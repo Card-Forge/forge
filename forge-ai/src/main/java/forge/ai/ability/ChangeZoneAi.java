@@ -29,6 +29,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -1865,6 +1866,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
+        // Airbend lets its owner cast the exiled commander for {2}, which beats paying commander tax.
+        if (destination == ZoneType.Exile && causeSa != null && causeSa.getApi() == ApiType.Airbend) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         // Blink, including a delayed trigger that puts the exiled commander back on the battlefield.
         // The return may be the cause itself (the delayed trigger's execute ability) or a sub-ability
         // of the effect that exiled it. Origin can list more than Exile (Norin uses Exile,Command)
@@ -1885,16 +1891,41 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    /**
+     * Whether the AI should leave its commander in exile or its graveyard rather than put it into the
+     * command zone (CR 903.9a), because it gets the card back without paying commander tax: a pending
+     * delayed trigger returns it to the battlefield (Norin the Wary, Portcullis), or its owner may cast
+     * it from exile (Airbend).
+     */
+    public static boolean keepsCommanderOutOfCommandZone(Player ai, Card commander) {
+        if (commander.getZone() == null) {
+            return false;
+        }
+        ZoneType zone = commander.getZone().getZoneType();
+        if (zone == ZoneType.Exile && !commander.mayPlay(ai).isEmpty()) {
+            return true;
+        }
+        for (Trigger delayed : ai.getGame().getTriggerHandler().getDelayedTriggers()) {
+            if (delayed.getTriggerRemembered().contains(commander)) {
+                SpellAbility exec = delayed.getOverridingAbility();
+                if (isBattlefieldReturn(exec, zone) || (exec != null && isBattlefieldReturn(exec.getSubAbility(), zone))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /** True when {@code cause} exiles a card only to put it back onto the battlefield. */
     private static boolean blinksCommanderBack(SpellAbility cause) {
         if (cause == null) {
             return false;
         }
-        if (isExileToBattlefieldReturn(cause) || isDelayedBattlefieldReturn(cause)) {
+        if (isBattlefieldReturn(cause, ZoneType.Exile) || isDelayedBattlefieldReturn(cause)) {
             return true;
         }
         SpellAbility sub = cause.getSubAbility();
-        return isExileToBattlefieldReturn(sub) || isDelayedBattlefieldReturn(sub);
+        return isBattlefieldReturn(sub, ZoneType.Exile) || isDelayedBattlefieldReturn(sub);
     }
 
     /** A DelayedTrigger whose execute ability (or that ability's sub-ability) returns from exile. */
@@ -1903,14 +1934,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
         SpellAbility exec = sa.getAdditionalAbility("Execute");
-        if (isExileToBattlefieldReturn(exec)) {
+        if (isBattlefieldReturn(exec, ZoneType.Exile)) {
             return true;
         }
-        return exec != null && isExileToBattlefieldReturn(exec.getSubAbility());
+        return exec != null && isBattlefieldReturn(exec.getSubAbility(), ZoneType.Exile);
     }
 
-    /** ChangeZone or ChangeZoneAll from exile (origin may also list Command) onto the battlefield. */
-    private static boolean isExileToBattlefieldReturn(SpellAbility sa) {
+    /** ChangeZone or ChangeZoneAll onto the battlefield whose origin includes {@code from} (Norin lists Exile,Command). */
+    private static boolean isBattlefieldReturn(SpellAbility sa, ZoneType from) {
         if (sa == null) {
             return false;
         }
@@ -1922,8 +1953,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
         String origin = sa.getParam("Origin");
-        return origin != null && origin.length() <= 128
-                && ZoneType.listValueOf(origin).contains(ZoneType.Exile);
+        return origin != null && ZoneType.listValueOf(origin).contains(from);
     }
 
     public static AiAbilityDecision doExileCombatThreatLogic(final Player aiPlayer, final SpellAbility sa) {

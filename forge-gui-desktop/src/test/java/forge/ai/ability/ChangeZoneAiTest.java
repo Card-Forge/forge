@@ -14,12 +14,12 @@ import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
@@ -27,7 +27,6 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Map;
 
 public class ChangeZoneAiTest extends AITest {
 
@@ -108,81 +107,88 @@ public class ChangeZoneAiTest extends AITest {
         }
     }
 
+    // The commander tests below play real Commander and Tiny Leaders games. In Commander a commander put into
+    // exile or a graveyard reaches the command zone through the state-based action (CR 903.9a); in Tiny Leaders
+    // through the replacement effect. Both ask the AI.
+
     @Test
-    public void testNorinDelayedReturnDoesNotSendCommanderToCommandZone() {
-        Game game = commanderGame("Norin the Wary");
+    public void testPortcullisKeepsCommanderInExileUntilItReturns() {
+        for (GameType variant : new GameType[] {GameType.Commander, GameType.TinyLeaders}) {
+            Game game = commanderGame(variant, "Isamaru, Hound of Konda");
+            Player ai = game.getPlayers().get(1);
+            Player opponent = game.getPlayers().get(0);
+            Card portcullis = addCard("Portcullis", opponent);
+            addCards("Grizzly Bears", 2, opponent);
+            game.getAction().checkStateEffects(true);
+            Card commander = ai.getCommanders().get(0);
+
+            game.getAction().moveToPlay(commander, ai, null, AbilityKey.newMap());
+            resolveTriggers(game);
+            AssertJUnit.assertEquals(variant + ": Portcullis's return needs the commander in exile",
+                    ZoneType.Exile, zoneOf(game, commander));
+
+            game.getAction().moveToGraveyard(game.getCardState(portcullis), null, AbilityKey.newMap());
+            resolveTriggers(game);
+            AssertJUnit.assertEquals(variant + ": the commander comes back when Portcullis leaves",
+                    ZoneType.Battlefield, zoneOf(game, commander));
+        }
+    }
+
+    @Test
+    public void testAirbendKeepsCommanderInExileToCastForTwo() {
+        for (GameType variant : new GameType[] {GameType.Commander, GameType.TinyLeaders}) {
+            Game game = commanderGame(variant, "Isamaru, Hound of Konda");
+            Player ai = game.getPlayers().get(1);
+            Card commander = ai.getCommanders().get(0);
+            Card onBattlefield = game.getAction().moveToPlay(commander, ai, null, AbilityKey.newMap());
+
+            castAt(game, "Airbending Lesson", game.getPlayers().get(0), onBattlefield);
+            AssertJUnit.assertEquals(variant + ": an airbent commander stays in exile",
+                    ZoneType.Exile, zoneOf(game, commander));
+            AssertJUnit.assertFalse(variant + ": and its owner may cast it from there",
+                    game.getCardState(commander).mayPlay(ai).isEmpty());
+        }
+    }
+
+    @Test
+    public void testNorinStaysInExileForItsEndStepReturn() {
+        Game game = commanderGame(GameType.Commander, "Norin the Wary");
         Player ai = game.getPlayers().get(1);
-        Card norin = ai.getCommanders().get(0);
-        // Exile ability whose sub-ability is the end-step delayed return (Origin$ Exile,Command).
+        Card norin = game.getAction().moveToPlay(ai.getCommanders().get(0), ai, null, AbilityKey.newMap());
+
         SpellAbility exile = triggerExecute(norin, "TrigExile");
-
-        AssertJUnit.assertFalse("Norin's delayed battlefield return should decline the command zone",
-                acceptsCommandZone(ai, norin, exile, ZoneType.Exile));
+        AbilityUtils.resolve(exile);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertEquals("Norin's end step return should keep it in exile",
+                ZoneType.Exile, zoneOf(game, norin));
     }
 
     @Test
-    public void testPortcullisDelayedReturnAllIsABlink() {
-        Game game = commanderGame("Norin the Wary");
-        Player ai = game.getPlayers().get(1);
-        Card norin = ai.getCommanders().get(0);
-        Card portcullis = addCard("Portcullis", ai);
-        SpellAbility exile = triggerExecute(portcullis, "TrigExile");
-        // The delayed trigger's execute ability itself, not the exile that created it.
-        SpellAbility ret = exile.getSubAbility().getAdditionalAbility("Execute");
+    public void testExileWithoutAReturnStillGoesToCommandZone() {
+        for (GameType variant : new GameType[] {GameType.Commander, GameType.TinyLeaders}) {
+            Game game = commanderGame(variant, "Isamaru, Hound of Konda");
+            Player ai = game.getPlayers().get(1);
+            Card commander = ai.getCommanders().get(0);
+            Card onBattlefield = game.getAction().moveToPlay(commander, ai, null, AbilityKey.newMap());
 
-        AssertJUnit.assertNotNull(ret);
-        AssertJUnit.assertEquals(ApiType.ChangeZoneAll, ret.getApi());
-        AssertJUnit.assertFalse("Portcullis ChangeZoneAll should decline the command zone",
-                acceptsCommandZone(ai, norin, ret, ZoneType.Battlefield));
+            castAt(game, "Swords to Plowshares", game.getPlayers().get(0), onBattlefield);
+            AssertJUnit.assertEquals(variant + ": a plain exile still sends the commander to the command zone",
+                    ZoneType.Command, zoneOf(game, commander));
+        }
     }
 
-    @Test
-    public void testDestructiveExileAndGraveyardStillGoToCommandZone() {
-        Game game = commanderGame("Norin the Wary");
-        Player ai = game.getPlayers().get(1);
-        Card norin = ai.getCommanders().get(0);
-        SpellAbility swords = spellWithApi(addCardToZone("Swords to Plowshares", ai, ZoneType.Hand), ApiType.ChangeZone);
-        SpellAbility murder = spellWithApi(addCardToZone("Murder", ai, ZoneType.Hand), ApiType.Destroy);
-
-        AssertJUnit.assertTrue("a normal exile still goes to the command zone",
-                acceptsCommandZone(ai, norin, swords, ZoneType.Exile));
-        AssertJUnit.assertTrue("a normal graveyard move still goes to the command zone",
-                acceptsCommandZone(ai, norin, murder, ZoneType.Graveyard));
-    }
-
-    @Test
-    public void testReturnToHandDeclinesCommandZone() {
-        Game game = commanderGame("Acererak the Archlich");
-        Player ai = game.getPlayers().get(1);
-        Card acer = ai.getCommanders().get(0);
-        SpellAbility bounce = triggerExecute(acer, "TrigBounce");
-
-        AssertJUnit.assertFalse("returning to hand should decline the command zone",
-                acceptsCommandZone(ai, acer, bounce, ZoneType.Hand));
-    }
-
-    @Test
-    public void testDelayedNonBattlefieldReturnIsNotABlink() {
-        Game game = commanderGame("The Scorpion God");
-        Player ai = game.getPlayers().get(1);
-        Card god = ai.getCommanders().get(0);
-        // Dies, then a delayed trigger returns it to hand — not a battlefield blink.
-        SpellAbility delay = triggerExecute(god, "TrigDelay");
-
-        AssertJUnit.assertTrue("a delayed non-battlefield return is not a blink",
-                acceptsCommandZone(ai, god, delay, ZoneType.Graveyard));
-    }
-
-    private Game commanderGame(String commander) {
+    private Game commanderGame(GameType variant, String commander) {
         Deck deck = new Deck();
         deck.getOrCreate(DeckSection.Commander).add(commander, 1);
         List<RegisteredPlayer> players = Lists.newArrayList(
                 RegisteredPlayer.forCommander(deck).setPlayer(new LobbyPlayerAi("p2", null)),
                 RegisteredPlayer.forCommander(deck).setPlayer(new LobbyPlayerAi("p1", null)));
-        GameRules rules = new GameRules(GameType.Commander);
+        GameRules rules = new GameRules(variant);
+        rules.addAppliedVariant(variant);
         Game game = new Game(players, rules, new Match(rules, players, "Test"));
         for (Player p : game.getPlayers()) {
             p.initVariantsZones(p.getRegisteredPlayer());
+            fillLibrary(p, 5);
         }
         game.setAge(GameStage.Play);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, game.getPlayers().get(1));
@@ -190,31 +196,26 @@ public class ChangeZoneAiTest extends AITest {
         return game;
     }
 
-    /** The real commander replacement, decided by {@code AiController.doTrigger}. */
-    private boolean acceptsCommandZone(Player ai, Card commander, SpellAbility cause, ZoneType destination) {
-        SpellAbility replacement = null;
-        for (Card c : ai.getCardsIn(ZoneType.Command)) {
-            for (ReplacementEffect re : c.getReplacementEffects()) {
-                if (re.hasParam("CommanderMoveReplacement")) {
-                    replacement = re.ensureAbility();
-                    replacement.setReplacementEffect(re);
-                    replacement.setActivatingPlayer(ai);
-                }
-            }
-        }
-        AssertJUnit.assertNotNull("commander replacement ability", replacement);
+    private void castAt(Game game, String spell, Player caster, Card target) {
+        SpellAbility sa = addCardToZone(spell, caster, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(caster);
+        sa.getTargets().add(target);
+        AbilityUtils.resolve(sa);
+        game.getAction().checkStateEffects(true);
+    }
 
-        Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.Affected, commander);
-        params.put(AbilityKey.Cause, cause);
-        params.put(AbilityKey.Destination, destination);
-        params.put(AbilityKey.Origin, ZoneType.Battlefield);
-        replacement.setReplacingObject(AbilityKey.OriginalParams, params);
-        replacement.setReplacingObject(AbilityKey.Card, commander);
-        if (cause != null && cause.getActivatingPlayer() == null) {
-            cause.setActivatingPlayer(commander.getController());
+    private void resolveTriggers(Game game) {
+        game.getAction().checkStateEffects(true);
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        while (!game.getStack().isEmpty()) {
+            game.getStack().resolveStack();
+            game.getAction().checkStateEffects(true);
+            game.getStack().addAllTriggeredAbilitiesToStack();
         }
-        return ((PlayerControllerAi) ai.getController()).getAi().doTrigger(replacement, false);
+    }
+
+    private ZoneType zoneOf(Game game, Card card) {
+        return game.getCardState(card).getZone().getZoneType();
     }
 
     private SpellAbility triggerExecute(Card card, String execute) {
@@ -226,17 +227,6 @@ public class ChangeZoneAiTest extends AITest {
             }
         }
         AssertJUnit.fail("missing trigger execute " + execute + " on " + card.getName());
-        return null;
-    }
-
-    private SpellAbility spellWithApi(Card card, ApiType api) {
-        for (SpellAbility sa : card.getSpellAbilities()) {
-            if (sa.getApi() == api) {
-                sa.setActivatingPlayer(card.getController());
-                return sa;
-            }
-        }
-        AssertJUnit.fail("missing " + api + " on " + card.getName());
         return null;
     }
 

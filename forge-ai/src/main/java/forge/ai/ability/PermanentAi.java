@@ -14,13 +14,28 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Map;
+
 public class PermanentAi extends SpellAbilityAi {
+
+    /**
+     * The commander state-based action (CR 903.9a) asks with the commander's own spell whether to move it
+     * from exile or a graveyard to the command zone.
+     */
+    @Override
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
+            return !ChangeZoneAi.keepsCommanderOutOfCommandZone(ai, sa.getHostCard());
+        }
+        return super.confirmAction(ai, sa, mode, message, params);
+    }
 
     /**
      * Checks if the AI will play a SpellAbility based on its phase restrictions
