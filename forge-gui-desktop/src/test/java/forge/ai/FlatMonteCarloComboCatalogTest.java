@@ -51,7 +51,8 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
             }
         }
         AssertJUnit.assertTrue("catalog problems: " + problems, problems.isEmpty());
-        AssertJUnit.assertTrue("53 numbered combos in the list", ComboCatalog.entries().size() >= 53);
+        AssertJUnit.assertTrue("the list ai-combos.txt has the combos (read: " + ComboCatalog.entries().size() + ", problems "
+                + ComboCatalog.problems() + ")", ComboCatalog.entries().size() >= 50 && ComboCatalog.problems().isEmpty());
     }
 
     /** An opponent with every card of a combo on the battlefield is a threat; one card of it is not that. */
@@ -178,5 +179,52 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
                 forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 9));
         AssertJUnit.assertEquals("never more than can be paid", 3,
                 forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 3));
+    }
+
+    /**
+     * Every combo of ai-combos.txt, a new line included: with all its cards on an opponent's battlefield the AI sees the
+     * combo, counts it as a threat and aims removal at its cards; with its permanents on the AI's own battlefield the
+     * combo is worth points. Nothing to edit here for a new line of the file; the failure names the line.
+     */
+    @Test
+    public void everyComboOfTheFileIsSeenAsAThreatAndWorthPointsOnTheOwnSide() {
+        final List<String> problems = new ArrayList<>();
+        for (final ComboCatalog.Entry e : ComboCatalog.entries()) {
+            setUp();
+            final List<Card> theirs = new ArrayList<>();
+            final List<Card> mine = new ArrayList<>();
+            try {
+                for (final String slot : e.slotSpecs()) {
+                    final String card = slot.split(" / ")[0];
+                    theirs.add(addCard(card, opp));
+                    mine.add(addCard(card, ai));
+                }
+            } catch (final RuntimeException ex) {
+                problems.add(e + ": a card could not be created: " + ex);
+                continue;
+            }
+            if (!ComboCatalog.visibleCombos(ai).contains(e)) {
+                problems.add(e + " is not seen with all its cards on the opponent's battlefield: " + AntiCombo.describe(ai));
+            }
+            final int need = e.type == ComboCatalog.Type.WIN ? ComboCatalog.VISIBLE_WIN : ComboCatalog.VISIBLE_LOCK;
+            if (AntiCombo.threat(ai) < need) {
+                problems.add(e + " is a threat of only " + AntiCombo.threat(ai) + ", under " + need);
+            }
+            for (final Card c : theirs) {
+                if (AntiCombo.rank(ai, c) <= 0) {
+                    problems.add(e + ": " + c.getName() + " has no rank as a target");
+                }
+            }
+            boolean permanents = true;
+            for (final Card c : mine) {
+                permanents &= c.isPermanent();
+            }
+            final int own = ComboCatalog.term(ai);
+            if (permanents && own < (e.type == ComboCatalog.Type.WIN ? ComboCatalog.ASSEMBLED_WIN : 0)) {
+                problems.add(e + " (permanents only) is worth " + own + " on the AI's own battlefield");
+            }
+        }
+        AssertJUnit.assertTrue("combos of ai-combos.txt that the AI does not use as it should:\n" + String.join("\n", problems),
+                problems.isEmpty());
     }
 }

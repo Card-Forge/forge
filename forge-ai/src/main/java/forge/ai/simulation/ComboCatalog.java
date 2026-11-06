@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -12,10 +13,10 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 
 /**
- * The known combos of Vintage, Legacy and Modern as data: every combo is a list of slots, each slot is one card or a
+ * The known combos of Vintage, Legacy and Modern as data, read from {@code ai-combos.txt} (add a line there to teach the AI a new combo): every combo is a list of slots, each slot is one card or a
  * choice between cards ("Voltaic Key / Manifold Key"). A combo is assembled when every slot is filled by a card.
  * <ul>
- *   <li>For the AI's own deck ({@link ComboPlan.Kind#CATALOG}): the combos the deck can make are read once, and the
+ *   <li>For the AI's own deck ({@link ComboPlan.Kind #CATALOG}): the combos the deck can make are read once, and the
  *       rollouts are rewarded for having every slot in the hand or on the battlefield ({@link #term}).</li>
  *   <li>For the opponents ({@link AntiCombo}): a combo whose slots are all in view (battlefield, graveyard, stack) is a
  *       threat, and the cards that fill its slots are what a removal spell is aimed at ({@link #visibleThreat},
@@ -36,12 +37,15 @@ public final class ComboCatalog {
         public final Type type;
         /** Normalized names, one set per slot. */
         final List<Set<String>> slots;
+        /** The slots as written in the file (card names with their own spelling). */
+        private final List<String> rawSlots;
 
         Entry(final int number, final Type type, final String name, final String... slotSpecs) {
             this.number = number;
             this.name = name;
             this.type = type;
             final List<Set<String>> s = new ArrayList<>();
+            this.rawSlots = Collections.unmodifiableList(new ArrayList<>(java.util.Arrays.asList(slotSpecs)));
             for (final String spec : slotSpecs) {
                 final Set<String> alternatives = new LinkedHashSet<>();
                 for (final String n : spec.split(" / ")) {
@@ -52,13 +56,9 @@ public final class ComboCatalog {
             this.slots = Collections.unmodifiableList(s);
         }
 
-        /** The names of every card that fills a slot (not normalized: for tests and messages). */
+        /** The slots as written in the file, a slot being "Card A" or "Card A / Card B". */
         public List<String> slotSpecs() {
-            final List<String> result = new ArrayList<>();
-            for (final Set<String> slot : slots) {
-                result.add(String.join(" / ", slot));
-            }
-            return result;
+            return rawSlots;
         }
 
         public int slotCount() {
@@ -104,88 +104,85 @@ public final class ComboCatalog {
         }
     }
 
-    private static final List<Entry> ENTRIES;
+    private static Supplier<List<String>> file;
+    private static List<Entry> entries;
+    private static List<String> problems = Collections.emptyList();
 
-    static {
-        final List<Entry> e = new ArrayList<>();
-        // ---- combos that win the game
-        e.add(new Entry(1, Type.WIN, "Channel + Fireball", "Channel", "Fireball"));
-        e.add(new Entry(2, Type.WIN, "Time Vault + Voltaic Key", "Time Vault", "Voltaic Key / Manifold Key"));
-        e.add(new Entry(3, Type.WIN, "Flash + Protean Hulk", "Flash", "Protean Hulk"));
-        e.add(new Entry(4, Type.WIN, "Melira + Murderous Redcap + Viscera Seer", "Melira, Sylvok Outcast", "Murderous Redcap",
-                "Viscera Seer"));
-        e.add(new Entry(5, Type.WIN, "Tinker + Blightsteel Colossus", "Tinker", "Blightsteel Colossus"));
-        e.add(new Entry(6, Type.WIN, "Thassa's Oracle + Demonic Consultation", "Thassa's Oracle", "Demonic Consultation"));
-        e.add(new Entry(7, Type.WIN, "Thassa's Oracle + Tainted Pact", "Thassa's Oracle", "Tainted Pact"));
-        e.add(new Entry(7, Type.WIN, "Doomsday + Thassa's Oracle", "Doomsday", "Thassa's Oracle"));
-        e.add(new Entry(8, Type.WIN, "Demonic Consultation + Laboratory Maniac", "Demonic Consultation", "Laboratory Maniac"));
-        e.add(new Entry(9, Type.WIN, "Painter's Servant + Grindstone", "Painter's Servant", "Grindstone"));
-        e.add(new Entry(10, Type.WIN, "Tolarian Academy + Mind Over Matter + Stroke of Genius", "Tolarian Academy",
-                "Mind Over Matter", "Stroke of Genius"));
-        e.add(new Entry(11, Type.WIN, "Hermit Druid + Dread Return", "Hermit Druid", "Dread Return"));
-        e.add(new Entry(12, Type.WIN, "Ad Nauseam + Angel's Grace + Tendrils / Grapeshot", "Ad Nauseam", "Angel's Grace",
-                "Tendrils of Agony / Grapeshot"));
-        e.add(new Entry(13, Type.WIN, "High Tide + Palinchron + Stroke of Genius", "High Tide", "Palinchron", "Stroke of Genius"));
-        e.add(new Entry(14, Type.WIN, "Tendrils + Lion's Eye Diamond + Infernal Tutor", "Tendrils of Agony", "Lion's Eye Diamond",
-                "Infernal Tutor"));
-        e.add(new Entry(14, Type.WIN, "Yawgmoth's Will + Black Lotus + Dark Ritual + Tendrils", "Yawgmoth's Will", "Black Lotus",
-                "Dark Ritual", "Tendrils of Agony"));
-        e.add(new Entry(15, Type.WIN, "Underworld Breach + Lion's Eye Diamond + Brain Freeze", "Underworld Breach",
-                "Lion's Eye Diamond", "Brain Freeze"));
-        e.add(new Entry(16, Type.WIN, "Splinter Twin + Deceiver Exarch / Pestermite", "Splinter Twin",
-                "Deceiver Exarch / Pestermite"));
-        e.add(new Entry(17, Type.WIN, "Kiki-Jiki + Restoration Angel / Bounding Krasis", "Kiki-Jiki, Mirror Breaker",
-                "Restoration Angel / Bounding Krasis"));
-        e.add(new Entry(18, Type.WIN, "Saheeli Rai + Felidar Guardian", "Saheeli Rai", "Felidar Guardian"));
-        e.add(new Entry(19, Type.WIN, "Jeskai Ascendancy + Retraction Helix", "Jeskai Ascendancy", "Retraction Helix"));
-        e.add(new Entry(20, Type.WIN, "Heliod, Sun-Crowned + Walking Ballista", "Heliod, Sun-Crowned", "Walking Ballista"));
-        e.add(new Entry(21, Type.WIN, "Exquisite Blood + Sanguine Bond", "Exquisite Blood", "Sanguine Bond"));
-        e.add(new Entry(22, Type.WIN, "Mikaeus, the Unhallowed + Triskelion", "Mikaeus, the Unhallowed", "Triskelion"));
-        e.add(new Entry(23, Type.WIN, "Spike Feeder + Archangel of Thune", "Spike Feeder", "Archangel of Thune"));
-        e.add(new Entry(24, Type.WIN, "Witherbloom Apprentice + Chain of Smog", "Witherbloom Apprentice", "Chain of Smog"));
-        e.add(new Entry(25, Type.WIN, "Bloodletter of Aclazotz + Unstoppable Slasher", "Bloodletter of Aclazotz",
-                "Unstoppable Slasher"));
-        e.add(new Entry(26, Type.WIN, "Devoted Druid + Vizier of Remedies", "Devoted Druid", "Vizier of Remedies"));
-        e.add(new Entry(27, Type.WIN, "Basalt Monolith + Rings of Brighthearth", "Basalt Monolith", "Rings of Brighthearth"));
-        e.add(new Entry(28, Type.WIN, "Grim Monolith + Power Artifact", "Grim Monolith", "Power Artifact"));
-        e.add(new Entry(29, Type.WIN, "Metalworker + Staff of Domination", "Metalworker", "Staff of Domination"));
-        e.add(new Entry(30, Type.WIN, "Freed from the Real + Bloom Tender", "Freed from the Real", "Bloom Tender"));
-        e.add(new Entry(31, Type.WIN, "Pili-Pala + Grand Architect", "Pili-Pala", "Grand Architect"));
-        e.add(new Entry(32, Type.WIN, "Auriok Salvagers + Lion's Eye Diamond", "Auriok Salvagers", "Lion's Eye Diamond"));
-        e.add(new Entry(33, Type.WIN, "Krark-Clan Ironworks + Scrap Trawler + Myr Retriever", "Krark-Clan Ironworks",
-                "Scrap Trawler", "Myr Retriever"));
-        e.add(new Entry(34, Type.WIN, "Worldgorger Dragon + Animate Dead", "Worldgorger Dragon",
-                "Animate Dead / Necromancy / Dance of the Dead"));
-        e.add(new Entry(35, Type.WIN, "Sliver Queen + Mana Echoes", "Sliver Queen", "Mana Echoes"));
-        e.add(new Entry(35, Type.WIN, "Urza, Lord High Artificer + Thopter Foundry + Sword of the Meek",
-                "Urza, Lord High Artificer", "Thopter Foundry", "Sword of the Meek"));
-        e.add(new Entry(36, Type.WIN, "Hive Mind + Pact of Negation", "Hive Mind", "Pact of Negation"));
-        e.add(new Entry(37, Type.WIN, "Peer into the Abyss + Underworld Dreams", "Peer into the Abyss", "Underworld Dreams"));
-        e.add(new Entry(38, Type.WIN, "Scapeshift + Valakut", "Scapeshift", "Valakut, the Molten Pinnacle"));
-        e.add(new Entry(39, Type.WIN, "Dark Depths + Thespian's Stage / Vampire Hexmage", "Dark Depths",
-                "Thespian's Stage / Vampire Hexmage"));
-        e.add(new Entry(40, Type.WIN, "Illusions of Grandeur + Donate", "Illusions of Grandeur", "Donate"));
-        e.add(new Entry(41, Type.WIN, "Leyline of the Void + Helm of Obedience", "Leyline of the Void", "Helm of Obedience"));
-        e.add(new Entry(42, Type.WIN, "Near-Death Experience + Worship", "Near-Death Experience", "Worship"));
-        e.add(new Entry(42, Type.WIN, "Aetherworks Marvel + Woodweaver's Puzzleknot", "Aetherworks Marvel",
-                "Woodweaver's Puzzleknot"));
-        e.add(new Entry(43, Type.WIN, "Second Sunrise + Conjurer's Bauble", "Second Sunrise", "Conjurer's Bauble"));
-        // ---- combo locks
-        e.add(new Entry(44, Type.LOCK, "Counterbalance + Sensei's Divining Top", "Counterbalance", "Sensei's Divining Top"));
-        e.add(new Entry(45, Type.LOCK, "Mindslaver + Academy Ruins", "Mindslaver", "Academy Ruins"));
-        e.add(new Entry(46, Type.LOCK, "Isochron Scepter + Orim's Chant", "Isochron Scepter", "Orim's Chant"));
-        e.add(new Entry(47, Type.LOCK, "Teferi, Time Raveler + Knowledge Pool", "Teferi, Time Raveler", "Knowledge Pool"));
-        e.add(new Entry(48, Type.LOCK, "Maralen of the Mornsong + Opposition Agent", "Maralen of the Mornsong",
-                "Opposition Agent"));
-        e.add(new Entry(49, Type.LOCK, "Karn, the Great Creator + Mycosynth Lattice", "Karn, the Great Creator",
-                "Mycosynth Lattice"));
-        e.add(new Entry(50, Type.LOCK, "Drana and Linvala + Urborg + Kormus Bell", "Drana and Linvala",
-                "Urborg, Tomb of Yawgmoth / Kormus Bell"));
-        e.add(new Entry(51, Type.LOCK, "Solemnity + Decree of Silence", "Solemnity", "Decree of Silence"));
-        e.add(new Entry(52, Type.LOCK, "Narset, Parter of Veils + Geier Reach Sanitarium", "Narset, Parter of Veils",
-                "Geier Reach Sanitarium"));
-        e.add(new Entry(53, Type.LOCK, "Unburial Rites + Iona, Shield of Emeria", "Unburial Rites", "Iona, Shield of Emeria"));
-        ENTRIES = Collections.unmodifiableList(e);
+    /**
+     * Says where the combos are: the supplier returns the lines of {@code ai-combos.txt} (forge-ai cannot see the resource
+     * folder, so the front end hands it over, as for {@link AiCardLists}). Forgets what was read before.
+     */
+    public static synchronized void configure(final Supplier<List<String>> lines) {
+        file = lines;
+        entries = null;
+    }
+
+    /** Forgets what was read, so the next question reads the file again (after it was edited, in tests). */
+    public static synchronized void reload() {
+        entries = null;
+    }
+
+    /** The lines of the file that could not be read as a combo, with the reason (for the data test). */
+    public static synchronized List<String> problems() {
+        entries();
+        return problems;
+    }
+
+    /**
+     * Reads {@code win | Name | slot | slot ...} (or {@code lock | ...}); a slot is a card or {@code Card A / Card B}.
+     * Blank lines and what follows a {@code #} are ignored. A line that is not a combo is reported and skipped.
+     */
+    static List<Entry> parse(final List<String> lines, final List<String> problemList) {
+        final List<Entry> result = new ArrayList<>();
+        int number = 0;
+        for (final String raw : lines) {
+            final int hash = raw.indexOf('#');
+            final String line = (hash < 0 ? raw : raw.substring(0, hash)).trim();
+            if (line.isEmpty()) {
+                continue;
+            }
+            final String[] parts = line.split("\\s*\\|\\s*");
+            final String kind = parts[0].trim().toLowerCase(java.util.Locale.ROOT);
+            if (parts.length < 4 || !(kind.equals("win") || kind.equals("lock"))) {
+                problemList.add("'" + line + "': expected  win|lock | Name | slot | slot ...  with at least two slots");
+                continue;
+            }
+            final String[] slots = new String[parts.length - 2];
+            boolean empty = false;
+            for (int i = 2; i < parts.length; i++) {
+                slots[i - 2] = parts[i].trim();
+                empty |= slots[i - 2].isEmpty();
+            }
+            if (empty) {
+                problemList.add("'" + line + "': an empty slot");
+                continue;
+            }
+            result.add(new Entry(++number, kind.equals("win") ? Type.WIN : Type.LOCK, parts[1].trim(), slots));
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    private static synchronized List<Entry> load() {
+        if (entries == null) {
+            final List<String> found = new ArrayList<>();
+            List<String> lines = Collections.emptyList();
+            if (file == null) {
+                found.add("no combo file was configured (ComboCatalog.configure)");
+            } else {
+                try {
+                    final List<String> read = file.get();
+                    lines = read == null ? Collections.<String>emptyList() : read;
+                } catch (final RuntimeException ex) {
+                    found.add("the combo file could not be read: " + ex);
+                }
+            }
+            entries = parse(lines, found);
+            problems = Collections.unmodifiableList(found);
+            for (final String problem : found) {
+                System.err.println("ComboCatalog: " + problem);
+            }
+        }
+        return entries;
     }
 
     /** What an assembled combo in the hand or on the battlefield is worth to the AI, in evaluator points. */
@@ -196,7 +193,7 @@ public final class ComboCatalog {
     /** A slot filled by a permanent is worth more than one filled by a card in hand: it is already working. */
     static final int ON_BATTLEFIELD = 10;
     /** What an assembled combo of an opponent in view is worth to the opponent. */
-    static final int VISIBLE_WIN = 140;
+    public static final int VISIBLE_WIN = 140;
     public static final int VISIBLE_LOCK = 90;
     /** A card that fills a slot of a combo is aimed at with this share of the rank of a key card. */
     static final int RANK_PIECE_PERCENT = 40;
@@ -207,7 +204,7 @@ public final class ComboCatalog {
     }
 
     public static List<Entry> entries() {
-        return ENTRIES;
+        return load();
     }
 
     /** Whether the card fills a slot of any combo. */
@@ -215,9 +212,25 @@ public final class ComboCatalog {
         if (c == null) {
             return false;
         }
-        for (final Entry e : ENTRIES) {
+        for (final Entry e : load()) {
             if (e.fillsSomeSlot(c)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the card name fills a slot of any combo (for logs that only have names). */
+    public static boolean isPieceName(final String name) {
+        if (name == null) {
+            return false;
+        }
+        final String n = AiCardLists.normalize(name);
+        for (final Entry e : load()) {
+            for (final Set<String> slot : e.slots) {
+                if (slot.contains(n)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -226,7 +239,7 @@ public final class ComboCatalog {
     /** The combos a list of cards can make: every slot is filled by one of the cards. */
     public static List<Entry> assembledBy(final Iterable<Card> cards) {
         final List<Entry> result = new ArrayList<>();
-        for (final Entry e : ENTRIES) {
+        for (final Entry e : load()) {
             if (e.assembledBy(cards)) {
                 result.add(e);
             }
@@ -238,7 +251,7 @@ public final class ComboCatalog {
     public static List<Entry> inNames(final Iterable<String> names) {
         final Set<String> keys = AiCardLists.deckKeys(names);
         final List<Entry> result = new ArrayList<>();
-        for (final Entry e : ENTRIES) {
+        for (final Entry e : load()) {
             boolean all = true;
             for (final Set<String> slot : e.slots) {
                 boolean found = false;
@@ -286,7 +299,7 @@ public final class ComboCatalog {
         final List<Card> cards = own(ai, false);
         final List<Card> board = own(ai, true);
         int best = 0;
-        for (final Entry e : ENTRIES) {
+        for (final Entry e : load()) {
             final List<Card> fillers = e.fillers(cards);
             final int filled = fillers.size();
             if (filled == 0) {
@@ -359,7 +372,7 @@ public final class ComboCatalog {
         }
         int percent = 0;
         final List<Card> seen = visible(ai, true);
-        for (final Entry e : ENTRIES) {
+        for (final Entry e : load()) {
             if (!e.fillsSomeSlot(c)) {
                 continue;
             }
