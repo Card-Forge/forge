@@ -12,6 +12,7 @@ import forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
@@ -81,8 +82,11 @@ public class CardManager extends ItemManager<PaperCard> {
 
         // Now we're ready to go on with retrieving cards to be returned
         Map<PaperCard, Integer> cardsMap = new HashMap<>();
+        CardDb cardDb = StaticData.instance().getCommonCards();
         for (String cardName : entriesByName.keySet()) {
             List<Entry<PaperCard, Integer>> entries = entriesByName.get(cardName);
+            if (cardDb.canExcludePrints(Lists.transform(entries, Entry::getKey)))
+                entries = entries.stream().filter(e -> !cardDb.isPrintExcluded(e.getKey())).collect(Collectors.toList());
 
             ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), Lists::newArrayList);
             for (Entry<PaperCard, Integer> entry : entries) {

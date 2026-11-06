@@ -20,6 +20,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
@@ -560,7 +561,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             CardPool deckNoBasicLands = deckNoRestrictedEditions.getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
             for (RewardData rdata : data.rewards) {
-                rewardCollectionPool.addAll(rdata.generate(false, enemyDeck == null ? null : deckNoBasicLands.toFlatList(), true));
+                rewardCollectionPool.addAll(rdata.generate(false, enemyDeck == null ? null : CardUtil.withAllowedPrints(deckNoBasicLands.toFlatList()), true));
             }
         }
         if (this.rewards != null) { // Collect additional rewards.

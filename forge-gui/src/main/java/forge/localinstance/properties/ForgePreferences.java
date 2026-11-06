@@ -17,9 +17,11 @@
  */
 package forge.localinstance.properties;
 
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.StringJoiner;
+import java.util.TreeSet;
 
 import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
@@ -81,6 +83,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_PREFER_LANG_FOR_UNIQUE_CARDS ("false"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
         UI_SMART_CARD_ART("true"),
+        UI_EXCLUDED_SETS(""), // entries read by SetExclusions
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
@@ -458,6 +461,21 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
             }
         }
         setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
+        save();
+    }
+
+    public Set<String> getPrefSet(final FPref pref) {
+        final Set<String> entries = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        for (String entry : getPref(pref).split(",")) {
+            if (!entry.isBlank()) {
+                entries.add(entry.trim());
+            }
+        }
+        return entries;
+    }
+
+    public void setPrefSet(final FPref pref, final Collection<String> entries) {
+        setPref(pref, String.join(",", entries));
         save();
     }
 

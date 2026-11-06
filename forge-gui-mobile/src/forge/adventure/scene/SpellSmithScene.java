@@ -66,6 +66,7 @@ public class SpellSmithScene extends UIScene {
     private int lockedShardPrice = 0;
 
     private List<CardEdition> editions = null;
+    private Iterable<PaperCard> editionsPool = null;
     private Reward currentReward = null;
     private boolean paidInShards = false;
 
@@ -165,8 +166,10 @@ public class SpellSmithScene extends UIScene {
     }
 
     public void loadEditions() {
-        if (editions != null)
+        // the editions follow the card pool, which is rebuilt when the settings change
+        if (editions != null && editionsPool == RewardData.getAllCards())
             return;
+        editionsPool = RewardData.getAllCards();
         editions = StaticData.instance().getSortedEditions().stream().filter(input -> {
             if (input == null)
                 return false;

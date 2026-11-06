@@ -3,8 +3,6 @@ package forge.screens.settings;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
 import forge.Forge;
-import forge.Graphics;
-import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -16,6 +14,7 @@ import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.filters.ArchivedFormatSelect;
+import forge.itemmanager.filters.MultiSetSelect;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -26,7 +25,6 @@ import forge.util.Utils;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class CardImageBrowserScreen extends FScreen {
@@ -159,7 +157,18 @@ public class CardImageBrowserScreen extends FScreen {
                 preventHandling = true;
                 cbxFormats.setText(selectedFormatText);
                 preventHandling = false;
-                Forge.openScreen(new MultiSetSelect());
+                Forge.openScreen(new MultiSetSelect(Forge.getLocalizer().getMessage("lblChooseSets"), Collections.emptyList(), sets -> {
+                    if (sets.isEmpty())
+                        return;
+                    List<String> codes = new ArrayList<>();
+                    for (CardEdition ed : sets) { codes.add(ed.getCode()); }
+                    selectedFormat     = new GameFormat(null, codes, null);
+                    selectedFormatText = sets.size() > 1
+                            ? TextUtil.join(codes, ", ")
+                            : sets.get(0).toString();
+                    cbxFormats.setText(selectedFormatText);
+                    scheduleStatsUpdate();
+                }));
             } else {
                 selectedFormat = (GameFormat) cbxFormats.getSelectedItem();
                 selectedFormatText = cbxFormats.getText();
@@ -381,109 +390,5 @@ public class CardImageBrowserScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         scroller.setBounds(0, startY, width, height - startY);
-    }
-
-    // =========================================================================
-    //  "Choose Sets" inner screen  (mirrors FormatFilter.MultiSetSelect)
-    // =========================================================================
-
-    private class MultiSetSelect extends FScreen {
-        private final Set<CardEdition>        selectedSets = new HashSet<>();
-        private final FGroupList<CardEdition> lstSets      = add(new FGroupList<>());
-
-        private MultiSetSelect() {
-            super(Forge.getLocalizer().getMessage("lblChooseSets"));
-
-            lstSets.addGroup("Core Sets");
-            lstSets.addGroup("Expansions");
-            lstSets.addGroup("Starter Sets");
-            lstSets.addGroup("Reprint Sets");
-            lstSets.addGroup("Boxed Sets");
-            lstSets.addGroup("Collector's Edition");
-            lstSets.addGroup("Duel Decks");
-            lstSets.addGroup("Promo Sets");
-            lstSets.addGroup("Digital Sets");
-            lstSets.addGroup("Draft Innovation Sets");
-            lstSets.addGroup("Commander Sets");
-            lstSets.addGroup("Multiplayer Sets");
-            lstSets.addGroup("Other Supplemental Sets");
-            lstSets.addGroup("Funny Sets");
-            lstSets.addGroup("Custom Sets");
-
-            for (CardEdition set : FModel.getMagicDb().getSortedEditions()) {
-                switch (set.getType()) {
-                    case CORE:              lstSets.addItem(set,  0); break;
-                    case EXPANSION:         lstSets.addItem(set,  1); break;
-                    case STARTER:           lstSets.addItem(set,  2); break;
-                    case REPRINT:           lstSets.addItem(set,  3); break;
-                    case BOXED_SET:         lstSets.addItem(set,  4); break;
-                    case COLLECTOR_EDITION: lstSets.addItem(set,  5); break;
-                    case DUEL_DECK:         lstSets.addItem(set,  6); break;
-                    case PROMO:             lstSets.addItem(set,  7); break;
-                    case ONLINE:            lstSets.addItem(set,  8); break;
-                    case DRAFT:             lstSets.addItem(set,  9); break;
-                    case COMMANDER:         lstSets.addItem(set, 10); break;
-                    case MULTIPLAYER:       lstSets.addItem(set, 11); break;
-                    case OTHER:             lstSets.addItem(set, 12); break;
-                    case FUNNY:             lstSets.addItem(set, 13); break;
-                    default:                lstSets.addItem(set, 14); break;
-                }
-            }
-            lstSets.setListItemRenderer(new SetRenderer());
-        }
-
-        @Override
-        public void onClose(Consumer<Boolean> canCloseCallback) {
-            if (!selectedSets.isEmpty()) {
-                List<CardEdition> sorted = new ArrayList<>(selectedSets);
-                Collections.sort(sorted);
-                List<String> codes = new ArrayList<>();
-                for (CardEdition ed : sorted) { codes.add(ed.getCode()); }
-                selectedFormat     = new GameFormat(null, codes, null);
-                selectedFormatText = sorted.size() > 1
-                        ? TextUtil.join(codes, ", ")
-                        : sorted.get(0).toString();
-                cbxFormats.setText(selectedFormatText);
-                scheduleStatsUpdate();
-            }
-            super.onClose(canCloseCallback);
-        }
-
-        @Override
-        protected void doLayout(float startY, float width, float height) {
-            lstSets.setBounds(0, startY, width, height - startY);
-        }
-
-        private class SetRenderer extends FList.ListItemRenderer<CardEdition> {
-            @Override public float getItemHeight() { return Utils.AVG_FINGER_HEIGHT; }
-
-            @Override
-            public boolean tap(Integer index, CardEdition value, float x, float y, int count) {
-                if (selectedSets.contains(value)) {
-                    if (count == 2) { Forge.back(); } else { selectedSets.remove(value); }
-                } else {
-                    selectedSets.add(value);
-                    if (count == 2) { Forge.back(); }
-                }
-                return true;
-            }
-
-            @Override
-            public void drawValue(Graphics g, Integer index, CardEdition value, FSkinFont font,
-                                  FSkinColor foreColor, FSkinColor backColor, boolean pressed,
-                                  float x, float y, float w, float h) {
-                float offset = SettingsScreen.getInsets(w) - FList.PADDING;
-                x += offset; y += offset; w -= 2 * offset; h -= 2 * offset;
-
-                float textH = h;
-                h *= 0.66f;
-                g.drawText(value.toString(), font, foreColor, x, y,
-                        w - h - FList.PADDING, textH, false, Align.left, true);
-                x += w - h;
-                y += (textH - h) / 2;
-                FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, foreColor,
-                        selectedSets.contains(value), x, y, h, h);
-            }
-        }
     }
 }

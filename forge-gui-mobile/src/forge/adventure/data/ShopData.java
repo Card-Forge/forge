@@ -18,6 +18,15 @@ public class ShopData {
     public Array<RewardData> rewards;
     public String overlaySprite = "";
 
+    public boolean sellsOnlyExcludedCards() {
+        if (rewards == null || rewards.isEmpty())
+            return false;
+        for (RewardData reward : new Array.ArrayIterator<>(rewards))
+            if (!reward.givesOnlyExcludedCards())
+                return false;
+        return true;
+    }
+
     public String getDescription() {
         return forge.Forge.getLocalizer().getMessageorUseDefault(
             "adv.shop." + name + ".description", description);
