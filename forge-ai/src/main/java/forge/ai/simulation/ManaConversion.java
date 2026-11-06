@@ -51,8 +51,21 @@ public final class ManaConversion {
         return mana.countX() == 0 && mana.getCMC() > 0;
     }
 
+    /**
+     * Gives a mana ability that nobody has activated yet its controller as activator. Asking what it can produce
+     * checks its conditions, and the engine prints "Did not have activator set" for every one of those checks when
+     * there is no activator (a whole library of lands, five colors each, at every mulligan decision).
+     */
+    static SpellAbility withActivator(final SpellAbility ma) {
+        if (ma.getActivatingPlayer() == null && ma.getHostCard() != null && ma.getHostCard().getController() != null) {
+            ma.setActivatingPlayer(ma.getHostCard().getController());
+        }
+        return ma;
+    }
+
     /** The colors (a mask of {@link MagicColor#WUBRG}) the ability can make. */
     static byte producedColors(final SpellAbility ma) {
+        withActivator(ma);
         byte colors = 0;
         for (final byte col : MagicColor.WUBRG) {
             // mana is described by its short letter ("W"), not the color name

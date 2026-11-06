@@ -453,4 +453,148 @@ public class FlatMonteCarloComboTest extends AITest {
         addCardToZone("Omniscience", p, ZoneType.Battlefield);
         AssertJUnit.assertTrue(ComboGuard.winLikelySoon(p, plan.combos));
     }
+
+    // ------------------------------------------------------------------ real tournament lists (main decks)
+
+    private static final Object[] RAKDOS_REANIMATOR = { "Animate Dead", 4, "Archon of Cruelty", 3,
+            "Atraxa, Grand Unifier", 4, "Badlands", 2, "Bloodstained Mire", 1, "Cabal Therapy", 2, "Dark Ritual", 4,
+            "Faithless Looting", 4, "Griselbrand", 4, "Lotus Petal", 4, "Marsh Flats", 2, "Polluted Delta", 2,
+            "Raucous Theater", 1, "Reanimate", 4, "Shallow Grave", 4, "Swamp", 2, "Thoughtseize", 4,
+            "Undercity Sewers", 1, "Underground Sea", 1, "Unmask", 4, "Verdant Catacombs", 2 };
+
+    private static final Object[] ELVES = { "Allosaurus Shepherd", 3, "Atraxa, Grand Unifier", 1, "Badgermole Cub", 4,
+            "Bayou", 2, "Boseiju, Who Endures", 1, "Collector Ouphe", 1, "Craterhoof Behemoth", 1, "Dryad Arbor", 2,
+            "Elvish Mystic", 2, "Elvish Visionary", 1, "Endurance", 1, "Forest", 2, "Formidable Speaker", 3,
+            "Fyndhorn Elves", 2, "Gaea's Cradle", 4, "Green Sun's Zenith", 4, "Llanowar Elves", 2,
+            "Misty Rainforest", 2, "Natural Order", 3, "Once Upon a Time", 3, "Quirion Ranger", 4,
+            "Temur Sabertooth", 1, "Verdant Catacombs", 1, "Windswept Heath", 3, "Wirewood Symbiote", 4,
+            "Wooded Foothills", 2 };
+
+    private static final Object[] ALUREN = { "Acererak the Archlich", 4, "Aluren", 4, "Ancient Tomb", 4,
+            "Atraxa, Grand Unifier", 4, "Boseiju, Who Endures", 1, "Brainstorm", 4, "City of Traitors", 1,
+            "Flooded Strand", 3, "Force of Will", 4, "Hedge Maze", 2, "Island", 1, "Lotus Petal", 4,
+            "Misty Rainforest", 4, "Omniscience", 2, "Ponder", 4, "Savannah", 1, "Show and Tell", 4, "Stock Up", 4,
+            "Tropical Island", 2, "Tundra", 1, "Veil of Summer", 2 };
+
+    private static final Object[] MYSTIC_FORGE = { "Ancient Tomb", 4, "Giant's Boulder", 4, "Grim Monolith", 4,
+            "Karn, the Great Creator", 4, "Kozilek's Command", 4, "Lotus Petal", 4, "Manifold Key", 4,
+            "Mishra's Research Desk", 1, "Mox Opal", 1, "Mystic Forge", 3, "Paradox Engine", 1, "Planar Nexus", 4,
+            "Tezzeret, Cruel Captain", 3, "The One Ring", 4, "Transmute Artifact", 3, "Urza's Saga", 4,
+            "Urza's Tower", 4, "Urza's Workshop", 4 };
+
+    private static final Object[] AFFINITY = { "Claws of Gix", 3, "Emry, Lurker of the Loch", 3,
+            "Engineered Explosives", 4, "Fiery Islet", 4, "Island", 2, "Kappa Cannoneer", 4, "Mishra's Bauble", 4,
+            "Mox Opal", 4, "Pinnacle Emissary", 4, "Pithing Needle", 1, "Preordain", 1, "Shadowspear", 1,
+            "Shivan Reef", 3, "Skateboard", 1, "Spirebluff Canal", 4, "Steam Vents", 1, "Thoughtcast", 1,
+            "Tormod's Crypt", 4, "Urza's Saga", 4, "Weapons Manufacturing", 4, "Welding Jar", 3 };
+
+    private static final Object[] MILL = { "Archive Trap", 4, "Cephalid Coliseum", 1, "Crypt Incursion", 1,
+            "Drown in the Loch", 4, "Echoing Truth", 1, "Fatal Push", 4, "Field of Ruin", 4, "Fractured Sanity", 4,
+            "Glimpse the Unthinkable", 1, "Hedron Crab", 4, "Island", 2, "Jace, the Perfected Mind", 1,
+            "Murderous Cut", 1, "Polluted Delta", 4, "Ruin Crab", 4, "Scalding Tarn", 1, "Surgical Extraction", 3,
+            "Swamp", 1, "Tasha's Hideous Laughter", 3, "Visions of Beyond", 3, "Watery Grave", 1 };
+
+    private static final Object[] LIVING_END = { "Breeding Pool", 1, "Curator of Mysteries", 2, "Endurance", 4,
+            "Force of Negation", 4, "Forest", 1, "Generous Ent", 3, "Island", 1, "Living End", 3,
+            "Misty Rainforest", 4, "Oliphaunt", 4, "Sacred Foundry", 1, "Shardless Agent", 4, "Street Wraith", 4,
+            "Striped Riverwinder", 2, "Subtlety", 4, "Violent Outburst", 4, "Waker of Waves", 1, "Wistfulness", 4 };
+
+    @Test
+    public void rakdosReanimatorIsReadAsReanimator() {
+        final Game game = initAndCreateGame();
+        final DeckPlan plan = DeckPlan.forSetting("auto", deal(game, RAKDOS_REANIMATOR));
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.REANIMATOR));
+    }
+
+    @Test
+    public void livingEndListIsReadAsMassReanimation() {
+        final Game game = initAndCreateGame();
+        final DeckPlan plan = DeckPlan.forSetting("auto", deal(game, LIVING_END));
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.MASS_REANIMATION));
+    }
+
+    @Test
+    public void millListIsReadAsMill() {
+        final Game game = initAndCreateGame();
+        final DeckPlan plan = DeckPlan.forSetting("auto", deal(game, MILL));
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.MILL));
+    }
+
+    @Test
+    public void modernAffinityWithImproviseIsReadAsAffinity() {
+        final Game game = initAndCreateGame();
+        final DeckPlan plan = DeckPlan.forSetting("auto", deal(game, AFFINITY));
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.AFFINITY));
+        AssertJUnit.assertFalse(plan.combos.has(ComboPlan.Kind.ARTIFACT_ENGINE));
+    }
+
+    @Test
+    public void elvesWithOneCraterhoofAndTutorsAreReadAsGoWide() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, ELVES);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.GO_WIDE));
+        // Green Sun's Zenith is a piece of the plan, so it is never thrown away
+        final Card zenith = addCardToZone("Green Sun's Zenith", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(plan.combos.isKeyCard(zenith));
+    }
+
+    @Test
+    public void aWideDeckWithOneFinisherAndNoTutorsIsNotGoWide() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, "Craterhoof Behemoth", 1, "Llanowar Elves", 4, "Elvish Mystic", 4,
+                "Fyndhorn Elves", 4, "Quirion Ranger", 4, "Wirewood Symbiote", 4, "Forest", 16);
+        AssertJUnit.assertFalse(DeckPlan.forSetting("auto", p).combos.has(ComboPlan.Kind.GO_WIDE));
+    }
+
+    @Test
+    public void alurenListIsReadAsFreeCast() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, ALUREN);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.FREE_CAST));
+        final Card acererak = addCardToZone("Acererak the Archlich", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(plan.combos.isKeyCard(acererak));
+    }
+
+    @Test
+    public void alurenInPlayWithACreatureToCastIsWorthMoreThanTheCardsApart() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, ALUREN);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final int before = plan.combos.term(p);
+        addCardToZone("Acererak the Archlich", p, ZoneType.Hand);
+        final int creatureOnly = plan.combos.term(p);
+        addCardToZone("Aluren", p, ZoneType.Battlefield);
+        final int assembled = plan.combos.term(p);
+        AssertJUnit.assertTrue(creatureOnly > before);
+        AssertJUnit.assertTrue(assembled > creatureOnly);
+    }
+
+    @Test
+    public void mysticForgeListIsReadAsArtifactEngine() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, MYSTIC_FORGE);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.summary(), plan.combos.has(ComboPlan.Kind.ARTIFACT_ENGINE));
+        // Manifold Key is marked "the heuristic AI can't play this": as a piece of the combo Flat MC may still try it
+        final Card key = addCardToZone("Manifold Key", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(plan.combos.overridesRemAi(key));
+    }
+
+    @Test
+    public void artifactEnginesInPlayAreWorthMoreThanInHand() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, MYSTIC_FORGE);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Mystic Forge", p, ZoneType.Hand);
+        final int inHand = plan.combos.term(p);
+        for (final Card c : new CardCollection(p.getCardsIn(ZoneType.Hand))) {
+            p.getZone(ZoneType.Hand).remove(c);
+        }
+        addCardToZone("Mystic Forge", p, ZoneType.Battlefield);
+        addCardToZone("Paradox Engine", p, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(plan.combos.term(p) > inHand);
+    }
 }
+

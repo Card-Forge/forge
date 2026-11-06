@@ -426,7 +426,7 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+            if (PhaseType.COMBAT_DECLARE_BLOCKERS.equals(game.getPhaseHandler().getPhase()) && ComputerUtil.protectRecursion(sa,
                         () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
                 final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
                 if (!nonCreatures.isEmpty()) {
@@ -438,6 +438,13 @@ public class ComputerUtil {
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
+            if (ai.getController() instanceof PlayerControllerAi) {
+                final Card madness = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                        .madnessDiscard(ai, typeList);
+                if (madness != null) {
+                    return madness; // it comes back as a cheap spell
+                }
+            }
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
@@ -615,6 +622,10 @@ public class ComputerUtil {
 
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
+            if (prefCard == null && ability.isManaAbility()) {
+                // paying for mana: give up what the AI would miss least (a token, a creature that comes back)
+                prefCard = ManaSacrifice.chooseFodder(ai, typeList);
+            }
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }
@@ -1194,7 +1205,7 @@ public class ComputerUtil {
         return sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
+                        && !ph.isPlayerNextTurn(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
                 && !sa.hasParam("ActivationPhases");
     }
@@ -1688,7 +1699,7 @@ public class ComputerUtil {
         // currently confirming optional threat ability:
         // need to ignore it so AI doesn't think some of its objects are already taken care of
         if (stack.isResolving() && sa == null) {
-            sa = stack.peekAbility();
+            sa = stack.getResolvingAbility();
             saviour = null;
         }
 
@@ -1700,13 +1711,15 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            // account for copied abilities on the stack as well
+            SpellAbility original = spell;
             if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
-                spell = spell.getOriginalAbility();
+                original = spell.getOriginalAbility();
             }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
-            if (sa == null || (sa != spell && sa != sub)) {
+            if (sa == null || (sa != spell && sa != original && sa != sub)) {
                 predictThreatenedObjects(ai, saviour, spell).forEach(objects::add);
             }
             if (top) {

@@ -1,6 +1,6 @@
 Name:Captain Michael Burnham
 ManaCost:2 R
-Types:Legendary Creature Officer
+Types:Legendary Creature Human Officer
 PT:3/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land you control enters, NICKNAME deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, put a +1/+1 counter on NICKNAME.

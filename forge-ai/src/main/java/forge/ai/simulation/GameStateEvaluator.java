@@ -38,7 +38,8 @@ public class GameStateEvaluator {
     }
     private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
-        if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
+        // Test games and partially initialized simulation states may not have entered a phase yet.
+        if (phase == null || phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
         }
         // If the current player has no creatures in play, there won't be any combat. This avoids

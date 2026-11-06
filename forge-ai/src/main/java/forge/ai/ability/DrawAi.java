@@ -44,7 +44,7 @@ public class DrawAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         Card hostCard = sa.getHostCard();
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean aboutToBeMyTurn = ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        boolean aboutToBeMyTurn = ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
 
         if (!targetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -160,6 +160,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true; // the pile is drawn through in the main phase it was made in, with the cards in hand
+        }
         // Sacrificing a creature in response to something dangerous is generally good in any phase
         boolean isSacCost = false;
         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
@@ -185,6 +188,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true;
+        }
         if (logic.equals("VeilOfSummer")) {
             return SpecialCardAi.VeilOfSummer.consider(ai, sa); // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
         } else if (logic.startsWith("LifeLessThan.")) {
@@ -193,13 +199,27 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("RespondToOwnActivation")) {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
-        } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+        } else if ((!ph.isPlayerNextTurn(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
                 && !"YawgmothsBargain".equals(logic)) {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
+    }
+
+    /** The draw of an ability that takes cards out of a library that is already a Doomsday pile (see DoomsdayPile). */
+    private static boolean drawsThroughDoomsdayPile(final Player ai, final SpellAbility sa) {
+        try {
+            if (sa.usesTargeting() && !sa.canTarget(ai)) {
+                return false;
+            }
+            final int numCards = sa.hasParam("NumCards")
+                    ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            return forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards);
+        } catch (final RuntimeException e) {
+            return false;
+        }
     }
 
     @Override
@@ -276,6 +296,12 @@ public class DrawAi extends SpellAbilityAi {
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
             numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
+        }
+
+        if (sa.costHasManaX() && sa.getRootAbility().getXManaCostPaid() == null && source != null
+                && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DREDGE_REFILL, source)) {
+            // Breakthrough for the dredge line: X=0 draws four and throws the hand away, which is the point.
+            sa.getRootAbility().setXManaCostPaid(0);
         }
 
         boolean xPaid = false;
@@ -416,7 +442,7 @@ public class DrawAi extends SpellAbilityAi {
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
-                if (numCards >= computerLibrarySize - 3) {
+                if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
                         if (numCards <= 0 && !mandatory) {
@@ -534,7 +560,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (numCards >= computerLibrarySize - 3) {
+            if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
                 if (ai.isCardInPlay("Laboratory Maniac") && !ai.cantWin()) {
                     return true;
                 }

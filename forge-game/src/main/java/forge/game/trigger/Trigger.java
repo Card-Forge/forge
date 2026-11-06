@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.*;
@@ -42,6 +41,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Strings;
 
 import java.util.*;
+import java.util.function.BooleanSupplier;
 
 /**
  * <p>
@@ -74,6 +74,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     private Set<PhaseType> validPhases;
 
     private SpellAbility spawningAbility;
+
+    // the event being checked, so its conditions can name the triggering objects
+    private TriggerWaiting checkedEvent;
+    private Map<AbilityKey, Object> checkedObjects;
 
     /**
      * <p>
@@ -337,7 +341,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         // host controller will be null when adding card in a simulation game
-        if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
+        if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(checkedEvent == null && checkedObjects == null ? paramsWithoutEvent() : mapParams)) {
             return false;
         }
 
@@ -402,63 +406,50 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (condition == null) {
-            return true;
-        }
-
-        if ("LifePaid".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-            if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
-                return false;
-            }
-        } else if ("NoOpponentHasMoreLifeThanAttacked".equals(condition)) {
-            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
-            if (attacked == null) {
-                attacked = (GameEntity) runParams.get(AbilityKey.Defender);
-            }
-            // we should not have gotten this far if planeswalker was attacked, but just to be safe
-            if (!(attacked instanceof Player)) {
-                return false;
-            }
-            final Player attackedP = (Player) attacked;
-            int life = attackedP.getLife();
-            boolean found = false;
-            for (Player opp : getHostCard().getController().getOpponents()) {
-                if (opp.equals(attackedP)) {
-                    continue;
-                }
-                if (opp.getLife() > life) {
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                return false;
-            }
-        } else if ("Sacrificed".equals(condition)) {
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-            if (trigSA != null && Iterables.isEmpty(trigSA.getPaidList("Sacrificed"))) {
-                return false;
-            }
-        } else if ("AttackedPlayerWithMostLife".equals(condition)) {
-            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
-            if (attacked == null) {
-                // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
-                // ends up being in Defender at that point.
-                attacked = (GameEntity) runParams.get(AbilityKey.Defender);
-            }
-            if (attacked == null || !attacked.isValid("Player.withMostLife",
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
-        } else if ("AttackerHasUnattackedOpp".equals(condition)) {
-            Player attacker = (Player) runParams.get(AbilityKey.AttackingPlayer);
-            if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
-                return false;
-            }
-        }
-        
         return true;
+    }
+
+    // without an event the conditions on its triggering objects can't be checked, so they are left out
+    private Map<String, String> paramsWithoutEvent() {
+        Map<String, String> params = mapParams;
+        for (String key : List.of("CheckSVar", "CheckDefinedPlayer")) {
+            String value = mapParams.get(key);
+            if (value != null && (value.contains("Trigger") || hasSVar(value) && getSVar(value).contains("Trigger"))) {
+                if (params == mapParams) {
+                    params = new HashMap<>(mapParams);
+                }
+                params.remove(key);
+            }
+        }
+        return params;
+    }
+
+    /** Runs a check against this event, so conditions can name its triggering objects, as in "that player" (CR 603.4) */
+    public final boolean checkWith(final TriggerWaiting event, final BooleanSupplier check) {
+        checkedEvent = event;
+        try {
+            return check.getAsBoolean();
+        } finally {
+            checkedEvent = null;
+        }
+    }
+
+    /** Runs a check against the triggering objects of the fired ability */
+    public final boolean checkWith(final SpellAbility fired, final BooleanSupplier check) {
+        checkedObjects = fired.getTriggeringObjects();
+        try {
+            return check.getAsBoolean();
+        } finally {
+            checkedObjects = null;
+        }
+    }
+
+    @Override
+    public Object getTriggeringObject(final AbilityKey type) {
+        if (checkedObjects != null) {
+            return checkedObjects.get(type);
+        }
+        return checkedEvent == null ? null : checkedEvent.getTriggeringObjects(this).get(type);
     }
 
     /** {@inheritDoc} */
@@ -488,15 +479,15 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public abstract boolean performTest(Map<AbilityKey, Object> runParams);
 
-    /**
-     * <p>
-     * setTriggeringObjects.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public abstract void setTriggeringObjects(SpellAbility sa, final Map<AbilityKey, Object> runParams);
+    /** Fills in the triggering objects its ability gets from this event */
+    public abstract void setTriggeringObjects(Map<AbilityKey, Object> objects, final Map<AbilityKey, Object> runParams);
+
+    /** The triggering objects its ability would get for this event */
+    public final Map<AbilityKey, Object> buildTriggeringObjects(final Map<AbilityKey, Object> runParams) {
+        final Map<AbilityKey, Object> objects = AbilityKey.newMap();
+        setTriggeringObjects(objects, runParams);
+        return objects;
+    }
 
     /**
      * Gets the id.

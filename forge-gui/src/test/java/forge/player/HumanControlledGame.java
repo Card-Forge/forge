@@ -1,6 +1,7 @@
 package forge.player;
 
 import com.google.common.collect.Lists;
+import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.deck.Deck;
@@ -20,8 +21,8 @@ import forge.util.Localizer;
 import java.util.List;
 
 /**
- * A two-player game in which both players are human-controlled and the first player's UI is a
- * {@link FakeGuiGame}.
+ * A game in which the first player is human-controlled and their UI is a {@link FakeGuiGame}. By
+ * default a second human-controlled player is the only opponent.
  * <p>
  * Built without {@code FModel}: no card database, preferences or asset directory are loaded. Cards
  * are created from inline script text, so each test states exactly the card characteristics it
@@ -36,13 +37,19 @@ public final class HumanControlledGame {
     final FakeGuiGame gui = new FakeGuiGame();
 
     public HumanControlledGame() {
+        this(lobbyPlayer("Opponent"));
+    }
+
+    HumanControlledGame(final LobbyPlayer... opponents) {
         // The engine reads localized strings and keyword descriptions from these singletons.
         Localizer.getInstance().initialize("en-US", "res/languages/");
         Lang.createInstance("en-US");
 
         final List<RegisteredPlayer> players = Lists.newArrayList(
-                new RegisteredPlayer(new Deck()).setPlayer(lobbyPlayer("Human")),
-                new RegisteredPlayer(new Deck()).setPlayer(lobbyPlayer("Opponent")));
+                new RegisteredPlayer(new Deck()).setPlayer(lobbyPlayer("Human")));
+        for (final LobbyPlayer opponent : opponents) {
+            players.add(new RegisteredPlayer(new Deck()).setPlayer(opponent));
+        }
         final GameRules rules = new GameRules(GameType.Constructed);
         game = new Game(players, rules, new Match(rules, players, "Test"));
         human = game.getPlayers().get(0);
@@ -61,7 +68,7 @@ public final class HumanControlledGame {
 
     // LobbyPlayerHuman.createIngamePlayer() personalizes the player name from FModel preferences,
     // which would pull in the whole model. Same controller wiring, without that lookup.
-    private static LobbyPlayerHuman lobbyPlayer(final String name) {
+    static LobbyPlayerHuman lobbyPlayer(final String name) {
         return new LobbyPlayerHuman(name) {
             @Override
             public Player createIngamePlayer(final Game game, final int id) {

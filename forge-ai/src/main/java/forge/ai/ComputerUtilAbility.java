@@ -244,7 +244,7 @@ public class ComputerUtilAbility {
         return true;
     }
 
-    public final static saComparator saEvaluator = new saComparator();
+    public final static Comparator<SpellAbility> saEvaluator = Comparator.comparing(sa -> new SortKey(sa, false));
 
     /**
      * Everything the evaluator order depends on, computed once per SpellAbility. Keys are compared
@@ -253,7 +253,7 @@ public class ComputerUtilAbility {
      * (e.g. "FreeSpellAI" returned -1 in both directions) and so could contradict itself.
      */
     public static final class SortKey implements Comparable<SortKey> {
-        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score, notSpectacle;
+        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score;
 
         private SortKey(SpellAbility sa, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
@@ -272,15 +272,13 @@ public class ComputerUtilAbility {
             final Card host = sa.getHostCard();
             freeSpellFirst = host != null && host.hasSVar("FreeSpellAI") ? 0 : 1;
 
-            int s = cmc + saComparator.getSpellAbilityPriority(sa);
+            int s = cmc + getSpellAbilityPriority(sa);
             // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
                 // try to align the scales: if priority swings in either direction extra evaluation matters less
                 s += Math.round(ComputerUtilCard.evaluateCreature(sa) / (10.5f + Math.abs(s)));
             }
             score = s;
-            // Cheaper Spectacle costs should be preferred (only as tie-break: a pairwise rule can't be transitive)
-            notSpectacle = sa.isSpectacle() ? 0 : 1;
         }
 
         @Override
@@ -295,9 +293,8 @@ public class ComputerUtilAbility {
             if (r != 0) return r;
             r = Integer.compare(freeSpellFirst, o.freeSpellFirst);
             if (r != 0) return r;
-            r = Integer.compare(o.score, score); // higher score first
-            if (r != 0) return r;
-            return Integer.compare(notSpectacle, o.notSpectacle);
+            // higher score first
+            return Integer.compare(o.score, score);
         }
 
         private static boolean isLowPriorityPlanarDieRoll(SpellAbility sa) {
@@ -324,16 +321,6 @@ public class ComputerUtilAbility {
             }
             return 0;
         }
-    }
-
-    public final static class saComparator implements Comparator<SpellAbility> {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            return compareEvaluator(a, b, false);
-        }
-        public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
-            return new SortKey(a, safeToEvaluateCreatures).compareTo(new SortKey(b, safeToEvaluateCreatures));
-        }
 
         private static int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
@@ -343,7 +330,6 @@ public class ComputerUtilAbility {
                 System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
                 return 0;
             }
-            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
 
             if (source != null) {
                 // puts creatures in front of spells
@@ -365,7 +351,7 @@ public class ComputerUtilAbility {
                     p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
                 // don't play equipment before having any creatures
-                if (source.isEquipment() && noCreatures) {
+                if (source.isEquipment() && ai.getCreaturesInPlay().isEmpty()) {
                     p -= 9;
                 }
                 // don't equip stuff in main 2 if there's more stuff to cast at the moment
@@ -406,10 +392,11 @@ public class ComputerUtilAbility {
                 }
             }
 
-            // use Surge and Prowl costs when able to
-            if (sa.isSurged() || sa.isProwl()) {
+            // positive and/or cheaper altcosts, try to take advantage while they're enabled
+            if (sa.isSurged() || sa.isProwl() || sa.isSpectacle()) {
                 p += 9;
             }
+
             // sort planeswalker abilities with most costly first
             if (sa.isPwAbility()) {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
@@ -463,15 +450,10 @@ public class ComputerUtilAbility {
      */
     public static boolean sortSpellAbilities(final List<SpellAbility> all) {
         final boolean fellBack = ComparatorUtil.safeSort(all, cachedEvaluator(false));
-        return sortCreatureSpellsImpl(all) || fellBack;
+        return sortCreatureSpells(all) || fellBack;
     }
 
-    public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
-        sortCreatureSpellsImpl(all);
-        return all;
-    }
-
-    private static boolean sortCreatureSpellsImpl(final List<SpellAbility> all) {
+    private static boolean sortCreatureSpells(final List<SpellAbility> all) {
         // try to smoothen power creep by making CMC less of a factor
         final List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
         if (creatures.size() <= 1) {
