@@ -109,7 +109,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     private boolean sideboardsAgainstOpponentDeck() {
         return brains.getGame().getRules().getAISideboardingEnabled() && brains.getGame().getAIFlatMonteCarlo()
-                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED);
+                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED) && !brains.getGame().getRules().getSideboardForAI();
     }
 
     @Override
