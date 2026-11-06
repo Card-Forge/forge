@@ -2436,6 +2436,10 @@ public class AbilityUtils {
             return doXMath(player.getTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YourExtraTurns")) {
+            return doXMath(player.getExtraTurnsPlayed(), expr, c, ctb);
+        }
+
         if (sq[0].equals("NotedNumber")) {
             return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
         }
