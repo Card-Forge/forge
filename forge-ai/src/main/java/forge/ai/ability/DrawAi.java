@@ -160,6 +160,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true; // the pile is drawn through in the main phase it was made in, with the cards in hand
+        }
         // Sacrificing a creature in response to something dangerous is generally good in any phase
         boolean isSacCost = false;
         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
@@ -185,6 +188,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true;
+        }
         if (logic.equals("VeilOfSummer")) {
             return SpecialCardAi.VeilOfSummer.consider(ai, sa); // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
         } else if (logic.startsWith("LifeLessThan.")) {
@@ -200,6 +206,20 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
+    }
+
+    /** The draw of an ability that takes cards out of a library that is already a Doomsday pile (see DoomsdayPile). */
+    private static boolean drawsThroughDoomsdayPile(final Player ai, final SpellAbility sa) {
+        try {
+            if (sa.usesTargeting() && !sa.canTarget(ai)) {
+                return false;
+            }
+            final int numCards = sa.hasParam("NumCards")
+                    ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            return forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards);
+        } catch (final RuntimeException e) {
+            return false;
+        }
     }
 
     @Override
@@ -422,7 +442,7 @@ public class DrawAi extends SpellAbilityAi {
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
-                if (numCards >= computerLibrarySize - 3) {
+                if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
                         if (numCards <= 0 && !mandatory) {
@@ -540,7 +560,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (numCards >= computerLibrarySize - 3) {
+            if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
                 if (ai.isCardInPlay("Laboratory Maniac") && !ai.cantWin()) {
                     return true;
                 }

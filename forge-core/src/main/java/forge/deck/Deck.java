@@ -823,7 +823,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             for (Entry<DeckSection, CardPool> ds : myDeck) {
                 List<PaperCard> result = Lists.newArrayList();
                 for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) {
+                    if (forge.card.CardAiHints.isRemovedFromAiDecks(cp.getKey().getRules())) {
                         result.add(cp.getKey());
                     }
                 }

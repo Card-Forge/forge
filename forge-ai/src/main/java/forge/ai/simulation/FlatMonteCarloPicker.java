@@ -961,6 +961,12 @@ public final class FlatMonteCarloPicker {
         if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             return false;
         }
+        if (isRemoveDeckCantrip(sa)) {
+            return true;
+        }
+        if (isManaGrantingEffect(sa)) {
+            return true;
+        }
         final PlayKind kind = playKind(sa);
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
@@ -974,6 +980,64 @@ public final class FlatMonteCarloPicker {
             return api == ApiType.ChangeZone || api == ApiType.Destroy || api == ApiType.Tap;
         }
         return broad && isDevelopment(sa);
+    }
+
+    /**
+     * An effect spell that grants a mana ability is useful to discovery even though EffectAi has no generic
+     * heuristic for deciding when to play it. The rollout can judge the effect by what it lets the player cast.
+     * Keep this narrow: only effects that actually grant a mana ability are added.
+     */
+    private static boolean isManaGrantingEffect(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.Effect || !sa.hasParam("Abilities")) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        for (final String name : sa.getParam("Abilities").split(",")) {
+            final String sVar = name.trim();
+            if (host.hasSVar(sVar)) {
+                final String script = host.getSVar(sVar);
+                if (script != null && script.trim().startsWith("AB$ Mana")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The free and nearly free cantrips and tutors the heuristics drop with AI:RemoveDeck:All (Gitaxian Probe, Mishra's
+     * Bauble, Vampiric Tutor, Demonic Consultation, Merchant Scroll): they target the opponent only to look, or search for
+     * a card, so no other rule offers them, yet a vintage deck is built around them. The rollouts decide when to cast them.
+     */
+    static boolean isRemoveDeckCantrip(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || host.isLand() || host.getCMC() > 2 || !ComputerUtilCard.isCardRemAIDeck(host)) {
+            return false;
+        }
+        if (cantripChain(sa)) {
+            return true;
+        }
+        if (sa.isSpell() && host.isPermanent()) { // Mishra's Bauble: casting it is the way to its ability
+            for (final SpellAbility ab : host.getSpellAbilities()) {
+                if (cantripChain(ab)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean cantripChain(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api == ApiType.Draw || api == ApiType.RevealHand || api == ApiType.Reveal || api == ApiType.PeekAndReveal
+                    || api == ApiType.Dig
+                    || api == ApiType.DigUntil || api == ApiType.NameCard
+                    || api == ApiType.ChangeZone && "Library".equals(a.getParamOrDefault("Origin", ""))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isDevelopment(final SpellAbility sa) {
@@ -1158,10 +1222,11 @@ public final class FlatMonteCarloPicker {
             return 100000; // the face first: damage and drain are often best aimed there
         }
         final Card c = (Card) e;
+        final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c);
+            return ComputerUtilCard.evaluateCreature(c) + danger;
         }
-        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0);
+        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
 
     /**

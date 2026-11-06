@@ -89,6 +89,37 @@ pair_partner | Painter's Servant
 # with Lion's Eye Diamond cracked in response the dredgers are in the graveyard before the first draw
 dredge_refill | Breakthrough
 
+# ------------------------------------------------------------------------------------------------ Vintage metagame
+# Oath of Druids: a second Oath does nothing (Atraxa, the creature it fetches, is already a cheat_target, and Show and
+# Tell with four Atraxa is read as the cheat deck by the cheat lists above)
+combo_engine | Oath of Druids
+
+# Oath of Druids needs the opponent to control more creatures at the upkeep of the Oath's controller: Forbidden Orchard
+# gives them a token when it is tapped for mana, at the end of their turn (OathTiming)
+gives_opponent_creature | Forbidden Orchard
+
+# Time Vault wins an extra turn per untap (Manifold Key, Voltaic Key): it counts with the artifact payoffs
+artifact_payoff | Time Vault
+
+# AI:RemoveDeck:All and AI:RemoveDeck:Random cards Flat MC plays on its own: free cantrips and tutors, the fast mana and
+# the lands of the combo decks. Decks built for the AI keep them (the combo pieces are kept through their own roles)
+flat_mc_plays | Gitaxian Probe | Mishra's Bauble | Urza's Bauble | Vampiric Tutor | Demonic Consultation | Merchant Scroll | Springleaf Drum
+flat_mc_plays | Mana Crypt | Mana Vault | Lotus Petal | Mox Opal | Ancient Tomb | Mishra's Workshop | Tolarian Academy | Eldrazi Temple
+flat_mc_plays | Demonic Tutor | Mystical Tutor | Tinker | Lion's Eye Diamond | Bazaar of Baghdad
+
+# Doomsday: kept with Thassa's Oracle in hand; the pile is cards that draw (the most for the least), then mana
+doomsday | Doomsday
+doomsday_draw | Gitaxian Probe | Street Wraith | Gush | Ancestral Recall | Preordain
+doomsday_mana | Dark Ritual | Lotus Petal | Black Lotus | Mox Jet | Mox Sapphire | Mox Opal
+
+# Sphere Shops: Smelting Vat sacrifices one artifact for the better ones in the top eight cards, chaining the deck's artifacts
+artifact_engine | Smelting Vat
+
+# Lurrus Vault Key: Goblin Engineer puts Time Vault in the graveyard and returns it (as does Goblin Welder against an
+# artifact), Manifold Key untaps it: the two vault pieces and the two goblins are held together as one pair
+pair_engine | Time Vault | Manifold Key
+pair_partner | Goblin Engineer | Goblin Welder
+
 # ------------------------------------------------------------------------------------------------ Standard metagame
 # Superior Spider-Man enters as a copy of any creature card in a graveyard and "if you cast it" triggers still work:
 # discard or mill Bringer of the Last Gift (or Uldaros Theorix) and cast Spider-Man for four mana
@@ -122,3 +153,11 @@ library_cut_finisher | Restless Reef | Insatiable Avarice
 # and Appa makes an Ally token for every spell cast from exile), the other drain creatures
 airbend_reducer | Doc Aurlock, Grizzled Genius | Semblance Anvil
 airbend_payoff | Bontu's Monument | Kalastria Healer | Zulaport Cutthroat | Cruel Celebrant | Blood Artist
+
+# AntiCombo (see forge.ai.simulation.AntiCombo): what the AI must not let an opponent keep or cast. KEY cards win or
+# are the heart of a combo (counted at full weight when an opponent has them on the battlefield, on the stack or in the
+# graveyard as something to bring back), PIECE cards are what a combo deck needs around the keys (half the weight).
+anti_combo_key | Time Vault | Doomsday | Thassa's Oracle | Laboratory Maniac | Jace, Wielder of Mysteries | Underworld Breach | Brain Freeze | Tendrils of Agony | Grapeshot | Past in Flames | Yawgmoth's Will | Oath of Druids | Show and Tell | Sneak Attack | Tinker | Reanimate | Animate Dead | Exhume | Necromancy | Entomb | Griselbrand | Archon of Cruelty | Atraxa, Grand Unifier | Blightsteel Colossus | Emrakul, the Aeons Torn | Bolas's Citadel | Hullbreaker Horror | Kiki-Jiki, Mirror Breaker | Splinter Twin | Narcomoeba | Dread Return | Balustrade Spy | Painter's Servant | Grindstone | Hypergenesis | Through the Breach | Natural Order | Food Chain | Omniscience | Dream Halls | Basalt Monolith | Isochron Scepter | Dramatic Reversal | Demonic Consultation | Tainted Pact | Mind's Desire | Empty the Warrens | Living End | Goblin Welder | Goblin Engineer | Manifold Key
+# the cards of the combo catalog an opponent shows (ComboCatalog): weighed as keys, but not kept in AI decks for it
+anti_combo_seen | Channel | Flash | Protean Hulk | Melira, Sylvok Outcast | Hermit Druid | Ad Nauseam | High Tide | Palinchron | Tolarian Academy | Mind Over Matter | Saheeli Rai | Jeskai Ascendancy | Exquisite Blood | Sanguine Bond | Krark-Clan Ironworks | Worldgorger Dragon | Sliver Queen | Hive Mind | Peer into the Abyss | Scapeshift | Dark Depths | Illusions of Grandeur | Donate | Helm of Obedience | Near-Death Experience | Aetherworks Marvel | Second Sunrise | Counterbalance | Mindslaver | Knowledge Pool | Solemnity | Decree of Silence | Maralen of the Mornsong | Opposition Agent | Mycosynth Lattice | Thopter Foundry | Urza, Lord High Artificer
+anti_combo_piece | Dark Ritual | Cabal Ritual | Lotus Petal | Mox Opal | Gitaxian Probe | Street Wraith | Gush | Preordain | Ponder | Brainstorm | Vampiric Tutor | Mystical Tutor | Demonic Tutor | Imperial Seal | Grim Tutor | Burning Wish | Soul-Guide Lantern
