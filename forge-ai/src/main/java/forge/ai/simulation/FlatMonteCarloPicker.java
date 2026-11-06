@@ -16,9 +16,9 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.spellability.TargetRestrictions;
 import forge.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
@@ -91,7 +91,7 @@ public final class FlatMonteCarloPicker {
     private static final int HOLD_VALUE_PER_CMC = 14;
     private static final int HOLD_COUNTER_VALUE_PER_CMC = 22;
     private static final int HOLD_VALUE_CAP = 90;
-    private static final int HOLD_TOTAL_CAP = HOLD_FLASH_ETB_INTERACTION_CAP;
+    private static final int HOLD_TOTAL_CAP = 140;
     /** Decks that look like control decks value holding up instants more. */
     private static final double CONTROL_HOLD_FACTOR = 1.75;
 
@@ -1755,8 +1755,7 @@ public final class FlatMonteCarloPicker {
     /**
      * Classifies an instant-speed card by looking at its abilities, not its name, so that it works for any card of any
      * deck: counterspells, removal (destroy, damage, fight, edict, bounce or exile from the battlefield, shrink),
-     * tricks (pump, protection), flash creatures, and flash creatures whose ETB interacts with a spell or ability on
-     * the stack. ETB detection follows the card's trigger and effect scripts, including modal choices.
+     * tricks (pump, protection), flash creatures, and everything else (draw spells, utility).
      */
     static HoldKind holdKind(final Card c) {
         boolean removal = false;
@@ -1966,8 +1965,8 @@ public final class FlatMonteCarloPicker {
     /**
      * What the mana and instants still unused at the end of the AI's turn are worth. The evaluator only looks at
      * what is on the table, which would always favour tapping out; this makes holding up a counterspell or a
-     * removal spell comparable to the small plays that would use the mana instead. Ordinary held-up cards stay
-     * below creature value; a relevant flash ETB answer can justify passing instead of deploying its body.
+     * removal spell comparable to the small plays that would use the mana instead. Only the best single card counts
+     * (there is only so much mana) and it is capped well below the value of a real creature.
      */
     static int holdUpBonus(final Player simAi, final Config cfg) {
         if (cfg.holdManaWeightPercent <= 0) {
@@ -2016,8 +2015,9 @@ public final class FlatMonteCarloPicker {
                 total += Math.min(option[0], option[2]) / 2;
             }
         }
-        total = Math.min(total, HOLD_TOTAL_CAP);
-        // A live ETB answer is not just generic value for unused mana; do not halve it for an aggro deck.
+        // Keep the ordinary hold cap unchanged; only a relevant flash ETB gets the higher cap.
+        total = Math.min(total, holdingEtbStackInteraction ? HOLD_FLASH_ETB_INTERACTION_CAP : HOLD_TOTAL_CAP);
+        // A live ETB answer is not generic unused-mana value; do not halve it for an aggro deck.
         final double factor = holdingEtbStackInteraction ? Math.max(1.0, cfg.controlFactor) : cfg.controlFactor;
         return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * factor);
     }
