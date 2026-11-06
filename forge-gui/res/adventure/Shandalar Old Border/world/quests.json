@@ -13084,6 +13084,9 @@
               "name": "(Take the Dwarven rune stone)",
               "action": [
                 {
+                  "issueQuest": "56"
+                },
+                {
                   "setQuestFlag": {
                     "key": "FE_DwarvenHold_Accepted",
                     "val": 1
@@ -13235,9 +13238,6 @@
                     "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
                     "val": 1
                   }
-                },
-                {
-                  "issueQuest": "56"
                 }
               ]
             }
@@ -13381,6 +13381,9 @@
           "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
           "action": [
             {
+              "issueQuest": "56"
+            },
+            {
               "setQuestFlag": {
                 "key": "FE_DwarvenHold_Accepted",
                 "val": 1
@@ -13478,9 +13481,6 @@
                 "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
                 "val": 1
               }
-            },
-            {
-              "issueQuest": "56"
             },
             {
               "battleWithActorID": 41004

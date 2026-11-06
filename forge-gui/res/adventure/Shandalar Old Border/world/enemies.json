@@ -103525,7 +103525,7 @@
   {
     "name": "FEM Dwarven Armorer",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_6.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_armorer.dck"
     ],
@@ -103574,7 +103574,7 @@
   {
     "name": "FEM Dwarven Berserker",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_berserker.dck"
     ],
@@ -103671,7 +103671,7 @@
   {
     "name": "FEM Dwarven Lieutenant",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_2.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_lieutenant.dck"
     ],
@@ -103720,7 +103720,7 @@
   {
     "name": "FEM Dwarven Demolition Team",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_3.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_demolition_team.dck"
     ],
@@ -103769,7 +103769,7 @@
   {
     "name": "FEM Dwarven Miner",
     "sprite": "sprites/enemy/humanoid/dwarf/miner.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_miner.dck"
     ],
@@ -103810,7 +103810,7 @@
   {
     "name": "FEM Dwarven Recruiter",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_4.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_recruiter.dck"
     ],
@@ -103859,7 +103859,7 @@
   {
     "name": "FEM Dwarven Soldier",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_soldier.dck"
     ],
@@ -103941,7 +103941,7 @@
   {
     "name": "FEM Dwarven Thaumaturgist",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarfpilot.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_thaumaturgist.dck"
     ],
@@ -103990,7 +103990,7 @@
   {
     "name": "FEM Dwarven Trader",
     "sprite": "sprites/enemy/fallen_empires/dwarven_hold/dwarven_trader.atlas",
-    "scale": 1.0,
+    "scale": 0.75,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_trader.dck"
     ],
@@ -104031,7 +104031,7 @@
   {
     "name": "FEM Dwarven Warrior",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_8.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_warrior.dck"
     ],
@@ -104072,7 +104072,7 @@
   {
     "name": "FEM Dwarven Weaponsmith",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_7.atlas",
-    "scale": 1.5,
+    "scale": 1.25,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_dwarven_weaponsmith.dck"
     ],
@@ -104432,7 +104432,7 @@
   {
     "name": "FEM Orgg vs Dwarves",
     "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orgg.atlas",
-    "scale": 0.65,
+    "scale": 0.4,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_orgg.dck"
     ],

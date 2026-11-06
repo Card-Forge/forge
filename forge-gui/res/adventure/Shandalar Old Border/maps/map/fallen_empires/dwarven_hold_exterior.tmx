@@ -821,8 +821,8 @@
   <object id="89" template="../../../../../../common/maps/obj/collision.tx" x="254.375" y="199.92" width="48.4318" height="4.24997" />
   <object id="90" template="../../../../../../common/maps/obj/collision.tx" x="246.83" y="199.92" width="7.61366" height="57.0682" />
   <object id="91" template="../../../../../../common/maps/obj/collision.tx" x="254.102" y="204.193" width="22.7046" height="18.4318" />
-  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="743.667" y="367.667" />
-  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="737" y="303.667" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="729.292" y="368.292" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="720" y="271.917" />
   <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="320.667" y="194.667" />
   <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="657.667" y="196.667" />
   <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="464.667" y="308.333" />
