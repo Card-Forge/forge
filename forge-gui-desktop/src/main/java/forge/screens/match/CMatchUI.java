@@ -355,6 +355,40 @@ public final class CMatchUI
         return targetingOverlay;
     }
 
+    // ---- "How to Play" tutorial: note and outline, drawn over the match screen ----
+    private TutorialOverlayPanel tutorialOverlay;
+
+    private TutorialOverlayPanel getTutorialOverlay() {
+        if (tutorialOverlay == null) {
+            tutorialOverlay = new TutorialOverlayPanel(this);
+        }
+        return tutorialOverlay;
+    }
+
+    /** One of the match screen's docked panels, or null when this match has none with that id. */
+    IVDoc<? extends ICDoc> getTutorialDoc(final EDocID id) {
+        return myDocs.get(id);
+    }
+
+    /** Shows a tutorial note over the board. Call on the UI thread. */
+    public void showTutorialCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        getTutorialOverlay().showCoach(title, text, nextLabel, onNext);
+    }
+
+    /** Removes the tutorial note. Call on the UI thread. */
+    public void hideTutorialCoach() {
+        if (tutorialOverlay != null) {
+            tutorialOverlay.hideCoach();
+        }
+    }
+
+    /** Outlines parts of the match screen for the tutorial; an empty set clears it. Call on the UI thread. */
+    public void highlightTutorial(final java.util.EnumSet<forge.gamemodes.tutorial.TutorialTarget> targets) {
+        if (tutorialOverlay != null || !targets.isEmpty()) {
+            getTutorialOverlay().highlight(targets);
+        }
+    }
+
     /**
      * View deck list.
      */
@@ -1298,6 +1332,9 @@ public final class CMatchUI
     public void afterGameEnd() {
         super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
+        if (tutorialOverlay != null) {
+            tutorialOverlay.detach();
+        }
         FThreads.invokeInEdtNowOrLater(() -> {
             if (isReplay()) {
                 SOverlayUtils.hideOverlay(); // the end-of-game screen would otherwise stay over the whole window
