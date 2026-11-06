@@ -1,12 +1,20 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.AITest;
+import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameStage;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.mulligan.MulliganService;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -155,5 +163,33 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertFalse(OpeningHand.isKeyCard(bears, DeckPlan.Archetype.RAMP));
         AssertJUnit.assertTrue(OpeningHand.isKeyCard(counter, DeckPlan.Archetype.CONTROL));
         AssertJUnit.assertFalse(OpeningHand.isKeyCard(elves, DeckPlan.Archetype.CONTROL));
+    }
+
+    /**
+     * London tucks as it draws, so the cards MulliganService counts have left the hand by the time it asks. Judged at its
+     * own size a landless five goes back; taking the two off again would make it three, under the threshold, and kept.
+     */
+    @Test
+    public void aMulliganedHandIsJudgedAtItsOwnSize() {
+        setUp(9, 8);
+        final Game game = ai.getGame();
+        final List<Integer> sizes = new ArrayList<>();
+        ai.dangerouslySetController(new PlayerControllerAi(game, ai, ai.getLobbyPlayer()) {
+            @Override
+            public boolean mulliganKeepHand(final Player firstPlayer, final int cardsToReturn) {
+                final CardCollection held = new CardCollection(ai.getCardsIn(ZoneType.Hand));
+                sizes.add(held.size());
+                for (final Card c : held) { // what was drawn goes back, for a hand of the same size with no land
+                    ai.getZone(ZoneType.Hand).remove(c);
+                    ai.getZone(ZoneType.Library).add(c);
+                }
+                hand(Collections.nCopies(held.size(), "Hill Giant").toArray(new String[0]));
+                return super.mulliganKeepHand(firstPlayer, cardsToReturn);
+            }
+        });
+        ai.drawCards(7);
+        game.setAge(GameStage.Mulligan);
+        new MulliganService(ai).perform();
+        AssertJUnit.assertEquals(Arrays.asList(7, 6, 5, 4), sizes);
     }
 }
