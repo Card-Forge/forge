@@ -1172,7 +1172,7 @@ public class Forge implements ApplicationListener {
         currentScene = newScene;
 
         currentScene.enter();
-        if (currentScene instanceof DuelScene)
+        if (currentScene instanceof DuelScene duel && !duel.isGeneratingDecks())
             Forge.clearTransitionScreen(true);
         return true;
     }
