@@ -747,7 +747,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
         if (panel.isGhost()) {
             // Route to the exiled card's own path; the engine gates whether anything happens
-            getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+            getMatchUI().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
             return;
         }
         boolean isLocal = getMatchUI().isLocalPlayer(model);
@@ -785,7 +785,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 // If accepted, doUpdateCard will remove from splitCardIds when
                 // the card's tapped state changes, allowing it to regroup.
                 splitCardIds.add(panel.getCard().getId());
-                if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
+                if (getMatchUI().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
                     doLayout();
                     if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
                         return;
@@ -873,16 +873,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 || activateDesc.equals(loc.getMessage("lblAttackWithCard"))
                 || activateDesc.equals(loc.getMessage("lblBlockWithCard"));
         if (alreadyInCombat) {
-            getMatchUI().getGameController().selectCard(primary, others, new MouseTriggerEvent(evt));
+            getMatchUI().selectCard(primary, others, new MouseTriggerEvent(evt));
         } else if (isCombat) {
             // Synthesize a left-click: InputAttack/InputBlock route the right-click button to
             // their undeclare branch, but here the user wants to declare from the badge prompt.
             MouseTriggerEvent declareTrigger = new MouseTriggerEvent(MouseEvent.BUTTON1, evt.getX(), evt.getY());
-            getMatchUI().getGameController().selectCard(primary, others, declareTrigger);
+            getMatchUI().selectCard(primary, others, declareTrigger);
         } else {
             // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect and the button.
             for (CardView cv : selected) {
-                getMatchUI().getGameController().selectCard(cv, null, new MouseTriggerEvent(evt));
+                getMatchUI().selectCard(cv, null, new MouseTriggerEvent(evt));
             }
         }
         // Update splitCardIds: clear whole stack, then mark the subset that
@@ -927,7 +927,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
         }
-        if (getMatchUI().getGameController().selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
+        if (getMatchUI().selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
             return true;
         }
         //if panel can't do anything with card selection, try selecting previous panel in stack

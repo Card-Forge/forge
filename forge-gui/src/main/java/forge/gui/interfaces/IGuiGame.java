@@ -15,6 +15,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
@@ -279,6 +280,9 @@ public interface IGuiGame {
      */
     default boolean canPickStackTargets() { return false; }
     boolean isSelecting();
+
+    /** Asks {@code player} the question, or withdraws the player's pending question when it is null. */
+    void setQuestion(PlayerView player, Question question);
 
     /**
      * Cards revealed to the player, until {@link #hideRevealedCards()}. The GUI chooses how to display them, and may

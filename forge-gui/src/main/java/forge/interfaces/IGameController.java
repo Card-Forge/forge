@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Answer;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
@@ -37,6 +38,8 @@ public interface IGameController {
     boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
 
     void selectAbility(SpellAbilityView sa);
+
+    void answer(Answer answer);
 
     /** Picks an item on the stack while a prompt is asking for stack targets. */
     void selectStackItem(StackItemView item);

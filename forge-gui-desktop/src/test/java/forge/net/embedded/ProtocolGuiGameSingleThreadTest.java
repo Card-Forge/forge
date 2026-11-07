@@ -7,7 +7,10 @@ import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.net.ProtocolGuiGame;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.event.GuiGameEvent;
@@ -53,7 +56,8 @@ public class ProtocolGuiGameSingleThreadTest {
         final ProtocolGuiGameInProcessTest.RecordingRemote remote;
         final Set<String> pumpThreads = Collections.synchronizedSet(new HashSet<>());
         int pumped;
-        boolean playedLand;
+        int landTurn = -1;
+        boolean cycled;
 
         PumpingGui(final ProtocolGuiGameInProcessTest.RecordingRemote remote) {
             super(remote);
@@ -78,23 +82,70 @@ public class ProtocolGuiGameSingleThreadTest {
             final PlayerView owner = (PlayerView) ub.getObjects()[0];
             final IGameController controller = getGameController(owner);
             final GameView gv = getGameView();
-            if (!playedLand && gv.getPhase() == PhaseType.MAIN1 && owner.equals(gv.getPlayerTurn())
-                    && owner.getHand() != null && !owner.getHand().isEmpty()) {
-                playedLand = true;
-                final CardView land = owner.getHand().iterator().next();
-                return () -> controller.selectCard(land, null, null);
-            }
-            if (playedLand && gv.getTurn() >= 3) {
+            final Question.Priority question = remote.lastQuestion instanceof Question.Priority q && owner.equals(q.player()) ? q : null;
+            if ((cycled && question != null) || gv.getTurn() >= 12) {
                 return controller::concede;
             }
-            return controller::selectButtonOk;
+            if (question == null) {
+                // Paying for the cycling: a Shivan Reef has two mana abilities, so the host asks which, blocking
+                final CardView reef = cycled ? find(owner.getBattlefield(), "Shivan Reef", false) : null;
+                return reef != null ? () -> controller.selectCard(reef, null, null) : controller::selectButtonOk;
+            }
+            final boolean myMain = owner.equals(gv.getPlayerTurn())
+                    && (gv.getPhase() == PhaseType.MAIN1 || gv.getPhase() == PhaseType.MAIN2);
+            if (myMain && landTurn != gv.getTurn()) {
+                CardView land = find(owner.getHand(), "Shivan Reef", false);
+                if (land == null) {
+                    land = find(owner.getHand(), "Drifting Meadow", false);
+                }
+                if (land != null) {
+                    landTurn = gv.getTurn();
+                    final SpellAbilityView landPlay = ProtocolGuiGameInProcessTest.playableAbility(question, land);
+                    return () -> controller.answer(new Answer.Play(question.id(), landPlay, null));
+                }
+            }
+            final CardView meadow = find(owner.getHand(), "Drifting Meadow", false);
+            if (myMain && meadow != null && untappedReefs(owner) >= 2) {
+                for (final SpellAbilityView sa : question.abilities().getOrDefault(meadow, List.of())) {
+                    if (sa.canPlay() && sa.toString().toLowerCase().contains("cycling")) {
+                        cycled = true;
+                        return () -> controller.answer(new Answer.Play(question.id(), sa, null));
+                    }
+                }
+            }
+            return () -> controller.answer(new Answer.Pass(question.id()));
+        }
+
+        private static CardView find(final Iterable<CardView> cards, final String name, final boolean tapped) {
+            if (cards != null) {
+                for (final CardView card : cards) {
+                    if (name.equals(card.getName()) && card.isTapped() == tapped) {
+                        return card;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private static int untappedReefs(final PlayerView owner) {
+            int count = 0;
+            if (owner.getBattlefield() != null) {
+                for (final CardView card : owner.getBattlefield()) {
+                    if ("Shivan Reef".equals(card.getName()) && !card.isTapped()) {
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
 
         private GuiGameEvent lastButtons() {
             synchronized (remote.log) {
                 for (int i = remote.log.size() - 1; i >= 0; i--) {
-                    if (remote.log.get(i).getMethod() == ProtocolMethod.updateButtons) {
-                        return remote.log.get(i);
+                    final GuiGameEvent ev = remote.log.get(i);
+                    if (ev.getMethod() == ProtocolMethod.updateButtons
+                            || (ev.getMethod() == ProtocolMethod.setQuestion && ev.getObjects()[1] != null)) {
+                        return ev;
                     }
                 }
             }
@@ -114,7 +165,8 @@ public class ProtocolGuiGameSingleThreadTest {
             final ProtocolGuiGameInProcessTest.RecordingRemote remote = new ProtocolGuiGameInProcessTest.RecordingRemote();
             final PumpingGui gui = new PumpingGui(remote);
             final Deck humanDeck = new Deck("Embedded");
-            humanDeck.getMain().add("Drifting Meadow", 40);
+            humanDeck.getMain().add("Shivan Reef", 26);
+            humanDeck.getMain().add("Drifting Meadow", 14);
             final Deck aiDeck = new Deck("AI");
             aiDeck.getMain().add("Plains", 40);
             final RegisteredPlayer human = new RegisteredPlayer(humanDeck).setPlayer(new LobbyPlayerHuman("Embedded"));
@@ -140,8 +192,9 @@ public class ProtocolGuiGameSingleThreadTest {
             final Set<String> all = new HashSet<>(gui.pumpThreads);
             all.addAll(remote.threadsSeen);
             assertEquals(all.size(), 1, "blocking dialogs ran on the same thread as the pumped inputs");
-            assertTrue(remote.blockingCalls.stream().anyMatch(s -> s.startsWith("getAbilityToPlay")), "nested sendAndWait ran inside the pump");
-            assertEquals(me.getBattlefield().size(), 1, "the land reached the battlefield");
+            assertTrue(gui.cycled, "a card was cycled by answering the priority question");
+            assertTrue(remote.blockingCalls.stream().anyMatch(s -> s.startsWith("getAbilityToPlay")),
+                    "paying for it, a blocking call nested inside a pumped answer ran on the waiting thread");
         } finally {
             GuiBase.setInterface(previous);
         }
