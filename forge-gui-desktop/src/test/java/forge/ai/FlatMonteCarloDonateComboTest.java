@@ -1,10 +1,13 @@
 package forge.ai;
 
+import java.util.Collections;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.simulation.ComboGuard;
 import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.DonateCombo;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -238,5 +241,71 @@ public class FlatMonteCarloDonateComboTest extends AITest {
         final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
         final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
         AssertJUnit.assertFalse("seven lands and no Donate, but the AI chose: " + play, "Illusions of Grandeur".equals(play));
+    }
+
+    @Test(timeOut = 240_000)
+    public void flatMcUsesLethalRemovalBeforeGushWhenIllusionsWasDonated() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(2); // Chain of Vapor is payable; Gush can instead return both Islands
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        addCardToZone("Chain of Vapor", ai, ZoneType.Hand);
+        addCardToZone("Gush", ai, ZoneType.Hand);
+        opp.setLife(20, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("the lethal bounce must be chosen before drawing with Gush", "Chain of Vapor", play);
+        AssertJUnit.assertTrue("Chain of Vapor must already target the donated Illusions",
+                chosen.get(0).getTargets().contains(illusions));
+    }
+
+    @Test(timeOut = 240_000)
+    public void flatMcSetsRepealXToTheDonatedIllusionsManaValue() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(5); // Repeal for X=4 costs five mana; Gush can instead return two Islands
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        addCardToZone("Repeal", ai, ZoneType.Hand);
+        addCardToZone("Gush", ai, ZoneType.Hand);
+        opp.setLife(20, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("Repeal should remove donated Illusions before Gush", "Repeal", play);
+        AssertJUnit.assertEquals("Repeal X must match Illusions' mana value", Integer.valueOf(4),
+                chosen.get(0).getXManaCostPaid());
+        AssertJUnit.assertTrue("Repeal must target the donated Illusions", chosen.get(0).getTargets().contains(illusions));
+    }
+
+    @Test
+    public void donatedIllusionsAboveTwentyLifeIsNotAnImmediateWin() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        islands(1);
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        opp.setLife(21, null);
+        addCardToZone("Chain of Vapor", ai, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertNull("losing 20 life from 21 does not finish the game",
+                DonateCombo.sureFinish(ai, Collections.singletonList(cast("Chain of Vapor"))));
     }
 }

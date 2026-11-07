@@ -1967,6 +1967,21 @@ public class AiController {
                 return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library
             }
         }
+        if (flatMonteCarloActive()) {
+            final SpellAbility donateFinish = DonateCombo.sureFinish(player, saList);
+            if (donateFinish != null) {
+                if (!hasFailedToCast(donateFinish)) {
+                    lastFlatMcResult = null;
+                    return donateFinish; // Removing donated Illusions now makes the only opponent lose 20 life.
+                }
+                for (SpellAbility ability = donateFinish; ability != null; ability = ability.getSubAbility()) {
+                    ability.resetTargets();
+                }
+                if (donateFinish.costHasManaX()) {
+                    donateFinish.setXManaCostPaid(null);
+                }
+            }
+        }
         // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
         final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
         if (sureStifle != null) {

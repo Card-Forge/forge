@@ -58,7 +58,7 @@ public final class AntiCombo {
             return 0;
         }
         if (DonateCombo.isGiftedTarget(ai, c)) {
-            return 0; // the AI deliberately gave this harmful permanent to its opponent
+            return DonateCombo.targetRank(ai, c); // our donated Illusions is the preferred removal target
         }
         // a card that fills a slot of a known combo (ComboCatalog) is aimed at as well, more so when it completes one
         return Math.max(weight(c) * RANK_BONUS / KEY_WEIGHT, ComboCatalog.rankPercent(ai, c) * RANK_BONUS / 100);

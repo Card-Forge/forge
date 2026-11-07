@@ -99,7 +99,8 @@ public class FlatMonteCarloAntiComboTest extends AITest {
         AssertJUnit.assertTrue("the gifted card is on the opponent's battlefield",
                 opp.getCardsIn(ZoneType.Battlefield).contains(gifted));
         AssertJUnit.assertEquals("a harmful gift is not a 60-point opponent threat", 0, AntiCombo.threat(ai));
-        AssertJUnit.assertEquals("do not aim removal at our own donated permanent", 0, AntiCombo.rank(ai, gifted));
+        AssertJUnit.assertTrue("aim removal at our gifted Illusions before ordinary permanents",
+                AntiCombo.rank(ai, gifted) > 10000);
         AssertJUnit.assertEquals("the opponent must not get combo credit for an AI-owned gift", 0,
                 ComboCatalog.visibleThreat(ai));
     }
