@@ -5,6 +5,9 @@ import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.GameType;
+import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -91,6 +94,42 @@ public class ChangeZoneAiTest extends AITest {
             AssertJUnit.assertFalse("AI should not cast Exhume without an own creature",
                     ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa) == AiPlayDecision.WillPlay);
         }
+    }
+
+    @Test
+    public void testCommanderStaysInExileForDelayedReturn() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        game.getRules().addAppliedVariant(GameType.Commander);
+
+        Card norin = addCard("Norin the Wary", ai);
+        ai.addCommander(norin);
+
+        SpellAbility exile = norin.getTriggers().get(0).ensureAbility();
+        exile.setActivatingPlayer(ai);
+        AbilityUtils.resolve(exile);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertEquals("Norin should remain in exile for his delayed return", 1,
+                countCardsWithName(game, "Norin the Wary", ZoneType.Exile));
+        AssertJUnit.assertEquals("Norin should not be moved to the command zone", 0,
+                countCardsWithName(game, "Norin the Wary", ZoneType.Command));
+    }
+
+    @Test
+    public void testCommanderMovesToCommandWithoutDelayedReturn() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        game.getRules().addAppliedVariant(GameType.Commander);
+
+        Card norin = addCard("Norin the Wary", ai);
+        ai.addCommander(norin);
+
+        game.getAction().exile(norin, null, AbilityKey.newMap());
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertEquals("An exiled commander without a delayed return should move to command", 1,
+                countCardsWithName(game, "Norin the Wary", ZoneType.Command));
     }
 
 }
