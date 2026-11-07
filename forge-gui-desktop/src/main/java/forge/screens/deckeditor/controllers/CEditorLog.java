@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
+import forge.item.PaperCard;
 import forge.screens.deckeditor.views.VEditorLog;
 
 /**
@@ -36,6 +37,10 @@ public enum CEditorLog implements ICDoc {
 
     public final void addLogEntry(final String message, final Color foreground) {
         view.addLogEntry(message, foreground);
+    }
+
+    public final void addLogEntry(final String message, final Color foreground, final PaperCard card) {
+        view.addLogEntry(message, foreground, card);
     }
 
     @Override

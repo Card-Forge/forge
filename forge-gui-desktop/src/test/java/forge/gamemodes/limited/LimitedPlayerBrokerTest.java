@@ -3,18 +3,14 @@ package forge.gamemodes.limited;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.deck.DeckSection;
-import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
-import org.mockito.MockedStatic;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
@@ -26,19 +22,18 @@ public class LimitedPlayerBrokerTest {
         PaperCard sideboardCard = card("Sideboard card");
         player.getDeck().getMain().add(mainCard, 2);
         player.getDeck().getOrCreate(DeckSection.Sideboard).add(sideboardCard);
+        player.setPromptSink((prompt, blocking, onAnswer) -> {
+            List<?> cards = prompt.options();
+            assertEquals(cards.size(), 3);
+            assertTrue(cards.contains(mainCard));
+            assertTrue(cards.contains(sideboardCard));
+            onAnswer.accept(List.of(cards.indexOf(mainCard)));
+        });
 
-        try (MockedStatic<SGuiChoose> choices = mockStatic(SGuiChoose.class)) {
-            choices.when(() -> SGuiChoose.oneOrNone(anyString(), anyCollection())).thenAnswer(invocation -> {
-                Collection<PaperCard> cards = invocation.getArgument(1);
-                assertEquals(cards.size(), 3);
-                assertTrue(cards.contains(mainCard));
-                assertTrue(cards.contains(sideboardCard));
-                return mainCard;
-            });
-
-            assertSame(player.chooseExchangeCard(null), mainCard);
-            assertSame(player.chooseExchangeCard(sideboardCard), mainCard);
-        }
+        List<PaperCard> chosen = new ArrayList<>();
+        player.chooseExchangeCard(null, chosen::add);
+        player.chooseExchangeCard(sideboardCard, chosen::add);
+        assertEquals(chosen, List.of(mainCard, mainCard));
     }
 
     @Test
@@ -49,16 +44,13 @@ public class LimitedPlayerBrokerTest {
         PaperCard offer = card("Offer");
         player.getDeck().getMain().add(mainCard);
         opponent.getDeck().getOrCreate(DeckSection.Sideboard).add(offer);
-        player.dealBrokers = 1;
-        doReturn(offer).when(opponent).chooseExchangeCard(any());
+        player.setPromptSink((prompt, blocking, onAnswer) -> onAnswer.accept(List.of()));
 
-        try (MockedStatic<SGuiChoose> choices = mockStatic(SGuiChoose.class)) {
-            choices.when(() -> SGuiChoose.oneOrNone(anyString(), anyCollection())).thenReturn(null);
-            player.activateBrokers(List.of(player, opponent));
-        }
+        boolean[] done = {false};
+        player.activateBrokers(List.of(player, opponent), 1, () -> done[0] = true);
 
-        verify(opponent, never()).chooseExchangeCard(any());
-        assertFalse(player.hasBrokers());
+        assertTrue(done[0]);
+        verify(opponent, never()).chooseExchangeCard(any(), any());
         assertEquals(player.getDeck().getMain().count(mainCard), 1);
         assertEquals(opponent.getDeck().get(DeckSection.Sideboard).count(offer), 1);
     }
