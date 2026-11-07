@@ -286,17 +286,22 @@ public class CLobby implements IDraftEventHandler {
         if (!(view.getLobby() instanceof ServerGameLobby serverLobby)) return;
         Localizer localizer = Localizer.getInstance();
 
-        // Step 0: If past events exist, offer a choice between creating new and loading one
+        // Step 0: If past events exist, offer a choice between creating new, loading one and deleting one
         if (!eventIdsByDropdownIndex.isEmpty()) {
             String[] setupOptions = {
                     localizer.getMessage("lblNetworkSetUpEventCreate"),
-                    localizer.getMessage("lblNetworkSetUpEventLoadPast")
+                    localizer.getMessage("lblNetworkSetUpEventLoadPast"),
+                    localizer.getMessage("lblNetworkSetUpEventDeletePast")
             };
             String setupChoice = GuiChoose.oneOrNone(
                     localizer.getMessage("lblNetworkSetUpEventPrompt"), setupOptions);
             if (setupChoice == null) return;
             if (setupChoice.equals(setupOptions[1])) {
                 openLoadPastEventDialog();
+                return;
+            }
+            if (setupChoice.equals(setupOptions[2])) {
+                openDeletePastEventDialog();
                 return;
             }
         }
@@ -330,7 +335,7 @@ public class CLobby implements IDraftEventHandler {
         NetworkEvent event = serverLobby.getCurrentEvent();
         if (event == null) return;
 
-        // Step 4: Pod size, picks per pack, pick timer and disconnect grace (draft only)
+        // Step 4: Pod size; for draft also picks per pack, pick timer and disconnect grace
         int timerSeconds = event.getPickTimerSeconds();
         int graceSeconds = event.getDisconnectGraceSeconds();
         if (isDraft) {
@@ -419,6 +424,10 @@ public class CLobby implements IDraftEventHandler {
                 int parsed = Integer.parseInt(graceField.getText().trim());
                 if (parsed >= 0) graceSeconds = parsed;
             } catch (NumberFormatException ignored) { }
+        } else {
+            Integer podSize = NetworkEvent.chooseSealedPodSize(serverLobby.getNumberOfSlots());
+            if (podSize == null) return;
+            event.setSealedPodSize(podSize);
         }
 
         if (!serverLobby.configureEvent(chosen, draft, timerSeconds, graceSeconds)) {
@@ -428,14 +437,18 @@ public class CLobby implements IDraftEventHandler {
         view.updateActionButtons();
     }
 
-    void openLoadPastEventDialog() {
-        if (eventIdsByDropdownIndex.isEmpty()) return;
+    private List<NetworkEvent.EventChoice> pastEventChoices() {
         List<NetworkEvent.EventChoice> choices = new ArrayList<>(eventIdsByDropdownIndex.size());
         for (String id : eventIdsByDropdownIndex) {
             choices.add(new NetworkEvent.EventChoice(id, NetworkEvent.getEventDisplayLabel(id)));
         }
+        return choices;
+    }
+
+    void openLoadPastEventDialog() {
+        if (eventIdsByDropdownIndex.isEmpty()) return;
         NetworkEvent.EventChoice chosen = GuiChoose.oneOrNone(
-                Localizer.getInstance().getMessage("lblNetworkLoadPastEventPrompt"), choices);
+                Localizer.getInstance().getMessage("lblNetworkLoadPastEventPrompt"), pastEventChoices());
         if (chosen == null) return;
         activeEventId = chosen.id();
         activeConformance = true;
@@ -444,6 +457,21 @@ public class CLobby implements IDraftEventHandler {
         view.updateActionButtons();
         view.updateDeckListFilter();
         broadcastEventSelection();
+    }
+
+    private void openDeletePastEventDialog() {
+        NetworkEvent.EventChoice chosen = GuiChoose.oneOrNone(
+                Localizer.getInstance().getMessage("lblNetworkDeletePastEventPrompt"), pastEventChoices());
+        if (chosen == null || !NetworkEvent.confirmDeleteEvent(chosen)) return;
+        NetworkEvent.deleteEventDecks(chosen.id());
+        scanAvailableEvents();
+        if (chosen.id().equals(activeEventId)) {
+            activeEventId = null;
+            broadcastEventSelection();
+        }
+        view.updateEventPanelState();
+        view.updateActionButtons();
+        view.updateDeckListFilter();
     }
 
     void startEvent() {
