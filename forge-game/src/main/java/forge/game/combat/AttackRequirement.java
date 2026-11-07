@@ -99,12 +99,11 @@ public class AttackRequirement {
                 - (isAttacking ? defenderSpecific.getOrDefault(defender, 0) : 0);
         if (isAttacking) {
             final Combat combat = defender.getGame().getCombat();
-            final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
 
             // check if a restriction will apply such that the requirement is no longer relevant
-            if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
+            // TODO REFACTOR?!
+            if (attackers.size() != 1) {
                 for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
-                    if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
                     int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
 
                     // only count violations if the forced creature can actually attack and has no cost incurred for doing so
