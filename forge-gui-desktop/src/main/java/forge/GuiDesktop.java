@@ -90,9 +90,17 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public String getAssetsDir() {
-        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
-                // FIXME: replace this hardcoded value!!
-                "../forge-gui/" : "";
+        // Release builds ship res/ next to the jar; IDE runs start in forge-gui-desktop/,
+        // and the launcher scripts in forge-gui-desktop/target/ start one level deeper.
+        if (new File("res").isDirectory()) {
+            return "";
+        }
+        for (String candidate : new String[] { "../forge-gui/", "../../forge-gui/" }) {
+            if (new File(candidate, "res").isDirectory()) {
+                return candidate;
+            }
+        }
+        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ? "../forge-gui/" : "";
     }
 
     @Override
