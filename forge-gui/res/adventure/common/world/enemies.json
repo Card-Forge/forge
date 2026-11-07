@@ -10335,7 +10335,9 @@
       "Boss",
       "IdentityColorless"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "bossInsult": "Emrakul never even noticed you. You were nothing more than a passing ripple in her endless hunger.",
+    "bossIntro": "Reality warps and tears around a presence far too vast to comprehend. Your thoughts begin to unravel."
   },
   {
     "name": "Esper Artificer",
@@ -12910,7 +12912,7 @@
     ],
     "gamesPerMatch": 3,
     "bossInsult": "Extinction suits you.",
-    "bossIntro": "<i>A thundering roar calls forth a primeval army.<i>"
+    "bossIntro": "A thundering roar calls forth a primeval army."
   },
   {
     "name": "Ghost",
@@ -31728,5 +31730,65 @@
       "IdentityBlack",
       "BiomeBlack"
     ]
+  },
+  {
+    "name": "Arzakon",
+    "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
+    "deck": [
+      "decks/boss/arzakon.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 25,
+    "scale": 2,
+    "life": 80,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 5000,
+        "addMaxCount": 2500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 100,
+        "addMaxCount": 50
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Arzakon"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Black Lotus"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 4,
+        "sourceDeck": "decks/boss/arzakon.dck"
+      }
+    ],
+    "colors": "WUBRG",
+    "questTags": [
+      "Fiend",
+      "Planeswalker",
+      "Boss",
+      "Arzakon"
+    ],
+    "gamesPerMatch": 3,
+    "bossIntro": "Shandalar was mine once. With the barrier in ruins, it will be mine again.",
+    "bossInsult": "Did you think breaking the barrier would free you? It only opened the door for me."
   }
 ]
