@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
@@ -31,6 +33,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import forge.StaticData;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -60,6 +63,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.menus.CDeckEditorUIMenus;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -467,37 +471,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          * Add context menu entries for foiling cards
          */
         public void addMakeFoils() {
-            final int max = getMaxMoveQuantity();
-            if (max == 0) { return; }
-
-            addMakeFoil(1);
-            if (max == 1) { return; }
-
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
-            }
-
-            addMakeFoil(qty);
-            if (max == 2) { return; }
-
-            addMakeFoil(-max);
-        }
-
-        /**
-         * Adds the individual context menu entry for foiling the requested number of cards
-         *
-         * @param qty           a negative quantity will prompt the user for a number
-         */
-        private void addMakeFoil(final int qty) {
-            String label = localizer.getMessage("lblConvertToFoil") + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-
-            GuiUtils.addMenuItem(menu, label, null, () -> {
-                Integer quantity = qty;
-                if (quantity < 0) {
-                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                    if (quantity == null) { return; }
-                }
+            addQuantityItems(itemText -> localizer.getMessage("lblConvertToFoil") + " " + itemText, quantity -> {
                 // get the currently selected card from the editor
                 CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                 PaperCard existingCard = cardManager.getSelectedItem();
@@ -508,6 +482,54 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 // add *quantity* into the deck and set them as selected
                 cardManager.addItem(foiledCard, quantity);
                 cardManager.setSelectedItem(foiledCard);
+            });
+        }
+
+        public void addChangePrintings() {
+            // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
+            if (!catalogManager.isInfinite()) { return; }
+            final CardManager cardManager = (CardManager) getItemManager();
+            final PaperCard card = cardManager.getSelectedItem();
+            if (card == null) { return; }
+            if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) { return; }
+
+            addQuantityItems(itemText -> localizer.getMessage("lblChangePrintingOf", itemText), quantity -> {
+                PaperCard chosen = ChangePrintingDialog.show(card);
+                if (chosen == null) { return; }
+                PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
+                if (newCard.equals(card)) { return; }
+                cardManager.removeItem(card, quantity);
+                cardManager.addItem(newCard, quantity);
+                getDeckController().notifyModelChanged();
+            });
+        }
+
+        /** Adds entries for one copy, the default card limit and a prompted X copies, as far as the selection allows. */
+        private void addQuantityItems(final Function<String, String> label, final IntConsumer action) {
+            final int max = getMaxMoveQuantity();
+            if (max == 0) { return; }
+
+            addQuantityItem(label, 1, action);
+            if (max == 1) { return; }
+
+            addQuantityItem(label, Math.min(FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT), max), action);
+            if (max == 2) { return; }
+
+            addQuantityItem(label, -max, action);
+        }
+
+        /**
+         * @param qty           a negative quantity will prompt the user for a number
+         */
+        private void addQuantityItem(final Function<String, String> label, final int qty, final IntConsumer action) {
+            String itemText = SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+            GuiUtils.addMenuItem(menu, label.apply(itemText), null, () -> {
+                Integer quantity = qty;
+                if (quantity < 0) {
+                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
+                    if (quantity == null) { return; }
+                }
+                action.accept(quantity);
             }, true, true);
         }
         //TODO: need to translate getItemDisplayString
