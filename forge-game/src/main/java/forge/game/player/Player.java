@@ -3140,6 +3140,15 @@ public class Player extends GameEntity implements Comparable<Player> {
                 c.setStartsGameInPlay(true);
             }
         }
+        for (final Pair<IPaperCard, Integer> suspended : registeredPlayer.getExtraCardsSuspended()) {
+            final Card c = Card.fromPaperCard(suspended.getLeft(), this);
+            // a second Suspend keyword would remove two time counters each upkeep
+            if (!c.hasKeyword(Keyword.SUSPEND)) {
+                c.addChangedCardKeywords(Lists.newArrayList("Suspend"), null, false, game.getNextTimestamp(), null);
+            }
+            c.addCounterInternal(CounterEnumType.TIME, suspended.getRight(), this, false, null, null);
+            getZone(ZoneType.Exile).add(c);
+        }
 
         for (final Card c : List.copyOf(getCardsIn(ZoneType.Library))) { //Copy the list so ChangeZone effects don't trigger concurrent modification.
             for (KeywordInterface inst : c.getKeywords()) {
