@@ -1867,6 +1867,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         stats.nextTurn();
     }
 
+    public final int getExtraTurnsPlayed() {
+        return stats.getExtraTurnsPlayed();
+    }
+
+    public final void incrementExtraTurnsPlayed() {
+        stats.nextExtraTurn();
+    }
+
     public final int getLastTurnNr() {
         return this.lastTurnNr;
     }

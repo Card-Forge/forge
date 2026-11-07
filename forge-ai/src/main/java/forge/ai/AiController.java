@@ -1975,6 +1975,21 @@ public class AiController {
                 return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library
             }
         }
+        if (flatMonteCarloActive()) {
+            final SpellAbility donateFinish = DonateCombo.sureFinish(player, saList);
+            if (donateFinish != null) {
+                if (!hasFailedToCast(donateFinish)) {
+                    lastFlatMcResult = null;
+                    return donateFinish; // Removing donated Illusions now makes the only opponent lose 20 life.
+                }
+                for (SpellAbility ability = donateFinish; ability != null; ability = ability.getSubAbility()) {
+                    ability.resetTargets();
+                }
+                if (donateFinish.costHasManaX()) {
+                    donateFinish.setXManaCostPaid(null);
+                }
+            }
+        }
         // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
         final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
         if (sureStifle != null) {
@@ -2504,6 +2519,45 @@ public class AiController {
                 && !h.getManaAbilities().isEmpty();
     }
 
+    /**
+     * A cost-reduction permanent marked AI:RemoveDeck:All or :Random (Sapphire Medallion, for example): the heuristic may omit it,
+     * but FlatMC should still compare deploying it when it can make a catalogued setup safer or cheaper.
+     */
+    boolean isRemoveDeckCostReductionPermanent(final SpellAbility sa) {
+        final Card h = sa == null ? null : sa.getHostCard();
+        // CardAiHints keeps the All and Random deck-removal flags separately; include both for this narrow exception.
+        if (h == null || !sa.isSpell() || !h.isPermanent() || h.isLand()
+            || !(ComputerUtilCard.isCardRemAIDeck(h) || ComputerUtilCard.isCardRemRandomDeck(h))) {
+            return false;
+        }
+        for (final StaticAbility ability : h.getStaticAbilities()) {
+            final String activator = ability.getParam("Activator");
+            final String valid = ability.getParam("ValidCard");
+            if (ability.getMode().contains(StaticAbilityMode.ReduceCost)
+                && (activator == null || "You".equals(activator) || "Any".equals(activator))
+                && (valid == null || !valid.contains("OppCtrl"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether this ability moves a card from its controller's hand onto the battlefield.
+     * These hidden-origin ChangeZone abilities need an eligible card in hand (Aether Vial,
+     * Quicksilver Amulet, Belbe's Portal, Elvish Piper, and similar effects).
+     */
+    private static boolean isHandToBattlefieldChangeZone(final SpellAbility sa) {
+        for (SpellAbility current = sa; current != null; current = current.getSubAbility()) {
+            if (current.getApi() == ApiType.ChangeZone && current.hasParam("Origin")
+                && ZoneType.listValueOf(current.getParam("Origin")).contains(ZoneType.Hand)
+                && ZoneType.Battlefield.toString().equals(current.getParam("Destination"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (sa == null) {
             return false;
@@ -2517,6 +2571,12 @@ public class AiController {
 
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
+        }
+        // ChangeZoneAi rejects a hidden-origin activation when no eligible card is in hand.
+        // Broad discovery must not add it back just because the activation cost itself is payable.
+        if (isHandToBattlefieldChangeZone(sa)
+                && (opinion == AiPlayDecision.CantPlayAi || opinion == AiPlayDecision.MissingNeededCards)) {
+            return false;
         }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
@@ -2533,6 +2593,7 @@ public class AiController {
         final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !isRemoveDeckManaPermanent(sa)
+                && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
                 && !TutorPlan.hasUse(player, sa)) {

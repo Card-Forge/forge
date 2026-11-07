@@ -264,6 +264,11 @@ public final class ComboCatalog {
         if (source == payoff) {
             return false;
         }
+        // Do not spend Channel's life to cast a second working legendary payoff such as Ulamog, the Ceaseless Hunger.
+        if (payoff.isPermanent() && !payoff.ignoreLegendRule() && !payoff.hasSVar("AILegendaryException")
+                && ComboGuard.duplicatesWorkingLegend(ai, payoff)) {
+            return false;
+        }
 
         final String sourceName = AiCardLists.normalize(source.getName());
         final String payoffName = AiCardLists.normalize(payoff.getName());
@@ -411,7 +416,11 @@ public final class ComboCatalog {
     private static List<Card> visible(final Player ai, final boolean withGraveyard) {
         final List<Card> cards = new ArrayList<>();
         for (final Player opp : ai.getOpponents()) {
-            cards.addAll(opp.getCardsIn(ZoneType.Battlefield));
+            for (final Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                if (!DonateCombo.isGiftedTarget(ai, c)) {
+                    cards.add(c);
+                }
+            }
             if (withGraveyard) {
                 cards.addAll(opp.getCardsIn(ZoneType.Graveyard));
             }
