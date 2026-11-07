@@ -1,16 +1,20 @@
 package forge.ai;
 
 import java.util.List;
+import java.util.Random;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.ability.ScryAi;
+import forge.ai.ability.SurveilAi;
 import forge.ai.simulation.FlatMonteCarloStats;
 import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 /**
  * Decision tests for the strategic side of the Monte Carlo AI: does it use card draw and selection, does it keep up
@@ -105,6 +109,50 @@ public class FlatMonteCarloStrategyTest extends AITest {
         game.getAction().checkStateEffects(true);
     }
 
+    /**
+     * Force the old 40% heuristic to receive an unfavourable random value. At the AI's opponent-end-step window,
+     * instant-speed Scry and Surveil must now be accepted deterministically after their safety checks.
+     */
+    private void assertSelectionIsAcceptedAtOpponentsEndStep(final String cardName, final SpellAbilityAi spellAi) {
+        final Game game = newGame(false);
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 2, ai);
+        final forge.game.card.Card spell = addCardToZone(cardName, ai, ZoneType.Hand);
+        fill(ai, "Island", "Grizzly Bears");
+        setPhase(game, PhaseType.END_OF_TURN, opp);
+        final SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        final Random previousRandom = MyRandom.getRandom();
+        try {
+            // CountingRandom delegates nextInt() to this source; -1 makes nextFloat() almost 1.0.
+            MyRandom.setRandom(new Random() {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public int nextInt() {
+                    return -1;
+                }
+            });
+            final AiAbilityDecision decision = spellAi.canPlay(ai, sa);
+            AssertJUnit.assertTrue(cardName + " should be accepted at the opponent's end step: " + decision,
+                    decision.willingToPlay());
+        } finally {
+            MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    @Test
+    public void instantScryIsAcceptedAtOpponentsEndStepWithoutRandomChance() {
+        assertSelectionIsAcceptedAtOpponentsEndStep("Opt", new ScryAi());
+    }
+
+    @Test
+    public void instantSurveilIsAcceptedAtOpponentsEndStepWithoutRandomChance() {
+        assertSelectionIsAcceptedAtOpponentsEndStep("Consider", new SurveilAi());
+    }
+
     // ------------------------------------------------------------------ opponent's end step
 
     @Test(timeOut = LONG_TIMEOUT_MS)
@@ -121,6 +169,22 @@ public class FlatMonteCarloStrategyTest extends AITest {
         final String play = nextPlay(ai);
         System.out.println("drawsACardAtTheOpponentsEndStep -> " + play);
         AssertJUnit.assertEquals("unused mana at the opponent's end step should be turned into a card", "Opt", play);
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void impulseIsCastAtTheOpponentsEndStep() {
+        final Game game = newGame(true);
+        game.AI_FLAT_MONTE_CARLO_MAX = true;
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 3, ai);
+        addCardToZone("Impulse", ai, ZoneType.Hand);
+        fill(ai, "Island", "Grizzly Bears", "Air Elemental");
+        fill(opp, "Mountain");
+        setPhase(game, PhaseType.END_OF_TURN, opp);
+        final String play = nextPlay(ai);
+        System.out.println("impulseIsCastAtTheOpponentsEndStep -> " + play);
+        AssertJUnit.assertEquals("a Dig spell that selects a card should use otherwise-unused end-step mana", "Impulse", play);
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)
