@@ -2274,7 +2274,15 @@ public class CardFactoryUtil {
 
             if (keyword.contains(":")) { // K:<keyword>:Cost:ExtraParams:ExtraDescription
                 final String[] k = keyword.split(":");
-                final Cost cost = new Cost(k[1], false);
+
+                // Default to mana cost if no cost provided
+                final String costString = k[1];
+                Cost cost;
+                if (costString.equals("")) {
+                    cost = new Cost(card.getManaCost(), false);
+                } else {
+                    cost = new Cost(k[1], false);
+                }
                 sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
                 sb.append(cost.isOnlyManaCost() ? "" : ".");
 
