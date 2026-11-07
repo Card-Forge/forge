@@ -1,0 +1,7 @@
+Name:Tom Paris, Risk-Taker
+ManaCost:4 U R
+Types:Legendary Creature Human Pilot
+PT:4/4
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Seek out — Whenever you draw your second card each turn, creatures you control gain flying, double strike, vigilance, and haste until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying & Double Strike & Vigilance & Haste
+Oracle:Seek out — Whenever you draw your second card each turn, creatures you control gain flying, double strike, vigilance, and haste until end of turn.

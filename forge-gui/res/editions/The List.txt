@@ -394,7 +394,6 @@ ALA-226 U Jungle Shrine @Wayne Reynolds
 ALA-228 U Savage Lands @Vance Kovacs
 ALA-229 U Seaside Citadel @Volkan Baǵa
 ALA-250 M Rafiq of the Many @Meel Tamphanon
-ALL-16 U Scars of the Veteran @Dan Frazier
 APC-7 U Diversionary Tactics @Jerry Tiritilli
 APC-18 C Standard Bearer @Ron Spencer
 APC-24 R Ice Cave @Jerry Tiritilli
@@ -1441,6 +1440,7 @@ CSP-145 R Dark Depths @Stephan Martiniere
 CSP-146 U Frost Marsh @Jim Pavelec
 CSP-148 U Mouth of Ronom @Daren Bader
 CSP-149 R Scrying Sheets @Thomas M. Baxa
+CST-16 U Scars of the Veteran @Dan Frazier
 DBL-121 C Siege Zombie @Johann Bodin
 DD1-4 U Elvish Harbinger @Larry MacDougall
 DD1-5 C Elvish Warrior @Christopher Moeller
@@ -2798,6 +2798,7 @@ KHM-47 C Berg Strider @Filip Burburan
 KHM-50 R Cosima, God of the Voyage @Micah Epstein
 KHM-52 R Cyclone Summoner @Andrey Kuzinskiy
 KHM-68 C Mistwalker @Steve Prescott
+KHM-70 M Orvar, the All-Form @Chase Stone
 KHM-72 C Ravenform @Anna Steinbauer
 KHM-84 C Demonic Gifts @Kekai Kotaki
 KHM-111 C Skull Raid @Igor Kieryluk

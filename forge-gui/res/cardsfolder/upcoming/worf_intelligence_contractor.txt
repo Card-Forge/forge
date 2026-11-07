@@ -1,0 +1,10 @@
+Name:Worf, Intelligence Contractor
+ManaCost:2 R
+Types:Legendary Creature Klingon Warrior Spy
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TakeOneEach | TriggerDescription$ When NICKNAME enters, for each opponent, gain control of up to one target creature that player controls with mana value 3 or less until end of turn. Untap those creatures. Until end of turn, they become Warriors in addition to their other types and gain haste.
+SVar:TakeOneEach:DB$ GainControl | ValidTgts$ Creature.OppCtrl+cmcLE3 | ValidTgtsDesc$ creature an opponent controls with mana value 3 or less | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Warrior
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:When Worf enters, for each opponent, gain control of up to one target creature that player controls with mana value 3 or less until end of turn. Untap those creatures. Until end of turn, they become Warriors in addition to their other types and gain haste.

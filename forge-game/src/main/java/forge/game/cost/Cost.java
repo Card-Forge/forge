@@ -1017,7 +1017,8 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
-                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend());
+                // a cost increase does not change how much of a waterbend cost can be paid by tapping
+                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend() != null ? mPart.getMaxWaterbend() : mPartOld.getMaxWaterbend());
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||

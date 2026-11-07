@@ -91,7 +91,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts().hasTapCost()
                     && sa instanceof AbilitySub
-                    && (!phase.getNextTurn().equals(ai)
+                    && (!phase.isPlayerNextTurn(ai)
                     || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
                 boolean combatants = false;
                 for (Card c : hList) {

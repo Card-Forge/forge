@@ -83,7 +83,7 @@ public class SpecialCardAi {
             final Game game = ai.getGame();
 
             // TODO This is basically removal, so we may want to play this at other times
-            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().getNextTurn() != ai) {
+            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || !game.getPhaseHandler().isPlayerNextTurn(ai)) {
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
             }
 
@@ -263,7 +263,7 @@ public class SpecialCardAi {
             if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
                 animated.addCounterInternal(CounterEnumType.P1P1, 2, ai, false, null, null);
             }
-            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai);
             boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
             boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
 
@@ -982,8 +982,8 @@ public class SpecialCardAi {
             lib.sort(CardLists.CmcComparatorInv);
 
             if (ai.getController() instanceof PlayerControllerAi) {
-                // A madness or Psychatog deck knows what it is missing: ask for that, whatever the profile says.
-                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                // A deck built around a combo (madness, Psychatog, storm...) knows what it is missing: ask for that, whatever the profile says.
+                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai)
                         .tutorPicks(ai, lib, changeNum);
                 if (planned != null) {
                     return planned;
@@ -1171,7 +1171,7 @@ public class SpecialCardAi {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
             CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
 
-            if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !availableGates.isEmpty()) {
+            if (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai) && !availableGates.isEmpty()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
@@ -1350,10 +1350,10 @@ public class SpecialCardAi {
             // TODO: Any other bad effects like that?
             boolean blackViseOTB = game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Black Vise"));
 
-            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
+            if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
@@ -2063,10 +2063,10 @@ public class SpecialCardAi {
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.
 
-            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN)
+            if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // draw +1 card when at max hand size, hoping to draw a workable spell or land

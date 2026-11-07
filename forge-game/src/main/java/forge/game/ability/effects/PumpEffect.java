@@ -382,7 +382,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final int numkw = AbilityUtils.calculateAmount(host, num, sa);
             List<String> choice = Lists.newArrayList();
             List<String> total = Lists.newArrayList(keywords);
-            if (sa.hasParam("NoRepetition")) {
+            if (sa.hasParam("NoRepetition") && !tgtCards.isEmpty()) {
                 for (String kw : keywords) {
                     if (tgtCards.get(0).hasKeyword(kw)) {
                         total.remove(kw);
