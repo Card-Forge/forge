@@ -293,6 +293,17 @@ public class ComputerUtilMana {
         }
     }
 
+    // the any-color mana ability of a source like Cavern of Souls, whose mana makes this spell uncounterable
+    private static SpellAbility getUncounterableManaAbility(Card source, SpellAbility sa) {
+        for (final SpellAbility ab : source.getManaAbilities()) {
+            final AbilityManaPart mp = ab.getManaPart();
+            if (mp != null && mp.isAnyMana() && mp.cannotCounterPaidWith(sa) && mp.meetsManaRestrictions(sa)) {
+                return ab;
+            }
+        }
+        return null;
+    }
+
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
             Collection<SpellAbility> maList, boolean checkCosts) {
         Card saHost = sa.getHostCard();
@@ -343,6 +354,13 @@ public class ComputerUtilMana {
                 default:
                     break;
             }
+        }
+
+        if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
+            // sources like Cavern of Souls go last, so another source pays {C} if it can and they pay generic uncounterably
+            List<SpellAbility> uncounterableLast = Lists.newArrayList(maList);
+            uncounterableLast.sort(Comparator.comparing(ma -> getUncounterableManaAbility(ma.getHostCard(), sa) != null));
+            maList = uncounterableLast;
         }
 
         for (final SpellAbility ma : maList) {
@@ -398,22 +416,12 @@ public class ComputerUtilMana {
 
             SpellAbility paymentChoice = ma;
 
-            // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
-            // to attempt to make the spell uncounterable when possible.
-            if (ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
-                    && saHost.getType().hasCreatureType(ma.getHostCard().getChosenType())) {
-                if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
-                    // Deprioritize Cavern of Souls, try to pay generic mana with it instead to use the NoCounter ability
-                    continue;
-                } else if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
-                    for (SpellAbility ab : maList) {
-                        if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
-                            if (!ab.getHostCard().isTapped()) {
-                                paymentChoice = ab;
-                                break;
-                            }
-                        }
-                    }
+            // Exception: when paying generic mana with a source like Cavern of Souls, prefer its any-color mana
+            // to make the spell uncounterable.
+            if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
+                SpellAbility uncounterable = getUncounterableManaAbility(ma.getHostCard(), sa);
+                if (uncounterable != null) {
+                    paymentChoice = uncounterable;
                 }
             }
 

@@ -164,4 +164,41 @@ public class AutoPaymentTest extends SimulationTest {
         // the Orrery is needed either way and covers the cost alone, so the Ring stays untapped
         AssertJUnit.assertTrue(ring.isUntapped());
     }
+
+    @Test
+    public void cavernOfSoulsPaysColorlessWhenNoOtherSourceCan() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Cavern of Souls", p).setChosenType("Eldrazi");
+        addCards("Forest", 2, p);
+        Card fleshraker = addCardToZone("Glaring Fleshraker", p, ZoneType.Hand); // {2}{C}
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = fleshraker.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false));
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
+    }
+
+    @Test
+    public void delightedHalflingPaysGenericSoTheLegendarySpellCantBeCountered() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Delighted Halfling", p).setSickness(false);
+        addCard("Mountain", p);
+        addCard("Forest", p);
+        Card squee = addCardToZone("Squee, Goblin Nabob", p, ZoneType.Hand); // {2}{R}
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = squee.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
+        AssertJUnit.assertTrue(sa.getPayingMana().stream().anyMatch(m -> m.addsNoCounterMagic(sa)));
+    }
 }
