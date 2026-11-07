@@ -2519,15 +2519,31 @@ public class AiController {
         final Card h = sa == null ? null : sa.getHostCard();
         // CardAiHints keeps the All and Random deck-removal flags separately; include both for this narrow exception.
         if (h == null || !sa.isSpell() || !h.isPermanent() || h.isLand()
-                || !(ComputerUtilCard.isCardRemAIDeck(h) || ComputerUtilCard.isCardRemRandomDeck(h))) {
+            || !(ComputerUtilCard.isCardRemAIDeck(h) || ComputerUtilCard.isCardRemRandomDeck(h))) {
             return false;
         }
         for (final StaticAbility ability : h.getStaticAbilities()) {
             final String activator = ability.getParam("Activator");
             final String valid = ability.getParam("ValidCard");
             if (ability.getMode().contains(StaticAbilityMode.ReduceCost)
-                    && (activator == null || "You".equals(activator) || "Any".equals(activator))
-                    && (valid == null || !valid.contains("OppCtrl"))) {
+                && (activator == null || "You".equals(activator) || "Any".equals(activator))
+                && (valid == null || !valid.contains("OppCtrl"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether this ability moves a card from its controller's hand onto the battlefield.
+     * These hidden-origin ChangeZone abilities need an eligible card in hand (Aether Vial,
+     * Quicksilver Amulet, Belbe's Portal, Elvish Piper, and similar effects).
+     */
+    private static boolean isHandToBattlefieldChangeZone(final SpellAbility sa) {
+        for (SpellAbility current = sa; current != null; current = current.getSubAbility()) {
+            if (current.getApi() == ApiType.ChangeZone && current.hasParam("Origin")
+                && ZoneType.listValueOf(current.getParam("Origin")).contains(ZoneType.Hand)
+                && ZoneType.Battlefield.toString().equals(current.getParam("Destination"))) {
                 return true;
             }
         }
@@ -2547,6 +2563,12 @@ public class AiController {
 
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
+        }
+        // ChangeZoneAi rejects a hidden-origin activation when no eligible card is in hand.
+        // Broad discovery must not add it back just because the activation cost itself is payable.
+        if (isHandToBattlefieldChangeZone(sa)
+                && (opinion == AiPlayDecision.CantPlayAi || opinion == AiPlayDecision.MissingNeededCards)) {
+            return false;
         }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:

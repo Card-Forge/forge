@@ -190,6 +190,9 @@ public class PhaseHandler implements IHasForgeLog {
                     }
                 }
                 playerTurn.incrementTurn();
+                if (playerTurn.isExtraTurn()) {
+                    playerTurn.incrementExtraTurnsPlayed();
+                }
 
                 final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
