@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            List<Mana> cleared = p.getManaPool().clearPool(false);
+            Collection<Mana> cleared = p.getManaPool().clearPool(false);
             drained.addAll(cleared);
             if (StaticAbilityUnspentMana.hasManaBurn(p)) {
                 final int lost = p.loseLife(cleared.size(), false, true, sa);
