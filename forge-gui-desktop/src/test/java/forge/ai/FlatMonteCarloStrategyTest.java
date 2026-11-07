@@ -74,6 +74,23 @@ public class FlatMonteCarloStrategyTest extends AITest {
         AssertJUnit.assertEquals("with three open Islands and nothing else to do the AI should cast Opt", "Opt", play);
     }
 
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void doesNotActivateHandToBattlefieldAbilitiesWithoutACreatureInHand() {
+        for (final String cardName : new String[] {
+                "Aether Vial", "Quicksilver Amulet", "Belbe's Portal", "Elvish Piper" }) {
+            final Game game = newGame(true);
+            final Player ai = game.getPlayers().get(1);
+            final Player opp = game.getPlayers().get(0);
+            addCards("Forest", 6, ai); // enough to activate each ability, including Quicksilver Amulet
+            addCard(cardName, ai).setSickness(false);
+            fill(ai, "Forest", "Grizzly Bears", "Air Elemental"); // creatures in the library do not satisfy an Origin$ Hand cost
+            fill(opp, "Mountain");
+            setPhase(game, PhaseType.MAIN2, ai);
+
+            AssertJUnit.assertNull(cardName + " must not activate when there is no eligible creature in hand", nextPlay(ai));
+        }
+    }
+
     // ------------------------------------------------------------------ helpers for the opponent's turn
 
     /** Makes the opponent (the other player) cast the card for real, leaving the spell on the stack. */
