@@ -2,13 +2,16 @@ package forge.game.ability.effects;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
@@ -54,7 +57,10 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardCollectionView untargetedCards = CardUtil.getRadiance(sa);
         CardCollectionView tgtCards = getTargetCards(sa);
 
-        tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
+        Map<Boolean, CardCollection> tgtPartition = tgtCards.stream().collect(Collectors.partitioningBy(Card::canBeDestroyed, Collectors.toCollection(CardCollection::new)));
+        untargetedCards = CardLists.filter(untargetedCards, Card::canBeDestroyed);
+
+        tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtPartition.get(true), ZoneType.Graveyard, sa);
         untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
@@ -72,6 +78,21 @@ public class DestroyEffect extends SpellAbilityEffect {
                 continue;
             }
             internalDestroy(gameCard, sa, params, zoneMovements);
+        }
+        if (sa.hasParam("AlwaysRemember") && sa.hasParam("RememberLKI")) {
+            for (final Card tgtC : tgtPartition.get(false)) {
+                if (!tgtC.isInPlay()) {
+                    continue;
+                }
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                host.addRemembered(zoneMovements.getLastStateBattlefield().get(gameCard));
+            }
         }
 
         for (final Card unTgtC : untargetedCards) {
