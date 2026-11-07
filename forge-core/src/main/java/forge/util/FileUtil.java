@@ -81,7 +81,7 @@ public final class FileUtil {
         return ensureDirectoryExists(new File(path));
     }
     public static boolean ensureDirectoryExists(final File dir) {
-        return (dir.exists() && dir.isDirectory()) || dir.mkdirs();
+        return (dir.exists() && dir.isDirectory()) || dir.mkdirs() || dir.isDirectory();
     }
 
     public static boolean deleteDirectory(File dir) {

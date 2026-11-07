@@ -16,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
@@ -61,8 +62,11 @@ public final class ScryfallBulkDataSync {
         }
 
         final Map<String, Map<String, Map<String, String[]>>> bySet = new HashMap<>();
+        // With every language in the file (allowedLangs == null) nothing is left out; otherwise prints that
+        // exist in no English version must not vanish with the languages that are not wanted.
+        final NoEnglishPrints noEnglish = allowedLangs == null ? null : new NoEnglishPrints();
         try {
-            streamAndAccumulate(downloadUrl, bySet, allowedLangs, progress, cancelled);
+            streamAndAccumulate(downloadUrl, bySet, allowedLangs, noEnglish, progress, cancelled);
         } catch (IOException e) {
             Logger.error(e, "ScryfallBulkDataSync: failed to download/parse bulk data");
             if (progress != null) {
@@ -73,6 +77,9 @@ public final class ScryfallBulkDataSync {
 
         if (cancelled.getAsBoolean()) {
             return -1;
+        }
+        if (noEnglish != null) {
+            noEnglish.addTo(bySet);
         }
 
         if (progress != null) {
@@ -145,7 +152,8 @@ public final class ScryfallBulkDataSync {
     }
 
     private static void streamAndAccumulate(String downloadUrl, Map<String, Map<String, Map<String, String[]>>> bySet,
-                                             Set<String> allowedLangs, ProgressListener progress, BooleanSupplier cancelled) throws IOException {
+                                             Set<String> allowedLangs, NoEnglishPrints noEnglish,
+                                             ProgressListener progress, BooleanSupplier cancelled) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) new URL(downloadUrl).openConnection();
         conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
         conn.setReadTimeout(READ_TIMEOUT_MS);
@@ -199,7 +207,7 @@ public final class ScryfallBulkDataSync {
                 } catch (Exception e) {
                     continue; // skip a malformed line rather than aborting the whole sync
                 }
-                addCard(bySet, card, allowedLangs);
+                addCard(bySet, card, allowedLangs, noEnglish);
                 cardsSeen[0]++;
 
                 long now = System.currentTimeMillis();
@@ -214,14 +222,21 @@ public final class ScryfallBulkDataSync {
         }
     }
 
-    private static void addCard(Map<String, Map<String, Map<String, String[]>>> bySet, JsonObject card, Set<String> allowedLangs) {
+    private static void addCard(Map<String, Map<String, Map<String, String[]>>> bySet, JsonObject card, Set<String> allowedLangs,
+                                NoEnglishPrints noEnglish) {
         String setCode = ScryfallSetSync.str(card, "set");
         String cn = ScryfallSetSync.str(card, "collector_number");
         String lang = ScryfallSetSync.str(card, "lang");
         if (setCode == null || cn == null || lang == null) {
             return;
         }
+        if (noEnglish != null && "en".equals(lang)) {
+            noEnglish.sawEnglish(setCode, cn); // whatever its image status: an English version exists
+        }
         if (allowedLangs != null && !allowedLangs.contains(lang)) {
+            if (noEnglish != null) {
+                noEnglish.offer(setCode, cn, lang, card);
+            }
             return;
         }
 
@@ -233,5 +248,55 @@ public final class ScryfallBulkDataSync {
         bySet.computeIfAbsent(setCode, k -> new HashMap<>())
                 .computeIfAbsent(cn, k -> new HashMap<>())
                 .put(lang, frontBack);
+    }
+
+    /**
+     * Some prints exist in no English version: Neon Dynasty 293 is Japanese, 428 Phyrexian. Scryfall's default
+     * listing has them in their own language, but a sync that only wants English and one other language
+     * would drop them. This keeps, for each such print, the first of its languages in Scryfall's own order,
+     * and adds it at the end if the print has no English version and nothing else was kept for it.
+     */
+    static final class NoEnglishPrints {
+        private final Set<String> englishPrints = new HashSet<>();
+        /** set -> collector number -> {language, uuids} of the best candidate so far. */
+        private final Map<String, Map<String, Object[]>> candidates = new HashMap<>();
+
+        void sawEnglish(String setCode, String cn) {
+            englishPrints.add(setCode + '|' + cn);
+            Map<String, Object[]> forSet = candidates.get(setCode);
+            if (forSet != null) {
+                forSet.remove(cn);
+            }
+        }
+
+        void offer(String setCode, String cn, String lang, JsonObject card) {
+            if (englishPrints.contains(setCode + '|' + cn)) {
+                return;
+            }
+            String[] frontBack = ScryfallSetSync.frontBackUuids(card);
+            if (frontBack == null) {
+                return;
+            }
+            Map<String, Object[]> forSet = candidates.computeIfAbsent(setCode, k -> new HashMap<>());
+            Object[] best = forSet.get(cn);
+            if (best == null || CdnUuidCache.languageRank(lang) < CdnUuidCache.languageRank((String) best[0])) {
+                forSet.put(cn, new Object[] {lang, frontBack});
+            }
+        }
+
+        void addTo(Map<String, Map<String, Map<String, String[]>>> bySet) {
+            for (Map.Entry<String, Map<String, Object[]>> forSet : candidates.entrySet()) {
+                for (Map.Entry<String, Object[]> candidate : forSet.getValue().entrySet()) {
+                    if (englishPrints.contains(forSet.getKey() + '|' + candidate.getKey())) {
+                        continue;
+                    }
+                    Map<String, String[]> langs = bySet.computeIfAbsent(forSet.getKey(), k -> new HashMap<>())
+                            .computeIfAbsent(candidate.getKey(), k -> new HashMap<>());
+                    if (langs.isEmpty()) {
+                        langs.put((String) candidate.getValue()[0], (String[]) candidate.getValue()[1]);
+                    }
+                }
+            }
+        }
     }
 }

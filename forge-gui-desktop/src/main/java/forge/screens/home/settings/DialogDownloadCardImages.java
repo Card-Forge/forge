@@ -1,6 +1,7 @@
 package forge.screens.home.settings;
 
 import com.google.common.collect.Iterables;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.download.GuiDownloader;
 import forge.game.GameFormat;
@@ -26,8 +27,10 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -59,6 +62,8 @@ public class DialogDownloadCardImages {
     private FComboBox<String> cbxIndexLang;
     private FButton btnSyncBulkDataLang;
     private FCheckBox cbPreferLangForUnique;
+    private FCheckBox cbIncludeTokens;
+    private FCheckBox cbOverwrite;
     private FButton btnClearCdnCache;
 
     public void show() {
@@ -93,6 +98,12 @@ public class DialogDownloadCardImages {
             selectedFormat = idx == 0 ? null : (GameFormat) cbxFormats.getSelectedItem();
             scheduleStatsUpdate();
         });
+
+        cbIncludeTokens = new FCheckBox(localizer.getMessage("cbIncludeTokenImages"));
+        cbIncludeTokens.setToolTipText(localizer.getMessage("nlIncludeTokenImages"));
+        cbIncludeTokens.addActionListener(e -> scheduleStatsUpdate());
+        cbOverwrite = new FCheckBox(localizer.getMessage("cbOverwriteImages"));
+        cbOverwrite.setToolTipText(localizer.getMessage("nlOverwriteImages"));
 
         btnDownload = new FButton(localizer.getMessage("btnDownloadCardImages"));
         btnDownload.addActionListener(e -> startDownload());
@@ -148,6 +159,8 @@ public class DialogDownloadCardImages {
         mainPanel.add(lblTotal, "w 480!, gaptop 15, center");
         mainPanel.add(lblDownloaded, "w 480!, center");
         mainPanel.add(lblMissing, "w 480!, center, gapbottom 10");
+        mainPanel.add(cbIncludeTokens, "w 460!, center");
+        mainPanel.add(cbOverwrite, "w 460!, center");
         mainPanel.add(btnDownload, "w 460!, h 32!, center, gaptop 10");
         mainPanel.add(btnSyncBulkData, "w 460!, h 32!, center, gaptop 8");
         mainPanel.add(cbxIndexLang, "w 300!, h 32!, split 2, gaptop 8");
@@ -178,16 +191,30 @@ public class DialogDownloadCardImages {
         lblMissing.setText(localizer.getMessage("lblMissing") + ": ...");
 
         final Predicate<PaperCard> combined = buildCurrentFilter();
+        final Predicate<CardEdition> editionFilter = buildCurrentEditionFilter();
+        final boolean withTokens = cbIncludeTokens.isSelected();
 
         FThreads.invokeInBackgroundThread(() -> {
             int total = 0, downloaded = 0, missing = 0;
+            final Set<CardEdition> tokenEditions = new HashSet<>();
             for (PaperCard card : Iterables.concat(
                     FModel.getMagicDb().getCommonCards().getAllCards(),
                     FModel.getMagicDb().getVariantCards().getAllCards())) {
                 if (combined.test(card)) {
                     total++;
                     if (card.hasImage()) { downloaded++; } else { missing++; }
+                    if (withTokens) {
+                        final CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+                        if (GuiDownloadFilteredCardImages.hasTokenImages(edition)) { tokenEditions.add(edition); }
+                    }
                 }
+            }
+            if (withTokens) {
+                GuiDownloadFilteredCardImages.addTokenOnlyEditions(tokenEditions, editionFilter);
+                final int[] tokens = GuiDownloadFilteredCardImages.countTokenImages(tokenEditions);
+                total += tokens[0];
+                downloaded += tokens[1];
+                missing += tokens[2];
             }
 
             if (generation.get() != gen) { return; }
@@ -199,6 +226,16 @@ public class DialogDownloadCardImages {
                 lblMissing.setText(localizer.getMessage("lblMissing") + ": " + fMissing);
             });
         });
+    }
+
+    /**
+     * Whether an edition is selected, for the editions that have no cards of their own (Old Border Custom, Duelist
+     * Magazine): there is no search text and the edition is in the chosen format or sets.
+     */
+    private Predicate<CardEdition> buildCurrentEditionFilter() {
+        final boolean noSearch = txtSearch.getText().trim().isEmpty();
+        final GameFormat format = selectedFormat;
+        return edition -> noSearch && (format == null || format.isSetLegal(edition.getCode()));
     }
 
     /** Builds the combined card predicate from the current search field and format selection. */
@@ -216,7 +253,7 @@ public class DialogDownloadCardImages {
     // =========================================================================
 
     private void startDownload() {
-        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter())).show();
+        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter(), buildCurrentEditionFilter(), cbIncludeTokens.isSelected(), cbOverwrite.isSelected())).show();
     }
 
     private void clearCdnCache() {
