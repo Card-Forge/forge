@@ -74,6 +74,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
             }
+
+            for (final CostPart part : cost.getCostParts()) {
+                if (part instanceof CostRemoveAnyCounter remove && new AiCostDecision(payer, sa, false).visit(remove) == null) {
+                    return false;
+                }
+            }
             return true;
         }
 
