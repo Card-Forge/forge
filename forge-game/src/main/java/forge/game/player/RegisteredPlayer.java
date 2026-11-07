@@ -152,6 +152,9 @@ public class RegisteredPlayer {
     		start.setStartingLife(40);
     		start.schemes = schemes;
     	}
+        if (appliedVariants.contains(GameType.TwoHeadedGiant)) {
+            start.setStartingLife(30); // 810.4: each team has a shared life total, which starts at 30 life
+        }
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40

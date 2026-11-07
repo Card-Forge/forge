@@ -389,9 +389,6 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if (player.equals("OpponentGreatest")) {
                 life = hostController.getOpponentsGreatestLifeTotal();
             }
-            if (player.equals("ActivePlayer")) {
-                life = game.getPhaseHandler().getPlayerTurn().getLife();
-            }
 
             final String rightString = lifeCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);

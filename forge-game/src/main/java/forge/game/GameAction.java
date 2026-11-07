@@ -1950,7 +1950,8 @@ public class GameAction {
             // then the rest have lost!
             reason = GameEndReason.WinsGameSpellEffect;
             for (Player pl : allPlayers) {
-                if (pl.equals(p)) {
+                // CR 810.8a: the winner's teammates win with them
+                if (p.getSharedTeam().contains(pl)) {
                     continue;
                 }
 
@@ -1973,6 +1974,24 @@ public class GameAction {
                         losers = Lists.newArrayListWithCapacity(3);
                     }
                     losers.add(p);
+                }
+            }
+        }
+
+        // CR 810.8a: a player who loses takes their team out with them
+        if (losers != null) {
+            for (Player p : Lists.newArrayList(losers)) {
+                for (Player mate : p.getSharedTeam()) {
+                    if (losers.contains(mate) || mate.hasLost()) {
+                        continue;
+                    }
+                    // CR 810.8b: a concession takes the team out at once
+                    if (p.conceded()) {
+                        mate.concede();
+                        losers.add(mate);
+                    } else if (mate.loseConditionMet(p.getOutcome().lossState, null)) {
+                        losers.add(mate);
+                    }
                 }
             }
         }

@@ -265,7 +265,7 @@ public class AiController {
         for (final Card c : ccvGameBattlefield) {
             final String curse = c.getSVar("AICurseEffect");
             final Card host = sa.getHostCard();
-            if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+            if ("NonActive".equals(curse) && !game.getPhaseHandler().isPlayerTurn(player)) {
                 return true;
             } else if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                     && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
@@ -1528,7 +1528,9 @@ public class AiController {
         if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || simMode != null
                 || !getBoolProperty(AiProps.FLAT_MC_ENABLED)
                 || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax() || isFlatMonteCarloLite())
-                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                // the rollouts choose a whole attack, so they would withdraw a teammate's attackers (CR 805.10b)
+                || combat.getAttackers().anyMatch(c -> !attacker.equals(c.getController()))) {
             return;
         }
         final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
@@ -1586,15 +1588,20 @@ public class AiController {
         // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
         // is made at declaration time. Remove attackers the AI can't pay for.
         // Correctness-critical and cheap, so it also runs when the deadline fired (outside the armed region).
-        removeUnpayableAttackers(combat);
+        removeUnpayableAttackers(attacker, combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
-            combat.clearAttackers();
+            // only this player's attackers are replaced, so a teammate's part of a team attack stays (CR 805.10b)
+            for (final Card own : CardLists.filterControlledBy(combat.getAttackers(), attacker)) {
+                combat.removeFromCombat(own);
+            }
             final Map<Card, GameEntity> legal = combat.getAttackConstraints().getLegalAttackers().getLeft();
             System.err.println("AI Attack declaration invalid, defaulting to: " + legal);
             for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
-                combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+                if (mandatoryAttacker.getKey().getController().equals(attacker)) {
+                    combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+                }
             }
             if (!CombatUtil.validateAttackers(combat)) {
                 aiAtk.declareAttackers(combat);
@@ -1602,8 +1609,9 @@ public class AiController {
         }
     }
 
-    private void removeUnpayableAttackers(Combat combat) {
-        for (Card attacker : combat.getAttackers().threadSafeIterable()) {
+    private void removeUnpayableAttackers(final Player attackingPlayer, Combat combat) {
+        // a teammate's attackers are theirs to pay for
+        for (Card attacker : CardLists.filterControlledBy(combat.getAttackers(), attackingPlayer)) {
             Cost attackCost = CombatUtil.getAttackCost(game, attacker, combat.getDefenderByAttacker(attacker));
             if (attackCost == null) {
                 continue;
@@ -2630,6 +2638,9 @@ public class AiController {
             // a manland, crew, saddle or station is only worth its cost at one moment of the turn, and the heuristics
             // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
             return false;
+        }
+        if (ActivationGuard.problem(player, sa) != null) {
+            return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;

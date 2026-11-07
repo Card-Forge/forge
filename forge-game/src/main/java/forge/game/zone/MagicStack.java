@@ -966,7 +966,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator = sa.getHostCard().getController();
             }
 
-            if (activator.equals(activePlayer)) {
+            // CR 805.7: a team puts all its triggered abilities on the stack in one order, chosen by its first player
+            if (activePlayer.sharesTeamWith(activator)) {
                 adjustAuraHost(sa);
                 activePlayerSAs.add(sa);
             }
@@ -1032,11 +1033,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void onNextTurn() {
-        final Player active = game.getPhaseHandler().getPlayerTurn();
         game.getStackZone().resetCardsAddedThisTurn();
         this.thisTurnActivated.clear();
         illegalAdditions.clear();
-        active.resetSpellCastSinceBegOfYourLastTurn();
+        for (final Player active : game.getPhaseHandler().getActivePlayers()) {
+            active.resetSpellCastSinceBegOfYourLastTurn();
+        }
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
             return;

@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import com.google.common.collect.Maps;
 
@@ -30,7 +31,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -70,12 +70,16 @@ public class Untap extends Phase {
     public void executeAt() {
         super.executeAt();
 
-        doPhasing(game.getPhaseHandler().getPlayerTurn());
+        for (final Player active : game.getPhaseHandler().getActivePlayers()) {
+            doPhasing(active);
+        }
         doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
 
         game.getAction().checkStaticAbilities();
 
-        doUntap();
+        for (final Player active : game.getPhaseHandler().getActivePlayers()) {
+            doUntap(active);
+        }
     }
 
     /**
@@ -83,8 +87,7 @@ public class Untap extends Phase {
      * doUntap.
      * </p>
      */
-    private void doUntap() {
-        final Player active = game.getPhaseHandler().getPlayerTurn();
+    private void doUntap(final Player active) {
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection untapList = new CardCollection(active.getCardsIn(ZoneType.Battlefield));
@@ -254,10 +257,12 @@ public class Untap extends Phase {
         }
         final Game game = previous.getGame();
         List<Card> casted = game.getStack().getSpellsCastLastTurn();
+        // under shared team turns the previous active player is the whole team
+        final Predicate<Card> castByPrevious = c -> previous.sharesTeamWith(c.getController());
 
-        if (game.isDay() && casted.stream().noneMatch(CardPredicates.isController(previous))) {
+        if (game.isDay() && casted.stream().noneMatch(castByPrevious)) {
             game.setDayTime(true);
-        } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
+        } else if (game.isNight() && CardLists.count(casted, castByPrevious) > 1) {
             game.setDayTime(false);
         }
     }
