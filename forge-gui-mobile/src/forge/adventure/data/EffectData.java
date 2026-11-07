@@ -14,6 +14,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class EffectData implements Serializable {
+    //Saves store items with their EffectData. Keep this value so saves made before a field was added still load.
+    private static final long serialVersionUID = -1350202758899129612L;
     public String name = null;           //Effect name. Can be checked for.
 
     //Duel effects.
