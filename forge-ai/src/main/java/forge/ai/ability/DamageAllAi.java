@@ -44,6 +44,9 @@ public class  DamageAllAi extends SpellAbilityAi {
              if (evaluateDamageAll(ai, sa, source, dmg) > 0) {
                  return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
              }
+             if (stopsLethalAttack(ai, sa, source, dmg)) {
+                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+             }
              return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             int best = -1, best_x = -1;
@@ -74,6 +77,23 @@ public class  DamageAllAi extends SpellAbilityAi {
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+    }
+
+    // a trade the AI would otherwise decline is still right if the creatures it kills are about to kill the AI
+    private boolean stopsLethalAttack(Player ai, SpellAbility sa, Card source, int dmg) {
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+            return false;
+        }
+        final String validP = sa.getParamOrDefault("ValidPlayers", "");
+        if (validP.equals("Player") && ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)) {
+            return false;
+        }
+        for (Player opp : ai.getOpponents()) {
+            if (ComputerUtil.stopsLethalAttack(ai, opp, getKillableCreatures(sa, opp, dmg))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Player determineOppToKill(Player ai, SpellAbility sa, Card source, int x) {
