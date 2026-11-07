@@ -189,7 +189,7 @@ public class SealedCardPoolGenerator {
                 // More recent sets are like 6 boosters of this edition + 1 Promo RareMythic from this edition
 
                 // Expecting to see things like
-                // # <Edition> Boosters, # Rarity+
+                // # <Edition> Boosters, # SpecialBooster, # Rarity+
 
                 String[] parts = bundle.split(", ");
                 for(String part : parts) {
@@ -202,7 +202,7 @@ public class SealedCardPoolGenerator {
                     int num = Integer.parseInt(pieces[0]);
                     String thing = pieces[pieces.length - 1];
 
-                    // Booster, Rarity, Named, SpecialBooster?
+                    // Booster, SpecialBooster, Rarity, Named?
 
                     if (thing.equalsIgnoreCase("Booster") || thing.equalsIgnoreCase("Boosters")) {
                         // Normal Boosters of this or block editions
@@ -216,6 +216,23 @@ public class SealedCardPoolGenerator {
                         for(int i = 0; i < num; i++) {
                             this.product.add(new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)));
                         }
+                    } else if (thing.equalsIgnoreCase("SpecialBooster") || thing.equalsIgnoreCase("SpecialBoosters")) {
+                        // Seeded boosters named "<edition code> Prerelease <name>" in boosters-special.txt, the player picks one
+                        String prefix = chosenEdition.getCode() + " Prerelease ";
+                        List<String> choices = new ArrayList<>();
+                        for (SealedTemplate special : FModel.getMagicDb().getSpecialBoosters()) {
+                            String specialName = special.getName();
+                            if (specialName.startsWith(prefix)) {
+                                choices.add("S(" + specialName + ")" + specialName.substring(prefix.length()));
+                            }
+                        }
+                        if (choices.isEmpty()) {
+                            throw new RuntimeException("No special boosters named '" + prefix + "...' found for the prerelease of " + chosenEdition.getName());
+                        }
+
+                        for (int i = 0; i < num; i++) {
+                            this.product.add(UnOpenedMeta.choose(StringUtils.join(choices, ";")));
+                        }
                     } else {
                         // Rarity
                         List<Pair<String, Integer>> promoSlot = new ArrayList<>();
@@ -227,7 +244,6 @@ public class SealedCardPoolGenerator {
                         this.product.add(new UnOpenedProduct(promoProduct, FModel.getMagicDb().getCommonCards().getAllCards(chosenEdition)));
                         // TODO This product should be Foiled only. How do I do that?
                     }
-                    // TODO Add support for special boosters like GuildPacks
                 }
 
                 //chosenEdition but really it should be defined by something in the edition file?
