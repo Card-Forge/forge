@@ -4,6 +4,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.simulation.AntiCombo;
+import forge.ai.simulation.ComboCatalog;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -82,5 +83,31 @@ public class FlatMonteCarloAntiComboTest extends AITest {
         addCard("Dark Ritual", opp);
         final Card oath = addCard("Oath of Druids", opp);
         AssertJUnit.assertEquals("the key before the piece: " + AntiCombo.describe(ai), oath, AntiCombo.threats(ai).get(0));
+    }
+
+    @Test
+    public void anAiOwnedDonateMePermanentGivenToAnOpponentIsNotAnOpponentThreat() {
+        setUp();
+        final Card gifted = createCard("Illusions of Grandeur", ai);
+        gifted.setGameTimestamp(game.getNextTimestamp());
+        gifted.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(gifted);
+
+        AssertJUnit.assertEquals("the battlefield zone records the new controller", opp,
+                gifted.getController());
+        AssertJUnit.assertEquals("the card is still owned by the AI", ai, gifted.getOwner());
+        AssertJUnit.assertTrue("the gifted card is on the opponent's battlefield",
+                opp.getCardsIn(ZoneType.Battlefield).contains(gifted));
+        AssertJUnit.assertEquals("a harmful gift is not a 60-point opponent threat", 0, AntiCombo.threat(ai));
+        AssertJUnit.assertEquals("do not aim removal at our own donated permanent", 0, AntiCombo.rank(ai, gifted));
+        AssertJUnit.assertEquals("the opponent must not get combo credit for an AI-owned gift", 0,
+                ComboCatalog.visibleThreat(ai));
+    }
+
+    @Test
+    public void anOpponentOwnedIllusionsIsStillAThreat() {
+        setUp();
+        addCard("Illusions of Grandeur", opp);
+        AssertJUnit.assertEquals("an opponent's own Illusions remains a key card", 60, AntiCombo.threat(ai));
     }
 }

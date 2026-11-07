@@ -74,6 +74,55 @@ public class FlatMonteCarloDonateComboTest extends AITest {
     }
 
     @Test
+    public void illusionsWaitsForCostReducersInHandToBeDeployed() {
+        setUp();
+        islands(7);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        addCardToZone("Sapphire Medallion", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("the Medallion is a setup card and should be deployed first", "donate-setup-first",
+                verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void illusionsCanUseAnAlreadyDeployedMedallionForNextTurnDonate() {
+        setUp();
+        islands(4);
+        addCardToZone("Sapphire Medallion", ai, ZoneType.Battlefield);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        AssertJUnit.assertNull("four lands plus one reduction covers the {2} upkeep and reduced Donate", verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void channelDoesNotCountAsNextTurnManaForIllusions() {
+        setUp();
+        islands(4);
+        final Card channel = addCardToZone("Channel", ai, ZoneType.Command);
+        final SpellAbility channelMana = forge.game.ability.AbilityFactory.getAbility(channel, "ABMana");
+        channel.addSpellAbility(channelMana);
+        channelMana.setActivatingPlayer(ai);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        AssertJUnit.assertFalse("a Command-zone Channel effect must not count as a renewable next-turn source",
+                forge.ai.ComputerUtilMana.getManaSourcesForNextTurn(ai).contains(channel));
+        AssertJUnit.assertEquals("four lands and temporary Channel mana are not a safe next-turn setup",
+                "donate-combo-incomplete", verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void flatMcCanDiscoverARemovedBlueCostReducer() {
+        setUp();
+        final Card medallion = addCardToZone("Sapphire Medallion", ai, ZoneType.Hand);
+        final SpellAbility cast = medallion.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Sapphire Medallion is marked AI:RemoveDeck:Random",
+                ComputerUtilCard.isCardRemRandomDeck(medallion));
+        AssertJUnit.assertTrue("AI:RemoveDeck medallions with ReduceCost statics must be candidates for FlatMC",
+                ((PlayerControllerAi) ai.getController()).getAi().isRemoveDeckCostReductionPermanent(cast));
+    }
+
+    @Test
     public void illusionsWaitsForTheManaToPayTheUpkeepAndDonate() {
         setUp();
         islands(3);
@@ -153,6 +202,25 @@ public class FlatMonteCarloDonateComboTest extends AITest {
         addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
         AssertJUnit.assertNull("an instant", verdict("Lightning Bolt"));
         AssertJUnit.assertNull("a creature without a cast preference", verdict("Grizzly Bears"));
+    }
+
+    @Test(timeOut = 240_000)
+    public void flatMcCastsDonateForIllusionsAlreadyOnTheBattlefield() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(3); // Donate costs {2}{U}
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Battlefield);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        addCard("Hill Giant", opp);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("with Illusions in play and three blue mana, FlatMC should complete the Donate combo",
+                "Donate", play);
     }
 
     // ------------------------------------------------------------------------------------------ the AI's next play

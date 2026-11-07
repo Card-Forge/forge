@@ -79,7 +79,27 @@ public class FlatMonteCarloXChoiceTest extends AITest {
         setUp();
         opp.setLife(5, null);
         addCard("Runeclaw Bear", opp); // toughness 2: the damage may be divided between the player and the creature
-        check("Fireball", 7, XChoice.adjust(ai, spell("Fireball"), 12), "life 5 and a 2 toughness creature: 7 clears both");
+        check("Fireball", 5, XChoice.adjust(ai, spell("Fireball"), 12), "do not add unrelated targets; 5 is lethal to the player");
+    }
+
+    @Test
+    public void xDamageChoosesOneRelevantTargetInsteadOfAddingTheWholeBoard() {
+        setUp();
+        opp.setLife(5, null);
+        addCard("Runeclaw Bear", opp); // 2 toughness
+        final Card largeCreature = addCard("Hill Giant", opp); // 3 toughness
+        largeCreature.setDamage(1);
+        check("Banefire", 5, XChoice.adjust(ai, spell("Banefire"), 12), "the player is a cheaper lethal target than either creature");
+        check("Fireball", 5, XChoice.adjust(ai, spell("Fireball"), 12), "do not pay 5 + 2 + 2 for separate targets");
+    }
+
+    @Test
+    public void xDamageCanStillChooseTheLargestSingleCreatureTarget() {
+        setUp();
+        opp.setLife(3, null);
+        final Card largeCreature = addCard("Hill Giant", opp);
+        largeCreature.setBaseToughness(8);
+        check("Banefire", 8, XChoice.adjust(ai, spell("Banefire"), 12), "the largest single target needs 8 damage");
     }
 
     @Test

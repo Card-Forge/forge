@@ -2496,6 +2496,29 @@ public class AiController {
                 && !h.getManaAbilities().isEmpty();
     }
 
+    /**
+     * A cost-reduction permanent marked AI:RemoveDeck:All or :Random (Sapphire Medallion, for example): the heuristic may omit it,
+     * but FlatMC should still compare deploying it when it can make a catalogued setup safer or cheaper.
+     */
+    boolean isRemoveDeckCostReductionPermanent(final SpellAbility sa) {
+        final Card h = sa == null ? null : sa.getHostCard();
+        // CardAiHints keeps the All and Random deck-removal flags separately; include both for this narrow exception.
+        if (h == null || !sa.isSpell() || !h.isPermanent() || h.isLand()
+                || !(ComputerUtilCard.isCardRemAIDeck(h) || ComputerUtilCard.isCardRemRandomDeck(h))) {
+            return false;
+        }
+        for (final StaticAbility ability : h.getStaticAbilities()) {
+            final String activator = ability.getParam("Activator");
+            final String valid = ability.getParam("ValidCard");
+            if (ability.getMode().contains(StaticAbilityMode.ReduceCost)
+                    && (activator == null || "You".equals(activator) || "Any".equals(activator))
+                    && (valid == null || !valid.contains("OppCtrl"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (sa == null) {
             return false;
@@ -2525,6 +2548,7 @@ public class AiController {
         final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !isRemoveDeckManaPermanent(sa)
+                && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
                 && !TutorPlan.hasUse(player, sa)) {
