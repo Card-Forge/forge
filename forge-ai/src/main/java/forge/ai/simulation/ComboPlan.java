@@ -2893,10 +2893,10 @@ public final class ComboPlan {
      * The mulligan rule of a tutor storm deck: keep a hand that can act, not a slow one. It needs a land (checked by the
      * caller) and either two tutors, or a tutor with mana to cast it (fast mana, or the engine), or plenty of fast mana
      * for the tutors it will draw. Disruption alone (Thoughtseize, Duress, Veil of Summer) is not a hand unless it is so
-     * small that going lower is worse.
+     * small that going lower is worse: a hand of six or fewer is always kept, and only a bigger one is judged.
      */
     public boolean keepsTutorStormHand(final CardCollectionView kept, final int size) {
-        if (size <= 5) {
+        if (size <= 6) {
             return true;
         }
         int tutors = 0;
