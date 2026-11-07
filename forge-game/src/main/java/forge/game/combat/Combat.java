@@ -709,16 +709,14 @@ public class Combat {
 
     // Call this method right after turn-based action of declare blockers has been performed
     public final void fireTriggersForUnblockedAttackers(final Game game) {
-        boolean bFlag = false;
-        List<GameEntity> defenders = Lists.newArrayList();
+        Multimap<Player, GameEntity> defendersByAttackingPlayer = ArrayListMultimap.create();
         for (AttackingBand ab : attackedByBands.get().values()) {
             Collection<Card> blockers = blockedBands.get().get(ab);
             boolean isBlocked = blockers != null && !blockers.isEmpty();
             ab.setBlocked(isBlocked);
 
-            if (!isBlocked) {
-                bFlag = true;
-                defenders.add(getDefenderByAttacker(ab));
+            if (!isBlocked && !ab.isEmpty()) {
+                defendersByAttackingPlayer.put(ab.getAttackers().getFirst().getController(), getDefenderByAttacker(ab));
                 for (Card attacker : ab.getAttackers()) {
                     // Run Unblocked Trigger
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -729,13 +727,11 @@ public class Combat {
                 }
             }
         }
-        if (bFlag) {
-            // triggers for Coveted Jewel
-            // currently there is only one attacking player
-            // should be updated when two-headed-giant is done
+        // triggers for Coveted Jewel, once per attacking player since a team can attack together (CR 805.10a)
+        for (Player attackingPlayer : defendersByAttackingPlayer.keySet()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.AttackingPlayer, getAttackingPlayer());
-            runParams.put(AbilityKey.Defenders, defenders);
+            runParams.put(AbilityKey.AttackingPlayer, attackingPlayer);
+            runParams.put(AbilityKey.Defenders, Lists.newArrayList(defendersByAttackingPlayer.get(attackingPlayer)));
             game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblockedOnce, runParams, false);
         }
     }
@@ -829,7 +825,7 @@ public class Combat {
             }
 
             GameEntity defender = getDefenderByAttacker(band);
-            Player assigningPlayer = getAttackingPlayer();
+            Player assigningPlayer = attacker.getController();
             orderedBlockers = blockersOrderedForDamageAssignment.get().get(attacker);
             // Defensive Formation is very similar to Banding with Blockers
             // It allows the defending player to assign damage instead of the attacking player
@@ -913,7 +909,7 @@ public class Combat {
                 } // No damage happens if blocked but no blockers left
             } else {
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, attackers,
-                        damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer || !this.legacyOrderCombatants);
+                        damageDealt, defender, divideCombatDamageAsChoose || attacker.getController() != assigningPlayer || !this.legacyOrderCombatants);
 
                 attackers.remove(attacker);
                 // player wants to assign another first
@@ -992,10 +988,11 @@ public class Combat {
     }
 
     public boolean isPlayerAttacked(Player who) {
+        // CR 805.10d: under shared team turns a player can block creatures attacking any player of their team
         for (GameEntity defender : attackedByBands.get().keySet()) {
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
-            if ((null != defenderAsCard && (defenderAsCard.getController() != who && defenderAsCard.getProtectingPlayer() != who)) ||
-                    (null == defenderAsCard && defender != who)) {
+            if ((null != defenderAsCard && (!who.sharesTeamWith(defenderAsCard.getController()) && !who.sharesTeamWith(defenderAsCard.getProtectingPlayer()))) ||
+                    (null == defenderAsCard && !who.sharesTeamWith((Player) defender))) {
                 continue; // defender is not related to player 'who'
             }
             for (AttackingBand ab : attackedByBands.get().get(defender)) {
