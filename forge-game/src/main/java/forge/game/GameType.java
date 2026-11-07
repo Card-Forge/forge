@@ -163,6 +163,9 @@ public enum GameType {
         if(this == Constructed || this == Commander)
             return EnumSet.of(DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
                     DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
+        if(this == Quest || this == QuestCommander)
+            return EnumSet.of(DeckSection.Schemes, DeckSection.Planes,
+                    DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
         return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
     }
 

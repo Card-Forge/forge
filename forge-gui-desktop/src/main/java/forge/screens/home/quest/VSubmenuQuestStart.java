@@ -60,6 +60,9 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
     private final FRadioButton radExpert = new FRadioButton(localizer.getMessage("questDifficultyExpert"));
     private final FCheckBox boxFantasy = new FCheckBox(localizer.getMessage("rbFantasyMode"));
     private final FCheckBox boxCommander = new FCheckBox(localizer.getMessage("rbCommanderSubformat"));
+    private final FCheckBox boxPlanechase = new FCheckBox(localizer.getMessage("lblPlanechase"));
+    private final FCheckBox boxArchenemyRumble  = new FCheckBox(localizer.getMessage("lblArchenemyRumble"));
+
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text(localizer.getMessage("lblStartingWorld") + ":").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
@@ -269,6 +272,12 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
 
         );
 
+        boxPlanechase.setSelected(false);
+        boxPlanechase.setEnabled(true);
+
+        boxArchenemyRumble.setSelected(false);
+        boxArchenemyRumble.setEnabled(true);
+
         boxCompleteSet.setEnabled(true);
         boxAllowDuplicates.setEnabled(true);
 
@@ -279,6 +288,8 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
         pnlDifficultyMode.add(boxFantasy, "h 25px!, gapbottom 15, gapright 4%");
         pnlDifficultyMode.add(boxCommander, "h 25px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(boxPlanechase, "h 25px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(boxArchenemyRumble, "h 25px!, gapbottom 15, gapright 4%");
         pnlDifficultyMode.add(lblStartingWorld, "h 25px!, hidemode 3");
         cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, gapbottom 7");
         pnlDifficultyMode.setOpaque(false);
@@ -476,6 +487,14 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
      */
     public boolean isCommander() {
         return boxCommander.isSelected();
+    }
+
+    public boolean isPlanechase() {
+        return boxPlanechase.isSelected();
+    }
+
+    public boolean isArchenemyRumble() {
+        return boxArchenemyRumble.isSelected();
     }
 
     public boolean startWithCompleteSet() {

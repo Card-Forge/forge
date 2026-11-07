@@ -11,6 +11,7 @@ import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.QuestUtil;
@@ -177,6 +178,8 @@ public class NewQuestScreen extends FScreen {
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblAllowUnlockAdEd")));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("rbFantasyMode")));
     private final FCheckBox cbCommander = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("rbCommanderSubformat")));
+    private final FCheckBox cbPlanechase= scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblPlanechase")));
+    private final FCheckBox cbArchenemyRumble = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblArchenemyRumble")));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
             .font(FSkinFont.get(22)).text(Forge.getLocalizer().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(event -> {
@@ -309,6 +312,8 @@ public class NewQuestScreen extends FScreen {
                 return;
             cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
         });
+        cbPlanechase.setSelected(false);
+        cbArchenemyRumble.setSelected(false);
 
     }
 
@@ -430,6 +435,8 @@ public class NewQuestScreen extends FScreen {
         return cbFantasy.isSelected();
     }
     public boolean isCommander() { return cbCommander.isSelected(); }
+    public boolean isPlanechase() { return cbPlanechase.isSelected(); }
+    public boolean isArchenemyRumble() {return cbArchenemyRumble.isSelected(); }
 
     public PoolType getPoolType() {
         if (radSurpriseMe.isSelected()) {
@@ -604,7 +611,15 @@ public class NewQuestScreen extends FScreen {
 
             DeckConstructionRules dcr = isCommander() ?  DeckConstructionRules.Commander: DeckConstructionRules.Default;
 
-            qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
+            Set<GameType> subTypes = new HashSet<GameType>();
+            if (isPlanechase()) {
+                subTypes.add(GameType.Planechase);
+            }
+            if (isArchenemyRumble()) {
+                subTypes.add(GameType.ArchenemyRumble);
+            }
+
+            qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr, subTypes);
             qc.save();
 
             // Save in preferences.

@@ -31,6 +31,7 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.Game;
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
 import forge.game.player.Player;
@@ -210,6 +211,26 @@ public class QuestController {
         return this.questFormat;
     }
 
+    public boolean isVariantFormat() {
+        return this.model.appliedVariants != null && !this.model.appliedVariants.isEmpty();
+    }
+
+    public boolean isPlanechase() {
+        Set<GameType> av = this.model.appliedVariants;
+        if (av != null) {
+            return av.contains(GameType.Planechase);
+        }
+        return false;
+    }
+
+    public boolean isArchenemyRumble() {
+        Set<GameType> av = this.model.appliedVariants;
+        if (av != null) {
+            return av.contains(GameType.ArchenemyRumble);
+        }
+        return false;
+    }
+
     /**
      * Gets the current event.
      *
@@ -300,9 +321,9 @@ public class QuestController {
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool,
             final String startingWorld, final StartingPoolPreferences userPrefs,
-            DeckConstructionRules dcr) {
+            DeckConstructionRules dcr, Set<GameType> appliedVariants) {
 
-        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld, dcr)); // pass awards and unlocks here
+        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld, dcr, appliedVariants)); // pass awards and unlocks here
 
         if (startingCards != null) {
             this.myCards.addDeck(startingCards);
