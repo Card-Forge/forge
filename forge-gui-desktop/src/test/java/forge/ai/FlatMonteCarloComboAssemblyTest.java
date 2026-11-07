@@ -41,7 +41,8 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
      * moment).
      */
     private static final Set<String> FINISHERS = new HashSet<>(Arrays.asList(
-            "Stroke of Genius", "Brain Freeze", "Retraction Helix", "Chain of Smog", "Peer into the Abyss", "Unburial Rites"));
+            "Stroke of Genius", "Brain Freeze", "Retraction Helix", "Chain of Smog", "Peer into the Abyss", "Unburial Rites",
+            "Scapeshift"));
 
     /** Combos that are put together only with a mana outlet: alone the loop exiles the AI's own board. */
     private static final Set<String> NEEDS_AN_OUTLET = new HashSet<>(Arrays.asList("Worldgorger Dragon + Animate Dead"));
@@ -285,5 +286,39 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         setUp();
         mana(2); // X of 7 at most
         AssertJUnit.assertNull("the opponent has 30 cards, 7 are not enough", ComboAssembly.finish(ai, strokeInHand(30), s -> true));
+    }
+
+    @Test(timeOut = 120000)
+    public void walkingBallistaIsNotCastForNothing() {
+        setUp();
+        mana(5);
+        addCardToZone("Heliod, Sun-Crowned", ai, ZoneType.Battlefield);
+        final Card ballista = addCardToZone("Walking Ballista", ai, ZoneType.Hand);
+        final SpellAbility cast = ballista.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility next = ComboAssembly.next(ai, java.util.Collections.singletonList(cast), s -> true);
+        AssertJUnit.assertNotNull("Heliod in play and a Ballista in hand with the mana: cast it", next);
+        AssertJUnit.assertTrue("for an X of more than nothing: " + next.getXManaCostPaid(),
+                next.getXManaCostPaid() != null && next.getXManaCostPaid() > 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftIsHeldUntilItKills() {
+        setUp();
+        mana(5);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        final Card scapeshift = addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        final SpellAbility cast = scapeshift.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        // a library of Plains: no Mountain to fetch
+        AssertJUnit.assertNull("Scapeshift with no Mountains in the library kills nobody",
+                ComboAssembly.next(ai, java.util.Collections.singletonList(cast), s -> true));
+        for (int i = 0; i < 10; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertNotNull("ten lands and ten Mountains: 30 damage, cast it",
+                ComboAssembly.next(ai, java.util.Collections.singletonList(cast), s -> true));
     }
 }

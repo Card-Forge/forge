@@ -18,6 +18,9 @@ public final class RunawayLoop {
     /** Enough hasty copies to win with: a loop that has not won after this many is not going to. */
     public static final int LIMIT = 40;
 
+    /** The limit in the copy of the game a rollout plays in. */
+    static final int SIMULATION_LIMIT = 5;
+
     private static final Map<Game, Map<String, Integer>> COUNTS = new WeakHashMap<>();
 
     private RunawayLoop() {
@@ -46,12 +49,19 @@ public final class RunawayLoop {
     /** Whether the AI has activated the ability this turn as often as it is going to. */
     public static boolean exceeded(final SpellAbility sa) {
         final Player ai = sa == null ? null : sa.getActivatingPlayer();
+        // a rollout goes round a loop in a copy of the game, for every play it tries: a few rounds are enough to see it
+        return exceeded(sa, ai != null && ai.getGame().isSimulationCopy() ? SIMULATION_LIMIT : LIMIT);
+    }
+
+    /** The same with a limit of the caller's own (a loop that is meant to go round many times). */
+    public static boolean exceeded(final SpellAbility sa, final int limit) {
+        final Player ai = sa == null ? null : sa.getActivatingPlayer();
         if (ai == null || sa.getHostCard() == null || !sa.isActivatedAbility()) {
             return false;
         }
         synchronized (COUNTS) {
             final Map<String, Integer> turn = COUNTS.get(ai.getGame());
-            return turn != null && turn.getOrDefault(key(ai, sa), 0) >= LIMIT;
+            return turn != null && turn.getOrDefault(key(ai, sa), 0) >= limit;
         }
     }
 }

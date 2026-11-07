@@ -56,6 +56,57 @@ public final class ComboAssembly {
         return false;
     }
 
+    /**
+     * A payoff that is worth casting only when it kills. Scapeshift sacrifices lands for Mountains from the library: with
+     * Valakut, the Molten Pinnacle in play, six or more Mountains entering together are three damage each, and anything
+     * less thins the library and wins nothing (the AI went on to draw from an empty library).
+     */
+    static boolean heldUntilLethal(final Player ai, final Card piece) {
+        if (!piece.getName().equals("Scapeshift")) {
+            return false;
+        }
+        boolean valakut = false;
+        int lands = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().startsWith("Valakut")) {
+                valakut = true;
+            } else if (c.isLand()) {
+                lands++;
+            }
+        }
+        int mountains = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (c.getType().hasSubtype("Mountain")) {
+                mountains++;
+            }
+        }
+        int life = Integer.MAX_VALUE;
+        for (final Player opp : ai.getOpponents()) {
+            life = Math.min(life, opp.getLife());
+        }
+        final int entering = Math.min(lands, mountains);
+        return !(valakut && entering >= 6 && 3 * entering >= life);
+    }
+
+    /**
+     * A creature spell with X in its cost and no toughness of its own (Walking Ballista, Hangarback Walker, Endless One,
+     * Stonecoil Serpent) that the mana cannot pay for an X of one: it would enter as a 0/0 and die. It costs nothing,
+     * so the rollouts liked it, and the AI cast its Ballistas one after the other for nothing.
+     */
+    public static boolean deadOnArrival(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null || !sa.isSpell() || !host.isCreature() || !hasX(host) || host.getBaseToughness() > 0
+                || !host.isInZone(ZoneType.Hand)) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        return ComputerUtilCost.setMaxXValue(sa, ai, false) < 1;
+    }
+
+    private static boolean hasX(final Card c) {
+        return c.getManaCost() != null && c.getManaCost().countX() > 0;
+    }
+
     /** The first card of the player's that fills the slot, in the zones asked for, or null. */
     private static Card filler(final Iterable<Card> cards, final java.util.Set<String> slot) {
         for (final Card c : cards) {
@@ -108,7 +159,9 @@ public final class ComboAssembly {
             final List<Card> spells = new ArrayList<>();
             for (final Card c : inHand) {
                 if (!c.isLand()) {
-                    cost += c.getCMC();
+                    // an X spell (Walking Ballista) counts for an X of one at least, and is cast after the others: it
+                    // takes what is left, and cast first for an X of nothing it is a card thrown away
+                    cost += c.getCMC() + (hasX(c) ? 2 : 0);
                     spells.add(c);
                 }
             }
@@ -124,15 +177,25 @@ public final class ComboAssembly {
                     continue;
                 }
             }
+            boolean held = false;
+            for (final Card c : spells) {
+                held |= heldUntilLethal(ai, c);
+            }
+            if (held) {
+                continue;
+            }
             if (spells.isEmpty() || ComputerUtilMana.getAvailableManaEstimate(ai) < cost) {
                 continue; // not the turn for it: the pieces are held
             }
-            spells.sort((a, b) -> Integer.compare(a.getCMC(), b.getCMC()));
+            spells.sort((a, b) -> hasX(a) != hasX(b) ? (hasX(a) ? 1 : -1) : Integer.compare(a.getCMC(), b.getCMC()));
             for (final Card piece : spells) {
                 for (final SpellAbility sa : candidates) {
                     if (sa != null && sa.getHostCard() == piece && sa.isSpell() && !sa.isLandAbility()) {
                         sa.setActivatingPlayer(ai);
                         if (approve.test(sa)) {
+                            if (hasX(piece) && ComputerUtilCost.setMaxXValue(sa, ai, false) < 1) {
+                                continue; // the AI's own logic refused an X of nothing and the fallback of the approval did not
+                            }
                             return sa;
                         }
                     }
