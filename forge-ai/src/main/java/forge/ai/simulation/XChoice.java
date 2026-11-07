@@ -13,8 +13,8 @@ import forge.game.zone.ZoneType;
  *   <li><b>Chalice of the Void</b> (X X): the number of charge counters counters every spell of that mana value, the AI's
  *       own too. X is the value of 0, 1 or 2 that hits the fewest of the AI's own spells in hand and library (ties: 1,
  *       then 2, then 0), never the most mana it could pay.</li>
- *   <li><b>X damage</b> (Fireball, Blaze, Banefire): never more than the life of the opponent with the most life, plus the
- *       toughness of its creatures (the damage may be divided), so the mana left over is kept (Channel and Fireball: X is 20, not more).</li>
+ *   <li><b>X damage</b> (Fireball, Blaze, Banefire): use a useful single lethal target; do not add unrelated creatures and
+ *       player life totals together, so Channel does not spend life to pay for damage that cannot all hit one target.</li>
  *   <li><b>X damage to each player</b> (Earthquake, Hurricane, Crypt Rats): never so much that it kills the AI.</li>
  *   <li><b>Discard X</b> (Mind Twist): never more than the cards in the biggest opposing hand.</li>
  * </ul>
@@ -113,17 +113,17 @@ public final class XChoice {
     }
 
     /**
-     * The damage that kills everything the spell could be aimed at (it may be divided among targets): the life of an
-     * opponent and the toughness of its creatures, for the opponent with the most.
+     * A useful single lethal damage amount. A single-target spell cannot deal its X to a player's life and every
+     * creature at once, so do not add unrelated targets together. For divided damage, target selection may use the
+     * amount to distribute damage, but the AI should not automatically pay the sum of the whole opposing board.
      */
     static int damageNeeded(final Player ai) {
         int need = 0;
         for (final Player opp : ai.getOpponents()) {
-            int total = Math.max(0, opp.getLife());
+            need = Math.max(need, Math.max(0, opp.getLife()));
             for (final Card c : opp.getCreaturesInPlay()) {
-                total += Math.max(0, c.getNetToughness() - c.getDamage());
+                need = Math.max(need, Math.max(0, c.getNetToughness() - c.getDamage()));
             }
-            need = Math.max(need, total);
         }
         return need;
     }

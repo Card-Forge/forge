@@ -57,6 +57,9 @@ public final class AntiCombo {
         if (ai == null || c == null || c.getController() == null || !c.getController().isOpponentOf(ai)) {
             return 0;
         }
+        if (DonateCombo.isGiftedTarget(ai, c)) {
+            return DonateCombo.targetRank(ai, c); // our donated Illusions is the preferred removal target
+        }
         // a card that fills a slot of a known combo (ComboCatalog) is aimed at as well, more so when it completes one
         return Math.max(weight(c) * RANK_BONUS / KEY_WEIGHT, ComboCatalog.rankPercent(ai, c) * RANK_BONUS / 100);
     }
@@ -70,6 +73,9 @@ public final class AntiCombo {
         int keys = 0;
         for (final Player opp : ai.getOpponents()) {
             for (final Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                if (DonateCombo.isGiftedTarget(ai, c)) {
+                    continue; // an AI-owned DonateMe permanent is the AI's payoff, not an opposing threat
+                }
                 total += weight(c);
                 keys += isKey(c) ? 1 : 0;
             }
@@ -102,6 +108,9 @@ public final class AntiCombo {
         for (final Player opp : ai.getOpponents()) {
             for (final ZoneType zone : new ZoneType[] { ZoneType.Battlefield, ZoneType.Graveyard }) {
                 for (final Card c : opp.getCardsIn(zone)) {
+                    if (DonateCombo.isGiftedTarget(ai, c)) {
+                        continue;
+                    }
                     if (weight(c) > 0) {
                         result.add(c);
                     }

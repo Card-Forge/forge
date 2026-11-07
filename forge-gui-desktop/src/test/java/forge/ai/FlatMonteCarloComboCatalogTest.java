@@ -204,19 +204,19 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
 
         AssertJUnit.assertTrue("the Command-zone effect must be found as a mana source",
                 forge.ai.ComputerUtilMana.getAvailableManaSources(ai, true).contains(channelEffect));
-        AssertJUnit.assertEquals("one Mountain plus 19 Channel activations, leaving one life", 20,
+        AssertJUnit.assertEquals("one Mountain plus 15 Channel activations, preserving five life", 16,
                 forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai, true));
 
         final Card banefire = addCardToZone("Banefire", ai, ZoneType.Hand);
         final SpellAbility banefireSpell = banefire.getFirstSpellAbility();
         banefireSpell.setActivatingPlayer(ai);
-        banefireSpell.setXManaCostPaid(19);
-        AssertJUnit.assertTrue("Channel must pay the generic X repeatedly, with the Mountain paying R",
+        banefireSpell.setXManaCostPaid(15);
+        AssertJUnit.assertTrue("Channel may pay 15 generic mana while preserving five life, with the Mountain paying R",
                 forge.ai.ComputerUtilMana.canPayManaCost(banefireSpell, ai, 0, false));
         AssertJUnit.assertEquals("test payment must not change the real life total", 20, ai.getLife());
 
-        banefireSpell.setXManaCostPaid(20);
-        AssertJUnit.assertFalse("the AI must not spend its last life to generate one more mana",
+        banefireSpell.setXManaCostPaid(16);
+        AssertJUnit.assertFalse("Channel must not spend below its five-life safety threshold",
                 forge.ai.ComputerUtilMana.canPayManaCost(banefireSpell, ai, 0, false));
         AssertJUnit.assertEquals("failed test payment must not change the real life total", 20, ai.getLife());
     }
@@ -246,6 +246,27 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
         mapSpell.setActivatingPlayer(ai);
         AssertJUnit.assertFalse("Channel must not spend life to cast an unrelated card, even with a payoff in hand",
                 forge.ai.ComputerUtilMana.canPayManaCost(mapSpell, ai, 0, false));
+    }
+
+    @Test
+    public void channelDoesNotPayForADuplicateUlamog() {
+        setUp();
+        ai.setLife(20, null);
+        final Card channelEffect = addCardToZone("Channel", ai, ZoneType.Command);
+        final SpellAbility channelMana = AbilityFactory.getAbility(channelEffect, "ABMana");
+        channelEffect.addSpellAbility(channelMana);
+        channelMana.setActivatingPlayer(ai);
+        addCard("Ulamog, the Ceaseless Hunger", ai);
+        final Card duplicate = addCardToZone("Ulamog, the Ceaseless Hunger", ai, ZoneType.Hand);
+        final SpellAbility cast = duplicate.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+
+        AssertJUnit.assertEquals("a working Ulamog is already on the battlefield", "duplicate-legend",
+                ComboGuard.problem(ai, cast, null, null));
+        AssertJUnit.assertFalse("Channel's life-to-mana ability must not be used for a redundant legendary payoff",
+                ComboCatalog.canUseCommandManaSourceFor(ai, channelEffect, cast));
+        AssertJUnit.assertFalse("with no other sources the duplicate cannot be paid for with Channel",
+                forge.ai.ComputerUtilMana.canPayManaCost(cast, ai, 0, false));
     }
 
     /**

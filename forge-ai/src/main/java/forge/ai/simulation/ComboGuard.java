@@ -30,8 +30,8 @@ import forge.game.zone.ZoneType;
 /**
  * Plays that Flat Monte Carlo must not spend a card on, whatever the rollouts think of them. Three kinds:
  * <ul>
- *   <li><b>The legend rule</b>: reanimating (Reanimate, Animate Dead, Exhume, Goryo's Vengeance, ...) or cheating in
- *       a legendary creature the AI already has in play and that still does its job. One of the two copies would go
+ *   <li><b>The legend rule</b>: casting, reanimating (Reanimate, Animate Dead, Exhume, Goryo's Vengeance, ...) or cheating
+ *       in a legendary permanent the AI already has in play and that still does its job. One of the two copies would go
  *       straight back to the graveyard. A copy that is useless (it cannot attack, it is phased out, it has no power
  *       left, it leaves at end of turn) does not count: replacing it is fine.</li>
  *   <li><b>Duplicated win pieces</b>: a second Omniscience, Dream Halls, Sneak Attack, or a second copy of a win card
@@ -108,6 +108,12 @@ public final class ComboGuard {
         }
         if (host == null) {
             return null;
+        }
+        // A second working copy of a legendary permanent is wasted even when it is cast directly (not reanimated).
+        // Respect cards with an explicit AI legendary exception; Mirror Gallery is handled by duplicatesWorkingLegend.
+        if (sa.isSpell() && host.isPermanent() && !host.ignoreLegendRule() && !host.hasSVar("AILegendaryException")
+                && duplicatesWorkingLegend(ai, host)) {
+            return "duplicate-legend";
         }
         // Balustrade Spy and Undercity Informer milling their own controller without the Oracle to follow it
         if (plan != null && plan.has(ComboPlan.Kind.LIBRARY_OUT)
