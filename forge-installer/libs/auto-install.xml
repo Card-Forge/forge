@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+	IzPack automation script, shipped inside the installer as the "auto-install.xml" resource.
+
+	Forge's auto updater extracts it from the package it just downloaded, replaces
+	@INSTALL_PATH@ with the directory Forge is running from and installs the update with
+	`java -jar forge-installer.jar auto-install.xml`, so an update doesn't have to be clicked
+	through. Keeping it here means it always describes the panels of the install.xml next to
+	it: IzPack aborts the automated install if a panel is missing from this file.
+-->
+<AutomatedInstallation langpack="eng">
+	<com.izforge.izpack.panels.htmlinfo.HTMLInfoPanel id="welcome"/>
+	<com.izforge.izpack.panels.target.TargetPanel id="install_dir">
+		<installpath>@INSTALL_PATH@</installpath>
+	</com.izforge.izpack.panels.target.TargetPanel>
+	<com.izforge.izpack.panels.packs.PacksPanel id="sdk_pack_select">
+		<pack index="0" name="Forge pack" selected="true"/>
+		<pack index="1" name="Script pack" selected="true"/>
+	</com.izforge.izpack.panels.packs.PacksPanel>
+	<com.izforge.izpack.panels.install.InstallPanel id="install"/>
+	<com.izforge.izpack.panels.finish.FinishPanel id="finish"/>
+</AutomatedInstallation>
