@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaMotion;
 
 /**
@@ -102,6 +103,7 @@ public class ArenaRepaintManager extends RepaintManager {
     public void addDirtyRegion(final JComponent c, final int x, final int y, final int w, final int h) {
         if (w > 0 && h > 0) {
             noticed(c);
+            ArenaCurtain.noteRepaint(c, x, y, w, h);
         }
         super.addDirtyRegion(c, x, y, w, h);
     }
@@ -110,6 +112,7 @@ public class ArenaRepaintManager extends RepaintManager {
     public void addDirtyRegion(final Window window, final int x, final int y, final int w, final int h) {
         if (w > 0 && h > 0) {
             noticed(window);
+            ArenaCurtain.noteRepaint(window, x, y, w, h);
         }
         super.addDirtyRegion(window, x, y, w, h);
     }

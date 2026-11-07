@@ -137,6 +137,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         return null;
     }
 
+    /** Whether a layout with no room at all leaves the cards where they are, to lay them out once there is room. */
+    protected boolean waitsForRoom() {
+        return false;
+    }
+
     @Override
     public void doLayout() {
         if (this.getCardPanels().isEmpty()) {
@@ -158,6 +163,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
         final int cardAreaWidth = rect.width;
         final int cardAreaHeight = rect.height;
+        if (waitsForRoom() && !hasLayoutRoom(cardAreaWidth, cardAreaHeight)) {
+            return;
+        }
         noteLayoutRoom(cardAreaWidth, cardAreaHeight);
         if (this.fanLayout) {
             doFanLayout(cardAreaWidth, cardAreaHeight);

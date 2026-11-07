@@ -86,7 +86,35 @@ public enum FOverlay {
         return this.pnl;
     }
 
+    /**
+     * Put on a component (as a client property set to true) that covers the whole overlay and paints its own
+     * backdrop, so the overlay does not darken the window under it as well.
+     */
+    public static final String OWN_BACKDROP = "forge.overlay.ownBackdrop";
+
     private class OverlayPanel extends SkinnedPanel {
+        /** In the Arena look the window darkens rather than going dark at once. */
+        private final ArenaMotion.Fade dim = new ArenaMotion.Fade(this::repaint, 1f);
+
+        @Override
+        public void setVisible(final boolean visible) {
+            if (visible && !isVisible() && ArenaTheme.isEnabled()) {
+                dim.set(0f);
+                dim.to(1f, 300);
+            }
+            super.setVisible(visible);
+        }
+
+        private boolean paintsOwnBackdrop() {
+            for (final java.awt.Component c : getComponents()) {
+                if (c.isVisible() && c instanceof javax.swing.JComponent
+                        && Boolean.TRUE.equals(((javax.swing.JComponent) c).getClientProperty(OWN_BACKDROP))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /**
          * For some reason, the alpha channel background doesn't work properly on
          * Windows 7, so the paintComponent override is required for a
@@ -98,7 +126,15 @@ public enum FOverlay {
         @Override
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            g.setColor(this.getBackground());
+            if (paintsOwnBackdrop()) {
+                return;
+            }
+            Color c = this.getBackground();
+            final float shown = dim.get();
+            if (shown < 1f) {
+                c = new Color(c.getRed(), c.getGreen(), c.getBlue(), Math.round(c.getAlpha() * shown));
+            }
+            g.setColor(c);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
     }

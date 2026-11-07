@@ -75,6 +75,49 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.setOpaque(true);
         setupMouseListeners();
         ArenaRepaintManager.register(this);
+        if (scrollPane != null) {
+            // a layout put off for want of room is done as soon as there is some
+            scrollPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+                @Override
+                public void componentResized(final java.awt.event.ComponentEvent e) {
+                    layOutOwed();
+                }
+            });
+            scrollPane.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsAdapter() {
+                @Override
+                public void ancestorResized(final java.awt.event.HierarchyEvent e) {
+                    layOutOwed();
+                }
+            });
+        }
+    }
+
+    /** Whether a layout was put off because the area had no room at all. */
+    private boolean layoutOwed;
+
+    /**
+     * Whether there is any room to lay the cards out in. For a moment while the screen's layout is rebuilt there is
+     * none: the area has been moved into a new cell that has no size yet. Laid out then, every card would pile up in
+     * a corner, and since the cell comes back to the size it had, nothing would lay them out again. So they stay
+     * where they are until there is room.
+     */
+    protected final boolean hasLayoutRoom(final int width, final int height) {
+        if (width > 0 && height > 0) {
+            return true;
+        }
+        layoutOwed = true;
+        return false;
+    }
+
+    private void layOutOwed() {
+        if (layoutOwed) {
+            final java.awt.Rectangle room = scrollPane.getVisibleRect();
+            if (room.width > 0 && room.height > 0) {
+                layoutOwed = false;
+                invalidate();
+                validate();
+            }
+        }
     }
 
     protected final CMatchUI getMatchUI() {

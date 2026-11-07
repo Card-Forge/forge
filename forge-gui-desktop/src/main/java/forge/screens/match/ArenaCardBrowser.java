@@ -41,6 +41,7 @@ import forge.CachedCardImage;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.toolbox.MouseTriggerEvent;
@@ -432,6 +433,7 @@ public final class ArenaCardBrowser extends JPanel {
     private void close() {
         animation.stop();
         tabBarDim.detach();
+        ArenaCurtain.fadeOut(this, 200); // what it showed fades off the board rather than vanishing
         final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
         lpn.removeComponentListener(followWindow);
         lpn.remove(this);
@@ -469,6 +471,9 @@ public final class ArenaCardBrowser extends JPanel {
     }
 
     private void toggleBattlefield() {
+        if (!viewingBattlefield) {
+            ArenaCurtain.fadeOut(this, 240); // the dialog fades off the board it gives way to
+        }
         viewingBattlefield = !viewingBattlefield;
         setOpaque(!viewingBattlefield);
         if (viewingBattlefield) {
@@ -490,6 +495,9 @@ public final class ArenaCardBrowser extends JPanel {
         }
         updateButtons();
         fitToWindow();
+        if (!viewingBattlefield) {
+            entrance.begin(280); // and comes back over it the way it came in
+        }
     }
 
     private int chosenCount() {

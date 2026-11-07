@@ -32,6 +32,7 @@ import forge.menus.ForgeMenu;
 import forge.menus.LayoutMenu;
 import forge.toolbox.FButton;
 import forge.toolbox.FDigitalClock;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -321,6 +322,7 @@ public class FNavigationBar extends FTitleBarBase {
 
     @Override
     public void setVisible(final boolean visible) {
+        final boolean wasSliding = revealDir != 0;
         hidden = !visible;
         if (pnlReveal != null) { //check needed because FTitleBarBase constructor calls this
             revealDir = 0;
@@ -328,7 +330,17 @@ public class FNavigationBar extends FTitleBarBase {
             checkForRevealChangeTimer.stop();
             pnlReveal.setVisible(hidden);
         }
-        if (visible || this.getLocation().y < 0) {
+        final int y = this.getLocation().y;
+        if (!visible && pnlReveal != null && ArenaTheme.isEnabled() && y < 0 && y > -visibleHeight) {
+            // part of the way out already: in the Arena look it slides the rest rather than vanishing
+            if (wasSliding) {
+                incrementRevealTimer.setInitialDelay(0);
+                incrementRevealTimer.start();
+                revealDir = -1;
+            } else {
+                stopReveal();
+            }
+        } else if (visible || y < 0) {
             setLocation(0, visible ? 0 : -visibleHeight);
         }
         else if (pnlReveal != null) { //if previously fully visible, delay hiding titlebar until mouse moves away

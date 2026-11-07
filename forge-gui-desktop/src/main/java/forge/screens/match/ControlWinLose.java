@@ -8,6 +8,7 @@ import forge.gamemodes.match.NextGameDecision;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.interfaces.IGameController;
+import forge.toolbox.ArenaCurtain;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -58,6 +59,8 @@ public class ControlWinLose {
     }
 
     private void nextGameAction(final NextGameDecision decision) {
+        // in the Arena look the end screen stays over the window until the next board or screen is ready, then fades into it
+        ArenaCurtain.cover();
         SOverlayUtils.hideOverlay();
         saveOptions();
         for (final IGameController controller : matchUI.getOriginalGameControllers()) {

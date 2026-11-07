@@ -59,6 +59,7 @@ import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
 import forge.screens.deckeditor.CDeckEditorUI;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -326,6 +327,17 @@ public enum FControl implements KeyEventDispatcher {
             return false;
         }
 
+        // in the Arena look one screen fades into the next, and a curtain held over the end of a game lifts here
+        final boolean covered = ArenaCurtain.cover();
+        try {
+            switchScreen(screen);
+        } finally {
+            ArenaCurtain.release(covered ? 380 : 460);
+        }
+        return true;
+    }
+
+    private void switchScreen(final FScreen screen) {
         if (currentScreen != null && currentScreen.isMatchScreen()) { //hide targeting overlay and reset image if was on match screen
             //SOverlayUtils.hideTargetingOverlay();
             if (isMatchBackgroundImageVisible()) {
@@ -371,7 +383,6 @@ public enum FControl implements KeyEventDispatcher {
         }
 
         Singletons.getView().getNavigationBar().updateSelectedTab();
-        return true;
     }
 
     private boolean isMatchBackgroundImageVisible() {

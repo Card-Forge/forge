@@ -540,6 +540,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         combatAssignments = buildCombatAssignments();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
+        if (ArenaTheme.isEnabled() && !hasLayoutRoom(rect.width, rect.height)) {
+            return;
+        }
+
         this.playAreaWidth = rect.width;
         this.playAreaHeight = rect.height;
         noteLayoutRoom(rect.width, rect.height);

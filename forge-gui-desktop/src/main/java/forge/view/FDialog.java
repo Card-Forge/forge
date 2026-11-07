@@ -38,6 +38,9 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.ArenaCurtain;
+import forge.toolbox.ArenaMotion;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
@@ -549,6 +552,9 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     private static class BackdropPanel extends JPanel {
         private static final SkinColor backColor = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
+        /** In the Arena look the window darkens behind a dialog, and clears after it, rather than switching. */
+        private final ArenaMotion.Fade dim = new ArenaMotion.Fade(this::repaint, 1f);
+
         private BackdropPanel() {
             setOpaque(false);
             setVisible(false);
@@ -556,9 +562,28 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         }
 
         @Override
+        public void setVisible(final boolean visible) {
+            if (visible != isVisible() && ArenaTheme.isEnabled()) {
+                if (visible) {
+                    dim.set(0f);
+                    dim.to(1f, 220);
+                } else {
+                    ArenaCurtain.fadeOut(this, 200);
+                }
+            }
+            super.setVisible(visible);
+        }
+
+        @Override
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            FSkin.setGraphicsColor(g, backColor);
+            final float shown = dim.get();
+            if (shown < 1f) {
+                final Color c = backColor.getColor();
+                g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), Math.round(c.getAlpha() * shown)));
+            } else {
+                FSkin.setGraphicsColor(g, backColor);
+            }
             g.fillRect(0, 0, getWidth(), getHeight());
         }
     }

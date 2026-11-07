@@ -112,6 +112,7 @@ import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
@@ -452,6 +453,31 @@ public final class CMatchUI
         registerDocs();
 
         screen.setCloseButtonTooltip(getConcedeCaption() + " Game");
+    }
+
+    private boolean isGameOver() {
+        return getGameView() != null && getGameView().isGameOver();
+    }
+
+    /** The players whose hands the board would show. */
+    private List<PlayerView> handOwners() {
+        final List<PlayerView> owners = new ArrayList<>();
+        final Iterable<PlayerView> localPlayers = getLocalPlayers();
+        for (final PlayerView p : sortedPlayers) {
+            if (allHands || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
+                owners.add(p);
+            }
+        }
+        return owners;
+    }
+
+    /** The players whose hands the board shows now. */
+    private List<PlayerView> shownHandOwners() {
+        final List<PlayerView> owners = new ArrayList<>();
+        for (final VHand hand : view.getHands()) {
+            owners.add(hand.getPlayer());
+        }
+        return owners;
     }
 
     private void initHandViews() {
@@ -1022,6 +1048,12 @@ public final class CMatchUI
 
     @Override
     public void updatePlayerControl() {
+        // in the Arena look the board is only rebuilt when there are other hands to show: a rebuild deals every hand out
+        // again. At the end of a game, say, everyone's control is cleared, and the board should stay as it is under the
+        // end screen.
+        if (ArenaTheme.isMatchBoard() && (isGameOver() || handOwners().equals(shownHandOwners()))) {
+            return;
+        }
         initHandViews();
         FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
@@ -1277,6 +1309,8 @@ public final class CMatchUI
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
+        // the board is built behind a picture of what was there, which fades once the match screen is up
+        ArenaCurtain.cover();
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(cLog);
 

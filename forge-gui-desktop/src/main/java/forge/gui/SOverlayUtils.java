@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import forge.Singletons;
 import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
@@ -104,6 +105,10 @@ public final class SOverlayUtils {
      */
     public static void hideOverlay() {
         Singletons.getView().getNavigationBar().setEnabled(true);
+        final JPanel panel = FOverlay.SINGLETON_INSTANCE.getPanel();
+        if (panel.isVisible() && !ArenaCurtain.isHeld()) {
+            ArenaCurtain.fadeOut(panel, 220); // in the Arena look what the overlay showed fades off the window
+        }
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
         if (null != prevFocusOwner) {

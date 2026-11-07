@@ -47,6 +47,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaText;
 import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
@@ -242,6 +243,13 @@ final class ArenaDialogKit {
             });
         }
 
+        /** Shows nothing until it begins. */
+        void hide() {
+            owner.setOpaque(false);
+            fade.set(0f);
+            owner.repaint();
+        }
+
         boolean isOver() {
             return fade.get() >= 1f;
         }
@@ -297,7 +305,7 @@ final class ArenaDialogKit {
         final List<Component> hidden = new ArrayList<>();
         for (final Component c : lpn.getComponents()) {
             // a card preview may still be fading out, having just been dismissed for this dialog
-            if (c.isVisible() && (c == hide || c instanceof ArenaFocusCard || c instanceof ArenaCardPreview)) {
+            if (c.isVisible() && (c == hide || c instanceof ArenaFocusCard || c instanceof ArenaCardPreview || c instanceof TabBarDim || ArenaCurtain.isCurtain(c))) {
                 hidden.add(c);
             }
         }
@@ -339,10 +347,14 @@ final class ArenaDialogKit {
         return out == null ? null : graded(out, DIM);
     }
 
-    /** The same picture for the end of the game: without the board's corner menu, and darker. */
-    static BufferedImage captureStage() {
-        final BufferedImage out = snapshot(null, true);
-        return out == null ? null : graded(out, STAGE_DIM);
+    /** The window as the end of the game shows it, without the board's corner menu: to be darkened by {@link #gradeStage}. */
+    static BufferedImage snapshotStage() {
+        return snapshot(null, true);
+    }
+
+    /** Darkens that picture as the end of the game shows it, more than a dialog's. Safe off the event thread. */
+    static BufferedImage gradeStage(final BufferedImage photo) {
+        return photo == null ? null : graded(photo, STAGE_DIM);
     }
 
     /** Takes a little of the colour out, lays the near-black dim over it, and darkens the edges in an oval the shape of the window. */
@@ -445,24 +457,33 @@ final class ArenaDialogKit {
     @SuppressWarnings("serial")
     static final class TabBarDim extends JComponent {
         private final Component bar = FView.SINGLETON_INSTANCE.getNavigationBar();
+        /** It darkens and clears with the dialog it belongs to rather than switching. */
+        private final ArenaMotion.Fade shown = new ArenaMotion.Fade(this::repaint, 0f);
 
         void attach() {
             final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
             if (getParent() == null) {
                 lpn.add(this, FView.NAVIGATION_BAR_LAYER);
+                shown.set(0f);
             }
             lpn.moveToFront(this);
             setBounds(bar.getBounds());
             setVisible(bar.isVisible());
+            shown.to(1f, 260);
         }
 
         void detach() {
-            final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
-            if (getParent() != null) {
-                final Rectangle r = getBounds();
-                lpn.remove(this);
-                lpn.repaint(r);
+            if (getParent() == null) {
+                return;
             }
+            shown.to(0f, 200, () -> {
+                final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
+                if (getParent() == lpn) {
+                    final Rectangle r = getBounds();
+                    lpn.remove(this);
+                    lpn.repaint(r);
+                }
+            });
         }
 
         @Override
@@ -472,8 +493,11 @@ final class ArenaDialogKit {
 
         @Override
         protected void paintComponent(final Graphics g) {
-            g.setColor(new Color(0f, 0f, 0f, DIM));
-            g.fillRect(0, 0, getWidth(), getHeight());
+            final float a = DIM * shown.get();
+            if (a > 0f) {
+                g.setColor(new Color(0f, 0f, 0f, Math.min(1f, a)));
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
         }
     }
 

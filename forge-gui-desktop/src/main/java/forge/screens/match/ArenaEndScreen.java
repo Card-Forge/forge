@@ -35,6 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaCurtain;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.util.Localizer;
@@ -62,6 +63,8 @@ final class ArenaEndScreen extends JPanel {
     private static final float SCORE_Y = 0.722f;
     private static final float BANNER_SIZE = 0.12f;
     private static final int EMBERS = 30;
+    /** How long the board is left to itself after the game ends, before this begins to come in. */
+    private static final int BEAT_MS = 650;
 
     /** A small round button with a drawn icon, dim until the mouse comes to it. */
     private static final class LogButton extends JButton {
@@ -117,7 +120,14 @@ final class ArenaEndScreen extends JPanel {
     private final JScrollPane log;
     private final LogButton btnLog = new LogButton();
     private final FButton btnCopy;
-    private final BufferedImage backdrop;
+    private BufferedImage backdrop;
+    /** Whether it has photographed the board, to come in over it. */
+    private boolean arrived;
+    /** Whether it has its scene drawn and is coming in, or is in. */
+    private boolean ready;
+    /** Changes whenever what the scene shows does, so that a scene drawn meanwhile is known to be out of date. */
+    private int sceneVersion;
+    private javax.swing.Timer beat;
     private final ArenaDialogKit.TabBarDim tabBarDim = new ArenaDialogKit.TabBarDim();
     private BufferedImage scene;
     private String score = "";
@@ -136,8 +146,8 @@ final class ArenaEndScreen extends JPanel {
         this.btnQuit = btnQuit;
         this.custom = custom;
         this.log = log;
-        backdrop = ArenaDialogKit.captureStage();
-        setOpaque(true);
+        setOpaque(false);
+        putClientProperty(forge.toolbox.FOverlay.OWN_BACKDROP, Boolean.TRUE);
 
         final Localizer localizer = Localizer.getInstance();
         btnLog.setToolTipText(localizer.getMessage("lblArenaShowLog"));
@@ -178,10 +188,17 @@ final class ArenaEndScreen extends JPanel {
         // the tab bar stays above the overlay, so it is dimmed for as long as this shows
         addHierarchyListener(e -> {
             if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
-                if (isShowing()) {
-                    tabBarDim.attach();
-                } else {
+                if (!isShowing()) {
                     tabBarDim.detach();
+                    if (beat != null) {
+                        beat.stop();
+                    }
+                } else if (arrived) {
+                    tabBarDim.attach();
+                } else if (beat == null || !beat.isRunning()) {
+                    beat = new javax.swing.Timer(BEAT_MS, t -> arrive());
+                    beat.setRepeats(false);
+                    beat.start();
                 }
             }
         });
@@ -196,10 +213,12 @@ final class ArenaEndScreen extends JPanel {
     void setScore(final String score0) {
         score = score0 == null ? "" : score0;
         scene = null;
+        sceneVersion++;
         repaint();
     }
 
     private void toggleLog() {
+        ArenaCurtain.fadeOver(this, 220); // the log comes and goes through a quick fade
         logShown = !logShown;
         btnLog.setToolTipText(Localizer.getInstance().getMessage(logShown ? "lblArenaHideLog" : "lblArenaShowLog"));
         log.setVisible(logShown);
@@ -258,11 +277,63 @@ final class ArenaEndScreen extends JPanel {
         btnCopy.setBounds(logPanel.x + logPanel.width - pad - copyW, logPanel.y + logPanel.height - pad - copyH, copyW, copyH);
     }
 
-    /** The end of the game takes its time coming in. */
+    /**
+     * The end of the game takes its time coming in. Once it shows, it waits a moment, so that the last blow lands
+     * and the life total runs down on the board itself, and only then photographs the board for its backdrop and
+     * fades in over it. Until then it shows nothing at all.
+     */
     @Override
     public void addNotify() {
         super.addNotify();
-        entrance.begin(560);
+        if (!arrived) {
+            entrance.hide();
+        }
+    }
+
+    /**
+     * Photographs the board, which has to be done here on the event thread, and draws the scene from it on another
+     * (at full size that takes long enough to stop anything still moving on the board), then comes in.
+     */
+    private void arrive() {
+        if (!isShowing() || arrived) {
+            return;
+        }
+        arrived = true;
+        final BufferedImage photo = ArenaDialogKit.snapshotStage();
+        final int w = getWidth(), h = getHeight(), version = sceneVersion;
+        final boolean side = hasCustom();
+        final String words = score;
+        final Thread painter = new Thread(() -> {
+            BufferedImage stage = null, made = null;
+            try {
+                stage = ArenaDialogKit.gradeStage(photo);
+                made = w > 0 && h > 0 ? renderScene(stage, w, h, side, words) : null;
+            } catch (final RuntimeException e) {
+                e.printStackTrace(); // it is drawn again as it is painted
+            }
+            final BufferedImage stage0 = stage, made0 = made;
+            SwingUtilities.invokeLater(() -> comeIn(stage0, made0, version, side));
+        }, "Arena end scene");
+        painter.setDaemon(true);
+        painter.start();
+    }
+
+    private void comeIn(final BufferedImage stage, final BufferedImage made, final int version, final boolean side) {
+        backdrop = stage;
+        if (made != null && version == sceneVersion) {
+            scene = made;
+            sceneCustom = side;
+        }
+        ready = true;
+        if (isShowing()) {
+            tabBarDim.attach();
+            entrance.begin(560);
+        }
+    }
+
+    @Override
+    public boolean contains(final int x, final int y) {
+        return ready && super.contains(x, y);
     }
 
     @Override
@@ -283,10 +354,13 @@ final class ArenaEndScreen extends JPanel {
     }
 
     private void paintEndScene(final Graphics2D g0) {
+        if (!ready) {
+            return; // not come in yet
+        }
         final int w = getWidth(), h = getHeight();
         if (scene == null || scene.getWidth() != w || scene.getHeight() != h || sceneCustom != hasCustom()) {
             sceneCustom = hasCustom();
-            scene = renderScene(w, h);
+            scene = renderScene(backdrop, w, h, sceneCustom, score);
         }
         g0.drawImage(scene, 0, 0, null);
         if (logShown && logPanel != null) {
@@ -306,13 +380,13 @@ final class ArenaEndScreen extends JPanel {
         }
     }
 
-    private BufferedImage renderScene(final int w, final int h) {
+    /** Draws the whole still scene. It reads nothing that changes, so it may be drawn off the event thread. */
+    private BufferedImage renderScene(final BufferedImage stage, final int w, final int h, final boolean side, final String score) {
         final BufferedImage out = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         final Graphics2D g = out.createGraphics();
         try {
             ArenaDialogKit.quality(g);
-            ArenaDialogKit.paintBackdrop(g, backdrop, w, h);
-            final boolean side = hasCustom();
+            ArenaDialogKit.paintBackdrop(g, stage, w, h);
             final int cx = side ? Math.round(w * 0.22f) : w / 2;
             final int avatarSize = portraitSize(h, side);
             final int avatarCy = Math.round(h * MEDALLION_Y);

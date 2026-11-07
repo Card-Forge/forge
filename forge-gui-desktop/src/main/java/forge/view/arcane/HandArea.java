@@ -57,6 +57,11 @@ public class HandArea extends CardArea {
     }
 
     @Override
+    protected boolean waitsForRoom() {
+        return ArenaTheme.isEnabled();
+    }
+
+    @Override
     protected boolean cardPanelDraggable(final CardPanel panel) {
         return panel.getCard() != null && !isFanExtra(panel);
     }
