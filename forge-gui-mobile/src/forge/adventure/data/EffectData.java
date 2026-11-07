@@ -21,6 +21,8 @@ public class EffectData implements Serializable {
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
+    public String[] startBattleWithCardInHand; //Cards added to the hand after mulligans.
+    public int maxHandSizeModifier = 0;  //Amount to add to maximum hand size, without changing starting hand size.
 
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
@@ -44,47 +46,38 @@ public class EffectData implements Serializable {
     }
 
     public Array<IPaperCard> startBattleWithCards() {
-        Array<IPaperCard> startCards=new Array<>(IPaperCard.class);
-        if(startBattleWithCard != null) {
-            for (String name:startBattleWithCard) {
-                PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
-                if(C != null)
-                    startCards.add(C);
-                else {
-                    try {
-                        PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
-                        if (T != null) startCards.add(T);
-                        else System.err.print("Can not find card/token \"" + name + "\"\n");
-                    } catch (Exception e) {
-                        //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
-                        System.err.print("Can not find card/token \"" + name + "\"\n");
-                    }
-                }
-            }
-        }
-        return startCards;
+        return cardsFromNames(startBattleWithCard);
     }
 
-    public Array<IPaperCard> startBattleWithCardsInCommandZone(){
-        Array<IPaperCard> startCardsInCommandZone=new Array<>(IPaperCard.class);
-        if(startBattleWithCardInCommandZone != null) {
-            for (String name:startBattleWithCardInCommandZone) {
-                PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
-                if(C != null)
-                    startCardsInCommandZone.add(C);
-                else {
-                    try {
-                        PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
-                        if (T != null) startCardsInCommandZone.add(T);
-                        else System.err.print("Can not find card/token \"" + name + "\"\n");
-                    } catch (Exception e) {
-                        //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
-                        System.err.print("Can not find card/token \"" + name + "\"\n");
-                    }
+    public Array<IPaperCard> startBattleWithCardsInCommandZone() {
+        return cardsFromNames(startBattleWithCardInCommandZone);
+    }
+
+    public Array<IPaperCard> startBattleWithCardsInHand() {
+        return cardsFromNames(startBattleWithCardInHand);
+    }
+
+    private static Array<IPaperCard> cardsFromNames(String[] names) {
+        Array<IPaperCard> cards = new Array<>(IPaperCard.class);
+        if (names == null) {
+            return cards;
+        }
+        for (String name : names) {
+            PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
+            if (C != null)
+                cards.add(C);
+            else {
+                try {
+                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                    if (T != null) cards.add(T);
+                    else System.err.print("Can not find card/token \"" + name + "\"\n");
+                } catch (Exception e) {
+                    //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
+                    System.err.print("Can not find card/token \"" + name + "\"\n");
                 }
             }
         }
-        return startCardsInCommandZone;
+        return cards;
     }
 
     public String itemize(Array<IPaperCard> paperCards) {
@@ -103,8 +96,12 @@ public class EffectData implements Serializable {
             description+="Battlefield:" + itemize(startBattleWithCards()) + "\n";
         if(startBattleWithCardInCommandZone != null && startBattleWithCardInCommandZone.length != 0)
             description+="Command:" + itemize(startBattleWithCardsInCommandZone()) + "\n";
+        if(startBattleWithCardInHand != null && startBattleWithCardInHand.length != 0)
+            description+="Hand:" + itemize(startBattleWithCardsInHand()) + "\n";
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
+        if(maxHandSizeModifier != 0)
+            description+="Max hand size: " + maxHandSizeModifier + "\n";
         if(moveSpeed!=0 && moveSpeed != 1)
             description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)

@@ -3157,6 +3157,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    public void initStartingHandExtras() {
+        final RegisteredPlayer registeredPlayer = getRegisteredPlayer();
+        for (final IPaperCard cp : registeredPlayer.getExtraCardsInHand()) {
+            getZone(ZoneType.Hand).add(Card.fromPaperCard(cp, this));
+        }
+        final int maxHandSizeModifier = registeredPlayer.getMaxHandSizeModifier();
+        if (maxHandSizeModifier != 0) {
+            final DetachedCardEffect eff = new DetachedCardEffect(this, "Maximum Hand Size Modifier");
+            eff.addStaticAbility("Mode$ Continuous | Affected$ You | EffectZone$ Command | RaiseMaxHandSize$ " + maxHandSizeModifier
+                    + " | Description$ Your maximum hand size is changed by " + maxHandSizeModifier + ".");
+            getZone(ZoneType.Command).add(eff);
+        }
+    }
+
     public void initCommanderColor(Card cmd) {
         if (cmd.getRules().getAddsWildCardColor()) {
             Player p = cmd.getController();

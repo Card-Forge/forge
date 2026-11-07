@@ -2390,6 +2390,11 @@ public class GameAction {
             }
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
+            // after the mulligans, which shuffle the hand away and redraw up to the maximum hand size
+            for (final Player p1 : game.getPlayers()) {
+                p1.initStartingHandExtras();
+            }
+
             game.setAge(GameStage.Play);
 
             //<THIS CODE WILL WORK WITH PHASE = NULL>
