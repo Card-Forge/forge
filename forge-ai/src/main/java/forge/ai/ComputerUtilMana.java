@@ -1321,8 +1321,8 @@ public class ComputerUtilMana {
             if (toPay.isOr2Generic()) {
                 colorChoice = toPay.getColorMask();
             } else {
-                // Generic/{C}: prefer hand+battlefield identity over the W-first WUBRG scan.
-                if (toPay.isGeneric() || toPay == ManaCostShard.COLORLESS || toPay.isPhyrexian()) {
+                // Generic/hybrid: prefer hand+battlefield identity over the W-first WUBRG scan.
+                if (toPay.isGeneric() || toPay.isMultiColor()) {
                     final String prominent = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Hand, ZoneType.Battlefield));
                     final byte c = MagicColor.fromName(MagicColor.toShortString(prominent));
                     if (c != 0 && ai.getManaPool().canPayForShardWithColor(toPay, c)) {
