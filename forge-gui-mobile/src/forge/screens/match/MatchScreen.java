@@ -50,6 +50,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.GuiBase;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
@@ -63,6 +64,9 @@ import forge.model.FModel;
 import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaShortcutSheet;
+import forge.screens.match.arena.ArenaShortcuts;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
@@ -377,6 +381,23 @@ public class MatchScreen extends FScreen {
 
     public VStack getStack() {
         return stack;
+    }
+
+    public VGameMenu getGameMenu() {
+        return gameMenu;
+    }
+
+    public VPlayers getPlayersMenu() {
+        return players;
+    }
+
+    public VDevMenu getDevMenu() {
+        return devMenu;
+    }
+
+    /** The chat, or null outside network play. */
+    public VChat getChat() {
+        return chat;
     }
 
     public VPlayerPanel getTopPlayerPanel() {
@@ -996,11 +1017,86 @@ public class MatchScreen extends FScreen {
         return attached != null && attached.iterator().hasNext();
     }
 
+    /**
+     * The keyboard shortcuts the Arena look adds ({@link ArenaShortcuts}, those not {@code existing}); the ones keyDown
+     * already had stay in its switch, so both looks answer them the same way. Zooming the card under the pointer
+     * waits for the hover preview, so Z falls through to keyDown as before.
+     */
+    private boolean arenaShortcut(int keyCode) {
+        final ArenaShortcuts.Action action = ArenaShortcuts.match(keyCode);
+        if (action == null || ArenaShortcuts.get(action).existing) {
+            return false;
+        }
+        switch (action) {
+            case PASS_UNTIL_STACK_RESOLVES: {
+                final IGameController controller = getGameController();
+                final PlayerView local = MatchController.instance.getCurrentPlayer();
+                final GameView gameView = MatchController.instance.getGameView();
+                if (controller == null || local == null || gameView == null || gameView.getStack().isEmpty()) {
+                    return false;
+                }
+                controller.sendYieldUpdate(new YieldUpdate.StackYield(local, true, true));
+                return true;
+            }
+            case PASS_UNTIL_MY_TURN:
+                MatchController.toggleYieldMarker(MatchController.instance.getCurrentPlayer(), PhaseType.UPKEEP);
+                return true;
+            case PASS_UNTIL_NEXT_TURN:
+                MatchController.toggleYieldMarker(nextTurnPlayer(), PhaseType.UPKEEP);
+                return true;
+            case OPEN_LOG:
+                toggleDropDown(log);
+                return true;
+            case OPEN_STACK:
+                toggleDropDown(stack);
+                return true;
+            case OPEN_MENU:
+                toggleDropDown(gameMenu);
+                return true;
+            case SHOW_SHORTCUTS:
+                ArenaShortcutSheet.open();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /** Whose turn comes after the current one (the next player still in the game, in seat order). */
+    private static PlayerView nextTurnPlayer() {
+        final GameView gameView = MatchController.instance.getGameView();
+        if (gameView == null || gameView.getPlayers() == null || gameView.getPlayerTurn() == null) {
+            return null;
+        }
+        final List<PlayerView> players = new ArrayList<>();
+        for (final PlayerView p : gameView.getPlayers()) {
+            players.add(p);
+        }
+        final int turn = players.indexOf(gameView.getPlayerTurn());
+        for (int i = 1; i <= players.size(); i++) {
+            final PlayerView p = players.get(Math.floorMod(turn + i, players.size()));
+            if (!p.getHasLost()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private static void toggleDropDown(final FDropDown dropDown) {
+        if (dropDown.isVisible()) {
+            dropDown.hide();
+        } else {
+            dropDown.show();
+        }
+    }
+
     @Override
     public boolean keyDown(int keyCode) {
         // TODO: make the keyboard shortcuts configurable on Mobile
         if (Forge.hasGamepad() && ((FMenuBar) getHeader()).isShowingMenu(false) && (keyCode == Keys.ESCAPE || keyCode == Keys.ENTER))
             return false;
+        if (ArenaMatchLayout.desktop() && arenaShortcut(keyCode)) {
+            return true;
+        }
         switch (keyCode) {
             case Keys.DPAD_DOWN:
                 if (!((FMenuBar) getHeader()).isShowingMenu(true)) {

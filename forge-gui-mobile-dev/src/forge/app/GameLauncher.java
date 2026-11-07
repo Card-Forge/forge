@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.util.HWInfo;
 import forge.Forge;
 import forge.adventure.util.Config;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.lwjgl.system.Configuration;
@@ -115,7 +117,9 @@ public class GameLauncher {
             config.setResizable(false);
         }
         config.setHdpiMode(HdpiMode.Logical);
-        applyFrameRate(config);
+        if (isArenaThemeOn()) {
+            applyFrameRate(config); //with the Arena look off, keep libGDX's frame pacing exactly as before
+        }
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -140,6 +144,19 @@ public class GameLauncher {
         });
 
         new Lwjgl3Application(start, config);
+    }
+
+    /**
+     * Whether the Arena look is on ({@link FPref#UI_ARENA_THEME_GDX}), read from the preferences file before the model
+     * is loaded. Switching it in the settings changes the frame pacing from the next start.
+     */
+    private static boolean isArenaThemeOn() {
+        try {
+            return new ForgePreferences().getPrefBoolean(FPref.UI_ARENA_THEME_GDX);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

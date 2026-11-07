@@ -714,6 +714,24 @@ public class MatchController extends NetworkGuiGame {
         instance.seedYieldStateOnHost();
     }
 
+    /**
+     * Sets (or, pressed again, clears) the auto-pass marker on {@code phaseOwner}'s {@code phase}, as a long press on
+     * that phase label does. Used by the Arena look's pass-until keyboard shortcuts.
+     */
+    public static void toggleYieldMarker(final PlayerView phaseOwner, final PhaseType phase) {
+        if (phaseOwner == null || view == null) {
+            return;
+        }
+        final VPlayerPanel panel = MatchScreen.getPlayerPanels().get(phaseOwner);
+        final VPhaseIndicator.PhaseLabel label = panel == null ? null : panel.getPhaseIndicator().getLabel(phase);
+        instance.handleYieldMarkerToggle(phaseOwner, phase, () -> {
+            if (label != null) {
+                label.setStopAtPhase(true);
+            }
+            instance.pushSkipPhaseToControllers(phaseOwner, phase);
+        });
+    }
+
     public static void writeMatchPreferences() {
         if (Forge.lifecycleClosing)
             return;

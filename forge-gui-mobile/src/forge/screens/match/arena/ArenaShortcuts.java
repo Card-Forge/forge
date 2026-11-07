@@ -11,16 +11,11 @@ import forge.Forge.KeyInputAdapter;
 
 /**
  * The match keyboard shortcuts of the Arena look, as data: which key does what, a label for the key and a line saying
- * what it does. Nothing here acts; the match screen wires the actions (worker D) and the options overlay lists them
- * (worker C). Keys follow MatchScreen.keyDown where it already handles the same action ({@link Shortcut#existing}
+ * what it does. MatchScreen.arenaShortcut does the new ones (desktop, Arena look on) and {@link ArenaShortcutSheet}
+ * lists them. Keys follow MatchScreen.keyDown where it already handles the same action ({@link Shortcut#existing}
  * says so), so the default look and the Arena look answer the same keys; the new ones use keys keyDown leaves free
- * (F5 revalidates the screen and the arrow keys emulate swipes globally, so those are avoided).
- *
- * <pre>{@code
- * // in MatchScreen.keyDown (worker D), before the existing switch:
- * ArenaShortcuts.Action a = ArenaTheme.isActive() ? ArenaShortcuts.match(keyCode) : null;
- * if (a != null && !ArenaShortcuts.get(a).existing) { ...do a...; return true; }
- * }</pre>
+ * (F5 revalidates the screen and the arrow keys emulate swipes globally, so those are avoided). ZOOM_CARD is listed
+ * but not wired yet: it waits for the hover preview.
  */
 public final class ArenaShortcuts {
     private ArenaShortcuts() { }

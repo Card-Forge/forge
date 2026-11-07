@@ -10,6 +10,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.card.CardZoom;
 import forge.game.card.CardView;
+import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 
@@ -322,26 +323,22 @@ public abstract class ArenaDialogOverlay extends FOverlay {
                     onEscapeKey();
                 }
                 return true;
-            case Keys.LEFT:
-            case Keys.DPAD_LEFT:
+            case Keys.LEFT: // also the gamepad's DPAD_LEFT (same key code)
                 if (!viewingBattlefield) {
                     onArrow(-1, 0);
                 }
                 return true;
-            case Keys.RIGHT:
-            case Keys.DPAD_RIGHT:
+            case Keys.RIGHT: // also the gamepad's DPAD_RIGHT (same key code)
                 if (!viewingBattlefield) {
                     onArrow(1, 0);
                 }
                 return true;
-            case Keys.UP:
-            case Keys.DPAD_UP:
+            case Keys.UP: // also the gamepad's DPAD_UP (same key code)
                 if (!viewingBattlefield) {
                     onArrow(0, -1);
                 }
                 return true;
-            case Keys.DOWN:
-            case Keys.DPAD_DOWN:
+            case Keys.DOWN: // also the gamepad's DPAD_DOWN (same key code)
                 if (!viewingBattlefield) {
                     onArrow(0, 1);
                 }
@@ -350,8 +347,23 @@ public abstract class ArenaDialogOverlay extends FOverlay {
                 toggleBattlefield();
                 return true;
             default:
+                if (passesThrough(keyCode)) {
+                    final FScreen screen = Forge.getCurrentScreen();
+                    return screen != null && screen.keyDown(keyCode);
+                }
                 return true; // the board's shortcuts wait while a question is open
         }
+    }
+
+    /**
+     * Whether a key the dialog does not use still goes to the match screen while the dialog is open: conceding
+     * (Ctrl+Q) and the shortcut list (H), which both open their own dialog on top of this one. Everything else the
+     * board does waits. Forge's own keys (the Android menu and back keys, the arrow keys' swipes) are handled by
+     * {@code Forge}'s input processor before any overlay sees them, so they are not affected.
+     */
+    protected boolean passesThrough(final int keyCode) {
+        final ArenaShortcuts.Action a = ArenaShortcuts.match(keyCode);
+        return a == ArenaShortcuts.Action.CONCEDE || a == ArenaShortcuts.Action.SHOW_SHORTCUTS;
     }
 
     protected void onPress(final float x, final float y) {

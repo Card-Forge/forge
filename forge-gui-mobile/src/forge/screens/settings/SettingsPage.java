@@ -707,7 +707,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
             Forge.getLocalizer().getMessage("cbHideReminderText"),
             Forge.getLocalizer().getMessage("nlHideReminderText")), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ARENA_THEME,
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ARENA_THEME_GDX,
             Forge.getLocalizer().getMessage("lblArenaLook"),
             Forge.getLocalizer().getMessage("nlArenaLook")) {
                 @Override

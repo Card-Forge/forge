@@ -98,7 +98,7 @@ public final class ArenaTheme {
     private static final List<Runnable> listeners = new ArrayList<>();
 
     /**
-     * Whether the Arena look is on: {@link FPref#UI_ARENA_THEME} is set and this is not adventure mode (whose duels
+     * Whether the Arena look is on: {@link FPref#UI_ARENA_THEME_GDX} is set and this is not adventure mode (whose duels
      * keep their own look). A field read, cheap enough for every view on every frame. It is refreshed once per frame
      * by {@link ArenaMotion#tick()} and straight away by {@link #refresh()} (the settings toggle calls it).
      */
@@ -121,7 +121,7 @@ public final class ArenaTheme {
     /** Re-reads the preference. Listeners run (on the render thread) when the result changes. */
     public static void refresh() {
         final ForgePreferences prefs = FModel.getPreferences();
-        prefOn = prefs != null && prefs.getPrefBoolean(FPref.UI_ARENA_THEME);
+        prefOn = prefs != null && prefs.getPrefBoolean(FPref.UI_ARENA_THEME_GDX);
         final boolean now = prefOn && !Forge.isMobileAdventureMode;
         if (now != active) {
             active = now;
@@ -195,6 +195,11 @@ public final class ArenaTheme {
 
     public static Color rgba(final int r, final int g, final int b, final int a) {
         return new Color(r / 255f, g / 255f, b / 255f, a / 255f);
+    }
+
+    /** Fills {@code out} with r, g, b (0..255) at alpha {@code a} (0..255, may be fractional) and returns it. */
+    public static Color rgbaInto(final int r, final int g, final int b, final float a, final Color out) {
+        return out.set(r / 255f, g / 255f, b / 255f, clamp01(a / 255f));
     }
 
     /** A new colour with this alpha (0..1). Allocates; per frame prefer {@link #alpha(Color, float, Color)}. */

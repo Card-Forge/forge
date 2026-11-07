@@ -130,7 +130,7 @@ public final class ArenaCornerMenu extends FDisplayObject {
         protected void buildMenu() {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblGame"), FSkinImage.SETTINGS, e -> openDropDown(screen.getGameMenu())));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPlayers") + " (" + MatchScreen.getPlayerPanels().size() + ")",
-                    FSkinImage.HDCHOOSE, e -> openDropDown(screen.getPlayersMenu())));
+                    FSkinImage.HDCHOICE, e -> openDropDown(screen.getPlayersMenu())));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblLog") + "  [" + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.OPEN_LOG) + "]",
                     FSkinImage.HDLIBRARY, e -> toggleLog()));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblStack") + "  [" + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.OPEN_STACK) + "]",
@@ -142,7 +142,7 @@ public final class ArenaCornerMenu extends FDisplayObject {
                 addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblDev"), FSkinImage.SETTINGS, e -> openDropDown(screen.getDevMenu())));
             }
             addItem(new FMenuItem(Forge.getLocalizer().getMessageorUseDefault("lblArenaGdxShortcuts", "Keyboard shortcuts")
-                    + "  [" + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.SHOW_SHORTCUTS) + "]", FSkinImage.HDCHOOSE, e -> ArenaShortcutSheet.open()));
+                    + "  [" + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.SHOW_SHORTCUTS) + "]", FSkinImage.HDCHOICE, e -> ArenaShortcutSheet.open()));
         }
     }
 
