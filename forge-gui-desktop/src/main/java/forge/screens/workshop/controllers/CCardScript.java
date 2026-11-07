@@ -101,6 +101,14 @@ public enum CCardScript implements ICDoc {
     public void refresh() {
         if (refreshing) { return; }
         refreshing = true;
+        try {
+            refreshScript();
+        } finally {
+            refreshing = false;
+        }
+    }
+
+    private void refreshScript() {
         final JTextPane txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
         txtScript.setText(currentScriptInfo != null ? currentScriptInfo.getText() : "");
         txtScript.setEditable(currentScriptInfo != null && currentScriptInfo.canEdit());
@@ -115,7 +123,6 @@ public enum CCardScript implements ICDoc {
                 doc.setCharacterAttributes(region.getKey(), region.getValue(), error, true);
             }
         }
-        refreshing = false;
     }
 
     public boolean hasChanges() {
