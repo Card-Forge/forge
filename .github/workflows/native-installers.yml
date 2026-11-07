@@ -1,0 +1,72 @@
+name: Native Installers
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  TAG: ${{ inputs.tag }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  windows-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch and unpack the release tarball
+        run: |
+          gh release download "$TAG" -R "${{ github.repository }}" -p 'forge-installer-*.tar.bz2' -D in
+          f=$(basename in/*.tar.bz2)
+          v=${f#forge-installer-}
+          echo "VERSION=${v%.tar.bz2}" >> "$GITHUB_ENV"
+          mkdir dist
+          tar xjf "in/$f" -C dist
+
+      - name: Build Windows installer
+        run: |
+          sudo apt-get update && sudo apt-get install -y nsis
+          forge-installer/native/build-exe.sh dist "$VERSION" "out/forge-$VERSION-setup.exe"
+
+      - name: Build Debian package
+        run: forge-installer/native/build-deb.sh dist "$VERSION" "out/forge-$VERSION.deb"
+
+      - name: Attach to release
+        run: gh release upload "$TAG" out/* --clobber -R "${{ github.repository }}"
+
+  # hdiutil exists only on macOS.
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch and unpack the release tarball
+        run: |
+          gh release download "$TAG" -R "${{ github.repository }}" -p 'forge-installer-*.tar.bz2' -D in
+          f=$(basename in/*.tar.bz2)
+          v=${f#forge-installer-}
+          echo "VERSION=${v%.tar.bz2}" >> "$GITHUB_ENV"
+          mkdir dist
+          tar xjf "in/$f" -C dist
+
+      - name: Build disk image
+        run: forge-installer/native/build-dmg.sh dist "$VERSION" "out/forge-$VERSION.dmg"
+
+      - name: Attach to release
+        run: gh release upload "$TAG" out/* --clobber -R "${{ github.repository }}"
+
+  notify-failure:
+    if: failure()
+    needs: [windows-linux, macos]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔴 Native installers failed for \`$TAG\`.\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}
