@@ -36,12 +36,19 @@ public final class ComboCatalog {
         public final int number;
         public final String name;
         public final Type type;
+        /** A two card combo of the Commander lists (see {@link AiCardLists}), not a line of ai-combos.txt. */
+        public final boolean pair;
         /** Normalized names, one set per slot. */
         final List<Set<String>> slots;
         /** The slots as written in the file (card names with their own spelling). */
         private final List<String> rawSlots;
 
         Entry(final int number, final Type type, final String name, final String... slotSpecs) {
+            this(number, type, false, name, slotSpecs);
+        }
+
+        Entry(final int number, final Type type, final boolean pair, final String name, final String... slotSpecs) {
+            this.pair = pair;
             this.number = number;
             this.name = name;
             this.type = type;
@@ -116,11 +123,13 @@ public final class ComboCatalog {
     public static synchronized void configure(final Supplier<List<String>> lines) {
         file = lines;
         entries = null;
+        pairEntries = null;
     }
 
     /** Forgets what was read, so the next question reads the file again (after it was edited, in tests). */
     public static synchronized void reload() {
         entries = null;
+        pairEntries = null;
     }
 
     /** The lines of the file that could not be read as a combo, with the reason (for the data test). */
@@ -206,6 +215,39 @@ public final class ComboCatalog {
 
     public static List<Entry> entries() {
         return load();
+    }
+
+    /** The first number of the two card combos of the Commander lists: above every line of ai-combos.txt. */
+    public static final int PAIR_NUMBER_BASE = 1000;
+
+    private static List<Entry> pairEntries;
+
+    /**
+     * The two card combos of {@code commander-bracket-combos.txt} and {@code ai-commander-combos.txt} as entries (win
+     * combos of two slots, numbered from {@link #PAIR_NUMBER_BASE}). They are not part of {@link #entries()}: the
+     * rollouts' terms and the opponent's threat list stay as they were, the combos are put together by
+     * {@link ComboAssembly} and tested from here.
+     */
+    public static synchronized List<Entry> commanderEntries() {
+        if (pairEntries == null) {
+            final List<Entry> list = new ArrayList<>();
+            int number = PAIR_NUMBER_BASE;
+            for (final AiCardLists.Pair p : AiCardLists.allPairs()) {
+                if (p.firstKey.equals(p.secondKey)) {
+                    continue;
+                }
+                list.add(new Entry(number++, Type.WIN, true, p.toString(), p.first, p.second));
+            }
+            pairEntries = Collections.unmodifiableList(list);
+        }
+        return pairEntries;
+    }
+
+    /** The lines of ai-combos.txt and then the two card combos of the Commander lists. */
+    public static List<Entry> assemblyEntries() {
+        final List<Entry> all = new ArrayList<>(load());
+        all.addAll(commanderEntries());
+        return all;
     }
 
     /** Whether the card fills a slot of any combo. */
