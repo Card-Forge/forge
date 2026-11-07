@@ -8,6 +8,7 @@ import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.AdventureQuestEvent;
 import forge.adventure.util.AdventureQuestEventType;
 import forge.adventure.util.Current;
+import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -47,6 +48,7 @@ public class AdventureQuestStage implements Serializable {
     public List<Integer> prerequisiteIDs = new ArrayList<>();
     public List<String> enemyTags = new ArrayList<>(); //Tags defining potential targets
     public List<String> enemyExcludeTags = new ArrayList<>(); //Tags denoting invalid targets
+    public String requiredEnemy = ""; //Must not have been defeated at the target location.
     public List<String> itemNames = new ArrayList<>(); //Tags defining items to use
     public List<String> equipNames = new ArrayList<>(); //Tags defining equipment to use
     public boolean prologueDisplayed = false;
@@ -99,14 +101,15 @@ public class AdventureQuestStage implements Serializable {
         if (POIToken != null && !POIToken.isEmpty()) {
             PointOfInterest tokenTarget = poiTokens.get(POIToken);
             if (tokenTarget != null) {
-                setTargetPOI(tokenTarget);
+                if (isRequiredEnemyAvailable(tokenTarget)) setTargetPOI(tokenTarget);
                 return;
             } else {
                 System.out.println("Quest '" + questName + "' -  Stage '" + this.name + "' failed to generate POI from token reference: '" + POIToken + "'");
             }
         }
         if (here) {
-            setTargetPOI(AdventureQuestController.instance().mostRecentPOI);
+            PointOfInterest location = AdventureQuestController.instance().mostRecentPOI;
+            if (isRequiredEnemyAvailable(location)) setTargetPOI(location);
             return;
         }
         if (!allowInactivePOI) {
@@ -114,6 +117,10 @@ public class AdventureQuestStage implements Serializable {
         }
         for (String tag : POITags) {
             validPOIs.removeIf(q -> Arrays.stream(q.getData().questTags).noneMatch(tag::equals));
+        }
+        if (hasRequiredEnemy()) {
+            validPOIs.removeIf(q -> !isRequiredEnemyAvailable(q));
+            if (validPOIs.isEmpty()) return; // Never fall back to an unrelated or defeated target.
         }
         if (!anyPOI) {
             if (validPOIs.isEmpty()) {
@@ -221,6 +228,7 @@ public class AdventureQuestStage implements Serializable {
         this.count4 = other.count4;
         this.enemyTags = other.enemyTags;
         this.enemyExcludeTags = other.enemyExcludeTags;
+        this.requiredEnemy = other.requiredEnemy;
         this.anyPOI = other.anyPOI;
         this.here = other.here;
         this.targetPOI = other.targetPOI;
@@ -263,6 +271,32 @@ public class AdventureQuestStage implements Serializable {
             }
         }
         return validPOIs;
+    }
+
+    public boolean hasRequiredEnemy() {
+        return requiredEnemy != null && !requiredEnemy.isEmpty();
+    }
+
+    private boolean isRequiredEnemyAvailable(PointOfInterest location) {
+        return location != null && (!hasRequiredEnemy()
+                || !WorldSave.getCurrentSave().getPointOfInterestChanges(location.getID()).isEnemyDefeated(requiredEnemy));
+    }
+
+    /** Resolve an enemy requirement using the same location scope as target assignment. */
+    public List<PointOfInterest> getAvailablePOIs() {
+        // TODO: Resolve required-enemy availability for token-linked stages before quest generation.
+        // Until their target is bound, do not offer quests whose availability cannot be established.
+        if (worldMapOK || objective == Hunt || (targetPOI == null && POIToken != null && !POIToken.isEmpty())) {
+            return new ArrayList<>();
+        }
+        List<PointOfInterest> candidates = new ArrayList<>(targetPOI != null ? Collections.singletonList(targetPOI)
+                : here ? Collections.singletonList(AdventureQuestController.instance().mostRecentPOI)
+                : Current.world().getAllPointOfInterest());
+        candidates.removeIf(location -> location == null || (!allowInactivePOI && !location.getActive())
+                || (!here && (POIToken == null || POIToken.isEmpty())
+                && !Arrays.asList(location.getData().questTags).containsAll(POITags))
+                || !isRequiredEnemyAvailable(location));
+        return candidates;
     }
 
     public AdventureQuestController.QuestStatus handleEvent(AdventureQuestEvent event) {
