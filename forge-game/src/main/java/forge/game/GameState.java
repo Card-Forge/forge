@@ -67,6 +67,7 @@ public class GameState {
         private String precast = null;
         private String putOnStack = null;
         private final Map<ZoneType, String> cardTexts = new EnumMap<>(ZoneType.class);
+        private String name = null;
     }
     private final List<PlayerState> playerStates = new ArrayList<>();
 
@@ -598,6 +599,8 @@ public class GameState {
             getPlayerState(categoryName).manaPool = categoryValue;
         } else if (categoryName.endsWith("persistentmana")) {
             getPlayerState(categoryName).persistentMana = categoryValue;
+        } else if (categoryName.endsWith("name")) {
+            getPlayerState(categoryName).name = categoryValue;
         } else {
             System.err.println("Unknown key: " + categoryName);
         }
@@ -1159,6 +1162,9 @@ public class GameState {
 
     private void setupPlayerState(final Player p, final PlayerState state) {
         // Lock check static as we setup player state
+        if (state.name != null && !state.name.isEmpty()) {
+            p.setName(state.name);
+        }
 
         // Clear all zones first, this ensures that any lingering cards and effects (e.g. in command zone) get cleared up
         // before setting up a new state

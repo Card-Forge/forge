@@ -89,6 +89,7 @@ public enum CSubmenuTutorial implements ICDoc, IMenuProvider {
         hostedMatch.setStartGameHook(() -> {
             SOptionPane.showMessageDialog(selected.getGoalDescription(), selected.getName(), SOptionPane.INFORMATION_ICON);
             selected.applyToGame(hostedMatch.getGame());
+            hostedMatch.refreshTitle();
         });
 
         hostedMatch.setEndGameHook((() -> selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()))));

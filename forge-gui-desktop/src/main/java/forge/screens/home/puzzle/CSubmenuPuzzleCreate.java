@@ -93,6 +93,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
             SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblWelcomePuzzleModeMessage"),
                     Localizer.getInstance().getMessage("lblCreateNewPuzzle"), SOptionPane.WARNING_ICON);
             emptyPuzzle.applyToGame(hostedMatch.getGame());
+            hostedMatch.refreshTitle();
         });
 
         final List<RegisteredPlayer> players = new ArrayList<>();
