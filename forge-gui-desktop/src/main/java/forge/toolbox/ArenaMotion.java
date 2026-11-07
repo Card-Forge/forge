@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 /**
  * Everything that moves on the Arena board runs off this one clock on the event thread, which
@@ -19,7 +18,8 @@ import javax.swing.Timer;
  * animation down for that frame rather than making it jump ahead.
  */
 public final class ArenaMotion {
-    private static final int FRAME_MS = 15;
+    /** 120 frames a second. A Swing timer cannot do this on Windows, where it only wakes every 15.6 ms. */
+    private static final long FRAME_NANOS = 1_000_000_000L / 120;
     /** The most one frame may advance an animation by. */
     private static final long LONGEST_STEP_NANOS = 50_000_000L;
     private static final int AMBIENT_MIN_MS = 33;
@@ -28,8 +28,10 @@ public final class ArenaMotion {
     private static final float AMBIENT_SHARE = 0.15f;
 
     private static final List<Tween> tweens = new ArrayList<>();
-    private static final Timer clock = new Timer(FRAME_MS, e -> tick());
+    private static final Clock clock = new Clock();
     private static long lastTick;
+    /** Whether the event thread is inside a frame of the clock right now. */
+    private static boolean ticking;
 
     private static final Set<JComponent> ambientAsked = new LinkedHashSet<>();
     private static final List<Rectangle> ambientPainted = new ArrayList<>();
@@ -151,7 +153,103 @@ public final class ArenaMotion {
         }
     }
 
+    /**
+     * Wakes the event thread at a steady 120 frames a second while anything moves. It sleeps most of each
+     * frame (Thread.sleep is fine-grained where a timer is not) and spins only the last moment, and it never has
+     * more than one frame waiting on the event thread: when painting falls behind, frames are dropped, not queued.
+     */
+    private static final class Clock implements Runnable {
+        private final java.util.concurrent.atomic.AtomicBoolean posted = new java.util.concurrent.atomic.AtomicBoolean();
+        private volatile boolean running;
+        private final Runnable frame = () -> {
+            posted.set(false);
+            if (this.running) {
+                tick();
+            }
+        };
+        private Thread thread;
+
+        boolean isRunning() {
+            return running;
+        }
+
+        void start() {
+            running = true;
+            if (thread == null) {
+                thread = new Thread(this, "Arena motion clock");
+                thread.setDaemon(true);
+                thread.setPriority(Thread.NORM_PRIORITY + 1);
+                thread.start();
+            } else {
+                java.util.concurrent.locks.LockSupport.unpark(thread);
+            }
+        }
+
+        void stop() {
+            running = false;
+        }
+
+        @Override
+        public void run() {
+            long next = System.nanoTime();
+            while (true) {
+                if (!running) {
+                    java.util.concurrent.locks.LockSupport.park(this);
+                    next = System.nanoTime();
+                    continue;
+                }
+                next += FRAME_NANOS;
+                long left = next - System.nanoTime();
+                if (left < -FRAME_NANOS) {
+                    // asleep or held up: start counting again from now rather than racing to catch up
+                    next = System.nanoTime();
+                    left = 0;
+                }
+                try {
+                    while (left > 1_200_000L) {
+                        Thread.sleep(1);
+                        left = next - System.nanoTime();
+                    }
+                } catch (final InterruptedException e) {
+                    return;
+                }
+                while (next - System.nanoTime() > 0) {
+                    Thread.onSpinWait();
+                }
+                if (running && posted.compareAndSet(false, true)) {
+                    SwingUtilities.invokeLater(frame);
+                }
+            }
+        }
+    }
+
+    /** Whether what is asking to be repainted now is a frame of an animation or a breathing effect. */
+    public static boolean isTicking() {
+        return ticking;
+    }
+
+    private static boolean ambientRepaint;
+
+    /** Whether the repaint being asked for now is only the next breath of something breathing. */
+    public static boolean isAmbientRepaint() {
+        return ambientRepaint;
+    }
+
+    /** Whether anything is moving, as opposed to merely breathing. */
+    public static boolean isAnimating() {
+        return !tweens.isEmpty();
+    }
+
     private static void tick() {
+        ticking = true;
+        try {
+            tickFrame();
+        } finally {
+            ticking = false;
+        }
+    }
+
+    private static void tickFrame() {
         final long now = System.nanoTime();
         final long step = Math.min(now - lastTick, LONGEST_STEP_NANOS);
         lastTick = now;
@@ -205,7 +303,12 @@ public final class ArenaMotion {
                 // while another window is in use this stays asked for and waits, using nothing
                 ambientAsked.remove(component);
                 ambientPainted.add(SwingUtilities.convertRectangle(component, new Rectangle(0, 0, component.getWidth(), component.getHeight()), window));
-                component.repaint();
+                ambientRepaint = true;
+                try {
+                    component.repaint();
+                } finally {
+                    ambientRepaint = false;
+                }
                 repainted = true;
             }
         }

@@ -2321,10 +2321,26 @@ public final class ArenaArt {
     private static BufferedImage cached(final String key, final Maker maker) {
         BufferedImage img = CACHE.get(key);
         if (img == null) {
-            img = maker.make();
+            img = premultiplied(maker.make());
             CACHE.put(key, img);
         }
         return img;
+    }
+
+    /** The same picture with its colours premultiplied, which lays over the screen a good deal faster in software. */
+    private static BufferedImage premultiplied(final BufferedImage img) {
+        if (img == null || img.getType() == BufferedImage.TYPE_INT_ARGB_PRE || !img.getColorModel().hasAlpha()) {
+            return img;
+        }
+        final BufferedImage pre = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB_PRE);
+        final Graphics2D g = pre.createGraphics();
+        try {
+            g.setComposite(java.awt.AlphaComposite.Src);
+            g.drawImage(img, 0, 0, null);
+        } finally {
+            g.dispose();
+        }
+        return pre;
     }
 
     private static Path2D blade(final double x0, final double y0, final double c1x, final double c1y, final double c2x, final double c2y,

@@ -160,6 +160,68 @@ public class ImageCache {
     }
 
     /**
+     * A card image waiting to be scaled. Scaling takes longer than a frame, so a caller that cannot wait for it does
+     * everything else on the event thread ({@link #prepareScale}), only {@link #scale} on another thread, and puts
+     * the result in the cache on the event thread again ({@link #storeScaled}); the usual calls then find it there.
+     */
+    public static final class PendingScale {
+        private final String resizedKey;
+        private final BufferedImage original;
+        private final int width, height;
+
+        private PendingScale(final String resizedKey, final BufferedImage original, final int width, final int height) {
+            this.resizedKey = resizedKey;
+            this.original = original;
+            this.width = width;
+            this.height = height;
+        }
+
+        /** Scales the image. Safe on any thread: it only reads the original, which nothing changes. */
+        public BufferedImage scale() {
+            return new ResampleOp(width, height).filter(original, null);
+        }
+    }
+
+    /**
+     * On the event thread: what scaling this card's image to this size would take, or null when the usual
+     * {@link #getImageNoDefault} call would be quick (the image is to hand, needs no scaling, or has yet to be fetched).
+     */
+    public static PendingScale prepareScale(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
+        final String key = card.getCurrentState().getImageKey(viewers);
+        if (StringUtils.isEmpty(key) || !isSupportedImageSize(width, height)) {
+            return null;
+        }
+        final String resizedKey = key.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))
+                ? hiddenSleeveCacheKey(card, width, height) : String.format("%s#%dx%d", key, width, height);
+        if (_CACHE.getIfPresent(resizedKey) != null) {
+            return null;
+        }
+        // as in scaleImage
+        final Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, false, card);
+        final BufferedImage original = orgImgs.getLeft();
+        if (original == null || original == _defaultImage || orgImgs.getRight()) {
+            return null;
+        }
+        final double scaleX = (-1 == width ? 1 : (double) width / original.getWidth());
+        final double scaleY = (-1 == height ? 1 : (double) height / original.getHeight());
+        double bestFitScale = Math.min(scaleX, scaleY);
+        if ((bestFitScale > 1) && !FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
+            bestFitScale = 1;
+        }
+        if (1 == bestFitScale) {
+            return null;
+        }
+        return new PendingScale(resizedKey, original, (int) (original.getWidth() * bestFitScale), (int) (original.getHeight() * bestFitScale));
+    }
+
+    /** On the event thread: keeps what {@link PendingScale#scale} made, where the usual calls will find it. */
+    public static void storeScaled(final PendingScale pending, final BufferedImage scaled) {
+        if (scaled != null) {
+            _CACHE.put(pending.resizedKey, scaled);
+        }
+    }
+
+    /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */

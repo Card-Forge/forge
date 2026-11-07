@@ -136,9 +136,12 @@ public final class ArenaCardPreview extends JComponent {
         preview.imageH = h;
         preview.imageX = GAP + (panelLeft ? panelW : 0);
         preview.panelX = panelLeft ? GAP : GAP + w + GAP;
-        // leave room around everything for the shadow
-        preview.setBounds(x - GAP, y - GAP, blockW + 2 * GAP, h + 2 * GAP);
-        preview.setVisible(true);
+        // leave room around everything for the shadow; the board under it is only uncovered, not changed
+        final int px = x - GAP, py = y - GAP, pw = blockW + 2 * GAP, ph = h + 2 * GAP;
+        forge.view.arcane.ArenaRepaintManager.overBoard(() -> {
+            preview.setBounds(px, py, pw, ph);
+            preview.setVisible(true);
+        });
         preview.shown.to(1f, 120);
         preview.repaint();
     }
@@ -148,7 +151,7 @@ public final class ArenaCardPreview extends JComponent {
             final ArenaCardPreview preview = instance;
             // it goes with a quick fade, unless the mouse has gone straight to another card
             preview.shown.to(0f, 90, () -> {
-                preview.setVisible(false);
+                forge.view.arcane.ArenaRepaintManager.overBoard(() -> preview.setVisible(false));
                 preview.card = null;
                 preview.image = null;
                 preview.status = null;
@@ -194,60 +197,97 @@ public final class ArenaCardPreview extends JComponent {
         return new Status(chips, granted.toString());
     }
 
+    // what the preview shows only changes with the card or what is said of it, so it is drawn once and then copied;
+    // only how far it has faded in changes from frame to frame
+    private BufferedImage picture;
+    private Object[] pictureOf;
+
     @Override
     protected void paintComponent(final Graphics g0) {
         final BufferedImage img = image == null ? null : image.getImage();
+        final float visible = shown.get();
+        final java.awt.geom.AffineTransform t = ((Graphics2D) g0).getTransform();
+        if ((t.getType() & ~(java.awt.geom.AffineTransform.TYPE_TRANSLATION | java.awt.geom.AffineTransform.TYPE_UNIFORM_SCALE)) == 0 && getWidth() > 0 && getHeight() > 0) {
+            final double scale = t.getScaleX();
+            final Object[] of = {img, scale, getWidth(), getHeight(), imageW, imageH, imageX, panelX, status, playable, statsNow, statsColour};
+            if (picture == null || !java.util.Arrays.equals(of, pictureOf)) {
+                picture = new BufferedImage((int) Math.ceil(getWidth() * scale), (int) Math.ceil(getHeight() * scale), BufferedImage.TYPE_INT_ARGB_PRE);
+                final Graphics2D pg = picture.createGraphics();
+                try {
+                    pg.scale(scale, scale);
+                    paintPreview(pg, img, 1f);
+                } finally {
+                    pg.dispose();
+                }
+                pictureOf = of;
+            }
+            final Graphics2D g = (Graphics2D) g0.create();
+            try {
+                g.setTransform(java.awt.geom.AffineTransform.getTranslateInstance(Math.round(t.getTranslateX()),
+                        Math.round(t.getTranslateY() + Math.round((1f - visible) * (GAP - 2)) * scale)));
+                if (visible < 1f) {
+                    g.setComposite(java.awt.AlphaComposite.SrcOver.derive(visible));
+                }
+                g.drawImage(picture, 0, 0, null);
+            } finally {
+                g.dispose();
+            }
+            return;
+        }
         final Graphics2D g = (Graphics2D) g0.create();
         try {
-            final float visible = shown.get();
-            if (visible < 1f) {
-                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(visible));
-                g.translate(0, Math.round((1f - visible) * (GAP - 2)));
-            }
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            if (img != null) {
-                final int w = imageW, h = imageH, arc = Math.round(w * 0.07f);
-                ArenaTheme.paintGlowAround(g, imageX, GAP + 6, w, h, arc, Color.BLACK, GAP - 1, 240, arc + 6);
-                if (playable) {
-                    ArenaTheme.paintGlowAround(g, imageX, GAP, w, h, arc, ArenaTheme.PLAYABLE, GAP - 2, 230, arc);
-                }
-                final RoundRectangle2D shape = new RoundRectangle2D.Float(imageX, GAP, w, h, arc, arc);
-                final Shape oldClip = g.getClip();
-                g.clip(shape);
-                g.setColor(Color.BLACK);
-                g.fill(shape);
-                // keep the image's own aspect ratio, centred in the frame
-                final float scale = Math.min(w / (float) img.getWidth(), h / (float) img.getHeight());
-                final int iw = Math.round(img.getWidth() * scale), ih = Math.round(img.getHeight() * scale);
-                g.drawImage(img, imageX + (w - iw) / 2, GAP + (h - ih) / 2, iw, ih, null);
-                g.setClip(oldClip);
-                g.setColor(new Color(0, 0, 0, 200));
-                g.draw(shape);
-                if (statsNow != null) {
-                    // what it is right now, over the printed box
-                    // large enough to hide the printed box entirely
-                    final int bw = Math.round(w * 0.235f), bh = Math.round(h * 0.066f);
-                    final int bx = imageX + w - bw - Math.round(w * 0.032f), by = GAP + h - bh - Math.round(h * 0.036f);
-                    g.setColor(new Color(4, 4, 6));
-                    g.fillRoundRect(bx - 2, by - 2, bw + 4, bh + 4, bh, bh);
-                    g.setPaint(new java.awt.GradientPaint(0, by, Color.WHITE, 0, by + bh, new Color(0xA8A49A)));
-                    g.fillRoundRect(bx, by, bw, bh, bh, bh);
-                    final int rim = Math.max(2, Math.round(bh * 0.09f));
-                    g.setPaint(new java.awt.GradientPaint(0, by + rim, new Color(0xFBF8EF), 0, by + bh - rim, new Color(0xE0DACC)));
-                    g.fillRoundRect(bx + rim, by + rim, bw - 2 * rim, bh - 2 * rim, bh - 2 * rim, bh - 2 * rim);
-                    g.setFont(ArenaTheme.numeralFont(Font.BOLD, bh * 0.68f));
-                    final FontMetrics sfm = g.getFontMetrics();
-                    g.setColor(statsColour);
-                    g.drawString(statsNow, bx + (bw - sfm.stringWidth(statsNow)) / 2, by + (bh + sfm.getAscent() - sfm.getDescent()) / 2);
-                }
-            }
-            if (status != null) {
-                paintStatus(g, panelX, GAP, imageX, imageW, imageH);
-            }
+            paintPreview(g, img, visible);
         } finally {
             g.dispose();
+        }
+    }
+
+    private void paintPreview(final Graphics2D g, final BufferedImage img, final float visible) {
+        if (visible < 1f) {
+            g.setComposite(java.awt.AlphaComposite.SrcOver.derive(visible));
+            g.translate(0, Math.round((1f - visible) * (GAP - 2)));
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        if (img != null) {
+            final int w = imageW, h = imageH, arc = Math.round(w * 0.07f);
+            ArenaTheme.paintGlowAround(g, imageX, GAP + 6, w, h, arc, Color.BLACK, GAP - 1, 240, arc + 6);
+            if (playable) {
+                ArenaTheme.paintGlowAround(g, imageX, GAP, w, h, arc, ArenaTheme.PLAYABLE, GAP - 2, 230, arc);
+            }
+            final RoundRectangle2D shape = new RoundRectangle2D.Float(imageX, GAP, w, h, arc, arc);
+            final Shape oldClip = g.getClip();
+            g.clip(shape);
+            g.setColor(Color.BLACK);
+            g.fill(shape);
+            // keep the image's own aspect ratio, centred in the frame
+            final float scale = Math.min(w / (float) img.getWidth(), h / (float) img.getHeight());
+            final int iw = Math.round(img.getWidth() * scale), ih = Math.round(img.getHeight() * scale);
+            g.drawImage(img, imageX + (w - iw) / 2, GAP + (h - ih) / 2, iw, ih, null);
+            g.setClip(oldClip);
+            g.setColor(new Color(0, 0, 0, 200));
+            g.draw(shape);
+            if (statsNow != null) {
+                // what it is right now, over the printed box
+                // large enough to hide the printed box entirely
+                final int bw = Math.round(w * 0.235f), bh = Math.round(h * 0.066f);
+                final int bx = imageX + w - bw - Math.round(w * 0.032f), by = GAP + h - bh - Math.round(h * 0.036f);
+                g.setColor(new Color(4, 4, 6));
+                g.fillRoundRect(bx - 2, by - 2, bw + 4, bh + 4, bh, bh);
+                g.setPaint(new java.awt.GradientPaint(0, by, Color.WHITE, 0, by + bh, new Color(0xA8A49A)));
+                g.fillRoundRect(bx, by, bw, bh, bh, bh);
+                final int rim = Math.max(2, Math.round(bh * 0.09f));
+                g.setPaint(new java.awt.GradientPaint(0, by + rim, new Color(0xFBF8EF), 0, by + bh - rim, new Color(0xE0DACC)));
+                g.fillRoundRect(bx + rim, by + rim, bw - 2 * rim, bh - 2 * rim, bh - 2 * rim, bh - 2 * rim);
+                g.setFont(ArenaTheme.numeralFont(Font.BOLD, bh * 0.68f));
+                final FontMetrics sfm = g.getFontMetrics();
+                g.setColor(statsColour);
+                g.drawString(statsNow, bx + (bw - sfm.stringWidth(statsNow)) / 2, by + (bh + sfm.getAscent() - sfm.getDescent()) / 2);
+            }
+        }
+        if (status != null) {
+            paintStatus(g, panelX, GAP, imageX, imageW, imageH);
         }
     }
 

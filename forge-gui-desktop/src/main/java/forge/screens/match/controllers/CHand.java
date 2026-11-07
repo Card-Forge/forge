@@ -225,10 +225,15 @@ public class CHand implements ICDoc {
         if (!ArenaTheme.isMatchBoard() || !matchUI.isLocalPlayer(player)) {
             return extras;
         }
-        if (player.getCommanders() != null) {
-            for (final CardView commander : player.getCommanders()) {
-                if (ZoneType.Command.equals(commander.getZone()) && !extras.contains(commander)) {
-                    extras.add(commander);
+        // Taken from the command zone itself: the player's list of commanders can hold a view of the card from
+        // before it last changed zones (each zone makes a new card), which still says it is in the graveyard or
+        // exile after it has come back, so a commander that died once was never offered to be cast again.
+        // Views are equal by card id, so the list still says which cards are commanders.
+        final Iterable<CardView> command = player.getCards(ZoneType.Command);
+        if (player.getCommanders() != null && command != null) {
+            for (final CardView card : command) {
+                if (player.getCommanders().contains(card) && !extras.contains(card)) {
+                    extras.add(card);
                 }
             }
         }

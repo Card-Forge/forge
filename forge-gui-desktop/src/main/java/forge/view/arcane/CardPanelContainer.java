@@ -74,6 +74,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.scrollPane = scrollPane;
         this.setOpaque(true);
         setupMouseListeners();
+        ArenaRepaintManager.register(this);
     }
 
     protected final CMatchUI getMatchUI() {
@@ -336,7 +337,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         //pfps the validate just below will do the layout, so don't do it here        this.doLayout();
         this.invalidate();
         this.getParent().validate();
-        this.repaint();
+        ArenaRepaintManager.overBoard(this::repaint); // which cards are here changed, not how any of them looks
     }
 
     public final void clear() {

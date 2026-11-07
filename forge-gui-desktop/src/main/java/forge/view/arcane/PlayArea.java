@@ -749,7 +749,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.rows = placed;
         this.setPreferredSize(new Dimension(this.playAreaWidth, this.playAreaHeight));
         this.revalidate();
-        repaint();
+        // the cards say for themselves what a layout changed about how they look; this is for where they now are
+        ArenaRepaintManager.overBoard(this::repaint);
     }
 
     /** One wing of the back row between two x positions, pressed against the portrait; overlaps its piles if it must. */
@@ -1406,7 +1407,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 Animation.moveCard(toPanel);
             }
         }
-        repaint();
+        ArenaRepaintManager.overBoard(this::repaint); // the cards changed say so themselves
     }
 
     public boolean updateCard(final CardView card, boolean fromRefresh) {

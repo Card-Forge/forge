@@ -50,12 +50,14 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Multiset;
 
 import forge.CachedCardImage;
+import forge.ImageCache;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
@@ -162,9 +164,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private ArenaMotion.Tween arrival;
     private boolean arenaHidden; // on its way here as a picture: nothing to paint yet
     private float arrivalAlpha = 1f, arrivalScale = 1f, arrivalDrop;
-    private final ArenaMotion.Fade fanLean = new ArenaMotion.Fade(this::repaint, 0f);
-    private final ArenaMotion.Fade hoverLift = new ArenaMotion.Fade(this::repaint, 0f);
-    private final ArenaMotion.Fade glowMix = new ArenaMotion.Fade(this::repaint, 1f);
+    private final ArenaMotion.Fade fanLean = new ArenaMotion.Fade(this::repaintArenaMotion, 0f);
+    private final ArenaMotion.Fade hoverLift = new ArenaMotion.Fade(this::repaintArenaMotion, 0f);
+    // one glow giving way to another is a crossfade of two pictures, so its frames change nothing to be drawn again
+    private final ArenaMotion.Fade glowMix = new ArenaMotion.Fade(this::repaintArenaMotion, 1f);
     private final ArenaMotion.Fade statsPop = new ArenaMotion.Fade(this::repaint, 0f);
     private final ArenaMotion.Fade hitFlash = new ArenaMotion.Fade(this::repaint, 0f);
     private ArenaMotion.Tween hitTween;
@@ -177,6 +180,37 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private String seenStats;
     private Font badgeFont;
     private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
+
+    // An Arena card at rest is painted from a picture of itself, so a neighbour can move without it being drawn again
+    /** Goes up whenever anything about this card may look different. */
+    private int arenaContent;
+    /** What {@link #arenaContent} and the board's generation were at the last paint: a card is only kept once it holds still. */
+    private int arenaContentPainted = -1, arenaGenerationPainted = -1;
+    /** The picture of this card at rest, and the other end of what it is crossfading towards, if anything. */
+    private BufferedImage arenaPicture, arenaPictureTo;
+    /** Made quickly (without the fine drawing of a turned card) while something else was moving: made properly once all is still. */
+    private boolean arenaPictureDraft;
+    private ArenaBlend arenaPictureBlend = ArenaBlend.NONE;
+    private int arenaPictureContent, arenaPictureGeneration;
+    private double arenaPictureScale;
+    private int arenaPictureW, arenaPictureH, arenaPictureCardX, arenaPictureCardY, arenaPictureCardW, arenaPictureCardH;
+    private double arenaPictureAngle, arenaPictureLean;
+    private float arenaPictureMotionScale;
+    /** Making pictures shares a frame's time: past this, cards are drawn as before and kept a frame later. */
+    private static final long ARENA_PICTURE_BUDGET_NANOS = 3_000_000L;
+    private static long arenaBudgetFrom, arenaBudgetSpent;
+
+    /**
+     * What a pair of pictures of a card is a crossfade of. Each of these changes the look of a card by a blend of two
+     * ends (the colour going out of a tap, one glow giving way to another, a glow breathing), so a card going through
+     * one need not be drawn again every frame: it is drawn at both ends once, and the two laid one over the other.
+     */
+    private enum ArenaBlend { NONE, TAP, GLOW, BREATH }
+
+    /** While a picture is made of one end of a blend, where that end is; otherwise NaN, and the card paints as it is. */
+    private float arenaTapForced = Float.NaN, arenaMixForced = Float.NaN, arenaWaveForced = Float.NaN;
+    /** How long a breath of this card's glow takes, as of its last paint; 0 when it is not breathing. */
+    private float arenaBreathPeriod;
 
     private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
     private static final Color HOTKEY_BADGE_BG = new Color(20, 20, 20, 220);
@@ -290,8 +324,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void updateImage() {
         FThreads.assertExecutedByEdt(true);
+        // asked for again in case the card shows another face now; the art cut from it is only made again if the image differs
         tileSource = null;
-        tileArt = null;
 
         if (card == null)  {
             cachedImage = null;
@@ -303,7 +337,32 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final float screenScale = GuiBase.getInterface().getScreenScale();
         int imageWidth = Math.round(imagePanel.getWidth() * screenScale);
         int imageHeight = Math.round(imagePanel.getHeight() * screenScale);
-        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imageWidth, imageHeight) {
+        // On the Arena board a card image not yet scaled to this size is scaled away from the event thread, since that
+        // takes longer than a frame; the panel shows what it showed meanwhile (a card arriving is hidden while it flies in)
+        final Iterable<PlayerView> viewers = matchUI.getLocalPlayers();
+        final String wanted = card.getCurrentState().getImageKey(viewers) + "#" + imageWidth + "x" + imageHeight;
+        if (ArenaTheme.isEnabled() && !wanted.equals(imageScaleFailed)) {
+            if (wanted.equals(imageScaling)) {
+                return;
+            }
+            final ImageCache.PendingScale pending = ImageCache.prepareScale(card, viewers, imageWidth, imageHeight);
+            if (pending != null) {
+                imageScaling = wanted;
+                scaleAway(pending, scaled -> {
+                    if (wanted.equals(imageScaling)) {
+                        imageScaling = null;
+                        if (!scaled) {
+                            imageScaleFailed = wanted; // then the usual way, whatever it costs
+                        }
+                        if (card != null && imagePanel != null) {
+                            updateImage();
+                        }
+                    }
+                });
+                return;
+            }
+        }
+        cachedImage = new CachedCardImage(card, viewers, imageWidth, imageHeight) {
             @Override
             public void onImageFetched() {
                 if (cachedImage != null) {
@@ -326,14 +385,20 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return displayEnabled;
     }
     public final void setDisplayEnabled(final boolean displayEnabled0) {
-        displayEnabled = displayEnabled0;
+        if (displayEnabled != displayEnabled0) {
+            displayEnabled = displayEnabled0;
+            arenaContentChanged();
+        }
     }
 
     public int getGroupCount() {
         return groupCount;
     }
     public void setGroupCount(int count) {
-        this.groupCount = count;
+        if (this.groupCount != count) {
+            this.groupCount = count;
+            arenaContentChanged(); // the count is painted on it
+        }
     }
 
     public final void setAnimationPanel(final boolean isAnimationPanel0) {
@@ -365,7 +430,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private void paintArenaTurned(final Graphics2D g) {
         final double base = Math.max(1d, Math.abs(g.getTransform().getScaleX()));
         // while it moves nobody can see the difference, and it costs a good deal: the clean picture comes as it stops
-        final double scale = base * (base >= 1.5d || isArenaInMotion() ? 1 : 2);
+        final double scale = base * (base >= 1.5d || isArenaInMotion() || arenaQuickPaint ? 1 : 2);
         final java.awt.geom.AffineTransform turn = new java.awt.geom.AffineTransform();
         final float scaled = arenaMotionScale();
         final float cx = cardXOffset + cardWidth / 2f, cy = cardYOffset + cardHeight / 2f;
@@ -389,6 +454,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int reach = Math.round(cardWidth * (tile ? 0.13f : 0.2f));
         final Rectangle whole = new Rectangle(0, 0, getWidth(), getHeight()).intersection(new Rectangle(cardXOffset - reach, cardYOffset - reach,
                 cardWidth + 2 * reach, cardHeight + 2 * reach + cardHeight / 12));
+        if (isArenaInMotion() && !whole.isEmpty() && paintArenaMoving(g, turn, whole, scale)) {
+            return;
+        }
         Rectangle needed = whole;
         final Rectangle clip = g.getClipBounds();
         if (clip != null) {
@@ -426,6 +494,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             fg.setClip(needed);
             super.paint(fg);
             fg.dispose();
+            if (arenaKeepFlat && needed.equals(whole)) {
+                keepArenaRestFlat(flat, pw, ph, whole, base);
+            }
             final Graphics2D turned = (Graphics2D) g.create();
             try {
                 turned.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -448,9 +519,271 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
+    // A turned card at rest is drawn flat before it is turned; that flat picture is kept, so that when the card next
+    // moves (a hand fanning out again, a tap) it need not be drawn at all
+    private boolean arenaKeepFlat;
+    /** Which end of the breath the picture being made is, for a breathing card (its two flat pictures are kept). */
+    private float arenaKeepEnd;
+    private ArenaBlend arenaKeepBlend = ArenaBlend.NONE, arenaRestFlatBlend = ArenaBlend.NONE;
+    private BufferedImage arenaRestFlat, arenaRestFlatB;
+    private final Rectangle arenaRestFlatArea = new Rectangle();
+    private double arenaRestFlatScale;
+    private float arenaRestFlatTap;
+    private int arenaRestFlatContent, arenaRestFlatGeneration, arenaRestFlatW, arenaRestFlatH, arenaRestFlatCardX, arenaRestFlatCardY, arenaRestFlatCardW, arenaRestFlatCardH;
+
+    private void keepArenaRestFlat(final BufferedImage flat, final int pw, final int ph, final Rectangle whole, final double base) {
+        final int w = Math.max(1, (int) Math.ceil(whole.width * base)), h = Math.max(1, (int) Math.ceil(whole.height * base));
+        final BufferedImage kept = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB_PRE);
+        final Graphics2D kg = kept.createGraphics();
+        try {
+            kg.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            kg.setComposite(java.awt.AlphaComposite.Src);
+            kg.drawImage(flat, 0, 0, w, h, 0, 0, pw, ph, null);
+        } finally {
+            kg.dispose();
+        }
+        if (arenaKeepBlend == ArenaBlend.BREATH && arenaKeepEnd >= 1f) {
+            arenaRestFlatB = kept;
+        } else {
+            arenaRestFlat = kept;
+            arenaRestFlatB = null;
+        }
+        arenaRestFlatBlend = arenaKeepBlend;
+        arenaRestFlatArea.setBounds(whole);
+        arenaRestFlatScale = base;
+        arenaRestFlatTap = arenaTapAmount();
+        arenaRestFlatContent = arenaContent;
+        arenaRestFlatGeneration = ArenaRepaintManager.generation();
+        arenaRestFlatW = getWidth();
+        arenaRestFlatH = getHeight();
+        arenaRestFlatCardX = cardXOffset;
+        arenaRestFlatCardY = cardYOffset;
+        arenaRestFlatCardW = cardWidth;
+        arenaRestFlatCardH = cardHeight;
+    }
+
+    /** Whether the flat picture kept from this card's last rest still shows it as it is, at this scale. */
+    private boolean isArenaRestFlat(final double scale) {
+        return arenaRestFlat != null && arenaRestFlatContent == arenaContent && arenaRestFlatGeneration == ArenaRepaintManager.generation()
+                && arenaRestFlatScale == scale && arenaRestFlatW == getWidth() && arenaRestFlatH == getHeight()
+                && arenaRestFlatCardX == cardXOffset && arenaRestFlatCardY == cardYOffset && arenaRestFlatCardW == cardWidth && arenaRestFlatCardH == cardHeight;
+    }
+
+    // A moving card is painted flat once and only turned each frame
+    private BufferedImage arenaFlatFrom, arenaFlatTo;
+    private int arenaFlatContent, arenaFlatGeneration;
+    private double arenaFlatScale;
+    private ArenaBlend arenaFlatBlend = ArenaBlend.NONE;
+    private final Rectangle arenaFlatFromArea = new Rectangle(), arenaFlatToArea = new Rectangle();
+
+    /** How far along a blend is now, from its first picture (0) to its second (1). */
+    private float arenaBlendAmount(final ArenaBlend blend) {
+        switch (blend) {
+            case TAP: return arenaTapAmount();
+            case GLOW: return glowMix.get();
+            case BREATH: return ArenaMotion.pulse(this, arenaBreathPeriod); // asking for the next breath, too
+            default: return 0f;
+        }
+    }
+
+    /**
+     * Turns the flat pictures of a moving card into place. Only geometry changes from one frame of a glide, a lift or a
+     * lean to the next, so the card is not drawn again; a tap or a change of glow on the way is a crossfade of two.
+     */
+    private boolean paintArenaMoving(final Graphics2D g, final java.awt.geom.AffineTransform turn, final Rectangle whole, final double scale) {
+        final boolean tapping = running(tapTween), glowing = glowMix.isMoving();
+        // both at once cannot be told apart in two pictures: then it is drawn again each frame, as it always was
+        final boolean both = tapping && glowing;
+        final ArenaBlend blend = both ? ArenaBlend.NONE : tapping ? ArenaBlend.TAP : glowing ? ArenaBlend.GLOW
+                : arenaBreathPeriod > 0f ? ArenaBlend.BREATH : ArenaBlend.NONE;
+        final boolean current = !both && arenaFlatFrom != null && arenaFlatContent == arenaContent && arenaFlatGeneration == ArenaRepaintManager.generation()
+                && arenaFlatScale == scale && arenaFlatBlend == blend;
+        // when this frame has drawn as much as it can afford, a card goes on as it looked a moment ago, and is drawn anew a frame later
+        boolean stale = false;
+        if (!current) {
+            // a card that was standing still already has a flat picture of itself: flat as it stood, or kept from its turning
+            final boolean breathing = blend == ArenaBlend.BREATH;
+            final boolean restFlat = blend != ArenaBlend.GLOW && isArenaRestFlat(scale)
+                    && (breathing ? arenaRestFlatBlend == ArenaBlend.BREATH && arenaRestFlatB != null : arenaRestFlatBlend == ArenaBlend.NONE);
+            if (!breathing && blend != ArenaBlend.GLOW && isArenaRestPicture(scale)) {
+                arenaFlatFrom = arenaPicture;
+                arenaFlatFromArea.setBounds(0, 0, getWidth(), getHeight());
+            } else if (restFlat && (blend != ArenaBlend.TAP || arenaRestFlatTap <= 0f)) {
+                arenaFlatFrom = arenaRestFlat;
+                arenaFlatFromArea.setBounds(arenaRestFlatArea);
+            } else if (!both && arenaFlatFrom != null && arenaFlatScale == scale && !arenaPictureBudget()) {
+                stale = true; // what it had
+                if (arenaFlatBlend != blend) {
+                    arenaFlatTo = null;
+                }
+            } else if (!both && arenaFlatFrom == null && arenaRestFlat != null && arenaRestFlatScale == scale
+                    && arenaRestFlatW == getWidth() && arenaRestFlatH == getHeight() && !arenaPictureBudget()) {
+                stale = true; // how it stood a moment ago
+                arenaFlatFrom = arenaRestFlat;
+                arenaFlatFromArea.setBounds(arenaRestFlatArea);
+                arenaFlatTo = null;
+            } else {
+                final long start = System.nanoTime();
+                arenaFlatFrom = arenaFlat(whole, scale, blend, 0f);
+                arenaFlatFromArea.setBounds(whole);
+                arenaBudgetSpent += System.nanoTime() - start;
+            }
+        }
+        if (!current && !stale) {
+            arenaFlatTo = null;
+            final boolean breathing = blend == ArenaBlend.BREATH;
+            final boolean restFlat = blend != ArenaBlend.GLOW && isArenaRestFlat(scale)
+                    && (breathing ? arenaRestFlatBlend == ArenaBlend.BREATH && arenaRestFlatB != null : arenaRestFlatBlend == ArenaBlend.NONE);
+            if (breathing && restFlat) {
+                arenaFlatTo = arenaRestFlatB;
+                arenaFlatToArea.setBounds(arenaRestFlatArea);
+            } else if (blend == ArenaBlend.TAP && restFlat && arenaRestFlatTap >= 1f) {
+                // untapping: how it stood is how the tap ends
+                arenaFlatTo = arenaRestFlat;
+                arenaFlatToArea.setBounds(arenaRestFlatArea);
+            }
+            arenaFlatContent = arenaContent;
+            arenaFlatGeneration = ArenaRepaintManager.generation();
+            arenaFlatScale = scale;
+            arenaFlatBlend = blend;
+        }
+        arenaPicture = null;
+        arenaPictureTo = null;
+        if (blend != ArenaBlend.NONE && !stale && arenaFlatTo == null && arenaPictureBudget()) {
+            // the other end: when several cards start at once, these are spread over the first frames
+            final long start = System.nanoTime();
+            arenaFlatTo = arenaFlat(whole, scale, blend, 1f);
+            arenaFlatToArea.setBounds(whole);
+            arenaBudgetSpent += System.nanoTime() - start;
+        }
+        final float amount = arenaFlatTo != null ? ArenaMotion.clamp01(arenaBlendAmount(blend)) : 0f;
+        if (amount > 0f && amount < 1f && arenaFlatFromArea.equals(arenaFlatToArea)) {
+            // mixed flat first, which is cheap, so that the dear part, turning it, is done once
+            drawArenaFlat(g, turn, arenaMixed(arenaFlatFrom, arenaFlatTo, amount), arenaFlatToArea, scale, arrivalAlpha);
+            return true;
+        }
+        if (amount < 1f) {
+            drawArenaFlat(g, turn, arenaFlatFrom, arenaFlatFromArea, scale, arrivalAlpha);
+        }
+        if (amount > 0f) {
+            drawArenaFlat(g, turn, arenaFlatTo, arenaFlatToArea, scale, amount < 1f ? arrivalAlpha * amount : arrivalAlpha);
+        }
+        return true;
+    }
+
+    /** One picture to mix two of the same size in, for the moment it takes to turn the mix into place. */
+    private static BufferedImage arenaMixScratch;
+
+    private static BufferedImage arenaMixed(final BufferedImage from, final BufferedImage to, final float amount) {
+        final int w = from.getWidth(), h = from.getHeight();
+        if (arenaMixScratch == null || arenaMixScratch.getWidth() < w || arenaMixScratch.getHeight() < h) {
+            arenaMixScratch = new BufferedImage(Math.max(w, arenaMixScratch == null ? 0 : arenaMixScratch.getWidth()),
+                    Math.max(h, arenaMixScratch == null ? 0 : arenaMixScratch.getHeight()), BufferedImage.TYPE_INT_ARGB_PRE);
+        }
+        final Graphics2D mg = arenaMixScratch.createGraphics();
+        try {
+            mg.setComposite(java.awt.AlphaComposite.Src);
+            mg.drawImage(from, 0, 0, null);
+            mg.setComposite(java.awt.AlphaComposite.SrcOver.derive(amount));
+            mg.drawImage(to, 0, 0, null);
+        } finally {
+            mg.dispose();
+        }
+        return arenaMixScratch.getSubimage(0, 0, w, h);
+    }
+
+    private static void drawArenaFlat(final Graphics2D g, final java.awt.geom.AffineTransform turn, final BufferedImage flat, final Rectangle area, final double scale, final float alpha) {
+        final Graphics2D turned = (Graphics2D) g.create();
+        try {
+            turned.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            turned.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            if (alpha < 1f) {
+                turned.setComposite(java.awt.AlphaComposite.SrcOver.derive(alpha));
+            }
+            turned.transform(turn);
+            turned.translate(area.x, area.y);
+            turned.scale(1d / scale, 1d / scale);
+            turned.drawImage(flat, 0, 0, null);
+        } finally {
+            turned.dispose();
+        }
+    }
+
+    /** Whether the picture kept of this card at rest is still right and shows it flat and as it is, at this scale. */
+    private boolean isArenaRestPicture(final double scale) {
+        return arenaPicture != null && arenaPictureBlend == ArenaBlend.NONE && arenaPictureContent == arenaContent && arenaPictureGeneration == ArenaRepaintManager.generation()
+                && arenaPictureScale == scale && arenaPictureW == getWidth() && arenaPictureH == getHeight()
+                && arenaPictureCardX == cardXOffset && arenaPictureCardY == cardYOffset && arenaPictureCardW == cardWidth && arenaPictureCardH == cardHeight
+                && arenaPictureAngle == 0d && arenaPictureLean == 0d && arenaPictureMotionScale == 1f;
+    }
+
+    /** Whether this frame still has time for making a picture. */
+    private static boolean arenaPictureBudget() {
+        final long now = System.nanoTime();
+        if (now - arenaBudgetFrom > 8_000_000L) {
+            arenaBudgetFrom = now;
+            arenaBudgetSpent = 0;
+        }
+        return arenaBudgetSpent < ARENA_PICTURE_BUDGET_NANOS;
+    }
+
+    /** This card as it stands, unturned, over the given part of the panel, at one end of a blend. */
+    private BufferedImage arenaFlat(final Rectangle area, final double scale, final ArenaBlend blend, final float end) {
+        final int pw = Math.max(1, (int) Math.ceil(area.width * scale)), ph = Math.max(1, (int) Math.ceil(area.height * scale));
+        final BufferedImage flat = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_ARGB_PRE);
+        final Graphics2D fg = flat.createGraphics();
+        forceArenaBlend(blend, end);
+        try {
+            fg.scale(scale, scale);
+            fg.translate(-area.x, -area.y);
+            fg.setClip(area);
+            super.paint(fg);
+        } finally {
+            forceArenaBlend(ArenaBlend.NONE, Float.NaN);
+            fg.dispose();
+        }
+        return flat;
+    }
+
+    /** Has the card paint itself at one end of a blend; NONE puts everything back as it is. */
+    private void forceArenaBlend(final ArenaBlend blend, final float end) {
+        arenaTapForced = blend == ArenaBlend.TAP ? end : Float.NaN;
+        arenaMixForced = blend == ArenaBlend.GLOW ? end : Float.NaN;
+        arenaWaveForced = blend == ArenaBlend.BREATH ? end : Float.NaN;
+    }
+
+    /** Where this card's glow is in its breath, from 0 to 1; asking for the next breath as it goes. */
+    private float arenaWave() {
+        final float wave = ArenaMotion.pulse(this, arenaBreathPeriod);
+        return Float.isNaN(arenaWaveForced) ? wave : arenaWaveForced;
+    }
+
+    /** A repaint for a frame of a glide, lift, lean, arrival or jolt: the card moves, but nothing on it changes. */
+    private void repaintArenaMotion() {
+        final int content = arenaContent;
+        repaint();
+        arenaContent = content;
+    }
+
+    /**
+     * Moves or resizes the panel without that counting as a change to how the card looks (Swing repaints a
+     * component it moves, which would otherwise throw its picture away every frame of a glide). A new size is
+     * part of what a picture is kept for, so that still makes a new one.
+     */
+    private void placeArenaPanel(final Runnable move) {
+        final int content = arenaContent;
+        ArenaRepaintManager.overBoard(move);
+        arenaContent = content;
+    }
+
     /** Whether this card is turned, moved or fading at the moment, and so cannot just be painted where it stands. */
     private boolean isArenaMoved() {
         return getTappedAngle() > 0 || fanLean.get() != 0f || arenaMotionScale() != 1f || arrivalAlpha < 1f || arrivalDrop != 0f || hitShake != 0f;
+    }
+
+    /** Whether this card is turning, growing or fading from frame to frame; one only sliding across is not. */
+    private boolean isArenaReshaping() {
+        return running(tapTween) || running(arrival) || running(hitTween) || fanLean.isMoving() || hoverLift.isMoving() || running(glide) && glideScale != 1f;
     }
 
     /** Whether this card will be painted again in a moment anyway. */
@@ -469,6 +802,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     /** How far from untapped this card is showing: 1 at rest once tapped. */
     private float arenaTapAmount() {
+        if (!Float.isNaN(arenaTapForced)) {
+            return arenaTapForced;
+        }
         return ArenaMotion.clamp01((float) (getTappedAngle() / ARENA_TAPPED_ANGLE));
     }
 
@@ -492,7 +828,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // it swings over a little past the tilt, and just settles back when untapped
         tapTween = ArenaMotion.play(tapped0 ? 240 : 190, tapped0 ? ArenaMotion.BACK : ArenaMotion.OUT, t -> {
             tappedAngle = Math.max(0d, from + (goal - from) * t);
-            repaint();
+            repaintArenaMotion(); // the colour going is a crossfade of the two flat pictures: see paintArenaMoving
         }, () -> {
             tappedAngle = goal;
             tapTween = null;
@@ -522,7 +858,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         arenaHidden = false;
         arrival = ArenaMotion.play(millis, delay, ArenaMotion.OUT, t -> {
             arrivalAlpha = t;
-            repaint();
+            repaintArenaMotion();
         }, () -> {
             arrivalAlpha = 1f;
             arrival = null;
@@ -547,7 +883,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             arrivalAlpha = ArenaMotion.clamp01(t * 1.6f);
             arrivalScale = ArenaMotion.lerp(1.16f, 1f, t);
             arrivalDrop = drop * (1f - t);
-            repaint();
+            repaintArenaMotion();
         }, () -> {
             arrivalAlpha = 1f;
             arrivalScale = 1f;
@@ -614,7 +950,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final float reach = Math.max(3f, cardWidth * 0.028f);
         hitTween = ArenaMotion.play(300, ArenaMotion.LINEAR, t -> {
             hitShake = (float) Math.sin(t * Math.PI * 5d) * reach * (1f - t);
-            repaint();
+            repaintArenaMotion();
         }, () -> {
             hitShake = 0f;
             hitTween = null;
@@ -628,6 +964,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return ArenaTheme.isEnabled() ? ARENA_TAPPED_ANGLE : TAPPED_ANGLE;
     }
 
+    /** Something inside this card has changed, so the picture it keeps of itself has to be made again. */
+    final void arenaContentChanged() {
+        arenaContent++;
+    }
+
     @Override
     public final void paint(final Graphics g) {
         if (!displayEnabled) {
@@ -636,10 +977,161 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (!isValid()) {
             super.validate();
         }
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         if (arenaHidden && !ArenaTheme.snapshotting) {
             return;
         }
+        if (ArenaTheme.isEnabled() && !ArenaTheme.snapshotting && getWidth() > 0 && getHeight() > 0) {
+            ArenaRepaintManager.install(this);
+            final boolean steady = arenaContent == arenaContentPainted && ArenaRepaintManager.generation() == arenaGenerationPainted;
+            arenaContentPainted = arenaContent;
+            arenaGenerationPainted = ArenaRepaintManager.generation();
+            if (paintArenaPicture(g2d, steady)) {
+                return;
+            }
+            if (!isArenaInMotion() && !isAnimationPanel) {
+                // drawn quickly for now, as if moving; once it holds still a clean picture is made of it
+                arenaQuickPaint = true;
+                try {
+                    paintUncached(g2d);
+                } finally {
+                    arenaQuickPaint = false;
+                }
+                settleArenaLater();
+                return;
+            }
+        }
+        paintUncached(g2d);
+    }
+
+    /** Set while a card at rest is drawn without its picture, which it then is again cleanly a moment later. */
+    private boolean arenaQuickPaint;
+    private javax.swing.Timer arenaSettle;
+
+    private void settleArenaLater() {
+        if (arenaSettle == null) {
+            // the clean picture is made once nothing at all is moving, where a longer frame is not seen
+            arenaSettle = new javax.swing.Timer(150, e -> {
+                if (ArenaMotion.isAnimating()) {
+                    arenaSettle.restart();
+                } else {
+                    repaintArenaMotion();
+                }
+            });
+            arenaSettle.setRepeats(false);
+        }
+        arenaSettle.restart();
+    }
+
+    /**
+     * Paints this card from the picture it keeps of itself, making that first if it has held still since it was last
+     * painted. False if it has to be drawn as usual: it is moving or changing, or this frame has made enough pictures.
+     */
+    private boolean paintArenaPicture(final Graphics2D g, final boolean steady) {
+        if (isAnimationPanel || isArenaReshaping() || arrivalAlpha < 1f || statsPop.isMoving() || hitFlash.isMoving()) {
+            return false; // a tap starting takes the picture over, see paintArenaMoving
+        }
+        if (!isArenaInMotion()) {
+            // at rest: the pictures for moving are done with (one only sliding still uses them, should this not do)
+            arenaFlatFrom = null;
+            arenaFlatTo = null;
+        }
+        final java.awt.geom.AffineTransform t = g.getTransform();
+        if ((t.getType() & ~(java.awt.geom.AffineTransform.TYPE_TRANSLATION | java.awt.geom.AffineTransform.TYPE_UNIFORM_SCALE)) != 0) {
+            return false; // turned or skewed: not a picture laid square on the screen
+        }
+        final double scale = t.getScaleX();
+        final int w = getWidth(), h = getHeight();
+        // a glow giving way to another, or one breathing, is a crossfade of two pictures (as of its last paint)
+        final ArenaBlend blend = glowMix.isMoving() ? ArenaBlend.GLOW : arenaBreathPeriod > 0f ? ArenaBlend.BREATH : ArenaBlend.NONE;
+        final boolean animating = ArenaMotion.isAnimating();
+        final boolean current = arenaPicture != null && (!arenaPictureDraft || animating) && arenaPictureBlend == blend && (blend == ArenaBlend.NONE || arenaPictureTo != null)
+                && arenaPictureContent == arenaContent && arenaPictureGeneration == ArenaRepaintManager.generation()
+                && arenaPictureScale == scale && arenaPictureW == w && arenaPictureH == h
+                && arenaPictureCardX == cardXOffset && arenaPictureCardY == cardYOffset && arenaPictureCardW == cardWidth && arenaPictureCardH == cardHeight
+                && arenaPictureAngle == getTappedAngle() && arenaPictureLean == fanLean.get() && arenaPictureMotionScale == arenaMotionScale();
+        if (!current) {
+            arenaPicture = null;
+            arenaPictureTo = null;
+            if (!steady || !arenaPictureBudget()) {
+                return false; // just changed (it may well change again next frame), or no time left in this one
+            }
+            final long start = System.nanoTime();
+            // while anything moves, a turned card is drawn plainly (a quarter of the work), and drawn finely once all is still
+            arenaPictureDraft = animating;
+            ArenaBlend made = blend;
+            BufferedImage picture = arenaRestPicture(w, h, scale, made, 0f);
+            // painting it may have shown it is breathing after all, or has stopped
+            final ArenaBlend now = glowMix.isMoving() ? ArenaBlend.GLOW : arenaBreathPeriod > 0f ? ArenaBlend.BREATH : ArenaBlend.NONE;
+            if (now != made) {
+                made = now;
+                picture = arenaRestPicture(w, h, scale, made, 0f);
+            }
+            arenaPicture = picture;
+            arenaPictureTo = made == ArenaBlend.NONE ? null : arenaRestPicture(w, h, scale, made, 1f);
+            arenaPictureBlend = made;
+            arenaPictureContent = arenaContent;
+            arenaPictureGeneration = ArenaRepaintManager.generation();
+            arenaPictureScale = scale;
+            arenaPictureW = w;
+            arenaPictureH = h;
+            arenaPictureCardX = cardXOffset;
+            arenaPictureCardY = cardYOffset;
+            arenaPictureCardW = cardWidth;
+            arenaPictureCardH = cardHeight;
+            arenaPictureAngle = getTappedAngle();
+            arenaPictureLean = fanLean.get();
+            arenaPictureMotionScale = arenaMotionScale();
+            arenaBudgetSpent += System.nanoTime() - start;
+            if (arenaPictureDraft) {
+                settleArenaLater();
+            }
+        }
+        // laid on whole device pixels, so it is copied rather than resampled
+        final float amount = arenaPictureTo == null ? 0f : ArenaMotion.clamp01(arenaBlendAmount(arenaPictureBlend));
+        final Graphics2D square = (Graphics2D) g.create();
+        try {
+            square.setTransform(java.awt.geom.AffineTransform.getTranslateInstance(Math.round(t.getTranslateX()), Math.round(t.getTranslateY())));
+            if (amount < 1f) {
+                square.drawImage(arenaPicture, 0, 0, null);
+            }
+            if (amount > 0f) {
+                if (amount < 1f) {
+                    square.setComposite(java.awt.AlphaComposite.SrcOver.derive(amount));
+                }
+                square.drawImage(arenaPictureTo, 0, 0, null);
+            }
+        } finally {
+            square.dispose();
+        }
+        return true;
+    }
+
+    /** The whole panel as it is now, at one end of a blend, in device pixels. */
+    private BufferedImage arenaRestPicture(final int w, final int h, final double scale, final ArenaBlend blend, final float end) {
+        final int pw = Math.max(1, (int) Math.ceil(w * scale)), ph = Math.max(1, (int) Math.ceil(h * scale));
+        final BufferedImage picture = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_ARGB_PRE);
+        final Graphics2D pg = picture.createGraphics();
+        forceArenaBlend(blend, end);
+        // a card painted as it is: if it is turned, the flat picture made on the way is kept for its next move
+        arenaKeepFlat = blend == ArenaBlend.NONE || blend == ArenaBlend.BREATH;
+        arenaKeepBlend = blend;
+        arenaKeepEnd = end;
+        arenaQuickPaint = arenaPictureDraft;
+        try {
+            pg.scale(scale, scale);
+            pg.setClip(0, 0, w, h);
+            paintUncached(pg);
+        } finally {
+            arenaKeepFlat = false;
+            arenaQuickPaint = false;
+            forceArenaBlend(ArenaBlend.NONE, Float.NaN);
+            pg.dispose();
+        }
+        return picture;
+    }
+
+    private void paintUncached(Graphics2D g2d) {
         if (ArenaTheme.isEnabled() && isArenaMoved() && getWidth() > 0 && getHeight() > 0) {
             paintArenaTurned(g2d);
             return;
@@ -836,14 +1328,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             glowNowStrength = strength;
             glowSeen = true;
         }
-        final float mix = ArenaTheme.snapshotting ? 1f : glowMix.get();
+        final float mix = ArenaTheme.snapshotting ? 1f : Float.isNaN(arenaMixForced) ? glowMix.get() : arenaMixForced;
         final Color fading = mix < 1f && !ArenaTheme.snapshotting ? glowWas : null;
         // what can be picked now breathes, and so does what can be played from the hand, so as to be noticed
         float breath = 1f;
+        arenaBreathPeriod = 0f;
         if (glow == ArenaTheme.SELECTABLE && !ArenaTheme.snapshotting) {
-            breath = 0.72f + 0.28f * ArenaMotion.pulse(this, 1.5f);
+            arenaBreathPeriod = 1.5f;
+            breath = 0.72f + 0.28f * arenaWave();
         } else if (glow == ArenaTheme.PLAYABLE && !isSelected && arenaCostWidth > 0 && !ArenaTheme.snapshotting) {
-            breath = 0.8f + 0.2f * ArenaMotion.pulse(this, 2.4f);
+            arenaBreathPeriod = 2.4f;
+            breath = 0.8f + 0.2f * arenaWave();
         }
         final float glowAlpha = mix * breath;
         final java.awt.Composite solid = g2d.getComposite();
@@ -1048,6 +1543,29 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // the art box is about 45% of a card's height
         final int srcH = Math.min(1040, Math.max(Math.round(cardHeight * screenScale), Math.round(ph / 0.45f)));
         if (tileSource == null || tileSourceHeight != srcH) {
+            final int srcW = Math.round(srcH / ASPECT_RATIO);
+            // scaling a card image takes longer than a frame: if it is not to hand at this size, it is made away
+            // from the event thread, and the tile shows its art cut from the card image it already has meanwhile
+            if (tileScaleFailed != srcH) {
+                if (tileScaling == srcH) {
+                    return getArenaStandInArt(pw, ph);
+                }
+                final ImageCache.PendingScale pending = ImageCache.prepareScale(card, matchUI.getLocalPlayers(), srcW, srcH);
+                if (pending != null) {
+                    tileScaling = srcH;
+                    scaleAway(pending, scaled -> {
+                        if (tileScaling == srcH) {
+                            tileScaling = -1;
+                            if (!scaled) {
+                                tileScaleFailed = srcH;
+                            }
+                            tileArt = null;
+                            repaint();
+                        }
+                    });
+                    return getArenaStandInArt(pw, ph);
+                }
+            }
             tileSourceHeight = srcH;
             tileSource = new CachedCardImage(card, matchUI.getLocalPlayers(), Math.round(srcH / ASPECT_RATIO), srcH) {
                 @Override
@@ -1056,7 +1574,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     repaint();
                 }
             };
-            tileArt = null;
         }
         final BufferedImage src = tileSource.getImage();
         if (src == null) {
@@ -1080,6 +1597,61 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             tileArtSource = src;
         }
         return tileArt;
+    }
+
+    /** One thread that scales card images for tiles, so that a card coming onto the board does not stall a frame. */
+    private static final java.util.concurrent.ExecutorService ARENA_TILE_SCALER = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        final Thread t = new Thread(r, "Arena tile images");
+        t.setDaemon(true);
+        t.setPriority(Thread.NORM_PRIORITY - 1);
+        return t;
+    });
+    /** The card image (key and size) being scaled for this panel away from the event thread, and one that could not be. */
+    private String imageScaling, imageScaleFailed;
+    /** The height of card image being scaled for this tile away from the event thread, or -1. */
+    private int tileScaling = -1;
+    /** A height whose scaling came to nothing (no image yet, say): that goes the usual way, which fetches it. */
+    private int tileScaleFailed = -1;
+    private BufferedImage tileStandIn, tileStandInFrom;
+
+    /** Scales a card image on the scaler's thread, keeps it in the image cache, then says on the event thread whether it worked. */
+    private static void scaleAway(final ImageCache.PendingScale pending, final java.util.function.Consumer<Boolean> then) {
+        ARENA_TILE_SCALER.execute(() -> {
+            BufferedImage scaled;
+            try {
+                scaled = pending.scale();
+            } catch (final RuntimeException e) {
+                scaled = null;
+            }
+            final BufferedImage made = scaled;
+            SwingUtilities.invokeLater(() -> {
+                ImageCache.storeScaled(pending, made);
+                then.accept(made != null);
+            });
+        });
+    }
+
+    /** For the moment the tile's own image is being scaled: its art cut from the card image the panel already shows. */
+    private BufferedImage getArenaStandInArt(final int pw, final int ph) {
+        final BufferedImage src = imagePanel == null ? null : imagePanel.getSrcImage();
+        if (src == null) {
+            return null;
+        }
+        if (tileStandIn == null || tileStandInFrom != src || tileStandIn.getWidth() != pw || tileStandIn.getHeight() != ph) {
+            final float sx = src.getWidth() * 0.1f, sy = src.getHeight() * 0.11f;
+            final float sw = src.getWidth() * 0.8f, sh = src.getHeight() * 0.45f;
+            final float fit = Math.max(pw / sw, ph / sh);
+            final float cw = pw / fit, ch = ph / fit;
+            final float cx = sx + (sw - cw) / 2f, cy = sy + (sh - ch) * 0.22f;
+            final BufferedImage art = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_RGB);
+            final Graphics2D ag = art.createGraphics();
+            ag.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            ag.drawImage(src, 0, 0, pw, ph, Math.round(cx), Math.round(cy), Math.round(cx + cw), Math.round(cy + ch), null);
+            ag.dispose();
+            tileStandIn = art;
+            tileStandInFrom = src;
+        }
+        return tileStandIn;
     }
 
     /**
@@ -1848,7 +2420,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * uncovered, which its cost lines up with. Call before setCardBounds, which makes room for both.
      */
     public final void setArenaFan(final double angle, final int costWidth) {
-        arenaCostWidth = costWidth;
+        if (arenaCostWidth != costWidth) {
+            arenaCostWidth = costWidth;
+            arenaContentChanged(); // the cost lines up with what the neighbour leaves showing
+        }
         if (angle != arenaFanAngle) {
             arenaFanAngle = angle;
             if (cardWidth > 0 && displayEnabled && !arenaHidden && isShowing()) {
@@ -1861,7 +2436,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     /** Arena board: this card is tucked behind another in its pile. */
     public final void setArenaStackBack(final boolean back) {
-        arenaStackBack = back;
+        if (arenaStackBack != back) {
+            arenaStackBack = back;
+            arenaContentChanged(); // set by a layout, which does not repaint the card itself
+        }
     }
 
     public final double getArenaFanAngle() {
@@ -2149,13 +2727,24 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void repaint() {
+        // a breath of the glow is a crossfade of the two pictures this card keeps for it: nothing to draw again
+        if (!(ArenaMotion.isAmbientRepaint() && (arenaPictureBlend == ArenaBlend.BREATH && arenaPicture != null
+                || arenaFlatBlend == ArenaBlend.BREATH && arenaFlatFrom != null))) {
+            arenaContent++;
+        }
         final Rectangle b = getBounds();
         final JRootPane rootPane = SwingUtilities.getRootPane(this);
         if (rootPane == null) {
             return;
         }
         final Point p = SwingUtilities.convertPoint(getParent(), b.x, b.y, rootPane);
-        rootPane.repaint(p.x, p.y, b.width, b.height);
+        // counted just above: what changed is this card, not the board
+        ArenaRepaintManager.cardAsking = true;
+        try {
+            rootPane.repaint(p.x, p.y, b.width, b.height);
+        } finally {
+            ArenaRepaintManager.cardAsking = false;
+        }
     }
 
     /**
@@ -2174,27 +2763,31 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 || getParent() instanceof CardPanelContainer container && container.isLayoutSnapping()
                 || startScale > ARENA_MOST_SCALE || startScale < 1f / ARENA_MOST_SCALE;
         cancelGlide();
+        // a card being put in its place changes how no other card looks; its own size is part of its picture
         if (snap || dx == 0 && dy == 0 && startScale == 1f) {
-            setBounds(bx, by, bw, bh);
+            placeArenaPanel(() -> setBounds(bx, by, bw, bh));
             return;
         }
         glideToX = bx;
         glideToY = by;
         glideScale = startScale;
-        setBounds(bx + dx, by + dy, bw, bh);
+        placeArenaPanel(() -> setBounds(bx + dx, by + dy, bw, bh));
         final int distance = Math.abs(dx) + Math.abs(dy);
         final int millis = Math.min(320, 120 + Math.round(distance * 0.35f));
         glide = ArenaMotion.play(millis, ArenaMotion.OUT, t -> {
-            setLocation(bx + Math.round(dx * (1f - t)), by + Math.round(dy * (1f - t)));
+            placeArenaPanel(() -> setLocation(bx + Math.round(dx * (1f - t)), by + Math.round(dy * (1f - t))));
             if (startScale != 1f) {
                 glideScale = ArenaMotion.lerp(startScale, 1f, t);
-                repaint();
+                repaintArenaMotion();
             }
         }, () -> {
             glide = null;
+            final boolean scaled = glideScale != 1f;
             glideScale = 1f;
-            setLocation(bx, by);
-            repaint();
+            placeArenaPanel(() -> setLocation(bx, by));
+            if (scaled) {
+                repaint(); // the clean picture at its own size, now that it has stopped
+            }
         });
     }
 
@@ -2322,6 +2915,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     @Override
     public void dispose() {
         cancelGlide();
+        if (arenaSettle != null) {
+            arenaSettle.stop();
+        }
         if (tapTween != null) {
             tapTween.cancel();
         }
@@ -2334,6 +2930,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         attachedToPanel = null;
         attachedPanels = null;
         stack = null;
+        arenaPicture = null;
+        arenaPictureTo = null;
+        arenaFlatFrom = null;
+        arenaFlatTo = null;
         imagePanel.setImage(null);
         imagePanel = null;
         card = null;

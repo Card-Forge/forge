@@ -300,6 +300,35 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         }
     }
 
+    // the body of the button lit and unlit, drawn once each: the light rising and falling only mixes the two
+    private final java.awt.image.BufferedImage[] arenaFaces = new java.awt.image.BufferedImage[2];
+    private Object[] arenaFacesOf;
+
+    private void paintArenaFace(final Graphics2D g, final boolean lit, final boolean pressed) {
+        final int w = getWidth(), h = getHeight();
+        final double device = getGraphicsConfiguration() == null ? 1d : getGraphicsConfiguration().getDefaultTransform().getScaleX();
+        final Object[] of = {w, h, primary, pressed, isFocusOwner(), toggle, isEnabled(), device};
+        if (!java.util.Arrays.equals(of, arenaFacesOf)) {
+            arenaFaces[0] = null;
+            arenaFaces[1] = null;
+            arenaFacesOf = of;
+        }
+        final int i = lit ? 1 : 0;
+        if (arenaFaces[i] == null) {
+            final java.awt.image.BufferedImage face = new java.awt.image.BufferedImage(Math.max(1, (int) Math.ceil(w * device)),
+                    Math.max(1, (int) Math.ceil(h * device)), java.awt.image.BufferedImage.TYPE_INT_ARGB_PRE);
+            final Graphics2D fg = face.createGraphics();
+            try {
+                fg.scale(device, device);
+                ArenaTheme.paintButton(fg, w, h, primary, lit, pressed, isFocusOwner(), toggle, isEnabled());
+            } finally {
+                fg.dispose();
+            }
+            arenaFaces[i] = face;
+        }
+        g.drawImage(arenaFaces[i], 0, 0, w, h, null);
+    }
+
     private void paintArena(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g.create();
         try {
@@ -327,11 +356,11 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
                 light = Math.max(light, 0.55f * ArenaMotion.pulse(this, 2.2f));
             }
             if (light < 1f) {
-                ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, false, pressed, isFocusOwner(), toggle, isEnabled());
+                paintArenaFace(g2d, false, pressed);
             }
             if (light > 0f) {
                 g2d.setComposite(AlphaComposite.SrcOver.derive(wholeAlpha * light));
-                ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, true, pressed, isFocusOwner(), toggle, isEnabled());
+                paintArenaFace(g2d, true, pressed);
                 g2d.setComposite(whole);
             }
             final String text = arenaLabel != null ? arenaLabel : getText();

@@ -597,7 +597,15 @@ public class TargetingOverlay {
 
         // Arena: one full repaint once things settle, so that anything which changed without asking to be
         // repainted still comes right, without every small repaint costing a whole window as it otherwise did
-        private final javax.swing.Timer settled = new javax.swing.Timer(150, e -> FView.SINGLETON_INSTANCE.getFrame().repaint());
+        // it waits for anything moving to stop, since a whole window costs more than a frame and would show as a stutter
+        private final javax.swing.Timer settled = new javax.swing.Timer(150, e -> {
+            if (ArenaMotion.isAnimating()) {
+                ((javax.swing.Timer) e.getSource()).restart();
+                return;
+            }
+            // this is for the arrows: the cards say for themselves when they change, so their pictures stand
+            forge.view.arcane.ArenaRepaintManager.overBoard(() -> FView.SINGLETON_INSTANCE.getFrame().repaint());
+        });
         private long settlingSince;
 
         private void repaintOnceSettled(final Graphics g) {

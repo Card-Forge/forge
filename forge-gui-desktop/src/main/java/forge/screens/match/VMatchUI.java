@@ -120,9 +120,13 @@ public class VMatchUI implements IVTopLevelUI {
             if (parent != null) {
                 parent.removeDoc(vField);
                 vField.setParentCell(null);
-                if (parent != c0 && parent != c1 && parent.getDocs().isEmpty()) {
-                    SRearrangingUtil.fillGap(parent);
-                    FView.SINGLETON_INSTANCE.removeDragCell(parent);
+                // A dynamic split cell is removed below without filling its gap, since the base
+                // cells are stretched over the whole row afterwards; asking its neighbours to fill
+                // it can fail when several split cells sit side by side ("Gap was not filled").
+                if (parent != c0 && parent != c1 && parent.getDocs().isEmpty() && !dynamicCells.contains(parent)) {
+                    if (fillGapIfPossible(parent)) {
+                        FView.SINGLETON_INSTANCE.removeDragCell(parent);
+                    }
                 }
             }
         }
@@ -147,6 +151,21 @@ public class VMatchUI implements IVTopLevelUI {
         }
         if (c1 != null) {
             c1.setRoughBounds(computeFieldRegion(c1));
+        }
+    }
+
+    /**
+     * Has the neighbours of an emptied cell take over its space. False if no neighbour lines up with
+     * it: the cell is then better kept (empty) than removed and its space left unpainted, and the
+     * screen update goes on rather than failing.
+     */
+    private static boolean fillGapIfPossible(final DragCell emptied) {
+        try {
+            SRearrangingUtil.fillGap(emptied);
+            return true;
+        } catch (final UnsupportedOperationException e) {
+            System.err.println("Layout: could not fill the space of an empty panel; keeping it: " + e.getMessage());
+            return false;
         }
     }
 
@@ -276,8 +295,9 @@ public class VMatchUI implements IVTopLevelUI {
         SwingUtilities.invokeLater(() -> {
             for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
                 if (c.getDocs().isEmpty()) {
-                    SRearrangingUtil.fillGap(c);
-                    FView.SINGLETON_INSTANCE.removeDragCell(c);
+                    if (fillGapIfPossible(c)) {
+                        FView.SINGLETON_INSTANCE.removeDragCell(c);
+                    }
                 }
             }
         });
