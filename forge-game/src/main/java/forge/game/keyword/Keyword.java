@@ -103,6 +103,7 @@ public enum Keyword {
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HIDDEN_AGENDA("Hidden agenda", SimpleKeyword.class, false, "Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name."),
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
+    HOST("Host", KeywordWithCost.class, false, "%s: Host target creature at this Realm. A Realm can host any number of creatures. Host only as a sorcery."),
     IMPENDING("Impending", KeywordWithCostAndAmount.class, false, "If you cast this spell for its impending cost, it enters with {%2$d:time counter} and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it."),
     IMPROVISE("Improvise", SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
     INCREMENT("Increment", SimpleKeyword.class, false, "Whenever you cast a spell, if the amount of mana you spent is greater than this creature’s power or toughness, put a +1/+1 counter on this creature."),
