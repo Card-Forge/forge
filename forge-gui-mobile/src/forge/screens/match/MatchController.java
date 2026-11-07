@@ -806,6 +806,9 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
+        if (delayedReveal != null) {
+            reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards());
+        }
         final int m1 = max >= 0 ? optionList.size() - max : -1;
         final int m2 = min >= 0 ? optionList.size() - min : -1;
         return SGuiChoose.order(title, Forge.getLocalizer().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);
