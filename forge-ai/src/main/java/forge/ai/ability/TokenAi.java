@@ -90,7 +90,8 @@ public class TokenAi extends SpellAbilityAi {
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             }
-            if (x <= 0) {
+            // SacrificeTokenAmount scripts use SacCost preferences to guarantee positive output after payment.
+            if (x < 0 || (x == 0 && !"SacrificeTokenAmount".equals(sa.getParam("AILogic")))) {
                 if ("RandomPT".equals(sa.getParam("AILogic"))) {
                     // e.g. Necropolis of Azar - we're guaranteed at least 1 toughness from the ability
                     x = 1;
