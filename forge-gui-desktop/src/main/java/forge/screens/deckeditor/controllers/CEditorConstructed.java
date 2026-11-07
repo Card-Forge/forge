@@ -40,6 +40,7 @@ import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
+import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 
@@ -214,9 +215,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
         switch (sectionMode) {
         case Commander:
+            if (!items.iterator().hasNext()) { return; }
+            PaperCard newCard = items.iterator().next().getKey(); //can only add one card at a time when on commander section
+            if (!confirmCommander(editor.gameType, newCard)) { return; }
             int count = editor.getDeckManager().getItemCount();
             if (count > 0) {
-                PaperCard newCard = items.iterator().next().getKey(); //can only add one card at a time when on commander section
                 if (editor.gameType == GameType.Oathbreaker) { //replace oathbreaker or signature spell if needed
                     for (Entry<PaperCard, Integer> entry : editor.getDeckManager().getPool()) {
                         if (entry.getKey().getRules().canBeOathbreaker() == newCard.getRules().canBeOathbreaker()) {
@@ -484,7 +487,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     }
 
     private static String commanderSlotKey(CardRules rules, DeckFormat df) {
-        if (df.isLegalCommander(rules)) {
+        if (df.isAllowedCommander(rules, FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY))) {
             return df.hasSignatureSpell() ? "lblasoathbreaker" : "lblascommander";
         }
         if (df.hasSignatureSpell() && rules.canBeSignatureSpell()) {
@@ -499,6 +502,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (ce.controller.getModel().getOrCreate(DeckSection.Commander).countByName(card) > 0) { return; }
         // A catalog add obeys the same copy limit as a normal add
         if (isAdd && ce.getAllowedAdditions(Collections.singletonMap(card, 1).entrySet()).isEmpty()) { return; }
+        if (!confirmCommander(ce.gameType, card)) { return; }
         if (!isAdd) {
             ce.deckManager.removeItem(card, 1);
         }
@@ -506,6 +510,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         ce.controller.notifyModelChanged();
         // Surface the result by switching the deck pane to the Commander section
         ce.getCbxSection().setSelectedItem(DeckSection.Commander);
+    }
+
+    private static boolean confirmCommander(GameType gt, PaperCard card) {
+        DeckFormat df = gt.getDeckFormat();
+        if (df.hasSignatureSpell() || df.isLegalCommander(card.getRules())) { return true; }
+        return FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmIllegalCommander", card.getName()));
     }
 
     private void placeCardInCommanderSection(PaperCard card) {
@@ -608,8 +618,13 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case Commander:
                 if(gameType == GameType.Constructed)
                     break;
+                DeckFormat df = gameType.getDeckFormat();
+                ItemPool<PaperCard> pool = commanderPool;
+                if (!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) && !df.hasSignatureSpell()) {
+                    pool = normalPool.getFilteredPool(c -> df.isAllowedCommander(c.getRules(), false));
+                }
                 this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
-                this.getCatalogManager().setPool(commanderPool, true);
+                this.getCatalogManager().setPool(pool, true);
                 this.getCatalogManager().setAllowMultipleSelections(false);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
                 break;
