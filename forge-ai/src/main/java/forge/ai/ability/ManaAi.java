@@ -127,7 +127,7 @@ public class ManaAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
-    // Dark Ritual and other similar instants/sorceries that add mana to mana pool
+    // Dark Ritual, High Tide, and other similar spells that increase available mana
     public static boolean doManaRitualLogic(Player ai, SpellAbility sa, boolean fromTrigger) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
@@ -150,12 +150,21 @@ public class ManaAi extends SpellAbilityAi {
         if (manaSources.contains(host) && ComputerUtilCost.isSacrificeSelfCost(sa.getRootAbility().getPayCosts())) {
             numManaSrcs--;
         }
-        int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
-        manaReceived *= sa.getParam("Produced").split(" ").length;
+        final boolean highTide = "HighTide".equals(logic);
+        final int untappedIslands = highTide
+                ? CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED.and(CardPredicates.isType("Island")))
+                : 0;
+        if (highTide && untappedIslands == 0) {
+            return false;
+        }
+        int manaReceived = highTide
+                ? untappedIslands - 1
+                : (sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1)
+                        * sa.getParam("Produced").split(" ").length;
 
         int selfCost = sa.getRootAbility().getPayCosts().getCostMana() != null ? sa.getRootAbility().getPayCosts().getCostMana().getMana().getCMC() : 0;
 
-        String produced = sa.getParam("Produced");
+        String produced = highTide ? "U" : sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
 
         int numCounters = 0;
