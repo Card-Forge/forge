@@ -26,7 +26,7 @@ public final class FormatChoices {
             COMMANDER_GAME_TYPES.stream(), GENERATED_GAME_TYPES.stream()).collect(Collectors.toList());
     /** Game types the lobby's Variants list applies on top of the format. Several can be applied at once. */
     public static final List<GameType> STACKED_GAME_TYPES = List.of(
-            GameType.Vanguard, GameType.Planechase, GameType.Archenemy, GameType.ArchenemyRumble);
+            GameType.Vanguard, GameType.Planechase, GameType.Archenemy, GameType.ArchenemyRumble, GameType.TwoHeadedGiant);
 
     /** The entry that opens the archived formats, which are too many to list. */
     public static final Object ARCHIVED = new Object() {
