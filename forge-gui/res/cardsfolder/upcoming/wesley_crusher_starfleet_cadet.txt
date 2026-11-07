@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Legendary Creature Human Officer
 PT:2/2
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, choose two —
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBBounce,DBUnblockable,DBLoot | CharmNum$ 2
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | ValidTgtsDesc$ noncreature spell | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcLE2 | ValidTgtsDesc$ creature with mana value 2 or less | SpellDescription$ Return target creature with mana value 2 or less to its owner's hand.
