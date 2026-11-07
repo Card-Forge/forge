@@ -88,7 +88,7 @@ public class PerfPatchRulesTest extends GameSimulationTest {
     @SuppressWarnings("unchecked")
     private static void assertCoherent(CardState s, String ctx) throws Exception {
         Method buildStatic = privateMethod("buildStaticAbilities");
-        Method buildRepl = privateMethod("buildReplacementEffects", boolean.class);
+        Method buildRepl = privateMethod("buildReplacementEffects");
 
         List<String> cachedStaticSig = sig(s.getStaticAbilities());
         if (buildStatic != null) {
@@ -96,12 +96,10 @@ public class PerfPatchRulesTest extends GameSimulationTest {
             Assert.assertEquals(cachedStaticSig, freshStatic, "STALE static-ability cache: " + s.getCard() + "/" + s.getStateName() + " " + ctx);
         }
 
-        for (boolean rulesHost : new boolean[]{true, false}) {
-            List<String> cached = sig(s.getReplacementEffects(rulesHost));
-            if (buildRepl != null) {
-                List<String> fresh = sig((Iterable<? extends CardTraitBase>) buildRepl.invoke(s, rulesHost));
-                Assert.assertEquals(cached, fresh, "STALE replacement-effect cache (rulesHost=" + rulesHost + "): " + s.getCard() + "/" + s.getStateName() + " " + ctx);
-            }
+        List<String> cached = sig(s.getReplacementEffects());
+        if (buildRepl != null) {
+            List<String> fresh = sig((Iterable<? extends CardTraitBase>) buildRepl.invoke(s));
+            Assert.assertEquals(cached, fresh, "STALE replacement-effect cache: " + s.getCard() + "/" + s.getStateName() + " " + ctx);
         }
     }
 
@@ -295,19 +293,19 @@ public class PerfPatchRulesTest extends GameSimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         Card bears = addCard("Grizzly Bears", p);
-        int base = bears.getReplacementEffects().size();
+        long base = bears.streamReplacementEffects().count();
         assertCoherent(bears, "baseline");
 
         for (CounterEnumType type : new CounterEnumType[]{CounterEnumType.SHIELD, CounterEnumType.STUN, CounterEnumType.FINALITY}) {
-            int before = bears.getReplacementEffects().size();
+            long before = bears.streamReplacementEffects().count();
             bears.addCounterInternal(type, 1, p, false, null, null);                    // ADAPT: counter API
-            Assert.assertTrue(bears.getReplacementEffects().size() > before, type + " counter must add a replacement effect");
+            Assert.assertTrue(bears.streamReplacementEffects().count() > before, type + " counter must add a replacement effect");
             assertCoherent(bears, "with " + type);
             bears.subtractCounter(type, 1, p);                                          // ADAPT: counter API
-            Assert.assertEquals(bears.getReplacementEffects().size(), before, type + " removal must remove it again");
+            Assert.assertEquals(bears.streamReplacementEffects().count(), before, type + " removal must remove it again");
             assertCoherent(bears, "without " + type);
         }
-        Assert.assertEquals(bears.getReplacementEffects().size(), base);
+        Assert.assertEquals(bears.streamReplacementEffects().count(), base);
     }
 
     // =====================================================================================
@@ -339,7 +337,7 @@ public class PerfPatchRulesTest extends GameSimulationTest {
         CardState st = bears.getState(CardStateName.Original);
 
         Assert.assertEquals(st.getStaticAbilities().size(), 0, "premise");
-        Assert.assertEquals(st.getReplacementEffects(true).size(), 0, "premise");
+        Assert.assertEquals(st.getReplacementEffects().size(), 0, "premise");
 
         st.copyFrom(lord.getState(CardStateName.Original), false);
         Assert.assertEquals(st.getStaticAbilities().size(), lord.getState(CardStateName.Original).getStaticAbilities().size());
@@ -347,12 +345,12 @@ public class PerfPatchRulesTest extends GameSimulationTest {
         assertCoherent(st, "copied Lord");
 
         st.copyFrom(cove.getState(CardStateName.Original), false);
-        Assert.assertTrue(st.getReplacementEffects(true).size() > 0, "replacement copied");
+        Assert.assertTrue(st.getReplacementEffects().size() > 0, "replacement copied");
         Assert.assertEquals(st.getStaticAbilities().size(), 0, "statics replaced by the new source");
         assertCoherent(st, "copied Cove");
 
         st.copyFrom(angel.getState(CardStateName.Original), false);
-        Assert.assertEquals(st.getReplacementEffects(true).size(), 0);
+        Assert.assertEquals(st.getReplacementEffects().size(), 0);
         assertCoherent(st, "copied Angel");
     }
 
@@ -372,10 +370,10 @@ public class PerfPatchRulesTest extends GameSimulationTest {
         Assert.assertEquals(st.getStaticAbilities().size(), s0);
         assertCoherent(st, "static removed");
 
-        int r0 = st.getReplacementEffects(true).size();
+        int r0 = st.getReplacementEffects().size();
         ReplacementEffect re = newReplacement(bears, st);
         st.addReplacementEffect(re);
-        Assert.assertEquals(st.getReplacementEffects(true).size(), r0 + 1);
+        Assert.assertEquals(st.getReplacementEffects().size(), r0 + 1);
         assertCoherent(st, "replacement added");
     }
 
