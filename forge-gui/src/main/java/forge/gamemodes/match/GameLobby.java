@@ -165,7 +165,7 @@ public abstract class GameLobby implements IHasGameType {
             if (field.startsWith(SETUP_VARIANTS)) {
                 for (final String name : StringUtils.split(field.substring(SETUP_VARIANTS.length()), ',')) {
                     final GameType variant = EnumUtils.getEnum(GameType.class, name);
-                    if (variant != null && (choices.contains(variant) || FormatChoices.STACKED_GAME_TYPES.contains(variant))) {
+                    if (variant != null && (choices.contains(variant) || FormatChoices.VARIANTS.contains(variant))) {
                         applyVariant(variant);
                     }
                 }
