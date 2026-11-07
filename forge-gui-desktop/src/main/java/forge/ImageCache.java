@@ -26,7 +26,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +46,7 @@ import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.card.CardSplitType;
+import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -50,6 +54,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.SleeveArt;
 import forge.localinstance.properties.ForgePreferences;
@@ -80,10 +85,18 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> _missingIconKeys = new HashSet<>();
+    // a preloaded deck needs an entry per card plus the scaled copies its views paint
+    private static final int PRELOAD_CACHE_SIZE = 1500;
+    private static int preloadGeneration = 0;
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
-            .maximumSize(FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM))
+            .maximumSize(cacheSize())
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
+
+    private static int cacheSize() {
+        final int configured = FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM);
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_PRELOAD_DECK_IMAGES) ? Math.max(configured, PRELOAD_CACHE_SIZE) : configured;
+    }
     private static final BufferedImage _defaultImage;
     private static final BufferedImage _stars;
     private static final BufferedImage _inv_stars;
@@ -134,7 +147,34 @@ public class ImageCache {
         }
     }
 
+    /** Decodes the image files already on disk for these decks' cards, one per EDT event. */
+    public static void preloadCache(final Collection<Deck> decks) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_DISABLE_CARD_IMAGES)) {
+            return;
+        }
+        if (!FThreads.isGuiThread()) {
+            FThreads.invokeInEdtLater(() -> preloadCache(decks));
+            return;
+        }
+        final Set<PaperCard> cards = new LinkedHashSet<>();
+        for (final Deck deck : decks) {
+            if (deck != null) {
+                cards.addAll(deck.getAllCardsInASinglePool().toFlatList());
+            }
+        }
+        preloadNext(cards.iterator(), ++preloadGeneration);
+    }
+
+    private static void preloadNext(final Iterator<PaperCard> cards, final int generation) {
+        if (generation != preloadGeneration || !cards.hasNext()) {
+            return;
+        }
+        getOriginalImage(cards.next().getCardImageKey(), false, null);
+        SwingUtilities.invokeLater(() -> preloadNext(cards, generation));
+    }
+
     public static void clear() {
+        preloadGeneration++;
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
         ImageKeys.clearMissingCards();
