@@ -11,6 +11,7 @@ import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -294,7 +295,8 @@ public class TokenInfo {
         if (sa.hasParam("TokenName")) {
             CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("TokenName"), sa);
             if (!cards.isEmpty()) {
-                result.setName(cards.getFirst().getDisplayName());
+                result.setName(cards.getFirst().getName());
+                result.getCurrentState().setFlavorName(cards.getFirst().getCurrentState().getFlavorName());
             }
         }
         if (sa.hasParam("TokenPower")) {
@@ -333,6 +335,15 @@ public class TokenInfo {
                     colorSets.add(c.getColor());
                 }
                 result.setColor(ColorSet.combine(colorSets.toArray(new ColorSet[0])));
+            }
+        }
+
+        if (sa.hasParam("TokenAbilities")) {
+            String[] tokenAbilities = sa.getParam("TokenAbilities").split(",");
+            for (final String s : tokenAbilities) {
+                SpellAbility sSA = AbilityFactory.getAbility(result, s, sa);
+                sSA.setIntrinsic(true);
+                result.addSpellAbility(sSA,true);
             }
         }
 

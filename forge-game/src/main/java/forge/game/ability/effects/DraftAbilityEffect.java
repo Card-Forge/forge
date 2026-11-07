@@ -25,7 +25,7 @@ public class DraftAbilityEffect extends SpellAbilityEffect {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(player).append(" drafts a ability for ").append(source.getDisplayName());
+        sb.append(player).append(" drafts an ability for ").append(source.getDisplayName());
 
         return sb.toString();
     }
