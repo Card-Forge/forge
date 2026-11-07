@@ -134,6 +134,8 @@ public final class AiCardLists {
     private static final class Data {
         final Map<Role, Set<String>> roles = new EnumMap<>(Role.class);
         final Map<String, List<Pair>> byCard = new HashMap<>();
+        /** Normalized names of every role except ANTI_COMBO_SEEN, for {@link #isFlatMcPlayable}. */
+        Set<String> flatMcPlayable = Collections.emptySet();
         int pairCount;
     }
 
@@ -191,12 +193,11 @@ public final class AiCardLists {
         if (cardName == null) {
             return false;
         }
-        for (final Role role : Role.values()) {
-            if (role != Role.ANTI_COMBO_SEEN && has(role, cardName)) {
-                return true;
-            }
+        final Set<String> playable = data().flatMcPlayable; // one lock, not one per role
+        if (playable.isEmpty()) {
+            return false;
         }
-        return false;
+        return playable.contains(normalize(cardName)); // one normalize, not one per role
     }
 
     public static boolean has(final Role role, final Card card) {
@@ -253,8 +254,31 @@ public final class AiCardLists {
 
     /** Lower case, no accents, single spaces: "Éomer,  Marshal" and "eomer, marshal" are the same card. */
     public static String normalize(final String name) {
+        if (isPlainAscii(name)) {
+            return name.toLowerCase(Locale.ROOT); // NFD and \p{M} do nothing to ASCII, and the spaces are already single
+        }
         final String plain = Normalizer.normalize(name.trim(), Normalizer.Form.NFD).replaceAll("\\p{M}+", "");
         return plain.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ");
+    }
+
+    /**
+     * True when normalize() would only have to lower case the name: printable ASCII only (so no accents, tabs or
+     * newlines), no double space, and no space at either end (trim() would change it).
+     */
+    private static boolean isPlainAscii(final String s) {
+        final int n = s.length();
+        if (n == 0 || s.charAt(0) == ' ' || s.charAt(n - 1) == ' ') {
+            return false;
+        }
+        char prev = 0;
+        for (int i = 0; i < n; i++) {
+            final char c = s.charAt(i);
+            if (c < ' ' || c > '~' || (c == ' ' && prev == ' ')) {
+                return false;
+            }
+            prev = c;
+        }
+        return true;
     }
 
     // ---------------------------------------------------------------------------------------------- the reading
@@ -295,6 +319,13 @@ public final class AiCardLists {
         for (final Role r : d.roles.keySet()) {
             d.roles.put(r, Collections.unmodifiableSet(d.roles.get(r)));
         }
+        final Set<String> playable = new HashSet<>();
+        for (final Map.Entry<Role, Set<String>> e : d.roles.entrySet()) {
+            if (e.getKey() != Role.ANTI_COMBO_SEEN) {
+                playable.addAll(e.getValue());
+            }
+        }
+        d.flatMcPlayable = Collections.unmodifiableSet(playable);
 
         final Set<String> seen = new HashSet<>();
         for (final Supplier<List<String>> file : comboFiles) {
