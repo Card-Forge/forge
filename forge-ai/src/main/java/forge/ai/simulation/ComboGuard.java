@@ -164,6 +164,11 @@ public final class ComboGuard {
         if (untimely != null) {
             return untimely;
         }
+        // an activated ability with nothing to act on (Oran-Rief with no new green creature): see ActivationGuard
+        final String idle = ActivationGuard.problem(ai, sa);
+        if (idle != null) {
+            return idle;
+        }
         // Demonic Consultation exiles the library: only to win, with the Oracle's trigger on the stack (ConsultationWin)
         if (ConsultationWin.isConsultation(sa) && !ConsultationWin.winnerOnStack(ai.getGame(), ai)) {
             return "consultation-no-winner";
