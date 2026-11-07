@@ -45,6 +45,13 @@ public final class ComboAssembly {
             if (e.name.startsWith(c)) {
                 return true;
             }
+            if (e.pair) {
+                for (final String spec : e.slotSpecs()) {
+                    if (spec.startsWith(c)) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
@@ -76,7 +83,7 @@ public final class ComboAssembly {
         final List<Card> hand = new ArrayList<>(ai.getCardsIn(ZoneType.Hand));
         final List<Card> play = new ArrayList<>(ai.getCardsIn(ZoneType.Battlefield));
         final List<Card> yard = new ArrayList<>(ai.getCardsIn(ZoneType.Graveyard));
-        for (final ComboCatalog.Entry e : ComboCatalog.entries()) {
+        for (final ComboCatalog.Entry e : ComboCatalog.assemblyEntries()) {
             if (isCovered(e)) {
                 continue;
             }
@@ -103,6 +110,18 @@ public final class ComboAssembly {
                 if (!c.isLand()) {
                     cost += c.getCMC();
                     spells.add(c);
+                }
+            }
+            if (e.pair) {
+                // a pair of the Commander lists: the permanents only. A spell of such a pair (a removal spell, a draw
+                // spell) has a target and a time of its own, which the AI's own play picks; the permanents are what
+                // a pair needs on the table together
+                boolean permanentsOnly = true;
+                for (final Card c : spells) {
+                    permanentsOnly &= c.isPermanent();
+                }
+                if (!permanentsOnly) {
+                    continue;
                 }
             }
             if (spells.isEmpty() || ComputerUtilMana.getAvailableManaEstimate(ai) < cost) {
