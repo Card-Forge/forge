@@ -344,9 +344,9 @@ public class PhaseHandler implements IHasForgeLog {
                         game.updateCombatForView();
                     }
 
-                    if (!combat.assignCombatDamage(false)) {
-                        givePriorityToPlayer = false;
-                    } else {
+                    // this step always happens (rule 510.4), and players get priority
+                    // even when no creature assigns damage in it
+                    if (combat.assignCombatDamage(false)) {
                         combat.dealAssignedDamage();
                     }
                     break;
