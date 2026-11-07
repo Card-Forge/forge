@@ -33,6 +33,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
 import forge.game.event.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementResult;
@@ -78,6 +79,7 @@ public class PhaseHandler implements IHasForgeLog {
     private int nMainsThisTurn = 0;
     private int nEndOfTurnsThisTurn = 0;
     private int planarDiceSpecialActionThisTurn = 0;
+    private int aggressiveCombatNum = -1;
 
     private Player playerTurn = null;
     private Player playerPreviousTurn = null;
@@ -160,6 +162,18 @@ public class PhaseHandler implements IHasForgeLog {
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
         } else {
+            // (Used for Aggressive keyword)
+            // This MUST run here, before the extraPhases map is read a few lines down
+            // If this check ran after that read instead, we'd already have committed to Main2 by the
+            // time we tried to queue the extra combat, and the queued entry would sit
+            // unused (or worse, get picked up by some unrelated later combat).
+            if (phase == PhaseType.COMBAT_END && isFirstCombat()
+                    && CardLists.count(playerTurn.getCreaturesInPlay(), CardPredicates.hasKeyword(Keyword.AGGRESSIVE)) > 0) {
+                addExtraPhase(PhaseType.COMBAT_END, new ArrayList<>(PhaseType.PHASE_GROUPS.get(2)),
+                        PhaseType.getNext(PhaseType.COMBAT_END, isTopsy));
+                aggressiveCombatNum = nCombatsThisTurn + 1;
+            }
+
             // If the phase that's ending has a stack of additional phases
             // Take the LIFO one and move to that instead of the normal one
             ExtraPhase extraPhase = null;
@@ -424,6 +438,7 @@ public class PhaseHandler implements IHasForgeLog {
                     nCombatsThisTurn = 0;
                     nMainsThisTurn = 0;
                     nEndOfTurnsThisTurn = 0;
+                    aggressiveCombatNum = -1;
                     game.getStack().resetMaxDistinctSources();
 
                     // CR 514.3
@@ -985,6 +1000,12 @@ public class PhaseHandler implements IHasForgeLog {
     }
     public final int getNumCombat() {
         return nCombatsThisTurn;
+    }
+
+    // True only while the current combat is specifically the one Aggressive granted.
+    // Consumed by CombatUtil.canAttack() to restrict attackers during it.
+    public final boolean isAggressiveCombat() {
+        return nCombatsThisTurn == aggressiveCombatNum;
     }
 
     public final int getNumUpkeep() {
