@@ -361,6 +361,7 @@ public class FlatMonteCarloStormTest extends AITest {
             fast.add(addCard(n, p));
         }
         AssertJUnit.assertTrue("two tutors and mana", combos.keepsTutorStormHand(fast, 7));
+        AssertJUnit.assertTrue("a six card hand is kept whatever it holds", combos.keepsTutorStormHand(slow, 6));
         AssertJUnit.assertTrue("a five card hand is kept whatever it holds", combos.keepsTutorStormHand(slow, 5));
     }
 }
