@@ -3,5 +3,5 @@ ManaCost:U
 Types:Creature Merfolk Warrior
 PT:1/1
 A:AB$ Animate | Cost$ T | ValidTgts$ Land | Types$ Island | RemoveLandTypes$ True | SpellDescription$ Target land becomes an Island until end of turn.
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:{T}: Target land becomes an Island until end of turn.
