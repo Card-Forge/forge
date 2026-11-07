@@ -8,7 +8,7 @@ public class ShaderUtil implements Disposable {
     public static ShaderUtil instance;
     private ShaderProgram shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
         shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderCardRounded, shaderRoundedRect2,
-        shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo;
+        shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo, shaderArena, shaderArenaTilt;
     private ShaderUtil() {
         ShaderProgram.pedantic = false;
     }
@@ -110,10 +110,36 @@ public class ShaderUtil implements Disposable {
         return shaderPix;
     }
 
+    /**
+     * The Arena uber shader: draws ordinary sprites exactly like SpriteBatch's default shader and, for quads with
+     * packed texture coordinates, signed-distance rounded rectangles (fills, rings, glows, soft shadows). See
+     * {@link Shaders#arenaUberFrag} and {@code Graphics.drawArenaShape}.
+     */
+    public ShaderProgram getShaderArena() {
+        if (shaderArena == null)
+            shaderArena = compile("arena", Shaders.arenaVert, Shaders.arenaUberFrag);
+        return shaderArena;
+    }
+
+    /** Arena card tilt (perspective mesh, rounded corners, glare). See {@code Graphics.drawTiltedImage}. */
+    public ShaderProgram getShaderArenaTilt() {
+        if (shaderArenaTilt == null)
+            shaderArenaTilt = compile("arena tilt", Shaders.arenaVert, Shaders.arenaTiltFrag);
+        return shaderArenaTilt;
+    }
+
+    private static ShaderProgram compile(String name, String vert, String frag) {
+        ShaderProgram program = new ShaderProgram(vert, frag);
+        if (!program.isCompiled()) {
+            System.err.println("ShaderUtil: " + name + " shader failed to compile:\n" + program.getLog());
+        }
+        return program;
+    }
+
     @Override
     public void dispose() {
         Forge.safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
             shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderCardRounded,
-            shaderRoundedRect2, shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo);
+            shaderRoundedRect2, shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo, shaderArena, shaderArenaTilt);
     }
 }

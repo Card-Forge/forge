@@ -52,6 +52,8 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.match.DiceOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.arena.ArenaCurtain;
+import forge.screens.match.arena.ArenaMotion;
 import forge.screens.settings.CardImageBrowserScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -949,6 +951,8 @@ public class Forge implements ApplicationListener {
         //dispose card textures handled by assetmanager
         boolean dispose = toNewScreen.toLowerCase().contains("homescreen") && disposeTextures;
         try {
+            //Arena look: into, out of or between matches the old screen fades over the new one (a picture taken now)
+            ArenaCurtain.onScreenChange(currentScreen, screen0);
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
             currentScreen = screen0;
@@ -981,6 +985,7 @@ public class Forge implements ApplicationListener {
 
         ImageCache.getInstance().allowSingleLoad();
         ForgeAnimation.advanceAll();
+        ArenaMotion.tick(); // Arena look: its animation clock (asks for the next frame itself while anything moves)
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
         float delta = Gdx.graphics.getDeltaTime();
@@ -1011,6 +1016,11 @@ public class Forge implements ApplicationListener {
         Classic.getInstance().render(screen);
         DiceOverlay.getInstance().render();
         FrameRate.getInstance().render(showFPS);
+    }
+
+    /** What is on the window now: the closing, transition, current or splash screen, in that priority. */
+    public static FContainer getDisplayedScreen() {
+        return getHierachyScreen();
     }
 
     private static FContainer getHierachyScreen() {

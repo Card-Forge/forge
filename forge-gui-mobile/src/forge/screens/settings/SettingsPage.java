@@ -24,6 +24,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
@@ -706,6 +707,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
             Forge.getLocalizer().getMessage("cbHideReminderText"),
             Forge.getLocalizer().getMessage("nlHideReminderText")), 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ARENA_THEME,
+            Forge.getLocalizer().getMessage("lblArenaLook"),
+            Forge.getLocalizer().getMessage("nlArenaLook")) {
+                @Override
+                public void select() {
+                    super.select();
+                    //takes effect at once: the match screen reads it every frame
+                    ArenaTheme.refresh();
+                }
+            }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MATCH_IMAGE_VISIBLE,
             Forge.getLocalizer().getMessage("lblShowMatchBackground"),
             Forge.getLocalizer().getMessage("nlShowMatchBackground")), 4);

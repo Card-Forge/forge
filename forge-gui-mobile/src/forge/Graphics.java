@@ -133,6 +133,11 @@ public class Graphics implements Disposable {
         if (shapeRenderer.getCurrentType() != null) {
             shapeRenderer.end();
         }
+        // the Arena shaders are bound lazily and left bound while drawing; never carry them past the frame
+        final ShaderProgram bound = batch.getShader();
+        if (bound != null && (bound == arenaShader || bound == arenaTiltShader)) {
+            batch.setShader(null);
+        }
         resetClipState();
     }
 
@@ -2284,6 +2289,445 @@ public class Graphics implements Disposable {
     private static Color liningFor(int r, int g, int b) {
         int brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         return brightness > 155 ? LINING_DARK : LINING_LIGHT;
+    }
+
+    // ---- Arena theme: shapes, glow, tilt and fades -------------------------------------------------------------------
+    //
+    // Cost model (read this before drawing hundreds of things):
+    //  * SpriteBatch flushes (one GL draw call) whenever the texture or the shader changes.
+    //  * The Arena shapes below (fills, gradients, rings, glows, soft shadows) are quads drawn through the batch with the
+    //    shared 1x1 white texture and the Arena "uber" shader. That shader draws ordinary sprites exactly like the default
+    //    one, so once bound it is left bound: shapes, fillRect/fillGradientRect/drawRect quads and multi-stop gradients
+    //    all merge into ONE draw call until something else changes the texture (text, an image) or the shader (any of the
+    //    older effect helpers such as drawCardRoundRect, which reset it to the default). Draw a layer's shapes together
+    //    (e.g. all glows of a row, then all cards) and they cost one call.
+    //  * drawTiltedImage uses its own shader with per-card uniforms: one draw call per tilted card, the same as
+    //    drawCardRoundRect costs today. Use it for the few cards that are actually tilted or rounded, not for every tile.
+    //  * drawImageFaded / drawCrossfade only change the batch colour: no flush.
+    //  * Shapes follow the batch transform (startRotateTransform), clips and setAlphaComposite like everything else.
+    // Coordinates are Forge's: y grows downwards from the top of the current bounds, in logical pixels.
+
+    /** {@link #drawArenaShape} modes: filled rounded rectangle. */
+    public static final int SHAPE_FILL = 0;
+    /** Ring (outline) of thickness {@code amount}, drawn inside the shape's edge. */
+    public static final int SHAPE_RING = 1;
+    /** Soft glow fading out over {@code amount} beyond the shape's edge; nothing is drawn inside the shape. */
+    public static final int SHAPE_GLOW = 2;
+    /** The shape blurred by {@code amount} (a soft shadow or halo, filled in the middle). */
+    public static final int SHAPE_SOFT = 3;
+
+    private ShaderProgram arenaShader, arenaTiltShader;
+    private boolean arenaShaderFailed;
+    private final float[] shapeVerts = new float[20 * 8];
+    private final Color shapeC1 = new Color(), shapeC2 = new Color(), shapeC3 = new Color();
+    private final Color[] twoColors = new Color[2];
+    private static final float[] TWO_STOPS = {0f, 1f};
+    private float[] tiltVerts = new float[0];
+    private static final int TILT_GRID = 8;
+    private final float[] tiltGx = new float[(TILT_GRID + 1) * (TILT_GRID + 1)], tiltGy = new float[(TILT_GRID + 1) * (TILT_GRID + 1)],
+            tiltGc = new float[(TILT_GRID + 1) * (TILT_GRID + 1)];
+
+    /** Whether the Arena shapes can be drawn on this GPU (the shader compiled). Shapes degrade to plain fills otherwise. */
+    public boolean isArenaShaderAvailable() {
+        return getArenaShader() != null;
+    }
+
+    private ShaderProgram getArenaShader() {
+        if (arenaShader == null && !arenaShaderFailed) {
+            ShaderProgram s = ShaderUtil.getInstance().getShaderArena();
+            if (s.isCompiled()) {
+                arenaShader = s;
+            } else {
+                arenaShaderFailed = true;
+            }
+        }
+        return arenaShader;
+    }
+
+    /**
+     * Binds the Arena uber shader unless it is bound already (a flush only if it was not). Ordinary drawing carries
+     * on unchanged under it, so there is no need to unbind; {@link #end()} resets it at the end of the frame.
+     */
+    public boolean useArenaShader() {
+        ShaderProgram s = getArenaShader();
+        if (s == null) {
+            return false;
+        }
+        if (batch.getShader() != s) {
+            batch.setShader(s);
+        }
+        return true;
+    }
+
+    /**
+     * One signed-distance rounded rectangle through the batch, with a two-colour gradient.
+     *
+     * @param mode    {@link #SHAPE_FILL}, {@link #SHAPE_RING}, {@link #SHAPE_GLOW} or {@link #SHAPE_SOFT}
+     * @param x       left of the shape itself (for glow/soft the drawn quad reaches {@code amount} further out)
+     * @param radius  corner radius, clamped to half the shorter side (half of it makes a pill or a circle)
+     * @param amount  ring thickness, glow spread or blur, in logical pixels (ignored for fills)
+     * @param c1      colour at the top (vertical) or left; alpha included
+     * @param c2      colour at the bottom or right (pass c1 again for a flat colour)
+     */
+    public void drawArenaShape(int mode, float x, float y, float w, float h, float radius, float amount, Color c1, Color c2, boolean vertical) {
+        twoColors[0] = c1;
+        twoColors[1] = c2;
+        drawArenaShape(mode, x, y, w, h, radius, amount, twoColors, TWO_STOPS, vertical);
+        twoColors[0] = twoColors[1] = null;
+    }
+
+    /**
+     * {@link #drawArenaShape(int, float, float, float, float, float, float, Color, Color, boolean)} with a multi-stop
+     * gradient: {@code colors[i]} at {@code stops[i]} (0..1 across the shape, ascending). It is one shape however many
+     * stops it has (the pieces join seamlessly), drawn in one batch run.
+     */
+    public void drawArenaShape(int mode, float x, float y, float w, float h, float radius, float amount, Color[] colors, float[] stops, boolean vertical) {
+        if (w <= 0 || h <= 0 || colors.length == 0 || !batch.isDrawing()) {
+            return;
+        }
+        if (!useArenaShader()) {
+            // no shader: plain fills where that is close enough, nothing for the soft effects
+            if (mode == SHAPE_FILL) {
+                fillRoundRect(colors[0], x, y, w, h, Math.min(radius, Math.min(w, h) / 2f));
+            } else if (mode == SHAPE_RING) {
+                drawRoundRect(Math.max(1f, amount), colors[0], x, y, w, h, Math.min(radius, Math.min(w, h) / 2f));
+            }
+            return;
+        }
+        final float pad = mode == SHAPE_GLOW || mode == SHAPE_SOFT ? Math.max(1f, amount) : 0f;
+        final float qx0 = x - pad, qy0 = y - pad, qw = w + 2 * pad, qh = h + 2 * pad;
+        final float m = Math.min(qw, qh) / 2f;
+        final float r = Math.max(0f, Math.min(radius, Math.min(w, h) / 2f));
+        final int a = Math.round(Math.min(1f, r / m) * 1023f);
+        final int amt;
+        if (mode == SHAPE_FILL) {
+            amt = 0;
+        } else if (mode == SHAPE_RING) {
+            amt = Math.round(Math.min(1f, Math.max(0f, amount) / m) * 255f);
+        } else {
+            amt = Math.round(Math.min(1f, pad / m) * 255f);
+        }
+        final int b = (mode & 3) * 256 + amt;
+        final float uBase = -4f * (a + 1), vBase = -4f * (b + 1);
+
+        // split the quad along the gradient axis at the stops that fall inside it; every piece keeps the whole quad's
+        // normalised coordinates, so the shader still sees one shape
+        final float axis0 = vertical ? qy0 : qx0, axisLen = vertical ? qh : qw;
+        final float shape0 = vertical ? y : x, shapeLen = vertical ? h : w;
+        float prev = 0f; // position along the quad, 0..1
+        int n = 0;
+        final float[] v = shapeVerts;
+        for (int i = 0; i <= stops.length; i++) {
+            float next;
+            if (i < stops.length) {
+                next = (shape0 + stops[i] * shapeLen - axis0) / axisLen;
+                if (next <= prev + 1e-4f || next >= 1f - 1e-4f) {
+                    continue;
+                }
+            } else {
+                next = 1f;
+            }
+            if (n * 20 + 20 > v.length) {
+                flushShapeVerts(n);
+                n = 0;
+            }
+            putShapePiece(v, n * 20, prev, next, vertical, qx0, qy0, qw, qh, uBase, vBase, colors, stops, shape0, shapeLen, axis0, axisLen);
+            n++;
+            prev = next;
+        }
+        flushShapeVerts(n);
+    }
+
+    private void flushShapeVerts(int pieces) {
+        if (pieces > 0) {
+            batch.draw(getWhiteTexture(), shapeVerts, 0, pieces * 20);
+        }
+    }
+
+    private void putShapePiece(float[] v, int o, float t0, float t1, boolean vertical, float qx0, float qy0, float qw, float qh,
+            float uBase, float vBase, Color[] colors, float[] stops, float shape0, float shapeLen, float axis0, float axisLen) {
+        // colours at both ends of the piece
+        final float c0 = gradientAt(colors, stops, (axis0 + t0 * axisLen - shape0) / shapeLen, shapeC1).toFloatBits();
+        final float c1 = gradientAt(colors, stops, (axis0 + t1 * axisLen - shape0) / shapeLen, shapeC1).toFloatBits();
+        final float px0, px1, py0, py1; // piece in Forge coordinates (y down)
+        final float nx0, nx1, ny0, ny1; // normalised quad coordinates, -1..1
+        if (vertical) {
+            px0 = qx0; px1 = qx0 + qw; nx0 = -1f; nx1 = 1f;
+            py0 = qy0 + t0 * qh; py1 = qy0 + t1 * qh; ny0 = -1f + 2f * t0; ny1 = -1f + 2f * t1;
+        } else {
+            py0 = qy0; py1 = qy0 + qh; ny0 = -1f; ny1 = 1f;
+            px0 = qx0 + t0 * qw; px1 = qx0 + t1 * qw; nx0 = -1f + 2f * t0; nx1 = -1f + 2f * t1;
+        }
+        final float l = adjustX(px0), r = adjustX(px1);
+        final float top = adjustY(py0, 0), bottom = adjustY(py1, 0); // GL y: top > bottom
+        // colour at the top / left edge of the piece is c0, at the bottom / right c1
+        final float cTL = c0, cTR = vertical ? c0 : c1, cBL = vertical ? c1 : c0, cBR = c1;
+        // bottom-left, top-left, top-right, bottom-right
+        v[o] = l;       v[o + 1] = bottom; v[o + 2] = cBL; v[o + 3] = uBase + nx0; v[o + 4] = vBase + ny1;
+        v[o + 5] = l;   v[o + 6] = top;    v[o + 7] = cTL; v[o + 8] = uBase + nx0; v[o + 9] = vBase + ny0;
+        v[o + 10] = r;  v[o + 11] = top;   v[o + 12] = cTR; v[o + 13] = uBase + nx1; v[o + 14] = vBase + ny0;
+        v[o + 15] = r;  v[o + 16] = bottom; v[o + 17] = cBR; v[o + 18] = uBase + nx1; v[o + 19] = vBase + ny1;
+    }
+
+    // colour of a multi-stop gradient at t (clamped), times the alpha composite, into out
+    private Color gradientAt(Color[] colors, float[] stops, float t, Color out) {
+        Color c;
+        if (colors.length == 1 || t <= stops[0]) {
+            out.set(colors[0]);
+        } else if (t >= stops[stops.length - 1]) {
+            out.set(colors[Math.min(colors.length, stops.length) - 1]);
+        } else {
+            int i = 1;
+            while (i < stops.length - 1 && t > stops[i]) {
+                i++;
+            }
+            final float span = stops[i] - stops[i - 1];
+            final float f = span <= 0f ? 1f : (t - stops[i - 1]) / span;
+            c = colors[i - 1];
+            final Color d = colors[i];
+            out.set(c.r + (d.r - c.r) * f, c.g + (d.g - c.g) * f, c.b + (d.b - c.b) * f, c.a + (d.a - c.a) * f);
+        }
+        if (alphaComposite < 1) {
+            out.a *= alphaComposite;
+        }
+        return out;
+    }
+
+    /** Antialiased filled rounded rectangle, batched (the older {@link #fillRoundRect} pauses the batch). */
+    public void fillSmoothRoundRect(Color color, float x, float y, float w, float h, float radius) {
+        drawArenaShape(SHAPE_FILL, x, y, w, h, radius, 0, color, color, true);
+    }
+
+    /** Antialiased rounded rectangle with a vertical (top to bottom) or horizontal (left to right) gradient. */
+    public void fillSmoothRoundRectGradient(Color c1, Color c2, boolean vertical, float x, float y, float w, float h, float radius) {
+        drawArenaShape(SHAPE_FILL, x, y, w, h, radius, 0, c1, c2, vertical);
+    }
+
+    /** Antialiased rounded outline of the given thickness, inside the rectangle's edge. */
+    public void drawSmoothRoundRect(float thickness, Color color, float x, float y, float w, float h, float radius) {
+        drawArenaShape(SHAPE_RING, x, y, w, h, radius, thickness, color, color, true);
+    }
+
+    /** Antialiased disc (centre and radius, like {@link #fillCircle}). */
+    public void fillSmoothCircle(Color color, float cx, float cy, float radius) {
+        drawArenaShape(SHAPE_FILL, cx - radius, cy - radius, 2 * radius, 2 * radius, radius, 0, color, color, true);
+    }
+
+    /** Antialiased ring round a circle, inside its edge. */
+    public void drawSmoothCircle(float thickness, Color color, float cx, float cy, float radius) {
+        drawArenaShape(SHAPE_RING, cx - radius, cy - radius, 2 * radius, 2 * radius, radius, thickness, color, color, true);
+    }
+
+    /**
+     * Outer glow round a rounded rectangle (a card, a button): strongest at its edge and gone {@code spread} beyond it,
+     * nothing inside, so draw it before or after the thing itself. Intensity is the colour's alpha.
+     */
+    public void drawGlow(Color color, float x, float y, float w, float h, float radius, float spread) {
+        drawArenaShape(SHAPE_GLOW, x, y, w, h, radius, spread, color, color, true);
+    }
+
+    /** Soft shadow (or filled halo) of a rounded rectangle, blurred by {@code blur}. Offset x/y yourself for a drop shadow. */
+    public void drawSoftShadow(Color color, float x, float y, float w, float h, float radius, float blur) {
+        drawArenaShape(SHAPE_SOFT, x, y, w, h, radius, blur, color, color, true);
+    }
+
+    /**
+     * Plain (square) rectangle with a multi-stop gradient, batched with the default shader: {@code colors[i]} at
+     * {@code stops[i]} (0..1, ascending) along the width (horizontal) or height (vertical).
+     */
+    public void fillGradientStops(Color[] colors, float[] stops, boolean vertical, float x, float y, float w, float h) {
+        if (w <= 0 || h <= 0 || colors.length == 0) {
+            return;
+        }
+        if (!batch.isDrawing()) {
+            fillGradientRect(colors[0], colors[colors.length - 1], vertical, x, y, w, h);
+            return;
+        }
+        float prev = 0f;
+        for (int i = 0; i <= stops.length; i++) {
+            float next = i < stops.length ? stops[i] : 1f;
+            if (next <= prev + 1e-4f && i < stops.length) {
+                continue;
+            }
+            next = Math.min(next, 1f);
+            final float ca = gradientAt(colors, stops, prev, shapeC2).toFloatBits();
+            final float cb = gradientAt(colors, stops, next, shapeC3).toFloatBits();
+            if (vertical) {
+                final float y0 = y + prev * h, y1 = y + next * h;
+                // bottom-left, top-left, top-right, bottom-right: top is ca
+                batchQuad(adjustX(x), adjustY(y1, 0), w, y1 - y0, cb, ca, ca, cb);
+            } else {
+                final float x0 = x + prev * w, x1 = x + next * w;
+                batchQuad(adjustX(x0), adjustY(y, h), x1 - x0, h, ca, ca, cb, cb);
+            }
+            prev = next;
+            if (prev >= 1f) {
+                break;
+            }
+        }
+    }
+
+    /** Draws an image with its alpha multiplied by {@code alpha} (on top of setAlphaComposite). No flush. */
+    public void drawImageFaded(TextureRegion image, float x, float y, float w, float h, float alpha) {
+        if (image == null || alpha <= 0f) {
+            return;
+        }
+        final float old = batch.getPackedColor();
+        final Color c = batch.getColor();
+        batch.setColor(c.r, c.g, c.b, c.a * Math.min(1f, alpha));
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.setPackedColor(old);
+    }
+
+    public void drawImageFaded(Texture image, float x, float y, float w, float h, float alpha) {
+        if (image == null || alpha <= 0f) {
+            return;
+        }
+        final float old = batch.getPackedColor();
+        final Color c = batch.getColor();
+        batch.setColor(c.r, c.g, c.b, c.a * Math.min(1f, alpha));
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.setPackedColor(old);
+    }
+
+    /** {@code from} fading into {@code to}: t = 0 shows only {@code from}, 1 only {@code to}. No flush beyond texture changes. */
+    public void drawCrossfade(TextureRegion from, TextureRegion to, float x, float y, float w, float h, float t) {
+        t = Math.max(0f, Math.min(1f, t));
+        if (t < 1f) {
+            drawImageFaded(from, x, y, w, h, 1f);
+        }
+        if (t > 0f) {
+            drawImageFaded(to, x, y, w, h, t);
+        }
+    }
+
+    /**
+     * A card (or any image) with an outer glow, then the image itself, with rounded corners when {@code cornerRadius}
+     * is above 0 (through {@link #drawTiltedImage}, flat). For many cards prefer drawing all the glows first with
+     * {@link #drawGlow}, then the cards: the glows then share one draw call.
+     */
+    public void drawImageWithGlow(TextureRegion image, float x, float y, float w, float h, float cornerRadius, Color glowColor, float spread) {
+        if (image == null) {
+            return;
+        }
+        if (glowColor != null && glowColor.a > 0f && spread > 0f) {
+            drawGlow(glowColor, x, y, w, h, cornerRadius, spread);
+        }
+        if (cornerRadius > 0f) {
+            drawTiltedImage(image, x, y, w, h, 0f, 0f, 0f, 1f, cornerRadius, 0f, 0f, 1f);
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+
+    /** {@link #drawTiltedImage(TextureRegion, float, float, float, float, float, float, float, float, float, float, float, float)} for a whole texture. */
+    public void drawTiltedImage(Texture image, float x, float y, float w, float h, float tiltX, float tiltY, float rotation,
+            float scale, float cornerRadius, float shading, float gray, float alpha) {
+        if (image == null) {
+            return;
+        }
+        drawTiltedImage(new TextureRegion(image), x, y, w, h, tiltX, tiltY, rotation, scale, cornerRadius, shading, gray, alpha);
+    }
+
+    /**
+     * Draws an image as a card in fake 3D: tilted towards the viewer (hover tilt), turned in the plane (tap), lifted
+     * (scaled about its centre), with antialiased rounded corners, shading on the side turned away and a soft glare.
+     * The card is a perspective-projected 8x8 mesh, so the texture does not shear along the diagonal. One draw call.
+     *
+     * @param x,y,w,h      the flat, untransformed card (Forge coordinates); it turns about its centre
+     * @param tiltX        degrees about the horizontal screen axis; positive tips the top edge away from the viewer
+     * @param tiltY        degrees about the vertical screen axis; positive tips the right edge away
+     * @param rotation     degrees in the plane, clockwise on screen (90 = tapped), applied before the tilt
+     * @param scale        lift: 1 is the flat size
+     * @param cornerRadius corner radius of the flat card in logical pixels (0 for square corners)
+     * @param shading      0..1: how dark the far side gets and how bright the glare is
+     * @param gray         0..1 grey-out (e.g. for something that cannot be chosen)
+     * @param alpha        0..1, on top of setAlphaComposite
+     */
+    public void drawTiltedImage(TextureRegion image, float x, float y, float w, float h, float tiltX, float tiltY, float rotation,
+            float scale, float cornerRadius, float shading, float gray, float alpha) {
+        if (image == null || w <= 0 || h <= 0 || alpha <= 0f || !batch.isDrawing()) {
+            return;
+        }
+        if (arenaTiltShader == null) {
+            ShaderProgram s = ShaderUtil.getInstance().getShaderArenaTilt();
+            if (!s.isCompiled()) {
+                // no shader: a plain rotated image
+                drawRotatedImage(image, x + w * (1 - scale) / 2, y + h * (1 - scale) / 2, w * scale, h * scale,
+                        x + w / 2, y + h / 2, -rotation);
+                return;
+            }
+            arenaTiltShader = s;
+            if (arenaShader == null) {
+                getArenaShader(); // so end() knows both
+            }
+        }
+        final boolean tilted = Math.abs(tiltX) > 0.05f || Math.abs(tiltY) > 0.05f;
+        final int n = tilted ? TILT_GRID : 1;
+        final int floats = n * n * 20;
+        if (tiltVerts.length < floats) {
+            tiltVerts = new float[floats];
+        }
+        final float cx = x + w / 2f, cy = y + h / 2f;
+        final double ax = Math.toRadians(tiltX), ay = Math.toRadians(tiltY), ar = Math.toRadians(rotation);
+        final float cosA = (float) Math.cos(ax), sinA = (float) Math.sin(ax);
+        final float cosB = (float) Math.cos(ay), sinB = (float) Math.sin(ay);
+        final float cosR = (float) Math.cos(ar), sinR = (float) Math.sin(ar);
+        final float sw = w * scale, sh = h * scale;
+        final float depth = 3.2f * Math.max(sw, sh); // viewer distance: a modest perspective
+        final float u0 = image.getU(), u1 = image.getU2(), v0 = image.getV(), v1 = image.getV2();
+        final Color bc = batch.getColor();
+        final float baseA = bc.a * Math.min(1f, alpha);
+        final float half = 0.5f * Math.max(sw, sh);
+        // project the (n+1)^2 grid once
+        final int g1 = n + 1;
+        final float[] gx = tiltGx, gy = tiltGy, gc = tiltGc;
+        for (int j = 0; j <= n; j++) {
+            for (int i = 0; i <= n; i++) {
+                float lx = ((float) i / n - 0.5f) * sw, ly = ((float) j / n - 0.5f) * sh; // y down
+                // turn in the plane (clockwise on a y-down screen)
+                final float rx = lx * cosR - ly * sinR, ry = lx * sinR + ly * cosR;
+                // tilt about the screen's vertical axis, then its horizontal axis; z grows away from the viewer
+                final float x1 = rx * cosB, z1 = rx * sinB;
+                final float y2 = ry * cosA + z1 * sinA, z2 = -ry * sinA + z1 * cosA;
+                final float f = depth / (depth + z2);
+                final int k = j * g1 + i;
+                gx[k] = adjustX(cx + x1 * f);
+                gy[k] = adjustY(cy + y2 * f, 0);
+                final float shade = 1f - shading * 0.45f * Math.max(0f, Math.min(1f, z2 / half));
+                gc[k] = Color.toFloatBits(bc.r * shade, bc.g * shade, bc.b * shade, baseA);
+            }
+        }
+        final float[] v = tiltVerts;
+        int o = 0;
+        for (int j = 0; j < n; j++) {
+            final float tv0 = v0 + (v1 - v0) * j / n, tv1 = v0 + (v1 - v0) * (j + 1) / n;
+            for (int i = 0; i < n; i++) {
+                final float tu0 = u0 + (u1 - u0) * i / n, tu1 = u0 + (u1 - u0) * (i + 1) / n;
+                final int tl = j * g1 + i, tr = tl + 1, bl = tl + g1, br = bl + 1;
+                // bottom-left, top-left, top-right, bottom-right (in card terms: row j is above row j+1)
+                v[o] = gx[bl];  v[o + 1] = gy[bl];  v[o + 2] = gc[bl];  v[o + 3] = tu0;  v[o + 4] = tv1;
+                v[o + 5] = gx[tl]; v[o + 6] = gy[tl]; v[o + 7] = gc[tl]; v[o + 8] = tu0; v[o + 9] = tv0;
+                v[o + 10] = gx[tr]; v[o + 11] = gy[tr]; v[o + 12] = gc[tr]; v[o + 13] = tu1; v[o + 14] = tv0;
+                v[o + 15] = gx[br]; v[o + 16] = gy[br]; v[o + 17] = gc[br]; v[o + 18] = tu1; v[o + 19] = tv1;
+                o += 20;
+            }
+        }
+        final ShaderProgram prev = batch.getShader();
+        if (prev == arenaTiltShader) {
+            batch.flush(); // another tilted card is still waiting with its own uniforms
+        } else {
+            batch.setShader(arenaTiltShader); // flushes what was batched before, binds the shader
+        }
+        arenaTiltShader.setUniformf("u_uvRect", u0, v0, u1, v1);
+        arenaTiltShader.setUniformf("u_size", sw, sh);
+        arenaTiltShader.setUniformf("u_radius", Math.max(0f, Math.min(cornerRadius * scale, Math.min(sw, sh) / 2f)));
+        final float tiltAmount = Math.min(1f, (Math.abs(tiltX) + Math.abs(tiltY)) / 15f);
+        arenaTiltShader.setUniformf("u_sheen", 0.5f - tiltY / 45f, 0.5f + tiltX / 45f, tilted ? shading * 0.28f * tiltAmount : 0f);
+        arenaTiltShader.setUniformf("u_gray", Math.max(0f, Math.min(1f, gray)));
+        batch.draw(image.getTexture(), v, 0, floats);
+        // the uniforms belong to this card: draw it now and go back to what was bound
+        batch.setShader(prev == arenaShader ? arenaShader : null);
     }
 
     public static void setVideoMode(String videoMode) {

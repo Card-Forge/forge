@@ -2407,4 +2407,137 @@ public class Shaders {
             "    vec4 texColor = v_color * texture2D(u_texture, pixelatedUV);\n" +
             "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
             "}";
+
+    // ---- Arena theme ------------------------------------------------------------------------------------------------
+    // Precision header shared by the Arena shaders: they decode packed shape parameters and measure distances in
+    // pixels, which needs highp where the device has it (desktop GL ignores all of this).
+    private static final String arenaFragHeader =
+            "#ifdef GL_ES\n" +
+            "#extension GL_OES_standard_derivatives : enable\n" +
+            "#ifdef GL_FRAGMENT_PRECISION_HIGH\n" +
+            "precision highp float;\n" +
+            "#else\n" +
+            "precision mediump float;\n" +
+            "#endif\n" +
+            "#endif\n";
+
+    private static final String arenaSdRoundBox =
+            "float sdRoundBox(vec2 p, vec2 b, float r) {\n" +
+            "    vec2 q = abs(p) - b + vec2(r);\n" +
+            "    return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;\n" +
+            "}\n";
+
+    /**
+     * Vertex shader for the Arena shaders: the default SpriteBatch one, with high precision texture coordinates on
+     * GLES (they carry packed shape parameters, see {@link #arenaUberFrag}).
+     */
+    public static final String arenaVert =
+            "#ifdef GL_ES\n" +
+            "#define HIGHP highp\n" +
+            "#else\n" +
+            "#define HIGHP\n" +
+            "#endif\n" +
+            "attribute vec4 a_position;\n" +
+            "attribute vec4 a_color;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "uniform mat4 u_projTrans;\n" +
+            "varying vec4 v_color;\n" +
+            "varying HIGHP vec2 v_texCoords;\n" +
+            "void main() {\n" +
+            "    v_color = a_color;\n" +
+            "    v_color.a = v_color.a * (255.0/254.0);\n" +
+            "    v_texCoords = a_texCoord0;\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "}\n";
+
+    /**
+     * The Arena "uber" fragment shader. Ordinary sprites (texture coordinates above -2.5, i.e. every normal draw) come
+     * out exactly as with SpriteBatch's default shader, so the shader can stay bound while text, images and rects are
+     * drawn in between. A quad whose texture coordinates are below -2.5 is a signed-distance rounded rectangle instead:
+     * <pre>
+     *   u = -4 * (A + 1) + nx      A = radius as a fraction of the quad's smaller half side, 0..1023
+     *   v = -4 * (B + 1) + ny      B = mode * 256 + amount (0..255, a fraction of that half side)
+     *   nx, ny = -1..1 across the quad
+     * </pre>
+     * The quad's size in framebuffer pixels comes from the screen-space derivatives of nx and ny, so shapes stay sharp
+     * at any scale and under rotation. Modes: 0 fill, 1 ring of thickness amount, 2 glow (soft halo outside an inner
+     * shape inset by amount, nothing inside), 3 soft (blurred filled shape, blur = amount). Colour, and any gradient,
+     * comes from the vertex colours. See {@code Graphics.drawArenaShape}.
+     */
+    public static final String arenaUberFrag = arenaFragHeader +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            arenaSdRoundBox +
+            "void main() {\n" +
+            "    vec2 ddx = dFdx(v_texCoords);\n" +
+            "    vec2 ddy = dFdy(v_texCoords);\n" +
+            "    if (v_texCoords.x > -2.5) {\n" +
+            "        gl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n" +
+            "        return;\n" +
+            "    }\n" +
+            "    float w = -v_texCoords.x;\n" +
+            "    float a1 = floor((w + 2.0) * 0.25);\n" +
+            "    float nx = 4.0 * a1 - w;\n" +
+            "    float h = -v_texCoords.y;\n" +
+            "    float b1 = floor((h + 2.0) * 0.25);\n" +
+            "    float ny = 4.0 * b1 - h;\n" +
+            "    vec2 hq = vec2(1.0 / max(length(vec2(ddx.x, ddy.x)), 1e-6), 1.0 / max(length(vec2(ddx.y, ddy.y)), 1e-6));\n" +
+            "    float B = b1 - 1.0;\n" +
+            "    float mode = floor(B / 256.0 + 0.001);\n" +
+            "    float amt = (B - mode * 256.0) / 255.0;\n" +
+            "    float m = min(hq.x, hq.y);\n" +
+            "    float r = ((a1 - 1.0) / 1023.0) * m;\n" +
+            "    vec2 p = vec2(nx, ny) * hq;\n" +
+            "    float alpha;\n" +
+            "    if (mode < 0.5) {\n" +
+            "        alpha = clamp(0.5 - sdRoundBox(p, hq, r), 0.0, 1.0);\n" +
+            "    } else if (mode < 1.5) {\n" +
+            "        float t = max(amt * m, 1.0);\n" +
+            "        float d = sdRoundBox(p, hq, r);\n" +
+            "        alpha = clamp(0.5 - d, 0.0, 1.0) * clamp(0.5 + d + t, 0.0, 1.0);\n" +
+            "    } else {\n" +
+            "        float pad = max(amt * m, 1.0);\n" +
+            "        vec2 bi = max(hq - vec2(pad), vec2(0.5));\n" +
+            "        float d = sdRoundBox(p, bi, min(r, min(bi.x, bi.y)));\n" +
+            "        if (mode < 2.5) {\n" +
+            "            float f = 1.0 - clamp(d / pad, 0.0, 1.0);\n" +
+            "            alpha = f * f * clamp(0.5 + d, 0.0, 1.0);\n" +
+            "        } else {\n" +
+            "            alpha = 1.0 - smoothstep(-pad, pad, d);\n" +
+            "        }\n" +
+            "    }\n" +
+            "    gl_FragColor = vec4(v_color.rgb, v_color.a * alpha);\n" +
+            "}\n";
+
+    /**
+     * Arena card tilt: a texture region on a (subdivided, perspective-projected) mesh, with antialiased rounded corners
+     * measured on the flat card, an optional grey-out and a soft glare spot. The vertex colours carry the shading.
+     */
+    public static final String arenaTiltFrag = arenaFragHeader +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform vec4 u_uvRect;\n" +
+            "uniform vec2 u_size;\n" +
+            "uniform float u_radius;\n" +
+            "uniform vec3 u_sheen;\n" +
+            "uniform float u_gray;\n" +
+            arenaSdRoundBox +
+            "void main() {\n" +
+            "    vec2 n = (v_texCoords - u_uvRect.xy) / (u_uvRect.zw - u_uvRect.xy);\n" +
+            "    vec4 col = texture2D(u_texture, v_texCoords);\n" +
+            "    vec2 p = (n - 0.5) * u_size;\n" +
+            "    float d = sdRoundBox(p, u_size * 0.5, u_radius);\n" +
+            "    float aa = max(fwidth(d), 0.0001);\n" +
+            "    col.a *= clamp(0.5 - d / aa, 0.0, 1.0);\n" +
+            "    if (u_gray > 0.0) {\n" +
+            "        col.rgb = mix(col.rgb, vec3(dot(col.rgb, vec3(0.299, 0.587, 0.114))), u_gray);\n" +
+            "    }\n" +
+            "    if (u_sheen.z > 0.0) {\n" +
+            "        vec2 q = (n - u_sheen.xy) * vec2(1.0, u_size.y / max(u_size.x, 1.0));\n" +
+            "        col.rgb = min(col.rgb + vec3(u_sheen.z * exp(-dot(q, q) * 5.0)), vec3(1.0));\n" +
+            "    }\n" +
+            "    gl_FragColor = col * v_color;\n" +
+            "}\n";
 }

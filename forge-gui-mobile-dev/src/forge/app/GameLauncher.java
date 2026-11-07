@@ -115,6 +115,7 @@ public class GameLauncher {
             config.setResizable(false);
         }
         config.setHdpiMode(HdpiMode.Logical);
+        applyFrameRate(config);
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -139,6 +140,29 @@ public class GameLauncher {
         });
 
         new Lwjgl3Application(start, config);
+    }
+
+    /**
+     * Runs at the monitor's refresh rate (120 fps on a 120 Hz screen) instead of libGDX's 60 fps assumptions: vsync
+     * paces the frames, the foreground cap is the refresh rate (plus one, so the limiter never fights vsync, and so
+     * it still holds where a driver ignores vsync), and the idle poll runs at the refresh rate too, so a frame asked
+     * for by input (hover, drag) is not held back up to 1/60 s by libGDX's idle sleep while rendering on demand.
+     */
+    public static void applyFrameRate(Lwjgl3ApplicationConfiguration config) {
+        int hz = 60;
+        try {
+            DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
+            if (dm != null && dm.refreshRate > 0) {
+                hz = dm.refreshRate;
+            }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        hz = Math.max(30, Math.min(hz, 360));
+        config.useVsync(true);
+        config.setForegroundFPS(hz + 1);
+        config.setIdleFPS(hz);
+        System.out.println("Display refresh rate " + hz + " Hz: rendering up to " + hz + " fps");
     }
 
     private static float getPrimaryScreenAspect() {
