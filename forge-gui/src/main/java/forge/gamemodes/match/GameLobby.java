@@ -438,6 +438,12 @@ public abstract class GameLobby implements IHasGameType {
             return;
         }
 
+        if (variant == GameType.TwoHeadedGiant || variant == GameType.Archenemy) {
+            for (int i = 0; i < data.slots.size(); i++) {
+                data.slots.get(i).setTeam(i);
+            }
+        }
+
         if (variant == currentGameType) {
             if (hasVariant(GameType.Commander)) {
                 currentGameType = GameType.Commander;
