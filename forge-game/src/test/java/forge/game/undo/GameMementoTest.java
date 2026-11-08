@@ -337,6 +337,24 @@ public class GameMementoTest {
     }
 
     @Test
+    public void captureEstimateIncludesInitialGraphAndSurvivesReset() {
+        final Root r = new Root();
+        for (int i = 0; i < 500; i++) { item(r, i); }
+        final GameMemento.Recorder rec = new GameMemento.Recorder();
+
+        rec.capture(r);
+        final long fullCapture = rec.lastCaptureBytes();
+        AssertJUnit.assertTrue("initial full capture must be budgeted", fullCapture > rec.liveBytes() / 2);
+
+        r.items.get(0).value++;
+        rec.capture(r);
+        AssertJUnit.assertTrue("incremental capture estimate must remain available", rec.lastCaptureBytes() > 0);
+
+        rec.reset();
+        AssertJUnit.assertTrue("memory guard estimate must survive history reset", rec.lastCaptureBytes() > 0);
+    }
+
+    @Test
     public void unchangedGraphCostsNothing() {
         final Root r = sampleRoot();
         final GameMemento.Recorder rec = new GameMemento.Recorder();
