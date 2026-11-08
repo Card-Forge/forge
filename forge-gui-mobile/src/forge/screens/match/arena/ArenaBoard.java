@@ -480,8 +480,59 @@ public final class ArenaBoard {
     // ---- rows ------------------------------------------------------------------------------------------------------
     /** The front row's tile height before a crowded row shrinks it. */
     public static float frontTileHeight(final boolean local, final boolean seat) {
+        return Math.round(fullFrontTileHeight(local, seat) * cardScale());
+    }
+
+    /** {@link #frontTileHeight} at full card size: the room the row has, which smaller tiles sit in the middle of. */
+    public static float fullFrontTileHeight(final boolean local, final boolean seat) {
         final float share = seat ? TILE_H_SEAT : local ? TILE_H : TILE_H * FOE_FRONT;
         return Math.round(windowH() * share);
+    }
+
+    // ---- card size (the slider under the corner buttons) -----------------------------------------------------------
+    /** The smallest the card size slider makes the cards, against their full size. */
+    public static final float CARD_SCALE_MIN = 0.6f;
+    private static float cardScale = -1f;
+    private static int cardScaleSaved = -1;
+
+    /** How large the cards are (battlefield tiles and the hand), from {@link #CARD_SCALE_MIN} to 1; kept in the preferences. */
+    public static float cardScale() {
+        if (cardScale < 0f) {
+            int pct = 100;
+            try {
+                pct = Integer.parseInt(forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_ARENA_CARD_SIZE));
+            } catch (final RuntimeException e) {
+                // not a number, or no preferences yet: full size
+            }
+            cardScale = clampScale(pct / 100f);
+            cardScaleSaved = Math.round(cardScale * 100f);
+        }
+        return cardScale;
+    }
+
+    private static float clampScale(final float s) {
+        return Math.max(CARD_SCALE_MIN, Math.min(1f, Math.round(s * 100f) / 100f));
+    }
+
+    /** Sets the card size (whole percents); returns whether it changed. {@code save} writes it to the preferences now. */
+    public static boolean setCardScale(final float s, final boolean save) {
+        final float v = clampScale(s);
+        final boolean changed = v != cardScale();
+        cardScale = v;
+        if (save) {
+            saveCardScale();
+        }
+        return changed;
+    }
+
+    /** Writes the card size to the preferences, if it changed since last written. */
+    public static void saveCardScale() {
+        final int pct = Math.round(cardScale() * 100f);
+        if (pct != cardScaleSaved) {
+            cardScaleSaved = pct;
+            forge.model.FModel.getPreferences().setPref(forge.localinstance.properties.ForgePreferences.FPref.UI_ARENA_CARD_SIZE, String.valueOf(pct));
+            forge.model.FModel.getPreferences().save();
+        }
     }
 
     /** The back row's tile height for a front row this tall. */
@@ -491,12 +542,12 @@ public final class ArenaBoard {
     }
 
     public static float minTileHeight() {
-        return Math.round(windowH() * TILE_H_MIN);
+        return Math.round(windowH() * TILE_H_MIN * cardScale());
     }
 
     /** The smallest a back row's lands get before they start to overlap. */
     public static float smallestBackHeight() {
-        return Math.round(windowH() * TILE_H * FOE_BACK);
+        return Math.round(windowH() * TILE_H * FOE_BACK * cardScale());
     }
 
     public static float frontRowTop(final boolean local, final boolean seat) {

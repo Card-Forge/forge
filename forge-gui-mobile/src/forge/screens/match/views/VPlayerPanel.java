@@ -414,7 +414,11 @@ public class VPlayerPanel extends FContainer {
         field.setBounds(0, 0, width, height);
         final float frontH = ArenaBoard.frontTileHeight(local, seat);
         final float backH = ArenaBoard.backTileHeight(local, seat, frontH);
-        field.setArenaRows(ArenaBoard.frontRowTop(local, seat) - top, frontH, ArenaBoard.backRowTop(local, seat) - top, backH);
+        //smaller cards (the card size slider) sit in the middle of the room their rows have at full size
+        final float fullFrontH = ArenaBoard.fullFrontTileHeight(local, seat);
+        final float fullBackH = ArenaBoard.backTileHeight(local, seat, fullFrontH);
+        field.setArenaRows(ArenaBoard.frontRowTop(local, seat) - top + Math.round((fullFrontH - frontH) / 2f), frontH,
+                ArenaBoard.backRowTop(local, seat) - top + Math.round((fullBackH - backH) / 2f), backH);
         field.revalidate();
 
         //the portrait, with the phase ladder on its wings

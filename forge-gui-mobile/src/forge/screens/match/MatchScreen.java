@@ -65,6 +65,7 @@ import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.arena.ArenaBoardPainter;
+import forge.screens.match.arena.ArenaCardSizeSlider;
 import forge.screens.match.arena.ArenaCornerMenu;
 import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.arena.ArenaPlayerInfo;
@@ -112,6 +113,7 @@ public class MatchScreen extends FScreen {
 
     // the Arena board
     private final ArenaCornerMenu cornerMenu;
+    private final ArenaCardSizeSlider cardSizeSlider;
     private boolean arenaLaidOut;
     private ArenaMatchLayout.PromptMode arenaPromptMode;
     private float arenaPromptHeight = -1;
@@ -230,6 +232,9 @@ public class MatchScreen extends FScreen {
         ArenaMatchLayout.setBoardPossible(topPlayerPrompt == null); //two prompts at opposite ends: the default layout
         cornerMenu = add(new ArenaCornerMenu(this));
         cornerMenu.setVisible(false);
+        //under the corner buttons, how large the cards are; the board follows it at once
+        cardSizeSlider = add(new ArenaCardSizeSlider(this::revalidate));
+        cardSizeSlider.setVisible(false);
         ArenaTheme.addListener(arenaThemeListener);
     }
 
@@ -268,6 +273,9 @@ public class MatchScreen extends FScreen {
         cornerMenu.setVisible(true);
         ArenaMatchLayout.cornerMenu(width, height, arenaRect);
         cornerMenu.setBounds(arenaRect.x, arenaRect.y, arenaRect.width, arenaRect.height);
+        final float sliderH = Math.round(arenaRect.height * 0.62f), sliderW = Math.round(arenaRect.height * 3.4f);
+        cardSizeSlider.setVisible(true);
+        cardSizeSlider.setBounds(arenaRect.x + arenaRect.width - sliderW, arenaRect.y + arenaRect.height + ArenaMatchLayout.cornerGap(), sliderW, sliderH);
         placeArenaPrompt(width, height);
     }
 
@@ -392,6 +400,7 @@ public class MatchScreen extends FScreen {
         getHeader().setVisible(true);
         cornerMenu.setVisible(false);
         cornerMenu.closeGear();
+        cardSizeSlider.setVisible(false);
         bottomPlayerPrompt.setVisible(true);
         bottomPlayerPrompt.setArenaMode(null);
     }
@@ -977,7 +986,7 @@ public class MatchScreen extends FScreen {
 
         if (arenaLaidOut && isArenaBoard()) { //who is out: their seat has left the board, so a plate under the corner says so
             final float outH = Math.max(ArenaTheme.px(22), Math.round(getHeight() * 0.026f));
-            ArenaPlayerInfo.drawEliminated(g, game, cornerMenu.getRight(), cornerMenu.getBottom() + ArenaMatchLayout.cornerGap(), outH);
+            ArenaPlayerInfo.drawEliminated(g, game, cornerMenu.getRight(), cardSizeSlider.getBottom() + ArenaMatchLayout.cornerGap(), outH);
         }
         drawArcs(g);
         CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());

@@ -251,7 +251,9 @@ public class VZoneDisplay extends VCardDisplayArea {
         final float availableWidth = Math.max(1f, right - left);
         final float costRow = Math.round(areaHeight * ArenaBoard.FAN_COST_ROW);
         final float availableHeight = areaHeight - 2 * gutter - costRow;
-        float cardHeight = Math.round(availableHeight / (1f + ArenaBoard.FAN_LIFT - ArenaBoard.FAN_SINK));
+        //the card size slider: smaller cards sink as far into the bottom edge, in proportion, as full-size ones
+        final float fullHeight = Math.round(availableHeight / (1f + ArenaBoard.FAN_LIFT - ArenaBoard.FAN_SINK));
+        float cardHeight = Math.round(fullHeight * ArenaBoard.cardScale());
         float cardWidth = Math.round(cardHeight / FCardPanel.ASPECT_RATIO);
         final float minWidth = Math.round(cardWidth * 0.45f);
         while (cardWidth > minWidth && Math.max(0, count - 1) * cardWidth * ArenaBoard.FAN_MIN_STEP + (count > 0 ? cardWidth : 0)
@@ -268,7 +270,7 @@ public class VZoneDisplay extends VCardDisplayArea {
         final float rowWidth = count == 0 ? 0f : (count - 1) * step + cardWidth;
         final float lift = Math.round(cardHeight * ArenaBoard.FAN_LIFT);
         final float arc = Math.round(cardHeight * ArenaBoard.FAN_ARC);
-        final float baseY = gutter + costRow + lift;
+        final float baseY = gutter + costRow + lift + Math.round(fullHeight * (1f - ArenaBoard.cardScale()) * (1f - ArenaBoard.FAN_SINK));
         //the hand stays centred on the window; cards castable from elsewhere follow on its right
         float x = count == 0 ? (left + right) / 2f - (extrasW - cardWidth * ArenaBoard.FAN_EXTRAS_GAP) / 2f
                 : Math.max(left, (left + right) / 2f - rowWidth / 2f);
