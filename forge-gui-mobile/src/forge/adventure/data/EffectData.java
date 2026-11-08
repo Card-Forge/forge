@@ -6,6 +6,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
 import forge.model.FModel;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ public class EffectData implements Serializable {
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
     public String[] startBattleWithCardInHand; //Cards added to the hand after mulligans.
     public int maxHandSizeModifier = 0;  //Amount to add to maximum hand size, without changing starting hand size.
+    public SuspendedCard[] startBattleWithCardSuspended; //Cards that start suspended in Exile.
 
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
@@ -59,27 +61,49 @@ public class EffectData implements Serializable {
         return cardsFromNames(startBattleWithCardInHand);
     }
 
+    public Array<Pair<IPaperCard, Integer>> startBattleWithCardsSuspended() {
+        Array<Pair<IPaperCard, Integer>> cards = new Array<>();
+        if (startBattleWithCardSuspended == null) {
+            return cards;
+        }
+        for (SuspendedCard suspended : startBattleWithCardSuspended) {
+            if (suspended.turns < 1) {
+                System.err.print("Suspended card \"" + suspended.card + "\" needs at least 1 turn\n");
+                continue;
+            }
+            IPaperCard card = cardFromName(suspended.card);
+            if (card != null)
+                cards.add(Pair.of(card, suspended.turns));
+        }
+        return cards;
+    }
+
     private static Array<IPaperCard> cardsFromNames(String[] names) {
         Array<IPaperCard> cards = new Array<>(IPaperCard.class);
         if (names == null) {
             return cards;
         }
         for (String name : names) {
-            PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
-            if (C != null)
-                cards.add(C);
-            else {
-                try {
-                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
-                    if (T != null) cards.add(T);
-                    else System.err.print("Can not find card/token \"" + name + "\"\n");
-                } catch (Exception e) {
-                    //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
-                    System.err.print("Can not find card/token \"" + name + "\"\n");
-                }
-            }
+            IPaperCard card = cardFromName(name);
+            if (card != null)
+                cards.add(card);
         }
         return cards;
+    }
+
+    private static IPaperCard cardFromName(String name) {
+        PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
+        if (C != null)
+            return C;
+        try {
+            PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+            if (T != null) return T;
+            System.err.print("Can not find card/token \"" + name + "\"\n");
+        } catch (Exception e) {
+            //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
+            System.err.print("Can not find card/token \"" + name + "\"\n");
+        }
+        return null;
     }
 
     public String itemize(Array<IPaperCard> paperCards) {
@@ -100,6 +124,12 @@ public class EffectData implements Serializable {
             description+="Command:" + itemize(startBattleWithCardsInCommandZone()) + "\n";
         if(startBattleWithCardInHand != null && startBattleWithCardInHand.length != 0)
             description+="Hand:" + itemize(startBattleWithCardsInHand()) + "\n";
+        if(startBattleWithCardSuspended != null && startBattleWithCardSuspended.length != 0) {
+            description+="Suspended:";
+            for (Pair<IPaperCard, Integer> suspended : startBattleWithCardsSuspended())
+                description+="\n" + suspended.getLeft() + " (" + suspended.getRight() + ")";
+            description+="\n";
+        }
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
         if(maxHandSizeModifier != 0)
@@ -120,6 +150,9 @@ public class EffectData implements Serializable {
         return description;
     }
 
+
+    public static class SuspendedCard implements Serializable {
+        public String card;
+        public int turns;
+    }
 }
-
-

@@ -9,6 +9,7 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +30,7 @@ public class RegisteredPlayer {
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsInCommandZone = null;
     private Iterable<IPaperCard> extraCardsInHand = null;
+    private Iterable<Pair<IPaperCard, Integer>> extraCardsSuspended = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
@@ -89,6 +91,9 @@ public class RegisteredPlayer {
     public final Iterable<? extends IPaperCard> getExtraCardsInHand() {
         return extraCardsInHand == null ? EmptyList : extraCardsInHand;
     }
+    public final Iterable<Pair<IPaperCard, Integer>> getExtraCardsSuspended() {
+        return extraCardsSuspended == null ? Collections.emptyList() : extraCardsSuspended;
+    }
 
     public final void addExtraCardsOnBattlefield(Iterable<IPaperCard> extraCardsonTable) {
         if (this.extraCardsOnBattlefield == null)
@@ -114,6 +119,13 @@ public class RegisteredPlayer {
     }
     public void setMaxHandSizeModifier(int maxHandSizeModifier0) {
         this.maxHandSizeModifier = maxHandSizeModifier0;
+    }
+
+    public final void addExtraCardsSuspended(Iterable<Pair<IPaperCard, Integer>> extraCardsSuspended) {
+        if (this.extraCardsSuspended == null)
+            this.extraCardsSuspended = extraCardsSuspended;
+        else
+            this.extraCardsSuspended = Iterables.concat(this.extraCardsSuspended, extraCardsSuspended);
     }
 
     public int getStartingHand() {

@@ -125,6 +125,10 @@ public final class ActivationGuard {
     }
 
     /** A loyalty ability that puts loyalty counters on the Planeswalker (+N, or an X it cannot read). */
+    public static boolean gainsLoyalty(final SpellAbility sa) {
+        return loyaltyGain(sa);
+    }
+
     private static boolean loyaltyGain(final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         if (cost == null || !sa.isPwAbility()) {
