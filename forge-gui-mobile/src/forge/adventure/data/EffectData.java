@@ -24,6 +24,8 @@ public class EffectData implements Serializable {
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
+    public String[] startBattleWithCardInHand; //Cards added to the hand after mulligans.
+    public int maxHandSizeModifier = 0;  //Amount to add to maximum hand size, without changing starting hand size.
     public SuspendedCard[] startBattleWithCardSuspended; //Cards that start suspended in Exile.
 
     //Map only effects.
@@ -53,6 +55,10 @@ public class EffectData implements Serializable {
 
     public Array<IPaperCard> startBattleWithCardsInCommandZone() {
         return cardsFromNames(startBattleWithCardInCommandZone);
+    }
+
+    public Array<IPaperCard> startBattleWithCardsInHand() {
+        return cardsFromNames(startBattleWithCardInHand);
     }
 
     public Array<Pair<IPaperCard, Integer>> startBattleWithCardsSuspended() {
@@ -116,6 +122,8 @@ public class EffectData implements Serializable {
             description+="Battlefield:" + itemize(startBattleWithCards()) + "\n";
         if(startBattleWithCardInCommandZone != null && startBattleWithCardInCommandZone.length != 0)
             description+="Command:" + itemize(startBattleWithCardsInCommandZone()) + "\n";
+        if(startBattleWithCardInHand != null && startBattleWithCardInHand.length != 0)
+            description+="Hand:" + itemize(startBattleWithCardsInHand()) + "\n";
         if(startBattleWithCardSuspended != null && startBattleWithCardSuspended.length != 0) {
             description+="Suspended:";
             for (Pair<IPaperCard, Integer> suspended : startBattleWithCardsSuspended())
@@ -124,6 +132,8 @@ public class EffectData implements Serializable {
         }
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
+        if(maxHandSizeModifier != 0)
+            description+="Max hand size: " + maxHandSizeModifier + "\n";
         if(moveSpeed!=0 && moveSpeed != 1)
             description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)

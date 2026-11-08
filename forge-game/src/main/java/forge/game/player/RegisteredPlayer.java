@@ -26,8 +26,10 @@ public class RegisteredPlayer {
     private int startingLife = 20;
     private int startingHand = 7;
     private int manaShards = 0;
+    private int maxHandSizeModifier = 0;
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsInCommandZone = null;
+    private Iterable<IPaperCard> extraCardsInHand = null;
     private Iterable<Pair<IPaperCard, Integer>> extraCardsSuspended = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
@@ -86,6 +88,9 @@ public class RegisteredPlayer {
     public final Iterable<? extends IPaperCard> getExtraCardsInCommandZone() {
         return extraCardsInCommandZone == null ? EmptyList : extraCardsInCommandZone;
     }
+    public final Iterable<? extends IPaperCard> getExtraCardsInHand() {
+        return extraCardsInHand == null ? EmptyList : extraCardsInHand;
+    }
     public final Iterable<Pair<IPaperCard, Integer>> getExtraCardsSuspended() {
         return extraCardsSuspended == null ? Collections.emptyList() : extraCardsSuspended;
     }
@@ -102,6 +107,20 @@ public class RegisteredPlayer {
         else
             this.extraCardsInCommandZone = Iterables.concat(this.extraCardsInCommandZone, extraCardsInCommandZone);
     }
+    public final void addExtraCardsInHand(Iterable<IPaperCard> extraCardsInHand) {
+        if (this.extraCardsInHand == null)
+            this.extraCardsInHand = extraCardsInHand;
+        else
+            this.extraCardsInHand = Iterables.concat(this.extraCardsInHand, extraCardsInHand);
+    }
+
+    public int getMaxHandSizeModifier() {
+        return maxHandSizeModifier;
+    }
+    public void setMaxHandSizeModifier(int maxHandSizeModifier0) {
+        this.maxHandSizeModifier = maxHandSizeModifier0;
+    }
+
     public final void addExtraCardsSuspended(Iterable<Pair<IPaperCard, Integer>> extraCardsSuspended) {
         if (this.extraCardsSuspended == null)
             this.extraCardsSuspended = extraCardsSuspended;

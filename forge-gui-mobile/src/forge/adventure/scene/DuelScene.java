@@ -346,25 +346,31 @@ public class DuelScene extends ForgeScene {
         //Apply various combat effects.
         int lifeMod = 0;
         int changeStartCards = 0;
+        int maxHandSizeModifier = 0;
         int extraManaShards = 0;
         Array<IPaperCard> startCards = new Array<>();
         Array<IPaperCard> startCardsInCommandZone = new Array<>();
+        Array<IPaperCard> startCardsInHand = new Array<>();
         Array<Pair<IPaperCard, Integer>> startCardsSuspended = new Array<>();
 
         for (EffectData data : effects) {
             lifeMod += data.lifeModifier;
             changeStartCards += data.changeStartCards;
+            maxHandSizeModifier += data.maxHandSizeModifier;
             startCards.addAll(data.startBattleWithCards());
             startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
+            startCardsInHand.addAll(data.startBattleWithCardsInHand());
             startCardsSuspended.addAll(data.startBattleWithCardsSuspended());
             extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
         player.addExtraCardsInCommandZone(startCardsInCommandZone);
+        player.addExtraCardsInHand(startCardsInHand);
         player.addExtraCardsSuspended(startCardsSuspended);
         if (lifeMod != 0)
             player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
+        player.setMaxHandSizeModifier(player.getMaxHandSizeModifier() + maxHandSizeModifier);
         player.setManaShards((player.getManaShards() + extraManaShards));
         player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
     }
