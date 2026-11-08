@@ -32,6 +32,9 @@ import forge.model.FModel;
 import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.arena.ArenaBoard;
+import forge.screens.match.arena.ArenaCards;
+import forge.screens.match.arena.ArenaMatchLayout;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FSelectionBox;
@@ -485,6 +488,152 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         ThreadUtil.invokeInGameThread(() -> cardPanel.selectCard(false));
     }
 
+    // ---- the Arena board's rows ------------------------------------------------------------------------------------
+
+    /** One card on the board with what stands with it: its attachments (behind it), then it, then its stacked copies. */
+    private static int arenaGroupSize(CardAreaPanel top) {
+        int n = 0;
+        for (CardAreaPanel a : top.getAttachedPanels()) {
+            if (a != null) { n += arenaGroupSize(a); }
+        }
+        n++;
+        return top.getNextPanelInStack() == null ? n : n + arenaGroupSize(top.getNextPanelInStack());
+    }
+
+    private static float arenaGroupWidth(CardAreaPanel top, float w) {
+        return w + Math.round(w * ArenaBoard.STACK_STEP) * (arenaGroupSize(top) - 1);
+    }
+
+    /**
+     * The Arena board's arrangement of a battlefield row (port of the Swing PlayArea.layoutArenaBoard): the front row
+     * (creatures) is centred and its tiles keep one size while they fit, then shrink, then overlap; the back row runs in
+     * two wings either side of the portrait, lands on the left pressed against it and everything else on the right. In
+     * combat what fights steps out towards the other army and stands a little larger. Tiles are wider than tall.
+     *
+     * @param front     the front row (else the back row)
+     * @param local     the local player's field (else an opponent's)
+     * @param seat      an opponent's seat in a game of three or more
+     * @param centreX   where the portrait's column is, in this row's coordinates
+     */
+    protected final void layoutArenaRow(boolean front, boolean local, boolean seat, float centreX, float width) {
+        orderedCards.get().clear();
+        infoGhostCardIds.get().clear();
+        final List<CardAreaPanel> tops = cardPanels.get();
+        final float frontH = ArenaBoard.frontTileHeight(local, seat);
+        final float minH = ArenaBoard.minTileHeight();
+        final float margin = ArenaBoard.rowMargin(seat);
+        if (front) {
+            float h = frontH;
+            final float room = width - 2 * margin;
+            while (h > minH && arenaRowWidth(tops, h) > room) {
+                h -= 2;
+            }
+            final float w = Math.round(h * ArenaBoard.TILE_RATIO);
+            final float total = arenaRowWidth(tops, h);
+            final float squeeze = total <= room || tops.size() < 2 ? 0f : (total - room) / (tops.size() - 1);
+            final float shown = total - squeeze * Math.max(0, tops.size() - 1);
+            float x = Math.max(margin, centreX - shown / 2f);
+            if (x + shown > width - margin) {
+                x = Math.max(margin, width - margin - shown);
+            }
+            final float step = Math.round(ArenaBoard.windowH() * ArenaBoard.COMBAT_STEP) * (local ? -1 : 1);
+            for (CardAreaPanel top : tops) {
+                final boolean fighting = top.getCard().isAttacking() || top.getCard().isBlocking();
+                placeArenaGroup(top, x, fighting ? step : 0f, w, h, fighting ? ArenaBoard.COMBAT_SCALE : 1f);
+                x += arenaGroupWidth(top, w) + Math.round(w * ArenaBoard.TILE_GAP) - squeeze;
+            }
+            return;
+        }
+        // the back row: lands on the left wing, the rest on the right; lands shrink before they cross the portrait
+        final List<CardAreaPanel> lands = new ArrayList<>(), others = new ArrayList<>();
+        for (CardAreaPanel top : tops) {
+            (top.getCard().getCurrentState().isLand() ? lands : others).add(top);
+        }
+        float h = ArenaBoard.backTileHeight(local, seat, frontH);
+        final float clear = ArenaBoard.portraitClear(seat);
+        final float rightLimit = ArenaBoard.backRowRight(local, seat, width);
+        if (seat) { //a seat's portrait is above its rows: one row across the whole width
+            final List<CardAreaPanel> all = new ArrayList<>(lands);
+            all.addAll(others);
+            while (h > minH && arenaRowWidth(all, h) > rightLimit - margin) {
+                h -= 2;
+            }
+            placeArenaWing(all, margin, rightLimit, h, false, true);
+            return;
+        }
+        final float leftRoom = centreX - clear - margin;
+        final float smallest = ArenaBoard.smallestBackHeight();
+        while (h > smallest && !lands.isEmpty() && arenaRowWidth(lands, h) > leftRoom) {
+            h -= 2;
+        }
+        final float w = Math.round(h * ArenaBoard.TILE_RATIO);
+        final float gap = Math.round(w * ArenaBoard.TILE_GAP);
+        final float mostOverlap = Math.round(w * 0.35f);
+        final List<CardAreaPanel> leftWing = new ArrayList<>(), rightWing = new ArrayList<>();
+        float used = -gap;
+        for (CardAreaPanel top : lands) {
+            final float gw = arenaGroupWidth(top, w) + gap;
+            if (leftWing.isEmpty() || used + gw - leftWing.size() * mostOverlap <= leftRoom) {
+                leftWing.add(top);
+                used += gw;
+            } else {
+                rightWing.add(top);
+            }
+        }
+        rightWing.addAll(others);
+        placeArenaWing(leftWing, margin, centreX - clear, h, true, false);
+        placeArenaWing(rightWing, centreX + clear, rightLimit, h, false, false);
+    }
+
+    private static float arenaRowWidth(List<CardAreaPanel> row, float h) {
+        final float w = Math.round(h * ArenaBoard.TILE_RATIO), gap = Math.round(w * ArenaBoard.TILE_GAP);
+        float total = -gap;
+        for (CardAreaPanel top : row) {
+            total += arenaGroupWidth(top, w) + gap;
+        }
+        return Math.max(0, total);
+    }
+
+    /** One wing of the back row between two x positions, pressed against the portrait (alignRight) or centred; overlaps if it must. */
+    private void placeArenaWing(List<CardAreaPanel> row, float left, float right, float h, boolean alignRight, boolean centre) {
+        if (row.isEmpty()) {
+            return;
+        }
+        final float w = Math.round(h * ArenaBoard.TILE_RATIO), gap = Math.round(w * ArenaBoard.TILE_GAP);
+        final float total = arenaRowWidth(row, h);
+        final float room = Math.max(w, right - left);
+        final float squeeze = total <= room || row.size() < 2 ? 0f : (total - room) / (row.size() - 1);
+        final float shown = total - squeeze * Math.max(0, row.size() - 1);
+        float x = alignRight ? Math.max(left, right - shown) : centre ? Math.max(left, left + (room - shown) / 2f) : left;
+        for (CardAreaPanel top : row) {
+            placeArenaGroup(top, x, 0f, w, h, 1f);
+            x += arenaGroupWidth(top, w) + gap - squeeze;
+        }
+    }
+
+    /** Lays a card and what stands with it out from x: each one a step to the right of the one behind it. */
+    private void placeArenaGroup(CardAreaPanel top, float x, float y, float w, float h, float scale) {
+        final List<FCardPanel> group = new ArrayList<>();
+        top.buildCardPanelList(group);
+        final float step = Math.round(w * ArenaBoard.STACK_STEP);
+        int chain = 0;
+        for (CardAreaPanel p = top; p != null; p = p.getNextPanelInStack()) {
+            chain++;
+        }
+        for (int i = 0; i < group.size(); i++) {
+            final CardAreaPanel p = (CardAreaPanel) group.get(i);
+            orderedCards.get().add(p.getCard());
+            if (p.isInfoGhost()) {
+                infoGhostCardIds.get().add(p.getCard().getId());
+            }
+            p.setBounds(Math.round(x + i * step), Math.round(y), w, h);
+            final ArenaCards.State st = p.getArenaState();
+            st.scale = scale;
+            st.stackBack = i < group.size() - 1;
+            st.groupCount = i == group.size() - 1 && chain > 1 ? chain : 0;
+        }
+    }
+
     public static class CardAreaPanel extends FCardPanel {
         private static Map<Integer, CardAreaPanel> allCardPanels = new HashMap<>();
         private static final Map<Integer, Rectangle> handStarts = new ConcurrentHashMap<>();
@@ -626,6 +775,34 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         //use static get(card) function instead
         private CardAreaPanel(CardView card0) {
             super(card0);
+        }
+
+        private ArenaCards.State arenaState;
+
+        /** What the Arena look remembers about this card between frames (its glide, light, tap...). */
+        public ArenaCards.State getArenaState() {
+            if (arenaState == null) {
+                arenaState = new ArenaCards.State();
+            }
+            return arenaState;
+        }
+
+        /** Whether the Arena look draws this card as a tile on a battlefield row. */
+        public boolean isArenaTile() {
+            return displayArea instanceof VField.FieldRow && ArenaMatchLayout.applies();
+        }
+
+        /** Whether the Arena look draws this card in the local hand's fan. */
+        public boolean isArenaHandCard() {
+            return displayArea instanceof VZoneDisplay zone && zone.isArenaHand();
+        }
+
+        @Override
+        protected boolean renderedCardContains(float x, float y) {
+            if (isArenaTile() || isArenaHandCard()) { //the whole panel is the tile or the card (and the strip it rose from)
+                return x >= 0 && y >= 0 && x <= getWidth() && y <= getHeight();
+            }
+            return super.renderedCardContains(x, y);
         }
 
         public VCardDisplayArea getDisplayArea() {
@@ -952,6 +1129,22 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     return; // hide the real card while the flying copy is on screen
                 }
                 flight = null;
+            }
+            if (isArenaTile()) {
+                final ArenaCards.State st = getArenaState();
+                st.follow(screenPos.x, screenPos.y, displayArea);
+                stopAnimations(); //the Arena look swings the card over itself
+                ArenaCards.drawTile(g, getCard(), st, isHovered(), 0, 0, getWidth(), getHeight());
+                if (ghostKind != GhostKind.NONE) {
+                    g.fillSmoothRoundRect(GHOST_TINT, 0, 0, getWidth(), getHeight(), getWidth() * 0.04f);
+                }
+                return;
+            }
+            if (isArenaHandCard()) {
+                final ArenaCards.State st = getArenaState();
+                st.follow(screenPos.x, screenPos.y, displayArea);
+                ArenaCards.drawHandCard(g, getCard(), st, isHovered(), 0, 0, getWidth(), st.cardHeight > 0 ? st.cardHeight : getHeight());
+                return;
             }
             if (displayArea != null && displayArea.rotateCards180) {
                 float padding = getPadding();

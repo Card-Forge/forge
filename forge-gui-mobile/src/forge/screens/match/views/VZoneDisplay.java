@@ -8,6 +8,10 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaBoard;
+import forge.screens.match.arena.ArenaCards;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.collect.FCollectionView;
@@ -23,6 +27,38 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     public ZoneType getZoneType() {
         return zoneType;
+    }
+
+    /** Whether this is the local player's hand on the Arena board: a fan along the bottom of the window. */
+    public boolean isArenaHand() {
+        return zoneType == ZoneType.Hand && ArenaMatchLayout.applies() && MatchController.getView() != null
+                && MatchController.getView().getBottomPlayerPanel() != null && MatchController.getView().getBottomPlayerPanel().getPlayer() == player;
+    }
+
+    private CardAreaPanel arenaRaised; //the hovered card of the Arena fan, raised above the others
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        if (isArenaHand()) {
+            //the hovered card rises and its neighbours part: lay the fan out again when the pointer moves to another card
+            CardAreaPanel hovered = null;
+            for (CardAreaPanel p : cardPanels.get()) {
+                if (p.isHovered()) {
+                    hovered = p;
+                    break;
+                }
+            }
+            if (hovered != arenaRaised) {
+                arenaRaised = hovered;
+                revalidate();
+            }
+            return;
+        }
+        if (ArenaMatchLayout.applies()) { //a zone the game opened: a strip on glass over the board
+            forge.screens.match.arena.ArenaArt.glassPanel(g, 0, 0, getWidth(), getHeight());
+            return;
+        }
+        super.drawBackground(g);
     }
 
     @Override
@@ -52,8 +88,7 @@ public class VZoneDisplay extends VCardDisplayArea {
         }
     }
 
-    @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+    private boolean panImpl(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
             return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
         }
@@ -119,7 +154,7 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     protected boolean layoutVerticallyForLandscapeMode() {
-        return !VPlayerPanel.isAltZoneLayout();
+        return !VPlayerPanel.isAltZoneLayout() && !ArenaMatchLayout.applies(); //an opened zone is a strip on the Arena board
     }
 
     @Override
@@ -135,6 +170,9 @@ public class VZoneDisplay extends VCardDisplayArea {
 
         orderedCards.get().clear();
 
+        if (isArenaHand()) {
+            return layoutArenaFan(visibleWidth, visibleHeight);
+        }
         if (Forge.isLandscapeMode() && layoutVerticallyForLandscapeMode()) {
             return layoutAndGetScrollBoundsLandscape(visibleWidth, visibleHeight);
         }
@@ -170,6 +208,78 @@ public class VZoneDisplay extends VCardDisplayArea {
         }
 
         return new ScrollBounds(centered ? visibleWidth : x, visibleHeight);
+    }
+
+    /**
+     * The Arena hand (port of the Swing CardArea fan): one centred, overlapping row on a shallow arc, sunk half below
+     * the window's bottom edge, each card leaning out from the middle; the hovered card rises (and straightens) and its
+     * neighbours part. Each panel reaches down over the strip its card rose from, so a still pointer keeps it raised.
+     */
+    private ScrollBounds layoutArenaFan(float areaWidth, float areaHeight) {
+        revealedPanel = null;
+        final java.util.List<CardAreaPanel> panels = cardPanels.get();
+        final int count = panels.size();
+        final float gutter = Math.max(2f, areaHeight * 0.02f);
+        final float sideRoom = Math.round(areaHeight * 0.3f) + Math.round(areaWidth * 0.055f);
+        final float left = gutter + sideRoom, right = areaWidth - gutter - sideRoom;
+        final float availableWidth = Math.max(1f, right - left);
+        final float costRow = Math.round(areaHeight * ArenaBoard.FAN_COST_ROW);
+        final float availableHeight = areaHeight - 2 * gutter - costRow;
+        float cardHeight = Math.round(availableHeight / (1f + ArenaBoard.FAN_LIFT - ArenaBoard.FAN_SINK));
+        float cardWidth = Math.round(cardHeight / FCardPanel.ASPECT_RATIO);
+        final float minWidth = Math.round(cardWidth * 0.45f);
+        while (cardWidth > minWidth && Math.max(0, count - 1) * cardWidth * ArenaBoard.FAN_MIN_STEP + (count > 0 ? cardWidth : 0) > availableWidth) {
+            cardWidth--;
+        }
+        cardHeight = Math.round(cardWidth * FCardPanel.ASPECT_RATIO);
+        float step = cardWidth * ArenaBoard.FAN_STEP;
+        if (count > 1) {
+            step = Math.max(1f, Math.min(step, (availableWidth - cardWidth) / (count - 1)));
+        }
+        final float rowWidth = count == 0 ? 0f : (count - 1) * step + cardWidth;
+        final float lift = Math.round(cardHeight * ArenaBoard.FAN_LIFT);
+        final float arc = Math.round(cardHeight * ArenaBoard.FAN_ARC);
+        final float baseY = gutter + costRow + lift;
+        float x = Math.max(left, (left + right) / 2f - rowWidth / 2f);
+        final CardAreaPanel raised = arenaRaised != null && panels.contains(arenaRaised) ? arenaRaised : null;
+        final int raisedIndex = raised == null ? -1 : panels.indexOf(raised);
+        final float spread = raised == null ? 0f : Math.round(cardWidth * 0.42f);
+        //later cards overlap earlier ones; the raised one is above them all
+        clearChildren();
+        for (int i = 0; i < count; i++) {
+            final CardAreaPanel panel = panels.get(i);
+            orderedCards.get().add(panel.getCard());
+            final float t = count == 1 ? 0f : (i / (count - 1f)) * 2f - 1f;
+            float y = baseY + Math.round(arc * t * t);
+            final boolean up = panel == raised;
+            if (up) {
+                y -= lift;
+            }
+            final float lean = up || count < 2 ? 0f
+                    : Math.max(-ArenaBoard.FAN_MAX_LEAN, Math.min(ArenaBoard.FAN_MAX_LEAN, (i - (count - 1) / 2f) * ArenaBoard.FAN_LEAN));
+            final float part = raisedIndex < 0 || i == raisedIndex ? 0f : i < raisedIndex ? -spread : spread;
+            panel.setBounds(Math.round(x + part), y, cardWidth, cardHeight + (up ? lift : 0f));
+            final ArenaCards.State st = panel.getArenaState();
+            st.fanLean = lean;
+            st.raised = up;
+            st.cardHeight = cardHeight;
+            if (!up) {
+                add(panel);
+            }
+            x += step;
+        }
+        if (raised != null) {
+            add(raised);
+        }
+        return new ScrollBounds(areaWidth, areaHeight);
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        if (isArenaHand()) {
+            return true; //the fan always fits: nothing to scroll or reveal
+        }
+        return panImpl(x, y, deltaX, deltaY, moreVertical);
     }
 
     private ScrollBounds layoutAndGetScrollBoundsLandscape(float visibleWidth, float visibleHeight) {
@@ -214,6 +324,10 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     protected void startClip(Graphics g) {
+        if (isArenaHand()) { //the raised card rises out of the strip; its light reaches past it
+            g.startClip(-getLeft() - 4000, -getTop() - 4000, 8000 + getWidth(), 8000 + getHeight());
+            return;
+        }
         if (Forge.isLandscapeMode()) {
             g.startClip(0, 0, getWidth(), getHeight());
         }

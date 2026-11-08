@@ -1,0 +1,337 @@
+package forge.screens.match.arena;
+
+import java.util.function.Consumer;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Align;
+
+import forge.Forge;
+import forge.Graphics;
+import forge.assets.FSkinFont;
+import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
+import forge.screens.match.MatchController;
+import forge.toolbox.FDisplayObject;
+import forge.util.collect.FCollectionView;
+
+/**
+ * What the Arena board shows of a player besides the battlefield, each a small view the player panel places: the zone
+ * piles (library, graveyard, exile, command zone) as card piles with counts, the player's name on a plate in the corner,
+ * and an opponent's hand as a fan of card backs. Ported from the Swing {@code ArenaZonePile} and VField's name plate.
+ * They draw only while the Arena look is on; the player panel hides them otherwise.
+ */
+public final class ArenaPlayerParts {
+    private ArenaPlayerParts() { }
+
+    private static final float CARD_RATIO = 0.716f;
+    private static final Color S1 = new Color(), S2 = new Color(), S3 = new Color();
+    private static final Color PAGE_LIT = ArenaTheme.rgb(0x968E7C), PAGE = ArenaTheme.rgb(0x46423A);
+    private static final Color EXILE_TINT = ArenaTheme.rgba(150, 170, 220, 90);
+    private static final Color BADGE = ArenaTheme.rgba(6, 6, 8, 235), BADGE_RIM = ArenaTheme.rgba(255, 255, 255, 120);
+    private static final Color NAME_PLATE = ArenaTheme.rgba(6, 7, 11, 150);
+
+    // ---- piles -----------------------------------------------------------------------------------------------------
+
+    /**
+     * A player's piles side by side: the library as a stack of sleeves, the graveyard and exile showing their top card,
+     * the command zone its commander (with the commander tax). Each carries a count that jumps when it changes. A click
+     * opens the Arena card browser on that zone; the wheel does too.
+     */
+    public static final class Piles extends FDisplayObject {
+        private static final ZoneType[] ZONES = {ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command};
+        private final PlayerView player;
+        private boolean rightToLeft;
+        private final Consumer<ZoneType> fallback;
+        private final int[] seen = {-1, -1, -1, -1};
+        private final ArenaMotion.Fade[] bump = {new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f)};
+        private final ArenaMotion.Fade[] hot = {new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f), new ArenaMotion.Fade(0f)};
+        private final float[] cellX = new float[4], cellW = new float[4];
+        private final boolean[] shown = new boolean[4];
+        private final String[] countText = new String[4];
+
+        /**
+         * @param rightToLeft piles fill from the right (an opponent's, in the top right corner)
+         * @param fallback    what to do when the browser does not open (show the zone the old way)
+         */
+        public Piles(final PlayerView player0, final boolean rightToLeft0, final Consumer<ZoneType> fallback0) {
+            player = player0;
+            rightToLeft = rightToLeft0;
+            fallback = fallback0;
+        }
+
+        /** Piles fill from the right (an opponent's, in the top right corner) or from the left (yours). */
+        public void setRightToLeft(final boolean rightToLeft0) {
+            rightToLeft = rightToLeft0;
+        }
+
+        private int count(final int i) {
+            final ZoneType zone = ZONES[i];
+            return player.getZoneSize(zone);
+        }
+
+        private boolean isShown(final int i) {
+            // an empty pile takes no room; only the library is always there
+            return i == 0 || count(i) > 0;
+        }
+
+        private void layoutCells() {
+            final float h = getHeight();
+            final float pad = Math.max(2f, ArenaTheme.px(2));
+            final float cardH = h - 2 * pad - ArenaTheme.px(8);
+            final float cw = Math.round(cardH * CARD_RATIO) + ArenaTheme.px(10);
+            final float gap = Math.round(cw * 0.12f);
+            float x = rightToLeft ? getWidth() : 0f;
+            for (int i = 0; i < ZONES.length; i++) {
+                shown[i] = isShown(i);
+                if (!shown[i]) {
+                    continue;
+                }
+                cellW[i] = cw;
+                if (rightToLeft) {
+                    x -= cw;
+                    cellX[i] = x;
+                    x -= gap;
+                } else {
+                    cellX[i] = x;
+                    x += cw + gap;
+                }
+            }
+        }
+
+        private int pileAt(final float x, final float y) {
+            layoutCells();
+            for (int i = 0; i < ZONES.length; i++) {
+                if (shown[i] && x >= cellX[i] && x < cellX[i] + cellW[i] && y >= 0 && y <= getHeight()) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        @Override
+        public boolean tap(final float x, final float y, final int count) {
+            final int i = pileAt(x, y);
+            if (i < 0) {
+                return false;
+            }
+            open(ZONES[i]);
+            return true;
+        }
+
+        private void open(final ZoneType zone) {
+            if (!ArenaCardBrowser.browseZone(player, zone) && fallback != null) {
+                fallback.accept(zone);
+            }
+        }
+
+        @Override
+        public boolean longPress(final float x, final float y) {
+            final int i = pileAt(x, y);
+            if (i < 0) {
+                return false;
+            }
+            final CardView top = topCard(i);
+            if (top != null) {
+                CardZoom.show(top);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean pan(final float x, final float y, final float dx, final float dy, final boolean moreVertical) {
+            return false;
+        }
+
+        private CardView topCard(final int i) {
+            final ZoneType zone = ZONES[i];
+            if (zone == ZoneType.Library) {
+                return null;
+            }
+            final FCollectionView<CardView> cards = player.getCards(zone);
+            if (cards == null || cards.isEmpty()) {
+                return null;
+            }
+            if (zone == ZoneType.Command && player.getCommanders() != null) {
+                // the commander rather than an emblem or effect that happens to be on top
+                for (final CardView c : cards) {
+                    if (player.getCommanders().contains(c)) {
+                        return c;
+                    }
+                }
+            }
+            try {
+                return cards.getLast();
+            } catch (final RuntimeException e) {
+                return null; // changed under us; next frame
+            }
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            if (!ArenaTheme.isActive()) {
+                return;
+            }
+            layoutCells();
+            final float mx = Forge.mouseMovedX - screenPos.x, my = Forge.mouseMovedY - screenPos.y;
+            final boolean over = Forge.magnify && mx >= 0 && my >= 0 && mx < getWidth() && my < getHeight();
+            for (int i = 0; i < ZONES.length; i++) {
+                final int n = count(i);
+                if (seen[i] >= 0 && n != seen[i]) {
+                    bump[i].set(1f);
+                    bump[i].to(0f, 380);
+                }
+                if (n != seen[i] || countText[i] == null) {
+                    countText[i] = String.valueOf(n);
+                }
+                seen[i] = n;
+                if (!shown[i]) {
+                    continue;
+                }
+                final boolean lit = over && mx >= cellX[i] && mx < cellX[i] + cellW[i];
+                if (hot[i].goal() != (lit ? 1f : 0f)) {
+                    hot[i].to(lit ? 1f : 0f, ArenaMotion.HOVER_MS);
+                }
+                drawPile(g, i, n, cellX[i], cellW[i], getHeight());
+            }
+        }
+
+        private void drawPile(final Graphics g, final int i, final int count, final float cellX0, final float cellW0, final float cellH) {
+            final ZoneType zone = ZONES[i];
+            final float pad = Math.max(2f, ArenaTheme.px(2));
+            final int depth = zone == ZoneType.Library ? Math.min(5, 1 + count / 15) : Math.min(2, 1 + count / 6);
+            final float d = Math.max(1f, ArenaTheme.px(1.4f));
+            float ch = cellH - 2 * pad - ArenaTheme.px(8) - depth * d;
+            float cw = Math.round(ch * CARD_RATIO);
+            if (cw > cellW0 - 2 * pad - depth * d) {
+                cw = cellW0 - 2 * pad - depth * d;
+                ch = Math.round(cw / CARD_RATIO);
+            }
+            if (cw <= 0 || ch <= 0) {
+                return;
+            }
+            final float lift = ArenaTheme.px(4) * hot[i].get();
+            final float x = cellX0 + (cellW0 - cw - depth * d) / 2f;
+            final float y = cellH - ch - pad - ArenaTheme.px(6) - lift;
+            final float r = Math.max(ArenaTheme.px(3), cw / 18f);
+            if (count == 0) {
+                // an empty library: a dashed hollow with the zone's name
+                ArenaArt.frame(g, x, y, cw, ch, r, ArenaTheme.alpha(ArenaTheme.GOLD, 0.27f, S1), Math.max(1f, ArenaTheme.px(1.2f)));
+                final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(9), Math.min(ArenaTheme.px(12), cw / 5.5f)));
+                g.drawText(zone.getTranslatedName(), f, ArenaTheme.TEXT_DIM, x, y, cw, ch, false, Align.center, true);
+                return;
+            }
+            // the pile's thickness: page edges rising behind the top card, lit along the far edge
+            g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.82f, S1), x, y + ArenaTheme.px(2), cw + depth * d, ch, r, ArenaTheme.px(9));
+            for (int o = depth; o >= 1; o--) {
+                g.fillSmoothRoundRect(o == depth ? PAGE_LIT : PAGE, x + o * d, y - o * d, cw, ch, r);
+            }
+            final CardView top = topCard(i);
+            if (top != null && MatchController.instance.mayView(top)) {
+                CardRenderer.drawCard(g, top, x, y, cw, ch, CardStackPosition.Top);
+                if (zone == ZoneType.Exile) {
+                    g.fillSmoothRoundRect(EXILE_TINT, x, y, cw, ch, r); // exile reads as a cold, faded pile
+                }
+            } else {
+                ArenaCards.drawCardBack(g, player, x, y, cw, ch, r, false);
+            }
+            g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.BLACK, 0.78f, S1), x, y, cw, ch, r);
+            if (hot[i].get() > 0f) {
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.HOVER, 0.45f * hot[i].get(), S2), x, y, cw, ch, r, ArenaTheme.px(8));
+            }
+            String badge = countText[i];
+            if (zone == ZoneType.Command) {
+                // commander tax: two more for each time the commander has already been cast
+                final int tax = top != null && player.getCommanders() != null && player.getCommanders().contains(top) ? 2 * player.getCommanderCast(top) : 0;
+                badge = tax > 0 ? "+" + tax : null;
+            }
+            if (badge != null) {
+                countBadge(g, badge, x + cw / 2f, y + ch, cellH, bump[i].get());
+            }
+        }
+
+        private void countBadge(final Graphics g, final String text, final float cx, final float cy, final float cellH, final float bumped) {
+            final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(15), cellH * 0.15f) * (1f + 0.38f * bumped));
+            final float bh = f.getLineHeight() + ArenaTheme.px(2);
+            final float bw = Math.max(bh, ArenaArt.textWidth(text, f) + bh * 0.7f);
+            final float bx = cx - bw / 2f, by = Math.min(getHeight() - bh, cy - bh / 2f);
+            g.fillSmoothRoundRect(BADGE, bx, by, bw, bh, bh / 2f);
+            g.drawSmoothRoundRect(1f, BADGE_RIM, bx, by, bw, bh, bh / 2f);
+            ArenaArt.textBold(g, text, f, ArenaTheme.TEXT, bx, by, bw, bh, Align.center);
+        }
+    }
+
+    // ---- an opponent's hand ----------------------------------------------------------------------------------------
+
+    /** An opponent's hand as a fan of card backs hanging beside the portrait; a count only when it is too big to draw. */
+    public static final class OpponentHand extends FDisplayObject {
+        private final PlayerView player;
+
+        public OpponentHand(final PlayerView player0) {
+            player = player0;
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            if (!ArenaTheme.isActive()) {
+                return;
+            }
+            final int count = player.getZoneSize(ZoneType.Hand);
+            if (count == 0) {
+                return;
+            }
+            final float h = getHeight(), w = getWidth();
+            final float ch = Math.round(h * 0.9f), cw = Math.round(ch * CARD_RATIO);
+            final float r = Math.max(ArenaTheme.px(3), cw / 18f);
+            final int shown = Math.min(count, 10);
+            // spread sideways as well as turned, so it reads as a held hand and not a stack
+            final float stepX = shown < 2 ? 0 : Math.min(cw * 0.55f, (w - cw) / (shown - 1));
+            final float cx = w / 2f;
+            for (int i = 0; i < shown; i++) {
+                final float place = i - (shown - 1) / 2f;
+                final float cardX = Math.round(cx + place * stepX);
+                g.startRotateTransform(cardX, h + ch / 5f, -place * 4.5f);
+                g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.5f, S1), cardX - cw / 2f, h - ch - 2 + ArenaTheme.px(2), cw, ch, r, ArenaTheme.px(5));
+                ArenaCards.drawCardBack(g, player, cardX - cw / 2f, h - ch - 2, cw, ch, r, true);
+                g.endTransform();
+            }
+            if (count > shown) {
+                ArenaArt.countBadge(g, String.valueOf(count), cx, h - ch / 3f, Math.max(ArenaTheme.px(20), h * 0.3f));
+            }
+        }
+    }
+
+    // ---- the name plate --------------------------------------------------------------------------------------------
+
+    /** The player's name in the corner on a dark plate with a gold diamond, readable whatever the board does behind it. */
+    public static final class NamePlate extends FDisplayObject {
+        private final PlayerView player;
+
+        public NamePlate(final PlayerView player0) {
+            player = player0;
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            if (!ArenaTheme.isActive()) {
+                return;
+            }
+            final String name = player.getName();
+            final float h = getHeight() - 2, d = Math.max(ArenaTheme.px(6), h / 3f);
+            final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(13), h * 0.62f));
+            final float textX = ArenaTheme.px(12) + d + ArenaTheme.px(8);
+            final float plateW = Math.min(getWidth() - 1, textX + ArenaArt.textWidth(name, f) + ArenaTheme.px(14));
+            g.fillSmoothRoundRect(NAME_PLATE, 0, 0, plateW, h, h / 2f);
+            final float mx = ArenaTheme.px(12) + d / 2f, my = h / 2f;
+            // a small gold diamond: a square turned on its corner (a rounded square at 45 degrees)
+            g.startRotateTransform(mx, my, 45f);
+            g.fillSmoothRoundRect(ArenaTheme.GOLD, mx - d * 0.36f, my - d * 0.36f, d * 0.72f, d * 0.72f, d * 0.08f);
+            g.endTransform();
+            ArenaArt.textShadowed(g, name, f, ArenaTheme.WHITE, textX, 0, plateW - textX, h, Align.left);
+        }
+    }
+}

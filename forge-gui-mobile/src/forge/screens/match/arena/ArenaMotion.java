@@ -421,6 +421,22 @@ public final class ArenaMotion {
             }
         }
 
+        /**
+         * Moves the value by {@code by} without touching its target or its speed: what follows a target that just
+         * jumped (a card laid out somewhere else) keeps moving smoothly from where it was seen.
+         */
+        public void shift(final float by) {
+            if (by == 0f) {
+                return;
+            }
+            value += by;
+            if (!registered && Math.abs(value - target) > epsilon) {
+                registered = true;
+                springs.add(this);
+                requestFrame();
+            }
+        }
+
         /** Jumps to {@code now} and rests there. */
         public void set(final float now) {
             value = now;

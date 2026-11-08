@@ -17,6 +17,8 @@ import forge.game.player.PlayerView;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.FDisplayObject;
 
 public class VManaPool extends VDisplayArea {
@@ -72,6 +74,20 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
+        if (ArenaMatchLayout.applies()) { //the Arena board: the colours that have mana, as chips in a row
+            for (ManaLabel label : manaLabels) {
+                final boolean has = !"0".equals(label.text);
+                label.setVisible(has);
+                if (has) {
+                    label.setBounds(x, y, visibleHeight, visibleHeight);
+                    x += visibleHeight * 1.08f;
+                }
+            }
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+        for (ManaLabel label : manaLabels) {
+            label.setVisible(true);
+        }
         if (Forge.isLandscapeMode() && VPlayerPanel.isAltZoneLayout()) {
             //alternate landscape layout: one horizontal row of icons, each with its count underneath
             float labelWidth = visibleWidth / manaLabels.size();
@@ -153,6 +169,17 @@ public class VManaPool extends VDisplayArea {
 
         @Override
         public void draw(Graphics g) {
+            if (ArenaMatchLayout.applies()) { //a dark disc with the colour's symbol and the amount on a gold badge
+                final float d = Math.min(getWidth(), getHeight());
+                final float r = d / 2f;
+                g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.5f), 0, ArenaTheme.px(2), d, d, r, ArenaTheme.px(4));
+                g.fillSmoothRoundRectGradient(ArenaTheme.NAVY_LIGHT, ArenaTheme.NIGHT, true, 0, 0, d, d, r);
+                g.drawSmoothCircle(Math.max(1f, d / 18f), isHovered() ? ArenaTheme.GOLD_BRIGHT : ArenaTheme.GOLD, r, r, r);
+                final float s = d * 0.62f;
+                g.drawImage(image, (d - s) / 2f, (d - s) / 2f, s, s);
+                forge.screens.match.arena.ArenaArt.countBadge(g, text, d * 0.82f, d * 0.82f, d * 0.46f);
+                return;
+            }
             float textHeight = FONT.getCapHeight();
             float gapY = textHeight / 4f;
 

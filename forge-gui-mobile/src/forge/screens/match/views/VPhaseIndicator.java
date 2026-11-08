@@ -19,6 +19,8 @@ import forge.game.player.PlayerView;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaGlyphs;
+import forge.screens.match.arena.ArenaMatchLayout;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -65,7 +67,22 @@ public class VPhaseIndicator extends FContainer {
         addPhaseLabel("CL", PhaseType.CLEANUP);
     }
 
-    private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget; }
+    private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget && !isArenaLadder(); }
+
+    // the Arena board: the phases as glyphs on the portrait's wings, half each side of it
+    private float arenaPortrait; //the portrait's diameter while laid out as the Arena ladder, 0 otherwise
+
+    /** Lays the phases out as the Arena ladder round a portrait this big (0 to go back to the default look). */
+    public void setArenaLadder(float portraitDiameter) {
+        if (arenaPortrait != portraitDiameter) {
+            arenaPortrait = portraitDiameter;
+            revalidate();
+        }
+    }
+
+    private boolean isArenaLadder() {
+        return arenaPortrait > 0 && ArenaMatchLayout.applies();
+    }
 
     //compact landscape layout: nothing is drawn until the phase button opens the stops column
     private BooleanSupplier onRight;
@@ -185,7 +202,7 @@ public class VPhaseIndicator extends FContainer {
 
     @Override
     public boolean tap(float x, float y, int count) { //only reached when no stop label took the tap
-        if (!Forge.isLandscapeMode()) { return false; }
+        if (!Forge.isLandscapeMode() || isArenaLadder()) { return false; } //the portrait between the wings takes it
         if (isCompact()) { //a stray touch on the open column only keeps it open, the phase button toggles it
             keepExpanded();
             return true;
@@ -242,6 +259,10 @@ public class VPhaseIndicator extends FContainer {
 
     @Override
     public void draw(Graphics g) {
+        if (isArenaLadder()) { //just the glyphs, on the portrait's wings
+            super.draw(g);
+            return;
+        }
         if (isCompact()) {
             drawCompactStops(g);
             return;
@@ -355,7 +376,9 @@ public class VPhaseIndicator extends FContainer {
     }
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
-        phaseLabels.put(phaseType, add(new PhaseLabel(caption)));
+        PhaseLabel label = new PhaseLabel(caption);
+        label.phase = phaseType;
+        phaseLabels.put(phaseType, add(label));
     }
 
     public PhaseLabel getLabel(PhaseType phaseType) {
@@ -400,6 +423,28 @@ public class VPhaseIndicator extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        if (isArenaLadder()) {
+            //beginning of the turn through blockers on the left wing, ending against the portrait; the rest on the right
+            final int half = getChildCount() / 2;
+            final float gap = Math.max(1f, height / 34f);
+            final float leftEnd = width / 2 - Math.round(arenaPortrait * 0.62f);
+            final float rightStart = width / 2 + Math.round(arenaPortrait * 0.62f);
+            float leftW = 0;
+            for (int i = 0; i < half; i++) {
+                leftW += ArenaGlyphs.cellWidth(((PhaseLabel) getChildAt(i)).phase, height) + (i > 0 ? gap : 0);
+            }
+            float x = leftEnd - leftW;
+            for (int i = 0; i < getChildCount(); i++) {
+                final PhaseLabel lbl = (PhaseLabel) getChildAt(i);
+                if (i == half) {
+                    x = rightStart;
+                }
+                final float w = ArenaGlyphs.cellWidth(lbl.phase, height);
+                lbl.setBounds(x, 0, w, height);
+                x += w + gap;
+            }
+            return;
+        }
         if (width > height) {
             float x = 0;
             float w = width / phaseLabels.size();
@@ -425,6 +470,7 @@ public class VPhaseIndicator extends FContainer {
 
     public class PhaseLabel extends FDisplayObject {
         private final String caption;
+        private PhaseType phase;
         private boolean stopAtPhase = false;
         private boolean active = false;
         private boolean yieldMarked = false;
@@ -505,6 +551,14 @@ public class VPhaseIndicator extends FContainer {
 
         @Override
         public void draw(final Graphics g) {
+            if (isArenaLadder() && phase != null) {
+                ArenaGlyphs.draw(g, ArenaGlyphs.kindOf(phase), 0, 0, getWidth(), getHeight(), active, stopAtPhase, isHovered(), 1f);
+                if (yieldMarked) { //passing until here: a small amber chevron under the glyph
+                    final float s = Math.max(3f, getHeight() * 0.22f), cx = getWidth() / 2f;
+                    g.fillTriangle(YIELD_MARKER_COLOR, cx - s, getHeight(), cx + s, getHeight(), cx, getHeight() - s);
+                }
+                return;
+            }
             float x = PADDING_X;
             float w = getWidth() - 2 * PADDING_X;
             float h = getHeight();

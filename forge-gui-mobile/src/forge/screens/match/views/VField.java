@@ -10,6 +10,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.arena.ArenaBoard;
+import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -118,7 +120,7 @@ public class VField extends FContainer {
                 otherPermanents.addAll(contraptions);
             }
 
-            if (creatures.isEmpty()) {
+            if (creatures.isEmpty() && !ArenaMatchLayout.applies()) { //the Arena board keeps a front row of creatures only
                 row1.refreshCardPanels(otherPermanents);
                 row2.refreshCardPanels(lands);
             } else {
@@ -278,8 +280,29 @@ public class VField extends FContainer {
         row2.clear();
     }
 
+    // the Arena board: where the front and back rows go in this field, set by the player panel's Arena layout
+    private float arenaFrontTop = -1, arenaBackTop, arenaFrontH, arenaBackH;
+
+    /** The Arena board's rows: their tops and heights in this field's coordinates (the field covers the player's area). */
+    void setArenaRows(float frontTop, float frontH, float backTop, float backH) {
+        arenaFrontTop = frontTop;
+        arenaFrontH = frontH;
+        arenaBackTop = backTop;
+        arenaBackH = backH;
+    }
+
+    /** Whether this is an opponent's seat, one of several along the top of the Arena board. */
+    boolean isArenaSeat() {
+        return flipped && ArenaBoard.isSeatGame();
+    }
+
     @Override
     protected void doLayout(float width, float height) {
+        if (ArenaMatchLayout.applies() && arenaFrontTop >= 0) {
+            row1.setBounds(0, arenaFrontTop, width, arenaFrontH);
+            row2.setBounds(0, arenaBackTop, width, arenaBackH);
+            return;
+        }
         float cardSize = height / 2;
         float y1, y2;
         if (flipped) {
@@ -339,6 +362,24 @@ public class VField extends FContainer {
 
         @Override
         protected void drawBackground(forge.Graphics g) { } //battlefield rows never get the zone backing
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            if (ArenaMatchLayout.applies() && arenaFrontTop >= 0) { //rows fit the board: they never scroll
+                layoutArenaRow(this == row1, !flipped, isArenaSeat(), visibleWidth / 2f, visibleWidth);
+                return new ScrollBounds(visibleWidth, visibleHeight);
+            }
+            return super.layoutAndGetScrollBounds(visibleWidth, visibleHeight);
+        }
+
+        @Override
+        protected void startClip(forge.Graphics g) {
+            if (ArenaMatchLayout.applies()) { //lifted, lit and tilted tiles reach past the row
+                g.startClip(-getLeft() - 4000, -getTop() - 4000, 8000 + getWidth(), 8000 + getHeight());
+                return;
+            }
+            super.startClip(g);
+        }
 
         @Override
         protected boolean animateEntry() { return true; }

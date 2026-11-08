@@ -26,6 +26,8 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaPrompt;
 import forge.gamemodes.match.YieldController;
 import forge.toolbox.FEvent;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -95,6 +97,7 @@ public class VPrompt extends FContainer {
         return undoIcon;
     }
 
+    private final Color arenaText = new Color();
     private boolean overMatch; //the match screen's own prompts float over the background in the compact layout, a dialog's prompt does not
 
     public void setOverMatch(boolean value) { overMatch = value; }
@@ -156,7 +159,7 @@ public class VPrompt extends FContainer {
         lblMessage = add(new MessageLabel());
         lblMessage.setLeft(BTN_WIDTH);
         lblMessage.setHeight(HEIGHT);
-        btnOk = add(new FButton(okText, okCommand));
+        btnOk = add(new PromptButton(okText, okCommand, true));
         btnCancel = add(new CancelButton(cancelText, e -> onCancelPressed(cancelCommand, e)));
         btnUndo = add(new UndoButton());
         btnMenu = add(new MenuButton());
@@ -171,6 +174,109 @@ public class VPrompt extends FContainer {
 
     public FButton getBtnOk() {
         return btnOk;
+    }
+
+    // ---- the Arena board ------------------------------------------------------------------------------------------
+    private final ArenaPrompt.State arena = new ArenaPrompt.State();
+
+    /** Whether this is the match screen's own prompt drawn in the Arena look (a dialog's prompt keeps its look). */
+    public boolean isArenaPrompt() {
+        return overMatch && ArenaMatchLayout.applies();
+    }
+
+    /** Which kind of Arena prompt this is now: null while it only waits on someone else (then it is not shown). */
+    public ArenaMatchLayout.PromptMode getArenaMode() {
+        if (!btnOk.isEnabled() && !btnCancel.isEnabled()) {
+            return null;
+        }
+        return ArenaPrompt.isPriorityOnly(btnOk.getText(), btnCancel.getText()) ? ArenaMatchLayout.PromptMode.PRIORITY : ArenaMatchLayout.PromptMode.DECISION;
+    }
+
+    /** Called by the match screen as it places the prompt for a new kind: it fades in again. */
+    public void setArenaMode(ArenaMatchLayout.PromptMode mode) {
+        if (mode != arena.mode) {
+            arena.mode = mode;
+            arena.shown.set(0f);
+            arena.shown.to(1f, 220);
+        }
+    }
+
+    /** A decision's height at this width: its message (wrapped, at most a third of the window) above its buttons. */
+    public float getArenaDecisionHeight(float width, float windowH) {
+        final float buttonH = ArenaPrompt.decisionButtonHeight(windowH);
+        if (StringUtils.isBlank(message)) {
+            return buttonH; //no message yet (the game is still setting up): just the buttons
+        }
+        final FSkinFont font = ArenaPrompt.messageFont(windowH);
+        final float textH = lblMessage.renderer.getWrappedBounds(message, font, width - 2 * arenaMessagePad()).height;
+        return Math.min(textH + 2 * arenaMessagePad(), windowH / 3f) + Utils.scale(3) + buttonH;
+    }
+
+    private static float arenaMessagePad() {
+        return forge.screens.match.arena.ArenaTheme.px(18);
+    }
+
+    private void doArenaLayout(float width, float height) {
+        final float wh = forge.screens.match.arena.ArenaBoard.windowH();
+        btnMenu.setVisible(false);
+        if (arena.mode == ArenaMatchLayout.PromptMode.PRIORITY) {
+            final float strip = ArenaPrompt.stripHeight(wh), action = ArenaPrompt.actionHeight(wh), caption = ArenaPrompt.captionHeight(wh);
+            final float smallW = ArenaPrompt.smallWidth(wh), smallH = ArenaPrompt.smallHeight(wh);
+            lblMessage.setVisible(false);
+            btnOk.setBounds(0, strip, width, action);
+            btnCancel.setBounds(width - smallW, strip + action + caption, smallW, smallH);
+            btnUndo.setVisible(undoShown);
+            btnUndo.setBounds(width - smallW - smallH - Utils.scale(4), strip + action + caption, smallH, smallH);
+            return;
+        }
+        final float buttonH = ArenaPrompt.decisionButtonHeight(wh);
+        final float gap = Utils.scale(3);
+        final boolean blank = StringUtils.isBlank(message);
+        lblMessage.setVisible(!blank);
+        lblMessage.setBounds(0, 0, width, Math.max(0, height - buttonH - gap));
+        final float bw = (width - Utils.scale(4)) / 2;
+        btnOk.setBounds(0, height - buttonH, bw, buttonH);
+        btnCancel.setBounds(width - bw, height - buttonH, bw, buttonH);
+        btnUndo.setVisible(false);
+    }
+
+    /** The prompt's own buttons: the Arena pill on the match screen, the skin's button elsewhere. */
+    private class PromptButton extends FButton {
+        private final boolean ok;
+
+        private PromptButton(String text, FEventHandler command, boolean ok0) {
+            super(text, command);
+            ok = ok0;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            if (!isArenaPrompt()) {
+                super.draw(g);
+                return;
+            }
+            drawArenaButton(g, this, ok, isHeld(this));
+        }
+    }
+
+    /** Whether the pointer is holding this button down (FButton keeps its own pressed state to itself). */
+    private static boolean isHeld(FButton button) {
+        return button.isHovered() && com.badlogic.gdx.Gdx.input != null && com.badlogic.gdx.Gdx.input.isTouched();
+    }
+
+    private void drawArenaButton(Graphics g, FButton button, boolean ok, boolean held) {
+        final float alpha = arena.shown.get();
+        if (arena.mode == ArenaMatchLayout.PromptMode.PRIORITY) {
+            if (ok) {
+                ArenaPrompt.drawButton(g, ArenaPrompt.actionLabel(), button.getWidth(), button.getHeight(), true, button.isHovered(), held, button.isEnabled(), alpha);
+            } else { //End Turn as a small round chevron button; Undo keeps its words
+                final String text = button.getText();
+                final boolean endTurn = text != null && text.equals(Forge.getLocalizer().getMessage("lblEndTurn"));
+                ArenaPrompt.drawButton(g, endTurn ? "\u00BB" : text, button.getWidth(), button.getHeight(), endTurn, button.isHovered(), held, button.isEnabled(), alpha);
+            }
+            return;
+        }
+        ArenaPrompt.drawButton(g, button.getText(), button.getWidth(), button.getHeight(), ok, button.isHovered(), held, button.isEnabled(), alpha);
     }
 
     public FButton getBtnCancel() {
@@ -312,6 +418,15 @@ public class VPrompt extends FContainer {
             super(text, command);
         }
 
+        @Override
+        public void draw(Graphics g) {
+            if (!isArenaPrompt()) {
+                super.draw(g);
+                return;
+            }
+            drawArenaButton(g, this, false, isHeld(this));
+        }
+
         private static String msg(String key) {
             try {
                 return Forge.getLocalizer().getMessage(key);
@@ -347,6 +462,11 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        if (isArenaPrompt()) {
+            doArenaLayout(width, height);
+            return;
+        }
+        lblMessage.setVisible(true);
         boolean showUndo = undoShown;
         btnUndo.setVisible(showUndo);
         float undoSpace = showUndo ? UNDO_SIZE + 2 * UNDO_GAP : 0;
@@ -381,6 +501,18 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (isArenaPrompt()) {
+            final float alpha = arena.shown.get();
+            final float wh = forge.screens.match.arena.ArenaBoard.windowH();
+            if (arena.mode == ArenaMatchLayout.PromptMode.PRIORITY) {
+                ArenaPrompt.drawStrip(g, arena, getWidth(), ArenaPrompt.stripHeight(wh), alpha);
+                final float y = ArenaPrompt.stripHeight(wh) + ArenaPrompt.actionHeight(wh);
+                ArenaPrompt.drawCaption(g, ArenaPrompt.caption(), 0, y, getWidth(), ArenaPrompt.captionHeight(wh), alpha);
+            } else if (lblMessage.isVisible()) {
+                ArenaPrompt.drawMessageShade(g, 0, 0, getWidth(), lblMessage.getHeight(), alpha);
+            }
+            return;
+        }
         if (isFrostedMatch()) {
             //the match's own prompt lets the background show through, a dialog's prompt must hide what is behind it
             g.fillRect(overMatch ? COMPACT_SCRIM : GLASS_SOLID, 0, 0, getWidth(), getHeight());
@@ -390,7 +522,7 @@ public class VPrompt extends FContainer {
     }
     
     private class MessageLabel extends FDisplayObject {
-        private final TextRenderer renderer = new TextRenderer();
+        final TextRenderer renderer = new TextRenderer();
 
         @Override
         public boolean tap(float x, float y, int count) {
@@ -422,6 +554,16 @@ public class VPrompt extends FContainer {
 
         @Override
         public void draw(Graphics g) {
+            if (isArenaPrompt()) { //a few lines of centred white words on the decision's shade
+                if (!StringUtils.isEmpty(message)) {
+                    final float pad = arenaMessagePad();
+                    final float wh = forge.screens.match.arena.ArenaBoard.windowH();
+                    final float a = arena.shown.get();
+                    final Color c = arenaText.set(1f, 1f, 1f, a);
+                    renderer.drawText(g, message, ArenaPrompt.messageFont(wh), c, pad, pad, getWidth() - 2 * pad, getHeight() - 2 * pad, 0, getHeight(), true, Align.center, true);
+                }
+                return;
+            }
             if (!StringUtils.isEmpty(message)) {
                 float x = PADDING;
                 float y = PADDING;

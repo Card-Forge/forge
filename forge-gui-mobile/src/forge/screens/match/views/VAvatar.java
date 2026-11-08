@@ -17,6 +17,9 @@ import forge.game.card.CounterEnumType;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaPortrait;
+import forge.screens.match.arena.ArenaSkin;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FSelectionBox;
 import forge.util.AITimeoutTracker;
@@ -68,6 +71,32 @@ public class VAvatar extends FDisplayObject {
         image = MatchController.getPlayerAvatar(player);
         setSize(size, size);
         avatarAnimation = new AvatarAnimation();
+    }
+
+    private static final ArenaSkin<VAvatar> ARENA = new ArenaPortrait();
+    private final ArenaPortrait.State arenaState = new ArenaPortrait.State();
+    private boolean arenaOpponent;
+
+    public PlayerView getPlayer() {
+        return player;
+    }
+
+    public FImage getImage() {
+        return image;
+    }
+
+    /** What the Arena portrait remembers between frames. */
+    public ArenaPortrait.State getArenaState() {
+        return arenaState;
+    }
+
+    /** Whether this portrait hangs from the top of the Arena board (an opponent's). */
+    public boolean isArenaOpponent() {
+        return arenaOpponent;
+    }
+
+    void setArenaOpponent(boolean opponent) {
+        arenaOpponent = opponent;
     }
 
     public void addLifeDifference(int delta) {
@@ -142,6 +171,9 @@ public class VAvatar extends FDisplayObject {
     }
 
     public Vector2 getTargetingArrowOrigin() {
+        if (ArenaMatchLayout.applies()) { //the rim of the portrait that faces the board
+            return new Vector2(screenPos.x + getWidth() / 2, arenaOpponent ? screenPos.y + getHeight() * 0.92f : screenPos.y + getHeight() * 0.08f);
+        }
         Vector2 origin = new Vector2(this.screenPos.x, this.screenPos.y);
         origin.x += getWidth()-getWidth()/8f;
         origin.y += getWidth()-getWidth()/8f;
@@ -150,6 +182,9 @@ public class VAvatar extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        if (ArenaMatchLayout.applies() && ArenaSkin.draw(ARENA, g, this)) {
+            return;
+        }
         float w = isHovered() ? getWidth()/16f+getWidth() : getWidth();
         float h = isHovered() ? getWidth()/16f+getHeight() : getHeight();
 

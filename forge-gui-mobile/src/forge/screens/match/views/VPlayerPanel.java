@@ -28,6 +28,11 @@ import forge.menu.FPopupMenu;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaArt;
+import forge.screens.match.arena.ArenaBoard;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaPlayerParts;
+import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -342,9 +347,151 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.setOnRight(this::isCompactRight);
         // fix z-index
         bringTabsToFront();
+        //the Arena board's own parts: piles, name plate, an opponent's hand as card backs (hidden in the default look)
+        arenaPiles = add(new ArenaPlayerParts.Piles(player, false, this::openArenaZone));
+        arenaName = add(new ArenaPlayerParts.NamePlate(player));
+        arenaHand = add(new ArenaPlayerParts.OpponentHand(player));
+        arenaPiles.setVisible(false);
+        arenaName.setVisible(false);
+        arenaHand.setVisible(false);
         //the compact layout opens the phase stops over the field, so the indicator has to draw above it
         remove(phaseIndicator);
         add(phaseIndicator);
+    }
+
+    // ---- the Arena board ------------------------------------------------------------------------------------------
+    private ArenaPlayerParts.Piles arenaPiles;
+    private ArenaPlayerParts.NamePlate arenaName;
+    private ArenaPlayerParts.OpponentHand arenaHand;
+    private boolean arenaLaidOut;
+    private final Rectangle arenaRect = new Rectangle();
+
+    /** A pile the Arena card browser could not show (or with the Arena browser off): the zone opens the old way. */
+    private void openArenaZone(ZoneType zone) {
+        if (zone == ZoneType.Library) {
+            return; //the library is face down
+        }
+        InfoTab tab = zoneTabs.containsKey(zone) ? zoneTabs.get(zone) : zone == ZoneType.Command ? commandTab : null;
+        if (tab == null) {
+            return;
+        }
+        setSelectedTab(selectedTab == tab ? null : tab);
+    }
+
+    /**
+     * The Arena board (port of the Swing VField.ArenaFieldLayout): the battlefield fills the player's area and what
+     * belongs to the player floats over it, placed by fractions of the window ({@link ArenaBoard}). The portrait sits
+     * centred on the outer edge with its phase ladder on the wings; the back row of permanents runs either side of it;
+     * the piles are in the window's corner, bottom left for you and top right for an opponent, whose hand hangs beside
+     * the portrait as card backs; yours is a fan along the bottom. A zone the game opens (to pick from it) shows as a
+     * strip on glass over the board. The default look's tabs and life label are hidden.
+     */
+    private void doArenaLayout(float width, float height) {
+        arenaLaidOut = true;
+        final boolean local = !isFlipped();
+        final boolean seat = !local && ArenaBoard.isSeatGame();
+        final float top = getTop(), left = getLeft(); //the field scroller sits at 0, 0 and never scrolls on the Arena board
+        for (InfoTab tab : tabs) {
+            tab.setVisible(false);
+        }
+        lblLife.setVisible(false);
+        tabStrip.setVisible(false);
+        phaseButton.setVisible(false);
+        commandZone.setVisible(false);
+
+        //the battlefield: front and back rows at the Arena's heights
+        field.setBounds(0, 0, width, height);
+        final float frontH = ArenaBoard.frontTileHeight(local, seat);
+        final float backH = ArenaBoard.backTileHeight(local, seat, frontH);
+        field.setArenaRows(ArenaBoard.frontRowTop(local, seat) - top, frontH, ArenaBoard.backRowTop(local, seat) - top, backH);
+        field.revalidate();
+
+        //the portrait, with the phase ladder on its wings
+        final float d = ArenaBoard.portraitDiameter(seat);
+        final float cx = Math.round(width / 2f), cy = ArenaBoard.portraitCenterY(local, seat) - top;
+        avatar.setArenaOpponent(!local);
+        avatar.setBounds(cx - d / 2f, cy - d / 2f, d, d);
+        phaseIndicator.setVisible(!seat);
+        if (!seat) {
+            final float ladderH = Math.round(ArenaBoard.windowH() * 0.024f);
+            final float span = Math.round(d * 1.7f);
+            phaseIndicator.setArenaLadder(d);
+            phaseIndicator.setBounds(cx - span, cy - ladderH / 2f + Math.round(d * (local ? 0.04f : -0.04f)), 2 * span, ladderH);
+        }
+
+        //piles, name plate, an opponent's hand
+        ArenaBoard.piles(local, seat, left, width, arenaRect);
+        arenaPiles.setRightToLeft(!local);
+        arenaPiles.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+        arenaPiles.setVisible(true);
+        ArenaBoard.name(local, seat, left, width, arenaRect);
+        arenaName.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+        arenaName.setVisible(true);
+        arenaHand.setVisible(!local);
+        if (!local) {
+            ArenaBoard.opponentHand(seat, left, width, arenaRect);
+            arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+        }
+
+        //what floats beside the portrait: mana in the pool
+        final VDisplayArea pool = tabManaPool.getDisplayArea();
+        final float poolH = Math.round(ArenaBoard.windowH() * 0.05f);
+        pool.setBounds(ArenaBoard.extrasLeft(seat, cx), cy - poolH / 2f, poolH * 6, poolH);
+        pool.setVisible(pool.getCount() > 0);
+
+        //the zones: your hand is the fan; a zone the game opened is a strip over the board; the rest stay closed
+        for (InfoTab tab : tabs) {
+            if (tab == tabManaPool) {
+                continue;
+            }
+            final VDisplayArea area = tab.getDisplayArea();
+            if (area == null) {
+                continue;
+            }
+            final boolean hand = tab instanceof InfoTabZone z && z.zoneType == ZoneType.Hand;
+            if (hand && local) {
+                ArenaBoard.hand(arenaRect);
+                area.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+                area.setVisible(true);
+            } else if (tab == selectedTab && !hand) {
+                final float sw = Math.round(ArenaBoard.windowW() * 0.46f), sh = Math.round(ArenaBoard.windowH() * 0.16f);
+                final float sy = local ? Math.round(ArenaBoard.windowH() * 0.4f) - top : Math.round(ArenaBoard.windowH() * 0.13f) - top;
+                area.setBounds(local ? Math.round(ArenaBoard.windowW() * 0.02f) : width - sw - Math.round(ArenaBoard.windowW() * 0.02f), sy, sw, sh);
+                area.setVisible(true);
+            } else {
+                area.setVisible(false);
+            }
+        }
+        if (commandTab == selectedTab) {
+            final float sw = Math.round(ArenaBoard.windowW() * 0.3f), sh = Math.round(ArenaBoard.windowH() * 0.16f);
+            commandZone.setBounds(local ? Math.round(ArenaBoard.windowW() * 0.02f) : width - sw - Math.round(ArenaBoard.windowW() * 0.02f),
+                    (local ? Math.round(ArenaBoard.windowH() * 0.4f) : Math.round(ArenaBoard.windowH() * 0.13f)) - top, sw, sh);
+            commandZone.setVisible(true);
+        }
+    }
+
+    /** Back to the default look: what the Arena layout hid comes back, its own parts go. */
+    private void leaveArenaLayout() {
+        arenaLaidOut = false;
+        for (InfoTab tab : tabs) {
+            tab.setVisible(true);
+            tab.setDisplayVisible(tab == selectedTab);
+        }
+        lblLife.setVisible(true);
+        phaseIndicator.setVisible(true);
+        phaseIndicator.setArenaLadder(0);
+        arenaPiles.setVisible(false);
+        arenaName.setVisible(false);
+        arenaHand.setVisible(false);
+        field.setArenaRows(-1, 0, 0, 0);
+        avatar.setArenaOpponent(false);
+        avatar.setSize(avatarHeight, avatarHeight);
+        compactAvatarSize = -1f;
+    }
+
+    /** Whether this panel is laid out as part of the Arena board. */
+    public boolean isArenaLaidOut() {
+        return arenaLaidOut;
     }
 
     private void syncCommandZone() {
@@ -753,6 +900,13 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        if (ArenaMatchLayout.applies()) {
+            doArenaLayout(width, height);
+            return;
+        }
+        if (arenaLaidOut) {
+            leaveArenaLayout();
+        }
         if (Forge.isLandscapeMode()) {
             doLandscapeLayout(width, height);
             return;
@@ -1513,6 +1667,10 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void draw(Graphics g) {
+        if (arenaLaidOut && ArenaMatchLayout.applies()) {
+            super.draw(g);
+            return;
+        }
         if (Forge.isLandscapeMode() && commonTabWidth > 0 && slideProgress < 1f) {
             //zone displays slide in and out from behind the right tab column, so don't let them draw over it
             g.startClip(0, 0, getWidth() - commonTabWidth, getHeight());
@@ -1591,6 +1749,18 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
+        if (arenaLaidOut && ArenaMatchLayout.applies()) {
+            if (isFlipped() && ArenaBoard.isSeatGame()) { //each seat is a pane of dark glass fading towards the board
+                final float gutter = Math.round(ArenaBoard.windowW() * 0.0075f);
+                final float h = Math.round(ArenaBoard.windowH() * 0.345f);
+                final boolean active = MatchController.instance.getGameView() != null && MatchController.instance.getGameView().getPlayerTurn() == player;
+                g.fillGradientRect(ArenaTheme.alpha(ArenaTheme.NIGHT, 0.33f), ArenaTheme.alpha(ArenaTheme.NIGHT, 0f), true, gutter, 2, getWidth() - 2 * gutter, h);
+                if (active) {
+                    ArenaArt.frame(g, gutter, 2, getWidth() - 2 * gutter, h, Math.max(12, h / 14f) / 2f, ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 0.7f), 2.6f);
+                }
+            }
+            return;
+        }
         if (Forge.isLandscapeMode()) {
             FSkinColor tabBg = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
             if (commonTabWidth > 0) {
