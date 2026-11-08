@@ -861,6 +861,10 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void onCommandZoneUpdated() {
+        if (ArenaMatchLayout.applies()) { //the Arena board places every zone itself; the default look's slide must not move them
+            revalidate();
+            return;
+        }
         syncCommandZone();
         if (Forge.isLandscapeMode() && initW > 0) {
             layoutTabsLandscape(); //tab appears or disappears as cards come and go
@@ -1089,7 +1093,7 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void layoutTabsLandscape() {
-        if (tabs.isEmpty()) { return; }
+        if (tabs.isEmpty() || ArenaMatchLayout.applies()) { return; } //the Arena board has its own layout (doArenaLayout)
         if (isCompactLayout()) {
             layoutCompactColumn();
             return;
@@ -1423,6 +1427,7 @@ public class VPlayerPanel extends FContainer {
 
     //only what moves during slide animations: field, command zone and zone displays
     private void updateAnimatedLayout(float width, float height) {
+        if (ArenaMatchLayout.applies()) { return; } //the Arena board has its own layout (doArenaLayout)
         if (isCompactLayout()) {
             updateCompactAnimatedLayout(width, height);
             return;
