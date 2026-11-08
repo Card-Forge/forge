@@ -19,7 +19,8 @@ import forge.toolbox.FButton;
  *     above the local portrait (its bottom at 71% of the height);</li>
  * <li>the corner menu (gear and log buttons) in the top right corner;</li>
  * <li>the stack, docked on the right ({@link #stackDock}), the log, docked on the left ({@link #logDock}), both
- *     toggled from the corner menu or with S / L.</li>
+ *     toggled from the corner menu or with S / L; with seats they sit below the seats.</li>
+
  * </ul>
  * Sizes are fractions of the screen, so 21:9 and 16:9 both work; fixed Swing pixel sizes go through
  * {@link ArenaTheme#px}. Each player panel lays out its own inside ({@code VPlayerPanel.doArenaLayout}, with the

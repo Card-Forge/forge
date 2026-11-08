@@ -249,6 +249,13 @@ public final class ArenaPlayerParts {
             for (int o = depth; o >= 1; o--) {
                 g.fillSmoothRoundRect(o == depth ? PAGE_LIT : PAGE, x + o * d, y - o * d, cw, ch, r);
             }
+            // something in it can be played now (the commander from the command zone, flashback, cards cast from exile):
+            // the pile breathes in the light the hand's playable cards have
+            final boolean playable = hasPlayable(zone);
+            final float breath = playable ? 0.65f + 0.35f * ArenaMotion.pulse(1.5f) : 0f;
+            if (playable) {
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.9f * breath, S3), x, y, cw, ch, r, ArenaTheme.px(10));
+            }
             final CardView top = topCard(i);
             if (top != null && MatchController.instance.mayView(top)) {
                 CardRenderer.drawCard(g, top, x, y, cw, ch, CardStackPosition.Top);
@@ -259,6 +266,9 @@ public final class ArenaPlayerParts {
                 ArenaCards.drawCardBack(g, player, x, y, cw, ch, r, false);
             }
             g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.BLACK, 0.78f, S1), x, y, cw, ch, r);
+            if (playable) {
+                g.drawSmoothRoundRect(Math.max(1.5f, ArenaTheme.px(2)), ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.6f + 0.4f * breath, S3), x, y, cw, ch, r);
+            }
             if (hot[i].get() > 0f) {
                 g.drawGlow(ArenaTheme.alpha(ArenaTheme.HOVER, 0.45f * hot[i].get(), S2), x, y, cw, ch, r, ArenaTheme.px(8));
             }
@@ -273,7 +283,26 @@ public final class ArenaPlayerParts {
             }
         }
 
+        /** Whether a card in this zone of the player's is one the prompt offers to play now. */
+        private boolean hasPlayable(final ZoneType zone) {
+            final FCollectionView<CardView> cards = player.getCards(zone);
+            if (cards == null || cards.isEmpty()) {
+                return false;
+            }
+            try {
+                for (final CardView c : cards) {
+                    if (MatchController.instance.isActionable(c)) {
+                        return true;
+                    }
+                }
+            } catch (final RuntimeException e) {
+                // changed under us: next frame
+            }
+            return false;
+        }
+
         private void countBadge(final Graphics g, final String text, final float cx, final float cy, final float cellH, final float bumped) {
+
             final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(15), cellH * 0.15f) * (1f + 0.38f * bumped));
             final float bh = f.getLineHeight() + ArenaTheme.px(2);
             final float bw = Math.max(bh, ArenaArt.textWidth(text, f) + bh * 0.7f);

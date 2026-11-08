@@ -287,7 +287,11 @@ public final class ArenaPlayerInfo {
         } catch (final RuntimeException e) {
             return false;
         }
+        if (art == forge.card.CardImageRenderer.forgeArt) {
+            return false; // the "no picture" stand-in: the colour and initial say more
+        }
         final TextureRegion r = art == null ? null : art.getTextureRegion();
+
         if (r == null || r.getRegionWidth() <= 0 || r.getRegionHeight() <= 0) {
             return false;
         }
