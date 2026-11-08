@@ -869,6 +869,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             handleExiledWith(triggerList.allCards(), sa);
         }
 
+
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && shuffle) {
             PlayerCollection pl = new PlayerCollection();
