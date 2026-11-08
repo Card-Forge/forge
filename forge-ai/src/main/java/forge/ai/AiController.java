@@ -1899,11 +1899,28 @@ public class AiController {
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
 
-        if (topOwnedByAI) {
+        if (topOwnedByAI && flatMonteCarloActive()) {
             // Stiflenought: the AI's own "sacrifice it unless" trigger is answered with Stifle, which nothing else would do
             final SpellAbility stifle = StifleCombo.stifleOwnTrigger(player, top);
             if (stifle != null) {
                 return stifle;
+            }
+            if (stormSolver != null && stormSolver.expectsResponse(player)) {
+                // a line of the tutor storm solver answers its own spell (Lion's Eye Diamond with Infernal Tutor on the stack)
+                final SpellAbility response = stormSolver.next(player, deckPlan(player).combos);
+                if (response != null) {
+                    return response;
+                }
+            }
+            // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
+            final SpellAbility consultation = ConsultationWin.response(player);
+            if (consultation != null) {
+                return consultation;
+            }
+            // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
+            final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
+            if (diamond != null) {
+                return diamond;
             }
         }
 
@@ -1913,31 +1930,6 @@ public class AiController {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
             mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
-
-        if (topOwnedByAI && stormSolver != null && flatMonteCarloActive() && stormSolver.expectsResponse(player)) {
-            // a line of the tutor storm solver answers its own spell (Lion's Eye Diamond with Infernal Tutor on the stack)
-            final SpellAbility response = stormSolver.next(player, deckPlan(player).combos);
-            if (response != null) {
-                return response;
-            }
-        }
-
-        if (topOwnedByAI && flatMonteCarloActive()) {
-            // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
-            final SpellAbility consultation = ConsultationWin.response(player);
-            if (consultation != null) {
-                return consultation;
-            }
-        }
-
-        if (topOwnedByAI && flatMonteCarloActive()) {
-            // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
-            final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
-            if (diamond != null) {
-                return diamond;
-            }
-        }
-
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -1985,13 +1977,12 @@ public class AiController {
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
-        if (flatMonteCarloActive()) {
+
+        if (flatMc) {
             final SpellAbility vault = VaultLoop.sureCast(player, saList);
             if (vault != null) {
                 return vault; // Time Vault and what untaps it: an extra turn every turn, no rollouts needed
             }
-        }
-        if (flatMonteCarloActive()) {
             final SpellAbility oracle = ConsultationWin.sureCast(player, saList);
             if (oracle != null) {
                 return oracle; // Thassa's Oracle with Demonic Consultation in hand: cast it, the Consultation answers its trigger
@@ -2012,8 +2003,6 @@ public class AiController {
             if (dreadReturn != null) {
                 return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library
             }
-        }
-        if (flatMonteCarloActive()) {
             final SpellAbility donateFinish = DonateCombo.sureFinish(player, saList);
             if (donateFinish != null) {
                 if (!hasFailedToCast(donateFinish)) {
@@ -2027,8 +2016,6 @@ public class AiController {
                     donateFinish.setXManaCostPaid(null);
                 }
             }
-        }
-        if (flatMonteCarloActive()) {
             final SpellAbility loop = LoopRunner.next(player, saList, this::loopApproved);
             if (loop != null) {
                 return loop; // a loop of the combo list is on the table: one more round of it
@@ -2042,31 +2029,28 @@ public class AiController {
                 return assembly; // a catalogued combo whose other cards are all in play or in hand: put it together
             }
         }
-        // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
-        final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
-        if (sureStifle != null) {
-            return sureStifle;
-        }
-        if (flatMonteCarloActive() && game.getStack().isEmpty()) {
+        if (flatMc && game.getStack().isEmpty()) {
+            // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
+            final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
+            if (sureStifle != null) {
+                return sureStifle;
+            }
             final SpellAbility sure = deckPlan(player).combos.sureMadnessPlay(player, saList);
             if (sure != null) {
                 return sure; // safe and sure: no rollouts needed
             }
-        }
-        if (flatMonteCarloActive() && game.getStack().isEmpty()) {
             final SpellAbility cut = deckPlan(player).combos.sureCutPlay(player, saList);
             if (cut != null) {
                 return cut; // the library cut with a finisher in place: no rollouts needed
             }
-        }
-
-        if (flatMonteCarloActive() && game.getStack().isEmpty() && deckPlan(player).combos.has(ComboPlan.Kind.TUTOR_STORM)) {
-            if (stormSolver == null) {
-                stormSolver = new StormSolver();
-            }
-            final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
-            if (solved != null) {
-                return solved; // a line that wins this turn was found: follow it instead of guessing
+            if (deckPlan(player).combos.has(ComboPlan.Kind.TUTOR_STORM)) {
+                if (stormSolver == null) {
+                    stormSolver = new StormSolver();
+                }
+                final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
+                if (solved != null) {
+                    return solved; // a line that wins this turn was found: follow it instead of guessing
+                }
             }
         }
 
