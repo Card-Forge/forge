@@ -703,15 +703,13 @@ public final class GameMemento {
                     last = m;
                     lastDeltaEntries = dc;
                     lastDeltaBytes = deltaBytes;
-                    if (hadRegistry) {
-                        final long arrays = dc == 0 ? 0L : 32L + 16L * dc;
-                        final long captureBytes = allocatedBytes + deltaAllocatedBytes
-                                + Math.max(0L, scratchBytes() - scratchBefore)
-                                + MEMENTO_BYTES + arrays;
-                        // Retain some history of larger captures, but let the estimate fall after quieter actions.
-                        final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
-                        lastCaptureBytes = Math.max(captureBytes, decayed);
-                    }
+                    final long arrays = dc == 0 ? 0L : 32L + 16L * dc;
+                    final long captureBytes = allocatedBytes + deltaAllocatedBytes
+                            + Math.max(0L, scratchBytes() - scratchBefore)
+                            + MEMENTO_BYTES + arrays;
+                    // Retain some history of larger captures, but let the estimate fall after quieter actions.
+                    final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
+                    lastCaptureBytes = Math.max(captureBytes, decayed);
                 } else {
                     m.targets = new Object[wn];
                     m.snaps = new Snap[wn];
