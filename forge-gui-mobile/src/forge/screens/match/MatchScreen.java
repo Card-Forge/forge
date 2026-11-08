@@ -466,6 +466,11 @@ public class MatchScreen extends FScreen {
         return log;
     }
 
+    /** The cards revealed during the game (the default layout's reveal tab; the Arena corner menu opens it). */
+    public VReveal getRevealed() {
+        return revealed;
+    }
+
     public VStack getStack() {
         return stack;
     }

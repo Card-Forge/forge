@@ -115,7 +115,7 @@ public final class ArenaCornerMenu extends FDisplayObject {
             gearMenu.hide();
             any = true;
         }
-        for (final FDropDown d : new FDropDown[] {screen.getGameMenu(), screen.getPlayersMenu(), screen.getDevMenu(), screen.getChat()}) {
+        for (final FDropDown d : new FDropDown[] {screen.getGameMenu(), screen.getPlayersMenu(), screen.getDevMenu(), screen.getChat(), screen.getRevealed()}) {
             if (d != null && d.isVisible()) {
                 d.hide();
                 any = true;
@@ -135,6 +135,10 @@ public final class ArenaCornerMenu extends FDisplayObject {
                     FSkinImage.HDLIBRARY, e -> toggleLog()));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblStack") + "  [" + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.OPEN_STACK) + "]",
                     FSkinImage.HDEXILE, e -> toggleStack()));
+            if (!MatchController.instance.getRevealedCards().isEmpty()) { //what has been revealed this game (the menu bar's reveal tab)
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRevealed") + " (" + MatchController.instance.getRevealedCards().size() + ")",
+                        FSkinImage.HDLIBRARY, e -> openDropDown(screen.getRevealed())));
+            }
             if (screen.getChat() != null) {
                 addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChat"), FSkinImage.HDLIBRARY, e -> openDropDown(screen.getChat())));
             }
