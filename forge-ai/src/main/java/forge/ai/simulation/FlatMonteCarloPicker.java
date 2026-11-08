@@ -20,6 +20,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.ai.ComputerUtilCard;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
 import forge.util.MyRandom;
@@ -490,7 +491,12 @@ public final class FlatMonteCarloPicker {
         /** The opponent's end step, empty stack: act now or pass, then play the AI's whole next turn and score at its second main phase. */
         END_STEP,
         /** Declaring attackers: compare attack sets, play the combat out (the opponent blocks) and score at the second main phase. */
-        ATTACK
+        ATTACK,
+        /**
+         * The AI's own turn, blockers declared, empty stack: pass (the block stands and the damage is dealt) or use a trick
+         * now, when the opponent can no longer change the block. The combat is played out, scored at the second main phase.
+         */
+        BLOCKED
     }
 
     public static Result choose(final Player player, final List<SpellAbility> approved, final List<SpellAbility> extras,
@@ -923,7 +929,11 @@ public final class FlatMonteCarloPicker {
                 }
             } else if (targeting != null) {
                 target = hostileTarget(player, sa);
-                if (target == null && isLoyaltyPlay(sa)) {
+                if (target == null && isSavingPlay(player, sa)) {
+                    target = savingTarget(player, sa);
+                } else if (target == null && (mode == Mode.BLOCKED || defendingWindow(player, mode))) {
+                    target = combatTarget(player, sa);
+                } else if (target == null && (isLoyaltyPlay(sa) || isActivationPlay(sa) || isOtherZonePlay(sa))) {
                     target = loyaltyTarget(player, sa);
                 }
                 if (target == null) {
@@ -1006,11 +1016,32 @@ public final class FlatMonteCarloPicker {
                 && !(isLoyaltyPlay(sa) && XChoice.loyaltyPlan(sa.getHostCard().getController(), sa) != null)) {
             return false; // an X is paid with a value the rollouts do not choose: only a "-X" with a careful plan is allowed
         }
+        if (SurpriseEntry.isEntryAbility(sa)) {
+            // Quicksilver Amulet, Elvish Piper, Sneak Attack: a surprise at the moments that make it one (the attack is
+            // declared and the blockers are not, the opponent's end step, the AI's own combat for a hasty creature), and
+            // never a reason to wait for spare mana: the creature in hand is what the mana would be spent on anyway
+            final Player owner = sa.getHostCard().getController();
+            return owner != null && SurpriseEntry.offered(owner, sa);
+        }
+        if (isOtherZonePlay(sa)) {
+            if (!sparesMana(sa.getHostCard().getController(), sa)) {
+                return false; // the mana is wanted for something else this turn
+            }
+            if (isMeaningfulOtherZone(sa)) {
+                return true; // unearth, embalm, eternalize, scavenge, encore: a creature or a counter for the mana
+            }
+        }
+        if (isActivationPlay(sa) && !sparesMana(sa.getHostCard().getController(), sa)) {
+            return false; // the mana is wanted for something else this turn: rollouts cannot see an ability's later waste
+        }
         if (isRemoveDeckCantrip(sa)) {
             return true;
         }
         if (isManaGrantingEffect(sa)) {
             return true;
+        }
+        if (isActivationPlay(sa) && isMeaningfulActivation(sa)) {
+            return true; // firebreathing, a pinger, an equip: the rollouts play the combat out and weigh it
         }
         if (isLoyaltyPlay(sa)) {
             return true; // a Planeswalker's ability: the rollouts weigh the loyalty and the effect against everything else
@@ -1052,6 +1083,79 @@ public final class FlatMonteCarloPicker {
         return false;
     }
 
+    /** An activated, non-mana ability of a permanent in play that is not a loyalty ability: a pinger, firebreathing, an equip. */
+    static boolean isActivationPlay(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return sa.isActivatedAbility() && !sa.isPwAbility() && !sa.isManaAbility() && !sa.isSpell()
+                && host != null && host.isInZone(ZoneType.Battlefield) && host.getController() != null;
+    }
+
+    /** An activated ability of a card in the graveyard or in exile: unearth, embalm, eternalize, scavenge, encore. */
+    public static boolean isOtherZonePlay(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return host != null && sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && !sa.isPwAbility()
+                && (host.isInZone(ZoneType.Graveyard) || host.isInZone(ZoneType.Exile)) && host.getController() != null;
+    }
+
+    /**
+     * The graveyard and exile abilities that give a permanent or a counter for their cost: the five keywords, and any
+     * script that makes a token, a copy or a counter. They are discovered when the mana is spare, and the rollouts decide.
+     */
+    static boolean isMeaningfulOtherZone(final SpellAbility sa) {
+        if (sa.isKeyword(Keyword.UNEARTH) || sa.isKeyword(Keyword.EMBALM) || sa.isKeyword(Keyword.ETERNALIZE)
+                || sa.isKeyword(Keyword.SCAVENGE) || sa.isKeyword(Keyword.ENCORE)) {
+            return true;
+        }
+        final ApiType api = sa.getApi();
+        return api == ApiType.Token || api == ApiType.CopyPermanent || api == ApiType.PutCounter
+                || api == ApiType.PutCounterAll || api == ApiType.ChangeZone && !sa.usesTargeting()
+                && !"Library".equals(sa.getParamOrDefault("Origin", ""));
+    }
+
+    /**
+     * The activated abilities the rollouts can judge on their own in the main phase: an equip, damage, counters, tokens,
+     * discard and life loss. They are discovered when they are not idle (see {@link ActivationGuard}) and the mana they cost is spare
+     * ({@link #sparesMana}); the rollouts then say whether they beat doing nothing. The effects it does not list (draw, life,
+     * tokens, counters, removal, tapping) have their own rules above.
+     */
+    static boolean isMeaningfulActivation(final SpellAbility sa) {
+        final ApiType api = sa.getApi();
+        // A pump is not offered in the main phase: the opponent would see it before he blocks. It is a combat trick, and
+        // those are offered once the blocks are down (Mode.BLOCKED, isCombatTrick).
+        if (api != ApiType.DealDamage && api != ApiType.Attach && api != ApiType.PutCounter && api != ApiType.Token
+                && api != ApiType.Discard && api != ApiType.LoseLife) {
+            return false;
+        }
+        return ActivationGuard.problem(sa.getHostCard().getController(), sa) == null;
+    }
+
+    /**
+     * Whether paying for the ability leaves the mana that something else in the hand needs this turn: a firebreathing
+     * dragon with a creature to cast waits for the creature. An ability with no mana in its cost always does, and so does
+     * one with nothing castable in hand to compete with.
+     */
+    public static boolean sparesMana(final Player ai, final SpellAbility sa) {
+        try {
+            final int cost = sa.getPayCosts() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+            if (cost == 0) {
+                return true;
+            }
+            final int available = ComputerUtilMana.getAvailableManaEstimate(ai);
+            if (cost > available) {
+                return false;
+            }
+            int cheapest = Integer.MAX_VALUE;
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                if (!c.isLand() && c.getCMC() <= available) {
+                    cheapest = Math.min(cheapest, c.getCMC());
+                }
+            }
+            return cheapest == Integer.MAX_VALUE || available - cost >= cheapest;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
     /**
      * A loyalty ability of a Planeswalker in play that is not idle (see {@link ActivationGuard}): Sorin's "target creature
      * gains deathtouch and lifelink" or "you may sacrifice a Vampire". The heuristics turn many of them down (the effect
@@ -1080,7 +1184,8 @@ public final class FlatMonteCarloPicker {
         }
         final ApiType api = ts.getApi();
         final boolean hostile = ts.isCurse() || api == ApiType.Destroy || api == ApiType.DealDamage || api == ApiType.Tap
-                || api == ApiType.ChangeZone || api == ApiType.Fight || api == ApiType.Sacrifice || api == ApiType.DamageAll;
+                || api == ApiType.ChangeZone || api == ApiType.Fight || api == ApiType.Sacrifice || api == ApiType.DamageAll
+                || api == ApiType.Discard || api == ApiType.LoseLife;
         sa.setActivatingPlayer(player);
         GameEntity best = null;
         int bestRank = Integer.MIN_VALUE;
@@ -1448,7 +1553,7 @@ public final class FlatMonteCarloPicker {
             // MyRandom is global state; this is safe because the game thread is waiting for this AI decision.
             MyRandom.setRandom(new Random(seed));
 
-            final GameSimulator sim = GameSimulator.forRollout(player.getGame(), player, mode == Mode.RESPOND);
+            final GameSimulator sim = GameSimulator.forRollout(player.getGame(), player, mode == Mode.RESPOND || mode == Mode.BLOCKED);
             final Game simGame = sim.getSimulatedGameState();
             final Player simAi = sim.getSimulatedAiPlayer();
             simGame.AI_TIMEOUT = Math.min(simGame.AI_TIMEOUT, ROLLOUT_AI_TIMEOUT_SECONDS);
@@ -1464,6 +1569,9 @@ public final class FlatMonteCarloPicker {
                     break;
                 case ATTACK:
                     value = rolloutAttack(sim, simGame, simAi, cand, cfg, playoutPlays);
+                    break;
+                case BLOCKED:
+                    value = rolloutBlocked(sim, simGame, simAi, cand, cfg, playoutPlays);
                     break;
                 default:
                     value = rolloutMain(sim, simGame, simAi, cand, cfg, playoutPlays);
@@ -1759,6 +1867,264 @@ public final class FlatMonteCarloPicker {
         final Long base = valueAtSecondMain(simGame, simAi, cand, cfg, false);
         return base == null || base == WIN_VALUE || base == LOSS_VALUE ? base
                 : Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, base + held));
+    }
+
+    /**
+     * The blockers are down: use the trick (or pass), let it resolve, and play the combat out to the second main phase.
+     * Passing is the usual line, and the trick has to be better than that, so the AI keeps its mana and its surprise unless
+     * the damage and the blocked creature it saves or kills are worth more.
+     */
+    private static Long rolloutBlocked(final GameSimulator sim, final Game simGame, final Player simAi,
+                                       final Candidate cand, final Config cfg, final int playoutPlays) {
+        final Player simOpp = simAi.getWeakestOpponent();
+        if (!cand.isHold()) {
+            if (!sim.applySpellAbility(cand.sa, false)) {
+                lastRolloutProblem = "apply";
+                return null;
+            }
+            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+        }
+        final PhaseHandler ph = simGame.getPhaseHandler();
+        if (!simGame.isGameOver()) {
+            GameSimulator.resolveStack(simGame, simOpp);
+        }
+        if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+            ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));
+            playOut(simGame, simAi, playoutPlays);
+        }
+        return valueAtSecondMain(simGame, simAi, cand, cfg, true);
+    }
+
+    /**
+     * The tricks worth looking at once the blocks are down: a pump (a combat trick, firebreathing, bloodrush), protection or
+     * regeneration, damage or removal to finish the fight. Not judged here whether it is a good idea: the rollouts do that.
+     */
+    public static boolean isCombatTrick(final SpellAbility sa) {
+        if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null || sa.isPwAbility()) {
+            return false;
+        }
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
+            return false;
+        }
+        if (sa.isNinjutsu()) {
+            return true; // swap an unblocked attacker for the ninja: the classic bait, the block cannot be changed any more
+        }
+        final ApiType api = sa.getApi();
+        return api == ApiType.Pump || api == ApiType.PumpAll || api == ApiType.Protection || api == ApiType.Regenerate
+                || isInteraction(sa) && api != ApiType.Counter;
+    }
+
+    /** The AI's permanents that the opponent's spell or ability on top of the stack is aimed at. */
+    static List<Card> threatened(final Player player) {
+        final List<Card> out = new ArrayList<>();
+        final MagicStack stack = player.getGame().getStack();
+        if (stack.isEmpty()) {
+            return out;
+        }
+        final SpellAbility top = stack.peekAbility();
+        if (top == null || top.getActivatingPlayer() == null || !top.getActivatingPlayer().isOpponentOf(player)
+                || top.getTargets() == null) {
+            return out;
+        }
+        for (final Card c : top.getTargets().getTargetCards()) {
+            if (player.equals(c.getController())) {
+                out.add(c);
+            }
+        }
+        return out;
+    }
+
+    /**
+     * An activated ability that answers what is on the stack: regeneration, protection or a toughness boost for the
+     * creature that the opponent's removal or burn is aimed at (the stack is non-empty, the opponent's, and names the
+     * creature). The rollouts play the stack out and decide whether the card or the mana was worth it; this only makes
+     * the answer a candidate, which the heuristics do not always do for abilities that are not spells.
+     */
+    public static boolean isSavingPlay(final Player player, final SpellAbility sa) {
+        if (sa == null || player.getGame().getStack().isEmpty()) {
+            return false;
+        }
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null || !sa.isActivatedAbility() || sa.isSpell() || sa.isManaAbility() || sa.isPwAbility()
+                || !host.isInZone(ZoneType.Battlefield) || (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart())) {
+            return false;
+        }
+        final List<Card> threatened = threatened(player);
+        if (threatened.isEmpty()) {
+            return false;
+        }
+        final SpellAbility top = player.getGame().getStack().peekAbility();
+        final ApiType threat = top.getApi();
+        final boolean kills = threat == ApiType.Destroy || threat == ApiType.DealDamage || threat == ApiType.Fight
+                || threat == ApiType.DamageAll || threat == ApiType.DestroyAll;
+        final ApiType api = sa.getApi();
+        boolean answers;
+        if (api == ApiType.Regenerate) {
+            answers = kills;
+        } else if (api == ApiType.Protection) {
+            answers = true;
+        } else if (api == ApiType.Pump) {
+            final String kw = sa.getParamOrDefault("KW", "");
+            answers = kw.contains("Indestructible") && kills || kw.contains("Hexproof") || kw.contains("Shroud")
+                    || kw.contains("Protection");
+            if (!answers && threat == ApiType.DealDamage) {
+                try {
+                    answers = forge.game.ability.AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
+                } catch (final RuntimeException e) {
+                    answers = false;
+                }
+            }
+        } else {
+            answers = false;
+        }
+        if (!answers) {
+            return false;
+        }
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts != null) {
+            return true; // aimed by savingTarget
+        }
+        if (hasTargeting(sa)) {
+            return false;
+        }
+        return threatened.contains(host); // untargeted: it is for the permanent itself
+    }
+
+    /** The threatened creature that a targeted answer is for (the most valuable one it can legally target), or null. */
+    public static GameObject savingTarget(final Player player, final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || ts.getTargetRestrictions() == null || ts.getTargetRestrictions().getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return null;
+        }
+        sa.setActivatingPlayer(player);
+        final List<Card> threatened = threatened(player);
+        GameEntity best = null;
+        int bestRank = Integer.MIN_VALUE;
+        for (final GameEntity e : ts.getTargetRestrictions().getAllCandidates(ts)) {
+            if (e instanceof Card && threatened.contains(e) && targetRank(player, e) > bestRank) {
+                bestRank = targetRank(player, e);
+                best = e;
+            }
+        }
+        return best != null && applyTarget(sa, best) ? best : null;
+    }
+
+    /**
+     * Whether the AI has priority on the opponent's turn after the blockers were declared, with an empty stack: the moment
+     * to pump the creature it blocked with (or to save it), when the opponent can no longer change the attack.
+     */
+    static boolean defendingWindow(final Player player, final Mode mode) {
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        return mode == Mode.RESPOND && player.getGame().getStack().isEmpty() && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                && !ph.isPlayerTurn(player) && ph.getCombat() != null;
+    }
+
+    /**
+     * The creature of the AI's that a trick is for once the blocks are down. On the AI's own turn the attacker that was
+     * blocked (the one the trick can save or let win), else one that is not blocked (extra damage). On the opponent's
+     * turn the creature that blocks (a pump that wins the fight, protection that saves it), the one in the biggest
+     * fight first. Null when no such creature is a legal target.
+     */
+    public static GameObject combatTarget(final Player player, final SpellAbility sa) {
+        final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (combat == null || ts == null || ts.getTargetRestrictions() == null
+                || ts.getTargetRestrictions().getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return null;
+        }
+        final boolean defending = !player.getGame().getPhaseHandler().isPlayerTurn(player);
+        sa.setActivatingPlayer(player);
+        GameEntity best = null;
+        int bestRank = Integer.MIN_VALUE;
+        for (final GameEntity e : ts.getTargetRestrictions().getAllCandidates(ts)) {
+            if (!(e instanceof Card) || !player.equals(((Card) e).getController())) {
+                continue;
+            }
+            final Card c = (Card) e;
+            final int rank;
+            if (defending) {
+                if (!combat.isBlocking(c)) {
+                    continue;
+                }
+                rank = 100000 + targetRank(player, e);
+            } else {
+                if (!combat.isAttacking(c)) {
+                    continue;
+                }
+                final boolean blocked = combat.isBlocked(c) || !combat.getBlockers(c).isEmpty();
+                rank = (blocked ? 100000 : 0) + targetRank(player, e);
+            }
+            if (rank > bestRank) {
+                bestRank = rank;
+                best = e;
+            }
+        }
+        if (best != null && !fightChanges(sa, (Card) best, combat)) {
+            return null; // the pump changes nothing: the creature wins (or dies) anyway, and the trick is worth more later
+        }
+        return best != null && applyTarget(sa, best) ? best : null;
+    }
+
+    /**
+     * Whether a pump can change the result of the fight of one creature against one other: the creature that would win
+     * without it wins with it, and the one that would lose and still loses is not a reason to spend the card either.
+     * Unknown (several opponents in the fight, keywords such as first strike or deathtouch, an amount that is not a
+     * number, a pump that is not a +N/+N) is "yes": the rollouts decide.
+     */
+    /**
+     * A pump that cannot change the fight it is for (an untargeted one, such as firebreathing, is for its own creature).
+     * Used to drop it from the candidates once the blocks are down: the mana and the surprise are worth more later.
+     */
+    public static boolean pointlessPump(final Player player, final SpellAbility sa) {
+        final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
+        if (combat == null || sa.getApi() != ApiType.Pump || hasTargeting(sa) || !sa.isActivatedAbility()
+                || sa.getHostCard() == null) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        return (combat.isAttacking(host) || combat.isBlocking(host)) && !fightChanges(sa, host, combat);
+    }
+
+    private static boolean fightChanges(final SpellAbility sa, final Card mine, final forge.game.combat.Combat combat) {
+        try {
+            SpellAbility ts = singleTargetingAbility(sa);
+            if (ts == null && !hasTargeting(sa)) {
+                ts = sa; // firebreathing and the like: the creature itself
+            }
+            if (ts == null || ts.getApi() != ApiType.Pump || ts.hasParam("KW")) {
+                return true;
+            }
+            final java.util.List<Card> others = new ArrayList<>();
+            if (combat.isAttacking(mine)) {
+                others.addAll(combat.getBlockers(mine));
+            } else if (combat.isBlocking(mine)) {
+                others.addAll(combat.getAttackersBlockedBy(mine));
+            }
+            if (others.size() != 1) {
+                return true;
+            }
+            final Card other = others.get(0);
+            if (mine.hasDoubleStrike() || mine.hasFirstStrike() || other.hasDoubleStrike() || other.hasFirstStrike()
+                    || mine.hasKeyword(Keyword.DEATHTOUCH) || other.hasKeyword(Keyword.DEATHTOUCH) || mine.hasKeyword(Keyword.TRAMPLE)) {
+                return true;
+            }
+            // as many times as the open mana pays for an ability that can be repeated (firebreathing), once otherwise
+            int times = 1;
+            if (sa.isActivatedAbility() && sa.getPayCosts() != null && !sa.getPayCosts().hasTapCost()
+                    && sa.getPayCosts().getTotalMana() != null && sa.getPayCosts().getTotalMana().getCMC() > 0) {
+                times = Math.max(1, ComputerUtilMana.getAvailableManaEstimate(sa.getHostCard().getController())
+                        / sa.getPayCosts().getTotalMana().getCMC());
+            }
+            final int att = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
+            final int def = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
+            final boolean diesNow = other.getNetPower() >= mine.getNetToughness();
+            final boolean killsNow = mine.getNetPower() >= other.getNetToughness();
+            final boolean diesThen = other.getNetPower() >= mine.getNetToughness() + def;
+            final boolean killsThen = mine.getNetPower() + att >= other.getNetToughness();
+            return diesNow != diesThen || killsNow != killsThen;
+        } catch (final RuntimeException e) {
+            return true;
+        }
     }
 
     /**
@@ -2087,6 +2453,11 @@ public final class FlatMonteCarloPicker {
             options.add(new int[] { value, Math.max(1, c.getCMC()), cap,
                     kind == HoldKind.FLASH_ETB_INTERACTION ? 1 : 0 });
         }
+        // an ability that puts a creature from the hand onto the battlefield (Quicksilver Amulet, Elvish Piper) is held
+        // like a flash creature: the mana left open lets it come in as a blocker, or at the end of the opponent's turn
+        for (final int[] entry : entryOptions(simAi, mana)) {
+            options.add(entry);
+        }
         options.sort((a, b) -> Integer.compare(b[0], a[0]));
 
         // ...and as many as the open mana pays for, because two counterspells held with four lands are worth more
@@ -2112,6 +2483,39 @@ public final class FlatMonteCarloPicker {
         // A live ETB answer is not generic unused-mana value; do not halve it for an aggro deck.
         final double factor = holdingEtbStackInteraction ? Math.max(1.0, cfg.controlFactor) : cfg.controlFactor;
         return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * factor);
+    }
+
+    /**
+     * The entry abilities of the AI's permanents that can still be used on the opponent's turn: untapped, not summoning
+     * sick if they need the tap, payable with the open mana, and a creature in the hand worth putting in. One option each,
+     * {value, mana, cap, 0} like the cards in hand.
+     */
+    private static List<int[]> entryOptions(final Player simAi, final int mana) {
+        final List<int[]> out = new ArrayList<>();
+        for (final Card perm : simAi.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility sa : perm.getSpellAbilities()) {
+                if (!SurpriseEntry.isEntryAbility(sa)) {
+                    continue;
+                }
+                final forge.game.cost.Cost cost = sa.getPayCosts();
+                if (cost != null && cost.hasTapCost() && (perm.isTapped() || perm.isSick())) {
+                    continue;
+                }
+                final int need = cost == null || cost.getTotalMana() == null ? 0 : cost.getTotalMana().getCMC();
+                if (need > mana) {
+                    continue;
+                }
+                sa.setActivatingPlayer(simAi);
+                int best = 0;
+                for (final Card c : SurpriseEntry.candidates(simAi, sa)) {
+                    best = Math.max(best, c.getCMC());
+                }
+                if (best > 0) {
+                    out.add(new int[] { HOLD_FLASH_CREATURE_PER_CMC * best, Math.max(1, need), HOLD_VALUE_CAP, 0 });
+                }
+            }
+        }
+        return out;
     }
 
     /**

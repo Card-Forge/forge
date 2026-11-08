@@ -1979,7 +1979,10 @@ public class AiController {
             }
             final Card h = spellAbility.getHostCard();
             return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
-                    || (flatMc && LoopRunner.held(player, spellAbility)));
+                    || (flatMc && LoopRunner.held(player, spellAbility))
+                    || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
+                    || (flatMc && FlatMonteCarloPicker.isOtherZonePlay(spellAbility)
+                    && !FlatMonteCarloPicker.sparesMana(player, spellAbility)));
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
@@ -2138,12 +2141,19 @@ public class AiController {
                     ? FlatMonteCarloPicker.Mode.RESPOND : null;
         }
         if (ph.isPlayerTurn(player)) {
-            return null;
+            // The blockers are down and the AI has priority: the moment to pump the attacker that was blocked, or to
+            // sneak something in, with the opponent unable to take back the block (see Mode.BLOCKED).
+            return ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && game.getPlayers().size() == 2 && ph.getCombat() != null
+                    && !ph.getCombat().getAttackersOf(player.getWeakestOpponent()).isEmpty()
+                    ? FlatMonteCarloPicker.Mode.BLOCKED : null;
         }
         if (ph.is(PhaseType.END_OF_TURN) && game.getPlayers().size() == 2) {
             return FlatMonteCarloPicker.Mode.END_STEP;
         }
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.getCombat() != null && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+        if ((ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) && ph.getCombat() != null
+                && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+            // after the attackers (a creature can still be put in to block) and after the blockers (a trick for the
+            // creature that blocks): the opponent cannot take the attack or the blocks back
             return FlatMonteCarloPicker.Mode.RESPOND;
         }
         return null;
@@ -2221,7 +2231,15 @@ public class AiController {
         // Card draw and selection only make sense in response to a spell or at the end step; during combat only
         // interaction is worth an instant.
         if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()) {
-            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa));
+            final boolean blocksDown = game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa)
+                    && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
+                    && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter
+            extras.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
+            approved.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
         }
         final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
         FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
@@ -2646,7 +2664,11 @@ public class AiController {
         }
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;
+        final PhaseHandler discoveryPhase = game.getPhaseHandler();
+        final boolean afterBlocks = discoveryPhase.is(PhaseType.COMBAT_DECLARE_BLOCKERS);
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
+                && !(afterBlocks && FlatMonteCarloPicker.isCombatTrick(sa))
+                && !FlatMonteCarloPicker.isSavingPlay(player, sa)
                 && !isRemoveDeckManaPermanent(sa)
                 && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
