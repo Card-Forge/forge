@@ -34,10 +34,11 @@ public final class UndoManager {
     private long budgetPhase = -1;
     /** Set when undo is switched off: the recorder is emptied by the game thread at the next checkpoint. */
     private boolean resetRecorder;
-    /** Objects captured by the last snapshot: predicts the peak heap use of the next capture. */
+    /** Retained for standalone rollback snapshots, which copy the whole graph. */
     private long lastObjects;
-    /** Rough peak bytes per captured object while a capture runs (an estimate; tune from real logs). */
     private static final long BYTES_PER_OBJECT = 220;
+    /** Room for scratch buffers and allocations not represented by the previous delta. */
+    private static final long MIN_CAPTURE_HEADROOM = 256L * 1024;
     /**
      * Heap the undo history may pin in total: the recorder's copy of the current state plus every reverse delta, as
      * counted by the memento classes. About a seventh of the maximum heap (at most 1 GB), so a phone never fills up
@@ -45,8 +46,18 @@ public final class UndoManager {
      */
     private static final long MAX_RETAINED_BYTES = Math.min(1L << 30, Runtime.getRuntime().maxMemory() / 7);
 
-    /** False when the heap is too full to take another snapshot safely. */
+    /**
+     * Use the previous capture's actual allocation as the next-capture estimate. A large game graph
+     * can be mostly unchanged, so objectCount * a fixed number needlessly disables undo on phones.
+     */
     private boolean heapAllows() {
+        final Runtime rt = Runtime.getRuntime();
+        final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
+        return free > MIN_CAPTURE_HEADROOM + recorder.lastCaptureBytes() * 2L;
+    }
+
+    /** Standalone rollback marks retain a full graph snapshot, so keep their graph-size estimate. */
+    private boolean heapAllowsStandalone() {
         if (lastObjects == 0) { return true; }
         final Runtime rt = Runtime.getRuntime();
         final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
@@ -153,7 +164,7 @@ public final class UndoManager {
         if (mode() == Mode.OFF) {
             return null;
         }
-        if (!heapAllows()) {
+        if (!heapAllowsStandalone()) {
             dropHistory("Low memory");   // the human history is the big freeable chunk
             if (!heapAllows()) {
                 return null;

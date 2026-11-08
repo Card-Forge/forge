@@ -40,7 +40,9 @@ public final class GameMemento {
 
     private static final Object[] NO_OBJECTS = new Object[0];
     private static final long[] NO_LONGS = new long[0];
+    private static final int[] NO_INTS = new int[0];
     private static final Snap[] NO_SNAPS = new Snap[0];
+    private static final UndoDelta[] NO_DELTAS = new UndoDelta[0];
     private static final Node[] NO_NODES = new Node[0];
 
     /** Pessimistic heap cost of a registry entry (Node + map slots), of one delta entry, and of a memento shell. */
@@ -84,6 +86,101 @@ public final class GameMemento {
                     : copy instanceof short[] || copy instanceof char[] ? 2 : 1;
             return 32L + (long) Array.getLength(copy) * w;
         }
+    }
+
+    /** Compact reverse patch; the recorder keeps one complete snapshot for the current state. */
+    private abstract static class UndoDelta {
+        abstract Snap restore(Snap current);
+        abstract long bytes();
+        abstract long allocationBytes();
+
+        static UndoDelta between(final Snap old, final Snap current) {
+            if (old instanceof ObjSnap before && current instanceof ObjSnap after && before.ci == after.ci) {
+                int nr = 0, np = 0;
+                for (int i = 0; i < before.refs.length; i++) if (before.refs[i] != after.refs[i]) nr++;
+                for (int i = 0; i < before.prims.length; i++) if (before.prims[i] != after.prims[i]) np++;
+                final int[] refIndexes = nr == 0 ? NO_INTS : new int[nr];
+                final Object[] oldRefs = nr == 0 ? NO_OBJECTS : new Object[nr];
+                final int[] primIndexes = np == 0 ? NO_INTS : new int[np];
+                final long[] oldPrims = np == 0 ? NO_LONGS : new long[np];
+                for (int i = 0, r = 0; i < before.refs.length; i++) {
+                    if (before.refs[i] != after.refs[i]) { refIndexes[r] = i; oldRefs[r++] = before.refs[i]; }
+                }
+                for (int i = 0, p = 0; i < before.prims.length; i++) {
+                    if (before.prims[i] != after.prims[i]) { primIndexes[p] = i; oldPrims[p++] = before.prims[i]; }
+                }
+                final UndoDelta compact = new ObjDelta(before.ci, refIndexes, oldRefs, primIndexes, oldPrims);
+                return compact.bytes() < old.bytes() ? compact : new FullDelta(old);
+            }
+            if (old instanceof SeqSnap before && current instanceof SeqSnap after) {
+                int prefix = 0;
+                final int common = Math.min(before.items.length, after.items.length);
+                while (prefix < common && before.items[prefix] == after.items[prefix]) prefix++;
+                int suffix = 0;
+                while (suffix < before.items.length - prefix && suffix < after.items.length - prefix
+                        && before.items[before.items.length - 1 - suffix]
+                        == after.items[after.items.length - 1 - suffix]) suffix++;
+                final int middleLength = before.items.length - prefix - suffix;
+                final Object[] oldMiddle = middleLength == 0 ? NO_OBJECTS
+                        : Arrays.copyOfRange(before.items, prefix, prefix + middleLength);
+                final UndoDelta compact = new SeqDelta(prefix, suffix, before.items.length, oldMiddle);
+                return compact.bytes() < old.bytes() ? compact : new FullDelta(old);
+            }
+            return new FullDelta(old);
+        }
+    }
+
+    private static final class FullDelta extends UndoDelta {
+        final Snap old;
+        FullDelta(Snap old) { this.old = old; }
+        @Override Snap restore(Snap current) { return old; }
+        @Override long bytes() { return 24L + old.bytes(); }
+        @Override long allocationBytes() { return 24L; }
+    }
+
+    private static final class ObjDelta extends UndoDelta {
+        final ClassInfo ci;
+        final int[] refIndexes;
+        final Object[] oldRefs;
+        final int[] primIndexes;
+        final long[] oldPrims;
+        ObjDelta(ClassInfo ci, int[] refIndexes, Object[] oldRefs, int[] primIndexes, long[] oldPrims) {
+            this.ci = ci; this.refIndexes = refIndexes; this.oldRefs = oldRefs;
+            this.primIndexes = primIndexes; this.oldPrims = oldPrims;
+        }
+        @Override Snap restore(Snap current) {
+            if (!(current instanceof ObjSnap now) || now.ci != ci) throw new IllegalStateException("object snapshot kind changed");
+            final Object[] refs = now.refs.length == 0 ? NO_OBJECTS : now.refs.clone();
+            final long[] prims = now.prims.length == 0 ? NO_LONGS : now.prims.clone();
+            for (int i = 0; i < refIndexes.length; i++) refs[refIndexes[i]] = oldRefs[i];
+            for (int i = 0; i < primIndexes.length; i++) prims[primIndexes[i]] = oldPrims[i];
+            return new ObjSnap(ci, refs, prims);
+        }
+        private static long intArrayBytes(int n) { return n == 0 ? 0L : 16L + 4L * n; }
+        private static long longArrayBytes(int n) { return n == 0 ? 0L : 16L + 8L * n; }
+        @Override long bytes() {
+            return 32L + intArrayBytes(refIndexes.length) + arr(oldRefs.length)
+                    + intArrayBytes(primIndexes.length) + longArrayBytes(oldPrims.length);
+        }
+        @Override long allocationBytes() { return bytes(); }
+    }
+
+    private static final class SeqDelta extends UndoDelta {
+        final int prefix, suffix, oldLength;
+        final Object[] oldMiddle;
+        SeqDelta(int prefix, int suffix, int oldLength, Object[] oldMiddle) {
+            this.prefix = prefix; this.suffix = suffix; this.oldLength = oldLength; this.oldMiddle = oldMiddle;
+        }
+        @Override Snap restore(Snap current) {
+            if (!(current instanceof SeqSnap now)) throw new IllegalStateException("sequence snapshot kind changed");
+            final Object[] items = oldLength == 0 ? NO_OBJECTS : new Object[oldLength];
+            if (prefix > 0) System.arraycopy(now.items, 0, items, 0, prefix);
+            if (oldMiddle.length > 0) System.arraycopy(oldMiddle, 0, items, prefix, oldMiddle.length);
+            if (suffix > 0) System.arraycopy(now.items, now.items.length - suffix, items, oldLength - suffix, suffix);
+            return new SeqSnap(items);
+        }
+        @Override long bytes() { return 32L + arr(oldMiddle.length); }
+        @Override long allocationBytes() { return bytes(); }
     }
 
     private static final class ClassInfo {
@@ -133,7 +230,7 @@ public final class GameMemento {
     private Recorder owner;
     private GameMemento next;                    // the memento captured right after this one, null for the newest
     private Node[] undoNodes = NO_NODES;         // objects that differ between this state and the next one ...
-    private Snap[] undoSnaps = NO_SNAPS;         // ... and their snapshot in THIS state (null = did not exist yet)
+    private UndoDelta[] undoDeltas = NO_DELTAS;  // ... and compact reverse patch for THIS state (null = new object)
     private long undoBytes;
     private int size;                            // objects in the graph at capture time
 
@@ -434,7 +531,7 @@ public final class GameMemento {
         private Node[] work = new Node[INITIAL_SCRATCH];   // breadth-first work list of the capture in progress
         private int wn;
         private Node[] dn = new Node[INITIAL_SCRATCH];     // reverse delta being built
-        private Snap[] ds = new Snap[INITIAL_SCRATCH];
+        private UndoDelta[] ds = new UndoDelta[INITIAL_SCRATCH];
         private int dc;
         private long deltaBytes;
         private Object[] sRefs = new Object[256];
@@ -457,6 +554,7 @@ public final class GameMemento {
         /** Size of the reverse delta the last capture attached to the memento before it. */
         private int lastDeltaEntries;
         private long lastDeltaBytes;
+        private long lastCaptureBytes;
 
         int registrySize() { return registry.size(); }   // tests
 
@@ -466,6 +564,9 @@ public final class GameMemento {
         /** Entries in / estimated heap of the delta the last capture produced (predicts the next one). */
         public int lastDeltaEntries() { return lastDeltaEntries; }
         public long lastDeltaBytes() { return lastDeltaBytes; }
+
+        /** Bytes allocated by the previous chained capture, including new snapshots and its reverse patch. */
+        public long lastCaptureBytes() { return lastCaptureBytes; }
 
         /** True if {@code m} is the newest memento, i.e. the state the recorder currently describes. */
         public boolean isLatest(GameMemento m) { return m != null && m == last && m.owner == this; }
@@ -529,7 +630,7 @@ public final class GameMemento {
             work = new Node[INITIAL_SCRATCH];
             wn = 0;
             dn = new Node[INITIAL_SCRATCH];
-            ds = new Snap[INITIAL_SCRATCH];
+            ds = new UndoDelta[INITIAL_SCRATCH];
             dc = 0;
             deltaBytes = 0;
             sRefs = new Object[256];
@@ -539,6 +640,7 @@ public final class GameMemento {
             liveBytes = 0;
             lastDeltaEntries = 0;
             lastDeltaBytes = 0;
+            lastCaptureBytes = 0;
             last = null;
             current = null;
             recording = false;
@@ -563,6 +665,8 @@ public final class GameMemento {
             dc = 0;
             deltaBytes = 0;
             wn = 0;
+            long allocatedBytes = 0L;
+            long deltaAllocatedBytes = 0L;
             try {
                 enqueue(root);
                 for (int wi = 0; wi < wn; wi++) {
@@ -572,7 +676,8 @@ public final class GameMemento {
                     if (now != old) {
                         n.snap = now;
                         liveBytes += old == null ? NODE_BYTES + now.bytes() : now.bytes() - old.bytes();
-                        if (recording) { note(n, old); }
+                        allocatedBytes += now.bytes() + (old == null ? NODE_BYTES : 0L);
+                        if (recording) { deltaAllocatedBytes += note(n, old, now); }
                     }
                 }
                 // Objects no longer reachable: remember them so a rewind can bring them back. Walking downwards means
@@ -581,19 +686,22 @@ public final class GameMemento {
                 for (int i = nc - 1; i >= 0; i--) { if (conts[i].gen != g) { forget(conts[i]); } }
                 if (chained) {
                     final Node[] undoN = dc == 0 ? NO_NODES : Arrays.copyOf(dn, dc);
-                    final Snap[] undoS = dc == 0 ? NO_SNAPS : Arrays.copyOf(ds, dc);
+                    final UndoDelta[] undoD = dc == 0 ? NO_DELTAS : Arrays.copyOf(ds, dc);
                     m.owner = this;
                     m.size = wn;
                     if (prev != null) {
                         prev.undoNodes = undoN;
-                        prev.undoSnaps = undoS;
+                        prev.undoDeltas = undoD;
                         prev.undoBytes = deltaBytes;
                         prev.next = m;
                     }
                     last = m;
                     lastDeltaEntries = dc;
                     lastDeltaBytes = deltaBytes;
+                    lastCaptureBytes = prev == null ? 0L
+                            : allocatedBytes + deltaAllocatedBytes + MEMENTO_BYTES + 32L + 16L * dc;
                 } else {
+                    lastCaptureBytes = 0L;
                     m.targets = new Object[wn];
                     m.snaps = new Snap[wn];
                     for (int i = 0; i < wn; i++) {
@@ -612,7 +720,7 @@ public final class GameMemento {
 
         private void forget(final Node x) {
             liveBytes -= NODE_BYTES + x.snap.bytes();
-            if (recording) { note(x, x.snap); }
+            if (recording) { note(x, x.snap, null); }
             registry.remove(x.obj);
             unlink(x);
         }
@@ -622,7 +730,7 @@ public final class GameMemento {
             if (work.length > MAX_KEPT_SCRATCH) { work = new Node[INITIAL_SCRATCH]; }
             else { Arrays.fill(work, 0, Math.min(wn, work.length), null); }
             wn = 0;
-            if (dn.length > MAX_KEPT_SCRATCH) { dn = new Node[INITIAL_SCRATCH]; ds = new Snap[INITIAL_SCRATCH]; }
+            if (dn.length > MAX_KEPT_SCRATCH) { dn = new Node[INITIAL_SCRATCH]; ds = new UndoDelta[INITIAL_SCRATCH]; }
             else {
                 Arrays.fill(dn, 0, Math.min(dc, dn.length), null);
                 Arrays.fill(ds, 0, Math.min(dc, ds.length), null);
@@ -635,15 +743,18 @@ public final class GameMemento {
             recording = false;
         }
 
-        private void note(final Node n, final Snap old) {
+        private long note(final Node n, final Snap old, final Snap now) {
             if (dc == dn.length) {
                 dn = Arrays.copyOf(dn, dc * 2);
                 ds = Arrays.copyOf(ds, dc * 2);
             }
+            final UndoDelta delta = old == null ? null
+                    : now == null ? new FullDelta(old) : UndoDelta.between(old, now);
             dn[dc] = n;
-            ds[dc] = old;
+            ds[dc] = delta;
             dc++;
-            deltaBytes += ENTRY_BYTES + (old == null ? 0L : old.bytes());
+            deltaBytes += ENTRY_BYTES + (delta == null ? 0L : delta.bytes());
+            return delta == null ? 0L : delta.allocationBytes();
         }
 
         // restoring
@@ -674,7 +785,7 @@ public final class GameMemento {
                 for (final GameMemento c : chain) {
                     c.next = null;
                     c.undoNodes = NO_NODES;
-                    c.undoSnaps = NO_SNAPS;
+                    c.undoDeltas = NO_DELTAS;
                     c.undoBytes = 0;
                 }
             }
@@ -694,25 +805,29 @@ public final class GameMemento {
         /** Moves the registry from the state after {@code c} back to the state of {@code c}. */
         private void rewind(final GameMemento c) {
             final Node[] ns = c.undoNodes;
-            final Snap[] ss = c.undoSnaps;
+            final UndoDelta[] deltas = c.undoDeltas;
             for (int i = 0; i < ns.length; i++) {
                 final Node nd = ns[i];
-                final Snap old = ss[i];
+                final UndoDelta delta = deltas[i];
                 final boolean present = registry.get(nd.obj) == nd;
-                if (old == null) {                 // appeared after c: forget it
+                if (delta == null) {               // appeared after c: forget it
                     if (present) {
                         registry.remove(nd.obj);
                         unlink(nd);
                         liveBytes -= NODE_BYTES + nd.snap.bytes();
                     }
-                } else if (present) {              // changed after c: back to the old snapshot
+                } else if (present) {              // changed after c: apply the compact reverse patch
+                    final Snap old = delta.restore(nd.snap);
                     liveBytes += old.bytes() - nd.snap.bytes();
                     nd.snap = old;
-                } else {                           // disappeared after c: bring it back
-                    nd.snap = old;
+                } else {                           // disappeared after c: bring back its full old snapshot
+                    if (!(delta instanceof FullDelta full)) {
+                        throw new IllegalStateException("missing object has no full reverse snapshot");
+                    }
+                    nd.snap = full.old;
                     registry.put(nd.obj, nd);
                     link(nd);
-                    liveBytes += NODE_BYTES + old.bytes();
+                    liveBytes += NODE_BYTES + full.old.bytes();
                 }
             }
         }

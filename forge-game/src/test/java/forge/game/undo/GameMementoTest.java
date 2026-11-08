@@ -315,6 +315,28 @@ public class GameMementoTest {
     // ---- memory
 
     @Test
+    public void reverseDeltasStoreOnlyChangedFieldsAndSequenceSplices() {
+        final Root r = new Root();
+        for (int i = 0; i < 200; i++) { item(r, i); }
+        final GameMemento.Recorder rec = new GameMemento.Recorder();
+        final GameMemento before = rec.capture(r);
+        final String fingerprint = fp(r);
+
+        r.items.get(0).value++;
+        final Item a = r.items.get(100);
+        r.items.set(100, r.items.get(101));
+        r.items.set(101, a);
+        rec.capture(r);
+
+        AssertJUnit.assertEquals(2, before.deltaSize());
+        AssertJUnit.assertTrue("single-field and short-splice deltas should be compact: "
+                + before.retainedBytes(), before.retainedBytes() < 512);
+        AssertJUnit.assertTrue(before.restore());
+        AssertJUnit.assertEquals(fingerprint, fp(r));
+        assertAccounting(rec);
+    }
+
+    @Test
     public void unchangedGraphCostsNothing() {
         final Root r = sampleRoot();
         final GameMemento.Recorder rec = new GameMemento.Recorder();
