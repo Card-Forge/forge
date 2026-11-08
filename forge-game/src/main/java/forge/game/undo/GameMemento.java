@@ -547,8 +547,10 @@ public final class GameMemento {
         private GameMemento last;      // newest memento of the chain; the registry describes its state
         private boolean recording;     // true while a reverse delta is being collected
         private long liveBytes;        // estimated heap of the registry: nodes plus current snapshots
-        /** Conservative, decaying estimate of the latest incremental capture allocation. */
+        /** Conservative, decaying estimate of incremental capture allocation. */
         private long lastCaptureBytes;
+        /** Measured cost of the last initial / standalone full-graph capture; survives reset. */
+        private long lastFullCaptureBytes;
 
         /** Debug only (off by default): list fields holding values the walker treats as opaque. */
         public boolean debugBlindSpots;
@@ -567,6 +569,9 @@ public final class GameMemento {
 
         /** Estimated allocation of a recent incremental capture, excluding the initial full graph. */
         public long lastCaptureBytes() { return lastCaptureBytes; }
+
+        /** Estimated allocation of the initial full-graph capture, retained across reset for safe rebuilding. */
+        public long lastFullCaptureBytes() { return lastFullCaptureBytes; }
 
         /** Entries in / estimated heap of the delta the last capture produced (predicts the next one). */
         public int lastDeltaEntries() { return lastDeltaEntries; }
@@ -706,9 +711,14 @@ public final class GameMemento {
                     final long captureBytes = allocatedBytes + deltaAllocatedBytes
                             + Math.max(0L, scratchBytes() - scratchBefore)
                             + MEMENTO_BYTES + arrays;
-                    // Retain some history of larger captures, but let the estimate fall after quieter actions.
-                    final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
-                    lastCaptureBytes = Math.max(captureBytes, decayed);
+                    if (hadRegistry) {
+                        // Retain some history of larger incremental captures, but let it fall after quieter actions.
+                        final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
+                        lastCaptureBytes = Math.max(captureBytes, decayed);
+                    } else {
+                        lastFullCaptureBytes = captureBytes;
+                        lastCaptureBytes = 0L;
+                    }
                 } else {
                     m.targets = new Object[wn];
                     m.snaps = new Snap[wn];
