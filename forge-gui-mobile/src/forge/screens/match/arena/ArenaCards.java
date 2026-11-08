@@ -227,7 +227,7 @@ public final class ArenaCards {
         if (mc.isHighlighted(card)) {
             return GLOW_CHOSEN;
         }
-        if (mc.isSelectable(card)) {
+        if (mc.isSelectable(card) || ArenaBoard.isAttackOption(card)) { // or a planeswalker / battle your attack could go to
             return GLOW_SELECTABLE;
         }
         if (!inHand) {
@@ -451,6 +451,8 @@ public final class ArenaCards {
         }
         if (card.isAttacking()) {
             drawAttackTarget(g, card, st, x, y, w, h);
+        } else if (ArenaBoard.isAttackOption(card)) { // while you declare attackers: "Click to attack" / "Your attack goes here"
+            drawPlate(g, ArenaPortrait.attackPlate(MatchController.instance.isHighlighted(card)), ArenaTheme.SELECTABLE, x, y, w, h);
         }
         // the damage it took rising off it
         final float up = st.hitFloat.get();
@@ -484,13 +486,19 @@ public final class ArenaCards {
                     ? Forge.getLocalizer().getMessage("lblArenaYou") : defender instanceof CardView c ? c.getName() : defender.toString();
             st.attackText = Forge.getLocalizer().getMessage("lblArenaAttackingWho", name);
         }
+        drawPlate(g, st.attackText, GLOW_COLOR[GLOW_ATTACK], x, y, w, h);
+    }
+
+    /** A one-line plate centred over a tile's top edge (it keeps the name clear), rimmed in {@code rim}. */
+    private static void drawPlate(final Graphics g, final String text, final Color rim, final float x, final float y, final float w,
+            final float h) {
         final FSkinFont f = evenFont(Math.max(ArenaTheme.px(14), h * ATTACK_TEXT));
         final float ph = Math.round(f.getLineHeight() * 1.3f);
-        final float pw = Math.min(w * 1.3f, ArenaArt.cachedTextWidth(st.attackText, f) + ph);
+        final float pw = Math.min(w * 1.3f, ArenaArt.cachedTextWidth(text, f) + ph);
         final float px = x + (w - pw) / 2f, py = y - ph - h * ATTACK_GAP;
         g.fillSmoothRoundRect(ATTACK_PLATE, px, py, pw, ph, ph / 2f);
-        g.drawSmoothRoundRect(Math.max(1f, ph * 0.06f), GLOW_COLOR[GLOW_ATTACK], px, py, pw, ph, ph / 2f);
-        g.drawText(st.attackText, f, ArenaTheme.WHITE, px, py, pw, ph, false, Align.center, true);
+        g.drawSmoothRoundRect(Math.max(1f, ph * 0.06f), rim, px, py, pw, ph, ph / 2f);
+        g.drawText(text, f, ArenaTheme.WHITE, px, py, pw, ph, false, Align.center, true);
     }
 
     private static void bloom(final Graphics g, final int kind, final float x, final float y, final float w, final float h, final float radius,

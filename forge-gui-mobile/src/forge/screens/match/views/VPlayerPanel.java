@@ -349,6 +349,8 @@ public class VPlayerPanel extends FContainer {
         bringTabsToFront();
         //the Arena board's own parts: piles, name plate, an opponent's hand as card backs (hidden in the default look)
         arenaPiles = add(new ArenaPlayerParts.Piles(player, false, this::openArenaZone));
+        arenaCastables = add(new ArenaPlayerParts.Castables(player));
+        arenaCastables.setVisible(false);
         arenaName = add(new ArenaPlayerParts.NamePlate(player));
         arenaHand = add(new ArenaPlayerParts.OpponentHand(player));
         arenaPiles.setVisible(false);
@@ -361,6 +363,7 @@ public class VPlayerPanel extends FContainer {
 
     // ---- the Arena board ------------------------------------------------------------------------------------------
     private ArenaPlayerParts.Piles arenaPiles;
+    private ArenaPlayerParts.Castables arenaCastables;
     private ArenaPlayerParts.NamePlate arenaName;
     private ArenaPlayerParts.OpponentHand arenaHand;
     private boolean arenaLaidOut;
@@ -440,6 +443,14 @@ public class VPlayerPanel extends FContainer {
             ArenaBoard.watchedHand(cx + left, arenaRect);
             arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
         }
+        //what you can cast from outside your hand (your commander...), as plates over your piles
+        arenaCastables.setVisible(ownFan);
+        if (ownFan) {
+            ArenaBoard.piles(true, false, left, width, arenaRect);
+            final float ch = ArenaPlayerParts.Castables.heightFor(ArenaBoard.windowH());
+            arenaCastables.setBounds(arenaRect.x - left, arenaRect.y - top - ch - Math.round(ArenaBoard.windowH() * 0.008f),
+                    Math.round(ArenaBoard.windowW() * 0.22f), ch);
+        }
 
         //what floats beside the portrait: mana in the pool (a seat's shows as chips on its name plate, where it has room)
         final VDisplayArea pool = tabManaPool.getDisplayArea();
@@ -504,6 +515,7 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.setVisible(true);
         phaseIndicator.setArenaLadder(0);
         arenaPiles.setVisible(false);
+        arenaCastables.setVisible(false);
         arenaName.setVisible(false);
         arenaHand.setVisible(false);
         field.setArenaRows(-1, 0, 0, 0);

@@ -1,11 +1,16 @@
 package forge.screens.match.arena;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
+import forge.util.collect.FCollectionView;
 
 /**
  * Where the parts of a player's area go on the Arena board, as fractions of the window, so 21:9, 16:9 and smaller
@@ -60,49 +65,101 @@ public final class ArenaBoard {
         return Math.max(1, Forge.getScreenHeight());
     }
 
+    // ---- who is at the table (worked out once per frame: every seat, chip and tile asks) ----------------------------
+    private static long tableFrame = -1;
+    private static GameView tableGame;
+    private static boolean seatGame, declaringAttack;
+    private static PlayerView nextPlayer;
+
+    /** Brings the per-frame answers up to date: an index walk over the players, no allocation. */
+    private static void refreshTable() {
+        final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
+        final GameView game = MatchController.instance.getGameView();
+        if (frame == tableFrame && game == tableGame && frame >= 0) {
+            return;
+        }
+        tableFrame = frame;
+        tableGame = game;
+        seatGame = false;
+        declaringAttack = false;
+        nextPlayer = null;
+        final FCollectionView<PlayerView> players = game == null ? null : game.getPlayers();
+        if (players == null) {
+            return;
+        }
+        final int n = players.size();
+        int living = 0;
+        final PlayerView turn = game.getPlayerTurn();
+        int turnAt = -1;
+        for (int i = 0; i < n; i++) {
+            final PlayerView p = players.get(i);
+            if (!p.getHasLost()) {
+                living++;
+            }
+            if (p == turn) {
+                turnAt = i;
+            }
+        }
+        seatGame = (living == 0 ? n : living) > 2;
+        if (turnAt >= 0) {
+            for (int k = 1; k < n; k++) { // the next player still in the game, in seat order
+                final PlayerView p = players.get((turnAt + k) % n);
+                if (!p.getHasLost()) {
+                    nextPlayer = p;
+                    break;
+                }
+            }
+        }
+        // you are declaring attackers: your turn, the step, and the prompt marks the defender it collects them for
+        if (turn != null && game.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS && MatchController.instance.isLocalPlayer(turn)) {
+            for (int i = 0; i < n && !declaringAttack; i++) {
+                final PlayerView p = players.get(i);
+                declaringAttack = p != turn && MatchController.instance.isHighlighted(p);
+            }
+            for (int i = 0; i < n && !declaringAttack; i++) { // the defender may be a planeswalker or a battle
+                final FCollectionView<CardView> field = players.get(i).getCards(ZoneType.Battlefield);
+                for (int j = 0, m = field == null ? 0 : field.size(); j < m && !declaringAttack; j++) {
+                    declaringAttack = MatchController.instance.isHighlighted(field.get(j));
+                }
+            }
+        }
+    }
+
     /** Whether opponents sit side by side along the top (more than two players still in the game). */
     public static boolean isSeatGame() {
-        final GameView game = MatchController.instance.getGameView();
-        return game != null && game.getPlayers() != null && countLiving(game) > 2;
+        refreshTable();
+        return seatGame;
+    }
+
+    /** Who plays after the current turn: the next player still in the game in seat order, or null. */
+    public static PlayerView nextTurnPlayer() {
+        refreshTable();
+        return nextPlayer;
     }
 
     /**
-     * Who plays after the current turn: the next player still in the game in seat order (the order of
-     * {@code GameView.getPlayers()}), or null. No allocation: it runs every frame.
+     * Whether you are choosing attackers now (your declare-attackers step, the prompt collecting them for a defender it
+     * marks). Then every opponent still in the game, and their planeswalkers and battles, can be clicked to send the
+     * attack there; the client is not told the engine's exact list, so this is what the rules allow in Commander.
      */
-    public static PlayerView nextTurnPlayer(final GameView game) {
-        if (game == null || game.getPlayers() == null || game.getPlayerTurn() == null) {
-            return null;
-        }
-        final PlayerView turn = game.getPlayerTurn();
-        PlayerView first = null;
-        boolean passed = false;
-        for (final PlayerView p : game.getPlayers()) {
-            if (p == turn) {
-                passed = true;
-                continue;
-            }
-            if (p.getHasLost()) {
-                continue;
-            }
-            if (passed) {
-                return p;
-            }
-            if (first == null) {
-                first = p;
-            }
-        }
-        return first;
+    public static boolean isDeclaringAttack() {
+        refreshTable();
+        return declaringAttack;
     }
 
-    private static int countLiving(final GameView game) {
-        int n = 0;
-        for (final PlayerView p : game.getPlayers()) {
-            if (!p.getHasLost()) {
-                n++;
-            }
+    /** While you declare attackers: whether this player could be the defender (an opponent still in the game). */
+    public static boolean isAttackOption(final PlayerView p) {
+        final PlayerView me = MatchController.instance.getCurrentPlayer();
+        return isDeclaringAttack() && p != null && me != null && p != me && !p.getHasLost() && p.isOpponentOf(me);
+    }
+
+    /** While you declare attackers: whether this permanent could be attacked (an opponent's planeswalker or battle). */
+    public static boolean isAttackOption(final CardView c) {
+        if (!isDeclaringAttack() || c == null || c.getZone() != ZoneType.Battlefield || c.getCurrentState() == null) {
+            return false;
         }
-        return n == 0 ? game.getPlayers().size() : n;
+        final CardView.CardStateView st = c.getCurrentState();
+        return (st.isPlaneswalker() || st.isBattle()) && isAttackOption(c.getController());
     }
 
     // ---- portrait --------------------------------------------------------------------------------------------------

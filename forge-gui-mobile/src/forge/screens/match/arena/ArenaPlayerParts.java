@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Forge;
 import forge.Graphics;
@@ -19,6 +21,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -58,7 +61,8 @@ public final class ArenaPlayerParts {
         // the pile under the pointer this frame (-1: none), whether it is lit, the commander tax and the texts saying it
         private int hovered = -1;
         private boolean hoveredPlayable;
-        private int taxFor = -1, taxHintFor = -1;
+        private int taxFor = -1, taxHintFor = -1, taxNow;
+        private long taxAt;
         private String taxText, taxHint, playableHint;
 
         /**
@@ -314,7 +318,12 @@ public final class ArenaPlayerParts {
             String badge = countText[i];
             if (zone == ZoneType.Command) {
                 // commander tax: two more for each time the commander has already been cast, said in words ("Tax +2")
-                final int tax = top != null && player.getCommanders() != null && player.getCommanders().contains(top) ? 2 * player.getCommanderCast(top) : 0;
+                // (read again at most every ArenaPlayerInfo.REFRESH_MS: the lookup boxes the card's id)
+                if (taxText == null || TimeUtils.timeSinceMillis(taxAt) >= ArenaPlayerInfo.REFRESH_MS) {
+                    taxAt = TimeUtils.millis();
+                    taxNow = top != null && player.getCommanders() != null && player.getCommanders().contains(top) ? 2 * player.getCommanderCast(top) : 0;
+                }
+                final int tax = taxNow;
                 if (tax != taxFor || taxText == null) {
                     taxFor = tax;
                     taxText = Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax));
@@ -353,6 +362,144 @@ public final class ArenaPlayerParts {
             g.fillSmoothRoundRect(BADGE, bx, by, bw, bh, bh / 2f);
             g.drawSmoothRoundRect(1f, BADGE_RIM, bx, by, bw, bh, bh / 2f);
             ArenaArt.textBold(g, text, f, ArenaTheme.TEXT, bx, by, bw, bh, Align.center);
+        }
+    }
+
+    // ---- what you can cast from outside your hand -------------------------------------------------------------------
+
+    /**
+     * The cards the prompt offers you to play from outside your hand - your commander in the command zone, flashback
+     * and the like in the graveyard, cards you may play from exile - each as a plate above your piles ("Cast Krenko, Mob
+     * Boss · Tax +2"); a click casts it (the Swing board puts such cards beside the hand). Read again at most every
+     * {@link ArenaPlayerInfo#REFRESH_MS}; drawing them allocates nothing.
+     */
+    public static final class Castables extends FDisplayObject {
+        private static final ZoneType[] FROM = {ZoneType.Command, ZoneType.Graveyard, ZoneType.Exile};
+        private static final int MOST = 3;
+        /** A plate's height against the window's, and the gap between plates (shares of a plate's height). */
+        private static final float PLATE_H = 0.032f, PLATE_GAP = 0.2f;
+        private static final Color PLATE_FILL = ArenaTheme.rgba(6, 18, 26, 235);
+        private final PlayerView player;
+        private final CardView[] cards = new CardView[MOST];
+        private final TextureRegion[] arts = new TextureRegion[MOST];
+        private final String[] texts = new String[MOST];
+        private final int[] taxes = new int[MOST];
+        private int n;
+        private long readAt;
+
+        public Castables(final PlayerView player0) {
+            player = player0;
+        }
+
+        /** The plates' height in all, for the most there can be (the panel sizes this view from it). */
+        public static float heightFor(final float windowH) {
+            final float h = Math.round(windowH * PLATE_H);
+            return MOST * h + (MOST - 1) * Math.max(2f, h * PLATE_GAP);
+        }
+
+        private void read() {
+            readAt = TimeUtils.millis();
+            n = 0;
+            final List<CardView> actionable = MatchController.instance.getSelection().actionable();
+            for (int i = 0, m = actionable.size(); i < m && n < MOST; i++) {
+                final CardView c = actionable.get(i);
+                if (!player.equals(c.getOwner()) || !isFrom(c.getZone()) || contains(c)) {
+                    continue;
+                }
+                final int tax = c.getZone() == ZoneType.Command && player.getCommanders() != null && player.getCommanders().contains(c)
+                        ? 2 * player.getCommanderCast(c) : 0;
+                if (cards[n] != c || taxes[n] != tax || texts[n] == null) {
+                    final boolean land = c.getCurrentState() != null && c.getCurrentState().isLand();
+                    final String verb = Forge.getLocalizer().getMessage(land ? "lblArenaPlayCard" : "lblArenaCastCard", c.getName());
+                    texts[n] = tax > 0 ? verb + " · " + Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax)) : verb;
+                }
+                if (cards[n] != c || arts[n] == null) {
+                    arts[n] = ArenaPlayerInfo.circleArtOf(c);
+                }
+                cards[n] = c;
+                taxes[n] = tax;
+                n++;
+            }
+            for (int i = n; i < MOST; i++) {
+                cards[i] = null;
+            }
+        }
+
+        private static boolean isFrom(final ZoneType zone) {
+            for (final ZoneType z : FROM) {
+                if (z == zone) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean contains(final CardView c) {
+            for (int i = 0; i < n; i++) {
+                if (cards[i] == c) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private float plateH() {
+            return Math.round(ArenaBoard.windowH() * PLATE_H);
+        }
+
+        /** The plate at y (from the bottom up: the first sits lowest, nearest the piles), or -1. */
+        private int plateAt(final float y) {
+            final float h = plateH(), gap = Math.max(2f, h * PLATE_GAP);
+            for (int i = 0; i < n; i++) {
+                final float top = getHeight() - (i + 1) * h - i * gap;
+                if (y >= top && y < top + h) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        @Override
+        public boolean tap(final float x, final float y, final int count) {
+            final int i = plateAt(y);
+            if (i < 0 || cards[i] == null) {
+                return false;
+            }
+            final CardView card = cards[i];
+            ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().selectCard(card, null, null));
+            return true;
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            if (!ArenaTheme.isActive()) {
+                return;
+            }
+            if (TimeUtils.timeSinceMillis(readAt) >= ArenaPlayerInfo.REFRESH_MS) {
+                read();
+            }
+            if (n == 0) {
+                return;
+            }
+            final float h = plateH(), gap = Math.max(2f, h * PLATE_GAP);
+            final FSkinFont f = ArenaCards.evenFont(h * 0.5f);
+            final float mx = Forge.mouseMovedX - screenPos.x, my = Forge.mouseMovedY - screenPos.y;
+            final int over = Forge.magnify && mx >= 0 && mx < getWidth() ? plateAt(my) : -1;
+            final float breath = 0.65f + 0.35f * ArenaMotion.pulse(1.5f);
+            for (int i = 0; i < n; i++) {
+                final float top = getHeight() - (i + 1) * h - i * gap;
+                final float w = Math.min(getWidth(), ArenaArt.cachedTextWidth(texts[i], f) + 2.2f * h);
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.PLAYABLE, (i == over ? 0.95f : 0.6f) * breath, S1), 0, top, w, h, h / 2f, h * 0.35f);
+                g.fillSmoothRoundRect(PLATE_FILL, 0, top, w, h, h / 2f);
+                g.drawSmoothRoundRect(Math.max(1f, h * 0.06f), ArenaTheme.PLAYABLE, 0, top, w, h, h / 2f);
+                final float d = h * 0.78f;
+                if (arts[i] != null) {
+                    ArenaArt.circleImage(g, arts[i], h * 0.12f + d / 2f, top + h / 2f, d);
+                } else {
+                    g.fillSmoothCircle(ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.35f, S2), h * 0.12f + d / 2f, top + h / 2f, d / 2f);
+                }
+                g.drawText(texts[i], f, ArenaTheme.WHITE, h * 0.3f + d, top, w - d - h * 0.6f, h, false, Align.left, true);
+            }
         }
     }
 
@@ -429,6 +576,7 @@ public final class ArenaPlayerParts {
         private final PlayerView player;
         private float nameH; // seat: the name's row; the rest of the height is for the chips. 0: the whole height
         private PhaseType phaseFor;
+        private final ArenaPlayerInfo.Row chips = new ArenaPlayerInfo.Row();
         private String phaseText;
 
         public NamePlate(final PlayerView player0) {
@@ -471,12 +619,12 @@ public final class ArenaPlayerParts {
                         phaseText = phaseFor.nameForUi;
                     }
                     lead = ArenaPlayerInfo.LEAD_PHASE;
-                } else if (ArenaBoard.nextTurnPlayer(game) == player) {
+                } else if (ArenaBoard.nextTurnPlayer() == player) {
                     lead = ArenaPlayerInfo.LEAD_NEXT;
                 }
             }
             final float chipH = Math.round(h * SEAT_CHIP_SHARE), gap = Math.max(2f, chipH * 0.18f);
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, phaseText, ArenaTheme.px(4),
+            ArenaPlayerInfo.draw(g, chips, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, phaseText, ArenaTheme.px(4),
                     nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4) - nameH * FAN_CLEARANCE);
         }
     }

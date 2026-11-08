@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -94,6 +95,19 @@ public class VStack extends FDropDown {
     }
 
     private static final int ARENA_MOST_TARGETS = 2;
+
+    /** The "[Card: ..., Activator: ...]" list of what set a trigger off, at the end of its text (the Swing board's pattern). */
+    private static final Pattern TRIGGER_OBJECTS = Pattern.compile("\\s*\\[[^\\[\\]]*\\]\\s*$");
+
+    /** Which target collections an entry (and its sub-abilities) holds now: a change means it was retargeted. */
+    private static int targetsSignature(final StackItemView item) {
+        int sig = 0;
+        for (StackItemView part = item; part != null; part = part.getSubInstance()) {
+            sig = 31 * sig + System.identityHashCode(part.getTargetPlayers());
+            sig = 31 * sig + System.identityHashCode(part.getTargetCards());
+        }
+        return sig;
+    }
 
     private static int appendTarget(final StringBuilder names, final int n, final String name) {
         if (n < ARENA_MOST_TARGETS) {
@@ -601,7 +615,7 @@ public class VStack extends FDropDown {
                 text = "(OPTIONAL) " + text;
             }
             if (isArenaStack()) { //as on the Swing board: the "[Card: ..., Activator: ...]" list of what set a trigger off goes
-                text = text.replaceAll("\\s*\\[[^\\[\\]]*\\]\\s*$", "");
+                text = TRIGGER_OBJECTS.matcher(text).replaceAll("");
             }
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
@@ -776,6 +790,7 @@ public class VStack extends FDropDown {
         }
 
         private String arenaCaster, arenaTargets;
+        private int arenaTargetsSig;
         /** How much of this entry shows from under the newer ones (all of it for the top one). */
         private float arenaVisibleW = Float.MAX_VALUE;
 
@@ -795,7 +810,15 @@ public class VStack extends FDropDown {
             if (arenaCaster == null) {
                 final PlayerView me = MatchController.instance.getCurrentPlayer();
                 arenaCaster = activator.equals(me) ? Forge.getLocalizer().getMessage("lblArenaYou") : activator.getName();
+                arenaTargetsSig = targetsSignature(stackInstance);
                 arenaTargets = arenaTargetsText(stackInstance);
+            } else {
+                // retargeting gives the entry new target collections: say the new targets (nothing is made unless they changed)
+                final int sig = targetsSignature(stackInstance);
+                if (sig != arenaTargetsSig) {
+                    arenaTargetsSig = sig;
+                    arenaTargets = arenaTargetsText(stackInstance);
+                }
             }
             final FSkinFont f = ArenaTheme.fontPx(Math.max(10, Math.round(h * CASTER_TEXT / 2) * 2));
             final float line = Math.round(f.getLineHeight() * 1.25f), dot = line * 0.32f, pad = line * CASTER_PAD;
@@ -808,13 +831,18 @@ public class VStack extends FDropDown {
             g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, px, py, pw, ph, line / 2f);
             g.fillSmoothCircle(ArenaTheme.GOLD, px + pad + dot / 2f, py + line / 2f, dot / 2f);
             final float tx = px + pad + dot * 1.6f;
-            // a buried entry shows only a strip: the text is cut at the plate's edge rather than shrunk to nothing
-            g.startClip(px, py, pw - pad / 2f, ph);
+            // a buried entry shows only a strip: text that does not fit is cut at the plate's edge, not shrunk to nothing
+            final boolean clip = textW + 2 * pad > pw;
+            if (clip) {
+                g.startClip(px, py, pw - pad / 2f, ph);
+            }
             g.drawText(arenaCaster, f, ArenaTheme.WHITE, tx, py, textW + 2 * pad, line, false, Align.left, true);
             if (arenaTargets != null) {
                 g.drawText(arenaTargets, f, ArenaTheme.GOLD, px + pad, py + line, textW + 2 * pad, line, false, Align.left, true);
             }
-            g.endClip();
+            if (clip) {
+                g.endClip();
+            }
         }
 
         @Override

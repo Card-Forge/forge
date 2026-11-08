@@ -12,7 +12,6 @@ import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
 import forge.game.GameView;
-import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.screens.match.MatchController;
@@ -41,7 +40,8 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         String lifeText = "";
         int lifeTextFor = Integer.MIN_VALUE;
         String hintText;
-        boolean hintAttack;
+        // the chips round the life plate: commander damage on the left, counters and designations on the right
+        final ArenaPlayerInfo.Row damageRow = new ArenaPlayerInfo.Row(), infoRow = new ArenaPlayerInfo.Row();
     }
 
     private static final int RING_CHOSEN = 0, RING_SELECTABLE = 1, RING_TARGET = 2, RING_HOVER = 3;
@@ -113,14 +113,19 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         if (!seat) { //a seat's chips go under its name plate: beside its small plate they would run into its hand and piles
             final float chipH = Math.round(plateH * CHIP_SHARE), gap = plateH * 0.75f + ArenaTheme.px(6);
             // with seats round the table, it says when you play next as it does on theirs
-            final int lead = ArenaBoard.isSeatGame() && ArenaBoard.nextTurnPlayer(game) == player ? ArenaPlayerInfo.LEAD_NEXT : ArenaPlayerInfo.LEAD_NONE;
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.CMDR, ArenaPlayerInfo.LEAD_NONE, null, cx - gap, cy + d / 2f, chipH, true, 0);
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, lead, null, cx + gap, cy + d / 2f, chipH, false, 0);
+            final int lead = ArenaBoard.isSeatGame() && ArenaBoard.nextTurnPlayer() == player ? ArenaPlayerInfo.LEAD_NEXT : ArenaPlayerInfo.LEAD_NONE;
+            ArenaPlayerInfo.draw(g, st.damageRow, player, ArenaPlayerInfo.CMDR, ArenaPlayerInfo.LEAD_NONE, null, cx - gap, cy + d / 2f, chipH, true, 0);
+            ArenaPlayerInfo.draw(g, st.infoRow, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, lead, null, cx + gap, cy + d / 2f, chipH,
+                    false, 0);
         }
-        if (ring == RING_SELECTABLE && isPointerOver(v)) { // what the breathing ring means: it can be clicked, and for what
-            final FSkinFont hf = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), plateH * 0.36f));
-            final float top = opponent ? cy + d / 2f + plateH * 0.6f + ArenaTheme.px(4) : cy - d / 2f - ArenaArt.hintHeight(hf) - ArenaTheme.px(8);
-            ArenaArt.hint(g, hintText(st, player, game), hf, cx, top, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
+        final FSkinFont hf = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), plateH * HINT_SHARE));
+        final float hintTop = opponent ? cy + d / 2f + plateH * 0.6f + ArenaTheme.px(4) : cy - d / 2f - ArenaArt.hintHeight(hf) - ArenaTheme.px(8);
+        if (ArenaBoard.isDeclaringAttack() && opponent && (ring == RING_CHOSEN || ring == RING_SELECTABLE)) {
+            // while you declare attackers every opponent says, without hovering, where your attack goes and that it can go
+            // to them instead (the prompt asks for the same in words)
+            ArenaArt.hint(g, attackPlate(ring == RING_CHOSEN), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
+        } else if (ring == RING_SELECTABLE && isPointerOver(v)) { // what the breathing ring means: it can be clicked, for what
+            ArenaArt.hint(g, hintText(st, player), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
         }
 
         final float up = st.floatUp.get();
@@ -140,16 +145,26 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         return Forge.magnify && v.screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY);
     }
 
+    /** The hint plate's text against the life plate's height. */
+    private static final float HINT_SHARE = 0.36f;
+    private static String attackHere, clickToAttack;
+
+    /** "Your attack goes here" for the defender being filled, "Click to attack" for the others; made once. */
+    static String attackPlate(final boolean current) {
+        if (attackHere == null) {
+            attackHere = Forge.getLocalizer().getMessage("lblArenaAttackHere");
+            clickToAttack = Forge.getLocalizer().getMessage("lblArenaClickToAttack");
+        }
+        return current ? attackHere : clickToAttack;
+    }
+
     /** The share of the life plate's height a chip beside it takes. */
     private static final float CHIP_SHARE = 0.56f;
 
-    /** "Click to attack X" while attackers are being declared, "Click to choose X" for any other pick; made once each. */
-    private static String hintText(final State st, final PlayerView player, final GameView game) {
-        final boolean attack = game != null && game.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS
-                && MatchController.instance.isLocalPlayer(game.getPlayerTurn());
-        if (st.hintText == null || st.hintAttack != attack) {
-            st.hintAttack = attack;
-            st.hintText = Forge.getLocalizer().getMessage(attack ? "lblArenaHintAttack" : "lblArenaHintChoose", player.getName());
+    /** "Click to choose X" (a target, a player to pick); made once per portrait. */
+    private static String hintText(final State st, final PlayerView player) {
+        if (st.hintText == null) {
+            st.hintText = Forge.getLocalizer().getMessage("lblArenaHintChoose", player.getName());
         }
         return st.hintText;
     }
@@ -159,7 +174,7 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         if (mc.isHighlighted(player)) {
             return RING_CHOSEN;
         }
-        if (mc.isSelectable(player)) {
+        if (mc.isSelectable(player) || ArenaBoard.isAttackOption(player)) {
             return RING_SELECTABLE;
         }
         if (isStackTarget(player)) {

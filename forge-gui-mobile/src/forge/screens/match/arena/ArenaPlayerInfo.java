@@ -1,11 +1,13 @@
 package forge.screens.match.arena;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Forge;
 import forge.Graphics;
@@ -36,7 +38,13 @@ import forge.util.collect.FCollectionView;
  * <li>a seat's floating mana (yours and a single opponent's keep their pool beside the portrait).</li>
  * </ul>
  * A row may be led by a pill: the step a seat's turn is in, or that it plays next. {@link #drawEliminated} lists the
- * players who are out. Nothing here allocates per frame once the figures and names have been seen.
+ * players who are out.
+ *
+ * <h2>Cost</h2>
+ * Each caller keeps a {@link Row}. Reading the game (iterating its collections, looking up art) and laying the chips
+ * out - shrinking them until a wrapping row fits - happens in {@link Row#rebuild} at most every {@link #REFRESH_MS}, or
+ * at once when the row's place, size or lead changes; every other frame only draws what the row holds, which allocates
+ * nothing.
  */
 public final class ArenaPlayerInfo {
     private ArenaPlayerInfo() { }
@@ -47,16 +55,19 @@ public final class ArenaPlayerInfo {
     /** How a row is led: nothing, the step of the turn (gold), or "plays next" (steel). */
     public static final int LEAD_NONE = 0, LEAD_PHASE = 1, LEAD_NEXT = 2;
 
+    /** How often a row reads the game again (the figures it shows change on game events, not per frame). */
+    public static final long REFRESH_MS = 100;
+
     // ---- the chip's proportions, as shares of its height ---------------------------------------------------------
     /** Figures and labels. */
     private static final float FIGURE_TEXT = 0.62f, LABEL_TEXT = 0.56f;
     /** Gap between chips and between wrapped rows. */
     private static final float GAP = 0.18f;
-    /** Padding before a circle or icon, after the text. */
-    private static final float PAD_LEFT = 0.12f, PAD_RIGHT = 0.4f;
-    /** Space between a circle or icon and its text. */
+    /** Padding before a picture, and after the text; a chip with no picture pads its text by half a height each side. */
+    private static final float PAD_LEFT = 0.12f, PAD_RIGHT = 0.4f, PAD_PLAIN = 0.5f;
+    /** Space between a picture and its text. */
     private static final float TEXT_GAP = 0.2f;
-    /** An icon's size, and the ring round a circle (a circle is the chip's height less this on each side). */
+    /** An icon's size, and the ring round a circle picture (a circle is the chip's height less this on each side). */
     private static final float ICON = 0.72f, RING_INSET = 0.09f;
     /** Rim lines. */
     private static final float RIM = 0.05f, CIRCLE_RIM = 0.045f;
@@ -67,6 +78,8 @@ public final class ArenaPlayerInfo {
     /** How a row that does not fit shrinks: this much a step, at most this many steps (down to about half its size). */
     private static final float FIT_SHRINK = 0.88f;
     private static final int FIT_STEPS = 5;
+    /** The most chips a row holds. */
+    private static final int MAX_CHIPS = 24;
 
     private static final Color CMDR_COLOR = ArenaTheme.rgb(0xE8C27A), CMDR_NEAR = ArenaTheme.rgb(0xFF6A5C);
     private static final Color CHIP_FILL = ArenaTheme.rgba(8, 9, 14, 225);
@@ -76,7 +89,6 @@ public final class ArenaPlayerInfo {
     private static final Color LEAD_TOP = ArenaTheme.rgb(0x8A6A2E), LEAD_BOTTOM = ArenaTheme.rgb(0x4A3612);
     private static final Color NEXT_TOP = ArenaTheme.rgb(0x4C5664), NEXT_BOTTOM = ArenaTheme.rgb(0x252B33), NEXT_RIM = ArenaTheme.rgb(0xAFC3DA);
     private static final Color STATUS_FILL = ArenaTheme.rgba(58, 44, 16, 235), OUT_FILL = ArenaTheme.rgba(20, 18, 16, 225);
-    private static final Color S1 = new Color();
 
     private static final CounterEnumType[] COUNTER_TYPES = {CounterEnumType.POISON, CounterEnumType.ENERGY, CounterEnumType.EXPERIENCE,
             CounterEnumType.RAD, CounterEnumType.TICKET};
@@ -139,111 +151,345 @@ public final class ArenaPlayerInfo {
         return -1;
     }
 
+    // ---- a row ------------------------------------------------------------------------------------------------------
+
+    /** What a chip shows before its text. */
+    private static final int PIC_NONE = 0, PIC_CARD = 1, PIC_ICON = 2, PIC_SYMBOL = 3;
+
     /**
-     * Draws the chips in a row, from {@code x} rightwards ({@code rightToLeft} false) or leftwards, wrapping onto a
-     * further row below after {@code maxW} (0: no limit, one row; at most {@link #MAX_ROWS} rows, what does not fit is
-     * left out). Rows are {@code h} tall and centred on {@code cy} for the first. {@code lead} ({@link #LEAD_PHASE} with
-     * {@code leadText}, or {@link #LEAD_NEXT}) comes first. Returns the number of rows used.
+     * One caller's row of chips, as last read and laid out. Keep one per place a row is drawn (a portrait's two sides,
+     * a seat's plate) and pass it to {@link #draw} each frame.
      */
-    public static int draw(final Graphics g, final PlayerView player, final int what, final int lead, final String leadText, final float x,
-            final float cy, final float h, final boolean rightToLeft, final float maxW) {
-        if (player == null) {
-            return 0;
+    public static final class Row {
+        // what was asked for last, so a change of place or lead lays the row out again at once
+        private PlayerView player;
+        private int what = -1, lead = -1;
+        private String leadText;
+        private float x0 = Float.NaN, cy0, h0, maxW0;
+        private boolean rtl0;
+        private long builtAt;
+        // the chips: what they show, and where they went
+        private int n;
+        private final int[] pic = new int[MAX_CHIPS];
+        private final CardView[] card = new CardView[MAX_CHIPS];
+        private final TextureRegion[] art = new TextureRegion[MAX_CHIPS];
+        private final String[] initial = new String[MAX_CHIPS];
+        private final Color[] tint = new Color[MAX_CHIPS];
+        private final FSkinImage[] icon = new FSkinImage[MAX_CHIPS];
+        private final String[] symbol = new String[MAX_CHIPS];
+        private final String[] text = new String[MAX_CHIPS];
+        private final boolean[] label = new boolean[MAX_CHIPS];
+        private final Color[] top = new Color[MAX_CHIPS], bottom = new Color[MAX_CHIPS], rim = new Color[MAX_CHIPS], ink = new Color[MAX_CHIPS];
+        private final float[] cx = new float[MAX_CHIPS], cyAt = new float[MAX_CHIPS], cw = new float[MAX_CHIPS];
+        private final boolean[] shown = new boolean[MAX_CHIPS], clipped = new boolean[MAX_CHIPS];
+        private float h;
+        private int rows;
+        private FSkinFont figureFont, labelFont, initialFont;
+
+        /** Whether the row has to read the game and lay itself out again before this frame's draw. */
+        private boolean stale(final PlayerView p, final int what1, final int lead1, final String leadText1, final float x, final float cy,
+                final float h1, final boolean rtl, final float maxW) {
+            return p != player || what1 != what || lead1 != lead || leadText1 != leadText || x != x0 || cy != cy0 || h1 != h0
+                    || rtl != rtl0 || maxW != maxW0 || TimeUtils.timeSinceMillis(builtAt) >= REFRESH_MS;
         }
-        // a wrapping row that would leave chips out (a seat with commander damage, the Monarch and mana on a small
-        // window) takes smaller chips instead, down to a floor, keeping its top where it was
-        float fit = h;
-        if (maxW > 0) {
-            for (int i = 0; i < FIT_STEPS; i++) {
-                layout(null, player, what, lead, leadText, x, cy - (h - fit) / 2f, fit, rightToLeft, maxW);
-                if (ROW.dropped == 0) {
+
+        private void add(final int pic1, final String text1, final boolean label1, final Color top1, final Color bottom1, final Color rim1,
+                final Color ink1) {
+            if (n >= MAX_CHIPS) {
+                return;
+            }
+            pic[n] = pic1;
+            text[n] = text1;
+            label[n] = label1;
+            top[n] = top1;
+            bottom[n] = bottom1;
+            rim[n] = rim1;
+            ink[n] = ink1;
+            card[n] = null;
+            art[n] = null;
+            initial[n] = null;
+            icon[n] = null;
+            symbol[n] = null;
+            n++;
+        }
+
+        /** Reads the player's state into chips and lays them out, shrinking them until a wrapping row fits. */
+        private void rebuild(final PlayerView p, final int what1, final int lead1, final String leadText1, final float x, final float cy,
+                final float h1, final boolean rtl, final float maxW) {
+            player = p;
+            what = what1;
+            lead = lead1;
+            leadText = leadText1;
+            x0 = x;
+            cy0 = cy;
+            h0 = h1;
+            rtl0 = rtl;
+            maxW0 = maxW;
+            builtAt = TimeUtils.millis();
+            n = 0;
+            if (lead1 == LEAD_PHASE && leadText1 != null) {
+                add(PIC_NONE, leadText1, true, LEAD_TOP, LEAD_BOTTOM, ArenaTheme.GOLD, ArenaTheme.WHITE);
+            } else if (lead1 == LEAD_NEXT) {
+                add(PIC_NONE, nextLabel(), true, NEXT_TOP, NEXT_BOTTOM, NEXT_RIM, ArenaTheme.WHITE);
+            }
+            if ((what1 & CMDR) != 0) {
+                readCommanderDamage(p);
+            }
+            if ((what1 & COUNTERS) != 0) {
+                for (int i = 0; i < COUNTER_TYPES.length; i++) {
+                    final int k = p.getCounters(COUNTER_TYPES[i]);
+                    if (k > 0) {
+                        add(PIC_ICON, figure(k), false, CHIP_FILL, CHIP_FILL, COUNTER_COLORS[i], COUNTER_COLORS[i]);
+                        icon[n - 1] = COUNTER_ICONS[i];
+                    }
+                }
+            }
+            if ((what1 & STATUS) != 0) {
+                readStatus(p);
+            }
+            if ((what1 & MANA) != 0) {
+                for (int i = 0; i < ManaAtom.MANATYPES.length; i++) {
+                    final int k = p.getMana(ManaAtom.MANATYPES[i]);
+                    if (k > 0) {
+                        add(PIC_SYMBOL, figure(k), false, CHIP_FILL, CHIP_FILL, MANA_RIM, ArenaTheme.WHITE);
+                        symbol[n - 1] = MANA_SYMBOLS[i];
+                    }
+                }
+            }
+            // the one shrink-to-fit step: smaller chips until nothing is left out (or the floor), keeping the top
+            float fit = h1;
+            for (int step = 0; ; step++) {
+                place(x, cy - (h1 - fit) / 2f, fit, rtl, maxW);
+                if (maxW <= 0 || allShown() || step >= FIT_STEPS) {
                     break;
                 }
                 fit *= FIT_SHRINK;
             }
         }
-        return layout(g, player, what, lead, leadText, x, cy - (h - fit) / 2f, fit, rightToLeft, maxW);
-    }
 
-    /** Lays the chips out and, with a Graphics, draws them; with none it only counts what fits. */
-    private static int layout(final Graphics g, final PlayerView player, final int what, final int lead, final String leadText, final float x,
-            final float cy, final float h, final boolean rightToLeft, final float maxW) {
-        final Row row = ROW.start(g, x, cy, h, rightToLeft, maxW);
-        if (lead == LEAD_PHASE && leadText != null) {
-            row.leadChip(leadText, LEAD_TOP, LEAD_BOTTOM, ArenaTheme.GOLD);
-        } else if (lead == LEAD_NEXT) {
-            row.leadChip(nextLabel(), NEXT_TOP, NEXT_BOTTOM, NEXT_RIM);
-        }
-        if ((what & CMDR) != 0) {
-            drawCommanderDamage(row, player);
-        }
-        if ((what & COUNTERS) != 0) {
-            for (int i = 0; i < COUNTER_TYPES.length; i++) {
-                final int n = player.getCounters(COUNTER_TYPES[i]);
-                if (n > 0) {
-                    row.iconChip(COUNTER_ICONS[i], figure(n), COUNTER_COLORS[i]);
+        private boolean allShown() {
+            for (int i = 0; i < n; i++) {
+                if (!shown[i]) {
+                    return false;
                 }
             }
+            return true;
         }
-        if ((what & STATUS) != 0) {
-            final FCollectionView<CardView> command = player.getCards(ZoneType.Command);
-            if (command != null) {
-                try {
-                    for (final CardView c : command) {
-                        final int status = statusOf(c);
-                        if (status >= 0) {
-                            row.statusChip(c, statusLabel(status));
-                        }
+
+        private void readCommanderDamage(final PlayerView p) {
+            final GameView game = MatchController.instance.getGameView();
+            final FCollectionView<PlayerView> players = game == null ? null : game.getPlayers();
+            if (players == null) {
+                return;
+            }
+            for (int i = 0; i < players.size(); i++) {
+                final PlayerView other = players.get(i);
+                final List<CardView> commanders = other == p ? null : other.getCommanders();
+                for (int j = 0, m = commanders == null ? 0 : commanders.size(); j < m; j++) {
+                    final CardView cmdr = commanders.get(j);
+                    final int damage = p.getCommanderDamage(cmdr);
+                    if (damage > 0) {
+                        final Color c = damage >= CMDR_NEAR_DAMAGE ? CMDR_NEAR : CMDR_COLOR;
+                        add(PIC_CARD, figure(damage), false, CHIP_FILL, CHIP_FILL, c, c);
+                        setCard(cmdr, null);
                     }
-                } catch (final RuntimeException e) {
-                    // the zone changed under us: next frame
                 }
             }
         }
-        if ((what & MANA) != 0) {
-            for (int i = 0; i < ManaAtom.MANATYPES.length; i++) {
-                final int n = player.getMana(ManaAtom.MANATYPES[i]);
-                if (n > 0) {
-                    row.manaChip(MANA_SYMBOLS[i], figure(n));
-                }
-            }
-        }
-        return row.rows();
-    }
 
-    private static void drawCommanderDamage(final Row row, final PlayerView player) {
-        final GameView game = MatchController.instance.getGameView();
-        if (game == null || game.getPlayers() == null) {
-            return;
-        }
-        for (final PlayerView other : game.getPlayers()) {
-            if (other == player || other.getCommanders() == null) {
-                continue;
+        private void readStatus(final PlayerView p) {
+            final FCollectionView<CardView> command = p.getCards(ZoneType.Command);
+            if (command == null) {
+                return;
             }
-            for (final CardView cmdr : other.getCommanders()) {
-                final int damage = player.getCommanderDamage(cmdr);
-                if (damage > 0) {
-                    row.commanderChip(cmdr, figure(damage), damage >= CMDR_NEAR_DAMAGE);
+            try {
+                for (int i = 0; i < command.size(); i++) {
+                    final CardView c = command.get(i);
+                    final int status = statusOf(c);
+                    if (status >= 0) {
+                        final String l = statusLabel(status);
+                        add(PIC_CARD, l, true, STATUS_FILL, CHIP_FILL, STATUS_GOLD, STATUS_GOLD);
+                        setCard(c, l);
+                    }
                 }
+            } catch (final IndexOutOfBoundsException e) {
+                // the zone changed under us: the next rebuild has it
+            }
+        }
+
+        /** A card's picture for the chip just added: its art, or (none loaded yet) its colours and initial. */
+        private void setCard(final CardView c, final String nameForInitial) {
+            final int i = n - 1;
+            card[i] = c;
+            art[i] = circleArtOf(c);
+            initial[i] = initial(nameForInitial != null ? nameForInitial : c.getName());
+            if (tint[i] == null) {
+                tint[i] = new Color(); // one per slot, reused by every rebuild
+            }
+            try {
+                if (nameForInitial != null) {
+                    ArenaTheme.alpha(STATUS_GOLD, 0.35f, tint[i]);
+                } else {
+                    ArenaTheme.mix(ArenaTheme.tileTint(c.getCurrentState()), ArenaTheme.BLACK, 0.35f, tint[i]);
+                }
+            } catch (final RuntimeException e) {
+                tint[i].set(CMDR_COLOR);
+            }
+        }
+
+        /** Places the chips in rows of {@code h}; marks those that do not fit (beyond {@link #MAX_ROWS}) as not shown. */
+        private void place(final float x, final float cy, final float h1, final boolean rtl, final float maxW) {
+            h = h1;
+            figureFont = ArenaCards.evenFont(h1 * FIGURE_TEXT);
+            labelFont = ArenaCards.evenFont(h1 * LABEL_TEXT);
+            initialFont = ArenaCards.evenFont((h1 - 2 * Math.max(1.5f, h1 * RING_INSET)) * FIGURE_TEXT);
+            final float gap = Math.max(2f, h1 * GAP);
+            float at = x, y = cy;
+            rows = 0;
+            for (int i = 0; i < n; i++) {
+                float w = width(i);
+                clipped[i] = maxW > 0 && w > maxW;
+                if (clipped[i]) {
+                    w = maxW; // a lone chip wider than the row: its text is cut at the edge
+                }
+                if (rows == 0) {
+                    rows = 1;
+                } else if (maxW > 0 && Math.abs(at - x) + w > maxW) {
+                    if (rows >= MAX_ROWS) {
+                        for (int k = i; k < n; k++) {
+                            shown[k] = false;
+                        }
+                        return;
+                    }
+                    rows++;
+                    at = x;
+                    y += h1 + gap;
+                }
+                cx[i] = rtl ? at - w : at;
+                cyAt[i] = y;
+                cw[i] = w;
+                shown[i] = true;
+                at = rtl ? at - w - gap : at + w + gap;
+            }
+        }
+
+        private float width(final int i) {
+            final float tw = ArenaArt.cachedTextWidth(text[i], label[i] ? labelFont : figureFont);
+            if (pic[i] == PIC_NONE) {
+                return tw + 2 * h * PAD_PLAIN;
+            }
+            return h * PAD_LEFT + picSize(i) + h * TEXT_GAP + tw + h * PAD_RIGHT;
+        }
+
+        private float picSize(final int i) {
+            return pic[i] == PIC_CARD ? h - 2 * Math.max(1.5f, h * RING_INSET) : h * ICON;
+        }
+
+        /** Draws what the row holds. No game reads, no allocation. */
+        private void drawChips(final Graphics g) {
+            for (int i = 0; i < n; i++) {
+                if (shown[i]) {
+                    chip(g, i);
+                }
+            }
+        }
+
+        /** One chip: its ground and rim, its picture if any, its text. */
+        private void chip(final Graphics g, final int i) {
+            final float left = cx[i], w = cw[i], cy = cyAt[i], top0 = cy - h / 2f;
+            if (top[i] == bottom[i]) {
+                g.fillSmoothRoundRect(top[i], left, top0, w, h, h / 2f);
+            } else {
+                g.fillSmoothRoundRectGradient(top[i], bottom[i], true, left, top0, w, h, h / 2f);
+            }
+            g.drawSmoothRoundRect(Math.max(1f, h * RIM), rim[i], left, top0, w, h, h / 2f);
+            float tx = left + h * PAD_PLAIN;
+            if (pic[i] != PIC_NONE) {
+                final float s = picSize(i), pcx = left + h * PAD_LEFT + s / 2f;
+                switch (pic[i]) {
+                    case PIC_CARD:
+                        if (art[i] != null) {
+                            ArenaArt.circleImage(g, art[i], pcx, cy, s);
+                        } else {
+                            g.fillSmoothCircle(tint[i], pcx, cy, s / 2f);
+                            ArenaArt.textBold(g, initial[i], initialFont, label[i] ? rim[i] : ArenaTheme.WHITE,
+                                    pcx - s / 2f, cy - s / 2f, s, s, Align.center);
+                        }
+                        g.drawSmoothCircle(Math.max(1f, h * CIRCLE_RIM), rim[i], pcx, cy, s / 2f);
+                        break;
+                    case PIC_ICON:
+                        g.drawImage(icon[i], pcx - s / 2f, cy - s / 2f, s, s);
+                        break;
+                    default:
+                        CardFaceSymbols.drawSymbol(symbol[i], g, pcx - s / 2f, cy - s / 2f, s, s);
+                        break;
+                }
+                tx = pcx + s / 2f + h * TEXT_GAP;
+            }
+            final float textW = left + w - tx - (pic[i] == PIC_NONE ? h * PAD_PLAIN : h * PAD_RIGHT * 0.75f);
+            if (clipped[i]) {
+                g.startClip(left, top0, w, h);
+            }
+            if (label[i]) {
+                ArenaArt.textShadowed(g, text[i], labelFont, ink[i], tx, top0, Math.max(textW, 1f), h, pic[i] == PIC_NONE ? Align.center : Align.left);
+            } else {
+                ArenaArt.textBold(g, text[i], figureFont, ink[i], tx, top0, Math.max(textW, 1f), h, Align.center);
+            }
+            if (clipped[i]) {
+                g.endClip();
             }
         }
     }
 
     /**
+     * Draws a row of chips from {@code x} rightwards ({@code rightToLeft} false) or leftwards, wrapping onto a second
+     * row below after {@code maxW} (0: no limit, one row); rows are {@code h} tall, the first centred on {@code cy}.
+     * {@code lead} ({@link #LEAD_PHASE} with {@code leadText}, or {@link #LEAD_NEXT}) comes first. A row that does not
+     * fit takes smaller chips. Returns the number of rows used.
+     */
+    public static int draw(final Graphics g, final Row row, final PlayerView player, final int what, final int lead, final String leadText,
+            final float x, final float cy, final float h, final boolean rightToLeft, final float maxW) {
+        if (player == null) {
+            return 0;
+        }
+        if (row.stale(player, what, lead, leadText, x, cy, h, rightToLeft, maxW)) {
+            row.rebuild(player, what, lead, leadText, x, cy, h, rightToLeft, maxW);
+        }
+        row.drawChips(g);
+        return row.rows;
+    }
+
+    // ---- who is out -------------------------------------------------------------------------------------------------
+
+    private static final String[] outTexts = new String[8];
+    private static int outCount;
+    private static long outBuiltAt;
+    private static GameView outGame;
+    /** "{name} is out", made once per name. */
+    private static final Map<String, String> OUT_TEXTS = new HashMap<>();
+
+    /**
      * The players who are out, one dim plate each ("Vivien is out"), stacked down from {@code top} with their right
-     * edges at {@code right}: a seat that goes leaves the board, so this is what still says who has gone.
+     * edges at {@code right}: a seat that goes leaves the board, so this is what still says who has gone. The list is
+     * read again at most every {@link #REFRESH_MS}.
      */
     public static void drawEliminated(final Graphics g, final GameView game, final float right, final float top, final float h) {
-        if (game == null || game.getPlayers() == null) {
-            return;
+        if (game != outGame || TimeUtils.timeSinceMillis(outBuiltAt) >= REFRESH_MS) {
+            outGame = game;
+            outBuiltAt = TimeUtils.millis();
+            outCount = 0;
+            final FCollectionView<PlayerView> players = game == null ? null : game.getPlayers();
+            for (int i = 0, m = players == null ? 0 : players.size(); i < m && outCount < outTexts.length; i++) {
+                final PlayerView p = players.get(i);
+                if (p.getHasLost()) {
+                    outTexts[outCount++] = outText(p);
+                }
+            }
         }
         final FSkinFont f = ArenaCards.evenFont(h * LABEL_TEXT);
         float y = top;
-        for (final PlayerView p : game.getPlayers()) {
-            if (!p.getHasLost()) {
-                continue;
-            }
-            final String text = outText(p);
+        for (int i = 0; i < outCount; i++) {
+            final String text = outTexts[i];
             final float w = ArenaArt.cachedTextWidth(text, f) + h;
             g.fillSmoothRoundRect(OUT_FILL, right - w, y, w, h, h / 2f);
             g.drawSmoothRoundRect(Math.max(1f, h * RIM), OUT_RIM, right - w, y, w, h, h / 2f);
@@ -251,9 +497,6 @@ public final class ArenaPlayerInfo {
             y += h + Math.max(2f, h * GAP);
         }
     }
-
-    /** "{name} is out", made once per name. */
-    private static final Map<String, String> OUT_TEXTS = new HashMap<>();
 
     private static String outText(final PlayerView p) {
         final String name = p.getName();
@@ -265,155 +508,7 @@ public final class ArenaPlayerInfo {
         return s;
     }
 
-    private static final Row ROW = new Row();
-
-    /** Places chips one after another. */
-    private static final class Row {
-        private Graphics g;
-        private float x0, x, cy, h, maxW;
-        private boolean rtl;
-        private int rows;
-        /** Chips left out for want of room in the last layout. */
-        int dropped;
-
-        Row start(final Graphics g0, final float x1, final float cy0, final float h0, final boolean rtl0, final float maxW0) {
-            g = g0;
-            x0 = x = x1;
-            cy = cy0;
-            h = h0;
-            rtl = rtl0;
-            maxW = maxW0;
-            rows = 0;
-            dropped = 0;
-            return this;
-        }
-
-        int rows() {
-            return rows;
-        }
-
-        /**
-         * Where a chip {@code w} wide goes: its left edge, after wrapping if needed; NaN when it does not fit (a wrapped
-         * row holds at most {@link #MAX_ROWS} rows, which is all a seat's plate has room for above its lands).
-         */
-        private float place(final float w) {
-            final float gap = Math.max(2f, h * GAP);
-            if (rows == 0) {
-                rows = 1;
-            } else if (maxW > 0 && Math.abs(x - x0) + w > maxW) {
-                if (rows >= MAX_ROWS) {
-                    dropped++;
-                    return Float.NaN;
-                }
-                rows++;
-                x = x0;
-                cy += h + gap;
-            }
-            if (maxW > 0 && w > maxW) {
-                dropped++;
-                return Float.NaN;
-            }
-            final float left = rtl ? x - w : x;
-            x = rtl ? x - w - gap : x + w + gap;
-            return left;
-        }
-
-        private float ring() {
-            return Math.max(1.5f, h * RING_INSET);
-        }
-
-        /** The chip's ground and rim. */
-        private void ground(final float left, final float w, final Color fill, final Color rim) {
-            final float top = cy - h / 2f;
-            g.fillSmoothRoundRect(fill, left, top, w, h, h / 2f);
-            g.drawSmoothRoundRect(Math.max(1f, h * RIM), rim, left, top, w, h, h / 2f);
-        }
-
-        void leadChip(final String text, final Color top, final Color bottom, final Color rim) {
-            FSkinFont f = ArenaCards.evenFont(h * LABEL_TEXT);
-            float w = ArenaArt.cachedTextWidth(text, f) + h;
-            if (maxW > 0 && w > maxW) { // a long step name on a narrow plate: smaller type rather than past the plate's edge
-                f = ArenaCards.evenFont(Math.max(8f, h * LABEL_TEXT * (maxW - h) / Math.max(1f, w - h)));
-                w = Math.min(maxW, ArenaArt.cachedTextWidth(text, f) + h);
-            }
-            final float left = place(w);
-            if (Float.isNaN(left) || g == null) {
-                return;
-            }
-            g.fillSmoothRoundRectGradient(top, bottom, true, left, cy - h / 2f, w, h, h / 2f);
-            g.drawSmoothRoundRect(Math.max(1f, h * RIM), rim, left, cy - h / 2f, w, h, h / 2f);
-            ArenaArt.textBold(g, text, f, ArenaTheme.WHITE, left, cy - h / 2f, w, h, Align.center);
-        }
-
-        void commanderChip(final CardView cmdr, final String figure, final boolean near) {
-            final FSkinFont f = ArenaCards.evenFont(h * FIGURE_TEXT);
-            final float art = h - 2 * ring();
-            final float w = h * PAD_LEFT + art + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
-            final float left = place(w);
-            if (Float.isNaN(left) || g == null) {
-                return;
-            }
-            final Color c = near ? CMDR_NEAR : CMDR_COLOR;
-            ground(left, w, CHIP_FILL, c);
-            final float acx = left + h * PAD_LEFT + art / 2f;
-            if (!circleArt(g, cmdr, acx, cy, art)) {
-                circleInitial(g, cmdr, acx, cy, art);
-            }
-            g.drawSmoothCircle(Math.max(1f, h * CIRCLE_RIM), c, acx, cy, art / 2f);
-            final float tx = acx + art / 2f + h * TEXT_GAP;
-            ArenaArt.textBold(g, figure, f, c, tx, cy - h / 2f, left + w - tx - h * PAD_RIGHT * 0.75f, h, Align.center);
-        }
-
-        void iconChip(final FSkinImage icon, final String figure, final Color c) {
-            final FSkinFont f = ArenaCards.evenFont(h * FIGURE_TEXT);
-            final float is = h * ICON;
-            final float w = h * PAD_LEFT + is + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
-            final float left = place(w);
-            if (Float.isNaN(left) || g == null) {
-                return;
-            }
-            ground(left, w, CHIP_FILL, c);
-            g.drawImage(icon, left + h * PAD_LEFT, cy - is / 2f, is, is);
-            final float tx = left + h * PAD_LEFT + is + h * TEXT_GAP * 0.5f;
-            ArenaArt.textBold(g, figure, f, c, tx, cy - h / 2f, left + w - tx - h * PAD_RIGHT * 0.75f, h, Align.center);
-        }
-
-        void manaChip(final String symbol, final String figure) {
-            final FSkinFont f = ArenaCards.evenFont(h * FIGURE_TEXT);
-            final float is = h * ICON;
-            final float w = h * PAD_LEFT + is + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
-            final float left = place(w);
-            if (Float.isNaN(left) || g == null) {
-                return;
-            }
-            ground(left, w, CHIP_FILL, MANA_RIM);
-            CardFaceSymbols.drawSymbol(symbol, g, left + h * PAD_LEFT, cy - is / 2f, is, is);
-            final float tx = left + h * PAD_LEFT + is + h * TEXT_GAP * 0.5f;
-            ArenaArt.textBold(g, figure, f, ArenaTheme.WHITE, tx, cy - h / 2f, left + w - tx - h * PAD_RIGHT * 0.75f, h, Align.center);
-        }
-
-        void statusChip(final CardView effect, final String label) {
-            final FSkinFont f = ArenaCards.evenFont(h * LABEL_TEXT);
-            final float art = h - 2 * ring();
-            final float w = h * PAD_LEFT + art + h * TEXT_GAP + ArenaArt.cachedTextWidth(label, f) + h * PAD_RIGHT;
-            final float left = place(w);
-            if (Float.isNaN(left) || g == null) {
-                return;
-            }
-            final float top = cy - h / 2f;
-            g.fillSmoothRoundRectGradient(STATUS_FILL, CHIP_FILL, true, left, top, w, h, h / 2f);
-            g.drawSmoothRoundRect(Math.max(1f, h * RIM), STATUS_GOLD, left, top, w, h, h / 2f);
-            final float acx = left + h * PAD_LEFT + art / 2f;
-            if (!circleArt(g, effect, acx, cy, art)) {
-                g.fillSmoothCircle(ArenaTheme.alpha(STATUS_GOLD, 0.35f, S1), acx, cy, art / 2f);
-                final FSkinFont lf = ArenaCards.evenFont(art * FIGURE_TEXT);
-                ArenaArt.textBold(g, initial(label), lf, STATUS_GOLD, acx - art / 2f, cy - art / 2f, art, art, Align.center);
-            }
-            g.drawSmoothCircle(Math.max(1f, h * CIRCLE_RIM), STATUS_GOLD, acx, cy, art / 2f);
-            final float tx = acx + art / 2f + h * TEXT_GAP;
-            ArenaArt.textShadowed(g, label, f, STATUS_GOLD, tx, top, left + w - tx, h, Align.left);
-        }
-    }
+    // ---- pictures ---------------------------------------------------------------------------------------------------
 
     private static final String[] INITIALS = new String[128];
 
@@ -433,35 +528,21 @@ public final class ArenaPlayerInfo {
         return s;
     }
 
-    /** No art loaded (yet): the card's colours in the circle and its initial, so commanders still tell apart. */
-    private static void circleInitial(final Graphics g, final CardView card, final float cx, final float cy, final float d) {
-        Color tint;
+    /** A card's art as a square for a circle crop (its own region, kept by the chip), or null if it has no picture yet. */
+    static TextureRegion circleArtOf(final CardView card) {
+        final FImageComplex picture;
         try {
-            tint = ArenaTheme.tileTint(card.getCurrentState());
+            picture = CardRenderer.getCardArt(card);
         } catch (final RuntimeException e) {
-            tint = CMDR_COLOR;
+            return null;
         }
-        g.fillSmoothCircle(ArenaTheme.mix(tint, ArenaTheme.BLACK, 0.35f, S1), cx, cy, d / 2f);
-        final FSkinFont lf = ArenaCards.evenFont(d * FIGURE_TEXT);
-        ArenaArt.textBold(g, initial(card.getName()), lf, ArenaTheme.WHITE, cx - d / 2f, cy - d / 2f, d, d, Align.center);
-    }
-
-    /** A card's art cropped to a circle; false if it has no picture (yet). */
-    static boolean circleArt(final Graphics g, final CardView card, final float cx, final float cy, final float d) {
-        final FImageComplex art;
-        try {
-            art = CardRenderer.getCardArt(card);
-        } catch (final RuntimeException e) {
-            return false;
+        if (picture == null || picture == CardImageRenderer.forgeArt) {
+            return null; // the "no picture" stand-in: the colour and initial say more
         }
-        if (art == null || art == CardImageRenderer.forgeArt) {
-            return false; // the "no picture" stand-in: the colour and initial say more
-        }
-        final TextureRegion r = art.getTextureRegion();
+        final TextureRegion r = picture.getTextureRegion();
         if (r == null || r.getRegionWidth() <= 0 || r.getRegionHeight() <= 0) {
-            return false;
+            return null;
         }
-        ArenaArt.circleImage(g, ArenaArt.squareOf(r), cx, cy, d);
-        return true;
+        return new TextureRegion(ArenaArt.squareOf(r)); // the chip keeps it: squareOf's region is shared scratch
     }
 }

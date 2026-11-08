@@ -34,7 +34,6 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
 import forge.gui.events.UiEventAttackerDeclared;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.PlayerControllerHuman;
 import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
@@ -299,11 +298,7 @@ public class InputAttack extends InputSyncronizedBase {
         updateMessage();
     }
 
-    /**
-     * The defender being attacked and the band being formed. With the Arena look the other players that may be
-     * attacked are offered too (a click on one makes it the defender, as it always did), so with several opponents
-     * their portraits show that they can be picked; the classic look marks only the defender.
-     */
+    /** The defender being attacked and the band being formed. */
     @Override
     protected Selection getSelection() {
         final List<TrackableObject> chosen = new ArrayList<>();
@@ -313,17 +308,7 @@ public class InputAttack extends InputSyncronizedBase {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) chosen.add(CardView.get(card));
         }
-        final Selection selection = Selection.ofChosen(chosen);
-        if (!Boolean.parseBoolean(getController().getYieldController().getStringPref(FPref.UI_ARENA_THEME))) {
-            return selection;
-        }
-        final List<TrackableObject> others = new ArrayList<>();
-        for (final GameEntity defender : defenders) {
-            if (defender instanceof Player && defender != currentDefender) {
-                others.add(GameEntityView.get(defender));
-            }
-        }
-        return selection.withTargets(others);
+        return Selection.ofChosen(chosen);
     }
 
     @Override
