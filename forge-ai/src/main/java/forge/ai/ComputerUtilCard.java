@@ -1519,7 +1519,7 @@ public class ComputerUtilCard {
         if (power == 0 && toughness == 0) {
             boolean hasAll = true;
             for (String kw : keywords) {
-                if (!c.hasKeyword(kw)) {
+                if (!c.hasKeyword(kw) && Keyword.smartValueOf(kw).isMultipleRedundant()) {
                     hasAll = false;
                     break;
                 }
