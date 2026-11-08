@@ -54,7 +54,19 @@ public final class ArenaShortcutSheet extends ArenaDialogOverlay {
             }
             sb.append(ArenaShortcuts.keyLabels(s.action)).append("  -  ").append(s.description());
         }
+        if (hasFullscreenKeys()) {
+            sb.append('\n').append("F11 / Alt+Enter  -  ").append(fullscreenCaption());
+        }
         return sb.toString();
+    }
+
+    /** Desktop: F11 and Alt+Enter switch fullscreen anywhere in Forge (see Forge's key handling). */
+    private static boolean hasFullscreenKeys() {
+        return Forge.getDeviceAdapter() != null && Forge.getDeviceAdapter().hasWindowControls();
+    }
+
+    private static String fullscreenCaption() {
+        return Forge.getLocalizer().getMessageorUseDefault("lblArenaShortcutFullscreen", "Fullscreen on / off");
     }
 
     /** Shows the sheet over the match, or takes it away if it is up (H both opens and closes it). Render thread. */
@@ -94,6 +106,12 @@ public final class ArenaShortcutSheet extends ArenaDialogOverlay {
                 caps.add(label.substring(label.lastIndexOf('+') + 1));
                 row.keys.add(caps.toArray(new String[0]));
             }
+            rows.add(row);
+        }
+        if (hasFullscreenKeys()) { //desktop: the window's own keys work in the match too
+            final Row row = new Row(fullscreenCaption());
+            row.keys.add(new String[] { "F11" });
+            row.keys.add(new String[] { "Alt", "Enter" });
             rows.add(row);
         }
         btnDone.primary = true;

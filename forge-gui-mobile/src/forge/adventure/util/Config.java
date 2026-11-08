@@ -175,7 +175,11 @@ public class Config {
                 case "2160p":
                     val = 32;
                     break;
-                default:
+                default: //a desktop window size of its own, "WIDTHxHEIGHT"
+                    if (settingsData.videomode.indexOf('x') > 0) {
+                        int height = forge.Graphics.videoModeHeight(settingsData.videomode);
+                        val = height <= 768 ? 8 : height <= 1080 ? 16 : 32;
+                    }
                     break;
             }
         } catch (Exception e) {
