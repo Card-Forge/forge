@@ -85,10 +85,13 @@ public final class ArenaCards {
         private int glow = GLOW_NONE, glowWas = GLOW_NONE;
         private boolean glowKnown;
         final ArenaMotion.Fade glowMix = new ArenaMotion.Fade(1f);
-        // what changed on it: a pop of the stats, a red flash when it is hurt
-        final ArenaMotion.Fade statsPop = new ArenaMotion.Fade(0f), hitFlash = new ArenaMotion.Fade(0f);
+        // what changed on it: a pop of the stats; a jolt, a red flash and the number coming off it when it is hurt
+        final ArenaMotion.Fade statsPop = new ArenaMotion.Fade(0f), hitFlash = new ArenaMotion.Fade(0f), hitFloat = new ArenaMotion.Fade(1f);
         private String statsSeen;
         private int damageSeen = -1;
+        private float shake;
+        private ArenaMotion.Tween shakeTween;
+        private String hitText;
         // the name, fitted to its lozenge once per name and width
         private String nameFor;
         private float nameWidth;
@@ -176,7 +179,14 @@ public final class ArenaCards {
             statsSeen = stats;
             if (damageSeen >= 0 && damage > damageSeen) {
                 hitFlash.set(1f);
-                hitFlash.to(0f, 520);
+                hitFlash.to(0f, 380);
+                if (shakeTween != null) {
+                    shakeTween.cancel();
+                }
+                shakeTween = ArenaMotion.play(300, ArenaMotion.LINEAR, t -> shake = (float) Math.sin(t * Math.PI * 5d) * (1f - t), () -> shake = 0f);
+                hitText = "-" + (damage - damageSeen);
+                hitFloat.set(0f);
+                hitFloat.to(1f, 1000, 0, ArenaMotion.LINEAR, null);
             }
             damageSeen = damage;
         }
@@ -302,7 +312,7 @@ public final class ArenaCards {
         final float tapAngle = st.tap.get() * TAPPED_ANGLE; // past 1 while it overshoots
         final float grow = st.scale * (1f + HOVER_GROWTH * st.lift.get());
         final float w = bw * grow, h = bh * grow;
-        final float x = bx + (bw - w) / 2f + st.dx.get(), y = by + (bh - h) / 2f + st.dy.get();
+        final float x = bx + (bw - w) / 2f + st.dx.get() + st.shake * Math.max(ArenaTheme.px(3), w * 0.028f), y = by + (bh - h) / 2f + st.dy.get();
         final float cx = x + w / 2f, cy = y + h / 2f;
         final float arc = Math.max(ArenaTheme.px(6), Math.round(w * 0.08f));
         final float radius = arc / 2f;
@@ -419,7 +429,16 @@ public final class ArenaCards {
         if (turned) {
             g.endTransform();
         }
+        // the damage it took rising off it
+        final float up = st.hitFloat.get();
+        if (up < 1f && st.hitText != null) {
+            final FSkinFont f = evenFont(Math.max(ArenaTheme.px(20), h * 0.22f));
+            final float ty = y + h * 0.25f - h * 0.45f * ArenaMotion.OUT.at(up);
+            ArenaArt.textOutlined(g, st.hitText, f, ArenaTheme.alpha(HIT_TEXT, 1f - up * up, S1), x, ty - f.getLineHeight() / 2f, w, f.getLineHeight(), Align.center);
+        }
     }
+
+    private static final Color HIT_TEXT = ArenaTheme.rgb(0xFF6A5C);
 
     private static void bloom(final Graphics g, final int kind, final float x, final float y, final float w, final float h, final float radius,
             final float spread, final boolean hovered, final float alpha) {

@@ -410,6 +410,8 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void updateTurn(final PlayerView player) {
+        //the Arena board says whose turn it is on a band across the board (nothing with the look off)
+        forge.screens.match.arena.ArenaTurnBanner.showTurn(player, player != null && isLocalPlayer(player));
     }
 
     @Override

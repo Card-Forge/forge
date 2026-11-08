@@ -874,6 +874,7 @@ public class MatchScreen extends FScreen {
 
         drawArcs(g);
         CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
+        forge.screens.match.arena.ArenaTurnBanner.draw(g, getWidth(), getHeight());
         drawCardPreview(g);
     }
 
@@ -901,7 +902,37 @@ public class MatchScreen extends FScreen {
                 && FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER);
     }
 
+    /**
+     * The Arena hover preview: the card under the pointer, large, beside it (a hand card rises over its slot), with a
+     * status panel for what its face does not show. Called every frame, with null when nothing is hovered so that the
+     * preview fades out rather than vanishing.
+     */
+    private void drawArenaPreview(Graphics g) {
+        CardView card = null;
+        Rectangle at = null;
+        boolean inHand = false;
+        if (!CardZoom.isOpen() && potentialListener != null && isHoverPreviewEnabled()) {
+            for (FDisplayObject object : potentialListener) {
+                if (object == null || !object.isHovered()) { continue; }
+                if (object instanceof CardAreaPanel panel) {
+                    card = panel.getCard();
+                    at = panel.screenPos;
+                    inHand = panel.isArenaHandCard();
+                } else if (object instanceof FCardPanel cardPanel) {
+                    card = cardPanel.getCard();
+                    at = cardPanel.screenPos;
+                }
+                if (card != null) { break; }
+            }
+        }
+        forge.screens.match.arena.ArenaCardPreview.drawHover(g, card, at, inHand, getWidth(), getHeight());
+    }
+
     private void drawCardPreview(Graphics g) {
+        if (isArenaBoard()) {
+            drawArenaPreview(g);
+            return;
+        }
         if (!Forge.isLandscapeMode() || CardZoom.isOpen()) { return; }
         try {
             CardView card = null;
@@ -1498,6 +1529,8 @@ public class MatchScreen extends FScreen {
 
     public void resetFields() {
         CardAreaPanel.resetForNewGame();
+        forge.screens.match.arena.ArenaCardPreview.clear();
+        forge.screens.match.arena.ArenaTurnBanner.clear();
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             for (CardAreaPanel p : playerPanel.getField().getCardPanels()) {
                 p.reset();

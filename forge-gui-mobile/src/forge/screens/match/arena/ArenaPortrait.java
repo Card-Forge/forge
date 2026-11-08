@@ -74,7 +74,9 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
             final float breath = active && !st.turnLight.isMoving() ? 0.82f + 0.18f * ArenaMotion.pulse(3f) : 1f;
             drawSunburst(g, cx, cy, d, light * breath);
         }
-        drawPlinth(g, cx, cy, d, light, opponent);
+        if (d >= ArenaBoard.windowH() * 0.09f) { //a seat's small portrait has no ladder, so no wings to carry it
+            drawPlinth(g, cx, cy, d, light, opponent);
+        }
 
         // the portrait itself, in a circle
         drawPicture(g, v.getImage(), cx, cy, d * 0.92f, player.getHasLost());
