@@ -352,7 +352,13 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 btnSubmit.enabled = ok != null && ok.isEnabled();
                 btnSecondary.text = cancel == null || cancel.getText() == null ? "" : cancel.getText();
                 btnSecondary.enabled = cancel != null && cancel.isEnabled();
-                btnSecondary.visible = !btnSecondary.text.isEmpty();
+                final boolean shown = !btnSecondary.text.isEmpty();
+                if (shown != btnSecondary.visible) {
+                    btnSecondary.visible = shown;
+                    if (getWidth() > 0) {
+                        ArenaDialogKit.placeButtons(getWidth(), getHeight(), btnSubmit, btnSecondary); // the slot is shared out again
+                    }
+                }
                 break;
             }
             default:

@@ -61,10 +61,10 @@ public class FCheckBox extends FLabel implements ICheckBox {
     }
 
     public static void drawCheckBox(Graphics g, boolean isChecked, float x, float y, float w, float h) {
-        if (ArenaWidgets.checkBox(g, isChecked, x, y, w, h)) { return; } //Arena look on the match screen
         drawCheckBox(g, getBoxColor(), getCheckColor(), isChecked, x, y, w, h);
     }
     public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {
+        if (ArenaWidgets.checkBox(g, isChecked, x, y, w, h)) { return; } //Arena look on the match screen
         g.drawRect(Utils.scale(1), boxColor, x, y, w, h);
         if (isChecked) {
             //draw check mark

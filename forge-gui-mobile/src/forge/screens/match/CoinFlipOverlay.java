@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -90,6 +91,15 @@ public class CoinFlipOverlay extends FOverlay {
     }
 
     @Override
+    protected void drawBackground(final Graphics g) {
+        if (ArenaWidgets.on()) { //Arena look on the match screen: the board dimmed as the Arena dialogs dim it
+            forge.screens.match.arena.ArenaDialogKit.backdrop(g, getWidth(), getHeight(), done ? 0f : 1f);
+            return;
+        }
+        super.drawBackground(g);
+    }
+
+    @Override
     public void drawOverlay(final Graphics g) {
         if (done) {
             return;
@@ -121,8 +131,8 @@ public class CoinFlipOverlay extends FOverlay {
         }
 
         if (t >= 1f) {
-            final FSkinFont font = FSkinFont.get(18);
-            final FSkinColor text = FSkinColor.get(Colors.CLR_TEXT);
+            final FSkinFont font = ArenaWidgets.on() ? forge.screens.match.arena.ArenaTheme.font(40) : FSkinFont.get(18);
+            final FSkinColor text = ArenaWidgets.on() ? ArenaWidgets.TEXT : FSkinColor.get(Colors.CLR_TEXT);
             final float textY = cy + size / 2f + 10f;
             g.drawText(caption, font, text, 0, textY + font.getLineHeight() * 1.6f,
                     w, font.getLineHeight() * 3f, true, Align.center, false);
