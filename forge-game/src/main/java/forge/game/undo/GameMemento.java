@@ -16,9 +16,10 @@ import java.util.concurrent.ConcurrentHashMap;
  *  - final fields are walked but not stored (they are never restored anyway),
  *  - a {@link Recorder} keeps the latest snapshot of every object and a new capture reuses (shares) the previous
  *    snapshot of any object that did not change,
- *  - a history of mementos is kept as <b>reverse deltas</b>: the recorder holds the full current state once, and each
- *    older memento only holds the old snapshots of the objects that changed (or appeared / disappeared) in the step
- *    after it. A memento therefore costs memory in proportion to what changed, not to the size of the game,
+ *  - a history of mementos is kept as <b>reverse deltas</b>: the recorder holds the full current state once, and
+ *    older mementos retain compact old-field patches / sequence splices when those are smaller than full snapshots;
+ *    objects that disappear still retain a full snapshot so they can be brought back. History therefore costs memory
+ *    in proportion to what changed, not to the size of the game,
  *  - every byte the history pins is counted ({@link Recorder#liveBytes()}, {@link #retainedBytes()}) so the caller
  *    can keep it under a heap budget,
  *  - scratch buffers are reused but never kept when they grew large, and a failed capture resets the recorder
