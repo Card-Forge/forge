@@ -49,6 +49,8 @@ public final class ArenaPlayerInfo {
     private static final String[] statusLabels = new String[STATUS_CARDS.length];
     private static final Color S1 = new Color();
     private static final Color LEAD_TOP = ArenaTheme.rgb(0x8A6A2E), LEAD_BOTTOM = ArenaTheme.rgb(0x4A3612);
+    private static final Color STATUS_FILL = ArenaTheme.rgba(58, 44, 16, 235);
+
 
 
     private static final String[] FIGURES = new String[200];
@@ -74,7 +76,7 @@ public final class ArenaPlayerInfo {
 
     /**
      * Draws the chips in a row, from {@code x} rightwards ({@code rightToLeft} false) or leftwards, wrapping onto a
-     * further row below after {@code maxW} (0: no limit, one row). Rows are {@code h} tall and centred on {@code cy}
+     * further row below after {@code maxW} (0: no limit, one row; at most two rows, what does not fit is left out). Rows are {@code h} tall and centred on {@code cy}
      * for the first. Returns the number of rows used (0 if there was nothing to show).
      */
     public static int draw(final Graphics g, final PlayerView player, final int what, final float x, final float cy, final float h,
@@ -142,6 +144,8 @@ public final class ArenaPlayerInfo {
     }
 
     private static final Row ROW = new Row();
+    /** The most rows a wrapping row of chips takes. */
+    private static final int MAX_ROWS = 2;
 
     /** Places chips one after another. */
     private static final class Row {
@@ -165,15 +169,24 @@ public final class ArenaPlayerInfo {
             return rows;
         }
 
-        /** Where a chip {@code w} wide goes: its left edge, after wrapping if needed. */
+        /**
+         * Where a chip {@code w} wide goes: its left edge, after wrapping if needed; NaN when it does not fit (a wrapped
+         * row holds at most {@link #MAX_ROWS} rows, which is all a seat's plate has room for above its lands).
+         */
         private float place(final float w) {
             final float gap = Math.max(2f, h * 0.18f);
             if (rows == 0) {
                 rows = 1;
             } else if (maxW > 0 && Math.abs(x - x0) + w > maxW) {
+                if (rows >= MAX_ROWS) {
+                    return Float.NaN;
+                }
                 rows++;
                 x = x0;
                 cy += h + gap;
+            }
+            if (maxW > 0 && w > maxW) {
+                return Float.NaN;
             }
             final float left = rtl ? x - w : x;
             x = rtl ? x - w - gap : x + w + gap;
@@ -189,6 +202,9 @@ public final class ArenaPlayerInfo {
             final float art = h - 2 * Math.max(1.5f, h * 0.09f);
             final float w = h * 0.12f + art + h * 0.22f + ArenaArt.textWidth(figure, f) + h * 0.4f;
             final float left = place(w);
+            if (Float.isNaN(left)) {
+                return;
+            }
             final Color c = near ? CMDR_NEAR : CMDR_COLOR;
             final float top = cy - h / 2f;
             g.fillSmoothRoundRect(CHIP_FILL, left, top, w, h, h / 2f);
@@ -203,9 +219,16 @@ public final class ArenaPlayerInfo {
         }
 
         void leadChip(final String text) {
-            final FSkinFont f = ArenaCards.evenFont(h * 0.56f);
-            final float w = ArenaArt.textWidth(text, f) + h;
+            FSkinFont f = ArenaCards.evenFont(h * 0.56f);
+            float w = ArenaArt.textWidth(text, f) + h;
+            if (maxW > 0 && w > maxW) { // a long step name on a narrow plate: smaller type rather than past the plate's edge
+                f = ArenaCards.evenFont(Math.max(8f, h * 0.56f * (maxW - h) / Math.max(1f, w - h)));
+                w = Math.min(maxW, ArenaArt.textWidth(text, f) + h);
+            }
             final float left = place(w);
+            if (Float.isNaN(left)) {
+                return;
+            }
             final float top = cy - h / 2f;
             g.fillSmoothRoundRectGradient(LEAD_TOP, LEAD_BOTTOM, true, left, top, w, h, h / 2f);
             g.drawSmoothRoundRect(Math.max(1f, h * 0.05f), ArenaTheme.GOLD, left, top, w, h, h / 2f);
@@ -217,6 +240,9 @@ public final class ArenaPlayerInfo {
             final float is = h * 0.72f;
             final float w = h * 0.22f + is + h * 0.16f + ArenaArt.textWidth(figure, f) + h * 0.4f;
             final float left = place(w);
+            if (Float.isNaN(left)) {
+                return;
+            }
             final float top = cy - h / 2f;
             g.fillSmoothRoundRect(CHIP_FILL, left, top, w, h, h / 2f);
             g.drawSmoothRoundRect(Math.max(1f, h * 0.05f), c, left, top, w, h, h / 2f);
@@ -230,8 +256,11 @@ public final class ArenaPlayerInfo {
             final float art = h - 2 * Math.max(1.5f, h * 0.09f);
             final float w = h * 0.12f + art + h * 0.26f + ArenaArt.textWidth(label, f) + h * 0.45f;
             final float left = place(w);
+            if (Float.isNaN(left)) {
+                return;
+            }
             final float top = cy - h / 2f;
-            g.fillSmoothRoundRectGradient(ArenaTheme.rgba(58, 44, 16, 235), CHIP_FILL, true, left, top, w, h, h / 2f);
+            g.fillSmoothRoundRectGradient(STATUS_FILL, CHIP_FILL, true, left, top, w, h, h / 2f);
             g.drawSmoothRoundRect(Math.max(1f, h * 0.05f), STATUS_GOLD, left, top, w, h, h / 2f);
             final float acx = left + h * 0.12f + art / 2f + Math.max(1.5f, h * 0.09f) - h * 0.06f;
             if (!circleArt(g, effect, acx, cy, art)) {

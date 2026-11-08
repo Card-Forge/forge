@@ -283,23 +283,21 @@ public final class ArenaPlayerParts {
             }
         }
 
-        /** Whether a card in this zone of the player's is one the prompt offers to play now. */
+        /**
+         * Whether a card in this zone of the player's is one the prompt offers to play now. Walks the prompt's short list
+         * of actionable cards (empty most frames), not the piles: a Commander library is 99 cards.
+         */
         private boolean hasPlayable(final ZoneType zone) {
-            final FCollectionView<CardView> cards = player.getCards(zone);
-            if (cards == null || cards.isEmpty()) {
-                return false;
-            }
-            try {
-                for (final CardView c : cards) {
-                    if (MatchController.instance.isActionable(c)) {
-                        return true;
-                    }
+            final java.util.List<CardView> actionable = MatchController.instance.getSelection().actionable();
+            for (int i = 0, n = actionable.size(); i < n; i++) {
+                final CardView c = actionable.get(i);
+                if (c.getZone() == zone && player.equals(c.getOwner())) {
+                    return true;
                 }
-            } catch (final RuntimeException e) {
-                // changed under us: next frame
             }
             return false;
         }
+
 
         private void countBadge(final Graphics g, final String text, final float cx, final float cy, final float cellH, final float bumped) {
 
