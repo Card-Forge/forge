@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
@@ -120,6 +121,21 @@ public abstract class Scene implements Disposable {
     }
     public void resize(int width, int height) {
 
+    }
+
+    //the window size the scene was made or last laid out for
+    private int fittedWidth = Gdx.graphics.getWidth(), fittedHeight = Gdx.graphics.getHeight();
+
+    /**
+     * Desktop: lays the scene out again ({@link #resize}) if the window has changed size since it was made or last
+     * laid out, as when it was not the scene showing while the window was resized.
+     */
+    public void fitWindow(int width, int height) {
+        if (width > 0 && height > 0 && (width != fittedWidth || height != fittedHeight)) {
+            fittedWidth = width;
+            fittedHeight = height;
+            resize(width, height);
+        }
     }
 
     private ShaderDrawable lastPreviewDrawable, lastScreenshotDrawable;

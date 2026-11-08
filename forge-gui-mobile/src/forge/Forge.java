@@ -1008,6 +1008,7 @@ public class Forge implements ApplicationListener {
         if (isDisposed)
             return;
         ScreenUtil.getInstance().onRenderFrame();
+        lockWindowForAdventure();
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
@@ -1082,13 +1083,17 @@ public class Forge implements ApplicationListener {
             }
             if (deviceAdapter != null && deviceAdapter.hasWindowControls()) {
                 resizeWindow(width, height);
-            } else if (currentScreen != null) {
-                currentScreen.setSize(width, height);
-            } else if (splashScreen != null) {
-                splashScreen.setSize(width, height);
+                if (currentScene != null)
+                    currentScene.fitWindow(width, height);
+            } else {
+                if (currentScreen != null) {
+                    currentScreen.setSize(width, height);
+                } else if (splashScreen != null) {
+                    splashScreen.setSize(width, height);
+                }
+                if (currentScene != null)
+                    currentScene.resize(width, height);
             }
-            if (currentScene != null)
-                currentScene.resize(width, height);
         } catch (Exception ex) {
             //graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
@@ -1096,6 +1101,41 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
             else
                 ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Desktop: a plain window of this size (leaving fullscreen and maximized), keeping the Fullscreen setting in step.
+     */
+    public static void setWindowSize(int width, int height) {
+        if (deviceAdapter == null || !deviceAdapter.hasWindowControls()) {
+            return;
+        }
+        boolean wasFullscreen = isFullscreen();
+        deviceAdapter.setWindowSize(width, height);
+        if (wasFullscreen) {
+            try {
+                FModel.getPreferences().setPref(FPref.UI_FULLSCREEN_MODE, false);
+                FModel.getPreferences().save();
+                Config.instance().getSettingData().fullScreen = false;
+                Config.instance().saveSettings();
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+            updateMouseConfine();
+        }
+    }
+
+    private static boolean windowLockedForAdventure;
+
+    /**
+     * Desktop: Adventure's scenes are laid out for the window size they were made at and do not follow a resize, so
+     * the window keeps its size while Adventure runs and can be resized again in the rest of Forge.
+     */
+    private static void lockWindowForAdventure() {
+        if (windowLockedForAdventure != isMobileAdventureMode && deviceAdapter != null && deviceAdapter.hasWindowControls()) {
+            windowLockedForAdventure = isMobileAdventureMode;
+            deviceAdapter.setWindowResizable(!isMobileAdventureMode);
         }
     }
 
@@ -1250,6 +1290,10 @@ public class Forge implements ApplicationListener {
         Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
 
+        if (deviceAdapter != null && deviceAdapter.hasWindowControls()) {
+            //desktop: a scene made, or last shown, at another window size catches up with this one first
+            currentScene.fitWindow(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
         currentScene.enter();
         if (currentScene instanceof DuelScene duel && !duel.isGeneratingDecks())
             Forge.clearTransitionScreen(true);

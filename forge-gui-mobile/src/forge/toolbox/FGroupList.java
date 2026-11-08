@@ -8,7 +8,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinTexture;
+import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.screens.FScreen;
 import forge.toolbox.FList.DefaultListItemRenderer;

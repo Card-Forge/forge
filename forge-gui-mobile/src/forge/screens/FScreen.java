@@ -88,7 +88,7 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        if ((GuiBase.isAndroid() && Forge.isLandscapeMode())||(width > height)) {
+        if (((GuiBase.isAndroid() || hasWindowControls()) && Forge.isLandscapeMode()) || (width > height)) {
             doLandscapeLayout(width, height); //handle landscape layout special
         } else if (header != null) {
             header.setBounds(0, 0, width, header.getPreferredHeight());
@@ -99,6 +99,11 @@ public abstract class FScreen extends FContainer {
     }
 
     protected abstract void doLayout(float startY, float width, float height);
+
+    /** Desktop window (which can be dragged to any shape, so its shape says nothing about the layout wanted). */
+    private static boolean hasWindowControls() {
+        return Forge.getDeviceAdapter() != null && Forge.getDeviceAdapter().hasWindowControls();
+    }
 
     //do layout for landscape mode and return width for any screen hosted on top of this screen
     protected float doLandscapeLayout(float width, float height) {

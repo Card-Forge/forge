@@ -20,6 +20,17 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     GameHUD hud;
     GameStage stage;
 
+    /**
+     * The window changed size (desktop). The stages draw their camera over the whole window anyway; their viewports
+     * only map clicks to the stage, so only their screen bounds change. (GameStage keeps the map's size as its world
+     * size, so a full viewport update would zoom the map out.)
+     */
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().setScreenBounds(0, 0, width, height);
+        hud.getViewport().setScreenBounds(0, 0, width, height);
+    }
+
     protected HudScene(GameStage s) {
         stage = s;
         hud = GameHUD.getInstance();

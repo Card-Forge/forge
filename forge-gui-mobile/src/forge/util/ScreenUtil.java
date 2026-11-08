@@ -54,7 +54,7 @@ public class ScreenUtil implements Disposable {
         width = Forge.getScreenWidth();
         height = Forge.getScreenHeight();
         bufferSize = width * height * 4;
-        pixels = BufferUtils.newByteBuffer(bufferSize);
+        pixels = null; //made again when a thumbnail needs it (a drag would otherwise allocate one per step)
         resized = true;
     }
     private boolean resized;
@@ -93,6 +93,9 @@ public class ScreenUtil implements Disposable {
 
     public Pixmap getThumbnailPreview() {
         Pixmap pixmap = new Pixmap(THUMB_WIDTH, THUMB_HEIGHT, Pixmap.Format.RGBA8888);
+        if (pixels == null) {
+            pixels = BufferUtils.newByteBuffer(bufferSize);
+        }
         pixels.clear();
         // Read full framebuffer into a ByteBuffer
         Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);

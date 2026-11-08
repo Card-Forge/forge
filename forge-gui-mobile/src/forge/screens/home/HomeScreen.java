@@ -46,6 +46,9 @@ public class HomeScreen extends FScreen {
      * at the Interface Size, so a big window does not get a column of giant buttons.
      */
     public static float getMainMenuWidth(float screenHeight) {
+        if (GuiBase.isMobile()) {
+            return screenHeight * MAIN_MENU_WIDTH_FACTOR;
+        }
         return Math.min(screenHeight * MAIN_MENU_WIDTH_FACTOR, Utils.scale(Utils.BASE_HEIGHT * MAIN_MENU_WIDTH_FACTOR));
     }
 
@@ -286,7 +289,8 @@ public class HomeScreen extends FScreen {
         //handle drawing main menu background for Landscape mode
         float w = getWidth();
         float h = getHeight();
-        if (w > h) {
+        //a desktop window keeps the landscape layout whatever shape it is dragged to (see FScreen.doLayout)
+        if (w > h || (Forge.isLandscapeMode() && Forge.getDeviceAdapter().hasWindowControls())) {
             w = getMainMenuWidth(h);
 
             float y1 = 0;

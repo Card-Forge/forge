@@ -55,6 +55,15 @@ public interface IDeviceAdapter {
     default void setWindowSize(int width, int height) {
     }
 
+    /** Lets the user resize the window or not (desktop). Default no-op. */
+    default void setWindowResizable(boolean resizable) {
+    }
+
+    /** The smallest size the window may have, {width, height} (desktop), or null when there is no window to speak of. */
+    default int[] getMinimumWindowSize() {
+        return null;
+    }
+
     /** The size of the monitor the window is on (desktop), or null when there is no window to speak of. */
     default int[] getMonitorSize() {
         return null;

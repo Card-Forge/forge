@@ -1052,7 +1052,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             String mode = newValue.substring(0, x).trim() + "x" + newValue.substring(x + 1).trim();
             super.valueChanged(mode);
             Graphics.setVideoMode(mode);
-            Forge.getDeviceAdapter().setWindowSize(Graphics.videoModeWidth(mode), Graphics.videoModeHeight(mode));
+            Forge.setWindowSize(Graphics.videoModeWidth(mode), Graphics.videoModeHeight(mode));
         }
 
         @Override
@@ -1070,20 +1070,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
     }
 
-    /** Window sizes that fit the monitor: the usual 16:9 ones and, on a wider or narrower monitor, ones of its shape. */
+    /**
+     * Window sizes that fit the monitor and are not below the smallest window the interface allows: the usual 16:9
+     * ones and, on a wider or narrower monitor, ones of its shape.
+     */
     private static List<String> windowSizes() {
         int[] monitor = Forge.getDeviceAdapter().getMonitorSize();
         int mw = monitor == null ? 3840 : monitor[0], mh = monitor == null ? 2160 : monitor[1];
+        int[] min = Forge.getDeviceAdapter().getMinimumWindowSize();
+        int minW = min == null ? 0 : min[0], minH = min == null ? 0 : min[1];
         TreeSet<String> sizes = new TreeSet<>(Comparator.comparingInt((String s) -> Graphics.videoModeHeight(s))
                 .thenComparingInt(Graphics::videoModeWidth));
         float aspect = (float) mw / mh;
         for (String mode : ForgeConstants.VIDEO_MODES) {
             int w = Graphics.videoModeWidth(mode), h = Graphics.videoModeHeight(mode);
-            if (w < mw && h < mh) {
+            if (h < minH) {
+                continue;
+            }
+            if (w < mw && h < mh && w >= minW) {
                 sizes.add(w + " x " + h);
             }
             int shaped = Math.round(h * aspect / 2) * 2;
-            if (Math.abs(aspect - 16f / 9f) > 0.1f && shaped < mw && h < mh) {
+            if (Math.abs(aspect - 16f / 9f) > 0.1f && shaped < mw && h < mh && shaped >= minW) {
                 sizes.add(shaped + " x " + h);
             }
         }

@@ -214,5 +214,15 @@ public class Main {
         public int[] getMonitorSize() {
             return DesktopWindow.getMonitorSize();
         }
+
+        @Override
+        public void setWindowResizable(boolean resizable) {
+            DesktopWindow.setResizable(resizable);
+        }
+
+        @Override
+        public int[] getMinimumWindowSize() {
+            return DesktopWindow.getMinimumSize();
+        }
     }
 }

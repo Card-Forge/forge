@@ -74,7 +74,9 @@ public class GameLauncher {
         boolean hasBothDims = widthArg != null && heightArg != null;
         // Only disable desktop auto-orientation when the user *really* overrides it
         boolean overrideOrientation = portraitArg || landscapeArg || hasBothDims;
-        Forge.setDesktopAutoOrientation(!overrideOrientation);
+        // The window can be resized to any shape and Forge opens at the shape it closed at, so its shape says nothing
+        // about the layout wanted: landscape unless "portrait" (or a taller width=/height=) asks otherwise
+        Forge.setDesktopAutoOrientation(false);
 
         // Determine desired portrait/landscape only if we are overriding orientation.
         boolean isPortrait = false;
