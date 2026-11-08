@@ -957,13 +957,19 @@ public class GameState {
     }
 
     private void handleAddSAsToStack(final Game game) {
+        Player lastActivator = null;
         for (int i = 0; i < playerStates.size(); i++) {
             if (playerStates.get(i).putOnStack != null) {
                 String[] spellList = TextUtil.split(playerStates.get(i).putOnStack, ';');
                 for (String spell : spellList) {
                     precastSpellFromCard(spell, game.getPlayers().get(i), game, true);
+                    lastActivator = game.getPlayers().get(i);
                 }
             }
+        }
+        // the player who put the last spell on the stack starts with priority, as if they had just cast it (CR 117.3c)
+        if (lastActivator != null) {
+            game.getPhaseHandler().setPriority(lastActivator);
         }
     }
 

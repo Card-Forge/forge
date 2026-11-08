@@ -950,7 +950,12 @@ public final class GameActionUtil {
         return completeList;
     }
 
-    public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
+    /**
+     * Undoes a cast or activation that couldn't be completed.
+     * @param waitingMark the waiting trigger count before the cast began: only the triggers since then are cleared
+     */
+    public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard,
+            final int waitingMark) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -1021,7 +1026,7 @@ public final class GameActionUtil {
         payment.refundPayment();
 
         game.getStack().clearFrozen();
-        game.getTriggerHandler().clearWaitingTriggers();
+        game.getTriggerHandler().clearWaitingTriggersFrom(waitingMark);
     }
 
 }

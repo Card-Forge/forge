@@ -364,6 +364,17 @@ public class TriggerHandler {
         return checkStatics;
     }
 
+    public int getWaitingTriggerCount() {
+        return waitingTriggers.size();
+    }
+
+    /** Clears the triggers that started waiting after {@code mark} (from {@link #getWaitingTriggerCount()}). */
+    public void clearWaitingTriggersFrom(final int mark) {
+        if (mark >= 0 && mark < waitingTriggers.size()) {
+            waitingTriggers.subList(mark, waitingTriggers.size()).clear();
+        }
+    }
+
     public void clearWaitingTriggers() {
         waitingTriggers.clear();
     }
