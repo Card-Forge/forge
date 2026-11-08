@@ -40,7 +40,8 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         String floatText;
         String lifeText = "";
         int lifeTextFor = Integer.MIN_VALUE;
-        String hintText;
+        String hintText, waitingText, lethalText;
+        int lethalFor = -1;
         // the chips round the life plate: commander damage on the left, counters and designations on the right
         final ArenaPlayerInfo.Row damageRow = new ArenaPlayerInfo.Row(), infoRow = new ArenaPlayerInfo.Row();
     }
@@ -115,8 +116,8 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
             final float chipH = Math.round(plateH * CHIP_SHARE), gap = plateH * 0.75f + ArenaTheme.px(6);
             // with seats round the table, it says when you play next as it does on theirs
             final int lead = ArenaBoard.isSeatGame() && ArenaBoard.nextTurnPlayer() == player ? ArenaPlayerInfo.LEAD_NEXT : ArenaPlayerInfo.LEAD_NONE;
-            ArenaPlayerInfo.draw(g, st.damageRow, player, ArenaPlayerInfo.CMDR, ArenaPlayerInfo.LEAD_NONE, null, cx - gap, cy + d / 2f, chipH, true, 0);
-            ArenaPlayerInfo.draw(g, st.infoRow, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, lead, null, cx + gap, cy + d / 2f, chipH,
+            ArenaPlayerInfo.draw(g, st.damageRow, v, player, ArenaPlayerInfo.CMDR, ArenaPlayerInfo.LEAD_NONE, null, cx - gap, cy + d / 2f, chipH, true, 0);
+            ArenaPlayerInfo.draw(g, st.infoRow, v, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, lead, null, cx + gap, cy + d / 2f, chipH,
                     false, 0);
         }
         final FSkinFont hf = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), plateH * HINT_SHARE));
@@ -131,6 +132,27 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
                     ArenaBoard.attackPlateRim(attack, current), ArenaBoard.attackPlateInk(attack));
         } else if (ring == RING_SELECTABLE && isPointerOver(v) && ArenaBoard.attackOption(player) == null) { // what the breathing ring means: it can be clicked, for what
             ArenaArt.hint(g, hintText(st, player), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
+        } else if (ArenaBoard.isWaitingOn(player)) {
+            // the game waits on them: a ring that turns at once (the thinking bubble comes after a while), and words on hover
+            drawWaitingRing(g, cx, cy, d);
+            if (isPointerOver(v)) {
+                if (st.waitingText == null) {
+                    st.waitingText = Forge.getLocalizer().getMessage("lblArenaWaitingFor", player.getName());
+                }
+                ArenaArt.hint(g, st.waitingText, hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
+            }
+        }
+        if (!opponent) { // unblocked attackers that would kill you: said above your portrait while it can still change
+            final int incoming = ArenaBoard.incomingDamage();
+            if (incoming > 0 && incoming >= player.getLife()) {
+                if (incoming != st.lethalFor || st.lethalText == null) {
+                    st.lethalFor = incoming;
+                    st.lethalText = Forge.getLocalizer().getMessage("lblArenaLethalIncoming", String.valueOf(incoming));
+                }
+                final float pulse = 0.6f + 0.4f * ArenaMotion.pulse(1.2f);
+                ArenaArt.hint(g, st.lethalText, hf, cx, cy - d / 2f - ArenaArt.hintHeight(hf) - ArenaTheme.px(8), -v.screenPos.x,
+                        ArenaBoard.windowW() - v.screenPos.x, ArenaTheme.alpha(LIFE_LOST, pulse, S2), LIFE_LOST);
+            }
         }
 
         final float up = st.floatUp.get();
@@ -155,6 +177,21 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
 
     /** The share of the life plate's height a chip beside it takes. */
     private static final float CHIP_SHARE = 0.56f;
+
+    private static final Color WAITING = ArenaTheme.rgb(0xBFE3FF);
+
+    /** A ring of light running round the portrait while the game waits on this player. */
+    private static void drawWaitingRing(final Graphics g, final float cx, final float cy, final float d) {
+        final float t = ArenaMotion.seconds() * 1.4f;
+        final float r = d / 2f + Math.max(2f, d * 0.06f);
+        final int dots = 12;
+        for (int i = 0; i < dots; i++) {
+            final double a = (i / (double) dots + t) * 2 * Math.PI;
+            final float glow = 0.25f + 0.75f * (float) Math.pow(0.5 + 0.5 * Math.cos(i * 2 * Math.PI / dots), 3);
+            g.fillSmoothCircle(ArenaTheme.alpha(WAITING, glow, S3), cx + (float) Math.cos(a) * r, cy + (float) Math.sin(a) * r, Math.max(1.5f, d * 0.03f));
+        }
+        ArenaMotion.requestFrame();
+    }
 
     /** "Click to choose X" (a target, a player to pick); made once per portrait. */
     private static String hintText(final State st, final PlayerView player) {

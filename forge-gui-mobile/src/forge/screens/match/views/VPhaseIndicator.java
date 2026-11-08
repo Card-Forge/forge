@@ -20,7 +20,10 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.arena.ArenaGlyphs;
+import forge.screens.match.arena.ArenaArt;
+import forge.screens.match.arena.ArenaBoard;
 import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -82,6 +85,16 @@ public class VPhaseIndicator extends FContainer {
 
     private boolean isArenaLadder() {
         return arenaPortrait > 0 && ArenaMatchLayout.applies();
+    }
+
+    //a seat's ladder pops out over the board on hover: it gets a dark ground and a line saying whose turns it stops in
+    private boolean arenaPopup;
+    private String arenaPopupText;
+
+    /** The ladder pops out over the board (a seat's): drawn on a ground of its own, captioned with whose turns it governs. */
+    public void setArenaPopup(boolean popup, String caption) {
+        arenaPopup = popup;
+        arenaPopupText = caption;
     }
 
     //compact landscape layout: nothing is drawn until the phase button opens the stops column
@@ -260,7 +273,17 @@ public class VPhaseIndicator extends FContainer {
     @Override
     public void draw(Graphics g) {
         if (isArenaLadder()) { //just the glyphs, on the portrait's wings
+            if (arenaPopup) {
+                final float r = getHeight() / 2f;
+                g.fillSmoothRoundRect(ArenaArt.HINT_FILL, -r, -r * 0.4f, getWidth() + 2 * r, getHeight() + r * 0.8f, r);
+                g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, -r, -r * 0.4f, getWidth() + 2 * r, getHeight() + r * 0.8f, r);
+            }
             super.draw(g);
+            if (arenaPopup && arenaPopupText != null) {
+                final FSkinFont f = ArenaTheme.fontPx(Math.max(12, Math.round(getHeight() * 0.32f)));
+                ArenaArt.hint(g, arenaPopupText, f, getWidth() / 2f, getHeight() + getHeight() * 0.5f, -screenPos.x,
+                        ArenaBoard.windowW() - screenPos.x);
+            }
             return;
         }
         if (isCompact()) {

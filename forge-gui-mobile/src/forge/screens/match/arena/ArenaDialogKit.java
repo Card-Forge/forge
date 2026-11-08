@@ -368,6 +368,7 @@ public final class ArenaDialogKit {
      */
     public static final class Heading {
         private String title, subtitle, fallback;
+        private String rawTitle, rawSubtitle, rawFallback; // as given, to see whether they changed
         private float lw, lh;
         private String shownTitle;
         private final List<String> lines = new ArrayList<>();
@@ -379,23 +380,28 @@ public final class ArenaDialogKit {
 
         /** Sets what the heading says; cheap when nothing changed. */
         public void set(final String title0, final String subtitle0, final String fallback0) {
-            if (!question && eq(title0, title) && eq(subtitle0, subtitle) && eq(fallback0, fallback)) {
+            if (!question && eq(title0, rawTitle) && eq(subtitle0, rawSubtitle) && eq(fallback0, rawFallback)) {
                 return;
             }
             question = false;
-            title = title0;
-            subtitle = subtitle0;
-            fallback = fallback0;
+            rawTitle = title0;
+            rawSubtitle = subtitle0;
+            rawFallback = fallback0;
+            //the game's words as a player reads them: no engine ids ("Hill Giant (50)"), "X: choose a mode"
+            title = ArenaPromptText.clean(title0);
+            subtitle = ArenaPromptText.clean(subtitle0);
+            fallback = ArenaPromptText.clean(fallback0);
             lw = 0;
         }
 
         /** Makes a question the whole heading, in one or two lines (Swing paintQuestionTitle). */
         public void setQuestion(final String question0) {
-            if (question && eq(question0, title)) {
+            if (question && eq(question0, rawTitle)) {
                 return;
             }
             question = true;
-            title = question0;
+            rawTitle = question0;
+            title = ArenaPromptText.clean(question0);
             subtitle = null;
             fallback = null;
             lw = 0;

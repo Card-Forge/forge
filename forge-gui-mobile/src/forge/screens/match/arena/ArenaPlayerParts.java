@@ -22,6 +22,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
@@ -64,6 +65,7 @@ public final class ArenaPlayerParts {
         private int hovered = -1;
         private boolean hoveredPlayable;
         private final int[] taxSeen = {-1, -1};
+        private final CardView[] taxSeenWho = new CardView[2];
         private long taxAt = Long.MIN_VALUE / 2;
         private String taxText, taxHint, playableHint;
 
@@ -348,11 +350,14 @@ public final class ArenaPlayerParts {
                 }
             }
             final int a = n > 0 ? taxNow[0] : -1, b = n > 1 ? taxNow[1] : -1;
-            if (a == taxSeen[0] && b == taxSeen[1]) {
-                return;
+            final CardView whoA = n > 0 ? taxWho[0] : null, whoB = n > 1 ? taxWho[1] : null;
+            if (a == taxSeen[0] && b == taxSeen[1] && whoA == taxSeenWho[0] && whoB == taxSeenWho[1]) {
+                return; // the same commanders waiting, at the same tax
             }
             taxSeen[0] = a;
             taxSeen[1] = b;
+            taxSeenWho[0] = whoA;
+            taxSeenWho[1] = whoB;
             if (a <= 0 && b <= 0) {
                 taxText = null;
                 taxHint = null;
@@ -363,8 +368,8 @@ public final class ArenaPlayerParts {
                     : l.getMessage("lblArenaCommanderTax", String.valueOf(a));
             String hint = null;
             for (int i = 0; i < n; i++) {
-                final String one = l.getMessage("lblArenaHintCommanderTax", taxWho[i].getName(), String.valueOf(taxNow[i]),
-                        String.valueOf(taxNow[i] / 2));
+                final String one = l.getMessage("lblArenaHintCommanderTax", CardTranslation.getTranslatedName(taxWho[i].getName()),
+                        String.valueOf(taxNow[i]), taxNow[i] / 2);
                 hint = hint == null ? one : l.getMessage("lblArenaJoin", hint, one);
             }
             taxHint = hint;
@@ -408,7 +413,7 @@ public final class ArenaPlayerParts {
      * {@link ArenaPlayerInfo#REFRESH_MS}; drawing them allocates nothing.
      */
     public static final class Castables extends FDisplayObject {
-        private static final ZoneType[] FROM = {ZoneType.Command, ZoneType.Graveyard, ZoneType.Exile};
+        private static final ZoneType[] FROM = {ZoneType.Command, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Library};
         private static final int MOST = 3;
         /** A plate's height against the window's, and the gap between plates (shares of a plate's height). */
         private static final float PLATE_H = 0.032f, PLATE_GAP = 0.2f;
@@ -437,19 +442,17 @@ public final class ArenaPlayerParts {
             final List<CardView> actionable = MatchController.instance.getSelection().actionable();
             for (int i = 0, m = actionable.size(); i < m && n < MOST; i++) {
                 final CardView c = actionable.get(i);
-                if (!player.equals(c.getOwner()) || !isFrom(c.getZone()) || contains(c)) {
+                if (!isFrom(c.getZone()) || contains(c)) { // yours or not: anything the prompt lets you play from there
                     continue;
                 }
                 final int tax = c.getZone() == ZoneType.Command ? ArenaPlayerInfo.commanderTax(player, c) : 0;
                 if (cards[n] != c || taxes[n] != tax || texts[n] == null) {
                     final boolean land = c.getCurrentState() != null && c.getCurrentState().isLand();
-                    final String verb = Forge.getLocalizer().getMessage(land ? "lblArenaPlayCard" : "lblArenaCastCard", c.getName());
+                    final String verb = Forge.getLocalizer().getMessage(land ? "lblArenaPlayCard" : "lblArenaCastCard", CardTranslation.getTranslatedName(c.getName()));
                     texts[n] = tax > 0 ? Forge.getLocalizer().getMessage("lblArenaJoin", verb,
                             Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax))) : verb;
                 }
-                if (cards[n] != c || arts[n] == null) {
-                    arts[n] = ArenaArt.circleArtOf(c);
-                }
+                arts[n] = ArenaArt.circleArtOf(c); //looked up at each read (a cache read), not kept past the next
                 cards[n] = c;
                 taxes[n] = tax;
                 n++;
@@ -527,7 +530,7 @@ public final class ArenaPlayerParts {
                 g.fillSmoothRoundRect(PLATE_FILL, 0, top, w, h, h / 2f);
                 g.drawSmoothRoundRect(Math.max(1f, h * 0.06f), ArenaTheme.PLAYABLE, 0, top, w, h, h / 2f);
                 final float d = h * 0.78f;
-                if (arts[i] != null) {
+                if (ArenaArt.isLive(arts[i])) {
                     ArenaArt.circleImage(g, arts[i], h * 0.12f + d / 2f, top + h / 2f, d);
                 } else {
                     g.fillSmoothCircle(ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.35f, S2), h * 0.12f + d / 2f, top + h / 2f, d / 2f);
@@ -628,10 +631,69 @@ public final class ArenaPlayerParts {
         private float nameH; // seat: the name's row; the rest of the height is for the chips. 0: the whole height
         private PhaseType phaseFor;
         private final ArenaPlayerInfo.Row chips = new ArenaPlayerInfo.Row();
+        // a crowded seat's "see all" button at the end of its name row
+        private boolean boardShown;
+        private float boardX, boardW;
+        private int boardFor = -1;
+        private String boardText, boardHint;
         private String phaseText;
 
         public NamePlate(final PlayerView player0) {
             player = player0;
+        }
+
+        /** A crowded seat: "Board 17" after the name, opening all its permanents in the browser (with a hint on hover). */
+        private void drawBoardButton(final Graphics g, final float h, final float plateW) {
+            final int count = player.getZoneSize(ZoneType.Battlefield);
+            boardShown = count > SEAT_CROWDED;
+            if (!boardShown) {
+                return;
+            }
+            if (count != boardFor || boardText == null) {
+                boardFor = count;
+                boardText = Forge.getLocalizer().getMessage("lblArenaSeatBoard", String.valueOf(count));
+            }
+            final FSkinFont f = ArenaCards.evenFont(h * 0.5f);
+            final float bh = h * 0.8f;
+            // after the name, never over it: "Board 17", or just "17" on a narrow plate, or nothing if even that has no room
+            String label = boardText;
+            boardW = ArenaArt.cachedTextWidth(label, f) + bh;
+            boardX = plateW + ArenaTheme.px(6);
+            if (boardX + boardW > getWidth()) {
+                label = ArenaPlayerInfo.figure(count);
+                boardW = ArenaArt.cachedTextWidth(label, f) + bh;
+            }
+            if (boardX + boardW > getWidth()) {
+                boardShown = false;
+                return;
+            }
+            g.fillSmoothRoundRect(ArenaArt.HINT_FILL, boardX, (h - bh) / 2f, boardW, bh, bh / 2f);
+            g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, boardX, (h - bh) / 2f, boardW, bh, bh / 2f);
+            g.drawText(label, f, ArenaTheme.WHITE, boardX, (h - bh) / 2f, boardW, bh, false, Align.center, true);
+            final float mx = Forge.mouseMovedX - screenPos.x, my = Forge.mouseMovedY - screenPos.y;
+            if (Forge.magnify && mx >= boardX && mx < boardX + boardW && my >= 0 && my < h) {
+                if (boardHint == null) {
+                    boardHint = Forge.getLocalizer().getMessage("lblArenaSeatBoardHint", player.getName());
+                }
+                ArenaArt.hint(g, boardHint, f, boardX + boardW / 2f, h + ArenaTheme.px(4), -screenPos.x, ArenaBoard.windowW() - screenPos.x);
+            }
+        }
+
+        /**
+         * A click on the plate picks the player when the prompt can take them (a defender to attack, a target, a player
+         * to choose): what its "Click to attack" chip and the portrait's hint promise.
+         */
+        @Override
+        public boolean tap(final float x, final float y, final int count) {
+            if (boardShown && x >= boardX && x < boardX + boardW && y < nameH) { // a crowded seat's board, all of it, in the browser
+                ArenaCardBrowser.browseZone(player, ZoneType.Battlefield);
+                return true;
+            }
+            if (!ArenaBoard.isAttackOption(player) && !MatchController.instance.isSelectable(player)) {
+                return false;
+            }
+            ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().selectPlayer(player, null));
+            return true;
         }
 
         /** A seat's plate: the name in the top {@code nameH0}, chips below. 0 for a plain name plate. */
@@ -683,10 +745,14 @@ public final class ArenaPlayerParts {
                 }
             }
             final float chipH = Math.round(h * SEAT_CHIP_SHARE), gap = Math.max(2f, chipH * 0.18f);
-            ArenaPlayerInfo.draw(g, chips, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, leadText, ArenaTheme.px(4),
+            drawBoardButton(g, h, plateW);
+            ArenaPlayerInfo.draw(g, chips, this, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, leadText, ArenaTheme.px(4),
                     nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4) - nameH * FAN_CLEARANCE);
         }
     }
+
+    /** A seat with more permanents than this crowds its row (tiles shrink and overlap): its plate offers the whole board. */
+    private static final int SEAT_CROWDED = 12;
 
     /** A seat's chips against the height of its name row; room kept clear for the hand fan's leaning cards (in name rows). */
     private static final float SEAT_CHIP_SHARE = 0.86f, FAN_CLEARANCE = 0.6f;

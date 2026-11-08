@@ -31,6 +31,7 @@ import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.arena.ArenaPrompt;
+import forge.screens.match.arena.ArenaPromptText;
 import forge.gamemodes.match.YieldController;
 import forge.toolbox.FEvent;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -182,6 +183,50 @@ public class VPrompt extends FContainer {
     // ---- the Arena board ------------------------------------------------------------------------------------------
     private final ArenaPrompt.State arena = new ArenaPrompt.State();
 
+    // the Arena board's words for the prompt (ids gone, what to click added), remade when the message or selection changes
+    private String arenaWords, arenaWordsFor, arenaWordsOk;
+    private Object arenaWordsSel;
+    // the buttons a decision was laid out with (a disabled one is hidden, the other takes the whole row)
+    private boolean arenaOkShown = true, arenaCancelShown = true;
+    // a decision is drawn after the board's arcs, so they never run through its words
+    private boolean arenaLateDraw;
+
+    /** The prompt's words on the Arena board. */
+    public String getArenaText() {
+        final Selection sel = MatchController.instance.getSelection();
+        final String ok = btnOk.getText();
+        if (arenaWords == null || message != arenaWordsFor || sel != arenaWordsSel || !java.util.Objects.equals(ok, arenaWordsOk)) {
+            arenaWordsFor = message;
+            arenaWordsSel = sel;
+            arenaWordsOk = ok;
+            arenaWords = ArenaPromptText.promptText(message, sel, ok);
+        }
+        return arenaWords;
+    }
+
+    /** Whether the decision's buttons changed which of them can be pressed since it was laid out (then lay it out again). */
+    public boolean arenaButtonsChanged() {
+        return arena.mode == ArenaMatchLayout.PromptMode.DECISION && (btnOk.isEnabled() != arenaOkShown || btnCancel.isEnabled() != arenaCancelShown);
+    }
+
+    /** The match screen draws a decision itself, after the arcs and card flights: this lets that one draw through. */
+    public void drawLate(Graphics g) {
+        arenaLateDraw = true;
+        try {
+            g.draw(this);
+        } finally {
+            arenaLateDraw = false;
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (isArenaPrompt() && arena.mode == ArenaMatchLayout.PromptMode.DECISION && !arenaLateDraw) {
+            return; //drawn by the match screen after the arcs
+        }
+        super.draw(g);
+    }
+
     /** Whether this is the match screen's own prompt drawn in the Arena look (a dialog's prompt keeps its look). */
     public boolean isArenaPrompt() {
         return overMatch && ArenaMatchLayout.applies();
@@ -217,7 +262,7 @@ public class VPrompt extends FContainer {
             return buttonH; //no message yet (the game is still setting up): just the buttons
         }
         final FSkinFont font = ArenaPrompt.messageFont(windowH);
-        final float textH = lblMessage.renderer.getWrappedBounds(message, font, width - 2 * arenaMessagePad()).height;
+        final float textH = lblMessage.renderer.getWrappedBounds(getArenaText(), font, width - 2 * arenaMessagePad()).height;
         return Math.min(textH + 2 * arenaMessagePad(), windowH / 3f) + Utils.scale(3) + buttonH;
     }
 
@@ -242,10 +287,20 @@ public class VPrompt extends FContainer {
         final float gap = Utils.scale(3);
         final boolean blank = StringUtils.isBlank(message);
         lblMessage.setVisible(!blank);
-        lblMessage.setBounds(0, 0, width, Math.max(0, height - buttonH - gap));
-        final float bw = (width - Utils.scale(4)) / 2;
-        btnOk.setBounds(0, height - buttonH, bw, buttonH);
-        btnCancel.setBounds(width - bw, height - buttonH, bw, buttonH);
+        lblMessage.setBounds(0, 0, width, Math.max(0, height - buttonH - gap - Utils.scale(6)));
+        //a button that cannot be pressed is not shown: the other takes the row
+        arenaOkShown = btnOk.isEnabled();
+        arenaCancelShown = btnCancel.isEnabled();
+        final float pad = Utils.scale(6);
+        final float inner = width - 2 * pad;
+        //both shown: the main action gets the larger share (its label says more: "Attack with 3 · Pay 6")
+        final float gap2 = Utils.scale(4);
+        final float okW = arenaOkShown && arenaCancelShown ? Math.round((inner - gap2) * 0.6f) : inner;
+        final float cancelW = arenaOkShown && arenaCancelShown ? inner - gap2 - okW : inner;
+        btnOk.setVisible(arenaOkShown);
+        btnCancel.setVisible(arenaCancelShown);
+        btnOk.setBounds(pad, height - buttonH - pad, okW, buttonH);
+        btnCancel.setBounds(arenaOkShown ? pad + okW + gap2 : pad, height - buttonH - pad, cancelW, buttonH);
         btnUndo.setVisible(false);
     }
 
@@ -282,10 +337,14 @@ public class VPrompt extends FContainer {
                 final String text = button.getText();
                 final boolean endTurn = text != null && text.equals(Forge.getLocalizer().getMessage("lblEndTurn"));
                 ArenaPrompt.drawButton(g, endTurn ? "\u00BB" : text, button.getWidth(), button.getHeight(), endTurn, button.isHovered(), held, button.isEnabled(), alpha);
+                if (endTurn && button.isHovered() && button.isEnabled()) { //the chevron says what it does under the pointer
+                    ArenaPrompt.drawHintAbove(g, ArenaPrompt.endTurnHint(), button);
+                }
             }
             return;
         }
-        ArenaPrompt.drawButton(g, button.getText(), button.getWidth(), button.getHeight(), ok, button.isHovered(), held, button.isEnabled(), alpha);
+        final String label = ok ? ArenaPromptText.okLabel(button.getText()) : ArenaPromptText.cancelLabel(button.getText(), card);
+        ArenaPrompt.drawButton(g, label, button.getWidth(), button.getHeight(), ok, button.isHovered(), held, button.isEnabled(), alpha);
     }
 
     public FButton getBtnCancel() {
@@ -338,6 +397,13 @@ public class VPrompt extends FContainer {
 
         @Override
         public void draw(Graphics g) {
+            drawUndo(g);
+            if (isArenaPrompt() && isHovered() && isEnabled()) { //what the round arrow does, under the pointer
+                ArenaPrompt.drawHintAbove(g, ArenaPrompt.undoHint(), this);
+            }
+        }
+
+        private void drawUndo(Graphics g) {
             float cx = getWidth() / 2, cy = getHeight() / 2;
             FImage icon = getUndoIcon();
             if (icon != null) { //round art from the zoom atlas: dim at rest, bright on hover, blue tint while pressed
@@ -514,11 +580,12 @@ public class VPrompt extends FContainer {
             final float alpha = arena.shown.get();
             final float wh = forge.screens.match.arena.ArenaBoard.windowH();
             if (arena.mode == ArenaMatchLayout.PromptMode.PRIORITY) {
+                ArenaPrompt.drawAutoPass(g, this); //auto-passing is on: say until when, above the buttons
                 ArenaPrompt.drawStrip(g, arena, getWidth(), ArenaPrompt.stripHeight(wh), alpha);
                 final float y = ArenaPrompt.stripHeight(wh) + ArenaPrompt.actionHeight(wh);
                 ArenaPrompt.drawCaption(g, ArenaPrompt.caption(), 0, y, getWidth(), ArenaPrompt.captionHeight(wh), alpha);
-            } else if (lblMessage.isVisible()) {
-                ArenaPrompt.drawMessageShade(g, 0, 0, getWidth(), lblMessage.getHeight(), alpha);
+            } else {
+                ArenaPrompt.drawDecisionPanel(g, 0, 0, getWidth(), getHeight(), alpha);
             }
             return;
         }
@@ -581,7 +648,7 @@ public class VPrompt extends FContainer {
                     final float wh = forge.screens.match.arena.ArenaBoard.windowH();
                     final float a = arena.shown.get();
                     final Color c = arenaText.set(1f, 1f, 1f, a);
-                    renderer.drawText(g, message, ArenaPrompt.messageFont(wh), c, pad, pad, getWidth() - 2 * pad, getHeight() - 2 * pad, 0, getHeight(), true, Align.center, true);
+                    renderer.drawText(g, getArenaText(), ArenaPrompt.messageFont(wh), c, pad, pad, getWidth() - 2 * pad, getHeight() - 2 * pad, 0, getHeight(), true, Align.center, true);
                 }
                 return;
             }

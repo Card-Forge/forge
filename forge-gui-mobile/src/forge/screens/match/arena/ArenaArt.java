@@ -484,7 +484,36 @@ public final class ArenaArt {
         return w;
     }
 
-    private static final Color HINT_FILL = ArenaTheme.rgba(6, 8, 13, 235);
+    /** The ground of hint plates (and of the attack plates and chips that say what a click does: one style). */
+    public static final Color HINT_FILL = ArenaTheme.rgba(6, 8, 13, 235);
+
+    /** Whether a texture region can still be drawn (its texture not disposed by the image cache since it was looked up). */
+    public static boolean isLive(final TextureRegion r) {
+        return r != null && r.getTexture() != null && r.getTexture().getTextureObjectHandle() != 0;
+    }
+
+    private static final ObjectMap<FSkinFont, ObjectFloatMap<String>> SYMBOL_WIDTHS = new ObjectMap<>();
+
+    /** The width of one line with mana symbols drawn as icons ({@link #symbolText}), measured once per font and text. */
+    public static float symbolTextWidth(final String text, final FSkinFont font) {
+        if (text == null || text.isEmpty()) {
+            return 0f;
+        }
+        ObjectFloatMap<String> widths = SYMBOL_WIDTHS.get(font);
+        if (widths == null) {
+            widths = new ObjectFloatMap<>();
+            SYMBOL_WIDTHS.put(font, widths);
+        }
+        float w = widths.get(text, -1f);
+        if (w < 0f) {
+            if (widths.size >= WIDTHS_PER_FONT) {
+                widths.clear();
+            }
+            w = RULES.getBounds(text, font).width;
+            widths.put(text, w);
+        }
+        return w;
+    }
 
     /** How tall {@link #hint} draws with this font. */
     public static float hintHeight(final FSkinFont font) {

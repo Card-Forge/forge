@@ -412,6 +412,11 @@ public class MatchController extends NetworkGuiGame {
             view.getViewWinLose().setVisible(true);
     }
 
+    /** What auto-passing is doing now ("Yielding until end of turn"), or null: the Arena board shows it by the buttons. */
+    public String getAutoPassText() {
+        return currentYieldMessage();
+    }
+
     @Override
     public void updateTurn(final PlayerView player) {
         //the Arena board says whose turn it is on a band across the board (nothing with the look off)
@@ -801,7 +806,9 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
+        //on the Arena board the game's words as a player reads them (no engine ids, a vote's tally line by line)
+        final String words = forge.screens.match.arena.ArenaTheme.isMatchBoard() ? forge.screens.match.arena.ArenaPromptText.clean(question) : question;
+        return FOptionPane.showCardOptionDialog(c, words, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override

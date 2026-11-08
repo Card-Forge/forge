@@ -20,6 +20,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
@@ -104,9 +105,10 @@ public final class ArenaCards {
         private float nameWidth;
         private String nameShown;
         private FSkinFont nameFont;
-        // whom it attacks, said on a plate when there is more than one to attack
+        // whom it attacks (or blocks), said on a plate when that is not obvious; the plate's text renderer
         private GameEntityView attackFor;
         private String attackText;
+        private TextRenderer plateText;
         // the counters' chips, rebuilt when the counters change
         private int countersHash = Integer.MIN_VALUE;
         private final String[] chipText = new String[3];
@@ -451,14 +453,19 @@ public final class ArenaCards {
         if (turned) {
             g.endTransform();
         }
-        if (card.isAttacking()) {
+        if (card.isAttacking() && isBlockersFor(card)) {
+            // you are declaring blockers and this is the attacker your clicks assign them to
+            drawPlate(g, st, blockersForText(), ArenaTheme.CHOSEN, x, y, w, h, true);
+        } else if (card.isAttacking()) {
             drawAttackTarget(g, card, st, x, y, w, h);
+        } else if (card.isBlocking()) {
+            drawBlockTarget(g, card, st, x, y, w, h);
         } else {
             final Selection.DefenderOption attack = ArenaBoard.attackOption(card); // a planeswalker or battle you could attack
             if (attack != null) {
                 final boolean current = MatchController.instance.isHighlighted(card);
                 // on the tile, not above it: a seat's back row sits right under its portrait, whose plate is up there
-                drawPlate(g, ArenaBoard.attackPlateText(attack, current), ArenaBoard.attackPlateRim(attack, current), x, y, w, h, false);
+                drawPlate(g, st, ArenaBoard.attackPlateText(attack, current), ArenaBoard.attackPlateRim(attack, current), x, y, w, h, false);
             }
         }
         // the damage it took rising off it
@@ -471,7 +478,6 @@ public final class ArenaCards {
     }
 
     private static final Color HIT_TEXT = ArenaTheme.rgb(0xFF6A5C);
-    private static final Color ATTACK_PLATE = ArenaTheme.rgba(20, 8, 4, 235);
     /** The "Attacking X" plate: its text against the tile's height, and its gap above the tile (it keeps the name clear). */
     private static final float ATTACK_TEXT = 0.11f, ATTACK_GAP = 0.03f;
 
@@ -483,37 +489,80 @@ public final class ArenaCards {
             final float h) {
         final GameView game = MatchController.instance.getGameView();
         final CombatView combat = game == null ? null : game.getCombat();
-        final GameEntityView defender = combat == null ? null : combat.getDefender(card);
+        GameEntityView defender = null;
+        if (combat != null) {
+            synchronized (combat) { // the game thread changes the combat while declaring
+                defender = combat.getDefender(card);
+            }
+        }
         if (defender == null || !(ArenaBoard.isSeatGame() || defender instanceof CardView)) {
             return;
         }
         if (defender != st.attackFor || st.attackText == null) {
             st.attackFor = defender;
-            final String name = defender instanceof PlayerView p && MatchController.instance.isLocalPlayer(p)
-                    ? Forge.getLocalizer().getMessage("lblArenaYou") : defender instanceof CardView c ? c.getName() : defender.toString();
-            st.attackText = Forge.getLocalizer().getMessage("lblArenaAttackingWho", name);
+            st.attackText = Forge.getLocalizer().getMessage("lblArenaAttackingWho", entityName(defender));
         }
-        drawPlate(g, st.attackText, GLOW_COLOR[GLOW_ATTACK], x, y, w, h, true);
+        drawPlate(g, st, st.attackText, GLOW_COLOR[GLOW_ATTACK], x, y, w, h, true);
+    }
+
+    /** "Blocking Shivan Dragon": which attacker a blocker stands in front of (the arcs say it too, but they cross). */
+    private static void drawBlockTarget(final Graphics g, final CardView card, final State st, final float x, final float y, final float w,
+            final float h) {
+        final CardView attacker = ArenaBoard.blockedBy(card);
+        if (attacker == null) {
+            return;
+        }
+        if (attacker != st.attackFor || st.attackText == null) {
+            st.attackFor = attacker;
+            st.attackText = Forge.getLocalizer().getMessage("lblArenaBlockingWho", entityName(attacker));
+        }
+        drawPlate(g, st, st.attackText, GLOW_COLOR[GLOW_BLOCK], x, y, w, h, true);
+    }
+
+    /** A player or card as the plates name it: "You", a player's name, a card's (translated) name. */
+    private static String entityName(final GameEntityView e) {
+        if (e instanceof PlayerView p) {
+            return ArenaBoard.isMe(p) ? Forge.getLocalizer().getMessage("lblArenaYou") : p.getName();
+        }
+        return e instanceof CardView c ? CardTranslation.getTranslatedName(c.getName()) : String.valueOf(e);
+    }
+
+    /** Whether you are declaring blockers and this attacker is the one your clicks assign blockers to (the prompt marks it). */
+    private static boolean isBlockersFor(final CardView attacker) {
+        final GameView game = MatchController.instance.getGameView();
+        return game != null && game.getPhase() == PhaseType.COMBAT_DECLARE_BLOCKERS && !ArenaBoard.isMe(attacker.getController())
+                && MatchController.instance.isHighlighted(attacker);
+    }
+
+    private static String blockersFor;
+
+    private static String blockersForText() {
+        if (blockersFor == null) {
+            blockersFor = Forge.getLocalizer().getMessage("lblArenaBlockersForThis");
+        }
+        return blockersFor;
     }
 
     /**
      * A plate on a tile, rimmed in {@code rim}: centred over its top edge ({@code above}, keeping the name clear) or across
      * the middle of its art. Long text wraps onto a second line; a cost in it ("{2}") shows as mana symbols.
      */
-    private static void drawPlate(final Graphics g, final String text, final Color rim, final float x, final float y, final float w,
-            final float h, final boolean above) {
+    private static void drawPlate(final Graphics g, final State st, final String text, final Color rim, final float x, final float y,
+            final float w, final float h, final boolean above) {
         final FSkinFont f = evenFont(Math.max(ArenaTheme.px(14), h * ATTACK_TEXT));
         final float line = Math.round(f.getLineHeight() * 1.3f);
         final float tw = ArenaArt.cachedTextWidth(text, f);
         final float pw = Math.min(w * 1.3f, tw + line);
         final float ph = tw + line > pw ? 2 * line : line;
         final float px = x + (w - pw) / 2f, py = above ? y - ph - h * ATTACK_GAP : y + (h - ph) / 2f;
-        g.fillSmoothRoundRect(ATTACK_PLATE, px, py, pw, ph, line / 2f);
-        g.drawSmoothRoundRect(Math.max(1f, line * 0.06f), rim, px, py, pw, ph, line / 2f);
-        PLATE_TEXT.drawText(g, text, f, ArenaTheme.WHITE, px + line * 0.3f, py, pw - line * 0.6f, ph, py, ph, ph > line, Align.center, true);
+        // the one plate style of the board's "what a click does" texts (as ArenaArt.hint)
+        g.fillSmoothRoundRect(ArenaArt.HINT_FILL, px, py, pw, ph, line / 2f);
+        g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), rim, px, py, pw, ph, line / 2f);
+        if (st.plateText == null) {
+            st.plateText = new TextRenderer(); // each tile's plate has its own (a renderer keeps per-text layout state)
+        }
+        st.plateText.drawText(g, text, f, ArenaTheme.WHITE, px + line * 0.3f, py, pw - line * 0.6f, ph, py, ph, ph > line, Align.center, true);
     }
-
-    private static final TextRenderer PLATE_TEXT = new TextRenderer();
 
     private static void bloom(final Graphics g, final int kind, final float x, final float y, final float w, final float h, final float radius,
             final float spread, final boolean hovered, final float alpha) {

@@ -42,6 +42,7 @@ import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
 import forge.screens.match.arena.ArenaArt;
+import forge.screens.match.arena.ArenaBoard;
 import forge.screens.match.arena.ArenaCards;
 import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.arena.ArenaMotion;
@@ -50,6 +51,7 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSelectionBox;
+import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
@@ -57,7 +59,9 @@ import forge.util.collect.FCollectionView;
 
 public class VStack extends FDropDown {
     // ---- the Arena board: the top of the stack as a large card on the right, what waits under it stepping left ------
-    private static final int ARENA_MOST_SHOWN = 5;
+    /** The widest the Arena stack runs (a share of the window), however many entries wait on it. */
+    private static final float ARENA_STACK_MAX_W = 0.42f;
+    private int arenaShown;
     private final Rectangle arenaDock = new Rectangle();
     private static final Color ARENA_BAND = new Color(6 / 255f, 8 / 255f, 13 / 255f, 0.96f);
     private static final Color ARENA_SOURCE = ArenaTheme.rgb(0x9CC4F0);
@@ -75,13 +79,13 @@ public class VStack extends FDropDown {
         for (StackItemView part = item; part != null; part = part.getSubInstance()) {
             if (part.getTargetPlayers() != null) {
                 for (final PlayerView p : part.getTargetPlayers()) {
-                    n = appendTarget(names, n, p.equals(MatchController.instance.getCurrentPlayer())
+                    n = appendTarget(names, n, ArenaBoard.isMe(p)
                             ? Forge.getLocalizer().getMessage("lblArenaYou") : p.getName());
                 }
             }
             if (part.getTargetCards() != null) {
                 for (final CardView c : part.getTargetCards()) {
-                    n = appendTarget(names, n, c.getName());
+                    n = appendTarget(names, n, CardTranslation.getTranslatedName(c.getName()));
                 }
             }
         }
@@ -89,7 +93,7 @@ public class VStack extends FDropDown {
             return null;
         }
         if (n > ARENA_MOST_TARGETS) {
-            names.append(" +").append(n - ARENA_MOST_TARGETS);
+            names.append(Forge.getLocalizer().getMessage("lblArenaAndMore", String.valueOf(n - ARENA_MOST_TARGETS)));
         }
         return Forge.getLocalizer().getMessage("lblArenaTargets", names.toString());
     }
@@ -112,7 +116,7 @@ public class VStack extends FDropDown {
     private static int appendTarget(final StringBuilder names, final int n, final String name) {
         if (n < ARENA_MOST_TARGETS) {
             if (n > 0) {
-                names.append(", ");
+                names.append(Forge.getLocalizer().getMessage("lblArenaListSeparator"));
             }
             names.append(name);
         }
@@ -158,8 +162,15 @@ public class VStack extends FDropDown {
         arenaSendOffLeavers(stack);
         float cardH = arenaDock.height;
         float cardW = Math.round(cardH / FCardPanel.ASPECT_RATIO);
-        final int shown = Math.min(stack.size(), ARENA_MOST_SHOWN);
-        final float step = Math.round(cardW * 0.36f);
+        // every entry is shown: the waiting ones step left behind the top one, closer together as there are more of them,
+        // so each keeps a strip you can hover (its preview and arcs) and click (to pick it as a target)
+        final float maxW = Math.round(sw * ARENA_STACK_MAX_W), minStep = Math.max(ArenaTheme.px(26), Math.round(cardW * 0.1f));
+        int shown = stack.size();
+        float step = Math.round(cardW * 0.36f);
+        if (shown > 1 && cardW + (shown - 1) * step > maxW) {
+            step = Math.max(minStep, (maxW - cardW) / (shown - 1));
+            shown = Math.min(shown, 1 + (int) ((maxW - cardW) / step));
+        }
         final float totalW = cardW + Math.max(0, shown - 1) * step;
         final float left = Math.max(0, arenaDock.x + arenaDock.width - totalW);
         paneSize = new ScrollBounds(arenaDock.x + arenaDock.width - left, cardH);
@@ -178,6 +189,7 @@ public class VStack extends FDropDown {
                 activeStackInstance = item;
             }
         }
+        arenaShown = shown;
         setBounds(left, arenaDock.y, paneSize.getWidth(), cardH);
         revealTargetZones();
     }
@@ -501,10 +513,10 @@ public class VStack extends FDropDown {
     protected void drawOverlay(Graphics g) {
         if (isArenaStack()) {
             final int size = MatchController.instance.getGameView() == null ? 0 : MatchController.instance.getGameView().getStack().size();
-            if (size > ARENA_MOST_SHOWN) { //what does not fit is counted under the cards
+            if (size > arenaShown) { //what does not fit even closely stepped is counted under the cards
                 if (size != arenaMoreFor) {
                     arenaMoreFor = size;
-                    arenaMoreText = Forge.getLocalizer().getMessage("lblArenaMoreOnStack", String.valueOf(size - ARENA_MOST_SHOWN));
+                    arenaMoreText = Forge.getLocalizer().getMessage("lblArenaMoreOnStack", String.valueOf(size - arenaShown));
                 }
                 final FSkinFont f = ArenaTheme.font(20);
                 ArenaArt.badge(g, arenaMoreText, f, getWidth() / 2, getHeight() - f.getLineHeight(),
@@ -540,7 +552,9 @@ public class VStack extends FDropDown {
 
     @Override
     protected void drawOnContainer(Graphics g) {
-        //draw target arrows immediately above stack for active item only
+        //draw target arrows immediately above stack for active item only (on the Arena board: the entry under the pointer)
+        final StackInstanceDisplay activeItem = arcItem();
+        final StackItemView activeStackInstance = activeItem == null ? null : isArenaStack() ? activeItem.stackInstance : this.activeStackInstance;
         if (activeItem != null) {
             Vector2 arrowOrigin = new Vector2(
                     activeItem.getLeft() + VStack.CARD_WIDTH * FCardPanel.TARGET_ORIGIN_FACTOR_X + VStack.PADDING + VStack.BORDER_THICKNESS,
@@ -594,6 +608,22 @@ public class VStack extends FDropDown {
                 instance = instance.getSubInstance();
             }
         }
+    }
+
+    /** The entry whose arcs show: the one under the pointer on the Arena board, else the active (top) one. */
+    private StackInstanceDisplay arcItem() {
+        if (isArenaStack() && Forge.magnify) {
+            StackInstanceDisplay over = null;
+            for (FDisplayObject child : getChildren()) { //the top of the stack is added last and drawn over the others
+                if (child instanceof StackInstanceDisplay d && child.screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY)) {
+                    over = d;
+                }
+            }
+            if (over != null) {
+                return over;
+            }
+        }
+        return activeItem;
     }
 
     public class StackInstanceDisplay extends FDisplayObject {
@@ -812,8 +842,7 @@ public class VStack extends FDropDown {
                 return;
             }
             if (arenaCaster == null) {
-                final PlayerView me = MatchController.instance.getCurrentPlayer();
-                arenaCaster = activator.equals(me) ? Forge.getLocalizer().getMessage("lblArenaYou") : activator.getName();
+                arenaCaster = ArenaBoard.isMe(activator) ? Forge.getLocalizer().getMessage("lblArenaYou") : activator.getName();
                 arenaTargetsSig = targetsSignature(stackInstance);
                 arenaTargets = arenaTargetsText(stackInstance);
             } else {

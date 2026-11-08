@@ -14,7 +14,6 @@ import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.card.CardFaceSymbols;
 import forge.card.mana.ManaAtom;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -23,6 +22,8 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
+import forge.toolbox.FDisplayObject;
+import forge.util.CardTranslation;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -158,10 +159,76 @@ public final class ArenaPlayerInfo {
         return -1;
     }
 
+    // ---- hints ------------------------------------------------------------------------------------------------------
+
+    /** What a chip's hint says. */
+    private static final int HINT_NONE = 0, HINT_CMDR = 1, HINT_MANA = 2, HINT_NEXT = 3, HINT_PHASE = 4, HINT_ATTACK = 5,
+            HINT_ATTACK_COST = 6, HINT_GOAD = 7, HINT_COUNTER0 = 10, HINT_STATUS0 = 20;
+    private static final String[] COUNTER_HINTS = {"lblArenaHintPoison", "lblArenaHintEnergy", "lblArenaHintExperience", "lblArenaHintRad",
+            "lblArenaHintTickets"};
+    private static final String[] STATUS_HINTS = {"lblArenaHintMonarch", "lblArenaHintInitiative", "lblArenaHintCitysBlessing"};
+
+    /** The words for chip {@code i} of {@code row} (made while it is hovered, not per frame). */
+    private static String hintFor(final Row row, final int i) {
+        final forge.util.Localizer l = Forge.getLocalizer();
+        final int kind = row.hintKind[i];
+        if (kind == HINT_CMDR && row.card[i] != null) {
+            return l.getMessage("lblArenaCommanderDamageTooltip", CardTranslation.getTranslatedName(row.card[i].getName()), row.hintValue[i]);
+        }
+        if (kind >= HINT_COUNTER0 && kind < HINT_COUNTER0 + COUNTER_HINTS.length) {
+            return l.getMessage(COUNTER_HINTS[kind - HINT_COUNTER0], row.hintValue[i]);
+        }
+        if (kind >= HINT_STATUS0 && kind < HINT_STATUS0 + STATUS_HINTS.length) {
+            return l.getMessage(STATUS_HINTS[kind - HINT_STATUS0]);
+        }
+        switch (kind) {
+            case HINT_MANA: return l.getMessage("lblArenaHintFloatingMana");
+            case HINT_NEXT: return l.getMessage("lblArenaHintPlaysNext");
+            case HINT_PHASE: return l.getMessage("lblArenaHintTheirStep");
+            case HINT_ATTACK: return l.getMessage("lblArenaHintClickToAttack");
+            case HINT_ATTACK_COST: return l.getMessage("lblArenaHintAttackCost");
+            case HINT_GOAD: return l.getMessage("lblArenaHintGoad");
+            default: return null;
+        }
+    }
+
+    /** A player's floating mana as mana symbols ("{B}{B}{W}", "{G}×5"), or null when the pool is empty. Made on rebuild. */
+    private static String manaText(final PlayerView p) {
+        StringBuilder sb = null;
+        for (int i = 0; i < ManaAtom.MANATYPES.length; i++) {
+            final int k = p.getMana(ManaAtom.MANATYPES[i]);
+            if (k <= 0) {
+                continue;
+            }
+            if (sb == null) {
+                sb = new StringBuilder();
+            }
+            final String sym = "{" + MANA_SYMBOLS[i] + "}";
+            if (k <= 3) {
+                for (int j = 0; j < k; j++) {
+                    sb.append(sym);
+                }
+            } else {
+                sb.append(sym).append('\u00d7').append(k);
+            }
+        }
+        return sb == null ? null : sb.toString();
+    }
+
+    /** Forgets what one game made (texts keyed by player names): a new match starts clean. */
+    static void clearGameCaches() {
+        OUT_TEXTS.clear();
+        outGame = null;
+        outCount = 0;
+    }
+
     // ---- a row ------------------------------------------------------------------------------------------------------
 
     /** What a chip shows before its text. */
-    private static final int PIC_NONE = 0, PIC_CARD = 1, PIC_ICON = 2, PIC_SYMBOL = 3;
+    private static final int PIC_NONE = 0, PIC_CARD = 1, PIC_ICON = 2;
+    /** A card picture's corner radius, as a share of its size (a counter's icon is round, a card's is not). */
+    private static final float CARD_CORNER = 0.18f;
+    private static final Color MANA_FILL = ArenaTheme.rgba(16, 20, 28, 230);
 
     /**
      * One caller's row of chips, as last read and laid out. Keep one per place a row is drawn (a portrait's two sides,
@@ -183,12 +250,16 @@ public final class ArenaPlayerInfo {
         private final String[] initial = new String[MAX_CHIPS];
         private final Color[] tint = new Color[MAX_CHIPS];
         private final FSkinImage[] icon = new FSkinImage[MAX_CHIPS];
-        private final String[] symbol = new String[MAX_CHIPS];
         private final String[] text = new String[MAX_CHIPS];
         private final boolean[] label = new boolean[MAX_CHIPS];
         private final Color[] top = new Color[MAX_CHIPS], bottom = new Color[MAX_CHIPS], rim = new Color[MAX_CHIPS], ink = new Color[MAX_CHIPS];
         private final float[] cx = new float[MAX_CHIPS], cyAt = new float[MAX_CHIPS], cw = new float[MAX_CHIPS];
         private final boolean[] shown = new boolean[MAX_CHIPS], clipped = new boolean[MAX_CHIPS];
+        // what a chip says under the pointer: its kind and figure, put into words only while it is hovered
+        private final int[] hintKind = new int[MAX_CHIPS], hintValue = new int[MAX_CHIPS];
+        private int hintFor = -1;
+        private long hintBuiltAt;
+        private String hintText;
         private float h;
         private int rows;
         private FSkinFont figureFont, labelFont, initialFont;
@@ -218,7 +289,8 @@ public final class ArenaPlayerInfo {
             }
             initial[n] = null;
             icon[n] = null;
-            symbol[n] = null;
+            hintKind[n] = HINT_NONE;
+            hintValue[n] = 0;
             n++;
         }
 
@@ -238,19 +310,24 @@ public final class ArenaPlayerInfo {
             n = 0;
             if (lead1 == LEAD_PHASE && leadText1 != null) {
                 add(PIC_NONE, leadText1, true, LEAD_TOP, LEAD_BOTTOM, ArenaTheme.GOLD, ArenaTheme.WHITE);
+                hintKind[n - 1] = HINT_PHASE;
             } else if (lead1 == LEAD_NEXT) {
                 add(PIC_NONE, nextLabel(), true, NEXT_TOP, NEXT_BOTTOM, NEXT_RIM, ArenaTheme.WHITE);
+                hintKind[n - 1] = HINT_NEXT;
             } else if (lead1 == LEAD_ATTACK && leadText1 != null) { // while you declare attackers: whether and how to attack them
                 final Selection.DefenderOption o = ArenaBoard.attackOption(p);
                 final boolean current = MatchController.instance.isHighlighted(p);
-                add(PIC_NONE, leadText1, true, CHIP_FILL, CHIP_FILL, o == null ? ArenaTheme.SELECTABLE : ArenaBoard.attackPlateRim(o, current),
+                add(PIC_NONE, leadText1, true, ArenaArt.HINT_FILL, ArenaArt.HINT_FILL, o == null ? ArenaTheme.SELECTABLE : ArenaBoard.attackPlateRim(o, current),
                         o == null ? ArenaTheme.WHITE : ArenaBoard.attackPlateInk(o));
+                hintKind[n - 1] = o != null && o.state() == Selection.DefenderState.CLOSED ? HINT_NONE : HINT_ATTACK;
                 final String cost = o == null ? null : ArenaBoard.attackCostText(o), goad = o == null ? null : ArenaBoard.attackGoadText(o);
                 if (cost != null) { // what it takes, as chips of their own so they wrap on a narrow plate
-                    add(PIC_NONE, cost, true, CHIP_FILL, CHIP_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                    add(PIC_NONE, cost, true, ArenaArt.HINT_FILL, ArenaArt.HINT_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                    hintKind[n - 1] = HINT_ATTACK_COST;
                 }
                 if (goad != null) {
-                    add(PIC_NONE, goad, true, CHIP_FILL, CHIP_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                    add(PIC_NONE, goad, true, ArenaArt.HINT_FILL, ArenaArt.HINT_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                    hintKind[n - 1] = HINT_GOAD;
                 }
             }
             if ((what1 & CMDR) != 0) {
@@ -262,27 +339,27 @@ public final class ArenaPlayerInfo {
                     if (k > 0) {
                         add(PIC_ICON, figure(k), false, CHIP_FILL, CHIP_FILL, COUNTER_COLORS[i], COUNTER_COLORS[i]);
                         icon[n - 1] = COUNTER_ICONS[i];
+                        hintKind[n - 1] = HINT_COUNTER0 + i;
+                        hintValue[n - 1] = k;
                     }
                 }
             }
             if ((what1 & STATUS) != 0) {
                 readStatus(p);
             }
-            if ((what1 & MANA) != 0) {
-                for (int i = 0; i < ManaAtom.MANATYPES.length; i++) {
-                    final int k = p.getMana(ManaAtom.MANATYPES[i]);
-                    if (k > 0) {
-                        add(PIC_SYMBOL, figure(k), false, CHIP_FILL, CHIP_FILL, MANA_RIM, ArenaTheme.WHITE);
-                        symbol[n - 1] = MANA_SYMBOLS[i];
-                    }
+            if ((what1 & MANA) != 0) { // floating mana: one chip of mana symbols, so it never reads as a counter
+                final String pool = manaText(p);
+                if (pool != null) {
+                    add(PIC_NONE, pool, true, MANA_FILL, MANA_FILL, MANA_RIM, ArenaTheme.WHITE);
+                    hintKind[n - 1] = HINT_MANA;
                 }
             }
             // two commanders with the same initial (partners Tymna and Thrasios) show two letters each, so they tell apart
             for (int i = 0; i < n; i++) {
                 for (int j = i + 1; j < n; j++) {
                     if (pic[i] == PIC_CARD && pic[j] == PIC_CARD && card[i] != card[j] && initial[i] != null && initial[i].equals(initial[j])) {
-                        initial[i] = twoLetters(card[i].getName());
-                        initial[j] = twoLetters(card[j].getName());
+                        initial[i] = twoLetters(CardTranslation.getTranslatedName(card[i].getName()));
+                        initial[j] = twoLetters(CardTranslation.getTranslatedName(card[j].getName()));
                     }
                 }
             }
@@ -322,6 +399,8 @@ public final class ArenaPlayerInfo {
                         final Color c = damage >= CMDR_NEAR_DAMAGE ? CMDR_NEAR : CMDR_COLOR;
                         add(PIC_CARD, figure(damage), false, CHIP_FILL, CHIP_FILL, c, c);
                         setCard(cmdr, null);
+                        hintKind[n - 1] = HINT_CMDR;
+                        hintValue[n - 1] = damage;
                     }
                 }
             }
@@ -335,26 +414,25 @@ public final class ArenaPlayerInfo {
             try {
                 for (int i = 0; i < command.size(); i++) {
                     final CardView c = command.get(i);
-                    final int status = statusOf(c);
+                    final int status = c == null ? -1 : statusOf(c);
                     if (status >= 0) {
                         final String l = statusLabel(status);
                         add(PIC_CARD, l, true, STATUS_FILL, CHIP_FILL, STATUS_GOLD, STATUS_GOLD);
                         setCard(c, l);
+                        hintKind[n - 1] = HINT_STATUS0 + status;
                     }
                 }
-            } catch (final IndexOutOfBoundsException e) {
-                // the zone changed under us: the next rebuild has it
+            } catch (final RuntimeException e) {
+                // the zone changed under us (a card left, the list was swapped): the next rebuild has it
             }
         }
 
         /** A card's picture for the chip just added: its art, or (none loaded yet) its colours and initial. */
         private void setCard(final CardView c, final String nameForInitial) {
             final int i = n - 1;
-            if (card[i] != c || art[i] == null) { // the same card as last time: keep its picture
-                card[i] = c;
-                art[i] = ArenaArt.circleArtOf(c);
-            }
-            initial[i] = initial(nameForInitial != null ? nameForInitial : c.getName());
+            card[i] = c;
+            art[i] = ArenaArt.circleArtOf(c); // looked up at each rebuild (a cache read), never kept past the next
+            initial[i] = initial(nameForInitial != null ? nameForInitial : CardTranslation.getTranslatedName(c.getName()));
             if (tint[i] == null) {
                 tint[i] = new Color(); // one per slot, reused by every rebuild
             }
@@ -406,7 +484,8 @@ public final class ArenaPlayerInfo {
         }
 
         private float width(final int i) {
-            final float tw = ArenaArt.cachedTextWidth(text[i], label[i] ? labelFont : figureFont);
+            final float tw = hintKind[i] == HINT_MANA || (label[i] && text[i].indexOf('{') >= 0)
+                    ? ArenaArt.symbolTextWidth(text[i], labelFont) : ArenaArt.cachedTextWidth(text[i], label[i] ? labelFont : figureFont);
             if (pic[i] == PIC_NONE) {
                 return tw + 2 * h * PAD_PLAIN;
             }
@@ -415,6 +494,39 @@ public final class ArenaPlayerInfo {
 
         private float picSize(final int i) {
             return pic[i] == PIC_CARD ? h - 2 * Math.max(1.5f, h * RING_INSET) : h * ICON;
+        }
+
+        /** The chip under the mouse, or -1 (the row draws in the owner's coordinates). */
+        private int chipUnderPointer(final FDisplayObject owner) {
+            if (owner == null || !Forge.magnify) {
+                return -1;
+            }
+            final float mx = Forge.mouseMovedX - owner.screenPos.x, my = Forge.mouseMovedY - owner.screenPos.y;
+            for (int i = 0; i < n; i++) {
+                if (shown[i] && mx >= cx[i] && mx < cx[i] + cw[i] && my >= cyAt[i] - h / 2f && my < cyAt[i] + h / 2f) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        /** What the chip under the pointer means, on a hint plate below it (put into words once while it stays hovered). */
+        private void drawHint(final Graphics g, final FDisplayObject owner) {
+            final int i = chipUnderPointer(owner);
+            if (i < 0 || hintKind[i] == HINT_NONE) {
+                return;
+            }
+            if (i != hintFor || hintBuiltAt != builtAt || hintText == null) {
+                hintFor = i;
+                hintBuiltAt = builtAt;
+                hintText = hintFor(this, i);
+            }
+            if (hintText == null) {
+                return;
+            }
+            final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(16), h * 0.7f));
+            ArenaArt.hint(g, hintText, f, cx[i] + cw[i] / 2f, cyAt[i] + h / 2f + Math.max(2f, h * GAP), -owner.screenPos.x,
+                    ArenaBoard.windowW() - owner.screenPos.x);
         }
 
         /** Draws what the row holds. No game reads, no allocation. */
@@ -439,21 +551,23 @@ public final class ArenaPlayerInfo {
             if (pic[i] != PIC_NONE) {
                 final float s = picSize(i), pcx = left + h * PAD_LEFT + s / 2f;
                 switch (pic[i]) {
-                    case PIC_CARD:
-                        if (art[i] != null) {
-                            ArenaArt.circleImage(g, art[i], pcx, cy, s);
+                    case PIC_CARD: {
+                        // a card's own picture: a rounded square (a counter's icon is round), its initial until art loads
+                        final float r = s * CARD_CORNER;
+                        if (ArenaArt.isLive(art[i])) {
+                            g.drawTiltedImage(art[i], pcx - s / 2f, cy - s / 2f, s, s, 0f, 0f, 0f, 1f, r, 0f, 0f, 1f);
                         } else {
-                            g.fillSmoothCircle(tint[i], pcx, cy, s / 2f);
+                            g.fillSmoothRoundRect(tint[i], pcx - s / 2f, cy - s / 2f, s, s, r);
                             ArenaArt.textBold(g, initial[i], initialFont, label[i] ? rim[i] : ArenaTheme.WHITE,
                                     pcx - s / 2f, cy - s / 2f, s, s, Align.center);
                         }
-                        g.drawSmoothCircle(Math.max(1f, h * CIRCLE_RIM), rim[i], pcx, cy, s / 2f);
+                        g.drawSmoothRoundRect(Math.max(1f, h * CIRCLE_RIM), rim[i], pcx - s / 2f, cy - s / 2f, s, s, r);
                         break;
+                    }
                     case PIC_ICON:
                         g.drawImage(icon[i], pcx - s / 2f, cy - s / 2f, s, s);
                         break;
                     default:
-                        CardFaceSymbols.drawSymbol(symbol[i], g, pcx - s / 2f, cy - s / 2f, s, s);
                         break;
                 }
                 tx = pcx + s / 2f + h * TEXT_GAP;
@@ -462,7 +576,7 @@ public final class ArenaPlayerInfo {
             if (clipped[i]) {
                 g.startClip(left, top0, w, h);
             }
-            if (label[i] && text[i].indexOf('{') >= 0) { // a cost ("Pay {2} each"): mana symbols, as on the cards
+            if (hintKind[i] == HINT_MANA || (label[i] && text[i].indexOf('{') >= 0)) { // mana symbols, as on the cards
                 ArenaArt.symbolText(g, text[i], labelFont, ink[i], tx, top0, Math.max(textW, 1f), h);
             } else if (label[i]) {
                 ArenaArt.textShadowed(g, text[i], labelFont, ink[i], tx, top0, Math.max(textW, 1f), h, pic[i] == PIC_NONE ? Align.center : Align.left);
@@ -481,8 +595,8 @@ public final class ArenaPlayerInfo {
      * {@code lead} ({@link #LEAD_PHASE} or {@link #LEAD_ATTACK} with {@code leadText}, or {@link #LEAD_NEXT}) comes first. A row that does not
      * fit takes smaller chips. Returns the number of rows used.
      */
-    public static int draw(final Graphics g, final Row row, final PlayerView player, final int what, final int lead, final String leadText,
-            final float x, final float cy, final float h, final boolean rightToLeft, final float maxW) {
+    public static int draw(final Graphics g, final Row row, final FDisplayObject owner, final PlayerView player, final int what, final int lead,
+            final String leadText, final float x, final float cy, final float h, final boolean rightToLeft, final float maxW) {
         if (player == null) {
             return 0;
         }
@@ -490,7 +604,13 @@ public final class ArenaPlayerInfo {
             row.rebuild(player, what, lead, leadText, x, cy, h, rightToLeft, maxW);
         }
         row.drawChips(g);
+        row.drawHint(g, owner);
         return row.rows;
+    }
+
+    /** Whether the pointer is over one of this row's chips (the owner's click can act on it). */
+    public static boolean isOverChip(final Row row, final FDisplayObject owner) {
+        return row.chipUnderPointer(owner) >= 0;
     }
 
     // ---- who is out -------------------------------------------------------------------------------------------------

@@ -362,6 +362,17 @@ public class VPlayerPanel extends FContainer {
     }
 
     // ---- the Arena board ------------------------------------------------------------------------------------------
+    private boolean arenaSeatLadder;
+
+    /** Whether the mouse is over one of this panel's parts (laid out in its coordinates; drawn or not). */
+    private boolean isPointerOver(FDisplayObject part) {
+        if (!Forge.magnify) {
+            return false;
+        }
+        final float mx = Forge.mouseMovedX - screenPos.x, my = Forge.mouseMovedY - screenPos.y;
+        final float pad = Utils.scale(4);
+        return mx >= part.getLeft() - pad && mx < part.getRight() + pad && my >= part.getTop() - pad && my < part.getBottom() + pad;
+    }
     private ArenaPlayerParts.Piles arenaPiles;
     private ArenaPlayerParts.Castables arenaCastables;
     private ArenaPlayerParts.NamePlate arenaName;
@@ -414,13 +425,17 @@ public class VPlayerPanel extends FContainer {
         final float cx = Math.round(width / 2f), cy = ArenaBoard.portraitCenterY(local, seat) - top;
         avatar.setArenaOpponent(!local);
         avatar.setBounds(cx - d / 2f, cy - d / 2f, d, d);
+        arenaSeatLadder = seat;
         phaseIndicator.setVisible(!seat);
+        final float ladderH = Math.round(ArenaBoard.windowH() * 0.024f);
+        final float span = Math.round(d * 1.7f);
+        phaseIndicator.setArenaLadder(d);
         if (!seat) {
-            final float ladderH = Math.round(ArenaBoard.windowH() * 0.024f);
-            final float span = Math.round(d * 1.7f);
-            phaseIndicator.setArenaLadder(d);
             phaseIndicator.setBounds(cx - span, cy - ladderH / 2f + Math.round(d * (local ? 0.04f : -0.04f)), 2 * span, ladderH);
+        } else { //a seat's ladder (your stops in their turns) comes out under its portrait while the pointer is there
+            phaseIndicator.setBounds(cx - span, cy + d / 2f + Math.round(d * 0.42f), 2 * span, ladderH);
         }
+        phaseIndicator.setArenaPopup(seat, seat ? Forge.getLocalizer().getMessage("lblArenaSeatStops", player.getName()) : null);
 
         //piles, name plate, an opponent's hand
         ArenaBoard.piles(local, seat, left, width, arenaRect);
@@ -507,6 +522,8 @@ public class VPlayerPanel extends FContainer {
     /** Back to the default look: what the Arena layout hid comes back, its own parts go. */
     private void leaveArenaLayout() {
         arenaLaidOut = false;
+        arenaSeatLadder = false;
+        phaseIndicator.setArenaPopup(false, null);
         for (InfoTab tab : tabs) {
             tab.setVisible(true);
             tab.setDisplayVisible(tab == selectedTab);
@@ -1718,6 +1735,9 @@ public class VPlayerPanel extends FContainer {
     @Override
     public void draw(Graphics g) {
         if (arenaLaidOut && ArenaMatchLayout.applies()) {
+            if (arenaSeatLadder) { //the seat's phase stops show while the pointer is on its portrait or on the ladder itself
+                phaseIndicator.setVisible(isPointerOver(avatar) || (phaseIndicator.isVisible() && isPointerOver(phaseIndicator)));
+            }
             super.draw(g);
             return;
         }

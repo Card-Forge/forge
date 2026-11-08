@@ -1,16 +1,20 @@
 package forge.screens.match.arena;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Forge;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
@@ -76,6 +80,7 @@ public final class ArenaBoard {
     private static GameView tableGame;
     private static boolean seatGame, declaringAttack;
     private static PlayerView nextPlayer;
+    private static long nextReadAt = Long.MIN_VALUE / 2;
 
     /** Brings the per-frame answers up to date: an index walk over the players, no allocation. */
     private static void refreshTable() {
@@ -85,41 +90,71 @@ public final class ArenaBoard {
             return;
         }
         tableFrame = frame;
-        tableGame = game;
+        if (game != tableGame) {
+            tableGame = game;
+            nextReadAt = Long.MIN_VALUE / 2;
+        }
         seatGame = false;
         declaringAttack = false;
-        nextPlayer = null;
         final FCollectionView<PlayerView> players = game == null ? null : game.getPlayers();
         if (players == null) {
+            nextPlayer = null;
             return;
         }
         final int n = players.size();
         int living = 0;
-        final PlayerView turn = game.getPlayerTurn();
-        int turnAt = -1;
         for (int i = 0; i < n; i++) {
-            final PlayerView p = players.get(i);
-            if (!p.getHasLost()) {
+            if (!players.get(i).getHasLost()) {
                 living++;
-            }
-            if (p == turn) {
-                turnAt = i;
             }
         }
         seatGame = (living == 0 ? n : living) > 2;
-        if (turnAt >= 0) {
-            for (int k = 1; k < n; k++) { // the next player still in the game, in seat order
-                final PlayerView p = players.get((turnAt + k) % n);
-                if (!p.getHasLost()) {
-                    nextPlayer = p;
-                    break;
+        if (TimeUtils.timeSinceMillis(nextReadAt) >= ArenaPlayerInfo.REFRESH_MS) {
+            nextReadAt = TimeUtils.millis();
+            nextPlayer = readNextTurn(game, players);
+        }
+        // you are choosing attackers (your turn, or one you control): the prompt says which defenders it allows (the
+        // engine's list, with costs and goad); with only one there is nothing to choose, so the board says nothing
+        declaringAttack = MatchController.instance.getSelection().defenders().size() > 1;
+        refreshCombat(game);
+    }
+
+    /**
+     * Who takes the next turn: the engine's answer where the game runs here (it counts extra turns and a reversed turn
+     * order), else the next player still in the game in seat order.
+     */
+    private static PlayerView readNextTurn(final GameView game, final FCollectionView<PlayerView> players) {
+        try {
+            final forge.game.Game local = game.getGame();
+            if (local != null && local.getPhaseHandler() != null) {
+                final forge.game.player.Player next = local.getPhaseHandler().getNextTurn();
+                if (next != null) {
+                    return next.getView();
                 }
             }
+        } catch (final RuntimeException e) {
+            // the engine changed under us: the seat order below
         }
-        // you are declaring attackers: the prompt says which defenders it allows (the engine's list, with costs and goad);
-        // with only one there is nothing to choose, so the board says nothing about it
-        final List<Selection.DefenderOption> options = MatchController.instance.getSelection().defenders();
-        declaringAttack = options.size() > 1 && turn != null && MatchController.instance.isLocalPlayer(turn);
+        final PlayerView turn = game.getPlayerTurn();
+        final int n = players.size();
+        int turnAt = -1;
+        for (int i = 0; i < n; i++) {
+            if (players.get(i) == turn) {
+                turnAt = i;
+            }
+        }
+        for (int k = 1; turnAt >= 0 && k < n; k++) {
+            final PlayerView p = players.get((turnAt + k) % n);
+            if (!p.getHasLost()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /** Whether this is a player at this screen (the one check every Arena view uses for "you"). */
+    public static boolean isMe(final PlayerView p) {
+        return p != null && MatchController.instance.isLocalPlayer(p);
     }
 
     /** Whether opponents sit side by side along the top (more than two players still in the game). */
@@ -128,10 +163,16 @@ public final class ArenaBoard {
         return seatGame;
     }
 
-    /** Who plays after the current turn: the next player still in the game in seat order, or null. */
+    /** Who plays after the current turn (extra turns and turn order counted where the game runs here), or null. */
     public static PlayerView nextTurnPlayer() {
         refreshTable();
         return nextPlayer;
+    }
+
+    /** Whether the game waits on this player (they hold priority), not you: their seat says so at once. */
+    public static boolean isWaitingOn(final PlayerView p) {
+        final GameView game = MatchController.instance.getGameView();
+        return p != null && game != null && !game.isGameOver() && !isMe(p) && !p.getHasLost() && p.getHasPriority();
     }
 
     /**
@@ -159,6 +200,124 @@ public final class ArenaBoard {
         return null;
     }
 
+    // ---- combat, read at most every ArenaPlayerInfo.REFRESH_MS ------------------------------------------------------
+    private static long combatAt = Long.MIN_VALUE / 2;
+    private static Object combatFor;
+    private static final IdentityHashMap<CardView, CardView> BLOCKS = new IdentityHashMap<>();
+    private static int myAttackers, myBlockers, attackCostTotal, incoming;
+    private static boolean attackCostKnown;
+
+    /**
+     * Reads the combat (under its lock: the game thread changes it): which attacker each blocker blocks, how many of
+     * yours attack or block, the generic mana your declared attacks will cost, and the damage coming at you unblocked.
+     */
+    private static void refreshCombat(final GameView game) {
+        final CombatView combat = game == null ? null : game.getCombat();
+        if (combat == combatFor && TimeUtils.timeSinceMillis(combatAt) < ArenaPlayerInfo.REFRESH_MS) {
+            return;
+        }
+        combatFor = combat;
+        combatAt = TimeUtils.millis();
+        BLOCKS.clear();
+        myAttackers = myBlockers = attackCostTotal = incoming = 0;
+        attackCostKnown = true;
+        if (combat == null) {
+            return;
+        }
+        try {
+            synchronized (combat) {
+                final List<Selection.DefenderOption> options = MatchController.instance.getSelection().defenders();
+                for (final CardView attacker : combat.getAttackers()) {
+                    final GameEntityView defender = combat.getDefender(attacker);
+                    final boolean mine = isMe(attacker.getController());
+                    if (mine) {
+                        myAttackers++;
+                        final String cost = costFor(options, defender);
+                        if (cost != null) {
+                            final int generic = genericMana(cost);
+                            if (generic < 0) {
+                                attackCostKnown = false;
+                            } else {
+                                attackCostTotal += generic;
+                            }
+                        }
+                    }
+                    final FCollectionView<CardView> blockers = combat.getPlannedBlockers(attacker);
+                    final boolean blocked = blockers != null && !blockers.isEmpty();
+                    if (blocked) {
+                        for (final CardView b : blockers) {
+                            BLOCKS.put(b, attacker);
+                            if (isMe(b.getController())) {
+                                myBlockers++;
+                            }
+                        }
+                    } else if (defender instanceof PlayerView p && isMe(p) && attacker.getCurrentState() != null) {
+                        incoming += Math.max(0, attacker.getCurrentState().getPower());
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            combatAt = Long.MIN_VALUE / 2; // changed under us: read again next frame
+        }
+    }
+
+    private static String costFor(final List<Selection.DefenderOption> options, final GameEntityView defender) {
+        for (int i = 0, n = options.size(); i < n; i++) {
+            final Selection.DefenderOption o = options.get(i);
+            if (o.defender().equals(defender)) {
+                return o.state() == Selection.DefenderState.COSTS ? o.cost() : null;
+            }
+        }
+        return null;
+    }
+
+    /** The generic mana in a cost like "{2}" (or "{1}{1}"), or -1 if it is anything else. */
+    private static int genericMana(final String cost) {
+        int total = 0, at = 0;
+        while (at < cost.length()) {
+            final int close = cost.indexOf('}', at);
+            if (cost.charAt(at) != '{' || close < 0) {
+                return -1;
+            }
+            try {
+                total += Integer.parseInt(cost.substring(at + 1, close));
+            } catch (final NumberFormatException e) {
+                return -1;
+            }
+            at = close + 1;
+        }
+        return total;
+    }
+
+    /** Which attacker this card blocks, or null. */
+    public static CardView blockedBy(final CardView blocker) {
+        refreshTable();
+        return BLOCKS.get(blocker);
+    }
+
+    /** How many of your creatures attack now, and how much generic mana that costs (-1: not just mana). */
+    public static int myAttackerCount() {
+        refreshTable();
+        return myAttackers;
+    }
+
+    public static int myAttackCost() {
+        refreshTable();
+        return attackCostKnown ? attackCostTotal : -1;
+    }
+
+    public static int myBlockerCount() {
+        refreshTable();
+        return myBlockers;
+    }
+
+    /** Combat damage coming at you from unblocked attackers (0 outside combat). */
+    public static int incomingDamage() {
+        refreshTable();
+        return incoming;
+    }
+
+    // ---- attack plates ------------------------------------------------------------------------------------------------
     private static final Map<Selection.DefenderOption, String> PLATE_TEXTS = new HashMap<>(), CURRENT_TEXTS = new HashMap<>();
     private static final Color CLOSED_RIM = ArenaTheme.rgb(0x6A655E), CLOSED_TEXT = ArenaTheme.rgb(0x9A958C), COST_RIM = ArenaTheme.rgb(0xFFB020);
 
@@ -202,7 +361,7 @@ public final class ArenaBoard {
     }
 
     private static final Map<String, String> COST_TEXTS = new HashMap<>();
-    private static final String[] GOAD_TEXTS = new String[8];
+    private static final Map<Integer, String> GOAD_TEXTS = new HashMap<>();
 
     /** "Pay {2} each" when every creature that could attack them has to pay (Propaganda...), else null; made once per cost. */
     public static String attackCostText(final Selection.DefenderOption o) {
@@ -217,16 +376,17 @@ public final class ArenaBoard {
         return s;
     }
 
-    /** "Goaded ×2: attack others" when they goaded creatures of yours (those must attack someone else if they can). */
+    /** "Goaded ×2: attack others" when they goaded creatures of yours that can attack (those must attack someone else). */
     public static String attackGoadText(final Selection.DefenderOption o) {
         if (o.goaded() <= 0) {
             return null;
         }
-        final int i = Math.min(o.goaded(), GOAD_TEXTS.length) - 1;
-        if (GOAD_TEXTS[i] == null) {
-            GOAD_TEXTS[i] = Forge.getLocalizer().getMessage("lblArenaGoadedMustAttackOthers", String.valueOf(i + 1));
+        String s = GOAD_TEXTS.get(o.goaded());
+        if (s == null) {
+            s = Forge.getLocalizer().getMessage("lblArenaGoadedMustAttackOthers", String.valueOf(o.goaded()));
+            GOAD_TEXTS.put(o.goaded(), s);
         }
-        return GOAD_TEXTS[i];
+        return s;
     }
 
     /** The rim of a defender's plate: chosen, open, at a cost, or closed. */
@@ -244,6 +404,19 @@ public final class ArenaBoard {
     public static boolean isAttackOption(final GameEntityView entity) {
         final Selection.DefenderOption o = attackOption(entity);
         return o != null && o.state() != Selection.DefenderState.CLOSED;
+    }
+
+    /** Forgets what one game made (texts keyed by its defenders and names): a new match starts clean. */
+    public static void clearGameCaches() {
+        PLATE_TEXTS.clear();
+        CURRENT_TEXTS.clear();
+        COST_TEXTS.clear();
+        GOAD_TEXTS.clear();
+        BLOCKS.clear();
+        combatFor = null;
+        tableGame = null;
+        nextPlayer = null;
+        ArenaPlayerInfo.clearGameCaches();
     }
 
     // ---- portrait --------------------------------------------------------------------------------------------------

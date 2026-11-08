@@ -287,11 +287,103 @@ public class MatchScreen extends FScreen {
             final float pw = Math.max(ArenaTheme.px(340), Math.round(height * 0.4f));
             final float ph = bottomPlayerPrompt.getArenaDecisionHeight(pw, height);
             arenaPromptHeight = ph;
-            arenaRect.set(Math.round((width - pw) / 2), Math.max(ArenaTheme.px(8), Math.round(height * ArenaMatchLayout.DECISION_BOTTOM) - ph), pw, ph);
+            arenaPromptSel = MatchController.instance.getSelection();
+            placeDecisionClear(width, height, pw, ph);
         }
         bottomPlayerPrompt.setArenaMode(mode);
         bottomPlayerPrompt.setBounds(arenaRect.x, arenaRect.y, arenaRect.width, arenaRect.height);
         bottomPlayerPrompt.revalidate();
+    }
+
+    private Object arenaPromptSel;
+    private final Rectangle arenaTry = new Rectangle();
+    private final List<Rectangle> arenaPicks = new ArrayList<>();
+    private int arenaPickCount;
+
+    /**
+     * Where a decision goes so that it covers nothing you can pick: its usual place above your portrait, else the gap
+     * between the opponents' rows and yours, over your hand, or to either side - the first that covers none of the
+     * highlighted cards, players or stack entries (else the one that covers fewest). Result in arenaRect.
+     */
+    private void placeDecisionClear(final float width, final float height, final float pw, final float ph) {
+        collectArenaPicks();
+        final float margin = Math.round(width * 0.02f);
+        final float usualTop = Math.max(ArenaTheme.px(8), Math.round(height * ArenaMatchLayout.DECISION_BOTTOM) - ph);
+        final float centreX = Math.round((width - pw) / 2);
+        final float[][] spots = {
+                {centreX, usualTop},
+                {centreX, Math.round(height * 0.33f)},
+                {centreX, Math.round(height * 0.985f) - ph},
+                {margin, usualTop},
+                {width - pw - margin, usualTop},
+        };
+        int best = -1, bestHits = Integer.MAX_VALUE;
+        for (int i = 0; i < spots.length; i++) {
+            arenaTry.set(spots[i][0], Math.max(ArenaTheme.px(8), spots[i][1]), pw, ph);
+            final int hits = countPicksUnder(arenaTry);
+            if (hits < bestHits) {
+                bestHits = hits;
+                best = i;
+                if (hits == 0) {
+                    break;
+                }
+            }
+        }
+        arenaRect.set(spots[best][0], Math.max(ArenaTheme.px(8), spots[best][1]), pw, ph);
+    }
+
+    private int countPicksUnder(final Rectangle r) {
+        int n = 0;
+        for (int i = 0; i < arenaPickCount; i++) {
+            if (r.overlaps(arenaPicks.get(i))) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** The screen rects of what the prompt lets you pick now: cards on the board and in your hand, portraits, stack entries. */
+    private void collectArenaPicks() {
+        arenaPickCount = 0;
+        final MatchController mc = MatchController.instance;
+        for (final VPlayerPanel panel : playerPanelsList) {
+            for (final CardAreaPanel p : panel.getField().getCardPanels()) {
+                final CardView c = p.getCard();
+                if (mc.isSelectable(c) || mc.isHighlighted(c) || mc.isActionable(c)) {
+                    addPick(p.screenPos);
+                }
+            }
+            final PlayerView pv = panel.getPlayer();
+            if (mc.isSelectable(pv) || mc.isHighlighted(pv) || forge.screens.match.arena.ArenaBoard.isAttackOption(pv)) {
+                addPick(panel.getAvatar().screenPos);
+            }
+        }
+        for (final VPlayerPanel.InfoTab tab : bottomPlayerPanel.getTabs()) {
+            if (tab.getDisplayArea() instanceof VZoneDisplay z && z.isArenaHand()) {
+                for (final FDisplayObject child : z.getChildren()) {
+                    if (child instanceof FCardPanel cp && cp.getCard() != null && (mc.isSelectable(cp.getCard()) || mc.isHighlighted(cp.getCard()))) {
+                        addPick(child.screenPos);
+                    }
+                }
+            }
+        }
+        if (stack.isVisible()) {
+            for (final FDisplayObject child : stack.getChildren()) {
+                if (child instanceof VStack.StackInstanceDisplay d && mc.isSelectable(d.stackInstance)) {
+                    addPick(child.screenPos);
+                }
+            }
+        }
+    }
+
+    private void addPick(final Rectangle r) {
+        if (r.width <= 0 || r.height <= 0) {
+            return;
+        }
+        if (arenaPickCount == arenaPicks.size()) {
+            arenaPicks.add(new Rectangle());
+        }
+        arenaPicks.get(arenaPickCount++).set(r);
     }
 
     /** Leaving the Arena board: the menu bar comes back, the corner menu goes. */
@@ -848,7 +940,10 @@ public class MatchScreen extends FScreen {
             final ArenaMatchLayout.PromptMode mode = bottomPlayerPrompt.getArenaMode();
             final boolean decisionResized = mode == ArenaMatchLayout.PromptMode.DECISION
                     && bottomPlayerPrompt.getArenaDecisionHeight(bottomPlayerPrompt.getWidth(), getHeight()) != arenaPromptHeight;
-            if (mode != arenaPromptMode || decisionResized) {
+            //and when what you can pick changes (it moves off the cards you can pick) or a button comes or goes
+            final boolean picksChanged = mode == ArenaMatchLayout.PromptMode.DECISION
+                    && (MatchController.instance.getSelection() != arenaPromptSel || bottomPlayerPrompt.arenaButtonsChanged());
+            if (mode != arenaPromptMode || decisionResized || picksChanged) {
                 placeArenaPrompt(getWidth(), getHeight());
                 forge.screens.match.arena.ArenaMotion.requestFrame();
             }
@@ -886,6 +981,9 @@ public class MatchScreen extends FScreen {
         }
         drawArcs(g);
         CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
+        if (arenaLaidOut && isArenaBoard() && bottomPlayerPrompt.isVisible() && arenaPromptMode == ArenaMatchLayout.PromptMode.DECISION) {
+            bottomPlayerPrompt.drawLate(g); //a decision above the arcs: they never run through its words
+        }
         forge.screens.match.arena.ArenaTurnBanner.draw(g, getWidth(), getHeight());
         drawCardPreview(g);
     }
@@ -1542,6 +1640,7 @@ public class MatchScreen extends FScreen {
         CardAreaPanel.resetForNewGame();
         forge.screens.match.arena.ArenaCardPreview.clear();
         forge.screens.match.arena.ArenaTurnBanner.clear();
+        forge.screens.match.arena.ArenaBoard.clearGameCaches(); //what one game made (names, defenders) starts afresh
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             for (CardAreaPanel p : playerPanel.getField().getCardPanels()) {
                 p.reset();

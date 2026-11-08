@@ -54,7 +54,7 @@ public final class ArenaPrompt {
     }
 
     private static boolean isMyTurn(final GameView game) {
-        return game != null && game.getPlayerTurn() != null && MatchController.instance.isLocalPlayer(game.getPlayerTurn());
+        return game != null && ArenaBoard.isMe(game.getPlayerTurn());
     }
 
     /** Where passing leads, under the action button (only on your turn with an empty stack). */
@@ -161,6 +161,62 @@ public final class ArenaPrompt {
         final float soft = Math.min(ArenaTheme.px(20), h / 2f - 1);
         g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.37f * alpha, S1), x + soft, y + soft, w - 2 * soft, h - 2 * soft, soft, soft);
         g.fillSmoothRoundRect(ArenaTheme.fadeBy(SHADE, alpha, S1), x + soft / 2f, y + soft / 2f, w - soft, h - soft, soft);
+    }
+
+    private static final Color PANEL = ArenaTheme.rgba(8, 10, 16, 236);
+    private static String endTurnHint, undoHint, autoPassText;
+    private static long autoPassAt = Long.MIN_VALUE / 2;
+
+    public static String endTurnHint() {
+        if (endTurnHint == null) {
+            endTurnHint = msg("lblArenaHintEndTurn");
+        }
+        return endTurnHint;
+    }
+
+    public static String undoHint() {
+        if (undoHint == null) {
+            undoHint = msg("lblArenaHintUndo");
+        }
+        return undoHint;
+    }
+
+    /** A hint plate above a button (in its coordinates), kept inside the window. */
+    public static void drawHintAbove(final Graphics g, final String text, final forge.toolbox.FDisplayObject button) {
+        final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(16), ArenaBoard.windowH() * 0.015f));
+        ArenaArt.hint(g, text, f, button.getWidth() / 2f, -ArenaArt.hintHeight(f) - ArenaTheme.px(6), -button.screenPos.x,
+                ArenaBoard.windowW() - button.screenPos.x);
+    }
+
+    /**
+     * While auto-passing is on (End turn, F2-F4, the stack's "yield"), a plate above the priority buttons says until when
+     * ("Yielding until end of turn"); the game's own words, read again at most every 100 ms.
+     */
+    public static void drawAutoPass(final Graphics g, final forge.toolbox.FDisplayObject prompt) {
+        if (com.badlogic.gdx.utils.TimeUtils.timeSinceMillis(autoPassAt) >= ArenaPlayerInfo.REFRESH_MS) {
+            autoPassAt = com.badlogic.gdx.utils.TimeUtils.millis();
+            autoPassText = MatchController.instance.getAutoPassText();
+        }
+        if (autoPassText == null || autoPassText.isEmpty()) {
+            return;
+        }
+        final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(16), ArenaBoard.windowH() * 0.015f));
+        ArenaArt.hint(g, autoPassText, f, prompt.getWidth() / 2f, -ArenaArt.hintHeight(f) - ArenaTheme.px(6), -prompt.screenPos.x,
+                ArenaBoard.windowW() - prompt.screenPos.x, ArenaTheme.SELECTABLE, ArenaTheme.WHITE);
+    }
+
+    /**
+     * A decision's own ground: a solid dark panel with a gold rim behind its words and buttons, so the board under it never
+     * shows through (it is drawn above the arcs, and placed where it covers nothing you can pick).
+     */
+    public static void drawDecisionPanel(final Graphics g, final float x, final float y, final float w, final float h, final float alpha) {
+        if (w <= 0 || h <= 0) {
+            return;
+        }
+        final float r = Math.min(ArenaTheme.px(16), h / 4f);
+        g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.6f * alpha, S1), x, y + ArenaTheme.px(4), w, h, r, ArenaTheme.px(14));
+        g.fillSmoothRoundRect(ArenaTheme.fadeBy(PANEL, alpha, S1), x, y, w, h, r);
+        g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), ArenaTheme.alpha(ArenaTheme.GOLD, 0.8f * alpha, S1), x, y, w, h, r);
     }
 
     /** One of the prompt's buttons: the Arena pill (molten when primary), its label fitted inside. */
