@@ -672,6 +672,13 @@ public final class ArenaCards {
         }
     }
 
+    /** The soft shadow a whole card casts down and to the left (Swing Sprite: 3.9% of its height, moved by 40% of that). */
+    public static void cardShadow(final Graphics g, final float x, final float y, final float w, final float h, final float radius) {
+        final float spread = Math.max(ArenaTheme.px(8), Math.round(h * 0.039f));
+        final float cast = Math.max(2f, Math.round(spread * 0.4f));
+        g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.85f, S1), x - cast, y + cast, w, h, radius, spread);
+    }
+
     // ---- card backs ------------------------------------------------------------------------------------------------
 
     /** The back of a card: the owner's sleeve, or (for the default sleeve, a small logo that does not enlarge well) an indigo field in a bronze border with a compass star. */

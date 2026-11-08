@@ -276,8 +276,18 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-        if (isArenaHand()) {
-            return true; //the fan always fits: nothing to scroll or reveal
+        if (isArenaHand()) { //the fan always fits; the wheel walks the raised card along it, so each can be read in turn
+            final java.util.List<CardAreaPanel> panels = cardPanels.get();
+            if (!panels.isEmpty() && moreVertical && deltaY != 0 && !com.badlogic.gdx.Gdx.input.isTouched()) {
+                int i = arenaRaised == null ? -1 : panels.indexOf(arenaRaised);
+                i = Math.max(0, Math.min(panels.size() - 1, i < 0 ? panels.size() / 2 : i + (deltaY < 0 ? 1 : -1)));
+                for (CardAreaPanel p : panels) {
+                    p.setHovered(p == panels.get(i));
+                }
+                MatchScreen.setPotentialListener(java.util.Arrays.asList((forge.toolbox.FDisplayObject) panels.get(i)));
+                panels.get(i).setHovered(true);
+            }
+            return true;
         }
         return panImpl(x, y, deltaX, deltaY, moreVertical);
     }

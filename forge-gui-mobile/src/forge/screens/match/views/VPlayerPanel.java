@@ -494,6 +494,16 @@ public class VPlayerPanel extends FContainer {
         return arenaLaidOut;
     }
 
+    /** On the Arena board: the screen rect of this player's pile for a zone (cards fly to it), or null. */
+    public Rectangle getArenaPileRect(ZoneType zone) {
+        return arenaLaidOut ? arenaPiles.getPileScreenRect(zone) : null;
+    }
+
+    /** On the Arena board: where an opponent's hand of card backs is on screen, or null (yours is the fan). */
+    public Rectangle getArenaOpponentHandRect() {
+        return arenaLaidOut && arenaHand.isVisible() && arenaHand.screenPos.width > 0 ? arenaHand.screenPos : null;
+    }
+
     private void syncCommandZone() {
         if (!Forge.isLandscapeMode()) { return; }
         if (isCompactLayout()) {

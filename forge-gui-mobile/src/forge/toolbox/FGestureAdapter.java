@@ -174,7 +174,18 @@ public abstract class FGestureAdapter extends InputAdapter {
     public boolean touchUp(int x, int y, int pointer, int button) {
         return touchUp((float)x, (float)y, pointer, button);
     }
+    /**
+     * A right click (secondary button) at x, y. Return true if it was used; otherwise it toggles the hover magnifier as
+     * before. The Arena board uses it for card zoom and context actions, and to back out of a decision.
+     */
+    protected boolean secondaryClick(float x, float y) {
+        return false;
+    }
+
     private boolean touchUp(float x, float y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT && secondaryClick(x, y)) {
+            return true;
+        }
         if (button == Input.Buttons.RIGHT) {
             //catch right click and set toggle magnify
             if (inTapSquare) {

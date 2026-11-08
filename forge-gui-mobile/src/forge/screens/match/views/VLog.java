@@ -56,7 +56,33 @@ public class VLog extends FDropDown {
 
     @Override
     protected boolean autoHide() {
-        return true;
+        return !isArenaDock(); //the Arena board docks the log: it stays until it is put away
+    }
+
+    // ---- the Arena board: the log docked on the left, on dark glass ------------------------------------------------
+    private final com.badlogic.gdx.math.Rectangle arenaDock = new com.badlogic.gdx.math.Rectangle();
+
+    private static boolean isArenaDock() {
+        return forge.screens.match.arena.ArenaTheme.isMatchBoard() && forge.screens.match.arena.ArenaMatchLayout.applies();
+    }
+
+    @Override
+    protected void updateSizeAndPosition() {
+        if (!isArenaDock()) {
+            super.updateSizeAndPosition();
+            return;
+        }
+        forge.screens.match.arena.ArenaMatchLayout.logDock(Forge.getScreenWidth(), Forge.getScreenHeight(), arenaDock);
+        paneSize = updateAndGetPaneSize(arenaDock.width, arenaDock.height);
+        setBounds(arenaDock.x, arenaDock.y, arenaDock.width, Math.min(paneSize.getHeight(), arenaDock.height));
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        if (isArenaDock()) {
+            return; //the glass has its own rim
+        }
+        super.drawOverlay(g);
     }
 
     @Override
@@ -76,6 +102,10 @@ public class VLog extends FDropDown {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (isArenaDock()) {
+            forge.screens.match.arena.ArenaArt.glassPanel(g, 0, 0, getWidth(), getHeight());
+            return;
+        }
         float w = getWidth();
         float h = getHeight();
         g.fillRect(getRowColor(), 0, 0, w, h); //can fill background with main row color since drop down will never be taller than number of rows
@@ -106,7 +136,7 @@ public class VLog extends FDropDown {
         }
 
         LogEntryDisplay logEntryDisplay;
-        float width = maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen
+        float width = isArenaDock() ? maxWidth : maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen
         float minWidth = 4 * Utils.AVG_FINGER_WIDTH;
         if (width < minWidth) {
             width = minWidth;
@@ -139,6 +169,8 @@ public class VLog extends FDropDown {
         super.setScrollPositionsAfterLayout(0, getMaxScrollTop()); //always scroll to bottom after layout
     }
 
+    private static final com.badlogic.gdx.graphics.Color ARENA_ROW = new com.badlogic.gdx.graphics.Color();
+
     private class LogEntryDisplay extends FDisplayObject {
         private final String text;
         private final boolean isAltRow;
@@ -161,6 +193,13 @@ public class VLog extends FDropDown {
             float w = getWidth();
             float h = getHeight();
 
+            if (isArenaDock()) { //light words on the glass, every other entry on a faint band
+                if (isAltRow) {
+                    g.fillRect(forge.screens.match.arena.ArenaTheme.alpha(forge.screens.match.arena.ArenaTheme.WHITE, 0.04f, ARENA_ROW), 0, 0, w, h);
+                }
+                renderer.drawText(g, text, FONT, forge.screens.match.arena.ArenaTheme.TEXT, PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, Align.left, false);
+                return;
+            }
             if (isAltRow) {
                 g.fillRect(getAltRowColor(), 0, 0, w, h);
             }

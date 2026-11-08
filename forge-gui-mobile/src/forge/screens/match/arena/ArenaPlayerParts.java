@@ -102,6 +102,25 @@ public final class ArenaPlayerParts {
             }
         }
 
+        private final com.badlogic.gdx.math.Rectangle pileRect = new com.badlogic.gdx.math.Rectangle();
+
+        /** The screen rect of the pile for a zone (cards fly to it), or null if this player has no such pile showing. */
+        public com.badlogic.gdx.math.Rectangle getPileScreenRect(final ZoneType zone) {
+            if (screenPos.width <= 0) {
+                return null;
+            }
+            layoutCells();
+            for (int i = 0; i < ZONES.length; i++) {
+                if (ZONES[i] == zone) {
+                    if (!shown[i]) {
+                        shown[i] = true; //about to get the card that is on its way
+                    }
+                    return pileRect.set(screenPos.x + cellX[i], screenPos.y, cellW[i], getHeight());
+                }
+            }
+            return null;
+        }
+
         private int pileAt(final float x, final float y) {
             layoutCells();
             for (int i = 0; i < ZONES.length; i++) {

@@ -136,9 +136,26 @@ public class TargetingOverlay {
         pendingCount++;
     }
 
+    /** The Arena's arc kind for an arrow's meaning. */
+    private static int arenaKind(final ArcConnection connects) {
+        switch (connects) {
+            case FoesAttacking: return forge.screens.match.arena.ArenaArcs.ATTACK;
+            case FoesBlocking: return forge.screens.match.arena.ArenaArcs.BLOCK;
+            case FoesStackTargeting: return forge.screens.match.arena.ArenaArcs.FOE;
+            default: return forge.screens.match.arena.ArenaArcs.FRIEND;
+        }
+    }
+
     private static void flushArrows(final Graphics g) {
         final int count = pendingCount;
         if (count == 0) { return; }
+        if (forge.screens.match.arena.ArenaMatchLayout.applies()) { //the Arena's glowing arcs, drawn once each
+            for (int i = 0; i < count; i++) {
+                final PendingArrow a = pendingArrows.get(i);
+                forge.screens.match.arena.ArenaArcs.draw(g, a.start.x, a.start.y, a.end.x, a.end.y, arenaKind(a.connects));
+            }
+            return;
+        }
         final String style = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION); // read once, not per arrow per pass
         // the runnable is executed 2-3 times by drawArrowBatch, so it only draws from the prepared list
         g.drawArrowBatch(() -> {
@@ -271,6 +288,10 @@ public class TargetingOverlay {
      */
     public static void drawStackArrow(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects) {
         if (start == null || end == null) { return; }
+        if (forge.screens.match.arena.ArenaMatchLayout.applies()) {
+            forge.screens.match.arena.ArenaArcs.draw(g, start.x, start.y, end.x, end.y, arenaKind(connects));
+            return;
+        }
         final String style = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION);
         if ("Point".equals(style) || "Line".equals(style)) {
             drawArrowStyled(g, start, end, connects, style, false);
@@ -285,6 +306,10 @@ public class TargetingOverlay {
 
     private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid) {
         if (start == null || end == null) { return; }
+        if (forge.screens.match.arena.ArenaMatchLayout.applies()) {
+            forge.screens.match.arena.ArenaArcs.draw(g, start.x, start.y, end.x, end.y, arenaKind(connects));
+            return;
+        }
 
         FSkinColor color = foeDefColor;
 

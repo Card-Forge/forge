@@ -289,8 +289,148 @@ public final class CardFlightOverlay {
         return false;
     }
 
+    // ---- the Arena board: cards fly without spinning and fade into their tile; tiles turn back into cards to leave ----
+    private static boolean arena() {
+        return forge.screens.match.arena.ArenaMatchLayout.applies();
+    }
+
+    /** An Arena arrival: from the hand (or the stack's large card, or an opponent's hand of backs) to the tile's middle. */
+    private static void resolveArena(Flight f, PlayerView bottomPlayer, float screenH) {
+        f.toH = f.to.height * 1.08f;
+        f.toCx = f.to.x + f.to.width / 2;
+        f.toCy = f.to.y + f.to.height / 2;
+        if (f.from != null) { //a hand card's panel is as wide as the card; its height may include the strip it rose from
+            f.fromH = f.fromExact ? f.from.height : f.from.width * FCardPanel.ASPECT_RATIO;
+            f.fromCx = f.from.x + f.from.width / 2;
+            f.fromCy = f.from.y + f.fromH / 2;
+        } else {
+            Rectangle src = null;
+            VPlayerPanel pp = MatchScreen.getPlayerPanel(f.card.getController());
+            if (pp != null) {
+                src = pp.getArenaOpponentHandRect();
+                if (src == null && pp.getAvatar() != null && pp.getAvatar().screenPos.width > 0) {
+                    src = pp.getAvatar().screenPos;
+                }
+            }
+            f.fromH = f.toH * 0.6f;
+            if (src != null) {
+                f.fromCx = src.x + src.width / 2;
+                f.fromCy = src.y + src.height / 2;
+            } else {
+                f.fromCx = f.toCx;
+                f.fromCy = (f.card.getController() == bottomPlayer ? screenH : 0) ;
+            }
+        }
+        f.resolved = true;
+    }
+
+    /** An Arena departure: from the tile to the owner's pile for the zone it went to (or it lifts and fades in place). */
+    private static void resolveLeaveArena(Flight f) {
+        f.fromH = f.from.height * 1.08f;
+        f.fromCx = f.from.x + f.from.width / 2;
+        f.fromCy = f.from.y + f.from.height / 2;
+        ZoneType zone = zoneOf(f.card);
+        if (zone == null && isOnBattlefield(f.card)) { //e.g. a change of control: it moved rows, it did not leave
+            f.cancelled = true;
+            f.resolved = true;
+            return;
+        }
+        Rectangle dest = null;
+        PlayerView owner = f.card.getOwner();
+        VPlayerPanel pp = owner == null ? null : MatchScreen.getPlayerPanel(owner);
+        if (pp != null && zone != null) {
+            dest = zone == ZoneType.Hand ? (pp == MatchController.getView().getBottomPlayerPanel() ? null : pp.getArenaOpponentHandRect()) : pp.getArenaPileRect(zone);
+            if (dest == null && zone == ZoneType.Hand && pp == MatchController.getView().getBottomPlayerPanel()) {
+                dest = new Rectangle(Forge.getScreenWidth() / 2f - f.from.width / 2, Forge.getScreenHeight(), f.from.width, f.from.height);
+            }
+            if (dest == null && pp.getAvatar() != null && pp.getAvatar().screenPos.width > 0) {
+                dest = pp.getAvatar().screenPos;
+            }
+        }
+        f.durationNanos = LEAVE_MOVE_NANOS * 1.15f;
+        if (dest != null) {
+            f.toCx = dest.x + dest.width / 2;
+            f.toCy = dest.y + dest.height / 2;
+            f.toH = Math.min(dest.height, f.fromH * 0.6f);
+        } else { //gone (a token): it lifts a little and fades
+            f.toCx = f.fromCx;
+            f.toCy = f.fromCy - f.fromH * 0.25f;
+            f.toH = f.fromH * 0.9f;
+        }
+        f.resolved = true;
+    }
+
+    private static void drawEnterArena(Graphics g, Flight f, float t) {
+        final forge.screens.match.views.VCardDisplayArea.CardAreaPanel panel = forge.screens.match.views.VCardDisplayArea.CardAreaPanel.peek(f.card);
+        if (f.style == Style.POPUP) { //a token: it appears in place, growing with a small overshoot
+            final float e = Interpolation.swingOut.apply(t);
+            final float alpha = Math.min(1f, t * 3f);
+            drawArenaTileAt(g, f, panel, 0.5f + 0.5f * e, alpha);
+            return;
+        }
+        // a slight arc, easing out as it lands, then the tile comes up under it as the card fades
+        final float e = forge.screens.match.arena.ArenaMotion.OUT.at(t);
+        final float h = f.fromH + (f.toH - f.fromH) * e;
+        final float cx = f.fromCx + (f.toCx - f.fromCx) * e;
+        final float cy = f.fromCy + (f.toCy - f.fromCy) * e - Math.min(ARC_HEIGHT * 2f, Math.abs(f.toCy - f.fromCy) * 0.15f) * MathUtils.sin(MathUtils.PI * t);
+        final float land = MathUtils.clamp((t - 0.7f) / 0.3f, 0f, 1f);
+        if (land > 0f) {
+            drawArenaTileAt(g, f, panel, 1f, land);
+        }
+        final float alpha = 1f - land;
+        if (alpha <= 0.01f) { return; }
+        final float w = h / FCardPanel.ASPECT_RATIO;
+        final float old = g.getfloatAlphaComposite();
+        g.setAlphaComposite(old * alpha);
+        forge.screens.match.arena.ArenaCards.cardShadow(g, cx - w / 2, cy - h / 2, w, h, w * 0.045f);
+        CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h, CardStackPosition.Top, false, false, true);
+        g.setAlphaComposite(old);
+    }
+
+    /** The real tile at its place, scaled about its middle and faded (the panel itself is hidden while it flies). */
+    private static void drawArenaTileAt(Graphics g, Flight f, forge.screens.match.views.VCardDisplayArea.CardAreaPanel panel, float scale, float alpha) {
+        if (panel == null || alpha <= 0f) { return; }
+        final float w = f.to.width * scale, h = f.to.height * scale;
+        final float old = g.getfloatAlphaComposite();
+        g.setAlphaComposite(old * alpha);
+        forge.screens.match.arena.ArenaCards.drawTile(g, f.card, panel.getArenaState(), false, f.to.x + (f.to.width - w) / 2, f.to.y + (f.to.height - h) / 2, w, h);
+        g.setAlphaComposite(old);
+    }
+
+    private static void drawLeaveArena(Graphics g, Flight f, float t) {
+        // the tile turns back into its card where it stood, then flies to its pile, speeding up, shrinking and fading
+        final float turn = MathUtils.clamp(t / 0.22f, 0f, 1f);
+        final float m = MathUtils.clamp((t - 0.12f) / 0.88f, 0f, 1f);
+        final float e = Interpolation.pow2In.apply(m);
+        final float cx = f.fromCx + (f.toCx - f.fromCx) * e;
+        final float cy = f.fromCy + (f.toCy - f.fromCy) * e;
+        final float h = f.fromH + (f.toH - f.fromH) * e;
+        final float alpha = 1f - Interpolation.pow2In.apply(MathUtils.clamp((m - 0.55f) / 0.45f, 0f, 1f));
+        final float old = g.getfloatAlphaComposite();
+        if (turn < 1f) {
+            final forge.screens.match.views.VCardDisplayArea.CardAreaPanel panel = forge.screens.match.views.VCardDisplayArea.CardAreaPanel.peek(f.card);
+            if (panel != null) {
+                g.setAlphaComposite(old * (1f - turn));
+                forge.screens.match.arena.ArenaCards.drawTile(g, f.card, panel.getArenaState(), false, f.from.x, f.from.y, f.from.width, f.from.height);
+            }
+        }
+        if (alpha <= 0.01f || turn <= 0f) {
+            g.setAlphaComposite(old);
+            return;
+        }
+        final float w = h / FCardPanel.ASPECT_RATIO;
+        g.setAlphaComposite(old * alpha * turn);
+        forge.screens.match.arena.ArenaCards.cardShadow(g, cx - w / 2, cy - h / 2, w, h, w * 0.045f);
+        CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h, CardStackPosition.Top, false, false, true);
+        g.setAlphaComposite(old);
+    }
+
     /** Resolves start/end geometry of an ENTER flight once. Allocates a few small objects, but only once. */
     private static void resolve(Flight f, PlayerView bottomPlayer, float screenH) {
+        if (arena()) {
+            resolveArena(f, bottomPlayer, screenH);
+            return;
+        }
         float pad = FCardPanel.PADDING;
 
         // destination: card rect inside the panel's padding
@@ -381,6 +521,10 @@ public final class CardFlightOverlay {
 
     /** Resolves a LEAVE flight once: where the card was, which zone it went to, and where that zone's tab is. */
     private static void resolveLeave(Flight f) {
+        if (arena()) {
+            resolveLeaveArena(f);
+            return;
+        }
         float pad = FCardPanel.PADDING;
         float h = f.from.height - 2 * pad;
         float w = h / FCardPanel.ASPECT_RATIO;
@@ -485,6 +629,10 @@ public final class CardFlightOverlay {
     }
 
     private static void drawEnter(Graphics g, Flight f, float t) {
+        if (arena()) {
+            drawEnterArena(g, f, t);
+            return;
+        }
         float cx, cy, h, angle;
         float alpha = 1f;
 
@@ -536,6 +684,10 @@ public final class CardFlightOverlay {
     }
 
     private static void drawLeave(Graphics g, Flight f, float t) {
+        if (arena()) {
+            drawLeaveArena(g, f, t);
+            return;
+        }
         final float split = f.jitter ? GLITCH_FRACTION : 0f;
         float cx, cy, h, angle;
         float alpha = 1f;

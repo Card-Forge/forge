@@ -171,8 +171,8 @@ public class VAvatar extends FDisplayObject {
     }
 
     public Vector2 getTargetingArrowOrigin() {
-        if (ArenaMatchLayout.applies()) { //the rim of the portrait that faces the board
-            return new Vector2(screenPos.x + getWidth() / 2, arenaOpponent ? screenPos.y + getHeight() * 0.92f : screenPos.y + getHeight() * 0.08f);
+        if (ArenaMatchLayout.applies()) { //just past the portrait on the side that faces the board (below an opponent's life plate)
+            return new Vector2(screenPos.x + getWidth() / 2, screenPos.y + getHeight() / 2 + getHeight() * (arenaOpponent ? 0.86f : -0.56f));
         }
         Vector2 origin = new Vector2(this.screenPos.x, this.screenPos.y);
         origin.x += getWidth()-getWidth()/8f;

@@ -1002,12 +1002,20 @@ public class MatchScreen extends FScreen {
                 x = Math.max(left, Math.min(x, right - w));
                 y = a.y + a.height / 2 - h / 2;
             }
-            y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            if (isArenaBoard()) { //the prompt floats in a corner on the Arena board: only the window bounds the preview
+                y = Math.max(getHeight() * 0.02f, Math.min(y, getHeight() * 0.98f - h));
+            } else {
+                y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            }
             //open dropdowns draw over the preview, so it moves to their left instead of ending up under them
             if (getStack().isVisible()) { x = moveLeftOfObstacle(getStack().screenPos, x, y, w, h, a, left); }
             if (unifiedPhase.getMenu().isOpen()) { x = moveLeftOfObstacle(unifiedPhase.getMenu().screenPos, x, y, w, h, a, left); }
 
-            if (Forge.magnifyShowDetails) {
+            if (isArenaBoard() && !Forge.magnifyShowDetails) { //the Arena preview: the card on a soft shadow with a thin rim
+                forge.screens.match.arena.ArenaCards.cardShadow(g, x, y, w, h, w * 0.045f);
+                CardRenderer.drawCard(g, card, x, y, w, h, CardRenderer.CardStackPosition.Top, false, false, true);
+                g.drawSmoothRoundRect(1.5f, forge.screens.match.arena.ArenaTheme.alpha(forge.screens.match.arena.ArenaTheme.GOLD, 0.55f), x, y, w, h, w * 0.045f);
+            } else if (Forge.magnifyShowDetails) {
                 CardImageRenderer.drawDetails(g, card, MatchController.instance.getGameView(), false, x, y, w, h);
             } else {
                 CardRenderer.drawCard(g, card, x, y, w, h, CardRenderer.CardStackPosition.Top, false, false, true);
@@ -1151,20 +1159,60 @@ public class MatchScreen extends FScreen {
                 MatchController.toggleYieldMarker(nextTurnPlayer(), PhaseType.UPKEEP);
                 return true;
             case OPEN_LOG:
-                toggleDropDown(log);
+                if (isArenaBoard()) { cornerMenu.toggleLog(); } else { toggleDropDown(log); }
                 return true;
             case OPEN_STACK:
-                toggleDropDown(stack);
+                if (isArenaBoard()) { cornerMenu.toggleStack(); } else { toggleDropDown(stack); }
                 return true;
             case OPEN_MENU:
-                toggleDropDown(gameMenu);
+                if (isArenaBoard()) { cornerMenu.toggleGear(); } else { toggleDropDown(gameMenu); }
                 return true;
+            case ZOOM_CARD:
+                return zoomHoveredCard();
             case SHOW_SHORTCUTS:
                 ArenaShortcutSheet.open();
                 return true;
             default:
                 return false;
         }
+    }
+
+    /** Z: the card under the pointer, large (the Arena focus view on the Arena board); the stack's entries too. */
+    private boolean zoomHoveredCard() {
+        if (potentialListener == null) {
+            return false;
+        }
+        for (FDisplayObject object : potentialListener) {
+            if (object == null || !object.isHovered()) { continue; }
+            if (object instanceof CardAreaPanel panel) {
+                panel.showZoom();
+                return true;
+            }
+            if (object instanceof FCardPanel cardPanel && cardPanel.getCard() != null) {
+                CardZoom.show(cardPanel.getCard());
+                return true;
+            }
+            if (object instanceof VStack.StackInstanceDisplay item) {
+                CardZoom.show(item.stackInstance.getSourceCard());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A right click on the Arena board away from any card backs out: it closes an open menu, or cancels the decision
+     * being made (never ends the turn: the priority prompt's End Turn is not a way back).
+     */
+    public boolean arenaBackOut() {
+        if (cornerMenu.closeMenus()) {
+            return true;
+        }
+        final VPrompt prompt = getActivePrompt();
+        if (prompt.getArenaMode() == forge.screens.match.arena.ArenaMatchLayout.PromptMode.DECISION && prompt.getBtnCancel().isEnabled()) {
+            return prompt.getBtnCancel().trigger();
+        }
+        return false;
     }
 
     /** Whose turn comes after the current one (the next player still in the game, in seat order). */

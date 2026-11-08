@@ -1471,6 +1471,30 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
+        protected boolean secondaryClick(float x, float y) {
+            if (!forge.screens.match.arena.ArenaTheme.isMatchBoard()) {
+                return false; //elsewhere a right click toggles the magnifier, as it always has
+            }
+            //the Arena board: what a long press does under the pointer (zoom a card, a stack entry's or a player's
+            //details, mark a phase to pass to), else back out of the decision being made
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.longPress(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
+                }
+                final MatchScreen match = MatchController.getView();
+                if (match != null && currentScreen == match) {
+                    match.arenaBackOut();
+                }
+                return true;
+            } catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
+        }
+
+        @Override
         public boolean tap(float x, float y, int count) {
             if (shiftKeyDown && flick(x, y)) {
                 return true; //give flick logic a chance to handle Shift+click
