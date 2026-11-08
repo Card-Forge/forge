@@ -83,6 +83,7 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        RunawayLoop.note(ai, sa);
         if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
             if (pc.getAi().hasFailedToCast(sa)) {
                 return false;
@@ -1435,6 +1436,10 @@ public class ComputerUtil {
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
         if (!sa.isActivatedAbility()) {
             return false;
+        }
+
+        if (RunawayLoop.exceeded(sa)) {
+            return true;
         }
 
         int activations = sa.getActivationsThisTurn();

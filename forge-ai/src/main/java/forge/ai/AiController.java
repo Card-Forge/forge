@@ -906,6 +906,43 @@ public class AiController {
         return true;
     }
 
+    /**
+     * The check of a play made to assemble a catalogued combo: the heuristics' own approval (it sets targets), or for a
+     * spell without targets that can be cast and paid, whatever they think of a piece that does nothing alone.
+     */
+    private boolean assemblyApproved(final SpellAbility sa) {
+        try {
+            if (ComboGuard.problem(player, sa, null, deckPlan(player).combos) != null) {
+                return false;
+            }
+            sa.setActivatingPlayer(player);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            try {
+                if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                    return true;
+                }
+            } finally {
+                sa.clearLastState();
+            }
+            return (!sa.usesTargeting() || ComboAssembly.aimedDreamsKill(player, sa)) && sa.canPlay()
+                    && ComputerUtilCost.canPayCost(sa, player, false);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** The step of a loop (see {@link LoopRunner}): aimed already, so only the cost and an earlier failure are looked at. */
+    private boolean loopApproved(final SpellAbility sa) {
+        try {
+            sa.setActivatingPlayer(player);
+            return !hasFailedToCast(sa) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)
+                    && game.getStack().hasLegalTargeting(sa);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         AITimeoutTracker.check();
         final Card host = sa.getHostCard();
@@ -1941,7 +1978,8 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !flatMc;
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
+                    || (flatMc && LoopRunner.held(player, spellAbility)));
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
@@ -1988,6 +2026,20 @@ public class AiController {
                 if (donateFinish.costHasManaX()) {
                     donateFinish.setXManaCostPaid(null);
                 }
+            }
+        }
+        if (flatMonteCarloActive()) {
+            final SpellAbility loop = LoopRunner.next(player, saList, this::loopApproved);
+            if (loop != null) {
+                return loop; // a loop of the combo list is on the table: one more round of it
+            }
+            final SpellAbility finish = ComboAssembly.finish(player, saList, this::assemblyApproved);
+            if (finish != null) {
+                return finish; // a draw that takes the opponent's whole library: they lose at their next draw
+            }
+            final SpellAbility assembly = ComboAssembly.next(player, saList, this::assemblyApproved);
+            if (assembly != null) {
+                return assembly; // a catalogued combo whose other cards are all in play or in hand: put it together
             }
         }
         // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts

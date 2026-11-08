@@ -232,6 +232,17 @@ public final class AiCardLists {
         return new ArrayList<>(found.values());
     }
 
+    /** Every known two card combo once, in a fixed order (by the names, so a number given to one stays its own). */
+    public static List<Pair> allPairs() {
+        final Map<String, Pair> found = new java.util.TreeMap<>();
+        for (final List<Pair> list : data().byCard.values()) {
+            for (final Pair p : list) {
+                found.putIfAbsent(p.key(), p);
+            }
+        }
+        return new ArrayList<>(found.values());
+    }
+
     /** The normalized names of cards, with the faces of a card named "Front // Back" as well as the whole name. */
     public static Set<String> deckKeys(final Iterable<String> cardNames) {
         final Set<String> keys = new HashSet<>();
