@@ -547,6 +547,8 @@ public final class GameMemento {
         private GameMemento last;      // newest memento of the chain; the registry describes its state
         private boolean recording;     // true while a reverse delta is being collected
         private long liveBytes;        // estimated heap of the registry: nodes plus current snapshots
+        /** Conservative, decaying estimate of the latest incremental capture allocation. */
+        private long lastCaptureBytes;
 
         /** Debug only (off by default): list fields holding values the walker treats as opaque. */
         public boolean debugBlindSpots;
@@ -562,6 +564,9 @@ public final class GameMemento {
 
         /** Estimated heap held by the recorder itself: one node and one snapshot per tracked object. */
         public long liveBytes() { return liveBytes; }
+
+        /** Estimated allocation of a recent incremental capture, excluding the initial full graph. */
+        public long lastCaptureBytes() { return lastCaptureBytes; }
 
         /** Entries in / estimated heap of the delta the last capture produced (predicts the next one). */
         public int lastDeltaEntries() { return lastDeltaEntries; }
@@ -636,6 +641,7 @@ public final class GameMemento {
             sn = 0;
             highWater = 0;
             liveBytes = 0;
+            lastCaptureBytes = 0;
             lastDeltaEntries = 0;
             lastDeltaBytes = 0;
             last = null;
@@ -650,6 +656,8 @@ public final class GameMemento {
         public GameMemento captureStandalone(Object root) { return run(root, false); }
 
         private GameMemento run(final Object root, final boolean chained) {
+            final boolean hadRegistry = !registry.isEmpty();
+            final long scratchBefore = scratchBytes();
             final int g = ++gen;
             final GameMemento m = new GameMemento();
             current = m;
@@ -662,6 +670,8 @@ public final class GameMemento {
             dc = 0;
             deltaBytes = 0;
             wn = 0;
+            long allocatedBytes = 0L;
+            long deltaAllocatedBytes = 0L;
             try {
                 enqueue(root);
                 for (int wi = 0; wi < wn; wi++) {
@@ -671,7 +681,8 @@ public final class GameMemento {
                     if (now != old) {
                         n.snap = now;
                         liveBytes += old == null ? NODE_BYTES + now.bytes() : now.bytes() - old.bytes();
-                        if (recording) { note(n, old, now); }
+                        allocatedBytes += now.bytes() + (old == null ? NODE_BYTES : 0L);
+                        if (recording) { deltaAllocatedBytes += note(n, old, now); }
                     }
                 }
                 // Objects no longer reachable: remember them so a rewind can bring them back. Walking downwards means
@@ -692,6 +703,15 @@ public final class GameMemento {
                     last = m;
                     lastDeltaEntries = dc;
                     lastDeltaBytes = deltaBytes;
+                    if (hadRegistry) {
+                        final long arrays = dc == 0 ? 0L : 32L + 16L * dc;
+                        final long captureBytes = allocatedBytes + deltaAllocatedBytes
+                                + Math.max(0L, scratchBytes() - scratchBefore)
+                                + MEMENTO_BYTES + arrays;
+                        // Retain some history of larger captures, but let the estimate fall after quieter actions.
+                        final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
+                        lastCaptureBytes = Math.max(captureBytes, decayed);
+                    }
                 } else {
                     m.targets = new Object[wn];
                     m.snaps = new Snap[wn];
@@ -717,6 +737,12 @@ public final class GameMemento {
         }
 
         /** Don't pin game objects through scratch buffers, and don't keep oversized ones. */
+        /** Approximate retained capacities of recorder scratch arrays, for the next-capture safety estimate. */
+        private long scratchBytes() {
+            return arr(work.length) + arr(objs.length) + arr(conts.length) + arr(dn.length)
+                    + arr(ds.length) + arr(sRefs.length) + arr(sPrims.length);
+        }
+
         private void releaseScratch() {
             if (work.length > MAX_KEPT_SCRATCH) { work = new Node[INITIAL_SCRATCH]; }
             else { Arrays.fill(work, 0, Math.min(wn, work.length), null); }
@@ -734,7 +760,7 @@ public final class GameMemento {
             recording = false;
         }
 
-        private void note(final Node n, final Snap old, final Snap now) {
+        private long note(final Node n, final Snap old, final Snap now) {
             if (dc == dn.length) {
                 dn = Arrays.copyOf(dn, dc * 2);
                 ds = Arrays.copyOf(ds, dc * 2);
@@ -747,6 +773,7 @@ public final class GameMemento {
             ds[dc] = delta;
             dc++;
             deltaBytes += ENTRY_BYTES + (delta == null ? 0L : delta.bytes());
+            return delta instanceof UndoDelta ? delta.bytes() : 0L;
         }
 
         // restoring
