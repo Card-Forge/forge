@@ -1730,6 +1730,10 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
+        if (waitsForMainPhase()) {
+            return null; // nothing to do before the first main phase
+        }
+
         if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
@@ -1766,6 +1770,59 @@ public class AiController {
         }
 
         return singleSpellAbilityList(getSpellAbilityToPlay());
+    }
+
+    /**
+     * With Flat Monte Carlo on, the AI's own upkeep and draw step have nothing for it to do: acting there (a burn spell,
+     * an Aether Vial, a fetch land) only shows the opponent the cards and takes options from the first main phase,
+     * where the rollouts compare every line with the mana and the information still in hand. Everything it could do
+     * there it can do in the main phase, with a forecast ability the only thing that has to be used in the upkeep.
+     * Responses with something on the stack are not affected.
+     */
+    private boolean waitsForMainPhase() {
+        if (!flatMonteCarloActive() || !game.getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        if (!ph.isPlayerTurn(player) || !ph.getPhase().isBefore(PhaseType.MAIN1)) {
+            return false;
+        }
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.hasParam("Forecast")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A permanent spell with flash on the AI's own turn: casting it now only ends the surprise, and the opponent's
+     * removal gets it before it does anything. The opponent's end step, or an attack, is where Monte Carlo offers it
+     * (see {@link FlatMonteCarloPicker.Mode#END_STEP}). A hasty one may still be an attacker.
+     */
+    private boolean isFlashPermanentOnOwnTurn(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return host != null && sa.isSpell() && host.isPermanent() && !host.isLand() && host.hasKeyword(Keyword.FLASH)
+                && !host.hasKeyword(Keyword.HASTE) && game.getPhaseHandler().isPlayerTurn(player);
+    }
+
+    /** The permanent has an enters-the-battlefield trigger that is aimed (Leyline Binding, Cast Out, Banishment). */
+    private static boolean hasTargetedEtb(final Card card) {
+        for (final Trigger t : card.getTriggers()) {
+            final Map<String, String> params = t.getMapParams();
+            if (!"ChangesZone".equals(params.get("Mode")) || !"Battlefield".equals(params.get("Destination"))
+                    || params.get("ValidCard") == null || !params.get("ValidCard").contains("Self")
+                    || params.get("Execute") == null) {
+                continue;
+            }
+            final String ability = card.getSVar(params.get("Execute"));
+            if (ability.contains("ValidTgts$") && !ability.contains("TargetMin$ 0") && !ability.contains("Optional")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
@@ -2639,6 +2696,13 @@ public class AiController {
 
         if (!sa.checkRestrictions(player)) {
             return false;
+        }
+
+        if (isFlashPermanentOnOwnTurn(sa)) {
+            return false;
+        }
+        if (opinion == AiPlayDecision.BadEtbEffects && sa.isSpell() && hasTargetedEtb(sa.getHostCard())) {
+            return false; // an exile or removal on entering with nothing worth aiming at: the heuristics found no target
         }
 
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
