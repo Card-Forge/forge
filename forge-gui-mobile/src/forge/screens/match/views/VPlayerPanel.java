@@ -453,7 +453,7 @@ public class VPlayerPanel extends FContainer {
                 ArenaBoard.hand(arenaRect);
                 area.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
                 area.setVisible(true);
-            } else if (tab == selectedTab && !hand) {
+            } else if (tab == selectedTab) { //includes an opponent's hand you may see (e.g. while controlling their turn)
                 final float sw = Math.round(ArenaBoard.windowW() * 0.46f), sh = Math.round(ArenaBoard.windowH() * 0.16f);
                 final float sy = local ? Math.round(ArenaBoard.windowH() * 0.4f) - top : Math.round(ArenaBoard.windowH() * 0.13f) - top;
                 area.setBounds(local ? Math.round(ArenaBoard.windowW() * 0.02f) : width - sw - Math.round(ArenaBoard.windowW() * 0.02f), sy, sw, sh);

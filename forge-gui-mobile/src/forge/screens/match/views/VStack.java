@@ -63,6 +63,30 @@ public class VStack extends FDropDown {
         return forge.screens.match.arena.ArenaMatchLayout.applies();
     }
 
+    // the spells the Arena stack showed, and where: one that leaves for a pile flies there from its large card
+    private final Map<Integer, CardView> arenaShownSpells = new HashMap<>();
+    private final Map<Integer, Rectangle> arenaShownRects = new HashMap<>();
+
+    private void arenaSendOffLeavers(FCollectionView<StackItemView> stack) {
+        if (arenaShownSpells.isEmpty()) {
+            return;
+        }
+        final Set<Integer> still = new HashSet<>();
+        for (StackItemView item : stack) {
+            if (!item.isAbility() && item.getSourceCard() != null) {
+                still.add(item.getSourceCard().getId());
+            }
+        }
+        for (Map.Entry<Integer, CardView> e : arenaShownSpells.entrySet()) {
+            final Rectangle r = arenaShownRects.get(e.getKey());
+            if (!still.contains(e.getKey()) && r != null && r.width > 0 && !CardFlightOverlay.isLeavingStack(e.getKey())) {
+                CardFlightOverlay.startArenaStackLeave(e.getValue(), r);
+            }
+        }
+        arenaShownSpells.clear();
+        arenaShownRects.clear();
+    }
+
     /** The Arena stack: the top item a large card at the right of its dock, up to four more stepping left behind it. */
     private void arenaLayout() {
         final float sw = Forge.getScreenWidth(), sh = Forge.getScreenHeight();
@@ -71,6 +95,7 @@ public class VStack extends FDropDown {
         displayById.clear();
         activeItem = null;
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+        arenaSendOffLeavers(stack);
         float cardH = arenaDock.height;
         float cardW = Math.round(cardH / FCardPanel.ASPECT_RATIO);
         final int shown = Math.min(stack.size(), ARENA_MOST_SHOWN);
@@ -247,6 +272,9 @@ public class VStack extends FDropDown {
         restoreOldZones();
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+        if (isArenaStack()) { //spells that have gone fly to their pile, also when the stack has just emptied (it hides then)
+            arenaSendOffLeavers(stack);
+        }
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -646,6 +674,8 @@ public class VStack extends FDropDown {
             final float w = getWidth(), h = getHeight(), r = w * 0.045f;
             if (!stackInstance.isAbility()) { //a spell flies from here to where it goes
                 CardFlightOverlay.noteStackRect(sourceCard.getId(), screenPos.x, screenPos.y, w, h);
+                arenaShownSpells.put(sourceCard.getId(), sourceCard);
+                arenaShownRects.computeIfAbsent(sourceCard.getId(), k -> new Rectangle()).set(screenPos.x, screenPos.y, w, h);
             }
             final boolean top = activeItem == this;
             final boolean pickable = isSelectableTarget();

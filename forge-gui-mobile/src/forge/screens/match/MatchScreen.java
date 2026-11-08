@@ -225,6 +225,7 @@ public class MatchScreen extends FScreen {
             add(unifiedPhase.getMenu()); //above the header, so it opens over the field
         }
         //the Arena board has no menu bar: two round buttons in the top right corner take its place
+        ArenaMatchLayout.setBoardPossible(topPlayerPrompt == null); //two prompts at opposite ends: the default layout
         cornerMenu = add(new ArenaCornerMenu(this));
         cornerMenu.setVisible(false);
         ArenaTheme.addListener(arenaThemeListener);
@@ -232,7 +233,7 @@ public class MatchScreen extends FScreen {
 
     /** Whether the match is drawn as the Arena board (the look is on, landscape, and not the two-prompt hot seat layout). */
     public boolean isArenaBoard() {
-        return ArenaMatchLayout.applies() && topPlayerPrompt == null;
+        return ArenaMatchLayout.applies();
     }
 
     public ArenaCornerMenu getCornerMenu() {

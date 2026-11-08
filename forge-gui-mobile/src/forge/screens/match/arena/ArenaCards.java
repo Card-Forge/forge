@@ -539,10 +539,10 @@ public final class ArenaCards {
             font = smaller;
         }
         if (ArenaArt.textWidth(shown, font) > maxW) {
-            while (shown.length() > 1 && ArenaArt.textWidth(shown + "…", font) > maxW) {
+            while (shown.length() > 1 && ArenaArt.textWidth(shown + "...", font) > maxW) { //the skin's font has no ellipsis glyph
                 shown = shown.substring(0, shown.length() - 1);
             }
-            shown = shown.trim() + "…";
+            shown = shown.trim() + "...";
         }
         st.nameShown = shown;
         st.nameFont = font;

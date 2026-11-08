@@ -37,9 +37,19 @@ public final class ArenaMatchLayout {
     /** Where a decision prompt's bottom is (the local portrait's frame top in Swing). */
     public static final float DECISION_BOTTOM = 0.71f;
 
-    /** Whether the Arena layout is used: Arena look on, landscape (the Arena board has no portrait layout). */
+    private static volatile boolean boardPossible = true;
+
+    /**
+     * Whether the Arena layout is used: Arena look on, landscape (the Arena board has no portrait layout), and a match
+     * the board can show (not two local players each with their own prompt at opposite ends of the screen).
+     */
     public static boolean applies() {
-        return ArenaTheme.isActive() && Forge.isLandscapeMode();
+        return ArenaTheme.isActive() && Forge.isLandscapeMode() && boardPossible;
+    }
+
+    /** Set by each new match screen: false for a layout the Arena board cannot show, which then keeps the default look. */
+    public static void setBoardPossible(final boolean possible) {
+        boardPossible = possible;
     }
 
     /** Whether the desktop-only extras apply (mouse and keyboard: right click, shortcuts, wheel, hover preview). */

@@ -126,6 +126,7 @@ public final class CardFlightOverlay {
         private boolean moved; // ENTER: a card already on the battlefield changing rows
         private boolean toHidden;   // ENTER: destination is scrolled out of view, so the flight stops at the edge and fades out
         private boolean fromHidden; // ENTER: a moved card started out of view, so the flight fades in from the edge
+        private boolean cardShaped; // LEAVE on the Arena board: it leaves from the stack's large card, not a tile
 
         private Flight(CardView card, Rectangle from, boolean fromExact, Rectangle to, float tappedAngle, boolean leave) {
             this.card = card; this.from = from; this.fromExact = fromExact; this.to = to;
@@ -214,6 +215,18 @@ public final class CardFlightOverlay {
         Flight f = new Flight(card, fromPanel, false, null, tappedAngle, true);
         f.delayNanos = leaveBatchIndex * LEAVE_STAGGER_NANOS;
         leaveBatchIndex++;
+        flights.add(f);
+        Gdx.graphics.requestRendering();
+    }
+
+    /**
+     * The Arena board: a spell that left the stack for its owner's graveyard (resolved, countered) or any other pile
+     * flies there from the large card the stack showed it as.
+     */
+    public static void startArenaStackLeave(CardView card, Rectangle fromCard) {
+        if (countFlights(true) >= MAX_LEAVE_FLIGHTS || style() == Style.OFF) { return; }
+        Flight f = new Flight(card, new Rectangle(fromCard), true, null, 0f, true);
+        f.cardShaped = true;
         flights.add(f);
         Gdx.graphics.requestRendering();
     }
@@ -326,11 +339,16 @@ public final class CardFlightOverlay {
 
     /** An Arena departure: from the tile to the owner's pile for the zone it went to (or it lifts and fades in place). */
     private static void resolveLeaveArena(Flight f) {
-        f.fromH = f.from.height * 1.08f;
+        f.fromH = f.cardShaped ? f.from.height : f.from.height * 1.08f;
         f.fromCx = f.from.x + f.from.width / 2;
         f.fromCy = f.from.y + f.from.height / 2;
         ZoneType zone = zoneOf(f.card);
         if (zone == null && isOnBattlefield(f.card)) { //e.g. a change of control: it moved rows, it did not leave
+            f.cancelled = true;
+            f.resolved = true;
+            return;
+        }
+        if (f.cardShaped && zone == null) { //a spell from the stack that went nowhere a pile shows (e.g. the battlefield): its own flight
             f.cancelled = true;
             f.resolved = true;
             return;
@@ -399,7 +417,7 @@ public final class CardFlightOverlay {
 
     private static void drawLeaveArena(Graphics g, Flight f, float t) {
         // the tile turns back into its card where it stood, then flies to its pile, speeding up, shrinking and fading
-        final float turn = MathUtils.clamp(t / 0.22f, 0f, 1f);
+        final float turn = f.cardShaped ? 1f : MathUtils.clamp(t / 0.22f, 0f, 1f);
         final float m = MathUtils.clamp((t - 0.12f) / 0.88f, 0f, 1f);
         final float e = Interpolation.pow2In.apply(m);
         final float cx = f.fromCx + (f.toCx - f.fromCx) * e;
