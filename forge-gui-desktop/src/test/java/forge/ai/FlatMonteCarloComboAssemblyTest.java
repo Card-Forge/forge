@@ -321,4 +321,36 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         AssertJUnit.assertNotNull("ten lands and ten Mountains: 30 damage, cast it",
                 ComboAssembly.next(ai, java.util.Collections.singletonList(cast), s -> true));
     }
+
+    @Test(timeOut = 120000)
+    public void peerIntoTheAbyssIsCastWhenUnderworldDreamsKills() {
+        setUp();
+        addCards("Swamp", 10, ai);
+        final Player opp = game.getPlayers().get(0);
+        for (int i = 0; i < 40; i++) {
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCardToZone("Underworld Dreams", ai, ZoneType.Battlefield);
+        final Card peer = addCardToZone("Peer into the Abyss", ai, ZoneType.Hand);
+        peer.getFirstSpellAbility().setActivatingPlayer(ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility cast = ComboAssembly.finish(ai, java.util.Collections.singletonList(peer.getFirstSpellAbility()), s -> true);
+        AssertJUnit.assertNotNull("40 cards in the library: 20 drawn, a damage each, the opponent has 20 life: cast it", cast);
+        AssertJUnit.assertTrue("aimed at the opponent", cast.getTargets().contains(opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void peerIntoTheAbyssWithoutDreamsIsLeftToTheAi() {
+        setUp();
+        addCards("Swamp", 10, ai);
+        final Player opp = game.getPlayers().get(0);
+        for (int i = 0; i < 30; i++) {
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        final Card peer = addCardToZone("Peer into the Abyss", ai, ZoneType.Hand);
+        peer.getFirstSpellAbility().setActivatingPlayer(ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertNull("no Dreams: no kill",
+                ComboAssembly.finish(ai, java.util.Collections.singletonList(peer.getFirstSpellAbility()), s -> true));
+    }
 }

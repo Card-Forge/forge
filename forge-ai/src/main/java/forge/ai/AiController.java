@@ -925,7 +925,8 @@ public class AiController {
             } finally {
                 sa.clearLastState();
             }
-            return !sa.usesTargeting() && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
+            return (!sa.usesTargeting() || ComboAssembly.aimedDreamsKill(player, sa)) && sa.canPlay()
+                    && ComputerUtilCost.canPayCost(sa, player, false);
         } catch (final RuntimeException e) {
             return false;
         }
@@ -1977,7 +1978,8 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility));
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
+                    || (flatMc && LoopRunner.held(player, spellAbility)));
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());

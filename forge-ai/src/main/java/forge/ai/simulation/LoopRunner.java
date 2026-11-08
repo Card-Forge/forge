@@ -22,12 +22,16 @@ import forge.game.zone.ZoneType;
  * it. The loops that the AI does go round by itself (Splinter Twin, Kiki-Jiki, Saheeli Rai) are not here.
  * <ul>
  *   <li><b>Heliod, Sun-Crowned + Walking Ballista</b>: Heliod gives the Ballista lifelink, and every ping gains a
- *       life, which gives the Ballista back the counter it spent.</li>
+ *       life, which gives the Ballista back the counter it spent (from two counters on: a lone one is grown first).</li>
  *   <li><b>Mikaeus, the Unhallowed + Triskelion</b>: the Triskelion has undying, and shoots itself dead whenever
  *       only two counters are left; it comes back with four, and every counter above two goes at the opponent.</li>
  *   <li><b>Freed from the Real + Bloom Tender</b>: the Tender taps for green and blue, the Freed untaps it for blue:
  *       one green mana more every round, in the mana pool, for a Walking Ballista from the hand with an X as big as
  *       the opponent's life, and then the pings.</li>
+ *   <li><b>High Tide + Palinchron + Stroke of Genius</b>: with High Tide cast, every Island taps for two. Palinchron
+ *       untaps seven lands when it enters and goes back to the hand for {2}{U}{U}: round after round, the Islands are
+ *       tapped, Palinchron is bounced and cast again, and the mana in the pool grows by five. When it covers the
+ *       opponent's library, a Stroke of Genius for that much draws all of it: they lose at their next draw.</li>
  * </ul>
  * Every ability is activated at most {@link RunawayLoop#LIMIT} times a turn.
  */
@@ -70,7 +74,11 @@ public final class LoopRunner {
         if (triskelion != null) {
             return triskelion;
         }
-        return freedAndBloomTender(ai, candidates, target, approve);
+        final SpellAbility tender = freedAndBloomTender(ai, candidates, target, approve);
+        if (tender != null) {
+            return tender;
+        }
+        return highTideAndPalinchron(ai, candidates, target, approve);
     }
 
     private static Card inPlay(final Player ai, final String name) {
@@ -117,6 +125,17 @@ public final class LoopRunner {
         final Card ballista = inPlay(ai, "Walking Ballista");
         if (heliod == null || ballista == null || ballista.getCounters(CounterEnumType.P1P1) < 1) {
             return null;
+        }
+        if (ballista.getCounters(CounterEnumType.P1P1) < 2) {
+            // the ping that spends the last counter kills the Ballista, and the counter that Heliod's trigger puts on
+            // a creature only lands on one that is still there: grow it first ({4}: a +1/+1 counter)
+            final SpellAbility grow = activated(candidates, ballista, ApiType.PutCounter);
+            if (grow == null) {
+                return null;
+            }
+            grow.setActivatingPlayer(ai);
+            grow.resetTargets();
+            return !RunawayLoop.exceeded(grow) && approve.test(grow) ? grow : null;
         }
         if (!ballista.hasKeyword(Keyword.LIFELINK)) {
             return aimed(ai, activated(candidates, heliod, ApiType.Pump), ballista, approve);
@@ -195,5 +214,130 @@ public final class LoopRunner {
         }
         untap.setActivatingPlayer(ai);
         return !RunawayLoop.exceeded(untap, MAX_ACTIVATIONS) && approve.test(untap) ? untap : null;
+    }
+
+    private static final String HIGH_TIDE = "High Tide";
+    private static final String PALINCHRON = "Palinchron";
+    private static final String STROKE = "Stroke of Genius";
+
+    /** Untapped Islands needed before High Tide: it takes one, and the first Palinchron needs five mana after (four Islands, two each). */
+    static final int ISLANDS_NEEDED = 5;
+
+    private static boolean tideActive(final Player ai) {
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Command)) {
+            // the effect of the spell is a card of the command zone named "High Tide's Effect"
+            if (c.getName().startsWith(HIGH_TIDE)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int untappedIslands(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isTapped() && c.getType().hasSubtype("Island")) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    private static boolean inHand(final Player ai, final String name) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The spell of that name from the hand, or null. */
+    private static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isSpell() && !sa.isLandAbility() && host.isInZone(ZoneType.Hand)
+                    && ai.equals(host.getController()) && host.getName().equals(name)) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    /** Whether the three cards of High Tide, Palinchron and Stroke of Genius are the AI's to go round with. */
+    private static boolean tidePieces(final Player ai) {
+        return (inHand(ai, HIGH_TIDE) || tideActive(ai)) && inHand(ai, STROKE)
+                && (inHand(ai, PALINCHRON) || inPlay(ai, PALINCHRON) != null);
+    }
+
+    /**
+     * High Tide and Stroke of Genius are not cast on their own while the loop is waiting for its Islands: the AI threw
+     * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
+     */
+    public static boolean held(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || !ai.equals(host.getController())
+                || !(host.getName().equals(HIGH_TIDE) || host.getName().equals(STROKE))) {
+            return false;
+        }
+        return tidePieces(ai) && !tideActive(ai) && untappedIslands(ai) < ISLANDS_NEEDED;
+    }
+
+    private static SpellAbility highTideAndPalinchron(final Player ai, final List<SpellAbility> candidates,
+                                                      final Player opp, final Predicate<SpellAbility> approve) {
+        final SpellAbility stroke = castFromHand(ai, candidates, STROKE);
+        final Card palinchron = inPlay(ai, PALINCHRON);
+        final SpellAbility recast = castFromHand(ai, candidates, PALINCHRON);
+        if (stroke == null || palinchron == null && recast == null) {
+            return null;
+        }
+        final int library = opp.getCardsIn(ZoneType.Library).size();
+        if (library < 1 || !opp.canDraw() || opp.cantLoseCheck(forge.game.player.GameLossReason.Milled)
+                || opp.isCardInPlay("Laboratory Maniac") || !stroke.canTarget(opp)) {
+            return null;
+        }
+        if (!tideActive(ai)) {
+            final SpellAbility tide = castFromHand(ai, candidates, HIGH_TIDE);
+            if (tide == null || untappedIslands(ai) < ISLANDS_NEEDED) {
+                return null;
+            }
+            tide.setActivatingPlayer(ai);
+            return approve.test(tide) ? tide : null;
+        }
+        final int pool = ai.getManaPool().totalMana();
+        if (pool >= library + 3) {
+            stroke.setActivatingPlayer(ai);
+            stroke.resetTargets();
+            stroke.getTargets().add(opp);
+            if (forge.ai.ComputerUtilCost.setMaxXValue(stroke, ai, false) >= library && approve.test(stroke)) {
+                return stroke;
+            }
+        }
+        // the Islands first, all of them: what Palinchron untaps is tapped again for two each, which is the gain
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isManaAbility() && !host.isTapped() && ai.equals(host.getController())
+                    && host.getType().hasSubtype("Island")) {
+                sa.setActivatingPlayer(ai);
+                if (!RunawayLoop.exceeded(sa, MAX_ACTIVATIONS) && approve.test(sa)) {
+                    return sa;
+                }
+            }
+        }
+        if (palinchron != null) {
+            final SpellAbility bounce = activated(candidates, palinchron, ApiType.ChangeZone);
+            if (bounce != null && pool >= 9) { // {2}{U}{U} to bounce and {3}{U}{U} to cast again: with less the loop is stuck
+                bounce.setActivatingPlayer(ai);
+                bounce.resetTargets();
+                return !RunawayLoop.exceeded(bounce) && approve.test(bounce) ? bounce : null;
+            }
+            return null;
+        }
+        if (pool >= 5) {
+            recast.setActivatingPlayer(ai);
+            recast.resetTargets();
+            return approve.test(recast) ? recast : null;
+        }
+        return null;
     }
 }

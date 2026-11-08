@@ -63,6 +63,7 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     private final StringBuilder trace = new StringBuilder();
 
     private void runTurn() {
+        trace.setLength(0); // the test class is one instance for all its tests
         game.AI_FLAT_MONTE_CARLO = true;
         game.AI_TIMEOUT = 10;
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
@@ -100,6 +101,17 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertEquals("Heliod gives the lifelink", heliod, step.getHostCard());
         AssertJUnit.assertEquals(ApiType.Pump, step.getApi());
         AssertJUnit.assertTrue("aimed at the Ballista", step.getTargets().contains(ballista));
+    }
+
+    @Test(timeOut = 120000)
+    public void aLoneCounterIsGrownBeforeTheLoopStarts() {
+        setUp();
+        final Card heliod = addCardToZone("Heliod, Sun-Crowned", ai, ZoneType.Battlefield);
+        final Card ballista = withCounters("Walking Ballista", 1);
+        final SpellAbility step = LoopRunner.next(ai, abilitiesOf(heliod, ballista), s -> true);
+        AssertJUnit.assertNotNull("a Ballista with one counter: grow it, do not ping it dead", step);
+        AssertJUnit.assertEquals(ballista, step.getHostCard());
+        AssertJUnit.assertEquals(ApiType.PutCounter, step.getApi());
     }
 
     @Test(timeOut = 120000)
@@ -214,5 +226,79 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         }
         AssertJUnit.assertTrue("one land cannot pay for an X of one: the Ballista stays in hand\n" + trace + gameStateToString(game),
                 inHand);
+    }
+
+    /** The spells of the hand and the mana abilities of the permanents: what the AI chooses from. */
+    private List<SpellAbility> playsOf() {
+        final List<SpellAbility> sas = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            sas.addAll(c.getSpellAbilities());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            sas.addAll(c.getSpellAbilities());
+        }
+        for (final SpellAbility sa : sas) {
+            sa.setActivatingPlayer(ai);
+        }
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        return sas;
+    }
+
+    private void islandsAndTheTidePieces(final int islands) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Plains", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCards("Island", islands, ai);
+        addCardToZone("High Tide", ai, ZoneType.Hand);
+        addCardToZone("Palinchron", ai, ZoneType.Hand);
+        addCardToZone("Stroke of Genius", ai, ZoneType.Hand);
+    }
+
+    private SpellAbility spellOf(final String name) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(name)) {
+                return c.getFirstSpellAbility();
+            }
+        }
+        throw new IllegalStateException(name + " is not in the hand");
+    }
+
+    @Test(timeOut = 120000)
+    public void highTideIsCastOnceTheIslandsAreThere() {
+        islandsAndTheTidePieces(8);
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("eight Islands, High Tide, Palinchron and Stroke: the first step", step);
+        AssertJUnit.assertEquals("High Tide first", "High Tide", step.getHostCard().getName());
+        AssertJUnit.assertFalse("High Tide is not held when the Islands are there", LoopRunner.held(ai, spellOf("High Tide")));
+    }
+
+    @Test(timeOut = 120000)
+    public void highTideAndStrokeAreHeldWithoutTheIslands() {
+        islandsAndTheTidePieces(3);
+        AssertJUnit.assertNull("three Islands are not enough to go round", LoopRunner.next(ai, playsOf(), s -> true));
+        AssertJUnit.assertTrue("High Tide is kept for the loop", LoopRunner.held(ai, spellOf("High Tide")));
+        AssertJUnit.assertTrue("Stroke of Genius too", LoopRunner.held(ai, spellOf("Stroke of Genius")));
+    }
+
+    @Test(timeOut = 120000)
+    public void highTideAloneIsNotHeld() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        addCards("Island", 3, ai);
+        addCardToZone("High Tide", ai, ZoneType.Hand);
+        AssertJUnit.assertFalse("without Palinchron and Stroke it is a card like another", LoopRunner.held(ai, spellOf("High Tide")));
+    }
+
+    @Test(timeOut = 600000)
+    public void highTideAndPalinchronDrawTheOpponentsLibrary() {
+        islandsAndTheTidePieces(10);
+        runTurn();
+        AssertJUnit.assertEquals("the library of the opponent should be drawn (Stroke of Genius in the graveyard: "
+                        + ai.getCardsIn(ZoneType.Graveyard).size() + " cards there)\n" + trace + gameStateToString(game),
+                0, opp.getCardsIn(ZoneType.Library).size());
     }
 }

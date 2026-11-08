@@ -206,6 +206,40 @@ public final class ComboAssembly {
     }
 
     /**
+     * A draw spell at an opponent while the AI has Underworld Dreams (one damage per card the opponent draws, for each
+     * Dreams): Peer into the Abyss draws half the library, and with a Dreams or two that is the opponent's life
+     * many times over. Aims the spell at the opponent it kills and says whether there is one; Peer's own life loss
+     * (half of what is left, rounded up) finishes an opponent at one life.
+     */
+    public static boolean aimedDreamsKill(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || sa.getApi() != ApiType.Draw
+                || !sa.usesTargeting() || !host.getName().equals("Peer into the Abyss")) {
+            return false;
+        }
+        int dreams = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Underworld Dreams")) {
+                dreams++;
+            }
+        }
+        if (dreams == 0) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        for (final Player opp : ai.getOpponents()) {
+            final int draw = (opp.getCardsIn(ZoneType.Library).size() + 1) / 2;
+            final int left = opp.getLife() - draw * dreams;
+            if (opp.getLife() > 0 && opp.canDraw() && left <= 1 && sa.canTarget(opp)) {
+                sa.resetTargets();
+                sa.getTargets().add(opp);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * The finishing draw: a spell that makes a target player draw (Stroke of Genius, Brain Freeze is not one) cast at an
      * opponent whose whole library it takes, for the X the mana allows. The opponent loses at the next draw step, and
      * the rollouts only see that when they play on into the opponent's turn, so the play is made without them. Null when
@@ -237,6 +271,9 @@ public final class ComboAssembly {
                 }
             } catch (final RuntimeException e) {
                 continue;
+            }
+            if (aimedDreamsKill(ai, sa) && approve.test(sa)) {
+                return sa;
             }
             for (final Player opp : ai.getOpponents()) {
                 final int library = opp.getCardsIn(ZoneType.Library).size();
