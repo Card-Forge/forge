@@ -40,6 +40,10 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         int lifeTextFor = Integer.MIN_VALUE;
         String poisonText;
         int poisonFor = -1;
+        // commander damage taken, one chip per opposing commander that has dealt some (21 is lethal)
+        final String[] cmdrText = new String[4];
+        final int[] cmdrFor = {-1, -1, -1, -1};
+        final boolean[] cmdrNear = new boolean[4];
     }
 
     private static final int RING_CHOSEN = 0, RING_SELECTABLE = 1, RING_TARGET = 2, RING_HOVER = 3;
@@ -109,6 +113,7 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         final float plateH = Math.max(ArenaTheme.px(22), Math.round(d * (seat ? 0.58f : 0.42f)));
         drawLifePlate(g, st, cx, cy + d / 2f, plateH);
         drawPoison(g, st, player, cx + plateH * 0.75f + ArenaTheme.px(4), cy + d / 2f, plateH);
+        drawCommanderDamage(g, st, player, cx - plateH * 0.75f - ArenaTheme.px(4), cy + d / 2f, plateH);
 
         final float up = st.floatUp.get();
         if (up < 1f && st.floatText != null) {
@@ -268,6 +273,50 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         g.fillSmoothRoundRect(ArenaTheme.alpha(ArenaTheme.NIGHT, 0.9f, S1), x, cy - h / 2f, w, h, h / 2f);
         g.drawSmoothRoundRect(1f, POISON, x, cy - h / 2f, w, h, h / 2f);
         g.drawText(st.poisonText, f, POISON, x, cy - h / 2f, w, h, false, Align.center, true);
+    }
+
+    private static final Color CMDR = ArenaTheme.rgb(0xE8C27A), CMDR_NEAR = ArenaTheme.rgb(0xFF6A5C);
+
+    /** Chips left of the life plate: the commander damage this player has taken from each opposing commander. */
+    private static void drawCommanderDamage(final Graphics g, final State st, final PlayerView player, final float right, final float cy,
+            final float plateH) {
+        final GameView game = MatchController.instance.getGameView();
+        if (game == null || game.getPlayers() == null) {
+            return;
+        }
+        int n = 0;
+        for (final PlayerView other : game.getPlayers()) {
+            if (other == player || other.getCommanders() == null) {
+                continue;
+            }
+            for (final forge.game.card.CardView cmdr : other.getCommanders()) {
+                if (n >= st.cmdrText.length) {
+                    break;
+                }
+                final int damage = player.getCommanderDamage(cmdr);
+                if (damage <= 0) {
+                    continue;
+                }
+                if (st.cmdrFor[n] != damage || st.cmdrText[n] == null) {
+                    st.cmdrFor[n] = damage;
+                    st.cmdrText[n] = forge.Forge.getLocalizer().getMessage("lblArenaCommanderDamage", String.valueOf(damage));
+                    st.cmdrNear[n] = damage >= 15;
+                }
+                n++;
+            }
+        }
+        final FSkinFont f = ArenaCards.evenFont(plateH * 0.38f);
+        final float h = plateH * 0.56f;
+        float x = right;
+        for (int i = 0; i < n; i++) {
+            final float w = ArenaArt.textWidth(st.cmdrText[i], f) + h;
+            x -= w;
+            final Color c = st.cmdrNear[i] ? CMDR_NEAR : CMDR;
+            g.fillSmoothRoundRect(ArenaTheme.alpha(ArenaTheme.NIGHT, 0.9f, S1), x, cy - h / 2f, w, h, h / 2f);
+            g.drawSmoothRoundRect(1f, c, x, cy - h / 2f, w, h, h / 2f);
+            g.drawText(st.cmdrText[i], f, c, x, cy - h / 2f, w, h, false, Align.center, true);
+            x -= ArenaTheme.px(4);
+        }
     }
 
     /** Arena shows an opponent who is taking long to decide as a speech bubble with rippling dots beside the portrait. */
