@@ -2,7 +2,9 @@ Name:Vortex Elemental
 ManaCost:U
 Types:Creature Elemental
 PT:0/1
-A:AB$ ChangeZoneAll | Cost$ U | ChangeType$ Card.Self,Creature.blockingSource,Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Put CARDNAME and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle.
-A:AB$ MustBlock | Cost$ 3 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature that must block this creature this turn | SpellDescription$ Target creature blocks CARDNAME this turn if able.
+A:AB$ ChangeZone | Cost$ U | Defined$ Valid Card.Self,Creature.blockingSource,Creature.blockedBySourceLKI | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | SubAbility$ DBShuffleChanged | SpellDescription$ Put this creature and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle.
+A:AB$ MustBlock | Cost$ 3 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature that must block this creature this turn | SpellDescription$ Target creature blocks this creature this turn if able.
+SVar:DBShuffleChanged:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-Oracle:{U}: Put Vortex Elemental and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle.\n{3}{U}{U}: Target creature blocks Vortex Elemental this turn if able.
+Oracle:{U}: Put this creature and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle.\n{3}{U}{U}: Target creature blocks this creature this turn if able.
