@@ -94,16 +94,24 @@ public final class ArenaTheme {
 
     // ---- on / off ---------------------------------------------------------------------------------------------------
     private static volatile boolean active;
-    private static boolean prefOn;
+    private static boolean prefOn, prefSeen;
     private static final List<Runnable> listeners = new ArrayList<>();
+    private static final List<java.util.function.Consumer<Boolean>> prefListeners = new ArrayList<>();
 
     /**
-     * Whether the Arena look is on: {@link FPref#UI_ARENA_THEME_GDX} is set and this is not adventure mode (whose duels
-     * keep their own look). A field read, cheap enough for every view on every frame. It is refreshed once per frame
-     * by {@link ArenaMotion#tick()} and straight away by {@link #refresh()} (the settings toggle calls it).
+     * Whether the Arena look is on: {@link FPref#UI_ARENA_THEME} is set (the same setting as the Swing client's), this is
+     * not adventure mode (whose duels keep their own look) and the screen is in landscape (the Arena board has no
+     * portrait layout, so phones held upright keep the default look). A field read, cheap enough for every view on
+     * every frame. It is refreshed once per frame by {@link ArenaMotion#tick()} and straight away by {@link #refresh()}
+     * (the settings toggle calls it).
      */
     public static boolean isActive() {
         return active;
+    }
+
+    /** Whether the Arena look setting is on, whatever the screen (frame pacing follows this, not {@link #isActive()}). */
+    public static boolean isSettingOn() {
+        return prefOn;
     }
 
     /**
@@ -121,8 +129,19 @@ public final class ArenaTheme {
     /** Re-reads the preference. Listeners run (on the render thread) when the result changes. */
     public static void refresh() {
         final ForgePreferences prefs = FModel.getPreferences();
-        prefOn = prefs != null && prefs.getPrefBoolean(FPref.UI_ARENA_THEME_GDX);
-        final boolean now = prefOn && !Forge.isMobileAdventureMode;
+        final boolean pref = prefs != null && prefs.getPrefBoolean(FPref.UI_ARENA_THEME);
+        if (prefs != null && (pref != prefOn || !prefSeen)) {
+            prefOn = pref;
+            prefSeen = true;
+            for (final java.util.function.Consumer<Boolean> l : new ArrayList<>(prefListeners)) {
+                try {
+                    l.accept(pref);
+                } catch (final RuntimeException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        final boolean now = prefOn && !Forge.isMobileAdventureMode && Forge.isLandscapeMode();
         if (now != active) {
             active = now;
             for (final Runnable r : new ArrayList<>(listeners)) {
@@ -142,6 +161,14 @@ public final class ArenaTheme {
 
     public static void removeListener(final Runnable onChange) {
         listeners.remove(onChange);
+    }
+
+    /**
+     * Told the setting's value once it is first read and whenever it changes (render thread), for what follows the
+     * setting itself rather than the screen: the desktop launcher's frame pacing.
+     */
+    public static void addSettingListener(final java.util.function.Consumer<Boolean> onChange) {
+        prefListeners.add(onChange);
     }
 
     // ---- sizes ------------------------------------------------------------------------------------------------------

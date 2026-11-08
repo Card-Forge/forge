@@ -4,7 +4,10 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.util.HWInfo;
@@ -12,6 +15,7 @@ import forge.Forge;
 import forge.adventure.util.Config;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.screens.match.arena.ArenaTheme;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.lwjgl.system.Configuration;
@@ -120,6 +124,8 @@ public class GameLauncher {
         if (isArenaThemeOn()) {
             applyFrameRate(config); //with the Arena look off, keep libGDX's frame pacing exactly as before
         }
+        //the setting can be switched while Forge runs: the pacing follows it straight away, both ways
+        ArenaTheme.addSettingListener(GameLauncher::followArenaSetting);
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -147,25 +153,62 @@ public class GameLauncher {
     }
 
     /**
-     * Whether the Arena look is on ({@link FPref#UI_ARENA_THEME_GDX}), read from the preferences file before the model
-     * is loaded. Switching it in the settings changes the frame pacing from the next start.
+     * Whether the Arena look is on ({@link FPref#UI_ARENA_THEME}), read from the preferences file before the model
+     * is loaded. Switching it in the settings later changes the frame pacing at once ({@link #followArenaSetting}).
      */
     private static boolean isArenaThemeOn() {
         try {
-            return new ForgePreferences().getPrefBoolean(FPref.UI_ARENA_THEME_GDX);
+            return new ForgePreferences().getPrefBoolean(FPref.UI_ARENA_THEME);
         } catch (RuntimeException e) {
             e.printStackTrace();
             return false;
         }
     }
 
+    // libGDX's own pacing, which Forge used before the Arena look (the Lwjgl3ApplicationConfiguration defaults)
+    private static final int PLAIN_FOREGROUND_FPS = 0, PLAIN_IDLE_FPS = 60;
+
     /**
-     * Runs at the monitor's refresh rate (120 fps on a 120 Hz screen) instead of libGDX's 60 fps assumptions: vsync
-     * paces the frames, the foreground cap is the refresh rate (plus one, so the limiter never fights vsync, and so
-     * it still holds where a driver ignores vsync), and the idle poll runs at the refresh rate too, so a frame asked
-     * for by input (hover, drag) is not held back up to 1/60 s by libGDX's idle sleep while rendering on demand.
+     * The Arena look setting was read or changed (render thread): runs at the monitor's refresh rate while it is on and
+     * goes back to libGDX's own pacing when it is off. The running application's configuration is changed in place;
+     * its loop reads the foreground and idle rates every frame.
      */
-    public static void applyFrameRate(Lwjgl3ApplicationConfiguration config) {
+    private static void followArenaSetting(boolean on) {
+        try {
+            if (!(Gdx.graphics instanceof Lwjgl3Graphics)) {
+                return;
+            }
+            Lwjgl3Graphics graphics = (Lwjgl3Graphics) Gdx.graphics;
+            int hz = on ? refreshRate() : 0;
+            for (Lwjgl3ApplicationConfiguration live : liveConfigs(graphics)) {
+                live.setForegroundFPS(on ? hz + 1 : PLAIN_FOREGROUND_FPS);
+                live.setIdleFPS(on ? hz : PLAIN_IDLE_FPS);
+            }
+            graphics.setVSync(true); //on in both cases (libGDX's default); a driver ignoring it still has the cap
+        } catch (Exception e) {
+            e.printStackTrace(); //pacing only: never worth breaking the settings screen for
+        }
+    }
+
+    /** The configuration objects the running application paces itself by: the window's and the application's own. */
+    private static java.util.List<Lwjgl3ApplicationConfiguration> liveConfigs(Lwjgl3Graphics graphics) throws ReflectiveOperationException {
+        java.util.List<Lwjgl3ApplicationConfiguration> out = new java.util.ArrayList<>(2);
+        Lwjgl3Window window = graphics.getWindow();
+        java.lang.reflect.Method getConfig = Lwjgl3Window.class.getDeclaredMethod("getConfig");
+        getConfig.setAccessible(true);
+        out.add((Lwjgl3ApplicationConfiguration) getConfig.invoke(window));
+        if (Gdx.app instanceof Lwjgl3Application) {
+            java.lang.reflect.Field config = Lwjgl3Application.class.getDeclaredField("config");
+            config.setAccessible(true);
+            Lwjgl3ApplicationConfiguration appConfig = (Lwjgl3ApplicationConfiguration) config.get(Gdx.app);
+            if (appConfig != null && appConfig != out.get(0)) {
+                out.add(appConfig);
+            }
+        }
+        return out;
+    }
+
+    private static int refreshRate() {
         int hz = 60;
         try {
             DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
@@ -175,7 +218,17 @@ public class GameLauncher {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        hz = Math.max(30, Math.min(hz, 360));
+        return Math.max(30, Math.min(hz, 360));
+    }
+
+    /**
+     * Runs at the monitor's refresh rate (120 fps on a 120 Hz screen) instead of libGDX's 60 fps assumptions: vsync
+     * paces the frames, the foreground cap is the refresh rate (plus one, so the limiter never fights vsync, and so
+     * it still holds where a driver ignores vsync), and the idle poll runs at the refresh rate too, so a frame asked
+     * for by input (hover, drag) is not held back up to 1/60 s by libGDX's idle sleep while rendering on demand.
+     */
+    public static void applyFrameRate(Lwjgl3ApplicationConfiguration config) {
+        int hz = refreshRate();
         config.useVsync(true);
         config.setForegroundFPS(hz + 1);
         config.setIdleFPS(hz);
