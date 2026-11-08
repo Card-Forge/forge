@@ -251,6 +251,7 @@ public class MatchScreen extends FScreen {
     private void onArenaThemeChanged() {
         for (VPlayerPanel panel : playerPanelsList) {
             panel.getField().update(true);
+            panel.updateZone(ZoneType.Hand); //the Arena hand carries the commander and castables beside it, the default one not
             panel.revalidate(true);
         }
         revalidate();

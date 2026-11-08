@@ -19,7 +19,6 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
-import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
 import forge.item.PaperCard;
 import forge.model.FModel;
