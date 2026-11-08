@@ -27,6 +27,7 @@ public class EffectData implements Serializable {
     public String[] startBattleWithCardInHand; //Cards added to the hand after mulligans.
     public int maxHandSizeModifier = 0;  //Amount to add to maximum hand size, without changing starting hand size.
     public SuspendedCard[] startBattleWithCardSuspended; //Cards that start suspended in Exile.
+    public boolean allowIllegalCommander = false; //Keeps a commander that is not legal: any creature or planeswalker.
 
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
@@ -134,6 +135,8 @@ public class EffectData implements Serializable {
             description+="Starting hand: " + changeStartCards + "\n";
         if(maxHandSizeModifier != 0)
             description+="Max hand size: " + maxHandSizeModifier + "\n";
+        if(allowIllegalCommander)
+            description+="Any creature or planeswalker can be commander\n";
         if(moveSpeed!=0 && moveSpeed != 1)
             description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)
