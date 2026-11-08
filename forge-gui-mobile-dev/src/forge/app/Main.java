@@ -97,6 +97,7 @@ public class Main {
 
         @Override
         public void restart() {
+            DesktopWindow.save();
             if (RestartUtil.prepareForRestart()) {
                 // Calls dispose()
                 Gdx.app.exit();
@@ -108,6 +109,7 @@ public class Main {
 
         @Override
         public void exit() {
+            DesktopWindow.save();
             // Calls dispose()
             Gdx.app.exit();
             // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
@@ -186,6 +188,31 @@ public class Main {
             long handle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
             GLFW.glfwSetInputMode(handle, GLFW.GLFW_CURSOR,
                     confined ? GLFW.GLFW_CURSOR_CAPTURED : GLFW.GLFW_CURSOR_NORMAL);
+        }
+
+        @Override
+        public boolean hasWindowControls() {
+            return Gdx.graphics instanceof Lwjgl3Graphics;
+        }
+
+        @Override
+        public boolean isFullscreen() {
+            return DesktopWindow.isFullscreen();
+        }
+
+        @Override
+        public void setFullscreen(boolean fullscreen) {
+            DesktopWindow.setFullscreen(fullscreen);
+        }
+
+        @Override
+        public void setWindowSize(int width, int height) {
+            DesktopWindow.setWindowSize(width, height);
+        }
+
+        @Override
+        public int[] getMonitorSize() {
+            return DesktopWindow.getMonitorSize();
         }
     }
 }

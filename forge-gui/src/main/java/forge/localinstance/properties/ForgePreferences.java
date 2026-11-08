@@ -45,6 +45,12 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_FULLSCREEN_MODE ("false"),
         UI_KEEP_MOUSE_IN_FULLSCREEN ("false"),
         UI_VIDEO_MODE ("720p"),
+        /** libGDX desktop: how large text and controls are drawn, "Auto" or a percentage ("75%") of the phone-sized look. */
+        UI_INTERFACE_SIZE ("Auto"),
+        /** libGDX desktop: the window's last position and size when neither maximized nor fullscreen, "x,y,width,height". */
+        UI_WINDOW_BOUNDS (""),
+        /** libGDX desktop: whether the window was maximized when Forge closed (it opens maximized the first time). */
+        UI_WINDOW_MAXIMIZED ("true"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
         UI_ANIMATED_CARD_TAPUNTAP("true"),

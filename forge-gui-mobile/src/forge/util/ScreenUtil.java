@@ -43,7 +43,28 @@ public class ScreenUtil implements Disposable {
         isInitialized = true;
     }
 
+    /**
+     * The window changed size (desktop): later pictures of the screen are taken at the new size. The old texture stays
+     * until then, as a transition may still be showing it.
+     */
+    public void onResize() {
+        if (width == Forge.getScreenWidth() && height == Forge.getScreenHeight()) {
+            return;
+        }
+        width = Forge.getScreenWidth();
+        height = Forge.getScreenHeight();
+        bufferSize = width * height * 4;
+        pixels = BufferUtils.newByteBuffer(bufferSize);
+        resized = true;
+    }
+    private boolean resized;
+
     public TextureRegion takeScreenshot() {
+        if (resized && isInitialized && !pendingScreenshot) {
+            resized = false;
+            screenshotTexture.dispose();
+            isInitialized = false;
+        }
         if (!isInitialized) {
             initScreenshotBuffer();
         }
@@ -58,7 +79,7 @@ public class ScreenUtil implements Disposable {
         if (firstCapture || FrameRate.hideFPSCountdown <= 0) {
             Gdx.app.postRunnable(() -> {
                 Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, screenshotTexture.getTextureObjectHandle());
-                Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, width, height);
+                Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, Math.min(width, screenshotTexture.getWidth()), Math.min(height, screenshotTexture.getHeight()));
                 Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0);
                 pendingScreenshot = false;
                 firstCapture = false;

@@ -11,6 +11,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.util.HWInfo;
+import forge.util.InterfaceSize;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.localinstance.properties.ForgePreferences;
@@ -113,13 +114,13 @@ public class GameLauncher {
             int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
         }
 
-        if (Config.instance().getSettingData().fullScreen) {
-            config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-            config.setAutoIconify(true);
-        } else {
-            config.setWindowedMode(windowWidth, windowHeight);
-            config.setResizable(false);
-        }
+        //a resizable window that remembers itself, opening maximized the first time; fullscreen is borderless on its monitor
+        ForgePreferences launchPrefs = readPreferences();
+        DesktopWindow.configure(config, launchPrefs, Config.instance().getSettingData().fullScreen,
+                widthArg != null || heightArg != null ? windowWidth : 0, widthArg != null || heightArg != null ? windowHeight : 0,
+                windowWidth, windowHeight);
+        //how large text and controls are drawn: Utils.scale reads it when the window exists
+        InterfaceSize.set(launchPrefs == null ? InterfaceSize.AUTO : launchPrefs.getPref(FPref.UI_INTERFACE_SIZE));
         config.setHdpiMode(HdpiMode.Logical);
         if (isArenaThemeOn()) {
             applyFrameRate(config); //with the Arena look off, keep libGDX's frame pacing exactly as before
@@ -134,6 +135,11 @@ public class GameLauncher {
                 if (Forge.safeToClose)
                     Forge.exit(true);
                 return false;
+            }
+
+            @Override
+            public void created(Lwjgl3Window window) {
+                DesktopWindow.attach(window);
             }
 
             @Override
@@ -157,12 +163,22 @@ public class GameLauncher {
      * is loaded. Switching it in the settings later changes the frame pacing at once ({@link #followArenaSetting}).
      */
     private static boolean isArenaThemeOn() {
-        try {
-            return new ForgePreferences().getPrefBoolean(FPref.UI_ARENA_THEME);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            return false;
+        ForgePreferences prefs = readPreferences();
+        return prefs != null && prefs.getPrefBoolean(FPref.UI_ARENA_THEME);
+    }
+
+    private static ForgePreferences launchPreferences;
+
+    /** The preferences file as it is before the model loads (null if it cannot be read). */
+    private static ForgePreferences readPreferences() {
+        if (launchPreferences == null) {
+            try {
+                launchPreferences = new ForgePreferences();
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
         }
+        return launchPreferences;
     }
 
     // libGDX's own pacing, which Forge used before the Arena look (the Lwjgl3ApplicationConfiguration defaults)

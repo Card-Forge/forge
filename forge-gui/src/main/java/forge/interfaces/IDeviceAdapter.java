@@ -37,6 +37,29 @@ public interface IDeviceAdapter {
     default void setMouseConfined(boolean confined) {
     }
 
+    /** Whether Forge runs in a desktop window it can resize, maximize and make fullscreen (desktop LibGDX only). */
+    default boolean hasWindowControls() {
+        return false;
+    }
+
+    /** Whether the window covers its monitor (borderless fullscreen). */
+    default boolean isFullscreen() {
+        return false;
+    }
+
+    /** Switches between borderless fullscreen on the window's monitor and the window it was before. Default no-op. */
+    default void setFullscreen(boolean fullscreen) {
+    }
+
+    /** Leaves fullscreen and maximized state and resizes the window to this size, centred on its monitor. Default no-op. */
+    default void setWindowSize(int width, int height) {
+    }
+
+    /** The size of the monitor the window is on (desktop), or null when there is no window to speak of. */
+    default int[] getMonitorSize() {
+        return null;
+    }
+
     Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg");
     default boolean isSupportedAudioFormat(File file) {
         String path = file.getPath().toLowerCase();

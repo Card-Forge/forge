@@ -9,7 +9,8 @@ public class Utils {
     public static final float BASE_HEIGHT = 480f;
     private static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
     private static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
-    private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
+    //desktop: the Interface Size setting draws the phone-sized layout smaller on a big window (1 elsewhere)
+    private static final float HEIGHT_RATIO = SCREEN_HEIGHT * InterfaceSize.factor(SCREEN_HEIGHT) / BASE_HEIGHT;
 
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
 

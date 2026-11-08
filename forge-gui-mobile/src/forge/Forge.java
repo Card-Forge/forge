@@ -294,9 +294,37 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid() || deviceAdapter == null || Gdx.graphics == null) {
             return;
         }
-        boolean confine = Gdx.graphics.isFullscreen()
+        boolean confine = isFullscreen()
                 && FModel.getPreferences().getPrefBoolean(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN);
         deviceAdapter.setMouseConfined(confine);
+    }
+
+    /** Whether the window covers its monitor (desktop: borderless fullscreen; elsewhere libGDX's own fullscreen). */
+    public static boolean isFullscreen() {
+        if (deviceAdapter != null && deviceAdapter.hasWindowControls()) {
+            return deviceAdapter.isFullscreen();
+        }
+        return Gdx.graphics != null && Gdx.graphics.isFullscreen();
+    }
+
+    /**
+     * Desktop: switches borderless fullscreen on or off right away (F11, Alt+Enter, the Fullscreen setting) and keeps
+     * the setting in step, so the next start opens the same way.
+     */
+    public static void setFullscreen(boolean fullscreen) {
+        if (deviceAdapter == null || !deviceAdapter.hasWindowControls()) {
+            return;
+        }
+        deviceAdapter.setFullscreen(fullscreen);
+        try {
+            FModel.getPreferences().setPref(FPref.UI_FULLSCREEN_MODE, fullscreen);
+            FModel.getPreferences().save();
+            Config.instance().getSettingData().fullScreen = fullscreen;
+            Config.instance().saveSettings();
+        } catch (RuntimeException e) {
+            e.printStackTrace(); //the window changed anyway; only remembering it failed
+        }
+        updateMouseConfine();
     }
 
     public static boolean hasGamepad() {
@@ -1049,7 +1077,12 @@ public class Forge implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         try {
-            if (currentScreen != null) {
+            if (width <= 0 || height <= 0) {
+                return; //minimized
+            }
+            if (deviceAdapter != null && deviceAdapter.hasWindowControls()) {
+                resizeWindow(width, height);
+            } else if (currentScreen != null) {
                 currentScreen.setSize(width, height);
             } else if (splashScreen != null) {
                 splashScreen.setSize(width, height);
@@ -1061,7 +1094,42 @@ public class Forge implements ApplicationListener {
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
+            else
+                ex.printStackTrace();
         }
+    }
+
+    /**
+     * Desktop: the window was resized, maximized or made fullscreen. Everything is laid out again for the new size at
+     * the scale it was given at start-up (text and controls keep their size; there is just more or less room).
+     */
+    private void resizeWindow(int width, int height) {
+        if (width != screenWidth || height != screenHeight) {
+            screenWidth = width;
+            screenHeight = height;
+            camera.viewportWidth = width;
+            camera.viewportHeight = height;
+            camera.position.set(width / 2f, height / 2f, 0);
+            camera.update();
+            ScreenUtil.getInstance().onResize();
+        }
+        if (splashScreen != null) {
+            splashScreen.setSize(width, height);
+        }
+        if (transitionScreen != null) {
+            transitionScreen.setSize(width, height);
+        }
+        if (closingScreen != null) {
+            closingScreen.setSize(width, height);
+        }
+        if (currentScreen != null) {
+            FScreen backdrop = isLandscapeMode() ? currentScreen.getLandscapeBackdropScreen() : null;
+            if (backdrop != null && backdrop != currentScreen) {
+                backdrop.setSize(width, height); //the home screen's menu column, drawn beside the screen
+            }
+            currentScreen.setSize(width, height);
+        }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -1297,6 +1365,13 @@ public class Forge implements ApplicationListener {
             }
             if (keyCode == Keys.SHIFT_LEFT || keyCode == Keys.SHIFT_RIGHT) {
                 shiftKeyDown = true;
+            }
+            //desktop: F11 or Alt+Enter switches fullscreen, wherever Forge is
+            if (deviceAdapter != null && deviceAdapter.hasWindowControls() && !isMobileAdventureMode
+                    && (keyCode == Keys.F11 || ((keyCode == Keys.ENTER || keyCode == Keys.NUMPAD_ENTER)
+                    && (Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT))))) {
+                setFullscreen(!isFullscreen());
+                return true;
             }
 
             if (keyCode == Keys.LEFT || keyCode == Keys.RIGHT || keyCode == Keys.UP || keyCode == Keys.DOWN)
