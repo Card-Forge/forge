@@ -477,10 +477,10 @@ public final class ArenaPlayerParts {
             }
             final float chipH = Math.round(h * SEAT_CHIP_SHARE), gap = Math.max(2f, chipH * 0.18f);
             ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, phaseText, ArenaTheme.px(4),
-                    nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4));
+                    nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4) - nameH * FAN_CLEARANCE);
         }
     }
 
-    /** A seat's chips against the height of its name row. */
-    private static final float SEAT_CHIP_SHARE = 0.86f;
+    /** A seat's chips against the height of its name row; room kept clear for the hand fan's leaning cards (in name rows). */
+    private static final float SEAT_CHIP_SHARE = 0.86f, FAN_CLEARANCE = 0.6f;
 }

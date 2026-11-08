@@ -64,6 +64,9 @@ public final class ArenaPlayerInfo {
     private static final int CMDR_NEAR_DAMAGE = 15;
     /** The most rows a wrapping row of chips takes. */
     private static final int MAX_ROWS = 2;
+    /** How a row that does not fit shrinks: this much a step, at most this many steps (down to about half its size). */
+    private static final float FIT_SHRINK = 0.88f;
+    private static final int FIT_STEPS = 5;
 
     private static final Color CMDR_COLOR = ArenaTheme.rgb(0xE8C27A), CMDR_NEAR = ArenaTheme.rgb(0xFF6A5C);
     private static final Color CHIP_FILL = ArenaTheme.rgba(8, 9, 14, 225);
@@ -147,6 +150,24 @@ public final class ArenaPlayerInfo {
         if (player == null) {
             return 0;
         }
+        // a wrapping row that would leave chips out (a seat with commander damage, the Monarch and mana on a small
+        // window) takes smaller chips instead, down to a floor, keeping its top where it was
+        float fit = h;
+        if (maxW > 0) {
+            for (int i = 0; i < FIT_STEPS; i++) {
+                layout(null, player, what, lead, leadText, x, cy - (h - fit) / 2f, fit, rightToLeft, maxW);
+                if (ROW.dropped == 0) {
+                    break;
+                }
+                fit *= FIT_SHRINK;
+            }
+        }
+        return layout(g, player, what, lead, leadText, x, cy - (h - fit) / 2f, fit, rightToLeft, maxW);
+    }
+
+    /** Lays the chips out and, with a Graphics, draws them; with none it only counts what fits. */
+    private static int layout(final Graphics g, final PlayerView player, final int what, final int lead, final String leadText, final float x,
+            final float cy, final float h, final boolean rightToLeft, final float maxW) {
         final Row row = ROW.start(g, x, cy, h, rightToLeft, maxW);
         if (lead == LEAD_PHASE && leadText != null) {
             row.leadChip(leadText, LEAD_TOP, LEAD_BOTTOM, ArenaTheme.GOLD);
@@ -252,6 +273,8 @@ public final class ArenaPlayerInfo {
         private float x0, x, cy, h, maxW;
         private boolean rtl;
         private int rows;
+        /** Chips left out for want of room in the last layout. */
+        int dropped;
 
         Row start(final Graphics g0, final float x1, final float cy0, final float h0, final boolean rtl0, final float maxW0) {
             g = g0;
@@ -261,6 +284,7 @@ public final class ArenaPlayerInfo {
             rtl = rtl0;
             maxW = maxW0;
             rows = 0;
+            dropped = 0;
             return this;
         }
 
@@ -278,6 +302,7 @@ public final class ArenaPlayerInfo {
                 rows = 1;
             } else if (maxW > 0 && Math.abs(x - x0) + w > maxW) {
                 if (rows >= MAX_ROWS) {
+                    dropped++;
                     return Float.NaN;
                 }
                 rows++;
@@ -285,6 +310,7 @@ public final class ArenaPlayerInfo {
                 cy += h + gap;
             }
             if (maxW > 0 && w > maxW) {
+                dropped++;
                 return Float.NaN;
             }
             final float left = rtl ? x - w : x;
@@ -311,7 +337,7 @@ public final class ArenaPlayerInfo {
                 w = Math.min(maxW, ArenaArt.cachedTextWidth(text, f) + h);
             }
             final float left = place(w);
-            if (Float.isNaN(left)) {
+            if (Float.isNaN(left) || g == null) {
                 return;
             }
             g.fillSmoothRoundRectGradient(top, bottom, true, left, cy - h / 2f, w, h, h / 2f);
@@ -324,7 +350,7 @@ public final class ArenaPlayerInfo {
             final float art = h - 2 * ring();
             final float w = h * PAD_LEFT + art + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
             final float left = place(w);
-            if (Float.isNaN(left)) {
+            if (Float.isNaN(left) || g == null) {
                 return;
             }
             final Color c = near ? CMDR_NEAR : CMDR_COLOR;
@@ -343,7 +369,7 @@ public final class ArenaPlayerInfo {
             final float is = h * ICON;
             final float w = h * PAD_LEFT + is + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
             final float left = place(w);
-            if (Float.isNaN(left)) {
+            if (Float.isNaN(left) || g == null) {
                 return;
             }
             ground(left, w, CHIP_FILL, c);
@@ -357,7 +383,7 @@ public final class ArenaPlayerInfo {
             final float is = h * ICON;
             final float w = h * PAD_LEFT + is + h * TEXT_GAP + ArenaArt.cachedTextWidth(figure, f) + h * PAD_RIGHT;
             final float left = place(w);
-            if (Float.isNaN(left)) {
+            if (Float.isNaN(left) || g == null) {
                 return;
             }
             ground(left, w, CHIP_FILL, MANA_RIM);
@@ -371,7 +397,7 @@ public final class ArenaPlayerInfo {
             final float art = h - 2 * ring();
             final float w = h * PAD_LEFT + art + h * TEXT_GAP + ArenaArt.cachedTextWidth(label, f) + h * PAD_RIGHT;
             final float left = place(w);
-            if (Float.isNaN(left)) {
+            if (Float.isNaN(left) || g == null) {
                 return;
             }
             final float top = cy - h / 2f;
