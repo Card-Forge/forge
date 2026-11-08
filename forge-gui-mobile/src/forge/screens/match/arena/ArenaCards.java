@@ -828,10 +828,8 @@ public final class ArenaCards {
         }
     }
 
-    private static final Color PIP_BACK = ArenaTheme.rgba(0, 0, 0, 215);
-
     /**
-     * The cost of a hand card as bright mana pips sitting on its top edge (Swing CardPanel.drawArenaCostRow): the next
+     * The cost of a hand card as mana pips sitting on its top edge (Swing CardPanel.drawArenaCostRow): the next
      * card covers the printed one, so the pips line up with the right of the part it leaves showing.
      */
     private static void drawHandCost(final Graphics g, final CardView card, final State st, final float x, final float y, final float w) {
@@ -847,10 +845,6 @@ public final class ArenaCards {
         final float costW = CardFaceSymbols.getWidth(cost, size);
         final float px = x + Math.max(2f, shown - costW - Math.round(w * 0.03f));
         final float py = y - Math.round(size * 0.45f);
-        final int n = cost.getGlyphCount();
-        for (int i = 0; i < n; i++) {
-            g.fillSmoothCircle(PIP_BACK, px + i * size + size / 2f, py + size / 2f, size / 2f + 1f);
-        }
         CardFaceSymbols.drawManaCost(g, cost, px, py, size);
     }
 
