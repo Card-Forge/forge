@@ -274,9 +274,6 @@ public final class TimedAbilityGuard {
                 }
             }
         }
-        if (found.isEmpty()) {
-            found.add(Math.max(1, host.getKeywordMagnitude(Keyword.STATION)));
-        }
         final int[] result = new int[found.size()];
         int i = 0;
         for (final int t : found) {
