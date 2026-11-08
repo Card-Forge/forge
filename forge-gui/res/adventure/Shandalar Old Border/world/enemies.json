@@ -103621,6 +103621,8 @@
     ],
     "ai": "cautious",
     "boss": true,
+    "bossIntro": "--Dwarven battle song--",
+    "bossInsult": "The Dwarven battle song stops and a series of personal taunts sound from inside the still closed gate.",
     "speed": 0,
     "life": 40,
     "gamesPerMatch": 3,

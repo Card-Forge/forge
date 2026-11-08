@@ -12611,10 +12611,10 @@
   "name": "Hold the Hold",
   "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
   "offerDialog": {
-    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"\n\nWarning: Hard quest.",
+    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"",
     "options": [
       {
-        "name": "\"I'll go check it out. No promises, though!\"",
+        "name": "(Continue)",
         "condition": [
           {
             "actorID": 9150,
@@ -12622,51 +12622,67 @@
           },
           {
             "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted",
             "not": true
           }
         ],
-        "action": [
+        "text": "Warning: Hard quest.",
+        "options": [
           {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Accepted",
-              "val": 1
-            }
+            "name": "\"I'll go check it out. No promises, though!\"",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Accepted",
+                "not": true
+              }
+            ],
+            "action": [
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Accepted",
+                  "val": 1
+                }
+              },
+              {
+                "issueQuest": "56"
+              }
+            ]
           },
           {
-            "issueQuest": "56"
-          }
-        ]
-      },
-      {
-        "name": "\"I'll go check it out. No promises, though!\"",
-        "condition": [
-          {
-            "actorID": 9150,
-            "not": true
+            "name": "\"I'll go check it out. No promises, though!\"",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Accepted"
+              }
+            ]
           },
           {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted"
-          }
-        ]
-      },
-      {
-        "name": "\"I don't care. Go find someone else to knock down that gate.\" (Decline quest)",
-        "condition": [
-          {
-            "actorID": 9150,
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
+            "name": "\"I don't care. Go find someone else to knock down that gate.\" (Decline quest)",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              }
+            ]
           }
         ]
       }

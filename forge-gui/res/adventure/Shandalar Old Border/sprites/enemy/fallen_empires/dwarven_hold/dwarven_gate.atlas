@@ -1,10 +1,10 @@
 dwarven_gate.png
-size: 480,240
+size: 384,192
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Avatar
-  xy: 384, 96
+  xy: 336, 48
   size: 16, 16
 Idle
   xy: 0, 0
@@ -19,6 +19,9 @@ Idle
   xy: 144, 0
   size: 48, 48
 Idle
+  xy: 144, 0
+  size: 48, 48
+Idle
   xy: 192, 0
   size: 48, 48
 Idle
@@ -28,13 +31,13 @@ Idle
   xy: 288, 0
   size: 48, 48
 Idle
+  xy: 288, 0
+  size: 48, 48
+Idle
   xy: 336, 0
   size: 48, 48
 Idle
-  xy: 384, 0
-  size: 48, 48
-Idle
-  xy: 432, 0
+  xy: 0, 48
   size: 48, 48
 Idle
   xy: 0, 48
@@ -49,6 +52,9 @@ Idle
   xy: 144, 48
   size: 48, 48
 Idle
+  xy: 144, 48
+  size: 48, 48
+Idle
   xy: 192, 48
   size: 48, 48
 Idle
@@ -58,13 +64,10 @@ Idle
   xy: 288, 48
   size: 48, 48
 Idle
-  xy: 336, 48
+  xy: 288, 48
   size: 48, 48
-Idle
-  xy: 384, 48
-  size: 48, 48
-Idle
-  xy: 432, 48
+Attack
+  xy: 0, 96
   size: 48, 48
 Attack
   xy: 0, 96
@@ -87,8 +90,11 @@ Attack
 Attack
   xy: 288, 96
   size: 48, 48
-Attack
-  xy: 336, 96
+Death
+  xy: 0, 144
+  size: 48, 48
+Death
+  xy: 0, 144
   size: 48, 48
 Death
   xy: 0, 144
@@ -97,56 +103,35 @@ Death
   xy: 48, 144
   size: 48, 48
 Death
+  xy: 48, 144
+  size: 48, 48
+Death
+  xy: 48, 144
+  size: 48, 48
+Death
+  xy: 48, 144
+  size: 48, 48
+Death
+  xy: 96, 144
+  size: 48, 48
+Death
+  xy: 96, 144
+  size: 48, 48
+Death
+  xy: 96, 144
+  size: 48, 48
+Death
   xy: 96, 144
   size: 48, 48
 Death
   xy: 144, 144
   size: 48, 48
 Death
-  xy: 192, 144
+  xy: 144, 144
   size: 48, 48
 Death
-  xy: 240, 144
+  xy: 144, 144
   size: 48, 48
 Death
-  xy: 288, 144
-  size: 48, 48
-Death
-  xy: 336, 144
-  size: 48, 48
-Death
-  xy: 384, 144
-  size: 48, 48
-Death
-  xy: 432, 144
-  size: 48, 48
-Death
-  xy: 0, 192
-  size: 48, 48
-Death
-  xy: 48, 192
-  size: 48, 48
-Death
-  xy: 96, 192
-  size: 48, 48
-Death
-  xy: 144, 192
-  size: 48, 48
-Death
-  xy: 192, 192
-  size: 48, 48
-Death
-  xy: 240, 192
-  size: 48, 48
-Death
-  xy: 288, 192
-  size: 48, 48
-Death
-  xy: 336, 192
-  size: 48, 48
-Death
-  xy: 384, 192
-  size: 48, 48
-Death
-  xy: 432, 192
+  xy: 144, 144
   size: 48, 48

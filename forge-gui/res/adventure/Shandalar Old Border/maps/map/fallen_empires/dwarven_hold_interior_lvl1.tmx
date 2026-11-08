@@ -490,9 +490,9 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Let no one say we did not fight until the last...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ye'll no' pass this room while I still draw breath!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Soldier" />
     <property name="inactive" type="bool" value="true" />
     <property name="threatRange" type="int" value="30" />
