@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import forge.Forge;
+import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.interfaces.IGuiGame.OrderResult;
@@ -44,6 +45,33 @@ public final class ArenaChoices {
                     picks -> callback.accept(new ArrayList<>()));
         }
         return ArenaOptionsOverlay.choose(optionsTitle(min, max, choices), message, Math.max(0, min), max, choices, selected, display, null, callback);
+    }
+
+    /**
+     * chooseSingleEntityForEffect with cards revealed first (a search): the browser shows what was revealed (Done), then
+     * the choice opens over the match. Render thread.
+     */
+    public static boolean chooseEntity(final String title, final List<? extends GameEntityView> options, final String revealMessage,
+            final Collection<CardView> revealed, final boolean optional, final Consumer<GameEntityView> callback) {
+        if (!ArenaTheme.isMatchBoard() || options == null) {
+            return false;
+        }
+        final List<CardView> shown = revealed == null ? new ArrayList<>() : new ArrayList<>(revealed);
+        final Runnable choose = () -> {
+            if (options.isEmpty()) {
+                callback.accept(null);
+                return;
+            }
+            final List<GameEntityView> list = new ArrayList<>(options);
+            final Consumer<List<GameEntityView>> picked = r -> callback.accept(r == null || r.isEmpty() ? null : r.get(0));
+            if (!getChoices(title, optional ? 0 : 1, 1, list, null, null, picked)) {
+                forge.toolbox.GuiChoose.getChoices(title, optional ? 0 : 1, 1, list, null, null, picked);
+            }
+        };
+        if (shown.isEmpty() || !ArenaCardBrowser.reveal(revealMessage, shown, choose)) {
+            choose.run();
+        }
+        return true;
     }
 
     /** An ability to play from a card: the card stands beside its abilities. */

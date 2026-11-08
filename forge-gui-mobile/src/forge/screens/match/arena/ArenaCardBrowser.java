@@ -127,7 +127,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 ThreadUtil.invokeInGameThread(() -> controller().selectCard(card, null, null));
             }
         };
-        browser.open();
+        browser.openOverlay();
         return true;
     }
 
@@ -139,7 +139,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.CHOOSE, title, subtitle, cards, min, max, selected);
         browser.whenClosed = () -> done.accept(new ArrayList<>(browser.chosen));
-        browser.open();
+        browser.openOverlay();
         return true;
     }
 
@@ -150,7 +150,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.REVEAL, Forge.getLocalizer().getMessage("lblRevealed"), message, cards, 0, 0, null);
         browser.whenClosed = done;
-        browser.open();
+        browser.openOverlay();
         return true;
     }
 
@@ -171,7 +171,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             }
             done.accept(out);
         };
-        browser.open();
+        browser.openOverlay();
         return true;
     }
 
@@ -226,7 +226,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             return;
         }
         selectionBrowser = new ArenaCardBrowser(Mode.SELECTION, title, null, cards, 0, 0, null);
-        selectionBrowser.open();
+        selectionBrowser.openOverlay();
     }
 
     /** The input changed what is chosen or what its buttons say: the browser reads them as it draws. */

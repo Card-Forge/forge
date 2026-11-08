@@ -63,7 +63,7 @@ public abstract class ArenaDialogOverlay extends FOverlay {
     }
 
     /** Opens the dialog over the match. Render thread. */
-    public void open() {
+    public void openOverlay() {
         closed = false;
         pointerX = Forge.mouseMovedX;
         pointerY = Forge.mouseMovedY;

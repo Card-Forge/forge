@@ -59,6 +59,10 @@ import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.screens.match.arena.ArenaChoices;
+import forge.screens.match.arena.ArenaDamageOverlay;
+import forge.screens.match.arena.ArenaTheme;
+import forge.toolbox.GuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
@@ -481,6 +485,16 @@ public class MatchController extends NetworkGuiGame {
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
+        if (ArenaTheme.isMatchBoard()) { //Arena look: the card stands beside its abilities
+            return new WaitCallback<SpellAbilityView>() {
+                @Override
+                public void run() {
+                    if (!ArenaChoices.chooseAbility(hostCard, abilities, this)) {
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseAbilityToPlay"), abilities, this);
+                    }
+                }
+            }.invokeAndWait();
+        }
         return SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseAbilityToPlay"), abilities);
     }
 
@@ -552,6 +566,9 @@ public class MatchController extends NetworkGuiGame {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
+                if (ArenaDamageOverlay.assignCombatDamage(attacker, blockers, damage, defender, overrideOrder, maySkip, this)) {
+                    return; //Arena look on the match screen
+                }
                 final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, maySkip, this);
                 v.show();
             }
@@ -564,6 +581,9 @@ public class MatchController extends NetworkGuiGame {
         return new WaitCallback<Map<Object, Integer>>() {
             @Override
             public void run() {
+                if (ArenaDamageOverlay.assignGenericAmount(effectSource, targets, amount, atLeastOne, amountLabel, this)) {
+                    return; //Arena look on the match screen
+                }
                 final VAssignGenericAmount v = new VAssignGenericAmount(effectSource, targets, amount, atLeastOne, amountLabel, this);
                 v.show();
             }
@@ -816,6 +836,10 @@ public class MatchController extends NetworkGuiGame {
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
+                //Arena look: the revealed cards in the browser, then the choice, both over the match
+                if (ArenaChoices.chooseEntity(title, optionList, delayedReveal.getMessagePrefix(), delayedReveal.getCards(), isOptional, this)) {
+                    return;
+                }
                 final GameEntityPicker picker = new GameEntityPicker(title, optionList, delayedReveal, isOptional, this);
                 picker.show();
             }

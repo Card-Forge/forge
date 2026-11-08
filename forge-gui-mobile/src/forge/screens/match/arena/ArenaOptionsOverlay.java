@@ -134,6 +134,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
     private boolean listScrolls;
     private float listStep;
     private final ArenaMotion.Spring scroll = new ArenaMotion.Spring(0f, 60, 0.5f);
+    private FSkinFont pillFont;
 
     // ORDER
     private Option dragging;
@@ -209,7 +210,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             }
             done.accept(result);
         };
-        o.open();
+        o.openOverlay();
         return true;
     }
 
@@ -231,7 +232,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             }
             done.accept(result, offerRemember && o.remember);
         };
-        o.open();
+        o.openOverlay();
         return true;
     }
 
@@ -254,7 +255,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
                 done.accept(o.answer >= 0 ? o.answer : primary);
             }
         };
-        o.open();
+        o.openOverlay();
         return true;
     }
 
@@ -589,6 +590,16 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             widest = Math.max(widest, ArenaDialogKit.measure(option.label, f));
         }
         final float pillW = Math.max(Math.round(w * 0.09f), Math.min(Math.round(w * 0.24f), widest + Math.round(pillH * 1.2f)));
+        // one size of words for the whole wall: the largest at which the longest still fits its pill
+        String longest = "";
+        for (final Option option : options) {
+            if (ArenaDialogKit.measure(option.label, f) > ArenaDialogKit.measure(longest, f)) {
+                longest = option.label;
+            }
+        }
+        final float inner = pillW - 2 * ArenaArt.buttonPad(pillH);
+        pillFont = ArenaDialogKit.fitFont(longest, Math.max(ArenaTheme.px(12), Math.min((pillH - 2 * ArenaArt.buttonPad(pillH)) * 0.5f, ArenaTheme.px(30))),
+                ArenaTheme.px(10), inner - (pillH - 2 * ArenaArt.buttonPad(pillH)) * 0.7f);
         final float room = right - 2 * margin;
         final int n = options.size();
         final int fit = Math.max(1, (int) ((room + gap) / (pillW + gap)));
@@ -918,7 +929,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             }
             final boolean isPicked = picked.contains(option);
             final float a = isDimmed(option) ? 0.45f * alpha : alpha;
-            ArenaDialogKit.pill(g, option.label, b.x, b.y + dy, b.width, b.height, option.primary, option.hovered && kind != Kind.REVEAL,
+            ArenaDialogKit.pill(g, option.label, pillFont, b.x, b.y + dy, b.width, b.height, option.primary, option.hovered && kind != Kind.REVEAL,
                     false, isPicked, true, a);
         }
         if (clip) {

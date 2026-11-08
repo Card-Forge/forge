@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -324,7 +325,11 @@ public class FLabel extends FDisplayObject implements IButton {
             g.setAlphaComposite(alphaComposite);
         }
 
-        if (pressed) {
+        final boolean arenaButton = ((pressed && pressedColor == null) || (selected && (opaque || selectable)) || (opaque && !pressed))
+                && ArenaWidgets.labelButton(g, w, h, pressed, selected && (opaque || selectable), isHovered()); //Arena look on the match screen
+        if (arenaButton) {
+            //drawn
+        } else if (pressed) {
             if (pressedColor != null) {
                 g.fillRect(pressedColor, 0, 0, w, h);
             }

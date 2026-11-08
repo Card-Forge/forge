@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -167,6 +168,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
 
     @Override
     public void draw(Graphics g) {
+        if (textRenderer == null && ArenaWidgets.menuItem(g, getWidth(), HEIGHT, isHovered(), showPressedColor(), icon, GAP_X, ICON_SIZE,
+                allowForIcon, text, FONT, isEnabled(), GAP_X)) {
+            return; //Arena look on the match screen
+        }
         if (Frost.isOn()) {
             drawFrostedTab(g);
             if (!tabMode) { //drop-down entries keep a faint divider

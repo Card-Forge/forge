@@ -9,7 +9,11 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
+import forge.gui.GuiBase;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaShortcutSheet;
+import forge.screens.match.arena.ArenaShortcuts;
+import forge.screens.match.arena.ArenaTheme;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -80,6 +84,10 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetSavedAbilityOrders"), FSkinImage.WARNING, e ->
                 MatchController.instance.getGameController().sendYieldUpdate(new YieldUpdate.ClearAbilityOrders())
         ));
+        if (ArenaTheme.isActive() && GuiBase.getInterface().isRunningOnDesktop()) { //the Arena look lists the match's keys in its options
+            addItem(new FMenuItem(Forge.getLocalizer().getMessageorUseDefault("lblArenaGdxShortcuts", "Keyboard shortcuts") + "  ["
+                    + ArenaShortcuts.keyLabels(ArenaShortcuts.Action.SHOW_SHORTCUTS) + "]", FSkinImage.HDCHOICE, e -> ArenaShortcutSheet.open()));
+        }
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                 //pause game when spectating AI Match

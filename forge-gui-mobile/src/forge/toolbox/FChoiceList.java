@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.ImageKeys;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -335,6 +336,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
     @Override
     protected FSkinColor getItemFillColor(int index) {
+        final FSkinColor arena = ArenaWidgets.rowFill(maxChoices == 1 && selectedIndices.contains(index), index % 2 == 1);
+        if (arena != null) { return arena; } //Arena look on the match screen
         if (maxChoices == 1 && selectedIndices.contains(index)) {
             return getSelColor(); //don't show SEL_COLOR if in multi-select mode
         }

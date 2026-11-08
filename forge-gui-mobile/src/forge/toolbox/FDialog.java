@@ -12,6 +12,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.screens.FScreen;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
@@ -57,7 +58,13 @@ public abstract class FDialog extends FOverlay {
 
     protected FDialog(String title0, int buttonCount0) {
         buttonCount = buttonCount0;
-        prompt = add(new VPrompt("", "", null, null));
+        prompt = add(new VPrompt("", "", null, null) {
+            @Override
+            protected void drawBackground(Graphics g) {
+                if (ArenaWidgets.dialogButtonBand(g, getWidth(), getHeight())) { return; } //Arena look on the match screen
+                super.drawBackground(g);
+            }
+        });
         if (buttonCount < 3) {
             title0 = TextUtil.fastReplace(title0," - ", "\n"); //breakup into lines
             btnMiddle = null;
@@ -117,6 +124,7 @@ public abstract class FDialog extends FOverlay {
         button.setText(text);
         button.setCommand(command);
         button.setEnabled(true);
+        button.setArenaPrimary(index == 0); //the Arena look shows the first answer as the main one
         if (button == btnMiddle) { //allow middle button to be sized to fit text
             button.setWidth(button.getAutoSizeBounds().width * 1.25f);
         }
@@ -177,6 +185,10 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (ArenaWidgets.dialogBackground(g, getWidth(), getHeight(), getHeight() - (totalHeight + getBottomMargin()) * revealPercent,
+                totalHeight - VPrompt.HEIGHT, revealPercent)) {
+            return; //Arena look on the match screen
+        }
         super.drawBackground(g);
 
         if (revealPercent == 0) { return; }
@@ -204,6 +216,10 @@ public abstract class FDialog extends FOverlay {
         float dotRadius = SWIPE_BAR_HEIGHT / 6;
         float dotTop = y + SWIPE_BAR_HEIGHT / 2;
         int dotCount = 3;
+        if (ArenaWidgets.dialogOverlay(g, w, y, SWIPE_BAR_HEIGHT, revealPercent == 0 ? -1 : prompt.getTop(),
+                btnMiddle != null && revealPercent > 0 ? title : null, MSG_HEIGHT, VPrompt.FONT)) {
+            return; //Arena look on the match screen
+        }
         final boolean glass = VPrompt.isFrostedMatch();
         final Color dotColor = new Color(1f, 1f, 1f, 0.45f);
         g.fillRect(glass ? VPrompt.GLASS_SOLID : getSwipeBarColor().getColor(), 0, y, w, SWIPE_BAR_HEIGHT);

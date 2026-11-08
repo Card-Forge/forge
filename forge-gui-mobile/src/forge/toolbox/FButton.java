@@ -15,6 +15,7 @@ import forge.assets.FSkinImage;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;
@@ -34,6 +35,7 @@ public class FButton extends FDisplayObject implements IButton {
     private FSkinColor foreColor = getDefaultForeColor();
     private boolean toggled = false;
     private boolean pressed = false;
+    private boolean arenaPrimary; //the Arena look shows this button as the main answer (the molten pill)
     private FEventHandler command;
     private static final TextBounds textBounds = new TextBounds();
     private static final TextBounds autoSizeBounds = new TextBounds();
@@ -281,8 +283,14 @@ public class FButton extends FDisplayObject implements IButton {
         }
     }
 
+    /** Whether the Arena look (on the match screen) shows this button as the main answer of its dialog. */
+    public void setArenaPrimary(boolean primary0) {
+        arenaPrimary = primary0;
+    }
+
     @Override
     public void draw(Graphics g) {
+        if (ArenaWidgets.button(g, this, pressed, arenaPrimary)) { return; } //Arena look on the match screen
         if (Frost.isOn() /*&& corner == Corner.None*/) {
             drawFrosted(g);
             return;

@@ -262,6 +262,12 @@ public class FOptionPane extends FDialog {
             initButton(i, options.get(i), e -> setResult(option));
         }
         defaultOption = defaultOption0;
+        for (int i = 0; i < optionsSize; i++) { //the Arena look shows the default answer as the main one
+            final FButton button = getButton(i);
+            if (button != null) {
+                button.setArenaPrimary(i == defaultOption);
+            }
+        }
     }
 
     public void setResult(final int option) {

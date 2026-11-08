@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
@@ -188,10 +189,16 @@ public abstract class FDropDown extends FScrollPane {
         return paneSize;
     }
 
+    /** Whether this drop-down wears the Arena look on the match screen (a view with an Arena look of its own says no). */
+    protected boolean arenaLook() {
+        return true;
+    }
+
     @Override
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
+        if (arenaLook() && ArenaWidgets.dropDownBackground(g, w, h)) { return; } //Arena look on the match screen
         if (isGlass()) { //frosted slate, the same as the compact player panels
             g.fillRect(GLASS, 0, 0, w, h);
             return;
@@ -219,7 +226,9 @@ public abstract class FDropDown extends FScrollPane {
         super.drawOverlay(g);
         float w = getWidth();
         float h = getHeight();
-        if (isGlass()) {
+        if (arenaLook() && ArenaWidgets.dropDownOverlay(g, w, h)) {
+            //Arena look on the match screen: a gold rim
+        } else if (isGlass()) {
             g.drawRect(1, GLASS_EDGE, 0, 0, w, h);
         } else {
             g.drawRect(2, getBorderColor(), 0, 0, w, h); //ensure border shows up on all sides

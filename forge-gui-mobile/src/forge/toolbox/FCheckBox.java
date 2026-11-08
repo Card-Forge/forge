@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -60,6 +61,7 @@ public class FCheckBox extends FLabel implements ICheckBox {
     }
 
     public static void drawCheckBox(Graphics g, boolean isChecked, float x, float y, float w, float h) {
+        if (ArenaWidgets.checkBox(g, isChecked, x, y, w, h)) { return; } //Arena look on the match screen
         drawCheckBox(g, getBoxColor(), getCheckColor(), isChecked, x, y, w, h);
     }
     public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {

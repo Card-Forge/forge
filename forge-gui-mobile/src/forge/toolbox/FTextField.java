@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -23,6 +24,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING = Utils.scale(5);
     protected static FSkinColor getForeColor() {
+        if (ArenaWidgets.on()) { return ArenaWidgets.TEXT; } //Arena look on the match screen
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
@@ -429,8 +431,11 @@ public class FTextField extends FDisplayObject implements ITextField {
         float h = getHeight();
         boolean drawBackground = !readOnly; //don't draw background or border if read-only
 
-        final boolean frost = drawBackground && Frost.isOn();
-        if (frost) { //frosted: a rounded slate field with a faint light edge
+        final boolean arena = drawBackground && ArenaWidgets.fieldBackground(g, w, h, isEditing); //Arena look on the match screen
+        final boolean frost = !arena && drawBackground && Frost.isOn();
+        if (arena) {
+            //drawn
+        } else if (frost) { //frosted: a rounded slate field with a faint light edge
             final float radius = Utils.scale(2);//Math.min(h * 0.22f, Utils.scale(8));
             g.fillRoundRect(Frost.EDGE, 0, 0, w, h, radius);
             g.fillRoundRect(Frost.slate(0.62f), 1, 1, w - 2, h - 2, Math.max(0, radius - 1));
@@ -475,7 +480,7 @@ public class FTextField extends FDisplayObject implements ITextField {
             drawText(g, w, h);
         }
 
-        if (drawBackground && !frost) {
+        if (drawBackground && !frost && !arena) {
             g.drawRect(BORDER_THICKNESS, getForeColor(), BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
         }
     }

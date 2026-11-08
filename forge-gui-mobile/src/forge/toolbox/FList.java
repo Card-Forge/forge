@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.screens.match.arena.ArenaWidgets;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -218,6 +219,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (ArenaWidgets.listBackground(g, getWidth(), getHeight())) { return; } //Arena look on the match screen
         //support scrolling texture with list
         g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, -getScrollLeft(), -getScrollTop(), getScrollWidth(), getScrollHeight());
         g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, getWidth(), getHeight());
