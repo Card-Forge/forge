@@ -334,12 +334,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         float x = PADDING;
         float y = startY + PADDING;
         float fieldHeight = cbPlayerCount.getHeight();
-        if (Forge.isLandscapeMode()) {
+        final float comboWidth = (width - (x + lblFormat.getAutoSizeBounds().width + PADDING / 2
+                + lblVariants.getAutoSizeBounds().width + PADDING / 2
+                + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
+                + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2)) / 2;
+        // a narrow landscape screen, such as an unfolded foldable, uses the stacked rows
+        if (Forge.isLandscapeMode() && comboWidth >= Utils.AVG_FINGER_WIDTH * 2) {
             lblFormat.setBounds(x, y, lblFormat.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
             x += lblFormat.getWidth();
-            final float comboWidth = (width - (x + lblVariants.getAutoSizeBounds().width + PADDING / 2
-                    + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
-                    + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2)) / 2;
             cbFormat.setBounds(x, y, comboWidth, fieldHeight);
             x += cbFormat.getWidth();
             lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
