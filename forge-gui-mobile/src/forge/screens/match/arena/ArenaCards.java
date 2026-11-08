@@ -23,6 +23,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
+import forge.game.keyword.Keyword;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.game.spellability.StackItemView;
@@ -440,6 +441,11 @@ public final class ArenaCards {
             ArenaArt.countBadge(g, "×" + st.groupCount, x + w - d * 0.35f, y + d * 0.35f, d);
         }
 
+        // summoning sick (and no haste): "Zz" on a small plate sitting on the top edge
+        if (known && !st.stackBack && card.isSick() && !state.hasKeyword(Keyword.HASTE)) {
+            drawSleep(g, x + w / 2f, y, h);
+        }
+
         if (isSidelined(card)) {
             g.fillSmoothRoundRect(ArenaTheme.alpha(ArenaTheme.BLACK, 0.25f, S1), x, y, w, h, radius);
         }
@@ -852,6 +858,25 @@ public final class ArenaCards {
     }
 
     private static final Color BADGE_FILL = ArenaTheme.rgba(6, 6, 8, 240);
+    private static final Color SLEEP_INK = ArenaTheme.rgb(0xCFE3FF);
+
+    /**
+     * A creature that cannot attack or tap yet this turn: "Zz" on a dark plate centred on {@code cx}, sitting on the tile's
+     * top edge at {@code top} (mostly above it, clear of the name), sized from the tile's height.
+     */
+    private static void drawSleep(final Graphics g, final float cx, final float top, final float tileH) {
+        final float ph = Math.max(ArenaTheme.px(14), Math.round(tileH * 0.16f)), pw = Math.round(ph * 1.7f);
+        final float px = cx - pw / 2f, py = top - ph * 0.7f;
+        g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.5f, S1), px, py + ArenaTheme.px(1), pw, ph, ph / 2f, ArenaTheme.px(4));
+        g.fillSmoothRoundRect(CHIP, px, py, pw, ph, ph / 2f);
+        g.drawSmoothRoundRect(1f, CHIP_EDGE, px, py, pw, ph, ph / 2f);
+        // a large Z and a small one, a little higher, as sleep is drawn
+        final FSkinFont big = evenFont(ph * 0.8f), small = evenFont(ph * 0.55f);
+        final float bigW = ArenaArt.cachedTextWidth("Z", big), smallW = ArenaArt.cachedTextWidth("z", small);
+        final float gx = cx - (bigW + smallW) / 2f;
+        ArenaArt.textBold(g, "Z", big, SLEEP_INK, gx, py, bigW + 2f, ph, Align.left);
+        ArenaArt.textBold(g, "z", small, SLEEP_INK, gx + bigW, py - ph * 0.12f, smallW + 2f, ph, Align.left);
+    }
 
     /**
      * A card beside the hand that is not in it (the commander, a card castable from the graveyard or exile) wears the

@@ -303,7 +303,7 @@ public final class ArenaCardPreview {
         }
         if (cv.isFaceDown()) { chips.add(Forge.getLocalizer().getMessage("lblArenaFaceDown")); }
         if (cv.isTapped()) { chips.add(Forge.getLocalizer().getMessage("lblArenaTapped")); }
-        if (cv.isSick() && cv.getZone() == ZoneType.Battlefield) { chips.add(Forge.getLocalizer().getMessage("lblArenaSummoningSick")); }
+        if (cv.isSick() && !state.hasKeyword(forge.game.keyword.Keyword.HASTE)) { chips.add(Forge.getLocalizer().getMessage("lblArenaSummoningSick")); }
         if (cv.isAttacking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaAttacking")); }
         if (cv.isBlocking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaBlocking")); }
         if (cv.isPhasedOut()) { chips.add(Forge.getLocalizer().getMessage("lblArenaPhasedOut")); }
