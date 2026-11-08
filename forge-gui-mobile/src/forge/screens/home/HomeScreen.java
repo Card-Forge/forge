@@ -244,15 +244,20 @@ public class HomeScreen extends FScreen {
     protected float doLandscapeLayout(float width, float height) {
         float mainMenuWidth = getMainMenuWidth(height);
         float logoSize = mainMenuWidth - 2 * PADDING;
-        lblLogo.setBounds(PADDING, PADDING, logoSize, logoSize);
+        float buttonHeight = Utils.AVG_FINGER_HEIGHT * 0.9f;
+        boolean desktop = !GuiBase.isMobile();
+        if (desktop) { //a shorter window: a smaller logo rather than menu entries scrolled out of sight under Exit
+            float versionHeight = Math.round(lblVersion.getFont().getCapHeight() * 4);
+            float menuHeight = (baseButtonCount + 1) * buttonHeight + versionHeight + 3 * PADDING;
+            logoSize = Math.max(mainMenuWidth * 0.4f, Math.min(logoSize, height - menuHeight));
+        }
+        lblLogo.setBounds((mainMenuWidth - logoSize) / 2, PADDING, logoSize, logoSize);
 
         float x = 2 * PADDING;
         float y = lblLogo.getBottom() + PADDING;
         float buttonWidth = mainMenuWidth - x;
-        float buttonHeight = Utils.AVG_FINGER_HEIGHT * 0.9f;
 
         float bottom = height;
-        boolean desktop = !GuiBase.isMobile();
         btnExit.setVisible(desktop);
         lblVersion.setVisible(desktop);
         if (desktop) { //Exit and the version at the foot of the column, under the menu
