@@ -343,7 +343,7 @@ public class GameMementoTest {
         final GameMemento.Recorder rec = new GameMemento.Recorder();
 
         rec.capture(r);
-        final long fullCapture = rec.lastCaptureBytes();
+        final long fullCapture = rec.lastFullCaptureBytes();
         AssertJUnit.assertTrue("initial full capture must be budgeted", fullCapture > rec.liveBytes() / 2);
 
         r.items.get(0).value++;
@@ -351,7 +351,7 @@ public class GameMementoTest {
         AssertJUnit.assertTrue("incremental capture estimate must remain available", rec.lastCaptureBytes() > 0);
 
         rec.reset();
-        AssertJUnit.assertTrue("memory guard estimate must survive history reset", rec.lastCaptureBytes() > 0);
+        AssertJUnit.assertTrue("full capture estimate must survive history reset", rec.lastFullCaptureBytes() > 0);
     }
 
     @Test
