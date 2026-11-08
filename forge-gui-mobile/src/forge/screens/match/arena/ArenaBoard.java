@@ -166,15 +166,25 @@ public final class ArenaBoard {
         return out.set(cx - Math.round(d * 1.6f) - Math.round(w * 0.015f) - fanW, Math.round(h * -0.045f), fanW, Math.round(h * 0.105f));
     }
 
+    /** The height of a name plate's name (a seat's plate is taller: {@link #SEAT_NAME_ROWS} of these, chips under the name). */
+    public static float nameHeight() {
+        return Math.round(windowH() * 0.03f);
+    }
+
+    /** A seat's name plate holds the name and two rows of chips under it, down to just above the seat's back row. */
+    public static final float SEAT_NAME_ROWS = 3.15f;
+
     /** The player's name plate in the corner. */
     public static Rectangle name(final boolean local, final boolean seat, final float fieldX, final float fieldW, final Rectangle out) {
-        final float w = windowW(), h = windowH(), nameH = Math.round(h * 0.03f);
+        final float w = windowW(), h = windowH(), nameH = nameHeight();
         if (local) {
             return out.set(Math.round(h * 0.014f), Math.round(h * 0.962f), Math.round(w * 0.16f), nameH);
         }
         if (seat) {
             final float d = portraitDiameter(true);
-            return out.set(fieldX + Math.round(w * 0.0075f) + 10, 8, Math.max(40, fieldW / 2 - Math.round(d * 0.7f) - Math.round(h * 0.1f) - 16), nameH);
+            return out.set(fieldX + Math.round(w * 0.0075f) + 10, 8, Math.max(40, fieldW / 2 - Math.round(d * 0.7f) - Math.round(h * 0.1f) - 16),
+                    Math.round(nameH * SEAT_NAME_ROWS));
+
         }
         return out.set(fieldX + Math.round(h * 0.014f), Math.round(h * 0.008f), Math.round(w * 0.2f), nameH);
     }

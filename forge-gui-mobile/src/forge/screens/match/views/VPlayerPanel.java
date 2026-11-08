@@ -426,8 +426,11 @@ public class VPlayerPanel extends FContainer {
         arenaPiles.setVisible(true);
         ArenaBoard.name(local, seat, left, width, arenaRect);
         arenaName.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+        arenaName.setSeatRows(seat ? ArenaBoard.nameHeight() : 0);
         arenaName.setVisible(true);
         arenaHand.setVisible(!local);
+        arenaHand.setAlwaysCount(seat);
+
         if (!local) {
             ArenaBoard.opponentHand(seat, left, width, arenaRect);
             arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
@@ -453,22 +456,38 @@ public class VPlayerPanel extends FContainer {
                 ArenaBoard.hand(arenaRect);
                 area.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
                 area.setVisible(true);
-            } else if (tab == selectedTab) { //includes an opponent's hand you may see (e.g. while controlling their turn)
-                final float sw = Math.round(ArenaBoard.windowW() * 0.46f), sh = Math.round(ArenaBoard.windowH() * 0.16f);
-                final float sy = local ? Math.round(ArenaBoard.windowH() * 0.4f) - top : Math.round(ArenaBoard.windowH() * 0.13f) - top;
-                area.setBounds(local ? Math.round(ArenaBoard.windowW() * 0.02f) : width - sw - Math.round(ArenaBoard.windowW() * 0.02f), sy, sw, sh);
+            } else if (tab == selectedTab && !(hand && seat && player.getMindSlaveMaster() == null)) {
+                //includes an opponent's hand you may see (e.g. while controlling their turn). A seat's hand you only
+                //watch (a spectator, a hand revealed for good) stays its fan, face up: three strips would bury the seats
+                placeArenaStrip(area, local, seat, width, top, 0.46f);
                 area.setVisible(true);
             } else {
                 area.setVisible(false);
             }
         }
         if (commandTab == selectedTab) {
-            final float sw = Math.round(ArenaBoard.windowW() * 0.3f), sh = Math.round(ArenaBoard.windowH() * 0.16f);
-            commandZone.setBounds(local ? Math.round(ArenaBoard.windowW() * 0.02f) : width - sw - Math.round(ArenaBoard.windowW() * 0.02f),
-                    (local ? Math.round(ArenaBoard.windowH() * 0.4f) : Math.round(ArenaBoard.windowH() * 0.13f)) - top, sw, sh);
+            placeArenaStrip(commandZone, local, seat, width, top, 0.3f);
             commandZone.setVisible(true);
         }
     }
+
+    /**
+     * A zone opened over the board as a strip of cards on glass: over the middle of the window for you, in the top right
+     * for a single opponent, and inside the seat (centred, no wider than it) for one of three or four.
+     */
+    private void placeArenaStrip(final FDisplayObject area, final boolean local, final boolean seat, final float width, final float top,
+            final float share) {
+        final float margin = Math.round(ArenaBoard.windowW() * 0.02f);
+        float sw = Math.round(ArenaBoard.windowW() * share);
+        if (seat) {
+            sw = Math.min(sw, width - 2 * Math.round(ArenaBoard.windowW() * 0.01f));
+        }
+        final float sh = Math.round(ArenaBoard.windowH() * 0.16f);
+        final float sy = local ? Math.round(ArenaBoard.windowH() * 0.4f) - top : Math.round(ArenaBoard.windowH() * 0.13f) - top;
+        final float sx = local ? margin : seat ? Math.round((width - sw) / 2f) : width - sw - margin;
+        area.setBounds(sx, sy, sw, sh);
+    }
+
 
     /** Back to the default look: what the Arena layout hid comes back, its own parts go. */
     private void leaveArenaLayout() {

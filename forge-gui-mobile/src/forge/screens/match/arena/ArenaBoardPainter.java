@@ -128,9 +128,13 @@ public final class ArenaBoardPainter {
         g.fillGradientRect(ArenaTheme.alpha(ArenaTheme.BLACK, 0.45f, S1), ArenaTheme.alpha(ArenaTheme.BLACK, 0f, S2), false, fx, fy, sd * 0.8f, fh);
         g.fillGradientRect(ArenaTheme.alpha(ArenaTheme.BLACK, 0f, S1), ArenaTheme.alpha(ArenaTheme.BLACK, 0.25f, S2), true, fx, fy + fh - sd * 0.5f, fw, sd * 0.5f);
 
-        // banners: two hanging from the top wall, three sticking out of the side walls (Swing's hand-placed remnants)
-        drawHanging(g, m, x + fx - x + fw * 0.20f, y, 0.058f * h * 1.7f, fy - y + 0.012f * h, h, 0);
-        drawHanging(g, m, x + fx - x + fw * 0.78f, y, 0.052f * h * 1.7f, fy - y + 0.008f * h, h, 1);
+        // banners: two hanging from the top wall, three sticking out of the side walls (Swing's hand-placed remnants);
+        // with three or four players the top wall is where the seats' names, chips and piles are: no cloth behind them
+        if (!ArenaBoard.isSeatGame()) {
+            drawHanging(g, m, x + fx - x + fw * 0.20f, y, 0.058f * h * 1.7f, fy - y + 0.012f * h, h, 0);
+            drawHanging(g, m, x + fx - x + fw * 0.78f, y, 0.052f * h * 1.7f, fy - y + 0.008f * h, h, 1);
+        }
+
         drawSide(g, m, x, y + fy - y + fh * 0.30f, sideIn + 0.02f * h, 0.11f * h, h, 1, false);
         drawSide(g, m, x, y + fy - y + fh * 0.76f, sideIn + 0.02f * h, 0.11f * h, h, 0, false);
         drawSide(g, m, x + w - sideIn - 0.02f * h, y + fy - y + fh * 0.22f, sideIn + 0.02f * h, 0.11f * h, h, 0, true);

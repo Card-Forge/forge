@@ -553,6 +553,9 @@ public class VStack extends FDropDown {
                     stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
                 text = "(OPTIONAL) " + text;
             }
+            if (isArenaStack()) { //as on the Swing board: the "[Card: ..., Activator: ...]" list of what set a trigger off goes
+                text = text.replaceAll("\\s*\\[[^\\[\\]]*\\]\\s*$", "");
+            }
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final boolean isFaceDown = card.isFaceDown();
@@ -714,6 +717,7 @@ public class VStack extends FDropDown {
                 textRenderer.drawText(g, text, tf, forge.screens.match.arena.ArenaTheme.TEXT, w * 0.08f, bandY + pad + lf.getLineHeight() + pad, tw,
                         bandH - lf.getLineHeight() - 3 * pad, bandY, bandH, true, Align.left, false);
             }
+            drawArenaCaster(g, w, h);
             if (picked) {
                 g.drawSmoothRoundRect(Math.max(2f, h * 0.007f), forge.screens.match.arena.ArenaTheme.CHOSEN, 0, 0, w, h, r);
             } else if (pickable) {
@@ -724,12 +728,39 @@ public class VStack extends FDropDown {
             }
         }
 
+        private String arenaCaster;
+
+        /**
+         * Who put it on the stack, on a small plate under the card's title (left, so it shows on the entries waiting
+         * under the top one too): with three opponents a spell's card alone does not say whose it is.
+         */
+        private void drawArenaCaster(Graphics g, float w, float h) {
+            final PlayerView activator = stackInstance.getActivatingPlayer();
+            if (activator == null) {
+                return;
+            }
+            if (arenaCaster == null) {
+                final PlayerView me = MatchController.instance.getCurrentPlayer();
+                arenaCaster = activator.equals(me) ? Forge.getLocalizer().getMessage("lblArenaYou") : activator.getName();
+            }
+            final forge.assets.FSkinFont f = forge.screens.match.arena.ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.034f / 2) * 2));
+            final float ph = Math.round(f.getLineHeight() * 1.25f), dot = ph * 0.32f;
+            final float pw = Math.min(w * 0.9f, forge.screens.match.arena.ArenaArt.textWidth(arenaCaster, f) + ph * 0.6f + dot * 2.2f);
+            final float px = w * 0.05f, py = h * 0.108f;
+            g.fillSmoothRoundRect(ARENA_BAND, px, py, pw, ph, ph / 2f);
+            g.drawSmoothRoundRect(1f, forge.screens.match.arena.ArenaTheme.GOLD, px, py, pw, ph, ph / 2f);
+            g.fillSmoothCircle(forge.screens.match.arena.ArenaTheme.GOLD, px + ph * 0.3f + dot / 2f, py + ph / 2f, dot / 2f);
+            final float tx = px + ph * 0.3f + dot * 1.6f;
+            g.drawText(arenaCaster, f, forge.screens.match.arena.ArenaTheme.WHITE, tx, py, px + pw - tx - ph * 0.15f, ph, false, Align.left, true);
+        }
+
         @Override
         public void draw(Graphics g) {
             if (isArenaStack()) {
                 drawArena(g);
                 return;
             }
+
             float x = 0;
             float y = 0;
             float w = getWidth();

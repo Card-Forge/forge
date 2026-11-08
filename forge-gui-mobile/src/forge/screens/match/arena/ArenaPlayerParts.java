@@ -289,9 +289,15 @@ public final class ArenaPlayerParts {
     /** An opponent's hand as a fan of card backs hanging beside the portrait; a count only when it is too big to draw. */
     public static final class OpponentHand extends FDisplayObject {
         private final PlayerView player;
+        private boolean alwaysCount;
 
         public OpponentHand(final PlayerView player0) {
             player = player0;
+        }
+
+        /** A seat's fan is too small to count the backs in: it always carries the figure. */
+        public void setAlwaysCount(final boolean alwaysCount0) {
+            alwaysCount = alwaysCount0;
         }
 
         @Override
@@ -310,28 +316,57 @@ public final class ArenaPlayerParts {
             // spread sideways as well as turned, so it reads as a held hand and not a stack
             final float stepX = shown < 2 ? 0 : Math.min(cw * 0.55f, (w - cw) / (shown - 1));
             final float cx = w / 2f;
+            // a hand you may look at (watching a game, a hand revealed for good) is held face up
+            final FCollectionView<CardView> cards = player.getCards(ZoneType.Hand);
             for (int i = 0; i < shown; i++) {
                 final float place = i - (shown - 1) / 2f;
                 final float cardX = Math.round(cx + place * stepX);
+                CardView card = null;
+                if (cards != null) {
+                    try {
+                        card = i < cards.size() ? cards.get(i) : null;
+                    } catch (final RuntimeException e) {
+                        card = null; // changed under us: a back this frame
+                    }
+                }
                 g.startRotateTransform(cardX, h + ch / 5f, -place * 4.5f);
                 g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.5f, S1), cardX - cw / 2f, h - ch - 2 + ArenaTheme.px(2), cw, ch, r, ArenaTheme.px(5));
-                ArenaCards.drawCardBack(g, player, cardX - cw / 2f, h - ch - 2, cw, ch, r, true);
+                if (card != null && MatchController.instance.mayView(card)) {
+                    CardRenderer.drawCard(g, card, cardX - cw / 2f, h - ch - 2, cw, ch, CardStackPosition.Top);
+                } else {
+                    ArenaCards.drawCardBack(g, player, cardX - cw / 2f, h - ch - 2, cw, ch, r, true);
+                }
                 g.endTransform();
             }
-            if (count > shown) {
-                ArenaArt.countBadge(g, String.valueOf(count), cx, h - ch / 3f, Math.max(ArenaTheme.px(20), h * 0.3f));
+
+            if (count > shown || alwaysCount) {
+                ArenaArt.countBadge(g, ArenaPlayerInfo.figure(count), cx, h - ch / 3f, Math.max(ArenaTheme.px(20), h * 0.3f));
             }
+
         }
     }
 
     // ---- the name plate --------------------------------------------------------------------------------------------
 
-    /** The player's name in the corner on a dark plate with a gold diamond, readable whatever the board does behind it. */
+    /**
+     * The player's name in the corner on a dark plate with a gold diamond, readable whatever the board does behind it.
+     * A seat (three or four players) has a small portrait with no phase ladder and no room round it, so its plate also
+     * carries what the portrait cannot: the step its turn is in (while it is its turn), and under the name the chips of
+     * {@link ArenaPlayerInfo} - commander damage taken, counters, the Monarch - wrapping onto a second row.
+     */
     public static final class NamePlate extends FDisplayObject {
         private final PlayerView player;
+        private float nameH; // seat: the name's row; the rest of the height is for the chips. 0: the whole height
+        private forge.game.phase.PhaseType phaseFor;
+        private String phaseText;
 
         public NamePlate(final PlayerView player0) {
             player = player0;
+        }
+
+        /** A seat's plate: the name in the top {@code nameH0}, chips below. 0 for a plain name plate. */
+        public void setSeatRows(final float nameH0) {
+            nameH = nameH0;
         }
 
         @Override
@@ -340,7 +375,7 @@ public final class ArenaPlayerParts {
                 return;
             }
             final String name = player.getName();
-            final float h = getHeight() - 2, d = Math.max(ArenaTheme.px(6), h / 3f);
+            final float h = (nameH > 0 ? nameH : getHeight()) - 2, d = Math.max(ArenaTheme.px(6), h / 3f);
             final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(13), h * 0.62f));
             final float textX = ArenaTheme.px(12) + d + ArenaTheme.px(8);
             final float plateW = Math.min(getWidth() - 1, textX + ArenaArt.textWidth(name, f) + ArenaTheme.px(14));
@@ -351,6 +386,23 @@ public final class ArenaPlayerParts {
             g.fillSmoothRoundRect(ArenaTheme.GOLD, mx - d * 0.36f, my - d * 0.36f, d * 0.72f, d * 0.72f, d * 0.08f);
             g.endTransform();
             ArenaArt.textShadowed(g, name, f, ArenaTheme.WHITE, textX, 0, plateW - textX, h, Align.left);
+            if (nameH <= 0) {
+                return;
+            }
+            // whose turn it is shows on the seat's frame; which step it is in leads the chips, as the ladder would show it
+            final forge.game.GameView game = MatchController.instance.getGameView();
+            String lead = null;
+            if (game != null && game.getPlayerTurn() == player && game.getPhase() != null && !game.isGameOver()) {
+                if (game.getPhase() != phaseFor) {
+                    phaseFor = game.getPhase();
+                    phaseText = phaseFor.nameForUi;
+                }
+                lead = phaseText;
+            }
+            final float chipH = Math.round(h * 0.86f), gap = Math.max(2f, chipH * 0.18f);
+            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.ALL, lead, ArenaTheme.px(4), nameH + gap + chipH / 2f, chipH, false,
+                    getWidth() - ArenaTheme.px(4));
         }
     }
+
 }

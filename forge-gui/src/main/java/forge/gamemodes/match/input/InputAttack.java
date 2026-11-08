@@ -298,7 +298,10 @@ public class InputAttack extends InputSyncronizedBase {
         updateMessage();
     }
 
-    /** The defender being attacked and the band being formed. */
+    /**
+     * The defender being attacked and the band being formed; the other players that may be attacked are offered (a
+     * click on one makes it the defender), so with several opponents it shows that they can be picked.
+     */
     @Override
     protected Selection getSelection() {
         final List<TrackableObject> chosen = new ArrayList<>();
@@ -308,8 +311,18 @@ public class InputAttack extends InputSyncronizedBase {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) chosen.add(CardView.get(card));
         }
-        return Selection.ofChosen(chosen);
+        final List<TrackableObject> others = new ArrayList<>();
+        for (final GameEntity defender : defenders) {
+            if (defender instanceof Player && defender != currentDefender) {
+                others.add(GameEntityView.get(defender));
+            }
+        }
+        if (others.isEmpty()) {
+            return Selection.ofChosen(chosen);
+        }
+        return new Selection(List.of(), 0, 0, others, chosen, List.of());
     }
+
 
     @Override
     protected List<CardView> getActionable() {
