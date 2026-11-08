@@ -72,8 +72,25 @@ public class VZoneDisplay extends VCardDisplayArea {
     @Override
     public void update() {
         FCollectionView<CardView> cards = player.getCards(zoneType);
-        refreshCardPanels(MatchController.instance.isNetGame() ? cards.threadSafeIterable() : cards);
+        Iterable<CardView> model = MatchController.instance.isNetGame() ? cards.threadSafeIterable() : cards;
+        if (isArenaHand()) { //the commander and what can be cast from other zones follow the hand on its right
+            final java.util.List<CardView> hand = new java.util.ArrayList<>();
+            if (model != null) {
+                for (CardView c : model) {
+                    hand.add(c);
+                }
+            }
+            final java.util.List<CardView> extras = ArenaBoard.handCastables(player, hand);
+            arenaExtras = extras.size();
+            hand.addAll(extras);
+            model = hand;
+        } else {
+            arenaExtras = 0;
+        }
+        refreshCardPanels(model);
     }
+
+    private int arenaExtras; //Arena hand: how many of the last panels are cards castable from elsewhere, not hand cards
 
     @Override
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
@@ -226,7 +243,8 @@ public class VZoneDisplay extends VCardDisplayArea {
     private ScrollBounds layoutArenaFan(float areaWidth, float areaHeight) {
         revealedPanel = null;
         final java.util.List<CardAreaPanel> panels = cardPanels.get();
-        final int count = panels.size();
+        final int extras = Math.max(0, Math.min(arenaExtras, panels.size()));
+        final int count = panels.size() - extras;
         final float gutter = Math.max(2f, areaHeight * 0.02f);
         final float sideRoom = Math.round(areaHeight * 0.3f) + Math.round(areaWidth * 0.055f);
         final float left = gutter + sideRoom, right = areaWidth - gutter - sideRoom;
@@ -236,19 +254,28 @@ public class VZoneDisplay extends VCardDisplayArea {
         float cardHeight = Math.round(availableHeight / (1f + ArenaBoard.FAN_LIFT - ArenaBoard.FAN_SINK));
         float cardWidth = Math.round(cardHeight / FCardPanel.ASPECT_RATIO);
         final float minWidth = Math.round(cardWidth * 0.45f);
-        while (cardWidth > minWidth && Math.max(0, count - 1) * cardWidth * ArenaBoard.FAN_MIN_STEP + (count > 0 ? cardWidth : 0) > availableWidth) {
+        while (cardWidth > minWidth && Math.max(0, count - 1) * cardWidth * ArenaBoard.FAN_MIN_STEP + (count > 0 ? cardWidth : 0)
+                + extrasWidth(extras, cardWidth) > availableWidth) {
             cardWidth--;
         }
         cardHeight = Math.round(cardWidth * FCardPanel.ASPECT_RATIO);
+        final float extrasW = extrasWidth(extras, cardWidth);
+        final float handRoom = availableWidth - extrasW;
         float step = cardWidth * ArenaBoard.FAN_STEP;
         if (count > 1) {
-            step = Math.max(1f, Math.min(step, (availableWidth - cardWidth) / (count - 1)));
+            step = Math.max(1f, Math.min(step, (handRoom - cardWidth) / (count - 1)));
         }
         final float rowWidth = count == 0 ? 0f : (count - 1) * step + cardWidth;
         final float lift = Math.round(cardHeight * ArenaBoard.FAN_LIFT);
         final float arc = Math.round(cardHeight * ArenaBoard.FAN_ARC);
         final float baseY = gutter + costRow + lift;
-        float x = Math.max(left, (left + right) / 2f - rowWidth / 2f);
+        //the hand stays centred on the window; cards castable from elsewhere follow on its right
+        float x = count == 0 ? (left + right) / 2f - (extrasW - cardWidth * ArenaBoard.FAN_EXTRAS_GAP) / 2f
+                : Math.max(left, (left + right) / 2f - rowWidth / 2f);
+        final float overflow = x + rowWidth + extrasW - right;
+        if (overflow > 0) {
+            x = Math.max(left, x - overflow);
+        }
         final CardAreaPanel raised = arenaRaised != null && panels.contains(arenaRaised) ? arenaRaised : null;
         final int raisedIndex = raised == null ? -1 : panels.indexOf(raised);
         final float spread = raised == null ? 0f : Math.round(cardWidth * 0.42f);
@@ -277,10 +304,38 @@ public class VZoneDisplay extends VCardDisplayArea {
             }
             x += step;
         }
+        if (extras > 0) {
+            x = count == 0 ? x : x - step + cardWidth + cardWidth * ArenaBoard.FAN_EXTRAS_GAP;
+            final float extraStep = cardWidth * ArenaBoard.FAN_EXTRAS_STEP;
+            final float aside = raisedIndex >= 0 && raisedIndex < count ? spread : 0f;
+            for (int i = 0; i < extras; i++) {
+                final CardAreaPanel panel = panels.get(count + i);
+                orderedCards.get().add(panel.getCard());
+                final boolean up = panel == raised;
+                //the arc and the lean carry on through them
+                final float y = baseY + arc - (up ? lift : 0f);
+                final float part = raisedIndex >= count && i != raisedIndex - count ? (count + i < raisedIndex ? -spread : spread) : aside;
+                panel.setBounds(Math.round(x + part), y, cardWidth, cardHeight + (up ? lift : 0f));
+                final ArenaCards.State st = panel.getArenaState();
+                st.fanLean = up ? 0f : Math.min(ArenaBoard.FAN_MAX_LEAN, ArenaBoard.FAN_LEAN * (count / 2f + i + 1));
+                st.raised = up;
+                st.cardHeight = cardHeight;
+                st.costWidth = i == extras - 1 ? cardWidth : extraStep;
+                if (!up) {
+                    add(panel);
+                }
+                x += extraStep;
+            }
+        }
         if (raised != null) {
             add(raised);
         }
         return new ScrollBounds(areaWidth, areaHeight);
+    }
+
+    /** Room the cards after the hand take: a gap, then a tighter overlapping row. */
+    private static float extrasWidth(final int extras, final float cardWidth) {
+        return extras == 0 ? 0f : Math.round(cardWidth * ArenaBoard.FAN_EXTRAS_GAP + (extras - 1) * cardWidth * ArenaBoard.FAN_EXTRAS_STEP + cardWidth);
     }
 
     @Override

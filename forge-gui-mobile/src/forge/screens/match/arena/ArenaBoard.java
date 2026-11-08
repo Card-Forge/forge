@@ -1,5 +1,6 @@
 package forge.screens.match.arena;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
@@ -65,6 +67,46 @@ public final class ArenaBoard {
     public static final float FAN_LEAN = 2.2f, FAN_MAX_LEAN = 9f;
     /** How much a hovered hand card grows besides rising. */
     public static final float FAN_HOVER_GROWTH = 0.06f;
+    /** Space between the hand and the cards castable from elsewhere, and their spacing (shares of a card's width). */
+    public static final float FAN_EXTRAS_GAP = 0.42f, FAN_EXTRAS_STEP = 0.62f;
+    private static final ZoneType[] CASTABLE_FROM = {ZoneType.Command, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Library};
+
+    /**
+     * What follows the local hand on its right (Swing CHand.getArenaCastables): the player's commanders while they wait
+     * in the command zone, then every other card outside the hand the prompt offers to play now (flashback, cards exiled
+     * to be played, a companion...), from any player's zones.
+     */
+    public static List<CardView> handCastables(final PlayerView player, final List<CardView> hand) {
+        final List<CardView> extras = new ArrayList<>();
+        // read from the command zone itself: the list of commanders can hold a view of the card from before it last
+        // changed zones; views are equal by card id, so the list still says which cards are commanders
+        final FCollectionView<CardView> command = player.getCards(ZoneType.Command);
+        if (player.getCommanders() != null && command != null) {
+            for (final CardView card : command) {
+                if (player.getCommanders().contains(card) && !extras.contains(card)) {
+                    extras.add(card);
+                }
+            }
+        }
+        // the prompt's short list of actionable cards, not the zones: a Commander library is 99 cards
+        final List<CardView> actionable = MatchController.instance.getSelection().actionable();
+        for (int i = 0, n = actionable.size(); i < n; i++) {
+            final CardView card = actionable.get(i);
+            if (isCastableFrom(card.getZone()) && !hand.contains(card) && !extras.contains(card)) {
+                extras.add(card);
+            }
+        }
+        return extras;
+    }
+
+    private static boolean isCastableFrom(final ZoneType zone) {
+        for (final ZoneType z : CASTABLE_FROM) {
+            if (z == zone) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // ---- window ----------------------------------------------------------------------------------------------------
     public static float windowW() {

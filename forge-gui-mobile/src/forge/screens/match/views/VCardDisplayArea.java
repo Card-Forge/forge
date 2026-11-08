@@ -975,7 +975,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
-            if (displayArea != null && getCard().getZone() == ZoneType.Hand && screenPos.width > 0) {
+            if (displayArea != null && (getCard().getZone() == ZoneType.Hand || isArenaHandCard()) && screenPos.width > 0) { //a cast flies from where it was shown
                 handStarts.put(getCard().getId(), new Rectangle(screenPos));
             }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {

@@ -10,6 +10,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
@@ -23,6 +24,7 @@ import forge.game.card.CounterType;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -823,6 +825,7 @@ public final class ArenaCards {
             }
         }
         drawHandCost(g, card, st, x, y, w);
+        drawZoneBadge(g, card, x, y, w);
         if (turned) {
             g.endTransform();
         }
@@ -846,6 +849,39 @@ public final class ArenaCards {
         final float px = x + Math.max(2f, shown - costW - Math.round(w * 0.03f));
         final float py = y - Math.round(size * 0.45f);
         CardFaceSymbols.drawManaCost(g, cost, px, py, size);
+    }
+
+    private static final Color BADGE_FILL = ArenaTheme.rgba(6, 6, 8, 240);
+
+    /**
+     * A card beside the hand that is not in it (the commander, a card castable from the graveyard or exile) wears the
+     * icon of the zone it would be cast from on its left edge (Swing CardPanel.drawArenaCostRow).
+     */
+    private static void drawZoneBadge(final Graphics g, final CardView card, final float x, final float y, final float w) {
+        final FSkinImage icon = zoneIcon(card.getZone());
+        if (icon == null) {
+            return;
+        }
+        final float d = Math.round(Math.max(ArenaTheme.px(14), w * 0.14f)) + ArenaTheme.px(8);
+        final float cx = x - d * 2f / 3f + d / 2f, cy = y + d * 1.75f; //below the cost of the card it overlaps
+        g.fillSmoothCircle(BADGE_FILL, cx, cy, d / 2f);
+        g.drawSmoothCircle(Math.max(1f, ArenaTheme.px(1.2f)), ArenaTheme.GOLD, cx, cy, d / 2f);
+        final float in = d * 0.2f;
+        g.drawImage(icon, cx - d / 2f + in, cy - d / 2f + in, d - 2 * in, d - 2 * in);
+    }
+
+    private static FSkinImage zoneIcon(final ZoneType zone) {
+        if (zone == null) {
+            return null;
+        }
+        return switch (zone) {
+            case Graveyard -> FSkinImage.HDGRAVEYARD;
+            case Exile -> FSkinImage.HDEXILE;
+            case Library -> FSkinImage.HDLIBRARY;
+            case Command -> FSkinImage.COMMAND;
+            case Flashback -> FSkinImage.HDFLASHBACK;
+            default -> null;
+        };
     }
 
     /** The soft shadow a whole card casts down and to the left (Swing Sprite: 3.9% of its height, moved by 40% of that). */
