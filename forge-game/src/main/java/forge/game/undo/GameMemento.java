@@ -641,7 +641,6 @@ public final class GameMemento {
             sn = 0;
             highWater = 0;
             liveBytes = 0;
-            lastCaptureBytes = 0;
             lastDeltaEntries = 0;
             lastDeltaBytes = 0;
             last = null;
