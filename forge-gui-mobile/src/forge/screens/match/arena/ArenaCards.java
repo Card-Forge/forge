@@ -89,6 +89,8 @@ public final class ArenaCards {
         final ArenaMotion.Fade statsPop = new ArenaMotion.Fade(0f), hitFlash = new ArenaMotion.Fade(0f), hitFloat = new ArenaMotion.Fade(1f);
         private String statsSeen;
         private int damageSeen = -1;
+        private String statsText, statsLoyalty;
+        private int statsPower, statsToughness;
         private float shake;
         private ArenaMotion.Tween shakeTween;
         private String hitText;
@@ -108,6 +110,11 @@ public final class ArenaCards {
         public boolean raised;
         /** Set by the hand fan: the card's own height (the panel below it is the strip it rose from). */
         public float cardHeight;
+        /** Where the pointer is over the raised hand card (0..1 across and down it): the card tilts towards it. */
+        public float pointerU = 0.5f, pointerV = 0.5f;
+        final ArenaMotion.Spring tiltX = new ArenaMotion.Spring(0f, 60, 0.05f), tiltY = new ArenaMotion.Spring(0f, 60, 0.05f);
+        private com.badlogic.gdx.graphics.Texture faceTexture;
+        private TextureRegion faceRegion;
         /** Set by a battlefield row: drawn this much larger (a fighter) and this many cards stand in its stack. */
         public float scale = 1f;
         public int groupCount;
@@ -279,14 +286,21 @@ public final class ArenaCards {
 
     // ---- battlefield tiles -----------------------------------------------------------------------------------------
 
-    /** Power/toughness, or loyalty; null when the card has neither (or cannot be seen). */
-    static String tileStats(final CardView card, final boolean known) {
+    /** Power/toughness, or loyalty; null when the card has neither (or cannot be seen). Kept per card, made anew only when it changes. */
+    static String tileStats(final CardView card, final boolean known, final State st) {
         if (!known) {
             return null;
         }
         final CardStateView state = card.getCurrentState();
         if (state.isCreature() || state.isVehicle()) {
-            return state.getPower() + "/" + state.getToughness();
+            final int p = state.getPower(), t = state.getToughness();
+            if (st.statsText == null || p != st.statsPower || t != st.statsToughness || st.statsLoyalty != null) {
+                st.statsPower = p;
+                st.statsToughness = t;
+                st.statsLoyalty = null;
+                st.statsText = p + "/" + t;
+            }
+            return st.statsText;
         }
         return state.isPlaneswalker() ? state.getLoyalty() : null;
     }
@@ -302,7 +316,7 @@ public final class ArenaCards {
         st.noticeTapped(card.isTapped());
         final int glow = glowFor(card, hovered, false);
         st.noticeGlow(glow);
-        final String stats = tileStats(card, known);
+        final String stats = tileStats(card, known, st);
         st.noticeStats(stats, card.getDamage());
         if (st.lift.goal() != (hovered ? 1f : 0f)) {
             st.lift.to(hovered ? 1f : 0f, hovered ? 110 : 170);
@@ -677,14 +691,23 @@ public final class ArenaCards {
         if (glow != GLOW_NONE) {
             bloom(g, glow, x, y, w, h, radius, spread, st.raised, mix * breath);
         }
-        CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top);
-        if (st.glowWas != GLOW_NONE && mix < 1f) {
-            rim(g, st.glowWas, x, y, w, h, radius, 1f - mix);
-        }
-        if (glow != GLOW_NONE) {
-            rim(g, glow, x, y, w, h, radius, mix * (0.5f + 0.5f * breath));
+        // the raised card tilts towards the pointer, in perspective, with a glare
+        st.tiltX.to(st.raised ? (0.5f - ArenaMotion.clamp01(st.pointerV)) * 2f * MAX_TILT : 0f);
+        st.tiltY.to(st.raised ? (ArenaMotion.clamp01(st.pointerU) - 0.5f) * 2f * MAX_TILT : 0f);
+        final float tx = st.tiltX.get(), ty = st.tiltY.get();
+        final TextureRegion face = Math.abs(tx) + Math.abs(ty) > 0.05f ? faceOf(card, st) : null;
+        if (face != null) {
+            g.drawTiltedImage(face, x, y, w, h, tx, ty, 0f, 1f, radius, 0.7f, 0f, 1f);
         } else {
-            g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.WHITE, 0.25f, S1), x, y, w, h, radius);
+            CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top);
+            if (st.glowWas != GLOW_NONE && mix < 1f) {
+                rim(g, st.glowWas, x, y, w, h, radius, 1f - mix);
+            }
+            if (glow != GLOW_NONE) {
+                rim(g, glow, x, y, w, h, radius, mix * (0.5f + 0.5f * breath));
+            } else {
+                g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.WHITE, 0.25f, S1), x, y, w, h, radius);
+            }
         }
         if (turned) {
             g.endTransform();
@@ -696,6 +719,46 @@ public final class ArenaCards {
         final float spread = Math.max(ArenaTheme.px(8), Math.round(h * 0.039f));
         final float cast = Math.max(2f, Math.round(spread * 0.4f));
         g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.85f, S1), x - cast, y + cast, w, h, radius, spread);
+    }
+
+    /** How far (degrees) a raised hand card tilts towards the pointer at its edge. */
+    static final float MAX_TILT = 7f;
+
+    private static com.badlogic.gdx.graphics.Texture sharedFaceTexture;
+    private static TextureRegion sharedFaceRegion;
+
+    /** {@link #faceOf(CardView, State)} for a card with no state of its own (the hover preview); one remembered at a time. */
+    static TextureRegion faceOf(final CardView card) {
+        if (!MatchController.instance.mayView(card) || card.isFaceDown()) {
+            return null;
+        }
+        final forge.assets.ImageCache cache = forge.assets.ImageCache.getInstance();
+        final com.badlogic.gdx.graphics.Texture t = cache.getImage(card.getCurrentState().getImageKey(), false);
+        if (t == null || t == cache.getDefaultImage()) {
+            return null;
+        }
+        if (t != sharedFaceTexture) {
+            sharedFaceTexture = t;
+            sharedFaceRegion = cache.croppedBorderImage(t);
+        }
+        return sharedFaceRegion;
+    }
+
+    /** A card's own picture (the face as printed), when it is loaded and may be seen: for drawing it tilted. */
+    private static TextureRegion faceOf(final CardView card, final State st) {
+        if (!MatchController.instance.mayView(card) || card.isFaceDown()) {
+            return null;
+        }
+        final forge.assets.ImageCache cache = forge.assets.ImageCache.getInstance();
+        final com.badlogic.gdx.graphics.Texture t = cache.getImage(card.getCurrentState().getImageKey(), false);
+        if (t == null || t == cache.getDefaultImage()) {
+            return null;
+        }
+        if (t != st.faceTexture) {
+            st.faceTexture = t;
+            st.faceRegion = cache.croppedBorderImage(t);
+        }
+        return st.faceRegion;
     }
 
     // ---- card backs ------------------------------------------------------------------------------------------------

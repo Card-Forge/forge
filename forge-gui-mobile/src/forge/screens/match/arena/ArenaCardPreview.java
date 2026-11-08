@@ -128,8 +128,23 @@ public final class ArenaCardPreview {
             if (MatchController.instance.isActionable(card)) {
                 g.drawGlow(ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.9f, S1), x, y, w, h, r, gap * 0.85f);
             }
-            CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top, false, false, true);
-            g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.BLACK, 0.78f, S1), x, y, w, h, r);
+            // a hand card risen over its slot tilts towards the pointer, in perspective, catching the light
+            final boolean underPointer = inHand && card == ArenaCardPreview.card;
+            if (underPointer) {
+                TILT_X.to((0.5f - ArenaMotion.clamp01((Forge.mouseMovedY - y) / h)) * 2f * ArenaCards.MAX_TILT);
+                TILT_Y.to((ArenaMotion.clamp01((Forge.mouseMovedX - x) / w) - 0.5f) * 2f * ArenaCards.MAX_TILT);
+            } else {
+                TILT_X.to(0f);
+                TILT_Y.to(0f);
+            }
+            final float tx = TILT_X.get(), ty = TILT_Y.get();
+            final com.badlogic.gdx.graphics.g2d.TextureRegion face = Math.abs(tx) + Math.abs(ty) > 0.05f ? ArenaCards.faceOf(card) : null;
+            if (face != null) {
+                g.drawTiltedImage(face, x, y, w, h, tx, ty, 0f, 1f, r, 0.7f, 0f, 1f);
+            } else {
+                CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top, false, false, true);
+                g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.BLACK, 0.78f, S1), x, y, w, h, r);
+            }
             drawStatsNow(g, card, x, y, w, h);
         } finally {
             if (alpha < 1f) {
@@ -137,6 +152,8 @@ public final class ArenaCardPreview {
             }
         }
     }
+
+    private static final ArenaMotion.Spring TILT_X = new ArenaMotion.Spring(0f, 70, 0.05f), TILT_Y = new ArenaMotion.Spring(0f, 70, 0.05f);
 
     // what the stats plate says, worked out again only when the card or its numbers change
     private static CardView statsOf;

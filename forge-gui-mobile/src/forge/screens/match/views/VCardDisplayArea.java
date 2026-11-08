@@ -1143,6 +1143,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             if (isArenaHandCard()) {
                 final ArenaCards.State st = getArenaState();
                 st.follow(screenPos.x, screenPos.y, displayArea);
+                if (st.raised && getWidth() > 0) { //where the pointer is over it: it tilts that way
+                    st.pointerU = (Forge.mouseMovedX - screenPos.x) / getWidth();
+                    st.pointerV = (Forge.mouseMovedY - screenPos.y) / (st.cardHeight > 0 ? st.cardHeight : getHeight());
+                }
                 ArenaCards.drawHandCard(g, getCard(), st, isHovered(), 0, 0, getWidth(), st.cardHeight > 0 ? st.cardHeight : getHeight());
                 return;
             }
