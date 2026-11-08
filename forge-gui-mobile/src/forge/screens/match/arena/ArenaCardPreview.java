@@ -12,8 +12,10 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
+import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
@@ -27,9 +29,10 @@ import forge.toolbox.FCardPanel;
 /**
  * The Arena hover preview (port of the Swing {@code ArenaCardPreview}): a large copy of the card under the pointer.
  * A card in the hand rises in place over its own slot; a card anywhere else shows at the side of the window away from
- * it, with a slim glass panel beside it saying what is true of it right now that the printed card does not: counters,
- * tapped, summoning sick, in combat, phased out, face down, damage, and any rules text it has been given. Where its
- * power or toughness differ from the printed ones, a plate with the current values covers the printed box.
+ * it. Beside it a glass panel gives all of the card as it stands now: name and mana cost, type line, power and
+ * toughness (or loyalty, defence), state (counters, tapped, summoning sick, in combat, phased out, face down, damage)
+ * and its whole rules text, with whatever it has been given. Where its power or toughness differ from the printed
+ * ones, a plate with the current values covers the printed box.
  *
  * <p>Two ways to use it, both from {@code draw()} on the render thread:</p>
  * <ul>
@@ -45,7 +48,7 @@ public final class ArenaCardPreview {
     public static final float HEIGHT_OF_WINDOW = 0.52f;
     // Swing pixel sizes
     // Swing pixel sizes (the panel a little wider and its type a little larger than Swing's, for the GPU's lighter font)
-    private static final float GAP = 12f, PANEL_W = 320f, PAD = 12f;
+    private static final float GAP = 12f, PANEL_W = 400f, PAD = 14f;
     private static final int FADE_IN_MS = 120, FADE_OUT_MS = 90;
 
     private static final Color PANEL_FILL = ArenaTheme.rgba(10, 12, 18, 240);
@@ -93,8 +96,13 @@ public final class ArenaCardPreview {
         float x, y;
         boolean panelLeft = false;
         if (inHand) {
+            // the card rises over its own slot; the panel goes on its left, or its right when there is no room there
             x = anchor.x + anchor.width / 2f - w / 2f;
             y = screenH - h - gap;
+            x = Math.max(gap, Math.min(screenW - w - gap, x));
+            panelLeft = panel > 0f && x - panel >= gap;
+            out.set(Math.round(x), Math.round(y), w, h);
+            return panelLeft;
         } else {
             final boolean onRight = anchor.x + anchor.width / 2f > screenW * 0.6f;
             panelLeft = !onRight;
@@ -172,16 +180,8 @@ public final class ArenaCardPreview {
             statsToughness = state.getToughness();
             statsDamage = card.getDamage();
             statsNow = null;
-            int basePower = statsPower, baseToughness = statsToughness;
-            try {
-                final PaperCard printed = FModel.getMagicDb().getCommonCards().getCard(state.getName());
-                if (printed != null && printed.getRules() != null) {
-                    basePower = printed.getRules().getIntPower();
-                    baseToughness = printed.getRules().getIntToughness();
-                }
-            } catch (final RuntimeException e) {
-                // a card the database does not know (a token): the printed values are the current ones
-            }
+            final int[] printed = printedStats(state);
+            final int basePower = printed[0], baseToughness = printed[1];
             if (statsPower != basePower || statsToughness != baseToughness || statsDamage > 0) {
                 statsNow = statsPower + "/" + statsToughness;
                 statsColour = statsDamage > 0 ? STATS_WOUNDED
@@ -205,37 +205,58 @@ public final class ArenaCardPreview {
 
     // ---- the status panel ---------------------------------------------------------------------------------------------
 
-    /** What the status panel says: chips of state, then rules text the printed card does not have. Worked out off draw(). */
+    /**
+     * What the details panel says: the card's name and mana cost, its type line, its current power and toughness (or
+     * loyalty, defence), chips of state (counters, tapped, summoning sick, in combat, damage...), then its whole rules
+     * text as it stands now, with whatever it has been given. Worked out off draw().
+     */
     private static final class Status {
+        final String name, type, stats;
+        final ManaCost cost;
+        final Color statsColor;
         final List<String> chips = new ArrayList<>();
         final float[] chipW;
-        String body;
-        float width, height, chipH;
-        FSkinFont chipFont, bodyFont;
+        final String body;
+        float width, height, chipH, nameH, lineH, costSize;
+        FSkinFont nameFont, lineFont, chipFont, bodyFont;
         int rows;
 
-        Status(final List<String> chips0, final String body0, final float maxH) {
+        Status(final String name0, final ManaCost cost0, final String type0, final String stats0, final Color statsColor0,
+                final List<String> chips0, final String body0, final float maxH) {
+            name = name0 == null || name0.isEmpty() ? null : name0;
+            cost = cost0 == null || cost0.isNoCost() || cost0.getGlyphCount() == 0 ? null : cost0;
+            type = type0 == null || type0.isEmpty() ? null : type0;
+            stats = stats0 == null || stats0.isEmpty() ? null : stats0;
+            statsColor = statsColor0;
             chips.addAll(chips0);
             chipW = new float[chips.size()];
             body = body0 == null || body0.isEmpty() ? null : body0;
-            layout(maxH);
+            // the text gets smaller before any of it is cut off
+            for (final float size : TEXT_SIZES) {
+                layout(maxH, size);
+                if (height < maxH) {
+                    break;
+                }
+            }
         }
 
-        private void layout(final float maxH) {
-            final float pad = ArenaTheme.px(PAD), most = ArenaTheme.px(PANEL_W);
-            chipFont = ArenaTheme.font(18);
-            bodyFont = ArenaTheme.font(18);
+        private void layout(final float maxH, final float size) {
+            final float pad = ArenaTheme.px(PAD);
+            width = ArenaTheme.px(PANEL_W);
+            nameFont = ArenaTheme.font(size + 4f);
+            lineFont = ArenaTheme.font(size);
+            chipFont = lineFont;
+            bodyFont = lineFont;
+            nameH = nameFont.getLineHeight();
+            lineH = lineFont.getLineHeight();
+            costSize = Math.round(nameH * 0.8f);
             chipH = chipFont.getLineHeight() + ArenaTheme.px(4);
-            float widest = 0f;
+            final float room = width - 2 * pad;
             for (int i = 0; i < chips.size(); i++) {
-                chipW[i] = ArenaArt.textWidth(chips.get(i), chipFont) + ArenaTheme.px(14);
-                widest = Math.max(widest, chipW[i]);
+                chipW[i] = Math.min(room, ArenaArt.textWidth(chips.get(i), chipFont) + ArenaTheme.px(14));
             }
-            // as wide as the chips need when there is no text
-            width = body != null ? most : Math.min(most, widest + 2 * pad);
             rows = 0;
             float cx = 0f;
-            final float room = width - 2 * pad;
             for (int i = 0; i < chips.size(); i++) {
                 if (rows == 0 || cx + chipW[i] > room) {
                     rows++;
@@ -243,22 +264,36 @@ public final class ArenaCardPreview {
                 }
                 cx += chipW[i] + ArenaTheme.px(4);
             }
-            final float chipsH = rows * (chipH + ArenaTheme.px(4));
-            final float bodyH = body == null ? 0f : BODY.getWrappedBounds(body, bodyFont, room).height;
-            height = Math.min(maxH, pad + chipsH + (bodyH > 0 && chipsH > 0 ? ArenaTheme.px(6) : 0f) + bodyH + pad);
+            float h = pad;
+            if (name != null || cost != null) {
+                h += nameH;
+            }
+            if (type != null) {
+                h += lineH;
+            }
+            if (stats != null) {
+                h += lineH;
+            }
+            if (rows > 0) {
+                h += ArenaTheme.px(8) + rows * (chipH + ArenaTheme.px(4)) - ArenaTheme.px(4);
+            }
+            if (body != null) {
+                h += ArenaTheme.px(10) + BODY.getWrappedBounds(body, bodyFont, room).height;
+            }
+            height = Math.min(maxH, h + pad + ArenaTheme.px(6)); // a little slack: wrapped text measures a hair short
         }
     }
 
-    /** The status of a card out of the hand (null when the printed card says it all). Allocates: not for every frame. */
-    private static Status describe(final CardView cv, final boolean inHand, final float maxH) {
-        if (inHand || cv.getZone() == ZoneType.Hand) {
-            return null;
-        }
+    /** Text sizes (Swing points) the details panel tries, largest first: a few, since each new size builds a font. */
+    private static final float[] TEXT_SIZES = {21f, 18f, 15f};
+    private static final Color STATS_UP_LIGHT = ArenaTheme.rgb(0x8EC5FF), STATS_DOWN_LIGHT = ArenaTheme.rgb(0xFF8A7E);
+
+    /** Everything the details panel says about a card (null when there is nothing to say). Allocates: not for every frame. */
+    private static Status describe(final CardView cv, final float maxH) {
         final CardStateView state = cv.getCurrentState();
         if (state == null) {
             return null;
         }
-        final boolean mayView = MatchController.instance.mayView(cv);
         final List<String> chips = new ArrayList<>();
         final Multiset<CounterType> counters = cv.getCounters();
         if (counters != null) {
@@ -268,36 +303,67 @@ public final class ArenaCardPreview {
         }
         if (cv.isFaceDown()) { chips.add(Forge.getLocalizer().getMessage("lblArenaFaceDown")); }
         if (cv.isTapped()) { chips.add(Forge.getLocalizer().getMessage("lblArenaTapped")); }
-        if (cv.isSick()) { chips.add(Forge.getLocalizer().getMessage("lblArenaSummoningSick")); }
+        if (cv.isSick() && cv.getZone() == ZoneType.Battlefield) { chips.add(Forge.getLocalizer().getMessage("lblArenaSummoningSick")); }
         if (cv.isAttacking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaAttacking")); }
         if (cv.isBlocking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaBlocking")); }
         if (cv.isPhasedOut()) { chips.add(Forge.getLocalizer().getMessage("lblArenaPhasedOut")); }
         if (cv.getDamage() > 0) { chips.add(Forge.getLocalizer().getMessage("lblArenaDamage", cv.getDamage())); }
 
-        final String printed = state.getOracleText() == null ? "" : state.getOracleText();
-        final StringBuilder granted = new StringBuilder();
-        String composed = null;
-        try {
-            composed = CardDetailUtil.composeCardText(state, MatchController.instance.getGameView(), mayView);
-        } catch (final RuntimeException e) {
-            // a view the details cannot be worked out for: chips only
-        }
-        if (composed != null) {
-            for (final String line : composed.split("\\r?\\n")) {
-                final String trimmed = line.trim();
-                // counters are already in the chips
-                if (!trimmed.isEmpty() && !printed.contains(trimmed) && !trimmed.contains(" counters:")) {
-                    granted.append(granted.length() == 0 ? "" : "\n").append(trimmed);
+        String name = null, type = null, stats = null, body = null;
+        ManaCost cost = null;
+        Color statsColor = ArenaTheme.TEXT;
+        if (MatchController.instance.mayView(cv)) {
+            name = CardDetailUtil.formatCardName(cv, true, false);
+            cost = cv.isFaceDown() ? null : state.getManaCost();
+            type = CardDetailUtil.formatCardType(state, true);
+            stats = CardDetailUtil.formatPrimaryCharacteristic(state, true);
+            if (state.isCreature() && !cv.isFaceDown()) {
+                final int[] printed = printedStats(state);
+                if (cv.getDamage() > 0) {
+                    statsColor = STATS_DOWN_LIGHT;
+                } else if (state.getPower() != printed[0] || state.getToughness() != printed[1]) {
+                    statsColor = state.getPower() >= printed[0] && state.getToughness() >= printed[1] ? STATS_UP_LIGHT : STATS_DOWN_LIGHT;
                 }
             }
+            try {
+                final String composed = CardDetailUtil.composeCardText(state, MatchController.instance.getGameView(), true);
+                if (composed != null) {
+                    final StringBuilder text = new StringBuilder();
+                    for (final String line : composed.split("\\r?\\n")) {
+                        final String trimmed = line.trim();
+                        // counters are already in the chips
+                        if (!trimmed.isEmpty() && !trimmed.contains(" counters:")) {
+                            text.append(text.length() == 0 ? "" : "\n").append(trimmed);
+                        }
+                    }
+                    body = text.toString();
+                }
+            } catch (final RuntimeException e) {
+                // a view the details cannot be worked out for: the rest still shows
+            }
         }
-        if (chips.isEmpty() && granted.length() == 0) {
+        if (name == null && chips.isEmpty()) {
             return null;
         }
-        return new Status(chips, granted.toString(), maxH);
+        return new Status(name, cost, type, stats, statsColor, chips, body, maxH);
     }
 
-    /** The slim glass panel: chips of state, then the text. {@code x} is its left, {@code y} its top. */
+    /** The printed power and toughness of a card (its current ones for a card the database does not know, like a token). */
+    private static int[] printedStats(final CardStateView state) {
+        int power = state.getPower(), toughness = state.getToughness();
+        try {
+            final PaperCard printed = FModel.getMagicDb().getCommonCards().getCard(state.getName());
+            if (printed != null && printed.getRules() != null) {
+                power = printed.getRules().getIntPower();
+                toughness = printed.getRules().getIntToughness();
+            }
+        } catch (final RuntimeException e) {
+            // not in the database
+        }
+        return new int[] {power, toughness};
+    }
+
+    /** The details panel on glass: name and cost, type, stats, chips of state, then the rules text. {@code x}, {@code y}: its top left. */
     private static void drawStatus(final Graphics g, final Status s, final float x, final float y, final float alpha) {
         final float pad = ArenaTheme.px(PAD), r = ArenaTheme.px(6);
         final float old = g.getfloatAlphaComposite();
@@ -308,8 +374,31 @@ public final class ArenaCardPreview {
             g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.6f, S1), x, y + ArenaTheme.px(2), s.width, s.height, r, ArenaTheme.px(8));
             g.fillSmoothRoundRect(PANEL_FILL, x, y, s.width, s.height, r);
             g.drawSmoothRoundRect(1f, PANEL_RIM, x, y, s.width, s.height, r);
+            final float room = s.width - 2 * pad;
+            final float bottom = y + s.height - pad;
             float cy = y + pad;
+            if (s.name != null || s.cost != null) {
+                float costW = 0f;
+                if (s.cost != null) {
+                    costW = Math.min(room * 0.5f, CardFaceSymbols.getWidth(s.cost, s.costSize));
+                    final float size = Math.min(s.costSize, costW / s.cost.getGlyphCount());
+                    CardFaceSymbols.drawManaCost(g, s.cost, x + pad + room - costW, cy + (s.nameH - size) / 2f, size);
+                }
+                if (s.name != null) {
+                    ArenaArt.textBold(g, s.name, s.nameFont, ArenaTheme.WHITE, x + pad, cy, room - costW - ArenaTheme.px(6), s.nameH, Align.left);
+                }
+                cy += s.nameH;
+            }
+            if (s.type != null) {
+                ArenaArt.text(g, s.type, s.lineFont, ArenaTheme.TEXT_DIM, x + pad, cy, room, s.lineH, Align.left);
+                cy += s.lineH;
+            }
+            if (s.stats != null) {
+                ArenaArt.textBold(g, s.stats, s.lineFont, s.statsColor, x + pad, cy, room, s.lineH, Align.left);
+                cy += s.lineH;
+            }
             if (s.rows > 0) {
+                cy += ArenaTheme.px(8);
                 float cx = x + pad;
                 boolean first = true;
                 for (int i = 0; i < s.chips.size(); i++) {
@@ -322,13 +411,13 @@ public final class ArenaCardPreview {
                     ArenaArt.text(g, s.chips.get(i), s.chipFont, ArenaTheme.WHITE, cx, cy, s.chipW[i], s.chipH, Align.center);
                     cx += s.chipW[i] + ArenaTheme.px(4);
                 }
-                cy += s.chipH + ArenaTheme.px(10);
+                cy += s.chipH;
             }
             if (s.body != null) {
-                final float bottom = y + s.height - pad;
+                cy += ArenaTheme.px(10);
                 if (bottom > cy) {
                     g.startClip(x, cy, s.width, bottom - cy + ArenaTheme.px(2));
-                    BODY.drawText(g, s.body, s.bodyFont, ArenaTheme.TEXT, x + pad, cy, s.width - 2 * pad, bottom - cy, cy, bottom - cy, true, Align.left, false);
+                    BODY.drawText(g, s.body, s.bodyFont, ArenaTheme.TEXT, x + pad, cy, room, bottom - cy, cy, bottom - cy, true, Align.left, false);
                     g.endClip();
                 }
             }
@@ -381,7 +470,7 @@ public final class ArenaCardPreview {
         }
         final float h = preferredHeight(screenH);
         if (!statusKnown || statusMaxH != h || ArenaMotion.frame() - statusFrame > STATUS_FRAMES) {
-            status = describe(card, inHand, h);
+            status = describe(card, h);
             statusKnown = true;
             statusMaxH = h;
             statusFrame = ArenaMotion.frame();
