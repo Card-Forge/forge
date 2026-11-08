@@ -157,11 +157,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         add(cbVariants);
         cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(" + Forge.getLocalizer().getMessage("lblNone") + ")");
-        cbVariants.addItem(GameType.Vanguard);
-        cbVariants.addItem(GameType.Planechase);
-        cbVariants.addItem(GameType.Archenemy);
-        cbVariants.addItem(GameType.ArchenemyRumble);
-        cbVariants.addItem(GameType.TwoHeadedGiant);
+        for (final GameType variant : FormatChoices.VARIANTS) {
+            cbVariants.addItem(variant);
+        }
         cbVariants.addItem(Forge.getLocalizer().getMessage("lblMore"));
         cbVariants.setChangedHandler(event -> {
             final List<GameType> applied = Lists.newArrayList(Iterables.filter(lobby.getAppliedVariants(),
@@ -519,11 +517,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             super(Forge.getLocalizer().getInstance().getMessage("lblSelectVariants"));
 
             lstVariants.setListItemRenderer(new VariantRenderer());
-            lstVariants.addItem(new Variant(GameType.Vanguard));
-            lstVariants.addItem(new Variant(GameType.Planechase));
-            lstVariants.addItem(new Variant(GameType.Archenemy));
-            lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
-            lstVariants.addItem(new Variant(GameType.TwoHeadedGiant));
+            for (final GameType variant : FormatChoices.VARIANTS) {
+                lstVariants.addItem(new Variant(variant));
+            }
         }
 
         @Override
