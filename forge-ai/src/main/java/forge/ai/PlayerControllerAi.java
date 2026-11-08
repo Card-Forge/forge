@@ -5,6 +5,8 @@ import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.PutStickerAi;
+import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.OpeningHand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -21,6 +23,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.sticker.Sticker;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -47,6 +50,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import forge.game.undo.UndoManager;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -61,6 +65,9 @@ public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
+
+    /** Snapshot the whole game before a targeted AI cast so it can be taken back. Heavy on memory, so off. */
+    public static final boolean AI_ROLLBACK = false;
 
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
@@ -93,8 +100,73 @@ public class PlayerControllerAi extends PlayerController {
         return true;
     }
 
+    /** What this AI changed the last time it sideboarded by itself; see {@link #getSideboardingReport()}. */
+    private List<String> sideboardingReport = Collections.emptyList();
+
+    /**
+     * Flat Monte Carlo AIs read the deck of their opponent and sideboard against it, so nobody needs to do it for them.
+     * The AI sideboarding rule of the match still decides whether there is any sideboarding for AIs at all.
+     */
+    private boolean sideboardsAgainstOpponentDeck() {
+        return brains.getGame().getRules().getAISideboardingEnabled() && brains.getGame().getAIFlatMonteCarlo()
+                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED) && !brains.getGame().getRules().getSideboardForAI();
+    }
+
+    @Override
+    public boolean sideboardsByItself() {
+        return sideboardsAgainstOpponentDeck();
+    }
+
+    @Override
+    public List<String> getSideboardingReport() {
+        return sideboardingReport;
+    }
+
+    /**
+     * The sideboard plan of an AI that knows what it plays against: the decks its opponents played last game are
+     * read, and cards that do nothing against them are swapped for cards from the sideboard that do (see
+     * {@link SideboardAdvisor}). Returns the new main deck, or null to leave the deck as it is.
+     */
+    private List<PaperCard> sideboardAgainstOpponents(final List<PaperCard> main, final List<PaperCard> sideboard) {
+        final Match match = brains.getGame().getMatch();
+        final RegisteredPlayer me = player.getRegisteredPlayer();
+        final List<List<PaperCard>> opponentMains = new ArrayList<>();
+        final List<String> opponentNames = new ArrayList<>();
+        for (final RegisteredPlayer rp : match.getPlayers()) {
+            if (rp == me) {
+                continue;
+            }
+            List<PaperCard> known = match.getPlayedMain(rp);
+            if (known == null && rp.getDeck() != null) {
+                known = rp.getDeck().getMain().toFlatList();
+            }
+            if (known != null && !known.isEmpty()) {
+                opponentMains.add(known);
+                opponentNames.add(rp.getPlayer().getName());
+            }
+        }
+        if (opponentMains.isEmpty()) {
+            return null;
+        }
+        final SideboardAdvisor.Result plan = SideboardAdvisor.advise(player, main, sideboard, opponentMains,
+                opponentNames, SideboardAdvisor.maxSwapsFor(main.size()));
+        sideboardingReport = Collections.unmodifiableList(plan.report);
+        if (plan.swaps.isEmpty()) {
+            return null;
+        }
+        final List<PaperCard> newMain = new ArrayList<>(main);
+        for (final SideboardAdvisor.Swap swap : plan.swaps) {
+            // the overall content of the deck (Main+Sideboard) must not change, or the AI may cheat
+            if (newMain.remove(swap.out)) {
+                newMain.add(swap.in);
+            }
+        }
+        return newMain;
+    }
+
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
+        sideboardingReport = Collections.emptyList();
         if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
@@ -131,6 +203,10 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
+        if (!definedSideboardPlan && sideboardsAgainstOpponentDeck()) {
+            return sideboardAgainstOpponents(main, sideboard);
+        }
+
         boolean sbLimitedFormats = getAi().getBoolProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
         boolean sbSharedTypesOnly = getAi().getBoolProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
         boolean sbPlaneswalkerException = getAi().getBoolProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
@@ -142,8 +218,9 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         GameOutcome lastOutcome = brains.getGame().getMatch().getLastOutcome();
-        if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())
-            && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
+        final boolean weWon = lastOutcome != null && lastOutcome.getWinningPlayer() != null
+            && lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer());
+        if (weWon && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
             return null;
         }
 
@@ -172,12 +249,10 @@ public class PlayerControllerAi extends PlayerController {
                         if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
                             continue; // Only equivalent types allowed
                         }
-                    } else {
-                        if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
-                                || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                            if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
-                                continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
-                            }
+                    } else if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                            || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                        if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                            continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
                         }
                     }
 
@@ -600,6 +675,17 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         } else if (destinationZone == ZoneType.Library) {
+            // Doomsday: the five cards go on top in the order that draws through to the winner
+            if (source != null && forge.ai.simulation.DoomsdayPile.isDoomsday(source.getHostCard())) {
+                try {
+                    final CardCollectionView pile = forge.ai.simulation.DoomsdayPile.order(player, cards);
+                    if (pile != null) {
+                        return pile;
+                    }
+                } catch (final RuntimeException e) {
+                    // fall through to the general ordering
+                }
+            }
             // Ponder and similar cards
             Player p = cards.getFirst().getController(); // whose library are we reordering?
             CardCollection reordered = new CardCollection();
@@ -790,7 +876,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         if (brains.useSmartMulligan()) {
             try {
-                return forge.ai.simulation.OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
+                return OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
                         firstPlayer == player, brains.deckPlan(player), brains.getIntProperty(AiProps.MULLIGAN_THRESHOLD));
             } catch (final RuntimeException e) {
                 // fall back to the standard rule below
@@ -803,7 +889,7 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
         if (brains.useSmartMulligan()) {
             try {
-                return CardCollection.getView(forge.ai.simulation.OpeningHand.toBottom(player, hand, cardsToReturn,
+                return CardCollection.getView(OpeningHand.toBottom(player, hand, cardsToReturn,
                         player.getGame().getStartingPlayer() == player,
                         brains.deckPlan(player)));
             } catch (final RuntimeException e) {
@@ -860,6 +946,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         brains.declareBlockersFor(defender, combat);
+        // CR 805.10d: an illegal team block is declared again, so drop this player's blocks rather than repeat it
+        if (defender.getSharedTeam().size() > 1 && CombatUtil.validateTeamBlock(combat, defender) != null) {
+            for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), defender)) {
+                combat.undoBlockingAssignment(blocker);
+            }
+        }
     }
 
     @Override
@@ -874,9 +966,53 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
+            playWithRollback(sa, getDeferredTargetingPlayerAction(sa));
         }
         return true;
+    }
+
+    /** Whether any part of the ability chain has targets: only those can fail to go on the stack for lack of them. */
+    private static boolean usesTargeting(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.usesTargeting()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Casts or activates the ability. As a last resort against an illegal cast (costs paid, then the targets turn out
+     * not to be legal, "Couldn't add to stack, failed to target"), a snapshot is taken first, only for abilities that
+     * have targets and only in the real game, and the cast is taken back if it failed: lands untap, sacrificed or
+     * discarded cards come back, the card returns to where it was. The AI then does not try it again this turn.
+     *
+     * @return whether the ability was put on the stack (or resolved) without a rollback
+     */
+    public boolean playWithRollback(final SpellAbility sa, final Consumer<SpellAbility> chooseTargets) {
+        final Game game = player.getGame();
+        final boolean guarded = AI_ROLLBACK && !game.isSimulationCopy() && !sa.isCopied() && !sa.isTrigger() && usesTargeting(sa);
+        final UndoManager.Mark mark = guarded ? game.getUndoManager().markForRollback(game) : null;
+        final int hostId = sa.getHostCard().getId();
+        final int failedBefore = game.getStack().getIllegalAdditionCount(sa.getHostCard());
+        final String key = AiController.castKey(sa);
+
+        final boolean played = ComputerUtil.handlePlayingSpellAbility(player, sa, chooseTargets);
+
+        if (!sa.isCopied() && !sa.isTrigger() && game.getStack().getIllegalAdditionCount(sa.getHostCard()) > failedBefore) {
+            // MagicStack already refunded the mana and returned the card; remember it so the AI does not pick it again
+            getAi().noteFailedCast(key); // before any restore: this memory is not part of the game
+            if (guarded) {
+                final boolean restored = game.getUndoManager().rollbackTo(game, mark);
+                game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                        "AI cast of card #" + hostId + " was taken back" + (restored ? "" : " (no snapshot, the card was returned by hand)")));
+            }
+            return false;
+        }
+        if (!played && !sa.isCopied() && !sa.isTrigger()) {
+            getAi().noteFailedCast(key); // it did not go on the stack: not again this turn, or the AI picks it forever
+        }
+        return played;
     }
 
     /**
@@ -1251,7 +1387,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         final PhaseHandler ph = getGame().getPhaseHandler();
-        if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1 && sa.getTargetCard() != null) {
+        if (ph.is(PhaseType.MAIN1, sa.getActivatingPlayer()) && sa.getTargetCard() != null) {
             AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
             String s = aiAtk.toProtectAttacker(sa);
             if (s != null) {
@@ -1329,6 +1465,9 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
+            if (playedByTeammate(sa)) {
+                continue;
+            }
             if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
@@ -1343,7 +1482,7 @@ public class PlayerControllerAi extends PlayerController {
                         }
                     }
 
-                    if (sa.isMayChooseNewTargets()) {
+                    if (sa.isMayChooseNewTargets() && !sa.getAllTargetChoices().isEmpty()) {
                         chooseNewTargetsForCopy(sa);
                         // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                         // sa.setupNewTargets(player);
@@ -1420,6 +1559,20 @@ public class PlayerControllerAi extends PlayerController {
         boolean optional = !tgtSA.getPayCosts().isMandatory();
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell spell) { // Isn't it ALWAYS a spell?
+
+            // PlayEffect marks the spell with the madness alternative cost; the madness keyword itself sits on the
+            // trigger's ability, never on the card's own spell, so isKeyword(MADNESS) is always false here
+            if (tgtSA.isMadness() && !tgtSA.usesTargeting()
+                    && ComputerUtilCost.canPayCost(tgtSA, player, false)) {
+                return ComputerUtil.playStack(tgtSA, player, getGame()); // otherwise the card is just lost
+            }
+            // Beseech the Mirror -> Gaea's Will / Yawgmoth's Will: the generic check declines the engine, but
+            // PlayAi.chooseSingleCard already picked it on purpose, and a free cast beats it going to the hand
+            final CardState realState = tgtSA.getHostCard().getState(CardStateName.Original);
+            if (noManaCost && ("YawgmothsWill".equals(tgtSA.getParamOrDefault("AILogic", ""))
+                || realState != null && realState.hasKeyword(Keyword.BARGAIN))) {
+                return ComputerUtil.playStack(tgtSA, player, getGame());
+            }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
@@ -1480,8 +1633,44 @@ public class PlayerControllerAi extends PlayerController {
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         // TODO check if profile detection set to Auto
         setupAutoProfile(myDeck);
+        return keepComboPieces(myDeck, brains.complainCardsCantPlayWell(myDeck));
+    }
 
-        return brains.complainCardsCantPlayWell(myDeck);
+    /** Flat Monte Carlo can try a card the heuristics cannot play, so the pieces of the deck's combos stay in the deck. */
+    private Map<DeckSection, List<? extends PaperCard>> keepComboPieces(final Deck deck, final Map<DeckSection, List<? extends PaperCard>> complaints) {
+        if (complaints == null || complaints.isEmpty() || !brains.flatMonteCarloActive()) {
+            return complaints;
+        }
+        final Set<String> pieces;
+        try {
+            final List<Card> cards = new ArrayList<>();
+            for (final DeckSection section : new DeckSection[] { DeckSection.Main, DeckSection.Commander }) {
+                if (deck.has(section)) {
+                    for (final PaperCard pc : deck.get(section).toFlatList()) {
+                        cards.add(Card.fromPaperCard(pc, player));
+                    }
+                }
+            }
+            pieces = ComboPlan.scan(cards).pieceNames();
+        } catch (final RuntimeException e) {
+            return complaints;
+        }
+        if (pieces.isEmpty()) {
+            return complaints;
+        }
+        final Map<DeckSection, List<? extends PaperCard>> kept = new LinkedHashMap<>(); // never edit the deck's own map
+        for (final Map.Entry<DeckSection, List<? extends PaperCard>> e : complaints.entrySet()) {
+            final List<PaperCard> rest = new ArrayList<>();
+            for (final PaperCard pc : e.getValue()) {
+                if (!pieces.contains(pc.getName())) {
+                    rest.add(pc);
+                }
+            }
+            if (!rest.isEmpty()) {
+                kept.put(e.getKey(), rest);
+            }
+        }
+        return kept;
     }
 
     @Override
@@ -1502,18 +1691,12 @@ public class PlayerControllerAi extends PlayerController {
         // Filter out mana sources that will interfere with payManaCost()
         CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
-        // Filter out creatures if AI hasn't attacked yet
+        // before the AI attacks, any of its creatures may still be needed for combat, so they pay last
+        final CardCollection kept = new CardCollection();
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (!creatures) {
-                untapped = CardLists.filter(untapped, c -> !c.isCreature());
-            } else {
-                // TODO AI needs to learn how to use Convoke or Waterbend
-                return new HashMap<>();
-            }
-        }
-
-        if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
-                (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+            kept.addAll(CardLists.filter(untapped, CardPredicates.CREATURES));
+            untapped.removeAll(kept);
+        } else if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Do not convoke potential blockers until after opponent's attack
             final CardCollectionView blockers = ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(ai, null), CardCollection.EMPTY);
             untapped.removeAll(blockers);
@@ -1530,7 +1713,32 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
+        final Map<Card, ManaCostShard> chosen = ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
+        // improvise and waterbend don't record the cards they tap, which the AI checks before casting
+        if (kept.isEmpty() || !creatures || artifacts) {
+            return chosen;
+        }
+        // an X spell would size X to include the creatures kept for combat
+        if (sa.costHasManaX()) {
+            return chosen;
+        }
+        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
+        final ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
+        chosen.values().forEach(shard -> rest.decreaseShard(shard, 1));
+        if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+            return chosen;
+        }
+        kept.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c)).thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
+        for (final Card c : kept) {
+            ComputerUtilMana.getConvokeOrImproviseFromList(rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures).forEach((card, shard) -> {
+                chosen.put(card, shard);
+                rest.decreaseShard(shard, 1);
+            });
+            if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+                break;
+            }
+        }
+        return chosen;
     }
 
     @Override
@@ -1588,12 +1796,18 @@ public class PlayerControllerAi extends PlayerController {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
+            } else if (logic.equals(NamedDiscard.LOGIC)) {
+                name = NamedDiscard.chooseName(player, sa, valid);
             }
 
             if (!StringUtils.isBlank(name)) {
                 return name;
             }
         } else {
+            final String outside = forge.ai.simulation.ConsultationWin.nameOutsideLibrary(player, sa);
+            if (outside != null) {
+                return outside; // Demonic Consultation with Thassa's Oracle: a card that is not in the library
+            }
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {

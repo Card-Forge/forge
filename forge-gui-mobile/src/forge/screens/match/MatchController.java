@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.animation.FlipOntoBattlefieldAnimation;
 import forge.game.ability.effects.FlipOntoBattlefieldEffect;
@@ -101,11 +103,22 @@ public class MatchController extends NetworkGuiGame {
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
     private Map<PlayerView, Object> selectionZonesBackup;
+    private final List<CardView> revealedCards = new ArrayList<>(); // GL thread only, newest first
     // a panel with no tab selected backs up as this, so a restore can tell it from an entry openZones never touched
     private static final Object NO_TAB = new Object();
 
     public static MatchScreen getView() {
         return view;
+    }
+
+    public List<CardView> getRevealedCards() {
+        return revealedCards;
+    }
+
+    @Override
+    public void showRevealedCards(final Iterable<CardView> cards) {
+        final List<CardView> revealed = Lists.newArrayList(cards);
+        FThreads.invokeInEdtNowOrLater(() -> revealedCards.addAll(0, revealed));
     }
 
     @Override
@@ -239,6 +252,7 @@ public class MatchController extends NetworkGuiGame {
         if(GuiBase.isNetPlay(this))
             view.resetFields();
         selectionZonesBackup = null;
+        revealedCards.clear();
         setSelection(Selection.NONE);  //fix uncleared selection
 
         if (noHumans) {
@@ -361,23 +375,20 @@ public class MatchController extends NetworkGuiGame {
         //TODO
     }
 
-    private PlayerView lastPlayer;
+    private List<PlayerView> lastPlayers = new ArrayList<>();
     @Override
     public void updatePhase(boolean saveState) {
         final PhaseType ph = getGameView().getPhase();
         if (ph != null) {
+            // a team that shares its turns shows the phase on each of its players
+            final List<PlayerView> takingTurn = getGameView().getPlayers().stream().filter(p -> p.sharesTeamWith(getGameView().getPlayerTurn())).collect(Collectors.toList());
             if (ph.isBefore(PhaseType.END_OF_TURN))
-                lastPlayer = getGameView().getPlayerTurn();
+                lastPlayers = takingTurn;
             //reset phase labels
             view.resetAllPhaseButtons();
-            if (lastPlayer != null && PhaseType.CLEANUP.equals(ph)) {
+            for (final PlayerView p : PhaseType.CLEANUP.equals(ph) && !lastPlayers.isEmpty() ? lastPlayers : takingTurn) {
                 //set phaselabel
-                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
-                if (phaseLabel != null)
-                    phaseLabel.setActive(true);
-            } else if (getGameView().getPlayerTurn() != null) {
-                //set phaselabel
-                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
+                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
             }
@@ -793,6 +804,9 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
+        if (delayedReveal != null) {
+            reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards());
+        }
         final int m1 = max >= 0 ? optionList.size() - max : -1;
         final int m2 = min >= 0 ? optionList.size() - min : -1;
         return SGuiChoose.order(title, Forge.getLocalizer().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);

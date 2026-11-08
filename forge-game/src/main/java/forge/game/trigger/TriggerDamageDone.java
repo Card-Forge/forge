@@ -109,12 +109,12 @@ public class TriggerDamageDone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         // TODO try to reuse LKI of CardDamageHistory.registerDamage
-        sa.setTriggeringObject(AbilityKey.Source, CardCopyService.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
-        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(
-            runParams,
+        objects.put(AbilityKey.Source, CardCopyService.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        objects.put(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        AbilityKey.copyKeys(
+            runParams, objects,
             AbilityKey.Cause,
             AbilityKey.DamageAmount,
             // This parameter is here because LKI information related to combat doesn't work properly

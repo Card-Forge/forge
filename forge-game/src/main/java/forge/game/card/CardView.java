@@ -650,7 +650,8 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.equals(viewer)) {
+            // CR 810.5: Two-Headed Giant teammates may review each other's hands
+            if (controller.sharesTeamWith(viewer)) {
                 return true;
             }
             break;
@@ -982,30 +983,6 @@ public class CardView extends GameEntityView {
         return alternate0 ? getAlternateState() : getCurrentState();
     }
 
-    public boolean wasDestroyed() {
-        return get(TrackableProperty.WasDestroyed);
-    }
-    void updateWasDestroyed(boolean value) {
-        set(TrackableProperty.WasDestroyed, value);
-    }
-    public boolean needsUntapAnimation() {
-        return get(TrackableProperty.NeedsUntapAnimation);
-    }
-    public void updateNeedsUntapAnimation(boolean value) {
-        set(TrackableProperty.NeedsUntapAnimation, value);
-    }
-    public boolean needsTapAnimation() {
-        return get(TrackableProperty.NeedsTapAnimation);
-    }
-    public void updateNeedsTapAnimation(boolean value) {
-        set(TrackableProperty.NeedsTapAnimation, value);
-    }
-    public boolean needsTransformAnimation() {
-        return get(TrackableProperty.NeedsTransformAnimation);
-    }
-    public void updateNeedsTransformAnimation(boolean value) {
-        set(TrackableProperty.NeedsTransformAnimation, value);
-    }
     public boolean useCardArt() {
         // prevent NPE
         if (getCurrentState() == null)

@@ -341,7 +341,7 @@ public class AiAttackController {
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
         AITimeoutTracker.check();
         // check for time walks
-        if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
+        if (ai.getGame().getPhaseHandler().isPlayerNextTurn(ai)) {
             return potentialAttackers;
         }
         // no need to block (already holding mana to cast fog next turn)
@@ -750,7 +750,7 @@ public class AiAttackController {
         }
 
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, defendingOpponent);
-        if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+        if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
             return true;
         }
         for (Card trampler : trampleDmg.keySet()) {
@@ -759,7 +759,7 @@ public class AiAttackController {
                 totalPoisonDamage += dmg;
             }
             totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
-            if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+            if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
                 return true;
             }
         }
@@ -809,6 +809,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        // TODO plan the attack with teammates, so lethal that needs both players' creatures is found (CR 805.10b)
         final long id = AITimeoutTracker.key(ai.getGame().getId(), ai.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // predicting a HUMAN player's attack must not light up that player's timer bar

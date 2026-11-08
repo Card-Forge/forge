@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class FlatMonteCarloStats {
     /** Decision times kept for percentiles; beyond this only the counters keep growing. */
-    private static final int MAX_LATENCY_SAMPLES = 200_000;
+    private static final int MAX_LATENCY_SAMPLES = 20_000;
     /** Distinct card names / failure messages tracked, so that a flood of different messages stays bounded. */
     private static final int MAX_KEYS = 500;
 

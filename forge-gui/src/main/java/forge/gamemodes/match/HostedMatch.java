@@ -123,11 +123,14 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        sortedPlayers.sort((p1, p2) -> {
-            final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            return Integer.compare(v1, v2);
-        });
+        // teammates must keep their adjacent seats (CR 805.1)
+        if (!gameRules.hasSharedTeamTurns()) {
+            sortedPlayers.sort((p1, p2) -> {
+                final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            });
+        }
 
         if (sortedPlayers.size() == 2) {
             title = TextUtil.concatNoSpace(sortedPlayers.get(0).getPlayer().getName(), " vs ", sortedPlayers.get(1).getPlayer().getName());
@@ -162,6 +165,8 @@ public class HostedMatch {
         game.AI_FLAT_MONTE_CARLO = FModel.getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO);
         // Desktop auto-detection: phones and tablets keep the light settings, a PC gets the maximum strength.
         game.AI_FLAT_MONTE_CARLO_MAX = !forge.gui.GuiBase.isMobile();
+        // ...and a phone gets the lite settings (attack search, cheap lookahead) instead of the bare profile values.
+        game.AI_FLAT_MONTE_CARLO_LITE = forge.gui.GuiBase.isMobile();
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 

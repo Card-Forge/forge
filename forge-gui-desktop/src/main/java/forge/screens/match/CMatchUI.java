@@ -718,7 +718,7 @@ public final class CMatchUI
 
     @Override
     public void showRevealedCards(final Iterable<CardView> cards) {
-        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        // only hands open: cards revealed from any other zone show in the reveal dialog
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
             if (update.getZones().contains(ZoneType.Hand)) {
@@ -921,20 +921,22 @@ public final class CMatchUI
 
     @Override
     public void updatePhase(boolean saveState) {
-        final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
-        // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
-        PhaseLabel lbl = null;
-        if (ph != null) {
-            lbl = p == null ? null : getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
-        } else {
-            // not sure what debugging information would help here, log for now
+        if (ph == null) {
+            // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
             System.err.println("getGameView().getPhase() returned 'null'");
         }
 
         resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
+        if (ph != null) {
+            // a team that shares its turns shows the phase on each of its players
+            final PlayerView turnPlayer = getGameView().getPlayerTurn();
+            for (final PlayerView p : getGameView().getPlayers()) {
+                final PhaseLabel lbl = p.sharesTeamWith(turnPlayer) ? getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph) : null;
+                if (lbl != null) {
+                    lbl.setActive(true);
+                }
+            }
         }
 
         if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases

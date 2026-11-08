@@ -5,6 +5,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CombatData;
@@ -49,9 +50,6 @@ public class DeltaSyncManager implements IHasForgeLog {
     private static final int CLEAN_STREAK_TO_RESTORE = 10;
     private static final int SAMPLE_SIZE = 15;
     private static final int MAX_WALK_ATTEMPTS = 3;
-
-    // Sentinel for properties that should be skipped in network transport
-    static final Object SKIP_MARKER = new Object();
 
     // Zone collection properties on PlayerView — the authoritative source for
     // CardView instances. Cross-reference properties (Commander, AttachedCards,
@@ -227,7 +225,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         collectObjectDelta(obj, objectDeltas, newObjects);
 
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
-        for (Map.Entry<TrackableProperty, Object> entry : ((Map<TrackableProperty, Object>) obj.getProps()).entrySet()) {
+        for (Map.Entry<TrackableProperty, Object> entry : obj.getProps().entrySet()) {
             Object value = entry.getValue();
             if (value instanceof TrackableObject to) {
                 // Skip GameEntityView→GameEntityView scalar cross-references
@@ -300,12 +298,14 @@ public class DeltaSyncManager implements IHasForgeLog {
     /**
      * Pre-scan zone collections across all players to seed authoritativeInstances.
      * Provides cross-player coverage for stale Commander references.
+     * A spell's card is in no zone collection while it is on the stack, so its stack item's source is seeded after them.
+     * Any other instance at that key, such as the one the reveal history or the commander list keeps, is stale.
      */
     private void preScanZoneCollections(GameView gameView) {
         if (gameView == null || gameView.getPlayers() == null) return;
         for (PlayerView player : gameView.getPlayers()) {
             for (TrackableProperty zoneProp : ZONE_COLLECTIONS) {
-                if (((Map<TrackableProperty, Object>) player.getProps()).get(zoneProp) instanceof TrackableCollection<?> tc) {
+                if (player.getProps().get(zoneProp) instanceof TrackableCollection<?> tc) {
                     for (Object item : tc) {
                         if (item instanceof CardView cv) {
                             authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
@@ -314,15 +314,20 @@ public class DeltaSyncManager implements IHasForgeLog {
                 }
             }
         }
+        for (StackItemView si : gameView.getStack()) {
+            CardView source = si.getSourceCard();
+            if (source != null) {
+                authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(source), source);
+            }
+        }
     }
 
     /**
      * Build a property map for a subset of dirty properties.
      */
     private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj, Set<TrackableProperty> dirtyProps) {
-        Map<TrackableProperty, Object> props = obj.getProps();
         // Copy props — mergeDelayedProps may add entries, and we iterate later
-        Map<TrackableProperty, Object> snapshot = new EnumMap<>(props);
+        Map<TrackableProperty, Object> snapshot = new EnumMap<>(obj.getProps());
         mergeDelayedProps(obj, snapshot, dirtyProps);
         if (dirtyProps == null) {
             // additional delayed props will be included from fresh object
@@ -330,10 +335,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         }
         Map<TrackableProperty, Object> delta = new EnumMap<>(TrackableProperty.class);
         for (TrackableProperty prop : dirtyProps) {
-            Object netValue = toNetworkValue(prop, snapshot.get(prop));
-            if (netValue != SKIP_MARKER) {
-                delta.put(prop, netValue);
-            }
+            delta.put(prop, toNetworkValue(prop, snapshot.get(prop)));
         }
         return delta;
     }
@@ -498,7 +500,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         // walkAndRegister only registers consumers (no data sent), and the
         // first collectDeltas corrects any stale registrations.
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
-        for (Object value : ((Map<TrackableProperty, Object>) obj.getProps()).values()) {
+        for (Object value : obj.getProps().values()) {
             if (value instanceof TrackableObject to) {
                 if (parentIsGameEntityView && to instanceof GameEntityView) {
                     continue;

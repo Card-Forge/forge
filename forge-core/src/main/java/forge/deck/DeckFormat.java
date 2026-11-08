@@ -83,7 +83,7 @@ public enum DeckFormat {
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
-    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
+    Brawl      ( Range.is(99), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {
@@ -686,6 +686,14 @@ public enum DeckFormat {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
+    }
+
+    /** Without legality checks any creature or planeswalker may command, except in signature spell formats. */
+    public boolean isAllowedCommander(CardRules rules, boolean enforceLegality) {
+        if (isLegalCommander(rules)) {
+            return true;
+        }
+        return !enforceLegality && !hasSignatureSpell() && (rules.canBeCreature() || rules.getType().isPlaneswalker());
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {

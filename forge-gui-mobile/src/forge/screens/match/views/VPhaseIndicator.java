@@ -130,7 +130,7 @@ public class VPhaseIndicator extends FContainer {
     public void drawPhaseButton(Graphics g, float w, float h) {
         final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
         final PhaseType phase = gv == null ? null : gv.getPhase();
-        final boolean myTurn = gv != null && phase != null && gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+        final boolean myTurn = phase != null && player.sharesTeamWith(gv.getPlayerTurn());
 
         final String text;
         final Color textColor;
@@ -244,7 +244,7 @@ public class VPhaseIndicator extends FContainer {
 
         if (expand < 1f && phase != null) {
             final float a = 1f - expand;
-            final boolean myTurn = gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+            final boolean myTurn = player.sharesTeamWith(gv.getPlayerTurn());
             String text = null;
             Color base;
             if (myTurn) {

@@ -104,6 +104,16 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
             return PaymentDecision.card(source);
         }
+        if (GuardedAbilities.isMvDiscard(cost) && GuardedAbilities.targetedMv(ability) >= 0) {
+            // "Discard a card with mana value X" where X is the target's (Kozilek, the Great Distortion): the generic
+            // discard rules know nothing of X and left this cost unpaid; give up the card that fits and is missed least
+            final CardCollection fitting = GuardedAbilities.chooseMvDiscard(player, ability, cost.getAbilityAmount(ability), discarded);
+            if (fitting == null) {
+                return null;
+            }
+            discarded.addAll(fitting);
+            return PaymentDecision.card(fitting);
+        }
         if (type.equals("Hand")) {
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
                 hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);

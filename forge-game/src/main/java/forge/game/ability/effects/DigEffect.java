@@ -254,6 +254,11 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
 
+                // no choice dialog follows, so show the looked-at cards here
+                if (valid.isEmpty() && delayedReveal != null) {
+                    chooser.getController().reveal(delayedReveal);
+                }
+
                 CardCollection movedCards;
                 if (changeAll) {
                     movedCards = new CardCollection(valid);
