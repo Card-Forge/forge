@@ -522,9 +522,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         final float frontH = ArenaBoard.frontTileHeight(local, seat);
         final float minH = ArenaBoard.minTileHeight();
         final float margin = ArenaBoard.rowMargin(seat);
+        // your rows keep left of the stack's dock while it is open (it would cover the right end of them otherwise)
+        final float right = local ? Math.min(width - margin, ArenaBoard.localRowRight()) : width - margin;
         if (front) {
             float h = frontH;
-            final float room = width - 2 * margin;
+            final float room = right - margin;
             while (h > minH && arenaRowWidth(tops, h) > room) {
                 h -= 2;
             }
@@ -533,8 +535,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             final float squeeze = total <= room || tops.size() < 2 ? 0f : (total - room) / (tops.size() - 1);
             final float shown = total - squeeze * Math.max(0, tops.size() - 1);
             float x = Math.max(margin, centreX - shown / 2f);
-            if (x + shown > width - margin) {
-                x = Math.max(margin, width - margin - shown);
+            if (x + shown > right) {
+                x = Math.max(margin, right - shown);
             }
             final float step = Math.round(ArenaBoard.windowH() * ArenaBoard.COMBAT_STEP) * (local ? -1 : 1);
             for (CardAreaPanel top : tops) {
@@ -551,7 +553,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
         float h = ArenaBoard.backTileHeight(local, seat, frontH);
         final float clear = ArenaBoard.portraitClear(seat);
-        final float rightLimit = ArenaBoard.backRowRight(local, seat, width);
+        final float rightLimit = Math.min(ArenaBoard.backRowRight(local, seat, width), right);
         if (seat) { //a seat's portrait is above its rows: one row across the whole width
             final List<CardAreaPanel> all = new ArrayList<>(lands);
             all.addAll(others);

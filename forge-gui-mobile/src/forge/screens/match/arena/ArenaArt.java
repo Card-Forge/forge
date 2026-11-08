@@ -7,8 +7,12 @@ import com.badlogic.gdx.utils.ObjectFloatMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import forge.Graphics;
+import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
+import forge.card.CardImageRenderer;
+import forge.card.CardRenderer;
+import forge.game.card.CardView;
 import forge.util.TextBounds;
 
 /**
@@ -327,6 +331,27 @@ public final class ArenaArt {
     private static final TextureRegion SQUARE = new TextureRegion();
 
     /**
+     * A card's art as a square for a circle crop, in a region of its own (keep it: {@link #squareOf} shares one), or null
+     * while it has no picture (the "no picture" stand-in counts as none). Look it up when the card changes, not per frame.
+     */
+    public static TextureRegion circleArtOf(final CardView card) {
+        final FImageComplex picture;
+        try {
+            picture = CardRenderer.getCardArt(card);
+        } catch (final RuntimeException e) {
+            return null;
+        }
+        if (picture == null || picture == CardImageRenderer.forgeArt) {
+            return null;
+        }
+        final TextureRegion r = picture.getTextureRegion();
+        if (r == null || r.getRegionWidth() <= 0 || r.getRegionHeight() <= 0) {
+            return null;
+        }
+        return new TextureRegion(squareOf(r));
+    }
+
+    /**
      * The middle square of a picture, so a circle crop of it is round (portraits, a commander's art in a chip). Shared
      * scratch region: use it before asking for another.
      */
@@ -412,6 +437,12 @@ public final class ArenaArt {
         RULES.drawText(g, text, font, color, x, y, w, h, y, h, true, Align.left, false);
     }
 
+    /** One centred line with mana symbols drawn as icons ("Pay {2} each"). */
+    public static void symbolText(final Graphics g, final String text, final FSkinFont font, final Color color, final float x, final float y,
+            final float w, final float h) {
+        RULES.drawText(g, text, font, color, x, y, w, h, y, h, false, Align.center, true);
+    }
+
     /** Height rules text takes when wrapped to {@code w}. */
     public static float rulesTextHeight(final String text, final FSkinFont font, final float w) {
         return RULES.getWrappedBounds(text, font, w).height;
@@ -467,12 +498,22 @@ public final class ArenaArt {
      */
     public static void hint(final Graphics g, final String text, final FSkinFont font, final float cx, final float top, final float minX,
             final float maxX) {
+        hint(g, text, font, cx, top, minX, maxX, ArenaTheme.GOLD, ArenaTheme.WHITE);
+    }
+
+    /** {@link #hint} with its rim and text in these colours (an attack choice's state, a greyed-out choice). */
+    public static void hint(final Graphics g, final String text, final FSkinFont font, final float cx, final float top, final float minX,
+            final float maxX, final Color rim, final Color ink) {
         final float h = hintHeight(font);
         final float w = cachedTextWidth(text, font) + h;
         final float x = Math.max(minX, Math.min(maxX - w, cx - w / 2f));
         g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.6f, S1), x, top + ArenaTheme.px(2), w, h, h / 2f, ArenaTheme.px(6));
         g.fillSmoothRoundRect(HINT_FILL, x, top, w, h, h / 2f);
-        g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, x, top, w, h, h / 2f);
-        g.drawText(text, font, ArenaTheme.WHITE, x, top, w, h, false, Align.center, true);
+        g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), rim, x, top, w, h, h / 2f);
+        if (text.indexOf('{') >= 0) { // a cost in it ("{2}"): mana symbols, as on the cards
+            RULES.drawText(g, text, font, ink, x, top, w, h, top, h, false, Align.center, true);
+        } else {
+            g.drawText(text, font, ink, x, top, w, h, false, Align.center, true);
+        }
     }
 }

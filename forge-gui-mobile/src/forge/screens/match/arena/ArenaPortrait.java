@@ -14,6 +14,7 @@ import forge.assets.FSkinFont;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.util.AITimeoutTracker;
@@ -120,11 +121,15 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
         }
         final FSkinFont hf = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), plateH * HINT_SHARE));
         final float hintTop = opponent ? cy + d / 2f + plateH * 0.6f + ArenaTheme.px(4) : cy - d / 2f - ArenaArt.hintHeight(hf) - ArenaTheme.px(8);
-        if (ArenaBoard.isDeclaringAttack() && opponent && (ring == RING_CHOSEN || ring == RING_SELECTABLE)) {
+        // a single opponent's portrait has room under it for the attack plate; a seat says it on its name plate
+        final Selection.DefenderOption attack = opponent && !seat ? ArenaBoard.attackOption(player) : null;
+        if (attack != null) {
             // while you declare attackers every opponent says, without hovering, where your attack goes and that it can go
             // to them instead (the prompt asks for the same in words)
-            ArenaArt.hint(g, attackPlate(ring == RING_CHOSEN), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
-        } else if (ring == RING_SELECTABLE && isPointerOver(v)) { // what the breathing ring means: it can be clicked, for what
+            final boolean current = ring == RING_CHOSEN;
+            ArenaArt.hint(g, ArenaBoard.attackPlateText(attack, current), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x,
+                    ArenaBoard.attackPlateRim(attack, current), ArenaBoard.attackPlateInk(attack));
+        } else if (ring == RING_SELECTABLE && isPointerOver(v) && ArenaBoard.attackOption(player) == null) { // what the breathing ring means: it can be clicked, for what
             ArenaArt.hint(g, hintText(st, player), hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
         }
 
@@ -147,16 +152,6 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
 
     /** The hint plate's text against the life plate's height. */
     private static final float HINT_SHARE = 0.36f;
-    private static String attackHere, clickToAttack;
-
-    /** "Your attack goes here" for the defender being filled, "Click to attack" for the others; made once. */
-    static String attackPlate(final boolean current) {
-        if (attackHere == null) {
-            attackHere = Forge.getLocalizer().getMessage("lblArenaAttackHere");
-            clickToAttack = Forge.getLocalizer().getMessage("lblArenaClickToAttack");
-        }
-        return current ? attackHere : clickToAttack;
-    }
 
     /** The share of the life plate's height a chip beside it takes. */
     private static final float CHIP_SHARE = 0.56f;

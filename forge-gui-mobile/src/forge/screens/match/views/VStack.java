@@ -219,11 +219,15 @@ public class VStack extends FDropDown {
         return isVisible() ? getTop() + getHeight() : 0f;
     }
 
+    /** On the Arena board your rows keep clear of the open stack: lay them out again when it comes and goes. */
     @Override
     public void setVisible(final boolean visible0) {
         final boolean changed = isVisible() != visible0;
         super.setVisible(visible0);
         if (changed) { notifyCoach(); } // now visible and positioned (or hidden), whoever opened or closed it
+        if (changed && isArenaStack() && MatchController.getView() != null && MatchController.getView().getBottomPlayerPanel() != null) {
+            MatchController.getView().getBottomPlayerPanel().getField().revalidate();
+        }
     }
 
     @Override

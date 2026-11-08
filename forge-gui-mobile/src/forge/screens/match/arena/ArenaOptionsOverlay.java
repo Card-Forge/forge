@@ -426,10 +426,13 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmitPlain");
             btnSubmit.enabled = true;
         } else {
-            btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmit", picked.size());
             // declining a single pick has its own button; a list of picks may be left empty
             final int least = max == 1 ? 1 : min;
             btnSubmit.enabled = picked.size() >= least && picked.size() <= max;
+            // the button says what it does: what is still to pick, or "Choose" a single pick, "Submit 2" several
+            btnSubmit.text = picked.size() < least ? Forge.getLocalizer().getMessage("lblArenaPickMore", least - picked.size())
+                    : max == 1 ? Forge.getLocalizer().getMessage("lblArenaChooseThis")
+                    : Forge.getLocalizer().getMessage("lblArenaSubmit", picked.size());
         }
         if (getWidth() > 0) {
             ArenaDialogKit.placeButtons(getWidth(), getHeight(), btnSubmit, btnOther, btnCancel);

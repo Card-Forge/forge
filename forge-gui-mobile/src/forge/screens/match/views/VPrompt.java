@@ -27,6 +27,7 @@ import com.badlogic.gdx.math.MathUtils;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.arena.ArenaPrompt;
@@ -186,10 +187,16 @@ public class VPrompt extends FContainer {
         return overMatch && ArenaMatchLayout.applies();
     }
 
-    /** Which kind of Arena prompt this is now: null while it only waits on someone else (then it is not shown). */
+    /**
+     * Which kind of Arena prompt this is now: null while it only waits on someone else (then it is not shown). A prompt
+     * whose buttons are both off but that asks for a click on the board (a vote, a pick that cannot be skipped) is a
+     * decision: its words say what to click.
+     */
     public ArenaMatchLayout.PromptMode getArenaMode() {
         if (!btnOk.isEnabled() && !btnCancel.isEnabled()) {
-            return null;
+            final Selection pick = MatchController.instance.getSelection();
+            final boolean asks = !StringUtils.isEmpty(message) && (!pick.cards().isEmpty() || !pick.targets().isEmpty());
+            return asks ? ArenaMatchLayout.PromptMode.DECISION : null;
         }
         return ArenaPrompt.isPriorityOnly(btnOk.getText(), btnCancel.getText()) ? ArenaMatchLayout.PromptMode.PRIORITY : ArenaMatchLayout.PromptMode.DECISION;
     }

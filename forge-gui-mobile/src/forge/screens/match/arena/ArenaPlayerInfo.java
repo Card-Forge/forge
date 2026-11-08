@@ -12,18 +12,16 @@ import com.badlogic.gdx.utils.TimeUtils;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardFaceSymbols;
-import forge.card.CardImageRenderer;
-import forge.card.CardRenderer;
 import forge.card.mana.ManaAtom;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.util.collect.FCollectionView;
 
@@ -53,7 +51,7 @@ public final class ArenaPlayerInfo {
     public static final int CMDR = 1, COUNTERS = 2, STATUS = 4, MANA = 8, ALL = CMDR | COUNTERS | STATUS;
 
     /** How a row is led: nothing, the step of the turn (gold), or "plays next" (steel). */
-    public static final int LEAD_NONE = 0, LEAD_PHASE = 1, LEAD_NEXT = 2;
+    public static final int LEAD_NONE = 0, LEAD_PHASE = 1, LEAD_NEXT = 2, LEAD_ATTACK = 3;
 
     /** How often a row reads the game again (the figures it shows change on game events, not per frame). */
     public static final long REFRESH_MS = 100;
@@ -125,6 +123,15 @@ public final class ArenaPlayerInfo {
             statusLabels[i] = Forge.getLocalizer().getMessage(STATUS_KEYS[i]);
         }
         return statusLabels[i];
+    }
+
+    /**
+     * The commander tax on {@code commander} for {@code player}: two more for each time it has already been cast from
+     * the command zone (each partner counts its own), 0 for a card that is not one of their commanders.
+     */
+    public static int commanderTax(final PlayerView player, final CardView commander) {
+        final List<CardView> commanders = player.getCommanders();
+        return commanders != null && commanders.contains(commander) ? 2 * player.getCommanderCast(commander) : 0;
     }
 
     /** "Plays next", localized once. */
@@ -205,8 +212,10 @@ public final class ArenaPlayerInfo {
             bottom[n] = bottom1;
             rim[n] = rim1;
             ink[n] = ink1;
-            card[n] = null;
-            art[n] = null;
+            if (pic1 != PIC_CARD) {
+                card[n] = null; // a card chip keeps its slot's picture if it shows the same card again (setCard)
+                art[n] = null;
+            }
             initial[n] = null;
             icon[n] = null;
             symbol[n] = null;
@@ -231,6 +240,18 @@ public final class ArenaPlayerInfo {
                 add(PIC_NONE, leadText1, true, LEAD_TOP, LEAD_BOTTOM, ArenaTheme.GOLD, ArenaTheme.WHITE);
             } else if (lead1 == LEAD_NEXT) {
                 add(PIC_NONE, nextLabel(), true, NEXT_TOP, NEXT_BOTTOM, NEXT_RIM, ArenaTheme.WHITE);
+            } else if (lead1 == LEAD_ATTACK && leadText1 != null) { // while you declare attackers: whether and how to attack them
+                final Selection.DefenderOption o = ArenaBoard.attackOption(p);
+                final boolean current = MatchController.instance.isHighlighted(p);
+                add(PIC_NONE, leadText1, true, CHIP_FILL, CHIP_FILL, o == null ? ArenaTheme.SELECTABLE : ArenaBoard.attackPlateRim(o, current),
+                        o == null ? ArenaTheme.WHITE : ArenaBoard.attackPlateInk(o));
+                final String cost = o == null ? null : ArenaBoard.attackCostText(o), goad = o == null ? null : ArenaBoard.attackGoadText(o);
+                if (cost != null) { // what it takes, as chips of their own so they wrap on a narrow plate
+                    add(PIC_NONE, cost, true, CHIP_FILL, CHIP_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                }
+                if (goad != null) {
+                    add(PIC_NONE, goad, true, CHIP_FILL, CHIP_FILL, ArenaBoard.attackPlateRim(o, false), ArenaTheme.WHITE);
+                }
             }
             if ((what1 & CMDR) != 0) {
                 readCommanderDamage(p);
@@ -253,6 +274,15 @@ public final class ArenaPlayerInfo {
                     if (k > 0) {
                         add(PIC_SYMBOL, figure(k), false, CHIP_FILL, CHIP_FILL, MANA_RIM, ArenaTheme.WHITE);
                         symbol[n - 1] = MANA_SYMBOLS[i];
+                    }
+                }
+            }
+            // two commanders with the same initial (partners Tymna and Thrasios) show two letters each, so they tell apart
+            for (int i = 0; i < n; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (pic[i] == PIC_CARD && pic[j] == PIC_CARD && card[i] != card[j] && initial[i] != null && initial[i].equals(initial[j])) {
+                        initial[i] = twoLetters(card[i].getName());
+                        initial[j] = twoLetters(card[j].getName());
                     }
                 }
             }
@@ -320,8 +350,10 @@ public final class ArenaPlayerInfo {
         /** A card's picture for the chip just added: its art, or (none loaded yet) its colours and initial. */
         private void setCard(final CardView c, final String nameForInitial) {
             final int i = n - 1;
-            card[i] = c;
-            art[i] = circleArtOf(c);
+            if (card[i] != c || art[i] == null) { // the same card as last time: keep its picture
+                card[i] = c;
+                art[i] = ArenaArt.circleArtOf(c);
+            }
             initial[i] = initial(nameForInitial != null ? nameForInitial : c.getName());
             if (tint[i] == null) {
                 tint[i] = new Color(); // one per slot, reused by every rebuild
@@ -430,7 +462,9 @@ public final class ArenaPlayerInfo {
             if (clipped[i]) {
                 g.startClip(left, top0, w, h);
             }
-            if (label[i]) {
+            if (label[i] && text[i].indexOf('{') >= 0) { // a cost ("Pay {2} each"): mana symbols, as on the cards
+                ArenaArt.symbolText(g, text[i], labelFont, ink[i], tx, top0, Math.max(textW, 1f), h);
+            } else if (label[i]) {
                 ArenaArt.textShadowed(g, text[i], labelFont, ink[i], tx, top0, Math.max(textW, 1f), h, pic[i] == PIC_NONE ? Align.center : Align.left);
             } else {
                 ArenaArt.textBold(g, text[i], figureFont, ink[i], tx, top0, Math.max(textW, 1f), h, Align.center);
@@ -444,7 +478,7 @@ public final class ArenaPlayerInfo {
     /**
      * Draws a row of chips from {@code x} rightwards ({@code rightToLeft} false) or leftwards, wrapping onto a second
      * row below after {@code maxW} (0: no limit, one row); rows are {@code h} tall, the first centred on {@code cy}.
-     * {@code lead} ({@link #LEAD_PHASE} with {@code leadText}, or {@link #LEAD_NEXT}) comes first. A row that does not
+     * {@code lead} ({@link #LEAD_PHASE} or {@link #LEAD_ATTACK} with {@code leadText}, or {@link #LEAD_NEXT}) comes first. A row that does not
      * fit takes smaller chips. Returns the number of rows used.
      */
     public static int draw(final Graphics g, final Row row, final PlayerView player, final int what, final int lead, final String leadText,
@@ -512,6 +546,14 @@ public final class ArenaPlayerInfo {
 
     private static final String[] INITIALS = new String[128];
 
+    /** The first two letters of a name ("Ty", "Th"), for initials that would otherwise be the same. Made on rebuild only. */
+    private static String twoLetters(final String name) {
+        if (name == null || name.length() < 2) {
+            return initial(name);
+        }
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1, 2);
+    }
+
     /** The first letter of a name, from a shared table for plain letters. */
     private static String initial(final String name) {
         if (name == null || name.isEmpty()) {
@@ -526,23 +568,5 @@ public final class ArenaPlayerInfo {
             s = INITIALS[c] = String.valueOf(c);
         }
         return s;
-    }
-
-    /** A card's art as a square for a circle crop (its own region, kept by the chip), or null if it has no picture yet. */
-    static TextureRegion circleArtOf(final CardView card) {
-        final FImageComplex picture;
-        try {
-            picture = CardRenderer.getCardArt(card);
-        } catch (final RuntimeException e) {
-            return null;
-        }
-        if (picture == null || picture == CardImageRenderer.forgeArt) {
-            return null; // the "no picture" stand-in: the colour and initial say more
-        }
-        final TextureRegion r = picture.getTextureRegion();
-        if (r == null || r.getRegionWidth() <= 0 || r.getRegionHeight() <= 0) {
-            return null;
-        }
-        return new TextureRegion(ArenaArt.squareOf(r)); // the chip keeps it: squareOf's region is shared scratch
     }
 }

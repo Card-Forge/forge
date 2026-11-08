@@ -435,7 +435,7 @@ public class VPlayerPanel extends FContainer {
         //the bottom seat once you are out and only watch (their cards are not yours to see)
         final boolean ownFan = local && MatchController.getView() != null && MatchController.getView().getBottomPlayerPanel() == this;
         arenaHand.setVisible(!ownFan);
-        arenaHand.setAlwaysCount(seat || !ownFan);
+        arenaHand.setAlwaysCount(seat || (local && !ownFan)); //a seat's small fan, or a watched bottom player's; 1v1 as before
         if (!local) {
             ArenaBoard.opponentHand(seat, left, width, arenaRect);
             arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);

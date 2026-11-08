@@ -1,15 +1,21 @@
 package forge.screens.match.arena;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
+import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.card.CardView;
-import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
-import forge.game.zone.ZoneType;
+import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
+import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -110,19 +116,10 @@ public final class ArenaBoard {
                 }
             }
         }
-        // you are declaring attackers: your turn, the step, and the prompt marks the defender it collects them for
-        if (turn != null && game.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS && MatchController.instance.isLocalPlayer(turn)) {
-            for (int i = 0; i < n && !declaringAttack; i++) {
-                final PlayerView p = players.get(i);
-                declaringAttack = p != turn && MatchController.instance.isHighlighted(p);
-            }
-            for (int i = 0; i < n && !declaringAttack; i++) { // the defender may be a planeswalker or a battle
-                final FCollectionView<CardView> field = players.get(i).getCards(ZoneType.Battlefield);
-                for (int j = 0, m = field == null ? 0 : field.size(); j < m && !declaringAttack; j++) {
-                    declaringAttack = MatchController.instance.isHighlighted(field.get(j));
-                }
-            }
-        }
+        // you are declaring attackers: the prompt says which defenders it allows (the engine's list, with costs and goad);
+        // with only one there is nothing to choose, so the board says nothing about it
+        final List<Selection.DefenderOption> options = MatchController.instance.getSelection().defenders();
+        declaringAttack = options.size() > 1 && turn != null && MatchController.instance.isLocalPlayer(turn);
     }
 
     /** Whether opponents sit side by side along the top (more than two players still in the game). */
@@ -138,28 +135,115 @@ public final class ArenaBoard {
     }
 
     /**
-     * Whether you are choosing attackers now (your declare-attackers step, the prompt collecting them for a defender it
-     * marks). Then every opponent still in the game, and their planeswalkers and battles, can be clicked to send the
-     * attack there; the client is not told the engine's exact list, so this is what the rules allow in Commander.
+     * Whether you are choosing attackers now with more than one defender to choose from (the engine's list, sent with
+     * the prompt): then every possible defender says whether and how it can be attacked, and a click sends the attack
+     * there.
      */
     public static boolean isDeclaringAttack() {
         refreshTable();
         return declaringAttack;
     }
 
-    /** While you declare attackers: whether this player could be the defender (an opponent still in the game). */
-    public static boolean isAttackOption(final PlayerView p) {
-        final PlayerView me = MatchController.instance.getCurrentPlayer();
-        return isDeclaringAttack() && p != null && me != null && p != me && !p.getHasLost() && p.isOpponentOf(me);
+    /** While you declare attackers: what the engine allows for this player or permanent as the defender, or null. */
+    public static Selection.DefenderOption attackOption(final GameEntityView entity) {
+        if (entity == null || !isDeclaringAttack()) {
+            return null;
+        }
+        final List<Selection.DefenderOption> options = MatchController.instance.getSelection().defenders();
+        for (int i = 0, n = options.size(); i < n; i++) {
+            final Selection.DefenderOption o = options.get(i);
+            if (entity.equals(o.defender())) {
+                return o;
+            }
+        }
+        return null;
     }
 
-    /** While you declare attackers: whether this permanent could be attacked (an opponent's planeswalker or battle). */
-    public static boolean isAttackOption(final CardView c) {
-        if (!isDeclaringAttack() || c == null || c.getZone() != ZoneType.Battlefield || c.getCurrentState() == null) {
-            return false;
+    private static final Map<Selection.DefenderOption, String> PLATE_TEXTS = new HashMap<>(), CURRENT_TEXTS = new HashMap<>();
+    private static final Color CLOSED_RIM = ArenaTheme.rgb(0x6A655E), CLOSED_TEXT = ArenaTheme.rgb(0x9A958C), COST_RIM = ArenaTheme.rgb(0xFFB020);
+
+    /**
+     * What a possible defender says while you declare attackers, in one line, made once per state: {@link
+     * #attackStateText}, then {@link #attackCostText} and {@link #attackGoadText} if any ("Click to attack · Pay {2}
+     * each").
+     */
+    public static String attackPlateText(final Selection.DefenderOption o, final boolean current) {
+        final Map<Selection.DefenderOption, String> cache = current ? CURRENT_TEXTS : PLATE_TEXTS;
+        String s = cache.get(o);
+        if (s == null) {
+            if (cache.size() > 64) {
+                cache.clear(); // options change each declaration: do not keep them all game
+            }
+            final Localizer l = Forge.getLocalizer();
+            s = attackStateText(o, current);
+            final String cost = attackCostText(o), goad = attackGoadText(o);
+            if (cost != null) {
+                s = l.getMessage("lblArenaJoin", s, cost);
+            }
+            if (goad != null) {
+                s = l.getMessage("lblArenaJoin", s, goad);
+            }
+            cache.put(o, s);
         }
-        final CardView.CardStateView st = c.getCurrentState();
-        return (st.isPlaneswalker() || st.isBattle()) && isAttackOption(c.getController());
+        return s;
+    }
+
+    private static String attackHere, clickToAttack, cantBeAttacked;
+
+    /** "Your attack goes here" on the defender being filled, "Click to attack" on the others, "Can't be attacked". */
+    public static String attackStateText(final Selection.DefenderOption o, final boolean current) {
+        if (attackHere == null) {
+            final Localizer l = Forge.getLocalizer();
+            attackHere = l.getMessage("lblArenaAttackHere");
+            clickToAttack = l.getMessage("lblArenaClickToAttack");
+            cantBeAttacked = l.getMessage("lblArenaCantBeAttacked");
+        }
+        return o.state() == Selection.DefenderState.CLOSED ? cantBeAttacked : current ? attackHere : clickToAttack;
+    }
+
+    private static final Map<String, String> COST_TEXTS = new HashMap<>();
+    private static final String[] GOAD_TEXTS = new String[8];
+
+    /** "Pay {2} each" when every creature that could attack them has to pay (Propaganda...), else null; made once per cost. */
+    public static String attackCostText(final Selection.DefenderOption o) {
+        if (o.state() != Selection.DefenderState.COSTS || o.cost() == null) {
+            return null;
+        }
+        String s = COST_TEXTS.get(o.cost());
+        if (s == null) {
+            s = Forge.getLocalizer().getMessage("lblArenaAttackCosts", o.cost());
+            COST_TEXTS.put(o.cost(), s);
+        }
+        return s;
+    }
+
+    /** "Goaded ×2: attack others" when they goaded creatures of yours (those must attack someone else if they can). */
+    public static String attackGoadText(final Selection.DefenderOption o) {
+        if (o.goaded() <= 0) {
+            return null;
+        }
+        final int i = Math.min(o.goaded(), GOAD_TEXTS.length) - 1;
+        if (GOAD_TEXTS[i] == null) {
+            GOAD_TEXTS[i] = Forge.getLocalizer().getMessage("lblArenaGoadedMustAttackOthers", String.valueOf(i + 1));
+        }
+        return GOAD_TEXTS[i];
+    }
+
+    /** The rim of a defender's plate: chosen, open, at a cost, or closed. */
+    public static Color attackPlateRim(final Selection.DefenderOption o, final boolean current) {
+        return current ? ArenaTheme.CHOSEN : o.state() == Selection.DefenderState.CLOSED ? CLOSED_RIM
+                : o.state() == Selection.DefenderState.COSTS ? COST_RIM : ArenaTheme.SELECTABLE;
+    }
+
+    /** The text colour of a defender's plate (dim when it cannot be attacked). */
+    public static Color attackPlateInk(final Selection.DefenderOption o) {
+        return o.state() == Selection.DefenderState.CLOSED ? CLOSED_TEXT : ArenaTheme.WHITE;
+    }
+
+    /** Whether this player or permanent could be clicked now to send the attack there (open or at a cost). */
+    public static boolean isAttackOption(final GameEntityView entity) {
+        final Selection.DefenderOption o = attackOption(entity);
+        return o != null && o.state() != Selection.DefenderState.CLOSED;
     }
 
     // ---- portrait --------------------------------------------------------------------------------------------------
@@ -209,6 +293,21 @@ public final class ArenaBoard {
     /** Half the gap the back row leaves round the portrait. */
     public static float portraitClear(final boolean seat) {
         return Math.round(windowH() * (seat ? CLEAR_SEAT : CLEAR));
+    }
+
+    private static final Rectangle DOCK = new Rectangle();
+
+    /**
+     * How far right your rows may run: short of the stack's dock while it is open over the board (in a game of seats,
+     * where it sits low enough to cover them), else no limit.
+     */
+    public static float localRowRight() {
+        final MatchScreen view = MatchController.getView();
+        if (view == null || !isSeatGame() || !view.getStack().isVisible()) {
+            return Float.MAX_VALUE;
+        }
+        ArenaMatchLayout.stackDock(windowW(), windowH(), DOCK);
+        return Math.min(DOCK.x, view.getStack().getLeft()) - Math.round(windowW() * 0.01f);
     }
 
     /** The side margin of the rows. */

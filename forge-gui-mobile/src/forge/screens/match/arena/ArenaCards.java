@@ -10,6 +10,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
@@ -24,6 +25,7 @@ import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.gamemodes.match.Selection;
 import forge.screens.match.MatchController;
 import forge.util.CardTranslation;
 
@@ -451,8 +453,13 @@ public final class ArenaCards {
         }
         if (card.isAttacking()) {
             drawAttackTarget(g, card, st, x, y, w, h);
-        } else if (ArenaBoard.isAttackOption(card)) { // while you declare attackers: "Click to attack" / "Your attack goes here"
-            drawPlate(g, ArenaPortrait.attackPlate(MatchController.instance.isHighlighted(card)), ArenaTheme.SELECTABLE, x, y, w, h);
+        } else {
+            final Selection.DefenderOption attack = ArenaBoard.attackOption(card); // a planeswalker or battle you could attack
+            if (attack != null) {
+                final boolean current = MatchController.instance.isHighlighted(card);
+                // on the tile, not above it: a seat's back row sits right under its portrait, whose plate is up there
+                drawPlate(g, ArenaBoard.attackPlateText(attack, current), ArenaBoard.attackPlateRim(attack, current), x, y, w, h, false);
+            }
         }
         // the damage it took rising off it
         final float up = st.hitFloat.get();
@@ -486,20 +493,27 @@ public final class ArenaCards {
                     ? Forge.getLocalizer().getMessage("lblArenaYou") : defender instanceof CardView c ? c.getName() : defender.toString();
             st.attackText = Forge.getLocalizer().getMessage("lblArenaAttackingWho", name);
         }
-        drawPlate(g, st.attackText, GLOW_COLOR[GLOW_ATTACK], x, y, w, h);
+        drawPlate(g, st.attackText, GLOW_COLOR[GLOW_ATTACK], x, y, w, h, true);
     }
 
-    /** A one-line plate centred over a tile's top edge (it keeps the name clear), rimmed in {@code rim}. */
+    /**
+     * A plate on a tile, rimmed in {@code rim}: centred over its top edge ({@code above}, keeping the name clear) or across
+     * the middle of its art. Long text wraps onto a second line; a cost in it ("{2}") shows as mana symbols.
+     */
     private static void drawPlate(final Graphics g, final String text, final Color rim, final float x, final float y, final float w,
-            final float h) {
+            final float h, final boolean above) {
         final FSkinFont f = evenFont(Math.max(ArenaTheme.px(14), h * ATTACK_TEXT));
-        final float ph = Math.round(f.getLineHeight() * 1.3f);
-        final float pw = Math.min(w * 1.3f, ArenaArt.cachedTextWidth(text, f) + ph);
-        final float px = x + (w - pw) / 2f, py = y - ph - h * ATTACK_GAP;
-        g.fillSmoothRoundRect(ATTACK_PLATE, px, py, pw, ph, ph / 2f);
-        g.drawSmoothRoundRect(Math.max(1f, ph * 0.06f), rim, px, py, pw, ph, ph / 2f);
-        g.drawText(text, f, ArenaTheme.WHITE, px, py, pw, ph, false, Align.center, true);
+        final float line = Math.round(f.getLineHeight() * 1.3f);
+        final float tw = ArenaArt.cachedTextWidth(text, f);
+        final float pw = Math.min(w * 1.3f, tw + line);
+        final float ph = tw + line > pw ? 2 * line : line;
+        final float px = x + (w - pw) / 2f, py = above ? y - ph - h * ATTACK_GAP : y + (h - ph) / 2f;
+        g.fillSmoothRoundRect(ATTACK_PLATE, px, py, pw, ph, line / 2f);
+        g.drawSmoothRoundRect(Math.max(1f, line * 0.06f), rim, px, py, pw, ph, line / 2f);
+        PLATE_TEXT.drawText(g, text, f, ArenaTheme.WHITE, px + line * 0.3f, py, pw - line * 0.6f, ph, py, ph, ph > line, Align.center, true);
     }
+
+    private static final TextRenderer PLATE_TEXT = new TextRenderer();
 
     private static void bloom(final Graphics g, final int kind, final float x, final float y, final float w, final float h, final float radius,
             final float spread, final boolean hovered, final float alpha) {

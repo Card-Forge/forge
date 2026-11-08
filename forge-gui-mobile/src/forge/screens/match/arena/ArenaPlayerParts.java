@@ -17,10 +17,12 @@ import forge.card.CardZoom;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
+import forge.gamemodes.match.Selection;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
 
@@ -61,8 +63,8 @@ public final class ArenaPlayerParts {
         // the pile under the pointer this frame (-1: none), whether it is lit, the commander tax and the texts saying it
         private int hovered = -1;
         private boolean hoveredPlayable;
-        private int taxFor = -1, taxHintFor = -1, taxNow;
-        private long taxAt;
+        private final int[] taxSeen = {-1, -1};
+        private long taxAt = Long.MIN_VALUE / 2;
         private String taxText, taxHint, playableHint;
 
         /**
@@ -241,11 +243,7 @@ public final class ArenaPlayerParts {
          */
         private void drawHint(final Graphics g) {
             final String text;
-            if (ZONES[hovered] == ZoneType.Command && taxFor > 0) {
-                if (taxHint == null || taxHintFor != taxFor) {
-                    taxHintFor = taxFor;
-                    taxHint = Forge.getLocalizer().getMessage("lblArenaHintCommanderTax", String.valueOf(taxFor), String.valueOf(taxFor / 2));
-                }
+            if (ZONES[hovered] == ZoneType.Command && taxHint != null) {
                 text = taxHint;
             } else if (hoveredPlayable) {
                 if (playableHint == null) {
@@ -317,18 +315,13 @@ public final class ArenaPlayerParts {
             }
             String badge = countText[i];
             if (zone == ZoneType.Command) {
-                // commander tax: two more for each time the commander has already been cast, said in words ("Tax +2")
-                // (read again at most every ArenaPlayerInfo.REFRESH_MS: the lookup boxes the card's id)
-                if (taxText == null || TimeUtils.timeSinceMillis(taxAt) >= ArenaPlayerInfo.REFRESH_MS) {
+                // the tax of each commander waiting here ("Tax +2", partners "Tax +2 / +0"), read at most every
+                // ArenaPlayerInfo.REFRESH_MS (the lookup boxes the card's id)
+                if (TimeUtils.timeSinceMillis(taxAt) >= ArenaPlayerInfo.REFRESH_MS) {
                     taxAt = TimeUtils.millis();
-                    taxNow = top != null && player.getCommanders() != null && player.getCommanders().contains(top) ? 2 * player.getCommanderCast(top) : 0;
+                    readTax();
                 }
-                final int tax = taxNow;
-                if (tax != taxFor || taxText == null) {
-                    taxFor = tax;
-                    taxText = Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax));
-                }
-                badge = tax > 0 ? taxText : null;
+                badge = taxText;
             }
             if (hot[i].goal() > 0f) {
                 hovered = i;
@@ -338,6 +331,47 @@ public final class ArenaPlayerParts {
                 countBadge(g, badge, x + cw / 2f, y + ch, cellH, bump[i].get());
             }
         }
+
+        /**
+         * The commander tax of the (up to two, with partners) commanders in the command zone: the badge ("Tax +2", "Tax
+         * +2 / +0") when any has been cast, and the hover hint saying each one's tax and casts. Texts are made only when
+         * a figure changes.
+         */
+        private void readTax() {
+            final List<CardView> commanders = player.getCommanders();
+            int n = 0;
+            for (int i = 0, m = commanders == null ? 0 : commanders.size(); i < m && n < 2; i++) {
+                final CardView c = commanders.get(i);
+                if (c.getZone() == ZoneType.Command) {
+                    taxWho[n] = c;
+                    taxNow[n++] = ArenaPlayerInfo.commanderTax(player, c);
+                }
+            }
+            final int a = n > 0 ? taxNow[0] : -1, b = n > 1 ? taxNow[1] : -1;
+            if (a == taxSeen[0] && b == taxSeen[1]) {
+                return;
+            }
+            taxSeen[0] = a;
+            taxSeen[1] = b;
+            if (a <= 0 && b <= 0) {
+                taxText = null;
+                taxHint = null;
+                return;
+            }
+            final Localizer l = Forge.getLocalizer();
+            taxText = n > 1 ? l.getMessage("lblArenaCommanderTaxPair", String.valueOf(a), String.valueOf(b))
+                    : l.getMessage("lblArenaCommanderTax", String.valueOf(a));
+            String hint = null;
+            for (int i = 0; i < n; i++) {
+                final String one = l.getMessage("lblArenaHintCommanderTax", taxWho[i].getName(), String.valueOf(taxNow[i]),
+                        String.valueOf(taxNow[i] / 2));
+                hint = hint == null ? one : l.getMessage("lblArenaJoin", hint, one);
+            }
+            taxHint = hint;
+        }
+
+        private final int[] taxNow = new int[2];
+        private final CardView[] taxWho = new CardView[2];
 
         /**
          * Whether a card in this zone of the player's is one the prompt offers to play now. Walks the prompt's short list
@@ -406,15 +440,15 @@ public final class ArenaPlayerParts {
                 if (!player.equals(c.getOwner()) || !isFrom(c.getZone()) || contains(c)) {
                     continue;
                 }
-                final int tax = c.getZone() == ZoneType.Command && player.getCommanders() != null && player.getCommanders().contains(c)
-                        ? 2 * player.getCommanderCast(c) : 0;
+                final int tax = c.getZone() == ZoneType.Command ? ArenaPlayerInfo.commanderTax(player, c) : 0;
                 if (cards[n] != c || taxes[n] != tax || texts[n] == null) {
                     final boolean land = c.getCurrentState() != null && c.getCurrentState().isLand();
                     final String verb = Forge.getLocalizer().getMessage(land ? "lblArenaPlayCard" : "lblArenaCastCard", c.getName());
-                    texts[n] = tax > 0 ? verb + " · " + Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax)) : verb;
+                    texts[n] = tax > 0 ? Forge.getLocalizer().getMessage("lblArenaJoin", verb,
+                            Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax))) : verb;
                 }
                 if (cards[n] != c || arts[n] == null) {
-                    arts[n] = ArenaPlayerInfo.circleArtOf(c);
+                    arts[n] = ArenaArt.circleArtOf(c);
                 }
                 cards[n] = c;
                 taxes[n] = tax;
@@ -507,8 +541,13 @@ public final class ArenaPlayerParts {
 
     /** An opponent's hand as a fan of card backs hanging beside the portrait; a count only when it is too big to draw. */
     public static final class OpponentHand extends FDisplayObject {
+        private static final int MOST_SHOWN = 10;
         private final PlayerView player;
         private boolean alwaysCount;
+        // which cards are held face up (a hand you may look at): worked out when the hand changes or at the chips' refresh
+        private final CardView[] faceUp = new CardView[MOST_SHOWN];
+        private int readCount = -1;
+        private long readAt;
 
         public OpponentHand(final PlayerView player0) {
             player = player0;
@@ -531,26 +570,22 @@ public final class ArenaPlayerParts {
             final float h = getHeight(), w = getWidth();
             final float ch = Math.round(h * 0.9f), cw = Math.round(ch * CARD_RATIO);
             final float r = Math.max(ArenaTheme.px(3), cw / 18f);
-            final int shown = Math.min(count, 10);
+            final int shown = Math.min(count, MOST_SHOWN);
+            if (count != readCount || TimeUtils.timeSinceMillis(readAt) >= ArenaPlayerInfo.REFRESH_MS) {
+                readFaceUp(shown);
+                readCount = count;
+                readAt = TimeUtils.millis();
+            }
             // spread sideways as well as turned, so it reads as a held hand and not a stack
             final float stepX = shown < 2 ? 0 : Math.min(cw * 0.55f, (w - cw) / (shown - 1));
             final float cx = w / 2f;
-            // a hand you may look at (watching a game, a hand revealed for good) is held face up
-            final FCollectionView<CardView> cards = player.getCards(ZoneType.Hand);
             for (int i = 0; i < shown; i++) {
                 final float place = i - (shown - 1) / 2f;
                 final float cardX = Math.round(cx + place * stepX);
-                CardView card = null;
-                if (cards != null) {
-                    try {
-                        card = i < cards.size() ? cards.get(i) : null;
-                    } catch (final RuntimeException e) {
-                        card = null; // changed under us: a back this frame
-                    }
-                }
+                final CardView card = faceUp[i];
                 g.startRotateTransform(cardX, h + ch / 5f, -place * 4.5f);
                 g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.5f, S1), cardX - cw / 2f, h - ch - 2 + ArenaTheme.px(2), cw, ch, r, ArenaTheme.px(5));
-                if (card != null && MatchController.instance.mayView(card)) {
+                if (card != null) {
                     CardRenderer.drawCard(g, card, cardX - cw / 2f, h - ch - 2, cw, ch, CardStackPosition.Top);
                 } else {
                     ArenaCards.drawCardBack(g, player, cardX - cw / 2f, h - ch - 2, cw, ch, r, true);
@@ -560,6 +595,22 @@ public final class ArenaPlayerParts {
 
             if (count > shown || alwaysCount) {
                 ArenaArt.countBadge(g, ArenaPlayerInfo.figure(count), cx, h - ch / 3f, Math.max(ArenaTheme.px(20), h * 0.3f));
+            }
+        }
+
+        /** A hand you may look at (watching a game, a hand revealed for good) is held face up: which of its cards those are. */
+        private void readFaceUp(final int shown) {
+            final FCollectionView<CardView> cards = player.getCards(ZoneType.Hand);
+            for (int i = 0; i < MOST_SHOWN; i++) {
+                CardView card = null;
+                if (cards != null && i < shown) {
+                    try {
+                        card = i < cards.size() ? cards.get(i) : null;
+                    } catch (final IndexOutOfBoundsException e) {
+                        card = null; // changed under us: the next read has it
+                    }
+                }
+                faceUp[i] = card != null && MatchController.instance.mayView(card) ? card : null;
             }
         }
     }
@@ -612,19 +663,27 @@ public final class ArenaPlayerParts {
             // it, and the seat that plays next says so (turn order round the table)
             final GameView game = MatchController.instance.getGameView();
             int lead = ArenaPlayerInfo.LEAD_NONE;
-            if (game != null && !game.isGameOver()) {
+            String leadText = phaseText;
+            final Selection.DefenderOption attack = ArenaBoard.attackOption(player);
+            if (attack != null) {
+                // while you declare attackers the seat says whether your attack can go to them and on what terms (its
+                // small portrait has no room under it for the plate a single opponent's gets)
+                lead = ArenaPlayerInfo.LEAD_ATTACK;
+                leadText = ArenaBoard.attackStateText(attack, MatchController.instance.isHighlighted(player));
+            } else if (game != null && !game.isGameOver()) {
                 if (game.getPlayerTurn() == player && game.getPhase() != null) {
                     if (game.getPhase() != phaseFor) {
                         phaseFor = game.getPhase();
                         phaseText = phaseFor.nameForUi;
                     }
                     lead = ArenaPlayerInfo.LEAD_PHASE;
+                    leadText = phaseText;
                 } else if (ArenaBoard.nextTurnPlayer() == player) {
                     lead = ArenaPlayerInfo.LEAD_NEXT;
                 }
             }
             final float chipH = Math.round(h * SEAT_CHIP_SHARE), gap = Math.max(2f, chipH * 0.18f);
-            ArenaPlayerInfo.draw(g, chips, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, phaseText, ArenaTheme.px(4),
+            ArenaPlayerInfo.draw(g, chips, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, leadText, ArenaTheme.px(4),
                     nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4) - nameH * FAN_CLEARANCE);
         }
     }
