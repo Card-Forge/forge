@@ -3,6 +3,8 @@ package forge.screens.match.arena;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ObjectFloatMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import forge.Graphics;
 import forge.assets.FSkinFont;
@@ -322,6 +324,24 @@ public final class ArenaArt {
     }
 
     // ---- portraits --------------------------------------------------------------------------------------------------
+    private static final TextureRegion SQUARE = new TextureRegion();
+
+    /**
+     * The middle square of a picture, so a circle crop of it is round (portraits, a commander's art in a chip). Shared
+     * scratch region: use it before asking for another.
+     */
+    public static TextureRegion squareOf(final TextureRegion r) {
+        final int w = r.getRegionWidth(), h = r.getRegionHeight();
+        if (w == h) {
+            return r;
+        }
+        final int s = Math.min(w, h);
+        SQUARE.setTexture(r.getTexture());
+        SQUARE.setRegion(r.getRegionX() + (w - s) / 2, r.getRegionY() + (h - s) / 2, s, s);
+        SQUARE.flip(r.isFlipX(), r.isFlipY());
+        return SQUARE;
+    }
+
     /** An image cropped to a circle (antialiased), e.g. an avatar. One draw call (tilt shader). */
     public static void circleImage(final Graphics g, final TextureRegion image, final float cx, final float cy, final float diameter) {
         g.drawTiltedImage(image, cx - diameter / 2f, cy - diameter / 2f, diameter, diameter, 0f, 0f, 0f, 1f, diameter / 2f, 0f, 0f, 1f);
@@ -404,5 +424,55 @@ public final class ArenaArt {
         }
         font.getBounds(text, 0, text.length(), BOUNDS);
         return BOUNDS.width;
+    }
+
+    private static final ObjectMap<FSkinFont, ObjectFloatMap<String>> WIDTHS = new ObjectMap<>();
+    private static final int WIDTHS_PER_FONT = 512;
+
+    /**
+     * {@link #textWidth} for text drawn every frame (names, figures, labels): measured once per font and string, then
+     * looked up. Pass strings that are kept (shared figures, names, labels), not ones built per frame. Render thread.
+     */
+    public static float cachedTextWidth(final String text, final FSkinFont font) {
+        if (text == null || text.isEmpty()) {
+            return 0f;
+        }
+        ObjectFloatMap<String> widths = WIDTHS.get(font);
+        if (widths == null) {
+            widths = new ObjectFloatMap<>();
+            WIDTHS.put(font, widths);
+        }
+        float w = widths.get(text, -1f);
+        if (w < 0f) {
+            if (widths.size >= WIDTHS_PER_FONT) {
+                widths.clear(); // a long game's worth of names and figures: start again rather than grow
+            }
+            w = textWidth(text, font);
+            widths.put(text, w);
+        }
+        return w;
+    }
+
+    private static final Color HINT_FILL = ArenaTheme.rgba(6, 8, 13, 235);
+
+    /** How tall {@link #hint} draws with this font. */
+    public static float hintHeight(final FSkinFont font) {
+        return Math.round(font.getLineHeight() * 1.5f);
+    }
+
+    /**
+     * A one-line hint plate (what something lit up means and that it can be clicked) centred on {@code cx}, its top at
+     * {@code top}, kept inside {@code minX..maxX} (the window, in the caller's coordinates). {@code text} should be a
+     * kept string (its width is cached).
+     */
+    public static void hint(final Graphics g, final String text, final FSkinFont font, final float cx, final float top, final float minX,
+            final float maxX) {
+        final float h = hintHeight(font);
+        final float w = cachedTextWidth(text, font) + h;
+        final float x = Math.max(minX, Math.min(maxX - w, cx - w / 2f));
+        g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.6f, S1), x, top + ArenaTheme.px(2), w, h, h / 2f, ArenaTheme.px(6));
+        g.fillSmoothRoundRect(HINT_FILL, x, top, w, h, h / 2f);
+        g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, x, top, w, h, h / 2f);
+        g.drawText(text, font, ArenaTheme.WHITE, x, top, w, h, false, Align.center, true);
     }
 }

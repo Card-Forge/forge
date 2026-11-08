@@ -6,14 +6,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinFont;
 import forge.game.GameView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VAvatar;
 import forge.util.AITimeoutTracker;
 
 /**
@@ -24,7 +27,7 @@ import forge.util.AITimeoutTracker;
  * a new figure while the difference floats off. Everything is drawn round the portrait's own square (the view's bounds);
  * the plinth and the sunburst reach well beyond it.
  */
-public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.VAvatar> {
+public final class ArenaPortrait implements ArenaSkin<VAvatar> {
     /** What a portrait remembers between frames. */
     public static final class State {
         final ArenaMotion.Fade turnLight = new ArenaMotion.Fade(0f);
@@ -37,6 +40,8 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         String floatText;
         String lifeText = "";
         int lifeTextFor = Integer.MIN_VALUE;
+        String hintText;
+        boolean hintAttack;
     }
 
     private static final int RING_CHOSEN = 0, RING_SELECTABLE = 1, RING_TARGET = 2, RING_HOVER = 3;
@@ -50,11 +55,10 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
 
     private static final Color BUBBLE = ArenaTheme.rgba(10, 12, 18, 225);
     private static final Color S1 = new Color(), S2 = new Color(), S3 = new Color(), S4 = new Color();
-    private static final TextureRegion SQUARE = new TextureRegion();
     private static Texture sunburst;
 
     @Override
-    public boolean draw(final Graphics g, final forge.screens.match.views.VAvatar v) {
+    public boolean draw(final Graphics g, final VAvatar v) {
         final PlayerView player = v.getPlayer();
         final State st = v.getArenaState();
         final float d = Math.min(v.getWidth(), v.getHeight());
@@ -107,9 +111,16 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         final float plateH = Math.max(ArenaTheme.px(22), Math.round(d * (seat ? 0.58f : 0.42f)));
         drawLifePlate(g, st, cx, cy + d / 2f, plateH);
         if (!seat) { //a seat's chips go under its name plate: beside its small plate they would run into its hand and piles
-            final float chipH = Math.round(plateH * 0.56f), gap = plateH * 0.75f + ArenaTheme.px(6);
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.CMDR, cx - gap, cy + d / 2f, chipH, true, 0);
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, cx + gap, cy + d / 2f, chipH, false, 0);
+            final float chipH = Math.round(plateH * CHIP_SHARE), gap = plateH * 0.75f + ArenaTheme.px(6);
+            // with seats round the table, it says when you play next as it does on theirs
+            final int lead = ArenaBoard.isSeatGame() && ArenaBoard.nextTurnPlayer(game) == player ? ArenaPlayerInfo.LEAD_NEXT : ArenaPlayerInfo.LEAD_NONE;
+            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.CMDR, ArenaPlayerInfo.LEAD_NONE, null, cx - gap, cy + d / 2f, chipH, true, 0);
+            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.COUNTERS | ArenaPlayerInfo.STATUS, lead, null, cx + gap, cy + d / 2f, chipH, false, 0);
+        }
+        if (ring == RING_SELECTABLE && isPointerOver(v)) { // what the breathing ring means: it can be clicked, and for what
+            final FSkinFont hf = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), plateH * 0.36f));
+            final float top = opponent ? cy + d / 2f + plateH * 0.6f + ArenaTheme.px(4) : cy - d / 2f - ArenaArt.hintHeight(hf) - ArenaTheme.px(8);
+            ArenaArt.hint(g, hintText(st, player, game), hf, cx, top, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
         }
 
         final float up = st.floatUp.get();
@@ -122,6 +133,25 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         }
         drawThinking(g, player, cx, cy, d);
         return true;
+    }
+
+    /** Whether the mouse is over the portrait now (the hover flag can outlive a click elsewhere). */
+    private static boolean isPointerOver(final VAvatar v) {
+        return Forge.magnify && v.screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY);
+    }
+
+    /** The share of the life plate's height a chip beside it takes. */
+    private static final float CHIP_SHARE = 0.56f;
+
+    /** "Click to attack X" while attackers are being declared, "Click to choose X" for any other pick; made once each. */
+    private static String hintText(final State st, final PlayerView player, final GameView game) {
+        final boolean attack = game != null && game.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS
+                && MatchController.instance.isLocalPlayer(game.getPlayerTurn());
+        if (st.hintText == null || st.hintAttack != attack) {
+            st.hintAttack = attack;
+            st.hintText = Forge.getLocalizer().getMessage(attack ? "lblArenaHintAttack" : "lblArenaHintChoose", player.getName());
+        }
+        return st.hintText;
     }
 
     private static int ringFor(final PlayerView player, final boolean hovered) {
@@ -207,7 +237,7 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
         if (image instanceof FImageComplex) {
             final TextureRegion r = ((FImageComplex) image).getTextureRegion();
             if (r != null) {
-                ArenaArt.circleImage(g, squareOf(r), cx, cy, d);
+                ArenaArt.circleImage(g, ArenaArt.squareOf(r), cx, cy, d);
                 if (lost) {
                     g.fillSmoothCircle(ArenaTheme.alpha(ArenaTheme.BLACK, 0.55f, S1), cx, cy, d / 2f);
                 }
@@ -220,19 +250,6 @@ public final class ArenaPortrait implements ArenaSkin<forge.screens.match.views.
             final float corner = d * 0.21f;
             g.drawSmoothCircle(corner, ArenaTheme.NIGHT, cx, cy, d / 2f + corner);
         }
-    }
-
-    /** The middle square of a picture, so a circle crop is round. Shared scratch region. */
-    private static TextureRegion squareOf(final TextureRegion r) {
-        final int w = r.getRegionWidth(), h = r.getRegionHeight();
-        if (w == h) {
-            return r;
-        }
-        final int s = Math.min(w, h);
-        SQUARE.setTexture(r.getTexture());
-        SQUARE.setRegion(r.getRegionX() + (w - s) / 2, r.getRegionY() + (h - s) / 2, s, s);
-        SQUARE.flip(r.isFlipX(), r.isFlipY());
-        return SQUARE;
     }
 
     /** The plate under the portrait with the life total on it; red at 5 or less. */

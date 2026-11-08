@@ -165,7 +165,6 @@ public final class ArenaMatchLayout {
         return out.set(Math.round(w * DOCK_MARGIN), dockTop(h), dw, dockHeight(h));
     }
 
-
     /** What dropdowns may cover: the whole board (the prompt floats, it is not a strip any more). */
     public static Rectangle dropDownBoundary(final float w, final float h, final Rectangle out) {
         return out.set(0, 0, w, h);

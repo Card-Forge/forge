@@ -428,19 +428,24 @@ public class VPlayerPanel extends FContainer {
         arenaName.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
         arenaName.setSeatRows(seat ? ArenaBoard.nameHeight() : 0);
         arenaName.setVisible(true);
-        arenaHand.setVisible(!local);
-        arenaHand.setAlwaysCount(seat);
-
+        //your hand is the fan along the bottom; anyone else's is a small fan by their portrait - also a player who takes
+        //the bottom seat once you are out and only watch (their cards are not yours to see)
+        final boolean ownFan = local && MatchController.getView() != null && MatchController.getView().getBottomPlayerPanel() == this;
+        arenaHand.setVisible(!ownFan);
+        arenaHand.setAlwaysCount(seat || !ownFan);
         if (!local) {
             ArenaBoard.opponentHand(seat, left, width, arenaRect);
             arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
+        } else if (!ownFan) {
+            ArenaBoard.watchedHand(cx + left, arenaRect);
+            arenaHand.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
         }
 
-        //what floats beside the portrait: mana in the pool
+        //what floats beside the portrait: mana in the pool (a seat's shows as chips on its name plate, where it has room)
         final VDisplayArea pool = tabManaPool.getDisplayArea();
         final float poolH = Math.round(ArenaBoard.windowH() * 0.05f);
         pool.setBounds(ArenaBoard.extrasLeft(seat, cx), cy - poolH / 2f, poolH * 6, poolH);
-        pool.setVisible(pool.getCount() > 0);
+        pool.setVisible(!seat && pool.getCount() > 0);
 
         //the zones: your hand is the fan; a zone the game opened is a strip over the board; the rest stay closed
         for (InfoTab tab : tabs) {
@@ -452,11 +457,11 @@ public class VPlayerPanel extends FContainer {
                 continue;
             }
             final boolean hand = tab instanceof InfoTabZone z && z.zoneType == ZoneType.Hand;
-            if (hand && local) {
+            if (hand && ownFan) {
                 ArenaBoard.hand(arenaRect);
                 area.setBounds(arenaRect.x - left, arenaRect.y - top, arenaRect.width, arenaRect.height);
                 area.setVisible(true);
-            } else if (tab == selectedTab && !(hand && seat && player.getMindSlaveMaster() == null)) {
+            } else if (tab == selectedTab && !(hand && (seat || !ownFan) && player.getMindSlaveMaster() == null)) {
                 //includes an opponent's hand you may see (e.g. while controlling their turn). A seat's hand you only
                 //watch (a spectator, a hand revealed for good) stays its fan, face up: three strips would bury the seats
                 placeArenaStrip(area, local, seat, width, top, 0.46f);
@@ -487,7 +492,6 @@ public class VPlayerPanel extends FContainer {
         final float sx = local ? margin : seat ? Math.round((width - sw) / 2f) : width - sw - margin;
         area.setBounds(sx, sy, sw, sh);
     }
-
 
     /** Back to the default look: what the Arena layout hid comes back, its own parts go. */
     private void leaveArenaLayout() {

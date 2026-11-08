@@ -34,6 +34,7 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
 import forge.gui.events.UiEventAttackerDeclared;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.PlayerControllerHuman;
 import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
@@ -299,8 +300,9 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     /**
-     * The defender being attacked and the band being formed; the other players that may be attacked are offered (a
-     * click on one makes it the defender), so with several opponents it shows that they can be picked.
+     * The defender being attacked and the band being formed. With the Arena look the other players that may be
+     * attacked are offered too (a click on one makes it the defender, as it always did), so with several opponents
+     * their portraits show that they can be picked; the classic look marks only the defender.
      */
     @Override
     protected Selection getSelection() {
@@ -311,18 +313,18 @@ public class InputAttack extends InputSyncronizedBase {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) chosen.add(CardView.get(card));
         }
+        final Selection selection = Selection.ofChosen(chosen);
+        if (!Boolean.parseBoolean(getController().getYieldController().getStringPref(FPref.UI_ARENA_THEME))) {
+            return selection;
+        }
         final List<TrackableObject> others = new ArrayList<>();
         for (final GameEntity defender : defenders) {
             if (defender instanceof Player && defender != currentDefender) {
                 others.add(GameEntityView.get(defender));
             }
         }
-        if (others.isEmpty()) {
-            return Selection.ofChosen(chosen);
-        }
-        return new Selection(List.of(), 0, 0, others, chosen, List.of());
+        return selection.withTargets(others);
     }
-
 
     @Override
     protected List<CardView> getActionable() {

@@ -1,5 +1,7 @@
 package forge.screens.match.views;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
@@ -523,6 +525,18 @@ public class VPrompt extends FContainer {
     
     private class MessageLabel extends FDisplayObject {
         final TextRenderer renderer = new TextRenderer();
+
+        /**
+         * On the Arena board a decision's words float over the middle of your own creatures and are sized to fit (no
+         * magnifier needed): pointer and taps go through them to the board, so a creature under them can still be picked.
+         */
+        @Override
+        public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+            if (isArenaPrompt()) {
+                return;
+            }
+            super.buildTouchListeners(screenX, screenY, listeners);
+        }
 
         @Override
         public boolean tap(float x, float y, int count) {

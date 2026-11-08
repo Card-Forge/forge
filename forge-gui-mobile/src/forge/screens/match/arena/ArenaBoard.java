@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.game.GameView;
+import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 
 /**
@@ -65,9 +66,38 @@ public final class ArenaBoard {
         return game != null && game.getPlayers() != null && countLiving(game) > 2;
     }
 
+    /**
+     * Who plays after the current turn: the next player still in the game in seat order (the order of
+     * {@code GameView.getPlayers()}), or null. No allocation: it runs every frame.
+     */
+    public static PlayerView nextTurnPlayer(final GameView game) {
+        if (game == null || game.getPlayers() == null || game.getPlayerTurn() == null) {
+            return null;
+        }
+        final PlayerView turn = game.getPlayerTurn();
+        PlayerView first = null;
+        boolean passed = false;
+        for (final PlayerView p : game.getPlayers()) {
+            if (p == turn) {
+                passed = true;
+                continue;
+            }
+            if (p.getHasLost()) {
+                continue;
+            }
+            if (passed) {
+                return p;
+            }
+            if (first == null) {
+                first = p;
+            }
+        }
+        return first;
+    }
+
     private static int countLiving(final GameView game) {
         int n = 0;
-        for (final forge.game.player.PlayerView p : game.getPlayers()) {
+        for (final PlayerView p : game.getPlayers()) {
             if (!p.getHasLost()) {
                 n++;
             }
@@ -174,6 +204,15 @@ public final class ArenaBoard {
     /** A seat's name plate holds the name and two rows of chips under it, down to just above the seat's back row. */
     public static final float SEAT_NAME_ROWS = 3.15f;
 
+    /**
+     * The hand of a player in the bottom seat who is not you (you are out and watch the rest): a small fan of their
+     * cards left of the portrait, above the window's bottom edge, where your own fan would run.
+     */
+    public static Rectangle watchedHand(final float portraitCx, final Rectangle out) {
+        final float h = windowH(), fanW = Math.round(h * 0.26f), fanH = Math.round(h * 0.105f);
+        return out.set(portraitCx - Math.round(portraitDiameter(false) * 1.9f) - fanW, h - fanH - Math.round(h * 0.012f), fanW, fanH);
+    }
+
     /** The player's name plate in the corner. */
     public static Rectangle name(final boolean local, final boolean seat, final float fieldX, final float fieldW, final Rectangle out) {
         final float w = windowW(), h = windowH(), nameH = nameHeight();
@@ -184,7 +223,6 @@ public final class ArenaBoard {
             final float d = portraitDiameter(true);
             return out.set(fieldX + Math.round(w * 0.0075f) + 10, 8, Math.max(40, fieldW / 2 - Math.round(d * 0.7f) - Math.round(h * 0.1f) - 16),
                     Math.round(nameH * SEAT_NAME_ROWS));
-
         }
         return out.set(fieldX + Math.round(h * 0.014f), Math.round(h * 0.008f), Math.round(w * 0.2f), nameH);
     }

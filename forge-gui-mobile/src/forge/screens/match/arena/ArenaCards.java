@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Multiset;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
@@ -12,10 +13,12 @@ import forge.assets.FSkinFont;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
+import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
@@ -99,6 +102,9 @@ public final class ArenaCards {
         private float nameWidth;
         private String nameShown;
         private FSkinFont nameFont;
+        // whom it attacks, said on a plate when there is more than one to attack
+        private GameEntityView attackFor;
+        private String attackText;
         // the counters' chips, rebuilt when the counters change
         private int countersHash = Integer.MIN_VALUE;
         private final String[] chipText = new String[3];
@@ -443,6 +449,9 @@ public final class ArenaCards {
         if (turned) {
             g.endTransform();
         }
+        if (card.isAttacking()) {
+            drawAttackTarget(g, card, st, x, y, w, h);
+        }
         // the damage it took rising off it
         final float up = st.hitFloat.get();
         if (up < 1f && st.hitText != null) {
@@ -453,6 +462,36 @@ public final class ArenaCards {
     }
 
     private static final Color HIT_TEXT = ArenaTheme.rgb(0xFF6A5C);
+    private static final Color ATTACK_PLATE = ArenaTheme.rgba(20, 8, 4, 235);
+    /** The "Attacking X" plate: its text against the tile's height, and its gap above the tile (it keeps the name clear). */
+    private static final float ATTACK_TEXT = 0.11f, ATTACK_GAP = 0.03f;
+
+    /**
+     * Whom an attacker is attacking, on a plate across the top of its tile, whenever that is not obvious: with seats
+     * (three or more players) or when it attacks a planeswalker or a battle. The arcs say it too, but they cross.
+     */
+    private static void drawAttackTarget(final Graphics g, final CardView card, final State st, final float x, final float y, final float w,
+            final float h) {
+        final GameView game = MatchController.instance.getGameView();
+        final CombatView combat = game == null ? null : game.getCombat();
+        final GameEntityView defender = combat == null ? null : combat.getDefender(card);
+        if (defender == null || !(ArenaBoard.isSeatGame() || defender instanceof CardView)) {
+            return;
+        }
+        if (defender != st.attackFor || st.attackText == null) {
+            st.attackFor = defender;
+            final String name = defender instanceof PlayerView p && MatchController.instance.isLocalPlayer(p)
+                    ? Forge.getLocalizer().getMessage("lblArenaYou") : defender instanceof CardView c ? c.getName() : defender.toString();
+            st.attackText = Forge.getLocalizer().getMessage("lblArenaAttackingWho", name);
+        }
+        final FSkinFont f = evenFont(Math.max(ArenaTheme.px(14), h * ATTACK_TEXT));
+        final float ph = Math.round(f.getLineHeight() * 1.3f);
+        final float pw = Math.min(w * 1.3f, ArenaArt.cachedTextWidth(st.attackText, f) + ph);
+        final float px = x + (w - pw) / 2f, py = y - ph - h * ATTACK_GAP;
+        g.fillSmoothRoundRect(ATTACK_PLATE, px, py, pw, ph, ph / 2f);
+        g.drawSmoothRoundRect(Math.max(1f, ph * 0.06f), GLOW_COLOR[GLOW_ATTACK], px, py, pw, ph, ph / 2f);
+        g.drawText(st.attackText, f, ArenaTheme.WHITE, px, py, pw, ph, false, Align.center, true);
+    }
 
     private static void bloom(final Graphics g, final int kind, final float x, final float y, final float w, final float h, final float radius,
             final float spread, final boolean hovered, final float alpha) {

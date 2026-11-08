@@ -40,6 +40,11 @@ import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
+import forge.screens.match.arena.ArenaArt;
+import forge.screens.match.arena.ArenaCards;
+import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaMotion;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
@@ -54,13 +59,54 @@ public class VStack extends FDropDown {
     private static final int ARENA_MOST_SHOWN = 5;
     private final Rectangle arenaDock = new Rectangle();
     private static final Color ARENA_BAND = new Color(6 / 255f, 8 / 255f, 13 / 255f, 0.96f);
-    private static final Color ARENA_SOURCE = forge.screens.match.arena.ArenaTheme.rgb(0x9CC4F0);
+    private static final Color ARENA_SOURCE = ArenaTheme.rgb(0x9CC4F0);
     private final Color arenaScratch = new Color();
     private String arenaMoreText;
     private int arenaMoreFor = -1;
 
+    /**
+     * "Targets Sorin, Grizzly Bears" for what an entry (and its sub-abilities) aims at - players, then cards, the
+     * first {@link #ARENA_MOST_TARGETS} by name and a count for the rest - or null if it aims at nothing.
+     */
+    private static String arenaTargetsText(final StackItemView item) {
+        final StringBuilder names = new StringBuilder();
+        int n = 0;
+        for (StackItemView part = item; part != null; part = part.getSubInstance()) {
+            if (part.getTargetPlayers() != null) {
+                for (final PlayerView p : part.getTargetPlayers()) {
+                    n = appendTarget(names, n, p.equals(MatchController.instance.getCurrentPlayer())
+                            ? Forge.getLocalizer().getMessage("lblArenaYou") : p.getName());
+                }
+            }
+            if (part.getTargetCards() != null) {
+                for (final CardView c : part.getTargetCards()) {
+                    n = appendTarget(names, n, c.getName());
+                }
+            }
+        }
+        if (n == 0) {
+            return null;
+        }
+        if (n > ARENA_MOST_TARGETS) {
+            names.append(" +").append(n - ARENA_MOST_TARGETS);
+        }
+        return Forge.getLocalizer().getMessage("lblArenaTargets", names.toString());
+    }
+
+    private static final int ARENA_MOST_TARGETS = 2;
+
+    private static int appendTarget(final StringBuilder names, final int n, final String name) {
+        if (n < ARENA_MOST_TARGETS) {
+            if (n > 0) {
+                names.append(", ");
+            }
+            names.append(name);
+        }
+        return n + 1;
+    }
+
     private static boolean isArenaStack() {
-        return forge.screens.match.arena.ArenaMatchLayout.applies();
+        return ArenaMatchLayout.applies();
     }
 
     // the spells the Arena stack showed, and where: one that leaves for a pile flies there from its large card
@@ -90,7 +136,7 @@ public class VStack extends FDropDown {
     /** The Arena stack: the top item a large card at the right of its dock, up to four more stepping left behind it. */
     private void arenaLayout() {
         final float sw = Forge.getScreenWidth(), sh = Forge.getScreenHeight();
-        forge.screens.match.arena.ArenaMatchLayout.stackDock(sw, sh, arenaDock);
+        ArenaMatchLayout.stackDock(sw, sh, arenaDock);
         clear();
         displayById.clear();
         activeItem = null;
@@ -111,6 +157,7 @@ public class VStack extends FDropDown {
             final float dw = Math.round(cardW * scale), dh = Math.round(cardH * scale);
             final float x = paneSize.getWidth() - cardW - i * step + (i == 0 ? 0 : (cardW - dw) * 0.15f);
             display.setBounds(x, (cardH - dh) / 2f, dw, dh);
+            display.arenaVisibleW = i == 0 ? dw : step;
             add(display);
             if (i == 0) {
                 activeItem = display;
@@ -441,9 +488,9 @@ public class VStack extends FDropDown {
                     arenaMoreFor = size;
                     arenaMoreText = Forge.getLocalizer().getMessage("lblArenaMoreOnStack", String.valueOf(size - ARENA_MOST_SHOWN));
                 }
-                final forge.assets.FSkinFont f = forge.screens.match.arena.ArenaTheme.font(20);
-                forge.screens.match.arena.ArenaArt.badge(g, arenaMoreText, f, getWidth() / 2, getHeight() - f.getLineHeight(),
-                        forge.screens.match.arena.ArenaTheme.GLASS, forge.screens.match.arena.ArenaTheme.GLASS_EDGE, forge.screens.match.arena.ArenaTheme.TEXT);
+                final FSkinFont f = ArenaTheme.font(20);
+                ArenaArt.badge(g, arenaMoreText, f, getWidth() / 2, getHeight() - f.getLineHeight(),
+                        ArenaTheme.GLASS, ArenaTheme.GLASS_EDGE, ArenaTheme.TEXT);
             }
             return;
         }
@@ -539,7 +586,7 @@ public class VStack extends FDropDown {
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
         private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
-        private forge.assets.FSkinFont arenaTextFont; // the Arena band's text, measured once per font and width
+        private FSkinFont arenaTextFont; // the Arena band's text, measured once per font and width
         private float arenaTextW, arenaTextH;
 
         private StackInstanceDisplay(StackItemView stackInstance0, float width) {
@@ -688,19 +735,19 @@ public class VStack extends FDropDown {
             if (a < 1f) {
                 g.setAlphaComposite(old * a);
             }
-            forge.screens.match.arena.ArenaCards.cardShadow(g, 0, 0, w, h, r);
+            ArenaCards.cardShadow(g, 0, 0, w, h, r);
             if (picked) {
-                g.drawGlow(forge.screens.match.arena.ArenaTheme.alpha(forge.screens.match.arena.ArenaTheme.CHOSEN, 0.95f, arenaScratch), 0, 0, w, h, r, h * 0.05f);
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.CHOSEN, 0.95f, arenaScratch), 0, 0, w, h, r, h * 0.05f);
             } else if (pickable) {
-                final float breath = 0.6f + 0.4f * forge.screens.match.arena.ArenaMotion.pulse(1.5f);
-                g.drawGlow(forge.screens.match.arena.ArenaTheme.alpha(forge.screens.match.arena.ArenaTheme.SELECTABLE, 0.95f * breath, arenaScratch), 0, 0, w, h, r, h * 0.05f);
+                final float breath = 0.6f + 0.4f * ArenaMotion.pulse(1.5f);
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.SELECTABLE, 0.95f * breath, arenaScratch), 0, 0, w, h, r, h * 0.05f);
             } else if (top) {
-                g.drawGlow(forge.screens.match.arena.ArenaTheme.alpha(ARENA_SOURCE, 0.55f, arenaScratch), 0, 0, w, h, r, h * 0.045f);
+                g.drawGlow(ArenaTheme.alpha(ARENA_SOURCE, 0.55f, arenaScratch), 0, 0, w, h, r, h * 0.045f);
             }
             CardRenderer.drawCard(g, sourceCard, 0, 0, w, h, CardStackPosition.Top);
             if (stackInstance.isAbility()) { //what the ability does, on an opaque band over the card's own text box
-                final forge.assets.FSkinFont tf = forge.screens.match.arena.ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.032f / 2) * 2));
-                final forge.assets.FSkinFont lf = forge.screens.match.arena.ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.036f / 2) * 2));
+                final FSkinFont tf = ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.032f / 2) * 2));
+                final FSkinFont lf = ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.036f / 2) * 2));
                 final float tw = w * 0.84f;
                 if (arenaTextFont != tf || arenaTextW != tw) {
                     arenaTextFont = tf;
@@ -711,28 +758,34 @@ public class VStack extends FDropDown {
                 final float bandH = Math.max(h * 0.4f, lf.getLineHeight() + arenaTextH + 3 * pad);
                 final float bandY = h * 0.965f - bandH;
                 g.fillSmoothRoundRect(ARENA_BAND, w * 0.04f, bandY, w * 0.92f, bandH, r);
-                g.drawSmoothRoundRect(1f, forge.screens.match.arena.ArenaTheme.GLASS_EDGE, w * 0.04f, bandY, w * 0.92f, bandH, r);
+                g.drawSmoothRoundRect(1f, ArenaTheme.GLASS_EDGE, w * 0.04f, bandY, w * 0.92f, bandH, r);
                 final String tag = Forge.getLocalizer().getMessage(stackInstance.isTrigger() ? "lblArenaTriggeredAbility" : "lblArenaAbility");
-                g.drawText(tag, lf, forge.screens.match.arena.ArenaTheme.GOLD, w * 0.08f, bandY + pad, tw, lf.getLineHeight(), false, Align.left, true);
-                textRenderer.drawText(g, text, tf, forge.screens.match.arena.ArenaTheme.TEXT, w * 0.08f, bandY + pad + lf.getLineHeight() + pad, tw,
+                g.drawText(tag, lf, ArenaTheme.GOLD, w * 0.08f, bandY + pad, tw, lf.getLineHeight(), false, Align.left, true);
+                textRenderer.drawText(g, text, tf, ArenaTheme.TEXT, w * 0.08f, bandY + pad + lf.getLineHeight() + pad, tw,
                         bandH - lf.getLineHeight() - 3 * pad, bandY, bandH, true, Align.left, false);
             }
             drawArenaCaster(g, w, h);
             if (picked) {
-                g.drawSmoothRoundRect(Math.max(2f, h * 0.007f), forge.screens.match.arena.ArenaTheme.CHOSEN, 0, 0, w, h, r);
+                g.drawSmoothRoundRect(Math.max(2f, h * 0.007f), ArenaTheme.CHOSEN, 0, 0, w, h, r);
             } else if (pickable) {
-                g.drawSmoothRoundRect(Math.max(2f, h * 0.006f), forge.screens.match.arena.ArenaTheme.SELECTABLE, 0, 0, w, h, r);
+                g.drawSmoothRoundRect(Math.max(2f, h * 0.006f), ArenaTheme.SELECTABLE, 0, 0, w, h, r);
             }
             if (a < 1f) {
                 g.setAlphaComposite(old);
             }
         }
 
-        private String arenaCaster;
+        private String arenaCaster, arenaTargets;
+        /** How much of this entry shows from under the newer ones (all of it for the top one). */
+        private float arenaVisibleW = Float.MAX_VALUE;
+
+        /** The caster plate's text against the card's height, its place, and its padding (shares of the plate's height). */
+        private static final float CASTER_TEXT = 0.034f, CASTER_X = 0.05f, CASTER_Y = 0.108f, CASTER_PAD = 0.3f;
 
         /**
-         * Who put it on the stack, on a small plate under the card's title (left, so it shows on the entries waiting
-         * under the top one too): with three opponents a spell's card alone does not say whose it is.
+         * Who put it on the stack and what it aims at, on a plate under the card's title (left, so it shows on the
+         * entries waiting under the top one too): with three opponents a spell's card alone does not say whose it is
+         * or at whom it goes. Both texts are made once per entry.
          */
         private void drawArenaCaster(Graphics g, float w, float h) {
             final PlayerView activator = stackInstance.getActivatingPlayer();
@@ -742,16 +795,26 @@ public class VStack extends FDropDown {
             if (arenaCaster == null) {
                 final PlayerView me = MatchController.instance.getCurrentPlayer();
                 arenaCaster = activator.equals(me) ? Forge.getLocalizer().getMessage("lblArenaYou") : activator.getName();
+                arenaTargets = arenaTargetsText(stackInstance);
             }
-            final forge.assets.FSkinFont f = forge.screens.match.arena.ArenaTheme.fontPx(Math.max(10, Math.round(h * 0.034f / 2) * 2));
-            final float ph = Math.round(f.getLineHeight() * 1.25f), dot = ph * 0.32f;
-            final float pw = Math.min(w * 0.9f, forge.screens.match.arena.ArenaArt.textWidth(arenaCaster, f) + ph * 0.6f + dot * 2.2f);
-            final float px = w * 0.05f, py = h * 0.108f;
-            g.fillSmoothRoundRect(ARENA_BAND, px, py, pw, ph, ph / 2f);
-            g.drawSmoothRoundRect(1f, forge.screens.match.arena.ArenaTheme.GOLD, px, py, pw, ph, ph / 2f);
-            g.fillSmoothCircle(forge.screens.match.arena.ArenaTheme.GOLD, px + ph * 0.3f + dot / 2f, py + ph / 2f, dot / 2f);
-            final float tx = px + ph * 0.3f + dot * 1.6f;
-            g.drawText(arenaCaster, f, forge.screens.match.arena.ArenaTheme.WHITE, tx, py, px + pw - tx - ph * 0.15f, ph, false, Align.left, true);
+            final FSkinFont f = ArenaTheme.fontPx(Math.max(10, Math.round(h * CASTER_TEXT / 2) * 2));
+            final float line = Math.round(f.getLineHeight() * 1.25f), dot = line * 0.32f, pad = line * CASTER_PAD;
+            final float ph = arenaTargets == null ? line : 2 * line;
+            final float px = w * CASTER_X, py = h * CASTER_Y;
+            final float textW = Math.max(ArenaArt.cachedTextWidth(arenaCaster, f) + dot * 1.6f,
+                    arenaTargets == null ? 0f : ArenaArt.cachedTextWidth(arenaTargets, f));
+            final float pw = Math.max(line, Math.min(Math.min(w * 0.9f, arenaVisibleW - px - pad), textW + 2 * pad));
+            g.fillSmoothRoundRect(ARENA_BAND, px, py, pw, ph, line / 2f);
+            g.drawSmoothRoundRect(1f, ArenaTheme.GOLD, px, py, pw, ph, line / 2f);
+            g.fillSmoothCircle(ArenaTheme.GOLD, px + pad + dot / 2f, py + line / 2f, dot / 2f);
+            final float tx = px + pad + dot * 1.6f;
+            // a buried entry shows only a strip: the text is cut at the plate's edge rather than shrunk to nothing
+            g.startClip(px, py, pw - pad / 2f, ph);
+            g.drawText(arenaCaster, f, ArenaTheme.WHITE, tx, py, textW + 2 * pad, line, false, Align.left, true);
+            if (arenaTargets != null) {
+                g.drawText(arenaTargets, f, ArenaTheme.GOLD, px + pad, py + line, textW + 2 * pad, line, false, Align.left, true);
+            }
+            g.endClip();
         }
 
         @Override

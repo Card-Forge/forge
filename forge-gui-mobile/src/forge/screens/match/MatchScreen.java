@@ -67,9 +67,11 @@ import forge.screens.FScreen;
 import forge.screens.match.arena.ArenaBoardPainter;
 import forge.screens.match.arena.ArenaCornerMenu;
 import forge.screens.match.arena.ArenaMatchLayout;
+import forge.screens.match.arena.ArenaPlayerInfo;
 import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.arena.ArenaShortcutSheet;
 import forge.screens.match.arena.ArenaShortcuts;
+import forge.screens.match.arena.ArenaTurnBanner;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
@@ -878,6 +880,10 @@ public class MatchScreen extends FScreen {
             activeEffect.draw(g, 10, 10, 100, 100);
         }
 
+        if (arenaLaidOut && isArenaBoard()) { //who is out: their seat has left the board, so a plate under the corner says so
+            final float outH = Math.max(ArenaTheme.px(22), Math.round(getHeight() * 0.026f));
+            ArenaPlayerInfo.drawEliminated(g, game, cornerMenu.getRight(), cornerMenu.getBottom() + ArenaMatchLayout.cornerGap(), outH);
+        }
         drawArcs(g);
         CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
         forge.screens.match.arena.ArenaTurnBanner.draw(g, getWidth(), getHeight());
@@ -1816,6 +1822,9 @@ public class MatchScreen extends FScreen {
                 if (!losers.isEmpty()) {
                     for (VPlayerPanel p : losers) {
                         if (playerPanelsList.size() > 2) {
+                            if (isArenaBoard()) { //the seat goes: say who is out as it does
+                                ArenaTurnBanner.show(Forge.getLocalizer().getMessage("lblArenaPlayerOut", p.getPlayer().getName()), false);
+                            }
                             p.setVisible(false);
                             playerPanelsList.remove(p);
                             System.out.println("Removed panel: " + p.getPlayer().toString());

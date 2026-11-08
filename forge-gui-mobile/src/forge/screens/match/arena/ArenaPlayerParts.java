@@ -1,5 +1,6 @@
 package forge.screens.match.arena;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.graphics.Color;
@@ -11,7 +12,9 @@ import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
+import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
@@ -52,6 +55,11 @@ public final class ArenaPlayerParts {
         private final float[] cellX = new float[4], cellW = new float[4];
         private final boolean[] shown = new boolean[4];
         private final String[] countText = new String[4];
+        // the pile under the pointer this frame (-1: none), whether it is lit, the commander tax and the texts saying it
+        private int hovered = -1;
+        private boolean hoveredPlayable;
+        private int taxFor = -1, taxHintFor = -1;
+        private String taxText, taxHint, playableHint;
 
         /**
          * @param rightToLeft piles fill from the right (an opponent's, in the top right corner)
@@ -196,6 +204,7 @@ public final class ArenaPlayerParts {
                 return;
             }
             layoutCells();
+            hovered = -1;
             final float mx = Forge.mouseMovedX - screenPos.x, my = Forge.mouseMovedY - screenPos.y;
             final boolean over = Forge.magnify && mx >= 0 && my >= 0 && mx < getWidth() && my < getHeight();
             for (int i = 0; i < ZONES.length; i++) {
@@ -217,6 +226,36 @@ public final class ArenaPlayerParts {
                 }
                 drawPile(g, i, n, cellX[i], cellW[i], getHeight());
             }
+            if (hovered >= 0) {
+                drawHint(g);
+            }
+        }
+
+        /**
+         * Under the pointer, a lit pile says what its light means (something in it can be played - click to open), and
+         * the command zone what the commander costs on top now (the tax and how many casts made it).
+         */
+        private void drawHint(final Graphics g) {
+            final String text;
+            if (ZONES[hovered] == ZoneType.Command && taxFor > 0) {
+                if (taxHint == null || taxHintFor != taxFor) {
+                    taxHintFor = taxFor;
+                    taxHint = Forge.getLocalizer().getMessage("lblArenaHintCommanderTax", String.valueOf(taxFor), String.valueOf(taxFor / 2));
+                }
+                text = taxHint;
+            } else if (hoveredPlayable) {
+                if (playableHint == null) {
+                    playableHint = Forge.getLocalizer().getMessage("lblArenaHintPlayable");
+                }
+                text = playableHint;
+            } else {
+                return;
+            }
+            final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(18), getHeight() * 0.13f));
+            final float hh = ArenaArt.hintHeight(f);
+            final boolean below = screenPos.y < ArenaBoard.windowH() / 2f;
+            final float top = below ? getHeight() + ArenaTheme.px(6) : -hh - ArenaTheme.px(6);
+            ArenaArt.hint(g, text, f, cellX[hovered] + cellW[hovered] / 2f, top, -screenPos.x, ArenaBoard.windowW() - screenPos.x);
         }
 
         private void drawPile(final Graphics g, final int i, final int count, final float cellX0, final float cellW0, final float cellH) {
@@ -274,9 +313,17 @@ public final class ArenaPlayerParts {
             }
             String badge = countText[i];
             if (zone == ZoneType.Command) {
-                // commander tax: two more for each time the commander has already been cast
+                // commander tax: two more for each time the commander has already been cast, said in words ("Tax +2")
                 final int tax = top != null && player.getCommanders() != null && player.getCommanders().contains(top) ? 2 * player.getCommanderCast(top) : 0;
-                badge = tax > 0 ? "+" + tax : null;
+                if (tax != taxFor || taxText == null) {
+                    taxFor = tax;
+                    taxText = Forge.getLocalizer().getMessage("lblArenaCommanderTax", String.valueOf(tax));
+                }
+                badge = tax > 0 ? taxText : null;
+            }
+            if (hot[i].goal() > 0f) {
+                hovered = i;
+                hoveredPlayable = playable;
             }
             if (badge != null) {
                 countBadge(g, badge, x + cw / 2f, y + ch, cellH, bump[i].get());
@@ -288,7 +335,7 @@ public final class ArenaPlayerParts {
          * of actionable cards (empty most frames), not the piles: a Commander library is 99 cards.
          */
         private boolean hasPlayable(final ZoneType zone) {
-            final java.util.List<CardView> actionable = MatchController.instance.getSelection().actionable();
+            final List<CardView> actionable = MatchController.instance.getSelection().actionable();
             for (int i = 0, n = actionable.size(); i < n; i++) {
                 final CardView c = actionable.get(i);
                 if (c.getZone() == zone && player.equals(c.getOwner())) {
@@ -298,12 +345,10 @@ public final class ArenaPlayerParts {
             return false;
         }
 
-
         private void countBadge(final Graphics g, final String text, final float cx, final float cy, final float cellH, final float bumped) {
-
             final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(15), cellH * 0.15f) * (1f + 0.38f * bumped));
             final float bh = f.getLineHeight() + ArenaTheme.px(2);
-            final float bw = Math.max(bh, ArenaArt.textWidth(text, f) + bh * 0.7f);
+            final float bw = Math.max(bh, ArenaArt.cachedTextWidth(text, f) + bh * 0.7f);
             final float bx = cx - bw / 2f, by = Math.min(getHeight() - bh, cy - bh / 2f);
             g.fillSmoothRoundRect(BADGE, bx, by, bw, bh, bh / 2f);
             g.drawSmoothRoundRect(1f, BADGE_RIM, bx, by, bw, bh, bh / 2f);
@@ -369,7 +414,6 @@ public final class ArenaPlayerParts {
             if (count > shown || alwaysCount) {
                 ArenaArt.countBadge(g, ArenaPlayerInfo.figure(count), cx, h - ch / 3f, Math.max(ArenaTheme.px(20), h * 0.3f));
             }
-
         }
     }
 
@@ -384,7 +428,7 @@ public final class ArenaPlayerParts {
     public static final class NamePlate extends FDisplayObject {
         private final PlayerView player;
         private float nameH; // seat: the name's row; the rest of the height is for the chips. 0: the whole height
-        private forge.game.phase.PhaseType phaseFor;
+        private PhaseType phaseFor;
         private String phaseText;
 
         public NamePlate(final PlayerView player0) {
@@ -405,7 +449,7 @@ public final class ArenaPlayerParts {
             final float h = (nameH > 0 ? nameH : getHeight()) - 2, d = Math.max(ArenaTheme.px(6), h / 3f);
             final FSkinFont f = ArenaCards.evenFont(Math.max(ArenaTheme.px(13), h * 0.62f));
             final float textX = ArenaTheme.px(12) + d + ArenaTheme.px(8);
-            final float plateW = Math.min(getWidth() - 1, textX + ArenaArt.textWidth(name, f) + ArenaTheme.px(14));
+            final float plateW = Math.min(getWidth() - 1, textX + ArenaArt.cachedTextWidth(name, f) + ArenaTheme.px(14));
             g.fillSmoothRoundRect(NAME_PLATE, 0, 0, plateW, h, h / 2f);
             final float mx = ArenaTheme.px(12) + d / 2f, my = h / 2f;
             // a small gold diamond: a square turned on its corner (a rounded square at 45 degrees)
@@ -416,20 +460,27 @@ public final class ArenaPlayerParts {
             if (nameH <= 0) {
                 return;
             }
-            // whose turn it is shows on the seat's frame; which step it is in leads the chips, as the ladder would show it
-            final forge.game.GameView game = MatchController.instance.getGameView();
-            String lead = null;
-            if (game != null && game.getPlayerTurn() == player && game.getPhase() != null && !game.isGameOver()) {
-                if (game.getPhase() != phaseFor) {
-                    phaseFor = game.getPhase();
-                    phaseText = phaseFor.nameForUi;
+            // whose turn it is shows on the seat's frame; which step it is in leads the chips, as the ladder would show
+            // it, and the seat that plays next says so (turn order round the table)
+            final GameView game = MatchController.instance.getGameView();
+            int lead = ArenaPlayerInfo.LEAD_NONE;
+            if (game != null && !game.isGameOver()) {
+                if (game.getPlayerTurn() == player && game.getPhase() != null) {
+                    if (game.getPhase() != phaseFor) {
+                        phaseFor = game.getPhase();
+                        phaseText = phaseFor.nameForUi;
+                    }
+                    lead = ArenaPlayerInfo.LEAD_PHASE;
+                } else if (ArenaBoard.nextTurnPlayer(game) == player) {
+                    lead = ArenaPlayerInfo.LEAD_NEXT;
                 }
-                lead = phaseText;
             }
-            final float chipH = Math.round(h * 0.86f), gap = Math.max(2f, chipH * 0.18f);
-            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.ALL, lead, ArenaTheme.px(4), nameH + gap + chipH / 2f, chipH, false,
-                    getWidth() - ArenaTheme.px(4));
+            final float chipH = Math.round(h * SEAT_CHIP_SHARE), gap = Math.max(2f, chipH * 0.18f);
+            ArenaPlayerInfo.draw(g, player, ArenaPlayerInfo.ALL | ArenaPlayerInfo.MANA, lead, phaseText, ArenaTheme.px(4),
+                    nameH + gap + chipH / 2f, chipH, false, getWidth() - ArenaTheme.px(4));
         }
     }
 
+    /** A seat's chips against the height of its name row. */
+    private static final float SEAT_CHIP_SHARE = 0.86f;
 }

@@ -37,6 +37,16 @@ public record Selection(List<CardView> cards, int min, int max, List<TrackableOb
         return new Selection(cards, min, max, targets, chosen, actionable);
     }
 
+    /** This selection also offering {@code more} players or stack items to pick. */
+    public Selection withTargets(final List<? extends TrackableObject> more) {
+        if (more.isEmpty()) {
+            return this;
+        }
+        final List<TrackableObject> all = new ArrayList<>(targets);
+        all.addAll(more);
+        return new Selection(cards, min, max, all, chosen, actionable);
+    }
+
     public boolean offersStackItems() {
         return targets.stream().anyMatch(StackItemView.class::isInstance);
     }
