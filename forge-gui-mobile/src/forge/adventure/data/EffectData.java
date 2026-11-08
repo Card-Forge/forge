@@ -6,7 +6,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
 import forge.model.FModel;
-import org.apache.commons.lang3.tuple.Pair;
+import forge.util.FileSection;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -24,9 +24,7 @@ public class EffectData implements Serializable {
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
-    public String[] startBattleWithCardInHand; //Cards added to the hand after mulligans.
-    public int maxHandSizeModifier = 0;  //Amount to add to maximum hand size, without changing starting hand size.
-    public SuspendedCard[] startBattleWithCardSuspended; //Cards that start suspended in Exile.
+    public String[] startBattleScript; //Card-script lines run after mulligans. "SVar:Name:Value" lines set SVars the others can use.
     public boolean allowIllegalCommander = false; //Keeps a commander that is not legal: any creature or planeswalker.
 
     //Map only effects.
@@ -45,6 +43,7 @@ public class EffectData implements Serializable {
         lifeModifier=effect.lifeModifier;
         changeStartCards=effect.changeStartCards;
         startBattleWithCard=effect.startBattleWithCard;
+        startBattleScript=effect.startBattleScript;
         colorView=effect.colorView;
         opponent = (effect.opponent == null) ? null : new EffectData(effect.opponent);
         extraManaShards = effect.extraManaShards;
@@ -56,27 +55,6 @@ public class EffectData implements Serializable {
 
     public Array<IPaperCard> startBattleWithCardsInCommandZone() {
         return cardsFromNames(startBattleWithCardInCommandZone);
-    }
-
-    public Array<IPaperCard> startBattleWithCardsInHand() {
-        return cardsFromNames(startBattleWithCardInHand);
-    }
-
-    public Array<Pair<IPaperCard, Integer>> startBattleWithCardsSuspended() {
-        Array<Pair<IPaperCard, Integer>> cards = new Array<>();
-        if (startBattleWithCardSuspended == null) {
-            return cards;
-        }
-        for (SuspendedCard suspended : startBattleWithCardSuspended) {
-            if (suspended.turns < 1) {
-                System.err.print("Suspended card \"" + suspended.card + "\" needs at least 1 turn\n");
-                continue;
-            }
-            IPaperCard card = cardFromName(suspended.card);
-            if (card != null)
-                cards.add(Pair.of(card, suspended.turns));
-        }
-        return cards;
     }
 
     private static Array<IPaperCard> cardsFromNames(String[] names) {
@@ -123,18 +101,16 @@ public class EffectData implements Serializable {
             description+="Battlefield:" + itemize(startBattleWithCards()) + "\n";
         if(startBattleWithCardInCommandZone != null && startBattleWithCardInCommandZone.length != 0)
             description+="Command:" + itemize(startBattleWithCardsInCommandZone()) + "\n";
-        if(startBattleWithCardInHand != null && startBattleWithCardInHand.length != 0)
-            description+="Hand:" + itemize(startBattleWithCardsInHand()) + "\n";
-        if(startBattleWithCardSuspended != null && startBattleWithCardSuspended.length != 0) {
-            description+="Suspended:";
-            for (Pair<IPaperCard, Integer> suspended : startBattleWithCardsSuspended())
-                description+="\n" + suspended.getLeft() + " (" + suspended.getRight() + ")";
-            description+="\n";
+        if(startBattleScript != null) {
+            for (String line : startBattleScript) {
+                String spellDescription = line.startsWith("SVar:") ? null
+                        : FileSection.parseToMap(line, FileSection.DOLLAR_SIGN_KV_SEPARATOR).get("SpellDescription");
+                if (spellDescription != null)
+                    description += spellDescription + "\n";
+            }
         }
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
-        if(maxHandSizeModifier != 0)
-            description+="Max hand size: " + maxHandSizeModifier + "\n";
         if(allowIllegalCommander)
             description+="Any creature or planeswalker can be commander\n";
         if(moveSpeed!=0 && moveSpeed != 1)
@@ -153,9 +129,4 @@ public class EffectData implements Serializable {
         return description;
     }
 
-
-    public static class SuspendedCard implements Serializable {
-        public String card;
-        public int turns;
-    }
 }
