@@ -2,9 +2,11 @@ Name:Curse of the Fire Penguin
 ManaCost:4 R R
 Types:Enchantment Aura
 K:Enchant:Creature
-SVar:AttachAILogic:Pump
+SVar:AttachAILogic:SpecificCard
+SVar:AttachAIValid:Creature.leastPowerControlledByYou
 S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | GainTextOf$ Self | FromState$ Flipped | TextBoxOnly$ True | Description$ This enchantment consumes and confuses enchanted creature.
 AlternateMode:Flip
+SVar:PlayMain1:TRUE
 Oracle:Enchant creature\nThis enchantment consumes and confuses enchanted creature.
 
 ALTERNATE
