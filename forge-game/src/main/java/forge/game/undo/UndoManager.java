@@ -34,10 +34,8 @@ public final class UndoManager {
     private long budgetPhase = -1;
     /** Set when undo is switched off: the recorder is emptied by the game thread at the next checkpoint. */
     private boolean resetRecorder;
-    /** Objects captured by the last snapshot: predicts the peak heap use of the next capture. */
+    /** Objects captured by the last snapshot, used only to budget standalone full rollback snapshots. */
     private long lastObjects;
-    /** Rough peak bytes per captured object while a capture runs (an estimate; tune from real logs). */
-    private static final long BYTES_PER_OBJECT = 220;
     /**
      * Heap the undo history may pin in total: the recorder's copy of the current state plus every reverse delta, as
      * counted by the memento classes. About a seventh of the maximum heap (at most 1 GB), so a phone never fills up
@@ -45,12 +43,18 @@ public final class UndoManager {
      */
     private static final long MAX_RETAINED_BYTES = Math.min(1L << 30, Runtime.getRuntime().maxMemory() / 7);
 
-    /** False when the heap is too full to take another snapshot safely. */
-    private boolean heapAllows() {
-        if (lastObjects == 0) { return true; }
+    /**
+     * Keep a fixed emergency reserve and budget the next allocation from the previous measured capture.
+     * Standalone AI rollback snapshots are full-graph copies, unlike the incremental human-history checkpoints.
+     */
+    private boolean heapAllows(boolean standalone) {
         final Runtime rt = Runtime.getRuntime();
         final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
-        return free > lastObjects * BYTES_PER_OBJECT;
+        final long estimate = standalone
+                ? lastObjects * 220L
+                : recorder.lastCaptureBytes();
+        final long reserve = Math.max(4L << 20, Math.min(16L << 20, rt.maxMemory() / 64L));
+        return free > estimate + reserve;
     }
 
     /** Game thread. Frees the undo history and the recorder's registry. */
@@ -116,9 +120,9 @@ public final class UndoManager {
             if (stack.isEmpty()) { recorder.detach(); }
         }
 
-        if (!heapAllows()) {
+        if (!heapAllows(false)) {
             dropHistory("Low memory");
-            if (!heapAllows()) { return; }
+            return;
         }
         final Entry entry;
         try {
@@ -153,11 +157,9 @@ public final class UndoManager {
         if (mode() == Mode.OFF) {
             return null;
         }
-        if (!heapAllows()) {
+        if (!heapAllows(true)) {
             dropHistory("Low memory");   // the human history is the big freeable chunk
-            if (!heapAllows()) {
-                return null;
-            }
+            return null;
         }
         try {
             final GameMemento m = GameMemento.capture(game);
