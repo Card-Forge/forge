@@ -277,6 +277,9 @@ public class VPrompt extends FContainer {
             final float strip = ArenaPrompt.stripHeight(wh), action = ArenaPrompt.actionHeight(wh), caption = ArenaPrompt.captionHeight(wh);
             final float smallW = ArenaPrompt.smallWidth(wh), smallH = ArenaPrompt.smallHeight(wh);
             lblMessage.setVisible(false);
+            //a decision laid out before this may have hidden a button it could not press
+            btnOk.setVisible(true);
+            btnCancel.setVisible(true);
             btnOk.setBounds(0, strip, width, action);
             btnCancel.setBounds(width - smallW, strip + action + caption, smallW, smallH);
             btnUndo.setVisible(undoShown);
