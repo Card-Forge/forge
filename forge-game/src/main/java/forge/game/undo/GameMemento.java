@@ -98,8 +98,15 @@ public final class GameMemento {
         static UndoDelta between(final Snap old, final Snap current) {
             if (old instanceof ObjSnap before && current instanceof ObjSnap after && before.ci == after.ci) {
                 int nr = 0, np = 0;
-                for (int i = 0; i < before.refs.length; i++) if (before.refs[i] != after.refs[i]) nr++;
-                for (int i = 0; i < before.prims.length; i++) if (before.prims[i] != after.prims[i]) np++;
+                for (int i = 0; i < before.refs.length; i++) {
+                    if (before.refs[i] != after.refs[i]) { nr++; }
+                }
+                for (int i = 0; i < before.prims.length; i++) {
+                    if (before.prims[i] != after.prims[i]) { np++; }
+                }
+                if (ObjDelta.estimatedBytes(nr, np) >= old.bytes()) {
+                    return new FullDelta(old);
+                }
                 final int[] refIndexes = nr == 0 ? NO_INTS : new int[nr];
                 final Object[] oldRefs = nr == 0 ? NO_OBJECTS : new Object[nr];
                 final int[] primIndexes = np == 0 ? NO_INTS : new int[np];
@@ -110,8 +117,7 @@ public final class GameMemento {
                 for (int i = 0, p = 0; i < before.prims.length; i++) {
                     if (before.prims[i] != after.prims[i]) { primIndexes[p] = i; oldPrims[p++] = before.prims[i]; }
                 }
-                final UndoDelta compact = new ObjDelta(before.ci, refIndexes, oldRefs, primIndexes, oldPrims);
-                return compact.bytes() < old.bytes() ? compact : new FullDelta(old);
+                return new ObjDelta(before.ci, refIndexes, oldRefs, primIndexes, oldPrims);
             }
             if (old instanceof SeqSnap before && current instanceof SeqSnap after) {
                 int prefix = 0;
@@ -122,10 +128,12 @@ public final class GameMemento {
                         && before.items[before.items.length - 1 - suffix]
                         == after.items[after.items.length - 1 - suffix]) suffix++;
                 final int middleLength = before.items.length - prefix - suffix;
+                if (32L + arr(middleLength) >= old.bytes()) {
+                    return new FullDelta(old);
+                }
                 final Object[] oldMiddle = middleLength == 0 ? NO_OBJECTS
                         : Arrays.copyOfRange(before.items, prefix, prefix + middleLength);
-                final UndoDelta compact = new SeqDelta(prefix, suffix, before.items.length, oldMiddle);
-                return compact.bytes() < old.bytes() ? compact : new FullDelta(old);
+                return new SeqDelta(prefix, suffix, before.items.length, oldMiddle);
             }
             return new FullDelta(old);
         }
@@ -150,19 +158,21 @@ public final class GameMemento {
             this.primIndexes = primIndexes; this.oldPrims = oldPrims;
         }
         @Override Snap restore(Snap current) {
-            if (!(current instanceof ObjSnap now) || now.ci != ci) throw new IllegalStateException("object snapshot kind changed");
+            if (!(current instanceof ObjSnap now) || now.ci != ci) {
+                throw new IllegalStateException("object snapshot kind changed");
+            }
             final Object[] refs = now.refs.length == 0 ? NO_OBJECTS : now.refs.clone();
             final long[] prims = now.prims.length == 0 ? NO_LONGS : now.prims.clone();
-            for (int i = 0; i < refIndexes.length; i++) refs[refIndexes[i]] = oldRefs[i];
-            for (int i = 0; i < primIndexes.length; i++) prims[primIndexes[i]] = oldPrims[i];
+            for (int i = 0; i < refIndexes.length; i++) { refs[refIndexes[i]] = oldRefs[i]; }
+            for (int i = 0; i < primIndexes.length; i++) { prims[primIndexes[i]] = oldPrims[i]; }
             return new ObjSnap(ci, refs, prims);
         }
         private static long intArrayBytes(int n) { return n == 0 ? 0L : 16L + 4L * n; }
         private static long longArrayBytes(int n) { return n == 0 ? 0L : 16L + 8L * n; }
-        @Override long bytes() {
-            return 32L + intArrayBytes(refIndexes.length) + arr(oldRefs.length)
-                    + intArrayBytes(primIndexes.length) + longArrayBytes(oldPrims.length);
+        static long estimatedBytes(int refs, int prims) {
+            return 32L + intArrayBytes(refs) + arr(refs) + intArrayBytes(prims) + longArrayBytes(prims);
         }
+        @Override long bytes() { return estimatedBytes(oldRefs.length, oldPrims.length); }
         @Override long allocationBytes() { return bytes(); }
     }
 
@@ -173,7 +183,9 @@ public final class GameMemento {
             this.prefix = prefix; this.suffix = suffix; this.oldLength = oldLength; this.oldMiddle = oldMiddle;
         }
         @Override Snap restore(Snap current) {
-            if (!(current instanceof SeqSnap now)) throw new IllegalStateException("sequence snapshot kind changed");
+            if (!(current instanceof SeqSnap now)) {
+                throw new IllegalStateException("sequence snapshot kind changed");
+            }
             final Object[] items = oldLength == 0 ? NO_OBJECTS : new Object[oldLength];
             if (prefix > 0) System.arraycopy(now.items, 0, items, 0, prefix);
             if (oldMiddle.length > 0) System.arraycopy(oldMiddle, 0, items, prefix, oldMiddle.length);
