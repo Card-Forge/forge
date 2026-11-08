@@ -172,9 +172,15 @@ public abstract class ArenaDialogOverlay extends FOverlay {
     // ---- input ------------------------------------------------------------------------------------------------------
 
     @Override
-    public void buildTouchListeners(final float screenX, final float screenY, final List<FDisplayObject> listeners) {
+    public void buildTouchListeners(final float screenX0, final float screenY0, final List<FDisplayObject> listeners) {
         if (!isVisible()) {
             return;
+        }
+        float screenX = screenX0, screenY = screenY0;
+        if (screenX == 0 && screenY == 0 && (Forge.mouseMovedX != 0 || Forge.mouseMovedY != 0)) {
+            // an arrow key: Forge emulates a swipe with a touch at the corner first; the pointer has not moved
+            screenX = Forge.mouseMovedX;
+            screenY = Forge.mouseMovedY;
         }
         final float x = screenToLocalX(screenX), y = screenToLocalY(screenY);
         if (viewingBattlefield) {
@@ -245,6 +251,16 @@ public abstract class ArenaDialogOverlay extends FOverlay {
 
     @Override
     public boolean tap(final float x, final float y, final int count) {
+        if (Forge.mouseButtonID == com.badlogic.gdx.Input.Buttons.RIGHT && !viewingBattlefield) {
+            // the right button looks at a card rather than picking it
+            final CardView card = cardAt(x, y);
+            if (card != null) {
+                CardZoom.show(card);
+                return true;
+            }
+            onRightClick(x, y);
+            return true;
+        }
         final ArenaDialogKit.Pill pill = pillAt(x, y);
         if (pill != null) {
             pill.fire();
@@ -254,6 +270,15 @@ public abstract class ArenaDialogOverlay extends FOverlay {
             onTap(x, y, count);
         }
         return true;
+    }
+
+    /** A right click away from any card (cards zoom): by default nothing. */
+    protected void onRightClick(final float x, final float y) {
+    }
+
+    /** Whether a button or finger is down on the dialog now (a drag rather than the wheel). */
+    protected final boolean isPointerDown() {
+        return pointerDown;
     }
 
     @Override

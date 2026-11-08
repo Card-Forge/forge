@@ -21,6 +21,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.game.card.CardView;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.match.arena.ArenaChoices;
 import forge.screens.match.views.VPrompt;
 import forge.util.Utils;
 import forge.util.WaitCallback;
@@ -84,8 +85,16 @@ public class FOptionPane extends FDialog {
         showOptionDialog(message, null, title, icon, options, defaultOption, callback);
     }
     public static void showOptionDialog(final String message, final FSkinFont messageFont, final String title, final FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
+        if (ArenaChoices.ask(message, title, isStandardIcon(icon), options, defaultOption, callback)) {
+            return; //the Arena look on the match screen asks with its own overlay
+        }
         final FOptionPane optionPane = new FOptionPane(message, messageFont, title, icon, null, options, defaultOption, callback);
         optionPane.show();
+    }
+
+    /** Whether a dialog's picture is only one of the plain question, information, warning and error marks (or none). */
+    private static boolean isStandardIcon(final FImage icon) {
+        return icon == null || icon == QUESTION_ICON || icon == INFORMATION_ICON || icon == WARNING_ICON || icon == ERROR_ICON;
     }
 
     public static int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
@@ -97,6 +106,9 @@ public class FOptionPane extends FDialog {
         }.invokeAndWait();
     }
     public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
+        if (ArenaChoices.askAboutCard(card, message, title, options, defaultOption, callback)) {
+            return; //the Arena look on the match screen asks with its own overlay
+        }
         final FDisplayObject cardDisplay;
         if (card != null) {
             cardDisplay = new FDisplayObject() {

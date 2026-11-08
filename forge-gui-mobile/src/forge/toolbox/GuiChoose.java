@@ -12,6 +12,7 @@ import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.card.CardView;
+import forge.screens.match.arena.ArenaChoices;
 import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.util.FSerializableFunction;
 
@@ -217,6 +218,9 @@ public class GuiChoose {
             }
             throw new RuntimeException("choice required from empty list");
         }
+        if (ArenaChoices.getChoices(message, min, max, choices, selected, display, callback)) {
+            return; //the Arena look on the match screen asks with its own overlays
+        }
 
         ListChooser<T> c = new ListChooser<>(message, min, max, choices, display, callback);
         c.show(selected, false);
@@ -243,6 +247,9 @@ public class GuiChoose {
 
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean showRememberCheckbox, final Consumer<OrderResult<T>> callback) {
+        if (ArenaChoices.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, showRememberCheckbox, callback)) {
+            return; //the Arena look on the match screen asks with its own overlays
+        }
         @SuppressWarnings("unchecked")
         final DualListBox<T>[] holder = new DualListBox[1];
         holder[0] = new DualListBox<>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, list -> {

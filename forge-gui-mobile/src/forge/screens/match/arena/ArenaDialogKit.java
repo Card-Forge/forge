@@ -338,6 +338,12 @@ public final class ArenaDialogKit {
     /** A title line: a 2px drop shadow and a heavier stroke (Swing paintTitleLine with the bold display face). */
     public static void titleLine(final Graphics g, final String text, final FSkinFont font, final float x, final float y, final float w,
             final float h, final float alpha) {
+        if (text != null && text.indexOf('{') >= 0) {
+            // mana symbols in a question ("add {G}?") are drawn as symbols
+            SYMBOL_TEXT.drawTextShadowed(g, text, Integer.MAX_VALUE, font, ArenaTheme.alpha(ArenaTheme.WHITE, alpha, S2), x, y, w, h, y, h, false,
+                    Align.center, true);
+            return;
+        }
         final float o = Math.max(1f, ArenaTheme.px(2));
         final Color shadow = ArenaTheme.alpha(ArenaTheme.BLACK, 0.75f * alpha, S1);
         g.drawText(text, font, shadow, x, y + o, w, h, false, Align.center, true);
@@ -978,6 +984,52 @@ public final class ArenaDialogKit {
         if (alpha < 1f) {
             g.setAlphaComposite(old);
         }
+    }
+
+    // ---- what the decision is about ---------------------------------------------------------------------------------
+
+    private static java.lang.reflect.Method promptCardGetter;
+    private static java.lang.reflect.Field promptCardField;
+    private static boolean promptCardLooked;
+
+    /**
+     * The card the match's prompt is about (what is being cast or resolved while the game asks), or null. Read from the
+     * active VPrompt: its {@code getCardView()} if it has one, else the card it keeps for its message.
+     */
+    public static CardView promptCard() {
+        try {
+            final forge.screens.match.MatchScreen view = forge.screens.match.MatchController.getView();
+            if (view == null) {
+                return null;
+            }
+            final Object prompt = view.getActivePrompt();
+            if (prompt == null) {
+                return null;
+            }
+            if (!promptCardLooked) {
+                promptCardLooked = true;
+                try {
+                    promptCardGetter = prompt.getClass().getMethod("getCardView");
+                } catch (final NoSuchMethodException e) {
+                    try {
+                        promptCardField = forge.screens.match.views.VPrompt.class.getDeclaredField("card");
+                        promptCardField.setAccessible(true);
+                    } catch (final ReflectiveOperationException | RuntimeException e2) {
+                        promptCardField = null;
+                    }
+                }
+            }
+            final Object card = promptCardGetter != null ? promptCardGetter.invoke(prompt)
+                    : promptCardField != null ? promptCardField.get(prompt) : null;
+            return card instanceof CardView ? (CardView) card : null;
+        } catch (final ReflectiveOperationException | RuntimeException e) {
+            return null;
+        }
+    }
+
+    /** The dialog's own title unless it is empty or only the program's name, in which case the words for {@code fallbackKey}. */
+    public static String dialogTitle(final String title, final String fallbackKey) {
+        return title == null || title.trim().isEmpty() || "Forge".equals(title.trim()) ? Forge.getLocalizer().getMessage(fallbackKey) : title;
     }
 
     // ---- waiting for an answer --------------------------------------------------------------------------------------
