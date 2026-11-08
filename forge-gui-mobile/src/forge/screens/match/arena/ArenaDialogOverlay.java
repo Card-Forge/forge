@@ -62,6 +62,11 @@ public abstract class ArenaDialogOverlay extends FOverlay {
         return closed;
     }
 
+    /** Whether it has stepped aside ("View Battlefield"), leaving only its button over the board. */
+    public final boolean isViewingBattlefield() {
+        return viewingBattlefield;
+    }
+
     /** Opens the dialog over the match. Render thread. */
     public void openOverlay() {
         closed = false;

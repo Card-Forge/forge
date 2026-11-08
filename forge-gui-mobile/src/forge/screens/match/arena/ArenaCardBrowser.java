@@ -229,6 +229,12 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         selectionBrowser.openOverlay();
     }
 
+    /** Whether the browser of the game's current selection is up over the board (not stepped aside). */
+    public static boolean isSelectionShowing() {
+        final ArenaCardBrowser browser = selectionBrowser;
+        return browser != null && !browser.isClosed() && !browser.isViewingBattlefield();
+    }
+
     /** The input changed what is chosen or what its buttons say: the browser reads them as it draws. */
     public static void refreshSelection() {
         ArenaMotion.requestFrame();

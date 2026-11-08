@@ -38,6 +38,14 @@ public class VZoneDisplay extends VCardDisplayArea {
     private CardAreaPanel arenaRaised; //the hovered card of the Arena fan, raised above the others
 
     @Override
+    public void draw(Graphics g) {
+        if (!isArenaHand() && ArenaMatchLayout.applies() && forge.screens.match.arena.ArenaCardBrowser.isSelectionShowing()) {
+            return; //the Arena card browser shows these cards over the board, the strip would only show through it
+        }
+        super.draw(g);
+    }
+
+    @Override
     protected void drawBackground(Graphics g) {
         if (isArenaHand()) {
             //the hovered card rises and its neighbours part: lay the fan out again when the pointer moves to another card

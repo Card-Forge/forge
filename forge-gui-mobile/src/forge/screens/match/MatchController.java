@@ -627,6 +627,8 @@ public class MatchController extends NetworkGuiGame {
     public void setSelection(final Selection selection) {
         final Selection prev = getSelection();
         super.setSelection(selection);
+        //the Arena look: cards to pick from zones the board does not show (a graveyard, exile...) open in the card browser
+        forge.screens.match.arena.ArenaCardBrowser.followSelection(selection);
         final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
         FThreads.invokeInEdtLater(() -> {
             if (stackOffered && !view.getStack().isVisible()) { // stack items are picked in the stack view, so bring it up
