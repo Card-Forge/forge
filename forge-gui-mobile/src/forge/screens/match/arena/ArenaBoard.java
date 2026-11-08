@@ -57,6 +57,8 @@ public final class ArenaBoard {
             SEAT_BACK_Y = 0.1f, SEAT_FRONT_Y = 0.205f;
     /** Space between tiles, as a share of a tile's width; stacked copies show this much of each. */
     public static final float TILE_GAP = 0.085f, STACK_STEP = 0.1f;
+    /** A stack of tokens shows at most this many edges behind its front card; its count badge says the rest. */
+    public static final int TOKEN_PEEK = 2;
 
     // ---- the hand fan (CardArea.doFanLayout) ------------------------------------------------------------------------
     /** The local hand's strip: from this share of the window's height down, between these shares of its width. */

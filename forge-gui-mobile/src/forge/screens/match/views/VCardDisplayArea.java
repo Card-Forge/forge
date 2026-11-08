@@ -501,7 +501,21 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     private static float arenaGroupWidth(CardAreaPanel top, float w) {
-        return w + Math.round(w * ArenaBoard.STACK_STEP) * (arenaGroupSize(top) - 1);
+        return w + Math.round(w * ArenaBoard.STACK_STEP) * arenaGroupSteps(top);
+    }
+
+    /**
+     * How many steps a group fans out to the right: one per card behind the front one, except that a stack of tokens
+     * (treasures, food, a crowd of 1/1s) reads as one card - at most {@link ArenaBoard#TOKEN_PEEK} edges show behind
+     * it, the rest lie straight under, and its count says how many.
+     */
+    private static int arenaGroupSteps(CardAreaPanel top) {
+        final int size = arenaGroupSize(top);
+        return isArenaTokenPile(top) ? Math.min(size - 1, ArenaBoard.TOKEN_PEEK) : size - 1;
+    }
+
+    private static boolean isArenaTokenPile(CardAreaPanel top) {
+        return top.getNextPanelInStack() != null && top.getCard().isToken() && top.getAttachedPanels().isEmpty();
     }
 
     /**
@@ -622,13 +636,15 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         for (CardAreaPanel p = top; p != null; p = p.getNextPanelInStack()) {
             chain++;
         }
+        // the cards of a token pile past the few that peek out lie straight under the first of those
+        final int under = group.size() - 1 - arenaGroupSteps(top);
         for (int i = 0; i < group.size(); i++) {
             final CardAreaPanel p = (CardAreaPanel) group.get(i);
             orderedCards.get().add(p.getCard());
             if (p.isInfoGhost()) {
                 infoGhostCardIds.get().add(p.getCard().getId());
             }
-            p.setBounds(Math.round(x + i * step), Math.round(y), w, h);
+            p.setBounds(Math.round(x + Math.max(0, i - under) * step), Math.round(y), w, h);
             final ArenaCards.State st = p.getArenaState();
             st.scale = scale;
             st.stackBack = i < group.size() - 1;
