@@ -2202,11 +2202,14 @@ public class AiController {
         if (ph.isPlayerTurn(player)) {
             // The blockers are down and the AI has priority: the moment to pump the attacker that was blocked, or to
             // sneak something in, with the opponent unable to take back the block (see Mode.BLOCKED).
-            return ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && game.getPlayers().size() == 2 && ph.getCombat() != null
-                    && !ph.getCombat().getAttackersOf(player.getWeakestOpponent()).isEmpty()
+            return ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getCombat() != null
+                    && !ph.getCombat().getAttackers().isEmpty()
                     ? FlatMonteCarloPicker.Mode.BLOCKED : null;
         }
-        if (ph.is(PhaseType.END_OF_TURN) && game.getPlayers().size() == 2) {
+        if (ph.is(PhaseType.END_OF_TURN)
+                && (game.getPlayers().size() == 2 || player.equals(game.getNextPlayerAfter(ph.getPlayerTurn())))) {
+            // the rollout plays on into the AI's own next turn: with more players that is only the next turn when the
+            // AI sits right after the player whose end step it is
             return FlatMonteCarloPicker.Mode.END_STEP;
         }
         if ((ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) && ph.getCombat() != null
@@ -2725,7 +2728,8 @@ public class AiController {
             // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
             return false;
         }
-        if (ActivationGuard.problem(player, sa) != null) {
+        final String problem = ActivationGuard.problem(player, sa);
+        if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
             return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }
         final Card host = sa.getHostCard();

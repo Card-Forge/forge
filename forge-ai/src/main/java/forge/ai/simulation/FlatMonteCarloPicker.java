@@ -939,6 +939,11 @@ public final class FlatMonteCarloPicker {
                     target = savingTarget(player, sa);
                 } else if (target == null && (mode == Mode.BLOCKED || defendingWindow(player, mode))) {
                     target = combatTarget(player, sa);
+                    if (target == null && multiCombatTargets(player, sa)) {
+                        cands.add(new Candidate(sa, null, true)); // aimed at several creatures: the targets stay on the play
+                        extrasLeft--;
+                        continue;
+                    }
                 } else if (target == null && (isLoyaltyPlay(sa) || isActivationPlay(sa) || isOtherZonePlay(sa))) {
                     target = loyaltyTarget(player, sa);
                 }
@@ -1165,7 +1170,8 @@ public final class FlatMonteCarloPicker {
         // A pump is not offered in the main phase: the opponent would see it before he blocks. It is a combat trick, and
         // those are offered once the blocks are down (Mode.BLOCKED, isCombatTrick).
         if (api != ApiType.DealDamage && api != ApiType.Attach && api != ApiType.PutCounter && api != ApiType.Token
-                && api != ApiType.Discard && api != ApiType.LoseLife) {
+                && api != ApiType.Discard && api != ApiType.LoseLife && api != ApiType.Untap
+                && api != ApiType.CopyPermanent && api != ApiType.Sacrifice) {
             return false;
         }
         return ActivationGuard.problem(sa.getHostCard().getController(), sa) == null;
@@ -1235,6 +1241,9 @@ public final class FlatMonteCarloPicker {
             final Boolean own = isOwnSide(player, e);
             if (own == null || own == hostile) {
                 continue;
+            }
+            if (api == ApiType.Untap && e instanceof Card && !((Card) e).isTapped()) {
+                continue; // an untap is for something that is tapped
             }
             final int rank = targetRank(player, e);
             if (rank > bestRank) {
@@ -2162,6 +2171,58 @@ public final class FlatMonteCarloPicker {
             return null; // the pump changes nothing: the creature wins (or dies) anyway, and the trick is worth more later
         }
         return best != null && applyTarget(sa, best) ? best : null;
+    }
+
+    /**
+     * A trick with "up to N target creatures" (a team pump, protection for two creatures) aimed at the AI's creatures
+     * that are in the fight, the ones in the biggest fights first. The targets are left on the play. False when the
+     * trick has one target (see {@link #combatTarget}), is divided, or has fewer legal targets in the combat than it needs.
+     */
+    public static boolean multiCombatTargets(final Player player, final SpellAbility sa) {
+        final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (combat == null || ts == null || ts.getTargetRestrictions() == null || ts.isDividedAsYouChoose()) {
+            return false;
+        }
+        final TargetRestrictions tr = ts.getTargetRestrictions();
+        final int max = tr.getMaxTargets(sa.getHostCard(), ts);
+        if (max <= 1) {
+            return false;
+        }
+        final boolean defending = !player.getGame().getPhaseHandler().isPlayerTurn(player);
+        sa.setActivatingPlayer(player);
+        final List<Card> fighters = new ArrayList<>();
+        final Map<Card, Integer> rank = new java.util.HashMap<>();
+        for (final GameEntity e : tr.getAllCandidates(ts)) {
+            if (!(e instanceof Card) || !player.equals(((Card) e).getController())) {
+                continue;
+            }
+            final Card c = (Card) e;
+            if (defending ? !combat.isBlocking(c) : !combat.isAttacking(c)) {
+                continue;
+            }
+            final boolean fighting = defending || combat.isBlocked(c) || !combat.getBlockers(c).isEmpty();
+            rank.put(c, (fighting ? 100000 : 0) + targetRank(player, c));
+            fighters.add(c);
+        }
+        if (fighters.size() < Math.max(1, tr.getMinTargets(sa.getHostCard(), ts))) {
+            return false;
+        }
+        fighters.sort((a, b) -> rank.get(b) - rank.get(a));
+        ts.resetTargets();
+        for (final Card c : fighters) {
+            if (ts.getTargets().size() >= max) {
+                break;
+            }
+            if (ts.canTarget(c)) {
+                ts.getTargets().add(c);
+            }
+        }
+        if (ts.getTargets().isEmpty() || !ts.isTargetNumberValid()) {
+            ts.resetTargets();
+            return false;
+        }
+        return true;
     }
 
     /**
