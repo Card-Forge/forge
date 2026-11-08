@@ -104438,6 +104438,8 @@
     ],
     "ai": "cautious",
     "boss": true,
+    "bossIntro": "\"Orgg!!!\"",
+    "bossInsult": "\"Orgg. Orgg orgg.\"",
     "speed": 12,
     "life": 40,
     "gamesPerMatch": 3,

@@ -12611,7 +12611,7 @@
   "name": "Hold the Hold",
   "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
   "offerDialog": {
-    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"",
+    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"\n\nWarning: Hard quest.",
     "options": [
       {
         "name": "\"I'll go check it out. No promises, though!\"",
@@ -12835,20 +12835,6 @@
       "POIToken": "",
       "mapFlag": "FE_DwarvenHold_Victory",
       "mapFlagValue": 1
-    },
-    {
-      "id": 2,
-      "name": "Return to Town",
-      "description": "Return to the town where you accepted the request.",
-      "here": true,
-      "objective": "Travel",
-      "prerequisiteIDs": [
-        1
-      ],
-      "prologue": {},
-      "epilogue": {},
-      "failureDialog": {},
-      "POIToken": ""
     }
   ],
   "questSourceTags": [
@@ -12883,7 +12869,7 @@
     "name": "Hold the Hold",
     "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
     "offerDialog": {
-      "text": "A stout dwarf leading a heavily laden pony looks you up and down. \"Who are ye? Have ye come here tae aid us in oor hour o' need?\"",
+      "text": "A stout dwarf leading a heavily laden pony looks you up and down. \"Who are ye? Have ye come here tae aid us in oor hour o' need?\"\n\nWarning: Hard quest.",
       "options": [
         {
           "condition": [
@@ -13497,7 +13483,7 @@
               "actorID": 9150
             }
           ],
-          "name": "\"I'm just passing through.\" (Decline for now)",
+          "name": "\"Oops, took a wrong turn somewhere. Going back now.\" (Decline for now)",
           "text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
         },
         {

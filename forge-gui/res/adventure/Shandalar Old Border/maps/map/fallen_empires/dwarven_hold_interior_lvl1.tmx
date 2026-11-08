@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="151021">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="151022">
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
  <tileset firstgid="26497" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
@@ -259,7 +259,7 @@
     <property name="hidden" type="bool" value="true" />
    </properties>
   </object>
-  <object id="9262" template="../../../../../../common/maps/obj/dialog.tx" name="Dwarven Hold faction setup" x="384" y="44" width="20" height="24">
+  <object id="9262" template="../../../../../../common/maps/obj/dialog.tx" name="Dwarven Hold faction setup" x="384" y="68" width="20" height="32">
    <properties>
     <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 42005}, {&quot;deleteMapObject&quot;: 42006}, {&quot;deleteMapObject&quot;: 42016}, {&quot;deleteMapObject&quot;: 42020}, {&quot;deleteMapObject&quot;: 42022}, {&quot;deleteMapObject&quot;: 42023}, {&quot;deleteMapObject&quot;: 42024}, {&quot;deleteMapObject&quot;: 42025}, {&quot;deleteMapObject&quot;: 42026}, {&quot;deleteMapObject&quot;: 42027}, {&quot;deleteMapObject&quot;: 42028}, {&quot;deleteMapObject&quot;: 42029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}, {&quot;deleteMapObject&quot;: 52005}, {&quot;deleteMapObject&quot;: 52006}, {&quot;deleteMapObject&quot;: 52016}, {&quot;deleteMapObject&quot;: 52020}, {&quot;deleteMapObject&quot;: 52022}, {&quot;deleteMapObject&quot;: 52023}, {&quot;deleteMapObject&quot;: 52024}, {&quot;deleteMapObject&quot;: 52025}, {&quot;deleteMapObject&quot;: 52026}, {&quot;deleteMapObject&quot;: 52027}, {&quot;deleteMapObject&quot;: 52028}, {&quot;deleteMapObject&quot;: 52029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;}], &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}]}]" />
     <property name="hidden" type="bool" value="true" />
@@ -274,6 +274,7 @@
   </object>
   <object id="42005" template="../../../../../../common/maps/obj/enemy.tx" x="240.083" y="447.333">
    <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Song|LEG&quot;, &quot;count&quot;: 1}]" />
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
     <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
@@ -297,6 +298,7 @@
   </object>
   <object id="42006" template="../../../../../../common/maps/obj/enemy.tx" x="223.583" y="454.583">
    <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Song|LEG&quot;, &quot;count&quot;: 1}]" />
     <property name="Type" value="FEM Dwarven Berserker" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
     <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
@@ -523,7 +525,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Thaumaturgist" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Transmutation is nae exclusively a blue or black magic art. Here, let me gie ye a wee taste o' distilled chaos tae show ye what I mean.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;Transmutation is nae exclusively a blue or black magic art. Here, let me gie ye a wee taste o' distilled chaos tae show ye what I mean.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Accept the Chaoslace)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;, &quot;val&quot;: 1}}, {&quot;grantRewards&quot;: [{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chaoslace|LEA&quot;, &quot;count&quot;: 1}]}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;}], &quot;text&quot;: &quot;\&quot;Mind ye, a wee taste is a' ye get. Chaos is best served in sma' doses.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Thaumaturgist" />
     <property name="enemy" value="FEM Dwarven Thaumaturgist" />
     <property name="pursueRange" type="int" value="0" />
@@ -637,6 +639,11 @@
    <properties>
     <property name="hidden" value="true" type="bool" />
     <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;actorID&quot;: 52020}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_TraderGreeting&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;Welcome, pal. As ye can see, we've got a wee bit o' a situation wi' that orc and goblin raiding party outside. But make yersel' comfortable till help arrives. Or, even better, help us yersel'.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_TraderGreeting&quot;, &quot;val&quot;: 1}}]}]}]" />
+   </properties>
+  </object>
+  <object id="151021" template="../../../../../../common/maps/obj/scroll.tx" x="399.75" y="319.75">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Shrine|ODY&quot;, &quot;count&quot;: 1}]" />
    </properties>
   </object>
  </objectgroup>
