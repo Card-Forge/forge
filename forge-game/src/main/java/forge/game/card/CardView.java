@@ -650,7 +650,8 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.equals(viewer)) {
+            // CR 810.5: Two-Headed Giant teammates may review each other's hands
+            if (controller.sharesTeamWith(viewer)) {
                 return true;
             }
             break;

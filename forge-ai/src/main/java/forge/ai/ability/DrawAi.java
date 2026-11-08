@@ -52,7 +52,7 @@ public class DrawAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final Player player = sa.getTargets().getFirstTargetedPlayer();
-            if (player != null && player.isOpponentOf(ai)) {
+            if (player != null && player.isOpponentOf(ai) && !killsOpponent(ai, player, sa)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
@@ -206,6 +206,35 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
+    }
+
+    /**
+     * Whether this draw, aimed at an opponent, ends the game for them: it takes their whole library (they lose at their
+     * next draw, targetAI aims it there) or comes with a life loss of the same size that kills them. Every other draw
+     * at an opponent is a gift and is not made.
+     */
+    private static boolean killsOpponent(final Player ai, final Player opp, final SpellAbility sa) {
+        try {
+            final SpellAbility root = sa.getRootAbility();
+            int n;
+            if (sa.costHasManaX() && root.getXManaCostPaid() != null) {
+                n = root.getXManaCostPaid();
+            } else {
+                n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("NumCards", "1"), sa);
+            }
+            if (n <= 0) {
+                return false;
+            }
+            if (n >= opp.getCardsIn(ZoneType.Library).size() && opp.canDraw() && !opp.cantLoseCheck(GameLossReason.Milled)
+                    && !opp.isCardInPlay("Laboratory Maniac")) {
+                return true;
+            }
+            final SpellAbility loseLife = sa.findSubAbilityByType(ApiType.LoseLife);
+            return loseLife != null && "Targeted".equals(loseLife.getParam("Defined")) && opp.canLoseLife()
+                    && n >= opp.getLife();
+        } catch (final RuntimeException e) {
+            return false;
+        }
     }
 
     /** The draw of an ability that takes cards out of a library that is already a Doomsday pile (see DoomsdayPile). */

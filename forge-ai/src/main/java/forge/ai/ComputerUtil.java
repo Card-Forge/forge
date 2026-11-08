@@ -83,6 +83,7 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        RunawayLoop.note(ai, sa);
         if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
             if (pc.getAi().hasFailedToCast(sa)) {
                 return false;
@@ -1437,6 +1438,10 @@ public class ComputerUtil {
             return false;
         }
 
+        if (RunawayLoop.exceeded(sa)) {
+            return true;
+        }
+
         int activations = sa.getActivationsThisTurn();
 
         //10 activations should still be acceptable
@@ -1883,7 +1888,7 @@ public class ComputerUtil {
                     }
                 } else if (o instanceof Player p) {
                     if (source.hasKeyword(Keyword.INFECT)) {
-                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
+                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getGame().getRules().getPoisonCountersToLose() - p.getPoisonCounters()) {
                             threatened.add(p);
                         }
                     } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {

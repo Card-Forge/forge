@@ -15,6 +15,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -291,13 +293,14 @@ public class PermanentAi extends SpellAbilityAi {
                     dontCast = true;
                 }
             } else if (param.equals("NumManaSourcesNextTurn")) {
-                // Only cast if there are X or more mana sources controlled by the AI *or*
-                // if there are X-1 mana sources in play but the AI has an extra land in hand
-                CardCollection m = ComputerUtilMana.getAvailableManaSources(ai, true);
+                // Count only battlefield sources that will normally be available after the next untap. In particular,
+                // a temporary mana effect in the Command zone (Channel) cannot support the Illusions-Donate upkeep.
+                CardCollection m = ComputerUtilMana.getManaSourcesForNextTurn(ai);
                 int extraMana = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS) > 0 ? 1 : 0;
                 if (source.getName().equals("Illusions of Grandeur")) {
-                    // TODO: this is currently hardcoded for specific Illusions-Donate cost reduction spells, need to make this generic.
-                    extraMana += Math.min(3, CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Sapphire Medallion").or(CardPredicates.nameEquals("Helm of Awakening"))).size()) * 2; // each cost-reduction spell accounts for {1} in both Illusions and Donate
+                    // The Illusions spell is already cast by the time this next-turn mana is needed. A reducer can
+                    // therefore help only with Donate; it does not reduce the {2} cumulative upkeep.
+                    extraMana += Math.min(2, getBlueSpellCostReduction(ai, ZoneType.Battlefield));
                 }
                 if (m.size() + extraMana < Integer.parseInt(value)) {
                     dontCast = true;
@@ -331,6 +334,61 @@ public class PermanentAi extends SpellAbilityAi {
         }
 
         return dontCast;
+    }
+
+    /**
+     * Amount by which the cards in {@code zone} reduce spells that are blue (Illusions of Grandeur and Donate).
+     * This reads the actual ReduceCost static abilities rather than relying on the names of particular medallions.
+     */
+    public static int getBlueSpellCostReduction(final Player ai, final ZoneType zone) {
+        if (ai == null || zone == null) {
+            return 0;
+        }
+        int reduction = 0;
+        for (final Card card : ai.getCardsIn(zone)) {
+            if (!card.isPermanent()) {
+                continue;
+            }
+            for (final StaticAbility ability : card.getStaticAbilities()) {
+                final String activator = ability.getParam("Activator");
+                if (!ability.getMode().contains(StaticAbilityMode.ReduceCost)
+                        || activator != null && !"You".equals(activator) && !"Any".equals(activator)) {
+                    continue;
+                }
+                final String valid = ability.getParam("ValidCard");
+                if (valid != null && (valid.contains("OppCtrl") || !"Card".equals(valid)
+                        && !valid.contains("Blue") && !valid.contains("Spell"))) {
+                    continue;
+                }
+                final String amount = ability.getParam("Amount");
+                try {
+                    reduction += amount == null ? 1 : Math.max(0, Integer.parseInt(amount));
+                } catch (final NumberFormatException ex) {
+                    // A dynamic reduction is conservatively counted as one rather than treated as unlimited.
+                    reduction++;
+                }
+            }
+        }
+        return reduction;
+    }
+
+    /** Whether a card in hand has a static ability that can reduce the cost of the blue Trix spells. */
+    public static boolean isBlueSpellCostReducer(final Card card) {
+        if (card == null || !card.isPermanent()) {
+            return false;
+        }
+        for (final StaticAbility ability : card.getStaticAbilities()) {
+            final String activator = ability.getParam("Activator");
+            if (ability.getMode().contains(StaticAbilityMode.ReduceCost)
+                    && (activator == null || "You".equals(activator) || "Any".equals(activator))) {
+                final String valid = ability.getParam("ValidCard");
+                if (valid == null || !valid.contains("OppCtrl")
+                        && ("Card".equals(valid) || valid.contains("Blue") || valid.contains("Spell"))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

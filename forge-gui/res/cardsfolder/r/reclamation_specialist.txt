@@ -1,0 +1,7 @@
+Name:Reclamation Specialist
+ManaCost:2 B
+Types:Artifact Creature Borg
+PT:2/2
+A:AB$ Draw | Cost$ 1 Sac<1/Creature.Artifact/artifact creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:{1}, Sacrifice an artifact creature: Draw a card.

@@ -621,6 +621,9 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
+            if (playedByTeammate(sa)) {
+                continue;
+            }
             prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, getGame());
         }

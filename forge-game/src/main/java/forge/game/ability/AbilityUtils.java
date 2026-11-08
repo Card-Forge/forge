@@ -472,10 +472,6 @@ public class AbilityUtils {
             } else if (hType.startsWith("Remembered")) {
                 addPlayer(card.getRemembered(), hType, players);
                 val = playerXCount(players, calcX[1], card, ability);
-            } else if (hType.equals("NonActive")) {
-                players.addAll(game.getPlayers());
-                players.remove(game.getPhaseHandler().getPlayerTurn());
-                val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("HasLost")) {
                 players.addAll(game.getLostPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
@@ -1122,7 +1118,15 @@ public class AbilityUtils {
             }
         } else if (defined.equals("AttackingPlayer")) {
             if (game.getPhaseHandler().inCombat()) {
-                players.add(game.getCombat().getAttackingPlayer());
+                // CR 805.10c: for a blocking creature, the player controlling what it blocks
+                final CardCollection blocked = game.getCombat().getAttackersBlockedBy(card);
+                if (blocked.isEmpty()) {
+                    players.add(game.getCombat().getAttackingPlayer());
+                } else {
+                    for (final Card attacker : blocked) {
+                        players.add(attacker.getController());
+                    }
+                }
             }
         } else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
@@ -2436,6 +2440,10 @@ public class AbilityUtils {
             return doXMath(player.getTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YourExtraTurns")) {
+            return doXMath(player.getExtraTurnsPlayed(), expr, c, ctb);
+        }
+
         if (sq[0].equals("NotedNumber")) {
             return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
         }
@@ -2552,8 +2560,7 @@ public class AbilityUtils {
         // Count$Domain
         if (sq[0].startsWith("Domain")) {
             int n = 0;
-            Player neededPlayer = sq[0].equals("DomainActivePlayer") ? game.getPhaseHandler().getPlayerTurn() : player;
-            CardCollection lands = neededPlayer.getLandsInPlay();
+            CardCollection lands = player.getLandsInPlay();
             for (String basic : MagicColor.Constant.BASIC_LANDS) {
                 if (!CardLists.getType(lands, basic).isEmpty()) {
                     n++;

@@ -42,6 +42,7 @@ import org.apache.commons.lang3.Strings;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -291,6 +292,22 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
+
+    /** True if the trigger's condition or effect names this triggering object, as in "that player", so it applies to each one separately (CR 805.4d, 805.10c). */
+    protected final boolean refersToTriggering(final AbilityKey key) {
+        final String name = "Triggered" + key;
+        final Predicate<String> names = v -> v.contains(name) || getHostCard().hasSVar(v) && getHostCard().getSVar(v).contains(name);
+        if (getMapParams().values().stream().anyMatch(names)) {
+            return true;
+        }
+        for (SpellAbility sa = ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+            if (sa.getMapParams().values().stream().anyMatch(names)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * requirementsCheck.

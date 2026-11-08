@@ -1,10 +1,13 @@
 package forge.ai;
 
+import java.util.Collections;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.simulation.ComboGuard;
 import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.DonateCombo;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -71,6 +74,55 @@ public class FlatMonteCarloDonateComboTest extends AITest {
         addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
         addCardToZone("Donate", ai, ZoneType.Hand);
         AssertJUnit.assertNull("Donate in hand, five sources: the upkeep of 2 and Donate's 3 next turn", verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void illusionsWaitsForCostReducersInHandToBeDeployed() {
+        setUp();
+        islands(7);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        addCardToZone("Sapphire Medallion", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("the Medallion is a setup card and should be deployed first", "donate-setup-first",
+                verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void illusionsCanUseAnAlreadyDeployedMedallionForNextTurnDonate() {
+        setUp();
+        islands(4);
+        addCardToZone("Sapphire Medallion", ai, ZoneType.Battlefield);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        AssertJUnit.assertNull("four lands plus one reduction covers the {2} upkeep and reduced Donate", verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void channelDoesNotCountAsNextTurnManaForIllusions() {
+        setUp();
+        islands(4);
+        final Card channel = addCardToZone("Channel", ai, ZoneType.Command);
+        final SpellAbility channelMana = forge.game.ability.AbilityFactory.getAbility(channel, "ABMana");
+        channel.addSpellAbility(channelMana);
+        channelMana.setActivatingPlayer(ai);
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Hand);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        AssertJUnit.assertFalse("a Command-zone Channel effect must not count as a renewable next-turn source",
+                forge.ai.ComputerUtilMana.getManaSourcesForNextTurn(ai).contains(channel));
+        AssertJUnit.assertEquals("four lands and temporary Channel mana are not a safe next-turn setup",
+                "donate-combo-incomplete", verdict("Illusions of Grandeur"));
+    }
+
+    @Test
+    public void flatMcCanDiscoverARemovedBlueCostReducer() {
+        setUp();
+        final Card medallion = addCardToZone("Sapphire Medallion", ai, ZoneType.Hand);
+        final SpellAbility cast = medallion.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Sapphire Medallion is marked AI:RemoveDeck:Random",
+                ComputerUtilCard.isCardRemRandomDeck(medallion));
+        AssertJUnit.assertTrue("AI:RemoveDeck medallions with ReduceCost statics must be candidates for FlatMC",
+                ((PlayerControllerAi) ai.getController()).getAi().isRemoveDeckCostReductionPermanent(cast));
     }
 
     @Test
@@ -155,6 +207,25 @@ public class FlatMonteCarloDonateComboTest extends AITest {
         AssertJUnit.assertNull("a creature without a cast preference", verdict("Grizzly Bears"));
     }
 
+    @Test(timeOut = 240_000)
+    public void flatMcCastsDonateForIllusionsAlreadyOnTheBattlefield() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(3); // Donate costs {2}{U}
+        addCardToZone("Illusions of Grandeur", ai, ZoneType.Battlefield);
+        addCardToZone("Donate", ai, ZoneType.Hand);
+        addCard("Hill Giant", opp);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("with Illusions in play and three blue mana, FlatMC should complete the Donate combo",
+                "Donate", play);
+    }
+
     // ------------------------------------------------------------------------------------------ the AI's next play
 
     @Test(timeOut = 240_000)
@@ -170,5 +241,71 @@ public class FlatMonteCarloDonateComboTest extends AITest {
         final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
         final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
         AssertJUnit.assertFalse("seven lands and no Donate, but the AI chose: " + play, "Illusions of Grandeur".equals(play));
+    }
+
+    @Test(timeOut = 240_000)
+    public void flatMcUsesLethalRemovalBeforeGushWhenIllusionsWasDonated() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(2); // Chain of Vapor is payable; Gush can instead return both Islands
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        addCardToZone("Chain of Vapor", ai, ZoneType.Hand);
+        addCardToZone("Gush", ai, ZoneType.Hand);
+        opp.setLife(20, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("the lethal bounce must be chosen before drawing with Gush", "Chain of Vapor", play);
+        AssertJUnit.assertTrue("Chain of Vapor must already target the donated Illusions",
+                chosen.get(0).getTargets().contains(illusions));
+    }
+
+    @Test(timeOut = 240_000)
+    public void flatMcSetsRepealXToTheDonatedIllusionsManaValue() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        fillLibrary(ai, 20);
+        fillLibrary(opp, 20);
+        islands(5); // Repeal for X=4 costs five mana; Gush can instead return two Islands
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        addCardToZone("Repeal", ai, ZoneType.Hand);
+        addCardToZone("Gush", ai, ZoneType.Hand);
+        opp.setLife(20, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+
+        final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
+        AssertJUnit.assertEquals("Repeal should remove donated Illusions before Gush", "Repeal", play);
+        AssertJUnit.assertEquals("Repeal X must match Illusions' mana value", Integer.valueOf(4),
+                chosen.get(0).getXManaCostPaid());
+        AssertJUnit.assertTrue("Repeal must target the donated Illusions", chosen.get(0).getTargets().contains(illusions));
+    }
+
+    @Test
+    public void donatedIllusionsAboveTwentyLifeIsNotAnImmediateWin() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        islands(1);
+        final Card illusions = createCard("Illusions of Grandeur", ai);
+        illusions.setGameTimestamp(game.getNextTimestamp());
+        illusions.setController(opp, game.getNextTimestamp());
+        opp.getZone(ZoneType.Battlefield).add(illusions);
+        opp.setLife(21, null);
+        addCardToZone("Chain of Vapor", ai, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertNull("losing 20 life from 21 does not finish the game",
+                DonateCombo.sureFinish(ai, Collections.singletonList(cast("Chain of Vapor"))));
     }
 }

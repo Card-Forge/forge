@@ -2096,7 +2096,7 @@ public class SpecialCardAi {
             CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
             if (cardsInGY.size() == 0) {
                 return false;
-            } else if (ai.getGame().getPhaseHandler().getPlayerTurn() != ai) {
+            } else if (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                 // The AI is not very good at deciding for what to viably do during the opp's turn when this
                 // comes from an instant speed effect (e.g. Magus of the Will)
                 return false;

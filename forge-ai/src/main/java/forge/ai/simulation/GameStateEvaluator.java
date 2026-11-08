@@ -191,7 +191,9 @@ public class GameStateEvaluator {
                 availableValue = 0;
             }
             String str = cardToString(c);
-            int multiplier = c.getController().isOpponentOf(aiPlayer) ? -1 : 1;
+            // A DonateMe permanent owned by the AI is intentionally harmful to the opponent who now controls it.
+            // Keep its value on the AI's side of the score instead of treating Donate as handing the opponent a gift.
+            int multiplier = c.getController().isOpponentOf(aiPlayer) && !DonateCombo.isGiftedTarget(aiPlayer, c) ? -1 : 1;
             debugPrint("  Battlefield: " + str + " = " + (multiplier < 0 ? "-" : "") + value);
             score += multiplier * value;
             availableScore += multiplier * availableValue;

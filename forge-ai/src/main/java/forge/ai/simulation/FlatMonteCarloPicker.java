@@ -695,6 +695,31 @@ public final class FlatMonteCarloPicker {
             }
         }
 
+        if (best == 0 && approved.isEmpty() && mode == Mode.MAIN) {
+            // The heuristics approved nothing, so index 0 is passing and a discovered play has to beat it by a margin. A
+            // plus ability of a Planeswalker is worth little in the score (two points a loyalty counter) but costs nothing
+            // else: it is taken unless the rollouts show it hurting (never worse than passing in the paired rounds).
+            int pick = -1;
+            for (int c = 1; c < evaluated; c++) {
+                final Candidate cc = cands.get(c);
+                if (cc.isHold() || !cc.extra || cc.attackers != null || !isLoyaltyPlay(cc.sa)
+                        || !ActivationGuard.gainsLoyalty(cc.sa)) {
+                    continue;
+                }
+                final int pairs = Math.min(count[0], count[c]);
+                long diff = 0;
+                for (int i = 0; i < pairs; i++) {
+                    diff += vals[c][i] - vals[0][i];
+                }
+                if (diff >= 0 && (pick < 0 || count[c] > 0 && diff > 0)) {
+                    pick = c;
+                }
+            }
+            if (pick > 0) {
+                best = pick;
+            }
+        }
+
         final Candidate chosen = cands.get(best);
         final String reason = chosen.isHold() ? "hold" : best == 0 ? "kept-heuristic"
                 : chosen.target != null ? "target-override" : "override";
@@ -872,6 +897,20 @@ public final class FlatMonteCarloPicker {
                 continue;
             }
             GameObject target = null;
+            if (isLoyaltyPlay(sa) && sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
+                // a "-X" Planeswalker ability: X and the target are decided together, with the Planeswalker kept alive
+                final XChoice.LoyaltyPlan plan = XChoice.loyaltyPlan(player, sa);
+                if (plan == null) {
+                    continue;
+                }
+                sa.setXManaCostPaid(plan.x);
+                if (plan.target != null && !applyTarget(sa, plan.target)) {
+                    continue;
+                }
+                cands.add(new Candidate(sa, plan.target, true));
+                extrasLeft--;
+                continue;
+            }
             final SpellAbility targeting = singleTargetingAbility(sa);
             if (targeting != null && TutorPlan.isLibraryTutor(sa)) {
                 if (!aimAtOpponent(player, targeting)) {
@@ -884,6 +923,9 @@ public final class FlatMonteCarloPicker {
                 }
             } else if (targeting != null) {
                 target = hostileTarget(player, sa);
+                if (target == null && isLoyaltyPlay(sa)) {
+                    target = loyaltyTarget(player, sa);
+                }
                 if (target == null) {
                     continue; // a targeted play with nothing sensible to aim at is not worth a rollout
                 }
@@ -960,14 +1002,18 @@ public final class FlatMonteCarloPicker {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null) {
             return false;
         }
-        if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
-            return false;
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()
+                && !(isLoyaltyPlay(sa) && XChoice.loyaltyPlan(sa.getHostCard().getController(), sa) != null)) {
+            return false; // an X is paid with a value the rollouts do not choose: only a "-X" with a careful plan is allowed
         }
         if (isRemoveDeckCantrip(sa)) {
             return true;
         }
         if (isManaGrantingEffect(sa)) {
             return true;
+        }
+        if (isLoyaltyPlay(sa)) {
+            return true; // a Planeswalker's ability: the rollouts weigh the loyalty and the effect against everything else
         }
         final PlayKind kind = playKind(sa);
         if (kind == PlayKind.STRATEGIC) {
@@ -1004,6 +1050,52 @@ public final class FlatMonteCarloPicker {
             }
         }
         return false;
+    }
+
+    /**
+     * A loyalty ability of a Planeswalker in play that is not idle (see {@link ActivationGuard}): Sorin's "target creature
+     * gains deathtouch and lifelink" or "you may sacrifice a Vampire". The heuristics turn many of them down (the effect
+     * alone is not worth a card, or it has a target they do not like) but the loyalty is worth points of its own, and
+     * the rollouts count them. Abilities with an X in the cost are never discovered (see {@link #isDiscoverable}).
+     */
+    static boolean isLoyaltyPlay(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return sa.isPwAbility() && sa.isActivatedAbility() && host.isPlaneswalker()
+                && host.isInZone(ZoneType.Battlefield);
+    }
+
+    /**
+     * The target of a Planeswalker's single-target ability that the heuristics did not aim: the opponent's best permanent
+     * for an effect against them (removal, damage, tapping, a curse), otherwise the AI's own best permanent or the AI
+     * itself (a pump, a counter). Null when the ability has no single target, or nothing sensible is there.
+     */
+    public static GameObject loyaltyTarget(final Player player, final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || ts.isDividedAsYouChoose()) {
+            return null;
+        }
+        final TargetRestrictions tr = ts.getTargetRestrictions();
+        if (tr == null || tr.getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return null;
+        }
+        final ApiType api = ts.getApi();
+        final boolean hostile = ts.isCurse() || api == ApiType.Destroy || api == ApiType.DealDamage || api == ApiType.Tap
+                || api == ApiType.ChangeZone || api == ApiType.Fight || api == ApiType.Sacrifice || api == ApiType.DamageAll;
+        sa.setActivatingPlayer(player);
+        GameEntity best = null;
+        int bestRank = Integer.MIN_VALUE;
+        for (final GameEntity e : tr.getAllCandidates(ts)) {
+            final Boolean own = isOwnSide(player, e);
+            if (own == null || own == hostile) {
+                continue;
+            }
+            final int rank = targetRank(player, e);
+            if (rank > bestRank) {
+                bestRank = rank;
+                best = e;
+            }
+        }
+        return best != null && applyTarget(sa, best) ? best : null;
     }
 
     /**

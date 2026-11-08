@@ -1,0 +1,6 @@
+Name:There's Coffee in that Nebula
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Plains,Permanent.nonLand+cmcLE3 | Optional$ True | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a Plains card or nonland permanent card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom in a random order.
+K:Beam me up:2 W
+Oracle:Look at the top five cards of your library. You may reveal a Plains card or nonland permanent card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom in a random order.\nBeam me up {2}{W} (You may cast this card from your graveyard for {2}{W} if you also return a creature you control to its owner's hand. Then exile this spell.)

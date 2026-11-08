@@ -1345,7 +1345,8 @@ public class Game {
             player.onCleanupPhase();
         }
         for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+            // under shared team turns this was also the turn of the card's controller
+            c.onCleanupPhase(getPhaseHandler().isPlayerTurn(c.getController()) ? c.getController() : getPhaseHandler().getPlayerTurn());
         }
         for (final Card card : getCardsInGame()) {
             card.resetActivationsPerTurn();
