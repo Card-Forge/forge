@@ -50,9 +50,16 @@ public final class UndoManager {
     private boolean heapAllows(boolean standalone) {
         final Runtime rt = Runtime.getRuntime();
         final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
-        final long estimate = standalone
-                ? lastObjects * 220L
-                : recorder.lastCaptureBytes();
+        final long estimate;
+        if (standalone) {
+            final long full = recorder.lastFullCaptureBytes();
+            estimate = full > 0 ? full : lastObjects * 220L;
+        } else if (recorder.liveBytes() > 0) {
+            // First incremental checkpoint has no measured delta yet; use a modest floor, not the full graph size.
+            estimate = Math.max(1L << 20, recorder.lastCaptureBytes());
+        } else {
+            estimate = recorder.lastFullCaptureBytes();
+        }
         final long reserve = Math.max(4L << 20, Math.min(16L << 20, rt.maxMemory() / 64L));
         return free > estimate + reserve;
     }
