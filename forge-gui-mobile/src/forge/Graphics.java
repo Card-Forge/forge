@@ -2730,10 +2730,54 @@ public class Graphics implements Disposable {
         batch.setShader(prev == arenaShader ? arenaShader : null);
     }
 
+    /** Width of a video mode: "1080p" and the like, or "WIDTHxHEIGHT" (desktop window sizes of the monitor's shape). */
+    public static int videoModeWidth(String videoMode) {
+        int x = videoMode == null ? -1 : videoMode.indexOf('x');
+        if (x > 0) {
+            try {
+                return Integer.parseInt(videoMode.substring(0, x).trim());
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        switch (videoMode == null ? "" : videoMode) {
+            case "768p": return 1366;
+            case "900p": return 1600;
+            case "1080p": return 1920;
+            case "1440p": return 2560;
+            case "2160p": return 3840;
+            default: return 1280;
+        }
+    }
+
+    /** Height of a video mode: "1080p" and the like, or "WIDTHxHEIGHT". */
+    public static int videoModeHeight(String videoMode) {
+        int x = videoMode == null ? -1 : videoMode.indexOf('x');
+        if (x > 0) {
+            try {
+                return Integer.parseInt(videoMode.substring(x + 1).trim());
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        switch (videoMode == null ? "" : videoMode) {
+            case "768p": return 768;
+            case "900p": return 900;
+            case "1080p": return 1080;
+            case "1440p": return 1440;
+            case "2160p": return 2160;
+            default: return 720;
+        }
+    }
+
     public static void setVideoMode(String videoMode) {
         if (videoMode == null)
             videoMode = "720p";
         Config.instance().getSettingData().videomode = videoMode;
+        if (videoMode.indexOf('x') > 0) { //a size of its own, "WIDTHxHEIGHT"
+            Config.instance().getSettingData().width = videoModeWidth(videoMode);
+            Config.instance().getSettingData().height = videoModeHeight(videoMode);
+            Config.instance().saveSettings();
+            return;
+        }
         switch (videoMode) {
             case "768p":
                 Config.instance().getSettingData().width = 1366;

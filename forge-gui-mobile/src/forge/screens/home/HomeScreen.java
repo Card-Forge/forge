@@ -18,6 +18,8 @@ import forge.game.GameType;
 import forge.gamemodes.replay.ReplayLauncher;
 import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.assets.FSkinFont;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
@@ -38,6 +40,14 @@ public class HomeScreen extends FScreen {
     private static final FSkinColor l00 = clrTheme.stepColor(0);
     private static final FSkinColor d80 = clrTheme.stepColor(-80);
     public static final float MAIN_MENU_WIDTH_FACTOR = 0.35f;
+
+    /**
+     * Width of the landscape menu column: 35% of the window height on a phone, and on desktop as wide as that would be
+     * at the Interface Size, so a big window does not get a column of giant buttons.
+     */
+    public static float getMainMenuWidth(float screenHeight) {
+        return Math.min(screenHeight * MAIN_MENU_WIDTH_FACTOR, Utils.scale(Utils.BASE_HEIGHT * MAIN_MENU_WIDTH_FACTOR));
+    }
 
     public static final HomeScreen instance = new HomeScreen();
 
@@ -62,6 +72,10 @@ public class HomeScreen extends FScreen {
             }
     ).iconInBackground().iconScaleFactor(1).build());
     private final ButtonScroller buttonScroller = add(new ButtonScroller());
+    //desktop: the way out at the foot of the menu column, and which Forge this is
+    private final MenuButton btnExit = add(new MenuButton(Forge.getLocalizer().getMessage("lblExit"), e -> Forge.exit(false)));
+    private final FLabel lblVersion = add(new FLabel.Builder().text("Forge " + Forge.getDeviceAdapter().getVersionString())
+            .font(FSkinFont.get(10)).textColor(FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.45f)).align(Align.left).build());
     private final List<MenuButton> buttons = new ArrayList<>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
@@ -204,6 +218,8 @@ public class HomeScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        btnExit.setVisible(false);
+        lblVersion.setVisible(false);
         float buttonWidth = width - 2 * PADDING;
         float buttonHeight = buttons.get(0).getFont().getCapHeight() * 3.5f;
         float x = PADDING;
@@ -226,7 +242,7 @@ public class HomeScreen extends FScreen {
 
     @Override
     protected float doLandscapeLayout(float width, float height) {
-        float mainMenuWidth = height * MAIN_MENU_WIDTH_FACTOR;
+        float mainMenuWidth = getMainMenuWidth(height);
         float logoSize = mainMenuWidth - 2 * PADDING;
         lblLogo.setBounds(PADDING, PADDING, logoSize, logoSize);
 
@@ -235,9 +251,20 @@ public class HomeScreen extends FScreen {
         float buttonWidth = mainMenuWidth - x;
         float buttonHeight = Utils.AVG_FINGER_HEIGHT * 0.9f;
 
+        float bottom = height;
+        boolean desktop = !GuiBase.isMobile();
+        btnExit.setVisible(desktop);
+        lblVersion.setVisible(desktop);
+        if (desktop) { //Exit and the version at the foot of the column, under the menu
+            float versionHeight = Math.round(lblVersion.getFont().getCapHeight() * 4);
+            lblVersion.setBounds(x + PADDING * 3, height - versionHeight, buttonWidth - PADDING * 3, versionHeight);
+            btnExit.setBounds(x, lblVersion.getTop() - buttonHeight, buttonWidth, buttonHeight);
+            bottom = btnExit.getTop() - PADDING;
+        }
+
         buttonScroller.buttonHeight = buttonHeight;
         buttonScroller.padding = 0;
-        buttonScroller.setBounds(x, y, buttonWidth, height - y);
+        buttonScroller.setBounds(x, y, buttonWidth, bottom - y);
 
         return width - mainMenuWidth; //move hosted screens to the right of menu
     }
@@ -255,7 +282,7 @@ public class HomeScreen extends FScreen {
         float w = getWidth();
         float h = getHeight();
         if (w > h) {
-            w = h * MAIN_MENU_WIDTH_FACTOR;
+            w = getMainMenuWidth(h);
 
             float y1 = 0;
             float h1 = h;
@@ -282,6 +309,7 @@ public class HomeScreen extends FScreen {
             if (Frost.isOn()) { //frosted navigation column: slate glass, the active entry washed with the accent and a bar on the left
                 g.fillGradientRect(Frost.slate(0.90f), Frost.slate(0.70f), false, 0, 0, w, h);
                 g.drawLine(1, Frost.EDGE, w, 0, w, h);
+                drawHoverBand(g, Frost.HOVER, w);
                 if (activeButtonIndex != -1) {
                     final MenuButton active = buttons.get(activeButtonIndex);
                     final float top = Math.max(buttonScroller.getTop() + active.getTop(), buttonScroller.getTop());
@@ -304,6 +332,31 @@ public class HomeScreen extends FScreen {
             if (h2 > 0) {
                 g.fillGradientRect(l00, d80, false, w1, y2, w2, h2);
             }
+            drawHoverBand(g, HOVER_FILL.getColor(), w);
+        }
+    }
+
+    /** Desktop: a faint band across the whole menu column behind the entry under the mouse. */
+    private void drawHoverBand(Graphics g, com.badlogic.gdx.graphics.Color color, float columnWidth) {
+        MenuButton pointed = btnExit.isPointedAt() ? btnExit : null;
+        float top = 0, bottom = 0;
+        if (pointed != null) {
+            top = btnExit.getTop();
+            bottom = btnExit.getBottom();
+        } else {
+            for (int i = 0; i < buttons.size(); i++) {
+                MenuButton b = buttons.get(i);
+                if (i != activeButtonIndex && b.isPointedAt()) {
+                    //clipped to the visible part of the scrolling list
+                    top = Math.max(buttonScroller.getTop() + b.getTop(), buttonScroller.getTop());
+                    bottom = Math.min(buttonScroller.getTop() + b.getBottom(), buttonScroller.getBottom());
+                    pointed = b;
+                    break;
+                }
+            }
+        }
+        if (pointed != null && bottom > top) {
+            g.fillRect(color, 0, top, columnWidth, bottom - top);
         }
     }
 
@@ -322,25 +375,32 @@ public class HomeScreen extends FScreen {
         }
     }
 
+    private static final FSkinColor HOVER_FILL = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.07f);
+
     private class MenuButton extends FButton {
         public MenuButton(String caption, FEventHandler command) {
             super(caption, command);
+        }
+
+        /** Under the mouse now (hover flags can be left over after the list scrolls under a still pointer). */
+        boolean isPointedAt() {
+            return isVisible() && isHovered() && screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY);
         }
 
         @Override
         public void draw(Graphics g) {
             if (Forge.isLandscapeMode()) {
                 //draw text only for Landscape mode
+                final boolean active = buttons.indexOf(this) == activeButtonIndex;
+                //the row under the mouse is lit across the column (desktop); the text keeps its size, so nothing jumps
+                //(the band behind it is drawn with the column, see drawHoverBand)
+                final boolean hovered = !active && isPointedAt();
                 if (Frost.isOn()) { //frosted: white text, brighter for the active entry, indented from the accent bar
-                    final boolean active = buttons.indexOf(this) == activeButtonIndex;
                     final float indent = PADDING * 3;
-                    if (isHovered() && !active) {
-                        g.fillRect(Frost.HOVER, -2 * PADDING, 0, getWidth() + 2 * PADDING, getHeight());
-                    }
-                    g.drawText(getText(), isHovered() && getFont().canIncrease() ? getFont().increase() : getFont(), active ? Frost.TEXT : Frost.TEXT_DIM, indent, 0, getWidth() - indent, getHeight(), false, Align.left, true);
+                    g.drawText(getText(), getFont(), active || hovered ? Frost.TEXT : Frost.TEXT_DIM, indent, 0, getWidth() - indent, getHeight(), false, Align.left, true);
                     return;
                 }
-                g.drawText(getText(), isHovered() && getFont().canIncrease() ? getFont().increase() : getFont(), getForeColor(), 0, 0, getWidth(), getHeight(), false, Align.left, true);
+                g.drawText(getText(), getFont(), getForeColor(), 0, 0, getWidth(), getHeight(), false, Align.left, true);
             }
             else { //draw buttons normally for portrait mode
                 super.draw(g);

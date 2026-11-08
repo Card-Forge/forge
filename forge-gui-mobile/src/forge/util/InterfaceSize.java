@@ -32,8 +32,11 @@ public final class InterfaceSize {
         return setting;
     }
 
+    private static float startHeight;
+
     /** The factor {@link Utils} applies to its height-based scale, for a window this tall at start-up. */
     public static float factor(float windowHeight) {
+        startHeight = windowHeight;
         if (AUTO.equalsIgnoreCase(setting)) {
             return windowHeight > AUTO_FULL_HEIGHT ? AUTO_FULL_HEIGHT / windowHeight : 1f;
         }
@@ -43,6 +46,11 @@ public final class InterfaceSize {
         } catch (NumberFormatException e) {
             return 1f;
         }
+    }
+
+    /** "Auto (75%)" for the Auto setting at the height the window had at start-up, the percentage otherwise. */
+    public static String describe(String value) {
+        return describe(value, startHeight);
     }
 
     /** "Auto (75%)" for the Auto setting at this window height, the percentage otherwise. */

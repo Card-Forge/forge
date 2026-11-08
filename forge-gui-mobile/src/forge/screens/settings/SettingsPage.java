@@ -30,13 +30,18 @@ import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.menu.FCheckBoxMenuItem;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.toolbox.FCheckBox;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FDialog;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
+import forge.util.InterfaceSize;
 import forge.util.Lang;
 import forge.util.Utils;
 
@@ -45,6 +50,8 @@ import java.util.*;
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FTextField txtSearch = add(new FTextField());
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
+    private final List<String> groupNames = new ArrayList<>();
+    private final CategoryNav categoryNav = add(new CategoryNav());
     private final CustomSelectSetting settingSkins;
     private final CustomSelectSetting settingCJKFonts;
 
@@ -57,15 +64,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         txtSearch.setLiveChangeEvents(true); //filter as characters are typed
         txtSearch.setChangedHandler(e -> applySearch());
 
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGameplayOptions"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("RandomDeckGeneration"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("AdvancedSettings"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("GraphicOptions"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("lblCardOverlays"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("lblVibrationOptions"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("SoundOptions"));
-        lstSettings.addGroup(Forge.getLocalizer().getMessage("ServerPreferences"));
+        addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
+        addGroup(Forge.getLocalizer().getMessage("lblGameplayOptions"));
+        addGroup(Forge.getLocalizer().getMessage("RandomDeckGeneration"));
+        addGroup(Forge.getLocalizer().getMessage("AdvancedSettings"));
+        addGroup(Forge.getLocalizer().getMessage("GraphicOptions"));
+        addGroup(Forge.getLocalizer().getMessage("lblCardOverlays"));
+        addGroup(Forge.getLocalizer().getMessage("lblVibrationOptions"));
+        addGroup(Forge.getLocalizer().getMessage("SoundOptions"));
+        addGroup(Forge.getLocalizer().getMessage("ServerPreferences"));
 
         // GENERAL SETTINGS TAB
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, Forge.getLocalizer().getMessage("cbpSelectLanguage"),
@@ -144,6 +151,33 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             /*lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
                 Forge.getLocalizer().getMessage("lblMinimizeScreenLock"),
                 Forge.getLocalizer().getMessage("nlMinimizeScreenLock")), 0);*/
+        } else if (Forge.getDeviceAdapter().hasWindowControls()) {
+            //desktop window: everything applies at once
+            lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
+                Forge.getLocalizer().getMessage("lblFullScreenMode"),
+                Forge.getLocalizer().getMessageorUseDefault("nlFullScreenModeDesktop",
+                    "Fills the monitor without a window frame. F11 or Alt+Enter switch it at any time.")) {
+                    @Override
+                    public void select() {
+                        Forge.setFullscreen(!Forge.isFullscreen());
+                    }
+
+                    @Override
+                    public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+                        FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, Forge.isFullscreen(), x + w - h, y, h, h);
+                    }
+                }, 0);
+            lstSettings.addItem(new WindowSizeSetting(), 0);
+            lstSettings.addItem(new InterfaceSizeSetting(), 0);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN,
+                Forge.getLocalizer().getMessage("lblKeepMouseInFullscreen"),
+                Forge.getLocalizer().getMessage("nlKeepMouseInFullscreen")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        Forge.updateMouseConfine();
+                    }
+                }, 0);
         } else {
             //fullscreen
             lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
@@ -925,11 +959,178 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             || (setting.description != null && setting.description.toLowerCase().contains(query)));
     }
 
+    private void addGroup(String name) {
+        groupNames.add(name);
+        lstSettings.addGroup(name);
+    }
+
+    //desktop pages with room for the category column beside a column of settings at least MIN_LIST_WIDTH wide get both;
+    //the settings column stops growing at MAX_LIST_WIDTH so values stay next to what they belong to
+    private static final float NAV_WIDTH = Utils.scale(175);
+    private static final float NAV_GAP = Utils.scale(16);
+    private static final float MIN_LIST_WIDTH = Utils.scale(480);
+    private static final float MAX_LIST_WIDTH = Utils.scale(640);
+
     @Override
     protected void doLayout(float width, float height) {
         float searchHeight = FTextField.getDefaultHeight(txtSearch.getFont());
-        txtSearch.setBounds(0, 0, width, searchHeight);
-        lstSettings.setBounds(0, searchHeight, width, height - searchHeight);
+        if (GuiBase.isMobile() || width < NAV_WIDTH + 3 * NAV_GAP + MIN_LIST_WIDTH) {
+            categoryNav.setVisible(false);
+            txtSearch.setBounds(0, 0, width, searchHeight);
+            lstSettings.setBounds(0, searchHeight, width, height - searchHeight);
+            return;
+        }
+        //a big window: categories on the left, a readable column of settings beside them, the pair centred
+        float listWidth = Math.min(MAX_LIST_WIDTH, width - NAV_WIDTH - NAV_GAP - 2 * NAV_GAP);
+        float x = Math.round((width - NAV_WIDTH - NAV_GAP - listWidth) / 2);
+        float top = NAV_GAP;
+        float listTop = top + searchHeight + NAV_GAP / 2;
+        categoryNav.setVisible(true);
+        categoryNav.setBounds(x, listTop, NAV_WIDTH, height - listTop);
+        x += NAV_WIDTH + NAV_GAP;
+        txtSearch.setBounds(x, top, listWidth, searchHeight);
+        lstSettings.setBounds(x, listTop, listWidth, height - listTop);
+    }
+
+    /** Desktop, wide pages: the setting groups down the left; the one being read is lit, a click jumps to another. */
+    private class CategoryNav extends FDisplayObject {
+        private final FSkinFont font = FSkinFont.get(13);
+
+        private float rowHeight() {
+            return Math.round(font.getCapHeight() * 3.4f);
+        }
+
+        private int indexAt(float y) {
+            int i = (int) Math.floor(y / rowHeight());
+            return i >= 0 && i < groupNames.size() ? i : -1;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            int i = indexAt(y);
+            if (lstSettings.isGroupVisible(i)) {
+                lstSettings.scrollToGroup(i);
+            }
+            return true;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            float w = getWidth(), rh = rowHeight(), pad = Utils.scale(8);
+            int current = lstSettings.getCurrentGroup();
+            int hovered = isHovered() ? indexAt(screenToLocalY(Forge.mouseMovedY)) : -1;
+            FSkinColor fore = FList.getForeColor();
+            for (int i = 0; i < groupNames.size(); i++) {
+                float y = i * rh;
+                boolean shown = lstSettings.isGroupVisible(i);
+                if (i == current) {
+                    g.fillRect(FList.getPressedColor().alphaColor(0.30f), 0, y, w, rh);
+                    g.fillRect(FList.getPressedColor(), 0, y, Math.max(2f, Utils.scale(2)), rh);
+                } else if (i == hovered && shown) {
+                    g.fillRect(FList.getPressedColor().alphaColor(0.15f), 0, y, w, rh);
+                }
+                g.drawText(groupNames.get(i), font, shown ? fore : SettingsScreen.DESC_COLOR, pad, y, w - 2 * pad, rh, false, Align.left, true);
+            }
+        }
+    }
+
+    /** Desktop: the window's size now, and sizes to set it to straight away (a window is also resizable by hand). */
+    private class WindowSizeSetting extends CustomSelectSetting {
+        WindowSizeSetting() {
+            super(FPref.UI_VIDEO_MODE, Forge.getLocalizer().getMessageorUseDefault("lblWindowSize", "Window Size"),
+                Forge.getLocalizer().getMessageorUseDefault("nlWindowSize",
+                    "Resizes the window now. It can also be dragged to any size or maximized, and opens at the size it closed at."),
+                windowSizes());
+        }
+
+        @Override
+        public void valueChanged(String newValue) {
+            int x = newValue.indexOf('x');
+            if (x < 0) {
+                return;
+            }
+            String mode = newValue.substring(0, x).trim() + "x" + newValue.substring(x + 1).trim();
+            super.valueChanged(mode);
+            Graphics.setVideoMode(mode);
+            Forge.getDeviceAdapter().setWindowSize(Graphics.videoModeWidth(mode), Graphics.videoModeHeight(mode));
+        }
+
+        @Override
+        protected String currentOption() {
+            return Forge.getScreenWidth() + " x " + Forge.getScreenHeight();
+        }
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+            String value = currentOption();
+            if (Forge.isFullscreen()) {
+                value += "  (" + Forge.getLocalizer().getMessage("lblFullScreenMode") + ")";
+            }
+            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
+    /** Window sizes that fit the monitor: the usual 16:9 ones and, on a wider or narrower monitor, ones of its shape. */
+    private static List<String> windowSizes() {
+        int[] monitor = Forge.getDeviceAdapter().getMonitorSize();
+        int mw = monitor == null ? 3840 : monitor[0], mh = monitor == null ? 2160 : monitor[1];
+        TreeSet<String> sizes = new TreeSet<>(Comparator.comparingInt((String s) -> Graphics.videoModeHeight(s))
+                .thenComparingInt(Graphics::videoModeWidth));
+        float aspect = (float) mw / mh;
+        for (String mode : ForgeConstants.VIDEO_MODES) {
+            int w = Graphics.videoModeWidth(mode), h = Graphics.videoModeHeight(mode);
+            if (w < mw && h < mh) {
+                sizes.add(w + " x " + h);
+            }
+            int shaped = Math.round(h * aspect / 2) * 2;
+            if (Math.abs(aspect - 16f / 9f) > 0.1f && shaped < mw && h < mh) {
+                sizes.add(shaped + " x " + h);
+            }
+        }
+        return new ArrayList<>(sizes);
+    }
+
+    /** Desktop: how large text and controls are drawn (restart). */
+    private class InterfaceSizeSetting extends CustomSelectSetting {
+        InterfaceSizeSetting() {
+            super(FPref.UI_INTERFACE_SIZE, Forge.getLocalizer().getMessageorUseDefault("lblInterfaceSize", "Interface Size"),
+                Forge.getLocalizer().getMessageorUseDefault("nlInterfaceSize",
+                    "How large text, buttons and lists are drawn. Auto keeps them a comfortable size on big monitors; 100% fills the window like the phone version. The Arena match board is not affected. (REQUIRES RESTART)"),
+                InterfaceSize.CHOICES);
+        }
+
+        @Override
+        public void valueChanged(String newValue) {
+            super.valueChanged(newValue);
+            if (!newValue.equalsIgnoreCase(InterfaceSize.get())) {
+                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblRestartForgeDescription"), Forge.getLocalizer().getMessage("lblRestartForge"), Forge.getLocalizer().getMessage("lblRestart"), Forge.getLocalizer().getMessage("lblLater"), result -> {
+                    if (result) {
+                        Forge.restart(true);
+                    }
+                });
+            }
+        }
+
+        @Override
+        protected String optionCaption(String option) {
+            return InterfaceSize.describe(option);
+        }
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+            g.drawText(InterfaceSize.describe(FModel.getPreferences().getPref(FPref.UI_INTERFACE_SIZE)), font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
+    /** The settings row under the mouse pointer, if any (desktop). */
+    private FDisplayObject hoveredRow() {
+        for (int i = 0; i < lstSettings.getCount(); i++) {
+            FDisplayObject row = lstSettings.getItemAt(i);
+            if (row != null && row.isVisible() && row.isHovered() && row.screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY)) {
+                return row;
+            }
+        }
+        return null;
     }
 
     private abstract class Setting {
@@ -1023,9 +1224,74 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         }
 
+        /** The option the setting has now (the stored value, unless the setting shows something else). */
+        protected String currentOption() {
+            if (pref instanceof FPref) {
+                return FModel.getPreferences().getPref((FPref) pref);
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                return FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+            }
+            return null;
+        }
+
+        /** How an option is written in the list of choices. */
+        protected String optionCaption(String option) {
+            return option;
+        }
+
         @Override
         public void select() {
+            if (!GuiBase.isMobile() && showChoicesMenu()) {
+                return;
+            }
             Forge.openScreen(new CustomSelectScreen());
+        }
+
+        /**
+         * Desktop: the choices drop down from the row under the mouse, as in any desktop program, instead of filling a
+         * screen of their own. False when there are too many to fit, or no row to hang them from.
+         */
+        private boolean showChoicesMenu() {
+            final FDisplayObject row = hoveredRow();
+            if (row == null || options.size() * FMenuItem.HEIGHT > Forge.getScreenHeight() * 0.8f) {
+                return false;
+            }
+            final String current = currentOption();
+            new FPopupMenu() {
+                @Override
+                protected void buildMenu() {
+                    for (final String option : options) {
+                        addItem(new FCheckBoxMenuItem(optionCaption(option), option.equals(current), e -> {
+                            if (!option.equals(current)) {
+                                valueChanged(option);
+                            }
+                        }));
+                    }
+                }
+
+                @Override
+                protected void drawBackground(Graphics g) {
+                    g.fillRect(FScreen.Header.getBackColor(), 0, 0, getWidth(), getHeight()); //nothing behind shows through
+                    super.drawBackground(g);
+                }
+
+                @Override
+                protected void updateSizeAndPosition() {
+                    super.updateSizeAndPosition();
+                    //hang it from the right end of the row, under the value, and keep it on the screen; it is placed in
+                    //its container (the settings screen, drawn beside the home menu), so in that screen's coordinates
+                    FDisplayObject container = getContainer();
+                    float cx = container.screenPos.x, cy = container.screenPos.y;
+                    float right = row.screenPos.x + row.getWidth() - SettingsScreen.getInsets(row.getWidth()) - cx;
+                    float x = Math.max(0, Math.min(right - getWidth(), container.getWidth() - getWidth()));
+                    float y = row.screenPos.y - cy + row.getHeight() * 0.55f;
+                    if (y + getHeight() > container.getHeight()) {
+                        y = Math.max(0, row.screenPos.y - cy + row.getHeight() * 0.45f - getHeight());
+                    }
+                    setBounds(Math.round(x), Math.round(y), getWidth(), getHeight());
+                }
+            }.show(row, 0, 0);
+            return true;
         }
 
         private class CustomSelectScreen extends FScreen {

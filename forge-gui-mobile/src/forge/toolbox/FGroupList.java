@@ -8,7 +8,8 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinTexture;
+import forge.assets.FSkinTexture;
+import forge.gui.GuiBase;
 import forge.screens.FScreen;
 import forge.toolbox.FList.DefaultListItemRenderer;
 import forge.toolbox.FList.ListItemRenderer;
@@ -48,6 +49,45 @@ public class FGroupList<E> extends FScrollPane {
 
     public void addItem(E item) {
         addItem(item, 0);
+    }
+
+    public int getGroupCount() {
+        return groups.size();
+    }
+
+    /** Whether the group shows (it has items that pass the filter). */
+    public boolean isGroupVisible(int groupIndex) {
+        return groupIndex >= 0 && groupIndex < groups.size() && groups.get(groupIndex).isVisible();
+    }
+
+    /** Scrolls the list so that the group's header is at the top (as far as the list scrolls). */
+    public void scrollToGroup(int groupIndex) {
+        if (isGroupVisible(groupIndex)) {
+            setScrollTop(groups.get(groupIndex).getTop() + getScrollTop());
+        }
+    }
+
+    /** The group being read: the last one whose header has reached a third of the way down the list. */
+    public int getCurrentGroup() {
+        float line = getHeight() / 3;
+        int current = -1;
+        for (int i = 0; i < groups.size(); i++) {
+            ListGroup group = groups.get(i);
+            if (!group.isVisible()) {
+                continue;
+            }
+            if (current < 0 || group.getTop() <= line) {
+                current = i;
+            }
+        }
+        if (getScrollTop() >= getMaxScrollTop() - 1 && getScrollTop() > 0) { //at the end the last groups can never reach the line
+            for (int i = groups.size() - 1; i >= 0; i--) {
+                if (groups.get(i).isVisible()) {
+                    return groups.get(i).getTop() < getHeight() ? Math.max(current, i) : current;
+                }
+            }
+        }
+        return current;
     }
     public void addItem(E item, int groupIndex) {
         if (groups.isEmpty()) {
@@ -298,6 +338,9 @@ public class FGroupList<E> extends FScrollPane {
     protected FSkinColor getItemFillColor(ListItem item) {
         if (item.pressed) {
             return FList.getPressedColor();
+        }
+        if (!GuiBase.isMobile() && item.isHovered() && item.screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY)) { //desktop: the row under the mouse is lit faintly
+            return FList.getPressedColor().alphaColor(0.45f);
         }
         return null;
     }
