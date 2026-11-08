@@ -257,8 +257,7 @@ public final class TimedAbilityGuard {
     }
 
     /**
-     * The charge counts at which the card changes: those named in its static abilities, or, when none can be found,
-     * the number printed on the Station keyword. Never empty for a card with Station.
+     * The charge counts at which the card changes: those named in its static abilities.
      */
     static int[] thresholds(final Card host) {
         final java.util.TreeSet<Integer> found = new java.util.TreeSet<>();

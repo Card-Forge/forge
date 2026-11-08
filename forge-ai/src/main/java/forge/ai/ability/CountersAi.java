@@ -117,7 +117,7 @@ public abstract class CountersAi extends SpellAbilityAi {
                         if (!st.isIntrinsic()) {
                             continue;
                         }
-                        Matcher m = stationPattern.matcher("Affected");
+                        Matcher m = stationPattern.matcher((st.getParam("Affected")));
                         if (!m.find()) {
                             continue;
                         }

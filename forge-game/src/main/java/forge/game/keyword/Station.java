@@ -23,17 +23,14 @@ public class Station extends SimpleKeyword {
             reminderText = String.format(reminderText, "Planet");
         }
         for (StaticAbility st : card.getStaticAbilities()) {
-            if (!st.isIntrinsic()) {
-                continue;
-            }
-            if (!"Creature".equals(st.getParam("AddType"))) {
+            if (!st.isIntrinsic() || !"Creature".equals(st.getParam("AddType"))) {
                 continue;
             }
             Matcher m = pattern.matcher(st.getParam("Affected"));
             if (!m.find()) {
                 continue;
             }
-            extra = "It's an artifact creature at " + m.group(1) + "+.";
+            extra = " It's an artifact creature at " + m.group(1) + "+.";
             break;
         }
         return reminderText + extra;
