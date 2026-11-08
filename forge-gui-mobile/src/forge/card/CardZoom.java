@@ -34,6 +34,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaFocusView;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
@@ -179,6 +181,11 @@ public class CardZoom extends FOverlay {
     }
 
     public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0, boolean advBack) {
+        //Arena look on the match screen: its own focus view shows the cards (false when they are not cards: then the zoom does)
+        if (!advBack && !nestedShow && ArenaTheme.isMatchBoard() && ArenaFocusView.show(items0, currentIndex0, activateHandler0, showBackSide)) {
+            showBackSide = false;
+            return;
+        }
         final boolean nested = nestedShow;
         nestedShow = false;
         if (!nested) backStack.clear(); // a fresh open starts a new history
@@ -206,10 +213,14 @@ public class CardZoom extends FOverlay {
     }
 
     public static boolean isOpen() {
-        return cardZoom.isVisible();
+        return cardZoom.isVisible() || ArenaFocusView.isOpen();
     }
 
     public static void hideZoom() {
+        if (ArenaFocusView.isOpen()) {
+            ArenaFocusView.hideFocus();
+            return;
+        }
         if (isAdvBack) {
             requestClose();
             return;

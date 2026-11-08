@@ -1,0 +1,394 @@
+package forge.screens.match.arena;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
+import com.google.common.collect.Multiset;
+
+import forge.Forge;
+import forge.Graphics;
+import forge.assets.FSkinFont;
+import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
+import forge.game.zone.ZoneType;
+import forge.gui.card.CardDetailUtil;
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.screens.match.MatchController;
+import forge.toolbox.FCardPanel;
+
+/**
+ * The Arena hover preview (port of the Swing {@code ArenaCardPreview}): a large copy of the card under the pointer.
+ * A card in the hand rises in place over its own slot; a card anywhere else shows at the side of the window away from
+ * it, with a slim glass panel beside it saying what is true of it right now that the printed card does not: counters,
+ * tapped, summoning sick, in combat, phased out, face down, damage, and any rules text it has been given. Where its
+ * power or toughness differ from the printed ones, a plate with the current values covers the printed box.
+ *
+ * <p>Two ways to use it, both from {@code draw()} on the render thread:</p>
+ * <ul>
+ * <li>{@link #drawHover}: call it every frame with the hovered card (or null); it places itself, works out its panel,
+ *     and fades in (120 ms) and out (90 ms) by itself.</li>
+ * <li>{@link #place} and {@link #draw} for a caller that places and fades the preview itself.</li>
+ * </ul>
+ */
+public final class ArenaCardPreview {
+    private ArenaCardPreview() { }
+
+    /** The preview's height, as a share of the window's (Swing HEIGHT_OF_WINDOW). */
+    public static final float HEIGHT_OF_WINDOW = 0.52f;
+    // Swing pixel sizes
+    private static final float GAP = 12f, PANEL_W = 250f, PAD = 10f;
+    private static final int FADE_IN_MS = 120, FADE_OUT_MS = 90;
+
+    private static final Color PANEL_FILL = ArenaTheme.rgba(10, 12, 18, 240);
+    private static final Color PANEL_RIM = ArenaTheme.rgba(255, 255, 255, 60);
+    private static final Color CHIP_FILL = ArenaTheme.rgb(0x282C36);
+    private static final Color PLATE_EDGE = ArenaTheme.rgb(0x040406);
+    private static final Color PLATE_RIM_TOP = ArenaTheme.rgb(0xFFFFFF), PLATE_RIM_BOTTOM = ArenaTheme.rgb(0xA8A49A);
+    private static final Color PLATE_TOP = ArenaTheme.rgb(0xFBF8EF), PLATE_BOTTOM = ArenaTheme.rgb(0xE0DACC);
+    private static final Color STATS_WOUNDED = ArenaTheme.rgb(0xB3261E), STATS_UP = ArenaTheme.rgb(0x1450A8),
+            STATS_DOWN = ArenaTheme.rgb(0x8A1C14);
+    private static final Color S1 = new Color(), S2 = new Color(), S3 = new Color();
+    private static final Rectangle CARD = new Rectangle();
+
+    // ---- geometry ---------------------------------------------------------------------------------------------------
+
+    /** How tall the preview is in a window this tall. */
+    public static float preferredHeight(final float screenH) {
+        return Math.round(screenH * HEIGHT_OF_WINDOW);
+    }
+
+    /** How wide the preview's card is in a window this tall. */
+    public static float preferredWidth(final float screenH) {
+        return Math.round(preferredHeight(screenH) / FCardPanel.ASPECT_RATIO);
+    }
+
+    /** The space kept round the preview and between it and its panel. */
+    public static float gap() {
+        return Math.max(4f, ArenaTheme.px(GAP));
+    }
+
+    /**
+     * Where the preview of a card at {@code anchor} (screen coordinates) goes, as Swing places it: a card in the hand
+     * rises over its own slot, its foot just above the bottom of the window; a card anywhere else shows at the side of
+     * the window away from it, 14% of the height from the top. {@code panelW} is the width of a status panel beside the
+     * card (0 for none), which goes on the side facing the middle of the window. The card's rectangle goes into
+     * {@code out}; returns whether the panel goes on its left.
+     */
+    public static boolean place(final Rectangle anchor, final boolean inHand, final float panelW, final float screenW, final float screenH,
+            final Rectangle out) {
+        final float h = preferredHeight(screenH), w = preferredWidth(screenH), gap = gap();
+        final float panel = panelW > 0f ? panelW + gap : 0f;
+        final float blockW = w + panel;
+        float x, y;
+        boolean panelLeft = false;
+        if (inHand) {
+            x = anchor.x + anchor.width / 2f - w / 2f;
+            y = screenH - h - gap;
+        } else {
+            final boolean onRight = anchor.x + anchor.width / 2f > screenW * 0.6f;
+            panelLeft = !onRight;
+            x = onRight ? gap : screenW - blockW - gap;
+            y = Math.round(screenH * 0.14f);
+        }
+        x = Math.max(gap, Math.min(screenW - blockW - gap, x));
+        y = Math.max(gap, Math.min(screenH - h - gap, y));
+        out.set(Math.round(panelLeft ? x + panel : x), Math.round(y), w, h);
+        return panelLeft;
+    }
+
+    // ---- the card ---------------------------------------------------------------------------------------------------
+
+    /**
+     * The preview's card at x, y, w, h: a soft shadow cast below it, the cyan light when it can be played now, the card
+     * itself and, when its power or toughness are not the printed ones, a plate with the current values over the
+     * printed box. {@code alpha} fades all of it.
+     */
+    public static void draw(final Graphics g, final CardView card, final float x, final float y, final float w, final float h, final float alpha) {
+        if (card == null || alpha <= 0f || w <= 0 || h <= 0) {
+            return;
+        }
+        final float old = g.getfloatAlphaComposite();
+        if (alpha < 1f) {
+            g.setAlphaComposite(old * alpha);
+        }
+        try {
+            final float r = w * 0.035f, gap = gap();
+            g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.94f, S1), x, y + gap * 0.5f, w, h, r, gap);
+            if (MatchController.instance.isActionable(card)) {
+                g.drawGlow(ArenaTheme.alpha(ArenaTheme.PLAYABLE, 0.9f, S1), x, y, w, h, r, gap * 0.85f);
+            }
+            CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top, false, false, true);
+            g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.BLACK, 0.78f, S1), x, y, w, h, r);
+            drawStatsNow(g, card, x, y, w, h);
+        } finally {
+            if (alpha < 1f) {
+                g.setAlphaComposite(old);
+            }
+        }
+    }
+
+    // what the stats plate says, worked out again only when the card or its numbers change
+    private static CardView statsOf;
+    private static int statsPower = Integer.MIN_VALUE, statsToughness, statsDamage;
+    private static String statsNow;
+    private static Color statsColour;
+
+    private static void drawStatsNow(final Graphics g, final CardView card, final float x, final float y, final float w, final float h) {
+        final CardStateView state = card.getCurrentState();
+        if (state == null || !state.isCreature() || card.isFaceDown()) {
+            return;
+        }
+        if (statsOf != card || statsPower != state.getPower() || statsToughness != state.getToughness() || statsDamage != card.getDamage()) {
+            statsOf = card;
+            statsPower = state.getPower();
+            statsToughness = state.getToughness();
+            statsDamage = card.getDamage();
+            statsNow = null;
+            int basePower = statsPower, baseToughness = statsToughness;
+            try {
+                final PaperCard printed = FModel.getMagicDb().getCommonCards().getCard(state.getName());
+                if (printed != null && printed.getRules() != null) {
+                    basePower = printed.getRules().getIntPower();
+                    baseToughness = printed.getRules().getIntToughness();
+                }
+            } catch (final RuntimeException e) {
+                // a card the database does not know (a token): the printed values are the current ones
+            }
+            if (statsPower != basePower || statsToughness != baseToughness || statsDamage > 0) {
+                statsNow = statsPower + "/" + statsToughness;
+                statsColour = statsDamage > 0 ? STATS_WOUNDED
+                        : statsPower >= basePower && statsToughness >= baseToughness ? STATS_UP : STATS_DOWN;
+            }
+        }
+        if (statsNow == null) {
+            return;
+        }
+        // large enough to hide the printed box entirely
+        final float bw = Math.round(w * 0.235f), bh = Math.round(h * 0.066f);
+        final float bx = x + w - bw - Math.round(w * 0.032f), by = y + h - bh - Math.round(h * 0.036f);
+        final float edge = Math.max(1.5f, ArenaTheme.px(2));
+        g.fillSmoothRoundRect(PLATE_EDGE, bx - edge, by - edge, bw + 2 * edge, bh + 2 * edge, (bh + 2 * edge) / 2f);
+        g.fillSmoothRoundRectGradient(PLATE_RIM_TOP, PLATE_RIM_BOTTOM, true, bx, by, bw, bh, bh / 2f);
+        final float rim = Math.max(2f, Math.round(bh * 0.09f));
+        g.fillSmoothRoundRectGradient(PLATE_TOP, PLATE_BOTTOM, true, bx + rim, by + rim, bw - 2 * rim, bh - 2 * rim, (bh - 2 * rim) / 2f);
+        final FSkinFont font = ArenaTheme.fontPx(Math.round(bh * 0.68f));
+        ArenaArt.textBold(g, statsNow, font, statsColour, bx, by, bw, bh, Align.center);
+    }
+
+    // ---- the status panel ---------------------------------------------------------------------------------------------
+
+    /** What the status panel says: chips of state, then rules text the printed card does not have. Worked out off draw(). */
+    private static final class Status {
+        final List<String> chips = new ArrayList<>();
+        final float[] chipW;
+        String body;
+        float width, height, chipH;
+        FSkinFont chipFont, bodyFont;
+        int rows;
+
+        Status(final List<String> chips0, final String body0, final float maxH) {
+            chips.addAll(chips0);
+            chipW = new float[chips.size()];
+            body = body0 == null || body0.isEmpty() ? null : body0;
+            layout(maxH);
+        }
+
+        private void layout(final float maxH) {
+            final float pad = ArenaTheme.px(PAD), most = ArenaTheme.px(PANEL_W);
+            chipFont = ArenaTheme.font(14);
+            bodyFont = ArenaTheme.font(14);
+            chipH = chipFont.getLineHeight() + ArenaTheme.px(4);
+            float widest = 0f;
+            for (int i = 0; i < chips.size(); i++) {
+                chipW[i] = ArenaArt.textWidth(chips.get(i), chipFont) + ArenaTheme.px(14);
+                widest = Math.max(widest, chipW[i]);
+            }
+            // as wide as the chips need when there is no text
+            width = body != null ? most : Math.min(most, widest + 2 * pad);
+            rows = 0;
+            float cx = 0f;
+            final float room = width - 2 * pad;
+            for (int i = 0; i < chips.size(); i++) {
+                if (rows == 0 || cx + chipW[i] > room) {
+                    rows++;
+                    cx = 0f;
+                }
+                cx += chipW[i] + ArenaTheme.px(4);
+            }
+            final float chipsH = rows * (chipH + ArenaTheme.px(4));
+            final float bodyH = body == null ? 0f : ArenaArt.rulesTextHeight(body, bodyFont, room);
+            height = Math.min(maxH, pad + chipsH + (bodyH > 0 && chipsH > 0 ? ArenaTheme.px(6) : 0f) + bodyH + pad);
+        }
+    }
+
+    /** The status of a card out of the hand (null when the printed card says it all). Allocates: not for every frame. */
+    private static Status describe(final CardView cv, final boolean inHand, final float maxH) {
+        if (inHand || cv.getZone() == ZoneType.Hand) {
+            return null;
+        }
+        final CardStateView state = cv.getCurrentState();
+        if (state == null) {
+            return null;
+        }
+        final boolean mayView = MatchController.instance.mayView(cv);
+        final List<String> chips = new ArrayList<>();
+        final Multiset<CounterType> counters = cv.getCounters();
+        if (counters != null) {
+            for (final Multiset.Entry<CounterType> e : counters.entrySet()) {
+                chips.add(e.getCount() + "x " + e.getElement().getCounterOnCardDisplayName());
+            }
+        }
+        if (cv.isFaceDown()) { chips.add(Forge.getLocalizer().getMessage("lblArenaFaceDown")); }
+        if (cv.isTapped()) { chips.add(Forge.getLocalizer().getMessage("lblArenaTapped")); }
+        if (cv.isSick()) { chips.add(Forge.getLocalizer().getMessage("lblArenaSummoningSick")); }
+        if (cv.isAttacking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaAttacking")); }
+        if (cv.isBlocking()) { chips.add(Forge.getLocalizer().getMessage("lblArenaBlocking")); }
+        if (cv.isPhasedOut()) { chips.add(Forge.getLocalizer().getMessage("lblArenaPhasedOut")); }
+        if (cv.getDamage() > 0) { chips.add(Forge.getLocalizer().getMessage("lblArenaDamage", cv.getDamage())); }
+
+        final String printed = state.getOracleText() == null ? "" : state.getOracleText();
+        final StringBuilder granted = new StringBuilder();
+        String composed = null;
+        try {
+            composed = CardDetailUtil.composeCardText(state, MatchController.instance.getGameView(), mayView);
+        } catch (final RuntimeException e) {
+            // a view the details cannot be worked out for: chips only
+        }
+        if (composed != null) {
+            for (final String line : composed.split("\\r?\\n")) {
+                final String trimmed = line.trim();
+                // counters are already in the chips
+                if (!trimmed.isEmpty() && !printed.contains(trimmed) && !trimmed.contains(" counters:")) {
+                    granted.append(granted.length() == 0 ? "" : "\n").append(trimmed);
+                }
+            }
+        }
+        if (chips.isEmpty() && granted.length() == 0) {
+            return null;
+        }
+        return new Status(chips, granted.toString(), maxH);
+    }
+
+    /** The slim glass panel: chips of state, then the text. {@code x} is its left, {@code y} its top. */
+    private static void drawStatus(final Graphics g, final Status s, final float x, final float y, final float alpha) {
+        final float pad = ArenaTheme.px(PAD), r = ArenaTheme.px(6);
+        final float old = g.getfloatAlphaComposite();
+        if (alpha < 1f) {
+            g.setAlphaComposite(old * alpha);
+        }
+        try {
+            g.drawSoftShadow(ArenaTheme.alpha(ArenaTheme.BLACK, 0.6f, S1), x, y + ArenaTheme.px(2), s.width, s.height, r, ArenaTheme.px(8));
+            g.fillSmoothRoundRect(PANEL_FILL, x, y, s.width, s.height, r);
+            g.drawSmoothRoundRect(1f, PANEL_RIM, x, y, s.width, s.height, r);
+            float cy = y + pad;
+            if (s.rows > 0) {
+                float cx = x + pad;
+                boolean first = true;
+                for (int i = 0; i < s.chips.size(); i++) {
+                    if (!first && cx + s.chipW[i] > x + s.width - pad) {
+                        cx = x + pad;
+                        cy += s.chipH + ArenaTheme.px(4);
+                    }
+                    first = false;
+                    g.fillSmoothRoundRect(CHIP_FILL, cx, cy, s.chipW[i], s.chipH, ArenaTheme.px(3));
+                    ArenaArt.text(g, s.chips.get(i), s.chipFont, ArenaTheme.WHITE, cx, cy, s.chipW[i], s.chipH, Align.center);
+                    cx += s.chipW[i] + ArenaTheme.px(4);
+                }
+                cy += s.chipH + ArenaTheme.px(10);
+            }
+            if (s.body != null) {
+                final float bottom = y + s.height - pad;
+                if (bottom > cy) {
+                    g.startClip(x, cy, s.width, bottom - cy + ArenaTheme.px(2));
+                    ArenaArt.rulesText(g, s.body, s.bodyFont, ArenaTheme.TEXT, x + pad, cy, s.width - 2 * pad, bottom - cy);
+                    g.endClip();
+                }
+            }
+        } finally {
+            if (alpha < 1f) {
+                g.setAlphaComposite(old);
+            }
+        }
+    }
+
+    // ---- the hover preview, run here ----------------------------------------------------------------------------------
+
+    private static final ArenaMotion.Fade shown = new ArenaMotion.Fade(0f);
+    private static CardView card;
+    private static final Rectangle anchor = new Rectangle();
+    private static boolean inHand;
+    private static Status status;
+    private static boolean statusKnown;
+    private static long statusFrame;
+    private static float statusMaxH;
+    /** How many frames a status is kept before it is worked out again, so a card changing under the pointer shows it. */
+    private static final int STATUS_FRAMES = 20;
+
+    /**
+     * The whole hover preview, for {@code drawOverlay} of the match screen: call it every frame with the card under the
+     * pointer and its rectangle on screen ({@code inHand} for cards in the hand), or with null when there is none. It
+     * fades in when a card comes, goes straight over to another card, and fades out once there is none.
+     */
+    public static void drawHover(final Graphics g, final CardView hovered, final Rectangle hoveredAt, final boolean hoveredInHand,
+            final float screenW, final float screenH) {
+        if (hovered != null && hoveredAt != null) {
+            if (hovered != card) {
+                card = hovered;
+                statusKnown = false;
+            }
+            anchor.set(hoveredAt);
+            inHand = hoveredInHand;
+            if (shown.goal() != 1f) {
+                shown.to(1f, FADE_IN_MS);
+            }
+        } else if (card != null && shown.goal() != 0f) {
+            shown.to(0f, FADE_OUT_MS, ArenaCardPreview::forget);
+        }
+        if (card == null) {
+            return;
+        }
+        final float a = shown.get();
+        if (a <= 0f) {
+            return;
+        }
+        final float h = preferredHeight(screenH);
+        if (!statusKnown || statusMaxH != h || ArenaMotion.frame() - statusFrame > STATUS_FRAMES) {
+            status = describe(card, inHand, h);
+            statusKnown = true;
+            statusMaxH = h;
+            statusFrame = ArenaMotion.frame();
+        }
+        final boolean panelLeft = place(anchor, inHand, status == null ? 0f : status.width, screenW, screenH, CARD);
+        // it rises a few pixels into place as it fades in
+        final float rise = Math.round((1f - a) * (gap() - 2f));
+        draw(g, card, CARD.x, CARD.y + rise, CARD.width, CARD.height, a);
+        if (status != null) {
+            final float px = panelLeft ? CARD.x - ArenaTheme.px(4) - status.width : CARD.x + CARD.width + gap();
+            drawStatus(g, status, px, CARD.y + rise, a);
+        }
+    }
+
+    /** Whether a preview is showing (or fading). */
+    public static boolean isShowing() {
+        return card != null && shown.get() > 0f;
+    }
+
+    /** Takes the preview down at once. */
+    public static void clear() {
+        shown.set(0f);
+        forget();
+    }
+
+    private static void forget() {
+        card = null;
+        status = null;
+        statusKnown = false;
+    }
+}

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -24,6 +25,8 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMagnifyView;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaEndScreen;
+import forge.screens.match.arena.ArenaTheme;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -42,6 +45,8 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private final FTextArea txtLog;
     private final OutcomesPanel pnlOutcomes;
     private final GameView game;
+    /** The Arena look of this screen (null when the look was off as the game ended): it draws and answers in its place. */
+    private ArenaEndScreen arena;
 
     public ViewWinLose(final GameView game0) {
         super(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.75f));
@@ -52,9 +57,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         lblStats = add(new FLabel.Builder().font(FSkinFont.get(26)).align(Align.center).build());
         pnlOutcomes = add(new OutcomesPanel());
 
-        btnContinue = add(new FButton());
-        btnRestart = add(new FButton());
-        btnQuit = add(new FButton());
+        btnContinue = add(new ArenaHiddenButton());
+        btnRestart = add(new ArenaHiddenButton());
+        btnQuit = add(new ArenaHiddenButton());
 
         btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
         btnContinue.setFont(FSkinFont.get(22));
@@ -68,7 +73,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n")) {
             @Override
             public boolean tap(float x, float y, int count) {
-                if (txtLog.getMaxScrollTop() > 0) {
+                if (arena == null && txtLog.getMaxScrollTop() > 0) {
                     FMagnifyView.show(txtLog, txtLog.getText(), txtLog.getTextColor(), ViewWinLose.this.getBackColor(), txtLog.getFont(), true);
                 }
                 return true;
@@ -134,9 +139,42 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             control = new ControlWinLose(this, game0);
         }
 
+        if (ArenaTheme.isMatchBoard() && !MatchController.instance.isReplay()) { //recordings keep the plain screen
+            arena = new ArenaEndScreen(new ArenaEndScreen.ViewHost() {
+                @Override
+                public void hideView() {
+                    hide();
+                }
+
+                @Override
+                public float getWidth() {
+                    return ViewWinLose.this.getWidth();
+                }
+
+                @Override
+                public float getHeight() {
+                    return ViewWinLose.this.getHeight();
+                }
+            }, game0, btnContinue, btnRestart, btnQuit, txtLog);
+            //it draws its own title, score and buttons: the plain ones stay out of sight
+            for (FDisplayObject plain : new FDisplayObject[] {lblTitle, lblStats, pnlOutcomes, lblLog, btnCopyLog, btnShowBattlefield}) {
+                plain.setVisible(false);
+            }
+        }
+
         showGameOutcomeSummary();
         showPlayerScores();
         control.showRewards();
+    }
+
+    /** The view's buttons: the mode's controller sets them up and their actions run as ever; the Arena look draws them as pills instead. */
+    private class ArenaHiddenButton extends FButton {
+        @Override
+        public void draw(Graphics g) {
+            if (arena == null) {
+                super.draw(g);
+            }
+        }
     }
 
     private String composeTitle(final GameView game) {
@@ -185,6 +223,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
     @Override
     protected void doLayout(float width, float height) {
+        if (arena != null) {
+            arena.layout(width, height);
+            return;
+        }
         float x = width * INSETS_FACTOR;
         float y = x;
         if (Forge.isLandscapeMode()) { //prevent everything being too wide in Landscape mode
@@ -265,7 +307,69 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     }
 
     @Override
+    public void setVisible(boolean visible0) {
+        final boolean was = isVisible();
+        super.setVisible(visible0);
+        if (arena != null && was != isVisible()) {
+            if (isVisible()) {
+                arena.onShown();
+            } else {
+                arena.onHidden();
+            }
+        }
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        if (arena != null) {
+            arena.drawScene(g);
+            return;
+        }
+        super.drawBackground(g);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        if (arena != null) {
+            arena.drawFront(g);
+            return;
+        }
+        super.drawOverlay(g);
+    }
+
+    @Override
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+        if (arena != null && isVisible()) {
+            arena.pointer(screenToLocalX(screenX), screenToLocalY(screenY));
+        }
+        super.buildTouchListeners(screenX, screenY, listeners);
+    }
+
+    @Override
+    public boolean press(float x, float y) {
+        return arena != null ? arena.press(x, y) : super.press(x, y);
+    }
+
+    @Override
+    public boolean release(float x, float y) {
+        return arena != null ? arena.release(x, y) : super.release(x, y);
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        return arena != null ? arena.tap(x, y, count) : super.tap(x, y, count);
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        return arena != null ? arena.fling(velocityX, velocityY) : super.fling(velocityX, velocityY);
+    }
+
+    @Override
     public boolean keyDown(int keyCode) {
+        if (arena != null && arena.keyDown(keyCode)) {
+            return true;
+        }
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
             if (Forge.isMobileAdventureMode) {
                 if (btnContinue.isEnabled()) {
