@@ -86,6 +86,45 @@ public class FlatMonteCarloDefenseTest extends AITest {
         AssertJUnit.assertNull("the Wurm eats the Bears without help (the AI chose " + play + ")", play);
     }
 
+    @Test(timeOut = LONG)
+    public void aTrickIsNeedlessWhenTheFightIsWonAnyway() {
+        setUp();
+        addCards("Forest", 1, ai);
+        final SpellAbility growth = addCardToZone("Giant Growth", ai, ZoneType.Hand).getFirstSpellAbility();
+        growth.setActivatingPlayer(ai);
+        final Card wurm = ready("Craw Wurm", ai);
+        final Card bears = ready("Grizzly Bears", opp);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, opp);
+        game.getPhaseHandler().setCombat(blocked(bears, wurm));
+        AssertJUnit.assertTrue("the 6/4 beats the 2/2", forge.ai.simulation.FlatMonteCarloPicker.needlessTrick(ai, growth));
+    }
+
+    @Test(timeOut = LONG)
+    public void aTrickIsNeededWhenTheBlockerWouldDie() {
+        setUp();
+        addCards("Forest", 1, ai);
+        final SpellAbility growth = addCardToZone("Giant Growth", ai, ZoneType.Hand).getFirstSpellAbility();
+        growth.setActivatingPlayer(ai);
+        final Card bears = ready("Grizzly Bears", ai);
+        final Card giant = ready("Hill Giant", opp);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, opp);
+        game.getPhaseHandler().setCombat(blocked(giant, bears));
+        AssertJUnit.assertFalse("the Bears die to the Giant", forge.ai.simulation.FlatMonteCarloPicker.needlessTrick(ai, growth));
+    }
+
+    @Test(timeOut = LONG)
+    public void aTrickIsNeededWhenTheOpposingCreatureWouldLive() {
+        setUp();
+        addCards("Forest", 1, ai);
+        final SpellAbility growth = addCardToZone("Giant Growth", ai, ZoneType.Hand).getFirstSpellAbility();
+        growth.setActivatingPlayer(ai);
+        final Card giant = ready("Hill Giant", ai);
+        final Card giant2 = ready("Hill Giant", opp);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, opp);
+        game.getPhaseHandler().setCombat(blocked(giant2, giant));
+        AssertJUnit.assertFalse("3/3 against 3/3: both die, the trick saves one", forge.ai.simulation.FlatMonteCarloPicker.needlessTrick(ai, growth));
+    }
+
     // ------------------------------------------------------------------------------------------ the surprise
 
     @Test(timeOut = LONG)

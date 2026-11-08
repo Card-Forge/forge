@@ -1981,6 +1981,8 @@ public class AiController {
             return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
                     || (flatMc && LoopRunner.held(player, spellAbility))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
+                    || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
+                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.isOtherZonePlay(spellAbility)
                     && !FlatMonteCarloPicker.sparesMana(player, spellAbility)));
         });
@@ -2673,7 +2675,9 @@ public class AiController {
                 && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
-                && !TutorPlan.hasUse(player, sa)) {
+                && !TutorPlan.hasUse(player, sa)
+                && !(flatMonteCarloActive() && (SpecialActions.isDiscoverable(player, sa)
+                || HandAbilities.isDiscoverable(player, sa)))) {
             return false; // a tutor with something to find is a play for the rollouts to weigh, in every mode
         }
         try {

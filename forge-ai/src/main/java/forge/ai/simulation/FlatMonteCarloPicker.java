@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -927,6 +928,11 @@ public final class FlatMonteCarloPicker {
                 if (targeting.getTargets().isEmpty()) {
                     continue;
                 }
+            } else if (targeting != null && isRecursion(sa)) {
+                target = recursionTarget(player, sa); // one's own card in the graveyard, not an opposing permanent
+                if (target == null) {
+                    continue;
+                }
             } else if (targeting != null) {
                 target = hostileTarget(player, sa);
                 if (target == null && isSavingPlay(player, sa)) {
@@ -1109,7 +1115,43 @@ public final class FlatMonteCarloPicker {
         final ApiType api = sa.getApi();
         return api == ApiType.Token || api == ApiType.CopyPermanent || api == ApiType.PutCounter
                 || api == ApiType.PutCounterAll || api == ApiType.ChangeZone && !sa.usesTargeting()
-                && !"Library".equals(sa.getParamOrDefault("Origin", ""));
+                && !"Library".equals(sa.getParamOrDefault("Origin", ""))
+                || api == ApiType.Discard || api == ApiType.LoseLife || api == ApiType.Animate || isRecursion(sa);
+    }
+
+    /** A targeted ability of a graveyard or exile card that brings a card back to the hand or the battlefield. */
+    static boolean isRecursion(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.ChangeZone || !sa.usesTargeting()) {
+            return false;
+        }
+        final String origin = sa.getParamOrDefault("Origin", "");
+        final String destination = sa.getParamOrDefault("Destination", "");
+        return (origin.contains("Graveyard") || origin.contains("Exile"))
+                && ("Hand".equals(destination) || "Battlefield".equals(destination));
+    }
+
+    /** The best card of the AI's own that a recursion ability can bring back: the best creature, else the dearest card. */
+    static GameObject recursionTarget(final Player player, final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || ts.getTargetRestrictions() == null
+                || ts.getTargetRestrictions().getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return null;
+        }
+        sa.setActivatingPlayer(player);
+        Card best = null;
+        int bestValue = Integer.MIN_VALUE;
+        for (final GameEntity e : ts.getTargetRestrictions().getAllCandidates(ts)) {
+            if (!(e instanceof Card) || !player.equals(((Card) e).getOwner()) || e.equals(sa.getHostCard())) {
+                continue;
+            }
+            final Card c = (Card) e;
+            final int value = c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 100 + 10 * c.getCMC();
+            if (value > bestValue) {
+                bestValue = value;
+                best = c;
+            }
+        }
+        return best != null && applyTarget(sa, best) ? best : null;
     }
 
     /**
@@ -1146,7 +1188,7 @@ public final class FlatMonteCarloPicker {
             }
             int cheapest = Integer.MAX_VALUE;
             for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-                if (!c.isLand() && c.getCMC() <= available) {
+                if (!c.isLand() && c != sa.getHostCard() && c.getCMC() <= available) {
                     cheapest = Math.min(cheapest, c.getCMC());
                 }
             }
@@ -1834,7 +1876,8 @@ public final class FlatMonteCarloPicker {
             value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
         }
         if (cand != null && cand.sa != null) {
-            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg);
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg) + SpecialActions.bonus(cand.sa, cfg)
+                    + HandAbilities.bonus(cand.sa, cfg);
         }
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
     }
@@ -1905,6 +1948,12 @@ public final class FlatMonteCarloPicker {
         }
         if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             return false;
+        }
+        if (HandAbilities.isReinforce(sa)) {
+            return true; // counters for a discarded card, once the blocks show which creature they win the fight for
+        }
+        if (SpecialActions.isTurnFaceUp(sa)) {
+            return true; // a morph turned up once the blocks are down: the opponent decided without knowing what it is
         }
         if (sa.isNinjutsu()) {
             return true; // swap an unblocked attacker for the ninja: the classic bait, the block cannot be changed any more
@@ -2007,6 +2056,56 @@ public final class FlatMonteCarloPicker {
             }
         }
         return best != null && applyTarget(sa, best) ? best : null;
+    }
+
+    /**
+     * A pump spell once the blocks are down that cannot change the fight: every creature of the AI's in the combat
+     * survives it and every creature of the opponent's that fights one of them dies, with no help. The trick would only
+     * spend a card (and the mana, and the surprise) on a fight that is won. An attacker that is not blocked is a use for
+     * it (damage), and so is any creature that would die or any opposing one that would live.
+     */
+    public static boolean needlessTrick(final Player ai, final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || sa.getApi() != ApiType.Pump || sa.getHostCard() == null
+                || sa.getParamOrDefault("NumAtt", "").startsWith("-") || sa.getParamOrDefault("NumDef", "").startsWith("-")) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final forge.game.combat.Combat combat = ph.getCombat();
+        if (combat == null || !ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            return false;
+        }
+        boolean mine = false;
+        try {
+            for (final Card attacker : combat.getAttackers()) {
+                if (ai.equals(attacker.getController())) {
+                    mine = true;
+                    if (!combat.isBlocked(attacker) || ComputerUtilCombat.combatantWouldBeDestroyed(ai, attacker, combat)) {
+                        return false;
+                    }
+                    for (final Card blocker : combat.getBlockers(attacker)) {
+                        if (!ComputerUtilCombat.combatantWouldBeDestroyed(ai, blocker, combat)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            for (final Card blocker : combat.getAllBlockers()) {
+                if (ai.equals(blocker.getController())) {
+                    mine = true;
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, blocker, combat)) {
+                        return false;
+                    }
+                    for (final Card attacker : combat.getAttackersBlockedBy(blocker)) {
+                        if (!ComputerUtilCombat.combatantWouldBeDestroyed(ai, attacker, combat)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            return false; // a refinement only
+        }
+        return mine;
     }
 
     /**
