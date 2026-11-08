@@ -14,6 +14,7 @@ import forge.assets.TextRenderer;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -120,6 +121,8 @@ public final class ArenaCards {
         public boolean raised;
         /** Set by the hand fan: the card's own height (the panel below it is the strip it rose from). */
         public float cardHeight;
+        /** Set by the hand fan: how much of the card the next one leaves uncovered, which its cost lines up with. */
+        public float costWidth;
         /** Where the pointer is over the raised hand card (0..1 across and down it): the card tilts towards it. */
         public float pointerU = 0.5f, pointerV = 0.5f;
         final ArenaMotion.Spring tiltX = new ArenaMotion.Spring(0f, 60, 0.05f), tiltY = new ArenaMotion.Spring(0f, 60, 0.05f);
@@ -819,9 +822,36 @@ public final class ArenaCards {
                 g.drawSmoothRoundRect(1f, ArenaTheme.alpha(ArenaTheme.WHITE, 0.25f, S1), x, y, w, h, radius);
             }
         }
+        drawHandCost(g, card, st, x, y, w);
         if (turned) {
             g.endTransform();
         }
+    }
+
+    private static final Color PIP_BACK = ArenaTheme.rgba(0, 0, 0, 215);
+
+    /**
+     * The cost of a hand card as bright mana pips sitting on its top edge (Swing CardPanel.drawArenaCostRow): the next
+     * card covers the printed one, so the pips line up with the right of the part it leaves showing.
+     */
+    private static void drawHandCost(final Graphics g, final CardView card, final State st, final float x, final float y, final float w) {
+        if (!MatchController.instance.mayView(card) || card.isFaceDown()) {
+            return;
+        }
+        final ManaCost cost = card.getCurrentState().getManaCost();
+        if (cost == null || cost.isNoCost() || cost.getGlyphCount() == 0) {
+            return;
+        }
+        final float size = Math.round(Math.max(ArenaTheme.px(14), w * 0.14f));
+        final float shown = st.raised || st.costWidth <= 0f ? w : Math.min(w, st.costWidth);
+        final float costW = CardFaceSymbols.getWidth(cost, size);
+        final float px = x + Math.max(2f, shown - costW - Math.round(w * 0.03f));
+        final float py = y - Math.round(size * 0.45f);
+        final int n = cost.getGlyphCount();
+        for (int i = 0; i < n; i++) {
+            g.fillSmoothCircle(PIP_BACK, px + i * size + size / 2f, py + size / 2f, size / 2f + 1f);
+        }
+        CardFaceSymbols.drawManaCost(g, cost, px, py, size);
     }
 
     /** The soft shadow a whole card casts down and to the left (Swing Sprite: 3.9% of its height, moved by 40% of that). */

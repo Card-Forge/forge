@@ -271,6 +271,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             st.fanLean = lean;
             st.raised = up;
             st.cardHeight = cardHeight;
+            st.costWidth = i == count - 1 ? cardWidth : step; //the cost lines up with what the next card leaves showing
             if (!up) {
                 add(panel);
             }
