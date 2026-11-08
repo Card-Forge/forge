@@ -14,8 +14,8 @@ import forge.Forge.KeyInputAdapter;
  * what it does. MatchScreen.arenaShortcut does the new ones (desktop, Arena look on) and {@link ArenaShortcutSheet}
  * lists them. Keys follow MatchScreen.keyDown where it already handles the same action ({@link Shortcut#existing}
  * says so), so the default look and the Arena look answer the same keys; the new ones use keys keyDown leaves free
- * (F5 revalidates the screen and the arrow keys emulate swipes globally, so those are avoided). ZOOM_CARD is listed
- * but not wired yet: it waits for the hover preview.
+ * (F5 revalidates the screen and the arrow keys emulate swipes globally, so those are avoided). Z (ZOOM_CARD) opens the
+ * card under the pointer in the focus view (MatchScreen.zoomHoveredCard).
  */
 public final class ArenaShortcuts {
     private ArenaShortcuts() { }

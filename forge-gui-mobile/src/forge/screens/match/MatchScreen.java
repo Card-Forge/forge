@@ -1170,8 +1170,7 @@ public class MatchScreen extends FScreen {
 
     /**
      * The keyboard shortcuts the Arena look adds ({@link ArenaShortcuts}, those not {@code existing}); the ones keyDown
-     * already had stay in its switch, so both looks answer them the same way. Zooming the card under the pointer
-     * waits for the hover preview, so Z falls through to keyDown as before.
+     * already had stay in its switch, so both looks answer them the same way. Z zooms the card under the pointer.
      */
     private boolean arenaShortcut(int keyCode) {
         final ArenaShortcuts.Action action = ArenaShortcuts.match(keyCode);

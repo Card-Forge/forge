@@ -22,8 +22,9 @@ import forge.toolbox.FButton;
  *     toggled from the corner menu or with S / L.</li>
  * </ul>
  * Sizes are fractions of the screen, so 21:9 and 16:9 both work; fixed Swing pixel sizes go through
- * {@link ArenaTheme#px}. Each player panel lays out its own inside (worker B): the local panel's hand runs along the
- * bottom edge of its bounds, between {@link #HAND_LEFT} and {@link #HAND_RIGHT} of the width.
+ * {@link ArenaTheme#px}. Each player panel lays out its own inside ({@code VPlayerPanel.doArenaLayout}, with the
+ * {@link ArenaBoard} fractions): field rows, portrait, phase ladder, piles and name plate; the local panel's hand fans
+ * out along the bottom edge, between {@link #HAND_LEFT} and {@link #HAND_RIGHT} of the width.
  *
  * <p>Nothing here allocates per call: results go into the caller's rectangle.</p>
  */
