@@ -1,5 +1,8 @@
 package forge.screens.match.arena;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
@@ -16,6 +19,7 @@ import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -131,6 +135,9 @@ public final class ArenaCards {
         final ArenaMotion.Spring tiltX = new ArenaMotion.Spring(0f, 60, 0.05f), tiltY = new ArenaMotion.Spring(0f, 60, 0.05f);
         private com.badlogic.gdx.graphics.Texture faceTexture;
         private TextureRegion faceRegion;
+        // the hand card's cost as the pips' image keys, in the order they are drawn, made again when the cost changes
+        private ManaCost costFor;
+        private String[] costKeys;
         /** Set by a battlefield row: drawn this much larger (a fighter) and this many cards stand in its stack. */
         public float scale = 1f;
         public int groupCount;
@@ -851,10 +858,41 @@ public final class ArenaCards {
         }
         final float size = Math.round(Math.max(ArenaTheme.px(14), w * 0.14f));
         final float shown = st.raised || st.costWidth <= 0f ? w : Math.min(w, st.costWidth);
-        final float costW = CardFaceSymbols.getWidth(cost, size);
+        if (cost != st.costFor || st.costKeys == null) {
+            st.costFor = cost;
+            st.costKeys = pipKeys(cost);
+        }
+        final String[] keys = st.costKeys;
+        final float costW = keys.length * size;
         final float px = x + Math.max(2f, shown - costW - Math.round(w * 0.03f));
         final float py = y - Math.round(size * 0.45f);
-        CardFaceSymbols.drawManaCost(g, cost, px, py, size);
+        for (int i = 0; i < keys.length; i++) { // indexed: drawing a ManaCost itself makes iterators every frame
+            CardFaceSymbols.drawSymbol(keys[i], g, px + i * size, py, size, size);
+        }
+    }
+
+    /** A cost's pips as symbol image keys in CardFaceSymbols.drawManaCost's order: X, then the generic part, then the rest. */
+    private static String[] pipKeys(final ManaCost cost) {
+        final List<String> keys = new ArrayList<>();
+        final int generic = cost.getGenericCost();
+        if (generic > 0 || cost.isPureGeneric()) {
+            for (final ManaCostShard s : cost) {
+                if (s == ManaCostShard.X) {
+                    keys.add(s.getImageKey());
+                }
+            }
+            keys.add(String.valueOf(generic));
+            for (final ManaCostShard s : cost) {
+                if (s != ManaCostShard.X) {
+                    keys.add(s.getImageKey());
+                }
+            }
+        } else {
+            for (final ManaCostShard s : cost) {
+                keys.add(s.getImageKey());
+            }
+        }
+        return keys.toArray(new String[0]);
     }
 
     private static final Color BADGE_FILL = ArenaTheme.rgba(6, 6, 8, 240);

@@ -601,11 +601,14 @@ public final class ArenaBoard {
         if (seat) {
             final float d = portraitDiameter(true);
             final float zonesX = fieldX + fieldW / 2 + Math.round(d * 0.7f);
-            final float reserve = fieldX + fieldW >= w - 4 ? Math.max(Math.round(h * 0.075f), Math.round(w * 0.06f)) : 14;
+            final float reserve = fieldX + fieldW >= w - 4
+                    ? Math.max(Math.max(Math.round(h * 0.075f), Math.round(w * 0.06f)), ArenaMatchLayout.cornerColumnWidth(h)) : 14;
             return out.set(zonesX, Math.round(h * 0.008f), Math.max(0, fieldX + fieldW - zonesX - reserve), Math.round(h * 0.076f));
         }
         final float zonesH = Math.round(h * 0.118f), zonesW = Math.round(w * 0.15f);
-        final float right = fieldX + fieldW - Math.max(Math.round(h * 0.075f), Math.round(fieldW * 0.06f));
+        // clear of the corner buttons and the card size slider under them, on a narrow window too
+        final float right = fieldX + fieldW - Math.max(Math.max(Math.round(h * 0.075f), Math.round(fieldW * 0.06f)),
+                ArenaMatchLayout.cornerColumnWidth(h));
         return out.set(right - zonesW, Math.round(h * 0.006f), zonesW, zonesH);
     }
 

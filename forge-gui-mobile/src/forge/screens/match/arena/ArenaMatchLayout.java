@@ -131,6 +131,14 @@ public final class ArenaMatchLayout {
         return Math.max(2f, ArenaTheme.pxRound(6));
     }
 
+    /** The card size slider under the corner buttons: its width and height against a corner button's size. */
+    public static final float SLIDER_W = 3.4f, SLIDER_H = 0.62f;
+
+    /** How much of the top right corner the corner buttons and the slider under them take from the window's edge. */
+    public static float cornerColumnWidth(final float h) {
+        return Math.round(cornerButtonSize(h) * SLIDER_W) + 2 * cornerGap();
+    }
+
     /** The corner menu: two round buttons side by side in the top right corner. */
     public static Rectangle cornerMenu(final float w, final float h, final Rectangle out) {
         final float s = cornerButtonSize(h), gap = cornerGap();

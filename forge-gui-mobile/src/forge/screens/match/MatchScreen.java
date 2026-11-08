@@ -274,7 +274,7 @@ public class MatchScreen extends FScreen {
         cornerMenu.setVisible(true);
         ArenaMatchLayout.cornerMenu(width, height, arenaRect);
         cornerMenu.setBounds(arenaRect.x, arenaRect.y, arenaRect.width, arenaRect.height);
-        final float sliderH = Math.round(arenaRect.height * 0.62f), sliderW = Math.round(arenaRect.height * 3.4f);
+        final float sliderH = Math.round(arenaRect.height * ArenaMatchLayout.SLIDER_H), sliderW = Math.round(arenaRect.height * ArenaMatchLayout.SLIDER_W);
         cardSizeSlider.setVisible(true);
         cardSizeSlider.setBounds(arenaRect.x + arenaRect.width - sliderW, arenaRect.y + arenaRect.height + ArenaMatchLayout.cornerGap(), sliderW, sliderH);
         placeArenaPrompt(width, height);
