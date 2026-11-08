@@ -11,6 +11,7 @@ import com.google.common.collect.Multiset;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
@@ -43,7 +44,8 @@ public final class ArenaCardPreview {
     /** The preview's height, as a share of the window's (Swing HEIGHT_OF_WINDOW). */
     public static final float HEIGHT_OF_WINDOW = 0.52f;
     // Swing pixel sizes
-    private static final float GAP = 12f, PANEL_W = 250f, PAD = 10f;
+    // Swing pixel sizes (the panel a little wider and its type a little larger than Swing's, for the GPU's lighter font)
+    private static final float GAP = 12f, PANEL_W = 320f, PAD = 12f;
     private static final int FADE_IN_MS = 120, FADE_OUT_MS = 90;
 
     private static final Color PANEL_FILL = ArenaTheme.rgba(10, 12, 18, 240);
@@ -56,6 +58,8 @@ public final class ArenaCardPreview {
             STATS_DOWN = ArenaTheme.rgb(0x8A1C14);
     private static final Color S1 = new Color(), S2 = new Color(), S3 = new Color();
     private static final Rectangle CARD = new Rectangle();
+    /** Its own text renderer: it keeps the laid-out text from frame to frame as long as the text is the same. */
+    private static final TextRenderer BODY = new TextRenderer();
 
     // ---- geometry ---------------------------------------------------------------------------------------------------
 
@@ -202,8 +206,8 @@ public final class ArenaCardPreview {
 
         private void layout(final float maxH) {
             final float pad = ArenaTheme.px(PAD), most = ArenaTheme.px(PANEL_W);
-            chipFont = ArenaTheme.font(14);
-            bodyFont = ArenaTheme.font(14);
+            chipFont = ArenaTheme.font(18);
+            bodyFont = ArenaTheme.font(18);
             chipH = chipFont.getLineHeight() + ArenaTheme.px(4);
             float widest = 0f;
             for (int i = 0; i < chips.size(); i++) {
@@ -223,7 +227,7 @@ public final class ArenaCardPreview {
                 cx += chipW[i] + ArenaTheme.px(4);
             }
             final float chipsH = rows * (chipH + ArenaTheme.px(4));
-            final float bodyH = body == null ? 0f : ArenaArt.rulesTextHeight(body, bodyFont, room);
+            final float bodyH = body == null ? 0f : BODY.getWrappedBounds(body, bodyFont, room).height;
             height = Math.min(maxH, pad + chipsH + (bodyH > 0 && chipsH > 0 ? ArenaTheme.px(6) : 0f) + bodyH + pad);
         }
     }
@@ -307,7 +311,7 @@ public final class ArenaCardPreview {
                 final float bottom = y + s.height - pad;
                 if (bottom > cy) {
                     g.startClip(x, cy, s.width, bottom - cy + ArenaTheme.px(2));
-                    ArenaArt.rulesText(g, s.body, s.bodyFont, ArenaTheme.TEXT, x + pad, cy, s.width - 2 * pad, bottom - cy);
+                    BODY.drawText(g, s.body, s.bodyFont, ArenaTheme.TEXT, x + pad, cy, s.width - 2 * pad, bottom - cy, cy, bottom - cy, true, Align.left, false);
                     g.endClip();
                 }
             }

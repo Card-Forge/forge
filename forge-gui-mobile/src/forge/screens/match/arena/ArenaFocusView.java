@@ -250,9 +250,10 @@ public final class ArenaFocusView extends FOverlay {
     private void onCardChanged() {
         details.forCard(cards.get(index), altState, handler == null ? null : handler.getActivateAction(index));
         btnActivate.visible = details.action != null;
-        btnActivate.text = details.action == null ? "" : details.action;
+        // the zoom words it for "Swipe up to %s" ("cast spell"): on a button it starts with a capital
+        btnActivate.text = details.action == null ? "" : Character.toUpperCase(details.action.charAt(0)) + details.action.substring(1);
         btnFlip.visible = canTurnOver();
-        btnFlip.text = Forge.getLocalizer().getMessageorUseDefault("lblFlip", "Flip");
+        btnFlip.text = Forge.getLocalizer().getMessageorUseDefault("lblArenaFlip", "Flip");
         lw = -1; // the panel's rows depend on the card
         ArenaMotion.requestFrame();
     }
@@ -302,10 +303,18 @@ public final class ArenaFocusView extends FOverlay {
             }
         }
         final float room = panelW - 2 * pad, bgap = ArenaTheme.px(10);
-        final float bw = shown == 0 ? 0 : (room - (shown - 1) * bgap) / shown;
+        // the action's words are the longest: its pill takes a larger share of the row
+        float weights = 0f;
+        for (final Pill p : pills) {
+            if (p.visible) {
+                weights += p.primary ? 1.7f : 1f;
+            }
+        }
+        final float unit = shown == 0 ? 0 : (room - (shown - 1) * bgap) / weights;
         float bx = panelRect.x + pad;
         for (final Pill p : pills) {
             if (p.visible) {
+                final float bw = unit * (p.primary ? 1.7f : 1f);
                 p.bounds.set(Math.round(bx), panelRect.y + panelH - pad - bh, Math.round(bw), bh);
                 bx += bw + bgap;
             } else {
@@ -806,8 +815,11 @@ public final class ArenaFocusView extends FOverlay {
             // the rules text takes what is left between
             final float textBottom = foot - ArenaTheme.px(10);
             if (!body.isEmpty() && textBottom > y) {
-                g.startClip(px + pad, y, room, textBottom - y);
-                bodyText.drawText(g, body, bodyFont, ArenaTheme.TEXT, px + pad, y, room, textBottom - y, y, textBottom - y, true, Align.left, false);
+                // the last line's descenders may reach a little into the gap below; a longer text is cut off there
+                final float reach = textBottom - y + bodyFont.getLineHeight() * 0.35f;
+                g.startClip(px + pad, y, room, reach);
+                bodyText.drawText(g, body, bodyFont, ArenaTheme.TEXT, px + pad, y, room, Math.max(reach, bodyH + bodyFont.getLineHeight()), y, reach,
+                        true, Align.left, false);
                 g.endClip();
             }
         }
@@ -851,8 +863,23 @@ public final class ArenaFocusView extends FOverlay {
                 return;
             }
             final float h = bounds.height;
-            final FSkinFont f = ArenaTheme.fontPx(Math.round(Math.min(h * 0.42f, 40f)));
-            ArenaArt.button(g, text, f, bounds.x, bounds.y + rise, bounds.width, h, primary, lit.get() > 0.5f, pressed, false, false, true);
+            if (font == null || fontH != h || fontW != bounds.width || !text.equals(fontFor)) {
+                // the largest of a few sizes at which the words fit
+                fontFor = text;
+                fontH = h;
+                fontW = bounds.width;
+                int px = Math.round(Math.min(h * 0.42f, 40f));
+                font = ArenaTheme.fontPx(px);
+                while (px > 10 && ArenaArt.textWidth(text, font) > bounds.width - h * 0.8f) {
+                    px -= 2;
+                    font = ArenaTheme.fontPx(px);
+                }
+            }
+            ArenaArt.button(g, text, font, bounds.x, bounds.y + rise, bounds.width, h, primary, lit.get() > 0.5f, pressed, false, false, true);
         }
+
+        private FSkinFont font;
+        private String fontFor;
+        private float fontH, fontW;
     }
 }
