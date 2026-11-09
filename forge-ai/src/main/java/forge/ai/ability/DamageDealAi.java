@@ -32,7 +32,6 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -1058,6 +1057,8 @@ public class DamageDealAi extends DamageAiBase {
         // Try to chain damage/debuff effects
         if (StringUtils.isNumeric(damage) || (damage.startsWith("-") && StringUtils.isNumeric(damage.substring(1)))) {
             // currently only works for predictable numeric damage
+            final List<GameEntity> targets = sa.usesTargeting()
+                    ? sa.getTargetRestrictions().getAllCandidates(sa) : List.of();
             CardCollection cards = new CardCollection();
             cards.addAll(ai.getCardsIn(ZoneType.Hand));
             cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
@@ -1091,16 +1092,13 @@ public class DamageDealAi extends DamageAiBase {
                         }
                         if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
-                                // Ensure that the chained spell can target at least the same things (or more) as the current one
-                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
-                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
-                                String[] validTgtsSa = tgtSa.getValidTgts();
-                                String[] validTgtsAb = tgtAb.getValidTgts();
-                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                // The target is chosen after adding the chained damage, so the
+                                // follow-up must be able to hit any target the first spell can choose.
+                                ab.getTargetRestrictions().applyTargetTextChanges(ab);
+                                if (targets.stream().anyMatch(target -> !ab.canTarget(target))) {
                                     continue;
                                 }
 
-                                // FIXME: should it also check restrictions for targeting players?
                                 ManaCost costSa = sa.getPayCosts().getTotalMana();
                                 ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
                                 ManaCost total = ManaCost.combine(costSa, costAb);
