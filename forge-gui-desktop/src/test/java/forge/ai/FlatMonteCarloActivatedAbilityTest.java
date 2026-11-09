@@ -17,7 +17,7 @@ import forge.game.zone.ZoneType;
  */
 public class FlatMonteCarloActivatedAbilityTest extends AITest {
     private Game game;
-    private Player ai;
+    private Player ai, opp;
 
     private void setUp() {
         game = initAndCreateGame();
@@ -55,7 +55,7 @@ public class FlatMonteCarloActivatedAbilityTest extends AITest {
         addCards("Plains", 2, ai);
         final SpellAbility equip = mine("Short Sword");
         addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
-        addCardToZone("Grizzly Bears", ai, ZoneType.Hand); // costs the two
+        addCardToZone("Silvercoat Lion", ai, ZoneType.Hand); // {1}{W}: costs the two
         AssertJUnit.assertFalse("the mana is for the second Bears", FlatMonteCarloPicker.isDiscoverable(equip));
     }
 
@@ -273,4 +273,118 @@ public class FlatMonteCarloActivatedAbilityTest extends AITest {
         final SpellAbility channel = from("Boseiju, Who Endures", ZoneType.Hand);
         AssertJUnit.assertTrue("channel: destroy an artifact, enchantment or nonbasic land", FlatMonteCarloPicker.isDiscoverable(channel));
     }
+    // ==================================================================================== MORE THAN ONE TARGET OR OPPONENT
+    @Test
+    public void aTrickWithTwoTargetsIsAimedAtTheBlockedAttacker() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        final Card blocked = addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card giant = addCardToZone("Hill Giant", opp, ZoneType.Battlefield);
+        final forge.game.combat.Combat combat = new forge.game.combat.Combat(ai);
+        combat.addAttacker(blocked, opp);
+        combat.addBlocker(blocked, giant);
+        combat.setBlocked(blocked, true);
+        game.getPhaseHandler().setCombat(combat);
+        final SpellAbility trick = addCardToZone("Appeal to Eirdu", ai, ZoneType.Hand).getFirstSpellAbility();
+        trick.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals("one or two targets: the one creature that matters", blocked,
+                forge.ai.simulation.FlatMonteCarloPicker.combatTarget(ai, trick));
+    }
+
+    @Test
+    public void aTrickInAThreePlayerGameIsAimedAtTheBlockedAttacker() {
+        game = initAndCreateThreePlayerGame();
+        ai = game.getPlayers().get(1);
+        final Player first = game.getPlayers().get(0);
+        final Player third = game.getPlayers().get(2);
+        final Card blocked = addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card free = addCardToZone("Vampire Nighthawk", ai, ZoneType.Battlefield);
+        final Card giant = addCardToZone("Hill Giant", first, ZoneType.Battlefield);
+        final forge.game.combat.Combat combat = new forge.game.combat.Combat(ai);
+        combat.addAttacker(blocked, first);
+        combat.addAttacker(free, third);
+        combat.addBlocker(blocked, giant);
+        combat.setBlocked(blocked, true);
+        game.getPhaseHandler().setCombat(combat);
+        final SpellAbility trick = addCardToZone("Giant Growth", ai, ZoneType.Hand).getFirstSpellAbility();
+        trick.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals(blocked, forge.ai.simulation.FlatMonteCarloPicker.combatTarget(ai, trick));
+    }
+
+
+    // ==================================================================================== X OF MANA, AND THE SPARE MANA
+    private SpellAbility xAbility(final String name) {
+        final Card c = addCardToZone(name, ai, ZoneType.Battlefield);
+        c.setSickness(false);
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && !sa.isManaAbility()) {
+                sa.setActivatingPlayer(ai);
+                return sa;
+            }
+        }
+        throw new IllegalStateException("no activated ability on " + name);
+    }
+
+    private void xSetUp() {
+        game = initAndCreateGame();
+        game.AI_FLAT_MONTE_CARLO = true;
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+    }
+
+    @Test
+    public void anXAbilityDamagesWhatTheManaKills() {
+        xSetUp();
+        addCards("Mountain", 4, ai);
+        final SpellAbility cinder = xAbility("Cinder Elemental"); // {X}{R}, T, sacrifice
+        final Card giant = addCardToZone("Hill Giant", opp, ZoneType.Battlefield);
+        addCardToZone("Llanowar Elves", opp, ZoneType.Battlefield);
+        final forge.ai.simulation.XChoice.LoyaltyPlan plan = forge.ai.simulation.XChoice.manaXPlan(ai, cinder);
+        AssertJUnit.assertNotNull(plan);
+        AssertJUnit.assertEquals("a Giant has toughness 3", 3, plan.x);
+        AssertJUnit.assertEquals("the best creature the mana kills", giant, plan.target);
+        AssertJUnit.assertTrue(forge.ai.simulation.FlatMonteCarloPicker.isDiscoverable(cinder));
+    }
+
+    @Test
+    public void anXAbilityWithNothingToKillHasNoPlan() {
+        xSetUp();
+        addCards("Mountain", 4, ai);
+        final SpellAbility cinder = xAbility("Cinder Elemental");
+        addCardToZone("Serra Angel", opp, ZoneType.Battlefield); // toughness 4, and the mana pays for 3
+        AssertJUnit.assertNull(forge.ai.simulation.XChoice.manaXPlan(ai, cinder));
+        AssertJUnit.assertFalse(forge.ai.simulation.FlatMonteCarloPicker.isDiscoverable(cinder));
+    }
+
+    @Test
+    public void anXAbilityWaitsForASpellTheManaIsFor() {
+        xSetUp();
+        addCards("Mountain", 4, ai);
+        final SpellAbility cinder = xAbility("Cinder Elemental");
+        addCardToZone("Hill Giant", opp, ZoneType.Battlefield);
+        addCardToZone("Hill Giant", ai, ZoneType.Hand); // {3}{R}: the four lands
+        AssertJUnit.assertFalse(forge.ai.simulation.FlatMonteCarloPicker.isDiscoverable(cinder));
+    }
+
+    @Test
+    public void aHeldInstantDoesNotTakeTheAbilitysMana() {
+        xSetUp();
+        addCards("Forest", 2, ai);
+        final SpellAbility token = xAbility("Ant Queen"); // {1}{G}
+        addCardToZone("Giant Growth", ai, ZoneType.Hand); // held for the opponent's turn: the rollouts price it
+        AssertJUnit.assertTrue(forge.ai.simulation.FlatMonteCarloPicker.sparesMana(ai, token));
+    }
+
+    @Test
+    public void aSpellOfTheAbilitysColoursIsKept() {
+        xSetUp();
+        addCards("Forest", 2, ai);
+        final SpellAbility token = xAbility("Ant Queen");
+        addCardToZone("Grizzly Bears", ai, ZoneType.Hand); // {1}{G}: the two lands
+        AssertJUnit.assertFalse(forge.ai.simulation.FlatMonteCarloPicker.sparesMana(ai, token));
+        addCards("Forest", 2, ai);
+        AssertJUnit.assertTrue("four lands pay for both", forge.ai.simulation.FlatMonteCarloPicker.sparesMana(ai, token));
+    }
+
 }

@@ -904,6 +904,20 @@ public final class FlatMonteCarloPicker {
                 continue;
             }
             GameObject target = null;
+            if (XChoice.isManaX(sa)) {
+                // an activated "{X}..." ability: X and the target are decided together, as for a "-X" loyalty ability
+                final XChoice.LoyaltyPlan plan = XChoice.manaXPlan(player, sa);
+                if (plan == null) {
+                    continue;
+                }
+                sa.setXManaCostPaid(plan.x);
+                if (plan.target != null && !applyTarget(sa, plan.target)) {
+                    continue;
+                }
+                cands.add(new Candidate(sa, plan.target, true));
+                extrasLeft--;
+                continue;
+            }
             if (isLoyaltyPlay(sa) && sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
                 // a "-X" Planeswalker ability: X and the target are decided together, with the Planeswalker kept alive
                 final XChoice.LoyaltyPlan plan = XChoice.loyaltyPlan(player, sa);
@@ -1022,6 +1036,13 @@ public final class FlatMonteCarloPicker {
     public static boolean isDiscoverable(final SpellAbility sa, final boolean broad) {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null) {
             return false;
+        }
+        if (XChoice.isManaX(sa)) {
+            // an X of mana: only with a careful plan (damage that kills something), and when the mana it takes is spare
+            final Player owner = sa.getHostCard().getController();
+            final XChoice.LoyaltyPlan plan = XChoice.manaXPlan(owner, sa);
+            return plan != null && sparesMana(owner, sa, plan.x * XChoice.xCount(sa))
+                    && ActivationGuard.problem(owner, sa) == null;
         }
         if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()
                 && !(isLoyaltyPlay(sa) && XChoice.loyaltyPlan(sa.getHostCard().getController(), sa) != null)) {
@@ -1183,8 +1204,20 @@ public final class FlatMonteCarloPicker {
      * one with nothing castable in hand to compete with.
      */
     public static boolean sparesMana(final Player ai, final SpellAbility sa) {
+        return sparesMana(ai, sa, 0);
+    }
+
+    /**
+     * The same with {@code extra} more mana for an X. A spell in the hand is kept when the ability would stop it being cast
+     * this turn: it can be paid for now (the colours too, as the AI's own payment sees them) and cannot once the ability's
+     * mana is set aside. Instants and flash cards are left out: they are held for the opponent's turn, and the rollouts
+     * already price the mana held open for them. A cost that does not leave the cheapest card its mana is the fallback
+     * when the payment check cannot say.
+     */
+    public static boolean sparesMana(final Player ai, final SpellAbility sa, final int extra) {
         try {
-            final int cost = sa.getPayCosts() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+            final int cost = (sa.getPayCosts() == null || sa.getPayCosts().getTotalMana() == null ? 0
+                    : sa.getPayCosts().getTotalMana().getCMC()) + extra;
             if (cost == 0) {
                 return true;
             }
@@ -1192,13 +1225,28 @@ public final class FlatMonteCarloPicker {
             if (cost > available) {
                 return false;
             }
-            int cheapest = Integer.MAX_VALUE;
             for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-                if (!c.isLand() && c != sa.getHostCard() && c.getCMC() <= available) {
-                    cheapest = Math.min(cheapest, c.getCMC());
+                if (c.isLand() || c == sa.getHostCard() || isInstantSpeedSpell(c)) {
+                    continue;
+                }
+                for (final SpellAbility spell : c.getSpellAbilities()) {
+                    if (!spell.isSpell()) {
+                        continue;
+                    }
+                    spell.setActivatingPlayer(ai);
+                    try {
+                        if (ComputerUtilMana.canPayManaCost(spell, ai, 0, false)
+                                && !ComputerUtilMana.canPayManaCost(spell, ai, cost, false)) {
+                            return false; // the mana is for this spell
+                        }
+                    } catch (final RuntimeException e) {
+                        if (c.getCMC() <= available && available - cost < c.getCMC()) {
+                            return false; // the payment check could not say: the plain count
+                        }
+                    }
                 }
             }
-            return cheapest == Integer.MAX_VALUE || available - cost >= cheapest;
+            return true;
         } catch (final RuntimeException e) {
             return false;
         }
@@ -2137,8 +2185,8 @@ public final class FlatMonteCarloPicker {
         final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
         final SpellAbility ts = singleTargetingAbility(sa);
         if (combat == null || ts == null || ts.getTargetRestrictions() == null
-                || ts.getTargetRestrictions().getMaxTargets(sa.getHostCard(), ts) != 1) {
-            return null;
+                || ts.getTargetRestrictions().getMinTargets(sa.getHostCard(), ts) > 1) {
+            return null; // "up to two" is aimed at the one creature that matters; one that needs two is left to the heuristics
         }
         final boolean defending = !player.getGame().getPhaseHandler().isPlayerTurn(player);
         sa.setActivatingPlayer(player);
