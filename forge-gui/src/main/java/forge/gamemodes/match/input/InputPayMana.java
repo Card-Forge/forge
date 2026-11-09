@@ -11,6 +11,7 @@ import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardCollection;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
@@ -239,6 +240,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return false;
         }
 
+        // Only generic mana is left to pay, and nothing cares which colours pay it (no "if {R} was spent", no converge
+        // or sunburst, no colour that avoids a drawback): then a colour or a source's twin abilities change nothing
+        final Card paidForHost = saPaidFor.getHostCard();
+        final boolean anyColorWillDo = colorNeeded == 0 && !saPaidFor.tracksManaSpent()
+                && (paidForHost == null || (!paidForHost.hasSVar("ManaNeededToAvoidNegativeEffect")
+                        && !(saPaidFor.isSpell() && paidForHost.hasKeyword(Keyword.SUNBURST))));
+
         final SpellAbility chosen;
 
         if (chosenAbility == null) {
@@ -318,6 +326,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
 
+            // abilities that differ only in the colour they make (and that colour doesn't matter here): take the first
+            if (choice && abilitiesMap.size() > 1 && anyColorWillDo && interchangeable(abilitiesMap.values())) {
+                choice = false;
+            }
+
             ArrayList<SpellAbilityView> choices = new ArrayList<>(abilitiesMap.keySet());
             chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one(Localizer.getInstance().getMessage("lblChooseManaAbility"),  choices)) : abilitiesMap.get(choices.get(0));
         } else {
@@ -332,6 +345,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (chosen.canProduce(MagicColor.toShortString(color)) && colors.hasAnyColor(color)) {
                 producedColorMask |= color;
             }
+        }
+
+        // which colour "any colour" (a Treasure) makes doesn't matter here: make one rather than ask. Only when all of it
+        // goes into the cost, so that no mana of a colour you didn't pick is left floating
+        if (anyColorWillDo && Integer.bitCount(producedColorMask) > 1
+                && chosen.totalAmountOfManaGenerated(saPaidFor, true) <= manaCost.getConvertedManaCost()) {
+            producedColorMask = Integer.lowestOneBit(producedColorMask);
         }
 
         chosen.setManaExpressChoice(ColorSet.fromMask(producedColorMask));
@@ -366,6 +386,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         });
 
+        return true;
+    }
+
+    /**
+     * Whether these mana abilities are the same but for the colour they make: the same cost, the same amount (all of
+     * it going into the cost), no effect beyond the mana, and mana that comes with no strings attached (restrictions,
+     * keywords, counters, triggers).
+     */
+    private boolean interchangeable(final Collection<SpellAbility> abilities) {
+        String cost = null;
+        int amount = -1;
+        for (final SpellAbility ma : abilities) {
+            if (ma.getSubAbility() != null || ma.isManaCannotCounter(saPaidFor)) {
+                return false;
+            }
+            final String c = ma.getPayCosts() == null ? "" : ma.getPayCosts().toSimpleString();
+            final int a = ma.totalAmountOfManaGenerated(saPaidFor, true);
+            if (cost == null) {
+                cost = c;
+                amount = a;
+            } else if (!cost.equals(c) || amount != a) {
+                return false;
+            }
+            if (a > manaCost.getConvertedManaCost()) { // some would be left floating, in the colour taken
+                return false;
+            }
+            for (final AbilityManaPart mp : ma.getAllManaParts()) {
+                final String restrictions = mp.getManaRestrictions();
+                if ((restrictions != null && !restrictions.isEmpty()) || mp.addKeywords(saPaidFor) || mp.addsCounters(saPaidFor)
+                        || mp.getTriggersWhenSpent() || mp.isPersistentMana() || mp.isCombatMana()) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
