@@ -198,6 +198,7 @@ public final class DoomsdayPile {
 
     private static boolean makes(final Card c, final String color) {
         for (final SpellAbility ma : c.getManaAbilities()) {
+            ManaConversion.withActivator(ma); // asking what it makes checks its conditions, which want an activator
             try {
                 if (ma.canProduce(color)) {
                     return true;
