@@ -58,7 +58,7 @@ public class ConniveEffect extends SpellAbilityEffect {
             return;
         }
 
-        PlayerCollection controllers = new PlayerCollection(game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn()));
+        PlayerCollection controllers = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
         controllers.retainAll(toConnive.stream().map(Card::getController).collect(Collectors.toSet()));
 
         for (final Player p : controllers) {

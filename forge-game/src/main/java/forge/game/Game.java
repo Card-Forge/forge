@@ -448,7 +448,9 @@ public class Game {
         final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
         final PlayerCollection players = new PlayerCollection(
                 directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
-
+        if (!players.contains(p)) {
+            p = getNextPlayerAfter(p);
+        }
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
         return players;
