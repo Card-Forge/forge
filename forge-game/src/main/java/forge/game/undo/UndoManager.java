@@ -36,6 +36,10 @@ public final class UndoManager {
     private boolean resetRecorder;
     /** Objects captured by the last snapshot, used only to budget standalone full rollback snapshots. */
     private long lastObjects;
+    /** Decaying high-water estimate for standalone AI rollback snapshots. */
+    private long lastStandaloneCaptureBytes;
+    /** Consecutive denied checkpoints before releasing a stale baseline as well. */
+    private int lowMemorySkips;
     /**
      * Heap the undo history may pin in total: the recorder's copy of the current state plus every reverse delta, as
      * counted by the memento classes. About a seventh of the maximum heap (at most 1 GB), so a phone never fills up
@@ -43,25 +47,48 @@ public final class UndoManager {
      */
     private static final long MAX_RETAINED_BYTES = Math.min(1L << 30, Runtime.getRuntime().maxMemory() / 7);
 
+    private static final long MIN_INCREMENTAL_ESTIMATE = 256L << 10;
+    private static final long MIN_HEAP_RESERVE = 512L << 10;
+    private static final long MAX_HEAP_RESERVE = 16L << 20;
+    private static final int MAX_BASELINE_REUSE_SKIPS = 3;
+
     /**
-     * Keep a fixed emergency reserve and budget the next allocation from the previous measured capture.
+     * Keep a small heap-scaled reserve and budget the next allocation from recent capture estimates.
      * Standalone AI rollback snapshots are full-graph copies, unlike the incremental human-history checkpoints.
      */
     private boolean heapAllows(boolean standalone) {
         final Runtime rt = Runtime.getRuntime();
-        final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
+        final long headroom = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
+        final long full = Math.max(recorder.lastFullCaptureBytes(), lastStandaloneCaptureBytes);
         final long estimate;
         if (standalone) {
-            final long full = recorder.lastFullCaptureBytes();
-            estimate = full > 0 ? full : lastObjects * 220L;
+            estimate = full > 0 ? full : Math.max(1L << 20, lastObjects * 220L);
         } else if (recorder.liveBytes() > 0) {
-            // First incremental checkpoint has no measured delta yet; use a modest floor, not the full graph size.
-            estimate = Math.max(1L << 20, recorder.lastCaptureBytes());
+            if (recorder.needsBaseline()) {
+                // A soft low-memory trim detached the chain. This capture refreshes the baseline
+                // without recording a reverse delta, so use its separately tracked estimate.
+                final long rebase = recorder.lastRebaseCaptureBytes();
+                final long fallback = full > 0 ? Math.min(1L << 20, full / 64L) : MIN_INCREMENTAL_ESTIMATE;
+                estimate = Math.max(MIN_INCREMENTAL_ESTIMATE, rebase > 0 ? rebase : fallback);
+            } else {
+                // Seed the first delta from a fraction of a known full capture, but never treat an
+                // unknown incremental cost as zero. The floor still permits small edits on phones.
+                final long firstDelta = full > 0 ? Math.min(1L << 20, full / 64L) : MIN_INCREMENTAL_ESTIMATE;
+                estimate = Math.max(MIN_INCREMENTAL_ESTIMATE, Math.max(firstDelta, recorder.lastCaptureBytes()));
+            }
         } else {
-            estimate = recorder.lastFullCaptureBytes();
+            // After a hard reset, retain the last known full-capture cost. On a first-ever capture
+            // use a conservative floor; no estimate can guarantee safety for an unknown graph.
+            estimate = full > 0 ? full : Math.max(1L << 20, lastObjects * 220L);
         }
-        final long reserve = Math.max(4L << 20, Math.min(16L << 20, rt.maxMemory() / 64L));
-        return free > estimate + reserve;
+        // These counters estimate retained structures and common temporary arrays, not exact JVM
+        // peak allocation. Add a margin for overlapping old/new arrays and hash-table growth.
+        final long peakEstimate = estimate + Math.max(128L << 10, estimate / 2L);
+        // At 512 MiB this is 1 MiB, rather than the previous 8 MiB. This leaves room for modest
+        // incremental checkpoints when a phone has only a few MiB of heap headroom.
+        final long reserve = Math.max(MIN_HEAP_RESERVE,
+                Math.min(MAX_HEAP_RESERVE, rt.maxMemory() / 512L));
+        return headroom > peakEstimate + reserve;
     }
 
     /** Game thread. Frees the undo history and the recorder's registry. */
@@ -70,6 +97,25 @@ public final class UndoManager {
         barrierReason = why;
         justRestored = false;
         recorder.reset();
+        lowMemorySkips = 0;
+    }
+
+    /** Drops obsolete undo deltas but keeps the latest baseline for a cheaper refresh. */
+    private synchronized void discardHistoryKeepingBaseline(String why) {
+        stack.clear();
+        barrierReason = why;
+        justRestored = false;
+        recorder.detach();
+        if (recorder.liveBytes() > 0) {
+            if (++lowMemorySkips >= MAX_BASELINE_REUSE_SKIPS) {
+                // A repeatedly stale baseline can pin objects that have since left the game.
+                // Release it eventually rather than retaining an obsolete graph indefinitely.
+                recorder.reset();
+                lowMemorySkips = 0;
+            }
+        } else {
+            lowMemorySkips = 0;
+        }
     }
 
     /** Estimated heap pinned by the history: the recorder's current state plus the delta of every step. */
@@ -128,14 +174,18 @@ public final class UndoManager {
         }
 
         if (!heapAllows(false)) {
-            dropHistory("Low memory");
-            return;
+            // Discard reverse history first but preserve the current baseline. Recheck with the
+            // cheaper baseline-only estimate; if it fits, refresh the baseline now so the next
+            // action can already be undoable.
+            discardHistoryKeepingBaseline("Low memory");
+            if (!heapAllows(false)) { return; }
         }
         final Entry entry;
         try {
             final GameMemento m = recorder.capture(game);   // slow part, no lock held
             lastObjects = m.objectCount();
             entry = new Entry(m, game.getGameLog().size());
+            lowMemorySkips = 0;
         } catch (final RuntimeException | OutOfMemoryError ex) {
             dropHistory("Low memory");
             return;
@@ -171,6 +221,8 @@ public final class UndoManager {
         try {
             final GameMemento m = GameMemento.capture(game);
             lastObjects = m.objectCount();
+            final long decayed = lastStandaloneCaptureBytes - lastStandaloneCaptureBytes / 8L;
+            lastStandaloneCaptureBytes = Math.max(m.captureBytes(), decayed);
             return new Mark(m, game.getGameLog().size());
         } catch (final RuntimeException | OutOfMemoryError ex) {
             dropHistory("Low memory");

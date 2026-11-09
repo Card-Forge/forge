@@ -154,11 +154,12 @@ public final class GameMemento {
             if (!(current instanceof ObjSnap now) || now.ci != ci) {
                 throw new IllegalStateException("object snapshot kind changed");
             }
-            final Object[] refs = now.refs.length == 0 ? NO_OBJECTS : now.refs.clone();
-            final long[] prims = now.prims.length == 0 ? NO_LONGS : now.prims.clone();
-            for (int i = 0; i < refIndexes.length; i++) { refs[refIndexes[i]] = oldRefs[i]; }
-            for (int i = 0; i < primIndexes.length; i++) { prims[primIndexes[i]] = oldPrims[i]; }
-            return new ObjSnap(ci, refs, prims);
+            // A changed current snapshot is owned by its registry Node. Older mementos retain
+            // the previous snapshot (or its reverse patch), never this newly captured snapshot.
+            // Restore in place to avoid cloning the object's complete field arrays on every undo.
+            for (int i = 0; i < refIndexes.length; i++) { now.refs[refIndexes[i]] = oldRefs[i]; }
+            for (int i = 0; i < primIndexes.length; i++) { now.prims[primIndexes[i]] = oldPrims[i]; }
+            return now;
         }
         private static long intArrayBytes(int n) { return n == 0 ? 0L : 16L + 4L * n; }
         private static long longArrayBytes(int n) { return n == 0 ? 0L : 16L + 8L * n; }
@@ -177,6 +178,14 @@ public final class GameMemento {
         @Override Snap restore(Snap current) {
             if (!(current instanceof SeqSnap now)) {
                 throw new IllegalStateException("sequence snapshot kind changed");
+            }
+            // Most list edits preserve length. Restore just the changed middle in place instead
+            // of allocating a replacement array for the entire collection.
+            if (now.items.length == oldLength) {
+                if (oldMiddle.length > 0) {
+                    System.arraycopy(oldMiddle, 0, now.items, prefix, oldMiddle.length);
+                }
+                return now;
             }
             final Object[] items = oldLength == 0 ? NO_OBJECTS : new Object[oldLength];
             if (prefix > 0) System.arraycopy(now.items, 0, items, 0, prefix);
@@ -237,6 +246,8 @@ public final class GameMemento {
     private HistoryData[] undoDeltas = NO_DELTAS; // ... old snapshot or compact reverse patch (null = new object)
     private long undoBytes;
     private int size;                            // objects in the graph at capture time
+    /** Estimated bytes allocated while this memento was captured; not an exact JVM peak measurement. */
+    private long captureBytes;
 
     public final List<String> problems = new ArrayList<>();
 
@@ -258,6 +269,9 @@ public final class GameMemento {
         if (owner != null) { return MEMENTO_BYTES + undoBytes; }
         return MEMENTO_BYTES + ((long) targets.length + snaps.length) * 8L;
     }
+
+    /** Package-private so UndoManager can budget standalone rollback snapshots. */
+    long captureBytes() { return captureBytes; }
 
     /** Object count per class, biggest first. Works for full mementos and for the recorder's newest one. */
     public List<Map.Entry<String, Integer>> histogram() {
@@ -549,6 +563,8 @@ public final class GameMemento {
         private long liveBytes;        // estimated heap of the registry: nodes plus current snapshots
         /** Conservative, decaying estimate of incremental capture allocation. */
         private long lastCaptureBytes;
+        /** Allocation estimate for refreshing a detached baseline without storing reverse deltas. */
+        private long lastRebaseCaptureBytes;
         /** Measured cost of the last initial / standalone full-graph capture; survives reset. */
         private long lastFullCaptureBytes;
 
@@ -572,6 +588,12 @@ public final class GameMemento {
 
         /** Estimated allocation of the initial full-graph capture, retained across reset for safe rebuilding. */
         public long lastFullCaptureBytes() { return lastFullCaptureBytes; }
+
+        /** Estimated allocation of a baseline refresh after history has been detached. */
+        public long lastRebaseCaptureBytes() { return lastRebaseCaptureBytes; }
+
+        /** True when a registry exists but the next capture must establish a fresh baseline. */
+        public boolean needsBaseline() { return last == null; }
 
         /** Entries in / estimated heap of the delta the last capture produced (predicts the next one). */
         public int lastDeltaEntries() { return lastDeltaEntries; }
@@ -711,13 +733,25 @@ public final class GameMemento {
                     final long captureBytes = allocatedBytes + deltaAllocatedBytes
                             + Math.max(0L, scratchBytes() - scratchBefore)
                             + MEMENTO_BYTES + arrays;
+                    m.captureBytes = captureBytes;
                     if (hadRegistry) {
-                        // Retain some history of larger incremental captures, but let it fall after quieter actions.
-                        final long decayed = lastCaptureBytes - lastCaptureBytes / 4L;
-                        lastCaptureBytes = Math.max(captureBytes, decayed);
+                        if (recording) {
+                            // Keep a conservative recent high-water mark; decay slowly after quieter actions.
+                            final long decayed = lastCaptureBytes - lastCaptureBytes / 8L;
+                            lastCaptureBytes = Math.max(captureBytes, decayed);
+                        } else {
+                            // A detached recorder refreshes its baseline without retaining reverse deltas.
+                            final long decayed = lastRebaseCaptureBytes - lastRebaseCaptureBytes / 8L;
+                            lastRebaseCaptureBytes = Math.max(captureBytes, decayed);
+                            // A successful baseline-only capture is evidence that recent work is
+                            // cheaper than the previous delta high-water mark. Lower that mark
+                            // gradually so low-memory devices can resume recording small edits.
+                            lastCaptureBytes = Math.max(captureBytes * 2L, lastCaptureBytes / 2L);
+                        }
                     } else {
                         lastFullCaptureBytes = captureBytes;
                         lastCaptureBytes = 0L;
+                        lastRebaseCaptureBytes = 0L;
                     }
                 } else {
                     m.targets = new Object[wn];
@@ -726,6 +760,10 @@ public final class GameMemento {
                         m.targets[i] = work[i].obj;
                         m.snaps[i] = work[i].snap;
                     }
+                    // Standalone snapshots (notably AI rollback marks) also report their allocation
+                    // estimate. They use a separate Recorder from human undo history.
+                    m.captureBytes = allocatedBytes + Math.max(0L, scratchBytes() - scratchBefore)
+                            + MEMENTO_BYTES + 32L + 16L * wn;
                 }
             } catch (final RuntimeException | Error e) {
                 reset();   // never leave a half-updated registry or a dangling chain behind

@@ -441,6 +441,35 @@ public class GameMementoTest {
     }
 
     @Test
+    public void detachDropsOldHistoryButKeepsBaselineForTheNextUndo() {
+        final Root r = sampleRoot();
+        final GameMemento.Recorder rec = new GameMemento.Recorder();
+        final GameMemento first = rec.capture(r);
+        r.items.get(0).value = 11;
+        final GameMemento second = rec.capture(r);
+        final long live = rec.liveBytes();
+        AssertJUnit.assertTrue(first.deltaSize() > 0);
+
+        rec.detach();
+        AssertJUnit.assertEquals("detaching must retain the current baseline", live, rec.liveBytes());
+        AssertJUnit.assertFalse(first.restore());
+        AssertJUnit.assertFalse(second.restore());
+
+        r.items.get(0).value = 22;
+        final String baselineState = fp(r);
+        final GameMemento baseline = rec.capture(r);
+        AssertJUnit.assertEquals("a detached recorder starts a fresh baseline", 0, baseline.deltaSize());
+        AssertJUnit.assertTrue("baseline refresh allocation should be tracked", rec.lastRebaseCaptureBytes() > 0);
+
+        r.items.get(0).value = 33;
+        rec.capture(r);
+        AssertJUnit.assertTrue("the next action should once again be undoable", baseline.deltaSize() > 0);
+        AssertJUnit.assertTrue(baseline.restore());
+        AssertJUnit.assertEquals(baselineState, fp(r));
+        assertAccounting(rec);
+    }
+
+    @Test
     public void aCaptureThatFailsHalfWayResetsTheRecorderInsteadOfCorruptingIt() {
         final Root r = sampleRoot();
         final GameMemento.Recorder rec = new GameMemento.Recorder();
@@ -475,6 +504,7 @@ public class GameMementoTest {
         final Root r = sampleRoot();
         final String before = fp(r);
         final GameMemento mark = GameMemento.capture(r);       // what UndoManager.markForRollback takes
+        AssertJUnit.assertTrue("standalone snapshots must report their allocation estimate", mark.captureBytes() > 0);
         final GameMemento.Recorder rec = new GameMemento.Recorder();
         rec.capture(r);
         r.items.get(0).value = 5;
