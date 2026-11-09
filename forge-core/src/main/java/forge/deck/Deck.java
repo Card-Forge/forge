@@ -390,7 +390,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             for (Entry<PaperCard, Integer> entry : pool) {
                 PaperCard card = entry.getKey();
                 String normalizedRequest = getPoolRequest(entry, namesToKeepWithNoEdition);
-                if(deckSection.validate(card))
+                // The deck editors allow any creature as commander when deck legality is off
+                if(deckSection.validate(card) || (deckSection == DeckSection.Commander && card.getRules().canBeCreature()))
                     validatedSection.add(normalizedRequest);
                 else {
                     // Card was in the wrong section. Move it to the right section.

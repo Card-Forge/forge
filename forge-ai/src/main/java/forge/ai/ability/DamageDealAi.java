@@ -1070,6 +1070,9 @@ public class DamageDealAi extends DamageAiBase {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
                     }
+                    if (ab.getActivatingPlayer() == null) {
+                        ab.setActivatingPlayer(ai); // a spell still in hand has none, and canPlay() checks need one
+                    }
                     if (!ab.canPlay()) {
                         continue;
                     }
