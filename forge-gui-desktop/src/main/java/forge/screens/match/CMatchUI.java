@@ -67,7 +67,9 @@ import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.Selection;
+import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.client.FGameClient;
 import forge.interfaces.IGameController;
@@ -112,6 +114,7 @@ import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
+import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -1029,6 +1032,29 @@ public final class CMatchUI
         }
     }
 
+    private JCheckBoxMenuItem createIgnoreForAutoPassItem(final CardView card) {
+        final IGameController controller = getGameController();
+        final boolean ignored = controller.getYieldController().isIgnoredForAutoPass(card.getId());
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblIgnoreForAutoPass"), ignored);
+        item.addActionListener(e -> controller.sendYieldUpdate(new YieldUpdate.IgnoreForAutoPass(card.getId(), !ignored)));
+        GuiUtils.setMenuItemSize(item);
+        return item;
+    }
+
+    /** Without priority there is no ability menu, so an ignored card that no prompt takes shows its checkbox alone. Returns true if shown. */
+    public boolean showIgnoreForAutoPassMenu(final CardView card, final Component parent, final int x, final int y) {
+        final VPrompt prompt = getCPrompt().getView();
+        if (card == null || prompt.getBtnOK().isEnabled() || prompt.getBtnCancel().isEnabled() || isSelectable(card)
+                || !YieldController.coversForAutoPass(getCurrentPlayer(), card)
+                || !getGameController().getYieldController().isIgnoredForAutoPass(card.getId())) {
+            return false;
+        }
+        final JPopupMenu menu = new JPopupMenu();
+        menu.add(createIgnoreForAutoPassItem(card));
+        menu.show(parent, x, y);
+        return true;
+    }
+
     @Override
     public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
@@ -1044,7 +1070,10 @@ public final class CMatchUI
         if (abilities.isEmpty()) {
             return null;
         }
-        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
+        // A right-click opens the menu even for one ability, so the card can be ignored for auto-pass
+        final boolean menuClick = triggerEvent.getButton() == MouseEvent.BUTTON3
+                && YieldController.coversForAutoPass(getCurrentPlayer(), hostCard);
+        if (!menuClick && abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
             if (abilities.get(0).canPlay()) {
                 return abilities.get(0); //only return ability if it's playable, otherwise return null
             }
@@ -1079,7 +1108,12 @@ public final class CMatchUI
             index++;
         }
 
-        if (firstEnabled >= 0) { //only show menu if at least one ability can be played
+        if (menuClick) {
+            GuiUtils.addSeparator(menu);
+            menu.add(createIgnoreForAutoPassItem(hostCard));
+        }
+
+        if (firstEnabled >= 0 || menuClick) {
             //add scroll area when too big
             // TODO: do we need a user setting for the scrollCount?
             MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);

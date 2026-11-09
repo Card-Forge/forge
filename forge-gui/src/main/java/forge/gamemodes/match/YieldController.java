@@ -12,6 +12,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
+import forge.game.zone.ZoneType;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgeConstants;
@@ -85,6 +86,7 @@ public class YieldController {
 
     private final AutoYieldStore localStore = new AutoYieldStore();
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
+    private final Set<Integer> ignoredForAutoPass = new HashSet<>();
 
     /** Populated only on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldPref} envelopes); local controllers always defer to FModel. Override wins, FModel is fallback. */
     private final EnumMap<FPref, String> prefOverrides = new EnumMap<>(FPref.class);
@@ -116,6 +118,17 @@ public class YieldController {
         EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
         if (skip) set.add(phase);
         else set.remove(phase);
+    }
+
+    public synchronized boolean isIgnoredForAutoPass(int cardId) {
+        return ignoredForAutoPass.contains(cardId);
+    }
+    public synchronized Set<Integer> getIgnoredForAutoPass() {
+        return new HashSet<>(ignoredForAutoPass);
+    }
+    private synchronized void setIgnoredForAutoPass(int cardId, boolean ignored) {
+        if (ignored) ignoredForAutoPass.add(cardId);
+        else ignoredForAutoPass.remove(cardId);
     }
 
     public boolean autoPassUntilStackEmpty() {
@@ -160,6 +173,14 @@ public class YieldController {
         autoPassUntilMarker = null;
         hasLeftMarker = false;
         activationOnMarker = false;
+    }
+
+    /** True when {@code card} is in a zone that AvailableActions scans for {@code player}. */
+    public static boolean coversForAutoPass(PlayerView player, CardView card) {
+        final ZoneType zone = card.getZone();
+        if (player == null || zone == null) return false;
+        if (player.getFlashback().contains(card)) return true;
+        return (zone == ZoneType.Hand || zone == ZoneType.Battlefield) && player.equals(card.getController());
     }
 
     /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
@@ -387,6 +408,8 @@ public class YieldController {
             return u.active();
         } else if (update instanceof YieldUpdate.CardAutoYield u) {
             activeStore().setYield(AutoYieldStore.Tier.GAME, u.cardKey(), u.active());
+        } else if (update instanceof YieldUpdate.IgnoreForAutoPass u) {
+            setIgnoredForAutoPass(u.cardId(), u.ignored());
         } else if (update instanceof YieldUpdate.TriggerDecision u) {
             activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, u.storageKey(), u.decision());
         } else if (update instanceof YieldUpdate.SetDisableYields u) {
@@ -447,12 +470,13 @@ public class YieldController {
         if (local != null && gui != null) gui.applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
     }
 
-    /** Active yields as updates, to refill a client's empty cache after reconnect. */
+    /** Active yields and ignored cards as updates, to refill a client's empty cache after reconnect. */
     public synchronized List<YieldUpdate> activeYieldUpdates(PlayerView local) {
         List<YieldUpdate> updates = new ArrayList<>();
         if (autoPassUntilEOT) updates.add(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, true));
         if (autoPassUntilStackEmpty) updates.add(new YieldUpdate.StackYield(local, true, stackYieldRespectsInterrupts));
         if (autoPassUntilMarker != null) updates.add(new YieldUpdate.SetMarker(autoPassUntilMarker.getPhaseOwner(), autoPassUntilMarker.getPhase(), false));
+        for (int cardId : ignoredForAutoPass) updates.add(new YieldUpdate.IgnoreForAutoPass(cardId, true));
         return updates;
     }
 

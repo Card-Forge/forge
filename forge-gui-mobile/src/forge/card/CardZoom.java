@@ -17,6 +17,8 @@ import forge.Graphics;
 import forge.adventure.data.ItemData;
 import forge.adventure.util.RewardActor;
 import forge.assets.FImage;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.deck.ArchetypeDeckGenerator;
@@ -26,6 +28,9 @@ import forge.deck.DeckProxy;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -108,6 +113,10 @@ public class CardZoom extends FOverlay {
 
     private static FImage imgSpecialize;
     private static boolean showSpecializeBtn, showSpecialized;
+    private static PlayerView autoPassPlayer;
+    private static boolean ignoredForAutoPass;
+    private static final Rectangle ignoreToggle = new Rectangle(OFFSCREEN, OFFSCREEN, 0, 0);
+    private static final Color ignoreToggleBack = new Color();
     private static boolean spreadNext; // set right before show() to fan the new cards out of a stack
     private static float spreadT = 1f; // 0 = stacked on the centre card, 1 = fully fanned
     private static final float SPREAD_SECONDS = 0.45f;
@@ -374,6 +383,52 @@ public class CardZoom extends FOverlay {
         }
     }
 
+    private static boolean rowShown() {
+        for (boolean on : btnOn) if (on) return true;
+        return false;
+    }
+
+    /** Below the card and its icon row when that fits, otherwise beside the card's bottom right corner, so the card stays fully visible. */
+    private static void drawIgnoreToggle(Graphics g, float w, float h, float messageHeight, float pad, float cardWidth, float cardBottom, float rowBottom) {
+        if (autoPassPlayer == null || rowShow < 0.03f) {
+            ignoreToggle.set(OFFSCREEN, OFFSCREEN, 0, 0);
+            return;
+        }
+        final FSkinFont font = FDialog.MSG_FONT;
+        final String text = Forge.getLocalizer().getMessage("lblIgnoreForAutoPass");
+        final float inner = font.getCapHeight();
+        final float box = inner * 1.6f;
+        final float th = Math.max(box + 2 * inner, Utils.AVG_FINGER_HEIGHT * 0.7f);
+        final float tw = inner + box + inner * 0.8f + font.getBounds(text).width + inner * 2f;
+        final float belowTop = (rowShown() ? Math.max(cardBottom, rowBottom) : cardBottom) + pad;
+        final float besideLeft = (w + cardWidth) / 2 + pad;
+        final boolean below = belowTop + th <= h - messageHeight - pad || besideLeft + tw > w - pad;
+        final float tx = below ? (w - tw) / 2 : besideLeft;
+        final float ty = below ? belowTop : cardBottom - th;
+
+        // Opaque, so the outline drawn as a larger fill behind it doesn't show through
+        final Color back = ignoreToggleBack.set((ignoredForAutoPass ? FDialog.getMsgForeColor() : FDialog.getMsgBackColor()).getColor());
+        back.a = 1f;
+        final FSkinColor fore = ignoredForAutoPass ? FDialog.getMsgBackColor() : FDialog.getMsgForeColor();
+        final float line = Utils.scale(1.5f);
+        final float oldAlpha = g.getfloatAlphaComposite();
+        g.setAlphaComposite(oldAlpha * rowShow);
+        g.fillRoundRect(FDialog.getMsgForeColor(), tx, ty, tw, th, th / 2);
+        g.fillRoundRect(back, tx + line, ty + line, tw - 2 * line, th - 2 * line, th / 2 - line);
+        final float bx = tx + inner, by = ty + (th - box) / 2;
+        if (ignoredForAutoPass) {
+            g.fillRect(fore, bx, by, box, box);
+            g.drawLine(line, back, bx + box * 0.22f, by + box * 0.52f, bx + box * 0.42f, by + box * 0.72f);
+            g.drawLine(line, back, bx + box * 0.42f, by + box * 0.72f, bx + box * 0.78f, by + box * 0.3f);
+        } else {
+            g.drawRect(line, fore, bx, by, box, box);
+        }
+        g.drawText(text, font, fore, bx + box + inner * 0.8f, ty, tw, th, false, Align.left, true);
+        g.setAlphaComposite(oldAlpha);
+        if (rowShow >= 0.5f) ignoreToggle.set(tx, ty, tw, th);
+        else ignoreToggle.set(OFFSCREEN, OFFSCREEN, 0, 0);
+    }
+
     private static void openSpecialized() {
         if (currentCard == null) return;
         specializedCardsList.clear();
@@ -483,6 +538,9 @@ public class CardZoom extends FOverlay {
         }
         showAltState = false;
         showSpecializeBtn = currentCard != null && currentCard.canSpecialize() && currentCard.getCurrentState().getState() == CardStateName.Original;
+        autoPassPlayer = currentCard == null ? null : findAutoPassPlayer(currentCard);
+        ignoredForAutoPass = autoPassPlayer != null && MatchController.instance.getGameController(autoPassPlayer)
+                .getYieldController().isIgnoredForAutoPass(currentCard.getId());
         cardRotated = false;
         rotAnim = 0f;
         updateRotateButton();
@@ -578,6 +636,13 @@ public class CardZoom extends FOverlay {
             return s.isPhenomenon() || s.isPlane() || (s.isBattle() && !altState)
                 || (card.getAlternateState() != null && card.getAlternateState().isBattle() && altState);
         }
+    }
+
+    private static PlayerView findAutoPassPlayer(CardView card) {
+        for (PlayerView p : MatchController.instance.getLocalPlayers()) {
+            if (YieldController.coversForAutoPass(p, card)) return p;
+        }
+        return null;
     }
 
     private static void updateRotateButton() {
@@ -831,6 +896,12 @@ public class CardZoom extends FOverlay {
             flipTap();
             return true;
         }
+        if (autoPassPlayer != null && ignoreToggle.contains(x, y)) {
+            ignoredForAutoPass = !ignoredForAutoPass;
+            MatchController.instance.getGameController(autoPassPlayer)
+                    .sendYieldUpdate(new YieldUpdate.IgnoreForAutoPass(currentCard.getId(), ignoredForAutoPass));
+            return true;
+        }
         if (fanActive) {
             if (leftArrowVisible && leftArrow.contains(x, y)) {
                 targetPos = Math.max(0, Math.round(targetPos) - 1);
@@ -1036,6 +1107,7 @@ public class CardZoom extends FOverlay {
         g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
         drawActionRow(g, w / 2, rowCy, btnD); // buttons last so nothing draws over them
+        drawIgnoreToggle(g, w, h, messageHeight, pad, cardWidth, y + cardHeight, rowCy + btnD / 2);
         g.setAlphaComposite(baseAlpha);
         interrupt(false);
     }
