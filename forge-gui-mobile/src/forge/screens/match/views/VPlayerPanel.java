@@ -461,10 +461,9 @@ public class VPlayerPanel extends FContainer {
         }
 
         //what floats beside the portrait: mana in the pool (a seat's shows as chips on its name plate, where it has room)
-        final VDisplayArea pool = tabManaPool.getDisplayArea();
-        final float poolH = Math.round(ArenaBoard.windowH() * 0.05f);
-        pool.setBounds(ArenaBoard.extrasLeft(seat, cx), cy - poolH / 2f, poolH * 6, poolH);
-        pool.setVisible(!seat && pool.getCount() > 0);
+        arenaPoolX = ArenaBoard.extrasLeft(seat, cx);
+        arenaPoolCy = cy;
+        placeArenaPool();
 
         //the zones: your hand is the fan; a zone the game opened is a strip over the board; the rest stay closed
         for (InfoTab tab : tabs) {
@@ -902,6 +901,19 @@ public class VPlayerPanel extends FContainer {
 
     public void updateManaPool() {
         tabManaPool.update();
+        if (arenaLaidOut && ArenaMatchLayout.applies()) { //the tray beside the portrait comes, goes and grows with the mana
+            placeArenaPool();
+        }
+    }
+
+    private float arenaPoolX, arenaPoolCy; //where the Arena's mana tray starts, and the middle of its height
+
+    /** The Arena's mana tray beside the portrait, as wide as the colours it holds; a seat's mana is on its name plate. */
+    private void placeArenaPool() {
+        final VManaPool pool = (VManaPool) tabManaPool.getDisplayArea();
+        final float poolH = Math.round(ArenaBoard.windowH() * 0.05f);
+        pool.setBounds(arenaPoolX, arenaPoolCy - poolH / 2f, pool.getArenaWidth(poolH), poolH);
+        pool.setVisible(!arenaSeatLadder && pool.getCount() > 0);
     }
 
     private void onCommandZoneUpdated() {
