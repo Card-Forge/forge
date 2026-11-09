@@ -234,7 +234,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         if (loginName == null || loginName.isEmpty()) {
             loginName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
         }
-        // Don't use send() here, as this.channel is not yet set!
         ctx.channel().writeAndFlush(new LoginEvent(
                 loginName,
                 Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),
