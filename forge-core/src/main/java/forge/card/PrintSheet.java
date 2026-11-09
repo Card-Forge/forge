@@ -40,7 +40,12 @@ public class PrintSheet {
 
     public PrintSheet(String name0, ItemPool<PaperCard> pool) {
         name = name0;
-        cardsWithWeights = pool != null ? pool : new ItemPool<>(PaperCard.class);
+        cardsWithWeights = new ItemPool<>(PaperCard.class);
+        if (pool != null) {
+            for (Entry<PaperCard, Integer> entry : pool) {
+                add(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     public void add(PaperCard card) {
@@ -48,6 +53,10 @@ public class PrintSheet {
     }
 
     public void add(PaperCard card, int weight) {
+        // Skip missing/unsupported scripts so boosters never deal placeholder cards.
+        if (card == null || card.getRules() == null || card.getRules().isUnsupported()) {
+            return;
+        }
         cardsWithWeights.add(card, weight);
     }
 
@@ -57,7 +66,7 @@ public class PrintSheet {
 
     public void addAll(Iterable<PaperCard> cards, int weight) {
         for (PaperCard card : cards)
-            cardsWithWeights.add(card, weight);
+            add(card, weight);
     }
 
     /**

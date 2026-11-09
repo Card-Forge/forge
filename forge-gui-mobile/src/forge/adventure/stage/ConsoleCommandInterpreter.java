@@ -26,6 +26,7 @@ import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.screens.CoverScreen;
 import forge.util.Aggregates;
 import forge.util.ScreenUtil;
@@ -371,6 +372,14 @@ public class ConsoleCommandInterpreter {
                 return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
             Current.player().setColorIdentity(s[0]);
             return "Player color identity set to " + Current.player().getColorIdentity() + ".";
+        });
+        registerCommand(new String[]{"rename"}, s -> {
+            if (s.length < 1 || s[0] == null || s[0].trim().isEmpty())
+                return "Command needs 1 parameter: Name.";
+            String newName = s[0].trim();
+            Current.player().setName(newName);
+            GamePlayerUtil.getGuiPlayer().setName(newName);
+            return "Renamed player to " + newName;
         });
         registerCommand(new String[]{"resetQuests"}, s -> {
             Current.player().resetQuestFlags();

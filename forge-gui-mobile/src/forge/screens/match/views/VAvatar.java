@@ -189,7 +189,7 @@ public class VAvatar extends FDisplayObject {
             }
         }
         //turn indicator
-        if (player == MatchController.instance.getGameView().getPlayerTurn()) {
+        if (player.sharesTeamWith(MatchController.instance.getGameView().getPlayerTurn())) {
             float alpha = displayPriority ? 1f : 0.8f;
             if (alphaModifier < 1)
                 alpha = alphaModifier;

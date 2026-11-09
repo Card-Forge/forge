@@ -1,0 +1,215 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Image",
+      "image": "ui/equipment.png",
+      "x": 8,
+      "y": 112,
+      "width": 129,
+      "height": 243
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Ability1",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 17,
+      "y": 124
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Ability2",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 107,
+      "y": 124
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Neck",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 138
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Body",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 173
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Boots",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 275
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Left",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 28,
+      "y": 207
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Right",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 96,
+      "y": 207
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Pocket",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 75,
+      "y": 304
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Medal",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 23,
+      "y": 304
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Blessing",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 49,
+      "y": 304
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Special",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 101,
+      "y": 304
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Heart",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 88,
+      "y": 328
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Token",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 36,
+      "y": 328
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Slotless",
+      "style": "item_frame_static",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 328
+    },
+    {
+      "type": "Scroll",
+      "name": "inventory",
+      "x": 145,
+      "y": 112,
+      "width": 117,
+      "height": 243
+    },
+    {
+      "type": "Window",
+      "x": 8,
+      "y": 8,
+      "width": 254,
+      "height": 98
+    },
+    {
+      "type": "Label",
+      "name": "item_description",
+      "x": 16,
+      "y": 16,
+      "width": 246,
+      "height": 90
+    },
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "tr(lblDispose)",
+      "width": 60,
+      "height": 30,
+      "x": 8,
+      "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "equip",
+      "text": "tr(lblEquip)",
+      "width": 60,
+      "height": 30,
+      "x": 75,
+      "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "use",
+      "text": "tr(lblUse)",
+      "width": 60,
+      "height": 30,
+      "x": 140,
+      "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "width": 60,
+      "height": 30,
+      "x": 205,
+      "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "repair",
+      "text": "[%80][+ToolBox] tr(lblRepair)",
+      "width": 42,
+      "height": 22,
+      "x": 16,
+      "y": 80
+    }
+  ]
+}

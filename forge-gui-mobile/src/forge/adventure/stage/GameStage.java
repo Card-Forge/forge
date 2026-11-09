@@ -488,7 +488,7 @@ public abstract class GameStage extends Stage {
                 noQuicksaveDialog.activate();
             } else {
                 getPlayerSprite().storePos();
-                WorldSave.requestPreview();
+                WorldSave.requestPreview(true); // saved right away, so no stale preview and no cooldown
                 WorldSave.getCurrentSave().quickSave();
             }
         }

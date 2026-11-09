@@ -1,0 +1,337 @@
+//Rank|Name|Rarity|Set
+#1|Georgiou, Terran Emperor|M|TRK
+#2|Sheoldred, the Apocalypse|M|SDS
+#3|Death Is Irrelevant|M|TRK
+#4|Captain Jean-Luc Picard|M|TRK
+#5|Borg Cube|M|TRK
+#6|Decree of Pain|M|SDS
+#7|Primary Unimatrix Adjunct|R|TRK
+#8|Sen Triplets|M|SDS
+#9|U.S.S. Enterprise-D, Galaxy-Class|R|TRK
+#10|Armus, Skin of Evil|R|TRK
+#11|Crystalline Entity|M|TRK
+#12|Deanna Troi, Psychic Counsel|R|TRK
+#13|Deep Space 9|M|TRK
+#14|Dr. Joseph M'Benga|M|TRK
+#15|Empress Galina|M|SDS
+#16|Excalbian Gamemaster|M|TRK
+#17|General Chang, Cold Warrior|R|TRK
+#18|Holo-Engineer|R|TRK
+#19|Kenrith, the Returned King|M|SDS
+#20|Mikaeus, the Lunarch|M|SDS
+#21|Mr. Spock, Science Officer|M|TRK
+#22|Overflow Submatrix|R|TRK
+#23|The Destruction of Praxis|R|TRK
+#24|Torbran, Thane of Red Fell|M|SDS
+#25|U.S.S. Discovery, at Black Alert|R|TRK
+#26|U.S.S. Enterprise-A, Free Spirit|M|TRK
+#27|U.S.S. Reliant, From Hell's Heart|R|TRK
+#28|Captain James T. Kirk|M|TRK
+#29|Collation Trimatrix|R|TRK
+#30|Gul Dukat, Colonial Prefect|M|TRK
+#31|Khan, Vengeful Heart|M|TRK
+#32|Pah-Wraith|R|TRK
+#33|Sarek, Federation Ambassador|R|TRK
+#34|Antagonist Incorporator|R|TRK
+#35|Captain Pike, Fullness of Time|R|TRK
+#36|Dr. Leonard "Bones" McCoy|R|TRK
+#37|Elim Garak, Simple Tailor|R|TRK
+#38|Gowron, Eager for Battle|R|TRK
+#39|Hemmer, Fixing What Is Broken|U|TRK
+#40|Jadzia Dax, Living Legacy|M|TRK
+#41|Kira Nerys, Firebrand|R|TRK
+#42|Prosper, Tome-Bound|M|SDS
+#43|Rok-Tahk, Budding Scientist|M|TRK
+#44|Sela, Tal Shiar Paradox|R|TRK
+#45|Tatyova, Benthic Druid|M|SDS
+#46|Dr. McCoy, Surly Surgeon|U|TRK
+#47|Federation Outpost|R|TRK
+#48|The Caretaker|R|TRK
+#49|Captain Jonathan Archer|R|TRK
+#50|Captain Kathryn Janeway|M|TRK
+#51|Q, Stacking the Deck|M|TRK
+#52|The Wrath of Khan|R|TRK
+#53|Bristly Bill, Spine Sower|M|SDS
+#54|Captain Benjamin Sisko|R|TRK
+#55|Captain Sisay|M|SDS
+#56|David and Carol Marcus, Creators|U|TRK
+#57|Drivnod, Carnage Dominus|M|SDS
+#58|Ertai Resurrected|M|SDS
+#59|H.M.S. Bounty, Unlikely Timeship|R|TRK
+#60|He's Dead, Jim|C|TRK
+#61|Locutus, the One Who Speaks|U|TRK
+#62|Loot, Exuberant Explorer|M|SDS
+#63|Rishkar, Peema Renegade|M|SDS
+#64|Romulan Bird-of-Prey|R|TRK
+#65|Salt Vampire|R|TRK
+#66|Seven of Nine|U|TRK
+#67|Sulu, Space Swashbuckler|R|TRK
+#68|The Inner Light|R|TRK
+#69|Unexplored Territory|C|TRK
+#70|Wesley Crusher, Starfleet Cadet|R|TRK
+#71|Grand Nagus Zek|R|TRK
+#72|Mogis, God of Slaughter|M|SDS
+#73|Blastoneuron|U|TRK
+#74|Dathon, His Heart Open|R|TRK
+#75|Deep Space Scan|R|TRK
+#76|Isshin, Two Heavens as One|M|SDS
+#77|Jhoira, Weatherlight Captain|M|SDS
+#78|Lieutenant Commander Data|M|TRK
+#79|Lt. Cmdr. Geordi La Forge|R|TRK
+#80|MACO Strike Team|R|TRK
+#81|Miles O'Brien, Transporter Ops|R|TRK
+#82|Mirror Universe Intrusion|R|TRK
+#83|Nog, Ambitious Cadet|R|TRK
+#84|Riku of Many Paths|M|SDS
+#85|Scotty, Miracle Worker|M|TRK
+#86|Seven of Nine, Unassimilated|M|TRK
+#87|Sisay, Weatherlight Captain|M|SDS
+#88|Subcommander T'Pol|R|TRK
+#89|Tasha Yar, Out of Time|R|TRK
+#90|The City on the Edge of Forever|R|TRK
+#91|The Holodeck|R|TRK
+#92|Will Riker, First in the Field|R|TRK
+#93|Academy Instructor|U|TRK
+#94|Andoria|L|TRK
+#95|Assembly Specialist|U|TRK
+#96|Bajor|L|TRK
+#97|Bat'leth|U|TRK
+#98|Cardassia Prime|L|TRK
+#99|Command Decision|C|TRK
+#100|Common Goal|C|TRK
+#101|Earth, Sector 001|L|TRK
+#102|Eject the Warp Core|C|TRK
+#103|Ferenginar|L|TRK
+#104|Jake Sisko, War Correspondent|U|TRK
+#105|Khaaaaaaaaaaaannn!|U|TRK
+#106|Marooned|C|TRK
+#107|Nyota Uhura, Communications|R|TRK
+#108|Orion|L|TRK
+#109|Planetary Bombardment|C|TRK
+#110|Plasma Cascade|C|TRK
+#111|Qo'noS|L|TRK
+#112|Risa|L|TRK
+#113|Romulus|L|TRK
+#114|Shizo, Death's Storehouse|M|SDS
+#115|Spock, Always Your Friend|U|TRK
+#116|Stella Lee, Wild Card|M|SDS
+#117|Temporal Conqueror|C|TRK
+#118|Transporter Malfunction|U|TRK
+#119|V'Ger, the Intruder|U|TRK
+#120|Vash, Freelance Archaeologist|U|TRK
+#121|Vulcan|L|TRK
+#122|Worf, Intelligence Contractor|R|TRK
+#123|Amok Time|U|TRK
+#124|Cloak and Phaser|U|TRK
+#125|Collective Drone|U|TRK
+#126|Command Subadjunct|U|TRK
+#127|Conquest Mission|U|TRK
+#128|De-evolve|U|TRK
+#129|Hive Mind Coprocessor|U|TRK
+#130|Jett Reno, Problem Solver|U|TRK
+#131|Malfunctioning Holodeck|C|TRK
+#132|Munitions Enthusiast|U|TRK
+#133|Ni'Var Science Academy|R|TRK
+#134|Perils of the Past|C|TRK
+#135|Phlox, Unorthodox Doctor|U|TRK
+#136|Resistance Is Futile|U|TRK
+#137|Rutherford, Upgraded Ensign|U|TRK
+#138|Sarcophagus, Ship of the Dead|U|TRK
+#139|Saru, Unthreatened|U|TRK
+#140|Support Mission|U|TRK
+#141|The Measure of a Man|U|TRK
+#142|Xenobotanist|C|TRK
+#143|Brad Boimler, Eager Ensign|U|TRK
+#144|Cantankerous Captain|C|TRK
+#145|D-7 Battle Cruiser|R|TRK
+#146|D'Ghor Bloodletter|U|TRK
+#147|Dal R'El, Augment Orphan|U|TRK
+#148|Daniels, Temporal Agent|U|TRK
+#149|Ensign Pavel Chekov|U|TRK
+#150|Enterprise NX-01|U|TRK
+#151|Genesis Effect|C|TRK
+#152|Guidance Failure|C|TRK
+#153|Gwyndala, the Progeny|R|TRK
+#154|Hologram Stalker|U|TRK
+#155|Hoshi Sato, Exolinguist|U|TRK
+#156|Interstellar Effigy|C|TRK
+#157|Kai Winn, Faithless Leader|R|TRK
+#158|L'Rell, Fierce Visionary|U|TRK
+#159|Organic Avulsion Unit|U|TRK
+#160|Picard, Leading by Example|U|TRK
+#161|Quark's Bar|R|TRK
+#162|Spatial Anomaly|U|TRK
+#163|Species 8472|U|TRK
+#164|Subspace Anomaly|U|TRK
+#165|Suurok-Class Science Vessel|C|TRK
+#166|U.S.S. Excelsior, Cutting Edge|U|TRK
+#167|Zefram Cochrane, Warp Pioneer|U|TRK
+#168|Adversary by Algorithm|U|TRK
+#169|Anthropological Mission|U|TRK
+#170|Arcum Dagsson|M|SDS
+#171|Artificial Anomaly|U|TRK
+#172|Assault Drone|C|TRK
+#173|Beckett Mariner, Impetuous Ensign|U|TRK
+#174|Captain Michael Burnham|U|TRK
+#175|Cleveland Booker, Empath|U|TRK
+#176|Dahar Master|C|TRK
+#177|Free Borg Revolutionaries|C|TRK
+#178|Gaseous Anomaly|U|TRK
+#179|Hit It!|R|TRK
+#180|Hologram Janeway|U|TRK
+#181|Hull Breach|M|SDS
+#182|In the Pale Moonlight|U|TRK
+#183|Kirk, Commanding Officer|U|TRK
+#184|Make It So|C|TRK
+#185|Minamo, School at Water's Edge|M|SDS
+#186|Oberth-Class Starship|C|TRK
+#187|Obsidian Order Operative|C|TRK
+#188|Ravenous Cosmozoan|U|TRK
+#189|Relentless Drednok|C|TRK
+#190|Rogue Artificial Intelligence|C|TRK
+#191|Set Phasers to . . .|C|TRK
+#192|Sylvia Tilly, Joy of Discovery|U|TRK
+#193|Syndicate Liquidators|U|TRK
+#194|Tal Shiar Analyst|C|TRK
+#195|Temporal Anomaly|U|TRK
+#196|Thada Adel, Acquisitor|M|SDS
+#197|The Doctor, EMH|U|TRK
+#198|The Duras Sisters|U|TRK
+#199|The Traveler|U|TRK
+#200|The Unicomplex|R|TRK
+#201|U.S.S. Cerritos, Following Up|U|TRK
+#202|U.S.S. Voyager, Lone Wanderer|U|TRK
+#203|Warp Speed|U|TRK
+#204|Worf, Honor-Bound Warrior|U|TRK
+#205|Zero, Incorporeal Sensate|U|TRK
+#206|70,000 Light-Years from Home|U|TRK
+#207|A Good Day to Die|C|TRK
+#208|All Good Things . . .|R|TRK
+#209|Automated Warfare System|C|TRK
+#210|Battle-Scarred Survivalist|C|TRK
+#211|Combadge|U|TRK
+#212|Constable Odo|U|TRK
+#213|Culber and Stamets, Star-Crossed|U|TRK
+#214|Dominion Assault Force|C|TRK
+#215|Encounter the Unknown|R|TRK
+#216|Energize|U|TRK
+#217|Erica Ortegas, Plucky Pilot|U|TRK
+#218|Gabriel Lorca, Mirror Menace|U|TRK
+#219|Ghost of Illyria|U|TRK
+#220|Gray and Adira, Forever Joined|U|TRK
+#221|Impossible Choice|U|TRK
+#222|Khan, Despot by Design|U|TRK
+#223|La'An Noonien-Singh, Security|U|TRK
+#224|Lore, Positronic Provocateur|U|TRK
+#225|Lwaxana Troi, Charming Guest|R|TRK
+#226|Mugato|U|TRK
+#227|Neelix, Moral Support|U|TRK
+#228|Q Continuum|R|TRK
+#229|Quark, Humble Proprietor|M|TRK
+#230|Saavik, Stoic Student|U|TRK
+#231|Saurian Explorer|C|TRK
+#232|Savvy Profiteer|C|TRK
+#233|Shields Up!|C|TRK
+#234|Sickbay|U|TRK
+#235|Silicate Surveyor|C|TRK
+#236|Test of Identity|U|TRK
+#237|Test of Priorities|U|TRK
+#238|Those Old Scientists|U|TRK
+#239|Warp Core|C|TRK
+#240|Xindi Surveyors|C|TRK
+#241|Blood Crypt|R|TRK
+#242|Breeding Pool|R|TRK
+#243|Cetacean Ops|C|TRK
+#244|Cha'DIch Investigator|C|TRK
+#245|Class-F Shuttlecraft|C|TRK
+#246|Cloistered Telepath|C|TRK
+#247|Cold-Blooded Crew|C|TRK
+#248|Cybernetic Specialist|C|TRK
+#249|Dathon and Picard at El-Adrel|C|TRK
+#250|Dominion Supervisor|C|TRK
+#251|Emergency Holographic Crew|C|TRK
+#252|Federation Field Medic|C|TRK
+#253|Federation Probe|C|TRK
+#254|First Contact|C|TRK
+#255|Fugitive Listener|C|TRK
+#256|Godless Shrine|R|TRK
+#257|Hallowed Fountain|R|TRK
+#258|Highly Illogical|U|TRK
+#259|Horta|C|TRK
+#260|Humpback Whales|C|TRK
+#261|Kobayashi Maru Scenario|M|TRK
+#262|Open Communications|C|TRK
+#263|Overgrown Tomb|R|TRK
+#264|Pattern Buffer Preservation|C|TRK
+#265|Photosynthetic Physician|C|TRK
+#266|Phyrexian Tower|M|SDS
+#267|Reckless Impulse|C|TRK
+#268|Sacred Foundry|R|TRK
+#269|Stable Wormhole|R|TRK
+#270|Starfleet Spanner Jockey|C|TRK
+#271|Steam Vents|R|TRK
+#272|Stomping Ground|R|TRK
+#273|Tactical Officer|C|TRK
+#274|Temple Garden|R|TRK
+#275|Tenacious Drone|C|TRK
+#276|Una Chin-Riley, Number One|U|TRK
+#277|Watery Grave|R|TRK
+#278|Andromedan Automatons|C|TRK
+#279|Astute Terraformer|C|TRK
+#280|Boarding Action|C|TRK
+#281|Commander Raffi Musiker|U|TRK
+#282|Consider the Prime Directive|C|TRK
+#283|D'Vana Tendi, Optimistic Ensign|U|TRK
+#284|Data, New Life|U|TRK
+#285|Dominion Saboteur|U|TRK
+#286|DOT-7 Repair Squad|C|TRK
+#287|Emergency Medical Hologram|C|TRK
+#288|Final Frontier|C|TRK
+#289|I'm a Doctor, Not a . . .|C|TRK
+#290|Melkotian Adjudicator|C|TRK
+#291|Moopsy|C|TRK
+#292|Planetary Patrol|C|TRK
+#293|Pure Energy|C|TRK
+#294|Storied Veteran|U|TRK
+#295|Tal Shiar Operative|C|TRK
+#296|Talon Gates of Madara|M|SDS
+#297|Test of Loyalty|U|TRK
+#298|There's Coffee in that Nebula|U|TRK
+#299|Vexing Drone|C|TRK
+#300|Shuttle Ace|C|TRK
+#301|Stray from History|C|TRK
+#302|Suus Mahna Practitioner|C|TRK
+#303|Tea, Earl Grey, Hot|C|TRK
+#304|Test of Conviction|U|TRK
+#305|Starfleet Security|C|TRK
+#306|The Naked Time|U|TRK
+#307|Captain's Tutelage|C|TRK
+#308|Dominion Infiltration|R|TRK
+#309|Dr. Beverly Crusher|M|TRK
+#310|Engineered Explosives|R|TRK
+#311|Exploratory Mission|U|TRK
+#312|Genesis Device|R|TRK
+#313|Isolinear Processor|U|TRK
+#314|Live Long and Prosper|R|TRK
+#315|Peace in Our Time|R|TRK
+#316|Pet Sehlat|C|TRK
+#317|Red Alert!|U|TRK
+#318|Replicator|R|TRK
+#319|Rules of Acquisition|U|TRK
+#320|Starfleet Academy|M|TRK
+#321|Targ Wrangler|U|TRK
+#322|Tell Me What You See|U|TRK
+#323|Test of Courage|U|TRK
+#324|Tricorder|C|TRK
+#325|Vengeance Mission|U|TRK
+#326|Year of Hell|R|TRK
+#327|Branching Timeline|R|TRK
+#328|Vulcan Mind-Meld|U|TRK
+#329|Troubling Tribbles|R|TRK
+#330|Type-2 Phaser|U|TRK
+#331|Brazen Bluff|R|TRK
+#332|Bruvac the Grandiloquent|M|SDS
+#333|Federation Resupply|R|TRK
+#334|Flare of Fortitude|M|SDS
+#335|Infinite Diversity|M|TRK
+#336|The Needs of the Many|R|TRK

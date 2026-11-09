@@ -1,0 +1,9 @@
+Name:Worf, Still Not Merry
+ManaCost:3 R W
+Types:Legendary Creature Klingon Warrior Officer
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, for each attacking non-Faerie creature, create a tapped and attacking 1/1 blue Faerie creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:X:Count$Valid Creature.attacking+nonFaerie
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Worf attacks, for each attacking non-Faerie creature, create a tapped and attacking 1/1 blue Faerie creature token with flying.

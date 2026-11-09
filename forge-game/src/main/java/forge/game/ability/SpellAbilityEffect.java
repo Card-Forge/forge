@@ -315,6 +315,17 @@ public abstract class SpellAbilityEffect {
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                            return getPlayers(true,  "Defined",    sa); }
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
+    /** The target players, one per team under shared team turns: one effect adds or skips a turn, phase or step for a team only once (CR 805.8). */
+    protected final static PlayerCollection getTargetPlayersOnePerTeam(final SpellAbility sa) {
+        final PlayerCollection players = new PlayerCollection();
+        for (final Player p : getTargetPlayers(sa)) {
+            if (!players.anyMatch(p::sharesTeamWith)) {
+                players.add(p);
+            }
+        }
+        return players;
+    }
+
     // should really only be used by effects that need it to avoid overhead
     protected static List<Player> getTargetPlayersWithDuplicates(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         List<Player> result = Lists.newArrayList();
@@ -765,7 +776,7 @@ public abstract class SpellAbilityEffect {
         final Combat combat = game.getCombat();
 
         // CR 506.3b
-        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(c.getController())) {
+        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().sharesTeamWith(c.getController())) {
             String attacking = sa.getParam(attackingParam);
 
             GameEntity defender = null;
