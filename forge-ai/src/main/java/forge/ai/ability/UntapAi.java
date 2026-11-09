@@ -488,12 +488,12 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
             final Game game = host.getGame();
-            for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
+            for (Card card : AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa)) {
                 final Card gameCard = game.getCardState(card, null);
                 if (gameCard == null
                         || !gameCard.isInPlay() // not in play
                         || gameCard.isUntapped() // already untapped
-                        ) {
+                ) {
                     return false;
                 }
 

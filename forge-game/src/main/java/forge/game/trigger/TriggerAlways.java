@@ -57,7 +57,7 @@ public class TriggerAlways extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
     }
 
     @Override

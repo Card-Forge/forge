@@ -1353,7 +1353,7 @@ public class SpecialCardAi {
             if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
@@ -2066,7 +2066,7 @@ public class SpecialCardAi {
             if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // draw +1 card when at max hand size, hoping to draw a workable spell or land
@@ -2096,7 +2096,7 @@ public class SpecialCardAi {
             CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
             if (cardsInGY.size() == 0) {
                 return false;
-            } else if (ai.getGame().getPhaseHandler().getPlayerTurn() != ai) {
+            } else if (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                 // The AI is not very good at deciding for what to viably do during the opp's turn when this
                 // comes from an instant speed effect (e.g. Magus of the Will)
                 return false;

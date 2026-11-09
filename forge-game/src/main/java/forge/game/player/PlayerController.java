@@ -107,6 +107,16 @@ public abstract class PlayerController {
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
     public abstract List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
+
+    /** Has a teammate put their own ability from the team's shared order on the stack (CR 805.7); false if the ability is this player's. */
+    protected final boolean playedByTeammate(final SpellAbility sa) {
+        final Player owner = sa.getActivatingPlayer() != null ? sa.getActivatingPlayer() : sa.getHostCard().getController();
+        if (player.equals(owner)) {
+            return false;
+        }
+        owner.getController().orderAndPlaySimultaneousSa(Lists.newArrayList(sa));
+        return true;
+    }
     public abstract boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
 

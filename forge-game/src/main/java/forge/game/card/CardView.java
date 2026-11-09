@@ -650,7 +650,8 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.equals(viewer)) {
+            // CR 810.5: Two-Headed Giant teammates may review each other's hands
+            if (controller.sharesTeamWith(viewer)) {
                 return true;
             }
             break;
@@ -1020,7 +1021,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
 
         final Card cloner = c.getCloner();
-        set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
+        // Use the cloner's printed name; for self-clones (e.g. Sculpting Steel) its current
+        // name is the copied card's name, which would be misleading here.
+        set(TrackableProperty.Cloner, cloner == null ? null
+                : cloner.getOriginalState(CardStateName.Original).getName() + " (" + cloner.getId() + ")");
 
         CardCollection mergedCollection = new CardCollection();
         if (c.hasMergedCard()) {

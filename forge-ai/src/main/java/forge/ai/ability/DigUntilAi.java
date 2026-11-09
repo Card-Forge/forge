@@ -25,7 +25,9 @@ public class DigUntilAi extends SpellAbilityAi {
                 && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.SELF_MILL_OUTLET, sa.getHostCard())
                 && ai.getController() instanceof PlayerControllerAi
                 && ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
-                        .has(forge.ai.simulation.ComboPlan.Kind.LIBRARY_OUT);
+                        .has(forge.ai.simulation.ComboPlan.Kind.LIBRARY_OUT)
+                // and only while the winner can follow the mill: without Thassa's Oracle the deck just loses its library
+                && ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.libraryOutSelfMillSafe(ai);
     }
 
     @Override
