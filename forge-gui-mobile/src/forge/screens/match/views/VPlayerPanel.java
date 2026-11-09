@@ -22,7 +22,6 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.skin.FSkinProp;
-import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -99,6 +98,36 @@ public class VPlayerPanel extends FContainer {
     private static final Color COMPACT_BOX_EDGE = new Color(1f, 1f, 1f, 0.26f);
     private static final int COMPACT_DOUBLE_ROWS = 4;                 //tabs per column in the double tab layout
 
+    /**
+     * Bottom screen of a dual-screen device: this panel is laid out with the portrait layout (field, open zone,
+     * avatar and tab row) even though the app runs in landscape, and the hand is always open.
+     */
+    private boolean dualScreenBottom;
+    private static final float DUAL_SCREEN_HAND_GAP = Utils.scale(14);
+
+    public boolean isDualScreenBottom() {
+        return dualScreenBottom;
+    }
+
+    public void setDualScreenBottom(boolean b0) {
+        dualScreenBottom = b0;
+    }
+
+    /** Landscape layout for this panel: false for the dual-screen bottom panel, which uses the portrait layout. */
+    public boolean landscapeLayout() {
+        return Forge.isLandscapeMode() && !dualScreenBottom;
+    }
+
+    /** {@link #isCompactLayout()} for this panel. */
+    public boolean compactLayout() {
+        return !dualScreenBottom && isCompactLayout();
+    }
+
+    /** {@link #isAltZoneLayout()} for this panel. */
+    public boolean altZoneLayout() {
+        return !dualScreenBottom && isAltZoneLayout();
+    }
+
     /** @return true if the compact landscape layout is in use (it needs landscape mode and the "Use Compact Layout" setting) */
     public static boolean isCompactLayout() {
         if (!Forge.isLandscapeMode()) { return false; }
@@ -108,7 +137,7 @@ public class VPlayerPanel extends FContainer {
 
     /** @return true if this panel's controls are on the right side of the screen in the compact layout */
     public boolean isCompactRight() {
-        if (!isCompactLayout()) { return false; }
+        if (!compactLayout()) { return false; }
         return compactLayoutCache == 2 || (compactLayoutCache == 3 && !isFlipped());
     }
 
@@ -202,7 +231,7 @@ public class VPlayerPanel extends FContainer {
 
     //the background image is drawn behind the whole panel, so it must not follow the field, which moves as zones open
     public float getBackgroundLeft() {
-        if (!isCompactLayout()) { return field.getLeft(); }
+        if (!compactLayout()) { return field.getLeft(); }
         if (isCompactAlternate()) { return 0f; } //the columns of both players sit on different sides
         return isCompactRight() ? 0f : tabColWidth;
     }
@@ -213,7 +242,7 @@ public class VPlayerPanel extends FContainer {
     }
 
     public float getBackgroundHeight() {
-        return isCompactLayout() ? getHeight() : field.getHeight();
+        return compactLayout() ? getHeight() : field.getHeight();
     }
 
     /** @return true if the open card zone is a horizontal box instead of a side column (alternate and compact layouts) */
@@ -231,7 +260,7 @@ public class VPlayerPanel extends FContainer {
 
     /** @return true if this display is the card zone box of the alternate layout (the command zone never is) */
     public boolean isStripDisplay(VDisplayArea display) {
-        return isAltZoneLayout() && isBoxDisplay(display) && display != commandZone;
+        return altZoneLayout() && isBoxDisplay(display) && display != commandZone;
     }
 
     //displays that live in the corner box of the alternate layout: card zones and the mana pool
@@ -348,8 +377,8 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void syncCommandZone() {
-        if (!Forge.isLandscapeMode()) { return; }
-        if (isCompactLayout()) {
+        if (!landscapeLayout()) { return; }
+        if (compactLayout()) {
             syncCompactCommandZone();
             return;
         }
@@ -388,7 +417,7 @@ public class VPlayerPanel extends FContainer {
 
     //the phase stops column pushes the field and the open zones aside while it is open
     private void onPhaseStopsResized() {
-        if (isCompactLayout() && initW > 0) { updateAnimatedLayout(initW, initH); }
+        if (compactLayout() && initW > 0) { updateAnimatedLayout(initW, initH); }
     }
 
     public PlayerView getPlayer() {
@@ -418,6 +447,11 @@ public class VPlayerPanel extends FContainer {
         return selectedTab;
     }
 
+    /** The hand zone tab, or null if this panel has none. */
+    public InfoTab getHandTab() {
+        return zoneTabs.get(ZoneType.Hand);
+    }
+
     public void resetZoneTabs() {
         for (InfoTab tab : tabs)
             tab.reset();
@@ -440,6 +474,9 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void setSelectedTab(InfoTab tab) {
+        if (dualScreenBottom && tab == null) {
+            tab = zoneTabs.get(ZoneType.Hand); //the hand is shown whenever no other zone is
+        }
         if (this.selectedTab == tab) {
             return;
         }
@@ -458,7 +495,7 @@ public class VPlayerPanel extends FContainer {
             this.selectedTab.setDisplayVisible(true);
             startSlideAnimation(wasClosed);
         }
-        if (isCompactLayout()) { syncCommandZone(); }
+        if (compactLayout()) { syncCommandZone(); }
 
         if (MatchController.getView() != null) {
             MatchController.getView().revalidate();
@@ -468,12 +505,12 @@ public class VPlayerPanel extends FContainer {
     private void startSlideAnimation(boolean fieldToo) {
         stopSlideAnimation();
         boxWidthCur = -1f; //the card zone box snaps to the size of the newly selected zone
-        if (!Forge.isLandscapeMode() || getWidth() <= 0) {
+        if (!landscapeLayout() || getWidth() <= 0) {
             slideProgress = 1f;
             slideFieldToo = false;
             return;
         }
-        if (isCompactLayout() && !fieldToo) { //switching zones while one is open: the contents swap, the band stays put
+        if (compactLayout() && !fieldToo) { //switching zones while one is open: the contents swap, the band stays put
             slideProgress = 1f;
             slideFieldToo = false;
             return;
@@ -485,7 +522,7 @@ public class VPlayerPanel extends FContainer {
     }
 
     private boolean startSlideOut() {
-        if (!Forge.isLandscapeMode() || getWidth() <= 0) { return false; }
+        if (!landscapeLayout() || getWidth() <= 0) { return false; }
         if (slideClosing) { return true; }
         stopSlideAnimation();
         slideClosing = true;
@@ -493,7 +530,7 @@ public class VPlayerPanel extends FContainer {
         slideProgress = 1f;
         slideAnimation = new TabSlideAnimation(true);
         slideAnimation.start();
-        if (isCompactLayout()) { syncCommandZone(); } //the command zone leaves together with the card zone
+        if (compactLayout()) { syncCommandZone(); } //the command zone leaves together with the card zone
         return true;
     }
 
@@ -516,7 +553,7 @@ public class VPlayerPanel extends FContainer {
             float t = Math.min(elapsed / SLIDE_DURATION, 1f);
             float eased = 1f - (1f - t) * (1f - t) * (1f - t);
             slideProgress = closing ? 1f - eased : eased;
-            if (selectedTab != null && Forge.isLandscapeMode()) {
+            if (selectedTab != null && landscapeLayout()) {
                 updateAnimatedLayout(initW, initH);
             }
             return t < 1f;
@@ -532,7 +569,7 @@ public class VPlayerPanel extends FContainer {
                 slideClosing = false;
                 forceClose = true;
                 try { setSelectedTab(null); } finally { forceClose = false; }
-            } else if (!endingAll && selectedTab != null && Forge.isLandscapeMode()) {
+            } else if (!endingAll && selectedTab != null && landscapeLayout()) {
                 updateAnimatedLayout(initW, initH);
             }
         }
@@ -575,7 +612,7 @@ public class VPlayerPanel extends FContainer {
         selected--;
         if (selected < -1)
             selected = -1;
-        if (isCompactLayout()) { syncCommandZone(); }
+        if (compactLayout()) { syncCommandZone(); }
     }
 
     public InfoTab getManaPoolTab() {
@@ -652,7 +689,7 @@ public class VPlayerPanel extends FContainer {
 
     private void onCommandZoneUpdated() {
         syncCommandZone();
-        if (Forge.isLandscapeMode() && initW > 0) {
+        if (landscapeLayout() && initW > 0) {
             layoutTabsLandscape(); //tab appears or disappears as cards come and go
             updateAnimatedLayout(initW, initH); //width follows the card count
         } else {
@@ -660,18 +697,23 @@ public class VPlayerPanel extends FContainer {
         }
     }
 
+    /** The command zone when it is on screen with cards (any layout), for controller navigation; otherwise null. */
+    public VZoneDisplay getVisibleCommandDisplay() {
+        return commandZone.isVisible() && commandZone.getCount() > 0 && commandZone.getChildCount() > 0 ? commandZone : null;
+    }
+
     public VZoneDisplay getOpenCommandDisplay() {
-        return commandOpen && Forge.isLandscapeMode() ? commandZone : null;
+        return commandOpen && landscapeLayout() ? commandZone : null;
     }
 
     /** @return screen x of the left-most open zone display, or Float.MAX_VALUE if none */
     public float getOpenDisplayScreenLeft() {
         float left = Float.MAX_VALUE;
-        if (isCompactLayout()) { return left; } //zones sit in the band along the outer edge and never take space from the field
+        if (compactLayout()) { return left; } //zones sit in the band along the outer edge and never take space from the field
         if (selectedTab != null && selectedTab.isVisible() && selectedTab.getDisplayArea() != null) {
             left = Math.min(left, selectedTab.getDisplayArea().screenPos.x);
         }
-        if (commandOpen && commandProgress > 0f && Forge.isLandscapeMode()) {
+        if (commandOpen && commandProgress > 0f && landscapeLayout()) {
             left = Math.min(left, commandZone.screenPos.x);
         }
         return left;
@@ -700,7 +742,15 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
-        if (Forge.isLandscapeMode()) {
+        if (dualScreenBottom && selectedTab == null) { //tabs closed without setSelectedTab: fall back to the hand
+            InfoTab hand = zoneTabs.get(ZoneType.Hand);
+            if (hand != null) {
+                selectedTab = hand;
+                selected = tabs.indexOf(hand);
+                hand.setDisplayVisible(true);
+            }
+        }
+        if (landscapeLayout()) {
             doLandscapeLayout(width, height);
             return;
         }
@@ -755,6 +805,9 @@ public class VPlayerPanel extends FContainer {
         if (selectedTab != null) {
             y -= displayAreaHeight;
         }
+        if (dualScreenBottom) {
+            y -= DUAL_SCREEN_HAND_GAP; //keep the battlefield's lower row clear of the always-open hand
+        }
 
         //command zone size first, so the field's second row leaves room for it
         int cmdCount = commandZone.getCount();
@@ -789,7 +842,7 @@ public class VPlayerPanel extends FContainer {
         initH = height;
         syncCommandZone();
         //tab columns keep a minimum width so the icon and a 2-digit count always fit, even with the half size avatars of 3-4 player games
-        if (isCompactLayout()) { //wider column and bigger values so 2 and 3 digit counts stay readable
+        if (compactLayout()) { //wider column and bigger values so 2 and 3 digit counts stay readable
             tabValueWidth = COMPACT_VALUE_FONT.getBounds("000").width;
             fitCompactAvatar(height);
             compactSingleWidth = Math.max(Math.round(avatar.getWidth() * COMPACT_COLUMN_WIDTH_RATIO), getCompactMinColumnWidth());
@@ -802,7 +855,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         final float x = getColumnX();
-        float y = isCompactLayout() ? COMPACT_PANEL_PAD_TOP : 0f;
+        float y = compactLayout() ? COMPACT_PANEL_PAD_TOP : 0f;
         avatar.setPosition(x + (tabColWidth - avatar.getWidth()) / 2, y);
         y += avatar.getHeight();
 
@@ -813,7 +866,7 @@ public class VPlayerPanel extends FContainer {
         } else
             y += lblLife.getHeight();
 
-        final boolean compact = isCompactLayout();
+        final boolean compact = compactLayout();
         final boolean phaseButtonShown = compact && !isUnifiedPhase();
         if (compact) { //the phase button sits right under the life total (unless the unified label replaces it), the tab scroller takes the rest
             compactPhaseHeight = getCompactPhaseHeight();
@@ -873,7 +926,7 @@ public class VPlayerPanel extends FContainer {
 
     private void layoutTabsLandscape() {
         if (tabs.isEmpty()) { return; }
-        if (isCompactLayout()) {
+        if (compactLayout()) {
             layoutCompactColumn();
             return;
         }
@@ -1050,7 +1103,7 @@ public class VPlayerPanel extends FContainer {
 
     //a tab that was selected from elsewhere (gamepad, a card moving zones) must not stay out of sight
     private void scrollCompactToTab(InfoTab tab) {
-        if (!isCompactLayout()) { return; }
+        if (!compactLayout()) { return; }
         final int idx = compactTabs.indexOf(tab);
         if (idx < 0) { return; }
         float target = compactScrollTarget;
@@ -1097,7 +1150,7 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             final float max = getCompactMaxScroll();
-            if (max <= 0 || !isCompactLayout()) { return; }
+            if (max <= 0 || !compactLayout()) { return; }
             final float w = getWidth(), h = getHeight();
             //theme colours: the active colour for the thumb and arrows over a track in the border colour
             final Color c = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_ACTIVE : Colors.CLR_ACTIVE).getColor();
@@ -1117,7 +1170,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-            if (!isCompactLayout() || compactCell <= 0 || getCompactMaxScroll() <= 0) { return false; } //nothing to scroll
+            if (!compactLayout() || compactCell <= 0 || getCompactMaxScroll() <= 0) { return false; } //nothing to scroll
             if (!panning && Math.abs(deltaX) > Math.abs(deltaY)) { return false; } //a sideways drag isn't a scroll
             panning = true;
             lastPanMillis = System.currentTimeMillis();
@@ -1136,7 +1189,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public boolean fling(float velocityX, float velocityY) {
-            if (!isCompactLayout() || System.currentTimeMillis() - lastPanMillis > COMPACT_FLING_WINDOW_MS) { return false; }
+            if (!compactLayout() || System.currentTimeMillis() - lastPanMillis > COMPACT_FLING_WINDOW_MS) { return false; }
             if (Math.abs(velocityY) < Math.abs(velocityX)) { return false; }
             //a flick moves on by one whole tab in its direction instead of coasting
             if (velocityY < 0) {
@@ -1152,7 +1205,7 @@ public class VPlayerPanel extends FContainer {
     private class CompactPhaseButton extends FDisplayObject {
         @Override
         public boolean tap(float x, float y, int count) {
-            if (!isCompactLayout()) { return false; }
+            if (!compactLayout()) { return false; }
             phaseIndicator.toggleStops();
             return true;
         }
@@ -1193,7 +1246,7 @@ public class VPlayerPanel extends FContainer {
 
     private void updateTabLayout(float width, float height) {
         phaseIndicator.resetFont();
-        if (isCompactLayout()) { //the stops column opens over the left edge of the field
+        if (compactLayout()) { //the stops column opens over the left edge of the field
             final float stopsWidth = Math.round(Math.max(avatar.getWidth() * COMPACT_STOPS_WIDTH_RATIO, tabColWidth * 0.55f));
             //opens on the inner side of the control column
             phaseIndicator.setBounds(isCompactRight() ? getColumnX() - stopsWidth : tabColWidth, 0, stopsWidth, height);
@@ -1206,11 +1259,11 @@ public class VPlayerPanel extends FContainer {
 
     //only what moves during slide animations: field, command zone and zone displays
     private void updateAnimatedLayout(float width, float height) {
-        if (isCompactLayout()) {
+        if (compactLayout()) {
             updateCompactAnimatedLayout(width, height);
             return;
         }
-        if (isAltZoneLayout()) {
+        if (altZoneLayout()) {
             updateAltAnimatedLayout(width, height);
             return;
         }
@@ -1409,7 +1462,7 @@ public class VPlayerPanel extends FContainer {
 
     //zone contents changed: the box follows the card count
     private void refreshAltBox() {
-        if (selectedTab != null && Forge.isLandscapeMode() && initW > 0 && isAltZoneLayout()) {
+        if (selectedTab != null && landscapeLayout() && initW > 0 && altZoneLayout()) {
             updateAnimatedLayout(initW, initH);
         }
     }
@@ -1423,7 +1476,7 @@ public class VPlayerPanel extends FContainer {
             } else {
                 boxWidthCur += diff * Math.min(1f, dt * 16f);
             }
-            if (selectedTab != null && Forge.isLandscapeMode() && initW > 0) {
+            if (selectedTab != null && landscapeLayout() && initW > 0) {
                 updateAnimatedLayout(initW, initH);
             }
             return boxWidthCur != boxWidthTarget;
@@ -1439,14 +1492,14 @@ public class VPlayerPanel extends FContainer {
     public float getCommonTabWidth() { return commonTabWidth; }
 
     /** @return the width of one control column in the compact layout (the double tab layout is two of these wide), 0 before the first layout */
-    public float getColumnWidth() { return compactSingleWidth > 0f && isCompactLayout() ? compactSingleWidth : tabColWidth; }
+    public float getColumnWidth() { return compactSingleWidth > 0f && compactLayout() ? compactSingleWidth : tabColWidth; }
 
     /**
      * @return the screen rect cards can visibly fly through in landscape mode, which is the panel without its two tab
      * columns, or null in portrait mode or before the first layout
      */
     public Rectangle getFlightArea() {
-        if (!Forge.isLandscapeMode() || screenPos.width <= 0 || tabColWidth <= 0) { return null; }
+        if (!landscapeLayout() || screenPos.width <= 0 || tabColWidth <= 0) { return null; }
         float left = screenPos.x + tabColWidth;
         float right = screenPos.x + screenPos.width - commonTabWidth;
         if (isCompactRight()) { //controls on the right: the free area is everything left of them
@@ -1460,7 +1513,7 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void draw(Graphics g) {
-        if (Forge.isLandscapeMode() && commonTabWidth > 0 && slideProgress < 1f) {
+        if (landscapeLayout() && commonTabWidth > 0 && slideProgress < 1f) {
             //zone displays slide in and out from behind the right tab column, so don't let them draw over it
             g.startClip(0, 0, getWidth() - commonTabWidth, getHeight());
             try {
@@ -1469,7 +1522,7 @@ public class VPlayerPanel extends FContainer {
                 g.endClip();
             }
             drawCommonTabColumn(g);
-        } else if (slideProgress < 1f && Forge.isLandscapeMode()) {
+        } else if (slideProgress < 1f && landscapeLayout()) {
             //keep the zone display from drawing outside this panel while it slides
             g.startClip(0, 0, getWidth(), getHeight());
             try {
@@ -1538,7 +1591,7 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
-        if (Forge.isLandscapeMode()) {
+        if (landscapeLayout()) {
             FSkinColor tabBg = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
             if (commonTabWidth > 0) {
                 if (isFrosted()) { g.fillRect(COMPACT_GLASS, getWidth() - commonTabWidth, 0, commonTabWidth, getHeight()); }
@@ -1566,9 +1619,9 @@ public class VPlayerPanel extends FContainer {
             float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
             float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
             float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
-            final boolean overlayBox = isZoneOverlay() && Forge.isLandscapeMode() && isStripDisplay(selectedDisplayArea);
+            final boolean overlayBox = isZoneOverlay() && landscapeLayout() && isStripDisplay(selectedDisplayArea);
             //compact layout: the open zone sits in a rounded box with room around its cards, so it reads apart from the battlefield
-            final boolean compactBox = isCompactLayout() && isStripDisplay(selectedDisplayArea);
+            final boolean compactBox = compactLayout() && isStripDisplay(selectedDisplayArea);
             if (compactBox) {
                 drawZoneBox(g, x - COMPACT_ZONE_INSET, top - COMPACT_ZONE_INSET, w + 2 * COMPACT_ZONE_INSET, h + 2 * COMPACT_ZONE_INSET);
             } else if (!overlayBox) {
@@ -1577,12 +1630,12 @@ public class VPlayerPanel extends FContainer {
 
             if (overlayBox || compactBox) {
                 //no frame lines: the compact box has its own ring, and the full overlay box would extend past the cards
-            } else if (Forge.isLandscapeMode()) {
+            } else if (landscapeLayout()) {
                 if (isStripDisplay(selectedDisplayArea)) { //corner box: border on its left and field facing edges
                     float edgeY = isFlipped() ? bottom : top;
                     zoneLine(g, x, top, x, bottom);
                     zoneLine(g, x, edgeY, x + w, edgeY);
-                    if (isCompactLayout()) { //the compact box floats beside the field, so it is closed on its right too
+                    if (compactLayout()) { //the compact box floats beside the field, so it is closed on its right too
                         zoneLine(g, x + w, top, x + w, bottom);
                     }
                 } else {
@@ -1598,8 +1651,8 @@ public class VPlayerPanel extends FContainer {
                 zoneLine(g, right, y, w, y);
             }
         }
-        if (Forge.isLandscapeMode() && commandVisibleWidth > 0 && commandZone.isVisible()) {
-            if (isCompactLayout()) { //the same rounded box as the card zone, its height and inset taken from the layout
+        if (landscapeLayout() && commandVisibleWidth > 0 && commandZone.isVisible()) {
+            if (compactLayout()) { //the same rounded box as the card zone, its height and inset taken from the layout
                 final float inset = COMPACT_ZONE_INSET;
                 drawZoneBox(g, commandBoxLeft, commandZone.getTop() - inset, commandBoxVisibleWidth, commandZone.getHeight() + 2 * inset);
             } else {
@@ -1611,7 +1664,7 @@ public class VPlayerPanel extends FContainer {
                 float sideX = isCompactRight() ? cx + commandVisibleWidth : cx; //the edge facing the field
                 zoneLine(g, sideX, cy, sideX, cy + ch);
                 //edge facing the field (the alternate layout puts the command zone on the inner side)
-                float edgeY = isFlipped() != isAltZoneLayout() ? cy + ch : cy;
+                float edgeY = isFlipped() != altZoneLayout() ? cy + ch : cy;
                 zoneLine(g, cx, edgeY, cx + commandVisibleWidth, edgeY);
             }
         }
@@ -1677,7 +1730,7 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
-            if (Forge.altPlayerLayout && Forge.isLandscapeMode()) {
+            if (Forge.altPlayerLayout && landscapeLayout()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width + 1, INFO2_FONT.getBounds(lifeStr).height + 1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
@@ -1817,7 +1870,7 @@ public class VPlayerPanel extends FContainer {
                 g.startRotateTransform(tx + tw / 2, cy, 180);
                 align = Align.right;
             }
-            g.drawText(value, isCompactLayout() ? COMPACT_VALUE_FONT : INFO_FONT, getInfoForeColor(), tx, 0, tw, getHeight(), false, align, true);
+            g.drawText(value, compactLayout() ? COMPACT_VALUE_FONT : INFO_FONT, getInfoForeColor(), tx, 0, tw, getHeight(), false, align, true);
             if (rotated) { g.endTransform(); }
         }
 
@@ -1875,7 +1928,7 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             //compact layout: tabs scroll under the edges of the viewport, so a tab part way out must not draw past it
-            final boolean clip = isCompactLayout() && compactViewHeight > 0;
+            final boolean clip = compactLayout() && compactViewHeight > 0;
             if (clip) { g.startClip(0, compactViewTop - getTop(), getWidth(), compactViewHeight); }
             try {
                 drawTab(g);
@@ -1885,7 +1938,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         private void drawTab(Graphics g) {
-            if (Forge.isLandscapeMode() && isCommonZone() && !isFrosted()) {
+            if (landscapeLayout() && isCommonZone() && !isFrosted()) {
                 g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
             }
             float x, y, w, h;
@@ -1906,12 +1959,12 @@ public class VPlayerPanel extends FContainer {
                     y--;
                     h += 2;
                 }
-                float fillY = Forge.isLandscapeMode() ? 0 : (isFlipped() ? INFO_TAB_PADDING_Y : 0);
-                float fillH = Forge.isLandscapeMode() ? getHeight() : getHeight() - INFO_TAB_PADDING_Y;
+                float fillY = landscapeLayout() ? 0 : (isFlipped() ? INFO_TAB_PADDING_Y : 0);
+                float fillH = landscapeLayout() ? getHeight() : getHeight() - INFO_TAB_PADDING_Y;
                 if (drawOverlay)
                     g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, fillY, w, fillH);
                 //change the graveyard tab selection color to active phase color to indicate the player has delirium
-                if (isCompactLayout()) { //a flat soft band across the panel, no rounding
+                if (compactLayout()) { //a flat soft band across the panel, no rounding
                     final float pad = Utils.scale(3);
                     g.fillRect(COMPACT_GLASS_CHIP, pad, 0, w - 2 * pad, getHeight());
                 } else if (isFrosted()) {
@@ -1919,7 +1972,7 @@ public class VPlayerPanel extends FContainer {
                 } else {
                     g.fillRect(this.getSelectedBackgroundColor(), 0, fillY, w, fillH);
                 }
-                if (!Forge.isLandscapeMode()) {
+                if (!landscapeLayout()) {
                     if (isFlipped()) { //use clip to ensure all corners connect
                         g.startClip(-1, y, w + 2, h);
                     } else {
@@ -1933,7 +1986,7 @@ public class VPlayerPanel extends FContainer {
                     g.endClip();
                 }
             }
-            if (Forge.isLandscapeMode()) {
+            if (landscapeLayout()) {
                 if (isDoubleTabs()) { drawDoubleContent(g); } else { drawLandscapeContent(g); }
                 return;
             }
@@ -2053,32 +2106,32 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         protected boolean isSelected() {
-            return Forge.isLandscapeMode() ? commandOpen : selectedTab == this;
+            return landscapeLayout() ? commandOpen : selectedTab == this;
         }
 
         @Override
         protected boolean isTabShown() {
-            //return Forge.isLandscapeMode() && (isSelected() || displayArea.getCount() > 0 || commandProgress > 0f);
+            //return landscapeLayout() && (isSelected() || displayArea.getCount() > 0 || commandProgress > 0f);
             // Keep the Commander zone tab available in compact landscape mode,
             // even when the zone is empty. The compact two-column layout should
             // expose the same zone controls consistently.
-            return Forge.isLandscapeMode() && (isCompactLayout() || isSelected() || displayArea.getCount() > 0 || commandProgress > 0f);
+            return landscapeLayout() && (compactLayout() || isSelected() || displayArea.getCount() > 0 || commandProgress > 0f);
         }
 
         @Override
         public void setDisplayBounds(float x, float y, float width, float height) {
-            if (!Forge.isLandscapeMode()) { //landscape lays this display out separately
+            if (!landscapeLayout()) { //landscape lays this display out separately
                 super.setDisplayBounds(x, y, width, height);
             }
         }
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (isCompactLayout()) {
+            if (compactLayout()) {
                 toggleCompactCommandZone();
                 return true;
             }
-            if (Forge.isLandscapeMode()) {
+            if (landscapeLayout()) {
                 boolean open = !commandOpen;
                 commandUserClosed = !open;
                 setCommandOpen(open);
@@ -2098,7 +2151,7 @@ public class VPlayerPanel extends FContainer {
         commandOpen = open;
         stopCommandAnimation();
         if (open) { commandZone.setVisible(true); }
-        if (!Forge.isLandscapeMode() || getWidth() <= 0) {
+        if (!landscapeLayout() || getWidth() <= 0) {
             commandProgress = open ? 1f : 0f;
             commandZone.setVisible(open);
             return;
@@ -2129,7 +2182,7 @@ public class VPlayerPanel extends FContainer {
             float t = Math.min(elapsed / SLIDE_DURATION, 1f);
             float eased = 1f - (1f - t) * (1f - t) * (1f - t);
             commandProgress = startProgress + ((opening ? 1f : 0f) - startProgress) * eased;
-            if (Forge.isLandscapeMode()) {
+            if (landscapeLayout()) {
                 updateAnimatedLayout(initW, initH);
             }
             return t < 1f;
@@ -2141,7 +2194,7 @@ public class VPlayerPanel extends FContainer {
             commandAnimation = null;
             commandProgress = opening ? 1f : 0f;
             if (!opening) { commandZone.setVisible(false); }
-            if (Forge.isLandscapeMode()) {
+            if (landscapeLayout()) {
                 layoutTabsLandscape();
                 updateAnimatedLayout(initW, initH);
             }
@@ -2344,7 +2397,7 @@ public class VPlayerPanel extends FContainer {
         protected void refreshCardPanels(Iterable<CardView> model) {
             int oldCount = getCount();
             super.refreshCardPanels(model);
-            if (!Forge.isLandscapeMode() && getCount() != oldCount) {
+            if (!landscapeLayout() && getCount() != oldCount) {
                 setVisible(getCount() > 0);
                 VPlayerPanel.this.revalidate();
             }
@@ -2357,10 +2410,10 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
-            if (Forge.isLandscapeMode() && commandVisibleWidth < 1f) {
+            if (landscapeLayout() && commandVisibleWidth < 1f) {
                 return;
             }
-            if (commandProgress < 1f && Forge.isLandscapeMode()) {
+            if (commandProgress < 1f && landscapeLayout()) {
                 //only the part that has slid out from the field edge is visible
                 g.startClip(isCompactRight() ? getWidth() - commandVisibleWidth : 0, 0, commandVisibleWidth, getHeight());
                 try {
@@ -2376,7 +2429,7 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (MatchController.getView().selectedPlayerPanel() == this && !((FMenuBar) MatchController.getView().getHeader()).isShowingMenu(true)) {
+        if (MatchController.getView().selectedPlayerPanel() == this && !MatchController.getView().isPadBlockedByMenu()) {
             if (keyCode == Input.Keys.BUTTON_B) {
                 MatchScreen.nullPotentialListener();
                 closeSelectedTab();

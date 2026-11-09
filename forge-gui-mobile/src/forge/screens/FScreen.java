@@ -404,6 +404,13 @@ public abstract class FScreen extends FContainer {
         return getLandscapeBackdropScreen() != HomeScreen.instance; //don't allow going back if home screen is backdrop by default
     }
 
+    /**
+     * Content for the secondary (bottom) display of a dual-screen device, or null to show the idle panel.
+     */
+    public FContainer getSecondaryRoot() {
+        return null;
+    }
+
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {

@@ -362,6 +362,38 @@ public class VField extends FContainer {
         public void update() { //no logic needed
         }
 
+        /** Whether the controller highlight is on the last card of the row (or the row is empty). */
+        public boolean isSelectionAtEnd() {
+            return this.getChildCount() == 0 || this.selected >= this.getChildCount() - 1;
+        }
+
+        @Override
+        protected void syncControllerSelection() {
+            if (this.selectedChild == null) {
+                return;
+            }
+            int index = VDisplayArea.indexOfChild(this, this.selectedChild);
+            if (index >= 0) {
+                this.selected = index;
+                return;
+            }
+            //the selected card left the battlefield: highlight the card that took its place
+            boolean active = this.selectedChild.isHovered();
+            this.selectedChild.setHovered(false);
+            this.selectedChild = null;
+            if (!active || this.getChildCount() == 0) {
+                this.selected = -1;
+                if (active) {
+                    MatchScreen.nullPotentialListener();
+                }
+                return;
+            }
+            this.selected = Math.min(Math.max(this.selected, 0), this.getChildCount() - 1);
+            this.selectedChild = getChildAt(this.selected);
+            this.selectedChild.setHovered(true);
+            MatchScreen.setPotentialListener(Arrays.asList(this.selectedChild));
+        }
+
         @Override
         public void setNextSelected(int val) {
             this.selected++;
@@ -413,7 +445,7 @@ public class VField extends FContainer {
         @Override
         public void tapChild() {
             if (this.selectedChild instanceof FCardPanel)
-                VCardDisplayArea.CardAreaPanel.get(((FCardPanel) this.selectedChild).getCard()).selectCard(false);
+                VCardDisplayArea.CardAreaPanel.get(((FCardPanel) this.selectedChild).getCard()).controllerTap();
         }
     }
 }

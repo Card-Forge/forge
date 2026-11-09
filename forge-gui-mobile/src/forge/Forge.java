@@ -9,6 +9,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.ControllerMapping;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
@@ -39,6 +40,7 @@ import forge.gui.download.CdnUuidCache;
 import forge.gui.error.BugReporter;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IDeviceAdapter;
+import forge.interfaces.ISecondaryScreen;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -77,6 +79,7 @@ public class Forge implements ApplicationListener {
     private static Graphics graphics;
     private static FScreen currentScreen;
     private static ControllerListener controllerListener;
+    private static boolean controllerListenerAdded = false;
     private static boolean hasGamepad = false;
     private static boolean lastInputWasController = false;
     public static Texture lastPreview = null;
@@ -201,6 +204,7 @@ public class Forge implements ApplicationListener {
         inputProcessor = new MainInputProcessor();
 
         Gdx.input.setInputProcessor(inputProcessor);
+        attachSecondaryInput();
         /*
          Set CatchBackKey here and exit the app when you hit the
          back button while the textures,fonts,etc are still loading,
@@ -208,6 +212,15 @@ public class Forge implements ApplicationListener {
          the app again (seems it doesnt dispose correctly...?!?)
          */
         Gdx.input.setCatchKey(Keys.BACK, true);
+        //controller support for Classic mode (menus and matches), e.g. built-in handheld controls
+        try {
+            hasGamepad = GuiBase.isAndroid()
+                    ? !getDeviceAdapter().getGamepads().isEmpty()
+                    : Controllers.getCurrent() != null;
+            enableControllerListener();
+        } catch (Throwable t) {
+            t.printStackTrace(); //controller backend missing shouldn't block startup
+        }
         destroyThis = true; //Prevent back()
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = getForgePreferences().getPref(FPref.UI_SELECTOR_MODE);
@@ -298,11 +311,10 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean hasGamepad() {
-        //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
-            return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
+            return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad in Adventure
         }
-        return false;
+        return hasGamepad;
     }
 
     public static void setWindowFocus(boolean focused) {
@@ -698,6 +710,37 @@ public class Forge implements ApplicationListener {
             System.err.println("Forge switches to English due to an error generating CJK Fonts. Language: "+locale);
         }
     }
+    /** Routes touches from the secondary display (delivered on any thread) to a dedicated gesture processor. */
+    private static void attachSecondaryInput() {
+        ISecondaryScreen secondaryScreen = getDeviceAdapter() == null ? null : getDeviceAdapter().getSecondaryScreen();
+        if (secondaryScreen == null) {
+            return;
+        }
+        final MainInputProcessor processor = new MainInputProcessor(true);
+        secondaryScreen.setTouchListener(new ISecondaryScreen.TouchListener() {
+            @Override
+            public void touchDown(int x, int y, int pointer) {
+                post(() -> processor.touchDown(x, y, pointer, Input.Buttons.LEFT));
+            }
+            @Override
+            public void touchDragged(int x, int y, int pointer) {
+                post(() -> processor.touchDragged(x, y, pointer));
+            }
+            @Override
+            public void touchUp(int x, int y, int pointer) {
+                post(() -> processor.touchUp(x, y, pointer, Input.Buttons.LEFT));
+            }
+            private void post(Runnable r) {
+                Gdx.app.postRunnable(() -> {
+                    if (!isDisposed && SecondaryDisplay.isActive()) {
+                        r.run();
+                    }
+                    Gdx.graphics.requestRendering();
+                });
+            }
+        });
+    }
+
     public static void showMenu() {
         if (isMobileAdventureMode)
             return;
@@ -1002,6 +1045,8 @@ public class Forge implements ApplicationListener {
             OverlayText.getInstance().render(delta);
             // render framerate if enabled
             FrameRate.getInstance().render(showFPS);
+            // adventure isn't dual-screen aware: idle panel on the second display
+            SecondaryDisplay.render(null);
             return;
         }
         // update DiceOverlay
@@ -1010,6 +1055,8 @@ public class Forge implements ApplicationListener {
         Classic.getInstance().render(screen);
         DiceOverlay.getInstance().render();
         FrameRate.getInstance().render(showFPS);
+        // second physical display (dual-screen handhelds), drawn with the same GL context
+        SecondaryDisplay.render(screen);
     }
 
     private static FContainer getHierachyScreen() {
@@ -1273,7 +1320,16 @@ public class Forge implements ApplicationListener {
     public static float mouseMovedX = 0;
     public static float mouseMovedY = 0;
     private static class MainInputProcessor extends FGestureAdapter {
-        private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
+        private final List<FDisplayObject> potentialListeners = new ArrayList<>();
+        /** true for the processor that handles touches on the secondary (bottom) display */
+        private final boolean secondary;
+
+        MainInputProcessor() {
+            this(false);
+        }
+        MainInputProcessor(boolean secondary0) {
+            secondary = secondary0;
+        }
         private static char lastKeyTyped;
         private static boolean keyTyped, shiftKeyDown;
 
@@ -1376,6 +1432,20 @@ public class Forge implements ApplicationListener {
 
         private void updatePotentialListeners(float x, float y) {
             potentialListeners.clear();
+
+            if (secondary) {
+                //a modal dialog on the primary display blocks the board on the secondary display too
+                for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
+                    if (overlay.isVisibleOnScreen(currentScreen) && overlay.preventInputBehindOverlay()) {
+                        return;
+                    }
+                }
+                FContainer root = SecondaryDisplay.getCurrentRoot();
+                if (root != null) {
+                    root.buildTouchListeners(x, y, potentialListeners);
+                }
+                return;
+            }
 
             //base potential listeners on object containing touch down point
             for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
@@ -1649,132 +1719,154 @@ public class Forge implements ApplicationListener {
                     translateAxis(controller, axisIndex, value);//prevent multi press axis
                     return super.axisMoved(controller, axisIndex, value);
                 }
+                private final boolean[] axisPushed = new boolean[16];
                 private void translateAxis(Controller controller, int axisIndex, float value) {
                     if (!hasGamepad())
-                        return;//adventure only
-                    FContainer container = FOverlay.getTopOverlay();
-                    if (container == null) {
-                        container = currentScreen;
-                    }
-                    if (container != null) {
-                        if (currentScreen instanceof MatchScreen) {
-                            if (4 == axisIndex && value == 1f) { //others are L2Button if missing this axis
-                                container.keyDown(Keys.ENTER);
-                            }
-                            if (5 == axisIndex && value == 1f) { //others are R2 Button if missing this axis
-                                container.keyDown(Keys.ESCAPE);
-                            }
-                            if (controller.getMapping().axisLeftY == axisIndex) {
-                                if (value == 1f)
-                                    container.keyDown(Keys.PAGE_DOWN);
-                            }
-                        /*if (controller.getMapping().axisLeftX == axisIndex) {
-                            if (value == 1f) {
-
-                            }
-                        }*/
-                        }
-                    }
+                        return;
+                    if (isMobileAdventureMode && !(currentScreen instanceof MatchScreen))
+                        return; //adventure scenes have their own listener
+                    //edge-detect so a held stick/trigger fires once per push
+                    if (axisIndex < 0 || axisIndex >= axisPushed.length)
+                        return;
+                    boolean pushed = Math.abs(value) > 0.6f;
+                    boolean wasPushed = axisPushed[axisIndex];
+                    axisPushed[axisIndex] = pushed;
+                    if (!pushed || wasPushed)
+                        return;
+                    int key = -1;
+                    ControllerMapping m = controller.getMapping();
+                    if (4 == axisIndex && value > 0) //L2 trigger axis
+                        key = currentScreen instanceof MatchScreen ? Keys.ENTER : Keys.PAGE_UP;
+                    else if (5 == axisIndex && value > 0) //R2 trigger axis
+                        key = currentScreen instanceof MatchScreen ? Keys.ESCAPE : Keys.PAGE_DOWN;
+                    else if (m.axisLeftY == axisIndex)
+                        key = value > 0 ? Keys.DPAD_DOWN : Keys.DPAD_UP;
+                    else if (m.axisLeftX == axisIndex)
+                        key = value > 0 ? Keys.DPAD_RIGHT : Keys.DPAD_LEFT;
+                    if (key != -1)
+                        dispatchControllerKey(key);
                 }
                 private void translateButtons(Controller controller, int buttonIndex, boolean keyDown) {
-                    if (!hasGamepad())
-                        return; //adventure only
                     if (!keyDown)
                         return; //prevent keyup on forgescene
-                    //overlay shoud have priority
-                    FContainer container = FOverlay.getTopOverlay();
-                    if (container == null) {
-                        container = currentScreen;
-                    }
-                    if (container != null) {
-                        if (currentScreen instanceof MatchScreen) {
-                            if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
-                                container.keyDown(Keys.ENTER);
-                            }
-                            if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
-                                container.keyDown(Keys.ESCAPE);
-                            }
-                            if (controller.getMapping().buttonX == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_X);
-                            }
-                            if (controller.getMapping().buttonY == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_Y);
-                            }
-                            if (controller.getMapping().buttonR1 == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_R1);
-                            }
-                            if (controller.getMapping().buttonL1 == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_L1);
-                            }
-                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
-                                container.keyDown(Keys.DPAD_DOWN);
-                            }
-                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
-                                container.keyDown(Keys.DPAD_LEFT);
-                            }
-                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
-                                container.keyDown(Keys.DPAD_RIGHT);
-                            }
-                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
-                                container.keyDown(Keys.DPAD_UP);
-                            }
-                            if (controller.getMapping().buttonA == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_A);
-                            }
-                            if (controller.getMapping().buttonB == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_B);
-                            }
-                            if (controller.getMapping().buttonBack == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_SELECT);
-                            }
-                        } else {//Others
-                        /*if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
-                            container.keyDown(Keys.ENTER);
-                        }
-                        if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
-                            container.keyDown(Keys.ESCAPE);
-                        }*/
-                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
-                                container.keyDown(Keys.DPAD_DOWN);
-                            }
-                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
-                                container.keyDown(Keys.DPAD_LEFT);
-                            }
-                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
-                                container.keyDown(Keys.DPAD_RIGHT);
-                            }
-                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
-                                container.keyDown(Keys.DPAD_UP);
-                            }
-                            if (controller.getMapping().buttonBack == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_SELECT);
-                            }
-                            if (controller.getMapping().buttonB == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_B);
-                            }
-                            if (controller.getMapping().buttonA == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_A);
-                            }
-                            if (controller.getMapping().buttonX == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_X);
-                            }
-                            if (controller.getMapping().buttonY == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_Y);
-                            }
-                            if (controller.getMapping().buttonR1 == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_R1);
-                            }
-                            if (controller.getMapping().buttonL1 == buttonIndex) {
-                                container.keyDown(Keys.BUTTON_L1);
-                            }
-                        }
-                    }
+                    PadButton button = PadButton.fromMapping(controller.getMapping(), buttonIndex);
+                    if (button != null)
+                        handlePadButton(button);
                 }
             };
         }
-        Controllers.addListener(controllerListener);
+        if (!controllerListenerAdded) {
+            Controllers.addListener(controllerListener);
+            controllerListenerAdded = true;
+        }
         if (Controllers.getCurrent() != null)
             System.out.println("Gamepad: " + Controllers.getCurrent().getName());
+    }
+
+    /** Logical controller buttons, independent of a controller's raw button numbering. */
+    public enum PadButton {
+        A, B, X, Y, L1, R1, L2, R2, UP, DOWN, LEFT, RIGHT, START, SELECT;
+
+        static PadButton fromMapping(ControllerMapping m, int buttonIndex) {
+            if (buttonIndex == m.buttonA) return A;
+            if (buttonIndex == m.buttonB) return B;
+            if (buttonIndex == m.buttonX) return X;
+            if (buttonIndex == m.buttonY) return Y;
+            if (buttonIndex == m.buttonL1) return L1;
+            if (buttonIndex == m.buttonR1) return R1;
+            if (buttonIndex == m.buttonL2) return L2;
+            if (buttonIndex == m.buttonR2) return R2;
+            if (buttonIndex == m.buttonDpadUp) return UP;
+            if (buttonIndex == m.buttonDpadDown) return DOWN;
+            if (buttonIndex == m.buttonDpadLeft) return LEFT;
+            if (buttonIndex == m.buttonDpadRight) return RIGHT;
+            if (buttonIndex == m.buttonBack) return SELECT;
+            if (buttonIndex == m.buttonStart) return START;
+            return null;
+        }
+
+        /**
+         * The libGDX key code the Classic UI understands for this button.
+         * In matches L2/R2 act as OK/Cancel (pass priority / end turn); elsewhere they page lists.
+         */
+        int toKey(boolean inMatch) {
+            switch (this) {
+                case A: return Keys.BUTTON_A;
+                case B: return Keys.BUTTON_B;
+                case X: return Keys.BUTTON_X;
+                case Y: return Keys.BUTTON_Y;
+                case L1: return Keys.BUTTON_L1;
+                case R1: return Keys.BUTTON_R1;
+                case L2: return inMatch ? Keys.ENTER : Keys.PAGE_UP;
+                case R2: return inMatch ? Keys.ESCAPE : Keys.PAGE_DOWN;
+                case UP: return Keys.DPAD_UP;
+                case DOWN: return Keys.DPAD_DOWN;
+                case LEFT: return Keys.DPAD_LEFT;
+                case RIGHT: return Keys.DPAD_RIGHT;
+                case SELECT: return Keys.BUTTON_SELECT;
+                case START: return Keys.BUTTON_START;
+                default: return -1;
+            }
+        }
+    }
+
+    /**
+     * Handles a controller button press in Classic mode (menus, dialogs and matches).
+     * Must be called on the GL thread. Used by the controller listener and by test tools that simulate a controller.
+     */
+    public static void handlePadButton(PadButton button) {
+        hasGamepad = true;
+        lastInputWasController = true;
+        if (!hasGamepad())
+            return;
+        if (isMobileAdventureMode && !(currentScreen instanceof MatchScreen))
+            return; //adventure scenes have their own listener
+        int key = button.toKey(currentScreen instanceof MatchScreen);
+        if (key != -1)
+            dispatchControllerKey(key);
+    }
+
+    //what controller keys go to: the top overlay, the current screen, or the splash screen's mode buttons
+    static FContainer getControllerKeyTarget() {
+        FContainer container = FOverlay.getTopOverlay();
+        if (container == null) {
+            container = currentScreen;
+        }
+        if (container == null && splashScreen != null && splashScreen.isShowModeSelector()) {
+            container = splashScreen; //Classic / Adventure mode buttons
+        }
+        return container;
+    }
+
+    /** Debug (test tools): the widgets controller focus can reach right now. Call on the GL thread. */
+    public static String describeControllerFocus() {
+        FContainer container = getControllerKeyTarget();
+        if (container instanceof MatchScreen) {
+            return ((MatchScreen) container).describeControllerState() + '\n' + ControllerFocus.describe(container);
+        }
+        return container == null ? "no target" : ControllerFocus.describe(container);
+    }
+
+    /** Sends a controller-originated key to the top overlay, or the current screen. */
+    static void dispatchControllerKey(int key) {
+        FContainer container = getControllerKeyTarget();
+        if (container == null) {
+            return;
+        }
+        boolean inMatch = currentScreen instanceof MatchScreen;
+        if (key == Keys.BUTTON_START && !inMatch) {
+            showMenu();
+            return;
+        }
+        if (ControllerFocus.handleKey(container, key)) {
+            Gdx.graphics.requestRendering();
+            return;
+        }
+        boolean handled = container.keyDown(key == Keys.BUTTON_START ? Keys.BUTTON_SELECT : key);
+        if (!handled && key == Keys.BUTTON_B && !(inMatch && container == currentScreen)) {
+            container.keyDown(Keys.BACK); //B acts as Back outside the match board
+        }
+        Gdx.graphics.requestRendering();
     }
 
     public static void setDesktopAutoOrientation(boolean auto) {

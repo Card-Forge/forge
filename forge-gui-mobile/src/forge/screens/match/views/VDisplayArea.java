@@ -28,6 +28,44 @@ public abstract class VDisplayArea extends FScrollPane {
         }
     }
 
+    /**
+     * Keeps controller selection valid after the cards changed: follows the selected card to its new position, or,
+     * when it left this area (played, discarded...), moves the highlight to the card that took its place.
+     */
+    protected void syncControllerSelection() {
+        if (selectedChild == null) {
+            return;
+        }
+        int index = indexOfChild(this, selectedChild);
+        if (index >= 0) {
+            selectedIndex = index;
+            return;
+        }
+        boolean active = selectedChild.isHovered();
+        selectedChild.setHovered(false);
+        selectedChild = null;
+        if (!active || getChildCount() == 0) {
+            selectedIndex = -1;
+            if (active) {
+                MatchScreen.nullPotentialListener();
+            }
+            return;
+        }
+        selectedIndex = Math.min(Math.max(selectedIndex, 0), getChildCount() - 1);
+        selectedChild = getChildAt(selectedIndex);
+        selectedChild.setHovered(true);
+        MatchScreen.setPotentialListener(Arrays.asList(selectedChild));
+    }
+
+    static int indexOfChild(FScrollPane area, FDisplayObject child) {
+        for (int i = 0; i < area.getChildCount(); i++) {
+            if (area.getChildAt(i) == child) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public abstract int getCount();
     public abstract void update();
     public void setNextSelected(int val) {
@@ -70,9 +108,35 @@ public abstract class VDisplayArea extends FScrollPane {
             MatchScreen.setPotentialListener(Arrays.asList(selectedChild));
         }
     }
+    /** Highlights the current card for controller navigation (the first one if none was selected yet). */
+    public void selectCurrent() {
+        if (selectedChild != null && selectedIndex >= 0 && selectedIndex < getChildCount() && getChildAt(selectedIndex) == selectedChild) {
+            selectedChild.setHovered(true);
+            scrollIntoView(selectedChild);
+            MatchScreen.setPotentialListener(Arrays.asList(selectedChild));
+        } else {
+            selectedIndex = -1;
+            selectedChild = null;
+            setNextSelected(1);
+        }
+    }
+
+    /** Whether the controller highlight is on the first card (or nothing is highlighted). */
+    public boolean isSelectionAtStart() {
+        return selectedIndex <= 0;
+    }
+
+    /** Removes the controller highlight. */
+    public void unselectCurrent() {
+        if (selectedChild != null) {
+            selectedChild.setHovered(false);
+            MatchScreen.nullPotentialListener();
+        }
+    }
+
     public void tapChild() {
         if (selectedChild instanceof FCardPanel)
-            VCardDisplayArea.CardAreaPanel.get(((FCardPanel) selectedChild).getCard()).selectCard(false);
+            VCardDisplayArea.CardAreaPanel.get(((FCardPanel) selectedChild).getCard()).controllerTap();
         else if (selectedChild instanceof VManaPool.ManaLabel)
             ((VManaPool.ManaLabel) selectedChild).activate();
     }

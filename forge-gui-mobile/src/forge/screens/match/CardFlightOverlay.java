@@ -446,12 +446,34 @@ public final class CardFlightOverlay {
     }
 
     public static void draw(Graphics g, PlayerView bottomPlayer, float screenH) {
+        drawFiltered(g, bottomPlayer, screenH, null, false);
+    }
+
+    /**
+     * @param controlledBy when not null, only flights of cards controlled by this player are drawn (dual-screen:
+     *                     the bottom screen draws the local player's cards, the top screen everyone else's)
+     * @param exclude when true, the filter is inverted: cards controlled by {@code controlledBy} are skipped
+     */
+    public static void draw(Graphics g, PlayerView bottomPlayer, float screenH, PlayerView controlledBy, boolean exclude) {
+        drawFiltered(g, bottomPlayer, screenH, controlledBy, exclude);
+    }
+
+    private static boolean matches(Flight f, PlayerView controlledBy, boolean exclude) {
+        if (controlledBy == null) { return true; }
+        PlayerView controller = f.card.getController();
+        if (controller == null) { controller = f.card.getOwner(); }
+        boolean same = controlledBy.equals(controller);
+        return exclude != same;
+    }
+
+    private static void drawFiltered(Graphics g, PlayerView bottomPlayer, float screenH, PlayerView controlledBy, boolean exclude) {
         style();
         if (flights.isEmpty()) { return; }
 
         final long now = TimeUtils.nanoTime();
         for (int i = 0; i < flights.size(); ) {      // index loop: no Iterator allocation, oldest drawn first
             Flight f = flights.get(i);
+            if (!matches(f, controlledBy, exclude)) { i++; continue; }
 
             if (!f.resolved) {
                 if (f.leave) { resolveLeave(f); } else { resolve(f, bottomPlayer, screenH); }

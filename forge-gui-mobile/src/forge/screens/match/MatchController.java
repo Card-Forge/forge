@@ -410,6 +410,9 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void updateTurn(final PlayerView player) {
+        if (view != null) {
+            view.followTurn(player); //dual screen: show the battlefield of the opponent whose turn it is
+        }
     }
 
     @Override

@@ -32,6 +32,7 @@ import forge.model.FModel;
 import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.toolbox.ControllerFocus;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FSelectionBox;
@@ -188,23 +189,40 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     @Override
     protected void drawOverlay(Graphics g) {
         super.drawOverlay(g);
+        //with a gamepad cards don't grow on hover, so outline the card the controller is on (drawn after all cards so
+        //overlapping neighbours don't cover it)
+        if (Forge.hasGamepad() && Forge.lastInputWasController()) {
+            for (CardAreaPanel panel : cardPanels.get()) {
+                if (panel.isHovered()) {
+                    Rectangle r = cardBounds(panel);
+                    ControllerFocus.drawRing(g, r.x, r.y, r.width, r.height);
+                    break;
+                }
+            }
+        }
         if (dragPanel == null || !Forge.isLandscapeMode()) { return; }
 
         //surround the selected card with a box, matching how the card is drawn (tapped cards are turned sideways)
+        Rectangle r = cardBounds(dragPanel);
+        FSelectionBox.draw(g, Color.LIME, SELECTION_BOX_THICKNESS, r.x, r.y, r.width, r.height);
+    }
+
+    //where the card itself is drawn inside its panel, in this area's coordinates (tapped cards are turned sideways)
+    private static Rectangle cardBounds(CardAreaPanel panel) {
         final float padding = FCardPanel.PADDING;
-        float w = dragPanel.getWidth() - 2 * padding;
-        float h = dragPanel.getHeight() - 2 * padding;
+        float w = panel.getWidth() - 2 * padding;
+        float h = panel.getHeight() - 2 * padding;
         if (w == h) { //adjust width if needed to match how the card itself is drawn
             w = h / FCardPanel.ASPECT_RATIO;
         }
-        float top = dragPanel.getTop() + padding;
-        if (dragPanel.isTapped()) {
+        float top = panel.getTop() + padding;
+        if (panel.isTapped()) {
             top += h - w;
             float temp = w;
             w = h;
             h = temp;
         }
-        FSelectionBox.draw(g, Color.LIME, SELECTION_BOX_THICKNESS, dragPanel.getLeft() + padding, top, w, h);
+        return new Rectangle(panel.getLeft() + padding, top, w, h);
     }
     @Override
     public int getCount() {
@@ -295,6 +313,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             shownLastRefresh.addAll(shownScratch);
         }
 
+        syncControllerSelection();
         if (isVisible()) {
             revalidate();
             if (newCardPanel != null) {
@@ -783,6 +802,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 return true;
             }
             return false;
+        }
+
+        /** Controller/keyboard equivalent of a tap: same game-thread routing as {@link #tap}. */
+        public void controllerTap() {
+            ThreadUtil.invokeInGameThread(() -> {
+                if (!selectCard(false) && !MatchController.instance.isSelecting())
+                    FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
+            });
         }
 
         @Override

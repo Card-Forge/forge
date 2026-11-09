@@ -86,6 +86,7 @@ public class Main extends AndroidApplication {
     private static final long HEAP_HEARTBEAT_MS = 30_000L;
 
     private AndroidAdapter Gadapter;
+    private ThorSecondaryScreen secondaryScreen; //dual-screen handhelds (e.g. AYN Thor bottom screen)
     private ArrayList<String> gamepads;
     private AndroidClipboard androidClipboard;
     private boolean isMIUI;
@@ -172,6 +173,9 @@ public class Main extends AndroidApplication {
         try {
             super.onResume();
         } catch (Exception ignore) {}
+        if (secondaryScreen != null) {
+            secondaryScreen.onResume();
+        }
     }
 
     @Override
@@ -223,6 +227,12 @@ public class Main extends AndroidApplication {
         actManager.getMemoryInfo(memInfo);
 
         boolean permissiongranted = checkPermission();
+        try {
+            secondaryScreen = new ThorSecondaryScreen(this);
+        } catch (Exception e) {
+            netLog.warn("[dualscreen] unavailable: {}", e.toString());
+            secondaryScreen = null;
+        }
         Gadapter = new AndroidAdapter(getContext());
         String cpu = "";
         String soc = "";
@@ -582,6 +592,9 @@ public class Main extends AndroidApplication {
             heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
             heapHeartbeatHandler = null;
         }
+        if (secondaryScreen != null) {
+            secondaryScreen.onDestroy();
+        }
         triggerDispose();
         super.onDestroy();
         //ensure app doesn't stick around
@@ -610,6 +623,9 @@ public class Main extends AndroidApplication {
     @Override
     protected void onPause() {
         netLog.info("[lifecycle] onPause");
+        if (secondaryScreen != null) {
+            secondaryScreen.onPause();
+        }
         super.onPause();
 
         /*ForgePreferences prefs = FModel.getPreferences();
@@ -903,6 +919,11 @@ public class Main extends AndroidApplication {
         @Override
         public ArrayList<String> getGamepads() {
             return gamepads;
+        }
+
+        @Override
+        public forge.interfaces.ISecondaryScreen getSecondaryScreen() {
+            return secondaryScreen != null && secondaryScreen.hasDisplay() ? secondaryScreen : null;
         }
 
         //Commonly supported Android audio formats, taken from https://developer.android.com/media/platform/supported-formats#audio-formats

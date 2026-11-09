@@ -6,6 +6,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
+import forge.toolbox.ControllerFocus;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.Frost;
@@ -46,7 +47,7 @@ public abstract class LaunchScreen extends FScreen {
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
     protected abstract void startMatch();
 
-    protected class StartButton extends FDisplayObject {
+    protected class StartButton extends FDisplayObject implements ControllerFocus.Focusable {
         private boolean pressed;
 
         /**

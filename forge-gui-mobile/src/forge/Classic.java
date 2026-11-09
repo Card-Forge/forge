@@ -1,6 +1,7 @@
 package forge;
 
 import forge.gui.error.BugReporter;
+import forge.toolbox.ControllerFocus;
 import forge.toolbox.FContainer;
 import forge.toolbox.FOverlay;
 
@@ -11,6 +12,19 @@ public class Classic {
 
     public static Classic getInstance() {
         return instance == null ? instance = new Classic() : instance;
+    }
+
+    /** Draws a root container onto the secondary display (no overlays; they stay on the primary display). */
+    void renderSecondary(FContainer root, com.badlogic.gdx.graphics.Camera cam, int width, int height) {
+        Graphics g = Forge.getGraphics();
+        g.setProjectionMatrix(cam.combined);
+        g.begin(width, height);
+        try {
+            root.screenPos.set(0, 0, width, height);
+            root.draw(g);
+        } finally {
+            g.end();
+        }
     }
 
     void render(FContainer screen) {
@@ -40,6 +54,8 @@ public class Classic {
                     }
                 }
             }
+            //gamepad focus ring for menus/dialogs
+            ControllerFocus.draw(Forge.getGraphics(), Forge.getControllerKeyTarget());
             //update here
             if (Forge.needsUpdate) {
                 if (Forge.getAssets().manager().update(16))

@@ -3,6 +3,7 @@ package forge.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import forge.interfaces.IDeviceAdapter;
+import forge.interfaces.ISecondaryScreen;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.UpnpServiceConfiguration;
@@ -29,6 +30,7 @@ public class Main {
                this is an indicator if the LWJGL3 has booted up succesfully. */
             closeSplash();
         }
+        DesktopControllerHook.startIfEnabled(); //debug: simulated controller input for testing
         new GameLauncher(versionString, args);
     }
     public static void closeSplash() {
@@ -176,6 +178,13 @@ public class Main {
         @Override
         public void requestFileAcces() {
 
+        }
+
+        private final ISecondaryScreen secondaryScreen = DesktopSecondaryScreen.fromSystemProperties();
+
+        @Override
+        public ISecondaryScreen getSecondaryScreen() {
+            return secondaryScreen;
         }
 
         @Override

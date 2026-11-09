@@ -33,6 +33,11 @@ public interface IDeviceAdapter {
     boolean needFileAccess();
     void requestFileAcces();
 
+    /** Second display (e.g. dual-screen handheld bottom screen), or null if there is none. */
+    default ISecondaryScreen getSecondaryScreen() {
+        return null;
+    }
+
     /** Confine the mouse cursor to the window (desktop LibGDX only). Default no-op. */
     default void setMouseConfined(boolean confined) {
     }

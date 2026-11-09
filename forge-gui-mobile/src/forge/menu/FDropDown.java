@@ -144,6 +144,11 @@ public abstract class FDropDown extends FScrollPane {
 
     protected abstract boolean autoHide();
 
+    /** False for drop downs that stay docked open (e.g. the landscape lobby's mode menu) rather than popping up. */
+    public boolean isAutoHide() {
+        return autoHide();
+    }
+
     protected abstract ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight);
 
     protected void updateSizeAndPosition() {

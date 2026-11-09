@@ -24,6 +24,10 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
 import forge.toolbox.FDisplayObject;
+import com.badlogic.gdx.Gdx;
+import forge.assets.FSkinFont;
+import forge.toolbox.FLabel;
+import forge.toolbox.FContainer;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
@@ -35,6 +39,7 @@ import com.google.common.collect.Maps;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.SecondaryDisplay;
 import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -94,6 +99,12 @@ public class MatchScreen extends FScreen {
     private ViewWinLose viewWinLose = null;
     private static List<FDisplayObject> potentialListener;
     private int selectedPlayer;
+    //dual-screen devices: the local player's panel and prompt live on the secondary (bottom) display,
+    //the primary display shows one opponent at a time (switched with L1 / the opponent bar)
+    private final boolean dualScreen;
+    private VBottomScreen bottomScreen;
+    private VPlayerPanel shownOpponent;
+    private OpponentBar opponentBar;
 
 
     private final Map<Integer, Vector2> endpoints;
@@ -196,6 +207,18 @@ public class MatchScreen extends FScreen {
         cardsonBattlefield  = new HashSet<>();
         playerViewSet = new HashSet<>();
 
+        dualScreen = topPlayerPrompt == null && !Forge.isMobileAdventureMode && SecondaryDisplay.isEnabled();
+        if (dualScreen) {
+            scroller.remove(bottomPlayerPanel);
+            remove(bottomPlayerPrompt);
+            bottomPlayerPanel.setDualScreenBottom(true);
+            bottomScreen = new VBottomScreen(bottomPlayerPanel, bottomPlayerPrompt);
+            shownOpponent = topPlayerPanel;
+            if (playerPanelsList.size() > 2) {
+                opponentBar = scroller.add(new OpponentBar());
+            }
+        }
+
         if (topPlayerPrompt == null) {
             //the menu bar pops up over the top of the field in the compact layout, so it must draw above everything else
             remove(getHeader());
@@ -268,6 +291,281 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
     private VPlayerPanel liveBottom() { return playerPanelsList.get(playerPanelsList.size() - 1); }
     private int liveMultiplier() { return playerPanelsList.size() - 1; }
+
+    //dual-screen: the d-pad is in the local player's hand (a third row under the battlefield) rather than on the field
+    private boolean bottomFocusInHand;
+    private VZoneDisplay commandFocus; //the open command zone the controller is in (reached with RIGHT from the end of a row)
+
+    //dual-screen: the bottom panel is selected and its hand is the open zone
+    /** Debug (test tools): where the controller is in the match. */
+    public String describeControllerState() {
+        VPlayerPanel panel = selectedPlayerPanel();
+        StringBuilder sb = new StringBuilder("match: selectedPlayer=").append(selectedPlayer)
+                .append(panel == bottomPlayerPanel ? " (bottom)" : "").append(" dual=").append(dualScreen)
+                .append(" handFocus=").append(bottomFocusInHand).append(" handAvailable=").append(isBottomHandAvailable());
+        if (panel != null) {
+            sb.append(" row=").append(panel.getSelectedRow() == panel.getField().getRow1() ? "row1" : "row2")
+                    .append(" tab=").append(panel.getSelectedTab() == null ? "none" : panel.getSelectedTab() == panel.getHandTab() ? "hand" : "other");
+            sb.append(" rowChildren=[");
+            VField.FieldRow r = panel.getSelectedRow();
+            for (int i = 0; i < r.getChildCount(); i++) {
+                FDisplayObject c = r.getChildAt(i);
+                sb.append(c instanceof FCardPanel ? ((FCardPanel) c).getCard().toString() : c.getClass().getSimpleName())
+                        .append(c.isHovered() ? "*" : "").append(", ");
+            }
+            sb.append(']');
+        }
+        sb.append(" command=").append(commandFocus != null);
+        if (panel != null) {
+            VZoneDisplay cmd = panel.getVisibleCommandDisplay();
+            sb.append(" openCommand=").append(cmd == null ? "null" : cmd.getChildCount() + " cards");
+        }
+        sb.append(" hovered=");
+        if (potentialListener != null) {
+            for (FDisplayObject o : potentialListener) {
+                if (o != null && o.isHovered()) {
+                    sb.append(o instanceof FCardPanel ? ((FCardPanel) o).getCard().toString() : o.getClass().getSimpleName()).append(';');
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    private boolean isBottomHandAvailable() {
+        if (!dualScreen || selectedPlayerPanel() != bottomPlayerPanel) {
+            return false;
+        }
+        InfoTab tab = bottomPlayerPanel.getSelectedTab();
+        return tab != null && tab == bottomPlayerPanel.getHandTab() && tab.getDisplayArea().isVisible();
+    }
+
+    //whether the d-pad moves through the panel's open zone instead of its battlefield rows
+    private boolean navigatingTab(VPlayerPanel panel) {
+        InfoTab selected = panel.getSelectedTab();
+        if (selected == null || !selected.getDisplayArea().isVisible()) {
+            return false;
+        }
+        if (dualScreen && panel == bottomPlayerPanel && selected == panel.getHandTab()) {
+            return bottomFocusInHand; //the hand is always open on the bottom display: it's a row you move into
+        }
+        return true;
+    }
+
+    /** True when the local player's board is on the secondary (bottom) display. */
+    public boolean isDualScreen() {
+        return dualScreen;
+    }
+
+    @Override
+    public FContainer getSecondaryRoot() {
+        return dualScreen ? bottomScreen : null;
+    }
+
+    /** Dual-screen: the opponent whose battlefield is on the primary display. */
+    public VPlayerPanel getShownOpponent() {
+        if (shownOpponent == null || !playerPanelsList.contains(shownOpponent) || shownOpponent == bottomPlayerPanel) {
+            shownOpponent = null;
+            for (VPlayerPanel panel : playerPanelsList) {
+                if (panel != bottomPlayerPanel) {
+                    shownOpponent = panel;
+                    break;
+                }
+            }
+        }
+        return shownOpponent;
+    }
+
+    //an open menu takes the d-pad; in dual-screen mode the stack is just a display on the other screen, so it doesn't
+    public boolean isPadBlockedByMenu() {
+        FMenuBar menuBar = (FMenuBar) getHeader();
+        return dualScreen ? menuBar.isShowingMenuExcept(getStack()) : menuBar.isShowingMenu(true);
+    }
+
+    private void leaveCommandZone() {
+        if (commandFocus != null) {
+            commandFocus.unselectCurrent();
+            commandFocus = null;
+        }
+    }
+
+    /**
+     * Controller keys while the highlight is in a command zone: LEFT/RIGHT move through it (LEFT from its first card goes
+     * back to the battlefield row), A casts / activates, Y zooms; UP/DOWN leave it and act on the battlefield rows.
+     * @return true if the key was handled here
+     */
+    private boolean commandZoneKey(int keyCode) {
+        if (commandFocus == null) {
+            return false;
+        }
+        VPlayerPanel panel = selectedPlayerPanel();
+        if (panel == null || commandFocus != panel.getVisibleCommandDisplay() || commandFocus.getChildCount() == 0) {
+            leaveCommandZone(); //the commander was cast, or the zone closed
+            if (panel != null && (keyCode == Keys.DPAD_LEFT || keyCode == Keys.DPAD_RIGHT)) {
+                panel.getSelectedRow().selectCurrent();
+                return true;
+            }
+            return false;
+        }
+        switch (keyCode) {
+            case Keys.DPAD_RIGHT:
+                commandFocus.setNextSelected(1);
+                return true;
+            case Keys.DPAD_LEFT:
+                if (commandFocus.isSelectionAtStart()) {
+                    leaveCommandZone();
+                    panel.getSelectedRow().selectCurrent();
+                } else {
+                    commandFocus.setPreviousSelected(1);
+                }
+                return true;
+            case Keys.BUTTON_A:
+                commandFocus.tapChild();
+                return true;
+            case Keys.BUTTON_Y:
+                commandFocus.showZoom();
+                return true;
+            case Keys.DPAD_UP:
+            case Keys.DPAD_DOWN:
+            case Keys.BUTTON_L1:
+                leaveCommandZone();
+                return false; //continue on the battlefield rows
+            default:
+                return false;
+        }
+    }
+
+    private static boolean hasCards(VField.FieldRow row) {
+        return row.getChildCount() > 0;
+    }
+
+    //dual-screen: the d-pad crosses from the top of the bottom battlefield to the shown opponent's battlefield
+    private boolean canEnterShownOpponent() {
+        VPlayerPanel opponent = dualScreen ? getShownOpponent() : null;
+        return opponent != null && (hasCards(opponent.getField().getRow1()) || hasCards(opponent.getField().getRow2()));
+    }
+
+    private void enterShownOpponent() {
+        leaveCommandZone();
+        VPlayerPanel opponent = getShownOpponent();
+        if (bottomFocusInHand) {
+            bottomPlayerPanel.getSelectedTab().getDisplayArea().unselectCurrent();
+            bottomFocusInHand = false;
+        }
+        bottomPlayerPanel.getSelectedRow().unselectCurrent();
+        if (opponent.getSelectedTab() != null) {
+            opponent.closeSelectedTab(); //an open zone of the opponent would take over the d-pad
+        }
+        selectedPlayer = playerPanelsList.indexOf(opponent);
+        //row1 of the (flipped) opponent is the one nearest the middle of the table
+        VField.FieldRow target = hasCards(opponent.getField().getRow1()) ? opponent.getField().getRow1() : opponent.getField().getRow2();
+        if (opponent.getSelectedRow() != target) {
+            opponent.switchRow();
+        }
+        opponent.getSelectedRow().selectCurrent();
+    }
+
+    private void returnToBottomPanel() {
+        leaveCommandZone();
+        selectedPlayerPanel().getSelectedRow().unselectCurrent();
+        selectedPlayer = playerPanelsList.indexOf(bottomPlayerPanel);
+        VField field = bottomPlayerPanel.getField();
+        if (!hasCards(field.getRow1()) && !hasCards(field.getRow2()) && isBottomHandAvailable()) {
+            bottomFocusInHand = true;
+            bottomPlayerPanel.getSelectedTab().getDisplayArea().selectCurrent();
+            return;
+        }
+        VField.FieldRow target = hasCards(field.getRow1()) ? field.getRow1() : field.getRow2();
+        if (bottomPlayerPanel.getSelectedRow() != target) {
+            bottomPlayerPanel.switchRow();
+        }
+        bottomPlayerPanel.getSelectedRow().selectCurrent();
+    }
+
+    /**
+     * Dual-screen: when an opponent's turn starts, the primary display switches to that opponent's battlefield.
+     * A controller highlight on the previously shown opponent moves along to the new one.
+     */
+    public void followTurn(PlayerView player) {
+        if (!dualScreen || player == null) {
+            return;
+        }
+        VPlayerPanel panel = getPlayerPanel(player);
+        if (panel == null || panel == bottomPlayerPanel || panel == getShownOpponent()) {
+            return;
+        }
+        if (selectedPlayerPanel() == getShownOpponent()) {
+            leaveCommandZone();
+            selectedPlayerPanel().getSelectedRow().unselectCurrent();
+            selectedPlayer = playerPanelsList.indexOf(panel);
+        }
+        setShownOpponent(panel);
+    }
+
+    /** Dual-screen: shows this opponent's battlefield on the primary display. */
+    public void setShownOpponent(VPlayerPanel panel) {
+        if (!dualScreen || panel == null || panel == bottomPlayerPanel || panel == shownOpponent) {
+            return;
+        }
+        shownOpponent = panel;
+        if (opponentBar != null) {
+            opponentBar.update();
+        }
+        scroller.revalidate();
+        Gdx.graphics.requestRendering();
+    }
+
+    //a panel that is drawn on the primary display right now (dual-screen hides the bottom panel and other opponents)
+    private boolean isShownOnPrimary(VPlayerPanel panel) {
+        return !dualScreen || panel == getShownOpponent();
+    }
+
+    /** Dual-screen: row of buttons over the top field to pick which opponent is shown (3+ players). */
+    private class OpponentBar extends FContainer {
+        private final List<FLabel> buttons = new ArrayList<>();
+        private final List<VPlayerPanel> panels = new ArrayList<>();
+
+        private OpponentBar() {
+            update();
+        }
+
+        void update() {
+            List<VPlayerPanel> opponents = new ArrayList<>();
+            for (VPlayerPanel panel : playerPanelsList) {
+                if (panel != bottomPlayerPanel) {
+                    opponents.add(panel);
+                }
+            }
+            if (!opponents.equals(panels)) {
+                clear();
+                buttons.clear();
+                panels.clear();
+                for (VPlayerPanel panel : opponents) {
+                    panels.add(panel);
+                    buttons.add(add(new FLabel.ButtonBuilder().text(panel.getPlayer().getName())
+                            .font(FSkinFont.get(12)).command(e -> setShownOpponent(panel)).build()));
+                }
+            }
+            for (int i = 0; i < panels.size(); i++) {
+                buttons.get(i).setSelected(panels.get(i) == shownOpponent);
+            }
+            revalidate();
+        }
+
+        float getPreferredHeight() {
+            return Utils.scale(26);
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            if (buttons.isEmpty()) {
+                return;
+            }
+            float w = width / buttons.size();
+            for (int i = 0; i < buttons.size(); i++) {
+                buttons.get(i).setBounds(i * w, 0, w, height);
+            }
+        }
+    }
 
     private IGameController getGameController() {
         return MatchController.instance.getGameController();
@@ -451,6 +749,10 @@ public class MatchScreen extends FScreen {
             startY = VPrompt.HEIGHT;
             scrollerWidth -= menuBarWidth;
         }
+        if (dualScreen) {
+            scroller.setBounds(0, startY, scrollerWidth, height - startY);
+            return;
+        }
         scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
@@ -462,6 +764,9 @@ public class MatchScreen extends FScreen {
 
     @Override
     public Rectangle getDropDownBoundary() {
+        if (dualScreen) {
+            return new Rectangle(0, 0, getWidth(), getHeight()); //the prompt is on the bottom display
+        }
         if (topPlayerPrompt == null) {
             return new Rectangle(0, 0, getWidth(), getHeight() - VPrompt.HEIGHT); //prevent covering prompt
         }
@@ -504,7 +809,11 @@ public class MatchScreen extends FScreen {
         }
 
         drawArcs(g);
-        CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
+        if (dualScreen) {
+            CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight(), bottomPlayerPanel.getPlayer(), true);
+        } else {
+            CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
+        }
         drawCardPreview(g);
     }
 
@@ -589,6 +898,21 @@ public class MatchScreen extends FScreen {
             float h = getHeight() * PREVIEW_HEIGHT_RATIO;
             float w = h / FCardPanel.ASPECT_RATIO;
 
+            if (dualScreen && isOnBottomDisplay(anchor)) {
+                //the card is on the bottom display: show it big on the right of the top display
+                h = scroller.getHeight() * 0.92f;
+                w = h / FCardPanel.ASPECT_RATIO;
+                float px = scroller.getRight() - w - PREVIEW_GAP;
+                float py = scroller.screenPos.y + (scroller.getHeight() - h) / 2;
+                if (getStack().isVisible()) { px = Math.min(px, getStack().screenPos.x - w - PREVIEW_GAP); }
+                if (Forge.magnifyShowDetails) {
+                    CardImageRenderer.drawDetails(g, card, MatchController.instance.getGameView(), false, px, py, w, h);
+                } else {
+                    CardRenderer.drawCard(g, card, px, py, w, h, CardRenderer.CardStackPosition.Top, false, false, true);
+                }
+                return;
+            }
+
             float left = scroller.getLeft();
             float right = left + scroller.getWidth();
             VPlayerPanel owner = getPlayerPanel(card.getController());
@@ -633,7 +957,8 @@ public class MatchScreen extends FScreen {
                 x = Math.max(left, Math.min(x, right - w));
                 y = a.y + a.height / 2 - h / 2;
             }
-            y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            float previewBottom = dualScreen ? scroller.screenPos.y + scroller.getHeight() : bottomPlayerPrompt.screenPos.y;
+            y = Math.max(scroller.screenPos.y, Math.min(y, previewBottom - h));
             //open dropdowns draw over the preview, so it moves to their left instead of ending up under them
             if (getStack().isVisible()) { x = moveLeftOfObstacle(getStack().screenPos, x, y, w, h, a, left); }
             if (unifiedPhase.getMenu().isOpen()) { x = moveLeftOfObstacle(unifiedPhase.getMenu().screenPos, x, y, w, h, a, left); }
@@ -653,6 +978,11 @@ public class MatchScreen extends FScreen {
 
     //if the preview would sit under the obstacle (an open dropdown), returns an x left of both the obstacle and the hovered card
     //so neither is covered; when there is no room on that side the preview stays where it was
+    //dual-screen: whether a display object is drawn on the bottom display (a child of the bottom screen root)
+    private boolean isOnBottomDisplay(FDisplayObject object) {
+        return bottomScreen != null && bottomScreen.isAncestorOf(object);
+    }
+
     private static float moveLeftOfObstacle(Rectangle obstacle, float x, float y, float w, float h, Rectangle anchor, float left) {
         if (obstacle.width <= 0 || x >= obstacle.x + obstacle.width || x + w <= obstacle.x
                 || y >= obstacle.y + obstacle.height || y + h <= obstacle.y) {
@@ -708,6 +1038,7 @@ public class MatchScreen extends FScreen {
 
                 final VPlayerPanel playerPanel = getPlayerPanel(p);
                 if (playerPanel == null || !playerPanelsList.contains(playerPanel)) continue;
+                if (!isShownOnPrimary(playerPanel)) continue; //on the other display, or a hidden opponent
                 playerViewSet.add(p);
 
                 final FCollectionView<CardView> battlefield = p.getBattlefield();
@@ -759,19 +1090,35 @@ public class MatchScreen extends FScreen {
         // TODO: make the keyboard shortcuts configurable on Mobile
         if (Forge.hasGamepad() && ((FMenuBar) getHeader()).isShowingMenu(false) && (keyCode == Keys.ESCAPE || keyCode == Keys.ENTER))
             return false;
+        if (!isPadBlockedByMenu() && commandZoneKey(keyCode)) {
+            revalidate(true);
+            return true;
+        }
         switch (keyCode) {
             case Keys.DPAD_DOWN:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        if (bottomFocusInHand && isBottomHandAvailable()) {
+                            //the hand on the bottom display is a single row: nothing below it
+                        } else if (navigatingTab(selectedPlayerPanel())) {
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().setNextSelected(2);
+                        } else if (dualScreen && selectedPlayerPanel() != bottomPlayerPanel
+                                && (selectedPlayerPanel().getSelectedRow() == selectedPlayerPanel().getField().getRow1()
+                                    || !hasCards(selectedPlayerPanel().getField().getRow1()))) {
+                            nullPotentialListener();
+                            returnToBottomPanel();
                         } else {
                             nullPotentialListener();
                             VField.FieldRow row = selectedPlayerPanel() != getBottomPlayerPanel()
                                     ? selectedPlayerPanel().getField().getRow2()
                                     : selectedPlayerPanel().getField().getRow1();
-                            if (selectedPlayerPanel().getSelectedRow() == row) {
+                            VField bottomField = selectedPlayerPanel().getField();
+                            if (isBottomHandAvailable() && (selectedPlayerPanel().getSelectedRow() == bottomField.getRow2()
+                                    || bottomField.getRow2().getChildCount() == 0)) { //skip an empty row on the way to the hand
+                                selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                                bottomFocusInHand = true;
+                                bottomPlayerPanel.getSelectedTab().getDisplayArea().selectCurrent();
+                            } else if (selectedPlayerPanel().getSelectedRow() == row) {
                                 selectedPlayerPanel().getSelectedRow().unselectCurrent();
                                 selectedPlayerPanel().switchRow();
                                 selectedPlayerPanel().getSelectedRow().selectCurrent();
@@ -785,11 +1132,16 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.DPAD_RIGHT:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        VZoneDisplay command = selectedPlayerPanel().getVisibleCommandDisplay();
+                        if (navigatingTab(selectedPlayerPanel())) {
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().setNextSelected(1);
+                        } else if (command != null && command.getChildCount() > 0 && selectedPlayerPanel().getSelectedRow().isSelectionAtEnd()) {
+                            //the open command zone sits right of the battlefield: RIGHT from the end of a row goes into it
+                            selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                            commandFocus = command;
+                            command.selectCurrent();
                         } else {
                             selectedPlayerPanel().getSelectedRow().setNextSelected(1);
                         }
@@ -799,10 +1151,34 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.DPAD_UP:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        VField bf = bottomPlayerPanel.getField();
+                        boolean atTopOfBottom = selectedPlayerPanel() == bottomPlayerPanel && (bottomFocusInHand || !navigatingTab(bottomPlayerPanel))
+                                && (bottomFocusInHand ? !hasCards(bf.getRow1()) && !hasCards(bf.getRow2())
+                                    : bottomPlayerPanel.getSelectedRow() == bf.getRow1() || !hasCards(bf.getRow1()));
+                        VZoneDisplay bottomCommand = bottomPlayerPanel.getVisibleCommandDisplay();
+                        if (atTopOfBottom && bottomFocusInHand && bottomCommand != null) {
+                            //empty battlefield: the command zone is the next stop above the hand
+                            bottomPlayerPanel.getSelectedTab().getDisplayArea().unselectCurrent();
+                            bottomFocusInHand = false;
+                            commandFocus = bottomCommand;
+                            bottomCommand.selectCurrent();
+                        } else if (atTopOfBottom && canEnterShownOpponent()) {
+                            nullPotentialListener();
+                            enterShownOpponent();
+                        } else if (bottomFocusInHand && isBottomHandAvailable()) {
+                            bottomPlayerPanel.getSelectedTab().getDisplayArea().unselectCurrent();
+                            bottomFocusInHand = false;
+                            //go to the row nearest the hand that has cards
+                            VField field = bottomPlayerPanel.getField();
+                            VField.FieldRow target = field.getRow2().getChildCount() > 0 || field.getRow1().getChildCount() == 0
+                                    ? field.getRow2() : field.getRow1();
+                            if (bottomPlayerPanel.getSelectedRow() != target) {
+                                bottomPlayerPanel.switchRow();
+                            }
+                            bottomPlayerPanel.getSelectedRow().selectCurrent();
+                        } else if (navigatingTab(selectedPlayerPanel())) {
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().setPreviousSelected(2);
                         } else {
                             nullPotentialListener();
@@ -823,10 +1199,9 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.DPAD_LEFT:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        if (navigatingTab(selectedPlayerPanel())) {
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().setPreviousSelected(1);
                         } else {
                             selectedPlayerPanel().getSelectedRow().setPreviousSelected(1);
@@ -837,10 +1212,9 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.BUTTON_Y:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        if (navigatingTab(selectedPlayerPanel())) {
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().showZoom();
                         } else {
                             selectedPlayerPanel().getSelectedRow().showZoom();
@@ -850,10 +1224,9 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.BUTTON_A:
-                if (!((FMenuBar) getHeader()).isShowingMenu(true)) {
+                if (!isPadBlockedByMenu()) {
                     try {
-                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
-                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                        if (navigatingTab(selectedPlayerPanel())) {
                             //nullPotentialListener();
                             selectedPlayerPanel().getSelectedTab().getDisplayArea().tapChild();
                         } else {
@@ -866,6 +1239,11 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.BUTTON_L1: //switch selected panels
                 if (Forge.hasGamepad()) {
+                    leaveCommandZone();
+                    if (bottomFocusInHand && isBottomHandAvailable()) {
+                        bottomPlayerPanel.getSelectedTab().getDisplayArea().unselectCurrent();
+                        bottomFocusInHand = false;
+                    }
                     //nullPotentialListener();
                     selectedPlayerPanel().hideSelectedTab();
                     selectedPlayer--;
@@ -873,6 +1251,9 @@ public class MatchScreen extends FScreen {
                         selectedPlayer = playerPanelsList.size() - 1;
                     selectedPlayerPanel().closeSelectedTab();
                     selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                    if (dualScreen) {
+                        setShownOpponent(selectedPlayerPanel());
+                    }
                     //selectedPlayerPanel().setNextSelectedTab(true);
                 }
                 break;
@@ -1183,7 +1564,7 @@ public class MatchScreen extends FScreen {
             float bgFullWidth, scaledbgHeight;
             final int multiplier = liveMultiplier();
             float bgHeight = getPlayerBgHeight(midField, y);
-            if (!Forge.isLandscapeMode()) { //portrait: fixed full-area rect so zone tabs opening/closing never resize or shift the image
+            if (!Forge.isLandscapeMode() || dualScreen) { //portrait/dual-screen: fixed full-area rect so zone tabs opening/closing never resize or shift the image
                 x = 0;
                 y = 0;
                 w = getWidth();
@@ -1324,6 +1705,9 @@ public class MatchScreen extends FScreen {
                 }
             }
 
+            if (dualScreen) {
+                return; //a single opponent fills the field; the local player is on the other display
+            }
             for (VPlayerPanel playerPanel : playerPanelsList) {
                 midField = playerPanel.getTop();
                 y = midField - 0.5f;
@@ -1344,6 +1728,27 @@ public class MatchScreen extends FScreen {
                 avatarHeight *= 0.5f;
             }
 
+            if (dualScreen) {
+                VPlayerPanel shown = getShownOpponent();
+                float top = 0;
+                if (opponentBar != null) {
+                    opponentBar.update();
+                    float barHeight = opponentBar.getPreferredHeight();
+                    opponentBar.setBounds(0, 0, visibleWidth, barHeight);
+                    top = barHeight;
+                }
+                for (VPlayerPanel playerPanel : playerPanelsList) {
+                    if (playerPanel == bottomPlayerPanel) {
+                        continue;
+                    }
+                    boolean show = playerPanel == shown;
+                    playerPanel.setVisible(show);
+                    if (show) {
+                        playerPanel.setBounds(0, top, visibleWidth, visibleHeight - top);
+                    }
+                }
+                return new ScrollBounds(visibleWidth, visibleHeight);
+            }
             if (Forge.isLandscapeMode() && playerCount == 2) {
                 float panelHeight = totalHeight / 2;
                 //list is ordered top to bottom, and the original top/bottom panel may have been removed

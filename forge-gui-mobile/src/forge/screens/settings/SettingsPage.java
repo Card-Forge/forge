@@ -750,6 +750,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },4);
         }
+        if (Forge.getDeviceAdapter().getSecondaryScreen() != null) { //dual-screen handhelds, e.g. AYN Thor
+            lstSettings.addItem(new BooleanSetting(FPref.UI_DUAL_SCREEN,
+                Forge.getLocalizer().getMessageorUseDefault("lblDualScreen", "Use Second Screen"),
+                Forge.getLocalizer().getMessageorUseDefault("nlDualScreen",
+                    "In matches, show your battlefield, hand and prompt on the second (bottom) screen and opponents on the main screen. Applies to the next match.")),
+                4);
+        }
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
             Forge.getLocalizer().getMessage("lblShowFPSDisplay"),
             Forge.getLocalizer().getMessage("nlShowFPSDisplay")) {

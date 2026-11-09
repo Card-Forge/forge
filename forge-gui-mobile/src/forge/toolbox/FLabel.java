@@ -282,6 +282,11 @@ public class FLabel extends FDisplayObject implements IButton {
         return handled;
     }
 
+    /** True when tapping this label does something (used for controller focus). */
+    public boolean isActionable() {
+        return selectable || command != null;
+    }
+
     public boolean trigger() {
         if (isEnabled() && command != null) {
             command.handleEvent(new FEvent(this, FEventType.TAP));

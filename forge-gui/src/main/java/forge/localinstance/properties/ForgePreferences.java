@@ -42,6 +42,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
 
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
+        UI_DUAL_SCREEN ("true"),
         UI_FULLSCREEN_MODE ("false"),
         UI_KEEP_MOUSE_IN_FULLSCREEN ("false"),
         UI_VIDEO_MODE ("720p"),
