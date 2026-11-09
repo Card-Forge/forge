@@ -307,6 +307,7 @@ public final class ComboGuard {
                         || ma.getPayCosts().hasSpecificCostType(CostDiscard.class))) {
                     continue; // used up by making the mana
                 }
+                ManaConversion.withActivator(ma); // asking what it makes checks its conditions, which want an activator
                 try {
                     best = Math.max(best, Math.max(1, ma.amountOfManaGenerated(false)));
                     for (int i = 0; i < 5; i++) {
