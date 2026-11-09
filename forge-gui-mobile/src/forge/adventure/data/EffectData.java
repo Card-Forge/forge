@@ -25,6 +25,7 @@ public class EffectData implements Serializable {
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
     public String[] startBattleScript; //Card-script lines run after mulligans. "SVar:Name:Value" lines set SVars the others can use.
+    public boolean allowIllegalCommander = false; //Keeps a commander that is not legal: any creature or planeswalker.
 
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
@@ -110,6 +111,8 @@ public class EffectData implements Serializable {
         }
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
+        if(allowIllegalCommander)
+            description+="Any creature or planeswalker can be commander\n";
         if(moveSpeed!=0 && moveSpeed != 1)
             description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)
