@@ -1730,6 +1730,10 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
+        if (waitsForMainPhase()) {
+            return null; // nothing to do before the first main phase
+        }
+
         if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
@@ -1766,6 +1770,59 @@ public class AiController {
         }
 
         return singleSpellAbilityList(getSpellAbilityToPlay());
+    }
+
+    /**
+     * With Flat Monte Carlo on, the AI's own upkeep and draw step have nothing for it to do: acting there (a burn spell,
+     * an Aether Vial, a fetch land) only shows the opponent the cards and takes options from the first main phase,
+     * where the rollouts compare every line with the mana and the information still in hand. Everything it could do
+     * there it can do in the main phase, with a forecast ability the only thing that has to be used in the upkeep.
+     * Responses with something on the stack are not affected.
+     */
+    private boolean waitsForMainPhase() {
+        if (!flatMonteCarloActive() || !game.getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        if (!ph.isPlayerTurn(player) || !ph.getPhase().isBefore(PhaseType.MAIN1)) {
+            return false;
+        }
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (Forecast.isForecast(sa)) {
+                    return false; // the list is cut down to the forecast abilities instead (see getSpellAbilityToPlay)
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A permanent spell with flash on the AI's own turn: casting it now only ends the surprise, and the opponent's
+     * removal gets it before it does anything. The opponent's end step, or an attack, is where Monte Carlo offers it
+     * (see {@link FlatMonteCarloPicker.Mode#END_STEP}). A hasty one may still be an attacker.
+     */
+    private boolean isFlashPermanentOnOwnTurn(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return host != null && sa.isSpell() && host.isPermanent() && !host.isLand() && host.hasKeyword(Keyword.FLASH)
+                && !host.hasKeyword(Keyword.HASTE) && game.getPhaseHandler().isPlayerTurn(player);
+    }
+
+    /** The permanent has an enters-the-battlefield trigger that is aimed (Leyline Binding, Cast Out, Banishment). */
+    private static boolean hasTargetedEtb(final Card card) {
+        for (final Trigger t : card.getTriggers()) {
+            final Map<String, String> params = t.getMapParams();
+            if (!"ChangesZone".equals(params.get("Mode")) || !"Battlefield".equals(params.get("Destination"))
+                    || params.get("ValidCard") == null || !params.get("ValidCard").contains("Self")
+                    || params.get("Execute") == null) {
+                continue;
+            }
+            final String ability = card.getSVar(params.get("Execute"));
+            if (ability.contains("ValidTgts$") && !ability.contains("TargetMin$ 0") && !ability.contains("Optional")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
@@ -1971,7 +2028,17 @@ public class AiController {
             }
             final Card h = spellAbility.getHostCard();
             return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
-                    || (flatMc && LoopRunner.held(player, spellAbility)));
+                    || (flatMc && LoopRunner.held(player, spellAbility))
+                    || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
+                    || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
+                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
+                    // an equip is an investment: it does not take the mana of a creature that could be cast instead
+                    || (flatMc && spellAbility.isEquip() && !FlatMonteCarloPicker.sparesMana(player, spellAbility))
+                    // the upkeep is for a forecast ability, if its cost costs nothing the first main phase needs
+                    || (flatMc && Forecast.beforeOwnMain(player)
+                        && !(Forecast.isForecast(spellAbility) && Forecast.worthIt(player, spellAbility)))
+                    || (flatMc && FlatMonteCarloPicker.isOtherZonePlay(spellAbility)
+                    && !FlatMonteCarloPicker.sparesMana(player, spellAbility)));
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
@@ -2122,12 +2189,22 @@ public class AiController {
                     ? FlatMonteCarloPicker.Mode.RESPOND : null;
         }
         if (ph.isPlayerTurn(player)) {
-            return null;
+            // The blockers are down and the AI has priority: the moment to pump the attacker that was blocked, or to
+            // sneak something in, with the opponent unable to take back the block (see Mode.BLOCKED).
+            return ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getCombat() != null
+                    && !ph.getCombat().getAttackers().isEmpty()
+                    ? FlatMonteCarloPicker.Mode.BLOCKED : null;
         }
-        if (ph.is(PhaseType.END_OF_TURN) && game.getPlayers().size() == 2) {
+        if (ph.is(PhaseType.END_OF_TURN)
+                && (game.getPlayers().size() == 2 || player.equals(game.getNextPlayerAfter(ph.getPlayerTurn())))) {
+            // the rollout plays on into the AI's own next turn: with more players that is only the next turn when the
+            // AI sits right after the player whose end step it is
             return FlatMonteCarloPicker.Mode.END_STEP;
         }
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.getCombat() != null && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+        if ((ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) && ph.getCombat() != null
+                && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+            // after the attackers (a creature can still be put in to block) and after the blockers (a trick for the
+            // creature that blocks): the opponent cannot take the attack or the blocks back
             return FlatMonteCarloPicker.Mode.RESPOND;
         }
         return null;
@@ -2205,7 +2282,15 @@ public class AiController {
         // Card draw and selection only make sense in response to a spell or at the end step; during combat only
         // interaction is worth an instant.
         if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()) {
-            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa));
+            final boolean blocksDown = game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa)
+                    && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
+                    && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter
+            extras.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
+            approved.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
         }
         final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
         FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
@@ -2605,6 +2690,13 @@ public class AiController {
             return false;
         }
 
+        if (isFlashPermanentOnOwnTurn(sa)) {
+            return false;
+        }
+        if (opinion == AiPlayDecision.BadEtbEffects && sa.isSpell() && hasTargetedEtb(sa.getHostCard())) {
+            return false; // an exile or removal on entering with nothing worth aiming at: the heuristics found no target
+        }
+
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
         }
@@ -2625,17 +2717,24 @@ public class AiController {
             // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
             return false;
         }
-        if (ActivationGuard.problem(player, sa) != null) {
+        final String problem = ActivationGuard.problem(player, sa);
+        if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
             return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;
+        final PhaseHandler discoveryPhase = game.getPhaseHandler();
+        final boolean afterBlocks = discoveryPhase.is(PhaseType.COMBAT_DECLARE_BLOCKERS);
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
+                && !(afterBlocks && FlatMonteCarloPicker.isCombatTrick(sa))
+                && !FlatMonteCarloPicker.isSavingPlay(player, sa)
                 && !isRemoveDeckManaPermanent(sa)
                 && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
-                && !TutorPlan.hasUse(player, sa)) {
+                && !TutorPlan.hasUse(player, sa)
+                && !(flatMonteCarloActive() && (SpecialActions.isDiscoverable(player, sa)
+                || HandAbilities.isDiscoverable(player, sa)))) {
             return false; // a tutor with something to find is a play for the rollouts to weigh, in every mode
         }
         try {

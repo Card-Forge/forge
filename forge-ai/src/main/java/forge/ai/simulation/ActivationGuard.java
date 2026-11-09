@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.ai.ComputerUtilCard;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -75,6 +76,9 @@ public final class ActivationGuard {
         if (costUnpayable(ai, sa)) {
             return "cost-unpayable";
         }
+        if (onlyValuableSacrifice(ai, sa)) {
+            return "valuable-sacrifice";
+        }
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
@@ -119,6 +123,43 @@ public final class ActivationGuard {
                 if (!part.canPay(sa, ai, false)) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    /** The most a creature may be worth to be sacrificed to an outlet for what the outlet gives (a weak token or creature). */
+    static final int FODDER_VALUE = 140;
+
+    /**
+     * A sacrifice outlet (Viscera Seer, Ashnod's Altar, Carrion Feeder) offered to the rollouts only when there is fodder:
+     * a token, a creature marked to be sacrificed, or a weak one. The cost is paid with the AI's worst creature, and
+     * the rollouts cannot see what a sacrificed good creature was worth beyond the evaluator's number.
+     */
+    private static boolean onlyValuableSacrifice(final Player ai, final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostSacrifice)) {
+                continue;
+            }
+            final String type = part.getType();
+            if (type == null || "CARDNAME".equals(type) || part.payCostFromSource()) {
+                continue; // the permanent itself: a sacrifice of its own
+            }
+            boolean any = false;
+            for (final Card c : CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split("/")[0],
+                    ai, sa.getHostCard(), sa)) {
+                any = true;
+                if (!c.isCreature() || c.isToken() || c.hasSVar("SacMe")
+                        || ComputerUtilCard.evaluateCreature(c) <= FODDER_VALUE) {
+                    return false;
+                }
+            }
+            if (any) {
+                return true;
             }
         }
         return false;
