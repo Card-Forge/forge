@@ -576,6 +576,26 @@ public class AiController {
         return false;
     }
 
+    /** An Urza's land of a kind that is not in play yet, when the choice also holds one of a kind that is. */
+    private Card chooseMissingUrzaLand(final CardCollection landList) {
+        final String[] kinds = { "Mine", "Power-Plant", "Tower" };
+        Card missing = null;
+        boolean duplicate = false;
+        for (final Card land : landList) {
+            for (final String kind : kinds) {
+                if (!land.getType().hasSubtype(kind) || !land.getType().hasSubtype("Urza's")) {
+                    continue;
+                }
+                if (player.getLandsInPlay().anyMatch(l -> l.getType().hasSubtype(kind) && l.getType().hasSubtype("Urza's"))) {
+                    duplicate = true;
+                } else if (missing == null) {
+                    missing = land;
+                }
+            }
+        }
+        return duplicate ? missing : null;
+    }
+
     private Card chooseBestLandToPlay(CardCollection landList) {
         if (landList.isEmpty()) {
             return null;
@@ -625,6 +645,14 @@ public class AiController {
         final Card forCombo = deckPlan(player).combos.chooseLand(player, landList);
         if (forCombo != null) {
             return forCombo;
+        }
+
+        // Urza's Mine, Power-Plant and Tower are worth more together: a second Tower is the one to hold back
+        if (landList.size() > 1) {
+            final Card tron = chooseMissingUrzaLand(landList);
+            if (tron != null) {
+                return tron;
+            }
         }
 
         // Plan the next land drops against the spells in hand (and the commander): which colours are needed when, and
@@ -2702,7 +2730,9 @@ public class AiController {
         }
         // ChangeZoneAi rejects a hidden-origin activation when no eligible card is in hand.
         // Broad discovery must not add it back just because the activation cost itself is payable.
-        if (isHandToBattlefieldChangeZone(sa)
+        // Stoneforge Mystic and the like (an eligible card is in hand, see isCheatFromHand) are the exception: the rollouts
+        // judge what the card is worth in play, the heuristics' "can't play" is about the ability, not the card.
+        if (isHandToBattlefieldChangeZone(sa) && !FlatMonteCarloPicker.isCheatFromHand(sa)
                 && (opinion == AiPlayDecision.CantPlayAi || opinion == AiPlayDecision.MissingNeededCards)) {
             return false;
         }

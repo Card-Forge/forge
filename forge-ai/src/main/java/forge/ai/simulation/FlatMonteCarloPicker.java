@@ -1192,10 +1192,29 @@ public final class FlatMonteCarloPicker {
         // those are offered once the blocks are down (Mode.BLOCKED, isCombatTrick).
         if (api != ApiType.DealDamage && api != ApiType.Attach && api != ApiType.PutCounter && api != ApiType.Token
                 && api != ApiType.Discard && api != ApiType.LoseLife && api != ApiType.Untap
-                && api != ApiType.CopyPermanent && api != ApiType.Sacrifice) {
+                && api != ApiType.CopyPermanent && api != ApiType.Sacrifice && !isCheatFromHand(sa)) {
             return false;
         }
         return ActivationGuard.problem(sa.getHostCard().getController(), sa) == null;
+    }
+
+    /**
+     * "You may put a creature (an Equipment) card from your hand onto the battlefield" on a permanent in play: Elvish
+     * Piper, Stoneforge Mystic, Quicksilver Amulet. The rollouts see the card that arrives and the mana it did not
+     * cost, so the ability competes with the other plays like any other. Only offered with such a card in hand.
+     */
+    public static boolean isCheatFromHand(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.ChangeZone || !sa.isActivatedAbility() || sa.usesTargeting()) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        final String valid = sa.getParam("ChangeType");
+        if (host == null || valid == null || !host.isInZone(ZoneType.Battlefield)
+                || !"Hand".equals(sa.getParam("Origin")) || !"Battlefield".equals(sa.getParam("Destination"))) {
+            return false;
+        }
+        final Player owner = host.getController();
+        return !forge.game.card.CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
     }
 
     /**
@@ -1225,8 +1244,14 @@ public final class FlatMonteCarloPicker {
             if (cost > available) {
                 return false;
             }
+            // a card the ability itself puts onto the battlefield (Stoneforge Mystic and an Equipment) is no competitor
+            final boolean cheat = isCheatFromHand(sa);
+            final String cheatable = cheat ? sa.getParam("ChangeType") : null;
             for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
                 if (c.isLand() || c == sa.getHostCard() || isInstantSpeedSpell(c)) {
+                    continue;
+                }
+                if (cheat && c.isValid(cheatable, ai, sa.getHostCard(), sa)) {
                     continue;
                 }
                 for (final SpellAbility spell : c.getSpellAbilities()) {
