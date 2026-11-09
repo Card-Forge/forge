@@ -17,6 +17,7 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -29,6 +30,7 @@ import java.util.function.IntConsumer;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -471,7 +473,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          * Add context menu entries for foiling cards
          */
         public void addMakeFoils() {
-            addQuantityItems(itemText -> localizer.getMessage("lblConvertToFoil") + " " + itemText, quantity -> {
+            final String foil = localizer.getMessage("lblConvertToFoil");
+            addQuantityItems(foil, itemText -> foil + " " + itemText, null, true, quantity -> {
                 // get the currently selected card from the editor
                 CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                 PaperCard existingCard = cardManager.getSelectedItem();
@@ -493,7 +496,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             if (card == null) { return; }
             if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) { return; }
 
-            addQuantityItems(itemText -> localizer.getMessage("lblChangePrintingOf", itemText), quantity -> {
+            addQuantityItems(localizer.getMessage("lblChangePrinting"), itemText -> localizer.getMessage("lblChangePrintingOf", itemText), null, true, quantity -> {
                 PaperCard chosen = ChangePrintingDialog.show(card);
                 if (chosen == null) { return; }
                 PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
@@ -504,52 +507,55 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             });
         }
 
-        /** Adds entries for one copy, the default card limit and a prompted X copies, as far as the selection allows. */
-        private void addQuantityItems(final Function<String, String> label, final IntConsumer action) {
+        /**
+         * Adds one entry when only one copy can be chosen, otherwise a submenu for one copy,
+         * the default card limit and a prompted X copies.
+         * @param shortcuts     Space modifiers for each entry, or null for no shortcuts
+         */
+        private void addQuantityItems(final String title, final Function<String, String> label, final int[] shortcuts,
+                                      final boolean bold, final IntConsumer action) {
             final int max = getMaxMoveQuantity();
             if (max == 0) { return; }
 
-            addQuantityItem(label, 1, action);
-            if (max == 1) { return; }
+            if (max == 1) {
+                menu.add(createQuantityItem(label.apply(getQuantityText(1)), 1, shortcuts, 0, bold, action));
+                return;
+            }
 
-            addQuantityItem(label, Math.min(FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT), max), action);
-            if (max == 2) { return; }
+            final List<Integer> quantities = new ArrayList<>(List.of(1, Math.min(FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT), max)));
+            if (max > 2) {
+                quantities.add(-max);
+            }
+            final JMenu submenu = GuiUtils.createMenu(title);
+            if (bold) {
+                submenu.setFont(submenu.getFont().deriveFont(Font.BOLD));
+            }
+            for (int i = 0; i < quantities.size(); i++) {
+                final int qty = quantities.get(i);
+                submenu.add(createQuantityItem(TextUtil.capitalize(getQuantityText(qty)), qty, shortcuts, i, false, action));
+            }
+            menu.add(submenu);
+        }
 
-            addQuantityItem(label, -max, action);
+        //TODO: need to translate getItemDisplayString
+        private String getQuantityText(final int qty) {
+            return SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
         }
 
         /**
          * @param qty           a negative quantity will prompt the user for a number
          */
-        private void addQuantityItem(final Function<String, String> label, final int qty, final IntConsumer action) {
-            String itemText = SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-            GuiUtils.addMenuItem(menu, label.apply(itemText), null, () -> {
+        private JMenuItem createQuantityItem(final String label, final int qty, final int[] shortcuts, final int index,
+                                             final boolean bold, final IntConsumer action) {
+            final KeyStroke shortcut = shortcuts == null ? null : KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcuts[index]);
+            return GuiUtils.createMenuItem(label, shortcut, () -> {
                 Integer quantity = qty;
                 if (quantity < 0) {
                     quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
                     if (quantity == null) { return; }
                 }
                 action.accept(quantity);
-            }, true, true);
-        }
-        //TODO: need to translate getItemDisplayString
-        private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
-            String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-            if (dest != null && !dest.isEmpty()) {
-                label += " " + dest;
-            }
-            GuiUtils.addMenuItem(menu, label, KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), () -> {
-                Integer quantity = qty;
-                if (quantity < 0) {
-                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                    if (quantity == null) { return; }
-                }
-                if (isAddContextMenu) {
-                    CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                } else {
-                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
-                }
-            }, true, shortcutModifiers == 0);
+            }, true, bold);
         }
 
         /**
@@ -624,21 +630,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         private void addItems(final String verb, final String dest, final boolean toAlternate, final int shortcutModifiers1, final int shortcutModifiers2, final int shortcutModifiers3) {
-            final int max = getMaxMoveQuantity();
-            if (max == 0) { return; }
-
-            addItem(verb, dest, toAlternate, 1, shortcutModifiers1);
-            if (max == 1) { return; }
-
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
-            }
-
-            addItem(verb, dest, toAlternate, qty, shortcutModifiers2);
-            if (max == 2) { return; }
-
-            addItem(verb, dest, toAlternate, -max, shortcutModifiers3); //pass -max as quantity to indicate to prompt for specific quantity
+            final boolean hasDest = dest != null && !dest.isEmpty();
+            addQuantityItems(hasDest ? verb + " " + dest : verb,
+                    itemText -> verb + " " + itemText + (hasDest ? " " + dest : ""),
+                    new int[] { shortcutModifiers1, shortcutModifiers2, shortcutModifiers3 },
+                    shortcutModifiers1 == 0, quantity -> {
+                        if (isAddContextMenu) {
+                            CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
+                        } else {
+                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
+                        }
+                    });
         }
 
         public void addMoveItems(final String verb, final String dest) {
