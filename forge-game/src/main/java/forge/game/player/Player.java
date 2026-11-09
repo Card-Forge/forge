@@ -718,10 +718,13 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
             // In case that commander is merged permanent, get the real commander card
             final Card realCommander = source.getRealCommander();
-            addCommanderDamage(realCommander, amount);
-            view.updateCommanderDamage(this);
-            if (realCommander != source) {
-                view.updateMergedCommanderDamage(source, realCommander);
+            // not in the CR: the Two-Headed Giant format page counts commander damage per team
+            for (final Player p : getSharedTeam()) {
+                p.addCommanderDamage(realCommander, amount);
+                p.view.updateCommanderDamage(p);
+                if (realCommander != source) {
+                    p.view.updateMergedCommanderDamage(source, realCommander);
+                }
             }
         }
 
