@@ -1494,7 +1494,7 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
-    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+    void chooseNewTargetsForCopy(final SpellAbility copy) {
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1525,6 +1525,10 @@ public class PlayerControllerAi extends PlayerController {
             for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
                 s.setTargets(oldTargets.get(i++));
             }
+        }
+        if (!targetingPlayer) {
+            // a copy that would do what the original or another copy already does goes for another target
+            CopyTargets.awayFromTheOthers(player, copy);
         }
     }
 
@@ -1954,9 +1958,7 @@ public class PlayerControllerAi extends PlayerController {
         if (!sa.usesTargeting() || sa.getTargetRestrictions() == null) {
             return Integer.MAX_VALUE;
         }
-        final ApiType api = sa.getApi();
-        if (api != ApiType.Counter && api != ApiType.Tap && api != ApiType.TapAll && api != ApiType.Untap
-                && api != ApiType.ChangeZone && api != ApiType.Destroy && api != ApiType.Sacrifice) {
+        if (!CopyTargets.repeatsDoNothing(sa)) {
             return Integer.MAX_VALUE;
         }
         sa.setActivatingPlayer(player);

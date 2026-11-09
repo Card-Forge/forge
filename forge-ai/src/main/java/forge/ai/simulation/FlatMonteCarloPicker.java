@@ -952,12 +952,12 @@ public final class FlatMonteCarloPicker {
                 if (target == null && isSavingPlay(player, sa)) {
                     target = savingTarget(player, sa);
                 } else if (target == null && (mode == Mode.BLOCKED || defendingWindow(player, mode))) {
-                    target = combatTarget(player, sa);
-                    if (target == null && multiCombatTargets(player, sa)) {
+                    if (multiCombatTargets(player, sa)) {
                         cands.add(new Candidate(sa, null, true)); // aimed at several creatures: the targets stay on the play
                         extrasLeft--;
                         continue;
                     }
+                    target = combatTarget(player, sa); // one creature in the fight (or a trick with a single target)
                 } else if (target == null && (isLoyaltyPlay(sa) || isActivationPlay(sa) || isOtherZonePlay(sa))) {
                     target = loyaltyTarget(player, sa);
                 }
@@ -2224,7 +2224,8 @@ public final class FlatMonteCarloPicker {
     /**
      * A trick with "up to N target creatures" (a team pump, protection for two creatures) aimed at the AI's creatures
      * that are in the fight, the ones in the biggest fights first. The targets are left on the play. False when the
-     * trick has one target (see {@link #combatTarget}), is divided, or has fewer legal targets in the combat than it needs.
+     * trick has one target, is divided, or has fewer than two of the AI's creatures in the fight (then see
+     * {@link #combatTarget}, which is also where the check that the pump changes the fight is made).
      */
     public static boolean multiCombatTargets(final Player player, final SpellAbility sa) {
         final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
@@ -2253,8 +2254,8 @@ public final class FlatMonteCarloPicker {
             rank.put(c, (fighting ? 100000 : 0) + targetRank(player, c));
             fighters.add(c);
         }
-        if (fighters.size() < Math.max(1, tr.getMinTargets(sa.getHostCard(), ts))) {
-            return false;
+        if (fighters.size() < Math.max(2, tr.getMinTargets(sa.getHostCard(), ts))) {
+            return false; // one creature in the fight: combatTarget aims at it, with its check that the pump changes anything
         }
         fighters.sort((a, b) -> rank.get(b) - rank.get(a));
         ts.resetTargets();

@@ -3,6 +3,8 @@ package forge.ai;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.FlatMonteCarloPicker;
+import forge.ai.simulation.Forecast;
 import forge.ai.simulation.HandAbilities;
 import forge.ai.simulation.SpecialActions;
 import forge.ai.simulation.TutorPlan;
@@ -168,5 +170,153 @@ public class FlatMonteCarloSpecialActionTest extends AITest {
         AssertJUnit.assertTrue(HandAbilities.isReinforce(reinforce));
         AssertJUnit.assertTrue(forge.ai.simulation.FlatMonteCarloPicker.isCombatTrick(reinforce));
         AssertJUnit.assertFalse("not a main phase play", forge.ai.simulation.FlatMonteCarloPicker.isDiscoverable(reinforce));
+    }
+
+    private SpellAbility forecastOfSkyHussar() {
+        final Card hussar = addCardToZone("Sky Hussar", ai, ZoneType.Hand);
+        // not through getAllPossibleAbilities: it leaves out an ability whose restrictions (the upkeep, once a turn) fail now
+        for (final SpellAbility sa : hussar.getSpellAbilities()) {
+            if (sa.hasParam("Forecast")) {
+                sa.setActivatingPlayer(ai);
+                return sa;
+            }
+        }
+        throw new IllegalStateException("no forecast ability on " + hussar);
+    }
+
+    @Test
+    public void aForecastAbilityIsRecognizedInTheHandInTheUpkeep() {
+        setUp();
+        final SpellAbility forecast = forecastOfSkyHussar();
+        AssertJUnit.assertTrue(Forecast.isForecast(forecast));
+        game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, ai);
+        AssertJUnit.assertTrue(Forecast.beforeOwnMain(ai));
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertFalse(Forecast.beforeOwnMain(ai));
+    }
+
+    @Test
+    public void aForecastThatTapsCreaturesThatWouldAttackIsKept() {
+        setUp();
+        final SpellAbility forecast = forecastOfSkyHussar();
+        for (int i = 0; i < 2; i++) {
+            addCardToZone("Savannah Lions", ai, ZoneType.Battlefield).setSickness(false);
+        }
+        game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, ai);
+        AssertJUnit.assertFalse("two attackers against an empty board: they are needed in the first main phase",
+                Forecast.worthIt(ai, forecast));
+    }
+
+    @Test
+    public void aForecastThatTapsCreaturesThatCannotAttackIsUsed() {
+        setUp();
+        final SpellAbility forecast = forecastOfSkyHussar();
+        for (int i = 0; i < 2; i++) {
+            addCardToZone("Savannah Lions", ai, ZoneType.Battlefield).setSickness(true);
+        }
+        game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, ai);
+        AssertJUnit.assertTrue("two creatures that came this turn have nothing else to do", Forecast.worthIt(ai, forecast));
+    }
+
+    @Test
+    public void aForecastNeedsTheCreaturesItTaps() {
+        setUp();
+        final SpellAbility forecast = forecastOfSkyHussar();
+        game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, ai);
+        AssertJUnit.assertFalse("no creatures to tap", Forecast.worthIt(ai, forecast));
+    }
+
+    // ------------------------------------------------------------------------------------------------ copy targets
+
+    /** The first spell ability of the card, aimed at the target and put on the stack for the player. */
+    private SpellAbility aimedOnTheStack(final String name, final Player owner, final forge.game.GameObject target) {
+        final Card card = addCardToZone(name, owner, ZoneType.Hand);
+        owner.getZone(ZoneType.Hand).remove(card);
+        final SpellAbility sa = card.getFirstSpellAbility();
+        sa.setActivatingPlayer(owner);
+        if (target != null) {
+            sa.resetTargets();
+            sa.getTargets().add(target);
+        }
+        game.getStack().add(sa);
+        return sa;
+    }
+
+    private SpellAbility copyAimedAt(final SpellAbility original, final forge.game.GameObject target) {
+        final SpellAbility copy = original.copy(ai);
+        copy.resetTargets();
+        copy.getTargets().add(target);
+        return copy;
+    }
+
+    @Test
+    public void aCopyOfABounceSpellLeavesTheTargetOfTheOriginal() {
+        setUp();
+        final Card giant = addCardToZone("Hill Giant", game.getPlayers().get(0), ZoneType.Battlefield);
+        final Card bears = addCardToZone("Grizzly Bears", game.getPlayers().get(0), ZoneType.Battlefield);
+        final SpellAbility original = aimedOnTheStack("Unsummon", ai, giant);
+        final SpellAbility copy = copyAimedAt(original, giant);
+        AssertJUnit.assertTrue(CopyTargets.awayFromTheOthers(ai, copy));
+        AssertJUnit.assertEquals("the other creature of the opponent", bears, copy.getTargets().getFirstTargetedCard());
+    }
+
+    @Test
+    public void aCopyKeepsTheTargetWhenThereIsNoOther() {
+        setUp();
+        final Card giant = addCardToZone("Hill Giant", game.getPlayers().get(0), ZoneType.Battlefield);
+        final SpellAbility original = aimedOnTheStack("Unsummon", ai, giant);
+        final SpellAbility copy = copyAimedAt(original, giant);
+        AssertJUnit.assertFalse(CopyTargets.awayFromTheOthers(ai, copy));
+        AssertJUnit.assertEquals(giant, copy.getTargets().getFirstTargetedCard());
+    }
+
+    @Test
+    public void aCopyOfBurnStaysOnTheTargetBecauseDamageAdds() {
+        setUp();
+        final Card giant = addCardToZone("Hill Giant", game.getPlayers().get(0), ZoneType.Battlefield);
+        addCardToZone("Grizzly Bears", game.getPlayers().get(0), ZoneType.Battlefield);
+        final SpellAbility original = aimedOnTheStack("Shock", ai, giant);
+        final SpellAbility copy = copyAimedAt(original, giant);
+        AssertJUnit.assertFalse(CopyTargets.repeatsDoNothing(copy));
+        AssertJUnit.assertFalse(CopyTargets.awayFromTheOthers(ai, copy));
+    }
+
+    @Test
+    public void aCopyOfACounterspellGoesForAnotherSpell() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        final SpellAbility ring = aimedOnTheStack("Sol Ring", opp, null);
+        final SpellAbility stone = aimedOnTheStack("Mind Stone", opp, null);
+        final SpellAbility original = aimedOnTheStack("Consign to Memory", ai, ring);
+        final SpellAbility copy = copyAimedAt(original, ring);
+        AssertJUnit.assertTrue(CopyTargets.awayFromTheOthers(ai, copy));
+        AssertJUnit.assertEquals(stone, copy.getTargets().getFirstTargetedSpell());
+    }
+
+    // ---------------------------------------------------------------------------------------- one trick, several targets
+
+    @Test
+    public void aTrickForTwoIsAimedAtTwoFightsAndAtOneForOne() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        final Card bears1 = addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card bears2 = addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card block1 = addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, ai);
+        final forge.game.combat.Combat combat = new forge.game.combat.Combat(ai);
+        combat.addAttacker(bears1, opp);
+        combat.addAttacker(bears2, opp);
+        combat.addBlocker(bears1, block1);
+        combat.setBlocked(bears1, true);
+        game.getPhaseHandler().setCombat(combat);
+        final SpellAbility trick = addCardToZone("Appeal to Eirdu", ai, ZoneType.Hand).getFirstSpellAbility();
+        trick.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("two attackers, one blocked and one not: both are in the combat", FlatMonteCarloPicker.multiCombatTargets(ai, trick));
+        AssertJUnit.assertEquals(2, trick.getTargets().size());
+        trick.resetTargets();
+        // one attacker only: the single-target path (combatTarget) is the one that decides
+        combat.removeFromCombat(bears2);
+        AssertJUnit.assertFalse(FlatMonteCarloPicker.multiCombatTargets(ai, trick));
+        AssertJUnit.assertEquals(bears1, FlatMonteCarloPicker.combatTarget(ai, trick));
     }
 }

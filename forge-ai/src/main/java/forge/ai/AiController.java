@@ -1789,8 +1789,8 @@ public class AiController {
         }
         for (final Card c : player.getCardsIn(ZoneType.Hand)) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
-                if (sa.hasParam("Forecast")) {
-                    return false;
+                if (Forecast.isForecast(sa)) {
+                    return false; // the list is cut down to the forecast abilities instead (see getSpellAbilityToPlay)
                 }
             }
         }
@@ -2032,6 +2032,11 @@ public class AiController {
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
                     || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
+                    // an equip is an investment: it does not take the mana of a creature that could be cast instead
+                    || (flatMc && spellAbility.isEquip() && !FlatMonteCarloPicker.sparesMana(player, spellAbility))
+                    // the upkeep is for a forecast ability, if its cost costs nothing the first main phase needs
+                    || (flatMc && Forecast.beforeOwnMain(player)
+                        && !(Forecast.isForecast(spellAbility) && Forecast.worthIt(player, spellAbility)))
                     || (flatMc && FlatMonteCarloPicker.isOtherZonePlay(spellAbility)
                     && !FlatMonteCarloPicker.sparesMana(player, spellAbility)));
         });
