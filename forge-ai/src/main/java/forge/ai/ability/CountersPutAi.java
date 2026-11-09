@@ -1216,7 +1216,7 @@ public class CountersPutAi extends CountersAi {
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
                 Integer minStation = null;
                 for (StaticAbility st : source.getStaticAbilities()) {
-                    if (!st.isIntrinsic() || !"Creature".equals(st.getParam("AddType"))) {
+                    if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
                         continue;
                     }
                     Matcher m = pattern.matcher(st.getParam("Affected"));
@@ -1240,7 +1240,7 @@ public class CountersPutAi extends CountersAi {
         if (ph.is(PhaseType.MAIN2, ai)) {
             Integer maxStation = null;
             for (StaticAbility st : source.getStaticAbilities()) {
-                if (!st.isIntrinsic()) {
+                if (!st.isIntrinsic() || !st.hasParam("Affected")) {
                     continue;
                 }
                 Matcher m = pattern.matcher(st.getParam("Affected"));

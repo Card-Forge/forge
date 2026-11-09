@@ -114,10 +114,10 @@ public abstract class CountersAi extends SpellAbilityAi {
                 if (c.hasKeyword(Keyword.STATION)) {
                     Integer maxStation = null;
                     for (StaticAbility st : c.getStaticAbilities()) {
-                        if (!st.isIntrinsic()) {
+                        if (!st.isIntrinsic() || !st.hasParam("Affected")) {
                             continue;
                         }
-                        Matcher m = stationPattern.matcher((st.getParam("Affected")));
+                        Matcher m = stationPattern.matcher(st.getParam("Affected"));
                         if (!m.find()) {
                             continue;
                         }

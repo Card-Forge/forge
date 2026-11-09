@@ -23,7 +23,7 @@ public class Station extends SimpleKeyword {
             reminderText = String.format(reminderText, "Planet");
         }
         for (StaticAbility st : card.getStaticAbilities()) {
-            if (!st.isIntrinsic() || !"Creature".equals(st.getParam("AddType"))) {
+            if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
                 continue;
             }
             Matcher m = pattern.matcher(st.getParam("Affected"));
