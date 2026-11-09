@@ -103,8 +103,8 @@ public class FlatMonteCarloSpecialActionTest extends AITest {
     public void aDeferralWaitsForACardThatTheManaIsWantedFor() {
         setUp();
         final Card behold = addCardToZone("Behold the Multiverse", ai, ZoneType.Hand);
-        addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
-        addCards("Island", 2, ai); // {2} for the foretell leaves nothing for the 2-drop, which costs {1}{G}
+        addCardToZone("Merfolk Looter", ai, ZoneType.Hand);
+        addCards("Island", 2, ai); // {2} for the foretell leaves nothing for the 2-drop, which costs {1}{U}
         final SpellAbility foretell = find(behold, SpellAbility::isForetelling);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
         AssertJUnit.assertFalse(SpecialActions.isDiscoverable(ai, foretell));
