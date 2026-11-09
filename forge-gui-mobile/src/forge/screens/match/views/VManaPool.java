@@ -127,7 +127,7 @@ public class VManaPool extends VDisplayArea {
         if (totalMana <= 0) {
             return;
         }
-        final float h = getHeight(), w = Math.min(getWidth(), getArenaWidth(h)), r = h / 2f;
+        final float h = getHeight(), w = getWidth(), r = h / 2f; //the panel sizes it to its tray (getArenaWidth)
         g.drawSoftShadow(ARENA_SHADOW, 0, ArenaTheme.px(2), w, h, r, ArenaTheme.px(6));
         g.fillSmoothRoundRectGradient(ARENA_TOP, ARENA_BOTTOM, true, 0, 0, w, h, r);
         g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), ARENA_RIM, 0, 0, w, h, r);
