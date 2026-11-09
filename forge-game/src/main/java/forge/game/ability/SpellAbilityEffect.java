@@ -365,13 +365,9 @@ public abstract class SpellAbilityEffect {
 
     protected static void sortAPNAP(final SpellAbility sa, final List<Player> players) {
         final Game game = sa.getHostCard().getGame();
-        // try sort in APNAP order
         Player starter = game.getPhaseHandler().getPlayerTurn();
         if (sa.hasParam("StartingWith")) {
             starter = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("StartingWith"), sa).getFirst();
-        }
-        if (starter != null && !starter.isInGame()) {
-            starter = game.getNextPlayerAfter(starter);
         }
         PlayerCollection ordered = game.getPlayersInTurnOrder(starter);
         players.sort(Comparator.comparingInt(ordered::indexOf));
