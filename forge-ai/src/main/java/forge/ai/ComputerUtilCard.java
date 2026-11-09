@@ -765,10 +765,6 @@ public class ComputerUtilCard {
         Map<Card, Integer> cache = new IdentityHashMap<>();
         return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
     }
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
-        // TODO ideally we could reuse the value from the previous pass with false
-        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -1518,6 +1514,20 @@ public class ComputerUtilCard {
             }
         }
         */
+
+        // check if the pump only gives a keyword and the target already has that keyword, in which case skip it
+        if (power == 0 && toughness == 0) {
+            boolean hasAll = true;
+            for (String kw : keywords) {
+                if (!c.hasKeyword(kw) || !Keyword.smartValueOf(kw).isMultipleRedundant()) {
+                    hasAll = false;
+                    break;
+                }
+            }
+            if (hasAll) {
+                return false;
+            }
+        }
 
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)

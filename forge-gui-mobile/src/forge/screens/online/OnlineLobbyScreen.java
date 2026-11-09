@@ -723,7 +723,8 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             // otherwise the centring slack leaves a gap below the conformance checkbox.
             float rowH = Utils.AVG_FINGER_HEIGHT;
             float actionRowTop = btnStart.getTop() + (btnStart.getHeight() - rowH) / 2f;
-            float bandBottom = (isHost && limited) ? actionRowTop : height;
+            // A client has no start button, so its lobby also takes the button's band
+            float bandBottom = !isHost ? btnStart.getBottom() : limited ? actionRowTop : height;
             float by = bandBottom - bottomBandH;
 
             super.doLayoutAboveBtnStart(superStartY, width, by);

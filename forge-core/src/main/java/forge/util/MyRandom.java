@@ -18,8 +18,11 @@
 package forge.util;
 
 import java.security.SecureRandom;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * <p>
@@ -41,6 +44,7 @@ public class MyRandom {
         CountingRandom(Random delegate) { super(0); this.delegate = delegate; }
         @Override protected int next(int bits) {
             calls.incrementAndGet();
+            if (TRACE) { trace(); }
             return delegate.nextInt() >>> (32 - bits);
         }
         @Override public void setSeed(long seed) {
@@ -49,6 +53,34 @@ public class MyRandom {
     }
     /** Number of random draws made so far. Used by undo to detect that randomness was consumed. */
     public static long callCount() { return calls.get(); }
+
+    // Debug only (-Dforge.undo.debug=true): tally draws by thread and call site, to find who consumes randomness.
+    private static final boolean TRACE = Boolean.getBoolean("forge.undo.debug");
+    private static final Map<String, LongAdder> SITES = new ConcurrentHashMap<>();
+
+    private static void trace() {
+        final StringBuilder key = new StringBuilder(Thread.currentThread().getName()).append(" <- ");
+        int shown = 0;
+        for (final StackTraceElement e : new Throwable().getStackTrace()) {
+            final String c = e.getClassName();
+            if (c.startsWith("java.") || c.startsWith("jdk.") || c.startsWith("forge.util.MyRandom")) { continue; }
+            key.append(c.substring(c.lastIndexOf('.') + 1)).append('.').append(e.getMethodName())
+                    .append(':').append(e.getLineNumber()).append(shown < 3 ? " < " : "");
+            if (++shown == 4) { break; }
+        }
+        SITES.computeIfAbsent(key.toString(), k -> new LongAdder()).increment();
+    }
+
+    /** Debug only: the {@code top} busiest draw sites since the last call, as text; clears the tally. */
+    public static String drainTrace(final int top) {
+        final StringBuilder sb = new StringBuilder();
+        SITES.entrySet().stream()
+                .sorted((a, b) -> Long.compare(b.getValue().sum(), a.getValue().sum()))
+                .limit(top)
+                .forEach(e -> sb.append("\n    ").append(e.getValue().sum()).append("x ").append(e.getKey()));
+        SITES.clear();
+        return sb.toString();
+    }
 
     public static boolean percentTrue(final int percent) {
         return percent > MyRandom.getRandom().nextInt(100);

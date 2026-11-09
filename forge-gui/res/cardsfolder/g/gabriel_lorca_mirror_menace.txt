@@ -1,0 +1,8 @@
+Name:Gabriel Lorca, Mirror Menace
+ManaCost:4 B
+Types:Legendary Creature Human Rogue Officer
+PT:5/4
+K:Menace
+T:Mode$ FacesDilemma | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ Whenever you face a dilemma, you may pay {B}. If you do, return this card from your graveyard to your hand. (You face a dilemma as you choose one or more modes for a spell or ability.)
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Menace\nWhenever you face a dilemma, you may pay {B}. If you do, return this card from your graveyard to your hand. (You face a dilemma as you choose one or more modes for a spell or ability.)

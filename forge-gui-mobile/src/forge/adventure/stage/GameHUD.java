@@ -228,16 +228,16 @@ public class GameHUD extends Stage {
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
 
-        ui.addActor(notificationPane);
-        //move touchpad here so z-index is over notificationPane and we can still move the player
-        if (GuiBase.isAndroid()) //add touchpad for android
-            ui.addActor(touchpad);
-        //MAP
+        //MAP (added before notificationPane so notifications are drawn over the minimap)
         mapGroup.addActor(miniMap);
         mapGroup.addActor(mapborder);
         mapGroup.addActor(openMapActor);
         mapGroup.addActor(miniMapPlayer);
         ui.addActor(mapGroup);
+        ui.addActor(notificationPane);
+        //move touchpad here so z-index is over notificationPane and we can still move the player
+        if (GuiBase.isAndroid()) //add touchpad for android
+            ui.addActor(touchpad);
         //HUD
         hudGroup.addActor(gamehud);
         hudGroup.addActor(keyCollection);
@@ -1127,7 +1127,7 @@ public class GameHUD extends Stage {
                 notificationText.setWrap(false);
                 notificationText.setText(text);
                 notificationText.setColor(Color.BLACK);
-                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
+                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : gamehud.getX() - 20));
                 notificationText.setWrap(true);
                 notificationText.layout();
 

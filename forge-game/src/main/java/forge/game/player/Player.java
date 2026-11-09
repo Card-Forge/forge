@@ -101,7 +101,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
     private int landsPlayedThisTurn;
-    private int landsPlayedLastTurn;
+    private int landsPlayedMyLastTurn;
     private int numPowerSurgeLands;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
@@ -126,6 +126,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private List<Card> discardedThisTurn = new ArrayList<>();
     private List<Card> sacrificedThisTurn = new ArrayList<>();
+    private List<Card> playedLandsThisTurn = new ArrayList<>();
 
     private int simultaneousDamage = 0;
 
@@ -307,7 +308,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateOpponentsForView() {
-        view.updateOpponents(this);
+        view.updateOpponentsAndTeam(this);
     }
 
     public void updateFlashbackForView() {
@@ -349,7 +350,16 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the total number of poison counters amongst this player's opponents.
      */
     public final int getOpponentsTotalPoisonCounters() {
-        return Aggregates.sum(getOpponents(), Player::getPoisonCounters);
+        // CR 810.10a: an opposing team that shares poison counters counts them once
+        final PlayerCollection counted = new PlayerCollection();
+        int total = 0;
+        for (final Player opponent : getOpponents()) {
+            if (!counted.contains(opponent)) {
+                counted.addAll(opponent.getSharedTeam());
+                total += opponent.getPoisonCounters();
+            }
+        }
+        return total;
     }
 
     /**
@@ -473,6 +483,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         int oldLife = life;
         life += lifeGain;
         view.updateLife(this);
+        shareLifeWithTeam();
         boolean firstGain = lifeGainedTimesThisTurn == 0;
         lifeGainedThisTurn += lifeGain;
         lifeGainedTimesThisTurn++;
@@ -493,8 +504,21 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
+    // CR 810.9: one player gains or loses the life, and the result applies to the team's shared total
+    private void shareLifeWithTeam() {
+        for (final Player p : getSharedTeam()) {
+            if (p != this) {
+                final int old = p.life;
+                p.life = life;
+                p.view.updateLife(p);
+                game.fireEvent(new GameEventPlayerLivesChanged(p, old, life));
+            }
+        }
+    }
+
     public final boolean canGainLife() {
-        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantGainLife(this);
+        // CR 810.9g, 810.9h, 810.10c: an effect that stops a player gaining or losing life, or getting poison counters, covers the shared team
+        return isInGame() && !getSharedTeam().anyMatch(StaticAbilityCantGainLosePayLife::anyCantGainLife);
     }
 
     public final int loseLife(int toLose, final boolean damage, final boolean manaBurn, final SpellAbility cause) {
@@ -531,6 +555,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         life -= toLose;
         view.updateLife(this);
+        shareLifeWithTeam();
         if (manaBurn) {
             game.fireEvent(new GameEventManaBurn(PlayerView.get(this), true, toLose));
         } else {
@@ -552,14 +577,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantLoseLife(this);
+        return isInGame() && !getSharedTeam().anyMatch(StaticAbilityCantGainLosePayLife::anyCantLoseLife);
     }
 
     public final boolean canPayLife(final int lifePayment, final boolean effect, SpellAbility cause) {
         if (lifePayment > 0 && life < lifePayment) {
             return false;
         }
-        return lifePayment <= 0 || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect, cause);
+        return lifePayment <= 0 || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect, cause)
+                && !getSharedTeam().anyMatch(p -> p != this && StaticAbilityCantGainLosePayLife.anyCantLoseLife(p));
     }
 
     public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
@@ -839,7 +865,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!isInGame()) {
             return false;
         }
-        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
+        if (type.is(CounterEnumType.POISON) ? getSharedTeam().anyMatch(p -> StaticAbilityCantPutCounter.anyCantPutCounter(p, type))
+                : StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
             return false;
         }
         return true;
@@ -926,6 +953,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         int old = getCounters(counterType);
         setCounters(counterType, num);
         view.updateCounters(this);
+        // CR 810.10: one player gets the poison counters, and the team shares them
+        if (counterType.is(CounterEnumType.POISON)) {
+            for (final Player p : getSharedTeam()) {
+                if (p != this) {
+                    p.setCounters(counterType, num);
+                    p.view.updateCounters(p);
+                    if (fireEvents) {
+                        getGame().fireEvent(new GameEventPlayerCounters(p, counterType, old, num));
+                    }
+                }
+            }
+        }
         if (fireEvents) {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, old, num));
             if (counterType.is(CounterEnumType.POISON)) {
@@ -1659,10 +1698,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
+        // LKI from before the move remembers the zone the land is played from
+        final Card playedLKI = CardCopyService.getLKICopy(land);
 
         game.copyLastState();
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
         game.updateLastStateForCard(c);
+        playedLandsThisTurn.add(playedLKI);
 
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
@@ -1823,6 +1865,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void incrementTurn() {
         stats.nextTurn();
+    }
+
+    public final int getExtraTurnsPlayed() {
+        return stats.getExtraTurnsPlayed();
+    }
+
+    public final void incrementExtraTurnsPlayed() {
+        stats.nextExtraTurn();
     }
 
     public final int getLastTurnNr() {
@@ -2000,6 +2050,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (game.getReplacementHandler().run(ReplacementType.GameLoss, repParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
+            // CR 810.8a: a teammate who can't lose the game keeps the whole team in it
+            if (getSharedTeam().anyMatch(p -> p != this && p.cantLoseCheck(state))) {
+                return false;
+            }
         }
         setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
@@ -2066,7 +2120,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
         // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= game.getRules().getPoisonCountersToLose() && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
         }
 
@@ -2252,8 +2306,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
-    public final int getLandsPlayedLastTurn() {
-        return landsPlayedLastTurn;
+    public final List<Card> getPlayedLandsThisTurn() {
+        return playedLandsThisTurn;
+    }
+    public final int getLandsPlayedMyLastTurn() {
+        return landsPlayedMyLastTurn;
     }
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
@@ -2262,6 +2319,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
+        playedLandsThisTurn.clear();
         view.updateNumLandThisTurn(this);
     }
     public final void setLandsPlayedThisTurn(int num) {
@@ -2270,11 +2328,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         view.updateNumLandThisTurn(this);
     }
-    public final void setLandsPlayedLastTurn(int num) {
-        landsPlayedLastTurn = num;
+    public final void setLandsPlayedMyLastTurn(int num) {
+        landsPlayedMyLastTurn = num;
     }
     public final void setNumDrawnLastTurn(int num) {
-        numDrawnLastTurn= num;
+        numDrawnLastTurn = num;
     }
 
     public final int getInvestigateNumThisTurn() {
@@ -2498,8 +2556,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
         setTappedLandForManaThisTurn(false);
-        setLandsPlayedLastTurn(getLandsPlayedThisTurn());
-        resetLandsPlayedThisTurn();
         investigatedThisTurn = 0;
         scryThisTurn = 0;
         surveilThisTurn = 0;
@@ -2533,9 +2589,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (game.getPhaseHandler().isPlayerTurn(this)) {
             setBeenDealtCombatDamageSinceLastTurn(false);
             setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
+            setLandsPlayedMyLastTurn(getLandsPlayedThisTurn());
             clearAttackedMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
+        resetLandsPlayedThisTurn();
     }
 
     public boolean canCastSorcery() {
@@ -2652,10 +2710,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         } finally {
             removeController(ts, false);
         }
-    }
-
-    public boolean isSkippingCombat() {
-        return !isInGame();
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {
@@ -3098,6 +3152,27 @@ public class Player extends GameEntity implements Comparable<Player> {
                     effect.setActivatingPlayer(this);
 
                     getController().playSpellAbilityNoStack(effect, true);
+                }
+            }
+        }
+    }
+
+    public void runStartGameScripts() {
+        for (final List<String> script : getRegisteredPlayer().getStartGameScripts()) {
+            // each script gets its own host, so SVar names and remembered cards stay separate
+            final DetachedCardEffect host = new DetachedCardEffect(this, "Start of Game Effect");
+            getZone(ZoneType.Command).add(host);
+            for (final String line : script) {
+                if (line.startsWith("SVar:")) {
+                    final String[] svar = line.split(":", 3);
+                    host.setSVar(svar[1], svar[2]);
+                }
+            }
+            for (final String line : script) {
+                if (!line.startsWith("SVar:")) {
+                    final SpellAbility sa = AbilityFactory.getAbility(line, host);
+                    sa.setActivatingPlayer(this);
+                    getController().playSpellAbilityNoStack(sa, true);
                 }
             }
         }
@@ -3756,6 +3831,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         this.updateZoneForView(com);
+    }
+
+    /** This player, or in Two-Headed Giant a teammate: see {@link #getSharedTeam()}. */
+    public final boolean sharesTeamWith(final Player other) {
+        return equals(other) || other != null && game.getRules().hasSharedTeamTurns() && sameTeam(other);
+    }
+
+    /** The players who take turns, hold priority and attack together, and share a life total, poison counters, wins and losses:
+     *  the whole team in Two-Headed Giant (CR 805, 810), otherwise this player alone. */
+    public final PlayerCollection getSharedTeam() {
+        return game.getRules().hasSharedTeamTurns() ? getTeamMates(true) : new PlayerCollection(this);
     }
 
     public final boolean sameTeam(final Player other) {

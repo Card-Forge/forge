@@ -439,7 +439,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
+        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedMyLastTurn() == 0 && ph.isPlayerTurn(ai))
                 || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
         boolean canManaLock = oppLandsOTB <= amountLandsToManalock && oppSkippedLandDrop;
 

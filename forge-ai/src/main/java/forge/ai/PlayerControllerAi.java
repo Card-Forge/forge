@@ -5,6 +5,8 @@ import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.PutStickerAi;
+import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.OpeningHand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -107,7 +109,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     private boolean sideboardsAgainstOpponentDeck() {
         return brains.getGame().getRules().getAISideboardingEnabled() && brains.getGame().getAIFlatMonteCarlo()
-                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED);
+                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED) && !brains.getGame().getRules().getSideboardForAI();
     }
 
     @Override
@@ -216,8 +218,9 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         GameOutcome lastOutcome = brains.getGame().getMatch().getLastOutcome();
-        if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())
-            && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
+        final boolean weWon = lastOutcome != null && lastOutcome.getWinningPlayer() != null
+            && lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer());
+        if (weWon && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
             return null;
         }
 
@@ -246,12 +249,10 @@ public class PlayerControllerAi extends PlayerController {
                         if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
                             continue; // Only equivalent types allowed
                         }
-                    } else {
-                        if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
-                                || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                            if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
-                                continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
-                            }
+                    } else if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                            || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                        if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                            continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
                         }
                     }
 
@@ -674,6 +675,17 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         } else if (destinationZone == ZoneType.Library) {
+            // Doomsday: the five cards go on top in the order that draws through to the winner
+            if (source != null && forge.ai.simulation.DoomsdayPile.isDoomsday(source.getHostCard())) {
+                try {
+                    final CardCollectionView pile = forge.ai.simulation.DoomsdayPile.order(player, cards);
+                    if (pile != null) {
+                        return pile;
+                    }
+                } catch (final RuntimeException e) {
+                    // fall through to the general ordering
+                }
+            }
             // Ponder and similar cards
             Player p = cards.getFirst().getController(); // whose library are we reordering?
             CardCollection reordered = new CardCollection();
@@ -864,7 +876,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         if (brains.useSmartMulligan()) {
             try {
-                return forge.ai.simulation.OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
+                return OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
                         firstPlayer == player, brains.deckPlan(player), brains.getIntProperty(AiProps.MULLIGAN_THRESHOLD));
             } catch (final RuntimeException e) {
                 // fall back to the standard rule below
@@ -877,7 +889,7 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
         if (brains.useSmartMulligan()) {
             try {
-                return CardCollection.getView(forge.ai.simulation.OpeningHand.toBottom(player, hand, cardsToReturn,
+                return CardCollection.getView(OpeningHand.toBottom(player, hand, cardsToReturn,
                         player.getGame().getStartingPlayer() == player,
                         brains.deckPlan(player)));
             } catch (final RuntimeException e) {
@@ -934,6 +946,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         brains.declareBlockersFor(defender, combat);
+        // CR 805.10d: an illegal team block is declared again, so drop this player's blocks rather than repeat it
+        if (defender.getSharedTeam().size() > 1 && CombatUtil.validateTeamBlock(combat, defender) != null) {
+            for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), defender)) {
+                combat.undoBlockingAssignment(blocker);
+            }
+        }
     }
 
     @Override
@@ -1369,7 +1387,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         final PhaseHandler ph = getGame().getPhaseHandler();
-        if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1 && sa.getTargetCard() != null) {
+        if (ph.is(PhaseType.MAIN1, sa.getActivatingPlayer()) && sa.getTargetCard() != null) {
             AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
             String s = aiAtk.toProtectAttacker(sa);
             if (s != null) {
@@ -1447,6 +1465,9 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
+            if (playedByTeammate(sa)) {
+                continue;
+            }
             if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
@@ -1461,7 +1482,7 @@ public class PlayerControllerAi extends PlayerController {
                         }
                     }
 
-                    if (sa.isMayChooseNewTargets()) {
+                    if (sa.isMayChooseNewTargets() && !sa.getAllTargetChoices().isEmpty()) {
                         chooseNewTargetsForCopy(sa);
                         // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                         // sa.setupNewTargets(player);
@@ -1473,7 +1494,7 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
-    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+    void chooseNewTargetsForCopy(final SpellAbility copy) {
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1504,6 +1525,10 @@ public class PlayerControllerAi extends PlayerController {
             for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
                 s.setTargets(oldTargets.get(i++));
             }
+        }
+        if (!targetingPlayer) {
+            // a copy that would do what the original or another copy already does goes for another target
+            CopyTargets.awayFromTheOthers(player, copy);
         }
     }
 
@@ -1544,6 +1569,13 @@ public class PlayerControllerAi extends PlayerController {
             if (tgtSA.isMadness() && !tgtSA.usesTargeting()
                     && ComputerUtilCost.canPayCost(tgtSA, player, false)) {
                 return ComputerUtil.playStack(tgtSA, player, getGame()); // otherwise the card is just lost
+            }
+            // Beseech the Mirror -> Gaea's Will / Yawgmoth's Will: the generic check declines the engine, but
+            // PlayAi.chooseSingleCard already picked it on purpose, and a free cast beats it going to the hand
+            final CardState realState = tgtSA.getHostCard().getState(CardStateName.Original);
+            if (noManaCost && ("YawgmothsWill".equals(tgtSA.getParamOrDefault("AILogic", ""))
+                || realState != null && realState.hasKeyword(Keyword.BARGAIN))) {
+                return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
@@ -1623,7 +1655,7 @@ public class PlayerControllerAi extends PlayerController {
                     }
                 }
             }
-            pieces = forge.ai.simulation.ComboPlan.scan(cards).pieceNames();
+            pieces = ComboPlan.scan(cards).pieceNames();
         } catch (final RuntimeException e) {
             return complaints;
         }
@@ -1768,12 +1800,18 @@ public class PlayerControllerAi extends PlayerController {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
+            } else if (logic.equals(NamedDiscard.LOGIC)) {
+                name = NamedDiscard.chooseName(player, sa, valid);
             }
 
             if (!StringUtils.isBlank(name)) {
                 return name;
             }
         } else {
+            final String outside = forge.ai.simulation.ConsultationWin.nameOutsideLibrary(player, sa);
+            if (outside != null) {
+                return outside; // Demonic Consultation with Thassa's Oracle: a card that is not in the library
+            }
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {
@@ -1874,6 +1912,11 @@ public class PlayerControllerAi extends PlayerController {
             return 0;
         }
 
+        if (keyword.getKeyword() == Keyword.REPLICATE) {
+            // a copy is worth its mana only with a target of its own when a second go at one target does nothing
+            max = Math.min(max, replicateCopiesWorthPaying(sa));
+        }
+
         int chosenAmount = 0;
 
         Cost costSoFar = sa.getPayCosts().copy();
@@ -1889,6 +1932,39 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         return chosenAmount;
+    }
+
+    private int replicateTargetCount(final SpellAbility sa) {
+        if (sa.getApi() == ApiType.Counter) {
+            int n = 0;
+            for (final SpellAbilityStackInstance si : player.getGame().getStack()) {
+                final SpellAbility onStack = si.getSpellAbility();
+                if (onStack.getActivatingPlayer() != null && onStack.getActivatingPlayer().isOpponentOf(player)
+                        && sa.canTargetSpellAbility(onStack)) {
+                    n++;
+                }
+            }
+            return n;
+        }
+        return sa.getTargetRestrictions().getAllCandidates(sa, false).size();
+    }
+    /**
+     * How many times replicate is worth paying: a counterspell, a tap, a bounce or a removal spell does nothing the
+     * second time on the same target (Consign to Memory, Gigadrowse, Vacuumelt), so the copies are limited to the
+     * other targets there are (one spell and each copy aimed at its own). Burn, pumps and the like stack, and an
+     * untargeted spell does its work for each copy: those are paid for as far as the mana goes.
+     */
+    private int replicateCopiesWorthPaying(final SpellAbility sa) {
+        if (!sa.usesTargeting() || sa.getTargetRestrictions() == null) {
+            return Integer.MAX_VALUE;
+        }
+        if (!CopyTargets.repeatsDoNothing(sa)) {
+            return Integer.MAX_VALUE;
+        }
+        sa.setActivatingPlayer(player);
+        final int perCopy = Math.max(1, sa.getTargetRestrictions().getMaxTargets(sa.getHostCard(), sa));
+        final int candidates = replicateTargetCount(sa);
+        return Math.max(0, candidates / perCopy - 1);
     }
 
     @Override

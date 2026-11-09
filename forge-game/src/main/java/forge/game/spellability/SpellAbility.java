@@ -980,14 +980,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggeringObjects.put(type, o);
     }
 
-    public void setTriggeringObjectsFrom(final Map<AbilityKey, Object> runParams, final AbilityKey... types) {
-        for (AbilityKey type : types) {
-            if (runParams.containsKey(type)) {
-                triggeringObjects.put(type, runParams.get(type));
-            }
-        }
-    }
-
     public boolean hasTriggeringObject(final AbilityKey type) {
         return triggeringObjects.containsKey(type);
     }
@@ -2158,6 +2150,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                             candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = getActivatingPlayer();
+                }
+                if (targetingPlayer == null) {
+                    // nobody to choose the targets, so they cannot be chosen
+                    return false;
                 }
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied

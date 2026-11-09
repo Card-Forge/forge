@@ -41,7 +41,7 @@ public final class TutorPlan {
         // Intuition's root spell ability is not hidden. Its selection is handled
         // by a separate hidden sub-ability, so recognize it by its AILogic.
         final boolean intuition = sa != null && "Intuition".equals(sa.getParam("AILogic"));
-        if (sa == null || !sa.isSpell() || sa.getApi() != ApiType.ChangeZone
+        if (sa == null || !(sa.isSpell() || isHandAbility(sa)) || sa.getApi() != ApiType.ChangeZone
                 || (!sa.isHidden() && !intuition) || !sa.hasParam("Origin")) {
             return false;
         }
@@ -60,7 +60,17 @@ public final class TutorPlan {
             return false; // somebody else's library
         }
         final String type = sa.getParamOrDefault("ChangeType", "");
-        return !(type.contains("Land") && !type.contains("Nonland")); // fetching lands is the heuristics' ramp logic
+        return !HandAbilities.searchesLands(type); // fetching lands is the heuristics' ramp logic
+    }
+
+    /**
+     * An activated ability of a card in the hand that searches the library (transmute, and the scripts like it): the
+     * card is discarded to pay for it, so it is a card for a card, and worth the mana only for a card that is better.
+     */
+    public static boolean isHandAbility(final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        return host != null && sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility()
+                && host.isInZone(ZoneType.Hand);
     }
 
     /** What the spell can find: the cards of the library that fit its description. */
@@ -105,6 +115,10 @@ public final class TutorPlan {
         if (!isLibraryTutor(sa)) {
             return false;
         }
+        if (isHandAbility(sa)) {
+            // a card for a card plus the mana: only for what the deck plan is missing, and with the mana to spare
+            return hasPlanTarget(ai, sa) && FlatMonteCarloPicker.sparesMana(ai, sa);
+        }
         for (final Card c : pool(ai, sa)) {
             if (!c.isLand()) {
                 return true;
@@ -129,7 +143,7 @@ public final class TutorPlan {
                 if (plan != null && picks.size() > 1) {
                     value = Math.max(value, plan.combos.graveyardGain(ai, picks));
                 }
-            } else if (hasUse(ai, sa)) {
+            } else if (!isHandAbility(sa) && hasUse(ai, sa)) {
                 value = IDLE_BONUS;
             }
         } catch (final RuntimeException e) {

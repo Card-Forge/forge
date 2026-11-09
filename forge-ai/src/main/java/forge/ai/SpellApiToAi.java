@@ -117,6 +117,7 @@ public enum SpellApiToAi {
             .put(ApiType.HealDamage, AlwaysPlayAi.class)
             .put(ApiType.Heist, AlwaysPlayAi.class)
             .put(ApiType.ImmediateTrigger, ImmediateTriggerAi.class)
+            .put(ApiType.Incubate, AlwaysPlayAi.class)
             .put(ApiType.Investigate, InvestigateAi.class)
             .put(ApiType.Learn, LearnAi.class)
             .put(ApiType.LoseLife, LifeLoseAi.class)

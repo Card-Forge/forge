@@ -1,0 +1,8 @@
+Name:Chief Miles O'Brien
+ManaCost:2 U
+Types:Legendary Creature Human Artificer
+PT:2/4
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ Seek out — Whenever you draw your second card each turn, double the number of each kind of counter on target artifact or creature you control.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | ValidTgtsDesc$ artifact or creature you control | Multiplier$ 2
+DeckHints:Ability$Counters
+Oracle:Seek out — Whenever you draw your second card each turn, double the number of each kind of counter on target artifact or creature you control.
