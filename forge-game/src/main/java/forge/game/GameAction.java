@@ -2392,7 +2392,7 @@ public class GameAction {
 
             // after the mulligans, which shuffle the hand away and redraw up to the maximum hand size
             for (final Player p1 : game.getPlayers()) {
-                p1.initStartingHandExtras();
+                p1.runStartGameScripts();
             }
 
             game.setAge(GameStage.Play);
