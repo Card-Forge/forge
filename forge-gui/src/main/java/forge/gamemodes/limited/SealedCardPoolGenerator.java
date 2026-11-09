@@ -36,6 +36,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.model.MetaSet;
 import forge.model.UnOpenedMeta;
 import forge.util.FileUtil;
 import forge.util.Localizer;
@@ -189,20 +190,21 @@ public class SealedCardPoolGenerator {
                 // More recent sets are like 6 boosters of this edition + 1 Promo RareMythic from this edition
 
                 // Expecting to see things like
-                // # <Edition> Boosters, # SpecialBooster, # Rarity+
+                // # <Edition> Boosters, # MetaSet, # Rarity+
 
-                String[] parts = bundle.split(", ");
+                String[] parts = TextUtil.splitWithParenthesis(bundle, ',');
                 for(String part : parts) {
+                    part = part.trim();
                     boolean promo = part.endsWith("+");
                     if (promo) {
                         part = part.substring(0, part.length() - 1);
                     }
 
-                    String[] pieces = part.split(" ");
+                    String[] pieces = TextUtil.splitWithParenthesis(part, ' ');
                     int num = Integer.parseInt(pieces[0]);
                     String thing = pieces[pieces.length - 1];
 
-                    // Booster, SpecialBooster, Rarity, Named?
+                    // Booster, MetaSet, Rarity, Named?
 
                     if (thing.equalsIgnoreCase("Booster") || thing.equalsIgnoreCase("Boosters")) {
                         // Normal Boosters of this or block editions
@@ -216,22 +218,10 @@ public class SealedCardPoolGenerator {
                         for(int i = 0; i < num; i++) {
                             this.product.add(new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)));
                         }
-                    } else if (thing.equalsIgnoreCase("SpecialBooster") || thing.equalsIgnoreCase("SpecialBoosters")) {
-                        // Seeded boosters named "<edition code> Prerelease <name>" in boosters-special.txt, the player picks one
-                        String prefix = chosenEdition.getCode() + " Prerelease ";
-                        List<String> choices = new ArrayList<>();
-                        for (SealedTemplate special : FModel.getMagicDb().getSpecialBoosters()) {
-                            String specialName = special.getName();
-                            if (specialName.startsWith(prefix)) {
-                                choices.add("S(" + specialName + ")" + specialName.substring(prefix.length()));
-                            }
-                        }
-                        if (choices.isEmpty()) {
-                            throw new RuntimeException("No special boosters named '" + prefix + "...' found for the prerelease of " + chosenEdition.getName());
-                        }
-
+                    } else if (thing.contains("(")) {
+                        // A MetaSet like the ones in blocks.txt, e.g. 1 Choose(S(TDM Prerelease Abzan)Abzan;S(TDM Prerelease Jeskai)Jeskai)
                         for (int i = 0; i < num; i++) {
-                            this.product.add(UnOpenedMeta.choose(StringUtils.join(choices, ";")));
+                            this.product.add(new MetaSet(thing, false).getBooster());
                         }
                     } else {
                         // Rarity

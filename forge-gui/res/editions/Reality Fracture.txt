@@ -88,7 +88,7 @@ Replace=.000687F wholeSheet("FRA pair chandra borderless")
 Replace=.000687F wholeSheet("FRA pair garruk borderless")
 
 [EchoedThird]
-ExcludeNamesDrawnBy=EchoedPair
+ExcludeDrawnNames=true
 Base=Uncommon:fromSheet("FRA echoed third")
 Replace=.076923F Rare:fromSheet("FRA echoed third")
 Replace=.016484F Mythic:fromSheet("FRA echoed third")

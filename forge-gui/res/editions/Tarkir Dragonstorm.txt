@@ -8,8 +8,8 @@ ScryfallCode=TDM
 # Odds are the MTGJSON play booster sheet weights; booster fun (showcase/borderless/etc, collector numbers 292-398) comes from the "TDM booster fun" sheet
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard+
-Prerelease=5 Boosters, 1 SpecialBooster, 1 RareMythic+
-# The SpecialBooster is the seeded faction booster (9 Common, 3 Uncommon, 1 RareMythic, 1 faction land), see "TDM Prerelease <faction>" in blockdata/boosters-special.txt
+Prerelease=5 Boosters, 1 Choose(S(TDM Prerelease Abzan)Abzan;S(TDM Prerelease Jeskai)Jeskai;S(TDM Prerelease Mardu)Mardu;S(TDM Prerelease Sultai)Sultai;S(TDM Prerelease Temur)Temur), 1 RareMythic+
+# The Choose is the seeded faction booster (9 Common, 3 Uncommon, 1 RareMythic, 1 faction land), the S() entries are "TDM Prerelease <faction>" in blockdata/boosters-special.txt
 BoosterBox=30
 
 [Common]

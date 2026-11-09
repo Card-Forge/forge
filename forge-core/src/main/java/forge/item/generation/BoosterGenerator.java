@@ -469,7 +469,7 @@ public class BoosterGenerator {
         // Instead each slot defines their percentages on their own
         List<PaperCard> result = new ArrayList<>();
         Map<String, BoosterSlot> boosterSlots = template.getNamedSlots();
-        Map<String, List<PaperCard>> drawnBySlot = new HashMap<>();
+        Set<String> drawnNames = new HashSet<>();
 
         for (Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft().trim();
@@ -484,13 +484,8 @@ public class BoosterGenerator {
 
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
 
-            // Cards with the same name as the ones drawn by these slots earlier in this booster can't be drawn again
-            Set<String> excludedNames = new HashSet<>();
-            for (String drawnBy : boosterSlot.getExcludeNamesDrawnBy()) {
-                for (PaperCard pc : drawnBySlot.getOrDefault(drawnBy, Collections.emptyList())) {
-                    excludedNames.add(pc.getName());
-                }
-            }
+            // Cards with the same name as the ones drawn earlier in this booster can't be drawn again
+            Collection<String> excludedNames = boosterSlot.isExcludeDrawnNames() ? drawnNames : Collections.emptySet();
 
             List<PaperCard> paperCards = Lists.newArrayList();
             Map<String, Long> randomDraws = new LinkedHashMap<>();
@@ -540,7 +535,9 @@ public class BoosterGenerator {
                 }
             }
             result.addAll(paperCards);
-            drawnBySlot.computeIfAbsent(slotType, k -> new ArrayList<>()).addAll(paperCards);
+            for (PaperCard pc : paperCards) {
+                drawnNames.add(pc.getName());
+            }
         }
 
         return result;
