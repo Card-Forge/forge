@@ -18,7 +18,6 @@
 package forge.game;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.card.CardStateName;
@@ -110,8 +109,6 @@ public final class GameActionUtil {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
                 source.clearStaticChangedCardKeywords(false);
-                // the copy carries the real card's play options, the check below recomputes them for this state
-                source.setMayPlay(Maps.newHashMap());
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
