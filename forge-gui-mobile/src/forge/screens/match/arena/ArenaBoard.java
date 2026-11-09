@@ -558,6 +558,37 @@ public final class ArenaBoard {
         return Math.round(windowH() * (local ? LOCAL_BACK_Y : seat ? SEAT_BACK_Y : FOE_BACK_Y));
     }
 
+    /** A back row that would overlap wraps onto up to this many rows, its tiles no smaller than this share of the window's height. */
+    public static final int BACK_ROWS_MOST = 3;
+    public static final float BACK_ROWS_LEAST_H = 0.045f;
+
+    /**
+     * The top of the band a back row may fill (window coordinates) when one row of it would overlap: yours reaches up
+     * to just under the front row, an opponent's starts where their back row does (above it are their name and piles).
+     */
+    public static float backBandTop(final boolean local, final boolean seat) {
+        if (local) {
+            return frontRowTop(true, false) + fullFrontTileHeight(true, false) + Math.round(windowH() * 0.012f);
+        }
+        return backRowTop(false, seat);
+    }
+
+    /**
+     * The bottom of that band: yours a little under the back row (clear of the mana beside the portrait), an
+     * opponent's down to just above their front row.
+     */
+    public static float backBandBottom(final boolean local, final boolean seat) {
+        if (local) {
+            return backRowTop(true, false) + backTileHeight(true, false, fullFrontTileHeight(true, false)) + Math.round(windowH() * 0.02f);
+        }
+        return frontRowTop(false, seat) - Math.round(windowH() * 0.01f);
+    }
+
+    /** The space between the rows of a back row that wraps. */
+    public static float backRowsGap() {
+        return Math.max(2f, Math.round(windowH() * 0.006f));
+    }
+
     /** Half the gap the back row leaves round the portrait. */
     public static float portraitClear(final boolean seat) {
         return Math.round(windowH() * (seat ? CLEAR_SEAT : CLEAR));

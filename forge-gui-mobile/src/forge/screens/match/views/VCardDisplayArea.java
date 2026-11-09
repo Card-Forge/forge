@@ -528,8 +528,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
      * @param local     the local player's field (else an opponent's)
      * @param seat      an opponent's seat in a game of three or more
      * @param centreX   where the portrait's column is, in this row's coordinates
+     * @param rowY      where one row of tiles sits from this area's top (the back row's area is the band it may wrap into)
      */
-    protected final void layoutArenaRow(boolean front, boolean local, boolean seat, float centreX, float width) {
+    protected final void layoutArenaRow(boolean front, boolean local, boolean seat, float centreX, float width, float rowY) {
         orderedCards.get().clear();
         infoGhostCardIds.get().clear();
         final List<CardAreaPanel> tops = cardPanels.get();
@@ -560,12 +561,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
             return;
         }
-        // the back row: lands on the left wing, the rest on the right; lands shrink before they cross the portrait
+        // the back row: lands on the left wing, the rest on the right; lands shrink before they cross the portrait. It fills
+        // this area's whole height (the band it may wrap into); one row of it sits rowY down
         final List<CardAreaPanel> lands = new ArrayList<>(), others = new ArrayList<>();
         for (CardAreaPanel top : tops) {
             (top.getCard().getCurrentState().isLand() ? lands : others).add(top);
         }
         float h = ArenaBoard.backTileHeight(local, seat, frontH);
+        final float fullH = h; //the most a wrapped row's tiles get
         final float clear = ArenaBoard.portraitClear(seat);
         final float rightLimit = Math.min(ArenaBoard.backRowRight(local, seat, width), right);
         if (seat) { //a seat's portrait is above its rows: one row across the whole width
@@ -574,7 +577,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             while (h > minH && arenaRowWidth(all, h) > rightLimit - margin) {
                 h -= 2;
             }
-            placeArenaWing(all, margin, rightLimit, h, false, true);
+            if (arenaRowWidth(all, h) > rightLimit - margin
+                    && placeArenaRows(fullH, new ArenaWing(all, margin, rightLimit, false, true))) {
+                return; //more than one row is better than cards on top of each other
+            }
+            placeArenaWing(all, margin, rightLimit, rowY, h, false, true);
             return;
         }
         final float leftRoom = centreX - clear - margin;
@@ -597,8 +604,78 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
         }
         rightWing.addAll(others);
-        placeArenaWing(leftWing, margin, centreX - clear, h, true, false);
-        placeArenaWing(rightWing, centreX + clear, rightLimit, h, false, false);
+        // one row would put cards on top of each other: lands and the rest each take more rows of smaller tiles instead
+        if ((arenaRowWidth(leftWing, h) > leftRoom || arenaRowWidth(rightWing, h) > rightLimit - centreX - clear)
+                && placeArenaRows(fullH, new ArenaWing(lands, margin, centreX - clear, true, false),
+                        new ArenaWing(others, centreX + clear, rightLimit, false, false))) {
+            return;
+        }
+        placeArenaWing(leftWing, margin, centreX - clear, rowY, h, true, false);
+        placeArenaWing(rightWing, centreX + clear, rightLimit, rowY, h, false, false);
+    }
+
+    /** A part of the back row: its cards, between two x positions, pressed against the portrait (alignRight) or centred. */
+    private static final class ArenaWing {
+        final List<CardAreaPanel> cards;
+        final float left, right;
+        final boolean alignRight, centre;
+
+        ArenaWing(List<CardAreaPanel> cards, float left, float right, boolean alignRight, boolean centre) {
+            this.cards = cards;
+            this.left = left;
+            this.right = right;
+            this.alignRight = alignRight;
+            this.centre = centre;
+        }
+    }
+
+    /**
+     * The back row wrapped onto more rows: the largest tiles (up to {@code mostH}) at which every wing fits its width in
+     * at most {@link ArenaBoard#BACK_ROWS_MOST} rows without overlapping, and all those rows fit this area's height (at
+     * the smallest, one row of small tiles may do). Each wing's rows sit in the middle of the height. False, placing
+     * nothing, when no such size is left: then the one row overlaps as it must.
+     */
+    private boolean placeArenaRows(float mostH, ArenaWing... wings) {
+        final float bandH = getHeight(), rowGap = ArenaBoard.backRowsGap();
+        final float least = Math.round(ArenaBoard.windowH() * ArenaBoard.BACK_ROWS_LEAST_H);
+        for (float h = mostH; h >= least; h -= 2) {
+            int rows = 0;
+            for (ArenaWing wing : wings) {
+                rows = Math.max(rows, arenaRows(wing.cards, wing.right - wing.left, h).size());
+            }
+            if (rows == 0 || rows > ArenaBoard.BACK_ROWS_MOST || rows * h + (rows - 1) * rowGap > bandH) {
+                continue;
+            }
+            for (ArenaWing wing : wings) {
+                final List<List<CardAreaPanel>> lines = arenaRows(wing.cards, wing.right - wing.left, h);
+                final float y = (bandH - (lines.size() * h + (lines.size() - 1) * rowGap)) / 2f;
+                for (int i = 0; i < lines.size(); i++) {
+                    placeArenaWing(lines.get(i), wing.left, wing.right, Math.round(y + i * (h + rowGap)), h, wing.alignRight, wing.centre);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /** These cards in rows no wider than {@code room} at tile height {@code h}, filling each row before the next. */
+    private static List<List<CardAreaPanel>> arenaRows(List<CardAreaPanel> cards, float room, float h) {
+        final List<List<CardAreaPanel>> lines = new ArrayList<>();
+        final float w = Math.round(h * ArenaBoard.TILE_RATIO), gap = Math.round(w * ArenaBoard.TILE_GAP);
+        List<CardAreaPanel> line = null;
+        float used = 0;
+        for (CardAreaPanel top : cards) {
+            final float gw = arenaGroupWidth(top, w);
+            if (line == null || used + gap + gw > room) {
+                line = new ArrayList<>();
+                lines.add(line);
+                used = gw;
+            } else {
+                used += gap + gw;
+            }
+            line.add(top);
+        }
+        return lines;
     }
 
     private static float arenaRowWidth(List<CardAreaPanel> row, float h) {
@@ -611,7 +688,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     /** One wing of the back row between two x positions, pressed against the portrait (alignRight) or centred; overlaps if it must. */
-    private void placeArenaWing(List<CardAreaPanel> row, float left, float right, float h, boolean alignRight, boolean centre) {
+    private void placeArenaWing(List<CardAreaPanel> row, float left, float right, float y, float h, boolean alignRight, boolean centre) {
         if (row.isEmpty()) {
             return;
         }
@@ -622,7 +699,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         final float shown = total - squeeze * Math.max(0, row.size() - 1);
         float x = alignRight ? Math.max(left, right - shown) : centre ? Math.max(left, left + (room - shown) / 2f) : left;
         for (CardAreaPanel top : row) {
-            placeArenaGroup(top, x, 0f, w, h, 1f);
+            placeArenaGroup(top, x, y, w, h, 1f);
             x += arenaGroupWidth(top, w) + gap - squeeze;
         }
     }

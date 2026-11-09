@@ -417,8 +417,12 @@ public class VPlayerPanel extends FContainer {
         //smaller cards (the card size slider) sit in the middle of the room their rows have at full size
         final float fullFrontH = ArenaBoard.fullFrontTileHeight(local, seat);
         final float fullBackH = ArenaBoard.backTileHeight(local, seat, fullFrontH);
+        //the back row covers the band it may wrap into when one row of it would overlap (its tiles must be in it to be clicked)
+        final float backTop = ArenaBoard.backRowTop(local, seat) + Math.round((fullBackH - backH) / 2f);
+        final float bandTop = Math.min(backTop, ArenaBoard.backBandTop(local, seat));
+        final float bandBottom = Math.max(backTop + backH, ArenaBoard.backBandBottom(local, seat));
         field.setArenaRows(ArenaBoard.frontRowTop(local, seat) - top + Math.round((fullFrontH - frontH) / 2f), frontH,
-                ArenaBoard.backRowTop(local, seat) - top + Math.round((fullBackH - backH) / 2f), backH);
+                bandTop - top, bandBottom - bandTop, backTop - bandTop);
         field.revalidate();
 
         //the portrait, with the phase ladder on its wings
@@ -526,7 +530,7 @@ public class VPlayerPanel extends FContainer {
         arenaPiles.setVisible(false);
         arenaName.setVisible(false);
         arenaHand.setVisible(false);
-        field.setArenaRows(-1, 0, 0, 0);
+        field.setArenaRows(-1, 0, 0, 0, 0);
         avatar.setArenaOpponent(false);
         avatar.setSize(avatarHeight, avatarHeight);
         compactAvatarSize = -1f;

@@ -281,14 +281,18 @@ public class VField extends FContainer {
     }
 
     // the Arena board: where the front and back rows go in this field, set by the player panel's Arena layout
-    private float arenaFrontTop = -1, arenaBackTop, arenaFrontH, arenaBackH;
+    private float arenaFrontTop = -1, arenaBackTop, arenaFrontH, arenaBackH, arenaBackRowY;
 
-    /** The Arena board's rows: their tops and heights in this field's coordinates (the field covers the player's area). */
-    void setArenaRows(float frontTop, float frontH, float backTop, float backH) {
+    /**
+     * The Arena board's rows, in this field's coordinates (the field covers the player's area): the front row's top and
+     * height, and the band the back row may fill (its top and height) with where its one row sits in that band.
+     */
+    void setArenaRows(float frontTop, float frontH, float backBandTop, float backBandH, float backRowY) {
         arenaFrontTop = frontTop;
         arenaFrontH = frontH;
-        arenaBackTop = backTop;
-        arenaBackH = backH;
+        arenaBackTop = backBandTop;
+        arenaBackH = backBandH;
+        arenaBackRowY = backRowY;
     }
 
     /** Whether this is an opponent's seat, one of several along the top of the Arena board. */
@@ -366,7 +370,7 @@ public class VField extends FContainer {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             if (ArenaMatchLayout.applies() && arenaFrontTop >= 0) { //rows fit the board: they never scroll
-                layoutArenaRow(this == row1, !flipped, isArenaSeat(), visibleWidth / 2f, visibleWidth);
+                layoutArenaRow(this == row1, !flipped, isArenaSeat(), visibleWidth / 2f, visibleWidth, this == row1 ? 0f : arenaBackRowY);
                 return new ScrollBounds(visibleWidth, visibleHeight);
             }
             return super.layoutAndGetScrollBounds(visibleWidth, visibleHeight);
