@@ -389,7 +389,10 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
         // Wait for combat to finish, not just for life to change. An unblocked attack changes life during
         // combat damage, before the end-of-combat phase and main phase 2 have been reached.
-        if (!waitUntil(() -> game.isGameOver() || !myTurn() || phase() == PhaseType.MAIN2, 30_000)) {
+        // The game gives the player priority in each combat step on the way (more of them when the opponent
+        // blocks), so pass it along here: merely waiting hangs until the timeout and ends the demo as a desync.
+        if (!advanceTo(() -> game.isGameOver() || !myTurn() || phase() == PhaseType.MAIN2, 60_000,
+                t("msgTutPassTry"))) {
             if (alive()) {
                 desync();
             }
@@ -457,10 +460,20 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         if (stopped) {
             return;
         }
-        waitUntil(() -> !has(opp, ZoneType.Battlefield, BRIGAND) || me.getLife() < STARTING_LIFE, 12_000);
+        // Pass priority through the combat steps, and judge the result only once combat damage has really been
+        // dealt. The phase is set to COMBAT_DAMAGE slightly before the damage is applied on the game thread, so
+        // reading the board in that step can still show the old state; end of combat or later is always safe.
+        if (!advanceTo(() -> game.isGameOver() || myTurn()
+                        || phase().ordinal() > PhaseType.COMBAT_DAMAGE.ordinal(),
+                60_000, t("msgTutPassTry"))) {
+            if (alive()) {
+                desync();
+            }
+            return;
+        }
         if (!has(opp, ZoneType.Battlefield, BRIGAND)) {
             spotlightAndSay(cards(find(me, ZoneType.Battlefield, GIANT)), t("lblTutBlocked"), t("msgTutBlocked"));
-        } else {
+        } else if (me.getLife() < STARTING_LIFE) {
             say(t("lblTutNotBlocked"), t("msgTutNotBlocked", STARTING_LIFE - me.getLife()));
         }
     }
@@ -495,7 +508,17 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
                     return;
                 }
             }
-            waitUntil(() -> game.isGameOver() || opp.getLife() < oppLife, 15_000);
+            // Pass priority through the combat steps and judge only once combat damage has really been dealt
+            // (past COMBAT_DAMAGE, as in the block lesson). Merely waiting never passes priority in declare
+            // blockers, so the damage never happened and "Not quite" was shown before combat even resolved.
+            if (!advanceTo(() -> game.isGameOver() || !myTurn()
+                            || phase().ordinal() > PhaseType.COMBAT_DAMAGE.ordinal(),
+                    60_000, t("msgTutPassTry"))) {
+                if (alive()) {
+                    desync();
+                }
+                return;
+            }
             if (game.isGameOver() || opp.getLife() <= 0) {
                 break;
             }
@@ -638,7 +661,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
      */
     private boolean advanceTo(final BooleanSupplier target, final long timeoutMs, final String hint)
             throws InterruptedException {
-        final long end = System.currentTimeMillis() + timeoutMs;
+        long end = System.currentTimeMillis() + timeoutMs;
         long lastNudge = System.currentTimeMillis();
         while (true) {
             if (safe(target)) {
@@ -648,7 +671,9 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
                 return false;
             }
             if (safe(this::myPriority)) {
+                final long noteStart = System.currentTimeMillis();
                 explainPhase();
+                end += System.currentTimeMillis() - noteStart; // time spent reading a note is not a stalled game
                 if (watch) {
                     ok();
                     Thread.sleep(PASS_MS);
