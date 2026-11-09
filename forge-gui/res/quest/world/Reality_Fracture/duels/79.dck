@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Very Hard
+Description=./Modern/Reality_Fracture/TheOtherCody_-_UrzaTron_(Modern,_#897472).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+4 Kozilek's Command
+4 Sowing Mycospawn
+4 Ugin's Labyrinth
+1 Forest
+3 Portent of Calamity
+4 Stock Up
+4 Ugin, Eye of the Storms
+1 Island
+3 Giant's Boulder
+4 Expedition Map
+4 Urza's Mine
+4 Urza's Power Plant
+1 Breeding Pool
+4 Eldrazi Temple
+2 Dismember
+2 Ulamog, the Ceaseless Hunger
+3 Talisman of Curiosity
+4 Urza's Tower
+[Sideboard]
+2 Dismember
+4 Consign to Memory
+2 Disruptor Flute
+2 Karn, Argent Defender
+3 Chalice of the Void
+2 Grafdigger's Cage

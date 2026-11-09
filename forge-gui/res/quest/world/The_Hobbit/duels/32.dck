@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Austin_Bench_-_Jund_Sacrifice_(Standard,_#899186).dck
+Deck Type=constructed
+
+[Main]
+4 Biotech Specialist
+4 Gene Pollinator
+4 Greedy Freebooter
+4 The Sackville-Bagginses
+2 Callous Inspector
+2 Rottenmouth Viper
+2 Umbral Collar Zealot
+1 Smaug the Magnificent
+1 Wolverine, Fierce Fighter
+2 Requiting Hex
+4 Lively Dirge
+3 Stir Up Trouble
+4 Obsessive Pursuit
+1 The Misty Mountains Cold
+4 Blooming Marsh
+4 Overgrown Tomb
+4 Starting Town
+2 Blazemire Verge
+2 Blood Crypt
+2 Wastewood Verge
+1 Forest
+1 Multiversal Passage
+1 Stomping Ground
+1 Swamp
+[Sideboard]
+2 Requiting Hex
+3 Duress
+3 Strategic Betrayal
+2 Shoot the Sheriff
+2 The Ooze
+1 Maelstrom Pulse
+2 Professor Dellian Fel

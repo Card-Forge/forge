@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Bawer_-_Mardu_Aggro_(Standard,_#901762).dck
+Deck Type=constructed
+
+[Main]
+4 Blood Crypt
+4 Bloodghast
+1 Swamp
+1 Multiversal Passage
+4 Cool but Rude
+2 Erode
+3 Godless Shrine
+4 Hardened Academic
+1 Mountain
+4 Moonshadow
+4 Iron-Shield Elf
+4 Marauding Mako
+1 Inti, Seneschal of the Sun
+2 Inspiring Vantage
+3 Concealed Courtyard
+4 Practiced Offense
+2 Requiting Hex
+4 Sacred Foundry
+3 Starting Town
+1 Carnage, Crimson Chaos
+4 Dark Matter Manipulator
+[Sideboard]
+2 Ghost Vacuum
+2 Duress
+2 Doorkeeper Thrull
+2 Day of Judgment
+2 Strategic Betrayal
+3 Monument to Endurance
+2 Shoot the Sheriff

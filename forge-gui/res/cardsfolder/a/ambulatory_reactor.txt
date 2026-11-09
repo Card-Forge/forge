@@ -1,0 +1,8 @@
+Name:Ambulatory Reactor
+ManaCost:3 U
+Types:Artifact Creature Borg
+PT:2/5
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddAbility$ Mana | Description$ Artifact creatures you control have "{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {C}.
+DeckHints:Type$Artifact
+Oracle:Artifact creatures you control have "{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source."

@@ -1,0 +1,8 @@
+Name:I.K.S. Negh'Var, Imperial Flagship
+ManaCost:3
+Types:Legendary Artifact Spacecraft
+PT:6/6
+S:Mode$ Continuous | Affected$ Klingon.YouCtrl,Warrior.YouCtrl | AddKeyword$ Vigilance | Description$ Klingons and Warriors you control have vigilance.
+K:Station:10
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE10_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance | Description$ STATION 10+ Flying, vigilance
+Oracle:Klingons and Warriors you control have vigilance.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.)\nSTATION 10+\nFlying, vigilance

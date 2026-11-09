@@ -27,8 +27,8 @@ public class TriggerCaseSolved extends Trigger {
     }
 
     @Override
-        public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player);
+        public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Card, AbilityKey.Player);
     }
 
     public String getImportantStackObjects(SpellAbility sa) {

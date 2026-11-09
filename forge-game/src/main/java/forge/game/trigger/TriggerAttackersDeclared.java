@@ -56,6 +56,13 @@ public class TriggerAttackersDeclared extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        // a team's attack runs once per attacking player for triggers keyed to one, and once whole for the rest (CR 805.10c)
+        if (runParams.containsKey(AbilityKey.OneOfAttackingTeam)) {
+            final boolean perAttackingPlayer = hasParam("AttackingPlayer") || refersToTriggering(AbilityKey.AttackingPlayer);
+            if ((boolean) runParams.get(AbilityKey.OneOfAttackingTeam) != perAttackingPlayer) {
+                return false;
+            }
+        }
         if (!matchesValidParam("AttackingPlayer", runParams.get(AbilityKey.AttackingPlayer))) {
             return false;
         }
@@ -76,7 +83,7 @@ public class TriggerAttackersDeclared extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         Iterable<GameEntity> attackedTarget = (Iterable<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
 
         CardCollection attackers = (CardCollection) runParams.get(AbilityKey.Attackers);
@@ -88,14 +95,14 @@ public class TriggerAttackersDeclared extends Trigger {
             }
             attackedTarget = defenders;
         }
-        sa.setTriggeringObject(AbilityKey.Attackers, attackers);
+        objects.put(AbilityKey.Attackers, attackers);
 
         if (hasParam("AttackedTarget")) {
             attackedTarget = IterableUtil.filter(attackedTarget, GameObjectPredicates.restriction(getParam("AttackedTarget").split(","), getHostCard().getController(), getHostCard(), this));
         }
-        sa.setTriggeringObject(AbilityKey.AttackedTarget, attackedTarget);
+        objects.put(AbilityKey.AttackedTarget, attackedTarget);
 
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.AttackingPlayer);
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.AttackingPlayer);
     }
 
     @Override

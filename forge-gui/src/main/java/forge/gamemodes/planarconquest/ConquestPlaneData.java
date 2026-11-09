@@ -37,6 +37,17 @@ public class ConquestPlaneData implements IXmlWritable {
         ConquestEventRecord result = eventResults[eventIndex];
         return result != null && result.hasConquered();
     }
+    public boolean hasConqueredRegion(int regionIndex) {
+        ConquestPlane plane = location.getPlane();
+        for (int row = 0; row < plane.getRowsPerRegion(); row++) {
+            for (int col = 0; col < plane.getCols(); col++) {
+                if (!hasConquered(regionIndex, row, col)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public ConquestEventRecord getEventRecord(ConquestLocation loc) {
         return eventResults[loc.getEventIndex()];

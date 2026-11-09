@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Inaba_Konan_-_Mono_Green_Aggro_(Standard,_#886269).dck
+Deck Type=constructed
+
+[Main]
+15 Forest
+4 Fabled Passage
+3 Ba Sing Se
+2 Escape Tunnel
+1 Elven Passage
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Icetill Explorer
+4 Sazh's Chocobo
+1 Keen-Eyed Curator
+4 Sapling Nursery
+4 Earthbender Ascension
+4 Esper Origins
+2 Shared Roots
+2 Meltstrider's Resolve
+1 Lumbering Worldwagon
+1 Royal Treatment
+[Sideboard]
+1 Meltstrider's Resolve
+1 Leatherhead, Swamp Stalker
+1 Surrak, Elusive Hunter
+3 Mossborn Hydra
+1 Hunter's Talent
+2 Pick Your Poison
+2 Soul-Guide Lantern
+3 Torpor Orb
+1 Gigantic Big Bear

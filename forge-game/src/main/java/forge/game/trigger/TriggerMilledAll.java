@@ -45,7 +45,7 @@ public class TriggerMilledAll extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         CardCollection cards = (CardCollection) runParams.get(AbilityKey.Cards);
 
         if (hasParam("ValidCard")) {
@@ -53,8 +53,8 @@ public class TriggerMilledAll extends Trigger {
                     getHostCard(), this);
         }
 
-        sa.setTriggeringObject(AbilityKey.Cards, cards);
-        sa.setTriggeringObject(AbilityKey.Amount, cards.size());
+        objects.put(AbilityKey.Cards, cards);
+        objects.put(AbilityKey.Amount, cards.size());
     }
 
     @Override

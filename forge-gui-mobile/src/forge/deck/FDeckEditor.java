@@ -902,12 +902,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         DeckFormat format = this.editorConfig.getDeckFormat();
         if(card == null)
             return 0;
-        else if (!shouldEnforceConformity())
+        if (!shouldEnforceConformity())
             return Integer.MAX_VALUE;
-        else if(format != null)
+        if(format != null)
             return format.getMaxCardCopies(card);
-        else
-            return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+        return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
     }
 
     protected DeckSectionPage showExtraSectionTab(DeckSection section) {
@@ -1670,12 +1669,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             if(parentScreen.getCommanderPage().cardManager.getPool().contains(card))
                 return false; //Don't let it be the commander if it already is one.
-            if(!parentScreen.shouldEnforceConformity())
-                return card.getRules().canBeCreature();
+            return getCommanderFormat().isAllowedCommander(card.getRules(), parentScreen.shouldEnforceConformity());
+        }
+
+        private DeckFormat getCommanderFormat() {
             DeckFormat format = parentScreen.editorConfig.getDeckFormat();
-            if(format == null)
-                format = DeckFormat.Commander;
-            return format.isLegalCommander(card.getRules());
+            return format == null ? DeckFormat.Commander : format;
         }
 
         protected boolean canBePartnerCommander(final PaperCard card) {
@@ -1778,15 +1777,31 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void setCommander(PaperCard card) {
-            DeckSectionPage commanderPage = parentScreen.getCommanderPage();
-            commanderPage.ejectCards();
-            moveCard(card, commanderPage);
-            refresh(); //refresh so cards shown that match commander's color identity
+            confirmIfIllegalCommander(card, () -> {
+                DeckSectionPage commanderPage = parentScreen.getCommanderPage();
+                commanderPage.ejectCards();
+                moveCard(card, commanderPage);
+                refresh(); //refresh so cards shown that match commander's color identity
+            });
         }
 
         protected void setPartnerCommander(PaperCard card) {
-            moveCard(card, parentScreen.getCommanderPage());
-            refresh(); //refresh so cards shown that match commander's color identity
+            confirmIfIllegalCommander(card, () -> {
+                moveCard(card, parentScreen.getCommanderPage());
+                refresh(); //refresh so cards shown that match commander's color identity
+            });
+        }
+
+        private void confirmIfIllegalCommander(PaperCard card, Runnable place) {
+            if (getCommanderFormat().isLegalCommander(card.getRules())) {
+                place.run();
+                return;
+            }
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblConfirmIllegalCommander", card.getName()), result -> {
+                if (result) {
+                    place.run();
+                }
+            });
         }
 
         protected void setSignatureSpell(PaperCard card) {
@@ -1947,7 +1962,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //Then we just remove the "add to deck" option when clicking a card outside the color identity.
                 if(needsCommander()) {
                     //If we need a commander, show only commander candidates.
-                    cardPool.retainIf(deckFormat.isLegalCommanderPredicate());
+                    cardPool.retainIf(c -> deckFormat.isAllowedCommander(c.getRules(), parentScreen.shouldEnforceConformity()));
                     if(editorConfig.getGameType() == GameType.Oathbreaker)
                         label = "lblOathbreakers";
                     else

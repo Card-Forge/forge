@@ -1,0 +1,8 @@
+Name:Class-F Shuttlecraft
+ManaCost:3
+Types:Artifact Spacecraft
+PT:2/4
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Station:6
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance | Description$ STATION 6+ Flying, vigilance
+Oracle:{T}: Add one mana of any color.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.)\nSTATION 6+\nFlying, vigilance

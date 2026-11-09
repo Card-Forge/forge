@@ -35219,7 +35219,7 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Jalira, Master Polymorphistr"
+        "cardName": "Jalira, Master Polymorphist"
       },
       {
         "type": "deckCard",
@@ -67693,7 +67693,7 @@
     "name": "The Ur-Sphinx",
     "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
     "deck": [
-      "decks/legends/the_ur_sphinx.dck"
+      "decks/legends/the_ur-sphinx.dck"
     ],
     "ai": "",
     "flying": true,

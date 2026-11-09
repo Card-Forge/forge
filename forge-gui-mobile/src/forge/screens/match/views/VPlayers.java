@@ -90,7 +90,7 @@ public class VPlayers extends FDropDown {
                 g.drawImage(MatchController.getPlayerAvatar(player), x, y, h, h);
             }
             if (!MatchController.instance.getGameView().isCommander()) {
-                if (!Forge.isMobileAdventureMode)
+                if (!Forge.isMobileAdventureMode && playerDeck != null) // a replay has no deck to name
                     details += playerDeck.getName();
             } else {
                 extra += 2;

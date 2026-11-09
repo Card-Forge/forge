@@ -118,4 +118,7 @@ ScryfallCode=PMEI
 2026-24 M Benjamin Sisko, Besieged @Josu Hernaiz
 2026-25 R Hulk, Gamma Goliath @Zezhou Chen
 2026-26 M Doctor Doom, King of Latveria @Jorge Molina
+2026-27 R Mind Stone @Camille Alquier
+2026-28 R Venom, Eddie Brock @Simon Dominic
+2026-29 R Villainous Hideout @Paulius Daščioras
 2027-1 M Final Showdown @Tetsuya Nomura

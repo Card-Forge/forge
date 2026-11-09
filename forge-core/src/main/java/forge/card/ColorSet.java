@@ -366,4 +366,19 @@ public enum ColorSet implements Iterable<Color>, Serializable {
     public Collection<Color> getOrderedColors() {
         return orderedShards;
     }
+    private String symbolString = null;
+    public String getSymbolsString() {
+        if (this.symbolString == null) {
+            final StringBuilder builder = new StringBuilder(32);
+
+            for (final MagicColor.Color color : this.orderedShards) {
+                if (color != null) {
+                    // Pulls the symbol string (e.g., "{W}") directly
+                    builder.append(color.getSymbol());
+                }
+            }
+            this.symbolString = builder.toString();
+        }
+        return this.symbolString;
+    }
 }
