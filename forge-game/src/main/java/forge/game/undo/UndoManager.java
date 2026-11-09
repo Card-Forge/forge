@@ -49,8 +49,15 @@ public final class UndoManager {
 
     private static final long MIN_INCREMENTAL_ESTIMATE = 256L << 10;
     private static final long MIN_HEAP_RESERVE = 512L << 10;
-    private static final long MAX_HEAP_RESERVE = 16L << 20;
+    private static final long MAX_HEAP_RESERVE = 2L << 20;
+    private static final long HEAP_RESERVE_SCALE_DIVISOR = 4096L;
     private static final int MAX_BASELINE_REUSE_SKIPS = 3;
+
+    static long heapReserve(long maxMemory) {
+        return Math.max(MIN_HEAP_RESERVE,
+                Math.min(MAX_HEAP_RESERVE,
+                        maxMemory / HEAP_RESERVE_SCALE_DIVISOR));
+    }
 
     /**
      * Keep a small heap-scaled reserve and budget the next allocation from recent capture estimates.
@@ -86,8 +93,9 @@ public final class UndoManager {
         final long peakEstimate = estimate + Math.max(128L << 10, estimate / 2L);
         // At 512 MiB this is 1 MiB, rather than the previous 8 MiB. This leaves room for modest
         // incremental checkpoints when a phone has only a few MiB of heap headroom.
-        final long reserve = Math.max(MIN_HEAP_RESERVE,
-                Math.min(MAX_HEAP_RESERVE, rt.maxMemory() / 512L));
+        //final long reserve = Math.max(MIN_HEAP_RESERVE,
+                //Math.min(MAX_HEAP_RESERVE, rt.maxMemory() / 512L));
+        final long reserve = heapReserve(rt.maxMemory());
         return headroom > peakEstimate + reserve;
     }
 
