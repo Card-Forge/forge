@@ -1241,8 +1241,11 @@ public class MatchScreen extends FScreen {
                 final FCollectionView<CardView> battlefield = p.getBattlefield();
                 if (battlefield.isEmpty()) continue;
 
-                final float left = playerPanel.getField().getLeft();
-                final float right = playerPanel.getField().getRight();
+                //the field's place on the screen, as the card origins are: getLeft()/getRight() are within its player panel,
+                //which on the Arena board with seats (three or more players) sits beside the other opponents', not at x = 0
+                final Rectangle fieldPos = playerPanel.getField().screenPos;
+                final float left = fieldPos.x;
+                final float right = fieldPos.x + fieldPos.width;
 
                 if (netGame) {
                     // network games need the thread-safe iterator
