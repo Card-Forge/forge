@@ -91,8 +91,16 @@ public final class UndoManager {
         return headroom > peakEstimate + reserve;
     }
 
+    /** Run with -Dforge.undo.debug=true to see on stderr why the undo history was cleared. */
+    private static final boolean DEBUG = Boolean.getBoolean("forge.undo.debug");
+
+    private void debug(String msg) {
+        if (DEBUG) { System.err.println("[undo] " + msg); }
+    }
+
     /** Game thread. Frees the undo history and the recorder's registry. */
     private synchronized void dropHistory(String why) {
+        debug("history dropped (" + stack.size() + " steps): " + why);
         stack.clear();
         barrierReason = why;
         justRestored = false;
@@ -155,7 +163,11 @@ public final class UndoManager {
             owner = who;
             if (justRestored) { justRestored = false; return; }
             long r = MyRandom.callCount();
-            if (r != randomMark) { barrier("randomness used"); randomMark = r; }
+            if (DEBUG) {
+                final String sites = MyRandom.drainTrace(6);   // also clears the tally for the next interval
+                if (r != randomMark) { debug("random draws since last prompt, by site:" + sites); }
+            }
+            if (r != randomMark) { barrier("randomness used (" + (r - randomMark) + " draws)"); randomMark = r; }
             var ph = game.getPhaseHandler();
             long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
             if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }
@@ -186,13 +198,23 @@ public final class UndoManager {
             lastObjects = m.objectCount();
             entry = new Entry(m, game.getGameLog().size());
             lowMemorySkips = 0;
-        } catch (final RuntimeException | OutOfMemoryError ex) {
+        } catch (final OutOfMemoryError ex) {
             dropHistory("Low memory");
+            return;
+        } catch (final RuntimeException ex) {
+            // not a memory problem: report it as what it is instead of hiding it behind "Low memory"
+            System.err.println("Undo snapshot failed, history dropped: " + ex);
+            if (DEBUG) { ex.printStackTrace(); }
+            dropHistory("Undo snapshot failed: " + ex);
             return;
         }
 
         synchronized (this) {
             stack.push(entry);
+            if (DEBUG) {
+                debug("depth=" + stack.size() + " retained=" + (retainedBytes() >> 20) + "MB of "
+                        + (MAX_RETAINED_BYTES >> 20) + "MB, objects=" + lastObjects);
+            }
             //System.out.println("[undo] objects=" + entry.memento().objectCount() + " delta=" + recorder.lastDeltaEntries() + " retained=" + retainedBytes());
             if (stack.size() >= 2) barrierReason = null;
         }
@@ -263,7 +285,11 @@ public final class UndoManager {
     }
 
     /** Anything that reveals hidden info or makes the opponent act. */
-    public synchronized void barrier(String why) { stack.clear(); barrierReason = why; }
+    public synchronized void barrier(String why) {
+        if (!stack.isEmpty()) { debug("barrier '" + why + "' cleared " + stack.size() + " steps"); }
+        stack.clear();
+        barrierReason = why;
+    }
 
     public synchronized boolean canUndo(Player who) { return isOwner(who) && canUndo(); }
     public synchronized boolean canUndo() { return mode != Mode.OFF && stack.size() >= 2 && (!LIMITED || undosLeft > 0); }
