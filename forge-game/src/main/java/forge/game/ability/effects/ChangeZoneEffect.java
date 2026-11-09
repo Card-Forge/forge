@@ -905,9 +905,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean defined = sa.hasParam("Defined") || chooseFromDef;
         final String changeType = sa.getParamOrDefault("ChangeType", "");
         boolean mandatory = sa.hasParam("Mandatory");
-        Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newHashMap();
+        Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newLinkedHashMap();
 
         List<Player> fetchers = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
+        sortAPNAP(sa, fetchers);
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
             final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Chooser"), sa);
