@@ -851,8 +851,12 @@ public class MatchController extends NetworkGuiGame {
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                //Arena look: the revealed cards in the browser, then the choice, both over the match
-                if (ArenaChoices.chooseEntity(title, optionList, delayedReveal.getMessagePrefix(), delayedReveal.getCards(), isOptional, this)) {
+                //Arena look: the revealed cards in the browser, then the choice, both over the match. A search of a library
+                //goes straight to the cards it can find: the whole library first is only a long row to click through
+                final java.util.Set<ZoneType> revealedFrom = delayedReveal.getZone();
+                final boolean librarySearch = revealedFrom != null && revealedFrom.size() == 1 && revealedFrom.contains(ZoneType.Library);
+                if (ArenaChoices.chooseEntity(title, optionList, delayedReveal.getMessagePrefix(), librarySearch ? null : delayedReveal.getCards(),
+                        isOptional, this)) {
                     return;
                 }
                 final GameEntityPicker picker = new GameEntityPicker(title, optionList, delayedReveal, isOptional, this);

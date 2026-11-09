@@ -3,16 +3,20 @@ package forge.screens.match.arena;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.assets.FSkinFont;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
@@ -23,6 +27,8 @@ import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FTextField;
+import forge.util.CardTranslation;
 import forge.util.ThreadUtil;
 
 /**
@@ -50,6 +56,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private static final float HOVER_LIFT = 0.045f;
     private static final float CHOSEN_SCALE = 1.05f;
     private static final float HOVER_SCALE = 1.05f;
+    /** A pick from more cards than this gets a search field. */
+    private static final int SEARCH_ABOVE = 8;
 
     /** What the browser is for. */
     private enum Mode {
@@ -76,8 +84,14 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private final int max;
     private final List<CardView> cards;
     private final List<CardView> chosen = new ArrayList<>();
+    /** The cards in the row: all of them, or those the search finds (and what has been chosen). */
     private final List<Item> items = new ArrayList<>();
+    private final List<Item> allItems = new ArrayList<>();
     private final List<Item> drawOrder = new ArrayList<>();
+    /** Top left, at the title's height, when there are many cards to pick from; null otherwise. */
+    private final FTextField search;
+    private String query = "";
+    private String noMatchText; // what the row says when the search finds nothing, made when the search changes
     private final CardView focusCard;
     private final ArenaDialogKit.Pill btnSubmit = new ArenaDialogKit.Pill();
     private final ArenaDialogKit.Pill btnSecondary = new ArenaDialogKit.Pill();
@@ -273,6 +287,15 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         for (final CardView card : cards) {
             items.add(new Item(card));
         }
+        allItems.addAll(items);
+        if ((mode == Mode.CHOOSE || mode == Mode.SELECTION) && cards.size() > SEARCH_ABOVE) {
+            search = add(new FTextField());
+            search.setGhostText(Forge.getLocalizer().getMessage("lblArenaSearchCards"));
+            search.setLiveChangeEvents(true);
+            search.setChangedHandler(e -> applySearch());
+        } else {
+            search = null;
+        }
         setOpenMillis(340);
         btnSubmit.primary = true;
         btnSubmit.action = this::submit;
@@ -289,6 +312,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
 
     @Override
     protected void onClosed() {
+        endSearchInput();
         if (selectionBrowser == this) {
             selectionBrowser = null;
         }
@@ -297,6 +321,70 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             whenClosed = null;
             r.run();
         }
+    }
+
+    @Override
+    protected void onViewToggled() {
+        endSearchInput();
+    }
+
+    /** Typing goes back to the board once the field is gone or set aside. */
+    private void endSearchInput() {
+        if (search != null && search.isEditing()) {
+            Forge.endKeyInput();
+        }
+    }
+
+    // ---- search -----------------------------------------------------------------------------------------------------
+
+    /** Shows the cards whose name or type holds what is typed in the search field (and keeps what is chosen in view). */
+    private void applySearch() {
+        final String q = search == null ? "" : search.getText().trim().toLowerCase(Locale.ROOT);
+        if (q.equals(query)) {
+            return;
+        }
+        query = q;
+        noMatchText = Forge.getLocalizer().getMessage("lblArenaNoCardsMatch", search.getText().trim());
+        items.clear();
+        for (final Item item : allItems) {
+            if (q.isEmpty() || isChosen(item.card) || matches(item.card, q)) {
+                items.add(item);
+            }
+        }
+        if (focus != null && !items.contains(focus)) {
+            focus = null;
+        }
+        for (final Item item : allItems) {
+            if (item.hovered && !items.contains(item)) {
+                item.hovered = false;
+                item.hover.set(0f);
+            }
+        }
+        scroll.set(0f);
+        relayout();
+    }
+
+    private static boolean matches(final CardView card, final String q) {
+        final CardStateView state = card.getCurrentState();
+        if (state == null) {
+            return false;
+        }
+        final String name = state.getName();
+        if (name != null && !name.isEmpty()) {
+            if (name.toLowerCase(Locale.ROOT).contains(q)) {
+                return true;
+            }
+            final String translated = CardTranslation.getTranslatedName(name);
+            if (translated != null && translated.toLowerCase(Locale.ROOT).contains(q)) {
+                return true;
+            }
+        }
+        return state.getType() != null && state.getType().toString().toLowerCase(Locale.ROOT).contains(q);
+    }
+
+    /** Whether a key starts typing in the search field: a letter or a digit, without Ctrl. */
+    private static boolean typesInSearch(final int keyCode) {
+        return !KeyInputAdapter.isCtrlKeyDown() && ((keyCode >= Keys.A && keyCode <= Keys.Z) || (keyCode >= Keys.NUM_0 && keyCode <= Keys.NUM_9));
     }
 
     /** Closes without the fade (another browser takes its place at once). */
@@ -422,6 +510,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     protected void layoutDialog(final float w, final float h) {
         heading.set(title, headingLine(), fallbackTitle());
         ArenaDialogKit.placeButtons(w, h, btnSubmit, btnSecondary);
+        if (search != null) { //top left, level with the title, as View Battlefield is top right
+            final float sh = ArenaDialogKit.buttonH(h);
+            search.setFont(ArenaTheme.fontPx(Math.max(8, Math.round(sh * 0.42f / 2f) * 2)));
+            search.setBounds(Math.round(w * 0.024f), Math.round(h * 0.09f) - sh / 2f, Math.round(w * 0.17f), sh);
+        }
         if (mode == Mode.ARRANGE) {
             layoutArrange(w, h, false);
         } else {
@@ -623,11 +716,14 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             heading.set(title, headingLine(), fallbackTitle()); // the input may have changed its words
         }
         heading.draw(g, w, h, alpha);
+        if (search != null) {
+            g.draw(search);
+        }
         if (mode == Mode.ARRANGE) {
             if (topLabel != null) {
                 ArenaDialogKit.railEnds(g, topLabel, ArenaDialogKit.lastCaption(topLabel), firstBadge, lastBadge, captionY, h, alpha);
             }
-        } else if (anySelectable() && fanRight > fanLeft) {
+        } else if (anySelectable() && !items.isEmpty() && fanRight > fanLeft) {
             ArenaDialogKit.rowShards(g, fanLeft, fanRight, fanFoot, h, lightAt, alpha);
         }
         if (focusCard != null) {
@@ -712,6 +808,12 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         if (focus != null) {
             drawFocus(g, focus, dx, h, alpha);
+        }
+        if (search != null && items.isEmpty() && noMatchText != null) { //the search found nothing: say so where the cards would be
+            final FSkinFont f = ArenaTheme.fontPx(Math.max(8, Math.round(h * 0.03f / 2f) * 2));
+            final float lh = f.getLineHeight();
+            ArenaArt.textShadowed(g, noMatchText, f,
+                    ArenaTheme.alpha(ArenaTheme.TEXT, alpha, S1), 0, Math.round(h * ArenaDialogKit.ROW_CENTRE_Y) - lh / 2f, w, lh, Align.center);
         }
     }
 
@@ -964,6 +1066,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
 
     @Override
     public boolean keyDown(final int keyCode) {
+        // with a search field, a letter or digit starts typing in it (the character itself follows as typed text)
+        if (search != null && !viewingBattlefield && typesInSearch(keyCode)) {
+            search.startEdit();
+            return true;
+        }
         // Space picks (or puts back) the card the arrow keys are on
         if (keyCode == Keys.SPACE && !viewingBattlefield && focus != null && (mode == Mode.CHOOSE || mode == Mode.SELECTION || mode == Mode.ZONE)) {
             onCardClicked(focus, 1);
