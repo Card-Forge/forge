@@ -23,6 +23,7 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -41,6 +42,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
@@ -107,47 +109,41 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         CEditorLog.SINGLETON_INSTANCE.addLogEntry(message);
     }
 
+    @Override
+    public void addLogEntry(String message, PaperCard card) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message, null, card);
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         // can only draft one at a time, regardless of the requested quantity
-        PaperCard card = items.iterator().next().getKey();
+        draftCard(items.iterator().next().getKey(), DraftPicksSections.getPickSection(toAlternate), null);
+    }
 
-        if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
-            System.out.println(card + " not drafted because we're skipping this pick");
-            showPackToDraft();
-            return;
-        }
-
-        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
-            card = boosterDraft.getHumanPlayer().pickFromArchdemonCurse(boosterDraft.getHumanPlayer().nextChoice());
-        }
-
-        // get next booster pack if we aren't picking again from this pack
-        DeckSection section = DraftPicksSections.getPickSection(toAlternate);
-        this.boosterDraft.setChoice(card, section);
+    private void draftCard(PaperCard card, DeckSection section, DraftAction variant) {
+        this.boosterDraft.setChoice(card, section, variant);
         picksSections.refresh();
         showPackToDraft();
     }
 
     protected void showPackToDraft() {
-        boolean nextChoice = this.boosterDraft.hasNextChoice();
-        ItemPool<PaperCard> pool = null;
-        if (nextChoice) {
-            pool = this.boosterDraft.nextChoice();
-            nextChoice = pool != null && !pool.isEmpty();
-        }
-
-        if (nextChoice) {
+        while (this.boosterDraft.hasNextChoice()) {
+            ItemPool<PaperCard> pool = this.boosterDraft.nextChoice();
+            if (pool == null || pool.isEmpty()) {
+                break;
+            }
+            if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
+                boosterDraft.skipChoice();
+                continue;
+            }
             this.showChoices(pool);
+            return;
         }
-        else {
-            boosterDraft.postDraftActions();
-
-            this.saveDraft();
-        }
+        boosterDraft.postDraftActions();
+        this.saveDraft();
     }
 
     /* (non-Javadoc)
@@ -164,6 +160,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
         cmb.addMoveAlternateItems(localizer.getMessage("lblDraft"), localizer.getMessage("lbltosideboard"));
+        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), DraftPicksSections.getPickSection(false), action));
     }
 
     @Override
@@ -171,6 +168,17 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         cmb.addMoveItems(localizer.getMessage("lblMove"),
                 localizer.getMessage(picksSections.getDestination() == DeckSection.Main
                         ? "lblToMainDeck" : "lbltosideboard"));
+        cmb.addDraftActionItems(currentActions(), action -> {
+            boosterDraft.getHumanPlayer().activate(action);
+            picksSections.refresh();
+            // The activated card turns face down, so its marker and the hints change
+            this.showChoices(this.getCatalogManager().getPool());
+        });
+    }
+
+    private List<DraftAction> currentActions() {
+        LimitedPlayer me = boosterDraft.getHumanPlayer();
+        return me.getActions(me.nextChoice());
     }
 
     /**
@@ -184,16 +192,17 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
+        String packCaption = localizer.getMessage("lblPackNCards", String.valueOf(packNumber));
 
         int count = list.countAll();
 
-        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+        if (boosterDraft.getHumanPlayer().isPackHidden()) {
             // Only show facedown cards with no information
             this.getCatalogManager().setPool(generateFakePaperCards(count));
         } else {
             this.getCatalogManager().setPool(list);
         }
+        showAbilityHints(currentActions(), packCaption);
     } // showChoices()
 
     private ItemPool<PaperCard> generateFakePaperCards(int count) {
@@ -325,6 +334,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
             VEditorLog.SINGLETON_INSTANCE.showView();
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(true);
 
         ccAddLabel = this.getBtnAdd().getText();
 
@@ -408,6 +418,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(false);
         if (draftLogParent != null) {
             draftLogParent.addDoc(VEditorLog.SINGLETON_INSTANCE);
         }
