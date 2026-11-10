@@ -1,0 +1,8 @@
+Name:Illusory Thoughts
+ManaCost:U U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ You | ChangeType$ Card | ChangeNum$ 2 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBChangeZoneLibrary | StackDescription$ SpellDescription | SpellDescription$ Look at target opponent's hand and choose up to two cards from it. Put them on top of that player's library in any order. Search that player's library for that many cards. That player puts those cards into their hand, then shuffles.
+SVar:DBChangeZoneLibrary:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ X | Chooser$ You | Mandatory$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Look at target opponent's hand and choose up to two cards from it. Put them on top of that player's library in any order. Search that player's library for that many cards. That player puts those cards into their hand, then shuffles.
