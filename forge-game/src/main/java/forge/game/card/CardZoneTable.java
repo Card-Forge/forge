@@ -11,6 +11,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameAction;
 import forge.game.ability.AbilityKey;
+import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -18,6 +19,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
@@ -29,6 +31,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     private CardCollectionView lastStateBattlefield;
     private CardCollectionView lastStateGraveyard;
+    private Map<Player, Integer> lastStateLife;
     
     public CardZoneTable() {
         this(null, null);
@@ -69,6 +72,17 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
     public void setLastStateGraveyard(CardCollectionView lastState) {
         lastStateGraveyard = lastState == null ? CardCollection.EMPTY : new CardCollection(lastState);
+    }
+    public void initLastStateLife(Iterable<Player> players) {
+        if (lastStateLife == null) {
+            lastStateLife = new HashMap<>();
+            for (Player p : players) {
+                lastStateLife.put(p, p.getLife());
+            }
+        }
+    }
+    public int getLastStateLife(Player p) {
+        return lastStateLife == null ? p.getLife() : lastStateLife.getOrDefault(p, p.getLife());
     }
 
     /**

@@ -3585,6 +3585,13 @@ public class AbilityUtils {
             return doXMath(player.getStartingLibrarySize(), m, source, ctb);
         }
 
+        if (value.contains("LastStateLifeTotal")) {
+            if (ctb instanceof SpellAbility sa && sa.getRootAbility().getReplacingObject(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table) {
+                return doXMath(table.getLastStateLife(player), m, source, ctb);
+            }
+            return doXMath(player.getLife(), m, source, ctb);
+        }
+
         if (value.contains("LifeTotal")) {
             return doXMath(player.getLife(), m, source, ctb);
         }
