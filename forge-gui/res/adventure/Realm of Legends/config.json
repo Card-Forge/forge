@@ -152,6 +152,7 @@
     "CN2"
   ],
   "usePriceListPrices": false,
+  "eventRerollPrice": 10,
   "chaosDeckFormat": "Commander",
   "difficulties": [
     {

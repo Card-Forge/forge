@@ -101,6 +101,15 @@
       "y": 224
     },
 	{
+      "type": "TextButton",
+      "name": "reroll",
+      "text": "[+Refresh][+shards]",
+      "width": 85,
+      "height": 30,
+      "x": 305,
+      "y": 236
+    },
+	{
       "type": "Table",
       "name": "metaDraftTable",
       "x": 15,
