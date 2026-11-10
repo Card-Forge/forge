@@ -1656,8 +1656,10 @@ public class AiController implements IHasForgeLog {
                 SimAudit.checkpoint(game, player);
             }
             final List<SpellAbility> chosen = chooseSpellAbilityToPlayImpl();
-            if (aiLog.isDebugEnabled() && chosen != null && !chosen.isEmpty()) {
-                aiLog.debug("{} T{} {}: plays {}", player, game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), chosen);
+            if (aiLog.isDebugEnabled() && chosen != null) {
+                for (final SpellAbility sa : chosen) {
+                    aiLog.debug("{} T{} {}: plays {}: {}", player, game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), sa.getHostCard(), sa);
+                }
             }
             if (SimAudit.ENABLED) {
                 SimAudit.afterChoice(game, player, chosen);
