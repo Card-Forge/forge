@@ -405,7 +405,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), false, !mandatory, false);
+            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblMatchAutoPay"), Localizer.getInstance().getMessage("lblCancel"), false, !mandatory, false);
         } else {
             getController().getGui().updateButtons(getOwner(), "", Localizer.getInstance().getMessage("lblCancel"), false, !mandatory, false);
         }
@@ -419,7 +419,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (supportAutoPay()) {
             ensureAutoPayManaSources();
             if (autoPayManaSources != null) { //enabled Auto button if mana cost can be paid
-                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
+                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblMatchAutoPay"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
         // Just-tapped sources leave the highlights, and the AI's auto-tap plan is emphasized

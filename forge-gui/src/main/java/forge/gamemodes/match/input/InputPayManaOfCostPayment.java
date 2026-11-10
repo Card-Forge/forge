@@ -87,7 +87,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
                 msg.append(saPaidFor.getHostCard()).append(" - ").append(saPaidFor.toString()).append("\n\n");
             }
         }
-        msg.append(localizer.getMessage("lblPayManaCost")).append(" ").append(displayMana);
+        msg.append(localizer.getMessage("lblMatchPayManaForCard", displayMana, saPaidFor.getHostCard().getTranslatedName()));
         if (this.phyLifeToLose > 0) {
             msg.append(" ").append(String.format(localizer.getMessage("lblLifePaidForPhyrexianMana"), this.phyLifeToLose));
         }
