@@ -1680,21 +1680,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected boolean canBePartnerCommander(final PaperCard card) {
             if(!parentScreen.isCommanderEditor())
                 return false;
-            if(parentScreen.editorConfig.getGameType() == GameType.Oathbreaker) {
-                //FIXME: For now, simplify Oathbreaker by not supporting partners.
-                //Needs support for tracking whose signature spell is whose, here and elsewhere.
-                return false;
-            }
-            CardPool commanderPool = parentScreen.getDeck().get(DeckSection.Commander);
-            if (commanderPool == null)
-                return false;
-            List<PaperCard> commanders = commanderPool.toFlatList();
-            commanders.removeIf((c) -> c.getRules().canBeSignatureSpell());
-            if(commanders.size() != 1)
-                return false;
-            if(!parentScreen.shouldEnforceConformity())
-                return true;
-            return commanders.get(0).getRules().canBePartnerCommanders(card.getRules());
+            return getPartnerableCommander(card) != null;
+        }
+
+        private PaperCard getPartnerableCommander(final PaperCard card) {
+            return getCommanderFormat().getPartnerableCommander(parentScreen.getDeck(), card, parentScreen.shouldEnforceConformity());
         }
 
         protected boolean canBeSignatureSpell(final PaperCard card) {
@@ -1777,7 +1767,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void setCommander(PaperCard card) {
-            confirmIfIllegalCommander(card, () -> {
+            confirmCommander(card, null, () -> {
                 DeckSectionPage commanderPage = parentScreen.getCommanderPage();
                 commanderPage.ejectCards();
                 moveCard(card, commanderPage);
@@ -1786,18 +1776,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void setPartnerCommander(PaperCard card) {
-            confirmIfIllegalCommander(card, () -> {
+            confirmCommander(card, getPartnerableCommander(card), () -> {
                 moveCard(card, parentScreen.getCommanderPage());
                 refresh(); //refresh so cards shown that match commander's color identity
             });
         }
 
-        private void confirmIfIllegalCommander(PaperCard card, Runnable place) {
-            if (getCommanderFormat().isLegalCommander(card.getRules())) {
+        private void confirmCommander(PaperCard card, PaperCard partnerOf, Runnable place) {
+            String warning = getCommanderFormat().getIllegalCommanderWarning(card, partnerOf);
+            if (warning == null) {
                 place.run();
                 return;
             }
-            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblConfirmIllegalCommander", card.getName()), result -> {
+            FOptionPane.showConfirmDialog(warning, result -> {
                 if (result) {
                     place.run();
                 }
