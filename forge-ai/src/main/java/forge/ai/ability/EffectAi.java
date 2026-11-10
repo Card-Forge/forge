@@ -173,6 +173,11 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = saCreature != null;
             } else if (logic.equals("Always")) {
                 randomReturn = true;
+            } else if (logic.equals("HighTide")) {
+                if (!phase.is(PhaseType.MAIN1, ai) && !phase.is(PhaseType.MAIN2, ai)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                randomReturn = ManaAi.doManaRitualLogic(ai, sa, false);
             } else if (logic.equals("Main1")) {
                 if (phase.getPhase().isBefore(PhaseType.MAIN1)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
