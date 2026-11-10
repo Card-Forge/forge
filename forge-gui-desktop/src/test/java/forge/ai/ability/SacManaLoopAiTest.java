@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 // dies, each opponent loses 1 life and you gain 1 life) + Trudge Garden (whenever you gain life, you may pay {2}: 4/4
 // Fungus Beast). The altar's mana pays the next creature: endless drain. Four 0/8
 // walls stop the attack, no land.
-public class SacManaLoop152Test extends AITest {
+public class SacManaLoopAiTest extends AITest {
 
     private Player altarGame(boolean garden) {
         Game game = initAndCreateGame();

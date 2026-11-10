@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 
 // Solemnity (no +1/+1 counters) makes undying loop like persist with Melira: Geralf's
 // Messenger + Cartel Aristocrat (free sacrifice outlet) = endless life loss.
-public class UndyingLoop144Test extends AITest {
+public class UndyingLoopAiTest extends AITest {
 
     private Player loopGame(boolean solemnity) {
         Game game = initAndCreateGame();

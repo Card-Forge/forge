@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 // Melira + a persist creature that gains life when it enters (Kitchen Finks) + a free sacrifice
 // outlet = as much life as wanted (tournament v20, Pod: Melira + Finks + Bloodthrone Vampire on the battlefield for
 // 10 turns, never looped, lost at 8 life)
-public class LifeLoop134Test extends AITest {
+public class LifeGainLoopAiTest extends AITest {
 
     private Game loopGame(String outlet, boolean melira, int life, boolean blocker) {
         Game game = initAndCreateGame();

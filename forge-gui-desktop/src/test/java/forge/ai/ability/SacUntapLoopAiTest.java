@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 
 // Blasting Station (untaps when a creature enters) + Pitiless Plunderer (Treasure on death)
 // + Stimulus Package (sacrifice a Treasure: 1/1 Citizen) = endless damage without mana.
-public class SacUntapLoop145Test extends AITest {
+public class SacUntapLoopAiTest extends AITest {
 
     private Player loopGame(boolean converter) {
         Game game = initAndCreateGame();
