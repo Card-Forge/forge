@@ -1,0 +1,10 @@
+Name:Gray Merchant of Alphabet
+ManaCost:3 B B
+Types:Creature Zombie Performer
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature enters, choose a letter. For each creature you control that has the chosen letter in its name, you gain 1 life and each opponent loses 1 life.
+SVar:TrigChoose:DB$ ChooseType | Type$ Letter | Defined$ You | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X
+SVar:X:Count$Valid Creature.YouCtrl+NameContainsChosenLetter
+Oracle:When this creature enters, choose a letter. For each creature you control that has the chosen letter in its name, you gain 1 life and each opponent loses 1 life.
