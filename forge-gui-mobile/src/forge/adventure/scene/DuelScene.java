@@ -379,6 +379,8 @@ public class DuelScene extends ForgeScene {
 
     private boolean needsEnemyDeckGeneration() {
         if (chaosBattle) return false;
+        //Sealed events build an opponent's deck the first time it is faced, see AdventureEventData.generateOpponentDeck.
+        if (eventData != null && !arenaBattleChallenge) return eventData.needsOpponentDeck(eventData.nextOpponent);
         return arenaBattleChallenge || (eventData == null && !enemy.getData().copyPlayerDeck);
     }
 
@@ -399,10 +401,15 @@ public class DuelScene extends ForgeScene {
         new Thread(() -> {
             List<Deck> decks = new ArrayList<>();
             try {
-                EnemyData e = enemy.getData();
-                for (int i = 0; i < 9 && e != null; i++) {
-                    decks.add(!arenaBattleChallenge && e.copyPlayerDeck ? null : generateEnemyDeck(e));
-                    e = e.nextEnemy;
+                if (eventData != null && !arenaBattleChallenge) {
+                    //The opponent's deck is stored on the event participant, there is nothing to hand back in the list.
+                    eventData.generateOpponentDeck(eventData.nextOpponent);
+                } else {
+                    EnemyData e = enemy.getData();
+                    for (int i = 0; i < 9 && e != null; i++) {
+                        decks.add(!arenaBattleChallenge && e.copyPlayerDeck ? null : generateEnemyDeck(e));
+                        e = e.nextEnemy;
+                    }
                 }
             } catch (Throwable t) {
                 t.printStackTrace();

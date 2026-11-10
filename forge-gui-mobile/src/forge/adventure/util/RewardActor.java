@@ -112,6 +112,28 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean boosterTriggered = false;
     private boolean isUpdating = false;
 
+    // booster-images.txt is read once instead of once per pack reward (a pack shop can show many).
+    private static volatile List<String> boosterImageList;
+
+    private static List<String> getBoosterImageList() {
+        List<String> list = boosterImageList;
+        if (list == null) {
+            list = new ArrayList<>();
+            try (Scanner scanner = new Scanner(new File(IMAGE_LIST_QUEST_BOOSTERS_FILE))) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (!line.isBlank())
+                        list.add(line);
+                }
+            } catch (Exception ignored) {}
+            boosterImageList = list;
+        }
+        return list;
+    }
+
+    // Path of a booster image that was queued on the asset manager and is not decoded yet, see act().
+    private String pendingPackImagePath;
+
     @Override
     public void dispose() {
         if (needsToBeDisposed) {
@@ -143,6 +165,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (raw)
             return image;
         if (Reward.Type.CardPack.equals(reward.type)) {
+            if (pendingPackImagePath != null)
+                return image; //still loading asynchronously, don't force a blocking decode
             Texture cached = ImageCache.getInstance().getImage(imageKey, false, true);
             return cached == null ? image : cached;
         }
@@ -218,19 +242,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 return;
             }
 
-            image = t;
-            loaded = true;
-
-            Sprite backSprite = Config.instance().getItemSprite("CardBack");
-            Sprite item = new Sprite(new TextureRegion(t));
-
-            if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
-                Gdx.app.postRunnable(() -> setItemTooltips(item, backSprite, true));
-            } else {
-                setItemTooltips(item, backSprite, true);
-            }
+            applyPackTexture(t);
         }
         Gdx.graphics.requestRendering();
+    }
+
+    /** Shows a decoded booster texture on this pack reward and rebuilds its tooltip. */
+    private void applyPackTexture(Texture t) {
+        image = t;
+        loaded = true;
+
+        Sprite backSprite = Config.instance().getItemSprite("CardBack");
+        Sprite item = new Sprite(new TextureRegion(t));
+
+        if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
+            Gdx.app.postRunnable(() -> setItemTooltips(item, backSprite, true));
+        } else {
+            setItemTooltips(item, backSprite, true);
+        }
     }
 
     public void setAutoSell(boolean sell) {
@@ -444,15 +473,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     } else {
                         // Collect all available booster image URLs for this edition
                         List<String> available = new ArrayList<>();
-                        try (Scanner scanner = new Scanner(new File(IMAGE_LIST_QUEST_BOOSTERS_FILE))) {
-                            while (scanner.hasNextLine()) {
-                                String line = scanner.nextLine();
-                                String filename = line.substring(line.lastIndexOf('/') + 1);
-                                if (filename.startsWith(editionCode + "_") || filename.startsWith(editionCode + ".")) {
-                                    available.add(line);
-                                }
+                        for (String line : getBoosterImageList()) {
+                            String filename = line.substring(line.lastIndexOf('/') + 1);
+                            if (filename.startsWith(editionCode + "_") || filename.startsWith(editionCode + ".")) {
+                                available.add(line);
                             }
-                        } catch (Exception ignored) {}
+                        }
 
                         if (!available.isEmpty()) {
                             String chosen = available.get(MyRandom.getRandom().nextInt(available.size()));
@@ -470,16 +496,29 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item;
                 boolean found = !imageKey.isEmpty();
                 if(found) {
-                    Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
                     isBooster = true;
+                    // Don't decode the booster image here: that blocks the render thread once per pack when a
+                    // shop opens. Queue it on the asset manager like card images and swap it in from act().
+                    Texture t = null;
+                    File packFile = ImageKeys.getImageFile(imageKey);
+                    if (packFile != null && packFile.exists()) {
+                        final String packPath = packFile.getPath();
+                        t = Forge.getAssets().manager().get(packPath, Texture.class, false);
+                        if (t == null) {
+                            try {
+                                if (!Forge.getAssets().manager().contains(packPath))
+                                    Forge.getAssets().manager().load(packPath, Texture.class, Forge.getAssets().getTextureFilter());
+                                pendingPackImagePath = packPath;
+                            } catch (Exception ignored) {}
+                        }
+                    }
                     if (t != null) {
                         item = new Sprite(new TextureRegion(t));
-
-                        //setCardImage(t);
-                        onImageFetched();
+                        applyPackTexture(t);
                     }
                     else {
-                        GuiBase.getInterface().getImageFetcher().fetchImage(imageKey, this);
+                        if (pendingPackImagePath == null)
+                            GuiBase.getInterface().getImageFetcher().fetchImage(imageKey, this);
                         item = Config.instance().getItemSprite("Deck");
                         setItemTooltips(item, backSprite, isBooster);
                     }
@@ -1079,6 +1118,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             hideTooltip(tooltip);
         if (Forge.getAssets() != null && Forge.getAssets().manager() != null) {
             Forge.getAssets().manager().update(16);
+            if (pendingPackImagePath != null) {
+                Texture packTexture = Forge.getAssets().manager().get(pendingPackImagePath, Texture.class, false);
+                if (packTexture != null) {
+                    pendingPackImagePath = null;
+                    applyPackTexture(packTexture);
+                    Gdx.graphics.requestRendering();
+                }
+            }
         }
 
         if (clicked) {
