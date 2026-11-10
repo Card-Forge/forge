@@ -784,35 +784,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             newH = boundH;
             newW = (newH * origW) / origH;
         }
-        float AR = 480f / 270f;
-        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
-        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
-        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
-        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
-        if (realX > x) {
-            x *= 1.1f;
-        } else if (realY > y) {
-            y *= 1.1f;
-        }
-        float fW = Math.max(x, y);
-        float fH = Math.min(x, y);
-        float mul = fW / fH < AR ? AR / (fW / fH) : (fW / fH) / AR;
-        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().cardTooltipAdjLandscape : Config.instance().getSettingData().cardTooltipAdj;
-        if (custom != null && custom != 1f) {
-            mul *= custom;
-        } else {
-            if (fW / fH >= 2f) {//tall display
-                mul = (fW / fH) - ((fW / fH) / AR);
-                if ((fW / fH) >= 2.1f && (fW / fH) < 2.2f)
-                    mul *= 0.9f;
-                else if ((fW / fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
-                    mul *= 0.8f;
-            }
-        }
+        // Undo the stretch of the UI viewport so the card keeps its real ratio on any window/screen size
+        float correction = ScreenAspectCorrection.widthCorrection(Scene.getIntendedWidth(), Scene.getIntendedHeight(),
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (Forge.isLandscapeMode())
-            drawable.setMinSize(newW * mul, newH);
+            drawable.setMinSize(newW * correction, newH);
         else
-            drawable.setMinSize(newW, newH * mul);
+            drawable.setMinSize(newW, newH / correction);
         return drawable;
     }
 
