@@ -735,11 +735,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return result;
     }
 
+    // Draw and DealDamage ask their "you may" through OptionalDecider, other effects through Optional
+    private static boolean isOptionalEffect(final SpellAbility sa) {
+        return sa.hasParam("Optional") || sa.hasParam("OptionalDecider");
+    }
+
     // one Always Yes/No decision must not answer two different "you may" questions; walks the sub-ability chain only
     // TODO offer a separate decision for each Optional ability in the chain
     private static boolean isOnlyOptionalInChain(final SpellAbility sa) {
         for (SpellAbility s = sa.getRootAbility(); s != null; s = s.getSubAbility()) {
-            if (s != sa && s.hasParam("Optional")) return false;
+            if (s != sa && isOptionalEffect(s)) return false;
         }
         return true;
     }
@@ -755,7 +760,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
         // only the trigger's controller sets Always Yes/No from the stack, and it must not also pick which zones to search
-        if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional") && mode != PlayerActionConfirmMode.ChangeZoneFromAltSource
+        if (sa.getRootAbility().isMandatory() && isOptionalEffect(sa) && mode != PlayerActionConfirmMode.ChangeZoneFromAltSource
                 && player.equals(sa.getActivatingPlayer()) && isOnlyOptionalInChain(sa)) {
             if (!isMacroActive()) {
                 AutoYieldStore.TriggerDecision decision = getTriggerDecision(sa.yieldKey());
