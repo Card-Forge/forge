@@ -3029,7 +3029,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        // Schemes
+        // Schemes. The deck zones below are replaced rather than added to: a restarted game starts from the registered cards again
         CardCollection sd = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getSchemes()) {
             sd.add(Card.fromPaperCard(cp, this));
@@ -3037,8 +3037,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!sd.isEmpty()) {
             for (Card c : sd) {
                 c.setCollectible(true);
-                getZone(ZoneType.SchemeDeck).add(c);
             }
+            getZone(ZoneType.SchemeDeck).setCards(sd);
             getZone(ZoneType.SchemeDeck).shuffle();
         }
 
@@ -3050,8 +3050,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!l.isEmpty()) {
             for (Card c : l) {
                 c.setCollectible(true);
-                getZone(ZoneType.PlanarDeck).add(c);
             }
+            getZone(ZoneType.PlanarDeck).setCards(l);
             getZone(ZoneType.PlanarDeck).shuffle();
         }
 
@@ -3103,27 +3103,33 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Attractions
-        PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+        CardCollection attractions = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getAttractions()) {
             Card c = Card.fromPaperCard(cp, this);
             c.setCollectible(true);
-            attractionDeck.add(c);
+            attractions.add(c);
         }
-        if (!attractionDeck.isEmpty())
+        if (!attractions.isEmpty()) {
+            PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+            attractionDeck.setCards(attractions);
             attractionDeck.shuffle();
+        }
 
         // Sticker sheets
         initStickerSheets(registeredPlayer);
 
         // Contraptions
-        PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);
+        CardCollection contraptions = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getContraptions()) {
             Card c = Card.fromPaperCard(cp, this);
             c.setCollectible(true);
-            contraptionDeck.add(c);
+            contraptions.add(c);
         }
-        if (!contraptionDeck.isEmpty())
+        if (!contraptions.isEmpty()) {
+            PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);
+            contraptionDeck.setCards(contraptions);
             contraptionDeck.shuffle();
+        }
 
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards  = registeredPlayer.getExtraCardsInCommandZone();
