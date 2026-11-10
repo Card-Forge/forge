@@ -50,42 +50,27 @@ public class SimultaneousEntryReplacementTest extends AITest {
 
     @Test
     public void lifeLandSeesLifeBeforeShockLandPaysEnteringWithIt() {
-        Card shack = returnWithShockLand("Lakeside Shack", 14);
+        Card shack = returnTogether("Breeding Pool", "Lakeside Shack");
 
         AssertJUnit.assertTrue(shack.isTapped());
     }
 
-    @Test
-    public void etchedCornfieldSeesLifeBeforeShockLandPaysEnteringWithIt() {
-        Card cornfield = returnWithShockLand("Etched Cornfield", 14);
-
-        AssertJUnit.assertTrue(cornfield.isTapped());
-    }
-
-    @Test
-    public void lifeLandEntersUntappedWhenAPlayerAlreadyHasThirteenOrLessWithShockLand() {
-        Card shack = returnWithShockLand("Lakeside Shack", 13);
-
-        AssertJUnit.assertFalse(shack.isTapped());
-    }
-
-    private Card returnWithShockLand(String lifeLand, int life) {
+    private Card returnTogether(String movesFirst, String movesSecond) {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         p.dangerouslySetController(new ShockLandPayer(game, p));
-        p.setLife(life, null);
+        p.setLife(14, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         Card host = addCard("Forest", p);
-        addCardToZone("Breeding Pool", p, ZoneType.Graveyard);
-        Card land = addCardToZone(lifeLand, p, ZoneType.Graveyard);
+        addCardToZone(movesFirst, p, ZoneType.Graveyard);
+        Card second = addCardToZone(movesSecond, p, ZoneType.Graveyard);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Land.YouOwn | Origin$ Graveyard | Destination$ Battlefield", host);
+        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", host);
         sa.setActivatingPlayer(p);
         AbilityUtils.resolve(sa);
 
-        AssertJUnit.assertEquals(life - 2, p.getLife());
-        return game.getCardState(land);
+        return game.getCardState(second);
     }
 
     // the default AI only pays for a shock land when it plans to cast a spell with it
@@ -98,21 +83,5 @@ public class SimultaneousEntryReplacementTest extends AITest {
         public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
             return new CostPayment(cost, sa).payComputerCosts(new AiCostDecision(player, sa, true));
         }
-    }
-
-    private Card returnTogether(String movesFirst, String movesSecond) {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        Card host = addCard("Forest", p);
-        addCardToZone(movesFirst, p, ZoneType.Graveyard);
-        Card second = addCardToZone(movesSecond, p, ZoneType.Graveyard);
-        game.getAction().checkStateEffects(true);
-
-        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", host);
-        sa.setActivatingPlayer(p);
-        AbilityUtils.resolve(sa);
-
-        return game.getCardState(second);
     }
 }

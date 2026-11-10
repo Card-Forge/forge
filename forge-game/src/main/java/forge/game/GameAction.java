@@ -327,6 +327,7 @@ public class GameAction {
                 repParams.put(AbilityKey.CounterMap, table.column(copied));
                 if (params != null && params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable czt) {
                     czt.initLastStateLife(game.getPlayers());
+                    repParams.put(AbilityKey.LastStateLife, czt.getLastStateLife());
                 }
             }
             if (params != null) {

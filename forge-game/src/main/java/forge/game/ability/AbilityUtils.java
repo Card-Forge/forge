@@ -3585,15 +3585,16 @@ public class AbilityUtils {
             return doXMath(player.getStartingLibrarySize(), m, source, ctb);
         }
 
-        if (value.contains("LastStateLifeTotal")) {
-            if (ctb instanceof SpellAbility sa && sa.getRootAbility().getReplacingObject(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table) {
-                return doXMath(table.getLastStateLife(player), m, source, ctb);
-            }
-            return doXMath(player.getLife(), m, source, ctb);
-        }
-
         if (value.contains("LifeTotal")) {
-            return doXMath(player.getLife(), m, source, ctb);
+            int life = player.getLife();
+            if (ctb instanceof SpellAbility sa) {
+                @SuppressWarnings("unchecked")
+                final Map<Player, Integer> lastStateLife = (Map<Player, Integer>) sa.getRootAbility().getReplacingObject(AbilityKey.LastStateLife);
+                if (lastStateLife != null) {
+                    life = lastStateLife.getOrDefault(player, life);
+                }
+            }
+            return doXMath(life, m, source, ctb);
         }
 
         if (value.contains("LifeLostThisTurn")) {

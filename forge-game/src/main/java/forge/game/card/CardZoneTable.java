@@ -81,8 +81,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             }
         }
     }
-    public int getLastStateLife(Player p) {
-        return lastStateLife == null ? p.getLife() : lastStateLife.getOrDefault(p, p.getLife());
+    public Map<Player, Integer> getLastStateLife() {
+        return lastStateLife;
     }
 
     /**
