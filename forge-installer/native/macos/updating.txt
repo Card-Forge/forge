@@ -1,0 +1,9 @@
+Updating Forge
+
+Drag Forge and Forge Adventure into Applications and choose Replace.
+
+These are kept:
+- Decks, preferences and saved games in ~/Library/Application Support/Forge
+- Downloaded card pictures in ~/Library/Caches/Forge
+
+Anything added inside the old Forge app, such as custom skins, is replaced with it.

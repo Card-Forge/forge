@@ -1,0 +1,7 @@
+#!/bin/sh
+contents=$(cd "$(dirname "$0")/.." && pwd)
+. "$contents/Resources/find-java.sh"
+forge_require_java
+export JDK_JAVA_OPTIONS="'-Xdock:name=Forge' '-Xdock:icon=$contents/Resources/Forge.icns'"
+# Run by relative path: forge.command's own cd breaks when the full path has a space.
+cd "$contents/Resources/forge" && exec ./forge.command
