@@ -12,12 +12,17 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameRules;
+import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.sticker.StickerSheet;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
@@ -68,6 +73,29 @@ public class StickerSheetTest extends AITest {
                     c.getName() + " was revealed but is not one of the registered sheets");
             assertTrue(c.getView().getText().contains(StickerSheet.getStickers(c).get(0).getDescription()),
                     c.getName() + " should list its stickers from the start");
+        }
+    }
+
+    /** CR 728.1 - a restarted game follows the starting procedure again, so three new sheets replace the old ones. */
+    @Test
+    public void testRestartChoosesSheetsAgain() {
+        List<PaperCard> pool = allSheets().subList(0, 10);
+        Player p = playerWithSheets(pool);
+        Game game = p.getGame();
+        game.setAge(GameStage.Play);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().onStackResolved();
+
+        SpellAbility restart = addCard("Karn Liberated", p).getSpellAbilities().stream()
+                .filter(sa -> sa.getApi() == ApiType.RestartGame).findFirst().orElseThrow();
+        restart.setActivatingPlayer(p);
+        AbilityUtils.resolve(restart);
+
+        assertEquals(p.getZone(ZoneType.StickerSheets).size(), 3,
+                "the restart should choose three new sheets, not add them to the old ones");
+        for (Card c : p.getZone(ZoneType.StickerSheets)) {
+            assertTrue(pool.stream().anyMatch(pc -> pc.getName().equals(c.getName())),
+                    c.getName() + " was revealed but is not one of the registered sheets");
         }
     }
 
