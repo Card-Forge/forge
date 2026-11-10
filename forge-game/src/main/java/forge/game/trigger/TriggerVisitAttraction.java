@@ -26,9 +26,9 @@ public class TriggerVisitAttraction extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         //TODO: Attraction roll value? Person who caused the attraction roll?
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player, AbilityKey.Card);
     }
 
     @Override

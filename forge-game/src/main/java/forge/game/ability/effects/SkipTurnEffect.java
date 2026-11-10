@@ -41,7 +41,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         String exile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile " +
         "| ConditionCheckSVar$ NumTurns | ConditionSVarCompare$ EQ0";
 
-        for (final Player player : getTargetPlayers(sa)) {
+        for (final Player player : getTargetPlayersOnePerTeam(sa)) {
             final Card eff = createEffect(sa, player, name, image);
             eff.setSVar("NumTurns", "Number$" + numTurns);
             SpellAbility calcTurn = AbilityFactory.getAbility(effect, eff);

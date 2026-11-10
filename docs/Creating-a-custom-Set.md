@@ -94,7 +94,7 @@ Let's comment out Master Chef to avoid a name conflict with an existing MTG card
 
 Save your file, and let's move onto another step.
 
-> If there is a conflict, you can add something in its name for differenciate it, such as a set tag (ie. `Master Chef (MSEM)`).
+> If there is a conflict, you can add something in its name for differentiate it, such as a set tag (ie. `Master Chef (MSEM)`).
 
 ## Scripting your first cards
 Now, you might remember than Unearth was an existing MTG card so we do not need to create a custom card rule for it. Let's create a few others.

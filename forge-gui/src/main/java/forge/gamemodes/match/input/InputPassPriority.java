@@ -219,7 +219,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         FCollectionView<StackItemView> stack = gv.getStack();
         if (stack != null && !stack.isEmpty()) return false;
         PlayerView currentTurn = gv.getPlayerTurn();
-        if (currentTurn != null && currentTurn.equals(pv)) {
+        if (pv.sharesTeamWith(currentTurn)) {
             // Always suppress on player's first turn (no lands/mana yet)
             if (gv.getTurn() <= gv.getPlayers().size()) return false;
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_ON_OWN_TURN)) return false;

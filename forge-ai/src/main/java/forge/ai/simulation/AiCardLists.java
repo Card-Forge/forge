@@ -34,6 +34,25 @@ import forge.game.card.Card;
 public final class AiCardLists {
     /** What a card is for. The key in the file is the lower case name of the constant. */
     public enum Role {
+        /** Cards an opponent must not be left with: they win a game or are the heart of a combo (see {@link AntiCombo}). */
+        ANTI_COMBO_KEY,
+        /** What a combo deck needs around its keys: rituals, cheap tutors and draw (half the weight of a key). */
+        ANTI_COMBO_PIECE,
+        /** More cards the opponents' combos are made of: counted as keys by AntiCombo, but not a card Flat MC plays. */
+        ANTI_COMBO_SEEN,
+        /** Permanents that give an opponent a creature on demand: Forbidden Orchard's tokens set Oath of Druids off (see OathTiming). */
+        GIVES_OPPONENT_CREATURE,
+        /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
+        DOOMSDAY,
+        /** Cards that draw for next to nothing, the pile Doomsday keeps (Gitaxian Probe, Street Wraith, Gush...). */
+        DOOMSDAY_DRAW,
+        /** Free or cheap mana the pile can hold (Dark Ritual, Lotus Petal, the Moxen). */
+        DOOMSDAY_MANA,
+        /**
+         * Cards marked AI:RemoveDeck:All that Flat MC plays by itself (free cantrips, mana permanents) and that are in
+         * no other role: decks built for the AI keep them (see {@link #isFlatMcPlayable}).
+         */
+        FLAT_MC_PLAYS,
         /** Living End and kin: cast from the library by cascade or suspend once the swap is worth it. */
         MASS_PAYOFF,
         /** Spells that bring a creature back from a graveyard. */
@@ -54,7 +73,37 @@ public final class AiCardLists {
         /** Permanents of which a second copy does nothing (ComboGuard). */
         COMBO_ENGINE,
         /** Spells that put cards from hand onto the battlefield when they resolve (ComboGuard). */
-        HAND_CHEAT
+        HAND_CHEAT,
+        /** Permanents that let creatures (or every spell) be cast for free: Aluren, Omniscience. */
+        FREE_CAST_ENGINE,
+        /** Cheap creatures that loop or win once a free_cast_engine is in play (Acererak, Cavern Harpy...). */
+        FREE_CAST_TARGET,
+        /** Artifacts that chain artifacts: cast them from the library, untap them, tutor them (Mystic Forge...). */
+        ARTIFACT_ENGINE,
+        /** What an artifact engine deck wins or swings the game with (Karn, The One Ring, Kozilek's Command...). */
+        ARTIFACT_PAYOFF,
+        /** Spells that fetch an overrun finisher from the library (Green Sun's Zenith, Natural Order...). */
+        FINISHER_TUTOR,
+        /** Cards that win when the library is (nearly) empty: Thassa's Oracle, Laboratory Maniac. */
+        LIBRARY_OUT_PAYOFF,
+        /** Cards that empty the AI's own library on purpose: Balustrade Spy, Cephalid Illusionist and what targets it. */
+        SELF_MILL_OUTLET,
+        /** Cards that bring the winner back from the graveyard once the library is gone (Dread Return). */
+        LIBRARY_OUT_RECURSION,
+        /** The engine half of a two card kill (Grindstone). */
+        PAIR_ENGINE,
+        /** The other half of a two card kill (Painter's Servant). */
+        PAIR_PARTNER,
+        /** Draw spells that throw the rest of the hand away, whose draws a dredger replaces (Breakthrough). */
+        DREDGE_REFILL,
+        /** Cards that cut both libraries down to a few cards when they enter (Doomsday Excruciator). */
+        LIBRARY_CUT,
+        /** What wins after the cut: Restless Reef mills four a turn, Insatiable Avarice makes the opponent draw three. */
+        LIBRARY_CUT_FINISHER,
+        /** Permanents that make an airbent (exiled) creature cost nothing to cast again: Doc Aurlock, Semblance Anvil. */
+        AIRBEND_REDUCER,
+        /** Cards that drain the opponent for every creature cast or entering under the airbend loop: Bontu's Monument. */
+        AIRBEND_PAYOFF
     }
 
     /** A two card combo, with the names as they are written in the file. */
@@ -85,6 +134,8 @@ public final class AiCardLists {
     private static final class Data {
         final Map<Role, Set<String>> roles = new EnumMap<>(Role.class);
         final Map<String, List<Pair>> byCard = new HashMap<>();
+        /** Normalized names of every role except ANTI_COMBO_SEEN, for {@link #isFlatMcPlayable}. */
+        Set<String> flatMcPlayable = Collections.emptySet();
         int pairCount;
     }
 
@@ -134,6 +185,21 @@ public final class AiCardLists {
         return cardName != null && names(role).contains(normalize(cardName));
     }
 
+    /**
+     * Whether Flat MC plays this card although its script says AI:RemoveDeck:All: it is listed as one it plays, or is a
+     * piece of a combo or loop that has a role.
+     */
+    public static boolean isFlatMcPlayable(final String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        final Set<String> playable = data().flatMcPlayable; // one lock, not one per role
+        if (playable.isEmpty()) {
+            return false;
+        }
+        return playable.contains(normalize(cardName)); // one normalize, not one per role
+    }
+
     public static boolean has(final Role role, final Card card) {
         return card != null && has(role, card.getName());
     }
@@ -166,6 +232,17 @@ public final class AiCardLists {
         return new ArrayList<>(found.values());
     }
 
+    /** Every known two card combo once, in a fixed order (by the names, so a number given to one stays its own). */
+    public static List<Pair> allPairs() {
+        final Map<String, Pair> found = new java.util.TreeMap<>();
+        for (final List<Pair> list : data().byCard.values()) {
+            for (final Pair p : list) {
+                found.putIfAbsent(p.key(), p);
+            }
+        }
+        return new ArrayList<>(found.values());
+    }
+
     /** The normalized names of cards, with the faces of a card named "Front // Back" as well as the whole name. */
     public static Set<String> deckKeys(final Iterable<String> cardNames) {
         final Set<String> keys = new HashSet<>();
@@ -188,8 +265,31 @@ public final class AiCardLists {
 
     /** Lower case, no accents, single spaces: "Éomer,  Marshal" and "eomer, marshal" are the same card. */
     public static String normalize(final String name) {
+        if (isPlainAscii(name)) {
+            return name.toLowerCase(Locale.ROOT); // NFD and \p{M} do nothing to ASCII, and the spaces are already single
+        }
         final String plain = Normalizer.normalize(name.trim(), Normalizer.Form.NFD).replaceAll("\\p{M}+", "");
         return plain.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ");
+    }
+
+    /**
+     * True when normalize() would only have to lower case the name: printable ASCII only (so no accents, tabs or
+     * newlines), no double space, and no space at either end (trim() would change it).
+     */
+    private static boolean isPlainAscii(final String s) {
+        final int n = s.length();
+        if (n == 0 || s.charAt(0) == ' ' || s.charAt(n - 1) == ' ') {
+            return false;
+        }
+        char prev = 0;
+        for (int i = 0; i < n; i++) {
+            final char c = s.charAt(i);
+            if (c < ' ' || c > '~' || (c == ' ' && prev == ' ')) {
+                return false;
+            }
+            prev = c;
+        }
+        return true;
     }
 
     // ---------------------------------------------------------------------------------------------- the reading
@@ -230,6 +330,13 @@ public final class AiCardLists {
         for (final Role r : d.roles.keySet()) {
             d.roles.put(r, Collections.unmodifiableSet(d.roles.get(r)));
         }
+        final Set<String> playable = new HashSet<>();
+        for (final Map.Entry<Role, Set<String>> e : d.roles.entrySet()) {
+            if (e.getKey() != Role.ANTI_COMBO_SEEN) {
+                playable.addAll(e.getValue());
+            }
+        }
+        d.flatMcPlayable = Collections.unmodifiableSet(playable);
 
         final Set<String> seen = new HashSet<>();
         for (final Supplier<List<String>> file : comboFiles) {

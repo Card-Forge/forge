@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -19,11 +20,12 @@ import forge.game.spellability.SpellAbility;
  * <p>
  * The rollouts are deck independent; the plan only tilts what they value: an aggro or burn deck counts damage to the
  * opponent more and its own life less, a control deck the opposite, a combo deck is given long playouts, a ramp deck
- * values mana development. The tilt is small (a few evaluator points per life point) so that the rollouts can still
- * disagree with it when the position says otherwise.
+ * values mana development, and a lands deck (Exploration, Life from the Loam, Crucible of Worlds, Wasteland, creature
+ * lands) values every land it gets onto the table and plays the long game. The tilt is small (a few evaluator points
+ * per life point) so that the rollouts can still disagree with it when the position says otherwise.
  */
 public final class DeckPlan {
-    public enum Archetype { AGGRO, BURN, CONTROL, COMBO, RAMP, MIDRANGE }
+    public enum Archetype { AGGRO, BURN, CONTROL, COMBO, RAMP, LANDS, MIDRANGE }
 
     public final Archetype archetype;
     /** Extra evaluator points for each point of life the opponent has lost (from 20). */
@@ -100,6 +102,9 @@ public final class DeckPlan {
                 return new DeckPlan(a, 1, 1, 100, 0, true, ComboPlan.EMPTY);
             case RAMP:
                 return new DeckPlan(a, 0, 1, 100, 8, false, ComboPlan.EMPTY);
+            case LANDS:
+                // a grinding deck: its own life matters a little more than the opponent's, and every land counts
+                return new DeckPlan(a, 1, 2, 100, 6, false, ComboPlan.EMPTY);
             default:
                 return NONE;
         }
@@ -163,6 +168,11 @@ public final class DeckPlan {
         final ComboPlan combos = ComboPlan.scan(player);
         final CommanderPlan cmd = CommanderPlan.scan(player);
         Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        if (combos.has(ComboPlan.Kind.DARK_DEPTHS) && classify(player) == Archetype.LANDS) {
+            // Legacy Lands: Dark Depths with Thespian's Stage is its win condition, but the deck is still about its
+            // lands (the long playouts of a combo plan stay: the plan keeps the combo)
+            arch = Archetype.LANDS;
+        }
         if (arch == Archetype.MIDRANGE && cmd.archetypeHint() != null) {
             // 99 singleton cards never look like aggro or control to the counters of classify: the commander says
             arch = cmd.archetypeHint();
@@ -181,9 +191,22 @@ public final class DeckPlan {
         int bigSpells = 0;
         int reactive = 0;
         int counters = 0;
+        int lands = 0;
+        int landMatters = 0;
+        int utilityLands = 0;
         for (final Card c : player.getAllCards()) {
-            if (c.isLand() || c.isToken() || c.isImmutable()) {
+            if (c.isToken() || c.isImmutable()) {
                 continue;
+            }
+            if (c.isLand()) {
+                lands++;
+                if (isUtilityLand(c)) {
+                    utilityLands++;
+                }
+                continue;
+            }
+            if (isLandMatters(c)) {
+                landMatters++;
             }
             spells++;
             cmcSum += c.getCMC();
@@ -227,6 +250,10 @@ public final class DeckPlan {
         if (burn * 100 / spells >= 25 && creatures * 100 / spells <= 35) {
             return Archetype.BURN;
         }
+        if (lands >= LANDS_MIN_LANDS && lands * 100 >= LANDS_MIN_SHARE * (lands + spells)
+                && landMatters + utilityLands >= LANDS_MIN_PAYOFFS) {
+            return Archetype.LANDS; // before RAMP: a lands deck with a Titan is still about its lands
+        }
         if (counters >= 3 || reactive * 100 / spells >= 30 && creatures * 100 / spells <= 40) {
             return Archetype.CONTROL;
         }
@@ -239,7 +266,138 @@ public final class DeckPlan {
         return Archetype.MIDRANGE;
     }
 
+    /** A lands deck plays this many lands or more (a normal 60 card deck plays 24 or fewer) ... */
+    static final int LANDS_MIN_LANDS = 26;
+    /**
+     * ... and at least this share of the deck (percent), so that a 99 card Commander deck, which plays 36 lands or
+     * more as a matter of course, is not taken for one ...
+     */
+    static final int LANDS_MIN_SHARE = 45;
+    /** ... and this many cards that care about them: land-matters spells and lands that do more than make mana. */
+    static final int LANDS_MIN_PAYOFFS = 10;
+
+    /**
+     * What a land-matters spell says: landfall and the cards that play an extra land, take lands back from the
+     * graveyard (Crucible of Worlds, Life from the Loam), count or sacrifice lands, or destroy them.
+     */
+    private static final Pattern LAND_TEXT = Pattern.compile(
+            "landfall|whenever a land|whenever a (forest|island|swamp|mountain|plains)|additional land"
+                    + "|lands? cards? from your graveyard|play lands from|lands? you control"
+                    + "|sacrifice (a|any number of) lands?|destroy target (nonbasic )?land");
+
+    /** A spell that cares about lands: read from the card's text. */
+    static boolean isLandMatters(final Card c) {
+        final String text = c.getOracleText();
+        return text != null && LAND_TEXT.matcher(text.toLowerCase(Locale.ROOT)).find();
+    }
+
+    /**
+     * A land that does more than make mana: a creature land, a land that destroys or copies another land, or one that
+     * untaps. Fetch lands and the like do not count, they are in every deck.
+     */
+    static boolean isUtilityLand(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            final ApiType api = sa.getApi();
+            if (sa.isActivatedAbility() && (api == ApiType.Animate || api == ApiType.Destroy || api == ApiType.Clone
+                    || api == ApiType.Untap)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Archetype and combos, for statistics and the game log ("COMBO[MASS_REANIMATION(52: ...)]"). */
+    /**
+     * What to search the library for, for any kind of deck: the combo's missing piece first (see
+     * {@link ComboPlan#tutorPicks}), then what the commander plan is built around, then for a ramp deck the mana it
+     * is short of or the big spell it can now cast. Null for no opinion: the normal choice is made.
+     */
+    public forge.game.card.CardCollection tutorPicks(final Player ai, final Iterable<forge.game.card.Card> pool, final int n) {
+        if (ai == null || pool == null || n <= 0) {
+            return null;
+        }
+        final forge.game.card.CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
+        if (fromCombo != null) {
+            return fromCombo;
+        }
+        if (n != 1) {
+            return null;
+        }
+        final forge.game.card.CardCollectionView hand = ai.getCardsIn(forge.game.zone.ZoneType.Hand);
+        final forge.game.card.CardCollectionView board = ai.getCardsIn(forge.game.zone.ZoneType.Battlefield);
+        for (final forge.game.card.Card c : pool) {
+            if (!c.isLand() && commander.isKeyCard(c) && !hand.contains(c) && !named(hand, board, c.getName())) {
+                return new forge.game.card.CardCollection(c);
+            }
+        }
+        final forge.game.card.Card ramp = archetype == Archetype.RAMP ? rampPick(pool, hand, board) : null;
+        return ramp == null ? null : new forge.game.card.CardCollection(ramp);
+    }
+
+    /** The one card to search for, or null for no opinion. */
+    public forge.game.card.Card tutorPick(final Player ai, final Iterable<forge.game.card.Card> pool) {
+        final forge.game.card.CardCollection picks = tutorPicks(ai, pool, 1);
+        return picks == null ? null : picks.getFirst();
+    }
+
+    private static boolean named(final forge.game.card.CardCollectionView hand, final forge.game.card.CardCollectionView board,
+                                 final String name) {
+        for (final forge.game.card.Card x : hand) {
+            if (x.getName().equals(name)) {
+                return true;
+            }
+        }
+        for (final forge.game.card.Card x : board) {
+            if (x.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A ramp deck short of mana (or stuck with a big spell in hand) fetches the cheapest mana source it can cast now;
+     * with the mana it fetches the biggest spell it can cast within a turn or two, the one it was built for.
+     */
+    private static forge.game.card.Card rampPick(final Iterable<forge.game.card.Card> pool,
+                                                 final forge.game.card.CardCollectionView hand,
+                                                 final forge.game.card.CardCollectionView board) {
+        int sources = 0;
+        for (final forge.game.card.Card x : board) {
+            if (x.isLand() || !x.getManaAbilities().isEmpty()) {
+                sources++;
+            }
+        }
+        int stuckAt = 0;
+        for (final forge.game.card.Card x : hand) {
+            if (!x.isLand()) {
+                stuckAt = Math.max(stuckAt, x.getCMC());
+            }
+        }
+        forge.game.card.Card best = null;
+        int bestScore = 0;
+        for (final forge.game.card.Card c : pool) {
+            if (c.isLand()) {
+                continue;
+            }
+            final boolean source = !c.getManaAbilities().isEmpty();
+            int score = 0;
+            if (source && sources < 7 && c.getCMC() <= sources + 1) {
+                score = 100 - 10 * c.getCMC() + (stuckAt > sources + 1 ? 50 : 0);
+            } else if (!source && sources >= 4 && c.getCMC() <= sources + 2) {
+                score = 60 + 8 * c.getCMC() + (c.isCreature() ? forge.ai.ComputerUtilCard.evaluateCreature(c) / 20 : 0);
+            }
+            if (score > 0 && named(hand, board, c.getName())) {
+                score -= 60; // one is already at hand
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = c;
+            }
+        }
+        return best;
+    }
+
     public String describe() {
         final String base = combos.isEmpty() ? archetype.name() : archetype.name() + combos;
         return commander.isActive() ? base + "/CMD" + commander : base;
