@@ -133,8 +133,8 @@ public class MatchScreen extends FScreen {
         unifiedPhase = new VUnifiedPhase(this::getPlayerPanelsList);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
-                e -> getGameController().selectButtonOk(),
-                e -> getGameController().selectButtonCancel()));
+                e -> MatchController.instance.selectButtonOk(),
+                e -> MatchController.instance.selectButtonCancel()));
 
         bottomPlayerPrompt.setOverMatch(true);
 
@@ -143,8 +143,8 @@ public class MatchScreen extends FScreen {
         else {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
             topPlayerPrompt = add(new VPrompt("", "",
-                    e -> getGameController().selectButtonOk(),
-                    e -> getGameController().selectButtonCancel()));
+                    e -> MatchController.instance.selectButtonOk(),
+                    e -> MatchController.instance.selectButtonCancel()));
             topPlayerPrompt.setOverMatch(true);
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
