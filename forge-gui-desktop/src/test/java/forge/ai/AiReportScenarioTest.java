@@ -117,14 +117,17 @@ public class AiReportScenarioTest extends AITest {
         }
         /** What the heuristics think of each ability of the card (in play or in hand): why a play was left out. */
         String why(final String card) {
-            final StringBuilder sb = new StringBuilder(" | heuristics:");
+            final StringBuilder sb = new StringBuilder(" | sorcery=" + ai.canCastSorcery() + " phase=" + game.getPhaseHandler().getPhase()
+                    + " turn=" + game.getPhaseHandler().getPlayerTurn() + " ai=" + ai + " mana=" + ComputerUtilMana.getAvailableManaEstimate(ai)
+                    + " | heuristics:");
             for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Hand }) {
                 for (final Card k : ai.getCardsIn(z)) {
                     if (!card.equals(k.getName())) { continue; }
                     for (final SpellAbility sa : k.getSpellAbilities()) {
                         try {
                             sa.setActivatingPlayer(ai);
-                            sb.append(" [").append(z).append(' ').append(sa.getApi()).append(" -> ").append(controller().canPlaySa(sa)).append(']');
+                            sb.append(" [").append(z).append(' ').append(sa.getApi()).append(" -> ").append(controller().canPlaySa(sa))
+                                    .append(" failedBefore=").append(controller().hasFailedToCast(sa)).append(']');
                         } catch (final RuntimeException e) { sb.append(" [").append(sa.getApi()).append(" threw ").append(e).append(']'); }
                     }
                 }
@@ -157,7 +160,17 @@ public class AiReportScenarioTest extends AITest {
             ComputerUtil.playStack(sa, ai, game);
             resolveAll();
         }
-        void resolveAll() { if (!game.getStack().isEmpty()) { game.getStack().resolveStack(); } }
+        /** Resolves the stack until nothing is left, putting triggered abilities (enter-the-battlefield ...) on it as the real game does. */
+        final StringBuilder trace = new StringBuilder();
+        void resolveAll() {
+            for (int i = 0; i < 50; i++) {
+                game.getStack().addAllTriggeredAbilitiesToStack();
+                if (game.getStack().isEmpty()) { return; }
+                final SpellAbility top = game.getStack().peekAbility();
+                trace.append(" [resolving ").append(top).append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
+                game.getStack().resolveStack();
+            }
+        }
         /** The player gets the effect of a spell for free (protection, hexproof ...). */
         void effect(final Player owner, final String name) {
             final SpellAbility sa = hand(name, owner).getFirstSpellAbility();
@@ -210,11 +223,11 @@ public class AiReportScenarioTest extends AITest {
         final String M1 = "MAIN1";
 
         // ---------------- AI doesn't cast ...
-        l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, M1, true, "Pithing Needle",
+        l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, "MAIN2", true, "Pithing Needle",
                 c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.bf("Walking Ballista", c.opp); /* not Sol Ring: a mana ability is exempt from the Needle */ }));
-        l.add(play("4279", "Solitary Confinement", Fid.EXACT, M1, true, "Solitary Confinement",
+        l.add(play("4279", "Solitary Confinement", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
                 c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.bf("Grizzly Bears", c.opp); }));
-        l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, M1, true, "Forge Anew",
+        l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, "MAIN2", true, "Forge Anew",
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.bf("Bonesplitter", c.ai); c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Springleaf Drum", c.ai); c.bf("Grizzly Bears", c.ai); }));
@@ -334,14 +347,22 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 3, c.ai); final Card f = c.bf("Sleep-Cursed Faerie", c.ai); f.setTapped(true); c.stack(c.opp, "Brainstorm"); }));
         l.add(noPlay("4348", "sacrificing Undercity Informer for nothing", Fid.APPROX, M1, true, "Undercity Informer",
                 c -> { c.bf("Swamp", 2, c.ai); c.bf("Undercity Informer", c.ai); c.bf("Grizzly Bears", c.ai); }));
-        l.add(new Scenario("7480", "two ETB triggers (Panharmonicon) must not pick the same target", Fid.APPROX, M1, true,
+        // a creature is held for MAIN2 by the AI unless it has a reason to cast it first (PermanentAi "wait for Main2"), so test #7480 there
+        l.add(new Scenario("7480", "two ETB triggers (Panharmonicon) must not pick the same target", Fid.APPROX, "MAIN2", true,
                 c -> { c.bf("Mountain", 4, c.ai); c.bf("Panharmonicon", c.ai); c.hand("Flametongue Kavu", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); },
                 c -> {
                     final SpellAbility sa = c.playOf("Flametongue Kavu");
-                    if (sa == null) { return "not cast"; }
+                    if (sa == null) { return "not cast" + c.why("Flametongue Kavu"); }
                     c.resolve(sa);
-                    return c.opp.getCreaturesInPlay().isEmpty() ? null : c.opp.getCreaturesInPlay().size() + " creature(s) survived";
+                    return c.opp.getCreaturesInPlay().isEmpty() ? null : c.opp.getCreaturesInPlay().size() + " creature(s) survived (damage " + c.opp.getCreaturesInPlay().stream().map(x -> String.valueOf(x.getDamage())).collect(java.util.stream.Collectors.joining("/")) + "), Kavu in " + c.ai.getCardsIn(forge.game.zone.ZoneType.Battlefield).stream().anyMatch(x -> x.getName().equals("Flametongue Kavu")) + " | stack:" + c.trace;
                 }));
+        l.add(play("7480", "control: plain Grizzly Bears with two Forests (is ANY creature cast in this harness?)", Fid.APPROX, "MAIN2", true, "Grizzly Bears",
+                c -> { c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); }));
+        // A/B for #7480: the same board without Panharmonicon, and with only one creature to target
+        l.add(play("7480", "control: Flametongue Kavu with two targets and NO Panharmonicon", Fid.APPROX, "MAIN2", true, "Flametongue Kavu",
+                c -> { c.bf("Mountain", 4, c.ai); c.hand("Flametongue Kavu", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        l.add(play("7480", "control: Flametongue Kavu with Panharmonicon and one target", Fid.APPROX, "MAIN2", true, "Flametongue Kavu",
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Panharmonicon", c.ai); c.hand("Flametongue Kavu", c.ai); c.bf("Grizzly Bears", c.opp); }));
 
         // ---------------- combat
         l.add(new Scenario("4264", "attacking a player with protection from creatures", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
@@ -384,7 +405,7 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 4, c.ai); c.hand("Gifts Ungiven", c.ai); c.lib("Wurmcoil Engine", c.ai); c.lib("Inferno Titan", c.ai); c.lib("Griselbrand", c.ai); c.lib("Emrakul, the Aeons Torn", c.ai); c.lib("Island", c.ai); },
                 c -> {
                     final SpellAbility sa = c.playOf("Gifts Ungiven");
-                    if (sa == null) { return "Gifts not cast"; }
+                    if (sa == null) { return "Gifts not cast" + c.why("Gifts Ungiven"); }
                     c.resolve(sa);
                     return c.ai.getCardsIn(ZoneType.Hand).stream().anyMatch(k -> k.getCMC() >= 6) ? "ended with only top-end cards in hand" : null;
                 }));
