@@ -56,8 +56,7 @@ public class AudioClip implements IAudioClip {
     /** Voices handed to the mixer that may still be sounding. */
     private final List<Voice> voices = new CopyOnWriteArrayList<>();
     private volatile float volume = 1f;
-    /** When the next voice may start sounding, so a batch stays granular. See {@link #play}. */
-    private volatile long nextStart;
+    private final int repeatDelayMillis;
 
     /** This sound's samples in {@link SoftwareMixer#FORMAT}, decoded once and kept. */
     static byte[] samplesOf(File file) throws IOException, UnsupportedAudioFileException {
@@ -77,6 +76,7 @@ public class AudioClip implements IAudioClip {
 
     public AudioClip(final String filename) {
         pcm = decode(filename);
+        repeatDelayMillis = SoftwareMixer.repeatDelayMillis(filename);
     }
 
     /**
@@ -102,14 +102,7 @@ public class AudioClip implements IAudioClip {
     @Override
     public final void play(float value) {
         volume = value;
-        // A batch of one sound -- four lands tapping together -- should stay granular instead of
-        // summing into one louder copy, so each voice starts SoundSystem.DELAY after the one
-        // before it. The mixer owes the voice that much silence; the old code got the same spacing
-        // by sleeping the delay on the caller, which during a match is the game thread.
-        final long now = System.currentTimeMillis();
-        final long startAt = isDone() ? now : Math.max(now, nextStart);
-        nextStart = startAt + SoundSystem.DELAY;
-        start(value, false, SoftwareMixer.framesForMillis(startAt - now));
+        start(value, false, repeatDelayMillis);
     }
 
     @Override
@@ -117,12 +110,12 @@ public class AudioClip implements IAudioClip {
         start(volume, true, 0);
     }
 
-    private void start(float value, boolean loop, int delayFrames) {
+    private synchronized void start(float value, boolean loop, int repeatDelayMillis) {
         voices.removeIf(voice -> !voice.isPlaying());
         if (pcm == null || voices.size() >= MAX_VOICES) {
             return;
         }
-        voices.add(SoftwareMixer.play(pcm, value, loop, delayFrames));
+        voices.add(SoftwareMixer.play(pcm, value, loop, repeatDelayMillis));
     }
 
     @Override
