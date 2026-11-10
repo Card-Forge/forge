@@ -1815,7 +1815,20 @@ public class PlayerControllerAi extends PlayerController {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {
-                return list.get(0).getName();
+                // Meddling Mage: not the name another copy already holds, and a key card of the opponent's deck first (#12801)
+                final Set<String> taken = SpecialCardAi.namesTakenByOtherCopies(player, sa);
+                CardCollectionView pool = CardLists.filter(list, c -> !taken.contains(c.getName()));
+                if (pool.isEmpty()) {
+                    pool = list;
+                }
+                final CardCollection keyCards = new CardCollection();
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() != null && opp.getRegisteredPlayer().getDeck() != null) {
+                        final List<String> keys = opp.getRegisteredPlayer().getDeck().getKeyCards();
+                        keyCards.addAll(CardLists.filter(pool, c -> keys.contains(c.getName())));
+                    }
+                }
+                return ComputerUtilCard.getBestAI(keyCards.isEmpty() ? pool : keyCards).getName();
             }
         }
         return "Morphling";

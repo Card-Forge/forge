@@ -284,6 +284,32 @@ public class AiReportScenarioTest extends AITest {
         l.add(play("6601", "Boltwave against a player at 20 life with creatures", Fid.EXACT, "MAIN2", true, "Boltwave",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Boltwave", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
 
+        // ---------------- the same name chosen by several copies
+        l.add(new Scenario("12801", "a second Meddling Mage names a different card than the first", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Birds of Paradise", c.opp); c.bf("Elvish Mystic", c.opp); c.bf("Llanowar Elves", c.opp);
+                    c.bf("Meddling Mage", c.ai).setNamedCards(java.util.Arrays.asList("Birds of Paradise"));
+                },
+                c -> {
+                    final Card second = c.bf("Meddling Mage", c.ai);
+                    final SpellAbility naming = second.getReplacementEffects().get(0).getOverridingAbility();
+                    naming.setActivatingPlayer(c.ai);
+                    final String name = ((PlayerControllerAi) c.ai.getController()).chooseCardName(naming, f -> true, "Card.nonLand", "");
+                    return "Birds of Paradise".equals(name) ? "named Birds of Paradise again" : null;
+                }));
+        l.add(new Scenario("5896", "a second Pithing Needle names a different card than the first", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Spellskite", c.opp); c.bf("Agatha's Soul Cauldron", c.opp); c.bf("Shalai, Voice of Plenty", c.opp);
+                    c.bf("Pithing Needle", c.ai).setNamedCards(java.util.Arrays.asList("Shalai, Voice of Plenty"));
+                },
+                c -> {
+                    final Card second = c.bf("Pithing Needle", c.ai);
+                    final SpellAbility naming = second.getReplacementEffects().get(0).getOverridingAbility();
+                    naming.setActivatingPlayer(c.ai);
+                    final String name = ((PlayerControllerAi) c.ai.getController()).chooseCardName(naming, f -> true, "", "");
+                    return "Shalai, Voice of Plenty".equals(name) ? "named Shalai, Voice of Plenty again" : null;
+                }));
+
         // ---------------- AI casts ... wrongly
         l.add(new Scenario("3994", "burn at a creature it cannot kill (Lightning Bolt should not target Wurmcoil Engine)", Fid.EXACT, M1, true,
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Wurmcoil Engine", c.opp); },
@@ -310,13 +336,16 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); c.bf("Grief", c.ai); }));
 
         // ---------------- AI doesn't use ability ...
-        l.add(activates("4391", "Waker of Waves", "Waker of Waves", null));
-        l.add(activates("5904", "Unstable Amulet", "Unstable Amulet", null));
+        l.add(play("4391", "Waker of Waves in hand with three lands, one of them blue (it can never be cast)", Fid.EXACT, "MAIN2", true, "Waker of Waves",
+                c -> { c.bf("Island", c.ai); c.bf("Mountain", 2, c.ai); c.hand("Waker of Waves", c.ai); c.lib("Island", c.ai); c.lib("Mountain", c.ai); }));
+        l.add(activates("5904", "Unstable Amulet with energy to spend", "Unstable Amulet", c -> c.ai.setCounters(CounterEnumType.ENERGY, 4)));
         l.add(new Scenario("5935", "channel ability that does not deal damage (Boseiju at an artifact)", Fid.APPROX, M1, true,
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Boseiju, Who Endures", c.ai); c.bf("Sol Ring", c.opp); },
                 c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Boseiju, Who Endures") && sa.isAbility()) ? null : "channel not used"));
-        l.add(activates("6108", "The Underworld Cookbook, first ability", "The Underworld Cookbook", null));
-        l.add(activates("6719", "Catapult Captain", "Catapult Captain", c -> c.bf("Ornithopter", c.ai)));
+        l.add(activates("6108", "The Underworld Cookbook: discard the fatty for the reanimation spell", "The Underworld Cookbook",
+                c -> { c.hand("Goryo's Vengeance", c.ai); c.hand("Emrakul, the Aeons Torn", c.ai); }));
+        l.add(play("6719", "Catapult Captain can kill the opponent by sacrificing a 0/6", Fid.EXACT, M1, true, "Catapult Captain",
+                c -> { c.bf("Swamp", 3, c.ai); c.bf("Catapult Fodder", c.ai).changeCardState("Transform", null, null); /* the Captain is its back face */ c.bf("Giant Ox", c.ai); c.opp.setLife(6, null); }));
         l.add(play("4022", "Stoneforge Mystic with an equipment in hand (activate, don't attack)", Fid.EXACT, M1, true, "Stoneforge Mystic",
                 c -> { c.bf("Plains", 2, c.ai); c.bf("Stoneforge Mystic", c.ai); c.hand("Batterskull", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(new Scenario("4023", "Stoneforge Mystic fetches the best equipment (Batterskull, not Bonesplitter)", Fid.APPROX, M1, true,

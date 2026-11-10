@@ -165,6 +165,12 @@ public class ComputerUtilCost {
                             // Better do something than just discard stuff
                             return true;
                         }
+                        // a card that cannot be cast any time soon is worth more as its own ability (Waker of Waves, seven
+                        // mana with three lands); cycling has its own decision
+                        if (sa != null && !sa.isCycling() && source.isInZone(ZoneType.Hand) && !source.isLand()
+                                && source.getCMC() > ai.getLandsInPlay().size() + 1) {
+                            continue;
+                        }
                         return false;
                     }
                     typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);

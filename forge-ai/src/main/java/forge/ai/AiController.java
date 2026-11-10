@@ -2838,6 +2838,7 @@ public class AiController {
         if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
             reportSortFallback(all);
         }
+        ComputerUtilAbility.putCastPayoffsFirst(all);
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
         final ComboPlan combos = deckPlan(player).combos;

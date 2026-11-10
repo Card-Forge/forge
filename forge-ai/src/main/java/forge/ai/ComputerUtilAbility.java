@@ -158,6 +158,44 @@ public class ComputerUtilAbility {
         return result;
     }
 
+    /**
+     * A permanent that pays off for each spell its controller casts (Up the Beanstalk draws a card for each spell of mana
+     * value 5 or more) goes before the first spell of the list it would pay off for: cast after it, it only misses the card (#4278).
+     */
+    public static void putCastPayoffsFirst(final List<SpellAbility> list) {
+        for (int i = 1; i < list.size(); i++) {
+            final SpellAbility payoff = list.get(i);
+            if (!payoff.isSpell() || payoff.getHostCard() == null || !payoff.getHostCard().isPermanent()) {
+                continue;
+            }
+            for (int j = 0; j < i; j++) {
+                if (paysOffFor(payoff, list.get(j))) {
+                    list.remove(i);
+                    list.add(j, payoff);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
+        final Card host = payoff.getHostCard();
+        final Card cast = spell.getHostCard();
+        if (!spell.isSpell() || cast == null || cast == host) {
+            return false;
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))
+                    || !t.hasParam("TriggerZones") || !t.getParam("TriggerZones").contains("Battlefield")) {
+                continue;
+            }
+            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard"), host.getController(), host, t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
         Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
 
