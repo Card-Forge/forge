@@ -1800,7 +1800,7 @@ public class PlayerControllerAi extends PlayerController {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
-            } else if (logic.equals(NamedDiscard.LOGIC)) {
+            } else if (NamedDiscard.isNamingLogic(logic)) {
                 name = NamedDiscard.chooseName(player, sa, valid);
             }
 

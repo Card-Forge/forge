@@ -32,11 +32,23 @@ public final class NamedDiscard {
     public static final String LOGIC = "NamedDiscard";
 
     /**
+     * The value of {@code AILogic} for the cards that name a card and exile every copy of it from a player's graveyard,
+     * hand and library (Unmoored Ego, Slaughter Games, Cranial Extraction ...). Same naming as the discard, a wider reach.
+     */
+    public static final String EXILE_LOGIC = "NamedExile";
+
+    public static boolean isNamingLogic(final String logic) {
+        return LOGIC.equals(logic) || EXILE_LOGIC.equals(logic);
+    }
+
+    /**
      * The player the discard part of the spell is aimed at, or null when no target has been chosen yet.
      */
     public static Player discardTarget(final SpellAbility sa) {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
-            if (a.getApi() == ApiType.Discard && a.usesTargeting() && a.getTargets() != null) {
+            final ApiType api = a.getApi();
+            if ((api == ApiType.Discard || api == ApiType.ChangeZone || api == ApiType.ChangeZoneAll)
+                    && a.usesTargeting() && a.getTargets() != null) {
                 for (final GameEntity e : a.getTargets().getTargetEntities()) {
                     if (e instanceof Player) {
                         return (Player) e;
@@ -163,6 +175,9 @@ public final class NamedDiscard {
      * at least two cards. The flashback costs a creature, so it is never a blind guess.
      */
     public static AiAbilityDecision consider(final Player ai, final SpellAbility sa) {
+        if (EXILE_LOGIC.equals(sa.getParam("AILogic"))) {
+            return considerExile(ai, sa);
+        }
         if (combosOf(ai).selfDiscardName(ai, sa.getHostCard()) != null) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -176,6 +191,32 @@ public final class NamedDiscard {
             }
             if (!flashback && opp.getCardsIn(ZoneType.Hand).size() >= 2) {
                 return new AiAbilityDecision(70, AiPlayDecision.WillPlay);
+            }
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * Unmoored Ego and its kin: worth the mana when the opponent holds a card seen revealed, or at least two cards (the
+     * name is a guess, but the spell also reaches the library and the graveyard). The opponent is aimed at here, because
+     * the effects behind the naming only ask for "target player" and the AI would otherwise not pick one.
+     */
+    private static AiAbilityDecision considerExile(final Player ai, final SpellAbility sa) {
+        for (final Player opp : ai.getOpponents()) {
+            final int inHand = opp.getCardsIn(ZoneType.Hand).size();
+            final boolean known = !knownInHand(ai, opp).isEmpty();
+            if (!known && inHand < 2) {
+                continue;
+            }
+            for (SpellAbility a = sa.getSubAbility(); a != null; a = a.getSubAbility()) {
+                if (a.usesTargeting() && a.getTargetRestrictions().canTgtPlayer()) {
+                    if (!a.canTarget(opp)) {
+                        break;
+                    }
+                    a.resetTargets();
+                    a.getTargets().add(opp);
+                    return new AiAbilityDecision(known ? 100 : 70, AiPlayDecision.WillPlay);
+                }
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

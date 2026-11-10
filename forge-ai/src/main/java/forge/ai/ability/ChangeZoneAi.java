@@ -453,7 +453,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // make sure this will actually do something:
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
-        if (tgt != null && tgt.canTgtPlayer()) {
+        if (tgt != null && tgt.canTgtPlayer() && !sa.getTargets().isTargetingAnyPlayer()) { // a player already chosen (the naming spells) stays
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
                 sa.getTargets().add(opp);

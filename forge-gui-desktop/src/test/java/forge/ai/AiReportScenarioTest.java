@@ -123,6 +123,21 @@ public class AiReportScenarioTest extends AITest {
             for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Hand }) {
                 for (final Card k : ai.getCardsIn(z)) {
                     if (!card.equals(k.getName())) { continue; }
+                    if (z == ZoneType.Hand) { // what the enter-the-battlefield check makes of it, and of each "as it enters" choice
+                        try {
+                            final SpellAbility main = k.getFirstSpellAbility();
+                            main.setActivatingPlayer(ai);
+                            sb.append(" [etbCheck=").append(controller().checkETBEffects(k, main, null));
+                            for (final forge.game.replacement.ReplacementEffect re : k.getReplacementEffects()) {
+                                final SpellAbility ex = re.getOverridingAbility();
+                                if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(controller().doTrigger(ex.copy(ai), false))
+                                        .append(" decision=").append(SpellApiToAi.Converter.get(ex).doTriggerNoCostWithSubs(ai, ex.copy(ai), false))
+                                        .append(" opposing permanents with an activated ability=").append(forge.game.card.CardLists.getValidCards(
+                                                ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, k, ex)); }
+                            }
+                            sb.append(']');
+                        } catch (final RuntimeException e) { sb.append(" [etbCheck threw ").append(e).append(']'); }
+                    }
                     for (final SpellAbility sa : k.getSpellAbilities()) {
                         try {
                             sa.setActivatingPlayer(ai);
@@ -169,6 +184,7 @@ public class AiReportScenarioTest extends AITest {
                 final SpellAbility top = game.getStack().peekAbility();
                 trace.append(" [resolving ").append(top).append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
                 game.getStack().resolveStack();
+                game.getAction().checkStateEffects(true); // lethal damage kills, as it does between two priority passes
             }
         }
         /** The player gets the effect of a spell for free (protection, hexproof ...). */
@@ -224,11 +240,11 @@ public class AiReportScenarioTest extends AITest {
 
         // ---------------- AI doesn't cast ...
         l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, "MAIN2", true, "Pithing Needle",
-                c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.bf("Walking Ballista", c.opp); /* not Sol Ring: a mana ability is exempt from the Needle */ }));
+                c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.counters(c.bf("Wrenn and Six", c.opp), CounterEnumType.LOYALTY, 3); /* (bf() adds no loyalty and the walker would die) a planeswalker is what the AI Needles for sure; a plain activated ability is only a 5% roll, and a mana ability (Sol Ring) is exempt */ }));
         l.add(play("4279", "Solitary Confinement", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
                 c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, "MAIN2", true, "Forge Anew",
-                c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.bf("Bonesplitter", c.ai); c.bf("Grizzly Bears", c.ai); }));
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.gy("Bonesplitter", c.ai); /* its enter trigger needs an Equipment in the graveyard */ c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Springleaf Drum", c.ai); c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4302", "Unmoored Ego against a full hand", Fid.EXACT, M1, true, "Unmoored Ego",
@@ -236,7 +252,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("4326", "bounce land with a single land in play (should play Azorius Chancery)", Fid.EXACT, M1, true,
                 c -> { c.bf("Plains", c.ai); c.hand("Azorius Chancery", c.ai); },
                 c -> c.landPlays().stream().anyMatch(k -> k.getName().equals("Azorius Chancery")) ? null : "Chancery not chosen as land drop"));
-        l.add(play("4359", "suspending Restore Balance with one land", Fid.EXACT, M1, true, "Restore Balance",
+        l.add(play("4359", "suspending Restore Balance with one land", Fid.EXACT, "MAIN2", true, "Restore Balance",
                 c -> { c.bf("Plains", c.ai); c.hand("Restore Balance", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4464", "protection trick against a burn spell aimed at the AI's creature", Fid.APPROX, M1, false, "Gods Willing",
                 c -> { c.bf("Plains", c.ai); c.hand("Gods Willing", c.ai); final Card bears = c.bf("Serra Angel", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
@@ -251,9 +267,9 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Forest", 4, c.ai); c.hand("Collected Company", c.ai); for (int i = 0; i < 6; i++) { c.lib("Grizzly Bears", c.ai); } }));
         l.add(play("4352", "Adventure side while the main spell is castable too", Fid.APPROX, M1, true, "Bonecrusher Giant",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Bonecrusher Giant", c.ai); c.hand("Goblin Guide", c.ai); c.bf("Grizzly Bears", c.opp); }));
-        l.add(play("6015", "Skullcrack against a player at 20 life", Fid.EXACT, M1, true, "Skullcrack",
+        l.add(play("6015", "Skullcrack against a player at 20 life", Fid.EXACT, "MAIN2", true, "Skullcrack",
                 c -> { c.bf("Mountain", 2, c.ai); c.hand("Skullcrack", c.ai); }));
-        l.add(play("6601", "Boltwave against a player at 20 life with creatures", Fid.EXACT, M1, true, "Boltwave",
+        l.add(play("6601", "Boltwave against a player at 20 life with creatures", Fid.EXACT, "MAIN2", true, "Boltwave",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Boltwave", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
 
         // ---------------- AI casts ... wrongly
@@ -482,6 +498,7 @@ public class AiReportScenarioTest extends AITest {
     public void aiBehavesAsReported(final Scenario s) {
         final Game game = initAndCreateGame();
         game.AI_FLAT_MONTE_CARLO = FLAT_MC;
+        if (System.getProperty("forge.test.issue") != null) { forge.ai.simulation.FlatMonteCarloPicker.DEBUG = true; } // a single scenario: print what the picker made of it
         game.AI_TIMEOUT = 10;
         final Ctx c = new Ctx(game);
         if (FLAT_MC) { fillLibrary(c.ai, 20); fillLibrary(c.opp, 20); } // rollouts must not deck anyone
