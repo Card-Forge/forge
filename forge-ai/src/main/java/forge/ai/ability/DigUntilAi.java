@@ -15,6 +15,21 @@ import java.util.Map;
 
 public class DigUntilAi extends SpellAbilityAi {
 
+    /**
+     * Balustrade Spy and Undercity Informer (the self_mill_outlet role of ai-card-roles.txt) aim at their own controller,
+     * but only for a deck that was read as a library-out deck (Oops! All Spells). Everywhere else they stay as the card
+     * script has them: aimed at the opponent. The card scripts are not touched.
+     */
+    private static boolean millsSelf(final Player ai, final SpellAbility sa) {
+        return sa.getHostCard() != null
+                && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.SELF_MILL_OUTLET, sa.getHostCard())
+                && ai.getController() instanceof PlayerControllerAi
+                && ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                        .has(forge.ai.simulation.ComboPlan.Kind.LIBRARY_OUT)
+                // and only while the winner can follow the mill: without Thassa's Oracle the deck just loses its library
+                && ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.libraryOutSelfMillSafe(ai);
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
@@ -52,6 +67,16 @@ public class DigUntilAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
+        }
+
+        if (sa.usesTargeting() && millsSelf(ai, sa)) {
+            // Balustrade Spy and Undercity Informer in a deck without lands: the library is the AI's own to empty
+            sa.resetTargets();
+            if (!sa.canTarget(ai) || ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            sa.getTargets().add(ai);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (sa.usesTargeting()) {
@@ -92,6 +117,13 @@ public class DigUntilAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (sa.usesTargeting() && millsSelf(ai, sa)) {
+            sa.resetTargets();
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+        }
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.isCurse()) {

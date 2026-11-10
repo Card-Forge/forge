@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import forge.ai.*;
+import forge.ai.ability.AnimateAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -48,7 +49,7 @@ public class SpellAbilityPicker {
 
     private void printPhaseInfo() {
         String phaseStr = game.getPhaseHandler().getPhase().toString();
-        if (game.getPhaseHandler().getPlayerTurn() != player) {
+        if (!game.getPhaseHandler().isPlayerTurn(player)) {
             phaseStr = "opponent " + phaseStr;
         }
         print("---- choose ability  (phase = " + phaseStr + ")");
@@ -348,6 +349,10 @@ public class SpellAbilityPicker {
         }
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
+        }
+        // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
+        if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
+            return AiPlayDecision.DoesntImpactCombat;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;

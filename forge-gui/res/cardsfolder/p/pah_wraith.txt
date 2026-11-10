@@ -1,0 +1,10 @@
+Name:Pah-Wraith
+ManaCost:5 R R
+Types:Creature Wraith
+PT:4/4
+K:First Strike
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Strange new worlds — Whenever this creature attacks, creatures you control get +X/+0 until end of turn, where X is the number of differently named lands you control.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:First strike, haste\nStrange new worlds — Whenever this creature attacks, creatures you control get +X/+0 until end of turn, where X is the number of differently named lands you control.

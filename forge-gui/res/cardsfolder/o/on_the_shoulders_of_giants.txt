@@ -1,0 +1,7 @@
+Name:On the Shoulders of Giants
+ManaCost:2 U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Historic+YouCtrl | AddKeyword$ Flying | Description$ Historic creatures you control have flying. (Artifacts, legendaries, and Sagas are historic.)
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Historic creatures you control have flying. (Artifacts, legendaries, and Sagas are historic.)

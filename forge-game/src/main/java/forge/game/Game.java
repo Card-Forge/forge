@@ -448,7 +448,9 @@ public class Game {
         final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
         final PlayerCollection players = new PlayerCollection(
                 directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
-
+        if (!players.contains(p)) {
+            p = getNextPlayerAfter(p);
+        }
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
         return players;
@@ -1345,7 +1347,8 @@ public class Game {
             player.onCleanupPhase();
         }
         for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+            // under shared team turns this was also the turn of the card's controller
+            c.onCleanupPhase(getPhaseHandler().isPlayerTurn(c.getController()) ? c.getController() : getPhaseHandler().getPlayerTurn());
         }
         for (final Card card : getCardsInGame()) {
             card.resetActivationsPerTurn();

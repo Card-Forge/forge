@@ -27,6 +27,7 @@ import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
+import forge.gui.GuiChoose;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
@@ -81,12 +82,9 @@ public class VLobby implements ILobbyView {
 
     // Variants frame and variables
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
-    private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
-    private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
-    private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
-    private final ImmutableList<VariantCheckBox> vntBoxes  =
-            ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard);
+    private final List<VariantCheckBox> vntBoxes =
+            FormatChoices.VARIANTS.stream().map(VariantCheckBox::new).toList();
+    private final VariantCheckBox vntVanguard = Iterables.find(vntBoxes, vcb -> vcb.variant == GameType.Vanguard);
 
     private final FComboBoxPanel<Object> cboFormatPanel =
             new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblFormat") + ":", FormatChoices.get(true));
@@ -903,6 +901,9 @@ public class VLobby implements ILobbyView {
                 populateDeckPanel(GameType.Constructed);
             }
             break;
+        case TwoHeadedGiant:
+            populateDeckPanel(GameType.Constructed);
+            break;
         case Commander:
         case Oathbreaker:
         case TinyLeaders:
@@ -1230,9 +1231,22 @@ public class VLobby implements ILobbyView {
             syncGameFormatCombo();
             return;
         }
+        if (selected == FormatChoices.ARCHIVED) {
+            syncGameFormatCombo();
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                applyFormatChoice(archived);
+            }
+            return;
+        }
         if (selected == lobby.getFormatChoice()) { return; }
 
-        lobby.setFormatChoice(selected);
+        applyFormatChoice(selected);
+    }
+
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
+        lobby.saveSetup();
         update(false);
         updateActionButtons();
     }
@@ -1242,7 +1256,8 @@ public class VLobby implements ILobbyView {
         if (cboFormatPanel.getSelectedItem() != applied) {
             suppressFormatListener = true;
             try {
-                cboFormatPanel.setSelectedItem(applied);
+                // The model takes an archived format, which the list does not hold
+                cboFormatPanel.getComboBox().getModel().setSelectedItem(applied);
             } finally {
                 suppressFormatListener = false;
             }
@@ -1278,6 +1293,7 @@ public class VLobby implements ILobbyView {
                 } else {
                     lobby.removeVariant(variantType);
                 }
+                lobby.saveSetup();
                 VLobby.this.update(false);
                 VLobby.this.updateActionButtons();
             });

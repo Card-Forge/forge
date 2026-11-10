@@ -1,0 +1,10 @@
+Name:Cloak and Phaser
+ManaCost:8 U
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Strange new worlds — This spell costs {X} less to cast, where X is the number of differently named lands you control.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_romulan | SubAbility$ DBDraw | SpellDescription$ Create two 2/2 black Romulan creature tokens. Draw two cards, then discard a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+DeckHas:Ability$Token|Discard
+Oracle:Strange new worlds — This spell costs {X} less to cast, where X is the number of differently named lands you control.\nCreate two 2/2 black Romulan creature tokens. Draw two cards, then discard a card.

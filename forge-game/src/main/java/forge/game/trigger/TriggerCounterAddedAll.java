@@ -26,7 +26,7 @@ public class TriggerCounterAddedAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         final GameEntityCounterTable table = (GameEntityCounterTable) runParams.get(AbilityKey.Objects);
 
         Map<GameEntity, Integer> all = this.filterTable(table);
@@ -36,8 +36,8 @@ public class TriggerCounterAddedAll extends Trigger {
             amount += v;
         }
 
-        sa.setTriggeringObject(AbilityKey.Objects, Lists.newArrayList(all.keySet()));
-        sa.setTriggeringObject(AbilityKey.Amount, amount);
+        objects.put(AbilityKey.Objects, Lists.newArrayList(all.keySet()));
+        objects.put(AbilityKey.Amount, amount);
     }
 
     @Override

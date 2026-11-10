@@ -15,6 +15,7 @@ import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -46,7 +47,6 @@ public class WorldSave {
     private final SignalList onLoadList = new SignalList();
     private static long lastPreviewTimestamp = 0L;
     private static final long COOLDOWN_WINDOW_MS = 800L;
-    private static boolean firstCapture = true;
     private static final ExecutorService SAVE_EXECUTOR =
         Executors.newSingleThreadExecutor(r -> {
             Thread thread = new Thread(r, "Forge-Adventure-Save");
@@ -473,28 +473,44 @@ public class WorldSave {
 
     // prevent spam of preview if user repeatedly/accidentally reopen scene that request previews
     public static void requestPreview() {
-        final long currentTimestamp = TimeUtils.millis();
+        requestPreview(false);
+    }
 
-        if (firstCapture) {
-            firstCapture = false;
-            // init once
+    /**
+     * @param force skip the cooldown, for a caller that uses the preview right away (quick save)
+     */
+    public static void requestPreview(final boolean force) {
+        final long currentTimestamp = TimeUtils.millis();
+        final PreviewAction action = previewAction(GuiBase.getInterface().isGuiThread(),
+                currentTimestamp, lastPreviewTimestamp, force);
+        if (action == PreviewAction.SKIP) {
+            return;
+        }
+        lastPreviewTimestamp = currentTimestamp;
+        if (action == PreviewAction.NOW) {
             currentSave.header.createPreview();
             return;
         }
-
-        // If 800ms has not passed since the last successful generation, skip
-        if (currentTimestamp - lastPreviewTimestamp < COOLDOWN_WINDOW_MS) {
-            return;
-        }
-
-        // Update the timestamp immediately to lock out parallel thread spam on the spot
-        lastPreviewTimestamp = currentTimestamp;
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
                 currentSave.header.createPreview();
             }
         });
+    }
+
+    enum PreviewAction { SKIP, NOW, LATER }
+
+    static PreviewAction previewAction(final boolean onGlThread, final long now, final long last, final boolean force) {
+        // If 800ms has not passed since the last generation, skip
+        if (!force && now - last < COOLDOWN_WINDOW_MS) {
+            return PreviewAction.SKIP;
+        }
+        // On the GL thread the capture has to happen now. Queued, it runs after the frame that already shows the next
+        // scene (the menu) was swapped, and what the back buffer holds then depends on the driver: the frame before
+        // (the world) or the frame just drawn (the menu). Input is handled before the frame is drawn, so now the back
+        // buffer still holds a world frame. Other threads cannot read the GL buffer at all and have to queue.
+        return onGlThread ? PreviewAction.NOW : PreviewAction.LATER;
     }
 
     public static void dispose() {
