@@ -142,7 +142,7 @@ public class AiReportScenarioTest extends AITest {
                         try {
                             sa.setActivatingPlayer(ai);
                             sb.append(" [").append(z).append(' ').append(sa.getApi()).append(" -> ").append(controller().canPlaySa(sa))
-                                    .append(" failedBefore=").append(controller().hasFailedToCast(sa)).append(']');
+                                    .append(" payable=").append(ComputerUtilCost.canPayCost(sa, ai, false)).append(" failedBefore=").append(controller().hasFailedToCast(sa)).append(']');
                         } catch (final RuntimeException e) { sb.append(" [").append(sa.getApi()).append(" threw ").append(e).append(']'); }
                     }
                 }
@@ -189,6 +189,7 @@ public class AiReportScenarioTest extends AITest {
         }
         /** The player gets the effect of a spell for free (protection, hexproof ...). */
         void effect(final Player owner, final String name) {
+            bf("Plains", 3, owner); // the effect is paid for like any spell, and the player has no mana of its own ({2}{W} for Teferi's Protection)
             final SpellAbility sa = hand(name, owner).getFirstSpellAbility();
             sa.setActivatingPlayer(owner);
             if (!ComputerUtil.playNoStack(owner, sa, game, true)) {
@@ -253,21 +254,27 @@ public class AiReportScenarioTest extends AITest {
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Springleaf Drum", c.ai); c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4302", "Unmoored Ego against a full hand", Fid.EXACT, M1, true, "Unmoored Ego",
-                c -> { c.bf("Swamp", 3, c.ai); c.hand("Unmoored Ego", c.ai); c.hand("Lightning Bolt", c.opp); c.hand("Lightning Bolt", c.opp); }));
+                c -> { c.bf("Island", c.ai); c.bf("Swamp", 2, c.ai); /* {1}{U}{B} */ c.hand("Unmoored Ego", c.ai); c.hand("Lightning Bolt", c.opp); c.hand("Lightning Bolt", c.opp); }));
         l.add(new Scenario("4326", "bounce land with a single land in play (should play Azorius Chancery)", Fid.EXACT, M1, true,
                 c -> { c.bf("Plains", c.ai); c.hand("Azorius Chancery", c.ai); },
                 c -> c.landPlays().stream().anyMatch(k -> k.getName().equals("Azorius Chancery")) ? null : "Chancery not chosen as land drop"));
         l.add(play("4359", "suspending Restore Balance with one land", Fid.EXACT, "MAIN2", true, "Restore Balance",
                 c -> { c.bf("Plains", c.ai); c.hand("Restore Balance", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4464", "protection trick against a burn spell aimed at the AI's creature", Fid.APPROX, M1, false, "Gods Willing",
-                c -> { c.bf("Plains", c.ai); c.hand("Gods Willing", c.ai); final Card bears = c.bf("Serra Angel", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
+                c -> { c.bf("Plains", c.ai); c.hand("Gods Willing", c.ai); final Card birds = c.bf("Birds of Paradise", c.ai); /* Serra Angel (4 toughness) survives a Bolt, so nothing to save */ c.stack(c.opp, "Lightning Bolt", birds); }));
         l.add(play("5897", "Invert Polarity against a burn spell", Fid.APPROX, M1, false, "Invert Polarity",
-                c -> { c.richMana(); c.hand("Invert Polarity", c.ai); c.stack(c.opp, "Lightning Bolt", c.ai); }));
+                c -> { c.richMana(); c.hand("Invert Polarity", c.ai); c.stack(c.opp, "Serra Angel"); /* the report: a spell worth 3+ mana (a Bolt is not) */ }));
         l.add(play("7626", "Titan's Presence with a colorless creature to reveal", Fid.APPROX, M1, true, "Titan's Presence",
                 c -> { c.bf("Forest", 3, c.ai); c.hand("Titan's Presence", c.ai); c.hand("Wurmcoil Engine", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(skip("4113", "cascaded/free Glimpse of Tomorrow is resolved (not just exiled)", "needs a real cascade; playNoStack does not model it"));
         l.add(play("4210", "Violent Outburst with no creature to attack", Fid.APPROX, M1, true, "Violent Outburst",
-                c -> { c.bf("Mountain", 3, c.ai); c.hand("Violent Outburst", c.ai); c.lib("Lightning Bolt", c.ai); c.lib("Mountain", c.ai); }));
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); /* {1}{R}{G} */ c.hand("Violent Outburst", c.ai); c.lib("Lightning Bolt", c.ai); c.lib("Mountain", c.ai); }));
+        // the report: a Living End deck casts it for the cascade, once the graveyard is ready (ComboPlan decides, see massReanimationRuling)
+        l.add(play("4210", "Living End deck, five creatures in the graveyard, no creature to pump", Fid.APPROX, M1, true, "Violent Outburst",
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); c.hand("Violent Outburst", c.ai); c.lib("Living End", c.ai); c.lib("Lightning Bolt", c.ai);
+                    for (int i = 0; i < 5; i++) { c.gy("Grizzly Bears", c.ai); } }));
+        l.add(noPlay("4210", "Living End deck, empty graveyard: the cascade would waste the payoff", Fid.APPROX, M1, true, "Violent Outburst",
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); c.hand("Violent Outburst", c.ai); c.lib("Living End", c.ai); c.lib("Lightning Bolt", c.ai); }));
         l.add(play("4215", "Collected Company at the opponent's end step", Fid.EXACT, "END_OF_TURN", false, "Collected Company",
                 c -> { c.bf("Forest", 4, c.ai); c.hand("Collected Company", c.ai); for (int i = 0; i < 6; i++) { c.lib("Grizzly Bears", c.ai); } }));
         l.add(play("4352", "Adventure side while the main spell is castable too", Fid.APPROX, M1, true, "Bonecrusher Giant",

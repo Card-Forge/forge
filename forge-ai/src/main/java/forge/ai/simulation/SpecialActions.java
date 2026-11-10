@@ -26,6 +26,9 @@ import forge.game.zone.ZoneType;
 public final class SpecialActions {
     /** Evaluator points for a mana that the deferred cast will not have to pay; a card is worth 100-250 in play. */
     static final int POINTS_PER_MANA_SAVED = 20;
+    /** Mana a suspend is worth for a card without a mana cost: it cannot be cast any other way, so the wait costs nothing. */
+    static final int NO_COST_SAVING = 3;
+
     /** Evaluator points lost for each turn a suspended card waits for its counters. */
     static final int POINTS_PER_TURN_WAITED = 15;
 
@@ -53,6 +56,9 @@ public final class SpecialActions {
         final String suspend = keywordOriginal(host, "Suspend:");
         if (suspend == null) {
             return 0;
+        }
+        if (host.getManaCost().isNoCost()) {
+            return NO_COST_SAVING; // Restore Balance, Ancestral Vision: suspending is the only way the card is ever cast
         }
         final String[] parts = suspend.split(":");
         int turns = 1;

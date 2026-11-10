@@ -121,6 +121,17 @@ public final class ComboPlan {
     }
 
     /**
+     * Whether a cascade spell may be cast just for the free spell it brings along, when the spell itself does nothing
+     * (Violent Outburst with no creature to pump). A Living End style deck decides on all its cascade spells in
+     * {@link #massReanimationRuling}: before the graveyard is ready a cascade would waste the payoff, and with a full board
+     * the swap would cost the AI its own creatures. Any other deck, a cascade deck that can only find its payoff included,
+     * has nothing to lose: the cascade is a free spell on top.
+     */
+    public boolean mayCascadeForTheFreeSpell(final Player ai) {
+        return !isMassReanimationDeck(ai);
+    }
+
+    /**
      * The creatures of the AI that an airbend (Aang, Swift Savior, Appa, Airbender Ascension) should exile so that they
      * can be cast again: only while a free cast engine that makes the exile cost nothing is in play (Doc Aurlock), and
      * only the creatures of the free cast combo, never the one that makes the trigger.
