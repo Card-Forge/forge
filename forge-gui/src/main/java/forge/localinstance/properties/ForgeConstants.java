@@ -91,7 +91,7 @@ public final class ForgeConstants {
     public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
 
     public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
-    public static final String DRAFT_RANKINGS_FOLDER          = DRAFT_DIR + "rankings/";
+    public static final String DRAFT_RANKINGS_FOLDER        = DRAFT_DIR + "rankings/";
     public static final String SEALED_DIR                   = RES_DIR + "sealed" + PATH_SEPARATOR;
     public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
     public static final String TOKEN_DATA_DIR               = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
