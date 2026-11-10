@@ -1,0 +1,32 @@
+[metadata]
+Name=Dwarven Trader
+[Main]
+9 Mountain|3ED
+1 Balduvian Trading Post|ALL
+3 Caldera Lake|TMP
+4 Dwarven Ruins|FEM
+2 Gemstone Mine|WTH
+1 High Market|MMQ
+1 Rainbow Vale|FEM
+1 Ravaged Highlands|ODY
+1 Reflecting Pool|TMP
+4 Dwarven Trader|HML|[72a]
+4 Dwarven Trader|HML|[72b]
+4 Dwarven Pony|HML
+3 Dwarven Nomad|MIR
+4 Dwarven Patrol|APC
+1 Bargaining Table|MMQ
+1 Credit Voucher|MMQ
+1 Crooked Scales|MMQ
+1 Noetic Scales|USG
+2 Dream Cache|MIR
+1 Iron Star|3ED
+4 Impulse|VIS
+1 Merchant Scroll|HML
+2 Horn of Greed|STH
+2 Bribery|MMQ
+1 Illicit Auction|MIR
+1 Aeolipile|FEM
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Dwarven Trader|HML|[72b]

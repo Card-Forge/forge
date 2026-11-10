@@ -1,0 +1,28 @@
+[metadata]
+Name=Goblin Flotilla
+[Main]
+12 Mountain|3ED
+2 Dwarven Ruins|FEM
+4 Caldera Lake|TMP
+2 Ravaged Highlands|ODY
+2 Reflecting Pool|TMP
+1 Rainbow Vale|FEM
+8 Goblin Flotilla|FEM
+2 Goblin Soothsayer|MIR
+4 Goblin Piledriver|ONS
+4 Goblin Raider|USG
+4 Goblin Lackey|USG
+2 Goblin Warchief|SCG
+1 Goblin Chirurgeon|FEM|[54a]
+1 Goblin Chirurgeon|FEM|[54b]
+1 Goblin Chirurgeon|FEM|[54c]
+1 Goblin War Drums|FEM|[58a]
+1 Goblin War Drums|FEM|[58d]
+3 Goblin Shrine|DRK
+4 Lingering Mirage|USG
+1 Fool's Tome|TMP
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Goblin Flotilla|FEM
+1 Mystic Compass|ALL
+1 War Barge|DRK
