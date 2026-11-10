@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.ai.AiAttackController;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
@@ -1037,6 +1038,14 @@ public final class FlatMonteCarloPicker {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null) {
             return false;
         }
+        if (sa.isSpell() && sa.getHostCard().hasSVar("EndOfTurnLeavePlay") && sa.getHostCard().getController() != null) {
+            // Ball Lightning: its single attack is pointless against a player who is protected from it
+            for (final Player opp : sa.getHostCard().getController().getOpponents()) {
+                if (AiAttackController.isDamageProtected(opp, sa.getHostCard())) {
+                    return false;
+                }
+            }
+        }
         if (XChoice.isManaX(sa)) {
             // an X of mana: only with a careful plan (damage that kills something), and when the mana it takes is spare
             final Player owner = sa.getHostCard().getController();
@@ -1806,7 +1815,9 @@ public final class FlatMonteCarloPicker {
         }
         final List<Card> legal = new ArrayList<>();
         for (final Card c : player.getCreaturesInPlay()) {
-            if (forge.game.combat.CombatUtil.canAttack(c, main)) {
+            if (forge.game.combat.CombatUtil.canAttack(c, main)
+                    // attacking is legal into protection, but the damage is prevented: not worth offering as a candidate
+                    && !(main instanceof Player && AiAttackController.isDamageProtected((Player) main, c))) {
                 legal.add(c);
             }
         }

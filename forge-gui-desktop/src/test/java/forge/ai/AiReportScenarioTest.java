@@ -191,7 +191,12 @@ public class AiReportScenarioTest extends AITest {
         void effect(final Player owner, final String name) {
             final SpellAbility sa = hand(name, owner).getFirstSpellAbility();
             sa.setActivatingPlayer(owner);
-            ComputerUtil.playNoStack(owner, sa, game, true);
+            if (!ComputerUtil.playNoStack(owner, sa, game, true)) {
+                throw new IllegalStateException("setup: the effect of " + name + " could not be played (cost not payable?)");
+            }
+            if (name.equals("Teferi's Protection") && !owner.hasKeyword("Protection from everything")) {
+                throw new IllegalStateException("setup: " + name + " resolved but the player has no protection, keywords=" + owner.getKeywords());
+            }
         }
     }
 
