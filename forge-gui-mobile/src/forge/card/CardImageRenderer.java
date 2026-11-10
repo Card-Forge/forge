@@ -1,12 +1,11 @@
 package forge.card;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
-import static forge.card.CardRenderer.CROP_MULTIPLIER;
-import static forge.card.CardRenderer.isModernFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.ImageKeys;
@@ -200,13 +199,8 @@ public class CardImageRenderer {
         }
         //space for artist
         textBoxHeight -= 2 * getCapHeight(PT_FONT);
-        PaperCard paperCard = null;
-        try {
-            paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
-        } catch (Exception e) {}
-        String artist = "WOTC";
-        if (paperCard != null && !paperCard.getArtist().isEmpty())
-            artist = paperCard.getArtist();
+        // the artist is only needed (and only looked up in the card database) when it is actually shown
+        String artist = showArtist ? getArtist(state.getImageKey()) : "WOTC";
         float minTextBoxHeight = 2 * headerHeight;
         if (textBoxHeight < minTextBoxHeight) {
             artHeight -= (minTextBoxHeight - textBoxHeight); //subtract from art height if text box not big enough otherwise
@@ -292,6 +286,33 @@ public class CardImageRenderer {
         if (showArtist)
             g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (getCapHeight(TYPE_FONT) / 2), y + (getCapHeight(TYPE_FONT) / 2), w, h, false, Align.left, false);
     }
+    // drawCardImage() ran a carddb search for every card on every frame just to find the artist's name, so cache it
+    private static final ConcurrentHashMap<String, String> artistByImageKey = new ConcurrentHashMap<>();
+
+    private static String getArtist(String imageKey) {
+        if (imageKey == null) {
+            return "WOTC";
+        }
+        final String cached = artistByImageKey.get(imageKey);
+        if (cached != null) {
+            return cached;
+        }
+        String artist = "WOTC";
+        try {
+            final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard != null && !paperCard.getArtist().isEmpty()) {
+                artist = paperCard.getArtist();
+            }
+        } catch (Exception e) {
+            return artist; // not remembered, so a lookup that failed once is tried again
+        }
+        if (artistByImageKey.size() > 500) {
+            artistByImageKey.clear(); // stays bounded
+        }
+        artistByImageKey.put(imageKey, artist);
+        return artist;
+    }
+
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
         if (colors == null)
             return;
@@ -894,23 +915,16 @@ public class CardImageRenderer {
         if (image == null || image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || card.useCardArt())) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
-            float radius = (h - w) / 8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f : 1.0f;
             float new_w = w * wh_Adj;
             float new_h = h * wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2 : x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2 : y;
-            float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
-            float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
             boolean displayFlipped = card.isFlipped();
             if (card.isFlipCard() && altState) {
                 displayFlipped = !displayFlipped;
             }
 
-            if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
-                croppedArea = 0.975f;
-                minusxy = 0.135f * radius;
-            }
             if (canshow && displayFlipped) {
                 if (Forge.enableUIMask.equals("Full")) {
                     g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 1f, CardRendererUtils.getFoilIndex(card));
@@ -919,40 +933,15 @@ public class CardImageRenderer {
                 } else {
                     g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.getFoilIndex(card));
                 }
-            } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState)) {
-                if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 1f, CardRendererUtils.getFoilIndex(card));
-                } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
-                } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
-            } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState)) {
-                boolean isAftermath = CardRendererUtils.hasAftermath(card);
-                if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
-                } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
-                } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
             } else {
                 if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
                     if (card.isForeTold() || altState) {
-                        if (CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState) && isCurrentCard) {
-                            boolean isAftermath = CardRendererUtils.hasAftermath(card);
-                            if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
-                            } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
-                            } else
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
+                        if (Forge.enableUIMask.equals("Full")) {
+                            g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
+                        } else if (Forge.enableUIMask.equals("Crop")) {
+                            g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
                         } else {
-                            if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
-                            } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
-                            } else {
-                                g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
-                            }
+                            g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
                         }
                     } else {
                         //show sleeves instead

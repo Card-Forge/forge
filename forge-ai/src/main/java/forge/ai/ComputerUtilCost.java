@@ -178,6 +178,10 @@ public class ComputerUtilCost {
                     if (pref == null) {
                         return false;
                     }
+                    if (pref.hasKeyword(Keyword.MADNESS) && ai.getController() instanceof PlayerControllerAi
+                            && !((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.madnessDiscardAllowed(ai, sa)) {
+                        return false; // a madness card is only thrown away inside the madness window
+                    }
                     typeList.remove(pref);
                     hand.remove(pref);
                 }
@@ -364,7 +368,7 @@ public class ComputerUtilCost {
                     if (source.isCreature()) {
                         // e.g. Sakura-Tribe Elder
                         final Combat combat = ai.getGame().getCombat();
-                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai) && ComputerUtilCard.evaluateCreature(source) <= 150;
+                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().isPlayerNextTurn(ai) && ComputerUtilCard.evaluateCreature(source) <= 150;
                         final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false)
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);

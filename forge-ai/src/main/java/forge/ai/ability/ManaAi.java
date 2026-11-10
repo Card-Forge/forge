@@ -75,7 +75,7 @@ public class ManaAi extends SpellAbilityAi {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         }
         if ("AtOppEOT".equals(logic)) {
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+            return ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai)
                     && (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife());
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
@@ -260,7 +260,7 @@ public class ManaAi extends SpellAbilityAi {
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         // TODO if threatened use right away
-        return ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
+        return ph.is(PhaseType.END_OF_TURN) && (ph.isPlayerNextTurn(ai) || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
                 && (activateForTrigger || canRampPool(ai, sa.getHostCard()));   
     }
 

@@ -1,0 +1,10 @@
+Name:Zefram Cochrane, Warp Pioneer
+ManaCost:2 U
+Types:Legendary Creature Human Pilot
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Artifact.nonLand+YouCtrl+TopLibrary | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Library | Description$ Once during each of your turns, you may cast an artifact spell from the top of your library.
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Spacecraft.YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Spacecraft you control enter with two additional charge counters on them.
+DeckHints:Type$Spacecraft
+Oracle:You may look at the top card of your library any time.\nOnce during each of your turns, you may cast an artifact spell from the top of your library.\nSpacecraft you control enter with two additional charge counters on them.

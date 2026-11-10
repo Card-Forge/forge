@@ -8,9 +8,11 @@ import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.gamemodes.net.ChatMessage;
@@ -579,6 +581,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         return null;
     }
 
+    /** The client holding a removed slot loses it. The slots above move down, and their clients move with them. */
+    public void slotRemoved(final int index) {
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == index) {
+                client.setIndex(RemoteClient.UNASSIGNED_SLOT);
+            } else if (client.getIndex() > index) {
+                client.setIndex(client.getIndex() - 1);
+            }
+        }
+    }
+
     public void clearPlayerGuis() {
         for (final RemoteClient client : clients.values()) {
             client.setGui(null);
@@ -946,6 +959,13 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
         if (pch != null) {
+            // openView gives the client new controllers with empty yield caches, so resend the active yields
+            final PlayerView local = pch.getLocalPlayerView();
+            if (local != null) {
+                for (final YieldUpdate u : pch.getYieldController().activeYieldUpdates(local)) {
+                    netGui.applyYieldUpdate(u);
+                }
+            }
             pch.getInputQueue().updateObservers();
             netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
         }
@@ -985,11 +1005,14 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
         final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
         p.dangerouslySetController(aiCtrl);
+        // The match's later games seat players from here
+        p.getRegisteredPlayer().setPlayer(aiLobbyPlayer);
         netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
         // Clear InputQueue to unblock the game thread (waiting on cdlDone)
         pch.getInputQueue().clearInputs();
         netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
+        hostedMatch.tallyNextGameDecisions();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
@@ -1094,7 +1117,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                     clients.put(ctx.channel(), disconnected);
                     netLog.info("[Reconnect] Channel swapped for {} (slot {})", username, disconnected.getIndex());
 
-                    // Resume and resync
                     resumeAndResync(disconnected);
 
                     // Draft-side resync: re-send the current pack and clear grace state.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/FrankHolmquist_-_Mono_Green_Landfall_(Standard,_#901756).dck
+Deck Type=constructed
+
+[Main]
+3 Ba Sing Se
+14 Forest
+4 Icetill Explorer
+4 Earthbender Ascension
+1 Demolition Field
+4 Mightform Harmonizer
+2 Elven Passage
+4 Sazh's Chocobo
+4 Mossborn Hydra
+4 Llanowar Elves
+4 Fabled Passage
+1 Pit of Offerings
+2 Hard-Hitting Question
+1 Escape Tunnel
+4 Carnivorous Cultivator
+2 Keen-Eyed Curator
+1 Cryptic Caves
+1 Snakeskin Veil
+[Sideboard]
+2 Hard-Hitting Question
+1 Snakeskin Veil
+2 Surrak, Elusive Hunter
+2 Torpor Orb
+1 Eumidian Terrabotanist
+2 Sapling Nursery
+2 Sandman, Shifting Scoundrel
+2 Pick Your Poison
+1 Adventurer's Inn

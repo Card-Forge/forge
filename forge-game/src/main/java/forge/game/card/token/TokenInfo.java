@@ -270,19 +270,23 @@ public class TokenInfo {
         if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
-        String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
-        edition = tokenSetFor(edition, script);
+        String edition;
         Map<String, String> pins = getPinsFor(game);
         String pinned = pins.get(script);
-        if (pinned != null) edition = pinned;
-        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
-        if (token != null && pinned == null) {
-            pins.put(script, token.getEdition());
+        if (pinned != null) {
+            edition = pinned;
+        } else {
+            edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
+            edition = tokenSetFor(edition, script);
         }
-
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
         if (token == null) {
             return null;
         }
+        if (pinned == null) {
+            pins.put(script, token.getEdition());
+        }
+
         final Card result = CardFactory.getCard(token, owner, game);
 
         if (sa.hasParam("TokenPower")) {

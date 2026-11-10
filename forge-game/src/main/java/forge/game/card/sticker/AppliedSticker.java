@@ -3,6 +3,7 @@ package forge.game.card.sticker;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 
@@ -104,7 +105,7 @@ public class AppliedSticker implements PerpetualInterface {
         if (sticker.getKeywords() == null) {
             return List.of();
         }
-        return Arrays.stream(sticker.getKeywords().split(",")).map(String::trim).toList();
+        return Arrays.stream(sticker.getKeywords().split(",")).map(String::trim).collect(Collectors.toList());
     }
 
     public CardTraitChanges getGrantedTraits(Card c) {

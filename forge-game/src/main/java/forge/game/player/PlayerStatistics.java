@@ -31,6 +31,7 @@ public class PlayerStatistics {
     private int timesMulliganed = 0;
 
     private int turnsPlayed = 0;
+    private int extraTurnsPlayed = 0;
 
     private PlayerOutcome outcome;
 
@@ -71,6 +72,14 @@ public class PlayerStatistics {
 
     public int getTurnsPlayed() {
         return turnsPlayed;
+    }
+
+    public void nextExtraTurn() {
+        this.extraTurnsPlayed++;
+    }
+
+    public int getExtraTurnsPlayed() {
+        return extraTurnsPlayed;
     }
 
     public void nextTurn() {

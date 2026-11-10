@@ -3,6 +3,7 @@ package forge.util;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardSplitType;
 import forge.gui.FThreads;
 import forge.gui.download.CdnUuidCache;
 import forge.item.IPaperCard;
@@ -78,15 +79,19 @@ public abstract class ImageFetcher {
         String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
         String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, card.getCollectorNumber(), edition.getCardsLangCode());
 
-        // Prefer CDN (no rate limit) if this set was already synced; read-only, see getCdnUrlIfCached().
-        if (!StringUtils.isBlank(setCode)) {
+        // Specialize variants are separate Scryfall cards (16w, 16u, ...). The CDN cache is
+        // keyed by the base collector number, so it would return the base card's image.
+        boolean specVariant = card.getRules().getSplitType() == CardSplitType.Specialize
+                && face != null && !face.isEmpty() && !"back".equals(face);
+
+        if (!specVariant && !StringUtils.isBlank(setCode)) {
             String size = useArtCrop ? "art_crop" : "normal";
-            String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrlIfCached(
-                    setCode, card.getCollectorNumber(), langCode, face, size);
+            String cdnUrl = CdnUuidCache.getCdnUrlIfCached(setCode, card.getCollectorNumber(), langCode, face, size);
             if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
 
-        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
+        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD
+                + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
         if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
     }
 
@@ -117,12 +122,15 @@ public abstract class ImageFetcher {
             // Look up the download URL from booster-images.txt
             final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
 
+            // Only build the "name + any extension" matcher when the key has no extension, and only once.
+            final boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
+            final Pattern withExtension = filenameHasNoExtension
+                    ? Pattern.compile(".*" + Pattern.quote(filename) + "\\.[^.]+$") : null;
+
             for (String line : boosterFileContent) {
                 boolean exactMatch = line.endsWith(filename);
-                boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
-                boolean matchesWithExtension = line.matches(".*" + Pattern.quote(filename) + "\\.[^.]+$");
 
-                if (exactMatch || (filenameHasNoExtension && matchesWithExtension)) {
+                if (exactMatch || (withExtension != null && withExtension.matcher(line).matches())) {
                     if (line.startsWith("http")) {
                         downloadUrls.add(line);
                     } else {

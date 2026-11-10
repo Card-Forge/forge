@@ -1,0 +1,7 @@
+Name:Borg Incursion
+ManaCost:2 W
+Types:Instant
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_borg | TokenOwner$ You | SubAbility$ DBProtectionAll | SpellDescription$ Create two 1/1 colorless Borg artifact creature tokens, then artifact creatures you control gain protection from the color of your choice until end of turn. (They can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)
+SVar:DBProtectionAll:DB$ ProtectionAll | ValidCards$ Creature.Artifact+YouCtrl | Gains$ Choice | Choices$ AnyColor
+DeckHas:Ability$Token
+Oracle:Create two 1/1 colorless Borg artifact creature tokens, then artifact creatures you control gain protection from the color of your choice until end of turn. (They can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)

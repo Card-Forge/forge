@@ -193,24 +193,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
-        Card cp = c;
-
-        // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.isBestow()) {
-            // already bestowed or in battlefield, no need to check for spell
-            if (c.isInPlay()) {
-                return false;
-            }
-
-            // if card is lki and bestowed, then do nothing there, it got already animated
-            if (!(c.isLKI() && c.isBestowed())) {
-                if (!c.isLKI()) {
-                    cp = CardCopyService.getLKICopy(c);
-                }
-
-                cp.animateBestow(false);
-            }
-        }
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -237,13 +219,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
                     if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
-                            && !c.mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
+                            && !sa.getHostCard().mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
                         return false;
                     }
 
                     Map<String,String> params = sa.getMayPlay().getMapParams();
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
+                        if (!c.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
@@ -357,7 +339,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Explicit Aftermath check there
-        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb() || sa.isVengeance()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 

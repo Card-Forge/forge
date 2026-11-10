@@ -1,0 +1,32 @@
+[metadata]
+Name=Dwarven Demolition Team
+[Main]
+9 Mountain|3ED
+2 Battlefield Forge|APC
+1 Dwarven Hold|FEM
+1 Dwarven Ruins|FEM
+2 Gemstone Mine|WTH
+4 Plateau|3ED
+2 Scabland|TMP
+3 Blasted Landscape|USG
+4 Dwarven Demolition Team|2ED
+2 Dwarven Blastminer|ONS
+2 Bomb Squad|ODY
+2 Mine Layer|ODY
+4 Basalt Golem|MIR
+4 Aurification|ONS
+4 Aeolipile|FEM
+1 Demolish|ODY
+1 Tunnel|3ED
+2 Aftershock|TMP
+2 Howling Mine|3ED
+2 Erratic Explosion|ONS
+1 Chaos Charm|MIR
+1 Detonate|ATQ
+1 Word of Blasting|MMQ
+1 Artifact Blast|ATQ
+2 Fireblast|VIS
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Aeolipile|FEM
+1 Dwarven Demolition Team|2ED

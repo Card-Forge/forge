@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Boin_-_Boros_Dragons_(Standard,_#894215).dck
+Deck Type=constructed
+
+[Main]
+4 Maelstrom of the Spirit Dragon
+4 Burst Lightning
+2 Twinmaw Stormbrood
+4 Multiversal Passage
+2 Get Lost
+4 Sarkhan, Dragon Ascendant
+4 Inspiring Vantage
+2 Cavern of Souls
+1 Mountain
+4 Sunbillow Verge
+4 Momo, Friendly Flier
+4 Nova Hellkite
+4 Sacred Foundry
+4 Magmatic Hellkite
+2 Magda, the Hoardmaster
+4 Smaug the Magnificent
+4 Clarion Conqueror
+1 Plains
+2 Voice of Victory
+[Sideboard]
+1 Get Lost
+2 Rest in Peace
+2 The Legend of Roku
+2 Pyroclasm
+4 Price of Freedom
+4 Seam Rip

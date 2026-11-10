@@ -26,7 +26,7 @@ public class StaticAbilityPanharmonicon {
      * @return how many additional times the trigger triggers for the event, according to the current board and limited by its activation limits
      */
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
-        return limitByActivations(t, countPanharmonicon(game, t, runParams));
+        return t.limitByActivations(countPanharmonicon(game, t, runParams));
     }
 
     /**
@@ -38,15 +38,15 @@ public class StaticAbilityPanharmonicon {
      * @return how many additional times the trigger triggers for the event
      */
     public static int countPanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
-        // already at its limit (e.g. "triggers only once each turn"), so there's no need to look for any effects
-        if (limitByActivations(t, 1) == 0) {
-            return 0;
-        }
-
         int n = 0;
 
+        // already at its limit (e.g. "triggers only once each turn"), so there's no need to look for any effects
+        if (t.limitByActivations(2) < 2) {
+            return n;
+        }
+
+        // exclude "helper" trigger
         if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
-            // exclude "helper" trigger
             return n;
         }
 
@@ -80,19 +80,6 @@ public class StaticAbilityPanharmonicon {
         }
 
         return n;
-    }
-
-    /**
-     * It can't trigger more times than the limit allows
-     */
-    public static int limitByActivations(final Trigger t, int additional) {
-        if (t.hasParam("GameActivationLimit")) {
-            additional = Math.min(additional, Integer.parseInt(t.getParam("GameActivationLimit")) - t.getActivationsThisGame() - 1);
-        }
-        if (t.hasParam("ActivationLimit")) {
-            additional = Math.min(additional, Integer.parseInt(t.getParam("ActivationLimit")) - t.getActivationsThisTurn() - 1);
-        }
-        return Math.max(additional, 0);
     }
 
     public static boolean applyPanharmoniconAbility(final StaticAbility stAb, final Trigger trigger, final Map<AbilityKey, Object> runParams) {

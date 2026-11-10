@@ -172,16 +172,26 @@ public class TriggerHandler {
     }
 
     public void collectTriggerForWaiting() {
+        collectTriggerForWaiting(false);
+    }
+    public void collectTriggerForWaiting(final boolean exceptEntering) {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;
 
+            // CR 603.6a what sees a permanent enter is decided once everything entering with it has
+            if (exceptEntering && wt.getMode() == TriggerType.ChangesZone
+                    && ZoneType.Battlefield.name().equals(wt.getParams().get(AbilityKey.Destination))) {
+                continue;
+            }
+
             // TODO we don't seem to handle Static ones from this,
             // so they shouldn't be checked for performance in the first place
-            wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
+            wt.setTriggers(getActiveTrigger(wt));
 
-            // how often they trigger has to be determined now as well, not only when they are put on the stack
+            // what they see and how often they trigger has to be determined now as well, not only when they are put on the stack
             for (final Trigger t : wt.getTriggers()) {
+                wt.getTriggeringObjects(t);
                 if (!t.isStatic()) {
                     wt.setAdditionalTriggers(t, StaticAbilityPanharmonicon.countPanharmonicon(game, t, wt.getParams()));
                 }
@@ -269,9 +279,10 @@ public class TriggerHandler {
     }
 
     private void runStateTrigger(final Map<AbilityKey, Object> runParams) {
+        final TriggerWaiting wt = new TriggerWaiting(TriggerType.Always, runParams);
         for (final Trigger t: Lists.newArrayList(activeTriggers)) {
-            if (canRunTrigger(t, TriggerType.Always, runParams)) {
-                runSingleTrigger(t, runParams);
+            if (canRunTrigger(t, wt)) {
+                runSingleTrigger(t, wt, null);
             }
         }
     }
@@ -298,7 +309,6 @@ public class TriggerHandler {
             return false;
         }
 
-        final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
         // Copy triggers here, so things can be modified just in case
         final List<Trigger> delayedTriggersWorkingCopy = new ArrayList<>(delayedTriggers);
@@ -306,10 +316,10 @@ public class TriggerHandler {
 
         // Static ones should happen first
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
-            if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
+            if (t.isStatic() && canRunTrigger(t, wt)) {
                 int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
                 for (int i = 0; i < trigAmt; ++i) {
-                    runSingleTrigger(t, runParams);
+                    runSingleTrigger(t, wt, null);
                 }
                 checkStatics = true;
             }
@@ -333,24 +343,21 @@ public class TriggerHandler {
 
         // the trigger will be ordered later in MagicStack
         for (final Trigger t : triggers) {
-            if (!t.isStatic() && (wasCollected || canRunTrigger(t, mode, runParams))) {
-                if (wasCollected && !t.checkActivationLimit()) {
-                    continue;
-                }
+            if (!t.isStatic() && (wasCollected || canRunTrigger(t, wt))) {
                 // collected ones already know how often they trigger, it can't change until they are put on the stack
                 int additional = wasCollected ? wt.getAdditionalTriggers(t) : StaticAbilityPanharmonicon.countPanharmonicon(game, t, runParams);
-                int trigAmt = 1 + StaticAbilityPanharmonicon.limitByActivations(t, additional);
+                int trigAmt = t.limitByActivations(1 + additional);
                 for (int i = 0; i < trigAmt; ++i) {
-                    runSingleTrigger(t, runParams, wt.getController(t));
+                    runSingleTrigger(t, wt, wt.getController(t));
                 }
                 checkStatics = true;
             }
         }
 
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
+            if (isTriggerActive(deltrig) && canRunTrigger(deltrig, wt)) {
                 delayedTriggers.remove(deltrig);
-                runSingleTrigger(deltrig, runParams);
+                runSingleTrigger(deltrig, wt, null);
             }
         }
 
@@ -390,30 +397,24 @@ public class TriggerHandler {
         return true;
     }
 
-    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<AbilityKey, Object> runParams) {
-        if (regtrig.getMode() != mode) {
+    private boolean canRunTrigger(final Trigger regtrig, final TriggerWaiting wt) {
+        if (regtrig.getMode() != wt.getMode()) {
             return false; // Not the right mode.
         }
+        final Map<AbilityKey, Object> runParams = wt.getParams();
 
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (!regtrig.checkActivationLimit()) {
+        if (regtrig.limitByActivations(1) == 0) {
             return false;
         }
 
-        if (!regtrig.requirementsCheck(game)) {
-            return false; // Conditions aren't right.
-        }
-
-        if (!regtrig.meetsRequirementsOnTriggeredObjects(game, runParams)) {
-            return false; // Conditions aren't right.
-        }
-
-        if (!regtrig.performTest(runParams)) {
-            return false; // Test failed.
+        if (!regtrig.checkWith(wt, () -> regtrig.requirementsCheck(game)
+                && regtrig.meetsRequirementsOnTriggeredObjects(game, runParams) && regtrig.performTest(runParams))) {
+            return false;
         }
 
         if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {
@@ -429,13 +430,11 @@ public class TriggerHandler {
         return true;
     }
 
-    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
-        runSingleTrigger(regtrig, runParams, null);
-    }
-    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
+    private void runSingleTrigger(final Trigger regtrig, final TriggerWaiting wt, Player controller) {
         if (controller == null) {
             controller = regtrig.getHostCard().getController();
         }
+        final Map<AbilityKey, Object> runParams = wt.getParams();
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
         if (runParams.get(AbilityKey.MergedCards) != null) {
             // Check if the trigger cares the origin is from battlefield
@@ -446,23 +445,23 @@ public class TriggerHandler {
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
-                runSingleTriggerInternal(regtrig, newParams, controller);
+                runSingleTriggerInternal(regtrig, newParams, regtrig.buildTriggeringObjects(newParams), controller);
             } else {
                 // Else, trigger for each merged components
                 for (final Card c : mergedCards) {
                     newParams.put(AbilityKey.Card, c);
-                    runSingleTriggerInternal(regtrig, newParams, controller);
+                    runSingleTriggerInternal(regtrig, newParams, regtrig.buildTriggeringObjects(newParams), controller);
                 }
             }
         } else {
-            runSingleTriggerInternal(regtrig, runParams, controller);
+            runSingleTriggerInternal(regtrig, runParams, wt.getTriggeringObjects(regtrig), controller);
         }
     }
 
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
+    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams, final Map<AbilityKey, Object> triggeringObjects, Player controller) {
         // All tests passed, execute ability.
 
         adjustUndoStack(regtrig, runParams);
@@ -498,7 +497,7 @@ public class TriggerHandler {
         }
 
         sa.setTrigger(regtrig);
-        regtrig.setTriggeringObjects(sa, runParams);
+        sa.setTriggeringObjects(triggeringObjects);
 
         if (regtrig.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);
@@ -590,9 +589,12 @@ public class TriggerHandler {
     }
 
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
+        return getActiveTrigger(new TriggerWaiting(mode, runParams));
+    }
+    private List<Trigger> getActiveTrigger(final TriggerWaiting wt) {
         List<Trigger> trigger = Lists.newArrayList();
         for (final Trigger t : activeTriggers) {
-            if (canRunTrigger(t, mode, runParams)) {
+            if (canRunTrigger(t, wt)) {
                 trigger.add(t);
             }
         }

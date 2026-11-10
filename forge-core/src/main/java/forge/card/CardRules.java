@@ -336,10 +336,15 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
-    public boolean canBePartnerCommanders(CardRules b) {
-        if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
-            return false;
+    public boolean canBePartnerCommanders(CardRules b, boolean impliedPartnership) {
+        if (impliedPartnership) {
+            // Imply partnership for Commander Draft. (Really only Commander Masters)
+            if (this.canBeCommander() && (this.hasKeyword("Partner") || this.getColorIdentity().countColors() <= 1)
+             && b.canBeCommander() && (b.hasKeyword("Partner") || b.getColorIdentity().countColors() <= 1)) {
+                return true;
+            }
         }
+
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
             return true; // normal partner commander
         }
@@ -360,6 +365,10 @@ public final class CardRules implements ICardCharacteristics {
             return true; // Doctor Who partner commander
         }
         return false;
+    }
+
+    public boolean canBePartnerCommanders(CardRules b) {
+        return canBePartnerCommanders(b, false);
     }
 
     public boolean canBePartnerCommander() {

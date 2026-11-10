@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Domain — At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands they control. Then CARDNAME deals 3 damage to that player.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredPlayer | LifeAmount$ DomainX | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 3
-SVar:DomainX:Count$DomainActivePlayer
+SVar:DomainX:TriggeredPlayer$DomainPlayer
 AI:RemoveDeck:Random
 Oracle:Domain — At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands they control. Then Collapsing Borders deals 3 damage to that player.

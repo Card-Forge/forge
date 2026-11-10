@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
@@ -22,7 +23,7 @@ public final class StickerSheet {
     private static final String KEYWORD = "StickerSheet:";
     // CR 123.5 - the same test GameAction.changeZone keeps stickers by
     private static final EnumSet<ZoneType> PUBLIC_ZONES = EnumSet.copyOf(
-            Arrays.stream(ZoneType.values()).filter(z -> !z.isHidden()).toList());
+            Arrays.stream(ZoneType.values()).filter(z -> !z.isHidden()).collect(Collectors.toList()));
 
     private StickerSheet() {
     }

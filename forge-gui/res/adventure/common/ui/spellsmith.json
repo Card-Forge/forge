@@ -320,7 +320,7 @@
       "type": "TextButton",
       "selectable": true,
       "name": "BMythic",
-      "text": "Mythic",  
+      "text": "tr(lblMythic)",  
       "x": 250,
       "y": 240,
       "width": 70,

@@ -360,6 +360,7 @@ public class GameAction {
                     }
                 } else if (toBattlefield && !c.isInPlay()) {
                     // was replaced with another Zone Change
+                    cleanStaticEffect(staticEff, copied);
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
@@ -1094,6 +1095,9 @@ public class GameAction {
         checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
+        checkStaticAbilities(runEvents, affectedCards, preList, null);
+    }
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList, final Set<Card> enteringWith) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -1156,7 +1160,7 @@ public class GameAction {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
-                    affectedHere = stAb.applyContinuousAbilityBefore(layer, preList);
+                    affectedHere = stAb.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(stAb.getHostCard()) ? CardCollection.EMPTY : preList);
                     if (affectedHere != null) {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
@@ -1173,7 +1177,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
-                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, preList);
+                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(st2.getHostCard()) ? CardCollection.EMPTY : preList);
                                 if (newAffected != null) {
                                     affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(newAffected);
                                 }
@@ -1589,7 +1593,6 @@ public class GameAction {
                 orderedNoRegCreats = true;
             }
             for (Card c : noRegCreats) {
-                c.updateWasDestroyed(true);
                 sacrificeDestroy(c, null, mapParams);
             }
 
@@ -1947,7 +1950,8 @@ public class GameAction {
             // then the rest have lost!
             reason = GameEndReason.WinsGameSpellEffect;
             for (Player pl : allPlayers) {
-                if (pl.equals(p)) {
+                // CR 810.8a: the winner's teammates win with them
+                if (p.getSharedTeam().contains(pl)) {
                     continue;
                 }
 
@@ -1970,6 +1974,24 @@ public class GameAction {
                         losers = Lists.newArrayListWithCapacity(3);
                     }
                     losers.add(p);
+                }
+            }
+        }
+
+        // CR 810.8a: a player who loses takes their team out with them
+        if (losers != null) {
+            for (Player p : Lists.newArrayList(losers)) {
+                for (Player mate : p.getSharedTeam()) {
+                    if (losers.contains(mate) || mate.hasLost()) {
+                        continue;
+                    }
+                    // CR 810.8b: a concession takes the team out at once
+                    if (p.conceded()) {
+                        mate.concede();
+                        losers.add(mate);
+                    } else if (mate.loseConditionMet(p.getOutcome().lossState, null)) {
+                        losers.add(mate);
+                    }
                 }
             }
         }
@@ -2132,8 +2154,6 @@ public class GameAction {
             c.getController().addSacrificedThisTurn(lkiCopy, source);
             lki.put(c.getController(), lkiCopy);
 
-            c.updateWasDestroyed(true);
-
             Card changed = sacrificeDestroy(c, source, params);
             if (changed != null) {
                 result.add(changed);
@@ -2172,8 +2192,6 @@ public class GameAction {
             activator = sa.getActivatingPlayer();
         }
 
-        //for animation
-        c.updateWasDestroyed(true);
         // Play the Destroy sound
         game.fireEvent(new GameEventCardDestroyed());
 
@@ -2372,6 +2390,11 @@ public class GameAction {
             }
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
+            // after the mulligans, which shuffle the hand away and redraw up to the maximum hand size
+            for (final Player p1 : game.getPlayers()) {
+                p1.runStartGameScripts();
+            }
+
             game.setAge(GameStage.Play);
 
             //<THIS CODE WILL WORK WITH PHASE = NULL>
@@ -2452,7 +2475,6 @@ public class GameAction {
         }
 
         if (isFirstGame) {
-            final Player winner = goesFirst;
             game.fireEvent(new GameEventFlipCoin(goesFirst.getView(), true, true));
         }
 
@@ -2591,6 +2613,7 @@ public class GameAction {
 
             if (p.hasLost()) { // the person who should take initiative is gone, it goes to next player
                 takeInitiative(game.getNextPlayerAfter(p), set);
+                return;
             }
 
             game.setHasInitiative(p);
@@ -2620,10 +2643,9 @@ public class GameAction {
             switch (game.getReplacementHandler().run(ReplacementType.Scry, repParams)) {
                 case NotReplaced:
                     break;
-                case Updated: {
+                case Updated:
                     playerScry = (int) repParams.get(AbilityKey.Num);
                     break;
-                }
                 default:
                     continue;
             }

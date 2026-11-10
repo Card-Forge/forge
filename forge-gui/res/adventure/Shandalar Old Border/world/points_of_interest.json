@@ -4422,5 +4422,22 @@
 			"Hostile",
 			"Sidequest"
 		]
+	},
+	{
+		"name": "DwarvenHold",
+		"displayName": "Dwarven Hold",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
+		"sprite": "DwarvenHold",
+		"map": "../Shandalar Old Border/maps/map/fallen_empires/dwarven_hold_exterior.tmx",
+		"radiusFactor": 0.6,
+		"questTags": [
+			"DwarvenHold",
+			"FallenEmpires",
+			"BiomeRed",
+			"Hostile",
+			"Sidequest"
+		]
 	}
 ]

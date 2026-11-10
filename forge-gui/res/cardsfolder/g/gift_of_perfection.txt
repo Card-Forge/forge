@@ -1,0 +1,9 @@
+Name:Gift of Perfection
+ManaCost:4 U
+Types:Sorcery
+A:SP$ DigUntil | Defined$ Player.Opponent | Valid$ Creature | ValidDescription$ creature | RevealedDestination$ Library | RememberRevealed$ True | SubAbility$ DBChooseCard | SpellDescription$ Each opponent reveals cards from the top of their library until they reveal a creature card. Assimilate one of the creature cards revealed this way. Then each opponent puts the other cards they revealed this way on the bottom of their library in a random order. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.IsRemembered | ChoiceZone$ Library | Mandatory$ True | ForgetChosen$ True | SubAbility$ DBAssimilate
+SVar:DBAssimilate:DB$ Assimilate | Defined$ ChosenCard | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:Each opponent reveals cards from the top of their library until they reveal a creature card. Assimilate one of the creature cards revealed this way. Then each opponent puts the other cards they revealed this way on the bottom of their library in a random order. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)

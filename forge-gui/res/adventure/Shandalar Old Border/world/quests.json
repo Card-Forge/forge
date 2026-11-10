@@ -226,6 +226,31 @@
 },
 {
 	"id": 2,
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
+	],
 	"isTemplate": true,
 	"name": "Wanderlust",
 	"description": "Make a delivery to a distant location.",
@@ -2862,6 +2887,31 @@
 },
 {
 	"id": 11,
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
+	],
 	"isTemplate": true,
 	"name": "Eviction Notice",
 	"description": "Clear all enemies from a dungeon.",
@@ -6496,9 +6546,9 @@
 	"id": 26,
 	"isTemplate": true,
 	"name": "Spores of Death",
-	"description": "Defeat Slimefoot and his fungi in his bog and report back.",
+	"description": "Defeat Thallid Lord and his fungi in his grove and report back.",
 	"offerDialog": {
-		"text": "Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the rogue fungus Slimefoot.",
+		"text": "Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the ominous fungus Thallid Lord.",
 		"options": [
 			{
 				"action": [
@@ -6527,12 +6577,12 @@
 				]
 			},
 			{
-				"name": "Tell me more about Slimefoot and what I can do to stop it.",
-				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence. A monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
+				"name": "Tell me more about Thallid Lord and what I can do to stop it.",
+				"text": "Thank you, noble adventurer. Thallid Lord is a creature of pure malevolence. A monstrous being that has taken root in the grove located in the darkest depths of the forest. Its toxic spores have brought devastation to our lands. To defeat it, you must journey through the deepest forest, filled with treacherous terrain and deadly creatures lurking within.",
 				"options": [
 					{
-						"name": "I see. So you want me to travel to Slimefoot's swamp and defeat him?",
-						"text": "Slimefoot is a formidable foe, adept at both offense and defense. Its body secretes a corrosive slime, and its tentacles strike with lightning speed. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
+						"name": "I see. So you want me to travel to Thallid Lord's grove and defeat him?",
+						"text": "Thallid Lord is a formidable foe, adept at both offense and defense. Its fungal minions are countless and its strikes are deadly. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
 						"options": [
 							{
 								"action": [
@@ -6640,7 +6690,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the swamp. (-2 Local Reputation)",
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of clearing out the current occupants of the Thallid Grove. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -6660,7 +6710,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to Slimefoot's Lair and defeat him and his fungal minions'. The target location is in the Swamp biome.",
+			"description": "Travel to Thallid Grove and defeat Thallid Lord and his fungal minions'. The target location is in the Forest biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
@@ -6674,7 +6724,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing Slimefoot's Lair.",
+			"description": "Return to town and report your success in clearing Thallid Grove.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -6686,10 +6736,10 @@
 		}
 	],
 	"questSourceTags": [
-		"swamp_capital",
-		"swamp_town_generic",
-		"swamp_town_identity",
-		"swamp_town_tribal"
+		"forest_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal"
 	]
 },
 {
@@ -11743,7 +11793,7 @@
 							"options": [
 								{
 									"name": "(Continue)",
-									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
+									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"\n\nWarning: Hard quest.",
 									"options": [
 										{
 											"condition": [
@@ -12526,20 +12576,6 @@
 				"POIToken": "",
 				"mapFlag": "FE_Svyelunite_OpponentsDefeated",
 				"mapFlagValue": 18
-			},
-			{
-				"id": 2,
-				"name": "Return to Town",
-				"description": "Return to the town where you accepted the request.",
-				"here": true,
-				"objective": "Travel",
-				"prerequisiteIDs": [
-					1
-				],
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": ""
 			}
 		],
 		"questSourceTags": [
@@ -12568,5 +12604,929 @@
 			"forest_capital",
 			"SvyeluniteTempleEntry"
 		]
-	}
+	},
+	{
+  "id": 56,
+  "isTemplate": true,
+  "name": "Hold the Hold",
+  "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
+  "offerDialog": {
+    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"",
+    "options": [
+      {
+        "name": "(Continue)",
+        "condition": [
+          {
+            "actorID": 9150,
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ],
+        "text": "Warning: Hard quest.",
+        "options": [
+          {
+            "name": "\"I'll go check it out. No promises, though!\"",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Accepted",
+                "not": true
+              }
+            ],
+            "action": [
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Accepted",
+                  "val": 1
+                }
+              },
+              {
+                "issueQuest": "56"
+              }
+            ]
+          },
+          {
+            "name": "\"I'll go check it out. No promises, though!\"",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Accepted"
+              }
+            ]
+          },
+          {
+            "name": "\"I don't care. Go find someone else to knock down that gate.\" (Decline quest)",
+            "condition": [
+              {
+                "actorID": 9150,
+                "not": true
+              },
+              {
+                "checkQuestFlag": "FE_DwarvenHold_Completed",
+                "not": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "prologue": {},
+  "epilogue": {
+    "text": "The siege of the Dwarven Hold is over.",
+    "options": [
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "op": "=",
+              "val": 1
+            }
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ],
+        "name": "Receive the thanks of the dwarves.",
+        "text": "The last raiders flee down the mountain pass. The dwarves gather in the great hall, raise their tankards in your honor, and open the hold's treasury to you.",
+        "options": [
+          {
+            "name": "(Accept the reward)",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Hold|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Lieutenant|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Armorer|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
+                  }
+                ],
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "op": "=",
+              "val": 2
+            }
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ],
+        "name": "Claim your share of the plunder.",
+        "text": "With the hold's defenders broken, the Orcish Captain flips a coin to decide your share of the plunder. It lands in your favor.",
+        "options": [
+          {
+            "name": "(Accept the reward)",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Orcish Captain|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Goblin Grenade|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Goblin War Drums|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
+                  }
+                ],
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "failureDialog": {
+    "text": "The siege of the Dwarven Hold is decided without you.",
+    "options": [
+      {
+        "name": "(Quest Failed)"
+      }
+    ]
+  },
+  "declinedDialog": {
+    "text": "The dwarf shrugs and leads his pony away.",
+    "options": [
+      {
+        "name": "(Leave)"
+      }
+    ]
+  },
+  "reward": {},
+  "rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
+  "stages": [
+    {
+      "id": 1,
+      "name": "Siege of the Dwarven Hold",
+      "description": "Travel to the Dwarven Hold in the red biome and defeat every member of the opposing faction, outside and inside the hold.",
+      "POITags": [
+        "DwarvenHold"
+      ],
+      "objective": "QuestFlag",
+      "prologue": {},
+      "epilogue": {},
+      "failureDialog": {},
+      "POIToken": "",
+      "mapFlag": "FE_DwarvenHold_Victory",
+      "mapFlagValue": 1
+    }
+  ],
+  "questSourceTags": [
+    "waste_town_generic",
+    "waste_town_identity",
+    "waste_town_tribal",
+    "plains_town_generic",
+    "plains_town_identity",
+    "plains_town_tribal",
+    "plains_capital",
+    "island_town_generic",
+    "island_town_identity",
+    "island_town_tribal",
+    "island_capital",
+    "swamp_town_generic",
+    "swamp_town_identity",
+    "swamp_town_tribal",
+    "swamp_capital",
+    "mountain_town_generic",
+    "mountain_town_identity",
+    "mountain_town_tribal",
+    "mountain_capital",
+    "forest_town_generic",
+    "forest_town_identity",
+    "forest_town_tribal",
+    "forest_capital"
+  ]
+},
+	{
+    "id": 57,
+    "isTemplate": true,
+    "name": "Hold the Hold",
+    "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
+    "offerDialog": {
+      "text": "A stout dwarf leading a heavily laden pony looks you up and down. \"Who are ye? Have ye come here tae aid us in oor hour o' need?\"\n\nWarning: Hard quest.",
+      "options": [
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted"
+            }
+          ],
+          "name": "\"Yep, that's right.\" (Aid the dwarves)",
+          "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+          "options": [
+            {
+              "name": "(Take the Dwarven rune stone)",
+              "action": [
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Faction",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Defeated",
+                    "val": 0
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Victory",
+                    "val": 0
+                  }
+                },
+                {
+                  "addItem": "Dwarven Rune Stone"
+                },
+                {
+                  "deleteMapObject": 41004
+                },
+                {
+                  "deleteMapObject": 41039
+                },
+                {
+                  "activateMapObject": 41002
+                },
+                {
+                  "activateMapObject": 41003
+                },
+                {
+                  "activateMapObject": 41005
+                },
+                {
+                  "activateMapObject": 41006
+                },
+                {
+                  "activateMapObject": 41007
+                },
+                {
+                  "activateMapObject": 41008
+                },
+                {
+                  "activateMapObject": 41009
+                },
+                {
+                  "activateMapObject": 41010
+                },
+                {
+                  "activateMapObject": 41011
+                },
+                {
+                  "activateMapObject": 41012
+                },
+                {
+                  "activateMapObject": 41013
+                },
+                {
+                  "activateMapObject": 41014
+                },
+                {
+                  "activateMapObject": 41015
+                },
+                {
+                  "activateMapObject": 41016
+                },
+                {
+                  "activateMapObject": 41017
+                },
+                {
+                  "activateMapObject": 41018
+                },
+                {
+                  "activateMapObject": 41019
+                },
+                {
+                  "deleteMapObject": 51002
+                },
+                {
+                  "deleteMapObject": 51003
+                },
+                {
+                  "deleteMapObject": 51005
+                },
+                {
+                  "deleteMapObject": 51006
+                },
+                {
+                  "deleteMapObject": 51007
+                },
+                {
+                  "deleteMapObject": 51008
+                },
+                {
+                  "deleteMapObject": 51009
+                },
+                {
+                  "deleteMapObject": 51010
+                },
+                {
+                  "deleteMapObject": 51011
+                },
+                {
+                  "deleteMapObject": 51012
+                },
+                {
+                  "deleteMapObject": 51013
+                },
+                {
+                  "deleteMapObject": 51014
+                },
+                {
+                  "deleteMapObject": 51015
+                },
+                {
+                  "deleteMapObject": 51016
+                },
+                {
+                  "deleteMapObject": 51017
+                },
+                {
+                  "deleteMapObject": 51018
+                },
+                {
+                  "deleteMapObject": 51019
+                },
+                {
+                  "deleteMapObject": 51004
+                },
+                {
+                  "deleteMapObject": 51100
+                },
+                {
+                  "deleteMapObject": 9150
+                },
+                {
+                  "deleteMapObject": 9151
+                },
+                {
+                  "setMapFlag": {
+                    "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                    "val": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted",
+              "not": true
+            }
+          ],
+          "name": "\"Yep, that's right.\" (Aid the dwarves)",
+          "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+          "options": [
+            {
+              "name": "(Take the Dwarven rune stone)",
+              "action": [
+                {
+                  "issueQuest": "56"
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Accepted",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Faction",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Defeated",
+                    "val": 0
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Victory",
+                    "val": 0
+                  }
+                },
+                {
+                  "addItem": "Dwarven Rune Stone"
+                },
+                {
+                  "deleteMapObject": 41004
+                },
+                {
+                  "deleteMapObject": 41039
+                },
+                {
+                  "activateMapObject": 41002
+                },
+                {
+                  "activateMapObject": 41003
+                },
+                {
+                  "activateMapObject": 41005
+                },
+                {
+                  "activateMapObject": 41006
+                },
+                {
+                  "activateMapObject": 41007
+                },
+                {
+                  "activateMapObject": 41008
+                },
+                {
+                  "activateMapObject": 41009
+                },
+                {
+                  "activateMapObject": 41010
+                },
+                {
+                  "activateMapObject": 41011
+                },
+                {
+                  "activateMapObject": 41012
+                },
+                {
+                  "activateMapObject": 41013
+                },
+                {
+                  "activateMapObject": 41014
+                },
+                {
+                  "activateMapObject": 41015
+                },
+                {
+                  "activateMapObject": 41016
+                },
+                {
+                  "activateMapObject": 41017
+                },
+                {
+                  "activateMapObject": 41018
+                },
+                {
+                  "activateMapObject": 41019
+                },
+                {
+                  "deleteMapObject": 51002
+                },
+                {
+                  "deleteMapObject": 51003
+                },
+                {
+                  "deleteMapObject": 51005
+                },
+                {
+                  "deleteMapObject": 51006
+                },
+                {
+                  "deleteMapObject": 51007
+                },
+                {
+                  "deleteMapObject": 51008
+                },
+                {
+                  "deleteMapObject": 51009
+                },
+                {
+                  "deleteMapObject": 51010
+                },
+                {
+                  "deleteMapObject": 51011
+                },
+                {
+                  "deleteMapObject": 51012
+                },
+                {
+                  "deleteMapObject": 51013
+                },
+                {
+                  "deleteMapObject": 51014
+                },
+                {
+                  "deleteMapObject": 51015
+                },
+                {
+                  "deleteMapObject": 51016
+                },
+                {
+                  "deleteMapObject": 51017
+                },
+                {
+                  "deleteMapObject": 51018
+                },
+                {
+                  "deleteMapObject": 51019
+                },
+                {
+                  "deleteMapObject": 51004
+                },
+                {
+                  "deleteMapObject": 51100
+                },
+                {
+                  "deleteMapObject": 9150
+                },
+                {
+                  "deleteMapObject": 9151
+                },
+                {
+                  "setMapFlag": {
+                    "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                    "val": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted"
+            }
+          ],
+          "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+          "action": [
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Faction",
+                "val": 2
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Defeated",
+                "val": 0
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Victory",
+                "val": 0
+              }
+            },
+            {
+              "deleteMapObject": 41002
+            },
+            {
+              "deleteMapObject": 41003
+            },
+            {
+              "deleteMapObject": 41005
+            },
+            {
+              "deleteMapObject": 41006
+            },
+            {
+              "deleteMapObject": 41007
+            },
+            {
+              "deleteMapObject": 41008
+            },
+            {
+              "deleteMapObject": 41009
+            },
+            {
+              "deleteMapObject": 41010
+            },
+            {
+              "deleteMapObject": 41011
+            },
+            {
+              "deleteMapObject": 41012
+            },
+            {
+              "deleteMapObject": 41013
+            },
+            {
+              "deleteMapObject": 41014
+            },
+            {
+              "deleteMapObject": 41015
+            },
+            {
+              "deleteMapObject": 41016
+            },
+            {
+              "deleteMapObject": 41017
+            },
+            {
+              "deleteMapObject": 41018
+            },
+            {
+              "deleteMapObject": 41019
+            },
+            {
+              "activateMapObject": 41004
+            },
+            {
+              "activateMapObject": 41039
+            },
+            {
+              "deleteMapObject": 51004
+            },
+            {
+              "deleteMapObject": 51039
+            },
+            {
+              "deleteMapObject": 9150
+            },
+            {
+              "deleteMapObject": 9151
+            },
+            {
+              "battleWithActorID": 41004
+            },
+            {
+              "setMapFlag": {
+                "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                "val": 1
+              }
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted",
+              "not": true
+            }
+          ],
+          "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+          "action": [
+            {
+              "issueQuest": "56"
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Accepted",
+                "val": 1
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Faction",
+                "val": 2
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Defeated",
+                "val": 0
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Victory",
+                "val": 0
+              }
+            },
+            {
+              "deleteMapObject": 41002
+            },
+            {
+              "deleteMapObject": 41003
+            },
+            {
+              "deleteMapObject": 41005
+            },
+            {
+              "deleteMapObject": 41006
+            },
+            {
+              "deleteMapObject": 41007
+            },
+            {
+              "deleteMapObject": 41008
+            },
+            {
+              "deleteMapObject": 41009
+            },
+            {
+              "deleteMapObject": 41010
+            },
+            {
+              "deleteMapObject": 41011
+            },
+            {
+              "deleteMapObject": 41012
+            },
+            {
+              "deleteMapObject": 41013
+            },
+            {
+              "deleteMapObject": 41014
+            },
+            {
+              "deleteMapObject": 41015
+            },
+            {
+              "deleteMapObject": 41016
+            },
+            {
+              "deleteMapObject": 41017
+            },
+            {
+              "deleteMapObject": 41018
+            },
+            {
+              "deleteMapObject": 41019
+            },
+            {
+              "activateMapObject": 41004
+            },
+            {
+              "activateMapObject": 41039
+            },
+            {
+              "deleteMapObject": 51004
+            },
+            {
+              "deleteMapObject": 51039
+            },
+            {
+              "deleteMapObject": 9150
+            },
+            {
+              "deleteMapObject": 9151
+            },
+            {
+              "setMapFlag": {
+                "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                "val": 1
+              }
+            },
+            {
+              "battleWithActorID": 41004
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            }
+          ],
+          "name": "\"Oops, took a wrong turn somewhere. Going back now.\" (Decline for now)",
+          "text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed"
+            }
+          ],
+          "name": "The siege of the Dwarven Hold has already been decided. (Leave)"
+        },
+        {
+          "condition": [
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction"
+            }
+          ],
+          "name": "(Continue)"
+        }
+      ]
+    },
+    "reward": {},
+    "rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
+    "questSourceTags": [
+      "DwarvenHoldEntry"
+    ]
+  }
 ]

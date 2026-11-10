@@ -2,7 +2,7 @@ Name:Plan for All Outcomes
 ManaCost:3 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this enchantment enters, the owner of up to one other target nonland permanent puts it on their choice of the top or bottom of their library.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.Other+nonLand | ValidTgtsDesc$ another nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.Other+nonLand | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ another nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigEmpower | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first noncreature spell each turn, empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 SVar:TrigEmpower:DB$ Empower | Type$ Jace | Num$ 1
 Oracle:When this enchantment enters, the owner of up to one other target nonland permanent puts it on their choice of the top or bottom of their library.\nWhenever you cast your first noncreature spell each turn, empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

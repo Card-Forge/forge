@@ -200,7 +200,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                        if (ai.getGame().getPhaseHandler().isPlayerTurn(tgt.getController())) {
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
@@ -683,7 +683,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
                         freePing = true;
                     }
                     if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
@@ -695,7 +695,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if ((freePing && !avoidTargetP(ai, sa))
-                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
                         && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
@@ -1069,6 +1069,9 @@ public class DamageDealAi extends DamageAiBase {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
+                    }
+                    if (ab.getActivatingPlayer() == null) {
+                        ab.setActivatingPlayer(ai); // a spell still in hand has none, and canPlay() checks need one
                     }
                     if (!ab.canPlay()) {
                         continue;

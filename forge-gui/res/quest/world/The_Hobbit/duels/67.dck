@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Hobbit/Carlos_sp_-_Hammer_Time_(Modern,_#898849).dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Kíli the Resourceful
+3 Kappa Cannoneer
+3 Puresteel Paladin
+1 Ornithopter
+4 Colossus Hammer
+4 Cori-Steel Cutter
+4 Leyline Axe
+4 Mox Opal
+1 Paradise Mantle
+1 Shadowspear
+1 Skateboard
+3 Metallic Rebuke
+1 Steelshaper's Gift
+4 Urza's Saga
+1 Sigarda's Aid
+4 Arid Mesa
+4 Flooded Strand
+2 Hallowed Fountain
+2 Plains
+2 Sacred Foundry
+1 Elegant Parlor
+1 Island
+1 Meticulous Archive
+[Sideboard]
+1 Sigarda's Aid
+3 Surge of Salvation
+2 Consign to Memory
+2 High Noon
+2 Mystical Dispute
+1 Damping Sphere
+1 March of Otherworldly Light
+1 Pithing Needle
+1 Rest in Peace
+1 Surgical Extraction
