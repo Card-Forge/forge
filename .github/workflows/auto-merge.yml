@@ -28,11 +28,11 @@ jobs:
       - name: Check the author and changed files
         env:
           GH_TOKEN: ${{ github.token }}
-          # The id is matched, because a login that is renamed can be taken by someone else.
+          # The id is matched, because an account's old username can be taken by someone else after a rename.
           # Each path must end with "/" so that it cannot match a sibling folder with a longer name.
           ALLOWLIST: |
             [
-              { "login": "VigilantSera", "id": 249134373, "paths": ["forge-gui/res/adventure/Realm of Legends/"] }
+              { "user": "VigilantSera", "id": 249134373, "paths": ["forge-gui/res/adventure/Realm of Legends/"] }
             ]
           PR: ${{ github.event.pull_request.number }}
           AUTHOR_ID: ${{ github.event.pull_request.user.id }}
