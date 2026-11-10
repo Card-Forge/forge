@@ -962,7 +962,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            getGui().showRevealedCards(collection);
             if (replayGui != null) {
                 replayGui.showRevealedCards(collection);
                 replayGui.hideRevealedCards();
@@ -975,11 +974,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (revealInPrompt) {
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
-                inp.showAndWait();
+                // set the prompt first: the zone leaves focus on the prompt only if OK is already enabled when it opens
+                inputQueue.setInput(inp);
+                getGui().showRevealedCards(collection);
+                inp.awaitLatchRelease();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
             } else {
+                getGui().showRevealedCards(collection);
                 getGui().reveal(fm, collection);
             }
             getGui().hideRevealedCards();
