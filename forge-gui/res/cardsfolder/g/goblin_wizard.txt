@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Creature Goblin Wizard
 PT:1/1
 A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Goblin | ChangeNum$ 1 | SpellDescription$ You may put a Goblin permanent card from your hand onto the battlefield.
-A:AB$ Protection | Cost$ R | ValidTgts$ Permanent.Goblin | TgtPrompt$ Select target Goblin | Gains$ white | SpellDescription$ Target Goblin gains protection from white until end of turn.
+A:AB$ Pump | Cost$ R | ValidTgts$ Permanent.Goblin | TgtPrompt$ Select target Goblin | KW$ Protection from white | SpellDescription$ Target Goblin gains protection from white until end of turn.
 DeckHints:Type$Goblin
 Oracle:{T}: You may put a Goblin permanent card from your hand onto the battlefield.\n{R}: Target Goblin gains protection from white until end of turn.
