@@ -1550,7 +1550,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void initialize() {
-            cardManager.setItemActivateHandler(e -> onCardActivated(this.cardManager.getSelectedItem()));
+            cardManager.setItemActivateHandler(e -> {
+                final PaperCard card = this.cardManager.getSelectedItem();
+                if (card != null) { //nothing selected, nothing to move
+                    onCardActivated(card);
+                }
+            });
             cardManager.setContextMenuBuilder(new ContextMenuBuilder<>() {
                 @Override
                 public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
@@ -2062,10 +2067,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public void hideTab() {
             //hidden for good (a finished draft's pack page): the Arena side-by-side layout stops showing it as well
-            if (parentScreen != null && parentScreen.catalogPage == this && parentScreen.catalogTabHiddenBySplit) {
-                parentScreen.catalogTabHiddenBySplit = false;
+            if (parentScreen != null && parentScreen.catalogPage == this) {
                 final FDeckEditor editor = parentScreen;
-                FThreads.invokeInEdtLater(() -> editor.revalidate(true)); //drafts finish on a background thread
+                FThreads.invokeInEdtNowOrLater(() -> { //drafts finish on a background thread
+                    if (editor.catalogTabHiddenBySplit) {
+                        editor.catalogTabHiddenBySplit = false;
+                        editor.revalidate(true);
+                    }
+                });
             }
             super.hideTab();
         }
