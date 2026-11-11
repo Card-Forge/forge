@@ -82,6 +82,15 @@ public class UntapAi extends SpellAbilityAi {
         return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
     }
 
+    /** For the simulation, which does not go through checkApiLogic: an untap of the card itself that is not worth its cost. */
+    public static boolean isPointlessSelfUntap(final Player ai, final SpellAbility sa) {
+        if (sa.getApi() != ApiType.Untap || sa.usesTargeting()) {
+            return false;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return !defined.isEmpty() && !worthUntappingItself(ai, sa, defined.get(0));
+    }
+
     /**
      * A creature that pays mana to untap itself (Sleep-Cursed Faerie) is untapped for combat: to attack with it before
      * the attackers are declared, or to block with it once the opponent has attacked. Not in response to just any spell,

@@ -594,7 +594,7 @@ public class ComputerUtilCard {
     /** An anthem for its controller's creatures. */
     private static final int ANTHEM_BONUS = 40;
     /** "Whenever another creature you control dies ..." (Zulaport Cutthroat, Blood Artist): slightly more than a single use. */
-    private static final int DEATH_ENGINE_BONUS = 25;
+    private static final int DEATH_ENGINE_BONUS = 60;
 
     /**
      * What a creature does besides its stats that makes it worth removing first, read from its own abilities: a static

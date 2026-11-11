@@ -470,9 +470,18 @@ public class AiReportScenarioTest extends AITest {
                 }));
         l.add(noPlay("4300", "stealing the player's Pithing Needle that names its own card", Fid.APPROX, M1, true, "Steal Artifact",
                 c -> { c.bf("Island", 4, c.ai); c.hand("Steal Artifact", c.ai); c.bf("Sol Ring", c.ai); final Card n = c.bf("Pithing Needle", c.opp); n.setNamedCards(java.util.Arrays.asList("Sol Ring")); }));
-        l.add(new Scenario("5892", "Surgical Extraction takes the opposing key card, not its own most expensive one", Fid.APPROX, M1, true,
-                c -> { c.bf("Swamp", c.ai); c.hand("Surgical Extraction", c.ai); c.gy("Inferno Titan", c.ai); c.gy("Reanimate", c.opp); },
-                c -> { final Card t = c.target(c.playOf("Surgical Extraction")); return t != null && t.getController() == c.opp || t != null && t.getOwner() == c.opp ? null : "targeted " + t; }));
+        l.add(new Scenario("5892", "Surgical Extraction takes the opposing key card (and its copies in hand and library), not its own most expensive one", Fid.APPROX, "MAIN2", true,
+                c -> { c.bf("Swamp", c.ai); c.hand("Surgical Extraction", c.ai); c.gy("Inferno Titan", c.ai); c.gy("Reanimate", c.opp); c.hand("Reanimate", c.opp); c.lib("Reanimate", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Surgical Extraction");
+                    final Card t = c.target(sa);
+                    if (t == null || t.getOwner() != c.opp) { return "targeted " + t; }
+                    c.resolve(sa);
+                    for (final ZoneType z : new ZoneType[] { ZoneType.Graveyard, ZoneType.Hand, ZoneType.Library }) {
+                        if (c.opp.getCardsIn(z).stream().anyMatch(k -> k.getName().equals("Reanimate"))) { return "a Reanimate was left in " + z; }
+                    }
+                    return c.ai.getCardsIn(ZoneType.Graveyard).stream().anyMatch(k -> k.getName().equals("Inferno Titan")) ? null : "exiled its own Inferno Titan";
+                }));
         l.add(play("5894", "Tishana's Tidebinder against an activated ability", Fid.APPROX, M1, false, "Tishana's Tidebinder",
                 c -> { c.bf("Island", 3, c.ai); c.hand("Tishana's Tidebinder", c.ai); final Card m = c.bf("Mother of Runes", c.opp); final SpellAbility sa = m.getSpellAbilities().get(0); sa.setActivatingPlayer(c.opp); sa.getTargets().add(m); c.game.getStack().add(sa); }));
         l.add(new Scenario("4054", "burn into Unsettled Mariner with exactly one mana (cannot pay the tax)", Fid.EXACT, M1, true,
@@ -518,7 +527,7 @@ public class AiReportScenarioTest extends AITest {
                     return c.ai.getCounters(CounterEnumType.ENERGY) < 6 ? null : "energy never spent";
                 }));
         l.add(aimed("5940", "Calibrated Blast on the creature that gives the player hexproof", Fid.APPROX, M1, true, "Calibrated Blast", "Shalai, Voice of Plenty",
-                c -> { c.bf("Mountain", 2, c.ai); c.hand("Calibrated Blast", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.bf("Grizzly Bears", c.opp); }));
+                c -> { c.bf("Mountain", 3, c.ai); /* Calibrated Blast costs {2}{R} */ c.hand("Calibrated Blast", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(new Scenario("6031", "plays a different Urza's land than the one already in play", Fid.EXACT, M1, true,
                 c -> { c.bf("Urza's Tower", c.ai); c.hand("Urza's Tower", c.ai); c.hand("Urza's Mine", c.ai); },
                 c -> { final List<Card> p = c.landPlays(); return !p.isEmpty() && p.get(0).getName().equals("Urza's Mine") ? null : "first land drop: " + p; }));
