@@ -1,0 +1,6 @@
+Name:Cursed - Crusader
+ManaCost:no cost
+Types:Cursed
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature your opponents control enters, put a +1/+1 counter on each creature that player controls.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.ControlledBy TriggeredCardController | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever a creature your opponents control enters, put a +1/+1 counter on each creature that player controls.

@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of The Military
+ManaCost:no cost
+Types:Trait
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Command | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you attack with two or more creatures, draw a card.

@@ -1,0 +1,7 @@
+Name:Chest Trait - Idol Of Dread
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | OptionalDecider$ You | Execute$ DBLife | TriggerDescription$ At the beginning of your upkeep, you may lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+SVar:DBLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ 1
+Oracle:At the beginning of your upkeep, you may lose 1 life and amass Zombies 1.\n(Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

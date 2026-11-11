@@ -1,0 +1,4 @@
+Name:Aetherwork - Restoration Chamber 2
+ManaCost:no cost
+Types:Trait
+Oracle:Gain 4 life after each match victory.

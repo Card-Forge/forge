@@ -1,0 +1,4 @@
+Name:Chest Trait - Relic Of Wisdom
+ManaCost:no cost
+Types:Trait
+Oracle:Draw 1 additional card at the start of each match.

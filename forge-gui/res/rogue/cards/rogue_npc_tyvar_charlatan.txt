@@ -1,0 +1,6 @@
+Name:Tyvar Trait - Charlatan Commander
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddAbility$ Copy | EffectZone$ Command | Description$ Commander creatures you own have "{3}: This creature becomes a copy of another target creature."
+SVar:Copy:AB$ Clone | Cost$ 3 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ This creature becomes a copy of another target creature.
+Oracle:Commander creatures you own have\n"{3}: This creature becomes a copy of another target creature."

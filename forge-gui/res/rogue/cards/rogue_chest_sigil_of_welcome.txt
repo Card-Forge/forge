@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of Welcome
+ManaCost:no cost
+Types:Trait
+T:Mode$ ChangesZone | TriggerZones$ Command | ValidCard$ Creature.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Whenever a creature you control enters, you gain 1 life.

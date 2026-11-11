@@ -1,0 +1,6 @@
+Name:Wound - Arm
+ManaCost:no cost
+Types:Wound
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast your second spell each turn, this Trait deals 3 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
+Oracle:Whenever you cast your second spell each turn, this Trait deals 3 damage to you.

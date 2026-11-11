@@ -1,0 +1,5 @@
+Name:Tyvar Trait - Fury
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddKeyword$ Haste | EffectZone$ Command | Description$ Your commander has haste.
+Oracle:Your commander has haste.

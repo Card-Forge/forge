@@ -1,0 +1,6 @@
+Name:Chest Trait - Charm Of Ascendancy
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each of up to two target creatures you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures you control | CounterType$ P1P1 | CounterNum$ 1
+Oracle:At the beginning of your end step, put a +1/+1 counter on each of up to two target creatures you control.

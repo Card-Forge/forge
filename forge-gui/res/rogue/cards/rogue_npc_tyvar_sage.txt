@@ -1,0 +1,8 @@
+Name:Tyvar Trait - Sage Commander
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ ETB & LTB | EffectZone$ Command | Description$ Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."
+SVar:ETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters or leaves the battlefield, draw a card.
+SVar:LTB:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature enters or leaves the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."

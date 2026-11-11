@@ -1,0 +1,4 @@
+Name:Event Trait - Distorted Reality
+ManaCost:no cost
+Types:Trait
+Oracle:After your next 2 matches, gain 1 less gold and see 3 fewer non-mythic cards in Card Rewards.

@@ -1,0 +1,6 @@
+Name:Cursed - Demonic
+ManaCost:no cost
+Types:Cursed
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Command | IsPresent$ Creature.ActivePlayerCtrl | PresentCompare$ EQ1 | Execute$ TrigToken | TriggerDescription$ At the beginning of each opponent's end step, if that player controls exactly one creature, that player creates a 5/5 black Demon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ b_5_5_demon_flying | TokenOwner$ TriggeredPlayer
+Oracle:At the beginning of each opponent's end step, if that player controls exactly one creature, that player creates a 5/5 black Demon creature token with flying.

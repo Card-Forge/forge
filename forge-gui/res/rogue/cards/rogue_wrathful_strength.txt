@@ -1,0 +1,5 @@
+Name:Wrathful - Strength
+ManaCost:no cost
+Types:Wrathful
+S:Mode$ Continuous | Affected$ Creature.IsCommander+OppCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | EffectZone$ Command | Description$ Commander creatures your opponents control get +2/+2 and have trample.
+Oracle:Commander creatures your opponents control get +2/+2 and have trample.

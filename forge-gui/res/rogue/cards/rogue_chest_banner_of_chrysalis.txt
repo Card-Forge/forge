@@ -1,0 +1,5 @@
+Name:Chest Trait - Banner Of Chrysalis
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Flying | EffectZone$ Command | Description$ Creature tokens you control have flying.
+Oracle:Creature tokens you control have flying.

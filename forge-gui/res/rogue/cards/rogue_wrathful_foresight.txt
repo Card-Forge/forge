@@ -1,0 +1,6 @@
+Name:Wrathful - Foresight
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ TrigScry | TriggerDescription$ At the beginning of each opponent's upkeep, that player scries 1.
+SVar:TrigScry:DB$ Scry | Defined$ Opponent | ScryNum$ 1
+Oracle:At the beginning of each opponent's upkeep, that player scries 1.

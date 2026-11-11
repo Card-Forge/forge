@@ -1,0 +1,5 @@
+Name:Chest Trait - Banner Of War
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | EffectZone$ Command | Description$ Creatures you control have menace.
+Oracle:Creatures you control have menace.

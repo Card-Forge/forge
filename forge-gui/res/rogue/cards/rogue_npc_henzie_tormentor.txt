@@ -1,0 +1,6 @@
+Name:Henzie Trait - Tormentor
+ManaCost:no cost
+Types:Trait
+S:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | EffectZone$ Command | Description$ Your opponents can't gain life.
+S:Mode$ CantPreventDamage | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | EffectZone$ Command | Description$ Your damage can't be prevented.
+Oracle:Your opponents can't gain life.\nYour damage can't be prevented.

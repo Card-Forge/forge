@@ -1,0 +1,6 @@
+Name:Chest Trait - Omen Of Splendor
+ManaCost:no cost
+Types:Trait
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws their second card each turn, you create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+Oracle:Whenever an opponent draws their second card each turn, you create a Treasure token.

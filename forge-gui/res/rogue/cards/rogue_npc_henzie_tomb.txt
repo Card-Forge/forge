@@ -1,0 +1,4 @@
+Name:Henzie Trait - Henzie's Tomb
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with an Ancient Tomb on the battlefield.

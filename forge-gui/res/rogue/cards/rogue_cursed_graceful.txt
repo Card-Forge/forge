@@ -1,0 +1,6 @@
+Name:Cursed - Graceful
+ManaCost:no cost
+Types:Cursed
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ At the beginning of each opponent's upkeep, that player creates a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TriggeredPlayer
+Oracle:At the beginning of each opponent's upkeep, that player creates a 1/1 white Spirit creature token with flying.

@@ -1,0 +1,7 @@
+Name:Chest Trait - Shield Of Care
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | LifeTotal$ You | LifeAmount$ LE5 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.

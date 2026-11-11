@@ -1,0 +1,4 @@
+Name:Chest Trait - Relic Of Wealth
+ManaCost:no cost
+Types:Trait
+Oracle:Gain 3 additional Gold after every match.

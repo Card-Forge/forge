@@ -1,0 +1,6 @@
+Name:Chest Trait - Shield Of Machination
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible
+Oracle:At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.

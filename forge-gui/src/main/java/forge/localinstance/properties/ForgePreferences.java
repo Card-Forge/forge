@@ -205,6 +205,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_ONLINE ("false"),
         SUBMENU_GAUNTLET ("false"),
+        SUBMENU_ROGUE ("true"),
         SUBMENU_QUEST ("false"),
         SUBMENU_PUZZLE("false"),
         SUBMENU_SETTINGS ("false"),

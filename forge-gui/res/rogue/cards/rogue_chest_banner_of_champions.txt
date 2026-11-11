@@ -1,0 +1,5 @@
+Name:Chest Trait - Banner Of Champions
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | EffectZone$ Command | Description$ Creatures you control get +1/+1 and have vigilance.
+Oracle:Creatures you control get +1/+1 and have vigilance.

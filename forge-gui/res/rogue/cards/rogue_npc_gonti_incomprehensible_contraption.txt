@@ -1,0 +1,4 @@
+Name:Gonti Curio - Incomprehensible Contraption
+ManaCost:no cost
+Types:Weird Item
+Oracle:A brass box crowded with tiny gears and sealed compartments. Its crank makes half a turn before sticking. One wheel is painted directly onto the lid.

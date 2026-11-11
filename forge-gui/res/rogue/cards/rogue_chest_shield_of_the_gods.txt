@@ -1,0 +1,5 @@
+Name:Chest Trait - Shield Of The Gods
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | EffectZone$ Command | Description$ You have hexproof.
+Oracle:You have hexproof.

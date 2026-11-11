@@ -1,0 +1,5 @@
+Name:Cursed - Asceticism
+ManaCost:no cost
+Types:Cursed
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddKeyword$ Hexproof | EffectZone$ Command | Description$ Creatures your opponents control have hexproof.
+Oracle:Creatures your opponents control have hexproof.

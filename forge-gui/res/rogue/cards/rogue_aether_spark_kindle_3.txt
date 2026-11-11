@@ -1,0 +1,4 @@
+Name:Aetherwork - Spark Kindle 3
+ManaCost:no cost
+Types:Trait
+Oracle:Begin each match with 3 basic lands from your deck already on the battlefield.

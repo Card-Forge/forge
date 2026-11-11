@@ -1,0 +1,5 @@
+Name:Cursed - Eternal
+ManaCost:no cost
+Types:Cursed
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Indestructible | EffectZone$ Command | Description$ Creatures your opponents control get +2/+2 and have indestructible.
+Oracle:Creatures your opponents control get +2/+2 and have indestructible.
