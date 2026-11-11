@@ -259,11 +259,12 @@ public class DamageDealAi extends DamageAiBase {
                 // won't play it even in chain
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
-                // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
+            if (!chainDmg.getKey().canTarget(sa.getTargets().get(0))) {
+                // we might be trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
                 if (!damageTargetAI(ai, sa, dmg, false)) {
+                    // could try to find another chain candidate
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
@@ -1092,11 +1093,9 @@ public class DamageDealAi extends DamageAiBase {
                         if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
-                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
-                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
-                                String[] validTgtsSa = tgtSa.getValidTgts();
-                                String[] validTgtsAb = tgtAb.getValidTgts();
-                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                String[] validTgtsSa = sa.getTargetRestrictions().getValidTgts();
+                                String[] validTgtsAb = ab.getTargetRestrictions().getValidTgts();
+                                if (!validTgtsAb[0].equals("Any") && !Arrays.asList(validTgtsAb).containsAll(Arrays.asList(validTgtsSa))) {
                                     continue;
                                 }
 
