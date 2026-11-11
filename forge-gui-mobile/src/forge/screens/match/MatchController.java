@@ -51,6 +51,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.PromptContext;
 import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
@@ -62,6 +63,7 @@ import forge.gui.util.SGuiChoose;
 import forge.screens.match.arena.ArenaCardBrowser;
 import forge.screens.match.arena.ArenaChoices;
 import forge.screens.match.arena.ArenaDamageOverlay;
+import forge.screens.match.arena.ArenaMatchLayout;
 import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.GuiChoose;
 import forge.gui.util.SOptionPane;
@@ -439,6 +441,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void finishGame() {
+        FThreads.invokeInEdtNowOrLater(ArenaCardBrowser::clearRevealing); //the game is over: nothing is being revealed any more
         if (Forge.isMobileAdventureMode) {
             if (Config.instance().getSettingData().disableWinLose) {
                 MatchController.writeMatchPreferences();
@@ -896,8 +899,61 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void setPromptContext(final CardView source, final String reason) {
-        ArenaChoices.setContext(source, reason); //the Arena dialogs name the card (or the reason) in their titles
+    public void setPromptContext(final PromptContext context) {
+        ArenaChoices.setContext(context); //the Arena dialogs name the card (or the reason) in their titles
+    }
+
+    @Override
+    public boolean explainsPrompts() {
+        return ArenaTheme.isMatchBoard() && ArenaMatchLayout.desktop(); //the Arena look on a desktop: prompts say why
+    }
+
+    /** The Arena look: a scry or a surveil on one screen, the top of the library above and the rest below. */
+    @Override
+    public List<CardView> sortIntoRows(final String title, final String hint, final List<CardView> cards, final String upperLabel,
+            final String lowerLabel) {
+        if (!explainsPrompts()) {
+            return null;
+        }
+        return new WaitCallback<List<CardView>>() {
+            @Override
+            public void run() {
+                if (!ArenaCardBrowser.sortRows(title, hint, cards, upperLabel, lowerLabel, this)) {
+                    accept(null);
+                }
+            }
+        }.invokeAndWait();
+    }
+
+    /** The Arena look: two piles shown one above the other, face up where they may be seen, with a button to take each. */
+    @Override
+    public int choosePile(final String title, final List<CardView> pile1, final int hidden1, final List<CardView> pile2, final int hidden2) {
+        if (!explainsPrompts()) {
+            return -1;
+        }
+        final Integer taken = new WaitCallback<Integer>() {
+            @Override
+            public void run() {
+                if (!ArenaCardBrowser.piles(title, pile1, hidden1, pile2, hidden2, this::accept)) {
+                    accept(-1);
+                }
+            }
+        }.invokeAndWait();
+        return taken == null ? -1 : taken;
+    }
+
+    /**
+     * The Arena look: when every offered card must be taken (a whole hand to discard), a pick with all of them already
+     * picked, answered with its verb, rather than the classic list that would put them in order.
+     */
+    @Override
+    public <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices,
+            final List<T> destChoices, final CardView c) {
+        if (explainsPrompts() && max > 1 && min == max && sourceChoices != null && min >= sourceChoices.size()
+                && (destChoices == null || destChoices.isEmpty())) {
+            return getChoices(title, min, max, sourceChoices, sourceChoices, null);
+        }
+        return super.many(title, topCaption, min, max, sourceChoices, destChoices, c);
     }
 
     @Override

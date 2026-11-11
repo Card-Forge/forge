@@ -76,8 +76,8 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblKeep"), localizer.getMessage("lblMulligan"), true, true, true);
         sb.append(localizer.getMessage("lblDoYouWantToKeepYourHand"));
-        final String explained = getController().getGui().isLibgdxPort() ? explainLondon(localizer, game) : "";
-        if (!explained.isEmpty()) { //the libGDX prompt says what each answer does
+        final String explained = getController().getGui().explainsPrompts() ? explainLondon(localizer, game) : "";
+        if (!explained.isEmpty()) { //explained prompts say what each answer does
             sb.append("\n").append(explained);
         }
 

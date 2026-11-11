@@ -2119,10 +2119,12 @@ public class MatchScreen extends FScreen {
             }
         };
 
+        forge.screens.match.arena.ArenaOptionsOverlay.markNextDestructive(0); //Concede (the first answer) cannot be taken back
         FOptionPane.showConfirmDialog(getLocalizer().getMessage("lblConcedeCurrentGame"),
             getLocalizer().getMessage("lblConcedeTitle"),
             getLocalizer().getMessage("lblConcede"),
             getLocalizer().getMessage("lblCancel"), callback);
+        forge.screens.match.arena.ArenaOptionsOverlay.markNextDestructive(-1); //taken up, or not wanted by a classic dialog
     }
 
     @Override

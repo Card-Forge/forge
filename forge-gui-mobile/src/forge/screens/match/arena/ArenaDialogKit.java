@@ -17,6 +17,7 @@ import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
+import forge.gamemodes.match.PromptContext;
 import forge.gui.FThreads;
 import forge.toolbox.FCardPanel;
 
@@ -1011,29 +1012,49 @@ public final class ArenaDialogKit {
     }
 
     /**
-     * A submit pill's words for {@code picked} of {@code min}..{@code max}: "Choose 2" when something is picked, "Skip"
-     * when nothing need be, else "Confirm" waiting (inert) under a caption saying how many are still to pick, so the
-     * button never says "Choose 0" or reads as a live answer it is not.
+     * A pick's submit button: one verb for the dialog's whole life, saying what the picks are for and how many
+     * ("Discard 2", "Put 2 on bottom", else "Choose 2"), dimmed until the picks are enough with "Pick N more" beneath it;
+     * "Skip" while nothing is picked from an optional choice.
      */
-    public static void submitWords(final Pill pill, final int picked, final int min, final int max) {
-        final forge.util.Localizer words = Forge.getLocalizer();
+    public static void submitWords(final Pill pill, final int picked, final int min, final int max, final PromptContext.Verb verb) {
         pill.enabled = picked >= min && picked <= max;
-        pill.caption = null;
-        if (picked > 0) {
-            pill.text = words.getMessage("lblArenaSubmit", picked);
-        } else if (min <= 0) {
-            pill.text = words.getMessage("lblArenaSkip");
-        } else {
-            pill.text = words.getMessage("lblArenaConfirm");
+        if (picked == 0 && min <= 0) {
+            pill.text = cachedWords("lblArenaSkip", 0);
+            pill.caption = null;
+            return;
         }
-        if (picked < min) {
-            pill.caption = words.getMessage("lblArenaPickMore", min - picked);
+        // a fixed count names it from the start; an "up to" count follows the picks
+        pill.text = verbPhrase(verb, min == max ? max : Math.max(picked, Math.max(1, min)));
+        pill.caption = picked < min ? cachedWords("lblArenaPickMore", min - picked) : null;
+    }
+
+    /** "Discard 2": the verb of what the picks are for with how many (whole localizable phrases, looked up once each). */
+    public static String verbPhrase(final PromptContext.Verb verb, final int count) {
+        final PromptContext.Verb v = verb == null ? PromptContext.Verb.CHOOSE : verb;
+        switch (v) {
+            case DISCARD: return cachedWords("lblArenaVerbDiscard", count);
+            case SACRIFICE: return cachedWords("lblArenaVerbSacrifice", count);
+            case EXILE: return cachedWords("lblArenaVerbExile", count);
+            case DESTROY: return cachedWords("lblArenaVerbDestroy", count);
+            case PUT_ON_BOTTOM: return cachedWords("lblArenaVerbPutOnBottom", count);
+            case PUT_INTO_GRAVEYARD: return cachedWords("lblArenaVerbPutIntoGraveyard", count);
+            default: return cachedWords("lblArenaVerbChoose", count);
         }
     }
 
-    /** Whether an answer's words are one that cannot be taken back (Concede), so it is drawn red. */
-    public static boolean isDestructive(final String label) {
-        return label != null && label.equalsIgnoreCase(Forge.getLocalizer().getMessage("lblConcede"));
+    private static final java.util.Map<String, String[]> WORDS_BY_COUNT = new java.util.HashMap<>();
+    private static final int CACHED_COUNTS = 64;
+
+    /** A phrase with a count in it, looked up and formatted once per key and count (render thread). */
+    static String cachedWords(final String key, final int count) {
+        if (count < 0 || count >= CACHED_COUNTS) {
+            return Forge.getLocalizer().getMessage(key, count);
+        }
+        final String[] byCount = WORDS_BY_COUNT.computeIfAbsent(key, k -> new String[CACHED_COUNTS]);
+        if (byCount[count] == null) {
+            byCount[count] = Forge.getLocalizer().getMessage(key, count);
+        }
+        return byCount[count];
     }
 
     /** A destructive answer's pill (Concede): red with a warm rim, white words; brighter under the pointer. */

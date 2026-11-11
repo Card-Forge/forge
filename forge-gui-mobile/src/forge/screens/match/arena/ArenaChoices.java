@@ -11,6 +11,7 @@ import forge.game.GameEntityView;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.PromptContext;
 import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.util.CardTranslation;
 
@@ -26,13 +27,16 @@ public final class ArenaChoices {
 
     // what the game says the next question is about (IGuiGame.setPromptContext): set on the game thread, read on the
     // render thread when the dialog opens
-    private static volatile CardView contextSource;
-    private static volatile String contextReason;
+    private static volatile PromptContext context = PromptContext.NONE;
 
-    /** The card whose effect asks the next question, or why it is asked when no card does; both null once answered. */
-    public static void setContext(final CardView source, final String reason) {
-        contextSource = source;
-        contextReason = reason;
+    /** What the next question is about: the card whose effect asks, or why when no card does, and what picks are for. */
+    public static void setContext(final PromptContext context0) {
+        context = context0 == null ? PromptContext.NONE : context0;
+    }
+
+    /** What the cards the next dialog picks are for, so its button can say it ("Discard 2"). */
+    static PromptContext.Verb verb() {
+        return context.verb();
     }
 
     /**
@@ -40,12 +44,11 @@ public final class ArenaChoices {
      * discard to hand size has no card behind it), else the card of the prompt on the board.
      */
     static CardView sourceCard() {
-        final CardView source = contextSource;
-        if (source != null) {
-            return source;
+        final PromptContext now = context;
+        if (now.source() != null) {
+            return now.source();
         }
-        final String reason = contextReason;
-        return reason != null && !reason.isEmpty() ? null : ArenaDialogKit.promptCard();
+        return now.reason() != null && !now.reason().isEmpty() ? null : ArenaDialogKit.promptCard();
     }
 
     /**
@@ -53,11 +56,12 @@ public final class ArenaChoices {
      * effect asks (as a modal spell's "Abzan Charm: choose a mode"), else the plain title.
      */
     static String titleFor(final String title) {
-        final String reason = contextReason;
+        final PromptContext now = context;
+        final String reason = now.reason();
         if (reason != null && !reason.isEmpty()) {
             return reason;
         }
-        final CardView source = contextSource;
+        final CardView source = now.source();
         if (source == null || source.getCurrentState() == null) {
             return title;
         }

@@ -19,6 +19,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.PromptContext;
 import forge.gamemodes.match.Selection;
 import forge.gui.FThreads;
 import forge.interfaces.IGameController;
@@ -70,7 +71,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         /** the game's current input is picking cards from hidden zones; clicks and Submit go to it */
         SELECTION,
         /** put cards in order by dragging them along one row */
-        ARRANGE
+        ARRANGE,
+        /** sort cards between two rows (a scry: the top and the bottom of the library); a click moves a card across */
+        SORT,
+        /** two piles, one above the other; the player takes one with its button */
+        PILES
     }
 
     private static ArenaCardBrowser selectionBrowser;
@@ -93,6 +98,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private String query = "";
     private String noMatchText; // what the row says when the search finds nothing, made when the search changes
     private final CardView focusCard;
+    /** What the picks are for, as the game said when the browser opened: the submit button's verb. */
+    private final PromptContext.Verb verb = ArenaChoices.verb();
     private final ArenaDialogKit.Pill btnSubmit = new ArenaDialogKit.Pill();
     private final ArenaDialogKit.Pill btnSecondary = new ArenaDialogKit.Pill();
     private Runnable whenClosed;
@@ -112,6 +119,13 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private float dragGrabX, dragGrabY, dragDownX, dragDownY;
     private boolean dragMoved;
     private float railLeft, railRight, railY, captionY, firstBadge, lastBadge;
+    // SORT and PILES: the cards in the lower row, what each row is, how many more of each pile lie face down
+    private final java.util.Set<CardView> lowerRow = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+    private String upperLabel, lowerLabel, upperNote, lowerNote;
+    private int pileTaken = -1;
+    private float upperCy, lowerCy, labelX, labelW;
+    private FSkinFont labelFont, noteFont;
+    private static final float ROWS_CARD_HEIGHT = 0.25f, ROWS_UPPER_Y = 0.33f, ROWS_LOWER_Y = 0.625f, ROWS_LABEL_SHARE = 0.13f;
 
     // ---- opening ----------------------------------------------------------------------------------------------------
 
@@ -157,6 +171,67 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         return true;
     }
 
+    /**
+     * A scry or a surveil on one screen: the cards in an upper row ({@code upperLabel}, the top of the library) and a
+     * lower one ({@code lowerLabel}), a click moving a card across; tells {@code done} the cards left in the lower row.
+     */
+    public static boolean sortRows(final String title, final String hint, final List<CardView> cards, final String upperLabel,
+            final String lowerLabel, final Consumer<List<CardView>> done) {
+        if (!ArenaTheme.isMatchBoard() || cards == null || cards.isEmpty()) {
+            return false;
+        }
+        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.SORT, ArenaChoices.titleFor(title), hint, cards, 0, 0, null);
+        browser.upperLabel = upperLabel;
+        browser.lowerLabel = lowerLabel;
+        browser.whenClosed = () -> {
+            final List<CardView> out = new ArrayList<>();
+            for (final Item item : browser.allItems) {
+                if (browser.lowerRow.contains(item.card)) {
+                    out.add(item.card);
+                }
+            }
+            done.accept(out);
+        };
+        browser.openOverlay();
+        return true;
+    }
+
+    /**
+     * Two piles, one above the other, face up where the player may see them ({@code hidden1}/{@code hidden2} more lie face
+     * down), each taken with its own button; tells {@code done} 0 or 1.
+     */
+    public static boolean piles(final String title, final List<CardView> pile1, final int hidden1, final List<CardView> pile2,
+            final int hidden2, final java.util.function.IntConsumer done) {
+        final List<CardView> all = new ArrayList<>();
+        if (pile1 != null) {
+            all.addAll(pile1);
+        }
+        if (pile2 != null) {
+            all.addAll(pile2);
+        }
+        if (!ArenaTheme.isMatchBoard() || all.isEmpty()) {
+            return false;
+        }
+        final forge.util.Localizer words = Forge.getLocalizer();
+        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.PILES, ArenaChoices.titleFor(title), null, all, 0, 0, null);
+        if (pile2 != null) {
+            browser.lowerRow.addAll(pile2);
+        }
+        browser.upperLabel = words.getMessage("lblArenaPileN", 1);
+        browser.lowerLabel = words.getMessage("lblArenaPileN", 2);
+        browser.upperNote = hidden1 > 0 ? words.getMessage("lblArenaPileHidden", hidden1) : null;
+        browser.lowerNote = hidden2 > 0 ? words.getMessage("lblArenaPileHidden", hidden2) : null;
+        browser.btnSecondary.action = () -> {
+            browser.pileTaken = 1;
+            browser.close();
+        };
+        browser.btnSecondary.visible = true;
+        browser.updateButtons();
+        browser.whenClosed = () -> done.accept(browser.pileTaken == 1 ? 1 : 0);
+        browser.openOverlay();
+        return true;
+    }
+
     /** Shows cards that are only being revealed: nothing to pick, just Done. The cards show their faces meanwhile. */
     public static boolean reveal(final String message, final List<CardView> cards, final Runnable done) {
         if (!ArenaTheme.isMatchBoard() || cards == null || cards.isEmpty()) {
@@ -164,9 +239,13 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.REVEAL, ArenaChoices.titleFor(Forge.getLocalizer().getMessage("lblRevealed")),
                 message, cards, 0, 0, null);
-        REVEALING.addAll(cards);
+        for (final CardView c : cards) {
+            REVEALING.merge(c, 1, Integer::sum);
+        }
         browser.whenClosed = () -> {
-            REVEALING.removeAll(cards);
+            for (final CardView c : cards) { //a card two reveals show stays face up until both are done
+                REVEALING.computeIfPresent(c, (k, n) -> n > 1 ? n - 1 : null);
+            }
             if (done != null) {
                 done.run();
             }
@@ -176,11 +255,16 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     }
 
     /** The cards a reveal is showing now (render thread): face up, as the game revealed them. */
-    private static final java.util.Set<CardView> REVEALING = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+    private static final java.util.Map<CardView, Integer> REVEALING = new java.util.IdentityHashMap<>();
+
+    /** The match is over: no card is being revealed any more (render thread). */
+    public static void clearRevealing() {
+        REVEALING.clear();
+    }
 
     /** Whether the Arena browser is showing this card as revealed, so it is drawn face up. */
     public static boolean isRevealing(final CardView card) {
-        return !REVEALING.isEmpty() && REVEALING.contains(card);
+        return !REVEALING.isEmpty() && REVEALING.containsKey(card);
     }
 
     /**
@@ -446,11 +530,18 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private void updateButtons() {
         switch (mode) {
             case CHOOSE:
-                ArenaDialogKit.submitWords(btnSubmit, chosen.size(), min, max);
+                ArenaDialogKit.submitWords(btnSubmit, chosen.size(), min, max, verb);
                 break;
             case ARRANGE:
+            case SORT:
                 btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmitPlain");
                 btnSubmit.enabled = true;
+                break;
+            case PILES:
+                btnSubmit.text = ArenaDialogKit.cachedWords("lblArenaTakePile", 1);
+                btnSubmit.enabled = true;
+                btnSecondary.text = ArenaDialogKit.cachedWords("lblArenaTakePile", 2);
+                btnSecondary.enabled = true;
                 break;
             case SELECTION: {
                 // mirror the prompt's own buttons, which the input keeps up to date
@@ -459,7 +550,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 final int n = chosenCount();
                 btnSubmit.enabled = ok != null && ok.isEnabled();
                 // nothing picked yet: the prompt's own word for going on ("Done"), never "Choose 0"
-                btnSubmit.text = n > 0 ? Forge.getLocalizer().getMessage("lblArenaSubmit", n)
+                btnSubmit.text = n > 0 ? ArenaDialogKit.verbPhrase(verb, n)
                         : ok != null && ok.getText() != null && !ok.getText().isEmpty() ? ok.getText()
                         : Forge.getLocalizer().getMessage("lblArenaSubmitPlain");
                 btnSecondary.text = cancel == null || cancel.getText() == null ? "" : cancel.getText();
@@ -494,8 +585,15 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 ThreadUtil.invokeInGameThread(() -> controller().selectCard(item.card, null, null));
                 ArenaMotion.requestFrame();
                 return;
+            case SORT: //a click moves the card to the other row
+                if (!lowerRow.remove(item.card)) {
+                    lowerRow.add(item.card);
+                }
+                relayout();
+                return;
             case REVEAL:
             case ARRANGE:
+            case PILES:
                 return;
             default:
                 break;
@@ -535,6 +633,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         if (mode == Mode.ARRANGE) {
             layoutArrange(w, h, false);
+        } else if (mode == Mode.SORT || mode == Mode.PILES) {
+            layoutRows(w, h);
         } else {
             layoutRow(w, h);
         }
@@ -544,6 +644,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         if (getWidth() > 0) {
             if (mode == Mode.ARRANGE) {
                 layoutArrange(getWidth(), getHeight(), true);
+            } else if (mode == Mode.SORT || mode == Mode.PILES) {
+                layoutRows(getWidth(), getHeight());
             } else {
                 layoutRow(getWidth(), getHeight());
             }
@@ -653,6 +755,82 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         return Math.min(Math.round(cw * (1f - overlapFor(n))), (room - 2 * pad - cw) / (n - 1));
     }
 
+    /**
+     * SORT and PILES: two rows of flat cards, one above the other, each named at its left (the top of the library and the
+     * bottom; pile 1 and pile 2), side by side while they fit and overlapping after that.
+     */
+    private void layoutRows(final float w, final float h) {
+        ch = Math.round(h * ROWS_CARD_HEIGHT);
+        cw = Math.round(ch / FCardPanel.ASPECT_RATIO);
+        maxAngle = 0f;
+        rowScrolls = false;
+        maxScroll = 0f;
+        rowStep = cw;
+        labelX = Math.round(w * 0.03f);
+        labelW = Math.round(w * ROWS_LABEL_SHARE);
+        final float left = labelX + labelW, right = ArenaDialogKit.rowRight(w, h, focusCard != null);
+        upperCy = Math.round(h * ROWS_UPPER_Y);
+        lowerCy = Math.round(h * ROWS_LOWER_Y);
+        placeInRow(false, left, right, upperCy);
+        placeInRow(true, left, right, lowerCy);
+        viewX = 0;
+        viewW = w;
+        viewY = Math.round(h * ArenaDialogKit.ROW_AREA_TOP);
+        viewH = Math.round(h * ArenaDialogKit.ROW_AREA_BOTTOM) - viewY;
+        fanLeft = left;
+        fanRight = right;
+        fanFoot = lowerCy + ch / 2f;
+        labelFont = ArenaTheme.fontPx(Math.max(8, Math.round(h * 0.03f / 2f) * 2));
+        noteFont = ArenaTheme.fontPx(Math.max(8, Math.round(h * 0.022f / 2f) * 2));
+        restack();
+    }
+
+    private void placeInRow(final boolean lower, final float left, final float right, final float cy) {
+        final List<Item> row = new ArrayList<>();
+        for (final Item item : items) {
+            if (lowerRow.contains(item.card) == lower) {
+                row.add(item);
+            }
+        }
+        final int n = row.size();
+        final float room = right - left, gap = Math.round(cw * 0.08f);
+        final float step = n <= 1 ? 0 : Math.min(cw + gap, (room - cw) / (n - 1));
+        final float rowW = cw + Math.max(0, n - 1) * step;
+        final float x0 = left + (room - rowW) / 2f + cw / 2f;
+        for (int i = 0; i < n; i++) {
+            final Item item = row.get(i);
+            item.overlapped = n > 1 && step < cw;
+            item.place(x0 + i * step, cy, 0f);
+        }
+    }
+
+    /** SORT and PILES: each row's name at its left, with how many cards it holds (or lie face down in it) under it. */
+    private void drawRowLabels(final Graphics g, final float h, final float alpha) {
+        if (labelFont == null) {
+            return;
+        }
+        drawRowLabel(g, upperLabel, upperNote, false, upperCy, alpha);
+        drawRowLabel(g, lowerLabel, lowerNote, true, lowerCy, alpha);
+        final float y = (upperCy + lowerCy) / 2f;
+        ArenaArt.divider(g, labelX, y, getWidth() - 2 * labelX, ArenaTheme.alpha(ArenaTheme.GOLD, 0.35f * alpha, S1), 1f);
+    }
+
+    private void drawRowLabel(final Graphics g, final String label, final String note, final boolean lower, final float cy, final float alpha) {
+        if (label == null) {
+            return;
+        }
+        int count = 0;
+        for (final Item item : items) {
+            if (lowerRow.contains(item.card) == lower) {
+                count++;
+            }
+        }
+        final float lh = labelFont.getLineHeight();
+        ArenaArt.textShadowed(g, label, labelFont, ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, alpha, S1), labelX, cy - lh, labelW, lh, Align.left);
+        final String below = note != null ? note : ArenaDialogKit.cachedWords("lblArenaRowCount", count);
+        ArenaArt.textShadowed(g, below, noteFont, ArenaTheme.alpha(ArenaTheme.TEXT, alpha, S2), labelX, cy, labelW, noteFont.getLineHeight(), Align.left);
+    }
+
     /** One row of cards on one baseline, side by side while they fit, overlapping after that; its numbers on a rail. */
     private void layoutArrange(final float w, final float h, final boolean keepDragged) {
         final boolean source = focusCard != null;
@@ -741,6 +919,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             if (topLabel != null) {
                 ArenaDialogKit.railEnds(g, topLabel, ArenaDialogKit.lastCaption(topLabel), firstBadge, lastBadge, captionY, h, alpha);
             }
+        } else if (mode == Mode.SORT || mode == Mode.PILES) {
+            drawRowLabels(g, h, alpha);
         } else if (anySelectable() && !items.isEmpty() && fanRight > fanLeft) {
             ArenaDialogKit.rowShards(g, fanLeft, fanRight, fanFoot, h, lightAt, alpha);
         }
@@ -847,7 +1027,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         final int kind;
         if (picked || item == dragItem) {
             kind = ArenaDialogKit.CHOSEN;
-        } else if (mode == Mode.CHOOSE || mode == Mode.ARRANGE || (mode == Mode.SELECTION && MatchController.instance.isSelectable(item.card))
+        } else if (mode == Mode.CHOOSE || mode == Mode.ARRANGE || mode == Mode.SORT || (mode == Mode.SELECTION && MatchController.instance.isSelectable(item.card))
                 || (mode == Mode.ZONE && playable(item.card))) {
             kind = ArenaDialogKit.SELECTABLE;
         } else {

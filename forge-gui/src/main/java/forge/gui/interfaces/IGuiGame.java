@@ -15,6 +15,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.PromptContext;
 import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
@@ -264,12 +265,38 @@ public interface IGuiGame {
     void setCard(CardView card);
 
     /**
-     * What the next choice, number or name the game asks for is about: the card whose effect asks ({@code source}, may be
-     * null) and, when the question has no card behind it, a short heading saying why it is asked ({@code reason}, may be
-     * null), e.g. discarding down to the maximum hand size. Both null when the question is answered. A user interface
-     * may use it to title its dialog; by default it is ignored.
+     * What the next choice, number or name the game asks for is about (see {@link PromptContext}): the card whose effect
+     * asks, or a heading saying why when no card does, and what the cards picked are for. {@link PromptContext#NONE} once
+     * the question is answered (or the context of the question it was asked inside). A user interface may use it to title
+     * its dialog and word its button; by default it is ignored.
      */
-    default void setPromptContext(CardView source, String reason) {
+    default void setPromptContext(PromptContext context) {
+    }
+
+    /**
+     * Whether this user interface wants the game's prompts to explain themselves at length (why a discard is asked, what
+     * Keep and Mulligan do): the libGDX client's Arena look on a desktop. Others keep the classic wording. Default false.
+     */
+    default boolean explainsPrompts() {
+        return false;
+    }
+
+    /**
+     * One screen sorting {@code cards} between two rows (a scry: the top and the bottom of the library), a click moving a
+     * card from one row to the other. Returns the cards the player left in the lower row, or null when this user
+     * interface has no such screen, so the caller asks the classic way.
+     */
+    default List<CardView> sortIntoRows(String title, String hint, List<CardView> cards, String upperLabel, String lowerLabel) {
+        return null;
+    }
+
+    /**
+     * Two piles shown one above the other, the player taking one (Fact or Fiction): {@code pile1} and {@code pile2} are the
+     * cards the player may see, {@code hidden1} and {@code hidden2} how many more lie face down. Returns 0 or 1 for the pile
+     * taken, or -1 when this user interface has no such screen, so the caller asks the classic way.
+     */
+    default int choosePile(String title, List<CardView> pile1, int hidden1, List<CardView> pile2, int hidden2) {
+        return -1;
     }
 
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);

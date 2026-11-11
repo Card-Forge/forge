@@ -29,6 +29,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.PromptContext;
 import forge.toolbox.FCardPanel;
 import forge.util.CardTranslation;
 
@@ -114,6 +115,8 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
     private final int min;
     private final int max;
     private final CardView focusCard;
+    /** What the picks are for, as the game said when the dialog opened: the submit button's verb. */
+    private final PromptContext.Verb verb = ArenaChoices.verb();
     private final List<Option> options = new ArrayList<>();
     private final List<Option> picked = new ArrayList<>();
     private final ArenaDialogKit.Pill btnSubmit = new ArenaDialogKit.Pill();
@@ -240,8 +243,20 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
      * Asks a question answered by one of {@code buttons}; tells {@code done} the index of the one pressed. Render
      * thread. False if the overlay does not apply.
      */
+    private static int nextDestructive = -1;
+
+    /**
+     * The next question's answer at {@code index} cannot be taken back (Concede): it is drawn red and no answer is lit as
+     * the one to press. Set just before asking; any question asked next takes it up (render thread).
+     */
+    public static void markNextDestructive(final int index) {
+        nextDestructive = index;
+    }
+
     public static boolean ask(final String title, final String message, final List<String> buttons, final int defaultIndex, final CardView card,
             final Consumer<Integer> done) {
+        final int destructive = nextDestructive;
+        nextDestructive = -1;
         if (!isOn() || buttons == null || buttons.isEmpty() || buttons.size() > MAX_OPTIONS) {
             return false;
         }
@@ -249,14 +264,10 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
         o.addOptions(buttons, null);
         final int primary = defaultIndex >= 0 && defaultIndex < o.options.size() ? defaultIndex : 0;
         // an answer that cannot be taken back (Concede) is red, and then nothing is lit as the one to press
-        boolean danger = false;
-        for (final Option option : o.options) {
-            if (option.answerPill != null && ArenaDialogKit.isDestructive(option.label)) {
-                option.answerPill.danger = true;
-                danger = true;
-            }
-        }
-        if (!danger) {
+        final boolean danger = destructive >= 0 && destructive < o.options.size() && o.options.get(destructive).answerPill != null;
+        if (danger) {
+            o.options.get(destructive).answerPill.danger = true;
+        } else {
             o.options.get(primary).primary = true;
             o.options.get(primary).answerPill.primary = true;
         }
@@ -442,9 +453,9 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             if (max == 1) {
                 btnSubmit.enabled = picked.size() == 1;
                 btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaChooseThis");
-                btnSubmit.caption = picked.isEmpty() ? Forge.getLocalizer().getMessage("lblArenaPickMore", 1) : null;
+                btnSubmit.caption = picked.isEmpty() ? ArenaDialogKit.cachedWords("lblArenaPickMore", 1) : null;
             } else {
-                ArenaDialogKit.submitWords(btnSubmit, picked.size(), least, max);
+                ArenaDialogKit.submitWords(btnSubmit, picked.size(), least, max, verb);
             }
         }
         if (getWidth() > 0) {

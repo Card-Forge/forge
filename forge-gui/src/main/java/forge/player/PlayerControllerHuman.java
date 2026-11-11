@@ -65,6 +65,7 @@ import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.DrawOfferCoordinator;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.PromptContext;
 import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
@@ -104,6 +105,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -399,7 +401,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     host.getTranslatedName()), min, max);
         }
-        setPromptContext(ability);
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(ability));
         try {
             if ("NumTimes".equals(announce)) {
                 return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
@@ -408,18 +410,43 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     host.getTranslatedName()), min, max, min + 9);
         } finally {
-            clearPromptContext();
+            restorePromptContext(previousContext);
         }
     }
 
-    /** Tells the user interface which card's effect asks the next question (see IGuiGame#setPromptContext). */
-    private void setPromptContext(final SpellAbility sa) {
-        final Card host = sa == null ? null : sa.getHostCard();
-        getGui().setPromptContext(host == null ? null : CardView.get(host), null);
+    /** What the question being asked now is about (see IGuiGame#setPromptContext). */
+    private PromptContext promptContext = PromptContext.NONE;
+
+    /**
+     * Tells the user interface what the next question is about and returns what it was about before, to hand back to
+     * {@link #restorePromptContext} in a finally: a question asked while answering another keeps its own context, and the
+     * outer one comes back after it.
+     */
+    private PromptContext pushPromptContext(final PromptContext context) {
+        final PromptContext previous = promptContext;
+        promptContext = context == null ? PromptContext.NONE : context;
+        getGui().setPromptContext(promptContext);
+        return previous;
     }
 
-    private void clearPromptContext() {
-        getGui().setPromptContext(null, null);
+    private void restorePromptContext(final PromptContext previous) {
+        promptContext = previous == null ? PromptContext.NONE : previous;
+        getGui().setPromptContext(promptContext);
+    }
+
+    /** Asks {@code question} with {@code context} as what it is about (see {@link #pushPromptContext}). */
+    private <R> R inContext(final PromptContext context, final Supplier<R> question) {
+        final PromptContext previous = pushPromptContext(context);
+        try {
+            return question.get();
+        } finally {
+            restorePromptContext(previous);
+        }
+    }
+
+    /** A card or player name made safe inside a message that is later passed through String.format. */
+    private static String formatSafe(final String name) {
+        return name == null ? "" : name.replace("%", "%%");
     }
 
     @Override
@@ -519,8 +546,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(sourceList);
         GameEntityViewMap<Card, CardView> gameCachechoose = GameEntityView.getMap(sourceList);
-        List<CardView> views = getGui().many(title, localizer.getMessage("lblChosenCards"), min, max,
-                gameCachechoose.getTrackableKeys(), CardView.get(sa.getHostCard()));
+        List<CardView> views = inContext(PromptContext.of(sa), () -> getGui().many(title, localizer.getMessage("lblChosenCards"), min, max,
+                gameCachechoose.getTrackableKeys(), CardView.get(sa.getHostCard())));
         endTempShowCards();
         gameCachechoose.addToList(views, choices);
         return choices;
@@ -635,8 +662,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         GameEntityViewMap<T, GameEntityView> gameCacheChoose = GameEntityView.getMap(optionList);
-        final GameEntityView result = getGui().chooseSingleEntityForEffect(title,
-                gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional);
+        final GameEntityView result = inContext(PromptContext.of(sa), () -> getGui().chooseSingleEntityForEffect(title,
+                gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional));
         endTempShowCards();
 
         if (result == null || !gameCacheChoose.containsKey(result)) {
@@ -675,7 +702,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         GameEntityViewMap<T, GameEntityView> gameCacheEntity = GameEntityView.getMap(optionList);
-        final List<GameEntityView> views = getGui().chooseEntitiesForEffect(title, gameCacheEntity.getTrackableKeys(), min, max, delayedReveal);
+        final List<GameEntityView> views = inContext(PromptContext.of(sa),
+                () -> getGui().chooseEntitiesForEffect(title, gameCacheEntity.getTrackableKeys(), min, max, delayedReveal));
         endTempShowCards();
 
         List<T> results = Lists.newArrayList();
@@ -691,11 +719,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min >= max) {
             return min;
         }
-        setPromptContext(sa);
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(sa));
         try {
             return chooseNumberFromRange(title, min, max);
         } finally {
-            clearPromptContext();
+            restorePromptContext(previousContext);
         }
     }
 
@@ -722,11 +750,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final List<Integer> choices,
                             final Player relatedPlayer) {
-        setPromptContext(sa);
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(sa));
         try {
             return getGui().one(title, choices);
         } finally {
-            clearPromptContext();
+            restorePromptContext(previousContext);
         }
     }
 
@@ -742,7 +770,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create a mapping between a spell's view and the spell itself
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
-        Object choice = getGui().one(title, Lists.newArrayList(spellViewCache.keySet()));
+        Object choice = inContext(PromptContext.of(sa), () -> getGui().one(title, Lists.newArrayList(spellViewCache.keySet())));
 
         // Human is supposed to read the message and understand from it what to choose
         return spellViewCache.get(choice);
@@ -764,7 +792,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         //override generic
-        List<SpellAbilityView> chosen = getGui().getChoices(title, num, num, Lists.newArrayList(spellViewCache.keySet()));
+        final String question = title;
+        List<SpellAbilityView> chosen = inContext(PromptContext.of(sa), () -> getGui().getChoices(question, num, num, Lists.newArrayList(spellViewCache.keySet())));
 
         for (SpellAbilityView view : chosen) {
             if (spellViewCache.containsKey(view)) {
@@ -784,6 +813,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
+        return inContext(PromptContext.of(sa), () -> confirmActionAsked(sa, message, options, cardToShow));
+    }
+
+    private boolean confirmActionAsked(final SpellAbility sa, final String message, final List<String> options, final Card cardToShow) {
         // Another card should be displayed in the prompt on mouse over rather than the SA source
         if (cardToShow != null) {
             tempShowCard(cardToShow);
@@ -804,14 +837,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmBidAction(final SpellAbility sa, final PlayerActionConfirmMode bidlife, final String string,
                                     final int bid, final Player winner) {
-        final boolean result = InputConfirm.confirm(this, sa, string + " " + localizer.getMessage("lblHighestBidder") + " " + winner);
+        final boolean result = inContext(PromptContext.of(sa),
+                () -> InputConfirm.confirm(this, sa, string + " " + localizer.getMessage("lblHighestBidder") + " " + winner));
         recordConfirm(sa, result);
         return result;
     }
 
     @Override
     public boolean confirmStaticApplication(final Card hostCard, PlayerActionConfirmMode mode, final String message, final String logic) {
-        final boolean result = InputConfirm.confirm(this, CardView.get(hostCard), message);
+        final boolean result = inContext(PromptContext.of(hostCard), () -> InputConfirm.confirm(this, CardView.get(hostCard), message));
         recordConfirm(CardView.get(hostCard), result);
         return result;
     }
@@ -865,7 +899,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = spellAbilityView.getHostCard();
             else
                 cardView = wrapper.getCardView();
-            final boolean result = this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            final CardView asking = cardView;
+            final boolean result = inContext(PromptContext.of(sa),
+                    () -> this.getGui().confirm(asking, buildQuestion.toString().replaceAll("\n", " ")));
             recordConfirm(cardView, result);
             return result;
         }
@@ -1066,8 +1102,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             GameEntityViewMap<Card, CardView> cardCacheScry = GameEntityView.getMap(topN);
 
             toBottom = new CardCollection();
-            List<CardView> views = getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
-                    localizer.getMessage("lblCardsToPutOnTheBottom"), -1, cardCacheScry.getTrackableKeys(), null);
+            //one screen with the top and the bottom of the library where the user interface has it, else the classic pick
+            List<CardView> views = getGui().sortIntoRows(localizer.getMessage("lblArenaScryTitle", topN.size()),
+                    localizer.getMessage("lblArenaScryHint"), cardCacheScry.getTrackableKeys(),
+                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaBottomOfLibrary"));
+            if (views == null) {
+                views = getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
+                        localizer.getMessage("lblCardsToPutOnTheBottom"), -1, cardCacheScry.getTrackableKeys(), null);
+            }
             cardCacheScry.addToList(views, toBottom);
 
             topN.removeAll(toBottom);
@@ -1111,8 +1153,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             GameEntityViewMap<Card, CardView> gameCacheSurveil = GameEntityView.getMap(topN);
             toGrave = new CardCollection();
-            List<CardView> views = getGui().many(localizer.getMessage("lblSelectCardsToBePutIntoTheGraveyard"),
-                    localizer.getMessage("lblCardsToPutInTheGraveyard"), -1, gameCacheSurveil.getTrackableKeys(), null);
+            //one screen with the top of the library and the graveyard where the user interface has it, else the classic pick
+            List<CardView> views = getGui().sortIntoRows(localizer.getMessage("lblArenaSurveilTitle", topN.size()),
+                    localizer.getMessage("lblArenaScryHint"), gameCacheSurveil.getTrackableKeys(),
+                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaToGraveyard"));
+            if (views == null) {
+                views = getGui().many(localizer.getMessage("lblSelectCardsToBePutIntoTheGraveyard"),
+                        localizer.getMessage("lblCardsToPutInTheGraveyard"), -1, gameCacheSurveil.getTrackableKeys(), null);
+            }
             gameCacheSurveil.addToList(views, toGrave);
             topN.removeAll(toGrave);
             if (topN.isEmpty()) {
@@ -1228,19 +1276,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final String discardFor = discardForMessage(p, sa, optional ? max : min);
             if (useSelectCardsInput(valid, sa)) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-                inp.setMessage(discardFor);
+                inp.setMessage(discardFor.replace("%", "%%")); //the input formats it with the count still to pick
                 inp.setCancelAllowed(optional);
                 inp.showAndWait();
                 endTempShowCards();
                 return new CardCollection(inp.getSelected());
             }
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            setPromptContext(sa);
+            final PromptContext previousContext = pushPromptContext(PromptContext.of(sa, PromptContext.Verb.DISCARD));
             List<CardView> views;
             try {
                 views = getGui().many(discardFor, localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
             } finally {
-                clearPromptContext();
+                restorePromptContext(previousContext);
             }
             endTempShowCards();
             final CardCollection choices = new CardCollection();
@@ -1250,9 +1298,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         final Card host = sa.getHostCard();
-        if (getGui().isLibgdxPort() && host != null) { //the libGDX prompt says what makes you discard and where the cards go
+        if (getGui().explainsPrompts() && host != null) { //the prompt says what makes you discard and where the cards go
             inp.setMessage(localizer.getMessage(sa.hasParam("AnyNumber") ? "lblDiscardOwnUpToForEffect" : "lblDiscardOwnForEffect",
-                    host.getName(), "%d"));
+                    formatSafe(host.getTranslatedName()), "%d"));
         } else {
             inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
         }
@@ -1261,15 +1309,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     /**
-     * The words of a discard chosen for another player: in the libGDX client what makes them discard and where the cards
-     * go ("Mind Rot makes Arryn discard. Choose 2 of their cards to put into their graveyard."), else the plain count.
+     * The words of a discard chosen for another player: where the prompts explain themselves, what makes them discard and
+     * where the cards go ("Mind Rot makes Arryn discard. Choose 2 of their cards to put into their graveyard."), else the plain count.
      */
     private String discardForMessage(final Player p, final SpellAbility sa, final int count) {
         final Card host = sa == null ? null : sa.getHostCard();
-        if (!getGui().isLibgdxPort() || host == null) {
+        if (!getGui().explainsPrompts() || host == null) {
             return String.format(localizer.getMessage("lblChooseMinCardToDiscard"), count);
         }
-        return localizer.getMessage("lblDiscardForEffectBody", host.getName(), p.getName(), count);
+        return localizer.getMessage("lblDiscardForEffectBody", host.getTranslatedName(), p.getName(), count);
     }
 
     @Override
@@ -1284,7 +1332,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i <= cardsInGrave; i++) {
             cntChoice.add(i);
         }
-        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build());
+        //no card asks: the heading says it is delve, and what the cards picked are for
+        final PromptContext previousContext = pushPromptContext(PromptContext.because(localizer.getMessage("lblArenaDelve"), PromptContext.Verb.EXILE));
+        try {
+            return delve(cntChoice.build(), grave, toExile);
+        } finally {
+            restorePromptContext(previousContext);
+        }
+    }
+
+    private CardCollectionView delve(final List<Integer> cntChoice, final CardCollection grave, final CardCollection toExile) {
+        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice);
 
         GameEntityViewMap<Card, CardView> gameCacheGrave = GameEntityView.getMap(grave);
         for (int i = 0; i < chosenAmount; i++) {
@@ -1373,10 +1431,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (kindOfType.equals("Creature")) {
             sortCreatureTypes(types);
         }
-        if (isOptional) {
-            return getGui().oneOrNone(localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase()), types);
-        }
-        return getGui().one(localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase()), types);
+        final String question = localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase());
+        return inContext(PromptContext.of(sa), () -> isOptional ? getGui().oneOrNone(question, types) : getGui().one(question, types));
     }
 
     // sort creature types such that those most prevalent in player's deck are
@@ -1858,14 +1914,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (getGui().isLibgdxPort()) {
             tempShowCards(player.getCardsIn(ZoneType.Hand));
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
-            getGui().setPromptContext(null, localizer.getMessageorUseDefault("lblDiscardToHandSize", "Discard to hand size ({0} max)", max));
+            final PromptContext previousContext = pushPromptContext(PromptContext.because(
+                    localizer.getMessage("lblDiscardToHandSizeTitle"), PromptContext.Verb.DISCARD));
             List<CardView> views;
             try {
-                //the body says why (the hand is over its maximum) and where the cards go
-                views = getGui().many(localizer.getMessage("lblDiscardToHandSizeBody", player.getCardsIn(ZoneType.Hand).size(), max, nDiscard),
-                        localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
+                //explained: the body says why (the hand is over its maximum) and where the cards go
+                final String body = getGui().explainsPrompts()
+                        ? localizer.getMessage("lblDiscardToHandSizeBody", player.getCardsIn(ZoneType.Hand).size(), max, nDiscard)
+                        : String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard);
+                views = getGui().many(body, localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
             } finally {
-                clearPromptContext();
+                restorePromptContext(previousContext);
             }
             endTempShowCards();
             final CardCollection choices = new CardCollection();
@@ -1991,7 +2050,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean chooseFlipResult(final SpellAbility sa, final Player flipper, final boolean call) {
         final List<String> labelsSrc = call ? List.of(localizer.getMessage("lblHeads"), localizer.getMessage("lblTails"))
                 : List.of(localizer.getMessage("lblWinTheFlip"), localizer.getMessage("lblLoseTheFlip"));
-        return getGui().one(sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult"), labelsSrc).equals(labelsSrc.get(0));
+        final String question = getGui().explainsPrompts() ? localizer.getMessage("lblChooseAResult") //the title names the card
+                : sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult");
+        return inContext(PromptContext.of(sa), () -> getGui().one(question, labelsSrc)).equals(labelsSrc.get(0));
     }
 
     @Override
@@ -2101,7 +2162,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ColorSet chooseColors(final String message, final SpellAbility sa, final int min, final int max, ColorSet options) {
-        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors())));
+        return ColorSet.fromEnums(inContext(PromptContext.of(sa), () -> getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors()))));
     }
 
     @Override
@@ -2139,12 +2200,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return remembered;
         }
         final byte result;
-        if (choices.size() > 2) {
-            result = getGui().one(message, choices).getColorMask();
-        } else {
-            final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
-                    ? 0 : 1;
-            result = choices.get(idxChosen).getColorMask();
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(c));
+        try {
+            if (choices.size() > 2) {
+                result = getGui().one(message, choices).getColorMask();
+            } else {
+                final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
+                        ? 0 : 1;
+                result = choices.get(idxChosen).getColorMask();
+            }
+        } finally {
+            restorePromptContext(previousContext);
         }
 
         macros().addRememberedAction(new ColorChoiceAction(result));
@@ -2162,12 +2228,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 .collect(Collectors.toList());
         if (choices.isEmpty())
             return null;
-        setPromptContext(sa);
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(sa));
         CardFaceView cardFaceView;
         try {
             cardFaceView = getGui().one(message, choices);
         } finally {
-            clearPromptContext();
+            restorePromptContext(previousContext);
         }
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
@@ -2177,12 +2243,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Map<CardFaceView, ICardFace> mapped = faces.stream().collect(Collectors.toMap(CardFaceView::new, Function.identity(), (a, b) -> a, TreeMap::new));
         if (mapped.isEmpty())
             return null;
-        setPromptContext(sa);
+        final PromptContext previousContext = pushPromptContext(PromptContext.of(sa));
         CardFaceView chosen;
         try {
             chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
         } finally {
-            clearPromptContext();
+            restorePromptContext(previousContext);
         }
         return mapped.get(chosen);
     }
@@ -2193,7 +2259,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }
-        return getGui().one(prompt, options);
+        return inContext(PromptContext.of(sa), () -> getGui().one(prompt, options));
     }
 
     @Override
@@ -2202,7 +2268,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(states, null);
         }
         Map<CardStateView, CardState> cache = CardView.getStateMap(states);
-        CardStateView chosen = getGui().one(message, Lists.newArrayList(cache.keySet()));
+        CardStateView chosen = inContext(PromptContext.of(sa), () -> getGui().one(message, Lists.newArrayList(cache.keySet())));
         return cache.get(chosen);
     }
 
@@ -2211,7 +2277,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }
-        return getGui().one(prompt, options);
+        return inContext(PromptContext.of(sa), () -> getGui().one(prompt, options));
     }
 
     @Override
@@ -2232,7 +2298,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 //prevent NPE when overriding the cardView, the getPaperCardFromImageKey can return null making the GUI freeze, reset the view if error happens
                 cardView = sa.getCardView();
             }
-            return getGui().confirm(cardView, question.replaceAll("\n", " "));
+            final CardView shown = cardView;
+            return inContext(PromptContext.of(sa), () -> getGui().confirm(shown, question.replaceAll("\n", " ")));
         }
         final boolean result = InputConfirm.confirm(this, sa, question);
         if (result) {
@@ -2375,7 +2442,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public String chooseProtectionType(final SpellAbility sa, final List<String> choices) {
-        return getGui().one(Localizer.getInstance().getMessage("lblChooseAProtection"), choices);
+        return inContext(PromptContext.of(sa), () -> getGui().one(Localizer.getInstance().getMessage("lblChooseAProtection"), choices));
     }
 
     @Override
@@ -2709,6 +2776,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          * getGui().confirm(CardView.get(sa.getHostCard()), "Choose a Pile",
          * possibleValues); }
          */
+
+        //both piles at once, face up where they may be seen, where the user interface has such a screen
+        final boolean see1 = faceUp.equals("False"), see2 = !faceUp.equals("True");
+        if (see1) {
+            tempShowCards(pile1);
+        }
+        if (see2) {
+            tempShowCards(pile2);
+        }
+        final int taken = inContext(PromptContext.of(sa), () -> getGui().choosePile(localizer.getMessage("lblArenaPileTitle"),
+                see1 ? CardView.getCollection(pile1) : Lists.newArrayList(), see1 ? 0 : pile1.size(),
+                see2 ? CardView.getCollection(pile2) : Lists.newArrayList(), see2 ? 0 : pile2.size()));
+        if (taken >= 0) {
+            endTempShowCards();
+            return taken == 0;
+        }
+        endTempShowCards();
 
         final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
         final CardView pileView1 = new CardView(Integer.MIN_VALUE, null, p1Str);
