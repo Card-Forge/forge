@@ -452,13 +452,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView choosePermanentsToSacrifice(final SpellAbility sa, final int min, final int max,
                                                           final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice").toLowerCase(), sa);
+        return inContext(PromptContext.of(sa, PromptContext.Verb.SACRIFICE),
+                () -> choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice").toLowerCase(), sa));
     }
 
     @Override
     public CardCollectionView choosePermanentsToDestroy(final SpellAbility sa, final int min, final int max,
                                                         final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblDestroy"), sa);
+        return inContext(PromptContext.of(sa, PromptContext.Verb.DESTROY),
+                () -> choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblDestroy"), sa));
     }
 
     private CardCollectionView choosePermanentsTo(final int min, int max, final CardCollectionView valid,
@@ -1304,7 +1306,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
         }
-        inp.showAndWait();
+        inContext(PromptContext.of(sa, PromptContext.Verb.DISCARD), () -> {
+            inp.showAndWait();
+            return null;
+        });
         return new CardCollection(inp.getSelected());
     }
 
