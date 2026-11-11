@@ -48,6 +48,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
     TextraLabel money, shards;
     TextraButton advance, back, editDeck, nextPage, previousPage, reroll;
     private Table scrollContainer;
+    private float rerollLift, rerollJoinDrop, rerollJoinWiden;
+    private boolean rerollLayout;
     ScrollPane scroller;
     Table root, headerTable, metaDraftTable;
     int pageIndex = 0;
@@ -190,17 +192,10 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
         ui.onButtonPress("reroll", EventScene.this::reroll);
         reroll = ui.findActor("reroll");
-        if (canReroll()) {
-            // Lift the button row above the reroll button and shorten the panel over it by the same amount.
-            float lift = reroll.getTop() + 4 - advance.getY();
-            for (Actor button : new Actor[]{advance, back, editDeck}) {
-                button.moveBy(0, lift);
-            }
-            for (String name : Forge.isLandscapeMode() ? new String[]{"stats", "blessingInfo"} : new String[]{"scrollWindow"}) {
-                Actor panel = ui.findActor(name);
-                panel.setHeight(panel.getHeight() - lift);
-                panel.moveBy(0, lift);
-            }
+        if (reroll != null) {
+            rerollLift = reroll.getY() - back.getY();
+            rerollJoinDrop = advance.getY() - (reroll.getY() - 4 - advance.getHeight());
+            rerollJoinWiden = back.getRight() - advance.getRight();
         }
 
         Window window = ui.findActor("scrollWindow");
@@ -341,6 +336,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         if (reroll != null) {
             int price = Config.instance().getConfigData().eventRerollPrice;
             reroll.setVisible(canReroll());
+            layoutForReroll(canReroll());
             reroll.setText("[+Refresh][+shards]" + price);
             reroll.setDisabled(Current.player().getShards() < price);
         }
@@ -465,6 +461,22 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private boolean canReroll() {
         return reroll != null && Config.instance().getConfigData().eventRerollPrice > 0 && currentEvent.eventStatus == Available;
+    }
+
+    // Puts Back beside the reroll button with a full width Join Event below, and shortens the info panel above.
+    private void layoutForReroll(boolean show) {
+        if (show == rerollLayout)
+            return;
+        rerollLayout = show;
+        int sign = show ? 1 : -1;
+        back.moveBy(0, sign * rerollLift);
+        advance.moveBy(0, -sign * rerollJoinDrop);
+        advance.setWidth(advance.getWidth() + sign * rerollJoinWiden);
+        for (String name : Forge.isLandscapeMode() ? new String[]{"stats", "blessingInfo"} : new String[]{"scrollWindow"}) {
+            Actor panel = ui.findActor(name);
+            panel.setHeight(panel.getHeight() - sign * rerollLift);
+            panel.moveBy(0, sign * rerollLift);
+        }
     }
 
     private void reroll() {
