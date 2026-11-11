@@ -339,6 +339,11 @@ public class DeckProxy implements InventoryItem {
         return highestRarity;
     }
 
+    /** The card whose art stands for the deck: its first commander, else its card with the highest mana value. */
+    public PaperCard getCoverCard() {
+        return getDeck().getCommanders().isEmpty() ? getHighestCMCCard() : getDeck().getCommanders().get(0);
+    }
+
     public PaperCard getHighestCMCCard() {
         PaperCard key = null;
         Map<PaperCard, Integer> keyCMC = new HashMap<>(64);
