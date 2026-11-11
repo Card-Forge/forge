@@ -3101,6 +3101,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             state.applyToGame(getGame());
         }
 
+        @Override
+        public void setupGameState(final List<String> lines) {
+            final GameState state = createGameStateObject();
+            try {
+                state.parse(lines);
+            } catch (final RuntimeException e) {
+                getGui().showErrorDialog(localizer.getMessage("lblErrorLoadingBattleSetupFile"));
+                return;
+            }
+            if (getGame().getPhaseHandler().getPriorityPlayer() == null) {
+                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
+                return;
+            }
+            state.applyToGame(getGame());
+        }
+
         /*
          * (non-Javadoc)
          *
