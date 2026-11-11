@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public enum TeferiOptionalEncounter implements NPCOptionalEncounter {
     TEMPORAL_ANCHOR("teferi:temporal_anchor") {
         @Override
         public List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Teferi offers you his hand. \"Easy, Commander. You're back in the Aether. Take a moment.\"",
                 "He traces a small circle in the air between you. For a moment, its light holds still against " +
                     "your skin. \"A temporal link, anchored here. I establish it just before you leave. If you're " +
@@ -32,7 +33,7 @@ public enum TeferiOptionalEncounter implements NPCOptionalEncounter {
     CODEX_AND_HISTORY("teferi:codex_and_history") {
         @Override
         public List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Back already? I meant...keep it up, Commander. You're getting stronger every second that I am watching you.",
                 "Oh, and did you know that I try to keep track of your memories ad findings during your Runs?\n"
                     + "Open the 'Codex' to view and reset your overall game progress, stats, unlocked cards and tutorials.\n"
@@ -48,7 +49,7 @@ public enum TeferiOptionalEncounter implements NPCOptionalEncounter {
     AUTO_UPDATE("teferi:auto_update") {
         @Override
         public List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Umm...It might be a bad timing but...Just a quick reminder that you can (and probably should) check 'Content Downloaders' (on the left) and then select 'Check for Updates' from time to time.\n"
                     + "That way you won't miss any new features, fixes and content.",
                 "Make sure 'Auto updater' in 'Preferences' is set to 'Snapshot.\n'"

@@ -85,7 +85,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     RogueMetaProgress progress = RogueMetaProgress.getInstance();
     boolean newState = !progress.isDevUnlockAll();
     progress.setDevUnlockAll(newState);
-    view.getBtnDevUnlockAll().setText(newState ? "[Dev] Lock Commanders" : "[Dev] Unlock All");
+    view.getBtnDevUnlockAll().setText(newState ? Localizer.getInstance().getMessage("lblRogueDevLockCommanders") : Localizer.getInstance().getMessage("lblRogueDevUnlockAll"));
     loadAvailableCommanders();
   }
 
@@ -100,7 +100,7 @@ public enum CSubmenuRogueStart implements ICDoc {
       progress.setNPCLevel(entry.getKey().id, entry.getValue());
     }
 
-    FOptionPane.showMessageDialog("NPC progression levels updated.", "Dev NPC Progress");
+    FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueNpcProgressUpdated"), Localizer.getInstance().getMessage("lblRogueDevNpcProgressTitle"));
   }
 
   @Override
@@ -209,13 +209,13 @@ public enum CSubmenuRogueStart implements ICDoc {
     boolean hasCompletedRuns = RogueMetaProgress.getInstance().getTotalRunsCompleted() > 0;
     view.getBtnAether().setEnabled(hasCompletedRuns);
     view.getBtnAether()
-        .setToolTipText(hasCompletedRuns ? null : "Unlock the Aether by completing your first Run.");
+        .setToolTipText(hasCompletedRuns ? null : Localizer.getInstance().getMessage("lblRogueUnlockAetherHint"));
     view.getBtnHistory().setEnabled(hasCompletedRuns);
     view.getBtnHistory()
-        .setToolTipText(hasCompletedRuns ? null : "Unlock the Run History by completing your first Run.");
+        .setToolTipText(hasCompletedRuns ? null : Localizer.getInstance().getMessage("lblRogueUnlockHistoryHint"));
     view.getBtnStats().setEnabled(hasCompletedRuns);
     view.getBtnStats()
-        .setToolTipText(hasCompletedRuns ? null : "Unlock Codex by completing your first Run.");
+        .setToolTipText(hasCompletedRuns ? null : Localizer.getInstance().getMessage("lblRogueUnlockCodexHint"));
 
     // Refresh layout
     view.getCommanderCarouselPanel().revalidate();
@@ -379,7 +379,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     if (panel.isLocked()) {
       // Show unlock condition for locked commanders
       view.getLblCommanderName().setText("???");
-      view.getLblDescriptionLabel().setText("Unlock:");
+      view.getLblDescriptionLabel().setText(Localizer.getInstance().getMessage("lblRogueUnlockLabel"));
       view.getLblDescriptionLock().setVisible(true);
       String unlockDesc = deck.getUnlockDescription();
       if (unlockDesc != null && !unlockDesc.isEmpty()) {
@@ -393,7 +393,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     } else {
       // Show normal details for unlocked commanders
       view.getLblCommanderName().setText(deck.getCommanderCardName());
-      view.getLblDescriptionLabel().setText("Description:");
+      view.getLblDescriptionLabel().setText(Localizer.getInstance().getMessage("lblRogueDescriptionLabel"));
       view.getLblDescriptionLock().setVisible(false);
       view.getTxtDescription().setText(deck.getDescription());
       view.getTxtTheme().setText(deck.getThemeDescription());
@@ -429,7 +429,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     RogueMetaProgress progress = RogueMetaProgress.getInstance();
     if (!progress.isDescensionModeUnlocked()) {
       view.getLblDescensionLockText().setText(
-          "Descension Mode - Win a Run with 3 different Commanders to unlock.");
+          Localizer.getInstance().getMessage("lblRogueUnlockDescensionHint"));
       view.getPnlDescensionLock().setVisible(true);
       view.getChkDescension().setVisible(false);
       return;
@@ -454,7 +454,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     int maxUnlocked = progress.getMaxDescensionUnlocked(commanderName);
     if (maxUnlocked == 0) {
       view.getLblDescensionLockText().setText(
-          "Win a Run with " + commanderName + " to unlock Descension Mode for this Commander.");
+          Localizer.getInstance().getMessage("lblRogueUnlockCommanderDescensionHint", commanderName));
       view.getPnlDescensionLock().setVisible(true);
       view.getChkDescension().setVisible(false);
     } else {
@@ -505,8 +505,8 @@ public enum CSubmenuRogueStart implements ICDoc {
     boolean locked = selectedDescensionLevel > maxUnlocked;
 
     String levelName = dl != null
-        ? String.format("Level %d - %s", selectedDescensionLevel, dl.name)
-        : String.format("Level %d", selectedDescensionLevel);
+        ? Localizer.getInstance().getMessage("lblRogueNamedLevel", selectedDescensionLevel, dl.name)
+        : Localizer.getInstance().getMessage("lblRogueLevel", selectedDescensionLevel);
     view.getLblDescensionLevel().setText(levelName);
     view.getLblDescensionLock().setVisible(locked);
     view.getBtnDescensionDown().setVisible(selectedDescensionLevel > 1);
@@ -516,9 +516,7 @@ public enum CSubmenuRogueStart implements ICDoc {
       view.getLblDescensionDesc().setText(dl != null ? dl.description : "");
       updateStartButtonState();
     } else {
-      view.getLblDescensionDesc().setText(String.format(
-          "Win a Run with %s in Descension Level %d to unlock Level %d.",
-          commanderName, selectedDescensionLevel - 1, selectedDescensionLevel));
+      view.getLblDescensionDesc().setText(Localizer.getInstance().getMessage("lblRogueUnlockNextDescensionHint", commanderName, selectedDescensionLevel - 1, selectedDescensionLevel));
       updateStartButtonState();
     }
   }
@@ -554,7 +552,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     try {
       for (CustomRunModification modification : modifications) {
         runDeck = modification.createRogueDeck(runDeck, chosenCommander,
-            (deck, ctx) -> new CardSelectionDialog("Starting Deck", ctx.cardSelectionSubtitle,
+            (deck, ctx) -> new CardSelectionDialog(Localizer.getInstance().getMessage("lblRogueStartingDeck"), ctx.cardSelectionSubtitle,
                 ctx.candidateCards, new RogueRun(deck), ctx.cardSelectionMinCount,
                 ctx.cardSelectionMaxCount, ctx.buildDeckPreview).show());
         if (runDeck == null) {
@@ -566,8 +564,8 @@ public enum CSubmenuRogueStart implements ICDoc {
       runDeck = null;
     }
     if (runDeck == null) {
-      FOptionPane.showMessageDialog("Could not generate a valid Commander deck. Please try again.",
-          "Custom Run");
+      FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueCouldNotGenerateDeck"),
+          Localizer.getInstance().getMessage("lblRogueCustomRun"));
       return;
     }
     if (chosenOne) {
@@ -589,10 +587,10 @@ public enum CSubmenuRogueStart implements ICDoc {
     List<RogueRun> runsToAbandon = getContinuableRunsToAbandon();
     if (!runsToAbandon.isEmpty()) {
       boolean confirmed = FOptionPane.showConfirmDialog(
-          "You have an active Run in progress.\nStarting a new Run will abandon it. Continue?",
-          "Abandon Current Run",
-          "Start New Run",
-          "Cancel",
+          Localizer.getInstance().getMessage("lblRogueAbandonForNewRun"),
+          Localizer.getInstance().getMessage("lblRogueAbandonCurrentRun"),
+          Localizer.getInstance().getMessage("lblRogueStartNewRun"),
+          Localizer.getInstance().getMessage("lblCancel"),
           false
       );
       if (!confirmed) return;
@@ -727,7 +725,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     }
 
     CSubmenuRogueMap.SINGLETON_INSTANCE.showNodeResultDialog(
-        "NPC Reward Gained", "You gained a reward from " + effect.getDisplayName() + ".", sections);
+        Localizer.getInstance().getMessage("lblRogueNpcRewardGained"), Localizer.getInstance().getMessage("lblRogueGainedNpcReward", effect.getDisplayName()), sections);
   }
 
   private List<NodeResultPanel.CardSection> buildNpcResultSections(NPCEffect effect, EffectResultContext ctx) {
@@ -737,12 +735,12 @@ public enum CSubmenuRogueStart implements ICDoc {
     List<NodeResultPanel.CardSection> sections = new ArrayList<>();
     List<PaperCard> removedCards = filterResultCards(ctx.removedCards, excludedNames);
     if (!removedCards.isEmpty()) {
-      sections.add(new NodeResultPanel.CardSection("Cards removed:", removedCards));
+      sections.add(new NodeResultPanel.CardSection(Localizer.getInstance().getMessage("lblRogueCardsRemoved"), removedCards));
     }
 
     List<PaperCard> addedCards = filterResultCards(ctx.addedCards, excludedNames);
     if (!addedCards.isEmpty()) {
-      sections.add(new NodeResultPanel.CardSection("Cards added:", addedCards));
+      sections.add(new NodeResultPanel.CardSection(Localizer.getInstance().getMessage("lblRogueCardsAdded"), addedCards));
     }
     return sections;
   }

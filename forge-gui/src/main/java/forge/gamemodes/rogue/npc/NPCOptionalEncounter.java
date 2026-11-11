@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface NPCOptionalEncounter extends NPCEncounter {
     String getId();
 
     default List<String> getStoryTextChunks() {
-        return List.of();
+        return ImmutableList.of();
     }
 
     @Override
@@ -29,6 +30,6 @@ public interface NPCOptionalEncounter extends NPCEncounter {
         }
 
         progress.markNPCEncounterSeen(getId());
-        return buildContext(storyTextChunks, List.of());
+        return buildContext(storyTextChunks, ImmutableList.of());
     }
 }

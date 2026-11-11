@@ -11,6 +11,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsConfiguration;
@@ -80,7 +81,7 @@ public class NPCDialog {
         desiredHeight += txtFlavor.getPreferredSize().height + 10 + 20;
 
         if (flavorTextChunks.size() > 1 || ctx.choices().isEmpty()) {
-            btnContinue = RogueButtonHelper.createNavigationButton("Continue");
+            btnContinue = RogueButtonHelper.createNavigationButton(Localizer.getInstance().getMessage("lblContinue"));
             RogueButtonHelper.setChoiceButtonSizeHint(btnContinue, choiceButtonWidth);
             btnContinue.addActionListener(e -> advanceChunkOrClose());
             panel.add(btnContinue, "w 80%!, ax center, gap 0 0 10px 10px, wrap");
@@ -119,8 +120,8 @@ public class NPCDialog {
         typewriterText.setFullText(flavorTextChunks.get(currentChunkIndex));
         updateButtonVisibility();
         boolean hasRerolls = rerollCtx.remainingRerolls > 0;
-        optionPane = new FOptionPane(null, "NPC Encounter", null, panel,
-                hasRerolls ? List.of("Reroll (" + rerollCtx.remainingRerolls + " left)") : List.of(), -1);
+        optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueNpcEncounter"), null, panel,
+                hasRerolls ? List.of(Localizer.getInstance().getMessage("lblRogueRerollsRemaining", rerollCtx.remainingRerolls)) : List.of(), -1);
         optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         RogueUIHelper.disableSpacebarButtonActivation(optionPane.getContentPane());
         optionPane.getTitleBar().setVisible(false);

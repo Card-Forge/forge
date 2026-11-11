@@ -293,7 +293,9 @@ public class RogueIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
+                    String name = reader.getValue();
+                    PaperCard card = RogueConfig.getRogueCard(name);
+                    result.add(card != null ? card : FModel.getMagicDb().getCommonCards().getCard(name));
                 } else if ("card".equals(nodename)) { // New format
                     result.add(readCardPrinted(reader), cnt);
                 }
@@ -321,7 +323,11 @@ public class RogueIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
+            PaperCard card = RogueConfig.getRogueCard(name);
+            if (card != null) {
+                return foil ? card.getFoiled() : card;
+            }
+            card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
             if (null == card) {
                 // Get replacement card from any edition if it exists
                 card = FModel.getMagicDb().getCommonCards().getCard(name);

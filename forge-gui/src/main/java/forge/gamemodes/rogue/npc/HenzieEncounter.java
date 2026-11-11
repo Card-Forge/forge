@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueRun;
@@ -28,7 +29,7 @@ public enum HenzieEncounter implements NPCEncounter {
         }
     };
 
-    private static final List<RogueEvent> CONTRACT_EVENTS = List.of(
+    private static final List<RogueEvent> CONTRACT_EVENTS = ImmutableList.of(
         RogueEvent.STREET_OF_CONCEALMENT,
         RogueEvent.STREET_OF_GREED,
         RogueEvent.STREET_OF_FORCEFULNESS
@@ -96,7 +97,7 @@ public enum HenzieEncounter implements NPCEncounter {
 
     @Override
     public List<String> getOfferingBoonMonologues() {
-        return List.of(
+        return ImmutableList.of(
             "Henzie checks the buckles on your pack. \"Heading out already? Hold on. I've been putting a few things " +
                 "aside for you. Take a look before you go getting yourself killed with somebody else's stuff.\"",
             "Henzie folds a supplier's letter and pockets it with a grin. \"Took a little asking around, but I've got " +
@@ -108,40 +109,40 @@ public enum HenzieEncounter implements NPCEncounter {
 
     private NPCContext buildAcceptedContractContext() {
         return buildContext(
-            List.of(
+            ImmutableList.of(
                 "The devil folds the signed contract and slips it inside his coat. \"Smarter than I thought. Name's Henzie 'Toolbox' Torre. " +
                     "You need something acquired, come find me.\"",
                 "He glances over your belongings and outfit. \"Actually, find me before your next trip. I can get you better " +
                     "than that. First lot's on me. You keep coming back from places most people won't go near, " +
                     "I reckon we'll have plenty of business.\""
             ),
-            List.of()
+            ImmutableList.of()
         );
     }
 
     private NPCContext buildDeclinedContractContext() {
         return buildContext(
             "???", getNpc().avatarIndex,
-            List.of(
+            ImmutableList.of(
                 "The unsigned contract begins to fade, but the devil catches it between two claws and studies you " +
                     "with theatrical disappointment.",
                 "\"Bad choice. Would've guessed you Commanders were a little smarter than that. All right, I guess " +
                     "no meta-progression for this one. No unlocked mobster devil at the start " +
                     "of each Run offering crazy starting boons until a contract gets signed. You do you, pal.\""
             ),
-            List.of()
+            ImmutableList.of()
         );
     }
 
     private NPCContext buildAutomaticUnlockContext() {
         return buildContext(
-            List.of(
+            ImmutableList.of(
                 "The devil spots you and puts away the contract he was reaching for. \"All right. I've spent " +
                     "enough on ink trying to sell you something. Let's try letting you see what I can do.\"",
                 "He holds out a hand. \"Henzie 'Toolbox' Torre. Come see me before you head out. I'll set you up " +
                     "with a sample. You like the results, keep coming back. I've got plenty more where that came from.\""
             ),
-            List.of()
+            ImmutableList.of()
         );
     }
 

@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.effect;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.CardPool;
@@ -53,7 +54,7 @@ public interface RogueEffect {
     default String getEffectCardReference() { return null; }
 
     /** Cards this effect provides outside the deck but should still block singleton deck rewards. */
-    default List<String> getDuplicateProtectedCardReferences() { return List.of(); }
+    default List<String> getDuplicateProtectedCardReferences() { return ImmutableList.of(); }
 
     /** Optional ranked card reference for effects whose representative card varies by rank. */
     default String getEffectCardReferenceForRank(int rank) {
@@ -540,7 +541,7 @@ public interface RogueEffect {
     }
 
     default void gainWound(RogueRun run, EffectResultContext ctx) {
-        List<WoundEffect> available = new ArrayList<>(List.of(WoundEffect.values()));
+        List<WoundEffect> available = new ArrayList<>(ImmutableList.copyOf(WoundEffect.values()));
         List<RogueEffect> active = run.getActiveWoundEffects();
         available.removeIf(w -> active.stream().anyMatch(a -> a == w));
         if (available.isEmpty()) return;
@@ -658,12 +659,12 @@ public interface RogueEffect {
 
         List<PaperCard> result = run.getAllCardsForActiveCommander(filter);
         if (result.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> selectedCards = getSubsetFromCollection(result, count);
         if (selectedCards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         selectedCards = applyCardPrintOverrides(selectedCards, cardPrintOverrides);
@@ -673,7 +674,7 @@ public interface RogueEffect {
     // Get random subset of cards if specific count was passed, otherwise return ALL cards
     private static List<PaperCard> getSubsetFromCollection(List<PaperCard> cards, Integer count) {
         if (cards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         if (count == null) {
@@ -681,12 +682,12 @@ public interface RogueEffect {
         }
 
         if (count <= 0) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         if (count == 1) {
             PaperCard selected = Aggregates.random(cards);
-            return selected == null ? List.of() : new ArrayList<>(List.of(selected));
+            return selected == null ? ImmutableList.of() : new ArrayList<>(ImmutableList.of(selected));
         }
 
         Collections.shuffle(cards, MyRandom.getRandom());

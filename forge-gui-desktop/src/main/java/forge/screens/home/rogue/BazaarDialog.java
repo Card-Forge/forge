@@ -81,7 +81,7 @@ public class BazaarDialog {
     this.availableItems = new ArrayList<>(items);
     this.run = run;
     this.availableGold = gold;
-    this.dialogTitle = title != null ? title : "Bazaar";
+    this.dialogTitle = title != null ? title : Localizer.getInstance().getMessage("lblRogueBazaar");
     this.rerollButtonLabel = rerollButtonLabel;
     this.selectedTabIndex = selectedTabIndex;
     splitItems();
@@ -96,7 +96,7 @@ public class BazaarDialog {
         .build();
 
     lblGold = new FLabel.Builder()
-        .text("Gold: " + availableGold)
+        .text(Localizer.getInstance().getMessage("lblRogueGoldTotal", availableGold))
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
         .fontSize(14)
         .fontAlign(SwingConstants.RIGHT)
@@ -104,7 +104,7 @@ public class BazaarDialog {
     lblGold.setHorizontalTextPosition(SwingConstants.LEFT);
 
     lblCost = new FLabel.Builder()
-        .text("Cost: 0")
+        .text(Localizer.getInstance().getMessage("lblRogueBazaarCost", 0))
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
         .fontSize(14)
         .fontAlign(SwingConstants.RIGHT)
@@ -113,7 +113,7 @@ public class BazaarDialog {
 
     SeparatorLine separator = new SeparatorLine();
     lblRemaining = new FLabel.Builder()
-        .text("Remaining: " + availableGold)
+        .text(Localizer.getInstance().getMessage("lblRogueRemainingGold", availableGold))
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
         .fontSize(14)
         .fontStyle(Font.BOLD)
@@ -123,8 +123,8 @@ public class BazaarDialog {
 
     FLabel lblDescription = new FLabel.Builder()
         .text(specialItems.isEmpty()
-            ? "Select cards to purchase (prices based on rarity)"
-            : "Select offers to purchase")
+            ? Localizer.getInstance().getMessage("lblRogueSelectCardsToBuy")
+            : Localizer.getInstance().getMessage("lblRogueSelectOffersToBuy"))
         .fontSize(12)
         .fontAlign(SwingConstants.CENTER)
         .build();
@@ -241,12 +241,12 @@ public class BazaarDialog {
     final int VIEW_MAP_OPTION = showReroll ? 3 : 2;
     final int SKIP_OPTION = showReroll ? 4 : 3;
     final List<String> buttons = new ArrayList<>();
-    buttons.add(specialItems.isEmpty() ? "Buy Selected Cards" : "Buy Selected");
+    buttons.add(specialItems.isEmpty() ? localizer.getMessage("lblRogueBuySelectedCards") : localizer.getMessage("lblRogueBuySelected"));
     if (showReroll) {
       buttons.add(rerollButtonLabel);
     }
-    buttons.add("View Deck");
-    buttons.add("View Map");
+    buttons.add(Localizer.getInstance().getMessage("lblViewDeck"));
+    buttons.add(localizer.getMessage("lblRogueViewMap"));
     buttons.add(localizer.getMessage("lblSkip"));
 
     final javax.swing.Icon coinIcon = createCoinIcon();
@@ -367,8 +367,8 @@ public class BazaarDialog {
       specialRows.add(carryItems);
       specialGridPanel = new ShopGridPanel(specialRows);
       tabbedPane = new FTabbedPane();
-      tabbedPane.addTab("Cards", cardGridPanel);
-      tabbedPane.addTab("Traits & Carry Cards", specialGridPanel);
+      tabbedPane.addTab(Localizer.getInstance().getMessage("lblCards"), cardGridPanel);
+      tabbedPane.addTab(Localizer.getInstance().getMessage("lblRogueTraitsAndCarryCards"), specialGridPanel);
       tabbedPane.setSelectedIndex(Math.max(0, Math.min(selectedTabIndex, tabbedPane.getTabCount() - 1)));
       add(tabbedPane);
     }
@@ -589,8 +589,8 @@ public class BazaarDialog {
 
     private void updateGoldStatus() {
       int totalCost = BazaarPricing.calculateItemsTotalCost(selectedItems);
-      lblCost.setText(totalCost > 0 ? "Cost: -" + totalCost : "Cost: 0");
-      lblRemaining.setText("Remaining: " + (availableGold - totalCost));
+      lblCost.setText(Localizer.getInstance().getMessage("lblRogueBazaarCost", -totalCost));
+      lblRemaining.setText(Localizer.getInstance().getMessage("lblRogueRemainingGold", availableGold - totalCost));
       if (optionPane != null) {
         optionPane.getButton(0).setEnabled(!selectedItems.isEmpty());
       }

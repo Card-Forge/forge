@@ -73,15 +73,15 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   SINGLETON_INSTANCE;
 
   enum CodexTab {
-    GLOBAL_STATS("Global Stats"),
-    COMMANDERS("Rogue Commanders"),
-    PLANEBOUNDS("Planebounds"),
-    TRAITS("Traits");
+    GLOBAL_STATS("lblRogueGlobalStats"),
+    COMMANDERS("lblRogueCommanders"),
+    PLANEBOUNDS("lblRoguePlanebounds"),
+    TRAITS("lblRogueTraits");
 
-    private final String label;
+    private final String labelKey;
 
-    CodexTab(String label) {
-      this.label = label;
+    CodexTab(String labelKey) {
+      this.labelKey = labelKey;
     }
   }
 
@@ -91,7 +91,8 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private static final int TOP_SECTION_WRAP_WIDTH = 700;
 
   private DragCell parentCell;
-  private final DragTab tab = new DragTab("Rogue Codex");
+  private final Localizer localizer = Localizer.getInstance();
+  private final DragTab tab = new DragTab(localizer.getMessage("lblRogueCodex"));
   private final FTabbedPane codexTabs = new FTabbedPane();
   private final Map<CodexTab, SkinnedPanel> tabPanels = new EnumMap<>(CodexTab.class);
   private CardUtil zoomUtil;
@@ -105,26 +106,26 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       .fontSize(16)
       .build();
 
-  private final FLabel lblRunsStarted = new FLabel.Builder().text("Runs Started: 0").fontSize(14).build();
-  private final FLabel lblRunsCompleted = new FLabel.Builder().text("Runs Completed: 0").fontSize(14).build();
-  private final FLabel lblRunsWon = new FLabel.Builder().text("Runs Won: 0").fontSize(14).build();
-  private final FLabel lblRunsLost = new FLabel.Builder().text("Runs Lost: 0").fontSize(14).build();
-  private final FLabel lblTotalPlaytime = new FLabel.Builder().text("Total Playtime: 00:00:00").fontSize(14).build();
-  private final FLabel lblMatchesWon = new FLabel.Builder().text("Matches Won: 0").fontSize(14).build();
-  private final FLabel lblMatchesLost = new FLabel.Builder().text("Matches Lost: 0").fontSize(14).build();
-  private final FLabel lblMaxLife = new FLabel.Builder().text("Max Life Reached: 0").fontSize(14).build();
-  private final FLabel lblMaxGold = new FLabel.Builder().text("Max Gold Earned: 0").fontSize(14).build();
-  private final FLabel lblMaxCreatureTypes = new FLabel.Builder().text("Max Creature Types: 0").fontSize(14).build();
-  private final FLabel lblMaxArtifacts = new FLabel.Builder().text("Max Artifacts: 0").fontSize(14).build();
-  private final FLabel lblMaxSharedCreatureType = new FLabel.Builder().text("Max Shared Creature Type: 0").fontSize(14).build();
-  private final FLabel lblMaxLegendaryPermanents = new FLabel.Builder().text("Max Legendary Permanents: 0").fontSize(14).build();
-  private final FLabel lblMaxNonbasicLands = new FLabel.Builder().text("Max Nonbasic Lands: 0").fontSize(14).build();
+  private final FLabel lblRunsStarted = new FLabel.Builder().text(localizer.getMessage("lblRogueRunsStarted", 0)).fontSize(14).build();
+  private final FLabel lblRunsCompleted = new FLabel.Builder().text(localizer.getMessage("lblRogueRunsCompleted", 0)).fontSize(14).build();
+  private final FLabel lblRunsWon = new FLabel.Builder().text(localizer.getMessage("lblRogueRunsWon", 0)).fontSize(14).build();
+  private final FLabel lblRunsLost = new FLabel.Builder().text(localizer.getMessage("lblRogueRunsLost", 0)).fontSize(14).build();
+  private final FLabel lblTotalPlaytime = new FLabel.Builder().text(localizer.getMessage("lblRogueTotalPlaytime", "00:00:00")).fontSize(14).build();
+  private final FLabel lblMatchesWon = new FLabel.Builder().text(localizer.getMessage("lblRogueMatchesWon", 0)).fontSize(14).build();
+  private final FLabel lblMatchesLost = new FLabel.Builder().text(localizer.getMessage("lblRogueMatchesLost", 0)).fontSize(14).build();
+  private final FLabel lblMaxLife = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxLife", 0)).fontSize(14).build();
+  private final FLabel lblMaxGold = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxGold", 0)).fontSize(14).build();
+  private final FLabel lblMaxCreatureTypes = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxCreatureTypes", 0)).fontSize(14).build();
+  private final FLabel lblMaxArtifacts = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxArtifacts", 0)).fontSize(14).build();
+  private final FLabel lblMaxSharedCreatureType = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxSharedCreatureType", 0)).fontSize(14).build();
+  private final FLabel lblMaxLegendaryPermanents = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxLegendaryPermanents", 0)).fontSize(14).build();
+  private final FLabel lblMaxNonbasicLands = new FLabel.Builder().text(localizer.getMessage("lblRogueMaxNonbasicLands", 0)).fontSize(14).build();
 
   private final FButton btnBack;
   private final FButton btnStatsBack;
   private final FButton btnReset;
   private final FButton btnResetTutorials;
-  private final FButton btnDevUnlockCodex = new FButton("[Dev] Unlock Codex");
+  private final FButton btnDevUnlockCodex = new FButton(localizer.getMessage("lblRogueDevUnlockCodex"));
 
   VSubmenuRogueCodex() {
     lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -133,19 +134,19 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       SkinnedPanel tabPanel = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
       tabPanel.setOpaque(false);
       tabPanels.put(codexTab, tabPanel);
-      codexTabs.addTab(codexTab.label, tabPanel);
+      codexTabs.addTab(localizer.getMessage(codexTab.labelKey), tabPanel);
     }
     codexTabs.addChangeListener(e -> notifyTabSelection());
 
-    btnBack = new FButton("Back");
+    btnBack = new FButton(localizer.getMessage("lblBack"));
     btnBack.setIcon(FSkin.getImage(FSkinProp.ICO_OPEN).resize(24, 24).getIcon());
-    btnStatsBack = new FButton("Back");
+    btnStatsBack = new FButton(localizer.getMessage("lblBack"));
     btnStatsBack.setIcon(FSkin.getImage(FSkinProp.ICO_OPEN).resize(24, 24).getIcon());
 
-    btnReset = new FButton("Reset Progress");
+    btnReset = new FButton(localizer.getMessage("lblRogueResetProgress"));
     btnReset.setIcon(FSkin.getImage(FSkinProp.ICO_DELETE).resize(24, 24).getIcon());
 
-    btnResetTutorials = new FButton("Reset Tutorials");
+    btnResetTutorials = new FButton(localizer.getMessage("lblRogueResetTutorials"));
     btnResetTutorials.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_BOOK).resize(24, 24).getIcon());
   }
 
@@ -153,20 +154,20 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       int matchesWon, int matchesLost,
       int maxLife, int maxGold, int maxCreatureTypes, int maxArtifacts, int maxSharedCreatureType,
       int maxLegendaryPermanents, int maxNonbasicLands) {
-    lblRunsStarted.setText("Runs Started: " + runsStarted);
-    lblRunsCompleted.setText("Runs Completed: " + runsCompleted);
-    lblRunsWon.setText("Runs Won: " + runsWon);
-    lblRunsLost.setText("Runs Lost: " + (runsCompleted - runsWon));
-    lblTotalPlaytime.setText("Total Playtime: " + TextHelper.formatHoursMinutesSeconds(totalPlaytimeMillis));
-    lblMatchesWon.setText("Matches Won: " + matchesWon);
-    lblMatchesLost.setText("Matches Lost: " + matchesLost);
-    lblMaxLife.setText("Max Life Reached: " + maxLife);
-    lblMaxGold.setText("Max Gold Earned: " + maxGold);
-    lblMaxCreatureTypes.setText("Max Creature Types: " + maxCreatureTypes);
-    lblMaxArtifacts.setText("Max Artifacts: " + maxArtifacts);
-    lblMaxSharedCreatureType.setText("Max Shared Creature Type: " + maxSharedCreatureType);
-    lblMaxLegendaryPermanents.setText("Max Legendary Permanents: " + maxLegendaryPermanents);
-    lblMaxNonbasicLands.setText("Max Nonbasic Lands: " + maxNonbasicLands);
+    lblRunsStarted.setText(localizer.getMessage("lblRogueRunsStarted", runsStarted));
+    lblRunsCompleted.setText(localizer.getMessage("lblRogueRunsCompleted", runsCompleted));
+    lblRunsWon.setText(localizer.getMessage("lblRogueRunsWon", runsWon));
+    lblRunsLost.setText(localizer.getMessage("lblRogueRunsLost", runsCompleted - runsWon));
+    lblTotalPlaytime.setText(localizer.getMessage("lblRogueTotalPlaytime", TextHelper.formatHoursMinutesSeconds(totalPlaytimeMillis)));
+    lblMatchesWon.setText(localizer.getMessage("lblRogueMatchesWon", matchesWon));
+    lblMatchesLost.setText(localizer.getMessage("lblRogueMatchesLost", matchesLost));
+    lblMaxLife.setText(localizer.getMessage("lblRogueMaxLife", maxLife));
+    lblMaxGold.setText(localizer.getMessage("lblRogueMaxGold", maxGold));
+    lblMaxCreatureTypes.setText(localizer.getMessage("lblRogueMaxCreatureTypes", maxCreatureTypes));
+    lblMaxArtifacts.setText(localizer.getMessage("lblRogueMaxArtifacts", maxArtifacts));
+    lblMaxSharedCreatureType.setText(localizer.getMessage("lblRogueMaxSharedCreatureType", maxSharedCreatureType));
+    lblMaxLegendaryPermanents.setText(localizer.getMessage("lblRogueMaxLegendaryPermanents", maxLegendaryPermanents));
+    lblMaxNonbasicLands.setText(localizer.getMessage("lblRogueMaxNonbasicLands", maxNonbasicLands));
   }
 
   public void showGlobalStats() {
@@ -232,10 +233,10 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     traitEntries.addAll(eventEntries);
     traitEntries.addAll(woundEntries);
 
-    addTraitSection(sections, "Chest", chestEntries);
-    addTraitSection(sections, "NPC", npcEntries);
-    addTraitSection(sections, "Event", eventEntries);
-    addTraitSection(sections, "Wound", woundEntries);
+    addTraitSection(sections, localizer.getMessage("lblRogueChest"), chestEntries);
+    addTraitSection(sections, localizer.getMessage("lblRogueNpc"), npcEntries);
+    addTraitSection(sections, localizer.getMessage("lblRogueEvent"), eventEntries);
+    addTraitSection(sections, localizer.getMessage("lblRogueWound"), woundEntries);
 
     pnlContent.add(createTraitStatsHeader(traitEntries), "growx, gapbottom 16");
     pnlContent.add(createPanelScrollPane(sections), "grow, push");
@@ -297,18 +298,18 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     JPanel panel = new SkinnedPanel(new MigLayout("insets 20, gap 5, wrap 1", "[grow]", ""));
     panel.setOpaque(false);
 
-    addSectionLabel(panel, "Run Statistics");
+    addSectionLabel(panel, localizer.getMessage("lblRogueRunStatistics"));
     panel.add(lblTotalPlaytime);
     panel.add(lblRunsStarted);
     panel.add(lblRunsCompleted);
     panel.add(lblRunsWon);
     panel.add(lblRunsLost, "gapbottom 20");
 
-    addSectionLabel(panel, "Match Statistics");
+    addSectionLabel(panel, localizer.getMessage("lblRogueMatchStatistics"));
     panel.add(lblMatchesWon);
     panel.add(lblMatchesLost, "gapbottom 20");
 
-    addSectionLabel(panel, "Milestones");
+    addSectionLabel(panel, localizer.getMessage("lblRogueMilestones"));
     panel.add(lblMaxLife);
     panel.add(lblMaxGold);
     panel.add(lblMaxCreatureTypes);
@@ -338,7 +339,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       boolean selected = selectedCommander != null
           && selectedCommander.getCommanderCardName().equals(commander.getCommanderCardName());
       FLabel avatar = createAvatarLabel(unlocked ? commander.getAvatarIndex() : -1,
-          unlocked ? commander.getName() : "Locked Commander", selected, unlocked);
+          unlocked ? commander.getName() : localizer.getMessage("lblRogueLockedCommander"), selected, unlocked);
       if (unlocked) {
         avatar.setCommand((Runnable) () -> selectionCallback.accept(commander));
       }
@@ -359,7 +360,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
         boolean selected = selectedPlanebound != null
             && selectedPlanebound.deckPath().equals(planebound.deckPath());
         FLabel avatar = createAvatarLabel(encountered ? planebound.avatarIndex() : -1,
-            encountered ? planebound.planeboundName() : "Unknown Planebound", selected, encountered);
+            encountered ? planebound.planeboundName() : localizer.getMessage("lblRogueUnknownPlanebound"), selected, encountered);
         if (encountered) {
           avatar.setCommand((Runnable) () -> selectionCallback.accept(planebound));
         }
@@ -469,10 +470,10 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
 
     JPanel sections = new CodexSectionsPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]"));
     sections.setOpaque(false);
-    addCardGridSection(sections, "Commander", createCommanderCardEntries(selectedCommander));
-    addCardGridSection(sections, "Reward Pool - Non Mythics", nonMythicEntries);
-    addCardGridSection(sections, "Reward Pool - Mythics", mythicEntries);
-    addCardGridSection(sections, "Start Deck", startDeckEntries);
+    addCardGridSection(sections, localizer.getMessage("lblCommander"), createCommanderCardEntries(selectedCommander));
+    addCardGridSection(sections, localizer.getMessage("lblRogueRewardPoolNonMythics"), nonMythicEntries);
+    addCardGridSection(sections, localizer.getMessage("lblRogueRewardPoolMythics"), mythicEntries);
+    addCardGridSection(sections, localizer.getMessage("lblRogueStartDeck"), startDeckEntries);
     panel.add(createPanelScrollPane(sections), "grow, push");
     return panel;
   }
@@ -484,7 +485,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     CodexCardGrid.CardState state = acquired ? CodexCardGrid.CardState.NORMAL
         : seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
     return new CodexCardGrid.Entry(card, card.getName(),
-        state == CodexCardGrid.CardState.HIDDEN ? "Unknown Card" : card.getName(), state);
+        state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
   }
 
   private JPanel createCommanderStatsHeader(RogueDeck selectedCommander, RogueMetaProgress progress,
@@ -496,14 +497,12 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     List<CodexCardGrid.Entry> rewardEntries = new ArrayList<>(nonMythicEntries);
     rewardEntries.addAll(mythicEntries);
     panel.add(new FLabel.Builder().text(selectedCommander.getName()).fontSize(16).fontStyle(Font.BOLD).build());
-    panel.add(new FLabel.Builder().text("Runs: " + progress.getRunsStartedWithCommander(commanderName)).fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Wins: " + progress.getRunsWonWithCommander(commanderName)).fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Max Descension: " + progress.getMaxDescensionWon(commanderName)).fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Max Endless: " + progress.getMaxEndlessCompleted(commanderName)).fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Seen: " + countSeenCards(rewardEntries) + " of "
-        + rewardEntries.size() + " Cards").fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Acquired: " + countAcquiredCards(rewardEntries) + " of "
-        + rewardEntries.size() + " Cards").fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderRuns", progress.getRunsStartedWithCommander(commanderName))).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderWins", progress.getRunsWonWithCommander(commanderName))).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueMaxDescension", progress.getMaxDescensionWon(commanderName))).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueMaxEndless", progress.getMaxEndlessCompleted(commanderName))).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueSeenCards", countSeenCards(rewardEntries), rewardEntries.size())).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueAcquiredCards", countAcquiredCards(rewardEntries), rewardEntries.size())).fontSize(13).build());
     return panel;
   }
 
@@ -542,7 +541,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     JPanel sections = new CodexSectionsPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]"));
     sections.setOpaque(false);
     sections.add(createPlaneboundTopSections(selectedPlanebound, commanderEntries), "w 100%!, growx, gapbottom 20");
-    addCardGridSection(sections, "Deck", entries);
+    addCardGridSection(sections, localizer.getMessage("lblDeck"), entries);
     panel.add(createPanelScrollPane(sections), "grow, push");
     return panel;
   }
@@ -557,18 +556,17 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
         .fontSize(16)
         .fontStyle(Font.BOLD)
         .build());
-    panel.add(new FLabel.Builder().text("Slain: " + progress.getPlaneboundWins(selectedPlanebound)
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRoguePlaneboundSlain", progress.getPlaneboundWins(selectedPlanebound))
         + " times").fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Defeated by: " + progress.getPlaneboundLosses(selectedPlanebound)
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRoguePlaneboundDefeats", progress.getPlaneboundLosses(selectedPlanebound))
         + " times").fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Seen: " + countSeenCards(deckEntries) + " of "
-        + deckEntries.size() + " Cards").fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueSeenCards", countSeenCards(deckEntries), deckEntries.size())).fontSize(13).build());
     return panel;
   }
 
   private JPanel createPlaneboundTopSections(RoguePlanebound selectedPlanebound,
                                              List<CodexCardGrid.Entry> commanderEntries) {
-    JPanel commanderSection = createCardGridSection("Commander", commanderEntries);
+    JPanel commanderSection = createCardGridSection(localizer.getMessage("lblCommander"), commanderEntries);
     PaperCard planeCard = getPlaneCard(selectedPlanebound);
     if (planeCard == null) {
       return commanderSection;
@@ -589,7 +587,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private JPanel createPlaneSection(PaperCard planeCard) {
     CodexPlaneSectionPanel panel = new CodexPlaneSectionPanel();
     panel.setOpaque(false);
-    addSectionLabel(panel, "Plane");
+    addSectionLabel(panel, localizer.getMessage("lblPlane"));
     panel.addPlanePanel(new CodexPlanePanel(planeCard, this::getZoomUtil));
     return panel;
   }
@@ -624,16 +622,14 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     CodexCardGrid.CardState state = progress.hasSeenPlaneboundCard(selectedPlanebound, card)
         ? CodexCardGrid.CardState.NORMAL : CodexCardGrid.CardState.HIDDEN;
     return new CodexCardGrid.Entry(card, card.getName(),
-        state == CodexCardGrid.CardState.HIDDEN ? "Unknown Card" : card.getName(), state);
+        state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
   }
 
   private JPanel createTraitStatsHeader(List<CodexCardGrid.Entry> traitEntries) {
     JPanel panel = new SkinnedPanel(new MigLayout("insets 8, gap 12", "[][]", ""));
     panel.setOpaque(false);
-    panel.add(new FLabel.Builder().text("Seen: " + countSeenCards(traitEntries) + " of "
-        + traitEntries.size() + " Traits").fontSize(13).build());
-    panel.add(new FLabel.Builder().text("Acquired: " + countAcquiredCards(traitEntries) + " of "
-        + traitEntries.size() + " Traits").fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueSeenTraits", countSeenCards(traitEntries), traitEntries.size())).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueAcquiredTraits", countAcquiredCards(traitEntries), traitEntries.size())).fontSize(13).build());
     return panel;
   }
 
@@ -653,7 +649,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
           : seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
       String label = getTraitLabel(effect, card);
       entries.add(new CodexCardGrid.Entry(card, label,
-          state == CodexCardGrid.CardState.HIDDEN ? "Unknown Trait" : label, state));
+          state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownTrait") : label, state));
     }
     return entries;
   }

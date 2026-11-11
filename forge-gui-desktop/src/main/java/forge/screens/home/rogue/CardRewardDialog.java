@@ -92,7 +92,7 @@ public class CardRewardDialog {
 
     // Create gold label (top-right, text before icon)
     lblGold = new FLabel.Builder()
-        .text("Gold: " + gold)
+        .text(Localizer.getInstance().getMessage("lblRogueGoldTotal", gold))
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
         .fontSize(14)
         .fontAlign(SwingConstants.RIGHT)
@@ -167,7 +167,7 @@ public class CardRewardDialog {
   }
 
   private String getRewardsText() {
-    return String.format("Victory! %s.", title);
+    return Localizer.getInstance().getMessage("lblRogueVictoryReward", title);
   }
 
   /**
@@ -188,7 +188,7 @@ public class CardRewardDialog {
     if (showReroll) {
       buttons.add(rerollLabel);
     }
-    buttons.add("View Deck");
+    buttons.add(localizer.getMessage("lblViewDeck"));
 
     // Cache coin icon for reroll button
     final javax.swing.Icon coinIcon = createCoinIcon();
@@ -197,7 +197,7 @@ public class CardRewardDialog {
     do {
       optionPane = new FOptionPane(
           null,
-          "Card Rewards",
+          Localizer.getInstance().getMessage("lblRogueCardRewards"),
           null,
           panel,
           buttons,
@@ -259,8 +259,7 @@ public class CardRewardDialog {
   }
 
   private String getInfoText() {
-    return String.format("Select up to %d cards (%d selected)", maxSelections,
-        selectedCards.size());
+    return Localizer.getInstance().getMessage("lblRogueCardRewardSelectionCount", maxSelections, selectedCards.size());
   }
 
   private static javax.swing.Icon createCoinIcon() {

@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableList;
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.GameView;
@@ -37,7 +38,7 @@ public class RogueWinLoseController {
     private final RogueRun currentRun;
 
     // Carry cards lost during the match (set by handleMatchData, shown by both victory/defeat)
-    private List<CarryCard> lostCarryCards = List.of();
+    private List<CarryCard> lostCarryCards = ImmutableList.of();
 
     public RogueWinLoseController(final GameView game0, final IWinLoseView<? extends IButton> view0,
                                  final RogueRun currentRun0, final CardRewardHelper.RewardDialog rewardDialog0) {

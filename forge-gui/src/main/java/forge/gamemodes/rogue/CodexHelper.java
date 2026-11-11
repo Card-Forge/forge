@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
@@ -203,10 +204,10 @@ public final class CodexHelper {
 
     public static Map<TraitCategory, List<RogueEffect>> getCodexTraitsByCategory() {
         Map<TraitCategory, List<RogueEffect>> result = new EnumMap<>(TraitCategory.class);
-        addCodexTraits(result, List.of(NPCEffect.values()));
-        addCodexTraits(result, List.of(ChestEffect.values()));
-        addCodexTraits(result, List.of(EventEffect.values()));
-        addCodexTraits(result, List.of(WoundEffect.values()));
+        addCodexTraits(result, ImmutableList.copyOf(NPCEffect.values()));
+        addCodexTraits(result, ImmutableList.copyOf(ChestEffect.values()));
+        addCodexTraits(result, ImmutableList.copyOf(EventEffect.values()));
+        addCodexTraits(result, ImmutableList.copyOf(WoundEffect.values()));
         for (List<RogueEffect> traits : result.values()) {
             traits.sort(Comparator.comparing(RogueEffect::getUIDisplayName, String.CASE_INSENSITIVE_ORDER));
         }
@@ -323,7 +324,7 @@ public final class CodexHelper {
     private static List<PaperCard> getPlaneboundCodexCards(RoguePlanebound planebound) {
         Deck deck = RogueConfig.loadPlaneboundDeck(planebound);
         if (deck == null) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> cards = new ArrayList<>();

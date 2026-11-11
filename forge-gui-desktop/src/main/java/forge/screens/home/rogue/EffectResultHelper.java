@@ -6,6 +6,7 @@ import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.EffectResultContext;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +44,7 @@ final class EffectResultHelper {
         }
 
         List<PaperCard> removed = new CardSelectionDialog(
-            "Card Selection",
+            Localizer.getInstance().getMessage("lblRogueCardSelection"),
             getCardRemovalSubtitle(removeMinCount, removeMaxCount),
             ctx.candidateCards, currentRun, removeMinCount, removeMaxCount, ctx.buildDeckPreview).show();
         if (removed.size() < removeMinCount) {
@@ -83,7 +84,7 @@ final class EffectResultHelper {
         String subtitle = ctx.cardSelectionSubtitle != null
             ? ctx.cardSelectionSubtitle : getCardAdditionSubtitle(addMinCount, addMaxCount);
         List<PaperCard> added = new CardSelectionDialog(
-            "Card Selection",
+            Localizer.getInstance().getMessage("lblRogueCardSelection"),
             subtitle,
             ctx.candidateCards, currentRun, addMinCount, addMaxCount, ctx.buildDeckPreview).show();
         if (added.isEmpty() && addMinCount > 0) {
@@ -137,15 +138,15 @@ final class EffectResultHelper {
 
     private static String getCardAdditionSubtitle(int addMinCount, int addMaxCount) {
         if (addMinCount == addMaxCount) {
-            return addMaxCount == 1 ? "Choose 1 card to add." : "Choose " + addMaxCount + " cards to add.";
+            return addMaxCount == 1 ? Localizer.getInstance().getMessage("lblRogueChooseOneToAdd") : Localizer.getInstance().getMessage("lblRogueChooseExactToAdd", addMaxCount);
         }
-        return "Choose up to " + addMaxCount + " cards to add.";
+        return Localizer.getInstance().getMessage("lblRogueChooseUpToToAdd", addMaxCount);
     }
 
     private static String getCardRemovalSubtitle(int removeMinCount, int removeMaxCount) {
         if (removeMinCount == removeMaxCount) {
-            return removeMaxCount == 1 ? "Choose 1 card to remove." : "Choose " + removeMaxCount + " cards to remove.";
+            return removeMaxCount == 1 ? Localizer.getInstance().getMessage("lblRogueChooseOneToRemove") : Localizer.getInstance().getMessage("lblRogueChooseExactToRemove", removeMaxCount);
         }
-        return "Choose up to " + removeMaxCount + " cards to remove.";
+        return Localizer.getInstance().getMessage("lblRogueChooseUpToToRemove", removeMaxCount);
     }
 }

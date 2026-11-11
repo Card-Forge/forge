@@ -15,6 +15,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsConfiguration;
@@ -112,12 +113,12 @@ public class EventDialog {
     int result;
     do {
       List<String> buttons = new ArrayList<>();
-      buttons.add("View Deck");
-      buttons.add("View Map");
+      buttons.add(Localizer.getInstance().getMessage("lblViewDeck"));
+      buttons.add(Localizer.getInstance().getMessage("lblRogueViewMap"));
       if (hasRerolls) {
-        buttons.add("Reroll (" + rerollCtx.remainingRerolls + " left)");
+        buttons.add(Localizer.getInstance().getMessage("lblRogueRerollsRemaining", rerollCtx.remainingRerolls));
       }
-      optionPane = new FOptionPane(null, "Event", null, panel,
+      optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueEvent"), null, panel,
           buttons, VIEW_DECK_OPTION);
       optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
       RogueUIHelper.disableSpacebarButtonActivation(optionPane.getContentPane());

@@ -69,14 +69,14 @@ public class SanctumDialog {
         .build();
 
     FLabel lblDescription = new FLabel.Builder()
-        .text("Choose your action:")
+        .text(Localizer.getInstance().getMessage("lblRogueChooseAction"))
         .fontSize(14)
         .fontAlign(SwingConstants.CENTER)
         .build();
     int choiceButtonWidth = (DIALOG_WIDTH - 2 * PANEL_INSETS) * 4 / 5;
 
     FButton btnRest = RogueButtonHelper.createChoiceButton(
-        "Rest", TextHelper.stripPreviewMarkers(restDescription),
+        Localizer.getInstance().getMessage("lblRogueRest"), TextHelper.stripPreviewMarkers(restDescription),
         TextHelper.extractPreviewReferences(restDescription));
     RogueButtonHelper.setChoiceButtonSizeHint(btnRest, choiceButtonWidth);
     btnRest.addActionListener(e -> {
@@ -91,9 +91,9 @@ public class SanctumDialog {
     }
     previewTargets.add(new PreviewTarget(btnRest, TextHelper.extractPreviewReferences(restDescription)));
 
-    String cookDescription = "Gain a random Food {{Item}}.";
+    String cookDescription = Localizer.getInstance().getMessage("lblRogueCookDescription", "{{Item}}");
     FButton btnCook = RogueButtonHelper.createChoiceButton(
-        "Cook", TextHelper.stripPreviewMarkers(cookDescription),
+        Localizer.getInstance().getMessage("lblRogueCook"), TextHelper.stripPreviewMarkers(cookDescription),
         TextHelper.extractPreviewReferences(cookDescription));
     RogueButtonHelper.setChoiceButtonSizeHint(btnCook, choiceButtonWidth);
     btnCook.addActionListener(e -> {
@@ -104,9 +104,9 @@ public class SanctumDialog {
     });
     previewTargets.add(new PreviewTarget(btnCook, TextHelper.extractPreviewReferences(cookDescription)));
 
-    String reflectDescription = "Gain 3 {{Removal Credits}}.";
+    String reflectDescription = Localizer.getInstance().getMessage("lblRogueReflectDescription", "{{Removal Credits}}");
     FButton btnReflect = RogueButtonHelper.createChoiceButton(
-        "Reflect", TextHelper.stripPreviewMarkers(reflectDescription),
+        Localizer.getInstance().getMessage("lblRogueReflect"), TextHelper.stripPreviewMarkers(reflectDescription),
         TextHelper.extractPreviewReferences(reflectDescription));
     RogueButtonHelper.setChoiceButtonSizeHint(btnReflect, choiceButtonWidth);
     btnReflect.addActionListener(e -> {
@@ -163,10 +163,10 @@ public class SanctumDialog {
         SoundEffectType.Enchantment.isSynced());
     optionPane = new FOptionPane(
         null,
-        "Sanctum",
+        Localizer.getInstance().getMessage("lblRogueSanctum"),
         null,
         panel,
-        List.of("Skip"),
+        List.of(Localizer.getInstance().getMessage("lblSkip")),
         0
     );
     optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

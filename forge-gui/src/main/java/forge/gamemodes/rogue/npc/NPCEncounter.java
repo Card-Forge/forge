@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueRun;
@@ -37,7 +38,7 @@ public interface NPCEncounter {
 
     /** Run-start boon monologues for NPCs that offer choices. */
     default List<String> getOfferingBoonMonologues() {
-        return List.of();
+        return ImmutableList.of();
     }
 
     /** Picks one run-start boon monologue, or an empty string if none are configured. */
@@ -59,7 +60,7 @@ public interface NPCEncounter {
         Collections.shuffle(pool, MyRandom.getRandom());
         int choiceCount = Math.min(3, pool.size());
         return buildContext(
-            List.of(getRandomBoonMonologue()),
+            ImmutableList.of(getRandomBoonMonologue()),
             pool.subList(0, choiceCount).stream()
                 .map(effect -> new NPCContext.NPCChoice(effect.getDisplayName(), effect))
                 .collect(Collectors.toList())

@@ -351,8 +351,10 @@ public class RoguePreviewPopup {
             return null;
         }
 
-        RogueConfig.loadRogueCards();
-        PaperCard card;
+        PaperCard card = RogueConfig.getRogueCard(referenceParts.cardName());
+        if (card != null) {
+            return card;
+        }
         if (referenceParts.setCode() == null || referenceParts.setCode().isEmpty()) {
             card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName());
         } else if (referenceParts.artIndex() == null) {

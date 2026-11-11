@@ -225,17 +225,17 @@ public enum CSubmenuRogueMap implements ICDoc {
     if (node instanceof NodePlanebound nodePlanebound) {
       String planeName = pathCtx.hidePlanes && !nodePlanebound.isRevealed()
           ? "???" : nodePlanebound.getRoguePlanebound().planeName();
-      return "Enter " + planeName;
+      return Localizer.getInstance().getMessage("lblRogueEnterPlane", planeName);
     } else if (node instanceof NodeSanctum) {
-      return "Enter Sanctum";
+      return Localizer.getInstance().getMessage("lblRogueEnterSanctum");
     } else if (node instanceof NodeBazaar) {
-      return "Enter Bazaar";
+      return Localizer.getInstance().getMessage("lblRogueEnterBazaar");
     } else if (node instanceof NodeEvent) {
-      return "Enter Event";
+      return Localizer.getInstance().getMessage("lblRogueEnterEvent");
     } else if (node instanceof NodeChest) {
-      return "Open Chest";
+      return Localizer.getInstance().getMessage("lblRogueOpenChest");
     } else {
-      return "Enter Node";
+      return Localizer.getInstance().getMessage("lblRogueEnterNode");
     }
   }
 
@@ -249,12 +249,12 @@ public enum CSubmenuRogueMap implements ICDoc {
       button.setToolTipText(null);
     } else {
       button.setVisible(true);
-      button.setText("Reroll Plane (" + pathCtx.remainingPlaneboundRerolls + " left)");
+      button.setText(Localizer.getInstance().getMessage("lblRogueRerollPlaneCount", pathCtx.remainingPlaneboundRerolls));
       boolean hasCandidates = !getPlaneboundRerollCandidates(nodePlanebound).isEmpty();
       button.setEnabled(hasCandidates);
       button.setToolTipText(hasCandidates
-          ? "Reroll the selected Planebound."
-          : "No alternative Planebound available.");
+          ? Localizer.getInstance().getMessage("lblRogueRerollPlanebound")
+          : Localizer.getInstance().getMessage("lblRogueNoAlternativePlanebound"));
     }
 
     if (button.getParent() != null) {
@@ -369,13 +369,13 @@ public enum CSubmenuRogueMap implements ICDoc {
     if (defeatCtx.revived) {
       currentRun.setCurrentLife(defeatCtx.reviveLife);
       FOptionPane.showMessageDialog(
-          "Continuum Engine activated! You survived with " + defeatCtx.reviveLife + " life!",
-          "Continuum Engine!");
+          Localizer.getInstance().getMessage("lblRogueContinuumRevive", defeatCtx.reviveLife),
+          Localizer.getInstance().getMessage("lblRogueContinuumEngine"));
       return false;
     }
 
     if (RogueWinLoseController.finalizeRunDefeat(currentRun, defeatedBy)) {
-      FOptionPane.showMessageDialog("You won 1 Spark!", "Spark Reward");
+      FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueSparkWon"), Localizer.getInstance().getMessage("lblRogueSparkReward"));
     }
     showSideNodeDefeatDialog(defeatedBy);
     currentRun = null;
@@ -400,10 +400,10 @@ public enum CSubmenuRogueMap implements ICDoc {
 
   private void showSideNodeDefeatDialog(String defeatedBy) {
     String message = defeatedBy == null || defeatedBy.isEmpty()
-        ? "You were defeated! Your Run has ended."
-        : "You were defeated by " + defeatedBy + "! Your Run has ended.";
+        ? Localizer.getInstance().getMessage("lblRogueDefeated")
+        : Localizer.getInstance().getMessage("lblRogueDefeatedBy", defeatedBy);
     NodeResultPanel resultPanel = new NodeResultPanel(message, List.of());
-    FOptionPane optionPane = new FOptionPane(null, "Defeat", null, resultPanel, List.of("OK"), 0);
+    FOptionPane optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueDefeat"), null, resultPanel, List.of(Localizer.getInstance().getMessage("lblOK")), 0);
     resultPanel.initZoom(optionPane);
     optionPane.setVisible(true);
     optionPane.dispose();
@@ -415,7 +415,7 @@ public enum CSubmenuRogueMap implements ICDoc {
   }
 
   void showEventResultDialog(String message, List<NodeResultPanel.CardSection> sections) {
-    showDefaultNodeResultDialog("Event Completed", message, sections, true);
+    showDefaultNodeResultDialog(Localizer.getInstance().getMessage("lblRogueEventCompleted"), message, sections, true);
   }
 
   private void showDefaultNodeResultDialog(String title, String message,
@@ -462,7 +462,7 @@ public enum CSubmenuRogueMap implements ICDoc {
     wrapper.setPreferredSize(dialogSize);
     wrapper.setMinimumSize(dialogSize);
 
-    FOptionPane optionPane = new FOptionPane(null, title, null, wrapper, List.of("OK"), 0);
+    FOptionPane optionPane = new FOptionPane(null, title, null, wrapper, List.of(Localizer.getInstance().getMessage("lblOK")), 0);
     resultPanel.initZoom(optionPane);
     resultPanel.startTypewriter();
     optionPane.setVisible(true);
@@ -527,10 +527,10 @@ public enum CSubmenuRogueMap implements ICDoc {
     }
 
     boolean confirmed = FOptionPane.showConfirmDialog(
-        "Abandon this Run? It will be recorded in History and cannot be continued.",
-        "Abandon Run",
-        "Abandon Run",
-        "Cancel",
+        Localizer.getInstance().getMessage("lblRogueAbandonRunConfirm"),
+        Localizer.getInstance().getMessage("lblRogueAbandonRun"),
+        Localizer.getInstance().getMessage("lblRogueAbandonRun"),
+        Localizer.getInstance().getMessage("lblCancel"),
         false);
     if (!confirmed) {
       return;

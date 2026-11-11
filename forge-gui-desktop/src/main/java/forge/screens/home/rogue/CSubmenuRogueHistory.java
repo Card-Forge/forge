@@ -6,6 +6,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.screens.home.CHomeUI;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 /**
  * Controller for the Rogue Commander run history screen.
@@ -44,10 +45,10 @@ public enum CSubmenuRogueHistory implements ICDoc {
 
   private void confirmResetHistory() {
     boolean confirmed = FOptionPane.showConfirmDialog(
-        "Are you sure you want to delete all run history?\nThis action cannot be undone.",
-        "Reset Run History",
-        "Reset",
-        "Cancel",
+        Localizer.getInstance().getMessage("lblRogueResetHistoryConfirm"),
+        Localizer.getInstance().getMessage("lblRogueResetRunHistory"),
+        Localizer.getInstance().getMessage("lblReset"),
+        Localizer.getInstance().getMessage("lblCancel"),
         false
     );
 

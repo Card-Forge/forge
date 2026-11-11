@@ -3,10 +3,12 @@ package forge.gamemodes.rogue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import forge.StaticData;
 import forge.card.CardMockTestCase;
+import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.ItemPool;
@@ -34,6 +36,24 @@ public class RogueConfigTest extends CardMockTestCase {
         if (testData != null) {
             testData.setCommanderPredicate(originalCommanderPredicate);
         }
+    }
+
+    @Test
+    public void bundledCardsRoundTripWithoutEnteringSharedCardPools() {
+        String name = "Gonti Curio - Tarnished Relic";
+        PaperCard curio = RogueConfig.getRogueCard(name);
+        assertNotNull(curio);
+        assertSame(RogueConfig.getCard(name, null, null), curio);
+
+        CardPool pool = new CardPool();
+        pool.add(curio.getFoiled(), 2);
+        var serializer = RogueIO.getSerializer(false);
+        CardPool loaded = (CardPool) serializer.fromXML(serializer.toXML(pool));
+        assertEquals(loaded.toFlatList(), List.of(curio.getFoiled(), curio.getFoiled()));
+        assertTrue(loaded.toFlatList().get(0).isFoil());
+
+        assertNull(testData.getCommonCards().getCard(name));
+        assertNull(testData.getVariantCards().getCard(name));
     }
 
     @Test

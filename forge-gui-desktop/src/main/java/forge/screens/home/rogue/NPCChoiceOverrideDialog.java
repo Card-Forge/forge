@@ -8,6 +8,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -59,7 +60,7 @@ class NPCChoiceOverrideDialog {
         wrapper.setOpaque(false);
 
         FLabel lblTitle = new FLabel.Builder()
-            .text("[DEV] Override NPC Choices")
+            .text(Localizer.getInstance().getMessage("lblRogueDevOverrideNpcChoices"))
             .fontSize(16)
             .fontStyle(Font.BOLD)
             .fontAlign(SwingConstants.CENTER)
@@ -75,8 +76,8 @@ class NPCChoiceOverrideDialog {
         wrapper.setPreferredSize(new Dimension(420, 420));
         wrapper.setMinimumSize(new Dimension(420, 420));
 
-        optionPane = new FOptionPane(null, "[DEV] NPC Choice Override", null, wrapper,
-            List.of("OK", "Cancel"), 0);
+        optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueDevNpcChoiceOverride"), null, wrapper,
+            List.of("OK", Localizer.getInstance().getMessage("lblCancel")), 0);
         updateSelectionState();
         optionPane.setVisible(true);
         int result = optionPane.getResult();
@@ -103,8 +104,7 @@ class NPCChoiceOverrideDialog {
                 selectedCount++;
             }
         }
-        lblInfo.setText("Select exactly 3 effects (" + selectedCount + " / " + REQUIRED_SELECTIONS
-            + " selected). Current choices are preselected.");
+        lblInfo.setText(Localizer.getInstance().getMessage("lblRogueNpcOverrideSelection", REQUIRED_SELECTIONS, selectedCount));
         if (optionPane != null) {
             optionPane.setButtonEnabled(0, selectedCount == REQUIRED_SELECTIONS);
         }

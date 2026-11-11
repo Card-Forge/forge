@@ -10,6 +10,7 @@ import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.views.ImageView;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
@@ -29,7 +30,7 @@ public class CommanderSelectionDialog {
   public PaperCard show() {
     List<PaperCard> commanders = RogueCustomDeckGenerator.getEligibleCommanders();
     if (commanders.isEmpty()) {
-      FOptionPane.showMessageDialog("No legal Commanders are available.", "Choose any Commander");
+      FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueNoLegalCommanders"), Localizer.getInstance().getMessage("lblRogueChooseAnyCommander"));
       return null;
     }
 
@@ -107,8 +108,8 @@ public class CommanderSelectionDialog {
     content.setMinimumSize(dialogSize);
     content.setSize(dialogSize);
 
-    FOptionPane pane = new FOptionPane(null, "Choose any Commander", null, content,
-        List.of("Choose Commander", "Cancel"), 0);
+    FOptionPane pane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueChooseAnyCommander"), null, content,
+        List.of(Localizer.getInstance().getMessage("lblRogueChooseCommander"), Localizer.getInstance().getMessage("lblCancel")), 0);
     pane.setButtonEnabled(0, cardManager.getSelectedItem() != null);
     cardManager.addSelectionListener(e ->
         pane.setButtonEnabled(0, cardManager.getSelectedItem() != null));

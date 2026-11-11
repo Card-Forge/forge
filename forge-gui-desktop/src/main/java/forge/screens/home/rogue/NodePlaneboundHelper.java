@@ -24,6 +24,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.player.GamePlayerUtil;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -53,7 +54,7 @@ class NodePlaneboundHelper {
 
         if (ForgePreferences.DEV_MODE) {
             RoguePlanebound picked = (RoguePlanebound) JOptionPane.showInputDialog(
-                null, "Override planebound:", "[DEV] Pick Planebound",
+                null, Localizer.getInstance().getMessage("lblRogueDevOverridePlanebound"), Localizer.getInstance().getMessage("lblRogueDevPickPlanebound"),
                 JOptionPane.PLAIN_MESSAGE, null,
                 RogueConfig.loadPlanebounds().toArray(), node.getRoguePlanebound());
             if (picked != null) {
@@ -212,10 +213,10 @@ class NodePlaneboundHelper {
 
         boolean hasWrathful = wrathfulCount > 0;
         boolean hasCursed = cursedCount > 0;
-        String title = hasWrathful && hasCursed ? "Wrathful & Cursed Planebound"
-            : hasCursed ? "Cursed Planebound" : "Wrathful Planebound";
-        String message = hasWrathful && hasCursed ? "This Planebound is Wrathful and Cursed!"
-            : hasCursed ? "This Planebound is Cursed!" : "This Planebound is Wrathful!";
-        FOptionPane.showOptionDialog(message, title, null, effectsPanel, List.of("OK"), 0);
+        String title = hasWrathful && hasCursed ? Localizer.getInstance().getMessage("lblRogueWrathfulAndCursed")
+            : hasCursed ? Localizer.getInstance().getMessage("lblRogueCursed") : Localizer.getInstance().getMessage("lblRogueWrathful");
+        String message = hasWrathful && hasCursed ? Localizer.getInstance().getMessage("lblRogueWrathfulAndCursedMessage")
+            : hasCursed ? Localizer.getInstance().getMessage("lblRogueCursedMessage") : Localizer.getInstance().getMessage("lblRogueWrathfulMessage");
+        FOptionPane.showOptionDialog(message, title, null, effectsPanel, List.of(Localizer.getInstance().getMessage("lblOK")), 0);
     }
 }

@@ -1,6 +1,7 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.path.NodeChest;
+import forge.util.Localizer;
 import java.awt.*;
 
 /**
@@ -19,7 +20,7 @@ public class NodeChestPanel extends NodeCircularPanel {
   public NodeChestPanel(NodeChest node) {
     super(node);
     this.chestNode = node;
-    setToolTipText("Chest: Open for a random reward.");
+    setToolTipText(Localizer.getInstance().getMessage("lblRogueChestTooltip"));
   }
 
   @Override

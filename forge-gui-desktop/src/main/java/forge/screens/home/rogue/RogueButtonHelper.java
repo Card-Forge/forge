@@ -8,6 +8,7 @@ import forge.toolbox.FSkin;
 import forge.localinstance.skin.FSkinProp;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.Localizer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -72,7 +73,7 @@ public final class RogueButtonHelper {
   }
 
   public static FButton createViewDeckButtonForHistory(Runnable onClick) {
-    FButton button = new FButton("View Deck");
+    FButton button = new FButton(Localizer.getInstance().getMessage("lblViewDeck"));
     button.setIcon(FSkin.getIcon(FSkinProp.ICO_CARD_IMAGE));
     button.setIconTextGap(6);
     button.setHorizontalTextPosition(SwingConstants.RIGHT);

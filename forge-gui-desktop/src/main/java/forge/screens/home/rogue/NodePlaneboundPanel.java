@@ -16,6 +16,7 @@ import forge.sound.SoundSystem;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
+import forge.util.Localizer;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
@@ -133,12 +134,12 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     if (type == RoguePlaneboundType.ELITE) {
       JLabel star = new JLabel(FSkin.getImage(FSkinProp.IMG_STAR_FILLED).resize(16, 16).getIcon());
       star.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
-      star.setToolTipText("Elite Planebound");
+      star.setToolTipText(Localizer.getInstance().getMessage("lblRogueElitePlanebound"));
       pnlNameRow.add(star);
     } else if (type == RoguePlaneboundType.BOSS) {
       JLabel skull = new JLabel(FSkin.getImage(FSkinProp.IMG_POISON).resize(18, 18).getIcon());
       skull.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
-      skull.setToolTipText("Boss Planebound");
+      skull.setToolTipText(Localizer.getInstance().getMessage("lblRogueBossPlanebound"));
       pnlNameRow.add(skull);
     }
 
@@ -151,13 +152,13 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
 
     for (int i = 0; i < node.getWrathfulCount(); i++) {
       JLabel flame = new JLabel(FLAME_ICON);
-      flame.setToolTipText("Wrathful — this Planebound gains a minor buff");
+      flame.setToolTipText(Localizer.getInstance().getMessage("lblRogueWrathfulTooltip"));
       pnlLifeRow.add(flame);
     }
 
     for (int i = 0; i < node.getCursedCount(); i++) {
       JLabel pentagram = new JLabel(PENTAGRAM_ICON);
-      pentagram.setToolTipText("Cursed — this Planebound gains a powerful buff");
+      pentagram.setToolTipText(Localizer.getInstance().getMessage("lblRogueCursedTooltip"));
       pnlLifeRow.add(pentagram);
     }
 
@@ -167,7 +168,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     lblLifeTotal.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
     lblLifeTotal.setHorizontalAlignment(SwingConstants.CENTER);
     lblLifeTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 6, 0, 0));
-    lblLifeTotal.setToolTipText("Planebound starts match with " + planeboundLife + " Life.");
+    lblLifeTotal.setToolTipText(Localizer.getInstance().getMessage("lblRoguePlaneboundStartingLife", planeboundLife));
     pnlLifeRow.add(lblLifeTotal);
     add(pnlLifeRow);
   }

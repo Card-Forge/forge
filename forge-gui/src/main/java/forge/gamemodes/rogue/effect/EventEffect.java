@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.effect;
 
+import com.google.common.collect.ImmutableList;
 import forge.deck.DeckSection;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.rogue.*;
@@ -29,7 +30,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCardsToDeck(run, ctx, getDBCardsFilter(), 3, null, List.of());
+            addCardsToDeck(run, ctx, getDBCardsFilter(), 3, null, ImmutableList.of());
         }
     },
     AFTER_DUSK_EXPLORE("after_dusk_explore", "Explore Mansion",
@@ -65,7 +66,7 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             removeCardsFromDeck(run, ctx, getDeckCardFilter(), null);
-            addCarryCards(run, ctx, getDBCardsFilter(), 2, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 2, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     AMBUSH_FIGHT("ambush_fight", "Fight!", "Fight a random {{Planebound}} on a random Plane!",
@@ -103,7 +104,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.ITEM, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.ITEM, ImmutableList.of());
         }
     },
     AMONG_MURDERERS_CONFESS("among_murderers_confess", "Confess",
@@ -158,7 +159,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     BENDING_STUDY("bending_study", "Study the Scrolls",
@@ -174,7 +175,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 3, RogueRun.CarryCardType.SCROLL, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 3, RogueRun.CarryCardType.SCROLL, ImmutableList.of());
         }
     },
     BREAKING_OLD_LAWS_DUPLICATE("breaking_the_old_laws_duplicate", "Duplicate",
@@ -231,7 +232,7 @@ public enum EventEffect implements RogueEffect {
                 .map(RogueConfig::getRulesNamePrint)
                 .collect(Collectors.toList()));
             candidateCards = run.filterDuplicateCards(candidateCards);
-            List<CardReference> partnerPrintOverrides = List.of(
+            List<CardReference> partnerPrintOverrides = ImmutableList.of(
                 new CardReference("Akiri, Line-Slinger", "PZ2", 1),
                 new CardReference("Armix, Filigree Thrasher", "CMR", 1),
                 new CardReference("Bruse Tarl, Boorish Herder", "PZ2", 1),
@@ -325,7 +326,7 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             gainWound(run, ctx);
-            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     BURROWED_SELL("burrowed_sell", "Sell",
@@ -441,7 +442,7 @@ public enum EventEffect implements RogueEffect {
                 return;
             }
             removeCardsFromDeck(run, ctx, getDeckCardFilter(), 9);
-            addCardsToDeck(run, ctx, getDBCardsFilter(), 1, 9, List.of());
+            addCardsToDeck(run, ctx, getDBCardsFilter(), 1, 9, ImmutableList.of());
         }
 
         @Override
@@ -501,7 +502,7 @@ public enum EventEffect implements RogueEffect {
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
 
             run.loseLife(3);
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     DRIFTED_STEAL("drifted_steal", "Steal Vehicle", "Gain a random Vehicle {{Item}}.",
@@ -514,7 +515,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.ITEM, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, RogueRun.CarryCardType.ITEM, ImmutableList.of());
         }
     },
     ETERNAL_CRUSADE_SECURE_SPECIMEN("eternal_crusade_secure_specimen", "Secure Specimen",
@@ -528,7 +529,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     ETERNAL_CRUSADE_JOIN_SPACE_MARINES("eternal_crusade_join_space_marines", "Join Space Marines",
@@ -594,7 +595,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     FINAL_PREPARATIONS_LEVEL_UP("final_preparations_level_up", "Level Up",
@@ -663,7 +664,7 @@ public enum EventEffect implements RogueEffect {
             String setCode = "PIP";
             int artIndex = 1;
 
-            addCardsToDeck(run, ctx, getDBCardsFilter(), null, null, List.of(
+            addCardsToDeck(run, ctx, getDBCardsFilter(), null, null, ImmutableList.of(
                 new CardReference("Agility Bobblehead", setCode, artIndex),
                 new CardReference("Charisma Bobblehead", setCode, artIndex),
                 new CardReference("Endurance Bobblehead", setCode, artIndex),
@@ -692,7 +693,7 @@ public enum EventEffect implements RogueEffect {
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             removeCardsFromDeck(run, ctx, getDeckCardFilter(), null);
             removeCarryCards(run, ctx, CarryCardType.ITEM);
-            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     GROUND_ZERO_MUTATE("ground_zero_mutate", "Explore Wasteland", "Remove 5 random creatures from your deck. For each creature removed this way, add a random radiation mutant to your deck.",
@@ -715,7 +716,7 @@ public enum EventEffect implements RogueEffect {
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             removeCardsFromDeck(run, ctx, getDeckCardFilter(), 5);
             int removedCount = ctx.removedCards.size();
-            addCardsToDeck(run, ctx, getDBCardsFilter(), removedCount, null, List.of());
+            addCardsToDeck(run, ctx, getDBCardsFilter(), removedCount, null, ImmutableList.of());
         }
     },
     HEALER_POTION("healer_potion", "Healer's Potion", "Pay 5 {{Gold}}, gain 8 Life.",
@@ -846,7 +847,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, ImmutableList.of());
         }
     },
     LOST_NOT_FORGOTTEN_PARTY("lost_not_forgotten_party", "Stumble Into Party",
@@ -1031,7 +1032,7 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             int colorCount = Integer.bitCount(run.getCommanderColorIdentityMask());
-            addCardsToDeck(run, ctx, getDBCardsFilter(), colorCount, null, List.of());
+            addCardsToDeck(run, ctx, getDBCardsFilter(), colorCount, null, ImmutableList.of());
         }
     },
     ON_THE_EDGE_BOARD("on_the_edge_board", "Board",
@@ -1064,7 +1065,7 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.ITEM, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.ITEM, ImmutableList.of());
         }
     },
     ON_THE_EDGE_SCAVENGE("on_the_edge_scavenge", "Scavenge",
@@ -1092,7 +1093,7 @@ public enum EventEffect implements RogueEffect {
             int exchangeCount = 3;
             RogueDeck rogueDeck = run.getSelectedRogueDeck();
             List<PaperCard> replacementCards = rogueDeck == null
-                ? List.of()
+                ? ImmutableList.of()
                 : rogueDeck.drawRewardOptions(exchangeCount, run.getNotAlreadyInDeckPredicate());
             selectCardsFromDeck(run, ctx, PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND),
                 exchangeCount, exchangeCount, replacementCards, null);
@@ -1259,7 +1260,7 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             gainWound(run, ctx);
-            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.ITEM, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 3, CarryCardType.ITEM, ImmutableList.of());
         }
     },
     TRAPPED_IN_THE_LAIR_TAME("trapped_in_the_lair_tame", "Tame",
@@ -1276,7 +1277,7 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
             run.loseLife(3);
-            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, List.of());
+            addCarryCards(run, ctx, getDBCardsFilter(), 1, CarryCardType.FELLOW, ImmutableList.of());
         }
     };
 

@@ -1,12 +1,11 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.BazaarContext;
 import forge.gamemodes.rogue.effect.BazaarItem;
 import forge.item.PaperCard;
-import forge.model.FModel;
-import java.util.List;
 
 /**
  * Gonti, Lord of Luxury - Bazaar Shop Owner NPC.
@@ -36,7 +35,7 @@ public enum GontiEncounter implements NPCEncounter {
 
         @Override
         public void onBeforeBazaar(BazaarContext ctx, RogueRun run) {
-            PaperCard curio = getRogueCard(CURIO_CARD_NAME);
+            PaperCard curio = RogueConfig.getRogueCard(CURIO_CARD_NAME);
             if (curio != null) {
                 ctx.inventory.add(BazaarItem.forCurio(curio, CURIO_PRICE));
             }
@@ -50,7 +49,7 @@ public enum GontiEncounter implements NPCEncounter {
 
             incrementNpcLevel();
             return buildContext(
-                List.of(
+                ImmutableList.of(
                     "A figure steps out from behind the bazaar stall, eyes wide with both disbelief and fascination. " +
                         "\"You... you actually bought it? Ha!! That thing has been sitting there for ages! " +
                         "I had almost stopped thinking of it as stock.\"",
@@ -61,7 +60,7 @@ public enum GontiEncounter implements NPCEncounter {
                     "nobody else wants, I'll promise you won't regret it.\""
                 ),
 
-                List.of(new NPCContext.NPCChoice("Accept", null))
+                ImmutableList.of(new NPCContext.NPCChoice("Accept", null))
             );
         }
     },
@@ -83,7 +82,7 @@ public enum GontiEncounter implements NPCEncounter {
         @Override
         public void onBeforeBazaar(BazaarContext ctx, RogueRun run) {
             applyDiscount(ctx);
-            PaperCard curio = getRogueCard(CURIO_CARD_NAME);
+            PaperCard curio = RogueConfig.getRogueCard(CURIO_CARD_NAME);
             if (curio != null) {
                 ctx.inventory.add(BazaarItem.forCurio(curio, CURIO_PRICE));
             }
@@ -97,7 +96,7 @@ public enum GontiEncounter implements NPCEncounter {
 
             incrementNpcLevel();
             return buildContext(
-                List.of(
+                ImmutableList.of(
                     "Gonti freezes when the bauble changes hands, then leans over the stall with a grin " +
                         "that is far too sharp for such a harmless sale. \"Again? You bought another one?",
                     "I was certain even you would notice that this one does even less than the last. " +
@@ -107,7 +106,7 @@ public enum GontiEncounter implements NPCEncounter {
                         "ordinary customers.\""
                 ),
 
-                List.of(new NPCContext.NPCChoice("Accept", null))
+                ImmutableList.of(new NPCContext.NPCChoice("Accept", null))
             );
         }
     },
@@ -131,7 +130,7 @@ public enum GontiEncounter implements NPCEncounter {
         public void onBeforeBazaar(BazaarContext ctx, RogueRun run) {
             applyDiscount(ctx);
             enableSpecialSelection(ctx);
-            PaperCard curio = getRogueCard(CURIO_CARD_NAME);
+            PaperCard curio = RogueConfig.getRogueCard(CURIO_CARD_NAME);
             if (curio != null) {
                 ctx.inventory.add(BazaarItem.forCurio(curio, CURIO_PRICE));
             }
@@ -145,7 +144,7 @@ public enum GontiEncounter implements NPCEncounter {
 
             incrementNpcLevel();
             return buildContext(
-                List.of(
+                ImmutableList.of(
                     "Gonti stares at the contraption in your hands, then counts your coins a second time. " +
                         "\"No. No, that cannot be right.\"",
                     "\"That device doesn't do anything. I didn't even try to hide the painted wheel!\"",
@@ -155,7 +154,7 @@ public enum GontiEncounter implements NPCEncounter {
                         "Do try not to make me regret encouraging this.\""
                 ),
 
-                List.of(new NPCContext.NPCChoice("Accept", null))
+                ImmutableList.of(new NPCContext.NPCChoice("Accept", null))
             );
         }
     },
@@ -183,11 +182,6 @@ public enum GontiEncounter implements NPCEncounter {
 
     @Override
     public int getRequiredLevel() { return requiredLevel; }
-
-    private static PaperCard getRogueCard(String cardName) {
-        RogueConfig.loadRogueCards();
-        return FModel.getMagicDb().getCommonCards().getCard(cardName);
-    }
 
     private static void applyDiscount(BazaarContext ctx) {
         ctx.discountCount = 2;

@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueRun;
@@ -103,7 +104,7 @@ public enum NPCEncounterComposite {
                 return Collections.singletonList(ctx);
             }
         }
-        return List.of();
+        return ImmutableList.of();
     }
 
     public void onBeforeSanctum(SanctumContext ctx, RogueRun run, RogueMetaProgress progress) {

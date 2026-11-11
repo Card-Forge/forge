@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public final class TextHelper {
 
     public static List<PreviewReference> extractPreviewReferences(String text) {
         if (text == null || text.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         LinkedHashMap<String, PreviewReference> cards = new LinkedHashMap<>();
@@ -87,7 +88,7 @@ public final class TextHelper {
         }
 
         if (cards.isEmpty() && keywords.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PreviewReference> references = new ArrayList<>(cards.size() + keywords.size());

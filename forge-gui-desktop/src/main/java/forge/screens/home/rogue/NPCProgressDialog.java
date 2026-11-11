@@ -78,10 +78,10 @@ public class NPCProgressDialog {
   public Map<NPC, Integer> show() {
     optionPane = new FOptionPane(
         null,
-        "Dev NPC Progress",
+        Localizer.getInstance().getMessage("lblRogueDevNpcProgressTitle"),
         null,
         panel,
-        List.of("Save", "Cancel"),
+        List.of(Localizer.getInstance().getMessage("lblSave"), Localizer.getInstance().getMessage("lblCancel")),
         SAVE_OPTION
     );
 
@@ -117,7 +117,7 @@ public class NPCProgressDialog {
 
     List<LevelOption> options = new ArrayList<>();
     options.add(new LevelOption(
-        "Keep current level (" + currentLevel + " - " + getActiveEncounterName(encounters, currentLevel) + ")",
+        Localizer.getInstance().getMessage("lblRogueKeepNpcLevel", currentLevel, getActiveEncounterName(encounters, currentLevel)),
         currentLevel));
     boolean hasLevelZero = false;
     for (NPCEncounter encounter : encounters) {

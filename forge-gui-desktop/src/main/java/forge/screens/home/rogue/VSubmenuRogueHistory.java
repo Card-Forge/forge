@@ -47,7 +47,8 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
   SINGLETON_INSTANCE;
 
   private DragCell parentCell;
-  private final DragTab tab = new DragTab("Run History");
+  private final Localizer localizer = Localizer.getInstance();
+  private final DragTab tab = new DragTab(localizer.getMessage("lblRogueRunHistory"));
 
   private final FLabel lblTitle = new FLabel.Builder()
       .text(Localizer.getInstance().getMessage("lblRogueRogueCommanderRunHistory"))
@@ -69,10 +70,10 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
         ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
         ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    btnBack = new FButton("Back");
+    btnBack = new FButton(localizer.getMessage("lblBack"));
     btnBack.setIcon(FSkin.getImage(FSkinProp.ICO_OPEN).resize(24, 24).getIcon());
 
-    btnResetHistory = new FButton("Reset History");
+    btnResetHistory = new FButton(localizer.getMessage("lblRogueResetHistory"));
     btnResetHistory.setIcon(FSkin.getImage(FSkinProp.ICO_DELETE).resize(24, 24).getIcon());
   }
 
@@ -80,7 +81,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
   public EMenuGroup getGroupEnum() { return EMenuGroup.ROGUE; }
 
   @Override
-  public String getMenuTitle() { return "Run History"; }
+  public String getMenuTitle() { return localizer.getMessage("lblRogueRunHistory"); }
 
   @Override
   public EDocID getItemEnum() { return EDocID.HOME_ROGUEHISTORY; }
@@ -146,6 +147,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
    * Layout: avatar on left, info rows on right, all left aligned.
    */
   static class RunHistoryCard extends FSkin.SkinnedPanel {
+    private final Localizer localizer = Localizer.getInstance();
     private static final int INSET = 10;
     private static final int AVATAR_SIZE = 60;
     private static final int AVATAR_GAP = 5;
@@ -204,7 +206,12 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
         default: outcomeColor = Color.GRAY; break;
       }
       lblOutcome = new FLabel.Builder()
-          .text(displayedOutcome)
+          .text(switch (displayedOutcome) {
+            case "VICTORY" -> localizer.getMessage("lblRogueHistoryVictory");
+            case "DEFEAT" -> localizer.getMessage("lblRogueHistoryDefeat");
+            case "ABANDONED" -> localizer.getMessage("lblRogueHistoryAbandoned");
+            default -> displayedOutcome;
+          })
           .fontSize(13)
           .fontStyle(Font.BOLD)
           .fontAlign(SwingConstants.RIGHT)
@@ -214,24 +221,23 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
 
       String detail = "";
       if ("VICTORY".equals(entry.getOutcome()) && !entry.getBossOrDefeatedBy().isEmpty()) {
-        detail = "Boss slain: " + entry.getBossOrDefeatedBy();
+        detail = localizer.getMessage("lblRogueHistoryBossSlain", entry.getBossOrDefeatedBy());
       } else if ("DEFEAT".equals(entry.getOutcome()) && !entry.getBossOrDefeatedBy().isEmpty()) {
-        detail = "Defeated by: " + entry.getBossOrDefeatedBy();
+        detail = localizer.getMessage("lblRogueHistoryDefeatedBy", entry.getBossOrDefeatedBy());
       }
       lblDetail = new FLabel.Builder().text(detail).fontSize(12)
           .fontAlign(SwingConstants.LEFT).build();
       add(lblDetail);
 
       lblTimestamp = new FLabel.Builder()
-          .text("<html><div align='right'>Date: " + entry.getTimestamp()
-              + "<br>Run Duration: " + entry.getFormattedRunTime() + "</div></html>")
+          .text(localizer.getMessage("lblRogueHistoryTimestamp", entry.getTimestamp(), entry.getFormattedRunTime()))
           .fontSize(11)
           .fontAlign(SwingConstants.RIGHT)
           .build();
       add(lblTimestamp);
 
       if (!entry.getPath().isEmpty()) {
-        txtPath = new FTextArea("Path: " + String.join(", ", entry.getPath()));
+        txtPath = new FTextArea(localizer.getMessage("lblRogueHistoryPath", String.join(", ", entry.getPath())));
         txtPath.setEditable(false);
         txtPath.setLineWrap(true);
         txtPath.setWrapStyleWord(true);
@@ -248,7 +254,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
 
       if (descensionLevel != null) {
            lblDescension = new FLabel.Builder()
-               .text("Descension: Level " + descensionLevel.level + " - " + descensionLevel.name)
+               .text(localizer.getMessage("lblRogueHistoryDescension", descensionLevel.level, descensionLevel.name))
                .fontSize(12).fontAlign(SwingConstants.LEFT).build();
            add(lblDescension);
       } else {
@@ -257,7 +263,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
 
       if (entry.getEndlessLevel() > 0) {
         lblEndless = new FLabel.Builder()
-            .text("Endless Level " + entry.getEndlessLevel())
+            .text(localizer.getMessage("lblRogueEndlessLevel", entry.getEndlessLevel()))
             .fontSize(12).fontAlign(SwingConstants.LEFT).build();
         lblEndless.setToolTipText(EndlessMode.getModifiersDescription(entry.getEndlessLevel()));
         add(lblEndless);

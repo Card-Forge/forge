@@ -2,6 +2,7 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.RogueRun;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
@@ -30,10 +31,10 @@ final class RogueMapDialog {
 
     FOptionPane optionPane = new FOptionPane(
         null,
-        "View Map",
+        Localizer.getInstance().getMessage("lblRogueViewMap"),
         null,
         mapPanel,
-        List.of("Back"),
+        List.of(Localizer.getInstance().getMessage("lblBack")),
         0);
     optionPane.setVisible(true);
     optionPane.dispose();

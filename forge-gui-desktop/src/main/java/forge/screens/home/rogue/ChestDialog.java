@@ -80,7 +80,7 @@ public class ChestDialog {
       desiredHeight += btnReward.getPreferredSize().height + 10 + 10;
     }
 
-    FButton btnSkip = RogueButtonHelper.createChoiceButton("Skip Loot", "");
+    FButton btnSkip = RogueButtonHelper.createChoiceButton(Localizer.getInstance().getMessage("lblRogueSkipLoot"), "");
     RogueButtonHelper.setChoiceButtonSizeHint(btnSkip, choiceButtonWidth);
     btnSkip.addActionListener(e -> {
       selectedLoot = null;
@@ -106,12 +106,12 @@ public class ChestDialog {
     int result;
     do {
       List<String> buttons = new ArrayList<>();
-      buttons.add("View Deck");
-      buttons.add("View Map");
+      buttons.add(Localizer.getInstance().getMessage("lblViewDeck"));
+      buttons.add(Localizer.getInstance().getMessage("lblRogueViewMap"));
       if (hasRerolls) {
-        buttons.add("Reroll (" + rerollCtx.remainingRerolls + " left)");
+        buttons.add(Localizer.getInstance().getMessage("lblRogueRerollsRemaining", rerollCtx.remainingRerolls));
       }
-      optionPane = new FOptionPane(null, "Chest", null, panel,
+      optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueChest"), null, panel,
           buttons, VIEW_DECK_OPTION);
       optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
       RogueUIHelper.disableSpacebarButtonActivation(optionPane.getContentPane());

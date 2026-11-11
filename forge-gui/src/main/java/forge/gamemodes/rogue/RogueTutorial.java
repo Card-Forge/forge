@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 /**
@@ -257,7 +258,7 @@ public enum RogueTutorial {
 
   RogueTutorial(String title, String... messageChunks) {
     this.title = title;
-    this.messageChunks = List.of(messageChunks);
+    this.messageChunks = ImmutableList.copyOf(messageChunks);
   }
 
   public String getTitle() {

@@ -3,7 +3,7 @@ package forge.gamemodes.rogue.effect;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertSame;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import com.google.common.collect.Iterables;
@@ -25,7 +25,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePath;
 import forge.item.PaperCard;
-import forge.util.ImageUtil;
+import forge.model.FModel;
 import java.util.List;
 import java.util.Map;
 import org.testng.annotations.Test;
@@ -95,7 +95,8 @@ public class EndlessModeTest extends SimulationTest {
         assertEquals(Iterables.size(human.getExtraCardsInCommandZone()), 1);
         PaperCard matchCard = (PaperCard) human.getExtraCardsInCommandZone().iterator().next();
         assertEquals(matchCard.getName(), "Endless Mode - Level 5");
-        assertSame(ImageUtil.getPaperCardFromImageKey(matchCard.getImageKey(false)), matchCard);
+        assertTrue(matchCard.getRules().isCustom());
+        assertNull(FModel.getMagicDb().getCommonCards().getCard(matchCard.getName()));
 
         BazaarContext bazaar = new BazaarContext();
         bazaar.priceAdjustment = 2;

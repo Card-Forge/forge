@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.effect;
 
+import com.google.common.collect.ImmutableList;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
@@ -13,6 +14,7 @@ import forge.gamemodes.rogue.path.NodeBazaar;
 import forge.gamemodes.rogue.path.NodeChest;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +95,7 @@ public enum CustomRunModification implements RogueEffect {
             ctx.candidateCards = candidates.subList(0, Math.min(60, candidates.size()));
             ctx.cardSelectionMinCount = pickCount;
             ctx.cardSelectionMaxCount = pickCount;
-            ctx.cardSelectionSubtitle = "Choose cards for your starting deck.";
+            ctx.cardSelectionSubtitle = Localizer.getInstance().getMessage("lblRogueChooseStartingDeckCards");
             ctx.buildDeckPreview = picks -> {
                 Deck preview = new Deck(sealedDeck.getStartDeck());
                 preview.getMain().addAllFlat(picks);
@@ -189,7 +191,7 @@ public enum CustomRunModification implements RogueEffect {
 
         @Override
         public void onBeforeChestLoot(ChoiceRerollContext ctx, RogueRun run) {
-            ctx.forcedChestChoices = List.of(ChestEffect.CARD_CACHE_BAN);
+            ctx.forcedChestChoices = ImmutableList.of(ChestEffect.CARD_CACHE_BAN);
             ctx.remainingRerolls = 0;
         }
     };

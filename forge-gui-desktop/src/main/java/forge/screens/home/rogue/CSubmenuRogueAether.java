@@ -11,6 +11,7 @@ import forge.screens.home.CHomeUI;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
@@ -102,7 +103,7 @@ public enum CSubmenuRogueAether implements ICDoc {
       refreshDisplay();
       AetherUpgrade u = AetherUpgrade.forLevel(nextLevel);
       if (u != null) {
-        FOptionPane.showMessageDialog(u.name + " unlocked!\n" + u.description, "Aether Upgrade Unlocked");
+        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueUnlockedAetherUpgrade", u.name, u.description), Localizer.getInstance().getMessage("lblRogueAetherUpgradeUnlocked"));
       }
     }
   }
@@ -135,7 +136,7 @@ public enum CSubmenuRogueAether implements ICDoc {
     int maxLevel = AetherUpgrade.getMaxLevel();
     boolean isMaxed = progress.getAetherUpgradeLevel() >= maxLevel;
     progress.setAetherUpgradeLevel(isMaxed ? 0 : maxLevel);
-    view.getBtnDevMaxAether().setText(isMaxed ? "[Dev] Max Aether" : "[Dev] Reset Aether");
+    view.getBtnDevMaxAether().setText(isMaxed ? Localizer.getInstance().getMessage("lblRogueDevMaxAether") : Localizer.getInstance().getMessage("lblRogueDevResetAether"));
     view.populate();
     refreshDisplay();
   }
@@ -146,10 +147,10 @@ public enum CSubmenuRogueAether implements ICDoc {
 
   private void confirmResetAetherworks() {
     boolean confirmed = FOptionPane.showConfirmDialog(
-        "Are you sure you want to reset all Aetherworks?\nAll spent Echoes will be refunded.",
-        "Reset Aetherworks",
-        "Reset",
-        "Cancel",
+        Localizer.getInstance().getMessage("lblRogueResetAetherworksConfirm"),
+        Localizer.getInstance().getMessage("lblRogueResetAetherworks"),
+        Localizer.getInstance().getMessage("lblReset"),
+        Localizer.getInstance().getMessage("lblCancel"),
         false
     );
 
@@ -157,7 +158,7 @@ public enum CSubmenuRogueAether implements ICDoc {
       int refunded = RogueMetaProgress.getInstance().resetAetherEffects();
       refreshDisplay();
       if (refunded > 0) {
-        FOptionPane.showMessageDialog("Refunded " + refunded + " Echoes.", "Aetherworks Reset");
+        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueRefundedEchoes", refunded), Localizer.getInstance().getMessage("lblRogueAetherworksReset"));
       }
     }
   }

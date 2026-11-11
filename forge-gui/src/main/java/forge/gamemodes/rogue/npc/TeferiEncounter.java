@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public enum TeferiEncounter implements NPCEncounter {
     BEFORE_FIRST_RUN(0) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "A dark-skinned man in blue robes looks up from a dismantled machine, slightly surprised. " +
                     "He sets down his tool and comes to meet you, smiling.\n" +
                     "\"Commander. You came.\" He offers his hand. \"I'm Teferi. Forgive me, I keep forgetting " +
@@ -46,7 +47,7 @@ public enum TeferiEncounter implements NPCEncounter {
     FIRST_EVIDENCE(1) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Teferi rises to meet you, a broad smile on his face. \"You made it through! Come, sit " +
                     "with me. I want to hear how it went.\"\n" +
                     "He pulls up a chair and listens as you recount the battles along the Trail. \"You fought " +
@@ -66,7 +67,7 @@ public enum TeferiEncounter implements NPCEncounter {
     PATTERN_SPREADS(2) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "\"You're back! Here, let me take that.\" Teferi sets the black material you've brought " +
                     "back beside the first sample. He listens as you describe the Planebounds you fought. \"You " +
                     "went through different worlds and found the same thing. I was hoping you'd come back and " +
@@ -88,7 +89,7 @@ public enum TeferiEncounter implements NPCEncounter {
     PHYREXIA(3) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "\"It's glistening oil, Commander. Phyrexian.\"\n" +
                     "Teferi leaves the new sample sealed. \"With " +
                     "the same signs coming back from a third Trail, I can't keep hoping I'm wrong.\"",
@@ -118,7 +119,7 @@ public enum TeferiEncounter implements NPCEncounter {
     RELAY(4) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "\"This was inside the Planebound?\" Teferi looks at the broken casing you've brought back, " +
                     "at the black filaments trailing from it. \"Phyrexian work. Someone put this in them and " +
                     "let it take root.\" He listens as you describe the fight.\n" +
@@ -142,7 +143,7 @@ public enum TeferiEncounter implements NPCEncounter {
     NETWORK(5) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "As you set down the recovered implant, black filaments twitch inside one of the older " +
                     "casings. A moment later, the new arrival twitches too.\n" +
                     "\"You see that?\" Teferi watches the casings closely. \"They answer each other. They communicate! " +
@@ -161,7 +162,7 @@ public enum TeferiEncounter implements NPCEncounter {
     ARTIFICIAL_ROUTE(6) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "\"This gets more and more awkward. Someone is using the Planebounds to build a road between " +
                     "worlds.\" Teferi draws a line across the charts on the wall, through the places you've " +
                     "fought your way across. \"The relays steal their mana and use it to force Omenpaths open " +
@@ -192,7 +193,7 @@ public enum TeferiEncounter implements NPCEncounter {
     DIRECTIVE(7) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "\"Wait. That part's still receiving something.\" Teferi holds a hand above the open relay " +
                     "you brought back. Deep inside its casing, a knot of black fibers pulses. \"You kept enough " +
                     "of it intact. Give me a moment.\"",
@@ -213,7 +214,7 @@ public enum TeferiEncounter implements NPCEncounter {
     FIRST_BREACH(8) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Teferi lets you finish describing the tear that opened along the Trail. The relays flared " +
                     "together, and for a few moments you could see another world: white towers rising from " +
                     "black sinew, with metal branches stretched across the sky. Then the opening crumpled and " +
@@ -235,7 +236,7 @@ public enum TeferiEncounter implements NPCEncounter {
     SYNCHRONIZATION(9) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "Teferi meets you before you've had time to set down your things. \"The breach is still " +
                     "open. I've been watching it since you left. I can see New Phyrexia through it, and each " +
                     "time the remaining relays send their power together, the tear widens.\" He waits until " +
@@ -255,7 +256,7 @@ public enum TeferiEncounter implements NPCEncounter {
     NEMESIS(10) {
         @Override
         protected List<String> getStoryTextChunks() {
-            return List.of(
+            return ImmutableList.of(
                 "The captive Conductor stirs as you set it down. Pale porcelain plates unfold around a " +
                     "knot of black flesh. Long, rootlike limbs strain against its bonds, and something pulses " +
                     "between its metal ribs. Teferi steps in front of you.\n" +
@@ -313,7 +314,7 @@ public enum TeferiEncounter implements NPCEncounter {
             }
 
             if (isTriggerConditionMet(progress)) {
-                NPCContext context = buildContext(storyTextChunks, List.of());
+                NPCContext context = buildContext(storyTextChunks, ImmutableList.of());
                 incrementNpcLevel();
                 return context;
             }
@@ -323,7 +324,7 @@ public enum TeferiEncounter implements NPCEncounter {
     }
 
     protected List<String> getStoryTextChunks() {
-        return List.of();
+        return ImmutableList.of();
     }
 
     @Override

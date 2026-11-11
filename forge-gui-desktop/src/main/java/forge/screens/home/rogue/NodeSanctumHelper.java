@@ -15,6 +15,7 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.toolbox.FOptionPane;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -54,17 +55,16 @@ class NodeSanctumHelper {
             || currentRun.getMaxLife() > sanctumCtx.restMaxLifeCost;
         boolean restEnabled = canPayRestCost && (effectiveHealAmount > 0 || hasWounds);
         String restDescription = sanctumCtx.restLifeGainDisabled
-            ? "Cure all {{Wound}}s."
+            ? Localizer.getInstance().getMessage("lblRogueCureWounds", "{{Wound}}")
             : sanctumCtx.restFullHeal
-                ? "Heal to full Life. Lose " + sanctumCtx.restMaxLifeCost
-                    + " Max. Life. Cure all {{Wound}}s."
-                : "Gain " + effectiveHealAmount + " Life & Cure all {{Wound}}s.";
+                ? Localizer.getInstance().getMessage("lblRogueFullRest", sanctumCtx.restMaxLifeCost, "{{Wound}}")
+                : Localizer.getInstance().getMessage("lblRogueGainLifeAndCureWounds", effectiveHealAmount, "{{Wound}}");
         String restDisabledReason = restEnabled
             ? null
-            : !canPayRestCost ? "You don't have enough Max. Life."
+            : !canPayRestCost ? Localizer.getInstance().getMessage("lblRogueNotEnoughMaxLife")
                 : sanctumCtx.restLifeGainDisabled
-                ? "You have no wounds to cure."
-                : "You are already at maximum life and have no wounds to cure.";
+                ? Localizer.getInstance().getMessage("lblRogueNoWoundsToCure")
+                : Localizer.getInstance().getMessage("lblRogueFullLifeAndNoWounds");
 
         SanctumDialog dialog = new SanctumDialog(
             restDescription, restEnabled, restDisabledReason, sanctumCtx);
@@ -84,14 +84,14 @@ class NodeSanctumHelper {
                 PaperCard craftedFood = craftSanctumFood(currentRun);
                 if (craftedFood == null) {
                     FOptionPane.showMessageDialog(
-                        "No Food items matching your commander's color identity were available to craft.",
-                        "Sanctum");
+                        Localizer.getInstance().getMessage("lblRogueNoFoodAvailable"),
+                        Localizer.getInstance().getMessage("lblRogueSanctum"));
                     break;
                 }
                 currentRun.addCarryCard(craftedFood, CarryCardType.ITEM, SANCTUM_COOK_SOURCE_ID);
                 map.showNodeResultDialog(
-                    "Sanctum",
-                    "You cooked:",
+                    Localizer.getInstance().getMessage("lblRogueSanctum"),
+                    Localizer.getInstance().getMessage("lblRogueYouCooked"),
                     List.of(new NodeResultPanel.CardSection(null, List.of(craftedFood))),
                     900,
                     700,

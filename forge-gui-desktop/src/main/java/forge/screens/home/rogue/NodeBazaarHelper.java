@@ -23,6 +23,7 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.localinstance.achievements.RogueCommanderAchievements;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -188,7 +189,7 @@ class NodeBazaarHelper {
 
     private BazaarContext createOrdinaryBazaarContext() {
         BazaarContext bazaarCtx = new BazaarContext();
-        bazaarCtx.title = "Bazaar";
+        bazaarCtx.title = Localizer.getInstance().getMessage("lblRogueBazaar");
         return bazaarCtx;
     }
 

@@ -44,7 +44,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
   // Fields used with interface IVDoc
   private DragCell parentCell;
-  private final DragTab tab = new DragTab("Start New Run");
+  private final DragTab tab = new DragTab(localizer.getMessage("lblRogueStartNewRun"));
 
   private final FLabel lblTitle = new FLabel.Builder()
       .text(Localizer.getInstance().getMessage("lblRoguePickYourRogueCommander"))
@@ -67,7 +67,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
       .build();
 
   private final FLabel lblDescriptionLabel = new FLabel.Builder()
-      .text("Description:")
+      .text(localizer.getMessage("lblRogueDescriptionLabel"))
       .fontSize(14)
       .build();
 
@@ -75,7 +75,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
       .icon(FSkin.getImage(FSkinProp.ICO_LOCK).resize(14, 14)).build();
 
   private final FLabel lblThemeLabel = new FLabel.Builder()
-      .text("Themes:")
+      .text(localizer.getMessage("lblRogueThemesLabel"))
       .fontSize(14)
       .build();
 
@@ -91,15 +91,15 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private final FButton btnHistory;
 
   // Dev buttons
-  private final FButton btnDevUnlockAll = new FButton("[Dev] Unlock All");
-  private final FButton btnDevNPCProgress = new FButton("[Dev] NPC Progress");
+  private final FButton btnDevUnlockAll = new FButton(localizer.getMessage("lblRogueDevUnlockAll"));
+  private final FButton btnDevNPCProgress = new FButton(localizer.getMessage("lblRogueDevNpcProgress"));
 
   // Run configuration
-  private final FCheckBox chkCustomRuns = new FCheckBox("Custom Run");
-  private final FCheckBox chkRandomRogueCommander = new FCheckBox("Mania");
-  private final FCheckBox chkChooseRogueCommander = new FCheckBox("Chosen One");
+  private final FCheckBox chkCustomRuns = new FCheckBox(localizer.getMessage("lblRogueCustomRun"));
+  private final FCheckBox chkRandomRogueCommander = new FCheckBox(localizer.getMessage("lblRogueMania"));
+  private final FCheckBox chkChooseRogueCommander = new FCheckBox(localizer.getMessage("lblRogueChosenOne"));
   private final FLabel lblCustomRunHint = new FLabel.Builder()
-      .text("Custom Runs do not unlock Commanders or Descension Levels, and do not award Sparks.")
+      .text(localizer.getMessage("lblRogueCustomRunLimitations"))
       .fontSize(12).build();
   private FSkin.SkinnedPanel pnlCustomModifications;
   private FScrollPane scrollCustomModifications;
@@ -138,7 +138,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private JPanel pnlCustomRunLock;
 
   // Descension UI
-  private final FCheckBox chkDescension = new FCheckBox("Descension Mode");
+  private final FCheckBox chkDescension = new FCheckBox(localizer.getMessage("lblRogueDescensionMode"));
   private final FButton btnDescensionDown = new FButton("<");
   private final FLabel lblDescensionLock = new FLabel.Builder()
       .icon(FSkin.getImage(FSkinProp.ICO_LOCK).resize(20, 20)).build();
@@ -151,23 +151,23 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
   VSubmenuRogueStart() {
     // Setup buttons with icons (matching Path View style)
-    btnBeginRun = new FButton("Start Run");
+    btnBeginRun = new FButton(localizer.getMessage("lblRogueStartRun"));
     btnBeginRun.setIcon(FSkin.getImage(FSkinProp.ICO_ALPHASTRIKE).resize(24, 24).getIcon());
 
-    btnStats = new FButton("Codex");
+    btnStats = new FButton(localizer.getMessage("lblRogueCodex"));
     btnStats.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_BOOK).resize(24, 24).getIcon());
 
-    btnAether = new FButton("Aether");
+    btnAether = new FButton(localizer.getMessage("lblRogueAether"));
     btnAether.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_GOLD).resize(24, 24).getIcon());
 
-    btnHistory = new FButton("History");
+    btnHistory = new FButton(localizer.getMessage("lblRogueHistory"));
     btnHistory.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_NOTES).resize(24, 24).getIcon());
 
     lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     btnCommanderPrevious.setFocusable(false);
     btnCommanderNext.setFocusable(false);
-    btnCommanderPrevious.setToolTipText("Previous commander");
-    btnCommanderNext.setToolTipText("Next commander");
+    btnCommanderPrevious.setToolTipText(localizer.getMessage("lblRoguePreviousCommander"));
+    btnCommanderNext.setToolTipText(localizer.getMessage("lblRogueNextCommander"));
     chkDescension.addComponentListener(visibilityListener);
     chkDescension.addItemListener(e -> SwingUtilities.invokeLater(() -> updateResponsiveLayout()));
     pnlCommanderCarousel.add(btnCommanderPrevious);
@@ -262,7 +262,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     panel.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[150px][grow]"));
 
     // Row 0: Commander name
-    panel.add(new FLabel.Builder().text("Commander:").fontSize(14).build(),
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderLabel")).fontSize(14).build(),
         "cell 0 0, alignx left, aligny top");
     panel.add(lblCommanderName, "cell 1 0, alignx left, growx");
 

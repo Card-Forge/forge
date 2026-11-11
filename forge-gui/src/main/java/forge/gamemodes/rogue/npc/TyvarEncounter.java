@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.npc;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.SanctumContext;
@@ -21,13 +22,13 @@ public enum TyvarEncounter implements NPCEncounter {
             }
             ctx.preSanctumDialogs.add(buildContext(
                 "Stranger", STRANGER_AVATAR_INDEX,
-                List.of(
+                ImmutableList.of(
                     "A man in torn clothes drags himself across the Sanctum's stone floor, leaving a thin trail " +
                         "of blood. He reaches for a pillar, but his arm gives way.",
                     "He presses a hand against his side and looks up at you. \"Here. Help me keep pressure on it. " +
                         "I can't stop the bleeding.\""
                 ),
-                List.of()
+                ImmutableList.of()
             ));
             addHelpStrangerChoice(ctx);
         }
@@ -47,14 +48,14 @@ public enum TyvarEncounter implements NPCEncounter {
             }
             incrementNpcLevel();
             return buildContext(
-                List.of(
+                ImmutableList.of(
                     "The stranger eases himself upright against the pillar. \"You needed this rest yourself, " +
                         "didn't you? And you spent it on me.\" He offers his hand. \"Tyvar Kell. I'm glad you found me.\"",
                     "He tries to stand, winces, and settles back with a short laugh. \"Give me a little time. " +
                         "I'll meet you in the Aether. Come find me before you head out, and we'll get you ready " +
                         "for a proper fight. As often as you need, friend. I owe you more than a thank-you.\""
                 ),
-                List.of()
+                ImmutableList.of()
             );
         }
     },
@@ -89,7 +90,7 @@ public enum TyvarEncounter implements NPCEncounter {
 
     @Override
     public List<String> getOfferingBoonMonologues() {
-        return List.of(
+        return ImmutableList.of(
             "Tyvar waves you over to a bench piled with gear. \"There you are! I've been sorting through this " +
                 "for you. You can thank me by coming back to tell me how the fight went. In detail, mind you.\"",
             "Tyvar rests a hand on the stone wall. Gray spreads across his knuckles, then fades as he pulls away. " +

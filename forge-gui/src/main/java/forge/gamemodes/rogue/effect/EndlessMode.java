@@ -1,6 +1,6 @@
 package forge.gamemodes.rogue.effect;
 
-import forge.StaticData;
+import com.google.common.collect.ImmutableList;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -9,7 +9,6 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePathNode;
 import forge.item.PaperCard;
-import java.util.List;
 import java.util.function.Consumer;
 
 /** Difficulty and Bazaar pricing for each Trail continuation. */
@@ -83,15 +82,7 @@ public enum EndlessMode implements RogueEffect {
         int level = run.getEndlessLevel();
         int handBonus = Math.min(getHandBonus(level), opponent.getDeck().getMain().countAll() * 30 / 100);
         opponent.setStartingHand(opponent.getStartingHand() + handBonus);
-        PaperCard card = createMatchCard(level);
-        PaperCard registeredCard = StaticData.instance().getCommonCards().getCard(
-            card.getName(), CardEdition.UNKNOWN_CODE);
-        if (registeredCard == null) {
-            StaticData.instance().getCommonCards().addCard(card);
-        } else {
-            card = registeredCard;
-        }
-        RogueEffect.addCardToCommandZone(card, human);
+        RogueEffect.addCardToCommandZone(createMatchCard(level), human);
     }
 
     @Override
@@ -111,7 +102,7 @@ public enum EndlessMode implements RogueEffect {
         String damageAndLifeLossText = "If a source an opponent controls would deal damage to you, "
             + "it deals that much damage plus " + damageBonus + " instead; whenever a spell or ability "
             + "an opponent controls causes you to lose life, you lose " + damageBonus + " additional life.";
-        CardRules rules = CardRules.fromScript(List.of(
+        CardRules rules = CardRules.fromScript(ImmutableList.of(
             "Name:Endless Mode - Level " + level,
             "ManaCost:no cost",
             "Types:Cursed",

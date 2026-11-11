@@ -1,6 +1,7 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.path.NodeBazaar;
+import forge.util.Localizer;
 import java.awt.*;
 
 /**
@@ -16,7 +17,7 @@ public class NodeBazaarPanel extends NodeCircularPanel {
    */
   public NodeBazaarPanel(NodeBazaar node) {
     super(node);
-    setToolTipText("Bazaar: Spend gold to buy cards for your deck.");
+    setToolTipText(Localizer.getInstance().getMessage("lblRogueBazaarTooltip"));
   }
 
   @Override

@@ -1,5 +1,7 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.DeckHints;
@@ -161,13 +163,13 @@ public final class RogueCustomDeckGenerator {
 
     private static List<Map.Entry<PaperCard, Integer>> getCommanderSynergy(PaperCard commander) {
         Map<String, List<Map.Entry<PaperCard, Integer>>> matrix = getSynergyMatrix();
-        return matrix == null ? List.of() : matrix.getOrDefault(commander.getName(), List.of());
+        return matrix == null ? ImmutableList.of() : matrix.getOrDefault(commander.getName(), ImmutableList.of());
     }
 
     private static RogueDeck tryGenerate(PaperCard commander,
             Map<String, List<Map.Entry<PaperCard, Integer>>> matrix, boolean randomlyChosen) {
         List<Map.Entry<PaperCard, Integer>> synergy = matrix == null
-            ? List.of() : matrix.getOrDefault(commander.getName(), List.of());
+            ? ImmutableList.of() : matrix.getOrDefault(commander.getName(), ImmutableList.of());
         try {
             return generateForCommander(commander, synergy, randomlyChosen);
         } catch (RuntimeException e) {
@@ -224,7 +226,7 @@ public final class RogueCustomDeckGenerator {
 
         private List<List<PaperCard>> prioritize(List<List<PaperCard>> sources) {
             List<List<PaperCard>> prioritized = new ArrayList<>();
-            for (Set<String> names : List.of(needs, hints)) {
+            for (Set<String> names : ImmutableList.of(needs, hints)) {
                 for (List<PaperCard> source : sources) {
                     prioritized.add(source.stream().filter(card -> names.contains(card.getName())).collect(Collectors.toList()));
                 }
@@ -271,7 +273,7 @@ public final class RogueCustomDeckGenerator {
         List<PaperCard> eligibleCards = new ArrayList<>(
             RogueConfig.getRandomCardsForEdition(eligible, preferredEdition));
         List<PaperCard> startingCards = getStartingPrints(eligibleCards, eligible, preferredEdition);
-        Set<String> excludedStartingCardNames = Set.of("Sol Ring", "Arcane Signet");
+        Set<String> excludedStartingCardNames = ImmutableSet.of("Sol Ring", "Arcane Signet");
         startingCards.removeIf(card -> excludedStartingCardNames.contains(card.getName()));
         Map<String, PaperCard> eligibleByName = indexByName(eligibleCards);
         Map<String, PaperCard> startingByName = indexByName(startingCards);
@@ -381,7 +383,7 @@ public final class RogueCustomDeckGenerator {
         List<PaperCard> broadCandidates = new ArrayList<>(context.startingCards());
         Collections.shuffle(broadCandidates, MyRandom.getRandom());
         // Prefer Forge's generated deck, then other synergy cards, then the legal pool.
-        List<List<PaperCard>> sources = List.of(spellCandidates, synergyCandidates, broadCandidates);
+        List<List<PaperCard>> sources = ImmutableList.of(spellCandidates, synergyCandidates, broadCandidates);
         List<PaperCard> nonbasicLands = new ArrayList<>(context.generatedLands().values());
         Collections.shuffle(nonbasicLands, MyRandom.getRandom());
 
@@ -528,7 +530,7 @@ public final class RogueCustomDeckGenerator {
         List<PaperCard> eligibleCards = new ArrayList<>(context.eligibleCards());
         Collections.shuffle(eligibleCards, MyRandom.getRandom());
         // The full synergy list remains available even if Forge's one generated deck omitted a card.
-        List<List<PaperCard>> sources = List.of(generatedCards, synergyCards, eligibleCards);
+        List<List<PaperCard>> sources = ImmutableList.of(generatedCards, synergyCards, eligibleCards);
         Set<String> used = new HashSet<>();
         for (PaperCard card : start.getMain().toFlatList()) {
             used.add(card.getName());
@@ -577,7 +579,7 @@ public final class RogueCustomDeckGenerator {
             Map<RewardThemeCategory, Integer> targets) {
         Set<String> used = new HashSet<>(startingNames);
         List<List<PaperCard>> themeSources = targets.isEmpty()
-            ? List.of() : context.themeMatches().prioritize(sources);
+            ? ImmutableList.of() : context.themeMatches().prioritize(sources);
         CardPool rewardPool = new CardPool();
         // Reserve each required category from the same priority-ordered sources.
         addRewards(rewardPool, used, themeSources, targets.getOrDefault(RewardThemeCategory.MYTHICS, 0),

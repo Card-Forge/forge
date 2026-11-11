@@ -1,5 +1,9 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.StaticData;
@@ -41,9 +45,9 @@ public class RogueConfig {
     private RogueConfig() {
     }
 
-    private static final Set<String> EXCLUDED_RANDOM_DRAW_SET_CODES = Set.of("UNK", "UNH");
+    private static final Set<String> EXCLUDED_RANDOM_DRAW_SET_CODES = ImmutableSet.of("UNK", "UNH");
     private static final Set<String> DEPRIORITIZED_RANDOM_PRINT_SET_CODES =
-        Set.of("SLZ", "MAR", "FCA", "TLE", "PF25", "PF26", "SLD", "PSPL", "MBC", "SCH", "HOC",
+        ImmutableSet.of("SLZ", "MAR", "FCA", "TLE", "PF25", "PF26", "SLD", "PSPL", "MBC", "SCH", "HOC",
             "PZA", "OTP", "PIO", "KLR", "EA2", "PSVC", "PRM");
     private static final String FALLBACK_LAND_SET = "MH3";
     private static final String WASTES_FALLBACK_LAND_SET = "M3C";
@@ -55,21 +59,20 @@ public class RogueConfig {
     private static List<PaperCard> cachedGamechangerCards = null;
     private static List<PaperCard> cachedCommanderBanlistCards = null;
 
-    private static boolean rogueCardsLoaded = false;
+    private static final Supplier<Map<String, PaperCard>> rogueCards =
+            Suppliers.memoize(RogueConfig::loadRogueCards);
 
-    /**
-     * Load Rogue Commander-specific card scripts from res/rogue/cards/ into the live card DB.
-     * Mirrors the pattern used by Adventure mode's custom_cards. Safe to call multiple times.
-     */
-    public static void loadRogueCards() {
-        if (rogueCardsLoaded) return;
-        rogueCardsLoaded = true;
+    public static PaperCard getRogueCard(String name) {
+        return name == null ? null : rogueCards.get().get(name);
+    }
 
+    private static Map<String, PaperCard> loadRogueCards() {
+        Map<String, PaperCard> cards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         File cardsDir = new File(ForgeConstants.RES_DIR, "rogue/cards");
-        if (!cardsDir.exists() || !cardsDir.isDirectory()) return;
-
         File[] cardFiles = cardsDir.listFiles((dir, name) -> name.endsWith(".txt"));
-        if (cardFiles == null) return;
+        if (cardFiles == null) {
+            return cards;
+        }
 
         CardRules.Reader rulesReader = new CardRules.Reader();
         for (File cardFile : cardFiles) {
@@ -78,15 +81,16 @@ public class RogueConfig {
                 rulesReader.reset();
                 List<String> lines = FileUtil.readAllLines(isr, true);
                 String name = cardFile.getName();
-                String baseName = name.endsWith(".txt") ? name.substring(0, name.length() - 4) : name;
+                String baseName = name.substring(0, name.length() - 4);
                 CardRules rules = rulesReader.readCard(lines, baseName);
                 rules.setCustom();
                 PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN_CODE, CardRarity.Special);
-                (rules.isVariant() ? db.getVariantCards() : db.getCommonCards()).addCard(card);
+                cards.put(card.getName(), card);
             } catch (Exception e) {
                 Logger.error(e, "Error loading Rogue card {}", cardFile.getName());
             }
         }
+        return cards;
     }
 
     /**
@@ -224,12 +228,12 @@ public class RogueConfig {
             File deckFile = new File(ForgeConstants.RES_DIR, "rogue/util/gamechangers.dck");
             if (!deckFile.exists()) {
                 Logger.warn("Gamechanger deck not found: {}", deckFile.getAbsolutePath());
-                cachedGamechangerCards = List.of();
+                cachedGamechangerCards = ImmutableList.of();
             } else {
                 Deck deck = DeckSerializer.fromFile(deckFile);
                 if (deck == null) {
                     Logger.warn("Failed to load Gamechanger deck from {}", deckFile.getAbsolutePath());
-                    cachedGamechangerCards = List.of();
+                    cachedGamechangerCards = ImmutableList.of();
                 } else {
                     cachedGamechangerCards = new ArrayList<>(deck.getMain().toFlatList());
                 }
@@ -247,12 +251,12 @@ public class RogueConfig {
             File deckFile = new File(ForgeConstants.RES_DIR, "rogue/util/commander_banlist.dck");
             if (!deckFile.exists()) {
                 Logger.warn("Commander banlist deck not found: {}", deckFile.getAbsolutePath());
-                cachedCommanderBanlistCards = List.of();
+                cachedCommanderBanlistCards = ImmutableList.of();
             } else {
                 Deck deck = DeckSerializer.fromFile(deckFile);
                 if (deck == null) {
                     Logger.warn("Failed to load Commander banlist deck from {}", deckFile.getAbsolutePath());
-                    cachedCommanderBanlistCards = List.of();
+                    cachedCommanderBanlistCards = ImmutableList.of();
                 } else {
                     cachedCommanderBanlistCards = new ArrayList<>(deck.getMain().toFlatList());
                 }
@@ -457,7 +461,7 @@ public class RogueConfig {
     /** All basic-land arts in an edition for the Rogue Deck Editor. */
     public static List<PaperCard> getBasicLandsFromEdition(String edition) {
         if (StringUtils.isBlank(edition)) {
-            return List.of();
+            return ImmutableList.of();
         }
         List<PaperCard> basics = new ArrayList<>();
         for (Map.Entry<PaperCard, Integer> entry : FModel.getAllCards()) {
@@ -510,7 +514,10 @@ public class RogueConfig {
      * setCode and artIndex may be null to ignore edition or art selection.
      */
     public static PaperCard getCard(String cardName, String setCode, Integer artIndex) {
-        loadRogueCards();
+        PaperCard rogueCard = getRogueCard(cardName);
+        if (rogueCard != null) {
+            return rogueCard;
+        }
         PaperCard card;
         if (setCode == null || setCode.isEmpty()) {
             card = db.getCommonCards().getCard(cardName);

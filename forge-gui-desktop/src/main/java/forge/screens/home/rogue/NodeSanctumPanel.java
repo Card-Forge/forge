@@ -1,6 +1,7 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.path.NodeSanctum;
+import forge.util.Localizer;
 import java.awt.*;
 
 /**
@@ -21,7 +22,7 @@ public class NodeSanctumPanel extends NodeCircularPanel {
     super(node);
     this.sanctumNode = node;
     setToolTipText(
-        "Sanctum: Gain life and cure all wounds, craft a random Food item, or gain 3 Removal Credits.");
+        Localizer.getInstance().getMessage("lblRogueSanctumTooltip"));
   }
 
   @Override

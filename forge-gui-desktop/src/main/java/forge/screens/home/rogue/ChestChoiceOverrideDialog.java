@@ -6,6 +6,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -50,7 +51,7 @@ class ChestChoiceOverrideDialog {
         wrapper.setOpaque(false);
 
         FLabel lblTitle = new FLabel.Builder()
-            .text("[DEV] Override Chest Loot")
+            .text(Localizer.getInstance().getMessage("lblRogueDevOverrideChestLoot"))
             .fontSize(16)
             .fontStyle(Font.BOLD)
             .fontAlign(SwingConstants.CENTER)
@@ -66,8 +67,8 @@ class ChestChoiceOverrideDialog {
         wrapper.setPreferredSize(new Dimension(420, 420));
         wrapper.setMinimumSize(new Dimension(420, 420));
 
-        optionPane = new FOptionPane(null, "[DEV] Chest Loot Override", null, wrapper,
-            List.of("OK", "Cancel"), 0);
+        optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueDevChestLootOverride"), null, wrapper,
+            List.of("OK", Localizer.getInstance().getMessage("lblCancel")), 0);
         updateSelectionState();
         optionPane.setVisible(true);
         int result = optionPane.getResult();
@@ -93,8 +94,7 @@ class ChestChoiceOverrideDialog {
                 selectedCount++;
             }
         }
-        lblInfo.setText("Select exactly 2 effects (" + selectedCount + " / " + REQUIRED_SELECTIONS
-            + " selected). Current loot choices are preselected.");
+        lblInfo.setText(Localizer.getInstance().getMessage("lblRogueChestOverrideSelection", REQUIRED_SELECTIONS, selectedCount));
         if (optionPane != null) {
             optionPane.setButtonEnabled(0, selectedCount == REQUIRED_SELECTIONS);
         }

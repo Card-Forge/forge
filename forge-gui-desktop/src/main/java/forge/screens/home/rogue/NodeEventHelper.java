@@ -11,6 +11,7 @@ import forge.gamemodes.rogue.npc.NPCEncounterComposite;
 import forge.gamemodes.rogue.path.NodeEvent;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.MyRandom;
+import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -98,7 +99,7 @@ class NodeEventHelper {
         }
 
         RogueEvent picked = (RogueEvent) JOptionPane.showInputDialog(
-            null, "Override event:", "[DEV] Pick Event",
+            null, Localizer.getInstance().getMessage("lblRogueDevOverrideEvent"), Localizer.getInstance().getMessage("lblRogueDevPickEvent"),
             JOptionPane.PLAIN_MESSAGE, null,
             RogueEvent.values(), event);
         return picked != null ? picked : event;
@@ -153,14 +154,14 @@ class NodeEventHelper {
     private List<NodeResultPanel.CardSection> buildNodeResultSections(EffectResultContext ctx) {
         List<NodeResultPanel.CardSection> sections = new ArrayList<>();
         if (ctx.gainedWoundEffect != null) {
-            sections.add(new NodeResultPanel.CardSection("Wound gained:",
+            sections.add(new NodeResultPanel.CardSection(Localizer.getInstance().getMessage("lblRogueWoundGained"),
                 ctx.gainedWoundEffect.getDisplayName() + " - " + ctx.gainedWoundEffect.getDescription()));
         }
         if (ctx.removedCards != null && !ctx.removedCards.isEmpty()) {
-            sections.add(new NodeResultPanel.CardSection("Cards removed:", ctx.removedCards));
+            sections.add(new NodeResultPanel.CardSection(Localizer.getInstance().getMessage("lblRogueCardsRemoved"), ctx.removedCards));
         }
         if (ctx.addedCards != null && !ctx.addedCards.isEmpty()) {
-            sections.add(new NodeResultPanel.CardSection("Cards added:", ctx.addedCards));
+            sections.add(new NodeResultPanel.CardSection(Localizer.getInstance().getMessage("lblRogueCardsAdded"), ctx.addedCards));
         }
         return sections;
     }

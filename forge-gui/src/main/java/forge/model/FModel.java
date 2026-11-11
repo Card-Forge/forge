@@ -446,6 +446,7 @@ public final class FModel {
             case Constructed, Draft, Sealed, Quest, PlanarConquest, Puzzle, Adventure -> achievements.get().get(gameType);
             case AdventureEvent -> achievements.get().get(GameType.Adventure);
             case QuestDraft -> achievements.get().get(GameType.Quest);
+            case RogueCommander -> RogueCommanderAchievements.instance;
             default -> achievements.get().get(GameType.Constructed);
         };
     }

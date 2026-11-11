@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import com.google.common.collect.ImmutableList;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import forge.deck.DeckFormat;
 import forge.deck.Deck;
@@ -263,7 +264,7 @@ public class RogueRun {
     // Deck management
     public List<PaperCard> getSelectableDeckCards(Predicate<PaperCard> filter) {
         if (currentDeck == null) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> deckCards = new ArrayList<>(currentDeck.getMain().toFlatList());
@@ -289,14 +290,14 @@ public class RogueRun {
 
     public List<PaperCard> removeCardsFromDeck(Predicate<PaperCard> predicate) {
         if (currentDeck == null || predicate == null) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> deckCardsToRemove = new ArrayList<>(currentDeck.getMain().toFlatList());
         Set<String> commanderNames = getActiveCommanderNames();
         deckCardsToRemove.removeIf(card -> commanderNames.contains(card.getName()) || !predicate.test(card));
         if (deckCardsToRemove.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         for (PaperCard card : deckCardsToRemove) {
@@ -307,12 +308,12 @@ public class RogueRun {
 
     public List<PaperCard> removeRandomCardsFromDeck(int count, Predicate<PaperCard> predicate) {
         if (currentDeck == null || count <= 0) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> selectableDeckCards = getSelectableDeckCards(predicate);
         if (selectableDeckCards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         Collections.shuffle(selectableDeckCards, MyRandom.getRandom());
@@ -352,7 +353,7 @@ public class RogueRun {
     }
 
     public List<CarryCard> getCarryCards() {
-        return carryCards != null ? carryCards : List.of();
+        return carryCards != null ? carryCards : ImmutableList.of();
     }
 
     public boolean hasCarryCardOfType(CarryCardType type) {
@@ -365,12 +366,12 @@ public class RogueRun {
      */
     public List<PaperCard> filterCardsByCommanderColorIdentity(List<PaperCard> cards) {
         if (cards == null || cards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> commanders = getActiveCommanders();
         if (commanders.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         Predicate<PaperCard> predicate =
@@ -388,10 +389,10 @@ public class RogueRun {
         if (card == null) {
             return false;
         }
-        boolean fulfillsColorIdentity = !filterCardsByCommanderColorIdentity(List.of(card)).isEmpty();
+        boolean fulfillsColorIdentity = !filterCardsByCommanderColorIdentity(ImmutableList.of(card)).isEmpty();
 
         if (fulfillsColorIdentity) {
-            return !filterDuplicateCards(List.of(card)).isEmpty();
+            return !filterDuplicateCards(ImmutableList.of(card)).isEmpty();
         } else {
             return false;
         }
@@ -399,7 +400,7 @@ public class RogueRun {
 
     public List<PaperCard> filterAddableCardsToDeck(Collection<PaperCard> cards) {
         if (cards == null || cards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         List<PaperCard> filtered = filterCardsByCommanderColorIdentity(new ArrayList<>(cards));
@@ -411,7 +412,7 @@ public class RogueRun {
             return false;
         }
 
-        if (filterCardsByCommanderColorIdentity(List.of(card)).isEmpty()) {
+        if (filterCardsByCommanderColorIdentity(ImmutableList.of(card)).isEmpty()) {
             return false;
         }
 
@@ -422,7 +423,7 @@ public class RogueRun {
 
     public List<PaperCard> filterDuplicateCards(Collection<PaperCard> cards) {
         if (cards == null || cards.isEmpty()) {
-            return List.of();
+            return ImmutableList.of();
         }
 
         Map<String, Integer> existingCardCounts = getExistingCardCounts();
@@ -482,7 +483,7 @@ public class RogueRun {
                 return commanders;
             }
         }
-        return List.of();
+        return ImmutableList.of();
     }
 
     private Set<String> getActiveCommanderNames() {

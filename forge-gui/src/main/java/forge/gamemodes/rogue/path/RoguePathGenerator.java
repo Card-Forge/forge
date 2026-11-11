@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.path;
 
+import com.google.common.collect.ImmutableList;
 import forge.gamemodes.rogue.*;
 import forge.gamemodes.rogue.effect.ChestEffect;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
@@ -36,7 +37,7 @@ public class RoguePathGenerator {
         for (RogueEvent e : RogueEvent.values()) {
             if (e.isAvailable()) events.add(e);
         }
-        List<ChestEffect> chestEffect = new ArrayList<>(List.of(ChestEffect.values()));
+        List<ChestEffect> chestEffect = new ArrayList<>(ImmutableList.copyOf(ChestEffect.values()));
 
         // Split planebounds into normal, elite and boss lists
         List<RoguePlanebound> normalPlanebounds = getPlaneboundsOfType(
@@ -72,7 +73,7 @@ public class RoguePathGenerator {
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
-        specialNodes.add(new NodeChest(List.of(
+        specialNodes.add(new NodeChest(ImmutableList.of(
             chestEffect.get(lootIndex++),
             chestEffect.get(lootIndex++))));
 
@@ -87,7 +88,7 @@ public class RoguePathGenerator {
         specialNodes.add(new NodeSanctum());
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
-        specialNodes.add(new NodeChest(List.of(
+        specialNodes.add(new NodeChest(ImmutableList.of(
             chestEffect.get(lootIndex++),
             chestEffect.get(lootIndex++))));
 
@@ -110,7 +111,7 @@ public class RoguePathGenerator {
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
-        specialNodes.add(new NodeChest(List.of(
+        specialNodes.add(new NodeChest(ImmutableList.of(
             chestEffect.get(lootIndex++),
             chestEffect.get(lootIndex++))));
 
@@ -135,7 +136,7 @@ public class RoguePathGenerator {
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
         specialNodes.add(new NodeEvent(events.get(eventIndex++)));
-        specialNodes.add(new NodeChest(List.of(
+        specialNodes.add(new NodeChest(ImmutableList.of(
             chestEffect.get(lootIndex++),
             chestEffect.get(lootIndex++))));
 
@@ -149,7 +150,7 @@ public class RoguePathGenerator {
         specialNodes.add(new NodeSanctum());
         specialNodes.add(new NodeBazaar());
         specialNodes.add(new NodeEvent(events.get(eventIndex)));
-        specialNodes.add(new NodeChest(List.of(
+        specialNodes.add(new NodeChest(ImmutableList.of(
             chestEffect.get(lootIndex++),
             chestEffect.get(lootIndex))));
 
@@ -168,7 +169,7 @@ public class RoguePathGenerator {
 
     static void ensureSideNodeTypes(RoguePath path, List<RogueEvent> events,
                                     List<ChestEffect> chestEffects) {
-        List<Class<? extends RoguePathNode>> sideTypes = List.of(
+        List<Class<? extends RoguePathNode>> sideTypes = ImmutableList.of(
             NodeBazaar.class, NodeSanctum.class, NodeEvent.class, NodeChest.class);
 
         for (Class<? extends RoguePathNode> missingType : sideTypes) {
@@ -211,7 +212,7 @@ public class RoguePathGenerator {
             return new NodeEvent(events.get(0));
         }
         if (type == NodeChest.class) {
-            return new NodeChest(List.of(chestEffects.get(0), chestEffects.get(1)));
+            return new NodeChest(ImmutableList.of(chestEffects.get(0), chestEffects.get(1)));
         }
         throw new IllegalArgumentException("Unsupported side node type: " + type);
     }
