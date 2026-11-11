@@ -46,9 +46,9 @@ public final class ArenaWidgets {
     public static final FSkinColor GOLD = FSkinColor.getStandardColor(ArenaTheme.GOLD);
     public static final FSkinColor GOLD_LINE = FSkinColor.getStandardColor(ArenaTheme.rgba(216, 178, 106, 110));
 
-    /** Whether the shared widgets wear the Arena look now: whenever the Arena look is on, in a match and in the menus. */
+    /** Whether the shared widgets wear the Arena look now: on the Arena match board, and in the desktop menus. */
     public static boolean on() {
-        return ArenaMenus.on();
+        return ArenaTheme.isMatchBoard() || ArenaMenus.on();
     }
 
     // ---- dialog sheets (FDialog) ------------------------------------------------------------------------------------

@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
+import forge.card.CardRenderer;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
@@ -23,6 +25,7 @@ import forge.deck.CardPool;
 import forge.deck.CommanderOptions;
 import forge.deck.CommanderPicks;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
@@ -46,6 +49,7 @@ import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.settings.SettingsScreen;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
@@ -109,6 +113,44 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     };
 
     int lastArchenemy = 0;
+
+    // ---- Arena look: the chosen decks shown in the room the players leave free, as Arena shows the deck you will play
+    /** The showcase needs at least this share of the screen's height; its tiles' art is this wide for its height. */
+    private static final float SHOWCASE_MIN_SHARE = 0.25f, ART_ASPECT = 1.37f;
+    private final DeckProxy[] showcaseProxy = new DeckProxy[MAX_PLAYERS];
+    private final PaperCard[] showcaseCard = new PaperCard[MAX_PLAYERS];
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (!ArenaMenus.on()) {
+            return;
+        }
+        final int count = Math.min(getNumPlayers(), playerPanels.size());
+        float used = 0;
+        for (int i = 0; i < count; i++) {
+            used += playerPanels.get(i).getHeight();
+        }
+        final float pad = PADDING * 4;
+        final float top = playersScroll.getTop() + used + pad, bottom = btnStart.getTop() - pad;
+        if (count == 0 || used >= playersScroll.getHeight() || bottom - top < getHeight() * SHOWCASE_MIN_SHARE) {
+            return;
+        }
+        final float h = bottom - top;
+        final float tileW = Math.min(h * 0.62f * ART_ASPECT, (getWidth() - pad * (count + 1)) / count);
+        float x = (getWidth() - count * tileW - (count - 1) * pad) / 2f;
+        for (int i = 0; i < count; i++) {
+            final PlayerPanel panel = playerPanels.get(i);
+            final DeckProxy proxy = panel.getDeckChooser().getLstDecks().getSelectedItem();
+            if (proxy != showcaseProxy[i]) { //the deck's card for its art, looked up once per choice (generated decks have none)
+                showcaseProxy[i] = proxy;
+                showcaseCard[i] = proxy == null || proxy.isGeneratedDeck() ? null : proxy.getHighestCMCCard();
+            }
+            final FImage art = showcaseCard[i] == null ? null : CardRenderer.getCardArt(showcaseCard[i]);
+            ArenaMenus.deckTile(g, panel.getPlayerName(), proxy == null ? "" : proxy.getName(), art, x, top, tileW, h);
+            x += tileW + pad;
+        }
+    }
 
     public LobbyScreen(String headerCaption, FPopupMenu menu, GameLobby lobby0) {
         super(headerCaption, menu);

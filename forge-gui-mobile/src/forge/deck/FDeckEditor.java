@@ -21,7 +21,6 @@ import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -40,6 +39,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.ArenaMenus;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
@@ -580,13 +580,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
      */
     private static final float SPLIT_COLUMNS_PER_ASPECT = 2.45f;
     private static final int SPLIT_MIN_COLUMNS = 4, SPLIT_MAX_COLUMNS = 8;
-    private static final String ARENA_IN_DECK = Forge.getLocalizer().getMessage("lblArenaInDeck");
-    private static final String ARENA_MAX_COPIES = Forge.getLocalizer().getMessage("lblArenaMaxCopies");
     private boolean splitLayout, catalogTabHiddenBySplit, catalogFocused;
     private int splitColumns;
 
     protected boolean canSplitLayout() {
-        if (!ArenaMenus.on() || GuiBase.isMobile() || catalogPage == null
+        if (!ArenaMenus.on() || catalogPage == null
                 || Forge.getScreenWidth() < Forge.getScreenHeight() * SPLIT_MIN_ASPECT) {
             return false;
         }
@@ -631,10 +629,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 catalogPage.showTab();
             }
             catalogPage.cardManager.showConfigView();
-            catalogPage.cardManager.setClickToActivate(false, null);
+            catalogPage.cardManager.stopClickToActivate();
             for (DeckSectionPage page : pagesBySection.values()) {
                 page.cardManager.showConfigView();
-                page.cardManager.setClickToActivate(false, null);
+                page.cardManager.stopClickToActivate();
             }
             if (getSelectedPage() != catalogPage) {
                 catalogPage.setVisible(false);
@@ -650,7 +648,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private void showSplitViews() {
         splitColumns = splitColumnsForWindow();
         catalogPage.cardManager.setView(ItemManager.IMAGE_VIEW, splitColumns, false);
-        catalogPage.cardManager.setClickToActivate(true, this::catalogClickBadge);
+        catalogPage.cardManager.setClickToActivate(ItemManager.ClickAction.ADD, this::catalogClickBadge);
         for (DeckSectionPage page : pagesBySection.values()) {
             showSplitView(page);
         }
@@ -658,24 +656,61 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     private void showSplitView(DeckSectionPage page) {
         page.cardManager.setView(ItemManager.LIST_VIEW, page.cardManager.getImageColumnCount(), false);
-        page.cardManager.setClickToActivate(true, card -> "-1");
+        page.cardManager.setClickToActivate(ItemManager.ClickAction.REMOVE, this::deckRowClickBadge);
     }
 
-    /** What a click on this catalog card does: "+1" (with "2/4 in deck" once the deck holds some), or "Max 4/4" when no more fit. */
+    /**
+     * What a click on this catalog card does, as one phrase: "+1", "+1   2/4 in deck" once the deck holds some (counted
+     * as the copy limit counts them), or "Max 4/4" when no more fit. Kept while the card and the counts stay the same.
+     */
     private String catalogClickBadge(PaperCard card) {
         final DeckSectionPage destination = getPageForSection(DeckSection.matchingSection(card));
         if (destination == null || getDeck() == null) {
             return null;
         }
-        final CardPool section = getDeck().get(destination.deckSection);
-        final int inDeck = section == null ? 0 : section.countByName(card.getName());
+        final int inDeck = copiesCountedForLimit(card);
         final int allowed = getNumAllowedInDeck(card);
-        final String count = allowed == Integer.MAX_VALUE || !shouldEnforceConformity() ? String.valueOf(inDeck) : inDeck + "/" + allowed;
-        if (getMaxMovable(card, catalogPage, destination) <= 0) {
-            return ARENA_MAX_COPIES + " " + count;
+        final boolean limited = allowed != Integer.MAX_VALUE && shouldEnforceConformity();
+        final boolean fits = getMaxMovable(card, catalogPage, destination) > 0;
+        if (card != badgeCard || inDeck != badgeInDeck || allowed != badgeAllowed || fits != badgeFits) {
+            badgeCard = card;
+            badgeInDeck = inDeck;
+            badgeAllowed = allowed;
+            badgeFits = fits;
+            final Localizer l = Forge.getLocalizer();
+            if (!fits) {
+                badgeWords = limited ? l.getMessage("lblArenaMaxOf", inDeck, allowed) : l.getMessage("lblArenaMax");
+            } else if (inDeck == 0) {
+                badgeWords = l.getMessage("lblArenaAddOne");
+            } else {
+                badgeWords = limited ? l.getMessage("lblArenaAddOneOf", inDeck, allowed) : l.getMessage("lblArenaAddOneCount", inDeck);
+            }
         }
-        return inDeck > 0 ? "+1   " + count + " " + ARENA_IN_DECK : "+1";
+        return badgeWords;
     }
+
+    private PaperCard badgeCard;
+    private int badgeInDeck, badgeAllowed;
+    private boolean badgeFits;
+    private String badgeWords;
+
+    /** What a click on this deck row does, as one phrase: "Remove 1 (4 in deck)". */
+    private String deckRowClickBadge(PaperCard card) {
+        if (getDeck() == null) {
+            return null;
+        }
+        final int inDeck = copiesCountedForLimit(card);
+        if (card != rowBadgeCard || inDeck != rowBadgeInDeck) {
+            rowBadgeCard = card;
+            rowBadgeInDeck = inDeck;
+            rowBadgeWords = Forge.getLocalizer().getMessage("lblArenaRemoveOne", inDeck);
+        }
+        return rowBadgeWords;
+    }
+
+    private PaperCard rowBadgeCard;
+    private int rowBadgeInDeck;
+    private String rowBadgeWords;
 
     private TabPage<FDeckEditor> firstDeckPage() {
         for (TabPage<FDeckEditor> tabPage : tabPages) {
@@ -711,8 +746,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     @Override
     protected void drawOverlay(Graphics g) {
         super.drawOverlay(g);
-        if (splitLayout && catalogFocused) { //the catalog asked for (a new deck section's cards): a gold line round it
-            ArenaMenus.outline(g, catalogPage.getLeft(), catalogPage.getTop(), catalogPage.getWidth(), catalogPage.getHeight());
+        if (splitLayout) { //the side that has the keys: a gold line round it
+            final TabPage<FDeckEditor> focused = catalogFocused ? catalogPage : getSelectedPage();
+            if (focused != null) {
+                ArenaMenus.focusFrame(g, focused.getLeft(), focused.getTop(), focused.getWidth(), focused.getHeight());
+            }
         }
     }
 
@@ -1023,6 +1061,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return additions;
     }
 
+    /** Copies of this card the copy limit counts: across all deck sections, in limited without the sideboard. */
+    protected int copiesCountedForLimit(PaperCard card) {
+        int numInDeck = getDeck().countByName(card.getName());
+        if(isLimitedEditor()) //In limited, disregard cards in sideboard. (This matters for cards like Seven Dwarves)
+            numInDeck -= getDeck().getOrCreate(DeckSection.Sideboard).countByName(card);
+        return numInDeck;
+    }
+
     protected int getMaxMovable(PaperCard card, CardManagerPage source, CardManagerPage destination) {
         return getMaxMovable(card, source, destination, source.cardManager.getItemCount(card));
     }
@@ -1045,10 +1091,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return numAvailable;
         }
 
-        //Count copies across all deck sections.
-        int numInDeck = getDeck().countByName(card.getName());
-        if(isLimitedEditor()) //In limited, disregard cards in sideboard. (This matters for cards like Seven Dwarves)
-            numInDeck -= getDeck().getOrCreate(DeckSection.Sideboard).countByName(card);
+        int numInDeck = copiesCountedForLimit(card);
 
         int numAllowedInDeck = getNumAllowedInDeck(card);
 
@@ -1432,6 +1475,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private static final float ARENA_SAVE_WIDTH = 2.6f, ARENA_DECK_SIZE_WIDTH = 3.4f;
     private static final FSkinColor DECK_SIZE_SHORT = FSkinColor.getStandardColor(ArenaMenus.TEXT_SOFT);
     private static final FSkinColor DECK_SIZE_REACHED = FSkinColor.getStandardColor(ArenaMenus.entryText(true, false));
+    private static final FSkinColor DECK_SIZE_OVER = FSkinColor.getStandardColor(ArenaTheme.DANGER);
 
     /** The deck editor's Save: the skin's disk icon, or in the Arena look a labelled button, gold while there are changes. */
     protected static class SaveButton extends FLabel {
@@ -1445,7 +1489,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public void draw(Graphics g) {
             final float inset = getHeight() * 0.12f;
             if (!ArenaMenus.button(g, label, inset, inset, getWidth() - 2 * inset,
-                    getHeight() - 2 * inset, isEnabled(), isHovered(), false, isEnabled())) {
+                    getHeight() - 2 * inset, isEnabled(), isHovered(), isPressed(), isEnabled())) {
                 super.draw(g);
             }
         }
@@ -1457,15 +1501,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return format == null ? 0 : format.getMainRange().getMinimum();
     }
 
-    /** Arena look: the header's main deck size against the format's minimum (58 / 60). */
+    /**
+     * Arena look: the header's main deck size against the format's minimum (58 / 60), coloured from the format's legal
+     * range: soft while short, gold inside it, red above its maximum (100 / 99 in Commander).
+     */
     protected void updateDeckSize() {
         if (!ArenaMenus.on() || deck == null) {
             return;
         }
         final int size = deck.getMain().countAll();
+        final DeckFormat format = editorConfig.getDeckFormat();
+        final Integer most = format == null ? null : format.getMainRange().getMaximum();
         final int target = deckSizeTarget();
         deckHeader.lblDeckSize.setText(target > 0 ? size + " / " + target : String.valueOf(size));
-        deckHeader.lblDeckSize.setTextColor(target > 0 && size < target ? DECK_SIZE_SHORT : DECK_SIZE_REACHED);
+        deckHeader.lblDeckSize.setTextColor(most != null && size > most ? DECK_SIZE_OVER
+                : target > 0 && size < target ? DECK_SIZE_SHORT : DECK_SIZE_REACHED);
     }
 
     /** Header chat button that renders the unread-message badge shared with the in-match chat tab. */
@@ -1562,6 +1612,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             cardManager.setItemActivateHandler(e -> {
                 final PaperCard card = this.cardManager.getSelectedItem();
                 if (card != null) { //nothing selected, nothing to move
+                    parentScreen.catalogFocused = this == parentScreen.catalogPage; //the keys follow the side clicked
                     onCardActivated(card);
                 }
             });

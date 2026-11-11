@@ -691,9 +691,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         ItemInfo item = getItemAtPoint(x, y);
         if (itemManager.isClickToActivate()) { //every click adds (or takes) one, double clicks included
             if (item != null && !(item.getKey() instanceof DeckProxy)) {
-                if (!item.selected) { //selectItem would unselect an item clicked a second time
-                    selectItem(item);
-                }
+                onSetSelectedIndex(item.index); //this card alone, whatever was selected before (selectItem would toggle)
                 itemManager.activateClicked();
             }
             return true;

@@ -7,6 +7,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
+import forge.gui.GuiBase;
 import forge.screens.match.arena.ArenaArt;
 import forge.screens.match.arena.ArenaDialogKit;
 import forge.screens.match.arena.ArenaTheme;
@@ -55,11 +56,16 @@ public final class ArenaMenus {
     private static final float BADGE_FRAME = 3f, BADGE_MIN_HEIGHT = 26f, BADGE_CARD_SHARE = 0.14f;
     private static final float BADGE_TOP = 0.36f, BADGE_MAX_WIDTH = 0.9f, BADGE_PAD = 1.2f, BADGE_FONT_SHARE = 0.62f;
     /** A chooser's chevron (its height, and its gap from the right end, as shares of the button's height) and hint words. */
-    private static final float CHEVRON_SHARE = 0.42f, CHEVRON_PAD = 0.4f, HINT_SHARE = 0.4f;
+    private static final float CHEVRON_SHARE = 0.55f, CHEVRON_PAD = 0.4f, HINT_SHARE = 0.44f;
+    /** A chooser's chevron stroke, Swing px. */
+    private static final float CHEVRON_STROKE = 3.5f;
 
-    /** Whether the menus (and the widgets they share with the match) wear the Arena look now. A field read. */
+    /**
+     * Whether the menus wear the Arena look now: the Arena look is on and this is the desktop client (phones and tablets
+     * keep their own menus; the match board itself follows {@link ArenaTheme#isActive()} everywhere). Two field reads.
+     */
     public static boolean on() {
-        return ArenaTheme.isActive();
+        return ArenaTheme.isActive() && !GuiBase.isMobile();
     }
 
     /**
@@ -130,6 +136,18 @@ public final class ArenaMenus {
         return true;
     }
 
+    /** The pane that has the keys (the deck editor's catalog or deck list): a bright gold frame, thicker than a border. */
+    public static void focusFrame(final Graphics g, final float x, final float y, final float w, final float h) {
+        if (!on()) {
+            return;
+        }
+        final float t = Math.max(2f, ArenaTheme.px(FOCUS_FRAME));
+        g.drawRect(t, ArenaTheme.GOLD_BRIGHT, x + t / 2f, y + t / 2f, w - t, h - t);
+    }
+
+    /** The focus frame's thickness, Swing px. */
+    private static final float FOCUS_FRAME = 3f;
+
     /** The colour of an entry's words in a column: bright gold when active, cream under the pointer, soft otherwise. */
     public static Color entryText(final boolean active, final boolean hovered) {
         return active ? ArenaTheme.GOLD_BRIGHT : hovered ? ArenaTheme.TEXT : TEXT_SOFT;
@@ -182,7 +200,7 @@ public final class ArenaMenus {
             return false;
         }
         final float inset = Math.max(2f, h * 0.06f);
-        final FSkinFont font = ArenaDialogKit.fitFont(text, Math.min(h * START_FONT_SHARE, ArenaTheme.px(START_FONT_MAX)),
+        final FSkinFont font = START_FONT.get(text, Math.min(h * START_FONT_SHARE, ArenaTheme.px(START_FONT_MAX)),
                 ArenaTheme.px(START_FONT_MIN), w * START_TEXT_ROOM);
         ArenaDialogKit.pill(g, text, font, inset, inset, w - 2 * inset, h - 2 * inset, enabled, hovered, pressed, false, enabled, 1f);
         return true;
@@ -216,51 +234,134 @@ public final class ArenaMenus {
 
     /**
      * One-click deck building: the control at the end of every deck row, a round gold-rimmed button showing what a click
-     * on the row does (a minus for "-1": take one out), so taking a card out is as plain to see as adding one.
+     * on the row does - a bold minus when it takes one out ({@code removes}), else a plus - legible at any size.
      */
-    public static void rowControl(final Graphics g, final String words, final float x, final float y, final float size) {
-        if (words == null) {
-            return;
-        }
+    public static void rowControl(final Graphics g, final boolean removes, final float x, final float y, final float size) {
         final float r = size / 2f;
         g.fillSmoothRoundRect(WELL, x, y, size, size, r);
         g.drawSmoothRoundRect(lineThickness(), ArenaTheme.GOLD, x, y, size, size, r);
-        if (words.startsWith("-")) { //taking one out: a bold minus, legible at any size
-            final float bar = size * ROW_MINUS_LENGTH, t = Math.max(2f, size * ROW_MINUS_THICKNESS);
-            g.fillRect(ArenaTheme.GOLD_BRIGHT, x + (size - bar) / 2f, y + (size - t) / 2f, bar, t);
-        } else {
-            g.drawText(words, ArenaDialogKit.font(size * BADGE_FONT_SHARE * 0.8f), ArenaTheme.GOLD_BRIGHT, x, y, size, size, false, Align.center, true);
+        final float bar = size * ROW_MINUS_LENGTH, t = Math.max(2f, size * ROW_MINUS_THICKNESS);
+        g.fillRect(ArenaTheme.GOLD_BRIGHT, x + (size - bar) / 2f, y + (size - t) / 2f, bar, t);
+        if (!removes) {
+            g.fillRect(ArenaTheme.GOLD_BRIGHT, x + (size - t) / 2f, y + (size - bar) / 2f, t, bar);
         }
+    }
+
+    /** One-click deck building: over the list row under the pointer, a pill at the right end of {@code w} saying what a click does. */
+    public static void rowBadge(final Graphics g, final String words, final float x, final float y, final float w, final float h) {
+        final float bh = h * ROW_CONTROL_SHARE;
+        final FSkinFont font = ArenaDialogKit.font(bh * BADGE_FONT_SHARE);
+        final float bw = Math.min(w * BADGE_MAX_WIDTH, ArenaArt.textWidth(words, font) + bh * BADGE_PAD);
+        pill(g, words, x + w - bw, y + (h - bh) / 2f, bw, bh);
     }
 
     /** The minus in a row control: its length and thickness as shares of the control. */
     private static final float ROW_MINUS_LENGTH = 0.5f, ROW_MINUS_THICKNESS = 0.12f;
 
     /**
-     * Marks a button as a chooser (the lobby's deck choice): a gold chevron at its right end and {@code hint} at its left
-     * in soft words. Draws nothing when the Arena look is off.
+     * The lobby's showcase of a chosen deck: the player's name over a gold-framed glass tile holding the deck's art (or
+     * a "?" for a deck made when the game starts) and the deck's name in gold under it.
      */
-    public static void chooserCue(final Graphics g, final float w, final float h, final String hint) {
+    public static void deckTile(final Graphics g, final String player, final String deck, final FImage art, final float x, final float y,
+            final float w, final float h) {
+        final float nameH = h * TILE_NAME_SHARE, artH = h - 2 * nameH;
+        final FSkinFont playerFont = ArenaDialogKit.font(nameH * 0.6f), deckFont = ArenaDialogKit.font(nameH * 0.62f);
+        ArenaArt.textShadowed(g, player, playerFont, TEXT_SOFT, x, y, w, nameH, Align.center);
+        final float ay = y + nameH, r = ArenaTheme.px(TILE_RADIUS);
+        g.fillSmoothRoundRect(WELL, x, ay, w, artH, r);
+        if (art != null) {
+            final float inset = lineThickness() * 2;
+            g.drawImage(art, x + inset, ay + inset, w - 2 * inset, artH - 2 * inset);
+        } else {
+            g.drawText("?", ArenaDialogKit.font(artH * 0.4f), ArenaTheme.GOLD_DIM, x, ay, w, artH, false, Align.center, true);
+        }
+        g.drawSmoothRoundRect(lineThickness() * 1.5f, ArenaTheme.GOLD, x, ay, w, artH, r);
+        ArenaArt.textShadowed(g, deck, deckFont, ArenaTheme.GOLD_BRIGHT, x, ay + artH, w, nameH, Align.center);
+    }
+
+    /** A deck tile's name rows (each a share of its height) and its corner (Swing px). */
+    private static final float TILE_NAME_SHARE = 0.12f, TILE_RADIUS = 10f;
+
+    /** An empty list's line saying how to start ("No decks here yet. Press New Deck to build one."), centred in it. */
+    public static void emptyState(final Graphics g, final String words, final float x, final float y, final float w, final float h) {
         if (!on()) {
             return;
         }
+        final FSkinFont font = ArenaDialogKit.font(ArenaTheme.px(EMPTY_FONT));
+        ArenaArt.textShadowed(g, words, font, TEXT_SOFT, x, y, w, h * EMPTY_TOP_SHARE, Align.center);
+    }
+
+    /** The empty-list line's size (Swing px) and how far down the list it sits (a share of the list's height, doubled). */
+    private static final float EMPTY_FONT = 28f, EMPTY_TOP_SHARE = 0.6f;
+
+    /**
+     * Marks a button as a chooser (the lobby's deck choice): a gold chevron at its right end and {@code hint} at its left
+     * in soft words. Draws nothing when the Arena look is off.
+     */
+    public static void chooserCue(final Graphics g, final float w, final float h, final String hint, final boolean hovered) {
+        if (!on()) {
+            return;
+        }
+        if (hovered) {
+            g.fillRect(HOVER_WASH, 0, 0, w, h);
+        }
         final float size = h * CHEVRON_SHARE, pad = h * CHEVRON_PAD;
-        final float cx = w - pad - size / 2f, cy = h / 2f, t = Math.max(2f, ArenaTheme.px(2.5f));
-        g.drawLine(t, ArenaTheme.GOLD, cx - size / 4f, cy - size / 2f, cx + size / 4f, cy);
-        g.drawLine(t, ArenaTheme.GOLD, cx + size / 4f, cy, cx - size / 4f, cy + size / 2f);
+        final float cx = w - pad - size / 2f, cy = h / 2f, t = Math.max(2f, ArenaTheme.px(CHEVRON_STROKE));
+        final Color c = hovered ? ArenaTheme.GOLD_BRIGHT : ArenaTheme.GOLD;
+        g.drawLine(t, c, cx - size / 4f, cy - size / 2f, cx + size / 4f, cy);
+        g.drawLine(t, c, cx + size / 4f, cy, cx - size / 4f, cy + size / 2f);
         if (hint != null) {
             final FSkinFont font = ArenaDialogKit.font(h * HINT_SHARE);
-            g.drawText(hint, font, TEXT_SOFT, pad, 0, w / 3f, h, false, Align.left, true);
+            g.drawText(hint, font, c, pad, 0, w / 3f, h, false, Align.left, true);
         }
+    }
+
+    /**
+     * A hint for the control under the pointer: soft words on a dark pill with a gold rim, its right end at
+     * {@code right}, just below {@code top}. Draws nothing when the Arena look is off.
+     */
+    public static void hint(final Graphics g, final String words, final float right, final float top, final float lineHeight) {
+        if (!on() || words == null) {
+            return;
+        }
+        final FSkinFont font = ArenaDialogKit.font(lineHeight * HINT_SHARE);
+        final float h = lineHeight * 0.7f, w = ArenaArt.textWidth(words, font) + h * 1.2f;
+        final float x = right - w, r = h / 2f;
+        g.fillSmoothRoundRect(WELL, x, top, w, h, r);
+        g.drawSmoothRoundRect(lineThickness(), LINE, x, top, w, h, r);
+        g.drawText(words, font, ArenaTheme.TEXT, x, top, w, h, false, Align.center, true);
     }
 
     private static void pill(final Graphics g, final String words, final float x, final float y, final float w, final float h) {
         final float r = h / 2f;
         g.fillSmoothRoundRect(WELL, x, y, w, h, r);
         g.drawSmoothRoundRect(lineThickness(), ArenaTheme.GOLD_BRIGHT, x, y, w, h, r);
-        final FSkinFont font = ArenaDialogKit.fitFont(words, h * BADGE_FONT_SHARE, ArenaTheme.px(START_FONT_MIN) * 0.75f, w * 0.9f);
-        g.drawText(words, font, ArenaTheme.GOLD_BRIGHT, x, y, w, h, false, Align.center, true);
+        g.drawText(words, PILL_FONT.get(words, h * BADGE_FONT_SHARE, ArenaTheme.px(START_FONT_MIN) * 0.75f, w * 0.9f),
+                ArenaTheme.GOLD_BRIGHT, x, y, w, h, false, Align.center, true);
     }
+
+    /**
+     * The last font fitted for one place that draws every frame (a badge, the Start button): fitting measures the words
+     * at several sizes, so it is done again only when the words or the room change.
+     */
+    private static final class FittedFont {
+        private String words;
+        private float most, least, room;
+        private FSkinFont font;
+
+        FSkinFont get(final String words0, final float most0, final float least0, final float room0) {
+            if (font == null || !words0.equals(words) || most0 != most || least0 != least || room0 != room) {
+                words = words0;
+                most = most0;
+                least = least0;
+                room = room0;
+                font = ArenaDialogKit.fitFont(words0, most0, least0, room0);
+            }
+            return font;
+        }
+    }
+
+    private static final FittedFont PILL_FONT = new FittedFont(), START_FONT = new FittedFont();
 
     private static float lineThickness() {
         return Math.max(1f, ArenaTheme.px(LINE_PX));

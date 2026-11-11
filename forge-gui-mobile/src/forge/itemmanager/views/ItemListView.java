@@ -285,7 +285,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     else if (itemManager.isClickToActivate()) { //one-click mode: each row ends in the control a click works
                         float size = h * ArenaMenus.ROW_CONTROL_SHARE;
                         w -= size + size / 2;
-                        ArenaMenus.rowControl(g, itemManager.getClickBadge(value.getKey()), x + w + size / 4, y + (h - size) / 2, size);
+                        ArenaMenus.rowControl(g, itemManager.getClickAction() == ItemManager.ClickAction.REMOVE, x + w + size / 4, y + (h - size) / 2, size);
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
                     if(itemManager.itemIsFavorite(value)) {
@@ -326,7 +326,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (index < 0 || index >= getCount()) {
                 return;
             }
-            ArenaMenus.hoverRow(g, 0, getItemStartPosition(index), getWidth(), getListItemRenderer().getItemHeight());
+            final float y = getItemStartPosition(index), h = getListItemRenderer().getItemHeight();
+            ArenaMenus.hoverRow(g, 0, y, getWidth(), h);
+            final String words = itemManager.getClickBadge(getItemAt(index).getKey());
+            if (words != null) { //what a click on the row does, by its control ("Remove 1 (4 in deck)")
+                ArenaMenus.rowBadge(g, words, 0, y, getWidth() - h * ArenaMenus.ROW_CONTROL_SHARE * 1.5f, h);
+            }
         }
 
         @Override

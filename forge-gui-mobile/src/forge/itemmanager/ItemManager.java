@@ -1076,26 +1076,40 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     // ---- one-click mode (the Arena deck editor): a left click activates an item, a right click opens its menu
-    private boolean clickToActivate;
+    /** What one click on an item does in one-click mode. */
+    public enum ClickAction { ADD, REMOVE }
+
+    private ClickAction clickAction;
     private Function<T, String> clickBadge;
 
     /**
-     * One-click mode: a single click activates the item under it (adds a card to the deck, takes one out) instead of
-     * selecting it and opening its menu, which a right click or long press opens then; and the item under the pointer
-     * carries a badge with the words {@code badge} gives for it (what a click will do).
+     * One-click mode: a single click activates the item under it ({@code action}: adds a card to the deck or takes one
+     * out) instead of selecting it and opening its menu, which a right click or long press opens then; and the item
+     * under the pointer carries a badge with the words {@code badge} gives for it (what a click will do).
      */
-    public void setClickToActivate(boolean on, Function<T, String> badge) {
-        clickToActivate = on;
+    public void setClickToActivate(ClickAction action, Function<T, String> badge) {
+        clickAction = action;
         clickBadge = badge;
     }
 
+    /** Back to the usual clicks: select, then the menu. */
+    public void stopClickToActivate() {
+        clickAction = null;
+        clickBadge = null;
+    }
+
     public boolean isClickToActivate() {
-        return clickToActivate;
+        return clickAction != null;
+    }
+
+    /** What a click does in one-click mode; only meaningful while {@link #isClickToActivate()}. */
+    public ClickAction getClickAction() {
+        return clickAction;
     }
 
     /** The words of the one-click badge for this item (see {@link #setClickToActivate}). */
     public String getClickBadge(T item) {
-        return clickToActivate && clickBadge != null && item != null ? clickBadge.apply(item) : null;
+        return clickAction != null && clickBadge != null && item != null ? clickBadge.apply(item) : null;
     }
 
     /** One-click mode: the item under a click has been selected; activate it, closing any menu. */

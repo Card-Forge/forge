@@ -111,6 +111,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
 
                 private final String arenaNote = description + " " + Forge.getLocalizer().getMessage("nlThemeArenaOverride");
+                private final String arenaValue = Forge.getLocalizer().getMessage("lblArenaLook");
+
+                @Override
+                public boolean isEnabled() { //the Arena look decides the menus' look while it is on
+                    return !ArenaMenus.on();
+                }
+
+                @Override
+                public void select() {
+                    if (isEnabled()) {
+                        super.select();
+                    }
+                }
+
+                @Override
+                public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+                    if (isEnabled()) {
+                        super.drawPrefValue(g, font, color, x, y, w, h);
+                    } else {
+                        g.drawText(arenaValue, font, color, x, y, w, h, false, Align.right, false);
+                    }
+                }
 
                 @Override
                 public String getDescription() { //the menus and the match wear the Arena look whatever the theme
@@ -980,6 +1002,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private static final float MAX_LIST_WIDTH = Utils.scale(640);
     /** Arena look: the settings column may grow this much wider, so descriptions take fewer lines on a wide window. */
     private static final float ARENA_MAX_LIST_WIDTH = Utils.scale(960);
+    private static final float ARENA_NAV_WIDTH = Utils.scale(230);
     /** Arena look: rows this much taller than the classic ones, room for two lines of the larger descriptions. */
     private static final float ARENA_ROW_SCALE = 1.3f;
     private static final FSkinFont ARENA_DESC_FONT = FSkinFont.get(13);
@@ -988,20 +1011,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     @Override
     protected void doLayout(float width, float height) {
         float searchHeight = FTextField.getDefaultHeight(txtSearch.getFont());
-        if (GuiBase.isMobile() || width < NAV_WIDTH + 3 * NAV_GAP + MIN_LIST_WIDTH) {
+        //the Arena look's wider category column keeps every group name at full size ("Random Deck Generation")
+        float navWidth = ArenaMenus.on() ? ARENA_NAV_WIDTH : NAV_WIDTH;
+        if (GuiBase.isMobile() || width < navWidth + 3 * NAV_GAP + MIN_LIST_WIDTH) {
             categoryNav.setVisible(false);
             txtSearch.setBounds(0, 0, width, searchHeight);
             lstSettings.setBounds(0, searchHeight, width, height - searchHeight);
             return;
         }
         //a big window: categories on the left, a readable column of settings beside them, the pair centred
-        float listWidth = Math.min(ArenaMenus.on() ? ARENA_MAX_LIST_WIDTH : MAX_LIST_WIDTH, width - NAV_WIDTH - NAV_GAP - 2 * NAV_GAP);
-        float x = Math.round((width - NAV_WIDTH - NAV_GAP - listWidth) / 2);
+        float listWidth = Math.min(ArenaMenus.on() ? ARENA_MAX_LIST_WIDTH : MAX_LIST_WIDTH, width - navWidth - NAV_GAP - 2 * NAV_GAP);
+        float x = Math.round((width - navWidth - NAV_GAP - listWidth) / 2);
         float top = NAV_GAP;
         float listTop = top + searchHeight + NAV_GAP / 2;
         categoryNav.setVisible(true);
-        categoryNav.setBounds(x, listTop, NAV_WIDTH, height - listTop);
-        x += NAV_WIDTH + NAV_GAP;
+        categoryNav.setBounds(x, listTop, navWidth, height - listTop);
+        x += navWidth + NAV_GAP;
         txtSearch.setBounds(x, top, listWidth, searchHeight);
         lstSettings.setBounds(x, listTop, listWidth, height - listTop);
     }

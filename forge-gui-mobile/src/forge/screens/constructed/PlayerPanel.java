@@ -104,7 +104,7 @@ public class PlayerPanel extends FContainer {
             @Override
             public void draw(Graphics g) {
                 super.draw(g);
-                ArenaMenus.chooserCue(g, getWidth(), getHeight(), hint);
+                ArenaMenus.chooserCue(g, getWidth(), getHeight(), hint, isHovered());
             }
         };
     }
@@ -505,7 +505,12 @@ public class PlayerPanel extends FContainer {
     protected void drawOverlay(Graphics g) {
         float y = getHeight() - FList.LINE_THICKNESS / 2;
         g.drawLine(FList.LINE_THICKNESS, FList.getLineColor(), 0, y, getWidth(), y);
+        if (humanAiSwitch.isHovered()) { //the Arena look says what the switch decides
+            ArenaMenus.hint(g, HUMAN_AI_HINT, humanAiSwitch.getRight(), humanAiSwitch.getBottom() + PADDING / 2, humanAiSwitch.getHeight());
+        }
     }
+
+    private static final String HUMAN_AI_HINT = Forge.getLocalizer().getMessage("lblArenaHumanOrAiHint");
 
     private final FEventHandler humanAiSwitched = new FEventHandler() {
         @Override

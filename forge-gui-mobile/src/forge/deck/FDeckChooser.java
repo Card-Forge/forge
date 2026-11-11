@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.assets.ImageCache;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
@@ -144,7 +145,6 @@ public class FDeckChooser extends FScreen {
         });
         btnNewDeck.setCommand(event -> createNewDeck());
         btnEditDeck.setCommand(event -> editSelectedDeck());
-        btnEditDeck.setArenaPrimary(true); //the Arena look lights the main action
         btnViewDeck.setCommand(event -> {
             if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
                     && selectedDeckType != DeckType.PIONEER_CARDGEN_DECK && selectedDeckType != DeckType.HISTORIC_CARDGEN_DECK
@@ -1261,6 +1261,31 @@ public class FDeckChooser extends FScreen {
             btnRandom.setBounds(x, y, width, buttonHeight);
         }
     }
+
+    /**
+     * Arena look: with no decks to show, a line in the empty list saying how to start, and New Deck lit as the main
+     * button instead of Edit Deck.
+     */
+    @Override
+    public void draw(Graphics g) {
+        final boolean empty = ArenaMenus.on() && lstDecks.getItemCount() == 0 && btnEditDeck.isVisible();
+        btnNewDeck.setArenaPrimary(empty);
+        btnEditDeck.setArenaPrimary(!empty);
+        super.draw(g);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (ArenaMenus.on() && lstDecks.getItemCount() == 0 && lstDecks.isVisible()) {
+            if (emptyWords == null) {
+                emptyWords = Forge.getLocalizer().getMessage("lblArenaNoDecksYet");
+            }
+            ArenaMenus.emptyState(g, emptyWords, lstDecks.getLeft(), lstDecks.getTop(), lstDecks.getWidth(), lstDecks.getHeight());
+        }
+    }
+
+    private String emptyWords;
 
     public DeckType getSelectedDeckType() { return selectedDeckType; }
     public void setSelectedDeckType(DeckType selectedDeckType0) {
