@@ -488,6 +488,29 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
+    // lower case collector numbers of the prints in the main "cards" section, built on first use
+    private volatile Set<String> traditionalCollectorNumbers;
+
+    /**
+     * True if the print with the given collector number has the traditional frame, that is, it is listed in the
+     * main "cards" section of the edition rather than in a special one (borderless, extended art, showcase,
+     * etched, full art, promo, buy a box...).
+     */
+    public boolean isTraditionalFrame(String collectorNumber) {
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return false;
+        Set<String> numbers = traditionalCollectorNumbers;
+        if (numbers == null) {
+            numbers = new HashSet<>();
+            for (EditionEntry entry : getCards()) {
+                if (entry.collectorNumber() != null)
+                    numbers.add(entry.collectorNumber().toLowerCase(Locale.ROOT));
+            }
+            traditionalCollectorNumbers = numbers;
+        }
+        return numbers.contains(collectorNumber.toLowerCase(Locale.ROOT));
+    }
+
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
 
     public String getTokenSet(String token) {

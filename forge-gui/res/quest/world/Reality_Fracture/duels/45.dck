@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Iron Man
+Title=Iron Man
+Icon=Iron Man.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/BrianG88_-_Golgari_Control_(Standard,_#894467).dck
+Deck Type=constructed
+
+[Main]
+1 Virtue of Persistence
+2 Deadly Cover-Up
+2 Garruk, Veiled Butcher
+2 Nowhere to Run
+3 Professor Dellian Fel
+3 Duress
+3 Requiting Hex
+4 Witherbloom Charm
+1 Doctor Doom
+1 Mosswood Dreadknight
+2 Emeritus of Abundance
+4 Environmental Scientist
+4 Vraska, the Cutting Glare
+4 Simulacrum Shaper
+2 Ba Sing Se
+2 Forest
+4 Swamp
+4 Deathcap Glade
+4 Overgrown Tomb
+4 Restless Cottage
+4 Wastewood Verge
+[Sideboard]
+1 Liliana, Dreadhorde General
+2 Shoot the Sheriff
+2 Vicious Rivalry
+2 Ghost Vacuum
+2 Strategic Betrayal
+2 Inside Information
+3 Terminal Criticism
+1 Duress

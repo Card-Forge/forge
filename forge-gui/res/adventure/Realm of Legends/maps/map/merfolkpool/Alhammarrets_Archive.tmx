@@ -29,7 +29,7 @@
   <object id="44" template="../../../../common/maps/obj/enemy.tx" x="232" y="143">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Propaganda|C13&quot;, &quot;Sphinx's Tutelage&quot;, &quot;Sphinx's Tutelage&quot;, &quot;Sphinx's Tutelage&quot;]}"/>
-    <property name="enemy" value="Alhammaret"/>
+    <property name="enemy" value="Alhammarret"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
@@ -108,7 +108,7 @@
   </object>
   <object id="57" template="../../../../common/maps/obj/scroll.tx" x="230.5" y="62.5">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Alhammaret's Archvive&quot;, &quot;count&quot;: 1 } ] "/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Alhammarret's Archive&quot;, &quot;count&quot;: 1 } ] "/>
    </properties>
   </object>
   <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="206.467" y="302.807" width="66.4742" height="16">

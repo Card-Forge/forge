@@ -49,6 +49,8 @@
   <object id="158" template="../../../../common/maps/obj/manashards.tx" x="244.5" y="137.5"/>
   <object id="160" template="../../../../common/maps/obj/enemy.tx" x="269" y="169.5">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Sandwurm Convergence&quot;]
+}</property>
     <property name="enemy" value="Sandwurm"/>
     <property name="pursueRange" type="int" value="80"/>
     <property name="speedModifier" type="float" value="50"/>

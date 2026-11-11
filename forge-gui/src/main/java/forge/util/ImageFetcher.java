@@ -122,12 +122,15 @@ public abstract class ImageFetcher {
             // Look up the download URL from booster-images.txt
             final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
 
+            // Only build the "name + any extension" matcher when the key has no extension, and only once.
+            final boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
+            final Pattern withExtension = filenameHasNoExtension
+                    ? Pattern.compile(".*" + Pattern.quote(filename) + "\\.[^.]+$") : null;
+
             for (String line : boosterFileContent) {
                 boolean exactMatch = line.endsWith(filename);
-                boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
-                boolean matchesWithExtension = line.matches(".*" + Pattern.quote(filename) + "\\.[^.]+$");
 
-                if (exactMatch || (filenameHasNoExtension && matchesWithExtension)) {
+                if (exactMatch || (withExtension != null && withExtension.matcher(line).matches())) {
                     if (line.startsWith("http")) {
                         downloadUrls.add(line);
                     } else {

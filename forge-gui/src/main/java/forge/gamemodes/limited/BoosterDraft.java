@@ -54,6 +54,8 @@ public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
     public static final int N_PLAYERS = 8;
+    public static final List<DraftOptions.DoublePick> PICK_RULES = List.of(
+            DraftOptions.DoublePick.NEVER, DraftOptions.DoublePick.FIRST_PICK, DraftOptions.DoublePick.ALWAYS);
     public static final String FILE_EXT = ".draft";
 
     int podSize;
@@ -469,6 +471,41 @@ public class BoosterDraft implements IBoosterDraft {
         return this.doublePickDuringDraft;
     }
 
+    /** The pick rule the chosen set specifies at this pod size, for marking and preselecting it. */
+    public DraftOptions.DoublePick getDefaultPicks(int podSize) {
+        return this.doublePickDuringDraft == null ? DraftOptions.DoublePick.NEVER : this.doublePickDuringDraft.resolve(podSize);
+    }
+
+    /** Asks for the pick rule with the set's own marked and preselected. Returns false if cancelled. */
+    public boolean choosePicks() {
+        final DraftOptions.DoublePick defaultPicks = getDefaultPicks(this.podSize);
+        final DraftOptions.DoublePick chosen = SGuiChoose.oneOrNone(
+                Localizer.getInstance().getMessage("lblDraftPicksPrompt"), PICK_RULES, defaultPicks,
+                rule -> markSetDefault(picksLabel(rule), rule == defaultPicks));
+        if (chosen == null) {
+            return false;
+        }
+        setDoublePick(chosen);
+        return true;
+    }
+
+    /** Display name for a resolved pick rule. */
+    public static String picksLabel(DraftOptions.DoublePick picks) {
+        final Localizer localizer = Localizer.getInstance();
+        return switch (picks == null ? DraftOptions.DoublePick.NEVER : picks) {
+            case FIRST_PICK -> localizer.getMessage("lblDraftPicksFirst");
+            case ALWAYS -> localizer.getMessage("lblDraftPicksAlways");
+            default -> localizer.getMessage("lblDraftPicksOne");
+        };
+    }
+
+    /** Mark the entry the chosen set specifies, so a player can see what it was designed for. */
+    public static String markSetDefault(String label, boolean isDefault) {
+        return isDefault
+                ? Localizer.getInstance().getMessage("lblDraftSetDefaultSuffix", label)
+                : label;
+    }
+
     /**
      * True when the pick rule gives this player another card from the pack they just
      * picked from. Call after {@link LimitedPlayer#draftCard} has counted the pick.
@@ -637,7 +674,6 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
-
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < this.podSize; i++) {
                 DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
@@ -847,9 +883,7 @@ public class BoosterDraft implements IBoosterDraft {
         for(LimitedPlayer pl : brokers) {
             pl.activateBrokers(this.players);
         }
-
     }
-
 
     private static String choosePackByPack(final List<String> setz, int packs) {
         StringBuilder sb = new StringBuilder();

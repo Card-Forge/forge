@@ -16,7 +16,7 @@ All tests live under `forge-gui-desktop/src/test/java/forge/net/`.
 ---
 
 # How It Works
-Every test game starts a real TCP server and connects one or more headless AI clients to it. The server and clients exchange game state over the network just like a real multiplayer game — the only difference is there's no GUI and the AI makes all decisions. By default this uses delta sync, but you can test the full-state sync path instead with `-Dforge.deltasync=false`.
+Every test game starts a real TCP server and connects one or more headless AI clients to it. The server and clients exchange game state over the network just like a real multiplayer game — the only difference is there's no GUI and the AI makes all decisions. By default this uses delta sync. With `-Dforge.deltasync=false` every update re-sends every object instead of only the changes.
 
 The vertical slice test uses minimal 10-card basic land decks instead, so games end quickly by decking out.
 

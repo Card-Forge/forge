@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Data
+Title=Data
+Icon=Data.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Honma_Kosuke_-_Jund_Sacrifice_(Standard,_#892752).dck
+Deck Type=constructed
+
+[Main]
+4 Greedy Freebooter
+1 Susurian Voidborn
+4 Umbral Collar Zealot
+4 Gene Pollinator
+4 Biotech Specialist
+3 Callous Inspector
+4 The Sackville-Bagginses
+4 Break Out
+4 Lively Dirge
+3 Deadly Precision
+4 Obsessive Pursuit
+2 Swamp
+4 Blooming Marsh
+1 Blood Crypt
+3 Stomping Ground
+3 Overgrown Tomb
+4 Blazemire Verge
+4 Starting Town
+[Sideboard]
+3 Duress
+2 Shoot the Sheriff
+1 Pawpatch Formation
+2 Strategic Betrayal
+2 Tragic Trajectory
+1 The Ooze
+2 Professor Dellian Fel
+1 Witherbloom Charm
+1 Guerrilla Gorilla

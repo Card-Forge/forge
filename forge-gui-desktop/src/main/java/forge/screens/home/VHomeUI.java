@@ -33,6 +33,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.Singletons;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -46,7 +47,6 @@ import forge.screens.home.online.VSubmenuOnlineDecks;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
-//import forge.screens.home.puzzle.VSubmenuTutorial;
 import forge.screens.home.quest.VSubmenuChallenges;
 import forge.screens.home.quest.VSubmenuDuels;
 import forge.screens.home.quest.VSubmenuQuestDecks;
@@ -67,6 +67,7 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
 
@@ -98,6 +99,12 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
+    /** Starts the guided practice game that teaches a newcomer the basics. */
+    private final JLabel lblHowToPlay = new FLabel.Builder()
+        .text(Localizer.getInstance().getMessage("lblHowToPlay")).fontAlign(SwingConstants.CENTER).fontSize(14)
+        .tooltip(Localizer.getInstance().getMessage("lblHowToPlayTooltip"))
+        .opaque().hoverable().cmdClick(() -> HowToPlay.chooseAndStart()).build();
+
     VHomeUI() {
         // Add main menu containing logo and menu buttons
         final JPanel pnlMainMenu = new JPanel(new MigLayout("w 200px!, ax center, insets 0, gap 0, wrap"));
@@ -105,9 +112,12 @@ public enum VHomeUI implements IVTopLevelUI {
 
         final int logoSize = 170;
         final int logoBottomGap = 4;
-        final int pnlMainMenuHeight = logoSize + logoBottomGap;
+        final int howToPlayHeight = 28;
+        final int pnlMainMenuHeight = logoSize + logoBottomGap + howToPlayHeight + logoBottomGap;
 
         pnlMainMenu.add(lblLogo, "w " + logoSize + "px!, h " + logoSize +
+                "px!, gap 0 4px 0 " + logoBottomGap + "px");
+        pnlMainMenu.add(lblHowToPlay, "w " + logoSize + "px!, h " + howToPlayHeight +
                 "px!, gap 0 4px 0 " + logoBottomGap + "px");
         pnlMenu.add(pnlMainMenu);
         
@@ -140,7 +150,6 @@ public enum VHomeUI implements IVTopLevelUI {
 
         allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
-        //allSubmenus.add(VSubmenuTutorial.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);

@@ -1,0 +1,7 @@
+Name:Savvy Profiteer
+ManaCost:1 R
+Types:Creature Ferengi Rogue
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Oracle:{T}: Add {R}.\n{3}, {T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

@@ -33,6 +33,10 @@ public interface IDeviceAdapter {
     boolean needFileAccess();
     void requestFileAcces();
 
+    /** Confine the mouse cursor to the window (desktop LibGDX only). Default no-op. */
+    default void setMouseConfined(boolean confined) {
+    }
+
     Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg");
     default boolean isSupportedAudioFormat(File file) {
         String path = file.getPath().toLowerCase();

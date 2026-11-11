@@ -150,29 +150,6 @@ public final class NetworkEvent {
         return Localizer.getInstance().getMessage("lblNetworkPodSizeEntry", podSize);
     }
 
-    /** The pick rule the chosen set specifies at this pod size, for marking and preselecting it. */
-    public static DraftOptions.DoublePick defaultPicksFor(BoosterDraft draft, int podSize) {
-        DraftOptions.DoublePick rule = draft == null ? null : draft.getDoublePick();
-        return rule == null ? DraftOptions.DoublePick.NEVER : rule.resolve(podSize);
-    }
-
-    /** Mark the entry the chosen set specifies, so a host can see what it was designed for. */
-    public static String markSetDefault(String label, boolean isDefault) {
-        return isDefault
-                ? Localizer.getInstance().getMessage("lblNetworkSetDefaultSuffix", label)
-                : label;
-    }
-
-    /** Display name for a resolved pick rule, shared by the panel and the setup dialogs. */
-    public static String picksLabel(DraftOptions.DoublePick picks) {
-        Localizer localizer = Localizer.getInstance();
-        return switch (picks == null ? DraftOptions.DoublePick.NEVER : picks) {
-            case FIRST_PICK -> localizer.getMessage("lblNetworkPicksFirst");
-            case ALWAYS -> localizer.getMessage("lblNetworkPicksAlways");
-            default -> localizer.getMessage("lblNetworkPicksOne");
-        };
-    }
-
     /** Pod row for a past event, read back from its saved tags. Empty when the pool predates them. */
     private static String podTextFromTags(Deck deck) {
         String size = DeckProxy.getEventTag(deck, "eventPodSize");
@@ -197,7 +174,7 @@ public final class NetworkEvent {
         if (picks == null || picks == DraftOptions.DoublePick.NEVER) {
             return localizer.getMessage("lblNetworkPodSizeEntry", podSize);
         }
-        return localizer.getMessage("lblNetworkEventPodSummary", podSize, picksLabel(picks));
+        return localizer.getMessage("lblNetworkEventPodSummary", podSize, BoosterDraft.picksLabel(picks));
     }
 
     /** The pool deck saved for a past event id, or null if none is on disk. */

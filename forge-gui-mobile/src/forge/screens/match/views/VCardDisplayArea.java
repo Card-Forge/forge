@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.FlipOntoBattlefieldAnimation;
@@ -222,6 +223,23 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     protected boolean animateEntry() { return false; }
 
+    /**
+     * Adds the cards of the last layout to {@code out} without allocating. orderedCards is cleared and refilled
+     * by layout, so an iterator (or addAll) throws ConcurrentModificationException if a relayout lands
+     * mid-copy. Reading by index cannot; if the list shrinks under us the rest is simply skipped, which at
+     * worst costs one entry animation.
+     */
+    private void collectOrderedCards(Set<CardView> out) {
+        final List<CardView> ordered = orderedCards.get();
+        try {
+            for (int i = 0, n = ordered.size(); i < n; i++) {
+                out.add(ordered.get(i));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // list shrank during the copy, keep what was read
+        }
+    }
+
     protected void refreshCardPanels(Iterable<CardView> model) {
         final boolean animate = animateEntry();
         Set<CardView> known = null, current = null;
@@ -232,7 +250,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
             shownScratch.clear();
             knownScratch.clear();
-            knownScratch.addAll(orderedCards.get());
+            collectOrderedCards(knownScratch);
             currentScratch.clear();
             known = knownScratch;
             current = currentScratch;
@@ -261,7 +279,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             for (int i = 0; i < shownLastRefresh.size(); i++) {
                 CardAreaPanel p = shownLastRefresh.get(i);
                 if (current.contains(p.getCard())) { continue; }
-                if (p.getCard().getZone() == ZoneType.Battlefield) {
+                // A network client replaces a moved card's view, so the panel's copy can still say battlefield
+                if (CardFlightOverlay.isOnBattlefield(p.getCard())) {
                     // if the new row already took this panel, it has handled the move
                     if (p.getDisplayArea() == null || p.getDisplayArea() == this) {
                         CardAreaPanel.markMoved(p.getCard());
@@ -384,10 +403,34 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        //room at the right end that something floating over the area (a zone box) covers: cards stay clear of it or can be scrolled clear
+        final float pad = Math.max(0f, getEndPadding());
+        final float usable = Math.max(1f, visibleWidth - pad);
+        float x = layoutCards(0f, visibleHeight);
+        final float align = getContentAlignment();
+        if (align > 0f && x > 0f && x < usable) { //fewer cards than fit: place them again, shifted
+            x = layoutCards(Math.round((usable - x) * align), visibleHeight);
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+        return new ScrollBounds(Math.max(x + pad, visibleWidth), visibleHeight);
+    }
+
+    //@return width at the right end of the area that is covered by something else, 0 normally
+    protected float getEndPadding() {
+        return 0f;
+    }
+
+    //@return how far to the right (0 = left, 0.5 = centered, 1 = right) cards are placed when they don't fill the area
+    protected float getContentAlignment() {
+        return 0f;
+    }
+
+    //lays the cards out from startX, returns the x the last one ends at
+    private float layoutCards(float startX, float visibleHeight) {
         orderedCards.get().clear();
         infoGhostCardIds.get().clear();
 
-        float x = 0;
+        float x = startX;
         float y = 0;
         float cardHeight = visibleHeight;
         float cardWidth = getCardWidth(cardHeight);
@@ -398,8 +441,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
             }
         }
-
-        return new ScrollBounds(x, visibleHeight);
+        return x;
     }
 
     @Override
@@ -456,8 +498,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private boolean hasFieldRect;
         private boolean leaveOriginLocked;
         private VCardDisplayArea lastFieldRow;
-        private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
-        private static final Set<Integer> movedIds = ConcurrentHashMap.newKeySet();
+        private static final Set<Integer> animatedIds = Sets.newConcurrentHashSet();
+        private static final Set<Integer> movedIds = Sets.newConcurrentHashSet();
         public static void markMoved(CardView c) { movedIds.add(c.getId()); }
         public static Rectangle takeHandStart(CardView card) {
             return handStarts.remove(card.getId());
@@ -644,7 +686,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public void updateCard(final CardView card) {
-            setTapped(card.isTapped());
+            showOnBattlefield(card);
 
             attachedPanels.clear();
 

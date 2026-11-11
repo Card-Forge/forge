@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Junkmener_-_UW_Control_(Standard,_#900716).dck
+Deck Type=constructed
+
+[Main]
+4 Consult the Star Charts
+4 Countersculpt
+3 Plains
+3 Island
+2 Erode
+1 Fatehold Charm
+4 Floodfarm Verge
+1 Fountainport
+4 Get Lost
+4 Hallowed Fountain
+4 Deserted Beach
+3 Jace's Machinations
+3 No More Lies
+3 Petrified Hamlet
+2 Pinnacle Starcage
+2 Day of Judgment
+2 Restless Anchorage
+3 Seam Rip
+1 Spell Snare
+4 The Theorist, Jace Beleren
+2 Theorist's Sanctum
+1 Three Steps Ahead
+[Sideboard]
+1 Erode
+2 Pinnacle Starcage
+2 Beza, the Bounding Spring
+2 Sphinx of False Conclusions
+2 Flashfreeze
+1 Emeritus of Ideation
+2 Disdainful Stroke
+1 Captain Marvel, Earth's Protector
+2 Ultima

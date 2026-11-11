@@ -177,7 +177,7 @@ public final class GameActionUtil {
                         // "if you also return a creature you control to its owner's hand" is an
                         // additional cost, so with nothing to return the spell is simply not castable
                         beamSA.getPayCosts().add(new Cost(
-                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature you control>", false));
+                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature>", false));
 
                         alternatives.add(beamSA);
                     } else if (keyword.startsWith("Flashback")) {
@@ -950,7 +950,12 @@ public final class GameActionUtil {
         return completeList;
     }
 
-    public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
+    /**
+     * Undoes a cast or activation that couldn't be completed.
+     * @param waitingMark the waiting trigger count before the cast began: only the triggers since then are cleared
+     */
+    public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard,
+            final int waitingMark) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -1021,7 +1026,7 @@ public final class GameActionUtil {
         payment.refundPayment();
 
         game.getStack().clearFrozen();
-        game.getTriggerHandler().clearWaitingTriggers();
+        game.getTriggerHandler().clearWaitingTriggersFrom(waitingMark);
     }
 
 }

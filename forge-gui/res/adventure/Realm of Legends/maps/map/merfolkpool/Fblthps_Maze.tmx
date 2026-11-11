@@ -335,7 +335,7 @@ All that stands in your way now is a final battle with Fblthp.&quot;,
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Now that you think about it, you're pretty sure you heard Fblthp head the other direction from the entrace, which would mean you're going the wrong way.&quot;,
+   &quot;text&quot;: &quot;Now that you think about it, you're pretty sure you heard Fblthp head the other direction from the entrance, which would mean you're going the wrong way.&quot;,
    &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
    &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
 }

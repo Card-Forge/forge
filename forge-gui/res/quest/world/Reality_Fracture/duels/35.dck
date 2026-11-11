@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Aidan_Trotter_-_Izzet_Prowess_(Standard,_#897576).dck
+Deck Type=constructed
+
+[Main]
+1 Spell Snare
+1 Stock Up
+1 Wild Ride
+1 Prismari Charm
+2 Bounce Off
+2 Secret Identity
+2 Impractical Joke
+4 Burst Lightning
+4 Flow State
+4 Opt
+4 Sleight of Hand
+2 Eddymurk Crab
+4 Elusive Otter
+4 Pompous Battlemage
+4 Slickshot Show-Off
+1 Mountain
+1 Starting Town
+2 Multiversal Passage
+4 Steam Vents
+4 Spirebluff Canal
+4 Riverpyre Verge
+4 Island
+[Sideboard]
+2 Spell Pierce
+1 Broadside Barrage
+2 Colorstorm Stallion
+1 Disdainful Stroke
+2 Fire Magic
+2 Ral, Crackling Wit
+1 Sear
+2 Soul-Guide Lantern
+2 Spell Snare

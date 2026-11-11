@@ -25,6 +25,7 @@ public enum AbilityKey {
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
+    OneOfAttackingTeam("OneOfAttackingTeam"),
     Blocker("Blocker"),
     Blockers("Blockers"),
     CanReveal("CanReveal"),
@@ -71,7 +72,6 @@ public enum AbilityKey {
     Explorer("Explorer"),
     ExtraDraws("ExtraDraws"),
     ExtraTurn("ExtraTurn"),
-    ETB("ETB"),
     Fighter("Fighter"),
     Fighters("Fighters"),
     FirstTime("FirstTime"),
@@ -177,6 +177,15 @@ public enum AbilityKey {
             return newMap();
         }
         return new EnumMap<>(map);
+    }
+
+    /** Copies the given keys that are present in from */
+    public static void copyKeys(final Map<AbilityKey, Object> from, final Map<AbilityKey, Object> to, final AbilityKey... keys) {
+        for (AbilityKey key : keys) {
+            if (from.containsKey(key)) {
+                to.put(key, from.get(key));
+            }
+        }
     }
 
     public static Map<AbilityKey, Object> mapFromCard(Card card) {

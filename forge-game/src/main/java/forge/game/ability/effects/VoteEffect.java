@@ -92,7 +92,7 @@ public class VoteEffect extends SpellAbilityEffect {
             Player realVoter = voter == null ? p : voter;
 
             if (other) {
-                voteOpts.remove(realVoter);
+                voteOpts.remove(p);
                 if (voteOpts.isEmpty()) continue;
             }
 

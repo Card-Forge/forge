@@ -30,6 +30,13 @@ public class SimultaneousEntryReplacementTest extends AITest {
     }
 
     @Test
+    public void darkDepthsKeepsItsCountersWhenSolemnityEntersWithIt() {
+        Card depths = returnTogether("Solemnity", "Dark Depths");
+
+        AssertJUnit.assertEquals(10, depths.getCounters(CounterEnumType.ICE));
+    }
+
+    @Test
     public void cloneCannotCopyAForestAnimatedByLifeAndLimbEnteringWithIt() {
         Card clone = returnTogether("Life and Limb", "Clone");
 

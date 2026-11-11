@@ -1,9 +1,13 @@
 package forge.gamemodes.match;
 
+import com.google.common.eventbus.Subscribe;
 import forge.game.GameView;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -160,7 +164,7 @@ public class YieldController {
 
     /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
     public static boolean isPriorityAtOrPastMarker(GameView gv, PlayerView phaseOwner, PhaseType phase) {
-        if (!phaseOwner.equals(gv.getPlayerTurn())) return false;
+        if (!phaseOwner.sharesTeamWith(gv.getPlayerTurn())) return false;
         PhaseType currentPhase = gv.getPhase();
         return currentPhase == phase || currentPhase.isAfter(phase);
     }
@@ -181,7 +185,7 @@ public class YieldController {
         if (autoPassUntilMarker != null && gv != null) {
             PlayerView turnPlayer = gv.getPlayerTurn();
             PhaseType currentPhase = gv.getPhase();
-            boolean inMarkerOwnerTurn = autoPassUntilMarker.getPhaseOwner().equals(turnPlayer);
+            boolean inMarkerOwnerTurn = autoPassUntilMarker.getPhaseOwner().sharesTeamWith(turnPlayer);
             boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
             boolean pastTarget = inMarkerOwnerTurn && currentPhase != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
             if (hasLeftMarker && (atTarget || (!activationOnMarker && pastTarget))) {
@@ -490,6 +494,23 @@ public class YieldController {
     public void maybeInterruptOnReveal() {
         if (!getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return;
         applyInterrupt();
+    }
+
+    /** Also runs with no yield active, so APINA with respects-interrupts can set autoPassInterrupted. */
+    @Subscribe
+    public void receiveGameEvent(final GameEvent ev) {
+        if (ev instanceof GameEventSpellAbilityCast cast) {
+            if (!shouldEvaluateInterrupts()) return;
+            for (SpellAbilityStackInstance si : owner.getGame().getStack()) {
+                if (si.getId() == cast.si().getId()) {
+                    onSpellAbilityCast(si);
+                    return;
+                }
+            }
+        } else if (ev instanceof GameEventAttackersDeclared) {
+            final CombatView combat = owner.getGame().getView().getCombat();
+            if (combat != null) onAttackersDeclared(combat);
+        }
     }
 
     public void onSpellAbilityCast(SpellAbilityStackInstance si) {

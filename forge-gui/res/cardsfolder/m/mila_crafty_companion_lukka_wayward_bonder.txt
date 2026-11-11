@@ -2,7 +2,7 @@ Name:Mila, Crafty Companion
 ManaCost:1 W W
 Types:Legendary Creature Fox
 PT:2/3
-T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWalkerPump | TriggerDescription$ Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.
+T:Mode$ AttackersDeclared | AttackingPlayer$ Opponent | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWalkerPump | TriggerDescription$ Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.
 SVar:TrigWalkerPump:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1
 T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Permanent.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You

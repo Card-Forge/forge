@@ -82,7 +82,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                         }
                         CardStateView csv = findCsvByState(parent, state);
                         if (csv != null) {
-                            ((Map<TrackableProperty, Object>) csv.getProps()).clear();
+                            csv.getProps().clear();
                         } else {
                             csv = parent.createAlternateState(state);
                         }
@@ -428,7 +428,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
             }
             // Non-CardView types: clear and reuse (PlayerView identity must be preserved
             // for GUI player matching; other types are rarely replaced).
-            ((Map<TrackableProperty, Object>) existing.getProps()).clear();
+            existing.getProps().clear();
             netLog.trace("[DeltaSync] {} ID={} already exists (replaced), cleared stale props",
                     typeName, objectId);
             return existing;

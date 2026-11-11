@@ -2,20 +2,32 @@ package forge.screens.match;
 
 import static forge.Forge.getLocalizer;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 import forge.screens.match.views.*;
 import forge.toolbox.FOptionPane;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.scene.GameScene;
+import forge.adventure.util.AdventureBackgroundResolver;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.tutorial.TutorialLayout;
+import forge.gamemodes.tutorial.TutorialTarget;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
@@ -75,6 +87,9 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VChat chat;
     private final VStack stack;
+    private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
+    private boolean iconTabsShown; //whether the top menu tabs were last laid out as icons
+    private boolean stackSuspended, prevMenuOpen, prevStackShown; //see syncStackWithMenus
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -89,6 +104,8 @@ public class MatchScreen extends FScreen {
     private final Map<Integer, Vector2> endpoints;
     private final Set<CardView> cardsonBattlefield;
     private final Set<PlayerView> playerViewSet;
+    //the dropdowns that open over the field: arrows to anything under them are not drawn (see updateArrowVisibility)
+    private final FDropDown[] arrowOccluders;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -113,10 +130,13 @@ public class MatchScreen extends FScreen {
         playerPanelsList.remove(bottomPlayerPanel);
         playerPanelsList.add(bottomPlayerPanel);
         selectedPlayer = playerPanelsList.size() - 1;
+        unifiedPhase = new VUnifiedPhase(this::getPlayerPanelsList);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
                 e -> getGameController().selectButtonCancel()));
+
+        bottomPlayerPrompt.setOverMatch(true);
 
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
@@ -125,6 +145,7 @@ public class MatchScreen extends FScreen {
             topPlayerPrompt = add(new VPrompt("", "",
                     e -> getGameController().selectButtonOk(),
                     e -> getGameController().selectButtonCancel()));
+            topPlayerPrompt.setOverMatch(true);
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);
@@ -148,18 +169,22 @@ public class MatchScreen extends FScreen {
         devMenu.setDropDownContainer(this);
         stack = new VStack();
         stack.setDropDownContainer(this);
+        arrowOccluders = new FDropDown[] { stack, gameMenu, players, revealed, log, chat, devMenu }; //chat is null outside network games
 
         FMenuBar menuBar = (FMenuBar) getHeader();
         if (topPlayerPrompt == null) {
+            menuBar.setIconMode(VPlayerPanel::isCompactLayout); //compact layout: equal width tabs with icons from the topmenu atlas
             menuBar.addTab("", revealed, true);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu).setTopIcon("vmenu", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players).setTopIcon("vplayers", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log).setTopIcon("vlog", false);
             if (chat != null) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat).setTopIcon("vchat", false);
             }
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
+            if (!MatchController.instance.isReplay()) {
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu).setTopIcon("vdev", false);
+            }
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack).setTopIcon("vstack", true);
         } else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
@@ -175,6 +200,74 @@ public class MatchScreen extends FScreen {
         endpoints = new HashMap<>();
         cardsonBattlefield  = new HashSet<>();
         playerViewSet = new HashSet<>();
+
+        if (topPlayerPrompt == null) {
+            //the menu bar pops up over the top of the field in the compact layout, so it must draw above everything else
+            remove(getHeader());
+            add(getHeader());
+            bottomPlayerPrompt.setMenuButton(VPlayerPanel.isMenuHidden(), this::toggleMenuBar);
+            add(unifiedPhase);
+            add(unifiedPhase.getMenu()); //above the header, so it opens over the field
+        }
+    }
+
+    //compact layout with a hidden top menu: the bar slides over the top of the field for a few seconds when the menu button
+    //is pressed, and closes by itself once no menu of it is open
+    private static final float MENU_BAR_SECONDS = 5f;
+    private boolean menuBarShown;
+    private final Timer.Task menuBarHideTask = new Timer.Task() {
+        @Override
+        public void run() {
+            if (tutorialHoldsMenuBar || ((FMenuBar) getHeader()).isShowingMenuExcept(stack)) { //a menu is open (or the tutorial is pointing at the bar): keep it until it closes
+                Timer.schedule(this, 2f);
+                return;
+            }
+            setMenuBarShown(false);
+        }
+    };
+
+    private void toggleMenuBar() {
+        setMenuBarShown(!menuBarShown);
+    }
+
+    private void setMenuBarShown(boolean shown) {
+        menuBarHideTask.cancel();
+        if (shown) { Timer.schedule(menuBarHideTask, MENU_BAR_SECONDS); }
+        if (menuBarShown != shown) {
+            menuBarShown = shown;
+            if (!shown) { ((FMenuBar) getHeader()).closeAllExcept(stack); } //an open stack stays up
+            revalidate();
+        }
+    }
+
+    //Compact layout: the stack display, the unified phase dropdown and the dev menu all open at the top right, so they take turns.
+    //Opening the phase dropdown or the dev menu tucks an open stack display away and brings it back when they close; opening the
+    //stack (by hand, or a new stack item showing it) closes them.
+    private void syncStackWithMenus() {
+        if (topPlayerPrompt != null || !VPlayerPanel.isCompactLayout()) {
+            stackSuspended = false;
+            prevMenuOpen = false;
+            prevStackShown = stack.isVisible();
+            return;
+        }
+        boolean menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible();
+        if (menuOpen && !prevMenuOpen && stack.isVisible()) {
+            stack.hide();
+            stackSuspended = true;
+        } else if (menuOpen && stack.isVisible() && !prevStackShown) {
+            unifiedPhase.getMenu().close();
+            devMenu.hide();
+        }
+        menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible(); //read again, a menu that was just closed may still report open
+        if (stackSuspended && !menuOpen) {
+            stackSuspended = false;
+            final GameView game = MatchController.instance.getGameView();
+            if (!stack.isVisible() && game != null && !game.getStack().isEmpty()) {
+                stack.show();
+            }
+        }
+        prevMenuOpen = menuOpen;
+        prevStackShown = stack.isVisible();
     }
 
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
@@ -254,9 +347,10 @@ public class MatchScreen extends FScreen {
     @Override
     public void onActivate() {
         //update dev menu visibility here so returning from Settings screen allows update
-        if (topPlayerPrompt == null) {
+        if (topPlayerPrompt == null && devMenu.getMenuTab() != null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
+        revalidate(); //the compact layout and unified phase settings may have changed in Settings
     }
 
     public boolean isTopHumanPlayerActive() {
@@ -321,6 +415,38 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        ((FMenuBar) getHeader()).setGlass(VPlayerPanel::isFrosted);
+        if (topPlayerPrompt == null) {
+            final boolean hidden = VPlayerPanel.isMenuHidden();
+            bottomPlayerPrompt.setMenuButton(hidden, this::toggleMenuBar);
+            if (hidden) { //the field takes the height of the bar; the bar floats over it while shown, or waits just above the screen
+                final float barHeight = getHeader().getHeight();
+                getHeader().setBounds(0, menuBarShown ? 0 : -barHeight, width, barHeight);
+                startY = 0;
+            } else if (menuBarShown) {
+                menuBarShown = false;
+                menuBarHideTask.cancel();
+            }
+        }
+        if (topPlayerPrompt == null) { //compact layout: one phase label right of the stack menu, the bar gives up the room for it
+            final boolean unified = VPlayerPanel.isUnifiedPhase();
+            final float barHeight = getHeader().getHeight();
+            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width * 0.4f) : 0f;
+            if (getHeader().getWidth() != width - buttonWidth) {
+                getHeader().setBounds(getHeader().getLeft(), getHeader().getTop(), width - buttonWidth, barHeight);
+            }
+            if (iconTabsShown != VPlayerPanel.isCompactLayout()) { //the tabs switch between text and icons
+                iconTabsShown = VPlayerPanel.isCompactLayout();
+                getHeader().revalidate();
+            }
+            unifiedPhase.setVisible(unified);
+            if (unified) {
+                unifiedPhase.setBounds(width - buttonWidth, 0, buttonWidth, barHeight);
+                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight);
+            } else {
+                unifiedPhase.getMenu().close();
+            }
+        }
         float scrollerWidth = width;
         if (topPlayerPrompt != null) {
             topPlayerPrompt.setBounds(0, 0, width, VPrompt.HEIGHT);
@@ -332,6 +458,243 @@ public class MatchScreen extends FScreen {
         }
         scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        coachTop = startY;
+        if (tutorialOverlay != null) { tutorialOverlay.setBounds(0, 0, width, height); }
+        layoutCoach();
+    }
+
+    // The "How to Play" tutorial: a note (the coach) that floats over the field without dimming it, and an overlay that
+    // outlines the part of the screen the note is about. Neither covers the player's hand or the prompt bar.
+    private CoachPanel coach;
+    private TutorialOverlay tutorialOverlay;
+    private float coachTop;
+    private EnumSet<TutorialTarget> tutorialTargets = EnumSet.noneOf(TutorialTarget.class);
+    private final List<Rectangle> tutorialRects = new ArrayList<>();
+    private final List<Rectangle> coachObstacles = new ArrayList<>();
+    private boolean tutorialOpenedPhaseList, tutorialHoldsMenuBar;
+
+    /**
+     * Both views are made together, overlay first: whichever of them is needed first, the note must end up above the
+     * dimming. (Made one at a time, a note shown before the first outline was created would be dimmed by it.)
+     */
+    private void ensureTutorialViews() {
+        if (tutorialOverlay == null) {
+            tutorialOverlay = add(new TutorialOverlay(this));
+            tutorialOverlay.setBounds(0, 0, getWidth(), getHeight());
+            tutorialOverlay.setVisible(false); // shown only while something is outlined
+        }
+        if (coach == null) {
+            coach = add(new CoachPanel(this::layoutCoach));
+        }
+    }
+
+    /** Which layout the player is looking at, so the tutorial can say where things are on this screen. */
+    public TutorialLayout getTutorialLayout() {
+        if (VPlayerPanel.isCompactLayout()) {
+            return VPlayerPanel.isUnifiedPhase() ? TutorialLayout.MOBILE_COMPACT_UNIFIED : TutorialLayout.MOBILE_COMPACT;
+        }
+        return Forge.isLandscapeMode() ? TutorialLayout.MOBILE_LANDSCAPE : TutorialLayout.MOBILE_PORTRAIT;
+    }
+
+    /**
+     * Outlines the given parts of the screen (an empty collection clears the outline). Parts that fold away are opened
+     * for as long as they are outlined: the phase stops, the hand, and the top menu bar when it is hidden.
+     * Call on the UI thread.
+     */
+    public void highlightTutorial(final Collection<TutorialTarget> targets) {
+        ensureTutorialViews();
+        final EnumSet<TutorialTarget> next = targets.isEmpty()
+                ? EnumSet.noneOf(TutorialTarget.class) : EnumSet.copyOf(targets);
+        tutorialTargets = next;
+
+        final VPlayerPanel me = liveBottom(), opp = liveTop();
+        if (next.contains(TutorialTarget.HAND)) {
+            me.showHandForTutorial();
+        }
+
+        final boolean phases = next.contains(TutorialTarget.PHASES);
+        if (VPlayerPanel.isUnifiedPhase()) {
+            if (phases) {
+                tutorialOpenedPhaseList |= !unifiedPhase.getMenu().isOpen();
+                unifiedPhase.getMenu().setOpen(true);
+            } else if (tutorialOpenedPhaseList) {
+                tutorialOpenedPhaseList = false;
+                unifiedPhase.getMenu().close();
+            }
+        } else {
+            me.getPhaseIndicator().setTutorialOpen(phases);
+            opp.getPhaseIndicator().setTutorialOpen(phases);
+        }
+
+        // a hidden top menu bar slides in for a few seconds; keep it down while the stack or the menu is the subject
+        final boolean wantsBar = VPlayerPanel.isMenuHidden()
+                && (next.contains(TutorialTarget.STACK) || next.contains(TutorialTarget.MENU));
+        if (wantsBar) {
+            tutorialHoldsMenuBar = true;
+            setMenuBarShown(true);
+        } else if (tutorialHoldsMenuBar) {
+            tutorialHoldsMenuBar = false;
+            setMenuBarShown(true); // restarts the usual few seconds, after which it slides away again
+        }
+
+        tutorialOverlay.setVisible(!next.isEmpty());
+        layoutCoach();
+        Gdx.graphics.requestRendering();
+    }
+
+    /** The screen rectangles of the parts the tutorial points at right now, as last drawn. */
+    List<Rectangle> getTutorialRects() {
+        return tutorialRects;
+    }
+
+    private void collectTutorialRects(final List<Rectangle> out) {
+        out.clear();
+        if (tutorialTargets.isEmpty()) {
+            return;
+        }
+        final VPlayerPanel me = liveBottom(), opp = liveTop();
+        for (final TutorialTarget target : tutorialTargets) {
+            switch (target) {
+                case YOUR_PLAYER -> me.addTutorialBadgeBounds(out);
+                case OPPONENT -> opp.addTutorialBadgeBounds(out);
+                case HAND -> me.addTutorialHandBounds(out);
+                case BATTLEFIELD -> addTutorialBounds(out, me.getField());
+                case ZONES -> me.addTutorialTabBounds(out);
+                case STACK -> {
+                    final FDisplayObject tab = stack.getMenuTab();
+                    if (tab != null && tab.screenPos.y + tab.screenPos.height > 0) { addTutorialBounds(out, tab); }
+                }
+                case PHASES -> {
+                    if (VPlayerPanel.isUnifiedPhase()) {
+                        addTutorialBounds(out, unifiedPhase);
+                        if (unifiedPhase.getMenu().isOpen()) { addTutorialBounds(out, unifiedPhase.getMenu()); }
+                    } else {
+                        me.addTutorialPhaseBounds(out);
+                        opp.addTutorialPhaseBounds(out);
+                    }
+                }
+                case PROMPT, BUTTONS -> addTutorialBounds(out, bottomPlayerPrompt);
+                case MENU -> {
+                    if (getHeader().screenPos.y + getHeader().screenPos.height > 0) { addTutorialBounds(out, getHeader()); }
+                }
+                default -> { } // CARD_INFO: mobile has no panel for it, long pressing a card is explained in the text
+            }
+        }
+    }
+
+    private static void addTutorialBounds(final List<Rectangle> out, final FDisplayObject o) {
+        if (o == null || !o.isVisible() || o.getWidth() <= 0 || o.getHeight() <= 0) { return; }
+        final Rectangle r = new Rectangle(o.screenPos);
+        for (final Rectangle known : out) {
+            if (known.equals(r)) { return; }
+        }
+        out.add(r);
+    }
+
+    /**
+     * Called every frame while the tutorial is up: reads where the outlined parts and the lists that hang over the
+     * field are, and places the note again when any of them moved.
+     */
+    void syncTutorialLayout() {
+        final List<Rectangle> targets = new ArrayList<>();
+        collectTutorialRects(targets);
+
+        final List<Rectangle> obstacles = new ArrayList<>(targets);
+        if (stack.isVisible()) { obstacles.add(new Rectangle(stack.screenPos)); }
+        final VUnifiedPhase.Menu phaseList = unifiedPhase.getMenu();
+        if (phaseList.isOpen() && phaseList.isVisible()) { obstacles.add(new Rectangle(phaseList.screenPos)); }
+
+        final boolean changed = !obstacles.equals(coachObstacles);
+        tutorialRects.clear();
+        tutorialRects.addAll(targets);
+        if (changed) {
+            coachObstacles.clear();
+            coachObstacles.addAll(obstacles);
+            layoutCoach();
+        }
+    }
+
+    /**
+     * Places the note over the field where it covers neither an outlined part nor a list that hangs over the field: the
+     * stack list, or the phase stops list. It starts at the top; where something is in the way it goes below it (as
+     * the stack always had it), else to the bottom of the field or to the side, else it overlaps as little as it can.
+     */
+    public void layoutCoach() {
+        if (coach == null) { return; }
+        final float width = getWidth();
+        final float bottomLimit = getHeight() - VPrompt.HEIGHT;
+        final boolean portrait = getHeight() > width;
+        final float gap = Utils.scale(4);
+        coach.setCompact(portrait);
+
+        final float fullWidth = portrait ? width - 2 * gap : Math.min(width * 0.72f, Utils.scale(560));
+        final float narrowWidth = portrait ? fullWidth : Math.min(fullWidth, Utils.scale(300));
+        final float panelHeight = coach.preferredHeight(bottomLimit - coachTop);
+
+        final List<Rectangle> obstacles = new ArrayList<>(coachObstacles);
+
+        // candidate heights, in the order they are preferred: the top, below each obstacle, the bottom, above each obstacle
+        final List<Float> ys = new ArrayList<>();
+        ys.add(coachTop + gap);
+        final List<Rectangle> byBottom = new ArrayList<>(obstacles);
+        byBottom.sort((a, b) -> Float.compare(a.y + a.height, b.y + b.height));
+        for (final Rectangle o : byBottom) { ys.add(o.y + o.height + gap); }
+        ys.add(bottomLimit - gap - panelHeight);
+        for (final Rectangle o : byBottom) { ys.add(o.y - gap - panelHeight); }
+
+        float bestX = (width - fullWidth) / 2, bestY = coachTop + gap, bestW = fullWidth;
+        float bestOverlap = Float.MAX_VALUE;
+        boolean found = false;
+        final float[] widths = portrait ? new float[] { fullWidth } : new float[] { fullWidth, narrowWidth };
+        search:
+        for (final float w : widths) {
+            final float[] xs = portrait ? new float[] { gap }
+                    : new float[] { (width - w) / 2, gap, width - w - gap };
+            for (final float y : ys) {
+                if (y < coachTop + gap - 0.5f || y + panelHeight > bottomLimit - gap + 0.5f) { continue; }
+                for (final float x : xs) {
+                    final Rectangle candidate = new Rectangle(x, y, w, panelHeight);
+                    float overlap = 0f;
+                    for (final Rectangle o : obstacles) { overlap += overlapArea(candidate, o); }
+                    if (overlap <= 0f) {
+                        bestX = x; bestY = y; bestW = w; found = true;
+                        break search;
+                    }
+                    if (w == fullWidth && overlap < bestOverlap) {
+                        bestOverlap = overlap; bestX = x; bestY = y; bestW = w;
+                    }
+                }
+            }
+        }
+        if (!found && portrait) { bestX = gap; }
+
+        final float rx = Math.round(bestX), ry = Math.round(bestY), rw = Math.round(bestW), rh = Math.round(panelHeight);
+        if (coach.getLeft() != rx || coach.getTop() != ry || coach.getWidth() != rw || coach.getHeight() != rh) {
+            coach.setBounds(rx, ry, rw, rh);
+            Gdx.graphics.requestRendering();
+        }
+    }
+
+    private static float overlapArea(final Rectangle a, final Rectangle b) {
+        final float w = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x);
+        final float h = Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y);
+        return w > 0f && h > 0f ? w * h : 0f;
+    }
+
+    /** Shows a tutorial note; runs {@code onNext} when the player presses its button. Call on the UI thread. */
+    public void showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        ensureTutorialViews();
+        coach.show(title, text, nextLabel, onNext);
+        layoutCoach();
+        Gdx.graphics.requestRendering();
+    }
+
+    /** Removes the tutorial note, if shown. Call on the UI thread. */
+    public void hideCoach() {
+        if (coach != null) {
+            coach.hidePanel();
+            Gdx.graphics.requestRendering();
+        }
     }
 
     @Override
@@ -353,6 +716,11 @@ public class MatchScreen extends FScreen {
         if (game == null) {
             return;
         }
+
+        if (topPlayerPrompt == null) { //the reveal tab is as wide as the player panels' control column
+            ((FMenuBar) getHeader()).setRevealWidth(VPlayerPanel.isCompactLayout() ? liveBottom().getColumnWidth() : 0f);
+        }
+        syncStackWithMenus();
 
         if (gameMenu != null) {
             // Index trailing items from end — entries inserted before Settings don't shift them
@@ -479,7 +847,20 @@ public class MatchScreen extends FScreen {
 
             Rectangle a = anchor.screenPos;
             float x, y;
-            if (sideDisplay != null) {
+            if (sideDisplay != null && VPlayerPanel.isCompactLayout()) {
+                //compact layout: zones are boxes along the panel's outer edge, so the preview goes on the field side of the box,
+                //over the card being inspected (or over the middle of the box while scrubbing, so it doesn't jump)
+                Rectangle d = sideDisplay.screenPos;
+                float cardCenter = d.x + d.width / 2;
+                if (!dragging && anchor instanceof FCardPanel) {
+                    cardCenter = a.x + a.width / 2;
+                } else if (sideDisplay instanceof VCardDisplayArea cardArea && cardArea.getDragPanel() != null) {
+                    cardCenter = cardArea.getDragPanel().screenPos.x + cardArea.getDragPanel().screenPos.width / 2;
+                }
+                x = Math.max(left, Math.min(cardCenter - w / 2, right - w));
+                boolean outerEdgeAtTop = owner != null && owner.isFlipped();
+                y = outerEdgeAtTop ? d.y + d.height + PREVIEW_GAP : d.y - h - PREVIEW_GAP;
+            } else if (sideDisplay != null) {
                 Rectangle d = sideDisplay.screenPos;
                 x = Math.max(left, d.x - w - PREVIEW_GAP); //may cover other open displays while previewing
                 y = d.y + d.height / 2 - h / 2;            //centered on the display so it doesn't jump while scrubbing
@@ -495,6 +876,9 @@ public class MatchScreen extends FScreen {
                 y = a.y + a.height / 2 - h / 2;
             }
             y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            //open dropdowns draw over the preview, so it moves to their left instead of ending up under them
+            if (getStack().isVisible()) { x = moveLeftOfObstacle(getStack().screenPos, x, y, w, h, a, left); }
+            if (unifiedPhase.getMenu().isOpen()) { x = moveLeftOfObstacle(unifiedPhase.getMenu().screenPos, x, y, w, h, a, left); }
 
             if (Forge.magnifyShowDetails) {
                 CardImageRenderer.drawDetails(g, card, MatchController.instance.getGameView(), false, x, y, w, h);
@@ -509,11 +893,46 @@ public class MatchScreen extends FScreen {
         }
     }
 
+    //if the preview would sit under the obstacle (an open dropdown), returns an x left of both the obstacle and the hovered card
+    //so neither is covered; when there is no room on that side the preview stays where it was
+    private static float moveLeftOfObstacle(Rectangle obstacle, float x, float y, float w, float h, Rectangle anchor, float left) {
+        if (obstacle.width <= 0 || x >= obstacle.x + obstacle.width || x + w <= obstacle.x
+                || y >= obstacle.y + obstacle.height || y + h <= obstacle.y) {
+            return x;
+        }
+        final float moved = Math.min(obstacle.x, anchor.x) - w - PREVIEW_GAP;
+        return moved >= left ? moved : x;
+    }
+
+    //Tells the targeting overlay what can be seen: an arrow to or from anything off the field area, or under the stack or an
+    //open menu, is not drawn. Called once per frame; plain float compares and no allocation, so it is cheap on Android.
+    private void updateArrowVisibility() {
+        final Rectangle area = scroller.screenPos;
+        TargetingOverlay.setVisibleArea(area.x, area.y, area.width, area.height);
+        TargetingOverlay.clearOccluders();
+        if (topPlayerPrompt != null) { return; } //two players on one device: the stack is rotated, so its rect would be wrong
+        for (final FDropDown dropDown : arrowOccluders) {
+            if (dropDown != null && dropDown.isVisible()) {
+                final Rectangle r = dropDown.screenPos;
+                TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+            }
+        }
+        if (unifiedPhase.getMenu().isOpen()) {
+            final Rectangle r = unifiedPhase.getMenu().screenPos;
+            TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+        }
+        if (menuBarShown) { //the top menu bar slides over the field
+            final Rectangle r = getHeader().screenPos;
+            TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+        }
+    }
+
     void drawArcs(Graphics g) {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) {
             return;
         }
+        updateArrowVisibility();
         //get all card targeting arrow origins on the battlefield
         endpoints.clear();
         cardsonBattlefield.clear();
@@ -565,7 +984,7 @@ public class MatchScreen extends FScreen {
         final CardAreaPanel panel = CardAreaPanel.get(c);
         if (panel == null) return;
         final Vector2 origin = panel.getTargetingArrowOrigin();
-        if (origin == null || origin.x < left || origin.x > right) return;
+        if (origin == null || origin.x < left || origin.x > right || !TargetingOverlay.isVisible(origin.x, origin.y)) return;
         endpoints.put(c.getId(), origin);
         cardsonBattlefield.add(c);
     }
@@ -875,24 +1294,13 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            return switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
-                case "green" -> FSkinTexture.ADV_BG_FOREST;
-                case "black" -> FSkinTexture.ADV_BG_SWAMP;
-                case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
-                case "blue" -> FSkinTexture.ADV_BG_ISLAND;
-                case "white" -> FSkinTexture.ADV_BG_PLAINS;
-                case "waste" -> FSkinTexture.ADV_BG_WASTE;
-                case "cave" -> FSkinTexture.ADV_BG_CAVE;
-                case "dungeon" -> FSkinTexture.ADV_BG_DUNGEON;
-                case "castle" -> FSkinTexture.ADV_BG_CASTLE;
-                default -> FSkinTexture.ADV_BG_COMMON;
-            };
+            return AdventureBackgroundResolver.getBattleBackground();
         }
         return FSkinTexture.BG_MATCH;
     }
 
     private float getPlayerBgHeight(float midField, float y) {
-        return (midField + liveBottom().getField().getHeight() * liveMultiplier()) - y;
+        return (midField + liveBottom().getBackgroundHeight() * liveMultiplier()) - y;
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -950,9 +1358,9 @@ public class MatchScreen extends FScreen {
                         if (!recomputed) {
                             float midField = liveTop().getBottom();
                             float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-                            float xx = liveTop().getField().getLeft();
-                            float yy = midField - liveTop().getField().getHeight() - promptHeight;
-                            float ww = getWidth() - xx;
+                            float xx = liveTop().getBackgroundLeft();
+                            float yy = midField - liveTop().getBackgroundHeight() - promptHeight;
+                            float ww = getWidth() - xx - liveTop().getBackgroundRightInset();
                             float bgFullWidth, scaledbgHeight;
                             int multiplier = liveMultiplier();
                             float bgHeight = getPlayerBgHeight(midField, yy);
@@ -1011,9 +1419,9 @@ public class MatchScreen extends FScreen {
             }
             final float midField = liveTop().getBottom();
             final float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-            float x = liveTop().getField().getLeft();
-            float y = midField - liveTop().getField().getHeight() - promptHeight;
-            float w = getWidth() - x;
+            float x = liveTop().getBackgroundLeft();
+            float y = midField - liveTop().getBackgroundHeight() - promptHeight;
+            float w = getWidth() - x - liveTop().getBackgroundRightInset();
             float bgFullWidth, scaledbgHeight;
             final int multiplier = liveMultiplier();
             float bgHeight = getPlayerBgHeight(midField, y);
@@ -1119,6 +1527,15 @@ public class MatchScreen extends FScreen {
                         }
                     }
                     losers.clear();
+                    //whoever now sits at the bottom takes the bottom layout (field rows and zones), everyone else stays mirrored
+                    for (int i = 0; i < playerPanelsList.size(); i++) {
+                        VPlayerPanel panel = playerPanelsList.get(i);
+                        boolean flip = i != playerPanelsList.size() - 1;
+                        if (panel.isFlipped() != flip) {
+                            panel.setFlipped(flip);
+                            panel.revalidate(true);
+                        }
+                    }
                     if (playerPanelsList.size() == 2) {
                         //reset avatar size
                         for (VPlayerPanel playerPanel : playerPanelsList) {
@@ -1260,6 +1677,10 @@ public class MatchScreen extends FScreen {
     }
 
     private void confirmUserConcedes() {
+        if (MatchController.instance.isReplay()) {
+            forge.gamemodes.net.client.ReplayPlayer.stopFor(MatchController.instance, true); // just leave a recording
+            return;
+        }
         final Consumer<Boolean> callback = result -> {
             if (result) {
                 getGameController().concede();
