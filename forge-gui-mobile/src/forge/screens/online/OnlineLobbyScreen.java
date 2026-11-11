@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
@@ -283,25 +282,14 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
                 Integer chosenPod = SGuiChoose.oneOrNone(
                         Forge.getLocalizer().getMessage("lblNetworkPodSizePrompt"), podSizes,
                         podSizes.contains(recommendedPod) ? recommendedPod : podSizes.get(0),
-                        n -> NetworkEvent.markSetDefault(
+                        n -> BoosterDraft.markSetDefault(
                                 NetworkEvent.podSizeLabel(n), n == recommendedPod));
                 if (chosenPod == null) return;
                 draft.setPodSize(chosenPod);
 
-                DraftOptions.DoublePick defaultPicks = NetworkEvent.defaultPicksFor(draft, chosenPod);
-                List<DraftOptions.DoublePick> pickRules = Arrays.asList(
-                        DraftOptions.DoublePick.NEVER,
-                        DraftOptions.DoublePick.FIRST_PICK,
-                        DraftOptions.DoublePick.ALWAYS);
-                DraftOptions.DoublePick chosenPicks = SGuiChoose.oneOrNone(
-                        Forge.getLocalizer().getMessage("lblNetworkPicksPrompt"), pickRules,
-                        defaultPicks,
-                        rule -> NetworkEvent.markSetDefault(
-                                NetworkEvent.picksLabel(rule), rule == defaultPicks));
-                if (chosenPicks == null) return;
-                draft.setDoublePick(chosenPicks);
+                if (!draft.choosePicks()) return;
 
-                String timersTitle = Forge.getLocalizer().getMessage("lblNetworkDraftSettingsTitle");
+                String timersTitle = Forge.getLocalizer().getMessage("lblDraftSettingsTitle");
                 String pickStr = SOptionPane.showInputDialog(
                         Forge.getLocalizer().getMessage("lblNetworkPickTimerPrompt"),
                         timersTitle, null, String.valueOf(timerSeconds), null, true);

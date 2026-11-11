@@ -54,6 +54,8 @@ public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
     public static final int N_PLAYERS = 8;
+    public static final List<DraftOptions.DoublePick> PICK_RULES = List.of(
+            DraftOptions.DoublePick.NEVER, DraftOptions.DoublePick.FIRST_PICK, DraftOptions.DoublePick.ALWAYS);
     public static final String FILE_EXT = ".draft";
 
     int podSize;
@@ -467,6 +469,41 @@ public class BoosterDraft implements IBoosterDraft {
     /** The pick rule as the set declared it, before resolving against a pod size. */
     public DraftOptions.DoublePick getDoublePick() {
         return this.doublePickDuringDraft;
+    }
+
+    /** The pick rule the chosen set specifies at this pod size, for marking and preselecting it. */
+    public DraftOptions.DoublePick getDefaultPicks(int podSize) {
+        return this.doublePickDuringDraft == null ? DraftOptions.DoublePick.NEVER : this.doublePickDuringDraft.resolve(podSize);
+    }
+
+    /** Asks for the pick rule with the set's own marked and preselected. Returns false if cancelled. */
+    public boolean choosePicks() {
+        final DraftOptions.DoublePick defaultPicks = getDefaultPicks(this.podSize);
+        final DraftOptions.DoublePick chosen = SGuiChoose.oneOrNone(
+                Localizer.getInstance().getMessage("lblDraftPicksPrompt"), PICK_RULES, defaultPicks,
+                rule -> markSetDefault(picksLabel(rule), rule == defaultPicks));
+        if (chosen == null) {
+            return false;
+        }
+        setDoublePick(chosen);
+        return true;
+    }
+
+    /** Display name for a resolved pick rule. */
+    public static String picksLabel(DraftOptions.DoublePick picks) {
+        final Localizer localizer = Localizer.getInstance();
+        return switch (picks == null ? DraftOptions.DoublePick.NEVER : picks) {
+            case FIRST_PICK -> localizer.getMessage("lblDraftPicksFirst");
+            case ALWAYS -> localizer.getMessage("lblDraftPicksAlways");
+            default -> localizer.getMessage("lblDraftPicksOne");
+        };
+    }
+
+    /** Mark the entry the chosen set specifies, so a player can see what it was designed for. */
+    public static String markSetDefault(String label, boolean isDefault) {
+        return isDefault
+                ? Localizer.getInstance().getMessage("lblDraftSetDefaultSuffix", label)
+                : label;
     }
 
     /**
