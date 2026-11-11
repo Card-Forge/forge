@@ -114,7 +114,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         // Detect commander draft: human deck has a Commander section with cards
-        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains("CommanderDraft");
+        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains(BoosterDraft.COMMANDER_DRAFT_TAG);
         final GameType effectiveGameType = isCommanderDraft ? GameType.CommanderDraft : gameType;
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {

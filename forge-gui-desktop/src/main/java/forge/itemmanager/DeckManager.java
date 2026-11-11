@@ -27,6 +27,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -405,7 +406,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                if (deck != null && (deck.getDeck().getTags().contains("CommanderDraft")
+                if (deck != null && (deck.getDeck().getTags().contains(BoosterDraft.COMMANDER_DRAFT_TAG)
                         || deck.getDeck().has(DeckSection.Commander))) {
                     editorCtrl = new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
                             screen, getCDetailPicture(), null);

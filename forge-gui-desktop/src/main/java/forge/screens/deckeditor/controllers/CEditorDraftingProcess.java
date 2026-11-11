@@ -18,14 +18,12 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.Singletons;
-import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
-import forge.gamemodes.limited.LimitedPlayer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -239,28 +237,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         } while(s == null || s.isEmpty());
 
         // Construct computer's decks and save draft
-        final Deck[] computer = this.boosterDraft.getComputerDecks();
-        final LimitedPlayer[] players = this.boosterDraft.getOpposingPlayers();
-
-        for(int i = 0; i < computer.length; i++) {
-            Deck deck = computer[i];
-            LimitedPlayer player = players[i];
-
-            deck.setDraftNotes(player.getSerializedDraftNotes());
-        }
-
-        // Assigned noted stuff to deck from LimitedPlayer
-        final DeckGroup finishedDraft = new DeckGroup(s);
-        final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
-
-        Deck humanDeck = (Deck) player.getDeck().copyTo(s);
-
-        humanDeck.setDraftNotes(player.getSerializedDraftNotes());
-        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
-            humanDeck.getTags().add("CommanderDraft");
-        }
-        finishedDraft.setHumanDeck(humanDeck);
-        finishedDraft.addAiDecks(computer);
+        final DeckGroup finishedDraft = ((BoosterDraft) boosterDraft).toDeckGroup(s);
 
         FModel.getDecks().getDraft().add(finishedDraft);
 
