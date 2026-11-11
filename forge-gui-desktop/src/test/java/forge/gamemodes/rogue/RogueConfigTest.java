@@ -11,6 +11,7 @@ import forge.card.CardMockTestCase;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.ImageUtil;
 import forge.util.ItemPool;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class RogueConfigTest extends CardMockTestCase {
     }
 
     @Test
-    public void bundledCardsRoundTripWithoutEnteringSharedCardPools() {
+    public void bundledCardsRoundTripAndResolveForDisplayOutsideTheCommonPool() {
         String name = "Gonti Curio - Tarnished Relic";
         PaperCard curio = RogueConfig.getRogueCard(name);
         assertNotNull(curio);
@@ -53,7 +54,7 @@ public class RogueConfigTest extends CardMockTestCase {
         assertTrue(loaded.toFlatList().get(0).isFoil());
 
         assertNull(testData.getCommonCards().getCard(name));
-        assertNull(testData.getVariantCards().getCard(name));
+        assertSame(ImageUtil.getPaperCardFromImageKey(curio.getImageKey(false)), curio);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package forge.gamemodes.rogue.effect;
 
 import com.google.common.collect.ImmutableList;
+import forge.StaticData;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -82,7 +84,16 @@ public enum EndlessMode implements RogueEffect {
         int level = run.getEndlessLevel();
         int handBonus = Math.min(getHandBonus(level), opponent.getDeck().getMain().countAll() * 30 / 100);
         opponent.setStartingHand(opponent.getStartingHand() + handBonus);
-        RogueEffect.addCardToCommandZone(createMatchCard(level), human);
+
+        PaperCard card = createMatchCard(level);
+        CardDb variants = StaticData.instance().getVariantCards();
+        PaperCard registeredCard = variants.getCard(card.getName(), CardEdition.UNKNOWN_CODE);
+        if (registeredCard == null) {
+            variants.addCard(card);
+        } else {
+            card = registeredCard;
+        }
+        RogueEffect.addCardToCommandZone(card, human);
     }
 
     @Override

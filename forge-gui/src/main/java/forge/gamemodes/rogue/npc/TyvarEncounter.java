@@ -69,7 +69,7 @@ public enum TyvarEncounter implements NPCEncounter {
     };
 
     private static final String HELP_STRANGER_CHOICE_ID = "tyvar_help_stranger";
-    private static final int STRANGER_AVATAR_INDEX = 125;
+    private static final int STRANGER_AVATAR_INDEX = 9;
 
     private final int requiredLevel;
 

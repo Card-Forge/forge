@@ -85,6 +85,8 @@ public class RogueConfig {
                 CardRules rules = rulesReader.readCard(lines, baseName);
                 rules.setCustom();
                 PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN_CODE, CardRarity.Special);
+                // Forge's image lookup searches variant cards without adding them to the normal deck catalog.
+                db.getVariantCards().addCard(card);
                 cards.put(card.getName(), card);
             } catch (Exception e) {
                 Logger.error(e, "Error loading Rogue card {}", cardFile.getName());

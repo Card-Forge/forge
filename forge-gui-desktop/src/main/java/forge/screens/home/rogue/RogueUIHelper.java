@@ -29,10 +29,11 @@ import net.miginfocom.swing.MigLayout;
 public final class RogueUIHelper {
 
   static int getAvailableAvatarIndex(final int avatarIndex) {
-    if (FSkin.getAvatars().containsKey(avatarIndex)) {
+    // The default sheet's question mark is the first tile without a portrait.
+    if (avatarIndex < 125 && FSkin.getAvatars().containsKey(avatarIndex)) {
       return avatarIndex;
     }
-    return FSkin.getAvatars().containsKey(125) ? 125 : 0;
+    return 0;
   }
 
 

@@ -573,8 +573,13 @@ public enum CSubmenuRogueStart implements ICDoc {
       AvatarSelector avatarSelector = new AvatarSelector(chosenCommander.getName(),
           RogueUIHelper.getAvailableAvatarIndex(runDeck.getAvatarIndex()), List.of());
       for (FLabel avatar : avatarSelector.getSelectables()) {
+        int avatarIndex = Integer.parseInt(avatar.getName().substring(11));
+        if (RogueUIHelper.getAvailableAvatarIndex(avatarIndex) != avatarIndex) {
+          avatar.setVisible(false);
+          continue;
+        }
         avatar.setCommand((UiCommand) () -> {
-          generatedDeck.setAvatarIndex(Integer.parseInt(avatar.getName().substring(11)));
+          generatedDeck.setAvatarIndex(avatarIndex);
           avatarSelector.setVisible(false);
         });
       }

@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import com.google.common.collect.Iterables;
@@ -26,6 +27,7 @@ import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePath;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.ImageUtil;
 import java.util.List;
 import java.util.Map;
 import org.testng.annotations.Test;
@@ -97,6 +99,7 @@ public class EndlessModeTest extends SimulationTest {
         assertEquals(matchCard.getName(), "Endless Mode - Level 5");
         assertTrue(matchCard.getRules().isCustom());
         assertNull(FModel.getMagicDb().getCommonCards().getCard(matchCard.getName()));
+        assertSame(ImageUtil.getPaperCardFromImageKey(matchCard.getImageKey(false)), matchCard);
 
         BazaarContext bazaar = new BazaarContext();
         bazaar.priceAdjustment = 2;

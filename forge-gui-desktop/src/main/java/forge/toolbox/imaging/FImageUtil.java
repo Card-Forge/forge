@@ -92,6 +92,7 @@ public final class FImageUtil {
         String imageKey = key;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard card = ImageUtil.getPaperCardFromImageKey(key);
+            // An unresolved card key falls back to the standard image in CardZoomer.
             if (card == null) {
                 return null;
             }

@@ -21,6 +21,7 @@ import forge.util.Localizer;
 
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import forge.card.MagicColor;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -40,6 +41,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
@@ -151,11 +153,14 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
      * Add basic lands to the deck (unrestricted).
      */
     private static void addBasicLands(CEditorRogue editor) {
+        if (!editor.isCurrentRun()) {
+            return;
+        }
 
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(editor.getHumanDeck(), null);
         CardPool landsToAdd = dialog.show();
 
-        if (landsToAdd != null && !landsToAdd.isEmpty()) {
+        if (landsToAdd != null && !landsToAdd.isEmpty() && editor.isCurrentRun()) {
             for (Entry<PaperCard, Integer> entry : landsToAdd) {
                 editor.getHumanDeck().getMain().add(entry.getKey(), entry.getValue());
             }
@@ -171,7 +176,7 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
 
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate || sectionMode != DeckSection.Main) { return; }
+        if (toAlternate || sectionMode != DeckSection.Main || !isCurrentRun()) { return; }
 
         // Only allow adding if all items are basic lands
         for (Entry<PaperCard, Integer> entry : items) {
@@ -204,7 +209,7 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
 
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate || sectionMode != DeckSection.Main) { return; }
+        if (toAlternate || sectionMode != DeckSection.Main || !isCurrentRun()) { return; }
 
         // Count how many non-basic lands are being removed
         int nonBasicLandsToRemove = 0;
@@ -355,8 +360,7 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
     @Override
     public boolean canSwitchAway(boolean isClosing) {
         // Save the RogueRun to persist deck changes
-        if (rogueRun == CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun()
-                && rogueRun.getHostedMatch() == null) {
+        if (isCurrentRun() && rogueRun.getHostedMatch() == null) {
             RogueIO.saveRun(rogueRun);
             RogueCommanderAchievements.instance.evaluateRunAchievements(rogueRun);
             // Reload to ensure we're working with the saved version
@@ -393,26 +397,44 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
 
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+            allDecksParent = null;
         }
         if (commanderDecksParent != null) {
             commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
+            commanderDecksParent = null;
         }
         if (oathbreakerDecksParent != null) {
             oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
+            oathbreakerDecksParent = null;
         }
         if (brawlDecksParent != null) {
             brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
+            brawlDecksParent = null;
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
+            tinyLeadersDecksParent = null;
         }
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+            deckGenParent = null;
         }
     }
 
     @Override
     public void update() {
+        if (!isCurrentRun()) {
+            // Let the tab finish opening before switching back to Rogue Commander.
+            SwingUtilities.invokeLater(() -> {
+                if (Singletons.getControl().getCurrentScreen() == getScreen()
+                        && CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController() == this
+                        && !isCurrentRun()) {
+                    navigateBackToPath();
+                }
+            });
+            return;
+        }
+
         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
         this.getDeckManager().setup(ItemManagerConfig.DECK_EDITOR);
 
@@ -595,12 +617,15 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
         }
     }
 
-    /**
-     * Navigate back to the Rogue Commander path view.
-     */
+    private boolean isCurrentRun() {
+        return rogueRun == CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun();
+    }
+
     private void navigateBackToPath() {
-        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
-        CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_ROGUEMAP);
+        if (Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN)) {
+            CHomeUI.SINGLETON_INSTANCE.itemClick(CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun() == null
+                ? EDocID.HOME_ROGUESTART : EDocID.HOME_ROGUEMAP);
+        }
     }
 
     /**
@@ -609,7 +634,7 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
      * - If last action was ADD: removes the cards that were added
      */
     private void undoLastRemoval() {
-        if (undoStack.isEmpty()) {
+        if (undoStack.isEmpty() || !isCurrentRun()) {
             return;
         }
 

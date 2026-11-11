@@ -199,7 +199,7 @@ public final class RogueCustomDeckGenerator {
         rogueDeck.setDescription(randomlyChosen ? "A random Commander and starting deck."
             : "A chosen Commander and generated starting deck.");
         rogueDeck.setThemeDescription("Generated from Commander synergy and color identity.");
-        rogueDeck.setAvatarIndex(125);
+        rogueDeck.setAvatarIndex(0);
         rogueDeck.setSleeveIndex(1);
         rogueDeck.setLandEdition("");
         rogueDeck.setIncludeColorlessBasics(commander.getRules().getColorIdentity().isColorless());
