@@ -456,7 +456,7 @@ public class CountersPutAi extends CountersAi {
                 // don't put the counter on the dead creature
                 if (sacSelf && c.equals(source)) {
                     return false;
-                } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
+                } else if (hasSacCost && !sacSelf && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058)
                     return false;
                 }
                 if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -639,7 +639,9 @@ public class CountersPutAi extends CountersAi {
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);
 
-        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, immediately)) {
+        // a solved Case has nothing else to do: it is cashed in as soon as there is something to animate (Case of the Filched Falcon, #12058)
+        final boolean cashInCase = sacSelf && source.getType().hasSubtype("Case");
+        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, immediately || cashInCase)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 

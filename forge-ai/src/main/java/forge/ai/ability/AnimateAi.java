@@ -444,7 +444,7 @@ public class AnimateAi extends SpellAbilityAi {
                 // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
                     SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
-                    if (sub == null || !"Targeted".equals(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
+                    if (sub == null || !isAnimatedTargetDefined(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
                             || !animatedCopy.canReceiveCounters(CounterEnumType.P1P1)) {
                         continue;
                     }
@@ -725,5 +725,10 @@ public class AnimateAi extends SpellAbilityAi {
             return !SpecialAiLogic.preferHasteForRiot(sa, payer);
         }
         return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
+    }
+
+    /** The counters go on the animated card itself: the target, or the remembered animated card (Rise and Shine, whose overload needs it, #12058). */
+    private static boolean isAnimatedTargetDefined(final String defined) {
+        return "Targeted".equals(defined) || "Remembered".equals(defined);
     }
 }

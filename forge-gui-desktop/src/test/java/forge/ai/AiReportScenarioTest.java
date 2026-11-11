@@ -149,7 +149,7 @@ public class AiReportScenarioTest extends AITest {
                         try {
                             sa.setActivatingPlayer(ai);
                             sb.append(" [").append(z).append(' ').append(sa.getApi()).append(" -> ").append(controller().canPlaySa(sa))
-                                    .append(" payable=").append(ComputerUtilCost.canPayCost(sa, ai, false)).append(" failedBefore=").append(controller().hasFailedToCast(sa)).append(']');
+                                    .append(" real=").append(SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa)).append(" payable=").append(ComputerUtilCost.canPayCost(sa, ai, false)).append(" failedBefore=").append(controller().hasFailedToCast(sa)).append(']');
                         } catch (final RuntimeException e) { sb.append(" [").append(sa.getApi()).append(" threw ").append(e).append(']'); }
                     }
                 }
@@ -275,7 +275,15 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.richMana(); c.hand("Invert Polarity", c.ai); c.stack(c.opp, "Serra Angel"); /* the report: a spell worth 3+ mana (a Bolt is not) */ }));
         l.add(play("7626", "Titan's Presence with a colorless creature to reveal", Fid.APPROX, M1, true, "Titan's Presence",
                 c -> { c.bf("Forest", 3, c.ai); c.hand("Titan's Presence", c.ai); c.hand("Wurmcoil Engine", c.ai); c.bf("Grizzly Bears", c.opp); }));
-        l.add(skip("4113", "cascaded/free Glimpse of Tomorrow is resolved (not just exiled)", "needs a real cascade; playNoStack does not model it"));
+        l.add(new Scenario("4113", "cascaded/free Glimpse of Tomorrow is resolved (not just exiled) with only lands in play", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.bf("Forest", 2, c.ai); c.lib("Grizzly Bears", c.ai); c.lib("Serra Angel", c.ai); c.lib("Wurmcoil Engine", c.ai); },
+                c -> { // the cascade offers the exiled card for free: the AI's answer to "cast it without paying its mana cost?"
+                    final Card g = addCardToZone("Glimpse of Tomorrow", c.ai, ZoneType.Exile);
+                    final SpellAbility sa = g.getFirstSpellAbility().copyWithNoManaCost();
+                    sa.setActivatingPlayer(c.ai);
+                    final AiPlayDecision d = c.controller().canPlaySa(sa);
+                    return d == AiPlayDecision.WillPlay ? null : "AI would not cast the cascaded Glimpse of Tomorrow: " + d;
+                }));
         l.add(play("4210", "Violent Outburst with no creature to attack", Fid.APPROX, M1, true, "Violent Outburst",
                 c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); /* {1}{R}{G} */ c.hand("Violent Outburst", c.ai); c.lib("Lightning Bolt", c.ai); c.lib("Mountain", c.ai); }));
         // the report: a Living End deck casts it for the cascade, once the graveyard is ready (ComboPlan decides, see massReanimationRuling)
@@ -472,7 +480,7 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); c.hand("Rift Bolt", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Leyline of Sanctity", c.opp); }));
         l.add(aimed("4225", "kill priority: Elvish Piper over Birds of Paradise", Fid.APPROX, M1, true, "Terminate", "Elvish Piper",
                 c -> { c.bf("Swamp", c.ai); c.bf("Mountain", c.ai); c.hand("Terminate", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Elvish Piper", c.opp); }));
-        l.add(new Scenario("4282", "tutor pile early in the game must not be all expensive cards", Fid.APPROX, M1, true,
+        l.add(new Scenario("4282", "tutor pile early in the game must not be all expensive cards", Fid.APPROX, "END_OF_TURN", false,
                 c -> { c.bf("Island", 4, c.ai); c.hand("Gifts Ungiven", c.ai); c.lib("Wurmcoil Engine", c.ai); c.lib("Inferno Titan", c.ai); c.lib("Griselbrand", c.ai); c.lib("Craterhoof Behemoth", c.ai); /* (Emrakul shuffles the graveyard back into the library, the Island with it) */ c.lib("Island", c.ai); },
                 c -> {
                     final SpellAbility sa = c.playOf("Gifts Ungiven");
@@ -564,8 +572,25 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(noPlay("7335", "sacrifice-at-end-of-turn haste creature into a player with protection from creatures", Fid.APPROX, M1, true, "Ball Lightning",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Ball Lightning", c.ai); c.effect(c.opp, "Teferi's Protection"); }));
-        l.add(skip("10922", "The Kingpin of Crime life payment on its trigger", "needs the card script: which trigger asks for the 2 life (paste the Forge script and I will add the setup)"));
-        l.add(skip("12058", "\"Target artifact you control becomes a 0/0 artifact creature. Put X +1/+1 counters on it\"", "the report gives no card name: tell me which card and I will add it"));
+        l.add(new Scenario("10922", "The Kingpin of Crime: pays 2 life for its attack trigger with two toughness-over-power creatures", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("The Kingpin of Crime", c.ai); c.bf("Pegasus Courser", 2, c.ai); },
+                c -> {
+                    final Combat combat = new Combat(c.ai);
+                    c.ai.getController().declareAttackers(c.ai, combat);
+                    c.game.getPhaseHandler().setCombat(combat);
+                    if (combat.getAttackers().isEmpty()) { return "AI did not attack"; }
+                    final java.util.Map<forge.game.ability.AbilityKey, Object> p = forge.game.ability.AbilityKey.newMap();
+                    p.put(forge.game.ability.AbilityKey.Attackers, combat.getAttackers());
+                    p.put(forge.game.ability.AbilityKey.AttackingPlayer, c.ai);
+                    p.put(forge.game.ability.AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
+                    c.game.getTriggerHandler().runTrigger(forge.game.trigger.TriggerType.AttackersDeclared, p, false);
+                    c.resolveAll();
+                    return c.ai.getLife() < 20 ? null : "life stayed at " + c.ai.getLife() + " with " + combat.getAttackers().size() + " attackers";
+                }));
+        l.add(play("12058", "Rise and Shine for its normal cost with a Darksteel Relic", Fid.APPROX, M1, true, "Rise and Shine",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Darksteel Relic", c.ai); c.hand("Rise and Shine", c.ai); }));
+        l.add(play("12058", "solved Case of the Filched Falcon with noncreature artifacts to animate", Fid.APPROX, M1, true, "Case of the Filched Falcon",
+                c -> { c.bf("Island", 3, c.ai); c.bf("Darksteel Relic", 2, c.ai); c.bf("Case of the Filched Falcon", c.ai).setSolved(true); }));
         l.add(noPlay("12765", "a second Aether Vial next to one already in play", Fid.APPROX, M1, true, "Aether Vial",
                 c -> { c.bf("Mountain", c.ai); final Card v = c.bf("Aether Vial", c.ai); c.counters(v, CounterEnumType.CHARGE, 1); c.hand("Aether Vial", c.ai); }));
         l.add(noPlay("12766", "Aura on its creature while the opponent's Spellskite can redirect it", Fid.APPROX, M1, true, "Rancor",
