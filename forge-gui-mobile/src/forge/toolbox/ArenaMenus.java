@@ -215,8 +215,8 @@ public final class ArenaMenus {
     public static final float ROW_CONTROL_SHARE = 0.62f;
 
     /**
-     * One-click deck building: the control at the end of every deck row, a round gold-rimmed button holding what a click
-     * on the row does ("-1"), so taking a card out is as plain to see as adding one.
+     * One-click deck building: the control at the end of every deck row, a round gold-rimmed button showing what a click
+     * on the row does (a minus for "-1": take one out), so taking a card out is as plain to see as adding one.
      */
     public static void rowControl(final Graphics g, final String words, final float x, final float y, final float size) {
         if (words == null) {
@@ -225,8 +225,16 @@ public final class ArenaMenus {
         final float r = size / 2f;
         g.fillSmoothRoundRect(WELL, x, y, size, size, r);
         g.drawSmoothRoundRect(lineThickness(), ArenaTheme.GOLD, x, y, size, size, r);
-        g.drawText(words, ArenaDialogKit.font(size * BADGE_FONT_SHARE * 0.8f), ArenaTheme.GOLD_BRIGHT, x, y, size, size, false, Align.center, true);
+        if (words.startsWith("-")) { //taking one out: a bold minus, legible at any size
+            final float bar = size * ROW_MINUS_LENGTH, t = Math.max(2f, size * ROW_MINUS_THICKNESS);
+            g.fillRect(ArenaTheme.GOLD_BRIGHT, x + (size - bar) / 2f, y + (size - t) / 2f, bar, t);
+        } else {
+            g.drawText(words, ArenaDialogKit.font(size * BADGE_FONT_SHARE * 0.8f), ArenaTheme.GOLD_BRIGHT, x, y, size, size, false, Align.center, true);
+        }
     }
+
+    /** The minus in a row control: its length and thickness as shares of the control. */
+    private static final float ROW_MINUS_LENGTH = 0.5f, ROW_MINUS_THICKNESS = 0.12f;
 
     /**
      * Marks a button as a chooser (the lobby's deck choice): a gold chevron at its right end and {@code hint} at its left
