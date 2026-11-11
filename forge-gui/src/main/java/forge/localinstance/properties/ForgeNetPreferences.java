@@ -27,6 +27,8 @@ public class ForgeNetPreferences extends AbstractPreferences<ForgeNetPreferences
     public enum FNetPref implements AbstractPreferences.IPref {
         NET_PORT("36743"),
         UPnP("ASK"),
+        /** What a browser on another machine must give to take the web host's seat. Empty lets anyone with the link take it. */
+        WEB_HOST_PASSWORD(""),
         NET_BANDWIDTH_LOGGING("false"),
         NET_LOG_CLEANUP_ENABLED("true"),
         NET_AFK_TIMEOUT("5"),
