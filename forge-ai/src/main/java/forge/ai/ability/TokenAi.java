@@ -45,6 +45,9 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card source = sa.getHostCard();
+        if ("DiscardFattyForReanimation".equals(sa.getParam("AILogic"))) {
+            return true; // the logic decides by the cards in hand, at any time of the turn
+        }
         // Planeswalker-related flags
         boolean pwMinus = false;
         boolean pwPlus = false;
@@ -135,6 +138,10 @@ public class TokenAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
+        if ("DiscardFattyForReanimation".equals(sa.getParam("AILogic"))) {
+            return discardFattyForReanimation(ai, sa);
+        }
+
         Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens
@@ -208,6 +215,32 @@ public class TokenAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * The Underworld Cookbook: a card is discarded for a Food only when that is the card's best use, a creature too
+     * expensive to ever cast (the card script's DiscardCost preference) while a reanimation spell in hand will bring
+     * it back from the graveyard.
+     */
+    private static AiAbilityDecision discardFattyForReanimation(final Player ai, final SpellAbility sa) {
+        final CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
+        final Card fatty = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DiscardCost", hand);
+        if (fatty == null || fatty.getCMC() <= ai.getLandsInPlay().size() + 1) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+        for (final Card c : hand) {
+            if (c == fatty) {
+                continue;
+            }
+            for (final SpellAbility spell : c.getSpellAbilities()) {
+                if (spell.getApi() == ApiType.ChangeZone && spell.hasParam("Origin") && spell.hasParam("Destination")
+                        && ZoneType.listValueOf(spell.getParam("Origin")).contains(ZoneType.Graveyard)
+                        && "Battlefield".equals(spell.getParam("Destination"))) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 

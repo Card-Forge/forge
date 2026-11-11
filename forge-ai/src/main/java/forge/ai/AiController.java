@@ -2795,6 +2795,10 @@ public class AiController {
             return false; // Persist with nothing but 1/1s to return: the rollouts like the trigger, the card is still wasted
         }
 
+        if (!forge.ai.ability.UntapAi.worthUntapping(player, sa)) {
+            return false; // Sleep-Cursed Faerie untapped itself in response to any spell: the rollouts cannot see the wasted mana
+        }
+
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
         }

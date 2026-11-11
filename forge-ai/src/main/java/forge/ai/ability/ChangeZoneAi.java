@@ -412,8 +412,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't use fetching to top of library/graveyard before main2
+        // (a tutor that only reveals the cards and hands them on with a follow-up, Gifts Ungiven, is a tutor to hand)
+        final boolean revealsForPile = sa.hasParam("RememberChanged") && sa.getSubAbility() != null;
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases") && !revealsForPile) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
@@ -459,6 +461,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 sa.getTargets().add(opp);
             } else if (!isCurse && sa.canTarget(aiPlayer)) {
                 sa.getTargets().add(aiPlayer);
+            } else if ("Targeted".equals(sa.getParam("Chooser")) && sa.canTarget(opp)) {
+                sa.getTargets().add(opp); // the targeted opponent only chooses (Gifts Ungiven's piles): the cards are still the AI's
             } else {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }

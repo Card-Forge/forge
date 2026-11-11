@@ -219,7 +219,7 @@ public class AiReportScenarioTest extends AITest {
     private static Scenario noPlay(final String id, final String t, final Fid f, final String ph, final boolean aiTurn,
                                    final String card, final Setup s) {
         return new Scenario(id, t + " (should NOT play " + card + ")", f, ph, aiTurn, s,
-                c -> c.plays(card) ? "AI played/activated " + card : null);
+                c -> c.plays(card) ? "AI played/activated " + card + ": " + c.plays() : null);
     }
 
     /** The card is played and aimed at the wanted target. */
@@ -255,7 +255,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, "MAIN2", true, "Pithing Needle",
                 c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.counters(c.bf("Wrenn and Six", c.opp), CounterEnumType.LOYALTY, 3); /* (bf() adds no loyalty and the walker would die) a planeswalker is what the AI Needles for sure; a plain activated ability is only a 5% roll, and a mana ability (Sol Ring) is exempt */ }));
         l.add(play("4279", "Solitary Confinement", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
-                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Grizzly Bears", c.ai); /* discard fodder for its upkeep: uncastable with Plains only, and not a land drop */ c.bf("Grizzly Bears", c.opp); }));
+                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Wurmcoil Engine", c.ai); /* discard fodder for its upkeep: uncastable with Plains only, and not a land drop */ c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, "MAIN2", true, "Forge Anew",
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.gy("Bonesplitter", c.ai); /* its enter trigger needs an Equipment in the graveyard */ c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
@@ -353,8 +353,9 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("5935", "channel ability that does not deal damage (Boseiju at an artifact)", Fid.APPROX, M1, true,
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Boseiju, Who Endures", c.ai); c.bf("Sol Ring", c.opp); },
                 c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Boseiju, Who Endures") && sa.isAbility()) ? null : "channel not used"));
-        l.add(activates("6108", "The Underworld Cookbook: discard the fatty for the reanimation spell", "The Underworld Cookbook",
-                c -> { c.hand("Goryo's Vengeance", c.ai); c.hand("Emrakul, the Aeons Torn", c.ai); }));
+        l.add(new Scenario("6108", "The Underworld Cookbook: discard the fatty for the reanimation spell (should activate The Underworld Cookbook)", Fid.APPROX, "MAIN2", true,
+                c -> { c.bf("Swamp", 3, c.ai); /* too little mana to cast Emrakul: it can only be discarded */ c.bf("The Underworld Cookbook", c.ai); c.hand("Goryo's Vengeance", c.ai); c.hand("Emrakul, the Aeons Torn", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> c.plays("The Underworld Cookbook") ? null : "AI never activated The Underworld Cookbook" + c.why("The Underworld Cookbook")));
         l.add(play("6719", "Catapult Captain can kill the opponent by sacrificing a 0/6", Fid.EXACT, M1, true, "Catapult Captain",
                 c -> { c.bf("Swamp", 3, c.ai); c.bf("Catapult Fodder", c.ai).changeCardState("Transform", null, null); /* the Captain is its back face */ c.bf("Giant Ox", c.ai); c.opp.setLife(6, null); }));
         l.add(play("4022", "Stoneforge Mystic with an equipment in hand (activate, don't attack)", Fid.EXACT, M1, true, "Stoneforge Mystic",
@@ -522,7 +523,7 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", c.ai); c.hand("Snuff Out", c.ai); c.bf("Roiling Vortex", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(new Scenario("5890", "As Foretold: casts Rift Bolt for free instead of only suspending it", Fid.APPROX, M1, true,
                 c -> { c.bf("Mountain", c.ai); final Card a = c.bf("As Foretold", c.ai); c.counters(a, CounterEnumType.TIME, 3); c.hand("Rift Bolt", c.ai); c.bf("Grizzly Bears", c.opp); },
-                c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Rift Bolt") && !sa.getDescription().contains("Suspend")) ? null : "only suspended it"));
+                c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Rift Bolt") && !sa.getDescription().contains("Suspend")) ? null : "only suspended it: plays=" + c.plays() + c.why("Rift Bolt")));
         l.add(new Scenario("5901", "Guide of Souls: pays the energy for its second ability when attacking", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Guide of Souls", c.ai); c.bf("Grizzly Bears", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 6); },
                 c -> {
@@ -545,7 +546,9 @@ public class AiReportScenarioTest extends AITest {
                     final SpellAbility sa = c.playOf("Calibrated Blast");
                     if (sa == null) { return "AI did not play Calibrated Blast" + c.why("Calibrated Blast"); } // the ability has no target of its own: it is the revealed card's trigger that aims
                     c.resolve(sa);
-                    return c.opp.getCardsIn(ZoneType.Battlefield).stream().anyMatch(k -> k.getName().equals("Shalai, Voice of Plenty")) ? "Shalai is still in play" : null;
+                    // the revealed card's mana value is the damage: judge the aim (the trigger's target), not the library the harness filled
+                    final boolean gone = c.opp.getCardsIn(ZoneType.Battlefield).stream().noneMatch(k -> k.getName().equals("Shalai, Voice of Plenty"));
+                    return gone || c.trace.toString().contains("-> [Shalai") ? null : "damage not aimed at Shalai |" + c.trace;
                 }));
         l.add(new Scenario("6031", "plays a different Urza's land than the one already in play", Fid.EXACT, M1, true,
                 c -> { c.bf("Urza's Tower", c.ai); c.hand("Urza's Tower", c.ai); c.hand("Urza's Mine", c.ai); },

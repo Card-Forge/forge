@@ -96,6 +96,15 @@ public class UntapAi extends SpellAbilityAi {
      * the attackers are declared, or to block with it once the opponent has attacked. Not in response to just any spell,
      * and not while a stun counter would take the untap (#6391).
      */
+    /** For discovery: false for an untap of the creature itself that is not wanted at this moment (see below). */
+    public static boolean worthUntapping(final Player ai, final SpellAbility sa) {
+        if (sa.getApi() != forge.game.ability.ApiType.Untap || sa.usesTargeting()) {
+            return true;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return defined.isEmpty() || worthUntappingItself(ai, sa, defined.get(0));
+    }
+
     private static boolean worthUntappingItself(final Player ai, final SpellAbility sa, final Card untapped) {
         if (!sa.isActivatedAbility() || !untapped.equals(sa.getHostCard()) || !untapped.isCreature()
                 || sa.getPayCosts().hasTapCost() || !sa.getPayCosts().hasManaCost()) {
