@@ -25,6 +25,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -163,6 +164,19 @@ public class TwoHeadedGiantTest extends AITest {
         assertTrue(a1.hasLost(), "the teammate stayed in the game");
         assertTrue(game.isGameOver());
         assertTrue(b1.getOutcome().hasWon());
+    }
+
+    /** Fails if the teammate's outcome loses the name of the card that made the team lose (CR 810.8a). */
+    @Test
+    public void aTeammateLosesToTheSameCard() {
+        Game game = twoHeadedGiant();
+        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1);
+
+        a2.loseConditionMet(GameLossReason.SpellEffect, "One with Death");
+        game.getAction().checkGameOverCondition();
+
+        assertTrue(game.isGameOver());
+        assertTrue(a1.getOutcome().toString().contains("One with Death"), "the teammate's outcome dropped the card name");
     }
 
     /** Fails if a Commander team does not start at 60 life, as the Two-Headed Giant format page sets. */
