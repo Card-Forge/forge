@@ -322,7 +322,7 @@ public class DamageDealAi extends DamageAiBase {
      * @return a {@link forge.game.card.Card} object.
      */
     private Card dealDamageChooseTgtC(final Player ai, final SpellAbility sa, final int d, final boolean noPrevention,
-            final Player pl, final boolean mandatory) {
+            final Player pl, final boolean mandatory, final boolean isDividedForCreature) {
         // wait until stack is empty (prevents duplicate kills)
         if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
             //TODO: The original code is a blunt instrument that also blocks all use of removal as interrupts.
@@ -356,6 +356,14 @@ public class DamageDealAi extends DamageAiBase {
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
             return ComputerUtilCard.getBestRemovalTargetAI(ai, killables);
+        }
+
+        /*
+        If damage from a spell or ability must be divided among creatures then if only one target remains it receives the damage
+         even if that damage isn't enough to destroy it
+         */
+        if (isDividedForCreature && hPlay.size() == 1 && d > 0) {
+            return hPlay.get(0);
         }
 
         if (!mandatory) {
@@ -618,7 +626,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
-                Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
+                Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (sa.isSpell() && !divided && !immediately && sa.getMaxTargets() == 1) {
@@ -646,7 +654,7 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack or from taking combat damage
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
-                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
+                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory, divided);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (!immediately && sa.getMaxTargets() == 1 && !divided) {
@@ -657,13 +665,10 @@ public class DamageDealAi extends DamageAiBase {
                     tcs.add(c);
                     if (divided) {
                         // if only other legal targets hurt own stuff just dump all dmg into this
-                        final Card nextTarget = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
-                        boolean dump = false;
-                        if (nextTarget != null && nextTarget.getController().equals(ai)) {
-                            dump = true;
-                        }
+                        final Card nextTarget = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory, true);
+                        boolean dump = nextTarget == null || nextTarget.getController().equals(ai);
                         final int assignedDamage = dump ? dmg : ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                        sa.addDividedAllocation(c, Math.min(assignedDamage, dmg));
+                        sa.addDividedAllocation(c, assignedDamage);
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
@@ -837,7 +842,7 @@ public class DamageDealAi extends DamageAiBase {
 
             // TODO: This currently also catches planeswalkers that can be killed (still necessary? Or can be removed?)
             if (tgt.canTgtCreature()) {
-                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, true);
+                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, true, divided);
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
