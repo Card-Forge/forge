@@ -11,7 +11,7 @@ import forge.assets.FSkinFont;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
-import forge.screens.match.arena.ArenaMenus;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent.FEventHandler;
@@ -315,14 +315,14 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             return FSkinColor.get(Colors.CLR_ACTIVE);
         }
         private static FSkinColor getTabForeColor() {
-            if (ArenaMenus.on())
-                return ARENA_TAB_TEXT;
             if (Forge.isMobileAdventureMode)
                 return FSkinColor.get(Colors.ADV_CLR_TEXT);
             return FSkinColor.get(Colors.CLR_TEXT);
         }
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
-        private static final FSkinColor ARENA_TAB_TEXT = FSkinColor.getStandardColor(forge.screens.match.arena.ArenaTheme.TEXT);
+        //Arena look: the selected tab's words in bright gold, the others soft but legible
+        private static final FSkinColor ARENA_TAB_TEXT = FSkinColor.getStandardColor(ArenaMenus.entryText(false, false));
+        private static final FSkinColor ARENA_TAB_SELECTED = FSkinColor.getStandardColor(ArenaMenus.entryText(true, false));
 
         protected T parentScreen;
         protected String caption;
@@ -426,9 +426,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 float h = getHeight();
                 float padding = h * 0.1f;
                 final boolean selectedTab = parentScreen.getSelectedPage() == TabPage.this;
-                if (ArenaMenus.on()) { //Arena look: gold wash and bar on the selected tab, a faint wash under the pointer
-                    if (selectedTab || isHovered()) {
-                        ArenaMenus.activeRow(g, 0, 0, w, h, true, !selectedTab);
+                final boolean arena = ArenaMenus.on();
+                final FSkinColor fore = !arena ? getTabForeColor() : selectedTab ? ARENA_TAB_SELECTED : ARENA_TAB_TEXT;
+                if (arena) { //Arena look: gold wash and bar on the selected tab, a faint wash under the pointer
+                    if (selectedTab) {
+                        ArenaMenus.activeRow(g, 0, 0, w, h);
+                    } else if (isHovered()) {
+                        ArenaMenus.hoverRow(g, 0, 0, w, h);
                     }
                 }
                 else if (selectedTab) {
@@ -440,7 +444,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 if (parentScreen.showCompactTabs() && !isLandscapeMode) {
                     h -= 2 * padding;
                     if (icon == null) {
-                        g.drawText(caption, TAB_FONT, getTabForeColor(), padding, padding, w, h, false, Align.center, true);
+                        g.drawText(caption, TAB_FONT, fore, padding, padding, w, h, false, Align.center, true);
                     }
                     else {
                         //center combination of icon and text
@@ -463,17 +467,17 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                             font = font.shrink();
                         }
 
-                        g.drawImage(icon, x, y, iconWidth, h);
+                        ArenaMenus.icon(g, icon, x, y, iconWidth, h); //gold-lit in the Arena look
 
                         x += iconOffset;
                         w -= iconOffset;
                         g.startClip(x, y, w, h);
-                        g.drawText(caption, font, getTabForeColor(), x, y, w, h, false, Align.left, true);
+                        g.drawText(caption, font, fore, x, y, w, h, false, Align.left, true);
                         g.endClip();
                     }
                 } else {
                     float y = h - padding - TAB_FONT.getCapHeight();
-                    g.drawText(caption, TAB_FONT, getTabForeColor(), padding, y - padding, w, h - y + padding, false, Align.center, true);
+                    g.drawText(caption, TAB_FONT, fore, padding, y - padding, w, h - y + padding, false, Align.center, true);
 
                     if (icon != null) {
                         float iconHeight = y - 2 * padding;
@@ -483,12 +487,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                             iconWidth = w;
                         }
                         float mod = isHovered() ? iconWidth/8f : 0;
-                        g.drawImage(icon, (padding + (w - iconWidth) / 2)-mod/2, ((y - iconHeight) / 2)-mod/2, iconWidth+mod, iconHeight+mod);
+                        ArenaMenus.icon(g, icon, (padding + (w - iconWidth) / 2)-mod/2, ((y - iconHeight) / 2)-mod/2, iconWidth+mod, iconHeight+mod);
                     }
                 }
 
-                //draw right/bottom border if needed
-                if (ArenaMenus.on()) {
+                //draw right/bottom border if needed (the Arena look has none)
+                if (arena) {
                     return;
                 }
                 if (parentScreen.tabHeader.finalVisibleTab != this || isLandscapeMode) {

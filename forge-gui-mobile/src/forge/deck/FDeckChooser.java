@@ -44,6 +44,8 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.arena.ArenaTheme;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
@@ -76,6 +78,9 @@ public class FDeckChooser extends FScreen {
 
     private final DeckManager lstDecks;
     private List<DeckProxy> AIDecks = new ArrayList<>();
+    /** Arena look: the least height of the button bar, in Swing pixels at 1440 high. */
+    private static final float ARENA_BUTTON_MIN_HEIGHT = 52f;
+
     private final FButton btnNewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewDeck"));
     private final FButton btnEditDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("btnEditDeck"));
     private final FButton btnViewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblViewDeck"));
@@ -139,6 +144,7 @@ public class FDeckChooser extends FScreen {
         });
         btnNewDeck.setCommand(event -> createNewDeck());
         btnEditDeck.setCommand(event -> editSelectedDeck());
+        btnEditDeck.setArenaPrimary(true); //the Arena look lights the main action
         btnViewDeck.setCommand(event -> {
             if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
                     && selectedDeckType != DeckType.PIONEER_CARDGEN_DECK && selectedDeckType != DeckType.HISTORIC_CARDGEN_DECK
@@ -1205,8 +1211,10 @@ public class FDeckChooser extends FScreen {
         float fieldHeight = cmbDeckTypes.getHeight();
         float totalButtonHeight;
         boolean landscapeMode = Forge.isLandscapeMode();
+        //the Arena look's button bar is at least a comfortable click high
+        final float buttonHeight = landscapeMode && ArenaMenus.on() ? Math.max(fieldHeight, ArenaTheme.px(ARENA_BUTTON_MIN_HEIGHT)) : fieldHeight;
         if (landscapeMode) {
-            totalButtonHeight = fieldHeight;
+            totalButtonHeight = buttonHeight;
         }
         else {
             totalButtonHeight = 2 * fieldHeight + PADDING;
@@ -1226,15 +1234,15 @@ public class FDeckChooser extends FScreen {
         }
 
         if (btnEditDeck.isVisible()) {
-            btnNewDeck.setBounds(x, y, buttonWidth, fieldHeight);
+            btnNewDeck.setBounds(x, y, buttonWidth, buttonHeight);
         }
         else if (landscapeMode) {
-            btnNewDeck.setBounds(x, y, 2 * buttonWidth + PADDING, fieldHeight);
+            btnNewDeck.setBounds(x, y, 2 * buttonWidth + PADDING, buttonHeight);
         }
         else {
-            btnNewDeck.setBounds(x, y, width, fieldHeight);
+            btnNewDeck.setBounds(x, y, width, buttonHeight);
         }
-        btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
+        btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         if (landscapeMode) {
             x += 2 * (buttonWidth + PADDING);
         }
@@ -1242,15 +1250,15 @@ public class FDeckChooser extends FScreen {
             y += fieldHeight + PADDING;
         }
 
-        btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
+        btnViewDeck.setBounds(x, y, buttonWidth, buttonHeight);
         if (btnViewDeck.isVisible()) {
-            btnRandom.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
+            btnRandom.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         }
         else if (landscapeMode) {
-            btnRandom.setBounds(x, y, 2 * buttonWidth + PADDING, fieldHeight);
+            btnRandom.setBounds(x, y, 2 * buttonWidth + PADDING, buttonHeight);
         }
         else {
-            btnRandom.setBounds(x, y, width, fieldHeight);
+            btnRandom.setBounds(x, y, width, buttonHeight);
         }
     }
 

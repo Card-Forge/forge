@@ -283,7 +283,7 @@ public class FButton extends FDisplayObject implements IButton {
         }
     }
 
-    /** Whether the Arena look (on the match screen) shows this button as the main answer of its dialog. */
+    /** Whether the Arena look shows this button as the main one (a dialog's main answer, a screen's main action): molten. */
     public void setArenaPrimary(boolean primary0) {
         arenaPrimary = primary0;
     }

@@ -28,6 +28,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.*;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
@@ -254,7 +255,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
         setGroupBy(config.getGroupBy(), true);
         setPileBy(config.getPileBy(), true);
-        setColumnCount(config.getImageColumnCount(), true);
+        columnCount = clampColumnCount(config.getImageColumnCount());
 
         if (colOverrides != null) {
             if (colOverrides.containsKey(ColumnDef.FAVORITE) && colOverrides.get(ColumnDef.FAVORITE).getFnDisplay() != null) {
@@ -355,47 +356,35 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return columnCount;
     }
 
-    public void setColumnCount(int columnCount0) {
-        setColumnCount(columnCount0, false);
+    private static int clampColumnCount(int columnCount0) {
+        return Math.max(MIN_COLUMN_COUNT, Math.min(MAX_COLUMN_COUNT, columnCount0));
     }
 
-    /** As {@link #setColumnCount(int)}, but not remembered in the config: a layout's own choice rather than the user's. */
-    public void setColumnCountUnsaved(int columnCount0) {
-        setColumnCount(columnCount0, false, false);
-    }
-
-    private void setColumnCount(int columnCount0, boolean forSetup) {
-        setColumnCount(columnCount0, forSetup, !forSetup);
-    }
-
-    private void setColumnCount(int columnCount0, boolean forSetup, boolean remember) {
-        if (columnCount0 < MIN_COLUMN_COUNT) {
-            columnCount0 = MIN_COLUMN_COUNT;
-        } else if (columnCount0 > MAX_COLUMN_COUNT) {
-            columnCount0 = MAX_COLUMN_COUNT;
+    /**
+     * Shows this many items across, keeping the scroll position on the item in focus. {@code remember}: store it in the
+     * config as the user's choice (a zoom); false for a layout's own choice (the Arena deck editor's grid).
+     */
+    public void setColumnCount(int columnCount0, boolean remember) {
+        columnCount0 = clampColumnCount(columnCount0);
+        if (remember && itemManager.getConfig() != null) {
+            itemManager.getConfig().setImageColumnCount(columnCount0);
         }
         if (columnCount == columnCount0) {
             return;
         }
         columnCount = columnCount0;
 
-        if (!forSetup) {
-            if (remember && itemManager.getConfig() != null) {
-                itemManager.getConfig().setImageColumnCount(columnCount);
-            }
-
-            //determine item to retain scroll position of following column count change
-            ItemInfo focalItem0 = getFocalItem();
-            if (focalItem0 == null) {
-                updateLayout(false);
-                return;
-            }
-
-            float offsetTop = focalItem0.getTop() - getScrollValue();
+        //determine item to retain scroll position of following column count change
+        ItemInfo focalItem0 = getFocalItem();
+        if (focalItem0 == null) {
             updateLayout(false);
-            setScrollValue(focalItem0.getTop() - offsetTop);
-            focalItem = focalItem0; //cache focal item so consecutive column count changes use the same item
+            return;
         }
+
+        float offsetTop = focalItem0.getTop() - getScrollValue();
+        updateLayout(false);
+        setScrollValue(focalItem0.getTop() - offsetTop);
+        focalItem = focalItem0; //cache focal item so consecutive column count changes use the same item
     }
 
     private ItemInfo getFocalItem() {
@@ -700,6 +689,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected boolean tap(float x, float y, int count) {
         ItemInfo item = getItemAtPoint(x, y);
+        if (itemManager.isClickToActivate()) { //every click adds (or takes) one, double clicks included
+            if (item != null && !(item.getKey() instanceof DeckProxy)) {
+                selectItem(item);
+                itemManager.activateClicked();
+            }
+            return true;
+        }
         if (count == 1) {
             selectItem(item);
             if (item != null)
@@ -718,16 +714,41 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    protected boolean contextClick(float x, float y) {
+        ItemInfo item = getItemAtPoint(x, y);
+        if (item == null) {
+            return false;
+        }
+        selectItem(item);
+        itemManager.showMenu(true, item.getLeft(), item.getWidth());
+        return true;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void drawClickBadge(Graphics g, float pointerX, float pointerY) {
+        ItemInfo item = getItemAtPoint(pointerX, pointerY);
+        if (item == null) {
+            return;
+        }
+        String words = itemManager.getClickBadge((T) item.getKey());
+        if (words != null) { //the item's place in the scroller (see getItemAtPoint)
+            ArenaMenus.cardBadge(g, words, item.getLeft() - item.group.getScrollLeft() + item.group.getLeft(),
+                    item.getTop() - getScrollValue(), item.getWidth(), item.getHeight());
+        }
+    }
+
+    @Override
     protected boolean zoom(float x, float y, float amount) {
         totalZoomAmount += amount;
 
         float columnZoomAmount = 2 * Utils.AVG_FINGER_WIDTH;
         while (totalZoomAmount >= columnZoomAmount) {
-            setColumnCount(getColumnCount() - 1);
+            setColumnCount(getColumnCount() - 1, true);
             totalZoomAmount -= columnZoomAmount;
         }
         while (totalZoomAmount <= -columnZoomAmount) {
-            setColumnCount(getColumnCount() + 1);
+            setColumnCount(getColumnCount() + 1, true);
             totalZoomAmount += columnZoomAmount;
         }
         return true;
@@ -1142,6 +1163,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
 
+    /** The frame round a selected item: green, or gold in the Arena look. */
+    private static Color selectionColor() {
+        return ArenaMenus.on() ? ArenaTheme.GOLD : Color.GREEN;
+    }
+
     private class ItemInfo extends FDisplayObject implements Entry<InventoryItem, Integer>, ImageFetcher.Callback {
         private final T item;
         private Integer cardPrice;
@@ -1247,16 +1273,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (deckSelectMode) {
                 dpImg = ImageCache.getInstance().getImage(item);
             }
-            if (selected) {
+            if (selected && !itemManager.isClickToActivate()) { //one-click mode selects nothing the user would see
                 if (!deckSelectMode) {
                     //if round border is enabled, the select highlight is also rounded..
                     if (Forge.enableUIMask.equals("Full")) {
                         //fillroundrect has rough/aliased corner
-                        g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
+                        g.fillRoundRect(selectionColor(), x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
                         //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
-                        g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
+                        g.drawRoundRect(1f, selectionColor(), x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
                     } else //default rectangle highlight
-                        g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                        g.fillRect(selectionColor(), x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                 }
             }
 
@@ -1299,11 +1325,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (dpImg != null) {//generated decks have missing info...
                     if (Forge.enableUIMask.equals("Off")) {
                         if (selected)
-                            g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                            g.fillRect(selectionColor(), x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                         g.drawImage(dpImg, x, y, w, h);
                     } else {
                         //commander bg
-                        g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
+                        g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, selectionColor(), selected);
 
                         PaperCard paperCard = null;
                         String imageKey = item.getImageKey(false);
@@ -1335,18 +1361,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         } else {
                             deckCover = CardRenderer.getCardArt(deckProxy.getDeck().getCommanders().isEmpty() ? deckProxy.getHighestCMCCard() : deckProxy.getDeck().getCommanders().get(0));
                             if (deckCover != null) {
-                                g.drawDeckBox(deckCover, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
+                                g.drawDeckBox(deckCover, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, selectionColor(), selected);
                             } else {
-                                g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                                g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, selectionColor(), selected);
                             }
                         }
                     } else {
                         if (itemManager.getConfig() == ItemManagerConfig.STRING_ONLY) {
                             //draw generic box for stringOnly config
-                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, selectionColor(), selected);
                         } else {
                             //draw missing box display if not avail or loading...
-                            g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
+                            g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, selectionColor(), selected);
                             //temporary fill image
                             g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                             //draw plastic effect overlay.

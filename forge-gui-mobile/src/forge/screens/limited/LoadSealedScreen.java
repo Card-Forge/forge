@@ -20,6 +20,7 @@ import forge.gamemodes.net.EventFormat;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.Frost;
 import forge.util.GuiPrefBinders;
 import forge.itemmanager.DeckManager;
@@ -114,7 +115,7 @@ public class LoadSealedScreen extends LaunchScreen {
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + FDeckChooser.PADDING;
         lblTip.setBounds(x, y, w, labelHeight);
-        lblTip.setVisible(!Frost.isOn());
+        lblTip.setVisible(!Frost.isOn() || ArenaMenus.on()); //the Arena look keeps the tip: it is the way to edit a deck here
     }
 
     @Override

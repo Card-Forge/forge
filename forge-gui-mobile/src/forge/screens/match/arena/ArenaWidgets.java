@@ -10,6 +10,7 @@ import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FButton;
 
 /**
@@ -18,8 +19,8 @@ import forge.toolbox.FButton;
  * bespoke Arena overlays, so that whatever classic dialog a match still opens (yield settings, auto-yields, a draw
  * offer, sideboarding between games, an input box, a very long list, a reconnect notice, the dev tools, the game and
  * player menus) is dressed in navy glass, gold and Arena buttons rather than the default skin; off it, the same pieces
- * dress the menus (home, new game lobbies, deck manager and editor, settings), with {@link forge.toolbox.Frost}'s Arena
- * palette for the rest. Each widget asks one method here first and keeps its own look when it says no.
+ * dress the menus (home, new game lobbies, deck manager and editor, settings), with {@link ArenaMenus} and
+ * {@link forge.toolbox.Frost}'s Arena palette for the rest. Each widget asks one method here first and keeps its own look when it says no.
  */
 public final class ArenaWidgets {
     private ArenaWidgets() { }
@@ -47,7 +48,7 @@ public final class ArenaWidgets {
 
     /** Whether the shared widgets wear the Arena look now: whenever the Arena look is on, in a match and in the menus. */
     public static boolean on() {
-        return ArenaTheme.isActive();
+        return ArenaMenus.on();
     }
 
     // ---- dialog sheets (FDialog) ------------------------------------------------------------------------------------
@@ -259,7 +260,8 @@ public final class ArenaWidgets {
         } else {
             top = hovered ? ArenaTheme.BTN_HOVER_TOP : ArenaTheme.BTN_TOP;
             bottom = hovered ? ArenaTheme.BTN_HOVER_BOTTOM : ArenaTheme.BTN_BOTTOM;
-            rim = hovered ? ArenaTheme.BTN_HOVER_RIM : ArenaTheme.BTN_RIM;
+            //on the board the Arena match's white rim; in the menus a gold line in place of the skin's white borders
+            rim = hovered ? ArenaTheme.BTN_HOVER_RIM : ArenaTheme.isMatchBoard() ? ArenaTheme.BTN_RIM : ArenaMenus.LINE;
         }
         final float inset = Math.max(1f, ArenaTheme.px(1));
         g.fillSmoothRoundRectGradient(top, bottom, true, inset, inset, w - 2 * inset, h - 2 * inset, r);

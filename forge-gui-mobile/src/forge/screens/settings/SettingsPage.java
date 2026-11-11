@@ -33,6 +33,7 @@ import forge.sound.SoundSystem;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FDialog;
@@ -107,6 +108,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 @Override
                 public void valueChanged(String newValue) {
                     FSkin.changeSkin(newValue);
+                }
+
+                private final String arenaNote = description + " " + Forge.getLocalizer().getMessage("nlThemeArenaOverride");
+
+                @Override
+                public String getDescription() { //the menus and the match wear the Arena look whatever the theme
+                    return ArenaMenus.on() ? arenaNote : description;
                 }
             };
         lstSettings.addItem(settingSkins, 0);
@@ -970,6 +978,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private static final float NAV_GAP = Utils.scale(16);
     private static final float MIN_LIST_WIDTH = Utils.scale(480);
     private static final float MAX_LIST_WIDTH = Utils.scale(640);
+    /** Arena look: the settings column may grow this much wider, so descriptions take fewer lines on a wide window. */
+    private static final float ARENA_MAX_LIST_WIDTH = Utils.scale(960);
+    /** Arena look: rows this much taller than the classic ones, room for two lines of the larger descriptions. */
+    private static final float ARENA_ROW_SCALE = 1.3f;
+    private static final FSkinFont ARENA_DESC_FONT = FSkinFont.get(13);
+    private static final FSkinColor ARENA_DESC_COLOR = FSkinColor.getStandardColor(ArenaMenus.TEXT_SOFT);
 
     @Override
     protected void doLayout(float width, float height) {
@@ -981,7 +995,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             return;
         }
         //a big window: categories on the left, a readable column of settings beside them, the pair centred
-        float listWidth = Math.min(MAX_LIST_WIDTH, width - NAV_WIDTH - NAV_GAP - 2 * NAV_GAP);
+        float listWidth = Math.min(ArenaMenus.on() ? ARENA_MAX_LIST_WIDTH : MAX_LIST_WIDTH, width - NAV_WIDTH - NAV_GAP - 2 * NAV_GAP);
         float x = Math.round((width - NAV_WIDTH - NAV_GAP - listWidth) / 2);
         float top = NAV_GAP;
         float listTop = top + searchHeight + NAV_GAP / 2;
@@ -1023,11 +1037,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             for (int i = 0; i < groupNames.size(); i++) {
                 float y = i * rh;
                 boolean shown = lstSettings.isGroupVisible(i);
-                if (forge.screens.match.arena.ArenaMenus.on()) { //Arena look: gold wash and bar, gold words for the current group
-                    if (i == current || (i == hovered && shown)) {
-                        forge.screens.match.arena.ArenaMenus.activeRow(g, 0, y, w, rh, true, i != current);
+                if (ArenaMenus.on()) { //Arena look: gold wash and bar, gold words for the current group
+                    if (i == current) {
+                        ArenaMenus.activeRow(g, 0, y, w, rh);
+                    } else if (i == hovered && shown) {
+                        ArenaMenus.hoverRow(g, 0, y, w, rh);
                     }
-                    g.drawText(groupNames.get(i), font, shown ? forge.screens.match.arena.ArenaMenus.entryText(i == current, i == hovered)
+                    g.drawText(groupNames.get(i), font, shown ? ArenaMenus.entryText(i == current, i == hovered)
                             : SettingsScreen.DESC_COLOR.getColor(), pad, y, w - 2 * pad, rh, false, Align.left, true);
                     continue;
                 }
@@ -1163,6 +1179,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         public abstract void select();
         public abstract void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float width, float height);
         public boolean isEnabled() { return true; }
+        public String getDescription() { return description; }
     }
 
     private class BooleanSetting extends Setting {
@@ -1608,7 +1625,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private class SettingRenderer extends FList.ListItemRenderer<Setting> {
         @Override
         public float getItemHeight() {
-            return SettingsScreen.SETTING_HEIGHT;
+            return ArenaMenus.on() ? SettingsScreen.SETTING_HEIGHT * ARENA_ROW_SCALE : SettingsScreen.SETTING_HEIGHT;
         }
 
         @Override
@@ -1632,7 +1649,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             g.drawText(value.label, font, labelColor, x, y, w, h, false, Align.left, false);
             value.drawPrefValue(g, font, labelColor, x, y, w, h);
             h += SettingsScreen.SETTING_PADDING;
-            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
+            if (ArenaMenus.on()) { //larger, brighter words, kept inside their own row
+                float descHeight = totalHeight - h + offset;
+                g.startClip(x, y + h, w, descHeight);
+                g.drawText(value.getDescription(), ARENA_DESC_FONT, ARENA_DESC_COLOR, x, y + h, w, descHeight, true, Align.left, false);
+                g.endClip();
+                return;
+            }
+            g.drawText(value.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
         }
     }
 }

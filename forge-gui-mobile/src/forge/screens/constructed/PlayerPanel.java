@@ -41,6 +41,7 @@ import forge.itemmanager.DeckManager;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -83,15 +84,30 @@ public class PlayerPanel extends FContainer {
     private FComboBox<Object> cbTeam = new FComboBox<>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<>();
 
-    private final FLabel btnDeck            = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblLoadingDeck")).build();
-    private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblSchemeDeckRandomGenerated")).build();
-    private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblCommanderDeckRandomGenerated")).build();
-    private final FLabel btnOathbreakDeck   = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblOathbreakerDeckRandomGenerated")).build();
-    private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblTinyLeadersDeckRandomGenerated")).build();
-    private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblBrawlDeckRandomGenerated")).build();
-    private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblPlanarDeckRandomGenerated")).build();
-    private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblVanguardAvatarRandom")).build();
+    private final FLabel btnDeck            = deckButton(Forge.getLocalizer().getMessage("lblLoadingDeck"));
+    private final FLabel btnSchemeDeck      = deckButton(Forge.getLocalizer().getMessage("lblSchemeDeckRandomGenerated"));
+    private final FLabel btnCommanderDeck   = deckButton(Forge.getLocalizer().getMessage("lblCommanderDeckRandomGenerated"));
+    private final FLabel btnOathbreakDeck   = deckButton(Forge.getLocalizer().getMessage("lblOathbreakerDeckRandomGenerated"));
+    private final FLabel btnTinyLeadersDeck = deckButton(Forge.getLocalizer().getMessage("lblTinyLeadersDeckRandomGenerated"));
+    private final FLabel btnBrawlDeck       = deckButton(Forge.getLocalizer().getMessage("lblBrawlDeckRandomGenerated"));
+    private final FLabel btnPlanarDeck      = deckButton(Forge.getLocalizer().getMessage("lblPlanarDeckRandomGenerated"));
+    private final FLabel btnVanguardAvatar  = deckButton(Forge.getLocalizer().getMessage("lblVanguardAvatarRandom"));
     private final FLabel btnCommanderPick   = new FLabel.ButtonBuilder().text("").build();
+
+    /**
+     * A button that opens a deck chooser. The Arena look marks it as one: a gold chevron at its right end and a
+     * "Choose deck" hint at its left, so the line reads as a choice rather than a caption.
+     */
+    private static FLabel deckButton(String text) {
+        final String hint = Forge.getLocalizer().getMessage("lblArenaChooseDeck");
+        return new FLabel(new FLabel.ButtonBuilder().text(text)) {
+            @Override
+            public void draw(Graphics g) {
+                super.draw(g);
+                ArenaMenus.chooserCue(g, getWidth(), getHeight(), hint);
+            }
+        };
+    }
 
     // Commander variant: the chosen commander deck, who may lead it, and the commander(s) picked
     // instead of its default (null = the default). The pick applies to the next match only.

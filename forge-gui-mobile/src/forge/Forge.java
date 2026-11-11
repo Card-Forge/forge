@@ -520,6 +520,7 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
+        ArenaMenus.followLook(); //the Arena look turned on or off re-lays the open screens out
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
@@ -901,6 +902,27 @@ public class Forge implements ApplicationListener {
 
     public static int getScreenHeight() {
         return screenHeight;
+    }
+
+    /**
+     * Lays the current screen and every screen it can go back to out again at their sizes: for a change of look that
+     * moves things about (the Arena look turned on or off) rather than a change of size.
+     */
+    public static void relayoutScreens() {
+        final Set<FScreen> screens = new LinkedHashSet<>(Dscreens);
+        if (currentScreen != null) {
+            screens.add(currentScreen);
+            final FScreen backdrop = currentScreen.getLandscapeBackdropScreen();
+            if (backdrop != null) {
+                screens.add(backdrop);
+            }
+        }
+        for (final FScreen screen : screens) {
+            if (screen.getWidth() > 0 && screen.getHeight() > 0) {
+                screen.revalidate(true);
+            }
+        }
+        Gdx.graphics.requestRendering();
     }
 
     public static FScreen getCurrentScreen() {
@@ -1592,7 +1614,15 @@ public class Forge implements ApplicationListener {
         @Override
         protected boolean secondaryClick(float x, float y) {
             if (!forge.screens.match.arena.ArenaTheme.isMatchBoard()) {
-                return false; //elsewhere a right click toggles the magnifier, as it always has
+                //a list that answers right clicks (the Arena deck editor's cards: their menu); else, as it always has,
+                //a right click toggles the magnifier
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener instanceof ContextClickable clickable
+                            && clickable.contextClick(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
+                }
+                return false;
             }
             //the Arena board: what a long press does under the pointer (zoom a card, a stack entry's or a player's
             //details, mark a phase to pass to), else back out of the decision being made

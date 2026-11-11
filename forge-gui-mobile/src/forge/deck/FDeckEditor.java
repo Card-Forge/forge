@@ -27,6 +27,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
+import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -36,11 +37,10 @@ import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.screens.match.arena.ArenaMenus;
-import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.*;
@@ -550,6 +550,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             deckHeader.setBounds(0, startY, width, HEADER_HEIGHT);
             startY += HEADER_HEIGHT;
         }
+        updateDeckSize(); //the Arena look may have just been turned on
         setSplitLayout(canSplitLayout());
         if (!splitLayout) {
             super.doLayout(startY, width, height);
@@ -561,19 +562,28 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             tabPage.setBounds(catalogWidth, startY, width - catalogWidth, height - startY);
         }
         catalogPage.setBounds(0, startY, catalogWidth, height - startY);
+        if (splitColumns != splitColumnsForWindow()) { //the window was resized: cards a third of its height again
+            showSplitViews();
+        }
     }
 
     // ---- Arena look on a wide desktop window: the catalog and the deck side by side, as Arena's deck builder has them
-    private static final float SPLIT_DECK_SHARE = 0.3f;
-    private boolean splitLayout, catalogTabHiddenBySplit;
-
-    /** Whether the catalog and the deck are on show together (the Arena look on a wide desktop window). */
-    public boolean isSplitLayout() {
-        return splitLayout;
-    }
+    /** The deck column's share of the width, and the window shape (width / height) the side-by-side layout needs. */
+    private static final float SPLIT_DECK_SHARE = 0.3f, SPLIT_MIN_ASPECT = 1.4f;
+    /**
+     * Catalog cards across per unit of window aspect (width / height), so a card is about a third of the window high:
+     * 6 across at 3440x1440, 4 at 1600x900; at least {@link #SPLIT_MIN_COLUMNS}, at most {@link #SPLIT_MAX_COLUMNS}.
+     */
+    private static final float SPLIT_COLUMNS_PER_ASPECT = 2.45f;
+    private static final int SPLIT_MIN_COLUMNS = 4, SPLIT_MAX_COLUMNS = 8;
+    private static final String ARENA_IN_DECK = Forge.getLocalizer().getMessage("lblArenaInDeck");
+    private static final String ARENA_MAX_COPIES = Forge.getLocalizer().getMessage("lblArenaMaxCopies");
+    private boolean splitLayout, catalogTabHiddenBySplit, catalogFocused;
+    private int splitColumns;
 
     protected boolean canSplitLayout() {
-        if (!ArenaTheme.isActive() || GuiBase.isMobile() || catalogPage == null || Forge.getScreenWidth() < Forge.getScreenHeight() * 1.4f) {
+        if (!ArenaMenus.on() || GuiBase.isMobile() || catalogPage == null
+                || Forge.getScreenWidth() < Forge.getScreenHeight() * SPLIT_MIN_ASPECT) {
             return false;
         }
         if (!catalogPage.isTabVisible() && !catalogTabHiddenBySplit) {
@@ -587,11 +597,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return false;
     }
 
+    private static int splitColumnsForWindow() {
+        final int columns = Math.round(SPLIT_COLUMNS_PER_ASPECT * Forge.getScreenWidth() / Forge.getScreenHeight());
+        return Math.max(SPLIT_MIN_COLUMNS, Math.min(SPLIT_MAX_COLUMNS, columns));
+    }
+
     private void setSplitLayout(boolean on) {
         if (on == splitLayout) {
             return;
         }
         splitLayout = on;
+        catalogFocused = false;
         if (on) {
             if (getSelectedPage() == catalogPage || getSelectedPage() == null) {
                 super.setSelectedPage(mainDeckPage != null && mainDeckPage.isTabVisible() ? mainDeckPage : firstDeckPage());
@@ -600,13 +616,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 catalogPage.hideTab();
                 catalogTabHiddenBySplit = true;
             }
-            //the catalog as a grid of cards about a third of the window high (6 across at 3440x1440, 4 at 1600x900) and
-            //the deck as a list, as Arena shows them; not remembered, so the editor without the Arena look keeps the user's
-            final int columns = Math.max(4, Math.min(8, Math.round(2.45f * Forge.getScreenWidth() / Forge.getScreenHeight())));
-            catalogPage.cardManager.showViewUnsaved(1, Math.max(columns, catalogPage.cardManager.getImageColumnCount()));
-            for (DeckSectionPage page : pagesBySection.values()) {
-                page.cardManager.showViewUnsaved(0, page.cardManager.getImageColumnCount());
-            }
+            showSplitViews();
             catalogPage.setVisible(true);
             if (canActivateTabPage()) {
                 catalogPage.onActivate();
@@ -617,14 +627,50 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 catalogPage.showTab();
             }
             catalogPage.cardManager.showConfigView();
+            catalogPage.cardManager.setClickToActivate(false, null);
             for (DeckSectionPage page : pagesBySection.values()) {
                 page.cardManager.showConfigView();
+                page.cardManager.setClickToActivate(false, null);
             }
             if (getSelectedPage() != catalogPage) {
                 catalogPage.setVisible(false);
                 catalogPage.onDeactivate();
             }
         }
+    }
+
+    /**
+     * The catalog as a grid of cards about a third of the window high and the deck pages as lists, as Arena shows them,
+     * not remembered (the editor without the Arena look keeps the user's views); and one click adds or removes a card.
+     */
+    private void showSplitViews() {
+        splitColumns = splitColumnsForWindow();
+        catalogPage.cardManager.setView(ItemManager.IMAGE_VIEW, splitColumns, false);
+        catalogPage.cardManager.setClickToActivate(true, this::catalogClickBadge);
+        for (DeckSectionPage page : pagesBySection.values()) {
+            showSplitView(page);
+        }
+    }
+
+    private void showSplitView(DeckSectionPage page) {
+        page.cardManager.setView(ItemManager.LIST_VIEW, page.cardManager.getImageColumnCount(), false);
+        page.cardManager.setClickToActivate(true, card -> "-1");
+    }
+
+    /** What a click on this catalog card does: "+1" (with "2/4 in deck" once the deck holds some), or "Max 4/4" when no more fit. */
+    private String catalogClickBadge(PaperCard card) {
+        final DeckSectionPage destination = getPageForSection(DeckSection.matchingSection(card));
+        if (destination == null || getDeck() == null) {
+            return null;
+        }
+        final CardPool section = getDeck().get(destination.deckSection);
+        final int inDeck = section == null ? 0 : section.countByName(card.getName());
+        final int allowed = getNumAllowedInDeck(card);
+        final String count = allowed == Integer.MAX_VALUE || !shouldEnforceConformity() ? String.valueOf(inDeck) : inDeck + "/" + allowed;
+        if (getMaxMovable(card, catalogPage, destination) <= 0) {
+            return ARENA_MAX_COPIES + " " + count;
+        }
+        return inDeck > 0 ? "+1   " + count + " " + ARENA_IN_DECK : "+1";
     }
 
     private TabPage<FDeckEditor> firstDeckPage() {
@@ -639,8 +685,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     @Override
     public void setSelectedPage(TabPage<FDeckEditor> tabPage) {
         if (splitLayout && tabPage == catalogPage) {
-            return; //the catalog is on show beside the deck already
+            //the catalog is on show beside the deck already: bring it up to date and give it the keys
+            catalogFocused = true;
+            if (canActivateTabPage()) {
+                catalogPage.onActivate();
+            }
+            return;
         }
+        catalogFocused = false;
         super.setSelectedPage(tabPage);
     }
 
@@ -653,15 +705,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     @Override
-    public void draw(Graphics g) {
-        //the Arena look was turned on or off elsewhere (the settings): lay out again for it
-        if (getWidth() > 0 && splitLayout != canSplitLayout()) {
-            revalidate(true);
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (splitLayout && catalogFocused) { //the catalog asked for (a new deck section's cards): a gold line round it
+            ArenaMenus.outline(g, catalogPage.getLeft(), catalogPage.getTop(), catalogPage.getWidth(), catalogPage.getHeight());
         }
-        super.draw(g);
     }
 
     protected void updateDeckHeader() {
+        updateDeckSize();
         boolean allowSave = allowSave();
         deckHeader.btnSave.setEnabled(allowSave);
         deckHeader.btnSave.setVisible(allowSave);
@@ -1032,6 +1084,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         DeckSectionPage page = createPageForExtraSection(section, this.editorConfig);
         this.pagesBySection.put(section, page);
         this.addTabPage(page);
+        if (splitLayout) {
+            showSplitView(page); //a section added beside the catalog is a list like the others
+        }
         return page;
     }
 
@@ -1157,6 +1212,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             //Pass input on to currently selected page. Calling super would invoke keypresses on all tabs.
             //Doing it first also gives the tab and card manager priority.
             //TODO: Generalize this to the TabPageScreen level if possible
+            if (splitLayout && catalogFocused && catalogPage.keyDown(keyCode))
+                return true; //the catalog beside the deck, asked for: it has the keys
             if(getSelectedPage().keyDown(keyCode))
                 return true;
         } catch (Exception e) {
@@ -1267,13 +1324,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected final FLabel lblName;
         protected final FLabel btnSave;
         protected final FLabel btnMoreOptions;
+        /** Arena look: the main deck's size against the format's (58 / 60), gold once it is reached. */
+        protected final FLabel lblDeckSize;
         protected FDisplayObject btnDraftLog;
         protected ChatHeaderButton btnChat;
 
         protected DeckHeader() {
             setHeight(HEADER_HEIGHT);
             this.lblName = add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
-            this.btnSave = add(new FLabel.Builder().icon(Forge.hdbuttons ? FSkinImage.HDSAVE : FSkinImage.SAVE).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
+            this.btnSave = add(new SaveButton(new FLabel.Builder().icon(Forge.hdbuttons ? FSkinImage.HDSAVE : FSkinImage.SAVE).align(Align.center).pressedColor(Header.getBtnPressedColor())));
+            this.lblDeckSize = add(new FLabel.Builder().font(FSkinFont.get(16)).align(Align.right).insets(new Vector2(Utils.scale(8), 0)).build());
             this.btnMoreOptions = add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
         }
 
@@ -1309,11 +1369,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @SuppressWarnings("SuspiciousNameCombination") //Intentionally using height for both edges so they're square.
         protected List<FDisplayObject> layoutHeaderElements(float height, float availableWidth) {
             List<FDisplayObject> out = new ArrayList<>();
-            btnSave.setSize(height, height);
+            final boolean arena = ArenaMenus.on();
+            btnSave.setSize(arena ? height * ARENA_SAVE_WIDTH : height, height); //the Arena look's is a labelled button
             btnMoreOptions.setSize(height, height);
             out.add(btnMoreOptions);
             if(btnSave.isVisible())
                 out.add(btnSave);
+            lblDeckSize.setVisible(arena);
+            if (arena) {
+                lblDeckSize.setSize(height * ARENA_DECK_SIZE_WIDTH, height);
+                out.add(lblDeckSize);
+            }
             float remainingWidth = availableWidth - (float) out.stream().mapToDouble(FDisplayObject::getWidth).sum();
             if(btnDraftLog != null) {
                 float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
@@ -1356,6 +1422,41 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.add(btnChat);
             return chat;
         }
+    }
+
+    /** Arena look: the Save button and deck size label widths, in header heights. */
+    private static final float ARENA_SAVE_WIDTH = 2.6f, ARENA_DECK_SIZE_WIDTH = 3.4f;
+    private static final FSkinColor DECK_SIZE_SHORT = FSkinColor.getStandardColor(ArenaMenus.TEXT_SOFT);
+    private static final FSkinColor DECK_SIZE_REACHED = FSkinColor.getStandardColor(ArenaMenus.entryText(true, false));
+
+    /** The deck editor's Save: the skin's disk icon, or in the Arena look a labelled button, gold while there are changes. */
+    protected static class SaveButton extends FLabel {
+        private final String label = Forge.getLocalizer().getMessage("lblSave");
+
+        protected SaveButton(Builder builder) {
+            super(builder);
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            final float inset = getHeight() * 0.12f;
+            if (!ArenaMenus.button(g, label, inset, inset, getWidth() - 2 * inset,
+                    getHeight() - 2 * inset, isEnabled(), isHovered(), false, isEnabled())) {
+                super.draw(g);
+            }
+        }
+    }
+
+    /** Arena look: the header's main deck size against the format's minimum (58 / 60). */
+    protected void updateDeckSize() {
+        if (!ArenaMenus.on() || deck == null) {
+            return;
+        }
+        final int size = deck.getMain().countAll();
+        final DeckFormat format = editorConfig.getDeckFormat();
+        final int target = format == null ? 0 : format.getMainRange().getMinimum();
+        deckHeader.lblDeckSize.setText(target > 0 ? size + " / " + target : String.valueOf(size));
+        deckHeader.lblDeckSize.setTextColor(target > 0 && size < target ? DECK_SIZE_SHORT : DECK_SIZE_REACHED);
     }
 
     /** Header chat button that renders the unread-message badge shared with the in-match chat tab. */
@@ -1961,8 +2062,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public void hideTab() {
             //hidden for good (a finished draft's pack page): the Arena side-by-side layout stops showing it as well
-            if (parentScreen != null && parentScreen.catalogPage == this) {
+            if (parentScreen != null && parentScreen.catalogPage == this && parentScreen.catalogTabHiddenBySplit) {
                 parentScreen.catalogTabHiddenBySplit = false;
+                final FDeckEditor editor = parentScreen;
+                FThreads.invokeInEdtLater(() -> editor.revalidate(true)); //drafts finish on a background thread
             }
             super.hideTab();
         }
@@ -2235,6 +2338,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             } else {
                 caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
             }
+            parentScreen.updateDeckSize();
             if(parentScreen.hiddenExtraSections.contains(this.deckSection) && cardManager.getPool() != null && !cardManager.getPool().isEmpty())
                 parentScreen.showExtraSectionTab(this.deckSection);
         }

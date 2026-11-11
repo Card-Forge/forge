@@ -6,8 +6,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
-import forge.screens.match.arena.ArenaMenus;
-import forge.screens.match.arena.ArenaTheme;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.Frost;
@@ -18,8 +17,10 @@ public abstract class LaunchScreen extends FScreen {
     private float START_BUTTON_RATIO = 0.f;
     private static final float PADDING = FOptionPane.PADDING;
 
+    /** Arena look: the Start button's height (a share of the classic one), and its width (in heights, at least a share of the screen's). */
+    private static final float ARENA_START_HEIGHT = 0.8f, ARENA_START_WIDTH = 3.6f, ARENA_START_MIN_SHARE = 0.16f;
+
     protected final StartButton btnStart = add(new StartButton());
-    private boolean arenaLayout; //laid out for the Arena look
 
     public LaunchScreen(String headerCaption) {
         super(headerCaption);
@@ -41,11 +42,10 @@ public abstract class LaunchScreen extends FScreen {
             buttonHeight = MAX_START_BUTTON_HEIGHT;
             buttonWidth = buttonHeight * START_BUTTON_RATIO;
         }
-        arenaLayout = ArenaTheme.isActive();
-        if (arenaLayout) {
+        if (ArenaMenus.on()) {
             //Arena look: a wide molten Start button in the bottom right corner, where Arena keeps its Play button
-            buttonHeight = MAX_START_BUTTON_HEIGHT * 0.8f;
-            buttonWidth = Math.min(width - 2 * PADDING, Math.max(buttonHeight * 3.6f, width * 0.16f));
+            buttonHeight = MAX_START_BUTTON_HEIGHT * ARENA_START_HEIGHT;
+            buttonWidth = Math.min(width - 2 * PADDING, Math.max(buttonHeight * ARENA_START_WIDTH, width * ARENA_START_MIN_SHARE));
             btnStart.setBounds(width - buttonWidth - 2 * PADDING, height - buttonHeight - 2 * PADDING, buttonWidth, buttonHeight);
             doLayoutAboveBtnStart(startY, width, height - buttonHeight - 3 * PADDING);
             return;
@@ -53,14 +53,6 @@ public abstract class LaunchScreen extends FScreen {
         btnStart.setBounds((width - buttonWidth) / 2, height - buttonHeight - PADDING, buttonWidth, buttonHeight);
 
         doLayoutAboveBtnStart(startY, width, height - buttonHeight - 2 * PADDING);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        if (arenaLayout != ArenaTheme.isActive() && getWidth() > 0) {
-            revalidate(true); //the Arena look was turned on or off elsewhere (the settings): the Start button moves
-        }
-        super.draw(g);
     }
 
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
@@ -98,10 +90,19 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public void draw(Graphics g) {
-            if (ArenaMenus.startButton(g, Forge.getLocalizer().getMessage("lblStart"), getWidth(), getHeight(), isHovered(), pressed,
-                    isEnabled())) {
-                //Arena look: the molten pill
-            } else if (Frost.isOn()) {
+            if (!ArenaMenus.startButton(g, Forge.getLocalizer().getMessage("lblStart"), getWidth(), getHeight(),
+                    isHovered(), pressed, isEnabled())) { //the Arena look's is the molten pill
+                drawSkinFace(g);
+            }
+            //its must be enabled or you can't start any game modes
+            if (!Forge.isLoadingaMatch()) {
+                if(!btnStart.isEnabled())
+                    btnStart.setEnabled(true);
+            }
+        }
+
+        private void drawSkinFace(Graphics g) {
+            if (Frost.isOn()) {
                 final float w = getWidth(), h = getHeight();
                 Frost.drawButton(g, w, h * 0.6f, isHovered(), pressed, isEnabled(), Forge.getLocalizer().getMessage("lblStart"));
             } else if (Forge.hdstart) {
@@ -112,11 +113,6 @@ public abstract class LaunchScreen extends FScreen {
                 g.drawImage(pressed ? FSkinImage.BTN_START_DOWN :
                     isHovered() ? FSkinImage.BTN_START_OVER :
                     FSkinImage.BTN_START_UP, 0, 0, getWidth(), getHeight());
-            //its must be enabled or you can't start any game modes
-            if (!Forge.isLoadingaMatch()) {
-                if(!btnStart.isEnabled())
-                    btnStart.setEnabled(true);
-            }
         }
     }
 

@@ -22,11 +22,11 @@ import forge.gui.GuiBase;
 import forge.assets.FSkinFont;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
-import forge.screens.match.arena.ArenaMenus;
 import forge.screens.online.OnlineMenu.OnlineScreen;
 import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
+import forge.toolbox.ArenaMenus;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -37,6 +37,8 @@ import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
+    /** Arena look: menu entries' words start this far in, clear of the active entry's gold bar. */
+    private static final float ARENA_INDENT = PADDING * 4;
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
     private static final FSkinColor l00 = clrTheme.stepColor(0);
     private static final FSkinColor d80 = clrTheme.stepColor(-80);
@@ -317,13 +319,16 @@ public class HomeScreen extends FScreen {
             }
 
             if (ArenaMenus.column(g, w, h, true)) { //Arena look: a glass column, the active entry washed in gold with a bright bar
-                drawHoverBand(g, null, w);
+                final float[] band = hoverBand();
+                if (band != null) {
+                    ArenaMenus.hoverRow(g, 0, band[0], w, band[1] - band[0]);
+                }
                 if (activeButtonIndex != -1) {
                     final MenuButton active = buttons.get(activeButtonIndex);
                     final float top = Math.max(buttonScroller.getTop() + active.getTop(), buttonScroller.getTop());
                     final float bottom = Math.min(buttonScroller.getTop() + active.getBottom(), h);
                     if (bottom > top) {
-                        ArenaMenus.activeRow(g, 0, top, w, bottom - top, true, false);
+                        ArenaMenus.activeRow(g, 0, top, w, bottom - top);
                     }
                 }
                 return;
@@ -360,6 +365,14 @@ public class HomeScreen extends FScreen {
 
     /** Desktop: a faint band across the whole menu column behind the entry under the mouse. */
     private void drawHoverBand(Graphics g, com.badlogic.gdx.graphics.Color color, float columnWidth) {
+        final float[] band = hoverBand();
+        if (band != null) {
+            g.fillRect(color, 0, band[0], columnWidth, band[1] - band[0]);
+        }
+    }
+
+    /** The top and bottom of the entry under the mouse (other than the active one) in the menu column, or null. */
+    private float[] hoverBand() {
         MenuButton pointed = btnExit.isPointedAt() ? btnExit : null;
         float top = 0, bottom = 0;
         if (pointed != null) {
@@ -377,13 +390,7 @@ public class HomeScreen extends FScreen {
                 }
             }
         }
-        if (pointed != null && bottom > top) {
-            if (color == null) { //the Arena look's faint gold
-                ArenaMenus.activeRow(g, 0, top, columnWidth, bottom - top, true, true);
-            } else {
-                g.fillRect(color, 0, top, columnWidth, bottom - top);
-            }
-        }
+        return pointed != null && bottom > top ? new float[] {top, bottom} : null;
     }
 
     private class ButtonScroller extends FScrollPane {
@@ -422,9 +429,8 @@ public class HomeScreen extends FScreen {
                 //(the band behind it is drawn with the column, see drawHoverBand)
                 final boolean hovered = !active && isPointedAt();
                 if (ArenaMenus.on()) { //Arena look: gold for the active entry, cream under the pointer, indented from the bar
-                    final float indent = PADDING * 4;
-                    g.drawText(getText(), getFont(), ArenaMenus.entryText(active, hovered), indent, 0,
-                            getWidth() - indent, getHeight(), false, Align.left, true);
+                    g.drawText(getText(), getFont(), ArenaMenus.entryText(active, hovered), ARENA_INDENT, 0,
+                            getWidth() - ARENA_INDENT, getHeight(), false, Align.left, true);
                     return;
                 }
                 if (Frost.isOn()) { //frosted: white text, brighter for the active entry, indented from the accent bar

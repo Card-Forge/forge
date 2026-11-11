@@ -78,13 +78,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final TextSearchFilter<? extends T> searchFilter;
 
     private final FLabel btnSearch = new FLabel.ButtonBuilder()
-            .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().build();
+            .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().uiIcon().build();
     private final FLabel btnView = new FLabel.ButtonBuilder()
-            .iconScaleFactor(0.9f).selectable().build(); //icon set later
+            .iconScaleFactor(0.9f).selectable().uiIcon().build(); //icon set later
     private final FLabel btnAdvancedSearchOptions = new FLabel.ButtonBuilder()
             .selectable(true).align(Align.center)
             .icon(Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS).iconScaleFactor(0.9f)
-            .build();
+            .uiIcon().build();
 
     private final FComboBox<ItemColumn> cbxSortOptions;
 
@@ -314,20 +314,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public abstract ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler);
 
-    /**
-     * Shows the list (0) or image (1) view with this many cards across the image view, without remembering either in
-     * the config: a layout's own choice (the Arena deck editor's), so the user's own choice is kept for elsewhere.
-     */
-    public void showViewUnsaved(int viewIndex, int imageColumns) {
-        imageView.setColumnCountUnsaved(imageColumns);
-        setViewIndex(viewIndex, false);
-    }
+    public static final int LIST_VIEW = 0, IMAGE_VIEW = 1;
 
-    /** Back to the view and image column count remembered in the config (after {@link #showViewUnsaved}). */
+    /** Back to the view and image column count remembered in the config (after a {@code setView(.., false)}). */
     public void showConfigView() {
         if (config != null) {
-            imageView.setColumnCountUnsaved(config.getImageColumnCount());
-            setViewIndex(config.getViewIndex(), false);
+            setView(config.getViewIndex(), config.getImageColumnCount(), false);
         }
     }
 
@@ -336,10 +328,19 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void setViewIndex(int viewIndex) {
-        setViewIndex(viewIndex, true);
+        showView(viewIndex, true);
     }
 
-    private void setViewIndex(int viewIndex, boolean remember) {
+    /**
+     * Shows the list or image view, with this many cards across the image view. {@code remember}: store both in the
+     * config as the user's choice; false for a layout's own choice (the Arena deck editor's), so the user's is kept.
+     */
+    public void setView(int viewIndex, int imageColumns, boolean remember) {
+        imageView.setColumnCount(imageColumns, remember);
+        showView(viewIndex, remember);
+    }
+
+    private void showView(int viewIndex, boolean remember) {
         if (viewIndex < 0 || viewIndex >= views.size()) {
             return;
         }
@@ -1074,6 +1075,35 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         contextMenuBuilder = contextMenuBuilder0;
     }
 
+    // ---- one-click mode (the Arena deck editor): a left click activates an item, a right click opens its menu
+    private boolean clickToActivate;
+    private Function<T, String> clickBadge;
+
+    /**
+     * One-click mode: a single click activates the item under it (adds a card to the deck, takes one out) instead of
+     * selecting it and opening its menu, which a right click or long press opens then; and the item under the pointer
+     * carries a badge with the words {@code badge} gives for it (what a click will do).
+     */
+    public void setClickToActivate(boolean on, Function<T, String> badge) {
+        clickToActivate = on;
+        clickBadge = badge;
+    }
+
+    public boolean isClickToActivate() {
+        return clickToActivate;
+    }
+
+    /** The words of the one-click badge for this item (see {@link #setClickToActivate}). */
+    public String getClickBadge(T item) {
+        return clickToActivate && clickBadge != null && item != null ? clickBadge.apply(item) : null;
+    }
+
+    /** One-click mode: the item under a click has been selected; activate it, closing any menu. */
+    public void activateClicked() {
+        closeMenu();
+        activateSelectedItems();
+    }
+
     public void showMenu(boolean delay) {
         showMenu(delay, 0f, 0f);
     }
@@ -1289,10 +1319,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 setSelectedIndexRelative(usingListView ? -10 : -1);
                 return true;
             case Input.Keys.DPAD_DOWN:
-                setSelectedIndexRelative(usingListView ? 1 : getConfig().getImageColumnCount());
+                setSelectedIndexRelative(usingListView ? 1 : imageView.getColumnCount());
                 return true;
             case Input.Keys.DPAD_UP:
-                setSelectedIndexRelative(usingListView ? -1 : -getConfig().getImageColumnCount());
+                setSelectedIndexRelative(usingListView ? -1 : -imageView.getColumnCount());
                 return true;
             case Input.Keys.BUTTON_A:
                 showMenu(true);
@@ -1304,7 +1334,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 }
                 break;
             case Input.Keys.BUTTON_L1:
-                setViewIndex(config.getViewIndex() == 1 ? 0 : 1);
+                setViewIndex(currentView == listView ? IMAGE_VIEW : LIST_VIEW); //from the view on show, not the remembered one
                 return true;
         }
 

@@ -39,6 +39,9 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.screens.match.arena.ArenaWidgets;
+import forge.toolbox.ArenaMenus;
+import forge.toolbox.ContextClickable;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
@@ -204,7 +207,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     protected void layoutOptionsPanel(float width, float height) {
     }
 
-    public final class ItemList extends FList<Entry<T, Integer>> {
+    public final class ItemList extends FList<Entry<T, Integer>> implements ContextClickable {
         private final ItemManager<T>.ItemRenderer renderer;
         private final CompactModeHandler compactModeHandler;
 
@@ -244,7 +247,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                         //don't activate if renderer handles tap
                         if (!renderer.tap(index, value, x, y, count)) {
-                            if (count == 1) {
+                            if (itemManager.isClickToActivate()) {
+                                itemManager.activateClicked(); //one-click mode: every click takes one out
+                            }
+                            else if (count == 1) {
                                 itemManager.showMenu(false);
                             }
                             else if (count == 2 && index == prevTapIndex) {
@@ -292,6 +298,36 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         @Override
+        public boolean contextClick(float x, float y) {
+            if (!itemManager.isClickToActivate() || maxSelections > 1) {
+                return false;
+            }
+            int index = getIndexAtPoint(x, y);
+            if (index < 0 || index >= getCount()) {
+                return false;
+            }
+            setSelectedIndex(index);
+            itemManager.showMenu(false);
+            return true;
+        }
+
+        @Override
+        protected void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
+            if (!itemManager.isClickToActivate() || !screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY)) {
+                return;
+            }
+            int index = getIndexAtPoint(screenToLocalX(Forge.mouseMovedX), screenToLocalY(Forge.mouseMovedY));
+            if (index < 0 || index >= getCount()) {
+                return;
+            }
+            String words = itemManager.getClickBadge(getItemAt(index).getKey());
+            if (words != null) {
+                ArenaMenus.rowBadge(g, words, 0, getItemStartPosition(index), getWidth(), getListItemRenderer().getItemHeight());
+            }
+        }
+
+        @Override
         public boolean press(float x, float y) {
             if (renderer.allowPressEffect(this, x, y)) {
                 return super.press(x, y);
@@ -301,7 +337,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
-            final FSkinColor arena = forge.screens.match.arena.ArenaWidgets.rowFill(maxSelections == 1 && selectedIndices.contains(index), index % 2 == 1);
+            final FSkinColor arena = ArenaWidgets.rowFill(maxSelections == 1 && selectedIndices.contains(index), index % 2 == 1);
             if (arena != null) {
                 return arena; //Arena look: a soft navy zebra, the selected row in gold
             }

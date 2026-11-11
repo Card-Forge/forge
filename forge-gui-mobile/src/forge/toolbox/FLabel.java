@@ -41,6 +41,7 @@ public class FLabel extends FDisplayObject implements IButton {
         private boolean bldIconScaleAuto     = true;
         private boolean bldEnabled           = true;
         private boolean bldParseSymbols      = true;
+        private boolean bldUiIcon            = false;
 
         private String bldText;
         private FImage bldIcon;
@@ -82,6 +83,8 @@ public class FLabel extends FDisplayObject implements IButton {
         public Builder pressedColor(final FSkinColor c0) { this.bldPressedColor = c0; return this; }
         public Builder parseSymbols() { parseSymbols(true); return this; }
         public Builder parseSymbols(final boolean b0) { this.bldParseSymbols = b0; return this; }
+        /** The icon is an interface glyph (search, settings, view...): lit in gold in the Arena look. */
+        public Builder uiIcon() { this.bldUiIcon = true; return this; }
     }
 
     // sets better defaults for button labels
@@ -147,7 +150,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private float alphaComposite;
     private int alignment;
     private Vector2 insets;
-    private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, iconScaleWithFont, pressed;
+    private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, iconScaleWithFont, pressed, uiIcon;
 
     private String text;
     private FImage icon;
@@ -169,6 +172,7 @@ public class FLabel extends FDisplayObject implements IButton {
         iconInBackground = b0.bldIconInBackground;
         iconScaleAuto = b0.bldIconScaleAuto;
         iconScaleWithFont = b0.bldIconScaleWithFont;
+        uiIcon = b0.bldUiIcon;
         text = b0.bldText != null ? b0.bldText : "";
         icon = b0.bldIcon;
         textColor = b0.bldTextColor;
@@ -346,7 +350,7 @@ public class FLabel extends FDisplayObject implements IButton {
             g.fillGradientRect(getD10(), getL20(), true, 0, 0, w, h);
             g.drawRect(BORDER_THICKNESS, getD10(), 0, 0, w, h);
         }
-        else if (selectable) {
+        else if (selectable && !ArenaMenus.outline(g, 0, 0, w, h)) { //the Arena look's border is a gold line
             g.drawRect(BORDER_THICKNESS, getL10(), 0, 0, w, h);
         }
         if (Frost.isOn()) {
@@ -438,7 +442,11 @@ public class FLabel extends FDisplayObject implements IButton {
                 }
                 float mod = isHovered() && selectable ? iconWidth < iconHeight ? iconWidth/8f : iconHeight/8f : 0;
                 //draw icon
-                g.drawImage(icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod);
+                if (uiIcon) {
+                    ArenaMenus.icon(g, icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod); //gold in the Arena look
+                } else {
+                    g.drawImage(icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod);
+                }
                 //draw overlay
                 if (overlayIcon != null) {
                     float oldAlpha = g.getfloatAlphaComposite();

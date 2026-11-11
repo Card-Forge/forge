@@ -18,6 +18,8 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.toolbox.ArenaMenus;
+import forge.toolbox.ContextClickable;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventType;
@@ -46,7 +48,12 @@ public abstract class ItemView<T extends InventoryItem> {
         model = model0;
     }
 
-    private class Scroller extends FScrollPane {
+    private class Scroller extends FScrollPane implements ContextClickable {
+        @Override
+        public boolean contextClick(float x, float y) {
+            return itemManager.isClickToActivate() && ItemView.this.contextClick(x, y);
+        }
+
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             onResize(visibleWidth, visibleHeight);
@@ -76,12 +83,26 @@ public abstract class ItemView<T extends InventoryItem> {
         @Override
         public void drawOverlay(Graphics g) {
             super.drawOverlay(g);
-            g.drawRect(1.5f, getBorderColor(), 0, 0, getWidth(), getHeight());
+            if (itemManager.isClickToActivate() && screenPos.contains(Forge.mouseMovedX, Forge.mouseMovedY)) {
+                drawClickBadge(g, screenToLocalX(Forge.mouseMovedX), screenToLocalY(Forge.mouseMovedY));
+            }
+            if (!ArenaMenus.outline(g, 0, 0, getWidth(), getHeight())) { //a gold line in the Arena look
+                g.drawRect(1.5f, getBorderColor(), 0, 0, getWidth(), getHeight());
+            }
         }
     }
 
     protected boolean tap(float x, float y, int count) {
         return false;
+    }
+
+    /** One-click mode: a right click at this point of the scroller; open the item's menu (true) if there is one. */
+    protected boolean contextClick(float x, float y) {
+        return false;
+    }
+
+    /** One-click mode: draw the badge of the item under the pointer, at this point of the scroller. */
+    protected void drawClickBadge(Graphics g, float pointerX, float pointerY) {
     }
     protected boolean zoom(float x, float y, float amount) {
         return false;

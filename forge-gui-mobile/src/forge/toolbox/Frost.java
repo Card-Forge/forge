@@ -8,20 +8,18 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
-import forge.screens.match.MatchScreen;
 import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.views.VPlayerPanel;
 import forge.util.Utils;
 
 /**
  * Shared look of the frosted style outside the match screen: dark translucent slate with the theme's accent colour.
- * With the Arena look on it is the Arena menus' look instead: navy glass with gold (see {@link #isArena()}).
+ * With the Arena look on it is the Arena menus' look instead: navy glass with gold (see {@link ArenaMenus#on()}).
  */
 public final class Frost {
     private static final Color SLATE = new Color(30 / 255f, 35 / 255f, 40 / 255f, 1f);
     private static final Color ARENA_SLATE = new Color(12 / 255f, 20 / 255f, 37 / 255f, 1f);
     public static final Color EDGE = new Color(1f, 1f, 1f, 0.12f);
-    private static final Color ARENA_EDGE = new Color(216 / 255f, 178 / 255f, 106 / 255f, 0.28f);
     public static final Color HOVER = new Color(1f, 1f, 1f, 0.12f);
     public static final Color HOVER_FILL = new Color(62 / 255f, 72 / 255f, 82 / 255f, 0.78f);
     public static final Color TEXT = new Color(1f, 1f, 1f, 0.92f);
@@ -33,7 +31,7 @@ public final class Frost {
     /** @return true when menus and screens should use the frosted look: compact layout, the Frosted Style setting or the Arena look */
     public static boolean isOn() {
         if (Forge.isMobileAdventureMode) { return false; }
-        if (isArena()) { return true; }
+        if (ArenaMenus.on()) { return true; }
         try {
             return VPlayerPanel.isFrosted();
         } catch (RuntimeException e) { //preferences not loaded yet, as on the splash screen
@@ -41,23 +39,11 @@ public final class Frost {
         }
     }
 
-    /**
-     * Whether the menus wear the Arena look: the Arena look is on ({@link ArenaTheme#isActive()}) and this is not the match
-     * screen, whose widgets the Arena board dresses itself. A field read and a type check, cheap enough for every frame.
-     */
-    public static boolean isArena() {
-        return ArenaTheme.isActive() && !(Forge.getCurrentScreen() instanceof MatchScreen);
-    }
-
     public static Color slate(float alpha) {
-        final Color c = isArena() ? ARENA_SLATE : SLATE;
+        final Color c = ArenaMenus.on() ? ARENA_SLATE : SLATE;
         return new Color(c.r, c.g, c.b, alpha);
     }
 
-    /** The faint line round frosted panels: white, or a soft gold in the Arena look. */
-    public static Color edge() {
-        return isArena() ? ARENA_EDGE : EDGE;
-    }
 
     /**
      * A frosted button face in the theme colour, like the Start button: a glossy gradient pill with a darker edge.
@@ -85,13 +71,13 @@ public final class Frost {
 
     /** the theme's active colour with the given alpha */
     public static Color accent(float alpha) {
-        final Color c = isArena() ? ArenaTheme.GOLD : FSkinColor.get(Colors.CLR_ACTIVE).getColor();
+        final Color c = ArenaMenus.on() ? ArenaTheme.GOLD : FSkinColor.get(Colors.CLR_ACTIVE).getColor();
         return new Color(c.r, c.g, c.b, alpha);
     }
 
     /** the accent, brightened or darkened by the factor */
     public static Color accentShade(float factor, float alpha) {
-        final Color c = isArena() ? ArenaTheme.GOLD : FSkinColor.get(Colors.CLR_ACTIVE).getColor();
+        final Color c = ArenaMenus.on() ? ArenaTheme.GOLD : FSkinColor.get(Colors.CLR_ACTIVE).getColor();
         return new Color(Math.min(1f, c.r * factor), Math.min(1f, c.g * factor), Math.min(1f, c.b * factor), alpha);
     }
 }
