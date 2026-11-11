@@ -7,6 +7,7 @@ import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -163,5 +164,20 @@ public class AutoPaymentTest extends SimulationTest {
 
         // the Orrery is needed either way and covers the cost alone, so the Ring stays untapped
         AssertJUnit.assertTrue(ring.isUntapped());
+    }
+
+    @Test
+    public void payColoredWithGemstoneCavernsLuckCounter() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card caverns = addCard("Gemstone Caverns", p);
+        caverns.addCounterInternal(CounterEnumType.LUCK, 1, p, false, null, null);
+        Card sentinel = addCardToZone("Esper Sentinel", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = sentinel.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false));
     }
 }
