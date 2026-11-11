@@ -6,10 +6,9 @@ import forge.gamemodes.rogue.effect.EndlessMode;
 import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import forge.gamemodes.rogue.path.*;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,9 +30,6 @@ public class RogueRunHistoryEntry {
     private List<EffectSnapshot> activeEffects;    // null for old saves
     private long runTimeMillis;                    // XStream defaults to 0 for old saves
 
-    public RogueRunHistoryEntry() {
-    }
-
     public static RogueRunHistoryEntry fromRun(RogueRun run, String outcome, String bossOrDefeatedBy) {
         RogueRunHistoryEntry entry = new RogueRunHistoryEntry();
         entry.commanderName = run.getCurrentCommanderName();
@@ -42,7 +38,7 @@ public class RogueRunHistoryEntry {
         entry.bossOrDefeatedBy = bossOrDefeatedBy != null ? bossOrDefeatedBy : "";
         entry.finalLife = run.getCurrentLife();
         entry.finalGold = run.getCurrentGold();
-        entry.timestamp = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        entry.timestamp = LocalDate.now().toString();
         entry.deckSnapshot = run.getCurrentDeck() != null ? new Deck(run.getCurrentDeck()) : null;
         entry.runTimeMillis = run.getRunTimeMillis();
 
@@ -58,33 +54,39 @@ public class RogueRunHistoryEntry {
             entry.activeEffects.add(new EffectSnapshot(effect.getUIDisplayText(), effect.getActiveDescription(run)));
         }
 
-        entry.path = new ArrayList<>();
+        entry.path = capturePath(run);
+        return entry;
+    }
 
-        if (run.getPath() != null) {
-            RoguePathNode currentNode = run.getCurrentNode();
-            for (RoguePathNode node : run.getPath().getNodes()) {
-                if (!node.isCompleted() && node != currentNode) {
-                    continue;
+    private static List<String> capturePath(RogueRun run) {
+        List<String> pathLabels = new ArrayList<>();
+        RoguePath path = run.getPath();
+        if (path == null) {
+            return pathLabels;
+        }
+
+        RoguePathNode currentNode = run.getCurrentNode();
+        for (RoguePathNode node : path.getNodes()) {
+            if (!node.isCompleted() && node != currentNode) {
+                continue;
+            }
+            if (node instanceof NodePlanebound planeboundNode) {
+                RoguePlanebound planebound = planeboundNode.getRoguePlanebound();
+                if (planebound != null) {
+                    pathLabels.add(planebound.planeName() + " (" + planebound.planeboundName() + ")");
                 }
-                if (node instanceof NodePlanebound) {
-                    NodePlanebound pb = (NodePlanebound) node;
-                    if (pb.getRoguePlanebound() != null) {
-                        entry.path.add(pb.getRoguePlanebound().planeName()
-                                + " (" + pb.getRoguePlanebound().planeboundName() + ")");
-                    }
-                } else if (node instanceof NodeSanctum) {
-                    entry.path.add("Sanctum");
-                } else if (node instanceof NodeBazaar) {
-                    entry.path.add("Bazaar");
-                } else if (node instanceof NodeChest) {
-                    entry.path.add("Loot");
-                } else if (node instanceof NodeEvent) {
-                    entry.path.add("Event");
-                }
+            } else if (node instanceof NodeSanctum) {
+                pathLabels.add("Sanctum");
+            } else if (node instanceof NodeBazaar) {
+                pathLabels.add("Bazaar");
+            } else if (node instanceof NodeChest) {
+                pathLabels.add("Loot");
+            } else if (node instanceof NodeEvent) {
+                pathLabels.add("Event");
             }
         }
 
-        return entry;
+        return pathLabels;
     }
 
     // Getters
@@ -93,8 +95,6 @@ public class RogueRunHistoryEntry {
     public String getOutcome() { return outcome; }
     public String getBossOrDefeatedBy() { return bossOrDefeatedBy; }
     public List<String> getPath() { return path != null ? path : new ArrayList<>(); }
-    public int getFinalLife() { return finalLife; }
-    public int getFinalGold() { return finalGold; }
     public String getTimestamp() { return timestamp; }
     public Deck getDeckSnapshot() { return deckSnapshot; }
     public int getDescensionLevel() { return descensionLevel; }
@@ -114,6 +114,7 @@ public class RogueRunHistoryEntry {
         private String tooltipText;
 
         public EffectSnapshot() {
+            // XStream's pure Java reflection provider uses this constructor when loading saves.
         }
 
         public EffectSnapshot(String displayText, String tooltipText) {

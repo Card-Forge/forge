@@ -5,6 +5,7 @@ import forge.ImageKeys;
 import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RoguePlaneboundType;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gui.CardPicturePanel;
@@ -22,7 +23,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
 
 /**
  * Visual representation of a Planebound node in the Rogue Commander path. Displays the plane card
@@ -44,16 +45,15 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   private final JLabel lblPlaneboundName;
   private final JLabel lblLifeTotal;
   private final PaperCard currentPlaneCard;
-  private final boolean isFaceDown;
   private boolean awaitingFlip;
 
   // Zoom utility
-  private CardUtil zoomUtil; // Lazily initialized on first zoom
-  private BufferedImage cachedRotatedImage; // Cache rotated image to avoid recreating
+  private transient CardUtil zoomUtil; // Lazily initialized on first zoom
+  private transient BufferedImage cachedRotatedImage; // Cache rotated image to avoid recreating
 
   // Flip animation
-  private final CardUtil.FlipAnimation flipAnimation;
-  private BufferedImage revealImage; // The face-up image to show after flip
+  private final transient CardUtil.FlipAnimation flipAnimation;
+  private transient BufferedImage revealImage; // The face-up image to show after flip
 
   /**
    * Create a panel for displaying a planebound node.
@@ -66,7 +66,6 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   public NodePlaneboundPanel(NodePlanebound node, boolean isFaceDown, int planeboundRowCount,
       boolean animateReveal) {
     super(node);
-    this.isFaceDown = isFaceDown;
     this.awaitingFlip = animateReveal;
     this.flipAnimation = new CardUtil.FlipAnimation(this);
 
@@ -87,25 +86,8 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
       setHiddenCardBackImage(cardBack);
     }
 
-    if (!isFaceDown && planeCard != null) {
-      // Load the face-up image
-      Pair<BufferedImage, Boolean> imageInfo = ImageCache.getCardOriginalImageInfo(
-          planeCard.getImageKey(false), true);
-      BufferedImage originalImage = imageInfo.getLeft();
-      boolean isPlaceholder = imageInfo.getRight();
-
-      if (ImageCache.isDefaultImage(originalImage) || isPlaceholder) {
-        GuiBase.getInterface().getImageFetcher().fetchImage(planeCard.getImageKey(false), this);
-      }
-
-      if (originalImage != null) {
-        revealImage = rotateImage90Clockwise(originalImage);
-        if (!animateReveal) {
-          cardImage.setItem(revealImage);
-        }
-      }
-    } else if (!isFaceDown) {
-      System.out.println("ERROR: Plane card not found in database!");
+    if (!isFaceDown) {
+      loadFaceUpImage(planeCard, planeName, animateReveal);
     }
 
     add(cardImage);
@@ -173,6 +155,21 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     add(pnlLifeRow);
   }
 
+  private void loadFaceUpImage(PaperCard planeCard, String planeName, boolean animateReveal) {
+    if (planeCard == null) {
+      Logger.warn("Plane card not found in database: {}", planeName);
+      return;
+    }
+
+    BufferedImage originalImage = CardUtil.getCardImageAndFetchIfNeeded(planeCard.getImageKey(false), this);
+    if (originalImage != null) {
+      revealImage = rotateImage90Clockwise(originalImage);
+      if (!animateReveal) {
+        cardImage.setItem(revealImage);
+      }
+    }
+  }
+
   /**
    * Animate flipping from face-down to face-up.
    */
@@ -235,22 +232,19 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   private BufferedImage getPlaneCardImage(PaperCard planeCard) {
     try {
       Card gameCard = Card.getCardForUi(planeCard);
-      if (gameCard != null) {
-        CardView cardView = CardView.get(gameCard);
+      CardView cardView = CardView.get(gameCard);
 
-        // Try high-quality image first (actual artwork)
-        BufferedImage image = FImageUtil.getImageXlhq(cardView.getCurrentState());
-        if (image != null) {
-          return image;
-        }
-
-        // Fall back to regular image
-        image = FImageUtil.getImage(cardView.getCurrentState());
+      // Try high-quality image first (actual artwork)
+      BufferedImage image = FImageUtil.getImageXlhq(cardView.getCurrentState());
+      if (image != null) {
         return image;
       }
+
+      // Fall back to regular image
+      image = FImageUtil.getImage(cardView.getCurrentState());
+      return image;
     } catch (Exception e) {
-      System.err.println("Warning: Could not get image for plane card: " + planeCard.getName());
-      e.printStackTrace();
+      Logger.warn(e, "Could not get image for plane card: {}", planeCard.getName());
     }
     return null;
   }
@@ -306,7 +300,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   private static PaperCard getPlaneCard(String planeName) {
     try {
       // Get all plane cards from the centralized cache
-      CardPool allPlanes = forge.gamemodes.rogue.RogueConfig.getAllPlanes();
+      CardPool allPlanes = RogueConfig.getAllPlanes();
 
       // Find the plane card by name
       for (PaperCard card : allPlanes.toFlatList()) {
@@ -316,9 +310,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
       }
       return null;
     } catch (Exception e) {
-      System.err.println(
-          "Warning: Error loading plane card: " + planeName + " - " + e.getMessage());
-      e.printStackTrace();
+      Logger.warn(e, "Error loading plane card: {}", planeName);
       return null;
     }
   }
@@ -358,15 +350,6 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   }
 
   /**
-   * Close the zoom overlay.
-   */
-  private void closeZoom() {
-    if (zoomUtil != null) {
-      zoomUtil.closeZoom();
-    }
-  }
-
-  /**
    * Callback from ImageFetcher when a card image has been downloaded. Updates the display with the
    * newly downloaded image.
    */
@@ -376,7 +359,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
       return;
     }
 
-    System.out.println("=== Image fetched for: " + currentPlaneCard.getName() + " ===");
+    Logger.debug("Image fetched for plane card: {}", currentPlaneCard.getName());
 
     // Clear cached rotated image so it gets regenerated with the new downloaded image
     cachedRotatedImage = null;
@@ -384,8 +367,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     // Get the newly downloaded image
     BufferedImage originalImage = getPlaneCardImage(currentPlaneCard);
     if (originalImage != null) {
-      System.out.println(
-          "New image size: " + originalImage.getWidth() + "x" + originalImage.getHeight());
+      Logger.debug("Plane card image size: {}x{}", originalImage.getWidth(), originalImage.getHeight());
       BufferedImage rotatedImage = rotateImage90Clockwise(originalImage);
       // Update revealImage so the flip animation uses the real image, not the fallback
       revealImage = rotatedImage;
@@ -402,10 +384,12 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
     Graphics2D g = img.createGraphics();
     g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    double cx = w / 2.0, cy = h / 2.0;
+    double cx = w / 2.0;
+    double cy = h / 2.0;
     double r = h / 2.0 - 1;
     // 5 vertices, connect every other (0->2->4->1->3) for pentagram shape
-    double[] px = new double[5], py = new double[5];
+    double[] px = new double[5];
+    double[] py = new double[5];
     for (int i = 0; i < 5; i++) {
       double angle = Math.PI / 2 + i * 2 * Math.PI / 5;
       px[i] = cx + r * Math.cos(angle);

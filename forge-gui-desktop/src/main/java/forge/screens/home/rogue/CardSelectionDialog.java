@@ -119,15 +119,10 @@ public class CardSelectionDialog {
     wrapper.add(scrollPane, BorderLayout.CENTER);
 
     // Dialog size — fit screen
-    GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
-        .getDefaultScreenDevice().getDefaultConfiguration();
-    Rectangle screenBounds = gc.getBounds();
-    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-    int usableWidth = screenBounds.width - screenInsets.left - screenInsets.right;
-    int usableHeight = screenBounds.height - screenInsets.top - screenInsets.bottom;
-    int dialogWidth = Math.min((int) (usableWidth * 0.9),
+    Dimension screenSize = RogueUIHelper.getUsableDefaultScreenSize();
+    int dialogWidth = Math.min((int) (screenSize.width * 0.9),
         CARDS_PER_ROW * (BASE_CARD_WIDTH + CARD_SPACING) + 2 * PADDING + 30); // +30 for scrollbar
-    int dialogHeight = (int) (usableHeight * 0.85) - 80;
+    int dialogHeight = (int) (screenSize.height * 0.85) - 80;
 
     Dimension dialogSize = new Dimension(dialogWidth, dialogHeight);
     wrapper.setPreferredSize(dialogSize);

@@ -510,7 +510,7 @@ public final class RogueCustomDeckGenerator {
                 break;
             }
         }
-        if (!addBasicLands(lands, commanderColors,
+        if (skipBasicLands(lands, commanderColors,
             RogueConfig.getBasicLandEdition(landEdition, context.commander()), STARTING_LAND_COUNT)) {
             return Collections.emptyList();
         }
@@ -746,7 +746,7 @@ public final class RogueCustomDeckGenerator {
     }
 
     /** Fills the list to the target count with basic lands in the commander's colors. */
-    public static boolean addBasicLands(List<PaperCard> lands, ColorSet colors, String landEdition,
+    public static boolean skipBasicLands(List<PaperCard> lands, ColorSet colors, String landEdition,
             int targetLandCount) {
         String[] basicNames = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
         byte[] basicColors = {MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK,
@@ -756,7 +756,7 @@ public final class RogueCustomDeckGenerator {
             if (colors.hasAnyColor(basicColors[i])) {
                 PaperCard basic = RogueConfig.getBasicLandPrint(basicNames[i], landEdition);
                 if (basic == null) {
-                    return false;
+                    return true;
                 }
                 basics.add(basic);
             }
@@ -764,14 +764,14 @@ public final class RogueCustomDeckGenerator {
         if (basics.isEmpty()) {
             PaperCard wastes = RogueConfig.getBasicLandPrint("Wastes", landEdition);
             if (wastes == null) {
-                return false;
+                return true;
             }
             basics.add(wastes);
         }
         for (int i = 0; lands.size() < targetLandCount; i++) {
             lands.add(basics.get(i % basics.size()));
         }
-        return true;
+        return false;
     }
 
     private static boolean addReward(CardPool rewards, Set<String> used, PaperCard card) {

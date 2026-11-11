@@ -12,6 +12,7 @@ import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.path.NodeBazaar;
 import forge.gamemodes.rogue.path.NodeChest;
+import forge.gamemodes.rogue.path.RoguePathNode;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Localizer;
@@ -120,8 +121,8 @@ public enum CustomRunModification implements RogueEffect {
 
             List<PaperCard> basics = new ArrayList<>();
             String landEdition = RogueConfig.getBasicLandEdition(sealedDeck.getLandEdition(), commanders.get(0));
-            if (!RogueCustomDeckGenerator.addBasicLands(basics, ColorSet.fromMask(commanderColors),
-                    landEdition, basicsNeeded)) {
+            if (RogueCustomDeckGenerator.skipBasicLands(basics, ColorSet.fromMask(commanderColors),
+                landEdition, basicsNeeded)) {
                 return null;
             }
             sealedMain.addAllFlat(basics);
@@ -144,7 +145,7 @@ public enum CustomRunModification implements RogueEffect {
 
         @Override
         public void afterPathGeneration(RogueRun run) {
-            run.getPath().replaceNodes(node -> node.isSideNode(), NodeBazaar::new);
+            run.getPath().replaceNodes(RoguePathNode::isSideNode, NodeBazaar::new);
         }
     },
     USURPER("custom:usurper", "Usurper",
@@ -186,7 +187,7 @@ public enum CustomRunModification implements RogueEffect {
         "All Side Nodes are Chests offering only cards from the Commander Banlist.", true) {
         @Override
         public void afterPathGeneration(RogueRun run) {
-            run.getPath().replaceNodes(node -> node.isSideNode(), NodeChest::new);
+            run.getPath().replaceNodes(RoguePathNode::isSideNode, NodeChest::new);
         }
 
         @Override

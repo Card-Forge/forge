@@ -1,10 +1,13 @@
 package forge.screens.home.rogue;
 
+import static forge.screens.home.rogue.CardRewardDialog.getCoinIcon;
+
 import forge.deckchooser.FDeckViewer;
 import forge.gamemodes.rogue.BazaarPricing;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.BazaarItem;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.home.rogue.CardUtil.CardGridSize;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FLabel;
@@ -31,6 +34,7 @@ import java.awt.Stroke;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.swing.SwingConstants;
@@ -63,10 +67,8 @@ public class BazaarDialog {
   private final int availableGold;
   private final String dialogTitle;
   private final String rerollButtonLabel;
-  private int selectedTabIndex;
   private boolean rerollEnabled = true;
   private final Set<BazaarItem> selectedItems = new HashSet<>();
-  private final FLabel lblGold;
   private final FLabel lblCost;
   private final FLabel lblRemaining;
 
@@ -83,7 +85,6 @@ public class BazaarDialog {
     this.availableGold = gold;
     this.dialogTitle = title != null ? title : Localizer.getInstance().getMessage("lblRogueBazaar");
     this.rerollButtonLabel = rerollButtonLabel;
-    this.selectedTabIndex = selectedTabIndex;
     splitItems();
 
     panel = new MainPanel();
@@ -95,7 +96,7 @@ public class BazaarDialog {
         .fontAlign(SwingConstants.CENTER)
         .build();
 
-    lblGold = new FLabel.Builder()
+    FLabel lblGold = new FLabel.Builder()
         .text(Localizer.getInstance().getMessage("lblRogueGoldTotal", availableGold))
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
         .fontSize(14)
@@ -122,9 +123,8 @@ public class BazaarDialog {
     lblRemaining.setHorizontalTextPosition(SwingConstants.LEFT);
 
     FLabel lblDescription = new FLabel.Builder()
-        .text(specialItems.isEmpty()
-            ? Localizer.getInstance().getMessage("lblRogueSelectCardsToBuy")
-            : Localizer.getInstance().getMessage("lblRogueSelectOffersToBuy"))
+        .text(Localizer.getInstance().getMessage(
+            specialItems.isEmpty() ? "lblRogueSelectCardsToBuy" : "lblRogueSelectOffersToBuy"))
         .fontSize(12)
         .fontAlign(SwingConstants.CENTER)
         .build();
@@ -135,7 +135,7 @@ public class BazaarDialog {
     panel.add(separator, "pos (100%-155) 50, w 145!, h 1px!");
     panel.add(lblRemaining, "pos (100%-160) 53, w 150!, h 20px!");
     panel.add(lblDescription, "w 100%!, h 20px!, ax center, gap 0 0 5px 10px, wrap");
-    panel.setupShopPanels();
+    panel.setupShopPanels(selectedTabIndex);
 
     int cardsPerRow = getMaxCardsPerRow();
     int numRows = getMaxRowCount();
@@ -174,10 +174,6 @@ public class BazaarDialog {
 
   public void setRerollEnabled(boolean enabled) {
     this.rerollEnabled = enabled;
-  }
-
-  public int getSelectedTabIndex() {
-    return selectedTabIndex;
   }
 
   private void splitItems() {
@@ -229,19 +225,23 @@ public class BazaarDialog {
     return Math.max(1, Math.max(cardRows, specialRows));
   }
 
-  public Set<BazaarItem> show() {
+  public record DialogResult(boolean rerollRequested, Set<BazaarItem> selectedItems,
+                             int selectedTabIndex) {}
+
+  public DialogResult show() {
     final Localizer localizer = Localizer.getInstance();
     SoundSystem.instance.play(SoundEffectType.CoinsDrop,
         SoundEffectType.CoinsDrop.isSynced());
 
     final int BUY_OPTION = 0;
     final boolean showReroll = rerollButtonLabel != null;
-    final int REROLL_OPTION = showReroll ? 1 : -1;
+    final int REROLL_OPTION = 1;
     final int VIEW_DECK_OPTION = showReroll ? 2 : 1;
     final int VIEW_MAP_OPTION = showReroll ? 3 : 2;
     final int SKIP_OPTION = showReroll ? 4 : 3;
     final List<String> buttons = new ArrayList<>();
-    buttons.add(specialItems.isEmpty() ? localizer.getMessage("lblRogueBuySelectedCards") : localizer.getMessage("lblRogueBuySelected"));
+    buttons.add(localizer.getMessage(
+        specialItems.isEmpty() ? "lblRogueBuySelectedCards" : "lblRogueBuySelected"));
     if (showReroll) {
       buttons.add(rerollButtonLabel);
     }
@@ -252,6 +252,7 @@ public class BazaarDialog {
     final javax.swing.Icon coinIcon = createCoinIcon();
 
     int result;
+    int selectedTabIndex;
     do {
       optionPane = new FOptionPane(
           null,
@@ -298,24 +299,13 @@ public class BazaarDialog {
       }
     } while (result == VIEW_DECK_OPTION || result == VIEW_MAP_OPTION);
 
-    if (result == BUY_OPTION) {
-      return selectedItems;
-    }
-    if (showReroll && result == REROLL_OPTION) {
-      return null;
-    }
-    return new HashSet<>();
+    boolean rerollRequested = showReroll && result == REROLL_OPTION;
+    Set<BazaarItem> purchases = result == BUY_OPTION ? selectedItems : Set.of();
+    return new DialogResult(rerollRequested, purchases, selectedTabIndex);
   }
 
   private static javax.swing.Icon createCoinIcon() {
-    final javax.swing.Icon raw = FSkin.getImage(FSkinProp.ICO_QUEST_COIN).resize(16, 16).getIcon();
-    return new javax.swing.Icon() {
-      public int getIconWidth()  { return raw.getIconWidth(); }
-      public int getIconHeight() { return raw.getIconHeight(); }
-      public void paintIcon(java.awt.Component c, java.awt.Graphics g, int x, int y) {
-        raw.paintIcon(c, g, x, y - 2);
-      }
-    };
+    return getCoinIcon();
   }
 
   private static class SeparatorLine extends javax.swing.JPanel {
@@ -335,17 +325,15 @@ public class BazaarDialog {
 
     private final List<SelectableCardPanel> cardPanels = new ArrayList<>();
     private ShopGridPanel cardGridPanel;
-    private ShopGridPanel specialGridPanel;
     private FTabbedPane tabbedPane;
     private Timer revealTimer;
-    private int revealIndex = 0;
 
     private MainPanel() {
       super(new MigLayout("insets 10, gap 0, wrap", "[grow, center]", ""));
       setOpaque(false);
     }
 
-    private void setupShopPanels() {
+    private void setupShopPanels(int selectedTabIndex) {
       cardGridPanel = new ShopGridPanel(buildRows(cardItems));
       if (specialItems.isEmpty()) {
         add(cardGridPanel);
@@ -365,7 +353,7 @@ public class BazaarDialog {
       List<List<BazaarItem>> specialRows = new ArrayList<>();
       specialRows.add(traitItems);
       specialRows.add(carryItems);
-      specialGridPanel = new ShopGridPanel(specialRows);
+      ShopGridPanel specialGridPanel = new ShopGridPanel(specialRows);
       tabbedPane = new FTabbedPane();
       tabbedPane.addTab(Localizer.getInstance().getMessage("lblCards"), cardGridPanel);
       tabbedPane.addTab(Localizer.getInstance().getMessage("lblRogueTraitsAndCarryCards"), specialGridPanel);
@@ -386,17 +374,20 @@ public class BazaarDialog {
     }
 
     public void startRevealAnimation() {
-      revealIndex = 0;
+      if (revealTimer != null) {
+        revealTimer.stop();
+      }
+      Iterator<SelectableCardPanel> remainingCards = cardPanels.iterator();
       revealTimer = new Timer(100, e -> {
-        if (revealIndex < cardPanels.size()) {
-          if (revealIndex == 0 && cardPanels.get(0).faceDown) {
+        if (remainingCards.hasNext()) {
+          SelectableCardPanel cardPanel = remainingCards.next();
+          if (cardPanel == cardPanels.get(0) && cardPanel.faceDown) {
             SoundSystem.instance.play(SoundEffectType.FlipCard,
                 SoundEffectType.FlipCard.isSynced());
           }
-          cardPanels.get(revealIndex).reveal();
-          revealIndex++;
+          cardPanel.reveal();
         } else {
-          revealTimer.stop();
+          ((Timer) e.getSource()).stop();
         }
       });
       revealTimer.start();
@@ -415,12 +406,6 @@ public class BazaarDialog {
       }
     }
 
-    private SelectableCardPanel createCardPanel(BazaarItem item) {
-      SelectableCardPanel cardPanel = new SelectableCardPanel(item);
-      cardPanels.add(cardPanel);
-      return cardPanel;
-    }
-
     private class ShopGridPanel extends SkinnedPanel {
       private final List<List<SelectableCardPanel>> rows = new ArrayList<>();
 
@@ -430,7 +415,8 @@ public class BazaarDialog {
         for (List<BazaarItem> itemRow : itemRows) {
           List<SelectableCardPanel> panelRow = new ArrayList<>();
           for (BazaarItem item : itemRow) {
-            SelectableCardPanel cardPanel = createCardPanel(item);
+            SelectableCardPanel cardPanel = new SelectableCardPanel(item);
+            cardPanels.add(cardPanel);
             panelRow.add(cardPanel);
             add(cardPanel);
           }
@@ -466,15 +452,11 @@ public class BazaarDialog {
         int desiredWidth = cardsPerRow * (BASE_CARD_WIDTH + CARD_SPACING) - CARD_SPACING;
         int desiredHeight = numRows * (baseCardHeight + 15) - 15;
 
-        float widthScale =
-            availableWidth > 0 ? Math.min(1.0f, (float) availableWidth / desiredWidth) : 1.0f;
-        float heightScale =
-            availableHeight > 0 ? Math.min(1.0f, (float) availableHeight / desiredHeight) : 1.0f;
-        float scale = Math.min(widthScale, heightScale);
-
-        cardWidth = Math.round(BASE_CARD_WIDTH * scale);
-        cardImageHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
-        priceLabelHeight = Math.round(PRICE_LABEL_HEIGHT * scale);
+        CardGridSize gridSize = CardUtil.fitCardGrid(BASE_CARD_WIDTH, availableWidth, availableHeight,
+            desiredWidth, desiredHeight);
+        cardWidth = gridSize.cardWidth();
+        cardImageHeight = gridSize.cardImageHeight();
+        priceLabelHeight = Math.round(PRICE_LABEL_HEIGHT * gridSize.scale());
         cardHeight = cardImageHeight + priceLabelHeight;
       }
 
@@ -490,7 +472,8 @@ public class BazaarDialog {
   }
 
   private class SelectableCardPanel extends SelectableCardPanelBase {
-    private final BazaarItem item;
+    // The dialog builds this panel from the current Bazaar inventory.
+    private final transient BazaarItem item;
 
     private SelectableCardPanel(BazaarItem item) {
       super(item.card(), () -> BazaarDialog.this.zoomUtil, true, ZoomActivation.MOUSE_WHEEL);

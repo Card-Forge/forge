@@ -30,8 +30,8 @@ public class NodeResultPanel extends SkinnedPanel {
     private static final int TEXT_RIGHT_PADDING = 8;
 
     private final List<ReadOnlyCardPanel> allCardPanels = new ArrayList<>();
-    private final RogueUIHelper.TypewriterText typewriterText;
-    private CardUtil zoomUtil;
+    private final transient RogueUIHelper.TypewriterText typewriterText;
+    private transient CardUtil zoomUtil;
 
     public record CardSection(String label, String text, List<PaperCard> cards) {
         public CardSection(String label, List<PaperCard> cards) {
@@ -92,49 +92,54 @@ public class NodeResultPanel extends SkinnedPanel {
 
         // Result sections
         for (CardSection section : sections) {
-            if (!hasContent(section)) continue;
-
-            if (hasLabel(section)) {
-                FLabel lblSection = new FLabel.Builder()
-                        .text(section.label())
-                        .fontSize(13)
-                        .fontStyle(Font.BOLD)
-                        .build();
-                add(lblSection, "w 100%!, h 22px!, gap 5px 0 5px 3px, wrap");
-                desiredHeight += 22 + 10;
-            }
-
-            if (section.text() != null && !section.text().isBlank()) {
-                FTextArea txtSection = createWrappedTextArea(section.text(), 13f, textWidth);
-                add(txtSection, "w 100%!, ax center, gap 0 0 0 5px, wrap");
-                desiredHeight += txtSection.getPreferredSize().height + 5;
-            }
-
-            if (section.cards() != null && !section.cards().isEmpty()) {
-                // Card row panel
-                SkinnedPanel cardRow = new SkinnedPanel(
-                        new MigLayout("insets 0, gap " + CARD_SPACING + "px, wrap " + MAX_CARDS_PER_ROW, "", ""));
-                cardRow.setOpaque(false);
-
-                for (PaperCard card : section.cards()) {
-                    ReadOnlyCardPanel cardPanel = new ReadOnlyCardPanel(card, () -> zoomUtil);
-                    allCardPanels.add(cardPanel);
-                    cardRow.add(cardPanel, "w " + CARD_WIDTH + "!, h " + CARD_HEIGHT + "!");
-                }
-
-                add(cardRow, "ax center, wrap");
-
-                int cardsPerRow = Math.min(section.cards().size(), MAX_CARDS_PER_ROW);
-                int rowCount = (int) Math.ceil(section.cards().size() / (double) cardsPerRow);
-                desiredHeight += rowCount * CARD_HEIGHT
-                        + Math.max(0, rowCount - 1) * CARD_SPACING
-                        + 10;
-            }
+            desiredHeight += addResultSection(section, textWidth);
         }
         desiredHeight = Math.max(desiredHeight, minHeight);
         Dimension size = new Dimension(desiredWidth, desiredHeight);
         setPreferredSize(size);
         setMinimumSize(size);
+    }
+
+    private int addResultSection(CardSection section, int textWidth) {
+        if (!hasContent(section)) {
+            return 0;
+        }
+
+        int sectionHeight = 0;
+        if (hasLabel(section)) {
+            FLabel lblSection = new FLabel.Builder()
+                    .text(section.label())
+                    .fontSize(13)
+                    .fontStyle(Font.BOLD)
+                    .build();
+            add(lblSection, "w 100%!, h 22px!, gap 5px 0 5px 3px, wrap");
+            sectionHeight += 22 + 10;
+        }
+
+        if (section.text() != null && !section.text().isBlank()) {
+            FTextArea txtSection = createWrappedTextArea(section.text(), 13f, textWidth);
+            add(txtSection, "w 100%!, ax center, gap 0 0 0 5px, wrap");
+            sectionHeight += txtSection.getPreferredSize().height + 5;
+        }
+
+        if (section.cards() != null && !section.cards().isEmpty()) {
+            SkinnedPanel cardRow = new SkinnedPanel(
+                    new MigLayout("insets 0, gap " + CARD_SPACING + "px, wrap " + MAX_CARDS_PER_ROW, "", ""));
+            cardRow.setOpaque(false);
+            for (PaperCard card : section.cards()) {
+                ReadOnlyCardPanel cardPanel = new ReadOnlyCardPanel(card, () -> zoomUtil);
+                allCardPanels.add(cardPanel);
+                cardRow.add(cardPanel, "w " + CARD_WIDTH + "!, h " + CARD_HEIGHT + "!");
+            }
+            add(cardRow, "ax center, wrap");
+
+            int cardsPerRow = Math.min(section.cards().size(), MAX_CARDS_PER_ROW);
+            int rowCount = (int) Math.ceil(section.cards().size() / (double) cardsPerRow);
+            sectionHeight += rowCount * CARD_HEIGHT
+                    + Math.max(0, rowCount - 1) * CARD_SPACING
+                    + 10;
+        }
+        return sectionHeight;
     }
 
     public void startTypewriter() {

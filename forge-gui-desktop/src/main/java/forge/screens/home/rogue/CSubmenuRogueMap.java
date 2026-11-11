@@ -113,7 +113,7 @@ public enum CSubmenuRogueMap implements ICDoc {
 
   @Override
   public void register() {
-    // TODO document why this method is empty
+    // The map attaches its listeners in initialize().
   }
 
   @Override
@@ -252,9 +252,8 @@ public enum CSubmenuRogueMap implements ICDoc {
       button.setText(Localizer.getInstance().getMessage("lblRogueRerollPlaneCount", pathCtx.remainingPlaneboundRerolls));
       boolean hasCandidates = !getPlaneboundRerollCandidates(nodePlanebound).isEmpty();
       button.setEnabled(hasCandidates);
-      button.setToolTipText(hasCandidates
-          ? Localizer.getInstance().getMessage("lblRogueRerollPlanebound")
-          : Localizer.getInstance().getMessage("lblRogueNoAlternativePlanebound"));
+      button.setToolTipText(Localizer.getInstance().getMessage(
+          hasCandidates ? "lblRogueRerollPlanebound" : "lblRogueNoAlternativePlanebound"));
     }
 
     if (button.getParent() != null) {
@@ -474,8 +473,12 @@ public enum CSubmenuRogueMap implements ICDoc {
     return currentRun;
   }
 
-  public void setCurrentRun(RogueRun run) {
+  void setCurrentRun(RogueRun run) {
     this.currentRun = run;
+  }
+
+  public void clearCurrentRun() {
+    currentRun = null;
   }
 
   private void devNextNode() {

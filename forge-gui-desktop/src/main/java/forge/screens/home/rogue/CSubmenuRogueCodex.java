@@ -56,21 +56,7 @@ public enum CSubmenuRogueCodex implements ICDoc {
   private void loadStatistics() {
     RogueMetaProgress progress = RogueMetaProgress.getInstance();
 
-    view.updateDisplay(
-        progress.getTotalRunsStarted(),
-        progress.getTotalRunsCompleted(),
-        progress.getTotalRunsWon(),
-        progress.getTotalPlaytimeMillis(),
-        progress.getTotalMatchesWon(),
-        progress.getTotalMatchesLost(),
-        progress.getMaxLifeInRun(),
-        progress.getMaxGoldInRun(),
-        progress.getMaxCreatureTypesInDeck(),
-        progress.getMaxArtifactsInDeck(),
-        progress.getMaxSharedCreatureTypeInDeck(),
-        progress.getMaxLegendaryPermanentsInDeck(),
-        progress.getMaxNonbasicLandsInDeck()
-    );
+    view.updateDisplay(progress);
 
     refreshActiveTab(progress);
   }

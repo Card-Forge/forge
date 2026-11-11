@@ -1,6 +1,5 @@
 package forge.screens.home.rogue;
 
-import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView;
 import forge.gui.CardPicturePanel;
@@ -18,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.function.Supplier;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Base class for selectable card panels with flip animation. Provides common functionality for card
@@ -41,9 +39,7 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
   protected boolean selected;
   protected boolean hovered;
   protected boolean faceDown;
-  private final CardUtil.FlipAnimation flipAnimation;
-  private final Supplier<CardUtil> zoomUtilSupplier;
-  private final ZoomActivation zoomActivation;
+  private final transient CardUtil.FlipAnimation flipAnimation;
 
   // Double-faced card support
   protected final boolean hasBackFace;
@@ -57,7 +53,7 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
    * @param faceDown         Whether the card starts face-down (for flip animation reveal)
    * @param zoomActivation   Mouse action used to zoom the card
    */
-  public SelectableCardPanelBase(PaperCard card, Supplier<CardUtil> zoomUtilSupplier,
+  protected SelectableCardPanelBase(PaperCard card, Supplier<CardUtil> zoomUtilSupplier,
       boolean faceDown, ZoomActivation zoomActivation) {
     super(null);
     this.card = card;
@@ -65,8 +61,6 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     this.faceDown = faceDown;
     this.flipAnimation = new CardUtil.FlipAnimation(this);
     this.cardPicture = new CardPicturePanel();
-    this.zoomUtilSupplier = zoomUtilSupplier;
-    this.zoomActivation = zoomActivation;
 
     // Check if card has a back face (transform, flip, meld, modal)
     this.hasBackFace = card.hasBackFace();
@@ -78,45 +72,29 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     updateCardDisplay();
     cardPicture.setOpaque(false);
     add(cardPicture);
+    installMouseListeners(zoomUtilSupplier, zoomActivation);
+  }
 
-    // Add mouse listener for selection and flip button clicks
+  private void installMouseListeners(Supplier<CardUtil> zoomUtilSupplier,
+      ZoomActivation zoomActivation) {
     addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (zoomActivation == ZoomActivation.MIDDLE_MOUSE_BUTTON
-            && e.getButton() == MouseEvent.BUTTON2) {
-          return;
-        }
-        if (!SelectableCardPanelBase.this.faceDown) {
-          // Check if click is on flip icon area
-          if (hasBackFace && isClickOnFlipIcon(e)) {
-            if (!flipAnimation.isAnimating()) {
-              SoundSystem.instance.play(SoundEffectType.FlipCard,
-                  SoundEffectType.FlipCard.isSynced());
-              flipToOtherFace();
-            }
-          } else {
-            toggleSelection();
-          }
+        if (!isMiddleButtonZoom(e, zoomActivation)) {
+          handleCardClick(e);
         }
       }
 
       @Override
       public void mousePressed(MouseEvent e) {
-        if (zoomActivation == ZoomActivation.MIDDLE_MOUSE_BUTTON
-            && e.getButton() == MouseEvent.BUTTON2
-            && !SelectableCardPanelBase.this.faceDown) {
-          CardUtil zoomUtil = zoomUtilSupplier != null ? zoomUtilSupplier.get() : null;
-          if (zoomUtil != null) {
-            zoomUtil.showZoom(card, showingAltFace);
-          }
+        if (isMiddleButtonZoom(e, zoomActivation)) {
+          showZoom(zoomUtilSupplier);
         }
       }
 
       @Override
       public void mouseReleased(MouseEvent e) {
-        if (zoomActivation == ZoomActivation.MIDDLE_MOUSE_BUTTON
-            && e.getButton() == MouseEvent.BUTTON2) {
+        if (isMiddleButtonZoom(e, zoomActivation)) {
           CardUtil zoomUtil = zoomUtilSupplier != null ? zoomUtilSupplier.get() : null;
           if (zoomUtil != null) {
             zoomUtil.closeZoom();
@@ -140,16 +118,39 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     });
 
     if (zoomActivation == ZoomActivation.MOUSE_WHEEL) {
-      // Add mouse wheel listener for card zoom (only when revealed)
       addMouseWheelListener(e -> {
-        if (!SelectableCardPanelBase.this.faceDown && e.getWheelRotation() < 0) {
-          CardUtil zoomUtil = zoomUtilSupplier != null ? zoomUtilSupplier.get() : null;
-          if (zoomUtil != null) {
-            // Zoom the currently displayed face
-            zoomUtil.showZoom(card, showingAltFace);
-          }
+        if (e.getWheelRotation() < 0) {
+          showZoom(zoomUtilSupplier);
         }
       });
+    }
+  }
+
+  private static boolean isMiddleButtonZoom(MouseEvent e, ZoomActivation zoomActivation) {
+    return zoomActivation == ZoomActivation.MIDDLE_MOUSE_BUTTON && e.getButton() == MouseEvent.BUTTON2;
+  }
+
+  private void handleCardClick(MouseEvent e) {
+    if (faceDown) {
+      return;
+    }
+    if (hasBackFace && isClickOnFlipIcon(e)) {
+      if (!flipAnimation.isAnimating()) {
+        SoundSystem.instance.play(SoundEffectType.FlipCard, SoundEffectType.FlipCard.isSynced());
+        flipToOtherFace();
+      }
+    } else {
+      toggleSelection();
+    }
+  }
+
+  private void showZoom(Supplier<CardUtil> zoomUtilSupplier) {
+    if (faceDown || zoomUtilSupplier == null) {
+      return;
+    }
+    CardUtil zoomUtil = zoomUtilSupplier.get();
+    if (zoomUtil != null) {
+      zoomUtil.showZoom(card, showingAltFace);
     }
   }
 
@@ -175,18 +176,7 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
       GuiBase.getInterface().getImageFetcher().fetchImage(
           ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), cardPicture);
     } else if (showingAltFace && hasBackFace) {
-      // Show alternate face - check if we need to fetch the image
-      String altImageKey = card.getImageKey(true);
-      Pair<BufferedImage, Boolean> imageInfo = ImageCache.getCardOriginalImageInfo(altImageKey,
-          true);
-      BufferedImage altImage = imageInfo.getLeft();
-      boolean isPlaceholder = imageInfo.getRight();
-
-      // Trigger fetch if image is missing or placeholder
-      if (ImageCache.isDefaultImage(altImage) || isPlaceholder) {
-        GuiBase.getInterface().getImageFetcher().fetchImage(altImageKey, this);
-      }
-
+      BufferedImage altImage = CardUtil.getCardImageAndFetchIfNeeded(card.getImageKey(true), this);
       if (altImage != null) {
         cardPicture.setItem(altImage);
       } else {
@@ -286,7 +276,7 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     // Draw hover/selection indicators ON TOP of everything (only if not animating)
     if (!flipAnimation.isAnimating()) {
       if (selected) {
-        drawSelectionHighlight(g2d, width, height);
+        CardUtil.drawSelectionHighlight(g2d, width, height);
       } else if (hovered && !faceDown) {
         // Draw yellow/gold hover border when not selected and card is revealed
         drawHoverHighlight(g2d, width, height);
@@ -311,10 +301,10 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     int padding = 5;
     int bgWidth = FLIP_ICON_WIDTH + padding * 2;
     int bgHeight = FLIP_ICON_HEIGHT + padding * 2;
-    int cornerRadius = bgWidth; // Full width = oval/pill shape
+    // Full width = oval/pill shape
     g2d.setColor(new Color(0, 0, 0, 230)); // Tiny bit of transparency
-    g2d.fillRoundRect(iconX - padding, iconY - padding, bgWidth, bgHeight, cornerRadius,
-        cornerRadius);
+    g2d.fillRoundRect(iconX - padding, iconY - padding, bgWidth, bgHeight, bgWidth,
+        bgWidth);
 
     // Draw the icon
     FSkin.drawImage(g2d, FSkin.getIcon(FSkinProp.ICO_FLIPCARD),
@@ -328,31 +318,5 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
     g2d.setColor(new Color(255, 215, 0));  // Gold color
     g2d.setStroke(new BasicStroke(4));
     g2d.drawRect(3, 3, width - 6, height - 6);
-  }
-
-  /**
-   * Draw the selection highlight (green border + checkmark).
-   */
-  protected void drawSelectionHighlight(Graphics2D g2d, int width, int height) {
-    // Draw thick border
-    g2d.setColor(new Color(0, 255, 0, 200)); // Green with transparency
-    g2d.setStroke(new BasicStroke(6)); // Thicker border
-    g2d.drawRect(3, 3, width - 6, height - 6);
-
-    // Draw checkmark in top-right corner
-    int checkSize = 30;
-    int checkX = width - checkSize - 8;
-    int checkY = 8;
-
-    // Draw circle background
-    g2d.setColor(new Color(0, 200, 0, 230));
-    g2d.fillOval(checkX, checkY, checkSize, checkSize);
-
-    // Draw checkmark
-    g2d.setColor(Color.WHITE);
-    g2d.setStroke(new BasicStroke(3));
-    int[] xPoints = {checkX + 7, checkX + 12, checkX + 23};
-    int[] yPoints = {checkY + 15, checkY + 20, checkY + 10};
-    g2d.drawPolyline(xPoints, yPoints, 3);
   }
 }

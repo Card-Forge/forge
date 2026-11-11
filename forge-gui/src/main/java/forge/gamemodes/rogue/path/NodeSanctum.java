@@ -6,37 +6,16 @@ package forge.gamemodes.rogue.path;
  */
 public class NodeSanctum extends RoguePathNode {
 
-    private int healAmount;
-    // Legacy serialized field retained for backward compatibility with older saved runs.
-    private int freeRemoves;
+    private final int healAmount;
 
     public NodeSanctum() {
         super();
         this.healAmount = 5;
-        this.freeRemoves = 3;
-    }
-
-    public NodeSanctum(int healAmount, int freeRemoves) {
-        super();
-        this.healAmount = healAmount;
-        this.freeRemoves = freeRemoves;
     }
 
     // Getters and Setters
     public int getHealAmount() {
         return healAmount;
-    }
-
-    public void setHealAmount(int healAmount) {
-        this.healAmount = healAmount;
-    }
-
-    public int getFreeRemoves() {
-        return freeRemoves;
-    }
-
-    public void setFreeRemoves(int freeRemoves) {
-        this.freeRemoves = freeRemoves;
     }
 
     @Override

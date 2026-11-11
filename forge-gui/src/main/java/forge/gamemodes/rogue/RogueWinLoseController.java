@@ -23,6 +23,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.player.GamePlayerUtil;
 import java.util.ArrayList;
 import java.util.List;
+import org.tinylog.Logger;
 
 /**
  * Controller for Rogue Commander win/lose screen.
@@ -92,7 +93,7 @@ public class RogueWinLoseController {
 
     private void handleMatchVictory() {
         if (currentRun == null) {
-            System.err.println("ERROR: No current run found in RogueWinLoseController");
+            Logger.error("Cannot record Rogue match victory without an active run");
             return;
         }
 

@@ -11,8 +11,6 @@ import java.awt.*;
  */
 public class NodeSanctumPanel extends NodeCircularPanel {
 
-  private final NodeSanctum sanctumNode;
-
   /**
    * Create a panel for displaying a sanctum node.
    *
@@ -20,7 +18,6 @@ public class NodeSanctumPanel extends NodeCircularPanel {
    */
   public NodeSanctumPanel(NodeSanctum node) {
     super(node);
-    this.sanctumNode = node;
     setToolTipText(
         Localizer.getInstance().getMessage("lblRogueSanctumTooltip"));
   }

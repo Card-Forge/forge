@@ -6,13 +6,11 @@ import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueEvent.EventChoice;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.ChoiceRerollContext;
-import forge.localinstance.skin.FSkinProp;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -120,16 +117,7 @@ public class EventDialog {
       }
       optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueEvent"), null, panel,
           buttons, VIEW_DECK_OPTION);
-      optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-      RogueUIHelper.disableSpacebarButtonActivation(optionPane.getContentPane());
-      optionPane.getTitleBar().setVisible(false);
-      optionPane.getButton(VIEW_DECK_OPTION).setIcon(FSkin.getIcon(FSkinProp.ICO_CARD_IMAGE));
-      optionPane.getButton(VIEW_DECK_OPTION).setHorizontalTextPosition(SwingConstants.RIGHT);
-      optionPane.getButton(VIEW_MAP_OPTION).setIcon(
-          FSkin.getImage(FSkinProp.ICO_QUEST_MAP).resize(24, 24).getIcon());
-      optionPane.getButton(VIEW_MAP_OPTION).setHorizontalTextPosition(SwingConstants.RIGHT);
-      panel.revalidate();
-      panel.repaint();
+      RogueUIHelper.prepareChoiceDialog(optionPane, panel, VIEW_DECK_OPTION, VIEW_MAP_OPTION);
       typewriterText.start();
       optionPane.setVisible(true);
       result = optionPane.getResult();

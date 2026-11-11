@@ -1,6 +1,7 @@
 package forge.gamemodes.rogue;
 
 import com.google.common.collect.ImmutableList;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
@@ -24,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public final class CodexHelper {
     public enum TraitCategory {
@@ -105,16 +105,6 @@ public final class CodexHelper {
             return;
         }
         RogueMetaProgress.getInstance().markTraitAcquired(effect);
-    }
-
-    public static void recordTraitsAcquired(Collection<? extends RogueEffect> effects) {
-        if (effects == null || effects.isEmpty()) {
-            return;
-        }
-
-        for (RogueEffect effect : effects) {
-            recordTraitAcquired(effect);
-        }
     }
 
     public static void recordPlaneboundEncounter(RoguePlanebound planebound) {

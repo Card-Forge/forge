@@ -1,5 +1,6 @@
 package forge.screens.home.rogue;
 
+import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.rogue.CardRewardHelper;
 import forge.gamemodes.rogue.CodexHelper;
@@ -98,18 +99,7 @@ final class EffectResultHelper {
         }
 
         if (ctx.addSection == DeckSection.Commander) {
-            if (ctx.replaceCurrentCardsInAddSection) {
-                List<PaperCard> removedCommanders = new ArrayList<>(currentRun.getCurrentDeck().getCommanders());
-                if (!removedCommanders.isEmpty()) {
-                    for (PaperCard commander : removedCommanders) {
-                        currentRun.getCurrentDeck().getOrCreate(DeckSection.Commander).remove(commander);
-                    }
-                    ctx.removedCards = removedCommanders;
-                }
-            }
-            for (PaperCard card : added) {
-                currentRun.getCurrentDeck().getOrCreate(DeckSection.Commander).add(card);
-            }
+            addSelectedCommanders(ctx, currentRun.getCurrentDeck(), added);
         } else {
             if (ctx.cardSelectionCopyCount > 1) {
                 List<PaperCard> copiedCards = new ArrayList<>();
@@ -122,6 +112,21 @@ final class EffectResultHelper {
         }
         ctx.addedCards = added;
         CodexHelper.recordAcquiredCards(currentRun, added);
+    }
+
+    private static void addSelectedCommanders(EffectResultContext ctx, Deck deck, List<PaperCard> added) {
+        if (ctx.replaceCurrentCardsInAddSection) {
+            List<PaperCard> removedCommanders = new ArrayList<>(deck.getCommanders());
+            if (!removedCommanders.isEmpty()) {
+                for (PaperCard commander : removedCommanders) {
+                    deck.getOrCreate(DeckSection.Commander).remove(commander);
+                }
+                ctx.removedCards = removedCommanders;
+            }
+        }
+        for (PaperCard card : added) {
+            deck.getOrCreate(DeckSection.Commander).add(card);
+        }
     }
 
     private static void handleCardRewardTrigger(EffectResultContext ctx, RogueRun currentRun) {

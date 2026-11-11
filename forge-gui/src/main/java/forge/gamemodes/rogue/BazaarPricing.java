@@ -13,6 +13,10 @@ import java.util.Set;
  * Centralized card and Trait prices and discount calculations.
  */
 public class BazaarPricing {
+    private BazaarPricing() {
+        /* This utility class should not be instantiated */
+    }
+
     public static final int TRAIT_PRICE = 8;
     public static final int DISCOUNTED_TRAIT_PRICE = TRAIT_PRICE / 2;
 

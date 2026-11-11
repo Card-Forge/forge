@@ -6,14 +6,9 @@ import forge.gamemodes.rogue.npc.NPCContext.NPCChoice;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,28 +51,10 @@ class NPCChoiceOverrideDialog {
     }
 
     NPCContext show() {
-        SkinnedPanel wrapper = new SkinnedPanel(new BorderLayout(0, 10));
-        wrapper.setOpaque(false);
-
-        FLabel lblTitle = new FLabel.Builder()
-            .text(Localizer.getInstance().getMessage("lblRogueDevOverrideNpcChoices"))
-            .fontSize(16)
-            .fontStyle(Font.BOLD)
-            .fontAlign(SwingConstants.CENTER)
-            .build();
-
-        SkinnedPanel header = new SkinnedPanel(new GridLayout(2, 1));
-        header.setOpaque(false);
-        header.add(lblTitle);
-        header.add(lblInfo);
-
-        wrapper.add(header, BorderLayout.NORTH);
-        wrapper.add(new FScrollPane(checkBoxPanel, true), BorderLayout.CENTER);
-        wrapper.setPreferredSize(new Dimension(420, 420));
-        wrapper.setMinimumSize(new Dimension(420, 420));
-
-        optionPane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueDevNpcChoiceOverride"), null, wrapper,
-            List.of("OK", Localizer.getInstance().getMessage("lblCancel")), 0);
+        Localizer localizer = Localizer.getInstance();
+        optionPane = RogueUIHelper.createChoiceOverridePane(
+            localizer.getMessage("lblRogueDevNpcChoiceOverride"),
+            localizer.getMessage("lblRogueDevOverrideNpcChoices"), lblInfo, checkBoxPanel);
         updateSelectionState();
         optionPane.setVisible(true);
         int result = optionPane.getResult();

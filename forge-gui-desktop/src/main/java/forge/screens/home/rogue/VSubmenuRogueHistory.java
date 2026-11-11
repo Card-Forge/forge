@@ -137,6 +137,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
   public JButton getBtnResetHistory() { return btnResetHistory; }
 
   @Override
+  @SuppressWarnings("java:S3066") // Required by IVDoc.
   public void setParentCell(DragCell cell0) { this.parentCell = cell0; }
 
   @Override
@@ -147,7 +148,8 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
    * Layout: avatar on left, info rows on right, all left aligned.
    */
   static class RunHistoryCard extends FSkin.SkinnedPanel {
-    private final Localizer localizer = Localizer.getInstance();
+    private static final String OUTCOME_VICTORY = "VICTORY";
+    private static final String OUTCOME_DEFEAT = "DEFEAT";
     private static final int INSET = 10;
     private static final int AVATAR_SIZE = 60;
     private static final int AVATAR_GAP = 5;
@@ -197,38 +199,14 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
           .build();
       add(lblName);
 
-      String displayedOutcome = entry.getEndlessLevel() > 0 && "DEFEAT".equals(entry.getOutcome())
-          ? "VICTORY" : entry.getOutcome();
-      Color outcomeColor;
-      switch (displayedOutcome) {
-        case "VICTORY": outcomeColor = new Color(0, 200, 0); break;
-        case "DEFEAT": outcomeColor = new Color(220, 50, 50); break;
-        default: outcomeColor = Color.GRAY; break;
-      }
-      lblOutcome = new FLabel.Builder()
-          .text(switch (displayedOutcome) {
-            case "VICTORY" -> localizer.getMessage("lblRogueHistoryVictory");
-            case "DEFEAT" -> localizer.getMessage("lblRogueHistoryDefeat");
-            case "ABANDONED" -> localizer.getMessage("lblRogueHistoryAbandoned");
-            default -> displayedOutcome;
-          })
-          .fontSize(13)
-          .fontStyle(Font.BOLD)
-          .fontAlign(SwingConstants.RIGHT)
-          .build();
-      lblOutcome.setForeground(outcomeColor);
+      lblOutcome = createOutcomeLabel(entry);
       add(lblOutcome);
 
-      String detail = "";
-      if ("VICTORY".equals(entry.getOutcome()) && !entry.getBossOrDefeatedBy().isEmpty()) {
-        detail = localizer.getMessage("lblRogueHistoryBossSlain", entry.getBossOrDefeatedBy());
-      } else if ("DEFEAT".equals(entry.getOutcome()) && !entry.getBossOrDefeatedBy().isEmpty()) {
-        detail = localizer.getMessage("lblRogueHistoryDefeatedBy", entry.getBossOrDefeatedBy());
-      }
-      lblDetail = new FLabel.Builder().text(detail).fontSize(12)
+      lblDetail = new FLabel.Builder().text(getOutcomeDetail(entry)).fontSize(12)
           .fontAlign(SwingConstants.LEFT).build();
       add(lblDetail);
 
+      Localizer localizer = Localizer.getInstance();
       lblTimestamp = new FLabel.Builder()
           .text(localizer.getMessage("lblRogueHistoryTimestamp", entry.getTimestamp(), entry.getFormattedRunTime()))
           .fontSize(11)
@@ -273,22 +251,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
 
       List<RogueRunHistoryEntry.EffectSnapshot> effects = entry.getActiveEffects();
       if (!effects.isEmpty()) {
-        JPanel pnlEffects = RogueUIHelper.createEffectPanel();
-        RogueUIHelper.populateEffectPanelFromSnapshots(pnlEffects, effects);
-        scrollEffects = new FScrollPane(pnlEffects, false,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        Dimension effectSize = pnlEffects.getPreferredSize();
-        int visibleRows = Math.min(3, effects.size());
-        int rowHeight = pnlEffects.getComponent(0).getPreferredSize().height;
-        int viewportHeight = Math.min(effectSize.height, visibleRows * rowHeight + visibleRows - 1);
-        boolean needsScrollbar = effects.size() > 6;
-        scrollEffects.setVerticalScrollBarPolicy(needsScrollbar
-            ? ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS : ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        int rightGap = 16;
-        scrollEffects.getViewport().setPreferredSize(new Dimension(effectSize.width + rightGap, viewportHeight));
-        int scrollbarWidth = needsScrollbar ? scrollEffects.getVerticalScrollBar().getPreferredSize().width : 0;
-        scrollEffects.setPreferredSize(new Dimension(effectSize.width + rightGap + scrollbarWidth, viewportHeight));
+        scrollEffects = createEffectsScroller(effects);
         add(scrollEffects);
       } else {
         scrollEffects = null;
@@ -304,6 +267,54 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
       for (Component component : getComponents()) {
         registerHoverTracking(component, hoverListener);
       }
+    }
+
+    private static FLabel createOutcomeLabel(RogueRunHistoryEntry entry) {
+      String outcome = entry.getOutcome();
+      String displayedOutcome = entry.getEndlessLevel() > 0 && OUTCOME_DEFEAT.equals(outcome)
+          ? OUTCOME_VICTORY : outcome;
+      Color outcomeColor = switch (displayedOutcome) {
+        case OUTCOME_VICTORY -> new Color(0, 200, 0);
+        case OUTCOME_DEFEAT -> new Color(220, 50, 50);
+        default -> Color.GRAY;
+      };
+      Localizer localizer = Localizer.getInstance();
+      FLabel label = new FLabel.Builder()
+          .text(switch (displayedOutcome) {
+            case OUTCOME_VICTORY -> localizer.getMessage("lblRogueHistoryVictory");
+            case OUTCOME_DEFEAT -> localizer.getMessage("lblRogueHistoryDefeat");
+            case "ABANDONED" -> localizer.getMessage("lblRogueHistoryAbandoned");
+            default -> displayedOutcome;
+          })
+          .fontSize(13)
+          .fontStyle(Font.BOLD)
+          .fontAlign(SwingConstants.RIGHT)
+          .build();
+      label.setForeground(outcomeColor);
+      return label;
+    }
+
+    private static String getOutcomeDetail(RogueRunHistoryEntry entry) {
+      String key = switch (entry.getOutcome()) {
+        case OUTCOME_VICTORY -> "lblRogueHistoryBossSlain";
+        case OUTCOME_DEFEAT -> "lblRogueHistoryDefeatedBy";
+        default -> null;
+      };
+      String opponent = entry.getBossOrDefeatedBy();
+      if (key == null || opponent.isEmpty()) {
+        return "";
+      }
+      return Localizer.getInstance().getMessage(key, opponent);
+    }
+
+    private static FScrollPane createEffectsScroller(List<RogueRunHistoryEntry.EffectSnapshot> effects) {
+      JPanel pnlEffects = RogueUIHelper.createEffectPanel();
+      RogueUIHelper.populateEffectPanelFromSnapshots(pnlEffects, effects);
+      FScrollPane scroller = new FScrollPane(pnlEffects, false,
+          ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+          ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+      RogueUIHelper.resizeEffectScroller(scroller, pnlEffects);
+      return scroller;
     }
 
     @Override
@@ -322,21 +333,16 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
       lblTimestamp.setBounds(metrics.rightSideX(), y, metrics.rightSideW(), metrics.metadataH());
       y += metrics.metadataH() + ROW_GAP;
 
-      int pathH = 0;
+      int pathH = getPathHeight(metrics.leftW());
       if (txtPath != null) {
-        txtPath.setSize(metrics.leftW(), Short.MAX_VALUE);
-        pathH = txtPath.getPreferredSize().height;
         txtPath.setBounds(metrics.contentX(), y, metrics.leftW(), pathH);
       }
-      if (btnViewDeck != null && metrics.viewDeckSize() != null) {
-        int buttonY = y + Math.max(0, (pathH - metrics.viewDeckSize().height) / 2);
-        btnViewDeck.setBounds(
-            metrics.rightSideX(), buttonY, metrics.viewDeckSize().width, metrics.viewDeckSize().height);
+      Dimension viewDeckSize = metrics.viewDeckSize();
+      if (viewDeckSize != null) {
+        int buttonY = y + Math.max(0, (pathH - viewDeckSize.height) / 2);
+        btnViewDeck.setBounds(metrics.rightSideX(), buttonY, viewDeckSize.width, viewDeckSize.height);
       }
-      if (txtPath != null || btnViewDeck != null) {
-        int buttonH = metrics.viewDeckSize() != null ? metrics.viewDeckSize().height : 0;
-        y += Math.max(pathH, buttonH) + ROW_GAP;
-      }
+      y += getPathRowHeight(pathH, viewDeckSize);
 
       if (!metrics.hasInfoCol() && lblEndless != null) {
         lblEndless.setBounds(metrics.contentX(), y, metrics.leftW(), metrics.rowH());
@@ -380,15 +386,8 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
       int y = INSET;
       y += 20 + ROW_GAP;
       y += metrics.metadataH() + ROW_GAP;
-      int pathH = 0;
-      if (txtPath != null) {
-        txtPath.setSize(Math.max(metrics.leftW(), 100), Short.MAX_VALUE);
-        pathH = txtPath.getPreferredSize().height;
-      }
-      if (txtPath != null || btnViewDeck != null) {
-        int buttonH = metrics.viewDeckSize() != null ? metrics.viewDeckSize().height : 0;
-        y += Math.max(pathH, buttonH) + ROW_GAP;
-      }
+      int pathH = getPathHeight(Math.max(metrics.leftW(), 100));
+      y += getPathRowHeight(pathH, metrics.viewDeckSize());
       if (!metrics.hasInfoCol() && lblEndless != null) {
         y += 20 + ROW_GAP;
       }
@@ -411,6 +410,22 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
         totalHeight = Math.max(totalHeight, infoY + INSET);
       }
       return new Dimension(w, totalHeight);
+    }
+
+    private int getPathHeight(int width) {
+      if (txtPath == null) {
+        return 0;
+      }
+      txtPath.setSize(width, Short.MAX_VALUE);
+      return txtPath.getPreferredSize().height;
+    }
+
+    private int getPathRowHeight(int pathHeight, Dimension viewDeckSize) {
+      if (txtPath == null && viewDeckSize == null) {
+        return 0;
+      }
+      int buttonHeight = viewDeckSize == null ? 0 : viewDeckSize.height;
+      return Math.max(pathHeight, buttonHeight) + ROW_GAP;
     }
 
     private LayoutMetrics getLayoutMetrics(int width) {

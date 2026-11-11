@@ -4,11 +4,6 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.util.List;
 
 /** Displays the current Rogue Commander path without allowing path interaction. */
@@ -41,12 +36,7 @@ final class RogueMapDialog {
   }
 
   private static Dimension getDialogSize() {
-    GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
-        .getDefaultScreenDevice().getDefaultConfiguration();
-    Rectangle screenBounds = gc.getBounds();
-    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-    int usableWidth = screenBounds.width - screenInsets.left - screenInsets.right;
-    int usableHeight = screenBounds.height - screenInsets.top - screenInsets.bottom;
-    return new Dimension((int) (usableWidth * 0.9), (int) (usableHeight * 0.9) - 80);
+    Dimension screenSize = RogueUIHelper.getUsableDefaultScreenSize();
+    return new Dimension((int) (screenSize.width * 0.9), (int) (screenSize.height * 0.9) - 80);
   }
 }

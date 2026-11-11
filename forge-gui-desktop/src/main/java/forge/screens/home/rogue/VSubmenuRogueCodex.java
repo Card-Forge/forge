@@ -2,7 +2,6 @@ package forge.screens.home.rogue;
 
 import forge.util.Localizer;
 
-import forge.ImageCache;
 import forge.deck.Deck;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueConfig;
@@ -12,7 +11,6 @@ import forge.gamemodes.rogue.RoguePlanebound;
 import forge.gamemodes.rogue.RoguePlaneboundType;
 import forge.gamemodes.rogue.TextHelper;
 import forge.gamemodes.rogue.effect.RogueEffect;
-import forge.gui.GuiBase;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -55,6 +53,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.swing.JButton;
@@ -64,7 +63,6 @@ import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components for Rogue Commander Codex screen.
@@ -89,6 +87,13 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private static final int AVATAR_SIZE = 64;
   private static final int TOP_SECTION_GAP = 24;
   private static final int TOP_SECTION_WRAP_WIDTH = 700;
+  private static final String GROW_AXIS = "[grow]";
+  private static final String LEADING_AND_GROW_AXIS = "[]" + GROW_AXIS;
+  private static final String STACKED_LAYOUT = "insets 0, gap 0, wrap 1";
+  private static final String SPACED_LAYOUT = "insets 0, gap 10";
+  private static final String STATS_HEADER_LAYOUT = "insets 8, gap 12";
+  private static final String STATS_HEADER_CONSTRAINTS = "growx, gapbottom 16";
+  private static final String FILL_CONTENT = "grow, push";
 
   private DragCell parentCell;
   private final Localizer localizer = Localizer.getInstance();
@@ -150,31 +155,33 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     btnResetTutorials.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_BOOK).resize(24, 24).getIcon());
   }
 
-  public void updateDisplay(int runsStarted, int runsCompleted, int runsWon, long totalPlaytimeMillis,
-      int matchesWon, int matchesLost,
-      int maxLife, int maxGold, int maxCreatureTypes, int maxArtifacts, int maxSharedCreatureType,
-      int maxLegendaryPermanents, int maxNonbasicLands) {
-    lblRunsStarted.setText(localizer.getMessage("lblRogueRunsStarted", runsStarted));
+  void updateDisplay(RogueMetaProgress progress) {
+    int runsCompleted = progress.getTotalRunsCompleted();
+    int runsWon = progress.getTotalRunsWon();
+    lblRunsStarted.setText(localizer.getMessage("lblRogueRunsStarted", progress.getTotalRunsStarted()));
     lblRunsCompleted.setText(localizer.getMessage("lblRogueRunsCompleted", runsCompleted));
     lblRunsWon.setText(localizer.getMessage("lblRogueRunsWon", runsWon));
     lblRunsLost.setText(localizer.getMessage("lblRogueRunsLost", runsCompleted - runsWon));
-    lblTotalPlaytime.setText(localizer.getMessage("lblRogueTotalPlaytime", TextHelper.formatHoursMinutesSeconds(totalPlaytimeMillis)));
-    lblMatchesWon.setText(localizer.getMessage("lblRogueMatchesWon", matchesWon));
-    lblMatchesLost.setText(localizer.getMessage("lblRogueMatchesLost", matchesLost));
-    lblMaxLife.setText(localizer.getMessage("lblRogueMaxLife", maxLife));
-    lblMaxGold.setText(localizer.getMessage("lblRogueMaxGold", maxGold));
-    lblMaxCreatureTypes.setText(localizer.getMessage("lblRogueMaxCreatureTypes", maxCreatureTypes));
-    lblMaxArtifacts.setText(localizer.getMessage("lblRogueMaxArtifacts", maxArtifacts));
-    lblMaxSharedCreatureType.setText(localizer.getMessage("lblRogueMaxSharedCreatureType", maxSharedCreatureType));
-    lblMaxLegendaryPermanents.setText(localizer.getMessage("lblRogueMaxLegendaryPermanents", maxLegendaryPermanents));
-    lblMaxNonbasicLands.setText(localizer.getMessage("lblRogueMaxNonbasicLands", maxNonbasicLands));
+    lblTotalPlaytime.setText(localizer.getMessage("lblRogueTotalPlaytime",
+        TextHelper.formatHoursMinutesSeconds(progress.getTotalPlaytimeMillis())));
+    lblMatchesWon.setText(localizer.getMessage("lblRogueMatchesWon", progress.getTotalMatchesWon()));
+    lblMatchesLost.setText(localizer.getMessage("lblRogueMatchesLost", progress.getTotalMatchesLost()));
+    lblMaxLife.setText(localizer.getMessage("lblRogueMaxLife", progress.getMaxLifeInRun()));
+    lblMaxGold.setText(localizer.getMessage("lblRogueMaxGold", progress.getMaxGoldInRun()));
+    lblMaxCreatureTypes.setText(localizer.getMessage("lblRogueMaxCreatureTypes", progress.getMaxCreatureTypesInDeck()));
+    lblMaxArtifacts.setText(localizer.getMessage("lblRogueMaxArtifacts", progress.getMaxArtifactsInDeck()));
+    lblMaxSharedCreatureType.setText(localizer.getMessage("lblRogueMaxSharedCreatureType",
+        progress.getMaxSharedCreatureTypeInDeck()));
+    lblMaxLegendaryPermanents.setText(localizer.getMessage("lblRogueMaxLegendaryPermanents",
+        progress.getMaxLegendaryPermanentsInDeck()));
+    lblMaxNonbasicLands.setText(localizer.getMessage("lblRogueMaxNonbasicLands", progress.getMaxNonbasicLandsInDeck()));
   }
 
   public void showGlobalStats() {
     setActiveTab(CodexTab.GLOBAL_STATS);
     SkinnedPanel pnlContent = getContentPanel(CodexTab.GLOBAL_STATS);
     pnlContent.removeAll();
-    pnlContent.setLayout(new MigLayout("insets 0, gap 0", "[grow]", "[grow]"));
+    pnlContent.setLayout(new MigLayout("insets 0, gap 0", GROW_AXIS, GROW_AXIS));
     FScrollPane scroller = new FScrollPane(createStatsPanel(), false,
         ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     pnlContent.add(scroller, "w 100%!, h 100%!");
@@ -186,10 +193,10 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     setActiveTab(CodexTab.COMMANDERS);
     SkinnedPanel pnlContent = getContentPanel(CodexTab.COMMANDERS);
     pnlContent.removeAll();
-    pnlContent.setLayout(new MigLayout("insets 0, gap 10", "[" + SIDEBAR_WIDTH + "px!][grow]", "[grow]"));
+    pnlContent.setLayout(new MigLayout(SPACED_LAYOUT, "[" + SIDEBAR_WIDTH + "px!]" + GROW_AXIS, GROW_AXIS));
     pnlContent.add(createSidebarScrollPane(createCommanderSidebar(commanders, selectedCommander, selectionCallback)),
         "growy");
-    pnlContent.add(createCommanderDetails(selectedCommander, progress), "grow, push");
+    pnlContent.add(createCommanderDetails(selectedCommander, progress), FILL_CONTENT);
     refreshContent();
   }
 
@@ -199,11 +206,11 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     SkinnedPanel pnlContent = getContentPanel(CodexTab.PLANEBOUNDS);
     int sidebarScrollValue = getSidebarScrollValue(pnlContent);
     pnlContent.removeAll();
-    pnlContent.setLayout(new MigLayout("insets 0, gap 10", "[" + SIDEBAR_WIDTH + "px!][grow]", "[grow]"));
+    pnlContent.setLayout(new MigLayout(SPACED_LAYOUT, "[" + SIDEBAR_WIDTH + "px!]" + GROW_AXIS, GROW_AXIS));
     FScrollPane sidebarScroller = createSidebarScrollPane(createPlaneboundSidebar(planebounds, selectedPlanebound,
         progress, selectionCallback));
     pnlContent.add(sidebarScroller, "growy");
-    pnlContent.add(createPlaneboundDetails(selectedPlanebound, progress), "grow, push");
+    pnlContent.add(createPlaneboundDetails(selectedPlanebound, progress), FILL_CONTENT);
     refreshContent();
     restoreSidebarScrollValue(sidebarScroller, sidebarScrollValue);
   }
@@ -213,9 +220,9 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     setActiveTab(CodexTab.TRAITS);
     SkinnedPanel pnlContent = getContentPanel(CodexTab.TRAITS);
     pnlContent.removeAll();
-    pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap 1", "[grow]", "[][grow]"));
+    pnlContent.setLayout(new MigLayout(STACKED_LAYOUT, GROW_AXIS, LEADING_AND_GROW_AXIS));
 
-    JPanel sections = new CodexSectionsPanel(new MigLayout("insets 12, gap 0, wrap 1", "[grow]"));
+    JPanel sections = new CodexSectionsPanel(new MigLayout("insets 12, gap 0, wrap 1", GROW_AXIS));
     sections.setOpaque(false);
 
     List<CodexCardGrid.Entry> chestEntries = createTraitEntries(
@@ -238,8 +245,8 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     addTraitSection(sections, localizer.getMessage("lblRogueEvent"), eventEntries);
     addTraitSection(sections, localizer.getMessage("lblRogueWound"), woundEntries);
 
-    pnlContent.add(createTraitStatsHeader(traitEntries), "growx, gapbottom 16");
-    pnlContent.add(createPanelScrollPane(sections), "grow, push");
+    pnlContent.add(createTraitStatsHeader(traitEntries), STATS_HEADER_CONSTRAINTS);
+    pnlContent.add(createPanelScrollPane(sections), FILL_CONTENT);
     refreshContent();
   }
 
@@ -287,7 +294,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private JPanel createHeaderPanel() {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 0, gap 8", "[][grow]", "[grow]"));
+    JPanel panel = new SkinnedPanel(new MigLayout("insets 0, gap 8", LEADING_AND_GROW_AXIS, GROW_AXIS));
     panel.setOpaque(false);
     panel.add(btnBack, "w 120px!, h 30px!");
     panel.add(lblTitle, "grow, push, h 30px!");
@@ -295,19 +302,20 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private JPanel createStatsPanel() {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 20, gap 5, wrap 1", "[grow]", ""));
+    JPanel panel = new SkinnedPanel(new MigLayout("insets 20, gap 5, wrap 1", GROW_AXIS, ""));
     panel.setOpaque(false);
 
+    final String sectionGap = "gapbottom 20";
     addSectionLabel(panel, localizer.getMessage("lblRogueRunStatistics"));
     panel.add(lblTotalPlaytime);
     panel.add(lblRunsStarted);
     panel.add(lblRunsCompleted);
     panel.add(lblRunsWon);
-    panel.add(lblRunsLost, "gapbottom 20");
+    panel.add(lblRunsLost, sectionGap);
 
     addSectionLabel(panel, localizer.getMessage("lblRogueMatchStatistics"));
     panel.add(lblMatchesWon);
-    panel.add(lblMatchesLost, "gapbottom 20");
+    panel.add(lblMatchesLost, sectionGap);
 
     addSectionLabel(panel, localizer.getMessage("lblRogueMilestones"));
     panel.add(lblMaxLife);
@@ -316,15 +324,16 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     panel.add(lblMaxArtifacts);
     panel.add(lblMaxSharedCreatureType);
     panel.add(lblMaxLegendaryPermanents);
-    panel.add(lblMaxNonbasicLands, "gapbottom 20");
+    panel.add(lblMaxNonbasicLands, sectionGap);
 
-    JPanel buttonPanel = new SkinnedPanel(new MigLayout("insets 0, gap 10"));
+    JPanel buttonPanel = new SkinnedPanel(new MigLayout(SPACED_LAYOUT));
     buttonPanel.setOpaque(false);
-    buttonPanel.add(btnStatsBack, "w 180px!, h 40px!");
-    buttonPanel.add(btnReset, "w 180px!, h 40px!");
-    buttonPanel.add(btnResetTutorials, "w 180px!, h 40px!");
+    final String buttonSize = "w 180px!, h 40px!";
+    buttonPanel.add(btnStatsBack, buttonSize);
+    buttonPanel.add(btnReset, buttonSize);
+    buttonPanel.add(btnResetTutorials, buttonSize);
     if (ForgePreferences.DEV_MODE) {
-      buttonPanel.add(btnDevUnlockCodex, "w 180px!, h 40px!");
+      buttonPanel.add(btnDevUnlockCodex, buttonSize);
     }
     panel.add(buttonPanel, "ax center");
 
@@ -432,7 +441,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private JPanel createCommanderDetails(RogueDeck selectedCommander, RogueMetaProgress progress) {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]", "[][grow]"));
+    JPanel panel = new SkinnedPanel(new MigLayout(STACKED_LAYOUT, GROW_AXIS, LEADING_AND_GROW_AXIS));
     panel.setOpaque(false);
     if (selectedCommander == null) {
       panel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblRogueNoUnlockedCommanders")).fontSize(14).build(), "gap 12 0 12 0");
@@ -447,34 +456,24 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
           ? mythicEntries : nonMythicEntries;
       entries.add(createCommanderRewardEntry(commanderName, card, progress));
     }
-    List<CodexCardGrid.Entry> startDeckEntries = new ArrayList<>();
     Deck startDeck = selectedCommander.getStartDeck();
-    if (startDeck != null) {
-      Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-      for (PaperCard card : startDeck.getMain().toFlatList()) {
-        if (card == null || card.getRules() == null) {
-          continue;
-        }
-        if (card.getRules().getType().isBasicLand() && !displayedBasicLandNames.add(card.getName())) {
-          continue;
-        }
-        startDeckEntries.add(new CodexCardGrid.Entry(card, card.getName(), card.getName(),
-            CodexCardGrid.CardState.NORMAL));
-      }
-    }
+    List<CodexCardGrid.Entry> startDeckEntries = startDeck == null ? new ArrayList<>()
+        : createDeckEntries(startDeck.getMain().toFlatList(),
+            card -> new CodexCardGrid.Entry(card, card.getName(), card.getName(),
+                CodexCardGrid.CardState.NORMAL));
     sortCodexCardEntries(nonMythicEntries);
     sortCodexCardEntries(mythicEntries);
     sortCodexCardEntries(startDeckEntries);
     panel.add(createCommanderStatsHeader(selectedCommander, progress, nonMythicEntries, mythicEntries),
-        "growx, gapbottom 16");
+        STATS_HEADER_CONSTRAINTS);
 
-    JPanel sections = new CodexSectionsPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]"));
+    JPanel sections = new CodexSectionsPanel(new MigLayout(STACKED_LAYOUT, GROW_AXIS));
     sections.setOpaque(false);
     addCardGridSection(sections, localizer.getMessage("lblCommander"), createCommanderCardEntries(selectedCommander));
     addCardGridSection(sections, localizer.getMessage("lblRogueRewardPoolNonMythics"), nonMythicEntries);
     addCardGridSection(sections, localizer.getMessage("lblRogueRewardPoolMythics"), mythicEntries);
     addCardGridSection(sections, localizer.getMessage("lblRogueStartDeck"), startDeckEntries);
-    panel.add(createPanelScrollPane(sections), "grow, push");
+    panel.add(createPanelScrollPane(sections), FILL_CONTENT);
     return panel;
   }
 
@@ -482,8 +481,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
                                                          RogueMetaProgress progress) {
     boolean acquired = progress.hasAcquiredCommanderRewardCard(commanderName, card);
     boolean seen = progress.hasSeenCommanderRewardCard(commanderName, card);
-    CodexCardGrid.CardState state = acquired ? CodexCardGrid.CardState.NORMAL
-        : seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
+    CodexCardGrid.CardState state = getDiscoveryState(acquired, seen);
     return new CodexCardGrid.Entry(card, card.getName(),
         state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
   }
@@ -491,7 +489,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private JPanel createCommanderStatsHeader(RogueDeck selectedCommander, RogueMetaProgress progress,
                                             List<CodexCardGrid.Entry> nonMythicEntries,
                                             List<CodexCardGrid.Entry> mythicEntries) {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 8, gap 12", "[][][][][][][]", ""));
+    JPanel panel = new SkinnedPanel(new MigLayout(STATS_HEADER_LAYOUT, "[][][][][][][]", ""));
     panel.setOpaque(false);
     String commanderName = selectedCommander.getCommanderCardName();
     List<CodexCardGrid.Entry> rewardEntries = new ArrayList<>(nonMythicEntries);
@@ -507,7 +505,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private JPanel createPlaneboundDetails(RoguePlanebound selectedPlanebound, RogueMetaProgress progress) {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]", "[][grow]"));
+    JPanel panel = new SkinnedPanel(new MigLayout(STACKED_LAYOUT, GROW_AXIS, LEADING_AND_GROW_AXIS));
     panel.setOpaque(false);
     if (selectedPlanebound == null) {
       panel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblRogueEncounterAPlaneboundToUnlockItsDeck")).fontSize(14).build(),
@@ -522,34 +520,26 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       for (PaperCard commander : deck.getCommanders()) {
         commanderEntries.add(createPlaneboundDeckEntry(selectedPlanebound, commander, progress));
       }
-      Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-      for (PaperCard card : deck.getAllCardsInASinglePool(false, false).toFlatList()) {
-        if (card == null || card.getRules() == null) {
-          continue;
-        }
-        if (card.getRules().getType().isBasicLand() && !displayedBasicLandNames.add(card.getName())) {
-          continue;
-        }
-        entries.add(createPlaneboundDeckEntry(selectedPlanebound, card, progress));
-      }
+      entries = createDeckEntries(deck.getAllCardsInASinglePool(false, false).toFlatList(),
+          card -> createPlaneboundDeckEntry(selectedPlanebound, card, progress));
     }
     sortCodexCardEntries(commanderEntries);
     sortCodexCardEntries(entries);
     panel.add(createPlaneboundStatsHeader(selectedPlanebound, progress, entries),
-        "growx, gapbottom 16");
+        STATS_HEADER_CONSTRAINTS);
 
-    JPanel sections = new CodexSectionsPanel(new MigLayout("insets 0, gap 0, wrap 1", "[grow]"));
+    JPanel sections = new CodexSectionsPanel(new MigLayout(STACKED_LAYOUT, GROW_AXIS));
     sections.setOpaque(false);
     sections.add(createPlaneboundTopSections(selectedPlanebound, commanderEntries), "w 100%!, growx, gapbottom 20");
     addCardGridSection(sections, localizer.getMessage("lblDeck"), entries);
-    panel.add(createPanelScrollPane(sections), "grow, push");
+    panel.add(createPanelScrollPane(sections), FILL_CONTENT);
     return panel;
   }
 
   private JPanel createPlaneboundStatsHeader(RoguePlanebound selectedPlanebound,
                                              RogueMetaProgress progress,
                                              List<CodexCardGrid.Entry> deckEntries) {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 8, gap 12", "[][][][]", ""));
+    JPanel panel = new SkinnedPanel(new MigLayout(STATS_HEADER_LAYOUT, "[][][][]", ""));
     panel.setOpaque(false);
     panel.add(new FLabel.Builder()
         .text(selectedPlanebound.planeboundName() + " - " + selectedPlanebound.planeName())
@@ -617,6 +607,21 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     return entries;
   }
 
+  private static List<CodexCardGrid.Entry> createDeckEntries(List<PaperCard> cards,
+      Function<PaperCard, CodexCardGrid.Entry> createEntry) {
+    List<CodexCardGrid.Entry> entries = new ArrayList<>();
+    Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+    for (PaperCard card : cards) {
+      if (card == null || card.getRules() == null) {
+        continue;
+      }
+      if (!card.getRules().getType().isBasicLand() || displayedBasicLandNames.add(card.getName())) {
+        entries.add(createEntry.apply(card));
+      }
+    }
+    return entries;
+  }
+
   private CodexCardGrid.Entry createPlaneboundDeckEntry(RoguePlanebound selectedPlanebound, PaperCard card,
                                                         RogueMetaProgress progress) {
     CodexCardGrid.CardState state = progress.hasSeenPlaneboundCard(selectedPlanebound, card)
@@ -626,7 +631,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private JPanel createTraitStatsHeader(List<CodexCardGrid.Entry> traitEntries) {
-    JPanel panel = new SkinnedPanel(new MigLayout("insets 8, gap 12", "[][]", ""));
+    JPanel panel = new SkinnedPanel(new MigLayout(STATS_HEADER_LAYOUT, "[][]", ""));
     panel.setOpaque(false);
     panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueSeenTraits", countSeenCards(traitEntries), traitEntries.size())).fontSize(13).build());
     panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueAcquiredTraits", countAcquiredCards(traitEntries), traitEntries.size())).fontSize(13).build());
@@ -645,13 +650,19 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       }
       boolean acquired = progress.hasAcquiredTrait(effect);
       boolean seen = progress.hasSeenTrait(effect);
-      CodexCardGrid.CardState state = acquired ? CodexCardGrid.CardState.NORMAL
-          : seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
+      CodexCardGrid.CardState state = getDiscoveryState(acquired, seen);
       String label = getTraitLabel(effect, card);
       entries.add(new CodexCardGrid.Entry(card, label,
           state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownTrait") : label, state));
     }
     return entries;
+  }
+
+  private static CodexCardGrid.CardState getDiscoveryState(boolean acquired, boolean seen) {
+    if (acquired) {
+      return CodexCardGrid.CardState.NORMAL;
+    }
+    return seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
   }
 
   private void addTraitSection(JPanel sections, String title, List<CodexCardGrid.Entry> entries) {
@@ -941,9 +952,9 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     private static final int CARD_GRID_PADDING = 15;
 
     private final PaperCard planeCard;
-    private final Supplier<CardUtil> zoomUtilSupplier;
+    private final transient Supplier<CardUtil> zoomUtilSupplier;
     private final PlaneImagePanel imagePanel = new PlaneImagePanel();
-    private BufferedImage rotatedPlaneImage;
+    private transient BufferedImage rotatedPlaneImage;
 
     private CodexPlanePanel(PaperCard planeCard, Supplier<CardUtil> zoomUtilSupplier) {
       super(null);
@@ -957,13 +968,6 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     @Override
     public void doLayout() {
       imagePanel.setBounds(getImageBounds());
-    }
-
-    private void showZoom() {
-      CardUtil zoomUtil = zoomUtilSupplier == null ? null : zoomUtilSupplier.get();
-      if (zoomUtil != null) {
-        zoomUtil.showZoom(planeCard);
-      }
     }
 
     private class PlaneImagePanel extends SkinnedPanel {
@@ -1004,6 +1008,13 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
             repaint();
           }
         });
+      }
+
+      private void showZoom() {
+        CardUtil zoomUtil = zoomUtilSupplier == null ? null : zoomUtilSupplier.get();
+        if (zoomUtil != null) {
+          zoomUtil.showZoom(planeCard);
+        }
       }
 
       @Override
@@ -1090,12 +1101,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     }
 
     private void updatePlaneImage() {
-      Pair<BufferedImage, Boolean> imageInfo = ImageCache.getCardOriginalImageInfo(
-          planeCard.getImageKey(false), true);
-      BufferedImage image = imageInfo.getLeft();
-      if (ImageCache.isDefaultImage(image) || imageInfo.getRight()) {
-        GuiBase.getInterface().getImageFetcher().fetchImage(planeCard.getImageKey(false), this);
-      }
+      BufferedImage image = CardUtil.getCardImageAndFetchIfNeeded(planeCard.getImageKey(false), this);
       if (image != null) {
         rotatedPlaneImage = rotateImage90Clockwise(image);
       }
@@ -1153,7 +1159,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   @Override
-  @SuppressWarnings({"WeakerAccess", "java:S2039"})
+  @SuppressWarnings({"WeakerAccess", "java:S2039", "java:S3066"}) // Required by IVDoc.
   public void setParentCell(DragCell cell0) {
     this.parentCell = cell0;
   }

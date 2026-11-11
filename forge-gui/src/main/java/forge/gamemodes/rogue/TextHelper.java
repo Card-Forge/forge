@@ -39,6 +39,7 @@ public final class TextHelper {
 
     private static String stripCardPattern(String text) {
         Matcher matcher = CARD_MARKER_PATTERN.matcher(text);
+        // Matcher overloads taking StringBuilder require Android API 34.
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
             String token = matcher.group(CARD_TOKEN_GROUP).trim();

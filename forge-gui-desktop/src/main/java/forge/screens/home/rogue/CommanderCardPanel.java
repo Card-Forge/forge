@@ -15,7 +15,7 @@ import java.util.function.Consumer;
  * single selection. For locked commanders, shows a card back with a lock indicator.
  */
 public class CommanderCardPanel extends SkinnedPanel {
-  private final RogueDeck commander;
+  private final transient RogueDeck commander;
   private final PaperCard commanderCard;
   private final CardPicturePanel cardPicture;
   private boolean selected;
@@ -23,7 +23,7 @@ public class CommanderCardPanel extends SkinnedPanel {
   private boolean hovered;      // For hover effect
   private boolean dimmed;
   private final boolean locked;
-  private Consumer<CommanderCardPanel> selectionCallback;
+  private transient Consumer<CommanderCardPanel> selectionCallback;
 
   public CommanderCardPanel(RogueDeck commander, VSubmenuRogueStart view) {
     super(null);
@@ -146,26 +146,7 @@ public class CommanderCardPanel extends SkinnedPanel {
 
     // Draw selection indicators if selected (unlocked commanders)
     if (selected) {
-      // Draw thick green border
-      g2d.setColor(new Color(0, 255, 0, 200));
-      g2d.setStroke(new BasicStroke(6));
-      g2d.drawRect(3, 3, width - 6, height - 6);
-
-      // Draw checkmark in top-right corner
-      int checkSize = 30;
-      int checkX = width - checkSize - 8;
-      int checkY = 8;
-
-      // Draw circle background
-      g2d.setColor(new Color(0, 200, 0, 230));
-      g2d.fillOval(checkX, checkY, checkSize, checkSize);
-
-      // Draw checkmark
-      g2d.setColor(Color.WHITE);
-      g2d.setStroke(new BasicStroke(3));
-      int[] xPoints = {checkX + 7, checkX + 12, checkX + 23};
-      int[] yPoints = {checkY + 15, checkY + 20, checkY + 10};
-      g2d.drawPolyline(xPoints, yPoints, 3);
+      CardUtil.drawSelectionHighlight(g2d, width, height);
     }
     // Draw yellow/gold border if highlighted (locked commanders when clicked)
     else if (highlighted) {

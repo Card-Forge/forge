@@ -2,6 +2,7 @@ package forge.gamemodes.rogue;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.tinylog.Logger;
 
 /**
  * Parses and evaluates unlock conditions for Rogue Commander decks.
@@ -93,7 +94,7 @@ public class RogueUnlockCondition {
         try {
             return Integer.parseInt(value.trim());
         } catch (NumberFormatException e) {
-            System.err.println("Invalid number in unlock condition: " + value);
+            Logger.warn("Invalid number in unlock condition: {}", value);
             return Integer.MAX_VALUE; // Impossible to meet on parse error
         }
     }
@@ -145,13 +146,6 @@ public class RogueUnlockCondition {
      */
     public boolean isAlwaysLocked() {
         return isDefault() && !Boolean.parseBoolean(conditions.get(KEY_DEFAULT));
-    }
-
-    /**
-     * Get the raw condition string.
-     */
-    public String getRawCondition() {
-        return rawCondition;
     }
 
     @Override

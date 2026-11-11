@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.CubicCurve2D;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,19 +33,20 @@ public class PathVisualizerPanel extends SkinnedPanel {
   private static final int PATH_LINE_WIDTH = 4;
 
   private final List<NodePanel> nodePanels;
-  private int currentNodeIndex;
-  private RogueRun currentRun;  // Store run for reachability checks
-  private NodePanel.NodeClickHandler clickHandler;
+  private transient RogueRun currentRun;
+  private transient NodePanel.NodeClickHandler clickHandler;
   private Integer selectedPanelIndex;
 
   private record RowLayout(List<NodePanel> panels, List<Rectangle> bounds) {
+  }
+
+  private record PathRow(int index, int y, List<NodePanel> panels, int width, boolean sideRow) {
   }
 
   public PathVisualizerPanel() {
     setLayout(null);
     setOpaque(false);
     this.nodePanels = new ArrayList<>();
-    this.currentNodeIndex = -1;
     this.selectedPanelIndex = null;
   }
 
@@ -74,7 +76,6 @@ public class PathVisualizerPanel extends SkinnedPanel {
 
     // Find current node index and current row
     RoguePathNode currentNode = run.getCurrentNode();
-    currentNodeIndex = path.getNodes().indexOf(currentNode);
     int currentRow = currentNode != null ? currentNode.getRowIndex() : 0;
 
     // Check wound effects (e.g. Wounded Eye hides planes)
@@ -91,47 +92,20 @@ public class PathVisualizerPanel extends SkinnedPanel {
     List<NodePlaneboundPanel> toReveal = new ArrayList<>();
     for (int i = 0; i < nodes.size(); i++) {
       RoguePathNode node = nodes.get(i);
+      int row = node.getRowIndex();
       boolean wasAlreadyRevealed = node instanceof NodePlanebound planebound
           && planebound.isRevealed();
-
-      // Face-down logic: only show nodes that were reachable in their row
-      boolean isFaceDown;
-      if (node.getRowIndex() < currentRow) {
-        // Past row - only show nodes that were visible when that row was current
-        List<Integer> visibleInThatRow = path.getVisibleNodesInCurrentRow(node.getRowIndex(),
-            new PathUpdateContext());
-        isFaceDown = !visibleInThatRow.contains(i);
-      } else if (node.getRowIndex() == currentRow) {
-        // Current row - show visible nodes
-        isFaceDown = !visibleInCurrentRow.contains(i);
-      } else {
-        // Future rows - effects can reveal reachable Planebound rows
-        isFaceDown = !visibleInFuturePlaneboundRows.contains(i);
-      }
-
-      // Wounded Eye: force planes in current and future rows to stay face-down
-      if (pathCtx.hidePlanes && node instanceof NodePlanebound
-          && node.getRowIndex() >= currentRow && !node.isCompleted()) {
-        isFaceDown = true;
-      }
-
-      if (wasAlreadyRevealed) {
-        isFaceDown = false;
-      }
-
-      boolean isCurrentRowReveal = node.getRowIndex() == currentRow
-          && visibleInCurrentRow.contains(i);
-      boolean isFutureReveal = node.getRowIndex() > currentRow
-          && visibleInFuturePlaneboundRows.contains(i);
+      boolean isFaceDown = !wasAlreadyRevealed && isNodeFaceDown(path, node, i, currentRow,
+          visibleInCurrentRow, visibleInFuturePlaneboundRows, pathCtx.hidePlanes);
       boolean animateReveal = node instanceof NodePlanebound && !wasAlreadyRevealed && !isFaceDown
-          && (isCurrentRowReveal || isFutureReveal);
+          && row >= currentRow;
 
       if (!isFaceDown && node instanceof NodePlanebound planebound) {
         planebound.setRevealed(true);
       }
 
       // Calculate planebound row count for life display
-      int planeboundRowCount = path.countPlaneboundRowsUpTo(node.getRowIndex());
+      int planeboundRowCount = path.countPlaneboundRowsUpTo(row);
 
       NodePanel nodePanel = NodePanelFactory.createPanel(node, isFaceDown, planeboundRowCount,
           animateReveal);
@@ -139,29 +113,49 @@ public class PathVisualizerPanel extends SkinnedPanel {
       nodePanels.add(nodePanel);
       add(nodePanel);
 
-      if (animateReveal && nodePanel instanceof NodePlaneboundPanel) {
-        toReveal.add((NodePlaneboundPanel) nodePanel);
+      if (animateReveal && nodePanel instanceof NodePlaneboundPanel planeboundPanel) {
+        toReveal.add(planeboundPanel);
       }
     }
 
     calculatePreferredSize();
     revalidate();
     repaint();
+    animateReveals(toReveal);
+  }
 
-    // Trigger staggered flip animations
-    if (!toReveal.isEmpty()) {
-      final int[] revealIndex = {0};
-      Timer revealTimer = new Timer(150, e -> {
-        if (revealIndex[0] < toReveal.size()) {
-          toReveal.get(revealIndex[0]).flipToReveal();
-          revealIndex[0]++;
-        } else {
-          ((Timer) e.getSource()).stop();
-        }
-      });
-      revealTimer.setInitialDelay(300); // Brief pause before first flip
-      revealTimer.start();
+  private static boolean isNodeFaceDown(RoguePath path, RoguePathNode node, int nodeIndex,
+                                        int currentRow, List<Integer> visibleInCurrentRow,
+                                        List<Integer> visibleInFuturePlaneboundRows, boolean hidePlanes) {
+    int row = node.getRowIndex();
+    if (row < currentRow) {
+      // Use reachability for that row without applying the current effects.
+      return !path.getVisibleNodesInCurrentRow(row, new PathUpdateContext()).contains(nodeIndex);
     }
+    if (hidePlanes && node instanceof NodePlanebound && !node.isCompleted()) {
+      return true;
+    }
+    List<Integer> visibleNodes = row == currentRow
+        ? visibleInCurrentRow : visibleInFuturePlaneboundRows;
+    return !visibleNodes.contains(nodeIndex);
+  }
+
+  private static void animateReveals(List<NodePlaneboundPanel> toReveal) {
+    if (toReveal.isEmpty()) {
+      return;
+    }
+
+    final int[] revealIndex = {0};
+    Timer revealTimer = new Timer(150, e -> {
+      if (revealIndex[0] < toReveal.size()) {
+        toReveal.get(revealIndex[0]).flipToReveal();
+        revealIndex[0]++;
+      } else {
+        ((Timer) e.getSource()).stop();
+      }
+    });
+    revealTimer.setInitialDelay(300); // Brief pause before first flip
+    revealTimer.start();
   }
 
   /**
@@ -206,7 +200,6 @@ public class PathVisualizerPanel extends SkinnedPanel {
   public void clearPath() {
     removeAll();
     nodePanels.clear();
-    currentNodeIndex = -1;
     revalidate();
     repaint();
   }
@@ -264,10 +257,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
     g2d.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS).getColor());
     g2d.setStroke(new BasicStroke(PATH_LINE_WIDTH));
 
-    List<RoguePathNode> nodes = path.getNodes();
-
     for (int i = 0; i < nodePanels.size(); i++) {
-      RoguePathNode fromNode = nodes.get(i);
       List<Integer> reachableIndices = path.getReachableNodeIndices(i);
 
       if (reachableIndices.isEmpty()) {
@@ -307,18 +297,12 @@ public class PathVisualizerPanel extends SkinnedPanel {
    * Draw a curved line (cubic Bezier curve) from (x1, y1) to (x2, y2).
    */
   private void drawCurvedLine(Graphics2D g2d, int x1, int y1, int x2, int y2) {
-    // Control points for cubic Bezier curve
-    // Place control points vertically between start and end
+    // Keep both control points halfway down so the curve leaves and enters the nodes vertically.
     int midY = (y1 + y2) / 2;
-    int ctrl1X = x1;
-    int ctrl1Y = midY;
-    int ctrl2X = x2;
-    int ctrl2Y = midY;
-
-    java.awt.geom.CubicCurve2D curve = new java.awt.geom.CubicCurve2D.Float(
+    CubicCurve2D curve = new CubicCurve2D.Double(
         x1, y1,
-        ctrl1X, ctrl1Y,
-        ctrl2X, ctrl2Y,
+        x1, midY,
+        x2, midY,
         x2, y2
     );
 
@@ -332,7 +316,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
     int arrowSize = 10;
 
     // Calculate angle
-    double angle = Math.atan2(y2 - y1, x2 - x1);
+    double angle = Math.atan2((double) y2 - y1, (double) x2 - x1);
 
     // Arrow head points
     int x3 = (int) (x2 - arrowSize * Math.cos(angle - Math.PI / 6));
@@ -352,13 +336,6 @@ public class PathVisualizerPanel extends SkinnedPanel {
     return nodePanels;
   }
 
-  /**
-   * Get the current node index.
-   */
-  public int getCurrentNodeIndex() {
-    return currentNodeIndex;
-  }
-
   private List<RowLayout> calculateRowLayouts(int availableWidth) {
     if (nodePanels.isEmpty() || currentRun == null || currentRun.getPath() == null) {
       return new ArrayList<>();
@@ -371,18 +348,48 @@ public class PathVisualizerPanel extends SkinnedPanel {
       rowIndices.computeIfAbsent(nodes.get(i).getRowIndex(), k -> new ArrayList<>()).add(i);
     }
 
-    int maxRow = path.getMaxRow();
+    List<PathRow> rows = buildPathRows(path, rowIndices);
     int maxPackedRowWidth = 0;
-    int y = 20;
+    for (PathRow row : rows) {
+      maxPackedRowWidth = Math.max(maxPackedRowWidth, row.width());
+    }
+    int layoutWidth = availableWidth > 0 ? Math.max(availableWidth, maxPackedRowWidth + 40)
+        : maxPackedRowWidth + 40;
 
-    List<Integer> rows = new ArrayList<>();
-    Map<Integer, Integer> rowY = new HashMap<>();
-    Map<Integer, Boolean> sideRows = new HashMap<>();
-    Map<Integer, List<NodePanel>> rowPanels = new HashMap<>();
+    // Pack every row first so side rows can align to a plane row above or below them.
+    Map<Integer, List<Rectangle>> packedBounds = new HashMap<>();
+    Map<Integer, Rectangle> planeBoundsByIndex = new HashMap<>();
+    for (PathRow row : rows) {
+      List<Rectangle> bounds = createPackedBounds(row, layoutWidth);
+      packedBounds.put(row.index(), bounds);
+      if (!row.sideRow()) {
+        List<Integer> indices = rowIndices.get(row.index());
+        for (int i = 0; i < indices.size(); i++) {
+          planeBoundsByIndex.put(indices.get(i), bounds.get(i));
+        }
+      }
+    }
+
+    List<RowLayout> rowLayouts = new ArrayList<>();
+    for (PathRow row : rows) {
+      List<Rectangle> rowPackedBounds = packedBounds.get(row.index());
+      List<Rectangle> bounds = row.sideRow()
+          ? createSideRowBounds(row.index(), row.panels(), rowIndices, planeBoundsByIndex, rowPackedBounds)
+          : rowPackedBounds;
+      rowLayouts.add(new RowLayout(row.panels(), bounds));
+    }
+    return rowLayouts;
+  }
+
+  private List<PathRow> buildPathRows(RoguePath path, Map<Integer, List<Integer>> rowIndices) {
+    List<RoguePathNode> nodes = path.getNodes();
+    List<PathRow> rows = new ArrayList<>();
+    int maxRow = path.getMaxRow();
+    int y = 20;
 
     for (int row = 0; row <= maxRow; row++) {
       List<Integer> indices = rowIndices.get(row);
-      if (indices == null || indices.isEmpty()) {
+      if (indices == null) {
         continue;
       }
 
@@ -395,79 +402,28 @@ public class PathVisualizerPanel extends SkinnedPanel {
 
       for (Integer index : indices) {
         NodePanel panel = nodePanels.get(index);
+        Dimension size = panel.getPreferredSize();
         panels.add(panel);
-        rowHeight = Math.max(rowHeight, panel.getPreferredSize().height);
-        rowWidth += panel.getPreferredSize().width;
+        rowHeight = Math.max(rowHeight, size.height);
+        rowWidth += size.width;
         sideRow &= nodes.get(index).isSideNode();
       }
       rowWidth += (panels.size() - 1) * HORIZONTAL_SPACING;
 
-      rows.add(row);
-      rowY.put(row, y);
-      sideRows.put(row, sideRow);
-      rowPanels.put(row, panels);
-      maxPackedRowWidth = Math.max(maxPackedRowWidth, rowWidth);
+      rows.add(new PathRow(row, y, panels, rowWidth, sideRow));
       y += rowHeight + NODE_SPACING;
     }
 
-    int layoutWidth = availableWidth > 0 ? Math.max(availableWidth, maxPackedRowWidth + 40)
-        : maxPackedRowWidth + 40;
-
-    Map<Integer, List<Rectangle>> packedBounds = new HashMap<>();
-    for (Integer row : rows) {
-      packedBounds.put(row, createPackedBounds(rowPanels.get(row), rowY.get(row), layoutWidth));
-    }
-
-    Map<Integer, Rectangle> planeBoundsByIndex = new HashMap<>();
-    for (Integer row : rows) {
-      if (Boolean.TRUE.equals(sideRows.get(row))) {
-        continue;
-      }
-      List<Integer> indices = rowIndices.get(row);
-      List<Rectangle> bounds = packedBounds.get(row);
-      for (int i = 0; i < indices.size() && i < bounds.size(); i++) {
-        planeBoundsByIndex.put(indices.get(i), bounds.get(i));
-      }
-    }
-
-    List<RowLayout> rowLayouts = new ArrayList<>();
-    for (Integer row : rows) {
-      List<NodePanel> panels = rowPanels.get(row);
-      List<Rectangle> rowPackedBounds = packedBounds.get(row);
-      List<Rectangle> bounds;
-
-      if (!Boolean.TRUE.equals(sideRows.get(row))) {
-        bounds = rowPackedBounds;
-      } else {
-        bounds = createSideRowBounds(
-            row,
-            panels,
-            rowIndices,
-            planeBoundsByIndex,
-            rowPackedBounds
-        );
-      }
-
-      rowLayouts.add(new RowLayout(panels, bounds));
-    }
-
-    return rowLayouts;
+    return rows;
   }
 
-  private List<Rectangle> createPackedBounds(List<NodePanel> rowPanels, int y, int layoutWidth) {
+  private List<Rectangle> createPackedBounds(PathRow row, int layoutWidth) {
     List<Rectangle> bounds = new ArrayList<>();
-    int totalWidth = 0;
-    for (NodePanel panel : rowPanels) {
-      totalWidth += panel.getPreferredSize().width;
-    }
-    totalWidth += (rowPanels.size() - 1) * HORIZONTAL_SPACING;
-
-    int startX = (layoutWidth - totalWidth) / 2;
-    for (NodePanel panel : rowPanels) {
-      int panelWidth = panel.getPreferredSize().width;
-      int panelHeight = panel.getPreferredSize().height;
-      bounds.add(new Rectangle(startX, y, panelWidth, panelHeight));
-      startX += panelWidth + HORIZONTAL_SPACING;
+    int startX = (layoutWidth - row.width()) / 2;
+    for (NodePanel panel : row.panels()) {
+      Dimension size = panel.getPreferredSize();
+      bounds.add(new Rectangle(startX, row.y(), size.width, size.height));
+      startX += size.width + HORIZONTAL_SPACING;
     }
     return bounds;
   }
@@ -561,6 +517,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
   }
 
   private List<Double> getSideAnchors(int sideCount, List<Double> planeCenters) {
+    // Matching parity lets side nodes center on planes. Using gaps flips the parity.
     if (planeCenters.size() == 1 || sideCount % 2 == planeCenters.size() % 2) {
       return new ArrayList<>(planeCenters);
     }

@@ -38,8 +38,10 @@ public class NodeChest extends RoguePathNode {
     @Override
     public String toString() {
         List<ChestEffect> effects = getChestEffects();
-        return !effects.isEmpty()
-            ? "Loot (" + String.join(" / ", effects.stream().map(ChestEffect::getDisplayName).collect(Collectors.toList())) + ")"
-            : "Loot (Treasure)";
+        return effects.isEmpty()
+            ? "Loot (Treasure)"
+            : "Loot (" + String.join(" / ",
+                effects.stream().map(ChestEffect::getDisplayName).collect(Collectors.toList()))
+              + ")";
     }
 }

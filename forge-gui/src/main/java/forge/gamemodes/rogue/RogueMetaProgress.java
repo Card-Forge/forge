@@ -1,6 +1,7 @@
 package forge.gamemodes.rogue;
 
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.NoTypePermission;
@@ -25,10 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -277,13 +276,12 @@ public class RogueMetaProgress {
         afterCodexProgressChanged(getCodexProgress().markTraitAcquired(getEffectKey(effect)));
     }
 
-    boolean updateCodexProgress(Function<CodexProgress, Boolean> updater) {
+    void updateCodexProgress(Predicate<CodexProgress> updater) {
         if (updater == null) {
-            return false;
+            return;
         }
-        boolean changed = Boolean.TRUE.equals(updater.apply(getCodexProgress()));
+        boolean changed = updater.test(getCodexProgress());
         afterCodexProgressChanged(changed);
-        return changed;
     }
 
     private void afterCodexProgressChanged(boolean changed) {
@@ -333,8 +331,10 @@ public class RogueMetaProgress {
 
         boolean changed = false;
         for (RogueDeck deck : RogueConfig.loadRogueDecks()) {
-            if (deck.getUnlockCondition() == null || deck.getUnlockCondition().isDefault()) continue;
-            if (!deck.getUnlockCondition().hasCondition(key)) continue;
+            RogueUnlockCondition condition = deck.getUnlockCondition();
+            if (condition == null || condition.isDefault() || !condition.hasCondition(key)) {
+                continue;
+            }
 
             String name = deck.getCommanderCardName();
             if (deck.isUnlocked() && !notifiedCommanderUnlocks.contains(name)) {
@@ -346,7 +346,7 @@ public class RogueMetaProgress {
                     .createLayeredImage(card, FSkinProp.IMG_SPECIAL_TROPHY,
                         ForgeConstants.CACHE_ACHIEVEMENTS_DIR
                             + "/unlock_" + name.replace(" ", "_") + ".png", 1f);
-                String unlockDesc = deck.getUnlockCondition().getDescription();
+                String unlockDesc = condition.getDescription();
                 SoundSystem.instance.play(SoundEffectType.Enchantment,
                     SoundEffectType.Enchantment.isSynced());
                 GuiBase.getInterface().showImageDialog(image,
@@ -355,26 +355,8 @@ public class RogueMetaProgress {
             }
         }
 
-        // Check global Descension Mode unlock when runs are won
-        if (stat == RogueStats.RUNS_WON) {
-            final String customRunsKey = "CUSTOM_RUNS";
-            if (isCustomRunsUnlocked() && !notifiedCommanderUnlocks.contains(customRunsKey)) {
-                notifiedCommanderUnlocks.add(customRunsKey);
-                changed = true;
-                GuiBase.getInterface().showImageDialog(null,
-                    "You have won 2 Runs!\nCustom Runs are now unlocked.",
-                    "Custom Runs Unlocked!");
-            }
-
-            final String descensionKey = "DESCENSION_MODE";
-            if (isDescensionModeUnlocked() && !notifiedCommanderUnlocks.contains(descensionKey)) {
-                notifiedCommanderUnlocks.add(descensionKey);
-                changed = true;
-                GuiBase.getInterface().showImageDialog(null,
-                    "You have won Runs with 3 different Commanders!\n" +
-                        "Descension Mode is now unlocked.",
-                    "Descension Mode Unlocked!");
-            }
+        if (stat == RogueStats.RUNS_WON && notifyRunModeUnlocks()) {
+            changed = true;
         }
 
         RogueCommanderAchievements.instance.evaluateCommanderUnlockAchievements();
@@ -382,6 +364,25 @@ public class RogueMetaProgress {
         if (changed) {
             save();
         }
+    }
+
+    private boolean notifyRunModeUnlocks() {
+        boolean changed = false;
+        if (isCustomRunsUnlocked() && notifiedCommanderUnlocks.add("CUSTOM_RUNS")) {
+            changed = true;
+            GuiBase.getInterface().showImageDialog(null,
+                "You have won 2 Runs!\nCustom Runs are now unlocked.",
+                "Custom Runs Unlocked!");
+        }
+
+        if (isDescensionModeUnlocked() && notifiedCommanderUnlocks.add("DESCENSION_MODE")) {
+            changed = true;
+            GuiBase.getInterface().showImageDialog(null,
+                "You have won Runs with 3 different Commanders!\n" +
+                    "Descension Mode is now unlocked.",
+                "Descension Mode Unlocked!");
+        }
+        return changed;
     }
 
     // ==================== Getters for Unlock Condition Evaluation ====================
@@ -1164,23 +1165,22 @@ public class RogueMetaProgress {
              InputStreamReader reader = new InputStreamReader(zin)) {
             progress = (RogueMetaProgress) getSerializer().fromXML(reader);
         } catch (Exception e) {
-            System.err.println("Error loading meta progress, starting fresh: " + e.getMessage());
+            Logger.error(e, "Error loading Rogue meta progress from {}, starting fresh", file);
             return new RogueMetaProgress();
         }
 
         int savedVersion = progress.getSaveVersion();
         if (savedVersion > RogueSaveMigration.currentVersion()) {
-            System.err.println("Rogue meta progress is from a newer version: " + file);
+            Logger.warn("Rogue meta progress is from a newer version: {}", file);
             return progress;
         }
         if (savedVersion < RogueSaveMigration.currentVersion()) {
             try {
                 RogueSaveMigration.applyToMetaProgress(progress);
-                progress.saveMigrated(file);
+                RogueIO.saveMigrated(file, progress::savePacked);
             } catch (Exception e) {
                 progress.setSaveVersion(savedVersion);
-                System.err.println("Error migrating rogue meta progress: " + file);
-                e.printStackTrace();
+                Logger.error(e, "Error migrating Rogue meta progress: {}", file);
             }
         }
         return progress;
@@ -1188,34 +1188,15 @@ public class RogueMetaProgress {
 
     public void save() {
         if (saveVersion != RogueSaveMigration.currentVersion()) {
-            System.err.println("Rogue meta progress was not saved because its save version is unsupported: " + saveVersion);
+            Logger.warn("Cannot save Rogue meta progress with unsupported save version: {}", saveVersion);
             return;
         }
-        File dir = new File(RogueIO.ROGUE_SAVE_DIR);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-
+        File file = getMetaProgressFile();
         try {
-            savePacked(getMetaProgressFile());
+            Files.createDirectories(file.toPath().getParent());
+            savePacked(file);
         } catch (Exception e) {
-            System.err.println("Error saving meta progress: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void saveMigrated(File file) throws IOException {
-        Path original = file.toPath();
-        Path backup = original.resolveSibling(file.getName() + ".pre-v" + RogueSaveMigration.currentVersion() + ".bak");
-        if (!Files.exists(backup)) {
-            Files.copy(original, backup);
-        }
-        Path temporary = Files.createTempFile(original.getParent(), file.getName(), ".tmp");
-        try {
-            savePacked(temporary.toFile());
-            Files.move(temporary, original, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-        } finally {
-            Files.deleteIfExists(temporary);
+            Logger.error(e, "Error saving Rogue meta progress: {}", file);
         }
     }
 

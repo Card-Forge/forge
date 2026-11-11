@@ -11,8 +11,6 @@ import java.awt.*;
  */
 public class NodeEventPanel extends NodeCircularPanel {
 
-  private final NodeEvent eventNode;
-
   /**
    * Create a panel for displaying an event node.
    *
@@ -20,7 +18,6 @@ public class NodeEventPanel extends NodeCircularPanel {
    */
   public NodeEventPanel(NodeEvent node) {
     super(node);
-    this.eventNode = node;
     setToolTipText(Localizer.getInstance().getMessage("lblRogueEventTooltip"));
   }
 
@@ -44,11 +41,10 @@ public class NodeEventPanel extends NodeCircularPanel {
   /**
    * Draw a scroll/parchment icon centered at the given position.
    */
-  private void drawScroll(Graphics2D g2d, int centerX, int centerY, int size) {
+  private void drawScroll(Graphics2D g2d, int centerX, int centerY, int scrollWidth) {
     // Main parchment (beige/tan rectangle)
     g2d.setColor(new Color(245, 222, 179));
-    int scrollWidth = size;
-    int scrollHeight = (int) (size * 0.8);
+    int scrollHeight = (int) (scrollWidth * 0.8);
     g2d.fillRoundRect(centerX - scrollWidth / 2, centerY - scrollHeight / 2, scrollWidth,
         scrollHeight, 5, 5);
 
@@ -59,7 +55,7 @@ public class NodeEventPanel extends NodeCircularPanel {
 
     // Question mark symbol (mysterious event)
     g2d.setColor(new Color(139, 69, 19));
-    g2d.setFont(new Font("Arial", Font.BOLD, (int) (size * 0.7)));
+    g2d.setFont(new Font("Arial", Font.BOLD, (int) (scrollWidth * 0.7)));
     FontMetrics fm = g2d.getFontMetrics();
     String symbol = "?";
     int textX = centerX - fm.stringWidth(symbol) / 2;

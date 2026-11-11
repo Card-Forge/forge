@@ -2,27 +2,20 @@ package forge.screens.home.rogue;
 
 import forge.util.Localizer;
 
-import forge.gamemodes.rogue.PreviewReference;
 import forge.gamemodes.rogue.TextHelper;
 import forge.gamemodes.rogue.effect.SanctumContext;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.screens.home.rogue.RogueUIHelper.PreviewTarget;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComponent;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -147,7 +140,8 @@ public class SanctumDialog {
       desiredHeight += btnExtraChoice.getPreferredSize().height + 10 + 10;
     }
 
-    int dialogHeight = Math.min(Math.max(desiredHeight + PANEL_INSETS, MIN_DIALOG_HEIGHT), getMaxDialogHeight());
+    int dialogHeight = Math.min(Math.max(desiredHeight + PANEL_INSETS, MIN_DIALOG_HEIGHT),
+        RogueUIHelper.getMaxChoiceDialogHeight());
     Dimension dialogSize = new Dimension(DIALOG_WIDTH, dialogHeight);
     panel.setPreferredSize(dialogSize);
     panel.setMinimumSize(dialogSize);
@@ -169,14 +163,7 @@ public class SanctumDialog {
         List.of(Localizer.getInstance().getMessage("lblSkip")),
         0
     );
-    optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-    RogueUIHelper.disableSpacebarButtonActivation(optionPane.getContentPane());
-    optionPane.getTitleBar().setVisible(false);
-    previewPopup = new RoguePreviewPopup();
-    previewTargets.forEach(target -> previewPopup.attachTo(target.component(), target.references()));
-
-    panel.revalidate();
-    panel.repaint();
+    previewPopup = RogueUIHelper.prepareChoiceDialogWithPreviews(optionPane, panel, previewTargets);
 
     optionPane.setVisible(true);
     hidePreview();
@@ -197,17 +184,6 @@ public class SanctumDialog {
       previewPopup.hide();
     }
   }
-
-  private static int getMaxDialogHeight() {
-    GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
-        .getDefaultScreenDevice().getDefaultConfiguration();
-    Rectangle screenBounds = gc.getBounds();
-    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-    int usableHeight = screenBounds.height - screenInsets.top - screenInsets.bottom;
-    return (int) (usableHeight * 0.9) - 80;
-  }
-
-  private record PreviewTarget(JComponent component, List<PreviewReference> references) {}
 
   private static class MainPanel extends SkinnedPanel {
 

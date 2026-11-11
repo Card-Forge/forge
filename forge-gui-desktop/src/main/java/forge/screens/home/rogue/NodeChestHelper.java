@@ -12,6 +12,7 @@ import forge.gamemodes.rogue.path.NodeChest;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.MyRandom;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 class NodeChestHelper {
@@ -48,7 +49,7 @@ class NodeChestHelper {
         } else {
             List<ChestEffect> availableEffects = ChestEffect.getAvailableEffects(currentRun, null);
             if (chestEffects.size() < CHEST_LOOT_CHOICE_COUNT
-                || !availableEffects.containsAll(chestEffects)) {
+                || !new HashSet<>(availableEffects).containsAll(chestEffects)) {
                 chestEffects = generateChestLootChoices(currentRun, List.of());
             }
             chestEffects = maybeOverrideChestChoices(chestEffects);
@@ -75,28 +76,29 @@ class NodeChestHelper {
             }
         } while (rerollRequested);
 
-        ChestEffect chestEffect = result.choice();
+        return applyChestLoot(currentRun, chestNode, result.choice());
+    }
+
+    private NodeFlowOutcome applyChestLoot(RogueRun currentRun, NodeChest chestNode, ChestEffect chestEffect) {
         if (chestEffect == null) {
             return NodeFlowOutcome.COMPLETE_NODE;
         }
         CodexHelper.recordTraitAcquired(chestEffect);
 
-        EffectResultContext ctx = new EffectResultContext();
-        if (chestEffect.getEffectType() == RogueEffect.EffectType.ONESHOT) {
-            chestEffect.applyEffect(currentRun, ctx);
-            if (effectResultHelper == null) {
-                CodexHelper.recordAcquiredCards(currentRun, ctx.addedCards);
-                return NodeFlowOutcome.COMPLETE_NODE;
-            }
-            NodeFlowOutcome outcome = effectResultHelper.handleEffectTrigger(chestNode, ctx, currentRun);
-            if (outcome == NodeFlowOutcome.COMPLETE_NODE) {
-                CodexHelper.recordAcquiredCards(currentRun, ctx.addedCards);
-            }
-            return outcome;
-        } else {
+        if (chestEffect.getEffectType() != RogueEffect.EffectType.ONESHOT) {
             currentRun.addChestEffect(chestEffect);
+            return NodeFlowOutcome.COMPLETE_NODE;
         }
-        return NodeFlowOutcome.COMPLETE_NODE;
+
+        EffectResultContext ctx = new EffectResultContext();
+        chestEffect.applyEffect(currentRun, ctx);
+        NodeFlowOutcome outcome = effectResultHelper == null
+            ? NodeFlowOutcome.COMPLETE_NODE
+            : effectResultHelper.handleEffectTrigger(chestNode, ctx, currentRun);
+        if (outcome == NodeFlowOutcome.COMPLETE_NODE) {
+            CodexHelper.recordAcquiredCards(currentRun, ctx.addedCards);
+        }
+        return outcome;
     }
 
     private List<ChestEffect> generateChestLootChoices(RogueRun currentRun,

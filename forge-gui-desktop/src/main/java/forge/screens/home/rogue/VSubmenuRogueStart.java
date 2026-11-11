@@ -39,6 +39,8 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private static final int OUTER_CARD_WIDTH = 140;
   private static final int CARD_SPACING = 15;
   private static final int CARD_PADDING = 15;
+  private static final int ACTION_BUTTON_WIDTH = 150;
+  private static final int ACTION_BUTTON_GAP = 10;
   private static final int COMMANDER_CAROUSEL_HEIGHT =
       Math.round(CENTER_CARD_WIDTH * CardPanel.ASPECT_RATIO) + 2 * CARD_PADDING + 20;
 
@@ -101,7 +103,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private final FLabel lblCustomRunHint = new FLabel.Builder()
       .text(localizer.getMessage("lblRogueCustomRunLimitations"))
       .fontSize(12).build();
-  private FSkin.SkinnedPanel pnlCustomModifications;
   private FScrollPane scrollCustomModifications;
   private JPanel pnlDetails;
   private JPanel descriptionHeader;
@@ -122,15 +123,15 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
       }
       lastDisplayWidth = width;
       lastViewportHeight = height;
-      SwingUtilities.invokeLater(() -> updateResponsiveLayout());
+      SwingUtilities.invokeLater(VSubmenuRogueStart.this::updateResponsiveLayout);
     }
   };
   private final ComponentAdapter visibilityListener = new ComponentAdapter() {
     @Override public void componentShown(ComponentEvent e) {
-      SwingUtilities.invokeLater(() -> updateResponsiveLayout());
+      SwingUtilities.invokeLater(VSubmenuRogueStart.this::updateResponsiveLayout);
     }
     @Override public void componentHidden(ComponentEvent e) {
-      SwingUtilities.invokeLater(() -> updateResponsiveLayout());
+      SwingUtilities.invokeLater(VSubmenuRogueStart.this::updateResponsiveLayout);
     }
   };
   private final Map<CustomRunModification, FCheckBox> customModificationChecks =
@@ -169,7 +170,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     btnCommanderPrevious.setToolTipText(localizer.getMessage("lblRoguePreviousCommander"));
     btnCommanderNext.setToolTipText(localizer.getMessage("lblRogueNextCommander"));
     chkDescension.addComponentListener(visibilityListener);
-    chkDescension.addItemListener(e -> SwingUtilities.invokeLater(() -> updateResponsiveLayout()));
+    chkDescension.addItemListener(e -> SwingUtilities.invokeLater(this::updateResponsiveLayout));
     pnlCommanderCarousel.add(btnCommanderPrevious);
     pnlCommanderCarousel.add(btnCommanderNext);
 
@@ -253,10 +254,12 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
     display.repaintSelf();
     display.revalidate();
-    SwingUtilities.invokeLater(() -> updateResponsiveLayout());
+    SwingUtilities.invokeLater(this::updateResponsiveLayout);
   }
 
   private JPanel createDetailsPanel() {
+    final String compactRowLayout = "insets 0, gap 5";
+    final String growHorizontally = "growx";
     JPanel panel = new JPanel();
     panel.setOpaque(false);
     panel.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[150px][grow]"));
@@ -289,18 +292,18 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     // Rows 3-4: Custom run modifications
     chkCustomRuns.setVisible(false);
     panel.add(chkCustomRuns, "cell 0 3, span 2, alignx left, gaptop 10px, hidemode 3");
-    pnlCustomRunLock = new JPanel(new MigLayout("insets 0, gap 5"));
+    pnlCustomRunLock = new JPanel(new MigLayout(compactRowLayout));
     pnlCustomRunLock.setOpaque(false);
     pnlCustomRunLock.add(
         new FLabel.Builder().icon(FSkin.getImage(FSkinProp.ICO_LOCK).resize(20, 20)).build(),
         "w 20px!, h 20px!");
     pnlCustomRunLock.add(new FLabel.Builder()
         .text(Localizer.getInstance().getMessage("lblRogueCustomRunWin2RunsWithAnyCommanderToUnlock")).fontSize(12).build(),
-        "growx");
+        growHorizontally);
     pnlCustomRunLock.setVisible(false);
     pnlCustomRunLock.addComponentListener(visibilityListener);
     panel.add(pnlCustomRunLock, "cell 0 3, span 2, growx, gaptop 10px, hidemode 3");
-    pnlCustomModifications = new ModificationsPanel(
+    FSkin.SkinnedPanel pnlCustomModifications = new ModificationsPanel(
         new MigLayout("insets 10 12 10 12, gapx 4, gapy 8, wrap 2, fillx", "[pref!][grow,fill]"));
     pnlCustomModifications.setOpaque(true);
     pnlCustomModifications.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -322,45 +325,66 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     chkDescension.setVisible(false);
     panel.add(chkDescension, "cell 0 5, span 2, alignx left, gaptop 10px, hidemode 3");
 
-    pnlDescensionLock = new JPanel(new MigLayout("insets 0, gap 5"));
+    pnlDescensionLock = new JPanel(new MigLayout(compactRowLayout));
     pnlDescensionLock.setOpaque(false);
     pnlDescensionLock.add(
         new FLabel.Builder().icon(FSkin.getImage(FSkinProp.ICO_LOCK).resize(20, 20)).build(),
         "w 20px!, h 20px!");
-    pnlDescensionLock.add(lblDescensionLockText, "growx");
+    pnlDescensionLock.add(lblDescensionLockText, growHorizontally);
     pnlDescensionLock.setVisible(false);
     pnlDescensionLock.addComponentListener(visibilityListener);
     panel.add(pnlDescensionLock, "cell 0 5, span 2, growx, gaptop 10px, hidemode 3");
 
     // Row 6: Descension level selector (hidden by default)
-    pnlDescensionLevel = new JPanel(new MigLayout("insets 0, gap 5, wrap 1"));
+    pnlDescensionLevel = new JPanel(new MigLayout(compactRowLayout + ", wrap 1"));
     pnlDescensionLevel.setOpaque(false);
-    JPanel arrowRow = new JPanel(new MigLayout("insets 0, gap 5"));
+    JPanel arrowRow = new JPanel(new MigLayout(compactRowLayout));
     arrowRow.setOpaque(false);
     arrowRow.add(btnDescensionDown, "w 50px!, h 30px!");
     arrowRow.add(lblDescensionLock, "w 20px!, h 20px!, hidemode 3");
-    arrowRow.add(lblDescensionLevel, "growx");
+    arrowRow.add(lblDescensionLevel, growHorizontally);
     arrowRow.add(btnDescensionUp, "w 50px!, h 30px!");
-    pnlDescensionLevel.add(arrowRow, "growx");
-    pnlDescensionLevel.add(lblDescensionDesc, "growx");
+    pnlDescensionLevel.add(arrowRow, growHorizontally);
+    pnlDescensionLevel.add(lblDescensionDesc, growHorizontally);
     pnlDescensionLevel.setVisible(false);
     pnlDescensionLevel.addComponentListener(visibilityListener);
     panel.add(pnlDescensionLevel, "cell 0 6, span 2, growx, gaptop 10px, hidemode 3");
 
     // Row 7: Buttons
-    pnlActions = new JPanel(new MigLayout("insets 0, gap 10"));
+    pnlActions = new JPanel(new MigLayout("insets 0, gap " + ACTION_BUTTON_GAP));
     pnlActions.setOpaque(false);
-    pnlActions.add(btnBeginRun, "w 150px!, h 40px!");
-    pnlActions.add(btnAether, "w 150px!, h 40px!");
-    pnlActions.add(btnHistory, "w 150px!, h 40px!");
-    pnlActions.add(btnStats, "w 150px!, h 40px!");
-    if (ForgePreferences.DEV_MODE) {
-      pnlActions.add(btnDevUnlockAll, "w 150px!, h 40px!");
-      pnlActions.add(btnDevNPCProgress, "w 150px!, h 40px!");
-    }
+    addActionButtons();
     panel.add(pnlActions, "cell 0 7, span 2, alignx center, gaptop 20px");
 
     return panel;
+  }
+
+  private void addActionButtons() {
+    final String buttonSize = "w " + ACTION_BUTTON_WIDTH + "px!, h 40px!";
+    pnlActions.add(btnBeginRun, buttonSize);
+    pnlActions.add(btnAether, buttonSize);
+    pnlActions.add(btnHistory, buttonSize);
+    pnlActions.add(btnStats, buttonSize);
+    if (ForgePreferences.DEV_MODE) {
+      pnlActions.add(btnDevUnlockAll, buttonSize);
+      pnlActions.add(btnDevNPCProgress, buttonSize);
+    }
+  }
+
+  private static int getActionColumnCount(int availableWidth) {
+    int maxColumns = Math.max(1,
+        (availableWidth + ACTION_BUTTON_GAP) / (ACTION_BUTTON_WIDTH + ACTION_BUTTON_GAP));
+    if (ForgePreferences.DEV_MODE) {
+      if (maxColumns >= 6) {
+        return 6;
+      }
+      if (maxColumns >= 3) {
+        return 3;
+      }
+    } else if (maxColumns >= 4) {
+      return 4;
+    }
+    return maxColumns >= 2 ? 2 : 1;
   }
 
   private void updateResponsiveLayout() {
@@ -371,22 +395,12 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     }
 
     int availableWidth = Math.round(display.getWidth() * 0.98f);
-    int maxColumns = Math.max(1, (availableWidth + 10) / 160);
-    int columns = ForgePreferences.DEV_MODE
-        ? maxColumns >= 6 ? 6 : maxColumns >= 3 ? 3 : maxColumns >= 2 ? 2 : 1
-        : maxColumns >= 4 ? 4 : maxColumns >= 2 ? 2 : 1;
+    int columns = getActionColumnCount(availableWidth);
     if (columns != actionColumns) {
       actionColumns = columns;
       pnlActions.removeAll();
-      pnlActions.setLayout(new MigLayout("insets 0, gap 10, wrap " + columns));
-      pnlActions.add(btnBeginRun, "w 150px!, h 40px!");
-      pnlActions.add(btnAether, "w 150px!, h 40px!");
-      pnlActions.add(btnHistory, "w 150px!, h 40px!");
-      pnlActions.add(btnStats, "w 150px!, h 40px!");
-      if (ForgePreferences.DEV_MODE) {
-        pnlActions.add(btnDevUnlockAll, "w 150px!, h 40px!");
-        pnlActions.add(btnDevNPCProgress, "w 150px!, h 40px!");
-      }
+      pnlActions.setLayout(new MigLayout("insets 0, gap " + ACTION_BUTTON_GAP + ", wrap " + columns));
+      addActionButtons();
     }
 
     int availableHeight = display.getParent().getHeight() - display.getY();
@@ -394,18 +408,13 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     if (expanded) {
       scrollCustomModifications.setVisible(false);
     }
-    int fixedHeight;
     int budget;
     boolean compact;
     try {
-      applyResponsiveSizes(COMMANDER_CAROUSEL_HEIGHT, 240, false);
-      fixedHeight = display.getPreferredSize().height - COMMANDER_CAROUSEL_HEIGHT;
-      budget = availableHeight - fixedHeight;
+      budget = measureHeightBudget(display, availableHeight, false);
       compact = budget < (expanded ? 148 : 48);
       if (compact) {
-        applyResponsiveSizes(COMMANDER_CAROUSEL_HEIGHT, 240, true);
-        fixedHeight = display.getPreferredSize().height - COMMANDER_CAROUSEL_HEIGHT;
-        budget = availableHeight - fixedHeight;
+        budget = measureHeightBudget(display, availableHeight, true);
       }
     } finally {
       if (expanded) {
@@ -423,6 +432,12 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     pnlDetails.revalidate();
     display.revalidate();
     display.repaintSelf();
+  }
+
+  private int measureHeightBudget(VHomeUI.PnlDisplay display, int availableHeight, boolean compact) {
+    applyResponsiveSizes(COMMANDER_CAROUSEL_HEIGHT, 240, compact);
+    int fixedHeight = display.getPreferredSize().height - COMMANDER_CAROUSEL_HEIGHT;
+    return availableHeight - fixedHeight;
   }
 
   private void applyResponsiveSizes(int targetCarousel, int targetCustom, boolean compact) {
@@ -470,13 +485,14 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         "cell 0 7, span 2, alignx center, gaptop " + (compact ? 0 : 20) + "px");
   }
 
-  public void setCustomModificationsVisible(boolean visible) {
+  void setCustomModificationsVisible(boolean visible) {
     scrollCustomModifications.setVisible(visible);
     pnlDetails.revalidate();
-    SwingUtilities.invokeLater(() -> updateResponsiveLayout());
+    SwingUtilities.invokeLater(this::updateResponsiveLayout);
   }
 
   @Override
+  @SuppressWarnings("java:S3066") // Required by IVDoc.
   public void setParentCell(DragCell cell0) {
     this.parentCell = cell0;
   }
@@ -688,88 +704,29 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         return;
       }
 
-      int centerWidth = Math.max(1, Math.min(CENTER_CARD_WIDTH,
-          Math.round((getHeight() - 2 * CARD_PADDING - 20) / CardPanel.ASPECT_RATIO)));
-      float scale = centerWidth / (float) CENTER_CARD_WIDTH;
-      int nearWidth = Math.max(1, Math.round(NEAR_CARD_WIDTH * scale));
-      int farWidth = Math.max(1, Math.round(FAR_CARD_WIDTH * scale));
-      int outerWidth = Math.max(1, Math.round(OUTER_CARD_WIDTH * scale));
-      int threeCardsWidth = centerWidth + 2 * nearWidth
+      CarouselCardSizes sizes = getCardSizes();
+      int threeCardsWidth = sizes.centerWidth() + 2 * sizes.nearWidth()
           + 2 * CARD_SPACING + 2 * CARD_PADDING;
-      int fiveCardsWidth = threeCardsWidth + 2 * farWidth + 2 * CARD_SPACING;
-      int sevenCardsWidth = fiveCardsWidth + 2 * outerWidth + 2 * CARD_SPACING;
-      int minSideWidth = 80;
-      int radius = 0;
-      if (count >= 3 && nearWidth >= minSideWidth && getWidth() >= threeCardsWidth) {
-        radius = 1;
-      }
-      if (count >= 5 && farWidth >= minSideWidth && getWidth() >= fiveCardsWidth) {
-        radius = 2;
-      }
-      if (count >= 7 && outerWidth >= minSideWidth && getWidth() >= sevenCardsWidth) {
-        radius = 3;
-      }
+      int radius = getVisibleRadius(count, sizes, threeCardsWidth);
       boolean showSecondCard = count == 2 && getWidth() >= threeCardsWidth;
-      int centerX = (getWidth() - centerWidth) / 2;
-      int centerLine = getHeight() / 2 + Math.round(10 * scale);
-      int centerHeight = Math.round(centerWidth * CardPanel.ASPECT_RATIO);
+      int centerLine = getHeight() / 2 + Math.round(10 * sizes.scale());
+      int centerHeight = Math.round(sizes.centerWidth() * CardPanel.ASPECT_RATIO);
       int arrowWidth = 50;
       int arrowHeight = 30;
       int arrowY = Math.max(0, Math.min(getHeight() - arrowHeight,
           centerLine - centerHeight / 2 + centerHeight - arrowHeight));
       if (radius > 0 || showSecondCard) {
-        int nearHeight = Math.round(nearWidth * CardPanel.ASPECT_RATIO);
-        int nearBottom = centerLine - nearHeight / 2 - Math.round(20 * scale) + nearHeight;
+        int nearHeight = Math.round(sizes.nearWidth() * CardPanel.ASPECT_RATIO);
+        int nearBottom = centerLine - nearHeight / 2 - Math.round(20 * sizes.scale()) + nearHeight;
         arrowY = Math.min(getHeight() - arrowHeight, Math.max(arrowY, nearBottom + 2));
+        // Hide neighboring cards if the arrows would overlap them.
         if (arrowY < nearBottom + 2) {
           radius = 0;
           showSecondCard = false;
         }
       }
-      boolean[] visible = new boolean[count];
+      layoutCards(centeredIndex, -radius, showSecondCard ? 1 : radius, centerLine, sizes);
 
-      for (int offset = -radius; offset <= radius; offset++) {
-        int index = Math.floorMod(centeredIndex + offset, count);
-        int distance = Math.abs(offset);
-        int width = distance == 0 ? centerWidth
-            : distance == 1 ? nearWidth : distance == 2 ? farWidth : outerWidth;
-        int height = Math.round(width * CardPanel.ASPECT_RATIO);
-        int x = centerX;
-        if (offset < 0) {
-          x -= CARD_SPACING + nearWidth;
-          if (distance >= 2) {
-            x -= CARD_SPACING + farWidth;
-          }
-          if (distance == 3) {
-            x -= CARD_SPACING + outerWidth;
-          }
-        } else if (offset > 0) {
-          x += centerWidth + CARD_SPACING;
-          if (distance >= 2) {
-            x += nearWidth + CARD_SPACING;
-          }
-          if (distance == 3) {
-            x += farWidth + CARD_SPACING;
-          }
-        }
-        CommanderCardPanel panel = commanderPanels.get(index);
-        panel.setBounds(x, centerLine - height / 2 - Math.round(distance * 20 * scale),
-            width, height);
-        visible[index] = true;
-      }
-      if (showSecondCard) {
-        int index = (centeredIndex + 1) % count;
-        int height = Math.round(nearWidth * CardPanel.ASPECT_RATIO);
-        commanderPanels.get(index).setBounds(centerX + centerWidth + CARD_SPACING,
-            centerLine - height / 2 - Math.round(20 * scale), nearWidth, height);
-        visible[index] = true;
-      }
-      for (int i = 0; i < count; i++) {
-        CommanderCardPanel panel = commanderPanels.get(i);
-        if (panel.isVisible() != visible[i]) {
-          panel.setVisible(visible[i]);
-        }
-      }
       Rectangle centerBounds = centeredPanel.getBounds();
       btnCommanderPrevious.setBounds(Math.max(0, centerBounds.x - arrowWidth - 8),
           arrowY, arrowWidth, arrowHeight);
@@ -777,6 +734,72 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
           centerBounds.x + centerBounds.width + 8), arrowY, arrowWidth, arrowHeight);
       btnCommanderPrevious.setVisible(true);
       btnCommanderNext.setVisible(true);
+    }
+
+    private CarouselCardSizes getCardSizes() {
+      int centerWidth = Math.max(1, Math.min(CENTER_CARD_WIDTH,
+          Math.round((getHeight() - 2 * CARD_PADDING - 20) / CardPanel.ASPECT_RATIO)));
+      float scale = centerWidth / (float) CENTER_CARD_WIDTH;
+      return new CarouselCardSizes(centerWidth,
+          Math.max(1, Math.round(NEAR_CARD_WIDTH * scale)),
+          Math.max(1, Math.round(FAR_CARD_WIDTH * scale)),
+          Math.max(1, Math.round(OUTER_CARD_WIDTH * scale)), scale);
+    }
+
+    private int getVisibleRadius(int count, CarouselCardSizes sizes, int threeCardsWidth) {
+      int fiveCardsWidth = threeCardsWidth + 2 * sizes.farWidth() + 2 * CARD_SPACING;
+      int sevenCardsWidth = fiveCardsWidth + 2 * sizes.outerWidth() + 2 * CARD_SPACING;
+      int minSideWidth = 80;
+      if (count >= 7 && sizes.outerWidth() >= minSideWidth && getWidth() >= sevenCardsWidth) {
+        return 3;
+      }
+      if (count >= 5 && sizes.farWidth() >= minSideWidth && getWidth() >= fiveCardsWidth) {
+        return 2;
+      }
+      if (count >= 3 && sizes.nearWidth() >= minSideWidth && getWidth() >= threeCardsWidth) {
+        return 1;
+      }
+      return 0;
+    }
+
+    private void layoutCards(int centeredIndex, int firstOffset, int lastOffset, int centerLine,
+        CarouselCardSizes sizes) {
+      int count = commanderPanels.size();
+      boolean[] visible = new boolean[count];
+      int x = (getWidth() - sizes.centerWidth()) / 2;
+      // Start at the leftmost card, then advance by each card's width and the gap.
+      for (int offset = firstOffset; offset < 0; offset++) {
+        x -= sizes.widthAtDistance(-offset) + CARD_SPACING;
+      }
+      for (int offset = firstOffset; offset <= lastOffset; offset++) {
+        int index = Math.floorMod(centeredIndex + offset, count);
+        int distance = Math.abs(offset);
+        int width = sizes.widthAtDistance(distance);
+        int height = Math.round(width * CardPanel.ASPECT_RATIO);
+        CommanderCardPanel panel = commanderPanels.get(index);
+        panel.setBounds(x, centerLine - height / 2 - Math.round(distance * 20 * sizes.scale()),
+            width, height);
+        visible[index] = true;
+        x += width + CARD_SPACING;
+      }
+      for (int i = 0; i < count; i++) {
+        CommanderCardPanel panel = commanderPanels.get(i);
+        if (panel.isVisible() != visible[i]) {
+          panel.setVisible(visible[i]);
+        }
+      }
+    }
+
+    private record CarouselCardSizes(int centerWidth, int nearWidth, int farWidth, int outerWidth,
+                                     float scale) {
+      private int widthAtDistance(int distance) {
+        return switch (distance) {
+          case 0 -> centerWidth;
+          case 1 -> nearWidth;
+          case 2 -> farWidth;
+          default -> outerWidth;
+        };
+      }
     }
   }
 }

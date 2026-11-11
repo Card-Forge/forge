@@ -139,7 +139,7 @@ public class RogueWinLose extends ControlWinLose {
 
         if (currentRun != null && (currentRun.isRunFailed() || currentRun.isRunWon())) {
             // Run is over (won or lost) - send player back to Commander selection
-            CSubmenuRogueMap.SINGLETON_INSTANCE.setCurrentRun(null);
+            CSubmenuRogueMap.SINGLETON_INSTANCE.clearCurrentRun();
             CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_ROGUESTART);
         } else {
             // Continue run - return to map

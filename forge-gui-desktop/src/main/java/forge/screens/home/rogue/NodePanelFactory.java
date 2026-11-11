@@ -8,6 +8,9 @@ import forge.gamemodes.rogue.path.*;
  */
 public class NodePanelFactory {
 
+  private NodePanelFactory() {
+  }
+
   /**
    * Create the appropriate panel for the given node type.
    *
@@ -19,17 +22,17 @@ public class NodePanelFactory {
    */
   public static NodePanel createPanel(RoguePathNode node, boolean isFaceDown,
       int planeboundRowCount, boolean animateReveal) {
-    if (node instanceof NodePlanebound) {
-      return new NodePlaneboundPanel((NodePlanebound) node, isFaceDown, planeboundRowCount,
+    if (node instanceof NodePlanebound nodePlanebound) {
+      return new NodePlaneboundPanel(nodePlanebound, isFaceDown, planeboundRowCount,
           animateReveal);
-    } else if (node instanceof NodeSanctum) {
-      return new NodeSanctumPanel((NodeSanctum) node);
-    } else if (node instanceof NodeBazaar) {
-      return new NodeBazaarPanel((NodeBazaar) node);
-    } else if (node instanceof NodeChest) {
-      return new NodeChestPanel((NodeChest) node);
-    } else if (node instanceof NodeEvent) {
-      return new NodeEventPanel((NodeEvent) node);
+    } else if (node instanceof NodeSanctum nodeSanctum) {
+      return new NodeSanctumPanel(nodeSanctum);
+    } else if (node instanceof NodeBazaar nodeBazaar) {
+      return new NodeBazaarPanel(nodeBazaar);
+    } else if (node instanceof NodeChest nodeChest) {
+      return new NodeChestPanel(nodeChest);
+    } else if (node instanceof NodeEvent nodeEvent) {
+      return new NodeEventPanel(nodeEvent);
     }
 
     // Fallback: Create a generic panel for unknown node types

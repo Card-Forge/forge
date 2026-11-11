@@ -4,6 +4,7 @@ import forge.deckchooser.FDeckViewer;
 import forge.gamemodes.rogue.RogueTutorial;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.home.rogue.CardUtil.CardGridSize;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FLabel;
@@ -17,10 +18,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.WindowConstants;
+import javax.swing.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Dialog for selecting reward cards visually. Displays cards as images and allows selecting up to a
@@ -39,7 +38,6 @@ public class CardRewardDialog {
 
   private final String title;
   private final int maxSelections;
-  private final int gold;
   private final String rerollLabel;
   private final boolean rerollEnabled;
   private final Set<PaperCard> selectedCards;
@@ -48,7 +46,6 @@ public class CardRewardDialog {
   private final FLabel lblInfo;
   private final FLabel lblRewards;
   private final FLabel lblGold;
-  private FOptionPane optionPane;
   private CardUtil zoomUtil;
 
   // Computed card dimensions (may be scaled down)
@@ -69,7 +66,6 @@ public class CardRewardDialog {
                           String rerollLabel, boolean rerollEnabled, int gold) {
     this.title = title;
     this.maxSelections = maxSelections;
-    this.gold = gold;
     this.rerollLabel = rerollLabel;
     this.rerollEnabled = rerollEnabled;
     this.selectedCards = new HashSet<>();
@@ -195,7 +191,7 @@ public class CardRewardDialog {
 
     int result;
     do {
-      optionPane = new FOptionPane(
+      FOptionPane optionPane = new FOptionPane(
           null,
           Localizer.getInstance().getMessage("lblRogueCardRewards"),
           null,
@@ -254,20 +250,21 @@ public class CardRewardDialog {
   }
 
 
-  private void updateInfoLabel() {
-    lblInfo.setText(getInfoText());
-  }
-
   private String getInfoText() {
     return Localizer.getInstance().getMessage("lblRogueCardRewardSelectionCount", maxSelections, selectedCards.size());
   }
 
   private static javax.swing.Icon createCoinIcon() {
-    final javax.swing.Icon raw = FSkin.getImage(FSkinProp.ICO_QUEST_COIN).resize(16, 16).getIcon();
-    return new javax.swing.Icon() {
+    return getCoinIcon();
+  }
+
+  @NonNull
+  static Icon getCoinIcon() {
+    final Icon raw = FSkin.getImage(FSkinProp.ICO_QUEST_COIN).resize(16, 16).getIcon();
+    return new Icon() {
       public int getIconWidth()  { return raw.getIconWidth(); }
       public int getIconHeight() { return raw.getIconHeight(); }
-      public void paintIcon(java.awt.Component c, java.awt.Graphics g, int x, int y) {
+      public void paintIcon(Component c, Graphics g, int x, int y) {
         raw.paintIcon(c, g, x, y - 2);
       }
     };
@@ -278,22 +275,6 @@ public class CardRewardDialog {
     if (currentRun != null && currentRun.getCurrentDeck() != null) {
       FDeckViewer.show(currentRun.getCurrentDeck());
     }
-  }
-
-  private void toggleCardSelection(SelectableCardPanel cardPanel) {
-    PaperCard card = cardPanel.card;
-
-    if (selectedCards.contains(card)) {
-      // Deselect
-      selectedCards.remove(card);
-      cardPanel.setSelected(false);
-    } else if (selectedCards.size() < maxSelections) {
-      // Select (if under limit)
-      selectedCards.add(card);
-      cardPanel.setSelected(true);
-    }
-
-    updateInfoLabel();
   }
 
   private class MainPanel extends SkinnedPanel {
@@ -334,15 +315,10 @@ public class CardRewardDialog {
       int desiredWidth = cardsPerRow * (BASE_CARD_WIDTH + CARD_SPACING) - CARD_SPACING;
       int desiredHeight = numRows * (baseCardHeight + CARD_SPACING) - CARD_SPACING;
 
-      float widthScale =
-          availableWidth > 0 ? Math.min(1.0f, (float) availableWidth / desiredWidth) : 1.0f;
-      float heightScale =
-          availableHeight > 0 ? Math.min(1.0f, (float) availableHeight / desiredHeight) : 1.0f;
-      float scale = Math.min(widthScale, heightScale);
-
-      // Apply scale to card dimensions
-      cardWidth = Math.round(BASE_CARD_WIDTH * scale);
-      cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
+      CardGridSize gridSize = CardUtil.fitCardGrid(BASE_CARD_WIDTH, availableWidth, availableHeight,
+          desiredWidth, desiredHeight);
+      cardWidth = gridSize.cardWidth();
+      cardHeight = gridSize.cardImageHeight();
 
       // Layout card panels (top-aligned after header)
       int cardIndex = 0;
@@ -350,9 +326,8 @@ public class CardRewardDialog {
       for (int row = 0; cardIndex < cardPanels.size() && row < MAX_ROWS; row++) {
         int cardsInThisRow = Math.min(cardsPerRow, cardPanels.size() - cardIndex);
         int rowWidth = cardsInThisRow * cardWidth + (cardsInThisRow - 1) * CARD_SPACING;
-        int startX = (totalWidth - rowWidth) / 2;
 
-        int x = startX;
+        int x = (totalWidth - rowWidth) / 2;
         for (int col = 0; col < cardsInThisRow; col++) {
           SelectableCardPanel cardPanel = cardPanels.get(cardIndex);
           cardPanel.setBounds(x, cardY, cardWidth, cardHeight);
@@ -373,7 +348,15 @@ public class CardRewardDialog {
 
     @Override
     protected void toggleSelection() {
-      toggleCardSelection(this);
+      if (selectedCards.contains(card)) {
+        selectedCards.remove(card);
+        setSelected(false);
+      } else if (selectedCards.size() < maxSelections) {
+        selectedCards.add(card);
+        setSelected(true);
+      }
+
+      lblInfo.setText(getInfoText());
     }
   }
 }

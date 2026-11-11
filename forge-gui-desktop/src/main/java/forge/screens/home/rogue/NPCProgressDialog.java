@@ -16,10 +16,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 
@@ -34,7 +31,6 @@ public class NPCProgressDialog {
 
   private final MainPanel panel;
   private final Map<NPC, FComboBox<LevelOption>> levelInputs = new EnumMap<>(NPC.class);
-  private FOptionPane optionPane;
 
   public NPCProgressDialog(RogueMetaProgress progress) {
     panel = new MainPanel();
@@ -76,7 +72,7 @@ public class NPCProgressDialog {
   }
 
   public Map<NPC, Integer> show() {
-    optionPane = new FOptionPane(
+    FOptionPane optionPane = new FOptionPane(
         null,
         Localizer.getInstance().getMessage("lblRogueDevNpcProgressTitle"),
         null,
@@ -93,12 +89,12 @@ public class NPCProgressDialog {
     optionPane.dispose();
 
     if (result != SAVE_OPTION) {
-      return null;
+      return Map.of();
     }
 
     Map<NPC, Integer> updatedLevels = new EnumMap<>(NPC.class);
     for (Map.Entry<NPC, FComboBox<LevelOption>> entry : levelInputs.entrySet()) {
-      updatedLevels.put(entry.getKey(), entry.getValue().getSelectedItem().level());
+      updatedLevels.put(entry.getKey(), Objects.requireNonNull(entry.getValue().getSelectedItem()).level());
     }
     return updatedLevels;
   }

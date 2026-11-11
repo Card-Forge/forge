@@ -96,7 +96,7 @@ public class RoguePreviewPopup {
             public void mouseEntered(MouseEvent e) {
                 hoveringSource = true;
                 cancelHide();
-                show(component, previewItems, primaryCard);
+                show(component, previewItems);
             }
 
             @Override
@@ -116,7 +116,7 @@ public class RoguePreviewPopup {
         hideNow();
     }
 
-    private void show(JComponent component, List<ResolvedPreviewItem> previewItems, PaperCard primaryCard) {
+    private void show(JComponent component, List<ResolvedPreviewItem> previewItems) {
         cancelHide();
         hideNow();
         ensureZoomUtil(component);
@@ -435,7 +435,7 @@ public class RoguePreviewPopup {
         }
     }
 
-    private class PreviewClusterPanel extends SkinnedPanel {
+    private static class PreviewClusterPanel extends SkinnedPanel {
         private PreviewClusterPanel() {
             super(new FlowLayout(FlowLayout.LEFT, 0, 0));
             setOpaque(false);
@@ -445,8 +445,7 @@ public class RoguePreviewPopup {
 
     private class CardPreviewPanel extends SkinnedPanel {
         private final PaperCard card;
-        private final CardPicturePanel picturePanel = new CardPicturePanel();
-        private boolean hovered;
+      private boolean hovered;
 
         private CardPreviewPanel(PaperCard card) {
             super(new BorderLayout());
@@ -457,7 +456,8 @@ public class RoguePreviewPopup {
             setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setPreferredSize(new Dimension(CARD_PREVIEW_WIDTH, CARD_PREVIEW_HEIGHT));
 
-            picturePanel.setOpaque(false);
+          CardPicturePanel picturePanel = new CardPicturePanel();
+          picturePanel.setOpaque(false);
             picturePanel.setPreferredSize(new Dimension(CARD_PREVIEW_WIDTH, CARD_PREVIEW_HEIGHT));
             picturePanel.setItem(card);
             add(picturePanel, BorderLayout.CENTER);

@@ -40,12 +40,6 @@ class NodeBazaarHelper {
 
     private final CSubmenuRogueMap map;
 
-    private record BazaarDialogResult(Set<BazaarItem> selectedItems, int selectedTabIndex) {
-        private boolean isReroll() {
-            return selectedItems == null;
-        }
-    }
-
     NodeBazaarHelper(CSubmenuRogueMap map) {
         this.map = map;
     }
@@ -83,7 +77,7 @@ class NodeBazaarHelper {
         applyActualItemPrices(bazaarCtx, inventory);
         CodexHelper.recordBazaarInventory(currentRun, inventory);
 
-        BazaarDialogResult dialogResult = showBazaarDialog(inventory, currentRun, bazaarCtx, null, false, 0);
+        BazaarDialog.DialogResult dialogResult = showBazaarDialog(inventory, currentRun, bazaarCtx, null, false, 0);
         return applyBazaarPurchases(currentRun, rogueDeck, bazaarCtx, dialogResult.selectedItems(), true);
     }
 
@@ -97,7 +91,7 @@ class NodeBazaarHelper {
         int freeRerolls = selCtx.freeRerolls;
         int rerollCount = 0;
         int selectedBazaarTab = 0;
-        BazaarDialogResult dialogResult;
+        BazaarDialog.DialogResult dialogResult;
         do {
             List<BazaarItem> inventory = buildOrdinaryBazaarRollInventory(currentRun, rogueDeck, bazaarCtx, selCtx);
             if (inventory.isEmpty()) {
@@ -114,11 +108,11 @@ class NodeBazaarHelper {
             selectedBazaarTab = dialogResult.selectedTabIndex();
             rogueDeck.discardRewardOptions(getRewardPoolCards(inventory));
 
-            if (dialogResult.isReroll()) {
+            if (dialogResult.rerollRequested()) {
                 spendRerollCostIfNeeded(currentRun, freeRerolls, rerollCount);
                 rerollCount++;
             }
-        } while (dialogResult.isReroll());
+        } while (dialogResult.rerollRequested());
 
         List<PaperCard> purchasedDeckCards = applyBazaarPurchases(currentRun, rogueDeck, bazaarCtx,
             dialogResult.selectedItems(), false);
@@ -136,7 +130,7 @@ class NodeBazaarHelper {
         return inventory;
     }
 
-    private BazaarDialogResult showBazaarDialog(List<BazaarItem> inventory, RogueRun currentRun,
+    private BazaarDialog.DialogResult showBazaarDialog(List<BazaarItem> inventory, RogueRun currentRun,
                                                 BazaarContext bazaarCtx, String rerollLabel,
                                                 boolean rerollEnabled, int selectedBazaarTab) {
         BazaarDialog dialog = new BazaarDialog(
@@ -147,8 +141,7 @@ class NodeBazaarHelper {
             rerollLabel,
             selectedBazaarTab);
         dialog.setRerollEnabled(rerollEnabled);
-        Set<BazaarItem> selectedItems = dialog.show();
-        return new BazaarDialogResult(selectedItems, dialog.getSelectedTabIndex());
+        return dialog.show();
     }
 
     private void spendRerollCostIfNeeded(RogueRun currentRun, int freeRerolls, int rerollCount) {
@@ -416,7 +409,7 @@ class NodeBazaarHelper {
                                                  BazaarContext bazaarCtx, Set<BazaarItem> selectedItems,
                                                  boolean customBazaar) {
         bazaarCtx.purchasedItems.clear();
-        if (selectedItems == null || selectedItems.isEmpty()) {
+        if (selectedItems.isEmpty()) {
             return List.of();
         }
 

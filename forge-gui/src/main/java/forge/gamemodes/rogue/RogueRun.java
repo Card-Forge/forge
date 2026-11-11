@@ -12,8 +12,8 @@ import forge.gamemodes.rogue.path.RoguePath;
 import forge.gamemodes.rogue.path.RoguePathNode;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -144,8 +144,7 @@ public class RogueRun {
 
     // Timestamp management
     public void stamp() {
-        final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
-        timestamp = dateFormat.format(new Date());
+        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yy, H:m"));
     }
 
     // Path navigation

@@ -53,14 +53,12 @@ public class RoguePath {
             }
 
             RoguePathNode replacement = replacementFactory.get();
-            if (replacement == null) {
-                continue;
+            if (replacement != null) {
+                replacement.setRowIndex(node.getRowIndex());
+                replacement.setColumnIndex(node.getColumnIndex());
+                replacement.setCompleted(node.isCompleted());
+                nodes.set(i, replacement);
             }
-
-            replacement.setRowIndex(node.getRowIndex());
-            replacement.setColumnIndex(node.getColumnIndex());
-            replacement.setCompleted(node.isCompleted());
-            nodes.set(i, replacement);
         }
     }
 
@@ -95,16 +93,11 @@ public class RoguePath {
         }
 
         List<Integer> targetRows = new ArrayList<>();
-        for (int row = startRowExclusive + 1; row <= getMaxRow(); row++) {
+        for (int row = startRowExclusive + 1; targetRows.size() < planeboundRowCount && row <= getMaxRow(); row++) {
             boolean hasPlanebound = getNodesInRow(row).stream()
                 .anyMatch(NodePlanebound.class::isInstance);
-            if (!hasPlanebound) {
-                continue;
-            }
-
-            targetRows.add(row);
-            if (targetRows.size() >= planeboundRowCount) {
-                break;
+            if (hasPlanebound) {
+                targetRows.add(row);
             }
         }
 
@@ -324,21 +317,18 @@ public class RoguePath {
         List<Integer> frontier = getVisibleNodesInCurrentRow(currentRow, pathCtx);
         int visiblePlaneboundRows = 0;
 
-        for (int row = currentRow + 1; row <= getMaxRow(); row++) {
+        for (int row = currentRow + 1;
+             visiblePlaneboundRows < pathCtx.additionalVisiblePlaneboundRows && row <= getMaxRow();
+             row++) {
             frontier = getReachableNodeIndicesInRow(frontier, row);
             if (frontier.isEmpty()) {
                 break;
             }
 
             List<Integer> visiblePlaneboundsInRow = getPlaneboundIndices(frontier);
-            if (visiblePlaneboundsInRow.isEmpty()) {
-                continue;
-            }
-
-            visibleIndices.addAll(visiblePlaneboundsInRow);
-            visiblePlaneboundRows++;
-            if (visiblePlaneboundRows >= pathCtx.additionalVisiblePlaneboundRows) {
-                break;
+            if (!visiblePlaneboundsInRow.isEmpty()) {
+                visibleIndices.addAll(visiblePlaneboundsInRow);
+                visiblePlaneboundRows++;
             }
         }
 

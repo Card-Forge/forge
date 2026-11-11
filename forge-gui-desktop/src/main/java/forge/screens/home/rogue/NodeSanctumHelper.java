@@ -46,28 +46,11 @@ class NodeSanctumHelper {
         NPCEncounterComposite.INSTANCE.onBeforeSanctum(sanctumCtx, currentRun, progress);
         showNpcDialogs(sanctumCtx.preSanctumDialogs);
 
-        int baseHealAmount = sanctumCtx.restLifeGainDisabled ? 0
-            : sanctumCtx.restFullHeal ? currentRun.getMaxLife() : sanctumNode.getHealAmount();
-        int missingLife = Math.max(0, currentRun.getMaxLife() - currentRun.getCurrentLife());
-        int effectiveHealAmount = Math.min(baseHealAmount, missingLife);
-        boolean hasWounds = !currentRun.getActiveWoundEffects().isEmpty();
-        boolean canPayRestCost = sanctumCtx.restLifeGainDisabled
-            || currentRun.getMaxLife() > sanctumCtx.restMaxLifeCost;
-        boolean restEnabled = canPayRestCost && (effectiveHealAmount > 0 || hasWounds);
-        String restDescription = sanctumCtx.restLifeGainDisabled
-            ? Localizer.getInstance().getMessage("lblRogueCureWounds", "{{Wound}}")
-            : sanctumCtx.restFullHeal
-                ? Localizer.getInstance().getMessage("lblRogueFullRest", sanctumCtx.restMaxLifeCost, "{{Wound}}")
-                : Localizer.getInstance().getMessage("lblRogueGainLifeAndCureWounds", effectiveHealAmount, "{{Wound}}");
-        String restDisabledReason = restEnabled
-            ? null
-            : !canPayRestCost ? Localizer.getInstance().getMessage("lblRogueNotEnoughMaxLife")
-                : sanctumCtx.restLifeGainDisabled
-                ? Localizer.getInstance().getMessage("lblRogueNoWoundsToCure")
-                : Localizer.getInstance().getMessage("lblRogueFullLifeAndNoWounds");
-
-        SanctumDialog dialog = new SanctumDialog(
-            restDescription, restEnabled, restDisabledReason, sanctumCtx);
+        int baseHealAmount = 0;
+        if (!sanctumCtx.restLifeGainDisabled) {
+            baseHealAmount = sanctumCtx.restFullHeal ? currentRun.getMaxLife() : sanctumNode.getHealAmount();
+        }
+        SanctumDialog dialog = createSanctumDialog(sanctumCtx, currentRun, baseHealAmount);
         SanctumDialog.SanctumChoice choice = dialog.show();
 
         switch (choice) {
@@ -114,6 +97,39 @@ class NodeSanctumHelper {
             case SKIP:
                 break;
         }
+    }
+
+    private static SanctumDialog createSanctumDialog(SanctumContext sanctumCtx, RogueRun currentRun,
+                                                       int baseHealAmount) {
+        int missingLife = Math.max(0, currentRun.getMaxLife() - currentRun.getCurrentLife());
+        int effectiveHealAmount = Math.min(baseHealAmount, missingLife);
+        boolean hasWounds = !currentRun.getActiveWoundEffects().isEmpty();
+        boolean canPayRestCost = sanctumCtx.restLifeGainDisabled
+            || currentRun.getMaxLife() > sanctumCtx.restMaxLifeCost;
+        boolean restEnabled = canPayRestCost && (effectiveHealAmount > 0 || hasWounds);
+
+        Localizer localizer = Localizer.getInstance();
+        final String woundMarker = "{{Wound}}";
+        String restDescription;
+        if (sanctumCtx.restLifeGainDisabled) {
+            restDescription = localizer.getMessage("lblRogueCureWounds", woundMarker);
+        } else if (sanctumCtx.restFullHeal) {
+            restDescription = localizer.getMessage("lblRogueFullRest", sanctumCtx.restMaxLifeCost, woundMarker);
+        } else {
+            restDescription = localizer.getMessage("lblRogueGainLifeAndCureWounds", effectiveHealAmount, woundMarker);
+        }
+
+        String restDisabledReason = null;
+        if (!restEnabled) {
+            String reasonKey;
+            if (!canPayRestCost) {
+                reasonKey = "lblRogueNotEnoughMaxLife";
+            } else {
+                reasonKey = sanctumCtx.restLifeGainDisabled ? "lblRogueNoWoundsToCure" : "lblRogueFullLifeAndNoWounds";
+            }
+            restDisabledReason = localizer.getMessage(reasonKey);
+        }
+        return new SanctumDialog(restDescription, restEnabled, restDisabledReason, sanctumCtx);
     }
 
     private void showNpcDialogs(List<NPCContext> contexts) {

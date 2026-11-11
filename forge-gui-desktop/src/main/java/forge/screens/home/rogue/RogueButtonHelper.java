@@ -16,6 +16,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -104,16 +105,14 @@ public final class RogueButtonHelper {
 
     List<String> tokens = new ArrayList<>();
     for (PreviewReference reference : references) {
-      if (reference.type() != type) {
-        continue;
+      if (reference.type() == type) {
+        String token = extractHighlightToken(reference, type);
+        if (!token.isEmpty()
+            && !description.contains(prefix + token + suffix)
+            && !description.contains("**" + token + "**")) {
+          tokens.add(token);
+        }
       }
-      String token = extractHighlightToken(reference, type);
-      if (token.isEmpty()
-          || description.contains(prefix + token + suffix)
-          || description.contains("**" + token + "**")) {
-        continue;
-      }
-      tokens.add(token);
     }
 
     tokens.sort(Comparator.comparingInt(String::length).reversed());
@@ -156,81 +155,6 @@ public final class RogueButtonHelper {
     return matcher.replaceAll(Matcher.quoteReplacement(prefix) + "$1" + Matcher.quoteReplacement(suffix));
   }
 
-  private static List<TextRun> parseDescriptionRuns(String description) {
-    if (description == null || description.isEmpty()) {
-      return List.of();
-    }
-
-    Matcher matcher = HIGHLIGHT_PATTERN.matcher(description);
-    List<TextRun> runs = new ArrayList<>();
-    int lastIndex = 0;
-
-    while (matcher.find()) {
-      addRun(runs, description.substring(lastIndex, matcher.start()), HighlightStyle.NORMAL);
-      if (matcher.group(1) != null) {
-        addRun(runs, matcher.group(1), HighlightStyle.EMPHASIS);
-      } else {
-        addRun(runs, matcher.group(2), HighlightStyle.KEYWORD);
-      }
-      lastIndex = matcher.end();
-    }
-    addRun(runs, description.substring(lastIndex), HighlightStyle.NORMAL);
-    return runs;
-  }
-
-  private static void addRun(List<TextRun> runs, String text, HighlightStyle style) {
-    if (text.isEmpty()) {
-      return;
-    }
-    runs.add(new TextRun(text, style));
-  }
-
-  private static List<LayoutToken> tokenizeRuns(List<TextRun> runs) {
-    List<LayoutToken> tokens = new ArrayList<>();
-    for (TextRun run : runs) {
-      int index = 0;
-      while (index < run.text().length()) {
-        char c = run.text().charAt(index);
-        if (c == '\r' || c == '\n') {
-          if (c == '\r' && index + 1 < run.text().length() && run.text().charAt(index + 1) == '\n') {
-            index++;
-          }
-          tokens.add(new LayoutToken("", HighlightStyle.NORMAL, false, true));
-          index++;
-          continue;
-        }
-
-        int start = index;
-        if (Character.isWhitespace(c)) {
-          while (index < run.text().length()) {
-            char current = run.text().charAt(index);
-            if (current == '\r' || current == '\n' || !Character.isWhitespace(current)) {
-              break;
-            }
-            index++;
-          }
-          tokens.add(new LayoutToken(normalizeWhitespace(run.text().substring(start, index)),
-              run.style(), true, false));
-          continue;
-        }
-
-        while (index < run.text().length()) {
-          char current = run.text().charAt(index);
-          if (current == '\r' || current == '\n' || Character.isWhitespace(current)) {
-            break;
-          }
-          index++;
-        }
-        tokens.add(new LayoutToken(run.text().substring(start, index), run.style(), false, false));
-      }
-    }
-    return tokens;
-  }
-
-  private static String normalizeWhitespace(String text) {
-    return text.replace('\t', ' ');
-  }
-
   private static String extractHighlightToken(PreviewReference reference, PreviewReferenceType type) {
     if (type == PreviewReferenceType.CARD) {
       return TextHelper.extractCardNameFromReference(reference.token());
@@ -244,7 +168,7 @@ public final class RogueButtonHelper {
     KEYWORD
   }
 
-  private record TextRun(String text, HighlightStyle style) {}
+  private record TextRun(String text, HighlightStyle style) implements Serializable {}
 
   private record LayoutToken(String text, HighlightStyle style, boolean whitespace, boolean newline) {}
 
@@ -259,6 +183,35 @@ public final class RogueButtonHelper {
       super("");
       choiceLabel = label == null ? "" : label;
       descriptionRuns = parseDescriptionRuns(description);
+    }
+
+    private static List<TextRun> parseDescriptionRuns(String description) {
+      if (description == null || description.isEmpty()) {
+        return List.of();
+      }
+
+      Matcher matcher = HIGHLIGHT_PATTERN.matcher(description);
+      List<TextRun> runs = new ArrayList<>();
+      int lastIndex = 0;
+
+      while (matcher.find()) {
+        addRun(runs, description.substring(lastIndex, matcher.start()), HighlightStyle.NORMAL);
+        if (matcher.group(1) != null) {
+          addRun(runs, matcher.group(1), HighlightStyle.EMPHASIS);
+        } else {
+          addRun(runs, matcher.group(2), HighlightStyle.KEYWORD);
+        }
+        lastIndex = matcher.end();
+      }
+      addRun(runs, description.substring(lastIndex), HighlightStyle.NORMAL);
+      return runs;
+    }
+
+    private static void addRun(List<TextRun> runs, String text, HighlightStyle style) {
+      if (text.isEmpty()) {
+        return;
+      }
+      runs.add(new TextRun(text, style));
     }
 
     private void setPreferredButtonWidth(int buttonWidth) {
@@ -357,33 +310,62 @@ public final class RogueButtonHelper {
       List<TextRun> currentLine = new ArrayList<>();
       int currentWidth = 0;
 
-      for (LayoutToken token : tokenizeRuns(descriptionRuns)) {
+      for (LayoutToken token : tokenizeRuns()) {
         if (token.newline()) {
           currentWidth = commitLine(lines, currentLine, currentWidth);
-          continue;
-        }
-
-        TextRun textRun = new TextRun(token.text(), token.style());
-        if (token.whitespace()) {
-          if (currentLine.isEmpty()) {
-            continue;
+        } else if (!token.whitespace() || !currentLine.isEmpty()) {
+          int tokenWidth = metrics.stringWidth(token.text());
+          if (!token.whitespace() && !currentLine.isEmpty() && currentWidth + tokenWidth > maxWidth) {
+            currentWidth = commitLine(lines, currentLine, currentWidth);
           }
-          currentLine.add(textRun);
-          currentWidth += metrics.stringWidth(token.text());
-          continue;
+          currentLine.add(new TextRun(token.text(), token.style()));
+          currentWidth += tokenWidth;
         }
-
-        int tokenWidth = metrics.stringWidth(token.text());
-        if (!currentLine.isEmpty() && currentWidth + tokenWidth > maxWidth) {
-          currentWidth = commitLine(lines, currentLine, currentWidth);
-        }
-
-        currentLine.add(textRun);
-        currentWidth += tokenWidth;
       }
 
       commitLine(lines, currentLine, currentWidth);
       return lines;
+    }
+
+    private List<LayoutToken> tokenizeRuns() {
+      List<LayoutToken> tokens = new ArrayList<>();
+      for (TextRun run : descriptionRuns) {
+        tokenizeRun(run, tokens);
+      }
+      return tokens;
+    }
+
+    private static void tokenizeRun(TextRun run, List<LayoutToken> tokens) {
+      String text = run.text();
+      int index = 0;
+      while (index < text.length()) {
+        int start = index;
+        char c = text.charAt(index);
+        index++;
+        if (isLineBreak(c)) {
+          if (c == '\r' && index < text.length() && text.charAt(index) == '\n') {
+            index++;
+          }
+          tokens.add(new LayoutToken("", HighlightStyle.NORMAL, false, true));
+          continue;
+        }
+
+        boolean whitespace = Character.isWhitespace(c);
+        while (index < text.length() && continuesToken(text.charAt(index), whitespace)) {
+          index++;
+        }
+        String tokenText = text.substring(start, index);
+        tokens.add(new LayoutToken(whitespace ? tokenText.replace('\t', ' ') : tokenText,
+            run.style(), whitespace, false));
+      }
+    }
+
+    private static boolean continuesToken(char c, boolean whitespace) {
+      return !isLineBreak(c) && Character.isWhitespace(c) == whitespace;
+    }
+
+    private static boolean isLineBreak(char c) {
+      return c == '\r' || c == '\n';
     }
 
     private int commitLine(List<LayoutLine> lines, List<TextRun> currentLine, int currentWidth) {

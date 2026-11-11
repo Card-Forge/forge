@@ -22,6 +22,7 @@ import forge.model.FModel;
 import forge.util.IgnoringXStream;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
@@ -30,11 +31,16 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 /**
  * Handles saving and loading of Rogue Commander run data using XStream serialization.
  */
 public class RogueIO {
+    private RogueIO() {
+        /* This utility class should not be instantiated */
+    }
+
 
     /** Suffix for all rogue run data files */
     public static final String SUFFIX_DATA = ".dat";
@@ -187,40 +193,31 @@ public class RogueIO {
             final String filename = xmlSaveFile.getName();
             data.setName(filename.substring(0, filename.length() - SUFFIX_DATA.length()));
         } catch (final IOException e) {
-            e.printStackTrace();
+            Logger.error(e, "Error reading Rogue run save: {}", xmlSaveFile);
             return null;
         } catch (final ConversionException e) {
             BugReporter.reportException(e);
             return null;
         } catch (final Exception e) { // If there's a non-IO exception, delete the corrupt file
-            e.printStackTrace();
-            try {
-                xmlSaveFile.delete();
-            } catch (final Exception deleteError) {
-                System.out.println("Error deleting corrupt rogue run file: " + deleteError);
-            }
+            Logger.error(e, "Error loading Rogue run save: {}", xmlSaveFile);
+            deleteRunFile(xmlSaveFile);
             return null;
         }
 
         if (data.getSaveVersion() > RogueSaveMigration.currentVersion()) {
-            System.err.println("Rogue run save is from a newer version: " + xmlSaveFile);
+            Logger.warn("Rogue run save is from a newer version: {}", xmlSaveFile);
             return null;
         }
         if (data.getSaveVersion() < RogueSaveMigration.currentVersion()) {
             try {
                 RogueSaveMigration.applyToRun(data);
-                saveMigratedRun(data, xmlSaveFile);
+                saveMigrated(xmlSaveFile, file -> savePacked(getSerializer(false), data, file));
             } catch (Exception e) {
-                System.err.println("Error migrating rogue run save: " + xmlSaveFile);
-                e.printStackTrace();
+                Logger.error(e, "Error migrating Rogue run save: {}", xmlSaveFile);
                 return null;
             }
         }
         return data;
-    }
-
-    public static RogueRun loadRun(final String filename) {
-        return loadRun(getRogueFile(filename));
     }
 
     public static void saveRun(final RogueRun rd) {
@@ -233,7 +230,12 @@ public class RogueIO {
         }
     }
 
-    private static void saveMigratedRun(final RogueRun run, final File file) throws IOException {
+    @FunctionalInterface
+    interface SaveWriter {
+        void write(File file) throws IOException;
+    }
+
+    static void saveMigrated(final File file, final SaveWriter writer) throws IOException {
         Path original = file.toPath();
         Path backup = original.resolveSibling(file.getName() + ".pre-v" + RogueSaveMigration.currentVersion() + ".bak");
         if (!Files.exists(backup)) {
@@ -241,7 +243,7 @@ public class RogueIO {
         }
         Path temporary = Files.createTempFile(original.getParent(), file.getName(), ".tmp");
         try {
-            savePacked(getSerializer(false), run, temporary.toFile());
+            writer.write(temporary.toFile());
             Files.move(temporary, original, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
         } finally {
             Files.deleteIfExists(temporary);
@@ -258,14 +260,19 @@ public class RogueIO {
     }
 
     public static void deleteRun(final String name) {
-        File file = getRogueFile(name);
-        if (file.exists()) {
-            file.delete();
-        }
+        deleteRunFile(getRogueFile(name));
     }
 
     public static void deleteRun(final RogueRun rd) {
         deleteRun(rd.getName());
+    }
+
+    private static void deleteRunFile(final File file) {
+        try {
+            Files.deleteIfExists(file.toPath());
+        } catch (IOException | InvalidPathException | SecurityException e) {
+            Logger.error(e, "Error deleting Rogue run save: {}", file);
+        }
     }
 
     // Converter for CardPool serialization (same as Gauntlet)
@@ -332,7 +339,7 @@ public class RogueIO {
                 // Get replacement card from any edition if it exists
                 card = FModel.getMagicDb().getCommonCards().getCard(name);
                 if (card == null) {
-                    System.err.println("Warning: Unsupported card found in rogue save: " + name + " from edition " + set + ". It will be removed from the save.");
+                    Logger.warn("Skipping unsupported card {} from edition {} in Rogue run save", name, set);
                 }
             }
             return card;

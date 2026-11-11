@@ -92,11 +92,7 @@ public abstract class NodePanel extends SkinnedPanel {
     paintNodeBorder(g);
   }
 
-  /**
-   * Paint the border and status indicators for this node. Subclasses can override to customize
-   * border appearance.
-   */
-  protected void paintNodeBorder(Graphics g) {
+  private void paintNodeBorder(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -124,9 +120,15 @@ public abstract class NodePanel extends SkinnedPanel {
 
     g2d.setColor(borderColor);
     g2d.setStroke(new BasicStroke(borderWidth));
-    g2d.drawRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 10, 10);
+    drawNodeBorder(g2d);
+    paintCompletionCheckmark(g2d);
+  }
 
-    // Draw checkmark for completed nodes
+  protected void drawNodeBorder(Graphics2D g2d) {
+    g2d.drawRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 10, 10);
+  }
+
+  private void paintCompletionCheckmark(Graphics2D g2d) {
     if (isCompleted) {
       g2d.setColor(new Color(0, 200, 0, 230));
       g2d.fillOval(getWidth() - 35, 10, 25, 25);

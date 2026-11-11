@@ -10,8 +10,6 @@ import java.awt.*;
  */
 public class NodeChestPanel extends NodeCircularPanel {
 
-  private final NodeChest chestNode;
-
   /**
    * Create a panel for displaying a chest node.
    *
@@ -19,7 +17,6 @@ public class NodeChestPanel extends NodeCircularPanel {
    */
   public NodeChestPanel(NodeChest node) {
     super(node);
-    this.chestNode = node;
     setToolTipText(Localizer.getInstance().getMessage("lblRogueChestTooltip"));
   }
 
@@ -43,11 +40,10 @@ public class NodeChestPanel extends NodeCircularPanel {
   /**
    * Draw a treasure chest icon centered at the given position.
    */
-  private void drawChest(Graphics2D g2d, int centerX, int centerY, int size) {
+  private void drawChest(Graphics2D g2d, int centerX, int centerY, int bodyWidth) {
     // Chest body (brown rectangle)
     g2d.setColor(new Color(139, 90, 43));
-    int bodyWidth = size;
-    int bodyHeight = (int) (size * 0.7);
+    int bodyHeight = (int) (bodyWidth * 0.7);
     g2d.fillRoundRect(centerX - bodyWidth / 2, centerY - bodyHeight / 2, bodyWidth, bodyHeight, 8,
         8);
 
