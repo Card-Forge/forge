@@ -359,8 +359,7 @@ public class TokenAi extends SpellAbilityAi {
         result.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
         // Apply static abilities
-        final Game game = ai.getGame();
-        ComputerUtilCard.applyStaticContPT(game, result, null);
+        ComputerUtilCard.applyStaticContPT(ai.getGame(), result, null);
         return result;
     }
 

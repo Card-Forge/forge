@@ -1,0 +1,7 @@
+Name:Command Subadjunct
+ManaCost:W
+Types:Artifact Creature Borg
+PT:2/1
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Vigilance | Description$ Artifact creatures you control have vigilance.
+SVar:PlayMain1:TRUE
+Oracle:Artifact creatures you control have vigilance.

@@ -1,0 +1,18 @@
+Name:Zombie Cheese Magician
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Zombie
+SVar:STK2:Kind$ Name | Word$ Cheese
+SVar:STK3:Kind$ Name | Word$ Magician
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ First strike | Keywords$ First Strike
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever this creature deals combat damage to a player, draw that many cards. | Triggers$ STK8Damage
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 6 | Toughness$ 2
+SVar:STK8Damage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ STK8Draw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw that many cards.
+SVar:STK8Draw:DB$ Draw | Defined$ You | NumCards$ STK8X
+SVar:STK8X:TriggerCount$DamageAmount
+Oracle:{TK}{TK} — First strike\n{TK}{TK}{TK}{TK} — Whenever this creature deals combat damage to a player, draw that many cards.\n{TK}{TK} — 3/3\n{TK}{TK}{TK} — 6/2

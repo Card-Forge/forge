@@ -1,0 +1,17 @@
+Name:Goblin Coward Parade
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Goblin
+SVar:STK2:Kind$ Name | Word$ Coward
+SVar:STK3:Kind$ Name | Word$ Parade
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.) | Keywords$ Mentor
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ When this permanent leaves the battlefield, you may destroy target creature with power 4 or greater. | Triggers$ STK8Leaves
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 2 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 8 | Toughness$ 4
+SVar:STK8Leaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ STK8Destroy | TriggerDescription$ When this permanent leaves the battlefield, you may destroy target creature with power 4 or greater.
+SVar:STK8Destroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater
+Oracle:{TK}{TK} — Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\n{TK}{TK}{TK} — When this permanent leaves the battlefield, you may destroy target creature with power 4 or greater.\n{TK}{TK} — 2/3\n{TK}{TK}{TK}{TK} — 8/4

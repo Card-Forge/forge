@@ -17,6 +17,7 @@ public class Classic {
         if (screen == null) // shouldn't be null
             return;
         try {
+            Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
             Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
             screen.screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
             if (screen.getRotate180()) {
@@ -41,7 +42,7 @@ public class Classic {
             }
             //update here
             if (Forge.needsUpdate) {
-                if (Forge.getAssets().manager().update())
+                if (Forge.getAssets().manager().update(16))
                     Forge.needsUpdate = false;
             }
             //sample batch

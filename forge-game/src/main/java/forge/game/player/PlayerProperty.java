@@ -59,15 +59,6 @@ public class PlayerProperty {
             if (!game.getPhaseHandler().isPlayerTurn(player)) {
                 return false;
             }
-        } else if (property.equals("NonActive")) {
-            if (game.getPhaseHandler().isPlayerTurn(player)) {
-                return false;
-            }
-        } else if (property.equals("OpponentToActive")) {
-            final Player active = game.getPhaseHandler().getPlayerTurn();
-            if (player.equals(active) || !player.isOpponentOf(active)) {
-                return false;
-            }
         } else if (property.equals("Other")) {
             if (player.equals(sourceController)) {
                 return false;
@@ -160,7 +151,9 @@ public class PlayerProperty {
                 }
             }
             int result;
-            if (property.contains("BySource")) {
+            if (property.contains("LastTurn")) {
+                result = player.getAssignedDamage(combat, null, true);
+            } else if (property.contains("BySource")) {
                 result = source.getDamageHistory().getDamageDoneThisTurn(combat, false, property.contains("SourceTimes"), null, "You", source, player, spellAbility);
             } else {
                 result = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
@@ -316,7 +309,7 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
-            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final Player controller = comparedPlayer(property.split("sThan")[1], sourceController, source, spellAbility);
             final CardCollectionView oppList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), cardType);
             final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), cardType);
             if (oppList.size() <= yourList.size()) {
@@ -325,14 +318,14 @@ public class PlayerProperty {
         } else if (property.startsWith("withAtLeast")) {
             final String cardType = property.split("More")[1].split("sThan")[0];
             final int amount = Integer.parseInt(property.substring(11, 12));
-            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final Player controller = comparedPlayer(property.split("sThan")[1], sourceController, source, spellAbility);
             final CardCollectionView oppList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), cardType);
             final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), cardType);
             if (oppList.size() < yourList.size() + amount) {
                 return false;
             }
         } else if (property.startsWith("hasMore")) {
-            final Player controller = property.contains("Than") && "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final Player controller = property.contains("Than") ? comparedPlayer(property.split("Than")[1], sourceController, source, spellAbility) : sourceController;
             if (property.substring(7).startsWith("Life") && player.getLife() <= controller.getLife()) {
                 return false;
             } else if (property.substring(7).startsWith("CardsInHand")
@@ -341,7 +334,7 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("hasFewer")) {
             final String cardType = property.split("sIn")[0].substring(8);
-            final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final Player controller = comparedPlayer(property.split("Than")[1], sourceController, source, spellAbility);
             final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
             final CardCollectionView oppList = CardLists.getType(player.getCardsIn(zt), cardType);
             final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(zt), cardType);
@@ -512,6 +505,14 @@ public class PlayerProperty {
             return false;
         }
         return true;
+    }
+
+    /** The player a "...Than" comparison measures against: You, or a defined player such as TriggeredPlayer. */
+    private static Player comparedPlayer(final String than, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+        if ("You".equals(than)) {
+            return sourceController;
+        }
+        return Iterables.getFirst(AbilityUtils.getDefinedPlayers(source, than, spellAbility), sourceController);
     }
 
 }

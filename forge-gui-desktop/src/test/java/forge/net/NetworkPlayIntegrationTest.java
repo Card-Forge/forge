@@ -4,10 +4,10 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.server.HostingServer;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.server.DeltaSyncManager;
-import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
@@ -84,14 +84,14 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
     public void testServerStartAndStop() {
         netLog.info("Testing server start/stop...");
         var server = forge.gamemodes.net.server.FServerManager.getInstance();
-        int port = 55556;
+        int port = PortAllocator.allocatePort();
 
         try {
             server.startServer(port);
-            Assert.assertTrue(server.isHosting(), "Server should be hosting after start");
+            Assert.assertTrue(HostingServer.isHosting(), "Server should be hosting after start");
             netLog.info("Server started on port {}", port);
         } finally {
-            if (server.isHosting()) {
+            if (HostingServer.isHosting()) {
                 server.stopServer();
                 netLog.info("Server stopped");
             }
@@ -132,8 +132,8 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         // Protocol lifecycle
         Assert.assertTrue(result.clientOpenViewCalled,
                 "Client should have received openView over the wire");
-        Assert.assertTrue(result.clientSetGameViewCount > 0,
-                "Client should have received setGameView updates (count: " + result.clientSetGameViewCount + ")");
+        Assert.assertEquals(result.clientSetGameViewCount, 1,
+                "Client should receive one full setGameView per game (count: " + result.clientSetGameViewCount + ")");
 
         // Client GameView state
         GameView clientGameView = result.clientGameView;
@@ -385,7 +385,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
         // Threshold is CHECKSUM_INTERVAL * 5/4 to give headroom for the adaptive
         // interval and game-end boundary effects while still catching checksum failures
-        if (RemoteClientGuiGame.useDeltaSync && totalDeltas >= DeltaSyncManager.CHECKSUM_INTERVAL) {
+        if (totalDeltas >= DeltaSyncManager.CHECKSUM_INTERVAL) {
             Assert.assertTrue(totalChecksums >= expectedMinChecksums,
                     String.format("Checksums should fire ~every %d deltas, expected >= %d but got %d (from %d deltas)",
                             DeltaSyncManager.CHECKSUM_INTERVAL, expectedMinChecksums, totalChecksums, totalDeltas));

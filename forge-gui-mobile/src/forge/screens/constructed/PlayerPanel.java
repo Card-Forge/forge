@@ -22,12 +22,16 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardSleeveImage;
+import forge.deck.CommanderOptions;
+import forge.deck.CommanderPicks;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.deck.FVanguardChooser;
 import forge.game.GameType;
+import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -50,6 +54,7 @@ import forge.toolbox.GuiChoose;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.SleeveArt;
+import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -86,6 +91,14 @@ public class PlayerPanel extends FContainer {
     private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblBrawlDeckRandomGenerated")).build();
     private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblPlanarDeckRandomGenerated")).build();
     private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblVanguardAvatarRandom")).build();
+    private final FLabel btnCommanderPick   = new FLabel.ButtonBuilder().text("").build();
+
+    // Commander variant: the chosen commander deck, who may lead it, and the commander(s) picked
+    // instead of its default (null = the default). The pick applies to the next match only.
+    private Deck commanderBase;
+    private List<CommanderOptions.Option> commanderOptions = Collections.emptyList();
+    private boolean hasCommanderChoices;
+    private List<PaperCard> commanderPick;
 
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
@@ -131,6 +144,8 @@ public class PlayerPanel extends FContainer {
         lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                final DeckProxy selected = ((DeckManager) e.getSource()).getSelectedItem();
+                refreshCommanderOptions(selected == null ? null : selected.getDeck());
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnCommanderDeck.setText(Forge.getLocalizer().getMessage("lblCommanderDeck")
                             + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
@@ -254,6 +269,8 @@ public class PlayerPanel extends FContainer {
             lstCommanderDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectCommanderDeckFor").replace("%s", txtPlayerName.getText()));
             Forge.openScreen(lstCommanderDecks);
         });
+        add(btnCommanderPick);
+        btnCommanderPick.setCommand(e -> chooseCommander());
         add(btnOathbreakDeck);
         btnOathbreakDeck.setCommand(e -> {
             lstOathbreakerDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectOathbreakerDeckFor").replace("%s", txtPlayerName.getText()));
@@ -296,26 +313,26 @@ public class PlayerPanel extends FContainer {
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
         //order by last variant..
-        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
-        if (gameTypes.contains(GameType.Commander)) {
+        final GameLobby lobby = screen.getLobby();
+        if (lobby.hasVariant(GameType.Commander)) {
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.Oathbreaker)) {
+        } else if (lobby.hasVariant(GameType.Oathbreaker)) {
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.TinyLeaders)) {
+        } else if (lobby.hasVariant(GameType.TinyLeaders)) {
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.Brawl)) {
+        } else if (lobby.hasVariant(GameType.Brawl)) {
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
@@ -381,7 +398,6 @@ public class PlayerPanel extends FContainer {
             humanAiSwitch.setPosition(x, y);
         }
 
-
         if (devModeSwitch.isVisible()) {
             if(Forge.isLandscapeMode())
                 y += dy;
@@ -407,6 +423,10 @@ public class PlayerPanel extends FContainer {
         if (btnCommanderDeck.isVisible()) {
             btnCommanderDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
+            if (btnCommanderPick.isVisible()) {
+                btnCommanderPick.setBounds(x, y, w, fieldHeight);
+                y += dy;
+            }
         }
         else if (btnOathbreakDeck.isVisible()) {
             btnOathbreakDeck.setBounds(x, y, w, fieldHeight);
@@ -446,6 +466,9 @@ public class PlayerPanel extends FContainer {
         if (btnCommanderDeck.isVisible() || btnOathbreakDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
             if(Forge.isLandscapeMode())
                 rows++;
+        }
+        if (btnCommanderPick.isVisible()) {
+            rows++;
         }
         if (btnSchemeDeck.isVisible()) {
             rows++;
@@ -809,7 +832,7 @@ public class PlayerPanel extends FContainer {
             }
             if (!isArchenemyApplied) {
                 cbTeam.setVisible(true);
-                cbTeam.setEnabled(mayEdit);
+                cbTeam.setEnabled(mayEdit && !screen.hasVariant(GameType.TwoHeadedGiant));
                 cbArchenemyTeam.setVisible(false);
             } else {
                 cbTeam.setVisible(false);
@@ -843,6 +866,104 @@ public class PlayerPanel extends FContainer {
             btnPlanarDeck.setVisible(isPlanechaseApplied && mayEdit);
             btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
         }
+
+        // The commander can be picked for local humans and AI players alike
+        btnCommanderPick.setVisible(isCommanderApplied && mayEdit && hasCommanderChoices
+                && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI));
+    }
+
+    /** Works out who may lead a newly chosen commander deck; an earlier pick is kept only for the same deck. */
+    private void refreshCommanderOptions(final Deck deck) {
+        final boolean sameDeck = deck != null && commanderBase != null && deck.getName().equals(commanderBase.getName());
+        commanderBase = deck;
+        commanderOptions = deck == null ? Collections.emptyList() : CommanderOptions.getOptions(deck, DeckFormat.Commander);
+        hasCommanderChoices = deck != null && !commanderOptions.isEmpty()
+                && CommanderPicks.hasChoices(deck, commanderOptions, DeckFormat.Commander);
+        if (commanderPick != null && !(sameDeck && CommanderPicks.isValidPick(deck, commanderPick, DeckFormat.Commander))) {
+            commanderPick = null;
+        }
+        updateCommanderPickButton();
+    }
+
+    private void updateCommanderPickButton() {
+        btnCommanderPick.setText(commanderBase == null ? "" : Forge.getLocalizer().getMessage("lblCommanderPick")
+                + ":" + (Forge.isLandscapeMode() ? " " : "\n") + CommanderPicks.describeCurrent(commanderBase, commanderPick));
+        final boolean wasVisible = btnCommanderPick.isVisible();
+        updateVariantControlsVisibility();
+        if (wasVisible != btnCommanderPick.isVisible() && getHeight() > 0) {
+            screen.getPlayersScroll().revalidate();
+        }
+    }
+
+    private void chooseCommander() {
+        final Deck base = commanderBase;
+        if (base == null || commanderOptions.isEmpty()) {
+            return;
+        }
+        final List<PaperCard> current = commanderPick != null ? commanderPick : base.getCommanders();
+        final List<CommanderChoice<CommanderOptions.Option>> items = new ArrayList<>();
+        for (final CommanderOptions.Option option : commanderOptions) {
+            items.add(new CommanderChoice<>(option, CommanderPicks.describe(option), option.getCommanders().get(0)));
+        }
+        final CommanderChoice<CommanderOptions.Option> selected = items.get(CommanderPicks.indexOfCurrent(commanderOptions, current));
+        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseCommanderFor", getPlayerName()), 0, 1,
+                items, Collections.singletonList(selected), null, result -> {
+            if (result.isEmpty()) {
+                return;
+            }
+            final CommanderOptions.Option option = result.get(0).getValue();
+            if (option.getCommanders().size() == 1) {
+                final PaperCard commander = option.getCommanders().get(0);
+                final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
+                if (!partners.isEmpty()) {
+                    choosePartner(base, option, commander, partners, current);
+                    return;
+                }
+            }
+            applyCommanderPick(base, option.getCommanders());
+        });
+    }
+
+    private void choosePartner(final Deck base, final CommanderOptions.Option option, final PaperCard commander,
+            final List<PaperCard> partners, final List<PaperCard> current) {
+        // A null value stands for "No partner", left out when the commander needs a partner to cover the deck's colors
+        final List<CommanderChoice<PaperCard>> items = new ArrayList<>();
+        if (CommanderPicks.allowsNoPartner(base, option, DeckFormat.Commander)) {
+            items.add(new CommanderChoice<>(null, Forge.getLocalizer().getMessage("lblNoPartner"), null));
+        }
+        final int offset = items.size();
+        for (final PaperCard partner : partners) {
+            items.add(new CommanderChoice<>(partner, CardTranslation.getTranslatedName(partner.getName()), partner));
+        }
+        final int currentPartner = CommanderPicks.indexOfCurrentPartner(partners, commander, current);
+        final CommanderChoice<PaperCard> selected = items.get(currentPartner < 0 ? 0 : offset + currentPartner);
+        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChoosePartnerFor", CardTranslation.getTranslatedName(commander.getName())),
+                0, 1, items, Collections.singletonList(selected), null, result -> {
+            if (result.isEmpty()) {
+                return;
+            }
+            final PaperCard partner = result.get(0).getValue();
+            applyCommanderPick(base, partner == null ? Collections.singletonList(commander) : Arrays.asList(commander, partner));
+        });
+    }
+
+    private void applyCommanderPick(final Deck base, final List<PaperCard> picked) {
+        if (base != commanderBase) {
+            return; // another deck was chosen while the picker was open
+        }
+        commanderPick = CommanderPicks.isSame(picked, base.getCommanders()) ? null : picked;
+        updateCommanderPickButton();
+        if (allowNetworking && humanAiSwitch.isToggled()) {
+            screen.updateMyDeck(index);
+        }
+    }
+
+    /** The commander(s) picked for this deck, or null to use the deck's own. */
+    public List<PaperCard> getCommanderPick(final Deck deck) {
+        if (commanderPick == null || deck == null || commanderBase == null || !deck.getName().equals(commanderBase.getName())) {
+            return null;
+        }
+        return deck == commanderBase || CommanderPicks.isValidPick(deck, commanderPick, DeckFormat.Commander) ? commanderPick : null;
     }
 
     public boolean isNetworkHost() {

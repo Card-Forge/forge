@@ -36,7 +36,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
-    private boolean copyingProps;
 
     protected TrackableObject(final int id0, final Tracker tracker) {
         id = id0;
@@ -68,9 +67,8 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return o.hashCode() == hashCode() && o.getClass().equals(getClass());
     }
 
-    // don't know if this is really needed, but don't know a better way
-    public <T> T getProps() {
-        return (T)props;
+    public Map<TrackableProperty, Object> getProps() {
+        return props;
     }
 
     @SuppressWarnings("unchecked")
@@ -88,7 +86,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
                 respectsFreeze = true;
             } else if (key.getFreezeMode() == TrackableProperty.FreezeMode.IgnoresFreezeIfUnset) {
-                respectsFreeze = (props.get(key) != null);
+                respectsFreeze = props.get(key) != null;
             }
             if (respectsFreeze) {
                 tracker.addDelayedPropChange(this, key, value);
@@ -127,24 +125,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         for (final Entry<TrackableProperty, Object> prop : props.entrySet()) {
             prop.getKey().updateObjLookup(tracker, prop.getValue());
         }
-    }
-
-    /**
-     * Copy all properties of another TrackableObject to this object.
-     * Used in network full-state scenarios where all properties should be synced.
-     */
-    public final void copyChangedProps(final TrackableObject from) {
-        if (copyingProps) { return; } //prevent infinite loop from circular reference
-        copyingProps = true;
-        for (final TrackableProperty prop : from.props.keySet()) {
-            prop.getType().copyChangedProps(from, this, prop);
-        }
-        // Remove properties that reverted to default on the source.
-        // set() removes props that equal their default value, so they won't
-        // appear in from.props — but they may still be in our props with a
-        // stale non-default value.
-        props.keySet().retainAll(from.props.keySet());
-        copyingProps = false;
     }
 
     // use when updating collection type properties without using set (or assigning the same object)

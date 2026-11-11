@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Marco_Rossi_-_Mono_Green_Landfall_(Standard,_#889564).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Sazh's Chocobo
+3 Esper Origins
+1 Surrak, Elusive Hunter
+4 Icetill Explorer
+4 Mightform Harmonizer
+3 Glimpse the Core
+1 Lumbering Worldwagon
+1 Meltstrider's Resolve
+4 Earthbender Ascension
+4 Sapling Nursery
+3 Ba Sing Se
+1 Demolition Field
+2 Elven Passage
+2 Escape Tunnel
+4 Fabled Passage
+14 Forest
+1 Promising Vein
+[Sideboard]
+1 Surrak, Elusive Hunter
+3 Meltstrider's Resolve
+1 Keen-Eyed Curator
+2 Torpor Orb
+2 Warg Tactics
+4 Mossborn Hydra
+1 Leatherhead, Swamp Stalker
+1 Gigantic Big Bear

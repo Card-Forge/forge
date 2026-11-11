@@ -40,6 +40,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class GameState {
@@ -60,7 +62,6 @@ public class GameState {
         private String manaPool = "";
         private String persistentMana = "";
         private int landsPlayed = 0;
-        private int landsPlayedLastTurn = 0;
         private int numRingTemptedYou = 0;
         private int speed = 0;
         private String precast = null;
@@ -135,7 +136,6 @@ public class GameState {
             String prefix = "p" + playerIndex++;
             sb.append(TextUtil.concatNoSpace(prefix + "life=", String.valueOf(p.life), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayed=", String.valueOf(p.landsPlayed), "\n"));
-            sb.append(TextUtil.concatNoSpace(prefix + "landsplayedlastturn=", String.valueOf(p.landsPlayedLastTurn), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "numringtemptedyou=", String.valueOf(p.numRingTemptedYou), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "speed=", String.valueOf(p.speed), "\n"));
             if (!p.counters.isEmpty()) {
@@ -164,7 +164,6 @@ public class GameState {
             PlayerState p = new PlayerState();
             p.life = player.getLife();
             p.landsPlayed = player.getLandsPlayedThisTurn();
-            p.landsPlayedLastTurn = player.getLandsPlayedLastTurn();
             p.counters = countersToString(player.getCounters());
             p.manaPool = processManaPool(player.getManaPool());
             p.numRingTemptedYou = player.getNumRingTemptedYou();
@@ -249,13 +248,40 @@ public class GameState {
         }
     }
 
+    private static final String TOKEN_PIPE = "%7C";
+    // States written before the escaping existed contain a raw key, e.g. Image:w_1_1_soldier|ONC|7|1 (name|SET|collector[|art]).
+    // The collector part must contain a digit so modifiers such as |Tapped or |Id:5 can never be mistaken for it.
+    private static final Pattern LEGACY_TOKEN_IMAGE = Pattern.compile(
+            "(Image:[^|;,]*)\\|([A-Za-z0-9]{2,5})\\|((?=[A-Za-z0-9]*\\d)[A-Za-z0-9]{1,6})(?:\\|(\\d+))?(?=[|,]|$)");
+
+    // escapes the pipes of a legacy token image key so the '|' split of the element doesn't cut the key apart
+    private static String protectTokenImageKey(String element) {
+        if (!element.startsWith("t:")) {
+            return element;
+        }
+        Matcher m = LEGACY_TOKEN_IMAGE.matcher(element);
+        if (!m.find()) {
+            return element;
+        }
+        StringBuilder sb = new StringBuilder(element.length() + 8);
+        sb.append(element, 0, m.start());
+        sb.append(m.group(1)).append(TOKEN_PIPE).append(m.group(2)).append(TOKEN_PIPE).append(m.group(3));
+        if (m.group(4) != null) {
+            sb.append(TOKEN_PIPE).append(m.group(4));
+        }
+        sb.append(element, m.end(), element.length());
+        return sb.toString();
+    }
+
     private void addCard(ZoneType zoneType, Map<ZoneType, String> cardTexts, Card c) {
         StringBuilder newText = new StringBuilder(cardTexts.get(zoneType));
         if (newText.length() > 0) {
             newText.append(";");
         }
         if (c.isToken()) {
-            newText.append("t:").append(new TokenInfo(c));
+            // the token's image key is name|SET|collector|art, and '|' also separates a card's modifiers in a state file,
+            // so escape it here (restored in processCardsForZone) instead of letting the loader cut the key apart
+            newText.append("t:").append(new TokenInfo(c).toString().replace("|", TOKEN_PIPE));
         } else {
             if (c.getPaperCard() == null) {
                 return;
@@ -544,8 +570,6 @@ public class GameState {
             getPlayerState(categoryName).counters = categoryValue;
         } else if (categoryName.endsWith("landsplayed")) {
             getPlayerState(categoryName).landsPlayed = Integer.parseInt(categoryValue);
-        } else if (categoryName.endsWith("landsplayedlastturn")) {
-            getPlayerState(categoryName).landsPlayedLastTurn = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("numringtemptedyou")) {
             getPlayerState(categoryName).numRingTemptedYou = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("speed")) {
@@ -933,13 +957,19 @@ public class GameState {
     }
 
     private void handleAddSAsToStack(final Game game) {
+        Player lastActivator = null;
         for (int i = 0; i < playerStates.size(); i++) {
             if (playerStates.get(i).putOnStack != null) {
                 String[] spellList = TextUtil.split(playerStates.get(i).putOnStack, ';');
                 for (String spell : spellList) {
                     precastSpellFromCard(spell, game.getPlayers().get(i), game, true);
+                    lastActivator = game.getPlayers().get(i);
                 }
             }
+        }
+        // the player who put the last spell on the stack starts with priority, as if they had just cast it (CR 117.3c)
+        if (lastActivator != null) {
+            game.getPhaseHandler().setPriority(lastActivator);
         }
     }
 
@@ -1153,7 +1183,6 @@ public class GameState {
 
         if (state.life >= 0) p.setLife(state.life, null);
         p.setLandsPlayedThisTurn(state.landsPlayed);
-        p.setLandsPlayedLastTurn(state.landsPlayedLastTurn);
         p.setNumRingTemptedYou(state.numRingTemptedYou);
         p.setSpeed(state.speed);
 
@@ -1207,9 +1236,12 @@ public class GameState {
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
 
-        if (!state.counters.isEmpty()) {
+        if (state.counters.isEmpty()) {
+            p.clearCounters();
+        } else {
             applyCountersToGameEntity(p, state.counters);
         }
+
         if (state.numRingTemptedYou > 0) {
             //setup all levels
             for (int i = 1; i <= state.numRingTemptedYou; i++) {
@@ -1235,7 +1267,7 @@ public class GameState {
     private CardCollectionView processCardsForZone(final String[] data, final Player player) {
         final CardCollection cl = new CardCollection();
         for (final String element : data) {
-            final String[] cardinfo = element.trim().split("\\|");
+            final String[] cardinfo = protectTokenImageKey(element.trim()).split("\\|");
 
             String setCode = null;
             for (final String info : cardinfo) {
@@ -1260,8 +1292,8 @@ public class GameState {
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
-                // TODO Make sure Game State conversion works with new tokens
-                String tokenStr = cardinfo[0].substring(2);
+                // TOKEN_PIPE is used for fixing the imagekey of tokens, restore the format for TokenInfo parser
+                String tokenStr = cardinfo[0].substring(2).replace(TOKEN_PIPE, "|");
                 c = new TokenInfo(tokenStr).makeOneToken(player);
             } else if (cardinfo[0].startsWith("T:")) {
                 String tokenStr = cardinfo[0].substring(2);
@@ -1288,7 +1320,7 @@ public class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap(false, null, null);
+                    c.tap(null, null);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Solved")) {

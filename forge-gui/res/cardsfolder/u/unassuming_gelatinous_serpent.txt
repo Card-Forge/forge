@@ -1,0 +1,20 @@
+Name:Unassuming Gelatinous Serpent
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Unassuming
+SVar:STK2:Kind$ Name | Word$ Gelatinous
+SVar:STK3:Kind$ Name | Word$ Serpent
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ When this permanent dies, return target noncreature, nonland card from your graveyard to your hand. | Triggers$ STK7Dies
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever this creature deals combat damage to a player, that player mills twice that many cards. | Triggers$ STK8Damage
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 2 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 7 | Toughness$ 2
+SVar:STK7Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ STK7Return | TriggerDescription$ When this permanent dies, return target noncreature, nonland card from your graveyard to your hand.
+SVar:STK7Return:DB$ ChangeZone | Mandatory$ True | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.nonCreature+nonLand+YouOwn | TgtPrompt$ Select target noncreature, nonland card in your graveyard
+SVar:STK8Damage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ STK8Mill | TriggerDescription$ Whenever this creature deals combat damage to a player, that player mills twice that many cards.
+SVar:STK8Mill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ STK8X
+SVar:STK8X:TriggerCount$DamageAmount/Twice
+Oracle:{TK}{TK} — When this permanent dies, return target noncreature, nonland card from your graveyard to your hand.\n{TK}{TK}{TK}{TK} — Whenever this creature deals combat damage to a player, that player mills twice that many cards.\n{TK}{TK} — 2/3\n{TK}{TK}{TK} — 7/2

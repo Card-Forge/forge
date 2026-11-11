@@ -45,7 +45,6 @@ public enum TrackableProperty {
     SplitCard(TrackableTypes.BooleanType),
     MergedCards(TrackableTypes.StringType),
     MergedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
-    RevealedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     PaperCardBackup(TrackableTypes.IPaperCardType),
 
     Attacking(TrackableTypes.BooleanType),
@@ -94,10 +93,7 @@ public enum TrackableProperty {
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
     PreparedSpell(TrackableTypes.CardViewType),
-    WasDestroyed(TrackableTypes.BooleanType),
-    NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+
     MarkedColors(TrackableTypes.ColorSetType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
@@ -117,26 +113,26 @@ public enum TrackableProperty {
 
     //Card State
     Name(TrackableTypes.StringType),
+    OracleName(TrackableTypes.StringType),
+    ImageKey(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     OriginalColors(TrackableTypes.ColorSetType),
-    ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
     OriginalManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
-    FunctionalVariant(TrackableTypes.StringType),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
-    OracleName(TrackableTypes.StringType),
+    HasPrintedPT(TrackableTypes.BooleanType),
     Power(TrackableTypes.IntegerType),
     Toughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.StringType),
     Defense(TrackableTypes.StringType),
+    FunctionalVariant(TrackableTypes.StringType),
     AttractionLights(TrackableTypes.IntegerSetType),
     ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
-    HasPrintedPT(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
     //check produce mana for BG
@@ -165,13 +161,13 @@ public enum TrackableProperty {
     SleeveArtKey(TrackableTypes.StringType),
     SleeveArtOffset(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
+    SharedTeam(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     MaxLandPlay(TrackableTypes.IntegerType),
     HasUnlimitedLandPlay(TrackableTypes.BooleanType),
     NumLandThisTurn(TrackableTypes.IntegerType),
-    NumManaShards(TrackableTypes.IntegerType),
     DraftNotes(TrackableTypes.StringMapType),
     NumDrawnThisTurn(TrackableTypes.IntegerType),
     AdditionalVote(TrackableTypes.IntegerType),
@@ -197,15 +193,18 @@ public enum TrackableProperty {
     AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    StickerSheets(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Stickers(TrackableTypes.StringType),
 
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
 
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
     HasAvailableActions(TrackableTypes.BooleanType),
+
+    NumManaShards(TrackableTypes.IntegerType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -214,9 +213,6 @@ public enum TrackableProperty {
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
     SA_IsSpell(TrackableTypes.BooleanType),
 
-    //HasBackSide
-    HasBackSide(TrackableTypes.BooleanType),
-
     //StackItem
     Key(TrackableTypes.StringType),
     SourceTrigger(TrackableTypes.IntegerType),
@@ -224,37 +220,38 @@ public enum TrackableProperty {
     ActivatingPlayer(TrackableTypes.PlayerViewType),
     TargetCards(TrackableTypes.CardViewCollectionType),
     TargetPlayers(TrackableTypes.PlayerViewCollectionType),
+    TargetStackItems(TrackableTypes.StackItemViewListType),
     SubInstance(TrackableTypes.StackItemViewType),
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),
     OptionalCosts(TrackableTypes.StringType),
 
     //Combat
+    CombatView(TrackableTypes.CombatViewType, FreezeMode.IgnoresFreeze),
     AttackersWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     AttackersWithBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     BandsWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     BandsWithBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
-    AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     BandsWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
-    CombatView(TrackableTypes.CombatViewType, FreezeMode.IgnoresFreeze),
 
     //Game
     Players(TrackableTypes.PlayerViewCollectionType),
     GameType(TrackableTypes.EnumType(GameType.class)),
     Title(TrackableTypes.StringType),
     Turn(TrackableTypes.IntegerType),
+    PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
     WinningPlayerName(TrackableTypes.StringType),
     WinningTeam(TrackableTypes.IntegerType),
-    MatchOver(TrackableTypes.BooleanType),
     Mulligan(TrackableTypes.BooleanType),
+    GameOver(TrackableTypes.BooleanType),
+    MatchOver(TrackableTypes.BooleanType),
     NumGamesInMatch(TrackableTypes.IntegerType),
     NumPlayedGamesInMatch(TrackableTypes.IntegerType),
     Stack(TrackableTypes.StackItemViewListType),
     StormCount(TrackableTypes.IntegerType),
-    GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
-    PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
-    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
     Object(TrackableTypes.ObjectType, FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
 

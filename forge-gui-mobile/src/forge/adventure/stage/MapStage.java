@@ -26,6 +26,7 @@ import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -49,6 +50,7 @@ import java.util.Queue;
  * Stage to handle tiled maps for points of interests
  */
 public class MapStage extends GameStage {
+
     public static MapStage instance;
     final Array<MapActor> actors = new Array<>();
     public com.badlogic.gdx.physics.box2d.World gdxWorld;
@@ -68,6 +70,8 @@ public class MapStage extends GameStage {
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private String battleBackground;       //Optional battle background folder for this map or floor.
+    private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
 
     public InputEvent eventTouchDown, eventTouchUp;
@@ -103,6 +107,8 @@ public class MapStage extends GameStage {
     public void clearIsInMap() {
         isInMap = false;
         effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        battleBackground = null;
+        currentMap = null;
         preventEscape = false;
         GameHUD.getInstance().showHideMap(true);
     }
@@ -174,7 +180,6 @@ public class MapStage extends GameStage {
 
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
-
     }
 
     Group collisionGroup;
@@ -223,6 +228,7 @@ public class MapStage extends GameStage {
         createNewWorld();
         isLoadingMatch = false;
         isInMap = true;
+        currentMap = targetMap;
         GameHUD.getInstance().showHideMap(false);
         this.tiledMap = map;
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
@@ -251,6 +257,7 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
+        battleBackground = MP.get("battleBackground", String.class);
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
         } else {
@@ -520,6 +527,10 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.nameOverride = dialogObject.toString();
                             }
+                            dialogObject = prop.get("battleBackground"); //Check for battle background override.
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.battleBackground = dialogObject.toString();
+                            }
                             dialogObject = prop.get("effect"); //Check for special effects.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, dialogObject.toString(), "");
@@ -703,7 +714,6 @@ public class MapStage extends GameStage {
                                 restockPrice = 0; //Tied to restock button
                             }
                             shopList = shopList.replaceAll("\\s", "");
-
                         }
 
                         if (prop.containsKey("noRestock") && (boolean) prop.get("noRestock")) {
@@ -737,12 +747,10 @@ public class MapStage extends GameStage {
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         shopsAlreadyPresent.add(data.name);
-                        Array<Reward> ret = new Array<>();
-                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
-                        }
-                        ShopActor actor = new ShopActor(this, id, ret, data);
+                        //Make sure the seed exists now (it is created from the world random the first time), but don't
+                        //generate the shop's cards until the player actually opens it. See ShopActor.getRewardData.
+                        changes.getShopSeed(id);
+                        ShopActor actor = new ShopActor(this, id, data, changes);
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
@@ -780,8 +788,8 @@ public class MapStage extends GameStage {
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         if (mustClearOnExit) {
             mustClearOnExit = false;
-
-            this.resetMapRecursive(AdventureQuestController.instance().mostRecentPOI.getData().map, new HashSet<>());
+            PointOfInterest poi = AdventureQuestController.instance().mostRecentPOI;
+            PointOfInterestChanges.resetDeletedObjectsRecursive(poi.getID(), poi.getData().map);
         }
 
         AdventureQuestController.instance().updateQuestsLeave();
@@ -797,48 +805,6 @@ public class MapStage extends GameStage {
         isPlayerLeavingDungeon = false;
         dialogOnlyInput = false;
         return true;
-    }
-
-    /**
-     * Recursively clears map objects for the current map and all connected maps to reset the state of the dungeon when exiting from it.
-     * @param currentMap The filename of the map to clear and check for connected maps from.
-     * @param clearedMaps A set of maps that have already been cleared to avoid infinite recursion from circular connections between maps.
-     */
-    private void resetMapRecursive(String currentMap, HashSet<String> clearedMaps) {
-        if (clearedMaps.contains(currentMap)) {
-            return;
-        }
-
-        clearedMaps.add(currentMap);
-
-        // Clear the current map's deleted objects.
-        TileMapScene.instance().getPointOfInterestChanges(currentMap).clearDeletedObjects();
-        
-        TiledMap currentTiledMap = loadMapFile(currentMap);
-        
-        for (MapLayer layer : currentTiledMap.getLayers()) {
-            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
-                continue;
-            }
-            
-            // Attemps to find connected maps through "entry" type MapObjects and recursively clear them as well.
-            for (MapObject obj : layer.getObjects()) {
-                MapProperties prop = obj.getProperties();
-                String type = prop.get("type", String.class);
-                
-                if (type != null && type.equals("entry")) {
-                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
-                    
-                    if (targetMap != null && !targetMap.isEmpty()) {
-                        resetMapRecursive(targetMap, clearedMaps);
-                    }
-                }
-            }
-        }
-    }
-
-    private TiledMap loadMapFile(String mapName) {
-        return new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(mapName));
     }
 
     @Override
@@ -966,7 +932,6 @@ public class MapStage extends GameStage {
     }
 
     public boolean lookForID(int id) { //Search actor by ID.
-
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)
                 return true;
@@ -977,7 +942,7 @@ public class MapStage extends GameStage {
     public EnemySprite getEnemyByID(int id) { //Search actor by ID, enemies only.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A instanceof EnemySprite && A.getId() == id)
-                return ((EnemySprite) A);
+                return (EnemySprite) A;
         }
         return null;
     }
@@ -1029,7 +994,6 @@ public class MapStage extends GameStage {
 
     private final ArrayList<NavigationVertex> navVerticesList = new ArrayList<>(256);
     private final ProgressableGraphPath<NavigationVertex> emptyFallbackNavPath = new ProgressableGraphPath<>(0);
-    private static final HashMap<String, String> rewardLabelsMap = new HashMap<>(32);
 
     @Override
     protected void onActing(float delta) {
@@ -1051,13 +1015,10 @@ public class MapStage extends GameStage {
         // cache the current player coordinates registry once
         playerPosReg.set(player.pos());
 
-        // for ambiguous collision with com.badlogic.gdx.utils.Collections
-        java.util.Collections.sort(navVerticesList, distanceComparator);
+        navVerticesList.sort(distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
-            int enemyCount = enemies.size();
-
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = enemies.size() - 1; i >= 0; i--) {
                 EnemySprite mob = enemies.get(i);
                 if (mob == null || mob.inactive) {
                     continue;
@@ -1128,9 +1089,7 @@ public class MapStage extends GameStage {
         if (positions.size() > 4)
             positions.remove();
 
-        int actorCount = actors.size;
-
-        for (int i = 0; i < actorCount; i++) {
+        for (int i = actors.size - 1; i >= 0; i--) {
             MapActor actor = actors.get(i);
             if (actor == null) continue;
 
@@ -1159,13 +1118,7 @@ public class MapStage extends GameStage {
                             case Life:
                             case Shards:
                             case Gold:
-                                String labelKey = rewardLabelsMap.get(rewardTypeName);
-                                if (labelKey == null) {
-                                    labelKey = "lbl" + rewardTypeName;
-                                    rewardLabelsMap.put(rewardTypeName, labelKey);
-                                }
-
-                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                                String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
                                 break;
@@ -1238,6 +1191,14 @@ public class MapStage extends GameStage {
         return isInMap;
     }
 
+    public String getBattleBackground() {
+        return battleBackground;
+    }
+
+    public String getCurrentMap() {
+        return currentMap;
+    }
+
     public void onBeginLeavingDungeon() {
         isPlayerLeavingDungeon = true;
     }
@@ -1261,8 +1222,6 @@ public class MapStage extends GameStage {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
         }
     }
-
-
 
     public void resetPosition() {
         if (positions.peek() != null){

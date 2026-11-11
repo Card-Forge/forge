@@ -6,3 +6,34 @@ Type=Online
 ScryfallCode=YFRA
 
 [cards]
+1 M Oko, Lord of the Fae @Billy Christian
+2 U Prophet of the Planeswalker @Julia Metzger
+3 R Valgavoth, the Lifeline @Lie Setiawan
+4 U Asymmetry Sage @Slawomir Maniak
+5 U Crux of the Theory @Jorge Jacinto
+6 R Echogoyfs @Andrew Mar
+7 R Jace's Saga @Matt Stewart
+8 R Paradox Kraken @Tiffany Turrill
+9 M Remnants of Beleren @Volkan Baǵa
+10 R Avoided Stairwurm @Pascal Quidault
+11 U Bend Mortal Limits @Xavier Ribeiro
+12 R Boisterous Clique @Michele Giorgi
+13 R Searing Soloist @Pascal Quidault
+14 U Sparks Ablaze @Fajareka Setiawan
+15 R Etali, Primal Garden @Loïc Canavaggia
+16 R Nylea's Oracle @Xavier Ribeiro
+17 U Selfless Germinator @Taras Susak
+18 R Banescale Serpent @Dmitry Burmak
+19 R The Bloodbile Swarm @Simon Dominic
+20 R Change the Narrative @Anastasia Ovchinnikova
+21 R Diabolic Formula @Igor Grechanyi
+22 U Dina, Flesh Sower @Aurore Folny
+23 M Enter the Eternities @Julie Dillon
+24 R Flourishing Forces @Elizabeth Peiró
+25 U Killian, Spotlight Chaser @Fajareka Setiawan
+26 M Quintorius, Fate Splitter @Lie Setiawan
+27 U Rootha, Ardent Artisan @Dmitry Burmak
+28 R Salvaged Imitations @Michele Giorgi
+29 U Zimone the Calculating @Jodie Muir
+30 M Willbound Quill @Leonardo Santanna
+31 R Potential Horizon @Jorge Jacinto

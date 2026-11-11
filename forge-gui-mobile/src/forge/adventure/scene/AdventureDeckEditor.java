@@ -111,6 +111,10 @@ public class AdventureDeckEditor extends FDeckEditor {
                 editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
                 editionsByName.put(e.getName().replace("'", "").toLowerCase(), e);
             }
+            // Older names of renamed items, still present in saved games
+            editionsByName.put("thrones of eldraine", FModel.getMagicDb().getEditions().get("ELD"));
+            editionsByName.put("magic 2021", FModel.getMagicDb().getEditions().get("M21"));
+            editionsByName.put("sixth edition", FModel.getMagicDb().getEditions().get("6ED"));
 
             String sketchbookPrefix = "landscape sketchbook - ";
             for (ItemData itemData : AdventurePlayer.current().getItems()) {

@@ -19,10 +19,12 @@ Town:Towns
 Urza's
 [CreatureTypes]
 Advisor:Advisors
+Aenar:Aenars
 Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
 Andorian:Andorians
+Android:Androids
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
@@ -39,6 +41,7 @@ Aurochs:Aurochs
 Avatar:Avatars
 Azra:Azra
 Badger:Badgers
+Bajoran:Bajorans
 Balloon:Balloons
 Barbarian:Barbarians
 Bard:Bards
@@ -50,11 +53,14 @@ Beaver:Beavers
 Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
+Betazoid:Betazoids
 Bird:Birds
 Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
+Bolian:Bolians
 Borg:Borg
+Brikar:Brikars
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
@@ -62,6 +68,7 @@ C'tan:C'tan
 Caitian:Caitians
 Camel:Camels
 Capybara:Capybaras
+Cardassian:Cardassians
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
@@ -76,6 +83,7 @@ Coward:Cowards
 Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
+Custodes:Custodes
 Cyberman:Cybermen
 Cyclops:Cyclopes
 Dalek:Daleks
@@ -83,6 +91,7 @@ Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
+Denobulan:Denobulans
 Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
@@ -98,8 +107,10 @@ Druid:Druids
 Dryad:Dryads
 Dwarf:Dwarves
 Echidna:Echidnas
+Edosian:Edosians
 Efreet:Efreets
 Egg:Eggs
+El-Aurian:El-Aurians
 Elder:Elders
 Eldrazi:Eldrazi
 Elemental:Elementals
@@ -108,8 +119,10 @@ Elf:Elves
 Elk:Elks
 Employee:Employees
 Eternal:Eternals
+Excalbian:Excalbians
 Eye:Eyes
 Faerie:Faeries
+Ferengi:Ferengi
 Ferret:Ferrets
 Fish:Fish
 Flagbearer:Flagbearers
@@ -146,6 +159,7 @@ Hellion:Hellions
 Hero:Heroes
 Hippo:Hippos
 Hippogriff:Hippogriffs
+Hirogen:Hirogens
 Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
@@ -154,6 +168,7 @@ Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
 Illusion:Illusions
+Illyrian:Illyrians
 Imp:Imps
 Incarnation:Incarnations
 Inhuman:Inhumans
@@ -162,6 +177,7 @@ Inquisitor:Inquisitors
 Insect:Insects
 Jackal:Jackals
 Jellyfish:Jellyfishes
+Jem'Hadar:Jem'Hadar
 Juggernaut:Juggernauts
 Kangaroo:Kangaroos
 Kavu:Kavu
@@ -174,6 +190,7 @@ Kobold:Kobolds
 Kor:Kors
 Kraken:Krakens
 Kree:Kree
+Kwejian:Kwejians
 Lamia:Lamias
 Lammasu:Lammasus
 Lanthanite:Lanthanites
@@ -187,9 +204,12 @@ Llama:Llamas
 Lobster:Lobsters
 Manticore:Manticores
 Masticore:Masticores
+Medusan:Medusans
+Melkotian:Melkotians
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
+Mindless-One:Mindless-Ones
 Minion:Minions
 Minotaur:Minotaurs
 Mite:Mites
@@ -205,6 +225,7 @@ Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
+Na'kuhl:Na'kuhl
 Nautilus:Nautili
 Necron:Necrons
 Nephilim:Nephilims
@@ -215,6 +236,7 @@ Noble:Nobles
 Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
+Ocampa:Ocampa
 Octopus:Octopi
 Officer:Officers
 Ogre:Ogres
@@ -312,7 +334,9 @@ Surrakar:Surrakars
 Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
+Talaxian:Talaxians
 Talosian:Talosians
+Tamarian:Tamarians
 Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
@@ -325,6 +349,8 @@ Time Lord:Time Lords
 Tosk:Tosks
 Toy:Toys
 Treefolk:Treefolk
+Tribble:Tribbles
+Trill:Trills
 Trilobite:Trilobites
 Triskelavite:Triskelavites
 Troll:Trolls
@@ -334,12 +360,14 @@ Unicorn:Unicorns
 Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
+Vau-N'Akat:Vau-N'Akat
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
 Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
+Walrus:Walruses
 Warlock:Warlocks
 Warrior:Warriors
 Weasel:Weasels
@@ -364,6 +392,7 @@ Chorus
 Lesson
 Omen
 Trap
+Vengeance
 [EnchantmentTypes]
 Aura:Auras
 Background
@@ -384,6 +413,7 @@ Blood
 Bobblehead:Bobbleheads
 Book:Books
 Clue:Clues
+Communicator:Communicators
 Equipment
 Food:Foods
 Fortification
@@ -464,6 +494,7 @@ Samut
 Sarkhan
 Serra
 Sifa
+Sivitri
 Sorin
 Szat
 Tamiyo
@@ -568,6 +599,7 @@ Theros
 Time
 Trenzalore
 Ulgrotha
+Unknown Planet
 Valla
 Vryn
 Wildfire

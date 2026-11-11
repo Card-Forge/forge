@@ -1,0 +1,22 @@
+[metadata]
+Name=Orcish Spy
+[Main]
+14 Mountain|3ED
+3 Dwarven Ruins|FEM
+4 Forgotten Cave|ONS
+2 Dormant Volcano|VIS
+3 Orcish Spy|FEM|[61a]
+3 Orcish Spy|FEM|[61b]
+3 Orcish Spy|FEM|[61c]
+4 Goblin Spy|INV
+4 Goblin Ringleader|APC
+4 Skirk Drill Sergeant|LGN
+4 Erratic Explosion|ONS
+1 Elkin Bottle|ICE
+2 False Orders|2ED
+2 Kaboom!|ONS
+1 Whirling Catapult|ALL
+6 Booby Trap|TMP
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Orcish Spy|FEM

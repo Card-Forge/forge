@@ -3,8 +3,8 @@ Code=YMKM
 Date=2024-03-05
 Name=Alchemy: Murders at Karlov Manor
 Type=Online
-Booster=1 UncommonRareMythic,8 Common:fromsheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 UncommonRareMythic:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand:fromSheet("MKM cards")
 ScryfallCode=YMKM
+Booster=1 UncommonRareMythic:fromsheet("YMKM cards"), 8 Common:fromsheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 UncommonRareMythic:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand:fromSheet("MKM cards")
 
 [cards]
 1 U Scrutiny of the Guildpact @Camille Alquier

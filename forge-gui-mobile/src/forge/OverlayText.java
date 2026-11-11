@@ -37,6 +37,7 @@ public class OverlayText {
             return;
         // render only on GameScenes
         if (Forge.currentScene instanceof GameScene) {
+            Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
             alpha = Math.min(alpha + delta * 0.75f, 1f);
             float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
             Forge.getGraphics().setAlphaComposite(alpha);

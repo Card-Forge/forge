@@ -75,10 +75,19 @@ def download_bulk_data():
     print("\nDone.")
 
 
+FIX_FUSED_SYMBOLS_RE = re.compile(r'\{([0-9]+)([A-Z]+)\}')
+
+
+def fix_fused_mana_symbols(value):
+    return FIX_FUSED_SYMBOLS_RE.sub(
+        lambda m: '{' + m.group(1) + '}' + ''.join('{' + c + '}' for c in m.group(2)),
+        value)
+
+
 def clean_text(value):
     if not value:
         return ""
-    return value.replace("\n", "\\n").replace("|", "VERT")
+    return fix_fused_mana_symbols(value.replace("\n", "\\n").replace("|", "VERT"))
 
 
 def build_scryfall_translation_index(target_langs):

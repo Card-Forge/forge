@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Dellarena_Marco_-_UR_Aggro_(Standard,_#891706).dck
+Deck Type=constructed
+
+[Main]
+1 Shore Up
+3 Full Bore
+4 Ancestral Anger
+4 Opt
+4 Secret Identity
+4 Sleight of Hand
+4 Wild Ride
+4 Callous Sell-Sword
+4 Elusive Otter
+4 Slickshot Show-Off
+4 Gandalf, Goblins' Bane
+1 Island
+3 Multiversal Passage
+4 Great Hall of the Biblioplex
+4 Spirebluff Canal
+4 Riverpyre Verge
+4 Steam Vents
+[Sideboard]
+4 Spell Pierce
+1 Soul-Guide Lantern
+4 Into the Flood Maw
+1 Ghost Vacuum
+4 Burst Lightning
+1 Shore Up

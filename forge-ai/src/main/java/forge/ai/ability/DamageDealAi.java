@@ -40,6 +40,7 @@ import java.util.Map;
 import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final SpellAbility root = sa.getRootAbility();
@@ -199,7 +200,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                        if (ai.getGame().getPhaseHandler().isPlayerTurn(tgt.getController())) {
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
@@ -682,7 +683,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
                         freePing = true;
                     }
                     if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
@@ -694,7 +695,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if ((freePing && !avoidTargetP(ai, sa))
-                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
                         && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
@@ -911,10 +912,12 @@ public class DamageDealAi extends DamageAiBase {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+        int dmg;
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && sa.getPayCosts().hasXInAnyCostPart()) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
+        } else {
+            dmg = calculateDamageAmount(sa, source, damage);
         }
 
         if (!sa.usesTargeting()) {
@@ -927,29 +930,29 @@ public class DamageDealAi extends DamageAiBase {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
+            // If I can kill my target by paying less mana, do it
+            int actualPay = 0;
+            final boolean noPrevention = sa.hasParam("NoPrevention");
+
+            //target is a player
+            if (!sa.getTargets().isTargetingAnyCard()) {
+                actualPay = dmg;
+            }
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                if (adjDamage > actualPay) {
+                    actualPay = adjDamage;
+                }
             }
 
-            if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
-                // If I can kill my target by paying less mana, do it
-                int actualPay = 0;
-                final boolean noPrevention = sa.hasParam("NoPrevention");
-
-                //target is a player
-                if (!sa.getTargets().isTargetingAnyCard()) {
-                    actualPay = dmg;
-                }
-                for (final Card c : sa.getTargets().getTargetCards()) {
-                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if (adjDamage > actualPay) {
-                        actualPay = adjDamage;
-                    }
-                }
-
-                sa.setXManaCostPaid(actualPay);
-            }
+            sa.setXManaCostPaid(actualPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1066,6 +1069,9 @@ public class DamageDealAi extends DamageAiBase {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
+                    }
+                    if (ab.getActivatingPlayer() == null) {
+                        ab.setActivatingPlayer(ai); // a spell still in hand has none, and canPlay() checks need one
                     }
                     if (!ab.canPlay()) {
                         continue;

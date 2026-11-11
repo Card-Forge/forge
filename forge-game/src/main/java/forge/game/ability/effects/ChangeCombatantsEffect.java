@@ -36,7 +36,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
         for (final Card c : getTargetCards(sa)) {
             String cardString = c.getTranslatedName() + " (" + c.getId() + ")";
             if (isOptional && !activator.getController().confirmAction(sa, null,
-                    Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), null)) {
+                    Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), c, null)) {
                 continue;
             }
 

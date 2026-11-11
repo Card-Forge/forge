@@ -1,0 +1,65 @@
+[metadata]
+Name=Skeleton Ship
+[Commander]
+1 Skeleton Ship|ice
+[Main]
+40 Island|jmp|[52]
+1 Armored Galleon|PO2
+1 Dandân|ARN
+1 Deep-Sea Serpent|POR
+1 Dreamwinder|ODY
+1 Ethereal Whiskergill|LRW
+1 Floodchaser|MOR
+1 Giant Shark|DRK
+1 Hammerhead Shark|STH
+1 Island Fish Jasconius|ARN
+1 Kukemssa Serpent|MIR
+1 Manta Ray|WTH
+1 Marjhan|HML
+1 Merchant Ship|ARN
+1 Pirate Ship|LEB
+1 Sealock Monster|THS
+1 Sea Monster|TMP
+1 Sea Serpent|LEB
+1 Serpent of the Endless Sea|M10
+1 Slipstream Eel|ONS
+1 Slipstream Serpent|TSP
+1 Steam Frigate|PO2
+1 Veiled Serpent|USG
+1 Vodalian Knights|FEM
+1 Vodalian Serpent|INV
+1 Seasinger|FEM
+1 Tidewalker|PLC
+1 Benthic Behemoth|TMP
+1 Chasm Skulker|M15
+1 Colossal Whale|M14
+1 Coral Barrier|M15
+1 Devouring Deep|LEG
+1 Fishliver Oil|ARN
+1 Harbor Serpent|M13
+1 Inkwell Leviathan|EMA
+1 Merfolk Assassin|DRK
+1 Merfolk Raiders|MIR
+1 Merfolk Seastalkers|ZEN
+1 Enclave Elite|WWK
+1 Inkfathom Divers|LRW
+1 Part Water|LEG
+1 Piracy Charm|PLC
+1 Rishadan Dockhand|MH2
+1 Rootwater Commando|NEM
+1 Sand Squid|MMQ
+1 Segovian Leviathan|LEG
+1 Stormtide Leviathan|M11
+1 Thada Adel, Acquisitor|WWK
+1 Stonybrook Banneret|MOR
+1 Grayscaled Gharial|RAV
+1 Charix, the Raging Isle|ZNR|[386]
+1 High Tide|DMR
+1 Whelming Wave|BNG
+1 Thing from the Deep|POR
+1 Denizen of the Deep|PO2
+1 Tireless Angler|YMID
+1 Skeleton Crew|LCC
+1 Ribskiff|ONE
+1 Tidal Wave|MIR
+1 Time Bomb|ICE
