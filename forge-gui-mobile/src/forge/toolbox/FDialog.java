@@ -55,6 +55,11 @@ public abstract class FDialog extends FOverlay {
     private float revealPercent = 0;
     private float lastDy = 0;
     private boolean finishedFirstReveal;
+    // the Arena look on a desktop's match screen: a card centred over the board, its heading on top, no keyboard margin
+    private boolean arenaCard;
+    private float cardX, cardW, headH;
+    /** The Arena card's width (a share of the window's) and its heading's height (in message heights). */
+    private static final float ARENA_CARD_W = 0.56f, ARENA_HEADING = 1.6f;
 
     protected FDialog(String title0, int buttonCount0) {
         buttonCount = buttonCount0;
@@ -83,20 +88,40 @@ public abstract class FDialog extends FOverlay {
         return 0;
     }
 
+    /** Below the dialog: the subclass's margin (room for a keyboard), or in the Arena card half the room left. */
+    private float margin() {
+        return arenaCard ? Math.max(0f, (getHeight() - totalHeight) / 2f) : getBottomMargin();
+    }
+
     @Override
     protected final void doLayout(float width, float height) {
         boolean firstReveal = (totalHeight == 0);
-        float contentHeight = layoutAndGetHeight(width, height - VPrompt.HEIGHT - 2 * MSG_HEIGHT);
-        totalHeight = contentHeight + VPrompt.HEIGHT;
+        arenaCard = forge.screens.match.arena.ArenaTheme.isMatchBoard() && forge.screens.match.arena.ArenaMatchLayout.desktop();
+        cardW = arenaCard ? Math.min(width, Math.round(width * ARENA_CARD_W)) : width;
+        cardX = (width - cardW) / 2f;
+        headH = arenaCard && !title.isEmpty() ? Math.round(MSG_HEIGHT * ARENA_HEADING) : 0;
+        if (btnMiddle == null) { //the Arena card says the title in its heading, not between the buttons
+            prompt.setMessage(arenaCard ? "" : title);
+        }
+        float contentHeight = layoutAndGetHeight(cardW, height - VPrompt.HEIGHT - 2 * MSG_HEIGHT - headH);
+        totalHeight = contentHeight + VPrompt.HEIGHT + headH;
         lastDy = 0; //reset whenever main layout occurs
 
         if (btnMiddle != null) {
-            btnMiddle.setLeft((width - btnMiddle.getWidth()) / 2);
-            if (!title.isEmpty()) {
+            btnMiddle.setLeft((cardW - btnMiddle.getWidth()) / 2);
+            if (!title.isEmpty() && !arenaCard) {
                 totalHeight += MSG_HEIGHT; //leave room for title above middle button
             }
         }
-        prompt.setBounds(0, totalHeight - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        prompt.setBounds(0, totalHeight - VPrompt.HEIGHT, cardW, VPrompt.HEIGHT);
+        if (arenaCard) { //what was laid out from the top left moves into the card, under its heading
+            for (FDisplayObject child : getChildren()) {
+                child.setLeft(child.getLeft() + cardX);
+                if (child != prompt) {
+                    child.setTop(child.getTop() + headH);
+                }
+            }
+        }
 
         updateDisplayTop();
 
@@ -108,7 +133,7 @@ public abstract class FDialog extends FOverlay {
     private void updateDisplayTop() {
         //shift all children into position
         float offsetDy = lastDy;
-        lastDy = getHeight() - (totalHeight + getBottomMargin()) * revealPercent;
+        lastDy = getHeight() - (totalHeight + margin()) * revealPercent;
         float dy = lastDy - offsetDy;
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
@@ -185,6 +210,11 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (arenaCard) { //the Arena card: the board dimmed, a navy glass card with a gold rim
+            ArenaWidgets.dialogCard(g, getWidth(), getHeight(), cardX, getHeight() - (totalHeight + margin()) * revealPercent, cardW,
+                    totalHeight, headH, revealPercent);
+            return;
+        }
         if (ArenaWidgets.dialogBackground(g, getWidth(), getHeight(), getHeight() - (totalHeight + getBottomMargin()) * revealPercent,
                 totalHeight - VPrompt.HEIGHT, revealPercent)) {
             return; //Arena look on the match screen
@@ -207,6 +237,12 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
+        if (arenaCard) { //the Arena card's heading on top; no swipe bar
+            if (headH > 0 && revealPercent > 0) {
+                ArenaWidgets.dialogHeading(g, title, cardX, getHeight() - (totalHeight + margin()) * revealPercent, cardW, headH, revealPercent);
+            }
+            return;
+        }
         //draw swipe bar
         float dx = SWIPE_BAR_HEIGHT * 0.7f;
         float startX = dx * 0.7f;
@@ -251,7 +287,7 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public boolean fling(float velocityX, float velocityY) {
-        if (!finishedFirstReveal) { return false; }
+        if (!finishedFirstReveal || arenaCard) { return false; } //the Arena card does not swipe away
 
         //support toggling temporary hide via swipe
         if (Math.abs(velocityY) > Math.abs(velocityX)) {
@@ -285,14 +321,14 @@ public abstract class FDialog extends FOverlay {
         private final PhysicsObject physicsObj;
 
         private RevealAnimation(float velocity) {
-            physicsObj = new PhysicsObject(new Vector2(0, (totalHeight + getBottomMargin()) * revealPercent), new Vector2(0, velocity));
+            physicsObj = new PhysicsObject(new Vector2(0, (totalHeight + margin()) * revealPercent), new Vector2(0, velocity));
         }
 
         @Override
         protected boolean advance(float dt) {
             if (physicsObj.isMoving()) { //avoid storing last fling stop time if scroll manually stopped
                 physicsObj.advance(dt);
-                float newRevealPercent = physicsObj.getPosition().y / (totalHeight + getBottomMargin());
+                float newRevealPercent = physicsObj.getPosition().y / (totalHeight + margin());
                 if (newRevealPercent < 0) {
                     newRevealPercent = 0;
                 }

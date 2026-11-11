@@ -224,6 +224,9 @@ public class VPrompt extends FContainer {
         if (isArenaPrompt() && arena.mode == ArenaMatchLayout.PromptMode.DECISION && !arenaLateDraw) {
             return; //drawn by the match screen after the arcs
         }
+        if (isArenaPrompt() && forge.screens.match.arena.ArenaDialogOverlay.coversBoard()) {
+            return; //an Arena dialog over the whole board has its own buttons: the board's prompt bar would only show through
+        }
         super.draw(g);
     }
 

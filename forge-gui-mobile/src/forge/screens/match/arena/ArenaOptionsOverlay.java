@@ -175,6 +175,22 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
         return ArenaTheme.isMatchBoard();
     }
 
+    /**
+     * A number from a whole range (getInteger) in the stepper, however long the range: only one number shows at a time.
+     * Render thread. False if the overlay does not apply.
+     */
+    public static boolean stepper(final String message, final List<Integer> numbers, final Consumer<Integer> done) {
+        if (!isOn() || numbers == null || numbers.size() < 2) {
+            return false;
+        }
+        final ArenaOptionsOverlay o = new ArenaOptionsOverlay(Kind.CHOICE, ArenaChoices.titleFor(Forge.getLocalizer().getMessage("lblArenaChooseNumber")),
+                message, null, 0, 1, ArenaChoices.sourceCard(), false);
+        o.addOptions(numbers, null);
+        o.whenClosed = () -> done.accept(o.cancelled || o.picked.isEmpty() ? null : numbers.get(o.picked.get(0).index));
+        o.openOverlay();
+        return true;
+    }
+
     /** Few enough options for the overlay; numbers (with "Other..." after them) fit a stepper of up to a hundred. */
     public static boolean fits(final List<?> choices) {
         if (choices == null || choices.isEmpty()) {

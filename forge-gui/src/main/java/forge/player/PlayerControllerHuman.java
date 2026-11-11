@@ -1121,7 +1121,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 GameEntityViewMap<Card, CardView> cardCacheOrder = GameEntityView.getMap(topN);
                 toTop = new CardCollection();
                 views = getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
-                        localizer.getMessage("lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
+                        localizer.getMessage(getGui().explainsPrompts() ? "lblArenaTopOfLibrary" : "lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
                 cardCacheOrder.addToList(views, toTop);
             }
         }
@@ -1171,7 +1171,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 GameEntityViewMap<Card, CardView> cardCacheOrder = GameEntityView.getMap(topN);
                 toTop = new CardCollection();
                 views = getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
-                        localizer.getMessage("lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
+                        localizer.getMessage(getGui().explainsPrompts() ? "lblArenaTopOfLibrary" : "lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
                 cardCacheOrder.addToList(views, toTop);
             }
         }

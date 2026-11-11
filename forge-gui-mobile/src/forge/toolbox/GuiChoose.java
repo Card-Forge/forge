@@ -123,6 +123,9 @@ public class GuiChoose {
             callback.accept(min);
             return;
         }
+        if (arenaStepper(message, min, max, callback)) {
+            return;
+        }
 
         //force cutting off after 100 numbers at most
         if (max == Integer.MAX_VALUE) {
@@ -144,6 +147,9 @@ public class GuiChoose {
     public static void getInteger(final String message, final int min, final int max, final int cutoff, final Consumer<Integer> callback) {
         if (max <= min || cutoff < min) { //just return min if max <= min or cutoff < min
             callback.accept(min);
+            return;
+        }
+        if (arenaStepper(message, min, max, callback)) {
             return;
         }
 
@@ -182,6 +188,24 @@ public class GuiChoose {
         });
     }
     
+    /** The most numbers the Arena stepper offers at once, instead of a list cut short with "Other..." to type one. */
+    private static final int ARENA_STEPPER_MOST = 1000;
+
+    /**
+     * The Arena look on the match screen: the whole range in its stepper (lower / higher, the number in the middle), no
+     * typing box, as long as the range is not huge. False when that does not apply.
+     */
+    private static boolean arenaStepper(final String message, final int min, final int max, final Consumer<Integer> callback) {
+        if (!forge.screens.match.arena.ArenaTheme.isMatchBoard() || (long) max - min + 1 > ARENA_STEPPER_MOST) {
+            return false;
+        }
+        final List<Integer> numbers = new ArrayList<>();
+        for (int i = min; i <= max; i++) {
+            numbers.add(i);
+        }
+        return forge.screens.match.arena.ArenaOptionsOverlay.stepper(message, numbers, callback);
+    }
+
     private static void getNumberInput(final String prompt, final String message, final int min, final int max, final Consumer<Integer> callback) {
         FOptionPane.showInputDialog(prompt, message, result -> {
             if (result == null) { //that is 'cancel'

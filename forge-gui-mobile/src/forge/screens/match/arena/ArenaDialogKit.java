@@ -85,6 +85,11 @@ public final class ArenaDialogKit {
     private static final float QUESTION_W = 0.4f;
     private static final float QUESTION_CY = 0.078f;
     private static final float RAIL_DROP = 0.025f;
+    /** The rule's gap below a two-line question; the dark backing behind a heading (its width, a share of the window). */
+    private static final float RULE_GAP = 0.012f, BACKING_W = 0.74f;
+    /** The gap a button row keeps from the local portrait, a share of the window's width. */
+    private static final float PORTRAIT_CLEAR = 0.012f;
+    private static final Color BACKING = ArenaTheme.rgba(4, 7, 14, 190);
 
     // render-thread scratch
     private static final Color S1 = new Color(), S2 = new Color(), S3 = new Color(), S4 = new Color();
@@ -135,8 +140,21 @@ public final class ArenaDialogKit {
         final int row = i / perRow;
         final int inRow = Math.min(perRow, count - row * perRow);
         final float rowW = inRow * bw + (inRow - 1) * gap;
-        final float x = cx - rowW / 2f + (i % perRow) * (bw + gap);
+        final float x = clearOfPortrait(cx, w, rowW) + (i % perRow) * (bw + gap);
         out.set(Math.round(x), buttonY(h) - (rows - 1 - row) * (bh + gap), bw, bh);
+    }
+
+    /**
+     * Where a row of buttons {@code rowW} wide centred on {@code cx} starts: as it is, or just right of the local player's
+     * portrait and life total (low in the middle of the board, showing through the dim) when it would cover them.
+     */
+    public static float clearOfPortrait(final float cx, final float w, final float rowW) {
+        final float left = cx - rowW / 2f;
+        final float half = ArenaBoard.portraitDiameter(false) / 2f + Math.round(w * PORTRAIT_CLEAR);
+        if (left + rowW <= w / 2f - half || left >= w / 2f + half) {
+            return left;
+        }
+        return Math.max(left, Math.min(w / 2f + half, w - Math.round(w * 0.03f) - rowW));
     }
 
     /** View Battlefield: top right, at the height of the title. */
@@ -392,6 +410,8 @@ public final class ArenaDialogKit {
         private boolean question;
         private final List<String> qLines = new ArrayList<>();
         private float qPitch;
+        /** Where the rule under the title goes: lower when a question's title takes two lines. */
+        private float ruleAt;
 
         /** Sets what the heading says; cheap when nothing changed. */
         public void set(final String title0, final String subtitle0, final String fallback0) {
@@ -435,8 +455,13 @@ public final class ArenaDialogKit {
             lines.clear();
             titleFont = font(h * TITLE_SIZE);
             subFont = font(h * SUBTITLE_SIZE);
+            ruleAt = ruleY(h);
             if (question) {
                 layoutQuestion(w, h);
+                if (qLines.size() > 1) { //the rule moves down below the second line
+                    final float lastBottom = h * QUESTION_CY - qPitch / 2f + (qLines.size() - 1) * qPitch + titleFont.getLineHeight() / 2f;
+                    ruleAt = Math.max(ruleAt, Math.round(lastBottom + h * RULE_GAP));
+                }
                 return;
             }
             // a card's name arrives with the game's internal id after it, which means nothing to a player
@@ -514,7 +539,7 @@ public final class ArenaDialogKit {
         /** The y just below the heading: under the subtitle if there is one, else under the rule. */
         public float bottom(final float w, final float h) {
             layout(w, h);
-            return lines.isEmpty() ? ruleY(h) : subtitleTop(h) + lines.size() * subFont.getLineHeight();
+            return lines.isEmpty() ? ruleAt : subtitleTop(h) + lines.size() * subFont.getLineHeight();
         }
 
         public void draw(final Graphics g, final float w, final float h, final float alpha) {
@@ -522,6 +547,7 @@ public final class ArenaDialogKit {
             if (alpha <= 0f) {
                 return;
             }
+            backing(g, w, h, alpha);
             if (question) {
                 final float lineH = titleFont.getLineHeight();
                 float cy = qLines.size() <= 1 ? h * TITLE_CY : h * QUESTION_CY - qPitch / 2f;
@@ -529,13 +555,13 @@ public final class ArenaDialogKit {
                     titleLine(g, line, titleFont, 0, cy - lineH / 2f, w, lineH, alpha);
                     cy += qPitch;
                 }
-                rule(g, w / 2f, ruleY(h), Math.round(w * RULE_W), h, ArenaTheme.WHITE, alpha);
+                rule(g, w / 2f, ruleAt, Math.round(w * RULE_W), h, ArenaTheme.WHITE, alpha);
                 return;
             }
             if (shownTitle != null) {
                 final float lineH = titleFont.getLineHeight();
                 titleLine(g, shownTitle, titleFont, 0, h * TITLE_CY - lineH / 2f, w, lineH, alpha);
-                rule(g, w / 2f, ruleY(h), Math.round(w * RULE_W), h, ArenaTheme.WHITE, alpha);
+                rule(g, w / 2f, ruleAt, Math.round(w * RULE_W), h, ArenaTheme.WHITE, alpha);
             }
             float y = subtitleTop(h);
             final float lineH = subFont.getLineHeight();
@@ -546,8 +572,21 @@ public final class ArenaDialogKit {
             }
         }
 
-        private static float subtitleTop(final float h) {
-            return ruleY(h) + Math.round(h * 0.008f);
+        private float subtitleTop(final float h) {
+            return ruleAt + Math.round(h * 0.008f);
+        }
+
+        /**
+         * A soft dark band behind the title and the lines under it, clear at both ends, so the names of the board's cards
+         * do not show through the words.
+         */
+        private void backing(final Graphics g, final float w, final float h, final float alpha) {
+            final float top = Math.round(h * (TITLE_CY - TITLE_SIZE * 0.75f));
+            final float bottom = (lines.isEmpty() ? ruleAt : subtitleTop(h) + lines.size() * subFont.getLineHeight()) + Math.round(h * 0.012f);
+            final float bw = Math.round(w * BACKING_W), x = (w - bw) / 2f;
+            final Color dark = ArenaTheme.alpha(BACKING, BACKING.a * alpha, S1), clear = ArenaTheme.alpha(BACKING, 0f, S2);
+            g.fillGradientRect(clear, dark, false, x, top, bw / 2f, bottom - top);
+            g.fillGradientRect(dark, clear, false, x + bw / 2f, top, bw / 2f, bottom - top);
         }
     }
 

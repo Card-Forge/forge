@@ -125,7 +125,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private int pileTaken = -1;
     private float upperCy, lowerCy, labelX, labelW;
     private FSkinFont labelFont, noteFont;
-    private static final float ROWS_CARD_HEIGHT = 0.25f, ROWS_UPPER_Y = 0.33f, ROWS_LOWER_Y = 0.625f, ROWS_LABEL_SHARE = 0.13f;
+    private static final float ROWS_CARD_HEIGHT = 0.235f, ROWS_UPPER_Y = 0.31f, ROWS_LOWER_Y = 0.6f, ROWS_LABEL_SHARE = 0.13f;
+    private static final Color LABEL_BACKING = ArenaTheme.rgba(4, 7, 14, 200);
 
     // ---- opening ----------------------------------------------------------------------------------------------------
 
@@ -825,7 +826,10 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 count++;
             }
         }
-        final float lh = labelFont.getLineHeight();
+        final float lh = labelFont.getLineHeight(), pad = Math.round(lh * 0.35f);
+        //a dark backing, so the board's cards do not show through the words
+        g.fillSmoothRoundRect(ArenaTheme.alpha(LABEL_BACKING, LABEL_BACKING.a * alpha, S2), labelX - pad, cy - lh - pad, labelW + pad,
+                lh + noteFont.getLineHeight() + 2 * pad, pad);
         ArenaArt.textShadowed(g, label, labelFont, ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, alpha, S1), labelX, cy - lh, labelW, lh, Align.left);
         final String below = note != null ? note : ArenaDialogKit.cachedWords("lblArenaRowCount", count);
         ArenaArt.textShadowed(g, below, noteFont, ArenaTheme.alpha(ArenaTheme.TEXT, alpha, S2), labelX, cy, labelW, noteFont.getLineHeight(), Align.left);

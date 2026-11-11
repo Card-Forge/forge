@@ -98,6 +98,39 @@ public final class ArenaWidgets {
         return true;
     }
 
+    /**
+     * The Arena card of an older dialog on a desktop's match screen (FDialog: yield settings, a list to choose from, an
+     * order list): the board dimmed, then a navy glass card centred over it with a gold rim and a gold line under its
+     * heading ({@code headH} tall, 0 for none). {@code reveal} 0..1 fades it in.
+     */
+    public static void dialogCard(final Graphics g, final float w, final float h, final float x, final float y, final float cw,
+            final float ch, final float headH, final float reveal) {
+        if (reveal <= 0f) {
+            return;
+        }
+        ArenaDialogKit.backdrop(g, w, h, Math.min(1f, reveal * 1.4f));
+        final float r = Math.max(4f, ArenaTheme.px(CARD_RADIUS));
+        g.fillSmoothRoundRectGradient(SHEET_TOP, SHEET_BOTTOM, true, x, y, cw, ch, r);
+        g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), ArenaTheme.alpha(ArenaTheme.GOLD, 0.8f, S1), x, y, cw, ch, r);
+        if (headH > 0) {
+            ArenaArt.divider(g, x, y + headH, cw, ArenaTheme.alpha(ArenaTheme.GOLD, 0.7f, S1), 1f);
+        }
+    }
+
+    /** The heading of an Arena dialog card: its title in the Arena voice, centred in the band at the card's top. */
+    public static void dialogHeading(final Graphics g, final String title, final float x, final float y, final float cw, final float headH,
+            final float reveal) {
+        if (title == null || title.isEmpty()) {
+            return;
+        }
+        final String line = title.replace('\n', ' ');
+        final FSkinFont font = ArenaDialogKit.fitFont(line, headH * 0.5f, headH * 0.3f, cw * 0.9f);
+        ArenaArt.textShadowed(g, line, font, ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, reveal, S2), x, y, cw, headH, Align.center);
+    }
+
+    /** The corner of an Arena dialog card, in Swing pixels. */
+    private static final float CARD_RADIUS = 12f;
+
     /** The button band of a dialog (its VPrompt): dark glass. False without the Arena look. */
     public static boolean dialogButtonBand(final Graphics g, final float w, final float h) {
         if (!on()) {

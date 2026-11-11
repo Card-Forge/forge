@@ -291,7 +291,8 @@ public final class ArenaEndScreen {
         if (count * bw + (count - 1) * gap > w * 0.92f) {
             bw = Math.round((w * 0.92f - (count - 1) * gap) / count);
         }
-        float x = w / 2f - (count * bw + (count - 1) * gap) / 2f;
+        //clear of the local portrait and life total, which show low in the middle of the board
+        float x = ArenaDialogKit.clearOfPortrait(w / 2f, w, count * bw + (count - 1) * gap);
         final float y = Math.round(h * BUTTON_CY - bh / 2f);
         for (final Pill p : row) {
             if (p.visible) {
