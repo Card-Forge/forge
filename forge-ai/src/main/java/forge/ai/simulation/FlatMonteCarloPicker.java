@@ -412,12 +412,19 @@ public final class FlatMonteCarloPicker {
         final boolean extra;
         /** For an attack decision: the attackers and what each attacks; empty means no attack. Null for plays. */
         final Map<Card, GameEntity> attackers;
+        /**
+         * The permanent the play was aimed at when this candidate was made. The candidates of one play share the same
+         * SpellAbility, and every rollout aims it at its own target, so after the rollouts its targets say nothing about
+         * what the heuristics wanted (see keepsMoreDangerousTarget).
+         */
+        final Card aim;
 
         Candidate(final Map<Card, GameEntity> attackers) {
             this.sa = null;
             this.target = null;
             this.extra = false;
             this.attackers = attackers;
+            this.aim = null;
         }
 
         Candidate(final SpellAbility sa) {
@@ -433,6 +440,7 @@ public final class FlatMonteCarloPicker {
             this.target = target;
             this.extra = extra;
             this.attackers = null;
+            this.aim = sa == null ? null : firstAimedCard(sa);
         }
 
         boolean isHold() {
@@ -1550,11 +1558,18 @@ public final class FlatMonteCarloPicker {
         if (heuristic == null || variant == null || heuristic.sa == null || !(variant.target instanceof Card)) {
             return false;
         }
-        final SpellAbility ts = singleTargetingAbility(heuristic.sa);
-        final Card kept = ts == null ? null : ts.getTargets().getFirstTargetedCard();
+        // noted when the candidate was made: the play's own targets are whatever the last rollout aimed them at, which
+        // depends on how many rounds the time budget allowed, so reading them here made the verdict change from run to run
+        final Card kept = heuristic.aim;
         final Card other = (Card) variant.target;
         return kept != null && kept.isCreature() && other.isCreature() && kept.getController().isOpponentOf(player)
                 && ComputerUtilCard.removalEffectBonus(kept) > ComputerUtilCard.removalEffectBonus(other);
+    }
+
+    /** The permanent a play with a single target is aimed at right now, or null. */
+    private static Card firstAimedCard(final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        return ts == null || ts.getTargets() == null ? null : ts.getTargets().getFirstTargetedCard();
     }
 
     /** True for the AI itself and its permanents, false for opponents and theirs, null for anything else. */
@@ -1576,7 +1591,10 @@ public final class FlatMonteCarloPicker {
         final Card c = (Card) e;
         final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c) + danger;
+            // what an opposing creature does besides its stats (Doran, a death engine) counts, as it does for the heuristics' own
+            // choice of removal target: a discovered removal spell is aimed with this rank and has no heuristic aim to fall back on
+            final boolean opposing = c.getController() != null && c.getController().isOpponentOf(player);
+            return ComputerUtilCard.evaluateCreature(c) + danger + (opposing ? ComputerUtilCard.removalEffectBonus(c) : 0);
         }
         return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
