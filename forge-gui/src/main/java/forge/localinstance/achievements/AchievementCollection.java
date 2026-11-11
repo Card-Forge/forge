@@ -63,7 +63,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         PlaneswalkerAchievements.instance.updateAll(player);
         ChallengeAchievements.instance.updateAll(player);
         CardActivationAchievements.instance.updateAll(player);
-        RogueCommanderAchievements.instance.updateAll(player);
+        if (match.getRules().getGameType() == GameType.RogueCommander) {
+            RogueCommanderAchievements.instance.updateAll(player);
+        }
     }
     
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {
@@ -78,7 +80,6 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(PlaneswalkerAchievements.instance);
         cb.addItem(CardActivationAchievements.instance);
         cb.addItem(ChallengeAchievements.instance);
-        cb.addItem(RogueCommanderAchievements.instance);
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {

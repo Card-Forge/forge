@@ -108,6 +108,15 @@ public class FScreen {
             "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
+    public static final FScreen DECK_EDITOR_ROGUE = new FScreen(
+            VDeckEditorUI.SINGLETON_INSTANCE,
+            CDeckEditorUI.SINGLETON_INSTANCE,
+            "lblRogueDeckEditor",
+            FSkin.getImage(FSkinProp.IMG_PACK),
+            true,
+            "lblCloseEditor",
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
     public static final FScreen DECK_EDITOR_QUEST_TOURNAMENT = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,

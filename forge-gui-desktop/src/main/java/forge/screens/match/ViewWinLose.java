@@ -44,6 +44,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     private final FScrollPane scrLog;
     private final FButton btnContinue, btnRestart, btnQuit;
+    private final SkinnedLabel lblQuitHint = new SkinnedLabel();
     private final SkinnedPanel pnlCustom;
 
     private final SkinnedLabel lblTitle = new SkinnedLabel("WinLoseFrame > lblTitle needs updating.");
@@ -100,6 +101,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             case Gauntlet:
                 control = new GauntletWinLose(this, game0, matchUI);
                 break;
+            case RogueCommander:
+                control = new RogueWinLose(this, game0, matchUI);
+                break;
             default: // will catch it after switch
                 break;
         }
@@ -134,6 +138,11 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             : puzzle ? localizer.getMessage("lblQuitPuzzle") : localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
+        lblQuitHint.setFont(FSkin.getRelativeFont(14));
+        lblQuitHint.setForeground(FORE_COLOR);
+        lblQuitHint.setHorizontalAlignment(SwingConstants.CENTER);
+        lblQuitHint.setIconTextGap(8);
+        lblQuitHint.setVisible(false);
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
@@ -168,7 +177,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlOutcomes.setOpaque(false);
         pnlLeft.add(lblTitle, "h 60px!, center");
         pnlLeft.add(pnlOutcomes, "center");
-        pnlLeft.add(lblStats, "h 60px!, center");
+        if (control.shouldShowPlayerScores()) {
+            pnlLeft.add(lblStats, "h 60px!, center");
+        }
 
         // A container must be made to ensure proper centering.
         final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, wrap, ax center"));
@@ -182,6 +193,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             pnlButtons.add(btnRestart, constraints);
         }
         pnlButtons.add(btnQuit, constraints);
+        if (lblQuitHint.isVisible()) {
+            pnlButtons.add(lblQuitHint, "w 300px!, h 46px!, center");
+        }
         pnlLeft.add(pnlButtons, "w 100%!");
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
@@ -196,7 +210,8 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
-        lblTitle.setText((replay ? "Replay: " : "") + composeTitle(game0));
+        final String titleOverride = control.getOutcomeTitleOverride();
+        lblTitle.setText(titleOverride == null ? (replay ? "Replay: " : "") + composeTitle(game0) : titleOverride);
     }
 
     public final void show() {
@@ -270,6 +285,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showPlayerScores() {
+        if (!control.shouldShowPlayerScores()) {
+            return;
+        }
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message()));
         }
@@ -287,6 +305,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     @Override
     public void showRewards(final Runnable runnable) {
         runnable.run(); //just run on GUI thread
+    }
+
+    void showQuitButtonHint(String message, FSkinProp icon) {
+        lblQuitHint.setText(message);
+        lblQuitHint.setIcon(FSkin.getIcon(icon).scale(0.35));
+        lblQuitHint.setVisible(true);
     }
 
     @Override

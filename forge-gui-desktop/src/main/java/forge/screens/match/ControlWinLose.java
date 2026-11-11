@@ -86,6 +86,14 @@ public class ControlWinLose {
         return false;
     }
 
+    public String getOutcomeTitleOverride() {
+        return null;
+    }
+
+    public boolean shouldShowPlayerScores() {
+        return true;
+    }
+
     /** @return ViewWinLose object this controller is in charge of */
     public ViewWinLose getView() {
         return this.view;
