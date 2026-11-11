@@ -1612,8 +1612,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             cardManager.setItemActivateHandler(e -> {
                 final PaperCard card = this.cardManager.getSelectedItem();
                 if (card != null) { //nothing selected, nothing to move
+                    onCardActivated(card); //(moving a card may select its section's page)
                     parentScreen.catalogFocused = this == parentScreen.catalogPage; //the keys follow the side clicked
-                    onCardActivated(card);
                 }
             });
             cardManager.setContextMenuBuilder(new ContextMenuBuilder<>() {
