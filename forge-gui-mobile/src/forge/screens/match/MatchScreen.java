@@ -1028,12 +1028,15 @@ public class MatchScreen extends FScreen {
      * preview fades out rather than vanishing.
      */
     private void drawArenaPreview(Graphics g) {
+        if (forge.screens.match.arena.ArenaDialogOverlay.coversBoard()) {
+            //an Arena dialog opened: the preview goes at once, not fading out while the dialog's dim is still fading in
+            forge.screens.match.arena.ArenaCardPreview.clear();
+            return;
+        }
         CardView card = null;
         Rectangle at = null;
         boolean inHand = false;
-        //not under an Arena dialog: the board's card under the pointer would show through the dialog's dim beside its cards
-        if (!CardZoom.isOpen() && !forge.screens.match.arena.ArenaDialogOverlay.coversBoard() && potentialListener != null
-                && isHoverPreviewEnabled()) {
+        if (!CardZoom.isOpen() && potentialListener != null && isHoverPreviewEnabled()) {
             for (FDisplayObject object : potentialListener) {
                 if (object == null || !object.isHovered()) { continue; }
                 if (object instanceof CardAreaPanel panel) {
