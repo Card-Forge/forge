@@ -547,6 +547,14 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.ignoreDungeonEffect = Boolean.parseBoolean(dialogObject.toString());
                             }
+                            dialogObject = prop.get("ignoreGlobalEffect");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreGlobalEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
+                            dialogObject = prop.get("ignoreBiomeEffect");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreBiomeEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
                             dialogObject = prop.get("reward"); //Check for additional rewards.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.rewards = JSONStringLoader.parse(RewardData[].class, dialogObject.toString(), "[]");

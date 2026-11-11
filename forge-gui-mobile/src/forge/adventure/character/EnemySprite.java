@@ -108,6 +108,11 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
+        //Map object properties override these after the sprite is created.
+        effect = data.effect;
+        ignoreGlobalEffect = data.ignoreGlobalEffect;
+        ignoreBiomeEffect = data.ignoreBiomeEffect;
+        ignoreDungeonEffect = data.ignoreDungeonEffect;
         float scale = data.scale;
         if (scale < 0)
             scale = 1f;
