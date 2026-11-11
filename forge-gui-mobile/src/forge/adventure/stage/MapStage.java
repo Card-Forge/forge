@@ -70,6 +70,8 @@ public class MapStage extends GameStage {
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private boolean ignoreGlobalEffect;    //Duels in this map skip the plane-wide effect.
+    private boolean ignoreBiomeEffect;     //Duels in this map skip the effect of the biome the map is in.
     private String battleBackground;       //Optional battle background folder for this map or floor.
     private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
@@ -107,6 +109,8 @@ public class MapStage extends GameStage {
     public void clearIsInMap() {
         isInMap = false;
         effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        ignoreGlobalEffect = false;
+        ignoreBiomeEffect = false;
         battleBackground = null;
         currentMap = null;
         preventEscape = false;
@@ -257,6 +261,10 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
+        if (MP.get("ignoreGlobalEffect") != null)
+            ignoreGlobalEffect = Boolean.parseBoolean(MP.get("ignoreGlobalEffect").toString());
+        if (MP.get("ignoreBiomeEffect") != null)
+            ignoreBiomeEffect = Boolean.parseBoolean(MP.get("ignoreBiomeEffect").toString());
         battleBackground = MP.get("battleBackground", String.class);
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
@@ -1174,7 +1182,7 @@ public class MapStage extends GameStage {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         started = false;
                         duelScene.initDuels(player, mob);
-                        duelScene.setEffectLayers(null, isInMap ? effect : null, false);
+                        duelScene.setEffectLayers(getBiomeEffect(), getDungeonEffect(), ignoresGlobalEffect());
                         Forge.switchScene(duelScene);
                     }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                 }
@@ -1188,6 +1196,25 @@ public class MapStage extends GameStage {
 
     public boolean isInMap() {
         return isInMap;
+    }
+
+    public EffectData getDungeonEffect() {
+        return isInMap ? effect : null;
+    }
+
+    private BiomeData getPointOfInterestBiome() {
+        PointOfInterest poi = TileMapScene.instance().rootPoint;
+        return !isInMap || poi == null ? null : GameScene.instance().getBiomeDataByPosition(poi.getPosition());
+    }
+
+    public EffectData getBiomeEffect() {
+        BiomeData biome = getPointOfInterestBiome();
+        return biome == null || ignoreBiomeEffect ? null : biome.effect;
+    }
+
+    public boolean ignoresGlobalEffect() {
+        BiomeData biome = getPointOfInterestBiome();
+        return isInMap && (ignoreGlobalEffect || biome != null && biome.ignoreGlobalEffect);
     }
 
     public String getBattleBackground() {

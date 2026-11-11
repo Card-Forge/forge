@@ -49,6 +49,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     final Vector2 enemyMoveVector = new Vector2();
     boolean collided = false;
     private final Vector2 navDirectionVec = new Vector2();
+    private final Vector2 biomePosition = new Vector2();
     private final ArrayList<Float> cachedSaveTimeouts = new ArrayList<>(32);
     private final ArrayList<String> cachedSaveNames = new ArrayList<>(32);
     private final ArrayList<Float> cachedSaveXCoords = new ArrayList<>(32);
@@ -133,6 +134,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 collided = false;
                                 duelScene.initDuels(player, mob);
+                                BiomeData biome = getBiome();
+                                duelScene.setEffectLayers(biome == null ? null : biome.effect, null, biome != null && biome.ignoreGlobalEffect);
                                 Forge.switchScene(duelScene);
                             }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
@@ -392,6 +395,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void enterSpawnPOI(){
         enterSpawnPOI = true; //On a new game, we want to automatically enter spawn POI the player overlaps with.
+    }
+
+    private BiomeData getBiome() {
+        return GameScene.instance().getBiomeDataByPosition(biomePosition.set(player.getX(), player.getY()));
     }
 
     public PointOfInterestMapSprite getMapSprite(PointOfInterest poi) {
