@@ -1288,6 +1288,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             if (item instanceof PaperCard pc) {
                 CardRenderer.drawCard(g, pc, x, y, w, h, pos);
+                final String badge = itemManager.getItemBadge(item);
+                if (badge != null) { //the Arena deck editor: how many the deck holds, on every card
+                    ArenaMenus.countBadge(g, badge, x, y, w, h);
+                }
                 if (showRanking) {
                     float rankSize = w / 2;
                     float y2 = y + (rankSize - (rankSize * 0.1f));

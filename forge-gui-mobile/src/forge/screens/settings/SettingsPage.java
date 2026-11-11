@@ -110,7 +110,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     FSkin.changeSkin(newValue);
                 }
 
-                private final String arenaNote = description + " " + Forge.getLocalizer().getMessage("nlThemeArenaOverride");
+                private final String arenaNote = description + " " + Forge.getLocalizer().getMessage("nlThemeArenaOverride", Forge.getLocalizer().getMessage("GraphicOptions"));
                 private final String arenaValue = Forge.getLocalizer().getMessage("lblArenaLook");
 
                 @Override

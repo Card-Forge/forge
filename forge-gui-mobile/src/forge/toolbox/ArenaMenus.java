@@ -259,28 +259,51 @@ public final class ArenaMenus {
     private static final float ROW_MINUS_LENGTH = 0.5f, ROW_MINUS_THICKNESS = 0.12f;
 
     /**
-     * The lobby's showcase of a chosen deck: the player's name over a gold-framed glass tile holding the deck's art (or
-     * a "?" for a deck made when the game starts) and the deck's name in gold under it.
+     * The lobby's showcase of a chosen deck: the player's name over a gold-framed glass tile holding the deck's art (for
+     * a deck made when the game starts, {@code sleeve}: the seat's card sleeve, upright in the middle) and the deck's
+     * full name in gold under it, on two lines if it needs them. A click on it changes the deck (the lobby handles it).
      */
-    public static void deckTile(final Graphics g, final String player, final String deck, final FImage art, final float x, final float y,
-            final float w, final float h) {
+    public static void deckTile(final Graphics g, final String player, final String deck, final FImage art, final boolean sleeve,
+            final float x, final float y, final float w, final float h) {
         final float nameH = h * TILE_NAME_SHARE, artH = h - 2 * nameH;
         final FSkinFont playerFont = ArenaDialogKit.font(nameH * 0.6f), deckFont = ArenaDialogKit.font(nameH * 0.62f);
         ArenaArt.textShadowed(g, player, playerFont, TEXT_SOFT, x, y, w, nameH, Align.center);
         final float ay = y + nameH, r = ArenaTheme.px(TILE_RADIUS);
         g.fillSmoothRoundRect(WELL, x, ay, w, artH, r);
-        if (art != null) {
+        if (art != null && sleeve) {
+            final float sh = artH * SLEEVE_HEIGHT, sw = sh * CARD_ASPECT;
+            g.drawImage(art, x + (w - sw) / 2f, ay + (artH - sh) / 2f, sw, sh);
+        } else if (art != null) {
             final float inset = lineThickness() * 2;
             g.drawImage(art, x + inset, ay + inset, w - 2 * inset, artH - 2 * inset);
         } else {
             g.drawText("?", ArenaDialogKit.font(artH * 0.4f), ArenaTheme.GOLD_DIM, x, ay, w, artH, false, Align.center, true);
         }
         g.drawSmoothRoundRect(lineThickness() * 1.5f, ArenaTheme.GOLD, x, ay, w, artH, r);
-        ArenaArt.textShadowed(g, deck, deckFont, ArenaTheme.GOLD_BRIGHT, x, ay + artH, w, nameH, Align.center);
+        g.drawText(deck, deckFont, ArenaTheme.GOLD_BRIGHT, x, ay + artH, w, nameH * 1.6f, true, Align.center, false);
     }
 
     /** A deck tile's name rows (each a share of its height) and its corner (Swing px). */
     private static final float TILE_NAME_SHARE = 0.12f, TILE_RADIUS = 10f;
+    /** A sleeve in a deck tile: its height as a share of the art box, and a card's width for its height. */
+    private static final float SLEEVE_HEIGHT = 0.86f, CARD_ASPECT = 0.716f;
+
+    /**
+     * On a card in the deck builder's catalog, at all times: how many copies the deck holds ("2/4"), a small dark pill
+     * with gold words at the foot of the card's art, clear of its name and its rules text.
+     */
+    public static void countBadge(final Graphics g, final String words, final float x, final float y, final float w, final float h) {
+        final float bh = Math.max(ArenaTheme.px(BADGE_MIN_HEIGHT) * COUNT_BADGE_SCALE, w * BADGE_CARD_SHARE * COUNT_BADGE_SCALE);
+        final FSkinFont font = ArenaDialogKit.font(bh * BADGE_FONT_SHARE);
+        final float bw = ArenaArt.textWidth(words, font) + bh * BADGE_PAD;
+        final float r = bh / 2f, bx = x + (w - bw) / 2f, by = y + h * COUNT_BADGE_TOP;
+        g.fillSmoothRoundRect(WELL, bx, by, bw, bh, r);
+        g.drawSmoothRoundRect(lineThickness(), ArenaTheme.GOLD, bx, by, bw, bh, r);
+        g.drawText(words, font, ArenaTheme.GOLD_BRIGHT, bx, by, bw, bh, false, Align.center, true);
+    }
+
+    /** The count badge: a share of the hover badge's size, and where it sits (a share of the card's height from its top). */
+    private static final float COUNT_BADGE_SCALE = 0.8f, COUNT_BADGE_TOP = 0.5f;
 
     /** An empty list's line saying how to start ("No decks here yet. Press New Deck to build one."), centred in it. */
     public static void emptyState(final Graphics g, final String words, final float x, final float y, final float w, final float h) {

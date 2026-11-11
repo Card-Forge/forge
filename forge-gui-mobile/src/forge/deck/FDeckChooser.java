@@ -81,6 +81,9 @@ public class FDeckChooser extends FScreen {
     private List<DeckProxy> AIDecks = new ArrayList<>();
     /** Arena look: the least height of the button bar, in Swing pixels at 1440 high. */
     private static final float ARENA_BUTTON_MIN_HEIGHT = 52f;
+    /** Arena look: a deck tile's width for its height, and the fewest tiles across. */
+    private static final float ARENA_DECK_TILE_ASPECT = 0.62f;
+    private static final int ARENA_MIN_DECK_COLUMNS = 3;
 
     private final FButton btnNewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewDeck"));
     private final FButton btnEditDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("btnEditDeck"));
@@ -1223,6 +1226,11 @@ public class FDeckChooser extends FScreen {
         cmbDeckTypes.setBounds(x, y, width, fieldHeight);
         y += cmbDeckTypes.getHeight() + 1;
         lstDecks.setBounds(x, y, width, height - y - totalButtonHeight - 2 * PADDING); //leave room for buttons at bottom
+        if (landscapeMode && ArenaMenus.on()) {
+            //the Arena look sizes the grid of decks to the window: two rows of whole tiles fit, none cut off at the side
+            final float tileWidth = lstDecks.getHeight() / 2f * ARENA_DECK_TILE_ASPECT;
+            lstDecks.setImageColumnCount(Math.max(ARENA_MIN_DECK_COLUMNS, Math.round(width / tileWidth)), false);
+        }
 
         y += lstDecks.getHeight() + PADDING;
         float buttonWidth;

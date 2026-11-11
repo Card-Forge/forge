@@ -14,6 +14,7 @@ import forge.card.MagicColor;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameLog;
 import forge.game.GameLogEntryType;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.DraftPack;
@@ -630,6 +631,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             catalogPage.cardManager.showConfigView();
             catalogPage.cardManager.stopClickToActivate();
+            catalogPage.cardManager.clearItemBadge();
+            if (splitCatalogPrepared) { //back to the catalog the classic editor shows
+                splitCatalogPrepared = false;
+                catalogPage.cardManager.setWantUnique(catalogPage.cardManager.getConfig() != null && catalogPage.cardManager.getConfig().getUniqueCardsOnly());
+                if (splitFormat != null) {
+                    catalogPage.cardManager.setFormatFilter(null);
+                }
+                catalogPage.cardManager.refresh();
+            }
             for (DeckSectionPage page : pagesBySection.values()) {
                 page.cardManager.showConfigView();
                 page.cardManager.stopClickToActivate();
@@ -647,11 +657,68 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
      */
     private void showSplitViews() {
         splitColumns = splitColumnsForWindow();
-        catalogPage.cardManager.setView(ItemManager.IMAGE_VIEW, splitColumns, false);
-        catalogPage.cardManager.setClickToActivate(ItemManager.ClickAction.ADD, this::catalogClickBadge);
+        final CardManager catalog = catalogPage.cardManager;
+        catalog.setView(ItemManager.IMAGE_VIEW, splitColumns, false);
+        catalog.setClickToActivate(ItemManager.ClickAction.ADD, this::catalogClickBadge);
+        catalog.setItemBadge(this::catalogCountBadge);
+        if (!splitCatalogPrepared) { //the first time: one tile per card, the deck's own format
+            splitCatalogPrepared = true;
+            catalog.setWantUnique(true);
+            splitFormat = deckFormatForSplit();
+            if (splitFormat != null) {
+                catalog.setFormatFilter(splitFormat);
+            }
+            catalog.refresh();
+        }
         for (DeckSectionPage page : pagesBySection.values()) {
             showSplitView(page);
         }
+    }
+
+    private boolean splitCatalogPrepared;
+    /** The format the side-by-side catalog opened in: the narrowest sanctioned format the deck is legal in, or null. */
+    private GameFormat splitFormat;
+
+    /**
+     * The narrowest sanctioned format (Standard before Pioneer before Modern...) a constructed deck with cards in it is
+     * legal in, so the catalog opens on cards that fit it; null for other editors, an empty deck or no such format.
+     */
+    private GameFormat deckFormatForSplit() {
+        if (editorConfig.getGameType() != GameType.Constructed || getDeck() == null || getDeck().getMain().isEmpty()) {
+            return null;
+        }
+        final java.util.Set<GameFormat> legal = FModel.getFormats().getAllFormatsOfDeck(getDeck());
+        GameFormat best = null;
+        for (final GameFormat format : FModel.getFormats().getSanctionedList()) {
+            if (legal.contains(format) && (best == null || setsAllowed(format) < setsAllowed(best))) {
+                best = format;
+            }
+        }
+        return best;
+    }
+
+    private static int setsAllowed(final GameFormat format) {
+        final int sets = format.getAllowedSetCodes().size();
+        return sets == 0 ? Integer.MAX_VALUE : sets; //no list of sets: every set
+    }
+
+    /** How many copies of each card name the deck holds, counted as the copy limit counts them; dropped on each change. */
+    private Map<String, Integer> inDeckCounts;
+
+    /** On every catalog card at all times: how many copies the deck holds, against the limit ("2/4"), or nothing. */
+    private String catalogCountBadge(PaperCard card) {
+        if (getDeck() == null) {
+            return null;
+        }
+        if (inDeckCounts == null) {
+            inDeckCounts = new HashMap<>();
+        }
+        final Integer inDeck = inDeckCounts.computeIfAbsent(card.getName(), name -> copiesCountedForLimit(card));
+        if (inDeck == 0) {
+            return null;
+        }
+        final int allowed = getNumAllowedInDeck(card);
+        return allowed != Integer.MAX_VALUE && shouldEnforceConformity() ? inDeck + "/" + allowed : String.valueOf(inDeck);
     }
 
     private void showSplitView(DeckSectionPage page) {
@@ -1424,7 +1491,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 out.add(btnSave);
             lblDeckSize.setVisible(arena);
             if (arena) {
-                lblDeckSize.setSize(height * ARENA_DECK_SIZE_WIDTH, height);
+                lblDeckSize.setSize(Math.min(availableWidth / 2, Math.max(height * ARENA_DECK_SIZE_WIDTH,
+                        lblDeckSize.getAutoSizeBounds().width + height)), height);
                 out.add(lblDeckSize);
             }
             float remainingWidth = availableWidth - (float) out.stream().mapToDouble(FDisplayObject::getWidth).sum();
@@ -1495,6 +1563,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    /** A format maximum at or above this means no real maximum. */
+    private static final int DECK_SIZE_UNBOUNDED = 10000;
+
+    /** How many cards of the main deck and sideboard the format does not allow. */
+    private int cardsNotIn(final GameFormat format) {
+        int count = 0;
+        for (final DeckSection section : new DeckSection[] {DeckSection.Main, DeckSection.Sideboard}) {
+            final CardPool pool = deck.get(section);
+            if (pool == null) {
+                continue;
+            }
+            for (final Entry<PaperCard, Integer> entry : pool) {
+                if (!format.getFilterRules().test(entry.getKey())) {
+                    count += entry.getValue();
+                }
+            }
+        }
+        return count;
+    }
+
     /** The least number of cards the format wants in the main deck, or 0 when it sets none. */
     protected int deckSizeTarget() {
         final DeckFormat format = editorConfig.getDeckFormat();
@@ -1513,8 +1601,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         final DeckFormat format = editorConfig.getDeckFormat();
         final Integer most = format == null ? null : format.getMainRange().getMaximum();
         final int target = deckSizeTarget();
-        deckHeader.lblDeckSize.setText(target > 0 ? size + " / " + target : String.valueOf(size));
-        deckHeader.lblDeckSize.setTextColor(most != null && size > most ? DECK_SIZE_OVER
+        final boolean bounded = most != null && most < DECK_SIZE_UNBOUNDED;
+        final Localizer l = Forge.getLocalizer();
+        //"58 / 60" when the format wants an exact size, "58 cards (min 60)" when it sets only a minimum
+        String text = target <= 0 ? l.getMessage("lblArenaDeckSize", size)
+                : bounded && most == target ? l.getMessage("lblArenaDeckSizeExact", size, target)
+                : bounded ? l.getMessage("lblArenaDeckSizeRange", size, target, most)
+                : l.getMessage("lblArenaDeckSizeMin", size, target);
+        final int illegal = splitFormat == null ? 0 : cardsNotIn(splitFormat);
+        if (illegal > 0) { //cards that do not fit the format the catalog opened in
+            text += "   " + l.getMessage("lblArenaNotInFormat", illegal, splitFormat.getName());
+        }
+        if (!text.equals(deckHeader.lblDeckSize.getText())) {
+            deckHeader.lblDeckSize.setText(text);
+            deckHeader.revalidate(); //its width follows its words
+        }
+        deckHeader.lblDeckSize.setTextColor(illegal > 0 || bounded && size > most ? DECK_SIZE_OVER
                 : target > 0 && size < target ? DECK_SIZE_SHORT : DECK_SIZE_REACHED);
     }
 
@@ -2411,11 +2513,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (deckSection == DeckSection.Commander || parentScreen.getDeck() == null) {
                 caption = captionPrefix; //don't display count for commander section since it won't be more than 1
             } else {
-                final int count = parentScreen.getDeck().get(deckSection).countAll();
-                final int target = deckSection == DeckSection.Main && ArenaMenus.on() ? parentScreen.deckSizeTarget() : 0;
-                //the Arena look counts the main deck against its target: "Main (58/60)"
-                caption = captionPrefix + " (" + (target > 0 ? count + "/" + target : String.valueOf(count)) + ")";
+                caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
             }
+            parentScreen.inDeckCounts = null; //the deck changed: count again
             parentScreen.updateDeckSize();
             if(parentScreen.hiddenExtraSections.contains(this.deckSection) && cardManager.getPool() != null && !cardManager.getPool().isEmpty())
                 parentScreen.showExtraSectionTab(this.deckSection);

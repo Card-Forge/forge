@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableSet;
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
+import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -1196,6 +1197,21 @@ public class PlayerPanel extends FContainer {
             return; //don't clobber (and cursor-reset) a name mid-typing; the commit re-syncs it
         }
         txtPlayerName.setText(string);
+    }
+
+    /** The deck choice on show for this seat (the constructed deck, or a variant's), or null when none is. */
+    public FLabel getShownDeckButton() {
+        for (final FLabel button : new FLabel[] {btnCommanderDeck, btnOathbreakDeck, btnTinyLeadersDeck, btnBrawlDeck, btnDeck}) {
+            if (button.isVisible()) {
+                return button;
+            }
+        }
+        return null;
+    }
+
+    /** This seat's card sleeve, or null. */
+    public FImage getSleeveImage() {
+        return sleeveLabel.getIcon();
     }
 
     public String getPlayerName() {

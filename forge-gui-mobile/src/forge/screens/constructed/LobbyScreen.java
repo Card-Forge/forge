@@ -11,6 +11,7 @@ import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -119,6 +120,25 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final float SHOWCASE_MIN_SHARE = 0.25f, ART_ASPECT = 1.37f;
     private final DeckProxy[] showcaseProxy = new DeckProxy[MAX_PLAYERS];
     private final PaperCard[] showcaseCard = new PaperCard[MAX_PLAYERS];
+    /** Where each tile was drawn last (screen-local), so a click on one changes that seat's deck. */
+    private final Rectangle[] showcaseBounds = java.util.stream.Stream.generate(Rectangle::new).limit(MAX_PLAYERS).toArray(Rectangle[]::new);
+    private int showcaseShown; //how many tiles were drawn last
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        if (ArenaMenus.on()) {
+            for (int i = 0; i < showcaseShown && i < playerPanels.size(); i++) {
+                if (showcaseBounds[i].contains(x, y)) {
+                    final FLabel deckButton = playerPanels.get(i).getShownDeckButton();
+                    if (deckButton != null) {
+                        deckButton.tap(0, 0, 1); //what its deck bar does: open the deck chooser
+                        return true;
+                    }
+                }
+            }
+        }
+        return super.tap(x, y, count);
+    }
 
     @Override
     protected void drawOverlay(Graphics g) {
@@ -127,6 +147,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             return;
         }
         final int count = Math.min(getNumPlayers(), playerPanels.size());
+        showcaseShown = 0;
         float used = 0;
         for (int i = 0; i < count; i++) {
             used += playerPanels.get(i).getHeight();
@@ -146,8 +167,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 showcaseProxy[i] = proxy;
                 showcaseCard[i] = proxy == null || proxy.isGeneratedDeck() ? null : proxy.getHighestCMCCard();
             }
-            final FImage art = showcaseCard[i] == null ? null : CardRenderer.getCardArt(showcaseCard[i]);
-            ArenaMenus.deckTile(g, panel.getPlayerName(), proxy == null ? "" : proxy.getName(), art, x, top, tileW, h);
+            //the deck's art, or for a deck made when the game starts the seat's card sleeve
+            final FImage art = showcaseCard[i] != null ? CardRenderer.getCardArt(showcaseCard[i]) : panel.getSleeveImage();
+            final FLabel deckButton = panel.getShownDeckButton();
+            final String deckName = deckButton != null ? deckButton.getText() : proxy == null ? "" : proxy.getName();
+            ArenaMenus.deckTile(g, panel.getPlayerName(), deckName, art, showcaseCard[i] == null, x, top, tileW, h);
+            showcaseBounds[i].set(x, top, tileW, h);
+            showcaseShown = i + 1;
             x += tileW + pad;
         }
     }

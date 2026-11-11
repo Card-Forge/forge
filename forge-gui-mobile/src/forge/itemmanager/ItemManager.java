@@ -323,6 +323,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
+    /** Shows this many items across the image view; {@code remember}: store it as the user's choice. */
+    public void setImageColumnCount(int columns, boolean remember) {
+        imageView.setColumnCount(columns, remember);
+    }
+
     public int getImageColumnCount() {
         return imageView.getColumnCount();
     }
@@ -970,7 +975,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         int filteredCount = filteredItems.countAll();
         int totalCount = isUnfiltered() ? filteredCount : pool.countAll();
 
-        searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
+        //the Arena look says the count once when nothing is filtered out ("(60)", not "(60 / 60)")
+        searchFilter.setRatio(filteredCount == totalCount && forge.toolbox.ArenaMenus.on()
+                ? "(" + totalCount + ")" : "(" + filteredCount + " / " + totalCount + ")");
     }
 
     public boolean isIncrementalSearchActive() {
@@ -1105,6 +1112,35 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     /** What a click does in one-click mode; only meaningful while {@link #isClickToActivate()}. */
     public ClickAction getClickAction() {
         return clickAction;
+    }
+
+    private Function<T, String> itemBadge;
+
+    /**
+     * A badge every item shows at all times (the Arena deck editor's catalog: how many copies the deck holds), from the
+     * words {@code badge} gives for it, or none when it gives null.
+     */
+    public void setItemBadge(Function<T, String> badge) {
+        itemBadge = badge;
+    }
+
+    public void clearItemBadge() {
+        itemBadge = null;
+    }
+
+    /** The words of the always-on badge for this item, or null (see {@link #setItemBadge}). */
+    public String getItemBadge(T item) {
+        return itemBadge != null && item != null ? itemBadge.apply(item) : null;
+    }
+
+    /** Filters the items by this format (null: every format), as choosing it in the format box does. */
+    public void setFormatFilter(forge.game.GameFormat format) {
+        for (ItemFilter<? extends T> filter : filters.get()) {
+            if (filter instanceof forge.itemmanager.filters.FormatFilter<?> formatFilter) {
+                formatFilter.setFormat(format);
+                return;
+            }
+        }
     }
 
     /** The words of the one-click badge for this item (see {@link #setClickToActivate}). */
