@@ -49,10 +49,10 @@ public final class ArenaMenus {
 
     /**
      * One-click badges: the card's hover frame (Swing px), the pill's height (at least {@code BADGE_MIN_HEIGHT} Swing px,
-     * else a share of the card's width or the row's height), its place on a card (from the top, a share of its height),
+     * else a share of the card's width), its place on a card (from the top, a share of its height),
      * its widest (a share of the card's), its room round the words (in pill heights) and its words' height (a share).
      */
-    private static final float BADGE_FRAME = 3f, BADGE_MIN_HEIGHT = 26f, BADGE_CARD_SHARE = 0.14f, BADGE_ROW_SHARE = 0.62f;
+    private static final float BADGE_FRAME = 3f, BADGE_MIN_HEIGHT = 26f, BADGE_CARD_SHARE = 0.14f;
     private static final float BADGE_TOP = 0.36f, BADGE_MAX_WIDTH = 0.9f, BADGE_PAD = 1.2f, BADGE_FONT_SHARE = 0.62f;
     /** A chooser's chevron (its height, and its gap from the right end, as shares of the button's height) and hint words. */
     private static final float CHEVRON_SHARE = 0.42f, CHEVRON_PAD = 0.4f, HINT_SHARE = 0.4f;
@@ -211,13 +211,21 @@ public final class ArenaMenus {
         pill(g, words, x + (w - bw) / 2f, y + h * BADGE_TOP, bw, bh); //over the art, clear of the name
     }
 
-    /** One-click deck building: over the list row under the pointer, a faint gold wash and a pill at its right end. */
-    public static void rowBadge(final Graphics g, final String words, final float x, final float y, final float w, final float h) {
-        g.fillRect(HOVER_WASH, x, y, w, h);
-        final float bh = h * BADGE_ROW_SHARE;
-        final FSkinFont font = ArenaDialogKit.font(bh * BADGE_FONT_SHARE);
-        final float bw = ArenaArt.textWidth(words, font) + bh * BADGE_PAD;
-        pill(g, words, x + w - bw - bh * 0.3f, y + (h - bh) / 2f, bw, bh);
+    /** A one-click list row's control, as a share of the row's height. */
+    public static final float ROW_CONTROL_SHARE = 0.62f;
+
+    /**
+     * One-click deck building: the control at the end of every deck row, a round gold-rimmed button holding what a click
+     * on the row does ("-1"), so taking a card out is as plain to see as adding one.
+     */
+    public static void rowControl(final Graphics g, final String words, final float x, final float y, final float size) {
+        if (words == null) {
+            return;
+        }
+        final float r = size / 2f;
+        g.fillSmoothRoundRect(WELL, x, y, size, size, r);
+        g.drawSmoothRoundRect(lineThickness(), ArenaTheme.GOLD, x, y, size, size, r);
+        g.drawText(words, ArenaDialogKit.font(size * BADGE_FONT_SHARE * 0.8f), ArenaTheme.GOLD_BRIGHT, x, y, size, size, false, Align.center, true);
     }
 
     /**

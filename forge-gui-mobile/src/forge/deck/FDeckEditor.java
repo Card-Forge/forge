@@ -550,7 +550,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             deckHeader.setBounds(0, startY, width, HEADER_HEIGHT);
             startY += HEADER_HEIGHT;
         }
-        updateDeckSize(); //the Arena look may have just been turned on
+        if (mainDeckPage != null && getDeck() != null) {
+            mainDeckPage.updateCaption(); //the Arena look may have just been turned on: "Main (58/60)", the header's size
+        } else {
+            updateDeckSize();
+        }
         setSplitLayout(canSplitLayout());
         if (!splitLayout) {
             super.doLayout(startY, width, height);
@@ -613,8 +617,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 super.setSelectedPage(mainDeckPage != null && mainDeckPage.isTabVisible() ? mainDeckPage : firstDeckPage());
             }
             if (catalogPage.isTabVisible()) { //the catalog is always on show, so it needs no tab
-                catalogPage.hideTab();
                 catalogTabHiddenBySplit = true;
+                catalogPage.hideTabBesideDeck();
             }
             showSplitViews();
             catalogPage.setVisible(true);
@@ -1447,14 +1451,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    /** The least number of cards the format wants in the main deck, or 0 when it sets none. */
+    protected int deckSizeTarget() {
+        final DeckFormat format = editorConfig.getDeckFormat();
+        return format == null ? 0 : format.getMainRange().getMinimum();
+    }
+
     /** Arena look: the header's main deck size against the format's minimum (58 / 60). */
     protected void updateDeckSize() {
         if (!ArenaMenus.on() || deck == null) {
             return;
         }
         final int size = deck.getMain().countAll();
-        final DeckFormat format = editorConfig.getDeckFormat();
-        final int target = format == null ? 0 : format.getMainRange().getMinimum();
+        final int target = deckSizeTarget();
         deckHeader.lblDeckSize.setText(target > 0 ? size + " / " + target : String.valueOf(size));
         deckHeader.lblDeckSize.setTextColor(target > 0 && size < target ? DECK_SIZE_SHORT : DECK_SIZE_REACHED);
     }
@@ -2064,9 +2073,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 scheduleRefresh();
         }
 
+        /** Hides the tab while the page is on show beside the deck (the Arena side-by-side layout), not for good. */
+        void hideTabBesideDeck() {
+            super.hideTab();
+        }
+
         @Override
         public void hideTab() {
-            //hidden for good (a finished draft's pack page): the Arena side-by-side layout stops showing it as well
+            //hidden for good (an existing draft deck's pack page, or a finished draft's): the Arena side-by-side layout
+            //stops showing it as well
             if (parentScreen != null && parentScreen.catalogPage == this) {
                 final FDeckEditor editor = parentScreen;
                 FThreads.invokeInEdtNowOrLater(() -> { //drafts finish on a background thread
@@ -2345,7 +2360,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (deckSection == DeckSection.Commander || parentScreen.getDeck() == null) {
                 caption = captionPrefix; //don't display count for commander section since it won't be more than 1
             } else {
-                caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
+                final int count = parentScreen.getDeck().get(deckSection).countAll();
+                final int target = deckSection == DeckSection.Main && ArenaMenus.on() ? parentScreen.deckSizeTarget() : 0;
+                //the Arena look counts the main deck against its target: "Main (58/60)"
+                caption = captionPrefix + " (" + (target > 0 ? count + "/" + target : String.valueOf(count)) + ")";
             }
             parentScreen.updateDeckSize();
             if(parentScreen.hiddenExtraSections.contains(this.deckSection) && cardManager.getPool() != null && !cardManager.getPool().isEmpty())

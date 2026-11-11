@@ -282,6 +282,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         FCheckBox.drawCheckBox(g, selectedIndices.contains(index), x + w, y + (h - checkBoxSize) / 2, checkBoxSize, checkBoxSize);
                         w -= padding;
                     }
+                    else if (itemManager.isClickToActivate()) { //one-click mode: each row ends in the control a click works
+                        float size = h * ArenaMenus.ROW_CONTROL_SHARE;
+                        w -= size + size / 2;
+                        ArenaMenus.rowControl(g, itemManager.getClickBadge(value.getKey()), x + w + size / 4, y + (h - size) / 2, size);
+                    }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
                     if(itemManager.itemIsFavorite(value)) {
                         float starSize = h * 0.35f;
@@ -321,10 +326,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (index < 0 || index >= getCount()) {
                 return;
             }
-            String words = itemManager.getClickBadge(getItemAt(index).getKey());
-            if (words != null) {
-                ArenaMenus.rowBadge(g, words, 0, getItemStartPosition(index), getWidth(), getListItemRenderer().getItemHeight());
-            }
+            ArenaMenus.hoverRow(g, 0, getItemStartPosition(index), getWidth(), getListItemRenderer().getItemHeight());
         }
 
         @Override

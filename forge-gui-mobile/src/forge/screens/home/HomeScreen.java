@@ -319,8 +319,7 @@ public class HomeScreen extends FScreen {
             }
 
             if (ArenaMenus.column(g, w, h, true)) { //Arena look: a glass column, the active entry washed in gold with a bright bar
-                final float[] band = hoverBand();
-                if (band != null) {
+                if (hoverBand(band)) {
                     ArenaMenus.hoverRow(g, 0, band[0], w, band[1] - band[0]);
                 }
                 if (activeButtonIndex != -1) {
@@ -365,14 +364,18 @@ public class HomeScreen extends FScreen {
 
     /** Desktop: a faint band across the whole menu column behind the entry under the mouse. */
     private void drawHoverBand(Graphics g, com.badlogic.gdx.graphics.Color color, float columnWidth) {
-        final float[] band = hoverBand();
-        if (band != null) {
+        if (hoverBand(band)) {
             g.fillRect(color, 0, band[0], columnWidth, band[1] - band[0]);
         }
     }
 
-    /** The top and bottom of the entry under the mouse (other than the active one) in the menu column, or null. */
-    private float[] hoverBand() {
+    private final float[] band = new float[2];
+
+    /**
+     * Whether an entry of the menu column other than the active one is under the mouse; if so its top and bottom go into
+     * {@code out} (clipped to the visible part of the scrolling list).
+     */
+    private boolean hoverBand(float[] out) {
         MenuButton pointed = btnExit.isPointedAt() ? btnExit : null;
         float top = 0, bottom = 0;
         if (pointed != null) {
@@ -390,7 +393,9 @@ public class HomeScreen extends FScreen {
                 }
             }
         }
-        return pointed != null && bottom > top ? new float[] {top, bottom} : null;
+        out[0] = top;
+        out[1] = bottom;
+        return pointed != null && bottom > top;
     }
 
     private class ButtonScroller extends FScrollPane {

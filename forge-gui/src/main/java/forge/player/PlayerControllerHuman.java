@@ -1225,9 +1225,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (p != player) {
             tempShowCards(visibleToChooser);
+            final String discardFor = discardForMessage(p, sa, optional ? max : min);
             if (useSelectCardsInput(valid, sa)) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-                inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
+                inp.setMessage(discardFor);
                 inp.setCancelAllowed(optional);
                 inp.showAndWait();
                 endTempShowCards();
@@ -1237,8 +1238,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             setPromptContext(sa);
             List<CardView> views;
             try {
-                views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
-                        localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
+                views = getGui().many(discardFor, localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
             } finally {
                 clearPromptContext();
             }
@@ -1249,9 +1249,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
-        inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
+        final Card host = sa.getHostCard();
+        if (getGui().isLibgdxPort() && host != null) { //the libGDX prompt says what makes you discard and where the cards go
+            inp.setMessage(localizer.getMessage(sa.hasParam("AnyNumber") ? "lblDiscardOwnUpToForEffect" : "lblDiscardOwnForEffect",
+                    host.getName(), "%d"));
+        } else {
+            inp.setMessage(sa.hasParam("AnyNumber") ? localizer.getMessage("lblDiscardUpToNCards") : localizer.getMessage("lblDiscardNCards"));
+        }
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
+    }
+
+    /**
+     * The words of a discard chosen for another player: in the libGDX client what makes them discard and where the cards
+     * go ("Mind Rot makes Arryn discard. Choose 2 of their cards to put into their graveyard."), else the plain count.
+     */
+    private String discardForMessage(final Player p, final SpellAbility sa, final int count) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (!getGui().isLibgdxPort() || host == null) {
+            return String.format(localizer.getMessage("lblChooseMinCardToDiscard"), count);
+        }
+        return localizer.getMessage("lblDiscardForEffectBody", host.getName(), p.getName(), count);
     }
 
     @Override
@@ -1843,7 +1861,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGui().setPromptContext(null, localizer.getMessageorUseDefault("lblDiscardToHandSize", "Discard to hand size ({0} max)", max));
             List<CardView> views;
             try {
-                views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
+                //the body says why (the hand is over its maximum) and where the cards go
+                views = getGui().many(localizer.getMessage("lblDiscardToHandSizeBody", player.getCardsIn(ZoneType.Hand).size(), max, nDiscard),
                         localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
             } finally {
                 clearPromptContext();

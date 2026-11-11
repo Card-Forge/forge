@@ -814,7 +814,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
         if (clip) {
             g.endClip();
-            drawChevrons(g, h, alpha);
+            drawChevrons(g, h, dx, alpha);
         }
         if (mode == Mode.ARRANGE) {
             for (int i = 0; i < items.size(); i++) {
@@ -869,16 +869,51 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         }
     }
 
-    /** The round arrows at the ends of a row that scrolls, on the sides that have more. */
-    private void drawChevrons(final Graphics g, final float h, final float alpha) {
+    /**
+     * The round arrows at the ends of a row that scrolls, on the sides that have more, each with how many cards lie past
+     * it ("3 more") under it, so the arrow says what it brings into view.
+     */
+    private void drawChevrons(final Graphics g, final float h, final float dx, final float alpha) {
         final float d = Math.round(h * 0.06f) + 2, cy = Math.round(h * ArenaDialogKit.ROW_CENTRE_Y);
+        int before = 0, after = 0;
+        for (final Item item : items) {
+            final float x = item.x.get() + dx;
+            if (x < viewX) {
+                before++;
+            } else if (x > viewX + viewW) {
+                after++;
+            }
+        }
         if (scroll.get() > 1f) {
-            ArenaDialogKit.roundButton(g, viewX + Math.round(h * 0.004f) + d / 2f, cy, d, -1, 0, false, false, alpha);
+            final float cx = viewX + Math.round(h * 0.004f) + d / 2f;
+            ArenaDialogKit.roundButton(g, cx, cy, d, -1, 0, false, false, alpha);
+            chevronLabel(g, before, cx, cy + d / 2f, d, alpha);
         }
         if (scroll.get() < maxScroll - 1f) {
-            ArenaDialogKit.roundButton(g, viewX + viewW - Math.round(h * 0.004f) - d / 2f, cy, d, 1, 0, false, false, alpha);
+            final float cx = viewX + viewW - Math.round(h * 0.004f) - d / 2f;
+            ArenaDialogKit.roundButton(g, cx, cy, d, 1, 0, false, false, alpha);
+            chevronLabel(g, after, cx, cy + d / 2f, d, alpha);
         }
     }
+
+    /** Under a scroll arrow: how many cards it brings into view. */
+    private static void chevronLabel(final Graphics g, final int count, final float cx, final float top, final float d, final float alpha) {
+        if (count <= 0) {
+            return;
+        }
+        if (morePattern == null) { //looked up once: "%d more"
+            morePattern = Forge.getLocalizer().getMessage("lblArenaMoreCards", "%d");
+        }
+        final String words = String.format(morePattern, count);
+        final FSkinFont font = ArenaDialogKit.font(d * CHEVRON_LABEL_SHARE);
+        final float lw = d * 2.4f, lh = d * 0.5f;
+        ArenaArt.textShadowed(g, words, font, ArenaTheme.alpha(ArenaTheme.TEXT, alpha, LABEL_COLOR), cx - lw / 2f, top + d * 0.08f, lw, lh, Align.center);
+    }
+
+    /** A scroll arrow's label: its words' height as a share of the arrow's size. */
+    private static final float CHEVRON_LABEL_SHARE = 0.32f;
+    private static final Color LABEL_COLOR = new Color();
+    private static String morePattern;
 
     private boolean chevronAt(final float x, final float y, final int side) {
         if (!rowScrolls) {

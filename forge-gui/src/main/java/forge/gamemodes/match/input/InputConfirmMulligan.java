@@ -17,7 +17,10 @@
  */
 package forge.gamemodes.match.input;
 
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -73,8 +76,28 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblKeep"), localizer.getMessage("lblMulligan"), true, true, true);
         sb.append(localizer.getMessage("lblDoYouWantToKeepYourHand"));
+        final String explained = getController().getGui().isLibgdxPort() ? explainLondon(localizer, game) : "";
+        if (!explained.isEmpty()) { //the libGDX prompt says what each answer does
+            sb.append("\n").append(explained);
+        }
 
         showMessage(sb.toString());
+    }
+
+    /**
+     * Under the London rule, what Keep and Mulligan do now: keep these cards, or shuffle them away, draw a new hand and put
+     * this many on the bottom (one more than the mulligans before it, the first one free in multiplayer and Brawl).
+     */
+    private String explainLondon(final Localizer localizer, final Game game) {
+        if (StaticData.instance().getMulliganRule() != MulliganDefs.MulliganRule.London) {
+            return "";
+        }
+        final boolean firstFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
+        final int tuck = player.getStats().getMulliganCount() + 1 - (firstFree ? 1 : 0);
+        final int hand = player.getCardsIn(ZoneType.Hand).size();
+        final int draw = player.getMaxHandSize();
+        return tuck > 0 ? localizer.getMessage("lblMulliganExplainLondon", hand, draw, tuck)
+                : localizer.getMessage("lblMulliganExplainFree", hand, draw);
     }
 
     @Override
