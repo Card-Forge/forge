@@ -242,6 +242,10 @@ public class GameFormat implements Comparable<GameFormat> {
         return additionalCardNames_ro;
     }
 
+    public DeckRules getDeckRules() {
+        return deckRules;
+    }
+
     /** The points cap a deck must stay within, or 0 when the format has no points list. */
     public int getMaxPoints() {
         return deckRules.cardPoints().isEmpty() ? 0 : deckRules.maxPoints();
