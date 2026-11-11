@@ -3,7 +3,7 @@ ManaCost:4 G W
 Types:Legendary Planeswalker Ajani
 Loyalty:4
 A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Permanent.nonLand | SpellDescription$ Reveal the top three cards of your library. Put all nonland permanent cards revealed this way into your hand and the rest on the bottom of your library in any order.
-A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | RememberLKI$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | RememberLKI$ True | AlwaysRemember$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup | SpellDescription$ Its controller gains life equal to its power.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower

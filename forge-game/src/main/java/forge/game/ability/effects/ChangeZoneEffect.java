@@ -558,8 +558,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (sa.hasParam("RememberLKI")) {
-                hostCard.addRemembered(CardCopyService.getLKICopy(gameCard));
+            final Card lkiCopy = sa.hasParam("RememberLKI") ? CardCopyService.getLKICopy(gameCard) : null;
+            if (lkiCopy != null && sa.hasParam("AlwaysRemember")) {
+                hostCard.addRemembered(lkiCopy);
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", gameCard.getTranslatedName(), Lang.joinHomogenous(origin, ZoneType::getTranslatedName), destination.getTranslatedName()));
@@ -784,6 +785,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("TrackDiscarded")) {
                     movedCard.setDiscarded(true);
                 }
+            }
+            if (lkiCopy != null && !sa.hasParam("AlwaysRemember") && movedCard.getZone().is(destination)) {
+                hostCard.addRemembered(lkiCopy);
             }
             if (!movedCard.getZone().equals(originZone)) {
                 Card meld = null;
@@ -1496,7 +1500,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-                if (sa.hasParam("RememberLKI")) {
+                if (sa.hasParam("RememberLKI") && (sa.hasParam("AlwaysRemember") || movedCard.getZone().is(destination))) {
                     source.addRemembered(CardCopyService.getLKICopy(c));
                 }
                 if (forget) {

@@ -47,7 +47,7 @@ SVar:Damage1:DB$ DealDamage | NumDmg$ 1 | Random$ True | CardChoices$ Creature |
 SVar:Nerf:DB$ ChooseCard | Choices$ Creature.Other | AtRandom$ True | SubAbility$ DBAnimate18 | SpellDescription$ A creature other than CARDNAME chosen at random becomes 0/2 until end of turn.
 SVar:DBAnimate18:DB$ Animate | Defined$ ChosenCard | Power$ 0 | Toughness$ 2 | SubAbility$ DBCleanup
 SVar:Exile:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone19 | SpellDescription$ Exile a creature chosen at random. Its controller gains life equal to its power.
-SVar:DBChangeZone19:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBGainLife19
+SVar:DBChangeZone19:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ DBGainLife19
 SVar:DBGainLife19:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X19 | SubAbility$ DBCleanup
 SVar:X19:RememberedLKI$CardPower
 SVar:Orcish:DB$ ChooseCard | Choices$ Creature | Amount$ Random | AtRandom$ True | SubAbility$ DBPutCounter20 | SpellDescription$ Randomly distribute X -0/-1 counters among a random number of creatures chosen at random, where X is the number of creatures in play.
