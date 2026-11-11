@@ -255,7 +255,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, "MAIN2", true, "Pithing Needle",
                 c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.counters(c.bf("Wrenn and Six", c.opp), CounterEnumType.LOYALTY, 3); /* (bf() adds no loyalty and the walker would die) a planeswalker is what the AI Needles for sure; a plain activated ability is only a 5% roll, and a mana ability (Sol Ring) is exempt */ }));
         l.add(play("4279", "Solitary Confinement", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
-                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.bf("Grizzly Bears", c.opp); }));
+                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Grizzly Bears", c.ai); /* discard fodder for its upkeep: uncastable with Plains only, and not a land drop */ c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, "MAIN2", true, "Forge Anew",
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.gy("Bonesplitter", c.ai); /* its enter trigger needs an Equipment in the graveyard */ c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
@@ -333,7 +333,9 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.hand("Grief", c.ai); c.hand("Thoughtseize", c.ai); c.bf("Leyline of Sanctity", c.opp); c.hand("Lightning Bolt", c.opp); }));
         l.add(new Scenario("4278", "Up the Beanstalk before the 5+ cost spell (should be the first play)", Fid.EXACT, M1, true,
                 c -> { c.bf("Forest", 10, c.ai); c.hand("Up the Beanstalk", c.ai); c.hand("Craterhoof Behemoth", c.ai); },
-                c -> { final SpellAbility sa = c.first(); return sa != null && sa.getHostCard().getName().equals("Up the Beanstalk") ? null : "first play was " + sa; }));
+                c -> { final SpellAbility sa = c.first();
+                    return sa != null && sa.getHostCard().getName().equals("Up the Beanstalk") ? null
+                            : "first play was " + sa + c.why("Up the Beanstalk") + c.why("Craterhoof Behemoth"); }));
         l.add(noPlay("4299", "Preordain in the player's upkeep under Teferi, Time Raveler", Fid.EXACT, "UPKEEP", false, "Preordain",
                 c -> { c.bf("Island", 2, c.ai); c.hand("Preordain", c.ai); c.bf("Teferi, Time Raveler", c.opp); }));
         l.add(noPlay("4325", "Angel's Grace against non-lethal damage", Fid.APPROX, M1, false, "Angel's Grace",
@@ -548,7 +550,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("6031", "plays a different Urza's land than the one already in play", Fid.EXACT, M1, true,
                 c -> { c.bf("Urza's Tower", c.ai); c.hand("Urza's Tower", c.ai); c.hand("Urza's Mine", c.ai); },
                 c -> { final List<Card> p = c.landPlays(); return !p.isEmpty() && p.get(0).getName().equals("Urza's Mine") ? null : "first land drop: " + p; }));
-        l.add(new Scenario("6105", "Suppression Field, not Stony Silence, against non-artifact abilities", Fid.EXACT, M1, true,
+        l.add(new Scenario("6105", "Suppression Field, not Stony Silence, against non-artifact abilities", Fid.EXACT, "MAIN2", true,
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Stony Silence", c.ai); c.hand("Suppression Field", c.ai); c.bf("Mother of Runes", c.opp); c.bf("Giver of Runes", c.opp); },
                 c -> { final SpellAbility sa = c.first(); return sa != null && sa.getHostCard().getName().equals("Suppression Field") ? null : "first play was " + sa + c.why("Suppression Field") + c.why("Stony Silence"); }));
         l.add(play("6617", "noncreature spell before combat with a prowess creature", Fid.EXACT, M1, true, "Lightning Bolt",
