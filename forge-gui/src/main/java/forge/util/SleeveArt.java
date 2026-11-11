@@ -1,5 +1,9 @@
 package forge.util;
 
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Base64;
@@ -84,6 +88,29 @@ public final class SleeveArt {
             entries.putIfAbsent(key, offset);
         }
         return entries;
+    }
+
+    /** Saves a card-art sleeve in the preferences' library, newest last. */
+    public static void remember(final String imageKey, final int offset) {
+        if (imageKey == null || imageKey.isEmpty()) {
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        final LinkedHashMap<String, Integer> library = parseLibrary(prefs.getPref(FPref.UI_SLEEVE_ART_LIBRARY));
+        library.remove(imageKey);
+        library.put(imageKey, clampOffset(offset));
+        prefs.setPref(FPref.UI_SLEEVE_ART_LIBRARY, formatLibrary(library));
+        prefs.save();
+    }
+
+    /** Removes a card-art sleeve from the preferences' library. */
+    public static void forget(final String imageKey) {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final LinkedHashMap<String, Integer> library = parseLibrary(prefs.getPref(FPref.UI_SLEEVE_ART_LIBRARY));
+        if (library.remove(imageKey) != null) {
+            prefs.setPref(FPref.UI_SLEEVE_ART_LIBRARY, formatLibrary(library));
+            prefs.save();
+        }
     }
 
     public static String formatLibrary(final Map<String, Integer> entries) {
