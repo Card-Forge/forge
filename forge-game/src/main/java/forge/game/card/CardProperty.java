@@ -1963,7 +1963,7 @@ public class CardProperty {
                 return false;
             }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, CardDb.EDITION_NON_REPRINT);
             if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }

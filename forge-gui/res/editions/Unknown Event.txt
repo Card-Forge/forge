@@ -69,7 +69,8 @@ CW02 C Unclaimed Cat @
 CZ02 C Spare Changeling @
 MW02 M You, Magic Playtester @
 MW02a M You, Iterative Playtester @
-MZ02 M Delphia, Undecided @
+MZ02a M Delphia, Undecided @ ${"variant": "A"}
+MZ02 M Delphia, Undecided @ ${"variant": "B"}
 RA02a R Goblin Savant @
 RA02b R Huge Truck @
 RA02c R Jitte and Divining Top @
