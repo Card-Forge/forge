@@ -77,7 +77,9 @@ public class DuelScene extends ForgeScene {
     EnemySprite enemy;
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
+    private EffectData biomeEffect;
     private EffectData dungeonEffect;
+    private boolean ignoreGlobalEffect;
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
@@ -251,7 +253,6 @@ public class DuelScene extends ForgeScene {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
             GameHUD.getInstance().updateBGM();
-            dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
             Forge.clearScreenStack();
@@ -363,13 +364,24 @@ public class DuelScene extends ForgeScene {
         player.addExtraCardsInCommandZone(startCardsInCommandZone);
         if (lifeMod != 0)
             player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
-        player.setStartingHand(player.getStartingHand() + changeStartCards);
+        player.setStartingHand(Math.max(0, player.getStartingHand() + changeStartCards));
         player.setManaShards((player.getManaShards() + extraManaShards));
         player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
     }
 
-    public void setDungeonEffect(EffectData E) {
-        dungeonEffect = E;
+    /** The enemy's own opt-outs are applied when the duel starts, so callers pass only the place's layers and opt-out. */
+    public void setEffectLayers(EffectData biomeEffect, EffectData dungeonEffect, boolean ignoreGlobalEffect) {
+        this.biomeEffect = biomeEffect;
+        this.dungeonEffect = dungeonEffect;
+        this.ignoreGlobalEffect = ignoreGlobalEffect;
+    }
+
+    private static void addEffect(Array<EffectData> ownSide, Array<EffectData> otherSide, EffectData effect) {
+        if (effect == null)
+            return;
+        ownSide.add(effect);
+        if (effect.opponent != null)
+            otherSide.add(effect.opponent);
     }
 
     /** True while enemy decks are being generated in the background (Forge.switchScene must keep the VS screen up). */
@@ -486,20 +498,16 @@ public class DuelScene extends ForgeScene {
                 playerEffects.add(advPlayer.getBlessing());
                 if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
             }
-
-            //Collect and add enemy effects (same as blessings but for individual enemies).
-            if (enemy.effect != null) {
-                oppEffects.add(enemy.effect);
-                if (enemy.effect.opponent != null)
-                    playerEffects.add(enemy.effect.opponent);
-            }
         }
-        //Collect and add dungeon-wide effects.
-        if (dungeonEffect != null) {
-            oppEffects.add(dungeonEffect);
-            if (dungeonEffect.opponent != null)
-                playerEffects.add(dungeonEffect.opponent);
-        }
+        //The plane-wide effect sides with the player like a blessing, and the other layers side with the enemies.
+        if (!ignoreGlobalEffect && !enemy.ignoreGlobalEffect)
+            addEffect(playerEffects, oppEffects, Config.instance().getConfigData().globalEffect);
+        if (!enemy.ignoreBiomeEffect)
+            addEffect(oppEffects, playerEffects, biomeEffect);
+        if (!enemy.ignoreDungeonEffect)
+            addEffect(oppEffects, playerEffects, dungeonEffect);
+        if (eventData == null || eventData.eventRules.allowsBlessings)
+            addEffect(oppEffects, playerEffects, enemy.effect);
 
         applyAdventureDeckRules(mainGameType.getDeckFormat(), allowsIllegalCommander(playerEffects));
         humanPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, playerDeck, null, false, null, null);
@@ -909,6 +917,8 @@ public class DuelScene extends ForgeScene {
         enemyAvatar.clear();
         this.isArena = isArena;
         this.eventData = eventData;
+        //Each caller sets the layers of its own place after this call.
+        setEffectLayers(null, null, false);
         if (eventData != null && eventData.eventRules == null)
             eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
         this.arenaBattleChallenge = isArena && Current.player().isHardorInsaneDifficulty();

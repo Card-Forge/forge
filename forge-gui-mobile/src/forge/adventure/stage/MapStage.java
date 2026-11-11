@@ -1174,8 +1174,7 @@ public class MapStage extends GameStage {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         started = false;
                         duelScene.initDuels(player, mob);
-                        if (isInMap && effect != null && !mob.ignoreDungeonEffect)
-                            duelScene.setDungeonEffect(effect);
+                        duelScene.setEffectLayers(null, isInMap ? effect : null, false);
                         Forge.switchScene(duelScene);
                     }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                 }
