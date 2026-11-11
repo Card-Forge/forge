@@ -143,6 +143,39 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     /**
+     * A permanent "{X}: CARDNAME has base power and toughness X/X" (Gigantoplasm, or a copy of it) that, with all the mana
+     * that can be spared as X, would not make the creature any bigger: it changes nothing and, being permanent, is allowed
+     * at any time, so the AI would otherwise repeat it at every priority pass.
+     */
+    public static boolean isRedundantPermanentPtSet(final Player ai, SpellAbility sa) {
+        sa = sa.getRootAbility();
+        if (sa.getApi() != ApiType.Animate || sa.usesTargeting() || !"Permanent".equals(sa.getParam("Duration"))
+                || !sa.hasParam("Power") || !sa.hasParam("Toughness")
+                || !("Self".equals(sa.getParam("ValidCards")) || "Self".equals(sa.getParam("Defined")))) {
+            return false;
+        }
+        if (sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords") || sa.hasParam("Types") || sa.hasParam("RemoveTypes")
+                || sa.hasParam("Colors") || sa.hasParam("Abilities") || sa.hasParam("Triggers")
+                || sa.hasParam("Replacements") || sa.hasParam("staticAbilities") || sa.hasParam("sVars")
+                || sa.getSubAbility() != null) {
+            return false; // might be worth it for what it grants
+        }
+        final Card host = sa.getHostCard();
+        if (host == null || !host.isInZone(ZoneType.Battlefield) || !host.isCreature()) {
+            return false;
+        }
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            final int x = ComputerUtilMana.determineLeftoverMana(sa, ai, false);
+            if (x <= 0) {
+                return true; // nothing to size it with
+            }
+            sa.setXManaCostPaid(x);
+        }
+        final Card animated = becomeAnimated(host, sa);
+        return animated.getCurrentPower() + animated.getCurrentToughness() <= host.getCurrentPower() + host.getCurrentToughness();
+    }
+
+    /**
      * An "until end of turn" animate of the source itself (Mutavault, Mishra's Factory, a Vehicle's crew ability...)
      * that leaves it unable to attack or block is wasted mana, no matter how the board looks afterwards: e.g. a
      * tapped Mutavault is still a Rat that makes Pack Rat bigger, which a board evaluation happily counts as a gain.
@@ -201,6 +234,9 @@ public class AnimateAi extends SpellAbilityAi {
         }
         if (isPointlessSelfAnimate(aiPlayer, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
+        }
+        if (isRedundantPermanentPtSet(aiPlayer, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);

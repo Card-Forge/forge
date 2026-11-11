@@ -354,6 +354,14 @@ public class SpellAbilityPicker {
         if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
             return AiPlayDecision.DoesntImpactCombat;
         }
+        if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()
+                && sa.getSVar("X").equals("Count$xPaid")
+                && (ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), player, false) <= 0
+                    || AnimateAi.isRedundantPermanentPtSet(player, sa))) {
+            // an {X} ability paid with X=0, or one that would change nothing: the simulation would happily "play" it at
+            // every priority pass
+            return AiPlayDecision.CantAffordX;
+        }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;
         }

@@ -314,6 +314,8 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("3994", "burn at a creature it cannot kill (Lightning Bolt should not target Wurmcoil Engine)", Fid.EXACT, M1, true,
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Wurmcoil Engine", c.opp); },
                 c -> { final Card t = c.target(c.playOf("Lightning Bolt")); return t != null && t.getName().equals("Wurmcoil Engine") ? "Bolt aimed at Wurmcoil Engine" : null; }));
+        l.add(noPlay("X0", "an {X} animate with no spare mana is paid with X=0 and repeated at every priority pass", Fid.EXACT, "DRAW", false, "Chimeric Staff",
+                c -> { c.bf("Chimeric Staff", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(noPlay("4122", "Persist on Orcish Bowmasters", Fid.EXACT, M1, true, "Persist",
                 c -> { c.bf("Swamp", 3, c.ai); c.hand("Persist", c.ai); c.gy("Orcish Bowmasters", c.ai); }));
         l.add(noPlay("4124", "Underworld Breach with an empty graveyard", Fid.EXACT, M1, true, "Underworld Breach",
