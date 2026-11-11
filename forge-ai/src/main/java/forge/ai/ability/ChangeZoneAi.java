@@ -671,6 +671,43 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
+    /** The target comes back with -1/-1 counters that take all its toughness (Persist on a 1/1). */
+    private static boolean diesToItsOwnMinusCounters(final SpellAbility sa) {
+        if (!"M1M1".equals(sa.getParam("WithCountersType"))) {
+            return false;
+        }
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+        for (final Card c : sa.getTargets().getTargetCards()) {
+            if (c.getNetToughness() - amount <= 0 && !c.hasKeyword(Keyword.PERSIST) && !c.hasKeyword(Keyword.UNDYING)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A spell that returns a creature card with -1/-1 counters (Persist) when every creature card it could return dies to
+     * them: there is nothing worth the spell, however the rollouts like the enter-the-battlefield trigger (#4122).
+     */
+    public static boolean onlyReturnsCreaturesThatDie(final Player ai, final SpellAbility sa) {
+        if (sa == null || sa.getApi() != ApiType.ChangeZone || !"M1M1".equals(sa.getParam("WithCountersType"))
+                || !"Battlefield".equals(sa.getParam("Destination")) || !sa.usesTargeting()) {
+            return false;
+        }
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+        boolean any = false;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Graveyard)) {
+            if (!sa.canTarget(c)) {
+                continue;
+            }
+            any = true;
+            if (c.getNetToughness() - amount > 0 || c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING)) {
+                return false;
+            }
+        }
+        return any;
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -686,6 +723,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (destination == ZoneType.Battlefield && diesToItsOwnMinusCounters(sa)) {
+                // Persist on a 1/1: it comes back with a -1/-1 counter and is gone again (#4122)
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
             }
         } else {
             // non-targeted retrieval

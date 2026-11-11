@@ -728,6 +728,11 @@ public final class FlatMonteCarloPicker {
             }
         }
 
+        if (best != 0 && keepsMoreDangerousTarget(player, cands.get(0), cands.get(best))) {
+            // the rollouts only see stats: an opposing creature with an effect (Doran, a death engine) outranks them
+            best = 0;
+        }
+
         final Candidate chosen = cands.get(best);
         final String reason = chosen.isHold() ? "hold" : best == 0 ? "kept-heuristic"
                 : chosen.target != null ? "target-override" : "override";
@@ -1535,6 +1540,21 @@ public final class FlatMonteCarloPicker {
             result.add(usable.get(i));
         }
         return result;
+    }
+
+    /**
+     * Whether the heuristics aimed at an opposing creature whose own abilities make it worth removing first and the
+     * variant aims at a creature without that (#4171): the rollouts value both by their stats alone.
+     */
+    private static boolean keepsMoreDangerousTarget(final Player player, final Candidate heuristic, final Candidate variant) {
+        if (heuristic == null || variant == null || heuristic.sa == null || !(variant.target instanceof Card)) {
+            return false;
+        }
+        final SpellAbility ts = singleTargetingAbility(heuristic.sa);
+        final Card kept = ts == null ? null : ts.getTargets().getFirstTargetedCard();
+        final Card other = (Card) variant.target;
+        return kept != null && kept.isCreature() && other.isCreature() && kept.getController().isOpponentOf(player)
+                && ComputerUtilCard.removalEffectBonus(kept) > ComputerUtilCard.removalEffectBonus(other);
     }
 
     /** True for the AI itself and its permanents, false for opponents and theirs, null for anything else. */

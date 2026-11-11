@@ -178,7 +178,7 @@ public class ComputerUtilAbility {
         }
     }
 
-    private static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
+    public static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
         final Card host = payoff.getHostCard();
         final Card cast = spell.getHostCard();
         if (!spell.isSpell() || cast == null || cast == host) {

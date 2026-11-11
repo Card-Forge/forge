@@ -331,9 +331,9 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 2, c.ai); c.hand("Preordain", c.ai); c.bf("Teferi, Time Raveler", c.opp); }));
         l.add(noPlay("4325", "Angel's Grace against non-lethal damage", Fid.APPROX, M1, false, "Angel's Grace",
                 c -> { c.bf("Plains", c.ai); c.hand("Angel's Grace", c.ai); c.stack(c.opp, "Lightning Bolt", c.ai); }));
-        l.add(new Scenario("4443", "kicked Bloodchief's Thirst on a 2-mana creature (should be cast unkicked)", Fid.APPROX, M1, true,
-                c -> { c.bf("Swamp", 4, c.ai); c.hand("Bloodchief's Thirst", c.ai); c.bf("Grizzly Bears", c.opp); },
-                c -> { final SpellAbility sa = c.playOf("Bloodchief's Thirst"); return sa == null ? "not cast at all" : sa.isKicked() ? "cast kicked" : null; }));
+        l.add(new Scenario("4443", "kicked Bloodchief's Thirst on a 2-mana creature (kicker only for a 3+ mana value target)", Fid.APPROX, M1, true,
+                c -> { c.bf("Swamp", 4, c.ai); c.hand("Bloodchief's Thirst", c.ai); c.hand("Smallpox", c.ai); c.bf("Giant Ox", c.opp); c.bf("Grizzly Bears", c.opp); },
+                c -> { final SpellAbility sa = c.playOf("Bloodchief's Thirst"); return sa != null && sa.isKicked() ? "cast kicked on a creature of mana value 2 or less" : null; }));
         l.add(noPlay("5891", "flickering Grief when the player has no cards in hand", Fid.APPROX, M1, true, "Ephemerate",
                 c -> { c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); c.bf("Grief", c.ai); }));
 
@@ -504,7 +504,19 @@ public class AiReportScenarioTest extends AITest {
                 c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Rift Bolt") && !sa.getDescription().contains("Suspend")) ? null : "only suspended it"));
         l.add(new Scenario("5901", "Guide of Souls: pays the energy for its second ability when attacking", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Guide of Souls", c.ai); c.bf("Grizzly Bears", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 6); },
-                c -> { c.attackers(); c.resolveAll(); return c.ai.getCounters(CounterEnumType.ENERGY) < 6 ? null : "energy never spent"; }));
+                c -> {
+                    final Combat combat = new Combat(c.ai);
+                    c.ai.getController().declareAttackers(c.ai, combat);
+                    c.game.getPhaseHandler().setCombat(combat);
+                    if (combat.getAttackers().isEmpty()) { return "AI did not attack"; }
+                    final java.util.Map<forge.game.ability.AbilityKey, Object> p = forge.game.ability.AbilityKey.newMap();
+                    p.put(forge.game.ability.AbilityKey.Attackers, combat.getAttackers());
+                    p.put(forge.game.ability.AbilityKey.AttackingPlayer, c.ai);
+                    p.put(forge.game.ability.AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
+                    c.game.getTriggerHandler().runTrigger(forge.game.trigger.TriggerType.AttackersDeclared, p, false);
+                    c.resolveAll();
+                    return c.ai.getCounters(CounterEnumType.ENERGY) < 6 ? null : "energy never spent";
+                }));
         l.add(aimed("5940", "Calibrated Blast on the creature that gives the player hexproof", Fid.APPROX, M1, true, "Calibrated Blast", "Shalai, Voice of Plenty",
                 c -> { c.bf("Mountain", 2, c.ai); c.hand("Calibrated Blast", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(new Scenario("6031", "plays a different Urza's land than the one already in play", Fid.EXACT, M1, true,

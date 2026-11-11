@@ -632,6 +632,17 @@ public class ComputerUtilCost {
                                 extraManaNeeded += wardCost.getTotalMana().getCMC();
                             }
                         }
+                        // the same tax written as a trigger (Unsettled Mariner): counter it unless its controller pays
+                        final Cost tax = targetingTax(tgt, sa.getHostCard().getController());
+                        if (tax != null) {
+                            final SpellAbilityAi topAI = new SpellAbilityAi() {};
+                            if (!topAI.willPayCosts(payer, sa, tax, sa.getHostCard())) {
+                                return false;
+                            }
+                            if (tax.hasManaCost()) {
+                                extraManaNeeded += tax.getTotalMana().getCMC();
+                            }
+                        }
                     }
                 }
             }
@@ -654,6 +665,46 @@ public class ComputerUtilCost {
         // TODO both of these call CostAdjustment.adjust, try to reuse instead
         return ComputerUtilMana.canPayManaCost(cost, sa, payer, extraManaNeeded, effect)
                 && CostPayment.canPayAdditionalCosts(cost, sa, effect, payer);
+    }
+
+    /**
+     * "Whenever it becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its
+     * controller pays {N}" on an opposing permanent that does not use the Ward keyword (Unsettled Mariner, #4054).
+     */
+    private static Cost targetingTax(final Card tgt, final Player attacker) {
+        if (!tgt.isInPlay() || !tgt.getController().isOpponentOf(attacker)) {
+            return null;
+        }
+        Cost total = null;
+        for (final Card c : tgt.getController().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.BecomesTarget || !t.hasParam("Execute") || !t.hasParam("ValidTarget")) {
+                    continue;
+                }
+                final String exec = c.getSVar(t.getParam("Execute"));
+                final java.util.regex.Matcher m = java.util.regex.Pattern.compile("DB\\$ Counter\\b.*UnlessCost\\$ ([^|]+?)\\s*(\\||$)").matcher(exec);
+                if (!m.find()) {
+                    continue;
+                }
+                boolean valid = false;
+                for (final String v : t.getParam("ValidTarget").split(",")) {
+                    if (tgt.isValid(v, c.getController(), c, null)) {
+                        valid = true;
+                        break;
+                    }
+                }
+                if (!valid) {
+                    continue;
+                }
+                try {
+                    final Cost one = new Cost(m.group(1).trim(), false);
+                    total = total == null ? one : total.add(one);
+                } catch (final RuntimeException e) {
+                    // a cost the AI cannot read (X ...): left to the trigger
+                }
+            }
+        }
+        return total;
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {

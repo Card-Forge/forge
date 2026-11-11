@@ -589,10 +589,43 @@ public class ComputerUtilCard {
         return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 
+    /** An effect that changes the whole board for everyone (Doran, the Siege Tower): removing it matters more than its stats. */
+    private static final int BOARD_WIDE_EFFECT_BONUS = 160;
+    /** An anthem for its controller's creatures. */
+    private static final int ANTHEM_BONUS = 40;
+    /** "Whenever another creature you control dies ..." (Zulaport Cutthroat, Blood Artist): slightly more than a single use. */
+    private static final int DEATH_ENGINE_BONUS = 25;
+
+    /**
+     * What a creature does besides its stats that makes it worth removing first, read from its own abilities: a static
+     * ability on creatures of every player, one on the controller's creatures, a trigger on other creatures dying (#4129, #4171).
+     */
+    public static int removalEffectBonus(final Card c) {
+        int bonus = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            final String valid = st.getParamOrDefault("ValidCard", st.getParamOrDefault("Affected", ""));
+            if (!valid.startsWith("Creature") || valid.contains("Self")) {
+                continue;
+            }
+            if (valid.contains("YouCtrl")) {
+                bonus = Math.max(bonus, ANTHEM_BONUS);
+            } else if (!valid.contains("OppCtrl")) {
+                bonus = Math.max(bonus, BOARD_WIDE_EFFECT_BONUS);
+            }
+        }
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))
+                    && "Graveyard".equals(t.getParam("Destination")) && t.getParamOrDefault("ValidCard", "").contains("Creature")) {
+                bonus = Math.max(bonus, DEATH_ENGINE_BONUS);
+            }
+        }
+        return bonus;
+    }
+
     private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
         int value;
         if (c.isCreature()) {
-            value = evaluateCreature(c);
+            value = evaluateCreature(c) + removalEffectBonus(c);
         } else if (c.isLand()) {
             value = evaluateLandRemovalPriority(ai, c, null, false);
         } else {

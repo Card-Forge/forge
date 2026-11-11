@@ -17,6 +17,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -70,11 +71,35 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        if (!pDefined.isEmpty() && !worthUntappingItself(ai, sa, pDefined.get(0))) {
+            // a timing decision: the rollouts must not add the activation back as a discovered play either
+            return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
+        }
         if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
             // If the defined card is tapped, or if there are no defined cards, we can play this ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+    }
+
+    /**
+     * A creature that pays mana to untap itself (Sleep-Cursed Faerie) is untapped for combat: to attack with it before
+     * the attackers are declared, or to block with it once the opponent has attacked. Not in response to just any spell,
+     * and not while a stun counter would take the untap (#6391).
+     */
+    private static boolean worthUntappingItself(final Player ai, final SpellAbility sa, final Card untapped) {
+        if (!sa.isActivatedAbility() || !untapped.equals(sa.getHostCard()) || !untapped.isCreature()
+                || sa.getPayCosts().hasTapCost() || !sa.getPayCosts().hasManaCost()) {
+            return true;
+        }
+        if (untapped.getCounters(CounterEnumType.STUN) > 0) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            return ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS);
+        }
+        return ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS);
     }
 
     @Override

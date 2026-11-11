@@ -2512,9 +2512,20 @@ public class AiController {
         // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
         // fall back to the other approved plays in heuristic order if the heuristics no longer like it.
         final List<SpellAbility> order = new ArrayList<>();
+        // a permanent that pays off for the chosen spell (Up the Beanstalk draws for a spell of mana value 5 or more) goes
+        // first when the mana covers both: cast after the spell it only misses the card (#4278)
+        final int manaNow = ComputerUtilMana.getAvailableManaEstimate(player);
+        for (final SpellAbility sa : approved) {
+            if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && result.choice.isSpell()
+                    && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                    && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= manaNow) {
+                order.add(sa);
+                break;
+            }
+        }
         order.add(result.choice);
         for (final SpellAbility sa : approved) {
-            if (sa != result.choice) {
+            if (sa != result.choice && !order.contains(sa)) {
                 order.add(sa);
             }
         }
@@ -2762,6 +2773,10 @@ public class AiController {
         }
         if (opinion == AiPlayDecision.BadEtbEffects && sa.isSpell() && hasTargetedEtb(sa.getHostCard())) {
             return false; // an exile or removal on entering with nothing worth aiming at: the heuristics found no target
+        }
+
+        if (forge.ai.ability.ChangeZoneAi.onlyReturnsCreaturesThatDie(player, sa)) {
+            return false; // Persist with nothing but 1/1s to return: the rollouts like the trigger, the card is still wasted
         }
 
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
