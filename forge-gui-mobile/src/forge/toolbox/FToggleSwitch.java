@@ -160,6 +160,9 @@ public class FToggleSwitch extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        if (forge.screens.match.arena.ArenaMenus.toggleSwitch(g, getWidth(), getHeight(), toggled, pressed, toggled ? onText : offText, font)) {
+            return; //Arena look: a dark well with a gold rim, the knob in gold
+        }
         float x = BORDER_THICKNESS; //leave a pixel so border displays in full
         float y = BORDER_THICKNESS;
         float w = getWidth() - 2 * x;

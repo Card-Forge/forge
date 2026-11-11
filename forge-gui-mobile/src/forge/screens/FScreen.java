@@ -18,6 +18,7 @@ import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.menu.FPopupMenu;
 import forge.screens.home.HomeScreen;
+import forge.screens.match.arena.ArenaMenus;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -182,6 +183,7 @@ public abstract class FScreen extends FContainer {
         }
         float w = getWidth();
         float h = getHeight();
+        if (ArenaMenus.screenBackground(g, w, h)) { return; } //Arena look: deep navy instead of the skin texture
         g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
         if (Frost.isOn()) { //frosted: the background shows through a dark slate wash instead of the theme colour
             g.fillRect(Frost.slate(0.78f), 0, 0, w, h);
@@ -236,11 +238,13 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void drawBackground(Graphics g) {
+            if (ArenaMenus.headerBand(g, getWidth(), getHeight())) { return; } //Arena look: dark glass, a gold line
             g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override
         public void drawOverlay(Graphics g) {
+            if (ArenaMenus.on()) { return; } //the band drew its own line
             if (Forge.isLandscapeMode() && getWidth() < Forge.getCurrentScreen().getWidth()) {
                 //in landscape mode, draw left border for sidebar if needed
                 g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());

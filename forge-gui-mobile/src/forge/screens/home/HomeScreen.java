@@ -22,6 +22,7 @@ import forge.gui.GuiBase;
 import forge.assets.FSkinFont;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
+import forge.screens.match.arena.ArenaMenus;
 import forge.screens.online.OnlineMenu.OnlineScreen;
 import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
@@ -315,6 +316,18 @@ public class HomeScreen extends FScreen {
                 }
             }
 
+            if (ArenaMenus.column(g, w, h, true)) { //Arena look: a glass column, the active entry washed in gold with a bright bar
+                drawHoverBand(g, null, w);
+                if (activeButtonIndex != -1) {
+                    final MenuButton active = buttons.get(activeButtonIndex);
+                    final float top = Math.max(buttonScroller.getTop() + active.getTop(), buttonScroller.getTop());
+                    final float bottom = Math.min(buttonScroller.getTop() + active.getBottom(), h);
+                    if (bottom > top) {
+                        ArenaMenus.activeRow(g, 0, top, w, bottom - top, true, false);
+                    }
+                }
+                return;
+            }
             if (Frost.isOn()) { //frosted navigation column: slate glass, the active entry washed with the accent and a bar on the left
                 g.fillGradientRect(Frost.slate(0.90f), Frost.slate(0.70f), false, 0, 0, w, h);
                 g.drawLine(1, Frost.EDGE, w, 0, w, h);
@@ -365,7 +378,11 @@ public class HomeScreen extends FScreen {
             }
         }
         if (pointed != null && bottom > top) {
-            g.fillRect(color, 0, top, columnWidth, bottom - top);
+            if (color == null) { //the Arena look's faint gold
+                ArenaMenus.activeRow(g, 0, top, columnWidth, bottom - top, true, true);
+            } else {
+                g.fillRect(color, 0, top, columnWidth, bottom - top);
+            }
         }
     }
 
@@ -404,6 +421,12 @@ public class HomeScreen extends FScreen {
                 //the row under the mouse is lit across the column (desktop); the text keeps its size, so nothing jumps
                 //(the band behind it is drawn with the column, see drawHoverBand)
                 final boolean hovered = !active && isPointedAt();
+                if (ArenaMenus.on()) { //Arena look: gold for the active entry, cream under the pointer, indented from the bar
+                    final float indent = PADDING * 4;
+                    g.drawText(getText(), getFont(), ArenaMenus.entryText(active, hovered), indent, 0,
+                            getWidth() - indent, getHeight(), false, Align.left, true);
+                    return;
+                }
                 if (Frost.isOn()) { //frosted: white text, brighter for the active entry, indented from the accent bar
                     final float indent = PADDING * 3;
                     g.drawText(getText(), getFont(), active || hovered ? Frost.TEXT : Frost.TEXT_DIM, indent, 0, getWidth() - indent, getHeight(), false, Align.left, true);

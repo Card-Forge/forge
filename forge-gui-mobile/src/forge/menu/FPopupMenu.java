@@ -7,6 +7,7 @@ import forge.Graphics;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
+import forge.screens.match.arena.ArenaMenus;
 import forge.toolbox.Frost;
 import forge.toolbox.FLabel;
 
@@ -101,6 +102,8 @@ public abstract class FPopupMenu extends FDropDownMenu {
     protected void drawBackground(Graphics g) {
         if (fixedSize == null) { //avoid showing background if menu has fixed size
             super.drawBackground(g);
+        } else if (ArenaMenus.column(g, getWidth(), getHeight(), false)) {
+            //Arena look: the landscape sidebar in dark glass with a gold edge
         } else if (Frost.isOn()) { //the landscape sidebar: a frosted column with a faint edge
             g.fillRect(Frost.slate(0.92f), 0, 0, getWidth(), getHeight());
             g.drawLine(1, Frost.EDGE, 0, 0, 0, getHeight());

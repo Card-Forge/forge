@@ -301,6 +301,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
+            final FSkinColor arena = forge.screens.match.arena.ArenaWidgets.rowFill(maxSelections == 1 && selectedIndices.contains(index), index % 2 == 1);
+            if (arena != null) {
+                return arena; //Arena look: a soft navy zebra, the selected row in gold
+            }
             if (maxSelections == 1 && selectedIndices.contains(index)) {
                 return getSelColor(); //don't show SEL_COLOR if in multi-select mode
             }

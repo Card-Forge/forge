@@ -11,6 +11,7 @@ import forge.assets.FSkinFont;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.screens.match.arena.ArenaMenus;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent.FEventHandler;
@@ -245,11 +246,17 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public void drawBackground(Graphics g) {
+            //Arena look: a glass column (landscape) or band, the tabs washed in gold when selected
+            if (Forge.isLandscapeMode() && !alwaysRenderHorizontal ? ArenaMenus.column(g, getWidth(), getHeight(), false)
+                    : ArenaMenus.headerBand(g, getWidth(), getHeight())) {
+                return;
+            }
             g.fillRect(Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_THEME).alphaColor(0.7f) : getBackColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override
         public void drawOverlay(Graphics g) {
+            if (ArenaMenus.on()) { return; } //the column or band drew its own edge
             if (Forge.isLandscapeMode()) {
                 //in landscape mode, draw left border for header
                 g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());
@@ -308,11 +315,14 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             return FSkinColor.get(Colors.CLR_ACTIVE);
         }
         private static FSkinColor getTabForeColor() {
+            if (ArenaMenus.on())
+                return ARENA_TAB_TEXT;
             if (Forge.isMobileAdventureMode)
                 return FSkinColor.get(Colors.ADV_CLR_TEXT);
             return FSkinColor.get(Colors.CLR_TEXT);
         }
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
+        private static final FSkinColor ARENA_TAB_TEXT = FSkinColor.getStandardColor(forge.screens.match.arena.ArenaTheme.TEXT);
 
         protected T parentScreen;
         protected String caption;
@@ -415,7 +425,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 float w = getWidth();
                 float h = getHeight();
                 float padding = h * 0.1f;
-                if (parentScreen.getSelectedPage() == TabPage.this) {
+                final boolean selectedTab = parentScreen.getSelectedPage() == TabPage.this;
+                if (ArenaMenus.on()) { //Arena look: gold wash and bar on the selected tab, a faint wash under the pointer
+                    if (selectedTab || isHovered()) {
+                        ArenaMenus.activeRow(g, 0, 0, w, h, true, !selectedTab);
+                    }
+                }
+                else if (selectedTab) {
                     g.fillRect(getSelTabColor(), Header.LINE_THICKNESS / 2, 0, w - Header.LINE_THICKNESS, h);
                 }
                 w -= 2 * padding;
@@ -472,6 +488,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 }
 
                 //draw right/bottom border if needed
+                if (ArenaMenus.on()) {
+                    return;
+                }
                 if (parentScreen.tabHeader.finalVisibleTab != this || isLandscapeMode) {
                     if (isLandscapeMode) {
                         float y = getHeight() - Header.LINE_THICKNESS / 2;

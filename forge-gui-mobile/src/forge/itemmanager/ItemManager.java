@@ -314,6 +314,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public abstract ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler);
 
+    /** Shows this many cards across the image view (as zooming it does), remembered in its config like a zoom. */
+    public void setImageColumnCount(int columns) {
+        imageView.setColumnCount(columns);
+    }
+    public int getImageColumnCount() {
+        return imageView.getColumnCount();
+    }
+
     public void setViewIndex(int viewIndex) {
         if (viewIndex < 0 || viewIndex >= views.size()) {
             return;

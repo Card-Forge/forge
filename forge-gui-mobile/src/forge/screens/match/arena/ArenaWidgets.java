@@ -14,11 +14,12 @@ import forge.toolbox.FButton;
 
 /**
  * The Arena look of the toolbox widgets the match shares with the menus (dialog sheets, buttons, drop-down menus and
- * their items, list rows, text fields, check boxes, label buttons), used only on the match screen
- * ({@link ArenaTheme#isMatchBoard()}): the safety net under the bespoke Arena overlays, so that whatever classic dialog
- * a match still opens (yield settings, auto-yields, a draw offer, sideboarding between games, an input box, a very long
- * list, a reconnect notice, the dev tools, the game and player menus) is dressed in navy glass, gold and Arena buttons
- * rather than the default skin. Each widget asks one method here first and keeps its own look when it says no.
+ * their items, list rows, text fields, check boxes, label buttons). On the match screen it is the safety net under the
+ * bespoke Arena overlays, so that whatever classic dialog a match still opens (yield settings, auto-yields, a draw
+ * offer, sideboarding between games, an input box, a very long list, a reconnect notice, the dev tools, the game and
+ * player menus) is dressed in navy glass, gold and Arena buttons rather than the default skin; off it, the same pieces
+ * dress the menus (home, new game lobbies, deck manager and editor, settings), with {@link forge.toolbox.Frost}'s Arena
+ * palette for the rest. Each widget asks one method here first and keeps its own look when it says no.
  */
 public final class ArenaWidgets {
     private ArenaWidgets() { }
@@ -44,16 +45,16 @@ public final class ArenaWidgets {
     public static final FSkinColor GOLD = FSkinColor.getStandardColor(ArenaTheme.GOLD);
     public static final FSkinColor GOLD_LINE = FSkinColor.getStandardColor(ArenaTheme.rgba(216, 178, 106, 110));
 
-    /** Whether the shared widgets wear the Arena look now: the Arena look, on the match screen. */
+    /** Whether the shared widgets wear the Arena look now: whenever the Arena look is on, in a match and in the menus. */
     public static boolean on() {
-        return ArenaTheme.isMatchBoard();
+        return ArenaTheme.isActive();
     }
 
     // ---- dialog sheets (FDialog) ------------------------------------------------------------------------------------
 
     /**
      * Under a dialog sheet: the board dimmed as the Arena dialogs dim it, and the sheet itself (from {@code sheetY},
-     * {@code sheetH} tall, the button band below it) in navy glass with a gold line along its top. False off the match.
+     * {@code sheetH} tall, the button band below it) in navy glass with a gold line along its top. False without the Arena look.
      */
     public static boolean dialogBackground(final Graphics g, final float w, final float h, final float sheetY, final float sheetH,
             final float reveal) {
@@ -71,7 +72,7 @@ public final class ArenaWidgets {
 
     /**
      * Over a dialog sheet: its grip (a slim bar with a gold notch the sheet can be swiped down by), the line over the
-     * button band and the title over the middle button if there is one. False off the match.
+     * button band and the title over the middle button if there is one. False without the Arena look.
      */
     public static boolean dialogOverlay(final Graphics g, final float w, final float gripY, final float gripH, final float bandY,
             final String title, final float titleH, final FSkinFont titleFont) {
@@ -96,7 +97,7 @@ public final class ArenaWidgets {
         return true;
     }
 
-    /** The button band of a dialog (its VPrompt): dark glass. False off the match. */
+    /** The button band of a dialog (its VPrompt): dark glass. False without the Arena look. */
     public static boolean dialogButtonBand(final Graphics g, final float w, final float h) {
         if (!on()) {
             return false;
@@ -109,7 +110,7 @@ public final class ArenaWidgets {
 
     /**
      * An FButton as an Arena pill (the molten one if it is the dialog's main answer). The board's own prompt buttons are
-     * left to the board's prompt look. False off the match (or for those), then the button draws itself.
+     * left to the board's prompt look. False without the Arena look (or for those), then the button draws itself.
      */
     public static boolean button(final Graphics g, final FButton b, final boolean pressed, final boolean primary) {
         if (!on() || isBoardPromptButton(b)) {
@@ -158,7 +159,7 @@ public final class ArenaWidgets {
 
     // ---- drop-downs and menus (FDropDown, FMenuItem) ----------------------------------------------------------------
 
-    /** Under a drop-down: navy glass. False off the match. */
+    /** Under a drop-down: navy glass. False without the Arena look. */
     public static boolean dropDownBackground(final Graphics g, final float w, final float h) {
         if (!on()) {
             return false;
@@ -167,7 +168,7 @@ public final class ArenaWidgets {
         return true;
     }
 
-    /** Round a drop-down: a thin gold rim and a soft shadow line under it. False off the match. */
+    /** Round a drop-down: a thin gold rim and a soft shadow line under it. False without the Arena look. */
     public static boolean dropDownOverlay(final Graphics g, final float w, final float h) {
         if (!on()) {
             return false;
@@ -211,7 +212,7 @@ public final class ArenaWidgets {
 
     // ---- check boxes (FCheckBox) ------------------------------------------------------------------------------------
 
-    /** A check box as the Arena remember box: a dark well in a gold outline, a gold tick when checked. False off the match. */
+    /** A check box as the Arena remember box: a dark well in a gold outline, a gold tick when checked. False without the Arena look. */
     public static boolean checkBox(final Graphics g, final boolean checked, final float x, final float y, final float w, final float h) {
         if (!on()) {
             return false;
@@ -223,7 +224,7 @@ public final class ArenaWidgets {
 
     // ---- text fields (FTextField, FComboBox) ------------------------------------------------------------------------
 
-    /** A text field's well: dark, with a gold rim (brighter while typing). False off the match. */
+    /** A text field's well: dark, with a gold rim (brighter while typing). False without the Arena look. */
     public static boolean fieldBackground(final Graphics g, final float w, final float h, final boolean editing) {
         if (!on()) {
             return false;
@@ -238,7 +239,7 @@ public final class ArenaWidgets {
 
     /**
      * Behind a label that works as a button (opaque, selectable or pressed): an Arena secondary button (gold when
-     * selected). Plain labels stay as they are. False off the match.
+     * selected). Plain labels stay as they are. False without the Arena look.
      */
     public static boolean labelButton(final Graphics g, final float w, final float h, final boolean pressed, final boolean selected,
             final boolean hovered) {
@@ -268,7 +269,7 @@ public final class ArenaWidgets {
 
     // ---- list rows (FList, FChoiceList) -----------------------------------------------------------------------------
 
-    /** Under a list: navy glass (no skin texture). False off the match. */
+    /** Under a list: navy glass (no skin texture). False without the Arena look. */
     public static boolean listBackground(final Graphics g, final float w, final float h) {
         if (!on()) {
             return false;
@@ -277,7 +278,7 @@ public final class ArenaWidgets {
         return true;
     }
 
-    /** The fill of a list row: gold for the selected, a soft navy zebra for the rest, or null off the match. */
+    /** The fill of a list row: gold for the selected, a soft navy zebra for the rest, or null without the Arena look. */
     public static FSkinColor rowFill(final boolean selected, final boolean alternate) {
         if (!on()) {
             return null;

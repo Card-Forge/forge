@@ -21,6 +21,7 @@ import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -35,6 +36,8 @@ import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.arena.ArenaMenus;
+import forge.screens.match.arena.ArenaTheme;
 import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
@@ -547,7 +550,117 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             deckHeader.setBounds(0, startY, width, HEADER_HEIGHT);
             startY += HEADER_HEIGHT;
         }
-        super.doLayout(startY, width, height);
+        setSplitLayout(canSplitLayout());
+        if (!splitLayout) {
+            super.doLayout(startY, width, height);
+            return;
+        }
+        //the catalog on the left, the chosen deck page (main, sideboard, statistics...) in a column on the right
+        final float catalogWidth = Math.round(width * (1f - SPLIT_DECK_SHARE));
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
+            tabPage.setBounds(catalogWidth, startY, width - catalogWidth, height - startY);
+        }
+        catalogPage.setBounds(0, startY, catalogWidth, height - startY);
+    }
+
+    // ---- Arena look on a wide desktop window: the catalog and the deck side by side, as Arena's deck builder has them
+    private static final float SPLIT_DECK_SHARE = 0.3f;
+    private static final int SPLIT_CATALOG_COLUMNS = 6;
+    //each kind of catalog once a session, so a view picked while editing is kept afterwards
+    private static final Set<ItemManagerConfig> splitViewsChosen = EnumSet.noneOf(ItemManagerConfig.class);
+    private boolean splitLayout, catalogTabHiddenBySplit;
+
+    /** Whether the catalog and the deck are on show together (the Arena look on a wide desktop window). */
+    public boolean isSplitLayout() {
+        return splitLayout;
+    }
+
+    protected boolean canSplitLayout() {
+        if (!ArenaTheme.isActive() || GuiBase.isMobile() || catalogPage == null || Forge.getScreenWidth() < Forge.getScreenHeight() * 1.4f) {
+            return false;
+        }
+        if (!catalogPage.isTabVisible() && !catalogTabHiddenBySplit) {
+            return false; //no catalog to show (an existing draft deck's editor hides its pack page)
+        }
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
+            if (tabPage != catalogPage && tabPage.isTabVisible()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void setSplitLayout(boolean on) {
+        if (on == splitLayout) {
+            return;
+        }
+        splitLayout = on;
+        if (on) {
+            if (getSelectedPage() == catalogPage || getSelectedPage() == null) {
+                super.setSelectedPage(mainDeckPage != null && mainDeckPage.isTabVisible() ? mainDeckPage : firstDeckPage());
+            }
+            if (catalogPage.isTabVisible()) { //the catalog is always on show, so it needs no tab
+                catalogTabHiddenBySplit = true;
+                catalogPage.hideTab();
+            }
+            if (catalogPage.cardManager.getConfig() != null && splitViewsChosen.add(catalogPage.cardManager.getConfig())) {
+                //the first time: the catalog as a grid of cards, the deck as a list, as Arena shows them
+                catalogPage.cardManager.setViewIndex(1);
+                if (catalogPage.cardManager.getImageColumnCount() < SPLIT_CATALOG_COLUMNS) {
+                    catalogPage.cardManager.setImageColumnCount(SPLIT_CATALOG_COLUMNS);
+                }
+                for (DeckSectionPage page : pagesBySection.values()) {
+                    page.cardManager.setViewIndex(0);
+                }
+            }
+            catalogPage.setVisible(true);
+            if (canActivateTabPage()) {
+                catalogPage.onActivate();
+            }
+        } else {
+            if (catalogTabHiddenBySplit) {
+                catalogTabHiddenBySplit = false;
+                catalogPage.showTab();
+            }
+            if (getSelectedPage() != catalogPage) {
+                catalogPage.setVisible(false);
+                catalogPage.onDeactivate();
+            }
+        }
+    }
+
+    private TabPage<FDeckEditor> firstDeckPage() {
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
+            if (tabPage != catalogPage && tabPage.isTabVisible()) {
+                return tabPage;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void setSelectedPage(TabPage<FDeckEditor> tabPage) {
+        if (splitLayout && tabPage == catalogPage) {
+            return; //the catalog is on show beside the deck already
+        }
+        super.setSelectedPage(tabPage);
+    }
+
+    @Override
+    public void onActivate() {
+        super.onActivate();
+        if (splitLayout && catalogPage != null) {
+            catalogPage.onActivate();
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        //the Arena look was turned on or off elsewhere (the settings): lay out again for it
+        if (getWidth() > 0 && splitLayout != canSplitLayout()) {
+            revalidate(true);
+        }
+        super.draw(g);
     }
 
     protected void updateDeckHeader() {
@@ -1168,11 +1281,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         public void drawBackground(Graphics g) {
+            if (ArenaMenus.headerBand(g, getWidth(), HEADER_HEIGHT)) { return; } //Arena look: dark glass, a gold line
             g.fillRect(Header.getBackColor(), 0, 0, getWidth(), HEADER_HEIGHT);
         }
 
         @Override
         public void drawOverlay(Graphics g) {
+            if (ArenaMenus.on()) { return; }
             float y = HEADER_HEIGHT - Header.LINE_THICKNESS / 2;
             g.drawLine(Header.LINE_THICKNESS, Header.getLineColor(), 0, y, getWidth(), y);
         }
