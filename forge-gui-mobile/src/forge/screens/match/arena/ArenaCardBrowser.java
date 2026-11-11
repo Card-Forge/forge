@@ -174,10 +174,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
 
     /**
      * A scry or a surveil on one screen: the cards in an upper row ({@code upperLabel}, the top of the library) and a
-     * lower one ({@code lowerLabel}), a click moving a card across; tells {@code done} the cards left in the lower row.
+     * lower one ({@code lowerLabel}), a click moving a card across and a drag ordering the upper row (numbered, 1 goes on
+     * top); tells {@code done} the upper row in order and the lower row.
      */
     public static boolean sortRows(final String title, final String hint, final List<CardView> cards, final String upperLabel,
-            final String lowerLabel, final Consumer<List<CardView>> done) {
+            final String lowerLabel, final Consumer<org.apache.commons.lang3.tuple.Pair<List<CardView>, List<CardView>>> done) {
         if (!ArenaTheme.isMatchBoard() || cards == null || cards.isEmpty()) {
             return false;
         }
@@ -185,13 +186,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         browser.upperLabel = upperLabel;
         browser.lowerLabel = lowerLabel;
         browser.whenClosed = () -> {
-            final List<CardView> out = new ArrayList<>();
-            for (final Item item : browser.allItems) {
-                if (browser.lowerRow.contains(item.card)) {
-                    out.add(item.card);
-                }
+            final List<CardView> upper = new ArrayList<>(), lower = new ArrayList<>();
+            for (final Item item : browser.items) { //the row order the player left (dragging reorders items)
+                (browser.lowerRow.contains(item.card) ? lower : upper).add(item.card);
             }
-            done.accept(out);
+            done.accept(org.apache.commons.lang3.tuple.Pair.of(upper, lower));
         };
         browser.openOverlay();
         return true;
@@ -201,8 +200,8 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
      * Two piles, one above the other, face up where the player may see them ({@code hidden1}/{@code hidden2} more lie face
      * down), each taken with its own button; tells {@code done} 0 or 1.
      */
-    public static boolean piles(final String title, final List<CardView> pile1, final int hidden1, final List<CardView> pile2,
-            final int hidden2, final java.util.function.IntConsumer done) {
+    public static boolean piles(final String title, final String hint, final List<CardView> pile1, final int hidden1,
+            final List<CardView> pile2, final int hidden2, final java.util.function.IntConsumer done) {
         final List<CardView> all = new ArrayList<>();
         if (pile1 != null) {
             all.addAll(pile1);
@@ -214,7 +213,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
             return false;
         }
         final forge.util.Localizer words = Forge.getLocalizer();
-        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.PILES, ArenaChoices.titleFor(title), null, all, 0, 0, null);
+        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.PILES, ArenaChoices.titleFor(title), hint, all, 0, 0, null);
         if (pile2 != null) {
             browser.lowerRow.addAll(pile2);
         }
@@ -1007,6 +1006,16 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 final float bx = item.overlapped ? item.x.get() - cw / 2f + d * 0.8f : item.x.get();
                 ArenaDialogKit.badge(g, i + 1, bx, railY, d, alpha);
             }
+        } else if (mode == Mode.SORT) { //the upper row's order: 1 goes on top of the library
+            int place = 0;
+            final float d = ArenaDialogKit.badgeSize(h);
+            for (final Item item : items) {
+                if (!lowerRow.contains(item.card)) {
+                    place++;
+                    final float bx = item.overlapped ? item.x.get() - cw / 2f + d * 0.8f : item.x.get();
+                    ArenaDialogKit.badge(g, place, bx, item.y.get() + ch / 2f, d, alpha);
+                }
+            }
         }
         if (focus != null) {
             drawFocus(g, focus, dx, h, alpha);
@@ -1195,11 +1204,11 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
 
     @Override
     protected void onPress(final float x, final float y) {
-        if (mode != Mode.ARRANGE) {
+        if (mode != Mode.ARRANGE && mode != Mode.SORT) {
             return;
         }
         final Item item = itemAt(x, y);
-        if (item != null) {
+        if (item != null && (mode == Mode.ARRANGE || !lowerRow.contains(item.card))) { //SORT: the upper row is ordered by dragging
             dragItem = item;
             dragGrabX = x - item.x.get();
             dragGrabY = y - item.y.get();
@@ -1230,14 +1239,22 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         final float cx = dragItem.x.get();
         int index = 0;
         for (final Item other : items) {
-            if (other != dragItem && other.x.target() < cx) {
+            //SORT: only the upper row's cards are passed (the lower row keeps its own order, out of the way)
+            if (other != dragItem && other.x.target() < cx && (mode == Mode.ARRANGE || !lowerRow.contains(other.card))) {
                 index++;
             }
+        }
+        if (mode == Mode.SORT) {
+            index = sortRowIndex(index);
         }
         if (items.indexOf(dragItem) != index) {
             items.remove(dragItem);
             items.add(index, dragItem);
-            layoutArrange(getWidth(), getHeight(), true);
+            if (mode == Mode.ARRANGE) {
+                layoutArrange(getWidth(), getHeight(), true);
+            } else {
+                relayoutKeeping(dragItem);
+            }
         }
         ArenaMotion.requestFrame();
     }
@@ -1247,12 +1264,40 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         endDrag();
     }
 
+    /** SORT: the place in {@code items} of the upper row's {@code n}th card (where a card dragged to that place goes). */
+    private int sortRowIndex(final int n) {
+        int seen = 0;
+        for (int i = 0; i < items.size(); i++) {
+            final Item other = items.get(i);
+            if (other == dragItem || lowerRow.contains(other.card)) {
+                continue;
+            }
+            if (seen == n) {
+                return i > items.indexOf(dragItem) ? i - 1 : i;
+            }
+            seen++;
+        }
+        return items.size() - 1;
+    }
+
+    /** SORT: lays the rows out again while a card is dragged, leaving the dragged one under the pointer. */
+    private void relayoutKeeping(final Item dragged) {
+        final float x = dragged.x.get(), y = dragged.y.get();
+        layoutRows(getWidth(), getHeight());
+        dragged.x.set(x);
+        dragged.y.set(y);
+    }
+
     private void endDrag() {
         if (dragItem == null) {
             return;
         }
         dragItem = null;
-        layoutArrange(getWidth(), getHeight(), false);
+        if (mode == Mode.ARRANGE) {
+            layoutArrange(getWidth(), getHeight(), false);
+        } else {
+            layoutRows(getWidth(), getHeight());
+        }
         if (dragMoved) {
             ArenaMotion.play(60, ArenaMotion.LINEAR, null, () -> dragMoved = false);
         }

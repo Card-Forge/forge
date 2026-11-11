@@ -444,6 +444,46 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    /**
+     * Who split the piles and where the one taken and the other go ("Arryn split the cards. The pile you take goes to
+     * your hand, the other to your graveyard."), from the effect's Separator, ChosenPile and UnchosenPile, or null.
+     */
+    private String pileHint(final SpellAbility sa) {
+        if (sa == null) {
+            return null;
+        }
+        String separator = null;
+        if (sa.hasParam("Separator")) {
+            final var who = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Separator"), sa);
+            separator = who.isEmpty() ? null
+                    : who.get(0) == player ? StringUtils.capitalize(localizer.getMessage("lblYou")) : who.get(0).getName();
+        }
+        final String taken = pileZone(sa, "ChosenPile"), other = pileZone(sa, "UnchosenPile");
+        final StringBuilder sb = new StringBuilder();
+        if (separator != null) {
+            sb.append(localizer.getMessage("lblArenaPilesSplitBy", separator));
+        }
+        if (taken != null && other != null) {
+            sb.append(sb.length() > 0 ? " " : "").append(localizer.getMessage("lblArenaPilesGoTo", taken, other));
+        }
+        return sb.length() == 0 ? null : sb.toString();
+    }
+
+    /** Where a pile goes: the zone its sub-ability moves it to, translated, or null. */
+    private static String pileZone(final SpellAbility sa, final String which) {
+        final SpellAbility sub = sa.hasParam(which) ? sa.getAdditionalAbility(which) : null;
+        if (sub == null || !sub.hasParam("Destination")) {
+            return null;
+        }
+        final ZoneType zone = ZoneType.smartValueOf(sub.getParam("Destination"));
+        return zone == null ? null : zone.getTranslatedName().toLowerCase();
+    }
+
+    /** The ability resolving now (what makes a scry or a surveil happen), or null. */
+    private SpellAbility resolvingAbility() {
+        return getGame().getStack().isResolving() ? getGame().getStack().getResolvingAbility() : null;
+    }
+
     /** A card or player name made safe inside a message that is later passed through String.format. */
     private static String formatSafe(final String name) {
         return name == null ? "" : name.replace("%", "%%");
@@ -1104,10 +1144,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             GameEntityViewMap<Card, CardView> cardCacheScry = GameEntityView.getMap(topN);
 
             toBottom = new CardCollection();
-            //one screen with the top and the bottom of the library where the user interface has it, else the classic pick
-            List<CardView> views = getGui().sortIntoRows(localizer.getMessage("lblArenaScryTitle", topN.size()),
+            //one screen with the top (in order) and the bottom of the library where the user interface has it, titled with
+            //the card that scries; else the classic pick, then the order of what stays on top
+            final Pair<List<CardView>, List<CardView>> rows = inContext(PromptContext.of(resolvingAbility()),
+                    () -> getGui().sortIntoRows(localizer.getMessage("lblArenaScryTitle", topN.size()),
                     localizer.getMessage("lblArenaScryHint"), cardCacheScry.getTrackableKeys(),
-                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaBottomOfLibrary"));
+                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaBottomOfLibrary")));
+            List<CardView> views = rows == null ? null : rows.getRight();
             if (views == null) {
                 views = getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
                         localizer.getMessage("lblCardsToPutOnTheBottom"), -1, cardCacheScry.getTrackableKeys(), null);
@@ -1115,7 +1158,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             cardCacheScry.addToList(views, toBottom);
 
             topN.removeAll(toBottom);
-            if (topN.isEmpty()) {
+            if (rows != null) { //ordered on the same screen
+                toTop = new CardCollection();
+                cardCacheScry.addToList(rows.getLeft(), toTop);
+                if (toTop.isEmpty()) {
+                    toTop = null;
+                }
+            } else if (topN.isEmpty()) {
                 toTop = null;
             } else if (topN.size() == 1) {
                 toTop = topN;
@@ -1155,17 +1204,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             GameEntityViewMap<Card, CardView> gameCacheSurveil = GameEntityView.getMap(topN);
             toGrave = new CardCollection();
-            //one screen with the top of the library and the graveyard where the user interface has it, else the classic pick
-            List<CardView> views = getGui().sortIntoRows(localizer.getMessage("lblArenaSurveilTitle", topN.size()),
+            //one screen with the top of the library (in order) and the graveyard where the user interface has it, titled with
+            //the card that surveils; else the classic pick, then the order of what stays on top
+            final Pair<List<CardView>, List<CardView>> rows = inContext(PromptContext.of(resolvingAbility()),
+                    () -> getGui().sortIntoRows(localizer.getMessage("lblArenaSurveilTitle", topN.size()),
                     localizer.getMessage("lblArenaScryHint"), gameCacheSurveil.getTrackableKeys(),
-                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaToGraveyard"));
+                    localizer.getMessage("lblArenaTopOfLibrary"), localizer.getMessage("lblArenaToGraveyard")));
+            List<CardView> views = rows == null ? null : rows.getRight();
             if (views == null) {
                 views = getGui().many(localizer.getMessage("lblSelectCardsToBePutIntoTheGraveyard"),
                         localizer.getMessage("lblCardsToPutInTheGraveyard"), -1, gameCacheSurveil.getTrackableKeys(), null);
             }
             gameCacheSurveil.addToList(views, toGrave);
             topN.removeAll(toGrave);
-            if (topN.isEmpty()) {
+            if (rows != null) { //ordered on the same screen
+                toTop = new CardCollection();
+                gameCacheSurveil.addToList(rows.getLeft(), toTop);
+                if (toTop.isEmpty()) {
+                    toTop = null;
+                }
+            } else if (topN.isEmpty()) {
                 toTop = null;
             } else if (topN.size() == 1) {
                 toTop = topN;
@@ -2782,22 +2840,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          * possibleValues); }
          */
 
-        //both piles at once, face up where they may be seen, where the user interface has such a screen
-        final boolean see1 = faceUp.equals("False"), see2 = !faceUp.equals("True");
-        if (see1) {
-            tempShowCards(pile1);
-        }
-        if (see2) {
-            tempShowCards(pile2);
-        }
-        final int taken = inContext(PromptContext.of(sa), () -> getGui().choosePile(localizer.getMessage("lblArenaPileTitle"),
-                see1 ? CardView.getCollection(pile1) : Lists.newArrayList(), see1 ? 0 : pile1.size(),
-                see2 ? CardView.getCollection(pile2) : Lists.newArrayList(), see2 ? 0 : pile2.size()));
-        if (taken >= 0) {
+        //both piles at once, face up where they may be seen, saying who split them and where each goes, where the user
+        //interface has such a screen (the classic path reveals nothing extra)
+        if (getGui().explainsPrompts()) {
+            final boolean see1 = faceUp.equals("False"), see2 = !faceUp.equals("True");
+            if (see1) {
+                tempShowCards(pile1);
+            }
+            if (see2) {
+                tempShowCards(pile2);
+            }
+            final int taken = inContext(PromptContext.of(sa), () -> getGui().choosePile(localizer.getMessage("lblArenaPileTitle"),
+                    pileHint(sa), see1 ? CardView.getCollection(pile1) : Lists.newArrayList(), see1 ? 0 : pile1.size(),
+                    see2 ? CardView.getCollection(pile2) : Lists.newArrayList(), see2 ? 0 : pile2.size()));
             endTempShowCards();
-            return taken == 0;
+            if (taken >= 0) {
+                return taken == 0;
+            }
         }
-        endTempShowCards();
 
         final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
         final CardView pileView1 = new CardView(Integer.MIN_VALUE, null, p1Str);

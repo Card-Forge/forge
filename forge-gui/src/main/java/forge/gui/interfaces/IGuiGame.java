@@ -283,19 +283,22 @@ public interface IGuiGame {
 
     /**
      * One screen sorting {@code cards} between two rows (a scry: the top and the bottom of the library), a click moving a
-     * card from one row to the other. Returns the cards the player left in the lower row, or null when this user
-     * interface has no such screen, so the caller asks the classic way.
+     * card from one row to the other and a drag ordering the upper row. Returns the upper row in order (its first card
+     * goes on top) and the lower row, or null when this user interface has no such screen, so the caller asks the
+     * classic way.
      */
-    default List<CardView> sortIntoRows(String title, String hint, List<CardView> cards, String upperLabel, String lowerLabel) {
+    default org.apache.commons.lang3.tuple.Pair<List<CardView>, List<CardView>> sortIntoRows(String title, String hint,
+            List<CardView> cards, String upperLabel, String lowerLabel) {
         return null;
     }
 
     /**
      * Two piles shown one above the other, the player taking one (Fact or Fiction): {@code pile1} and {@code pile2} are the
      * cards the player may see, {@code hidden1} and {@code hidden2} how many more lie face down. Returns 0 or 1 for the pile
-     * taken, or -1 when this user interface has no such screen, so the caller asks the classic way.
+     * taken, or -1 when this user interface has no such screen, so the caller asks the classic way. {@code hint} says who
+     * split the piles and where each goes, or is null.
      */
-    default int choosePile(String title, List<CardView> pile1, int hidden1, List<CardView> pile2, int hidden2) {
+    default int choosePile(String title, String hint, List<CardView> pile1, int hidden1, List<CardView> pile2, int hidden2) {
         return -1;
     }
 

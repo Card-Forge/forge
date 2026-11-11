@@ -910,12 +910,12 @@ public class MatchController extends NetworkGuiGame {
 
     /** The Arena look: a scry or a surveil on one screen, the top of the library above and the rest below. */
     @Override
-    public List<CardView> sortIntoRows(final String title, final String hint, final List<CardView> cards, final String upperLabel,
-            final String lowerLabel) {
+    public org.apache.commons.lang3.tuple.Pair<List<CardView>, List<CardView>> sortIntoRows(final String title, final String hint,
+            final List<CardView> cards, final String upperLabel, final String lowerLabel) {
         if (!explainsPrompts()) {
             return null;
         }
-        return new WaitCallback<List<CardView>>() {
+        return new WaitCallback<org.apache.commons.lang3.tuple.Pair<List<CardView>, List<CardView>>>() {
             @Override
             public void run() {
                 if (!ArenaCardBrowser.sortRows(title, hint, cards, upperLabel, lowerLabel, this)) {
@@ -927,14 +927,15 @@ public class MatchController extends NetworkGuiGame {
 
     /** The Arena look: two piles shown one above the other, face up where they may be seen, with a button to take each. */
     @Override
-    public int choosePile(final String title, final List<CardView> pile1, final int hidden1, final List<CardView> pile2, final int hidden2) {
+    public int choosePile(final String title, final String hint, final List<CardView> pile1, final int hidden1, final List<CardView> pile2,
+            final int hidden2) {
         if (!explainsPrompts()) {
             return -1;
         }
         final Integer taken = new WaitCallback<Integer>() {
             @Override
             public void run() {
-                if (!ArenaCardBrowser.piles(title, pile1, hidden1, pile2, hidden2, this::accept)) {
+                if (!ArenaCardBrowser.piles(title, hint, pile1, hidden1, pile2, hidden2, this::accept)) {
                     accept(-1);
                 }
             }
