@@ -1042,6 +1042,28 @@ public class AiController {
         return AiPlayDecision.WillPlay;
     }
 
+    /**
+     * A spell cast without spending mana (Snuff Out paying life, an evoke/alternative cost...) while a permanent such as
+     * Roiling Vortex punishes exactly that ("whenever a player casts a spell, if no mana was spent to cast it, ...").
+     */
+    public static boolean isPunishedForFreeCast(final SpellAbility sa) {
+        if (!sa.isSpell() || sa.getPayCosts() == null || !sa.getPayCosts().getTotalMana().isZero() || sa.costHasManaX()) {
+            return false;
+        }
+        for (final Card c : sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.SpellCast) {
+                    continue;
+                }
+                final String valid = t.getParam("ValidSA");
+                if (valid != null && valid.contains("ManaSpent EQ0")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         if (hasFailedToCast(sa)) {
             return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
@@ -1067,6 +1089,10 @@ public class AiController {
         }
 
         final Card card = sa.getHostCard();
+
+        if (isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS) && card.hasKeyword(Keyword.BUYBACK)

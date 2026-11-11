@@ -350,6 +350,9 @@ public class SpellAbilityPicker {
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
         }
+        if (forge.ai.AiController.isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
         // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
         if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
             return AiPlayDecision.DoesntImpactCombat;
