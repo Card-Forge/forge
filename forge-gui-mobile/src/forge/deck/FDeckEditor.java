@@ -565,8 +565,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     // ---- Arena look on a wide desktop window: the catalog and the deck side by side, as Arena's deck builder has them
     private static final float SPLIT_DECK_SHARE = 0.3f;
-    //each kind of catalog once a session, so a view picked while editing is kept afterwards
-    private static final Set<ItemManagerConfig> splitViewsChosen = EnumSet.noneOf(ItemManagerConfig.class);
     private boolean splitLayout, catalogTabHiddenBySplit;
 
     /** Whether the catalog and the deck are on show together (the Arena look on a wide desktop window). */
@@ -599,20 +597,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 super.setSelectedPage(mainDeckPage != null && mainDeckPage.isTabVisible() ? mainDeckPage : firstDeckPage());
             }
             if (catalogPage.isTabVisible()) { //the catalog is always on show, so it needs no tab
-                catalogTabHiddenBySplit = true;
                 catalogPage.hideTab();
+                catalogTabHiddenBySplit = true;
             }
-            if (catalogPage.cardManager.getConfig() != null && splitViewsChosen.add(catalogPage.cardManager.getConfig())) {
-                //the first time: the catalog as a grid of cards, the deck as a list, as Arena shows them
-                catalogPage.cardManager.setViewIndex(1);
-                //cards about a third of the window high, so two rows and a bit show: 6 across at 3440x1440, 4 at 1600x900
-                final int columns = Math.max(4, Math.min(8, Math.round(2.45f * Forge.getScreenWidth() / Forge.getScreenHeight())));
-                if (catalogPage.cardManager.getImageColumnCount() < columns) {
-                    catalogPage.cardManager.setImageColumnCount(columns);
-                }
-                for (DeckSectionPage page : pagesBySection.values()) {
-                    page.cardManager.setViewIndex(0);
-                }
+            //the catalog as a grid of cards about a third of the window high (6 across at 3440x1440, 4 at 1600x900) and
+            //the deck as a list, as Arena shows them; not remembered, so the editor without the Arena look keeps the user's
+            final int columns = Math.max(4, Math.min(8, Math.round(2.45f * Forge.getScreenWidth() / Forge.getScreenHeight())));
+            catalogPage.cardManager.showViewUnsaved(1, Math.max(columns, catalogPage.cardManager.getImageColumnCount()));
+            for (DeckSectionPage page : pagesBySection.values()) {
+                page.cardManager.showViewUnsaved(0, page.cardManager.getImageColumnCount());
             }
             catalogPage.setVisible(true);
             if (canActivateTabPage()) {
@@ -622,6 +615,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (catalogTabHiddenBySplit) {
                 catalogTabHiddenBySplit = false;
                 catalogPage.showTab();
+            }
+            catalogPage.cardManager.showConfigView();
+            for (DeckSectionPage page : pagesBySection.values()) {
+                page.cardManager.showConfigView();
             }
             if (getSelectedPage() != catalogPage) {
                 catalogPage.setVisible(false);
@@ -1959,6 +1956,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             isInitialized = true;
             if(needRefreshWhenShown)
                 scheduleRefresh();
+        }
+
+        @Override
+        public void hideTab() {
+            //hidden for good (a finished draft's pack page): the Arena side-by-side layout stops showing it as well
+            if (parentScreen != null && parentScreen.catalogPage == this) {
+                parentScreen.catalogTabHiddenBySplit = false;
+            }
+            super.hideTab();
         }
 
         @Override

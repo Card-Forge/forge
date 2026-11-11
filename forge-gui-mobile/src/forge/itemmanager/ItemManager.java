@@ -314,15 +314,32 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public abstract ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler);
 
-    /** Shows this many cards across the image view (as zooming it does), remembered in its config like a zoom. */
-    public void setImageColumnCount(int columns) {
-        imageView.setColumnCount(columns);
+    /**
+     * Shows the list (0) or image (1) view with this many cards across the image view, without remembering either in
+     * the config: a layout's own choice (the Arena deck editor's), so the user's own choice is kept for elsewhere.
+     */
+    public void showViewUnsaved(int viewIndex, int imageColumns) {
+        imageView.setColumnCountUnsaved(imageColumns);
+        setViewIndex(viewIndex, false);
     }
+
+    /** Back to the view and image column count remembered in the config (after {@link #showViewUnsaved}). */
+    public void showConfigView() {
+        if (config != null) {
+            imageView.setColumnCountUnsaved(config.getImageColumnCount());
+            setViewIndex(config.getViewIndex(), false);
+        }
+    }
+
     public int getImageColumnCount() {
         return imageView.getColumnCount();
     }
 
     public void setViewIndex(int viewIndex) {
+        setViewIndex(viewIndex, true);
+    }
+
+    private void setViewIndex(int viewIndex, boolean remember) {
         if (viewIndex < 0 || viewIndex >= views.size()) {
             return;
         }
@@ -331,7 +348,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             return;
         }
 
-        if (config != null) {
+        if (remember && config != null) {
             config.setViewIndex(viewIndex);
         }
 

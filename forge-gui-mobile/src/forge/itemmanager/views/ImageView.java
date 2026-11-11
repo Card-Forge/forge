@@ -359,7 +359,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         setColumnCount(columnCount0, false);
     }
 
+    /** As {@link #setColumnCount(int)}, but not remembered in the config: a layout's own choice rather than the user's. */
+    public void setColumnCountUnsaved(int columnCount0) {
+        setColumnCount(columnCount0, false, false);
+    }
+
     private void setColumnCount(int columnCount0, boolean forSetup) {
+        setColumnCount(columnCount0, forSetup, !forSetup);
+    }
+
+    private void setColumnCount(int columnCount0, boolean forSetup, boolean remember) {
         if (columnCount0 < MIN_COLUMN_COUNT) {
             columnCount0 = MIN_COLUMN_COUNT;
         } else if (columnCount0 > MAX_COLUMN_COUNT) {
@@ -371,7 +380,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         columnCount = columnCount0;
 
         if (!forSetup) {
-            if (itemManager.getConfig() != null) {
+            if (remember && itemManager.getConfig() != null) {
                 itemManager.getConfig().setImageColumnCount(columnCount);
             }
 
