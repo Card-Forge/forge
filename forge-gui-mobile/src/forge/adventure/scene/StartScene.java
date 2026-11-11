@@ -19,6 +19,7 @@ import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
@@ -26,9 +27,9 @@ import forge.util.ZipUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -167,7 +168,6 @@ public class StartScene extends UIScene {
         showDialog(backupDialog);
         return true;
     }
-    private final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyMMdd_HHmmss");
     private final SelectBox<String> backupSelectBox = Controls.newComboBox();
     private final Array<String> fileNames = new Array<>();
     private final String prefixPattern = ZipUtil.backupAdvFile.replace(".adv", "");
@@ -177,8 +177,7 @@ public class StartScene extends UIScene {
             File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file();
             File targetDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
 
-            String baseName = ZipUtil.backupAdvFile.replace(".adv", "");
-            String timestampedFileName = baseName + "_" + TIMESTAMP_FORMAT.format(new Date()) + ".adv";
+            String timestampedFileName = ZipUtil.newAdvBackupName();
             File targetFile = new File(targetDir, timestampedFileName);
 
             ZipUtil.zip(source, targetDir, timestampedFileName);
@@ -202,9 +201,14 @@ public class StartScene extends UIScene {
     public boolean restoreBackup() {
         File downloadDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
 
-        File[] files = downloadDir.listFiles((dir, name) -> strictBackupRegex.matcher(name).matches());
+        List<File> files = new ArrayList<>();
+        for (File dir : new File[] {downloadDir, new File(ForgeConstants.USER_ADVENTURE_BACKUP_DIR)}) {
+            File[] found = dir.listFiles((d, name) -> strictBackupRegex.matcher(name).matches());
+            if (found != null)
+                files.addAll(Arrays.asList(found));
+        }
 
-        if (files == null || files.length == 0) {
+        if (files.isEmpty()) {
             zipDialog = createGenericDialog("",
                 Forge.getLocalizer().getMessageorUseDefault("lblNoBackupsFound", "No backups found!"),
                 Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
@@ -212,7 +216,7 @@ public class StartScene extends UIScene {
             return false;
         }
 
-        Arrays.sort(files, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
+        files.sort((f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
 
         fileNames.clear();
         for (File file : files) {
@@ -225,8 +229,7 @@ public class StartScene extends UIScene {
             Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
             Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
             () -> {
-                String selectedName = backupSelectBox.getSelected();
-                File source = new File(downloadDir, selectedName);
+                File source = files.get(backupSelectBox.getSelectedIndex());
                 File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file().getParentFile();
                 removeDialog();
 

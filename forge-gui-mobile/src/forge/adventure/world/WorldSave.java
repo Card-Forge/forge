@@ -3,6 +3,7 @@ package forge.adventure.world;
 import com.badlogic.gdx.utils.TimeUtils;
 import forge.Forge;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -18,14 +19,21 @@ import forge.deck.Deck;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
+import forge.util.FileUtil;
+import forge.util.ZipUtil;
 
 import java.io.*;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Stream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -37,6 +45,7 @@ public class WorldSave {
     static final public int AUTO_SAVE_SLOT = -1;
     static final public int QUICK_SAVE_SLOT = -2;
     static final public int INVALID_SAVE_SLOT = -3;
+    private static final int VERSION_BACKUPS_KEPT = 2;
     static final WorldSave currentSave = new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player = new AdventurePlayer();
@@ -147,6 +156,51 @@ public class WorldSave {
 
     public static String getSaveFile(int slot) {
         return ForgeConstants.USER_ADVENTURE_DIR + Config.instance().getPlane() + File.separator + filename(slot);
+    }
+
+    /**
+     * Zips the adventure folder the first time a new build opens adventure mode. A build that cannot read part of
+     * a save loads what it can, and the next save writes that loss over the original.
+     */
+    public static void backupOnVersionChange() {
+        FileHandle buildTxt = GuiBase.isAndroid() ? Gdx.files.internal("build.txt") : Gdx.files.classpath("build.txt");
+        String build = Forge.getDeviceAdapter().getVersionString() + (buildTxt.exists() ? " " + buildTxt.readString().trim() : "");
+        File backupDir = new File(ForgeConstants.USER_ADVENTURE_BACKUP_DIR);
+        File marker = new File(backupDir, "build.txt");
+        if (build.equals(FileUtil.readFileToString(marker)))
+            return;
+        // Queued ahead of any async autosave, which runs on the same single thread
+        SAVE_EXECUTOR.execute(() -> {
+            File backup = new File(backupDir, ZipUtil.newAdvBackupName());
+            try {
+                if (!backupDir.isDirectory() && !backupDir.mkdirs())
+                    throw new IOException("Could not create backup directory: " + backupDir);
+                if (hasSaveFiles()) {
+                    ZipUtil.zip(new File(ForgeConstants.USER_ADVENTURE_DIR), backupDir, backup.getName());
+                    if (!ZipUtil.isValidZip(backup))
+                        throw new IOException("Backup verification failed: " + backup);
+                    String prefix = ZipUtil.backupAdvFile.replace(".adv", "_");
+                    File[] backups = backupDir.listFiles((dir, name) -> name.startsWith(prefix) && name.endsWith(".adv"));
+                    // Names carry the timestamp, so reverse name order is newest first
+                    Arrays.sort(backups, Comparator.reverseOrder());
+                    for (int i = VERSION_BACKUPS_KEPT; i < backups.length; i++)
+                        backups[i].delete();
+                }
+                FileUtil.writeFile(marker, build);
+            } catch (Exception e) {
+                backup.delete();
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private static boolean hasSaveFiles() throws IOException {
+        Path dir = Paths.get(ForgeConstants.USER_ADVENTURE_DIR);
+        if (!Files.isDirectory(dir))
+            return false;
+        try (Stream<Path> paths = Files.walk(dir)) {
+            return paths.anyMatch(p -> p.toString().endsWith(".sav"));
+        }
     }
 
     public static WorldSave getCurrentSave() {
