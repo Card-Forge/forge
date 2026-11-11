@@ -70,8 +70,11 @@ public class PermanentNoncreatureAi extends PermanentAi {
             if (!stops && !taxes) {
                 continue;
             }
-            hates = true;
             final String valid = st.getParamOrDefault("ValidCard", "Card");
+            if (valid.contains("NamedCard")) {
+                continue; // Pithing Needle and friends: the name is only chosen as it enters (see PithingNeedle logic)
+            }
+            hates = true;
             for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
                 if (!c.isValid(valid, host.getController(), host, st)) {
                     continue;

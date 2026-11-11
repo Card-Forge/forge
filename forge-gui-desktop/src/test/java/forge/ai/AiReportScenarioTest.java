@@ -135,6 +135,13 @@ public class AiReportScenarioTest extends AITest {
                                         .append(" opposing permanents with an activated ability=").append(forge.game.card.CardLists.getValidCards(
                                                 ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, k, ex)); }
                             }
+                            for (final forge.game.trigger.Trigger tr : k.getTriggers()) { // each enter-the-battlefield trigger, one ability of its chain at a time
+                                if (tr.getMode() != forge.game.trigger.TriggerType.ChangesZone || !"Battlefield".equals(tr.getParam("Destination"))) { continue; }
+                                sb.append(" trigger(stack=").append(game.getStack().size()).append("):");
+                                for (SpellAbility ex = tr.ensureAbility().copy(ai); ex != null; ex = ex.getSubAbility()) {
+                                    sb.append(' ').append(ex.getApi()).append('=').append(controller().doTrigger(ex, false));
+                                }
+                            }
                             sb.append(']');
                         } catch (final RuntimeException e) { sb.append(" [etbCheck threw ").append(e).append(']'); }
                     }
@@ -470,10 +477,11 @@ public class AiReportScenarioTest extends AITest {
                 }));
         l.add(noPlay("4300", "stealing the player's Pithing Needle that names its own card", Fid.APPROX, M1, true, "Steal Artifact",
                 c -> { c.bf("Island", 4, c.ai); c.hand("Steal Artifact", c.ai); c.bf("Sol Ring", c.ai); final Card n = c.bf("Pithing Needle", c.opp); n.setNamedCards(java.util.Arrays.asList("Sol Ring")); }));
-        l.add(new Scenario("5892", "Surgical Extraction takes the opposing key card (and its copies in hand and library), not its own most expensive one", Fid.APPROX, "MAIN2", true,
+        l.add(new Scenario("5892", "Surgical Extraction takes the opposing key card (and its copies in hand and library), not its own most expensive one", Fid.APPROX, "END_OF_TURN", false, /* an instant graveyard hate card waits for the opponent's end step (ChangeZoneAi.isPreferredTarget) */
                 c -> { c.bf("Swamp", c.ai); c.hand("Surgical Extraction", c.ai); c.gy("Inferno Titan", c.ai); c.gy("Reanimate", c.opp); c.hand("Reanimate", c.opp); c.lib("Reanimate", c.opp); },
                 c -> {
                     final SpellAbility sa = c.playOf("Surgical Extraction");
+                    if (sa == null) { return "Surgical Extraction not played" + c.why("Surgical Extraction"); }
                     final Card t = c.target(sa);
                     if (t == null || t.getOwner() != c.opp) { return "targeted " + t; }
                     c.resolve(sa);
@@ -483,7 +491,9 @@ public class AiReportScenarioTest extends AITest {
                     return c.ai.getCardsIn(ZoneType.Graveyard).stream().anyMatch(k -> k.getName().equals("Inferno Titan")) ? null : "exiled its own Inferno Titan";
                 }));
         l.add(play("5894", "Tishana's Tidebinder against an activated ability", Fid.APPROX, M1, false, "Tishana's Tidebinder",
-                c -> { c.bf("Island", 3, c.ai); c.hand("Tishana's Tidebinder", c.ai); final Card m = c.bf("Mother of Runes", c.opp); final SpellAbility sa = m.getSpellAbilities().get(0); sa.setActivatingPlayer(c.opp); sa.getTargets().add(m); c.game.getStack().add(sa); }));
+                c -> { c.bf("Island", 3, c.ai); c.hand("Tishana's Tidebinder", c.ai); final Card m = c.bf("Mother of Runes", c.opp); /* getSpellAbilities().get(0) is the creature spell: the tap ability is the one that goes on the stack */
+                    final SpellAbility sa = m.getSpellAbilities().stream().filter(SpellAbility::isActivatedAbility).findFirst().get(); sa.setActivatingPlayer(c.opp); sa.getTargets().add(m); c.game.getStack().add(sa);
+                    if (c.game.getStack().isEmpty()) { throw new IllegalStateException("the opponent's ability did not reach the stack"); } }));
         l.add(new Scenario("4054", "burn into Unsettled Mariner with exactly one mana (cannot pay the tax)", Fid.EXACT, M1, true,
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Unsettled Mariner", c.opp); },
                 c -> { final Card t = c.target(c.playOf("Lightning Bolt")); return t != null && t.getName().equals("Unsettled Mariner") ? "targeted the Mariner" : null; }));
@@ -526,14 +536,21 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return c.ai.getCounters(CounterEnumType.ENERGY) < 6 ? null : "energy never spent";
                 }));
-        l.add(aimed("5940", "Calibrated Blast on the creature that gives the player hexproof", Fid.APPROX, M1, true, "Calibrated Blast", "Shalai, Voice of Plenty",
-                c -> { c.bf("Mountain", 3, c.ai); /* Calibrated Blast costs {2}{R} */ c.hand("Calibrated Blast", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("5940", "Calibrated Blast's damage goes to the creature that gives the player hexproof (Shalai, Voice of Plenty)", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); /* {2}{R} */ c.hand("Calibrated Blast", c.ai); c.lib("Serra Angel", c.ai); /* the nonland card to reveal: 5 damage */
+                    c.bf("Shalai, Voice of Plenty", c.opp); c.bf("Grizzly Bears", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Calibrated Blast");
+                    if (sa == null) { return "AI did not play Calibrated Blast" + c.why("Calibrated Blast"); } // the ability has no target of its own: it is the revealed card's trigger that aims
+                    c.resolve(sa);
+                    return c.opp.getCardsIn(ZoneType.Battlefield).stream().anyMatch(k -> k.getName().equals("Shalai, Voice of Plenty")) ? "Shalai is still in play" : null;
+                }));
         l.add(new Scenario("6031", "plays a different Urza's land than the one already in play", Fid.EXACT, M1, true,
                 c -> { c.bf("Urza's Tower", c.ai); c.hand("Urza's Tower", c.ai); c.hand("Urza's Mine", c.ai); },
                 c -> { final List<Card> p = c.landPlays(); return !p.isEmpty() && p.get(0).getName().equals("Urza's Mine") ? null : "first land drop: " + p; }));
         l.add(new Scenario("6105", "Suppression Field, not Stony Silence, against non-artifact abilities", Fid.EXACT, M1, true,
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Stony Silence", c.ai); c.hand("Suppression Field", c.ai); c.bf("Mother of Runes", c.opp); c.bf("Giver of Runes", c.opp); },
-                c -> { final SpellAbility sa = c.first(); return sa != null && sa.getHostCard().getName().equals("Suppression Field") ? null : "first play was " + sa; }));
+                c -> { final SpellAbility sa = c.first(); return sa != null && sa.getHostCard().getName().equals("Suppression Field") ? null : "first play was " + sa + c.why("Suppression Field") + c.why("Stony Silence"); }));
         l.add(play("6617", "noncreature spell before combat with a prowess creature", Fid.EXACT, M1, true, "Lightning Bolt",
                 c -> { c.bf("Mountain", c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(noPlay("7335", "sacrifice-at-end-of-turn haste creature into a player with protection from creatures", Fid.APPROX, M1, true, "Ball Lightning",
