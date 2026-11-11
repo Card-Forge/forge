@@ -139,12 +139,27 @@ public abstract class FScreen extends FContainer {
             }
         }
         if (getWidth() == width && getHeight() == height) {
+            if (relayoutPending) { //the look changed while this screen was in the background
+                relayoutPending = false;
+                revalidate(true);
+            }
             if (header != null) {
                 header.onScreenActivate(); //let header handle when screen activated
             }
             return;
         }
+        relayoutPending = false;
         super.setSize(width, height);
+    }
+
+    private boolean relayoutPending;
+
+    /**
+     * Lays this screen out again the next time it is shown, even at the same size: for a change of look (the Arena look
+     * turned on or off) while it waits in the background, where laying it out now could show its menus over another.
+     */
+    public void relayoutWhenShown() {
+        relayoutPending = true;
     }
 
     @Override

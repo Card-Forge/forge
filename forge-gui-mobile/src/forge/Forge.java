@@ -905,22 +905,19 @@ public class Forge implements ApplicationListener {
     }
 
     /**
-     * Lays the current screen and every screen it can go back to out again at their sizes: for a change of look that
-     * moves things about (the Arena look turned on or off) rather than a change of size.
+     * Lays the current screen (and the home screen beside it) out again now and every screen it can go back to when it is
+     * shown next: for a change of look that moves things about (the Arena look turned on or off) rather than of size.
      */
     public static void relayoutScreens() {
-        final Set<FScreen> screens = new LinkedHashSet<>(Dscreens);
-        if (currentScreen != null) {
-            screens.add(currentScreen);
-            final FScreen backdrop = currentScreen.getLandscapeBackdropScreen();
-            if (backdrop != null) {
-                screens.add(backdrop);
-            }
+        for (final FScreen screen : Dscreens) {
+            screen.relayoutWhenShown();
         }
-        for (final FScreen screen : screens) {
-            if (screen.getWidth() > 0 && screen.getHeight() > 0) {
-                screen.revalidate(true);
+        if (currentScreen != null && currentScreen.getWidth() > 0) {
+            final FScreen backdrop = isLandscapeMode() ? currentScreen.getLandscapeBackdropScreen() : null;
+            if (backdrop != null && backdrop != currentScreen) {
+                backdrop.revalidate(true);
             }
+            currentScreen.revalidate(true);
         }
         Gdx.graphics.requestRendering();
     }
