@@ -116,7 +116,7 @@ public final class PersistLoopAi {
      * {@link #persistsClean}; or undying with no +1/+1 counter on a creature that cannot get +1/+1 counters (Solemnity,
      * static CantPutCounter): Geralf's Messenger + Solemnity + Cartel Aristocrat attacked into walls instead of looping.
      */
-    static boolean loopsClean(final Player ai, final Card c) {
+    public static boolean loopsClean(final Player ai, final Card c) {
         if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterEnumType.M1M1) == 0 && persistsClean(ai, c)) {
             return true;
         }

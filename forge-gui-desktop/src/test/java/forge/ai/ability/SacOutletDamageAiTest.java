@@ -75,4 +75,35 @@ public class SacOutletDamageAiTest extends AITest {
         assertEquals(countCardsWithName(game, "Kitchen Finks"), 1);
         assertEquals(countCardsWithName(game, "Melira, Sylvok Outcast"), 1);
     }
+
+    // Solemnity + Young Wolf (undying) + Goblin Bombardment: no +1/+1 counter, the wolf comes back each time
+    @Test
+    public void testSolemnityUndyingBombardmentLoops() {
+        assertLoops("Solemnity", "Young Wolf");
+    }
+
+    // Vizier of Remedies + Kitchen Finks + Goblin Bombardment: the persist counter is replaced by none
+    @Test
+    public void testVizierFinksBombardmentLoops() {
+        assertLoops("Vizier of Remedies", "Kitchen Finks");
+    }
+
+    private void assertLoops(final String enabler, final String looper) {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCard(enabler, ai);
+        addCard(looper, ai);
+        addCard("Goblin Bombardment", ai);
+        fillLibrary(ai, 20);
+        fillLibrary(opponent, 20);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        playUntilNextTurn(game);
+
+        assertTrue(opponent.getLife() <= 0, "life " + opponent.getLife());
+        assertEquals(countCardsWithName(game, looper), 1);
+    }
 }

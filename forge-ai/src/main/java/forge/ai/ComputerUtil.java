@@ -628,6 +628,15 @@ public class ComputerUtil {
                 sacList.add(loop);
                 return sacList;
             }
+            // a creature that comes back unchanged (persist with Melira or Vizier of Remedies, undying with Solemnity)
+            // costs nothing to sacrifice: Kitchen Finks rather than Vizier for Goblin Bombardment
+            for (final Card c : typeList) {
+                if (!c.isToken() && c.getOwner() == ai && c.getController() == ai && c.isInPlay() && c != source
+                        && PersistLoopAi.loopsClean(ai, c)) {
+                    sacList.add(c);
+                    return sacList;
+                }
+            }
         }
 
         while (count < amount) {

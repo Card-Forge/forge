@@ -98,7 +98,8 @@ public class DamageDealAi extends DamageAiBase {
 
     /**
      * "Sacrifice a creature: N damage to any target" (Goblin Bombardment). The creatures we can sacrifice
-     * kill the weakest opponent, or a persist creature comes back endlessly (Melira, Sylvok Outcast): target that
+     * kill the weakest opponent, or a persist / undying creature comes back endlessly (Melira, Vizier of Remedies,
+     * Solemnity: same test as PersistLoopAi.loopsClean): target that
      * opponent. Sacrifice choice stays with ComputerUtil.chooseSacrificeType (SacMe first, then the worst creature).
      */
     private static boolean sacOutletIsLethal(final Player ai, final SpellAbility sa, final Cost abCost, final Card source, final int dmg) {
@@ -132,8 +133,7 @@ public class DamageDealAi extends DamageAiBase {
         if (fodder.isEmpty()) {
             return false;
         }
-        final boolean endless = fodder.anyMatch(c -> c.hasKeyword(Keyword.PERSIST) && !c.isToken()
-                && c.getCounters(CounterEnumType.M1M1) == 0 && !c.canReceiveCounters(CounterEnumType.M1M1));
+        final boolean endless = fodder.anyMatch(c -> !c.isToken() && PersistLoopAi.loopsClean(ai, c));
         if (mana ? perShot < opp.getLife() : !endless && (long) perShot * fodder.size() < opp.getLife()) {
             return false;
         }
