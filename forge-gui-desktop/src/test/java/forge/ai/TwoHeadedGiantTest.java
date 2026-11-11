@@ -1,9 +1,11 @@
 package forge.ai;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
@@ -39,7 +41,7 @@ public class TwoHeadedGiantTest extends AITest {
         return teamGame(true);
     }
 
-    private Game teamGame(boolean sharedTeamTurns) {
+    private Game teamGame(boolean sharedTeamTurns, GameType... variants) {
         List<RegisteredPlayer> players = Lists.newArrayList();
         String[] names = {"a1", "a2", "b1", "b2"};
         for (int i = 0; i < names.length; i++) {
@@ -53,6 +55,9 @@ public class TwoHeadedGiantTest extends AITest {
         GameRules rules = new GameRules(GameType.Constructed);
         if (sharedTeamTurns) {
             rules.addAppliedVariant(GameType.TwoHeadedGiant);
+        }
+        for (GameType variant : variants) {
+            rules.addAppliedVariant(variant);
         }
         Game game = new Game(players, rules, new Match(rules, players, "Test"));
         game.setAge(GameStage.Play);
@@ -158,6 +163,35 @@ public class TwoHeadedGiantTest extends AITest {
         assertTrue(a1.hasLost(), "the teammate stayed in the game");
         assertTrue(game.isGameOver());
         assertTrue(b1.getOutcome().hasWon());
+    }
+
+    /** Fails if a Commander team does not start at 60 life, as the Two-Headed Giant format page sets. */
+    @Test
+    public void aCommanderTeamStartsAtSixtyLife() {
+        RegisteredPlayer rp = RegisteredPlayer.forVariants(4, EnumSet.of(GameType.TwoHeadedGiant, GameType.Commander),
+                new Deck(), null, false, null, null);
+        assertEquals(rp.getStartingLife(), 60);
+    }
+
+    /** Fails if combat damage from one commander to each teammate is counted per player, not per team as the format page sets,
+     *  or if the commander's tooltip lists the team's total more than once. */
+    @Test
+    public void commanderDamageAddsUpOverTheTeam() {
+        Game game = teamGame(true, GameType.Commander);
+        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1), b1 = game.getPlayers().get(2);
+        Card commander = addCard("Grizzly Bears", b1);
+        commander.setCommander(true);
+
+        a1.addDamageAfterPrevention(11, commander, null, true, new GameEntityCounterTable());
+        a2.addDamageAfterPrevention(9, commander, null, true, new GameEntityCounterTable());
+        game.getAction().checkStateEffects(true);
+        assertFalse(a1.hasLost(), "the team lost at 20 commander damage");
+        String info = b1.getView().getCommanderInfo(commander.getView());
+        assertEquals(StringUtils.countMatches(info, "Commander damage to"), 1, info);
+
+        a2.addDamageAfterPrevention(1, commander, null, true, new GameEntityCounterTable());
+        game.getAction().checkStateEffects(true);
+        assertTrue(a1.hasLost() && a2.hasLost(), "the team survived 21 commander damage");
     }
 
     /** Fails if a teammate's Platinum Angel keeps the team in the game after one player concedes (CR 810.8b). */

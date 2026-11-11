@@ -161,7 +161,8 @@ public class RegisteredPlayer {
     		start.schemes = schemes;
     	}
         if (appliedVariants.contains(GameType.TwoHeadedGiant)) {
-            start.setStartingLife(30); // 810.4: each team has a shared life total, which starts at 30 life
+            // with Commander, 40 and the +20 below give the 60 that the format page sets, which the CR does not
+            start.setStartingLife(appliedVariants.contains(GameType.Commander) ? 40 : 30); // 810.4: each team has a shared life total, which starts at 30 life
         }
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commanders = deck.getCommanders();
