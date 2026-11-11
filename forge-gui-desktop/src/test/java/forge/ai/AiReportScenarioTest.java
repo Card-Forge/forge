@@ -241,6 +241,13 @@ public class AiReportScenarioTest extends AITest {
         }, c -> c.plays(host) ? null : "AI never activated " + host + c.why(host));
     }
 
+    private AiPlayDecision freeCast(final Ctx c, final String name) {
+        final Card k = addCardToZone(name, c.ai, ZoneType.Exile);
+        final SpellAbility sa = k.getFirstSpellAbility().copyWithNoManaCost();
+        sa.setActivatingPlayer(c.ai);
+        return c.controller().canPlaySa(sa);
+    }
+
     private static Scenario skip(final String id, final String t, final String why) {
         return new Scenario(id, t, Fid.SMOKE, "MAIN1", true, c -> { }, c -> { throw new SkipException(why); });
     }
@@ -292,6 +299,23 @@ public class AiReportScenarioTest extends AITest {
                     for (int i = 0; i < 5; i++) { c.gy("Grizzly Bears", c.ai); } }));
         l.add(noPlay("4210", "Living End deck, empty graveyard: the cascade would waste the payoff", Fid.APPROX, M1, true, "Violent Outburst",
                 c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); c.hand("Violent Outburst", c.ai); c.lib("Living End", c.ai); c.lib("Lightning Bolt", c.ai); }));
+        // #4389: cascading into Living End with a full board kills the AI's own creatures and returns the opponent's best ones
+        l.add(noPlay("4389", "Living End deck, graveyard ready but five creatures on the battlefield: no cascade spell", Fid.APPROX, M1, true, "Violent Outburst",
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Forest", c.ai); c.hand("Violent Outburst", c.ai); c.lib("Living End", c.ai); c.lib("Lightning Bolt", c.ai);
+                    for (int i = 0; i < 5; i++) { c.gy("Grizzly Bears", c.ai); c.bf("Grizzly Bears", c.ai); } c.gy("Serra Angel", c.opp); }));
+        l.add(new Scenario("4389", "cascaded Living End with five creatures on the battlefield and the opponent's angels in the graveyard is not cast", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); for (int i = 0; i < 5; i++) { c.bf("Grizzly Bears", c.ai); } c.gy("Grizzly Bears", c.ai);
+                    c.gy("Serra Angel", c.opp); c.gy("Serra Angel", c.opp); c.gy("Wurmcoil Engine", c.opp); },
+                c -> {
+                    final AiPlayDecision d = freeCast(c, "Living End");
+                    return d != AiPlayDecision.WillPlay ? null : "AI cast the cascaded Living End and sacrificed its " + c.ai.getCreaturesInPlay().size() + " creatures";
+                }));
+        l.add(new Scenario("4389", "control: cascaded Living End with an empty battlefield and a full graveyard is cast", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); for (int i = 0; i < 4; i++) { c.gy("Serra Angel", c.ai); } c.gy("Grizzly Bears", c.opp); },
+                c -> {
+                    final AiPlayDecision d = freeCast(c, "Living End");
+                    return d == AiPlayDecision.WillPlay ? null : "AI would not cast the cascaded Living End: " + d;
+                }));
         l.add(play("4215", "Collected Company at the opponent's end step", Fid.EXACT, "END_OF_TURN", false, "Collected Company",
                 c -> { c.bf("Forest", 4, c.ai); c.hand("Collected Company", c.ai); for (int i = 0; i < 6; i++) { c.lib("Grizzly Bears", c.ai); } }));
         l.add(play("4352", "Adventure side while the main spell is castable too", Fid.APPROX, M1, true, "Bonecrusher Giant",
