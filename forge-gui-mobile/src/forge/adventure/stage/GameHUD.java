@@ -1161,6 +1161,10 @@ public class GameHUD extends Stage {
         notificationPane.addAction(newNotification);
     }
 
+    public boolean isShowingNotification() {
+        return notificationPane.hasActions();
+    }
+
     public void clearNotifications() {
         notificationText.setText("");
         notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth() * 0.4f, 25);

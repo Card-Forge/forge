@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import forge.Forge;
+import forge.adventure.data.EffectData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.MapStage;
@@ -136,6 +137,13 @@ public class TileMapScene extends HudScene {
 
     private void initializeDialogs() {
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
+        EffectData globalEffect = Config.instance().getConfigData().globalEffect;
+        if (WorldStage.getInstance().consumeGlobalEffectDialog() && globalEffect != null) {
+            //The stage has one dialog, so quest dialogs wait until this one is closed.
+            stage.effectDialog(globalEffect.getIntro(Forge.getLocalizer().getMessage("lblGlobalEffectDialogDescription")),
+                    globalEffect.getPlayerSideDescription(), () -> AdventureQuestController.instance().showQuestDialogs(stage));
+            return;
+        }
         AdventureQuestController.instance().showQuestDialogs(stage);
     }
     @Override
