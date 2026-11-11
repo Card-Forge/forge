@@ -50,10 +50,13 @@ public class VZoneDisplay extends VCardDisplayArea {
         if (isArenaHand()) {
             //the hovered card rises and its neighbours part: lay the fan out again when the pointer moves to another card
             CardAreaPanel hovered = null;
-            for (CardAreaPanel p : cardPanels.get()) {
-                if (p.isHovered()) {
-                    hovered = p;
-                    break;
+            //under an Arena dialog nothing rises: the pointer left resting on a card would keep it up behind the dim
+            if (!forge.screens.match.arena.ArenaDialogOverlay.coversBoard()) {
+                for (CardAreaPanel p : cardPanels.get()) {
+                    if (p.isHovered()) {
+                        hovered = p;
+                        break;
+                    }
                 }
             }
             if (hovered != arenaRaised) {

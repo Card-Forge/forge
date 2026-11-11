@@ -399,12 +399,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     host.getTranslatedName()), min, max);
         }
-        if ("NumTimes".equals(announce)) {
-            return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
+        setPromptContext(ability);
+        try {
+            if ("NumTimes".equals(announce)) {
+                return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
+                        host.getTranslatedName()), min, max, min + 9);
+            }
+            return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     host.getTranslatedName()), min, max, min + 9);
+        } finally {
+            clearPromptContext();
         }
-        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
-                host.getTranslatedName()), min, max, min + 9);
+    }
+
+    /** Tells the user interface which card's effect asks the next question (see IGuiGame#setPromptContext). */
+    private void setPromptContext(final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        getGui().setPromptContext(host == null ? null : CardView.get(host), null);
+    }
+
+    private void clearPromptContext() {
+        getGui().setPromptContext(null, null);
     }
 
     @Override
@@ -676,6 +691,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min >= max) {
             return min;
         }
+        setPromptContext(sa);
+        try {
+            return chooseNumberFromRange(title, min, max);
+        } finally {
+            clearPromptContext();
+        }
+    }
+
+    private int chooseNumberFromRange(final String title, final int min, final int max) {
         // todo check for X cost or any max value for optional costs like multikicker, etc to determine the correct max value,
         // fixes crash for word of command OutOfMemoryError when selecting a card with announce X or Multikicker since
         // it will build from 0 to Integer.MAX_VALUE...
@@ -698,7 +722,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final List<Integer> choices,
                             final Player relatedPlayer) {
-        return getGui().one(title, choices);
+        setPromptContext(sa);
+        try {
+            return getGui().one(title, choices);
+        } finally {
+            clearPromptContext();
+        }
     }
 
     @Override
@@ -1205,8 +1234,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return new CardCollection(inp.getSelected());
             }
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
-                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
+            setPromptContext(sa);
+            List<CardView> views;
+            try {
+                views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
+                        localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
+            } finally {
+                clearPromptContext();
+            }
             endTempShowCards();
             final CardCollection choices = new CardCollection();
             gameCacheDiscard.addToList(views, choices);
@@ -1805,8 +1840,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (getGui().isLibgdxPort()) {
             tempShowCards(player.getCardsIn(ZoneType.Hand));
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
-                    localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
+            getGui().setPromptContext(null, localizer.getMessageorUseDefault("lblDiscardToHandSize", "Discard to hand size ({0} max)", max));
+            List<CardView> views;
+            try {
+                views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
+                        localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
+            } finally {
+                clearPromptContext();
+            }
             endTempShowCards();
             final CardCollection choices = new CardCollection();
             gameCacheDiscard.addToList(views, choices);
@@ -2102,7 +2143,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 .collect(Collectors.toList());
         if (choices.isEmpty())
             return null;
-        CardFaceView cardFaceView = getGui().one(message, choices);
+        setPromptContext(sa);
+        CardFaceView cardFaceView;
+        try {
+            cardFaceView = getGui().one(message, choices);
+        } finally {
+            clearPromptContext();
+        }
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
 
@@ -2111,7 +2158,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Map<CardFaceView, ICardFace> mapped = faces.stream().collect(Collectors.toMap(CardFaceView::new, Function.identity(), (a, b) -> a, TreeMap::new));
         if (mapped.isEmpty())
             return null;
-        CardFaceView chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
+        setPromptContext(sa);
+        CardFaceView chosen;
+        try {
+            chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
+        } finally {
+            clearPromptContext();
+        }
         return mapped.get(chosen);
     }
 

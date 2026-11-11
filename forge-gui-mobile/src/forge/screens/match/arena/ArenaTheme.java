@@ -72,16 +72,21 @@ public final class ArenaTheme {
     public static final Color MOLTEN_GLOW      = rgb(0xFF8A2A);
     public static final Color MOLTEN_CORE      = rgba(255, 214, 130, 55);
     public static final Color MOLTEN_EDGE      = rgba(255, 240, 200, 120);
-    // Secondary buttons: near-black with a white outline; disabled: deep blue with a lit rim; toggled: gold
+    // Secondary buttons: near-black with a white outline; disabled: faded graphite with a faint rim (plainly inert, never
+    // a colour a live button wears); toggled: gold; destructive (Concede): red
     public static final Color BTN_TOP          = rgb(0x15171D);
     public static final Color BTN_BOTTOM       = rgb(0x08090C);
     public static final Color BTN_HOVER_TOP    = rgb(0x2C303A);
     public static final Color BTN_HOVER_BOTTOM = rgb(0x181A21);
     public static final Color BTN_RIM          = rgba(255, 255, 255, 128);
     public static final Color BTN_HOVER_RIM    = rgba(255, 255, 255, 190);
-    public static final Color BTN_OFF_TOP      = rgb(0x2B4C8C);
-    public static final Color BTN_OFF_BOTTOM   = rgb(0x18305E);
-    public static final Color BTN_OFF_RIM      = rgba(150, 195, 245, 210);
+    public static final Color BTN_OFF_TOP      = rgb(0x24272E);
+    public static final Color BTN_OFF_BOTTOM   = rgb(0x15171B);
+    public static final Color BTN_OFF_RIM      = rgba(255, 255, 255, 46);
+    public static final Color BTN_DANGER_TOP   = rgb(0xC0383C);
+    public static final Color BTN_DANGER_BOTTOM = rgb(0x7A1418);
+    public static final Color BTN_DANGER_HOVER_TOP = rgb(0xDC4A4E);
+    public static final Color BTN_DANGER_RIM   = rgb(0xFF9A8C);
     public static final Color BTN_ON_TOP       = rgb(0xA8843F);
     public static final Color BTN_ON_BOTTOM    = rgb(0x6A4E22);
 

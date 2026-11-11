@@ -1031,7 +1031,9 @@ public class MatchScreen extends FScreen {
         CardView card = null;
         Rectangle at = null;
         boolean inHand = false;
-        if (!CardZoom.isOpen() && potentialListener != null && isHoverPreviewEnabled()) {
+        //not under an Arena dialog: the board's card under the pointer would show through the dialog's dim beside its cards
+        if (!CardZoom.isOpen() && !forge.screens.match.arena.ArenaDialogOverlay.coversBoard() && potentialListener != null
+                && isHoverPreviewEnabled()) {
             for (FDisplayObject object : potentialListener) {
                 if (object == null || !object.isHovered()) { continue; }
                 if (object instanceof CardAreaPanel panel) {

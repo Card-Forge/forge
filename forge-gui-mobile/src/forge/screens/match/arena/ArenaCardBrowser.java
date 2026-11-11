@@ -157,15 +157,30 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         return true;
     }
 
-    /** Shows cards that are only being revealed: nothing to pick, just Done. */
+    /** Shows cards that are only being revealed: nothing to pick, just Done. The cards show their faces meanwhile. */
     public static boolean reveal(final String message, final List<CardView> cards, final Runnable done) {
         if (!ArenaTheme.isMatchBoard() || cards == null || cards.isEmpty()) {
             return false;
         }
-        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.REVEAL, Forge.getLocalizer().getMessage("lblRevealed"), message, cards, 0, 0, null);
-        browser.whenClosed = done;
+        final ArenaCardBrowser browser = new ArenaCardBrowser(Mode.REVEAL, ArenaChoices.titleFor(Forge.getLocalizer().getMessage("lblRevealed")),
+                message, cards, 0, 0, null);
+        REVEALING.addAll(cards);
+        browser.whenClosed = () -> {
+            REVEALING.removeAll(cards);
+            if (done != null) {
+                done.run();
+            }
+        };
         browser.openOverlay();
         return true;
+    }
+
+    /** The cards a reveal is showing now (render thread): face up, as the game revealed them. */
+    private static final java.util.Set<CardView> REVEALING = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+
+    /** Whether the Arena browser is showing this card as revealed, so it is drawn face up. */
+    public static boolean isRevealing(final CardView card) {
+        return !REVEALING.isEmpty() && REVEALING.contains(card);
     }
 
     /**
@@ -276,7 +291,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
         this.cards = new ArrayList<>(cards);
         this.min = min;
         this.max = max;
-        this.focusCard = mode == Mode.ZONE || mode == Mode.REVEAL ? null : ArenaDialogKit.promptCard();
+        this.focusCard = mode == Mode.ZONE || mode == Mode.REVEAL ? null : ArenaChoices.sourceCard();
         if (selected != null) {
             for (final CardView c : selected) {
                 if (this.cards.contains(c) && chosen.size() < Math.max(1, max)) {
@@ -431,8 +446,7 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
     private void updateButtons() {
         switch (mode) {
             case CHOOSE:
-                btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmit", chosen.size());
-                btnSubmit.enabled = chosen.size() >= min && chosen.size() <= max;
+                ArenaDialogKit.submitWords(btnSubmit, chosen.size(), min, max);
                 break;
             case ARRANGE:
                 btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmitPlain");
@@ -442,8 +456,12 @@ public final class ArenaCardBrowser extends ArenaDialogOverlay {
                 // mirror the prompt's own buttons, which the input keeps up to date
                 final VPrompt p = prompt();
                 final FButton ok = p == null ? null : p.getBtnOk(), cancel = p == null ? null : p.getBtnCancel();
-                btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaSubmit", chosenCount());
+                final int n = chosenCount();
                 btnSubmit.enabled = ok != null && ok.isEnabled();
+                // nothing picked yet: the prompt's own word for going on ("Done"), never "Choose 0"
+                btnSubmit.text = n > 0 ? Forge.getLocalizer().getMessage("lblArenaSubmit", n)
+                        : ok != null && ok.getText() != null && !ok.getText().isEmpty() ? ok.getText()
+                        : Forge.getLocalizer().getMessage("lblArenaSubmitPlain");
                 btnSecondary.text = cancel == null || cancel.getText() == null ? "" : cancel.getText();
                 btnSecondary.enabled = cancel != null && cancel.isEnabled();
                 final boolean shown = !btnSecondary.text.isEmpty();

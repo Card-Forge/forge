@@ -9,6 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
+import forge.screens.match.arena.ArenaTheme;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 
@@ -99,6 +100,12 @@ public class DualListBox<T> extends FDialog {
         addAllButton = add(new FButton(">>", e -> addAll()));
         removeButton = add(new FButton("<", onRemove));
         removeAllButton = add(new FButton("<<", e -> removeAll()));
+        if (ArenaTheme.isMatchBoard()) { //the Arena look says what the arrows do
+            addButton.setText(Forge.getLocalizer().getMessage("lblArenaOrderAdd"));
+            addAllButton.setText(Forge.getLocalizer().getMessage("lblArenaOrderAddAll"));
+            removeButton.setText(Forge.getLocalizer().getMessage("lblArenaOrderRemove"));
+            removeAllButton.setText(Forge.getLocalizer().getMessage("lblArenaOrderRemoveAll"));
+        }
         
         final FEventHandler onAccept = e -> {
             hide();
@@ -161,7 +168,9 @@ public class DualListBox<T> extends FDialog {
     }
 
     public void setSecondColumnLabelText(String label) {
-        orderedLabel.setText(label);
+        //the Arena look says which end of the ordered list the caption means ("First in the order: Top of Library")
+        final boolean arena = ArenaTheme.isMatchBoard() && label != null && !label.isEmpty();
+        orderedLabel.setText(arena ? Forge.getLocalizer().getMessage("lblArenaOrderFirst", label) : label);
     }
 
     public void setRememberDecisionVisible(boolean visible) {

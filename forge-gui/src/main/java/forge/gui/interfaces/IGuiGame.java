@@ -263,6 +263,15 @@ public interface IGuiGame {
 
     void setCard(CardView card);
 
+    /**
+     * What the next choice, number or name the game asks for is about: the card whose effect asks ({@code source}, may be
+     * null) and, when the question has no card behind it, a short heading saying why it is asked ({@code reason}, may be
+     * null), e.g. discarding down to the maximum hand size. Both null when the question is answered. A user interface
+     * may use it to title its dialog; by default it is ignored.
+     */
+    default void setPromptContext(CardView source, String reason) {
+    }
+
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
 
     default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}

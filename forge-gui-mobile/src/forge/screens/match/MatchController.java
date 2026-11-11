@@ -59,6 +59,7 @@ import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.screens.match.arena.ArenaCardBrowser;
 import forge.screens.match.arena.ArenaChoices;
 import forge.screens.match.arena.ArenaDamageOverlay;
 import forge.screens.match.arena.ArenaTheme;
@@ -886,6 +887,17 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public void setCard(final CardView card) {
         // doesn't need to do anything
+    }
+
+    @Override
+    public boolean mayView(final CardView c) {
+        //what the Arena browser is showing as revealed is shown face up, whoever's zone it is in
+        return ArenaCardBrowser.isRevealing(c) || super.mayView(c);
+    }
+
+    @Override
+    public void setPromptContext(final CardView source, final String reason) {
+        ArenaChoices.setContext(source, reason); //the Arena dialogs name the card (or the reason) in their titles
     }
 
     @Override

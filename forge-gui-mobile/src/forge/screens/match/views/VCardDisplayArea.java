@@ -34,6 +34,7 @@ import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.arena.ArenaBoard;
 import forge.screens.match.arena.ArenaCards;
+import forge.screens.match.arena.ArenaDialogOverlay;
 import forge.screens.match.arena.ArenaMatchLayout;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -1229,7 +1230,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 final ArenaCards.State st = getArenaState();
                 st.follow(screenPos.x, screenPos.y, displayArea);
                 stopAnimations(); //the Arena look swings the card over itself
-                ArenaCards.drawTile(g, getCard(), st, isHovered(), 0, 0, getWidth(), getHeight());
+                ArenaCards.drawTile(g, getCard(), st, isHovered() && !ArenaDialogOverlay.coversBoard(), 0, 0, getWidth(), getHeight());
                 if (ghostKind != GhostKind.NONE) {
                     g.fillSmoothRoundRect(GHOST_TINT, 0, 0, getWidth(), getHeight(), getWidth() * 0.04f);
                 }

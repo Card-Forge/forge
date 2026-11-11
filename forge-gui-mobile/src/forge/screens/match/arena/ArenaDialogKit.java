@@ -51,7 +51,10 @@ public final class ArenaDialogKit {
     private static final Color CHECK_TOP = ArenaTheme.rgb(0x0C0B09), CHECK_BOTTOM = ArenaTheme.rgb(0x1E1B16);
     private static final Color BACKDROP = ArenaTheme.rgb(0x040507);
     private static final Color PILL_SHADOW = ArenaTheme.rgba(60, 22, 0, 190), PILL_SHADOW_SOFT = ArenaTheme.rgba(60, 22, 0, 150);
-    private static final Color PILL_OFF_TEXT = ArenaTheme.rgba(255, 255, 255, 178);
+    private static final Color PILL_OFF_TEXT = ArenaTheme.rgba(255, 255, 255, 110);
+    private static final Color CAPTION = ArenaTheme.rgba(242, 236, 223, 225);
+    /** A caption over a pill: this much of the pill's height, and this far above it. */
+    private static final float CAPTION_H = 0.62f, CAPTION_GAP = 0.18f;
 
     /** The corner radius of a card-like tile is half of this share of its width: about 5%. */
     public static final float TILE_ARC = 0.1f;
@@ -312,6 +315,17 @@ public final class ArenaDialogKit {
 
     /** What the first end of a row means, spoken for the last end: "Resolve first" gives "Resolve last". */
     public static String lastCaption(final String first) {
+        //a library's ends: the other end of "Closest to top" is "Closest to bottom" (and back); under "Top of library", lower
+        final forge.util.Localizer words = Forge.getLocalizer();
+        if (first != null && first.equalsIgnoreCase(words.getMessage("lblClosestToTop"))) {
+            return words.getMessage("lblClosestToBottom");
+        }
+        if (first != null && first.equalsIgnoreCase(words.getMessage("lblClosestToBottom"))) {
+            return words.getMessage("lblClosestToTop");
+        }
+        if (first != null && (first.equalsIgnoreCase(words.getMessage("lblTopOfLibrary")) || first.equalsIgnoreCase(words.getMessage("lblArenaTop")))) {
+            return words.getMessage("lblArenaLowerInLibrary");
+        }
         if (first != null && first.length() >= 5 && first.toLowerCase().endsWith("first")) {
             final boolean upper = Character.isUpperCase(first.charAt(first.length() - 5));
             return first.substring(0, first.length() - 5) + (upper ? "Last" : "last");
@@ -431,8 +445,15 @@ public final class ArenaDialogKit {
                 shownTitle = fallback;
             } else {
                 final float room = Math.round(w * RULE_W * 0.9f);
+                final int split = heading.indexOf(": ");
+                final String source = split > 0 ? heading.substring(0, split) : null;
                 if (heading.length() <= TITLE_MOST_CHARS && measure(heading, titleFont) <= room) {
                     shownTitle = heading;
+                } else if (source != null && source.length() <= TITLE_MOST_CHARS && measure(source, titleFont) <= room) {
+                    // "Fireball: Choose a Number" too long: the card stays the title, what it asks leads the line under it
+                    shownTitle = source;
+                    final String what = heading.substring(split + 2);
+                    sub = sub == null || sub.isEmpty() ? what : what + " · " + sub;
                 } else {
                     shownTitle = fallback;
                     sub = sub == null || sub.isEmpty() ? heading : heading + " · " + sub;
@@ -925,6 +946,10 @@ public final class ArenaDialogKit {
         public final Rectangle bounds = new Rectangle();
         public String text = "";
         public boolean primary, enabled = true, toggled, visible = true;
+        /** Red: an answer that cannot be taken back (Concede). */
+        public boolean danger;
+        /** Words just above the pill saying what it is waiting for ("Pick 1 to continue"), or null. */
+        public String caption;
         public boolean hover, pressed;
         public Runnable action;
         /** Shown when this pill came into view (Swing FButton arenaAppear): grows in from 90%. */
@@ -963,8 +988,19 @@ public final class ArenaDialogKit {
             if (!visible || alpha <= 0f) {
                 return;
             }
-            pill(g, text, bounds.x, bounds.y, bounds.width, bounds.height, primary, hoverFade.get() > 0.5f && enabled, pressed && enabled, toggled,
-                    enabled, alpha);
+            final boolean hot = hoverFade.get() > 0.5f && enabled;
+            if (danger && enabled) {
+                dangerPill(g, text, bounds.x, bounds.y, bounds.width, bounds.height, hot, pressed, alpha);
+            } else {
+                pill(g, text, bounds.x, bounds.y, bounds.width, bounds.height, primary, hot, pressed && enabled, toggled, enabled, alpha);
+            }
+            if (caption != null && !caption.isEmpty()) {
+                final float ch = bounds.height * CAPTION_H;
+                final FSkinFont f = fitFont(caption, ch * 0.62f, ArenaTheme.px(10), Math.max(bounds.width * 1.6f, ArenaTheme.px(200)));
+                final float cy = bounds.y - ch - bounds.height * CAPTION_GAP;
+                ArenaArt.textShadowed(g, caption, f, ArenaTheme.alpha(CAPTION, CAPTION.a * alpha, S1), bounds.x - bounds.width * 0.5f, cy,
+                        bounds.width * 2f, ch, Align.center);
+            }
         }
     }
 
@@ -972,6 +1008,57 @@ public final class ArenaDialogKit {
     public static void pill(final Graphics g, final String text, final float x, final float y, final float w, final float h, final boolean primary,
             final boolean hover, final boolean pressed, final boolean toggled, final boolean enabled, final float alpha) {
         pill(g, text, null, x, y, w, h, primary, hover, pressed, toggled, enabled, alpha);
+    }
+
+    /**
+     * A submit pill's words for {@code picked} of {@code min}..{@code max}: "Choose 2" when something is picked, "Skip"
+     * when nothing need be, else "Confirm" waiting (inert) under a caption saying how many are still to pick, so the
+     * button never says "Choose 0" or reads as a live answer it is not.
+     */
+    public static void submitWords(final Pill pill, final int picked, final int min, final int max) {
+        final forge.util.Localizer words = Forge.getLocalizer();
+        pill.enabled = picked >= min && picked <= max;
+        pill.caption = null;
+        if (picked > 0) {
+            pill.text = words.getMessage("lblArenaSubmit", picked);
+        } else if (min <= 0) {
+            pill.text = words.getMessage("lblArenaSkip");
+        } else {
+            pill.text = words.getMessage("lblArenaConfirm");
+        }
+        if (picked < min) {
+            pill.caption = words.getMessage("lblArenaPickMore", min - picked);
+        }
+    }
+
+    /** Whether an answer's words are one that cannot be taken back (Concede), so it is drawn red. */
+    public static boolean isDestructive(final String label) {
+        return label != null && label.equalsIgnoreCase(Forge.getLocalizer().getMessage("lblConcede"));
+    }
+
+    /** A destructive answer's pill (Concede): red with a warm rim, white words; brighter under the pointer. */
+    public static void dangerPill(final Graphics g, final String text, final float x, final float y, final float w, final float h,
+            final boolean hover, final boolean pressed, final float alpha) {
+        final float old = g.getfloatAlphaComposite();
+        if (alpha < 1f) {
+            g.setAlphaComposite(old * alpha);
+        }
+        final float pad = ArenaArt.buttonPad(h), bx = x + pad, by = y + pad, bw = w - 2 * pad, bh = h - 2 * pad, r = bh / 2f;
+        if (bw > 0 && bh > 0) {
+            g.fillSmoothRoundRectGradient(pressed ? ArenaTheme.BTN_DANGER_BOTTOM : hover ? ArenaTheme.BTN_DANGER_HOVER_TOP : ArenaTheme.BTN_DANGER_TOP,
+                    pressed ? ArenaTheme.BLACK : ArenaTheme.BTN_DANGER_BOTTOM, true, bx, by, bw, bh, r);
+            g.drawSmoothRoundRect(Math.max(1f, ArenaTheme.px(1.5f)), ArenaTheme.BTN_DANGER_RIM, bx, by, bw, bh, r);
+        }
+        if (text != null && !text.isEmpty()) {
+            final FSkinFont f = fitFont(text, Math.max(ArenaTheme.px(12), Math.min(h * 0.5f, ArenaTheme.px(30))), ArenaTheme.px(10), w - h * 0.7f);
+            final float dy = pressed ? Math.max(1f, ArenaTheme.px(1)) : 0f;
+            g.drawText(text, f, PILL_SHADOW, x, y + dy + 1, w, h, false, Align.center, true);
+            g.drawText(text, f, ArenaTheme.WHITE, x, y + dy, w, h, false, Align.center, true);
+            g.drawText(text, f, ArenaTheme.WHITE, x + 1, y + dy, w, h, false, Align.center, true);
+        }
+        if (alpha < 1f) {
+            g.setAlphaComposite(old);
+        }
     }
 
     /** The font a pill this tall would pick for its words if they fit (one size for a whole wall of pills). */

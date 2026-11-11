@@ -40,6 +40,15 @@ public abstract class ArenaDialogOverlay extends FOverlay {
     private boolean closed;
     private int openMs = 320;
 
+    /**
+     * Whether an Arena dialog covers the board now (not stepped aside to view the battlefield). The board's cards then
+     * take no hover: the pointer that rested on one when the dialog opened would keep it raised and lit under the dim.
+     */
+    public static boolean coversBoard() {
+        final FOverlay top = FOverlay.getTopOverlay();
+        return top instanceof ArenaDialogOverlay && !((ArenaDialogOverlay) top).viewingBattlefield;
+    }
+
     protected ArenaDialogOverlay() {
         super(null); // the dialog draws its own backdrop
         btnView.action = this::toggleBattlefield;

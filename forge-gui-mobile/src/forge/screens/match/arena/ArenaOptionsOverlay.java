@@ -248,8 +248,18 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
         final ArenaOptionsOverlay o = new ArenaOptionsOverlay(Kind.BUTTONS, title, message, null, 1, 1, card, false);
         o.addOptions(buttons, null);
         final int primary = defaultIndex >= 0 && defaultIndex < o.options.size() ? defaultIndex : 0;
-        o.options.get(primary).primary = true;
-        o.options.get(primary).answerPill.primary = true;
+        // an answer that cannot be taken back (Concede) is red, and then nothing is lit as the one to press
+        boolean danger = false;
+        for (final Option option : o.options) {
+            if (option.answerPill != null && ArenaDialogKit.isDestructive(option.label)) {
+                option.answerPill.danger = true;
+                danger = true;
+            }
+        }
+        if (!danger) {
+            o.options.get(primary).primary = true;
+            o.options.get(primary).answerPill.primary = true;
+        }
         o.whenClosed = () -> {
             if (done != null) {
                 done.accept(o.answer >= 0 ? o.answer : primary);
@@ -268,7 +278,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
         this.min = min;
         this.max = max;
         // a plain question shows only the card it was asked about
-        this.focusCard = card != null || kind == Kind.BUTTONS ? card : ArenaDialogKit.promptCard();
+        this.focusCard = card != null || kind == Kind.BUTTONS ? card : ArenaChoices.sourceCard();
         this.offerRemember = offerRemember;
         setOpenMillis(320);
 
@@ -419,6 +429,7 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
 
     private void updateButtons() {
         btnSubmit.visible = submitShown();
+        btnSubmit.caption = null;
         if (kind == Kind.REVEAL) {
             btnSubmit.text = Forge.getLocalizer().getMessage("lblOK");
             btnSubmit.enabled = true;
@@ -428,11 +439,13 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
         } else {
             // declining a single pick has its own button; a list of picks may be left empty
             final int least = max == 1 ? 1 : min;
-            btnSubmit.enabled = picked.size() >= least && picked.size() <= max;
-            // the button says what it does: what is still to pick, or "Choose" a single pick, "Submit 2" several
-            btnSubmit.text = picked.size() < least ? Forge.getLocalizer().getMessage("lblArenaPickMore", least - picked.size())
-                    : max == 1 ? Forge.getLocalizer().getMessage("lblArenaChooseThis")
-                    : Forge.getLocalizer().getMessage("lblArenaSubmit", picked.size());
+            if (max == 1) {
+                btnSubmit.enabled = picked.size() == 1;
+                btnSubmit.text = Forge.getLocalizer().getMessage("lblArenaChooseThis");
+                btnSubmit.caption = picked.isEmpty() ? Forge.getLocalizer().getMessage("lblArenaPickMore", 1) : null;
+            } else {
+                ArenaDialogKit.submitWords(btnSubmit, picked.size(), least, max);
+            }
         }
         if (getWidth() > 0) {
             ArenaDialogKit.placeButtons(getWidth(), getHeight(), btnSubmit, btnOther, btnCancel);

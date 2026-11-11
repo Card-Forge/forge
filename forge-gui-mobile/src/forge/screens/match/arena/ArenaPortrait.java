@@ -142,7 +142,8 @@ public final class ArenaPortrait implements ArenaSkin<VAvatar> {
                 ArenaArt.hint(g, st.waitingText, hf, cx, hintTop, -v.screenPos.x, ArenaBoard.windowW() - v.screenPos.x);
             }
         }
-        if (!opponent) { // unblocked attackers that would kill you: said above your portrait while it can still change
+        // unblocked attackers that would kill you: said above your portrait while it can still change (not once it is over)
+        if (!opponent && (game == null || !game.isGameOver())) {
             final int incoming = ArenaBoard.incomingDamage();
             if (incoming > 0 && incoming >= player.getLife()) {
                 if (incoming != st.lethalFor || st.lethalText == null) {

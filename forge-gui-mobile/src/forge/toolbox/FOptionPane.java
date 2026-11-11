@@ -84,12 +84,21 @@ public class FOptionPane extends FDialog {
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
         showOptionDialog(message, null, title, icon, options, defaultOption, callback);
     }
-    public static void showOptionDialog(final String message, final FSkinFont messageFont, final String title, final FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
+    public static void showOptionDialog(final String message, final FSkinFont messageFont, final String title, final FImage icon, final List<String> options0, final int defaultOption, final Consumer<Integer> callback) {
+        final List<String> options = orYesNo(options0);
         if (ArenaChoices.ask(message, title, isStandardIcon(icon), options, defaultOption, callback)) {
             return; //the Arena look on the match screen asks with its own overlay
         }
         final FOptionPane optionPane = new FOptionPane(message, messageFont, title, icon, null, options, defaultOption, callback);
         optionPane.show();
+    }
+
+    /** The answers a question offers: Yes and No when the caller gave none (the game's confirm passes none). */
+    private static List<String> orYesNo(final List<String> options) {
+        if (options != null && !options.isEmpty()) {
+            return options;
+        }
+        return ImmutableList.of(Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"));
     }
 
     /** Whether a dialog's picture is only one of the plain question, information, warning and error marks (or none). */
@@ -105,7 +114,8 @@ public class FOptionPane extends FDialog {
             }
         }.invokeAndWait();
     }
-    public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final List<String> options, final int defaultOption, final Consumer<Integer> callback) {
+    public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final List<String> options0, final int defaultOption, final Consumer<Integer> callback) {
+        final List<String> options = orYesNo(options0);
         if (ArenaChoices.askAboutCard(card, message, title, options, defaultOption, callback)) {
             return; //the Arena look on the match screen asks with its own overlay
         }

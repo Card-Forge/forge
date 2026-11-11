@@ -8,6 +8,7 @@ import java.util.function.Function;
 
 import forge.Forge;
 import forge.game.GameEntityView;
+import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.interfaces.IGuiGame.OrderResult;
@@ -23,6 +24,47 @@ import forge.util.CardTranslation;
 public final class ArenaChoices {
     private ArenaChoices() { }
 
+    // what the game says the next question is about (IGuiGame.setPromptContext): set on the game thread, read on the
+    // render thread when the dialog opens
+    private static volatile CardView contextSource;
+    private static volatile String contextReason;
+
+    /** The card whose effect asks the next question, or why it is asked when no card does; both null once answered. */
+    public static void setContext(final CardView source, final String reason) {
+        contextSource = source;
+        contextReason = reason;
+    }
+
+    /**
+     * The card a dialog stands beside as what asks: the one the game named, none when the game gave only a reason (a
+     * discard to hand size has no card behind it), else the card of the prompt on the board.
+     */
+    static CardView sourceCard() {
+        final CardView source = contextSource;
+        if (source != null) {
+            return source;
+        }
+        final String reason = contextReason;
+        return reason != null && !reason.isEmpty() ? null : ArenaDialogKit.promptCard();
+    }
+
+    /**
+     * A dialog's title saying what it is for: the reason the game gave, or "Fireball: Choose a Number" when a card's
+     * effect asks (as a modal spell's "Abzan Charm: choose a mode"), else the plain title.
+     */
+    static String titleFor(final String title) {
+        final String reason = contextReason;
+        if (reason != null && !reason.isEmpty()) {
+            return reason;
+        }
+        final CardView source = contextSource;
+        if (source == null || source.getCurrentState() == null) {
+            return title;
+        }
+        final String name = CardTranslation.getTranslatedName(source.getCurrentState().getName());
+        return name == null || name.isEmpty() ? title : Forge.getLocalizer().getMessage("lblArenaTitleFor", name, title);
+    }
+
     /** GuiChoose.getChoices: pick between min and max (max below zero: only reveal), the picks in the order made. */
     @SuppressWarnings("unchecked")
     public static <T> boolean getChoices(final String message, final int min, final int max, final Collection<T> choices0, final Collection<T> selected,
@@ -37,14 +79,15 @@ public final class ArenaChoices {
             if (max < 0 || (min < 0 && max <= 0)) { // nothing to choose: the cards are only being revealed
                 return ArenaCardBrowser.reveal(message, cards, () -> callback.accept(new ArrayList<>()));
             }
-            return ArenaCardBrowser.choose(chooseTitle(min, max, cards.size()), message, Math.max(0, min), max, cards,
+            return ArenaCardBrowser.choose(titleFor(chooseTitle(min, max, cards.size())), message, Math.max(0, min), max, cards,
                     (Collection<CardView>) selected, picks -> callback.accept((List<T>) picks));
         }
         if (max < 0) {
             return ArenaOptionsOverlay.choose(Forge.getLocalizer().getMessage("lblRevealed"), message, 0, -1, choices, null, display, null,
                     picks -> callback.accept(new ArrayList<>()));
         }
-        return ArenaOptionsOverlay.choose(optionsTitle(min, max, choices), message, Math.max(0, min), max, choices, selected, display, null, callback);
+        return ArenaOptionsOverlay.choose(titleFor(optionsTitle(min, max, choices)), message, Math.max(0, min), max, choices, selected, display, null,
+                callback);
     }
 
     /**
@@ -162,7 +205,7 @@ public final class ArenaChoices {
         if (text == null || text.trim().isEmpty()) {
             text = title;
         }
-        return ArenaOptionsOverlay.ask(heading, text, options, defaultOption, card != null ? card : ArenaDialogKit.promptCard(), callback);
+        return ArenaOptionsOverlay.ask(heading, text, options, defaultOption, card != null ? card : sourceCard(), callback);
     }
 
     // ---- titles -----------------------------------------------------------------------------------------------------
@@ -185,6 +228,9 @@ public final class ArenaChoices {
         }
         if (max == 1 && !choices.isEmpty() && choices.get(0) instanceof SpellAbilityView) {
             return Forge.getLocalizer().getMessage("lblArenaChooseAbility");
+        }
+        if (max == 1 && !choices.isEmpty() && choices.get(0) instanceof CardFaceView) {
+            return Forge.getLocalizer().getMessage("lblArenaNameACard");
         }
         if (max == 1) {
             return Forge.getLocalizer().getMessage("lblArenaChooseOne");
