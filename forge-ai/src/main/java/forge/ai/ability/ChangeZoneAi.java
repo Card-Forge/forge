@@ -338,8 +338,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             CardCollectionView list = p.getCardsIn(origin);
 
             // remove cards that won't be seen if library can't be searched
-            if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
+            if (origin.contains(ZoneType.Library)) {
+                CardCollectionView searchable = ai.getSearchableLibrary(sa, p);
+                list = CardLists.filter(list, c -> !c.isInZone(ZoneType.Library) || (searchable != null && searchable.contains(c)));
             }
 
             if (type != null && p == ai) {
@@ -771,7 +772,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("SurvivalOfTheFittest")) {
-            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
         } else if (aiLogic.equals("BeforeCombat")) {
@@ -1070,7 +1071,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
+                if (!immediately && (!game.getPhaseHandler().isPlayerNextTurn(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                         && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                         && !ComputerUtil.activateForCost(sa, ai)) {
@@ -1501,6 +1502,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
+        if (destination == null) {
+            return fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+        // an opponent choosing between cards revealed from outside the game (Extrapolate the Impossible, Wish-like
+        // effects with a chooser) hands over the worse one
+        if (player.isOpponentOf(decider) && ZoneType.Hand.equals(destination) && origin.contains(ZoneType.Sideboard)) {
+            return ComputerUtilCard.getWorstAI(fetchList);
+        }
         List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         String position = sa.getParamOrDefault("LibraryPosition", null);
         // Focus on the keycards I don't already have access to
@@ -1520,6 +1529,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             keycardFound = withKeyCard.getFirst();
             break;
+        }
+
+        if (keycardFound == null && player == decider && player.getController() instanceof PlayerControllerAi
+                && (ZoneType.Hand.equals(destination) || ZoneType.Library.equals(destination) && "0".equals(position))) {
+            // no key card named by the deck file: the deck plan (combo, commander, ramp) knows what is missing,
+            // for the card taken into the hand and for the one put on top of the library (Vampiric Tutor)
+            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player)
+                    .tutorPick(player, fetchList);
         }
 
         if (sa.hasParam("AILogic")) {

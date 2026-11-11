@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -35,7 +36,9 @@ public class InnScene extends UIScene {
         localObjectId = objectId;
         if (lastGameScene != null)
             object.lastGameScene=lastGameScene;
-        initLocalEvent();
+        //Only pick up an event that already exists. Generating a new one (boosters, opponents) is slow, so it
+        //happens after the inn is on screen, see refreshStatus().
+        localEvent = findExistingLocalEvent();
 
         return object;
     }
@@ -110,7 +113,32 @@ public class InnScene extends UIScene {
         tempHitPointCost.setDisabled(!purchaseable);
         tempHitPointCost.setText("[+GoldCoin] " + tempHealthCost);
 
-        initLocalEvent();
+        localEvent = findExistingLocalEvent();
+        if (localEvent == null && !AdventureEventController.instance().isEventOnCooldown(localPointOfInterestId)) {
+            //A new event has to be generated. Show the inn right away and fill the event in once it's ready.
+            eventDescription.setText("[GREY]Loading events...");
+            event.setDisabled(true);
+            scheduleEventCreation();
+        } else {
+            updateEventStatus();
+        }
+    }
+
+    private void scheduleEventCreation() {
+        if (eventCreationPending)
+            return;
+        eventCreationPending = true;
+        //Posted twice so at least one frame with the loading text is drawn before the blocking generation starts.
+        Gdx.app.postRunnable(() -> Gdx.app.postRunnable(() -> {
+            eventCreationPending = false;
+            if (Forge.getCurrentScene() != this)
+                return; //Left the inn in the meantime, the event is created on the next visit.
+            initLocalEvent();
+            updateEventStatus();
+        }));
+    }
+
+    private void updateEventStatus() {
         if (localEvent == null){
             eventDescription.setText("[GREY]No events at this time");
             event.setDisabled(true);
@@ -150,14 +178,21 @@ public class InnScene extends UIScene {
         Forge.switchScene(scene);
     }
 
-    private static void initLocalEvent() {
-        localEvent = null;
+    private boolean eventCreationPending = false;
+
+    private static AdventureEventData findExistingLocalEvent() {
         for (AdventureEventData data :  AdventurePlayer.current().getEvents()){
             if (data.sourceID.equals(localPointOfInterestId) && data.eventOrigin == localObjectId){
-                localEvent = data;
-                return;
+                return data;
             }
         }
+        return null;
+    }
+
+    private static void initLocalEvent() {
+        localEvent = findExistingLocalEvent();
+        if (localEvent != null)
+            return;
         AdventureEventController controller = AdventureEventController.instance();
         localEvent = controller.createEvent(localPointOfInterestId);
         if(localEvent != null)

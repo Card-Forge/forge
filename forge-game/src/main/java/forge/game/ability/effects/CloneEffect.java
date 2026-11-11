@@ -114,7 +114,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         final boolean optional = sa.hasParam("Optional");
-        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopy", cardToCopy.getTranslatedName()), null)) {
+        if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopy", cardToCopy.getTranslatedName()), cardToCopy, null)) {
             return;
         }
 

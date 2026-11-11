@@ -57,6 +57,7 @@ public class NetConnectUtil {
         final int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
+        lobby.restoreSetup();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
         NetworkLogConfig.activateNetworkLogging();

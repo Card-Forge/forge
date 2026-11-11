@@ -25,8 +25,8 @@ public class TriggerCrankContraption extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player, AbilityKey.Card);
     }
 
     @Override

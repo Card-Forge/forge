@@ -8,7 +8,6 @@ import forge.gamemodes.net.server.HostingServer;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.server.DeltaSyncManager;
-import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
@@ -133,8 +132,8 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         // Protocol lifecycle
         Assert.assertTrue(result.clientOpenViewCalled,
                 "Client should have received openView over the wire");
-        Assert.assertTrue(result.clientSetGameViewCount > 0,
-                "Client should have received setGameView updates (count: " + result.clientSetGameViewCount + ")");
+        Assert.assertEquals(result.clientSetGameViewCount, 1,
+                "Client should receive one full setGameView per game (count: " + result.clientSetGameViewCount + ")");
 
         // Client GameView state
         GameView clientGameView = result.clientGameView;
@@ -386,7 +385,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
         // Threshold is CHECKSUM_INTERVAL * 5/4 to give headroom for the adaptive
         // interval and game-end boundary effects while still catching checksum failures
-        if (RemoteClientGuiGame.useDeltaSync && totalDeltas >= DeltaSyncManager.CHECKSUM_INTERVAL) {
+        if (totalDeltas >= DeltaSyncManager.CHECKSUM_INTERVAL) {
             Assert.assertTrue(totalChecksums >= expectedMinChecksums,
                     String.format("Checksums should fire ~every %d deltas, expected >= %d but got %d (from %d deltas)",
                             DeltaSyncManager.CHECKSUM_INTERVAL, expectedMinChecksums, totalChecksums, totalDeltas));

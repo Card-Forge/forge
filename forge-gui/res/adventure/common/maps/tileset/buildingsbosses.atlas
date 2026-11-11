@@ -198,3 +198,6 @@ Imperial Office
 SvyeluniteTemple
   xy: 396, 550
   size: 48, 32
+DwarvenHold
+  xy: 128, 480
+  size: 48, 32

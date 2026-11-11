@@ -11,326 +11,391 @@
   },
   {
     "name": "Landscape Sketchbook - Mirage",
+    "unique": true,
     "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
+    "unique": true,
     "description": "Gives access to Urza's Saga land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Coldsnap",
+    "unique": true,
     "description": "Gives access to Coldsnap land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Zendikar",
+    "unique": true,
     "description": "Gives access to Zendikar land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Innistrad",
+    "unique": true,
     "description": "Gives access to Innistrad land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ravnica Allegiance",
+    "unique": true,
     "description": "Gives access to Ravnica Allegiance land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Theros",
+    "unique": true,
     "description": "Gives access to Theros land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kamigawa Neon Dynasty",
+    "unique": true,
     "description": "Gives access to Neon Dynasty land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Dominaria",
+    "unique": true,
     "description": "Gives access to Dominaria land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Lorwyn",
+    "unique": true,
     "description": "Gives access to Lorwyn land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Shards of Alara",
+    "unique": true,
     "description": "Gives access to Shards of Alara land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Amonkhet",
+    "unique": true,
     "description": "Gives access to Amonkhet land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ixalan",
+    "unique": true,
     "description": "Gives access to Ixalan land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unglued",
+    "unique": true,
     "description": "Gives access to Unglued land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unhinged",
+    "unique": true,
     "description": "Gives access to Unhinged land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unstable",
+    "unique": true,
     "description": "Gives access to Unstable land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unfinity",
+    "unique": true,
     "description": "Gives access to Unfinity land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Aetherdrift",
+    "unique": true,
     "description": "Gives access to Aetherdrift land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Edge of Eternities",
+    "unique": true,
     "description": "Gives access to Edge of Eternities land arts in the add basic lands menu of the deckbuilder's upper right corner.y",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Strixhaven: School of Mages",
+    "unique": true,
     "description": "Gives access to Strixhaven land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Streets of New Capenna",
+    "unique": true,
     "description": "Gives access to New Capenna land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kaldheim",
+    "unique": true,
     "description": "Gives access to Kaldheim land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ikoria: Lair of Behemoths",
+    "unique": true,
     "description": "Gives access to Ikoria land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Throne of Eldraine",
+    "unique": true,
     "description": "Gives access to Eldraine land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Shadows Over Innistrad",
+    "unique": true,
     "description": "Gives access to Shadows Over Innistrad land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Battle for Zendikar",
+    "unique": true,
     "description": "Gives access to Battle for Zendikar land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Khans of Tarkir",
+    "unique": true,
     "description": "Gives access to Khans of Tarkir land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Hour of Devastation",
+    "unique": true,
     "description": "Gives access to Hour of Devastation land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kaladesh",
+    "unique": true,
     "description": "Gives access to Kaladesh land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Mercadian Masques",
+    "unique": true,
     "description": "Gives access to Mercadian Masques land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - New Phyrexia",
+    "unique": true,
     "description": "Gives access to New Phyrexia land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Mirrodin Besieged",
+    "unique": true,
     "description": "Gives access to Mirrodin Besieged land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Scars of Mirrodin",
+    "unique": true,
     "description": "Gives access to Scars of Mirrodin land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Magic Origins",
+    "unique": true,
     "description": "Gives access to Magic Origins land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Core Set 2021",
+    "unique": true,
     "description": "Gives access to M21 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Modern Horizons",
+    "unique": true,
     "description": "Gives access to Modern Horizons land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Tempest",
+    "unique": true,
     "description": "Gives access to Tempest land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Onslaught",
+    "unique": true,
     "description": "Gives access to Onslaught land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Odyssey",
+    "unique": true,
     "description": "Gives access to Odyssey land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Rise of the Eldrazi",
+    "unique": true,
     "description": "Gives access to Rise of the Eldrazi land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Dragons of Tarkir",
+    "unique": true,
     "description": "Gives access to Dragons of Tarkir land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Duskmourn: House of Horror",
+    "unique": true,
     "description": "Gives access to Duskmorn land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Outlaws of Thunder Junction",
+    "unique": true,
     "description": "Gives access to Thunder Junction land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Bloomburrow",
+    "unique": true,
     "description": "Gives access to Bloomburrow land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - The Brothers War",
+    "unique": true,
     "description": "Gives access to Brothers War land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Seventh Edition",
+    "unique": true,
     "description": "Gives access to 7th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Alpha",
+    "unique": true,
     "description": "Gives access to Alpha land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Beta",
+    "unique": true,
     "description": "Gives access to Beta land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Revised Edition",
+    "unique": true,
     "description": "Gives access to Revised land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Fourth Edition",
+    "unique": true,
     "description": "Gives access to 4th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Fifth Edition",
+    "unique": true,
     "description": "Gives access to 5th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Classic Sixth Edition",
+    "unique": true,
     "description": "Gives access to 6th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ice Age",
+    "unique": true,
     "description": "Gives access to Ice Age non-snow land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Tempest",
+    "unique": true,
     "description": "Gives access to Tempest land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal",
+    "unique": true,
     "description": "Gives access to Portal land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal Second Age",
+    "unique": true,
     "description": "Gives access to Portal Second Age land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal Three Kingdoms",
+    "unique": true,
     "description": "Gives access to Three Kingdoms land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Starter 1999",
+    "unique": true,
     "description": "Gives access to Starter 99 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Starter 2000",
+    "unique": true,
     "description": "Gives access to Starter 2000 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Battle Royale",
+    "unique": true,
     "description": "Gives access to Battle Royale Box Set land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Beatdown Box Set",
+    "unique": true,
     "description": "Gives access to Beatdown Box Set land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Lorwyn Eclipsed",
+    "unique": true,
     "description": "Gives access to Lorwyn Eclipsed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Tarkir: Dragonstorm",
+    "unique": true,
     "description": "Gives access to Tarkir Dragonstorm land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Secrets of Strixhaven",
+    "unique": true,
     "description": "Gives access to Secrets of Strixhaven land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Reality Fracture",
+    "unique": true,
     "description": "Gives access to Reality Fracture land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
@@ -3025,7 +3090,7 @@
   },
     {
     "name": "Artist's Beret",
-    "description": "Rummage on noncreature, 2R for noncreature cost -2, 2R for +2 noncombat damage",
+    "description": "Rummage on noncreature, 2R for noncreature cost -1, 2R for +2 noncombat damage",
     "equipmentSlot": "Neck",
     "iconName": "Artist'sBeret",
     "effect": {

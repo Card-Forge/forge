@@ -54,14 +54,14 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
         CardCollection allCards = this.filterCards(table);
 
-        sa.setTriggeringObject(AbilityKey.Cards, allCards);
-        sa.setTriggeringObject(AbilityKey.Amount, allCards.size());
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Cause);
+        objects.put(AbilityKey.Cards, allCards);
+        objects.put(AbilityKey.Amount, allCards.size());
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Cause);
     }
 
     @Override

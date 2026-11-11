@@ -1,0 +1,10 @@
+Name:U.S.S. Reliant, From Hell's Heart
+ManaCost:2 B B
+Types:Legendary Artifact Spacecraft
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever NICKNAME enters or deals combat damage to a player, return target creature card with mana value 4 or less from your graveyard to the battlefield with a finality counter on it.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or deals combat damage to a player, return target creature card with mana value 4 or less from your graveyard to the battlefield with a finality counter on it.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ValidTgts$ Creature.cmcLE4+YouOwn | ValidTgtsDesc$ creature card with mana value 4 or less in your graveyard
+K:Station:10
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE10_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 10+ Flying
+Oracle:Whenever U.S.S. Reliant enters or deals combat damage to a player, return target creature card with mana value 4 or less from your graveyard to the battlefield with a finality counter on it.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.)\nSTATION 10+\nFlying

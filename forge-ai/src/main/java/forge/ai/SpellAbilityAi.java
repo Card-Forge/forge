@@ -147,7 +147,7 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
             final String logic) {
          if (logic.equals("AtOppEOT")) {
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
          }
         return checkPhaseRestrictions(ai, sa, ph);
     }
@@ -504,7 +504,7 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
             return false;
         }
 
-        return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
+        return phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai);
     }
 
     protected boolean setAiEvaluationHost(final SpellAbility sa, final CardCollection remember) {

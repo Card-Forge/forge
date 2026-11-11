@@ -16,7 +16,7 @@ If no operators are passed between tokens, Forge will assume it is joined by `an
 
 Keywords can be negated by prefixing a minus sign `-`. For example, `t:creature -t:goblin` will search for "creatures that aren't goblins".
 
-If no keywords are used, Forge will search in their name, type and oracle text for the passed values. For exemple, `(cat | warrior)` will search for cards that has `cat` or `warrior` anywhere in their name, type, or oracle text. Not that it is not bounrd, so it will also match on "catastrophe". This type of search can be negated too. For exemple, `lightning -bolt` will search for card with "lightning and not bolt in their name, types, or oracle text", or `(t:cat | t:warrior) -(orc | angel | phyrexian)` will search for "cat or warrior cards that don't have orc, angel, or phyrexian in their name, types, or oracle text.
+If no keywords are used, Forge will search in their name, type and oracle text for the passed values. For example, `(cat | warrior)` will search for cards that has `cat` or `warrior` anywhere in their name, type, or oracle text. Not that it is not bounrd, so it will also match on "catastrophe". This type of search can be negated too. For example, `lightning -bolt` will search for card with "lightning and not bolt in their name, types, or oracle text", or `(t:cat | t:warrior) -(orc | angel | phyrexian)` will search for "cat or warrior cards that don't have orc, angel, or phyrexian in their name, types, or oracle text.
 
 ## Implemented keywords
 
@@ -31,7 +31,7 @@ Use `c` or `colorless` to match colorless cards, and `m`, `multi`, or `multicolo
 
 You can use comparison expressions (`>`, `<`, `>=`, `<=`, and `!=`) to check against ranges of colors.
 
-*Exemples:*
+*Examples:*
 `c:rg` - Cards that are at least red and green
 `c!gruul` - Cards that exclusively red and green
 `color>=uw -c:red` - Cards that are at least white and blue, but not red
@@ -43,7 +43,7 @@ Find cards of a certain card type with the `t:` or `type:` keywords. You can sea
 
 Using only partial words is allowed.
 
-*Exemples:*
+*Examples:*
 `t:merfolk t:legend` - Legendary merfolk cards
 `t:goblin -t:creature` - Goblin cards that aren't creatures
 
@@ -54,7 +54,7 @@ Use the `o:` or `oracle:` keywords to find cards that have specific phrases in t
 
 You must put quotes `" "` around text with punctuation or spaces.
 
-*Exemples:*
+*Examples:*
 `o:"enters tapped"` - Cards that enter the battlefield tapped
 
 #### Keyword(s): `keyword:`, `kw:`
@@ -62,7 +62,7 @@ You can use `keyword:` or `kw:` to search for cards with a specific keyword abil
 
 > Note: Known to be buggy. You can search by oracle text instead.
 
-*Exemples:*
+*Examples:*
 `kw:flying -t:creature` - Noncreatures that have the flying keyword
 
 #### Keyword(s): `name:`
@@ -70,7 +70,7 @@ You can find cards with certain words in their name using `name`.
 
 Supports `!` (exact search), `!=` (doesn't contain), and `:` or `=` (contains).
 
-*Exemples:*
+*Examples:*
 `name!Fire` - The card Fire
 `name:Phyrexian`- Cards that contain Phyrexian in their name
 
@@ -82,7 +82,7 @@ Find vanilla cratures (Creatures with no abilities).
 #### Keyword(s): `manavalue`, `mv`, `cmc`
 You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, comparing with a numeric expression (>, <, =, >=, <=, and !=).
 
-*Exemples:*
+*Examples:*
 `c:u mv=5` - Blue cards with mana value 5
 
 ### Power, Toughness, and Loyalty
@@ -90,20 +90,20 @@ You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, co
 #### Keyword(s): `power`, `pow`
 You can use numeric expressions (>, <, =, >=, <=, and !=) to find cards with certain power using `power` or `pow`.
 
-*Exemples:*
+*Examples:*
 `pow>=8` - Cards with 8 or more power
 `pow>tou c:w t:creature` - White creatures that are top-heavy
 
 #### Keyword(s): `toughness`, `tou`
 You can use numeric expressions (>, <, =, >=, <=, and !=) to find cards with certain toughness using `toughness` or `tou`.
 
-*Exemples:*
+*Examples:*
 `tou<=4` - Cards with 4 or less thoughness
 
 #### Keyword(s): `loyalty`, `loy`
 You can use numeric expressions (`>`, `<`, `=`, `>=`, `<=`, and `!=`) to find cards with certain starting loyalty using `loyalty` or `loy`.
 
-*Exemples:*
+*Examples:*
 `t:planeswalker loy=3` - Planeswalkers that start at 3 loyalty
 
 ### Sets (Editions)

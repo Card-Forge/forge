@@ -1,0 +1,10 @@
+Name:Balance of Terror
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:3:DBDestroy,DBExile,DBExile
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.Other,Enchantment.Other | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ another artifact or enchantment | SpellDescription$ Destroy up to one other target artifact or enchantment.
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+Other | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ another permanent you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile up to one other target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy up to one other target artifact or enchantment.\nII, III — Exile up to one other target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
