@@ -12,6 +12,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
+import forge.screens.home.rogue.CSubmenuRogueMap;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.toolbox.FAbsolutePositioner;
 
@@ -108,6 +109,11 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             selected = EDocID.valueOf(FModel.getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
         } catch (final Exception e) { }
 
+        if (selected == EDocID.HOME_ROGUEMAP) {
+            itemClick(CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun() == null
+                    ? EDocID.HOME_ROGUESTART : EDocID.HOME_ROGUEMAP);
+            return;
+        }
         if (selected != null && VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(selected) != null) {
             itemClick(selected);
         }

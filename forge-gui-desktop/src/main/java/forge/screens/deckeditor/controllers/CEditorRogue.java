@@ -30,7 +30,6 @@ import forge.game.GameType;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueIO;
 import forge.gamemodes.rogue.RogueRun;
-import forge.gamemodes.rogue.RogueTutorial;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
@@ -51,7 +50,6 @@ import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.rogue.CSubmenuRogueMap;
-import forge.screens.home.rogue.RogueTutorialHelper;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -147,8 +145,6 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
 
         // Setup Add Basic Lands button
         getBtnAddBasicLands().setCommand((UiCommand) () -> addBasicLands(this));
-
-        RogueTutorialHelper.showIfNotSeen(RogueTutorial.DECK_EDITOR);
     }
 
     /**

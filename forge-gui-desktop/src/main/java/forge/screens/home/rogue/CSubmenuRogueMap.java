@@ -550,19 +550,19 @@ public enum CSubmenuRogueMap implements ICDoc {
       return;
     }
 
-    if (!Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ROGUE)) {
-      return;
-    }
-
     CDeckEditorUI deckEditor = CDeckEditorUI.SINGLETON_INSTANCE;
     deckEditor.setEditorController(new CEditorRogue(currentRun, FScreen.DECK_EDITOR_ROGUE,
         deckEditor.getCDetailPicture()));
+    if (!Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ROGUE)) {
+      return;
+    }
 
     SwingUtilities.invokeLater(() -> {
       VCardCatalog catalog = VCardCatalog.SINGLETON_INSTANCE;
       if (catalog.getParentCell() != null) {
         catalog.getParentCell().setSelected(catalog);
       }
+      RogueTutorialHelper.showIfNotSeen(RogueTutorial.DECK_EDITOR);
     });
   }
 }
