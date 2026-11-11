@@ -1023,6 +1023,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             for (int i = 0; i < groupNames.size(); i++) {
                 float y = i * rh;
                 boolean shown = lstSettings.isGroupVisible(i);
+                if (forge.screens.match.arena.ArenaMenus.on()) { //Arena look: gold wash and bar, gold words for the current group
+                    if (i == current || (i == hovered && shown)) {
+                        forge.screens.match.arena.ArenaMenus.activeRow(g, 0, y, w, rh, true, i != current);
+                    }
+                    g.drawText(groupNames.get(i), font, shown ? forge.screens.match.arena.ArenaMenus.entryText(i == current, i == hovered)
+                            : SettingsScreen.DESC_COLOR.getColor(), pad, y, w - 2 * pad, rh, false, Align.left, true);
+                    continue;
+                }
                 if (i == current) {
                     g.fillRect(FList.getPressedColor().alphaColor(0.30f), 0, y, w, rh);
                     g.fillRect(FList.getPressedColor(), 0, y, Math.max(2f, Utils.scale(2)), rh);

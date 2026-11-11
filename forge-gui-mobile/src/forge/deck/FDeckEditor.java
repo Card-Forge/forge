@@ -565,7 +565,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     // ---- Arena look on a wide desktop window: the catalog and the deck side by side, as Arena's deck builder has them
     private static final float SPLIT_DECK_SHARE = 0.3f;
-    private static final int SPLIT_CATALOG_COLUMNS = 6;
     //each kind of catalog once a session, so a view picked while editing is kept afterwards
     private static final Set<ItemManagerConfig> splitViewsChosen = EnumSet.noneOf(ItemManagerConfig.class);
     private boolean splitLayout, catalogTabHiddenBySplit;
@@ -606,8 +605,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (catalogPage.cardManager.getConfig() != null && splitViewsChosen.add(catalogPage.cardManager.getConfig())) {
                 //the first time: the catalog as a grid of cards, the deck as a list, as Arena shows them
                 catalogPage.cardManager.setViewIndex(1);
-                if (catalogPage.cardManager.getImageColumnCount() < SPLIT_CATALOG_COLUMNS) {
-                    catalogPage.cardManager.setImageColumnCount(SPLIT_CATALOG_COLUMNS);
+                //cards about a third of the window high, so two rows and a bit show: 6 across at 3440x1440, 4 at 1600x900
+                final int columns = Math.max(4, Math.min(8, Math.round(2.45f * Forge.getScreenWidth() / Forge.getScreenHeight())));
+                if (catalogPage.cardManager.getImageColumnCount() < columns) {
+                    catalogPage.cardManager.setImageColumnCount(columns);
                 }
                 for (DeckSectionPage page : pagesBySection.values()) {
                     page.cardManager.setViewIndex(0);
