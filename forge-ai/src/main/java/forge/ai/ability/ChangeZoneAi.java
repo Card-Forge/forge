@@ -628,6 +628,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
+    /** The best card of the list that the AI can cast with the mana of its next turn, a land when it has none in hand. */
+    private static Card nearTermPileCard(final Player ai, final CardCollection list) {
+        int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
+        final boolean landInHand = ai.getCardsIn(ZoneType.Hand).anyMatch(CardPredicates.LANDS);
+        if (landInHand) {
+            mana++;
+        }
+        final int nearTermMana = mana + 1;
+        final CardCollection cheap = CardLists.filter(list, c -> c.getCMC() <= nearTermMana && (!c.isLand() || !landInHand));
+        return cheap.isEmpty() ? null : ComputerUtilCard.getBestAI(cheap);
+    }
+
     /**
      * Some logic for picking a creature card from a list.
      * @param list
@@ -644,7 +656,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return null;
         }
 
-        if (ai.getTurn() <= 3) {
+        {
+            // a creature the AI can cast with its next land is worth more than a bigger one it cannot (Eladamri's Call
+            // with four lands in play fetches the 4-drop, not Avacyn); with mana for everything the best one still wins
             int manaSources = ComputerUtilMana.getAvailableManaEstimate(ai, false);
             if (CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
                 manaSources++;
@@ -1701,7 +1715,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Does AI need a land?
             // The logic here seems wrong if the decider isn't the same as the player
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
+            if (c == null && origin.contains(ZoneType.Library) && sa.hasParam("RememberChanged") && sa.getSubAbility() != null) {
+                // a pile for the opponent to split (Gifts Ungiven): the opponent leaves the worst two, so the first card
+                // taken is one the AI can use at once, whatever the others are
+                c = nearTermPileCard(decider, fetchList);
+            }
+            if (c == null && !hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
                     !hand.anyMatch(crd -> ComputerUtilMana.hasEnoughManaSourcesToCast(crd.getFirstSpellAbility(), decider))) {
                 c = basicManaFixing(decider, fetchList);
             }

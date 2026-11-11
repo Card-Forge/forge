@@ -254,8 +254,10 @@ public class AiReportScenarioTest extends AITest {
         // ---------------- AI doesn't cast ...
         l.add(play("4261", "name-a-card lock piece against a Sol Ring", Fid.EXACT, "MAIN2", true, "Pithing Needle",
                 c -> { c.bf("Plains", c.ai); c.hand("Pithing Needle", c.ai); c.counters(c.bf("Wrenn and Six", c.opp), CounterEnumType.LOYALTY, 3); /* (bf() adds no loyalty and the walker would die) a planeswalker is what the AI Needles for sure; a plain activated ability is only a 5% roll, and a mana ability (Sol Ring) is exempt */ }));
-        l.add(play("4279", "Solitary Confinement", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
-                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Wurmcoil Engine", c.ai); /* discard fodder for its upkeep: uncastable with Plains only, and not a land drop */ c.bf("Grizzly Bears", c.opp); }));
+        l.add(play("4279", "Solitary Confinement at low life with two other cards (the discard for its upkeep)", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
+                c -> { c.ai.setLife(5, null); c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Wurmcoil Engine", c.ai); /* uncastable with Plains only: discard fodder */ c.bf("Grizzly Bears", c.opp); }));
+        l.add(noPlay("4279", "Solitary Confinement at full life: no reason to skip its own draw step", Fid.EXACT, "MAIN2", true, "Solitary Confinement",
+                c -> { c.bf("Plains", 3, c.ai); c.hand("Solitary Confinement", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Wurmcoil Engine", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4279", "Forge Anew with an equipment in play", Fid.APPROX, "MAIN2", true, "Forge Anew",
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Forge Anew", c.ai); c.gy("Bonesplitter", c.ai); /* its enter trigger needs an Equipment in the graveyard */ c.bf("Grizzly Bears", c.ai); }));
         l.add(play("4279", "Springleaf Drum with a creature to tap", Fid.EXACT, M1, true, "Springleaf Drum",
@@ -354,7 +356,7 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Boseiju, Who Endures", c.ai); c.bf("Sol Ring", c.opp); },
                 c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Boseiju, Who Endures") && sa.isAbility()) ? null : "channel not used"));
         l.add(new Scenario("6108", "The Underworld Cookbook: discard the fatty for the reanimation spell (should activate The Underworld Cookbook)", Fid.APPROX, "MAIN2", true,
-                c -> { c.bf("Swamp", 3, c.ai); /* too little mana to cast Emrakul: it can only be discarded */ c.bf("The Underworld Cookbook", c.ai); c.hand("Goryo's Vengeance", c.ai); c.hand("Emrakul, the Aeons Torn", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> { c.bf("Swamp", 3, c.ai); /* too little mana to cast Emrakul: it can only be discarded */ c.bf("The Underworld Cookbook", c.ai); c.hand("Goryo's Vengeance", c.ai); c.hand("Griselbrand", c.ai); /* (not Emrakul: its own trigger shuffles it out of the graveyard the moment it is discarded) */ c.bf("Grizzly Bears", c.opp); },
                 c -> c.plays("The Underworld Cookbook") ? null : "AI never activated The Underworld Cookbook" + c.why("The Underworld Cookbook")));
         l.add(play("6719", "Catapult Captain can kill the opponent by sacrificing a 0/6", Fid.EXACT, M1, true, "Catapult Captain",
                 c -> { c.bf("Swamp", 3, c.ai); c.bf("Catapult Fodder", c.ai).changeCardState("Transform", null, null); /* the Captain is its back face */ c.bf("Giant Ox", c.ai); c.opp.setLife(6, null); }));
@@ -471,12 +473,14 @@ public class AiReportScenarioTest extends AITest {
         l.add(aimed("4225", "kill priority: Elvish Piper over Birds of Paradise", Fid.APPROX, M1, true, "Terminate", "Elvish Piper",
                 c -> { c.bf("Swamp", c.ai); c.bf("Mountain", c.ai); c.hand("Terminate", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Elvish Piper", c.opp); }));
         l.add(new Scenario("4282", "tutor pile early in the game must not be all expensive cards", Fid.APPROX, M1, true,
-                c -> { c.bf("Island", 4, c.ai); c.hand("Gifts Ungiven", c.ai); c.lib("Wurmcoil Engine", c.ai); c.lib("Inferno Titan", c.ai); c.lib("Griselbrand", c.ai); c.lib("Emrakul, the Aeons Torn", c.ai); c.lib("Island", c.ai); },
+                c -> { c.bf("Island", 4, c.ai); c.hand("Gifts Ungiven", c.ai); c.lib("Wurmcoil Engine", c.ai); c.lib("Inferno Titan", c.ai); c.lib("Griselbrand", c.ai); c.lib("Craterhoof Behemoth", c.ai); /* (Emrakul shuffles the graveyard back into the library, the Island with it) */ c.lib("Island", c.ai); },
                 c -> {
                     final SpellAbility sa = c.playOf("Gifts Ungiven");
                     if (sa == null) { return "Gifts not cast" + c.why("Gifts Ungiven"); }
                     c.resolve(sa);
-                    return c.ai.getCardsIn(ZoneType.Hand).stream().anyMatch(k -> k.getCMC() >= 6) ? "ended with only top-end cards in hand" : null;
+                    // the pile has to contain the cheap card (the Island): whichever two cards the opponent leaves, the Island is in hand or in the graveyard, never still in the library
+                    final boolean tookCheapCard = java.util.stream.Stream.concat(c.ai.getCardsIn(ZoneType.Hand).stream(), c.ai.getCardsIn(ZoneType.Graveyard).stream()).anyMatch(k -> k.getCMC() == 0 && k.isLand());
+                    return tookCheapCard ? null : "the pile was only top-end cards" + c.trace;
                 }));
         l.add(noPlay("4300", "stealing the player's Pithing Needle that names its own card", Fid.APPROX, M1, true, "Steal Artifact",
                 c -> { c.bf("Island", 4, c.ai); c.hand("Steal Artifact", c.ai); c.bf("Sol Ring", c.ai); final Card n = c.bf("Pithing Needle", c.opp); n.setNamedCards(java.util.Arrays.asList("Sol Ring")); }));
@@ -521,9 +525,9 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));
         l.add(noPlay("5879", "free spell under the opponent's Roiling Vortex", Fid.EXACT, M1, true, "Snuff Out",
                 c -> { c.bf("Swamp", c.ai); c.hand("Snuff Out", c.ai); c.bf("Roiling Vortex", c.opp); c.bf("Grizzly Bears", c.opp); }));
-        l.add(new Scenario("5890", "As Foretold: casts Rift Bolt for free instead of only suspending it", Fid.APPROX, M1, true,
-                c -> { c.bf("Mountain", c.ai); final Card a = c.bf("As Foretold", c.ai); c.counters(a, CounterEnumType.TIME, 3); c.hand("Rift Bolt", c.ai); c.bf("Grizzly Bears", c.opp); },
-                c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Rift Bolt") && !sa.getDescription().contains("Suspend")) ? null : "only suspended it: plays=" + c.plays() + c.why("Rift Bolt")));
+        l.add(new Scenario("5890", "As Foretold with a counter and Ancestral Vision in hand: pays {0} for the spell (should not only suspend it)", Fid.EXACT, "MAIN2", true,
+                c -> { c.bf("Island", c.ai); final Card a = c.bf("As Foretold", c.ai); c.counters(a, CounterEnumType.TIME, 1); c.hand("Ancestral Vision", c.ai); },
+                c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Ancestral Vision") && !sa.getDescription().contains("Suspend")) ? null : "AI did not cast Ancestral Vision for {0}: plays=" + c.plays() + c.why("Ancestral Vision")));
         l.add(new Scenario("5901", "Guide of Souls: pays the energy for its second ability when attacking", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Guide of Souls", c.ai); c.bf("Grizzly Bears", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 6); },
                 c -> {

@@ -347,6 +347,11 @@ public class PermanentAi extends SpellAbilityAi {
                     dontCast = false;
                     break; // disregard other preferences, always cast as a last resort
                 }
+            } else if (param.equals("MinOtherCardsInHand")) {
+                // Only cast with enough other cards to pay for it (Solitary Confinement discards one every upkeep)
+                if (ai.getCardsIn(ZoneType.Hand).size() - (source.isInZone(ZoneType.Hand) ? 1 : 0) < Integer.parseInt(value)) {
+                    dontCast = true;
+                }
             } else if (param.equals("OnlyFromZone")) {
                 if (!source.getZone().getZoneType().toString().equals(value)) {
                     dontCast = true;
