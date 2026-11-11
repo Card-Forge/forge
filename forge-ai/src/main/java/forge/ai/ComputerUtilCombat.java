@@ -376,7 +376,7 @@ public class ComputerUtilCombat {
 
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = Lists.newArrayList();
-        for (Card c : combat.getAttackersOf(ai)) {
+        for (Card c : attackersOfTeam(ai, combat)) {
             if (c.isCommander()) {
                 CardCollection blockers = combat.getBlockers(c);
                 int currentCommanderDamage = ai.getCommanderDamage(c);

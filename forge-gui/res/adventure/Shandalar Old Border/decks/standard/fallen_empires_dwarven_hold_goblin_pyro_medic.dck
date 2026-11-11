@@ -1,0 +1,26 @@
+[metadata]
+Name=Goblin Pyro Medic
+[Main]
+15 Mountain|3ED
+3 Dwarven Ruins|FEM
+2 Dormant Volcano|VIS
+2 Goblin Burrows|ONS
+2 Goblin Chirurgeon|FEM|[54a]
+2 Goblin Chirurgeon|FEM|[54b]
+2 Goblin Chirurgeon|FEM|[54c]
+4 Goblin Medics|ULG
+2 Goblin Pyromancer|ONS
+2 Skirk Fire Marshal|ONS
+4 Goblin Firestarter|PO2
+4 Mogg Maniac|STH
+3 Balm of Restoration|FEM
+1 Ring of Renewal|FEM
+3 Aeolipile|FEM
+1 Flame Wave|STH
+2 Fireblast|VIS
+4 Fire Ambush|PTK
+2 Fire Diamond|MIR
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Goblin Chirurgeon|FEM
+1 Heat Stroke|WTH

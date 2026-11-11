@@ -1,0 +1,33 @@
+[metadata]
+Name=Dwarven Weaponsmith
+[Main]
+20 Mountain|3ED
+1 Dwarven Hold|FEM
+2 Dwarven Ruins|FEM
+4 Dwarven Weaponsmith|3ED
+1 Dwarven Soldier|FEM|[53a]
+1 Dwarven Soldier|FEM|[53b]
+1 Dwarven Soldier|FEM|[53c]
+1 Dwarven Lieutenant|FEM
+1 Spirit Shield|FEM
+1 Zelyon Sword|FEM
+2 Aeolipile|FEM
+1 Anvil of Bogardan|VIS
+4 Volcanic Hammer|PO2
+4 Onulet|ATQ
+2 Coal Golem|DRK
+2 Lead Golem|MIR
+2 Igneous Golem|MIR
+1 Bash to Bits|ODY
+1 Hearth Charm|VIS
+2 Smokestack|USG
+1 Fire Diamond|MIR
+1 Scalding Tongs|TMP
+1 Scrapheap|ULG
+2 Wall of Junk|USG
+1 Lava Axe|PO2
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Iron Star|3ED
+1 Scalding Tongs|TMP
+1 Dwarven Weaponsmith|3ED

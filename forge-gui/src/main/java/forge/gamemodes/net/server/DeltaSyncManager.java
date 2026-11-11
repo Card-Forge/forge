@@ -602,16 +602,22 @@ public class DeltaSyncManager implements IHasForgeLog {
     }
 
     /**
-     * Reset all tracking state for reconnection.
-     * Unregisters this consumer from all tracked objects.
-     * After reset, the next sync will be treated as a fresh initial sync.
+     * Send every object as new on the next {@link #collectDeltas}, keeping the sequence and checksum cadence.
      */
-    public void reset() {
-        // Unregister consumer from all tracked objects
+    public void resendAll() {
         for (TrackableObject obj : registeredByKey.values()) {
             obj.unregisterConsumer(consumerId);
         }
         registeredByKey.clear();
+    }
+
+    /**
+     * Reset all tracking state for a new game or a reconnect.
+     * Unregisters this consumer from all tracked objects.
+     * After reset, the next sync will be treated as a fresh initial sync.
+     */
+    public void reset() {
+        resendAll();
         sequenceNumber = 0;
         packetsSinceLastChecksum = 0;
         recentDeltaProperties.clear();

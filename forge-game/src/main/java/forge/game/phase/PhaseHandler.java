@@ -508,15 +508,19 @@ public class PhaseHandler implements IHasForgeLog {
         game.getStack().unfreezeStack();
 
         // CR 514.3a
-        if (phase == PhaseType.CLEANUP && (!game.getStack().isEmpty() || game.getStack().hasSimultaneousStackEntries())) {
+        if (phase == PhaseType.CLEANUP && game.getStack().hasSimultaneousStackEntries()) {
             bRepeatCleanup = true;
             givePriorityToPlayer = true;
         }
     }
 
     private void onPhaseEnd() {
+        onPhaseEnd(true);
+    }
+    private void onPhaseEnd(final boolean priorityWasGiven) {
         // If the Stack isn't empty why is nextPhase being called?
-        if (!game.getStack().isEmpty()) {
+        // (a step in which nobody received priority may end with objects on the stack: CR 502.4, CR 725.1f)
+        if (priorityWasGiven && !game.getStack().isEmpty()) {
             throw new IllegalStateException("Phase.nextPhase() is called, but Stack isn't empty.");
         }
 
@@ -1269,7 +1273,8 @@ public class PhaseHandler implements IHasForgeLog {
             nobodyPassed = pPlayerPriority.hasLost() && pFirstPriority == nextPlayer;
         }
         if (pFirstPriority == nextPlayer && !nobodyPassed) {
-            if (game.getStack().isEmpty()) {
+            final boolean priorityWasGiven = givePriorityToPlayer;
+            if (game.getStack().isEmpty() || !priorityWasGiven) {
                 if (playerTurn.hasLost()) {
                     setPriority(game.getNextPlayerAfter(playerTurn));
                 } else {
@@ -1277,7 +1282,7 @@ public class PhaseHandler implements IHasForgeLog {
                 }
 
                 givePriorityToPlayer = true;
-                onPhaseEnd();
+                onPhaseEnd(priorityWasGiven);
                 advanceToNextPhase();
                 onPhaseBegin();
             }

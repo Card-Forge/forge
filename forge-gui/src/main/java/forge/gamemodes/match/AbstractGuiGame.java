@@ -139,32 +139,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /**
-     * Receives a {@link GameView} snapshot and installs it as the GUI's view of game state.
-     * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
-     * client receives a {@code setGameView} protocol message.
-     *
-     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
-     * reassigned directly. If both are non-null, the incoming view's properties are merged
-     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
-     * the reference.
-     *
-     * <p>The merge path preserves object identity of the GameView and every nested
-     * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
-     * those instances (UI panels store {@code PlayerView}/{@code CardView} fields;
-     * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
-     * GameView reference would leave those references pointing at an orphaned graph;
-     * merging keeps them valid as the data underneath changes.
+     * Installs a {@link GameView} as the GUI's view of game state. A view belongs to one game, and
+     * {@code openView} builds the screen from it.
      */
     @Override
     public void setGameView(final GameView gameView0) {
-        if (gameView == null || gameView0 == null) {
-            if (gameView0 != null) {
-                gameView0.updateObjLookup();
-            }
-            gameView = gameView0;
-            return;
+        if (gameView0 != null) {
+            gameView0.updateObjLookup();
         }
-        gameView.copyChangedProps(gameView0);
+        gameView = gameView0;
     }
 
     public final IGameController getGameController() {
@@ -200,8 +183,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         // HashMap.put keeps the existing key on an id-equal put and PlayerView equality is by id, so without
-        // removing first, re-registration across matches would retain the prior game's stale PlayerView
-        final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
+        // removing first, re-registration across matches would retain the prior game's stale PlayerView.
+        // currentPlayer is re-set for the same reason.
+        final boolean doSetCurrentPlayer = originalGameControllers.isEmpty() || player.equals(getCurrentPlayer());
         originalGameControllers.remove(player);
         originalGameControllers.put(player, gameController);
         gameControllers.remove(player);

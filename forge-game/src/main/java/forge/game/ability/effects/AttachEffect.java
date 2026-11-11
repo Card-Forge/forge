@@ -141,7 +141,7 @@ public class AttachEffect extends SpellAbilityEffect {
             }
 
             String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", attachment.getTranslatedName(), attachToName);
-            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, message, null))
+            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, message, gameCard, null))
             // TODO add params for message
                 continue;
 
