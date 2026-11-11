@@ -872,8 +872,18 @@ public class PlayerControllerAi extends PlayerController {
         return Aggregates.random(swapChoices);
     }
 
+    /** Momir Basic and MoJhoSto: every deck is basic lands, the avatar in the command zone is the whole game. */
+    private boolean isBasicLandDeckVariant() {
+        final forge.game.GameRules rules = player.getGame().getRules();
+        return rules.hasAppliedVariant(forge.game.GameType.MomirBasic) || rules.hasAppliedVariant(forge.game.GameType.MoJhoSto)
+                || player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
+    }
+
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        if (isBasicLandDeckVariant()) {
+            return true; // Momir Basic / MoJhoSto: the deck is all basic lands and the avatar does the work, there is nothing to mulligan for
+        }
         if (brains.useSmartMulligan()) {
             try {
                 return OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,

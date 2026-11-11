@@ -10,6 +10,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 /** 
@@ -33,6 +34,10 @@ public class PermanentNoncreatureAi extends PermanentAi {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
 
+        if (hatesActivatedAbilitiesNobodyUses(ai, host)) {
+            return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame); // Stony Silence against no artifact ability (#6105)
+        }
+
         // Check for valid targets before casting
         if (host.hasSVar("OblivionRing")) {
             // TODO: only the "may" case wouldn't fail checkETBEffects - replace with NeedsToPlay SVar?
@@ -50,5 +55,34 @@ public class PermanentNoncreatureAi extends PermanentAi {
             }
         }
         return decision;
+    }
+
+    /**
+     * A permanent whose only job is to stop or tax activated abilities (Stony Silence, Suppression Field) when no
+     * opposing permanent it reaches has one that is not a mana ability.
+     */
+    private static boolean hatesActivatedAbilitiesNobodyUses(final Player ai, final Card host) {
+        boolean hates = false;
+        for (final StaticAbility st : host.getStaticAbilities()) {
+            final String mode = st.getParamOrDefault("Mode", "");
+            final boolean stops = "CantBeActivated".equals(mode) && st.getParamOrDefault("ValidSA", "").startsWith("Activated");
+            final boolean taxes = "RaiseCost".equals(mode) && st.getParamOrDefault("ValidSpell", "").startsWith("Activated");
+            if (!stops && !taxes) {
+                continue;
+            }
+            hates = true;
+            final String valid = st.getParamOrDefault("ValidCard", "Card");
+            for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+                if (!c.isValid(valid, host.getController(), host, st)) {
+                    continue;
+                }
+                for (final SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.isActivatedAbility() && !ab.isManaAbility()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return hates;
     }
 }

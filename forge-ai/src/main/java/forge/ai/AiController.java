@@ -2497,6 +2497,22 @@ public class AiController {
         if (result.hold) {
             return null; // pass priority with the mana still available
         }
+        if (result.choice != null && result.choice.isSpell() && result.choice.getHostCard() != null) {
+            // a permanent without targets that pays off for the chosen spell (Up the Beanstalk draws for one of mana
+            // value 5 or more) comes first when the mana covers both, whether or not the heuristics approved it (#4278)
+            final int mana = ComputerUtilMana.getAvailableManaEstimate(player);
+            final List<SpellAbility> pool = new ArrayList<>(approved);
+            pool.addAll(extras);
+            for (final SpellAbility sa : pool) {
+                if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && !sa.usesTargeting()
+                        && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                        && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= mana
+                        && guardProblem(sa, null, saveCantrips) == null) {
+                    sa.setActivatingPlayer(player);
+                    return sa;
+                }
+            }
+        }
         if (extras.contains(result.choice)) {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
             // it is still aimed where the rollouts liked it, and that it can still be paid for.

@@ -107,8 +107,9 @@ public class TapAi extends TapAiBase {
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         for (Card c : playable) {
                             // Check if the AI can pay for the card with the mana it has and intends to play it
-                            if (c.getManaCost().canBePaidWithAvailable(availableColors)
-                                    && ComputerUtil.hasReasonToPlayCardThisTurn(payer, c)) {
+                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
+                            // card always looks unaffordable. A nonland card that needs exactly this land's mana will do
+                            if (!c.isLand() && c.getManaCost().canBePaidWithAvailable(availableColors)) {
                                 return true;
                             }
                         }
