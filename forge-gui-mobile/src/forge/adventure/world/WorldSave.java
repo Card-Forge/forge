@@ -10,6 +10,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
+import forge.adventure.scene.StartScene;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
@@ -172,25 +173,31 @@ public class WorldSave {
         // Queued ahead of any async autosave, which runs on the same single thread
         SAVE_EXECUTOR.execute(() -> {
             File backup = new File(backupDir, ZipUtil.newAdvBackupName());
+            boolean backedUp = false;
             try {
                 if (!backupDir.isDirectory() && !backupDir.mkdirs())
                     throw new IOException("Could not create backup directory: " + backupDir);
-                if (hasSaveFiles()) {
-                    ZipUtil.zip(new File(ForgeConstants.USER_ADVENTURE_DIR), backupDir, backup.getName());
-                    if (!ZipUtil.isValidZip(backup))
-                        throw new IOException("Backup verification failed: " + backup);
-                    String prefix = ZipUtil.backupAdvFile.replace(".adv", "_");
-                    File[] backups = backupDir.listFiles((dir, name) -> name.startsWith(prefix) && name.endsWith(".adv"));
-                    // Names carry the timestamp, so reverse name order is newest first
-                    Arrays.sort(backups, Comparator.reverseOrder());
-                    for (int i = VERSION_BACKUPS_KEPT; i < backups.length; i++)
-                        backups[i].delete();
+                if (!hasSaveFiles()) {
+                    FileUtil.writeFile(marker, build);
+                    return;
                 }
+                ZipUtil.zip(new File(ForgeConstants.USER_ADVENTURE_DIR), backupDir, backup.getName());
+                if (!ZipUtil.isValidZip(backup))
+                    throw new IOException("Backup verification failed: " + backup);
+                String prefix = ZipUtil.backupAdvFile.replace(".adv", "_");
+                File[] backups = backupDir.listFiles((dir, name) -> name.startsWith(prefix) && name.endsWith(".adv"));
+                // Names carry the timestamp, so reverse name order is newest first
+                Arrays.sort(backups, Comparator.reverseOrder());
+                for (int i = VERSION_BACKUPS_KEPT; i < backups.length; i++)
+                    backups[i].delete();
                 FileUtil.writeFile(marker, build);
+                backedUp = true;
             } catch (Exception e) {
                 backup.delete();
                 e.printStackTrace();
             }
+            boolean result = backedUp;
+            Gdx.app.postRunnable(() -> StartScene.instance().showVersionBackupResult(result));
         });
     }
 

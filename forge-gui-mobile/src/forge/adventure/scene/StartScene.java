@@ -198,6 +198,13 @@ public class StartScene extends UIScene {
         }
         return true;
     }
+    public void showVersionBackupResult(boolean backedUp) {
+        TextraLabel message = Controls.newTextraLabel(Forge.getLocalizer().getMessage(backedUp ? "lblVersionBackupDone" : "lblVersionBackupFailed"));
+        message.setWrap(true);
+        Dialog dialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+        dialog.getContentTable().add(message).width(Forge.isLandscapeMode() ? 250f : 150f);
+        showDialog(dialog);
+    }
     public boolean restoreBackup() {
         File downloadDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
 
