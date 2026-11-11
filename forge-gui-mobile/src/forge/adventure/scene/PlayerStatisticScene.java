@@ -257,7 +257,7 @@ public class PlayerStatisticScene extends UIScene {
             BiomeData worldBiome = map.isInMap() ? null : WorldStage.getInstance().getStoredBiome();
             boolean ignoreGlobal = map.isInMap() ? map.ignoresGlobalEffect() : worldBiome != null && worldBiome.ignoreGlobalEffect;
             if (!ignoreGlobal)
-                appendEffect(effects, "lblPlaneEffect", Config.instance().getConfigData().globalEffect, true);
+                appendEffect(effects, "lblPlaneEffect", Config.instance().getConfigData().globalEffect, false);
             appendEffect(effects, "lblBiomeEffect", map.isInMap() ? map.getBiomeEffect() : worldBiome == null ? null : worldBiome.effect, false);
             appendEffect(effects, "lblDungeonEffect", map.getDungeonEffect(), false);
             appendEffect(effects, "lblBlessingEffect", Current.player().getBlessing(), true);

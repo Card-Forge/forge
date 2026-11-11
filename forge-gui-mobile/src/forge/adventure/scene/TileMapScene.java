@@ -141,7 +141,7 @@ public class TileMapScene extends HudScene {
         if (WorldStage.getInstance().consumeGlobalEffectDialog() && globalEffect != null) {
             //The stage has one dialog, so quest dialogs wait until this one is closed.
             stage.effectDialog(globalEffect.getIntro(Forge.getLocalizer().getMessage("lblGlobalEffectDialogDescription")),
-                    globalEffect.getPlayerSideDescription(), () -> AdventureQuestController.instance().showQuestDialogs(stage));
+                    globalEffect.getEnemySideDescription(), () -> AdventureQuestController.instance().showQuestDialogs(stage));
             return;
         }
         AdventureQuestController.instance().showQuestDialogs(stage);

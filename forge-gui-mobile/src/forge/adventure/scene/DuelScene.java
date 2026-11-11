@@ -499,9 +499,9 @@ public class DuelScene extends ForgeScene {
                 if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
             }
         }
-        //The plane-wide effect sides with the player like a blessing, and the other layers side with the enemies.
+        //Every layer is written for the enemies, as dungeon effects always were, so its opponent block goes to the player.
         if (!ignoreGlobalEffect && !enemy.ignoreGlobalEffect)
-            addEffect(playerEffects, oppEffects, Config.instance().getConfigData().globalEffect);
+            addEffect(oppEffects, playerEffects, Config.instance().getConfigData().globalEffect);
         if (!enemy.ignoreBiomeEffect)
             addEffect(oppEffects, playerEffects, biomeEffect);
         if (!enemy.ignoreDungeonEffect)
