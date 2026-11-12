@@ -1,7 +1,7 @@
 Name:Memoricide
 ManaCost:3 B
 Types:Sorcery
-A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ DBExile | SpellDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.
+A:SP$ NameCard | Defined$ You | AILogic$ NamedExile | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ DBExile | SpellDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Player | ChangeType$ Card.NamedCard | Origin$ Graveyard,Hand,Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | ChangeNum$ NumTotal | Hidden$ True
 SVar:NumTotal:Count$ValidGraveyard,Hand,Library Card.TargetedPlayerOwn
 AI:RemoveDeck:All

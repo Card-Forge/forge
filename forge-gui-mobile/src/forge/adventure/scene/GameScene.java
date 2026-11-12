@@ -131,10 +131,15 @@ public class GameScene extends HudScene {
     }
 
     public String getBiomeByPosition(Vector2 position) {
+        BiomeData biome = getBiomeDataByPosition(position);
+        return biome == null ? "waste" : biome.name; //shouldn't be the case but default to waste
+    }
+
+    public BiomeData getBiomeDataByPosition(Vector2 position) {
         World world = Current.world();
         int currentBiome = World.highestBiome(world.getBiomeMapXY((int) position.x / world.getTileSize(), (int) position.y / world.getTileSize()));
         List<BiomeData> biomeData = world.getData().GetBiomes();
-        return biomeData.size() <= currentBiome ? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
+        return biomeData.size() <= currentBiome ? null : biomeData.get(currentBiome);
     }
 
     public PointOfInterest getMapPOI() {

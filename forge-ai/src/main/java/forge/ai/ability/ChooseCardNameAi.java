@@ -27,7 +27,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             }
 
             String logic = sa.getParam("AILogic");
-            if (logic.equals(NamedDiscard.LOGIC)) {
+            if (NamedDiscard.isNamingLogic(logic)) {
                 return NamedDiscard.consider(ai, sa);
             }
             if (logic.equals("CursedScroll")) {
