@@ -20,7 +20,7 @@ package forge.gamemodes.match.input;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.game.Game;
-import forge.game.GameType;
+import forge.game.mulligan.MulliganService;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -92,10 +92,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         if (StaticData.instance().getMulliganRule() != MulliganDefs.MulliganRule.London) {
             return "";
         }
-        final boolean firstFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
+        //the mulligan service's own rule and numbers: whether the first is free, how many cards a mulligan draws
+        final boolean firstFree = MulliganService.isFirstMulliganFree(game);
         final int tuck = player.getStats().getMulliganCount() + 1 - (firstFree ? 1 : 0);
         final int hand = player.getCardsIn(ZoneType.Hand).size();
-        final int draw = player.getMaxHandSize();
+        final int draw = MulliganService.ruleFor(player, firstFree).handSizeAfterNextMulligan();
         return tuck > 0 ? localizer.getMessage("lblMulliganExplainLondon", hand, draw, tuck)
                 : localizer.getMessage("lblMulliganExplainFree", hand, draw);
     }

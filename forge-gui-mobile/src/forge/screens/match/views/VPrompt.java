@@ -204,9 +204,13 @@ public class VPrompt extends FContainer {
         return arenaWords;
     }
 
+    private boolean arenaOkWanted() {
+        return btnOk.isEnabled() || (forge.screens.match.arena.ArenaChoices.asksWithVerb() && !btnOk.getText().isEmpty());
+    }
+
     /** Whether the decision's buttons changed which of them can be pressed since it was laid out (then lay it out again). */
     public boolean arenaButtonsChanged() {
-        return arena.mode == ArenaMatchLayout.PromptMode.DECISION && (btnOk.isEnabled() != arenaOkShown || btnCancel.isEnabled() != arenaCancelShown);
+        return arena.mode == ArenaMatchLayout.PromptMode.DECISION && (arenaOkWanted() != arenaOkShown || btnCancel.isEnabled() != arenaCancelShown);
     }
 
     /** The match screen draws a decision itself, after the arcs and card flights: this lets that one draw through. */
@@ -294,8 +298,9 @@ public class VPrompt extends FContainer {
         final boolean blank = StringUtils.isBlank(message);
         lblMessage.setVisible(!blank);
         lblMessage.setBounds(0, 0, width, Math.max(0, height - buttonH - gap - Utils.scale(6)));
-        //a button that cannot be pressed is not shown: the other takes the row
-        arenaOkShown = btnOk.isEnabled();
+        //a button that cannot be pressed is not shown (the other takes the row), but a verb's button ("Put 2 on bottom")
+        //stays in view, dim, until enough is picked
+        arenaOkShown = arenaOkWanted();
         arenaCancelShown = btnCancel.isEnabled();
         final float pad = Utils.scale(6);
         final float inner = width - 2 * pad;

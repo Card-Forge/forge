@@ -34,34 +34,34 @@ public class MulliganService {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
 
-        boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
+        boolean firstMullFree = isFirstMulliganFree(game);
 
         for (Player player : whoCanMulligan) {
-            MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
-            AbstractMulligan mulligan;
-            switch (rule) {
-                case Original:
-                    mulligan = new OriginalMulligan(player, firstMullFree);
-                    break;
-                case Paris:
-                    mulligan = new ParisMulligan(player, firstMullFree);
-                    break;
-                case Vancouver:
-                    mulligan = new VancouverMulligan(player, firstMullFree);
-                    break;
-                case London:
-                    mulligan = new LondonMulligan(player, firstMullFree);
-                    break;
-                case Houston:
-                    mulligan = new HoustonMulligan(player, firstMullFree);
-                    break;
-                default:
-                    mulligan = new VancouverMulligan(player, firstMullFree);
-                    break;
-            }
-
+            AbstractMulligan mulligan = ruleFor(player, firstMullFree);
             mulligans.add(mulligan);
             mulligan.beforeFirstMulligan();
+        }
+    }
+
+    /** Whether a player's first mulligan is free in this game (multiplayer games and Brawl). */
+    public static boolean isFirstMulliganFree(final Game game) {
+        return game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
+    }
+
+    /** A new mulligan of the rule in force (the preference's) for this player: to run it, or to read its numbers. */
+    public static AbstractMulligan ruleFor(final Player player, final boolean firstMullFree) {
+        switch (StaticData.instance().getMulliganRule()) {
+            case Original:
+                return new OriginalMulligan(player, firstMullFree);
+            case Paris:
+                return new ParisMulligan(player, firstMullFree);
+            case London:
+                return new LondonMulligan(player, firstMullFree);
+            case Houston:
+                return new HoustonMulligan(player, firstMullFree);
+            case Vancouver:
+            default:
+                return new VancouverMulligan(player, firstMullFree);
         }
     }
 

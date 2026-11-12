@@ -25,6 +25,7 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
+import forge.gamemodes.match.PromptContext;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -46,10 +47,14 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     private final Player player;
     private final int toReturn;
 
+    /** Whether the prompt explains itself (decided once, when the question is asked). */
+    private final boolean explained;
+
     public InputLondonMulligan(final PlayerControllerHuman controller, final Player humanPlayer, int returning) {
         super(controller);
         player = humanPlayer;
         toReturn = returning;
+        explained = controller.getGui().explainsPrompts();
     }
 
     /** {@inheritDoc} */
@@ -62,13 +67,20 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
         StringBuilder sb = new StringBuilder();
 
-        //explained prompts say how to answer (click the cards in your hand) and what the other button does
-        final boolean explained = getController().getGui().explainsPrompts();
-        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"),
-                localizer.getMessage(explained ? "lblArenaChooseForMe" : "lblAuto"), cardsLeft == 0, cardsLeft != 0, true);
-
-        sb.append(explained ? localizer.getMessage("lblArenaLondonBottom", cardsLeft)
-                : String.format(localizer.getMessage("lblReturnForLondon"), cardsLeft));
+        //explained prompts: a title with how many are picked, how to answer (click the cards in your hand), the main button
+        //saying what it does ("Put 2 on bottom", shown but dim until enough are picked) and what the other one does
+        if (explained) {
+            getController().getGui().setPromptContext(PromptContext.because(
+                    localizer.getMessage("lblArenaLondonTitle"), PromptContext.Verb.PUT_ON_BOTTOM));
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblArenaPutOnBottom", toReturn),
+                    localizer.getMessage("lblArenaChooseForMe"), cardsLeft == 0, cardsLeft != 0, true);
+            sb.append(localizer.getMessage("lblArenaLondonCounter", selected.size(), toReturn)).append("\n");
+            sb.append(toReturn == 1 ? localizer.getMessage("lblArenaLondonBottomOne") : localizer.getMessage("lblArenaLondonBottom", toReturn));
+        } else {
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblAuto"),
+                    cardsLeft == 0, cardsLeft != 0, true);
+            sb.append(String.format(localizer.getMessage("lblReturnForLondon"), cardsLeft));
+        }
 
         showMessage(sb.toString());
     }
@@ -82,6 +94,9 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     @Override
     protected final void onOk() {
         getController().getGame().getView().updateIsMulligan(false);
+        if (explained) {
+            getController().getGui().setPromptContext(PromptContext.NONE);
+        }
         stop();
     }
 

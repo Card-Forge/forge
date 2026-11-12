@@ -40,6 +40,14 @@ public final class ArenaChoices {
     }
 
     /**
+     * Whether the question being asked has a verb (its main button says what it does, "Put 2 on bottom"): the board's
+     * prompt then keeps that button in view, dim, until enough is picked, rather than hiding it.
+     */
+    public static boolean asksWithVerb() {
+        return context.verb() != PromptContext.Verb.CHOOSE;
+    }
+
+    /**
      * The card a dialog stands beside as what asks: the one the game named, none when the game gave only a reason (a
      * discard to hand size has no card behind it), else the card of the prompt on the board.
      */
