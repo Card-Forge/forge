@@ -842,8 +842,10 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Runeclaw Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Grizzly Bear"));
-        // Expected 5*4*3=60 iterations (5 choices for first target, 4 for next, 3 for last.)
-        AssertJUnit.assertEquals(60, picker.getNumSimulations());
+        // Expected 3*2*1=6 iterations: a +1/+1 counter is only a gain on a creature of the AI's own, so the opponent's
+        // Flying Men and Water Elemental are not offered as targets (PossibleTargetSelector.pointlessCounterTarget);
+        // 3 choices for the first target, 2 for the next, 1 for the last.
+        AssertJUnit.assertEquals(6, picker.getNumSimulations());
     }
 
     @Test

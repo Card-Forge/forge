@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.ai.AiAttackController;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
@@ -411,12 +412,19 @@ public final class FlatMonteCarloPicker {
         final boolean extra;
         /** For an attack decision: the attackers and what each attacks; empty means no attack. Null for plays. */
         final Map<Card, GameEntity> attackers;
+        /**
+         * The permanent the play was aimed at when this candidate was made. The candidates of one play share the same
+         * SpellAbility, and every rollout aims it at its own target, so after the rollouts its targets say nothing about
+         * what the heuristics wanted (see keepsMoreDangerousTarget).
+         */
+        final Card aim;
 
         Candidate(final Map<Card, GameEntity> attackers) {
             this.sa = null;
             this.target = null;
             this.extra = false;
             this.attackers = attackers;
+            this.aim = null;
         }
 
         Candidate(final SpellAbility sa) {
@@ -432,6 +440,7 @@ public final class FlatMonteCarloPicker {
             this.target = target;
             this.extra = extra;
             this.attackers = null;
+            this.aim = sa == null ? null : firstAimedCard(sa);
         }
 
         boolean isHold() {
@@ -725,6 +734,11 @@ public final class FlatMonteCarloPicker {
             if (pick > 0) {
                 best = pick;
             }
+        }
+
+        if (best != 0 && keepsMoreDangerousTarget(player, cands.get(0), cands.get(best))) {
+            // the rollouts only see stats: an opposing creature with an effect (Doran, a death engine) outranks them
+            best = 0;
         }
 
         final Candidate chosen = cands.get(best);
@@ -1037,6 +1051,14 @@ public final class FlatMonteCarloPicker {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null) {
             return false;
         }
+        if (sa.isSpell() && sa.getHostCard().hasSVar("EndOfTurnLeavePlay") && sa.getHostCard().getController() != null) {
+            // Ball Lightning: its single attack is pointless against a player who is protected from it
+            for (final Player opp : sa.getHostCard().getController().getOpponents()) {
+                if (AiAttackController.isDamageProtected(opp, sa.getHostCard())) {
+                    return false;
+                }
+            }
+        }
         if (XChoice.isManaX(sa)) {
             // an X of mana: only with a careful plan (damage that kills something), and when the mana it takes is spare
             final Player owner = sa.getHostCard().getController();
@@ -1079,6 +1101,9 @@ public final class FlatMonteCarloPicker {
             return true; // a Planeswalker's ability: the rollouts weigh the loyalty and the effect against everything else
         }
         final PlayKind kind = playKind(sa);
+        if (kind == PlayKind.INTERACTION && MassRemoval.worthOffering(sa.getHostCard().getController(), sa)) {
+            return true; // a wipe that wins the board (or the game): the rollouts weigh it against holding
+        }
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
         }
@@ -1192,10 +1217,29 @@ public final class FlatMonteCarloPicker {
         // those are offered once the blocks are down (Mode.BLOCKED, isCombatTrick).
         if (api != ApiType.DealDamage && api != ApiType.Attach && api != ApiType.PutCounter && api != ApiType.Token
                 && api != ApiType.Discard && api != ApiType.LoseLife && api != ApiType.Untap
-                && api != ApiType.CopyPermanent && api != ApiType.Sacrifice) {
+                && api != ApiType.CopyPermanent && api != ApiType.Sacrifice && !isCheatFromHand(sa)) {
             return false;
         }
         return ActivationGuard.problem(sa.getHostCard().getController(), sa) == null;
+    }
+
+    /**
+     * "You may put a creature (an Equipment) card from your hand onto the battlefield" on a permanent in play: Elvish
+     * Piper, Stoneforge Mystic, Quicksilver Amulet. The rollouts see the card that arrives and the mana it did not
+     * cost, so the ability competes with the other plays like any other. Only offered with such a card in hand.
+     */
+    public static boolean isCheatFromHand(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.ChangeZone || !sa.isActivatedAbility() || sa.usesTargeting()) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        final String valid = sa.getParam("ChangeType");
+        if (host == null || valid == null || !host.isInZone(ZoneType.Battlefield)
+                || !"Hand".equals(sa.getParam("Origin")) || !"Battlefield".equals(sa.getParam("Destination"))) {
+            return false;
+        }
+        final Player owner = host.getController();
+        return !forge.game.card.CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
     }
 
     /**
@@ -1225,8 +1269,14 @@ public final class FlatMonteCarloPicker {
             if (cost > available) {
                 return false;
             }
+            // a card the ability itself puts onto the battlefield (Stoneforge Mystic and an Equipment) is no competitor
+            final boolean cheat = isCheatFromHand(sa);
+            final String cheatable = cheat ? sa.getParam("ChangeType") : null;
             for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
                 if (c.isLand() || c == sa.getHostCard() || isInstantSpeedSpell(c)) {
+                    continue;
+                }
+                if (cheat && c.isValid(cheatable, ai, sa.getHostCard(), sa)) {
                     continue;
                 }
                 for (final SpellAbility spell : c.getSpellAbilities()) {
@@ -1503,6 +1553,28 @@ public final class FlatMonteCarloPicker {
         return result;
     }
 
+    /**
+     * Whether the heuristics aimed at an opposing creature whose own abilities make it worth removing first and the
+     * variant aims at a creature without that (#4171): the rollouts value both by their stats alone.
+     */
+    private static boolean keepsMoreDangerousTarget(final Player player, final Candidate heuristic, final Candidate variant) {
+        if (heuristic == null || variant == null || heuristic.sa == null || !(variant.target instanceof Card)) {
+            return false;
+        }
+        // noted when the candidate was made: the play's own targets are whatever the last rollout aimed them at, which
+        // depends on how many rounds the time budget allowed, so reading them here made the verdict change from run to run
+        final Card kept = heuristic.aim;
+        final Card other = (Card) variant.target;
+        return kept != null && kept.isCreature() && other.isCreature() && kept.getController().isOpponentOf(player)
+                && ComputerUtilCard.removalEffectBonus(kept) > ComputerUtilCard.removalEffectBonus(other);
+    }
+
+    /** The permanent a play with a single target is aimed at right now, or null. */
+    private static Card firstAimedCard(final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        return ts == null || ts.getTargets() == null ? null : ts.getTargets().getFirstTargetedCard();
+    }
+
     /** True for the AI itself and its permanents, false for opponents and theirs, null for anything else. */
     private static Boolean isOwnSide(final Player player, final GameObject o) {
         if (o instanceof Player) {
@@ -1522,7 +1594,10 @@ public final class FlatMonteCarloPicker {
         final Card c = (Card) e;
         final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c) + danger;
+            // what an opposing creature does besides its stats (Doran, a death engine) counts, as it does for the heuristics' own
+            // choice of removal target: a discovered removal spell is aimed with this rank and has no heuristic aim to fall back on
+            final boolean opposing = c.getController() != null && c.getController().isOpponentOf(player);
+            return ComputerUtilCard.evaluateCreature(c) + danger + (opposing ? ComputerUtilCard.removalEffectBonus(c) : 0);
         }
         return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
@@ -1781,7 +1856,9 @@ public final class FlatMonteCarloPicker {
         }
         final List<Card> legal = new ArrayList<>();
         for (final Card c : player.getCreaturesInPlay()) {
-            if (forge.game.combat.CombatUtil.canAttack(c, main)) {
+            if (forge.game.combat.CombatUtil.canAttack(c, main)
+                    // attacking is legal into protection, but the damage is prevented: not worth offering as a candidate
+                    && !(main instanceof Player && AiAttackController.isDamageProtected((Player) main, c))) {
                 legal.add(c);
             }
         }
