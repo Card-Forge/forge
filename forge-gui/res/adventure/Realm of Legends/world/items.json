@@ -3090,7 +3090,7 @@
   },
     {
     "name": "Artist's Beret",
-    "description": "Rummage on noncreature, 2R for noncreature cost -2, 2R for +2 noncombat damage",
+    "description": "Rummage on noncreature, 2R for noncreature cost -1, 2R for +2 noncombat damage",
     "equipmentSlot": "Neck",
     "iconName": "Artist'sBeret",
     "effect": {

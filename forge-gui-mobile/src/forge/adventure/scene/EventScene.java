@@ -22,6 +22,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
@@ -532,6 +533,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             advance.setDisabled(true);
             TransitionScreen transitionScreen = new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
+                duelScene.setEffectLayers(null, null, MapStage.getInstance().ignoresGlobalEffect());
                 advance.setDisabled(false);
                 Forge.switchScene(duelScene);
             }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false,"",

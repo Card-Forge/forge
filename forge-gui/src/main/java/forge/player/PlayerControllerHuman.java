@@ -120,6 +120,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean mayLookAtAllCards = false;
 
     private IGuiGame gui;
+    // the hidden GUI recording a replay of this player's game, which keeps their reveals as their own GUI does
+    private IGuiGame replayGui;
 
     private final YieldController yieldController = new YieldController(this);
 
@@ -139,6 +141,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public PlayerControllerHuman(final Player p, final LobbyPlayer lp, final PlayerControllerHuman owner) {
         super(owner.getGame(), p, lp);
         gui = owner.gui;
+        replayGui = owner.replayGui;
         inputProxy = owner.inputProxy;
         inputQueue = owner.getInputQueue();
     }
@@ -148,6 +151,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
     public final void setGui(final IGuiGame gui) {
         this.gui = gui;
+    }
+    public final void setReplayGui(final IGuiGame replayGui) {
+        this.replayGui = replayGui;
     }
 
     public YieldController getYieldController() {
@@ -956,24 +962,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
+            getGui().showRevealedCards(collection);
+            if (replayGui != null) {
+                replayGui.showRevealedCards(collection);
+                replayGui.hideRevealedCards();
+            }
             // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
             final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
             if (revealInPrompt) {
-                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                getGui().hideRevealedCards();
             } else {
                 getGui().reveal(fm, collection);
             }
-            getGui().updateRevealedCards(collection);
+            getGui().hideRevealedCards();
             endTempShowCards();
         }
     }
@@ -1546,9 +1555,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean mulliganKeepHand(final Player mulliganingPlayer, int cardsToReturn) {
         // TODO we should be passing tuckCards into Confirmation Dialog
-        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
-        inp.showAndWait();
-        return inp.isKeepHand();
+        while (true) {
+            final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
+            inp.showAndWait();
+            if (!inp.hasUsedSerumPowder()) {
+                return inp.isKeepHand();
+            }
+            final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            final int handSize = hand.size();
+            for (final Card c : hand.threadSafeIterable()) {
+                getGame().getAction().exile(c, null, null);
+            }
+            player.drawCards(handSize);
+        }
     }
 
     @Override
@@ -1748,7 +1767,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final UndoManager undo = getGame().getUndoManager();
         undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
         if (!isMacroActive()) {
-            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+            if (UndoManager.OWN_TURN_ONLY && !getGame().getPhaseHandler().isPlayerTurn(player)) {
                 undo.barrier("Opponent's turn");
             } else {
                 undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
@@ -2441,6 +2460,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<SpellAbility> orderedSAs = orderSimultaneousSa(activePlayerSAs);
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
+            if (playedByTeammate(next)) {
+                continue;
+            }
             if (next.isTrigger() && !next.isCopied()) {
                 PlaySpellAbility.playSpellAbility(this, player, next);
             } else {
@@ -3175,7 +3197,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.hasCancelled()) {
                     CardCollection tapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        if (c.tap(true, null, null)) tapped.add(c);
+                        if (c.tap(null, null)) tapped.add(c);
                     }
                     if (!tapped.isEmpty()) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -3524,7 +3546,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
                                 sa.setCastFromPlayEffect(true);
+                                final int stackSize = getGame().getStack().size();
                                 PlaySpellAbility.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
+                                if (getGame().getStack().size() > stackSize) {
+                                    // as if p had just cast it: everyone gets to respond before it resolves (CR 117.3c)
+                                    getGame().getPhaseHandler().setPriority(p);
+                                }
                             }
                             // playSa could fire some triggers
                             getGame().getStack().addAllTriggeredAbilitiesToStack();
@@ -3761,17 +3788,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
-            if (getGame().isGameOver()) {
-                // Remote-client controllers on the server have no FControlGameEventHandler,
-                // so their input queues won't be released by the normal event path.
-                // Iterate registered players (not getPlayers(), which excludes the
-                // conceding player after onPlayerLost removes them from ingamePlayers).
-                for (Player p : getGame().getRegisteredPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman pch) {
-                        pch.getInputQueue().onGameOver(true);
-                    }
-                }
-            }
+            DrawOfferCoordinator.releaseInputQueues(getGame());
         }
     }
 
@@ -3980,6 +3997,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (macros != null && macros.isReplaying()) {
             return false;
         }
+        // a team that shares its turns stops where any of its players has a stop
+        if (getGui().getGameView() != null) {
+            return getGui().getGameView().getPlayers().stream().filter(turnPlayer::sharesTeamWith).allMatch(p -> playerSkipsPhase(p, phase));
+        }
+        return playerSkipsPhase(turnPlayer, phase);
+    }
+
+    private boolean playerSkipsPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }

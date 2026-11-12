@@ -16,7 +16,7 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
         final List<DeckProxy> decks = new ArrayList<>();
             for (String card: CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet()) {
                 //exclude non AI playables as keycards for AI decks
-                if (isForAi&&FModel.getMagicDb().getCommonCards().getRules(card, true).getAiHints().getRemAIDecks()) {
+                if (isForAi && forge.card.CardAiHints.isRemovedFromAiDecks(FModel.getMagicDb().getCommonCards().getRules(card, true))) {
                     continue;
                 }
                 decks.add(new CardThemedDeckGenerator(card, format, isForAi));

@@ -11,10 +11,12 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
 import forge.game.ability.AbilityUtils;
+import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.*;
@@ -132,6 +134,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
             if (!chosen.isEmpty()) {
                 host.addNamedCard(chosen);
+                // the name is public information (Cabal Therapy, Pithing Needle): the log must say which card it was.
+                p.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE,
+                        p + " names " + chosen + " (" + host + ").", host));
             }
             if (!randomChoice) {
                 p.setNamedCard(chosen);

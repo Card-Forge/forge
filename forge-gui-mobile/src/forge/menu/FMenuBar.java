@@ -61,7 +61,7 @@ public class FMenuBar extends Header {
         for (FMenuTab tab : tabs) {
             if (!tab.isVisible()) { continue; }
             if (tab.iconOnly) {
-                tab.setActiveIcon(MatchController.instance.getGameView().getRevealedCollection() != null);
+                tab.setActiveIcon(!MatchController.instance.getRevealedCards().isEmpty());
                 final float w = Math.min(width / 2, revealWidth > 0 ? revealWidth : Math.round(tab.getMinWidth() + FMenuTab.PADDING * 2));
                 tab.setBounds(x, 0, w, height);
                 x += w;
@@ -112,7 +112,7 @@ public class FMenuBar extends Header {
         for (FMenuTab tab : tabs) {
             if (tab.isVisible()) {
                 if (tab.iconOnly) {
-                    tab.setActiveIcon(MatchController.instance.getGameView().getRevealedCollection() != null);
+                    tab.setActiveIcon(!MatchController.instance.getRevealedCards().isEmpty());
                 }
                 tabWidth = Math.round(tab.getMinWidth() + dx);
                 if (x + tabWidth > width) {

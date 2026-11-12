@@ -15,6 +15,7 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.GameView;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
@@ -87,6 +88,12 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             btnQuit.setText("Close replay");
             btnContinue.setEnabled(false); // disabled buttons are left out of the layout
             btnRestart.setEnabled(false);
+        } else if (game0.getGameType() == GameType.Puzzle) {
+            // a puzzle is one fixed game: no next game and no new match, only trying it again
+            btnContinue.setEnabled(false);
+            final boolean tutorial = HowToPlay.isTutorialGame(game0);
+            btnRestart.setText(tutorial ? HowToPlay.restartLabel() : Forge.getLocalizer().getMessage("lblRestartPuzzle"));
+            btnQuit.setText(tutorial ? HowToPlay.quitLabel() : Forge.getLocalizer().getMessage("lblQuitPuzzle"));
         }
 
         // Control of the win/lose is handled differently for various game modes

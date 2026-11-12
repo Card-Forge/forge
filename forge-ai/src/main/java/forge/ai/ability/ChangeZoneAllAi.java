@@ -70,6 +70,12 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             return SpecialCardAi.LivingDeath.consider(ai, sa);
         } else if ("Timetwister".equals(aiLogic)) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
+        } else if ("ShuffleBackAndRedraw".equals(aiLogic)) {
+            // Glimpse of Tomorrow: reshuffling the board is only a gain when it holds little but lands and small bodies (#4113)
+            final CardCollection own = CardLists.filter(computerType, CardPredicates.NON_LANDS);
+            final boolean cheap = own.size() <= 3 && ComputerUtilCard.evaluateCreatureList(CardLists.filter(own, CardPredicates.CREATURES)) <= 450;
+            return cheap && !ai.getCardsIn(ZoneType.Library).isEmpty() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             boolean result = !ai.getDiscardedThisTurn().isEmpty() && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

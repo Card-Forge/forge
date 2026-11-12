@@ -23,11 +23,10 @@ public class TapAi extends TapAiBase {
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
-        final Player turn = phase.getPlayerTurn();
 
-        if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
-        } else if (turn.equals(ai)) {
+        } else if (phase.isPlayerTurn(ai)) {
             if (isSorcerySpeed(sa, ai) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
@@ -108,8 +107,9 @@ public class TapAi extends TapAiBase {
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         for (Card c : playable) {
                             // Check if the AI can pay for the card with the mana it has and intends to play it
-                            if (c.getManaCost().canBePaidWithAvailable(availableColors)
-                                    && ComputerUtil.hasReasonToPlayCardThisTurn(payer, c)) {
+                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
+                            // card always looks unaffordable. A nonland card that needs exactly this land's mana will do
+                            if (!c.isLand() && c.getManaCost().canBePaidWithAvailable(availableColors)) {
                                 return true;
                             }
                         }

@@ -1,22 +1,33 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostSacrifice;
+import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithCost;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 
 /**
@@ -35,12 +46,35 @@ import forge.game.zone.ZoneType;
  *       is worth it;</li>
  *   <li>{@link Kind#REANIMATOR}: reanimation spells and big creatures that are better in the graveyard than in hand;</li>
  *   <li>{@link Kind#STORM}: a storm payoff and the rituals and cantrips that feed it;</li>
+ *   <li>{@link Kind#TUTOR_STORM}: a storm finisher that is found by tutors (Infernal Tutor, Beseech the Mirror,
+ *       Wishes, Wishclaw Talisman) and cast with fast mana (rituals, moxen, Lotus Petal, Lion's Eye Diamond); the finisher
+ *       is held until the storm count makes it lethal;</li>
  *   <li>{@link Kind#CREATURE_COPY}: Splinter Twin or Kiki-Jiki with a creature that untaps or copies;</li>
  *   <li>{@link Kind#CASCADE_PAYOFF}: cascade spells whose only possible hit is the payoff;</li>
  *   <li>{@link Kind#CHEAT_FATTY}: Show and Tell, Sneak Attack, Through the Breach and the like, with huge creatures
  *       that are worth far more put into play than cast;</li>
+ *   <li>{@link Kind#REPLENISH}: Replenish and the like. Enchantments are put into the graveyard on purpose (Intuition,
+ *       Attunement, looting) and come back all at once, so the payoff waits until the graveyard is worth it;</li>
  *   <li>{@link Kind#GO_WIDE}: token and cheap creature decks with an overrun finisher (Craterhoof Behemoth, Overrun,
- *       Triumph of the Hordes): the finisher waits in hand until the board makes it lethal.</li>
+ *       Triumph of the Hordes): the finisher waits in hand until the board makes it lethal;</li>
+ *   <li>{@link Kind#DREDGE}: Golgari Grave-Troll, Stinkweed Imp and kin with the cards that work from the graveyard
+ *       (Bridge from Below, Ichorid, Prized Amalgam). The graveyard is the resource of the deck: the dredgers and the
+ *       cards that work from there are thrown away on purpose (looting, Careful Study), the right dredger is picked
+ *       for the size of the library, and Narcomoeba, which only works from the library, is kept;</li>
+ *   <li>{@link Kind#DARK_DEPTHS}: Dark Depths with Vampire Hexmage or Thespian's Stage. A Dark Depths on the table
+ *       that has lost its ice counters is a 20/20 flying indestructible Marit Lage, so the deck plays the land first
+ *       and then the piece that removes the counters. Lands are read for this one, the other kinds only read spells;</li>
+ *   <li>{@link Kind#FREE_CAST}: Aluren and Omniscience with the cheap creatures that loop under them (Acererak the
+ *       Archlich bounces itself and ventures, Cavern Harpy and Raven Familiar return each other). The engine is
+ *       worth most once it is in play with a creature to cast, and the creatures are never discarded;</li>
+ *   <li>{@link Kind#ARTIFACT_ENGINE}: Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and the artifacts that
+ *       chain off them, with payoffs such as Karn, The One Ring and Kozilek's Command. The engines are worth points
+ *       while they sit in play, because every artifact they cast or untap pays for the next one;</li>
+ *   <li>{@link Kind#LIBRARY_OUT}: Balustrade Spy, Cephalid Illusionist (with Shuko and Nomads en-Kor to target it)
+ *       empty the AI's own library and Thassa's Oracle or Laboratory Maniac wins. The library is only worth
+ *       emptying while the winner is in hand, and when it is not the deck must not mill itself out;</li>
+ *   <li>{@link Kind#PAIR}: two card kills that are not a copy engine (Painter's Servant with Grindstone): both
+ *       halves in hand or in play are worth far more than the cards apart.</li>
  * </ul>
  * Every number in here is a small evaluator bonus (a 2/2 creature is worth about 150) that is only given while the
  * combo is still alive, so a deck that merely contains one stray combo card is never taken for a combo deck: each
@@ -48,7 +82,8 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE,
+        LIBRARY_OUT, PAIR, LIBRARY_CUT, DOOMSDAY }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -85,8 +120,142 @@ public final class ComboPlan {
         return false;
     }
 
+    /**
+     * Whether a cascade spell may be cast just for the free spell it brings along, when the spell itself does nothing
+     * (Violent Outburst with no creature to pump). A Living End style deck decides on all its cascade spells in
+     * {@link #massReanimationRuling}: before the graveyard is ready a cascade would waste the payoff, and with a full board
+     * the swap would cost the AI its own creatures. Any other deck, a cascade deck that can only find its payoff included,
+     * has nothing to lose: the cascade is a free spell on top.
+     */
+    public boolean mayCascadeForTheFreeSpell(final Player ai) {
+        return !isMassReanimationDeck(ai);
+    }
+
+    /**
+     * The creatures of the AI that an airbend (Aang, Swift Savior, Appa, Airbender Ascension) should exile so that they
+     * can be cast again: only while a free cast engine that makes the exile cost nothing is in play (Doc Aurlock), and
+     * only the creatures of the free cast combo, never the one that makes the trigger.
+     */
+    public List<Card> airbendLoopTargets(final Player ai, final Card source) {
+        final List<Card> result = new ArrayList<>();
+        final Combo free = find(Kind.FREE_CAST);
+        if (free == null || ai == null) {
+            return result;
+        }
+        boolean engine = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            engine |= airbendReducerWorks(c);
+        }
+        if (!engine || airbendLoopCasts(ai, free) >= airbendLoopCap(ai)) {
+            return result; // no free recast, or the loop has gone on long enough: the pieces stay in play
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != source && c.isCreature() && isAirbendLoopCreature(free, c.getName())) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * A creature that the airbend loop may exile and cast again: one of the free cast combo of the deck, or one of the
+     * well known loop creatures of the lists whether or not this deck plays it (the other Aangs, Kalastria Healer and
+     * the other drain creatures are in the lists, not necessarily in the 75 cards the plan was read from).
+     */
+    private static boolean isAirbendLoopCreature(final Combo free, final String name) {
+        return free.payoffs.contains(name)
+                || AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, name)
+                || AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, name);
+    }
+
+    /**
+     * Whether the airbend loop is running and {@code host} is one of its creatures: a free recast is in play, the loop
+     * has not reached its cap, and there is another creature of the loop for it to airbend. Used to keep the AI from
+     * spending the loop's creatures (or tapping its tokens) on something that ends it, such as transforming Aang.
+     */
+    public boolean airbendLoopLive(final Player ai, final Card host) {
+        final Combo free = find(Kind.FREE_CAST);
+        if (free == null || ai == null || host == null || !host.isCreature()
+                || !isAirbendLoopCreature(free, host.getName())) {
+            return false;
+        }
+        boolean engine = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            engine |= airbendReducerWorks(c);
+        }
+        if (!engine || airbendLoopCasts(ai, free) >= airbendLoopCap(ai)) {
+            return false;
+        }
+        // the other creature of the loop may be on the battlefield or still in exile waiting to be cast for nothing
+        for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Exile }) {
+            for (final Card c : ai.getCardsIn(z)) {
+                if (c != host && c.isCreature() && isAirbendLoopCreature(free, c.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Doc Aurlock, or Semblance Anvil with a creature imprinted. */
+    private static boolean airbendReducerWorks(final Card c) {
+        if (!AiCardLists.has(AiCardLists.Role.AIRBEND_REDUCER, c.getName())) {
+            return false;
+        }
+        if (!c.getName().equals("Semblance Anvil")) {
+            return true;
+        }
+        for (final Card imprinted : c.getImprintedCards()) {
+            if (imprinted.isCreature()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The loop is cut off after this many casts from exile in one turn, unless a payoff drains the opponent. */
+    static final int AIRBEND_LOOP_CAP = 12;
+
+    /** The most casts a loop with a payoff may make: a payoff that does not really drain must not make a draw. */
+    static final int AIRBEND_LOOP_HARD_CAP = 150;
+
+    /**
+     * How many casts from exile the airbend loop may make this turn. Without a payoff it can only grow the board (an
+     * Ally token for every cast), so it stops early and leaves the pieces in play for the attack of the next turn:
+     * a loop that never ends is a draw. With a payoff in play (Bontu's Monument, Kalastria Healer) every cast is a point
+     * of life, so it runs until the opponent is dead.
+     */
+    public int airbendLoopCap(final Player ai) {
+        boolean payoff = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            payoff |= AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, c.getName());
+        }
+        if (!payoff) {
+            return AIRBEND_LOOP_CAP;
+        }
+        final Combo free = find(Kind.FREE_CAST);
+        final int casts = free == null ? 0 : airbendLoopCasts(ai, free);
+        final Player opp = ai.getWeakestOpponent();
+        final int life = opp == null ? 0 : Math.max(0, opp.getLife());
+        // every cast drains a point: casts + life stays put, so the cap stays out of reach until the opponent is dead
+        return Math.min(AIRBEND_LOOP_HARD_CAP, Math.max(AIRBEND_LOOP_CAP, casts + life + 10));
+    }
+
+    /** How many creatures of the loop the AI has cast from exile this turn. */
+    int airbendLoopCasts(final Player ai, final Combo free) {
+        int casts = 0;
+        for (final SpellAbility sa : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            final Card host = sa.getHostCard();
+            if (ai.equals(sa.getActivatingPlayer()) && host != null && isAirbendLoopCreature(free, host.getName())
+                    && host.getCastFrom() != null && host.getCastFrom().is(ZoneType.Exile)) {
+                casts++;
+            }
+        }
+        return casts;
+    }
+
     /** Hand attack aimed at yourself is fuel only when it throws away a big creature that a reanimation spell can use. */
-    public boolean selfDiscardWanted(final Player ai) {
+    public boolean bigDiscardWanted(final Player ai) {
         final Combo re = find(Kind.REANIMATOR);
         if (re == null || ai == null || ai.getLife() <= 4) {
             return false; // Thoughtseize costs 2 life
@@ -96,6 +265,109 @@ public final class ComboPlan {
             big |= c.isCreature() && isBigTarget(c);
         }
         return big && reanimationReady(ai, re);
+    }
+
+    /** Whether the hand holds something worth throwing away with a hand attack aimed at the AI itself. */
+    public boolean selfDiscardWanted(final Player ai) {
+        return selfDiscardName(ai, null) != null;
+    }
+
+    /**
+     * Whether a hand attack aimed at the AI itself is worth it, not counting the spell that makes it: Cabal Therapy
+     * has flashback, so in the hand it looks like a card that wants to be in the graveyard, and naming it discards
+     * nothing.
+     */
+    public boolean selfDiscardWanted(final Player ai, final Card host) {
+        return selfDiscardName(ai, host) != null;
+    }
+
+    public String selfDiscardName(final Player ai) {
+        return selfDiscardName(ai, null);
+    }
+
+    /**
+     * The name to give a hand attack aimed at the AI itself: the card (all copies together) that gains the most from
+     * being in the graveyard. {@code host} is the spell being cast; it is still in hand while the AI decides, and
+     * naming it would discard nothing. Null when nothing is worth it.
+     */
+    public String selfDiscardName(final Player ai, final Card host) {
+        final boolean big = bigDiscardWanted(ai);
+        final Map<String, Integer> total = new HashMap<>();
+        final Map<String, Integer> tiebreak = new HashMap<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c == host || c.isLand()) {
+                continue;
+            }
+            int v = graveyardValue(c);
+            int tie = 0;
+            if (big && c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
+                v += 5;
+                tie = ComputerUtilCard.evaluateCreature(c);
+            }
+            if (v <= 0) {
+                continue;
+            }
+            total.merge(c.getName(), v, Integer::sum);
+            tiebreak.merge(c.getName(), tie, Math::max);
+        }
+        String best = null;
+        int bestTotal = 1; // anything below 2 is not worth a card
+        int bestTie = -1;
+        for (final Map.Entry<String, Integer> e : total.entrySet()) {
+            final int t = e.getValue();
+            final int tie = tiebreak.get(e.getKey());
+            if (t > bestTotal || (t == bestTotal && best != null && tie > bestTie)) {
+                best = e.getKey();
+                bestTotal = t;
+                bestTie = tie;
+            }
+        }
+        return best;
+    }
+
+    /**
+     * How much a card wants to be in the graveyard instead of the hand: the DiscardMe SVar of its script, a graveyard
+     * trigger / ability / static (Bridge from Below), and the keywords that work from the graveyard.
+     */
+    static int graveyardValue(final Card c) {
+        int v = 0;
+        if (c.hasSVar("DiscardMe")) {
+            try {
+                v += Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
+            } catch (final NumberFormatException e) {
+                v += 1;
+            }
+        }
+        boolean fromGraveyard = false;
+        for (final Trigger t : c.getTriggers()) {
+            if (zoneParamHasGraveyard(t.getParam("TriggerZones"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (zoneParamHasGraveyard(st.getParam("EffectZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && zoneParamHasGraveyard(sa.getParam("ActivationZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        if (fromGraveyard) {
+            v += 4;
+        }
+        if (c.hasKeyword(Keyword.DREDGE)) {
+            v += 3;
+        }
+        if (c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.UNEARTH) || c.hasKeyword(Keyword.ESCAPE)) {
+            v += 3;
+        }
+        return v;
+    }
+
+    private static boolean zoneParamHasGraveyard(final String zones) {
+        return zones != null && zones.contains("Graveyard");
     }
 
     static boolean isTargetedDiscard(final SpellAbility sa) {
@@ -110,29 +382,6 @@ public final class ComboPlan {
     /** Where the cards of a deck are while a game is on (the sideboard is not part of the deck). */
     static final List<ZoneType> DECK_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
-
-    private static final Set<String> MASS_PAYOFF_NAMES = names("Living End", "Living Death", "Rise of the Dark Realms",
-            "Mass Reanimation", "Patriarch's Bidding", "Twilight's Call", "Pyrrhic Revival");
-    private static final Set<String> REANIMATION_SPELL_NAMES = names("Reanimate", "Animate Dead", "Exhume",
-            "Necromancy", "Unburial Rites", "Dance of the Dead", "Dance of the Manse", "Goryo's Vengeance",
-            "Shallow Grave", "Zombify", "Rise from the Grave", "Persist", "Footsteps of the Goryo", "Priest of Gix");
-    private static final Set<String> BIG_TARGET_NAMES = names("Griselbrand", "Sheoldred, the Apocalypse",
-            "Archon of Cruelty", "Atraxa, Grand Unifier", "Bringer of the Last Gift", "Elesh Norn, Grand Cenobite");
-    private static final Set<String> STORM_PAYOFF_NAMES = names("Grapeshot", "Tendrils of Agony", "Brain Freeze",
-            "Empty the Warrens", "Mind's Desire", "Hellkite Tyrant");
-    private static final Set<String> CHEAT_SPELL_NAMES = names("Show and Tell", "Sneak Attack", "Through the Breach",
-            "Natural Order", "Elvish Piper", "Hypergenesis", "Eureka", "Tooth and Nail", "Quicksilver Amulet",
-            "Prime Time", "Dream Halls", "Sneak Attack", "Emergence Zone", "Neoform");
-    private static final Set<String> CHEAT_TARGET_NAMES = names("Emrakul, the Aeons Torn", "Griselbrand",
-            "Inferno Titan", "Ulamog, the Ceaseless Hunger", "Ulamog, the Infinite Gyre", "Kozilek, Butcher of Truth",
-            "Archon of Cruelty", "Elesh Norn, Grand Cenobite", "Atraxa, Grand Unifier", "Craterhoof Behemoth",
-            "Terastodon", "Woodfall Primus", "Blightsteel Colossus", "Sundering Titan", "Void Winnower");
-    private static final Set<String> OVERRUN_NAMES = names("Craterhoof Behemoth", "Overrun", "Triumph of the Hordes",
-            "Tooth and Claw", "Rally the Ranks", "Coat of Arms", "Mutagenic Growth", "Finale of Devastation",
-            "Warstorm Surge", "Hall of Triumph");
-    private static final Set<String> COPY_ENGINE_NAMES = names("Splinter Twin", "Kiki-Jiki, Mirror Breaker");
-    private static final Set<String> COPY_TARGET_NAMES = names("Pestermite", "Deceiver Exarch", "Zealous Conscripts",
-            "Restoration Angel", "Felidar Guardian", "Village Bell-Ringer");
 
     /** One combo the deck is built around. */
     public static final class Combo {
@@ -205,10 +454,15 @@ public final class ComboPlan {
      */
     public static ComboPlan scan(final Iterable<Card> cards) {
         final List<Card> spells = new ArrayList<>();
+        final List<Card> lands = new ArrayList<>();
         int scanned = 0;
         for (final Card c : cards) {
             scanned++;
-            if (c.isLand() || c.isToken() || c.isImmutable()) {
+            if (c.isToken() || c.isImmutable()) {
+                continue;
+            }
+            if (c.isLand()) {
+                lands.add(c); // only Dark Depths and Thespian's Stage need them
                 continue;
             }
             spells.add(c);
@@ -220,6 +474,7 @@ public final class ComboPlan {
         addIfFound(found, massReanimation(spells));
         addIfFound(found, reanimator(spells));
         addIfFound(found, storm(spells));
+        addIfFound(found, tutorStorm(spells));
         addIfFound(found, creatureCopy(spells));
         addIfFound(found, cascadePayoff(spells));
         addIfFound(found, cheatFatty(spells));
@@ -227,6 +482,16 @@ public final class ComboPlan {
         addIfFound(found, mill(spells));
         addIfFound(found, affinity(spells));
         addIfFound(found, dredge(spells));
+        addIfFound(found, madness(spells));
+        addIfFound(found, atog(spells));
+        addIfFound(found, replenish(spells));
+        addIfFound(found, darkDepths(spells, lands));
+        addIfFound(found, freeCast(spells));
+        addIfFound(found, artifactEngine(spells));
+        addIfFound(found, libraryOut(spells));
+        addIfFound(found, pair(spells));
+        addIfFound(found, libraryCut(spells, lands));
+        addIfFound(found, doomsday(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -288,6 +553,11 @@ public final class ComboPlan {
         return find(kind) != null;
     }
 
+    /** Whether this is the only combo the deck was found to be built around. */
+    public boolean onlyHas(final Kind kind) {
+        return combos.size() == 1 && combos.get(0).kind == kind;
+    }
+
     private Combo find(final Kind kind) {
         for (final Combo c : combos) {
             if (c.kind == kind) {
@@ -317,6 +587,85 @@ public final class ComboPlan {
         return mass != null && anyNamed(player.getCardsIn(ZoneType.Library), mass.payoffs);
     }
 
+    /**
+     * Whether this player is playing a Living End style deck: Living End itself is still in the library (found by name,
+     * so that the deck is played right even when no deck plan was read), or the scan found a mass reanimation whose
+     * payoff is waiting in the library ({@link #wantsCyclingPriority}).
+     */
+    public boolean isMassReanimationDeck(final Player ai) {
+        if (ai == null) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (c.getName().equals("Living End")) {
+                return true;
+            }
+        }
+        return wantsCyclingPriority(ai);
+    }
+
+    /** What a Living End style deck thinks of a play, ahead of the normal heuristics ({@link #massReanimationRuling}). */
+    public enum Ruling {
+        /** The deck has nothing to say: the normal heuristics decide. */
+        NO_OPINION,
+        /** Do not even look at the play: it would waste the payoff (a cascade spell before the graveyard is ready). */
+        SKIP,
+        /** Play it: cycling and fuel while the library can afford it, the cascade spell once the swap is worth it. */
+        PLAY
+    }
+
+    /**
+     * The plays of a Living End style deck ({@link #isMassReanimationDeck}), decided here and not by the general play
+     * loop: cycling and the fuel plays go first while the library has 10 cards or more (and the life they cost can
+     * be spared), and a cascade spell waits until the swap pays (more than four creatures in the graveyard, or
+     * {@link #swapIsWorthIt}) and the board is not already full (four creatures), or the AI is in danger and has room
+     * for a blocker. Only {@link Ruling#PLAY} overrides the heuristics; a cost that cannot be paid or spared is no
+     * opinion, not a refusal.
+     *
+     * @param lifeInDanger whether {@code ComputerUtil.aiLifeInDanger} says so: slow, so asked once per decision by the
+     *                     caller and not per play
+     */
+    public Ruling massReanimationRuling(final Player ai, final SpellAbility sa, final boolean lifeInDanger) {
+        if (ai == null || sa == null || sa.getHostCard() == null) {
+            return Ruling.NO_OPINION;
+        }
+        if ((sa.isCycling() || isFuelPlay(sa)) && sa.canCastTiming(ai)
+                && ai.getCardsIn(ZoneType.Library).size() >= MASS_FUEL_MIN_LIBRARY) {
+            if (!ComputerUtilCost.canPayCost(sa, ai, sa.isTrigger())) {
+                return Ruling.NO_OPINION;
+            }
+            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                    && !ai.cantLoseForZeroOrLessLife()
+                    && ai.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                return Ruling.NO_OPINION; // the life is needed more than the card
+            }
+            return Ruling.PLAY;
+        }
+        if (!sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+            return Ruling.NO_OPINION;
+        }
+        final int creatures = ai.getCreaturesInPlay().size();
+        if (lifeInDanger) {
+            return creatures >= MASS_FULL_BOARD ? Ruling.NO_OPINION : Ruling.PLAY;
+        }
+        if (CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES).size() > MASS_CREATURES_READY
+                || swapIsWorthIt(ai)) {
+            if (creatures >= MASS_FULL_BOARD) {
+                return Ruling.SKIP;
+            }
+            return !sa.getHostCard().isPermanent() && sa.canCastTiming(ai)
+                    && ComputerUtilCost.canPayCost(sa, ai, sa.isTrigger()) ? Ruling.PLAY : Ruling.NO_OPINION;
+        }
+        return Ruling.SKIP;
+    }
+
+    /** Cycling and fuel are only played while the library has this many cards: the deck must not deck itself. */
+    private static final int MASS_FUEL_MIN_LIBRARY = 10;
+    /** More creatures than this in the graveyard make a cascade into the swap worth it. */
+    private static final int MASS_CREATURES_READY = 4;
+    /** With this many creatures in play the swap would cost the AI its own board. */
+    private static final int MASS_FULL_BOARD = 4;
+
     /** Whether the cascade spells of a mass reanimation or cascade deck can only find the payoff. */
     public boolean isCascadeSafe() {
         final Combo mass = find(Kind.MASS_REANIMATION);
@@ -335,12 +684,23 @@ public final class ComboPlan {
         if (sa == null) {
             return false;
         }
+        final Combo mad = find(Kind.MADNESS);
+        if (mad != null && isDiscardOutletPlay(sa)) {
+            final Player who = sa.getActivatingPlayer() != null ? sa.getActivatingPlayer() : sa.getHostCard().getController();
+            if (madnessWindowOpen(who, sa) && !castableMadness(who, sa).isEmpty()) {
+                return true; // the right moment, and the madness card can really be cast afterwards
+            }
+        }
         final boolean mass = find(Kind.MASS_REANIMATION) != null;
-        if (!mass && find(Kind.REANIMATOR) == null) {
+        final boolean dredge = find(Kind.DREDGE) != null;
+        if (!mass && !dredge && find(Kind.REANIMATOR) == null) {
             return false;
         }
         if (mass && isCyclingLike(sa)) {
             return true;
+        }
+        if (dredge && sa.isSpell() && isDiscardCostSpell(sa)) {
+            return true; // Cathartic Reunion and the like: the discard is the point, what is drawn is the bonus
         }
         final Card host = sa.getHostCard();
         if (host == null || !sa.isSpell() || !(host.isInstant() || host.isSorcery())) {
@@ -353,7 +713,7 @@ public final class ComboPlan {
         if (who == null) {
             who = host.getController();
         }
-        return isTargetedDiscard(sa) && selfDiscardWanted(who);
+        return isTargetedDiscard(sa) && selfDiscardWanted(who, host);
     }
 
     /**
@@ -362,6 +722,15 @@ public final class ComboPlan {
      * or a big creature still to be found.
      */
     public boolean fuelFirst(final Player player) {
+        final Combo mad = find(Kind.MADNESS);
+        if (mad != null && madnessReady(player, mad) && player.getGame().getPhaseHandler().isPlayerTurn(player)
+                && player.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+            return true; // only the Main 2 outlets are brought forward
+        }
+        final Combo dredge = find(Kind.DREDGE);
+        if (dredge != null && dredgeWantsFuel(player, dredge)) {
+            return true; // a dredger or a card that works from the graveyard is in hand and no engine is running yet
+        }
         if (find(Kind.MASS_REANIMATION) != null) {
             return wantsCyclingPriority(player);
         }
@@ -418,6 +787,39 @@ public final class ComboPlan {
                     break;
                 case DREDGE:
                     sum += dredgeTerm(ai, combo);
+                    break;
+                case MADNESS:
+                    sum += madnessTerm(ai, combo);
+                    break;
+                case ATOG:
+                    sum += atogTerm(ai, combo);
+                    break;
+                case REPLENISH:
+                    sum += replenishTerm(ai, combo);
+                    break;
+                case TUTOR_STORM:
+                    sum += tutorStormTerm(ai, combo);
+                    break;
+                case DARK_DEPTHS:
+                    sum += darkDepthsTerm(ai);
+                    break;
+                case FREE_CAST:
+                    sum += freeCastTerm(ai, combo);
+                    break;
+                case ARTIFACT_ENGINE:
+                    sum += artifactEngineTerm(ai, combo);
+                    break;
+                case LIBRARY_OUT:
+                    sum += libraryOutTerm(ai, combo);
+                    break;
+                case PAIR:
+                    sum += pairTerm(ai, combo);
+                    break;
+                case LIBRARY_CUT:
+                    sum += libraryCutTerm(ai, combo);
+                    break;
+                case DOOMSDAY:
+                    sum += DoomsdayPile.term(ai);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -550,16 +952,16 @@ public final class ComboPlan {
         return spell && fatty ? ASSEMBLED_BONUS : spell || fatty ? ONE_PIECE_BONUS / 2 : 0;
     }
 
-    /** An overrun finisher is worth holding until the board makes it count: each creature it can pump is points. */
+    /**
+     * An overrun finisher is worth holding until the board makes it count: each creature it can pump is points. A
+     * finisher that is still in the library counts for three quarters while a tutor for it (Green Sun's Zenith,
+     * Natural Order: the {@code cascaders} of this combo) waits in hand.
+     */
     private int goWideTerm(final Player ai, final Combo combo) {
-        boolean finisher = false;
-        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-            if (combo.payoffs.contains(c.getName())) {
-                finisher = true;
-                break;
-            }
-        }
-        if (!finisher) {
+        final boolean finisher = anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs);
+        final boolean tutored = !finisher && anyNamed(ai.getCardsIn(ZoneType.Hand), combo.cascaders)
+                && anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs);
+        if (!finisher && !tutored) {
             return 0;
         }
         int creatures = 0;
@@ -568,7 +970,65 @@ public final class ComboPlan {
                 creatures++;
             }
         }
-        return Math.min(160, 25 * creatures);
+        final int points = Math.min(160, 25 * creatures);
+        return tutored ? points * 3 / 4 : points;
+    }
+
+    /**
+     * Aluren and Omniscience: the engine in play with a creature to cast is the combo (Acererak the Archlich bounces
+     * itself and ventures for nothing, over and over); one turn before it, the engine in hand with the mana for it and
+     * a creature to go with it. Only the hand and the battlefield count for the creature, because Omniscience, unlike
+     * Aluren, does not cast from the library or the graveyard.
+     */
+    private int freeCastTerm(final Player ai, final Combo combo) {
+        int lands = 0;
+        boolean engineInPlay = false;
+        boolean targetInPlay = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand()) {
+                lands++;
+            }
+            engineInPlay |= combo.enablers.contains(c.getName());
+            targetInPlay |= combo.payoffs.contains(c.getName());
+        }
+        boolean engineInHand = false;
+        boolean targetInHand = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (combo.enablers.contains(c.getName())) {
+                engineInHand |= c.getCMC() <= lands + 1; // one more land drop
+            } else if (combo.payoffs.contains(c.getName())) {
+                targetInHand = true;
+            }
+        }
+        if (engineInPlay) {
+            return targetInPlay || targetInHand ? 2 * ASSEMBLED_BONUS : ASSEMBLED_BONUS / 2;
+        }
+        final boolean target = targetInPlay || targetInHand;
+        return engineInHand && target ? ASSEMBLED_BONUS : engineInHand || target ? ONE_PIECE_BONUS : 0;
+    }
+
+    /**
+     * Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and their kin: every one of them in play makes the
+     * next artifact cheaper or free, and the artifacts they keep in play are the mana for the payoff (Karn, The One
+     * Ring, Kozilek's Command), which is worth a little more while it is in hand. The top card of the library is not
+     * read: Mystic Forge shows it to the player, but a rollout must not use what the AI cannot know.
+     */
+    private int artifactEngineTerm(final Player ai, final Combo combo) {
+        int engines = 0;
+        int artifacts = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (combo.enablers.contains(c.getName())) {
+                engines++;
+            }
+            if (c.isArtifact()) {
+                artifacts++;
+            }
+        }
+        int sum = 60 * Math.min(engines, 3) + 15 * Math.min(artifacts, 8);
+        if (engines > 0 && anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs)) {
+            sum += ONE_PIECE_BONUS;
+        }
+        return Math.min(300, sum);
     }
 
     private static int creatureValue(final CardCollectionView cards) {
@@ -636,16 +1096,12 @@ public final class ComboPlan {
                 + (safe ? " (finds only the payoff)" : ""));
     }
 
-    private static final Set<String> MILL_PAYOFF_NAMES = names("Hedron Crab", "Ruin Crab", "Fractured Sanity",
-            "Bruvac the Grandiloquent", "Maddening Cacophony", "Mind Funeral", "Traumatize", "Glimpse the Unthinkable",
-            "Tome Scour", "Magus of the Mind", "Increasing Confusion");
-
     private static Combo mill(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>();
         final Set<String> enablers = new LinkedHashSet<>();
         int pieces = 0;
         for (final Card c : spells) {
-            if (MILL_PAYOFF_NAMES.contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.MILL_PAYOFF, c.getName())) {
                 payoffs.add(c.getName());
                 pieces++;
             } else if (millsOpponent(c)) {
@@ -686,7 +1142,8 @@ public final class ComboPlan {
         int payoffCopies = 0;
         int cheapArtifacts = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.AFFINITY)) {
+            // Improvise is the modern Affinity: Kappa Cannoneer pays for itself with the artifacts the deck is full of
+            if (c.hasKeyword(Keyword.AFFINITY) || c.hasKeyword(Keyword.IMPROVISE)) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.isArtifact() && c.getCMC() <= 2) {
@@ -723,8 +1180,7 @@ public final class ComboPlan {
                 enablers.add(c.getName());
                 fuel++;
             }
-            if (names("Bridge from Below", "Narcomoeba", "Prized Amalgam", "Ichorid", "Dread Return",
-                    "Creeping Chill").contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.DREDGE_PAYOFF, c.getName())) {
                 payoffs.add(c.getName());
             }
         }
@@ -735,21 +1191,1239 @@ public final class ComboPlan {
                 Collections.<String>emptySet(), false, "dredge=" + dredgers + ", fuel=" + fuel + ", payoffs=" + payoffs);
     }
 
+    /** Dredging with fewer cards than this left in the library costs the deck more than the cards it mills are worth. */
+    static final int DREDGE_SAFE_LIBRARY = 12;
+    private static final int DREDGE_CARD_VALUE = 12;
+    private static final int DREDGE_SHORT_PENALTY = 25;
+    /** Below this many cards in the library everything in the graveyard is worth less, in proportion. */
+    private static final int DREDGE_FULL_VALUE_LIBRARY = 16;
+
+    /**
+     * Progress of a dredge deck, in evaluator points. One dredger in the graveyard keeps the engine running, a second
+     * and a third are only back-ups (a draw can only be replaced once), while every card that works from the
+     * graveyard (Bridge from Below, Ichorid, Prized Amalgam, Dread Return) is worth its full share. A payoff that only
+     * works from the library (Narcomoeba) is worth nothing in the graveyard: it cannot flip from there. A short
+     * library makes the whole graveyard worth less, and 8 cards or fewer is a deck about to dredge itself out.
+     */
     private int dredgeTerm(final Player ai, final Combo combo) {
         final int lib = ai.getCardsIn(ZoneType.Library).size();
         if (lib <= 8) {
             return -200; // the deck must not dredge itself out
         }
-        int sum = 0;
+        int dredgers = 0;
+        int natives = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
             if (c.hasKeyword(Keyword.DREDGE)) {
-                sum += 30;
-            } else if (combo.payoffs.contains(c.getName())) {
-                sum += 60;
+                dredgers++;
+            } else if (combo.payoffs.contains(c.getName()) && worksFromGraveyard(c)) {
+                natives++;
             }
+        }
+        int sum = Math.min(dredgers, 1) * 40 + Math.max(0, Math.min(dredgers, 3) - 1) * 15 + Math.min(natives, 4) * 55;
+        if (lib < DREDGE_FULL_VALUE_LIBRARY) {
+            sum = sum * lib / DREDGE_FULL_VALUE_LIBRARY;
+        }
+        sum += DredgeLine.setupBonus(ai); // Breakthrough with Lion's Eye Diamond: see DredgeLine
+        return Math.min(250, sum);
+    }
+
+    /**
+     * Whether the card does its work from the graveyard: a dredge, flashback, unearth or escape card, or one with a
+     * trigger, replacement effect, static ability or activated ability that is live there (Bridge from Below, Ichorid
+     * and Prized Amalgam trigger from the graveyard). Read from the card, not from a list of names.
+     */
+    public static boolean worksFromGraveyard(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        if (c.hasKeyword(Keyword.DREDGE) || c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.UNEARTH)
+                || c.hasKeyword(Keyword.ESCAPE)) {
+            return true;
+        }
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getActiveZone() != null && t.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final ReplacementEffect r : c.getReplacementEffects()) {
+            if (r.getActiveZone() != null && r.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final StaticAbility s : c.getStaticAbilities()) {
+            if (s.getActiveZone() != null && s.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && sa.getRestrictions() != null
+                    && sa.getRestrictions().getZone() == ZoneType.Graveyard) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A card that throws cards away for the dredge deck: a spell or ability that discards other cards from the hand
+     * as its cost (Cathartic Reunion, Putrid Imp) or as its effect (Faithless Looting, Careful Study). Read from the
+     * card, not from a list of names.
+     */
+    public static boolean isDredgeOutlet(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+                final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+                if (d != null && !d.payCostFromSource()) {
+                    return true;
+                }
+            }
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if (a.getApi() == ApiType.Discard && "You".equals(a.getParamOrDefault("Defined", ""))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** What a dredge hand is made of: a dredger or a card that works from the graveyard. */
+    public static boolean isDredgeHandPiece(final Card c) {
+        return c != null && !c.isLand() && (c.hasKeyword(Keyword.DREDGE) || worksFromGraveyard(c));
+    }
+
+    /** A card a dredge deck would rather have in the graveyard than in the hand: a dredger, or a card that works from there. */
+    private static boolean belongsInGraveyard(final Card c, final Combo dredge) {
+        return c.hasKeyword(Keyword.DREDGE) || dredge.payoffs.contains(c.getName()) && worksFromGraveyard(c);
+    }
+
+    /** Whether a dredge deck has a reason to put cards into its graveyard before anything else this turn. */
+    private boolean dredgeWantsFuel(final Player player, final Combo dredge) {
+        if (player.getCardsIn(ZoneType.Library).size() <= DREDGE_SAFE_LIBRARY) {
+            return false; // the library is the limit now, not the graveyard
+        }
+        int dredgersAway = 0;
+        for (final Card c : player.getCardsIn(ZoneType.Graveyard)) {
+            dredgersAway += c.hasKeyword(Keyword.DREDGE) ? 1 : 0;
+        }
+        if (dredgersAway >= 2) {
+            return false; // the engine is running
+        }
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            if (belongsInGraveyard(c, dredge)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Which dredge card to use when several are in the graveyard. The game asks for one replacement effect and, with
+     * no opinion, takes the first of the list, whatever the library holds. The bigger the dredge the more fuel it
+     * mills, but every card it leaves the library short of {@link #DREDGE_SAFE_LIBRARY} costs more than that card is
+     * worth, so a deep library takes Golgari Grave-Troll and a thin one Life from the Loam. Null (no opinion) for a
+     * deck that is not a dredge deck and when something other than dredge is among the options.
+     */
+    public ReplacementEffect chooseDredge(final Player ai, final List<ReplacementEffect> options) {
+        if (ai == null || options == null || options.size() < 2 || find(Kind.DREDGE) == null) {
+            return null;
+        }
+        final int lib = ai.getCardsIn(ZoneType.Library).size();
+        ReplacementEffect best = null;
+        int bestScore = Integer.MIN_VALUE;
+        for (final ReplacementEffect re : options) {
+            if (!re.isKeyword(Keyword.DREDGE) || re.getHostCard() == null) {
+                return null; // some other replacement effect is among them: the normal rules choose
+            }
+            final int score = dredgeChoiceScore(re.getHostCard().getKeywordMagnitude(Keyword.DREDGE), lib);
+            if (score > bestScore) {
+                bestScore = score;
+                best = re;
+            }
+        }
+        return best;
+    }
+
+    /** What dredging this many cards is worth with this many cards in the library; hopeless when there are too few. */
+    public static int dredgeChoiceScore(final int amount, final int library) {
+        if (amount <= 0 || amount > library) {
+            return Integer.MIN_VALUE / 2;
+        }
+        final int shortfall = Math.max(0, DREDGE_SAFE_LIBRARY - (library - amount));
+        return DREDGE_CARD_VALUE * amount - DREDGE_SHORT_PENALTY * shortfall;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Dark Depths
+
+    private static final String DARK_DEPTHS_NAME = "Dark Depths";
+    private static final String THESPIANS_STAGE = "Thespian's Stage";
+    private static final String MARIT_LAGE = "Marit Lage";
+    /** A Dark Depths and the piece that removes its counters are on the table: the next play is a 20/20. */
+    private static final int DEPTHS_READY = 300;
+
+    /**
+     * A spell or creature that removes every counter from a permanent (Vampire Hexmage), read from its ability.
+     * Thespian's Stage is the other way to a Dark Depths with no counters, but it is a land and is named where it is
+     * needed.
+     */
+    static boolean isCounterWiper(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        if (c.getName().equals("Vampire Hexmage")) {
+            return true;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() == ApiType.RemoveCounter && "All".equals(sa.getParamOrDefault("CounterNum", ""))
+                    && "All".equals(sa.getParamOrDefault("CounterType", ""))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A spell that puts a land from the library onto the battlefield and sacrifices a land to do it (Crop Rotation,
+     * Sylvan Scrying is not one: it goes to the hand). Read from the ability, not from a name.
+     */
+    static boolean isLandTutor(final Card c) {
+        if (c == null || c.isLand() || !(c.isInstant() || c.isSorcery())) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() && sa.getApi() == ApiType.ChangeZone && "Library".equals(sa.getParamOrDefault("Origin", ""))
+                    && "Battlefield".equals(sa.getParamOrDefault("Destination", ""))
+                    && sa.getParamOrDefault("ChangeType", "").contains("Land")
+                    && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasIceCounters(final Card c) {
+        return c.getName().equals(DARK_DEPTHS_NAME) && c.getCounters(CounterType.getType("ICE")) > 0;
+    }
+
+    /** Dark Depths itself, or the spell that puts it onto the battlefield (Crop Rotation). */
+    static boolean isDepthsAccess(final Card c) {
+        return c != null && (c.getName().equals(DARK_DEPTHS_NAME) || isLandTutor(c));
+    }
+
+    static boolean isStage(final Card c) {
+        return c != null && c.getName().equals(THESPIANS_STAGE);
+    }
+
+    /** Dark Depths, Thespian's Stage, a Hexmage or Crop Rotation: what a Dark Depths hand is made of. */
+    static boolean isDepthsPiece(final Card c) {
+        return isDepthsAccess(c) || isStage(c) || isCounterWiper(c);
+    }
+
+    /**
+     * Crop Rotation (a land tutor that costs a land) in a Dark Depths deck: only a block, never a push. Fetching Dark
+     * Depths with nothing to take its counters off only costs a land, and a Stage or Hexmage on the table is no use
+     * when the mana left after the spell (G, and the land it sacrifices may be an untapped one) cannot pay for it.
+     * With Dark Depths already out, in hand or not in the library, the normal rules decide.
+     */
+    private static Ruling cropRotationRuling(final Player ai) {
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        if (!isNamed(ai.getCardsIn(ZoneType.Library), DARK_DEPTHS_NAME) || isNamed(hand, DARK_DEPTHS_NAME)) {
+            return Ruling.NO_OPINION;
+        }
+        boolean hexmageOut = false;
+        int spare = 0;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE) || hasIceCounters(c)) {
+                return Ruling.NO_OPINION; // the token is made, or Dark Depths is out and the search picks the Stage
+            }
+            if (isCounterWiper(c)) {
+                hexmageOut = true;
+            } else if (c.isLand() && !c.getName().equals(THESPIANS_STAGE) && !c.isTapped()
+                    && !c.getManaAbilities().isEmpty()) {
+                spare++;
+            }
+        }
+        if (!haveWiper(board, hand)) {
+            return Ruling.SKIP;
+        }
+        final int need = hexmageOut ? 0 : 2; // the Stage's ability or a Hexmage out of the hand
+        return spare - 1 >= need ? Ruling.NO_OPINION : Ruling.SKIP;
+    }
+
+    private static boolean isNamed(final Iterable<Card> cards, final String name) {
+        for (final Card c : cards) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether one of the pieces that take the counters off is in play or in hand (a Hexmage, Thespian's Stage). */
+    private static boolean haveWiper(final CardCollectionView board, final CardCollectionView hand) {
+        for (final CardCollectionView zone : new CardCollectionView[] { board, hand }) {
+            for (final Card c : zone) {
+                if (c.getName().equals(THESPIANS_STAGE) || isCounterWiper(c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What a land search should fetch for a Dark Depths deck: Dark Depths while there is none on the table or in hand
+     * (it is the card the deck is built around), then Thespian's Stage once a Dark Depths with its counters is out and
+     * nothing takes them off yet. Null for no opinion: the normal choice is made.
+     */
+    private Card depthsSearchPick(final Player ai, final CardCollectionView options) {
+        if (find(Kind.DARK_DEPTHS) == null) {
+            return null;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        boolean depthsOut = false;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return null;
+            }
+            depthsOut |= hasIceCounters(c);
+        }
+        Card depths = null;
+        Card stage = null;
+        for (final Card c : options) {
+            if (c.getName().equals(DARK_DEPTHS_NAME) && depths == null) {
+                depths = c;
+            } else if (c.getName().equals(THESPIANS_STAGE) && stage == null) {
+                stage = c;
+            }
+        }
+        if (!depthsOut && depths != null && !isNamed(hand, DARK_DEPTHS_NAME)) {
+            return depths;
+        }
+        if (depthsOut && stage != null && !haveWiper(board, hand)) {
+            return stage;
+        }
+        return null;
+    }
+
+    /**
+     * Which land a Dark Depths deck plays first. The general rule scores a land by the mana it makes, so a Dark Depths
+     * (no mana) waits in the hand until nothing else is left, and the Stage is played as just another colorless land.
+     * Here the mana comes first (two sources, enough for a Hexmage or the Stage's own ability), then Dark Depths once a
+     * piece that takes the counters off is in play or in hand, then the Stage once Dark Depths is out. Null for no
+     * opinion; never for a lone land, there is nothing to choose then.
+     */
+    public Card chooseLand(final Player ai, final CardCollection playable) {
+        if (find(Kind.DARK_DEPTHS) == null || ai == null || playable == null || playable.size() < 2) {
+            return null;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        int mana = 0;
+        boolean depthsOut = false;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return null;
+            }
+            depthsOut |= hasIceCounters(c);
+            if (c.isLand() && !c.getName().equals(THESPIANS_STAGE) && !c.getManaAbilities().isEmpty()) {
+                mana++;
+            }
+        }
+        if (mana < 2) {
+            return null; // the mana first: the normal rule picks the best source
+        }
+        Card depths = null;
+        Card stage = null;
+        for (final Card c : playable) {
+            if (c.getName().equals(DARK_DEPTHS_NAME) && depths == null) {
+                depths = c;
+            } else if (c.getName().equals(THESPIANS_STAGE) && stage == null) {
+                stage = c;
+            }
+        }
+        if (!depthsOut && depths != null && haveWiper(board, hand)) {
+            return depths;
+        }
+        if (depthsOut && stage != null && !isNamed(board, THESPIANS_STAGE)) {
+            return stage;
+        }
+        return null;
+    }
+
+    /**
+     * What a Dark Depths deck thinks of the activated abilities that take the counters off, ahead of the normal
+     * heuristics. The ability of Dark Depths itself (3 mana for one of ten counters) is ordinary as far as the general
+     * rules can tell, so they pay for it while Thespian's Stage or a Hexmage sits there doing nothing: with a piece
+     * that takes all of them off in play or in hand it is {@link Ruling#SKIP}. The piece itself is {@link Ruling#PLAY}
+     * once a Dark Depths with its counters is out and the cost can be paid, aimed at that Dark Depths (the general
+     * rules would pick any land for the Stage, or find no use for it at all: copying a legend the AI already has).
+     * Everything else, and every other deck, is {@link Ruling#NO_OPINION}.
+     */
+    public Ruling darkDepthsRuling(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.getHostCard() == null || find(Kind.DARK_DEPTHS) == null) {
+            return Ruling.NO_OPINION;
+        }
+        if (sa.isSpell() && isLandTutor(sa.getHostCard())) {
+            return cropRotationRuling(ai);
+        }
+        if (!sa.isActivatedAbility()) {
+            return Ruling.NO_OPINION;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        Card depths = null;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return Ruling.NO_OPINION; // done
+            }
+            if (depths == null && hasIceCounters(c)) {
+                depths = c;
+            }
+        }
+        if (depths == null) {
+            return Ruling.NO_OPINION;
+        }
+        final Card host = sa.getHostCard();
+        final String api = sa.getApi() == null ? "" : sa.getApi().name();
+        if (host.getName().equals(DARK_DEPTHS_NAME)) {
+            return api.equals("RemoveCounter") && haveWiper(board, ai.getCardsIn(ZoneType.Hand))
+                    ? Ruling.SKIP : Ruling.NO_OPINION;
+        }
+        final boolean stage = host.getName().equals(THESPIANS_STAGE) && api.equals("Clone");
+        final boolean hexmage = isCounterWiper(host) && api.startsWith("RemoveCounter");
+        if (!(stage || hexmage) || !host.isInZone(ZoneType.Battlefield) || !sa.usesTargeting() || !sa.canTarget(depths)
+                || !ComputerUtilCost.canPayCost(sa, ai, false)) {
+            return Ruling.NO_OPINION;
+        }
+        sa.resetTargets();
+        sa.getTargets().add(depths);
+        return Ruling.PLAY;
+    }
+
+    private static Combo darkDepths(final List<Card> spells, final List<Card> lands) {
+        int depths = 0;
+        int stages = 0;
+        int wipers = 0;
+        final Set<String> enablers = new LinkedHashSet<>();
+        for (final Card c : lands) {
+            if (c.getName().equals(DARK_DEPTHS_NAME)) {
+                depths++;
+            } else if (c.getName().equals(THESPIANS_STAGE)) {
+                stages++;
+                enablers.add(c.getName());
+            }
+        }
+        int tutors = 0;
+        for (final Card c : spells) {
+            if (isCounterWiper(c)) {
+                wipers++;
+                enablers.add(c.getName());
+            } else if (isLandTutor(c)) {
+                tutors++;
+                enablers.add(c.getName()); // Crop Rotation puts Dark Depths onto the battlefield at instant speed
+            }
+        }
+        // a deck built around it plays a few of each: one stray Hexmage next to a lone Dark Depths is not a combo deck
+        // (Selesnya Depths has no Hexmage: two Thespian's Stage and four Crop Rotation are the same plan)
+        if (depths < 2 || wipers + stages < 3 && !(wipers + stages >= 2 && tutors >= 4)) {
+            return null;
+        }
+        final Set<String> payoffs = new LinkedHashSet<>();
+        payoffs.add(DARK_DEPTHS_NAME);
+        return new Combo(Kind.DARK_DEPTHS, 30 + 6 * Math.min(depths, 4) + 5 * Math.min(wipers + stages, 8)
+                + 2 * Math.min(tutors, 4), payoffs, enablers, Collections.<String>emptySet(), false,
+                "depths=" + depths + ", hexmage=" + wipers + ", stage=" + stages + ", tutor=" + tutors);
+    }
+
+    /**
+     * Progress towards Marit Lage, in evaluator points. The land comes first (it makes no mana and does nothing by
+     * itself, which is why the rollouts would never see a reason to play it); then the piece that takes the counters
+     * off, which is a creature that can be sacrificed at once, or Thespian's Stage with the mana to use it. When the
+     * token is on the table the evaluator counts the 20/20 itself, so there is nothing left to add. The ready board
+     * is worth less than the token it turns into, which is why the rollouts still go and make it.
+     */
+    private int darkDepthsTerm(final Player ai) {
+        final CounterType ice = CounterType.getType("ICE");
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        boolean depthsOut = false;
+        boolean wiperOut = false;
+        boolean stageOut = false;
+        int mana = 0;
+        for (final Card c : board) {
+            final String n = c.getName();
+            if (n.equals(MARIT_LAGE)) {
+                return 0;
+            }
+            if (n.equals(DARK_DEPTHS_NAME) && c.getCounters(ice) > 0) {
+                depthsOut = true;
+            } else if (n.equals(THESPIANS_STAGE)) {
+                stageOut = true;
+            } else if (isCounterWiper(c)) {
+                wiperOut = true;
+            } else if (c.isLand() && !c.getManaAbilities().isEmpty()) {
+                mana++; // what pays for Hexmage or the Stage; the Stage taps for its own ability
+            }
+        }
+        boolean wiperInHand = false;
+        boolean stageInHand = false;
+        boolean depthsInHand = false;
+        for (final Card c : hand) {
+            wiperInHand |= isCounterWiper(c);
+            stageInHand |= c.getName().equals(THESPIANS_STAGE);
+            depthsInHand |= c.getName().equals(DARK_DEPTHS_NAME);
+        }
+        if (depthsOut) {
+            if (wiperOut) {
+                return DEPTHS_READY;
+            }
+            if (stageOut && mana >= 2) {
+                return DEPTHS_READY - 20;
+            }
+            if (wiperInHand && mana >= 2) {
+                return 220;
+            }
+            return stageInHand || stageOut ? 120 : ONE_PIECE_BONUS;
+        }
+        if (depthsInHand) {
+            return wiperOut || wiperInHand || stageOut || stageInHand ? 90 : 30;
+        }
+        boolean tutorInHand = false;
+        for (final Card c : hand) {
+            tutorInHand |= isLandTutor(c);
+        }
+        if (tutorInHand && isNamed(ai.getCardsIn(ZoneType.Library), DARK_DEPTHS_NAME)) {
+            // Crop Rotation can put Dark Depths onto the table, so the piece that takes its counters off is worth more
+            return wiperOut || wiperInHand || stageOut || stageInHand ? 110 : 50;
+        }
+        return wiperOut ? 25 : 0;
+    }
+
+    // ------------------------------------------------------------------------------------------------- madness
+
+    /** The mana value of the madness cost of the card, or -1 when it has none the AI can read. */
+    static int madnessCost(final Card c) {
+        try {
+            for (final KeywordInterface ki : c.getKeywords(Keyword.MADNESS)) {
+                if (ki instanceof KeywordWithCost) {
+                    final forge.game.cost.Cost cost = ((KeywordWithCost) ki).getCost();
+                    if (cost != null) {
+                        return cost.getTotalMana().getCMC();
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // an unreadable cost: no opinion
+        }
+        return -1;
+    }
+
+    /** A card that throws away another card of its controller: an outlet that turns on madness (and fuels an atog). */
+    private static boolean isDiscardOutlet(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (isDiscardOutletPlay(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isDiscardOutletPlay(final SpellAbility sa) {
+        if (sa == null || sa.isCycling()) {
+            return false;
+        }
+        if (sa.isActivatedAbility()) {
+            if (sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+                return false;
+            }
+            final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+            return d != null && !d.payCostFromSource();
+        }
+        if (!sa.isSpell()) {
+            return false;
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.getApi() == ApiType.Discard && a.getParamOrDefault("Defined", "").contains("You")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Combo madness(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int madnessCards = 0;
+        int outlets = 0;
+        for (final Card c : spells) {
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                payoffs.add(c.getName());
+                madnessCards++;
+            } else if (isDiscardOutlet(c)) {
+                enablers.add(c.getName());
+                outlets++;
+            }
+        }
+        if (madnessCards < 3 || outlets < 3) {
+            return null;
+        }
+        return new Combo(Kind.MADNESS, 25 + 6 * Math.min(madnessCards, 8) + 5 * Math.min(outlets, 8), payoffs, enablers,
+                Collections.<String>emptySet(), false, "madness=" + madnessCards + ", outlets=" + outlets);
+    }
+
+    private static boolean hasOutlet(final Player ai, final Combo combo) {
+        return anyNamed(ai.getCardsIn(ZoneType.Hand), combo.enablers)
+                || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.enablers);
+    }
+
+    /** A discard outlet play must wait: a castable madness card would be the one thrown away, and the moment is wrong. */
+    public boolean outletMustWait(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || find(Kind.MADNESS) == null || !isDiscardOutletPlay(sa)) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        return !castableMadness(ai, sa).isEmpty() && !madnessWindowOpen(ai, sa);
+    }
+
+    /**
+     * A card with madness is in the hand, a way to discard it is at hand, and there is mana for the discard and the
+     * madness cost together (counting the land that can still be played).
+     */
+    boolean madnessReady(final Player ai, final Combo combo) {
+        if (ai == null || !hasOutlet(ai, combo)) {
+            return false;
+        }
+        int cheapest = Integer.MAX_VALUE;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                final int m = madnessCost(c);
+                if (m >= 0) {
+                    cheapest = Math.min(cheapest, m);
+                }
+            }
+        }
+        if (cheapest == Integer.MAX_VALUE) {
+            return false;
+        }
+        return forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai, true) >= cheapest + 1;
+    }
+
+    /**
+     * The madness card to throw away when the cost or effect asks for a discard and it can be cast for its madness
+     * cost right away: the best one that can be paid for. Null when there is none, and the normal choice is made.
+     */
+    public Card madnessDiscard(final Player ai, final CardCollection valid) {
+        if (find(Kind.MADNESS) == null || ai == null || valid == null) {
+            return null;
+        }
+        Card best = null;
+        int bestScore = -1;
+        for (final Card c : valid) {
+            if (!c.hasKeyword(Keyword.MADNESS) || !canCastForMadness(ai, c)) {
+                continue;
+            }
+            final int v = madnessValue(c);
+            if (v > bestScore) { bestScore = v; best = c; }
+        }
+        return best;
+    }
+
+    private static int madnessValue(final Card c) {
+        return c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 100 + 20 * c.getCMC();
+    }
+
+    private static ManaCost madnessMana(final Card c) {
+        try {
+            for (final KeywordInterface ki : c.getKeywords(Keyword.MADNESS)) {
+                if (ki instanceof KeywordWithCost) {
+                    final forge.game.cost.Cost cost = ((KeywordWithCost) ki).getCost();
+                    if (cost != null) {
+                        return cost.getTotalMana();
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // unreadable: no opinion
+        }
+        return null;
+    }
+
+    /** The madness cost alone can be paid with the untapped sources, colours included. */
+    private static boolean canCastForMadness(final Player ai, final Card c) {
+        final ManaCost m = madnessMana(c);
+        if (m == null) {
+            return false;
+        }
+        final SpellAbility sa = c.getFirstSpellAbility();
+        if (sa == null) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        if (!madnessHasLegalTarget(sa)) {
+            return false;
+        }
+        if (m.isZero()) {
+            return true;
+        }
+        return forge.ai.ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(m), sa, ai, false);
+    }
+
+    /**
+     * A madness card that needs a target (a counterspell with nothing to counter, removal with nothing to hit) is
+     * exiled and then put into the graveyard when the madness trigger resolves: the cast is impossible, so it must
+     * never be thrown away for madness. Only asks; no target is chosen or left behind.
+     */
+    private static boolean madnessHasLegalTarget(final SpellAbility sa) {
+        try {
+            if (!sa.usesTargeting()) {
+                return true;
+            }
+            final forge.game.spellability.TargetRestrictions tr = sa.getTargetRestrictions();
+            if (tr == null) {
+                return true;
+            }
+            if (tr.getZone().contains(ZoneType.Stack)) {
+                return tr.getNumCandidates(sa) > 0; // hasCandidates says yes to every stack target
+            }
+            return tr.hasCandidates(sa);
+        } catch (final RuntimeException e) {
+            return true; // cannot tell: the old behaviour
+        }
+    }
+
+    private static boolean isInstantSpeed(final SpellAbility sa) {
+        final Card h = sa.getHostCard();
+        if (sa.isSpell()) {
+            return h.isInstant() || h.hasKeyword(Keyword.FLASH);
+        }
+        return !sa.getRestrictions().isSorcerySpeed();
+    }
+
+    /** How many cards the outlet throws away (99 for "your hand"): only single discards are planned. */
+    private static int discardAmount(final SpellAbility sa) {
+        if (sa.isActivatedAbility() && sa.getPayCosts() != null) {
+            final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+            if (d != null) {
+                return "Hand".equals(d.getType()) ? 99 : d.getAbilityAmount(sa);
+            }
+        }
+        return 1;
+    }
+
+    /**
+     * When the AI may use a discard outlet for madness. Instant-speed outlets wait for the opponent's end step (the
+     * mana would be wasted anyway, the card dodges sorcery-speed removal, and the opponent has no time to answer);
+     * sorcery-speed outlets go in the AI's own Main 2. Never with something on the stack, never aimed at anything.
+     */
+    public boolean madnessWindowOpen(final Player ai, final SpellAbility outlet) {
+        if (ai == null || outlet == null || outlet.usesTargeting() || !ai.getGame().getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            return ph.is(PhaseType.MAIN2) && !isInstantSpeed(outlet);
+        }
+        return ph.is(PhaseType.END_OF_TURN) && isInstantSpeed(outlet);
+    }
+
+    /** Madness cards in hand whose madness cost can be paid on top of the outlet's own mana cost. */
+    CardCollection castableMadness(final Player ai, final SpellAbility outlet) {
+        final CardCollection out = new CardCollection();
+        if (discardAmount(outlet) != 1) {
+            return out;
+        }
+        final ManaCost outletMana = outlet.getPayCosts() == null ? ManaCost.NO_COST : outlet.getPayCosts().getTotalMana();
+        outlet.setActivatingPlayer(ai);
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            final ManaCost m = c == outlet.getHostCard() || !c.hasKeyword(Keyword.MADNESS) ? null : madnessMana(c);
+            if (m == null) {
+                continue;
+            }
+            final SpellAbility cast = c.getFirstSpellAbility();
+            if (cast != null) {
+                cast.setActivatingPlayer(ai);
+                if (!madnessHasLegalTarget(cast)) {
+                    continue; // nothing to aim it at: the card would only be lost
+                }
+            }
+            final ManaCostBeingPaid total = new ManaCostBeingPaid(outletMana);
+            total.addManaCost(m);
+            if (forge.ai.ComputerUtilMana.canPayManaCost(total, outlet, ai, false)) {
+                out.add(c);
+            }
+        }
+        return out;
+    }
+
+    /** A discard cost may be paid with a madness card only inside the window (see checkDiscardCost). */
+    public boolean madnessDiscardAllowed(final Player ai, final SpellAbility sa) {
+        return find(Kind.MADNESS) == null || madnessWindowOpen(ai, sa);
+    }
+
+    /** The outlet play that is safe and sure right now, or null. The AI plays it without asking Monte Carlo. */
+    public SpellAbility sureMadnessPlay(final Player ai, final List<SpellAbility> candidates) {
+        if (find(Kind.MADNESS) == null || ai == null || candidates == null) {
+            return null;
+        }
+        SpellAbility best = null;
+        int bestValue = -1;
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || !isDiscardOutletPlay(sa)) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (!madnessWindowOpen(ai, sa)) {
+                continue;
+            }
+            int value = -1;
+            for (final Card c : castableMadness(ai, sa)) {
+                value = Math.max(value, madnessValue(c));
+            }
+            if (value > bestValue && sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false)) {
+                bestValue = value;
+                best = sa;
+            }
+        }
+        return best;
+    }
+
+    /** What the madness cards in the hand are worth: a lot when they can be cast cheaply, little as plain cards. */
+    private int madnessTerm(final Player ai, final Combo combo) {
+        final boolean outlet = hasOutlet(ai, combo);
+        final boolean ready = madnessReady(ai, combo);
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!c.hasKeyword(Keyword.MADNESS)) {
+                continue;
+            }
+            final int value = c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 50 + 30 * c.getCMC();
+            sum += value * (ready ? 45 : outlet ? 25 : 12) / 100;
         }
         return Math.min(250, sum);
     }
+
+    // ---------------------------------------------------------------------------------------- Replenish decks
+
+    /** The graveyard has to hold about two good enchantments before the payoff is cast (Opalescence and a Parallax Wave). */
+    static final int REPLENISH_WORTH_MIN = 300;
+    /** Share (percent) of what the graveyard's enchantments are worth, while the payoff can be cast or only drawn. */
+    private static final int REPLENISH_SHARE_ACCESS = 65;
+    private static final int REPLENISH_SHARE_NO_ACCESS = 25;
+
+    /** What an enchantment is worth on the battlefield; 0 for anything else (an Aura stays in the graveyard). */
+    static int enchantmentValue(final Card c) {
+        return c.isEnchantment() && !c.isAura() && !c.isLand() ? 50 + 30 * c.getCMC() : 0;
+    }
+
+    private static int graveyardEnchantmentValue(final Player ai) {
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            sum += enchantmentValue(c);
+        }
+        return sum;
+    }
+
+    /** Return all enchantment cards of the graveyard to the battlefield (Replenish, and the like). */
+    static boolean isEnchantmentRecursion(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if ((a.getApi() == ApiType.ChangeZoneAll || a.getApi() == ApiType.ChangeZone)
+                        && a.getParamOrDefault("Origin", "").contains("Graveyard")
+                        && "Battlefield".equals(a.getParamOrDefault("Destination", ""))
+                        && a.getParamOrDefault("ChangeType", "").contains("Enchantment")
+                        && !a.getParamOrDefault("ChangeType", "").contains("Aura")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A way to fill the graveyard: discarding or milling yourself, cycling, or a library search that puts the cards it
+     * does not take there (Intuition). Activated abilities count (Attunement draws three and discards four).
+     */
+    private static boolean isGraveyardFiller(final Card c) {
+        if (c.isLand()) {
+            return false;
+        }
+        if (hasCycling(c)) {
+            return true;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if ("Intuition".equals(sa.getParam("AILogic"))) {
+                return true;
+            }
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                final ApiType api = a.getApi();
+                final String who = a.getParamOrDefault("Defined", "You");
+                if (api == ApiType.Discard && !a.usesTargeting() && who.contains("You")
+                        || api == ApiType.Mill && !a.usesTargeting() && who.contains("You")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Combo replenish(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int enchantments = 0;
+        int fillers = 0;
+        for (final Card c : spells) {
+            if (isEnchantmentRecursion(c)) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+                continue;
+            }
+            if (enchantmentValue(c) > 0) {
+                enchantments++;
+            }
+            if (isGraveyardFiller(c)) {
+                enablers.add(c.getName());
+                fillers++;
+            }
+        }
+        if (payoffCopies < 2 || enchantments < 8 || fillers < 4) {
+            return null;
+        }
+        return new Combo(Kind.REPLENISH, 30 + 4 * Math.min(payoffCopies, 4) + 2 * Math.min(enchantments, 16)
+                + 2 * Math.min(fillers, 10), payoffs, enablers, Collections.<String>emptySet(), false,
+                "payoff=" + payoffs + ", enchantments=" + enchantments + ", fillers=" + fillers);
+    }
+
+    /** The enchantments in the graveyard are worth part of what Replenish makes of them, more while it is in hand. */
+    private int replenishTerm(final Player ai, final Combo combo) {
+        final boolean access = anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs);
+        if (!access && !anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs)) {
+            return 0; // every copy is used up: nothing left to prepare
+        }
+        return Math.min(350, graveyardEnchantmentValue(ai) * (access ? REPLENISH_SHARE_ACCESS : REPLENISH_SHARE_NO_ACCESS) / 100);
+    }
+
+    /** Whether the payoff is held back: cast on a graveyard without its enchantments it would be a wasted card. */
+    public boolean payoffMustWait(final Player ai, final SpellAbility sa) {
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep == null || ai == null || sa == null || !sa.isSpell() || sa.getHostCard() == null
+                || !rep.payoffs.contains(sa.getHostCard().getName())) {
+            return false;
+        }
+        return graveyardEnchantmentValue(ai) < REPLENISH_WORTH_MIN;
+    }
+
+    /**
+     * What to search for in a Replenish deck. Alone (a tutor that takes one card) the payoff first, then the best
+     * enchantment. For Intuition, where the card the opponent leaves goes into the hand and the rest into the
+     * graveyard, three different enchantments, the best first: whichever one is given, the other two are in the
+     * graveyard for the payoff.
+     */
+    private CardCollection replenishPicks(final Player ai, final Iterable<Card> pool, final int n, final Combo combo) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final List<Card> enchantments = new ArrayList<>();
+        Card payoff = null;
+        for (final Card c : pool) {
+            if (combo.payoffs.contains(c.getName())) {
+                payoff = payoff == null ? c : payoff;
+            } else if (enchantmentValue(c) > 0) {
+                enchantments.add(c);
+            }
+        }
+        enchantments.sort((a, b) -> Integer.compare(enchantmentValue(b), enchantmentValue(a)));
+        final CardCollection picks = new CardCollection();
+        if (n == 1) {
+            if (payoff != null && !anyNamed(hand, combo.payoffs)) {
+                picks.add(payoff);
+            } else if (!enchantments.isEmpty()) {
+                picks.add(enchantments.get(0));
+            }
+            return picks.size() == 1 ? picks : null;
+        }
+        final Set<String> names = new LinkedHashSet<>();
+        for (final Card c : enchantments) {
+            if (picks.size() < n && names.add(c.getName())) {
+                picks.add(c);
+            }
+        }
+        for (final Card c : enchantments) {
+            if (picks.size() < n && !picks.contains(c)) {
+                picks.add(c);
+            }
+        }
+        if (picks.size() < n && payoff != null && !picks.contains(payoff)) {
+            picks.add(payoff); // fewer than n enchantments are left: the payoff makes up the number
+        }
+        return picks.size() == n ? picks : null;
+    }
+
+    /**
+     * What a search that sends all but one of the cards to the graveyard (Intuition) is worth to a Replenish deck, in
+     * evaluator points: the opponent gives the AI the card that is worth least, so the others are what is gained. Not
+     * limited by how full the graveyard already is, which the progress term is (it stops counting at a point):
+     * every enchantment that is added comes back with the payoff.
+     */
+    public int graveyardGain(final Player ai, final Iterable<Card> picks) {
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep == null || ai == null || picks == null) {
+            return 0;
+        }
+        int sum = 0;
+        int least = Integer.MAX_VALUE;
+        int count = 0;
+        for (final Card c : picks) {
+            final int v = enchantmentValue(c);
+            sum += v;
+            least = Math.min(least, v);
+            count++;
+        }
+        if (count < 2) {
+            return 0;
+        }
+        final boolean access = anyNamed(ai.getCardsIn(ZoneType.Hand), rep.payoffs);
+        return Math.min(300, (sum - least) * (access ? REPLENISH_SHARE_ACCESS : REPLENISH_SHARE_NO_ACCESS) / 100);
+    }
+
+    // ------------------------------------------------------------------------------------------------- tutors
+
+    /**
+     * What to search the library for, for a madness or Psychatog deck: the piece that is missing (a discard outlet when
+     * a madness card waits in hand, a madness card when an outlet is out, the atog while there is none), then cards
+     * that are not yet in hand, and a land while the AI is short of them. When the opponent picks one of the cards
+     * (Intuition) the best {@code n} different cards are asked for, so that the one the opponent leaves is still good.
+     * Every other combo is served the same way: the piece that is missing first (a payoff when the enablers are
+     * there and the other way round), a second copy last. Decks that want cards in the graveyard are left alone when
+     * the cards that are not picked go there (Intuition): the normal logic knows what to put in the graveyard.
+     * Null when the deck has no combo, or nothing clearly worth fetching is in the pool: the normal choice is made.
+     */
+    public CardCollection tutorPicks(final Player ai, final Iterable<Card> pool, final int n) {
+        final Combo mad = find(Kind.MADNESS);
+        final Combo atog = find(Kind.ATOG);
+        if (combos.isEmpty() || ai == null || pool == null || n <= 0) {
+            return null;
+        }
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep != null) {
+            final CardCollection forReplenish = replenishPicks(ai, pool, n, rep);
+            if (forReplenish != null) {
+                return forReplenish;
+            }
+        }
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final java.util.Map<Card, Integer> score = new java.util.HashMap<>();
+        final List<Card> ranked = new ArrayList<>();
+        for (final Card c : pool) {
+            score.put(c, tutorScore(ai, c, mad, atog, hand, board, n > 1));
+            ranked.add(c);
+        }
+        ranked.sort((a, b) -> Integer.compare(score.get(b), score.get(a)));
+        final CardCollection picks = new CardCollection();
+        final Set<String> names = new LinkedHashSet<>();
+        for (final Card c : ranked) { // different cards first
+            if (picks.size() < n && score.get(c) > 0 && names.add(c.getName())) {
+                picks.add(c);
+            }
+        }
+        for (final Card c : ranked) { // then copies, if there are fewer than n different good cards
+            if (picks.size() < n && score.get(c) > 0 && !picks.contains(c)) {
+                picks.add(c);
+            }
+        }
+        return picks.size() == n ? picks : null;
+    }
+
+    /** The one card to search for, or null for no opinion. */
+    public Card tutorPick(final Player ai, final Iterable<Card> pool) {
+        final CardCollection picks = tutorPicks(ai, pool, 1);
+        return picks == null ? null : picks.getFirst();
+    }
+
+    /**
+     * A piece of any other combo: wanted most when its other half is already there, then when nothing is, and hardly
+     * when the same kind of piece is already at hand. Storm payoffs wait for a few rituals, go-wide finishers for a board.
+     */
+    private int pieceScore(final Card c, final Combo combo, final CardCollectionView hand, final CardCollectionView board,
+                           final boolean graveyardRest) {
+        final String n = c.getName();
+        final boolean payoff = combo.payoffs.contains(n);
+        final boolean enabler = combo.enablers.contains(n) || combo.cascaders.contains(n);
+        if (!payoff && !enabler) {
+            return 0;
+        }
+        if (graveyardRest && (combo.kind == Kind.MASS_REANIMATION || combo.kind == Kind.REANIMATOR
+                || combo.kind == Kind.DREDGE || combo.kind == Kind.MILL || combo.kind == Kind.REPLENISH)) {
+            return 0; // what is left over goes to the graveyard, which is where these decks want cards
+        }
+        boolean havePayoff = false;
+        boolean haveEnabler = false;
+        int enablersInHand = 0;
+        int creatures = 0;
+        for (final Card x : hand) {
+            havePayoff |= combo.payoffs.contains(x.getName());
+            final boolean e = combo.enablers.contains(x.getName()) || combo.cascaders.contains(x.getName());
+            haveEnabler |= e;
+            enablersInHand += e ? 1 : 0;
+        }
+        for (final Card x : board) {
+            havePayoff |= combo.payoffs.contains(x.getName());
+            haveEnabler |= combo.enablers.contains(x.getName());
+            creatures += x.isCreature() ? 1 : 0;
+        }
+        int s;
+        if (payoff) {
+            s = havePayoff ? 15 : haveEnabler ? 100 : 70;
+            if (combo.kind == Kind.STORM && enablersInHand < 2 || combo.kind == Kind.GO_WIDE && creatures < 3) {
+                s = Math.min(s, 20); // not yet: the payoff is wasted without the rituals or the board
+            }
+        } else {
+            s = haveEnabler ? 15 : havePayoff ? 100 : 70;
+        }
+        return s * (50 + combo.strength / 2) / 100;
+    }
+
+    private int tutorScore(final Player ai, final Card c, final Combo mad, final Combo atog,
+                           final CardCollectionView hand, final CardCollectionView board, final boolean graveyardRest) {
+        int lands = 0;
+        for (final Card x : hand) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        for (final Card x : board) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        if (c.isLand()) {
+            // Crop Rotation and the like: the land that is a piece of the deck (Dark Depths, Thespian's Stage) first
+            int piece = 0;
+            for (final Combo combo : combos) {
+                if (combo.kind == Kind.DARK_DEPTHS) {
+                    piece += pieceScore(c, combo, hand, board, graveyardRest);
+                }
+            }
+            return piece > 0 ? piece : lands < 4 ? 45 : -40;
+        }
+        int s = 0;
+        for (final Combo combo : combos) {
+            if (combo.kind != Kind.MADNESS && combo.kind != Kind.ATOG) {
+                s += pieceScore(c, combo, hand, board, graveyardRest);
+            }
+        }
+        if (mad != null) {
+            boolean madInHand = false;
+            for (final Card x : hand) {
+                madInHand |= x.hasKeyword(Keyword.MADNESS);
+            }
+            final boolean outlet = hasOutlet(ai, mad);
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                s += 70 + (outlet && !madInHand ? 50 : 0) - (madInHand ? 30 : 0);
+            } else if (isDiscardOutlet(c)) {
+                s += 70 + (!outlet && madInHand ? 60 : 0) - (outlet ? 25 : 0);
+            }
+        }
+        if (atog != null) {
+            boolean atogOut = false;
+            for (final Card x : hand) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            for (final Card x : board) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            if (atog.payoffs.contains(c.getName())) {
+                s += atogOut ? 20 : 90;
+            } else if (c.isInstant() || c.isSorcery()) {
+                s += 25;
+            }
+        }
+        if (s <= 0) {
+            return 0;
+        }
+        for (final Card x : hand) {
+            if (x.getName().equals(c.getName())) {
+                s -= 60; // one is already at hand
+                break;
+            }
+        }
+        if (c.isCreature()) {
+            s += Math.min(20, ComputerUtilCard.evaluateCreature(c) / 20);
+        }
+        return Math.max(s, 1);
+    }
+
+    // ------------------------------------------------------------------------------------------------- Psychatog
+
+    /** A creature that grows by throwing away cards from the hand or exiling cards from the graveyard. */
+    private static boolean isAtog(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (!sa.isActivatedAbility() || sa.getPayCosts() == null || sa.getApi() != ApiType.Pump) {
+                continue;
+            }
+            if (isDiscardOutletPlay(sa)) {
+                return true;
+            }
+            if (sa.getPayCosts().hasSpecificCostType(CostExile.class)) {
+                final CostExile e = sa.getPayCosts().getCostPartByType(CostExile.class);
+                if (e != null && e.getFrom().contains(ZoneType.Graveyard)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Combo atog(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int atogs = 0;
+        int fillers = 0;
+        for (final Card c : spells) {
+            if (isAtog(c)) {
+                payoffs.add(c.getName());
+                atogs++;
+            } else if (c.isInstant() || c.isSorcery()) {
+                enablers.add(c.getName());
+                fillers++;
+            } else if (isSelfFuelCard(c) || hasCycling(c)) {
+                enablers.add(c.getName());
+                fillers++;
+            }
+        }
+        if (atogs < 3 || fillers < 10) {
+            return null;
+        }
+        return new Combo(Kind.ATOG, 20 + 6 * Math.min(atogs, 8) + 2 * Math.min(fillers, 15), payoffs, enablers,
+                Collections.<String>emptySet(), false, "atogs=" + atogs + ", fillers=" + fillers);
+    }
+
+    /**
+     * An atog turns the graveyard (two cards for +1/+1) and the hand (one card for +1/+1) into power: a full
+     * graveyard is worth something even before the atog is out, and a lot while it is on the battlefield.
+     */
+    private int atogTerm(final Player ai, final Combo combo) {
+        boolean onBoard = false;
+        boolean inHand = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            onBoard |= combo.payoffs.contains(c.getName());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            inHand |= combo.payoffs.contains(c.getName());
+        }
+        final int graveyard = Math.min(12, ai.getCardsIn(ZoneType.Graveyard).size());
+        int sum = graveyard * (onBoard ? 10 : inHand ? 6 : 2);
+        if (onBoard) {
+            sum += Math.min(4, ai.getCardsIn(ZoneType.Hand).size()) * 6;
+        }
+        return Math.min(160, sum);
+    }
+
 
     private static Combo reanimator(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>(); // the big creatures
@@ -772,7 +2446,8 @@ public final class ComboPlan {
                 enablers.add(c.getName());
             }
         }
-        if (reanimation < 3 || big < 3) {
+        // four reanimation cards (Superior Spider-Man) make two big creatures enough
+        if (reanimation < 3 || big < 3 && !(reanimation >= 4 && big >= 2)) {
             return null;
         }
         final int strength = 25 + 6 * Math.min(reanimation, 8) + 4 * Math.min(big, 6) + 3 * Math.min(fuelCards, 8);
@@ -787,7 +2462,7 @@ public final class ComboPlan {
         int rituals = 0;
         int cantrips = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.STORM) || STORM_PAYOFF_NAMES.contains(c.getName())) {
+            if (isStormFinisher(c)) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.getCMC() <= 2 && !c.isCreature() && hasApi(c, ApiType.Mana)) {
@@ -806,14 +2481,719 @@ public final class ComboPlan {
                 "payoff=" + payoffs + ", rituals=" + rituals + ", cantrips=" + cantrips);
     }
 
+    // ----------------------------------------------------------------------------------- tutor storm
+
+    /** A storm card that wins the game: Tendrils of Agony, Grapeshot, Brain Freeze, Empty the Warrens. */
+    public static boolean isStormFinisher(final Card c) {
+        // a counterspell with storm (Flusterstorm) copies itself, it does not win the game
+        return !c.isLand() && !c.isCreature() && !hasApi(c, ApiType.Counter)
+                && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
+    }
+
+    /**
+     * Whether the hand holds what the kill is made of and cannot be given up: the storm finisher, or the engine that
+     * casts the graveyard again. Lion's Eye Diamond and the like discard the hand: not to pay for another spell then.
+     */
+    public static boolean holdsKillPiece(final Player ai) {
+        for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+            if (isStormFinisher(h) || (!h.isLand() && !h.isCreature() && isRecursionAbility(h.getSpellAbilities()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A card the kill is built from: the finisher, a tutor, the engine, fast mana. */
+    public static boolean isTutorStormPiece(final Card c) {
+        return isStormFinisher(c) || isLibraryTutor(c) || isRecursionEngine(c) || isFastMana(c);
+    }
+
+    /** A ritual, a mox, Lotus Petal, Lion's Eye Diamond: a cheap spell that is worth mana. */
+    private static boolean isFastMana(final Card c) {
+        return !c.isLand() && !c.isCreature() && c.getCMC() <= 2
+                && (hasApi(c, ApiType.Mana) || hasApi(c, ApiType.ManaReflected));
+    }
+
+    /**
+     * A spell or ability that finds any card (or a card of a broad type) in the library or the sideboard and puts it
+     * into the hand, or exiles it to be cast: Infernal Tutor, Beseech the Mirror, Wishclaw Talisman, the Wishes.
+     */
+    private static boolean isLibraryTutor(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if (a.getApi() != ApiType.ChangeZone) {
+                    continue;
+                }
+                final String origin = a.getParamOrDefault("Origin", "");
+                final boolean fromSideboard = origin.contains("Sideboard");
+                if (!origin.contains("Library") && !fromSideboard) {
+                    continue;
+                }
+                final String dest = a.getParamOrDefault("Destination", "");
+                if (!dest.equals("Hand") && !dest.equals("Exile")) {
+                    continue;
+                }
+                final String type = a.getParamOrDefault("ChangeType", "");
+                if (type.startsWith("Card") || fromSideboard && !type.isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Infernal Tutor: finds any card, but only with an empty hand ("Hellbent"); otherwise it finds a copy of a card of the hand. */
+    public static boolean isHellbentTutor(final Card c) {
+        return isLibraryTutor(c) && c.getOracleText() != null && c.getOracleText().contains("Hellbent");
+    }
+
+    /** Gaea's Will, Yawgmoth's Will: cast the spells of the graveyard again. */
+    private static boolean isRecursionEngine(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        return isRecursionAbility(c.getSpellAbilities());
+    }
+
+    public static boolean isRecursionAbility(final Collection<SpellAbility> abilities) {
+        for (final SpellAbility sa : abilities) {
+            if ("YawgmothsWill".equals(sa.getParamOrDefault("AILogic", ""))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static Combo tutorStorm(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int finishers = 0;
+        int mana = 0;
+        int tutors = 0;
+        int engines = 0;
+        for (final Card c : spells) {
+            if (isStormFinisher(c)) {
+                payoffs.add(c.getName());
+                finishers++;
+            } else if (isLibraryTutor(c)) {
+                enablers.add(c.getName());
+                tutors++;
+            } else if (isRecursionEngine(c)) {
+                enablers.add(c.getName());
+                engines++;
+            } else if (isFastMana(c)) {
+                enablers.add(c.getName());
+                mana++;
+            }
+        }
+        if (finishers < 1 || tutors < 3 || mana < 8) {
+            return null;
+        }
+        final int strength = 25 + 4 * Math.min(mana, 8) + 3 * Math.min(tutors, 6) + 8 * Math.min(finishers, 3)
+                + (engines > 0 ? 6 : 0);
+        return new Combo(Kind.TUTOR_STORM, strength, payoffs, enablers, Collections.<String>emptySet(), false,
+                "finishers=" + payoffs + ", tutors=" + tutors + ", fast mana=" + mana + ", engines=" + engines);
+    }
+
+    /** How much one copy of a storm finisher takes from the opponent: 2 for Tendrils of Agony, 1 for Grapeshot, else 0. */
+    static int perCopyDamage(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                final ApiType api = a.getApi();
+                final String amount = api == ApiType.LoseLife ? a.getParam("LifeAmount")
+                        : api == ApiType.DealDamage ? a.getParam("NumDmg") : null;
+                if (amount != null) {
+                    try {
+                        return Integer.parseInt(amount.trim());
+                    } catch (final NumberFormatException e) {
+                        return 0;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    /** The number of spells cast this turn by everybody: the storm count the next storm spell would copy itself that often for. */
+    static int stormCount(final Player ai) {
+        return ai.getGame().getStack().getSpellsCastThisTurn().size();
+    }
+
+    /**
+     * Whether casting the storm card now takes the last life of the only opponent: the spell and its copies (one for
+     * every spell cast before it this turn) each take {@link #perCopyDamage} life. False when the card does not
+     * simply take life, or when there is more than one opponent.
+     */
+    public static boolean stormIsLethal(final Player ai, final Card finisher) {
+        if (ai == null || finisher == null || !finisher.hasKeyword(Keyword.STORM)) {
+            return false;
+        }
+        final int per = perCopyDamage(finisher);
+        if (per <= 0 || ai.getOpponents().size() != 1) {
+            return false;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        return opp != null && (long) per * (stormCount(ai) + 1) >= opp.getLife();
+    }
+
+    /** A cheap guess at the mana the player can spend this turn: what floats in the pool and the untapped mana sources. */
+    private static int potentialMana(final Player ai) {
+        int mana = ai.getManaPool().totalMana();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isTapped() && !c.getManaAbilities().isEmpty()) {
+                mana++;
+            }
+        }
+        return mana;
+    }
+
+    /**
+     * Progress of a tutor storm deck, in evaluator points: the finisher (or a tutor that finds it) in the hand, mana to
+     * cast it, a storm count to make it lethal; most of it only while the finisher can still be found.
+     */
+    private int tutorStormTerm(final Player ai, final Combo combo) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        Card finisher = null;
+        for (final Card c : hand) {
+            if (combo.payoffs.contains(c.getName())) {
+                finisher = c;
+                break;
+            }
+        }
+        final boolean inLibrary = anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs);
+        final boolean tutorInHand = handHasTutor(hand);
+        if (finisher == null && !(inLibrary && tutorInHand)) {
+            return 0; // the finisher is out of reach, or it is not in the library and not in the hand: nothing to prepare
+        }
+        int sum = finisher != null ? 120 : 40;
+        final int mana = potentialMana(ai);
+        final int storm = stormCount(ai);
+        sum += Math.min(mana, 10) * 10;
+        sum += Math.min(storm, 12) * 12;
+        if (finisher != null) {
+            final Player opp = ai.getWeakestOpponent();
+            final int per = perCopyDamage(finisher);
+            if (opp != null && per > 0 && opp.getLife() > 0) {
+                final long damage = (long) per * (storm + 1);
+                sum += (int) Math.min(100L, damage * 100 / opp.getLife()) * 2;
+                if (mana >= finisher.getCMC() && damage >= opp.getLife()) {
+                    sum += 300; // castable, and lethal: only the cast is missing
+                }
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * How ready a tutor storm deck is to kill on a later turn, when it cannot this turn: the finisher and the engine in
+     * the hand, tutors to find them, fast mana still unspent in the hand, mana that stays in play (moxen, lands). The
+     * storm count is worth nothing here, it is gone at the end of the turn: a ritual cast without a kill loses points.
+     */
+    public int setupScore(final Player ai) {
+        if (find(Kind.TUTOR_STORM) == null || ai == null) {
+            return 0;
+        }
+        boolean finisher = false;
+        boolean engine = false;
+        int tutors = 0;
+        int fast = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (isStormFinisher(c)) {
+                finisher = true;
+            } else if (isRecursionEngine(c)) {
+                engine = true;
+            } else if (isLibraryTutor(c)) {
+                tutors++;
+            } else if (isFastMana(c)) {
+                fast++;
+            }
+        }
+        int permanents = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isLand() && !c.getManaAbilities().isEmpty() && !sacrificesForMana(c)) {
+                permanents++;
+            }
+        }
+        return (finisher ? 120 : 0) + (engine ? 80 : 0) + 40 * Math.min(tutors, 3) + 25 * Math.min(fast, 6)
+                + 35 * Math.min(permanents, 4) + 15 * Math.min(ai.getLandsInPlay().size(), 5);
+    }
+
+    /** The progress of a tutor storm deck in evaluator points (0 for any other deck); the solver ranks its states by it. */
+    public int stormProgress(final Player ai) {
+        final Combo combo = find(Kind.TUTOR_STORM);
+        return combo == null || ai == null ? 0 : tutorStormTerm(ai, combo);
+    }
+
+    /** Whether the storm card simply takes life per copy (Tendrils, Grapeshot): only then is "lethal" something to compute. */
+    public static boolean takesLifePerCopy(final Card c) {
+        return c != null && perCopyDamage(c) > 0;
+    }
+
+    /**
+     * A play a tutor storm deck keeps until the solver has found the kill: the fast mana (rituals, moxen, Lotus Petal,
+     * Lion's Eye Diamond) only builds the storm count and the mana of one turn, and spent without a kill it is gone.
+     * The solver plays these itself, whatever this says.
+     */
+    public boolean holdsForKill(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || sa.isLandAbility() || sa.getHostCard() == null) {
+            return false;
+        }
+        final Card c = sa.getHostCard();
+        if (!isFastMana(c)) {
+            return false;
+        }
+        if (c.isPermanent() && !sacrificesForMana(c)) {
+            return false; // Moxen stay on the battlefield: playing them early costs nothing and builds mana
+        }
+        if (c.isPermanent() && sa.getActivatingPlayer() != null) {
+            // set the Bargain up: a permanent to sacrifice (Lotus Petal, a Mox) is played ahead while a Bargain tutor
+            // (Beseech the Mirror) waits in the hand and there is nothing to sacrifice yet
+            final Player ai = sa.getActivatingPlayer();
+            boolean bargainTutor = false;
+            for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+                if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                    bargainTutor = true;
+                    break;
+                }
+            }
+            boolean fodder = false;
+            for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (!b.isLand() && b.isPermanent()) {
+                    fodder = true;
+                    break;
+                }
+            }
+            if (bargainTutor && !fodder) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A cheap permanent that is Bargain fodder and one more storm count on the kill turn, but costs a card or does
+     * nothing on any other turn (Giant's Boulder, Skateboard, Chrome Mox that imprints a card): the solver plays them
+     * in a line, the AI does not play them for nothing. One is let through while a Bargain tutor waits in the hand and
+     * there is nothing to sacrifice yet.
+     */
+    public boolean wastesFodder(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || !sa.isSpell() || sa.getHostCard() == null) {
+            return false;
+        }
+        final Card c = sa.getHostCard();
+        if (c.isLand() || c.isCreature() || !c.isPermanent() || c.getCMC() > 1 || isStormFinisher(c)) {
+            return false;
+        }
+        final boolean imprint = c.getOracleText() != null && c.getOracleText().contains("Imprint");
+        if (producesFreeMana(c) && !imprint) {
+            return false; // a Mox that costs nothing is mana for the rest of the game: holdsForKill decides about those
+        }
+        final Player ai = sa.getActivatingPlayer();
+        if (ai != null) {
+            boolean bargainTutor = false;
+            for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+                if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                    bargainTutor = true;
+                    break;
+                }
+            }
+            boolean fodder = false;
+            for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (!b.isLand() && b.isPermanent()) {
+                    fodder = true;
+                    break;
+                }
+            }
+            if (bargainTutor && !fodder) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** A mana ability that costs no mana (Chrome Mox, Mox Opal, Lotus Petal), unlike Giant's Boulder's {1},{T}. */
+    private static boolean producesFreeMana(final Card c) {
+        for (final SpellAbility m : c.getManaAbilities()) {
+            if (m.getPayCosts() != null && m.getPayCosts().getCostMana() == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What a hand is worth for the combos of the deck, in score points (negative for a dead hand): the pieces the
+     * hand needs to act in the first turns, read from the pieces of the combo. The best combo of the deck counts.
+     * Dredge, Dark Depths and the tutor storm deck are judged by their own rules in {@link OpeningHand}.
+     */
+    public int handBonus(final CardCollectionView hand) {
+        int lands = 0;
+        for (final Card c : hand) {
+            lands += c.isLand() ? 1 : 0;
+        }
+        int best = Integer.MIN_VALUE;
+        for (final Combo combo : combos) {
+            best = Math.max(best, handBonus(combo, hand, lands));
+        }
+        return best == Integer.MIN_VALUE ? 0 : best; // no combo: nothing to say
+    }
+
+    private static int handBonus(final Combo combo, final CardCollectionView hand, final int lands) {
+        int payoffs = 0;
+        int enablers = 0;
+        int cascaders = 0;
+        int reanimation = 0;
+        for (final Card c : hand) {
+            if (c.isLand()) {
+                continue;
+            }
+            final String n = c.getName();
+            payoffs += combo.payoffs.contains(n) ? 1 : 0;
+            enablers += combo.enablers.contains(n) ? 1 : 0;
+            cascaders += combo.cascaders.contains(n) ? 1 : 0;
+            reanimation += isReanimationSpell(c) ? 1 : 0;
+        }
+        switch (combo.kind) {
+            case REANIMATOR: {
+                final int fuel = Math.max(0, enablers - reanimation);
+                if (reanimation >= 1 && payoffs >= 1 && lands >= 1) {
+                    return 25; // the spell and the creature: it can happen this turn
+                }
+                if (reanimation >= 1 && fuel >= 1 && lands >= 1) {
+                    return 18; // loot or discard first
+                }
+                // big creatures and nothing that puts them anywhere, nothing that digs for it: a dead hand
+                return payoffs >= 1 && reanimation == 0 && fuel == 0 ? -60 : 0;
+            }
+            case MASS_REANIMATION:
+                return enablers >= 2 && lands >= 2 ? 20 + (cascaders + payoffs >= 1 ? 8 : 0) : 0;
+            case MILL:
+                return enablers + payoffs >= 3 && lands >= 2 ? 15 : 0;
+            case CHEAT_FATTY:
+                if (enablers >= 1 && payoffs >= 1 && lands >= 2) {
+                    return 25;
+                }
+                if (enablers >= 1 && lands >= 3) {
+                    return 8;
+                }
+                return payoffs >= 1 && enablers == 0 ? -30 : 0; // the fatty without a way to cheat it in
+            case AFFINITY:
+                return enablers >= 3 && lands >= 1 ? 15 + (payoffs >= 1 ? 8 : 0) : 0;
+            case GO_WIDE:
+                return enablers >= 3 && lands >= 2 ? 12 : 0;
+            case STORM:
+                return enablers >= 3 && lands >= 1 ? 20 + (payoffs >= 1 ? 5 : 0) : 0;
+            case CREATURE_COPY:
+                return payoffs >= 1 && enablers >= 1 && lands >= 3 ? 25 : 0;
+            case CASCADE_PAYOFF:
+                return cascaders >= 1 && lands >= 3 ? 12 : 0;
+            case REPLENISH:
+                return payoffs >= 1 && enablers >= 2 ? 15 : 0;
+            case MADNESS:
+                return payoffs >= 1 && enablers >= 1 && lands >= 2 ? 20 : 0;
+            case ATOG:
+                return payoffs >= 1 && lands >= 3 ? 15 : 0;
+            default:
+                return 0; // DREDGE, DARK_DEPTHS and TUTOR_STORM have their own rules
+        }
+    }
+
+    /**
+     * The mulligan rule of a tutor storm deck: keep a hand that can act, not a slow one. It needs a land (checked by the
+     * caller) and either two tutors, or a tutor with mana to cast it (fast mana, or the engine), or plenty of fast mana
+     * for the tutors it will draw. Disruption alone (Thoughtseize, Duress, Veil of Summer) is not a hand unless it is so
+     * small that going lower is worse.
+     */
+    public boolean keepsTutorStormHand(final CardCollectionView kept, final int size) {
+        if (size <= 5) {
+            return true;
+        }
+        int tutors = 0;
+        int mana = 0;
+        int engines = 0;
+        int lands = 0;
+        for (final Card c : kept) {
+            if (c.isLand()) {
+                lands++;
+            } else if (isLibraryTutor(c)) {
+                tutors++;
+            } else if (isRecursionEngine(c)) {
+                engines++;
+            } else if (isFastMana(c)) {
+                mana++;
+            }
+        }
+        if (tutors >= 2) {
+            return true;
+        }
+        if (tutors == 1 && (mana >= 1 || engines >= 1 || lands >= 2)) {
+            return true;
+        }
+        return mana + lands >= 4 && (tutors + engines >= 1 || mana >= 3);
+    }
+
+    /** Infernal Tutor with other cards in hand only finds a copy of the revealed card: keep it for Hellbent. */
+    public boolean wastesTutor(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || sa.getHostCard() == null || !sa.isSpell()
+                || !"Infernal Tutor".equals(sa.getHostCard().getName())) {
+            return false;
+        }
+        final Player ai = sa.getActivatingPlayer();
+        return ai != null && ai.getCardsIn(ZoneType.Hand).size() > 1;
+    }
+
+    /** Spells in the graveyard that an engine (Gaea's Will) can cast again. */
+    private static int replayable(final Player ai) {
+        int n = 0;
+        for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (!g.isLand() && !isRecursionEngine(g)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** What one copy of the finisher of this deck takes: Tendrils 2, Grapeshot 1 (0 when unknown). */
+    private static int finisherPer(final Player ai, final Combo combo) {
+        for (final ZoneType z : new ZoneType[] { ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile }) {
+            for (final Card c : ai.getCardsIn(z)) {
+                if (combo.payoffs.contains(c.getName()) && perCopyDamage(c) > 0) {
+                    return perCopyDamage(c);
+                }
+            }
+        }
+        return 0;
+    }
+
+    /** Whether a storm count of this size (plus the finisher itself) takes the last life of the opponent. */
+    private static boolean lethalAt(final Player ai, final Combo combo, final int storm) {
+        final int per = finisherPer(ai, combo);
+        final Player opp = ai.getWeakestOpponent();
+        return per > 0 && opp != null && ai.getOpponents().size() == 1 && (long) per * (storm + 1) >= opp.getLife();
+    }
+
+    /**
+     * Gaea's Will cast from the hand before it can make the kill: the graveyard it replays plus the storm count must
+     * reach lethal. The free cast of Beseech the Mirror is not a play of the AI, so it is never held by this.
+     */
+    public boolean wastesEngine(final SpellAbility sa) {
+        final Combo combo = find(Kind.TUTOR_STORM);
+        if (combo == null || sa == null || !sa.isSpell() || sa.getHostCard() == null
+                || !isRecursionEngine(sa.getHostCard()) || !sa.getHostCard().isInZone(ZoneType.Hand)) {
+            return false;
+        }
+        final Player ai = sa.getActivatingPlayer();
+        if (ai == null) {
+            return false;
+        }
+        // the engine itself, every replay, and the finisher are all spells that count
+        return !lethalAt(ai, combo, stormCount(ai) + 1 + replayable(ai));
+    }
+
+    /** Whether the setup is complete: the storm count, the fast mana left in hand and a working engine reach lethal. */
+    private boolean setupComplete(final Player ai, final Combo combo, final CardCollectionView hand) {
+        boolean engine = false;
+        for (final Card c : hand) {
+            engine |= isRecursionEngine(c);
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            engine |= isRecursionEngine(c);
+        }
+        final int replay = engine ? replayable(ai) + 1 : 0;
+        return lethalAt(ai, combo, stormCount(ai) + fastManaInHand(hand) + replay + 1);
+    }
+
+    /**
+     * How far a state is along the pattern of the deck, for the solver: the Bargain is set up, the free spell found the
+     * engine (Gaea's Will), the engine cast, the graveyard it can cast again (rituals, tutors), mana and storm count.
+     * The storm card comes last, so it is worth nothing here until it is lethal (the solver casts it as the last play).
+     */
+    public int solverScore(final Player ai) {
+        int sum = stormProgress(ai);
+        boolean bargainTutor = false;
+        boolean engineInHand = false;
+        for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+            if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                bargainTutor = true;
+            }
+            if (isRecursionEngine(h)) {
+                engineInHand = true;
+            }
+        }
+        boolean fodder = false;
+        for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!b.isLand() && b.isPermanent()) {
+                fodder = true;
+            }
+        }
+        if (bargainTutor && fodder) {
+            sum += 60; // the first line is ready
+        }
+        if (engineInHand) {
+            sum += 80; // found by the free spell: now it needs spells in the graveyard and the mana to cast it
+        }
+        boolean engineSpent = false;
+        for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (isRecursionEngine(g)) {
+                engineSpent = true;
+            }
+        }
+        if (engineSpent) {
+            int replayable = 0;
+            for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+                if (!g.isLand() && !isRecursionEngine(g)) {
+                    replayable++;
+                }
+            }
+            sum += 200 + 25 * Math.min(replayable, 8); // the engine is working: the graveyard is the storm count to come
+        }
+        return sum;
+    }
+
+    private static boolean handHasTutor(final CardCollectionView hand) {
+        for (final Card c : hand) {
+            if (isLibraryTutor(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int fastManaInHand(final CardCollectionView hand) {
+        int n = 0;
+        for (final Card h : hand) {
+            if (isFastMana(h)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** Lotus Petal, Lion's Eye Diamond: the mana is gone with the permanent, so they are kept for the kill. */
+    private static boolean sacrificesForMana(final Card c) {
+        for (final SpellAbility m : c.getManaAbilities()) {
+            if (m.getPayCosts() != null && m.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What a tutor of a tutor storm deck should find. The finisher when the mana for it is there (or it is the only
+     * way to get it), otherwise what makes the mana and the storm count: with a free cast (Beseech the Mirror) the
+     * engine that casts the graveyard again when there is something to cast, else a ritual; with a card for the hand
+     * mana first, then the finisher. Null when nothing in the list is a piece of the deck.
+     */
+    private Card tutorStormPick(final Player ai, final Combo combo, final CardCollectionView options,
+                                final ZoneType destination) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final boolean finisherInHand = anyNamed(hand, combo.payoffs);
+        final int mana = potentialMana(ai);
+        final boolean freeCast = destination == ZoneType.Exile;
+        int pieces = 0; // spells in the graveyard that an engine can cast again
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (isFastMana(c) || combo.enablers.contains(c.getName())) {
+                pieces++;
+            }
+        }
+        Card best = null;
+        int bestValue = 0;
+        boolean engineFound = false; // Gaea's Will is still among the choices (library)
+        for (final Card c : options) {
+            engineFound |= isRecursionEngine(c);
+        }
+        final boolean ready = setupComplete(ai, combo, hand);
+        for (final Card c : options) {
+            int v;
+            if (freeCast && (c.isLand() || c.getCMC() > 4)) {
+                continue; // cannot be cast for free (Beseech the Mirror: mana value 4 or less)
+            }
+            if (combo.payoffs.contains(c.getName())) {
+                if (freeCast && !stormIsLethal(ai, c)) {
+                    continue; // cast free below lethal it is wasted: leave it in the library
+                }
+                if (finisherInHand) {
+                    v = 5; // a second one is a spare at best
+                } else {
+                    // fetch the finisher once the kill is reachable and castable; before that the engine and mana come first
+                    v = mana + fastManaInHand(hand) >= c.getCMC() - 1 && ready ? 500 : 150;
+                }
+            } else if (isRecursionEngine(c)) {
+                // the free cast of Beseech the Mirror is the engine's turn: Gaea's Will casts the graveyard again, and the
+                // Beseech itself is in that graveyard by then. Found into the hand it is only worth it with pieces to cast
+                v = freeCast ? (pieces >= 1 ? 300 : 150) : (lethalAt(ai, combo, stormCount(ai) + 1 + replayable(ai)) ? 260 : 60);
+            } else if (freeCast && isLibraryTutor(c) && c.hasKeyword(Keyword.BARGAIN)) {
+                // a second Beseech: cast free it is not bargained, so it puts its find in the hand (the finisher, once the
+                // setup is complete), and it is one more spell for the storm count
+                v = engineFound ? 120 : 280;
+            } else if (isFastMana(c)) {
+                // before the kill is reachable, mana and storm count come first, whatever is already in play
+                v = (!ready || mana < 5) ? 200 : 90;
+            } else if (isLibraryTutor(c)) {
+                v = 110;
+            } else if (c.isLand()) {
+                v = 1;
+            } else if (combo.enablers.contains(c.getName())) {
+                v = 40;
+            } else {
+                v = 0;
+            }
+            if (v > bestValue) {
+                bestValue = v;
+                best = c;
+            }
+        }
+        return best;
+    }
+
+    /**
+     * The card to put back from the hand (Brainstorm). The generic "worst card" is the cheapest one, which for this deck
+     * is exactly the rituals and Lotus Petal that the kill is made of. Lands beyond what is needed come first, then the
+     * cards that do not help the kill (discard, Veil of Summer), and the finisher, the engine, tutors and fast mana last.
+     */
+    private static Card tutorStormPutBack(final Player ai, final CardCollectionView options) {
+        int lands = ai.getLandsInPlay().size();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.isLand()) {
+                lands++;
+            }
+        }
+        Card worst = null;
+        int worstValue = Integer.MAX_VALUE;
+        for (final Card c : options) {
+            final int v;
+            if (isStormFinisher(c)) {
+                v = 100;
+            } else if (isRecursionEngine(c)) {
+                v = 90;
+            } else if (isLibraryTutor(c)) {
+                v = 80;
+            } else if (isFastMana(c)) {
+                v = 70;
+            } else if (c.isLand()) {
+                v = lands > 3 ? 20 : 60; // the third or fourth land is needed, the fifth is not
+            } else {
+                v = 10;
+            }
+            if (v < worstValue) {
+                worstValue = v;
+                worst = c;
+            }
+        }
+        return worst;
+    }
+
     private static Combo creatureCopy(final List<Card> spells) {
         final Set<String> engines = new LinkedHashSet<>();
         final Set<String> targets = new LinkedHashSet<>();
         int targetCopies = 0;
         for (final Card c : spells) {
-            if (COPY_ENGINE_NAMES.contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.COPY_ENGINE, c.getName())) {
                 engines.add(c.getName());
-            } else if (COPY_TARGET_NAMES.contains(c.getName())) {
+            } else if (AiCardLists.has(AiCardLists.Role.COPY_TARGET, c.getName())) {
                 targets.add(c.getName());
                 targetCopies++;
             }
@@ -862,12 +3242,13 @@ public final class ComboPlan {
             if (isCheatSpell(c)) {
                 cheaters.add(c.getName());
                 cheatCopies++;
-            } else if (c.isCreature() && (CHEAT_TARGET_NAMES.contains(c.getName()) || c.getCMC() >= 7)) {
+            } else if (c.isCreature() && (AiCardLists.has(AiCardLists.Role.CHEAT_TARGET, c.getName()) || c.getCMC() >= 7)) {
                 fatties.add(c.getName());
                 fattyCopies++;
             }
         }
-        if (cheatCopies < 3 || fattyCopies < 3) {
+        // Omniscience and Show and Tell together are six or more cheaters: two huge creatures are then enough (Omni-Tell)
+        if (cheatCopies < 3 || fattyCopies < 3 && !(fattyCopies >= 2 && cheatCopies >= 6)) {
             return null;
         }
         return new Combo(Kind.CHEAT_FATTY, 25 + 6 * Math.min(cheatCopies, 8) + 4 * Math.min(fattyCopies, 6), fatties,
@@ -879,7 +3260,7 @@ public final class ComboPlan {
         if (c.isLand()) {
             return false;
         }
-        if (CHEAT_SPELL_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.CHEAT_SPELL, c.getName())) {
             return true; // by name first: Elvish Piper is a creature
         }
         if (c.isCreature()) {
@@ -900,22 +3281,445 @@ public final class ComboPlan {
     private static Combo goWide(final List<Card> spells) {
         final Set<String> finishers = new LinkedHashSet<>();
         final Set<String> bodies = new LinkedHashSet<>();
+        final Set<String> tutors = new LinkedHashSet<>();
         int finisherCopies = 0;
         int cheapBodies = 0;
+        int tutorCopies = 0;
         for (final Card c : spells) {
-            if (OVERRUN_NAMES.contains(c.getName()) || isOverrun(c)) {
+            if (AiCardLists.has(AiCardLists.Role.OVERRUN, c.getName()) || isOverrun(c)) {
                 finishers.add(c.getName());
                 finisherCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.FINISHER_TUTOR, c.getName())) {
+                tutors.add(c.getName());
+                tutorCopies++;
             } else if (c.getCMC() <= 3 && (c.isCreature() || hasApi(c, ApiType.Token))) {
                 bodies.add(c.getName());
                 cheapBodies++;
             }
         }
-        if (finisherCopies < 2 || cheapBodies < 16) {
+        // a single Craterhoof Behemoth is a plan when four or more spells (Green Sun's Zenith, Natural Order) find it
+        final boolean found = finisherCopies >= 2 || finisherCopies >= 1 && tutorCopies >= 4;
+        if (!found || cheapBodies < 16) {
             return null;
         }
-        return new Combo(Kind.GO_WIDE, 20 + 5 * Math.min(finisherCopies, 6) + Math.min(cheapBodies, 24), finishers,
-                bodies, Collections.<String>emptySet(), false, "finisher=" + finishers + ", bodies=" + cheapBodies);
+        return new Combo(Kind.GO_WIDE, 20 + 5 * Math.min(finisherCopies, 6) + Math.min(cheapBodies, 24)
+                + 2 * Math.min(tutorCopies, 6), finishers, bodies, tutors, false,
+                "finisher=" + finishers + ", bodies=" + cheapBodies + (tutors.isEmpty() ? "" : ", tutors=" + tutors));
+    }
+
+    /**
+     * Aluren or Omniscience together with cheap creatures that loop or win under it. Needs three copies of each: one
+     * Aluren and a stray Cavern Harpy is no combo deck.
+     */
+    private static Combo freeCast(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> targets = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int targetCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.FREE_CAST_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, c.getName())) {
+                targets.add(c.getName());
+                targetCopies++;
+            }
+        }
+        if (engineCopies < 3 || targetCopies < 3) {
+            return null;
+        }
+        return new Combo(Kind.FREE_CAST, 30 + 5 * Math.min(engineCopies, 8) + 5 * Math.min(targetCopies, 8), targets,
+                engines, Collections.<String>emptySet(), false, "engines=" + engines + ", targets=" + targets);
+    }
+
+    /**
+     * An artifact deck built around engines that chain artifacts (Mystic Forge, Paradox Engine, Manifold Key, Grim
+     * Monolith, Transmute Artifact) with payoffs that need the mana. A deck with a few artifacts and one engine is no
+     * engine deck: six engine cards, three payoff cards and sixteen artifacts are needed. The artifacts of the deck
+     * that are neither (Affinity decks) are {@link Kind#AFFINITY}, which this does not replace.
+     */
+    private static Combo artifactEngine(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> payoffs = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int payoffCopies = 0;
+        int artifacts = 0;
+        for (final Card c : spells) {
+            if (c.isArtifact()) {
+                artifacts++;
+            }
+            if (AiCardLists.has(AiCardLists.Role.ARTIFACT_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.ARTIFACT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            }
+        }
+        if (engineCopies < 6 || payoffCopies < 3 || artifacts < 16) {
+            return null;
+        }
+        return new Combo(Kind.ARTIFACT_ENGINE, 25 + 2 * Math.min(engineCopies, 12) + 3 * Math.min(payoffCopies, 8)
+                + Math.min(artifacts, 24) / 2, payoffs, engines, Collections.<String>emptySet(), false,
+                "engines=" + engines + ", payoffs=" + payoffs + ", artifacts=" + artifacts);
+    }
+
+    /**
+     * A deck that empties its own library and wins with Thassa's Oracle or Laboratory Maniac. At least one winner and
+     * four outlets (Balustrade Spy, or Cephalid Illusionist with the cards that target it); Doomsday is not an outlet,
+     * because the pile it builds has to be chosen card by card.
+     */
+    private static Combo libraryOut(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> outlets = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int outletCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, c.getName())) {
+                outlets.add(c.getName());
+                outletCopies++;
+            }
+        }
+        if (payoffCopies < 1 || outletCopies < 4) {
+            return null;
+        }
+        return new Combo(Kind.LIBRARY_OUT, 25 + 4 * Math.min(outletCopies, 8) + 10 * Math.min(payoffCopies, 3), payoffs,
+                outlets, Collections.<String>emptySet(), false, "winners=" + payoffs + ", outlets=" + outlets);
+    }
+
+
+    // ------------------------------------------------------------------------------------------- library cut
+
+    /**
+     * Dimir Excruciator: Doomsday Excruciator exiles all but the bottom six cards of both libraries when it is cast,
+     * and Superior Spider-Man copying it from the graveyard counts as casting it. Both players then draw from six cards
+     * (the AI one more with the upkeep draw), so the cut only wins with something that empties the opponent's library
+     * faster: Restless Reef (four a turn) or Insatiable Avarice. Without one it loses the game for the AI.
+     */
+    private static Combo libraryCut(final List<Card> spells, final List<Card> lands) {
+        final Set<String> cuts = new LinkedHashSet<>();
+        final Set<String> others = new LinkedHashSet<>();
+        int cutCopies = 0;
+        int copiers = 0;
+        int finishers = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, c.getName())) {
+                cuts.add(c.getName());
+                cutCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                others.add(c.getName());
+                finishers++;
+            } else if (c.isCreature() && isReanimationSpell(c)) {
+                others.add(c.getName());
+                copiers++;
+            }
+        }
+        for (final Card c : lands) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                others.add(c.getName());
+                finishers++;
+            }
+        }
+        if (cutCopies < 2 || copiers < 3 && cutCopies < 4 || finishers < 3) {
+            return null;
+        }
+        return new Combo(Kind.LIBRARY_CUT, 30 + 5 * Math.min(cutCopies, 4) + 4 * Math.min(copiers, 4)
+                + 3 * Math.min(finishers, 6), cuts, others, Collections.<String>emptySet(), false,
+                "cut=" + cuts + ", copiers/finishers=" + others);
+    }
+
+    /** After the cut each library holds this many cards. */
+    static final int LIBRARY_CUT_LEFT = 6;
+
+    /** What the cut with a finisher in play is worth by itself, before the race is counted. */
+    private static final int LIBRARY_CUT_DONE = 300;
+
+    /**
+     * Whether cutting the libraries is safe now: the AI has what empties the opponent's library before its own (a
+     * Restless Reef in play, to be animated and attack, or Insatiable Avarice in hand). Without it the cut loses.
+     */
+    public boolean libraryCutSafe(final Player ai) {
+        if (ai == null) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                return true;
+            }
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!c.isLand() && AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What Superior Spider-Man copies: the cutting card while the cut is safe and has not happened yet, any other
+     * creature otherwise (never the cutting card when it would lose the game). Null leaves the usual choice alone.
+     */
+    public Card cloneChoice(final Player ai, final Iterable<Card> options) {
+        final Combo cut = find(Kind.LIBRARY_CUT);
+        if (cut == null || ai == null) {
+            return null;
+        }
+        final List<Card> cuts = new ArrayList<>();
+        final List<Card> rest = new ArrayList<>();
+        for (final Card c : options) {
+            (cut.payoffs.contains(c.getName()) ? cuts : rest).add(c);
+        }
+        if (cuts.isEmpty()) {
+            return null;
+        }
+        if (libraryCutSafe(ai) && ai.getCardsIn(ZoneType.Library).size() > LIBRARY_CUT_LEFT) {
+            return cuts.get(0);
+        }
+        return rest.isEmpty() ? null : ComputerUtilCard.getBestAI(rest);
+    }
+
+    /**
+     * The cut that is safe and sure right now: the cutting card cast from the hand, or a copier (Superior Spider-Man)
+     * with a cutting creature in a graveyard, while a finisher is in play (or in hand) and neither library is cut yet.
+     * The AI plays it without asking Monte Carlo, whose rollouts cannot see far enough to find the finisher's clock.
+     */
+    public SpellAbility sureCutPlay(final Player ai, final List<SpellAbility> candidates) {
+        final Combo cut = find(Kind.LIBRARY_CUT);
+        if (cut == null || ai == null || candidates == null || !libraryCutSafe(ai)
+                || ai.getCardsIn(ZoneType.Library).size() <= LIBRARY_CUT_LEFT) {
+            return null;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        if (opp == null || opp.getCardsIn(ZoneType.Library).size() <= LIBRARY_CUT_LEFT) {
+            return null;
+        }
+        boolean cutInGraveyard = false;
+        for (final Player p : ai.getGame().getPlayers()) {
+            for (final Card c : p.getCardsIn(ZoneType.Graveyard)) {
+                cutInGraveyard |= c.isCreature() && cut.payoffs.contains(c.getName());
+            }
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host == null || !sa.isSpell() || host.isLand() || !host.isInZone(ZoneType.Hand)) {
+                continue;
+            }
+            final boolean cuts = cut.payoffs.contains(host.getName());
+            if (!cuts && !(cutInGraveyard && host.isCreature() && isReanimationSpell(host))) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false)) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    private int libraryCutTerm(final Player ai, final Combo combo) {
+        final Player opp = ai.getWeakestOpponent();
+        final int mine = ai.getCardsIn(ZoneType.Library).size();
+        final int theirs = opp == null ? 99 : opp.getCardsIn(ZoneType.Library).size();
+        final boolean safe = libraryCutSafe(ai);
+        if (mine > LIBRARY_CUT_LEFT) {
+            // before the cut: ready when the cutting card is in the graveyard with a copier in hand (or in hand itself)
+            // and the finisher is there; without the finisher nothing is gained
+            boolean cutReady = false;
+            boolean copier = false;
+            for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+                cutReady |= combo.payoffs.contains(c.getName());
+            }
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                cutReady |= combo.payoffs.contains(c.getName());
+                copier |= c.isCreature() && isReanimationSpell(c);
+            }
+            return safe ? (cutReady && copier ? ASSEMBLED_BONUS : cutReady ? ONE_PIECE_BONUS : 0) : 0;
+        }
+        // after the cut: the race. The opponent's library is the clock the finisher runs down
+        int sum = 0;
+        if (theirs <= 0) {
+            return TERM_MAX;
+        }
+        if (safe) {
+            // worth clearly more than the setup before the cut was (ASSEMBLED_BONUS): the cut is the combo, the finisher
+            // then runs the clock, and the rollouts must see casting the copier as a gain over holding it
+            sum += LIBRARY_CUT_DONE + (LIBRARY_CUT_LEFT + 1 - Math.min(theirs, LIBRARY_CUT_LEFT + 1)) * 40;
+        } else if (mine <= theirs) {
+            sum -= 150;
+        }
+        if (mine <= 1) {
+            sum -= 100;
+        }
+        return sum;
+    }
+
+    /** Library this small or smaller with the winner in hand is the win (Thassa's Oracle counts two for itself). */
+    private static final int LIBRARY_OUT_READY = 2;
+    /** Without a winner in hand a library this small is a deck about to lose to its own outlets. */
+    private static final int LIBRARY_OUT_DANGER = 6;
+    /** With the winner in hand every card missing from this many is worth a little. */
+    private static final int LIBRARY_OUT_SPAN = 25;
+
+    /** Dread Return's flashback sacrifices this many creatures. */
+    private static final int LIBRARY_OUT_FODDER = 3;
+
+    /**
+     * Whether the winner can still be put into play: it is in the hand, or it is in the graveyard (the main Oops line
+     * mills the whole library, the Oracle with it) with a reanimation spell in hand, or Dread Return in the graveyard
+     * and three creatures in play to pay for its flashback (Narcomoeba and Bridge from Below tokens count).
+     */
+    private boolean libraryOutWinnerReachable(final Player ai, final Combo combo) {
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs)) {
+            return false;
+        }
+        boolean recursion = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            recursion |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName());
+        }
+        boolean flashback = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        if (recursion) {
+            return true;
+        }
+        return flashback && ai.getCreaturesInPlay().size() >= LIBRARY_OUT_FODDER;
+    }
+
+    /** Doomsday with the Oracle: two copies of Doomsday, a winner and eight cards that draw or make mana for the pile. */
+    private static Combo doomsday(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int doomsdays = 0;
+        int winners = 0;
+        int pile = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.DOOMSDAY, c.getName())) {
+                enablers.add(c.getName());
+                doomsdays++;
+            } else if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                winners++;
+            } else if (AiCardLists.has(AiCardLists.Role.DOOMSDAY_DRAW, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.DOOMSDAY_MANA, c.getName())) {
+                pile++;
+            }
+        }
+        if (doomsdays < 2 || winners < 1 || pile < 8) {
+            return null;
+        }
+        return new Combo(Kind.DOOMSDAY, 30 + 4 * Math.min(doomsdays, 4) + 8 * Math.min(winners, 3) + Math.min(pile, 16), payoffs,
+                enablers, Collections.<String>emptySet(), false,
+                "doomsday=" + doomsdays + ", winners=" + payoffs + ", pile cards=" + pile);
+    }
+
+    /**
+     * Whether milling its own library out can be followed by the win: the winner (Thassa's Oracle) is in hand or in play,
+     * or it is in the library or graveyard with a way back that is certain: a reanimation spell in hand, or Dread Return
+     * in the graveyard or the library (it is milled with the rest) and three creatures to pay its flashback (the
+     * creatures in play and the Narcomoebas of the library, which come into play as they are milled). True for a deck
+     * that is not a library-out deck: there is nothing to say about it.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai) {
+        return libraryOutSelfMillSafe(ai, 0);
+    }
+
+    /**
+     * Like {@link #libraryOutSelfMillSafe(Player)} with {@code extraCreatures} more creatures than the ones in play to
+     * pay the flashback of Dread Return with: the Balustrade Spy that is about to be cast is one of them, and its
+     * trigger is what mills the library.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai, final int extraCreatures) {
+        final Combo combo = find(Kind.LIBRARY_OUT);
+        if (combo == null) {
+            return true;
+        }
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs) || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs) && !anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs)) {
+            return false; // exiled, or gone: nothing left to win with
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName())) {
+                return true;
+            }
+        }
+        boolean flashback = false;
+        int fodder = ai.getCreaturesInPlay().size() + extraCreatures;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+            if (entersFromMill(c)) {
+                fodder++;
+            }
+        }
+        return flashback && fodder >= LIBRARY_OUT_FODDER;
+    }
+
+    /** Narcomoeba: a creature that comes into play when it is put into the graveyard from the library. */
+    private static boolean entersFromMill(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+            if ("Library".equals(t.getParam("Origin")) && "Graveyard".equals(t.getParam("Destination"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
+     * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
+     * win with, so milling itself out is a penalty (the same guard as the dredge deck).
+     */
+    private int libraryOutTerm(final Player ai, final Combo combo) {
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        if (!libraryOutWinnerReachable(ai, combo)) {
+            return library <= LIBRARY_OUT_DANGER ? -200 : 0;
+        }
+        if (library <= LIBRARY_OUT_READY) {
+            return TERM_MAX;
+        }
+        return Math.max(0, Math.min(300, (LIBRARY_OUT_SPAN - library) * 12));
+    }
+
+    /**
+     * A two card kill: an engine and the card it needs (Grindstone with Painter's Servant). Both halves are needed,
+     * three copies of the partner and two of the engine, or a lone Grindstone in a deck of artifacts would count.
+     */
+    private static Combo pair(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> partners = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int partnerCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.PAIR_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.PAIR_PARTNER, c.getName())) {
+                partners.add(c.getName());
+                partnerCopies++;
+            }
+        }
+        if (engineCopies < 2 || partnerCopies < 3) {
+            return null;
+        }
+        return new Combo(Kind.PAIR, 30 + 6 * Math.min(engineCopies, 4) + 6 * Math.min(partnerCopies, 6), engines,
+                partners, Collections.<String>emptySet(), false, "engine=" + engines + ", partner=" + partners);
     }
 
     /** A spell that gives every creature of its controller a big bonus. */
@@ -946,6 +3750,33 @@ public final class ComboPlan {
         if (combos.isEmpty() || options == null || options.isEmpty()) {
             return null;
         }
+        if (has(Kind.DOOMSDAY) && destination == ZoneType.Library && origin.contains(ZoneType.Graveyard)
+                && origin.contains(ZoneType.Library)) {
+            final Card kept = DoomsdayPile.pick(ai, options); // Doomsday: the five cards of the pile
+            if (kept != null) {
+                return kept;
+            }
+        }
+        final Combo tutorStorm = find(Kind.TUTOR_STORM);
+        if (tutorStorm != null && (destination == ZoneType.Hand || destination == ZoneType.Exile)
+                && (origin.contains(ZoneType.Library) || origin.contains(ZoneType.Sideboard))) {
+            final Card pick = tutorStormPick(ai, tutorStorm, options, destination);
+            if (pick != null) {
+                return pick;
+            }
+        }
+        if (tutorStorm != null && destination == ZoneType.Exile && origin.contains(ZoneType.Hand)) {
+            return tutorStormPutBack(ai, options); // Chrome Mox imprints the card the kill needs least
+        }
+        if (tutorStorm != null && destination == ZoneType.Library && origin.contains(ZoneType.Hand)) {
+            return tutorStormPutBack(ai, options); // Brainstorm: what goes back is what the kill needs least
+        }
+        if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && has(Kind.PAIR)) {
+            final Card piece = VaultLoop.pick(ai, options); // Goblin Engineer: the vault, then what untaps it
+            if (piece != null) {
+                return piece;
+            }
+        }
         Card best = null;
         int bestValue = Integer.MIN_VALUE;
         if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)) {
@@ -966,6 +3797,9 @@ public final class ComboPlan {
             }
             return best != null ? best : land;
         }
+        if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)) {
+            return depthsSearchPick(ai, options); // Crop Rotation: the land the deck is built around, or no opinion
+        }
         if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && wantsGraveyardFuel()) {
             for (final Card c : options) {
                 if (!c.isCreature()) {
@@ -973,6 +3807,7 @@ public final class ComboPlan {
                 }
                 // a legend that is already in play and working is no use in the graveyard either
                 final int v = (isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c) ? 1000 : 0)
+                        + (find(Kind.DREDGE) != null && c.hasKeyword(Keyword.DREDGE) ? 400 : 0)
                         + ComputerUtilCard.evaluateCreature(c);
                 if (v > bestValue) {
                     bestValue = v;
@@ -998,7 +3833,8 @@ public final class ComboPlan {
     }
 
     private boolean wantsGraveyardFuel() {
-        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null;
+        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null || find(Kind.REPLENISH) != null
+                || find(Kind.DREDGE) != null;
     }
 
     /**
@@ -1008,6 +3844,20 @@ public final class ComboPlan {
      * opinion and the normal choice should be made.
      */
     public CardCollection preferredDiscards(final Player ai, final CardCollection valid, final int min) {
+        if (min > 0 && valid != null && ai != null && find(Kind.MADNESS) != null) {
+            // A forced discard (cleanup, an opponent's spell, Careful Study) is a free madness trigger: throw away the
+            // madness cards that can be cast right now, the best first.
+            final List<Card> castable = new ArrayList<>();
+            for (final Card c : valid) {
+                if (c.hasKeyword(Keyword.MADNESS) && canCastForMadness(ai, c)) {
+                    castable.add(c);
+                }
+            }
+            if (castable.size() >= min) {
+                castable.sort((a, b) -> Integer.compare(madnessValue(b), madnessValue(a)));
+                return new CardCollection(castable.subList(0, min));
+            }
+        }
         if (min <= 0 || valid == null || valid.size() < min || !wantsGraveyardFuel()) {
             return null;
         }
@@ -1043,6 +3893,12 @@ public final class ComboPlan {
     private boolean isProtected(final Card c) {
         for (final Combo combo : combos) {
             final String n = c.getName();
+            if (combo.kind == Kind.MADNESS || combo.kind == Kind.ATOG) {
+                continue; // a madness card is meant to be discarded; the atog's fuel is its hand
+            }
+            if (combo.kind == Kind.DREDGE && belongsInGraveyard(c, combo)) {
+                continue; // Bridge from Below, Ichorid, a dredger: worth more in the graveyard than in the hand
+            }
             if (combo.payoffs.contains(n) && !(c.isCreature() && isBigTarget(c)) || combo.cascaders.contains(n)
                     || combo.kind == Kind.REANIMATOR && combo.enablers.contains(n) && isReanimationSpell(c)) {
                 return true;
@@ -1055,6 +3911,15 @@ public final class ComboPlan {
         if (isProtected(c)) {
             return -1000; // the payoff, a reanimation spell or a cascade spell: the deck needs it in hand
         }
+        final Combo dredge = find(Kind.DREDGE);
+        if (dredge != null && belongsInGraveyard(c, dredge)) {
+            // a dredger first while none is in the graveyard (it is the engine), then the cards that work from there
+            int dredgersAway = 0;
+            for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+                dredgersAway += g.hasKeyword(Keyword.DREDGE) ? 1 : 0;
+            }
+            return 300 + (c.hasKeyword(Keyword.DREDGE) ? (dredgersAway < 2 ? 60 : -40) + c.getKeywordMagnitude(Keyword.DREDGE) : 0);
+        }
         if (c.isLand()) {
             int lands = 0;
             for (final Card x : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -1063,6 +3928,9 @@ public final class ComboPlan {
                 }
             }
             return lands >= 5 ? 15 : -200;
+        }
+        if (find(Kind.REPLENISH) != null && enchantmentValue(c) > 0) {
+            return 100 + enchantmentValue(c); // it comes back with the payoff, and does more there than in the hand
         }
         if (c.isCreature()) {
             if (find(Kind.REANIMATOR) != null && isBigTarget(c)) {
@@ -1100,7 +3968,7 @@ public final class ComboPlan {
         if (c.isLand() || !(c.isInstant() || c.isSorcery())) {
             return false;
         }
-        if (MASS_PAYOFF_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.MASS_PAYOFF, c.getName())) {
             return true;
         }
         for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1116,7 +3984,7 @@ public final class ComboPlan {
         if (c.isLand() || isMassPayoff(c)) {
             return false;
         }
-        if (REANIMATION_SPELL_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName())) {
             return true;
         }
         if (c.isCreature() || !(c.isInstant() || c.isSorcery())) {
@@ -1135,7 +4003,16 @@ public final class ComboPlan {
 
     /** A creature that is worth more brought back than cast: a big one, or one of the well known targets. */
     static boolean isBigTarget(final Card c) {
-        return BIG_TARGET_NAMES.contains(c.getName()) || c.getCMC() >= 6 || c.getNetPower() >= 6;
+        if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, c.getName())) {
+            return false; // Doomsday Excruciator is a way to cut the libraries, not a creature to bring back for its size
+        }
+        if (AiCardLists.has(AiCardLists.Role.BIG_TARGET, c.getName())) {
+            return true;
+        }
+        if (c.hasKeyword(Keyword.EVOKE)) {
+            return false; // Deceit and the other Incarnations cost six but are cast for two: no reason to bring them back
+        }
+        return c.getCMC() >= 6 || c.getNetPower() >= 6;
     }
 
     private static boolean hasCycling(final Card c) {
@@ -1192,6 +4069,15 @@ public final class ComboPlan {
         return false;
     }
 
+    /** A spell whose extra cost is to discard other cards from the hand (Cathartic Reunion, Tormenting Voice). */
+    private static boolean isDiscardCostSpell(final SpellAbility sa) {
+        if (sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+            return false;
+        }
+        final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+        return d != null && !d.payCostFromSource();
+    }
+
     private static boolean isSelfFuelSpell(final SpellAbility sa) {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
             final ApiType api = a.getApi();
@@ -1214,9 +4100,6 @@ public final class ComboPlan {
         return false;
     }
 
-    private static Set<String> names(final String... names) {
-        return Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(names)));
-    }
 
     /**
      * Whether the card is a win card of the deck: the big creature of a reanimator or cheating deck, the engine of a
@@ -1230,7 +4113,7 @@ public final class ComboPlan {
                 return true;
             }
         }
-        return BIG_TARGET_NAMES.contains(n) || CHEAT_TARGET_NAMES.contains(n);
+        return AiCardLists.has(AiCardLists.Role.BIG_TARGET, n) || AiCardLists.has(AiCardLists.Role.CHEAT_TARGET, n);
     }
 
     /** Names of every card that is a piece of one of the combos. */

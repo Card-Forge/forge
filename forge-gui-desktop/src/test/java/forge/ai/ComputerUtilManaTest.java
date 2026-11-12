@@ -11,18 +11,21 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gamesimulationtests.util.PlayerControllerForTests;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 /**
  * Auto payment should not tap every untapped source of one colour when the same cost can be paid
  * while leaving at least one source of each colour untapped. The number of sources used never changes.
+ * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
  */
 public class ComputerUtilManaTest extends SimulationTest {
 
@@ -121,5 +124,66 @@ public class ComputerUtilManaTest extends SimulationTest {
         // {2}{B} with 2 Swamp + 2 Island taps 3 of 4 lands, so one colour is gone either way
         final Map<String, Integer> untapped = payAndCountUntapped("2 B", 3, "Swamp:2", "Island:2");
         assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
+    }
+
+    /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
+    private Player sacrificeBoard(final int tokens, final String... permanents) {
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        for (final String name : permanents) {
+            addCard(name, p);
+        }
+        addTokens("b_2_2_zombie", tokens, p);
+        return p;
+    }
+
+    private boolean canPay(final Player p, final String spell) {
+        final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        return ComputerUtilMana.canPayManaCost(sa, p, 0, false);
+    }
+
+    @Test
+    public void sacrificeSourceIsUsedOncePerFodder() {
+        // Phyrexian Altar with three tokens pays for a three-drop on its own, but not for a four-drop
+        final Player p = sacrificeBoard(3, "Phyrexian Altar");
+        assertTrue(canPay(p, "Centaur Courser"), "{2}{G} with three tokens to sacrifice");
+        assertFalse(canPay(p, "Hill Giant"), "{3}{R} needs a fourth token");
+    }
+
+    @Test
+    public void sacrificeSourceNeedsFodderForEachUse() {
+        assertFalse(canPay(sacrificeBoard(2, "Phyrexian Altar"), "Centaur Courser"), "{2}{G} needs a third token");
+    }
+
+    @Test
+    public void sacrificeSourceMakingTwoManaIsUsedOncePerFodder() {
+        // Ashnod's Altar makes {C}{C} per token
+        final Player p = sacrificeBoard(2, "Ashnod's Altar");
+        assertTrue(canPay(p, "Juggernaut"), "{4} with two tokens to sacrifice");
+        assertFalse(canPay(p, "Gilded Lotus"), "{5} needs a third token");
+    }
+
+    @Test
+    public void selfSacrificeSourceIsNotAlsoFodder() {
+        // Blood Pet makes mana by sacrificing itself, so it can't also be sacrificed to Phyrexian Altar
+        final Player p = sacrificeBoard(2, "Phyrexian Altar", "Blood Pet");
+        assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
+        assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
+    }
+
+    @Test
+    public void humanScannedByAiCountsSacrificeMana() {
+        final Player p = sacrificeBoard(2, "Phyrexian Altar", "Blood Pet");
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        assertFalse(canPay(p, "Hill Giant"), "without an AI controller the Altar is used once");
+
+        // the available actions scan runs a human's payment under a temporary AI controller
+        p.runWithController(() -> {
+            assertFalse(p.isAI());
+            assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
+            assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
+        }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
     }
 }
