@@ -21,6 +21,7 @@ import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.adventure.util.Reward;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.card.ColorSet;
@@ -152,10 +153,6 @@ public class DuelScene extends ForgeScene {
         return enemy;
     }
 
-    public void concedeMatch() {
-        hostedMatch.getMatch().concede(humanPlayer);
-    }
-
     public void GameEnd() {
         //TODO: Progress towards applicable Adventure quests also needs to be reported here.
         if (eventData != null)
@@ -179,7 +176,6 @@ public class DuelScene extends ForgeScene {
             // Mostly for ante handling, but also blacker lotus
             GameOutcome.AnteResult anteResult = hostedMatch.getAnteResult(humanPlayer);
             if (anteResult != null) {
-                List<PaperCard> lostCards = anteResult.lostCards;
                 if (eventData != null) {
                     //In an event. Apply the ante result to the current event deck.
                     eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
@@ -196,18 +192,18 @@ public class DuelScene extends ForgeScene {
                     for (PaperCard card : anteResult.wonCards) {
                         Current.player().addCard(card);
                     }
-                    lostCards = cardsInDeck(anteResult.lostCards, Current.player().getSelectedDeck());
-                    for (PaperCard card : lostCards) {
+                    for (PaperCard card : anteResult.lostCards) {
                         // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
                         Current.player().removeLostCardFromPools(card);
                     }
                 }
                 anteWonCards = new ArrayList<>(anteResult.wonCards);
-                anteLostCards = new ArrayList<>(lostCards);
+                anteLostCards = new ArrayList<>(anteResult.lostCards);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        List<PaperCard> modifierLosses = winner || eventData != null ? Collections.emptyList() : loseModifierCards();
         String enemyName = enemy.getName();
         String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
@@ -219,14 +215,14 @@ public class DuelScene extends ForgeScene {
 
         // No popups needed, preserve original behavior
         if (!hasAnteResults && !isBossLoss) {
-            afterGameEnd(enemyName, finalWinner);
+            afterGameEnd(enemyName, finalWinner, modifierLosses);
             return;
         }
 
         // Build popup chain: ante results -> boss dialogue -> exit
         callbackExit = true;
         Runnable exitChain = () -> {
-            afterGameEnd(enemyName, finalWinner);
+            afterGameEnd(enemyName, finalWinner, modifierLosses);
             exitDuelScene();
         };
 
@@ -254,22 +250,19 @@ public class DuelScene extends ForgeScene {
         }
     }
 
-    /** A placeholder the duel put in the deck, such as the commander that replaces a disallowed one, isn't the player's to lose. */
-    private static List<PaperCard> cardsInDeck(List<PaperCard> cards, Deck deck) {
-        Map<String, Integer> left = new HashMap<>();
-        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList())
-            left.merge(card.getName(), 1, Integer::sum);
-        List<PaperCard> held = new ArrayList<>();
-        for (PaperCard card : cards) {
-            if (left.merge(card.getName(), -1, Integer::sum) >= 0)
-                held.add(card);
-        }
-        return held;
+    /** Takes the cards the run's modifiers cost for losing this fight out of the collection. */
+    private static List<PaperCard> loseModifierCards() {
+        List<PaperCard> lost = new ArrayList<>();
+        for (ModifierData modifier : Current.player().getActiveModifiers())
+            lost.addAll(modifier.lostCards(Current.player().getSelectedDeck()));
+        for (PaperCard card : lost)
+            Current.player().removeLostCardFromPools(card);
+        return lost;
     }
 
     Runnable endRunnable = null;
 
-    void afterGameEnd(String enemyName, boolean winner) {
+    void afterGameEnd(String enemyName, boolean winner, List<PaperCard> lost) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
             GameHUD.getInstance().updateBGM();
@@ -282,6 +275,13 @@ public class DuelScene extends ForgeScene {
 
             if (last instanceof IAfterMatch) {
                 ((IAfterMatch) last).setWinner(winner, isArena);
+            }
+            if (!lost.isEmpty()) {
+                Array<Reward> rewards = new Array<>();
+                for (PaperCard card : lost)
+                    rewards.add(new Reward(card));
+                RewardScene.instance().loadRewards(rewards, RewardScene.Type.Lost, null);
+                Forge.switchScene(RewardScene.instance());
             }
         });
     }

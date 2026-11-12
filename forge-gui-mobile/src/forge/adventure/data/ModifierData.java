@@ -4,7 +4,9 @@ import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.Aggregates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +17,19 @@ import java.util.function.Predicate;
  * every duel, like the plane's global effect, and can limit the cards the player's deck may use in duels.
  */
 public class ModifierData {
-    /** A deck limit implemented in code, with a setting the player picks. */
+    /** A rule implemented in code. The limits have a setting the player picks. */
     public enum Type {
         RarityLimit, //The highest rarity the deck's cards may have.
-        ColorLimit   //The colors the deck may use.
+        ColorLimit,  //The colors the deck may use.
+        CardLoss     //Losing a fight costs cards from the deck, set by lostCards and loseCommander.
     }
 
     public String name;
     public String description;
     public String icon;            //Name of an item icon shown beside the modifier, such as "BlackRune".
-    public Type type;              //Optional deck limit.
+    public Type type;              //Optional rule implemented in code.
+    public int lostCards;          //CardLoss: random nonbasic cards lost from the main deck.
+    public boolean loseCommander;  //CardLoss: the deck's commanders are lost too.
     public EffectData effect;      //Added to every duel, written for the enemies like the plane's global effect.
 
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */
@@ -81,5 +86,18 @@ public class ModifierData {
             return card -> card.getRules().getColorIdentity().hasNoColorsExcept(colors);
         }
         return card -> true;
+    }
+
+    /** @return the cards the player loses from the deck by losing a fight under this modifier, picked at random */
+    public List<PaperCard> lostCards(Deck deck) {
+        List<PaperCard> lost = new ArrayList<>();
+        if (type != Type.CardLoss)
+            return lost;
+        if (loseCommander)
+            lost.addAll(deck.getCommanders());
+        List<PaperCard> nonbasic = deck.getMain().toFlatList();
+        nonbasic.removeIf(card -> card.getRules().getType().isBasicLand());
+        lost.addAll(Aggregates.random(nonbasic, lostCards));
+        return lost;
     }
 }

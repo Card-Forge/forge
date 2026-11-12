@@ -293,14 +293,9 @@
       "name": "Permadeath",
       "description": "Lose a match: lose your commander and 5 random cards.",
       "icon": "BasilicaSkullbomb",
-      "effect": {
-        "opponent": {
-          "startBattleScript": [
-            "DB$ RemoveFromMatch | Defined$ ValidCommand Card.YouOwn+IsCommander | RemoveFromInventory$ True | OnMatchLoss$ True | SpellDescription$ Lose this match and you lose your commander and 5 random cards from your deck, never basic lands.",
-            "DB$ RemoveFromMatch | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | RemoveFromInventory$ True | OnMatchLoss$ True | Amount$ 5"
-          ]
-        }
-      }
+      "type": "CardLoss",
+      "lostCards": 5,
+      "loseCommander": true
     },
     {
       "name": "Rarity limit",

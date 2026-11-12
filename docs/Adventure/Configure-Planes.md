@@ -107,11 +107,12 @@ Optional rules the player can turn on at new game. The new-game screen shows a M
 Each modifier has a `name`, and an optional `description` and `icon` (an item icon name). It can use:
 
 - `effect`: a duel effect added to every duel except event duels. Like `globalEffect`, its top level applies to the enemies and its `opponent` block to the player. `ignoreGlobalEffect` doesn't skip it.
-- `type`: a deck limit with a setting the player picks.
-  - `RarityLimit`: the highest rarity allowed: Common, Uncommon or Rare. A card is allowed if any printing of it was at that rarity or lower. Basic lands are always allowed.
-  - `ColorLimit`: the colors the deck may use. Colorless cards are always allowed.
+- `type`: a rule implemented in code.
+  - `RarityLimit`: the player picks the highest rarity allowed: Common, Uncommon or Rare. A card is allowed if any printing of it was at that rarity or lower. Basic lands are always allowed.
+  - `ColorLimit`: the player picks the colors the deck may use. Colorless cards are always allowed.
+  - `CardLoss`: losing a fight, quitting a match included, removes cards from the player's collection, shown on a "You Lost" screen. `lostCards` sets how many random nonbasic cards are taken from the deck, and `loseCommander: true` takes the deck's commanders too. Event duels are not affected.
 
-In duels, cards that break a `type` limit are removed from the deck, the same way Adventure handles other cards a duel doesn't allow. An illegal commander is replaced, and the deck is filled up to its minimum size with Wastes.
+In duels, cards that break a `RarityLimit` or `ColorLimit` are removed from the deck, the same way Adventure handles other cards a duel doesn't allow. An illegal commander is replaced, and the deck is filled up to its minimum size with Wastes.
 
 ```json
 "modifiers": [
@@ -172,5 +173,3 @@ Each entry is one line of card script, run for that side after mulligans. A line
   "DB$ MakeCard | Name$ Lightning Bolt | Zone$ Hand | SpellDescription$ Start with Lightning Bolt in hand."
 ]
 ```
-
-A script can take cards from a player who loses the match with `RemoveFromMatch | RemoveFromInventory$ True | OnMatchLoss$ True`. Quitting the match between games counts as losing it. The Permadeath modifier in `Realm of Legends/config.json` is an example.
