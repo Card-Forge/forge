@@ -101,6 +101,26 @@ This example gives every enemy +2 life and starts the player with one card fewer
 }
 ```
 
+## **challenges**
+Optional rules the player can turn on for a whole run. The new-game screen shows a Challenges button when the plane lists any, and the player can turn each one on or off and change its settings. The choice is saved and can't be changed later. The new-game dialog and the Statistics screen list the chosen challenges.
+
+Each challenge has a `name`, an optional `description` and an optional `icon`, the name of an item icon such as `BlackRune` shown beside it. It can use any of these fields:
+
+- `effect`: a duel effect added to every duel except event duels, written like `globalEffect`. Towns, biomes and enemies that set `ignoreGlobalEffect` don't skip it, because the player chose it.
+- `maxRarity`: when true, the player picks the highest rarity allowed, Common, Uncommon or Rare. Every card in the deck must have been printed at that rarity or lower. Basic lands are always allowed.
+
+A deck that breaks a challenge's deck rules can't start a duel. The player sees why, and the enemy can't start a fight with them again until a few seconds after they close the message.
+
+```json
+"challenges": [
+  {
+    "name": "Rarity limit",
+    "description": "Every card in your deck must have been printed at this rarity or lower.",
+    "maxRarity": true
+  }
+]
+```
+
 # Duel effect layers
 
 A duel can get effects from four places. Every layer is written for the enemies, as dungeon effects always were: its top level goes to the enemies and its `opponent` block goes to the player. Only the player's own items and blessing are written the other way round.

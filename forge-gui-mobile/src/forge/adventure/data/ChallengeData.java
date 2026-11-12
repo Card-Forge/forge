@@ -23,6 +23,11 @@ public class ChallengeData {
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */
     public static final CardRarity[] RARITIES = {CardRarity.Common, CardRarity.Uncommon, CardRarity.Rare};
 
+    /** The value saved for the challenge when the player turns it on without changing its settings. */
+    public String defaultValue() {
+        return maxRarity ? RARITIES[0].name() : "";
+    }
+
     /** @param value the saved setting: the highest rarity allowed */
     public String describeValue(String value) {
         return value;

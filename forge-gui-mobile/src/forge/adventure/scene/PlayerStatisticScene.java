@@ -254,6 +254,9 @@ public class PlayerStatisticScene extends UIScene {
         if (blessingScroll != null) {
             MapStage map = MapStage.getInstance();
             StringBuilder effects = new StringBuilder();
+            String challenges = Current.player().getChallengesDescription();
+            if (!challenges.isEmpty())
+                effects.append("\n").append(Forge.getLocalizer().getMessage("lblChallenges")).append("\n").append(challenges);
             BiomeData worldBiome = map.isInMap() ? null : WorldStage.getInstance().getStoredBiome();
             boolean ignoreGlobal = map.isInMap() ? map.ignoresGlobalEffect() : worldBiome != null && worldBiome.ignoreGlobalEffect;
             if (!ignoreGlobal)

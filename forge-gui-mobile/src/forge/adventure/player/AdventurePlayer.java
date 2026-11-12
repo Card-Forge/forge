@@ -370,6 +370,23 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return active;
     }
 
+    /** @return each chosen challenge with its setting and description, or its duel effect when it has no description */
+    public String getChallengesDescription() {
+        StringBuilder text = new StringBuilder();
+        for (ChallengeData challenge : getActiveChallenges()) {
+            String value = challenge.describeValue(challenges.get(challenge.name));
+            text.append(challenge.name);
+            if (!value.isEmpty())
+                text.append(" (").append(value).append(")");
+            text.append("\n");
+            if (challenge.description != null)
+                text.append(challenge.description).append("\n");
+            else if (challenge.effect != null)
+                text.append(challenge.effect.getEnemySideDescription());
+        }
+        return text.toString();
+    }
+
     /** @return why the selected deck breaks the chosen challenges' deck rules, or null when it is allowed */
     public String getChallengeDeckProblem() {
         StringBuilder problems = new StringBuilder();

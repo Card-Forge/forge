@@ -1,17 +1,25 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
+import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.data.ChallengeData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -30,6 +38,8 @@ import forge.sound.SoundSystem;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -60,6 +70,8 @@ public class NewGameScene extends MenuScene {
     private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
+    private final TextraButton challengesButton;
+    private final Map<String, String> chosenChallenges = new LinkedHashMap<>(); //Challenge names and their settings.
 
     private NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -234,6 +246,11 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
+        challengesButton = ui.findActor("challenges");
+        ChallengeData[] challenges = Config.instance().getConfigData().challenges;
+        challengesButton.setVisible(challenges != null && challenges.length > 0);
+        ui.onButtonPress("challenges", NewGameScene.this::showChallenges);
+        updateChallengesButton();
     }
 
     // class field
@@ -342,6 +359,7 @@ public class NewGameScene extends MenuScene {
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
                     getStartingEdition(), 0);
+            AdventurePlayer.current().setChallenges(chosenChallenges);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -396,6 +414,125 @@ public class NewGameScene extends MenuScene {
 
         unselectActors();
         super.enter();
+    }
+
+    private void updateChallengesButton() {
+        Localizer localizer = Forge.getLocalizer();
+        String label = "[+ChallengeCoin] " + localizer.getMessage("lblChallenges");
+        if (!chosenChallenges.isEmpty())
+            label += " (" + chosenChallenges.size() + ")";
+        challengesButton.setText(label);
+    }
+
+    /** Edits a copy of the chosen challenges, kept only when the player presses OK. */
+    private void showChallenges() {
+        Localizer localizer = Forge.getLocalizer();
+        Map<String, String> edited = new LinkedHashMap<>(chosenChallenges);
+        boolean portrait = stage.getHeight() > stage.getWidth();
+        float width = Math.min(330, stage.getWidth() - 40);
+        float textWidth = width - 70;
+        Table rows = new Table();
+        rows.top();
+        for (ChallengeData challenge : Config.instance().getConfigData().challenges) {
+            rows.add(divider()).colspan(3).growX().row();
+            //A setting survives turning the challenge off and on again while the dialog is open.
+            String[] value = {chosenChallenges.getOrDefault(challenge.name, challenge.defaultValue())};
+            Actor setting = challengeSetting(challenge, value, edited);
+            TextraButton toggle = Controls.newTextButton("");
+            Runnable showState = () -> {
+                boolean on = edited.containsKey(challenge.name);
+                toggle.setStyle(Controls.getTextButtonStyle(on ? "goldframe" : "default"));
+                toggle.setText(on ? "[GOLD]" + localizer.getMessage("lblOn") : localizer.getMessage("lblOff"));
+                if (setting != null) {
+                    setting.getColor().a = on ? 1f : 0.4f;
+                    setting.setTouchable(on ? Touchable.enabled : Touchable.disabled);
+                }
+            };
+            toggle.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (edited.containsKey(challenge.name))
+                        edited.remove(challenge.name);
+                    else
+                        edited.put(challenge.name, value[0]);
+                    showState.run();
+                }
+            });
+            showState.run();
+            Table text = new Table();
+            text.defaults().left();
+            text.add(Controls.newTextraLabel(challenge.name)).row();
+            if (challenge.description != null)
+                text.add(wrappedLabel("[#A9A5C2]" + challenge.description, textWidth)).width(textWidth).row();
+            if (setting != null)
+                text.add(setting).padTop(2).padBottom(4).row();
+            rows.add(Controls.newTextraLabel(challenge.icon == null ? "" : "[+" + challenge.icon + "]")).width(20).padRight(4);
+            rows.add(text).width(textWidth).left().padTop(2).padBottom(3);
+            rows.add(toggle).width(36).height(18).padLeft(4).padRight(6).row();
+        }
+        Dialog dialog = Controls.newDialog("");
+        dialog.setBackground(Controls.getSkin().getDrawable("TenPatchGold"));
+        dialog.pad(6, 12, 6, 12);
+        dialog.getButtonTable().padTop(4);
+        dialog.getContentTable().defaults().left();
+        dialog.getContentTable().add(Controls.newTextraLabel("[+ChallengeCoin] " + localizer.getMessage("lblChallenges"))).row();
+        String intro = "[#A9A5C2]" + localizer.getMessage("lblChallengesIntro");
+        dialog.getContentTable().add(portrait ? wrappedLabel(intro, width - 10) : Controls.newTextraLabel(intro)).width(width - 10).padTop(2).row();
+        ScrollPane scroll = new ScrollPane(rows);
+        scroll.setScrollingDisabled(true, false);
+        dialog.getContentTable().add(scroll).width(width).height(Math.min(rows.getPrefHeight(), stage.getHeight() - (portrait ? 150 : 96))).padTop(2);
+        dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblCancel"), this::removeDialog, "goldframe")).width(70).height(24).padRight(8);
+        dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblOK"), () -> {
+            chosenChallenges.clear();
+            chosenChallenges.putAll(edited);
+            updateChallengesButton();
+            removeDialog();
+        }, "goldframe")).width(70).height(24);
+        showDialog(dialog);
+    }
+
+    private static Image divider() {
+        Image line = new Image(Controls.getSkin().newDrawable("white-pixel", new Color(1f, 1f, 1f, 0.12f)));
+        line.setHeight(1);
+        return line;
+    }
+
+    /** @return the control for a challenge's setting, or null when it has none */
+    private Actor challengeSetting(ChallengeData challenge, String[] value, Map<String, String> edited) {
+        if (challenge.maxRarity) {
+            Selector choice = new Selector();
+            String[] names = new String[ChallengeData.RARITIES.length];
+            int current = 0;
+            for (int i = 0; i < names.length; i++) {
+                names[i] = ChallengeData.RARITIES[i].name();
+                if (names[i].equals(value[0]))
+                    current = i;
+            }
+            choice.setTextList(names);
+            choice.setCurrentIndex(current);
+            choice.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    value[0] = names[choice.getCurrentIndex()];
+                    if (edited.containsKey(challenge.name))
+                        edited.put(challenge.name, value[0]);
+                }
+            });
+            choice.setSize(120, 16);
+            Table holder = new Table();
+            holder.add(choice).width(120).height(16);
+            return holder;
+        }
+        return null;
+    }
+
+    private static TypingLabel wrappedLabel(String text, float width) {
+        TypingLabel label = Controls.newTypingLabel(text);
+        label.skipToTheEnd();
+        label.setWrap(true);
+        label.setWidth(width);
+        label.layout();
+        return label;
     }
 
     private void showDifficultyHelp() {

@@ -224,6 +224,17 @@
       "height": 30,
       "x": 376,
       "y": 155
+    },
+    {
+      "type": "TextButton",
+      "name": "challenges",
+      "style": "goldframe",
+      "text": "tr(lblChallenges)",
+      "selectable": true,
+      "width": 100,
+      "height": 30,
+      "x": 376,
+      "y": 205
     }
   ]
 }
