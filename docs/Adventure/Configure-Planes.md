@@ -102,15 +102,15 @@ This example gives every enemy +2 life and starts the player with one card fewer
 ```
 
 ## **challenges**
-Optional rules the player can turn on for a whole run. The new-game screen shows a Challenges button when the plane lists any, and the player can turn each one on or off and change its settings. The choice is saved and can't be changed later. The new-game dialog and the Statistics screen list the chosen challenges.
+Optional rules the player can turn on at new game. The new-game screen shows a Challenges button when the plane defines any. The choices are saved and can't be changed later.
 
-Each challenge has a `name`, an optional `description` and an optional `icon`, the name of an item icon such as `BlackRune` shown beside it. It can use any of these fields:
+Each challenge has a `name`, and an optional `description` and `icon` (an item icon name). It can use:
 
-- `effect`: a duel effect added to every duel except event duels, written like `globalEffect`. Towns, biomes and enemies that set `ignoreGlobalEffect` don't skip it, because the player chose it.
-- `maxRarity`: when true, the player picks the highest rarity allowed, Common, Uncommon or Rare. Every card in the deck must have been printed at that rarity or lower. Basic lands are always allowed.
-- `pickColors`: when true, the player picks the colors their deck may use. Colorless cards are always allowed.
+- `effect`: a duel effect added to every duel except event duels. Like `globalEffect`, its top level applies to the enemies and its `opponent` block to the player. `ignoreGlobalEffect` doesn't skip it.
+- `maxRarity`: the player picks the highest rarity allowed: Common, Uncommon or Rare. Basic lands are always allowed.
+- `pickColors`: the player picks the colors the deck may use. Colorless cards are always allowed.
 
-A deck that breaks a challenge's deck rules can't start a duel. The player sees why, and the enemy can't start a fight with them again until a few seconds after they close the message.
+A deck that breaks `maxRarity` or `pickColors` can't start a duel.
 
 ```json
 "challenges": [
@@ -122,18 +122,9 @@ A deck that breaks a challenge's deck rules can't start a duel. The player sees 
   {
     "name": "Color limit",
     "pickColors": true
-  },
-  {
-    "name": "Permadeath",
-    "effect": { "opponent": { "startBattleScript": [
-      "DB$ Stake | Defined$ ValidCommand Card.YouOwn+IsCommander",
-      "DB$ Stake | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | Amount$ 5"
-    ] } }
   }
 ]
 ```
-
-The Permadeath example uses the `Stake` effect on the player's side: a player who loses the match loses their commander and 5 random cards from their deck that are not basic lands.
 
 # Duel effect layers
 
@@ -153,3 +144,30 @@ Each layer is an effect object in the same format as an item effect. These field
 Values from all layers, items and the blessing add together. Starting life never goes below 1 and the starting hand never goes below 0.
 
 A lower layer can opt out of any layer above it. A biome file can set `"ignoreGlobalEffect": true`, so duels in that biome and in its towns and dungeons skip the global effect. For maps and enemies, see [Create new Maps](Create-new-Maps.md) and [Create Enemies](Create-Enemies.md).
+
+# Effect fields
+
+Items, blessings, enemies, maps, biomes, `globalEffect` and challenges all use these fields.
+
+| Field | Effect |
+|---|---|
+| `description` | Replaces the intro line in effect dialogs and on the Statistics screen. |
+| `lifeModifier` | Added to starting life. |
+| `changeStartCards` | Added to starting hand size. |
+| `startBattleWithCard` | Cards that start on the battlefield. |
+| `startBattleWithCardInCommandZone` | Cards that start in the command zone. |
+| `startBattleScript` | Card-script lines run after mulligans. |
+| `allowIllegalCommander` | Any creature or planeswalker can be that side's commander. |
+| `extraManaShards` | Extra mana shards for the duel. |
+| `colorView`, `moveSpeed`, `goldModifier`, `cardRewardBonus` | Map effects. Items and blessings only. |
+| `opponent` | An effect for the other side. For items and blessings that is the enemies. For enemies, maps, biomes, `globalEffect` and challenges it is the player. |
+
+## startBattleScript
+
+Each entry is one line of card script, run for that side after mulligans. A line starting with `SVar:Name:` defines an SVar for the other lines. `SpellDescription$` sets the text shown in effect dialogs.
+
+```json
+"startBattleScript": [
+  "DB$ MakeCard | Name$ Lightning Bolt | Zone$ Hand | SpellDescription$ Start with Lightning Bolt in hand."
+]
+```
