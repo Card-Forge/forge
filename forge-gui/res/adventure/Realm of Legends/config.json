@@ -288,7 +288,7 @@
       "The Last Airbender",
       "(All)"
     ],
-  "challenges": [
+  "modifiers": [
     {
       "name": "Permadeath",
       "description": "Lose a match: lose your commander and 5 random cards.",
@@ -306,13 +306,13 @@
       "name": "Rarity limit",
       "description": "Cards must be this rarity or lower.",
       "icon": "Treasure",
-      "maxRarity": true
+      "type": "RarityLimit"
     },
     {
       "name": "Color limit",
       "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
       "icon": "Shard",
-      "pickColors": true
+      "type": "ColorLimit"
     }
   ]
 }

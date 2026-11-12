@@ -1165,11 +1165,6 @@ public class MapStage extends GameStage {
     
     public void beginDuel(EnemySprite mob) {
         if (mob == null) return;
-        String deckProblem = Current.player().getChallengeDeckProblem();
-        if (deckProblem != null) {
-            refuseDuel(mob, deckProblem);
-            return;
-        }
         mob.clearCollisionHeight();
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);

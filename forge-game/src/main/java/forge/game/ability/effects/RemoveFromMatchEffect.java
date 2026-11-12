@@ -33,7 +33,7 @@ public class RemoveFromMatchEffect extends SpellAbilityEffect {
         } else {
             toRemove = getTargetCards(sa);
         }
-        // OnMatchLoss is used by Adventure challenges, not by any card
+        // OnMatchLoss is used by Adventure modifiers, not by any card
         if (removeFromInventory && sa.hasParam("OnMatchLoss")) {
             if (host.getGame().getMaingame() != null) {
                 return;

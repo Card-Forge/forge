@@ -138,13 +138,13 @@ public class TileMapScene extends HudScene {
     private void initializeDialogs() {
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
         EffectData globalEffect = Config.instance().getConfigData().globalEffect;
-        String challenges = Current.player().getChallengesDescription();
-        if (WorldStage.getInstance().consumeGlobalEffectDialog() && (globalEffect != null || !challenges.isEmpty())) {
-            String intro = globalEffect == null ? Forge.getLocalizer().getMessage("lblChallengesIntro")
+        String modifiers = Current.player().getModifiersDescription();
+        if (WorldStage.getInstance().consumeGlobalEffectDialog() && (globalEffect != null || !modifiers.isEmpty())) {
+            String intro = globalEffect == null ? Forge.getLocalizer().getMessage("lblModifiersIntro")
                     : globalEffect.getIntro(Forge.getLocalizer().getMessage("lblGlobalEffectDialogDescription"));
             String details = globalEffect == null ? "" : globalEffect.getEnemySideDescription();
-            if (!challenges.isEmpty())
-                details += "\n" + Forge.getLocalizer().getMessage("lblChallenges") + "\n" + challenges;
+            if (!modifiers.isEmpty())
+                details += "\n" + Forge.getLocalizer().getMessage("lblModifiers") + "\n" + modifiers;
             //The stage has one dialog, so quest dialogs wait until this one is closed.
             stage.effectDialog(intro, details, () -> AdventureQuestController.instance().showQuestDialogs(stage));
             return;

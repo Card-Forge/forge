@@ -95,13 +95,13 @@ public class ConsoleCommandInterpreter {
         return matchTokenList.toArray(emptyStringArray);
     }
 
-    private static ChallengeData findChallenge(String name) {
-        ChallengeData[] challenges = Config.instance().getConfigData().challenges;
-        if (challenges == null)
+    private static ModifierData findModifier(String name) {
+        ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+        if (modifiers == null)
             return null;
-        for (ChallengeData challenge : challenges) {
-            if (challenge.name.equalsIgnoreCase(name))
-                return challenge;
+        for (ModifierData modifier : modifiers) {
+            if (modifier.name.equalsIgnoreCase(name))
+                return modifier;
         }
         return null;
     }
@@ -380,49 +380,49 @@ public class ConsoleCommandInterpreter {
             System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
             return "POI lists dumped to stdout.";
         });
-        registerCommand(new String[]{"challenge", "list"}, s -> {
-            ChallengeData[] challenges = Config.instance().getConfigData().challenges;
-            if (challenges == null || challenges.length == 0)
-                return "This plane has no challenges.";
+        registerCommand(new String[]{"modifier", "list"}, s -> {
+            ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+            if (modifiers == null || modifiers.length == 0)
+                return "This plane has no modifiers.";
             StringBuilder text = new StringBuilder();
-            for (ChallengeData challenge : challenges) {
-                String value = Current.player().getChallenges().get(challenge.name);
-                text.append(challenge.name).append(": ");
+            for (ModifierData modifier : modifiers) {
+                String value = Current.player().getModifiers().get(modifier.name);
+                text.append(modifier.name).append(": ");
                 if (value == null)
                     text.append("off");
                 else
-                    text.append(value.isEmpty() ? "on" : "on (" + challenge.describeValue(value) + ")");
+                    text.append(value.isEmpty() ? "on" : "on (" + modifier.describeValue(value) + ")");
                 text.append("\n");
             }
             return text.toString().trim();
         });
-        registerCommand(new String[]{"challenge", "on"}, s -> {
+        registerCommand(new String[]{"modifier", "on"}, s -> {
             if (s.length < 1)
-                return "Command needs a challenge name and an optional setting. Example:\n\"challenge on \"Rarity limit\" Uncommon\"";
-            ChallengeData challenge = findChallenge(s[0]);
-            if (challenge == null)
-                return "No challenge named " + s[0] + ". Use \"challenge list\".";
-            String value = challenge.defaultValue(Current.player().getColorIdentity());
+                return "Command needs a modifier name and an optional setting. Example:\n\"modifier on \"Rarity limit\" Uncommon\"";
+            ModifierData modifier = findModifier(s[0]);
+            if (modifier == null)
+                return "No modifier named " + s[0] + ". Use \"modifier list\".";
+            String value = modifier.defaultValue(Current.player().getColorIdentity());
             if (s.length > 1) {
-                value = challenge.parseValue(s[1]);
+                value = modifier.parseValue(s[1]);
                 if (value == null)
-                    return s[1] + " is not a setting of " + challenge.name + ".";
+                    return s[1] + " is not a setting of " + modifier.name + ".";
             }
-            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getChallenges());
-            chosen.put(challenge.name, value);
-            Current.player().setChallenges(chosen);
-            return challenge.name + " is on.";
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getModifiers());
+            chosen.put(modifier.name, value);
+            Current.player().setModifiers(chosen);
+            return modifier.name + " is on.";
         });
-        registerCommand(new String[]{"challenge", "off"}, s -> {
+        registerCommand(new String[]{"modifier", "off"}, s -> {
             if (s.length < 1)
-                return "Command needs 1 parameter: Challenge name.";
-            ChallengeData challenge = findChallenge(s[0]);
-            if (challenge == null)
-                return "No challenge named " + s[0] + ". Use \"challenge list\".";
-            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getChallenges());
-            chosen.remove(challenge.name);
-            Current.player().setChallenges(chosen);
-            return challenge.name + " is off.";
+                return "Command needs 1 parameter: Modifier name.";
+            ModifierData modifier = findModifier(s[0]);
+            if (modifier == null)
+                return "No modifier named " + s[0] + ". Use \"modifier list\".";
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getModifiers());
+            chosen.remove(modifier.name);
+            Current.player().setModifiers(chosen);
+            return modifier.name + " is off.";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)

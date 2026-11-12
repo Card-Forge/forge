@@ -227,9 +227,9 @@
     },
     {
       "type": "TextButton",
-      "name": "challenges",
+      "name": "modifiers",
       "style": "goldframe",
-      "text": "tr(lblChallenges)",
+      "text": "tr(lblModifiers)",
       "selectable": true,
       "width": 100,
       "height": 30,

@@ -55,7 +55,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Commander mode
     private AdventureModes adventureMode;
-    private final Map<String, String> challenges = new LinkedHashMap<>(); //Chosen challenge names and their settings.
+    private final Map<String, String> modifiers = new LinkedHashMap<>(); //Chosen modifier names and their settings.
 
     // Game data.
     private float worldPosX;
@@ -122,7 +122,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = false;
         usingCustomDeck = false;
         adventureMode = null;
-        challenges.clear();
+        modifiers.clear();
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -347,72 +347,44 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return adventureMode;
     }
 
-    /** @return the chosen challenges by name, each with its setting */
-    public Map<String, String> getChallenges() {
-        return Collections.unmodifiableMap(challenges);
+    /** @return the chosen modifiers by name, each with its setting */
+    public Map<String, String> getModifiers() {
+        return Collections.unmodifiableMap(modifiers);
     }
 
-    public void setChallenges(Map<String, String> chosen) {
-        challenges.clear();
-        challenges.putAll(chosen);
+    public void setModifiers(Map<String, String> chosen) {
+        modifiers.clear();
+        modifiers.putAll(chosen);
     }
 
-    /** @return the plane's challenges that this run has turned on, in the plane's order */
-    public List<ChallengeData> getActiveChallenges() {
-        List<ChallengeData> active = new ArrayList<>();
-        ChallengeData[] all = Config.instance().getConfigData().challenges;
+    /** @return the plane's modifiers that this run has turned on, in the plane's order */
+    public List<ModifierData> getActiveModifiers() {
+        List<ModifierData> active = new ArrayList<>();
+        ModifierData[] all = Config.instance().getConfigData().modifiers;
         if (all == null)
             return active;
-        for (ChallengeData challenge : all) {
-            if (challenges.containsKey(challenge.name))
-                active.add(challenge);
+        for (ModifierData modifier : all) {
+            if (modifiers.containsKey(modifier.name))
+                active.add(modifier);
         }
         return active;
     }
 
-    /** @return each chosen challenge with its setting and description, or its duel effect when it has no description */
-    public String getChallengesDescription() {
+    /** @return each chosen modifier with its setting and description, or its duel effect when it has no description */
+    public String getModifiersDescription() {
         StringBuilder text = new StringBuilder();
-        for (ChallengeData challenge : getActiveChallenges()) {
-            String value = challenge.describeValue(challenges.get(challenge.name));
-            text.append(challenge.name);
+        for (ModifierData modifier : getActiveModifiers()) {
+            String value = modifier.describeValue(modifiers.get(modifier.name));
+            text.append(modifier.name);
             if (!value.isEmpty())
                 text.append(" (").append(value).append(")");
             text.append("\n");
-            if (challenge.description != null)
-                text.append(challenge.description).append("\n");
-            else if (challenge.effect != null)
-                text.append(challenge.effect.getEnemySideDescription());
+            if (modifier.description != null)
+                text.append(modifier.description).append("\n");
+            else if (modifier.effect != null)
+                text.append(modifier.effect.getEnemySideDescription());
         }
         return text.toString();
-    }
-
-    /** @return why the selected deck breaks the chosen challenges' deck rules, or null when it is allowed */
-    public String getChallengeDeckProblem() {
-        StringBuilder problems = new StringBuilder();
-        for (ChallengeData challenge : getActiveChallenges()) {
-            String value = challenges.get(challenge.name);
-            for (String problem : challenge.deckProblems(deck, value)) {
-                if (problems.length() > 0)
-                    problems.append("\n\n");
-                problems.append(Forge.getLocalizer().getMessage("lblChallengeDeckProblem", challenge.name, challenge.describeValue(value), shortened(problem)));
-            }
-        }
-        return problems.length() == 0 ? null : problems.toString();
-    }
-
-    /** Puts a deck problem on one line with at most three of its cards, so the dialog fits on the screen. */
-    private static String shortened(String problem) {
-        List<String> lines = new ArrayList<>();
-        for (String line : problem.split("\n")) {
-            if (!line.isBlank())
-                lines.add(line);
-        }
-        List<String> cards = lines.subList(1, lines.size());
-        String shown = String.join(", ", cards.subList(0, Math.min(3, cards.size())));
-        if (cards.size() > 3)
-            shown += " " + Forge.getLocalizer().getMessage("lblAndCountMore", cards.size() - 3);
-        return lines.get(0) + " " + shown;
     }
 
     public boolean isCommanderMode() {
@@ -647,11 +619,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
             unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
         }
-        if (data.containsKey("challengeNames") && data.containsKey("challengeValues")) {
-            String[] names = (String[]) data.readObject("challengeNames");
-            String[] values = (String[]) data.readObject("challengeValues");
+        if (data.containsKey("modifierNames") && data.containsKey("modifierValues")) {
+            String[] names = (String[]) data.readObject("modifierNames");
+            String[] values = (String[]) data.readObject("modifierValues");
             for (int i = 0; i < names.length; i++) {
-                challenges.put(names[i], values[i]);
+                modifiers.put(names[i], values[i]);
             }
         }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
@@ -935,8 +907,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             characterFlagsKey.add(entry.getKey());
             characterFlagsValue.add(entry.getValue());
         }
-        data.storeObject("challengeNames", challenges.keySet().toArray(new String[0]));
-        data.storeObject("challengeValues", challenges.values().toArray(new String[0]));
+        data.storeObject("modifierNames", modifiers.keySet().toArray(new String[0]));
+        data.storeObject("modifierValues", modifiers.values().toArray(new String[0]));
         data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
         data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 

@@ -101,27 +101,28 @@ This example gives every enemy +2 life and starts the player with one card fewer
 }
 ```
 
-## **challenges**
-Optional rules the player can turn on at new game. The new-game screen shows a Challenges button when the plane defines any. The choices are saved and can't be changed later.
+## **modifiers**
+Optional rules the player can turn on at new game. The new-game screen shows a Modifiers button when the plane defines any. The choices are saved and can't be changed later.
 
-Each challenge has a `name`, and an optional `description` and `icon` (an item icon name). It can use:
+Each modifier has a `name`, and an optional `description` and `icon` (an item icon name). It can use:
 
 - `effect`: a duel effect added to every duel except event duels. Like `globalEffect`, its top level applies to the enemies and its `opponent` block to the player. `ignoreGlobalEffect` doesn't skip it.
-- `maxRarity`: the player picks the highest rarity allowed: Common, Uncommon or Rare. Basic lands are always allowed.
-- `pickColors`: the player picks the colors the deck may use. Colorless cards are always allowed.
+- `type`: a deck limit with a setting the player picks.
+  - `RarityLimit`: the highest rarity allowed: Common, Uncommon or Rare. A card is allowed if any printing of it was at that rarity or lower. Basic lands are always allowed.
+  - `ColorLimit`: the colors the deck may use. Colorless cards are always allowed.
 
-A deck that breaks `maxRarity` or `pickColors` can't start a duel.
+In duels, cards that break a `type` limit are removed from the deck, the same way Adventure handles other cards a duel doesn't allow. An illegal commander is replaced, and the deck is filled up to its minimum size with Wastes.
 
 ```json
-"challenges": [
+"modifiers": [
   {
     "name": "Rarity limit",
-    "description": "Every card in your deck must have been printed at this rarity or lower.",
-    "maxRarity": true
+    "description": "Cards must be this rarity or lower.",
+    "type": "RarityLimit"
   },
   {
     "name": "Color limit",
-    "pickColors": true
+    "type": "ColorLimit"
   }
 ]
 ```
@@ -147,7 +148,7 @@ A lower layer can opt out of any layer above it. A biome file can set `"ignoreGl
 
 # Effect fields
 
-Items, blessings, enemies, maps, biomes, `globalEffect` and challenges all use these fields.
+Items, blessings, enemies, maps, biomes, `globalEffect` and modifiers all use these fields.
 
 | Field | Effect |
 |---|---|
@@ -160,7 +161,7 @@ Items, blessings, enemies, maps, biomes, `globalEffect` and challenges all use t
 | `allowIllegalCommander` | Any creature or planeswalker can be that side's commander. |
 | `extraManaShards` | Extra mana shards for the duel. |
 | `colorView`, `moveSpeed`, `goldModifier`, `cardRewardBonus` | Map effects. Items and blessings only. |
-| `opponent` | An effect for the other side. For items and blessings that is the enemies. For enemies, maps, biomes, `globalEffect` and challenges it is the player. |
+| `opponent` | An effect for the other side. For items and blessings that is the enemies. For enemies, maps, biomes, `globalEffect` and modifiers it is the player. |
 
 ## startBattleScript
 
@@ -172,4 +173,4 @@ Each entry is one line of card script, run for that side after mulligans. A line
 ]
 ```
 
-A script can take cards from a player who loses the match with `RemoveFromMatch | RemoveFromInventory$ True | OnMatchLoss$ True`. Quitting the match between games counts as losing it. The Permadeath challenge in `Realm of Legends/config.json` is an example.
+A script can take cards from a player who loses the match with `RemoveFromMatch | RemoveFromInventory$ True | OnMatchLoss$ True`. Quitting the match between games counts as losing it. The Permadeath modifier in `Realm of Legends/config.json` is an example.

@@ -19,7 +19,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
-import forge.adventure.data.ChallengeData;
+import forge.adventure.data.ModifierData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -70,8 +70,8 @@ public class NewGameScene extends MenuScene {
     private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
-    private final TextraButton challengesButton;
-    private final Map<String, String> chosenChallenges = new LinkedHashMap<>(); //Challenge names and their settings.
+    private final TextraButton modifiersButton;
+    private final Map<String, String> chosenModifiers = new LinkedHashMap<>(); //Modifier names and their settings.
 
     private NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -246,11 +246,11 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
-        challengesButton = ui.findActor("challenges");
-        ChallengeData[] challenges = Config.instance().getConfigData().challenges;
-        challengesButton.setVisible(challenges != null && challenges.length > 0);
-        ui.onButtonPress("challenges", NewGameScene.this::showChallenges);
-        updateChallengesButton();
+        modifiersButton = ui.findActor("modifiers");
+        ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+        modifiersButton.setVisible(modifiers != null && modifiers.length > 0);
+        ui.onButtonPress("modifiers", NewGameScene.this::showModifiers);
+        updateModifiersButton();
     }
 
     // class field
@@ -359,7 +359,7 @@ public class NewGameScene extends MenuScene {
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
                     getStartingEdition(), 0);
-            AdventurePlayer.current().setChallenges(chosenChallenges);
+            AdventurePlayer.current().setModifiers(chosenModifiers);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -416,31 +416,31 @@ public class NewGameScene extends MenuScene {
         super.enter();
     }
 
-    private void updateChallengesButton() {
+    private void updateModifiersButton() {
         Localizer localizer = Forge.getLocalizer();
-        String label = "[+ChallengeCoin] " + localizer.getMessage("lblChallenges");
-        if (!chosenChallenges.isEmpty())
-            label += " (" + chosenChallenges.size() + ")";
-        challengesButton.setText(label);
+        String label = "[+ChallengeCoin] " + localizer.getMessage("lblModifiers");
+        if (!chosenModifiers.isEmpty())
+            label += " (" + chosenModifiers.size() + ")";
+        modifiersButton.setText(label);
     }
 
-    /** Edits a copy of the chosen challenges, kept only when the player presses OK. */
-    private void showChallenges() {
+    /** Edits a copy of the chosen modifiers, kept only when the player presses OK. */
+    private void showModifiers() {
         Localizer localizer = Forge.getLocalizer();
-        Map<String, String> edited = new LinkedHashMap<>(chosenChallenges);
+        Map<String, String> edited = new LinkedHashMap<>(chosenModifiers);
         boolean portrait = stage.getHeight() > stage.getWidth();
         float width = Math.min(330, stage.getWidth() - 40);
         float textWidth = width - 70;
         Table rows = new Table();
         rows.top();
-        for (ChallengeData challenge : Config.instance().getConfigData().challenges) {
+        for (ModifierData modifier : Config.instance().getConfigData().modifiers) {
             rows.add(divider()).colspan(3).growX().row();
-            //A setting survives turning the challenge off and on again while the dialog is open.
-            String[] value = {chosenChallenges.getOrDefault(challenge.name, challenge.defaultValue(getStartingColor()))};
-            Actor setting = challengeSetting(challenge, value, edited);
+            //A setting survives turning the modifier off and on again while the dialog is open.
+            String[] value = {chosenModifiers.getOrDefault(modifier.name, modifier.defaultValue(getStartingColor()))};
+            Actor setting = modifierSetting(modifier, value, edited);
             TextraButton toggle = Controls.newTextButton("");
             Runnable showState = () -> {
-                boolean on = edited.containsKey(challenge.name);
+                boolean on = edited.containsKey(modifier.name);
                 toggle.setStyle(Controls.getTextButtonStyle(on ? "goldframe" : "default"));
                 toggle.setText(on ? "[GOLD]" + localizer.getMessage("lblOn") : localizer.getMessage("lblOff"));
                 if (setting != null) {
@@ -451,22 +451,22 @@ public class NewGameScene extends MenuScene {
             toggle.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (edited.containsKey(challenge.name))
-                        edited.remove(challenge.name);
+                    if (edited.containsKey(modifier.name))
+                        edited.remove(modifier.name);
                     else
-                        edited.put(challenge.name, value[0]);
+                        edited.put(modifier.name, value[0]);
                     showState.run();
                 }
             });
             showState.run();
             Table text = new Table();
             text.defaults().left();
-            text.add(Controls.newTextraLabel(challenge.name)).row();
-            if (challenge.description != null)
-                text.add(wrappedLabel("[#A9A5C2]" + challenge.description, textWidth)).width(textWidth).row();
+            text.add(Controls.newTextraLabel(modifier.name)).row();
+            if (modifier.description != null)
+                text.add(wrappedLabel("[#A9A5C2]" + modifier.description, textWidth)).width(textWidth).row();
             if (setting != null)
                 text.add(setting).padTop(2).padBottom(4).row();
-            rows.add(Controls.newTextraLabel(challenge.icon == null ? "" : "[+" + challenge.icon + "]")).width(20).padRight(4);
+            rows.add(Controls.newTextraLabel(modifier.icon == null ? "" : "[+" + modifier.icon + "]")).width(20).padRight(4);
             rows.add(text).width(textWidth).left().padTop(2).padBottom(3);
             rows.add(toggle).width(36).height(18).padLeft(4).padRight(6).row();
         }
@@ -475,17 +475,17 @@ public class NewGameScene extends MenuScene {
         dialog.pad(6, 12, 6, 12);
         dialog.getButtonTable().padTop(4);
         dialog.getContentTable().defaults().left();
-        dialog.getContentTable().add(Controls.newTextraLabel("[+ChallengeCoin] " + localizer.getMessage("lblChallenges"))).row();
-        String intro = "[#A9A5C2]" + localizer.getMessage("lblChallengesIntro");
+        dialog.getContentTable().add(Controls.newTextraLabel("[+ChallengeCoin] " + localizer.getMessage("lblModifiers"))).row();
+        String intro = "[#A9A5C2]" + localizer.getMessage("lblModifiersIntro");
         dialog.getContentTable().add(portrait ? wrappedLabel(intro, width - 10) : Controls.newTextraLabel(intro)).width(width - 10).padTop(2).row();
         ScrollPane scroll = new ScrollPane(rows);
         scroll.setScrollingDisabled(true, false);
         dialog.getContentTable().add(scroll).width(width).height(Math.min(rows.getPrefHeight(), stage.getHeight() - (portrait ? 150 : 96))).padTop(2);
         dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblCancel"), this::removeDialog, "goldframe")).width(70).height(24).padRight(8);
         dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblOK"), () -> {
-            chosenChallenges.clear();
-            chosenChallenges.putAll(edited);
-            updateChallengesButton();
+            chosenModifiers.clear();
+            chosenModifiers.putAll(edited);
+            updateModifiersButton();
             removeDialog();
         }, "goldframe")).width(70).height(24);
         showDialog(dialog);
@@ -497,14 +497,14 @@ public class NewGameScene extends MenuScene {
         return line;
     }
 
-    /** @return the control for a challenge's setting, or null when it has none */
-    private Actor challengeSetting(ChallengeData challenge, String[] value, Map<String, String> edited) {
-        if (challenge.maxRarity) {
+    /** @return the control for a modifier's setting, or null when it has none */
+    private Actor modifierSetting(ModifierData modifier, String[] value, Map<String, String> edited) {
+        if (modifier.type == ModifierData.Type.RarityLimit) {
             Selector choice = new Selector();
-            String[] names = new String[ChallengeData.RARITIES.length];
+            String[] names = new String[ModifierData.RARITIES.length];
             int current = 0;
             for (int i = 0; i < names.length; i++) {
-                names[i] = ChallengeData.RARITIES[i].name();
+                names[i] = ModifierData.RARITIES[i].name();
                 if (names[i].equals(value[0]))
                     current = i;
             }
@@ -514,8 +514,8 @@ public class NewGameScene extends MenuScene {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     value[0] = names[choice.getCurrentIndex()];
-                    if (edited.containsKey(challenge.name))
-                        edited.put(challenge.name, value[0]);
+                    if (edited.containsKey(modifier.name))
+                        edited.put(modifier.name, value[0]);
                 }
             });
             choice.setSize(120, 16);
@@ -523,7 +523,7 @@ public class NewGameScene extends MenuScene {
             holder.add(choice).width(120).height(16);
             return holder;
         }
-        if (challenge.pickColors) {
+        if (modifier.type == ModifierData.Type.ColorLimit) {
             Table colors = new Table();
             for (char color : "WUBRG".toCharArray()) {
                 String colorName = String.valueOf(color);
@@ -535,8 +535,8 @@ public class NewGameScene extends MenuScene {
                         value[0] = value[0].contains(colorName) ? value[0].replace(colorName, "")
                                 : ColorSet.fromNames((value[0] + colorName).toCharArray()).toString();
                         toggle.getColor().a = value[0].contains(colorName) ? 1f : 0.35f;
-                        if (edited.containsKey(challenge.name))
-                            edited.put(challenge.name, value[0]);
+                        if (edited.containsKey(modifier.name))
+                            edited.put(modifier.name, value[0]);
                     }
                 });
                 colors.add(toggle).size(16).padRight(1);

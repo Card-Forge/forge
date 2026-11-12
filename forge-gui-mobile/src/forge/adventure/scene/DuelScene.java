@@ -58,6 +58,7 @@ import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * DuelScene
@@ -178,6 +179,7 @@ public class DuelScene extends ForgeScene {
             // Mostly for ante handling, but also blacker lotus
             GameOutcome.AnteResult anteResult = hostedMatch.getAnteResult(humanPlayer);
             if (anteResult != null) {
+                List<PaperCard> lostCards = anteResult.lostCards;
                 if (eventData != null) {
                     //In an event. Apply the ante result to the current event deck.
                     eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
@@ -194,13 +196,14 @@ public class DuelScene extends ForgeScene {
                     for (PaperCard card : anteResult.wonCards) {
                         Current.player().addCard(card);
                     }
-                    for (PaperCard card : anteResult.lostCards) {
+                    lostCards = cardsInDeck(anteResult.lostCards, Current.player().getSelectedDeck());
+                    for (PaperCard card : lostCards) {
                         // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
                         Current.player().removeLostCardFromPools(card);
                     }
                 }
                 anteWonCards = new ArrayList<>(anteResult.wonCards);
-                anteLostCards = new ArrayList<>(anteResult.lostCards);
+                anteLostCards = new ArrayList<>(lostCards);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,6 +252,19 @@ public class DuelScene extends ForgeScene {
         } else {
             afterAnte.run();
         }
+    }
+
+    /** A placeholder the duel put in the deck, such as the commander that replaces a disallowed one, isn't the player's to lose. */
+    private static List<PaperCard> cardsInDeck(List<PaperCard> cards, Deck deck) {
+        Map<String, Integer> left = new HashMap<>();
+        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList())
+            left.merge(card.getName(), 1, Integer::sum);
+        List<PaperCard> held = new ArrayList<>();
+        for (PaperCard card : cards) {
+            if (left.merge(card.getName(), -1, Integer::sum) >= 0)
+                held.add(card);
+        }
+        return held;
     }
 
     Runnable endRunnable = null;
@@ -507,8 +523,8 @@ public class DuelScene extends ForgeScene {
         if (!ignoreGlobalEffect && !enemy.ignoreGlobalEffect)
             addEffect(oppEffects, playerEffects, Config.instance().getConfigData().globalEffect);
         if (eventData == null) {
-            for (ChallengeData challenge : advPlayer.getActiveChallenges())
-                addEffect(oppEffects, playerEffects, challenge.effect);
+            for (ModifierData modifier : advPlayer.getActiveModifiers())
+                addEffect(oppEffects, playerEffects, modifier.effect);
         }
         if (!enemy.ignoreBiomeEffect)
             addEffect(oppEffects, playerEffects, biomeEffect);
@@ -728,6 +744,9 @@ public class DuelScene extends ForgeScene {
         //Can't just keep the player from entering a battle if their deck is invalid. So instead we'll just edit their deck.
         CardPool mainSection = playerDeck.getMain(), attractions = playerDeck.get(DeckSection.Attractions), contraptions = playerDeck.get(DeckSection.Contraptions);
 
+        if (eventData == null)
+            removeCardsModifiersDisallow();
+
         if(format.hasCommander()) {
             applyAdventureCommandZoneRules(playerDeck, format, allowIllegalCommander);
         }
@@ -767,6 +786,19 @@ public class DuelScene extends ForgeScene {
             int missingContraptions = 15 - contraptions.countAll();
             if(missingContraptions > 0)
                 contraptions.add(PLACEHOLDER_CONTRAPTION, missingContraptions);
+        }
+    }
+
+    /** The rules after this replace a removed commander and fill the deck up to its minimum size. */
+    private void removeCardsModifiersDisallow() {
+        AdventurePlayer advPlayer = Current.player();
+        for (ModifierData modifier : advPlayer.getActiveModifiers()) {
+            Predicate<PaperCard> allowed = modifier.allowedCards(advPlayer.getModifiers().get(modifier.name));
+            for (DeckSection section : List.of(DeckSection.Main, DeckSection.Commander)) {
+                CardPool pool = playerDeck.get(section);
+                if (pool != null)
+                    pool.retainIf(allowed);
+            }
         }
     }
 
