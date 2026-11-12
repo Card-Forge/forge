@@ -31,6 +31,8 @@ public class LifeGainEffect extends SpellAbilityEffect {
             sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
             if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
                 sb.append(spellDesc.substring(spellDesc.indexOf("life equal to")));
+            } else if (isAmountDeferred(sa, amountStr) && amountTextFromCard(sa, "gains? (\\S+ life (?:for each|equal to)[^.]*\\.)") != null) {
+                sb.append(amountTextFromCard(sa, "gains? (\\S+ life (?:for each|equal to)[^.]*\\.)"));
             } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
                 final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 

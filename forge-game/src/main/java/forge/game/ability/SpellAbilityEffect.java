@@ -42,6 +42,36 @@ import java.util.*;
 
 public abstract class SpellAbilityEffect {
 
+    /**
+     * Whether an amount cannot be read off yet while the ability is on the stack: it is a later part of a chain (what is
+     * counted may change before it resolves, "put a counter, then draw a card for each counter") or it counts what the
+     * earlier parts remember.
+     */
+    protected static boolean isAmountDeferred(final SpellAbility sa, final String amount) {
+        if (amount == null || StringUtils.isNumeric(amount)) {
+            return false;
+        }
+        if (sa instanceof AbilitySub) {
+            return true;
+        }
+        final String svar = sa.getSVar(amount);
+        return svar.contains("Remembered") || svar.contains("Imprinted");
+    }
+
+    /**
+     * The words of the card's own text that give such an amount ("3 life for each card exiled this way"), found with a
+     * regular expression whose first group is the part to use; null when the text has none.
+     */
+    protected static String amountTextFromCard(final SpellAbility sa, final String regex) {
+        String text = sa.getRootAbility().getParamOrDefault("SpellDescription", "");
+        if (text.isEmpty()) {
+            return null;
+        }
+        text = text.replace("CARDNAME", sa.getHostCard().getName());
+        final java.util.regex.Matcher m = java.util.regex.Pattern.compile(regex).matcher(text);
+        return m.find() ? m.group(1) : null;
+    }
+
     public void resolve(SpellAbility sa) {}
 
     /**
@@ -198,7 +228,17 @@ public abstract class SpellAbilityEffect {
         String currentName = sa.getHostCard().getTranslatedName();
         String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
         substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
-        return substitutedDesc;
+        return tidyDescription(substitutedDesc, sa instanceof AbilitySub);
+    }
+
+    /**
+     * Whitespace and punctuation of a composed description: one space between words, none before a full stop or comma,
+     * and nothing trailing on the whole text. Effects append their pieces with a space each, which leaves "haste ." and
+     * "It  gains" behind.
+     */
+    static String tidyDescription(final String text, final boolean isSubPart) {
+        String t = text.replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
+        return isSubPart ? t : t.stripTrailing();
     }
 
     // Common functions that all SAEffects will probably use

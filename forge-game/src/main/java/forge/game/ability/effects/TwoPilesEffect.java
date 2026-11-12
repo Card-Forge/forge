@@ -27,7 +27,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
-        sb.append("Separate all ").append(valid).append(" cards ");
+        sb.append("Separate all ").append(valid.isEmpty() ? "" : Lang.getInstance().describeValidList(valid).replaceAll(" card$", "") + " ").append("cards ");
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
         sb.append(" controls into two piles.");

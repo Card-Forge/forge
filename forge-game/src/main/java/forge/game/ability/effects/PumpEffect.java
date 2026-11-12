@@ -201,7 +201,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Radiance")) {
-                sb.append("and each other ").append(sa.getParam("ValidTgts"))
+                sb.append("and each other ").append(Lang.getInstance().describeValidList(sa.getParam("ValidTgts")))
                         .append(" that shares a color with ");
                 sb.append(tgts.size() > 1 ? "them " : "it ");
             }

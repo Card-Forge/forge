@@ -50,7 +50,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :
@@ -92,7 +92,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
                 if (ZoneType.Library.equals(revealed)) {
                     int revealedLibPos = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RevealedLibraryPosition"), sa);
-                    sb.append("and the rest on ").append(revealedLibPos < 0 ? "the bottom " : "on top ");
+                    sb.append("and the rest on ").append(revealedLibPos < 0 ? "the bottom " : "top ");
                     sb.append("of their library").append(sa.hasParam("RevealRandomOrder") ? " in a random order." : ".");
                 }
             } else if (revealed != null) {

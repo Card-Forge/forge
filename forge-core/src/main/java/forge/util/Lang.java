@@ -230,14 +230,106 @@ public abstract class Lang {
         return joinHomogenous(valid.stream().map(s -> formatValidDesc(s)).collect(Collectors.toList()), null, join);
     }
 
+    /** Like {@link #buildValidDesc(Collection, boolean)}, with the card types described as cards ("land card you own"). */
+    public String buildValidCardDesc(Collection<String> valid, boolean multiple) {
+        return joinHomogenous(valid.stream().map(s -> formatValidDesc(s, false, true)).collect(Collectors.toList()), null, multiple ? "and/or" : "or");
+    }
+
     public String formatValidDesc(String valid) {
-        List<String> commonStuff = List.of(
+        return formatValidDesc(valid, false, false);
+    }
+
+    /** A comma separated Valid list ("Creature,Planeswalker") as words: "creature or planeswalker". */
+    public String describeValidList(final String valid) {
+        return joinHomogenous(java.util.Arrays.asList(valid.split(",")), v -> formatValidDesc(v), "or");
+    }
+
+    private static final Pattern VALID_SCRIPT = Pattern.compile("[A-Za-z]+([.+][A-Za-z0-9]+)*");
+    private static final Pattern VALID_CMC_LIKE = Pattern.compile("(cmc|power|toughness)(LE|GE|EQ|LT|GT|NE)(\\w+)");
+    private static final List<String> VALID_ADJECTIVES = List.of("Basic", "Legendary", "Snow", "White", "Blue", "Black", "Red", "Green",
+            "Colorless", "Multicolor", "Monocolored", "Historic");
+
+    /**
+     * Turns a script "Valid" string ("Permanent.nonColorless", "Land.Basic", "Creature.Other+YouCtrl") into words
+     * ("colored permanent", "basic land", "other creature you control"). A string that is not a plain script string
+     * (several restrictions, variables, ...) comes back as it was.
+     *
+     * @param plural   the noun is made plural ("colored permanents")
+     * @param asCards  a card type as the noun gets "card" after it ("land card you own")
+     */
+    public String formatValidDesc(String valid, final boolean plural, final boolean asCards) {
+        final List<String> commonStuff = List.of(
                 //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
                 "Player", "Opponent", "Card", "Spell", "Permanent"
         );
-        if (commonStuff.contains(valid) || CardType.isACardType(valid)) {
-            valid = valid.toLowerCase();
+        if (!valid.contains(".") && !valid.contains("+")) {
+            if (commonStuff.contains(valid) || CardType.isACardType(valid)) {
+                valid = valid.toLowerCase();
+            }
+            return valid;
         }
-        return valid;
+        if (!VALID_SCRIPT.matcher(valid).matches()) {
+            return valid;
+        }
+        final String[] parts = valid.split("[.+]");
+        String noun = commonStuff.contains(parts[0]) || CardType.isACardType(parts[0]) ? parts[0].toLowerCase() : parts[0];
+        final List<String> adjectives = Lists.newArrayList();
+        final List<String> suffixes = Lists.newArrayList();
+        for (int i = 1; i < parts.length; i++) {
+            final String r = parts[i];
+            final java.util.regex.Matcher m = VALID_CMC_LIKE.matcher(r);
+            if (r.equals("nonColorless")) {
+                adjectives.add("colored");
+            } else if (r.equals("nonColored")) {
+                adjectives.add("colorless");
+            } else if (r.length() > 3 && r.startsWith("non") && Character.isUpperCase(r.charAt(3))) {
+                adjectives.add("non" + r.substring(3).toLowerCase());
+            } else if (r.equals("Other")) {
+                adjectives.add("other");
+            } else if (VALID_ADJECTIVES.contains(r)) {
+                adjectives.add(r.toLowerCase());
+            } else if (CardType.isACardType(r) && (noun.equals("card") || noun.equals("permanent"))) {
+                noun = r.toLowerCase();
+            } else if (CardType.isACardType(r)) {
+                adjectives.add(r.toLowerCase());
+            } else if (Character.isUpperCase(r.charAt(0)) && !r.endsWith("Ctrl") && !r.endsWith("Own") && !r.equals("Self")
+                    && (CardType.isASubType(r) || CardType.isASupertype(r))) {
+                adjectives.add(r);
+            } else if (r.equals("YouCtrl")) {
+                suffixes.add("you control");
+            } else if (r.equals("OppCtrl")) {
+                suffixes.add("an opponent controls");
+            } else if (r.equals("YouOwn")) {
+                suffixes.add("you own");
+            } else if (r.equals("OppOwn")) {
+                suffixes.add("an opponent owns");
+            } else if (r.equals("tapped") || r.equals("untapped") || r.equals("attacking") || r.equals("blocking") || r.equals("token")
+                    || r.equals("nontoken")) {
+                adjectives.add(r);
+            } else if (m.matches() && (m.group(3).matches("\\d+") || m.group(3).equals("X"))) {
+                final String what = m.group(1).equals("cmc") ? "mana value" : m.group(1);
+                final String how;
+                switch (m.group(2)) {
+                    case "LE": how = " or less"; break;
+                    case "GE": how = " or greater"; break;
+                    case "LT": how = " less than "; break;
+                    case "GT": how = " greater than "; break;
+                    default: how = "";
+                }
+                suffixes.add(m.group(2).equals("NE") ? "without " + what + " " + m.group(3)
+                        : how.endsWith(" ") ? "with " + what + how + m.group(3) : "with " + what + " " + m.group(3) + how);
+            }
+            // anything else is a condition the words cannot carry: left out
+        }
+        if (asCards && CardType.isACardType(StringUtils.capitalize(noun)) && !noun.equals("card") && !noun.equals("permanent") && !noun.equals("spell")) {
+            noun = noun + " card";
+        }
+        if (plural) {
+            noun = getPlural(noun);
+        }
+        final List<String> words = Lists.newArrayList(adjectives);
+        words.add(noun);
+        words.addAll(suffixes);
+        return String.join(" ", words);
     }
 }

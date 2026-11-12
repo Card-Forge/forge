@@ -33,7 +33,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         String piles = sa.getParam("Piles");
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
-        sb.append("Separate all ").append(valid).append(" cards ");
+        sb.append("Separate all ").append(valid.isEmpty() ? "" : Lang.getInstance().describeValidList(valid).replaceAll(" card$", "") + " ").append("cards ");
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 

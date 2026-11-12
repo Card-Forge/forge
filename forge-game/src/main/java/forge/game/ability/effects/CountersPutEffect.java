@@ -77,7 +77,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         String desc = sa.getDescription();
-        boolean forEach = desc.contains("for each");
+        // a "for each" after ", then" belongs to the next part of the ability ("put a counter, then draw a card for each ...")
+        boolean forEach = desc.contains(" for each") && (!desc.contains(", then") || desc.indexOf(", then") > desc.indexOf(" for each"));
         if (sa.hasParam("CounterTypes")) {
             if (desc.contains("Put ") && desc.contains(" on ")) {
                 desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)

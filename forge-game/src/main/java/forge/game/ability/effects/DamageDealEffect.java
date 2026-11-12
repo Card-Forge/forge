@@ -100,7 +100,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
 
         if (spellAbility.hasParam("Radiance")) {
-            stringBuilder.append(" and each other ").append(spellAbility.getParam("ValidTgts"))
+            stringBuilder.append(" and each other ").append(Lang.getInstance().describeValidList(spellAbility.getParam("ValidTgts")))
                     .append(" that shares a color with ");
             if (targets.size() > 1) {
                 stringBuilder.append("them");

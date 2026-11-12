@@ -23,7 +23,7 @@ public class DamageEachEffect extends DamageBaseEffect {
         final StringBuilder sb = new StringBuilder();
         final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDmg"), sa);
 
-        String desc = sa.getParamOrDefault("ValidCards", "");
+        String desc = sa.hasParam("ValidCards") ? Lang.getInstance().describeValidList(sa.getParam("ValidCards")) : "";
         if (sa.hasParam("ValidDescription")) {
             desc = sa.getParam("ValidDescription");
         }
