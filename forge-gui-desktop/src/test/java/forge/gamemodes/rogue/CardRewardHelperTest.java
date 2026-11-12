@@ -1,81 +1,73 @@
 package forge.gamemodes.rogue;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import forge.card.CardDbCardMockTestCase;
+import forge.card.CardDb;
+import forge.card.CardMockTestCase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.item.PaperCardPredicates;
-import java.util.ArrayList;
-import java.util.HashSet;
+import forge.model.FModel;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.testng.annotations.Test;
 
-public class CardRewardHelperTest extends CardDbCardMockTestCase {
+public class CardRewardHelperTest extends CardMockTestCase {
 
     @Test
-    public void testRunRewardRerollThenChooseCardRemovesItFromLaterRewards() {
-        RogueRun run = createRun(createStandardRewardPool(), CardRewardHelper.REROLL_BASE_COST);
-        List<List<PaperCard>> offers = new ArrayList<>();
-        AtomicInteger calls = new AtomicInteger();
+    public void rerollThenClaimReward() {
+        List<PaperCard> rewardCards = createRewardCards();
+        PaperCard chosenCard = rewardCards.get(0);
+        RogueRun run = createRun(rewardCards, CardRewardHelper.REROLL_BASE_COST);
+        AtomicBoolean reroll = new AtomicBoolean(true);
 
         List<PaperCard> chosenCards = CardRewardHelper.runReward(run, (title, cards, maxSelections,
                 rerollLabel, rerollEnabled, gold) -> {
-            offers.add(new ArrayList<>(cards));
-            return calls.getAndIncrement() == 0 ? null : List.of(cards.get(0));
+            if (reroll.getAndSet(false)) {
+                assertTrue(rerollEnabled);
+                return null;
+            }
+            assertTrue(cards.contains(chosenCard));
+            return List.of(chosenCard);
         }, false, null, null);
 
-        PaperCard chosenCard = chosenCards.get(0);
+        assertEquals(chosenCards, List.of(chosenCard));
         assertEquals(run.getCurrentGold(), 0);
         assertEquals(run.getCurrentDeck().getMain().count(chosenCard), 1);
 
-        List<List<PaperCard>> laterOffers = new ArrayList<>();
-        List<PaperCard> skippedCards = CardRewardHelper.runReward(run, (title, cards, maxSelections,
-                rerollLabel, rerollEnabled, gold) -> {
-            laterOffers.add(new ArrayList<>(cards));
-            return new ArrayList<>();
-        }, false, null, null);
-
-        assertTrue(skippedCards.isEmpty());
-        assertEquals(offers.size(), 2);
-        assertEquals(laterOffers.size(), 1);
-        assertFalse(laterOffers.get(0).contains(chosenCard));
+        // Draw without the owned-card filter so it cannot hide a failed pool removal.
+        List<PaperCard> remaining = run.getSelectedRogueDeck().drawRewardOptions(rewardCards.size(), null);
+        assertEquals(remaining.size(), rewardCards.size() - 1);
+        assertEquals(Set.copyOf(remaining), Set.copyOf(rewardCards.subList(1, rewardCards.size())));
     }
 
     @Test
-    public void testRunRewardSkipDiscardsOfferAndAllowsLaterReshuffle() {
-        RogueRun run = createRun(createSingleOfferPool(), 0);
-        List<List<PaperCard>> firstOffers = new ArrayList<>();
+    public void skippedRewardsReturnAfterReshuffle() {
+        List<PaperCard> rewardCards = createRewardCards();
+        RogueRun run = createRun(rewardCards, 0);
 
         List<PaperCard> skippedCards = CardRewardHelper.runReward(run, (title, cards, maxSelections,
                 rerollLabel, rerollEnabled, gold) -> {
-            firstOffers.add(new ArrayList<>(cards));
-            return new ArrayList<>();
-        }, false, null, null);
-
-        List<List<PaperCard>> secondOffers = new ArrayList<>();
-        List<PaperCard> skippedAgain = CardRewardHelper.runReward(run, (title, cards, maxSelections,
-                rerollLabel, rerollEnabled, gold) -> {
-            secondOffers.add(new ArrayList<>(cards));
-            return new ArrayList<>();
+            assertEquals(Set.copyOf(cards), Set.copyOf(rewardCards));
+            return List.of();
         }, false, null, null);
 
         assertTrue(skippedCards.isEmpty());
-        assertTrue(skippedAgain.isEmpty());
-        assertEquals(firstOffers.size(), 1);
-        assertEquals(secondOffers.size(), 1);
-        assertEquals(new HashSet<>(secondOffers.get(0)), new HashSet<>(firstOffers.get(0)));
+        RogueDeck deck = run.getSelectedRogueDeck();
+        assertTrue(deck.getRewardPoolCards().isEmpty());
+        List<PaperCard> reshuffled = deck.drawRewardOptions(rewardCards.size(), null);
+        assertEquals(reshuffled.size(), rewardCards.size());
+        assertEquals(Set.copyOf(reshuffled), Set.copyOf(rewardCards));
     }
 
-    private RogueRun createRun(CardPool rewardPool, int gold) {
+    private RogueRun createRun(List<PaperCard> rewardCards, int gold) {
+        CardPool rewardPool = new CardPool();
+        rewardPool.add(rewardCards);
         RogueDeck rogueDeck = new RogueDeck();
-        rogueDeck.setCommanderCardName("Test Commander");
+        // This fixture has no curated commander and should skip Codex tracking.
+        rogueDeck.setExperimental(true);
         rogueDeck.setStartDeck(new Deck("Test Deck"));
         rogueDeck.setRewardPool(rewardPool);
 
@@ -84,31 +76,12 @@ public class CardRewardHelperTest extends CardDbCardMockTestCase {
         return run;
     }
 
-    private CardPool createSingleOfferPool() {
-        CardPool rewardPool = new CardPool();
-        rewardPool.add(takeCards(PaperCardPredicates.IS_MYTHIC_RARE.negate(), 6));
-        rewardPool.add(takeCards(PaperCardPredicates.IS_MYTHIC_RARE, 1));
-        return rewardPool;
-    }
-
-    private CardPool createStandardRewardPool() {
-        CardPool rewardPool = createSingleOfferPool();
-        rewardPool.add(takeCards(PaperCardPredicates.IS_MYTHIC_RARE, 2).subList(1, 2));
-        return rewardPool;
-    }
-
-    private List<PaperCard> takeCards(Predicate<PaperCard> predicate, int count) {
-        List<PaperCard> result = new ArrayList<>();
-        Set<String> names = new HashSet<>();
-        for (PaperCard card : cardDb.getAllCards(predicate)) {
-            if (names.add(card.getName())) {
-                result.add(card);
-                if (result.size() == count) {
-                    break;
-                }
-            }
-        }
-        assertEquals(result.size(), count);
-        return result;
+    private List<PaperCard> createRewardCards() {
+        CardDb cards = FModel.getMagicDb().getCommonCards();
+        // A normal offer draws six nonmythics and one mythic, exhausting this pool.
+        return List.of(cards.getCard("Sol Ring", "MOC"), cards.getCard("Hedron Archive", "BFZ"),
+            cards.getCard("Runeclaw Bear", "M10"), cards.getCard("Thraben Inspector", "SOI"),
+            cards.getCard("Serra Angel", "M10"), cards.getCard("Lightning Bolt", "M10"),
+            cards.getCard("Atraxa, Grand Unifier", "ONE"));
     }
 }

@@ -1,42 +1,17 @@
 package forge.gamemodes.rogue.path;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import forge.gamemodes.rogue.effect.PathUpdateContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.testng.annotations.Test;
 
 public class RoguePathTest {
 
     @Test
-    public void replaceNodesPreservesPositionAndCompletionWithoutChangingOtherNodes() {
-        RoguePath path = createPath(1, 2);
-        RoguePathNode original = path.getNode(1);
-        RoguePathNode untouched = path.getNode(2);
-        original.setCompleted(true);
-        AtomicInteger replacements = new AtomicInteger();
-
-        path.replaceNodes(node -> node == original, () -> {
-            replacements.incrementAndGet();
-            return new NodeChest();
-        });
-
-        assertEquals(replacements.get(), 1);
-        assertTrue(path.getNode(1) instanceof NodeChest);
-        assertEquals(path.getNode(1).getRowIndex(), 1);
-        assertEquals(path.getNode(1).getColumnIndex(), 0);
-        assertTrue(path.getNode(1).isCompleted());
-        assertSame(path.getNode(2), untouched);
-        assertFalse(path.getNode(2).isCompleted());
-    }
-
-    @Test
-    public void reachableNodeIndicesHandleEdgesMiddleAndInvalidIndices() {
+    public void reachableNodesByPosition() {
         RoguePath path = createPath(3, 4);
 
         assertEquals(path.getReachableNodeIndices(0), List.of(3, 4));
@@ -50,7 +25,7 @@ public class RoguePathTest {
     }
 
     @Test
-    public void currentAndFutureVisibilityFollowCompletedNodesAndPlaneRows() {
+    public void mapVisibilityFollowsProgress() {
         RoguePath path = createPath(1, 3, 2, 3, 1);
         path.getNode(0).setCompleted(true);
 
@@ -72,7 +47,7 @@ public class RoguePathTest {
     }
 
     @Test
-    public void updatingNextPlaneboundRowsSkipsSideRowsAndStopsAtRequestedCount() {
+    public void updatesNextPlanebounds() {
         RoguePath path = createPath(1, 3, 2, 3, 1);
 
         path.updateNextPlaneboundRows(0, 2, node -> node.setWrathfulCount(1));

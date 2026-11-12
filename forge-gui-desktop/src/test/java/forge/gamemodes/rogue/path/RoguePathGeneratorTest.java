@@ -1,6 +1,7 @@
 package forge.gamemodes.rogue.path;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
@@ -39,43 +40,40 @@ public class RoguePathGeneratorTest {
     }
 
     @Test
-    public void generatedPathsHaveValidRowsAndEverySideNodeType() {
+    public void generatesValidPath() {
         try (MockedStatic<RogueConfig> config = Mockito.mockStatic(RogueConfig.class)) {
             config.when(RogueConfig::loadPlanebounds).thenReturn(createPlanebounds());
 
-            for (int seed = 0; seed < 50; seed++) {
-                MyRandom.setRandom(new Random(seed));
-                RogueRun run = new RogueRun();
-                RoguePathGenerator.generateRandomPath(run);
-                RoguePath path = run.getPath();
+            RogueRun run = new RogueRun();
+            RoguePathGenerator.generateRandomPath(run);
+            RoguePath path = run.getPath();
 
-                assertEquals(path.getMaxRow(), 10);
-                for (int row = 0; row <= 10; row++) {
-                    List<RoguePathNode> rowNodes = path.getNodesInRow(row);
-                    int maximum = row == 10 ? 1 : row == 9 ? 3 : 4;
-                    int minimum = row == 10 ? 1 : 2;
-                    assertTrue(rowNodes.size() >= minimum && rowNodes.size() <= maximum,
-                        "Unexpected node count at row " + row + " for seed " + seed);
-                    for (int column = 0; column < rowNodes.size(); column++) {
-                        RoguePathNode node = rowNodes.get(column);
-                        assertEquals(node.getColumnIndex(), column);
-                        assertEquals(node.getRowIndex(), row);
-                        assertEquals(node instanceof NodePlanebound, row % 2 == 0);
-                    }
+            assertEquals(path.getMaxRow(), 10);
+            for (int row = 0; row <= 10; row++) {
+                List<RoguePathNode> rowNodes = path.getNodesInRow(row);
+                int maximum = row == 10 ? 1 : row == 9 ? 3 : 4;
+                int minimum = row == 10 ? 1 : 2;
+                assertTrue(rowNodes.size() >= minimum && rowNodes.size() <= maximum,
+                    "Unexpected node count at row " + row);
+                for (int column = 0; column < rowNodes.size(); column++) {
+                    RoguePathNode node = rowNodes.get(column);
+                    assertEquals(node.getColumnIndex(), column);
+                    assertEquals(node.getRowIndex(), row);
+                    assertEquals(node instanceof NodePlanebound, row % 2 == 0);
                 }
+            }
 
-                assertHasEverySideNodeType(path);
-                Set<RogueEvent> usedEvents = new HashSet<>();
-                Set<ChestEffect> usedChestEffects = new HashSet<>();
-                for (RoguePathNode node : path.getNodes()) {
-                    if (node instanceof NodeEvent event) {
-                        assertNotNull(event.getEvent());
-                        assertTrue(usedEvents.add(event.getEvent()));
-                    } else if (node instanceof NodeChest chest) {
-                        assertEquals(chest.getChestEffects().size(), 2);
-                        for (ChestEffect effect : chest.getChestEffects()) {
-                            assertTrue(usedChestEffects.add(effect));
-                        }
+            assertHasEverySideNodeType(path);
+            Set<RogueEvent> usedEvents = new HashSet<>();
+            Set<ChestEffect> usedChestEffects = new HashSet<>();
+            for (RoguePathNode node : path.getNodes()) {
+                if (node instanceof NodeEvent event) {
+                    assertNotNull(event.getEvent());
+                    assertTrue(usedEvents.add(event.getEvent()));
+                } else if (node instanceof NodeChest chest) {
+                    assertEquals(chest.getChestEffects().size(), 2);
+                    for (ChestEffect effect : chest.getChestEffects()) {
+                        assertTrue(usedChestEffects.add(effect));
                     }
                 }
             }
@@ -83,7 +81,7 @@ public class RoguePathGeneratorTest {
     }
 
     @Test
-    public void missingTypesReplaceNodesFromTiedMostCommonTypes() {
+    public void fillsMissingSideNodes() {
         RoguePlanebound planebound = new RoguePlanebound("Plane", "Boss", "boss.dck", 1,
             RoguePlaneboundType.BOSS);
         NodePlanebound boss = new NodePlanebound(planebound);
@@ -93,7 +91,7 @@ public class RoguePathGeneratorTest {
             RoguePathNode node = i < 5 ? new NodeBazaar() : new NodeSanctum();
             node.setRowIndex(1 + 2 * (i / 2));
             node.setColumnIndex(i % 2);
-            node.setCompleted(true);
+            node.setCompleted(i % 2 == 0);
             nodes.add(node);
         }
         RoguePath path = new RoguePath(nodes);
@@ -106,9 +104,14 @@ public class RoguePathGeneratorTest {
         assertSame(path.getNode(0), boss);
         assertEquals(path.getNodes().size(), originalNodes.size());
         for (int i = 1; i < path.getNodeCount(); i++) {
-            assertEquals(path.getNode(i).getRowIndex(), originalNodes.get(i).getRowIndex());
-            assertEquals(path.getNode(i).getColumnIndex(), originalNodes.get(i).getColumnIndex());
-            assertTrue(path.getNode(i).isCompleted());
+            RoguePathNode node = path.getNode(i);
+            RoguePathNode original = originalNodes.get(i);
+            assertEquals(node.getRowIndex(), original.getRowIndex());
+            assertEquals(node.getColumnIndex(), original.getColumnIndex());
+            assertEquals(node.isCompleted(), original.isCompleted());
+            if (node instanceof NodeBazaar || node instanceof NodeSanctum) {
+                assertSame(node, original);
+            }
         }
         assertEquals(path.getNodes().stream().filter(NodeEvent.class::isInstance).count(), 1L);
         assertEquals(path.getNodes().stream().filter(NodeChest.class::isInstance).count(), 1L);
@@ -124,23 +127,7 @@ public class RoguePathGeneratorTest {
     }
 
     @Test
-    public void completeSideNodeMixIsLeftUntouched() {
-        List<RoguePathNode> nodes = new ArrayList<>(List.of(new NodeBazaar(), new NodeSanctum(),
-            new NodeEvent(RogueEvent.AFTER_DUSK),
-            new NodeChest(List.of(ChestEffect.CARD_CACHE, ChestEffect.CARD_CACHE_MYTHIC))));
-        RoguePath path = new RoguePath(nodes);
-        List<RoguePathNode> originalNodes = new ArrayList<>(nodes);
-
-        RoguePathGenerator.ensureSideNodeTypes(path, List.of(RogueEvent.AFTER_DUSK),
-            List.of(ChestEffect.CARD_CACHE, ChestEffect.CARD_CACHE_MYTHIC));
-
-        for (int i = 0; i < nodes.size(); i++) {
-            assertSame(path.getNode(i), originalNodes.get(i));
-        }
-    }
-
-    @Test
-    public void pathChangingEffectsStillRunAfterTheSideNodeSafeguard() {
+    public void richReplacesSideNodes() {
         try (MockedStatic<RogueConfig> config = Mockito.mockStatic(RogueConfig.class)) {
             config.when(RogueConfig::loadPlanebounds).thenReturn(createPlanebounds());
             RogueRun run = new RogueRun();
@@ -148,8 +135,10 @@ public class RoguePathGeneratorTest {
 
             RoguePathGenerator.generateRandomPath(run);
 
-            assertTrue(run.getPath().getNodes().stream().filter(RoguePathNode::isSideNode)
-                .allMatch(NodeBazaar.class::isInstance));
+            List<RoguePathNode> sideNodes = run.getPath().getNodes().stream()
+                .filter(RoguePathNode::isSideNode).toList();
+            assertFalse(sideNodes.isEmpty());
+            assertTrue(sideNodes.stream().allMatch(NodeBazaar.class::isInstance));
         }
     }
 

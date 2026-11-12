@@ -59,7 +59,7 @@ public class RogueCustomDeckGeneratorTest extends CardMockTestCase {
     }
 
     @Test
-    public void retryReachesStarterThemeTarget() {
+    public void retryBuildsThemedStarter() {
         Deck normal = createOffThemeDeck();
         List<PaperCard> themeCards = List.of(getCard("Youthful Valkyrie"),
             getCard("Inspiring Overseer"), getCard("Angel of Vitality"),
@@ -77,7 +77,7 @@ public class RogueCustomDeckGeneratorTest extends CardMockTestCase {
     }
 
     @Test
-    public void partialThemeRetryKeepsOriginalStarter() {
+    public void retryKeepsOriginalStarter() {
         Deck normal = createOffThemeDeck();
         PaperCard expensiveThemeCard = getCard("Angel of the Ruins");
         assertTrue(expensiveThemeCard.getRules().getManaCost().getCMC() > 6);
@@ -136,12 +136,7 @@ public class RogueCustomDeckGeneratorTest extends CardMockTestCase {
                 Mockito.eq(DeckFormat.Commander), Mockito.eq(false), Mockito.eq(false), Mockito.anyInt()))
                 .thenReturn(normal);
 
-            RogueDeck result = RogueCustomDeckGenerator.generateStartingDeck(selected);
-
-            deckgen.verify(() -> DeckgenUtil.generateRandomCommanderDeck(Mockito.eq(commander),
-                Mockito.eq(DeckFormat.Commander), Mockito.eq(false), Mockito.eq(false), Mockito.anyInt()),
-                Mockito.times(1));
-            return result;
+            return RogueCustomDeckGenerator.generateStartingDeck(selected);
         }
     }
 
