@@ -36,6 +36,20 @@ public class ChallengeData {
         return "";
     }
 
+    /** @return a typed setting in its saved form, or null when it isn't valid for this challenge */
+    public String parseValue(String input) {
+        if (maxRarity) {
+            for (CardRarity rarity : RARITIES) {
+                if (rarity.name().equalsIgnoreCase(input))
+                    return rarity.name();
+            }
+            return null;
+        }
+        if (pickColors)
+            return input.matches("(?i)[WUBRG]+") ? ColorSet.fromNames(input.toUpperCase().toCharArray()).toString() : null;
+        return null;
+    }
+
     /** @param value the saved setting: the highest rarity allowed, or the allowed colors as letters such as "WG" */
     public String describeValue(String value) {
         if (pickColors) {

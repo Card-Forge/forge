@@ -12,6 +12,9 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 
 | Command Example | Description |
 | -- | -- |
+| challenge list | Lists the plane's challenges and whether each is on, with its setting |
+| challenge on &lt;name&gt; \[setting\] | Turns a challenge on (use quotes for names with spaces). The setting is a rarity (Common, Uncommon or Rare) or color letters (one or more of WUBRG); without one it uses the default |
+| challenge off &lt;name&gt; | Turns a challenge off |
 | clearnosell | Removes all 'no sell value' cards you own from your inventory |
 | crack | Cracks a random item you have equipped |
 | fly &lt;duration&gt; | Allows you to walk over obstacles in the overworld or POI map for a number of seconds (currently useless in POIs, in which there will only be a visual effect on the player sprite) |

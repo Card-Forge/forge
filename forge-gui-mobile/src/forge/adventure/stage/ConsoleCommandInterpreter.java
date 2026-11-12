@@ -34,7 +34,9 @@ import forge.util.ScreenUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,6 +93,17 @@ public class ConsoleCommandInterpreter {
 
         // reuse
         return matchTokenList.toArray(emptyStringArray);
+    }
+
+    private static ChallengeData findChallenge(String name) {
+        ChallengeData[] challenges = Config.instance().getConfigData().challenges;
+        if (challenges == null)
+            return null;
+        for (ChallengeData challenge : challenges) {
+            if (challenge.name.equalsIgnoreCase(name))
+                return challenge;
+        }
+        return null;
     }
 
     public String command(String text) {
@@ -366,6 +379,50 @@ public class ConsoleCommandInterpreter {
             }
             System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
             return "POI lists dumped to stdout.";
+        });
+        registerCommand(new String[]{"challenge", "list"}, s -> {
+            ChallengeData[] challenges = Config.instance().getConfigData().challenges;
+            if (challenges == null || challenges.length == 0)
+                return "This plane has no challenges.";
+            StringBuilder text = new StringBuilder();
+            for (ChallengeData challenge : challenges) {
+                String value = Current.player().getChallenges().get(challenge.name);
+                text.append(challenge.name).append(": ");
+                if (value == null)
+                    text.append("off");
+                else
+                    text.append(value.isEmpty() ? "on" : "on (" + challenge.describeValue(value) + ")");
+                text.append("\n");
+            }
+            return text.toString().trim();
+        });
+        registerCommand(new String[]{"challenge", "on"}, s -> {
+            if (s.length < 1)
+                return "Command needs a challenge name and an optional setting. Example:\n\"challenge on \"Rarity limit\" Uncommon\"";
+            ChallengeData challenge = findChallenge(s[0]);
+            if (challenge == null)
+                return "No challenge named " + s[0] + ". Use \"challenge list\".";
+            String value = challenge.defaultValue(Current.player().getColorIdentity());
+            if (s.length > 1) {
+                value = challenge.parseValue(s[1]);
+                if (value == null)
+                    return s[1] + " is not a setting of " + challenge.name + ".";
+            }
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getChallenges());
+            chosen.put(challenge.name, value);
+            Current.player().setChallenges(chosen);
+            return challenge.name + " is on.";
+        });
+        registerCommand(new String[]{"challenge", "off"}, s -> {
+            if (s.length < 1)
+                return "Command needs 1 parameter: Challenge name.";
+            ChallengeData challenge = findChallenge(s[0]);
+            if (challenge == null)
+                return "No challenge named " + s[0] + ". Use \"challenge list\".";
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getChallenges());
+            chosen.remove(challenge.name);
+            Current.player().setChallenges(chosen);
+            return challenge.name + " is off.";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)
