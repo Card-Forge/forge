@@ -108,6 +108,7 @@ Each challenge has a `name`, an optional `description` and an optional `icon`, t
 
 - `effect`: a duel effect added to every duel except event duels, written like `globalEffect`. Towns, biomes and enemies that set `ignoreGlobalEffect` don't skip it, because the player chose it.
 - `maxRarity`: when true, the player picks the highest rarity allowed, Common, Uncommon or Rare. Every card in the deck must have been printed at that rarity or lower. Basic lands are always allowed.
+- `pickColors`: when true, the player picks the colors their deck may use. Colorless cards are always allowed.
 
 A deck that breaks a challenge's deck rules can't start a duel. The player sees why, and the enemy can't start a fight with them again until a few seconds after they close the message.
 
@@ -117,6 +118,10 @@ A deck that breaks a challenge's deck rules can't start a duel. The player sees 
     "name": "Rarity limit",
     "description": "Every card in your deck must have been printed at this rarity or lower.",
     "maxRarity": true
+  },
+  {
+    "name": "Color limit",
+    "pickColors": true
   }
 ]
 ```

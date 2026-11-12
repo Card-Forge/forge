@@ -436,7 +436,7 @@ public class NewGameScene extends MenuScene {
         for (ChallengeData challenge : Config.instance().getConfigData().challenges) {
             rows.add(divider()).colspan(3).growX().row();
             //A setting survives turning the challenge off and on again while the dialog is open.
-            String[] value = {chosenChallenges.getOrDefault(challenge.name, challenge.defaultValue())};
+            String[] value = {chosenChallenges.getOrDefault(challenge.name, challenge.defaultValue(getStartingColor()))};
             Actor setting = challengeSetting(challenge, value, edited);
             TextraButton toggle = Controls.newTextButton("");
             Runnable showState = () -> {
@@ -522,6 +522,26 @@ public class NewGameScene extends MenuScene {
             Table holder = new Table();
             holder.add(choice).width(120).height(16);
             return holder;
+        }
+        if (challenge.pickColors) {
+            Table colors = new Table();
+            for (char color : "WUBRG".toCharArray()) {
+                String colorName = String.valueOf(color);
+                TextraButton toggle = Controls.newTextButton("[+" + colorName + "]");
+                toggle.getColor().a = value[0].contains(colorName) ? 1f : 0.35f;
+                toggle.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        value[0] = value[0].contains(colorName) ? value[0].replace(colorName, "")
+                                : ColorSet.fromNames((value[0] + colorName).toCharArray()).toString();
+                        toggle.getColor().a = value[0].contains(colorName) ? 1f : 0.35f;
+                        if (edited.containsKey(challenge.name))
+                            edited.put(challenge.name, value[0]);
+                    }
+                });
+                colors.add(toggle).size(16).padRight(1);
+            }
+            return colors;
         }
         return null;
     }

@@ -294,6 +294,12 @@
       "description": "Cards must be this rarity or lower.",
       "icon": "Treasure",
       "maxRarity": true
+    },
+    {
+      "name": "Color limit",
+      "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
+      "icon": "Shard",
+      "pickColors": true
     }
   ]
 }

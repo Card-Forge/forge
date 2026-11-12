@@ -23,6 +23,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
@@ -106,10 +107,11 @@ public class GameFormat implements Comparable<GameFormat> {
     /**
      * Rules on the whole deck, on top of which cards are legal. With singleton, a deck holds one copy of each card
      * apart from those that allow more. Its main deck needs at least minMainDeckSize cards, and the points of its
-     * cards in cardPoints must not exceed maxPoints.
+     * cards in cardPoints must not exceed maxPoints. With colors set, every card's color identity must be within it.
      */
-    public record DeckRules(boolean singleton, int minMainDeckSize, int maxPoints, Map<String, Integer> cardPoints) {
-        public static final DeckRules NONE = new DeckRules(false, 0, 0, Map.of());
+    public record DeckRules(boolean singleton, int minMainDeckSize, int maxPoints, Map<String, Integer> cardPoints,
+                            ColorSet colors) {
+        public static final DeckRules NONE = new DeckRules(false, 0, 0, Map.of(), null);
     }
 
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
@@ -300,6 +302,21 @@ public class GameFormat implements Comparable<GameFormat> {
         final int mainSize = deck.getMain().countAll();
         if (mainSize < deckRules.minMainDeckSize()) {
             return Localizer.getInstance().getMessage("lblFormatTooFewCards", mainSize, deckRules.minMainDeckSize());
+        }
+        if (deckRules.colors() != null) {
+            final List<PaperCard> offColor = new ArrayList<>();
+            for (final Entry<PaperCard, Integer> entry : allCards) {
+                if (!entry.getKey().getRules().getColorIdentity().hasNoColorsExcept(deckRules.colors())) {
+                    offColor.add(entry.getKey());
+                }
+            }
+            if (!offColor.isEmpty()) {
+                final StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblFormatOffColorCards") + "\n");
+                for (final PaperCard card : offColor) {
+                    sb.append("\n").append(card.getDisplayName());
+                }
+                return sb.toString();
+            }
         }
         return getPoolLegalityProblem(allCards);
     }
@@ -574,8 +591,9 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
             final Boolean singleton = section.getBoolean("singleton");
+            final String colors = section.get("colors");
             return new DeckRules(singleton != null && singleton, section.getInt("mindecksize"), section.getInt("maxpoints"),
-                    Map.copyOf(cardPoints));
+                    Map.copyOf(cardPoints), colors == null ? null : ColorSet.fromNames(colors.toCharArray()));
         }
 
         /**
