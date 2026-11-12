@@ -329,51 +329,50 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        float x = PADDING;
+        final FLabel[] labels = {lblFormat, lblVariants, lblPlayers, lblGamesInMatch};
+        final FComboBox<?>[] fields = {cbFormat, cbVariants, cbPlayerCount, cbGamesInMatch};
+        final float fieldHeight = cbPlayerCount.getHeight();
         float y = startY + PADDING;
-        float fieldHeight = cbPlayerCount.getHeight();
-        final float comboWidth = (width - (x + lblFormat.getAutoSizeBounds().width + PADDING / 2
-                + lblVariants.getAutoSizeBounds().width + PADDING / 2
-                + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
-                + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2)) / 2;
-        // a narrow landscape screen, such as an unfolded foldable, uses the stacked rows
-        if (Forge.isLandscapeMode() && comboWidth >= Utils.AVG_FINGER_WIDTH * 2) {
-            lblFormat.setBounds(x, y, lblFormat.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblFormat.getWidth();
-            cbFormat.setBounds(x, y, comboWidth, fieldHeight);
-            x += cbFormat.getWidth();
-            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, comboWidth, fieldHeight);
-            x += cbVariants.getWidth();
-            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblPlayers.getWidth();
-            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-            x += cbPlayerCount.getWidth() + PADDING;
-            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblGamesInMatch.getWidth();
-            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-        } else {
-            lblFormat.setBounds(x, y, lblFormat.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblFormat.getWidth();
-            cbFormat.setBounds(x, y, width - x - PADDING, fieldHeight);
-            x = PADDING;
-            y += cbFormat.getHeight() + PADDING;
-            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
-            x = PADDING;
-            y += cbVariants.getHeight() + PADDING;
-            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblPlayers.getWidth();
-            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-            x += cbPlayerCount.getWidth() + PADDING;
-            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblGamesInMatch.getWidth();
-            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        // Each row takes as many fields as fit at their narrowest, then the format and variant boxes share what is left
+        for (int first = 0, end; first < fields.length; first = end) {
+            float used = PADDING * 3 / 2;
+            int stretching = 0;
+            for (end = first; end < fields.length; end++) {
+                // The match count never starts a row without the player count
+                final float needed = minWidth(labels[end], fields[end])
+                        + (fields[end] == cbPlayerCount ? minWidth(lblGamesInMatch, cbGamesInMatch) : 0);
+                if (end > first && fields[end] != cbGamesInMatch && used + needed > width) {
+                    break;
+                }
+                used += minWidth(labels[end], fields[end]);
+                if (stretches(fields[end])) {
+                    stretching++;
+                }
+            }
+            final float extra = stretching == 0 ? 0 : (width - used) / stretching;
+            float x = PADDING;
+            for (int i = first; i < end; i++) {
+                labels[i].setBounds(x, y, labels[i].getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+                x += labels[i].getWidth();
+                fields[i].setBounds(x, y, minWidth(fields[i]) + (stretches(fields[i]) ? extra : 0), fieldHeight);
+                x += fields[i].getWidth() + PADDING / 2;
+            }
+            y += fieldHeight + PADDING;
         }
-        y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);
+    }
+
+    private float minWidth(final FLabel label, final FComboBox<?> field) {
+        return label.getAutoSizeBounds().width + minWidth(field) + PADDING;
+    }
+
+    private boolean stretches(final FComboBox<?> field) {
+        return field == cbFormat || field == cbVariants;
+    }
+
+    // Sized on the longest choice, so the layout does not change with the selection. That choice may shrink its font a little.
+    private float minWidth(final FComboBox<?> field) {
+        return stretches(field) ? field.getAutoSizeWidth() * 0.85f : Math.max(field.getAutoSizeWidth(), Utils.AVG_FINGER_WIDTH * 0.75f);
     }
 
     GameType getCurrentGameMode() {
