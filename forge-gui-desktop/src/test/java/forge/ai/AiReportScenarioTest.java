@@ -316,6 +316,10 @@ public class AiReportScenarioTest extends AITest {
                     final AiPlayDecision d = freeCast(c, "Living End");
                     return d == AiPlayDecision.WillPlay ? null : "AI would not cast the cascaded Living End: " + d;
                 }));
+        // re-equipping the creature an Equipment is already on is idle: a "becomes attached" trigger alone is no combo
+        l.add(noPlay("FMC-equip0", "Lightning Greaves stays put when only a Bramble Elemental trigger could use the re-equip", Fid.APPROX, M1, true, "Lightning Greaves",
+                c -> { final Card g = c.bf("Lightning Greaves", c.ai); final Card b = c.bf("Grizzly Bears", c.ai); g.attachToEntity(b, null);
+                    c.bf("Bramble Elemental", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(play("4215", "Collected Company at the opponent's end step", Fid.EXACT, "END_OF_TURN", false, "Collected Company",
                 c -> { c.bf("Forest", 4, c.ai); c.hand("Collected Company", c.ai); for (int i = 0; i < 6; i++) { c.lib("Grizzly Bears", c.ai); } }));
         l.add(play("4352", "Adventure side while the main spell is castable too", Fid.APPROX, M1, true, "Bonecrusher Giant",
@@ -615,6 +619,34 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 2, c.ai); c.bf("Darksteel Relic", c.ai); c.hand("Rise and Shine", c.ai); }));
         l.add(play("12058", "solved Case of the Filched Falcon with noncreature artifacts to animate", Fid.APPROX, M1, true, "Case of the Filched Falcon",
                 c -> { c.bf("Island", 3, c.ai); c.bf("Darksteel Relic", 2, c.ai); c.bf("Case of the Filched Falcon", c.ai).setSolved(true); }));
+        // ---- Flat MC: equip {0}, counters, wipes, land wipes
+        l.add(play("FMC-equip0", "Lightning Greaves (equip {0}) onto a creature that has none", Fid.APPROX, M1, true, "Lightning Greaves",
+                c -> { c.bf("Lightning Greaves", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Grizzly Bears", c.opp); }));
+        l.add(noPlay("FMC-equip0", "Lightning Greaves is not moved onto the creature it already equips", Fid.APPROX, M1, true, "Lightning Greaves",
+                c -> { final Card g = c.bf("Lightning Greaves", c.ai); final Card b = c.bf("Grizzly Bears", c.ai); g.attachToEntity(b, null); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("FMC-ozolith", "Ozolith, the Shattered Spire puts its counter on a creature, not on a noncreature artifact", Fid.APPROX, "MAIN1", true,
+                c -> { c.bf("Forest", 2, c.ai); c.bf("Ozolith, the Shattered Spire", c.ai); c.bf("Sol Ring", c.ai); c.bf("Darksteel Relic", c.ai); c.bf("Grizzly Bears", c.ai); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Ozolith, the Shattered Spire");
+                    if (sa == null) { return "AI did not activate Ozolith" + c.why("Ozolith, the Shattered Spire"); }
+                    final Card got = c.target(sa);
+                    return got != null && got.isCreature() ? null : "counter went to " + got;
+                }));
+        l.add(play("FMC-wrath", "a wrath when the opponent's board is far better than the AI's", Fid.APPROX, "MAIN2", true, "Wrath of God",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Grizzly Bears", c.ai);
+                    c.bf("Serra Angel", c.opp); c.bf("Baneslayer Angel", c.opp); c.bf("Craterhoof Behemoth", c.opp); }));
+        l.add(noPlay("FMC-wrath", "no wrath when the AI's own board is the better one", Fid.APPROX, "MAIN2", true, "Wrath of God",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Serra Angel", c.ai); c.bf("Baneslayer Angel", c.ai);
+                    c.bf("Grizzly Bears", c.opp); }));
+        l.add(play("FMC-armageddon", "Armageddon when the AI's creatures are far ahead and the opponent is on a clock", Fid.APPROX, "MAIN2", true, "Armageddon",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Armageddon", c.ai); c.bf("Serra Angel", c.ai); c.bf("Baneslayer Angel", c.ai);
+                    c.bf("Mountain", 5, c.opp); c.bf("Grizzly Bears", c.opp); c.opp.setLife(10, null); }));
+        l.add(noPlay("FMC-armageddon", "no Armageddon when the opponent's creatures are ahead", Fid.APPROX, "MAIN2", true, "Armageddon",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Armageddon", c.ai); c.bf("Grizzly Bears", c.ai);
+                    c.bf("Mountain", 5, c.opp); c.bf("Serra Angel", c.opp); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(play("FMC-armageddon", "Armageddon when the AI's own lands are indestructible", Fid.APPROX, "MAIN2", true, "Armageddon",
+                c -> { c.bf("Plains", c.ai); c.bf("Darksteel Citadel", 3, c.ai); c.hand("Armageddon", c.ai); c.hand("Grizzly Bears", c.ai);
+                    c.bf("Mountain", 5, c.opp); c.hand("Serra Angel", c.opp); }));
         l.add(noPlay("12765", "a second Aether Vial next to one already in play", Fid.APPROX, M1, true, "Aether Vial",
                 c -> { c.bf("Mountain", c.ai); final Card v = c.bf("Aether Vial", c.ai); c.counters(v, CounterEnumType.CHARGE, 1); c.hand("Aether Vial", c.ai); }));
         l.add(noPlay("12766", "Aura on its creature while the opponent's Spellskite can redirect it", Fid.APPROX, M1, true, "Rancor",

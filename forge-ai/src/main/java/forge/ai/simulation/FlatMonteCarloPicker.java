@@ -1101,6 +1101,9 @@ public final class FlatMonteCarloPicker {
             return true; // a Planeswalker's ability: the rollouts weigh the loyalty and the effect against everything else
         }
         final PlayKind kind = playKind(sa);
+        if (kind == PlayKind.INTERACTION && MassRemoval.worthOffering(sa.getHostCard().getController(), sa)) {
+            return true; // a wipe that wins the board (or the game): the rollouts weigh it against holding
+        }
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
         }
