@@ -23,8 +23,6 @@ import forge.util.IgnoringXStream;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
@@ -46,9 +44,9 @@ public class RogueIO {
     public static final String SUFFIX_DATA = ".dat";
     /** Prefix for locked/default rogue runs */
     public static final String PREFIX_LOCKED = "LOCKED_";
-    /** Save directory for rogue runs */
+    /** Save directory for Rogue runs and meta progression. */
     public static final String ROGUE_SAVE_DIR =
-        ForgeConstants.USER_DIR + "rogue" + ForgeConstants.PATH_SEPARATOR;
+        ForgeConstants.USER_DIR + "rogue-commander" + ForgeConstants.PATH_SEPARATOR;
 
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
@@ -203,20 +201,6 @@ public class RogueIO {
             deleteRunFile(xmlSaveFile);
             return null;
         }
-
-        if (data.getSaveVersion() > RogueSaveMigration.currentVersion()) {
-            Logger.warn("Rogue run save is from a newer version: {}", xmlSaveFile);
-            return null;
-        }
-        if (data.getSaveVersion() < RogueSaveMigration.currentVersion()) {
-            try {
-                RogueSaveMigration.applyToRun(data);
-                saveMigrated(xmlSaveFile, file -> savePacked(getSerializer(false), data, file));
-            } catch (Exception e) {
-                Logger.error(e, "Error migrating Rogue run save: {}", xmlSaveFile);
-                return null;
-            }
-        }
         return data;
     }
 
@@ -227,26 +211,6 @@ public class RogueIO {
             RogueIO.savePacked(xStream, rd, getRogueFile(rd));
         } catch (final Exception ex) {
             throw new RuntimeException(ex);
-        }
-    }
-
-    @FunctionalInterface
-    interface SaveWriter {
-        void write(File file) throws IOException;
-    }
-
-    static void saveMigrated(final File file, final SaveWriter writer) throws IOException {
-        Path original = file.toPath();
-        Path backup = original.resolveSibling(file.getName() + ".pre-v" + RogueSaveMigration.currentVersion() + ".bak");
-        if (!Files.exists(backup)) {
-            Files.copy(original, backup);
-        }
-        Path temporary = Files.createTempFile(original.getParent(), file.getName(), ".tmp");
-        try {
-            writer.write(temporary.toFile());
-            Files.move(temporary, original, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-        } finally {
-            Files.deleteIfExists(temporary);
         }
     }
 

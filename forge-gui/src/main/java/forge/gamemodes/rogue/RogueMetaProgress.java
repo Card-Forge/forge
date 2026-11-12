@@ -40,8 +40,6 @@ public class RogueMetaProgress {
     private static final String META_PROGRESS_FILE = "meta_progress.dat";
     private static RogueMetaProgress instance;
 
-    private int saveVersion = RogueSaveMigration.currentVersion();
-
     // Per-commander tracking
     private Map<String, Integer> runsStartedPerCommander;
     private Map<String, Integer> runsWonPerCommander;
@@ -689,30 +687,6 @@ public class RogueMetaProgress {
         return aetherEffectRanks.getOrDefault(aetherEffect.getId(), 0);
     }
 
-    void capAetherEffectRank(AetherEffect aetherEffect, int maxRank) {
-        if (aetherEffectRanks == null) return;
-        Integer rank = aetherEffectRanks.get(aetherEffect.getId());
-        if (rank != null && rank > maxRank) {
-            aetherEffectRanks.put(aetherEffect.getId(), maxRank);
-        }
-    }
-
-    void retireAetherEffect(String id, int[] echoCosts) {
-        if (activeAetherEffects != null) {
-            activeAetherEffects.remove(id);
-        }
-        if (aetherEffectRanks == null) {
-            return;
-        }
-
-        Integer rank = aetherEffectRanks.remove(id);
-        if (rank != null) {
-            for (int i = 0; i < Math.min(rank, echoCosts.length); i++) {
-                totalEchoes += echoCosts[i];
-            }
-        }
-    }
-
     /**
      * Attempt to upgrade an Aetherwork to the next rank.
      * @return true if upgrade was successful, false if not enough echoes or already max rank
@@ -857,12 +831,6 @@ public class RogueMetaProgress {
 
     public long getTotalPlaytimeMillis() {
         return totalPlaytimeMillis;
-    }
-
-    void backfillTotalPlaytime() {
-        totalPlaytimeMillis = getRunHistory().stream()
-            .mapToLong(entry -> Math.max(0, entry.getRunTimeMillis()))
-            .sum();
     }
 
     public void addRunHistoryEntry(RogueRunHistoryEntry entry) {
@@ -1113,14 +1081,6 @@ public class RogueMetaProgress {
 
     // ==================== Persistence ====================
 
-    int getSaveVersion() {
-        return saveVersion;
-    }
-
-    void setSaveVersion(int version) {
-        saveVersion = version;
-    }
-
     private static File getMetaProgressFile() {
         return new File(RogueIO.ROGUE_SAVE_DIR, META_PROGRESS_FILE);
     }
@@ -1160,37 +1120,16 @@ public class RogueMetaProgress {
             return new RogueMetaProgress();
         }
 
-        RogueMetaProgress progress;
         try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(file.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
-            progress = (RogueMetaProgress) getSerializer().fromXML(reader);
+            return (RogueMetaProgress) getSerializer().fromXML(reader);
         } catch (Exception e) {
             Logger.error(e, "Error loading Rogue meta progress from {}, starting fresh", file);
             return new RogueMetaProgress();
         }
-
-        int savedVersion = progress.getSaveVersion();
-        if (savedVersion > RogueSaveMigration.currentVersion()) {
-            Logger.warn("Rogue meta progress is from a newer version: {}", file);
-            return progress;
-        }
-        if (savedVersion < RogueSaveMigration.currentVersion()) {
-            try {
-                RogueSaveMigration.applyToMetaProgress(progress);
-                RogueIO.saveMigrated(file, progress::savePacked);
-            } catch (Exception e) {
-                progress.setSaveVersion(savedVersion);
-                Logger.error(e, "Error migrating Rogue meta progress: {}", file);
-            }
-        }
-        return progress;
     }
 
     public void save() {
-        if (saveVersion != RogueSaveMigration.currentVersion()) {
-            Logger.warn("Cannot save Rogue meta progress with unsupported save version: {}", saveVersion);
-            return;
-        }
         File file = getMetaProgressFile();
         try {
             Files.createDirectories(file.toPath().getParent());
