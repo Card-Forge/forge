@@ -135,7 +135,14 @@ public class StackDescriptionSweepTest extends AITest {
                 addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
                 addCardToZone("Darksteel Relic", opp, ZoneType.Battlefield);
                 addCardToZone("Reanimate", opp, ZoneType.Graveyard);
+                addCardToZone("Grizzly Bears", opp, ZoneType.Graveyard);
+                addCardToZone("Island", opp, ZoneType.Battlefield);
+                addCardToZone("Pacifism", opp, ZoneType.Battlefield);
+                addCardToZone("Jace Beleren", opp, ZoneType.Battlefield);
                 addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+                addCardToZone("Island", ai, ZoneType.Battlefield);
+                addCardToZone("Darksteel Relic", ai, ZoneType.Battlefield);
+                addCardToZone("Grizzly Bears", ai, ZoneType.Graveyard);
                 addCardToZone("Reanimate", ai, ZoneType.Graveyard);
             }
             final Card card;
@@ -177,7 +184,12 @@ public class StackDescriptionSweepTest extends AITest {
                         continue;
                     }
                     triggers++;
-                    record(check(cardName, "trigger", sa, ai, opp, true), ok, todo, errors, byProblem);
+                    // what the stack shows for a trigger is the trigger's own text; the effect text is only read for the
+                    // "ABILITY" placeholder, so an effect that says nothing is fine there
+                    record(checkTrigger(cardName, t, sa, ai), ok, todo, errors, byProblem);
+                    if (t.hasParam("TriggerDescription") && t.getParam("TriggerDescription").contains("ABILITY")) {
+                        record(check(cardName, "trigger effect", sa, ai, opp, true), ok, todo, errors, byProblem);
+                    }
                 } catch (final RuntimeException e) {
                     record(threw(cardName, "trigger", e, true), ok, todo, errors, byProblem);
                 }
@@ -215,24 +227,40 @@ public class StackDescriptionSweepTest extends AITest {
     }
 
     /** Aims the ability at something the test game has, the opponent first. */
-    private static void pickTargets(final SpellAbility sa, final Player ai, final Player opp) {
+    private static boolean pickTargets(final SpellAbility sa, final Player ai, final Player opp) {
         if (!sa.usesTargeting()) {
-            return;
+            return true;
         }
         if (sa.canTarget(opp)) {
             sa.getTargets().add(opp);
-            return;
+            return true;
         }
         for (final Player p : Arrays.asList(opp, ai)) {
             for (final Card c : p.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard))) {
                 if (sa.canTarget(c)) {
                     sa.getTargets().add(c);
-                    return;
+                    return true;
                 }
             }
         }
         if (sa.canTarget(ai)) {
             sa.getTargets().add(ai);
+            return true;
+        }
+        return false;
+    }
+
+    /** The text the stack shows for a triggered ability: the trigger's description, with the effect where it says ABILITY. */
+    private Result checkTrigger(final String cardName, final Trigger t, final SpellAbility sa, final Player ai) {
+        try {
+            sa.setActivatingPlayer(ai);
+            // the "[Zone Changer: null]" tail lists what triggered it: there is nothing in the test game
+            final String text = new forge.game.trigger.WrappedAbility(t, sa, ai).getStackDescription(false)
+                    .replaceAll("(?:\\s*\\[[^\\]]*\\])+\\s*$", "");
+            final String line = cardName + " | trigger | \"" + text + "\"";
+            return new Result(line, text.isEmpty() ? "" : problems(text, cardName, String.valueOf(sa.getApi())), false);
+        } catch (final RuntimeException e) {
+            return threw(cardName, "trigger", e, true);
         }
     }
 
@@ -247,7 +275,14 @@ public class StackDescriptionSweepTest extends AITest {
         final String text;
         try {
             sa.setActivatingPlayer(ai);
-            pickTargets(sa, ai, opp);
+            for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+                sub.setActivatingPlayer(ai);
+                pickTargets(sub, ai, opp);
+            }
+            if (!pickTargets(sa, ai, opp)) {
+                // nothing in the test game to aim it at: the text would be the "no target" one, which says nothing
+                return new Result(cardName + " | " + kind + " " + sa.getApi() + " | no legal target in the test game", "", true);
+            }
             text = sa.getStackDescription();
         } catch (final RuntimeException e) {
             return threw(cardName, kind, e, trigger);
@@ -256,6 +291,17 @@ public class StackDescriptionSweepTest extends AITest {
         final String line = cardName + " | " + kind + " " + api + " | \"" + text + "\"";
         if (text == null) {
             return new Result(line, " [null description]", false);
+        }
+        if (EMPTY.matcher(text.replace(cardName, "~")).matches() && "None".equals(sa.getParam("StackDescription"))) {
+            return new Result(line, "", false); // the script says the spell shows nothing of its own
+        }
+        if (EMPTY.matcher(text.replace(cardName, "~")).matches() && (sa.hasParam("Defined") || sa.hasParam("Enchant"))) {
+            // "Defined$ Enchanted" and the like: the test card is not attached to anything
+            return new Result(line, "", true);
+        }
+        if (text.isBlank() && (sa.getApi() == null || kind.equals("trigger effect"))) {
+            // a land's mana ability or a keyword has no effect text, and a trigger's effect text is not what is shown
+            return new Result(line, "", false);
         }
         return new Result(line, problems(text, cardName, api), false);
     }

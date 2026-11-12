@@ -1144,7 +1144,9 @@ public class CardFactoryUtil {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
             sbTrig.append("ValidCard$ Card.Self+PromisedGift | Secondary$ True | TriggerDescription$ ");
-            sbTrig.append("Gift a ").append(giftDescription).append(" to ").append(card.getPromisedGift());
+            // the description brings its own article ("a card", "an Octopus", "a tapped Fish")
+            sbTrig.append("Gift ").append(giftDescription.matches("(?i)an? .*") ? "" : "a ").append(giftDescription)
+                    .append(" to ").append(card.getPromisedGift() == null ? "an opponent" : card.getPromisedGift());
 
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
             etbTrigger.setOverridingAbility(saGift);
@@ -1389,9 +1391,9 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            StringBuilder desc = new StringBuilder("Play Madness ");
+            StringBuilder desc = new StringBuilder("Play Madness");
             if (!"ManaCost".equals(manacost)) {
-                desc.append(ManaCostParser.parse(manacost)).append(" ");
+                desc.append(" ").append(ManaCostParser.parse(manacost));
             }
             desc.append(" - " + card.getDisplayName());
 
@@ -3601,7 +3603,7 @@ public class CardFactoryUtil {
 
             final StringBuilder sbStack = new StringBuilder();
             sbStack.append(card.getName()).append(" suspending for ");
-            sbStack.append(Lang.nounWithNumeral(k[1], "turn")).append(".)");
+            sbStack.append(Lang.nounWithNumeral(k[1], "turn")).append(".");
             suspend.setStackDescription(sbStack.toString());
 
             suspend.getRestrictions().setZone(ZoneType.Hand);

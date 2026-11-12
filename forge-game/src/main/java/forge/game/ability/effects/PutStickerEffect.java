@@ -36,9 +36,12 @@ public class PutStickerEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(sa.getActivatingPlayer()).append(" puts a ");
+        sb.append(sa.getActivatingPlayer()).append(" puts ");
         if (sa.hasParam("Kind")) {
-            sb.append(sa.getParam("Kind").toLowerCase()).append(" ");
+            final String kind = sa.getParam("Kind").toLowerCase();
+            sb.append(forge.util.Lang.startsWithVowel(kind) ? "an " : "a ").append(kind).append(" ");
+        } else {
+            sb.append("a ");
         }
         sb.append("sticker on ");
         if (sa.usesTargeting() || sa.hasParam("Defined")) {

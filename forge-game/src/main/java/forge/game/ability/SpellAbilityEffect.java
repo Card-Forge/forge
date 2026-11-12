@@ -237,7 +237,9 @@ public abstract class SpellAbilityEffect {
      * "It  gains" behind.
      */
     static String tidyDescription(final String text, final boolean isSubPart) {
-        String t = text.replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
+        String t = text.replaceAll(",{3,}", " ").replaceAll("(\\w)\\(s\\)", "$1s")
+                .replaceAll("(?<!\\.)\\.\\.(?!\\.)", ".").replaceAll("(?<=[a-z]{2}[.!?])(?=[A-Z][a-z]+ [a-z])", " ")
+                .replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
         return isSubPart ? t : t.stripTrailing();
     }
 

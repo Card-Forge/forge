@@ -67,7 +67,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
                 }
-                valid = validD.contains(" card") ? validD : validD + " " + valid;
+                valid = validD.matches("(?i).*\\bcards?$") ? validD : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {

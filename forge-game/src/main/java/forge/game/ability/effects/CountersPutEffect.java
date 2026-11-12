@@ -65,13 +65,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         sb.append(pronoun ? "they" : who).append(" ");
-        final String typeName = sa.hasParam("CounterType") ? CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase() : "";
+        final String typeName = sa.hasParam("CounterType") && !"ExistingCounter".equals(sa.getParam("CounterType"))
+                ? CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase() : "";
 
         final List<String> playerCounters = Arrays.asList("energy", "experience", "poison", "ticket");
         if (playerCounters.contains(typeName)) {
             sb.append(pronoun ? "get " : "gets ");
             sb.append(Lang.nounWithNumeralExceptOne(AbilityUtils.calculateAmount(card,
-                    sa.getParamOrDefault("CounterNum", "1"), sa), typeName + " counter"));
+                    sa.getParamOrDefault("CounterNum", "1"), sa), (typeName.isEmpty() ? "counter" : typeName + " counter")));
             sb.append(".");
             return sb.toString();
         }
@@ -91,7 +92,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.usesTargeting()) {
             final List<Card> targetCards = getTargetCards(sa);
             if (targetCards.isEmpty()) {
-                return sb.toString();
+                return "";
             }
         }
 
@@ -114,7 +115,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             sb.append("up to ");
         }
 
-        sb.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter"));
+        sb.append(Lang.nounWithNumeralExceptOne(amount, (typeName.isEmpty() ? "counter" : typeName + " counter")));
         sb.append(divAsChoose || divRandom ? " among " : " on ");
 
         // special handling for multiple Defined
@@ -125,7 +126,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         .replaceAll("[\\[\\]]", ""));
                 if (i + 1 < def.length) {
                     sb.append(" and ");
-                    sb.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter")).append(" on ");
+                    sb.append(Lang.nounWithNumeralExceptOne(amount, (typeName.isEmpty() ? "counter" : typeName + " counter"))).append(" on ");
                 }
             }
             // if use targeting we show all targets and corresponding counters
@@ -146,7 +147,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Choices")) {
             int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
-            String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
+            String what = sa.hasParam("ChoicesDesc") ? sa.getParam("ChoicesDesc") : Lang.getInstance().describeValidList(sa.getParam("Choices"));
             sb.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
             final List<Card> targetCards = getTargetCards(sa);

@@ -5,6 +5,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import java.util.List;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -20,7 +21,8 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
         // should update when adding effects for defined blocker
         sb.append("Reselect the defender of ");
-        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
+        final List<Card> targets = getTargetCards(sa);
+        sb.append(targets.isEmpty() ? "target creature" : Lang.joinHomogenous(targets)).append(".");
 
         return sb.toString();
     }

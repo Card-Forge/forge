@@ -52,6 +52,8 @@ public class StackDescriptionTest extends AITest {
         l.add(row("Crypt Incursion", 0, a("gains 3 life for each card"), a("gains 0 life")));
         l.add(row("Wildfire", 0, a("4 damage to each creature"), a("damage to Creature")));
         l.add(row("Tear Asunder", 0, a("Exile Darksteel Relic"), a("Exile\\.\\s*Exile", "CARDNAME")));
+        l.add(row("Wrath of God", 0, a("Destroy all creatures"), a("Destroy permanents", "OPTIONAL", "HIDDEN")));
+        l.add(row("Diabolic Edict", 0, a("sacrifices a creature"), a("OPTIONAL", "Sacrifices ")));
         l.add(row("Sleight of Hand", 0, a("one of them into their hand"), a("zero of them")));
         l.add(new Row("Witherbloom Command", -1, "DBMill", a("mills three cards", "land card"), a("Land\\.YouOwn", "Land\\.You Own", "CARDNAME")));
         l.add(new Row("Witherbloom Command", -1, "DBLoseLife", a("loses 2 life", "gains 2 life"), a("gains 2 life\\. .*gains 2 life")));

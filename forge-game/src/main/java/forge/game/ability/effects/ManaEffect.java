@@ -308,16 +308,14 @@ public class ManaEffect extends SpellAbilityEffect {
         sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " adds " : " add ");
         sb.append(toManaString(mana)).append(manaDesc).append(".");
         if (sa.hasParam("RestrictValid")) {
-            sb.append(" ");
             final String desc = sa.getDescription();
+            // the restriction is told in the card's own words; when they are not there it is left out
             if (desc.contains("Spend this") && desc.contains(".")) {
                 int i = desc.indexOf("Spend this");
-                sb.append(desc, i, desc.indexOf(".", i) + 1);
+                sb.append(" ").append(desc, i, desc.indexOf(".", i) + 1);
             } else if (desc.contains("This mana can't") && desc.contains(".")) { //for negative restrictions (Jegantha)
                 int i = desc.indexOf("This mana can't");
-                sb.append(desc, i, desc.indexOf(".", i) + 1);
-            } else {
-                sb.append("[failed to add RestrictValid to StackDesc]");
+                sb.append(" ").append(desc, i, desc.indexOf(".", i) + 1);
             }
         }
         return sb.toString();
