@@ -11,5 +11,5 @@ SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Exile | R
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
-SVar:X:Count$YouCastThisGameNotInStartingLibrary
+SVar:X:Count$YouCastThisGameNotInStartingDeck
 Oracle:Actualize — This spell costs {1} less to cast for each spell you've cast this game that wasn't from your starting deck.\nTrample\nWhenever Etali enters or attacks, conjure a random Dinosaur card into exile. You may cast that card this turn without paying its mana cost.

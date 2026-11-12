@@ -104,7 +104,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedMyLastTurn;
     private int numPowerSurgeLands;
     private int spellsCastThisGame;
-    private int spellsCastThisGameNotFromYourStartingLibrary;
+    private int spellsCastThisGameNotFromYourStartingDeck;
     private int spellsCastLastTurn;
     private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     private int investigatedThisTurn;
@@ -2395,7 +2395,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addSpellCastThisTurn(SpellAbility sp) {
         if (!cardsFromStartingDeck.contains(sp.getHostCard().getId())) {
-            spellsCastThisGameNotFromYourStartingLibrary++;
+            spellsCastThisGameNotFromYourStartingDeck++;
         }
         addSpellCastThisTurn();
     }
@@ -2410,12 +2410,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getSpellsCastThisGame() {
         return spellsCastThisGame;
     }
-    public final int getSpellsCastThisGameNotFromYourStartingLibrary() {
-        return spellsCastThisGameNotFromYourStartingLibrary;
+    public final int getSpellsCastThisGameNotFromYourStartingDeck() {
+        return spellsCastThisGameNotFromYourStartingDeck;
     }
     public final void resetSpellCastThisGame() {
         spellsCastThisGame = 0;
-        spellsCastThisGameNotFromYourStartingLibrary = 0;
+        spellsCastThisGameNotFromYourStartingDeck = 0;
     }
 
     public final int getLifeGainedByTeamThisTurn() {
