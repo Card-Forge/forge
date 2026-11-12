@@ -18,6 +18,7 @@ import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.CommanderOptions;
@@ -67,19 +68,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // General variables
     private GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
-    private final FLabel lblPlayers = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblPlayers") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblPlayers = new FLabel.Builder().icon(FSkinImage.PLAYERS).align(Align.center).build();
     private final FComboBox<Integer> cbPlayerCount;
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants frame and variables
-    private final FLabel lblVariants = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblVariants = new FLabel.Builder().icon(FSkinImage.PLANAR).align(Align.center).build();
     private final FComboBox<Object> cbVariants = new FComboBox<>();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblFormat") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblFormat = new FLabel.Builder().icon(FSkinImage.HDLIBRARY).align(Align.center).build();
     private final FComboBox<Object> cbFormat = new FComboBox<>();
 
     // Max games in a match frame and variables
-    private final FLabel lblGamesInMatch = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblGamesInMatch = new FLabel.Builder().icon(FSkinImage.DOCK_ALPHASTRIKE).align(Align.center).build();
     private final FComboBox<String> cbGamesInMatch = new FComboBox<>();
     private final GuiPrefBinders.ComboBox cbGamesInMatchBinder =
         new GuiPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch);
@@ -339,12 +340,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             int stretching = 0;
             for (end = first; end < fields.length; end++) {
                 // The match count never starts a row without the player count
-                final float needed = minWidth(labels[end], fields[end])
-                        + (fields[end] == cbPlayerCount ? minWidth(lblGamesInMatch, cbGamesInMatch) : 0);
+                final float needed = groupWidth(fields[end]) + (fields[end] == cbPlayerCount ? groupWidth(cbGamesInMatch) : 0);
                 if (end > first && fields[end] != cbGamesInMatch && used + needed > width) {
                     break;
                 }
-                used += minWidth(labels[end], fields[end]);
+                used += groupWidth(fields[end]);
                 if (stretches(fields[end])) {
                     stretching++;
                 }
@@ -352,7 +352,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             final float extra = stretching == 0 ? 0 : (width - used) / stretching;
             float x = PADDING;
             for (int i = first; i < end; i++) {
-                labels[i].setBounds(x, y, labels[i].getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+                labels[i].setBounds(x, y, fieldHeight, fieldHeight);
                 x += labels[i].getWidth();
                 fields[i].setBounds(x, y, minWidth(fields[i]) + (stretches(fields[i]) ? extra : 0), fieldHeight);
                 x += fields[i].getWidth() + PADDING / 2;
@@ -362,8 +362,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         playersScroll.setBounds(0, y, width, height - y);
     }
 
-    private float minWidth(final FLabel label, final FComboBox<?> field) {
-        return label.getAutoSizeBounds().width + minWidth(field) + PADDING;
+    // An icon label is as wide as the field is tall
+    private float groupWidth(final FComboBox<?> field) {
+        return field.getHeight() + minWidth(field) + PADDING;
     }
 
     private boolean stretches(final FComboBox<?> field) {
