@@ -34,7 +34,9 @@ public class StackDescriptionSweepTest extends AITest {
             names.add(pc.getName());
         }
         final List<String> findings = new ArrayList<>();
+        final List<String> skipped = new ArrayList<>();
         int abilities = 0;
+        int built = 0;
         Game game = null;
         Player ai = null;
         Player opp = null;
@@ -51,8 +53,11 @@ public class StackDescriptionSweepTest extends AITest {
             try {
                 card = addCardToZone(names.get(i), ai, ZoneType.Hand);
             } catch (final RuntimeException e) {
-                continue; // a card the test game cannot build (conspiracy, vanguard, ...)
+                // a card the test game cannot build (conspiracy, vanguard, ...): listed, not silently dropped
+                skipped.add(names.get(i) + " | " + e);
+                continue;
             }
+            built++;
             for (final SpellAbility sa : card.getAllSpellAbilities()) {
                 abilities++;
                 try {
@@ -76,12 +81,16 @@ public class StackDescriptionSweepTest extends AITest {
                 }
             }
         }
-        System.out.println("StackDescriptionSweepTest: " + abilities + " abilities, " + findings.size() + " with findings");
+        System.out.println("StackDescriptionSweepTest: " + built + " of " + names.size() + " unique cards built, " + skipped.size()
+                + " skipped, " + abilities + " abilities, " + findings.size() + " with findings");
         for (final String f : findings) {
             System.out.println("SWEEP  " + f);
         }
         try (PrintWriter w = new PrintWriter("target/stack-description-sweep.txt", "UTF-8")) {
             findings.forEach(w::println);
+        }
+        try (PrintWriter w = new PrintWriter("target/stack-description-sweep-skipped.txt", "UTF-8")) {
+            skipped.forEach(w::println);
         }
     }
 }
