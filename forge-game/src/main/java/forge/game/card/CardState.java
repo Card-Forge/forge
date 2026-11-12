@@ -60,6 +60,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
@@ -91,7 +92,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     // bumped after every change of replacementEffects (see getReplacementEffects)
     private int replacementEffectsVersion = 0;
     private volatile ReplacementEffectsCache replacementCacheRules = null;
-    private volatile ReplacementEffectsCache replacementCacheNoRules = null;
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
     private Map<String, SpellAbility> abilityForTrigger = Maps.newHashMap();
@@ -820,18 +820,15 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return changed;
     }
 
-    public FCollectionView<ReplacementEffect> getReplacementEffects() {
-        return getReplacementEffects(true);
-    }
     /**
      * Cached and re-validated on every read, like getStaticAbilities. Besides the stamps used there, the
      * hidden inputs (type flags, counters, ...) are evaluated on every read as a small bitmask and compared.
      */
-    public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
+    public FCollectionView<ReplacementEffect> getReplacementEffects() {
         final Object traits = FSnapshotTable.versionOf(card.getChangedCardTraits());
         final Object traitsByText = FSnapshotTable.versionOf(card.getChangedCardTraitsByText());
         if (traits == null || traitsByText == null) {
-            return buildReplacementEffects(rulesHost); // unknown table implementation: never cache
+            return buildReplacementEffects(); // unknown table implementation: never cache
         }
 
         CardState left = null;
@@ -845,10 +842,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         final int leftVersion = left == null ? -1 : left.replacementEffectsStamp();
         final int rightVersion = right == null ? -1 : right.replacementEffectsStamp();
         final int ownVersion = replacementEffectsStamp();
-        final int flags = replacementFlags(rulesHost);
+        final int flags = replacementFlags();
         final KeywordCollection keywords = cachedKeywords;
 
-        final ReplacementEffectsCache cache = rulesHost ? replacementCacheRules : replacementCacheNoRules;
+        final ReplacementEffectsCache cache = replacementCacheRules;
         if (cache != null && cache.traits == traits && cache.traitsByText == traitsByText
                 && cache.keywords == keywords && cache.flags == flags
                 && cache.ownVersion == ownVersion
@@ -857,14 +854,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
 
         // the stamps above were taken before building, so a change during the build is caught on the next read
-        final FCollection<ReplacementEffect> result = buildReplacementEffects(rulesHost);
+        final FCollection<ReplacementEffect> result = buildReplacementEffects();
         final ReplacementEffectsCache fresh = new ReplacementEffectsCache(result, traits, traitsByText, keywords,
                 flags, ownVersion, leftVersion, rightVersion);
-        if (rulesHost) {
-            replacementCacheRules = fresh;
-        } else {
-            replacementCacheNoRules = fresh;
-        }
+        replacementCacheRules = fresh;
         return result.shareCopy();
     }
 
@@ -874,24 +867,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     /** Everything besides the tables, lists and keywords that decides what buildReplacementEffects returns. */
-    private int replacementFlags(final boolean rulesHost) {
+    private int replacementFlags() {
         int flags = card.hasRemoveIntrinsic() ? 1 : 0; // LandTraitChanges
         final CardTypeView typeWithChanges = getTypeWithChanges(); // LandTraitChanges
         if (typeWithChanges.isPlaneswalker()) flags |= 2;
         if (typeWithChanges.isBattle()) flags |= 4;
         if (typeWithChanges.isSaga()) flags |= 8;
-        if (rulesHost) {
-            if (type.hasSubtype("Adventure")) flags |= 16;
-            if (type.hasSubtype("Omen")) flags |= 32;
-            // Card.updateReplacementEffects
-            if (card.getCounters(CounterEnumType.SHIELD) > 0) flags |= 64;
-            if (card.getCounters(CounterEnumType.STUN) > 0) flags |= 128;
-            if (card.getCounters(CounterEnumType.FINALITY) > 0) flags |= 256;
-        }
         return flags;
     }
 
-    private FCollection<ReplacementEffect> buildReplacementEffects(final boolean rulesHost) {
+    private FCollection<ReplacementEffect> buildReplacementEffects() {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -901,33 +886,45 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).replacementEffects);
         }
 
-        card.updateReplacementEffects(result, this, rulesHost);
+        card.updateReplacementEffects(result, this);
 
-        if (!rulesHost) {
+        return result;
+    }
+
+    public boolean hasRuleReplacementEffects() {
+        return type.hasSubtype("Adventure") || type.hasSubtype("Omen") || type.hasSubtype("Vengeance");
+    }
+
+    public Stream<ReplacementEffect> streamReplacementEffects() {
+        Stream<ReplacementEffect> result = getReplacementEffects().stream();
+
+        if (!hasRuleReplacementEffects()) {
             return result;
         }
+
+        Stream.Builder<ReplacementEffect> sb = Stream.builder();
 
         // below are global rules
         if (type.hasSubtype("Adventure")) {
             if (this.adventureRep == null) {
                 adventureRep = CardFactoryUtil.setupAdventureAbility(this);
             }
-            result.add(adventureRep);
+            sb.add(adventureRep);
         }
         if (type.hasSubtype("Omen")) {
             if (this.omenRep == null) {
                 omenRep = CardFactoryUtil.setupOmenAbility(this);
             }
-            result.add(omenRep);
+            sb.add(omenRep);
         }
         if (type.hasSubtype("Vengeance")) {
             if (this.vengeanceRep == null) {
                 vengeanceRep = CardFactoryUtil.setupVengeanceAbility(this);
             }
-            result.add(vengeanceRep);
+            sb.add(vengeanceRep);
         }
 
-        return result;
+        return Stream.concat(result, sb.build());
     }
 
     /** Immutable holder so the cached list and the stamps it was built from are published together. */
@@ -957,22 +954,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         final boolean changed = replacementEffects.add(replacementEffect);
         replacementEffectsVersion++;
         return changed;
-    }
-
-    public final boolean hasReplacementEffect(final ReplacementEffect re) {
-        return getReplacementEffects().contains(re);
-    }
-    public final boolean hasReplacementEffect(final int id) {
-        return getReplacementEffect(id) != null;
-    }
-
-    public final ReplacementEffect getReplacementEffect(final int id) {
-        for (final ReplacementEffect r : getReplacementEffects()) {
-            if (id == r.getId()) {
-                return r;
-            }
-        }
-        return null;
     }
 
     public ReplacementEffect getLoyaltyRep() {
