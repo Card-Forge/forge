@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.MulliganDefs;
 import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameType;
