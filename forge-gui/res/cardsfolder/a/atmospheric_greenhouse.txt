@@ -2,7 +2,7 @@ Name:Atmospheric Greenhouse
 ManaCost:4 G
 Types:Artifact Spacecraft
 PT:5/4
-K:Station:8
+K:Station
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounters | TriggerDescription$ When this Spacecraft enters, put a +1/+1 counter on each creature you control.
 SVar:TrigCounters:DB$ PutCounterAll | CounterType$ P1P1 | CounterNum$ 1 | ValidCards$ Creature.YouCtrl
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying & Trample | Description$ STATION 8+ Flying, trample

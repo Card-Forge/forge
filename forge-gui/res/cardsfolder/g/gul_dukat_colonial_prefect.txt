@@ -1,0 +1,13 @@
+Name:Gul Dukat, Colonial Prefect
+ManaCost:4 B B B
+Types:Legendary Creature Cardassian Rogue
+PT:6/6
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ RepeatOpps | TriggerDescription$ At the beginning of each end step, each opponent loses life equal to the life that player lost this turn. You gain life equal to the life lost this way. (Damage causes loss of life.)
+SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:X:PlayerCountRemembered$LifeLostThisTurn
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+SVar:AFLifeLost:Number$0
+DeckHas:Ability$LifeGain
+Oracle:Menace\nAt the beginning of each end step, each opponent loses life equal to the life that player lost this turn. You gain life equal to the life lost this way. (Damage causes loss of life.)

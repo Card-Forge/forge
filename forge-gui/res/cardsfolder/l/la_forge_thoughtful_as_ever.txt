@@ -1,0 +1,9 @@
+Name:La Forge, Thoughtful as Ever
+ManaCost:3 U
+Types:Legendary Creature Human Artificer
+PT:2/4
+A:AB$ Token | Cost$ T | TokenAmount$ X | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You | SpellDescription$ For each permanent you control that you've put a counter on this turn, create a 1/1 blue Faerie creature token with flying.
+SVar:X:Count$Valid Permanent.YouCtrl+countersReceivedThisTurn_GE1_Any_You
+DeckHas:Ability$Token & Type$Faerie
+DeckNeeds:Ability$Counters
+Oracle:{T}: For each permanent you control that you've put a counter on this turn, create a 1/1 blue Faerie creature token with flying.

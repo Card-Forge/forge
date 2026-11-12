@@ -37,7 +37,8 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : getStackDescription(sa);
 
-            if (!activator.getController().confirmAction(sa, null, message, null)) {
+            final Card cardToShow = defined.size() == 1 ? defined.get(0) : null;
+            if (!activator.getController().confirmAction(sa, null, message, cardToShow, null)) {
                 return;
             }
         }

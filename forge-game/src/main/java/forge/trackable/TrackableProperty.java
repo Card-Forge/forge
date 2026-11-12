@@ -93,12 +93,8 @@ public enum TrackableProperty {
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
     PreparedSpell(TrackableTypes.CardViewType),
-
     Augment(TrackableTypes.CardViewType),
-    WasDestroyed(TrackableTypes.BooleanType),
-    NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+
     MarkedColors(TrackableTypes.ColorSetType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
@@ -170,6 +166,7 @@ public enum TrackableProperty {
     SleeveArtKey(TrackableTypes.StringType),
     SleeveArtOffset(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
+    SharedTeam(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
@@ -211,8 +208,6 @@ public enum TrackableProperty {
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
     HasAvailableActions(TrackableTypes.BooleanType),
-
-    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
 
     NumManaShards(TrackableTypes.IntegerType),
 
@@ -263,7 +258,6 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
     Object(TrackableTypes.ObjectType, FreezeMode.IgnoresFreeze),
-    RevealedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {

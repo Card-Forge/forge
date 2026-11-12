@@ -77,7 +77,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType::getTranslatedName), destination.getTranslatedName());
             }
 
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
+            final Card cardToShow = cards.size() == 1 ? cards.get(0) : null;
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, cardToShow, null)) {
                 return;
             }
         }

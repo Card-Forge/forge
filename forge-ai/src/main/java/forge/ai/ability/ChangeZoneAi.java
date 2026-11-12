@@ -338,8 +338,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             CardCollectionView list = p.getCardsIn(origin);
 
             // remove cards that won't be seen if library can't be searched
-            if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
+            if (origin.contains(ZoneType.Library)) {
+                CardCollectionView searchable = ai.getSearchableLibrary(sa, p);
+                list = CardLists.filter(list, c -> !c.isInZone(ZoneType.Library) || (searchable != null && searchable.contains(c)));
             }
 
             if (type != null && p == ai) {
@@ -411,8 +412,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't use fetching to top of library/graveyard before main2
+        // (a tutor that only reveals the cards and hands them on with a follow-up, Gifts Ungiven, is a tutor to hand)
+        final boolean revealsForPile = sa.hasParam("RememberChanged") && sa.getSubAbility() != null;
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases") && !revealsForPile) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
@@ -452,12 +455,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // make sure this will actually do something:
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
-        if (tgt != null && tgt.canTgtPlayer()) {
+        if (tgt != null && tgt.canTgtPlayer() && !sa.getTargets().isTargetingAnyPlayer()) { // a player already chosen (the naming spells) stays
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else if (!isCurse && sa.canTarget(aiPlayer)) {
                 sa.getTargets().add(aiPlayer);
+            } else if ("Targeted".equals(sa.getParam("Chooser")) && sa.canTarget(opp)) {
+                sa.getTargets().add(opp); // the targeted opponent only chooses (Gifts Ungiven's piles): the cards are still the AI's
             } else {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
@@ -623,6 +628,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
+    /** The best card of the list that the AI can cast with the mana of its next turn, a land when it has none in hand. */
+    private static Card nearTermPileCard(final Player ai, final CardCollection list) {
+        int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
+        final boolean landInHand = ai.getCardsIn(ZoneType.Hand).anyMatch(CardPredicates.LANDS);
+        if (landInHand) {
+            mana++;
+        }
+        final int nearTermMana = mana + 1;
+        final CardCollection cheap = CardLists.filter(list, c -> c.getCMC() <= nearTermMana && (!c.isLand() || !landInHand));
+        return cheap.isEmpty() ? null : ComputerUtilCard.getBestAI(cheap);
+    }
+
     /**
      * Some logic for picking a creature card from a list.
      * @param list
@@ -639,7 +656,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return null;
         }
 
-        if (ai.getTurn() <= 3) {
+        {
+            // a creature the AI can cast with its next land is worth more than a bigger one it cannot (Eladamri's Call
+            // with four lands in play fetches the 4-drop, not Avacyn); with mana for everything the best one still wins
             int manaSources = ComputerUtilMana.getAvailableManaEstimate(ai, false);
             if (CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
                 manaSources++;
@@ -670,6 +689,43 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
+    /** The target comes back with -1/-1 counters that take all its toughness (Persist on a 1/1). */
+    private static boolean diesToItsOwnMinusCounters(final SpellAbility sa) {
+        if (!"M1M1".equals(sa.getParam("WithCountersType"))) {
+            return false;
+        }
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+        for (final Card c : sa.getTargets().getTargetCards()) {
+            if (c.getNetToughness() - amount <= 0 && !c.hasKeyword(Keyword.PERSIST) && !c.hasKeyword(Keyword.UNDYING)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A spell that returns a creature card with -1/-1 counters (Persist) when every creature card it could return dies to
+     * them: there is nothing worth the spell, however the rollouts like the enter-the-battlefield trigger (#4122).
+     */
+    public static boolean onlyReturnsCreaturesThatDie(final Player ai, final SpellAbility sa) {
+        if (sa == null || sa.getApi() != ApiType.ChangeZone || !"M1M1".equals(sa.getParam("WithCountersType"))
+                || !"Battlefield".equals(sa.getParam("Destination")) || !sa.usesTargeting()) {
+            return false;
+        }
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+        boolean any = false;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Graveyard)) {
+            if (!sa.canTarget(c)) {
+                continue;
+            }
+            any = true;
+            if (c.getNetToughness() - amount > 0 || c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING)) {
+                return false;
+            }
+        }
+        return any;
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -685,6 +741,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (destination == ZoneType.Battlefield && diesToItsOwnMinusCounters(sa)) {
+                // Persist on a 1/1: it comes back with a -1/-1 counter and is gone again (#4122)
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
             }
         } else {
             // non-targeted retrieval
@@ -771,7 +832,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("SurvivalOfTheFittest")) {
-            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
         } else if (aiLogic.equals("BeforeCombat")) {
@@ -1070,7 +1131,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
+                if (!immediately && (!game.getPhaseHandler().isPlayerNextTurn(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                         && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                         && !ComputerUtil.activateForCost(sa, ai)) {
@@ -1501,6 +1562,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
+        if (destination == null) {
+            return fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+        // an opponent choosing between cards revealed from outside the game (Extrapolate the Impossible, Wish-like
+        // effects with a chooser) hands over the worse one
+        if (player.isOpponentOf(decider) && ZoneType.Hand.equals(destination) && origin.contains(ZoneType.Sideboard)) {
+            return ComputerUtilCard.getWorstAI(fetchList);
+        }
         List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         String position = sa.getParamOrDefault("LibraryPosition", null);
         // Focus on the keycards I don't already have access to
@@ -1520,6 +1589,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             keycardFound = withKeyCard.getFirst();
             break;
+        }
+
+        if (keycardFound == null && player == decider && player.getController() instanceof PlayerControllerAi
+                && (ZoneType.Hand.equals(destination) || ZoneType.Library.equals(destination) && "0".equals(position))) {
+            // no key card named by the deck file: the deck plan (combo, commander, ramp) knows what is missing,
+            // for the card taken into the hand and for the one put on top of the library (Vampiric Tutor)
+            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player)
+                    .tutorPick(player, fetchList);
         }
 
         if (sa.hasParam("AILogic")) {
@@ -1638,7 +1715,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Does AI need a land?
             // The logic here seems wrong if the decider isn't the same as the player
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
+            if (c == null && origin.contains(ZoneType.Library) && sa.hasParam("RememberChanged") && sa.getSubAbility() != null) {
+                // a pile for the opponent to split (Gifts Ungiven): the opponent leaves the worst two, so the first card
+                // taken is one the AI can use at once, whatever the others are
+                c = nearTermPileCard(decider, fetchList);
+            }
+            if (c == null && !hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
                     !hand.anyMatch(crd -> ComputerUtilMana.hasEnoughManaSourcesToCast(crd.getFirstSpellAbility(), decider))) {
                 c = basicManaFixing(decider, fetchList);
             }

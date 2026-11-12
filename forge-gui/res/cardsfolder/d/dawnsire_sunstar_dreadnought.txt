@@ -2,7 +2,7 @@ Name:Dawnsire, Sunstar Dreadnought
 ManaCost:5
 Types:Legendary Artifact Spacecraft
 PT:20/20
-K:Station:20
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE10_CHARGE | AddTrigger$ AttackTrig | Description$ STATION 10+ Whenever you attack, NICKNAME deals 100 damage to up to one target creature or planeswalker.
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE20_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 20+ Flying
 SVar:AttackTrig:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, NICKNAME deals 100 damage to up to one target creature or planeswalker.

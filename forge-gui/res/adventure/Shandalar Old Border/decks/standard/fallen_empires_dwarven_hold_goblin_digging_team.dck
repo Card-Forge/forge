@@ -1,0 +1,26 @@
+[metadata]
+Name=Goblin Digging Team
+[Main]
+15 Mountain|3ED
+2 Dwarven Ruins|FEM
+4 Forgotten Cave|ONS
+3 Goblin Burrows|ONS
+4 Goblin Digging Team|DRK
+4 Goblin Digging Team|7ED
+4 Goblin Masons|UDS
+1 Tunnel|3ED
+1 Burrowing|3ED
+2 Goblin Grenadiers|WTH
+2 Goblin Spelunkers|USG
+2 Goblin Spelunkers|7ED
+2 Rock Jockey|SCG
+3 Goblin Caves|DRK
+2 Goblin Shrine|DRK
+1 Cave-In|MMQ
+3 Orcish Mine|HML
+1 Goblin War Strike|PO2
+2 Pit Trap|ICE
+2 Lay Waste|ONS
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Goblin Digging Team|7ED

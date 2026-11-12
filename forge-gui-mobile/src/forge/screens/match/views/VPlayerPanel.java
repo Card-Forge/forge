@@ -634,6 +634,59 @@ public class VPlayerPanel extends FContainer {
         return phaseIndicator;
     }
 
+    /**
+     * Screen rectangles the "How to Play" tutorial outlines for this panel. Each method adds nothing when the part is
+     * not on screen (a folded-away column, a hidden tab), so the tutorial simply shows no outline for it.
+     */
+    public void addTutorialBadgeBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        addVisibleBounds(out, avatar, lblLife);
+    }
+
+    /** The zone tabs, including the mana pool, as one rectangle. */
+    public void addTutorialTabBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        final com.badlogic.gdx.math.Rectangle union = new com.badlogic.gdx.math.Rectangle();
+        boolean any = false;
+        for (InfoTab tab : tabs) {
+            if (!tab.isVisible() || tab.getWidth() <= 0 || tab.getHeight() <= 0 || !tab.isTabShown()) { continue; }
+            if (!any) { union.set(tab.screenPos); any = true; }
+            else { union.merge(tab.screenPos); }
+        }
+        if (any) { out.add(union); }
+    }
+
+    /** The phase button and the phase stops, as far as they are showing. */
+    public void addTutorialPhaseBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        addVisibleBounds(out, phaseButton, phaseIndicator);
+    }
+
+    /** The open zone display of the hand, or nothing when the hand is not the open zone. */
+    public void addTutorialHandBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        final InfoTabZone hand = zoneTabs.get(ZoneType.Hand);
+        if (hand != null && selectedTab == hand) {
+            addVisibleBounds(out, hand.getDisplayArea());
+        }
+    }
+
+    /** Opens the hand if another zone is open, so it can be pointed at. */
+    public void showHandForTutorial() {
+        final InfoTabZone hand = zoneTabs.get(ZoneType.Hand);
+        if (hand != null && selectedTab != hand) {
+            setSelectedTab(hand);
+        }
+    }
+
+    private static void addVisibleBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out,
+                                         final forge.toolbox.FDisplayObject... objects) {
+        final com.badlogic.gdx.math.Rectangle union = new com.badlogic.gdx.math.Rectangle();
+        boolean any = false;
+        for (forge.toolbox.FDisplayObject o : objects) {
+            if (o == null || !o.isVisible() || o.getWidth() <= 0 || o.getHeight() <= 0) { continue; }
+            if (!any) { union.set(o.screenPos); any = true; }
+            else { union.merge(o.screenPos); }
+        }
+        if (any) { out.add(union); }
+    }
+
     public VAvatar getAvatar() {
         return avatar;
     }
@@ -1357,7 +1410,6 @@ public class VPlayerPanel extends FContainer {
         for (InfoTab tab : tabs) {
             tab.setDisplayBounds(boxLeft + inset, boxTop + inset, boxWidth - 2 * inset, boxHeight - 2 * inset);
         }
-        field.setCommandZoneWidth(0);
         if (isCompactAlternate()) {
             final float stops = phaseIndicator.getOpenWidth();
             final boolean rightSide = isCompactRight();
@@ -1370,8 +1422,15 @@ public class VPlayerPanel extends FContainer {
             field.setBounds(x, 0, regionWidth, height);
         }
         final boolean covers = selectedTab != null && isBoxDisplay(selectedTab.getDisplayArea());
-        final float cover = Math.max(covers ? boxWidth : 0f, commandProgress > 0 ? cmdWidth : 0f); //snapped, so the rows don't re-flow every animation frame
-        field.setEndPadding(Math.max(0f, field.getLeft() + field.getWidth() - (x + regionWidth - cover)));
+        //The rows end where the boxes begin, so the boxes are never covered by field cards and nothing of them is clipped: the card zone
+        //box sits over the outer row, the command zone box over the inner one. Both use the full width of their box, so the rows
+        //don't re-flow every animation frame.
+        final float fieldRight = field.getLeft() + field.getWidth();
+        final float boxEdge = x + regionWidth;
+        final float outerCover = covers ? Math.max(0f, fieldRight - (boxEdge - boxWidth - COMPACT_ZONE_GAP)) : 0f;
+        final float innerCover = commandProgress > 0 ? Math.max(0f, fieldRight - (boxEdge - cmdWidth - COMPACT_ZONE_GAP)) : 0f;
+        field.setEndPadding(0f);
+        field.setZoneCovers(outerCover, innerCover);
         field.setFieldModifier(0);
     }
 
@@ -1638,7 +1697,7 @@ public class VPlayerPanel extends FContainer {
 
         private void update() {
             int delta = player.getLife() - life;
-            player.setAvatarLifeDifference(player.getAvatarLifeDifference() + delta);
+            avatar.addLifeDifference(delta);
             if (delta != 0) {
                 life = player.getLife();
                 lifeStr = String.valueOf(life);

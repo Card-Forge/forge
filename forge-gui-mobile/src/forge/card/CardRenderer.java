@@ -1031,7 +1031,32 @@ public class CardRenderer {
 
     private static final int GL_BLEND = GL20.GL_BLEND;
 
+    // libGDX crashes with index -1 when the string is non-empty but none of its characters exist in the font
+    // and the font has no missing-glyph fallback. Likely source is the counter name from getCounterOnCardDisplayName(),
+    // for example a translated name or odd characters in a font that can’t draw them
+    private static String drawable(BitmapFont font, String text) {
+        final BitmapFont.BitmapFontData data = font.getData();
+        StringBuilder sb = null;
+        for (int i = 0; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (data.hasGlyph(c)) {
+                if (sb != null)
+                    sb.append(c);
+            }
+            else if (sb == null) {
+                sb = new StringBuilder(text.length());
+                sb.append(text, 0, i);
+            }
+        }
+        return sb == null ? text : sb.toString();
+    }
+
     private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, int horizontalAlignment) {
+        if (font == null || text == null)
+            return;
+        text = drawable(font, text);
+        if (text.isEmpty())
+            return;
         if (color.a < 1) { // enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }

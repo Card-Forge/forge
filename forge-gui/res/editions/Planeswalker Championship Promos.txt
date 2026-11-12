@@ -51,5 +51,5 @@ ScryfallCode=PWCS
 2026-2 R Into the Flood Maw @Kaeru DX
 2026-3 M The Wandering Rescuer @Hisashi Momose
 2026-4 R Twitching Doll @Tomoyuki Mizufune
-2026-05 R Voice of Victory @tokiwata
+2026-5 R Voice of Victory @tokiwata
 2026-6 R Strategic Betrayal @Amayagido

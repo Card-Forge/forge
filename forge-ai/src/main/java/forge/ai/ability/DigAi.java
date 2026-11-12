@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
+import forge.ai.simulation.DeckPlan;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -78,7 +79,7 @@ public class DigAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if ((!game.getPhaseHandler().getNextTurn().equals(ai)
+        if ((!game.getPhaseHandler().isPlayerNextTurn(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
             && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
             && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
@@ -152,6 +153,22 @@ public class DigAi extends SpellAbilityAi {
                 }
             }
             return null;
+        }
+
+        // For an ordinary self-dig that puts a card from the AI's library into its hand, prefer a missing
+        // combo/commander/ramp piece when the deck plan has a concrete opinion. Keep special AILogic paths
+        // (e.g. DigForCreature and EmulateScry) and other zones/players on their existing choices.
+        if (logic.isEmpty()
+                && sa.getActivatingPlayer() == ai
+                && relatedPlayer == ai
+                && "Library".equalsIgnoreCase(sa.getParamOrDefault("SourceZone", "Library"))
+                && "Hand".equalsIgnoreCase(sa.getParamOrDefault("DestinationZone", "Hand"))
+                && ai.getController() instanceof PlayerControllerAi) {
+            final DeckPlan plan = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai);
+            final Card planned = plan.tutorPick(ai, valid);
+            if (planned != null) {
+                return planned;
+            }
         }
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai) && !"ChooseBestForOpponent".equals(logic)) {

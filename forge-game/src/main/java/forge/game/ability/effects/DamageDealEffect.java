@@ -179,7 +179,9 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         if (sa.hasParam("OptionalDecider")) {
             Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
-            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", dmg, tgts), null)) {
+            final Card cardToShow = tgts.size() == 1 && tgts.get(0) instanceof Card ? (Card) tgts.get(0) : null;
+            if (decider != null && !decider.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", dmg, tgts), cardToShow, null)) {
                 return;
             }
         }

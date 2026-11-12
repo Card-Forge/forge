@@ -4,7 +4,7 @@ Types:Creature Wall
 PT:1/3
 K:Defender
 K:Kicker:1 W
-T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ BarricadePumped | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters with a +1/+1 counter on it and with "CARDNAME can attack as though it didn't have defender."
+R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ BarricadePumped | ReplacementResult$ Updated | Description$ If CARDNAME was kicked, it enters with a +1/+1 counter on it and with "CARDNAME can attack as though it didn't have defender."
 SVar:BarricadePumped:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | staticAbilities$ CanAttack | Duration$ Permanent
 SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.Self | Description$ CARDNAME can attack as though it didn't have defender.
