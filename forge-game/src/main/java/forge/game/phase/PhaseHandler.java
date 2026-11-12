@@ -77,6 +77,7 @@ public class PhaseHandler implements IHasForgeLog {
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
+    private final List<CardCollection> attackDeclarationsThisTurn = new ArrayList<>();
     private int nMainsThisTurn = 0;
     private int nEndOfTurnsThisTurn = 0;
     private int planarDiceSpecialActionThisTurn = 0;
@@ -478,6 +479,7 @@ public class PhaseHandler implements IHasForgeLog {
 
                     nUpkeepsThisTurn = 0;
                     nCombatsThisTurn = 0;
+                    attackDeclarationsThisTurn.clear();
                     nMainsThisTurn = 0;
                     nEndOfTurnsThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
@@ -711,6 +713,11 @@ public class PhaseHandler implements IHasForgeLog {
             runs.add(null);
         }
         runs.addAll(attackingPlayers);
+        // the triggers only run once the stack unfreezes, so they get the attacks made earlier this turn as they were before this one
+        final List<CardCollection> attackersBefore = new ArrayList<>(attackDeclarationsThisTurn);
+        if (!combat.getAttackers().isEmpty()) {
+            attackDeclarationsThisTurn.add(new CardCollection(CardCopyService.getLKICopyList(combat.getAttackers(), Maps.newHashMap())));
+        }
         for (final Player attacker : runs) {
             final CardCollection attackers = attacker == null ? combat.getAttackers() : CardLists.filterControlledBy(combat.getAttackers(), attacker);
             List<GameEntity> attackedTarget = new ArrayList<>();
@@ -730,6 +737,7 @@ public class PhaseHandler implements IHasForgeLog {
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attackers, attackers);
+            runParams.put(AbilityKey.AttackersBefore, attackersBefore);
             runParams.put(AbilityKey.AttackingPlayer, attacker == null ? playerTurn : attacker);
             runParams.put(AbilityKey.AttackedTarget, attackedTarget);
             if (team) {
