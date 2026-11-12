@@ -1,10 +1,16 @@
 package forge.ai;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.WeakHashMap;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -12,12 +18,14 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -90,22 +98,22 @@ public final class PersistLoopAi {
         if (!c.canReceiveCounters(CounterEnumType.M1M1)) {
             return true;
         }
-        for (final Card host : ai.getCardsIn(ZoneType.Battlefield)) {
-            for (final ReplacementEffect re : host.getReplacementEffects()) {
-                if (re.getMode() != ReplacementType.AddCounter || !"M1M1".equals(re.getParam("ValidCounterType"))
-                        || !re.hasParam("ValidCard")
-                        || !c.isValid(re.getParam("ValidCard").split(","), host.getController(), host, null)) {
-                    continue;
-                }
-                final SpellAbility rsa = re.ensureAbility();
-                if (rsa == null || rsa.getApi() != ApiType.ReplaceCounter) {
-                    continue;
-                }
-                final String amount = rsa.getParamOrDefault("Amount", "");
-                final String x = host.getSVar(amount);
-                if ("0".equals(amount) || (x != null && x.contains("CounterNum/Minus."))) {
-                    return true;
-                }
+        // the -1/-1 counter persist would put on it, asked to the replacement handler
+        final Map<Optional<Player>, Multiset<CounterType>> counters = new HashMap<>();
+        counters.put(Optional.of(c.getOwner()), HashMultiset.create(List.of(CounterEnumType.M1M1)));
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterMap, counters);
+        for (final ReplacementEffect re : ai.getGame().getReplacementHandler().getReplacementList(
+                ReplacementType.AddCounter, repParams, ReplacementLayer.Other)) {
+            final SpellAbility rsa = re.ensureAbility();
+            if (rsa == null || rsa.getApi() != ApiType.ReplaceCounter) {
+                continue;
+            }
+            final String amount = rsa.getParamOrDefault("Amount", "");
+            final String x = re.getHostCard().getSVar(amount);
+            if ("0".equals(amount) || (x != null && x.contains("CounterNum/Minus."))) {
+                return true;
             }
         }
         return false;
