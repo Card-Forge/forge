@@ -30,7 +30,9 @@ import forge.util.IterableUtil;
 import forge.util.MyRandom;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -623,7 +625,7 @@ public class CountersPutAi extends CountersAi {
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
                 // e.g. Power-Up abilities: use it to survive or win combat
-                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())
+                if (!hasSacCost && !(ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())
                         && !ComputerUtilCard.shouldPumpCard(ai, sa, cards.get(0), amount, amount, Lists.newArrayList())) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
@@ -1115,7 +1117,7 @@ public class CountersPutAi extends CountersAi {
                 || (combat != null && (((combat.isBlocked(source) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, source, combat)) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))
                 || (combat.isBlocking(source) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))));
 
-        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
+        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai)))) {
             return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
         }
 
@@ -1155,8 +1157,19 @@ public class CountersPutAi extends CountersAi {
         int maxCMC = Aggregates.max(ownLib, Card::getCMC);
         int optimalCMC = 0;
         int curAmount = 0;
+        // Several Aether Vials aimed at the same mana value are one Vial's worth: each one aims at a value that no other
+        // Vial of the AI is already on (or counting towards), so that together they cover more of the deck
+        final Set<Integer> taken = new HashSet<>();
+        for (final Card other : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (other != source && other.getName().equals(source.getName())) {
+                taken.add(other.getCounters(CounterEnumType.CHARGE));
+            }
+        }
         // Assume the AI knows its deck list and realizes what it has left in its library. Could be improved to make this less cheat-y.
         for (int cmc = numCtrs; cmc <= maxCMC; cmc++) {
+            if (taken.contains(cmc)) {
+                continue;
+            }
             int numPerCMC = CardLists.filter(ownLib, CardPredicates.hasCMC(cmc)).size();
             if (numPerCMC >= curAmount) {
                 curAmount = numPerCMC;

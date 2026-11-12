@@ -49,6 +49,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 import forge.util.Visitor;
 
 public class ReplacementHandler {
@@ -68,11 +69,13 @@ public class ReplacementHandler {
     }
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
-        final CardCollection preList = new CardCollection();
+        // only the ETB (Moved to battlefield) path needs a prelist; avoid allocating one for every check
+        final boolean etbCheck = ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination));
+        final CardCollection preList = etbCheck ? new CardCollection() : null;
         Card affectedLKI = null;
         Card affectedCard = null;
 
-        if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination))) {
+        if (etbCheck) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
             final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
@@ -109,7 +112,19 @@ public class ReplacementHandler {
 
         // Round up Static replacement effects
         game.forEachCardInGame(crd -> {
-            Card c = preList.get(crd);
+            Card c = preList == null ? crd : preList.get(crd);
+
+            // only when not prelist
+            boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
+
+            // most cards have no replacement effects: skip them before the zone lookup and iterator creation.
+            // The collection is fetched once and reused below (it can be rebuilt on every call).
+            final Card firstCard = c;
+            final FCollectionView<ReplacementEffect> firstEffects = c.getReplacementEffects();
+            if (noLKIstate && firstEffects.isEmpty()) {
+                return true;
+            }
+
             Zone cardZone = game.getZoneOf(c);
 
             // all tap/untap/produce mana replacements are active from the battlefield or the
@@ -119,15 +134,13 @@ public class ReplacementHandler {
             // (performance mode only, in case a custom card wants one active from elsewhere)
             if (Spell.isPerformanceMode()
                     && (event == ReplacementType.Tap || event == ReplacementType.Untap
-                            || event == ReplacementType.ProduceMana)
+                    || event == ReplacementType.ProduceMana)
                     && cardZone != null
                     && cardZone.getZoneType() != ZoneType.Battlefield
                     && cardZone.getZoneType() != ZoneType.Command) {
                 return true;
             }
 
-            // only when not prelist
-            boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
             if (!noLKIstate) {
                 Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
                 if (lastState != c) {
@@ -140,18 +153,21 @@ public class ReplacementHandler {
                 }
             }
 
-            for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
-                        && (layer == null || replacementEffect.getLayer() == layer)
-                        && replacementEffect.modeCheck(event, runParams)
-                        && !possibleReplacers.contains(replacementEffect)
-                        && replacementEffect.zonesCheck(cardZone)
-                        && replacementEffect.requirementsCheck(game)
-                        && replacementEffect.canReplace(runParams)) {
-                    possibleReplacers.add(replacementEffect);
-                    if (layer == ReplacementLayer.CantHappen) {
+            // the collection is a cached FCollection (a List): index it to avoid allocating an Iterator per card
+            final FCollectionView<ReplacementEffect> effects = c == firstCard ? firstEffects : c.getReplacementEffects();
+            if (effects instanceof List<?>) {
+                @SuppressWarnings("unchecked")
+                final List<ReplacementEffect> list = (List<ReplacementEffect>) effects;
+                for (int i = 0; i < list.size(); i++) {
+                    if (!collectReplacer(list.get(i), event, runParams, layer, cardZone, possibleReplacers)) {
                         return false;
                     }
+                }
+                return true;
+            }
+            for (final ReplacementEffect replacementEffect : effects) {
+                if (!collectReplacer(replacementEffect, event, runParams, layer, cardZone, possibleReplacers)) {
+                    return false;
                 }
             }
             return true;
@@ -177,6 +193,29 @@ public class ReplacementHandler {
         }
 
         return possibleReplacers;
+    }
+
+    /**
+     * Adds the replacement effect to possibleReplacers if it applies.
+     * @return false if the scan must stop (a CantHappen effect was found), true to continue
+     */
+    private boolean collectReplacer(final ReplacementEffect replacementEffect, final ReplacementType event,
+        final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Zone cardZone,
+        final List<ReplacementEffect> possibleReplacers) {
+        if (!replacementEffect.hasRun()
+                && (layer == null || replacementEffect.getLayer() == layer)
+                && replacementEffect.modeCheck(event, runParams)
+                && (hasRun.isEmpty() || !hasRun.contains(replacementEffect))
+                && !possibleReplacers.contains(replacementEffect)
+                && replacementEffect.zonesCheck(cardZone)
+                && replacementEffect.requirementsCheck(game)
+                && replacementEffect.canReplace(runParams)) {
+            possibleReplacers.add(replacementEffect);
+            if (layer == ReplacementLayer.CantHappen) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
@@ -262,18 +301,18 @@ public class ReplacementHandler {
             }
             ReplacementResult result = run(event, params);
             switch (result) {
-            case NotReplaced:
-            case Updated: {
-                runParams.putAll(params);
-                // effect was updated
-                runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
-                break;
-            }
-            default:
-                // effect was replaced with something else
-                res = result;
-                runParams.put(AbilityKey.ReplacementResult, result);
-                break;
+                case NotReplaced:
+                case Updated: {
+                    runParams.putAll(params);
+                    // effect was updated
+                    runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
+                    break;
+                }
+                default:
+                    // effect was replaced with something else
+                    res = result;
+                    runParams.put(AbilityKey.ReplacementResult, result);
+                    break;
             }
         }
 
@@ -502,39 +541,39 @@ public class ReplacementHandler {
 
         // Update damage map and prevent map
         switch (res) {
-        case NotReplaced:
-            break;
-        case Updated:
-            // check if this is still the affected card or player
-            if (target.equals(newTarget)) {
-                damageMap.put(source, target, newDamage - damage);
-            } else if (apiType == ApiType.ReplaceSplitDamage) {
-                damageMap.put(source, target, -newDamage);
-            }
-            if (!target.equals(newTarget)) {
-                if (apiType != ApiType.ReplaceSplitDamage) {
-                    damageMap.remove(source, target);
+            case NotReplaced:
+                break;
+            case Updated:
+                // check if this is still the affected card or player
+                if (target.equals(newTarget)) {
+                    damageMap.put(source, target, newDamage - damage);
+                } else if (apiType == ApiType.ReplaceSplitDamage) {
+                    damageMap.put(source, target, -newDamage);
                 }
-                damageMap.put(source, newTarget, newDamage);
-            }
-            if (apiType == ApiType.ReplaceDamage) {
-                preventMap.put(source, target, damage - newDamage);
-                // Record prevented amount
-                runParams.put(AbilityKey.PreventedAmount, damage - newDamage);
-            }
-            break;
-        default:
-            damageMap.remove(source, target);
-            if (apiType == ApiType.ReplaceDamage ||
-                    (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) ||
-                    mapParams.containsKey("PreventionEffect")) {
-                preventMap.put(source, target, damage);
-                // Record prevented amount
-                runParams.put(AbilityKey.PreventedAmount, damage);
-            }
-            if (apiType == ApiType.ReplaceSplitDamage) {
-                damageMap.put(source, newTarget, newDamage);
-            }
+                if (!target.equals(newTarget)) {
+                    if (apiType != ApiType.ReplaceSplitDamage) {
+                        damageMap.remove(source, target);
+                    }
+                    damageMap.put(source, newTarget, newDamage);
+                }
+                if (apiType == ApiType.ReplaceDamage) {
+                    preventMap.put(source, target, damage - newDamage);
+                    // Record prevented amount
+                    runParams.put(AbilityKey.PreventedAmount, damage - newDamage);
+                }
+                break;
+            default:
+                damageMap.remove(source, target);
+                if (apiType == ApiType.ReplaceDamage ||
+                        (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) ||
+                        mapParams.containsKey("PreventionEffect")) {
+                    preventMap.put(source, target, damage);
+                    // Record prevented amount
+                    runParams.put(AbilityKey.PreventedAmount, damage);
+                }
+                if (apiType == ApiType.ReplaceSplitDamage) {
+                    damageMap.put(source, newTarget, newDamage);
+                }
         }
 
         // Put run params into executed param list so this replacement effect won't handle them again

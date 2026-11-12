@@ -1,0 +1,9 @@
+Name:Blood-Sport Champion
+ManaCost:1 B
+Types:Creature Klingon Warrior
+PT:2/2
+K:Kicker:2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, if it was kicked, other creatures you control gain deathtouch until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other | KW$ Deathtouch
+Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nDeathtouch\nWhen this creature enters, if it was kicked, other creatures you control gain deathtouch until end of turn.

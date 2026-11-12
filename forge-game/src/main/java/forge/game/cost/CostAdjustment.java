@@ -367,7 +367,7 @@ public class CostAdjustment {
             }
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                if (c.tap(true, sa, payer)) tapped.add(c);
+                if (c.tap(sa, payer)) tapped.add(c);
             }
         }
         if (!tapped.isEmpty()) {

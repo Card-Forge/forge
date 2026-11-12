@@ -35,7 +35,7 @@ Let's break our card down:
  - K - A Keyword that gives our creature an ability. 
  - Oracle - The actual text that appears on that card. 
 
-For a reference of possible fields and their descriptions please see the [Card Scripting API](Card-scripting-API) document. Note that maintaining an up to date list of every ability of every Magic Card ever printed is not feasable. The API is meant to serve as a guide and includes most common used information. 
+For a reference of possible fields and their descriptions please see the [Card Scripting API](Card-scripting-API) document. Note that maintaining an up to date list of every ability of every Magic Card ever printed is not feasible. The API is meant to serve as a guide and includes most common used information. 
 
 3. Add Card to a Set
 
@@ -60,11 +60,11 @@ Speaking of which - our card doesn't have any artwork. Let's fix that.
 
 4. Add Card Image
 
-Open your Card Images folder. Find the code for the set you added your new card to and open the corrosponding subfolder. For us this will be:
+Open your Card Images folder. Find the code for the set you added your new card to and open the corresponding subfolder. For us this will be:
 
 > C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/cards/PDCI
 
-Add your card image in the folder. Ther are various online tools to create custom cards. For the purposes of the guide you can use this image:
+Add your card image in the folder. There are various online tools to create custom cards. For the purposes of the guide you can use this image:
 
 <img src="https://github.com/user-attachments/assets/55363e68-0232-42e2-a1f7-8971686119e6" width="250"/>
 
@@ -140,7 +140,7 @@ Oracle:Haste\nWhenever Goblin Card Guide deals damage to an opponent, draw a car
 Let's take a look at our changes:
  - T:Mode$ DamageDone - Trigger when Damage is Done.
  - ValidSource$ Card.Self - The source of the trigger. "Self" means our our card must be the source of the damage for the trigger to occur.
- - ValidTarget$ Opponent - The target of the trigger. "Oppenent" means our oppenent must receive damage for the trigger to occur.
+ - ValidTarget$ Opponent - The target of the trigger. "Opponent" means our opponent must receive damage for the trigger to occur.
  - TriggerZones$ Battlefield - Means the card must be on the battlefield for the trigger to occur.
  - Execute$ TrigDraw - What happens then the trigger occurs - in this case trigger a Draw effect.
  - SVar:TrigDraw:DB$ Draw - A String Variable used by the script. This one takes the Triggered Draw (TrigDraw) and tells the script to draw a card. "DB$ Draw" means "Drawback" "Draw".* 

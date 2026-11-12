@@ -46,6 +46,8 @@ final class SpellAbilityChoiceCopier {
             if (!sourceAbility.usesTargeting()) {
                 continue;
             }
+            // A copied ability can still hold the original game's targets; drop them before mapping.
+            destinationAbility.resetTargets();
             for (GameObject sourceTarget : sourceAbility.getTargets()) {
                 GameObject destinationTarget = gameObjectMapper.apply(sourceTarget);
                 destinationAbility.getTargets().add(destinationTarget);

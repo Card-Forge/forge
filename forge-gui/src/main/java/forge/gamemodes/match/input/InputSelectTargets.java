@@ -11,12 +11,14 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.gamemodes.match.Selection;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableObject;
 import forge.util.*;
 
 import java.util.ArrayList;
@@ -79,8 +81,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 valid.add(p);
             }
         }
-        return new Selection(new ArrayList<>(CardView.getCollection(choices)), initialMin, initialMax,
-                new ArrayList<>(PlayerView.getCollection(valid)), TargetingProgress.chosenTargets(sa));
+        final List<TrackableObject> offered = new ArrayList<>(PlayerView.getCollection(valid));
+        final List<TrackableObject> chosen = TargetingProgress.chosenTargets(sa);
+        // spells on the stack that are valid Card targets: make their stack entries tappable
+        for (final SpellAbilityStackInstance si : getController().getGame().getStack()) {
+            final SpellAbility onStack = si.getSpellAbility();
+            final Card host = onStack.getHostCard();
+            if (!onStack.isSpell() || host == null || !choices.contains(host)) { continue; }
+            offered.add(si.getView());
+            if (targets.contains(host)) {
+                chosen.add(si.getView());
+            }
+        }
+        return new Selection(new ArrayList<>(CardView.getCollection(choices)), initialMin, initialMax, offered, chosen, List.of());
     }
 
     @Override
@@ -320,6 +333,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean selectAbility(final SpellAbility ab) {
+        final Card host = ab == null ? null : ab.getHostCard();
+        if (isFinished() || ab == null || !ab.isSpell()) { return false; }
+        if (host == null || !choices.contains(host)) { return false; }
+        return onCardSelected(host, null, null);
     }
 
     @Override

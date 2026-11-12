@@ -503,7 +503,7 @@ public final class QuestUtilCards {
                 // Unopened product based on format of the cards?
                 questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate,
                         questController.getAllAllowedCards().filter(questController.getFormat().getFilterPrinted())
-                                .toList()).get());
+                                .collect(Collectors.toList())).get());
             }
         }
     }

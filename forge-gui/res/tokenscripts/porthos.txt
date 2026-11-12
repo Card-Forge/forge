@@ -1,0 +1,6 @@
+Name:Porthos
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Dog
+PT:1/1
+Oracle:

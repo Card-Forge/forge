@@ -1175,7 +1175,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_GENERIC), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
                     } else {
                         String deckImageKey = "";
-                        PaperCard coverCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
+                        PaperCard coverCard = dp.getCoverCard();
                         if (coverCard != null)
                             deckImageKey = coverCard.getImageKey(false);
 

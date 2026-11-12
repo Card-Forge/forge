@@ -87,7 +87,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
                 if (hasParam("ValidCounterType") && !ct.equals(CounterType.getType(getParam("ValidCounterType")))) {
                     continue;
                 }
-                if (!runParams.containsKey(AbilityKey.InternalTriggerTable) || affected.canReceiveCounters(ct, runParams)) {
+                if (!runParams.containsKey(AbilityKey.Destination) || affected.canReceiveCounters(ct, runParams)) {
                     return true;
                 }
             }

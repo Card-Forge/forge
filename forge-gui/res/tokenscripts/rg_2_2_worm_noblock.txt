@@ -1,0 +1,7 @@
+Name:Worm Token
+ManaCost:no cost
+Colors:red,green
+Types:Creature Worm
+PT:2/2
+S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ This token can't block.
+Oracle:This token can't block.

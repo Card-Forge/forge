@@ -3,7 +3,6 @@ package forge.screens.home.sanctioned;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -158,22 +157,14 @@ public class SleeveSelector extends FDialog {
             return;
         }
         final String key = chosen.card.getImageKey(false);
-        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
-                FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
-        library.put(key, chosen.offset); // overwrite any prior framing for this art
-        FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
-        FModel.getPreferences().save();
+        SleeveArt.remember(key, chosen.offset);
         resultArtKey = key;
         resultOffset = chosen.offset;
         setVisible(false);
     }
 
     private void removeCardArt(final String key, final FLabel lbl) {
-        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
-                FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
-        library.remove(key);
-        FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
-        FModel.getPreferences().save();
+        SleeveArt.forget(key);
         pnlCardArt.remove(lbl);
         pnlCardArt.revalidate();
         pnlCardArt.repaint();

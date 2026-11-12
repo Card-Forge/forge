@@ -25,6 +25,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
+import forge.screens.home.DraftPicksSelector;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 
@@ -113,7 +114,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         // Detect commander draft: human deck has a Commander section with cards
-        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains("CommanderDraft");
+        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains(BoosterDraft.COMMANDER_DRAFT_TAG);
         final GameType effectiveGameType = isCommanderDraft ? GameType.CommanderDraft : gameType;
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
@@ -222,7 +223,7 @@ public enum CSubmenuDraft implements ICDoc {
         if (poolType == null) { return; }
 
         final BoosterDraft draft = BoosterDraft.createDraft(poolType);
-        if (draft == null) { return; }
+        if (draft == null || !DraftPicksSelector.showDialog(draft)) { return; }
 
         final CEditorDraftingProcess draftController = new CEditorDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         draftController.showGui(draft);

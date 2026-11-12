@@ -1,5 +1,7 @@
 package forge.interfaces;
 
+import java.util.List;
+
 public interface IDevModeCheats {
 
     void setCanPlayUnlimitedLands(boolean canPlayUnlimitedLands0);
@@ -11,6 +13,9 @@ public interface IDevModeCheats {
     void dumpGameState();
 
     void setupGameState();
+
+    /** Sets up the game from the lines of a game state. A browser player cannot use the host's file dialog, so the state arrives as pasted or uploaded text. */
+    void setupGameState(List<String> lines);
 
     void tutorForCard();
 
@@ -80,6 +85,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void setupGameState() {
+        }
+        @Override
+        public void setupGameState(final List<String> lines) {
         }
         @Override
         public void setViewAllCards(final boolean canViewAll) {

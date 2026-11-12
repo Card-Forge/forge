@@ -84,7 +84,7 @@ public enum DeckFormat {
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
-    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
+    Brawl      ( Range.is(99), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {
@@ -687,6 +687,53 @@ public enum DeckFormat {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
+    }
+
+    /** Without legality checks any creature or planeswalker may command, except in signature spell formats. */
+    public boolean isAllowedCommander(CardRules rules, boolean enforceLegality) {
+        if (isLegalCommander(rules)) {
+            return true;
+        }
+        return !enforceLegality && !hasSignatureSpell() && (rules.canBeCreature() || rules.getType().isPlaneswalker());
+    }
+
+    /** Without legality checks any two allowed commanders may command together. */
+    public boolean isAllowedPartnership(CardRules a, CardRules b, boolean enforceLegality) {
+        if (a.canBePartnerCommanders(b)) {
+            return !enforceLegality || isLegalCommander(a) && isLegalCommander(b);
+        }
+        return !enforceLegality && isAllowedCommander(a, false) && isAllowedCommander(b, false);
+    }
+
+    /** The deck's only commander, if the card may join it as a partner. */
+    public PaperCard getPartnerableCommander(Deck deck, PaperCard card, boolean enforceLegality) {
+        // Oathbreaker partners would need to track whose signature spell is whose
+        if (hasSignatureSpell()) {
+            return null;
+        }
+        List<PaperCard> commanders = deck.getCommanders();
+        if (commanders.size() != 1) {
+            return null;
+        }
+        PaperCard commander = commanders.get(0);
+        if (commander.getName().equals(card.getName())) {
+            return null;
+        }
+        return isAllowedPartnership(commander.getRules(), card.getRules(), enforceLegality) ? commander : null;
+    }
+
+    /**
+     * @param partnerOf the commander the card joins, or null when it replaces the current commander
+     * @return the warning to confirm before placing the card, or null if the placement is legal
+     */
+    public String getIllegalCommanderWarning(PaperCard card, PaperCard partnerOf) {
+        if (partnerOf != null && !partnerOf.getRules().canBePartnerCommanders(card.getRules())) {
+            return Localizer.getInstance().getMessage("lblConfirmIllegalPartner", card.getName(), partnerOf.getName());
+        }
+        if (hasSignatureSpell() || isLegalCommander(card.getRules())) {
+            return null;
+        }
+        return Localizer.getInstance().getMessage("lblConfirmIllegalCommander", card.getName());
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {

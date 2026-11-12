@@ -339,6 +339,11 @@ public class DeckProxy implements InventoryItem {
         return highestRarity;
     }
 
+    /** The card whose art stands for the deck: its first commander, else its card with the highest mana value. */
+    public PaperCard getCoverCard() {
+        return getDeck().getCommanders().isEmpty() ? getHighestCMCCard() : getDeck().getCommanders().get(0);
+    }
+
     public PaperCard getHighestCMCCard() {
         PaperCard key = null;
         Map<PaperCard, Integer> keyCMC = new HashMap<>(64);
@@ -748,6 +753,14 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveCommanderDecks(final NetDeckArchiveCommander category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Commander", GameType.Commander, decks, "", category, null);
         }
         return decks;
     }

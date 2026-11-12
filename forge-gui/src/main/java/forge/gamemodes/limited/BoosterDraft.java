@@ -23,6 +23,7 @@ import forge.card.DraftOptions;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
@@ -54,7 +55,11 @@ public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
     public static final int N_PLAYERS = 8;
+    public static final List<DraftOptions.DoublePick> PICK_RULES = List.of(
+            DraftOptions.DoublePick.NEVER, DraftOptions.DoublePick.FIRST_PICK, DraftOptions.DoublePick.ALWAYS);
     public static final String FILE_EXT = ".draft";
+    /** Marks the human deck of a Commander draft, so the deck editor and match setup treat it as one. */
+    public static final String COMMANDER_DRAFT_TAG = "CommanderDraft";
 
     int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
@@ -161,8 +166,7 @@ public class BoosterDraft implements IBoosterDraft {
                 // log isn't shipped over the wire. Custom/Chaos/Import paths can still
                 // smuggle CNS cards in — fix those when the underlying issues are resolved.
                 for (final CardBlock b : storage) {
-                    if (b.getCntBoostersDraft() > 0) {
-                        if (forNetwork && b.getName().contains("Conspiracy")) continue;
+                    if (isDraftable(b, forNetwork)) {
                         blocks.add(b);
                     }
                 }
@@ -180,11 +184,11 @@ public class BoosterDraft implements IBoosterDraft {
 
                 String combo = sets.get(0);
                 if (sets.size() > 1) {
-                    final int nPacks = block.getCntBoostersDraft();
-                    if (nPacks == 3 && sets.size() < 4) {
-                        combo = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseSetCombination"), getSetCombos(sets));
+                    final List<String> presets = presetCombos(block, sets);
+                    if (!presets.isEmpty()) {
+                        combo = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseSetCombination"), presets);
                     } else {
-                        combo = choosePackByPack(sets, nPacks);
+                        combo = choosePackByPack(sets, block.getCntBoostersDraft());
                     }
 
                     if (combo == null) {
@@ -282,6 +286,16 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
         return sets;
+    }
+
+    /** Whether a block can be drafted. A network draft leaves out Conspiracy blocks, for the reasons in the TODO in generateProduct. */
+    public static boolean isDraftable(final CardBlock block, final boolean forNetwork) {
+        return block.getCntBoostersDraft() > 0 && !(forNetwork && block.getName().contains("Conspiracy"));
+    }
+
+    /** The set combinations offered for a block of these sets, or none when each pack's set is chosen in turn. */
+    public static List<String> presetCombos(final CardBlock block, final List<String> sets) {
+        return block.getCntBoostersDraft() == 3 && sets.size() > 1 && sets.size() < 4 ? getSetCombos(sets) : List.of();
     }
 
     private void setupFull() {
@@ -519,6 +533,41 @@ public class BoosterDraft implements IBoosterDraft {
         return this.doublePickDuringDraft;
     }
 
+    /** The pick rule the chosen set specifies at this pod size, for marking and preselecting it. */
+    public DraftOptions.DoublePick getDefaultPicks(int podSize) {
+        return this.doublePickDuringDraft == null ? DraftOptions.DoublePick.NEVER : this.doublePickDuringDraft.resolve(podSize);
+    }
+
+    /** Asks for the pick rule with the set's own marked and preselected. Returns false if cancelled. */
+    public boolean choosePicks() {
+        final DraftOptions.DoublePick defaultPicks = getDefaultPicks(this.podSize);
+        final DraftOptions.DoublePick chosen = SGuiChoose.oneOrNone(
+                Localizer.getInstance().getMessage("lblDraftPicksPrompt"), PICK_RULES, defaultPicks,
+                rule -> markSetDefault(picksLabel(rule), rule == defaultPicks));
+        if (chosen == null) {
+            return false;
+        }
+        setDoublePick(chosen);
+        return true;
+    }
+
+    /** Display name for a resolved pick rule. */
+    public static String picksLabel(DraftOptions.DoublePick picks) {
+        final Localizer localizer = Localizer.getInstance();
+        return switch (picks == null ? DraftOptions.DoublePick.NEVER : picks) {
+            case FIRST_PICK -> localizer.getMessage("lblDraftPicksFirst");
+            case ALWAYS -> localizer.getMessage("lblDraftPicksAlways");
+            default -> localizer.getMessage("lblDraftPicksOne");
+        };
+    }
+
+    /** Mark the entry the chosen set specifies, so a player can see what it was designed for. */
+    public static String markSetDefault(String label, boolean isDefault) {
+        return isDefault
+                ? Localizer.getInstance().getMessage("lblDraftSetDefaultSuffix", label)
+                : label;
+    }
+
     /**
      * True when the pick rule gives this player another card from the pack they just
      * picked from. Call after {@link LimitedPlayer#draftCard} has counted the pick.
@@ -733,6 +782,25 @@ public class BoosterDraft implements IBoosterDraft {
     @Override
     public LimitedPlayer getHumanPlayer() {
         return this.localPlayer;
+    }
+
+    /** Builds the finished draft as a deck group called name. Every deck carries its player's draft notes. */
+    public DeckGroup toDeckGroup(final String name) {
+        final Deck[] computer = getComputerDecks();
+        final LimitedPlayer[] opponents = getOpposingPlayers();
+        for (int i = 0; i < computer.length; i++) {
+            computer[i].setDraftNotes(opponents[i].getSerializedDraftNotes());
+        }
+        final LimitedPlayer human = getHumanPlayer();
+        final Deck humanDeck = (Deck) human.getDeck().copyTo(name);
+        humanDeck.setDraftNotes(human.getSerializedDraftNotes());
+        if (isCommanderDraft) {
+            humanDeck.getTags().add(COMMANDER_DRAFT_TAG);
+        }
+        final DeckGroup group = new DeckGroup(name);
+        group.setHumanDeck(humanDeck);
+        group.addAiDecks(computer);
+        return group;
     }
 
     @Override

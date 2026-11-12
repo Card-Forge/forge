@@ -87,6 +87,11 @@ public interface IGuiGame {
     }
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
+    /** Updates buttons while explicitly identifying whether Cancel represents Undo. */
+    default void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1, boolean undoAvailable) {
+        updateButtons(owner, label1, label2, enable1, enable2, focus1);
+    }
+
     /** Plays a coin flip animation and blocks until it finishes. No-op by default. */
     default void showCoinFlip(boolean heads, String caption, boolean waitForTap) {}
     default void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {}
@@ -132,8 +137,6 @@ public interface IGuiGame {
     }
     default void updateCards(Iterable<CardView> cards) {}
     default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
-
-    void updateRevealedCards(TrackableCollection<CardView> collection);
 
     default void refreshCardDetails(Iterable<CardView> cards) {}
     default void refreshField() {}
@@ -277,12 +280,9 @@ public interface IGuiGame {
     default boolean canPickStackTargets() { return false; }
     boolean isSelecting();
 
-    void setWeaklySelectable(final Iterable<CardView> cards);
-    void clearWeaklySelectable();
-
     /**
-     * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how
-     * to display them. Unrelated to {@link #updateRevealedCards}, which records the match's reveal history.
+     * Cards revealed to the player, until {@link #hideRevealedCards()}. The GUI chooses how to display them, and may
+     * keep them in its reveal history.
      */
     default void showRevealedCards(Iterable<CardView> cards) {}
     default void hideRevealedCards() {}

@@ -1273,9 +1273,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         else
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                     }
-                    else {
-                        if (cardPrice != null)
-                            drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
+                    else if (cardPrice != null) {
+                        drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
                     }
                 }
                 // spire colors
@@ -1325,7 +1324,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (deckProxy.getDeck().isEmpty()) {
                             g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.RED, selected);
                         } else {
-                            deckCover = CardRenderer.getCardArt(deckProxy.getDeck().getCommanders().isEmpty() ? deckProxy.getHighestCMCCard() : deckProxy.getDeck().getCommanders().get(0));
+                            deckCover = CardRenderer.getCardArt(deckProxy.getCoverCard());
                             if (deckCover != null) {
                                 g.drawDeckBox(deckCover, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                             } else {

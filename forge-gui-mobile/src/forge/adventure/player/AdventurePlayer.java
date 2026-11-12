@@ -317,6 +317,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Boolean isFemale() {
         return isFemale;
     }
@@ -1402,10 +1406,16 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         ItemData item = ItemListData.getItem(name);
         if (item == null)
             return false;
+        if (item.unique && hasItem(name))
+            return false;
         inventoryItems.add(item);
         if (updateEvent)
             AdventureQuestController.instance().updateItemReceived(item);
         return true;
+    }
+
+    public boolean canObtainItem(ItemData item) {
+        return item != null && !(item.unique && hasItem(item.name));
     }
 
     public void removeAllQuestItems(){

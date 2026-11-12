@@ -1,0 +1,12 @@
+Name:Constable Odo
+ManaCost:3 WU WU
+Types:Legendary Creature Shapeshifter Detective
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBInvestigate
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature an opponent controls. Put two stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | CounterType$ STUN | CounterNum$ 2
+SVar:DBInvestigate:DB$ Investigate | Num$ 2 | SpellDescription$ Investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters|Token
+Oracle:When Constable Odo enters, choose one —\n• Tap target creature an opponent controls. Put two stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\n• Investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

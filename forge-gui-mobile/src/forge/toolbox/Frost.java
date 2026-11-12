@@ -2,10 +2,12 @@ package forge.toolbox;
 
 import com.badlogic.gdx.graphics.Color;
 
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.screens.match.views.VPlayerPanel;
 import forge.util.Utils;
 
@@ -39,7 +41,8 @@ public final class Frost {
      * A frosted button face in the theme colour, like the Start button: a glossy gradient pill with a darker edge.
      * Hovering lights it up (brighter fill and edge, a white sheen); pressing darkens it.
      */
-    public static void drawButton(Graphics g, float w, float h, boolean hover, boolean pressed) {
+    private static FSkinFont skinFont = null;
+    public static void drawButton(Graphics g, float w, float h, boolean hover, boolean pressed, boolean enabled, String text) {
         final float radius = Utils.scale(2);//Math.min(h * 0.32f, Utils.scale(14));
         final float e = Math.max(1f, h * 0.05f);
         final float k = pressed ? 1.8f : hover ? 1.22f : 1f;
@@ -50,6 +53,11 @@ public final class Frost {
         g.fillGradientRect(accentShade(0.8f * k, 0f), accentShade(0.45f * k, 0.55f), true, inset, e + ih * 0.55f, w - 2 * inset, ih * 0.45f);
         if (hover && !pressed) {
             g.fillRoundRect(new Color(1f, 1f, 1f, 0.10f), e, e, w - 2 * e, h - 2 * e, Math.max(0f, radius - e));
+        }
+        if (text != null) {
+            if (skinFont == null)
+                skinFont = FSkinFont.forHeight(h / 1.5f);
+            g.drawText(text, skinFont, enabled ? Frost.TEXT : Frost.TEXT_DIM, 0, 0, w, h, false, Align.center, true);
         }
     }
 
