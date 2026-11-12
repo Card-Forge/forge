@@ -1,0 +1,13 @@
+Name:Reverend Mother Jessica
+ManaCost:2 U
+Types:Legendary Creature Human Noble Advisor
+PT:2/2
+K:Prowess
+K:Prowess
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TapOneEach | TriggerDescription$ Whenever CARDNAME attacks, for each opponent, tap up to one target creature that player controls with lesser power and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TapOneEach:DB$ Tap | ValidTgts$ Creature.OppCtrl+powerLEX | ValidTgtsDesc$ creature an opponent controls with lesser power | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)\nWhenever Reverend Mother Jessica attacks, for each opponent, tap up to one target creature that player controls with lesser power and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
