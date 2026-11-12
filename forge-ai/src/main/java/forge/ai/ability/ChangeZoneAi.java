@@ -1079,9 +1079,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     return true;
                 }
-                // blink logic: get my own permanents back or blink permanents with ETB effects
+                // blink logic: get my own permanents back or blink permanents with ETB effects and not blink card with oblivion ring effects
                 if (blink) {
-                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false)));
+                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken()
+                            && c.getOwner().equals(ai)
+                            && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false))
+                            && !(c.getController().equals(ai) && c.hasSVar("OblivionRing")));
                     if (!blinkTargets.isEmpty()) {
                         CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
                         // prefer post-combat unless targeting opponent's stuff or part of another ability
