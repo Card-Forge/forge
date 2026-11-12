@@ -10,6 +10,15 @@ To interact with the player, objects needs to be added to the Objects layer.
 
 Objects templates are stored in the "obj" folder, but are not necessary. 
 Impotent are the types of the object and his properties.  
+
+## Map properties
+
+`dungeonEffect` duel effect for every enemy in the map. The top level goes to the enemies and `opponent` goes to the player. A dialog shows it when the player enters a map with enemies.  
+`ignoreGlobalEffect` true to skip the plane's `globalEffect` in this map's duels.  
+`ignoreBiomeEffect` true to skip the effect of the biome the map is in.  
+All three carry over to the next maps of the same point of interest until a map sets them again.  
+
+See [Duel effect layers](Configure-Planes.md#duel-effect-layers) for how the effects stack.
  
 ## Object types
 
@@ -19,7 +28,9 @@ If the player win, the enemy will be removed from the map and the player will ge
 If the player loose, then the player will move 1 step back and receive the standard penalty.  
 Loot is also defined as enemy without a deck, then the player will receive the reward right away.
 Properties:  
-`enemy` name of the enemies
+`enemy` name of the enemies  
+`effect` duel effect for this enemy. Replaces the `effect` from the enemy's data.  
+`ignoreGlobalEffect`, `ignoreBiomeEffect`, `ignoreDungeonEffect` true to skip that layer in duels with this enemy. Each replaces the same field from the enemy's data.
 
 # shop
 Will spawn an shop on the map. On collide the player will enter the shop.

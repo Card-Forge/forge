@@ -1025,7 +1025,7 @@ public final class GameActionUtil {
         ability.resetOnceResolved();
         payment.refundPayment();
 
-        game.getStack().clearFrozen();
+        game.getStack().setFrozen(false);
         game.getTriggerHandler().clearWaitingTriggersFrom(waitingMark);
     }
 

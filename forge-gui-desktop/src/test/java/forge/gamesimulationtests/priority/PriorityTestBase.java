@@ -224,11 +224,6 @@ public abstract class PriorityTestBase extends AITest {
         return (ScriptedController) p.getController();
     }
 
-    protected void at(final PhaseType phase, final Player turnOf) {
-        game.getPhaseHandler().devModeSet(phase, turnOf);
-        game.getPhaseHandler().onStackResolved();
-    }
-
     protected List<Card> lands(final Player p, final int n) {
         return lands("Forest", p, n);
     }

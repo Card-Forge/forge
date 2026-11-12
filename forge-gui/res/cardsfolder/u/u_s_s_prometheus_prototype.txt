@@ -2,7 +2,7 @@ Name:U.S.S. Prometheus, Prototype
 ManaCost:5
 Types:Legendary Artifact Spacecraft
 PT:6/6
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE4_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 4+ Flying
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddTrigger$ DamageTrig | Description$ STATION 8+ Multivector Assault Mode — Whenever NICKNAME deals combat damage to an opponent, it deals that much damage to each other opponent.
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Multivector Assault Mode — Whenever NICKNAME deals combat damage to an opponent, it deals that much damage to each other opponent.

@@ -3466,7 +3466,7 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Station")) {
+        } else if (keyword.equals("Station")) {
             String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +
                     "| CounterType$ CHARGE | CounterNum$ StationX | SorcerySpeed$ True " +
                     "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";

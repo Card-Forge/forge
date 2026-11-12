@@ -633,12 +633,11 @@ public class GameState {
         PhaseType newPhase = tChangePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
         PhaseType advPhase = tAdvancePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tAdvancePhase);
 
-        // Set stack to resolving so things won't trigger/effects be checked right away
-        game.getStack().setResolving(true);
+        // Set stack to frozen so things won't trigger/effects be checked right away
+        game.getStack().setFrozen(true);
+        game.getTriggerHandler().setSuppressAllTriggers(true);
 
         game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn, turn);
-
-        game.getTriggerHandler().setSuppressAllTriggers(true);
 
         for (int i = 0; i < playerStates.size(); i++) {
             setupPlayerState(game.getPlayers().get(i), playerStates.get(i));
@@ -665,7 +664,6 @@ public class GameState {
             }
         }
 
-        game.getStack().setResolving(false);
         game.getStack().unfreezeStack();
 
         // Advance to a certain phase, activating all triggered abilities

@@ -19,8 +19,10 @@ import forge.game.cost.CostReturn;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTapType;
 import forge.game.cost.CostUntapType;
+import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 /**
@@ -194,6 +196,10 @@ public final class ActivationGuard {
             if (node.getTargetRestrictions() == null) {
                 return Verdict.USEFUL;
             }
+            final Verdict refined = targetedRefinement(ai, node);
+            if (refined != null) {
+                return refined;
+            }
             final int min = node.getMinTargets();
             final boolean idle = min > 0
                     ? node.getTargetRestrictions().getNumCandidates(node) < min
@@ -229,6 +235,75 @@ public final class ActivationGuard {
             default:
                 return Verdict.USEFUL;
         }
+    }
+
+    /**
+     * The counters go on something that is not a creature yet, and a later part of the same ability makes it one
+     * (Case of the Filched Falcon: counters on a noncreature artifact, which then becomes a 0/0 creature).
+     */
+    static boolean animatesTargetToCreature(final SpellAbility node) {
+        for (SpellAbility a = node; a != null; a = a.getSubAbility()) {
+            if (a.getApi() == ApiType.Animate && a.getParamOrDefault("Types", "").contains("Creature")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Two targeted effects whose candidates are not all worth the ability. A +1/+1 counter belongs on a creature
+     * (Ozolith, the Shattered Spire and its like also name noncreature artifacts, and a counter there does nothing),
+     * and an Equipment moved onto the creature it is already attached to does nothing, unless something in play
+     * pays for every attachment (a "becomes attached" trigger), which is what makes an equip {0} loop worth going round.
+     */
+    private static Verdict targetedRefinement(final Player ai, final SpellAbility node) {
+        final TargetRestrictions tr = node.getTargetRestrictions();
+        final ApiType api = node.getApi();
+        if (api == ApiType.PutCounter && "P1P1".equals(node.getParam("CounterType")) && !animatesTargetToCreature(node)) {
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (e instanceof Card && ((Card) e).isCreature()) {
+                    return null; // a real target exists: the ordinary count decides
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        if (api == ApiType.Attach && node.isEquip() && node.getHostCard().isEquipping()
+                && !attachPayoff(ai, node.getHostCard())) {
+            final Card current = node.getHostCard().getEquipping();
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (e != current) {
+                    return null;
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        return null;
+    }
+
+    /**
+     * Moving an Equipment onto the creature it is already on does nothing by itself, so it is only worth doing as a step
+     * of a combo the AI knows (ai-combos.txt) that is whole on its side of the table, with the Equipment or a permanent
+     * that triggers when something becomes attached as one of its pieces. A "becomes attached" trigger on its own is no
+     * reason: most of them pay once, and an equip {0} loop for a trickle of value is how the AI burns its turn.
+     */
+    private static boolean attachPayoff(final Player ai, final Card equipment) {
+        final CardCollection mine = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        for (final ComboCatalog.Entry e : ComboCatalog.entries()) {
+            if (!e.assembledBy(mine)) {
+                continue;
+            }
+            if (e.fillsSomeSlot(equipment)) {
+                return true;
+            }
+            for (final Card c : e.fillers(mine)) {
+                for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                    if (t.getMode() == forge.game.trigger.TriggerType.Attached) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private static Verdict allEffect(final Player ai, final SpellAbility node, final ApiType api, final Card host) {
