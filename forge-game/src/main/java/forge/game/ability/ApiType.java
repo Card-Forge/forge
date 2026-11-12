@@ -191,6 +191,7 @@ public enum ApiType {
     Shuffle (ShuffleEffect.class),
     SkipPhase (SkipPhaseEffect.class),
     SkipTurn (SkipTurnEffect.class),
+    Stake (StakeEffect.class),
     StoreSVar (StoreSVarEffect.class),
     Subgame (SubgameEffect.class),
     Surveil (SurveilEffect.class),

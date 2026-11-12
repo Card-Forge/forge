@@ -290,6 +290,19 @@
     ],
   "challenges": [
     {
+      "name": "Permadeath",
+      "description": "Lose a match: lose your commander and 5 random cards.",
+      "icon": "BasilicaSkullbomb",
+      "effect": {
+        "opponent": {
+          "startBattleScript": [
+            "DB$ Stake | Defined$ ValidCommand Card.YouOwn+IsCommander | SpellDescription$ Lose this match and you lose your commander and 5 random cards from your deck, never basic lands.",
+            "DB$ Stake | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | Amount$ 5"
+          ]
+        }
+      }
+    },
+    {
       "name": "Rarity limit",
       "description": "Cards must be this rarity or lower.",
       "icon": "Treasure",

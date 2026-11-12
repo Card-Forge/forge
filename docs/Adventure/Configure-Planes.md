@@ -122,9 +122,18 @@ A deck that breaks a challenge's deck rules can't start a duel. The player sees 
   {
     "name": "Color limit",
     "pickColors": true
+  },
+  {
+    "name": "Permadeath",
+    "effect": { "opponent": { "startBattleScript": [
+      "DB$ Stake | Defined$ ValidCommand Card.YouOwn+IsCommander",
+      "DB$ Stake | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | Amount$ 5"
+    ] } }
   }
 ]
 ```
+
+The Permadeath example uses the `Stake` effect on the player's side: a player who loses the match loses their commander and 5 random cards from their deck that are not basic lands.
 
 # Duel effect layers
 

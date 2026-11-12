@@ -353,6 +353,13 @@ Parameters:
 ### RestartGame
 Used in the script of *Karn Liberated*.
 
+### Stake
+Stakes cards the activating player owns. If that player loses the match, the cards are removed from their collection, reported like lost ante cards. Running the same line again in a later game of the match replaces its earlier stake.
+
+Parameters:
+- `Defined$` - the cards to stake
+- `Amount$ {Integer}` - lose only this many cards, picked at random from the staked cards when the match ends. Without it, all of them are lost.
+
 ## Goad
 
 ## Loops
