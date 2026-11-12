@@ -353,18 +353,6 @@ Parameters:
 ### RestartGame
 Used in the script of *Karn Liberated*.
 
-### RemoveFromMatch
-Removes cards from the rest of the match. Used in the scripts of *Blacker Lotus* and *Look at Me, I'm the DCI*.
-
-Parameters:
-- `Defined$` - the cards to remove
-- `RemoveType$` - remove every card in the game of this type instead
-- `IncludeSideboard$ True` - with `RemoveType$`, also remove matching sideboard cards
-- `RemoveFromInventory$ True` - the owner also loses the cards from their collection, reported like lost ante cards
-- `OnMatchLoss$ True` - used by Adventure modifiers. With `RemoveFromInventory$`, remove nothing now. The owner loses the cards from their collection only if they lose the match. Adventure also applies this when the player quits between games, through `Match.concede`. The same line running again, in a later game or after a restart, replaces its earlier cards.
-- `Amount$ {Integer}` - with `OnMatchLoss$`, lose only this many of the cards, picked at random when the match is lost
-- `LogMessage$` - the game log text
-
 ## Goad
 
 ## Loops

@@ -1,20 +1,13 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.ImmutableMap;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.event.GameEventRandomLog;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RemoveFromMatchEffect extends SpellAbilityEffect {
     @Override
@@ -32,25 +25,6 @@ public class RemoveFromMatchEffect extends SpellAbilityEffect {
             toRemove = (CardCollection) AbilityUtils.filterListByType(cards, sa.getParam("RemoveType"), sa);
         } else {
             toRemove = getTargetCards(sa);
-        }
-        // OnMatchLoss is used by Adventure modifiers, not by any card
-        if (removeFromInventory && sa.hasParam("OnMatchLoss")) {
-            if (host.getGame().getMaingame() != null) {
-                return;
-            }
-            final Map<Player, List<PaperCard>> pools = new LinkedHashMap<>();
-            for (final Card c : toRemove) {
-                if (c.isCollectible()) {
-                    pools.computeIfAbsent(c.getOwner(), p -> new ArrayList<>()).add((PaperCard) c.getPaperCard());
-                }
-            }
-            for (final Map.Entry<Player, List<PaperCard>> pool : pools.entrySet()) {
-                final int amount = sa.hasParam("Amount")
-                        ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : pool.getValue().size();
-                host.getGame().getMatch().addMatchLossRemoval(pool.getKey().getRegisteredPlayer(),
-                        ImmutableMap.copyOf(sa.getOriginalMapParams()), pool.getValue(), amount);
-            }
-            return;
         }
         String logMessage = sa.getParamOrDefault("LogMessage", "Removed from match");
         String remove = toRemove.toString().replace("[","").replace("]","");

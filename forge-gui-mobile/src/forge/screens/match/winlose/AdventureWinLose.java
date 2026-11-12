@@ -38,8 +38,6 @@ public class AdventureWinLose extends ControlWinLose {
     public void actionOnQuit() {
         saveOptions();
         getView().hide();
-        if (!lastGame.isMatchOver())
-            DuelScene.instance().concedeMatch();
         DuelScene.instance().GameEnd();
         if (!DuelScene.instance().hasCallbackExit())
             DuelScene.instance().exitDuelScene();

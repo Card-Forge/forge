@@ -21,7 +21,6 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
@@ -40,9 +39,6 @@ public class Match {
     private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
 
     private GameOutcome lastOutcome = null;
-
-    /** Pools a player loses a number of cards from, picked at random, if they lose the match. Keyed by the script line that added them. */
-    private final Map<RegisteredPlayer, Map<Object, Pair<List<PaperCard>, Integer>>> matchLossRemovals = new HashMap<>();
 
     public Match(final GameRules rules0, final List<RegisteredPlayer> players0, final String title) {
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
@@ -97,13 +93,6 @@ public class Match {
 
         // Typically ante, but also tearing up a blacker lotus
         executeOwnershipChanges(game);
-        if (isMatchOver()) {
-            for (RegisteredPlayer p : players) {
-                if (!lastOutcome.isWinner(p)) {
-                    removeOnMatchLoss(p);
-                }
-            }
-        }
 
         game.clearCaches();
 
@@ -126,39 +115,12 @@ public class Match {
         return main == null ? null : Collections.unmodifiableList(main);
     }
 
-    /** Does nothing once the match is over. */
-    public void concede(final RegisteredPlayer leaver) {
-        if (lastOutcome != null && !isMatchOver()) {
-            removeOnMatchLoss(leaver);
-        }
-    }
-
-    /** A later call with an equal {@code key} replaces this one, so a script line that runs again counts once. */
-    public void addMatchLossRemoval(final RegisteredPlayer owner, final Object key, final List<PaperCard> cards, final int amount) {
-        matchLossRemovals.computeIfAbsent(owner, p -> new HashMap<>()).put(key, Pair.of(cards, amount));
-    }
-
-    private void removeOnMatchLoss(final RegisteredPlayer loser) {
-        final List<PaperCard> lost = new ArrayList<>();
-        final Map<Object, Pair<List<PaperCard>, Integer>> pools = matchLossRemovals.remove(loser);
-        if (pools == null) {
-            return;
-        }
-        for (final Pair<List<PaperCard>, Integer> pool : pools.values()) {
-            lost.addAll(Aggregates.random(pool.getLeft(), pool.getRight()));
-        }
-        if (!lost.isEmpty()) {
-            lastOutcome.addAnteLost(loser, lost);
-        }
-    }
-
     public GameOutcome getOutcomeById(int id) {
         return gameOutcomes.get(id);
     }
 
     public void clearGamesPlayed() {
         gameOutcomes.clear();
-        matchLossRemovals.clear();
         for (RegisteredPlayer p : players) {
             p.restoreDeck();
         }
