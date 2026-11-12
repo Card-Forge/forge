@@ -287,6 +287,14 @@
       "Jumpstart 25",
       "The Last Airbender",
       "(All)"
-    ]
+    ],
+  "challenges": [
+    {
+      "name": "Rarity limit",
+      "description": "Cards must be this rarity or lower.",
+      "icon": "Treasure",
+      "maxRarity": true
+    }
+  ]
 }
 

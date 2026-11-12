@@ -370,6 +370,34 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return active;
     }
 
+    /** @return why the selected deck breaks the chosen challenges' deck rules, or null when it is allowed */
+    public String getChallengeDeckProblem() {
+        StringBuilder problems = new StringBuilder();
+        for (ChallengeData challenge : getActiveChallenges()) {
+            String value = challenges.get(challenge.name);
+            for (String problem : challenge.deckProblems(deck, value)) {
+                if (problems.length() > 0)
+                    problems.append("\n\n");
+                problems.append(Forge.getLocalizer().getMessage("lblChallengeDeckProblem", challenge.name, challenge.describeValue(value), shortened(problem)));
+            }
+        }
+        return problems.length() == 0 ? null : problems.toString();
+    }
+
+    /** Puts a deck problem on one line with at most three of its cards, so the dialog fits on the screen. */
+    private static String shortened(String problem) {
+        List<String> lines = new ArrayList<>();
+        for (String line : problem.split("\n")) {
+            if (!line.isBlank())
+                lines.add(line);
+        }
+        List<String> cards = lines.subList(1, lines.size());
+        String shown = String.join(", ", cards.subList(0, Math.min(3, cards.size())));
+        if (cards.size() > 3)
+            shown += " " + Forge.getLocalizer().getMessage("lblAndCountMore", cards.size() - 3);
+        return lines.get(0) + " " + shown;
+    }
+
     public boolean isCommanderMode() {
         return adventureMode != null && adventureMode.isCommanderLike();
     }

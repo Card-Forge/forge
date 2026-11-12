@@ -122,6 +122,11 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (collided)
                         return;
                     collided = true;
+                    String deckProblem = Current.player().getChallengeDeckProblem();
+                    if (deckProblem != null) {
+                        refuseDuel(mob, deckProblem);
+                        break;
+                    }
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);

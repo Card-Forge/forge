@@ -141,6 +141,17 @@ public abstract class GameStage extends Stage {
         dialogOnlyInput = isShowing;
     }
 
+    /** Shows why the deck can't be used under the run's challenges, then lets the player walk away from the enemy. */
+    protected void refuseDuel(MapActor enemy, String deckProblem) {
+        enemy.clearCollisionHeight();
+        effectDialog(Forge.getLocalizer().getMessage("lblDeckNotAllowed"), deckProblem, () -> Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                enemy.resetCollisionHeight();
+            }
+        }, 3f));
+    }
+
     public void effectDialog(EffectData effectData) {
         effectDialog(effectData.getIntro(Forge.getLocalizer().getMessage("lblEffectDialogDescription")), effectData.getEnemySideDescription(), null);
     }
