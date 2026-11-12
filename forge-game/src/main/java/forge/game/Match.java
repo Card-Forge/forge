@@ -103,6 +103,18 @@ public class Match {
         System.gc();
     }
 
+    /**
+     * The main decks as they were played in the game before this one, taken before anyone sideboards for the next
+     * game: what a player knows about the deck of its opponent. Empty before the second game.
+     */
+    private final Map<RegisteredPlayer, List<PaperCard>> playedMains = new IdentityHashMap<>();
+
+    /** The main deck {@code player} played last game (null if unknown), as everyone at the table has seen it. */
+    public List<PaperCard> getPlayedMain(final RegisteredPlayer player) {
+        final List<PaperCard> main = playedMains.get(player);
+        return main == null ? null : Collections.unmodifiableList(main);
+    }
+
     public GameOutcome getOutcomeById(int id) {
         return gameOutcomes.get(id);
     }
@@ -200,7 +212,14 @@ public class Match {
     private static void preparePlayerZone(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<>();
-        for (final Entry<PaperCard, Integer> stackOfCards : section) {
+        // Iterate the deck section in sorted order: CardPool's backing map
+        // does not guarantee iteration order, so for a fixed seed the
+        // pre-shuffle library order, the random-foil roll sequence, and the
+        // card id assignment order could all vary across JVMs. Sorted
+        // iteration makes zone preparation a pure function of (deck, seed).
+        List<Entry<PaperCard, Integer>> ordered = Lists.newArrayList(section);
+        ordered.sort(Entry.comparingByKey());
+        for (final Entry<PaperCard, Integer> stackOfCards : ordered) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
                 final Card card = Card.fromPaperCard(cp, player);
@@ -235,6 +254,14 @@ public class Match {
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
+        playedMains.clear();
+        if (canSideBoard) {
+            for (final RegisteredPlayer rp : playersConditions) {
+                if (rp.getDeck() != null) {
+                    playedMains.put(rp, new ArrayList<>(rp.getDeck().getMain().toFlatList()));
+                }
+            }
+        }
         PlayerController sideboardProxy = null;
         if (canSideBoard && sideboardForAIs) {
             for (int i = 0; i < players.size(); i++) {
@@ -253,7 +280,9 @@ public class Match {
             PlayerController person = player.getController();
 
             if (canSideBoard) {
-                if (sideboardProxy != null && person.isAI()) {
+                // an AI that reads the deck of its opponent sideboards for itself; the human only does it for the others
+                final boolean byItself = person.isAI() && person.sideboardsByItself();
+                if (sideboardProxy != null && person.isAI() && !byItself) {
                     person = sideboardProxy;
                 }
 
@@ -276,6 +305,12 @@ public class Match {
                     toChange.get(DeckSection.Sideboard).addAll(sideboard);
                 }
                 List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
+                if (byItself && toChange.has(DeckSection.Sideboard)) {
+                    // show what the AI did with its sideboard, so that nobody has to guess what changed between games
+                    for (final String line : person.getSideboardingReport()) {
+                        game.fireEvent(new GameEventAddLog(GameLogEntryType.SIDEBOARD, player.getName() + " " + line));
+                    }
+                }
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));

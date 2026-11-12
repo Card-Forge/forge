@@ -1,7 +1,6 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -15,8 +14,6 @@ import forge.gui.control.PlaybackSpeed;
 import forge.screens.match.MatchController;
 import forge.util.Utils;
 
-import static forge.assets.FSkin.getDefaultSkinFile;
-
 public class FCardPanel extends FDisplayObject {
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float PADDING = Utils.scale(2);
@@ -26,9 +23,11 @@ public class FCardPanel extends FDisplayObject {
     private CardView card;
     private boolean tapped;
     private boolean highlighted;
+    // The state last shown on the battlefield, so a change can be animated. Null until shown there
+    private CardStateName shownState;
+    private boolean needsTapAnimation, needsUntapAnimation, needsTransformAnimation;
     CardTapAnimation tapAnimation;
     CardUnTapAnimation untapAnimation;
-    CardDestroyedAnimation destroyedAnimation;
     CardTransformAnimation transformAnimation;
 
     public FCardPanel() {
@@ -39,7 +38,6 @@ public class FCardPanel extends FDisplayObject {
         card = card0;
         tapAnimation = new CardTapAnimation();
         untapAnimation = new CardUnTapAnimation();
-        destroyedAnimation = new CardDestroyedAnimation();
         transformAnimation = new CardTransformAnimation();
     }
 
@@ -65,6 +63,33 @@ public class FCardPanel extends FDisplayObject {
 
     public void setTapped(final boolean tapped0) {
         tapped = tapped0;
+    }
+
+    /** Shows the card as it is on the battlefield, animating a tap, untap or transform since it was last shown there. */
+    public void showOnBattlefield(final CardView card0) {
+        final CardStateName state = card0.getCurrentState().getState();
+        if (shownState != null && card0.isTapped() != tapped) {
+            needsTapAnimation = card0.isTapped();
+            needsUntapAnimation = !card0.isTapped();
+        }
+        // A card new to the battlefield counts as front face up, so one that enters melded or transformed animates
+        needsTransformAnimation |= isTransform(shownState == null ? CardStateName.Original : shownState, state);
+        shownState = state;
+        tapped = card0.isTapped();
+    }
+
+    private static boolean isTransform(final CardStateName from, final CardStateName to) {
+        if (from == to) {
+            return false;
+        }
+        return to == CardStateName.Flipped || to == CardStateName.Backside || to == CardStateName.Meld
+                || to == CardStateName.Original && (from == CardStateName.Flipped || from == CardStateName.Backside);
+    }
+
+    public void stopAnimations() {
+        needsTapAnimation = false;
+        needsUntapAnimation = false;
+        needsTransformAnimation = false;
     }
 
     protected float getTappedAngle() {
@@ -124,22 +149,10 @@ public class FCardPanel extends FDisplayObject {
         if (!animate || MatchController.instance.getGameSpeed() == PlaybackSpeed.FAST || (MatchController.instance.getGameView() != null && MatchController.instance.getGameView().isMatchOver())) {
             //don't animate if game is fast or match is over
             rotateTransform(g, x, y, w, h, edgeOffset, false);
-            card.updateNeedsTapAnimation(false);
-            card.updateNeedsUntapAnimation(false);
-            card.updateNeedsTransformAnimation(false);
+            stopAnimations();
         } else {
-            //card destroy animation
-            if (card.wasDestroyed()) {
-                if (destroyedAnimation.progress < 1) {
-                    destroyedAnimation.start();
-                    destroyedAnimation.drawCard(g, card, x, y, w, h, edgeOffset);
-                } else {
-                    rotateTransform(g, x, y, w, h, edgeOffset, animate);
-                }
-                return;
-            }
             //tap-untap animation
-            if (card.needsTapAnimation()) {
+            if (needsTapAnimation) {
                 //draw tapped
                 if (tapAnimation.progress < 1) {
                     tapAnimation.start();
@@ -147,7 +160,7 @@ public class FCardPanel extends FDisplayObject {
                 } else {
                     rotateTransform(g, x, y, w, h, edgeOffset, animate);
                 }
-            } else if (card.needsUntapAnimation()) {
+            } else if (needsUntapAnimation) {
                 //draw untapped
                 if (untapAnimation.progress < 1) {
                     untapAnimation.start();
@@ -165,7 +178,7 @@ public class FCardPanel extends FDisplayObject {
         if (tapped) {
             g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
         }
-        if (card.needsTransformAnimation() && animate) {
+        if (needsTransformAnimation && animate) {
             transformAnimation.start();
             transformAnimation.drawCard(g, card, x, y, w, h);
         } else {
@@ -175,46 +188,6 @@ public class FCardPanel extends FDisplayObject {
         }
         if (tapped) {
             g.endTransform();
-        }
-    }
-
-    private class CardDestroyedAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.6f;
-        private float progress = 0;
-        private Texture splatter = Forge.getAssets().getTexture(getDefaultSkinFile("splatter.png"));
-
-        private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
-            float percentage = progress / DURATION;
-            if (percentage < 0) {
-                percentage = 0;
-            } else if (percentage > 1) {
-                percentage = 1;
-                progress = 0;
-            }
-            float mod = w * percentage;
-            float oldAlpha = g.getfloatAlphaComposite();
-            if (tapped) {
-                g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
-            }
-            CardRenderer.drawCardWithOverlays(g, card, x - mod / 2, y - mod / 2, w + mod, h + mod, getStackPosition());
-            if (splatter != null) {
-                g.setAlphaComposite(0.6f);
-                g.drawCardImage(splatter, null, x - mod / 2, y - mod / 2, w + mod, h + mod, true, false, 0);
-                g.setAlphaComposite(oldAlpha);
-            }
-            if (tapped) {
-                g.endTransform();
-            }
-        }
-
-        @Override
-        protected boolean advance(float dt) {
-            progress += dt;
-            return progress < DURATION;
-        }
-
-        @Override
-        protected void onEnd(boolean endingAll) {
         }
     }
 
@@ -269,7 +242,7 @@ public class FCardPanel extends FDisplayObject {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            card.updateNeedsTransformAnimation(false);
+            needsTransformAnimation = false;
         }
     }
 
@@ -299,7 +272,7 @@ public class FCardPanel extends FDisplayObject {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            card.updateNeedsUntapAnimation(false);
+            needsUntapAnimation = false;
         }
     }
 
@@ -328,7 +301,7 @@ public class FCardPanel extends FDisplayObject {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            card.updateNeedsTapAnimation(false);
+            needsTapAnimation = false;
         }
     }
 

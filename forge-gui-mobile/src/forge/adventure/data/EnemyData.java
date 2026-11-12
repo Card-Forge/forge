@@ -48,6 +48,10 @@ public class EnemyData implements Serializable {
     public int gamesPerMatch = 1;
     public String bossInsult;
     public String bossIntro;
+    public EffectData effect;
+    public boolean ignoreGlobalEffect = false;
+    public boolean ignoreBiomeEffect = false;
+    public boolean ignoreDungeonEffect = false;
 
     public EnemyData() {
     }
@@ -77,6 +81,10 @@ public class EnemyData implements Serializable {
         questTags       = enemyData.questTags.clone();
         lifetime        = enemyData.lifetime;
         gamesPerMatch   = enemyData.gamesPerMatch;
+        effect          = enemyData.effect;
+        ignoreGlobalEffect  = enemyData.ignoreGlobalEffect;
+        ignoreBiomeEffect   = enemyData.ignoreBiomeEffect;
+        ignoreDungeonEffect = enemyData.ignoreDungeonEffect;
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }

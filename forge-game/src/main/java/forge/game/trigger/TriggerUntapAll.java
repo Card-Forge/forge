@@ -24,19 +24,19 @@ public class TriggerUntapAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         final Map<Player, CardCollection> map =
                 filteredMap((Map<Player, CardCollection>) runParams.get(AbilityKey.Map));
 
-        sa.setTriggeringObject(AbilityKey.Map, map);
-        sa.setTriggeringObject(AbilityKey.Player, map.keySet());
+        objects.put(AbilityKey.Map, map);
+        objects.put(AbilityKey.Player, map.keySet());
 
         CardCollection untapped = new CardCollection();
         for (final Map.Entry<Player, CardCollection> e : map.entrySet()) {
             untapped.addAll(e.getValue());
         }
-        sa.setTriggeringObject(AbilityKey.Cards, untapped);
-        sa.setTriggeringObject(AbilityKey.Amount, untapped.size());
+        objects.put(AbilityKey.Cards, untapped);
+        objects.put(AbilityKey.Amount, untapped.size());
     }
 
     @Override

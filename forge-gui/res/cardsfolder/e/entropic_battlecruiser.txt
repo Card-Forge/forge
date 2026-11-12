@@ -2,7 +2,7 @@ Name:Entropic Battlecruiser
 ManaCost:3 B
 Types:Artifact Spacecraft
 PT:3/10
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE1_CHARGE | AddTrigger$ DiscardTrig | Description$ STATION 1+ Whenever an opponent discards a card, they lose 3 life.
 SVar:DiscardTrig:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, they lose 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 3

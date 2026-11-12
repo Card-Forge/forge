@@ -1,0 +1,7 @@
+Name:Kirk, Man of Action
+ManaCost:2 G W U
+Types:Legendary Creature Human Officer
+PT:3/3
+S:Mode$ Continuous | Affected$ Officer.Other+YouCtrl,Artificer.Other+YouCtrl,Doctor.Other+YouCtrl,Pilot.Other+YouCtrl,Scientist.Other+YouCtrl,Creature.Other+Spacecraft+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Officers, Artificers, Doctors, Pilots, Scientists, and Spacecraft creatures you control get +2/+2.
+SVar:PlayMain1:TRUE
+Oracle:Other Officers, Artificers, Doctors, Pilots, Scientists, and Spacecraft creatures you control get +2/+2.

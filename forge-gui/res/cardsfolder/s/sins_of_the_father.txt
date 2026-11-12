@@ -1,0 +1,13 @@
+Name:Sins of the Father
+ManaCost:3 B R
+Types:Enchantment Saga
+K:Chapter:3:DBSac,DBToken,DBExile
+SVar:DBSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token | SpellDescription$ Each opponent sacrifices a nontoken creature of their choice.
+SVar:DBToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | TokenAmount$ X | SpellDescription$ For each opponent, you create a 2/1 red Klingon Warrior creature token with haste.
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBLoseLife | SpellDescription$ Exile target player's graveyard. Each opponent loses life equal to the number of creature cards exiled this way.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | Defined$ Opponent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$Amount
+SVar:Y:Remembered$Valid Creature
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a nontoken creature of their choice.\nII — For each opponent, you create a 2/1 red Klingon Warrior creature token with haste.\nIII — Exile target player's graveyard. Each opponent loses life equal to the number of creature cards exiled this way.

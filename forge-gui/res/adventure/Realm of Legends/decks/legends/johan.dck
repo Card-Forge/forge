@@ -3,7 +3,7 @@ Name=Sandwurm Convergence
 [Commander]
 1 Johan|LEG
 [Main]
-1 Greater Sandwurm|AKH
+10 Greater Sandwurm|AKH
 1 Abraded Bluffs|OTJ
 1 Arid Archway|OTJ
 1 Bristling Backwoods|OTJ
@@ -30,6 +30,6 @@ Name=Sandwurm Convergence
 1 Survivors' Encampment|HOU
 1 Blossoming Sands|TDM
 1 Quicksand|VIS
-24 Forest|AKH|[269]
-24 Plains|AKH|[255]
-24 Mountain|AKH|[266]
+21 Forest|AKH|[269]
+21 Plains|AKH|[255]
+21 Mountain|AKH|[266]

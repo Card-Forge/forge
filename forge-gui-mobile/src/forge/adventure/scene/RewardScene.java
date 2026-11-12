@@ -487,13 +487,17 @@ public class RewardScene extends UIScene {
                 headerLabel.setText(Forge.getLocalizer().getMessage("lblSelectRewards", remainingSelections));
                 doneButton.setDisabled(remainingSelections > 0);
         }
+        // The stage is stretched over the window, so compensate to keep the card's real ratio at any screen size.
+        // Needed before the grid search so rows and columns are counted with the final card width.
+        float correction = ScreenAspectCorrection.widthCorrection(Scene.getIntendedWidth(), Scene.getIntendedHeight(),
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         for (int h = 1; h < targetHeight; h++) {
             cardHeight = h;
             if (type == Type.Shop || type == Type.RewardChoice) {
                 cardHeight += doneButton.getHeight();
             }
             //cardHeight=targetHeight/i;
-            cardWidth = h / CARD_WIDTH_TO_HEIGHT;
+            cardWidth = h / CARD_WIDTH_TO_HEIGHT * correction;
             newArea = newRewards.size * cardWidth * cardHeight;
 
             int rows = (int) (targetHeight / cardHeight);
@@ -505,41 +509,8 @@ public class RewardScene extends UIScene {
                 bestCardHeight = h;
             }
         }
-        float AR = 480f / 270f;
-        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
-        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
-        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
-        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
-        float fW = Math.max(x, y);
-        float fH = Math.min(x, y);
-        float mul = fW / fH < AR ? AR / (fW / fH) : (fW / fH) / AR;
-        if (fW / fH >= 2f) {//tall display
-            mul = (fW / fH) - ((fW / fH) / AR);
-            if ((fW / fH) >= 2.1f && (fW / fH) < 2.2f)
-                mul *= 0.9f;
-            else if ((fW / fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
-                mul *= 0.8f;
-        }
         cardHeight = bestCardHeight * 0.90f;
-        Float custom = Forge.isLandscapeMode()
-            ? Config.instance().getSettingData().rewardCardAdjLandscape
-            : Config.instance().getSettingData().rewardCardAdj;
-        if (custom != null && custom != 1f) {
-            mul *= custom;
-        } else {
-            if (realX > x || realY > y) {
-                mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
-            } else {
-                //immersive | no navigation and/or showing cutout cam
-                if (fW / fH > 2.2f)
-                    mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
-                else if (fW / fH >= 2.1f)
-                    mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
-                else if (fW / fH >= 2f)
-                    mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
-            }
-        }
-        cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * mul;
+        cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * correction;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
         xOff += (targetWidth - (cardWidth * numberOfColumns)) / 2f;
@@ -623,11 +594,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || WorldSave.getCurrentSave().getPlayer().getGold() < price);
             if (isSold)
                 setText("SOLD");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -657,6 +637,8 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (Current.player().getGold() >= price) {
                         if (!shopActor.isUnlimited())
                             changes.buyCard(objectID, index);
@@ -689,11 +671,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(remainingSelections <= 0);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || remainingSelections <= 0);
             if (isSold)
                 setText("SELECTED");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -720,6 +711,8 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (remainingSelections >= 1) {
 
                         remainingSelections--;

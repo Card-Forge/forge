@@ -1,0 +1,30 @@
+[metadata]
+Name=Orcish Veteran
+[Main]
+14 Mountain|3ED
+3 Dwarven Ruins|FEM
+2 Dormant Volcano|VIS
+4 Forgotten Cave|ONS
+2 Orcish Veteran|FEM|[62a]
+2 Orcish Veteran|FEM|[62b]
+2 Orcish Veteran|FEM|[62c]
+2 Orcish Veteran|FEM|[62d]
+2 Orcish Captain|FEM
+4 Ironclaw Orcs|4ED
+2 Aeolipile|FEM
+1 Zelyon Sword|FEM
+1 Orc General|DRK
+2 Orcish Artillery|3ED
+2 Orcish Cannoneers|ICE
+2 Orcish Conscripts|ICE
+1 Ironclaw Curse|HML
+2 Bestial Fury|ALL|[67b]
+1 Veteran's Voice|ALL|[84a]
+1 Commando Raid|ONS
+1 Disharmony|LEG
+2 Downhill Charge|NMS
+2 Trumpet Blast|UDS
+3 Orcish Oriflamme|3ED
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Orcish Veteran|FEM

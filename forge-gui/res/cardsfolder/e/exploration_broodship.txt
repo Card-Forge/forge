@@ -2,7 +2,7 @@ Name:Exploration Broodship
 ManaCost:G
 Types:Artifact Spacecraft
 PT:4/4
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddStaticAbility$ ExplorationStatic | Description$ STATION 3+ You may play an additional land on each of your turns.
 SVar:ExplorationStatic:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ BroodshipStatic | Description$ STATION 8+ Flying,,,Once during each of your turns, you may cast a permanent spell from your graveyard by sacrificing a land in addition to paying its other costs.

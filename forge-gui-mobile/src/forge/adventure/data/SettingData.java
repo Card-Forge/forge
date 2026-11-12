@@ -15,6 +15,7 @@ public class SettingData {
     public boolean fullScreen;
     public String videomode;
     public String lastActiveSave;
+    // Legacy ratio adjustments, no longer used (cards keep their ratio automatically). Kept so older settings.json files still parse.
     public Float rewardCardAdj;
     public Float cardTooltipAdj;
     public Float rewardCardAdjLandscape;

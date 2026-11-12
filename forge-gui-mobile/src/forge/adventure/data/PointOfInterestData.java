@@ -15,7 +15,7 @@ import java.util.Set;
  * contains the information for the point of interests like towns and dungeons
  */
 public class PointOfInterestData implements Serializable {
-    private static final long serialVersionUID = -986253670258331930L;
+    private static final long serialVersionUID = -4412972164663781996L;
     public String name;
     public String type;
     public int count;

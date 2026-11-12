@@ -268,10 +268,11 @@ public class TargetSelection {
         }
 
         if (chosen instanceof CardView) {
-            if (!gameCacheChooseCard.containsKey(chosen)) {
+            final Card chosenCard = gameCacheChooseCard.get(chosen);
+            if (chosenCard == null) {
                 return false;
             }
-            if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
+            if (chosenCard.isInZone(ZoneType.Stack)) {
                 for (final SpellAbilityStackInstance si : game.getStack()) {
                     SpellAbility abilityOnStack = si.getSpellAbility();
                     // make sure we're not accidentally finding a cast trigger of this card first
@@ -284,7 +285,7 @@ public class TargetSelection {
                     }
                 }
             } else {
-                ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
+                ability.getTargets().add(chosenCard);
             }
         }
         return true;

@@ -25,6 +25,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
+import forge.screens.home.DraftPicksSelector;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 
@@ -222,7 +223,7 @@ public enum CSubmenuDraft implements ICDoc {
         if (poolType == null) { return; }
 
         final BoosterDraft draft = BoosterDraft.createDraft(poolType);
-        if (draft == null) { return; }
+        if (draft == null || !DraftPicksSelector.showDialog(draft)) { return; }
 
         final CEditorDraftingProcess draftController = new CEditorDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         draftController.showGui(draft);

@@ -1522,7 +1522,7 @@ public class CardProperty {
                 }
             }
             if (property.equals("attackingBattle")) {
-                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                final GameEntity attacked = combat.getDefenderByAttacker(card);
                 if (!(attacked instanceof Card)) {
                     return false;
                 }
@@ -1890,7 +1890,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("canBeBeamedUp")) {
-            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card)) {
+            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card, spellAbility)) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {

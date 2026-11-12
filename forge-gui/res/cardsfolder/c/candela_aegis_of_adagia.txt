@@ -3,7 +3,7 @@ ManaCost:W
 Types:Legendary Artifact Spacecraft
 PT:3/3
 K:Flash
-K:Station:8
+K:Station
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one target creature you control to its owner's hand. It perpetually gets +1/+1.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | TgtPrompt$ Select up to one target creature you control. | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
