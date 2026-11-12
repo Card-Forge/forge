@@ -1,12 +1,19 @@
 package forge.util;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 /** #5634: script "Valid" strings read as words wherever a stack description names what an effect affects. */
 public class LangValidDescTest {
-    private final Lang lang = Lang.getInstance();
+    private Lang lang;
+
+    @BeforeClass
+    public void setUp() {
+        Lang.createInstance("en-US");
+        lang = Lang.getInstance();
+    }
 
     @Test
     public void plainTypesKeepTheirOldForm() {
