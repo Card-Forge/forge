@@ -502,6 +502,10 @@ public class DuelScene extends ForgeScene {
         //Every layer is written for the enemies, as dungeon effects always were, so its opponent block goes to the player.
         if (!ignoreGlobalEffect && !enemy.ignoreGlobalEffect)
             addEffect(oppEffects, playerEffects, Config.instance().getConfigData().globalEffect);
+        if (eventData == null) {
+            for (ChallengeData challenge : advPlayer.getActiveChallenges())
+                addEffect(oppEffects, playerEffects, challenge.effect);
+        }
         if (!enemy.ignoreBiomeEffect)
             addEffect(oppEffects, playerEffects, biomeEffect);
         if (!enemy.ignoreDungeonEffect)

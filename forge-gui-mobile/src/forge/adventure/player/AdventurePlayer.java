@@ -55,6 +55,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Commander mode
     private AdventureModes adventureMode;
+    private final Map<String, String> challenges = new LinkedHashMap<>(); //Chosen challenge names and their settings.
 
     // Game data.
     private float worldPosX;
@@ -121,6 +122,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = false;
         usingCustomDeck = false;
         adventureMode = null;
+        challenges.clear();
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -343,6 +345,29 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public AdventureModes getAdventureMode(){
         return adventureMode;
+    }
+
+    /** @return the chosen challenges by name, each with its setting */
+    public Map<String, String> getChallenges() {
+        return Collections.unmodifiableMap(challenges);
+    }
+
+    public void setChallenges(Map<String, String> chosen) {
+        challenges.clear();
+        challenges.putAll(chosen);
+    }
+
+    /** @return the plane's challenges that this run has turned on, in the plane's order */
+    public List<ChallengeData> getActiveChallenges() {
+        List<ChallengeData> active = new ArrayList<>();
+        ChallengeData[] all = Config.instance().getConfigData().challenges;
+        if (all == null)
+            return active;
+        for (ChallengeData challenge : all) {
+            if (challenges.containsKey(challenge.name))
+                active.add(challenge);
+        }
+        return active;
     }
 
     public boolean isCommanderMode() {
@@ -576,6 +601,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards")));
             deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
             unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+        }
+        if (data.containsKey("challengeNames") && data.containsKey("challengeValues")) {
+            String[] names = (String[]) data.readObject("challengeNames");
+            String[] values = (String[]) data.readObject("challengeValues");
+            for (int i = 0; i < names.length; i++) {
+                challenges.put(names[i], values[i]);
+            }
         }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
@@ -858,6 +890,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             characterFlagsKey.add(entry.getKey());
             characterFlagsValue.add(entry.getValue());
         }
+        data.storeObject("challengeNames", challenges.keySet().toArray(new String[0]));
+        data.storeObject("challengeValues", challenges.values().toArray(new String[0]));
         data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
         data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 
