@@ -921,6 +921,9 @@ public final class ArenaOptionsOverlay extends ArenaDialogOverlay {
             return;
         }
         float y = questionTextY;
+        //a dark band behind the words, so the board's card names do not show through them
+        final float pad = Math.round(questionLineH * 0.4f);
+        ArenaDialogKit.textBacking(g, w, y - pad, questionLines.size() * questionLineH + 2 * pad, alpha);
         final Color white = ArenaTheme.alpha(ArenaTheme.WHITE, alpha, S1);
         for (final String line : questionLines) {
             ArenaDialogKit.edged(g, line, questionFont, white, 0, y, w, questionLineH, Align.center);

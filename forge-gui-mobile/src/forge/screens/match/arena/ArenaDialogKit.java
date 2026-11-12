@@ -583,11 +583,19 @@ public final class ArenaDialogKit {
         private void backing(final Graphics g, final float w, final float h, final float alpha) {
             final float top = Math.round(h * (TITLE_CY - TITLE_SIZE * 0.75f));
             final float bottom = (lines.isEmpty() ? ruleAt : subtitleTop(h) + lines.size() * subFont.getLineHeight()) + Math.round(h * 0.012f);
-            final float bw = Math.round(w * BACKING_W), x = (w - bw) / 2f;
-            final Color dark = ArenaTheme.alpha(BACKING, BACKING.a * alpha, S1), clear = ArenaTheme.alpha(BACKING, 0f, S2);
-            g.fillGradientRect(clear, dark, false, x, top, bw / 2f, bottom - top);
-            g.fillGradientRect(dark, clear, false, x + bw / 2f, top, bw / 2f, bottom - top);
+            textBacking(g, w, top, bottom - top, alpha);
         }
+    }
+
+    /**
+     * A dark band behind words that sit over the board (a heading, a dialog's message), fading out at both ends, so
+     * card names under them do not show through.
+     */
+    public static void textBacking(final Graphics g, final float w, final float top, final float height, final float alpha) {
+        final float bw = Math.round(w * BACKING_W), x = (w - bw) / 2f;
+        final Color dark = ArenaTheme.alpha(BACKING, BACKING.a * alpha, S1), clear = ArenaTheme.alpha(BACKING, 0f, S2);
+        g.fillGradientRect(clear, dark, false, x, top, bw / 2f, height);
+        g.fillGradientRect(dark, clear, false, x + bw / 2f, top, bw / 2f, height);
     }
 
     // ---- the board behind ----------------------------------------------------------------------------------------
