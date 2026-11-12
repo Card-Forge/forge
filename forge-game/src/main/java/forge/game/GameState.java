@@ -1305,6 +1305,9 @@ public class GameState {
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode, artID);
                 if (pc == null) {
+                    pc = StaticData.instance().getVariantCards().getCard(cardinfo[0], setCode, artID);
+                }
+                if (pc == null) {
                     System.err.println("ERROR: Tried to create a non-existent card named " + cardinfo[0] + " (set: " + (setCode == null ? "any" : setCode) + ") when loading game state!");
                     continue;
                 }
