@@ -38,9 +38,11 @@ public class Match {
 
     private final EventBus events = new EventBus("match events");
     private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
-    private final Map<RegisteredPlayer, Map<Object, Pair<List<PaperCard>, Integer>>> stakes = new LinkedHashMap<>();
 
     private GameOutcome lastOutcome = null;
+
+    /** Pools a player loses a number of cards from, picked at random, if they lose the match. Keyed by the script line that added them. */
+    private final Map<RegisteredPlayer, Map<Object, Pair<List<PaperCard>, Integer>>> matchLossRemovals = new HashMap<>();
 
     public Match(final GameRules rules0, final List<RegisteredPlayer> players0, final String title) {
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
@@ -96,7 +98,11 @@ public class Match {
         // Typically ante, but also tearing up a blacker lotus
         executeOwnershipChanges(game);
         if (isMatchOver()) {
-            settleStakes();
+            for (RegisteredPlayer p : players) {
+                if (!lastOutcome.isWinner(p)) {
+                    removeOnMatchLoss(p);
+                }
+            }
         }
 
         game.clearCaches();
@@ -120,13 +126,39 @@ public class Match {
         return main == null ? null : Collections.unmodifiableList(main);
     }
 
+    /** Does nothing once the match is over. */
+    public void concede(final RegisteredPlayer leaver) {
+        if (lastOutcome != null && !isMatchOver()) {
+            removeOnMatchLoss(leaver);
+        }
+    }
+
+    /** A later call with an equal {@code key} replaces this one, so a script line that runs again counts once. */
+    public void addMatchLossRemoval(final RegisteredPlayer owner, final Object key, final List<PaperCard> cards, final int amount) {
+        matchLossRemovals.computeIfAbsent(owner, p -> new HashMap<>()).put(key, Pair.of(cards, amount));
+    }
+
+    private void removeOnMatchLoss(final RegisteredPlayer loser) {
+        final List<PaperCard> lost = new ArrayList<>();
+        final Map<Object, Pair<List<PaperCard>, Integer>> pools = matchLossRemovals.remove(loser);
+        if (pools == null) {
+            return;
+        }
+        for (final Pair<List<PaperCard>, Integer> pool : pools.values()) {
+            lost.addAll(Aggregates.random(pool.getLeft(), pool.getRight()));
+        }
+        if (!lost.isEmpty()) {
+            lastOutcome.addAnteLost(loser, lost);
+        }
+    }
+
     public GameOutcome getOutcomeById(int id) {
         return gameOutcomes.get(id);
     }
 
     public void clearGamesPlayed() {
         gameOutcomes.clear();
-        stakes.clear();
+        matchLossRemovals.clear();
         for (RegisteredPlayer p : players) {
             p.restoreDeck();
         }
@@ -476,39 +508,6 @@ public class Match {
             }
             // Other game types (like Quest) need to do something in their own calls to actually update data
         }
-    }
-
-    /**
-     * Stakes {@code amount} random cards of {@code cards}, which {@code player} loses if they lose the match.
-     * A later stake with an equal {@code key} replaces this one.
-     */
-    public void addStake(RegisteredPlayer player, Object key, List<PaperCard> cards, int amount) {
-        stakes.computeIfAbsent(player, p -> new LinkedHashMap<>()).put(key, Pair.of(cards, amount));
-    }
-
-    private void settleStakes() {
-        RegisteredPlayer winner = getWinner();
-        for (Entry<RegisteredPlayer, Map<Object, Pair<List<PaperCard>, Integer>>> e : stakes.entrySet()) {
-            if (e.getKey() != winner) {
-                lastOutcome.addAnteLost(e.getKey(), randomLosses(e.getValue()));
-            }
-        }
-    }
-
-    /** Settles the stakes of a player who leaves before the match ends, as if they had lost it. */
-    public void forfeitStakes(RegisteredPlayer player) {
-        Map<Object, Pair<List<PaperCard>, Integer>> playerStakes = stakes.remove(player);
-        if (playerStakes != null && lastOutcome != null) {
-            lastOutcome.addAnteLost(player, randomLosses(playerStakes));
-        }
-    }
-
-    private static List<PaperCard> randomLosses(Map<Object, Pair<List<PaperCard>, Integer>> playerStakes) {
-        List<PaperCard> lost = new ArrayList<>();
-        for (Pair<List<PaperCard>, Integer> stake : playerStakes.values()) {
-            lost.addAll(Aggregates.random(stake.getLeft(), stake.getRight()));
-        }
-        return lost;
     }
 
     public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {

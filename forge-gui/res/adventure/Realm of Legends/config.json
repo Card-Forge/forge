@@ -296,8 +296,8 @@
       "effect": {
         "opponent": {
           "startBattleScript": [
-            "DB$ Stake | Defined$ ValidCommand Card.YouOwn+IsCommander | SpellDescription$ Lose this match and you lose your commander and 5 random cards from your deck, never basic lands.",
-            "DB$ Stake | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | Amount$ 5"
+            "DB$ RemoveFromMatch | Defined$ ValidCommand Card.YouOwn+IsCommander | RemoveFromInventory$ True | OnMatchLoss$ True | SpellDescription$ Lose this match and you lose your commander and 5 random cards from your deck, never basic lands.",
+            "DB$ RemoveFromMatch | Defined$ ValidAll Card.YouOwn+nonBasic+inZoneHand,Card.YouOwn+nonBasic+inZoneLibrary | RemoveFromInventory$ True | OnMatchLoss$ True | Amount$ 5"
           ]
         }
       }

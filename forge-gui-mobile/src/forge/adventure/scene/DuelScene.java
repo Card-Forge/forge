@@ -151,9 +151,8 @@ public class DuelScene extends ForgeScene {
         return enemy;
     }
 
-    /** Quitting before the match ends loses it, so the player's staked cards are lost too. */
-    public void forfeitMatch() {
-        hostedMatch.getMatch().forfeitStakes(humanPlayer);
+    public void concedeMatch() {
+        hostedMatch.getMatch().concede(humanPlayer);
     }
 
     public void GameEnd() {

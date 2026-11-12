@@ -171,3 +171,5 @@ Each entry is one line of card script, run for that side after mulligans. A line
   "DB$ MakeCard | Name$ Lightning Bolt | Zone$ Hand | SpellDescription$ Start with Lightning Bolt in hand."
 ]
 ```
+
+A script can take cards from a player who loses the match with `RemoveFromMatch | RemoveFromInventory$ True | OnMatchLoss$ True`. Quitting the match between games counts as losing it. The Permadeath challenge in `Realm of Legends/config.json` is an example.
