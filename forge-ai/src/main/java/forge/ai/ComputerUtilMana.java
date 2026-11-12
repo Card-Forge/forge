@@ -806,7 +806,7 @@ public class ComputerUtilMana {
                 // from a source the remaining cost can spare, so that its cost payment doesn't grab a
                 // land that's needed for a colored shard.
                 if (!test && !prepayFilterManaAbility(cost, sa, ai, saPayment, toPay, sourcesForShards, paymentList, effect)) {
-                    saPayment.getManaPart().clearExpressChoice();
+                    activeManaPart(saPayment).getManaPart().clearExpressChoice();
                     saExcludeList.add(saPayment);
                     continue;
                 }
@@ -1009,23 +1009,37 @@ public class ComputerUtilMana {
     }
 
     private static int producedColors(final SpellAbility ma) {
-        final AbilityManaPart mp = ma.getManaPart();
+        final SpellAbility part = activeManaPart(ma);
+        final AbilityManaPart mp = part.getManaPart();
         if (mp == null) {
             return 0;
         }
         final Set<String> reflected = CardUtil.getReflectableManaColors(ma);
         int mask = 0;
         for (final byte c : MagicColor.WUBRG) {
-            if (mp.canProduce(MagicColor.toShortString(c), ma) || reflected.contains(MagicColor.toLongString(c))) {
+            if (mp.canProduce(MagicColor.toShortString(c), part) || reflected.contains(MagicColor.toLongString(c))) {
                 mask |= c;
             }
         }
         return mask;
     }
 
+    // "Add {C}. If ..., instead add any color" scripts switch the root off and put the alternative in a sub-ability
+    private static SpellAbility activeManaPart(final SpellAbility ma) {
+        if (ma.getSubAbility() == null) {
+            return ma;
+        }
+        for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
+            if (part.getManaPart() != null && part.metConditions()) {
+                return part;
+            }
+        }
+        return ma;
+    }
+
     private static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
-            sa.getManaPart().clearExpressChoice();
+            activeManaPart(sa).getManaPart().clearExpressChoice();
         }
     }
 
@@ -1243,7 +1257,8 @@ public class ComputerUtilMana {
             return false;
         }
 
-        AbilityManaPart m = ma.getManaPart();
+        final SpellAbility part = activeManaPart(ma);
+        final AbilityManaPart m = part.getManaPart();
         if (!m.meetsManaRestrictions(sa)) {
             return false;
         }
@@ -1260,7 +1275,7 @@ public class ComputerUtilMana {
         }
 
         if (m.isComboMana()) {
-            for (String s : m.getComboColors(ma).split(" ")) {
+            for (String s : m.getComboColors(part).split(" ")) {
                 if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
                     continue;
                 }
@@ -1271,12 +1286,12 @@ public class ComputerUtilMana {
 
                 if (ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s))) {
                     // usually we'll want to produce color that matches the shard
-                    ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(ma).split(" ")));
+                    ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(part).split(" ")));
                     // but other effects might still lead to a more permissive payment
                     if (!shared.isColorless()) {
                         m.setExpressChoice(shared.iterator().next().getShortName());
                     }
-                    setComboManaChoice(ai, ma, cost);
+                    setComboManaChoice(ai, part, cost);
                     return true;
                 }
             }
@@ -1308,7 +1323,7 @@ public class ComputerUtilMana {
         }
 
         if (toPay == ManaCostShard.COLORED_X) {
-            for (String s : m.mana(ma).split(" ")) {
+            for (String s : m.mana(part).split(" ")) {
                 if (ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
                     return true;
                 }
