@@ -616,11 +616,14 @@ public class DeckgenUtil {
     }
 
     public static CardPool generatePlanarPool() {
+        return generatePlanarPool(MyRandom.getRandom().nextInt(FModel.getPlanechaseCards().countAll()-10)+10);
+    }
+
+    public static CardPool generatePlanarPool(int targetsize) {
         CardPool res = new CardPool();
         List<PaperCard> allPlanars = FModel.getPlanechaseCards().toFlatList();
 
         int phenoms = 0;
-        int targetsize = MyRandom.getRandom().nextInt(allPlanars.size()-10)+10;
         while (true) {
             PaperCard rndPlane = Aggregates.random(allPlanars);
             allPlanars.remove(rndPlane);
