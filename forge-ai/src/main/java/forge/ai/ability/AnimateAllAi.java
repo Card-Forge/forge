@@ -32,7 +32,25 @@ public class AnimateAllAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
+                sa.resetTargets();
+                for (Player opponent : aiPlayer.getOpponents()) {
+                    if (sa.canTarget(opponent)) {
+                        sa.getTargets().add(opponent);
+                        if (sa.isTargetNumberValid()) {
+                            break;
+                        }
+                    }
+                }
+                if (!sa.isTargetNumberValid()) {
+                    sa.resetTargets();
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed
+                    );
+                }
+            }
+
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay
+            );
         }
         return canPlay(aiPlayer, sa);
     }
