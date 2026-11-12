@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CountersPutAi extends CountersAi {
 
@@ -1208,7 +1210,8 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         PhaseHandler ph = source.getGame().getPhaseHandler();
 
-        int numStation = source.getKeywordMagnitude(Keyword.STATION);
+        Pattern pattern = Pattern.compile("counters_GE(\\d+)_CHARGE");
+
         int numCharge = source.getCounters(CounterEnumType.CHARGE);
         CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
         if (canTap.isEmpty()) {
@@ -1224,7 +1227,22 @@ public class CountersPutAi extends CountersAi {
         if (ph.is(PhaseType.MAIN1, ai)) {
             Card firstToTap = canTap.getFirst();
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
-                if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
+                Integer minStation = null;
+                for (StaticAbility st : source.getStaticAbilities()) {
+                    if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
+                        continue;
+                    }
+                    Matcher m = pattern.matcher(st.getParam("Affected"));
+                    if (!m.find()) {
+                        continue;
+                    }
+                    minStation = Integer.valueOf(m.group(1));
+                    break;
+                }
+                if (minStation == null) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                if (numCharge < minStation && numCharge + firstToTap.getNetPower() >= minStation
                         && firstToTap.getNetPower() <= source.getBasePower()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
@@ -1233,10 +1251,26 @@ public class CountersPutAi extends CountersAi {
 
         // If there's nothing to possibly block next turn, or we can reasonably stay on high enough life, go for it
         if (ph.is(PhaseType.MAIN2, ai)) {
+            Integer maxStation = null;
+            for (StaticAbility st : source.getStaticAbilities()) {
+                if (!st.isIntrinsic() || !st.hasParam("Affected")) {
+                    continue;
+                }
+                Matcher m = pattern.matcher(st.getParam("Affected"));
+                if (!m.find()) {
+                    continue;
+                }
+                int value = Integer.valueOf(m.group(1));
+                maxStation = maxStation == null ? value : Math.max(maxStation, value);
+            }
+            if (maxStation == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
             List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
             CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
 
-            if (numCharge < numStation) {
+            if (numCharge < maxStation) {
                 if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }

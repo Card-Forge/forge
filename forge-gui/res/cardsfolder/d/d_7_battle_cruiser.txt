@@ -2,7 +2,7 @@ Name:D-7 Battle Cruiser
 ManaCost:1 R
 Types:Artifact Spacecraft
 PT:3/3
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 3+ At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.
 SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.
 SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | AtEOT$ Sacrifice
