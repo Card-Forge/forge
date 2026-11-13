@@ -157,8 +157,6 @@ public class ProtocolGuiGameInProcessTest {
     public void humanControllerRunsThroughInProcessRemote() throws Exception {
         TestUtils.ensureFModelInitialized();
         FModel.getPreferences().setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, false);
-        FModel.getPreferences().setPref(FPref.YIELD_SKIP_PHASE_DELAY, true);
-        FModel.getPreferences().setPref(FPref.YIELD_SKIP_RESOLVE_DELAY, true);
         // Recording a replay encodes with the netplay codec, which is exactly what this test shows the game does not need
         FModel.getPreferences().setPref(FPref.UI_RECORD_REPLAYS, false);
         MyRandom.setRandom(new Random(7));
