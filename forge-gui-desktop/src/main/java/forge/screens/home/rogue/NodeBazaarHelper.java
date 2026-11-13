@@ -50,7 +50,7 @@ class NodeBazaarHelper {
         }
 
         runBazaarShopping(currentRun, null);
-        RogueCommanderAchievements.instance.evaluateRunAchievements(currentRun);
+        RogueCommanderAchievements.getInstance().evaluateRunAchievements(currentRun);
         map.completeSideNode(bazaarNode);
     }
 

@@ -71,8 +71,8 @@ public interface NPCEncounter {
     default void incrementNpcLevel() {
         RogueMetaProgress p = RogueMetaProgress.getInstance();
         p.setNPCLevelIfHigher(getNpc().id, p.getNPCLevel(getNpc().id) + 1);
-        RogueCommanderAchievements.instance.evaluateNpcBoonUnlockAchievements(p);
-        RogueCommanderAchievements.instance.evaluateUpgradeAchievements(p);
+        RogueCommanderAchievements.getInstance().evaluateNpcBoonUnlockAchievements(p);
+        RogueCommanderAchievements.getInstance().evaluateUpgradeAchievements(p);
     }
 
     /** Returns whether this encounter's trigger condition has been met. */

@@ -170,7 +170,7 @@ public class RogueWinLoseController {
         recordMatchStats(progress, true);
 
         // Evaluate run-level achievements after rewards
-        RogueCommanderAchievements.instance.evaluateRunAchievements(currentRun);
+        RogueCommanderAchievements.getInstance().evaluateRunAchievements(currentRun);
 
         // Move to next node
         currentRun.nextNode();
@@ -191,7 +191,7 @@ public class RogueWinLoseController {
             return;
         }
         progress.recordEndlessLevelCompleted(currentRun);
-        RogueCommanderAchievements.instance.recordEndlessLevelWon(currentRun.getEndlessLevel());
+        RogueCommanderAchievements.getInstance().recordEndlessLevelWon(currentRun.getEndlessLevel());
         if (currentRun.isCustomRun() && currentRun.getEndlessLevel() == 0) {
             progress.unlockEndlessMode();
         }
@@ -219,11 +219,11 @@ public class RogueWinLoseController {
 
         RogueStats.fireOnRunCompleted(run, progress, true);
 
-        RogueCommanderAchievements.instance.recordRunWon(
+        RogueCommanderAchievements.getInstance().recordRunWon(
             run.getCurrentCommanderName());
 
         boolean sparkAwarded = progress.recordDescensionWin(run);
-        RogueCommanderAchievements.instance.evaluateRunAchievements(run);
+        RogueCommanderAchievements.getInstance().evaluateRunAchievements(run);
         progress.notifyDescensionL1IfFirstWin(run);
 
         RogueIO.saveRun(run);
@@ -304,7 +304,7 @@ public class RogueWinLoseController {
                 defeatedBy != null ? defeatedBy : ""));
 
         RogueStats.fireOnRunCompleted(run, progress, false);
-        RogueCommanderAchievements.instance.evaluateRunAchievements(run);
+        RogueCommanderAchievements.getInstance().evaluateRunAchievements(run);
 
         RogueIO.saveRun(run);
         return false;

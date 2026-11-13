@@ -120,6 +120,7 @@ public final class FModel {
         a.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         a.put(GameType.Puzzle, new PuzzleAchievements());
         a.put(GameType.Adventure, new AdventureAchievements());
+        a.put(GameType.RogueCommander, new RogueCommanderAchievements());
         return a;
     });
 
@@ -443,10 +444,10 @@ public final class FModel {
     public static AchievementCollection getAchievements(GameType gameType) {
         // Translate gameType to appropriate type if needed
         return switch (gameType) {
-            case Constructed, Draft, Sealed, Quest, PlanarConquest, Puzzle, Adventure -> achievements.get().get(gameType);
+            case Constructed, Draft, Sealed, Quest, PlanarConquest, Puzzle, Adventure, RogueCommander ->
+                    achievements.get().get(gameType);
             case AdventureEvent -> achievements.get().get(GameType.Adventure);
             case QuestDraft -> achievements.get().get(GameType.Quest);
-            case RogueCommander -> RogueCommanderAchievements.instance;
             default -> achievements.get().get(GameType.Constructed);
         };
     }

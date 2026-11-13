@@ -515,9 +515,9 @@ public enum CSubmenuRogueMap implements ICDoc {
     progress.addEchoes(20);
     progress.addRunHistoryEntry(RogueRunHistoryEntry.fromRun(currentRun, "VICTORY", "[DEV]"));
     RogueStats.fireOnRunCompleted(currentRun, progress, true);
-    RogueCommanderAchievements.instance.recordRunWon(commanderName);
+    RogueCommanderAchievements.getInstance().recordRunWon(commanderName);
     progress.recordDescensionWin(currentRun);
-    RogueCommanderAchievements.instance.evaluateRunAchievements(currentRun);
+    RogueCommanderAchievements.getInstance().evaluateRunAchievements(currentRun);
     progress.notifyDescensionL1IfFirstWin(currentRun);
     RogueIO.saveRun(currentRun);
     currentRun = null;

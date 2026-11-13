@@ -362,7 +362,7 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
         // Save the RogueRun to persist deck changes
         if (isCurrentRun() && rogueRun.getHostedMatch() == null) {
             RogueIO.saveRun(rogueRun);
-            RogueCommanderAchievements.instance.evaluateRunAchievements(rogueRun);
+            RogueCommanderAchievements.getInstance().evaluateRunAchievements(rogueRun);
             // Reload to ensure we're working with the saved version
             // This prevents stale data if the editor is opened again
             resetTables();

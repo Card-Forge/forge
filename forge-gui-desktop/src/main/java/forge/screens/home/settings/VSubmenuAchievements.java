@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -22,8 +23,8 @@ import forge.gui.framework.EDocID;
 import forge.item.IPaperCard;
 import forge.localinstance.achievements.Achievement;
 import forge.localinstance.achievements.AchievementCollection;
-import forge.localinstance.achievements.RogueCommanderAchievements;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -127,7 +128,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         });
 
         AchievementCollection.buildComboBox(cbCollections);
-        cbCollections.addItem(RogueCommanderAchievements.instance);
+        cbCollections.addItem(FModel.getAchievements(GameType.RogueCommander));
 
         cbCollections.setSkinFont(FSkin.getRelativeBoldFont(14));
         cbCollections.setTextAlignment(TextAlignment.CENTER);

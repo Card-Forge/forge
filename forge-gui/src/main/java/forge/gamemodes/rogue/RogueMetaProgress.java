@@ -357,7 +357,7 @@ public class RogueMetaProgress {
             changed = true;
         }
 
-        RogueCommanderAchievements.instance.evaluateCommanderUnlockAchievements();
+        RogueCommanderAchievements.getInstance().evaluateCommanderUnlockAchievements();
 
         if (changed) {
             save();
@@ -630,7 +630,7 @@ public class RogueMetaProgress {
 
     public void setAetherUpgradeLevel(int level) {
         aetherUpgradeLevel = level;
-        RogueCommanderAchievements.instance.evaluateUpgradeAchievements(this);
+        RogueCommanderAchievements.getInstance().evaluateUpgradeAchievements(this);
         save();
     }
 
@@ -646,7 +646,7 @@ public class RogueMetaProgress {
         totalSparks -= upgrade.sparkCost;
         totalEchoes -= upgrade.echoCost;
         aetherUpgradeLevel = level;
-        RogueCommanderAchievements.instance.evaluateUpgradeAchievements(this);
+        RogueCommanderAchievements.getInstance().evaluateUpgradeAchievements(this);
         save();
         return true;
     }
@@ -1063,7 +1063,7 @@ public class RogueMetaProgress {
         } else {
             npcLevels.put(id, level);
         }
-        RogueCommanderAchievements.instance.evaluateUpgradeAchievements(this);
+        RogueCommanderAchievements.getInstance().evaluateUpgradeAchievements(this);
         save();
     }
 

@@ -79,7 +79,7 @@ public enum HenzieEncounter implements NPCEncounter {
 
         if (isAcceptedContract(effect)) {
             progress.setNPCLevel(getNpc().id, OFFERING_BOONS.requiredLevel);
-            RogueCommanderAchievements.instance.evaluateNpcBoonUnlockAchievements(progress);
+            RogueCommanderAchievements.getInstance().evaluateNpcBoonUnlockAchievements(progress);
             return buildAcceptedContractContext();
         }
 

@@ -35,11 +35,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Element;
 
 public class RogueCommanderAchievements extends AchievementCollection {
-    public static final RogueCommanderAchievements instance = new RogueCommanderAchievements();
-
-    private RogueCommanderAchievements() {
+    public RogueCommanderAchievements() {
         super("lblRogueCommanderRuns", ForgeConstants.ACHIEVEMENTS_DIR + "rogue-commander.xml",
               false, ForgeConstants.ROGUE_COMMANDER_ACHIEVEMENT_LIST_FILE);
+    }
+
+    public static RogueCommanderAchievements getInstance() {
+        return (RogueCommanderAchievements) FModel.getAchievements(GameType.RogueCommander);
     }
 
     @Override
