@@ -3346,3 +3346,48 @@
 2026-10-03 12855481 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-03-12855481-vintage-challenge-32.zip
 2026-10-03 12855488 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-03-12855488-vintage-challenge-16.zip
 2026-10-04 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-04-11185-vintage-league.zip
+2026-10-04 12855495 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-04-12855495-vintage-challenge-32.zip
+2026-10-05 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-05-11185-vintage-league.zip
+2026-10-06 11185 Vintage League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-06-11185-vintage-league.zip
+2026-10-06 12856182 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-06-12856182-vintage-challenge-32.zip
+2026-10-07 11185 Vintage League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-07-11185-vintage-league.zip
+2026-10-08 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-08-11185-vintage-league.zip
+2026-10-08 12856168 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-08-12856168-vintage-challenge-32.zip
+2026-10-08 12856333 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-08-12856333-vintage-challenge-16.zip
+2026-10-09 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-09-11185-vintage-league.zip
+2026-10-11 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-11-11185-vintage-league.zip
+2026-10-11 12856175 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-11-12856175-vintage-challenge-16.zip
+2026-10-13 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-13-11185-vintage-league.zip
+2026-10-14 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-14-11185-vintage-league.zip
+2026-10-15 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-15-11185-vintage-league.zip
+2026-10-15 12856576 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-15-12856576-vintage-challenge-32.zip
+2026-10-16 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-16-11185-vintage-league.zip
+2026-10-17 11185 Vintage League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-17-11185-vintage-league.zip
+2026-10-17 12856595 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-17-12856595-vintage-challenge-32.zip
+2026-10-18 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-18-11185-vintage-league.zip
+2026-10-18 12856602 Vintage Challenge 16 (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-18-12856602-vintage-challenge-16.zip
+2026-10-18 12856609 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-18-12856609-vintage-challenge-32.zip
+2026-10-20 11185 Vintage League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-20-11185-vintage-league.zip
+2026-10-21 11185 Vintage League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-21-11185-vintage-league.zip
+2026-10-22 11185 Vintage League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-22-11185-vintage-league.zip
+2026-10-22 12856960 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-22-12856960-vintage-challenge-32.zip
+2026-10-23 11185 Vintage League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-23-11185-vintage-league.zip
+2026-10-24 12856980 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-24-12856980-vintage-challenge-32.zip
+2026-10-25 11185 Vintage League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-25-11185-vintage-league.zip
+2026-10-25 12856987 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-25-12856987-vintage-challenge-16.zip
+2026-10-25 12856994 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-25-12856994-vintage-challenge-32.zip
+2026-10-26 11185 Vintage League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-26-11185-vintage-league.zip
+2026-10-27 11185 Vintage League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-27-11185-vintage-league.zip
+2026-10-29 12857459 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-29-12857459-vintage-challenge-16.zip
+2026-10-30 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-30-11185-vintage-league.zip
+2026-10-31 12857395 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-10-31-12857395-vintage-challenge-32.zip
+2026-11-01 12857401 Vintage Challenge 16 (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-01-12857401-vintage-challenge-16.zip
+2026-11-01 12857408 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-01-12857408-vintage-challenge-32.zip
+2026-11-02 11185 Vintage League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-02-11185-vintage-league.zip
+2026-11-03 11185 Vintage League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-03-11185-vintage-league.zip
+2026-11-05 11185 Vintage League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-05-11185-vintage-league.zip
+2026-11-05 12857669 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-05-12857669-vintage-challenge-32.zip
+2026-11-06 11185 Vintage League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-06-11185-vintage-league.zip
+2026-11-07 12857688 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-07-12857688-vintage-challenge-32.zip
+2026-11-08 12857694 Vintage Challenge 16 (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-08-12857694-vintage-challenge-16.zip
+2026-11-08 12857701 Vintage Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/vintage/2026-11-08-12857701-vintage-challenge-32.zip

@@ -1,0 +1,6 @@
+Name:Pattern Buffer Preservation
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Hand | DestinationZone2$ Graveyard | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+K:Beam me up:1 B
+Oracle:Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\nBeam me up {1}{B} (You may cast this card from your graveyard for {1}{B} if you also return a creature you control to its owner's hand. Then exile this spell.)

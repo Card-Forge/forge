@@ -161,7 +161,7 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             if (optional) {
                 String message = TextUtil.concatWithSpace("Transform", gameCard.getDisplayName(), "?");
-                if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null)) {
+                if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, gameCard, null)) {
                     return;
                 }
             }

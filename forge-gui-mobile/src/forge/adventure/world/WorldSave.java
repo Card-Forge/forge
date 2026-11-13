@@ -3,28 +3,38 @@ package forge.adventure.world;
 import com.badlogic.gdx.utils.TimeUtils;
 import forge.Forge;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
+import forge.adventure.scene.StartScene;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
+import forge.util.FileUtil;
+import forge.util.ZipUtil;
 
 import java.io.*;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Stream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -36,6 +46,7 @@ public class WorldSave {
     static final public int AUTO_SAVE_SLOT = -1;
     static final public int QUICK_SAVE_SLOT = -2;
     static final public int INVALID_SAVE_SLOT = -3;
+    private static final int VERSION_BACKUPS_KEPT = 2;
     static final WorldSave currentSave = new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player = new AdventurePlayer();
@@ -46,7 +57,6 @@ public class WorldSave {
     private final SignalList onLoadList = new SignalList();
     private static long lastPreviewTimestamp = 0L;
     private static final long COOLDOWN_WINDOW_MS = 800L;
-    private static boolean firstCapture = true;
     private static final ExecutorService SAVE_EXECUTOR =
         Executors.newSingleThreadExecutor(r -> {
             Thread thread = new Thread(r, "Forge-Adventure-Save");
@@ -147,6 +157,57 @@ public class WorldSave {
 
     public static String getSaveFile(int slot) {
         return ForgeConstants.USER_ADVENTURE_DIR + Config.instance().getPlane() + File.separator + filename(slot);
+    }
+
+    /**
+     * Zips the adventure folder the first time a new build opens adventure mode. A build that cannot read part of
+     * a save loads what it can, and the next save writes that loss over the original.
+     */
+    public static void backupOnVersionChange() {
+        FileHandle buildTxt = GuiBase.isAndroid() ? Gdx.files.internal("build.txt") : Gdx.files.classpath("build.txt");
+        String build = Forge.getDeviceAdapter().getVersionString() + (buildTxt.exists() ? " " + buildTxt.readString().trim() : "");
+        File backupDir = new File(ForgeConstants.USER_ADVENTURE_BACKUP_DIR);
+        File marker = new File(backupDir, "build.txt");
+        if (build.equals(FileUtil.readFileToString(marker)))
+            return;
+        // Queued ahead of any async autosave, which runs on the same single thread
+        SAVE_EXECUTOR.execute(() -> {
+            File backup = new File(backupDir, ZipUtil.newAdvBackupName());
+            boolean backedUp = false;
+            try {
+                if (!backupDir.isDirectory() && !backupDir.mkdirs())
+                    throw new IOException("Could not create backup directory: " + backupDir);
+                if (!hasSaveFiles()) {
+                    FileUtil.writeFile(marker, build);
+                    return;
+                }
+                ZipUtil.zip(new File(ForgeConstants.USER_ADVENTURE_DIR), backupDir, backup.getName());
+                if (!ZipUtil.isValidZip(backup))
+                    throw new IOException("Backup verification failed: " + backup);
+                String prefix = ZipUtil.backupAdvFile.replace(".adv", "_");
+                File[] backups = backupDir.listFiles((dir, name) -> name.startsWith(prefix) && name.endsWith(".adv"));
+                // Names carry the timestamp, so reverse name order is newest first
+                Arrays.sort(backups, Comparator.reverseOrder());
+                for (int i = VERSION_BACKUPS_KEPT; i < backups.length; i++)
+                    backups[i].delete();
+                FileUtil.writeFile(marker, build);
+                backedUp = true;
+            } catch (Exception e) {
+                backup.delete();
+                e.printStackTrace();
+            }
+            boolean result = backedUp;
+            Gdx.app.postRunnable(() -> StartScene.instance().showVersionBackupResult(result));
+        });
+    }
+
+    private static boolean hasSaveFiles() throws IOException {
+        Path dir = Paths.get(ForgeConstants.USER_ADVENTURE_DIR);
+        if (!Files.isDirectory(dir))
+            return false;
+        try (Stream<Path> paths = Files.walk(dir)) {
+            return paths.anyMatch(p -> p.toString().endsWith(".sav"));
+        }
     }
 
     public static WorldSave getCurrentSave() {
@@ -473,28 +534,44 @@ public class WorldSave {
 
     // prevent spam of preview if user repeatedly/accidentally reopen scene that request previews
     public static void requestPreview() {
-        final long currentTimestamp = TimeUtils.millis();
+        requestPreview(false);
+    }
 
-        if (firstCapture) {
-            firstCapture = false;
-            // init once
+    /**
+     * @param force skip the cooldown, for a caller that uses the preview right away (quick save)
+     */
+    public static void requestPreview(final boolean force) {
+        final long currentTimestamp = TimeUtils.millis();
+        final PreviewAction action = previewAction(GuiBase.getInterface().isGuiThread(),
+                currentTimestamp, lastPreviewTimestamp, force);
+        if (action == PreviewAction.SKIP) {
+            return;
+        }
+        lastPreviewTimestamp = currentTimestamp;
+        if (action == PreviewAction.NOW) {
             currentSave.header.createPreview();
             return;
         }
-
-        // If 800ms has not passed since the last successful generation, skip
-        if (currentTimestamp - lastPreviewTimestamp < COOLDOWN_WINDOW_MS) {
-            return;
-        }
-
-        // Update the timestamp immediately to lock out parallel thread spam on the spot
-        lastPreviewTimestamp = currentTimestamp;
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
                 currentSave.header.createPreview();
             }
         });
+    }
+
+    enum PreviewAction { SKIP, NOW, LATER }
+
+    static PreviewAction previewAction(final boolean onGlThread, final long now, final long last, final boolean force) {
+        // If 800ms has not passed since the last generation, skip
+        if (!force && now - last < COOLDOWN_WINDOW_MS) {
+            return PreviewAction.SKIP;
+        }
+        // On the GL thread the capture has to happen now. Queued, it runs after the frame that already shows the next
+        // scene (the menu) was swapped, and what the back buffer holds then depends on the driver: the frame before
+        // (the world) or the frame just drawn (the menu). Input is handled before the frame is drawn, so now the back
+        // buffer still holds a world frame. Other threads cannot read the GL buffer at all and have to queue.
+        return onGlThread ? PreviewAction.NOW : PreviewAction.LATER;
     }
 
     public static void dispose() {

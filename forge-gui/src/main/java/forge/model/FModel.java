@@ -369,6 +369,11 @@ public final class FModel {
                 () -> forge.util.FileUtil.readFile(ForgeConstants.AI_CARD_ROLES_FILE),
                 () -> forge.util.FileUtil.readFile(ForgeConstants.COMMANDER_BRACKET_COMBOS_FILE),
                 () -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMMANDER_COMBOS_FILE));
+        // the combos of the Vintage, Legacy and Modern metagame, as data (ai-combos.txt)
+        forge.ai.simulation.ComboCatalog.configure(() -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMBOS_FILE));
+        // decks built for the AI keep the AI:RemoveDeck:All cards that Flat MC plays, while it is on
+        forge.card.CardAiHints.setKeptForFlatMc(name -> getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO)
+                && AiCardLists.isFlatMcPlayable(name));
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix

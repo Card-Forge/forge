@@ -1,0 +1,66 @@
+# Combos the AI knows (read by ComboCatalog: the AI recognises them in its own deck and, with AntiCombo, in what the
+# opponents show). One combo a line:   win | Name | slot | slot ...     or     lock | Name | slot | slot ...
+# win: the combo wins the game; lock: it stops the opponent from playing. A slot is a card, or cards one of which is
+# enough (Card A / Card B). The combo is assembled when every slot has a card. Card names must exist (a test checks it).
+# Add a line to teach the AI a new combo: no code to change. Cards in public view that fill a slot weigh as pieces, a
+# combo whole in view is a threat, and the card that would complete it is the first target of removal.
+
+win | Channel + Fireball | Channel | Fireball
+win | Channel + Banefire | Channel | Banefire
+win | Channel + Ulamog, the Ceaseless Hunger | Channel | Ulamog, the Ceaseless Hunger
+win | Time Vault + Voltaic Key | Time Vault | Voltaic Key / Manifold Key
+win | Flash + Protean Hulk | Flash | Protean Hulk
+win | Melira + Murderous Redcap + Viscera Seer | Melira, Sylvok Outcast | Murderous Redcap | Viscera Seer
+win | Tinker + Blightsteel Colossus | Tinker | Blightsteel Colossus
+win | Thassa's Oracle + Demonic Consultation | Thassa's Oracle | Demonic Consultation
+win | Thassa's Oracle + Tainted Pact | Thassa's Oracle | Tainted Pact
+win | Doomsday + Thassa's Oracle | Doomsday | Thassa's Oracle
+win | Demonic Consultation + Laboratory Maniac | Demonic Consultation | Laboratory Maniac
+win | Painter's Servant + Grindstone | Painter's Servant | Grindstone
+win | Tolarian Academy + Mind Over Matter + Stroke of Genius | Tolarian Academy | Mind Over Matter | Stroke of Genius
+win | Hermit Druid + Dread Return | Hermit Druid | Dread Return
+win | Ad Nauseam + Angel's Grace + Tendrils / Grapeshot | Ad Nauseam | Angel's Grace | Tendrils of Agony / Grapeshot
+win | High Tide + Palinchron + Stroke of Genius | High Tide | Palinchron | Stroke of Genius
+win | Tendrils + Lion's Eye Diamond + Infernal Tutor | Tendrils of Agony | Lion's Eye Diamond | Infernal Tutor
+win | Yawgmoth's Will + Black Lotus + Dark Ritual + Tendrils | Yawgmoth's Will | Black Lotus | Dark Ritual | Tendrils of Agony
+win | Underworld Breach + Lion's Eye Diamond + Brain Freeze | Underworld Breach | Lion's Eye Diamond | Brain Freeze
+win | Splinter Twin + Deceiver Exarch / Pestermite | Splinter Twin | Deceiver Exarch / Pestermite
+win | Kiki-Jiki + Restoration Angel / Bounding Krasis | Kiki-Jiki, Mirror Breaker | Restoration Angel / Bounding Krasis
+win | Saheeli Rai + Felidar Guardian | Saheeli Rai | Felidar Guardian
+win | Jeskai Ascendancy + Retraction Helix | Jeskai Ascendancy | Retraction Helix
+win | Heliod, Sun-Crowned + Walking Ballista | Heliod, Sun-Crowned | Walking Ballista
+win | Exquisite Blood + Sanguine Bond | Exquisite Blood | Sanguine Bond
+win | Mikaeus, the Unhallowed + Triskelion | Mikaeus, the Unhallowed | Triskelion
+win | Spike Feeder + Archangel of Thune | Spike Feeder | Archangel of Thune
+win | Witherbloom Apprentice + Chain of Smog | Witherbloom Apprentice | Chain of Smog
+win | Bloodletter of Aclazotz + Unstoppable Slasher | Bloodletter of Aclazotz | Unstoppable Slasher
+win | Devoted Druid + Vizier of Remedies | Devoted Druid | Vizier of Remedies
+win | Basalt Monolith + Rings of Brighthearth | Basalt Monolith | Rings of Brighthearth
+win | Grim Monolith + Power Artifact | Grim Monolith | Power Artifact
+win | Metalworker + Staff of Domination | Metalworker | Staff of Domination
+win | Freed from the Real + Bloom Tender | Freed from the Real | Bloom Tender
+win | Pili-Pala + Grand Architect | Pili-Pala | Grand Architect
+win | Auriok Salvagers + Lion's Eye Diamond | Auriok Salvagers | Lion's Eye Diamond
+win | Krark-Clan Ironworks + Scrap Trawler + Myr Retriever | Krark-Clan Ironworks | Scrap Trawler | Myr Retriever
+win | Worldgorger Dragon + Animate Dead | Worldgorger Dragon | Animate Dead / Necromancy / Dance of the Dead
+win | Sliver Queen + Mana Echoes | Sliver Queen | Mana Echoes
+win | Urza, Lord High Artificer + Thopter Foundry + Sword of the Meek | Urza, Lord High Artificer | Thopter Foundry | Sword of the Meek
+win | Hive Mind + Pact of Negation | Hive Mind | Pact of Negation
+win | Peer into the Abyss + Underworld Dreams | Peer into the Abyss | Underworld Dreams
+win | Scapeshift + Valakut | Scapeshift | Valakut, the Molten Pinnacle
+win | Dark Depths + Thespian's Stage / Vampire Hexmage | Dark Depths | Thespian's Stage / Vampire Hexmage
+win | Illusions of Grandeur + Donate | Illusions of Grandeur | Donate
+win | Leyline of the Void + Helm of Obedience | Leyline of the Void | Helm of Obedience
+win | Near-Death Experience + Worship | Near-Death Experience | Worship
+win | Aetherworks Marvel + Woodweaver's Puzzleknot | Aetherworks Marvel | Woodweaver's Puzzleknot
+win | Second Sunrise + Conjurer's Bauble | Second Sunrise | Conjurer's Bauble
+lock | Counterbalance + Sensei's Divining Top | Counterbalance | Sensei's Divining Top
+lock | Mindslaver + Academy Ruins | Mindslaver | Academy Ruins
+lock | Isochron Scepter + Orim's Chant | Isochron Scepter | Orim's Chant
+lock | Teferi, Time Raveler + Knowledge Pool | Teferi, Time Raveler | Knowledge Pool
+lock | Maralen of the Mornsong + Opposition Agent | Maralen of the Mornsong | Opposition Agent
+lock | Karn, the Great Creator + Mycosynth Lattice | Karn, the Great Creator | Mycosynth Lattice
+lock | Drana and Linvala + Urborg + Kormus Bell | Drana and Linvala | Urborg, Tomb of Yawgmoth / Kormus Bell
+lock | Solemnity + Decree of Silence | Solemnity | Decree of Silence
+lock | Narset, Parter of Veils + Geier Reach Sanitarium | Narset, Parter of Veils | Geier Reach Sanitarium
+lock | Unburial Rites + Iona, Shield of Emeria | Unburial Rites | Iona, Shield of Emeria

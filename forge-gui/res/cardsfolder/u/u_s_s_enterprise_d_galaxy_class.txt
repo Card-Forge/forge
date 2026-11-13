@@ -2,7 +2,7 @@ Name:U.S.S. Enterprise-D, Galaxy-Class
 ManaCost:3
 Types:Legendary Artifact Spacecraft
 PT:4/5
-K:Station:7
+K:Station
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ CHARGE | FirstTime$ True | Execute$ TrigExile | TriggerDescription$ Whenever one or more charge counters are put on NICKNAME for the first time each turn, exile the top card of your library. You may play that card this turn.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup

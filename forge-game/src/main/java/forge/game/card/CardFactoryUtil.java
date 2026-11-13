@@ -916,7 +916,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
-            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True | IgnoreFreeze$ True";
+            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True";
             final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True";
@@ -3466,7 +3466,7 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Station")) {
+        } else if (keyword.equals("Station")) {
             String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +
                     "| CounterType$ CHARGE | CounterNum$ StationX | SorcerySpeed$ True " +
                     "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";

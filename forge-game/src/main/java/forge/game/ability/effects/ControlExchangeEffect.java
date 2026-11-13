@@ -87,7 +87,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
                 Localizer.getInstance().getMessage("lblExchangeControl",
                         object1.getTranslatedName(),
-                        object2.getTranslatedName()), null)) {
+                        object2.getTranslatedName()), object1, null)) {
             return;
         }
 

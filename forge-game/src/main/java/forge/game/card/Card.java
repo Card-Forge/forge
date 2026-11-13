@@ -2710,7 +2710,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
-                        || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
+                        || keyword.equals("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
                         || keyword.startsWith("Affinity")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
@@ -7603,16 +7603,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
-        for (final SpellAbility sa : abilities) {
+        abilities.removeIf(sa -> {
             sa.setActivatingPlayer(player);
             // fix things like retrace
             // check only if SA can't be cast normally
-            if (!sa.canPlay(true) && (removeUnplayable || !sa.isPossible())) {
-                toRemove.add(sa);
-            }
-        }
-        abilities.removeAll(toRemove);
+            return !sa.canPlay(true) && (removeUnplayable || !sa.isPossible());
+        });
 
         return abilities;
     }

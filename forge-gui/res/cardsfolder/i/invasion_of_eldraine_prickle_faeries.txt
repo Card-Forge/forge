@@ -19,5 +19,5 @@ PT:2/2
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ TrigCount | SVarCompare$ LE2 | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, CARDNAME deals 2 damage to them.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer
-SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl
+SVar:TrigCount:TriggeredPlayer$CardsInHand
 Oracle:Flying\nAt the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Prickle Faeries deals 2 damage to them.

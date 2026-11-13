@@ -95,10 +95,12 @@ public class RewardData implements Serializable {
         minDate          = rewardData.minDate;
     }
 
-    private static Iterable<PaperCard> allCards;
-    private static Iterable<PaperCard> allEnemyCards;
+    private static volatile Iterable<PaperCard> allCards;
+    private static volatile Iterable<PaperCard> allEnemyCards;
 
-    static private void initializeAllCards() {
+    static private synchronized void initializeAllCards() {
+        if (allCards != null && allEnemyCards != null)
+            return; // another thread finished first
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
@@ -129,20 +131,23 @@ public class RewardData implements Serializable {
         Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
         filters.add(pc -> !restrictedCards.contains(pc.getName()));
 
-        Collection<PaperCard> pool = CardUtil.getFullCardPool(false);
+        Collection<PaperCard> source = CardUtil.getFullCardPool(false);
         if (Config.instance().appliesUserExclusions())
-            pool = CardUtil.withAllowedPrints(new ArrayList<>(pool));
+            source = CardUtil.withAllowedPrints(new ArrayList<>(source));
 
         // Filter out specific cards.
-        allCards = pool.stream()
+        List<PaperCard> pool = source.stream()
                 .filter(IterableUtil.and(filters))
                 .collect(Collectors.toList());
 
-        //Filter AI cards for enemies.
-        allEnemyCards = IterableUtil.filter(allCards, input -> {
-            if (input == null) return false;
-            return !input.getRules().getAiHints().getRemAIDecks();
-        });
+        //Filter AI cards for enemies. Evaluated once; a lazy filter re-runs the FlatMC check on every template scan.
+        List<PaperCard> enemyPool = new ArrayList<>(pool.size());
+        for (PaperCard input : pool) {
+            if (input != null && !forge.card.CardAiHints.isRemovedFromAiDecks(input.getRules()))
+                enemyPool.add(input);
+        }
+        allEnemyCards = enemyPool;
+        allCards = pool; // assigned last: allCards != null implies the enemy pool is ready
     }
 
     static public Iterable<PaperCard> getAllCards() {
@@ -153,6 +158,7 @@ public class RewardData implements Serializable {
 
     public static void invalidateCardPool() {
         allCards = null;
+        allEnemyCards = null;
     }
 
     public boolean givesOnlyExcludedCards() {

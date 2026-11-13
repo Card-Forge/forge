@@ -312,15 +312,23 @@ public class AdventureEventData implements Serializable {
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);
     }
 
+    /**
+     * Opens the player's boosters and stores the result as the registered deck's sideboard.
+     * The opponents' pools and decks are deliberately not built here: building an AI deck is by far the most
+     * expensive part of a sealed event (especially for sets with a lot of tokens/deck hints) and only the next
+     * opponent's deck is ever needed. See {@link #generateOpponentDeck(AdventureEventParticipant)}.
+     */
     public void generateSealedPool() {
-        if (cardBlock == null) return;
+        //cardBlock is transient, so it is null for an event that was loaded from a save.
+        CardBlock block = getCardBlock();
+        if (block == null) return;
 
         try {
             // Open all boosters; restricted cards are excluded from non-meta packs.
             CardPool humanPool = new CardPool();
 
             for (String setCode : packConfiguration) {
-                IUnOpenedProduct booster = openSealedBooster(setCode);
+                IUnOpenedProduct booster = openSealedBooster(block, setCode);
                 if (booster == null) {
                     continue;
                 }
@@ -339,27 +347,6 @@ public class AdventureEventData implements Serializable {
             rewardDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
             rewardDeck.setName("Sealed Pool Cards");
 
-            // Generate AI opponents' decks
-            for (AdventureEventParticipant participant : participants) {
-                if (participant instanceof AdventureEventHuman) continue;
-
-                CardPool aiPool = new CardPool();
-                for (String setCode : packConfiguration) {
-                    IUnOpenedProduct booster = openSealedBooster(setCode);
-                    if (booster == null) {
-                        continue;
-                    }
-                    aiPool.addAllFlat(booster.get());
-                }
-
-                if (aiPool.isEmpty()) continue;
-
-                SealedDeckBuilder deckBuilder = new SealedDeckBuilder(aiPool.toFlatList());
-                String landSet = cardBlock.getLandSet() != null ? cardBlock.getLandSet().getCode() : null;
-                Deck aiDeck = deckBuilder.buildDeck(landSet);
-                participant.setDeck(aiDeck);
-            }
-
             eventStatus = AdventureEventController.EventStatus.Entered;
 
         } catch (Exception e) {
@@ -367,10 +354,50 @@ public class AdventureEventData implements Serializable {
         }
     }
 
-    private IUnOpenedProduct openSealedBooster(String setCode) {
-        for (String metaSetName : cardBlock.getMetaSetNames()) {
+    /**
+     * True if this is a sealed event and the given opponent has no deck yet, i.e. {@link #generateOpponentDeck}
+     * still has work to do. Events saved by earlier versions already have all opponent decks and return false.
+     */
+    public boolean needsOpponentDeck(AdventureEventParticipant participant) {
+        return format == AdventureEventController.EventFormat.Sealed
+                && participant != null
+                && !(participant instanceof AdventureEventHuman)
+                && participant.getDeck() == null;
+    }
+
+    /**
+     * Opens a fresh set of boosters for one sealed opponent and builds their deck from it. This is slow, so callers
+     * should run it off the render thread; it is a no-op if the opponent already has a deck.
+     */
+    public void generateOpponentDeck(AdventureEventParticipant participant) {
+        if (!needsOpponentDeck(participant)) return;
+        CardBlock block = getCardBlock();
+        if (block == null || packConfiguration == null) return;
+
+        try {
+            CardPool aiPool = new CardPool();
+            for (String setCode : packConfiguration) {
+                IUnOpenedProduct booster = openSealedBooster(block, setCode);
+                if (booster == null) {
+                    continue;
+                }
+                aiPool.addAllFlat(booster.get());
+            }
+
+            if (aiPool.isEmpty()) return;
+
+            SealedDeckBuilder deckBuilder = new SealedDeckBuilder(aiPool.toFlatList());
+            String landSet = block.getLandSet() != null ? block.getLandSet().getCode() : null;
+            participant.setDeck(deckBuilder.buildDeck(landSet));
+        } catch (Exception e) {
+            System.err.println("Error generating Sealed opponent deck: " + e.getMessage());
+        }
+    }
+
+    private IUnOpenedProduct openSealedBooster(CardBlock block, String setCode) {
+        for (String metaSetName : block.getMetaSetNames()) {
             if (metaSetName.equals(setCode)) {
-                return cardBlock.getBooster(setCode);
+                return block.getBooster(setCode);
             }
         }
         SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);

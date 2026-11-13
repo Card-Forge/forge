@@ -16,10 +16,14 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Adventure;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
+import forge.adventure.data.BiomeData;
+import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -248,11 +252,20 @@ public class PlayerStatisticScene extends UIScene {
             colorFrame.setDrawable(new TextureRegionDrawable(getColorFrame(Current.player().getColorIdentity())));
         }
         if (blessingScroll != null) {
-            if (Current.player().getBlessing() != null) {
-                blessingScroll.setText("[BLACK]" + Current.player().getBlessing().getDescription());
-            } else {
-                blessingScroll.setText("[BLACK]No blessing.");
-            }
+            MapStage map = MapStage.getInstance();
+            StringBuilder effects = new StringBuilder();
+            String modifiers = Current.player().getModifiersDescription();
+            if (!modifiers.isEmpty())
+                effects.append("\n").append(Forge.getLocalizer().getMessage("lblModifiers")).append("\n").append(modifiers);
+            BiomeData worldBiome = map.isInMap() ? null : WorldStage.getInstance().getStoredBiome();
+            boolean ignoreGlobal = map.isInMap() ? map.ignoresGlobalEffect() : worldBiome != null && worldBiome.ignoreGlobalEffect;
+            if (!ignoreGlobal)
+                appendEffect(effects, "lblPlaneEffect", Config.instance().getConfigData().globalEffect, false);
+            appendEffect(effects, "lblBiomeEffect", map.isInMap() ? map.getBiomeEffect() : worldBiome == null ? null : worldBiome.effect, false);
+            appendEffect(effects, "lblDungeonEffect", map.getDungeonEffect(), false);
+            appendEffect(effects, "lblBlessingEffect", Current.player().getBlessing(), true);
+            blessingScroll.setText("[BLACK]" + Forge.getLocalizer().getMessage("lblActiveEffects") + "\n"
+                    + (effects.length() == 0 ? Forge.getLocalizer().getMessage("lblNoActiveEffects") : effects.toString()));
         }
 
         for (Map.Entry<String, Pair<Integer, Integer>> entry : Current.player().getStatistic().getWinLossRecord().entrySet()) {
@@ -267,6 +280,15 @@ public class PlayerStatisticScene extends UIScene {
             scrollContainer.row();
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
+    }
+
+    private static void appendEffect(StringBuilder text, String labelKey, EffectData effect, boolean playerSide) {
+        if (effect == null)
+            return;
+        text.append("\n").append(Forge.getLocalizer().getMessage(labelKey)).append("\n");
+        if (effect.description != null)
+            text.append(effect.description).append("\n");
+        text.append(playerSide ? effect.getPlayerSideDescription() : effect.getEnemySideDescription());
     }
 
     void updateAchievements(AchievementCollection achievementCollection, boolean isActive) {

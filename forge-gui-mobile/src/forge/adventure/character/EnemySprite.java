@@ -86,6 +86,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
     public float speedModifier = 0.0f; // Increase or decrease default speed
     public boolean aggro = false;
+    public boolean ignoreGlobalEffect = false;
+    public boolean ignoreBiomeEffect = false;
     public boolean ignoreDungeonEffect = false;
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;
@@ -107,6 +109,11 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
+        //Map object properties override these after the sprite is created.
+        effect = data.effect;
+        ignoreGlobalEffect = data.ignoreGlobalEffect;
+        ignoreBiomeEffect = data.ignoreBiomeEffect;
+        ignoreDungeonEffect = data.ignoreDungeonEffect;
         float scale = data.scale;
         if (scale < 0)
             scale = 1f;

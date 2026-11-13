@@ -300,8 +300,27 @@ public class SpecialCardAi {
         }
     }
 
+    /**
+     * The names the other copies of the card have already chosen (Meddling Mage, Pithing Needle ...): a second copy that
+     * names the same card adds nothing (#12801, #5896).
+     */
+    public static Set<String> namesTakenByOtherCopies(final Player ai, final SpellAbility sa) {
+        final Set<String> taken = new HashSet<>();
+        final Card host = sa.getHostCard();
+        if (host == null) {
+            return taken;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != host && c.getName().equals(host.getName())) {
+                taken.addAll(c.getNamedCards());
+            }
+        }
+        taken.remove("");
+        return taken;
+    }
+
     public static class PithingNeedle {
-        // TODO Build out exclusion list based off cards in my deck and cards that other needles have chosen
+        // TODO Build out exclusion list based off cards in my deck
         public static String chooseCard(final Player ai, final SpellAbility sa) {
             String keyCardChoice = chooseCardViaKeyCard(ai, sa);
             if (keyCardChoice != null) {
@@ -398,13 +417,17 @@ public class SpecialCardAi {
 
             String bestKeyCard = null;
             int bestScore = Integer.MIN_VALUE;
+            final Set<String> taken = namesTakenByOtherCopies(ai, sa);
 
             for (Player opp : ai.getOpponents()) {
+                if (opp.getRegisteredPlayer() == null || opp.getRegisteredPlayer().getDeck() == null) {
+                    continue;
+                }
                 List<String> keyCards = opp.getRegisteredPlayer().getDeck().getKeyCards();
 
                 for (Card c : opp.getAllCards()) {
                     String name = c.getName();
-                    if (!keyCards.contains(name)) {
+                    if (!keyCards.contains(name) || taken.contains(name)) {
                         continue;
                     }
 
@@ -505,6 +528,7 @@ public class SpecialCardAi {
                 }
             }
 
+            namesTakenByOtherCopies(ai, sa).forEach(nameToScore::remove);
             if (nameToScore.isEmpty()) {
                 return null;
             }
@@ -1353,7 +1377,7 @@ public class SpecialCardAi {
             if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
@@ -2066,7 +2090,7 @@ public class SpecialCardAi {
             if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // draw +1 card when at max hand size, hoping to draw a workable spell or land
@@ -2096,7 +2120,7 @@ public class SpecialCardAi {
             CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
             if (cardsInGY.size() == 0) {
                 return false;
-            } else if (ai.getGame().getPhaseHandler().getPlayerTurn() != ai) {
+            } else if (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                 // The AI is not very good at deciding for what to viably do during the opp's turn when this
                 // comes from an instant speed effect (e.g. Magus of the Will)
                 return false;

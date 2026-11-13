@@ -5,9 +5,11 @@ import java.util.regex.Pattern;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.ComboGuard;
 import forge.ai.simulation.ComboPlan;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.DredgeLine;
+import forge.ai.simulation.LegalityGuard;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -143,6 +145,30 @@ public class FlatMonteCarloDredgeLineTest extends AITest {
         AssertJUnit.assertTrue("no Diamond in play", DredgeLine.mustWait(p, plan.combos, cast));
         addCardToZone("Lion's Eye Diamond", p, ZoneType.Battlefield);
         AssertJUnit.assertFalse("the line is complete", DredgeLine.mustWait(p, plan.combos, cast));
+    }
+
+    /**
+     * canPlaySa holds Breakthrough back with AnotherTime, but a fuel play with that answer is still offered to the
+     * rollouts as a discovered play: the guard is what stops it there, and it is what the AI really asks (aim is null).
+     */
+    @Test
+    public void theGuardRefusesBreakthroughUntilTheLineIsComplete() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, DREDGE_DECK);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final Card breakthrough = addCardToZone("Breakthrough", p, ZoneType.Hand);
+        final SpellAbility cast = breakthrough.getFirstSpellAbility();
+        cast.setActivatingPlayer(p);
+        AssertJUnit.assertEquals("no dredger, no Diamond", "dredge-line-incomplete",
+                ComboGuard.problem(p, cast, null, plan.combos));
+        addCardToZone("Golgari Grave-Troll", p, ZoneType.Hand);
+        AssertJUnit.assertEquals("no Diamond in play", "dredge-line-incomplete",
+                ComboGuard.problem(p, cast, null, plan.combos));
+        addCardToZone("Lion's Eye Diamond", p, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("generic guard sees an X=0 spell", "x-zero",
+                LegalityGuard.problem(p, cast));
+        AssertJUnit.assertNull("completed Dredge line deliberately uses X=0",
+                ComboGuard.problem(p, cast, null, plan.combos));
     }
 
     @Test

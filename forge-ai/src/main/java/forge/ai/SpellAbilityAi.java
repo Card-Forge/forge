@@ -440,6 +440,26 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
                     // don't choose kickers we don't want to play
                     continue;
                 }
+                // Bloodchief's Thirst: the kicker only widens the choice of target, so it is paid for when the plain
+                // spell has nothing to hit (#4443), not to kill a 2-mana creature the plain spell kills too
+                if (chosen.getHostCard().hasSVar("AIKickOnlyWithoutBaseTarget") && payer.getController() instanceof PlayerControllerAi) {
+                    // asked of the targeting rules directly: the plain spell hits something the opponent controls
+                    final SpellAbility plain = chosen.copy();
+                    plain.setActivatingPlayer(payer);
+                    boolean plainWorks = false;
+                    if (plain.usesTargeting()) {
+                        for (final Card c : payer.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+                            if (plain.canTarget(c)) {
+                                plainWorks = true;
+                                break;
+                            }
+                        }
+                    }
+                    plain.resetTargets();
+                    if (plainWorks) {
+                        continue;
+                    }
+                }
             }
 
             if (ComputerUtilCost.canPayCost(fullCostSa, payer, false)) {
