@@ -9,4 +9,5 @@ SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | Target
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered+nonLand | Zone$ Exile | ClearRemembered$ True | RepeatSubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ RememberedOwner | SubAbility$ DBPlot
 SVar:DBPlot:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Plotted
+SVar:X:Remembered$CardManaCost
 Oracle:{T}: Look at the top card of target player's library. You may put it into their graveyard.\nAt the beginning of your end step, you may pay {2}. When you do, exile the top card of two target players' libraries. For each nonland card exiled this way, its owner loses life equal to its mana value and it becomes plotted. (Its owner may cast it as a sorcery on a later turn without paying its mana cost.)
