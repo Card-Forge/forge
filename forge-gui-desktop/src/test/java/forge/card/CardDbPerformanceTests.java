@@ -19,6 +19,9 @@ public class CardDbPerformanceTests extends CardDbCardMockTestCase {
     @BeforeMethod
     public void setup() {
         super.setup();
+        if (!this.fullDbCardNames.isEmpty()) {
+            return;
+        }
         Collection<PaperCard> uniqueCards = this.cardDb.getUniqueCards();
         for (PaperCard card : uniqueCards)
             this.fullDbCardNames.add(card.getName());

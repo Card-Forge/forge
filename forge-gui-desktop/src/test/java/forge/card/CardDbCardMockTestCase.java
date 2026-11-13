@@ -123,9 +123,12 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     public void setup() {
         StaticData data = FModel.getMagicDb();
         this.cardDb = data.getCommonCards();
-        this.legacyCardDb = new LegacyCardDb(data.getCommonCards().getAllCards(), data.getEditions());
-        this.latestArtShivanDragonEdition = latestPrintingEditionOf(cardNameShivanDragon);
-        this.latestArtHymnToTourachEdition = latestPrintingEditionOf(cardNameHymnToTourach);
+        // Neither depends on the art preference and no test changes them, so one per class is enough
+        if (this.legacyCardDb == null) {
+            this.legacyCardDb = new LegacyCardDb(data.getCommonCards().getAllCards(), data.getEditions());
+            this.latestArtShivanDragonEdition = latestPrintingEditionOf(cardNameShivanDragon);
+            this.latestArtHymnToTourachEdition = latestPrintingEditionOf(cardNameHymnToTourach);
+        }
     }
 
     /**
