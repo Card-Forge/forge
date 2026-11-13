@@ -109,4 +109,62 @@ public class LegalityGuardTest extends FlatMcTestBase {
         AssertJUnit.assertTrue(wall.toughnessAssignsDamage());
         AssertJUnit.assertTrue(ComputerUtilCombat.attackerDamageBonus(wall, null, true) >= 0);
     }
+
+    // ------------------------------------------------------------------------------------------ sacrifice unless
+
+    @Test
+    public void faerieImpostorAloneWouldOnlySacrificeItself() {
+        final SpellAbility impostor = spellOf(put("Faerie Impostor", ai, ZoneType.Hand));
+        AssertJUnit.assertEquals("etb-self-sacrifice", LegalityGuard.problem(ai, impostor));
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, impostor));
+    }
+
+    // ------------------------------------------------------------------------------------------ X of nothing
+
+    @Test
+    public void anXCreatureWithNoManaForXIsHeld() {
+        put("Forest", ai, ZoneType.Battlefield);
+        final SpellAbility scourge = spellOf(put("Wildwood Scourge", ai, ZoneType.Hand)); // {X}{G}: one land is X = 0
+        AssertJUnit.assertEquals("x-zero", LegalityGuard.problem(ai, scourge));
+        put("Forest", ai, ZoneType.Battlefield);
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, scourge));
+    }
+
+    // ------------------------------------------------------------------------------------------ lands
+
+    @Test
+    public void templeOfTheFalseGodIsDormantUntilFourOtherLandsAreInPlay() {
+        final Card temple = put("Temple of the False God", ai, ZoneType.Hand);
+        AssertJUnit.assertTrue(LegalityGuard.isDormantLand(ai, temple));
+        put("Forest", 3, ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(LegalityGuard.isDormantLand(ai, temple));
+        put("Forest", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse(LegalityGuard.isDormantLand(ai, temple)); // the fifth land: it works at once
+        AssertJUnit.assertFalse(LegalityGuard.isDormantLand(ai, put("Forest", ai, ZoneType.Hand)));
+    }
+
+    // ------------------------------------------------------------------------------------------ chosen numbers
+
+    @Test
+    public void aNumberThatFeedsATokenForTheAiIsTheHighestOne() {
+        final Card pia = put("Pia Nalaar, Chief Mechanic", ai, ZoneType.Battlefield);
+        SpellAbility choose = null;
+        for (final forge.game.trigger.Trigger t : pia.getTriggers()) {
+            final SpellAbility a = t.ensureAbility();
+            if (a != null && a.getApi() == forge.game.ability.ApiType.ChooseNumber) {
+                choose = a;
+            }
+        }
+        AssertJUnit.assertNotNull(choose);
+        choose.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals(4, forge.ai.NumberChoice.choose(choose, java.util.Arrays.asList(1, 2, 3, 4), ai));
+    }
+
+    @Test
+    public void aNumberNothingReadsIsTheFirstOption() {
+        final Card void_ = put("Void", ai, ZoneType.Hand);
+        final SpellAbility sa = spellOf(void_);
+        AssertJUnit.assertEquals(0, forge.ai.NumberChoice.choose(sa, java.util.Arrays.asList(0, 1, 2), ai));
+    }
 }
