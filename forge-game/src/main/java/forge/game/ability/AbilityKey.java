@@ -23,7 +23,6 @@ public enum AbilityKey {
     Attacked("Attacked"),
     Attacker("Attacker"),
     Attackers("Attackers"),
-    AttackersBefore("AttackersBefore"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
     OneOfAttackingTeam("OneOfAttackingTeam"),

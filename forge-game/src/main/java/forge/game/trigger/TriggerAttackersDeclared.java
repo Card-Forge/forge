@@ -79,8 +79,21 @@ public class TriggerAttackersDeclared extends Trigger {
             // each attacking player of a team is only compared to their own creatures
             final boolean ownOnly = (boolean) runParams.getOrDefault(AbilityKey.OneOfAttackingTeam, false);
             final Player attackingPlayer = (Player) runParams.get(AbilityKey.AttackingPlayer);
-            for (final CardCollection before : (List<CardCollection>) runParams.getOrDefault(AbilityKey.AttackersBefore, List.of())) {
-                if (matchesAttackers(ownOnly ? CardLists.filterControlledBy(before, attackingPlayer) : before)) {
+            final Iterable<Player> players = ownOnly ? List.of(attackingPlayer) : attackingPlayer.getGame().getPlayers();
+            // the attackers of the current combat are logged already, only the earlier combats count
+            final int combat = attackingPlayer.getGame().getPhaseHandler().getNumCombat();
+            final Map<Integer, CardCollection> before = new HashMap<>();
+            for (final Player p : players) {
+                for (final Map.Entry<Integer, Map<GameEntity, List<Card>>> e : p.getCreaturesAttackedThisTurnByCombat().entrySet()) {
+                    if (e.getKey() != combat) {
+                        for (final List<Card> attackers : e.getValue().values()) {
+                            before.computeIfAbsent(e.getKey(), k -> new CardCollection()).addAll(attackers);
+                        }
+                    }
+                }
+            }
+            for (final CardCollection attackers : before.values()) {
+                if (matchesAttackers(attackers)) {
                     return false;
                 }
             }
