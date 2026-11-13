@@ -44,18 +44,18 @@ public enum RogueTutorial {
           "Take a moment to look around. In the default layout, your hand and battlefield are below your " +
           "opponent's area. Keep an eye on both life totals as the battle progresses. Double-click a card " +
           "to cast it when the rules allow and you can pay its costs.",
-      "At the bottom right, you will find your Command Zone, Graveyard, and Exile. Your Commander (which " +
-          "is you, sure, but that would make it sound slightly awkward) can be cast from the Command Zone. " +
-          "Check there for other available actions too, including rolling the Planar Die by using its card.",
-      "Click the zone icons below your opponent's avatar to open their respective zones. During their " +
-          "turn, you will find the Plane in their Command Zone instead of yours.",
-      "At the bottom left, the action prompts tell you what the game needs from you. Follow them to make " +
-          "choices and select targets. You can press Enter or Space instead of clicking 'OK'.",
-      "At the top left, the Stack shows spells and abilities about to resolve. Right-click a Stack entry " +
-          "and choose 'Resolve entire stack' to pass automatically until the Stack clears. The Match Log beside it " +
+      "Use the zone icons in your player panel to open your Command Zone, Graveyard, or Exile. " +
+          "Your Commander (which is you, sure, but that would make it sound slightly awkward) can be cast " +
+          "from the Command Zone. " +
+          "You can also use the Planar Die card there to roll the die when it's available.",
+      "Use the icons by your opponent's avatar to inspect their zones. During their turn, " +
+          "you'll find the Plane in their Command Zone.",
+      "Follow the action prompts to make choices, select targets, and see when the game is waiting for you.",
+      "The Stack tab shows spells and abilities about to resolve. Right-click a Stack entry " +
+          "and choose 'Resolve entire stack' to pass automatically until the Stack clears. The Log tab " +
           "lets you review what has happened. In case it ever interests you, that is.",
-      "At the top right, Card Details lets you read the cards you inspect. You can also zoom in on each " +
-          "card using the mouse wheel.\n" +
+      "The Card Detail tab shows the rules text of the card you're inspecting. Use the mouse wheel " +
+          "over any card picture to zoom in.\n" +
           "I don't want to play the old wise professor here, but it is always good to read and understand " +
           "cards before casting them.\n" +
           "To restore the default layout, choose 'Layout > Reset to Default Match Layout'."
@@ -63,12 +63,10 @@ public enum RogueTutorial {
 
   MATCH_CARD_HIGHLIGHTING(
       "Card Highlighting",
-      "Noticed the colored outlines of cards? By default, blue helps identify cards you can play or whose " +
-          "abilities you can activate. This includes land and spell plays, and during blocking it marks possible " +
-          "blockers.",
-      "Red marks creatures available to declare as attackers. Magenta marks cards you have chosen or " +
-          "that the current interaction highlights.",
-      "There are other colors as well, but I'm sure you'll find that out by yourself."
+      "Noticed the colored outlines of cards? When the game asks you to choose a card, look for a white outline around cards you can select. " +
+      "A magenta outline can mark a card you've already chosen.",
+      "If you'd like help spotting cards you can play or abilities you can activate, turn on " +
+          "'Display > Highlight Actionable Cards'. It's off by default."
   ),
 
   MATCH_PHASES_AND_YIELDS(
@@ -78,13 +76,11 @@ public enum RogueTutorial {
           "Click the phase buttons to enable or disable the default priority stops during a turn. You are " +
           "choosing when the game pauses for your input, not removing phases from the game.\n" +
           "If you ask me, then leave them as they are for now.",
-      "The 'End Turn' button at the bottom left passes automatically through the rest of the current " +
+      "The 'End Turn' button passes automatically through the rest of the current " +
           "turn, subject to yield interruptions. It does not end the turn immediately. When your last action " +
           "can be undone, that button shows 'Undo' instead.",
-      "Auto-Pass is turned on by default. The game currently passes automatically when it detects no " +
-          "available actions.\n" +
-          "To turn it off, uncheck 'Game > Enable auto-pass' or press P. Unlike the temporary yield requested " +
-          "by 'End Turn', Auto-Pass stays enabled until you turn it off.",
+      "Auto-Pass is off by default. To pass automatically when you have no available actions, check " +
+          "'Game > Enable auto-pass'. The default shortcut is P. It stays enabled until you turn it off.",
       "Open 'Game > Yield Settings' to choose which events interrupt a yield and return control to you, " +
           "such as being targeted or having attackers declared against you. Set these controls to suit your " +
           "pace.\n" +
