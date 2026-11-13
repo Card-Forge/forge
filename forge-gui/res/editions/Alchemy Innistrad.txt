@@ -5,7 +5,7 @@ Name=Alchemy: Innistrad
 Alias=Y22
 Type=Online
 ScryfallCode=YMID
-Booster=1 UncommonRareMythic:fromsheet("YMID cards"), 8 Common:fromsheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 UncommonRareMythic:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand:fromSheet("MID cards")
+Booster=1 UncommonRareMythic:fromsheet("YMID cards"), 9 Common:fromsheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand:fromSheet("MID cards")
 
 [cards]
 1 R Angel of Eternal Dawn @Aurore Folny
