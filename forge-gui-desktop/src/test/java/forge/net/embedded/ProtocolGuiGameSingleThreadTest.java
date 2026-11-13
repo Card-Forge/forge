@@ -109,6 +109,8 @@ public class ProtocolGuiGameSingleThreadTest {
         GuiBase.setInterface(new InlineEdtGui());
         try {
             FModel.getPreferences().setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, false);
+            FModel.getPreferences().setPref(FPref.YIELD_SKIP_PHASE_DELAY, true);
+            FModel.getPreferences().setPref(FPref.YIELD_SKIP_RESOLVE_DELAY, true);
             MyRandom.setRandom(new Random(7));
 
             final ProtocolGuiGameInProcessTest.RecordingRemote remote = new ProtocolGuiGameInProcessTest.RecordingRemote();
