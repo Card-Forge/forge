@@ -149,8 +149,9 @@ public class LifeSetEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-        sb.append(" life total becomes ").append(amount).append(".");
+        final List<Player> setPlayers = getTargetPlayers(sa);
+        final String who = playersOrDescribed(sa, setPlayers, "Defined");
+        sb.append(setPlayers.size() > 1 ? who + "'s life totals become " : Lang.getInstance().getPossesive(who) + " life total becomes ").append(amount).append(".");
         return sb.toString();
     }
 

@@ -193,7 +193,11 @@ public abstract class SpellAbilityEffect {
                 tokenizeString(sa, sb, stackDesc);
             }
         } else {
-            final String condDesc = sa.getParam("ConditionDescription");
+            String condDesc = sa.getParam("ConditionDescription");
+            // "If you control a creature with power 4 or greater." is written as a sentence of its own but leads the effect
+            if (condDesc != null && condDesc.matches("(?s)If [^.]*\\.") ) {
+                condDesc = condDesc.substring(0, condDesc.length() - 1) + ",";
+            }
             final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
             if (condDesc != null) {
@@ -263,13 +267,15 @@ public abstract class SpellAbilityEffect {
      * and nothing trailing on the whole text. Effects append their pieces with a space each, which leaves "haste ." and
      * "It  gains" behind.
      */
-    static String tidyDescription(final String text, final boolean isSubPart) {
+    public static String tidyDescription(final String text, final boolean isSubPart) {
         String t = text.replaceAll(",{3,}", " ").replaceAll("(\\w)\\(s\\)", "$1s")
                 .replaceAll("(?<!\\.)\\.\\.(?!\\.)", ".").replaceAll("(?<=[a-z]{2}[.!?])(?=[A-Z][a-z]+ [a-z])", " ")
-                .replaceAll("[ \\t]*\\n[ \\t]*", "\n").replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
+                .replaceAll("[ \\t]*\\n[ \\t]*", "\n").replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1")
+                .replaceAll("\\b([Tt]hen|[Aa]nd) \\1\\b", "$1");
         // a part that starts a sentence ("then discard a card.") is written with a capital
-        if (!t.isEmpty() && Character.isLowerCase(t.charAt(0))) {
-            t = Character.toUpperCase(t.charAt(0)) + t.substring(1);
+        final int first = t.length() - t.stripLeading().length();
+        if (first < t.length() && Character.isLowerCase(t.charAt(first))) {
+            t = t.substring(0, first) + Character.toUpperCase(t.charAt(first)) + t.substring(first + 1);
         }
         return isSubPart ? t : t.stripTrailing();
     }
@@ -315,16 +321,50 @@ public abstract class SpellAbilityEffect {
                     } else if (t.startsWith("s:")) {
                         objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
                     } else if (t.startsWith("c:")) {
-                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                        final List<? extends GameObject> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                        objs = cards.isEmpty() ? AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa) : cards;
                     } else {
                         objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                     }
-                    sb.append(Lang.joinHomogenous(objs));
+                    sb.append(objs.isEmpty() ? undefinedObjectText(t) : Lang.joinHomogenous(objs));
                 }
             } else {
                 sb.append(t);
             }
         }
+    }
+
+    /**
+     * The subject of a sentence about players. A player that is chosen or remembered only while the spell resolves is
+     * not known yet when its text is shown, so that it is told by the script's Defined value instead of left empty.
+     */
+    protected static String playersOrDescribed(final SpellAbility sa, final List<? extends GameEntity> players, final String definedParam) {
+        if (players != null && !players.isEmpty()) {
+            return Lang.joinHomogenous(players);
+        }
+        final String def = sa.getParamOrDefault(definedParam, "");
+        if (def.contains("Opponent")) {
+            return "each opponent";
+        } else if (def.equals("Player") || def.startsWith("Player.") || def.equals("EachPlayer")) {
+            return "each player";
+        } else if (def.contains("Chosen")) {
+            return "the chosen player";
+        }
+        return "that player";
+    }
+
+    /** What a {c:Equipped}-like reference reads as while nothing is there to name yet (nothing equipped, nothing chosen). */
+    private static String undefinedObjectText(final String token) {
+        final boolean players = token.startsWith("p:");
+        final String def = token.replaceFirst("^[pcs]:", "");
+        if (players) {
+            return "that player";
+        } else if (def.startsWith("Equipped")) {
+            return "equipped creature";
+        } else if (def.startsWith("Enchanted")) {
+            return "enchanted permanent";
+        }
+        return "that " + (token.startsWith("s:") ? "spell" : "card");
     }
 
     // Target/defined methods

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.card.CardUtil;
-import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -305,7 +304,7 @@ public class ManaEffect extends SpellAbilityEffect {
             mana = sa.getParam("Produced");
             manaDesc = sa.getParam("AmountDesc");
         }
-        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " adds " : " add ");
+        sb.append(playersOrDescribed(sa, tgtPlayers, "Defined")).append(tgtPlayers.size() > 1 ? " add " : " adds ");
         sb.append(toManaString(mana)).append(manaDesc).append(".");
         if (sa.hasParam("RestrictValid")) {
             final String desc = sa.getDescription();

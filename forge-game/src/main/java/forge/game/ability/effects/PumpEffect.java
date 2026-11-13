@@ -257,8 +257,9 @@ public class PumpEffect extends SpellAbilityEffect {
             boolean gets = sa.hasParam("NumAtt") || sa.hasParam("NumDef");
             boolean gains = !keywords.isEmpty();
 
+            final boolean plural = tgts.size() > 1;
             if (gets) {
-                sb.append("gets ");
+                sb.append(plural ? "get " : "gets ");
                 if (atk != 0) {
                     sb.append(atk > 0 ? "+" : "").append(atk).append("/");
                 } else {
@@ -269,9 +270,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 } else {
                     sb.append(atk < 0 ? "-" : "+").append(def).append(" ");
                 }
-                sb.append(gains ? "and gains " : "");
+                sb.append(gains ? (plural ? "and gain " : "and gains ") : "");
             } else if (gains) {
-                sb.append("gains ");
+                sb.append(plural ? "gain " : "gains ");
             }
 
             for (int i = 0; i < keywords.size(); i++) {

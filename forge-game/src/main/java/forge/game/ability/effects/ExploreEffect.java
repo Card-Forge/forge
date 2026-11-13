@@ -40,7 +40,7 @@ public class ExploreEffect extends SpellAbilityEffect {
 
         List<Card> tgt = getTargetCards(sa);
 
-        sb.append(Lang.joinHomogenous(tgt));
+        sb.append(tgt == null || tgt.isEmpty() ? "That creature" : Lang.joinHomogenous(tgt));
         sb.append(" ");
         sb.append(tgt.size() > 1 ? "explore" : "explores");
         sb.append(". ");

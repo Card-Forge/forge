@@ -23,6 +23,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
@@ -217,7 +218,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             } else {
                 saDesc = "<take no action>"; // printed in case nothing is chosen for the ability (e.g. Charm with Up to X)
             }
-            result = TextUtil.fastReplace(result, "ABILITY", saDesc);
+            result = SpellAbilityEffect.tidyDescription(TextUtil.fastReplace(result, "ABILITY", saDesc), true);
 
             result = CardTranslation.translateMultipleDescriptionText(result, sa.getHostCard());
             String translatedName = sa.getHostCard().getTranslatedName();

@@ -248,6 +248,7 @@ public abstract class Lang {
     }
 
     private static final Pattern VALID_SCRIPT = Pattern.compile("[A-Za-z]+([.+][A-Za-z0-9_]+)*");
+    private static final Pattern VALID_SHARES_COLOR = Pattern.compile("SharesColorWith Valid(\\w+)\\.([\\w.+!]+)");
     private static final Pattern VALID_NAMED = Pattern.compile("(?<=[.+])(!?)named([^+]+?)(?=\\+|$|\\.(?:You|Opp|Other|non)\\w*(?:\\+|$))");
     private static final Pattern VALID_CMC_LIKE = Pattern.compile("(cmc|power|toughness)(LE|GE|EQ|LT|GT|NE)(\\w+)");
     private static final List<String> VALID_ADJECTIVES = List.of("Basic", "Legendary", "Snow", "White", "Blue", "Black", "Red", "Green",
@@ -282,6 +283,13 @@ public abstract class Lang {
                 return (adj.isEmpty() ? "" : joinHomogenous(adj, null, "and") + " ") + nouns.get(0);
             }
             return joinHomogenous(java.util.Arrays.stream(each).map(e -> formatValidDesc(e.trim(), plural, asCards)).collect(Collectors.toList()), null, "and");
+        }
+        // "Card.SharesColorWith ValidCreature.Legendary+YouCtrl": shares a color with a described object
+        final java.util.regex.Matcher shares = VALID_SHARES_COLOR.matcher(valid);
+        if (shares.find()) {
+            final String other = formatValidDesc(shares.group(1) + "." + shares.group(2));
+            final String described = formatValidDesc(valid.substring(0, shares.start()) + "SHARESREF" + valid.substring(shares.end()), plural, asCards);
+            return described.replace("SHARESREF", "that shares a color with " + (startsWithVowel(other) ? "an " : "a ") + other);
         }
         // a name has spaces and punctuation of its own: "Card.namedAjani; Valiant Protector+YouOwn"
         final java.util.regex.Matcher named = VALID_NAMED.matcher(valid);
@@ -329,10 +337,10 @@ public abstract class Lang {
                 adjectives.add("colored");
             } else if (r.equals("nonColored")) {
                 adjectives.add("colorless");
+            } else if (r.equals("Other") || r.equals("nonSelf")) {
+                adjectives.add("other");
             } else if (r.length() > 3 && r.startsWith("non") && Character.isUpperCase(r.charAt(3))) {
                 adjectives.add("non" + r.substring(3).toLowerCase());
-            } else if (r.equals("Other")) {
-                adjectives.add("other");
             } else if (VALID_ADJECTIVES.contains(r)) {
                 adjectives.add(r.toLowerCase());
             } else if (CardType.isACardType(r) && (noun.equals("card") || noun.equals("permanent"))) {
@@ -348,6 +356,8 @@ public abstract class Lang {
                 suffixes.add(r.endsWith("You") ? "you control" : "that player controls");
             } else if (r.equalsIgnoreCase("multicolor")) {
                 adjectives.add("multicolored");
+            } else if (r.equals("SHARESREF")) {
+                suffixes.add("SHARESREF");
             } else if (r.startsWith("SharesColorWith")) {
                 suffixes.add("that shares a color with it");
             } else if (r.equals("ChosenColor")) {

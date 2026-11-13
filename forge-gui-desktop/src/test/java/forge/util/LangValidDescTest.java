@@ -40,7 +40,7 @@ public class LangValidDescTest {
 
     @Test
     public void anythingElseIsLeftAlone() {
-        assertEquals("Creature.!Self", lang.formatValidDesc("Creature.!Self"));
+        assertEquals("other creature", lang.formatValidDesc("Creature.!Self"));
         assertEquals("Creature.attackedThisTurn,Land", lang.formatValidDesc("Creature.attackedThisTurn,Land"));
     }
 }

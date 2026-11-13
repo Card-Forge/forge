@@ -336,6 +336,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(chooserNames).append(optional ? " may put " : thirdPerson ? " puts " : " put ")
                     .append(Lang.nounWithNumeralExceptOne(num, type + cardTag));
             sb.append(" into their ").append(destination.toLowerCase()).append(".");
+        } else if (!origin.isEmpty() && destination != null) {
+            // several origins ("Hand,Graveyard") or one without a wording of its own ("Command")
+            final List<String> from = Lists.newArrayList();
+            for (final String o : origin.split(",")) {
+                from.add("Command".equals(o) ? "the command zone" : "their " + o.toLowerCase());
+            }
+            sb.append(chooserNames).append(optional ? " may put " : thirdPerson ? " puts " : " put ")
+                    .append(defined ? type : Lang.nounWithNumeralExceptOne(num, type + cardTag))
+                    .append(" from ").append(Lang.joinHomogenous(from, null, "or"))
+                    .append("Battlefield".equals(destination) ? " onto the battlefield" : " into their " + destination.toLowerCase())
+                    .append(".");
         }
 
         return sb.toString();
