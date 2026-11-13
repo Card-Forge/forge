@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -144,6 +145,7 @@ public class StackDescriptionSweepTest extends AITest {
                 addCardToZone("Darksteel Relic", ai, ZoneType.Battlefield);
                 addCardToZone("Grizzly Bears", ai, ZoneType.Graveyard);
                 addCardToZone("Reanimate", ai, ZoneType.Graveyard);
+                addTargetFixtures(game, ai, opp);
             }
             final Card card;
             try {
@@ -226,6 +228,58 @@ public class StackDescriptionSweepTest extends AITest {
         }
     }
 
+    /**
+     * More of what abilities ask to aim at: a flier, a black and a legendary creature, a wall, an artifact creature, an
+     * equipment, a tapped creature, a creature with a counter, a nonbasic and a snow land, cards in hand, library and exile,
+     * a combat with a blocked attacker, and spells on the stack.
+     */
+    private void addTargetFixtures(final Game game, final Player ai, final Player opp) {
+        try {
+            final Card angel = addCardToZone("Serra Angel", opp, ZoneType.Battlefield);
+            final Card knight = addCardToZone("Black Knight", opp, ZoneType.Battlefield);
+            knight.setTapped(true);
+            addCardToZone("Wall of Wood", opp, ZoneType.Battlefield);
+            addCardToZone("Ornithopter", opp, ZoneType.Battlefield);
+            addCardToZone("Isamaru, Hound of Konda", opp, ZoneType.Battlefield);
+            addCardToZone("Bonesplitter", opp, ZoneType.Battlefield);
+            addCardToZone("Command Tower", opp, ZoneType.Battlefield);
+            addCardToZone("Snow-Covered Forest", opp, ZoneType.Battlefield);
+            addCardToZone("Grizzly Bears", opp, ZoneType.Hand);
+            addCardToZone("Grizzly Bears", opp, ZoneType.Library);
+            addCardToZone("Grizzly Bears", opp, ZoneType.Exile);
+            addCardToZone("Serra Angel", ai, ZoneType.Battlefield);
+            addCardToZone("Bonesplitter", ai, ZoneType.Battlefield);
+            addCardToZone("Glorious Anthem", ai, ZoneType.Battlefield);
+            addCardToZone("Command Tower", ai, ZoneType.Battlefield);
+            addCardToZone("Grizzly Bears", ai, ZoneType.Library);
+            addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
+            final Card counters = addCardToZone("Isamaru, Hound of Konda", ai, ZoneType.Battlefield);
+            counters.addCounterInternal(forge.game.card.CounterType.getType("P1P1"), 1, ai, false, null, null);
+            // a combat: the opponent's creature attacks and is blocked
+            final Card attacker = ai.getCardsIn(ZoneType.Battlefield).get(0);
+            final Combat combat = new Combat(ai);
+            combat.addAttacker(attacker, opp);
+            combat.addBlocker(attacker, angel);
+            game.getPhaseHandler().setCombat(combat);
+        } catch (final RuntimeException e) {
+            System.out.println("StackDescriptionSweepTest: some target fixtures could not be set up: " + e);
+        }
+        for (final String spellName : Arrays.asList("Grizzly Bears", "Lightning Bolt")) {
+            try {
+                final Card spellCard = addCardToZone(spellName, opp, ZoneType.Hand);
+                final SpellAbility spell = spellCard.getFirstSpellAbility();
+                spell.setActivatingPlayer(opp);
+                if (spell.usesTargeting()) {
+                    spell.getTargets().add(ai);
+                }
+                game.getAction().moveToStack(spellCard, spell);
+                game.getStack().add(spell);
+            } catch (final RuntimeException e) {
+                System.out.println("StackDescriptionSweepTest: no spell on the stack for " + spellName + ": " + e);
+            }
+        }
+    }
+
     /** Aims the ability at something the test game has, the opponent first. */
     private static boolean pickTargets(final SpellAbility sa, final Player ai, final Player opp) {
         if (!sa.usesTargeting()) {
@@ -238,6 +292,12 @@ public class StackDescriptionSweepTest extends AITest {
             candidates.addAll(p.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
         }
         candidates.add(ai);
+        for (final Player p : Arrays.asList(opp, ai)) {
+            candidates.addAll(p.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Library, ZoneType.Exile)));
+        }
+        for (final forge.game.spellability.SpellAbilityStackInstance si : ai.getGame().getStack()) {
+            candidates.add(si.getSpellAbility());
+        }
         for (final forge.game.GameObject o : candidates) {
             if (sa.getTargets().size() >= 2) {
                 break;
