@@ -1,0 +1,12 @@
+Name:Mohiam, Imperial Truthsayer
+ManaCost:1 U B
+Types:Legendary Creature Human Advisor
+PT:1/3
+A:AB$ Dig | Cost$ T | DigNum$ 1 | ValidTgts$ Player | ChangeNum$ Any | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of target player's library. You may put it into their graveyard.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {2}. When you do, exile the top card of two target players' libraries. For each nonland card exiled this way, its owner loses life equal to its mana value and it becomes plotted. (Its owner may cast it as a sorcery on a later turn without paying its mana cost.)
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 2 | Execute$ TrigExile | SpellDescription$ When you do, exile the top card of two target players' libraries. For each nonland card exiled this way, its owner loses life equal to its mana value and it becomes plotted. (Its owner may cast it as a sorcery on a later turn without paying its mana cost.)
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered+nonLand | Zone$ Exile | ClearRemembered$ True | RepeatSubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ RememberedOwner | SubAbility$ DBPlot
+SVar:DBPlot:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Plotted
+Oracle:{T}: Look at the top card of target player's library. You may put it into their graveyard.\nAt the beginning of your end step, you may pay {2}. When you do, exile the top card of two target players' libraries. For each nonland card exiled this way, its owner loses life equal to its mana value and it becomes plotted. (Its owner may cast it as a sorcery on a later turn without paying its mana cost.)
