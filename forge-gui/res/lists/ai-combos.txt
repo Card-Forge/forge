@@ -24,8 +24,8 @@ win | High Tide + Palinchron + Stroke of Genius | High Tide | Palinchron | Strok
 win | Tendrils + Lion's Eye Diamond + Infernal Tutor | Tendrils of Agony | Lion's Eye Diamond | Infernal Tutor
 win | Yawgmoth's Will + Black Lotus + Dark Ritual + Tendrils | Yawgmoth's Will | Black Lotus | Dark Ritual | Tendrils of Agony
 win | Underworld Breach + Lion's Eye Diamond + Brain Freeze | Underworld Breach | Lion's Eye Diamond | Brain Freeze
-win | Splinter Twin + Deceiver Exarch / Pestermite | Splinter Twin | Deceiver Exarch / Pestermite
-win | Kiki-Jiki + Restoration Angel / Bounding Krasis | Kiki-Jiki, Mirror Breaker | Restoration Angel / Bounding Krasis
+win | Splinter Twin + Deceiver Exarch / Pestermite | Splinter Twin | Deceiver Exarch / Pestermite / Zealous Conscripts / Village Bell-Ringer
+win | Kiki-Jiki + Restoration Angel / Bounding Krasis | Kiki-Jiki, Mirror Breaker | Restoration Angel / Bounding Krasis / Pestermite / Deceiver Exarch / Zealous Conscripts / Felidar Guardian / Village Bell-Ringer
 win | Saheeli Rai + Felidar Guardian | Saheeli Rai | Felidar Guardian
 win | Jeskai Ascendancy + Retraction Helix | Jeskai Ascendancy | Retraction Helix
 win | Heliod, Sun-Crowned + Walking Ballista | Heliod, Sun-Crowned | Walking Ballista
@@ -54,6 +54,15 @@ win | Leyline of the Void + Helm of Obedience | Leyline of the Void | Helm of Ob
 win | Near-Death Experience + Worship | Near-Death Experience | Worship
 win | Aetherworks Marvel + Woodweaver's Puzzleknot | Aetherworks Marvel | Woodweaver's Puzzleknot
 win | Second Sunrise + Conjurer's Bauble | Second Sunrise | Conjurer's Bauble
+win | Devoted Druid + Quillspike | Devoted Druid | Quillspike
+win | Deadeye Navigator + Palinchron / Peregrine Drake | Deadeye Navigator | Palinchron / Peregrine Drake
+win | Deadeye Navigator + Gilded Lotus + Deceiver Exarch / Zealous Conscripts | Deadeye Navigator | Gilded Lotus | Deceiver Exarch / Zealous Conscripts
+win | Galvanic Alchemist + Axebane Guardian | Galvanic Alchemist | Axebane Guardian
+win | Exquisite Blood + Vizkopa Guildmage | Exquisite Blood | Vizkopa Guildmage
+win | Teysa + Painter's Servant + Blood Artist | Teysa, Orzhov Scion | Painter's Servant | Blood Artist
+win | Thopter Foundry + Sword of the Meek | Thopter Foundry | Sword of the Meek
+win | Time Sieve + Faith's Reward | Time Sieve | Faith's Reward
+win | Heartbeat of Spring + Early Harvest | Heartbeat of Spring | Early Harvest
 lock | Counterbalance + Sensei's Divining Top | Counterbalance | Sensei's Divining Top
 lock | Mindslaver + Academy Ruins | Mindslaver | Academy Ruins
 lock | Isochron Scepter + Orim's Chant | Isochron Scepter | Orim's Chant
