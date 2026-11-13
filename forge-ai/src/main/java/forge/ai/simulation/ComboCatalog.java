@@ -217,6 +217,64 @@ public final class ComboCatalog {
         return load();
     }
 
+    /**
+     * The cards of the pool (what a tutor can find) that complete a catalogued combo: the combo has every slot but one
+     * filled by cards the AI has in play or in hand, and the card fills the empty slot. The best come first: a combo
+     * that wins before one that locks, the cheaper card before the dearer, each card once. A combo of which nothing is
+     * there yet is not served: a lone piece wins nothing, and the normal choice of the tutor knows better.
+     * Empty when no combo is one card short.
+     */
+    public static List<Card> missingPieces(final Player ai, final Iterable<Card> pool) {
+        final List<Card> out = new ArrayList<>();
+        if (ai == null || pool == null) {
+            return out;
+        }
+        final Set<String> have = new java.util.HashSet<>();
+        for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Hand }) {
+            for (final Card c : ai.getCardsIn(z)) {
+                have.add(AiCardLists.normalize(c.getName()));
+            }
+        }
+        final List<Card> candidates = new ArrayList<>();
+        final java.util.Map<Card, Integer> rank = new java.util.HashMap<>();
+        for (final Entry e : entries()) {
+            Set<String> empty = null;
+            int open = 0;
+            for (final Set<String> slot : e.slots) {
+                boolean filled = false;
+                for (final String n : slot) {
+                    filled |= have.contains(n);
+                }
+                if (!filled) {
+                    open++;
+                    empty = slot;
+                }
+            }
+            if (open != 1 || e.slots.size() < 2) {
+                continue;
+            }
+            for (final Card c : pool) {
+                if (empty.contains(AiCardLists.normalize(c.getName())) && !c.isLand()) {
+                    final int r = (e.type == Type.WIN ? 200 : 100) - c.getCMC();
+                    if (!rank.containsKey(c) || rank.get(c) < r) {
+                        rank.put(c, r);
+                    }
+                    if (!candidates.contains(c)) {
+                        candidates.add(c);
+                    }
+                }
+            }
+        }
+        candidates.sort((x, y) -> Integer.compare(rank.get(y), rank.get(x)));
+        final Set<String> names = new java.util.HashSet<>();
+        for (final Card c : candidates) {
+            if (names.add(c.getName())) {
+                out.add(c);
+            }
+        }
+        return out;
+    }
+
     /** The first number of the two card combos of the Commander lists: above every line of ai-combos.txt. */
     public static final int PAIR_NUMBER_BASE = 1000;
 
