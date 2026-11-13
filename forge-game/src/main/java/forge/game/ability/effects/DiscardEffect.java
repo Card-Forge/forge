@@ -66,6 +66,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     validD = "named"; // Cabal Therapy: the name is in the game log, not in the script text
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
+                } else if (!sa.hasParam("DiscardValidDesc") && validD.matches("[A-Za-z]+[.+].*")) {
+                    validD = Lang.getInstance().buildValidCardDesc(java.util.Arrays.asList(validD.split(",")), false);
                 }
                 valid = validD.matches("(?i).*\\bcards?$") ? validD : validD + " " + valid;
             }
@@ -88,7 +90,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 sb.append(oneTgtP ? " discards " : " discard ");
                 sb.append(oneCard ? "that card" : "those cards");
             } else if (revealDiscardAll) {
-                sb.append(" of type: ").append(valid);
+                sb.append(" ").append(Lang.getPlural(valid));
             }
 
             if (mode.equals("Defined")) {

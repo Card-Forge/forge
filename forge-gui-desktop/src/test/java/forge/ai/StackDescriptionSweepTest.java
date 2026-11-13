@@ -231,23 +231,22 @@ public class StackDescriptionSweepTest extends AITest {
         if (!sa.usesTargeting()) {
             return true;
         }
-        if (sa.canTarget(opp)) {
-            sa.getTargets().add(opp);
-            return true;
-        }
+        // up to two targets: "exchange control of two target creatures", "fights", "move a counter from ... onto ..."
+        final java.util.List<forge.game.GameObject> candidates = new java.util.ArrayList<>();
+        candidates.add(opp);
         for (final Player p : Arrays.asList(opp, ai)) {
-            for (final Card c : p.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard))) {
-                if (sa.canTarget(c)) {
-                    sa.getTargets().add(c);
-                    return true;
-                }
+            candidates.addAll(p.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
+        }
+        candidates.add(ai);
+        for (final forge.game.GameObject o : candidates) {
+            if (sa.getTargets().size() >= 2) {
+                break;
+            }
+            if (!sa.getTargets().contains(o) && sa.canTarget(o)) {
+                sa.getTargets().add(o);
             }
         }
-        if (sa.canTarget(ai)) {
-            sa.getTargets().add(ai);
-            return true;
-        }
-        return false;
+        return !sa.getTargets().isEmpty();
     }
 
     /** The text the stack shows for a triggered ability: the trigger's description, with the effect where it says ABILITY. */

@@ -1847,7 +1847,7 @@ public class CardFactoryUtil {
             StringBuilder playTrig = new StringBuilder();
 
             playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True");
-            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able.  ");
+            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able. ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
             String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
@@ -2028,7 +2028,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("MayFlashSac")) {
             String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
-                    + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
+                    + "the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
 
             final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | RememberObjects$ Self | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
             final String strSac = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";

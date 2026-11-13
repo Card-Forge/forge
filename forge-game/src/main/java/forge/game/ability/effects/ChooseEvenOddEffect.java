@@ -18,8 +18,9 @@ public class ChooseEvenOddEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-        sb.append("chooses even or odd.");
+        final java.util.List<forge.game.player.Player> players = getTargetPlayers(sa);
+        sb.append(players.isEmpty() ? "You choose" : Lang.joinHomogenous(players) + (players.size() == 1 ? " chooses" : " choose"));
+        sb.append(" even or odd.");
 
         return sb.toString();
     }

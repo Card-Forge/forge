@@ -247,7 +247,7 @@ public abstract class Lang {
         return joinHomogenous(java.util.Arrays.asList(valid.split(",")), v -> formatValidDesc(v), "or");
     }
 
-    private static final Pattern VALID_SCRIPT = Pattern.compile("[A-Za-z]+([.+][A-Za-z0-9]+)*");
+    private static final Pattern VALID_SCRIPT = Pattern.compile("[A-Za-z]+([.+][A-Za-z0-9_]+)*");
     private static final Pattern VALID_NAMED = Pattern.compile("(?<=[.+])(!?)named([^+]+?)(?=\\+|$|\\.(?:You|Opp|Other|non)\\w*(?:\\+|$))");
     private static final Pattern VALID_CMC_LIKE = Pattern.compile("(cmc|power|toughness)(LE|GE|EQ|LT|GT|NE)(\\w+)");
     private static final List<String> VALID_ADJECTIVES = List.of("Basic", "Legendary", "Snow", "White", "Blue", "Black", "Red", "Green",
@@ -291,9 +291,20 @@ public abstract class Lang {
             final String described = formatValidDesc(valid.substring(0, named.start()) + "NAMEDREF" + valid.substring(named.end()), plural, asCards);
             return described.replace("NAMEDREF", (not ? "not named " : "named ") + name);
         }
+        // "Creature.Artifact & Creature.nonArtifact": each of them
+        if (valid.contains(" & ")) {
+            final List<String> each = Lists.newArrayList();
+            for (final String e : valid.split(" & ")) {
+                each.add(formatValidDesc(e.trim(), plural, asCards));
+            }
+            return joinHomogenous(each, null, "and");
+        }
         if (!valid.contains(".") && !valid.contains("+")) {
             if (commonStuff.contains(valid) || CardType.isACardType(valid)) {
                 valid = valid.toLowerCase();
+                if (plural && !valid.endsWith("s")) {
+                    valid = getPlural(valid);
+                }
             }
             return valid;
         }
@@ -335,6 +346,10 @@ public abstract class Lang {
                 suffixes.add("NAMEDREF");
             } else if (r.startsWith("ControlledBy") && r.length() > "ControlledBy".length()) {
                 suffixes.add(r.endsWith("You") ? "you control" : "that player controls");
+            } else if (r.equalsIgnoreCase("multicolor")) {
+                adjectives.add("multicolored");
+            } else if (r.startsWith("SharesColorWith")) {
+                suffixes.add("that shares a color with it");
             } else if (r.equals("ChosenColor")) {
                 suffixes.add("of the chosen color");
             } else if (r.equals("ChosenType")) {

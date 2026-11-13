@@ -159,7 +159,9 @@ public class PumpEffect extends SpellAbilityEffect {
         } else if (p.length == 2) {
             t = p[0] + " " + p[1];
         }
-        return t.toLowerCase().replace("cardname", hostName);
+        t = t.replaceAll("\\.$", "").toLowerCase().replace("cardname", hostName);
+        // a replacement effect written as a keyword is an ability the creature gains, not a keyword
+        return kw.startsWith("Prevent ") || kw.startsWith("If ") ? "\"" + t + "\"" : t;
     }
 
     /** The predicate of a hidden keyword script ("CARDNAME can't block." -> "can't block"). */
@@ -210,15 +212,16 @@ public class PumpEffect extends SpellAbilityEffect {
             final List<String> sentences = Lists.newArrayList();
             for (final java.util.Iterator<String> it = keywords.iterator(); it.hasNext();) {
                 final String kw = it.next();
-                if (!kw.startsWith("HIDDEN ")) {
+                final boolean hidden = kw.startsWith("HIDDEN ");
+                if (!hidden && !kw.startsWith("CARDNAME ")) {
                     continue;
                 }
                 it.remove();
-                final String clause = hiddenClause(kw.substring("HIDDEN ".length()));
+                final String clause = hiddenClause(hidden ? kw.substring("HIDDEN ".length()) : kw);
                 if (clause.matches("(?i)(?:can't|can|must|doesn't|don't|attacks?|blocks?|is|are|has|have|loses?|gets?)\\b.*")) {
                     clauses.add(clause);
                 } else {
-                    sentences.add(kw.substring("HIDDEN ".length()).replaceAll("\\.$", "") + ".");
+                    sentences.add((hidden ? kw.substring("HIDDEN ".length()) : kw).replaceAll("\\.$", "") + ".");
                 }
             }
             if (!sentences.isEmpty() && keywords.isEmpty() && clauses.isEmpty() && !sa.hasParam("NumAtt") && !sa.hasParam("NumDef")) {

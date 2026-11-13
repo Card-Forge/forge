@@ -197,7 +197,7 @@ public abstract class SpellAbilityEffect {
             final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
             if (condDesc != null) {
-                sb.append(condDesc).append(" ");
+                sb.append(conditionPrefix(sa, condDesc)).append(" ");
             }
             sb.append(condDesc != null && condDesc.endsWith(",") ? StringUtils.uncapitalize(baseDesc) : baseDesc);
             if (afterDesc != null) {
@@ -232,6 +232,33 @@ public abstract class SpellAbilityEffect {
     }
 
     /**
+     * A ConditionDescription is usually a whole condition ("If you control a Forest,"). Some scripts only give the
+     * subject of one ("a permanent you controlled or a token,"), the rest being said by the spell before it, so that
+     * the condition is completed from what the parent ability did.
+     */
+    private static String conditionPrefix(final SpellAbility sa, final String condDesc) {
+        if (condDesc.isEmpty() || !Character.isLowerCase(condDesc.charAt(0)) || !condDesc.endsWith(",")
+                || condDesc.matches("(?s)(?:then|otherwise|instead|and|or|if|unless|when|whenever|as|until|for|at|during|while|after|before)\\b.*")) {
+            return condDesc;
+        }
+        final SpellAbility parent = sa.getParent();
+        String did = null;
+        if (parent != null && parent.getApi() != null) {
+            switch (parent.getApi()) {
+                case Destroy: case DestroyAll: did = "was destroyed this way"; break;
+                case Sacrifice: case SacrificeAll: did = "was sacrificed this way"; break;
+                case Discard: did = "was discarded this way"; break;
+                case Mill: did = "was milled this way"; break;
+                case ChangeZone: case ChangeZoneAll:
+                    did = "Exile".equals(parent.getParam("Destination")) ? "was exiled this way" : "was put there this way"; break;
+                default: break;
+            }
+        }
+        final String subject = condDesc.substring(0, condDesc.length() - 1);
+        return "If " + subject + (did == null ? "," : " " + did + ",");
+    }
+
+    /**
      * Whitespace and punctuation of a composed description: one space between words, none before a full stop or comma,
      * and nothing trailing on the whole text. Effects append their pieces with a space each, which leaves "haste ." and
      * "It  gains" behind.
@@ -239,7 +266,11 @@ public abstract class SpellAbilityEffect {
     static String tidyDescription(final String text, final boolean isSubPart) {
         String t = text.replaceAll(",{3,}", " ").replaceAll("(\\w)\\(s\\)", "$1s")
                 .replaceAll("(?<!\\.)\\.\\.(?!\\.)", ".").replaceAll("(?<=[a-z]{2}[.!?])(?=[A-Z][a-z]+ [a-z])", " ")
-                .replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
+                .replaceAll("[ \\t]*\\n[ \\t]*", "\n").replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1");
+        // a part that starts a sentence ("then discard a card.") is written with a capital
+        if (!t.isEmpty() && Character.isLowerCase(t.charAt(0))) {
+            t = Character.toUpperCase(t.charAt(0)) + t.substring(1);
+        }
         return isSubPart ? t : t.stripTrailing();
     }
 
