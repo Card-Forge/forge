@@ -199,7 +199,12 @@ public abstract class SpellAbilityEffect {
                 condDesc = condDesc.substring(0, condDesc.length() - 1) + ",";
             }
             final String afterDesc = sa.getParam("AfterDescription");
-            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
+            String effectDesc = this.getStackDescription(sa);
+            // an effect with nothing to say for itself is told in the card's own words
+            if ((effectDesc == null || effectDesc.isBlank()) && sa.hasParam("SpellDescription") && !sa.getParam("SpellDescription").matches("[,\\s]*")) {
+                effectDesc = sa.getParam("SpellDescription").replaceAll("\\s*\\([^)]*\\)", "");
+            }
+            final String baseDesc = CardTranslation.translateSingleDescriptionText(effectDesc, sa.getHostCard());
             if (condDesc != null) {
                 sb.append(conditionPrefix(sa, condDesc)).append(" ");
             }
@@ -214,7 +219,15 @@ public abstract class SpellAbilityEffect {
             // This includes all subAbilities
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
-                sb.append(abSub.getStackDescription());
+                String subText = abSub.getStackDescription();
+                // a part that starts a new sentence gets a capital, one that goes on after a comma does not
+                final String before = sb.toString().stripTrailing();
+                final int lead = subText.length() - subText.stripLeading().length();
+                if (lead < subText.length() && Character.isLowerCase(subText.charAt(lead))
+                        && (before.isEmpty() || before.matches("(?s).*[.!?:\"\u201d)\\n]$"))) {
+                    subText = subText.substring(0, lead) + Character.toUpperCase(subText.charAt(lead)) + subText.substring(lead + 1);
+                }
+                sb.append(subText);
             }
         }
 
@@ -232,7 +245,15 @@ public abstract class SpellAbilityEffect {
         String currentName = sa.getHostCard().getTranslatedName();
         String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
         substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
-        return tidyDescription(substitutedDesc, sa instanceof AbilitySub);
+        String result = tidyDescription(substitutedDesc, sa instanceof AbilitySub);
+        if (!(sa instanceof AbilitySub)) {
+            // the text after the "Card (12) -" prelude starts a sentence
+            final java.util.regex.Matcher m = java.util.regex.Pattern.compile("^(.*? \\(\\d+\\) - )([a-z])").matcher(result);
+            if (m.find()) {
+                result = m.group(1) + m.group(2).toUpperCase() + result.substring(m.end());
+            }
+        }
+        return result;
     }
 
     /**
@@ -270,11 +291,11 @@ public abstract class SpellAbilityEffect {
     public static String tidyDescription(final String text, final boolean isSubPart) {
         String t = text.replaceAll(",{3,}", " ").replaceAll("(\\w)\\(s\\)", "$1s")
                 .replaceAll("(?<!\\.)\\.\\.(?!\\.)", ".").replaceAll("(?<=[a-z]{2}[.!?])(?=[A-Z][a-z]+ [a-z])", " ")
-                .replaceAll("[ \\t]*\\n[ \\t]*", "\n").replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1")
+                .replaceAll("[ \\t]*\\r?\\n[ \\t]*", "\n").replaceAll("[ \\t]{2,}", " ").replaceAll(" +([.,;:!?])", "$1")
                 .replaceAll("\\b([Tt]hen|[Aa]nd) \\1\\b", "$1");
         // a part that starts a sentence ("then discard a card.") is written with a capital
         final int first = t.length() - t.stripLeading().length();
-        if (first < t.length() && Character.isLowerCase(t.charAt(first))) {
+        if (!isSubPart && first < t.length() && Character.isLowerCase(t.charAt(first))) {
             t = t.substring(0, first) + Character.toUpperCase(t.charAt(first)) + t.substring(first + 1);
         }
         return isSubPart ? t : t.stripTrailing();

@@ -842,7 +842,7 @@ public class CardFactoryUtil {
                     if (secondary) {
                         trigStr.append(" | Secondary$ True");
                     }
-                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
+                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription().trim());
                     final Trigger t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
                     t.setOverridingAbility(sa);
                     inst.addTrigger(t);
@@ -1935,7 +1935,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
-            String descStr = "Visit — " + sa.getDescription();
+            String descStr = "Visit — " + sa.getDescription().trim();
 
             final String trigStr = "Mode$ VisitAttraction | TriggerZones$ Battlefield | ValidCard$ Card.Self" +
                     "| TriggerDescription$ " + descStr;
@@ -1947,7 +1947,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
-            String descStr = "Prize — " + sa.getDescription();
+            String descStr = "Prize — " + sa.getDescription().trim();
 
             final String trigStr = "Mode$ ClaimPrize | Static$ True | TriggerZones$ Battlefield | ValidCard$ Card.Self" +
                     "| TriggerDescription$ " + descStr;
@@ -1966,7 +1966,7 @@ public class CardFactoryUtil {
                 String roomName = sa.getParam("RoomName");
                 StringBuilder trigStr = new StringBuilder("Mode$ RoomEntered | TriggerZones$ Command");
                 trigStr.append(" | ValidCard$ Card.Self | ValidRoom$ ").append(roomName);
-                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription());
+                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription().trim());
                 if (sa.hasParam("NextRoom")) {
                     boolean first = true;
                     StringBuilder nextRoomParam = new StringBuilder();

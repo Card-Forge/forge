@@ -220,7 +220,9 @@ public abstract class Lang {
         if (name.contains(":")) {
             return name.split(":")[0];
         }
-        return name.split(" ")[0];
+        final String[] words = name.split(" ");
+        // "Dr. Beverly Crusher" is not "Dr."
+        return words.length > 1 && words[0].endsWith(".") ? words[1] : words[0];
     }
 
     public String buildValidDesc(Collection<String> valid, boolean multiple) {
@@ -248,7 +250,7 @@ public abstract class Lang {
     }
 
     private static final Pattern VALID_SCRIPT = Pattern.compile("[A-Za-z]+([.+][A-Za-z0-9_]+)*");
-    private static final Pattern VALID_SHARES_COLOR = Pattern.compile("SharesColorWith Valid(\\w+)\\.([\\w.+!]+)");
+    private static final Pattern VALID_SHARES_COLOR = Pattern.compile("SharesColorWith Valid ?(\\w+)\\.([\\w.+!]+)");
     private static final Pattern VALID_NAMED = Pattern.compile("(?<=[.+])(!?)named([^+]+?)(?=\\+|$|\\.(?:You|Opp|Other|non)\\w*(?:\\+|$))");
     private static final Pattern VALID_CMC_LIKE = Pattern.compile("(cmc|power|toughness)(LE|GE|EQ|LT|GT|NE)(\\w+)");
     private static final List<String> VALID_ADJECTIVES = List.of("Basic", "Legendary", "Snow", "White", "Blue", "Black", "Red", "Green",

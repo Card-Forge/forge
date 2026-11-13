@@ -41,7 +41,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        String desc = sa.getParamOrDefault("ValidDescription", "Card");
+        String desc = sa.getParamOrDefault("ValidDescription", sa.hasParam("Valid") && !sa.getParam("Valid").equals("Card")
+                ? Lang.getInstance().buildValidDesc(java.util.Arrays.asList(sa.getParam("Valid").split(",")), false) : "Card");
 
         int untilAmount = 1;
         boolean isNumeric = true;
@@ -50,7 +51,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
+        sb.append(playersOrDescribed(sa, getTargetPlayers(sa), "Defined")).append(" ");
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :
