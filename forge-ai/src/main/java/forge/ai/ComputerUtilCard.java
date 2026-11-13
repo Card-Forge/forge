@@ -1548,6 +1548,10 @@ public class ComputerUtilCard {
         }
         */
 
+        // what the pump adds to the combat damage: the power, or the toughness while creatures assign combat damage
+        // equal to toughness (Doran, the Siege Tower), when +P does nothing and +T is the damage
+        final int dmgGain = c.toughnessAssignsDamage() ? toughness : power;
+
         // check if the pump only gives a keyword and the target already has that keyword, in which case skip it
         if (power == 0 && toughness == 0) {
             boolean hasAll = true;
@@ -1566,7 +1570,7 @@ public class ComputerUtilCard {
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
                 && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
-                && power > 0
+                && dmgGain > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;
         }
@@ -1628,7 +1632,7 @@ public class ComputerUtilCard {
                 if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
-                if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0) {
+                if (c.getNetCombatDamage() == 0 && c == sa.getHostCard() && dmgGain > 0) {
                     threat *= 4; //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
@@ -1640,7 +1644,7 @@ public class ComputerUtilCard {
                 if (holdCombatTricks && sa.getApi() == ApiType.Pump
                         && sa.hasParam("NumAtt") && sa.getHostCard() != null
                         && sa.getHostCard().isInZone(ZoneType.Hand)
-                        && c.getNetPower() > 0 // too obvious if attacking with a 0-power creature
+                        && c.getNetCombatDamage() > 0 // too obvious if attacking with a 0-power creature
                         && sa.getHostCard().isInstant() // only do it for instant speed spells in hand
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(sa, ai)) {
                     combatTrick = true;
@@ -1814,12 +1818,12 @@ public class ComputerUtilCard {
                 }
 
                 float value = pumpedDmg - dmg;
-                if (c == sa.getHostCard() && power > 0) {
+                if (c == sa.getHostCard() && dmgGain > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= (float) power / divisor;
+                    value *= (float) dmgGain / divisor;
                 } else {
                     value /= opp.getLife();
                 }

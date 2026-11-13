@@ -214,6 +214,16 @@ public final class ComboGuard {
                 && controlsWorkingCopy(ai, host)) {
             return "duplicate-engine";
         }
+        // Channel (and any spell that only gives life-for-mana until end of turn) with no payoff in hand to spend it on:
+        // the spell would be a wasted card, see EnablerGuard
+        final String illegal = LegalityGuard.problem(ai, sa);
+        if (illegal != null) {
+            return illegal;
+        }
+        final String enabler = EnablerGuard.problem(ai, sa);
+        if (enabler != null) {
+            return enabler;
+        }
         return null;
     }
 
@@ -536,7 +546,7 @@ public final class ComboGuard {
         if (!c.isCreature()) {
             return true;
         }
-        if (c.getNetPower() <= 0) {
+        if (c.getNetCombatDamage() <= 0) {
             return false;
         }
         if (c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
@@ -755,7 +765,7 @@ public final class ComboGuard {
         int damage = 0;
         final List<Integer> blockable = new ArrayList<>();
         for (final Card a : attackers) {
-            final int power = Math.max(0, a.getNetPower());
+            final int power = Math.max(0, a.getNetCombatDamage());
             boolean stoppable = false;
             for (final Card b : blockers) {
                 if (CombatUtil.canBlock(a, b)) {

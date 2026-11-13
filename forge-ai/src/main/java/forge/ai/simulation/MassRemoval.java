@@ -126,7 +126,7 @@ public final class MassRemoval {
         for (final Player o : ai.getOpponents()) {
             theirValue += ComputerUtilCard.evaluateCreatureList(o.getCreaturesInPlay());
             for (final Card c : o.getCreaturesInPlay()) {
-                theirPower += Math.max(0, c.getNetPower());
+                theirPower += Math.max(0, c.getNetCombatDamage());
             }
             if (target == null || o.getLife() < target.getLife()) {
                 target = o;
@@ -141,7 +141,7 @@ public final class MassRemoval {
         }
         int myPower = 0;
         for (final Card c : myCreatures) {
-            myPower += Math.max(0, c.getNetPower());
+            myPower += Math.max(0, c.getNetCombatDamage());
         }
         if (myPower <= 0 || ai.getLife() <= theirPower * 2) {
             return false;
