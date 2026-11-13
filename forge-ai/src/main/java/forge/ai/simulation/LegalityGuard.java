@@ -79,6 +79,11 @@ public final class LegalityGuard {
             }
             final List<GameEntity> candidates = tr.getAllCandidates(ability);
             if (candidates.isEmpty()) {
+                // the permanent is still in the hand here, but it is on the battlefield when its trigger is aimed:
+                // it can be its own target (Merfolk Skydiver: +1/+1 counter on target creature you control)
+                if (!isHostile(ability) && card.isValid(tr.getValidTgts(), ai, card, ability)) {
+                    continue;
+                }
                 return true;
             }
             if (isHostile(ability)) {
