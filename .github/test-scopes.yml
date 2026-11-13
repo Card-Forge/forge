@@ -1,0 +1,63 @@
+# Chooses which tests run on a pull request. Pushes always run every test.
+#
+# Each name below except "all" is a test category: a test package, e.g. "ai" means forge/ai/** in every module.
+# A test in no category is uncategorised.
+#
+# What a pull request runs:
+# - It changes a path under "all": every test.
+# - It changes a path under one or more categories: those categories and the uncategorised tests.
+# - It matches nothing here: the uncategorised tests only.
+#
+# A changed card script counts as a change to every test file and every file in forge-gui/res/lists that contains the card's name.
+#
+# To add a category, add a test package name and the paths that should trigger it.
+
+all:
+  - 'forge-core/src/main/**'
+  - 'forge-game/src/main/**'
+  - 'forge-ai/src/main/**'
+  - 'forge-gui/src/main/java/forge/model/**'
+  - 'forge-gui/src/main/java/forge/localinstance/**'
+  - 'forge-gui/src/main/java/forge/util/**'
+  - 'pom.xml'
+  - '**/pom.xml'
+  - '.github/workflows/test-build.yaml'
+  - '.github/test-scopes.yml'
+
+net:
+  - 'forge-gui/src/main/java/forge/gamemodes/match/**'
+  - 'forge-gui/src/main/java/forge/gamemodes/net/**'
+  - 'forge-gui/src/main/java/forge/gui/interfaces/**'
+  - 'forge-gui/src/main/java/forge/gui/control/**'
+  - 'forge-gui/src/main/java/forge/interfaces/**'
+  - 'forge-gui/src/main/java/forge/player/**'
+  - 'forge-gui-desktop/src/test/java/forge/net/**'
+
+ai:
+  - 'forge-gui/res/tokenscripts/**'
+  - 'forge-gui/res/ai/**'
+  - 'forge-gui/res/lists/**'
+  - 'forge-gui-desktop/src/test/java/forge/ai/**'
+  - 'forge-gui-desktop/src/test/java/forge/card/**'
+  - 'forge-gui-desktop/src/test/java/forge/gamesimulationtests/**'
+
+card:
+  - 'forge-gui/res/tokenscripts/**'
+  - 'forge-gui/res/editions/**'
+  - 'forge-gui/res/setlookup/**'
+  - 'forge-gui/res/blockdata/**'
+  - 'forge-gui/res/formats/**'
+  - 'forge-gui/res/languages/**'
+  - 'forge-gui-desktop/src/test/java/forge/ai/**'
+  - 'forge-gui-desktop/src/test/java/forge/card/**'
+  - 'forge-gui-desktop/src/test/java/forge/gamesimulationtests/**'
+
+gamesimulationtests:
+  - 'forge-gui/res/tokenscripts/**'
+  - 'forge-gui/res/editions/**'
+  - 'forge-gui/res/blockdata/**'
+  - 'forge-gui/res/ai/**'
+  - 'forge-gui/src/main/java/forge/gui/card/**'
+  - 'forge-gui-desktop/src/test/java/forge/ai/**'
+  - 'forge-gui-desktop/src/test/java/forge/card/**'
+  - 'forge-gui-desktop/src/test/java/forge/gamesimulationtests/**'
