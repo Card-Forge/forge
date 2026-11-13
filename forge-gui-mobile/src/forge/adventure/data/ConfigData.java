@@ -36,6 +36,8 @@ public class ConfigData {
     public boolean enableGeneticAI = true;
     public String chaosDeckFormat;
     public boolean usePriceListPrices = true;
+    // Shards to reroll an offered inn event before joining it. 0 disables rerolls.
+    public int eventRerollPrice;
     // Desktop default only; saved player choices take precedence on every platform.
     public boolean enableExtraBattleBackgroundsByDefault;
     public EffectData globalEffect;
