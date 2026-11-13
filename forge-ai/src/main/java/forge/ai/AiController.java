@@ -1214,6 +1214,9 @@ public class AiController {
                     return AiPlayDecision.BadEtbEffects;
                 }
             }
+            if (!sa.isLandAbility() && sa.isSpell() && LegalityGuard.etbWithoutTarget(player, card)) {
+                return AiPlayDecision.BadEtbEffects; // Journey to Nowhere, Oblivion Ring, Necromancy ... with nothing to aim at
+            }
             if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
                 return AiPlayDecision.BadEtbEffects;
             }
@@ -1572,16 +1575,16 @@ public class AiController {
     }
 
     /** In a simulated game: the attack to declare instead of asking the heuristics (set by a rollout, used once). */
-    private java.util.Map<Card, GameEntity> attackOverride;
+    private Map<Card, GameEntity> attackOverride;
 
-    public void setAttackOverride(final java.util.Map<Card, GameEntity> attackers) {
+    public void setAttackOverride(final Map<Card, GameEntity> attackers) {
         attackOverride = attackers;
     }
 
     private void declareOverriddenAttackers(final Combat combat) {
-        final java.util.Map<Card, GameEntity> attackers = attackOverride;
+        final Map<Card, GameEntity> attackers = attackOverride;
         attackOverride = null;
-        for (final java.util.Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
@@ -1605,7 +1608,7 @@ public class AiController {
         if (cfg == null) {
             return;
         }
-        final java.util.Map<Card, GameEntity> before = new java.util.LinkedHashMap<>();
+        final Map<Card, GameEntity> before = new LinkedHashMap<>();
         for (final Card c : combat.getAttackers()) {
             before.put(c, combat.getDefenderByAttacker(c));
         }
@@ -1620,8 +1623,53 @@ public class AiController {
             return;
         }
         combat.clearAttackers();
-        for (final java.util.Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {
+        final Map<Card, GameEntity> committed = new LinkedHashMap<>();
+        if (attacker != player || simMode != null || attackOverride != null
+                || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return committed;
+        }
+        GameEntity defender = null;
+        for (final Card c : combat.getAttackers()) {
+            if (attacker.equals(c.getController()) && combat.getDefenderByAttacker(c) != null) {
+                defender = combat.getDefenderByAttacker(c); // whoever the others attack
+                break;
+            }
+        }
+        if (defender == null) {
+            defender = AiAttackController.choosePreferredDefenderPlayer(attacker);
+        }
+        final Integer attackMax = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Card c : attacker.getCreaturesInPlay()) {
+            if (!c.isLand() || c.isTapped()) {
+                continue;
+            }
+            final GameEntity already = combat.getDefenderByAttacker(c);
+            if (already != null) {
+                committed.put(c, already);
+                continue;
+            }
+            if (defender == null || !CombatUtil.canAttack(c, defender)
+                    || attackMax != null && combat.getAttackers().size() >= attackMax) {
+                continue;
+            }
+            combat.addAttacker(c, defender);
+            committed.put(c, defender);
+        }
+        return committed;
+    }
+
+    /** Puts back the committed attackers (see {@link #commitAttackers}) that the attack search took out. */
+    private void restoreCommittedAttackers(final Combat combat, final Map<Card, GameEntity> committed) {
+        for (final Map.Entry<Card, GameEntity> e : committed.entrySet()) {
+            if (!combat.isAttacking(e.getKey()) && CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -1643,7 +1691,10 @@ public class AiController {
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
+            // a creature for this attack commited
+            final Map<Card, GameEntity> committed = commitAttackers(attacker, combat);
             refineAttackWithFlatMonteCarlo(attacker, combat);
+            restoreCommittedAttackers(combat, committed);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
@@ -1820,6 +1871,14 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
+            if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
+                // a land that makes no mana yet (Temple of the False God with four lands to come) waits for the others
+                final CardCollection working = CardLists.filter(landsWannaPlay,
+                        l -> !forge.ai.simulation.LegalityGuard.isDormantLand(player, l));
+                if (!working.isEmpty()) {
+                    landsWannaPlay = working;
+                }
+            }
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -2330,7 +2389,7 @@ public class AiController {
                     continue; // without discovery only a ramp deck's key card gets this far
                 }
                 try {
-                    if (counter.canPlay() && counter.canTargetSpellAbility(top)) {
+                    if (counter.checkRestrictions(player) && counter.canPlay() && counter.canTargetSpellAbility(top)) {
                         // aim first: a cost that depends on the target (a discard of its mana value) cannot be checked before
                         counter.resetTargets();
                         counter.getTargets().add(top);
@@ -2424,7 +2483,7 @@ public class AiController {
     }
 
     /**
-     * Plays that Flat Monte Carlo never spends a card on (see {@link forge.ai.simulation.ComboGuard}): bringing back
+     * Plays that Flat Monte Carlo never spends a card on (see {@link ComboGuard}): bringing back
      * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
      * and a cantrip while the AI is confident to win this turn or the next. Returns the reason, or null for a fine play.
      */
@@ -2660,7 +2719,7 @@ public class AiController {
 
     private DeckPlan flatMcDeckPlan;
 
-    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link DeckPlan}. */
     public DeckPlan deckPlan(final Player p) {
         if (flatMcDeckPlan == null) {
             flatMcDeckPlan = DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
@@ -3311,7 +3370,7 @@ public class AiController {
                     return slot;
                 }
 
-                return Aggregates.random(options);
+                return NumberChoice.choose(sa, options, relatedPlayer);
             default:
                 return options.get(0);
         }

@@ -63,7 +63,8 @@ public class RewardScene extends UIScene {
         Loot,
         QuestReward,
         RewardChoice,
-        EventReward
+        EventReward,
+        Lost
     }
 
     Type type;
@@ -236,7 +237,7 @@ public class RewardScene extends UIScene {
     public void enter() {
         autoSell = false;
         updateDetailButton();
-        if (type == Type.Loot && Forge.lastPreview != null) {
+        if ((type == Type.Loot || type == Type.Lost) && Forge.lastPreview != null) {
             setUIBackground(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
         } else {
             setUIBackground(origDrawable);
@@ -385,6 +386,8 @@ public class RewardScene extends UIScene {
         clearSelectable();
         this.type = type;
         doneClicked = false;
+        playerGold.setVisible(type != Type.Lost);
+        playerShards.setVisible(type != Type.Lost);
         updateCollectionPool();
         if (type == Type.Shop) {
             this.shopActor = shopActor;
@@ -481,6 +484,13 @@ public class RewardScene extends UIScene {
                 headerLabel.skipToTheEnd();
                 restockButton.setVisible(false);
                 break;
+            case Lost:
+                headerLabel.setPosition(restockButton.getX(), restockButton.getY());
+                headerLabel.setVisible(true);
+                headerLabel.setText("[%?SHINY]" + Forge.getLocalizer().getMessage("lblYouLost"));
+                headerLabel.skipToTheEnd();
+                restockButton.setVisible(false);
+                break;
             case RewardChoice:
                 restockButton.setVisible(false);
                 headerLabel.setVisible(remainingSelections > 0);
@@ -555,6 +565,8 @@ public class RewardScene extends UIScene {
                 stage.addActor(chooseRewardButton);
                 addToSelectable(chooseRewardButton);
             } else {
+                if (type == Type.Lost)
+                    actor.sold();
                 addToSelectable(actor);
             }
             generated.add(actor);

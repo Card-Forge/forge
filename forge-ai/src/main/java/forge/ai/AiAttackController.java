@@ -410,7 +410,7 @@ public class AiAttackController {
                 return false;
             }
             int dmg = c.getNetCombatDamage();
-            if (dmg <= 0 && ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) - dmg <= 0) {
+            if (dmg <= 0 && ComputerUtilCombat.attackerDamageBonus(c, null, true) - dmg <= 0) {
                 return false;
             }
             return ComputerUtilCombat.canAttackNextTurn(c);
@@ -564,7 +564,7 @@ public class AiAttackController {
             for (Card c : bandingCreatures) {
                 Card bestBand = null;
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     // Don't band a zero power creature if there's already a banding creature in a band
                     attackers = CardLists.filter(attackers, card -> combat.getBandOfAttacker(card).getAttackers().size() == 1);
                 }
@@ -586,7 +586,7 @@ public class AiAttackController {
                     bestBand = bestAttacker;
                 }
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     attackers = combat.getAttackers(); // restore the unfiltered attackers
                 }
 
@@ -1465,7 +1465,7 @@ public class AiAttackController {
             );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, null);
+            defPower = ComputerUtilCombat.totalCombatDamage(validBlockers); // Doran: toughness, not power
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant
@@ -1502,7 +1502,7 @@ public class AiAttackController {
                                     && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
-                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;
+                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetCombatDamage() <= 0;
 
                             // We are attacking too recklessly if we can't kill a single blocker and:
                             // - our creature will die for sure (chump attack)
@@ -1551,7 +1551,7 @@ public class AiAttackController {
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
             // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
-            if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
+            if (Math.max(0, attacker.getNetCombatDamage()) * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
                     // Do not attack if we can afford using the ability.
@@ -1808,7 +1808,7 @@ public class AiAttackController {
             // running simulations.
             CardCollection blkSorted = new CardCollection(this.blockers);
             CardLists.sortByPowerDesc(blkSorted);
-            refPowerValue += blkSorted.get(0).getCurrentPower();
+            refPowerValue += Math.max(0, blkSorted.get(0).getNetCombatDamage());
         }
 
         for (Card cre : attSorted) {
