@@ -106,6 +106,8 @@ public class CostSacrifice extends CostPartWithList {
                 desc = this.getTypeDescription();
             }
 
+            // "a permanent with mana value 1 or greater" is counted by the amount, not given an article twice
+            desc = desc.replaceFirst("^an? ", "");
             if (desc.startsWith("another")) sb.append(desc);
             else sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
                     : Lang.nounWithNumeralExceptOne(convertAmount(), desc));

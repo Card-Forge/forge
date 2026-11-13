@@ -79,7 +79,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         String desc = sa.getDescription();
         // a "for each" after ", then" belongs to the next part of the ability ("put a counter, then draw a card for each ...")
-        boolean forEach = desc.contains(" for each") && (!desc.contains(", then") || desc.indexOf(", then") > desc.indexOf(" for each"));
+        // and one inside a quoted ability ("... unless you pay {1} for each music counter on it") is not this effect's
+        final int quote = desc.indexOf('"');
+        boolean forEach = desc.contains(" for each") && (!desc.contains(", then") || desc.indexOf(", then") > desc.indexOf(" for each"))
+                && (quote < 0 || desc.indexOf(" for each") < quote);
         if (sa.hasParam("CounterTypes")) {
             if (desc.contains("Put ") && desc.contains(" on ")) {
                 desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)

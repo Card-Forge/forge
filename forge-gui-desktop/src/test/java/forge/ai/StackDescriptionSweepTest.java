@@ -249,13 +249,52 @@ public class StackDescriptionSweepTest extends AITest {
         return !sa.getTargets().isEmpty();
     }
 
+    private static final java.util.Set<String> TRIG_CARD = new java.util.HashSet<>(Arrays.asList("Card", "CardLKI", "NewCard", "Attacker",
+            "Blocker", "Fighter", "Token", "Source", "DamageSource", "Devoured", "Exploited", "Explorer", "Crew", "Championed", "Enlisted", "AttachSource", "AttachTarget"));
+    private static final java.util.Set<String> TRIG_CARDS = new java.util.HashSet<>(Arrays.asList("Cards", "Attackers", "Blockers",
+            "OtherAttackers", "Fighters", "Sources", "DamageSources", "CardsFiltered", "Objects"));
+    private static final java.util.Set<String> TRIG_PLAYER = new java.util.HashSet<>(Arrays.asList("Player", "Activator", "AttackingPlayer",
+            "DefendingPlayer", "Defender", "Attacked", "OriginalController", "DamageTarget", "Target", "OriginalDefender", "AttackedTarget"));
+    private static final java.util.Set<String> TRIG_NUMBER = new java.util.HashSet<>(Arrays.asList("Amount", "CounterAmount", "LifeAmount",
+            "DamageAmount", "Num", "Number", "NewCounterAmount", "LifeGained", "TokenNum", "PreventedAmount", "ScryNum", "SurveilNum"));
+
+    /** What a trigger would be handed in a game: a card, a player, an amount, so that its text can name them. */
+    private static void seedTriggeringObjects(final SpellAbility sa, final Player ai) {
+        final forge.game.card.Card any = ai.getCardsIn(ZoneType.Battlefield).isEmpty() ? null : ai.getCardsIn(ZoneType.Battlefield).get(0);
+        final Player other = ai.getOpponents().isEmpty() ? ai : ai.getOpponents().get(0);
+        for (final forge.game.ability.AbilityKey k : forge.game.ability.AbilityKey.values()) {
+            final String n = k.name();
+            if (sa.getTriggeringObject(k) != null) {
+                continue;
+            }
+            if (TRIG_CARD.contains(n) && any != null) {
+                sa.setTriggeringObject(k, any);
+            } else if (TRIG_CARDS.contains(n) && any != null) {
+                sa.setTriggeringObject(k, new forge.game.card.CardCollection(any));
+            } else if (TRIG_PLAYER.contains(n)) {
+                sa.setTriggeringObject(k, other);
+            } else if (TRIG_NUMBER.contains(n)) {
+                sa.setTriggeringObject(k, 2);
+            } else if (n.equals("Produced") || n.equals("Mana")) {
+                sa.setTriggeringObject(k, "G");
+            } else if (n.equals("Map")) {
+                sa.setTriggeringObject(k, new java.util.HashMap<>(java.util.Collections.singletonMap(other, 2)));
+            } else if (n.equals("OpponentVotedSame") || n.equals("OpponentVotedDiff")) {
+                sa.setTriggeringObject(k, new java.util.ArrayList<>());
+            } else if (n.equals("Cause") || n.equals("SpellAbility") || n.equals("SourceSA") || n.equals("StackSa")) {
+                sa.setTriggeringObject(k, sa);
+            }
+        }
+    }
+
     /** The text the stack shows for a triggered ability: the trigger's description, with the effect where it says ABILITY. */
     private Result checkTrigger(final String cardName, final Trigger t, final SpellAbility sa, final Player ai) {
         try {
             sa.setActivatingPlayer(ai);
+            seedTriggeringObjects(sa, ai);
             // the "[Zone Changer: null]" tail lists what triggered it: there is nothing in the test game
             final String text = new forge.game.trigger.WrappedAbility(t, sa, ai).getStackDescription(false)
-                    .replaceAll("(?:\\s*\\[[^\\]]*\\])+\\s*$", "");
+                    .replaceAll("\\s*\\[[A-Z][A-Za-z ]*: .*\\]\\s*$", "");
             final String line = cardName + " | trigger | \"" + text + "\"";
             return new Result(line, text.isEmpty() ? "" : problems(text, cardName, String.valueOf(sa.getApi())), false);
         } catch (final RuntimeException e) {
@@ -298,6 +337,9 @@ public class StackDescriptionSweepTest extends AITest {
             // "Defined$ Enchanted" and the like: the test card is not attached to anything
             return new Result(line, "", true);
         }
+        if (text.trim().equals("ABILITY") && kind.equals("trigger effect")) {
+            return new Result(line, "", false); // the saga chapter's text goes where ABILITY stands
+        }
         if (text.isBlank() && (sa.getApi() == null || kind.equals("trigger effect"))) {
             // a land's mana ability or a keyword has no effect text, and a trigger's effect text is not what is shown
             return new Result(line, "", false);
@@ -306,7 +348,15 @@ public class StackDescriptionSweepTest extends AITest {
     }
 
     private static Result threw(final String cardName, final String kind, final RuntimeException e, final boolean trigger) {
-        return new Result(cardName + " | " + kind + " | threw " + e, " [threw " + e.getClass().getSimpleName() + "]", trigger);
+        final StackTraceElement[] st = e.getStackTrace();
+        String where = "";
+        for (final StackTraceElement f : st) {
+            if (f.getClassName().startsWith("forge.")) {
+                where = " at " + f.getClassName().replaceFirst("^.*\\.", "") + "." + f.getMethodName() + ":" + f.getLineNumber();
+                break;
+            }
+        }
+        return new Result(cardName + " | " + kind + " | threw " + e + where, " [threw " + e.getClass().getSimpleName() + "]", trigger);
     }
 
     /**

@@ -74,6 +74,17 @@ public class DiscardEffect extends SpellAbilityEffect {
 
             if (mode.equals("Hand")) {
                 sb.append(oneTgtP ? "their hand" : "their hands");
+            } else if (mode.equals("Defined")) {
+                // the cards are named by the script ("Remembered", "ChosenCard"): say which ones are meant, not the whole list
+                final List<Card> toDiscard = sa.getHostCard() == null ? Lists.<Card>newArrayList()
+                        : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
+                if (toDiscard.size() == 1) {
+                    sb.append(toDiscard.get(0).toString());
+                } else if (toDiscard.size() > 1 && toDiscard.size() <= 3) {
+                    sb.append(TextUtil.join(toDiscard.stream().map(Card::toString).collect(java.util.stream.Collectors.toList()), ", "));
+                } else {
+                    sb.append(toDiscard.isEmpty() ? "that card" : "the rest");
+                }
             } else if (revealDiscardAll) {
                 sb.append("all");
             } else if (sa.hasParam("AnyNumber")) {
@@ -91,24 +102,6 @@ public class DiscardEffect extends SpellAbilityEffect {
                 sb.append(oneCard ? "that card" : "those cards");
             } else if (revealDiscardAll) {
                 sb.append(" ").append(Lang.getPlural(valid));
-            }
-
-            if (mode.equals("Defined")) {
-                sb.append(" defined cards");
-
-                if (sa.getHostCard() != null) {
-                    final List<Card> toDiscard = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
-                    if (!toDiscard.isEmpty()) {
-                        sb.append(": ");
-
-                        List<String> definedNames = Lists.newArrayList();
-                        for (Card discarded : toDiscard) {
-                            definedNames.add(discarded.toString());
-                        }
-
-                        sb.append(TextUtil.join(definedNames, ","));
-                    }
-                }
             }
 
             if (mode.equals("Random")) {

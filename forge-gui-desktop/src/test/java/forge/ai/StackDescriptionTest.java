@@ -65,7 +65,7 @@ public class StackDescriptionTest extends AITest {
     /** What no stack text should contain, whatever the card: raw script words, stray spaces and punctuation, a missing amount. */
     static final String[][] LINT = {
             { "CARDNAME|NICKNAME", "raw CARDNAME/NICKNAME" },
-            { "\\s{2,}", "double space" },
+            { "[ \\t]{2,}|[ \\t]\\n|\\n[ \\t]", "double space" },
             { "\\s[.,;:!?]", "space before punctuation" },
             { "\\b[A-Z][A-Za-z]+\\.!?[A-Za-z]{3,}", "raw Valid string (Type.restriction)" },
             { "\\b(?:Sacrifice|Destroy|Exile) (?:permanents|things?)\\b", "unspecific noun" },
