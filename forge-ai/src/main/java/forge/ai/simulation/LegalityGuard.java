@@ -2,6 +2,11 @@ package forge.ai.simulation;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import forge.ai.ComputerUtilMana;
+import forge.game.card.CardLists;
 
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
@@ -44,6 +49,13 @@ public final class LegalityGuard {
             if (host != null && sa.isSpell() && host.isPermanent() && !host.isLand() && !sa.isMutate()
                     && host.isInZone(ZoneType.Hand) && etbWithoutTarget(ai, host)) {
                 return "etb-no-target";
+            }
+            if (host != null && sa.isSpell() && host.isPermanent() && host.isInZone(ZoneType.Hand)
+                    && sacrificesItselfOnEntering(ai, host)) {
+                return "etb-self-sacrifice";
+            }
+            if (xIsZero(ai, sa)) {
+                return "x-zero";
             }
             return null;
         } catch (final RuntimeException e) {
@@ -114,5 +126,89 @@ public final class LegalityGuard {
             return "Battlefield".equals(ability.getParam("Origin")) && !ability.hasParam("GainControl");
         }
         return false;
+    }
+
+    // ------------------------------------------------------------------------------------------ sacrifice unless
+
+    private static final Pattern UNLESS_COST = Pattern.compile("UnlessCost\\$\\s*(Return|Sac)<(\\d+)/([^/>]+)");
+
+    /**
+     * Faerie Impostor and its kind: "when it enters, sacrifice it unless you return (sacrifice) another creature you
+     * control". With no other permanent the AI could pay with, the permanent is cast only to be sacrificed.
+     */
+    static boolean sacrificesItselfOnEntering(final Player ai, final Card card) {
+        for (final Trigger t : card.getTriggers()) {
+            final Map<String, String> params = t.getMapParams();
+            if (!"ChangesZone".equals(params.get("Mode")) || !"Battlefield".equals(params.get("Destination"))
+                    || params.get("ValidCard") == null || !params.get("ValidCard").contains("Self")
+                    || params.get("Execute") == null) {
+                continue;
+            }
+            final String script = card.getSVar(params.get("Execute"));
+            if (script == null || !script.contains("DB$ Sacrifice") || script.contains("Defined$ ")
+                    && !script.contains("Defined$ Self")) {
+                continue;
+            }
+            final Matcher m = UNLESS_COST.matcher(script);
+            if (!m.find() || script.contains("UnlessPayer$ Opponent")) {
+                continue;
+            }
+            final int need = Integer.parseInt(m.group(2));
+            final int have = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), m.group(3), ai, card, null).size();
+            if (have < need) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // ------------------------------------------------------------------------------------------ X of nothing
+
+    /**
+     * A spell whose cost has an X that the AI's mana cannot make one (a Hydra that enters with X counters, a clone that
+     * copies X creatures, a token maker with X tokens): X of nothing is a card thrown away. Chalice of the Void is the
+     * exception (X of zero is a real choice there), and so is a card that says so with {@code AIXZeroOk}.
+     */
+    static boolean xIsZero(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || !sa.costHasManaX()
+                || XChoice.isChalice(sa) || host.hasSVar("AIXZeroOk")
+                || "ChaliceOfTheVoid".equals(host.getSVar("AICurseEffect"))) {
+            return false;
+        }
+        final SpellAbility root = sa.getRootAbility();
+        final Integer before = root.getXManaCostPaid();
+        try {
+            return ComputerUtilMana.determineLeftoverMana(root, ai, false) < 1;
+        } finally {
+            root.setXManaCostPaid(before);
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------ dormant lands
+
+    private static final Pattern PRESENT_COMPARE = Pattern.compile("GE(\\d+)");
+
+    /**
+     * A land whose mana abilities all need more lands than the AI will have after this land drop (Temple of the False
+     * God: "activate only if you control five or more lands"). Played first, it is a land that makes no mana for turns.
+     */
+    public static boolean isDormantLand(final Player ai, final Card land) {
+        try {
+            if (land == null || !land.isLand() || land.getManaAbilities().isEmpty()) {
+                return false;
+            }
+            final int lands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Card::isLand).size() + 1;
+            for (final SpellAbility m : land.getManaAbilities()) {
+                final String present = m.getParamOrDefault("IsPresent", "");
+                final Matcher n = PRESENT_COMPARE.matcher(m.getParamOrDefault("PresentCompare", ""));
+                if (!present.startsWith("Land") || !n.matches() || Integer.parseInt(n.group(1)) <= lands) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (final RuntimeException e) {
+            return false;
+        }
     }
 }
