@@ -19,6 +19,8 @@ package forge.gamemodes.limited;
 
 import forge.card.ColorSet;
 import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -43,7 +45,18 @@ public final class CommanderDraftUtil {
             "The Prismatic Piper", "Faceless One"
     };
 
+    private static final String DECK_TAG = "CommanderDraft";
+
     private CommanderDraftUtil() {}
+
+    public static void markCommanderDraftDeck(final Deck deck) {
+        deck.getTags().add(DECK_TAG);
+    }
+
+    /** Also accepts untagged decks that have a commander, since older mobile saves carry no tag. */
+    public static boolean isCommanderDraftDeck(final Deck deck) {
+        return deck.getTags().contains(DECK_TAG) || deck.has(DeckSection.Commander);
+    }
 
     /**
      * Interactively selects 1–2 commanders for a Commander Draft deck.

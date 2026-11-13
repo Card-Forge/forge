@@ -24,6 +24,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gamemodes.gauntlet.GauntletUtil;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
@@ -500,6 +501,9 @@ public class FDeckChooser extends FScreen {
 
     private void editDeck(DeckProxy deck) {
         FDeckEditor.DeckEditorConfig editorConfig = getEditorConfig();
+        if (editorConfig == FDeckEditor.EditorConfigDraft && CommanderDraftUtil.isCommanderDraftDeck(deck.getDeck())) {
+            editorConfig = FDeckEditor.EditorConfigCommanderDraft;
+        }
         switch (editorConfig.getGameType()) {
             case Commander:
                 DeckPreferences.setCommanderDeck(deck.getName());
@@ -517,6 +521,7 @@ public class FDeckChooser extends FScreen {
                 DeckPreferences.setPlanarDeck(deck.getName());
                 break;
             case Draft:
+            case CommanderDraft:
                 DeckPreferences.setDraftDeck(deck.getName());
                 break;
             case Sealed:
