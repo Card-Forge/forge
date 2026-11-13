@@ -340,7 +340,8 @@ public class StackDescriptionSweepTest extends AITest {
         if (text.trim().equals("ABILITY") && kind.equals("trigger effect")) {
             return new Result(line, "", false); // the saga chapter's text goes where ABILITY stands
         }
-        if (text.isBlank() && (sa.getApi() == null || kind.equals("trigger effect"))) {
+        if ((text.isBlank() || kind.equals("trigger effect") && text.replaceFirst("^.*\\(\\d+\\) -", "").isBlank())
+                && (sa.getApi() == null || kind.equals("trigger effect"))) {
             // a land's mana ability or a keyword has no effect text, and a trigger's effect text is not what is shown
             return new Result(line, "", false);
         }
