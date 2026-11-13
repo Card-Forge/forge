@@ -41,5 +41,6 @@ public class ConfigData {
     // Desktop default only; saved player choices take precedence on every platform.
     public boolean enableExtraBattleBackgroundsByDefault;
     public EffectData globalEffect;
+    public ModifierData[] modifiers; //Optional rules the player can turn on at new game.
 
 }

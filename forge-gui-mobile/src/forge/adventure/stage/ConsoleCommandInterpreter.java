@@ -34,7 +34,9 @@ import forge.util.ScreenUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,6 +93,17 @@ public class ConsoleCommandInterpreter {
 
         // reuse
         return matchTokenList.toArray(emptyStringArray);
+    }
+
+    private static ModifierData findModifier(String name) {
+        ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+        if (modifiers == null)
+            return null;
+        for (ModifierData modifier : modifiers) {
+            if (modifier.name.equalsIgnoreCase(name))
+                return modifier;
+        }
+        return null;
     }
 
     public String command(String text) {
@@ -366,6 +379,50 @@ public class ConsoleCommandInterpreter {
             }
             System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
             return "POI lists dumped to stdout.";
+        });
+        registerCommand(new String[]{"modifier", "list"}, s -> {
+            ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+            if (modifiers == null || modifiers.length == 0)
+                return "This plane has no modifiers.";
+            StringBuilder text = new StringBuilder();
+            for (ModifierData modifier : modifiers) {
+                String value = Current.player().getModifiers().get(modifier.name);
+                text.append(modifier.name).append(": ");
+                if (value == null)
+                    text.append("off");
+                else
+                    text.append(value.isEmpty() ? "on" : "on (" + modifier.describeValue(value) + ")");
+                text.append("\n");
+            }
+            return text.toString().trim();
+        });
+        registerCommand(new String[]{"modifier", "on"}, s -> {
+            if (s.length < 1)
+                return "Command needs a modifier name and an optional setting. Example:\n\"modifier on \"Rarity limit\" Uncommon\"";
+            ModifierData modifier = findModifier(s[0]);
+            if (modifier == null)
+                return "No modifier named " + s[0] + ". Use \"modifier list\".";
+            String value = modifier.defaultValue(Current.player().getColorIdentity());
+            if (s.length > 1) {
+                value = modifier.parseValue(s[1]);
+                if (value == null)
+                    return s[1] + " is not a setting of " + modifier.name + ".";
+            }
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getModifiers());
+            chosen.put(modifier.name, value);
+            Current.player().setModifiers(chosen);
+            return modifier.name + " is on.";
+        });
+        registerCommand(new String[]{"modifier", "off"}, s -> {
+            if (s.length < 1)
+                return "Command needs 1 parameter: Modifier name.";
+            ModifierData modifier = findModifier(s[0]);
+            if (modifier == null)
+                return "No modifier named " + s[0] + ". Use \"modifier list\".";
+            Map<String, String> chosen = new LinkedHashMap<>(Current.player().getModifiers());
+            chosen.remove(modifier.name);
+            Current.player().setModifiers(chosen);
+            return modifier.name + " is off.";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)
