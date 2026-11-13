@@ -104,8 +104,8 @@ public final class CardFacePredicates {
                     } else if (m.contains("cmcEQ")) {
                         int i = Integer.parseInt(m.substring(5));
                         if (!hasCMC(input, i)) return false;
-                    } else if (m.startsWith("set")) {
-                        String setCode = m.substring(3);
+                    } else if (m.startsWith("inSet")) {
+                        String setCode = m.substring(5);
                         CardEdition edition = StaticData.instance().getCardEdition(setCode);
                         if (edition == null) {
                             return false;
