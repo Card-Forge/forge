@@ -1,4 +1,4 @@
-Name:Paul Atreides, Ducal Hero
+Name:Paul Atreides, Ducal Heir
 ManaCost:1 W
 Types:Legendary Creature Human Noble
 PT:1/2
