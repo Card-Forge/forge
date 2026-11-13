@@ -471,6 +471,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
+            if (tgt.canOnlyTgtOpponent()) {
+                for (final Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        return true;
+                    }
+                }
+                return false;
+            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
