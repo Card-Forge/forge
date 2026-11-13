@@ -48,7 +48,7 @@ final class LifeDrawGuard {
         }
         int threat = 0;
         for (final Card c : ai.getOpponents().getCreaturesInPlay()) {
-            threat += Math.max(0, c.getNetPower());
+            threat += Math.max(0, c.getNetCombatDamage());
         }
         final boolean dies = after < LIFE_FLOOR || threat >= after
                 || ComputerUtil.predictNextCombatsDanger(ai, ai.getOpponents()) > 0;

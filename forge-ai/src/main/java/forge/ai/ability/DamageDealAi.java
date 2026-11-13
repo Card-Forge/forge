@@ -698,6 +698,7 @@ public class DamageDealAi extends DamageAiBase {
                 if ((freePing && !avoidTargetP(ai, sa))
                         || (((phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || ProwessTiming.worthBeforeCombat(ai, sa) // before combat, so the prowess trigger counts
                         || isFaceBurnWorthCasting(ai, sa) // an instant that can only hit the player (Skullcrack)
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
                         && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
@@ -801,7 +802,7 @@ public class DamageDealAi extends DamageAiBase {
         }
         if (!urgent && !playReusable(ai, saMe)) {
             // a spell that can only hurt the opponent has no other use, so it is not kept for later (Boltwave at 6+ life)
-            return positive && isFaceBurnWorthCasting(ai, saMe);
+            return positive && (isFaceBurnWorthCasting(ai, saMe) || ProwessTiming.worthBeforeCombat(ai, saMe));
         }
         return true;
     }
