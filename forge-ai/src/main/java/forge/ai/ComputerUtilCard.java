@@ -622,6 +622,35 @@ public class ComputerUtilCard {
         return bonus;
     }
 
+    /** A permanent that stops the AI's creatures from attacking: worth about a good creature, and more with every creature it locks down. */
+    private static final int ATTACK_LOCK_BASE = 150;
+    private static final int ATTACK_LOCK_PER_CREATURE = 50;
+    private static final int ATTACK_LOCK_CAP = 400;
+
+    /**
+     * How many of the AI's creatures a static ability of the card stops from attacking (Moat). Read from the card's own
+     * CantAttack statics, so it is the situation (what the AI has in play) and not the mana value that decides.
+     */
+    public static int creaturesLockedFromAttacking(final Player ai, final Card c) {
+        if (c.isCreature() || c.getController().equals(ai)) {
+            return 0;
+        }
+        int most = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (!st.checkMode(StaticAbilityMode.CantAttack) || st.hasParam("Unless")) {
+                continue;
+            }
+            int n = 0;
+            for (final Card mine : ai.getCreaturesInPlay()) {
+                if (st.matchesValidParam("ValidCard", mine)) {
+                    n++;
+                }
+            }
+            most = Math.max(most, n);
+        }
+        return most;
+    }
+
     private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
         int value;
         if (c.isCreature()) {
@@ -632,6 +661,10 @@ public class ComputerUtilCard {
             value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {
                 value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+            final int locked = creaturesLockedFromAttacking(ai, c);
+            if (locked > 0) {
+                value += Math.min(ATTACK_LOCK_CAP, ATTACK_LOCK_BASE + ATTACK_LOCK_PER_CREATURE * locked);
             }
         }
 
@@ -1457,6 +1490,10 @@ public class ComputerUtilCard {
                 }
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
+        }
+        // a permanent that stops the AI's creatures from attacking (Moat): it is the whole board, not a tempo play
+        if (!c.isCreature() && creaturesLockedFromAttacking(ai, c) > 0) {
+            threat = Math.max(threat, 1.0f);
         }
         if (!c.getManaAbilities().isEmpty() && !landGrantingRemoval(sa)) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
