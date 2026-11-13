@@ -34,6 +34,10 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
         params.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
     }
 
+    public static boolean onlyChangesAmount(final SpellAbility sa) {
+        return sa.hasParam("ReplaceAmount") && !sa.hasParam("ReplaceMana") && !sa.hasParam("ReplaceType") && !sa.hasParam("ReplaceColor");
+    }
+
     /** @param anyColor the color to use where the effect lets its controller choose one */
     public static String replaceMana(final SpellAbility sa, String replaced, final String anyColor) {
         final Card card = sa.getHostCard();
