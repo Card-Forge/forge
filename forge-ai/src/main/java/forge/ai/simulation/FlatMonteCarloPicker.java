@@ -122,7 +122,7 @@ public final class FlatMonteCarloPicker {
         private static final long serialVersionUID = 1L;
 
         RolloutTooSlow() {
-            super("rollout too slow", null, false, false);
+            super("rollout too slow");
         }
     }
 
