@@ -1,0 +1,11 @@
+Name:Kes, Evolving Telepath
+ManaCost:4 U
+Types:Legendary Creature Ocampa Advisor
+PT:2/6
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a time counter on NICKNAME, then draw X cards, where X is the number of time counters on her. Then if she has nine or more time counters on her, sacrifice her.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE9_TIME
+SVar:X:Count$CardCounters.TIME
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, put a time counter on Kes, then draw X cards, where X is the number of time counters on her. Then if she has nine or more time counters on her, sacrifice her.

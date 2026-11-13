@@ -64,6 +64,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
+    public String battleBackground = ""; //Override the battle background folder for this encounter.
     public String bossInsult = ""; //Override the generated insult text when you are defeated.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
@@ -84,6 +85,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
     public float speedModifier = 0.0f; // Increase or decrease default speed
     public boolean aggro = false;
+    public boolean ignoreGlobalEffect = false;
+    public boolean ignoreBiomeEffect = false;
     public boolean ignoreDungeonEffect = false;
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;
@@ -105,6 +108,11 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
+        //Map object properties override these after the sprite is created.
+        effect = data.effect;
+        ignoreGlobalEffect = data.ignoreGlobalEffect;
+        ignoreBiomeEffect = data.ignoreBiomeEffect;
+        ignoreDungeonEffect = data.ignoreDungeonEffect;
         float scale = data.scale;
         if (scale < 0)
             scale = 1f;
@@ -712,4 +720,3 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         return _freeze;
     }
 }
-

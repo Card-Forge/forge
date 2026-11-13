@@ -1,0 +1,8 @@
+Name:Rite of Ascension
+ManaCost:2 R W
+Types:Enchantment
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Battlefront — Whenever you attack, for each opponent you attacked this turn, create a tapped and attacking 2/1 red Klingon Warrior creature token with haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisTurn
+SVar:PlayMain1:TRUE
+Oracle:Battlefront — Whenever you attack, for each opponent you attacked this turn, create a tapped and attacking 2/1 red Klingon Warrior creature token with haste.

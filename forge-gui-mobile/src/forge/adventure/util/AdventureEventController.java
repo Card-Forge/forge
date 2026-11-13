@@ -9,7 +9,6 @@ import forge.deck.DeckFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
-import forge.item.generation.BoosterGenerator;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
@@ -88,8 +87,16 @@ public class AdventureEventController implements Serializable {
         object = null;
     }
 
+    /**
+     * Cheap check (no generation) for whether {@link #createEvent(String)} would currently return nothing for this
+     * point because its next event isn't available yet.
+     */
+    public boolean isEventOnCooldown(String pointID) {
+        return nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay();
+    }
+
     public AdventureEventData createEvent(String pointID) {
-        if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
+        if (isEventOnCooldown(pointID)) {
             // No event currently available here
             return null;
         }
@@ -161,7 +168,7 @@ public class AdventureEventController implements Serializable {
 
     public Deck generateBooster(String setCode) {
         SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
-        List<PaperCard> cards = BoosterGenerator.getBoosterPack(template);
+        List<PaperCard> cards = CardUtil.generateRestrictedAwareBoosterPack(template);
         Deck output = new Deck();
         output.getMain().add(cards);
         String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();
@@ -170,7 +177,8 @@ public class AdventureEventController implements Serializable {
         return output;
     }
     public Deck generateBoosterByColor(String color) {
-        List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
+        List<PaperCard> cards = CardUtil.generateRestrictedAwareBoosterPack(
+                BoosterPack.fromColor(color).getSealedTemplate());
         Deck output = new Deck();
         output.getMain().add(cards);
         String editionName = color + " Booster Pack";
@@ -186,7 +194,7 @@ public class AdventureEventController implements Serializable {
         for (SealedTemplate template : StaticData.instance().getSpecialBoosters()) {
             if (!template.getEdition().contains(block.getLandSet().getCode()))
                 continue;
-            UnOpenedProduct toOpen = new UnOpenedProduct(template);
+            UnOpenedProduct toOpen = CardUtil.createRestrictedAwareBooster(template);
 
             Deck contents = new Deck();
             contents.getMain().add(toOpen.get());

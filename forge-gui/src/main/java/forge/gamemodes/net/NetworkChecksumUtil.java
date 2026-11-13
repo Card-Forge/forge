@@ -426,7 +426,7 @@ public final class NetworkChecksumUtil {
      * the delta.
      */
     static Object getEffectiveValue(TrackableObject obj, TrackableProperty prop) {
-        Object value = ((Map<TrackableProperty, Object>) obj.getProps()).get(prop);
+        Object value = obj.getProps().get(prop);
         Tracker tracker = obj.getTracker();
         if (tracker != null && tracker.isFrozen()) {
             Map<TrackableProperty, Object> delayed = tracker.getDelayedPropsFor(obj);

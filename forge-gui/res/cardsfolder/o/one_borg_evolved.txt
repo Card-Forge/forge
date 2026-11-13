@@ -1,0 +1,8 @@
+Name:One, Borg Evolved
+ManaCost:4 W U B
+Types:Legendary Artifact Creature Borg Artificer
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Flying & Double Strike & Vigilance & Menace & Lifelink & Ward:2 | Description$ Artifact creatures you control have flying, double strike, vigilance, menace, lifelink, and ward {2}.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+Oracle:Artifact creatures you control have flying, double strike, vigilance, menace, lifelink, and ward {2}.

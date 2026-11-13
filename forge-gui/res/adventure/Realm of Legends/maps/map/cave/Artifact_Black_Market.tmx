@@ -61,7 +61,7 @@
     &quot;text&quot;: &quot;'The forbidden spell I'm selling is Grim Monolith. Costs 2 mana, but taps for 3. Usable by any commander. And you can reuse it later.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000 }
         ],
@@ -77,7 +77,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],
@@ -101,7 +101,7 @@
     &quot;text&quot;: &quot;'I have two of the infamous moxen for sale. Mox Amber, empowered by legends, and the Chrome Mox, which can be imprinted with anything.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Mox Amber. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mox Amber. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -116,7 +116,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Mox Amber. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mox Amber. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -124,7 +124,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Chrome Mox. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Chrome Mox. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -139,7 +139,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Chrome Mox. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Chrome Mox. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -163,7 +163,7 @@
     &quot;text&quot;: &quot;'I have two powerful mana diamonds for sale. Mox Diamond can turn an unneeded land into fast mana. And Lion's Eye Diamond has the power of the mythical black lotus, just with a small additional cost.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Mox Diamond. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mox Diamond. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -178,7 +178,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Mox Diamond. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mox Diamond. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -186,7 +186,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Lion's Eye Diamond. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Lion's Eye Diamond. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -201,7 +201,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Lion's Eye Diamond. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Lion's Eye Diamond. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -225,7 +225,7 @@
     &quot;text&quot;: &quot;'You're in luck. I have TWO otherwise forbidden spells; lands of unmatched might. Mishra's Workshop produces THREE mana for artifacts, and the Library of Alexandria draws cards for FREE.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Mishra's Workshop. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mishra's Workshop. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000 }
         ],
@@ -240,7 +240,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Mishra's Workshop. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mishra's Workshop. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],
@@ -248,7 +248,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Library of Alexandria. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Library of Alexandria. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000 }
         ],
@@ -263,7 +263,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Library of Alexandria. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Library of Alexandria. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],

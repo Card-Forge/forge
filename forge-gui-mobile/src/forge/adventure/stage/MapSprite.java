@@ -39,7 +39,7 @@ public class MapSprite extends Actor {
         if (point != null) {
             PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID());
             setBookmarked(changes.isBookmarked(), point);
-            isCaveDungeon = "cave".equalsIgnoreCase(point.getData().type) || "dungeon".equalsIgnoreCase(point.getData().type);
+            isCaveDungeon = point.getData().isDungeon();
             if (point.getData().map != null && point.getID() != null) {
                 isOldorVisited = changes.hasDeletedObjects();
             }

@@ -1,0 +1,26 @@
+[metadata]
+Name=Dwarven Berserker
+[Main]
+19 Mountain|3ED
+1 Dwarven Hold|FEM
+3 Dwarven Ruins|FEM
+2 Dwarven Armorer|FEM
+4 Dwarven Berserker|WTH
+4 Dwarven Bloodboiler|JUD
+2 Dwarven Lieutenant|FEM
+2 Dwarven Recruiter|ODY
+2 Dwarven Strike Force|ODY
+1 Ring of Renewal|FEM
+1 Draconian Cylix|FEM
+4 Fiery Temper|TOR
+2 Violent Eruption|TOR
+2 Fit of Rage|WTH
+2 Seize the Day|ODY
+1 Dwarven Vigilantes|VIS
+3 Dwarven Warriors|3ED
+2 Anger|JUD
+1 Grand Melee|ONS
+2 Heart Wolf|HML
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Dwarven Berserker|WTH

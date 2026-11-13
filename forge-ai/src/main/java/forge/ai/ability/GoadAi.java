@@ -20,8 +20,9 @@ public class GoadAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             List<Card> goadable = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
 
-            if (goadable.isEmpty())
+            if (goadable.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
 
             if (game.getPlayers().size() > 2) {
                 // use this part only in multiplayer
@@ -59,6 +60,7 @@ public class GoadAi extends SpellAbilityAi {
             }
 
             if (!goadable.isEmpty()) {
+                sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(goadable));
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
@@ -97,10 +99,10 @@ public class GoadAi extends SpellAbilityAi {
                 List<Card> list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
                     list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+                    if (list.isEmpty()) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                 }
-
-                if (list.isEmpty())
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
                 sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(list));
                 return new AiAbilityDecision(30, AiPlayDecision.MandatoryPlay);

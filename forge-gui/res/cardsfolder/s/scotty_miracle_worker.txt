@@ -1,0 +1,9 @@
+Name:Scotty, Miracle Worker
+ManaCost:1 U U
+Types:Legendary Creature Human Artificer
+PT:2/3
+S:Mode$ Continuous | Affected$ Instant.YouOwn,Sorcery.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Beam me up | Condition$ PlayerTurn | Phases$ Main1,Main2 | Description$ During your main phase, each card in your graveyard has beam me up. The beam me up cost is equal to that spell's mana cost. NICKNAME can't be beamed up to cast a spell this way. (Only instant and sorcery spells can be cast this way. You may cast a card from your graveyard for its beam me up cost if you also return another creature you control to its owner's hand. Then exile that spell.)
+S:Mode$ CantBeBeamedUp | ValidCard$ Card.Self | ValidSA$ Spell.KeywordSource | Secondary$ True
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:During your main phase, each card in your graveyard has beam me up. The beam me up cost is equal to that spell's mana cost. Scotty can't be beamed up to cast a spell this way. (Only instant and sorcery spells can be cast this way. You may cast a card from your graveyard for its beam me up cost if you also return another creature you control to its owner's hand. Then exile that spell.)

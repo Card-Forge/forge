@@ -2,7 +2,7 @@ Name:Lumen-Class Frigate
 ManaCost:1 W
 Types:Artifact Spacecraft
 PT:3/5
-K:Station:12
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE2_CHARGE | AddStaticAbility$ AnthemStatic | Description$ STATION 2+ Other creatures you control get +1/+1.
 SVar:AnthemStatic:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE12_CHARGE | AddType$ Creature | AddKeyword$ Flying & Lifelink | Description$ STATION 12+ Flying, lifelink

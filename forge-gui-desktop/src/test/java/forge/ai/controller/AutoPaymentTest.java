@@ -7,6 +7,7 @@ import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -200,5 +201,20 @@ public class AutoPaymentTest extends SimulationTest {
         sa.setActivatingPlayer(p);
         AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
         AssertJUnit.assertTrue(sa.getPayingMana().stream().anyMatch(m -> m.addsNoCounterMagic(sa)));
+    }
+
+    @Test
+    public void payColoredWithGemstoneCavernsLuckCounter() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card caverns = addCard("Gemstone Caverns", p);
+        caverns.addCounterInternal(CounterEnumType.LUCK, 1, p, false, null, null);
+        Card sentinel = addCardToZone("Esper Sentinel", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = sentinel.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false));
     }
 }

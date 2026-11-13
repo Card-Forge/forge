@@ -33,6 +33,7 @@ import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Protection;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -105,7 +106,7 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = false;
         this.attackers = new ArrayList<>();
-        if (CombatUtil.canAttack(attacker, defendingOpponent)) {
+        if (CombatUtil.canAttack(attacker, defendingOpponent) && !isPointlessAttackOnProtectedPlayer(attacker, defendingOpponent)) {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
@@ -119,11 +120,38 @@ public class AiAttackController {
         }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
-            if (canAttackWrapper(c, defender)) {
+            if (canAttackWrapper(c, defender) && !isPointlessAttackOnProtectedPlayer(c, defender)) {
                 attackers.add(c);
             }
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+    }
+
+    /**
+     * Attacking is legal into a player with protection (e.g. Teferi's Protection: protection from everything), but
+     * every point of damage is prevented, so the attack gains nothing and only exposes the creature. Creatures that
+     * have to attack anyway stay in the list.
+     */
+    private boolean isPointlessAttackOnProtectedPlayer(final Card attacker, final GameEntity defender) {
+        if (nextTurn || !(defender instanceof Player) || attacker.getSVar("MustAttack").equals("True")) {
+            return false;
+        }
+        return isDamageProtected((Player) defender, attacker);
+    }
+
+    /** @return true if the player has protection (from everything, a colour, a type ...) that prevents damage from the source. */
+    public static boolean isDamageProtected(final Player p, final Card source) {
+        for (final KeywordInterface kw : p.getKeywords()) {
+            final String orig = kw.getOriginal();
+            if (!orig.startsWith("Protection")) {
+                continue;
+            }
+            final String valid = Protection.getProtectionValid(orig, true);
+            if (valid.isEmpty() || source.isValid(valid, p, null, null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -341,7 +369,7 @@ public class AiAttackController {
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
         AITimeoutTracker.check();
         // check for time walks
-        if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
+        if (ai.getGame().getPhaseHandler().isPlayerNextTurn(ai)) {
             return potentialAttackers;
         }
         // no need to block (already holding mana to cast fog next turn)
@@ -750,7 +778,7 @@ public class AiAttackController {
         }
 
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, defendingOpponent);
-        if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+        if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
             return true;
         }
         for (Card trampler : trampleDmg.keySet()) {
@@ -759,7 +787,7 @@ public class AiAttackController {
                 totalPoisonDamage += dmg;
             }
             totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
-            if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+            if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
                 return true;
             }
         }
@@ -809,6 +837,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        // TODO plan the attack with teammates, so lethal that needs both players' creatures is found (CR 805.10b)
         final long id = AITimeoutTracker.key(ai.getGame().getId(), ai.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // predicting a HUMAN player's attack must not light up that player's timer bar

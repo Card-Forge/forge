@@ -36,5 +36,8 @@ public class ConfigData {
     public boolean enableGeneticAI = true;
     public String chaosDeckFormat;
     public boolean usePriceListPrices = true;
+    // Desktop default only; saved player choices take precedence on every platform.
+    public boolean enableExtraBattleBackgroundsByDefault;
+    public EffectData globalEffect;
 
 }

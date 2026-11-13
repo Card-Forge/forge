@@ -3,7 +3,7 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import forge.game.GameType;
+import forge.deck.FormatChoices;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -95,18 +95,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblGameFormat") + ":").fontSize(12).build();
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblFormat") + ":").fontSize(12).build();
 
-    private final FComboBox<GameType> cbFormat = createFormatCombo();
+    private final FComboBox<Object> cbFormat = createFormatCombo();
 
-    private static FComboBox<GameType> createFormatCombo() {
-        FComboBox<GameType> cb = new FComboBox<>(new GameType[] {
-                GameType.Constructed,
-                GameType.Commander,
-                GameType.Oathbreaker,
-                GameType.Brawl,
-                GameType.TinyLeaders,
-        });
+    private static FComboBox<Object> createFormatCombo() {
+        FComboBox<Object> cb = new FComboBox<>(FormatChoices.get(false));
         cb.setFont(FSkin.getRelativeFont(12));
         return cb;
     }
@@ -249,7 +243,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         return btnImport;
     }
 
-    public FComboBox<GameType> getCbFormat() {
+    public FComboBox<Object> getCbFormat() {
         return cbFormat;
     }
 }

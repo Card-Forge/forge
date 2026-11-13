@@ -36,6 +36,8 @@ public class BiomeData implements Serializable {
     public String[] enemies;
     public String[] pointsOfInterest;
     public BiomeStructureData[] structures;
+    public EffectData effect;
+    public boolean ignoreGlobalEffect;
 
     private ArrayList<EnemyData> enemyList;
     private ArrayList<PointOfInterestData> pointOfInterestList;
@@ -84,7 +86,7 @@ public class BiomeData implements Serializable {
         }
         ArrayList<PointOfInterestData> cavesDungeon = new ArrayList<>();
         for (PointOfInterestData data : pointOfInterestList) {
-            if ("cave".equalsIgnoreCase(data.type) || "dungeon".equalsIgnoreCase(data.type)) {
+            if (data.isDungeon()) {
                 cavesDungeon.add(data);
             }
         }

@@ -1,0 +1,9 @@
+Name:Guinan, Ancient Advisor
+ManaCost:2 W
+Types:Legendary Creature El-Aurian Advisor
+PT:1/4
+A:AB$ PutCounterAll | Cost$ 1 T | ValidCards$ Creature.YouCtrl+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | RememberAmount$ True | SubAbility$ DBDraw | SpellDescription$ Put a +1/+1 counter on each creature you control that entered this turn. If you put two or more +1/+1 counters on creatures this way, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:{1}, {T}: Put a +1/+1 counter on each creature you control that entered this turn. If you put two or more +1/+1 counters on creatures this way, draw a card.

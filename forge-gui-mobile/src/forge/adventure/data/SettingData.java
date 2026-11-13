@@ -1,5 +1,6 @@
 package forge.adventure.data;
 
+import java.util.HashMap;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -14,6 +15,7 @@ public class SettingData {
     public boolean fullScreen;
     public String videomode;
     public String lastActiveSave;
+    // Legacy ratio adjustments, no longer used (cards keep their ratio automatically). Kept so older settings.json files still parse.
     public Float rewardCardAdj;
     public Float cardTooltipAdj;
     public Float rewardCardAdjLandscape;
@@ -29,4 +31,9 @@ public class SettingData {
     public boolean bindEquipmentLoadoutsToDecks;
     public boolean drawChevronsToHiddenEnemiesInClearQuest;
     public boolean preferEraMatchedTokenArt;
+    // Preserve explicitly stored global choices from the original background settings.
+    public Boolean enableExtraBattleBackgrounds;
+    public HashMap<String, Boolean> extraBattleBackgroundsByPlane = new HashMap<>();
+    public HashMap<String, String> battleBackgroundSources = new HashMap<>();
+    public HashMap<String, Boolean> useCustomBattleBackgroundSources = new HashMap<>();
 }

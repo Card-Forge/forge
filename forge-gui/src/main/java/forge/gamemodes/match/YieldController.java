@@ -164,7 +164,7 @@ public class YieldController {
 
     /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
     public static boolean isPriorityAtOrPastMarker(GameView gv, PlayerView phaseOwner, PhaseType phase) {
-        if (!phaseOwner.equals(gv.getPlayerTurn())) return false;
+        if (!phaseOwner.sharesTeamWith(gv.getPlayerTurn())) return false;
         PhaseType currentPhase = gv.getPhase();
         return currentPhase == phase || currentPhase.isAfter(phase);
     }
@@ -185,7 +185,7 @@ public class YieldController {
         if (autoPassUntilMarker != null && gv != null) {
             PlayerView turnPlayer = gv.getPlayerTurn();
             PhaseType currentPhase = gv.getPhase();
-            boolean inMarkerOwnerTurn = autoPassUntilMarker.getPhaseOwner().equals(turnPlayer);
+            boolean inMarkerOwnerTurn = autoPassUntilMarker.getPhaseOwner().sharesTeamWith(turnPlayer);
             boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
             boolean pastTarget = inMarkerOwnerTurn && currentPhase != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
             if (hasLeftMarker && (atTarget || (!activationOnMarker && pastTarget))) {
