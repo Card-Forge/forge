@@ -139,7 +139,9 @@ public final class ComboGuard {
         // Breakthrough without a dredger, a card for the graveyard and Lion's Eye Diamond in play only empties the hand.
         // Not left to AiController.canPlaySa: it answers AnotherTime, and a fuel play (a sorcery that discards) with that
         // answer is still offered to the rollouts as a discovered play, which the rollouts like (the graveyard fills).
-        if (plan != null && DredgeLine.mustWait(ai, plan, sa)) {
+        final boolean dredgeRefill = sa.isSpell() && plan != null
+                && plan.has(ComboPlan.Kind.DREDGE) && DredgeLine.isRefill(host);
+        if (dredgeRefill && DredgeLine.mustWait(ai, plan, sa)) {
             return "dredge-line-incomplete";
         }
         // Griselbrand: pay life, draw cards. Offered to the rollouts as a discovered play whatever the heuristics think,
@@ -217,7 +219,8 @@ public final class ComboGuard {
         // Channel (and any spell that only gives life-for-mana until end of turn) with no payoff in hand to spend it on:
         // the spell would be a wasted card, see EnablerGuard
         final String illegal = LegalityGuard.problem(ai, sa);
-        if (illegal != null) {
+        // A completed LED Dredge line deliberately casts Breakthrough for X=0.
+        if (illegal != null && !(dredgeRefill && "x-zero".equals(illegal))) {
             return illegal;
         }
         final String enabler = EnablerGuard.problem(ai, sa);
