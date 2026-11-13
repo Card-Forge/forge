@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
@@ -184,15 +185,17 @@ public class CostRemoveCounter extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
+        GameEntityCounterTable costTable = new GameEntityCounterTable();
         for (Map.Entry<GameEntity, Multiset<CounterType>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
             for (Multiset.Entry<CounterType> v : e.getValue().entrySet()) {
                 removed += v.getCount();
-                e.getKey().subtractCounter(v.getElement(), v.getCount(), ai);
+                e.getKey().subtractCounter(v.getElement(), v.getCount(), ai, costTable);
             }
             if (e.getKey() instanceof Card c) {
                 e.getKey().getGame().updateLastStateForCard(c);
             }
         }
+        costTable.replaceRemoveCounterEffect(ai.getGame(), null);
 
         ability.setSVar("CostCountersRemoved", Integer.toString(removed));
         return true;
