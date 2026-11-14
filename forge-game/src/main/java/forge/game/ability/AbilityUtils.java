@@ -2327,6 +2327,9 @@ public class AbilityUtils {
         if (sq[0].equals("YouCastThisGame")) {
             return doXMath(player.getSpellsCastThisGame(), expr, c, ctb);
         }
+        if (sq[0].equals("YouCastThisGameNotInStartingDeck")) {
+            return doXMath(player.getSpellsCastThisGameNotFromYourStartingDeck(), expr, c ,ctb);
+        }
 
         if (sq[0].equals("YourSpeed")) {
             return doXMath(player.getSpeed(), expr, c, ctb);

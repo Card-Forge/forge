@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -78,6 +79,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                 player.initCommanderColor(cmd);
                 com.add(cmd);
                 player.addCommander(cmd);
+                player.getCardsFromStartingDeck().add(cmd.getId());
             }
         }
 
@@ -132,6 +134,12 @@ public class SubgameEffect extends SpellAbilityEffect {
 
             // Contraptions
             setCardsInZone(player, ZoneType.ContraptionDeck, maingamePlayer.getCardsIn(ZoneType.ContraptionDeck), false);
+
+            List<Integer> ids = new ArrayList<>();
+            for (Card c: player.getCardsIn(ZoneType.Library)) {
+                ids.add(c.getId());
+            }
+            player.setCardsFromStartingDeck(ids);
 
             // Vanguard and Commanders
             initVariantsZonesSubgame(subgame, maingamePlayer, player);

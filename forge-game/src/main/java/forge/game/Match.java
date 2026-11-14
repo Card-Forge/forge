@@ -212,6 +212,7 @@ public class Match {
     private static void preparePlayerZone(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<>();
+        List<Integer> cardIds = new ArrayList<>();
         // Iterate the deck section in sorted order: CardPool's backing map
         // does not guarantee iteration order, so for a fixed seed the
         // pre-shuffle library order, the random-foil roll sequence, and the
@@ -231,9 +232,13 @@ public class Match {
                 card.setCollectible(true);
 
                 newLibrary.add(card);
+                cardIds.add(card.id);
             }
         }
         library.setCards(newLibrary);
+        if (zoneType.equals(ZoneType.Library)) {
+            player.setCardsFromStartingDeck(cardIds);
+        }
     }
 
     private void prepareAllZones(final Game game) {
