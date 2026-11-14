@@ -49,10 +49,10 @@ public class StackDescriptionSweepTest extends AITest {
     private static final String[][] GRAMMAR = {
             { "\\b([A-Za-z]{2,}) \\1\\b", "grammar: repeated word" },
             { "\\b(?:a|an|the) (?:a|an|the)\\b", "grammar: doubled article" },
-            { "\\ba (?!one\\b|once\\b|unicorn|us[aeiou]|uni|euro|ubiq|ut[ie])[aeiouAEIOU]\\w*", "grammar: 'a' before a vowel" },
+            { "\\ba (?!one\\b|once\\b|[Uu]nicorn|us[aeiou]|uni|euro|ubiq|ut[ie])[aeiouAEIOU]\\w*", "grammar: 'a' before a vowel" },
             { "\\ban (?!hour|honou?r|heir|honest|[xX]\\b|MVP)[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]\\w*", "grammar: 'an' before a consonant" },
             // "have it gain" is fine, "it gain" is not
-            { "(?<!\\bhave )(?<!\\bhaving )(?<!\\bmake )(?<!\\bmakes )(?<!\\blet )(?<!\\blets )\\b[Ii]t "
+            { "(?<!\\bhave )(?<!\\bhaving )(?<!\\bmake )(?<!\\bmakes )(?<!\\blet )(?<!\\blets )(?<!\\bwith )(?<!\\bby )\\b[Ii]t "
                     + "(?:gain|draw|lose|put|exile|reveal|mill|sacrifice|discard|search|shuffle|create|deal|destroy|return)\\b",
                     "grammar: 'it' with a base verb" },
             { "\\b(?:[Tt]hey|[Yy]ou) "
