@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import forge.ai.AiAbilityDecision;
 import forge.ai.PlaceholderTargetAi;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.cost.Cost;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -120,6 +121,7 @@ public class PlaceholderTargetAiTest extends FlatMcTestBase {
     @Test
     public void biteDownChoosesItsOwnCreatureThatKillsTheirs() {
         put("Forest", 2, ai, ZoneType.Battlefield);
+        at(PhaseType.MAIN1, ai);
         final Card hill = put("Hill Giant", ai, ZoneType.Battlefield); // 3/3
         put("Grizzly Bears", ai, ZoneType.Battlefield); // 2/2: the weaker biter
         put("Grizzly Bears", opp, ZoneType.Battlefield);
@@ -132,6 +134,7 @@ public class PlaceholderTargetAiTest extends FlatMcTestBase {
     @Test
     public void biteDownWithNothingToBiteIsNotCast() {
         put("Forest", 2, ai, ZoneType.Battlefield);
+        at(PhaseType.MAIN1, ai);
         put("Hill Giant", ai, ZoneType.Battlefield);
         final SpellAbility bite = spellOf(put("Bite Down", ai, ZoneType.Hand));
         AssertJUnit.assertFalse(forge.ai.SpellApiToAi.Converter.get(bite).canPlayWithSubs(ai, bite).willingToPlay());
