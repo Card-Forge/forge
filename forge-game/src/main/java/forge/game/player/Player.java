@@ -896,7 +896,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (counterType.is(CounterEnumType.RAD) && newValue > 0) {
             String setCode = null;
-            if (params.containsKey(AbilityKey.Cause)) {
+            if (params != null && params.containsKey(AbilityKey.Cause)) {
                 SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
                 setCode = cause.getHostCard().getSetCode();
             }
