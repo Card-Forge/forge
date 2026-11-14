@@ -3,9 +3,9 @@ ManaCost:1 G
 Types:Legendary Creature Bear
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Bear.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever another Bear you control enters, ABILITY
-SVar:TrigChoose:DB$ Charm | Choices$ DBCounter,DBPump
+SVar:TrigChoose:DB$ Charm | Choices$ DBCounter,DBTarget
 SVar:DBCounter:DB$ PutCounter | ValidTgts$ Bear | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target Bear.
-SVar:DBPump:DB$ Pump | ValidTgts$ Bear.YouCtrl | TgtPrompt$ Select target Bear you control | SubAbility$ DBFight | SpellDescription$ Target Bear you control fights target creature you don't control.
+SVar:DBTarget:DB$ TargetOnly | ValidTgts$ Bear.YouCtrl | TgtPrompt$ Select target Bear you control | SubAbility$ DBFight | SpellDescription$ Target Bear you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 DeckHas:Ability$Counters
 DeckHints:Type$Bear

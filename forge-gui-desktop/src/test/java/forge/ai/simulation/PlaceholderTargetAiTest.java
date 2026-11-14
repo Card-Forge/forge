@@ -13,7 +13,7 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 
 /**
- * The "choose target opponent" pumps of Speedbrood Stalker, Descendant of Masumaro, Iroh, Jon Irenicus, Coveted Falcon,
+ * The "choose target opponent" of Speedbrood Stalker, Descendant of Masumaro, Iroh, Jon Irenicus, Coveted Falcon,
  * Parnesse and Tresserhorn's Lord, and the decisions that follow them: what to give away, and when to pay to keep a card.
  */
 public class PlaceholderTargetAiTest extends FlatMcTestBase {
@@ -102,5 +102,38 @@ public class PlaceholderTargetAiTest extends FlatMcTestBase {
         AssertJUnit.assertFalse(PlaceholderTargetAi.worthPaying(ai, sac, cost));
         put("Grizzly Bears", 3, ai, ZoneType.Battlefield);
         AssertJUnit.assertTrue(PlaceholderTargetAi.worthPaying(ai, sac, cost));
+    }
+
+    private SpellAbility spellOf(final Card c) {
+        final SpellAbility sa = c.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        return sa;
+    }
+
+    @Test
+    public void targetOnlyAiIsNotAPumpAi() {
+        AssertJUnit.assertFalse(forge.ai.ability.PumpAi.class.isAssignableFrom(forge.ai.ability.TargetOnlyAi.class));
+        AssertJUnit.assertEquals(forge.ai.ability.TargetOnlyAi.class,
+                forge.ai.SpellApiToAi.Converter.get(spellOf(put("Bite Down", ai, ZoneType.Hand))).getClass());
+    }
+
+    @Test
+    public void biteDownChoosesItsOwnCreatureThatKillsTheirs() {
+        put("Forest", 2, ai, ZoneType.Battlefield);
+        final Card hill = put("Hill Giant", ai, ZoneType.Battlefield); // 3/3
+        put("Grizzly Bears", ai, ZoneType.Battlefield); // 2/2: the weaker biter
+        put("Grizzly Bears", opp, ZoneType.Battlefield);
+        final SpellAbility bite = spellOf(put("Bite Down", ai, ZoneType.Hand));
+        final AiAbilityDecision d = forge.ai.SpellApiToAi.Converter.get(bite).canPlayWithSubs(ai, bite);
+        AssertJUnit.assertTrue(String.valueOf(d), d.willingToPlay());
+        AssertJUnit.assertSame(hill, bite.getTargetCard());
+    }
+
+    @Test
+    public void biteDownWithNothingToBiteIsNotCast() {
+        put("Forest", 2, ai, ZoneType.Battlefield);
+        put("Hill Giant", ai, ZoneType.Battlefield);
+        final SpellAbility bite = spellOf(put("Bite Down", ai, ZoneType.Hand));
+        AssertJUnit.assertFalse(forge.ai.SpellApiToAi.Converter.get(bite).canPlayWithSubs(ai, bite).willingToPlay());
     }
 }

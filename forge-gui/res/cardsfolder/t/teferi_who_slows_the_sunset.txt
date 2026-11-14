@@ -2,9 +2,9 @@ Name:Teferi, Who Slows the Sunset
 ManaCost:2 W U
 Types:Legendary Planeswalker Teferi
 Loyalty:4
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | TgtPrompt$ Choose up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChooseCreature | StackDescription$ Choose up to one target artifact, up to one target creature, and up to one target land. | SpellDescription$ Choose up to one target artifact, up to one target creature, and up to one target land. Untap the chosen permanents you control. Tap the chosen permanents you don't control. You gain 2 life.
-SVar:DBChooseCreature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChooseLand | StackDescription$ None
-SVar:DBChooseLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Choose up to one target land | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBUntap | StackDescription$ None
+A:AB$ TargetOnly | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | TgtPrompt$ Choose up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChooseCreature | StackDescription$ Choose up to one target artifact, up to one target creature, and up to one target land. | SpellDescription$ Choose up to one target artifact, up to one target creature, and up to one target land. Untap the chosen permanents you control. Tap the chosen permanents you don't control. You gain 2 life.
+SVar:DBChooseCreature:DB$ TargetOnly | ValidTgts$ Creature | TgtPrompt$ Choose up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChooseLand | StackDescription$ None
+SVar:DBChooseLand:DB$ TargetOnly | ValidTgts$ Land | TgtPrompt$ Choose up to one target land | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBUntap | StackDescription$ None
 SVar:DBUntap:DB$ Untap | Defined$ Targeted.YouCtrl | SubAbility$ DBTap | StackDescription$ Untap the chosen permanents you control.
 SVar:DBTap:DB$ Tap | Defined$ Targeted.YouDontCtrl | SubAbility$ DBGainLife | StackDescription$ Tap the chosen permanents you don't control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2

@@ -5,7 +5,7 @@ A:SP$ Charm | Choices$ DBThird,DBNinetyEighth
 SVar:DBThird:DB$ Pump | ValidTgts$ Permanent.nonLand+OppCtrl | ValidTgtsDesc$ nonland permanent an opponent controls | IsCurse$ True | RememberObjects$ TargetedController | SubAbility$ DBGainThird | SpellDescription$ Follow the 3rd Rule — Gain control of target nonland permanent an opponent controls. That opponent draws three cards.
 SVar:DBGainThird:DB$ GainControl | Defined$ Targeted | NewController$ You | SubAbility$ DBDrawThird
 SVar:DBDrawThird:DB$ Draw | Defined$ Remembered | NumCards$ 3 | SubAbility$ DBCleanup
-SVar:DBNinetyEighth:DB$ Pump | ValidTgts$ Opponent | SubAbility$ DBGive | SpellDescription$ Follow the 98th Rule — Target opponent gains control of target nonland permanent you control. If they do, you draw three cards.
+SVar:DBNinetyEighth:DB$ TargetOnly | ValidTgts$ Opponent | SubAbility$ DBGive | SpellDescription$ Follow the 98th Rule — Target opponent gains control of target nonland permanent you control. If they do, you draw three cards.
 SVar:DBGive:DB$ GainControl | ValidTgts$ Permanent.nonLand+YouCtrl | ValidTgtsDesc$ nonland permanent you control | Defined$ Targeted | NewController$ ParentTarget | RememberControlled$ True | SubAbility$ DBDrawNinetyEighth
 SVar:DBDrawNinetyEighth:DB$ Draw | Defined$ You | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.OppCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
