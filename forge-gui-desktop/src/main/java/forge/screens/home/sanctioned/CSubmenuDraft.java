@@ -125,7 +125,7 @@ public enum CSubmenuDraft implements ICDoc {
             }
         }
 
-        FModel.getGauntletMini().resetGauntletDraft();
+        FModel.getLimitedMatch().resetGauntletDraft();
         String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
 
         if (duelType == null) {
@@ -137,7 +137,7 @@ public enum CSubmenuDraft implements ICDoc {
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
                 final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), effectiveGameType);
+                FModel.getLimitedMatch().launch(rounds, humanDeck.getDeck(), effectiveGameType);
             } else if ("Tournament".equals(duelType)) {
                 // TODO Allow for tournament style draft, instead of always a gauntlet
                 // Most of the time this will be a single elimination bracket

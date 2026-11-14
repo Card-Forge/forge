@@ -12,13 +12,13 @@ public abstract class LimitedWinLoseController {
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
     private final boolean wonMatch;
-    private GauntletMini gauntlet;
+    private LimitedMatch gauntlet;
     private boolean nextRound = false;
 
     public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final GameView game0) {
         view = view0;
         lastGame = game0;
-        gauntlet = FModel.getGauntletMini();
+        gauntlet = FModel.getLimitedMatch();
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getGuiPlayer());
     }
 

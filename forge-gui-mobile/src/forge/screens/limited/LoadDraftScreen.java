@@ -157,8 +157,8 @@ public class LoadDraftScreen extends LaunchScreen {
                     }
 
                     LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
-                        FModel.getGauntletMini().resetGauntletDraft();
-                        FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
+                        FModel.getLimitedMatch().resetGauntletDraft();
+                        FModel.getLimitedMatch().launch(rounds, humanDeck.getDeck(), GameType.Draft);
                     });
                 });
             } else {
@@ -187,7 +187,7 @@ public class LoadDraftScreen extends LaunchScreen {
                         pl.assignConspiracies();
                     }
 
-                    FModel.getGauntletMini().resetGauntletDraft();
+                    FModel.getLimitedMatch().resetGauntletDraft();
                     final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
                     hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
                 }));

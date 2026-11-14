@@ -115,7 +115,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             control = new AdventureWinLose(this, game0);
             break;
         case Draft:
-            if (!FModel.getGauntletMini().isGauntletDraft()) {
+            if (!FModel.getLimitedMatch().isGauntletDraft()) {
                 break;
             }
         //$FALL-THROUGH$

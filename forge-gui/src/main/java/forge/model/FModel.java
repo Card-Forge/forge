@@ -37,7 +37,7 @@ import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gui.GuiBase;
 import forge.gui.download.CdnUuidCache;
-import forge.gamemodes.limited.GauntletMini;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.ThemedChaosDraft;
 import forge.gamemodes.planarconquest.ConquestController;
 import forge.gamemodes.planarconquest.ConquestPlane;
@@ -126,7 +126,7 @@ public final class FModel {
     // Someone should take care of 2 gauntlets here
     private static TournamentData tournamentData;
     private static GauntletData gauntletData;
-    private static final Supplier<GauntletMini> gauntletMini = Suppliers.memoize(GauntletMini::new);
+    private static final Supplier<LimitedMatch> limitedMatch = Suppliers.memoize(LimitedMatch::new);
 
     private static final Supplier<QuestController> quest = Suppliers.memoize(QuestController::new);
     private static final Supplier<ConquestController> conquest = Suppliers.memoize(ConquestController::new);
@@ -462,8 +462,8 @@ public final class FModel {
         gauntletData = data0;
     }
 
-    public static GauntletMini getGauntletMini() {
-        return gauntletMini.get();
+    public static LimitedMatch getLimitedMatch() {
+        return limitedMatch.get();
     }
 
     public static CardCollections getDecks() {

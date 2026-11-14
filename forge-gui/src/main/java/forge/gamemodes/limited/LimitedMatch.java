@@ -32,14 +32,14 @@ import forge.util.Aggregates;
 
 /**
  * <p>
- * GauntletMini class.
+ * LimitedMatch class.
  * </p>
  *
  * @author Forge
- * @version $Id: GauntletMini.java $
+ * @version $Id: LimitedMatch.java $
  * @since 1.2.xx
  */
-public class GauntletMini {
+public class LimitedMatch {
     private HostedMatch hostedMatch = null;
     private int rounds;
     private Deck humanDeck;
@@ -50,7 +50,7 @@ public class GauntletMini {
     private GameType gauntletType;
     private final List<RegisteredPlayer> aiOpponents = new ArrayList<>();
 
-    public GauntletMini() {
+    public LimitedMatch() {
         currentRound = 1;
         gauntletDraft = false;
         wins = 0;

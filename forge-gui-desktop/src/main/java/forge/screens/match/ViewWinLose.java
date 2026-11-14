@@ -89,7 +89,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
                 control = new QuestDraftWinLose(this, game0, matchUI);
                 break;
             case Draft:
-                if (!FModel.getGauntletMini().isGauntletDraft()) {
+                if (!FModel.getLimitedMatch().isGauntletDraft()) {
                     break;
                 }
                 //$FALL-THROUGH$

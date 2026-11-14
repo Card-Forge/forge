@@ -112,7 +112,7 @@ public enum CSubmenuSealed implements ICDoc {
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
                 final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+                FModel.getLimitedMatch().launch(rounds, humanDeck.getDeck(), gameType);
             } else if ("Tournament".equals(duelType)) {
                 // TODO Allow for tournament style sealed, instead of always a gauntlet
             }

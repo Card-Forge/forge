@@ -147,7 +147,7 @@ public class LoadSealedScreen extends LaunchScreen {
 
                     LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
                         final int matches = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks().size();
-                        FModel.getGauntletMini().launch(matches, humanDeck.getDeck(), GameType.Sealed);
+                        FModel.getLimitedMatch().launch(matches, humanDeck.getDeck(), GameType.Sealed);
                     });
                 });
             } else {
@@ -181,7 +181,7 @@ public class LoadSealedScreen extends LaunchScreen {
                             pl.assignConspiracies();
                         }
 
-                        FModel.getGauntletMini().resetGauntletDraft();
+                        FModel.getLimitedMatch().resetGauntletDraft();
                         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
                         hostedMatch.startMatch(GameType.Sealed, null, starter, human, GuiBase.getInterface().getNewGuiGame());
                     });
