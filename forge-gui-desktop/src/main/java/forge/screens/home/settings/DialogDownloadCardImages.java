@@ -61,9 +61,9 @@ public class DialogDownloadCardImages {
     private FButton btnSyncBulkData;
     private FComboBox<String> cbxIndexLang;
     private FCheckBox cbPreferLangForUnique;
+    private Map<String, String> cardLangMapping;
     private FCheckBox cbIncludeTokens;
     private FCheckBox cbOverwrite;
-    private Map<String, String> cardLangMapping;
     private FButton btnClearCdnCache;
 
     public void show() {

@@ -89,6 +89,8 @@ public abstract class GuiDownloadService implements Runnable {
      * or 300 Mbit at 30 ms (16 reach only 85-92% there) and more workers add nothing, only longer or faster paths gain.
      */
     public static final int PARALLEL_DOWNLOADS = 20;
+    private static final int CONNECT_TIMEOUT_MS = 10_000;
+    private static final int READ_TIMEOUT_MS = 30_000;
     /** Separates alternative urls in a value of {@link #getNeededFiles()}; they are tried in order until one saves the file. */
     public static final String URL_SEPARATOR = "\n";
 
@@ -330,22 +332,13 @@ public abstract class GuiDownloadService implements Runnable {
         File tmpDest = null;
         try {
             final File base = fileDest.getParentFile();
-            if (ScryfallRateLimiter.isLimitedUrl(url)) {
-                // Wait out an active cooldown rather than skipping -- this is a background,
-                // cancelable bulk run, so it's worth pausing to actually finish downloading
-                // instead of racing through the rest of a large queue in skip-only mode.
-                ScryfallRateLimiter.awaitCooldownCleared(url, () -> cancel, this::reportStatus);
-            }
             if (!cancel && FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
-                URL imageUrl = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
-                // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
-                conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                 // don't allow redirections here -- they indicate 'file not found' on the server
                 // only allow redirections to consume Scryfall API
-                conn.setInstanceFollowRedirects(ScryfallRateLimiter.isApiUrl(url));
-                ScryfallRateLimiter.acquire(url); // waits for its turn on the Scryfall API and on paced hosts
-                conn.connect();
+                HttpURLConnection conn = connect(url, p, ScryfallRateLimiter.isApiUrl(url));
+                if (conn == null) {
+                    return false; //cancelled while waiting for its turn
+                }
 
                 //if .full file is not found try fullborder
                 if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.contains(".full.jpg")))
@@ -353,12 +346,10 @@ public abstract class GuiDownloadService implements Runnable {
                     fullborder = true;
                     conn.disconnect();
                     url = TextUtil.fastReplace(url, ".full.jpg", ".fullborder.jpg");
-                    imageUrl = new URL(url);
-                    conn = (HttpURLConnection) imageUrl.openConnection(p);
-                    conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
-                    conn.setInstanceFollowRedirects(false);
-                    ScryfallRateLimiter.acquire(url);
-                    conn.connect();
+                    conn = connect(url, p, false);
+                    if (conn == null) {
+                        return false;
+                    }
                 }
 
                 // if file is not found and this is a JPG, give PNG a shot...
@@ -371,12 +362,10 @@ public abstract class GuiDownloadService implements Runnable {
                         System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                     }
                     url = url.substring(0,url.length() - 4) + ".png";
-                    imageUrl = new URL(TextUtil.fastReplace(url, ".fullborder.", ".full."));
-                    conn = (HttpURLConnection) imageUrl.openConnection(p);
-                    conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
-                    conn.setInstanceFollowRedirects(false);
-                    ScryfallRateLimiter.acquire(url);
-                    conn.connect();
+                    conn = connect(TextUtil.fastReplace(url, ".fullborder.", ".full."), p, false);
+                    if (conn == null) {
+                        return false;
+                    }
                 }
 
                 if (fullborder) {
@@ -387,11 +376,12 @@ public abstract class GuiDownloadService implements Runnable {
                 case HttpURLConnection.HTTP_OK:
                     tmpDest = new File(fileDest.getPath() + ".tmp");
                     fos = new FileOutputStream(tmpDest);
-                    InputStream inputStream = conn.getInputStream();
                     long received = 0;
-                    while ((bufferLength = inputStream.read(buffer)) > 0) {
-                        fos.write(buffer, 0, bufferLength);
-                        received += bufferLength;
+                    try (InputStream inputStream = conn.getInputStream()) {
+                        while ((bufferLength = inputStream.read(buffer)) > 0) {
+                            fos.write(buffer, 0, bufferLength);
+                            received += bufferLength;
+                        }
                     }
                     fos.close();
                     fos = null;
@@ -451,6 +441,34 @@ public abstract class GuiDownloadService implements Runnable {
 
 
         return saved;
+    }
+
+    /**
+     * Opens a connection to the url and connects it once it is this download's turn on the url's host.
+     * Returns null if the run was cancelled while waiting.
+     */
+    private HttpURLConnection connect(final String url, final Proxy p, final boolean followRedirects) throws IOException {
+        final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection(p);
+        // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
+        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
+        // a transfer that stalls has to end, or its worker and the dialog's "finished" wait for it forever
+        conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
+        conn.setReadTimeout(READ_TIMEOUT_MS);
+        conn.setInstanceFollowRedirects(followRedirects);
+        do {
+            // Wait out an active cooldown rather than skipping -- this is a background, cancelable bulk run,
+            // so it's worth pausing to actually finish downloading instead of racing through the rest of a
+            // large queue in skip-only mode. Does nothing for urls that are not rate limited.
+            ScryfallRateLimiter.awaitCooldownCleared(url, () -> cancel, this::reportStatus);
+            ScryfallRateLimiter.acquire(url); // waits for its turn on the Scryfall API and on paced hosts
+            // Queuing for the turn can take a while with many workers, and a 429 may have come in meanwhile:
+            // check again so that the workers already in line stop too.
+        } while (!cancel && !Thread.currentThread().isInterrupted() && ScryfallRateLimiter.isCoolingDown(url));
+        if (cancel || Thread.currentThread().isInterrupted()) {
+            return null;
+        }
+        conn.connect();
+        return conn;
     }
 
     private synchronized void finishItem(final boolean cardSkipped) {

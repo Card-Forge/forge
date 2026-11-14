@@ -64,24 +64,6 @@ public final class ScryfallRateLimiter {
         }
     }
 
-    /** Stops pacing the host of {@code url} and forgets any cooldown it had. */
-    public static void unpaceHost(String url) {
-        final String host = hostOf(url);
-        if (host != null) {
-            pacedHosts.remove(host);
-        }
-    }
-
-    /** True for a url on a host registered with {@link #paceHost(String)}. */
-    public static boolean isPacedHostUrl(String url) {
-        return pacedHost(url) != null;
-    }
-
-    /** True for every url this class paces: Scryfall API requests and the registered third-party hosts. */
-    public static boolean isLimitedUrl(String url) {
-        return isApiUrl(url) || isPacedHostUrl(url);
-    }
-
     private static PacedHost pacedHost(String url) {
         final String host = hostOf(url);
         return host == null ? null : pacedHosts.get(host);
@@ -116,17 +98,14 @@ public final class ScryfallRateLimiter {
         return url != null && (url.contains("/cards/search") || url.contains("/cards/named"));
     }
 
-    /** Whether we are still backing off after Scryfall rate limited us. Clears an expired cooldown. */
+    /**
+     * Whether we are still backing off after Scryfall rate limited us. An expired cooldown is left in place rather
+     * than cleared: many threads ask at once, and a clear could erase a cooldown that a 429 set in the meantime
+     * or leave {@link #awaitCooldownCleared} reading null.
+     */
     public static boolean isCoolingDown() {
         final Date until = cooldownUntil;
-        if (until == null) {
-            return false;
-        }
-        if (until.after(new Date())) {
-            return true;
-        }
-        cooldownUntil = null;
-        return false;
+        return until != null && until.after(new Date());
     }
 
     /**

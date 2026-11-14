@@ -6,6 +6,7 @@ import forge.card.CardEdition;
 import forge.card.CardSplitType;
 import forge.gui.FThreads;
 import forge.gui.download.CdnUuidCache;
+import forge.gui.download.GuiDownloadService;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -16,7 +17,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
@@ -43,8 +47,6 @@ public abstract class ImageFetcher {
     /** token-images.txt as file name (lower case) -> url; read again only when the file changes. */
     private static volatile Map<String, String> hostedTokenUrls = null;
     private static volatile long hostedTokenListStamp = 0;
-    /** Override for tests; the path of a token-images.txt style list. */
-    static volatile String hostedTokenListOverride = null;
 
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
 
@@ -59,7 +61,7 @@ public abstract class ImageFetcher {
      * handed to {@link ScryfallRateLimiter}: nothing is known about how often they may be asked.
      */
     public static String getHostedTokenUrl(String filename) {
-        final String path = hostedTokenListOverride != null ? hostedTokenListOverride : ForgeConstants.IMAGE_LIST_TOKENS_FILE;
+        final String path = ForgeConstants.IMAGE_LIST_TOKENS_FILE;
         final long stamp = new File(path).lastModified();
         Map<String, String> urls = hostedTokenUrls;
         if (urls == null || stamp != hostedTokenListStamp) {
@@ -76,9 +78,22 @@ public abstract class ImageFetcher {
         return urls.get(filename.toLowerCase(Locale.ROOT));
     }
 
-    /** Where downloads run. Platforms that fetch many images at once (the mobile scroll) bring their own. */
-    protected ExecutorService getDownloadPool() {
-        return ThreadUtil.getServicePool();
+    /**
+     * Scrolling a card list asks for many images at once, and the shared service pool only has as many threads as the
+     * machine has cores although a download mostly waits for the network. Give the downloads as many workers as the
+     * bulk downloader uses; the ones that are idle for a while end.
+     */
+    private static final ExecutorService DOWNLOAD_POOL = newDownloadPool();
+
+    private static ExecutorService newDownloadPool() {
+        final ThreadPoolExecutor pool = new ThreadPoolExecutor(GuiDownloadService.PARALLEL_DOWNLOADS, GuiDownloadService.PARALLEL_DOWNLOADS,
+                30, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> {
+            Thread t = new Thread(r, "image-download");
+            t.setDaemon(true);
+            return t;
+        });
+        pool.allowCoreThreadTimeOut(true);
+        return pool;
     }
 
     private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
@@ -531,7 +546,7 @@ public abstract class ImageFetcher {
             currentFetches.remove(destPath);
         };
         try {
-            getDownloadPool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
+            DOWNLOAD_POOL.submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
         } catch (RejectedExecutionException re) {
             re.printStackTrace();
         }

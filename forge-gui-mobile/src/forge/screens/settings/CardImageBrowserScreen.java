@@ -47,9 +47,9 @@ public class CardImageBrowserScreen extends FScreen {
     private final FButton           btnSyncBulkData;
     private final FComboBox<String> cbxIndexLang;
     private final FCheckBox         cbPreferLangForUnique;
+    private final Map<String, String> cardLangMapping;
     private final FCheckBox         cbIncludeTokens;
     private final FCheckBox         cbOverwrite;
-    private final Map<String, String> cardLangMapping;
     private final FProgressBar      bulkSyncProgress;
     private final FButton           btnClearCdnCache;
 

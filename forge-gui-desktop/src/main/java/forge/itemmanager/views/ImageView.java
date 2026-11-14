@@ -35,9 +35,11 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
@@ -989,6 +991,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @SuppressWarnings("serial")
     private class CardViewDisplay extends JPanel implements ILocalRepaint {
         boolean showRanking = false;
+        private final Set<String> fetchRequested = new HashSet<>();
         private CardViewDisplay() {
             setOpaque(false);
             setFocusable(true);
@@ -1125,6 +1128,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
+        // Like the mobile card lists: a card that is drawn without its image gets downloaded right away, it
+        // does not have to be selected first. Only the items in view are drawn, so only those are asked for.
+        private void fetchIfMissing(final String imageKey, final int width, final int height) {
+            if (isPreferenceEnabled(FPref.UI_DISABLE_CARD_IMAGES) || !isPreferenceEnabled(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER)
+                    || fetchRequested.contains(imageKey) || ImageCache.isCached(imageKey, width, height)) {
+                return;
+            }
+            fetchRequested.add(imageKey);
+            GuiBase.getInterface().getImageFetcher().fetchImage(imageKey, this::repaintSelf);
+        }
+
         private void drawItemImage(Graphics2D g, ItemInfo itemInfo) {
             Rectangle bounds = itemInfo.getBounds();
             final int itemWidth = bounds.width;
@@ -1163,6 +1177,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int imageWidth = Math.round(drawWidth * screenScale);
             final int imageHeight = Math.round(drawHeight * screenScale);
             BufferedImage img = ImageCache.getImage(item, imageWidth, imageHeight, itemInfo.alt);
+            if (item instanceof PaperCard) {
+                fetchIfMissing(item.getImageKey(itemInfo.alt), imageWidth, imageHeight);
+            }
 
             if (img != null) {
                 g.drawImage(img, drawX, drawY, drawWidth, drawHeight, null);

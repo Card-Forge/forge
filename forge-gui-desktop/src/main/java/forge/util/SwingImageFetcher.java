@@ -50,12 +50,18 @@ public class SwingImageFetcher extends ImageFetcher {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             ScryfallRateLimiter.acquire(urlToDownload);
+            if (ScryfallRateLimiter.shouldSkip(urlToDownload)) {
+                return false; // a 429 came in while this download waited for its turn
+            }
 
             // Read through a connection rather than ImageIO.read(URL), which discards the response
             // code - without it a 429 is indistinguishable from any other failure and we keep asking.
             final URLConnection connection = url.openConnection();
             connection.setRequestProperty("Accept", "*/*");
             connection.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
+            // don't let a stalled connection hang the download thread forever
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(30000);
             if (connection instanceof HttpURLConnection httpConnection) {
                 final int responseCode = httpConnection.getResponseCode();
                 if (responseCode != HttpURLConnection.HTTP_OK) {

@@ -305,7 +305,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         images.putIfAbsent(image.file.getAbsolutePath(), image);
     }
 
-    void addMissingTokens(final CardEdition edition, final Map<String, String> downloads) {
+    private void addMissingTokens(final CardEdition edition, final Map<String, String> downloads) {
         for (final Map.Entry<String, TokenImage> entry : getTokenImages(edition).entrySet()) {
             final TokenImage image = entry.getValue();
             if ((!overwrite && image.file.exists()) || downloads.containsKey(entry.getKey())) continue;

@@ -139,7 +139,7 @@ final class ScryfallSetSync {
      * used. "lang:any" fetched ~10x more pages (every printed language) than needed and was tripping Scryfall's
      * rate limit before finishing a set, so the preferred language is the only other one that is asked for.
      */
-    static List<String> searchUrls(String setCode) throws UnsupportedEncodingException {
+    private static List<String> searchUrls(String setCode) throws UnsupportedEncodingException {
         String base = searchBaseUrlOverride != null ? searchBaseUrlOverride : DEFAULT_SEARCH_URL;
         List<String> queries = new ArrayList<>();
         queries.add("set:" + setCode);
@@ -149,9 +149,8 @@ final class ScryfallSetSync {
         }
         List<String> urls = new ArrayList<>();
         for (String query : queries) {
-            // include_extras so that token sets (e.g. TNEO) return their tokens as well
             // Fix encode for Android 12 and below
-            urls.add(base + "?unique=prints&include_extras=true&q=" + URLEncoder.encode(query, "UTF-8"));
+            urls.add(base + "?unique=prints&q=" + URLEncoder.encode(query, "UTF-8"));
         }
         return urls;
     }
