@@ -25,7 +25,7 @@ public class DestroyAllAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            return super.doTriggerNoCost(ai, sa, mandatory);
         }
 
         return doMassRemovalLogic(ai, sa);
