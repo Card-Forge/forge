@@ -5,7 +5,7 @@ A:AB$ Draft | Cost$ W T | Spellbook$ Angel of Destiny,Resplendent Angel,Angel of
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | Defined$ Remembered | StackDescription$ None
 A:AB$ ChangeZoneAll | Cost$ 1 Sac<1/CARDNAME> | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+ExiledWithSource | SpellDescription$ Put each card exiled with CARDNAME into your hand.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Type$Angel & Ability$LifeGain|Token|Counters

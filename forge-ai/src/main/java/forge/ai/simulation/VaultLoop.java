@@ -506,7 +506,7 @@ public final class VaultLoop {
                     || !host.isInZone(ZoneType.Battlefield)) {
                 continue;
             }
-            if (sa.getApi() == ApiType.Pump && sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Pump
+            if (sa.getApi() == ApiType.TargetOnly && sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.TargetOnly
                     && sa.usesTargeting()) {
                 // Goblin Welder: the spare artifact is swapped for the piece
                 sa.setActivatingPlayer(ai);

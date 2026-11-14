@@ -4,8 +4,8 @@ Types:Creature Human Detective
 PT:3/4
 K:ETBReplacement:Other:BelieveOrDoubt
 SVar:BelieveOrDoubt:DB$ GenericChoice | Choices$ Believe,Doubt | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Believe or Doubt.
-SVar:Believe:DB$ Pump | SpellDescription$ Believe
-SVar:Doubt:DB$ Pump | SpellDescription$ Doubt
+SVar:Believe:DB$ Nothing | SpellDescription$ Believe
+SVar:Doubt:DB$ Nothing | SpellDescription$ Doubt
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeBelieve | AddTrigger$ BelieveTrigger | Description$ • Believe — Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeDoubt | AddTrigger$ DoubtTrigger | Description$ • Doubt — At the beginning of your end step, you may return a nonland permanent you own to your hand. If you do, draw a card.
 SVar:BelieveTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.

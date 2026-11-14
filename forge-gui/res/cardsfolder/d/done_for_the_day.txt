@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChoice:DB$ GenericChoice | Choices$ DBTicket,DBTreasure,DBNeither | SubAbility$ DBEmployee
 SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | SpellDescription$ You get {TK}.
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
-SVar:DBNeither:DB$ Pump | SpellDescription$ Do neither.
+SVar:DBNeither:DB$ Nothing | SpellDescription$ Do neither.
 SVar:DBEmployee:DB$ Branch | BranchConditionSVar$ Employees | TrueSubAbility$ DBPerformer
 SVar:DBPerformer:DB$ Branch | BranchConditionSVar$ Performers | TrueSubAbility$ DBRobot
 SVar:DBRobot:DB$ Branch | BranchConditionSVar$ Robots | TrueSubAbility$ DBSticker

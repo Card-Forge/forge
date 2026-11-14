@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 |
 SVar:DBReturnCorrupted:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | TgtZone$ Graveyard | GainControl$ True | Destination$ Battlefield | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Creature.RememberedPlayerCtrl,Creature.ControlledBy Opponent.IsCorrupted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ CountCorruptedPlayers
-SVar:CountCorruptedPlayers:DB$ Pump | RememberObjects$ Opponent.IsCorrupted
+SVar:CountCorruptedPlayers:DB$ Bookkeeping | RememberObjects$ Opponent.IsCorrupted
 T:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.Self | Static$ True | Execute$ DBCleanup
 SVar:OneEach:PlayerCountOpponents$HasPropertyIsCorrupted
 DeckHints:Ability$Graveyard & Keyword$Toxic|Poisonous|Infect

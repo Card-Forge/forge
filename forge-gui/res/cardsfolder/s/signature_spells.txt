@@ -7,7 +7,7 @@ SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Impri
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBCopy | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may copy a card exiled with CARDNAME. You may cast the copy without paying its mana cost.
 SVar:DBCopy:DB$ Play | Valid$ Card.IsImprinted+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | CopyCard$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 DeckNeeds:Type$Instant|Sorcery

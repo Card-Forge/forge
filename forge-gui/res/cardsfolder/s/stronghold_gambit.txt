@@ -5,7 +5,7 @@ A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubA
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Hand | AILogic$ LowestCMCCreature | RememberChosen$ True | Mandatory$ True
 SVar:DBReveal:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRevealCard | SubAbility$ FilterCreature
 SVar:DBRevealCard:DB$ Reveal | Defined$ Player.IsRemembered | RevealDefined$ ValidHand Card.IsRemembered+RememberedPlayerCtrl
-SVar:FilterCreature:DB$ Pump | ForgetObjects$ ValidHand Card.nonCreature+IsRemembered | SubAbility$ MoveToPlay
+SVar:FilterCreature:DB$ Bookkeeping | ForgetObjects$ ValidHand Card.nonCreature+IsRemembered | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZoneAll | ChangeType$ Card.lowestRememberedCMC | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

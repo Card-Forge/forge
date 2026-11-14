@@ -117,11 +117,14 @@ public class TargetOnlyAi extends SpellAbilityAi {
         sa.resetTargets();
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             // the player named chooses the target when the ability resolves
-            final Player chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
-            sa.setTargetingPlayer(chooser);
-            return CardLists.getTargetableCards(game.getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()
-                    ? new AiAbilityDecision(0, AiPlayDecision.TargetingFailed)
-                    : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            // (a chooser the trigger or the stack has not defined yet is no one: choose like any other target)
+            final forge.game.player.PlayerCollection choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa);
+            if (!choosers.isEmpty()) {
+                sa.setTargetingPlayer(choosers.get(0));
+                return CardLists.getTargetableCards(game.getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()
+                        ? new AiAbilityDecision(0, AiPlayDecision.TargetingFailed)
+                        : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
 
         final AiAbilityDecision decision;
@@ -182,6 +185,20 @@ public class TargetOnlyAi extends SpellAbilityAi {
         return false;
     }
 
+    /** Every kind of target the script allows is the chooser's own ("Creature.YouCtrl"): a source, not a victim. */
+    private static boolean onlyOwn(final TargetRestrictions tr) {
+        final String[] valid = tr.getValidTgts();
+        if (valid == null || valid.length == 0) {
+            return false;
+        }
+        for (final String v : valid) {
+            if (!v.contains("YouCtrl") && !v.contains("YouOwn")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static boolean ours(final Player ai, final GameEntity e) {
         final Player p = e instanceof Player ? (Player) e : ((Card) e).getController();
         return p == ai || !ai.isOpponentOf(p);
@@ -215,13 +232,18 @@ public class TargetOnlyAi extends SpellAbilityAi {
 
     private AiAbilityDecision generic(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tr = sa.getTargetRestrictions();
-        final boolean hostile = aimedAtOpponents(sa);
+        final List<GameEntity> candidates = new ArrayList<>();
+        for (final GameEntity e : tr.getAllCandidates(sa)) {
+            if (sa.canTarget(e)) {
+                candidates.add(e);
+            }
+        }
+        // what follows hurts, but when the script only lets the player choose their own (Betrayal at the Vault: "target
+        // creature you control deals damage to ...") the target is the source of the damage, not its victim
+        final boolean hostile = aimedAtOpponents(sa) && !onlyOwn(tr);
         final List<GameEntity> preferred = new ArrayList<>();
         final List<GameEntity> forced = new ArrayList<>();
-        for (final GameEntity e : tr.getAllCandidates(sa)) {
-            if (!sa.canTarget(e)) {
-                continue;
-            }
+        for (final GameEntity e : candidates) {
             if (e == sa.getHostCard() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() && !hostile) {
                 continue; // it is tapped to pay for this
             }

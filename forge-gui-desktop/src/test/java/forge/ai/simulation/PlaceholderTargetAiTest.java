@@ -139,4 +139,125 @@ public class PlaceholderTargetAiTest extends FlatMcTestBase {
         final SpellAbility bite = spellOf(put("Bite Down", ai, ZoneType.Hand));
         AssertJUnit.assertFalse(forge.ai.SpellApiToAi.Converter.get(bite).canPlayWithSubs(ai, bite).willingToPlay());
     }
+
+    // ------------------------------------------------------------------------------------------ no AILogic: the default choice
+
+    private AiAbilityDecision canPlay(final SpellAbility sa) {
+        return forge.ai.SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa);
+    }
+
+    /** The choice of the first step alone: what follows it (DestroyAllAi weighing the lands) has its own tests. */
+    private AiAbilityDecision choice(final SpellAbility sa) {
+        return forge.ai.SpellApiToAi.Converter.get(sa).chkDrawback(ai, sa);
+    }
+
+    @Test
+    public void aRemovalPlaceholderIsAimedAtTheOpponentsPermanent() {
+        at(PhaseType.MAIN1, ai);
+        put("Forest", ai, ZoneType.Battlefield);
+        put("Mountain", ai, ZoneType.Battlefield);
+        final Card theirs = put("Forest", opp, ZoneType.Battlefield);
+        final SpellAbility wake = spellOf(put("Wake of Destruction", ai, ZoneType.Hand)); // destroy target land and its namesakes
+        final AiAbilityDecision d = choice(wake);
+        AssertJUnit.assertTrue(String.valueOf(d), d.willingToPlay());
+        AssertJUnit.assertSame(theirs, wake.getTargetCard());
+    }
+
+    @Test
+    public void aRemovalPlaceholderWithOnlyItsOwnPermanentsToAimAtIsHeld() {
+        at(PhaseType.MAIN1, ai);
+        put("Forest", ai, ZoneType.Battlefield);
+        put("Mountain", ai, ZoneType.Battlefield);
+        final SpellAbility wake = spellOf(put("Wake of Destruction", ai, ZoneType.Hand));
+        AssertJUnit.assertFalse(choice(wake).willingToPlay());
+        AssertJUnit.assertNull(wake.getTargetCard());
+    }
+
+    @Test
+    public void aTargetThatOnlyNamesTheSourceOfDamageIsTheAisOwnBestCreature() {
+        put("Forest", 6, ai, ZoneType.Battlefield);
+        at(PhaseType.COMBAT_DECLARE_BLOCKERS, ai);
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card hill = put("Hill Giant", ai, ZoneType.Battlefield);
+        put("Grizzly Bears", opp, ZoneType.Battlefield);
+        put("Grizzly Bears", opp, ZoneType.Battlefield);
+        // Betrayal at the Vault: "target creature you control deals damage equal to its power to two other creatures"
+        final SpellAbility betrayal = spellOf(put("Betrayal at the Vault", ai, ZoneType.Hand));
+        final AiAbilityDecision d = canPlay(betrayal);
+        AssertJUnit.assertTrue(String.valueOf(d), d.willingToPlay());
+        AssertJUnit.assertSame(hill, betrayal.getTargetCard());
+    }
+
+    @Test
+    public void aMandatoryTriggerWithOnlyAnOpponentToHitStillChoosesIt() {
+        // Bartz and Boko: "choose target creature an opponent controls" is mandatory, and the AI has no say
+        final Card bartz = put("Bartz and Boko", ai, ZoneType.Battlefield);
+        final Card theirs = put("Grizzly Bears", opp, ZoneType.Battlefield);
+        final SpellAbility sa = triggerRunning(bartz, "TrigTarget");
+        final AiAbilityDecision d = forge.ai.SpellApiToAi.Converter.get(sa).doTriggerNoCostWithSubs(ai, sa, true);
+        AssertJUnit.assertTrue(String.valueOf(d), d.willingToPlay());
+        AssertJUnit.assertSame(theirs, sa.getTargetCard());
+    }
+
+    // ------------------------------------------------------------------------------------------ DB$ Nothing
+
+    @Test
+    public void aModeNameIsNothingNotAPump() {
+        final Card siege = put("Citadel Siege", ai, ZoneType.Battlefield);
+        final SpellAbility khans = forge.game.ability.AbilityFactory.getAbility(siege, "Khans");
+        AssertJUnit.assertEquals(forge.game.ability.ApiType.Nothing, khans.getApi());
+        AssertJUnit.assertEquals(forge.ai.ability.NothingAi.class, forge.ai.SpellApiToAi.Converter.get(khans).getClass());
+        khans.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue(forge.ai.SpellApiToAi.Converter.get(khans).chkDrawback(ai, khans).willingToPlay());
+        AssertJUnit.assertFalse(forge.ai.SpellApiToAi.Converter.get(khans).canPlayWithSubs(ai, khans).willingToPlay());
+    }
+
+    // ------------------------------------------------------------------------------------------ DB$ Bookkeeping, DB$ EndOfTurn
+
+    private SpellAbility step(final Card host, final String script) {
+        final SpellAbility sa = forge.game.ability.AbilityFactory.getAbility(script, host);
+        sa.setActivatingPlayer(ai);
+        return sa;
+    }
+
+    @Test
+    public void bookkeepingRemembersImprintsAndNotes() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card other = put("Grizzly Bears", opp, ZoneType.Battlefield);
+        host.addRemembered(other);
+        step(host, "DB$ Bookkeeping | ImprintCards$ Self | NoteCards$ Self | NoteCardsFor$ Test | Defined$ You").resolve();
+        AssertJUnit.assertTrue(host.getImprintedCards().contains(host));
+        AssertJUnit.assertTrue(ai.getNotesForName("Test").contains("Id:" + host.getId()));
+        step(host, "DB$ Bookkeeping | ForgetImprinted$ Self | ClearNotedCardsFor$ Test | ForgetObjects$ Remembered | Defined$ You").resolve();
+        AssertJUnit.assertFalse(host.getImprintedCards().contains(host));
+        AssertJUnit.assertTrue(ai.getNotesForName("Test").isEmpty());
+        AssertJUnit.assertFalse(host.isRemembered(other));
+    }
+
+    @Test
+    public void aBookkeepingStepIsNotAPumpToTheAi() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        final SpellAbility sa = step(host, "DB$ Bookkeeping | RememberObjects$ Self");
+        AssertJUnit.assertEquals(forge.game.ability.ApiType.Bookkeeping, sa.getApi());
+        AssertJUnit.assertEquals(forge.ai.ability.NothingAi.class, forge.ai.SpellApiToAi.Converter.get(sa).getClass());
+        final SpellAbility eot = step(host, "DB$ EndOfTurn | Defined$ Self | AtEOT$ Sacrifice");
+        AssertJUnit.assertEquals(forge.ai.ability.NothingAi.class, forge.ai.SpellApiToAi.Converter.get(eot).getClass());
+    }
+
+    @Test
+    public void bookkeepingRemembersEveryValidCardOfTheZone() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        final Card mine = put("Hill Giant", ai, ZoneType.Battlefield);
+        final Card theirs = put("Grizzly Bears", opp, ZoneType.Battlefield);
+        final Card dead = put("Hill Giant", ai, ZoneType.Graveyard);
+        step(host, "DB$ Bookkeeping | RememberAll$ Creature.YouCtrl").resolve();
+        AssertJUnit.assertTrue(host.isRemembered(mine));
+        AssertJUnit.assertTrue(host.isRemembered(host));
+        AssertJUnit.assertFalse(host.isRemembered(theirs));
+        AssertJUnit.assertFalse(host.isRemembered(dead));
+        host.clearRemembered();
+        step(host, "DB$ Bookkeeping | RememberAll$ Creature.YouOwn | RememberZone$ Graveyard").resolve();
+        AssertJUnit.assertTrue(host.isRemembered(dead));
+        AssertJUnit.assertFalse(host.isRemembered(mine));
+    }
 }

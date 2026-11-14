@@ -2,7 +2,7 @@ Name:Cobra Trap
 ManaCost:4 G G
 Types:Instant Trap
 T:Mode$ Destroyed | ValidCauser$ Player.Opponent | ValidCard$ Permanent.nonCreature+YouCtrl | Execute$ TrackValidDestroy | Static$ True
-SVar:TrackValidDestroy:DB$ Pump | RememberObjects$ TriggeredCard
+SVar:TrackValidDestroy:DB$ Bookkeeping | RememberObjects$ TriggeredCard
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
 SVar:SetTrap:Remembered$Amount

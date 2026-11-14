@@ -3,10 +3,10 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+5
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigNote | Static$ True
-SVar:TrigNote:DB$ Pump | NoteCards$ TriggeredSource | NoteCardsFor$ MaelstromArchangelAvatar | SubAbility$ DBHit
+SVar:TrigNote:DB$ Bookkeeping | NoteCards$ TriggeredSource | NoteCardsFor$ MaelstromArchangelAvatar | SubAbility$ DBHit
 SVar:DBHit:DB$ StoreSVar | SVar$ Hits | Type$ CountSVar | Expression$ Hits/Plus.1
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
-SVar:TrigReset:DB$ Pump | ClearNotedCardsFor$ MaelstromArchangelAvatar | SubAbility$ DBReset
+SVar:TrigReset:DB$ Bookkeeping | ClearNotedCardsFor$ MaelstromArchangelAvatar | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ Hits | Type$ Number | Expression$ 0
 SVar:Hits:Number$0
 T:Mode$ Phase | Phase$ EndCombat | CheckSVar$ Hits | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigRepeatEach | TriggerDescription$ At end of combat, for each creature you controlled at the time it dealt combat damage to a player this turn, copy a random card with the same mana cost as that creature. You may pay {3}. If you do, choose one of those copies. If a copy of a permanent card is chosen, you may create a token that's a copy of that card. If a copy of an instant or sorcery card is chosen, you may cast the copy without paying its mana cost.
