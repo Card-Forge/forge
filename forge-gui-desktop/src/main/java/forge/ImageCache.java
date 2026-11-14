@@ -535,6 +535,18 @@ public class ImageCache {
         return !((3 > width && -1 != width) || (3 > height && -1 != height));
     }
 
+    private static String resizedKey(final String key, final int width, final int height) {
+        return String.format("%s#%dx%d", key, width, height);
+    }
+
+    /**
+     * Whether the image for a key is cached at that size, which means it was loaded from its file. A placeholder shown
+     * for a missing image is not cached while the online fetcher is on, so this tells what still needs downloading.
+     */
+    public static boolean isCached(final String key, final int width, final int height) {
+        return _CACHE.getIfPresent(resizedKey(key, width, height)) != null;
+    }
+
     // cardView is for Emblem, since there is no paper card for them
     public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage, CardView cardView) {
         if (StringUtils.isEmpty(key) || !isSupportedImageSize(width, height)) {
@@ -542,7 +554,7 @@ public class ImageCache {
             return null;
         }
 
-        String resizedKey = String.format("%s#%dx%d", key, width, height);
+        String resizedKey = resizedKey(key, width, height);
         if (key.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
             resizedKey = hiddenSleeveCacheKey(cardView, width, height);
         }

@@ -6,6 +6,7 @@ import forge.card.CardEdition;
 import forge.card.CardSplitType;
 import forge.gui.FThreads;
 import forge.gui.download.CdnUuidCache;
+import forge.gui.download.GuiDownloadService;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -15,7 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
@@ -39,7 +44,57 @@ public abstract class ImageFetcher {
         langCodeMap.put("zh-HK", "zht");
     }
 
+    /** token-images.txt as file name (lower case) -> url; read again only when the file changes. */
+    private static volatile Map<String, String> hostedTokenUrls = null;
+    private static volatile long hostedTokenListStamp = 0;
+
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
+
+    /** True for a url on Forge's own host while downloads from it are switched off. */
+    public static boolean isHostedDownloadDisabled(String url) {
+        return disableHostedDownload && url != null && url.startsWith(ForgeConstants.URL_CARDFORGE);
+    }
+
+    /**
+     * The url token-images.txt gives for a token file name (relative to the token pics dir), or null.
+     * Those are tokens a site other than Scryfall hosts, so the hosts that are not Forge's own are
+     * handed to {@link ScryfallRateLimiter}: nothing is known about how often they may be asked.
+     */
+    public static String getHostedTokenUrl(String filename) {
+        final String path = ForgeConstants.IMAGE_LIST_TOKENS_FILE;
+        final long stamp = new File(path).lastModified();
+        Map<String, String> urls = hostedTokenUrls;
+        if (urls == null || stamp != hostedTokenListStamp) {
+            urls = new HashMap<>();
+            for (org.apache.commons.lang3.tuple.Pair<String, String> pair : FileUtil.readNameUrlFile(path)) {
+                if (urls.putIfAbsent(pair.getLeft().toLowerCase(Locale.ROOT), pair.getRight()) == null
+                        && !pair.getRight().startsWith(ForgeConstants.URL_CARDFORGE)) {
+                    ScryfallRateLimiter.paceHost(pair.getRight());
+                }
+            }
+            hostedTokenUrls = urls;
+            hostedTokenListStamp = stamp;
+        }
+        return urls.get(filename.toLowerCase(Locale.ROOT));
+    }
+
+    /**
+     * Scrolling a card list asks for many images at once, and the shared service pool only has as many threads as the
+     * machine has cores although a download mostly waits for the network. Give the downloads as many workers as the
+     * bulk downloader uses; the ones that are idle for a while end.
+     */
+    private static final ExecutorService DOWNLOAD_POOL = newDownloadPool();
+
+    private static ExecutorService newDownloadPool() {
+        final ThreadPoolExecutor pool = new ThreadPoolExecutor(GuiDownloadService.PARALLEL_DOWNLOADS, GuiDownloadService.PARALLEL_DOWNLOADS,
+                30, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> {
+            Thread t = new Thread(r, "image-download");
+            t.setDaemon(true);
+            return t;
+        });
+        pool.allowCoreThreadTimeOut(true);
+        return pool;
+    }
 
     private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
         StaticData data = StaticData.instance();
@@ -65,8 +120,6 @@ public abstract class ImageFetcher {
             }
         } else {
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
-            String setCode = edition.getScryfallCode();
-            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop));
         }
         return null;
     }
@@ -93,6 +146,51 @@ public abstract class ImageFetcher {
         String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD
                 + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
         if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
+
+        // Some prints exist in no English version (Neon Dynasty 293 is Japanese, 428 Phyrexian). Asking for no
+        // language at all gets the one Scryfall considers the default, so this covers those as well.
+        String defaultLangUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD
+                + ImageUtil.getScryfallDownloadUrl(card, face, setCode, "", useArtCrop);
+        if (!downloadUrls.contains(defaultLangUrl)) downloadUrls.add(defaultLangUrl);
+    }
+
+    public static void addScryfallTokenUrl(CardEdition edition, String collectorNumber, String face, List<String> downloadUrls) {
+        String tokenCode = edition.getTokensCode();
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, collectorNumber, edition.getCardsLangCode());
+
+        String cdnUrl = CdnUuidCache.getCdnUrlIfCached(tokenCode, collectorNumber, langCode, face, "normal");
+        if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
+
+        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(collectorNumber, tokenCode, langCode, face));
+        // ... and the print Scryfall considers the default, for tokens that exist in no English version
+        String defaultLangUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(collectorNumber, tokenCode, "", face);
+        if (!downloadUrls.contains(defaultLangUrl)) downloadUrls.add(defaultLangUrl);
+    }
+
+    /** Cache file name, relative to the token pics dir, of a token image key. */
+    public static String getTokenFilename(String imageKey) {
+        String tmp = imageKey;
+        String face = "";
+        if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+            face = "back";
+            tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        }
+        String[] tempdata = tmp.substring(2).split("\\|");
+
+        StringBuilder sb = new StringBuilder();
+        if (tempdata.length > 1) {
+            sb.append(tempdata[1]).append("/");
+        }
+        if (tempdata.length > 2) {
+            sb.append(tempdata[2]).append("_");
+        }
+        sb.append(tempdata[0]);
+        if (tempdata.length <= 2 && !face.isEmpty()) {
+            sb.append("_").append(face);
+        }
+        sb.append(".jpg");
+        return sb.toString();
     }
 
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
@@ -291,20 +389,7 @@ public abstract class ImageFetcher {
             String tokenName = tempdata[0];
             String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
-            StringBuilder sb = new StringBuilder();
-            if (tempdata.length > 1) {
-                sb.append(setCode).append("/");
-            }
-            if (tempdata.length > 2) {
-                sb.append(tempdata[2]).append("_");
-            }
-            sb.append(tokenName);
-            if (tempdata.length <= 2 && !face.isEmpty()) {
-                sb.append("_").append(face);
-            }
-            sb.append(".jpg");
-
-            final String filename = sb.toString();
+            final String filename = getTokenFilename(imageKey);
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
             if (ImageKeys.missingCards.contains(filename)
                     || filename.equalsIgnoreCase("null.jpg")
@@ -312,12 +397,9 @@ public abstract class ImageFetcher {
                 return;
 
             // token-images.txt lets mods route specific tokens to hosted URLs.
-            for (org.apache.commons.lang3.tuple.Pair<String, String> pair :
-                    FileUtil.readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
-                if (filename.equalsIgnoreCase(pair.getLeft())) {
-                    downloadUrls.add(pair.getRight());
-                    break;
-                }
+            final String hostedUrl = getHostedTokenUrl(filename);
+            if (hostedUrl != null) {
+                downloadUrls.add(hostedUrl);
             }
 
             if (tempdata.length < 2) {
@@ -340,11 +422,8 @@ public abstract class ImageFetcher {
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
             if (tempdata.length > 2) {
-                String tokenCode = edition.getTokensCode();
-                String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
-                String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tempdata[2], edition.getCardsLangCode());
                 // Just assume the CNr from the token image is valid
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
+                addScryfallTokenUrl(edition, tempdata[2], face, downloadUrls);
             } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
                 // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
@@ -356,14 +435,10 @@ public abstract class ImageFetcher {
                 CardEdition.EditionEntry tis;
                 while (it.hasNext()) {
                     tis = it.next();
-                    String tokenCode = edition.getTokensCode();
                     if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
-                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
-                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tis.collectorNumber(), edition.getCardsLangCode());
-
-                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
+                    addScryfallTokenUrl(edition, tis.collectorNumber(), face, downloadUrls);
                 }
             }
 
@@ -431,11 +506,11 @@ public abstract class ImageFetcher {
         // Skip before registering rather than inside the download task: nothing removes a path from
         // the in-flight set below, so a fetch registered during the cooldown would never be retried
         // once the cooldown lifts. Only when every candidate is Scryfall - otherwise another source
-        // may still serve it.
-        if (ScryfallRateLimiter.isCoolingDown()) {
+        // may still serve it (Scryfall's API and the third-party hosts that are paced are the ones that back off).
+        if (!downloadUrls.isEmpty()) {
             boolean b = true;
             for (String downloadUrl : downloadUrls) {
-                if (!ScryfallRateLimiter.isApiUrl(downloadUrl)) {
+                if (!ScryfallRateLimiter.isCoolingDown(downloadUrl)) {
                     b = false;
                     break;
                 }
@@ -471,7 +546,7 @@ public abstract class ImageFetcher {
             currentFetches.remove(destPath);
         };
         try {
-            ThreadUtil.getServicePool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
+            DOWNLOAD_POOL.submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
         } catch (RejectedExecutionException re) {
             re.printStackTrace();
         }

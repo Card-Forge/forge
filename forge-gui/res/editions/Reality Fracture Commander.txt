@@ -122,11 +122,11 @@ ScryfallCode=FRC
 9 r_1_1_goblin @Paolo Parente
 10 kobolds_of_kher_keep @Paolo Parente
 11 gw_1_1_citizen @Maria Poliakova
-12 gingerbrute @Alexandre Honoré
 13 incubator_c_0_0_a_phyrexian @Johann Bodin
 14 c_a_map_sac_explore @Francesca Baerald
 15 c_1_1_a_myr @Michele Giorgi
 16 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
 
 [other]
+12 gingerbrute @Alexandre Honoré
 17 monarch @Luaren Ayrey
