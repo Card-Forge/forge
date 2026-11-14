@@ -93,7 +93,8 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
             }
         } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
-        } else if (ComputerUtil.preventRunAwayActivations(sa)) {
+        } else if (ComputerUtil.preventRunAwayActivations(sa) && PersistLoopAi.millLoopCard(ai, sa) == null) {
+            // a mill loop (Altar of Dementia + Melira + Kitchen Finks) ends with the library: let it finish
             return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 

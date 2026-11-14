@@ -1112,7 +1112,11 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
+            // a known winning sacrifice loop is played even when the generic AI logic would refuse it
+            boolean canPlay = PersistLoopAi.shouldLoop(player, sa)
+                    || SacUntapLoopAi.shouldLoop(player, sa)
+                    || SacManaLoopAi.shouldLoop(player, sa)
+                    || SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -2153,7 +2157,7 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc && !isKnownLoopAbility(spellAbility)) || ComboAssembly.deadOnArrival(player, spellAbility)
                     || (flatMc && LoopRunner.held(player, spellAbility))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
@@ -2772,6 +2776,17 @@ public class AiController {
      * be cast or activated right now (timing, restrictions and cost), so the only thing against it is the heuristics'
      * rule of thumb. Nothing is decided here; rollouts judge it against the alternatives.
      */
+    /**
+     * An activated ability that keeps a known winning sacrifice loop going (Altar of Dementia or Viscera Seer with
+     * Melira and a persist creature, a sacrifice-untap or sacrifice-for-mana drain loop) stays playable even when its
+     * card is marked AI:RemoveDeck:All: the loop logic decides, not the generic heuristics.
+     */
+    private boolean isKnownLoopAbility(final SpellAbility sa) {
+        return sa.isActivatedAbility() && sa.getHostCard().isInZone(ZoneType.Battlefield)
+                && (PersistLoopAi.shouldLoop(player, sa) || SacUntapLoopAi.shouldLoop(player, sa)
+                    || SacManaLoopAi.shouldLoop(player, sa));
+    }
+
     /**
      * A play of a card marked AI:RemoveDeck:All that is not a piece of the deck's combos or a tutor with a find: the
      * heuristics cannot play it well, so they never approve it, but with rollouts to check what it really does it may

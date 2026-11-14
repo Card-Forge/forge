@@ -622,6 +622,24 @@ public class ComputerUtil {
         final CardCollection sacList = new CardCollection();
         int count = 0;
 
+        // keep a winning persist / undying loop going (Melira + Murderous Redcap + free sacrifice outlet)
+        if (!effect && amount == 1) {
+            final Card loop = PersistLoopAi.anyLoopCard(ai, ability);
+            if (loop != null && typeList.contains(loop)) {
+                sacList.add(loop);
+                return sacList;
+            }
+            // a creature that comes back unchanged (persist with Melira or Vizier of Remedies, undying with Solemnity)
+            // costs nothing to sacrifice: Kitchen Finks rather than Vizier for Goblin Bombardment
+            for (final Card c : typeList) {
+                if (!c.isToken() && c.getOwner() == ai && c.getController() == ai && c.isInPlay() && c != source
+                        && PersistLoopAi.loopsClean(ai, c)) {
+                    sacList.add(c);
+                    return sacList;
+                }
+            }
+        }
+
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
             if (prefCard == null && ability.isManaAbility()) {
