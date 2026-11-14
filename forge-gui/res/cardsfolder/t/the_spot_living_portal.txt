@@ -4,8 +4,8 @@ ManaCost:3 W B
 Types:Legendary Creature Human Scientist Villain
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMarkBattlefield | TriggerDescription$ When NICKNAME enters, exile up to one target nonland permanent and up to one target nonland permanent card from a graveyard.
-SVar:TrigMarkBattlefield:DB$ Pump | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select up to one target nonland permanent | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBMarkGraveyard
-SVar:DBMarkGraveyard:DB$ Pump | ValidTgts$ Permanent.nonLand | TgtZone$ Graveyard | TgtPrompt$ Select up to one target nonland permanent card in a graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBExile
+SVar:TrigMarkBattlefield:DB$ TargetOnly | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select up to one target nonland permanent | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBMarkGraveyard
+SVar:DBMarkGraveyard:DB$ TargetOnly | ValidTgts$ Permanent.nonLand | TgtZone$ Graveyard | TgtPrompt$ Select up to one target nonland permanent card in a graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield,Graveyard | Destination$ Exile | Defined$ Targeted
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their owners' hands.
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBChangeZone

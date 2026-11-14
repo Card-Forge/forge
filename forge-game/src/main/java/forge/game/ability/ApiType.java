@@ -196,6 +196,7 @@ public enum ApiType {
     Surveil (SurveilEffect.class),
     SwitchBlock (SwitchBlockEffect.class),
     TakeInitiative (TakeInitiativeEffect.class),
+    TargetOnly (TargetOnlyEffect.class),
     Tap (TapEffect.class),
     TapAll (TapAllEffect.class),
     TapOrUntap (TapOrUntapEffect.class),

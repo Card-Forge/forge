@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -25,6 +26,7 @@ import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
@@ -32,6 +34,8 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.ScreenUtil;
@@ -43,8 +47,10 @@ import static forge.adventure.util.AdventureEventController.EventStatus.*;
 
 public class EventScene extends MenuScene implements IAfterMatch {
     TextraLabel money, shards;
-    TextraButton advance, back, editDeck, nextPage, previousPage;
+    TextraButton advance, back, editDeck, nextPage, previousPage, reroll;
     private Table scrollContainer;
+    private float rerollLift, rerollJoinDrop, rerollJoinWiden;
+    private boolean rerollLayout;
     ScrollPane scroller;
     Table root, headerTable, metaDraftTable;
     int pageIndex = 0;
@@ -185,6 +191,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
         editDeck = ui.findActor("editDeck");
 
+        ui.onButtonPress("reroll", EventScene.this::reroll);
+        reroll = ui.findActor("reroll");
+        if (reroll != null) {
+            rerollLift = reroll.getY() - back.getY();
+            rerollJoinDrop = advance.getY() - (reroll.getY() - 4 - advance.getHeight());
+            rerollJoinWiden = back.getRight() - advance.getRight();
+        }
+
         Window window = ui.findActor("scrollWindow");
         root = ui.findActor("enemies");
 
@@ -320,6 +334,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
         scroller.setActor(eventPages[pageIndex]);
         performTouch(scroller);
 
+        if (reroll != null) {
+            int price = Config.instance().getConfigData().eventRerollPrice;
+            reroll.setVisible(canReroll());
+            layoutForReroll(canReroll());
+            reroll.setText("[+Refresh][+shards]" + price);
+            reroll.setDisabled(Current.player().getShards() < price);
+        }
+
         //todo: add translations
         switch (currentEvent.eventStatus) {
             case Available:
@@ -436,6 +458,47 @@ public class EventScene extends MenuScene implements IAfterMatch {
             textureRegion = uiScene.getUIBackground();
         DeckEditScene.getInstance(textureRegion).loadEvent(currentEvent);
         Forge.switchScene(DeckEditScene.getInstance(textureRegion));
+    }
+
+    private boolean canReroll() {
+        return reroll != null && Config.instance().getConfigData().eventRerollPrice > 0 && currentEvent.eventStatus == Available;
+    }
+
+    // Puts Back beside the reroll button with a full width Join Event below, and shortens the info panel above.
+    private void layoutForReroll(boolean show) {
+        if (show == rerollLayout)
+            return;
+        rerollLayout = show;
+        int sign = show ? 1 : -1;
+        back.moveBy(0, sign * rerollLift);
+        advance.moveBy(0, -sign * rerollJoinDrop);
+        advance.setWidth(advance.getWidth() + sign * rerollJoinWiden);
+        for (String name : Forge.isLandscapeMode() ? new String[]{"stats", "blessingInfo"} : new String[]{"scrollWindow"}) {
+            Actor panel = ui.findActor(name);
+            panel.setHeight(panel.getHeight() - sign * rerollLift);
+            panel.moveBy(0, sign * rerollLift);
+        }
+    }
+
+    private void reroll() {
+        AdventureEventData rerolled = null;
+        //A realm with few event sets can still offer the same event after these tries.
+        for (int attempt = 0; attempt < 5; attempt++) {
+            AdventureEventData candidate = AdventureEventController.instance().createEvent(Current.world().getRandom().nextLong());
+            if (candidate == null)
+                continue;
+            rerolled = candidate;
+            if (candidate.format != currentEvent.format || !candidate.cardBlockName.equals(currentEvent.cardBlockName))
+                break;
+        }
+        if (rerolled == null)
+            return;
+
+        Current.player().takeShards(Config.instance().getConfigData().eventRerollPrice);
+        SoundSystem.instance.play(SoundEffectType.Shuffle, false);
+        Current.player().removeEvent(currentEvent);
+        AdventureEventController.instance().initializeEvent(rerolled, currentEvent.sourceID, currentEvent.eventOrigin, changes);
+        Forge.switchScene(EventScene.instance(lastGameScene, rerolled, changes));
     }
 
     public void advance() {

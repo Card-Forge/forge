@@ -2,7 +2,7 @@ Name:Carpet of Flowers
 ManaCost:G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigMana | ResolvedLimit$ 1 | TriggerDescription$ At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls.
-SVar:TrigMana:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBMana
+SVar:TrigMana:DB$ TargetOnly | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Amount$ NumManaMax | Produced$ Any
 SVar:NumManaMax:Count$Valid Island.TargetedPlayerCtrl
 AI:RemoveDeck:All

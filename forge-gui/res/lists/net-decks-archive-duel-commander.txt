@@ -848,3 +848,14 @@
 2026-09-25 10931 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-09-25-10931-duel-commander-league.zip
 2026-09-27 10931 Duel Commander League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-09-27-10931-duel-commander-league.zip
 2026-10-04 11217 Duel Commander League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-04-11217-duel-commander-league.zip
+2026-10-07 11217 Duel Commander League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-07-11217-duel-commander-league.zip
+2026-10-08 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-08-11217-duel-commander-league.zip
+2026-10-11 11217 Duel Commander League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-11-11217-duel-commander-league.zip
+2026-10-12 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-12-11217-duel-commander-league.zip
+2026-10-14 11217 Duel Commander League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-14-11217-duel-commander-league.zip
+2026-10-15 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-15-11217-duel-commander-league.zip
+2026-10-19 11217 Duel Commander League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-19-11217-duel-commander-league.zip
+2026-10-21 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-21-11217-duel-commander-league.zip
+2026-10-24 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-24-11217-duel-commander-league.zip
+2026-10-26 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-26-11217-duel-commander-league.zip
+2026-10-28 11217 Duel Commander League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/duel-commander/2026-10-28-11217-duel-commander-league.zip

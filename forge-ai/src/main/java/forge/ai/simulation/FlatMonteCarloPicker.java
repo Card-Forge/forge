@@ -122,7 +122,7 @@ public final class FlatMonteCarloPicker {
         private static final long serialVersionUID = 1L;
 
         RolloutTooSlow() {
-            super("rollout too slow", null, false, false);
+            super("rollout too slow");
         }
     }
 
@@ -2403,10 +2403,14 @@ public final class FlatMonteCarloPicker {
             }
             final int att = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
             final int def = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
-            final boolean diesNow = other.getNetPower() >= mine.getNetToughness();
-            final boolean killsNow = mine.getNetPower() >= other.getNetToughness();
-            final boolean diesThen = other.getNetPower() >= mine.getNetToughness() + def;
-            final boolean killsThen = mine.getNetPower() + att >= other.getNetToughness();
+            // under Doran, the Siege Tower the damage is the toughness: +P does nothing and +T is the damage
+            final boolean byToughness = mine.toughnessAssignsDamage();
+            final int myAtt = byToughness ? def : att;
+            final int myDef = def;
+            final boolean diesNow = other.getNetCombatDamage() >= mine.getNetToughness();
+            final boolean killsNow = mine.getNetCombatDamage() >= other.getNetToughness();
+            final boolean diesThen = other.getNetCombatDamage() >= mine.getNetToughness() + myDef;
+            final boolean killsThen = mine.getNetCombatDamage() + myAtt >= other.getNetToughness();
             return diesNow != diesThen || killsNow != killsThen;
         } catch (final RuntimeException e) {
             return true;

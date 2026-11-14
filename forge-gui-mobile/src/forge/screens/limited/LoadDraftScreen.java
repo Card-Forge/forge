@@ -15,6 +15,7 @@ import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.net.EventFormat;
 import forge.gui.FThreads;
@@ -88,7 +89,8 @@ public class LoadDraftScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setDraftDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigDraft, deck));
+        Forge.openScreen(new FDeckEditor(CommanderDraftUtil.isCommanderDraftDeck(deck.getDeck())
+                ? FDeckEditor.EditorConfigCommanderDraft : FDeckEditor.EditorConfigDraft, deck));
     }
 
     @Override

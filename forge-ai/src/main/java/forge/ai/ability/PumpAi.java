@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.game.Game;
@@ -239,9 +238,6 @@ public class PumpAi extends PumpAiBase {
                 }
 
             }
-        } else if (aiLogic.startsWith("Donate")) {
-            // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
-            return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
@@ -376,10 +372,6 @@ public class PumpAi extends PumpAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
 
-        if ("PowerStruggle".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.PowerStruggle.considerFirstTarget(ai, sa);
-        }
-
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
@@ -426,12 +418,6 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 }
                 return false;
-            } else if (sa.getParam("AILogic").equals("SameName")) {
-                return doSameNameLogic(ai, sa);
-            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
-                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
-                // the best for opponents
-                return SacrificeAi.doSacOneEachLogic(ai, sa).willingToPlay();
             } else if (sa.getParam("AILogic").equals("Destroy")) {
                 List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
                 if (tgts.isEmpty()) {
@@ -471,6 +457,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
+            if (tgt.canOnlyTgtOpponent()) {
+                for (final Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        return true;
+                    }
+                }
+                return false;
+            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
@@ -732,68 +727,6 @@ public class PumpAi extends PumpAiBase {
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory
         return true;
-    }
-
-    private boolean doSameNameLogic(Player aiPlayer, SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
-        final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final ZoneType origin = ZoneType.listValueOf(sa.getSubAbility().getParam("Origin")).get(0);
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), aiPlayer,
-                source, sa);
-        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
-        if (list.isEmpty()) {
-            return false; // no valid targets
-        }
-
-        Map<Player, Map.Entry<String, Integer>> data = Maps.newHashMap();
-
-        // need to filter for the opponents first
-        for (final Player opp : aiPlayer.getOpponents()) {
-            CardCollection oppList = CardLists.filterControlledBy(list, opp);
-
-            // no cards
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            // Compute value for each possible target
-            Map<String, Integer> values = ComputerUtilCard.evaluateCreatureListByName(oppList);
-
-            // reject if none of them can be targeted
-            oppList = CardLists.filter(oppList, CardPredicates.isTargetableBy(sa));
-            // none can be targeted
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            List<String> toRemove = Lists.newArrayList();
-            for (final String name : values.keySet()) {
-                if (!oppList.anyMatch(CardPredicates.nameEquals(name))) {
-                    toRemove.add(name);
-                }
-            }
-            values.keySet().removeAll(toRemove);
-
-            data.put(opp, Collections.max(values.entrySet(), Map.Entry.comparingByValue()));
-        }
-
-        if (!data.isEmpty()) {
-            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), Comparator.comparingInt(o -> o.getValue().getValue()));
-
-            // filter list again by the opponent and a creature of the wanted name that can be targeted
-            list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
-                    CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
-
-            // list should contain only one element or zero
-            sa.resetTargets();
-            for (Card c : list) {
-                sa.getTargets().add(c);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     @Override

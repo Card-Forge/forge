@@ -9,6 +9,7 @@ import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.GuiBase;
@@ -113,8 +114,7 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        // Detect commander draft: human deck has a Commander section with cards
-        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains("CommanderDraft");
+        final boolean isCommanderDraft = CommanderDraftUtil.isCommanderDraftDeck(humanDeck.getDeck());
         final GameType effectiveGameType = isCommanderDraft ? GameType.CommanderDraft : gameType;
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
