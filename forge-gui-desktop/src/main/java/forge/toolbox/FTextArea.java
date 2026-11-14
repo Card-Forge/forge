@@ -49,7 +49,7 @@ public class FTextArea extends SkinnedTextArea {
         }
 
         int maxLineWidth = 0;
-        final FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+        final FontMetrics metrics = this.getFontMetrics(this.getFont());
         final String[] lines = this.getText().split("(\r\n)|(\n)");
         for (String line : lines) {
             final int lineWidth = metrics.stringWidth(line);
