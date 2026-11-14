@@ -18,6 +18,7 @@
 package forge.card;
 
 import com.google.common.collect.*;
+import com.google.common.primitives.Ints;
 
 import forge.StaticData;
 import forge.card.CardDb.CardArtPreference;
@@ -292,6 +293,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private String name;
     private String alias = null;
     private BorderColor borderColor = BorderColor.BLACK;
+    private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
     // SealedProduct
     private String prerelease = null;
@@ -509,6 +511,51 @@ public final class CardEdition implements Comparable<CardEdition> {
             traditionalCollectorNumbers = numbers;
         }
         return numbers.contains(collectorNumber.toLowerCase(Locale.ROOT));
+    }
+
+    // tag -> lower case collector numbers of the entries carrying it
+    private final Map<String, Set<String>> taggedCollectorNumbers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+    /** The tags of the whole edition. */
+    public Set<String> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /** The tags carried by single entries of the edition. */
+    public Set<String> getPrintTags() {
+        return Collections.unmodifiableSet(taggedCollectorNumbers.keySet());
+    }
+
+    public boolean hasTag(String tag) {
+        return tags.contains(tag);
+    }
+
+    /** True if the whole edition carries the tag, or the entry with the given collector number does. */
+    public boolean hasTag(String tag, String collectorNumber) {
+        if (hasTag(tag))
+            return true;
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return false;
+        Set<String> tagged = taggedCollectorNumbers.get(tag);
+        // a back face listed as "123☇" shares the tags of its front, 123
+        String number = collectorNumber.endsWith("☇") ? collectorNumber.substring(0, collectorNumber.length() - 1) : collectorNumber;
+        return tagged != null && (tagged.contains(collectorNumber.toLowerCase(Locale.ROOT))
+                || tagged.contains(number.toLowerCase(Locale.ROOT)));
+    }
+
+    private void addPrintTag(String tag, String collectorNumber) {
+        taggedCollectorNumbers.computeIfAbsent(tag, k -> new HashSet<>()).add(collectorNumber.toLowerCase(Locale.ROOT));
+    }
+
+    // case-insensitive, keeping the spelling the file uses
+    private static Set<String> parseTags(String text) {
+        Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        if (StringUtils.isBlank(text))
+            return result;
+        for (String t : text.split(","))
+            if (!t.isBlank())
+                result.add(t.trim());
+        return result;
     }
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
@@ -803,6 +850,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.tokensCode = metadata.get("TokensCode", "T" + res.scryfallCode);
             res.tokenFallbackCode = metadata.get("TokenFallbackCode");
             res.cardsLanguage = metadata.get("CardLang", "en");
+            res.tags.addAll(parseTags(metadata.get("Tags")));
             res.boosterArts = metadata.getInt("BoosterCovers", 1);
 
             res.otherMap = otherMap;
@@ -931,6 +979,35 @@ public final class CardEdition implements Comparable<CardEdition> {
                 initAliases(ee);
             }
         }
+        /**
+         * Reads a tag file of [Tag] sections. A line names an edition, followed by the collector numbers of its
+         * tagged prints, or by nothing when the whole edition carries the tag. 1..21 stands for 1 to 21.
+         */
+        public void loadPrintTags(File file) {
+            for (Entry<String, List<String>> section : FileSection.parseSections(FileUtil.readFile(file)).entrySet()) {
+                String tag = section.getKey();
+                for (String line : section.getValue()) {
+                    String[] words = line.split("\\s+");
+                    CardEdition edition = get(words[0]);
+                    if (edition == null)
+                        continue;
+                    if (words.length == 1)
+                        edition.tags.add(tag);
+                    for (int i = 1; i < words.length; i++) {
+                        String[] range = words[i].split("\\.\\.");
+                        Integer first = range.length == 2 ? Ints.tryParse(range[0]) : null;
+                        Integer last = range.length == 2 ? Ints.tryParse(range[1]) : null;
+                        if (first != null && last != null) {
+                            for (int n = first; n <= last; n++)
+                                edition.addPrintTag(tag, String.valueOf(n));
+                        } else {
+                            edition.addPrintTag(tag, words[i]);
+                        }
+                    }
+                }
+            }
+        }
+
         private void initAliases(CardEdition E) { //Add the alias to the edition here, to ensure it's always done equally.
             String alias = E.getAlias();
             if (null != alias)
