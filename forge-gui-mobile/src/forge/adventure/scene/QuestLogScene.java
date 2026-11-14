@@ -36,11 +36,14 @@ public class QuestLogScene extends UIScene {
     private final Table detailTable = new Table();
     private final ScrollPane listScroll, detailScroll;
     private final TextraButton trackButton, abandonButton;
-    private final Button backLink;
+    private final Button backLink, completedLink;
+    private final TextraLabel completedLabel = Controls.newTextraLabel("");
+    private final Chevron completedChevron = new Chevron(new Color(0.36f, 0.32f, 0.27f, 1));
     private final Button.ButtonStyle rowStyle = new Button.ButtonStyle(), selectedRowStyle = new Button.ButtonStyle();
     private final List<Button> rows = new ArrayList<>();
     private final boolean split;
     private AdventureQuestData selected;
+    private boolean showCompleted;
     Scene lastGameScene;
 
     private QuestLogScene() {
@@ -75,12 +78,20 @@ public class QuestLogScene extends UIScene {
                     }));
         });
         abandonButton.setColor(Color.RED);
-        backLink = link("< " + Forge.getLocalizer().getMessage("lblQuestList"), () -> {
+        backLink = link(Controls.newTextraLabel(INK_SOFT + "< " + Forge.getLocalizer().getMessage("lblQuestList")), () -> {
             selected = null;
             buildList();
         });
 
         detailScroll = scrollPane(detailTable);
+        completedLink = link(completedLabel, () -> {
+            showCompleted = !showCompleted;
+            float scrollY = detailScroll.getScrollY();
+            fillDetails(selected);
+            detailScroll.setScrollY(scrollY);
+            updateNavigation();
+        });
+        completedLink.add(completedChevron).padRight(2);
         if (!split) {
             detailRoot.add(backLink).left().padBottom(4);
             detailRoot.row();
@@ -187,6 +198,7 @@ public class QuestLogScene extends UIScene {
 
     private void select(AdventureQuestData quest) {
         selected = quest;
+        showCompleted = false;
         if (split) {
             for (Button row : rows)
                 row.setStyle(row.getUserObject() == quest ? selectedRowStyle : rowStyle);
@@ -208,6 +220,8 @@ public class QuestLogScene extends UIScene {
             return;
         if (!split)
             addToSelectable(backLink);
+        if (!selected.getCompletedStages().isEmpty())
+            addToSelectable(completedLink);
         addToSelectable(trackButton);
         if (!selected.storyQuest)
             addToSelectable(abandonButton);
@@ -218,7 +232,8 @@ public class QuestLogScene extends UIScene {
         detailTable.clear();
         detailTable.top().left();
         detailTable.defaults().left().padBottom(3);
-        detailTable.add(label("[%80]" + INK_SOFT + Forge.getLocalizer().getMessage(quest.storyQuest ? "lblStoryQuest" : "lblSideQuest"), width)).width(width);
+        String tracked = quest.isTracked ? "   " + TRACKED + "• " + Forge.getLocalizer().getMessage("lblTracked") : "";
+        detailTable.add(label("[%80]" + INK_SOFT + Forge.getLocalizer().getMessage(quest.storyQuest ? "lblStoryQuest" : "lblSideQuest") + tracked, width)).width(width);
         detailTable.row();
         detailTable.add(label("[%125]" + INK + quest.getName(), width)).width(width);
         detailTable.row();
@@ -232,15 +247,25 @@ public class QuestLogScene extends UIScene {
             detailTable.add(rule).width(width).height(1).padTop(2).padBottom(5);
             detailTable.row();
         }
-        for (AdventureQuestStage stage : quest.getCompletedStages()) {
-            detailTable.add(label(INK_SOFT + "☑ " + stage.name, width)).width(width);
-            detailTable.row();
-        }
         for (AdventureQuestStage stage : quest.getActiveStages()) {
             detailTable.add(label(INK + "☐ " + stage.name, width)).width(width);
             detailTable.row();
             if (!stage.description.isEmpty()) {
                 detailTable.add(label("[%90]" + INK_SOFT + stage.description, width - 12)).width(width - 12).padLeft(12);
+                detailTable.row();
+            }
+        }
+        List<AdventureQuestStage> completed = quest.getCompletedStages();
+        if (!completed.isEmpty()) {
+            completedLabel.setText(INK_SOFT + "☑ " + Forge.getLocalizer().getMessage("lblCompletedStages", completed.size()));
+            completedChevron.up = showCompleted;
+            completedLink.invalidateHierarchy();
+            detailTable.add(completedLink).padLeft(-2);
+            detailTable.row();
+        }
+        if (showCompleted) {
+            for (AdventureQuestStage stage : completed) {
+                detailTable.add(label(INK_SOFT + "☑ " + stage.name, width)).width(width);
                 detailTable.row();
             }
         }
@@ -257,9 +282,9 @@ public class QuestLogScene extends UIScene {
         return label;
     }
 
-    private Button link(String text, Runnable action) {
+    private Button link(TextraLabel label, Runnable action) {
         Button link = new Button(rowStyle);
-        link.add(Controls.newTextraLabel(INK_SOFT + text)).pad(1, 2, 1, 2);
+        link.add(label).pad(1, 2, 1, 2);
         link.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -329,15 +354,39 @@ public class QuestLogScene extends UIScene {
         buildList();
     }
 
-    private static class MoreArrow extends Actor {
-        private static final float PX = 1.5f;
+    private static class Chevron extends Actor {
+        static final float PX = 1.5f;
+        private final Color color;
+        boolean up;
+
+        Chevron(Color color) {
+            this.color = color;
+            setSize(7 * PX, 4 * PX);
+            setTouchable(Touchable.disabled);
+        }
+
+        float bob() {
+            return 0;
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            float packed = batch.getPackedColor();
+            batch.setColor(color.r, color.g, color.b, parentAlpha);
+            for (int row = 0; row < 4; row++)
+                batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + bob() + (up ? row : 3 - row) * PX, (7 - row * 2) * PX, PX);
+            batch.setPackedColor(packed);
+        }
+    }
+
+    private static class MoreArrow extends Chevron {
         private final ScrollPane pane;
         private float elapsed;
 
         MoreArrow(ScrollPane pane) {
+            super(new Color(0.12f, 0.11f, 0.09f, 1));
             this.pane = pane;
             setSize(7 * PX, 6 * PX);
-            setTouchable(Touchable.disabled);
         }
 
         @Override
@@ -347,15 +396,14 @@ public class QuestLogScene extends UIScene {
         }
 
         @Override
+        float bob() {
+            return PX * (1 - MathUtils.cos(elapsed * MathUtils.PI2 / 1.2f));
+        }
+
+        @Override
         public void draw(Batch batch, float parentAlpha) {
-            if (pane.getMaxY() - pane.getScrollY() <= 1)
-                return;
-            float bob = PX * (1 - MathUtils.cos(elapsed * MathUtils.PI2 / 1.2f));
-            float color = batch.getPackedColor();
-            batch.setColor(0.12f, 0.11f, 0.09f, parentAlpha);
-            for (int row = 0; row < 4; row++)
-                batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + bob + (3 - row) * PX, (7 - row * 2) * PX, PX);
-            batch.setPackedColor(color);
+            if (pane.getMaxY() - pane.getScrollY() > 1)
+                super.draw(batch, parentAlpha);
         }
     }
 }
