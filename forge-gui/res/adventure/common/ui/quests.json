@@ -21,19 +21,19 @@
     {
       "type": "Table",
       "name": "questList",
-      "x": 20,
-      "y": 22,
-      "width": 390,
-      "height": 220,
+      "x": 22,
+      "y": 24,
+      "width": 160,
+      "height": 216,
 	  "fontColor":"black"
     },
 	{
       "type": "Table",
       "name": "questDetails",
-      "x": 20,
-      "y": 22,
-      "width": 390,
-      "height": 220,
+      "x": 192,
+      "y": 24,
+      "width": 216,
+      "height": 216,
 	  "fontColor":"black"
     },
 	{
