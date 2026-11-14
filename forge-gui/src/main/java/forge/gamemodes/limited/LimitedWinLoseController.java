@@ -12,13 +12,13 @@ public abstract class LimitedWinLoseController {
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
     private final boolean wonMatch;
-    private GauntletMini gauntlet;
+    private LimitedMatch limitedMatch;
     private boolean nextRound = false;
 
     public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final GameView game0) {
         view = view0;
         lastGame = game0;
-        gauntlet = FModel.getGauntletMini();
+        limitedMatch = FModel.getLimitedMatch();
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getGuiPlayer());
     }
 
@@ -32,9 +32,9 @@ public abstract class LimitedWinLoseController {
         nextRound = false;
 
         if (lastGame.isWinner(GamePlayerUtil.getGuiPlayer())) {
-            gauntlet.addWin();
+            limitedMatch.addWin();
         } else {
-            gauntlet.addLoss();
+            limitedMatch.addLoss();
         }
 
         view.getBtnRestart().setText(localizer.getMessage("btnRestartRound"));
@@ -46,20 +46,20 @@ public abstract class LimitedWinLoseController {
             }
 
             if (wonMatch) {
-                if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                    view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (gauntlet.getCurrentRound() + 1)
-                            + "/" + gauntlet.getRounds() + ")");
+                if (limitedMatch.getCurrentRound() < limitedMatch.getRounds()) {
+                    view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (limitedMatch.getCurrentRound() + 1)
+                            + "/" + limitedMatch.getRounds() + ")");
                     nextRound = true;
                     view.getBtnContinue().setEnabled(true);
-                    showTournamentInfo(localizer.getMessage("btnWonRound") + gauntlet.getCurrentRound() + "/"
-                            + gauntlet.getRounds());
+                    showTournamentInfo(localizer.getMessage("btnWonRound") + limitedMatch.getCurrentRound() + "/"
+                            + limitedMatch.getRounds());
                 } else {
                     showTournamentInfo(localizer.getMessage("btnWonTournament"));
                 }
             } else {
                 view.getBtnContinue().setVisible(false);
-                showTournamentInfo(localizer.getMessage("btnLoseRound") + gauntlet.getCurrentRound() + "/"
-                        + gauntlet.getRounds());
+                showTournamentInfo(localizer.getMessage("btnLoseRound") + limitedMatch.getCurrentRound() + "/"
+                        + limitedMatch.getRounds());
             }
         });
     }
@@ -69,7 +69,7 @@ public abstract class LimitedWinLoseController {
         if (nextRound) {
             view.hide();
             saveOptions();
-            gauntlet.nextRound();
+            limitedMatch.nextRound();
             return true;
         }
         return false;
@@ -77,12 +77,12 @@ public abstract class LimitedWinLoseController {
 
     public final void actionOnRestart() {
         resetView();
-        // gauntlet.resetCurrentRound();
+        // limitedMatch.resetCurrentRound();
     }
 
     public final void actionOnQuit() {
         resetView();
-        gauntlet.resetCurrentRound();
+        limitedMatch.resetCurrentRound();
     }
 
     /**
@@ -92,9 +92,9 @@ public abstract class LimitedWinLoseController {
      * @param String - the title to be displayed
      */
     private void showTournamentInfo(final String newTitle) {
-        showMessage("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds(), newTitle);
-        // + "      Total Wins: " + gauntlet.getWins()
-        // + "      Total Losses: " + gauntlet.getLosses()
+        showMessage("Round: " + limitedMatch.getCurrentRound() + "/" + limitedMatch.getRounds(), newTitle);
+        // + "      Total Wins: " + limitedMatch.getWins()
+        // + "      Total Losses: " + limitedMatch.getLosses()
     }
 
     /**

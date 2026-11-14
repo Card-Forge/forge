@@ -1,30 +1,21 @@
 package forge.screens.home.sanctioned;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.WinstonDraft;
-import forge.gamemodes.match.HostedMatch;
-import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorWinstonProcess;
 import forge.toolbox.FOptionPane;
@@ -86,19 +77,17 @@ public enum CSubmenuWinston implements ICDoc {
 
     private void startGame(final GameType gameType) {
         final DeckProxy humanDeck = VSubmenuWinston.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
-        final int aiIndex = 0;
 
         if (humanDeck == null) {
             FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
             return;
         }
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-            if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
-                return;
-            }
+        final LimitedMatch limitedMatch = FModel.getLimitedMatch();
+        final String errorMessage = limitedMatch.getDeckProblem(gameType, humanDeck.getDeck());
+        if (null != errorMessage) {
+            FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+            return;
         }
 
         SwingUtilities.invokeLater(() -> {
@@ -106,19 +95,7 @@ public enum CSubmenuWinston implements ICDoc {
             SOverlayUtils.showOverlay();
         });
 
-        final DeckGroup opponentDecks = FModel.getDecks().getWinston().get(humanDeck.getName());
-        final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
-        if (aiDeck == null) {
-            throw new IllegalStateException("Draft: Computer deck is null!");
-        }
-
-        final List<RegisteredPlayer> starter = new ArrayList<>();
-        final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-        starter.add(human);
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Winston, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        limitedMatch.startMatch(gameType, humanDeck.getDeck(), limitedMatch.getAiDecks(gameType, humanDeck.getDeck()).subList(0, 1));
 
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
