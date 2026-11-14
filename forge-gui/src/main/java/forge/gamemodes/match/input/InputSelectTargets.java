@@ -135,7 +135,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final int maxTargets = Objects.requireNonNullElse(numTargets, sa.getMaxTargets());
         final int targeted = sa.getTargets().size();
         if (maxTargets > 1) {
-            sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
+            sb.append("\n").append(Localizer.getInstance().getMessage("lblMatchTargetCount", targeted, maxTargets));
         }
 
         String name = sa.getHostCard().getTranslatedName();
