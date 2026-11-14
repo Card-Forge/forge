@@ -26,7 +26,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
@@ -69,15 +71,53 @@ public class TriggerAttackersDeclared extends Trigger {
         if (!matchesValidParam("AttackedTarget", runParams.get(AbilityKey.AttackedTarget))) {
             return false;
         }
+        if (!matchesAttackers((CardCollection) runParams.get(AbilityKey.Attackers))) {
+            return false;
+        }
+
+        if (hasParam("FirstTime")) {
+            // each attacking player of a team is only compared to their own creatures
+            final boolean ownOnly = (boolean) runParams.getOrDefault(AbilityKey.OneOfAttackingTeam, false);
+            final Player attackingPlayer = (Player) runParams.get(AbilityKey.AttackingPlayer);
+            final Iterable<Player> players = ownOnly ? List.of(attackingPlayer) : attackingPlayer.getGame().getPlayers();
+            // the attackers of the current combat are logged already, only the earlier combats count
+            final int combat = attackingPlayer.getGame().getPhaseHandler().getNumCombat();
+            final Map<Integer, CardCollection> before = new HashMap<>();
+            for (final Player p : players) {
+                for (final Map.Entry<Integer, Map<GameEntity, List<Card>>> e : p.getCreaturesAttackedThisTurnByCombat().entrySet()) {
+                    if (e.getKey() != combat) {
+                        for (final List<Card> attackers : e.getValue().values()) {
+                            before.computeIfAbsent(e.getKey(), k -> new CardCollection()).addAll(attackers);
+                        }
+                    }
+                }
+            }
+            for (final CardCollection attackers : before.values()) {
+                if (matchesAttackers(attackers)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean matchesAttackers(final Iterable<Card> declared) {
         if (hasParam("ValidAttackers")) {
             String param = getParamOrDefault("ValidAttackersAmount", "GE1");
-            int attackers = CardLists.getValidCardCount((CardCollection) runParams.get(AbilityKey.Attackers), getParam("ValidAttackers"), getHostCard().getController(), getHostCard(), this);
+            int attackers = CardLists.getValidCardCount(declared, getParam("ValidAttackers"), getHostCard().getController(), getHostCard(), this);
             int amount = AbilityUtils.calculateAmount(getHostCard(), param.substring(2), this);
             if (!Expressions.compare(attackers, param, amount)) {
                 return false;
             }
         }
-
+        if (hasParam("AttackersTotalPower")) {
+            String param = getParam("AttackersTotalPower");
+            int amount = AbilityUtils.calculateAmount(getHostCard(), param.substring(2), this);
+            if (!Expressions.compare(Aggregates.sum(declared, Card::getNetPower), param, amount)) {
+                return false;
+            }
+        }
         return true;
     }
 
