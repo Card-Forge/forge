@@ -1088,6 +1088,52 @@ public class GameAction {
         return false;
     }
 
+    /**
+     * Cheap pre-check for lookahead checks: does any continuous static ability that applies to {@code zone} (of any
+     * layer) affect {@code card} as it is right now, for example a copy of a spell set up as if it were on the stack?
+     * If none does, a full static check cannot change anything about that card. Deliberately conservative: it also
+     * counts the card's own and hidden static abilities, and ignores layers, since an effect that does not touch the
+     * card at first can only start to apply after another effect that does.
+     */
+    public boolean hasStaticAbilityAffectingCard(final ZoneType zone, final Card card) {
+        final CardCollection preList = new CardCollection(card);
+        for (final Card ca : Iterables.concat(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES), preList)) {
+            for (final StaticAbility stAb : Iterables.concat(ca.getStaticAbilities(), ca.getHiddenStaticAbilities())) {
+                if (!stAb.checkConditions(StaticAbilityMode.Continuous)) {
+                    continue;
+                }
+                if (!ZoneType.listValueOf(stAb.getParamOrDefault("AffectedZone", ZoneType.Battlefield.toString())).contains(zone)) {
+                    continue;
+                }
+                if (StaticAbilityContinuous.getAffectedCards(stAb, preList).contains(card)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Cheap pre-check for the ETB replacement lookahead (CR 614.12): could a full static check with {@code lki} (the
+     * card as it would be on the battlefield) substituted for {@code real} (the card where it is now) change
+     * anything? It cannot when no continuous static ability applies to the LKI card, and neither version of the card
+     * has continuous static abilities (or static commands) of its own that could start or stop affecting other
+     * cards. Conservative: any doubt answers true.
+     */
+    public boolean canStaticLookaheadChangeAnything(final ZoneType zone, final Card lki, final Card real) {
+        for (final Card c : new Card[] { lki, real }) {
+            if (!c.getStaticCommandList().isEmpty()) {
+                return true;
+            }
+            for (final StaticAbility stAb : Iterables.concat(c.getStaticAbilities(), c.getHiddenStaticAbilities())) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous)) {
+                    return true;
+                }
+            }
+        }
+        return hasStaticAbilityAffectingCard(zone, lki);
+    }
+
     public final void checkStaticAbilities() {
         checkStaticAbilities(true);
     }
