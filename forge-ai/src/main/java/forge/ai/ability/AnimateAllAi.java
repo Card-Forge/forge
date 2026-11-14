@@ -44,13 +44,11 @@ public class AnimateAllAi extends SpellAbilityAi {
                 }
                 if (!sa.isTargetNumberValid()) {
                     sa.resetTargets();
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed
-                    );
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             }
 
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay
-            );
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return canPlay(aiPlayer, sa);
     }
