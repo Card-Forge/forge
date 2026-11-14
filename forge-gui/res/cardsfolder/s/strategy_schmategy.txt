@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ StoreSVar | SVar$ Left | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ Repeat | RepeatCheckSVar$ Left | RepeatSVarCompare$ GT0 | RepeatSubAbility$ Roll | StackDescription$ Roll a six-sided die. CARDNAME has the indicated effect.
 SVar:Roll:DB$ RollDice | ResultSubAbilities$ 1:DBNothing,2:DBArtif,3:DBLand,4:DBDamage,5:DBWheel,6:DBTwoMore | SubAbility$ DBDecr
-SVar:DBNothing:DB$ Pump | SpellDescription$ 1 — Do nothing.
+SVar:DBNothing:DB$ Nothing | SpellDescription$ 1 — Do nothing.
 SVar:DBArtif:DB$ DestroyAll | ValidCards$ Artifact | SpellDescription$ 2 — Destroy all artifacts.
 SVar:DBLand:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ 3 — Destroy all lands.
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3 | SpellDescription$ 4 — CARDNAME deals 3 damage to each creature and each player.

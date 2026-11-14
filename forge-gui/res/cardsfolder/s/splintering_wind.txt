@@ -6,7 +6,7 @@ SVar:DBToken:DB$ Token | TokenScript$ g_1_1_splinter_flying_cum | TokenOwner$ Yo
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ LeavesBattlefield | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:LeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigDamageAll | TriggerDescription$ When it leaves the battlefield, it deals 1 damage to you and each creature you control.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.YouCtrl | ValidPlayers$ You | NumDmg$ 1 | SubAbility$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard | SubAbility$ ExileSelf
+SVar:DBForget:DB$ Bookkeeping | ForgetObjects$ TriggeredCard | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

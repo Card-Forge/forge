@@ -7,7 +7,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile | Condit
 SVar:DBExile:DB$ ChangeZone | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | AILogic$ MimicVat
 A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted.ExiledWithSource | Choices$ Card | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ MimicVat | SpellDescription$ Create a token that's a copy of a card exiled with CARDNAME. It gains haste. Exile it at the beginning of the next end step.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanImprinted | Static$ True
 SVar:DBCleanImprinted:DB$ Cleanup | ClearImprinted$ True
 SVar:NonStackingEffect:True

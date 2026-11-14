@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Instant
 A:SP$ ChangeZoneAll | ChangeType$ Creature.!token+YouCtrl | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBRollDice | SpellDescription$ Exile all nontoken creatures you control, then roll a d20.
 SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBDesc,10-20:DBReturn | StackDescription$ None
-SVar:DBDesc:DB$ Pump | SubAbility$ DBDelayTrig | SpellDescription$ 1—9 VERT Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+SVar:DBDesc:DB$ Nothing | SubAbility$ DBDelayTrig | SpellDescription$ 1—9 VERT Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 SVar:DBDelayTrig:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | SubAbility$ DBCleanup | TriggerDescription$ Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBExile | SpellDescription$ 10—20 VERT Return those cards to the battlefield under their owner's control, then exile them again. Return those cards to the battlefield under their owner's control at the beginning of the next end step.

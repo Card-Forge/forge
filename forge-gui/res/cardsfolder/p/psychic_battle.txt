@@ -9,7 +9,7 @@ SVar:DBCheckImprinted:DB$ Branch | BranchConditionSVar$ NumImprintedCard | TrueS
 SVar:DBCompareCMC:DB$ Branch | BranchConditionSVar$ CMCRememberedCard | BranchConditionSVarCompare$ GTCMCImprintedCard | TrueSubAbility$ DBImprintForget | FalseSubAbility$ DBCompareCMC2
 SVar:DBCompareCMC2:DB$ Branch | BranchConditionSVar$ CMCRememberedCard | BranchConditionSVarCompare$ EQCMCImprintedCard | TrueSubAbility$ DBImprint
 SVar:DBImprintForget:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBImprint
-SVar:DBImprint:DB$ Pump | ImprintCards$ Remembered
+SVar:DBImprint:DB$ Bookkeeping | ImprintCards$ Remembered
 SVar:DBChangeTargets:DB$ ChangeTargets | Defined$ TriggeredSourceSA | Chooser$ ImprintedOwner | Optional$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanupImprinted
 SVar:DBCleanupRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:DBCleanupImprinted:DB$ Cleanup | ClearImprinted$ True

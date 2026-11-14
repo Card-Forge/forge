@@ -198,8 +198,8 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
 
     private static boolean hasWelderAbility(final Card c) {
         for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility() && sa.getApi() == ApiType.Pump && sa.getSubAbility() != null
-                    && sa.getSubAbility().getApi() == ApiType.Pump) {
+            if (sa.isAbility() && sa.getApi() == ApiType.TargetOnly && sa.getSubAbility() != null
+                    && sa.getSubAbility().getApi() == ApiType.TargetOnly) {
                 return true;
             }
         }

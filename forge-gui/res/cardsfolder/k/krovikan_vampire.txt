@@ -2,10 +2,10 @@ Name:Krovikan Vampire
 ManaCost:3 B B
 Types:Creature Vampire
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPump | Static$ True
-SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigNote | Static$ True
+SVar:TrigNote:DB$ Bookkeeping | RememberObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.IsRemembered | TriggerZones$ Battlefield | Execute$ LoseTrack | Static$ True
-SVar:LoseTrack:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:LoseTrack:DB$ Bookkeeping | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 T:Mode$ TurnBegin | Execute$ DBCleanup2 | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | CheckSVar$ X | IsPresent$ Card.Self | Execute$ TrigChange | TriggerDescription$ At the beginning of each end step, if a creature dealt damage by CARDNAME this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of CARDNAME.

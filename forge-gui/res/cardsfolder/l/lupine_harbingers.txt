@@ -5,7 +5,7 @@ PT:4/4
 K:Trample
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Exile | Execute$ TrigNoteNum | Static$ True
-SVar:TrigNoteNum:DB$ Pump | NoteNumber$ X
+SVar:TrigNoteNum:DB$ Bookkeeping | NoteNumber$ X
 SVar:X:Count$YourTurns
 K:etbCounter:P1P1:Z:CheckSVar$ WasForetold:CARDNAME enters with X +1/+1 counters on it, where X is the number of turns you've begun since it was foretold.
 SVar:Z:SVar$X/Minus.Y
