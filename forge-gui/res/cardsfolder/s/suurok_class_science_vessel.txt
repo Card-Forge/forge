@@ -1,0 +1,9 @@
+Name:Suurok-Class Science Vessel
+ManaCost:2 U
+Types:Artifact Spacecraft
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Spacecraft enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+K:Station:5
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE5_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 5+ Flying
+Oracle:When this Spacecraft enters, draw a card.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 5+.)\nSTATION 5+\nFlying

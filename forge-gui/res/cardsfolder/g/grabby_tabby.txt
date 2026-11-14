@@ -1,0 +1,6 @@
+Name:Grabby Tabby
+ManaCost:3 G
+Types:Creature Cat Guest
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Permanent.stickered+YouCtrl | Description$ CARDNAME has vigilance as long as you control a stickered permanent.
+Oracle:This creature has vigilance as long as you control a stickered permanent.

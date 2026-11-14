@@ -42,7 +42,6 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.game.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -67,10 +66,12 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.client.FGameClient;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -151,7 +152,8 @@ public final class CMatchUI
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
-            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
+            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard,
+            ZoneType.StickerSheets);
 
     private final List<PlayerZoneUpdate> selectionZonesShown = Lists.newArrayList();
     private final List<PlayerZoneUpdate> revealZonesShown = Lists.newArrayList();
@@ -276,6 +278,12 @@ public final class CMatchUI
     }
 
     @Override
+    public void applyMacroState(final IMacroSystem.State state) {
+        super.applyMacroState(state);
+        FThreads.invokeInEdtNowOrLater(getCDock()::refreshMacroButtons);
+    }
+
+    @Override
     public void refreshYieldUi(final PlayerView player) {
         FThreads.invokeInEdtNowOrLater(() -> {
             // Marker is rendered only on the local player's view of the targeted phase indicator.
@@ -345,6 +353,40 @@ public final class CMatchUI
     }
     public TargetingOverlay getTargetingOverlay() {
         return targetingOverlay;
+    }
+
+    // ---- "How to Play" tutorial: note and outline, drawn over the match screen ----
+    private TutorialOverlayPanel tutorialOverlay;
+
+    private TutorialOverlayPanel getTutorialOverlay() {
+        if (tutorialOverlay == null) {
+            tutorialOverlay = new TutorialOverlayPanel(this);
+        }
+        return tutorialOverlay;
+    }
+
+    /** One of the match screen's docked panels, or null when this match has none with that id. */
+    IVDoc<? extends ICDoc> getTutorialDoc(final EDocID id) {
+        return myDocs.get(id);
+    }
+
+    /** Shows a tutorial note over the board. Call on the UI thread. */
+    public void showTutorialCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        getTutorialOverlay().showCoach(title, text, nextLabel, onNext);
+    }
+
+    /** Removes the tutorial note. Call on the UI thread. */
+    public void hideTutorialCoach() {
+        if (tutorialOverlay != null) {
+            tutorialOverlay.hideCoach();
+        }
+    }
+
+    /** Outlines parts of the match screen for the tutorial; an empty set clears it. Call on the UI thread. */
+    public void highlightTutorial(final java.util.EnumSet<forge.gamemodes.tutorial.TutorialTarget> targets) {
+        if (tutorialOverlay != null || !targets.isEmpty()) {
+            getTutorialOverlay().highlight(targets);
+        }
     }
 
     /**
@@ -669,43 +711,48 @@ public final class CMatchUI
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        super.setSelectables(cards, min, max);
+    public void setSelection(final Selection selection) {
+        final Selection prev = getSelection();
+        super.setSelection(selection);
+        final boolean cardsChanged = !prev.cards().equals(selection.cards());
+        final boolean actionableChanged = !prev.actionable().equals(selection.actionable());
+        final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
         // a maximum of 0 marks display-only highlighting, whose caller shows its own window
-        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
-        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        final PlayerZoneUpdates zones = cardsChanged && selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            if (cardsChanged || actionableChanged) {
+                // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                    updateCardsNetSafe(p.getCards(ZoneType.Hand));
+                }
             }
-            if (!zones.isEmpty()) {
-                updateZones(zones);
-                selectionZonesShown.addAll(tempShowZones(zones));
+            if (cardsChanged) {
+                if (selection.cards().isEmpty()) {
+                    hideZones(selectionZonesShown);
+                    selectionZonesShown.clear();
+                    FloatingZone.clearAllHotkeyAffordance();
+                } else if (!zones.isEmpty()) {
+                    updateZones(zones);
+                    selectionZonesShown.addAll(tempShowZones(zones));
+                }
             }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearSelectables() {
-        super.clearSelectables();
-        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            if (cardsChanged || actionableChanged) {
+                FloatingZone.refreshAll();
             }
-            hideZones(selectionZonesShown);
-            selectionZonesShown.clear();
-            FloatingZone.refreshAll();
-            FloatingZone.clearAllHotkeyAffordance();
+            if (stackOffered) { // stack entries are picked in the stack panel, so bring it up
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+            }
+            refreshStackTargetMarks();
+            if (isSelecting()) {
+                FloatingZone.refreshSelectionPrompts();
+            }
         });
     }
 
     @Override
     public void showRevealedCards(final Iterable<CardView> cards) {
-        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        // only hands open: cards revealed from any other zone show in the reveal dialog
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
             if (update.getZones().contains(ZoneType.Hand)) {
@@ -727,35 +774,18 @@ public final class CMatchUI
     }
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        super.setHighlighted(entities, b);
-        if (isSelecting()) {
-            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
+    public boolean canPickStackTargets() {
+        return true; // stack entries are clicked in the stack panel (VStack)
+    }
+
+    /** Repaints what shows the marks of players and stack entries: the avatar borders and the stack panel. */
+    private void refreshStackTargetMarks() {
+        if (getFieldViews() != null) {
+            for (final VField f : getFieldViews()) {
+                f.updateAvatarBorder();
+            }
         }
-    }
-
-    @Override
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        super.setWeaklySelectable(cards);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearWeaklySelectable() {
-        super.clearWeaklySelectable();
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
+        getCStack().getView().repaintSelection();
     }
 
     @Override
@@ -766,11 +796,6 @@ public final class CMatchUI
             }
             FloatingZone.refreshAll();
         });
-    }
-
-    @Override
-    public GameState getGamestate() {
-        return null;
     }
 
     @Override
@@ -930,20 +955,22 @@ public final class CMatchUI
 
     @Override
     public void updatePhase(boolean saveState) {
-        final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
-        // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
-        PhaseLabel lbl = null;
-        if (ph != null) {
-            lbl = p == null ? null : getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
-        } else {
-            // not sure what debugging information would help here, log for now
+        if (ph == null) {
+            // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
             System.err.println("getGameView().getPhase() returned 'null'");
         }
 
         resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
+        if (ph != null) {
+            // a team that shares its turns shows the phase on each of its players
+            final PlayerView turnPlayer = getGameView().getPlayerTurn();
+            for (final PlayerView p : getGameView().getPlayers()) {
+                final PhaseLabel lbl = p.sharesTeamWith(turnPlayer) ? getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph) : null;
+                if (lbl != null) {
+                    lbl.setActive(true);
+                }
+            }
         }
 
         if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases
@@ -1142,7 +1169,7 @@ public final class CMatchUI
 
     @Override
     public void showPromptMessage(PlayerView playerView, String message, CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         cPrompt.setMessage(message, card);
         notePromptMessage(message);
     }
@@ -1237,7 +1264,7 @@ public final class CMatchUI
             players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
         }
         initMatch(players, myPlayers);
-        clearSelectables(); //fix uncleared selection
+        setSelection(Selection.NONE); //fix uncleared selection
 
         actuateMatchPreferences();
 
@@ -1307,7 +1334,13 @@ public final class CMatchUI
     public void afterGameEnd() {
         super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
+        if (tutorialOverlay != null) {
+            tutorialOverlay.detach();
+        }
         FThreads.invokeInEdtNowOrLater(() -> {
+            if (isReplay()) {
+                SOverlayUtils.hideOverlay(); // the end-of-game screen would otherwise stay over the whole window
+            }
             Singletons.getView().getNavigationBar().closeTab(screen);
             LinkHandler.clearWeakReferencesNow();
         });

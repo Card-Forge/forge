@@ -7,16 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
-import forge.OverlayText;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.DuelScene;
-import forge.adventure.scene.GameScene;
-import forge.adventure.scene.RewardScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
@@ -141,7 +136,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                                 Forge.switchScene(duelScene);
                             }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
-                            WorldSave.getCurrentSave().autoSave();
+                            WorldSave.getCurrentSave().autoSaveAsync();
                         });
                     });
                     break;
@@ -216,36 +211,46 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
+
     public boolean handlePointsOfInterestCollision() {
         for (Actor actor : foregroundSprites.getChildren()) {
-            if (actor.getClass() == PointOfInterestMapSprite.class) {
-                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
-                if (!point.getPointOfInterest().getActive())
-                {
+            if (!(actor instanceof PointOfInterestMapSprite)) {
+                continue;
+            }
+
+            PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+
+            // Release the lock only after leaving the previous POI.
+            if (point == collidingPoint) {
+                if (!player.collideWith(point.getBoundingRect())) {
+                    collidingPoint = null;
+                } else {
                     continue;
                 }
-                if (player.collideWith(point.getBoundingRect())) {
-                    if (point == collidingPoint) {
-                        continue;
-                    }
-                    // The loadPOI generates booster and other things that may take time to load, so show a little loading text.
-                    OverlayText.getInstance().update("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} A U T O S A V E ");
-                    startPause(1f, ()-> {
-                        WorldSave.getCurrentSave().autoSave();
-                        loadPOI(point.getPointOfInterest());
-                        point.getMapSprite().checkOut();
-                        WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
-                    });
-                    return true;
-                } else {
-                    if (point == collidingPoint) {
-                        collidingPoint = null;
-                    }
-                }
             }
+
+            if (!point.getPointOfInterest().getActive()) {
+                continue;
+            }
+
+            if (!player.collideWith(point.getBoundingRect())) {
+                continue;
+            }
+
+            // Lock this POI before any scene transition.
+            collidingPoint = point;
+            WorldSave.getCurrentSave().autoSaveAsync();
+            WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
+            point.getMapSprite().checkOut();
+
+            // Do this last because it switches scenes.
+            loadPOI(point.getPointOfInterest());
+            return true;
         }
+
         return false;
     }
+
 
     public void loadPOI(PointOfInterest poi) {
         try {
@@ -416,12 +421,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
             }
         }
         else {
+            collidingPoint = null;
             for (Actor actor : foregroundSprites.getChildren()) {
-                if (actor.getClass() == PointOfInterestMapSprite.class) {
-                    PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
-                    if (player.collideWith(point.getBoundingRect())) {
-                        collidingPoint = point;
-                    }
+                if (!(actor instanceof PointOfInterestMapSprite)) {
+                    continue;
+                }
+                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                if (player.collideWith(point.getBoundingRect())) {
+                    collidingPoint = point;
+                    break;
                 }
             }
         }

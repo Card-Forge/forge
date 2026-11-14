@@ -16,11 +16,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -94,18 +93,27 @@ public class Assets implements Disposable {
     private HashMap<Integer, TextureRegion> borders;
     private HashMap<Integer, TextureRegion> deckbox;
     private HashMap<Integer, TextureRegion> cursor;
-    private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, blackTexture;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture, coinHead, coinTail;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
     private boolean isDisposed = false;
     private int miniMapID;
+    private String transformAtlasPath;
+    private TextureAtlas transformAtlas;
+    private boolean transformAtlasFailed;
+    private String topMenuAtlasPath;
+    private TextureAtlas topMenuAtlas;
+    private boolean topMenuAtlasFailed;
+    private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
+    private static final String COUNTER_FONT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
+
+    private FileHandle counterFontHandle; // cached
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -133,11 +141,6 @@ public class Assets implements Disposable {
             return;
         }
         isDisposed = true;
-        if (counterFonts != null) {
-            for (BitmapFont bitmapFont : counterFonts.values())
-                Forge.safeDispose(bitmapFont);
-            counterFonts.clear();
-        }
         if (fallback_skins != null) {
             for (Texture texture : fallback_skins.values())
                 Forge.safeDispose(texture);
@@ -154,8 +157,8 @@ public class Assets implements Disposable {
             textrafonts.clear();
         }
         Forge.safeDispose(
-            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
+            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, transformAtlas, topMenuAtlas);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -181,6 +184,41 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
+    }
+
+    public BitmapFont getCounterFont(int fontSize) {
+        if (fontSize <= 0) {
+            return null;
+        }
+
+        // faux key only for storing different font size params with the same ttf font
+        final String key = "Roboto-Bold-" + fontSize + ".ttf";
+
+        // Fast path: already loaded, no file system lookups
+        if (manager().isLoaded(key, BitmapFont.class)) {
+            return manager().get(key, BitmapFont.class);
+        }
+
+        // Resolve the TTF only once
+        if (counterFontHandle == null || !counterFontHandle.exists()) {
+            counterFontHandle = getFileHandle(ForgeConstants.COMMON_FONTS_DIR + "/" + COUNTER_FONT_FILE);
+            if (counterFontHandle == null || !counterFontHandle.exists()) {
+                counterFontHandle = null;
+                return null; // caller should fall back to a default font ideally
+            }
+        }
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter param = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        param.fontFileName = counterFontHandle.path();
+        param.fontParameters.size = fontSize;
+        param.fontParameters.characters = COUNTER_FONT_CHARS;
+        param.fontParameters.minFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.magFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.hinting = FreeTypeFontGenerator.Hinting.AutoMedium;
+
+        manager().load(key, BitmapFont.class, param);
+        manager().finishLoadingAsset(key);
+        return manager().get(key, BitmapFont.class);
     }
 
     public GifAnimation getGifAnimation() {
@@ -217,7 +255,10 @@ public class Assets implements Disposable {
 
     public MemoryTrackingAssetManager manager() {
         if (manager == null) {
-            manager = new MemoryTrackingAssetManager(new HybridFileHandleResolver());
+            HybridFileHandleResolver resolver = new HybridFileHandleResolver();
+            manager = new MemoryTrackingAssetManager(resolver);
+            manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+            manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         }
         return manager;
     }
@@ -299,12 +340,6 @@ public class Assets implements Disposable {
         if (cursor == null)
             cursor = new HashMap<>();
         return cursor;
-    }
-
-    public ObjectMap<Integer, BitmapFont> counterFonts() {
-        if (counterFonts == null)
-            counterFonts = new ObjectMap<>();
-        return counterFonts;
     }
 
     public ObjectMap<String, Texture> fallback_skins() {
@@ -443,19 +478,115 @@ public class Assets implements Disposable {
     }
 
     public Texture getWhiteTexture() {
-        return setTexture(whiteTexture, Color.WHITE, 1f);
+        if (whiteTexture == null)
+            whiteTexture = setTexture(whiteTexture, Color.WHITE, 1f);
+        return whiteTexture;
     }
 
     public Texture getBackropTexture() {
-        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+        if (backdropTexture == null)
+            backdropTexture = setTexture(backdropTexture, Color.BLACK, 0.5f);
+        return backdropTexture;
     }
 
     public Texture getGrayTexture() {
-        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        if (grayTexture == null)
+            grayTexture = setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        return grayTexture;
     }
 
     private Texture getBlackTexture() {
-        return setTexture(blackTexture, Color.BLACK, 1f);
+        if (blackTexture == null)
+            blackTexture = setTexture(blackTexture, Color.BLACK, 1f);
+        return blackTexture;
+    }
+
+    public Texture getCoinHead() {
+        if (coinHead == null) {
+            coinHead = getTexture(getDefaultSkinFile("coin_heads.png"));
+        }
+        return coinHead;
+    }
+
+    public Texture getCoinTail() {
+        if (coinTail == null) {
+            coinTail = getTexture(getDefaultSkinFile("coin_tails.png"));
+        }
+        return coinTail;
+    }
+
+    public TextureAtlas getTransformAtlas() {
+        if (isDisposed || transformAtlasFailed)
+            return null;
+        try {
+            if (transformAtlasPath == null && transformAtlas == null) {
+                FileHandle file = getDefaultSkinFile("sprite_transform.atlas");
+                if (file == null || !file.exists()) {
+                    transformAtlasFailed = true;
+                    return null;
+                }
+                if (FileType.Absolute.equals(file.type())) {
+                    transformAtlasPath = file.path();
+                } else { //inside an apk or jar, the asset manager can't see it
+                    transformAtlas = new TextureAtlas(file);
+                    smoothAtlas(transformAtlas);
+                }
+            }
+            if (transformAtlas != null)
+                return transformAtlas;
+            TextureAtlas atlas = manager().get(transformAtlasPath, TextureAtlas.class, false);
+            if (atlas == null) {
+                manager().load(transformAtlasPath, TextureAtlas.class);
+                manager().finishLoadingAsset(transformAtlasPath);
+                atlas = manager().get(transformAtlasPath, TextureAtlas.class);
+                smoothAtlas(atlas);
+            }
+            return atlas;
+        } catch (Exception e) {
+            transformAtlasFailed = true;
+            System.err.println("Failed to load sprite_transform.atlas: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /** Icons of the match screen's top menu in the compact layout: topmenu.atlas next to sprite_transform.atlas in the default skin folder. */
+    public TextureAtlas getTopMenuAtlas() {
+        if (isDisposed || topMenuAtlasFailed)
+            return null;
+        try {
+            if (topMenuAtlasPath == null && topMenuAtlas == null) {
+                FileHandle file = getDefaultSkinFile("topmenu.atlas");
+                if (file == null || !file.exists()) {
+                    topMenuAtlasFailed = true;
+                    return null;
+                }
+                if (FileType.Absolute.equals(file.type())) {
+                    topMenuAtlasPath = file.path();
+                } else { //inside an apk or jar, the asset manager can't see it
+                    topMenuAtlas = new TextureAtlas(file);
+                    smoothAtlas(topMenuAtlas);
+                }
+            }
+            if (topMenuAtlas != null)
+                return topMenuAtlas;
+            TextureAtlas atlas = manager().get(topMenuAtlasPath, TextureAtlas.class, false);
+            if (atlas == null) {
+                manager().load(topMenuAtlasPath, TextureAtlas.class);
+                manager().finishLoadingAsset(topMenuAtlasPath);
+                atlas = manager().get(topMenuAtlasPath, TextureAtlas.class);
+                smoothAtlas(atlas);
+            }
+            return atlas;
+        } catch (Exception e) {
+            topMenuAtlasFailed = true;
+            System.err.println("Failed to load topmenu.atlas: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private void smoothAtlas(TextureAtlas atlas) {
+        for (Texture t : atlas.getTextures())
+            t.setFilter(getTextureFilter().minFilter, getTextureFilter().magFilter);
     }
 
     public Texture getHolofoil() {
@@ -600,8 +731,8 @@ public class Assets implements Disposable {
                 textureSize = textureSize + (textureSize / 3);
             memoryPerFile.put(fileName, calcTextureDataSize(textureSize, textureData.getFormat()));
 
-            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
-                + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
+            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() +
+                calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
         }
 
         @SuppressWarnings("unchecked")
@@ -651,21 +782,6 @@ public class Assets implements Disposable {
             }
             cSFVal = val;
             return cSFVal;
-        }
-
-        private int calcCounterFonts() {
-            if (!Forge.showFPS)
-                return 0;
-            if (counterFonts == null || counterFonts.isEmpty())
-                return 0;
-            if (cCF == counterFonts.size)
-                return cCFVal;
-            int val = 0;
-            for (BitmapFont cf : counterFonts.values()) {
-                val += calcBitmapFont(cf);
-            }
-            cCFVal = val;
-            return cCFVal;
         }
 
         private int calcBitmapFont(BitmapFont bitmapFont) {

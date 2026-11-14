@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.LobbyPlayer;
-import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -66,11 +65,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
     @Override public void flashIncorrectAction() { }
     @Override public void alertUser() { }
-
-    @Override
-    public GameState getGamestate() {
-        return null;
-    }
 
     @Override public void setPanelSelection(CardView hostCard) { }
 

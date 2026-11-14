@@ -1,5 +1,7 @@
 package forge.card;
 
+import java.util.function.Predicate;
+
 /** 
  * CardAiHints holds all the different types of card hints for AI decks.
  *
@@ -30,6 +32,27 @@ public class CardAiHints {
      */
     public boolean getRemAIDecks() {
         return this.isRemovedFromAIDecks;
+    }
+
+    /**
+     * Cards marked AI:RemoveDeck:All that the Flat Monte Carlo AI does play (the cantrips and mana of the combo decks,
+     * the pieces of its combos): decks built for the AI keep them. Set by the model at start up; nothing is kept
+     * until then, or when Flat MC is off.
+     */
+    private static volatile Predicate<String> keptForFlatMc = name -> false;
+
+    public static void setKeptForFlatMc(final Predicate<String> kept) {
+        keptForFlatMc = kept == null ? name -> false : kept;
+    }
+
+    /** Whether decks built at random (for the AI as well) leave this card out: AI:RemoveDeck:Random, and not one Flat MC plays. */
+    public static boolean isRemovedFromRandomDecks(final CardRules rules) {
+        return rules.getAiHints().getRemRandomDecks() && !keptForFlatMc.test(rules.getName());
+    }
+
+    /** Whether the AI's decks leave this card out: marked AI:RemoveDeck:All, and not one Flat MC plays. */
+    public static boolean isRemovedFromAiDecks(final CardRules rules) {
+        return rules.getAiHints().getRemAIDecks() && !keptForFlatMc.test(rules.getName());
     }
 
     /**

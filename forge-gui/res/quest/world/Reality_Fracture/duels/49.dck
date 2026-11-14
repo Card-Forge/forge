@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/narca_-_Green_Ramp_(Standard,_#901123).dck
+Deck Type=constructed
+
+[Main]
+10 Forest
+4 Ba Sing Se
+4 Cavern of Souls
+4 Elven Passage
+2 Soulstone Sanctuary
+4 Emrakul, the Exigent Doom
+4 Heartwood Crafter
+4 Llanowar Elves
+4 Simulacrum Shaper
+2 Mightform Harmonizer
+2 Emeritus of Abundance
+2 Anticausal Vestige
+2 Vastlands Scavenger
+4 Interdimensional Web Watch
+4 The Echoverse Fulcrum
+4 Ugin, Eye of the Storms
+[Sideboard]
+2 Compel Brutality
+1 Ghost Vacuum
+2 Gigantic Big Bear
+2 Heritage Reclamation
+1 Leatherhead, Swamp Stalker
+2 Sapling Nursery
+3 Torpor Orb
+2 Keen-Eyed Curator

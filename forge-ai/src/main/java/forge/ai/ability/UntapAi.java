@@ -478,7 +478,7 @@ public class UntapAi extends SpellAbilityAi {
 
         // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
-        return ph.getNextTurn() == ai
+        return ph.isPlayerNextTurn(ai)
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
     }
 
@@ -488,12 +488,12 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
             final Game game = host.getGame();
-            for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
+            for (Card card : AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa)) {
                 final Card gameCard = game.getCardState(card, null);
                 if (gameCard == null
                         || !gameCard.isInPlay() // not in play
                         || gameCard.isUntapped() // already untapped
-                        ) {
+                ) {
                     return false;
                 }
 

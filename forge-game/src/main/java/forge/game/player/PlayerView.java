@@ -115,12 +115,22 @@ public class PlayerView extends GameEntityView {
     public List<PlayerView> getOpponents() {
         return Objects.requireNonNullElse(get(TrackableProperty.Opponents), List.of());
     }
-    void updateOpponents(Player p) {
+    void updateOpponentsAndTeam(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
+        set(TrackableProperty.SharedTeam, PlayerView.getCollection(p.getSharedTeam()));
     }
 
     public boolean isOpponentOf(final PlayerView other) {
         return getOpponents().contains(other);
+    }
+
+    /** True for this player, and in Two-Headed Giant for its teammate, as {@link Player#sharesTeamWith}. */
+    public boolean sharesTeamWith(final PlayerView other) {
+        if (equals(other)) {
+            return true;
+        }
+        TrackableCollection<PlayerView> team = get(TrackableProperty.SharedTeam);
+        return team != null && team.contains(other);
     }
 
     public final String getCommanderInfo(CardView v) {
@@ -202,6 +212,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.IsExtraTurn, val);
     }
 
+    public int getExtraTurnCount() {
+        return get(TrackableProperty.ExtraTurnCount);
+    }
+    public void setExtraTurnCount(final int val) {
+        set(TrackableProperty.ExtraTurnCount, val);
+    }
+
     public boolean getHasLost() {
         return get(TrackableProperty.HasLost);
     }
@@ -214,20 +231,6 @@ public class PlayerView extends GameEntityView {
     }
     public void setHasAvailableActions(boolean value) {
         set(TrackableProperty.HasAvailableActions, value);
-    }
-
-    public int getAvatarLifeDifference() {
-        return get(TrackableProperty.AvatarLifeDifference);
-    }
-    public void setAvatarLifeDifference(final int val) {
-        set(TrackableProperty.AvatarLifeDifference, val);
-    }
-
-    public int getExtraTurnCount() {
-        return get(TrackableProperty.ExtraTurnCount);
-    }
-    public void setExtraTurnCount(final int val) {
-        set(TrackableProperty.ExtraTurnCount, val);
     }
 
     public boolean getHasPriority() {

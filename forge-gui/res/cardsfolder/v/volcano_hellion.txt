@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDmg:DB$ ChooseNumber | ListTitle$ amount of damage to be dealt | ChooseAnyNumber$ True | SubAbility$ DBDmg | AILogic$ Min
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | NoPrevention$ True | DamageMap$ True | SubAbility$ DmgYou
 SVar:DmgYou:DB$ DealDamage | Defined$ You | NumDmg$ Y | NoPrevention$ True | SubAbility$ DmgResolve
-SVar:DmgResolve:DB$ DamageResolve
+SVar:DmgResolve:DB$ DamageResolve | NoPrevention$ True
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$ChosenNumber
 AI:RemoveDeck:All

@@ -1,5 +1,6 @@
 package forge.ai.controller;
 
+import forge.ai.ComputerUtilMana;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
@@ -142,5 +143,25 @@ public class AutoPaymentTest extends SimulationTest {
         // AI able to cast both creatures
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
+    }
+
+    @Test
+    public void useRequiredMultiManaSourceFirst() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card ring = addCard("Sol Ring", p);
+        addCard("Chromatic Orrery", p);
+        Card golem = addCardToZone("Steel Golem", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = golem.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
+
+        // the Orrery is needed either way and covers the cost alone, so the Ring stays untapped
+        AssertJUnit.assertTrue(ring.isUntapped());
     }
 }

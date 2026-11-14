@@ -32,6 +32,7 @@ public class RegisteredPlayer {
     private Iterable<PaperCard> conspiracies = null;
     private Iterable<PaperCard> attractions = null;
     private Iterable<PaperCard> contraptions = null;
+    private Iterable<PaperCard> stickerSheets = null;
     private List<PaperCard> commanders = Lists.newArrayList();
     private List<PaperCard> vanguardAvatars = null;
     private PaperCard planeswalker = null;
@@ -39,6 +40,7 @@ public class RegisteredPlayer {
     private Integer id = null;
     private boolean randomFoil = false;
     private boolean enableETBCountersEffect = false;
+    private final List<List<String>> startGameScripts = Lists.newArrayList();
 
     public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
@@ -96,6 +98,13 @@ public class RegisteredPlayer {
         else
             this.extraCardsInCommandZone = Iterables.concat(this.extraCardsInCommandZone, extraCardsInCommandZone);
     }
+    public final List<List<String>> getStartGameScripts() {
+        return startGameScripts;
+    }
+    /** Card-script lines run after mulligans. A line {@code SVar:Name:Value} sets an SVar the other lines can use, every other line is an ability. */
+    public final void addStartGameScript(List<String> script) {
+        startGameScripts.add(script);
+    }
 
     public int getStartingHand() {
         return startingHand;
@@ -151,6 +160,9 @@ public class RegisteredPlayer {
     		start.setStartingLife(40);
     		start.schemes = schemes;
     	}
+        if (appliedVariants.contains(GameType.TwoHeadedGiant)) {
+            start.setStartingLife(30); // 810.4: each team has a shared life total, which starts at 30 life
+        }
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
@@ -240,10 +252,20 @@ public class RegisteredPlayer {
                 : EmptyList;
     }
 
+    public Iterable<PaperCard> getStickerSheets() {
+        return stickerSheets;
+    }
+    private void assignStickerSheets() {
+        stickerSheets = currentDeck.has(DeckSection.Stickers)
+                ? currentDeck.get(DeckSection.Stickers).toFlatList()
+                : EmptyList;
+    }
+
     public void restoreDeck() {
         currentDeck = (Deck) originalDeck.copyTo(originalDeck.getName());
         assignAttractions();
         assignContraptions();
+        assignStickerSheets();
     }
 
     public boolean useRandomFoil() {

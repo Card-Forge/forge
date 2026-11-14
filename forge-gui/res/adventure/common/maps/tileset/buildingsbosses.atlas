@@ -195,3 +195,9 @@ Great Aurora
 Imperial Office
   xy: 384,448
   size: 48,48
+SvyeluniteTemple
+  xy: 396, 550
+  size: 48, 32
+DwarvenHold
+  xy: 128, 480
+  size: 48, 32

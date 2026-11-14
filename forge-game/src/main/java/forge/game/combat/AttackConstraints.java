@@ -21,6 +21,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.util.collect.FCollection;
@@ -34,15 +36,20 @@ public class AttackConstraints {
 
     private final Map<Card, AttackRestriction> restrictions = Maps.newHashMap();
     private final Map<Card, AttackRequirement> requirements = Maps.newHashMap();
-    private final Multimap<GameEntity, StaticAbility> playerRequirements;
+    /** Per attacking player, the defenders a static ability makes them attack with at least one of their creatures. */
+    private final Map<Player, Multimap<GameEntity, StaticAbility>> playerRequirements = Maps.newHashMap();
 
     public AttackConstraints(final Combat combat) {
-        possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
+        final Player attacking = combat.getAttackingPlayer();
+        // CR 805.10b: under shared team turns the team declares one combined attack, and each attacking player keeps their own requirements
+        final PlayerCollection attackingPlayers = attacking.getSharedTeam();
+        possibleAttackers = attackingPlayers.getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
-        globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
-        playerRequirements = StaticAbilityMustAttack.mustAttackSpecific(combat.getAttackingPlayer(), possibleDefenders);
+        globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(attacking, possibleDefenders);
+        for (final Player p : attackingPlayers) {
+            playerRequirements.put(p, StaticAbilityMustAttack.mustAttackSpecific(p, possibleDefenders));
+        }
 
-        // TODO extend for "SharedTurnModes"
         for (final Card possibleAttacker : possibleAttackers) {
             restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
 
@@ -321,20 +328,24 @@ public class AttackConstraints {
 
         result.sort(Comparator.reverseOrder());
 
-        Multimap<GameEntity, StaticAbility> playerReqs = MultimapBuilder.hashKeys().arrayListValues().build(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
-        while (!playerReqs.isEmpty()) {
-            Map.Entry<GameEntity, Collection<StaticAbility>> playerReq = playerReqs.asMap().entrySet().stream()
-                    .max(Comparator.comparing(e -> e.getValue().size())).orElse(null);
-            // find best attack to also fulfill the additional requirements
-            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())).findFirst().orElse(null);
-            if (bestMatch != null) {
-                bestMatch.requirements += playerReq.getValue().size();
-                usedAttackers.add(bestMatch.attacker);
-                // recalculate remaining requirements
-                playerReqs.values().removeAll(playerReq.getValue());
-            } else {
-                playerReqs.removeAll(playerReq.getKey());
+        for (final Entry<Player, Multimap<GameEntity, StaticAbility>> requirementsOf : playerRequirements.entrySet()) {
+            Multimap<GameEntity, StaticAbility> playerReqs = MultimapBuilder.hashKeys().arrayListValues().build(requirementsOf.getValue());
+            while (!playerReqs.isEmpty()) {
+                Map.Entry<GameEntity, Collection<StaticAbility>> playerReq = playerReqs.asMap().entrySet().stream()
+                        .max(Comparator.comparing(e -> e.getValue().size())).orElse(null);
+                // find best attack to also fulfill the additional requirements, one with a cost would be skipped later
+                Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())
+                        && att.attacker.getController().equals(requirementsOf.getKey())
+                        && CombatUtil.getAttackCost(att.attacker.getGame(), att.attacker, att.defender) == null).findFirst().orElse(null);
+                if (bestMatch != null) {
+                    bestMatch.requirements += playerReq.getValue().size();
+                    usedAttackers.add(bestMatch.attacker);
+                    // recalculate remaining requirements
+                    playerReqs.values().removeAll(playerReq.getValue());
+                } else {
+                    playerReqs.removeAll(playerReq.getKey());
+                }
             }
         }
         if (!usedAttackers.isEmpty()) {
@@ -379,7 +390,7 @@ public class AttackConstraints {
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {
             final AttackRestriction restriction = restrictions.get(attacker.getKey());
-            if (restriction != null && !restriction.canAttack(attacker.getKey(), attackers)) {
+            if (restriction != null && !restriction.canAttack(attacker.getValue(), attackers)) {
                 // Violating a restriction!
                 return -1;
             }
@@ -393,10 +404,14 @@ public class AttackConstraints {
             }
         }
 
-        Multimap<StaticAbility, GameEntity> inverted = MultimapBuilder.hashKeys().arrayListValues().build();
-        for (Collection<GameEntity> defSet : Multimaps.invertFrom(playerRequirements, inverted).asMap().values()) {
-            if (Collections.disjoint(defSet, attackers.values())) {
-                violations++;
+        for (final Entry<Player, Multimap<GameEntity, StaticAbility>> requirementsOf : playerRequirements.entrySet()) {
+            final List<GameEntity> attacked = attackers.entrySet().stream()
+                    .filter(e -> e.getKey().getController().equals(requirementsOf.getKey())).map(Entry::getValue).collect(Collectors.toList());
+            Multimap<StaticAbility, GameEntity> inverted = MultimapBuilder.hashKeys().arrayListValues().build();
+            for (Collection<GameEntity> defSet : Multimaps.invertFrom(requirementsOf.getValue(), inverted).asMap().values()) {
+                if (Collections.disjoint(defSet, attacked)) {
+                    violations++;
+                }
             }
         }
 

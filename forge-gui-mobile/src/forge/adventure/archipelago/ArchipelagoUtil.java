@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.ItemData;
 import forge.adventure.data.RewardData;
+import forge.adventure.data.ShopData;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Reward;
@@ -294,6 +296,37 @@ public class ArchipelagoUtil {
         data.count = count;
         data.itemName = itemName;
         return  data;
+    }
+
+    /**
+     * Archipelago equipment and item shops ("Equipment", "&lt;Color&gt;Item" and "&lt;Color&gt;Equipment" in Shandalar/Shops.json).
+     * The solo randomizer swaps the shop's rewards for its randomized items. Networked shops sell their Archipelago
+     * items instead of generating rewards (nothing until they are scouted).
+     * Returns true when the stock was filled here and the shop's own rewards should not be generated.
+     */
+    public static boolean addShopRewards(ShopData data, Array<Reward> stock) {
+        String shopName = data.name.toLowerCase();
+        if (!shopName.contains("equipment") && !shopName.contains("items")) return false;
+        switch (ArchipelagoData.getInstance().getArchipelagoMode()) {
+            case solo_randomizer:
+                Object[] randomizedEquipmentList = LocalRandomizer.getInstance().getItemsForEquipmentShop(data.name);
+                if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
+                    for (int i = 0; i < randomizedEquipmentList.length; i++) {
+                        data.rewards.set(i, generateRewardData("item", 1, randomizedEquipmentList[i].toString()));
+                    }
+                }
+                return false;
+            case networked_archipelago:
+                Set<ItemData> shopItems = ArchipelagoRandomizer.getInstance().getShopItems(data.name);
+                if (shopItems != null && shopItems.size() <= data.rewards.size) {
+                    for (ItemData item : shopItems) {
+                        stock.add(new Reward(item));
+                    }
+                }
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static Reward generateReward(String type, int count, String itemName) {

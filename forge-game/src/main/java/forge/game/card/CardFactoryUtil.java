@@ -43,6 +43,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityForetell;
 import forge.game.staticability.StaticAbilityPlotZone;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -2969,7 +2970,7 @@ public class CardFactoryUtil {
                     Player activator = this.getActivatingPlayer();
                     final Game game = activator.getGame();
 
-                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                    if (!game.getPhaseHandler().isPlayerTurn(activator) && !StaticAbilityForetell.canForetellAnyTurn(activator, getHostCard())) {
                         return false;
                     }
 
@@ -3950,6 +3951,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Nightbound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Prismatic")) {
+            String effect = "Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Protection")) {
             String valid = Protection.getProtectionValid(keyword, false);
 
@@ -4113,6 +4117,16 @@ public class CardFactoryUtil {
 
         re.setOverridingAbility(saShuffle);
 
+        return re;
+    }
+
+    public static ReplacementEffect setupVengeanceAbility(CardState card) {
+        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile "
+                + "| ValidStackSa$ Spell.Vengeance | Secondary$ True | Description$ Vengeance";
+        String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
+        re.setOverridingAbility(AbilityFactory.getAbility(abExile, card));
         return re;
     }
 

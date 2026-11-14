@@ -1,0 +1,10 @@
+Name:Borg Scout Sphere
+ManaCost:2 U
+Types:Artifact Spacecraft
+PT:5/5
+K:Station:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Spacecraft enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddStaticAbility$ DBStatic | Description$ STATION 6+ Artifact creatures you control have flying.
+SVar:DBStatic:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Flying | Description$ Artifact creatures you control have flying.
+Oracle:When this Spacecraft enters, draw a card.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.)\nSTATION 6+\nArtifact creatures you control have flying.

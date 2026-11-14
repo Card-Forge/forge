@@ -13,7 +13,9 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameType;
 import forge.game.GameView;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
@@ -21,6 +23,7 @@ import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMagnifyView;
+import forge.screens.match.MatchController;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -80,11 +83,24 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable()
                 .command(e -> hide()).build()
         );
-        lblTitle.setText(composeTitle(game0));
+        lblTitle.setText((MatchController.instance.isReplay() ? "Replay: " : "") + composeTitle(game0));
+        if (MatchController.instance.isReplay()) {
+            btnQuit.setText("Close replay");
+            btnContinue.setEnabled(false); // disabled buttons are left out of the layout
+            btnRestart.setEnabled(false);
+        } else if (game0.getGameType() == GameType.Puzzle) {
+            // a puzzle is one fixed game: no next game and no new match, only trying it again
+            btnContinue.setEnabled(false);
+            final boolean tutorial = HowToPlay.isTutorialGame(game0);
+            btnRestart.setText(tutorial ? HowToPlay.restartLabel() : Forge.getLocalizer().getMessage("lblRestartPuzzle"));
+            btnQuit.setText(tutorial ? HowToPlay.quitLabel() : Forge.getLocalizer().getMessage("lblQuitPuzzle"));
+        }
 
         // Control of the win/lose is handled differently for various game modes
         ControlWinLose control = null;
-        switch (game0.getGameType()) {
+        // a recording only shows what happened: no rewards, no saving results, no next game
+        final boolean replay = MatchController.instance.isReplay();
+        switch (replay ? GameType.Constructed : game0.getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;
@@ -251,6 +267,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
+            if (Forge.isMobileAdventureMode) {
+                if (btnContinue.isEnabled()) {
+                    btnContinue.trigger();
+                } else {
+                    btnQuit.trigger();
+                }
+                return true;
+            }
             btnQuit.trigger(); //quit on escape or back
             return true;
         } else if (keyCode == Keys.SPACE || keyCode == Keys.ENTER) {

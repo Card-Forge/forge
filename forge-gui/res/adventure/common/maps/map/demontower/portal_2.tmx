@@ -47,7 +47,8 @@
     <property name="dialog">[
   {
     &quot;text&quot;:&quot;The inscription reads: Congratulations Adventurer! Just for finding this place you have won a prize!&quot;,
-    &quot;options&quot;:Happily walk toward your prize&quot; }
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Happily walk toward your prize&quot; }
 ]
 }
 ]</property>

@@ -21,6 +21,7 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.*;
 import forge.item.PaperCard;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.gauntlet.*;
@@ -300,6 +301,7 @@ public class DeckController<T extends DeckBase> {
         }
         modelPath = path;
         load(name);
+        CDeckEditorUI.SINGLETON_INSTANCE.clearEditorFormat();
     }
 
     /**

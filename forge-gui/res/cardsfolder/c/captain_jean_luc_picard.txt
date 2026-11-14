@@ -1,0 +1,11 @@
+Name:Captain Jean-Luc Picard
+ManaCost:2 W
+Types:Legendary Creature Human Officer
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
+T:Mode$ SpellCast | ValidCard$ Creature,Spacecraft | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature or Spacecraft spell, create a 1/1 red Officer creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_officer | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ tapXType<7/Officer> | Origin$ Library | Destination$ Battlefield | ChangeType$ Spacecraft | ChangeNum$ 1 | WithCountersType$ CHARGE | WithCountersAmount$ 7 | SpellDescription$ Search your library for a Spacecraft card, put it onto the battlefield with seven charge counters on it, then shuffle.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Officer|Spacecraft
+Oracle:Other creatures you control get +1/+1.\nWhenever you cast a creature or Spacecraft spell, create a 1/1 red Officer creature token.\nTap seven untapped Officers you control: Search your library for a Spacecraft card, put it onto the battlefield with seven charge counters on it, then shuffle.

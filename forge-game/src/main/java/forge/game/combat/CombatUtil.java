@@ -216,15 +216,12 @@ public class CombatUtil {
         // or if not possible a planeswalker or a player which does goaded her
         if (attacker.isGoaded()) {
             final boolean goadedByDefender = defender instanceof Player && attacker.isGoadedBy((Player) defender);
-            // attacker got goaded by defender or defender is not player
             if (goadedByDefender || !(defender instanceof Player)) {
                 for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                    if (!ge.equals(defender) && ge instanceof Player) {
+                    if (!ge.equals(defender) && ge instanceof Player && !attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge) && getAttackCost(game, attacker, ge) == null) {
                         // found a player which does not goad that creature
-                        // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
-                            return false;
-                        }
+                        // without a cost, which nobody is required to pay (CR 508.1d)
+                        return false;
                     }
                 }
             }
@@ -523,8 +520,9 @@ public class CombatUtil {
             }
 
             // Rule 802.4a: A player can block only creatures attacking him/her or a planeswalker he/she controls
+            // CR 805.10d: under shared team turns, creatures attacking any player of their team
             Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
-            if (attacked != null && attacked != defendingPlayer) {
+            if (attacked != null && !attacked.sharesTeamWith(defendingPlayer)) {
                 return false;
             }
         }
@@ -697,6 +695,20 @@ public class CombatUtil {
             }
         }
 
+        // CR 805.10d: a team declares one combined block, which the game checks once all its players have declared
+        if (defending.getGame().getRules().hasSharedTeamTurns()) {
+            return null;
+        }
+        return validateBlockRestrictions(combat, defending, blockers);
+    }
+
+    /** Checks the combined block of the defender's team, which must be legal as a whole once all its players have declared (CR 805.10d). */
+    public static String validateTeamBlock(final Combat combat, final Player defender) {
+        return validateBlockRestrictions(combat, defender, CardLists.filterControlledBy(combat.getAllBlockers(), defender.getSharedTeam()));
+    }
+
+    /** Checks the restrictions that depend on the other blockers and on the number of blockers per attacker. */
+    public static String validateBlockRestrictions(final Combat combat, final Player defending, final List<Card> blockers) {
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
             boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
@@ -720,7 +732,12 @@ public class CombatUtil {
             }
         }
 
-        for (final Card attacker : attackers) {
+        final int maxBlockers = StaticAbilityBlockRestrict.blockRestrictNum(defending);
+        if (blockers.size() > maxBlockers) {
+            return TextUtil.concatWithSpace("No more than", String.valueOf(maxBlockers), "creatures can block each combat.");
+        }
+
+        for (final Card attacker : combat.getAttackers()) {
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
             if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers, combat))
@@ -752,11 +769,12 @@ public class CombatUtil {
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
-            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
+            // the lure check reads the attacker's own keywords; getBlockCost walks every card in the game
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
                 continue;
             }
 
-            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 
@@ -766,10 +784,7 @@ public class CombatUtil {
 
                 if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                     final List<Card> blockers = defendingPlayer.getCreaturesInPlay();
-                    blockers.remove(blocker);
-                    if (!canBeBlocked(attacker, blockers, combat)) {
-                        canBe = false;
-                    }
+                    canBe = canBeBlocked(attacker, blockers, combat);
                 }
                 if (canBe) {
                     requirementCards.add(attacker);
@@ -790,9 +805,7 @@ public class CombatUtil {
                 if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                     final List<Card> blockers = freeBlockers != null ? new CardCollection(freeBlockers) : defendingPlayer.getCreaturesInPlay();
                     blockers.remove(blocker);
-                    if (!canBeBlocked(attacker, blockers, combat)) {
-                        canBe = false;
-                    }
+                    canBe = canBeBlocked(attacker, blockers, combat);
                 }
                 if (canBe) {
                     requirementCards.add(attacker);
@@ -800,15 +813,21 @@ public class CombatUtil {
             }
         }
 
-        if (requirementCards.isEmpty()) {
+        if (requirementCards.isEmpty() || combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
             return false;
         }
 
-        if (combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
+        // a creature that can't block alone is not required to block if no other creature can block with it
+        if ((blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone."))
+                && blocker.getController().getCreaturesInPlay().stream().noneMatch(c -> c != blocker && canBlockAtLeastOne(c, attackers))) {
             return false;
         }
 
         if (!canBlock(blocker, combat)) {
+            // the maximum number of blockers is already reached by others
+            if (combat.getAttackersBlockedBy(blocker).isEmpty()) {
+                return false;
+            }
             // the blocker can't block more but is he even part of another requirement?
             for (final Card attacker : attackers) {
                 final boolean requirementSatisfied = attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker));

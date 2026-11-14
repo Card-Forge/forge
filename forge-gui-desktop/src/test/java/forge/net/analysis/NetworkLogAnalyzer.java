@@ -36,7 +36,7 @@ public class NetworkLogAnalyzer {
     // ==================== Structured (delta sync) patterns ====================
 
     private static final Pattern DELTA_PACKET_PATTERN = Pattern.compile(
-            "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(\\d+)%" +
+            "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(-?\\d+)%" +
             "(?:, StateOnlyDelta=(\\d+) bytes, StateOnlyFull=(\\d+) bytes)?");
 
     private static final Pattern GAME_EVENT_OUTCOME_PATTERN = Pattern.compile(

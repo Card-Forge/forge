@@ -84,7 +84,7 @@ public class SpecialCardAi {
             final Game game = ai.getGame();
 
             // TODO This is basically removal, so we may want to play this at other times
-            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().getNextTurn() != ai) {
+            if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || !game.getPhaseHandler().isPlayerNextTurn(ai)) {
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
             }
 
@@ -264,7 +264,7 @@ public class SpecialCardAi {
             if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
                 animated.addCounterInternal(CounterEnumType.P1P1, 2, ai, false, null, null);
             }
-            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai);
             boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
             boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
 
@@ -982,6 +982,15 @@ public class SpecialCardAi {
                     CardPredicates.nameNotEquals(sa.getHostCard().getName()));
             lib.sort(CardLists.CmcComparatorInv);
 
+            if (ai.getController() instanceof PlayerControllerAi) {
+                // A deck built around a combo (madness, Psychatog, storm...) knows what it is missing: ask for that, whatever the profile says.
+                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai)
+                        .tutorPicks(ai, lib, changeNum);
+                if (planned != null) {
+                    return planned;
+                }
+            }
+
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
             List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
 
@@ -1163,7 +1172,7 @@ public class SpecialCardAi {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
             CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
 
-            if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !availableGates.isEmpty()) {
+            if (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai) && !availableGates.isEmpty()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
@@ -1342,10 +1351,10 @@ public class SpecialCardAi {
             // TODO: Any other bad effects like that?
             boolean blackViseOTB = game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Black Vise"));
 
-            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
+            if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
@@ -1863,7 +1872,7 @@ public class SpecialCardAi {
             }
             int oppLossPerDraw = 0;
             int aiLossPerDraw = 0;
-            // Looks for value when opponents draw cards e.g. (Underworld Dreams, Scrawling Crawler, ...)
+            // Looks for value when opponents draw cards. Only damage and life loss effects are counted.
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
                 for (Trigger t : c.getTriggers()) {
                     if (t.getMode() != TriggerType.Drawn || !t.requirementsCheck(ai.getGame())) {
@@ -1886,11 +1895,11 @@ public class SpecialCardAi {
                 }
             }
             int oppLoss = oppLossPerDraw * numDraw;
-            // Win even through symmetrical damage: our triggers hurting opponents are ordered to resolve first
+            // Win despite symmetrical damage, our triggers hurting opponents are ordered to resolve first
             if (oppLossPerDraw > 0 && ai.getOpponents().allMatch(p -> p.canLoseLife() && p.getLife() <= oppLoss)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if (aiLossPerDraw * numDraw >= ai.getLife() && ai.canLoseLife()) {
-                // Don't kill ourselves with symmetrical damage
+                // Don't lose the game due to symmetrical damage
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (oppLossPerDraw > 0) {
                 // Go for it if the draws are lethal for an opponent
@@ -1905,7 +1914,7 @@ public class SpecialCardAi {
             int maxOppHandSize = 0;
 
             final int HAND_SIZE_THRESHOLD = 3;
-            // The more the opponents lose per draw, the more cards in hand we're willing to give up for it
+            // the more the opponents lose per draw, the more cards in hand we're willing to give up for it
             final int lowHandSize = HAND_SIZE_THRESHOLD + Math.max(0, oppLossPerDraw - aiLossPerDraw);
 
             for (Player p : ai.getOpponents()) {
@@ -2131,10 +2140,10 @@ public class SpecialCardAi {
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.
 
-            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN)
+            if (ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // draw +1 card when at max hand size, hoping to draw a workable spell or land
@@ -2164,7 +2173,7 @@ public class SpecialCardAi {
             CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
             if (cardsInGY.size() == 0) {
                 return false;
-            } else if (ai.getGame().getPhaseHandler().getPlayerTurn() != ai) {
+            } else if (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                 // The AI is not very good at deciding for what to viably do during the opp's turn when this
                 // comes from an instant speed effect (e.g. Magus of the Will)
                 return false;

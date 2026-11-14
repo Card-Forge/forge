@@ -41,11 +41,11 @@ jobs:
 
       - name: Install Android maven plugin
         run: |
-          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
-          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
-          curl -L -o android-maven-plugin-4.6.2.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.jar
-          curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
-          #mvn install:install-file -Dfile=android-maven-plugin-4.6.2.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.2 -Dpackaging=jar
+          # The fork's Android pom uses Card-Forge's 4.6.3 (com.github.cardforge.maven.plugins), which isn't on Maven Central
+          mkdir  -p ~/.m2/repository/com/github/cardforge/maven/plugins/android-maven-plugin/4.6.3
+          cd ~/.m2/repository/com/github/cardforge/maven/plugins/android-maven-plugin/4.6.3
+          curl -fL -o android-maven-plugin-4.6.3.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.3/android-maven-plugin-4.6.3.jar
+          curl -fL -o android-maven-plugin-4.6.3.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.3/android-maven-plugin-4.6.3.pom
           cd -
           mvn install -Dmaven.test.skip=true
           mvn dependency:tree
