@@ -2,13 +2,14 @@ package forge.ai.ability;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import forge.ai.*;
+import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import forge.ai.AITest;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
@@ -150,4 +151,97 @@ public class DamageDealAiTest extends AITest {
         // AI should choose ally's worst creature before its own
         AssertJUnit.assertEquals("AI should target ally's creature before its own when mandatory", allyCreature, chosen);
     }
+
+    @Test
+    public void testDistributeDamageBetweenThreeCreaturesTargetsAll() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCards("Forest", 10, ai);
+        addCard("Ghalta, Primal Hunger", ai);
+
+        Player user = game.getPlayers().get(0);
+        addCard("Hill Giant", user);
+        addCard("Colossal Dreadmaw", user);
+        addCard("Siege Mastodon", user);
+
+        Card source = addCardToZone("Monstrous Onslaught", ai, ZoneType.Hand);
+        SpellAbility sa = source.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        MyRandom.setRandom(new Random(0));
+        List<SpellAbility> plays = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
+        boolean isCast = plays != null && plays.stream().anyMatch(p -> p.getHostCard() == sa.getHostCard());
+        AssertJUnit.assertTrue(isCast);
+        AssertJUnit.assertEquals(12, sa.getTotalDividedValue());
+        AssertJUnit.assertEquals(3, sa.getTargets().size());
+    }
+
+    @Test
+    public void testDistributeDamageBetweenFourCreaturesTargetsOnlyTwo() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCards("Forest", 10, ai);
+        addCard("Ghalta, Primal Hunger", ai);
+
+        Player user = game.getPlayers().get(0);
+        addCard("Craw Wurm", user);
+        addCard("Craw Wurm", user);
+        addCard("Colossal Dreadmaw", user);
+        addCard("Siege Mastodon", user);
+
+        Card source = addCardToZone("Monstrous Onslaught", ai, ZoneType.Hand);
+        SpellAbility sa = source.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        MyRandom.setRandom(new Random(0));
+        List<SpellAbility> plays = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
+        boolean isCast = plays != null && plays.stream().anyMatch(p -> p.getHostCard() == sa.getHostCard());
+        AssertJUnit.assertTrue(isCast);
+        AssertJUnit.assertEquals(12, sa.getTotalDividedValue());
+        AssertJUnit.assertEquals(3, sa.getTargets().size());
+    }
+
+    @Test
+    public void testDistributeDamageBetweenTwoCreaturesTargetsOne() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCards("Forest", 10, ai);
+        addCard("Ravenous Gigantotherium", ai);
+
+        Player user = game.getPlayers().get(0);
+        addCard("Hill Giant", user);
+        addCard("Hill Giant", user);
+
+        Card source = addCardToZone("Monstrous Onslaught", ai, ZoneType.Hand);
+        SpellAbility sa = source.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        MyRandom.setRandom(new Random(0));
+        List<SpellAbility> plays = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
+        boolean isCast = plays != null && plays.stream().anyMatch(p -> p.getHostCard() == sa.getHostCard());
+        AssertJUnit.assertTrue(isCast);
+        AssertJUnit.assertEquals(3, sa.getTotalDividedValue());
+        AssertJUnit.assertEquals(1, sa.getTargets().size());
+    }
+
+    @Test
+    public void testDistributeDamageNotTargetsSpellIfNoKills() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCards("Forest", 10, ai);
+        addCard("Ravenous Gigantotherium", ai);
+
+        Player user = game.getPlayers().get(0);
+        addCard("Colossal Dreadmaw", user);
+
+        Card source = addCardToZone("Monstrous Onslaught", ai, ZoneType.Hand);
+        SpellAbility sa = source.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        MyRandom.setRandom(new Random(0));
+        List<SpellAbility> plays = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
+        boolean isCast = plays != null && plays.stream().anyMatch(p -> p.getHostCard() == sa.getHostCard());
+        AssertJUnit.assertFalse(isCast);
+    }
+
 }

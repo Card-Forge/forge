@@ -38,8 +38,12 @@ import java.util.List;
 import java.util.Map;
 
 import forge.util.IterableUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DamageDealAi extends DamageAiBase {
+
+    private static final Logger log = LoggerFactory.getLogger(DamageDealAi.class);
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
@@ -338,7 +342,6 @@ public class DamageDealAi extends DamageAiBase {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
-
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
 
@@ -570,6 +573,7 @@ public class DamageDealAi extends DamageAiBase {
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         int totalTargetedSoFar = -1;
+        boolean mandatoryForDividedCreatures = mandatory;
         while (sa.canAddMoreTarget()) {
             if (totalTargetedSoFar == tcs.size()) {
                 // Avoid looping endlessly when choosing targets for cards with variable target number and type
@@ -647,7 +651,7 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack or from taking combat damage
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
-                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
+                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatoryForDividedCreatures);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (!immediately && sa.getMaxTargets() == 1 && !divided) {
@@ -658,16 +662,17 @@ public class DamageDealAi extends DamageAiBase {
                     tcs.add(c);
                     if (divided) {
                         // if only other legal targets hurt own stuff just dump all dmg into this
-                        final Card nextTarget = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
-                        boolean dump = false;
-                        if (nextTarget != null && nextTarget.getController().equals(ai)) {
-                            dump = true;
-                        }
+                        final Card nextTarget = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatoryForDividedCreatures);
+                        boolean dump = nextTarget == null || nextTarget.getController().equals(ai);
                         final int assignedDamage = dump ? dmg : ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         sa.addDividedAllocation(c, Math.min(assignedDamage, dmg));
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
+                        }
+                        //If damage from a spell or ability must be divided among creatures then if available target remains it receives the damage even if that damage isn't enough to destroy it
+                        if (!nextTarget.getController().equals(ai) && nextTarget.getCurrentToughness() > dmg) {
+                            mandatoryForDividedCreatures = true;
                         }
                     }
                     continue;
