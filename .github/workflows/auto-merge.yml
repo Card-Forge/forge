@@ -1,0 +1,83 @@
+# Turns on auto-merge for pull requests from allowlisted authors when every changed file
+# lies under one of that author's paths. GitHub merges once the required checks pass,
+# and no sooner than five minutes after the pull request was opened.
+# To stop a pull request merging, mark it as a draft or add the WAIT label.
+# Turning auto-merge off by hand does not last, because the next event turns it back on.
+name: Auto-merge allowlisted PRs
+
+on:
+  # pull_request_target runs this file as it is on master, with a token that can merge.
+  # It must never check out or run code from the pull request.
+  pull_request_target:
+    branches: [master]
+    types: [opened, reopened, synchronize, ready_for_review, converted_to_draft, labeled, unlabeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  auto-merge:
+    if: github.repository == 'Card-Forge/forge'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the author and changed files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # The id is matched, because an account's old username can be taken by someone else after a rename.
+          # Each path must end with "/" so that it cannot match a sibling folder with a longer name.
+          ALLOWLIST: |
+            [
+              { "user": "VigilantSera", "id": 249134373, "paths": ["forge-gui/res/adventure/Realm of Legends/"] }
+            ]
+          PR: ${{ github.event.pull_request.number }}
+          AUTHOR_ID: ${{ github.event.pull_request.user.id }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
+          CREATED_AT: ${{ github.event.pull_request.created_at }}
+        run: |
+          set -euo pipefail
+
+          paths=$(jq -c --argjson id "$AUTHOR_ID" 'map(select(.id == $id)) | first | .paths // []' <<< "$ALLOWLIST")
+          if [ "$paths" = "[]" ]; then
+            echo "The author is not on the allowlist."
+            exit 0
+          fi
+
+          disable_auto_merge() {
+            echo "$1"
+            gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --disable-auto || true
+            exit 0
+          }
+
+          # The files endpoint lists at most 3000 files.
+          [ "$CHANGED_FILES" -gt 3000 ] && disable_auto_merge "The pull request changes too many files to check."
+
+          # A rename also counts its old path, so a file cannot be moved in from elsewhere.
+          outside=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" \
+              --jq '.[] | .filename, (.previous_filename // empty)' \
+            | jq -R -r --argjson paths "$paths" \
+              'select(. as $file | $paths | any(. as $p | $file | startswith($p)) | not)')
+          if [ -n "$outside" ]; then
+            disable_auto_merge "Files outside the allowed paths:"$'\n'"$outside"
+          fi
+
+          # Gives the author time to add WAIT or convert to a draft after opening the pull request.
+          wait=$(( $(date -d "$CREATED_AT" +%s) + 300 - $(date +%s) ))
+          [ "$wait" -gt 0 ] && sleep "$wait"
+
+          # Read live state, because the event payload can predate a label, a draft change or a push.
+          state=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json isDraft,labels,headRefOid)
+          if [ "$(jq -r .headRefOid <<< "$state")" != "$HEAD_SHA" ]; then
+            echo "The pull request has a newer commit, which its own run will check."
+            exit 0
+          fi
+          [ "$(jq -r .isDraft <<< "$state")" = "true" ] && disable_auto_merge "The pull request is a draft."
+          jq -e 'any(.labels[]; .name == "WAIT")' <<< "$state" > /dev/null \
+            && disable_auto_merge "The pull request is labelled WAIT."
+
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --auto --merge --match-head-commit "$HEAD_SHA"
