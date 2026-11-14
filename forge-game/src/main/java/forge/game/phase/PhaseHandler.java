@@ -265,7 +265,8 @@ public class PhaseHandler implements IHasForgeLog {
                 return !getActivePlayers().allMatch(Player::isInGame);
 
             case COMBAT_DECLARE_BLOCKERS:
-                skipDamageSteps = !inCombat() || combat.getAttackers().isEmpty();
+                // CR 508.8
+                skipDamageSteps = !inCombat() || (!combat.hasDeclaredAttackers() && combat.getAttackers().isEmpty());
                 //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
@@ -695,6 +696,7 @@ public class PhaseHandler implements IHasForgeLog {
         if (game.isGameOver()) { // they just like to close window at any moment
             return;
         }
+        combat.setAttackersDeclared(!combat.getAttackers().isEmpty());
 
         game.getTriggerHandler().resetActiveTriggers();
 

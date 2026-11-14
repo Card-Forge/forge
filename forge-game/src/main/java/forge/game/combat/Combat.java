@@ -59,6 +59,7 @@ import java.util.Map.Entry;
 public class Combat {
     private final Player playerWhoAttacks;
     private boolean legacyOrderCombatants;
+    private boolean attackersDeclared;
     private AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
     private final Supplier<FCollection<GameEntity>> attackableEntries = Suppliers.memoize(FCollection::new);
@@ -81,6 +82,7 @@ public class Combat {
 
     public Combat(Combat combat, IEntityMap map) {
         playerWhoAttacks = map.map(combat.playerWhoAttacks);
+        attackersDeclared = combat.attackersDeclared;
         for (GameEntity entry : combat.attackableEntries.get()) {
             attackableEntries.get().add(map.map(entry));
         }
@@ -126,6 +128,13 @@ public class Combat {
         }
 
         attackConstraints = new AttackConstraints(this);
+    }
+
+    public boolean hasDeclaredAttackers() {
+        return attackersDeclared;
+    }
+    public void setAttackersDeclared(boolean declared) {
+        attackersDeclared = declared;
     }
 
     private boolean isRealCombat() {
