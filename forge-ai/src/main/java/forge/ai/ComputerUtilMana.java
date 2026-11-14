@@ -219,6 +219,16 @@ public class ComputerUtilMana {
                 }
 
                 // Mana abilities on the same card
+                // more mana is only better when it costs the same kind of resource and does nothing else
+                if (ability1.getHostCard() == ability2.getHostCard()
+                        && ability1.getPayCosts().isReusuableResource() == ability2.getPayCosts().isReusuableResource()
+                        && ability1.getSubAbility() == null && ability2.getSubAbility() == null) {
+                    final int moreMana = ability2.amountOfManaGenerated(true) - ability1.amountOfManaGenerated(true);
+                    if (moreMana != 0) {
+                        return moreMana;
+                    }
+                }
+
                 String shardMana = shard.toShortString();
 
                 boolean payWithAb1 = shardMana.contains(ability1.getManaPart().mana(ability1));

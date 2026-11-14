@@ -173,6 +173,39 @@ public class ComputerUtilManaTest extends SimulationTest {
         assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
     }
 
+    private CardCollection sourcesToPay(final Player p, final String cost) {
+        // applies the static abilities that grant the mana abilities
+        p.getGame().getAction().checkStateEffects(true);
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        return ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser(cost))), sa, p, false);
+    }
+
+    @Test
+    public void grantedTwoManaAbilityOnLandPaysBothShards() {
+        final Player p = sacrificeBoard(0, "Mountain", "Mountain");
+        final Card forest = addCard("Forest", p);
+        addCard("Gift of Paradise", p).attachToEntity(forest, null);
+        assertEquals(sourcesToPay(p, "1 G"), new CardCollection(forest));
+    }
+
+    @Test
+    public void grantedTwoManaAbilityOnTreasurePaysBothShards() {
+        final Player p = sacrificeBoard(0, "Goldspan Dragon");
+        final Card treasure = addToken("c_a_treasure_sac", p);
+        assertEquals(sourcesToPay(p, "1 R"), new CardCollection(treasure));
+    }
+
+    @Test
+    public void landIsNotSacrificedForMoreManaThanNeeded() {
+        // Crystal Vein's sacrifice ability makes {C}{C}, but {1} only needs the tap ability
+        final Player p = sacrificeBoard(0, "Crystal Vein");
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertTrue(ComputerUtilMana.payManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("1"))), sa, p, false));
+        assertEquals(p.getCardsIn(ZoneType.Battlefield).size(), 1, "Crystal Vein should still be on the battlefield");
+    }
+
     @Test
     public void humanScannedByAiCountsSacrificeMana() {
         final Player p = sacrificeBoard(2, "Phyrexian Altar", "Blood Pet");

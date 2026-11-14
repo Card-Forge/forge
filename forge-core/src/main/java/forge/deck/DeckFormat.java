@@ -78,7 +78,7 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
-    CommanderDraft ( Range.of(59, 99),                     Range.of(0, 15), Integer.MAX_VALUE),
+    CommanderDraft ( Range.of(59, 99),                     null, Integer.MAX_VALUE),
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
@@ -413,7 +413,8 @@ public enum DeckFormat {
 
     /**
      * Checks only the commander part of a deck: the commander(s) themselves, partnerships,
-     * and that every card in the main deck and sideboard fits their color identity.
+     * and that every card in the main deck and sideboard fits their color identity
+     * (the main deck only for Commander Draft).
      * Deck size and card copies are not checked.
      * @return a description of the problem, or null if the commanders are fine
      */
@@ -504,7 +505,8 @@ public enum DeckFormat {
                 }
             }
         }
-        if (deck.has(DeckSection.Sideboard)) {
+        // A commander draft sideboard holds the rest of the drafted pool
+        if (deck.has(DeckSection.Sideboard) && this != CommanderDraft) {
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
                 if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
                     continue;

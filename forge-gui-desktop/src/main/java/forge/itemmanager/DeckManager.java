@@ -27,6 +27,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -40,7 +41,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
-import forge.deck.DeckSection;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorCommanderDraftLimited;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
@@ -405,8 +405,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                if (deck != null && (deck.getDeck().getTags().contains("CommanderDraft")
-                        || deck.getDeck().has(DeckSection.Commander))) {
+                if (deck != null && CommanderDraftUtil.isCommanderDraftDeck(deck.getDeck())) {
                     editorCtrl = new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
                             screen, getCDetailPicture(), null);
                 } else {
