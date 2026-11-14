@@ -1,6 +1,7 @@
 package forge.screens.limited;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -8,18 +9,15 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
-import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.limited.CommanderDraftUtil;
-import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.net.EventFormat;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.toolbox.Frost;
 import forge.util.GuiPrefBinders;
@@ -28,7 +26,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.LoadGameMenu;
@@ -132,8 +129,10 @@ public class LoadDraftScreen extends LaunchScreen {
                 return;
             }
 
+            final LimitedMatch limitedMatch = FModel.getLimitedMatch();
+            final List<Deck> aiDecks = limitedMatch.getAiDecks(GameType.Draft, humanDeck.getDeck());
             // Event decks lack a DeckGroup for gauntlet/AI play
-            if (FModel.getDecks().getDraft().get(humanDeck.getName()) == null) {
+            if (aiDecks.isEmpty()) {
                 FThreads.invokeInEdtLater(() ->
                     FOptionPane.showErrorDialog(
                         Forge.getLocalizer().getMessage("lblEventDeckEditOnly"),
@@ -143,65 +142,33 @@ public class LoadDraftScreen extends LaunchScreen {
 
             // TODO: if booster draft tournaments are supported in the future, add the possibility to choose them here
             final boolean gauntlet = cbMode.getSelectedItem().equals(Forge.getLocalizer().getMessage("lblGauntlet"));
+            final Integer choice = SGuiChoose.getInteger(Forge.getLocalizer().getMessage(
+                    gauntlet ? "lblHowManyOpponents" : "lblWhichOpponentWouldYouLikeToFace"), 1, aiDecks.size());
+            if (choice == null) {
+                return; // Cancel was pressed
+            }
 
-            if (gauntlet) {
-                final Integer rounds = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"),
-                        1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
-                if (rounds == null) {
+            FThreads.invokeInEdtLater(() -> {
+                if (!checkDeckLegality(humanDeck)) {
                     return;
                 }
 
-                FThreads.invokeInEdtLater(() -> {
-                    if (!checkDeckLegality(humanDeck)) {
-                        return;
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
+                    if (gauntlet) {
+                        limitedMatch.launchGauntlet(GameType.Draft, humanDeck.getDeck(), choice);
+                    } else {
+                        limitedMatch.startMatch(GameType.Draft, humanDeck.getDeck(), Collections.singletonList(aiDecks.get(choice - 1)));
                     }
-
-                    LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
-                        FModel.getLimitedMatch().resetGauntletDraft();
-                        FModel.getLimitedMatch().launch(rounds, humanDeck.getDeck(), GameType.Draft);
-                    });
                 });
-            } else {
-                final Integer aiIndex = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblWhichOpponentWouldYouLikeToFace"),
-                        1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
-                if (aiIndex == null) {
-                    return; // Cancel was pressed
-                }
-
-                final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
-                final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);
-                if (aiDeck == null) {
-                    throw new IllegalStateException("Draft: Computer deck is null!");
-                }
-
-                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
-                    if (!checkDeckLegality(humanDeck)) {
-                        return;
-                    }
-
-                    final List<RegisteredPlayer> starter = new ArrayList<>();
-                    final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-                    starter.add(human);
-                    starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-                    for (final RegisteredPlayer pl : starter) {
-                        pl.assignConspiracies();
-                    }
-
-                    FModel.getLimitedMatch().resetGauntletDraft();
-                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                    hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
-                }));
-            }
+            });
         });
     }
 
     private boolean checkDeckLegality(DeckProxy humanDeck) {
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Draft.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-            if (errorMessage != null) {
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblInvalidDeckDesc").replace("%n", errorMessage), Forge.getLocalizer().getMessage("lblInvalidDeck"));
-                return false;
-            }
+        String errorMessage = FModel.getLimitedMatch().getDeckProblem(GameType.Draft, humanDeck.getDeck());
+        if (errorMessage != null) {
+            FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblInvalidDeckDesc").replace("%n", errorMessage), Forge.getLocalizer().getMessage("lblInvalidDeck"));
+            return false;
         }
         return true;
     }

@@ -18,26 +18,25 @@
 package forge.gamemodes.limited;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.game.GameType;
+import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Aggregates;
 
 /**
- * <p>
- * LimitedMatch class.
- * </p>
- *
- * @author Forge
- * @version $Id: LimitedMatch.java $
- * @since 1.2.xx
+ * Starts matches between a saved limited deck and the AI decks drafted or built alongside it,
+ * either as a single match or as a gauntlet of rounds.
  */
 public class LimitedMatch {
     private HostedMatch hostedMatch = null;
@@ -46,16 +45,14 @@ public class LimitedMatch {
     private int currentRound;
     private int wins;
     private int losses;
-    private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
-    private GameType gauntletType;
-    private final List<RegisteredPlayer> aiOpponents = new ArrayList<>();
+    private boolean gauntlet;
+    private GameType gameType;
+    private final List<Deck> aiOpponents = new ArrayList<>();
 
     public LimitedMatch() {
         currentRound = 1;
-        gauntletDraft = false;
         wins = 0;
         losses = 0;
-        gauntletType = GameType.Sealed; // Assignable in launch();
     }
 
     /**
@@ -87,75 +84,85 @@ public class LimitedMatch {
     }
 
     /**
-     *
-     * Setup and launch the gauntlet.
-     * Note: The AI decks are connected to the human deck.
-     *
-     * @param rounds0
-     *          the number of rounds (opponent decks) in this tournament
-     * @param humanDeck0
-     *          the human deck for this tournament
-     * @param gauntletType0
-     *          game type (Sealed, Draft, Constructed...)
+     * @param mode Draft, Sealed or Winston
+     * @return the AI decks saved with {@code humanDeck0}, or an empty list for an event deck that has none
      */
-    public void launch(final int rounds0, final Deck humanDeck0, final GameType gauntletType0) {
-        rounds = rounds0;
-        humanDeck = humanDeck0;
-        gauntletType = gauntletType0;
-        List<Deck> aiDecks;
+    public List<Deck> getAiDecks(final GameType mode, final Deck humanDeck0) {
+        final DeckGroup group = switch (mode) {
+            case Draft -> FModel.getDecks().getDraft().get(humanDeck0.getName());
+            case Sealed -> FModel.getDecks().getSealed().get(humanDeck0.getName());
+            case Winston -> FModel.getDecks().getWinston().get(humanDeck0.getName());
+            default -> throw new IllegalArgumentException("No saved AI decks for " + mode);
+        };
+        return group == null ? Collections.emptyList() : group.getAiDecks();
+    }
 
-        switch (gauntletType) {
-            case Draft:
-            case CommanderDraft:
-                gauntletDraft = true;
-                aiDecks = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
-                break;
-            case Sealed:
-                aiDecks = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
-                break;
-            default:
-                throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
+    /**
+     * @return the reason {@code deck} cannot be played in {@code mode}, or null when it can or legality is not enforced
+     */
+    public String getDeckProblem(final GameType mode, final Deck deck) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            return null;
         }
+        return resolveGameType(mode, deck).getDeckFormat().getDeckConformanceProblem(deck);
+    }
 
+    public void startMatch(final GameType mode, final Deck humanDeck0, final List<Deck> opponents) {
+        humanDeck = humanDeck0;
+        gameType = resolveGameType(mode, humanDeck0);
+        gauntlet = false;
+        host(opponents);
+    }
+
+    /**
+     * Plays the AI decks saved with {@code humanDeck0} in order, one per round.
+     * A single round is played against a random AI deck.
+     */
+    public void launchGauntlet(final GameType mode, final Deck humanDeck0, final int rounds0) {
+        final List<Deck> aiDecks = getAiDecks(mode, humanDeck0);
+        humanDeck = humanDeck0;
+        gameType = resolveGameType(mode, humanDeck0);
+        gauntlet = true;
         aiOpponents.clear();
 
-        if (rounds == 1) { //play random opponent if only playing one round
-            aiOpponents.add(new RegisteredPlayer(aiDecks.get(Aggregates.randomInt(0, aiDecks.size() - 1))));
-        }
-        else { //otherwise play opponents in order
-            if (rounds > aiDecks.size()) {
-                rounds = aiDecks.size(); //don't allow playing same opponent twice
-            }
-            for (int i = 0; i < rounds; i++) {
-                aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
-            }
+        if (rounds0 == 1) {
+            rounds = 1;
+            aiOpponents.add(aiDecks.get(Aggregates.randomInt(0, aiDecks.size() - 1)));
+        } else {
+            rounds = Math.min(rounds0, aiDecks.size());
+            aiOpponents.addAll(aiDecks.subList(0, rounds));
         }
 
         resetCurrentRound();
         startRound();
     }
 
-    /**
-     * Starts the tournament.
-     */
     private void startRound() {
-        final List<RegisteredPlayer> starter = new ArrayList<>();
-        final RegisteredPlayer human = new RegisteredPlayer(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
-        starter.add(human);
-        starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));
+        host(Collections.singletonList(aiOpponents.get(currentRound - 1)));
+    }
 
-        for (final RegisteredPlayer pl : starter) {
-            pl.assignConspiracies();
+    private void host(final List<Deck> opponents) {
+        final List<RegisteredPlayer> players = new ArrayList<>();
+        final RegisteredPlayer human = register(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+        players.add(human);
+        for (final Deck aiDeck : opponents) {
+            players.add(register(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
         }
 
         hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(gameType, gameType == GameType.CommanderDraft ? EnumSet.of(GameType.Commander) : null,
+                players, human, GuiBase.getInterface().getNewGuiGame());
+    }
 
-        Set<GameType> gameTypes = null;
-        if (gauntletType == GameType.CommanderDraft) {
-            gameTypes = Set.of(GameType.Commander);
-        }
+    private RegisteredPlayer register(final Deck deck) {
+        final RegisteredPlayer player = gameType == GameType.CommanderDraft
+                ? RegisteredPlayer.forCommander(deck) : new RegisteredPlayer(deck);
+        player.assignConspiracies();
+        return player;
+    }
 
-        hostedMatch.startMatch(gauntletType, gameTypes, starter, human, GuiBase.getInterface().getNewGuiGame());
+    private static GameType resolveGameType(final GameType mode, final Deck deck) {
+        return mode == GameType.Draft && CommanderDraftUtil.isCommanderDraftDeck(deck) ? GameType.CommanderDraft : mode;
     }
 
     /**
@@ -205,18 +212,10 @@ public class LimitedMatch {
     }
 
     /**
-     * Resets the gauntletDraft value.
+     * @return true when {@code game} is a round of the gauntlet this class is running
      */
-    public void resetGauntletDraft() {
-        gauntletDraft = false;
-    }
-
-    /**
-     * Draft mode status.
-     * @return boolean, gauntletDraft
-     */
-    public final boolean isGauntletDraft() {
-        return gauntletDraft;
+    public final boolean isGauntletRound(final GameView game) {
+        return gauntlet && hostedMatch != null && hostedMatch.getGameView() == game;
     }
 
 }

@@ -88,12 +88,10 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             case QuestDraft:
                 control = new QuestDraftWinLose(this, game0, matchUI);
                 break;
-            case Draft:
-                if (!FModel.getLimitedMatch().isGauntletDraft()) {
+            case Draft, CommanderDraft, Sealed:
+                if (!FModel.getLimitedMatch().isGauntletRound(game0)) {
                     break;
                 }
-                //$FALL-THROUGH$
-            case Sealed:
                 control = new LimitedWinLose(this, game0, matchUI);
                 break;
             case CommanderGauntlet:

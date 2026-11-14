@@ -1,7 +1,6 @@
 package forge.screens.home.sanctioned;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -13,18 +12,14 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
-import forge.gamemodes.match.HostedMatch;
-import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
@@ -99,20 +94,18 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-            if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
-                return;
-            }
+        final LimitedMatch limitedMatch = FModel.getLimitedMatch();
+        final String errorMessage = limitedMatch.getDeckProblem(gameType, humanDeck.getDeck());
+        if (null != errorMessage) {
+            FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+            return;
         }
 
         String duelType = (String)VSubmenuSealed.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
-        final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
+        final List<Deck> aiDecks = limitedMatch.getAiDecks(gameType, humanDeck.getDeck());
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
-                final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getLimitedMatch().launch(rounds, humanDeck.getDeck(), gameType);
+                limitedMatch.launchGauntlet(gameType, humanDeck.getDeck(), aiDecks.size());
             } else if ("Tournament".equals(duelType)) {
                 // TODO Allow for tournament style sealed, instead of always a gauntlet
             }
@@ -124,20 +117,7 @@ public enum CSubmenuSealed implements ICDoc {
             SOverlayUtils.showOverlay();
         });
 
-        // Restore Zero Indexing
-        final int aiIndex = Integer.parseInt(duelType)-1;
-        final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
-        if (aiDeck == null) {
-            throw new IllegalStateException("Sealed: Computer deck is null!");
-        }
-
-        final List<RegisteredPlayer> starter = new ArrayList<>();
-        final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-        starter.add(human);
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Sealed, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        limitedMatch.startMatch(gameType, humanDeck.getDeck(), List.of(aiDecks.get(Integer.parseInt(duelType) - 1)));
 
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }

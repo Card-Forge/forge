@@ -114,12 +114,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         case AdventureEvent:
             control = new AdventureWinLose(this, game0);
             break;
-        case Draft:
-            if (!FModel.getLimitedMatch().isGauntletDraft()) {
+        case Draft, CommanderDraft, Sealed:
+            if (!FModel.getLimitedMatch().isGauntletRound(game0)) {
                 break;
             }
-        //$FALL-THROUGH$
-        case Sealed:
             control = new LimitedWinLose(this, game0);
             break;
         case Gauntlet:
