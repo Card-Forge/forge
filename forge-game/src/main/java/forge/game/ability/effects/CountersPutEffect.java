@@ -527,7 +527,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         placer = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                 Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                        if (placer.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
+                        if (placer.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, gameCard, null)) {
                             gameCard.setTributed(true);
                         } else {
                             continue;

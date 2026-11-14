@@ -23,15 +23,7 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
-import forge.ai.simulation.ComboGuard;
-import forge.ai.simulation.ComboPlan;
-import forge.ai.simulation.DeckPlan;
-import forge.ai.simulation.FlatMonteCarloPicker;
-import forge.ai.simulation.FlatMonteCarloStats;
-import forge.ai.simulation.GameStateEvaluator;
-import forge.ai.simulation.OnePlaySafetyChecker;
-import forge.ai.simulation.SimAudit;
-import forge.ai.simulation.SpellAbilityPicker;
+import forge.ai.simulation.*;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -103,7 +95,6 @@ public class AiController {
     private AIOption simMode;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
-    private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     // flat Monte Carlo bookkeeping: time spent on rollouts during one turn, to keep slow devices responsive
     private int flatMcTurn = -1;
@@ -112,7 +103,17 @@ public class AiController {
     /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
     private int flatMcErrors;
     private int flatMcSlowStreak;
+    /** Errors switch Monte Carlo off for the rest of the game (a bug will not go away); slowness only pauses it. */
     private boolean flatMcTripped;
+    /** Slowness: Monte Carlo sits out a few turns, then comes back with a smaller search (see {@link #flatMonteCarloConfig}). */
+    private int flatMcSlowTrips;
+    private int flatMcPausedUntilTurn = -1;
+    private int flatMcGoodStreak;
+    private static final int FLAT_MC_PAUSE_TURNS = 3;
+    /** The search shrinks and the pause grows for this many slow spells in a row; further ones change nothing. */
+    private static final int FLAT_MC_MAX_SLOW_TRIPS = 3;
+    /** Good decisions in a row that give back one step of the search a slow spell took away. */
+    private static final int FLAT_MC_RECOVER_DECISIONS = 25;
     /** Per player switch for comparisons and tests: null follows the game-wide setting. */
     private Boolean flatMcOverride;
     private Boolean flatMcMaxOverride;
@@ -158,6 +159,10 @@ public class AiController {
     public boolean usesHybridSimulation() {
         return simMode == AIOption.USE_HYBRID_SIMULATION;
     }
+    /** Whether any simulation search (full or hybrid) takes the decisions of this AI. */
+    public boolean usesSimulation() {
+        return simMode != null;
+    }
     public boolean usesFullSimulation() {
         return simMode == AIOption.USE_FULL_SIMULATION;
     }
@@ -185,9 +190,11 @@ public class AiController {
         return memory;
     }
 
+    private StormSolver stormSolver;
+
     /** Whether Flat Monte Carlo is switched on for this player. */
     public boolean flatMonteCarloActive() {
-        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcTripped
+        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcOff()
                 && simMode == null && getBoolProperty(AiProps.FLAT_MC_ENABLED);
     }
 
@@ -258,7 +265,7 @@ public class AiController {
         for (final Card c : ccvGameBattlefield) {
             final String curse = c.getSVar("AICurseEffect");
             final Card host = sa.getHostCard();
-            if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+            if ("NonActive".equals(curse) && !game.getPhaseHandler().isPlayerTurn(player)) {
                 return true;
             } else if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                     && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
@@ -543,6 +550,52 @@ public class AiController {
         return landList;
     }
 
+    /** Whether the land would enter the battlefield tapped right now (a replacement effect that taps it, with its condition met). */
+    private boolean landEntersTapped(final Card land) {
+        // check replacement effects if land would enter tapped or not
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
+        repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+
+        // add Params for AddCounter Replacements
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(land));
+
+        for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** An Urza's land of a kind that is not in play yet, when the choice also holds one of a kind that is. */
+    private Card chooseMissingUrzaLand(final CardCollection landList) {
+        final String[] kinds = { "Mine", "Power-Plant", "Tower" };
+        Card missing = null;
+        boolean duplicate = false;
+        for (final Card land : landList) {
+            for (final String kind : kinds) {
+                if (!land.getType().hasSubtype(kind) || !land.getType().hasSubtype("Urza's")) {
+                    continue;
+                }
+                if (player.getLandsInPlay().anyMatch(l -> l.getType().hasSubtype(kind) && l.getType().hasSubtype("Urza's"))) {
+                    duplicate = true;
+                } else if (missing == null) {
+                    missing = land;
+                }
+            }
+        }
+        return duplicate ? missing : null;
+    }
+
     private Card chooseBestLandToPlay(CardCollection landList) {
         if (landList.isEmpty()) {
             return null;
@@ -588,36 +641,35 @@ public class AiController {
             landList = unreflectedLands;
         }
 
+        // a deck built around a land (Dark Depths) plays its lands in its own order, see ComboPlan
+        final Card forCombo = deckPlan(player).combos.chooseLand(player, landList);
+        if (forCombo != null) {
+            return forCombo;
+        }
+
+        // Urza's Mine, Power-Plant and Tower are worth more together: a second Tower is the one to hold back
+        if (landList.size() > 1) {
+            final Card tron = chooseMissingUrzaLand(landList);
+            if (tron != null) {
+                return tron;
+            }
+        }
+
+        // Plan the next land drops against the spells in hand (and the commander): which colours are needed when, and
+        // whether a land that enters tapped costs anything this turn. It answers only when one land is clearly better.
+        if (landList.size() > 1 && getBoolProperty(AiProps.LAND_PLANNER)) {
+            final Card planned = LandPlanner.choose(player, landList, this::landEntersTapped);
+            if (planned != null) {
+                return planned;
+            }
+        }
+
         // try to skip lands that enter the battlefield tapped if we might want to play something this turn
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
-                // check replacement effects if land would enter tapped or not
-                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
-                repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
-                repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-
-                // add Params for AddCounter Replacements
-                GameEntityCounterTable table = new GameEntityCounterTable();
-                repParams.put(AbilityKey.EffectOnly, true);
-                repParams.put(AbilityKey.CounterTable, table);
-                repParams.put(AbilityKey.CounterMap, table.column(land));
-
-                boolean foundTapped = false;
-                for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
-                    SpellAbility reSA = re.ensureAbility();
-                    if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
-                        continue;
-                    }
-                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
-                    if (reSA.metConditions()) {
-                        foundTapped = true;
-                        break;
-                    }
-                }
-
                 // TODO if this is the only source for a color we need badly prioritize it instead
-                if (foundTapped) {
+                if (landEntersTapped(land)) {
                     continue;
                 }
 
@@ -770,6 +822,9 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             sa.setActivatingPlayer(player);
+            if (StifleCombo.keepsForDreadnought(player, sa)) {
+                continue; // the Stifle is for the Dreadnought's own trigger, not for whatever the opponent does first
+            }
             // check everything necessary
 
             AiPlayDecision opinion = canPlayAndPayFor(sa);
@@ -879,6 +934,43 @@ public class AiController {
         return true;
     }
 
+    /**
+     * The check of a play made to assemble a catalogued combo: the heuristics' own approval (it sets targets), or for a
+     * spell without targets that can be cast and paid, whatever they think of a piece that does nothing alone.
+     */
+    private boolean assemblyApproved(final SpellAbility sa) {
+        try {
+            if (ComboGuard.problem(player, sa, null, deckPlan(player).combos) != null) {
+                return false;
+            }
+            sa.setActivatingPlayer(player);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            try {
+                if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                    return true;
+                }
+            } finally {
+                sa.clearLastState();
+            }
+            return (!sa.usesTargeting() || ComboAssembly.aimedDreamsKill(player, sa)) && sa.canPlay()
+                    && ComputerUtilCost.canPayCost(sa, player, false);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** The step of a loop (see {@link LoopRunner}): aimed already, so only the cost and an earlier failure are looked at. */
+    private boolean loopApproved(final SpellAbility sa) {
+        try {
+            sa.setActivatingPlayer(player);
+            return !hasFailedToCast(sa) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)
+                    && game.getStack().hasLegalTargeting(sa);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         AITimeoutTracker.check();
         final Card host = sa.getHostCard();
@@ -938,12 +1030,52 @@ public class AiController {
             return AiPlayDecision.CantAfford;
         }
 
+        // convoking would tap a creature the AI means to attack or block with, so it keeps it for combat
+        final CardCollection convoked = new CardCollection(sa.getTappedForConvoke());
+        if (!convoked.isEmpty() && game.getPhaseHandler().isPlayerTurn(player)
+                && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && (convoked.anyMatch(c -> getPredictedCombat().isAttacking(c))
+                || ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(player, null), CardCollection.EMPTY).anyMatch(convoked::contains))) {
+            return AiPlayDecision.AnotherTime;
+        }
+
         return AiPlayDecision.WillPlay;
+    }
+
+    /**
+     * A spell cast without spending mana (Snuff Out paying life, an evoke/alternative cost...) while a permanent such as
+     * Roiling Vortex punishes exactly that ("whenever a player casts a spell, if no mana was spent to cast it, ...").
+     */
+    public static boolean isPunishedForFreeCast(final SpellAbility sa) {
+        if (!sa.isSpell() || sa.getPayCosts() == null || !sa.getPayCosts().getTotalMana().isZero() || sa.costHasManaX()) {
+            return false;
+        }
+        for (final Card c : sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.SpellCast) {
+                    continue;
+                }
+                final String valid = t.getParam("ValidSA");
+                if (valid != null && valid.contains("ManaSpent EQ0")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         if (hasFailedToCast(sa)) {
             return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
+        }
+        if (deckPlan(player).combos.outletMustWait(player, sa)) {
+            return AiPlayDecision.AnotherTime; // a madness card would be thrown away at the wrong moment
+        }
+        if (deckPlan(player).combos.payoffMustWait(player, sa)) {
+            return AiPlayDecision.AnotherTime; // Replenish on a graveyard without its enchantments is a wasted card
+        }
+        if (DredgeLine.mustWait(player, deckPlan(player).combos, sa)) {
+            return AiPlayDecision.AnotherTime; // Breakthrough without the Diamond and a dredger only empties the hand
         }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
@@ -957,6 +1089,10 @@ public class AiController {
         }
 
         final Card card = sa.getHostCard();
+
+        if (isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS) && card.hasKeyword(Keyword.BUYBACK)
@@ -984,6 +1120,19 @@ public class AiController {
 
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
+            }
+            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
+                // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
+                // nothing (a 0/0 animate, a 0-point pump) and the AI repeats it at every priority pass. Size X to the mana
+                // that can be spared, and don't activate when there is none.
+                final SpellAbility root = sa.getRootAbility();
+                Integer x = root.getXManaCostPaid();
+                if (x == null || x <= 0) {
+                    x = ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
+                }
+                if (x <= 0 && sa.getSVar("X").equals("Count$xPaid")) {
+                    return AiPlayDecision.CantAffordX;
+                }
             }
         } else {
             Cost payCosts = sa.getPayCosts();
@@ -1064,6 +1213,9 @@ public class AiController {
                 if (damage >= player.getLife()) {
                     return AiPlayDecision.BadEtbEffects;
                 }
+            }
+            if (!sa.isLandAbility() && sa.isSpell() && LegalityGuard.etbWithoutTarget(player, card)) {
+                return AiPlayDecision.BadEtbEffects; // Journey to Nowhere, Oblivion Ring, Necromancy ... with nothing to aim at
             }
             if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
                 return AiPlayDecision.BadEtbEffects;
@@ -1423,16 +1575,16 @@ public class AiController {
     }
 
     /** In a simulated game: the attack to declare instead of asking the heuristics (set by a rollout, used once). */
-    private java.util.Map<Card, GameEntity> attackOverride;
+    private Map<Card, GameEntity> attackOverride;
 
-    public void setAttackOverride(final java.util.Map<Card, GameEntity> attackers) {
+    public void setAttackOverride(final Map<Card, GameEntity> attackers) {
         attackOverride = attackers;
     }
 
     private void declareOverriddenAttackers(final Combat combat) {
-        final java.util.Map<Card, GameEntity> attackers = attackOverride;
+        final Map<Card, GameEntity> attackers = attackOverride;
         attackOverride = null;
-        for (final java.util.Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
@@ -1444,17 +1596,19 @@ public class AiController {
      * already in {@code combat}. Replaces it by another attack set when rollouts clearly prefer one.
      */
     private void refineAttackWithFlatMonteCarlo(final Player attacker, final Combat combat) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || simMode != null
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || simMode != null
                 || !getBoolProperty(AiProps.FLAT_MC_ENABLED)
-                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax())
-                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax() || isFlatMonteCarloLite())
+                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                // the rollouts choose a whole attack, so they would withdraw a teammate's attackers (CR 805.10b)
+                || combat.getAttackers().anyMatch(c -> !attacker.equals(c.getController()))) {
             return;
         }
         final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
         if (cfg == null) {
             return;
         }
-        final java.util.Map<Card, GameEntity> before = new java.util.LinkedHashMap<>();
+        final Map<Card, GameEntity> before = new LinkedHashMap<>();
         for (final Card c : combat.getAttackers()) {
             before.put(c, combat.getDefenderByAttacker(c));
         }
@@ -1469,8 +1623,53 @@ public class AiController {
             return;
         }
         combat.clearAttackers();
-        for (final java.util.Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {
+        final Map<Card, GameEntity> committed = new LinkedHashMap<>();
+        if (attacker != player || simMode != null || attackOverride != null
+                || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return committed;
+        }
+        GameEntity defender = null;
+        for (final Card c : combat.getAttackers()) {
+            if (attacker.equals(c.getController()) && combat.getDefenderByAttacker(c) != null) {
+                defender = combat.getDefenderByAttacker(c); // whoever the others attack
+                break;
+            }
+        }
+        if (defender == null) {
+            defender = AiAttackController.choosePreferredDefenderPlayer(attacker);
+        }
+        final Integer attackMax = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Card c : attacker.getCreaturesInPlay()) {
+            if (!c.isLand() || c.isTapped()) {
+                continue;
+            }
+            final GameEntity already = combat.getDefenderByAttacker(c);
+            if (already != null) {
+                committed.put(c, already);
+                continue;
+            }
+            if (defender == null || !CombatUtil.canAttack(c, defender)
+                    || attackMax != null && combat.getAttackers().size() >= attackMax) {
+                continue;
+            }
+            combat.addAttacker(c, defender);
+            committed.put(c, defender);
+        }
+        return committed;
+    }
+
+    /** Puts back the committed attackers (see {@link #commitAttackers}) that the attack search took out. */
+    private void restoreCommittedAttackers(final Combat combat, final Map<Card, GameEntity> committed) {
+        for (final Map.Entry<Card, GameEntity> e : committed.entrySet()) {
+            if (!combat.isAttacking(e.getKey()) && CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -1492,7 +1691,10 @@ public class AiController {
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
+            // a creature for this attack commited
+            final Map<Card, GameEntity> committed = commitAttackers(attacker, combat);
             refineAttackWithFlatMonteCarlo(attacker, combat);
+            restoreCommittedAttackers(combat, committed);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
@@ -1505,15 +1707,20 @@ public class AiController {
         // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
         // is made at declaration time. Remove attackers the AI can't pay for.
         // Correctness-critical and cheap, so it also runs when the deadline fired (outside the armed region).
-        removeUnpayableAttackers(combat);
+        removeUnpayableAttackers(attacker, combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
-            combat.clearAttackers();
+            // only this player's attackers are replaced, so a teammate's part of a team attack stays (CR 805.10b)
+            for (final Card own : CardLists.filterControlledBy(combat.getAttackers(), attacker)) {
+                combat.removeFromCombat(own);
+            }
             final Map<Card, GameEntity> legal = combat.getAttackConstraints().getLegalAttackers().getLeft();
             System.err.println("AI Attack declaration invalid, defaulting to: " + legal);
             for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
-                combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+                if (mandatoryAttacker.getKey().getController().equals(attacker)) {
+                    combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+                }
             }
             if (!CombatUtil.validateAttackers(combat)) {
                 aiAtk.declareAttackers(combat);
@@ -1521,8 +1728,9 @@ public class AiController {
         }
     }
 
-    private void removeUnpayableAttackers(Combat combat) {
-        for (Card attacker : combat.getAttackers().threadSafeIterable()) {
+    private void removeUnpayableAttackers(final Player attackingPlayer, Combat combat) {
+        // a teammate's attackers are theirs to pay for
+        for (Card attacker : CardLists.filterControlledBy(combat.getAttackers(), attackingPlayer)) {
             Cost attackCost = CombatUtil.getAttackCost(game, attacker, combat.getDefenderByAttacker(attacker));
             if (attackCost == null) {
                 continue;
@@ -1640,6 +1848,10 @@ public class AiController {
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
+        if (waitsForMainPhase()) {
+            return null; // nothing to do before the first main phase
+        }
+
         if (usesFullSimulation()) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
@@ -1659,6 +1871,14 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
+            if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
+                // a land that makes no mana yet (Temple of the False God with four lands to come) waits for the others
+                final CardCollection working = CardLists.filter(landsWannaPlay,
+                        l -> !forge.ai.simulation.LegalityGuard.isDormantLand(player, l));
+                if (!working.isEmpty()) {
+                    landsWannaPlay = working;
+                }
+            }
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -1676,6 +1896,59 @@ public class AiController {
         }
 
         return singleSpellAbilityList(getSpellAbilityToPlay());
+    }
+
+    /**
+     * With Flat Monte Carlo on, the AI's own upkeep and draw step have nothing for it to do: acting there (a burn spell,
+     * an Aether Vial, a fetch land) only shows the opponent the cards and takes options from the first main phase,
+     * where the rollouts compare every line with the mana and the information still in hand. Everything it could do
+     * there it can do in the main phase, with a forecast ability the only thing that has to be used in the upkeep.
+     * Responses with something on the stack are not affected.
+     */
+    private boolean waitsForMainPhase() {
+        if (!flatMonteCarloActive() || !game.getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        if (!ph.isPlayerTurn(player) || !ph.getPhase().isBefore(PhaseType.MAIN1)) {
+            return false;
+        }
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (Forecast.isForecast(sa)) {
+                    return false; // the list is cut down to the forecast abilities instead (see getSpellAbilityToPlay)
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A permanent spell with flash on the AI's own turn: casting it now only ends the surprise, and the opponent's
+     * removal gets it before it does anything. The opponent's end step, or an attack, is where Monte Carlo offers it
+     * (see {@link FlatMonteCarloPicker.Mode#END_STEP}). A hasty one may still be an attacker.
+     */
+    private boolean isFlashPermanentOnOwnTurn(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return host != null && sa.isSpell() && host.isPermanent() && !host.isLand() && host.hasKeyword(Keyword.FLASH)
+                && !host.hasKeyword(Keyword.HASTE) && game.getPhaseHandler().isPlayerTurn(player);
+    }
+
+    /** The permanent has an enters-the-battlefield trigger that is aimed (Leyline Binding, Cast Out, Banishment). */
+    private static boolean hasTargetedEtb(final Card card) {
+        for (final Trigger t : card.getTriggers()) {
+            final Map<String, String> params = t.getMapParams();
+            if (!"ChangesZone".equals(params.get("Mode")) || !"Battlefield".equals(params.get("Destination"))
+                    || params.get("ValidCard") == null || !params.get("ValidCard").contains("Self")
+                    || params.get("Execute") == null) {
+                continue;
+            }
+            final String ability = card.getSVar(params.get("Execute"));
+            if (ability.contains("ValidTgts$") && !ability.contains("TargetMin$ 0") && !ability.contains("Optional")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
@@ -1809,13 +2082,37 @@ public class AiController {
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
 
+        if (topOwnedByAI && flatMonteCarloActive()) {
+            // Stiflenought: the AI's own "sacrifice it unless" trigger is answered with Stifle, which nothing else would do
+            final SpellAbility stifle = StifleCombo.stifleOwnTrigger(player, top);
+            if (stifle != null) {
+                return stifle;
+            }
+            if (stormSolver != null && stormSolver.expectsResponse(player)) {
+                // a line of the tutor storm solver answers its own spell (Lion's Eye Diamond with Infernal Tutor on the stack)
+                final SpellAbility response = stormSolver.next(player, deckPlan(player).combos);
+                if (response != null) {
+                    return response;
+                }
+            }
+            // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
+            final SpellAbility consultation = ConsultationWin.response(player);
+            if (consultation != null) {
+                return consultation;
+            }
+            // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
+            final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
+            if (diamond != null) {
+                return diamond;
+            }
+        }
+
         // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
         boolean mustRespond = false;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
             mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
-
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -1849,23 +2146,106 @@ public class AiController {
 
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
         // Flat MC compares them with rollouts, the heuristics still decide for every other card
-        final ComboPlan comboPlan = flatMonteCarloActive()
-            ? deckPlan(player).combos : ComboPlan.EMPTY;
+        // Every other card marked AI:RemoveDeck:All stays in the list too, for Flat MC alone: see isFlatMcOnlyPlay
+        final boolean flatMc = flatMonteCarloActive();
         saList.removeIf(spellAbility -> {
             if (spellAbility.isLandAbility()) {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !comboPlan.isKeyCard(h);
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
+                    || (flatMc && LoopRunner.held(player, spellAbility))
+                    || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
+                    || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
+                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
+                    // an equip is an investment: it does not take the mana of a creature that could be cast instead
+                    || (flatMc && spellAbility.isEquip() && !FlatMonteCarloPicker.sparesMana(player, spellAbility))
+                    // the upkeep is for a forecast ability, if its cost costs nothing the first main phase needs
+                    || (flatMc && Forecast.beforeOwnMain(player)
+                        && !(Forecast.isForecast(spellAbility) && Forecast.worthIt(player, spellAbility)))
+                    || (flatMc && FlatMonteCarloPicker.isOtherZonePlay(spellAbility)
+                    && !FlatMonteCarloPicker.sparesMana(player, spellAbility)));
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
-        //update LivingEndPlayer: a deck that plays Living End by name, or any deck the scan found to be built around
-        //a mass reanimation (Living Death, Rise of the Dark Realms, ...) whose payoff is still in the library
-        useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"))
-                || deckPlan(player).combos.wantsCyclingPriority(player);
+
+        if (flatMc) {
+            final SpellAbility vault = VaultLoop.sureCast(player, saList);
+            if (vault != null) {
+                return vault; // Time Vault and what untaps it: an extra turn every turn, no rollouts needed
+            }
+            final SpellAbility oracle = ConsultationWin.sureCast(player, saList);
+            if (oracle != null) {
+                return oracle; // Thassa's Oracle with Demonic Consultation in hand: cast it, the Consultation answers its trigger
+            }
+            final SpellAbility pileDraw = DoomsdayPile.sureDraw(player, saList);
+            if (pileDraw != null && !hasFailedToCast(pileDraw)) {
+                return pileDraw; // Doomsday has cut the library: draw through the pile to the Oracle
+            }
+            final SpellAbility will = WillReplay.sureCast(player, saList);
+            if (will != null) {
+                return will; // Yawgmoth's Will with Time Walk, a Mox or Black Lotus in the graveyard
+            }
+            final SpellAbility orchard = OathTiming.sureCast(player);
+            if (orchard != null) {
+                return orchard; // Oath of Druids: the opponent is given a creature at its end step so that the upkeep trigger works
+            }
+            final SpellAbility dreadReturn = DreadReturnWin.sureCast(player, saList);
+            if (dreadReturn != null) {
+                return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library
+            }
+            final SpellAbility donateFinish = DonateCombo.sureFinish(player, saList);
+            if (donateFinish != null) {
+                if (!hasFailedToCast(donateFinish)) {
+                    lastFlatMcResult = null;
+                    return donateFinish; // Removing donated Illusions now makes the only opponent lose 20 life.
+                }
+                for (SpellAbility ability = donateFinish; ability != null; ability = ability.getSubAbility()) {
+                    ability.resetTargets();
+                }
+                if (donateFinish.costHasManaX()) {
+                    donateFinish.setXManaCostPaid(null);
+                }
+            }
+            final SpellAbility loop = LoopRunner.next(player, saList, this::loopApproved);
+            if (loop != null) {
+                return loop; // a loop of the combo list is on the table: one more round of it
+            }
+            final SpellAbility finish = ComboAssembly.finish(player, saList, this::assemblyApproved);
+            if (finish != null) {
+                return finish; // a draw that takes the opponent's whole library: they lose at their next draw
+            }
+            final SpellAbility assembly = ComboAssembly.next(player, saList, this::assemblyApproved);
+            if (assembly != null) {
+                return assembly; // a catalogued combo whose other cards are all in play or in hand: put it together
+            }
+        }
+        if (flatMc && game.getStack().isEmpty()) {
+            // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
+            final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
+            if (sureStifle != null) {
+                return sureStifle;
+            }
+            final SpellAbility sure = deckPlan(player).combos.sureMadnessPlay(player, saList);
+            if (sure != null) {
+                return sure; // safe and sure: no rollouts needed
+            }
+            final SpellAbility cut = deckPlan(player).combos.sureCutPlay(player, saList);
+            if (cut != null) {
+                return cut; // the library cut with a finisher in place: no rollouts needed
+            }
+            if (deckPlan(player).combos.has(ComboPlan.Kind.TUTOR_STORM)) {
+                if (stormSolver == null) {
+                    stormSolver = new StormSolver();
+                }
+                final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
+                if (solved != null) {
+                    return solved; // a line that wins this turn was found: follow it instead of guessing
+                }
+            }
+        }
 
         SpellAbility chosenSa;
         lastFlatMcResult = null;
@@ -1920,7 +2300,7 @@ public class AiController {
      * off. Only plain spells on the stack can be simulated, so a stack with abilities on it is left to the heuristics.
      */
     private FlatMonteCarloPicker.Mode reactiveMonteCarloMode(final boolean mustRespond) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || mustRespond
                 || simMode != null || !getBoolProperty(AiProps.FLAT_MC_ENABLED) || !getBoolProperty(AiProps.FLAT_MC_REACTIVE)) {
             return null;
         }
@@ -1934,13 +2314,23 @@ public class AiController {
             return onlySpells && top != null && top.getActivatingPlayer() != null && top.getActivatingPlayer().isOpponentOf(player)
                     ? FlatMonteCarloPicker.Mode.RESPOND : null;
         }
-        if (ph.getPlayerTurn() == player) {
-            return null;
+        if (ph.isPlayerTurn(player)) {
+            // The blockers are down and the AI has priority: the moment to pump the attacker that was blocked, or to
+            // sneak something in, with the opponent unable to take back the block (see Mode.BLOCKED).
+            return ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getCombat() != null
+                    && !ph.getCombat().getAttackers().isEmpty()
+                    ? FlatMonteCarloPicker.Mode.BLOCKED : null;
         }
-        if (ph.is(PhaseType.END_OF_TURN) && game.getPlayers().size() == 2) {
+        if (ph.is(PhaseType.END_OF_TURN)
+                && (game.getPlayers().size() == 2 || player.equals(game.getNextPlayerAfter(ph.getPlayerTurn())))) {
+            // the rollout plays on into the AI's own next turn: with more players that is only the next turn when the
+            // AI sits right after the player whose end step it is
             return FlatMonteCarloPicker.Mode.END_STEP;
         }
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.getCombat() != null && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+        if ((ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) && ph.getCombat() != null
+                && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+            // after the attackers (a creature can still be put in to block) and after the blockers (a trick for the
+            // creature that blocks): the opponent cannot take the attack or the blocks back
             return FlatMonteCarloPicker.Mode.RESPOND;
         }
         return null;
@@ -1971,7 +2361,7 @@ public class AiController {
         approved.addAll(chooseSpellAbilitiesToPlayFromList(saList, true,
                 discover ? cfg.maxCandidates * 2 : cfg.maxCandidates, discover ? extras : null));
         // counterspells the heuristics did not want to use are still worth a look against a big spell
-        if (top != null && discover && mode == FlatMonteCarloPicker.Mode.RESPOND) {
+        if (top != null && mode == FlatMonteCarloPicker.Mode.RESPOND) {
             // Counterspells with an alternative cost (Force of Will, Daze, Force of Negation...) are separate plays that
             // only exist once the alternative costs are expanded: the printed ones are not castable without the mana.
             final List<SpellAbility> counterBases = new ArrayList<>(getPlayableCounters(cards));
@@ -1992,21 +2382,41 @@ public class AiController {
                     continue;
                 }
                 counter.setActivatingPlayer(player);
+                // AILogic$ Never: out, unless it is one of the kinds that can be judged and discovery or a ramp deck's
+                // key card asks for it (Kozilek, the Great Distortion's counter)
+                final boolean guarded = GuardedAbilities.isNeverLogic(counter);
+                if (guarded ? !GuardedAbilities.mayConsider(player, counter, discover) : !discover) {
+                    continue; // without discovery only a ramp deck's key card gets this far
+                }
                 try {
-                    if (counter.canPlay() && counter.canTargetSpellAbility(top) && ComputerUtilCost.canPayCost(counter, player, false)) {
+                    if (counter.checkRestrictions(player) && counter.canPlay() && counter.canTargetSpellAbility(top)) {
+                        // aim first: a cost that depends on the target (a discard of its mana value) cannot be checked before
                         counter.resetTargets();
                         counter.getTargets().add(top);
-                        extras.add(counter);
+                        if (ComputerUtilCost.canPayCost(counter, player, false)
+                                && (!guarded || GuardedAbilities.worthIt(player, counter, top))) {
+                            extras.add(counter);
+                        } else {
+                            counter.resetTargets();
+                        }
                     }
                 } catch (final RuntimeException e) {
-                    // not castable after all
+                    counter.resetTargets(); // not castable after all
                 }
             }
         }
         // Card draw and selection only make sense in response to a spell or at the end step; during combat only
         // interaction is worth an instant.
         if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()) {
-            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa));
+            final boolean blocksDown = game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa)
+                    && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
+                    && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter
+            extras.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
+            approved.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
         }
         final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
         FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
@@ -2034,14 +2444,14 @@ public class AiController {
     }
 
     private boolean usesFlatMonteCarlo(final boolean mustRespond) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond || simMode != null
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || mustRespond || simMode != null
                 || !getBoolProperty(AiProps.FLAT_MC_ENABLED)) {
             return false; // off, forced responses, or one of the simulation modes which do their own lookahead
         }
         final PhaseHandler ph = game.getPhaseHandler();
         // Only sorcery-timing decisions on the AI's own turn: that is where the lines to compare are, and the
         // rollout ends at the second main phase. Everything reactive stays with the heuristics (and is cheap).
-        return ph.getPlayerTurn() == player && game.getStack().isEmpty()
+        return ph.isPlayerTurn(player) && game.getStack().isEmpty()
                 && (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2));
     }
 
@@ -2054,6 +2464,15 @@ public class AiController {
         final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(this, player);
         if (flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax()) {
             cfg.maximized();
+        } else if (game.getAIFlatMonteCarloLite()) {
+            cfg.mobileLite();
+        }
+        if (flatMcSlowTrips > 0) {
+            // Back after a pause for slowness: a smaller search, and no look at the opponent's turn, which costs most.
+            cfg.maxCandidates = Math.max(3, cfg.maxCandidates - 2 * flatMcSlowTrips);
+            cfg.rolloutsPerCandidate = Math.max(2, cfg.rolloutsPerCandidate - flatMcSlowTrips);
+            cfg.extraRounds = Math.min(cfg.extraRounds, 1);
+            cfg.opponentLookaheadPercent = 0;
         }
         final long left = cfg.turnBudgetNanos - flatMcTurnSpentNanos;
         if (left <= 0 || cfg.budgetNanos <= 0) {
@@ -2064,7 +2483,7 @@ public class AiController {
     }
 
     /**
-     * Plays that Flat Monte Carlo never spends a card on (see {@link forge.ai.simulation.ComboGuard}): bringing back
+     * Plays that Flat Monte Carlo never spends a card on (see {@link ComboGuard}): bringing back
      * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
      * and a cantrip while the AI is confident to win this turn or the next. Returns the reason, or null for a fine play.
      */
@@ -2137,6 +2556,22 @@ public class AiController {
         if (result.hold) {
             return null; // pass priority with the mana still available
         }
+        if (result.choice != null && result.choice.isSpell() && result.choice.getHostCard() != null) {
+            // a permanent without targets that pays off for the chosen spell (Up the Beanstalk draws for one of mana
+            // value 5 or more) comes first when the mana covers both, whether or not the heuristics approved it (#4278)
+            final int mana = ComputerUtilMana.getAvailableManaEstimate(player);
+            final List<SpellAbility> pool = new ArrayList<>(approved);
+            pool.addAll(extras);
+            for (final SpellAbility sa : pool) {
+                if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && !sa.usesTargeting()
+                        && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                        && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= mana
+                        && guardProblem(sa, null, saveCantrips) == null) {
+                    sa.setActivatingPlayer(player);
+                    return sa;
+                }
+            }
+        }
         if (extras.contains(result.choice)) {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
             // it is still aimed where the rollouts liked it, and that it can still be paid for.
@@ -2152,9 +2587,20 @@ public class AiController {
         // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
         // fall back to the other approved plays in heuristic order if the heuristics no longer like it.
         final List<SpellAbility> order = new ArrayList<>();
+        // a permanent that pays off for the chosen spell (Up the Beanstalk draws for a spell of mana value 5 or more) goes
+        // first when the mana covers both: cast after the spell it only misses the card (#4278)
+        final int manaNow = ComputerUtilMana.getAvailableManaEstimate(player);
+        for (final SpellAbility sa : approved) {
+            if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && result.choice.isSpell()
+                    && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                    && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= manaNow) {
+                order.add(sa);
+                break;
+            }
+        }
         order.add(result.choice);
         for (final SpellAbility sa : approved) {
-            if (sa != result.choice) {
+            if (sa != result.choice && !order.contains(sa)) {
                 order.add(sa);
             }
         }
@@ -2225,6 +2671,11 @@ public class AiController {
         return flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax();
     }
 
+    /** Phone and tablet matches: the attack search is part of it too, within the small time limits. */
+    private boolean isFlatMonteCarloLite() {
+        return game.getAIFlatMonteCarloLite();
+    }
+
     /** Forces the attack search on or off for this player; null follows the profile (FLAT_MC_ATTACK). */
     public void setFlatMonteCarloAttackOverride(final Boolean enabled) {
         flatMcAttackOverride = enabled;
@@ -2242,16 +2693,33 @@ public class AiController {
             }
         } else if ("too-slow".equals(reason) || "no-time".equals(reason)) {
             if (++flatMcSlowStreak >= 4) {
-                flatMcTripped = true; // this device cannot afford even two rollouts per decision
+                // This device could not afford two rollouts per decision just now. A phone has hiccups (a garbage
+                // collection, another app), so sit out a few turns and come back with a smaller search; only a device
+                // that keeps failing stays off for the game.
+                flatMcSlowStreak = 0;
+                flatMcGoodStreak = 0;
+                // Slowness never switches Monte Carlo off for good: each further failure pauses it a little longer
+                // (3, 6, then 9 turns) and shrinks the search further, and a run of good decisions earns the size back.
+                flatMcSlowTrips = Math.min(flatMcSlowTrips + 1, FLAT_MC_MAX_SLOW_TRIPS);
+                flatMcPausedUntilTurn = game.getPhaseHandler().getTurn() + FLAT_MC_PAUSE_TURNS * flatMcSlowTrips;
             }
         } else {
             flatMcSlowStreak = 0;
+            if (flatMcSlowTrips > 0 && ++flatMcGoodStreak >= FLAT_MC_RECOVER_DECISIONS) {
+                flatMcGoodStreak = 0;
+                flatMcSlowTrips--;
+            }
         }
+    }
+
+    /** Monte Carlo is off for this player: tripped by errors, or paused after slowness. */
+    private boolean flatMcOff() {
+        return flatMcTripped || game.getPhaseHandler().getTurn() < flatMcPausedUntilTurn;
     }
 
     private DeckPlan flatMcDeckPlan;
 
-    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link DeckPlan}. */
     public DeckPlan deckPlan(final Player p) {
         if (flatMcDeckPlan == null) {
             flatMcDeckPlan = DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
@@ -2296,7 +2764,7 @@ public class AiController {
 
     /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
     public boolean isFlatMonteCarloTripped() {
-        return flatMcTripped;
+        return flatMcOff();
     }
 
     /**
@@ -2304,19 +2772,133 @@ public class AiController {
      * be cast or activated right now (timing, restrictions and cost), so the only thing against it is the heuristics'
      * rule of thumb. Nothing is decided here; rollouts judge it against the alternatives.
      */
+    /**
+     * A play of a card marked AI:RemoveDeck:All that is not a piece of the deck's combos or a tutor with a find: the
+     * heuristics cannot play it well, so they never approve it, but with rollouts to check what it really does it may
+     * be offered as a discovered play (Parallax Wave's exile ability, the Wave itself). Only while Flat MC is on.
+     */
+    public boolean isFlatMcOnlyPlay(final SpellAbility sa) {
+        final Card h = sa == null ? null : sa.getHostCard();
+        return h != null && ComputerUtilCard.isCardRemAIDeck(h) && flatMonteCarloActive()
+                && !deckPlan(player).combos.isKeyCard(h) && !TutorPlan.hasPlanTarget(player, sa);
+    }
+
+    /**
+     * A mana rock or mana creature marked AI:RemoveDeck:All (Springleaf Drum): the heuristics never cast it, and
+     * without broad discovery nothing else would either, so it is always offered to the rollouts, which decide.
+     */
+    private boolean isRemoveDeckManaPermanent(final SpellAbility sa) {
+        final Card h = sa.getHostCard();
+        return h != null && sa.isSpell() && h.isPermanent() && !h.isLand() && ComputerUtilCard.isCardRemAIDeck(h)
+                && !h.getManaAbilities().isEmpty();
+    }
+
+    /**
+     * A cost-reduction permanent marked AI:RemoveDeck:All or :Random (Sapphire Medallion, for example): the heuristic may omit it,
+     * but FlatMC should still compare deploying it when it can make a catalogued setup safer or cheaper.
+     */
+    boolean isRemoveDeckCostReductionPermanent(final SpellAbility sa) {
+        final Card h = sa == null ? null : sa.getHostCard();
+        // CardAiHints keeps the All and Random deck-removal flags separately; include both for this narrow exception.
+        if (h == null || !sa.isSpell() || !h.isPermanent() || h.isLand()
+            || !(ComputerUtilCard.isCardRemAIDeck(h) || ComputerUtilCard.isCardRemRandomDeck(h))) {
+            return false;
+        }
+        for (final StaticAbility ability : h.getStaticAbilities()) {
+            final String activator = ability.getParam("Activator");
+            final String valid = ability.getParam("ValidCard");
+            if (ability.getMode().contains(StaticAbilityMode.ReduceCost)
+                && (activator == null || "You".equals(activator) || "Any".equals(activator))
+                && (valid == null || !valid.contains("OppCtrl"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether this ability moves a card from its controller's hand onto the battlefield.
+     * These hidden-origin ChangeZone abilities need an eligible card in hand (Aether Vial,
+     * Quicksilver Amulet, Belbe's Portal, Elvish Piper, and similar effects).
+     */
+    private static boolean isHandToBattlefieldChangeZone(final SpellAbility sa) {
+        for (SpellAbility current = sa; current != null; current = current.getSubAbility()) {
+            if (current.getApi() == ApiType.ChangeZone && current.hasParam("Origin")
+                && ZoneType.listValueOf(current.getParam("Origin")).contains(ZoneType.Hand)
+                && ZoneType.Battlefield.toString().equals(current.getParam("Destination"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+        if (sa == null) {
+            return false;
+        }
+
+        sa.setActivatingPlayer(player);
+
+        if (!sa.checkRestrictions(player)) {
+            return false;
+        }
+
+        if (isFlashPermanentOnOwnTurn(sa)) {
+            return false;
+        }
+        if (opinion == AiPlayDecision.BadEtbEffects && sa.isSpell() && hasTargetedEtb(sa.getHostCard())) {
+            return false; // an exile or removal on entering with nothing worth aiming at: the heuristics found no target
+        }
+
+        if (forge.ai.ability.ChangeZoneAi.onlyReturnsCreaturesThatDie(player, sa)) {
+            return false; // Persist with nothing but 1/1s to return: the rollouts like the trigger, the card is still wasted
+        }
+
+        if (!forge.ai.ability.UntapAi.worthUntapping(player, sa)) {
+            return false; // Sleep-Cursed Faerie untapped itself in response to any spell: the rollouts cannot see the wasted mana
+        }
+
+        if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
+            return false; // the script says the AI never plays it, and nothing makes an exception
+        }
+        // ChangeZoneAi rejects a hidden-origin activation when no eligible card is in hand.
+        // Broad discovery must not add it back just because the activation cost itself is payable.
+        // Stoneforge Mystic and the like (an eligible card is in hand, see isCheatFromHand) are the exception: the rollouts
+        // judge what the card is worth in play, the heuristics' "can't play" is about the ability, not the card.
+        if (isHandToBattlefieldChangeZone(sa) && !FlatMonteCarloPicker.isCheatFromHand(sa)
+                && (opinion == AiPlayDecision.CantPlayAi || opinion == AiPlayDecision.MissingNeededCards)) {
+            return false;
+        }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
                 return false;
             default:
                 break;
         }
+        if (TimedAbilityGuard.isTimed(sa) && !opinion.willingToPlay()) {
+            // a manland, crew, saddle or station is only worth its cost at one moment of the turn, and the heuristics
+            // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
+            return false;
+        }
+        final String problem = ActivationGuard.problem(player, sa);
+        if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
+            return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
+        }
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;
+        final PhaseHandler discoveryPhase = game.getPhaseHandler();
+        final boolean afterBlocks = discoveryPhase.is(PhaseType.COMBAT_DECLARE_BLOCKERS);
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
+                && !(afterBlocks && FlatMonteCarloPicker.isCombatTrick(sa))
+                && !FlatMonteCarloPicker.isSavingPlay(player, sa)
+                && !isRemoveDeckManaPermanent(sa)
+                && !isRemoveDeckCostReductionPermanent(sa)
                 && !combos.isFuelPlay(sa)
-                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))) {
-            return false;
+                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
+                && !TutorPlan.hasUse(player, sa)
+                && !(flatMonteCarloActive() && (SpecialActions.isDiscoverable(player, sa)
+                || HandAbilities.isDiscoverable(player, sa)))) {
+            return false; // a tutor with something to find is a play for the rollouts to weigh, in every mode
         }
         try {
             return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
@@ -2328,7 +2910,7 @@ public class AiController {
     private boolean isStillCastable(final SpellAbility sa) {
         sa.setActivatingPlayer(player);
         try {
-            return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
+            return sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
         } catch (final RuntimeException e) {
             return false;
         }
@@ -2389,9 +2971,12 @@ public class AiController {
         if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
             reportSortFallback(all);
         }
+        ComputerUtilAbility.putCastPayoffsFirst(all);
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
         final ComboPlan combos = deckPlan(player).combos;
+        final boolean massReanimation = combos.isMassReanimationDeck(player);
+        final boolean darkDepths = combos.has(ComboPlan.Kind.DARK_DEPTHS);
         final long aiId = AITimeoutTracker.key(game.getId(), player.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(aiId, timeoutNanos);
@@ -2402,7 +2987,7 @@ public class AiController {
             final Object evalLimit = AITimeoutTracker.arm(deadlineNanos, true);
             try {
                 //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
-                boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
+                final boolean isLifeInDanger = massReanimation && ComputerUtil.aiLifeInDanger(player, true, 0);
                 for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                     AITimeoutTracker.check();
 
@@ -2416,57 +3001,53 @@ public class AiController {
                             && player.getZone(ZoneType.Hand).contains(
                                     Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
                         )) {
-                        if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
+                        // a storm card that takes the last life of the opponent is always worth casting; a deck built around
+                        // finding it with tutors keeps it until then, any other deck casts it from the minimum storm count on
+                        if (!ComboPlan.stormIsLethal(player, sa.getHostCard())
+                                && ((combos.has(ComboPlan.Kind.TUTOR_STORM) && ComboPlan.takesLifePerCopy(sa.getHostCard()))
+                                || game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS))) {
                             // skip evaluating Storm unless we reached the minimum Storm count
                             continue;
                         }
                     }
 
-                    // living end AI decks
-                    // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
-                    AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
-                    if (useLivingEnd) {
-                        if ((sa.isCycling() || combos.isFuelPlay(sa)) && sa.canCastTiming(player)
-                                && player.getCardsIn(ZoneType.Library).size() >= 10) {
-                            if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
-                                if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
-                                        && !player.cantLoseForZeroOrLessLife() && player.getLife() <= sa.getPayCosts()
-                                                .getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
-                                    aiPlayDecision = AiPlayDecision.CantAfford;
-                                } else {
-                                    aiPlayDecision = AiPlayDecision.WillPlay;
-                                }
-                            }
-                        } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
-                            if (isLifeInDanger) { // needs more tune up for certain conditions
-                                aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa
-                                        : AiPlayDecision.WillPlay;
-                            } else if (CardLists
-                                    .filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES)
-                                    .size() > 4 || combos.swapIsWorthIt(player)) {
-                                if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
-                                    continue;
-                                else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player)
-                                        && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                                    aiPlayDecision = AiPlayDecision.WillPlay;
-                                // needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
-                            } else {
-                                continue;
-                            }
-                        }
+                    // a tutor storm deck keeps its rituals and moxen for the turn the solver finds the kill
+                    if (combos.holdsForKill(sa) || combos.wastesTutor(sa) || combos.wastesFodder(sa)) {
+                        continue;
+                    }
+                    // a take-life storm finisher is never cast unless it kills, even when it is the only spell left in hand
+                    if (combos.has(ComboPlan.Kind.TUTOR_STORM) && sa.isSpell() && sa.getHostCard() != null
+                            && ComboPlan.isStormFinisher(sa.getHostCard())
+                            && ComboPlan.takesLifePerCopy(sa.getHostCard())
+                            && !ComboPlan.stormIsLethal(player, sa.getHostCard())) {
+                        continue;
                     }
 
                     sa.setActivatingPlayer(player);
                     SpellAbility root = sa.getRootAbility();
 
+                    // a Living End style deck plays its cycling, fuel and cascade by its own rules, see ComboPlan
+                    ComboPlan.Ruling ruling = ComboPlan.Ruling.NO_OPINION;
+                    if (massReanimation) {
+                        ruling = combos.massReanimationRuling(player, sa, isLifeInDanger);
+                        if (ruling == ComboPlan.Ruling.SKIP) {
+                            continue;
+                        }
+                    }
+                    if (darkDepths && ruling == ComboPlan.Ruling.NO_OPINION) {
+                        ruling = combos.darkDepthsRuling(player, sa);
+                        if (ruling == ComboPlan.Ruling.SKIP) {
+                            continue;
+                        }
+                    }
+
                     if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
                         sa.setLastStateBattlefield(game.getLastStateBattlefield());
                         sa.setLastStateGraveyard(game.getLastStateGraveyard());
                     }
-                    //override decision for living end player
                     final AiPlayDecision opinion;
                     try {
-                        opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
+                        opinion = ruling == ComboPlan.Ruling.PLAY ? AiPlayDecision.WillPlay : canPlayAndPayFor(sa);
                     } finally {
                         // reset LastStateBattlefield - also when the deadline fired inside canPlayAndPayFor
                         sa.clearLastState();
@@ -2474,6 +3055,13 @@ public class AiController {
                     // PhaseHandler ph = game.getPhaseHandler();
                     // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
+                    if (isFlatMcOnlyPlay(sa)) {
+                        // never approved by the heuristics: only a play for the rollouts to weigh, and only with discovery
+                        if (extrasOut != null && isLegalDiscovery(sa, opinion)) {
+                            extrasOut.add(sa);
+                        }
+                        continue;
+                    }
                     if (opinion != AiPlayDecision.WillPlay) {
                         if (maxResults > 1) {
                             FlatMonteCarloStats.noteRejected(opinion.name());
@@ -2782,7 +3370,7 @@ public class AiController {
                     return slot;
                 }
 
-                return Aggregates.random(options);
+                return NumberChoice.choose(sa, options, relatedPlayer);
             default:
                 return options.get(0);
         }
@@ -3050,17 +3638,14 @@ public class AiController {
 
         if (decider == player && sa.getApi() != ApiType.Learn) {
             // the win card of a cheating spell, the creature to put into the graveyard: what the deck is built for
+            final Card tinkered = flatMonteCarloActive() && destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
+                    ? VaultLoop.tinkerPick(player, fetchList) : null; // Tinker: the vault or its key, whatever the deck's plan
+            if (tinkered != null) {
+                return tinkered;
+            }
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {
                 return forCombo;
-            }
-            if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)
-                    && !sa.hasParam("AILogic") && !fetchList.isEmpty()) {
-                // whatever the deck, a cheating spell is not for a land when anything else can be put onto the battlefield
-                final CardCollection nonLands = CardLists.filter(fetchList, c -> !c.isLand());
-                if (!nonLands.isEmpty() && nonLands.size() < fetchList.size()) {
-                    return ComputerUtilCard.getBestAI(nonLands);
-                }
             }
         }
 
@@ -3119,7 +3704,18 @@ public class AiController {
 
         result.addAll(mandatoryDiscard);
 
+        // damage and life loss for opponents resolves first, so they might lose before other triggers hurt us
+        result.addAll(filterList(result, this::onlyHurtsOpponents));
+
         return result;
+    }
+
+    private boolean onlyHurtsOpponents(SpellAbility sa) {
+        if ((sa.getApi() != ApiType.DealDamage && sa.getApi() != ApiType.LoseLife) || !sa.hasParam("Defined")) {
+            return false;
+        }
+        List<Player> hurt = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return !hurt.isEmpty() && hurt.stream().allMatch(p -> p.isOpponentOf(player));
     }
 
     // TODO move to more common place
@@ -3233,6 +3829,11 @@ public class AiController {
             List<ReplacementEffect> winGame = filterList(list, SpellAbility::getApi, ApiType.WinsGame);
             if (!winGame.isEmpty()) {
                 return winGame.get(0);
+            }
+            // several dredge cards in the graveyard: the one that suits the size of the library, not the first of the list
+            final ReplacementEffect dredge = deckPlan(player).combos.chooseDredge(player, list);
+            if (dredge != null) {
+                return dredge;
             }
         }
 

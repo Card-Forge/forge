@@ -182,13 +182,32 @@ public class ComputerUtilCombat {
                 return 0;
             }
 
-            damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
+            damage += attackerDamageBonus(attacker, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
                 sum *= 2;
             }
         }
         return sum;
+    }
+
+    /** What pumps add to the combat damage of the attacker: its power bonus, or its toughness bonus under Doran. */
+    public static int attackerDamageBonus(final Card attacker, final Combat combat, final boolean withoutAbilities) {
+        return attacker.toughnessAssignsDamage()
+                ? predictToughnessBonusOfAttacker(attacker, null, combat, withoutAbilities)
+                : predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
+    }
+
+    /**
+     * The combat damage a group of creatures would assign: their power, or their toughness while a static ability
+     * (Doran, the Siege Tower, Assault Formation, High Alert ...) says they assign damage equal to toughness.
+     */
+    public static int totalCombatDamage(final Iterable<Card> cards) {
+        int total = 0;
+        for (final Card c : cards) {
+            total += Math.max(0, c.getNetCombatDamage());
+        }
+        return total;
     }
 
     // Returns the poison an unblocked attacker would deal
@@ -207,8 +226,7 @@ public class ComputerUtilCombat {
         if (!attacked.canReceiveCounters(CounterEnumType.POISON)) {
             return 0;
         }
-        int damage = attacker.getNetCombatDamage() +
-                predictPowerBonusOfAttacker(attacker, null, null, false);
+        int damage = attacker.getNetCombatDamage() + attackerDamageBonus(attacker, null, false);
         int poison = 0;
         if (attacker.isInfectDamage(attacked)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
@@ -299,7 +317,7 @@ public class ComputerUtilCombat {
         int damage = 0;
 
         if (ai.canLoseLife()) {
-            final List<Card> attackers = combat.getAttackersOf(ai);
+            final List<Card> attackers = attackersOfTeam(ai, combat);
             final List<Card> unblocked = Lists.newArrayList();
 
             for (final Card attacker : attackers) {
@@ -340,7 +358,7 @@ public class ComputerUtilCombat {
 
         int poison = 0;
 
-        final List<Card> attackers = combat.getAttackersOf(ai);
+        final List<Card> attackers = attackersOfTeam(ai, combat);
         final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
@@ -365,9 +383,18 @@ public class ComputerUtilCombat {
         return ai.getPoisonCounters() + poison;
     }
 
+    /** The attackers whose damage reaches this player's life total: those attacking them, and in Two-Headed Giant those attacking a teammate (CR 810.4). */
+    private static List<Card> attackersOfTeam(final Player ai, final Combat combat) {
+        final CardCollection attackers = new CardCollection();
+        for (final Player p : ai.getSharedTeam()) {
+            attackers.addAll(combat.getAttackersOf(p));
+        }
+        return attackers;
+    }
+
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = Lists.newArrayList();
-        for (Card c : combat.getAttackersOf(ai)) {
+        for (Card c : attackersOfTeam(ai, combat)) {
             if (c.isCommander()) {
                 CardCollection blockers = combat.getBlockers(c);
                 int currentCommanderDamage = ai.getCommanderDamage(c);
@@ -405,7 +432,7 @@ public class ComputerUtilCombat {
     }
     public static boolean lifeInDanger(final Player ai, final Combat combat, final int payment) {
         // life in danger only cares about the player's life. Not Planeswalkers' life
-        if (ai.cantLose() || combat == null || combat.getAttackingPlayer() == ai) {
+        if (ai.cantLose() || combat == null || ai.sharesTeamWith(combat.getAttackingPlayer())) {
             return false;
         }
 
@@ -422,7 +449,7 @@ public class ComputerUtilCombat {
         }
 
         // check for creatures that must be blocked
-        final List<Card> attackers = combat.getAttackersOf(ai);
+        final List<Card> attackers = attackersOfTeam(ai, combat);
 
         final List<Card> threateningCommanders = getLifeThreateningCommanders(ai, combat);
 
@@ -488,7 +515,7 @@ public class ComputerUtilCombat {
         final List<Card> threateningCommanders = getLifeThreateningCommanders(ai, combat);
 
         // check for creatures that must be blocked
-        final List<Card> attackers = combat.getAttackersOf(ai);
+        final List<Card> attackers = attackersOfTeam(ai, combat);
 
         for (final Card attacker : attackers) {
             final List<Card> blockers = combat.getBlockers(attacker);
@@ -2467,7 +2494,7 @@ public class ComputerUtilCombat {
         }
 
         int life = ai.getLife();
-        int poisonLife = 10 - ai.getPoisonCounters();
+        int poisonLife = ai.getGame().getRules().getPoisonCountersToLose() - ai.getPoisonCounters();
         double percentLife = life * 1.0 / damageScore;
         double percentPoison = poisonLife * 1.0 / poisonScore;
 

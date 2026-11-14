@@ -1,0 +1,9 @@
+Name:Nyota Uhura, Communications
+ManaCost:2 U
+Types:Legendary Creature Human Officer
+PT:2/4
+K:ETBReplacement:Other:ChooseNumber
+SVar:ChooseNumber:DB$ ChooseNumber | Min$ 0 | Max$ 10 | Defined$ You | SpellDescription$ Hailing Frequencies — As NICKNAME enters, choose a number between 0 and 10.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQChosen | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Open a Channel — Whenever an opponent casts a spell with mana value equal to the chosen number, you draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Hailing Frequencies — As Nyota Uhura enters, choose a number between 0 and 10.\nOpen a Channel — Whenever an opponent casts a spell with mana value equal to the chosen number, you draw a card.

@@ -12,6 +12,6 @@ ALTERNATE
 Name:Flying Kick
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ SpellDescription | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
+A:SP$ TargetOnly | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ SpellDescription | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ PowerDmg | NumDmg$ ParentTargeted$CardPower | DamageSource$ ParentTarget | StackDescription$ None
 Oracle:Target creature you control deals damage equal to its power to target creature an opponent controls.\nFuse (You may cast one or both halves of this card from your hand.)

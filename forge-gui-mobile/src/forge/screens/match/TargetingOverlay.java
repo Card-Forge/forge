@@ -68,6 +68,48 @@ public class TargetingOverlay {
     private TargetingOverlay() {
     }
 
+    // The area arrows may be drawn in, and the areas drawn on top of the field (stack, open menus) that hide what is under them.
+    // Plain floats and one reused array, so deciding visibility allocates nothing per frame (GC pauses are felt on Android).
+    private static float clipLeft, clipTop, clipRight, clipBottom;
+    private static boolean hasClip = false;
+    private static float[] occluders = new float[4 * 8]; // left, top, right, bottom of each rect
+    private static int occluderCount = 0;
+
+    public static void setVisibleArea(final float x, final float y, final float w, final float h) {
+        clipLeft = x;
+        clipTop = y;
+        clipRight = x + w;
+        clipBottom = y + h;
+        hasClip = w > 0 && h > 0;
+    }
+
+    public static void clearOccluders() {
+        occluderCount = 0;
+    }
+
+    public static void addOccluder(final float x, final float y, final float w, final float h) {
+        if (w <= 0 || h <= 0) { return; }
+        final int i = occluderCount * 4;
+        if (i + 4 > occluders.length) {
+            occluders = Arrays.copyOf(occluders, occluders.length * 2);
+        }
+        occluders[i] = x;
+        occluders[i + 1] = y;
+        occluders[i + 2] = x + w;
+        occluders[i + 3] = y + h;
+        occluderCount++;
+    }
+
+    /** False when the point is outside the visible area or covered by an occluder; arrows to or from it are not drawn. */
+    public static boolean isVisible(final float x, final float y) {
+        if (hasClip && (x < clipLeft || x > clipRight || y < clipTop || y > clipBottom)) { return false; }
+        final float[] o = occluders;
+        for (int i = 0, n = occluderCount * 4; i < n; i += 4) {
+            if (x >= o[i] && x <= o[i + 2] && y >= o[i + 1] && y <= o[i + 3]) { return false; }
+        }
+        return true;
+    }
+
     // assembleArrows collects arrows here, then draws them all with ONE Graphics.drawArrowBatch
     private static final class PendingArrow {
         Vector2 start, end;
@@ -79,6 +121,7 @@ public class TargetingOverlay {
 
     private static void queueArrow(final Vector2 start, final Vector2 end, final ArcConnection connects, final boolean solid) {
         if (start == null || end == null) { return; }
+        if (!isVisible(start.x, start.y) || !isVisible(end.x, end.y)) { return; } // hidden, off screen or covered
         final PendingArrow a;
         if (pendingCount < pendingArrows.size()) {
             a = pendingArrows.get(pendingCount);

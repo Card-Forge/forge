@@ -1767,7 +1767,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final UndoManager undo = getGame().getUndoManager();
         undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
         if (!isMacroActive()) {
-            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+            if (UndoManager.OWN_TURN_ONLY && !getGame().getPhaseHandler().isPlayerTurn(player)) {
                 undo.barrier("Opponent's turn");
             } else {
                 undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
@@ -2460,6 +2460,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<SpellAbility> orderedSAs = orderSimultaneousSa(activePlayerSAs);
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
+            if (playedByTeammate(next)) {
+                continue;
+            }
             if (next.isTrigger() && !next.isCopied()) {
                 PlaySpellAbility.playSpellAbility(this, player, next);
             } else {
@@ -3543,7 +3546,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
                                 sa.setCastFromPlayEffect(true);
+                                final int stackSize = getGame().getStack().size();
                                 PlaySpellAbility.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
+                                if (getGame().getStack().size() > stackSize) {
+                                    // as if p had just cast it: everyone gets to respond before it resolves (CR 117.3c)
+                                    getGame().getPhaseHandler().setPriority(p);
+                                }
                             }
                             // playSa could fire some triggers
                             getGame().getStack().addAllTriggeredAbilitiesToStack();
@@ -3780,17 +3788,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
-            if (getGame().isGameOver()) {
-                // Remote-client controllers on the server have no FControlGameEventHandler,
-                // so their input queues won't be released by the normal event path.
-                // Iterate registered players (not getPlayers(), which excludes the
-                // conceding player after onPlayerLost removes them from ingamePlayers).
-                for (Player p : getGame().getRegisteredPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman pch) {
-                        pch.getInputQueue().onGameOver(true);
-                    }
-                }
-            }
+            DrawOfferCoordinator.releaseInputQueues(getGame());
         }
     }
 
@@ -3999,6 +3997,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (macros != null && macros.isReplaying()) {
             return false;
         }
+        // a team that shares its turns stops where any of its players has a stop
+        if (getGui().getGameView() != null) {
+            return getGui().getGameView().getPlayers().stream().filter(turnPlayer::sharesTeamWith).allMatch(p -> playerSkipsPhase(p, phase));
+        }
+        return playerSkipsPhase(turnPlayer, phase);
+    }
+
+    private boolean playerSkipsPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }

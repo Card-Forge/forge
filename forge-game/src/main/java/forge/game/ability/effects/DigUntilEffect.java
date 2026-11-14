@@ -218,7 +218,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Card c = itr.next();
 
                     if (optionalFound &&
-                            !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
+                            !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), c, null)) {
                         if (ZoneType.None.equals(optionalNoDestination)) {
                             itr.remove();
                             continue;

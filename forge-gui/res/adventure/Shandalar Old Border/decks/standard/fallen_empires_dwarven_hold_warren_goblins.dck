@@ -1,0 +1,32 @@
+[metadata]
+Name=Warren Goblins
+[Main]
+12 Mountain|3ED
+3 Dwarven Ruins|FEM
+2 Dormant Volcano|VIS
+4 Forgotten Cave|ONS
+2 Goblin Burrows|ONS
+2 Goblin Recruiter|VIS
+4 Goblin Matron|USG
+2 Goblin Digging Team|DRK
+1 Goblin Chirurgeon|FEM|[54a]
+1 Goblin Chirurgeon|FEM|[54b]
+1 Goblin Chirurgeon|FEM|[54c]
+2 Goblin Soothsayer|MIR
+2 Goblins of the Flarg|DRK
+1 Goblin Rock Sled|DRK
+1 Goblin Kites|FEM
+1 Bravado|USG
+4 Goblin Warrens|FEM
+1 Goblin War Strike|PO2
+2 Goblin General|PO2
+1 Goblin War Drums|FEM|[58c]
+1 Goblin War Drums|FEM|[58d]
+2 Goblin Caves|DRK
+2 Goblin Shrine|DRK
+4 Goblin Ringleader|APC
+2 Reckless One|ONS
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Goblin Warrens|FEM
+1 Goblin Mountaineer|PO2

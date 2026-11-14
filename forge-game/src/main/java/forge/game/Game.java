@@ -107,6 +107,9 @@ public class Game {
     // Whether Monte Carlo may use its maximum strength settings (bigger budgets, more lines and samples). Set by the
     // Match when it runs on a desktop; mobile ports keep the conservative profile values. Never inherited by copies.
     public boolean AI_FLAT_MONTE_CARLO_MAX = false;
+    // Whether Monte Carlo uses the phone/tablet settings: attack search and a cheap look at the opponent's next turn on
+    // top of the conservative profile values. Set by the Match on mobile ports; ignored when MAX is on. Never inherited.
+    public boolean AI_FLAT_MONTE_CARLO_LITE = false;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
 
@@ -445,7 +448,9 @@ public class Game {
         final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
         final PlayerCollection players = new PlayerCollection(
                 directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
-
+        if (!players.contains(p)) {
+            p = getNextPlayerAfter(p);
+        }
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
         return players;
@@ -1342,7 +1347,8 @@ public class Game {
             player.onCleanupPhase();
         }
         for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+            // under shared team turns this was also the turn of the card's controller
+            c.onCleanupPhase(getPhaseHandler().isPlayerTurn(c.getController()) ? c.getController() : getPhaseHandler().getPlayerTurn());
         }
         for (final Card card : getCardsInGame()) {
             card.resetActivationsPerTurn();
@@ -1550,6 +1556,9 @@ public class Game {
     }
     public boolean getAIFlatMonteCarloMax() {
         return AI_FLAT_MONTE_CARLO_MAX;
+    }
+    public boolean getAIFlatMonteCarloLite() {
+        return AI_FLAT_MONTE_CARLO_LITE;
     }
     public boolean isNoGUIUser() {
         return noGUIUser;

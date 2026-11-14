@@ -158,6 +158,44 @@ public class ComputerUtilAbility {
         return result;
     }
 
+    /**
+     * A permanent that pays off for each spell its controller casts (Up the Beanstalk draws a card for each spell of mana
+     * value 5 or more) goes before the first spell of the list it would pay off for: cast after it, it only misses the card (#4278).
+     */
+    public static void putCastPayoffsFirst(final List<SpellAbility> list) {
+        for (int i = 1; i < list.size(); i++) {
+            final SpellAbility payoff = list.get(i);
+            if (!payoff.isSpell() || payoff.getHostCard() == null || !payoff.getHostCard().isPermanent()) {
+                continue;
+            }
+            for (int j = 0; j < i; j++) {
+                if (paysOffFor(payoff, list.get(j))) {
+                    list.remove(i);
+                    list.add(j, payoff);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
+        final Card host = payoff.getHostCard();
+        final Card cast = spell.getHostCard();
+        if (!spell.isSpell() || cast == null || cast == host) {
+            return false;
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))
+                    || !t.hasParam("TriggerZones") || !t.getParam("TriggerZones").contains("Battlefield")) {
+                continue;
+            }
+            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard"), host.getController(), host, t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
         Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
 
@@ -244,7 +282,7 @@ public class ComputerUtilAbility {
         return true;
     }
 
-    public final static saComparator saEvaluator = new saComparator();
+    public final static Comparator<SpellAbility> saEvaluator = Comparator.comparing(sa -> new SortKey(sa, false));
 
     /**
      * Everything the evaluator order depends on, computed once per SpellAbility. Keys are compared
@@ -253,7 +291,7 @@ public class ComputerUtilAbility {
      * (e.g. "FreeSpellAI" returned -1 in both directions) and so could contradict itself.
      */
     public static final class SortKey implements Comparable<SortKey> {
-        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score, notSpectacle;
+        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, enablerFirst, score;
 
         private SortKey(SpellAbility sa, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
@@ -271,16 +309,16 @@ public class ComputerUtilAbility {
             zeroCmcFirst = cmc == 0 && ApiType.Mana != sa.getApi() ? 0 : 1;
             final Card host = sa.getHostCard();
             freeSpellFirst = host != null && host.hasSVar("FreeSpellAI") ? 0 : 1;
+            // a cheap permanent that rewards casting big spells (Up the Beanstalk) goes before the big spell it pays off on (#4278)
+            enablerFirst = sa.isSpell() && rewardsBigSpellInHand(sa) ? 0 : 1;
 
-            int s = cmc + saComparator.getSpellAbilityPriority(sa);
+            int s = cmc + getSpellAbilityPriority(sa);
             // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
                 // try to align the scales: if priority swings in either direction extra evaluation matters less
                 s += Math.round(ComputerUtilCard.evaluateCreature(sa) / (10.5f + Math.abs(s)));
             }
             score = s;
-            // Cheaper Spectacle costs should be preferred (only as tie-break: a pairwise rule can't be transitive)
-            notSpectacle = sa.isSpectacle() ? 0 : 1;
         }
 
         @Override
@@ -295,9 +333,39 @@ public class ComputerUtilAbility {
             if (r != 0) return r;
             r = Integer.compare(freeSpellFirst, o.freeSpellFirst);
             if (r != 0) return r;
-            r = Integer.compare(o.score, score); // higher score first
+            r = Integer.compare(enablerFirst, o.enablerFirst);
             if (r != 0) return r;
-            return Integer.compare(notSpectacle, o.notSpectacle);
+            // higher score first
+            return Integer.compare(o.score, score);
+        }
+
+        /** The permanent has a "whenever you cast a spell with mana value N or greater" trigger and another spell in hand qualifies. */
+        private static boolean rewardsBigSpellInHand(SpellAbility sa) {
+            final Card host = sa.getHostCard();
+            if (host == null || !host.isPermanent() || !host.isInZone(ZoneType.Hand) || host.getController() == null) {
+                return false;
+            }
+            for (final Trigger t : host.getTriggers()) {
+                if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidCard", "");
+                final int at = valid.indexOf("cmcGE");
+                if (at < 0) {
+                    continue;
+                }
+                try {
+                    final int min = Integer.parseInt(valid.substring(at + 5).replaceAll("\\D.*$", ""));
+                    for (final Card c : host.getController().getCardsIn(ZoneType.Hand)) {
+                        if (c != host && !c.isLand() && c.getCMC() >= min) {
+                            return true;
+                        }
+                    }
+                } catch (final NumberFormatException e) {
+                    // not a plain number: no preference
+                }
+            }
+            return false;
         }
 
         private static boolean isLowPriorityPlanarDieRoll(SpellAbility sa) {
@@ -324,16 +392,6 @@ public class ComputerUtilAbility {
             }
             return 0;
         }
-    }
-
-    public final static class saComparator implements Comparator<SpellAbility> {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            return compareEvaluator(a, b, false);
-        }
-        public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
-            return new SortKey(a, safeToEvaluateCreatures).compareTo(new SortKey(b, safeToEvaluateCreatures));
-        }
 
         private static int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
@@ -343,7 +401,6 @@ public class ComputerUtilAbility {
                 System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
                 return 0;
             }
-            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
 
             if (source != null) {
                 // puts creatures in front of spells
@@ -365,7 +422,7 @@ public class ComputerUtilAbility {
                     p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
                 // don't play equipment before having any creatures
-                if (source.isEquipment() && noCreatures) {
+                if (source.isEquipment() && ai.getCreaturesInPlay().isEmpty()) {
                     p -= 9;
                 }
                 // don't equip stuff in main 2 if there's more stuff to cast at the moment
@@ -406,10 +463,11 @@ public class ComputerUtilAbility {
                 }
             }
 
-            // use Surge and Prowl costs when able to
-            if (sa.isSurged() || sa.isProwl()) {
+            // positive and/or cheaper altcosts, try to take advantage while they're enabled
+            if (sa.isSurged() || sa.isProwl() || sa.isSpectacle()) {
                 p += 9;
             }
+
             // sort planeswalker abilities with most costly first
             if (sa.isPwAbility()) {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
@@ -463,15 +521,10 @@ public class ComputerUtilAbility {
      */
     public static boolean sortSpellAbilities(final List<SpellAbility> all) {
         final boolean fellBack = ComparatorUtil.safeSort(all, cachedEvaluator(false));
-        return sortCreatureSpellsImpl(all) || fellBack;
+        return sortCreatureSpells(all) || fellBack;
     }
 
-    public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
-        sortCreatureSpellsImpl(all);
-        return all;
-    }
-
-    private static boolean sortCreatureSpellsImpl(final List<SpellAbility> all) {
+    private static boolean sortCreatureSpells(final List<SpellAbility> all) {
         // try to smoothen power creep by making CMC less of a factor
         final List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
         if (creatures.size() <= 1) {

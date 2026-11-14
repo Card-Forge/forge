@@ -1,0 +1,9 @@
+Name:Impossible Choice
+ManaCost:2 B
+Types:Instant
+A:SP$ Charm | Choices$ DBSurgicalSeparation,DBRemainFused
+SVar:DBSurgicalSeparation:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Surgical Separation — Destroy target creature. Its controller creates two 1/1 red Officer creature tokens.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_officer | TokenOwner$ TargetedController
+SVar:DBRemainFused:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ Remain Fused — You draw two cards and each player loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player
+Oracle:Choose one —\n• Surgical Separation — Destroy target creature. Its controller creates two 1/1 red Officer creature tokens.\n• Remain Fused — You draw two cards and each player loses 2 life.

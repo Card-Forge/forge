@@ -6,7 +6,7 @@
   },
   {
     "name": "Silver Challenge Coin",
-    "description": "No current use. Can be safely disposed of.",
+    "description": "A weighty coin made of silver. Redeem for a free sealed.",
     "iconName": "SilverChallengeCoin"
   },
   {
@@ -3036,6 +3036,12 @@
     "name": "Time Walker's Trophy",
     "description": "A timeless trophy proving your victory over the Time Walker.",
     "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Dwarven Rune Stone",
+    "description": "A rune stone given to you by a Dwarven Pony Trader. It opens a secret latch into the Dwarven Hold.",
+    "iconName": "RedRune",
     "questItem": true
   }
 ]

@@ -48,6 +48,8 @@ final class StrategicEvaluator {
     private static final int ANSWER_CAP = 60;
     private static final int WEAK_BODY_VALUE = 150;
 
+    private static final int REANIMATION_TARGET_CAP = 250;
+
     private StrategicEvaluator() {
     }
 
@@ -58,9 +60,13 @@ final class StrategicEvaluator {
         int adj = 0;
         try {
             adj += handTerm(simAi);
+            adj += reanimationTargetTerm(simAi);
             adj += answerTerm(simAi);
             adj += threatQualityTerm(simAi);
             adj += planTerm(simAi, cfg.plan);
+            adj += ComboCatalog.term(simAi); // a known combo assembled in the hand and on the battlefield
+            adj += AntiCombo.term(simAi); // the combo pieces the opponents have in play, on the stack or to bring back
+            adj += DonateCombo.term(simAi); // harmful DonateMe permanents successfully given to an opponent
         } catch (final RuntimeException e) {
             return 0; // a refinement only: never let it break a rollout
         }
@@ -164,6 +170,32 @@ final class StrategicEvaluator {
         return adj;
     }
 
+    /**
+     * A creature too expensive to cast that sits in the own graveyard with a reanimation spell in hand is worth its
+     * full deploy value, not the halved value of a card that is far from castable in hand: discarding it (The Underworld
+     * Cookbook, a looter) is the first half of the plan. Only the best one counts, one spell returns one creature.
+     */
+    private static int reanimationTargetTerm(final Player simAi) {
+        boolean spellInHand = false;
+        for (final Card c : simAi.getCardsIn(ZoneType.Hand)) {
+            if (ComboPlan.isReanimationSpell(c)) {
+                spellInHand = true;
+                break;
+            }
+        }
+        if (!spellInHand) {
+            return 0;
+        }
+        final int lands = landsInPlay(simAi);
+        int best = 0;
+        for (final Card c : simAi.getCardsIn(ZoneType.Graveyard)) {
+            if (c.isCreature() && c.getCMC() > lands + 1) {
+                best = Math.max(best, deployValue(c) * HAND_PERCENT / 100);
+            }
+        }
+        return Math.min(best, REANIMATION_TARGET_CAP);
+    }
+
     private static int landsInHandCount(final CardCollectionView hand) {
         int n = 0;
         for (final Card c : hand) {
@@ -229,7 +261,7 @@ final class StrategicEvaluator {
             boolean outclassed = false;
             if (opp != null) {
                 for (final Card o : opp.getCreaturesInPlay()) {
-                    if (o.getNetPower() >= c.getNetToughness() && o.getNetToughness() > c.getNetPower()) {
+                    if (o.getNetCombatDamage() >= c.getNetToughness() && o.getNetToughness() > c.getNetCombatDamage()) {
                         outclassed = true;
                         break;
                     }

@@ -7,8 +7,8 @@ SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ GTY | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ At the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains+Basic | Tapped$ True | ChangeNum$ 1
 SVar:W:Count$Valid Creature.YouCtrl
-SVar:X:Count$Valid Creature.ActivePlayerCtrl
+SVar:X:Count$Valid Creature.ControlledBy TriggeredPlayer
 SVar:Y:Count$Valid Land.YouCtrl
-SVar:Z:Count$Valid Land.ActivePlayerCtrl
+SVar:Z:Count$Valid Land.ControlledBy TriggeredPlayer
 DeckHas:Ability$Token
 Oracle:At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.\nAt the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.

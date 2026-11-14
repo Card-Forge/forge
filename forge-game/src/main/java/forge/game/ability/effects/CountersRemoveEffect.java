@@ -81,13 +81,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             cntToRemove = AbilityUtils.calculateAmount(source, num, sa);
         }
 
-        if (sa.hasParam("Optional")) {
-            String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
-            if (!pc.confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?", null)) {
-                return;
-            }
-        }
-
         CounterType counterType = null;
 
         if (!type.equals("Any") && !type.equals("All")) {
@@ -113,6 +106,15 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
         if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved) {
             srcCards = new CardCollection(srcCards).filter(c -> !c.isInPlay() || sa.getLastStateBattlefield().contains(c));
+        }
+
+        if (sa.hasParam("Optional")) {
+            String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
+            final Card cardToShow = srcCards.size() == 1 ? srcCards.get(0) : null;
+            if (!pc.confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?",
+                    cardToShow, null)) {
+                return;
+            }
         }
 
         if (sa.hasParam("Choices")) {

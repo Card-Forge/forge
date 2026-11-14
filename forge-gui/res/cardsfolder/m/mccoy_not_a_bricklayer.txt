@@ -1,0 +1,8 @@
+Name:McCoy, Not a Bricklayer
+ManaCost:3 G W
+Types:Legendary Creature Human Doctor
+PT:0/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Doctor.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever NICKNAME or another Doctor you control enters, put a +1/+1 counter on each creature you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Lifelink | Description$ Creatures you control with counters on them have lifelink.
+Oracle:Whenever McCoy or another Doctor you control enters, put a +1/+1 counter on each creature you control.\nCreatures you control with counters on them have lifelink.
