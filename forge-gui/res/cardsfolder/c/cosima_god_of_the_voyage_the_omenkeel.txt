@@ -8,7 +8,7 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ LandEnter | Duratio
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:LandEnter:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Exile | ValidCard$ Land.YouCtrl | Execute$ TrigAddCounter | TriggerDescription$ Whenever a land you control enters, if NICKNAME is exiled, you may put a voyage counter on it. If you don't, return NICKNAME to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
 SVar:TrigAddCounter:DB$ PutCounter | Optional$ True | Defined$ Self | CounterType$ VOYAGE | CounterNum$ 1 | RememberAmount$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | Defined$ Self | Origin$ Exile | Destination$ Battlefield | RememberLKI$ True | WithCountersType$ P1P1 | WithCountersAmount$ X | SubAbility$ DBDraw
+SVar:DBReturn:DB$ ChangeZone | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | Defined$ Self | Origin$ Exile | Destination$ Battlefield | RememberLKI$ True | AlwaysRemember$ True | WithCountersType$ P1P1 | WithCountersAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
 SVar:X:RememberedLKI$CardCounters.VOYAGE
 SVar:Y:Count$RememberedNumber

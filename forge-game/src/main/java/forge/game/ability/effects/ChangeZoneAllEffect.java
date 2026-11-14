@@ -98,6 +98,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final String imprint = sa.getParam("Imprint");
         final boolean random = sa.hasParam("RandomOrder");
         final boolean remLKI = sa.hasParam("RememberLKI");
+        final boolean alwaysRemLKI = sa.hasParam("AlwaysRemember");
         final boolean movingToDeck = destination.isDeck();
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
@@ -125,8 +126,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getStack().remove(c);
             }
 
-            if (remLKI) {
-                source.addRemembered(CardCopyService.getLKICopy(c));
+            final Card lkiCopy = remLKI ? CardCopyService.getLKICopy(c) : null;
+            if (remLKI && alwaysRemLKI) {
+                source.addRemembered(lkiCopy);
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -164,6 +166,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
                 }
+            }
+
+            if (remLKI && !alwaysRemLKI && movedCard.getZone().is(destination)) {
+                source.addRemembered(lkiCopy);
             }
 
             if (!movedCard.getZone().equals(originZone)) {
