@@ -4,4 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Choices$ DBDestroyAll,DBDestroyAll2
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand+setMRD DST 5DS SOM | SpellDescription$ Destroy all nonland permanent cards originally printed in the Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin expansions.
 SVar:DBDestroyAll2:DB$ DestroyAll | ValidCards$ Permanent.nonLand+setMBS NPH ONE YONE | SpellDescription$ Destroy all nonland permanent cards originally printed in the Mirrodin Besieged, New Phyrexia, and Phyrexia: All Will Be One expansions.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:Choose one —\n• Destroy all nonland permanent cards originally printed in the Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin expansions.\n• Destroy all nonland permanent cards originally printed in the Mirrodin Besieged, New Phyrexia, and Phyrexia: All Will Be One expansions.
