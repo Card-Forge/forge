@@ -59,3 +59,6 @@ ScryfallCode=SCH
 51 R Thought Scour @Eli Minaya
 52 R Mastermind's Acquisition @Sam Guay
 53 M Jace Reawakened @Billy Christian
+54 R Novice Inspector @Kev Fang
+55 R Phelia, Exuberant Shepherd @Heather Hudson
+56 R Cosmogrand Zenith @Danny Schwartz
