@@ -466,7 +466,8 @@ public class VStack extends FDropDown {
         public final StackItemView stackInstance;
         private final Color foreColor, backColor, backColor2; //backColor2: the far end of the gradient on glass cards
         private Color glassStart, glassEnd; //the frosted gradient, built on the first glass draw
-        private String text;
+        private final String text;
+        private final int nameLength;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
         private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
@@ -475,13 +476,21 @@ public class VStack extends FDropDown {
             stackInstance = stackInstance0;
             CardView card = stackInstance.getSourceCard();
 
-            text = stackInstance.getText()
+            String rawText = stackInstance.getText()
                 .replace("\\r", "\r")
                 .replace("\\n", "\n");
             if (stackInstance.isOptionalTrigger() &&
                     stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
-                text = "(OPTIONAL) " + text;
+                rawText = "(OPTIONAL) " + rawText;
             }
+
+            // Format once when the display entry is created, not every rendering frame.
+            final String name = card.getName();
+            final String cId = "(" + card.getId() + ")";
+            final String optionalCost = !stackInstance.getOptionalCostString().isEmpty()
+                    ? " (" + stackInstance.getOptionalCostString() + ")" : "";
+            text = buildStackText(name, cId, optionalCost, rawText);
+            nameLength = name.length();
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final boolean isFaceDown = card.isFaceDown();
@@ -657,11 +666,7 @@ public class VStack extends FDropDown {
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
 
-            String name = sourceCard.getName();
-            String cId =  "(" + sourceCard.getId() + ")";
-            String optionalCostString = !stackInstance.getOptionalCostString().isEmpty() ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
-
-            drawStackText(g, buildStackText(name, cId, optionalCostString, text), name.length(),
+            drawStackText(g, text, nameLength,
                 FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
             if (!launched) { // replaces the early return
                 CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);

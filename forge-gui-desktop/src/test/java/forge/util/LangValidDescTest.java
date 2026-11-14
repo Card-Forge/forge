@@ -39,6 +39,14 @@ public class LangValidDescTest {
     }
 
     @Test
+    public void compoundAndCommaSeparatedDescriptionsKeepTheirWording() {
+        assertEquals("creature or planeswalker",
+                lang.describeValidList("Creature,Planeswalker"));
+        assertEquals("white and blue card",
+                lang.formatValidDesc("EACH Card.White & Card.Blue"));
+    }
+
+    @Test
     public void anythingElseIsLeftAlone() {
         assertEquals("other creature", lang.formatValidDesc("Creature.!Self"));
         assertEquals("Creature.attackedThisTurn,Land", lang.formatValidDesc("Creature.attackedThisTurn,Land"));

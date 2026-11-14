@@ -1,6 +1,7 @@
 package forge.ai;
 
 import forge.game.Game;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -19,6 +21,16 @@ import static org.testng.AssertJUnit.assertTrue;
  * "NICKNAMEreveals"). Each row names the card, which of its abilities is looked at, and what the text must and must not contain.
  */
 public class StackDescriptionTest extends AITest {
+
+    @Test
+    public void sharedDescriptionCleanupPreservesSentenceCase() {
+        assertEquals("Haste. It gains haste.",
+                SpellAbilityEffect.tidyDescription("haste . It  gains haste .", false));
+
+        // Sub-ability text must retain its continuation-style lowercase.
+        assertEquals("then draw a card.",
+                SpellAbilityEffect.tidyDescription("then draw a card.", true));
+    }
 
     private static final class Row {
         final String card;
