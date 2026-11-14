@@ -6421,7 +6421,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final String getMostRecentSet() {
-        return StaticData.instance().getCommonCards().getCard(getPaperCard().getName()).getEdition();
+        PaperCard pc = StaticData.instance().getCommonCards().getCard(getPaperCard().getName());
+        if (pc == null) {
+            pc = StaticData.instance().getVariantCards().getCard(getPaperCard().getName());
+        }
+        return pc.getEdition();
     }
 
     public final String getSetCode() {
