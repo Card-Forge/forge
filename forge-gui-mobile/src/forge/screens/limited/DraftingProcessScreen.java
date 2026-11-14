@@ -8,6 +8,7 @@ import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
 import forge.gui.FThreads;
@@ -110,7 +111,11 @@ public class DraftingProcessScreen extends FDeckEditor {
         final Deck[] computer = draft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(name);
-        finishedDraft.setHumanDeck((Deck) getDeck().copyTo(name));
+        final Deck humanDeck = (Deck) getDeck().copyTo(name);
+        if (draft.isCommanderDraft()) {
+            CommanderDraftUtil.markCommanderDraftDeck(humanDeck);
+        }
+        finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
         if(!isQuestDraft()) {
