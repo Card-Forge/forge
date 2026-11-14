@@ -36,7 +36,7 @@ import java.util.Set;
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
     public static final int TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS = 100;
-    // Location id of a check that doesn't exist in the APWorld (Emrakul only counts towards the goal).
+    // Location id of a check that doesn't exist in the APWorld (Arzakon only counts towards the goal).
     public static final long NO_LOCATION = -1L;
     public static final Set<String> COLOR_SET_NAMES =
             Collections.unmodifiableSet(new LinkedHashSet<>(List.of("white", "blue", "black", "red", "green")));
@@ -52,7 +52,7 @@ public class ArchipelagoUtil {
         public final ArchipelagoRegion region;
         public final boolean castleBoss;
         public final ArchipelagoCheckTypes check;
-        public final long locationId;     // Archipelago location id sent for this boss, or NO_LOCATION (Emrakul only counts towards the goal)
+        public final long locationId;     // Archipelago location id sent for this boss, or NO_LOCATION (Arzakon only counts towards the goal)
         private final List<String> recordedNames; // Lower-case names a defeat can be recorded under (EnemySprite.getName())
 
         private Boss(String name, String enemyName, ArchipelagoRegion region, boolean castleBoss, ArchipelagoCheckTypes check, long locationId, String... aliases) {
@@ -87,7 +87,9 @@ public class ArchipelagoUtil {
 
     // All checked bosses, grouped by region in ArchipelagoRegion order; the castle boss comes first in each region.
     public static final List<Boss> BOSSES = List.of(
-            castleBoss("Emrakul", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED, NO_LOCATION),
+            // Emrakul's location only exists in the APWorld when Arzakon is the final boss, the server ignores it otherwise
+            castleBoss("Emrakul", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED, 6L),
+            castleBoss("Arzakon", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.BOSS_ARZAKON_DEFEATED, NO_LOCATION),
             miniBoss("The Mother Slime", "Ooze Boss", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED, 100L),
             miniBoss("Slobad", "Slobad", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.SLOBAD_DEFEATED, 101L),
             miniBoss("Xira", "Xira", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.XIRA_DEFEATED, 102L),
@@ -326,7 +328,7 @@ public class ArchipelagoUtil {
     /// These are used as identifiers to make sure that when generating a world in networked archipelago they are placed close enough to the center to always be well accessible within their region.
     /// This is to prevent logic errors where a region unlock might be locked behind a certain miniboss dungeon, but that dungeon happened to generate in a random bubble within another region.
     public static List<String> getArchipelagoPois() {
-        return Arrays.asList("slime cave", "slobads factory", "xiras hive", "emrakul", "quest_aportaltonowhere", "quest_digsite", "quest_primaljungle", "quest_banditcave",
+        return Arrays.asList("slime cave", "slobads factory", "xiras hive", "emrakul", "arzakon", "quest_aportaltonowhere", "quest_digsite", "quest_primaljungle", "quest_banditcave",
                                 "nahiri encampment", "unhallowedabbey",
                                 "kiora island", "teferi hideout", "jacehold", "skep", "quest_libraryofvarsil",
                                 "slimefoots lair", "temple of liliana", "grolnoks bog", "vampirecastle3",

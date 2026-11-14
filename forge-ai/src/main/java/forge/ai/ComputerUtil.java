@@ -1633,7 +1633,7 @@ public class ComputerUtil {
         // currently confirming optional threat ability:
         // need to ignore it so AI doesn't think some of its objects are already taken care of
         if (stack.isResolving() && sa == null) {
-            sa = stack.peekAbility();
+            sa = stack.getResolvingAbility() != null ? stack.getResolvingAbility() : stack.peekAbility();
             saviour = null;
         }
 
@@ -1645,13 +1645,15 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            // account for copied abilities on the stack as well
+            SpellAbility original = spell;
             if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
-                spell = spell.getOriginalAbility();
+                original = spell.getOriginalAbility();
             }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
-            if (sa == null || (sa != spell && sa != sub)) {
+            if (sa == null || (sa != spell && sa != original && sa != sub)) {
                 predictThreatenedObjects(ai, saviour, spell).forEach(objects::add);
             }
             if (top) {

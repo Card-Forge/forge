@@ -38,6 +38,10 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         {
             displayName = data==null?"":data.getDisplayName();
         }
+        // Quest flags that activate this POI come from its definition, so they also apply after loading a save.
+        questFlagsToActivate.clear();
+        if (data != null)
+            questFlagsToActivate.addAll(Arrays.asList(data.questFlagsToActivate));
 
         oldMapId="";
         Array<Sprite> textureAtlas = Config.instance().getPOISprites(this.data);
@@ -125,6 +129,8 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     }
 
     public boolean getActive() {
+        if (forge.adventure.archipelago.ArchipelagoData.getInstance().isCastleOpenEarly(data))
+            return true;
         for (DialogData.ActionData.QuestFlag flag : questFlagsToActivate) {
             if (Current.player().getQuestFlag(flag.key) < flag.val){
                 return false;

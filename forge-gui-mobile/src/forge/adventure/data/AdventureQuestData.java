@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.GameScene;
@@ -12,6 +13,7 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.AdventureQuestEvent;
+import forge.adventure.util.AdventureQuestEventType;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
@@ -447,6 +449,16 @@ public class AdventureQuestData implements Serializable {
                 if (s.getStatus() == ACTIVE) {
                     if (s.hasRequiredFetchItems()) {
                         s.handleEvent(new AdventureQuestEvent());
+                    }
+                    // Archipelago opens the castles early: a castle beaten before its quest started still counts
+                    if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago
+                            && s.objective == AdventureQuestController.ObjectiveTypes.QuestFlag && s.mapFlag != null
+                            && Current.player().getQuestFlag(s.mapFlag) >= Math.max(1, s.mapFlagValue)) {
+                        AdventureQuestEvent event = new AdventureQuestEvent();
+                        event.type = AdventureQuestEventType.QUESTFLAG;
+                        event.flagName = s.mapFlag;
+                        event.flagValue = Current.player().getQuestFlag(s.mapFlag);
+                        s.handleEvent(event);
                     }
                     AdventureQuestController.instance().addQuestSprites(s);
                     showNotification = true;

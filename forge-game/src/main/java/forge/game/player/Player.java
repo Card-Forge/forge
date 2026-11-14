@@ -2939,6 +2939,14 @@ public class Player extends GameEntity implements Comparable<Player> {
                             e.printStackTrace();
                         }
                     }
+                    // Planeswalkers get their starting loyalty from a replacement effect instead of an etbCounter keyword
+                    if (c.isPlaneswalker()) {
+                        try {
+                            c.addCounterInternal(CounterType.getType("LOYALTY"), Integer.parseInt(c.getCurrentState().getBaseLoyalty()), null, false, null, null);
+                        } catch (NumberFormatException e) {
+                            // no fixed starting loyalty (e.g. X)
+                        }
+                    }
                 }
             }
         }
