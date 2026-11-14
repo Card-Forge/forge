@@ -4,7 +4,39 @@ Date=2024-05-07
 Name=Alchemy: Outlaws of Thunder Junction
 Type=Online
 ScryfallCode=YOTJ
-Booster=1 UncommonRareMythic:fromsheet("YOTJ cards"), 8 Common:fromsheet("OTJ cards"), 3 Uncommon:fromSheet("OTJ cards"), 1 UncommonRareMythic:fromSheet("OTJ cards"), 1 RareMythic:fromSheet("OTJ cards"), 1 BasicLand:fromSheet("OTJ cards")
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,Land,Wildcard,WildcardOTP
+Booster=5 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 Land, 1 Wildcard, 1 Wildcard+, 1 WildcardOTP
+
+[Common]
+Base=Common:fromSheet("OTJ cards")
+
+[Common-Guest]
+Base=Common:fromSheet("OTJ cards")
+Replace=.20F fromSheet("OTJ outlaw list")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YOTJ cards")
+Replace=0.385714F Rare:fromSheet("YOTJ cards")
+Replace=0.064286F Mythic:fromSheet("YOTJ cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("OTJ cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("OTJ cards")
+Replace=.025F RareMythic:!fromSheet("OTJ outlaw list")
+
+[Wildcard]
+Base=Any:!fromSheet("OTJ outlaw list")
+Replace=.0833F RareMythic:fromSheet("OTJ cards")
+
+[WildcardOTP]
+Base=Uncommon:fromSheet("OTP cards")
+Replace=.3333F RareMythic:fromSheet("OTP cards")
+
+[Land]
+Base=Land:fromSheet("OTJ cards")
 
 [cards]
 1 R Prairie Survivalist @Francis Tneh
