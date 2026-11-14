@@ -1,0 +1,7 @@
+Name:Calmwater Mentor
+ManaCost:2 W W
+Types:Creature Seal Monk
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for up to two creature cards with power 2 or less, reveal them, put them into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.powerLE2 | ChangeNum$ 2 | ShuffleNonMandatory$ True
+Oracle:When this creature enters, you may search your library for up to two creature cards with power 2 or less, reveal them, put them into your hand, then shuffle.
