@@ -475,6 +475,26 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("4264", "attacking a player with protection from creatures", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Grizzly Bears", c.ai); c.effect(c.opp, "Teferi's Protection"); },
                 c -> c.attackers().isEmpty() ? null : "attacked into protection"));
+        // protection from a chosen player (Guardian Archon, Eon Frolicker, Noble Heritage): the valid list has a comma in it, which crashed the attack check
+        l.add(new Scenario("protection-from-player", "attacking a player with protection from the attacking player (comma separated valid list)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Grizzly Bears", c.ai);
+                    c.opp.addChangedKeywords(java.util.Arrays.asList("Protection:Player.PlayerUID_" + c.ai.getId() + ":" + c.ai.getName()), new ArrayList<String>(), 1L, 0L); },
+                c -> c.attackers().isEmpty() ? null : "attacked into protection from the attacking player"));
+        // The Mindskinner: its damage is prevented and milled instead, an attack still does something
+        l.add(new Scenario("mindskinner", "The Mindskinner keeps attacking (its damage is replaced by a mill)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("The Mindskinner", c.ai); },
+                c -> c.attackers().stream().anyMatch(k -> k.getName().equals("The Mindskinner")) ? null : "The Mindskinner stayed home"));
+        l.add(new Scenario("mindskinner-token", "a creature other than The Mindskinner also attacks while the mill replacement is in play", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("The Mindskinner", c.ai); c.bf("Hill Giant", c.ai); },
+                c -> c.attackers().stream().anyMatch(k -> k.getName().equals("Hill Giant")) ? null : "Hill Giant stayed home"));
+        // Prismatic: the AI may spend any mana for it, so the colour of its lands must not decide whether it casts it
+        l.add(new Scenario("prismatic", "casts a spell with Prismatic using lands of another colour (should play Duress)", Fid.EXACT, "MAIN2", true,
+                c -> { c.bf("Island", 3, c.ai); c.hand("Lightning Bolt", c.opp);
+                    final Card duress = c.hand("Duress", c.ai);
+                    duress.addChangedCardKeywords(java.util.Arrays.asList("Prismatic"), new ArrayList<String>(), false, c.game.getNextTimestamp(), null); },
+                c -> c.plays("Duress") ? null : "AI did not cast Duress with Prismatic and only Islands" + c.why("Duress")));
+        l.add(noPlay("prismatic-control", "control for Prismatic: Duress without it is not payable with Islands", Fid.EXACT, "MAIN2", true, "Duress",
+                c -> { c.bf("Island", 3, c.ai); c.hand("Lightning Bolt", c.opp); c.hand("Duress", c.ai); }));
         l.add(new Scenario("4265", "keeps a blocker home against Noble Hierarch's exalted", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.ai.setLife(3, null); c.bf("Grizzly Bears", c.ai); c.bf("Serra Angel", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Grizzly Bears", c.opp); },
                 c -> c.attackers().size() >= 2 ? "attacked with everything while facing lethal exalted damage" : null));
