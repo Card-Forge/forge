@@ -1,6 +1,7 @@
 package forge.ai;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -20,6 +21,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -28,8 +30,8 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.IterableUtil;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 public class ComputerUtilCost {
@@ -536,6 +538,35 @@ public class ComputerUtilCost {
         return true;
     }
 
+    // Rough estimate whether the opponents' creatures could attack the planeswalker for its loyalty next turn,
+    // when our untapped creatures block the strongest attackers they can while accounting for menace & trample.
+    public static boolean isPlaneswalkerThreatened(final Player ai, final Card pw) {
+        return isPlaneswalkerThreatened(ai, pw, pw.getCurrentLoyalty());
+    }
+    public static boolean isPlaneswalkerThreatened(final Player ai, final Card pw, final int loyalty) {
+        List<Card> attackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> ComputerUtilCombat.canAttackNextTurn(c, pw));
+        attackers.sort(Comparator.comparingInt(c -> -ComputerUtilCombat.damageIfUnblocked(c, pw, null, false)));
+        List<Card> blockers = CardLists.filter(ai.getCreaturesInPlay(), Card::isUntapped);
+
+        int damage = 0;
+        for (Card attacker : attackers) {
+            int attackerDamage = ComputerUtilCombat.damageIfUnblocked(attacker, pw, null, false);
+            List<Card> canBlock = CardLists.filter(blockers, b -> CombatUtil.canBlock(attacker, b));
+            int needed = Math.max(1, CombatUtil.getMinNumBlockersForAttacker(attacker, ai));
+            if (canBlock.size() < needed) {
+                damage += attackerDamage;
+                continue;
+            }
+            List<Card> chosen = canBlock.subList(0, needed);
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                int absorbed = attacker.hasKeyword(Keyword.DEATHTOUCH) ? needed : Aggregates.sum(chosen, Card::getLethalDamage);
+                damage += Math.max(0, attackerDamage - absorbed);
+            }
+            blockers.removeAll(chosen);
+        }
+        return damage >= loyalty;
+    }
+
     /**
      * <p>
      * canPayCost.
@@ -594,15 +625,13 @@ public class ComputerUtilCost {
                 }
             }
 
-            // Try not to lose Planeswalker if not threatened
-            if (sa.isPwAbility()) {
+            // Try not to lose Planeswalker if not threatened, ultimates and game winning abilities are worth considering
+            if (sa.isPwAbility() && !sa.hasParam("Ultimate") && !ComputerUtilAbility.couldWinGame(payer, sa)) {
                 for (final CostPart part : cost.getCostParts()) {
                     if (part instanceof CostRemoveCounter) {
                         if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
-                            // refuse to pay if opponent has no creature threats or
-                            // 50% chance otherwise
-                            if (payer.getOpponents().getCreaturesInPlay().isEmpty()
-                                    || MyRandom.getRandom().nextFloat() < .5f) {
+                            // refuse to pay unless the opponents could kill it next turn anyway
+                            if (!isPlaneswalkerThreatened(payer, sa.getHostCard())) {
                                 return false;
                             }
                         }

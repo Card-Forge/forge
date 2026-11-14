@@ -45,6 +45,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -1887,10 +1888,58 @@ public class SpecialCardAi {
     // Timetwister
     public static class Timetwister {
         public static AiAbilityDecision consider(final Player ai, final SpellAbility sa) {
+            int numDraw = 7;
+            for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+                if (sub.getApi() == ApiType.Draw && sub.hasParam("NumCards")) {
+                    numDraw = AbilityUtils.calculateAmount(sa.getHostCard(), sub.getParam("NumCards"), sub);
+                }
+            }
+            int oppLossPerDraw = 0;
+            int aiLossPerDraw = 0;
+            // Looks for value when opponents draw cards. Only damage and life loss effects are counted.
+            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (Trigger t : c.getTriggers()) {
+                    if (t.getMode() != TriggerType.Drawn || !t.requirementsCheck(ai.getGame())) {
+                        continue;
+                    }
+                    SpellAbility trigSa = t.ensureAbility();
+                    String amount = trigSa == null ? null : trigSa.getApi() == ApiType.DealDamage ? trigSa.getParam("NumDmg")
+                            : trigSa.getApi() == ApiType.LoseLife ? trigSa.getParam("LifeAmount") : null;
+                    if (amount == null) {
+                        continue;
+                    }
+                    int loss = AbilityUtils.calculateAmount(c, amount, trigSa);
+                    String validCard = t.getParamOrDefault("ValidCard", "Card");
+                    if (validCard.contains("OppOwn")) {
+                        oppLossPerDraw += loss;
+                    } else if (validCard.equals("Card")) {
+                        oppLossPerDraw += loss;
+                        aiLossPerDraw += loss;
+                    }
+                }
+            }
+            int oppLoss = oppLossPerDraw * numDraw;
+            // Win despite symmetrical damage, our triggers hurting opponents are ordered to resolve first
+            if (oppLossPerDraw > 0 && ai.getOpponents().allMatch(p -> p.canLoseLife() && p.getLife() <= oppLoss)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else if (aiLossPerDraw * numDraw >= ai.getLife() && ai.canLoseLife()) {
+                // Don't lose the game due to symmetrical damage
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (oppLossPerDraw > 0) {
+                // Go for it if the draws are lethal for an opponent
+                for (Player p : ai.getOpponents()) {
+                    if (p.canLoseLife() && p.getLife() <= oppLoss) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                }
+            }
+
             final int aiHandSize = ai.getCardsIn(ZoneType.Hand).size();
             int maxOppHandSize = 0;
 
             final int HAND_SIZE_THRESHOLD = 3;
+            // the more the opponents lose per draw, the more cards in hand we're willing to give up for it
+            final int lowHandSize = HAND_SIZE_THRESHOLD + Math.max(0, oppLossPerDraw - aiLossPerDraw);
 
             for (Player p : ai.getOpponents()) {
                 int handSize = p.getCardsIn(ZoneType.Hand).size();
@@ -1899,8 +1948,11 @@ public class SpecialCardAi {
                 }
             }
 
+            // a hand with nothing worth casting is as good as an empty one, check in main 2 when we'd have cast it already
+            boolean deadHand = ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai) && isDeadHand(ai, sa);
+
             // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
-            if (aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
+            if (deadHand || aiHandSize < lowHandSize || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
                 // if the AI has less than 3 cards in hand or the opponent has more than 3 cards in hand than the AI
                 // then the AI is willing to play this ability
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1908,6 +1960,31 @@ public class SpecialCardAi {
                 // otherwise, don't play this ability
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+        }
+
+        // We could afford all other spells in hand together, but don't want to cast any of them
+        private static boolean isDeadHand(final Player ai, final SpellAbility sa) {
+            Map<Card, Integer> cheapestAffordable = new HashMap<>();
+            Set<Card> spells = new HashSet<>();
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
+            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+                // skip ourselves and other wheels, those would ask the same question back
+                if (!testSa.isSpell() || testSa.getHostCard().equals(sa.getHostCard())
+                        || "Timetwister".equals(testSa.getParam("AILogic"))) {
+                    continue;
+                }
+                testSa.setActivatingPlayer(ai);
+                spells.add(testSa.getHostCard());
+                if (ComputerUtilCost.canPayCost(testSa, ai, false)) {
+                    cheapestAffordable.merge(testSa.getHostCard(), testSa.getPayCosts().getTotalMana().getCMC(), Math::min);
+                    if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
+                        return false;
+                    }
+                }
+            }
+            // keep a hand we just don't have the mana for yet
+            int totalCost = cheapestAffordable.values().stream().mapToInt(Integer::intValue).sum();
+            return cheapestAffordable.size() == spells.size() && totalCost <= ComputerUtilMana.getAvailableManaEstimate(ai);
         }
     }
 
