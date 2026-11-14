@@ -40,9 +40,7 @@ public final class SResizingUtil {
     private static final List<DragCell> TOP_PANELS = new ArrayList<>();
     private static final List<DragCell> BOTTOM_PANELS = new ArrayList<>();
 
-    private static int dX;
     private static int evtX;
-    private static int dY;
     private static int evtY;
 
     /** Minimum cell width. */
@@ -202,21 +200,16 @@ public final class SResizingUtil {
 
     /** @param e &emsp; {@link java.awt.event.MouseEvent} */
     public static void resizeX(final MouseEvent e) {
-        dX = (int) e.getLocationOnScreen().getX() - evtX;
-        evtX = (int) e.getLocationOnScreen().getX();
-        boolean leftLock = false;
-        boolean rightLock = false;
-
+        if (LEFT_PANELS.isEmpty() || RIGHT_PANELS.isEmpty()) { return; }
+        int dX = e.getXOnScreen() - evtX;
         for (final DragCell t : LEFT_PANELS) {
-            if ((t.getW() + dX) < W_MIN) { leftLock = true; break; }
+            dX = Math.max(dX, Math.min(0, W_MIN - t.getW()));
         }
-
         for (final DragCell t : RIGHT_PANELS) {
-            if ((t.getW() - dX) < W_MIN) { rightLock = true; break; }
+            dX = Math.min(dX, Math.max(0, t.getW() - W_MIN));
         }
-
-        if (dX < 0 && leftLock) { return; }
-        if (dX > 0 && rightLock) { return; }
+        if (dX == 0) { return; }
+        evtX += dX;
 
         for (final DragCell t : LEFT_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW() + dX, t.getH());
@@ -231,21 +224,16 @@ public final class SResizingUtil {
 
     /** @param e &emsp; {@link java.awt.event.MouseEvent} */
     public static void resizeY(final MouseEvent e) {
-        dY = (int) e.getLocationOnScreen().getY() - evtY;
-        evtY = (int) e.getLocationOnScreen().getY();
-        boolean topLock = false;
-        boolean bottomLock = false;
-
+        if (TOP_PANELS.isEmpty() || BOTTOM_PANELS.isEmpty()) { return; }
+        int dY = e.getYOnScreen() - evtY;
         for (final DragCell t : TOP_PANELS) {
-            if ((t.getH() + dY) < H_MIN) { topLock = true; break; }
+            dY = Math.max(dY, Math.min(0, H_MIN - t.getH()));
         }
-
         for (final DragCell t : BOTTOM_PANELS) {
-            if ((t.getH() - dY) < H_MIN) { bottomLock = true; break; }
+            dY = Math.min(dY, Math.max(0, t.getH() - H_MIN));
         }
-
-        if (dY < 0 && topLock) { return; }
-        if (dY > 0 && bottomLock) { return; }
+        if (dY == 0) { return; }
+        evtY += dY;
 
         for (final DragCell t : TOP_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW(), t.getH() + dY);
