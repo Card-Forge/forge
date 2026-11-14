@@ -12,7 +12,6 @@ import forge.card.CardEdition;
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
-import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
@@ -697,11 +696,9 @@ public class GameState {
 
     private String processManaPool(ManaPool manaPool) {
         StringBuilder mana = new StringBuilder();
-        for (final byte c : ManaAtom.MANATYPES) {
-            int amount = manaPool.getAmountOfColor(c);
-            for (int i = 0; i < amount; i++) {
-                mana.append(MagicColor.toShortString(c)).append(" ");
-            }
+
+        for (final Map.Entry<Byte, Integer> e : manaPool.getView().entrySet()) {
+            mana.append(StringUtils.repeat(MagicColor.toShortString(e.getKey()) + " ", e.getValue()));
         }
 
         return mana.toString().trim();
