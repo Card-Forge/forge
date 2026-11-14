@@ -366,6 +366,17 @@ public class AiReportScenarioTest extends AITest {
                         return wanted.equals(name) ? null : "named " + name + " instead of " + wanted;
                     }));
         }
+        // Vampire Hexmage: "remove all counters" frees an impending permanent (Overlord of the Balemurk is no creature until the last time counter is gone)
+        l.add(play("hexmage-impending-end-step", "Vampire Hexmage frees the impending Overlord of the Balemurk at the end of the opponent's turn", Fid.EXACT, "END_OF_TURN", false, "Vampire Hexmage",
+                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
+        l.add(play("hexmage-impending-removal", "Vampire Hexmage frees the impending Overlord of the Balemurk in response to removal aimed at it", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
+                c -> { c.bf("Swamp", 2, c.ai); final Card overlord = c.bf("Overlord of the Balemurk", c.ai); c.counters(overlord, CounterEnumType.TIME, 5);
+                    c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Disenchant", overlord); }));
+        l.add(play("hexmage-in-danger", "Vampire Hexmage frees the impending Overlord of the Balemurk when Hexmage itself is about to be destroyed", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
+                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5);
+                    final Card hexmage = c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Terror", hexmage); }));
+        l.add(noPlay("hexmage-idle", "Vampire Hexmage keeps itself while nothing threatens it and it is not the end of the opponent's turn", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
+                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
         // Tavern Scoundrel + Krark, the Thumbless: winning the coin flip of Krark's trigger is winning a coin flip
         l.add(new Scenario("krark-tavern-scoundrel", "Krark's coin flip won: Tavern Scoundrel creates two Treasure tokens", Fid.EXACT, M1, true,
                 c -> { c.bf("Krark, the Thumbless", c.ai); c.bf("Tavern Scoundrel", c.ai); },
