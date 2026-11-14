@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -327,6 +329,34 @@ public class VStack extends FDropDown {
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
     }
 
+    /**
+     * Header line "Name (id) [optional cost]" followed by the description. The description from the game already
+     * starts with "Name (id) - " for spells/abilities, so only that leading prelude is removed; the rest of the
+     * text is shown untouched (no string hacks that could drop or garble parts of it).
+     */
+    private static String buildStackText(String name, String cId, String optionalCost, String rawText) {
+        String body = rawText == null ? "" : rawText.trim();
+        String optional = "";
+        if (body.startsWith(OPTIONAL_PREFIX)) {
+            optional = OPTIONAL_PREFIX;
+            body = body.substring(OPTIONAL_PREFIX.length()).trim();
+        }
+        if (body.startsWith(name)) {
+            final Matcher m = PRELUDE.matcher(body);
+            m.region(name.length(), body.length());
+            if (m.lookingAt()) { // only the "Name (id) -" prelude
+                body = body.substring(m.end()).trim();
+            }
+        }
+        body = TextUtil.fastReplace(body, "CARDNAME", name);
+        body = TextUtil.fastReplace(body, "  ", " ");
+        String header = name + " " + (name.length() > 1 ? cId : "") + optionalCost;
+        body = (optional + body).trim();
+        return body.isEmpty() ? header : header + "\n" + body;
+    }
+    private static final String OPTIONAL_PREFIX = "(OPTIONAL) ";
+    private static final Pattern PRELUDE = Pattern.compile("\\s*(?:\\(\\d+\\)\\s*-?|-)\\s*");
+
     //frosted cards sit on translucent glass over any battlefield, so the card name gets a thin dark outline
     private static void drawStackText(Graphics g, String text, int nameLength, FSkinFont font, Color color, float x, float y, float w, float h, float visibleY, float visibleH, boolean wrap, int align, boolean center) {
         if (VPlayerPanel.isFrosted()) {
@@ -439,7 +469,8 @@ public class VStack extends FDropDown {
         public final StackItemView stackInstance;
         private final Color foreColor, backColor, backColor2; //backColor2: the far end of the gradient on glass cards
         private Color glassStart, glassEnd; //the frosted gradient, built on the first glass draw
-        private String text;
+        private final String text;
+        private final int nameLength;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
         private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
@@ -448,13 +479,21 @@ public class VStack extends FDropDown {
             stackInstance = stackInstance0;
             CardView card = stackInstance.getSourceCard();
 
-            text = stackInstance.getText()
+            String rawText = stackInstance.getText()
                 .replace("\\r", "\r")
                 .replace("\\n", "\n");
             if (stackInstance.isOptionalTrigger() &&
                     stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
-                text = "(OPTIONAL) " + text;
+                rawText = "(OPTIONAL) " + rawText;
             }
+
+            // Format once when the display entry is created, not every rendering frame.
+            final String name = card.getName();
+            final String cId = "(" + card.getId() + ")";
+            final String optionalCost = !stackInstance.getOptionalCostString().isEmpty()
+                    ? " (" + stackInstance.getOptionalCostString() + ")" : "";
+            text = buildStackText(name, cId, optionalCost, rawText);
+            nameLength = name.length();
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final boolean isFaceDown = card.isFaceDown();
@@ -630,40 +669,8 @@ public class VStack extends FDropDown {
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
 
-            String name = sourceCard.getName();
-            int index = text.indexOf(name);
-            String newtext = "";
-            String cId =  "(" + sourceCard.getId() + ")";
-            String optionalCostString = !stackInstance.getOptionalCostString().isEmpty() ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
-
-            if (index == -1) {
-                newtext = TextUtil.fastReplace(text.trim(), "  ", " ");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,"--","-"),"- -","-");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
-                newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
-                drawStackText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""), name.length(),
-                    FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-
-            } else {
-                String modifier = (text.substring(0, index).length() > 0) ? "CARDNAME" : "";
-                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + modifier + text.substring(index + name.length()), "- -", "-");
-                String trimSecond = TextUtil.fastReplace(trimFirst, name+" "+cId, name);
-                newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
-
-                if(newtext.equals("\n"+name))
-                    drawStackText(g, name + " " + cId + optionalCostString, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-                else {
-                    newtext = TextUtil.fastReplace(newtext, "  ", " ");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
-                    newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
-                    newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
-                    newtext = TextUtil.fastReplace(newtext, name+name, name);
-                    drawStackText(g, name+" "+cId + optionalCostString +newtext, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-                }
-            }
+            drawStackText(g, text, nameLength,
+                FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
             if (!launched) { // replaces the early return
                 CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
             } else {

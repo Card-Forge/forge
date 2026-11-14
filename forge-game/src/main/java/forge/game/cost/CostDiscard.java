@@ -110,7 +110,10 @@ public class CostDiscard extends CostPartWithList {
             }
             else {
                 desc.append(this.getDescriptiveType());
-                desc.append(" card");
+                // "enchantment, instant or sorcery card" already says what it is
+                if (!desc.toString().matches("(?i).*\\bcards?$")) {
+                    desc.append(" card");
+                }
             }
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));

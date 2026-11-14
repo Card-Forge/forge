@@ -24,7 +24,16 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("TriggerDescription")) {
-            return sa.getParam("TriggerDescription");
+            String desc = sa.getParam("TriggerDescription");
+            // "When you do, ABILITY": the placeholder stands for what the reflexive trigger does
+            if (desc.contains("ABILITY")) {
+                final SpellAbility execute = sa.getAdditionalAbility("Execute");
+                String what = execute == null ? "" : execute.getStackDescription();
+                if (what != null && !what.isEmpty()) {
+                    desc = desc.replace("ABILITY", what.replaceFirst("^.*? \\(\\d+\\) - ", ""));
+                }
+            }
+            return desc.replaceAll("\\s*\\(NumTimes=\\d+\\)", "");
         }
         if (sa.hasParam("SpellDescription")) {
             return sa.getParam("SpellDescription");

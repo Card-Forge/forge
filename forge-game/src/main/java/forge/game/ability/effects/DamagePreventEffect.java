@@ -22,6 +22,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
@@ -59,7 +60,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
-            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
+            sb.append(" and each other ").append(Lang.getInstance().describeValidList(sa.getParam("ValidTgts")))
                     .append(" that shares a color with ");
             if (tgts.size() > 1) {
                 sb.append("them");

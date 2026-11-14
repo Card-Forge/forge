@@ -30,6 +30,8 @@ import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -41,6 +43,60 @@ import java.util.*;
  */
 
 public abstract class SpellAbilityEffect {
+
+    private static final Pattern IF_CONDITION_SENTENCE =
+            Pattern.compile("(?s)If [^.]*\\.");
+    private static final Pattern EMPTY_SPELL_DESCRIPTION =
+            Pattern.compile("[,\\s]*");
+    private static final Pattern REMOVE_REMINDER_TEXT =
+            Pattern.compile("\\s*\\([^)]*\\)");
+    private static final Pattern CONDITION_CONTINUATION =
+            Pattern.compile("(?s)(?:then|otherwise|instead|and|or|if|unless|when|whenever|as|until|for|at|during|while|after|before)\\b.*");
+    private static final Pattern STACK_CARD_PRELUDE =
+            Pattern.compile("^(.*? \\(\\d+\\) - )([a-z])");
+
+    /** An effect that goes on after a comma ("choose target creature, roll a d20") starts with one of these verbs. */
+    private static final Pattern CONTINUING_VERB = Pattern.compile("^(\\s*)([A-Z])((?:oll|raw|reate|ut|ap|ntap|estroy|xile|eturn|acrifice|iscard|ain|ose|cry|urveil|ill|eveal|earch|huffle|dd|hoose|ook|ttach|ight|nvestigate|roliferate|xplore|onnive|oad|egenerate|ounter|opy|eal)\\b.*)$", Pattern.DOTALL);
+    private static final Pattern TIDY_COMMA_RUN = Pattern.compile(",{3,}");
+    private static final Pattern TIDY_OPTIONAL_PLURAL = Pattern.compile("(\\w)\\(s\\)");
+    private static final Pattern TIDY_DOUBLE_PERIOD = Pattern.compile("(?<!\\.)\\.\\.(?!\\.)");
+    private static final Pattern TIDY_SENTENCE_SPACE =
+            Pattern.compile("(?<=[a-z]{2}[.!?])(?=[A-Z][a-z]+ [a-z])");
+    private static final Pattern TIDY_NEWLINES = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*");
+    private static final Pattern TIDY_DOUBLE_SPACES = Pattern.compile("[ \\t]{2,}");
+    private static final Pattern TIDY_PUNCTUATION_SPACE = Pattern.compile(" +([.,;:!?])");
+    private static final Pattern TIDY_DUPLICATE_CONJUNCTION =
+            Pattern.compile("\\b([Tt]hen|[Aa]nd) \\1\\b");
+
+    /**
+     * Whether an amount cannot be read off yet while the ability is on the stack: it is a later part of a chain (what is
+     * counted may change before it resolves, "put a counter, then draw a card for each counter") or it counts what the
+     * earlier parts remember.
+     */
+    protected static boolean isAmountDeferred(final SpellAbility sa, final String amount) {
+        if (amount == null || StringUtils.isNumeric(amount)) {
+            return false;
+        }
+        if (sa instanceof AbilitySub) {
+            return true;
+        }
+        final String svar = sa.getSVar(amount);
+        return svar.contains("Remembered") || svar.contains("Imprinted");
+    }
+
+    /**
+     * The words of the card's own text that give such an amount ("3 life for each card exiled this way"), found with a
+     * regular expression whose first group is the part to use; null when the text has none.
+     */
+    protected static String amountTextFromCard(final SpellAbility sa, final String regex) {
+        String text = sa.getRootAbility().getParamOrDefault("SpellDescription", "");
+        if (text.isEmpty()) {
+            return null;
+        }
+        text = text.replace("CARDNAME", sa.getHostCard().getName());
+        final java.util.regex.Matcher m = java.util.regex.Pattern.compile(regex).matcher(text);
+        return m.find() ? m.group(1) : null;
+    }
 
     public void resolve(SpellAbility sa) {}
 
@@ -157,17 +213,27 @@ public abstract class SpellAbilityEffect {
                     }
                 }
                 if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
-                    sb.append(" (Targeting: ").append(Lang.joinHomogenous(sa.getTargets())).append(")");
+                    sb.append(" (Targeting: ").append(joinNamed(sa.getTargets())).append(")");
                 }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 tokenizeString(sa, sb, stackDesc);
             }
         } else {
-            final String condDesc = sa.getParam("ConditionDescription");
+            String condDesc = sa.getParam("ConditionDescription");
+            // "If you control a creature with power 4 or greater." is written as a sentence of its own but leads the effect
+            if (condDesc != null && IF_CONDITION_SENTENCE.matcher(condDesc).matches()) {
+                condDesc = condDesc.substring(0, condDesc.length() - 1) + ",";
+            }
             final String afterDesc = sa.getParam("AfterDescription");
-            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
+            String effectDesc = this.getStackDescription(sa);
+            // an effect with nothing to say for itself is told in the card's own words
+            if ((effectDesc == null || effectDesc.isBlank()) && sa.hasParam("SpellDescription")
+                    && !EMPTY_SPELL_DESCRIPTION.matcher(sa.getParam("SpellDescription")).matches()) {
+                effectDesc = REMOVE_REMINDER_TEXT.matcher(sa.getParam("SpellDescription")).replaceAll("");
+            }
+            final String baseDesc = CardTranslation.translateSingleDescriptionText(effectDesc, sa.getHostCard());
             if (condDesc != null) {
-                sb.append(condDesc).append(" ");
+                sb.append(conditionPrefix(sa, condDesc)).append(" ");
             }
             sb.append(condDesc != null && condDesc.endsWith(",") ? StringUtils.uncapitalize(baseDesc) : baseDesc);
             if (afterDesc != null) {
@@ -180,7 +246,29 @@ public abstract class SpellAbilityEffect {
             // This includes all subAbilities
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
-                sb.append(abSub.getStackDescription());
+                String subText = abSub.getStackDescription();
+                // a part that starts a new sentence gets a capital, one that goes on after a comma does not
+                final int lead = subText.length() - subText.stripLeading().length();
+                if (lead < subText.length() && Character.isLowerCase(subText.charAt(lead))
+                        && endsWithSentence(sb)) {
+                    subText = subText.substring(0, lead) + Character.toUpperCase(subText.charAt(lead)) + subText.substring(lead + 1);
+                }
+                // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
+                if (sb.toString().stripTrailing().endsWith(",")) {
+                    final Matcher vm = Pattern.compile("^(\\s*)([A-Z])((?:oll|raw|reate|ut|ap|ntap|estroy|xile|eturn|acrifice|iscard|ain|ose|cry|urveil|ill|eveal|earch|huffle|dd|hoose|ook|ttach|ight|nvestigate|roliferate|xplore|onnive|oad|egenerate|ounter|opy|eal)\\b.*)$",
+                            Pattern.DOTALL).matcher(subText);
+                    if (vm.matches()) {
+                        subText = vm.group(1) + vm.group(2).toLowerCase() + vm.group(3);
+                    }
+                }
+                // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
+                if (endsWithComma(sb)) {
+                    final Matcher vm = CONTINUING_VERB.matcher(subText);
+                    if (vm.matches()) {
+                        subText = vm.group(1) + vm.group(2).toLowerCase() + vm.group(3);
+                    }
+                }
+                sb.append(subText);
             }
         }
 
@@ -198,7 +286,87 @@ public abstract class SpellAbilityEffect {
         String currentName = sa.getHostCard().getTranslatedName();
         String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
         substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
-        return substitutedDesc;
+        String result = tidyDescription(substitutedDesc, sa instanceof AbilitySub);
+        if (!(sa instanceof AbilitySub)) {
+            // the text after the "Card (12) -" prelude starts a sentence
+            final Matcher m = STACK_CARD_PRELUDE.matcher(result);
+            if (m.find()) {
+                result = m.group(1) + m.group(2).toUpperCase() + result.substring(m.end());
+            }
+        }
+        return result;
+    }
+
+    /** Whether the text so far ends with a comma, ignoring trailing whitespace (no copy of the text is made). */
+    private static boolean endsWithComma(final StringBuilder sb) {
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            final char c = sb.charAt(i);
+            if (!Character.isWhitespace(c)) {
+                return c == ',';
+            }
+        }
+        return false;
+    }
+
+    private static boolean endsWithSentence(final StringBuilder text) {
+        for (int i = text.length() - 1; i >= 0; i--) {
+            final char c = text.charAt(i);
+            if (Character.isWhitespace(c)) {
+                continue;
+            }
+            return c == '.' || c == '!' || c == '?' || c == ':' || c == '"'
+                    || c == '\u201d' || c == ')' || c == '\n';
+        }
+        return true;
+    }
+
+    /**
+     * A ConditionDescription is usually a whole condition ("If you control a Forest,"). Some scripts only give the
+     * subject of one ("a permanent you controlled or a token,"), the rest being said by the spell before it, so that
+     * the condition is completed from what the parent ability did.
+     */
+    private static String conditionPrefix(final SpellAbility sa, final String condDesc) {
+        if (condDesc.isEmpty() || !Character.isLowerCase(condDesc.charAt(0)) || !condDesc.endsWith(",")
+                || CONDITION_CONTINUATION.matcher(condDesc).matches()) {
+            return condDesc;
+        }
+        final SpellAbility parent = sa.getParent();
+        String did = null;
+        if (parent != null && parent.getApi() != null) {
+            switch (parent.getApi()) {
+                case Destroy: case DestroyAll: did = "was destroyed this way"; break;
+                case Sacrifice: case SacrificeAll: did = "was sacrificed this way"; break;
+                case Discard: did = "was discarded this way"; break;
+                case Mill: did = "was milled this way"; break;
+                case ChangeZone: case ChangeZoneAll:
+                    did = "Exile".equals(parent.getParam("Destination")) ? "was exiled this way" : "was put there this way"; break;
+                default: break;
+            }
+        }
+        final String subject = condDesc.substring(0, condDesc.length() - 1);
+        return "If " + subject + (did == null ? "," : " " + did + ",");
+    }
+
+    /**
+     * Whitespace and punctuation of a composed description: one space between words, none before a full stop or comma,
+     * and nothing trailing on the whole text. Effects append their pieces with a space each, which leaves "haste ." and
+     * "It  gains" behind.
+     */
+    public static String tidyDescription(final String text, final boolean isSubPart) {
+        String t = TIDY_COMMA_RUN.matcher(text).replaceAll(" ");
+        t = TIDY_OPTIONAL_PLURAL.matcher(t).replaceAll("$1");
+        t = TIDY_DOUBLE_PERIOD.matcher(t).replaceAll(".");
+        t = TIDY_SENTENCE_SPACE.matcher(t).replaceAll(" ");
+        t = TIDY_NEWLINES.matcher(t).replaceAll("\n");
+        t = TIDY_DOUBLE_SPACES.matcher(t).replaceAll(" ");
+        t = TIDY_PUNCTUATION_SPACE.matcher(t).replaceAll("$1");
+        t = TIDY_DUPLICATE_CONJUNCTION.matcher(t).replaceAll("$1");
+        // a part that starts a sentence ("then discard a card.") is written with a capital
+        final int first = t.length() - t.stripLeading().length();
+        if (!isSubPart && first < t.length() && Character.isLowerCase(t.charAt(first))) {
+            t = t.substring(0, first) + Character.toUpperCase(t.charAt(first)) + t.substring(first + 1);
+        }
+        return isSubPart ? t : t.stripTrailing();
     }
 
     // Common functions that all SAEffects will probably use
@@ -242,16 +410,83 @@ public abstract class SpellAbilityEffect {
                     } else if (t.startsWith("s:")) {
                         objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
                     } else if (t.startsWith("c:")) {
-                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                        final List<? extends GameObject> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                        objs = cards.isEmpty() ? AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa) : cards;
                     } else {
                         objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                     }
-                    sb.append(Lang.joinHomogenous(objs));
+                    sb.append(objs.isEmpty() ? undefinedObjectText(t) : joinNamed(objs));
                 }
             } else {
                 sb.append(t);
             }
         }
+    }
+
+    /**
+     * The subject of a sentence about players. A player that is chosen or remembered only while the spell resolves is
+     * not known yet when its text is shown, so that it is told by the script's Defined value instead of left empty.
+     */
+    protected static String playersOrDescribed(final SpellAbility sa, final List<? extends GameEntity> players, final String definedParam) {
+        if (players != null && !players.isEmpty()) {
+            return Lang.joinHomogenous(players);
+        }
+        final String def = sa.getParamOrDefault(definedParam, "");
+        if (def.contains("Opponent")) {
+            return "each opponent";
+        } else if (def.equals("Player") || def.startsWith("Player.") || def.equals("EachPlayer")) {
+            return "each player";
+        } else if (def.contains("Chosen")) {
+            return "the chosen player";
+        }
+        return "that player";
+    }
+
+    /** A spell or ability on the stack is told by its card ("Lightning Bolt (32)"), not by the text it would show. */
+    protected static String joinNamed(final Iterable<?> objects) {
+        final Iterator<?> iterator = objects.iterator();
+        if (!iterator.hasNext()) {
+            return "";
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        appendNamed(sb, iterator.next());
+        while (iterator.hasNext()) {
+            final Object object = iterator.next();
+            sb.append(iterator.hasNext() ? ", " : " and ");
+            appendNamed(sb, object);
+        }
+        return sb.toString();
+    }
+
+    private static void appendNamed(final StringBuilder sb, final Object object) {
+        if (object instanceof SpellAbility) {
+            final SpellAbility spell = (SpellAbility) object;
+            if (spell.getHostCard() == null) {
+                sb.append(spell);
+            } else {
+                sb.append(spell.getHostCard());
+                if (spell.isAbility()) {
+                    sb.append("'s ability");
+                }
+            }
+        } else {
+            sb.append(String.valueOf(object));
+        }
+    }
+
+    /** What a {c:Equipped}-like reference reads as while nothing is there to name yet (nothing equipped, nothing chosen). */
+    private static String undefinedObjectText(final String token) {
+        final boolean players = token.startsWith("p:");
+        final String def = token.replaceFirst("^[pcs]:", "");
+        if (players) {
+            return "that player";
+        } else if (def.startsWith("Equipped")) {
+            return "equipped creature";
+        } else if (def.startsWith("Enchanted")) {
+            return "enchanted permanent";
+        }
+        return "that " + (token.startsWith("s:") ? "spell" : "card");
     }
 
     // Target/defined methods

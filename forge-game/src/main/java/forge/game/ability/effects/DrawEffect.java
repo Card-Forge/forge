@@ -51,7 +51,9 @@ public class DrawEffect extends SpellAbilityEffect {
             sb.append(Lang.joinVerb(tgtPlayers, " draw")).append(" ");
             //if NumCards calculation could change between getStackDescription and resolve, use NumCardsDesc to avoid
             //a "wrong" stack description
-            sb.append(sa.hasParam("NumCardsDesc") ? sa.getParam("NumCardsDesc") : numCards == 1 ? "a card" :
+            final String deferred = !sa.hasParam("NumCardsDesc") && isAmountDeferred(sa, sa.getParam("NumCards"))
+                    ? amountTextFromCard(sa, "draws? ((?:a|an|\\w+) cards? (?:for each|equal to)[^.]*)") : null;
+            sb.append(sa.hasParam("NumCardsDesc") ? sa.getParam("NumCardsDesc") : deferred != null ? deferred : numCards == 1 ? "a card" :
                     (Lang.getNumeral(numCards) + " cards"));
             sb.append(".");
         }

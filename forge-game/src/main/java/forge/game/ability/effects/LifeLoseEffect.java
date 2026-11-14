@@ -7,7 +7,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
@@ -25,7 +24,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
         final String spellDesc = sa.getParam("SpellDescription");
 
         int affected = getTargetPlayers(sa).size();
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+        sb.append(playersOrDescribed(sa, getTargetPlayers(sa), "Defined"));
 
         sb.append(affected > 1 ? " each lose " : " loses ");
         if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
