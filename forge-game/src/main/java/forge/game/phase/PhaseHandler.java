@@ -408,10 +408,13 @@ public class PhaseHandler implements IHasForgeLog {
                         game.updateCombatForView();
                     }
 
-                    // no first strikers, skip this step
-                    if (!combat.assignCombatDamage(true)) {
+                    // this step happens only if an attacking or blocking creature has first strike
+                    // or double strike (rule 510.4); when it happens, players get priority in it
+                    // even when no creature assigns damage (rule 510.3)
+                    boolean firstStrikeAssigned = combat.assignCombatDamage(true);
+                    if (!combat.hasFirstStrikeCombatants()) {
                         givePriorityToPlayer = false;
-                    } else {
+                    } else if (firstStrikeAssigned) {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -421,9 +424,9 @@ public class PhaseHandler implements IHasForgeLog {
                         game.updateCombatForView();
                     }
 
-                    if (!combat.assignCombatDamage(false)) {
-                        givePriorityToPlayer = false;
-                    } else {
+                    // this step always happens (rule 510.4), and players get priority
+                    // even when no creature assigns damage in it
+                    if (combat.assignCombatDamage(false)) {
                         combat.dealAssignedDamage();
                     }
                     break;
