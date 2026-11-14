@@ -342,6 +342,51 @@ public class AiReportScenarioTest extends AITest {
                     final String name = ((PlayerControllerAi) c.ai.getController()).chooseCardName(naming, f -> true, "Card.nonLand", "");
                     return "Birds of Paradise".equals(name) ? "named Birds of Paradise again" : null;
                 }));
+        // Meddling Mage names the opponent's key cards in the order of the list, skipping one that is already in play
+        for (final boolean firstInPlay : new boolean[] { false, true }) {
+            l.add(new Scenario("meddling-mage-key-order", "Meddling Mage names the first key card" + (firstInPlay ? " that is not already in play" : ""),
+                    Fid.EXACT, M1, true,
+                    c -> {
+                        if (c.opp.getRegisteredPlayer() == null || c.opp.getRegisteredPlayer().getDeck() == null) {
+                            throw new SkipException("the test game has no registered deck to hold key cards");
+                        }
+                        // getKeyCards() hands out a copy: the list is filled through addKeyCard, in the order the player wants them answered
+                        for (final String key : new String[] { "Eladamri, Korvecdal", "Serra's Emissary", "Iona, Shield of Emeria", "Champion of Rhonas" }) {
+                            c.opp.getRegisteredPlayer().getDeck().addKeyCard(key);
+                        }
+                        if (firstInPlay) { c.bf("Eladamri, Korvecdal", c.opp); } else { c.hand("Eladamri, Korvecdal", c.opp); }
+                        c.hand("Serra's Emissary", c.opp); c.hand("Iona, Shield of Emeria", c.opp); c.hand("Champion of Rhonas", c.opp);
+                    },
+                    c -> {
+                        final Card mage = c.bf("Meddling Mage", c.ai);
+                        final SpellAbility naming = mage.getReplacementEffects().get(0).getOverridingAbility();
+                        naming.setActivatingPlayer(c.ai);
+                        final String name = ((PlayerControllerAi) c.ai.getController()).chooseCardName(naming, f -> true, "Card.nonLand", "");
+                        final String wanted = firstInPlay ? "Serra's Emissary" : "Eladamri, Korvecdal";
+                        return wanted.equals(name) ? null : "named " + name + " instead of " + wanted;
+                    }));
+        }
+        // Tavern Scoundrel + Krark, the Thumbless: winning the coin flip of Krark's trigger is winning a coin flip
+        l.add(new Scenario("krark-tavern-scoundrel", "Krark's coin flip won: Tavern Scoundrel creates two Treasure tokens", Fid.EXACT, M1, true,
+                c -> { c.bf("Krark, the Thumbless", c.ai); c.bf("Tavern Scoundrel", c.ai); },
+                c -> {
+                    // a lost flip returns the spell to the hand, so cast it again until a flip is won (a coin never loses 40 times in a row)
+                    for (int i = 0; i < 40; i++) {
+                        c.bf("Mountain", c.ai);
+                        final Card bolt = c.hand("Lightning Bolt", c.ai);
+                        final SpellAbility sa = bolt.getFirstSpellAbility();
+                        sa.setActivatingPlayer(c.ai);
+                        sa.getTargets().add(c.opp);
+                        c.resolve(sa);
+                        final long treasures = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().startsWith("Treasure")).count();
+                        if (!bolt.isInZone(ZoneType.Hand)) { // not bounced: the flip was won and the spell copied
+                            return treasures == 2 ? null : "the flip was won but there are " + treasures + " Treasure tokens" + c.trace;
+                        }
+                        if (treasures != 0) { return "a lost flip made " + treasures + " Treasure tokens"; }
+                        c.ai.getZone(ZoneType.Hand).remove(bolt); // out of the way for the next try
+                    }
+                    return "no flip was won in 40 tries";
+                }));
         l.add(new Scenario("5896", "a second Pithing Needle names a different card than the first", Fid.APPROX, M1, true,
                 c -> {
                     c.bf("Spellskite", c.opp); c.bf("Agatha's Soul Cauldron", c.opp); c.bf("Shalai, Voice of Plenty", c.opp);
