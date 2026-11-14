@@ -381,10 +381,14 @@ public class AbilityManaPart implements java.io.Serializable {
             return true;
         }
 
+        // Paying a cost of an SA already on the stack (Ward, unless, etc.) is not casting.
+        final boolean payingForEffect = getSourceCard().getGame().getStack()
+                .getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null;
+
         // Loop over restrictions
         for (String restriction : restrictions.split(",")) {
             if (restriction.equals("nonSpell")) {
-                return !sa.isSpell();
+                return !sa.isSpell() || payingForEffect;
             }
 
             if (restriction.equals("CumulativeUpkeep")) {
@@ -420,11 +424,12 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             // "can't" zone restriction – shouldn't be mixed with other restrictions
-            if (restriction.startsWith("CantCastSpellFrom")) {
-                if (!sa.isSpell()) {
+            // e.g. RestrictValid$ CantCast FromHand
+            if (restriction.startsWith("CantCast From")) {
+                if (!sa.isSpell() || payingForEffect) {
                     return true;
                 }
-                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
+                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(13));
                 final Card host = sa.getHostCard();
                 final Zone castFrom = host.getCastFrom();
                 //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
@@ -432,16 +437,16 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (!badZone.equals(zone)) {
                     return true;
                 }
+                continue;
             }
 
-            if (restriction.equals("CantCastNonArtifactSpells")) {
-                return !sa.isSpell() || sa.getHostCard().isArtifact();
-            }
-
-            // TODO refactor to differ between ForCost and ForEffect
-            // the payment is for a resolving SA, currently no other restrictions would allow that
-            if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
-                return false;
+            // ForEffect payments are not casts: only "!Spell" clauses allow them.
+            // Positive Spell.*/Activated.* clauses do not match, so "spend only to cast …" stays denied.
+            if (payingForEffect) {
+                if (restriction.equals("!Spell") || restriction.startsWith("!Spell.")) {
+                    return true;
+                }
+                continue;
             }
 
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
