@@ -2,7 +2,7 @@ Name:Agent of Raffine
 ManaCost:U
 Types:Creature Human Rogue
 PT:1/2
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Opponent | SubAbility$ DBConjure | StackDescription$ None | SpellDescription$ Choose target opponent.
+A:AB$ TargetOnly | Cost$ 2 T | ValidTgts$ Opponent | SubAbility$ DBConjure | StackDescription$ None | SpellDescription$ Choose target opponent.
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ValidLibrary Card.TopLibrary+TargetedPlayerOwn | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate | StackDescription$ REP Conjure_{p:You} conjures & their_{p:Targeted}'s & your_their | SpellDescription$ Conjure a duplicate of the top card of their library into your hand.
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Prismatic | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains prismatic.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExileTop

@@ -1,7 +1,7 @@
 Name:Face to Face
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Opponent | SubAbility$ ResetWin | IsCurse$ True | StackDescription$ You and target opponent play a best two-out-of-three Rock, Paper, Scissors match.
+A:SP$ TargetOnly | ValidTgts$ Opponent | SubAbility$ ResetWin | IsCurse$ True | StackDescription$ You and target opponent play a best two-out-of-three Rock, Paper, Scissors match.
 SVar:ResetWin:DB$ StoreSVar | SVar$ Wins | Type$ Number | Expression$ 0 | SubAbility$ ResetLoss
 SVar:ResetLoss:DB$ StoreSVar | SVar$ Losses | Type$ Number | Expression$ 0 | SubAbility$ RepeatPlay
 SVar:Total:SVar$Wins/LimitMin.Losses

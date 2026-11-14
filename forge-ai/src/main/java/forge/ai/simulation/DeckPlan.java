@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -312,42 +314,46 @@ public final class DeckPlan {
      * {@link ComboPlan#tutorPicks}), then what the commander plan is built around, then for a ramp deck the mana it
      * is short of or the big spell it can now cast. Null for no opinion: the normal choice is made.
      */
-    public forge.game.card.CardCollection tutorPicks(final Player ai, final Iterable<forge.game.card.Card> pool, final int n) {
+    public CardCollection tutorPicks(final Player ai, final Iterable<Card> pool, final int n) {
         if (ai == null || pool == null || n <= 0) {
             return null;
         }
-        final forge.game.card.CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
+        final CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
         if (fromCombo != null) {
             return fromCombo;
+        }
+        // a catalogued combo (ai-combos.txt) that is one card short: fetch that card
+        final List<Card> pieces = ComboCatalog.missingPieces(ai, pool);
+        if (pieces.size() >= n) {
+            return new CardCollection(pieces.subList(0, n));
         }
         if (n != 1) {
             return null;
         }
-        final forge.game.card.CardCollectionView hand = ai.getCardsIn(forge.game.zone.ZoneType.Hand);
-        final forge.game.card.CardCollectionView board = ai.getCardsIn(forge.game.zone.ZoneType.Battlefield);
-        for (final forge.game.card.Card c : pool) {
+        final CardCollectionView hand = ai.getCardsIn(forge.game.zone.ZoneType.Hand);
+        final CardCollectionView board = ai.getCardsIn(forge.game.zone.ZoneType.Battlefield);
+        for (final Card c : pool) {
             if (!c.isLand() && commander.isKeyCard(c) && !hand.contains(c) && !named(hand, board, c.getName())) {
-                return new forge.game.card.CardCollection(c);
+                return new CardCollection(c);
             }
         }
-        final forge.game.card.Card ramp = archetype == Archetype.RAMP ? rampPick(pool, hand, board) : null;
-        return ramp == null ? null : new forge.game.card.CardCollection(ramp);
+        final Card ramp = archetype == Archetype.RAMP ? rampPick(pool, hand, board) : null;
+        return ramp == null ? null : new CardCollection(ramp);
     }
 
     /** The one card to search for, or null for no opinion. */
-    public forge.game.card.Card tutorPick(final Player ai, final Iterable<forge.game.card.Card> pool) {
-        final forge.game.card.CardCollection picks = tutorPicks(ai, pool, 1);
+    public Card tutorPick(final Player ai, final Iterable<Card> pool) {
+        final CardCollection picks = tutorPicks(ai, pool, 1);
         return picks == null ? null : picks.getFirst();
     }
 
-    private static boolean named(final forge.game.card.CardCollectionView hand, final forge.game.card.CardCollectionView board,
-                                 final String name) {
-        for (final forge.game.card.Card x : hand) {
+    private static boolean named(final CardCollectionView hand, final CardCollectionView board, final String name) {
+        for (final Card x : hand) {
             if (x.getName().equals(name)) {
                 return true;
             }
         }
-        for (final forge.game.card.Card x : board) {
+        for (final Card x : board) {
             if (x.getName().equals(name)) {
                 return true;
             }
@@ -359,24 +365,22 @@ public final class DeckPlan {
      * A ramp deck short of mana (or stuck with a big spell in hand) fetches the cheapest mana source it can cast now;
      * with the mana it fetches the biggest spell it can cast within a turn or two, the one it was built for.
      */
-    private static forge.game.card.Card rampPick(final Iterable<forge.game.card.Card> pool,
-                                                 final forge.game.card.CardCollectionView hand,
-                                                 final forge.game.card.CardCollectionView board) {
+    private static Card rampPick(final Iterable<Card> pool, final CardCollectionView hand, final CardCollectionView board) {
         int sources = 0;
-        for (final forge.game.card.Card x : board) {
+        for (final Card x : board) {
             if (x.isLand() || !x.getManaAbilities().isEmpty()) {
                 sources++;
             }
         }
         int stuckAt = 0;
-        for (final forge.game.card.Card x : hand) {
+        for (final Card x : hand) {
             if (!x.isLand()) {
                 stuckAt = Math.max(stuckAt, x.getCMC());
             }
         }
-        forge.game.card.Card best = null;
+        Card best = null;
         int bestScore = 0;
-        for (final forge.game.card.Card c : pool) {
+        for (final Card c : pool) {
             if (c.isLand()) {
                 continue;
             }

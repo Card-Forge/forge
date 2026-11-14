@@ -22,6 +22,18 @@ public class TapAi extends TapAiBase {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        if (ManaDenial.isLandTapper(sa)) {
+            // Rishadan Port, Rishadan Dockhand: which land and when is ManaDenial's call; the generic logic below
+            // only looks at creatures and permanents with tap abilities, so it never taps a land
+            final Card land = ManaDenial.choose(ai, sa);
+            if (land == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            sa.resetTargets();
+            sa.getTargets().add(land);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
 
         if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
