@@ -8,7 +8,9 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -75,13 +77,15 @@ public class CountersRemoveAi extends SpellAbilityAi {
      * removed anyway, and when the target is about to be removed while it is not a creature.
      */
     public static Card worthwhileOwnTarget(final Player ai, final SpellAbility sa) {
-        if (sa.getApi() != forge.game.ability.ApiType.RemoveCounter || !"All".equals(sa.getParam("CounterType")) || !sa.usesTargeting()) {
+        if (sa.getApi() != ApiType.RemoveCounter || !"All".equals(sa.getParam("CounterType")) || !sa.usesTargeting()) {
             return null;
         }
         final Card source = sa.getHostCard();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         final boolean endOfOpponentTurn = ph.is(PhaseType.END_OF_TURN) && !ph.isPlayerTurn(ai);
-        final List<forge.game.GameObject> threatened = ComputerUtil.predictThreatenedObjects(ai, sa);
+        // with this ability as the "saviour" the prediction only knows the answers it was written for (regenerate, bounce,
+        // a pump): ask what the opponent's spells threaten at all, giving up the source is the answer worked out below
+        final List<GameObject> threatened = ComputerUtil.predictThreatenedObjects(ai, null);
         final boolean sourceThreatened = threatened.contains(source);
         final int sourceValue = source.isCreature() ? ComputerUtilCard.evaluateCreature(source) : 0;
 
@@ -92,7 +96,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 continue;
             }
             int value;
-            if (!c.isCreature() && c.getCounters(CounterEnumType.TIME) > 0 && c.hasStartOfKeyword("Impending")
+            if (c.getCounters(CounterEnumType.TIME) > 0 && c.hasStartOfKeyword("Impending")
                     && c.getRules() != null && c.getRules().getType().isCreature()) {
                 value = 10000 + ComputerUtilCard.evaluateCreature(c); // it turns into the creature it is
             } else if (c.isCreature() && hasNegativeCounter(c) && ComputerUtilCard.evaluateCreature(c) > sourceValue) {
