@@ -380,7 +380,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
-        return syncAndSendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, null/*triggerEvent*/); //someplatform don't have mousetriggerevent class or it will not allow them to click/tap
+        return syncAndSendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, NetTriggerEvent.of(triggerEvent));
     }
 
     @Override

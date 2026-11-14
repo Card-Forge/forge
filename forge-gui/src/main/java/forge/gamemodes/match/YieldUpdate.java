@@ -19,6 +19,7 @@ public sealed interface YieldUpdate extends Serializable
                 YieldUpdate.StackYield,
                 YieldUpdate.SetAutoPassUntilEndOfTurn,
                 YieldUpdate.CardAutoYield,
+                YieldUpdate.IgnoreForAutoPass,
                 YieldUpdate.TriggerDecision,
                 YieldUpdate.SetDisableYields,
                 YieldUpdate.SetDisableTriggers,
@@ -37,6 +38,9 @@ public sealed interface YieldUpdate extends Serializable
     record SetAutoPassUntilEndOfTurn(PlayerView player, boolean active) implements YieldUpdate {}
 
     record CardAutoYield(String cardKey, boolean active) implements YieldUpdate {}
+
+    /** Card ids only last one game, so this stays out of {@link SeedFromClient} and the host replays it on reconnect. */
+    record IgnoreForAutoPass(int cardId, boolean ignored) implements YieldUpdate {}
 
     /** Param order mirrors {@link CardAutoYield} (key, value). */
     record TriggerDecision(String storageKey, AutoYieldStore.TriggerDecision decision) implements YieldUpdate {}

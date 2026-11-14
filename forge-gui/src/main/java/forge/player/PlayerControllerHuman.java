@@ -1718,11 +1718,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // Highlights need the full set; APINA derives its boolean from the same scan.
                 Set<CardView> actionable = AvailableActions.collectActionable(getPlayer(), timeoutMs);
                 cachedActionableCards = actionable;
-                getPlayer().getView().setHasAvailableActions(!actionable.isEmpty());
+                // Ignored cards stay highlighted, because they can still be played
+                Set<Integer> ignored = yieldController.getIgnoredForAutoPass();
+                getPlayer().getView().setHasAvailableActions(actionable.stream().anyMatch(cv -> !ignored.contains(cv.getId())));
             } else {
                 // APINA only — early-exit boolean scan is cheaper than a full walk.
                 cachedActionableCards = null;
-                getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+                getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs, yieldController.getIgnoredForAutoPass()));
             }
         } else {
             cachedActionableCards = null;
@@ -4033,7 +4035,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 getGui().updateAutoPassPrompt();
             }
         }
-        if (update instanceof YieldUpdate.SeedFromClient
+        if (update instanceof YieldUpdate.SeedFromClient || update instanceof YieldUpdate.IgnoreForAutoPass
                 || (update instanceof YieldUpdate.SetYieldPref u
                         && u.pref() == FPref.YIELD_AUTO_PASS_NO_ACTIONS && Boolean.parseBoolean(u.value()))) {
             refreshAvailableActionsForPrompt();
@@ -4059,13 +4061,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    /** This sweep mutates the game graph, so it runs only when a preference that reads its result changes.
+    /** This sweep mutates the game graph, so it runs only when a setting that reads or filters its result changes.
      *  Otherwise the value computed when the prompt was built still stands. */
     private void refreshAvailableActionsForPrompt() {
         if (yieldController.isYieldActive() || !needsAvailableActions()) return;
         if (!(inputProxy.getInput() instanceof InputPassPriority)) return;
         long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-        getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+        getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs, yieldController.getIgnoredForAutoPass()));
     }
 
     /** True if yield consumer needs the synced wire field. */

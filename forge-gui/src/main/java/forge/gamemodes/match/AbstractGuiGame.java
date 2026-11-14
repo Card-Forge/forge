@@ -664,8 +664,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
         else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) pv = u.player();
-        // SetMarker carries the phase owner, not who is yielding. It only reaches a client, for its own player
-        else if (update instanceof YieldUpdate.SetMarker) pv = getCurrentPlayer();
+        // SetMarker carries the phase owner, not who is yielding, and IgnoreForAutoPass carries no player. Both only reach a client, for its own player
+        else if (update instanceof YieldUpdate.SetMarker || update instanceof YieldUpdate.IgnoreForAutoPass) pv = getCurrentPlayer();
         else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
