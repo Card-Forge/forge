@@ -41,7 +41,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        String desc = sa.getParamOrDefault("ValidDescription", "Card");
+        String desc = sa.getParamOrDefault("ValidDescription", sa.hasParam("Valid") && !sa.getParam("Valid").equals("Card")
+                ? Lang.getInstance().buildValidDesc(java.util.Arrays.asList(sa.getParam("Valid").split(",")), false) : "Card");
 
         int untilAmount = 1;
         boolean isNumeric = true;
@@ -50,19 +51,16 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+        sb.append(playersOrDescribed(sa, getTargetPlayers(sa), "Defined")).append(" ");
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :
                 "reveals cards from their library until revealing ");
-        String noun = "Card".equals(desc) ? " card" : desc + " card";
-        sb.append(isNumeric ? Lang.nounWithNumeralExceptOne(untilAmount, noun) : "X " + noun);
-        if (untilAmount != 1) {
-            sb.append("s");
-        }
+        final String noun = "Card".equals(desc) ? "card" : desc.matches("(?i).*\\bcards?$") ? desc : desc + " card";
+        sb.append(noun.startsWith("the ") ? noun : isNumeric ? Lang.nounWithNumeralExceptOne(untilAmount, noun) : "X " + Lang.getPlural(noun));
         if (sa.hasParam("MaxRevealed")) {
-            untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRevealed"), sa);
-            sb.append(" or ").append(untilAmount).append(" card/s");
+            final int maxRevealed = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRevealed"), sa);
+            sb.append(" or ").append(maxRevealed).append(maxRevealed == 1 ? " card" : " cards");
         }
         sb.append(".");
 
@@ -92,7 +90,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
                 if (ZoneType.Library.equals(revealed)) {
                     int revealedLibPos = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RevealedLibraryPosition"), sa);
-                    sb.append("and the rest on ").append(revealedLibPos < 0 ? "the bottom " : "on top ");
+                    sb.append("and the rest on ").append(revealedLibPos < 0 ? "the bottom " : "top ");
                     sb.append("of their library").append(sa.hasParam("RevealRandomOrder") ? " in a random order." : ".");
                 }
             } else if (revealed != null) {

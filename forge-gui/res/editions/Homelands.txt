@@ -79,7 +79,7 @@ ScryfallCode=HML
 53 U Ihsan's Shade @Christopher Rush
 54 U Irini Sengir @Pete Venters
 55 R Koskun Falls @Rob Alexander
-56 U Sengir Autocrat @David A. Cherry
+56 R Sengir Autocrat @David A. Cherry
 57a C Sengir Bats @Dan Frazier
 57b C Sengir Bats @Dan Frazier
 58 R Timmerian Fiends @Mike Kimble

@@ -193,34 +193,52 @@ public class SacrificeEffect extends SpellAbilityEffect {
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String num = sa.getParamOrDefault("Amount", "1");
 
-        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
-            sb.append("(OPTIONAL) ");
-        }
+        final boolean optional = sa.hasParam("Optional");
+        final boolean oneTgtP = tgts.size() == 1;
+        final String subject = tgts.isEmpty() ? "You" : Lang.joinHomogenous(tgts);
+        // "may" takes the base form of the verb, the others agree with the subject
+        final boolean thirdPerson = !optional && oneTgtP;
+        final String verb = sa.hasParam("Destroy") ? "destroy" : "sacrifice";
+        final String verbForm = verb + (thirdPerson ? "s" : "");
+        final String lead = subject + (optional ? " may " : " ") + verbForm + " ";
 
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+        int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append("Sacrifices ").append(sa.getHostCard());
+            sb.append(lead).append(sa.getHostCard()).append(".");
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
-            sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
+            if (toSac == null) {
+                sb.append(lead).append("the creature enchanted by ").append(sa.getHostCard()).append(".");
+            } else {
+                sb.append(toSac.getController()).append(optional ? " may " : " ").append(verb)
+                        .append(thirdPerson ? "s " : " ").append(toSac).append(".");
+            }
         } else {
-            sb.append(Lang.joinHomogenous(tgts)).append(" ");
-            boolean oneTgtP = tgts.size() == 1;
-
             String msg;
             if (sa.hasParam("SacMessage")) {
                 msg = sa.getParam("SacMessage");
+                // "Creature" in the script is a noun in the sentence ("non-Zombie Creature" keeps its subtype)
+                msg = java.util.regex.Pattern.compile("\\b(?:Creature|Permanent|Artifact|Enchantment|Land|Planeswalker|Battle|Card)\\b")
+                        .matcher(msg).replaceAll(m -> m.group().toLowerCase());
             } else {
                 msg = Lang.getInstance().buildValidDesc(List.of(valid.split(",")), false);
             }
-
-            if (sa.hasParam("Destroy")) {
-                sb.append(oneTgtP ? "destroys " : " destroy ");
+            sb.append(lead);
+            if (amount == 0 && isAmountDeferred(sa, num)) {
+                sb.append("any number of ").append(Lang.getPlural(msg));
+            } else if (amount == 0 && !num.matches("\\d+")) {
+                // X is not known before it resolves
+                sb.append("X ").append(Lang.getPlural(msg));
+            } else if (msg.matches("(?i)^(?:a|an|the|\\d+|one|two|three|four|five|six|seven|eight|nine|ten|x|that|those|each|all|any)\\b.*")
+                    && (amount == 1 || sa.hasParam("SacMessage"))) {
+                sb.append(msg); // the script wrote the amount into the message
+            } else if (sa.hasParam("SacMessage") && amount != 1 && msg.endsWith("s")) {
+                sb.append(Lang.getNumeral(amount)).append(" ").append(msg);
             } else {
-                sb.append(oneTgtP ? "sacrifices " : "sacrifice ");
+                sb.append(Lang.nounWithNumeralExceptOne(amount, msg));
             }
-            sb.append(Lang.nounWithNumeralExceptOne(amount, msg)).append(".");
+            sb.append(".");
         }
 
         return sb.toString();

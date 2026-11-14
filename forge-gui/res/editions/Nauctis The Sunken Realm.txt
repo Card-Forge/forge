@@ -6,3 +6,27 @@ Type=Expansion
 ScryfallCode=NAU
 
 [cards]
+5 M Calmwater Mentor @Danny Schwartz
+70 M Salinae, the Ocean Mother @Alexander Ostrowski
+121 M Tecton, Malignant Ruin @Alex Ries
+220 R Goramou the Coral-Taken @John Tedrick
+234 M Abyssal Lotus @Sarah Finnigan
+238 M Ring of Unity @Valera Lutfullina
+260 R Shimmering Citadel @Josu Solano
+281 M Calmwater Mentor @Cory Godbey
+311 R Goramou the Coral-Taken @Chuck Grieb
+316 M Abyssal Lotus @Iris Compiet
+317 M Ring of Unity @Serena Malyon
+321 M Salinae, the Ocean Mother @Svetlin Velinov
+329 R Goramou the Coral-Taken @PINDURSKI
+341 M Tecton, Malignant Ruin @Loïc Canavaggia
+346 R Shimmering Citadel @Josu Solano
+353 M Salinae, the Ocean Mother @Makoron
+354 M Tecton, Malignant Ruin @Mizugoromaru
+360 M Ring of Unity @3°C
+361 M Abyssal Lotus @Kelogsloops
+369 M Salinae, the Ocean Mother @Makoron
+370 M Tecton, Malignant Ruin @Mizugoromaru
+376 M Ring of Unity @3°C
+409 M Salinae, the Ocean Mother @Richey Beckett
+410 M Tecton, Malignant Ruin @Jason Raish

@@ -30,6 +30,11 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("Defined")) {
             List<Card> toSac = getDefinedCardsOrTargeted(sa);
             sb.append(Lang.joinHomogenous(toSac)).append(".");
+        } else if (sa.hasParam("ValidDescription")) {
+            sb.append(sa.getParam("ValidDescription")).append(".");
+        } else if (sa.hasParam("ValidCards")) {
+            sb.append("all ").append(Lang.joinHomogenous(java.util.Arrays.asList(sa.getParam("ValidCards").split(",")),
+                    v -> Lang.getInstance().formatValidDesc(v, true, false), "or")).append(".");
         } else {
             sb.append("permanents.");
         }

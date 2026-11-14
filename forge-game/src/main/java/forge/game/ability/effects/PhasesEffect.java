@@ -29,6 +29,12 @@ public class PhasesEffect extends SpellAbilityEffect {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
         final List<Card> tgtCards = getTargetCards(sa);
+        if (tgtCards.isEmpty()) {
+            // chosen or defined when it resolves
+            sb.append(sa.hasParam("AllValid") ? "All " + Lang.joinHomogenous(java.util.Arrays.asList(sa.getParam("AllValid").split(",")),
+                    v -> Lang.getInstance().formatValidDesc(v, true, false), "and") + " phase out." : "It phases out.");
+            return sb.toString();
+        }
         sb.append(Lang.joinHomogenous(tgtCards));
         sb.append(tgtCards.size() == 1 ? " phases out." : " phase out.");
         return sb.toString();

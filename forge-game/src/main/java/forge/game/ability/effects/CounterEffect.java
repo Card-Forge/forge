@@ -36,14 +36,11 @@ public class CounterEffect extends SpellAbilityEffect {
         sb.append("Counter");
 
         boolean isAbility = false;
-        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
-            sb.append(" ");
-            sb.append(tgtSA.getHostCard());
+        final List<SpellAbility> countered = getTargetSpells(sa);
+        for (final SpellAbility tgtSA : countered) {
             isAbility = tgtSA.isAbility();
-            if (isAbility) {
-                sb.append("'s ability");
-            }
         }
+        sb.append(" ").append(joinNamed(countered));
 
         if (isAbility && sa.hasParam("DestroyPermanent")) {
             sb.append(" and destroy it");

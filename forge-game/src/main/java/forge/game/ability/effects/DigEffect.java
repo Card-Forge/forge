@@ -64,10 +64,23 @@ public class DigEffect extends SpellAbilityEffect {
             if (numToDig != numToChange) {
                 String destZone1 = sa.hasParam("DestinationZone") ?
                         sa.getParam("DestinationZone").toLowerCase() : "hand";
-                String destZone2 = sa.hasParam("DestinationZone2") ?
-                        sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
-                if (sa.hasParam("RestRandomOrder")) {
-                    destZone2 = destZone2.replace("any", "a random");
+                final String rawZone2 = sa.hasParam("DestinationZone2") ? sa.getParam("DestinationZone2").toLowerCase() : "library";
+                String destZone2;
+                boolean exileRest = false;
+                switch (rawZone2) {
+                    case "library":
+                        destZone2 = ("0".equals(sa.getParam("LibraryPosition2")) ? "on top of their library" : "on the bottom of their library")
+                                + (sa.hasParam("RestRandomOrder") ? " in a random order." : " in any order.");
+                        break;
+                    case "exile":
+                        exileRest = true;
+                        destZone2 = ".";
+                        break;
+                    case "hand":
+                        destZone2 = "into their hand.";
+                        break;
+                    default:
+                        destZone2 = "into their " + rawZone2 + ".";
                 }
 
                 String verb2 = "put ";
@@ -83,7 +96,7 @@ public class DigEffect extends SpellAbilityEffect {
                 sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
                 if (sa.hasParam("ChangeValid")) {
                     String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
-                        sa.getParam("ChangeValid").toLowerCase();
+                        Lang.getInstance().buildValidCardDesc(Arrays.asList(sa.getParam("ChangeValid").split(",")), numToChange != 1);
                     if (!StringUtils.containsIgnoreCase(what, "card")) {
                         what = what + " card";
                     }
@@ -101,7 +114,7 @@ public class DigEffect extends SpellAbilityEffect {
                 } else {
                     sb.append("and ");
                 }
-                sb.append("put the rest ").append(destZone2);
+                sb.append(exileRest ? "exile the rest." : "put the rest " + destZone2);
             }
         }
         return sb.toString();

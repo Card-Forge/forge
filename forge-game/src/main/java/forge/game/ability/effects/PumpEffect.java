@@ -146,6 +146,31 @@ public class PumpEffect extends SpellAbilityEffect {
         }
     }
 
+    /**
+     * A keyword script as words ("Protection:Card.Red:red" -> "protection from red", "Enchant:Creature:creature" ->
+     * "enchant creature", "CARDNAME can't block" keeps the card's name).
+     */
+    static String keywordText(final String kw, final String hostName) {
+        final String[] p = kw.split(":");
+        String t = kw;
+        if (p.length >= 3 && !p[p.length - 1].isEmpty()) {
+            final String last = p[p.length - 1];
+            t = p[0].toLowerCase() + (p[0].equals("Protection") || p[0].equals("Hexproof") ? " from " : " ") + last;
+        } else if (p.length == 2) {
+            t = p[0] + " " + p[1];
+        }
+        t = t.replaceAll("\\.$", "").toLowerCase().replace("cardname", hostName);
+        // a replacement effect written as a keyword is an ability the creature gains, not a keyword
+        return kw.startsWith("Prevent ") || kw.startsWith("If ") ? "\"" + t + "\"" : t;
+    }
+
+    /** The predicate of a hidden keyword script ("CARDNAME can't block." -> "can't block"). */
+    static String hiddenClause(final String hidden) {
+        String t = hidden.trim().replaceAll("\\.$", "");
+        t = t.replaceFirst("^(?:CARDNAME|This card|This creature|This permanent|It) ", "");
+        return t.isEmpty() ? t : Character.toLowerCase(t.charAt(0)) + t.substring(1);
+    }
+
     /*
      * (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
@@ -182,6 +207,26 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
                 keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
             }
+            // "HIDDEN CARDNAME can't block": not a keyword to "gain", but a predicate of its own
+            final List<String> clauses = Lists.newArrayList();
+            final List<String> sentences = Lists.newArrayList();
+            for (final java.util.Iterator<String> it = keywords.iterator(); it.hasNext();) {
+                final String kw = it.next();
+                final boolean hidden = kw.startsWith("HIDDEN ");
+                if (!hidden && !kw.startsWith("CARDNAME ")) {
+                    continue;
+                }
+                it.remove();
+                final String clause = hiddenClause(hidden ? kw.substring("HIDDEN ".length()) : kw);
+                if (clause.matches("(?i)(?:can't|can|must|doesn't|don't|attacks?|blocks?|is|are|has|have|loses?|gets?)\\b.*")) {
+                    clauses.add(clause);
+                } else {
+                    sentences.add((hidden ? kw.substring("HIDDEN ".length()) : kw).replaceAll("\\.$", "") + ".");
+                }
+            }
+            if (!sentences.isEmpty() && keywords.isEmpty() && clauses.isEmpty() && !sa.hasParam("NumAtt") && !sa.hasParam("NumDef")) {
+                return String.join(" ", sentences);
+            }
 
             if (sa.hasParam("IfDesc")) {
                 if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
@@ -201,7 +246,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Radiance")) {
-                sb.append("and each other ").append(sa.getParam("ValidTgts"))
+                sb.append("and each other ").append(Lang.getInstance().describeValidList(sa.getParam("ValidTgts")))
                         .append(" that shares a color with ");
                 sb.append(tgts.size() > 1 ? "them " : "it ");
             }
@@ -212,8 +257,9 @@ public class PumpEffect extends SpellAbilityEffect {
             boolean gets = sa.hasParam("NumAtt") || sa.hasParam("NumDef");
             boolean gains = !keywords.isEmpty();
 
+            final boolean plural = tgts.size() > 1;
             if (gets) {
-                sb.append("gets ");
+                sb.append(plural ? "get " : "gets ");
                 if (atk != 0) {
                     sb.append(atk > 0 ? "+" : "").append(atk).append("/");
                 } else {
@@ -224,17 +270,22 @@ public class PumpEffect extends SpellAbilityEffect {
                 } else {
                     sb.append(atk < 0 ? "-" : "+").append(def).append(" ");
                 }
-                sb.append(gains ? "and gains " : "");
+                sb.append(gains ? (plural ? "and gain " : "and gains ") : "");
             } else if (gains) {
-                sb.append("gains ");
+                sb.append(plural ? "gain " : "gains ");
             }
 
             for (int i = 0; i < keywords.size(); i++) {
-                sb.append(keywords.get(i).toLowerCase());
+                sb.append(keywordText(keywords.get(i), sa.getHostCard().getName()));
                 sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
                 sb.append(keywords.size() == 2 && i == 0 ? " " : "");
                 sb.append(i+2 == keywords.size() ? "and " : "");
             }
+
+            for (int i = 0; i < clauses.size(); i++) {
+                sb.append(gets || gains || i > 0 ? " and " : "").append(clauses.get(i));
+            }
+            gains = gains || !clauses.isEmpty();
 
             if (sa.hasParam("CanBlockAny")) {
                 if (gets || gains) {

@@ -17,11 +17,8 @@ public class GameLossEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player p : tgtPlayers) {
-            sb.append(p.getName()).append(" ");
-        }
-
-        sb.append("loses the game.");
+        sb.append(playersOrDescribed(sa, tgtPlayers, "Defined"));
+        sb.append(tgtPlayers.size() > 1 ? " lose the game." : " loses the game.");
         return sb.toString();
     }
 
