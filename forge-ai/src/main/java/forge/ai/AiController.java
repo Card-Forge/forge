@@ -86,7 +86,7 @@ import static java.lang.Math.max;
  * @author Forge
  * @version $Id$
  */
-public class AiController {
+public class AiController implements IHasForgeLog {
     private final Player player;
     private final Game game;
     private final AiCardMemory memory;
@@ -828,8 +828,9 @@ public class AiController {
             // check everything necessary
 
             AiPlayDecision opinion = canPlayAndPayFor(sa);
-            //PhaseHandler ph = game.getPhaseHandler();
-            // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
+            if (aiLog.isTraceEnabled()) {
+                aiLog.trace("{} T{} {}: {} - counter {}: {}", player, game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), opinion, sa.getHostCard(), sa);
+            }
             if (opinion == AiPlayDecision.WillPlay) {
                 final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
                 if (bestSA == null || restrictionLevel > bestRestriction) {
@@ -1112,13 +1113,17 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
+            AiAbilityDecision apiDecision = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa);
+            boolean canPlay = apiDecision.willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
             Sentry.removeExtra("SA");
 
             if (!canPlay) {
+                if (aiLog.isTraceEnabled()) {
+                    aiLog.trace("{}: {} (rated {}) - {}: {}", player, apiDecision.decision(), apiDecision.rating(), card, sa);
+                }
                 return AiPlayDecision.CantPlayAi;
             }
             if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
@@ -1726,6 +1731,9 @@ public class AiController {
                 aiAtk.declareAttackers(combat);
             }
         }
+        if (aiLog.isDebugEnabled()) {
+            aiLog.debug("{} T{}: attacks with {} (aggression {})", attacker, game.getPhaseHandler().getTurn(), combat.getAttackers(), lastAttackAggression);
+        }
     }
 
     private void removeUnpayableAttackers(final Player attackingPlayer, Combat combat) {
@@ -1766,6 +1774,11 @@ public class AiController {
                 SimAudit.checkpoint(game, player);
             }
             final List<SpellAbility> chosen = chooseSpellAbilityToPlayImpl();
+            if (aiLog.isDebugEnabled() && chosen != null) {
+                for (final SpellAbility sa : chosen) {
+                    aiLog.debug("{} T{} {}: plays {}: {}", player, game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), sa.getHostCard(), sa);
+                }
+            }
             if (SimAudit.ENABLED) {
                 SimAudit.afterChoice(game, player, chosen);
             }
@@ -3052,8 +3065,9 @@ public class AiController {
                         // reset LastStateBattlefield - also when the deadline fired inside canPlayAndPayFor
                         sa.clearLastState();
                     }
-                    // PhaseHandler ph = game.getPhaseHandler();
-                    // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} T{} {}: {} - {}: {}", player, game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), opinion, sa.getHostCard(), sa);
+                    }
 
                     if (isFlatMcOnlyPlay(sa)) {
                         // never approved by the heuristics: only a play for the rollouts to weigh, and only with discovery
