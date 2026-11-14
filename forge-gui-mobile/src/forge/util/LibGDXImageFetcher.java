@@ -60,7 +60,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
             }
 
             boolean isScryfallUrl = urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)
-                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN);
+                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN)
+                    || urlToDownload.startsWith(getCardArtApiBaseUrl());
             String newdespath = urlToDownload.contains(".fullborder.") || isScryfallUrl ?
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
             if (!newdespath.contains(".full") && isScryfallUrl &&
