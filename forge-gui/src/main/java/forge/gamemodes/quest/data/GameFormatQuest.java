@@ -118,7 +118,6 @@ public final class GameFormatQuest extends GameFormat {
 	 * @return unmodifiable list of excluded sets.
 	 */
 	public List<String> getLockedSets() {
-
 		List<String> exSets = new ArrayList<>();
 		if (this.allowedSetCodes.isEmpty()) {
 			return exSets;
@@ -151,7 +150,7 @@ public final class GameFormatQuest extends GameFormat {
 	 * @return boolean, contains snow-land sets.
 	 */
 	public boolean hasSnowLands() {
-		return (this.isSetLegal("ICE") || this.isSetLegal("CSP"));
+		return this.isSetLegal("ICE") || this.isSetLegal("CSP");
 	}
 
 	public boolean canUnlockSets() {

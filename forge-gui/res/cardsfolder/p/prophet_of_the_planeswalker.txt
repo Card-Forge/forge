@@ -1,0 +1,9 @@
+Name:Prophet of the Planeswalker
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When this creature enters, you may behold a planeswalker. If you do, it perpetually gains "Loyalty abilities of this planeswalker cost an additional [+1] to activate."
+SVar:TrigAnimate:AB$ Animate | Cost$ Behold<1/Planeswalker> | Defined$ RevealedCards.!Self | Duration$ Perpetual | staticAbilities$ Cost
+SVar:Cost:Mode$ RaiseCost | ValidCard$ Card.Self | ValidSpell$ Activated.Loyalty | Cost$ AddCounter<1/LOYALTY> | Description$ Loyalty abilities of this planeswalker cost an additional [+1] to activate.
+DeckNeeds:Type$Planeswalker
+Oracle:When this creature enters, you may behold a planeswalker. If you do, it perpetually gains "Loyalty abilities of this planeswalker cost an additional [+1] to activate."

@@ -1,0 +1,10 @@
+Name:Make a _____ Splash
+ManaCost:2 U
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it.
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name
+T:Mode$ StickerPlaced | ValidPlayer$ You | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you put a sticker on CARDNAME, tap up to X target creatures, where X is the number of u's in name stickers on CARDNAME.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select up to X target creatures
+SVar:X:Count$CardStickers.NameLetter.u
+Oracle:Flash\nWhen this enchantment enters, you may put a name sticker on it.\nWhenever you put a sticker on this enchantment, tap up to X target creatures, where X is the number of u's in name stickers on this enchantment.

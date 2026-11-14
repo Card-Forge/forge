@@ -7,6 +7,7 @@ import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.GameScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
@@ -15,7 +16,6 @@ import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.AdventureQuestEvent;
 import forge.adventure.util.AdventureQuestEventType;
 import forge.adventure.util.Current;
-import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -39,8 +39,6 @@ public class AdventureQuestData implements Serializable {
     public String synopsis =""; //Intended for Dev Mode only at most
     public transient boolean completed = false;
     public transient boolean failed = false;
-    private transient boolean prologueDisplayed = false;
-    private transient boolean epilogueDisplayed = false;
 
     public DialogData offerDialog;
     public DialogData prologue;
@@ -236,11 +234,11 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetPOI(poiTokens, this.name);
         }
 
-        if (stage.getTargetPOI() != null
-                && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
-                || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
+        if (stage.getTargetPOI() != null && stage.getTargetPOI().getData().isDungeon()) {
             //todo: decide how to handle this in "anyPOI" scenarios
-            WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
+            // Reset root and all connected floors so previously cleared dungeons respawn for the quest
+            PointOfInterest target = stage.getTargetPOI();
+            PointOfInterestChanges.resetDeletedObjectsRecursive(target.getID(), target.getData().map);
         }
 
         PointOfInterest temp = stage.getTargetPOI();
@@ -295,7 +293,7 @@ public class AdventureQuestData implements Serializable {
         }
         for (Enumeration<String> enemy = enemyTokens.keys(); enemy.hasMoreElements();){
             String enemyKey = enemy.nextElement();
-            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getName());
+            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getDisplayName());
         }
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){
             String key = other.nextElement();
@@ -322,8 +320,8 @@ public class AdventureQuestData implements Serializable {
 
         for (Enumeration<String> e = enemyTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
-            data.text = data.text.replace(key, enemyTokens.get(key).getName());
-            data.name = data.name.replace(key, enemyTokens.get(key).getName());
+            data.text = data.text.replace(key, enemyTokens.get(key).getDisplayName());
+            data.name = data.name.replace(key, enemyTokens.get(key).getDisplayName());
         }
 
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){
@@ -420,16 +418,16 @@ public class AdventureQuestData implements Serializable {
     }
 
     public DialogData getPrologue() {
-        if (!prologueDisplayed) {
-            prologueDisplayed = true;
+        if (prologue != null && !prologue.isDisplayed()) {
+            prologue.markDisplayed();
             return prologue;
         }
         return null;
     }
 
     public DialogData getEpilogue() {
-        if (!epilogueDisplayed) {
-            epilogueDisplayed = true;
+        if (epilogue != null && !epilogue.isDisplayed()) {
+            epilogue.markDisplayed();
             return epilogue;
         }
         return null;

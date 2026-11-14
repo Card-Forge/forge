@@ -64,6 +64,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private volatile Channel channel;
+    // A server refuses a login by closing the connection, so only a client that held a seat reconnects
+    private volatile boolean seated;
 
     private ReconnectState reconnectState = ReconnectState.CONNECTED;
     private boolean shuttingDown = false;
@@ -104,6 +106,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
              .handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(final SocketChannel ch) throws Exception {
+                    // Set before the login goes out: a refused login closes the channel at once, and channelInactive ignores any other channel
+                    channel = ch;
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
                             new LoggingHandler(LogLevel.INFO),
@@ -123,7 +127,6 @@ public class FGameClient implements IToServer, IHasForgeLog {
                     newChannel.close();
                     return;
                 }
-                channel = newChannel;
             }
             final ChannelFuture ch = newChannel.closeFuture();
             attached = true;
@@ -265,6 +268,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
     }
 
     void setGameControllers(final Iterable<PlayerView> myPlayers) {
+        // A client that takes back a parked seat gets its match without a lobby update
+        seated = true;
         for (final PlayerView p : myPlayers) {
             NetGameController controller = new NetGameController(this);
             clientGui.setOriginalGameController(p, controller);
@@ -302,7 +307,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
      */
     void onDisconnected() {
         synchronized (reconnectLock) {
-            if (shuttingDown || reconnectState != ReconnectState.CONNECTED) {
+            if (shuttingDown || reconnectState != ReconnectState.CONNECTED || !seated) {
                 return;
             }
             reconnectState = ReconnectState.RECONNECTING;
@@ -483,6 +488,9 @@ public class FGameClient implements IToServer, IHasForgeLog {
                 // we're back in the match. Seat-lost is signaled explicitly via SeatLostEvent.
                 if (isActiveChannel(ctx.channel()) && getReconnectState() == ReconnectState.RECONNECTING) {
                     return;
+                }
+                if (event.getSlot() >= 0) {
+                    seated = true;
                 }
                 for (final ILobbyListener listener : lobbyListeners) {
                     listener.update(event.getState(), event.getSlot());

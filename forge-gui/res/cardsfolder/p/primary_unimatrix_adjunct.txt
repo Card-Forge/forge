@@ -1,0 +1,7 @@
+Name:Primary Unimatrix Adjunct
+ManaCost:3 W
+Types:Artifact Creature Borg
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Double Strike | Description$ Artifact creatures you control have double strike.
+SVar:PlayMain1:TRUE
+Oracle:Artifact creatures you control have double strike.

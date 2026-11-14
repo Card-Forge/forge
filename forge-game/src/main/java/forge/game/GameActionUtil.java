@@ -177,7 +177,7 @@ public final class GameActionUtil {
                         // "if you also return a creature you control to its owner's hand" is an
                         // additional cost, so with nothing to return the spell is simply not castable
                         beamSA.getPayCosts().add(new Cost(
-                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature you control>", false));
+                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature>", false));
 
                         alternatives.add(beamSA);
                     } else if (keyword.startsWith("Flashback")) {
@@ -1016,10 +1016,10 @@ public final class GameActionUtil {
             ability.setChosenList(null);
         }
 
-        ability.clearTargets();
-
+        //ability.clearTargets();
         ability.resetOnceResolved();
         payment.refundPayment();
+
         game.getStack().clearFrozen();
         game.getTriggerHandler().clearWaitingTriggers();
     }

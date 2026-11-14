@@ -1,0 +1,9 @@
+Name:Robo-Piñata
+ManaCost:2 W
+Types:Artifact Creature Clown Robot
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTicket,DBSticker
+SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 2 | SpellDescription$ You get {TK}{TK}.
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True | SpellDescription$ You may put a sticker on a nonland permanent you own.
+Oracle:When Robo-Piñata dies, choose one —\n• You get {TK}{TK}.\n• You may put a sticker on a nonland permanent you own.

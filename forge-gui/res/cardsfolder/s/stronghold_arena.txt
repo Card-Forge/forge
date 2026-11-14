@@ -2,7 +2,6 @@ Name:Stronghold Arena
 ManaCost:1 B
 Types:Enchantment
 K:Kicker:G:W
-PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life for each time it was kicked.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ DBReveal | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand. If you do, you lose life equal to its mana value.

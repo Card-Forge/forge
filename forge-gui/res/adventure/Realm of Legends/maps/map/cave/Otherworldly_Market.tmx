@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="170">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="171">
  <editorsettings>
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
  </layer>
  <layer id="5" name="Overlay" width="50" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt11EKgkAQBuCBIPDF1zqC0todOkrdooeEDtEtvIS9d6cUCRZ3tLE2nd3+Dwb2YRVnnFlYIgAAmSp1Y4pz0cU7dUZ0zz77Rgkuj6m5aPEo3AB/1qsuYiKdwxBcD37f96qNpvpIv2djiLbGfVYT3/8L4J/YMz60DsVt5GzSdm7Bcrg+b3un3/MhzIbd8+16aAb6+7j1LxybOp2U1OoblyaHMoI8JOw7yi4nMjm/T/t8cHetfcLvXWo+5jZ2RoQkhhwAAAAAnrkdLFU=
+   eJzt10EKwjAQBdABQXDjVo/QYOodPIq9hQsFD+FCz+BW97r3TqZEITTTmkiwk/ofDGSRls50JhAiAIAw56kfMTaljU9uBdG9+O4bQ3B5xOYixaP0A9IZj2wMSegc5mC/Svu+d20k1Sf0e2aaaK79ZyVJ/b8A/ok7423rXBw6ziZp5xb0h+vzuneaPZ/DbLg9X6/bZqC5j1unclREJ2XXa1OnSkitYl1MDtdXHluTwy7TPGK5d5SFyV8rfp/0+eDuWssJv/eX89GnrjMiJ0PIAQAAAOAJaS8vlw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -168,6 +168,14 @@
   <object id="169" template="../../../../common/maps/obj/shop.tx" x="119.667" y="401.667" width="13.6667" height="16">
    <properties>
     <property name="commonShopList" value="UBSLDShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="170" template="../../../../common/maps/obj/shop.tx" x="68.6667" y="403" width="13.6667" height="16">
+   <properties>
+    <property name="commonShopList" value="AlchemyShop"/>
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>

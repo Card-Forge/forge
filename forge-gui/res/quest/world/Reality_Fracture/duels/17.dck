@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Hoshide_Naonari_-_Bant_Control_(Standard,_#900706).dck
+Deck Type=constructed
+
+[Main]
+3 Floodfarm Verge
+3 Island
+2 Plains
+2 Breeding Pool
+2 Hedge Maze
+2 Forest
+2 Multiversal Passage
+2 Urban Retreat
+2 Restless Anchorage
+1 Meticulous Archive
+1 Ba Sing Se
+1 Lush Portico
+1 Temple Garden
+1 Hallowed Fountain
+4 Summon: Fenrir
+4 Garnet, Princess of Alexandria
+2 Overlord of the Floodpits
+2 Summon: Bahamut
+2 Yuna, Hope of Spira
+2 Wistfulness
+1 Tishana's Tidebinder
+3 Three Steps Ahead
+3 Seam Rip
+2 Roiling Dragonstorm
+2 Origin of the Avengers
+2 Erode
+2 The Legend of Kuruk
+1 Spell Pierce
+1 Get Lost
+1 Consult the Star Charts
+1 Day of Judgment
+[Sideboard]
+1 Seam Rip
+2 Erode
+1 Get Lost
+2 Day of Judgment
+1 Wan Shi Tong, Librarian
+1 Ugin, Eye of the Storms
+2 Rest in Peace
+1 Annul
+1 Disdainful Stroke
+1 Essence Scatter
+1 Negate
+1 Solarium Sentry

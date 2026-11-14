@@ -5,7 +5,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
@@ -31,6 +36,7 @@ public class InventoryScene extends UIScene {
     Button equipButton;
     TextraButton useButton;
     TextraLabel itemDescription;
+    private final ScrollPane itemDescriptionPane;
     private final Table inventory;
     private final Array<Button> inventoryButtons = new Array<>();
     private final HashMap<String, Button> equipmentSlots = new HashMap<>();
@@ -94,9 +100,34 @@ public class InventoryScene extends UIScene {
         itemDescription = ui.findActor("item_description");
         itemDescription.setAlignment(Align.topLeft);
         itemDescription.setWrap(true);
-        ScrollPane pane = new ScrollPane(itemDescription);
-        pane.setBounds(itemDescription.getX(), itemDescription.getY(), itemDescription.getWidth() - 5, itemDescription.getHeight() - 8);
-        ui.addActor(pane);
+
+        float topPad = 4f;
+        float bottomPad = 8f;
+        float sidePad = 5f;
+        float descX = itemDescription.getX();
+        float descY = itemDescription.getY() + bottomPad;
+        float descW = itemDescription.getWidth() - sidePad;
+        float descH = itemDescription.getHeight() - topPad - bottomPad;
+        itemDescription.setPosition(0, 0);
+        itemDescriptionPane = new ScrollPane(itemDescription);
+        itemDescriptionPane.setBounds(descX, descY, descW, descH);
+        itemDescriptionPane.setScrollingDisabled(true, false);
+        itemDescriptionPane.setFadeScrollBars(false);
+
+        itemDescriptionPane.addCaptureListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                stopScrollAvailableHint();
+                return false;
+            }
+
+            @Override
+            public boolean scrolled(InputEvent event, float x, float y, float amountX, float amountY) {
+                stopScrollAvailableHint();
+                return false;
+            }
+        });
+        ui.addActor(itemDescriptionPane);
 
         Array<Actor> children = ui.getChildren();
         for (int i = 0, n = children.size; i < n; i++) {
@@ -183,7 +214,7 @@ public class InventoryScene extends UIScene {
             return;
         int initialCost;
         try {
-            //TODO apply modifiers from reputation..
+            // TODO: Apply modifiers from reputation..
             initialCost = (int) (data.cost * 0.4f);
         } catch (Exception e) {
             initialCost = 500;
@@ -194,7 +225,7 @@ public class InventoryScene extends UIScene {
             return;
         }
         final int cost = initialCost;
-        showDialog(createGenericDialog("", "[+" + data.iconName + "] " + data.name + "\n" +
+        showDialog(createGenericDialog("", "[+" + data.iconName + "] " + data.getDisplayName() + "\n" +
             Forge.getLocalizer().getMessage("lblRepairCost", "[+GoldCoin] " + cost),
             Forge.getLocalizer().getMessage("lblYes"),
             Forge.getLocalizer().getMessage("lblNo"), () -> {
@@ -216,7 +247,6 @@ public class InventoryScene extends UIScene {
             object = new InventoryScene();
         return object;
     }
-
 
     public void done() {
         selectedSlot = null;
@@ -292,7 +322,7 @@ public class InventoryScene extends UIScene {
 
         //done();
         setSelected(null);
-        RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null, data.getTags().contains("noSell"));
+        RewardScene.instance().loadRewards(data, RewardScene.Type.EventReward, null, data.getTags().contains("noSell"));
         Forge.switchScene(RewardScene.instance());
         Current.player().getBoostersOwned().removeValue(data, true);
     }
@@ -308,7 +338,7 @@ public class InventoryScene extends UIScene {
                             this.triggerUse();
                             removeDialog();
                         }, this::removeDialog);
-                useDialog.getContentTable().add(Controls.newTextraLabel("Use " + data.name + "?\n" + data.getDescription()));
+                useDialog.getContentTable().add(Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblUse") + " " + data.getDisplayName() + "?\n" + data.getDescription()));
             }
             showDialog(useDialog);
         }
@@ -322,6 +352,71 @@ public class InventoryScene extends UIScene {
 
     public void clearItemDescription() {
         itemDescription.setText("");
+        refreshItemDescriptionLayout();
+    }
+
+    private void refreshItemDescriptionLayout() {
+        float width = itemDescriptionPane.getWidth();
+        String text = itemDescription.storedText == null ? "" : itemDescription.storedText.stripTrailing();
+        itemDescription.setWidth(width);
+        itemDescription.layout.setTargetWidth(width);
+        itemDescription.getFont().markup(text, itemDescription.layout.clear());
+        itemDescription.layout();
+        // Extra pad so icon glyphs on the last line aren't clipped by the pane edge.
+        // ScrollPane sizes Layout actors from getPrefHeight(), so keep that in sync.
+        float prefHeight = itemDescription.getPrefHeight();
+        float paneHeight = itemDescriptionPane.getHeight();
+        float contentHeight = prefHeight > paneHeight ? prefHeight + 4f : prefHeight;
+        itemDescription.setHeight(contentHeight);
+        stopScrollAvailableHint();
+        itemDescriptionPane.cancel();
+        itemDescriptionPane.setScrollY(0);
+        itemDescriptionPane.updateVisualScroll();
+        itemDescriptionPane.invalidate();
+        itemDescriptionPane.layout();
+        playScrollAvailableHint();
+    }
+
+    private void stopScrollAvailableHint() {
+        itemDescriptionPane.clearActions();
+    }
+
+    private void playScrollAvailableHint() {
+        float maxY = itemDescriptionPane.getMaxY();
+        // Ignore sub-pixel / rounding overflow; stripTrailing already removes blank-line fakes.
+        if (maxY <= 2f) {
+            return;
+        }
+        float bounce = Math.min(6f, maxY);
+        itemDescriptionPane.addAction(Actions.sequence(
+                Actions.delay(0.04f),
+                new TemporalAction(0.28f, Interpolation.sineOut) {
+                    @Override
+                    protected void update(float percent) {
+                        if (itemDescriptionPane.isPanning() || itemDescriptionPane.isDragging()) {
+                            stopScrollAvailableHint();
+                            return;
+                        }
+                        itemDescriptionPane.setScrollY(bounce * percent);
+                        itemDescriptionPane.updateVisualScroll();
+                    }
+                },
+                new TemporalAction(0.36f, Interpolation.sineIn) {
+                    @Override
+                    protected void update(float percent) {
+                        if (itemDescriptionPane.isPanning() || itemDescriptionPane.isDragging()) {
+                            stopScrollAvailableHint();
+                            return;
+                        }
+                        itemDescriptionPane.setScrollY(bounce * (1f - percent));
+                        itemDescriptionPane.updateVisualScroll();
+                    }
+                },
+                Actions.run(() -> {
+                    itemDescriptionPane.setScrollY(0);
+                    itemDescriptionPane.updateVisualScroll();
+                })
+        ));
     }
     private void setSelected(Button actor) {
         selected = actor;
@@ -345,9 +440,9 @@ public class InventoryScene extends UIScene {
             boolean isInPoi = MapStage.getInstance().isInMap();
             useButton.setDisabled(!(isInPoi && data.usableInPoi || !isInPoi && data.usableOnWorldMap));
             if (data.shardsNeeded == 0)
-                useButton.setText("Use");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUse"));
             else
-                useButton.setText("Use " + data.shardsNeeded + "[+Shards]");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUse") + " " + data.shardsNeeded + "[+Shards]");
             useButton.layout();
             if (Current.player().getShards() < data.shardsNeeded)
                 useButton.setDisabled(true);
@@ -362,14 +457,15 @@ public class InventoryScene extends UIScene {
                     if (id != null && id.equals(data.longID) && data.isEquipped) {
                         button.setText("Unequip");
                     } else {
-                        button.setText("Equip");
+                        button.setText(Forge.getLocalizer().getMessage("lblEquip"));
                     }
                     button.layout();
                 }
             }
             repairButton.setVisible(data.isCracked);
             String status = data.isCracked ? " (" + Forge.getLocalizer().getMessage("lblCracked") + ")" : "";
-            itemDescription.setText(data.name + status + "\n[%98]" + data.getDescription());
+            itemDescription.setText(data.getDisplayName() + status + "\n[%98]" + data.getDescription());
+            refreshItemDescriptionLayout();
         }
         else if (deckLocation.containsKey(actor)){
             Deck data = (deckLocation.get(actor));
@@ -377,14 +473,14 @@ public class InventoryScene extends UIScene {
 
             deleteButton.setDisabled(true);
             useButton.setDisabled(false);
-            useButton.setText("Open");
+            useButton.setText(Forge.getLocalizer().getMessage("lblOpen"));
             useButton.layout();
             equipButton.setDisabled(true);
             repairButton.setVisible(false);
 
             itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool(true, true).countAll() + " cards");
+            refreshItemDescriptionLayout();
         }
-
 
         for (Button button : inventoryButtons) {
             if (actor != button && button.isChecked()) {
@@ -392,7 +488,9 @@ public class InventoryScene extends UIScene {
             }
         }
 
-        performTouch(scrollPaneOfActor(itemDescription)); //can use mouse wheel if available to scroll after selection
+        if (stage != null) {
+            stage.setScrollFocus(itemDescriptionPane);
+        }
     }
 
     private void updateInventory() {
@@ -417,7 +515,7 @@ public class InventoryScene extends UIScene {
             }
             items.add(item);
         }
-        // sort these by slot type and name
+        // Sort these by slot type and name
         items.sort((o1, o2) -> {
             if (o1.equipmentSlot == null && o2.equipmentSlot == null) {
                 return o1.name.compareTo(o2.name);
@@ -491,7 +589,7 @@ public class InventoryScene extends UIScene {
                 });
                 inventoryButtons.add(newActor);
                 Deck deck = Current.player().getBoostersOwned().get(i);
-                if (deck == null | deck.isEmpty()) {
+                if (deck == null || deck.isEmpty()) {
                     System.err.print("Can not add null / empty booster " + Current.player().getBoostersOwned().get(i) + "\n");
                     continue;
                 }
@@ -536,7 +634,7 @@ public class InventoryScene extends UIScene {
                 addSlotBorder(slotButton);
             }
         }
-        // make sure repair is clickable
+        // Make sure repair is clickable
         repairButton.setZIndex(ui.getChildren().size);
     }
 
@@ -549,7 +647,6 @@ public class InventoryScene extends UIScene {
         }
         clearItemDescription();
         updateInventory();
-        //inventory.add().expand();
         super.enter();
     }
 

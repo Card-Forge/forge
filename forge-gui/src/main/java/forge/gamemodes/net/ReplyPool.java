@@ -21,7 +21,10 @@ public class ReplyPool {
 
     public void complete(final int index, final Object value) {
         synchronized (pool) {
-            pool.get(index).set(value);
+            final CompletableFuture future = pool.get(index);
+            if (future != null) {
+                future.set(value);
+            }
         }
     }
 

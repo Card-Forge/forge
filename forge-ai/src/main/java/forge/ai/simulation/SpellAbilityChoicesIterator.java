@@ -236,6 +236,9 @@ public class SpellAbilityChoicesIterator {
         // (currently no additional complexity to keep performance reasonable)
         if (sa.costHasManaX()) {
             Integer x = ComputerUtilCost.setMaxXValue(sa, sa.getActivatingPlayer(), sa.isTrigger());
+            if (x != null) {
+                x = XChoice.adjust(sa.getActivatingPlayer(), sa, x); // not the most mana: Chalice, burn beyond lethal
+            }
             controller.getLastDecision().xMana = x;
         }
     }

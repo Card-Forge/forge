@@ -19,3 +19,4 @@ ScryfallCode=PSPL
 11 R Elektra, Daughter of the Hand @Alessandra Pisano
 12 R Riddles in the Dark @Tomas Duchek
 13 M Jace Beleren @Cristi Balanescu
+14 M Jean-Luc Picard, Luminary @Alexander Mokhov

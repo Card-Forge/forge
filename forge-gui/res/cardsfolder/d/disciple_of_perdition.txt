@@ -7,6 +7,6 @@ SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y EQ13.2.1 |
 SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | StackDescription$ None
 SVar:Y:Count$YourLifeTotal
-SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard. That player loses 1 life.
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Opponent | ChangeType$ Card | SubAbility$ DBLoseLife2 | SpellDescription$ Exile target opponent's graveyard. That player loses 1 life.
 SVar:DBLoseLife2:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1 | StackDescription$ None
-Oracle:When Disciple of Perdition dies, choose one. If you have exactly 13 life, you may choose both.\n• You draw a card and lose 1 life.\n• Exile target player's graveyard. That player loses 1 life.
+Oracle:When Disciple of Perdition dies, choose one. If you have exactly 13 life, you may choose both.\n• You draw a card and lose 1 life.\n• Exile target opponent's graveyard. That player loses 1 life.

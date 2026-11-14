@@ -1,0 +1,8 @@
+Name:Data, Professor of Humanities
+ManaCost:3 U
+Types:Legendary Artifact Creature Android Scientist
+PT:3/4
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Seek out — Whenever you draw your second card each turn, create two 1/1 blue Faerie creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_faerie_flying
+DeckHas:Ability$Token
+Oracle:Seek out — Whenever you draw your second card each turn, create two 1/1 blue Faerie creature tokens with flying.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Very Hard
+Description=./Modern/Reality_Fracture/Simon_Eng_-_Mono-blue_Tron_(Modern,_#902201).dck
+Deck Type=constructed
+
+[Main]
+2 Dismember
+3 Dress Down
+3 Emrakul, the Aeons Torn
+1 Emrakul, the Exigent Doom
+4 Expedition Map
+2 Force of Negation
+4 Island
+4 Kozilek's Command
+2 Otawara, Soaring City
+4 Portent of Calamity
+3 Spell Snare
+2 Stock Up
+2 Subtlety
+4 Talisman of Dominance
+4 Ugin, Eye of the Storms
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+[Sideboard]
+1 Dismember
+1 Force of Negation
+1 Subtlety
+3 Chalice of the Void
+4 Consign to Memory
+1 Disruptor Flute
+2 Flusterstorm
+2 Mystical Dispute

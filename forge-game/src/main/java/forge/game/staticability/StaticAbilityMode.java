@@ -112,6 +112,9 @@ public enum StaticAbilityMode {
     // StaticAbilityCantDraw
     CantDraw,
 
+    // StaticAbilityDrawFromBottom
+    DrawFromBottom,
+
     // StaticAbilityCantDiscard
     CantDiscard,
 
@@ -172,6 +175,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityPlotZone
     PlotZone,
+
+    // StaticAbilityForetell
+    ForetellAnyTurn,
 
     // StaticAbilityNumLoyaltyAct
     NumLoyaltyAct,

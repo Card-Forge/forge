@@ -49,7 +49,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean random = sa.hasParam("RandomTarget");
         final Player activator = sa.getActivatingPlayer();
-        final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : activator;
+        final List<Player> choosers = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser") : null;
+        if (choosers != null && choosers.isEmpty()) {
+            return;
+        }
+        final Player chooser = choosers != null ? choosers.get(0) : activator;
 
         final MagicStack stack = activator.getGame().getStack();
 
@@ -65,7 +69,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
             // Redirect rules read 'you MAY choose new targets' ... okay!
             // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
-            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()), null)) {
+            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()), tgtSA.getHostCard(), null)) {
                 continue;
             }
             if (sa.hasParam("ChangeSingleTarget")) {
@@ -137,10 +141,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         SpellAbility pickSA = pickSI.getSpellAbility();
                         GameObject choice = pick.getValue();
                         TargetChoices oldTarget = pickSA.getTargets();
+                        int div = pickSA.getTotalDividedValue();
                         pickSA.resetTargets();
                         pickSA.getTargets().add(choice);
                         if (pickSA.isDividedAsYouChoose()) {
-                            pickSA.addDividedAllocation(choice, pickSA.getTotalDividedValue());
+                            pickSA.addDividedAllocation(choice, div);
                         }
                         pickSI.updateTarget(oldTarget, distinctObjects);
                     }

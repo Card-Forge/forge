@@ -1,0 +1,7 @@
+Name:Deliver from Chaos
+ManaCost:3 W B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | ValidTgtsDesc$ artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target artifact or creature. Create X 1/1 colorless Borg artifact creature tokens, where X is that permanent's mana value.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_borg | TokenOwner$ You
+SVar:X:Targeted$CardManaCost
+Oracle:Exile target artifact or creature. Create X 1/1 colorless Borg artifact creature tokens, where X is that permanent's mana value.
