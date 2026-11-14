@@ -373,11 +373,14 @@ public class CardArtPreferenceTest extends CardMockTestCase {
 
     @Test
     public void testLanguageAppliesUnderEveryPreferenceButNeverBreaksBlackBorder() {
+        String[] names = { "Shivan Dragon", "Lightning Bolt", "Serra Angel" };
         for (CardArtPreference pref : CardArtPreference.values()) {
             usePreference(pref);
             cardDb.setPreferredLanguageAvailability(null);
-            for (String name : new String[] { "Shivan Dragon", "Lightning Bolt", "Serra Angel" }) {
-                PaperCard baseline = cardDb.getUniqueByName(name);
+            PaperCard[] baselines = Arrays.stream(names).map(cardDb::getUniqueByName).toArray(PaperCard[]::new);
+            for (int i = 0; i < names.length; i++) {
+                String name = names[i];
+                PaperCard baseline = baselines[i];
                 List<PaperCard> candidates = cardDb.getAllCardsNoAlt(name).stream()
                         .filter(pc -> edition(pc) != null)
                         .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
@@ -391,7 +394,6 @@ public class CardArtPreferenceTest extends CardMockTestCase {
                 PaperCard unique = cardDb.getUniqueByName(name);
                 assertEquals(unique.getEdition(), target.getEdition(), pref + " / " + name);
                 assertEquals(unique.getCollectorNumber(), target.getCollectorNumber(), pref + " / " + name);
-                cardDb.setPreferredLanguageAvailability(null);
             }
         }
     }
@@ -417,7 +419,6 @@ public class CardArtPreferenceTest extends CardMockTestCase {
                 PaperCard unique = cardDb.getUniqueByName(name);
                 assertTrue(isBlack(edition(unique)), pref + " / " + name + " switched to white-bordered "
                         + unique.getEdition() + " because of the language preference");
-                cardDb.setPreferredLanguageAvailability(null);
                 checked++;
             }
             assertTrue(checked > 0, "card list should contain a card with white and black prints");
