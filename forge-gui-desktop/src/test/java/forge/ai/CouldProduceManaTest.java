@@ -5,11 +5,13 @@ import java.util.Set;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 /** CR 106.7: the types of mana a permanent could produce take replacement effects into account, in every order. */
 public class CouldProduceManaTest extends AITest {
@@ -138,5 +140,19 @@ public class CouldProduceManaTest extends AITest {
 
         addCard("Swamp", ai);
         AssertJUnit.assertEquals(Set.of("black"), coffers.getProducibleColors());
+    }
+
+    @Test
+    public void predictedManaKeepsTheCombinationMarkerUnderATypeReplacement() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card gate = addCard("Mystic Gate", ai);
+        addCard("Infernal Darkness", ai);
+        SpellAbility filter = gate.getManaAbilities().get(1);
+        filter.setActivatingPlayer(ai);
+
+        // no color is chosen yet, so the mana is still the list of colors to choose from
+        AssertJUnit.assertEquals("Combo B B", ComputerUtilMana.predictMana(filter, ai, ManaCostShard.BLACK));
     }
 }

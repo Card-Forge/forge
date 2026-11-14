@@ -20,6 +20,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.ReplaceManaEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -560,66 +561,26 @@ public class ComputerUtilMana {
             }
         }
 
-        // it is better to apply these ones first
-        if (!replaceMana.isEmpty()) {
-            for (SpellAbility saMana : replaceMana) {
-                // one of then has to Any
-                // one of then has to C
-                // one of then has to B
-                String m = saMana.getParam("ReplaceMana");
-                if ("Any".equals(m)) {
-                    byte rs = MagicColor.GREEN;
-                    for (byte c : MagicColor.WUBRGC) {
-                        if (toPay.canBePaidWithManaOfColor(c)) {
-                            rs = c;
-                            break;
-                        }
-                    }
-                    manaProduced = MagicColor.toShortString(rs);
-                } else {
-                    manaProduced = m;
-                }
+        // an effect that lets its controller choose a color gets the first one that pays the shard
+        byte rs = MagicColor.GREEN;
+        for (byte c : MagicColor.WUBRGC) {
+            if (toPay.canBePaidWithManaOfColor(c)) {
+                rs = c;
+                break;
             }
+        }
+        final String anyColor = MagicColor.toShortString(rs);
+
+        // it is better to apply these ones first
+        for (SpellAbility saMana : replaceMana) {
+            manaProduced = ReplaceManaEffect.replaceMana(saMana, manaProduced, anyColor);
         }
 
         // then apply this one
-        if (!replaceType.isEmpty()) {
-            for (SpellAbility saMana : replaceAmount) {
-                Card card = saMana.getHostCard();
-                if (saMana.hasParam("ReplaceType")) {
-                    // replace color and colorless
-                    String color = saMana.getParam("ReplaceType");
-                    if ("Any".equals(color)) {
-                        byte rs = MagicColor.GREEN;
-                        for (byte c : MagicColor.WUBRGC) {
-                            if (toPay.canBePaidWithManaOfColor(c)) {
-                                rs = c;
-                                break;
-                            }
-                        }
-                        color = MagicColor.toShortString(rs);
-                    }
-                    for (byte c : MagicColor.WUBRGC) {
-                        String s = MagicColor.toShortString(c);
-                        manaProduced = manaProduced.replace(s, color);
-                    }
-                } else if (saMana.hasParam("ReplaceColor")) {
-                    String color = saMana.getParam("ReplaceColor");
-                    if ("Chosen".equals(color)) {
-                        if (card.hasChosenColor()) {
-                            color = MagicColor.toShortString(card.getChosenColor());
-                        }
-                    }
-                    if (saMana.hasParam("ReplaceOnly")) {
-                        manaProduced = manaProduced.replace(saMana.getParam("ReplaceOnly"), color);
-                    } else {
-                        for (byte c : MagicColor.WUBRG) {
-                            String s = MagicColor.toShortString(c);
-                            manaProduced = manaProduced.replace(s, color);
-                        }
-                    }
-                }
-            }
+        for (SpellAbility saMana : replaceType) {
+            // combination mana with no color chosen yet keeps its marker, and only its colors are rewritten
+            final String prefix = manaProduced.startsWith("Combo ") ? "Combo " : "";
+            manaProduced = prefix + ReplaceManaEffect.replaceMana(saMana, manaProduced.substring(prefix.length()), anyColor);
         }
 
         // then multiply if able
