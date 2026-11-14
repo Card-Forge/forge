@@ -3,5 +3,5 @@ ManaCost:0
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This artifact enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Mana | PrecostDesc$ Descend 8 — | Cost$ T Exile<1/CARDNAME/this artifact> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | SpellDescription$ Add three mana of any one color.
+A:AB$ Mana | PrecostDesc$ Descend 8 — | Cost$ T Exile<1/CARDNAME/this artifact> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | SpellDescription$ Add three mana of any one color. Activate only if there are eight or more permanent cards in your graveyard.
 Oracle:This artifact enters tapped.\nDescend 8 — {T}, Exile this artifact: Add three mana of any one color. Activate only if there are eight or more permanent cards in your graveyard.
