@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import org.apache.commons.lang3.StringUtils;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -444,7 +445,10 @@ public class StackDescriptionSweepTest extends AITest {
             // a land's mana ability or a keyword has no effect text, and a trigger's effect text is not what is shown
             return new Result(line, "", false);
         }
-        return new Result(line, problems(text, cardName, api), false);
+        // a sub-ability's text goes on in the middle of the trigger's sentence ("When ~ enters, choose target ..."), so
+        // a lowercase start is right for the effect on its own
+        final String scanned = kind.equals("trigger effect") ? StringUtils.capitalize(text.stripLeading()) : text;
+        return new Result(line, problems(scanned, cardName, api), false);
     }
 
     private static Result threw(final String cardName, final String kind, final RuntimeException e, final boolean trigger) {

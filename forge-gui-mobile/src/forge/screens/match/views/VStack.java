@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -340,10 +342,10 @@ public class VStack extends FDropDown {
             body = body.substring(OPTIONAL_PREFIX.length()).trim();
         }
         if (body.startsWith(name)) {
-            String rest = body.substring(name.length());
-            if (rest.matches("(?s)\\s*\\(\\d+\\).*") || rest.matches("(?s)\\s*-.*")) { // only the "Name (id) -" prelude
-                rest = rest.replaceFirst("^\\s*\\(\\d+\\)", "");
-                body = rest.replaceFirst("^\\s*-\\s*", "").trim();
+            final Matcher m = PRELUDE.matcher(body);
+            m.region(name.length(), body.length());
+            if (m.lookingAt()) { // only the "Name (id) -" prelude
+                body = body.substring(m.end()).trim();
             }
         }
         body = TextUtil.fastReplace(body, "CARDNAME", name);
@@ -353,6 +355,7 @@ public class VStack extends FDropDown {
         return body.isEmpty() ? header : header + "\n" + body;
     }
     private static final String OPTIONAL_PREFIX = "(OPTIONAL) ";
+    private static final Pattern PRELUDE = Pattern.compile("\\s*(?:\\(\\d+\\)\\s*-?|-)\\s*");
 
     //frosted cards sit on translucent glass over any battlefield, so the card name gets a thin dark outline
     private static void drawStackText(Graphics g, String text, int nameLength, FSkinFont font, Color color, float x, float y, float w, float h, float visibleY, float visibleH, boolean wrap, int align, boolean center) {

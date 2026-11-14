@@ -30,6 +30,7 @@ import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -54,6 +55,8 @@ public abstract class SpellAbilityEffect {
     private static final Pattern STACK_CARD_PRELUDE =
             Pattern.compile("^(.*? \\(\\d+\\) - )([a-z])");
 
+    /** An effect that goes on after a comma ("choose target creature, roll a d20") starts with one of these verbs. */
+    private static final Pattern CONTINUING_VERB = Pattern.compile("^(\\s*)([A-Z])((?:oll|raw|reate|ut|ap|ntap|estroy|xile|eturn|acrifice|iscard|ain|ose|cry|urveil|ill|eveal|earch|huffle|dd|hoose|ook|ttach|ight|nvestigate|roliferate|xplore|onnive|oad|egenerate|ounter|opy|eal)\\b.*)$", Pattern.DOTALL);
     private static final Pattern TIDY_COMMA_RUN = Pattern.compile(",{3,}");
     private static final Pattern TIDY_OPTIONAL_PLURAL = Pattern.compile("(\\w)\\(s\\)");
     private static final Pattern TIDY_DOUBLE_PERIOD = Pattern.compile("(?<!\\.)\\.\\.(?!\\.)");
@@ -250,6 +253,21 @@ public abstract class SpellAbilityEffect {
                         && endsWithSentence(sb)) {
                     subText = subText.substring(0, lead) + Character.toUpperCase(subText.charAt(lead)) + subText.substring(lead + 1);
                 }
+                // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
+                if (sb.toString().stripTrailing().endsWith(",")) {
+                    final Matcher vm = Pattern.compile("^(\\s*)([A-Z])((?:oll|raw|reate|ut|ap|ntap|estroy|xile|eturn|acrifice|iscard|ain|ose|cry|urveil|ill|eveal|earch|huffle|dd|hoose|ook|ttach|ight|nvestigate|roliferate|xplore|onnive|oad|egenerate|ounter|opy|eal)\\b.*)$",
+                            Pattern.DOTALL).matcher(subText);
+                    if (vm.matches()) {
+                        subText = vm.group(1) + vm.group(2).toLowerCase() + vm.group(3);
+                    }
+                }
+                // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
+                if (endsWithComma(sb)) {
+                    final Matcher vm = CONTINUING_VERB.matcher(subText);
+                    if (vm.matches()) {
+                        subText = vm.group(1) + vm.group(2).toLowerCase() + vm.group(3);
+                    }
+                }
                 sb.append(subText);
             }
         }
@@ -271,12 +289,23 @@ public abstract class SpellAbilityEffect {
         String result = tidyDescription(substitutedDesc, sa instanceof AbilitySub);
         if (!(sa instanceof AbilitySub)) {
             // the text after the "Card (12) -" prelude starts a sentence
-            final java.util.regex.Matcher m = STACK_CARD_PRELUDE.matcher(result);
+            final Matcher m = STACK_CARD_PRELUDE.matcher(result);
             if (m.find()) {
                 result = m.group(1) + m.group(2).toUpperCase() + result.substring(m.end());
             }
         }
         return result;
+    }
+
+    /** Whether the text so far ends with a comma, ignoring trailing whitespace (no copy of the text is made). */
+    private static boolean endsWithComma(final StringBuilder sb) {
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            final char c = sb.charAt(i);
+            if (!Character.isWhitespace(c)) {
+                return c == ',';
+            }
+        }
+        return false;
     }
 
     private static boolean endsWithSentence(final StringBuilder text) {
