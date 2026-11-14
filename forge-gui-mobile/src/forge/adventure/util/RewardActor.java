@@ -1035,6 +1035,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         dispose();
     }
 
+    public void addTooltipTo(Actor actor) {
+        if (tooltip != null)
+            actor.addListener(tooltip);
+    }
+
     public void clearLabel() {
         if (autoSell != null)
             autoSell.remove();
