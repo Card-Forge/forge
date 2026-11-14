@@ -1,0 +1,9 @@
+Name:Crafty Octopus
+ManaCost:2 U
+Types:Host Creature Octopus Rigger
+PT:1/3
+K:Augment Host:Octopus:LeftSide:TrigAssemble
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigAssemble | TriggerDescription$ When this creature enters, this creature assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)
+SVar:TrigAssemble:DB$ AssembleContraption | SpellDescription$ this creature assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)
+DeckHints:Keyword$Augment
+Oracle:When this creature enters, this creature assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

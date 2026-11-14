@@ -2,6 +2,8 @@ Name:Dirty Rat
 ManaCost:1 B
 Types:Host Creature Rat
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, target opponent discards a card.
+K:Augment Host:Rat:LeftSide:TrigDiscard
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, target opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, target opponent discards a card.

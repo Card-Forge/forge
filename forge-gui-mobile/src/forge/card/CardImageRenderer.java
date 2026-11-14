@@ -787,8 +787,11 @@ public class CardImageRenderer {
 
     private static void drawPtBox(Graphics g, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
         ptPieces.clear();
-
-        if (state.isCreature()) {
+        if (state.isAugment()) {
+            ptPieces.add(state.getPowerModifier());
+            ptPieces.add("/");
+            ptPieces.add(state.getToughnessModifier());
+        } else if (state.isCreature()) {
             ptPieces.add(String.valueOf(state.getPower()));
             ptPieces.add("/");
             ptPieces.add(String.valueOf(state.getToughness()));

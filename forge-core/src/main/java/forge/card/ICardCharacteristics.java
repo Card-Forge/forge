@@ -17,6 +17,8 @@ public interface ICardCharacteristics extends IHasName {
     String getInitialLoyalty();
     String getDefense();
     Set<Integer> getAttractionLights();
+    String getPowerModifier();
+    String getToughnessModifier();
 
     String getOracleText();
 }

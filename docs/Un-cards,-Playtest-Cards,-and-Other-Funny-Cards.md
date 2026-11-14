@@ -393,6 +393,51 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Contraption Cannon
 1. Steamflogger Boss - (Not an Un-card)
 
+#### Host Cards
+1. Adorable Kitten
+1. Shaggy Camel
+1. Mer Man
+1. Numbing Jellyfish
+1. Big Boa Constrictor
+1. Dirty Rat
+1. Stinging Scorpion
+1. Bumbling Pangolin
+1. Feisty Stegosaurus
+1. Eager Beaver
+1. Mother Kangaroo
+1. Wild Crocodile
+1. Angelic Rocket
+1. Gnome-Made Engine
+1. Labro Bot
+1. Voracious Vacuum
+1. Ordinary Pony
+1. Crafty Octopus
+1. Strutting Turkey
+
+#### Augment
+1. Half-Kitten, Half-
+1. Humming-
+1. Rhino-
+1. Half-Shark, Half-
+1. Ninja
+1. Zombified
+1. Half-Orc, Half-
+1. Half-Squirrel, Half-
+1. Monkey-
+1. Multi-Headed
+1. Serpentine
+1. Robo-
+1. Steam-Powered
+1. Bat-
+
+##### Augment Support
+1. Success!
+1. Teacher's Pet
+1. Clever Combo
+1. Really Epic Punch
+1. Dr. Julius Jumblemorph
+1. Surgeon ~General~ Commander
+
 ### Planes
 1. (Uk) Black Lotus Lounge
 1. (Uk) City Hall
@@ -432,25 +477,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Once More With Feeling
 1. Look at Me, I'm the DCI
 1. Gleemox
-
-#### Host Cards
-(These work fine on their own, but can't reach their full potential without the Augment cards)
-1. Adorable Kitten
-1. Shaggy Camel
-1. Mer Man
-1. Numbing Jellyfish
-1. Big Boa Constrictor
-1. Dirty Rat
-1. Stinging Scorpion
-1. Bumbling Pangolin
-1. Feisty Stegosaurus
-1. Eager Beaver
-1. Mother Kangaroo
-1. Wild Crocodile
-1. Angelic Rocket
-1. Gnome-Made Engine
-1. Labro Bot
-1. Voracious Vacuum
 
 #### Planes
 (These have significant chances between their printings and might be worth to implement them as a variant)
@@ -1297,37 +1323,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Change Behavior of Counters
 1. (Uk) Takesies // Backsies - "Treat all counters as -1/-1 counters".
 1. (Uk) Uh, Squen & Crag Made a Card - Flips the behavior of +1/+1 and -1/-1 counters.
-
-
-#### Augment
-(Could possibly use the groundwork laid by Mutate to do these)
-1. Half-Kitten, Half-
-1. Humming-
-1. Rhino-
-1. Half-Shark, Half-
-1. Ninja
-1. Zombified
-1. Half-Orc, Half-
-1. Half-Squirrel, Half-
-1. Monkey-
-1. Multi-Headed
-1. Serpentine
-1. Robo-
-1. Steam-Powered
-1. Bat-
-
-##### Augment Support
-1. Success!
-1. Teacher's Pet
-1. Clever Combo
-1. Really Epic Punch
-1. Dr. Julius Jumblemorph
-1. Surgeon ~General~ Commander
-
-##### Host Cards
-1. Ordinary Pony
-1. Crafty Octopus
-1. Strutting Turkey
 
 #### Print Characteristics
 (Main complication with these is the golden rule of Un-games, that these characteristics are derived from the printing, not the central Oracle info that normal characteristics use. They may vary from one print to another based on language, edition, or just for stylistic reasons. One permanent can also have multiple sets of these merged into one by something like Grusilda. Only saving grace here keeping this out of Tier 5 is that we could in theory extract most of these from the Scryfall API...)

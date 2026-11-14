@@ -37,6 +37,8 @@ final class CardFace implements ICardFace, Cloneable {
     private String initialLoyalty = "";
     private String defense = "";
     private Set<Integer> attractionLights = null;
+    private String powerModifier = null;
+    private String toughnessModifier = null;
 
     private String nonAbilityText = null;
     private List<String> keywords = null;
@@ -65,7 +67,9 @@ final class CardFace implements ICardFace, Cloneable {
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
     @Override public ColorSet getColor()            { return this.color; }
-        
+    @Override public String getPowerModifier()      { return powerModifier; }
+    @Override public String getToughnessModifier()  { return toughnessModifier; }
+
     // these are raw and unparsed used for Card creation
     @Override public Iterable<String> getKeywords()   { return keywords; }
     @Override public Iterable<String> getDeckRules()  { return deckRules; }
@@ -104,6 +108,8 @@ final class CardFace implements ICardFace, Cloneable {
         }
         this.attractionLights = Arrays.stream(value.split(" ")).map(Integer::parseInt).collect(Collectors.toSet());
     }
+    void setPowerModifier(String powerModifier) { this.powerModifier = powerModifier; }
+    void setToughnessModifier(String toughnessModifier) { this.toughnessModifier = toughnessModifier; }
 
     void setPtText(String value) {
         final String[] k = value.split("/");
@@ -128,6 +134,17 @@ final class CardFace implements ICardFace, Cloneable {
             val = val.replace("*", "0");
         }
         return Integer.parseInt(val);
+    }
+
+    void setPTModifier(String value) {
+        final String[] k = value.split("/");
+
+        if (k.length != 2) {
+            throw new RuntimeException("Creature '" + this.getName() + "' has bad p/t modifier stats");
+        }
+
+        this.powerModifier = k[0];
+        this.toughnessModifier = k[1];
     }
 
     // Raw fields used for Card creation

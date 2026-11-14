@@ -2032,6 +2032,9 @@ public class ComputerUtilCard {
         if (!c.isCreature()) {
             return false;
         }
+        if (c.isAugment()) {
+            return true;
+        }
         final Card copy = CardCopyService.getLKICopy(c);
         applyStaticContPT(c.getGame(), copy, null);
         return copy.getNetToughness() <= 0;

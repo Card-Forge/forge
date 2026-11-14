@@ -1,0 +1,9 @@
+Name:Robo-
+ManaCost:no cost
+Types:Artifact Creature Construct
+Colors:colorless
+PTModifier:+1/+1
+K:Augment:2:LeftSide
+SVar:LeftSide:T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if an artifact entered the battlefield under your control this turn,
+SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
+Oracle:At the beginning of each end step, if an artifact entered the battlefield under your control this turn,\nAugment {2} ({2}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)
