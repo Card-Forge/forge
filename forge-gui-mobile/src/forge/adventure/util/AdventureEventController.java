@@ -100,8 +100,10 @@ public class AdventureEventController implements Serializable {
             // No event currently available here
             return null;
         }
+        return createEvent(getEventSeed(pointID));
+    }
 
-        long eventSeed = getEventSeed(pointID);
+    public AdventureEventData createEvent(long eventSeed) {
         Random random = new Random(eventSeed);
 
         AdventureEventData e;

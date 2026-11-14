@@ -173,6 +173,19 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = saCreature != null;
             } else if (logic.equals("Always")) {
                 randomReturn = true;
+            } else if (logic.equals("CombatDamageToughness")) {
+                // The Kingpin of Crime: pay life when the attackers that deal damage equal to their toughness add real damage (#10922)
+                final forge.game.combat.Combat combat = game.getCombat();
+                if (combat == null || ai.getLife() <= 8) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                int extra = 0;
+                for (final Card atk : combat.getAttackers()) {
+                    if (atk.getController().equals(ai) && atk.getNetPower() < atk.getNetToughness()) {
+                        extra += atk.getNetToughness() - atk.getNetPower();
+                    }
+                }
+                randomReturn = extra >= 3;
             } else if (logic.equals("Main1")) {
                 if (phase.getPhase().isBefore(PhaseType.MAIN1)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

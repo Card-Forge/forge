@@ -285,7 +285,8 @@ public class PumpEffect extends SpellAbilityEffect {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
 
-            if (!activator.getController().confirmAction(sa, null, message, null)) {
+            final Card cardToShow = tgtCards.size() == 1 ? tgtCards.get(0) : null;
+            if (!activator.getController().confirmAction(sa, null, message, cardToShow, null)) {
                 return;
             }
         }

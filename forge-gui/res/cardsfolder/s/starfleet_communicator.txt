@@ -7,7 +7,7 @@ S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddTrigger
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, draw X cards, then you may put up to X land cards from your hand onto the battlefield tapped, where X is the number of other creatures you control with a Communicator attached to them.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeNum$ X | ChangeType$ Land | Tapped$ True | SelectPrompt$ You may select up to X land cards
-SVar:X:Count$Valid Creature.Other+YouCtrl+AttachedBy Communicator
+SVar:X:Count$Valid Creature.Other+YouCtrl+AttachedBy Valid Communicator
 SVar:AE:SVar:HasAttackEffect:TRUE
 K:Equip:1
 DeckHas:Ability$Token

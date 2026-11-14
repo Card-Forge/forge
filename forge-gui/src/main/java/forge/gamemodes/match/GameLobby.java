@@ -359,19 +359,20 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.TwoHeadedGiant);
             break;
         case TwoHeadedGiant:
-            // the Commander variants and Vanguard set their own life totals, and Planechase has its own team rules (CR 901.12)
+            // the other Commander variants and Vanguard set their own life totals, and Planechase has its own team rules (CR 901.12)
             data.appliedVariants.remove(GameType.Vanguard);
             data.appliedVariants.remove(GameType.Planechase);
             data.appliedVariants.remove(GameType.Archenemy);
             data.appliedVariants.remove(GameType.ArchenemyRumble);
-            data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
+            if (hasVariant(GameType.Commander)) {
+                setGameType(GameType.Commander); // the desktop deck choosers follow the game type
+            }
             applyVariantTeams();
             break;
         case Commander:
-            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);

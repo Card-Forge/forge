@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 /**
  * Plays the "How to Play" practice game (see {@link HowToPlay}) one lesson at a time.
  *
- * <p>The game is fixed (res/tutorial/howtoplay/HowToPlay.pzl): a Mountain and Raging Goblin to cast, a Hill Giant to
+ * <p>The game is fixed (res/tutorial/HowToPlay.pzl): a Mountain and Raging Goblin to cast, a Hill Giant to
  * block with, and an opponent whose Goblin Brigand has to attack each combat, so every lesson happens the same way
  * every time. After a short tour of the board the lessons are: play a land, cast a spell and pay its mana, attack,
  * pass the turn, block, then attack until the opponent is out of life.

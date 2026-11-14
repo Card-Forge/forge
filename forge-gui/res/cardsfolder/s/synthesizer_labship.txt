@@ -2,7 +2,7 @@ Name:Synthesizer Labship
 ManaCost:U
 Types:Artifact Spacecraft
 PT:4/4
-K:Station:9
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE2_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 2+ At the beginning of combat on your turn, up to one other target artifact you control becomes an artifact creature with base power and toughness 2/2 and gains flying until end of turn.
 SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, up to one other target artifact you control becomes an artifact creature with base power and toughness 2/2 and gains flying until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.Other+YouCtrl | TgtPrompt$ Select up to one other target artifact you control | TargetMin$ 0 | TargetMax$ 1 | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature | Keywords$ Flying

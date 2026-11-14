@@ -143,6 +143,39 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     /**
+     * A permanent "{X}: CARDNAME has base power and toughness X/X" (Gigantoplasm, or a copy of it) that, with all the mana
+     * that can be spared as X, would not make the creature any bigger: it changes nothing and, being permanent, is allowed
+     * at any time, so the AI would otherwise repeat it at every priority pass.
+     */
+    public static boolean isRedundantPermanentPtSet(final Player ai, SpellAbility sa) {
+        sa = sa.getRootAbility();
+        if (sa.getApi() != ApiType.Animate || sa.usesTargeting() || !"Permanent".equals(sa.getParam("Duration"))
+                || !sa.hasParam("Power") || !sa.hasParam("Toughness")
+                || !("Self".equals(sa.getParam("ValidCards")) || "Self".equals(sa.getParam("Defined")))) {
+            return false;
+        }
+        if (sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords") || sa.hasParam("Types") || sa.hasParam("RemoveTypes")
+                || sa.hasParam("Colors") || sa.hasParam("Abilities") || sa.hasParam("Triggers")
+                || sa.hasParam("Replacements") || sa.hasParam("staticAbilities") || sa.hasParam("sVars")
+                || sa.getSubAbility() != null) {
+            return false; // might be worth it for what it grants
+        }
+        final Card host = sa.getHostCard();
+        if (host == null || !host.isInZone(ZoneType.Battlefield) || !host.isCreature()) {
+            return false;
+        }
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            final int x = ComputerUtilMana.determineLeftoverMana(sa, ai, false);
+            if (x <= 0) {
+                return true; // nothing to size it with
+            }
+            sa.setXManaCostPaid(x);
+        }
+        final Card animated = becomeAnimated(host, sa);
+        return animated.getCurrentPower() + animated.getCurrentToughness() <= host.getCurrentPower() + host.getCurrentToughness();
+    }
+
+    /**
      * An "until end of turn" animate of the source itself (Mutavault, Mishra's Factory, a Vehicle's crew ability...)
      * that leaves it unable to attack or block is wasted mana, no matter how the board looks afterwards: e.g. a
      * tapped Mutavault is still a Rat that makes Pack Rat bigger, which a board evaluation happily counts as a gain.
@@ -186,6 +219,65 @@ public class AnimateAi extends SpellAbilityAi {
         return ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS);
     }
 
+    /**
+     * Bait for a combat trick: an animated land that would only trade with the one creature that can block it is still
+     * worth the mana when an instant pump in hand, paid for with mana left over after the animation (and not from the
+     * land itself, which attacks), wins that fight. Deliberately narrow: exactly one possible blocker, a plain +N/+M
+     * pump, and the pumped land has to kill the blocker and survive it. Several blockers, keywords and tricks of other
+     * kinds are left to the ordinary attack decision.
+     *
+     * @param sa the animate ability of the AI's own permanent (a manland)
+     */
+    public static boolean hasBackingTrick(final Player ai, SpellAbility sa) {
+        sa = sa.getRootAbility();
+        final Card host = sa.getHostCard();
+        if (host == null || !host.isLand() || !host.isInZone(ZoneType.Battlefield) || sa.getApi() != ApiType.Animate
+                || sa.usesTargeting()) {
+            return false;
+        }
+        final Card animated = becomeAnimated(host, sa);
+        final List<Card> blockers = Lists.newArrayList();
+        for (final Card c : ai.getWeakestOpponent().getCreaturesInPlay()) {
+            if (CardPredicates.possibleBlockers(animated).test(c)) {
+                blockers.add(c);
+            }
+        }
+        if (blockers.size() != 1) {
+            return false; // nothing to bait, or a double block the trick cannot be counted on to beat
+        }
+        final Card blocker = blockers.get(0);
+        final int animateCost = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()
+                ? sa.getPayCosts().getTotalMana().getCMC() : 0;
+        // the animated land attacks and cannot pay for the trick
+        final int spare = ComputerUtilMana.getAvailableManaEstimate(ai, true) - 1 - animateCost;
+        for (final Card card : ai.getCardsIn(ZoneType.Hand)) {
+            if (!card.isInstant()) {
+                continue;
+            }
+            for (final SpellAbility trick : card.getSpellAbilities()) {
+                if (!trick.isSpell() || trick.getApi() != ApiType.Pump || trick.getPayCosts() == null
+                        || trick.getPayCosts().hasXInAnyCostPart() || trick.hasParam("KW")) {
+                    continue;
+                }
+                final int cost = trick.getPayCosts().hasManaCost() ? trick.getPayCosts().getTotalMana().getCMC() : 0;
+                if (cost > spare) {
+                    continue;
+                }
+                final int att = AbilityUtils.calculateAmount(card, trick.getParamOrDefault("NumAtt", "0"), trick);
+                final int def = AbilityUtils.calculateAmount(card, trick.getParamOrDefault("NumDef", "0"), trick);
+                if (att < 0 || def < 0 || att + def == 0) {
+                    continue;
+                }
+                final boolean kills = animated.getNetPower() + att >= blocker.getNetToughness();
+                final boolean survives = animated.getNetToughness() + def > blocker.getNetPower();
+                if (kills && survives) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -201,6 +293,9 @@ public class AnimateAi extends SpellAbilityAi {
         }
         if (isPointlessSelfAnimate(aiPlayer, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
+        }
+        if (isRedundantPermanentPtSet(aiPlayer, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
@@ -254,7 +349,8 @@ public class AnimateAi extends SpellAbilityAi {
                 }
                 Card animatedCopy = becomeAnimated(c, sa);
                 if (ph.isPlayerTurn(aiPlayer)
-                        && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
+                        && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)
+                        && !hasBackingTrick(aiPlayer, sa)) {
                     return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                 }
                 if (ph.getPlayerTurn().isOpponentOf(aiPlayer)
@@ -408,7 +504,7 @@ public class AnimateAi extends SpellAbilityAi {
                 // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
                     SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
-                    if (sub == null || !"Targeted".equals(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
+                    if (sub == null || !isAnimatedTargetDefined(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
                             || !animatedCopy.canReceiveCounters(CounterEnumType.P1P1)) {
                         continue;
                     }
@@ -689,5 +785,10 @@ public class AnimateAi extends SpellAbilityAi {
             return !SpecialAiLogic.preferHasteForRiot(sa, payer);
         }
         return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
+    }
+
+    /** The counters go on the animated card itself: the target, or the remembered animated card (Rise and Shine, whose overload needs it, #12058). */
+    private static boolean isAnimatedTargetDefined(final String defined) {
+        return "Targeted".equals(defined) || "Remembered".equals(defined);
     }
 }

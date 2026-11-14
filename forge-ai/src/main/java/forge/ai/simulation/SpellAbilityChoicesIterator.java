@@ -236,6 +236,16 @@ public class SpellAbilityChoicesIterator {
         // (currently no additional complexity to keep performance reasonable)
         if (sa.costHasManaX()) {
             Integer x = ComputerUtilCost.setMaxXValue(sa, sa.getActivatingPlayer(), sa.isTrigger());
+            if ((x == null || x <= 0) && sa.isSpell() && sa.getActivatingPlayer() != null) {
+                // setMaxXValue answers 0 for a cost whose X is not named "Count$xPaid" in the script: the most the mana
+                // pays is still the better X than none (a Hydra or a clone paid with X of 0 is a wasted card)
+                final SpellAbility root = sa.getRootAbility();
+                final int xCount = XChoice.xCount(sa);
+                final int pay = forge.ai.ComputerUtilMana.determineLeftoverMana(root, sa.getActivatingPlayer(), false) / xCount;
+                if (pay > 0) {
+                    x = pay;
+                }
+            }
             if (x != null) {
                 x = XChoice.adjust(sa.getActivatingPlayer(), sa, x); // not the most mana: Chalice, burn beyond lethal
             }

@@ -2,7 +2,7 @@ Name:Borg Scout Sphere
 ManaCost:2 U
 Types:Artifact Spacecraft
 PT:5/5
-K:Station:6
+K:Station
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Spacecraft enters, draw a card.
 SVar:TrigDraw:DB$ Draw
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddStaticAbility$ DBStatic | Description$ STATION 6+ Artifact creatures you control have flying.
