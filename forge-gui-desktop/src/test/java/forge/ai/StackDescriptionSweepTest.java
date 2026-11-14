@@ -306,7 +306,46 @@ public class StackDescriptionSweepTest extends AITest {
                 sa.getTargets().add(o);
             }
         }
+        if (sa.getTargets().isEmpty()) {
+            forceTarget(sa, ai, opp);
+        }
         return !sa.getTargets().isEmpty();
+    }
+
+    /**
+     * Nothing in the test game satisfies the script's restriction ("creature with power 7 or greater", "spell with mana value
+     * 5"): the text only has to be built, so aim at something of the right kind in the right zone and ignore the rest of
+     * the restriction. The description of such a line can name a target the real game would not allow.
+     */
+    private static void forceTarget(final SpellAbility sa, final Player ai, final Player opp) {
+        final forge.game.spellability.TargetRestrictions tr = sa.getTargetRestrictions();
+        if (tr == null) {
+            return;
+        }
+        final java.util.List<ZoneType> zones = tr.getZone();
+        if (zones != null && zones.contains(ZoneType.Stack)) {
+            for (final forge.game.spellability.SpellAbilityStackInstance si : ai.getGame().getStack()) {
+                sa.getTargets().add(si.getSpellAbility());
+                return;
+            }
+            return;
+        }
+        final java.util.List<Card> cards = new java.util.ArrayList<>();
+        for (final Player p : Arrays.asList(opp, ai)) {
+            cards.addAll(p.getCardsIn(zones == null || zones.isEmpty() ? Arrays.asList(ZoneType.Battlefield) : zones));
+        }
+        for (final Card c : cards) {
+            if (tr.canTgtCreature() && !tr.canTgtPermanent() && !c.isCreature()) {
+                continue;
+            }
+            sa.getTargets().add(c);
+            return;
+        }
+        if (tr.canTgtPlayer()) {
+            sa.getTargets().add(opp);
+        } else if (!cards.isEmpty()) {
+            sa.getTargets().add(cards.get(0));
+        }
     }
 
     private static final java.util.Set<String> TRIG_CARD = new java.util.HashSet<>(Arrays.asList("Card", "CardLKI", "NewCard", "Attacker",
@@ -316,7 +355,7 @@ public class StackDescriptionSweepTest extends AITest {
     private static final java.util.Set<String> TRIG_PLAYER = new java.util.HashSet<>(Arrays.asList("Player", "Activator", "AttackingPlayer",
             "DefendingPlayer", "Defender", "Attacked", "OriginalController", "DamageTarget", "Target", "OriginalDefender", "AttackedTarget"));
     private static final java.util.Set<String> TRIG_NUMBER = new java.util.HashSet<>(Arrays.asList("Amount", "CounterAmount", "LifeAmount",
-            "DamageAmount", "Num", "Number", "NewCounterAmount", "LifeGained", "TokenNum", "PreventedAmount", "ScryNum", "SurveilNum"));
+            "DamageAmount", "Num", "Number", "NewCounterAmount", "LifeGained", "TokenNum", "PreventedAmount", "ScryNum", "SurveilNum", "Result", "NaturalResult", "Sides"));
 
     /** What a trigger would be handed in a game: a card, a player, an amount, so that its text can name them. */
     private static void seedTriggeringObjects(final SpellAbility sa, final Player ai) {
@@ -330,7 +369,7 @@ public class StackDescriptionSweepTest extends AITest {
             if (TRIG_CARD.contains(n) && any != null) {
                 sa.setTriggeringObject(k, any);
             } else if (TRIG_CARDS.contains(n) && any != null) {
-                sa.setTriggeringObject(k, new forge.game.card.CardCollection(any));
+                sa.setTriggeringObject(k, new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Battlefield).stream().limit(2).collect(java.util.stream.Collectors.toList())));
             } else if (TRIG_PLAYER.contains(n)) {
                 sa.setTriggeringObject(k, other);
             } else if (TRIG_NUMBER.contains(n)) {

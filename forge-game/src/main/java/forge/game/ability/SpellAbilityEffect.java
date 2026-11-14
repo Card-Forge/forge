@@ -187,7 +187,7 @@ public abstract class SpellAbilityEffect {
                     }
                 }
                 if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
-                    sb.append(" (Targeting: ").append(Lang.joinHomogenous(sa.getTargets())).append(")");
+                    sb.append(" (Targeting: ").append(joinNamed(sa.getTargets())).append(")");
                 }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 tokenizeString(sa, sb, stackDesc);
@@ -347,7 +347,7 @@ public abstract class SpellAbilityEffect {
                     } else {
                         objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                     }
-                    sb.append(objs.isEmpty() ? undefinedObjectText(t) : Lang.joinHomogenous(objs));
+                    sb.append(objs.isEmpty() ? undefinedObjectText(t) : joinNamed(objs));
                 }
             } else {
                 sb.append(t);
@@ -372,6 +372,20 @@ public abstract class SpellAbilityEffect {
             return "the chosen player";
         }
         return "that player";
+    }
+
+    /** A spell or ability on the stack is told by its card ("Lightning Bolt (32)"), not by the text it would show. */
+    protected static String joinNamed(final Iterable<?> objects) {
+        final List<String> names = Lists.newArrayList();
+        for (final Object o : objects) {
+            if (o instanceof SpellAbility) {
+                final SpellAbility spell = (SpellAbility) o;
+                names.add(spell.getHostCard() == null ? spell.toString() : spell.getHostCard() + (spell.isAbility() ? "'s ability" : ""));
+            } else {
+                names.add(String.valueOf(o));
+            }
+        }
+        return Lang.joinHomogenous(names);
     }
 
     /** What a {c:Equipped}-like reference reads as while nothing is there to name yet (nothing equipped, nothing chosen). */
