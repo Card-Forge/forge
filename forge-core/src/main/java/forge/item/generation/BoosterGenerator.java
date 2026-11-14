@@ -34,10 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>
@@ -472,6 +469,7 @@ public class BoosterGenerator {
         // Instead each slot defines their percentages on their own
         List<PaperCard> result = new ArrayList<>();
         Map<String, BoosterSlot> boosterSlots = template.getNamedSlots();
+        Set<String> drawnNames = new HashSet<>();
 
         for (Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft().trim();
@@ -486,8 +484,33 @@ public class BoosterGenerator {
 
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
 
+            // Cards with the same name as the ones drawn earlier in this booster can't be drawn again
+            Collection<String> excludedNames = boosterSlot.isExcludeDrawnNames() ? drawnNames : Collections.emptySet();
+
             List<PaperCard> paperCards = Lists.newArrayList();
-            for(Map.Entry<String, Long> entry : bulkSlotReplacement(boosterSlot, numCards).entrySet()) {
+            Map<String, Long> randomDraws = new LinkedHashMap<>();
+            for (int remaining = numCards; remaining > 0; ) {
+                String determineSheet = boosterSlot.replaceSlot();
+                if (determineSheet == null || !determineSheet.startsWith("wholeSheet")) {
+                    randomDraws.merge(determineSheet, 1L, Long::sum);
+                    remaining--;
+                    continue;
+                }
+
+                // A wholeSheet replacement gives every card of the sheet at once, like the cards of a pair,
+                // so the number of cards of the slot has to cover the sheet
+                boolean convertThisToFoil = determineSheet.endsWith("+");
+                if (convertThisToFoil) {
+                    determineSheet = determineSheet.substring(0, determineSheet.length() - 1);
+                }
+                List<PaperCard> wholeSheet = getSlotPrintSheet(determineSheet, template.getEdition(), excludedNames).toFlatList();
+                for (PaperCard pc : wholeSheet) {
+                    paperCards.add(convertAllToFoil || convertThisToFoil ? pc.getFoiled() : pc);
+                }
+                remaining -= Math.max(1, wholeSheet.size());
+            }
+
+            for(Map.Entry<String, Long> entry : randomDraws.entrySet()) {
                 String determineSheet = entry.getKey();
                 int numCardsToGenerate = (int)(long)entry.getValue();
 
@@ -502,14 +525,7 @@ public class BoosterGenerator {
                     convertThisToFoil = true;
                 }
 
-                String setCode = template.getEdition();
-                PrintSheet ps;
-                try {
-                    // Apply the edition to the sheet name by default. We'll try again if that's not a real sheet
-                    ps = getPrintSheet(determineSheet + " " + setCode);
-                } catch (Exception e) {
-                    ps = getPrintSheet(determineSheet);
-                }
+                PrintSheet ps = getSlotPrintSheet(determineSheet, template.getEdition(), excludedNames);
                 if (convertAllToFoil || convertThisToFoil) {
                     for (PaperCard pc : ps.random(numCardsToGenerate, true)) {
                         paperCards.add(pc.getFoiled());
@@ -519,13 +535,23 @@ public class BoosterGenerator {
                 }
             }
             result.addAll(paperCards);
+            for (PaperCard pc : paperCards) {
+                drawnNames.add(pc.getName());
+            }
         }
 
         return result;
     }
 
-    private static Map<String, Long> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
-        return Stream.generate(boosterSlot::replaceSlot).limit(numCards).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    private static PrintSheet getSlotPrintSheet(String sheet, String setCode, Collection<String> excludedNames) {
+        PrintSheet ps;
+        try {
+            // Apply the edition to the sheet name by default. We'll try again if that's not a real sheet
+            ps = getPrintSheet(sheet + " " + setCode);
+        } catch (Exception e) {
+            ps = getPrintSheet(sheet);
+        }
+        return ps.copyWithoutNames(excludedNames);
     }
 
     private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {
