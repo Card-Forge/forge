@@ -3032,7 +3032,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        // Schemes
+        // Schemes. The deck zones below are replaced rather than added to: a restarted game starts from the registered cards again
         CardCollection sd = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getSchemes()) {
             sd.add(Card.fromPaperCard(cp, this));
@@ -3040,8 +3040,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!sd.isEmpty()) {
             for (Card c : sd) {
                 c.setCollectible(true);
-                getZone(ZoneType.SchemeDeck).add(c);
             }
+            getZone(ZoneType.SchemeDeck).setCards(sd);
             getZone(ZoneType.SchemeDeck).shuffle();
         }
 
@@ -3053,8 +3053,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!l.isEmpty()) {
             for (Card c : l) {
                 c.setCollectible(true);
-                getZone(ZoneType.PlanarDeck).add(c);
             }
+            getZone(ZoneType.PlanarDeck).setCards(l);
             getZone(ZoneType.PlanarDeck).shuffle();
         }
 
@@ -3106,33 +3106,33 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Attractions
-        PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+        CardCollection attractions = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getAttractions()) {
             Card c = Card.fromPaperCard(cp, this);
             c.setCollectible(true);
-            attractionDeck.add(c);
+            attractions.add(c);
         }
-        if (!attractionDeck.isEmpty())
+        if (!attractions.isEmpty()) {
+            PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+            attractionDeck.setCards(attractions);
             attractionDeck.shuffle();
-
-        // Sticker sheets - CR 123.2a/c: only the three chosen are kept
-        PlayerZone stickerSheets = getZone(ZoneType.StickerSheets);
-        for (IPaperCard cp : Aggregates.random(registeredPlayer.getStickerSheets(), DeckFormat.CHOSEN_STICKER_SHEETS)) {
-            Card sheet = Card.fromPaperCard(cp, this);
-            sheet.setCollectible(false);
-            stickerSheets.add(sheet);
         }
-        Card.refreshSheetViews(this);
+
+        // Sticker sheets
+        initStickerSheets(registeredPlayer);
 
         // Contraptions
-        PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);
+        CardCollection contraptions = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getContraptions()) {
             Card c = Card.fromPaperCard(cp, this);
             c.setCollectible(true);
-            contraptionDeck.add(c);
+            contraptions.add(c);
         }
-        if (!contraptionDeck.isEmpty())
+        if (!contraptions.isEmpty()) {
+            PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);
+            contraptionDeck.setCards(contraptions);
             contraptionDeck.shuffle();
+        }
 
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards  = registeredPlayer.getExtraCardsInCommandZone();
@@ -3158,6 +3158,27 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
+    }
+
+    public void initStickerSheets(RegisteredPlayer registeredPlayer) {
+        // CR 103.2d - all sheets are revealed, then three are chosen at random. A restart or a subgame chooses anew
+        CardCollection sheets = new CardCollection();
+        for (IPaperCard cp : registeredPlayer.getStickerSheets()) {
+            Card sheet = Card.fromPaperCard(cp, this);
+            sheet.setCollectible(false);
+            sheets.add(sheet);
+        }
+        if (sheets.isEmpty()) {
+            return;
+        }
+        PlayerZone stickerSheets = getZone(ZoneType.StickerSheets);
+        stickerSheets.setCards(sheets);
+        Card.refreshSheetViews(this);
+        game.getAction().reveal(sheets, ZoneType.StickerSheets, this, true, null);
+        List<Card> chosen = Aggregates.random(sheets, DeckFormat.CHOSEN_STICKER_SHEETS);
+        stickerSheets.setCards(chosen);
+        game.fireEvent(new GameEventAddLog(GameLogEntryType.SIDEBOARD, Localizer.getInstance()
+                .getMessage("lblPlayerChoseStickerSheets", getName(), Lang.joinHomogenous(chosen, Card::getName))));
     }
 
     public void runStartGameScripts() {
