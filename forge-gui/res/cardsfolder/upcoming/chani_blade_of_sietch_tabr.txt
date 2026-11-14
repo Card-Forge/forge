@@ -1,0 +1,11 @@
+Name:Chani, Blade of Sietch Tabr
+ManaCost:3 R G
+Types:Legendary Creature Human Warrior
+PT:3/3
+K:Double Strike
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature. If that land is a Desert, that creature gains vigilance, hexproof, and haste until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Hexproof & Haste | ConditionDefined$ TriggeredCard | ConditionPresent$ Desert
+DeckHints:Type$Desert
+Oracle:Double strike\nYou may play an additional land on each of your turns.\nLandfall — Whenever a land you control enters, put a +1/+1 counter on target creature. If that land is a Desert, that creature gains vigilance, hexproof, and haste until end of turn.

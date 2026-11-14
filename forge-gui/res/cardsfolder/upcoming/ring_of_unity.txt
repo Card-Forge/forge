@@ -1,0 +1,6 @@
+Name:Ring of Unity
+ManaCost:7
+Types:Artifact
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddAbility$ ColorlessMana | Description$ Artifacts you control have "{T}: Add {C}{C}."
+SVar:ColorlessMana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+Oracle:Artifacts you control have "{T}: Add {C}{C}."
