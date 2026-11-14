@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of Jeskai
+ManaCost:no cost
+Types:Trait
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Command | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever one or more creatures you control deal combat damage to a player, draw a card.

@@ -1,0 +1,5 @@
+Name:Event Trait - Partnership
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddKeyword$ Partner | EffectZone$ Command | Description$ Your commander has "Partner".
+Oracle:Your commander has "Partner".\n(You can have two commanders if both have partner.)

@@ -1,0 +1,7 @@
+Name:Chest Trait - Relic Of Ichor
+ManaCost:no cost
+Types:Trait
+R:Event$ RollPlanarDice | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreRoll
+SVar:IgnoreRoll:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
+Oracle:If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.

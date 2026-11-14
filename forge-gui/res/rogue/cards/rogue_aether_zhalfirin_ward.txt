@@ -1,0 +1,6 @@
+Name:Aetherwork - Zhalfirin Ward
+ManaCost:no cost
+Types:Trait
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.!IsCommander+YouCtrl+wasCastFromCommand,Creature.!IsCommander+YouCtrl+wasCastFromCommand | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ Whenever a noncommander artifact or creature you control enters from your command zone, it gains hexproof and indestructible.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Hexproof & Indestructible | Duration$ Permanent
+Oracle:Fellows and Items you control have hexproof and indestructible.

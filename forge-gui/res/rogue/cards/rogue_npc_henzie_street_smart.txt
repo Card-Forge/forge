@@ -1,0 +1,7 @@
+Name:Henzie Trait - Street Smart
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, you may draw an additional card. If you do, spells you cast this turn cost {2} more to cast.
+SVar:TrigDraw:DB$ Effect | UnlessCost$ Draw<1/Player.TriggeredPlayer> | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | StaticAbilities$ RaiseCost
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.YouCtrl | Type$ Spell | Amount$ 2 | Description$ Spells you cast this turn cost {2} more to cast.
+Oracle:At the beginning of your draw step, you may draw an additional card. If you do, spells you cast this turn cost {2} more to cast.

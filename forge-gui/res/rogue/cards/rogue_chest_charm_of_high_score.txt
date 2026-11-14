@@ -1,0 +1,6 @@
+Name:Chest Trait - Charm Of High Score
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card if you control a creature with the greatest power among creatures on the battlefield.
+SVar:TrigDraw:DB$ Draw | ConditionPresent$ Creature.greatestPower+YouCtrl | ConditionCompare$ GE1
+Oracle:At the beginning of your end step, draw a card if you control a creature with the greatest power among creatures on the battlefield.

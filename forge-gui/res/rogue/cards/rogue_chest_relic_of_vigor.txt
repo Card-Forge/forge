@@ -1,0 +1,6 @@
+Name:Chest Trait - Relic Of Vigor
+ManaCost:no cost
+Types:Trait
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.tapped+YouCtrl | Execute$ TrigUntap | TriggerZones$ Command | TriggerDescription$ Whenever a permanent you control enters tapped, untap it.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCardLKICopy
+Oracle:Whenever a permanent you control enters tapped, untap it.

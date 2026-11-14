@@ -1,0 +1,4 @@
+Name:Narset Trait - Farsight
+ManaCost:no cost
+Types:Trait
+Oracle:Reveal 3 more Planebound rows on the map.

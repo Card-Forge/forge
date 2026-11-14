@@ -1,0 +1,4 @@
+Name:Henzie Trait - Henzie's Field
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with a Field of the Dead on the battlefield.

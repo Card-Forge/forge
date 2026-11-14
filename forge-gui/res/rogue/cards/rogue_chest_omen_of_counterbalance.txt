@@ -1,0 +1,9 @@
+Name:Chest Trait - Omen Of Counterbalance
+ManaCost:no cost
+Types:Trait
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | OptionalDecider$ You | TriggerZones$ Command | Execute$ TrigReveal | TriggerDescription$ Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card.
+SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 1 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionPresent$ Card.cmcEQX | ConditionDefined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
+Oracle:Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card.

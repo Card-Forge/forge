@@ -1,0 +1,5 @@
+Name:Event Trait - Forcefulness
+ManaCost:no cost
+Types:Trait
+S:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell | Amount$ 2 | EffectZone$ Command | Description$ Spells you cast cost {2} less to cast.
+Oracle:Spells you cast cost {2} less to cast.\nEach opponent starts the match with a random creature card with mana value 3 or less from their deck on the battlefield.

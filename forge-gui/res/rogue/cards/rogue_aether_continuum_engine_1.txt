@@ -1,0 +1,4 @@
+Name:Aetherwork - Continuum Engine 1
+ManaCost:no cost
+Types:Trait
+Oracle:Survive defeat and revive with 5 life once.

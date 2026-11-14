@@ -1,0 +1,4 @@
+Name:Chest Trait - Relic Of Charisma
+ManaCost:no cost
+Types:Trait
+Oracle:All Bazaar offers cost 2 less Gold.

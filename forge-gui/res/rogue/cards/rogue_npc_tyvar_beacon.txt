@@ -1,0 +1,4 @@
+Name:Tyvar Trait - Tyvar's Beacon
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with a Command Beacon on the battlefield.

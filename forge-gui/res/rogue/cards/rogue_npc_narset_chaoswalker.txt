@@ -1,0 +1,6 @@
+Name:Narset Trait - Chaoswalker
+ManaCost:no cost
+Types:Trait
+R:Event$ Planeswalk | ActiveZones$ Command | ValidPlayer$ You | ValidCause$ PlanarDie | ReplaceWith$ REChaos | Description$ If you would planeswalk as a result of rolling the planar die, chaos ensues instead.
+SVar:REChaos:DB$ ChaosEnsues
+Oracle:If you would planeswalk as a result of rolling the planar die, chaos ensues instead.

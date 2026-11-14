@@ -1,0 +1,6 @@
+Name:Event Trait - Concealment
+ManaCost:no cost
+Types:Trait
+S:Mode$ CantBlock | ValidCard$ Creature.YouCtrl | EffectZone$ Command | Description$ Creatures you control can't block and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | EffectZone$ Command
+Oracle:Creatures you control can't block and can't be blocked.

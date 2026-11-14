@@ -1,0 +1,6 @@
+Name:Cursed - Dictator
+ManaCost:no cost
+Types:Cursed
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ TrigSac | TriggerDescription$ Whenever a creature your opponents control dies, you sacrifice a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
+Oracle:Whenever a creature your opponents control dies, you sacrifice a creature.

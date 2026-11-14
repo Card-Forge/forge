@@ -12,6 +12,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
+import forge.screens.home.rogue.CSubmenuRogueMap;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.toolbox.FAbsolutePositioner;
 
@@ -41,6 +42,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         }
 
         currentDocID = id0;
+        VHomeUI.SINGLETON_INSTANCE.setSidebarVisible(id0 != EDocID.HOME_ROGUEMAP);
 
         if (previousDoc != null) {
             if (!previousDoc.equals(id0.getDoc().getLayoutControl())) {
@@ -52,7 +54,9 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         id0.getDoc().populate();
         id0.getDoc().getLayoutControl().update();
         lblSelected = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
-        lblSelected.setSelected(true);
+        if (lblSelected != null) {
+            lblSelected.setSelected(true);
+        }
 
         prefs.setPref(FPref.SUBMENU_CURRENTMENU, id0.toString());
         prefs.save();
@@ -105,6 +109,11 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             selected = EDocID.valueOf(FModel.getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
         } catch (final Exception e) { }
 
+        if (selected == EDocID.HOME_ROGUEMAP) {
+            itemClick(CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun() == null
+                    ? EDocID.HOME_ROGUESTART : EDocID.HOME_ROGUEMAP);
+            return;
+        }
         if (selected != null && VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(selected) != null) {
             itemClick(selected);
         }

@@ -1,0 +1,6 @@
+Name:Chest Trait - Idol Of Ivory
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ GT6 | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have seven or more cards in hand, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:At the beginning of your upkeep, if you have seven or more cards in hand, you gain 3 life.

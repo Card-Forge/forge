@@ -1,0 +1,6 @@
+Name:Chest Trait - Omen Of Nightmares
+ManaCost:no cost
+Types:Trait
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+Oracle:Whenever an opponent draws a card, Omen Of Nightmares deals 1 damage to that player.

@@ -1,0 +1,5 @@
+Name:Wrathful - Fervor
+ManaCost:no cost
+Types:Wrathful
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddKeyword$ Haste | EffectZone$ Command | Description$ Creatures your opponents control have haste.
+Oracle:Creatures your opponents control have haste.

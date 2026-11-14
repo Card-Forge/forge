@@ -1,0 +1,4 @@
+Name:Wound - Head
+ManaCost:no cost
+Types:Wound
+Oracle:Start each match with 1 less card in hand.

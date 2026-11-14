@@ -1,0 +1,9 @@
+Name:Narset Trait - Darkwalker
+ManaCost:no cost
+Types:Trait
+T:Mode$ PlanarDice | Result$ Blank | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigDealDamage1 | TriggerDescription$ Whenever you roll a blank on the planar die, this Trait deals 1 damage to each opponent.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigDealDamage1 | TriggerDescription$ Whenever you roll Chaos on the planar die, this Trait deals 1 damage to each opponent.
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigDealDamage3 | TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, this Trait deals 3 damage to any target.
+SVar:TrigDealDamage1:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:TrigDealDamage3:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:Whenever you roll the planar die, this Trait deals 1 damage to each opponent. If you rolled Planeswalk, instead this Trait deals 3 damage to any target.

@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of The Goblin
+ManaCost:no cost
+Types:Trait
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 red Goblin creature token with haste.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin_haste | TokenOwner$ You
+Oracle:Whenever you cast a noncreature spell, create a 1/1 red Goblin creature token with haste.

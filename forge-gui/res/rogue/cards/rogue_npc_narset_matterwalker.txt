@@ -1,0 +1,9 @@
+Name:Narset Trait - Matterwalker
+ManaCost:no cost
+Types:Trait
+T:Mode$ PlanarDice | Result$ Blank | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigChangeZoneLimited | TriggerDescription$ Whenever you roll a blank on the planar die, you may put a nonland permanent card with mana value 2 or less from your hand onto the battlefield tapped.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigChangeZoneLimited | TriggerDescription$ Whenever you roll Chaos on the planar die, you may put a nonland permanent card with mana value 2 or less from your hand onto the battlefield tapped.
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, you may put a permanent card from your hand onto the battlefield.
+SVar:TrigChangeZoneLimited:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.YouOwn+nonLand+cmcLE2 | ChangeNum$ 1 | Optional$ True | Tapped$ True
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.YouOwn | ChangeNum$ 1 | Optional$ True
+Oracle:Whenever you roll the planar die, you may put a nonland permanent card with mana value 2 or less from your hand onto the battlefield tapped. If you rolled Planeswalk, instead you may put a permanent card from your hand onto the battlefield.

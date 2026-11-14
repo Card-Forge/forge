@@ -1,0 +1,7 @@
+Name:Tyvar Trait - Criminal Commander
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddKeyword$ Menace | AddStaticAbility$ PowerGrave | EffectZone$ Command | Description$ Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of cards in your graveyard."
+SVar:PowerGrave:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +X/+0, where X is the number of cards in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn
+Oracle:Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of cards in your graveyard."\n(A creature with menace can't be blocked except by two or more creatures.)

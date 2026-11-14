@@ -1,0 +1,4 @@
+Name:Aetherwork - Spark Kindle 1
+ManaCost:no cost
+Types:Trait
+Oracle:Begin each match with 1 basic land from your deck already on the battlefield.
