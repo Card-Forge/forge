@@ -36,7 +36,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -62,6 +64,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -223,30 +226,58 @@ public class ComputerUtilCard {
      */
 
     /**
-     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
-     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
-     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
+     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry.
+     * A toughness-setting characteristic-defining ability reads its controller's board, so an
+     * opponent's 8/8 can also be a 0/0 for us.
      */
     public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
         final Game game = newController.getGame();
         final MutableBoolean reset = new MutableBoolean(false);
         final CardCollection kept = CardLists.filter(list, c -> {
-            if (!c.isCreature() || c.getController().equals(newController)) {
+            if (!c.isCreature()) {
                 return true;
             }
-            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+            int toughness = c.getNetToughness();
+            if (!c.getController().equals(newController)
+                    && c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
                 final Card copy = CardCopyService.getLKICopy(c);
                 copy.setController(newController, game.getNextTimestamp());
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                return copy.getNetToughness() > 0;
+                toughness = copy.getNetToughness();
             }
-            return true;
+            toughness += c.getCounters(CounterEnumType.M1M1) - c.getCounters(CounterEnumType.P1P1);
+            return toughness > 0 || toughness + countersOnEntry(c) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);
         }
         return kept;
+    }
+
+    /** The +1/+1 counters entry replacements would put on {@code c} if it entered now. */
+    private static int countersOnEntry(final Card c) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        final GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
+
+        int amount = 0;
+        for (final ReplacementEffect re : c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            final SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || reSA.getApi() != ApiType.PutCounter || !"P1P1".equals(reSA.getParam("CounterType"))) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                // outside an actual entry, X counts as 0, as it does for a copy
+                amount += AbilityUtils.calculateAmount(reSA.getHostCard(), reSA.getParamOrDefault("CounterNum", "1"), reSA);
+            }
+        }
+        return amount;
     }
 
     public static Card getBestLandAI(final Iterable<Card> list) {
