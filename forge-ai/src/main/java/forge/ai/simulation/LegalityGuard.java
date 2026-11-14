@@ -54,6 +54,9 @@ public final class LegalityGuard {
                     && sacrificesItselfOnEntering(ai, host)) {
                 return "etb-self-sacrifice";
             }
+            if (host != null && sa.isSpell() && host.isInZone(ZoneType.Hand) && redundantCopy(ai, host)) {
+                return "redundant-copy";
+            }
             if (xIsZero(ai, sa)) {
                 return "x-zero";
             }
@@ -204,6 +207,51 @@ public final class LegalityGuard {
                 final Matcher n = PRESENT_COMPARE.matcher(m.getParamOrDefault("PresentCompare", ""));
                 if (!present.startsWith("Land") || !n.matches() || Integer.parseInt(n.group(1)) <= lands) {
                     return false;
+                }
+            }
+            return true;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------ a second copy
+
+    private static final String[] STACKING = { "AddPower", "AddToughness", "SetPower", "SetToughness", "AddHiddenKeyword",
+            "AddCost", "RaiseCost", "Amount", "AddType", "RemoveType", "SetColor", "AddColor" };
+
+    /**
+     * A second copy of a permanent whose whole job is a static grant that does not add up (Resonating Lute: "lands you
+     * control have ..."): the lands already have the ability, and a second one gives them nothing more. Equipment,
+     * Auras, creatures and cards with an enters or other trigger have uses of their own and are left alone.
+     */
+    static boolean redundantCopy(final Player ai, final Card host) {
+        try {
+            if (host.isCreature() || host.isEquipment() || host.isAura() || host.isLand() || host.isPlaneswalker()
+                    || host.isSaga() || host.getType().hasSubtype("Vehicle") || !host.getTriggers().isEmpty()
+                    || host.getStaticAbilities().isEmpty()) {
+                return false;
+            }
+            boolean copy = false;
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                copy |= c != host && c.getName().equals(host.getName());
+            }
+            if (!copy) {
+                return false;
+            }
+            for (final forge.game.staticability.StaticAbility st : host.getStaticAbilities()) {
+                if (!"Continuous".equals(st.getParam("Mode")) || st.getParam("Affected") == null
+                        || !(st.hasParam("AddAbility") || st.hasParam("AddKeyword") || st.hasParam("AddTrigger"))) {
+                    return false;
+                }
+                final String affected = st.getParam("Affected");
+                if (affected.contains("Self") || affected.contains("Equipped") || affected.contains("Enchanted")) {
+                    return false;
+                }
+                for (final String key : STACKING) {
+                    if (st.hasParam(key)) {
+                        return false;
+                    }
                 }
             }
             return true;

@@ -167,4 +167,21 @@ public class LegalityGuardTest extends FlatMcTestBase {
         final SpellAbility sa = spellOf(void_);
         AssertJUnit.assertEquals(0, forge.ai.NumberChoice.choose(sa, java.util.Arrays.asList(0, 1, 2), ai));
     }
+
+    // ------------------------------------------------------------------------------------------ a second copy
+
+    @Test
+    public void aSecondResonatingLuteIsHeldAndTheFirstIsNot() {
+        final SpellAbility first = spellOf(put("Resonating Lute", ai, ZoneType.Hand));
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, first));
+        put("Resonating Lute", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("redundant-copy", LegalityGuard.problem(ai, first));
+    }
+
+    @Test
+    public void aSecondCopyOfAStackingEffectIsFine() {
+        put("Glorious Anthem", ai, ZoneType.Battlefield);
+        final SpellAbility second = spellOf(put("Glorious Anthem", ai, ZoneType.Hand));
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, second));
+    }
 }

@@ -195,6 +195,7 @@ public enum SpellApiToAi {
             .put(ApiType.Subgame, AlwaysPlayAi.class)
             .put(ApiType.Surveil, SurveilAi.class)
             .put(ApiType.TakeInitiative, AlwaysPlayAi.class)
+            .put(ApiType.TargetOnly, TargetOnlyAi.class)
             .put(ApiType.Tap, TapAi.class)
             .put(ApiType.TapAll, TapAllAi.class)
             .put(ApiType.TapOrUntap, TapOrUntapAi.class)
