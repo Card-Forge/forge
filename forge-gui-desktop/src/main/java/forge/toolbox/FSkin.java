@@ -1806,6 +1806,7 @@ public class FSkin {
             UIManager.put("ToolTip.background", BACK_COLOR);
             UIManager.put("ToolTip.foreground", FORE_COLOR);
             UIManager.put("ToolTip.border", LINE_BORDER);
+            UIManager.put("ToolTip.font", FSkin.getFont().getBaseFont());
         }
 
         private void setTextEditLookAndFeel() {
