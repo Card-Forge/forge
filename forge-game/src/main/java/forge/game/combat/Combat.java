@@ -953,6 +953,14 @@ public class Combat {
         return !firstStrikeDamage && !combatantsThatDealtFirstStrikeDamage.get().contains(combatant);
     }
 
+    /**
+     * Whether an attacking or blocking creature had first strike or double strike when first-strike
+     * combat damage was assigned (rule 510.4), whether or not it assigned any damage.
+     */
+    public final boolean hasFirstStrikeCombatants() {
+        return !combatantsThatDealtFirstStrikeDamage.get().isEmpty();
+    }
+
     public final boolean assignCombatDamage(boolean firstStrikeDamage) {
         boolean assignedDamage = assignAttackersDamage(firstStrikeDamage);
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
