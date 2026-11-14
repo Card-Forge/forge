@@ -11,8 +11,10 @@ import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
@@ -21,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -289,6 +292,13 @@ public class TokenInfo {
 
         final Card result = CardFactory.getCard(token, owner, game);
 
+        if (sa.hasParam("TokenName")) {
+            CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("TokenName"), sa);
+            if (!cards.isEmpty()) {
+                result.setName(cards.getFirst().getName());
+                result.getCurrentState().setFlavorName(cards.getFirst().getCurrentState().getFlavorName());
+            }
+        }
         if (sa.hasParam("TokenPower")) {
             String str = sa.getParam("TokenPower");
             result.setBasePowerString(str);
@@ -315,8 +325,26 @@ public class TokenInfo {
 
         if (sa.hasParam("TokenColors")) {
             String colors = sa.getParam("TokenColors");
-            colors = colors.replace("ChosenColor", host.getChosenColor());
-            result.setColor(colors.split(","));
+            if (colors.contains("ChosenColor")) {
+                colors = colors.replace("ChosenColor", host.getChosenColor());
+                result.setColor(colors.split(","));
+            } else {
+                CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("TokenColors"), sa);
+                List<ColorSet> colorSets = new ArrayList<>();
+                for (Card c: cards) {
+                    colorSets.add(c.getColor());
+                }
+                result.setColor(ColorSet.combine(colorSets.toArray(new ColorSet[0])));
+            }
+        }
+
+        if (sa.hasParam("TokenAbilities")) {
+            String[] tokenAbilities = sa.getParam("TokenAbilities").split(",");
+            for (final String s : tokenAbilities) {
+                SpellAbility sSA = AbilityFactory.getAbility(result, s, sa);
+                sSA.setIntrinsic(true);
+                result.addSpellAbility(sSA,true);
+            }
         }
 
         return result;
