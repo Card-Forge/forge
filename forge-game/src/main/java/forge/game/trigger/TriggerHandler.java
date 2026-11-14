@@ -63,6 +63,10 @@ public class TriggerHandler {
         delayedTriggers.clear();
     }
 
+    public final List<Trigger> getDelayedTriggers() {
+        return Collections.unmodifiableList(delayedTriggers);
+    }
+
     public final void registerThisTurnDelayedTrigger(final Trigger trig) {
         thisTurnDelayedTriggers.add(trig);
         delayedTriggers.add(trig);
