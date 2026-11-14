@@ -1545,7 +1545,8 @@
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",
-			"BiomeColorless"
+			"BiomeColorless",
+			"Emrakul"
 		],
 		"questFlagsToActivate": [
 			{
@@ -4215,6 +4216,28 @@
 			"OccupiedTown",
 			"BiomeBlack",
 			"Sidequest"
+		]
+	},
+	{
+		"name": "Arzakon",
+		"displayName": "Arzakon's Castle",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "final_castle",
+		"map": "../common/maps/map/main_story/arzakon_fortress.tmx",
+		"radiusFactor": 0.6,
+		"questTags": [
+			"Castle",
+			"Story",
+			"BiomeColorless",
+			"Arzakon"
+		],
+		"questFlagsToActivate": [
+			{
+				"key": "ArzakonRevealed",
+				"val": 1
+			}
 		]
 	}
 ]
