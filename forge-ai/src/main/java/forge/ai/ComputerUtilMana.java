@@ -1841,7 +1841,6 @@ public class ComputerUtilMana {
 
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
-        final Game game = ai.getGame();
 
         for (final Card sourceCard : getAvailableManaSources(ai, checkPlayable)) {
             if (DEBUG_MANA_PAYMENT) {
@@ -1871,70 +1870,8 @@ public class ComputerUtilMana {
 
                 manaMap.put(ManaAtom.GENERIC, m);
 
-                SpellAbility tail = m;
-                while (tail != null) {
-                    AbilityManaPart mp = tail.getManaPart();
-                    if (mp != null && tail.metConditions()) {
-                        // TODO Replacement Check currently doesn't work for reflected colors
-
-                        // setup produce mana replacement effects
-                        String origin = mp.getOrigProduced();
-                        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(sourceCard);
-                        repParams.put(AbilityKey.Mana, manaForReplacementCheck(origin, tail));
-                        repParams.put(AbilityKey.Activator, ai);
-                        repParams.put(AbilityKey.AbilityMana, m); // RootAbility
-
-                        List<ReplacementEffect> reList = game.getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other);
-
-                        if (reList.isEmpty()) {
-                            Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
-                            // find possible colors
-                            for (MagicColor.Color color : MagicColor.Color.values()) {
-                                if (mp.canProduce(color.getShortName(), tail) || reflectedColors.contains(color.getName())) {
-                                    manaMap.put((int) ManaAtom.fromName(color.getName()), m);
-                                }
-                            }
-                        } else {
-                            // try to guess the color the mana gets replaced to
-                            for (ReplacementEffect re : reList) {
-                                SpellAbility o = re.getOverridingAbility();
-                                String replaced = origin;
-                                if (o == null || o.getApi() != ApiType.ReplaceMana) {
-                                    continue;
-                                }
-                                if (o.hasParam("ReplaceMana")) {
-                                    replaced = o.getParam("ReplaceMana");
-                                } else if (o.hasParam("ReplaceType")) {
-                                    String color = o.getParam("ReplaceType");
-                                    for (byte c : MagicColor.WUBRGC) {
-                                        String s = MagicColor.toShortString(c);
-                                        replaced = replaced.replace(s, color);
-                                    }
-                                } else if (o.hasParam("ReplaceColor")) {
-                                    String color = o.getParam("ReplaceColor");
-                                    if (o.hasParam("ReplaceOnly")) {
-                                        replaced = replaced.replace(o.getParam("ReplaceOnly"), color);
-                                    } else {
-                                        for (byte c : MagicColor.WUBRG) {
-                                            String s = MagicColor.toShortString(c);
-                                            replaced = replaced.replace(s, color);
-                                        }
-                                    }
-                                }
-
-                                for (byte color : MagicColor.WUBRG) {
-                                    if ("Any".equals(replaced) || replaced.contains(MagicColor.toShortString(color))) {
-                                        manaMap.put((int)color, m);
-                                    }
-                                }
-
-                                if (replaced.contains("C")) {
-                                    manaMap.put(ManaAtom.COLORLESS, m);
-                                }
-                            }
-                        }
-                    }
-                    tail = tail.getSubAbility();
+                for (final String color : CardUtil.canProduce(6, m, new HashSet<>())) {
+                    manaMap.put((int) ManaAtom.fromName(color), m);
                 }
 
                 if (m.getHostCard().isSnow()) {

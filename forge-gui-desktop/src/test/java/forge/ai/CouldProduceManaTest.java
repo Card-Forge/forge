@@ -10,8 +10,10 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 /** CR 106.7: the types of mana a permanent could produce take replacement effects into account, in every order. */
 public class CouldProduceManaTest extends AITest {
@@ -154,5 +156,22 @@ public class CouldProduceManaTest extends AITest {
 
         // no color is chosen yet, so the mana is still the list of colors to choose from
         AssertJUnit.assertEquals("Combo B B", ComputerUtilMana.predictMana(filter, ai, ManaCostShard.BLACK));
+    }
+
+    @Test
+    public void painlandStillPaysUnderDampingSphere() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Adarkar Wastes", ai);
+        addCard("Plains", ai);
+        addCard("Damping Sphere", game.getPlayers().get(0));
+        SpellAbility charm = addCardToZone("Azorius Charm", ai, ZoneType.Hand).getFirstSpellAbility(); // {W}{U}
+        charm.setActivatingPlayer(ai);
+        int life = ai.getLife();
+
+        ManaCostBeingPaid cost = new ManaCostBeingPaid(charm.getPayCosts().getTotalMana());
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(cost, charm, ai, false) && cost.isPaid());
+        AssertJUnit.assertEquals(life - 1, ai.getLife());
     }
 }
