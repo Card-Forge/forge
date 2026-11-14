@@ -113,6 +113,9 @@ public class CardStateProperty {
                 }
             }
             return found;
+        } else if (property.startsWith("OriginalType")) {
+            String originalType = property.substring(12);
+            return cardState.getType().hasStringType(originalType);
         } else if (property.startsWith("hasAbility")) {
             String valid = property.substring(11);
             for (final SpellAbility sa : cardState.getSpellAbilities()) {

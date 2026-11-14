@@ -1958,13 +1958,13 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("set")) {
-            final String setCode = property.substring(3, 6);
+            final String[] setCodes = property.substring(3).split(" ");
             if (card.getName().isEmpty()) {
                 return false;
             }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, CardDb.EDITION_NON_REPRINT);
-            if (setCard != null && !setCard.getEdition().equals(setCode)) {
+                    CardDb.CardArtPreference.ORIGINAL_ART_BLACK_BORDER_ALL_EDITIONS);
+            if (setCard == null || !Arrays.asList(setCodes).contains(setCard.getEdition())) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {
