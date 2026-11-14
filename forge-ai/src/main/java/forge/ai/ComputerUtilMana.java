@@ -219,6 +219,16 @@ public class ComputerUtilMana {
                 }
 
                 // Mana abilities on the same card
+                // more mana is only better when it costs the same kind of resource and does nothing else
+                if (ability1.getHostCard() == ability2.getHostCard()
+                        && ability1.getPayCosts().isReusuableResource() == ability2.getPayCosts().isReusuableResource()
+                        && ability1.getSubAbility() == null && ability2.getSubAbility() == null) {
+                    final int moreMana = ability2.amountOfManaGenerated(true) - ability1.amountOfManaGenerated(true);
+                    if (moreMana != 0) {
+                        return moreMana;
+                    }
+                }
+
                 String shardMana = shard.toShortString();
 
                 boolean payWithAb1 = shardMana.contains(ability1.getManaPart().mana(ability1));
@@ -293,6 +303,17 @@ public class ComputerUtilMana {
         }
     }
 
+    // the any-color mana ability of a source like Cavern of Souls, whose mana makes this spell uncounterable
+    private static SpellAbility getUncounterableManaAbility(Card source, SpellAbility sa) {
+        for (final SpellAbility ab : source.getManaAbilities()) {
+            final AbilityManaPart mp = ab.getManaPart();
+            if (mp != null && mp.isAnyMana() && mp.cannotCounterPaidWith(sa) && mp.meetsManaRestrictions(sa)) {
+                return ab;
+            }
+        }
+        return null;
+    }
+
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
             Collection<SpellAbility> maList, boolean checkCosts) {
         Card saHost = sa.getHostCard();
@@ -343,6 +364,13 @@ public class ComputerUtilMana {
                 default:
                     break;
             }
+        }
+
+        if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
+            // sources like Cavern of Souls go last, so another source pays {C} if it can and they pay generic uncounterably
+            List<SpellAbility> uncounterableLast = Lists.newArrayList(maList);
+            uncounterableLast.sort(Comparator.comparing(ma -> getUncounterableManaAbility(ma.getHostCard(), sa) != null));
+            maList = uncounterableLast;
         }
 
         for (final SpellAbility ma : maList) {
@@ -398,22 +426,12 @@ public class ComputerUtilMana {
 
             SpellAbility paymentChoice = ma;
 
-            // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
-            // to attempt to make the spell uncounterable when possible.
-            if (ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
-                    && saHost.getType().hasCreatureType(ma.getHostCard().getChosenType())) {
-                if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
-                    // Deprioritize Cavern of Souls, try to pay generic mana with it instead to use the NoCounter ability
-                    continue;
-                } else if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
-                    for (SpellAbility ab : maList) {
-                        if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
-                            if (!ab.getHostCard().isTapped()) {
-                                paymentChoice = ab;
-                                break;
-                            }
-                        }
-                    }
+            // Exception: when paying generic mana with a source like Cavern of Souls, prefer its any-color mana
+            // to make the spell uncounterable.
+            if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
+                SpellAbility uncounterable = getUncounterableManaAbility(ma.getHostCard(), sa);
+                if (uncounterable != null) {
+                    paymentChoice = uncounterable;
                 }
             }
 
@@ -508,13 +526,18 @@ public class ComputerUtilMana {
         return manaProduced.toString();
     }
 
+    // no color is chosen yet for combination mana, so "Combo W U" would count as three mana for ManaAmount
+    private static String manaForReplacementCheck(String produced, SpellAbility ma) {
+        return produced.startsWith("Combo ") ? StringUtils.repeat("C", " ", ma.amountOfManaGenerated(false)) : produced;
+    }
+
     private static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
         Game game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(hostCard);
-        repParams.put(AbilityKey.Mana, manaProduced);
+        repParams.put(AbilityKey.Mana, manaForReplacementCheck(manaProduced, saPayment));
         repParams.put(AbilityKey.Activator, ai);
         repParams.put(AbilityKey.AbilityMana, saPayment); // RootAbility
 
@@ -670,6 +693,7 @@ public class ComputerUtilMana {
         Multimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
+        int testLifeSpent = 0;
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
@@ -784,6 +808,11 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            if (test && saPayment != null && !canPayTestLifeCost(ai, saPayment, testLifeSpent)) {
+                saExcludeList.add(saPayment);
+                continue;
+            }
+
             final int manaCostToActivate = getManaToActivate(saPayment);
             if (manaCostToActivate > 0) {
                 if (test && !paymentList.isEmpty() && getManaToActivate(paymentList.get(paymentList.size() - 1)) > 0) {
@@ -795,7 +824,7 @@ public class ComputerUtilMana {
                 // from a source the remaining cost can spare, so that its cost payment doesn't grab a
                 // land that's needed for a colored shard.
                 if (!test && !prepayFilterManaAbility(cost, sa, ai, saPayment, toPay, sourcesForShards, paymentList, effect)) {
-                    saPayment.getManaPart().clearExpressChoice();
+                    activeManaPart(saPayment).getManaPart().clearExpressChoice();
                     saExcludeList.add(saPayment);
                     continue;
                 }
@@ -819,6 +848,7 @@ public class ComputerUtilMana {
 
                 String manaProduced = predictMana(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
+                testLifeSpent += getLifeCost(saPayment);
                 // the mana to activate the ability has to come from the remaining sources
                 if (manaCostToActivate > 0) {
                     cost.addManaCost(getManaCostToActivate(saPayment));
@@ -997,23 +1027,37 @@ public class ComputerUtilMana {
     }
 
     private static int producedColors(final SpellAbility ma) {
-        final AbilityManaPart mp = ma.getManaPart();
+        final SpellAbility part = activeManaPart(ma);
+        final AbilityManaPart mp = part.getManaPart();
         if (mp == null) {
             return 0;
         }
         final Set<String> reflected = CardUtil.getReflectableManaColors(ma);
         int mask = 0;
         for (final byte c : MagicColor.WUBRG) {
-            if (mp.canProduce(MagicColor.toShortString(c), ma) || reflected.contains(MagicColor.toLongString(c))) {
+            if (mp.canProduce(MagicColor.toShortString(c), part) || reflected.contains(MagicColor.toLongString(c))) {
                 mask |= c;
             }
         }
         return mask;
     }
 
+    // "Add {C}. If ..., instead add any color" scripts switch the root off and put the alternative in a sub-ability
+    private static SpellAbility activeManaPart(final SpellAbility ma) {
+        if (ma.getSubAbility() == null) {
+            return ma;
+        }
+        for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
+            if (part.getManaPart() != null && part.metConditions()) {
+                return part;
+            }
+        }
+        return ma;
+    }
+
     private static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
-            sa.getManaPart().clearExpressChoice();
+            activeManaPart(sa).getManaPart().clearExpressChoice();
         }
     }
 
@@ -1207,7 +1251,23 @@ public class ComputerUtilMana {
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, ManaCostBeingPaid cost, boolean checkCosts, Map<String, Integer> xManaCostPaidByColor) {
         final Card sourceCard = ma.getHostCard();
 
+        // A Command-zone mana effect that is a piece of a known win combo is reserved for that combo's payoff.
+        // Other Command-zone mana abilities (including unrelated commanders) keep their normal payment behavior.
+        if (ai.isAI() && sourceCard.isInZone(ZoneType.Command)
+                && forge.ai.simulation.ComboCatalog.isWinComboPiece(sourceCard)
+                && !forge.ai.simulation.ComboCatalog.canUseCommandManaSourceFor(ai, sourceCard, sa)) {
+            return false;
+        }
+
         if (isManaSourceReserved(ai, sourceCard)) {
+            return false;
+        }
+
+        // a mana ability that discards the hand (Lion's Eye Diamond) is not for paying a spell while the hand holds the
+        // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
+        if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
+                && ai.getController() instanceof PlayerControllerAi
+                && forge.ai.simulation.ComboPlan.holdsKillPiece(ai)) {
             return false;
         }
 
@@ -1215,7 +1275,8 @@ public class ComputerUtilMana {
             return false;
         }
 
-        AbilityManaPart m = ma.getManaPart();
+        final SpellAbility part = activeManaPart(ma);
+        final AbilityManaPart m = part.getManaPart();
         if (!m.meetsManaRestrictions(sa)) {
             return false;
         }
@@ -1232,7 +1293,7 @@ public class ComputerUtilMana {
         }
 
         if (m.isComboMana()) {
-            for (String s : m.getComboColors(ma).split(" ")) {
+            for (String s : m.getComboColors(part).split(" ")) {
                 if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
                     continue;
                 }
@@ -1243,12 +1304,12 @@ public class ComputerUtilMana {
 
                 if (ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s))) {
                     // usually we'll want to produce color that matches the shard
-                    ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(ma).split(" ")));
+                    ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(part).split(" ")));
                     // but other effects might still lead to a more permissive payment
                     if (!shared.isColorless()) {
                         m.setExpressChoice(shared.iterator().next().getShortName());
                     }
-                    setComboManaChoice(ai, ma, cost);
+                    setComboManaChoice(ai, part, cost);
                     return true;
                 }
             }
@@ -1280,7 +1341,7 @@ public class ComputerUtilMana {
         }
 
         if (toPay == ManaCostShard.COLORED_X) {
-            for (String s : m.mana(ma).split(" ")) {
+            for (String s : m.mana(part).split(" ")) {
                 if (ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
                     return true;
                 }
@@ -1293,8 +1354,11 @@ public class ComputerUtilMana {
             if (toPay.isOr2Generic()) {
                 colorChoice = toPay.getColorMask();
             } else {
+                // Generic/hybrid: prefer hand+battlefield identity over the W-first WUBRG scan.
+                final byte prominent = toPay.isGeneric() || toPay.isMultiColor() ? CardFactoryUtil.getMostProminentColors(
+                        ai.getCardsIn(ZoneType.Hand, ZoneType.Battlefield)) : 0;
                 for (byte c : MagicColor.WUBRG) {
-                    if (ai.getManaPool().canPayForShardWithColor(toPay, c)) {
+                    if ((prominent == 0 || (prominent & c) != 0) && ai.getManaPool().canPayForShardWithColor(toPay, c)) {
                         colorChoice = c;
                         break;
                     }
@@ -1583,14 +1647,17 @@ public class ComputerUtilMana {
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 
-        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), c -> !c.getManaAbilities().isEmpty());
+        final CardCollectionView manaZones = CardCollection.combine(p.getCardsIn(ZoneType.Battlefield), p.getCardsIn(ZoneType.Command));
+        final List<Card> srcs = CardLists.filter(manaZones, c -> !c.getManaAbilities().isEmpty());
 
         int maxProduced = 0;
         int producedWithCost = 0;
+        int lifeSpent = 0;
         boolean hasSourcesWithNoManaCost = false;
 
         for (Card src : srcs) {
             maxProduced = 0;
+            int lifeSpentByBest = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
                 ma.setActivatingPlayer(p);
@@ -1605,6 +1672,16 @@ public class ComputerUtilMana {
                     for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
                         producedTotal += part.amountOfManaGenerated(true);
                     }
+                    int lifeSpentByAbility = 0;
+                    final int lifeCost = getLifeCost(ma);
+                    if (lifeCost > 0) {
+                        final int uses = maxLifeManaUses(p, ma, lifeSpent);
+                        if (uses == 0) {
+                            continue;
+                        }
+                        producedTotal *= uses;
+                        lifeSpentByAbility = lifeCost * uses;
+                    }
 
                     if (costsToActivate > 0) {
                         producedWithCost += producedTotal;
@@ -1612,13 +1689,15 @@ public class ComputerUtilMana {
                         hasSourcesWithNoManaCost = true;
                     }
 
-                    if (producedTotal > maxProduced) {
+                    if (producedTotal > maxProduced || producedTotal == maxProduced && lifeSpentByAbility < lifeSpentByBest) {
                         maxProduced = producedTotal;
+                        lifeSpentByBest = lifeSpentByAbility;
                     }
                 }
             }
 
             availableMana += maxProduced;
+            lifeSpent += lifeSpentByBest;
         }
 
         availableMana += p.getManaPool().totalMana();
@@ -1630,8 +1709,31 @@ public class ComputerUtilMana {
         return availableMana;
     }
 
+    /**
+     * Renewable mana sources expected to remain available on the AI's next turn. Only battlefield permanents with
+     * reusable mana abilities count: Command-zone effects such as Channel are temporary, cards in hand are not yet
+     * sources, and one-shot sacrifice sources cannot be assumed to survive until the next turn.
+     */
+    public static CardCollection getManaSourcesForNextTurn(final Player ai) {
+        final CardCollection sources = new CardCollection();
+        if (ai == null) {
+            return sources;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ability : getAIPlayableMana(c)) {
+                final Cost cost = ability.getPayCosts();
+                if (cost != null && cost.isReusuableResource()) {
+                    sources.add(c);
+                    break;
+                }
+            }
+        }
+        return sources;
+    }
+
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
-        final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
+        final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
+                ai.getCardsIn(ZoneType.Command));
         final List<Card> manaSources = CardLists.filter(list, c -> {
             for (final SpellAbility am : getAIPlayableMana(c)) {
                 am.setActivatingPlayer(ai);
@@ -1827,7 +1929,7 @@ public class ComputerUtilMana {
                         // setup produce mana replacement effects
                         String origin = mp.getOrigProduced();
                         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(sourceCard);
-                        repParams.put(AbilityKey.Mana, origin);
+                        repParams.put(AbilityKey.Mana, manaForReplacementCheck(origin, tail));
                         repParams.put(AbilityKey.Activator, ai);
                         repParams.put(AbilityKey.AbilityMana, m); // RootAbility
 
@@ -1952,6 +2054,75 @@ public class ComputerUtilMana {
             shardSurplus += " " + shardColor;
         }
         return 99;
+    }
+
+    /** Life paid by a mana ability (Channel and effects like it). */
+    private static int getLifeCost(final SpellAbility sa) {
+        if (sa == null || sa.getPayCosts() == null) {
+            return 0;
+        }
+        int amount = 0;
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostPayLife payLife) {
+                amount += payLife.getAbilityAmount(sa);
+            }
+        }
+        return amount;
+    }
+
+    /** Whether a mana ability with a life cost can be activated repeatedly without tapping or consuming another resource. */
+    private static boolean isRepeatableLifeManaAbility(final SpellAbility sa) {
+        if (sa == null || sa.getPayCosts() == null || sa.getPayCosts().hasTapCost()) {
+            return false;
+        }
+        boolean paysLife = false;
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostPayLife) {
+                paysLife = true;
+            } else if (!part.isReusable()) {
+                return false;
+            }
+        }
+        return paysLife;
+    }
+
+    /** Number of life-paid activations that can be counted without spending the player's last life. */
+    private static int maxLifeManaUses(final Player player, final SpellAbility sa, final int lifeAlreadySpent) {
+        final int lifeCost = getLifeCost(sa);
+        if (lifeCost <= 0) {
+            return 1;
+        }
+        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        if (player.cantLoseForZeroOrLessLife()) {
+            minimumLife = 0;
+        }
+        final int spendable = player.getLife() - lifeAlreadySpent - minimumLife;
+        if (spendable < lifeCost) {
+            return 0;
+        }
+        final int once = spendable / lifeCost;
+        return isRepeatableLifeManaAbility(sa) ? once : 1;
+    }
+
+    /**
+     * Test payments do not actually change life totals, so account for life committed to earlier activations here.
+     * Otherwise a repeatable source such as Channel either gets used only once or appears to have unlimited life.
+     */
+    private static boolean canPayTestLifeCost(final Player player, final SpellAbility sa, final int lifeAlreadySpent) {
+        final int lifeCost = getLifeCost(sa);
+        if (lifeCost <= 0) {
+            return true;
+        }
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostPayLife payLife && !payLife.canPay(sa, player, false)) {
+                return false;
+            }
+        }
+        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        if (player.cantLoseForZeroOrLessLife()) {
+            minimumLife = 0;
+        }
+        return player.getLife() - lifeAlreadySpent - lifeCost >= minimumLife;
     }
 
     // Returns basic mana abilities plus "reflected mana" abilities

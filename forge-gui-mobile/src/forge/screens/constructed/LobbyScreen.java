@@ -3,11 +3,9 @@ package forge.screens.constructed;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.gamemodes.net.server.HostingServer;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +18,7 @@ import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.CommanderOptions;
@@ -54,6 +53,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.GuiChoose;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -68,19 +68,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // General variables
     private GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
-    private final FLabel lblPlayers = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblPlayers") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblPlayers = new FLabel.Builder().icon(FSkinImage.PLAYERS).align(Align.center).build();
     private final FComboBox<Integer> cbPlayerCount;
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants frame and variables
-    private final FLabel lblVariants = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblVariants = new FLabel.Builder().icon(FSkinImage.PLANAR).align(Align.center).build();
     private final FComboBox<Object> cbVariants = new FComboBox<>();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblFormat") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblFormat = new FLabel.Builder().icon(FSkinImage.HDLIBRARY).align(Align.center).build();
     private final FComboBox<Object> cbFormat = new FComboBox<>();
 
     // Max games in a match frame and variables
-    private final FLabel lblGamesInMatch = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblGamesInMatch = new FLabel.Builder().icon(FSkinImage.DOCK_ALPHASTRIKE).align(Align.center).build();
     private final FComboBox<String> cbGamesInMatch = new FComboBox<>();
     private final GuiPrefBinders.ComboBox cbGamesInMatchBinder =
         new GuiPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch);
@@ -158,26 +158,33 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         add(cbVariants);
         cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(" + Forge.getLocalizer().getMessage("lblNone") + ")");
-        cbVariants.addItem(GameType.Vanguard);
-        cbVariants.addItem(GameType.Planechase);
-        cbVariants.addItem(GameType.Archenemy);
-        cbVariants.addItem(GameType.ArchenemyRumble);
+        for (final GameType variant : FormatChoices.VARIANTS) {
+            cbVariants.addItem(variant);
+        }
         cbVariants.addItem(Forge.getLocalizer().getMessage("lblMore"));
         cbVariants.setChangedHandler(event -> {
+            final List<GameType> applied = Lists.newArrayList(Iterables.filter(lobby.getAppliedVariants(),
+                    variant -> !FormatChoices.FORMAT_GAME_TYPES.contains(variant)));
+            // updateVariantSelection moves this list to match the lobby, which needs no change
+            if (cbVariants.getSelectedIndex() <= 0 ? applied.isEmpty() : applied.equals(List.of(cbVariants.getSelectedItem()))) {
+                return;
+            }
             if (cbVariants.getSelectedIndex() <= 0) {
                 clearStackableVariants();
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
             else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
                 Forge.openScreen(new MultiVariantSelect());
                 updateVariantSelection();
             }
             else {
+                // Clearing the old variant resets this list to (None), so read the choice first
+                final GameType variant = (GameType) cbVariants.getSelectedItem();
                 clearStackableVariants();
-                lobby.applyVariant((GameType)cbVariants.getSelectedItem());
+                lobby.applyVariant(variant);
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
         });
 
@@ -188,10 +195,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbFormat.addItem(choice);
         }
         cbFormat.setChangedHandler(event -> {
+            if (cbFormat.getSelectedItem() == FormatChoices.ARCHIVED) {
+                updateFormatSelection();
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices(), archived -> {
+                    if (archived != null) {
+                        applyFormatChoice(archived);
+                    }
+                });
+                return;
+            }
             if (lobby.hasControl() && cbFormat.getSelectedItem() != lobby.getFormatChoice()) {
-                lobby.setFormatChoice(cbFormat.getSelectedItem());
-                updateLayoutForVariants();
-                saveAppliedVariants();
+                applyFormatChoice(cbFormat.getSelectedItem());
             }
         });
 
@@ -201,7 +215,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         updatePlayersFromPrefs();
 
-        FThreads.invokeInBackgroundThread(() -> {
+        // Blocks input until the decks load and the setup is restored, as saving a seat's deck before it loads throws
+        LoadingOverlay.runBackgroundTask(Forge.getLocalizer().getMessage("lblLoadingEllipsis"), true, loader -> {
             playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
             playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
             try {
@@ -209,7 +224,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
                 }
                 if (getNumPlayers() > 3) {
-                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                 }
             } catch (Exception e) {}
             /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -219,15 +234,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
             FThreads.invokeInEdtLater(() -> {
                 btnStart.setEnabled(lobby.hasControl());
-
-                Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
-                if (!gameTypes.isEmpty()) {
-                    for (GameType gameType : gameTypes) {
-                        lobby.applyVariant(gameType);
-                    }
-                    updateVariantSelection();
-                    updateLayoutForVariants();
-                }
+                lobby.restoreSetup();
+                updateLayoutForVariants();
             });
         });
 
@@ -264,8 +272,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
+        updateLayoutForVariants();
+        lobby.saveSetup();
+    }
+
     private void updateFormatSelection() {
-        cbFormat.setSelectedItem(lobby.getFormatChoice());
+        if (lobby.getFormatChoice() instanceof GameFormat format && format.getFormatType() == GameFormat.FormatType.ARCHIVED) {
+            // The list holds no archived formats, so the combo shows the name alone
+            cbFormat.setText(format.getName());
+        } else {
+            cbFormat.setSelectedItem(lobby.getFormatChoice());
+        }
         lblFormat.setEnabled(lobby.hasControl());
         cbFormat.setEnabled(lobby.hasControl());
         // Limited mode lists event pools, which the Constructed format does not apply to
@@ -273,11 +292,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         for (final PlayerPanel panel : playerPanels) {
             panel.getDeckChooser().getLstDecks().setRequiredFormat(format);
         }
-    }
-
-    private void saveAppliedVariants() {
-        FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, Sets.newHashSet(lobby.getAppliedVariants()));
-        FModel.getPreferences().save();
     }
 
     private void updateVariantSelection() {
@@ -316,49 +330,50 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        float x = PADDING;
+        final FLabel[] labels = {lblFormat, lblVariants, lblPlayers, lblGamesInMatch};
+        final FComboBox<?>[] fields = {cbFormat, cbVariants, cbPlayerCount, cbGamesInMatch};
+        final float fieldHeight = cbPlayerCount.getHeight();
         float y = startY + PADDING;
-        float fieldHeight = cbPlayerCount.getHeight();
-        if (Forge.isLandscapeMode()) {
-            lblFormat.setBounds(x, y, lblFormat.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblFormat.getWidth();
-            final float comboWidth = (width - (x + lblVariants.getAutoSizeBounds().width + PADDING / 2
-                    + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
-                    + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2)) / 2;
-            cbFormat.setBounds(x, y, comboWidth, fieldHeight);
-            x += cbFormat.getWidth();
-            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, comboWidth, fieldHeight);
-            x += cbVariants.getWidth();
-            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblPlayers.getWidth();
-            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-            x += cbPlayerCount.getWidth() + PADDING;
-            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblGamesInMatch.getWidth();
-            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-        } else {
-            lblFormat.setBounds(x, y, lblFormat.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblFormat.getWidth();
-            cbFormat.setBounds(x, y, width - x - PADDING, fieldHeight);
-            x = PADDING;
-            y += cbFormat.getHeight() + PADDING;
-            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
-            x = PADDING;
-            y += cbVariants.getHeight() + PADDING;
-            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblPlayers.getWidth();
-            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-            x += cbPlayerCount.getWidth() + PADDING;
-            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblGamesInMatch.getWidth();
-            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        // Each row takes as many fields as fit at their narrowest, then the format and variant boxes share what is left
+        for (int first = 0, end; first < fields.length; first = end) {
+            float used = PADDING * 3 / 2;
+            int stretching = 0;
+            for (end = first; end < fields.length; end++) {
+                // The match count never starts a row without the player count
+                final float needed = groupWidth(fields[end]) + (fields[end] == cbPlayerCount ? groupWidth(cbGamesInMatch) : 0);
+                if (end > first && fields[end] != cbGamesInMatch && used + needed > width) {
+                    break;
+                }
+                used += groupWidth(fields[end]);
+                if (stretches(fields[end])) {
+                    stretching++;
+                }
+            }
+            final float extra = stretching == 0 ? 0 : (width - used) / stretching;
+            float x = PADDING;
+            for (int i = first; i < end; i++) {
+                labels[i].setBounds(x, y, fieldHeight, fieldHeight);
+                x += labels[i].getWidth();
+                fields[i].setBounds(x, y, minWidth(fields[i]) + (stretches(fields[i]) ? extra : 0), fieldHeight);
+                x += fields[i].getWidth() + PADDING / 2;
+            }
+            y += fieldHeight + PADDING;
         }
-        y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);
+    }
+
+    // An icon label is as wide as the field is tall
+    private float groupWidth(final FComboBox<?> field) {
+        return field.getHeight() + minWidth(field) + PADDING;
+    }
+
+    private boolean stretches(final FComboBox<?> field) {
+        return field == cbFormat || field == cbVariants;
+    }
+
+    // Sized on the longest choice, so the layout does not change with the selection. That choice may shrink its font a little.
+    private float minWidth(final FComboBox<?> field) {
+        return stretches(field) ? field.getAutoSizeWidth() * 0.85f : Math.max(field.getAutoSizeWidth(), Utils.AVG_FINGER_WIDTH * 0.75f);
     }
 
     GameType getCurrentGameMode() {
@@ -504,10 +519,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             super(Forge.getLocalizer().getInstance().getMessage("lblSelectVariants"));
 
             lstVariants.setListItemRenderer(new VariantRenderer());
-            lstVariants.addItem(new Variant(GameType.Vanguard));
-            lstVariants.addItem(new Variant(GameType.Planechase));
-            lstVariants.addItem(new Variant(GameType.Archenemy));
-            lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
+            for (final GameType variant : FormatChoices.VARIANTS) {
+                lstVariants.addItem(new Variant(variant));
+            }
         }
 
         @Override
@@ -537,7 +551,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 updateVariantSelection();
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
         }
 
@@ -759,7 +773,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getCommanderDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblCommanderDeck") + ": "
-                        + playerPanel.getCommanderDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.Oathbreaker)) {
@@ -767,7 +781,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getOathbreakerDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblOathbreakerDeck") + ": "
-                        + playerPanel.getOathbreakerDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.TinyLeaders)) {
@@ -775,7 +789,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getTinyLeadersDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblTinyLeadersDeck") + ": "
-                        + playerPanel.getTinyLeadersDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.Brawl)) {
@@ -783,14 +797,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getBrawlDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblBrawlDeck") + ": "
-                        + playerPanel.getBrawlDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }else {
             deck = playerPanel.getDeck();
             if (deck != null) {
                 playerPanel.getDeckChooser().saveState();
                 deckName =  playerPanel.getDeckChooser().getSelectedDeckType().toString() + ": "
-                        + playerPanel.getDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
 

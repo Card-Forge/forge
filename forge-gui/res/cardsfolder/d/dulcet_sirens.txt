@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Siren
 PT:1/3
 K:Morph:U
-A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | SubAbility$ DBEffect | StackDescription$ None | SpellDescription$ Target creature attacks target opponent this turn if able.
+A:AB$ TargetOnly | Cost$ U T | ValidTgts$ Creature | SubAbility$ DBEffect | StackDescription$ None | SpellDescription$ Target creature attacks target opponent this turn if able.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Opponent | RememberObjects$ ParentTarget & Targeted | StaticAbilities$ MustAttack | StackDescription$ {c:ParentTarget} attacks {p:Targeted} this turn if able.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.IsRemembered | MustAttack$ Remembered | Description$ This creature attacks this player this turn if able.
 AI:RemoveDeck:All

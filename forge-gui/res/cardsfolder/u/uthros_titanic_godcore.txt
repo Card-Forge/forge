@@ -4,7 +4,7 @@ Types:Land Planet
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-K:Station:12
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE12_CHARGE | AddAbility$ UthrosMana | Description$ STATION 12+ {U}, {T}: Add {U} for each artifact you control.
 SVar:UthrosMana:AB$ Mana | Cost$ U T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl

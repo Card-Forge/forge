@@ -374,7 +374,7 @@ ScryfallCode=TRC
 389 R Isolated Chapel @Arthur Yuan
 390 R Morphic Pool @Pierre Loyvet
 391 R Mosswort Bridge @Joan Piqué Llorens
-392 R Mutavault @Pace Wilder
+392 R Mutavault @Pace Wilder ${"flavorName": "Galactic Menagerie"}
 393 R Port Town @Edouard
 394 R Prairie Stream @Carlos Dattoli
 395 R Radiant Summit @Pablo Mendoza

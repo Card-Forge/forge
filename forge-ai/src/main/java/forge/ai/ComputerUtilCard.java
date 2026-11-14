@@ -589,16 +589,82 @@ public class ComputerUtilCard {
         return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 
+    /** An effect that changes the whole board for everyone (Doran, the Siege Tower): removing it matters more than its stats. */
+    private static final int BOARD_WIDE_EFFECT_BONUS = 160;
+    /** An anthem for its controller's creatures. */
+    private static final int ANTHEM_BONUS = 40;
+    /** "Whenever another creature you control dies ..." (Zulaport Cutthroat, Blood Artist): slightly more than a single use. */
+    private static final int DEATH_ENGINE_BONUS = 60;
+
+    /**
+     * What a creature does besides its stats that makes it worth removing first, read from its own abilities: a static
+     * ability on creatures of every player, one on the controller's creatures, a trigger on other creatures dying (#4129, #4171).
+     */
+    public static int removalEffectBonus(final Card c) {
+        int bonus = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            final String valid = st.getParamOrDefault("ValidCard", st.getParamOrDefault("Affected", ""));
+            if (!valid.startsWith("Creature") || valid.contains("Self")) {
+                continue;
+            }
+            if (valid.contains("YouCtrl")) {
+                bonus = Math.max(bonus, ANTHEM_BONUS);
+            } else if (!valid.contains("OppCtrl")) {
+                bonus = Math.max(bonus, BOARD_WIDE_EFFECT_BONUS);
+            }
+        }
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))
+                    && "Graveyard".equals(t.getParam("Destination")) && t.getParamOrDefault("ValidCard", "").contains("Creature")) {
+                bonus = Math.max(bonus, DEATH_ENGINE_BONUS);
+            }
+        }
+        return bonus;
+    }
+
+    /** A permanent that stops the AI's creatures from attacking: worth about a good creature, and more with every creature it locks down. */
+    private static final int ATTACK_LOCK_BASE = 150;
+    private static final int ATTACK_LOCK_PER_CREATURE = 50;
+    private static final int ATTACK_LOCK_CAP = 400;
+
+    /**
+     * How many of the AI's creatures a static ability of the card stops from attacking (Moat). Read from the card's own
+     * CantAttack statics, so it is the situation (what the AI has in play) and not the mana value that decides.
+     */
+    public static int creaturesLockedFromAttacking(final Player ai, final Card c) {
+        if (c.isCreature() || c.getController().equals(ai)) {
+            return 0;
+        }
+        int most = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (!st.checkMode(StaticAbilityMode.CantAttack) || st.hasParam("Unless")) {
+                continue;
+            }
+            int n = 0;
+            for (final Card mine : ai.getCreaturesInPlay()) {
+                if (st.matchesValidParam("ValidCard", mine)) {
+                    n++;
+                }
+            }
+            most = Math.max(most, n);
+        }
+        return most;
+    }
+
     private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
         int value;
         if (c.isCreature()) {
-            value = evaluateCreature(c);
+            value = evaluateCreature(c) + removalEffectBonus(c);
         } else if (c.isLand()) {
             value = evaluateLandRemovalPriority(ai, c, null, false);
         } else {
             value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {
                 value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+            final int locked = creaturesLockedFromAttacking(ai, c);
+            if (locked > 0) {
+                value += Math.min(ATTACK_LOCK_CAP, ATTACK_LOCK_BASE + ATTACK_LOCK_PER_CREATURE * locked);
             }
         }
 
@@ -765,10 +831,6 @@ public class ComputerUtilCard {
         Map<Card, Integer> cache = new IdentityHashMap<>();
         return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
     }
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
-        // TODO ideally we could reuse the value from the previous pass with false
-        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -1429,6 +1491,10 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
+        // a permanent that stops the AI's creatures from attacking (Moat): it is the whole board, not a tempo play
+        if (!c.isCreature() && creaturesLockedFromAttacking(ai, c) > 0) {
+            threat = Math.max(threat, 1.0f);
+        }
         if (!c.getManaAbilities().isEmpty() && !landGrantingRemoval(sa)) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
@@ -1519,11 +1585,29 @@ public class ComputerUtilCard {
         }
         */
 
+        // what the pump adds to the combat damage: the power, or the toughness while creatures assign combat damage
+        // equal to toughness (Doran, the Siege Tower), when +P does nothing and +T is the damage
+        final int dmgGain = c.toughnessAssignsDamage() ? toughness : power;
+
+        // check if the pump only gives a keyword and the target already has that keyword, in which case skip it
+        if (power == 0 && toughness == 0) {
+            boolean hasAll = true;
+            for (String kw : keywords) {
+                if (!c.hasKeyword(kw) || !Keyword.smartValueOf(kw).isMultipleRedundant()) {
+                    hasAll = false;
+                    break;
+                }
+            }
+            if (hasAll) {
+                return false;
+            }
+        }
+
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
                 && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
-                && power > 0
+                && dmgGain > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;
         }
@@ -1585,7 +1669,7 @@ public class ComputerUtilCard {
                 if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
-                if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0) {
+                if (c.getNetCombatDamage() == 0 && c == sa.getHostCard() && dmgGain > 0) {
                     threat *= 4; //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
@@ -1597,7 +1681,7 @@ public class ComputerUtilCard {
                 if (holdCombatTricks && sa.getApi() == ApiType.Pump
                         && sa.hasParam("NumAtt") && sa.getHostCard() != null
                         && sa.getHostCard().isInZone(ZoneType.Hand)
-                        && c.getNetPower() > 0 // too obvious if attacking with a 0-power creature
+                        && c.getNetCombatDamage() > 0 // too obvious if attacking with a 0-power creature
                         && sa.getHostCard().isInstant() // only do it for instant speed spells in hand
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(sa, ai)) {
                     combatTrick = true;
@@ -1771,12 +1855,12 @@ public class ComputerUtilCard {
                 }
 
                 float value = pumpedDmg - dmg;
-                if (c == sa.getHostCard() && power > 0) {
+                if (c == sa.getHostCard() && dmgGain > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= (float) power / divisor;
+                    value *= (float) dmgGain / divisor;
                 } else {
                     value /= opp.getLife();
                 }

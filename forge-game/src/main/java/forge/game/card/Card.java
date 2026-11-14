@@ -2590,7 +2590,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("Split second") || keyword.equals("Sunburst") || keyword.equals("Riot")
                         || keyword.equals("Soulbond") || keyword.equals("Retrace")
                         || keyword.equals("Double team") || keyword.equals("Living metal")
-                        || keyword.equals("Foretell") // for the ones without cost
+                        || keyword.equals("Foretell") || keyword.equals("Prismatic") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Umbra armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
@@ -2710,7 +2710,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
-                        || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
+                        || keyword.equals("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
                         || keyword.startsWith("Affinity")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
@@ -3192,7 +3192,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("Undaunted") || keyword.equals("Cascade")
                         || keyword.equals("Devoid") ||  keyword.equals("Lifelink")
                         || keyword.equals("Bargain") || keyword.equals("Spree")
-                        || keyword.equals("Tiered") || keyword.equals("Split second")) {
+                        || keyword.equals("Tiered") || keyword.equals("Split second")
+                        || keyword.equals("Prismatic")) {
                     sbBefore.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n\r\n");
                 } else if (keyword.equals("Conspire") || keyword.equals("Epic")
@@ -7602,16 +7603,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
-        for (final SpellAbility sa : abilities) {
+        abilities.removeIf(sa -> {
             sa.setActivatingPlayer(player);
             // fix things like retrace
             // check only if SA can't be cast normally
-            if (!sa.canPlay(true) && (removeUnplayable || !sa.isPossible())) {
-                toRemove.add(sa);
-            }
-        }
-        abilities.removeAll(toRemove);
+            return !sa.canPlay(true) && (removeUnplayable || !sa.isPossible());
+        });
 
         return abilities;
     }

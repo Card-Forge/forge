@@ -55,6 +55,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Commander mode
     private AdventureModes adventureMode;
+    private final Map<String, String> modifiers = new LinkedHashMap<>(); //Chosen modifier names and their settings.
 
     // Game data.
     private float worldPosX;
@@ -121,6 +122,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = false;
         usingCustomDeck = false;
         adventureMode = null;
+        modifiers.clear();
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -317,6 +319,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Boolean isFemale() {
         return isFemale;
     }
@@ -339,6 +345,46 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public AdventureModes getAdventureMode(){
         return adventureMode;
+    }
+
+    /** @return the chosen modifiers by name, each with its setting */
+    public Map<String, String> getModifiers() {
+        return Collections.unmodifiableMap(modifiers);
+    }
+
+    public void setModifiers(Map<String, String> chosen) {
+        modifiers.clear();
+        modifiers.putAll(chosen);
+    }
+
+    /** @return the plane's modifiers that this run has turned on, in the plane's order */
+    public List<ModifierData> getActiveModifiers() {
+        List<ModifierData> active = new ArrayList<>();
+        ModifierData[] all = Config.instance().getConfigData().modifiers;
+        if (all == null)
+            return active;
+        for (ModifierData modifier : all) {
+            if (modifiers.containsKey(modifier.name))
+                active.add(modifier);
+        }
+        return active;
+    }
+
+    /** @return each chosen modifier with its setting and description, or its duel effect when it has no description */
+    public String getModifiersDescription() {
+        StringBuilder text = new StringBuilder();
+        for (ModifierData modifier : getActiveModifiers()) {
+            String value = modifier.describeValue(modifiers.get(modifier.name));
+            text.append(modifier.name);
+            if (!value.isEmpty())
+                text.append(" (").append(value).append(")");
+            text.append("\n");
+            if (modifier.description != null)
+                text.append(modifier.description).append("\n");
+            else if (modifier.effect != null)
+                text.append(modifier.effect.getEnemySideDescription());
+        }
+        return text.toString();
     }
 
     public boolean isCommanderMode() {
@@ -572,6 +618,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards")));
             deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
             unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+        }
+        if (data.containsKey("modifierNames") && data.containsKey("modifierValues")) {
+            String[] names = (String[]) data.readObject("modifierNames");
+            String[] values = (String[]) data.readObject("modifierValues");
+            for (int i = 0; i < names.length; i++) {
+                modifiers.put(names[i], values[i]);
+            }
         }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
@@ -854,6 +907,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             characterFlagsKey.add(entry.getKey());
             characterFlagsValue.add(entry.getValue());
         }
+        data.storeObject("modifierNames", modifiers.keySet().toArray(new String[0]));
+        data.storeObject("modifierValues", modifiers.values().toArray(new String[0]));
         data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
         data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 

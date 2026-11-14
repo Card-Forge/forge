@@ -176,6 +176,9 @@ public enum StaticAbilityMode {
     // StaticAbilityPlotZone
     PlotZone,
 
+    // StaticAbilityForetell
+    ForetellAnyTurn,
+
     // StaticAbilityNumLoyaltyAct
     NumLoyaltyAct,
 

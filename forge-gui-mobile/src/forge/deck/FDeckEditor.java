@@ -168,7 +168,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override public DeckFormat getDeckFormat() { return deckFormat; }
         @Override public IDeckController getController() { return controller; }
         @Override public Predicate<PaperCard> getCardFilter() { return cardFilter; }
-        @Override public boolean isLimited() { return deckFormat == DeckFormat.Limited; }
+        @Override public boolean isLimited() { return deckFormat == DeckFormat.Limited || deckFormat == DeckFormat.CommanderDraft; }
         @Override public boolean isDraft() { return gameType.isDraft(); }
         @Override public boolean hasCommander() { return deckFormat.hasCommander(); }
 
@@ -1669,32 +1669,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             if(parentScreen.getCommanderPage().cardManager.getPool().contains(card))
                 return false; //Don't let it be the commander if it already is one.
-            if(!parentScreen.shouldEnforceConformity())
-                return card.getRules().canBeCreature();
+            return getCommanderFormat().isAllowedCommander(card.getRules(), parentScreen.shouldEnforceConformity());
+        }
+
+        private DeckFormat getCommanderFormat() {
             DeckFormat format = parentScreen.editorConfig.getDeckFormat();
-            if(format == null)
-                format = DeckFormat.Commander;
-            return format.isLegalCommander(card.getRules());
+            return format == null ? DeckFormat.Commander : format;
         }
 
         protected boolean canBePartnerCommander(final PaperCard card) {
             if(!parentScreen.isCommanderEditor())
                 return false;
-            if(parentScreen.editorConfig.getGameType() == GameType.Oathbreaker) {
-                //FIXME: For now, simplify Oathbreaker by not supporting partners.
-                //Needs support for tracking whose signature spell is whose, here and elsewhere.
-                return false;
-            }
-            CardPool commanderPool = parentScreen.getDeck().get(DeckSection.Commander);
-            if (commanderPool == null)
-                return false;
-            List<PaperCard> commanders = commanderPool.toFlatList();
-            commanders.removeIf((c) -> c.getRules().canBeSignatureSpell());
-            if(commanders.size() != 1)
-                return false;
-            if(!parentScreen.shouldEnforceConformity())
-                return true;
-            return commanders.get(0).getRules().canBePartnerCommanders(card.getRules());
+            return getPartnerableCommander(card) != null;
+        }
+
+        private PaperCard getPartnerableCommander(final PaperCard card) {
+            return getCommanderFormat().getPartnerableCommander(parentScreen.getDeck(), card, parentScreen.shouldEnforceConformity());
         }
 
         protected boolean canBeSignatureSpell(final PaperCard card) {
@@ -1777,15 +1767,32 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void setCommander(PaperCard card) {
-            DeckSectionPage commanderPage = parentScreen.getCommanderPage();
-            commanderPage.ejectCards();
-            moveCard(card, commanderPage);
-            refresh(); //refresh so cards shown that match commander's color identity
+            confirmCommander(card, null, () -> {
+                DeckSectionPage commanderPage = parentScreen.getCommanderPage();
+                commanderPage.ejectCards();
+                moveCard(card, commanderPage);
+                refresh(); //refresh so cards shown that match commander's color identity
+            });
         }
 
         protected void setPartnerCommander(PaperCard card) {
-            moveCard(card, parentScreen.getCommanderPage());
-            refresh(); //refresh so cards shown that match commander's color identity
+            confirmCommander(card, getPartnerableCommander(card), () -> {
+                moveCard(card, parentScreen.getCommanderPage());
+                refresh(); //refresh so cards shown that match commander's color identity
+            });
+        }
+
+        private void confirmCommander(PaperCard card, PaperCard partnerOf, Runnable place) {
+            String warning = getCommanderFormat().getIllegalCommanderWarning(card, partnerOf);
+            if (warning == null) {
+                place.run();
+                return;
+            }
+            FOptionPane.showConfirmDialog(warning, result -> {
+                if (result) {
+                    place.run();
+                }
+            });
         }
 
         protected void setSignatureSpell(PaperCard card) {
@@ -1946,7 +1953,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //Then we just remove the "add to deck" option when clicking a card outside the color identity.
                 if(needsCommander()) {
                     //If we need a commander, show only commander candidates.
-                    cardPool.retainIf(deckFormat.isLegalCommanderPredicate());
+                    cardPool.retainIf(c -> deckFormat.isAllowedCommander(c.getRules(), parentScreen.shouldEnforceConformity()));
                     if(editorConfig.getGameType() == GameType.Oathbreaker)
                         label = "lblOathbreakers";
                     else
@@ -2836,7 +2843,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public void setDeckGroup(DeckGroup deckGroup) {
             this.setModel(deckGroup);
-            this.setDeck(deckGroup.getHumanDeck());
         }
     }
 

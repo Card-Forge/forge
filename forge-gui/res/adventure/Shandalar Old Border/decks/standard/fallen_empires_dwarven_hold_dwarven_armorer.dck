@@ -1,0 +1,28 @@
+[metadata]
+Name=Dwarven Armorer
+[Main]
+11 Mountain|3ED
+8 Plains|3ED
+1 Dwarven Hold|FEM
+2 Dwarven Ruins|FEM
+1 Battlefield Forge|APC
+4 Dwarven Armorer|FEM
+2 Dwarven Soldier|FEM|[53a]
+2 Dwarven Soldier|FEM|[53b]
+2 Dwarven Soldier|FEM|[53c]
+2 Dwarven Lieutenant|FEM
+4 Spark Mage|ODY
+1 Draconian Cylix|FEM
+1 Spirit Shield|FEM
+1 Zelyon Sword|FEM
+4 Planar Birth|USG
+2 Aeolipile|FEM
+4 Land Tax|LEG
+2 Dwarven Armory|ICE
+2 Anvil of Bogardan|VIS
+4 Volcanic Hammer|PO2
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Dwarven Armory|ICE
+1 Anvil of Bogardan|VIS
+1 Dwarven Armorer|FEM

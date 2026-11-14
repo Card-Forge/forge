@@ -437,6 +437,7 @@ public class Forge implements ApplicationListener {
         if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
             enableControllerListener();
         loadAdventureResources(true);
+        WorldSave.backupOnVersionChange();
     }
     private static void loadAdventureResources(boolean startScene) {
         try {
@@ -1172,7 +1173,7 @@ public class Forge implements ApplicationListener {
         currentScene = newScene;
 
         currentScene.enter();
-        if (currentScene instanceof DuelScene)
+        if (currentScene instanceof DuelScene duel && !duel.isGeneratingDecks())
             Forge.clearTransitionScreen(true);
         return true;
     }

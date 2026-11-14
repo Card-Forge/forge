@@ -1,0 +1,7 @@
+Name:Genesis Effect
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 6 | SubAbility$ DBDestroy | SpellDescription$ CARDNAME deals 6 damage to target creature. Destroy target land you control. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.YouCtrl | ValidTgtsDesc$ land you control | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
+Oracle:Genesis Effect deals 6 damage to target creature. Destroy target land you control. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."

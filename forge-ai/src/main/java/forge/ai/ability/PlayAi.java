@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.ai.simulation.ComboPlan;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.game.Game;
@@ -162,6 +163,26 @@ public class PlayAi extends SpellAbilityAi {
             validSA = SpellAbilityPredicates.isValid(sa.getParam("ValidSA").split(","), ai, sa.getHostCard(), sa);
         } else {
             validSA = null;
+        }
+        // Beseech the Mirror (and the like) offers the engine it found for free (Gaea's Will, Yawgmoth's Will). The generic
+        // check below wants several castable cards in the graveyard and declines, and the engine goes to the hand instead.
+        // Not read from the deck plan: the player of a simulated copy does not see the same deck as the real one.
+        final boolean freeCast = sa.hasParam("WithoutManaCost");
+        if (freeCast) {
+            for (final Card c : options) {
+                final CardState real = c.getState(CardStateName.Original);
+                if (!c.isFaceDown() || real == null) {
+                    continue;
+                }
+                if (real.hasKeyword(Keyword.STORM)) {
+                    return c; // only found for a free cast when it is lethal (see ComboPlan.tutorStormPick)
+                }
+                if (real.hasKeyword(Keyword.BARGAIN)) {
+                    return c; // a second Beseech the Mirror found by the first
+                }
+                if (ComboPlan.isRecursionAbility(real.getSpellAbilities()))
+                    return c;
+            }
         }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge

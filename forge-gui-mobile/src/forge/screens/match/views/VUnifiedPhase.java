@@ -318,7 +318,7 @@ public class VUnifiedPhase extends FDisplayObject {
             public void drawBackground(Graphics g) {
                 final float w = getWidth(), h = getHeight();
                 final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
-                final boolean turn = gv != null && player.equals(gv.getPlayerTurn());
+                final boolean turn = gv != null && player.sharesTeamWith(gv.getPlayerTurn());
                 if (turn) { //the player whose turn it is gets a lit row and an accent bar
                     g.fillRect(ROW_TURN, 0, 0, w, h);
                     final Color accent = VPhaseIndicator.getPhaseColor(true, true).getColor();

@@ -72,6 +72,8 @@ public class RolloutHeuristicPlayersTest extends SimulationTest {
         g.setAge(GameStage.Play);
         g.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
         g.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        // a game before its first turn has no turn player, and copying it fires a turn-phase event with a null player
+        g.getPhaseHandler().devModeSet(PhaseType.MAIN1, g.getPlayers().get(1));
         return g;
     }
 

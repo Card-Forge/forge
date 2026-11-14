@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,8 +65,16 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
                     Localizer.getInstance().getMessage("lblChooseProliferateTarget"), p, null);
 
             GameEntityCounterTable table = new GameEntityCounterTable();
+            final List<Player> poisoned = new ArrayList<>();
             for (final GameEntity ge : result) {
                 for (final CounterType ct : ge.getCounters().elementSet()) {
+                    // CR 701.34b: poison counters are shared by a team, so only one chosen player of a team gets another
+                    if (ct.is(CounterEnumType.POISON) && ge instanceof Player pl) {
+                        if (poisoned.stream().anyMatch(q -> q.getSharedTeam().contains(pl))) {
+                            continue;
+                        }
+                        poisoned.add(pl);
+                    }
                     ge.addCounter(ct, 1, p, table);
                 }
             }

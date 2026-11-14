@@ -47,6 +47,35 @@ public class TutorPlanTest extends FlatMcTestBase {
     }
 
     @Test
+    public void aTutorFetchesThePieceThatCompletesACataloguedCombo() {
+        addPlainDeck();
+        put("Devoted Druid", ai, ZoneType.Battlefield); // Devoted Druid + Quillspike is a line of ai-combos.txt
+        final Card quillspike = put("Quillspike", ai, ZoneType.Library);
+        final SpellAbility demonic = spellOf(put("Demonic Tutor", ai, ZoneType.Hand));
+        AssertJUnit.assertTrue(TutorPlan.hasPlanTarget(ai, demonic));
+        AssertJUnit.assertEquals(quillspike, TutorPlan.planPicks(ai, demonic).getFirst());
+    }
+
+    @Test
+    public void aLonePieceOfACataloguedComboIsNotFetched() {
+        addPlainDeck();
+        put("Quillspike", ai, ZoneType.Library); // nothing of the combo is at hand or in play
+        final SpellAbility demonic = spellOf(put("Demonic Tutor", ai, ZoneType.Hand));
+        AssertJUnit.assertTrue(ComboCatalog.missingPieces(ai, ai.getCardsIn(ZoneType.Library)).isEmpty());
+        AssertJUnit.assertFalse(TutorPlan.hasPlanTarget(ai, demonic));
+    }
+
+    @Test
+    public void theWinningComboIsFetchedBeforeTheLock() {
+        addPlainDeck();
+        put("Heartbeat of Spring", ai, ZoneType.Hand);
+        put("Counterbalance", ai, ZoneType.Hand);
+        final Card harvest = put("Early Harvest", ai, ZoneType.Library);
+        put("Sensei's Divining Top", ai, ZoneType.Library);
+        AssertJUnit.assertEquals(harvest, ComboCatalog.missingPieces(ai, ai.getCardsIn(ZoneType.Library)).get(0));
+    }
+
+    @Test
     public void aDeckWithoutAPlanOnlyGetsTheSmallBonusForUnusedMana() {
         addPlainDeck();
         final SpellAbility vampiric = spellOf(put("Vampiric Tutor", ai, ZoneType.Hand));
