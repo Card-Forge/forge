@@ -5,7 +5,7 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this Spacecraft enters or attacks, one or two target Klingons and/or Warriors you control gain flying until end of turn.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever this Spacecraft enters or attacks, one or two target Klingons and/or Warriors you control gain flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Klingon.YouCtrl,Warrior.YouCtrl | ValidTgtsDesc$ Klingon or Warrior you control | TargetMin$ 1 | TargetMax$ 2 | KW$ Flying
-K:Station:4
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE4_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 4+ Flying
 DeckHints:Type$Klingon|Warrior
 SVar:PlayMain1:TRUE

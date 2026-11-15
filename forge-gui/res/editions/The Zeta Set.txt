@@ -404,6 +404,23 @@ Replace=0.00125F Mythic:fromSheet("SLZ color banding")
 361 R Oboro, Palace in the Clouds @MSCHF
 362 U Reliquary Tower @MSCHF
 363 M Urborg, Tomb of Yawgmoth @MSCHF
+364 L Wastes @MSCHF
+365 L Plains @MSCHF
+366 L Plains @MSCHF
+367 L Plains @MSCHF
+368 L Island @MSCHF
+369 L Island @MSCHF
+370 L Island @MSCHF
+371 L Swamp @MSCHF
+372 L Swamp @MSCHF
+373 L Swamp @MSCHF
+374 L Mountain @MSCHF
+375 L Mountain @MSCHF
+376 L Mountain @MSCHF
+377 L Forest @MSCHF
+378 L Forest @MSCHF
+379 L Forest @MSCHF
+380 R Shivan Dragon @MSCHF
 
 [photocopy]
 1 All That Glitters|SLZ|[1]

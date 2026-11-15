@@ -130,6 +130,13 @@ public class PumpAllAi extends PumpAiBase {
 
         boolean result = ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
                 && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
+        if (!result && sa.isSpell() && sa.getHostCard().hasKeyword(Keyword.CASCADE)
+                && (!(ai.getController() instanceof PlayerControllerAi)
+                || ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.mayCascadeForTheFreeSpell(ai))) {
+            // the free spell from cascade is worth the mana even when nothing is there to pump (Violent Outburst, #4210),
+            // unless the deck plan keeps its cascade spells for the right moment (Living End)
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
         return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 

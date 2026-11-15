@@ -3,7 +3,7 @@ ManaCost:4
 Types:Legendary Artifact Spacecraft
 PT:5/5
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | RestrictValid$ Spell.IsCommander+YouOwn | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on CARDNAME. Spend this mana only to cast your commander.
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance & Haste | Description$ STATION 8+ Flying, vigilance, haste
 SVar:X:Count$CardCounters.CHARGE
 SVar:PlayMain1:TRUE

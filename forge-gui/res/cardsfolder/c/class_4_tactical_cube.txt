@@ -4,7 +4,7 @@ Types:Artifact Spacecraft
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Spacecraft enters, create two 1/1 colorless Borg artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_borg | TokenOwner$ You
-K:Station:7
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ DBStatic | Description$ STATION 7+ Flying,,,Artifact creatures you control get +1/+1.
 SVar:DBStatic:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Artifact creatures you control get +1/+1.
 SVar:PlayMain1:TRUE

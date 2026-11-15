@@ -9,7 +9,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | TargetType$ Spell | ValidTgts$ Card.cmcLE4 | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell with mana value 4 or less | RememberChanged$ True
 SVar:TrigPlay:DB$ Play | Defined$ Remembered.ExiledWithSource | Controller$ RememberedOwner | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetObjects$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 Oracle:Flash\nFlying\nWhen Spell Queller enters, exile target spell with mana value 4 or less.\nWhen Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.

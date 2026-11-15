@@ -4,6 +4,73 @@ Date=2026-10-13
 Name=Alchemy: Reality Fracture
 Type=Online
 ScryfallCode=YFRA
+BoosterSlots=Common,Common-SPG,Alchemy,Uncommon,RareMythic,Land,Wildcard,WildcardFoil,EchoedPair
+Booster=5 Common, 1 Common-SPG, 1 Alchemy, 1 Uncommon, 3 EchoedPair, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+
+[Common]
+Base=Common:fromSheet("FRA cards")
+
+[Common-SPG]
+Base=Common:fromSheet("FRA cards")
+Replace=0.0182F RareMythic:fromSheet("FRA special guests")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 16 rares and 5 mythics make those 38.92% and 6.08%.
+Base=Uncommon:fromSheet("YFRA cards")
+Replace=0.389189F Rare:fromSheet("YFRA cards")
+Replace=0.060811F Mythic:fromSheet("YFRA cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.038F Uncommon:fromSheet("FRA braintwister")
+
+[Wildcard]
+Base=Common:fromSheet("FRA cards")
+Replace=0.74F Uncommon:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.03F Uncommon:fromSheet("FRA braintwister")
+
+[EchoedPair]
+Base=Uncommon:fromSheet("FRA echoed pair")
+Replace=0.067F Rare:fromSheet("FRA echoed pair")
+Replace=0.014F Mythic:fromSheet("FRA echoed pair")
+Replace=0.017F Uncommon:fromSheet("FRA borderless echoed pair")
+Replace=0.0094F Rare:fromSheet("FRA borderless echoed pair")
+Replace=0.0036F Mythic:fromSheet("FRA borderless echoed pair")
+#This is known to be incorrect, but currently unable to assign these cards as a pair, so this will at least fill the slot
+
+[RareMythic]
+Base=Rare:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.148F Mythic:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.01F Rare:fromSheet("FRA shattered mirror")
+Replace=0.0048F Mythic:fromSheet("FRA shattered mirror")
+Replace=0.038F Rare:fromSheet("FRA sculptors stronghold")
+Replace=0.01F Mythic:fromSheet("FRA sculptors stronghold")
+Replace=0.031F Rare:fromSheet("FRA braintwister")
+Replace=0.0042F Mythic:fromSheet("FRA braintwister")
+Replace=0.01F Rare:fromSheet("FRA portal view land")
+
+[WildcardFoil]
+Base=Common:fromSheet("FRA cards")
+Replace=0.405F Uncommon:fromSheet("FRA cards")
+Replace=0.06F Rare:fromSheet("FRA cards")
+Replace=0.012F Mythic:fromSheet("FRA cards")
+Replace=0.008407F Uncommon:fromSheet("FRA echoed pair")
+Replace=0.002942F Rare:fromSheet("FRA echoed pair")
+Replace=0.0007006F Mythic:fromSheet("FRA echoed pair")
+Replace=0.005932F Uncommon:fromSheet("FRA braintwister")
+Replace=0.003503F Rare:fromSheet("FRA braintwister")
+Replace=0.0003503F Mythic:fromSheet("FRA braintwister")
+Replace=0.004203F Rare:fromSheet("FRA sculptors stronghold")
+Replace=0.0008173F Mythic:fromSheet("FRA sculptors stronghold")
+Replace=0.001168F Rare:fromSheet("FRA portal view land")
+
+[Land]
+Base=BasicLand:fromSheet("FRA dual basic")
+Replace=.109F BasicLand:fromSheet("FRA dual basic")+
+Replace=.146F BasicLand:fromSheet("FRA basic frame")
+Replace=.036F BasicLand:fromSheet("FRA basic frame")+
+Replace=.218F fromSheet("FRA tower")
+Replace=.055F fromSheet("FRA tower")+
 
 [cards]
 1 M Oko, Lord of the Fae @Billy Christian

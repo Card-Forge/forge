@@ -139,7 +139,9 @@ public final class ComboGuard {
         // Breakthrough without a dredger, a card for the graveyard and Lion's Eye Diamond in play only empties the hand.
         // Not left to AiController.canPlaySa: it answers AnotherTime, and a fuel play (a sorcery that discards) with that
         // answer is still offered to the rollouts as a discovered play, which the rollouts like (the graveyard fills).
-        if (plan != null && DredgeLine.mustWait(ai, plan, sa)) {
+        final boolean dredgeRefill = sa.isSpell() && plan != null
+                && plan.has(ComboPlan.Kind.DREDGE) && DredgeLine.isRefill(host);
+        if (dredgeRefill && DredgeLine.mustWait(ai, plan, sa)) {
             return "dredge-line-incomplete";
         }
         // Griselbrand: pay life, draw cards. Offered to the rollouts as a discovered play whatever the heuristics think,
@@ -213,6 +215,17 @@ public final class ComboGuard {
         if (sa.isSpell() && host.isPermanent() && !host.isLand() && AiCardLists.has(AiCardLists.Role.COMBO_ENGINE, host.getName())
                 && controlsWorkingCopy(ai, host)) {
             return "duplicate-engine";
+        }
+        // Channel (and any spell that only gives life-for-mana until end of turn) with no payoff in hand to spend it on:
+        // the spell would be a wasted card, see EnablerGuard
+        final String illegal = LegalityGuard.problem(ai, sa);
+        // A completed LED Dredge line deliberately casts Breakthrough for X=0.
+        if (illegal != null && !(dredgeRefill && "x-zero".equals(illegal))) {
+            return illegal;
+        }
+        final String enabler = EnablerGuard.problem(ai, sa);
+        if (enabler != null) {
+            return enabler;
         }
         return null;
     }
@@ -536,7 +549,7 @@ public final class ComboGuard {
         if (!c.isCreature()) {
             return true;
         }
-        if (c.getNetPower() <= 0) {
+        if (c.getNetCombatDamage() <= 0) {
             return false;
         }
         if (c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
@@ -755,7 +768,7 @@ public final class ComboGuard {
         int damage = 0;
         final List<Integer> blockable = new ArrayList<>();
         for (final Card a : attackers) {
-            final int power = Math.max(0, a.getNetPower());
+            final int power = Math.max(0, a.getNetCombatDamage());
             boolean stoppable = false;
             for (final Card b : blockers) {
                 if (CombatUtil.canBlock(a, b)) {

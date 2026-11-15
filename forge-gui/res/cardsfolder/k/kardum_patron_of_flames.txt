@@ -15,7 +15,7 @@ SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerR
 T:Mode$ ChangesZone | Origin$ Battlefield | ExcludedDestinations$ Graveyard | Static$ True | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetObjects$ TriggeredCard
 SVar:X:Count$CardCounters.FLAME
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard
