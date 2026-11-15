@@ -54,6 +54,12 @@ public final class WebSession implements IHasForgeLog {
             // Starting a match can ask host questions, so it runs on the host UI thread and never blocks a socket thread
             .on(Start.class, (s, ch, st) -> s.ui.invokeInEdtLater(() -> s.start(ch, st)))
             .on(Plain.leave, (s, ch, c) -> s.ui.invokeInEdtLater(s::leave))
+            // A cheat asks its questions as the game does and waits for the answers, so it runs on its own thread
+            .on(Dev.class, host((s, ch, d) -> {
+                if (s.stage instanceof Playing playing) {
+                    s.ui.runBackgroundTask("Dev mode", () -> DevMode.run(s.local, playing.gui(), d, ch));
+                }
+            }))
             // A setting changed before a match is used to set up the match. During a match the game is told as well
             .on(SetSetting.class, (s, ch, set) -> {
                 if (s.stage instanceof Playing p) {

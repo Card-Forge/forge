@@ -1,6 +1,13 @@
 package forge.web;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import forge.game.Game;
+import forge.game.player.Player;
+import forge.gamemodes.match.input.InputPassPriority;
+import forge.gamemodes.net.server.ServerGameLobby;
+import forge.gui.GuiBase;
+import forge.player.PlayerControllerHuman;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -18,6 +25,8 @@ import java.util.function.Supplier;
 abstract class WebHubTest {
     WebHub sessions;
     final List<TestBrowser> browsers = new CopyOnWriteArrayList<>();
+    /** Tracked by message, not by id, because a restarted match numbers its questions from the start again. */
+    final Set<JsonObject> answered = Collections.newSetFromMap(new IdentityHashMap<>());
 
     @BeforeClass
     public void startSessions() {
@@ -65,6 +74,10 @@ abstract class WebHubTest {
         sessions.onMessage(browser, message);
     }
 
+    static void onUi(final Runnable r) {
+        GuiBase.getInterface().invokeInEdtAndWait(r);
+    }
+
     /** Waits until the condition holds. The game thread deals the zones after the match starts, so its setup must be waited for. */
     static void awaitTrue(final BooleanSupplier wanted, final String why) {
         awaitTrue(wanted, () -> why);
@@ -84,6 +97,49 @@ abstract class WebHubTest {
 
     static String str(final JsonObject o, final String field) {
         return o.has(field) && !o.get(field).isJsonNull() ? o.get(field).getAsString() : null;
+    }
+
+    /** Gives each question its default answer until the web seat has priority. Only then has the game dealt its zones and is safe to end. */
+    void awaitPriority(final TestBrowser host) {
+        final String[] seen = { "no game" };
+        // A press sent before the input is ready is lost, so it is sent again
+        final long[] lastPress = { 0 };
+        awaitTrue(() -> {
+            final ServerGameLobby lobby = sessions.hostLobby();
+            final Game game = lobby == null || lobby.getHostedMatch() == null ? null : lobby.getHostedMatch().getGame();
+            if (game == null) {
+                return false;
+            }
+            for (final JsonObject m : host.got) {
+                if ("request".equals(m.get("t").getAsString()) && answered.add(m)) {
+                    sessions.onMessage(host, TestBrowser.reply(m.get("id").getAsInt(), m.get("default")));
+                }
+            }
+            for (final Player p : game.getPlayers()) {
+                if (p.getController() instanceof PlayerControllerHuman human) {
+                    final Object input = human.getInputQueue().getInput();
+                    seen[0] = (input == null ? "no input" : input.getClass().getSimpleName()) + ", messages "
+                            + host.got.stream().map(m -> m.get("t").getAsString() + (m.has("kind") ? ":" + m.get("kind").getAsString() : "")).distinct().toList()
+                            + ", turn " + game.getPhaseHandler().getTurn() + " " + game.getPhaseHandler().getPhase() + ", over " + game.isGameOver();
+                    if (input instanceof InputPassPriority) {
+                        return true;
+                    }
+                    if (input != null && System.currentTimeMillis() - lastPress[0] > 500) {
+                        lastPress[0] = System.currentTimeMillis();
+                        // At a table of more than two the toss winner chooses who goes first. OK does not answer that prompt
+                        final JsonObject prompt = host.last("prompt");
+                        final JsonArray players = prompt == null ? null : prompt.getAsJsonArray("selectablePlayers");
+                        if (players != null && !players.isEmpty()) {
+                            sessions.onMessage(host, message("selectPlayer", "key", players.get(0).getAsJsonObject().get("ref").getAsInt()));
+                        } else {
+                            // Keeping the opening hand is a separate input, answered with OK
+                            sessions.onMessage(host, TestBrowser.action("ok"));
+                        }
+                    }
+                }
+            }
+            return false;
+        }, () -> "the web seat never got priority: " + seen[0]);
     }
 
     /** Builds a message of the given type from name, value pairs. A field with a null value is left out. */

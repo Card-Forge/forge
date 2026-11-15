@@ -32,8 +32,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /** Forge's interface to the program it runs in, implemented for the web. One "WebUI" thread takes the place of Swing's event thread. */
@@ -72,6 +76,19 @@ public final class WebGuiBase implements IGuiBase, IHasForgeLog {
             }
         }
         return "";
+    }
+
+    /** One thread that runs its jobs in order and ends when idle, so a finished session keeps no thread. A job that throws is logged. */
+    public static Executor worker(final String name) {
+        final ExecutorService pool = new ThreadPoolExecutor(0, 1, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<>(),
+                new ThreadFactoryBuilder().setNameFormat(name).setDaemon(true).build());
+        return job -> pool.execute(() -> {
+            try {
+                job.run();
+            } catch (final RuntimeException e) {
+                netLog.error(e, "{} work failed", name);
+            }
+        });
     }
 
     private static Runnable guarded(final Runnable r) {
