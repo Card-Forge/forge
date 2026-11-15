@@ -172,7 +172,38 @@ public class SacrificeAi extends SpellAbilityAi {
         if ("BirthingRitual".equals(sa.getParam("AILogic"))) {
             return birthingRitualPaysOff(player, sa);
         }
-        return true;
+        return !sacrificesOnlyItselfForItsOwnBenefit(player, sa);
+    }
+
+    /**
+     * "You may sacrifice a creature. If you do, put a +1/+1 counter on CARDNAME" (Crovax the Cursed): when the creature
+     * the AI would give up is the source itself, the counter it would get is for a card that is gone. The same goes for
+     * any other reward that only the source itself could use.
+     */
+    private static boolean sacrificesOnlyItselfForItsOwnBenefit(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || !sa.hasParam("Optional") || "Self".equals(sa.getParamOrDefault("SacValid", "Self"))) {
+            return false;
+        }
+        boolean benefitsSource = false;
+        for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            final String defined = sub.getParam("Defined");
+            if (sub.getApi() == forge.game.ability.ApiType.PutCounter && (defined == null || "Self".equals(defined))
+                    || sub.getApi() == forge.game.ability.ApiType.Pump && "Self".equals(defined)) {
+                benefitsSource = true;
+                break;
+            }
+        }
+        if (!benefitsSource) {
+            return false;
+        }
+        final CardCollection options = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                c -> c.isValid(sa.getParam("SacValid"), ai, host, sa) && c.canBeSacrificedBy(sa, true));
+        if (options.isEmpty()) {
+            return true;
+        }
+        final CardCollection sac = forge.ai.ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sa, false, true);
+        return sac == null || sac.isEmpty() || sac.get(0) == host;
     }
 
     /**

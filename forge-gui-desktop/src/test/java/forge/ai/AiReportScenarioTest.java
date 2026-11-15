@@ -528,6 +528,46 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Hill Giant", 3, c.opp); }));
         l.add(play("harmful-removal", "Doom Blade for a Hill Giant is still fine", Fid.EXACT, "MAIN2", true, "Doom Blade",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Doom Blade", c.ai); c.bf("Hill Giant", c.opp); }));
+        // #12895 Crovax the Cursed: flying has to be there when the blockers are declared, and it never sacrifices itself for its own counter
+        final Setup crovaxVsSerra = c -> {
+            c.bf("Swamp", c.ai);
+            c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 6);
+            final Card serra = c.bf("Serra Angel", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(serra, c.ai);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("12895-flying-before-blocks", "Crovax gains flying when the Serra Angel attacks, before blockers", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", false,
+                "Crovax the Cursed", crovaxVsSerra));
+        l.add(noPlay("12895-flying-after-blocks", "no flying for Crovax once the blockers are declared (too late to block)", Fid.EXACT, "COMBAT_DECLARE_BLOCKERS", false,
+                "Crovax the Cursed", crovaxVsSerra));
+        l.add(new Scenario("12895-sacrifice-itself", "Crovax alone does not agree to sacrifice a creature (it would be itself)", Fid.EXACT, "UPKEEP", true,
+                c -> { c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 3); },
+                c -> {
+                    final Card crovax = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Crovax the Cursed")).findFirst().get();
+                    SpellAbility sac = crovax.getTriggers().get(0).ensureAbility();
+                    sac.setActivatingPlayer(c.ai);
+                    return ((PlayerControllerAi) c.ai.getController()).confirmAction(sac, null, "", null) ? "agreed to sacrifice Crovax to its own ability" : null;
+                }));
+        l.add(new Scenario("12895-sacrifice-other", "Crovax with a Grizzly Bears to spare may sacrifice it (the counter is worth a 2/2)", Fid.APPROX, "UPKEEP", true,
+                c -> { c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 3); c.bf("Llanowar Elves", c.ai); },
+                c -> {
+                    final Card crovax = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Crovax the Cursed")).findFirst().get();
+                    SpellAbility sac = crovax.getTriggers().get(0).ensureAbility();
+                    sac.setActivatingPlayer(c.ai);
+                    return ((PlayerControllerAi) c.ai.getController()).confirmAction(sac, null, "", null) ? null : "refused to sacrifice an Elf for a counter";
+                }));
+        // #12892 Garruk, Veiled Butcher: the -3 discards, even though creature cards in hand match his "creature an opponent controls would die" replacement
+        l.add(new Scenario("12892", "Garruk, Veiled Butcher -3: each opponent discards two cards (creature cards in the hand included)", Fid.EXACT, "MAIN1", true,
+                c -> { c.counters(c.bf("Garruk, Veiled Butcher", c.ai), CounterEnumType.LOYALTY, 5);
+                    c.hand("Grizzly Bears", c.opp); c.hand("Hill Giant", c.opp); },
+                c -> {
+                    final Card garruk = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Garruk, Veiled Butcher")).findFirst().get();
+                    final SpellAbility discard = garruk.getSpellAbilities().stream().filter(a -> a.getDescription().contains("discards two")).findFirst().get();
+                    discard.setActivatingPlayer(c.ai);
+                    c.resolve(discard);
+                    final int left = c.opp.getCardsIn(ZoneType.Hand).size();
+                    return left == 0 ? null : "the opponent still has " + left + " cards in hand";
+                }));
         l.add(noPlay("4435", "Quicksilver Amulet for a 1-mana creature", Fid.EXACT, M1, true, "Quicksilver Amulet",
                 c -> { c.bf("Island", 4, c.ai); c.bf("Quicksilver Amulet", c.ai); c.hand("Mother of Runes", c.ai); }));
         l.add(noPlay("5604", "abilities used as soon as possible for no reason (Mother of Runes, empty board)", Fid.APPROX, M1, true, "Mother of Runes",
