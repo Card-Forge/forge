@@ -13,6 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -72,6 +73,21 @@ abstract class WebHubTest {
     void send(final TestBrowser browser, final JsonObject message) {
         browser.forget();
         sessions.onMessage(browser, message);
+    }
+
+    /** Connects the host, named Host, and seats it at a new table opened with open ("lobby" or "invite"). */
+    TestBrowser hostAt(final String open) throws InterruptedException {
+        final TestBrowser host = connect("host");
+        sessions.onMessage(host, TestBrowser.action("claimHost"));
+        sessions.onMessage(host, message("setName", "name", "Host"));
+        send(host, TestBrowser.action(open));
+        // A table left by an earlier test can still send messages until the new one opens. Commands are accepted only after that
+        final JsonObject opening = host.awaitMatching("hello", h -> "opening".equals(h.get("screen").getAsString()), "the host's table never started opening");
+        final JsonObject opened = host.awaitMatching("hello", h -> host.got.indexOf(h) > host.got.indexOf(opening)
+                && "setup".equals(h.get("screen").getAsString()), "the host's table never opened");
+        host.awaitMatching("lobby", l -> host.got.indexOf(l) > host.got.indexOf(opened) && l.has("table")
+                && l.getAsJsonObject("table").get("mySeat").getAsInt() >= 0, "the host never sat at its table");
+        return host;
     }
 
     static void onUi(final Runnable r) {
@@ -140,6 +156,14 @@ abstract class WebHubTest {
             }
             return false;
         }, () -> "the web seat never got priority: " + seen[0]);
+    }
+
+    /** The names at a table's seats, with null for a seat that has no name. */
+    static List<String> seatNames(final JsonObject table) {
+        final List<String> out = new ArrayList<>();
+        table.getAsJsonArray("seats").forEach(s -> out.add(s.getAsJsonObject().has("name")
+                ? s.getAsJsonObject().get("name").getAsString() : null));
+        return out;
     }
 
     /** Builds a message of the given type from name, value pairs. A field with a null value is left out. */

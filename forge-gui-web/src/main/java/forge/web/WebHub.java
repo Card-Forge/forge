@@ -181,6 +181,11 @@ final class WebHub implements WebServer.Endpoint, IHasForgeLog {
         }
     }
 
+    /** Sends the table to every browser again, after a change that no lobby update carries. */
+    void lobbyChanged() {
+        byId.values().forEach(WebSession::lobbyChanged);
+    }
+
     /** Shuts down every session. Guests go first, so no guest session stays open after its game. */
     synchronized void shutdown() {
         stopping = true;

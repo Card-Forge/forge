@@ -206,6 +206,32 @@ final class TestBrowser implements BrowserChannel {
         return null;
     }
 
+    /** Waits until the latest table matches wanted. An earlier lobby message can describe a table that has since changed. */
+    JsonObject awaitLobby(final Predicate<JsonObject> wanted) throws InterruptedException {
+        for (int i = 0; i < WAIT_MILLIS / POLL_MILLIS; i++) {
+            final JsonObject latest = latestTable();
+            if (latest != null && wanted.test(latest)) {
+                return latest;
+            }
+            Thread.sleep(POLL_MILLIS);
+        }
+        return null;
+    }
+
+    JsonObject awaitLobbyWithSeat() throws InterruptedException {
+        return awaitLobby(l -> l.get("mySeat").getAsInt() >= 0);
+    }
+
+    JsonObject latestTable() {
+        JsonObject latest = null;
+        for (final JsonObject m : got) {
+            if ("lobby".equals(m.get("t").getAsString()) && m.has("table")) {
+                latest = m.getAsJsonObject("table");
+            }
+        }
+        return latest;
+    }
+
     JsonObject awaitMatching(final String type, final Predicate<JsonObject> wanted, final String why) throws InterruptedException {
         return found(awaitMatching(type, wanted), why);
     }
@@ -216,6 +242,10 @@ final class TestBrowser implements BrowserChannel {
 
     JsonObject awaitNewest(final String type, final Predicate<JsonObject> wanted, final String why) throws InterruptedException {
         return found(awaitNewest(type, wanted), why);
+    }
+
+    JsonObject awaitLobby(final Predicate<JsonObject> wanted, final String why) throws InterruptedException {
+        return found(awaitLobby(wanted), why);
     }
 
     /** The waits that take a why fail with it when no matching message arrived in time. */

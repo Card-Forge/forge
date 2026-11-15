@@ -11,6 +11,7 @@ import forge.util.IHasForgeLog;
 import forge.util.Localizer;
 import forge.util.LogSafe;
 import forge.util.storage.IStorage;
+import forge.web.deck.CardCatalog;
 import forge.web.deck.DeckCatalog;
 import forge.web.deck.DeckWorkspace;
 import forge.web.images.SkinSprites;
@@ -41,6 +42,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * passes each message to the part that handles it.
  */
 public final class WebSession implements IHasForgeLog {
+    private static final int CARD_SEARCH_LIMIT = 60;
     /** Long enough for any name a player types, short enough to fit on a seat plate. */
     static final int MAX_NAME_LENGTH = 24;
     private static final AtomicInteger SESSIONS = new AtomicInteger();
@@ -49,9 +51,15 @@ public final class WebSession implements IHasForgeLog {
             .on(PageError.class, (s, ch, e) -> netLog.warn("Page error for {}: {}", s.label(), LogSafe.forLog(e.text(), 1500)))
             .on(SetName.class, (s, ch, n) -> s.rename(ch, n.name(), n.avatar(), n.sleeve()))
             .on(ClaimHost.class, (s, ch, c) -> s.claimHost(ch, c.password()))
+            // Opening a game connects a client to the server, which is done on the host UI thread
+            .on(Plain.lobby, (s, ch, c) -> s.ui.invokeInEdtLater(() -> s.openLobby(ch, false, null)))
+            .on(Plain.leaveLobby, (s, ch, c) -> s.ui.invokeInEdtLater(s::leaveLobby))
             // One set of host questions serves the whole process, so only the host's browser may answer them
             .on(HostChoiceAnswer.class, host((s, ch, a) -> s.ui.hostQuestions().answer(a.id(), a.value())))
             .on(Plain.cardSets, (s, ch, c) -> ch.send(CardCatalog.sets()))
+            .on(SearchCards.class, (s, ch, q) -> s.decks.inTurn(() -> ch.send(new CardSearch(CardCatalog.searchCardNames(q.query(), CARD_SEARCH_LIMIT)))))
+            .on(AskPrintings.class, (s, ch, a) -> s.decks.inTurn(() -> ch.send(new Printings(a.name(), CardCatalog.printings(a.name(),
+                    a.cardPool() == null ? null : FModel.getFormats().getFormat(a.cardPool()))))))
             // Starting a match can ask host questions, so it runs on the host UI thread and never blocks a socket thread
             .on(Start.class, (s, ch, st) -> s.ui.invokeInEdtLater(() -> s.start(ch, st)))
             .on(Plain.leave, (s, ch, c) -> s.ui.invokeInEdtLater(s::leave))
@@ -77,6 +85,9 @@ public final class WebSession implements IHasForgeLog {
                     s.ui.invokeInEdtLater(() -> Options.setStops(s.settings, stops.mine(), stops.phases()));
                 }
             });
+    private final Lobby lobby;
+    /** The deck editor and importer. They open beside the menu or the table and are not a stage of their own. */
+    private final DeckWorkspace decks;
     private final WebGuiBase ui;
     private final WebHub sessions;
     /** True for the browser that claimed the host's seat. Only that browser may set up the table. */
@@ -225,6 +236,10 @@ public final class WebSession implements IHasForgeLog {
         return chosen != null || !isHost ? chosen : FModel.getPreferences().getPref(FPref.PLAYER_NAME);
     }
 
+    Lobby lobby() {
+        return lobby;
+    }
+
     public boolean attached() {
         return browser != null;
     }
@@ -309,6 +324,7 @@ public final class WebSession implements IHasForgeLog {
             p.gui().detach(channel);
         }
     }
+
     private static <T extends Record> Handler<WebSession, T> host(final Handler<WebSession, T> handler) {
         return (s, ch, c) -> {
             if (s.isHost) {
@@ -356,6 +372,81 @@ public final class WebSession implements IHasForgeLog {
             channel.send(error(Localizer.getInstance().getMessage("lblWebSessionAlreadyHosting")));
         }
         channel.send(hello());
+    }
+
+    private void leaveLobby() {
+        final Stage now = stage;
+        if (now instanceof Setup && move(now, new Menu())) {
+            local.endMatch();
+            if (isHost) {
+                sessions.hostGameClosed();
+            }
+        }
+    }
+
+    /** Opens match setup: a game of this machine's own, set up for an event when limited is not null, or a seat in the host's game. Tells the browser the result. */
+    private void openLobby(final BrowserChannel channel, final boolean invite, final EventKind limited) {
+        if (!isHost) {
+            joinHostGame();
+            return;
+        }
+        final Stage from = stage;
+        final Opening opening = new Opening();
+        // Leaving the old stage closes its match or table before the new one is built
+        if (from instanceof Opening || !move(from, opening)) {
+            return;
+        }
+        // A new table replaces the old one, so anyone seated at the old table is told it has closed before it is removed
+        if (from instanceof Setup || from instanceof Playing) {
+            sessions.hostGameClosed();
+        }
+        final WebGuiGame gui = new WebGuiGame(settings);
+        lobby.forget();
+        lobby.setShareable(invite);
+        eventSeat.newTable(gui);
+        try {
+            local.openHost(playerName(), gui, this::lobbyChanged, this::chatted);
+            if (invite) {
+                // Someone must be able to sit down, so the second seat is left open instead of filled
+                lobby.openSeat(1);
+            }
+            if (limited == null) {
+                lobby.restoreSetup(invite);
+            }
+        } catch (final RuntimeException e) {
+            netLog.error(e, "Could not open the lobby");
+            gui.close();
+            move(opening, new Menu());
+            // The move's hello clears the browser's last error, so the reason must be sent after it
+            channel.send(error(Localizer.getInstance().getMessage("lblWebSessionLobbyFailed", String.valueOf(e.getMessage()))));
+            return;
+        }
+        if (!move(opening, new Setup(gui, invite))) {
+            gui.close();
+            return;
+        }
+        applyChosenAvatar();
+        if (limited != null) {
+            table.setLimited(channel, limited);
+        }
+        lobby.queueDecks(channel, decks::inTurn);
+        lobby.sendState(channel);
+        sessions.hostGameOpened();
+    }
+
+    /** The table changed. The browser is shown it only once it is set up. Until then it is still being built. */
+    void lobbyChanged() {
+        ui.invokeInEdtLater(() -> {
+            if (isHost) {
+                sessions.seatsMayHaveChanged();
+            }
+            final BrowserChannel b = browser;
+            if (b != null && stage instanceof Setup) {
+                // A guest learns the host's format or card pool only here, so its deck list is rebuilt here too
+                lobby.relistDecks(b, decks::inTurn);
+                lobby.sendState(b);
+            }
+        });
     }
 
     /** Takes the name this browser asked for, unless the name has a problem. A guest waiting for a name then takes its seat. */
@@ -409,6 +500,42 @@ public final class WebSession implements IHasForgeLog {
             return Localizer.getInstance().getMessage("lblWebSessionNameTaken", trimmed);
         }
         return null;
+    }
+
+    void applySeat(final BrowserChannel channel, final SetSeat seat) {
+        // The name on the player's own seat is the name they play under, so it follows the same rules as the first name they chose
+        if (seat.name() != null && seat.index() == local.webSeat()) {
+            final String problem = nameProblem(seat.name());
+            if (problem != null) {
+                // Match setup has no line for errors, and the seat keeps its old name, so a notice is enough
+                channel.send(new Notice(Localizer.getInstance().getMessage("lblWebSessionNameNotChanged"), problem, false));
+            } else {
+                name = seat.name().trim();
+                lobby.setName(seat.index(), name);
+            }
+        } else if (seat.name() != null) {
+            lobby.setName(seat.index(), seat.name());
+        }
+        if (seat.deck() != null) {
+            lobby.setDeck(seat.index(), seat.deck());
+        }
+        if (seat.avatar() != null && lobby.setAvatar(seat.index(), seat.avatar()) && seat.index() == local.webSeat()) {
+            // The avatar on the player's own seat is the one shown for them everywhere else too
+            avatar = seat.avatar();
+            sessions.announcePresence();
+        }
+        if (seat.sleeve() != null) {
+            lobby.setSleeve(seat.index(), seat.sleeve());
+            if (seat.index() == local.webSeat()) {
+                sleeve = seat.sleeve();
+            }
+        }
+        if (seat.commander() != null) {
+            lobby.setCommander(seat.index(), seat.commander());
+        }
+        if (seat.aiProfile() != null) {
+            lobby.setAiProfile(seat.index(), seat.aiProfile());
+        }
     }
 
     public Hello hello() {
