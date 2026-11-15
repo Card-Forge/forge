@@ -1,13 +1,7 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -36,7 +30,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -62,6 +58,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -223,30 +220,67 @@ public class ComputerUtilCard {
      */
 
     /**
-     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
-     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
-     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
+     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry, and none if
+     * {@code enters} is false because an existing permanent becomes the copy.
+     * Static abilities and entry replacements read the copy's controller, so a copy of an opponent's
+     * creature is judged under {@code newController}: their 8/8 Nightmare can be a 0/0 for us.
      */
-    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController, final boolean enters) {
         final Game game = newController.getGame();
         final MutableBoolean reset = new MutableBoolean(false);
         final CardCollection kept = CardLists.filter(list, c -> {
-            if (!c.isCreature() || c.getController().equals(newController)) {
+            if (!c.isCreature()) {
                 return true;
             }
-            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
-                final Card copy = CardCopyService.getLKICopy(c);
+            Card copy = c;
+            if (!c.getController().equals(newController)) {
+                // a copy keeps base toughness, so only a printed 0 or a toughness-setting CDA can arrive dead
+                if (c.getBaseToughness() > 0
+                        && c.getStaticAbilities().stream().noneMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                    return true;
+                }
+                copy = CardCopyService.getLKICopy(c);
                 copy.setController(newController, game.getNextTimestamp());
+                // the LKI keeps the original's boosts, which the static pass below does not remove
+                copy.getPTBoostTable().clear();
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                return copy.getNetToughness() > 0;
             }
-            return true;
+            final int toughness = copy.getNetToughness() + copy.getCounters(CounterEnumType.M1M1) - copy.getCounters(CounterEnumType.P1P1);
+            if (toughness > 0) {
+                return true;
+            }
+            return enters && toughness + countersOnEntry(copy) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);
         }
         return kept;
+    }
+
+    /** The +1/+1 counters entry replacements would put on {@code c} if it entered now. */
+    private static int countersOnEntry(final Card c) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        final GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
+
+        int amount = 0;
+        for (final ReplacementEffect re : c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            final SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || reSA.getApi() != ApiType.PutCounter || !"P1P1".equals(reSA.getParam("CounterType"))) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                // outside an actual entry, X counts as 0, as it does for a copy
+                amount += AbilityUtils.calculateAmount(reSA.getHostCard(), reSA.getParamOrDefault("CounterNum", "1"), reSA);
+            }
+        }
+        return amount;
     }
 
     public static Card getBestLandAI(final Iterable<Card> list) {
@@ -2153,6 +2187,44 @@ public class ComputerUtilCard {
             return true;
         }
         return false;
+    }
+
+    /** Abilities that do nothing to the AI on their own (Spellskite redirects, a regeneration, a shield). */
+    private static final Set<ApiType> INERT_APIS = EnumSet.of(ApiType.ChangeTargets, ApiType.Regenerate, ApiType.Protection);
+
+    /**
+     * An opposing creature that cannot hurt the AI and does nothing for its owner: it is not able to attack (Moat,
+     * defender, can't attack), has no power to hurt with, no triggers or static abilities, and only abilities that do
+     * nothing to the AI on their own (Spellskite). Removal, and certainly a board wipe, is wasted on it; the AI should keep
+     * it for a real threat. (A deck that wins by targeting, burn, would value Spellskite: that is for its own logic.)
+     */
+    public static boolean isHarmlessCreature(final Player ai, final Card c) {
+        if (c == null || !c.isCreature() || c.getController() == null || !c.getController().isOpponentOf(ai)) {
+            return false;
+        }
+        if (isUselessCreature(c.getController(), c)) {
+            return true;
+        }
+        if (ComputerUtilCombat.getAttack(c) > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
+            return false;
+        }
+        if (!c.getTriggers().isEmpty() || !c.getStaticAbilities().isEmpty() || !c.getReplacementEffects().isEmpty()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() || sa.isLandAbility()) {
+                continue;
+            }
+            if (sa.isManaAbility() || sa.getApi() == null || !INERT_APIS.contains(sa.getApi())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The cards without the opposing creatures that are harmless (see isHarmlessCreature). */
+    public static CardCollection withoutHarmlessCreatures(final Player ai, final CardCollection cards) {
+        return CardLists.filter(cards, c -> !isHarmlessCreature(ai, c));
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {

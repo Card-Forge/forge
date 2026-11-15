@@ -123,4 +123,5 @@ ScryfallCode=PMEI
 2026-29 R Villainous Hideout @Paulius Daščioras
 2026-30 R Archmage of Runes @Kai Carpenter
 2026-31 R Rune-Scarred Demon @Michael Komarck
+2026-32 R Call of the Ring @Anato Finnstark
 2027-1 M Final Showdown @Tetsuya Nomura

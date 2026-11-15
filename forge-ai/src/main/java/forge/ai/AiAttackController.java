@@ -43,6 +43,8 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -147,7 +149,8 @@ public class AiAttackController {
                 continue;
             }
             final String valid = Protection.getProtectionValid(orig, true);
-            if (valid.isEmpty() || source.isValid(valid, p, null, null)) {
+            // getProtectionValid is a comma list ("Card.ControlledBy Player.PlayerUID_1,Emblem.ControlledBy ..."): one restriction each
+            if (valid.isEmpty() || source.isValid(valid.split(","), p, null, null)) {
                 return true;
             }
         }
@@ -283,6 +286,23 @@ public class AiAttackController {
         return result;
     }
 
+    /**
+     * @return true if a permanent the AI controls prevents the attacker's damage to the defender and replaces it with
+     * an effect of its own ("prevent that damage and each opponent mills that many cards").
+     */
+    private static boolean hasOwnDamageConversion(final Player ai, final Card attacker, final GameEntity defender) {
+        for (final Card c : ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Command))) {
+            for (final ReplacementEffect re : c.getReplacementEffects()) {
+                // combat damage only ("IsCombat$ False" is for noncombat damage); the valid lists are comma separated and matchesValidParam tries each
+                if (re.getMode() == ReplacementType.DamageDone && re.hasParam("ReplaceWith") && !"False".equals(re.getParam("IsCombat"))
+                        && re.matchesValidParam("ValidSource", attacker) && re.matchesValidParam("ValidTarget", defender)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Is there any reward for attacking? (for 0/1 creatures there is not)
     /**
      * <p>
@@ -319,6 +339,10 @@ public class AiAttackController {
             if (!onlyIfExalted || this.attackers.size() == 1 || aiAggression == 6 /* 6 is Exalted attack */) {
                 return true;
             }
+        }
+        // The Mindskinner: no damage gets through, but a replacement we control turns it into an effect (a mill), so the attack still does something
+        if (defender instanceof Player && hasOwnDamageConversion(ai, attacker, defender)) {
+            return true;
         }
         // Poison opponent if unblocked
         if (defender instanceof Player player
@@ -819,6 +843,10 @@ public class AiAttackController {
         List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
         List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
         List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        // not a battle whose back is a legend the AI already has (see LegalityGuard.redundantDefeat)
+        final int battleDamage = ComputerUtilCombat.totalCombatDamage(attackers);
+        prefBattleList = CardLists.filter(prefBattleList,
+                b -> !forge.ai.simulation.LegalityGuard.redundantDefeat(ai, b, battleDamage));
         if (!prefBattleList.isEmpty()) {
             // TODO try to be less predictable here, should really check if something would make the back uncastable
             return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
