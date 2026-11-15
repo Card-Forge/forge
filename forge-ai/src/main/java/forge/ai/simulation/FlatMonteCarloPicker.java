@@ -979,6 +979,9 @@ public final class FlatMonteCarloPicker {
                     continue; // a targeted play with nothing sensible to aim at is not worth a rollout
                 }
             }
+            if (shieldAlreadyUp(sa, target)) {
+                continue; // a regeneration shield that is up cannot be improved by paying for another one
+            }
             cands.add(new Candidate(sa, target, true));
             extrasLeft--;
         }
@@ -2095,6 +2098,33 @@ public final class FlatMonteCarloPicker {
         final ApiType api = sa.getApi();
         return api == ApiType.Pump || api == ApiType.PumpAll || api == ApiType.Protection || api == ApiType.Regenerate
                 || isInteraction(sa) && api != ApiType.Counter;
+    }
+
+    /**
+     * Regenerate for creatures that all have a shield already: the rollouts would keep scoring "protect my creature" and
+     * pay again on every priority pass (Mischievous Poltergeist paid its life away for one destruction).
+     */
+    static boolean shieldAlreadyUp(final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getApi() != ApiType.Regenerate || sa.getHostCard() == null) {
+            return false;
+        }
+        final List<Card> cards = new ArrayList<>();
+        if (target instanceof Card c) {
+            cards.add(c);
+        } else if (sa.usesTargeting() && sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
+            cards.addAll(sa.getTargets().getTargetCards());
+        } else if (sa.hasParam("Defined")) {
+            cards.addAll(forge.game.ability.AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
+        }
+        if (cards.isEmpty()) {
+            return false;
+        }
+        for (final Card c : cards) {
+            if (c.getShieldCount() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** The AI's permanents that the opponent's spell or ability on top of the stack is aimed at. */
