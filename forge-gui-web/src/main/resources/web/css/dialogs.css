@@ -1,0 +1,105 @@
+/* Dialogs and menus animate in instead of appearing at once. The scrim fades in, a box rises a few pixels, and a menu grows from where it opens. */
+@keyframes backdrop-in { from { opacity: 0; } }
+@keyframes box-in { from { opacity: 0; translate: 0 6px; } }
+@keyframes box-out { to { opacity: 0; translate: 0 6px; } }
+@keyframes menu-in { from { opacity: 0; scale: .94; } }
+@keyframes menu-out { to { opacity: 0; scale: .96; } }
+.backdrop { animation: backdrop-in .15s ease-out; }
+.dialog, .host-choice, .zone-panel, .zone-bar { animation: box-in .16s ease-out; }
+/* A closing element plays its exit animation before it is removed (closing.ts) */
+/* Each exit animation has its own keyframes name. The same name with only the direction changed would not run again. */
+@keyframes backdrop-out { to { opacity: 0; } }
+.backdrop.closing { animation: backdrop-out .12s ease-in forwards; }
+.backdrop.closing > * { animation: box-out .12s ease-in forwards; }
+/* A screen rises in when it opens, as a box does (index.html holds a root for each screen) */
+:is(#menu, #lobby, #editor, #limited, #drafting) > * { animation: box-in .18s ease-out; }
+/* Going back to an earlier screen shows it at once (screens.tsx) */
+html[data-back] :is(#menu, #lobby, #editor, #limited, #drafting) > *, html[data-back] :is(.modes .mode, .kind-card).plaque { animation: none; }
+/* A move to another page (main.ts render), or through an ordered set such as a step of the start menu (ui.ts eased), slides in the direction of the order, deeper pages to the left. The header has its own name, so it stays in place while the page under it slides */
+:is(#menu, #lobby, #limited, #drafting) { view-transition-name: screen; }
+:is(#menu, #lobby, #limited, #drafting) :is(.page-head, .ph) { view-transition-name: head; }
+/* The links fixed at the foot of the start menu stay in place too, so they do not slide with the page */
+html:not([data-form="portrait"]) .forge-links.foot { view-transition-name: forge-links; }
+/* The name makes the header a stacking context, so it is raised for its popups to stay above the page */
+:where(.page-head, .ph) { position: relative; z-index: 30; }
+/* A dialog's close button is a quiet square with a drawn X, like the page's other icon buttons */
+.dk-close { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 9px; background: var(--surface-2); color: var(--muted); }
+.dk-close:hover { background: var(--line); color: var(--text); }
+.dk-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+html[data-way]::view-transition-old(page), html[data-screen]::view-transition-old(screen), html[data-screen]::view-transition-old(page) { animation: .3s cubic-bezier(.2,.7,.3,1) both page-out; }
+html[data-way]::view-transition-new(page), html[data-screen]::view-transition-new(screen), html[data-screen]::view-transition-new(page) { animation: .32s cubic-bezier(.2,.7,.3,1) both page-in; }
+html[data-way="back"]::view-transition-old(page), html[data-screen="back"]::view-transition-old(screen), html[data-screen="back"]::view-transition-old(page) { animation-name: page-out-back; }
+html[data-way="back"]::view-transition-new(page), html[data-screen="back"]::view-transition-new(screen), html[data-screen="back"]::view-transition-new(page) { animation-name: page-in-back; }
+html[data-screen]::view-transition-group(head) { animation-duration: .3s; }
+/* The slide replaces the rise. A zero duration, not none, so the rise does not play when the attribute is removed */
+html[data-screen] :is(#menu, #lobby, #limited, #drafting) > *, html[data-screen] :is(.modes .mode, .kind-card).plaque { animation-duration: 0s; animation-delay: 0s; }
+@keyframes page-out { to { opacity: 0; translate: -40px 0; } }
+@keyframes page-in { from { opacity: 0; translate: 40px 0; } }
+@keyframes page-out-back { to { opacity: 0; translate: 40px 0; } }
+@keyframes page-in-back { from { opacity: 0; translate: -40px 0; } }
+/* The options rail runs down the side, so its pages slide up and down. The rail page has its own transition name, so the screen behind does not slide too. */
+html[data-rail]::view-transition-old(rail-page) { animation: .2s cubic-bezier(.2,.7,.3,1) both rail-out; }
+html[data-rail]::view-transition-new(rail-page) { animation: .24s cubic-bezier(.2,.7,.3,1) both rail-in; }
+html[data-rail="back"]::view-transition-old(rail-page) { animation-name: rail-out-back; }
+html[data-rail="back"]::view-transition-new(rail-page) { animation-name: rail-in-back; }
+@keyframes rail-out { to { opacity: 0; translate: 0 -16px; } }
+@keyframes rail-in { from { opacity: 0; translate: 0 16px; } }
+@keyframes rail-out-back { to { opacity: 0; translate: 0 16px; } }
+@keyframes rail-in-back { from { opacity: 0; translate: 0 -16px; } }
+html[data-motion="reduced"] :is(.backdrop, .backdrop > *, .dialog, .card-menu, .deck-menu, .land-set-menu, .host-choice, .zone-panel, .zone-bar,
+  #menu > *, #lobby > *, #editor > *, #limited > *, #drafting > *) { animation: none; }
+.backdrop[hidden] { display: none; }
+.backdrop { position: fixed; inset: 0; background: #0009; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 16px; z-index: 50; }
+.dialog { margin: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; max-width: min(90vw, 900px); max-height: calc(100vh - 32px); overflow: auto; display: grid; gap: 10px; }
+.dialog h3 { margin: 0; }
+/* A confirm's text keeps the line breaks in Forge's own messages */
+.dialog[role=alertdialog] > .hint { white-space: pre-line; }
+.dialog .hint { margin: 0; color: var(--muted); font-size: 12px; }
+.dialog .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.dialog .actions button.primary { min-width: 110px; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+/* An answer that loses something, such as conceding or leaving a draft, is red in place of brass */
+.dialog .actions button.danger { min-width: 110px; font-size: 15px; font-weight: 650; color: #fff; background: linear-gradient(180deg, color-mix(in srgb, #d4573f 80%, #fff), #b8432e); border-color: color-mix(in srgb, #d4573f 60%, #fff); box-shadow: 0 1px 0 #5a1e14; }
+.dialog .actions button.danger:hover:not(:disabled) { background: linear-gradient(180deg, color-mix(in srgb, #d4573f 65%, #fff), #c94d37); }
+/* A card's list of what it can do is a menu on the card, not a window in the middle of the board */
+.backdrop.anchored { background: none; }
+/* Each mat's picture gets the same dark layer the board would give it, so the brightness setting shows on the pictures too (board.css) */
+.playmat-choice { display: grid; gap: 12px; }
+.playmat-choice .mats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(120px, 28%), 1fr)); gap: 10px; }
+/* Rows keep their own height. A picture stretched by a wrapped label in the same row would widen past its tile. */
+.playmat-choice .mat { min-width: 0; display: grid; align-content: start; gap: 6px; padding: 6px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2);
+  color: var(--text); font-size: 12.5px; text-align: left; }
+.playmat-choice .mat:hover { border-color: var(--line-bright); }
+.playmat-choice .mat .pic { display: block; width: 100%; aspect-ratio: 3 / 2; border-radius: 6px; filter: saturate(var(--mat-saturate, 1));
+  background: radial-gradient(120% 90% at 50% 42%, rgb(10 13 19 / calc(var(--mat-wash, 0) - .12)) 0%, rgb(8 10 15 / calc(var(--mat-wash, 0) + .12)) 100%),
+    var(--thumb) center / cover no-repeat; }
+.playmat-choice .mat .pic.plain { filter: none; background: radial-gradient(120% 90% at 50% 42%, #1a202c 0%, #0f131b 100%); }
+.playmat-choice .mat.on { border-color: var(--accent-2); box-shadow: 0 0 0 1px var(--accent-2); background: var(--accent-soft); }
+.playmat-choice .brightness { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
+.playmat-choice .seg { border-radius: 7px; }
+.playmat-choice .seg button { padding: 5px 12px; font-size: 12.5px; }
+.playmat-picker { width: 400px; overflow-y: auto; }
+.playmat-picker .mats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* The page's dropdown (select.tsx). Its menu is placed against the window, so no panel clips it */
+.select { display: inline-flex; min-width: 0; }
+.select-button { display: inline-flex; align-items: center; gap: 8px; min-width: 0; max-width: 100%; background: var(--surface-2); color: var(--text); border: 1px solid var(--line);
+  border-radius: 8px; padding: 5px 10px 5px 12px; font: inherit; font-size: 13px; text-align: left; white-space: nowrap; cursor: pointer; }
+.select-button .pre { color: var(--muted); }
+.select-button .val { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.select-button svg { flex: none; width: 9px; height: 9px; fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.select-button:hover:not(:disabled) { border-color: var(--line-bright); }
+.select-button[aria-expanded="true"] { border-color: var(--accent-2); box-shadow: 0 0 0 3px var(--accent-soft); }
+.select-button:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.select-button:disabled { opacity: .5; cursor: default; }
+.select-button.pill { background: var(--accent-soft); border-color: var(--accent-2); border-radius: 999px; }
+.select-button.pill svg { stroke: var(--accent-2); }
+.select-menu { position: fixed; z-index: 70; box-sizing: border-box; max-width: calc(100vw - 16px); max-height: min(360px, 60vh); overflow-y: auto; padding: 5px;
+  display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 12px 32px #000a; animation: menu-in .12s cubic-bezier(.2,.7,.3,1); }
+.select-menu .head { font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); padding: 6px 8px 2px; }
+.select-menu .opt { display: flex; align-items: center; gap: 6px; text-align: left; background: none; border: 0; border-radius: 7px; padding: 6px 10px 6px 6px;
+  font: inherit; font-size: 13px; color: var(--text); white-space: nowrap; cursor: pointer; }
+.select-menu .opt .tick { flex: none; width: 14px; color: var(--accent-2); font-size: 12px; }
+.select-menu .opt.active { background: var(--surface-2); }
+.select-menu .opt[aria-selected="true"] { color: var(--accent-2); font-weight: 700; }
+html[data-form="portrait"] .select-menu .opt { min-height: 40px; font-size: 15px; }
+html[data-motion="reduced"] .select-menu { animation: none; }

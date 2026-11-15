@@ -1,0 +1,5 @@
+/* A dark layer covers the playmat so its picture does not distract from the cards. The brightness setting sets how dark the layer is. */
+html[data-playmat="dark"] :is(#match, .playmat-choice) { --mat-wash: .62; --mat-saturate: .75; }
+html[data-playmat="dim"] :is(#match, .playmat-choice) { --mat-wash: .46; --mat-saturate: .9; }
+html[data-playmat="light"] :is(#match, .playmat-choice) { --mat-wash: .32; --mat-saturate: 1; }
+html[data-playmat="bright"] :is(#match, .playmat-choice) { --mat-wash: .2; --mat-saturate: 1; }
