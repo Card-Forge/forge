@@ -1,8 +1,15 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import forge.game.ability.AbilityKey;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
@@ -132,7 +139,7 @@ public class AiReportScenarioTest extends AITest {
                                 final SpellAbility ex = re.getOverridingAbility();
                                 if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(controller().doTrigger(ex.copy(ai), false))
                                         .append(" decision=").append(SpellApiToAi.Converter.get(ex).doTriggerNoCostWithSubs(ai, ex.copy(ai), false))
-                                        .append(" opposing permanents with an activated ability=").append(forge.game.card.CardLists.getValidCards(
+                                        .append(" opposing permanents with an activated ability=").append(CardLists.getValidCards(
                                                 ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, k, ex)); }
                             }
                             for (final forge.game.trigger.Trigger tr : k.getTriggers()) { // each enter-the-battlefield trigger, one ability of its chain at a time
@@ -333,7 +340,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12801", "a second Meddling Mage names a different card than the first", Fid.APPROX, M1, true,
                 c -> {
                     c.bf("Birds of Paradise", c.opp); c.bf("Elvish Mystic", c.opp); c.bf("Llanowar Elves", c.opp);
-                    c.bf("Meddling Mage", c.ai).setNamedCards(java.util.Arrays.asList("Birds of Paradise"));
+                    c.bf("Meddling Mage", c.ai).setNamedCards(Arrays.asList("Birds of Paradise"));
                 },
                 c -> {
                     final Card second = c.bf("Meddling Mage", c.ai);
@@ -390,18 +397,22 @@ public class AiReportScenarioTest extends AITest {
                         sa.getTargets().add(c.opp);
                         c.resolve(sa);
                         final long treasures = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().startsWith("Treasure")).count();
-                        if (!bolt.isInZone(ZoneType.Hand)) { // not bounced: the flip was won and the spell copied
+                        // the card that was cast and the card that comes back to the hand are different objects (a zone change
+                        // makes a new one), so the spell is looked for in the hand by name
+                        final List<Card> back = CardLists.filter(c.ai.getCardsIn(ZoneType.Hand),
+                                CardPredicates.nameEquals("Lightning Bolt"));
+                        if (back.isEmpty()) { // not bounced: the flip was won and the spell copied
                             return treasures == 2 ? null : "the flip was won but there are " + treasures + " Treasure tokens" + c.trace;
                         }
                         if (treasures != 0) { return "a lost flip made " + treasures + " Treasure tokens"; }
-                        c.ai.getZone(ZoneType.Hand).remove(bolt); // out of the way for the next try
+                        for (final Card k : back) { c.ai.getZone(ZoneType.Hand).remove(k); } // out of the way for the next try
                     }
                     return "no flip was won in 40 tries";
                 }));
         l.add(new Scenario("5896", "a second Pithing Needle names a different card than the first", Fid.APPROX, M1, true,
                 c -> {
                     c.bf("Spellskite", c.opp); c.bf("Agatha's Soul Cauldron", c.opp); c.bf("Shalai, Voice of Plenty", c.opp);
-                    c.bf("Pithing Needle", c.ai).setNamedCards(java.util.Arrays.asList("Shalai, Voice of Plenty"));
+                    c.bf("Pithing Needle", c.ai).setNamedCards(Arrays.asList("Shalai, Voice of Plenty"));
                 },
                 c -> {
                     final Card second = c.bf("Pithing Needle", c.ai);
@@ -517,7 +528,7 @@ public class AiReportScenarioTest extends AITest {
                     final SpellAbility sa = c.playOf("Flametongue Kavu");
                     if (sa == null) { return "not cast" + c.why("Flametongue Kavu"); }
                     c.resolve(sa);
-                    return c.opp.getCreaturesInPlay().isEmpty() ? null : c.opp.getCreaturesInPlay().size() + " creature(s) survived (damage " + c.opp.getCreaturesInPlay().stream().map(x -> String.valueOf(x.getDamage())).collect(java.util.stream.Collectors.joining("/")) + "), Kavu in " + c.ai.getCardsIn(forge.game.zone.ZoneType.Battlefield).stream().anyMatch(x -> x.getName().equals("Flametongue Kavu")) + " | stack:" + c.trace;
+                    return c.opp.getCreaturesInPlay().isEmpty() ? null : c.opp.getCreaturesInPlay().size() + " creature(s) survived (damage " + c.opp.getCreaturesInPlay().stream().map(x -> String.valueOf(x.getDamage())).collect(Collectors.joining("/")) + "), Kavu in " + c.ai.getCardsIn(forge.game.zone.ZoneType.Battlefield).stream().anyMatch(x -> x.getName().equals("Flametongue Kavu")) + " | stack:" + c.trace;
                 }));
         l.add(play("7480", "control: plain Grizzly Bears with two Forests (is ANY creature cast in this harness?)", Fid.APPROX, "MAIN2", true, "Grizzly Bears",
                 c -> { c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); }));
@@ -534,7 +545,7 @@ public class AiReportScenarioTest extends AITest {
         // protection from a chosen player (Guardian Archon, Eon Frolicker, Noble Heritage): the valid list has a comma in it, which crashed the attack check
         l.add(new Scenario("protection-from-player", "attacking a player with protection from the attacking player (comma separated valid list)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Grizzly Bears", c.ai);
-                    c.opp.addChangedKeywords(java.util.Arrays.asList("Protection:Player.PlayerUID_" + c.ai.getId() + ":" + c.ai.getName()), new ArrayList<String>(), 1L, 0L); },
+                    c.opp.addChangedKeywords(Arrays.asList("Protection:Player.PlayerUID_" + c.ai.getId() + ":" + c.ai.getName()), new ArrayList<String>(), 1L, 0L); },
                 c -> c.attackers().isEmpty() ? null : "attacked into protection from the attacking player"));
         // The Mindskinner: its damage is prevented and milled instead, an attack still does something
         l.add(new Scenario("mindskinner", "The Mindskinner keeps attacking (its damage is replaced by a mill)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
@@ -547,7 +558,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("prismatic", "casts a spell with Prismatic using lands of another colour (should play Duress)", Fid.EXACT, "MAIN2", true,
                 c -> { c.bf("Island", 3, c.ai); c.hand("Lightning Bolt", c.opp);
                     final Card duress = c.hand("Duress", c.ai);
-                    duress.addChangedCardKeywords(java.util.Arrays.asList("Prismatic"), new ArrayList<String>(), false, c.game.getNextTimestamp(), null); },
+                    duress.addChangedCardKeywords(Arrays.asList("Prismatic"), new ArrayList<String>(), false, c.game.getNextTimestamp(), null); },
                 c -> c.plays("Duress") ? null : "AI did not cast Duress with Prismatic and only Islands" + c.why("Duress")));
         l.add(noPlay("prismatic-control", "control for Prismatic: Duress without it is not payable with Islands", Fid.EXACT, "MAIN2", true, "Duress",
                 c -> { c.bf("Island", 3, c.ai); c.hand("Lightning Bolt", c.opp); c.hand("Duress", c.ai); }));
@@ -591,11 +602,11 @@ public class AiReportScenarioTest extends AITest {
                     if (sa == null) { return "Gifts not cast" + c.why("Gifts Ungiven"); }
                     c.resolve(sa);
                     // the pile has to contain the cheap card (the Island): whichever two cards the opponent leaves, the Island is in hand or in the graveyard, never still in the library
-                    final boolean tookCheapCard = java.util.stream.Stream.concat(c.ai.getCardsIn(ZoneType.Hand).stream(), c.ai.getCardsIn(ZoneType.Graveyard).stream()).anyMatch(k -> k.getCMC() == 0 && k.isLand());
+                    final boolean tookCheapCard = Stream.concat(c.ai.getCardsIn(ZoneType.Hand).stream(), c.ai.getCardsIn(ZoneType.Graveyard).stream()).anyMatch(k -> k.getCMC() == 0 && k.isLand());
                     return tookCheapCard ? null : "the pile was only top-end cards" + c.trace;
                 }));
         l.add(noPlay("4300", "stealing the player's Pithing Needle that names its own card", Fid.APPROX, M1, true, "Steal Artifact",
-                c -> { c.bf("Island", 4, c.ai); c.hand("Steal Artifact", c.ai); c.bf("Sol Ring", c.ai); final Card n = c.bf("Pithing Needle", c.opp); n.setNamedCards(java.util.Arrays.asList("Sol Ring")); }));
+                c -> { c.bf("Island", 4, c.ai); c.hand("Steal Artifact", c.ai); c.bf("Sol Ring", c.ai); final Card n = c.bf("Pithing Needle", c.opp); n.setNamedCards(Arrays.asList("Sol Ring")); }));
         l.add(new Scenario("5892", "Surgical Extraction takes the opposing key card (and its copies in hand and library), not its own most expensive one", Fid.APPROX, "END_OF_TURN", false, /* an instant graveyard hate card waits for the opponent's end step (ChangeZoneAi.isPreferredTarget) */
                 c -> { c.bf("Swamp", c.ai); c.hand("Surgical Extraction", c.ai); c.gy("Inferno Titan", c.ai); c.gy("Reanimate", c.opp); c.hand("Reanimate", c.opp); c.lib("Reanimate", c.opp); },
                 c -> {
@@ -647,10 +658,10 @@ public class AiReportScenarioTest extends AITest {
                     c.ai.getController().declareAttackers(c.ai, combat);
                     c.game.getPhaseHandler().setCombat(combat);
                     if (combat.getAttackers().isEmpty()) { return "AI did not attack"; }
-                    final java.util.Map<forge.game.ability.AbilityKey, Object> p = forge.game.ability.AbilityKey.newMap();
-                    p.put(forge.game.ability.AbilityKey.Attackers, combat.getAttackers());
-                    p.put(forge.game.ability.AbilityKey.AttackingPlayer, c.ai);
-                    p.put(forge.game.ability.AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
+                    final Map<AbilityKey, Object> p = AbilityKey.newMap();
+                    p.put(AbilityKey.Attackers, combat.getAttackers());
+                    p.put(AbilityKey.AttackingPlayer, c.ai);
+                    p.put(AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
                     c.game.getTriggerHandler().runTrigger(forge.game.trigger.TriggerType.AttackersDeclared, p, false);
                     c.resolveAll();
                     return c.ai.getCounters(CounterEnumType.ENERGY) < 6 ? null : "energy never spent";
@@ -683,10 +694,10 @@ public class AiReportScenarioTest extends AITest {
                     c.ai.getController().declareAttackers(c.ai, combat);
                     c.game.getPhaseHandler().setCombat(combat);
                     if (combat.getAttackers().isEmpty()) { return "AI did not attack"; }
-                    final java.util.Map<forge.game.ability.AbilityKey, Object> p = forge.game.ability.AbilityKey.newMap();
-                    p.put(forge.game.ability.AbilityKey.Attackers, combat.getAttackers());
-                    p.put(forge.game.ability.AbilityKey.AttackingPlayer, c.ai);
-                    p.put(forge.game.ability.AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
+                    final Map<AbilityKey, Object> p = AbilityKey.newMap();
+                    p.put(AbilityKey.Attackers, combat.getAttackers());
+                    p.put(AbilityKey.AttackingPlayer, c.ai);
+                    p.put(AbilityKey.AttackedTarget, new ArrayList<>(combat.getDefenders()));
                     c.game.getTriggerHandler().runTrigger(forge.game.trigger.TriggerType.AttackersDeclared, p, false);
                     c.resolveAll();
                     return c.ai.getLife() < 20 ? null : "life stayed at " + c.ai.getLife() + " with " + combat.getAttackers().size() + " attackers";
