@@ -161,6 +161,16 @@ public final class ToBrowser {
             List<String> overBracket, int teams, boolean fixedPairs, List<Integer> teamChoices, List<String> aiProfiles) {
     }
 
+    /** A Limited table's event. phase is an EventPhase name. */
+    public record LimitedTable(EventKind kind, @Nullable String product, int podSize, @Nullable String pickRule, int timer,
+            @Nullable String phase, @Nullable String activeEventId, boolean eventDecksOnly, boolean started,
+            List<PastEvent> pastEvents) {
+    }
+
+    /** An earlier event whose pools the host keeps: its kind, its product, and when it was played (yyyy-MM-dd HH:mm). */
+    public record PastEvent(String id, EventKind kind, String product, String date) {
+    }
+
     /** Every entry of the lobby's Format menu, in FormatChoices' order. The deck finder and editor offer the same entries. Sent each time a browser connects. */
     @Message("formats")
     public record Formats(List<Format> formats) {
@@ -604,7 +614,61 @@ public final class ToBrowser {
             @SerializedName("default") List<Integer> defaultAnswer) {
     }
 
+    /** What the sealed setup form can offer, as desktop's sealed dialogs list it. */
+    @Message("limitedOptions")
+    public record LimitedOptions(List<SealedBlock> blocks, List<SealedBlock> fantasyBlocks, List<LimitedEdition> prereleases,
+            List<String> templates, List<DraftBlockOption> draftBlocks, List<DraftBlockOption> draftFantasyBlocks, List<String> cubes,
+            List<String> themes, @Nullable String lastCube) {
+    }
+
+    /** A draftable block. It has no combos when the set of each pack is chosen. podSize is the pod size a draft of it starts with, and picks the pick rule, a DoublePick name. */
+    public record DraftBlockOption(String name, int packs, List<String> sets, List<String> codes, List<String> combos, int podSize, String picks) {
+    }
+
+    /** A block's sealed product: how many packs, and the set combinations desktop offers for them. */
+    public record SealedBlock(String name, int packs, List<String> codes, List<String> combos) {
+    }
+
     public record LimitedEdition(String code, String name) {
+    }
+
+    /** The saved offline pools. */
+    @Message("limitedPools")
+    public record LimitedPools(List<PoolRow> sealed, List<PoolRow> draft) {
+    }
+
+    /** One saved pool. changed is the day it was last saved or played, as yyyy-MM-dd. */
+    public record PoolRow(String name, boolean built, int deckSize, String colors, @Nullable String changed, List<Opponent> opponents) {
+    }
+
+    public record Opponent(String name, String colors) {
+    }
+
+    /** pick counts from 1 within the pack. direction is 1 while packs pass to the next seat and -1 while they pass to the previous one. */
+    @Message("draft")
+    public record DraftState(int step, String product, int pack, int packs, int pick, int packSize, int direction, List<DraftSeat> seats,
+            List<DraftCard> cards, List<DraftCard> picks, List<Integer> moved, int clockSeconds, int clockLeftMillis,
+            List<DraftLogLine> log, boolean done) {
+    }
+
+    /** A line of the draft log: the start of a pack, the player's own pick, or another seat's pick. */
+    public enum DraftLogKind { pack, own, seat }
+
+    public record DraftLogLine(DraftLogKind kind, String text) {
+    }
+
+    /** A seat in pass order, where seat 0 is the player: how many packs it holds, and whether its player has left. */
+    public record DraftSeat(String name, boolean ai, int packs, boolean held) {
+    }
+
+    /** rank is desktop's draft score, up to 99, where higher is better. text is the rules text drawn when there is no picture. */
+    public record DraftCard(String name, String image, String cost, int mv, String colors, String type, String text, @Nullable String pt,
+            String rarity, @Nullable Integer rank, int pack, int pick, boolean sideboard) {
+    }
+
+    /** A gauntlet game's result. nextRound means the match was won and rounds are still left to play. */
+    @Message("limitedResult")
+    public record LimitedResult(int round, int rounds, int wins, int losses, boolean matchOver, boolean nextRound) {
     }
 
     /** Every message record. The TypeScript is generated from these. */

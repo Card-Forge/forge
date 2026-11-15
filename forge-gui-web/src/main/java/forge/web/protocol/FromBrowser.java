@@ -333,6 +333,92 @@ public final class FromBrowser {
     public record AutoDecisionCommand(AutoDecisionAction action, @Nullable String key, boolean on) {
     }
 
+    /** Opens the Limited pages for a kind of event. With resume, it opens the pool saved last directly. */
+    @Command("limitedOpen")
+    public record LimitedOpen(EventKind kind, boolean resume) {
+    }
+
+    /** Opens a sealed pool. product is a LimitedPoolType name. The fields that product does not need are null. */
+    @Command("sealedCreate")
+    public record SealedCreate(String product, @Nullable String block, @Nullable String combo, @Nullable String edition,
+            @Nullable String template, @Nullable String cubeId, int packs, String name, boolean replace) {
+    }
+
+    /** Starts an offline booster draft. product is a LimitedPoolType name. The fields that product needs are set. combo is "A/B/C". pickRule is a DoublePick name, or null for the set's own. */
+    @Command("draftStart")
+    public record DraftStart(String product, @Nullable String block, @Nullable String combo, @Nullable String cube, @Nullable String theme,
+            @Nullable String cubeId, @Nullable String pickRule) {
+    }
+
+    /** Picks the card at index from the pack. step is the draft state the click was made on, and a pick with an old step is ignored. */
+    @Command("draftPick")
+    public record DraftPick(int step, int index, boolean sideboard) {
+    }
+
+    /** Moves the pick at index, in the order picked, into the sideboard or back into the main deck. */
+    @Command("draftMove")
+    public record DraftMove(int index, boolean sideboard) {
+    }
+
+    /** Saves a finished draft. replace means the player agreed to replace a draft with the same name. */
+    @Command("draftSave")
+    public record DraftSave(String name, boolean replace) {
+    }
+
+    /** Opens a saved pool's opponents screen. */
+    @Command("poolOpen")
+    public record PoolOpen(String name) {
+    }
+
+    /** Opens a saved pool's deck in the editor. */
+    @Command("poolEdit")
+    public record PoolEdit(String name) {
+    }
+
+    @Command("poolDelete")
+    public record PoolDelete(String name) {
+    }
+
+    /** Against one opponent, against count opponents at once, or against each in turn. */
+    public enum PoolPlayMode { one, several, gauntlet }
+
+    /** Plays a pool's deck against one of its opponents. opponent is 0-based. games is the number of games in the match. */
+    @Command("poolPlay")
+    public record PoolPlay(String name, @Nullable PoolPlayMode mode, int opponent, int count, int games) {
+    }
+
+    /** The table's Limited switch, which only the host sets. It is the kind of event, or null for Constructed. */
+    @Command("setLimited")
+    public record SetLimited(@Nullable EventKind kind) {
+    }
+
+    /** Sets up the table's event, or sets it up again. timer and grace are in seconds. pickRule is a DoublePick name. */
+    @Command("eventSetup")
+    public record EventSetup(String product, @Nullable String block, @Nullable String combo, @Nullable String edition,
+            @Nullable String template, @Nullable String cube, @Nullable String theme, @Nullable String cubeId, int packs,
+            int podSize, @Nullable String pickRule, int timer, int grace) {
+    }
+
+    /** Keeps a seat at the table while it sits out the next match. */
+    @Command("sitOut")
+    public record SitOut(int index, boolean sittingOut) {
+    }
+
+    /** Plays a past event's decks again at this table, as desktop's Load Past Event does. */
+    @Command("eventHostAgain")
+    public record EventHostAgain(String eventId) {
+    }
+
+    /** Deletes a past event's pools from the host's event decks. */
+    @Command("eventForget")
+    public record EventForget(String eventId) {
+    }
+
+    /** Whether the deck finder lists only the event's decks. */
+    @Command("eventDecksOnly")
+    public record EventDecksOnly(boolean on) {
+    }
+
     /** Every command record. MessageJson decodes commands by these, and the TypeScript is generated from them. */
     static final List<Class<? extends Record>> COMMANDS = MessageJson.marked(Command.class);
 }

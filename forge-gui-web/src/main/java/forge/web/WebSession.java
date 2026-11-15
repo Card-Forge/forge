@@ -15,6 +15,7 @@ import forge.web.deck.CardCatalog;
 import forge.web.deck.DeckCatalog;
 import forge.web.deck.DeckWorkspace;
 import forge.web.images.SkinSprites;
+import forge.web.limited.Draft;
 import forge.web.limited.EventSeat;
 import forge.web.limited.OfflineDraft;
 import forge.web.limited.OfflinePools;
@@ -35,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 /**
  * One browser's session. Its current place is one {@link Stage}, which changes only through {@link #move}, apart from the session closing. Stages include the menu,
@@ -78,6 +80,22 @@ public final class WebSession implements IHasForgeLog {
             // Starting a match can ask host questions, so it runs on the host UI thread and never blocks a socket thread
             .on(Start.class, (s, ch, st) -> s.ui.invokeInEdtLater(() -> s.start(ch, st)))
             .on(Plain.leave, (s, ch, c) -> s.ui.invokeInEdtLater(s::leave))
+            .on(LimitedOpen.class, WebSession::openLimited)
+            .on(Plain.limitedLeave, (s, ch, c) -> s.atPool(e -> new Menu()))
+            .on(Plain.poolClose, (s, ch, c) -> s.atPool(e -> new Event(e.kind(), null)))
+            .on(PoolOpen.class, (s, ch, o) -> s.atPool(e -> new Event(e.kind(), o.name())))
+            .on(DraftMove.class, (s, ch, m) -> {
+                final Draft draft = s.draft();
+                if (draft != null) {
+                    draft.move(m.index(), m.sideboard());
+                }
+            })
+            .on(DraftPick.class, (s, ch, p) -> {
+                final Draft draft = s.draft();
+                if (draft != null) {
+                    draft.pick(p.step(), p.index(), p.sideboard());
+                }
+            })
             // A cheat asks its questions as the game does and waits for the answers, so it runs on its own thread
             .on(Dev.class, host((s, ch, d) -> {
                 if (s.stage instanceof Playing playing) {
@@ -120,6 +138,9 @@ public final class WebSession implements IHasForgeLog {
     private volatile Integer avatar;
     /** A guest's last chosen sleeve, from its browser. Null until it chooses one, and the seat then keeps the sleeve it was given. */
     private volatile Integer sleeve;
+    private final OfflineLimited limited;
+    private final EventSeat eventSeat;
+    private final TableCommands table;
     /**
      * Tells sessions apart. A browser that is moved to another session, such as a seat handed over, sees the number change. The log also uses it,
      * because the player may have no name yet, or the same name as another.
@@ -259,6 +280,10 @@ public final class WebSession implements IHasForgeLog {
 
     NetplaySeat local() {
         return local;
+    }
+
+    EventSeat eventSeat() {
+        return eventSeat;
     }
 
     public boolean attached() {
@@ -424,6 +449,24 @@ public final class WebSession implements IHasForgeLog {
             if (isHost) {
                 sessions.hostGameClosed();
             }
+        }
+    }
+
+    private void openLimited(final BrowserChannel channel, final LimitedOpen open) {
+        final EventKind kind = open.kind() == EventKind.draft ? EventKind.draft : EventKind.sealed;
+        final Stage now = stage;
+        if (isHost && ((now instanceof Event e && e.kind() == kind && !open.resume())
+                || ((now instanceof Menu || now instanceof Event)
+                    && move(now, new Event(kind, open.resume() ? OfflinePools.latest(kind) : null))))) {
+            limited.sendLimited(channel);
+        }
+    }
+
+    /** Moves between the Limited pages, while the browser is on one. */
+    private void atPool(final Function<Event, Stage> next) {
+        final Stage now = stage;
+        if (now instanceof Event e) {
+            move(now, next.apply(e));
         }
     }
 
@@ -679,6 +722,12 @@ public final class WebSession implements IHasForgeLog {
             return Screen.event;
         }
         return stage instanceof Playing ? Screen.playing : Screen.menu;
+    }
+
+    /** The draft this browser picks in: its own draft against the computer, or its seat's draft while the table drafts. */
+    private Draft draft() {
+        final OfflineDraft offline = limited.draft();
+        return offline != null ? offline : stage instanceof Setup ? eventSeat.draft() : null;
     }
 
     static boolean invited(final Stage stage) {

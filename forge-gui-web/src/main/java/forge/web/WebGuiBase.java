@@ -4,13 +4,19 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.JsonObject;
 import forge.ImageKeys;
 import forge.card.CardEdition;
+import forge.game.GameRules;
+import forge.game.GameType;
+import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.match.HostedMatch;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.interfaces.IGuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
+import forge.sound.MusicPlaylist;
 import forge.util.BuildInfo;
 import forge.util.FSerializableFunction;
 import forge.util.IHasForgeLog;
@@ -33,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -41,6 +49,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /** Forge's interface to the program it runs in, implemented for the web. One "WebUI" thread takes the place of Swing's event thread. */
 public final class WebGuiBase implements IGuiBase, IHasForgeLog {
@@ -58,6 +67,8 @@ public final class WebGuiBase implements IGuiBase, IHasForgeLog {
     private final ImageFetcher imageFetcher = new WebImageFetcher();
     private volatile Consumer<JsonObject> noticeSink = notice -> { };
     private final HostQuestions hostQuestions = new HostQuestions();
+    /** Set while a core game mode, such as the limited gauntlet, starts a match for the host's browser. */
+    private volatile SoloTable soloTable;
 
     public void setNoticeSink(final Consumer<JsonObject> sink) {
         noticeSink = sink;
@@ -66,6 +77,10 @@ public final class WebGuiBase implements IGuiBase, IHasForgeLog {
 
     HostQuestions hostQuestions() {
         return hostQuestions;
+    }
+
+    public void playSolo(final SoloTable table) {
+        soloTable = table;
     }
 
     /** The working folder or the nearest parent that holds Forge's res folder, directly or in forge-gui. A git checkout runs from the repository or a module folder. */
@@ -229,6 +244,19 @@ public final class WebGuiBase implements IGuiBase, IHasForgeLog {
             desktop.browse(new URI(url));
         }
     }
+
+    @Override public HostedMatch hostMatch() {
+        final SoloTable table = soloTable;
+        return table == null ? new HostedMatch() : new SoloMatch(table);
+    }
+    /** The server's GUI for the browser's seat at the solo table. Outside a core game mode's match, each seat's WebSession builds its GUI. */
+    @Override public IGuiGame getNewGuiGame() {
+        final SoloTable table = soloTable;
+        if (table == null) {
+            throw new UnsupportedOperationException("A web seat's GUI is built by WebSession");
+        }
+        return table.seatGui().get();
+    }
     @Override public boolean hasNetGame() { return false; }
 
     /** The image key of a set's booster picture, named as BoosterPack names its first one. */
@@ -267,4 +295,33 @@ public final class WebGuiBase implements IGuiBase, IHasForgeLog {
     @Override public void showSpellShop() { }
     @Override public void showBazaar() { }
     @Override public UpnpServiceConfiguration getUpnpPlatformService() { return new DefaultUpnpServiceConfiguration(); }
+
+    /** Starts a core game mode's match for the host's browser. begin starts it, and the table then adopts it. */
+    public interface SoloStart {
+        void start(HostedMatch match, GameRules rules, List<RegisteredPlayer> players, RegisteredPlayer human, Runnable begin);
+    }
+
+    /** The host browser's table, where a match that a core game mode starts is played. seatGui is the server's GUI for the browser's seat. */
+    public record SoloTable(Supplier<IGuiGame> seatGui, SoloStart start) { }
+
+    /** A core game mode's match, moved to the browser's table so the browser plays it over its loopback connection. */
+    private static final class SoloMatch extends HostedMatch {
+        private final SoloTable table;
+
+        SoloMatch(final SoloTable table) {
+            this.table = table;
+        }
+
+        // Every startMatch overload ends here, and a core game mode's match has one human
+        @Override
+        public void startMatch(final GameRules rules, final Set<GameType> variants, final List<RegisteredPlayer> players,
+                final Map<RegisteredPlayer, IGuiGame> guis, final MusicPlaylist playlist) {
+            if (guis == null || guis.size() != 1) {
+                super.startMatch(rules, variants, players, guis, playlist);
+                return;
+            }
+            table.start().start(this, rules, players, guis.keySet().iterator().next(),
+                    () -> super.startMatch(rules, variants, players, guis, playlist));
+        }
+    }
 }
