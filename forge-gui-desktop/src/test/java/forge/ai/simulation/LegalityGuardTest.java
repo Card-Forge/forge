@@ -257,4 +257,36 @@ public class LegalityGuardTest extends FlatMcTestBase {
         counters(zilortha, "STUN", 1, ai);
         AssertJUnit.assertFalse("Zilortha does nothing", LegalityGuard.redundantDefeat(ai, battle, defense + 4));
     }
+
+    // ------------------------------------------------------------------------------------------ Birthing Ritual
+
+    private boolean ritualWouldSacrifice() {
+        final Card ritual = put("Birthing Ritual", ai, ZoneType.Battlefield);
+        final SpellAbility sac = forge.game.ability.AbilityFactory.getAbility(ritual.getSVar("DBSacrifice"), ritual);
+        sac.setActivatingPlayer(ai);
+        return forge.ai.ability.SacrificeAi.birthingRitualPaysOff(ai, sac);
+    }
+
+    @Test
+    public void birthingRitualDoesNotSacrificeWithNothingToPutInItsPlace() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Forest", 7, ai, ZoneType.Library);
+        AssertJUnit.assertFalse(ritualWouldSacrifice());
+    }
+
+    @Test
+    public void birthingRitualDoesNotSacrificeForACreatureThatIsTooExpensive() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield); // mana value 2: up to 3
+        put("Forest", 6, ai, ZoneType.Library);
+        put("Serra Angel", ai, ZoneType.Library);
+        AssertJUnit.assertFalse(ritualWouldSacrifice());
+    }
+
+    @Test
+    public void birthingRitualSacrificesForABetterCreatureItCanPut() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Forest", 6, ai, ZoneType.Library);
+        put("Centaur Courser", ai, ZoneType.Library); // mana value 3, 3/3
+        AssertJUnit.assertTrue(ritualWouldSacrifice());
+    }
 }
