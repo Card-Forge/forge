@@ -280,7 +280,7 @@ public class TargetingOverlay {
     /** Draw a stack-target arrow to a player, curving it toward the battlefield rather than across the panel labels. */
     public static void drawPlayerArrow(final Graphics g, final Vector2 start, final Vector2 end,
                                        final ArcConnection connects, final boolean playerOnRight) {
-        if (start == null || end == null || !isVisible(start.x, start.y) || !isVisible(end.x, end.y)) { return; }
+        if (start == null || end == null || !isVisible(end.x, end.y)) { return; } // only the target can be hidden; the start sits on the stack itself
         final float bulge = playerArrowBulge(start, end, playerOnRight);
         drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false, bulge);
     }
