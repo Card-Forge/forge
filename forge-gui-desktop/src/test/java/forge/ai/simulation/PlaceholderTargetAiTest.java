@@ -260,4 +260,34 @@ public class PlaceholderTargetAiTest extends FlatMcTestBase {
         AssertJUnit.assertTrue(host.isRemembered(dead));
         AssertJUnit.assertFalse(host.isRemembered(mine));
     }
+
+    // ------------------------------------------------------------------------------------------ an optional cost
+
+    private boolean mayDo(final SpellAbility sa) {
+        sa.setActivatingPlayer(ai);
+        return forge.ai.SpellApiToAi.Converter.get(sa).doTrigger(ai, sa, false);
+    }
+
+    @Test
+    public void corpseberryCultivatorForagesWhenItCanAndNotWhenItCannot() {
+        final Card host = put("Corpseberry Cultivator", ai, ZoneType.Battlefield);
+        final SpellAbility forage = forge.game.ability.AbilityFactory.getAbility(host, "TrigStep");
+        AssertJUnit.assertFalse("nothing to forage with", mayDo(forage));
+        put("Grizzly Bears", 3, ai, ZoneType.Graveyard);
+        AssertJUnit.assertTrue("three cards to exile for a +1/+1 counter", mayDo(forage));
+    }
+
+    @Test
+    public void aForageWithNothingToShowForItIsNotPaid() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Grizzly Bears", 3, ai, ZoneType.Graveyard);
+        AssertJUnit.assertFalse(mayDo(step(host, "AB$ Nothing | Cost$ Forage")));
+    }
+
+    @Test
+    public void evidenceStillCollectsWhereTheCardSaysAlways() {
+        final Card host = put("Evidence Examiner", ai, ZoneType.Battlefield);
+        put("Hill Giant", ai, ZoneType.Graveyard);
+        AssertJUnit.assertTrue(mayDo(forge.game.ability.AbilityFactory.getAbility(host, "TrigEvidence")));
+    }
 }
