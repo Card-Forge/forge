@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Adventure;
@@ -30,6 +32,7 @@ public class QuestLogScene extends UIScene {
     private static final String INK = "[#1f1b16]";
     private static final String INK_SOFT = "[#5d5244]";
     private static final String TRACKED = "[#12808f]";
+    private static final Color INK_SOFT_COLOR = new Color(0.36f, 0.32f, 0.27f, 1);
 
     private final Table root, detailRoot;
     private final Table listTable = new Table();
@@ -38,9 +41,10 @@ public class QuestLogScene extends UIScene {
     private final TextraButton trackButton, abandonButton;
     private final Button backLink, completedLink;
     private final TextraLabel completedLabel = Controls.newTextraLabel("");
-    private final Chevron completedChevron = new Chevron(new Color(0.36f, 0.32f, 0.27f, 1));
+    private final Chevron completedChevron = new Chevron(INK_SOFT_COLOR, false);
     private final Button.ButtonStyle rowStyle = new Button.ButtonStyle(), selectedRowStyle = new Button.ButtonStyle();
     private final List<Button> rows = new ArrayList<>();
+    private final Font nameFont = new Font(Controls.getTextraFont()).adjustLineHeight(0.75f);
     private final boolean split;
     private AdventureQuestData selected;
     private boolean showCompleted;
@@ -181,10 +185,20 @@ public class QuestLogScene extends UIScene {
         row.setUserObject(quest);
         int stages = quest.stages.length;
         float progressWidth = 30;
+        float nameWidth = root.getWidth() - progressWidth - (split ? 20 : 33);
         row.add(label(TRACKED + (quest.isTracked ? "•" : ""), 8)).width(8).top().padLeft(3);
-        row.add(label(INK + quest.getName(), root.getWidth() - progressWidth - 20)).width(root.getWidth() - progressWidth - 20).left().padLeft(2);
-        row.add(Controls.newTextraLabel("[%80]" + INK_SOFT + (stages == 0 ? "" : quest.getCompletedStages().size() + "/" + stages)))
-                .width(progressWidth).top().right().padRight(3);
+        TextraLabel name = Controls.newTextraLabel(INK + quest.getName(), nameFont);
+        name.setWrap(true);
+        name.setWidth(nameWidth);
+        // restores the first line's position and the row height after the shorter line height
+        float shrink = Controls.getTextraFont().cellHeight - nameFont.cellHeight;
+        row.add(name).width(nameWidth).left().padLeft(2).padTop(-shrink / 2).padBottom(shrink * 1.5f);
+        TextraLabel progress = Controls.newTextraLabel("[%80]" + INK_SOFT + (stages == 0 ? "" : quest.getCompletedStages().size() + "/" + stages));
+        row.add(progress).width(progressWidth).top().right().padTop(2).padRight(split ? 3 : 0);
+        if (!split) {
+            progress.setAlignment(Align.right);
+            row.add(new Chevron(INK_SOFT_COLOR, true)).top().padTop(0.5f).padLeft(7).padRight(3);
+        }
         row.pad(3, 0, 3, 0);
         row.addListener(new ClickListener() {
             @Override
@@ -265,7 +279,7 @@ public class QuestLogScene extends UIScene {
         }
         if (showCompleted) {
             for (AdventureQuestStage stage : completed) {
-                detailTable.add(label(INK_SOFT + "☑ " + stage.name, width)).width(width);
+                detailTable.add(label(INK_SOFT + "☑ " + stage.name, width - 12)).width(width - 12).padLeft(12);
                 detailTable.row();
             }
         }
@@ -357,11 +371,13 @@ public class QuestLogScene extends UIScene {
     private static class Chevron extends Actor {
         static final float PX = 1.5f;
         private final Color color;
+        private final boolean right;
         boolean up;
 
-        Chevron(Color color) {
+        Chevron(Color color, boolean right) {
             this.color = color;
-            setSize(7 * PX, 4 * PX);
+            this.right = right;
+            setSize(right ? 4 * PX : 7 * PX, right ? 7 * PX : 4 * PX);
             setTouchable(Touchable.disabled);
         }
 
@@ -373,8 +389,12 @@ public class QuestLogScene extends UIScene {
         public void draw(Batch batch, float parentAlpha) {
             float packed = batch.getPackedColor();
             batch.setColor(color.r, color.g, color.b, parentAlpha);
-            for (int row = 0; row < 4; row++)
-                batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + bob() + (up ? row : 3 - row) * PX, (7 - row * 2) * PX, PX);
+            for (int row = 0; row < 4; row++) {
+                if (right)
+                    batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + row * PX, PX, (7 - row * 2) * PX);
+                else
+                    batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + bob() + (up ? row : 3 - row) * PX, (7 - row * 2) * PX, PX);
+            }
             batch.setPackedColor(packed);
         }
     }
@@ -384,7 +404,7 @@ public class QuestLogScene extends UIScene {
         private float elapsed;
 
         MoreArrow(ScrollPane pane) {
-            super(new Color(0.12f, 0.11f, 0.09f, 1));
+            super(new Color(0.12f, 0.11f, 0.09f, 1), false);
             this.pane = pane;
             setSize(7 * PX, 6 * PX);
         }

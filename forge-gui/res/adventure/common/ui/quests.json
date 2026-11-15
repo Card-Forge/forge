@@ -30,9 +30,9 @@
 	{
       "type": "Table",
       "name": "questDetails",
-      "x": 192,
+      "x": 198,
       "y": 24,
-      "width": 216,
+      "width": 210,
       "height": 216,
 	  "fontColor":"black"
     },
