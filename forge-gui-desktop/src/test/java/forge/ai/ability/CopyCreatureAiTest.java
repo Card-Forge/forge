@@ -92,6 +92,22 @@ public class CopyCreatureAiTest extends AITest {
         assertEquals("Serra Angel", crypto.getName());
     }
 
+    @Test
+    public void doesNotBecomeACopyThatOnlyLivesOnItsCounters() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        // Modular counts only on entry, and becoming a copy is not entering
+        addCard("Arcbound Lancer", opp).setCounters(CounterEnumType.P1P1, 4);
+        Card crypto = upkeep(game, ai, opp);
+
+        run(game);
+
+        assertEquals("Cryptoplasm", crypto.getName());
+        assertEquals(ZoneType.Battlefield, crypto.getZone().getZoneType());
+    }
+
     private SpellAbility saheeli(Game game, Player ai) {
         Card saheeli = addCard("Saheeli, the Sun's Brilliance", ai);
         saheeli.setSickness(false);
@@ -161,7 +177,7 @@ public class CopyCreatureAiTest extends AITest {
         walker.setCounters(CounterEnumType.P1P1, 2);
         addCard("Grumgully, the Generous", ai);
 
-        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).contains(walker));
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai, true).contains(walker));
     }
 
     @Test
@@ -174,7 +190,7 @@ public class CopyCreatureAiTest extends AITest {
         walker.setCounters(CounterEnumType.P1P1, 2);
         addCard("Grumgully, the Generous", opp);
 
-        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).isEmpty());
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai, true).isEmpty());
     }
 
     @Test
@@ -188,7 +204,7 @@ public class CopyCreatureAiTest extends AITest {
         addCard("Glorious Anthem", ai);
         game.getAction().checkStateEffects(true);
 
-        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).contains(walker));
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai, true).contains(walker));
     }
 
     @Test
@@ -202,6 +218,6 @@ public class CopyCreatureAiTest extends AITest {
         addCard("Glorious Anthem", opp);
         game.getAction().checkStateEffects(true);
 
-        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).isEmpty());
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai, true).isEmpty());
     }
 }

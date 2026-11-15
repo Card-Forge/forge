@@ -227,11 +227,12 @@ public class ComputerUtilCard {
 
     /**
      * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
-     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry.
+     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry, and none if
+     * {@code enters} is false because an existing permanent becomes the copy.
      * Static abilities and entry replacements read the copy's controller, so a copy of an opponent's
      * creature is judged under {@code newController}: their 8/8 Nightmare can be a 0/0 for us.
      */
-    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController, final boolean enters) {
         final Game game = newController.getGame();
         final MutableBoolean reset = new MutableBoolean(false);
         final CardCollection kept = CardLists.filter(list, c -> {
@@ -253,7 +254,10 @@ public class ComputerUtilCard {
                 reset.setTrue();
             }
             final int toughness = copy.getNetToughness() + copy.getCounters(CounterEnumType.M1M1) - copy.getCounters(CounterEnumType.P1P1);
-            return toughness > 0 || toughness + countersOnEntry(copy) > 0;
+            if (toughness > 0) {
+                return true;
+            }
+            return enters && toughness + countersOnEntry(copy) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);
