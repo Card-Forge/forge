@@ -45,7 +45,8 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   private final JLabel lblPlaneboundName;
   private final JLabel lblLifeTotal;
   private final PaperCard currentPlaneCard;
-  private boolean awaitingFlip;
+  // The image changes sides at the flip animation's midpoint, not when it starts.
+  private boolean isFaceUp;
 
   // Zoom utility
   private transient CardUtil zoomUtil; // Lazily initialized on first zoom
@@ -66,7 +67,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   public NodePlaneboundPanel(NodePlanebound node, boolean isFaceDown, int planeboundRowCount,
       boolean animateReveal) {
     super(node);
-    this.awaitingFlip = animateReveal;
+    this.isFaceUp = !isFaceDown && !animateReveal;
     this.flipAnimation = new CardUtil.FlipAnimation(this);
 
     // Card image (plane card) - rotated 90 degrees clockwise for horizontal display
@@ -174,13 +175,13 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
    * Animate flipping from face-down to face-up.
    */
   public void flipToReveal() {
-    if (flipAnimation.isAnimating() || revealImage == null) {
+    if (isFaceUp || flipAnimation.isAnimating() || revealImage == null) {
       return;
     }
     SoundSystem.instance.play(SoundEffectType.FlipCard,
         SoundEffectType.FlipCard.isSynced());
-    awaitingFlip = false;
     flipAnimation.start(() -> {
+      isFaceUp = true;
       cardImage.setItem(revealImage);
       lblPlaneboundName.setText(((NodePlanebound) node).getRoguePlanebound().planeboundName());
     });
@@ -277,7 +278,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
   }
 
   private void setHiddenCardBackImage(BufferedImage cardBack) {
-    if (cardBack == null) {
+    if (cardBack == null || isFaceUp) {
       return;
     }
     cardImage.setItem(rotateImage90Clockwise(cardBack));
@@ -371,8 +372,8 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
       BufferedImage rotatedImage = rotateImage90Clockwise(originalImage);
       // Update revealImage so the flip animation uses the real image, not the fallback
       revealImage = rotatedImage;
-      // Only update cardImage if the card is already face-up (not waiting for flip animation)
-      if (!awaitingFlip) {
+      // Keep the back visible until the animation reaches its midpoint.
+      if (isFaceUp) {
         cardImage.setItem(rotatedImage);
         cardImage.revalidate();
         cardImage.repaint();
