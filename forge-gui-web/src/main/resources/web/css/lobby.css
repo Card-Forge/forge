@@ -333,6 +333,7 @@ button.team-tab:hover, button.team-tab[aria-expanded="true"] { border-color: var
 .menu-list button:hover { background: var(--surface-2); }
 .menu-list button[aria-checked="true"] { background: var(--accent-soft); color: var(--accent-2); }
 
+
 .random-deck { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border-color: var(--accent-2); background: var(--accent-soft); color: var(--accent-2); }
 .dice { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; flex: none; }
 .dice circle { fill: currentColor; stroke: none; }
@@ -348,6 +349,7 @@ button.team-tab:hover, button.team-tab[aria-expanded="true"] { border-color: var
 .deck-row .deck-size { color: var(--muted); font-size: 12px; }
 .seat-problem { margin: 0; color: var(--select); font-size: 12px; }
 .seat-problem.bracket { color: var(--accent-2); }
+
 
 .play-row { display: grid; justify-items: center; gap: 10px; margin-top: 18px; }
 .play { min-width: 240px; font-size: 17px; padding: 10px 24px; }
@@ -606,9 +608,11 @@ html:not([data-form="portrait"]) .finder:has(.rail) :is(.dk-chosen, .finder-foot
 .saved.no-deck .art-tile { opacity: .4; pointer-events: none; }
 .no-deck-why { margin: 6px 0 0; color: var(--select); font-size: 12px; }
 
+
 .deck-formats { margin: 2px 0 0; color: var(--faint); font-size: 12px; }
 
 .dk-hit .note { flex: none; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; color: var(--muted); font-size: 12px; }
+
 
 /* A question that blocks the host until it is answered, so it is drawn above every other dialog */
 .host-back { position: fixed; inset: 0; background: rgba(6, 8, 12, .75); display: grid; place-items: center; z-index: 80; }
@@ -629,6 +633,8 @@ html:not([data-form="portrait"]) .finder:has(.rail) :is(.dk-chosen, .finder-foot
 .kind { background: none; border: none; padding: 0; color: var(--muted); }
 .kind:disabled { opacity: 1; }
 .kind:not(:disabled):hover { color: var(--accent-2); text-decoration: underline; }
+
+
 
 .share-row {
   display: grid;

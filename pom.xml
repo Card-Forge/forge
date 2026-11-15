@@ -406,5 +406,12 @@
                 <module>forge-gui-web</module>
             </modules>
         </profile>
+        <!-- A release build packages the web GUI in the desktop download, so it builds the module too. It runs online, as above. -->
+        <profile>
+            <id>windows-linux</id>
+            <modules>
+                <module>forge-gui-web</module>
+            </modules>
+        </profile>
     </profiles>
 </project>

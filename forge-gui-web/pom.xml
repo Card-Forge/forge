@@ -16,6 +16,9 @@
     <properties>
         <!-- Read by the npm test run below; -DskipTests on the command line overrides it -->
         <skipTests>false</skipTests>
+        <!-- The packaged launchers pass these, as desktop's do -->
+        <mandatory.java.args>-Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8</mandatory.java.args>
+        <addopen.java.args>--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED</addopen.java.args>
     </properties>
 
     <dependencies>
@@ -64,6 +67,13 @@
                             <replacement>-SNAPSHOT-${month.date}</replacement>
                             <failIfNoMatch>false</failIfNoMatch>
                         </configuration>
+                    </execution>
+                    <!-- The Windows launcher's file version, as desktop's -->
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -195,6 +205,84 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${basedir}/${configSourceDirectory}</basedir>
+                    <filesToInclude>forge-web.sh, forge-web.command, forge-web.cmd</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                        <replacement>
+                            <token>$mandatory.java.args$</token>
+                            <value>${mandatory.java.args}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <executions>
+                    <execution>
+                        <id>l4j-gui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>${project.build.directory}/forge-web.exe</outfile>
+                            <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                            <dontWrapJar>true</dontWrapJar>
+                            <errTitle>forge-web</errTitle>
+                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
+                            <icon>${basedir}/../forge-gui-desktop/src/main/config/forge.ico</icon>
+                            <classPath>
+                                <mainClass>forge.web.WebMain</mainClass>
+                                <addDependencies>false</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>17</minVersion>
+                                <requiresJdk>true</requiresJdk>
+                                <maxHeapSize>4096</maxHeapSize>
+                                <opts>
+                                    <opt>${mandatory.java.args}</opt>
+                                    <opt>${addopen.java.args}</opt>
+                                </opts>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
+                                <txtFileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</txtFileVersion>
+                                <fileDescription>Forge Web</fileDescription>
+                                <copyright>Forge</copyright>
+                                <productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
+                                <txtProductVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</txtProductVersion>
+                                <productName>Forge Web</productName>
+                                <internalName>forge-web</internalName>
+                                <originalFilename>forge-web.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
