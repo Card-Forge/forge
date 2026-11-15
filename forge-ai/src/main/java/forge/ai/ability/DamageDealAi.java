@@ -350,6 +350,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+        if (!mandatory) {
+            killables = ComputerUtilCard.withoutHarmlessCreatures(ai, killables);
+        }
 
         // Try not to target anything which will already be dead by the time the spell resolves
         killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
