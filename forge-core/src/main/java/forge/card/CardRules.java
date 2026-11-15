@@ -20,6 +20,7 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forge.card.mana.ManaCost;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -328,11 +329,20 @@ public final class CardRules implements ICardCharacteristics {
         if (!type.isLegendary()) {
             return false;
         }
-        if (canBeCreature() || type.isVehicle() || (
-                type.isSpacecraft() && getPower() != null)) {
-            // Spacecraft need printed PT
+
+        // That card must be either (a) a creature card, (b) a Vehicle card,
+        if (canBeCreature() || type.isVehicle()) {
             return true;
         }
+
+        if (type.isSpacecraft()) { // a Spacecraft card with one or more power/toughness boxes
+            for (String staticAbility : mainPart.getStaticAbilities()) {
+                if (staticAbility.contains("Station$ True") && staticAbility.contains("AddType$ Creature") && staticAbility.contains("SetPower$ ")) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -387,10 +397,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isDoctor() {
-        Set<String> subtypes = new HashSet<>();
-        for (String type : mainPart.getType().getSubtypes()) {
-            subtypes.add(type);
-        }
+        Set<String> subtypes = Sets.newHashSet(mainPart.getType().getSubtypes());
 
         return subtypes.size() == 2 && subtypes.contains("Time Lord") && subtypes.contains("Doctor");
     }
