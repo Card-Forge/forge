@@ -1,6 +1,7 @@
 package forge.web.protocol;
 
 import com.google.gson.JsonElement;
+import forge.deck.DeckSection;
 import forge.game.phase.PhaseType;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
@@ -39,12 +40,98 @@ public final class FromBrowser {
     public record PageError(String text) {
     }
 
+    @Command("deckDetails")
+    public record AskDeckDetails(String key) {
+    }
+    public enum DeckQueryKind { card, sideboard, set }
+    /** Which listed decks hold a card in the main deck or the sideboard, or cards from a set. */
+    @Command("deckQuery")
+    public record DeckQuery(DeckQueryKind kind, String value) {
+    }
+
     @Command("hostChoice")
     public record HostChoiceAnswer(int id, List<Integer> value) {
     }
 
     @Command("start")
     public record Start(boolean spectate) {
+    }
+
+    /** The format the start page's deck finder lists, while no table is open. */
+    @Command("browseFormat")
+    public record BrowseFormat(String format) {
+    }
+
+    /** Opens a deck from the finder by key, or a new deck for a format. seat is the seat whose finder it came from. copy edits a copy. */
+    @Command("editorOpen")
+    public record EditorOpen(@Nullable String key, @Nullable String newFormat, @Nullable Integer seat, boolean copy) {
+    }
+
+    public enum EditOp { add, remove, move, commander, printings, lands, landSet, suggestLands, foil }
+
+    /** A name and a count. The name is a card printing's image key in a printings change, or a basic land's name in a lands change. */
+    public record CountedName(String name, int count) {
+    }
+
+    @Command("editorEdit")
+    public record EditorEdit(EditOp op, @Nullable String name, @Nullable DeckSection from, @Nullable DeckSection to, int count,
+            @Nullable List<CountedName> printings, @Nullable List<CountedName> lands) {
+    }
+
+    @Command("editorRename")
+    public record EditorRename(String name) {
+    }
+
+    /** "Check legality against": a format, a card pool for Constructed, or no restriction at all. */
+    @Command("editorCheck")
+    public record EditorCheck(String format, @Nullable String cardPool, boolean unrestricted) {
+    }
+
+    public enum DeckOp { duplicate, delete, file }
+
+    @Command("editorDeck")
+    public record EditorDeck(DeckOp op) {
+    }
+
+    /** Deletes one of the player's own decks from the finder, without opening it. */
+    @Command("deckDelete")
+    public record DeckDelete(String key) {
+    }
+
+    /** Stars one of the decks the finder lists, or removes its star. */
+    @Command("deckFavourite")
+    public record DeckFavourite(String key, boolean on) {
+    }
+
+    /** A page of the catalogue. request is sent back with the answer, so a late answer to an old query is dropped. */
+    @Command("catalogue")
+    public record CatalogueQuery(int request, String text, String colours, String type, String filters, String sort, int offset,
+            boolean showAll,
+            @Nullable List<String> sets, @Nullable String format, @Nullable DeckSection section) {
+    }
+
+    @Command("importRead")
+    public record ImportRead(int request, String text, String format, @Nullable String cardPool, boolean unrestricted) {
+    }
+
+    @Command("importFetch")
+    public record ImportFetch(int request, String url) {
+    }
+
+    /** use puts the deck on a seat, edit opens it, and save keeps it. add and replace change the deck open in the editor. */
+    public enum ImportAction { use, edit, save, add, replace }
+
+    /** What to do when the name is taken: replace that deck, or keep both. */
+    public enum Clash { replace, keep }
+
+    @Command("importCommit")
+    public record ImportCommit(String text, String name, String format, @Nullable String cardPool, boolean unrestricted,
+            ImportAction action, @Nullable Integer seat, @Nullable String url, @Nullable Clash clash) {
+    }
+
+    /** A .dck file's text, saved as a deck of the format without using the importer. */
+    @Command("deckFile")
+    public record DeckFile(String text, String format, @Nullable Clash clash) {
     }
 
     @Command("reply")
@@ -89,6 +176,11 @@ public final class FromBrowser {
     /** Pays with one colour from the mana pool. color is its bit, as in the player's Mana property. */
     @Command("useMana")
     public record UseMana(byte color) {
+    }
+
+    /** How the host's generators build decks. singletons means one copy of each card. */
+    @Command("setDeckGen")
+    public record SetDeckGen(boolean singletons, boolean noArtifacts) {
     }
 
     @Command("setSetting")

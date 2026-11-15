@@ -51,6 +51,7 @@ public final class WebSession implements IHasForgeLog {
             .on(ClaimHost.class, (s, ch, c) -> s.claimHost(ch, c.password()))
             // One set of host questions serves the whole process, so only the host's browser may answer them
             .on(HostChoiceAnswer.class, host((s, ch, a) -> s.ui.hostQuestions().answer(a.id(), a.value())))
+            .on(Plain.cardSets, (s, ch, c) -> ch.send(CardCatalog.sets()))
             // Starting a match can ask host questions, so it runs on the host UI thread and never blocks a socket thread
             .on(Start.class, (s, ch, st) -> s.ui.invokeInEdtLater(() -> s.start(ch, st)))
             .on(Plain.leave, (s, ch, c) -> s.ui.invokeInEdtLater(s::leave))
@@ -268,6 +269,8 @@ public final class WebSession implements IHasForgeLog {
             }
         }
         channel.send(hello());
+        // These are the same for the whole run, so a browser gets them once instead of with every table change
+        channel.send(new Formats(LobbyFormats.choices()));
         if (isHost) {
             ui.hostQuestions().replay(channel::send);
         }
@@ -328,6 +331,22 @@ public final class WebSession implements IHasForgeLog {
                 p.gui().onCommand(channel, command);
             }
         }
+    }
+
+    /** A deck editor or importer command. A match fills the whole page, so deck commands are ignored during one. */
+    private void deckCommand(final BrowserChannel channel, final Record command) {
+        if (stage instanceof Playing) {
+            return;
+        }
+        final boolean closing = command instanceof Bare b && b.t() == Plain.editorClose && stage instanceof Event;
+        // The deck thread keeps editor saves and imports off the socket threads, in order with deck searches
+        decks.inTurn(() -> {
+            // Send the pools first, because closing the editor lists every deck again before the page changes
+            if (closing) {
+                channel.send(OfflinePools.pools());
+            }
+            DeckWorkspace.COMMANDS.run(decks, channel, command);
+        });
     }
 
     private void claimHost(final BrowserChannel channel, final String password) {
