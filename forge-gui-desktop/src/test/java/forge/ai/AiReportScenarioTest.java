@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
@@ -386,28 +385,21 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
         // Tavern Scoundrel + Krark, the Thumbless: winning the coin flip of Krark's trigger is winning a coin flip
         l.add(new Scenario("krark-tavern-scoundrel", "Krark's coin flip won: Tavern Scoundrel creates two Treasure tokens", Fid.EXACT, M1, true,
-                c -> { c.bf("Krark, the Thumbless", c.ai); c.bf("Tavern Scoundrel", c.ai); },
                 c -> {
-                    // a lost flip returns the spell to the hand, so cast it again until a flip is won (a coin never loses 40 times in a row)
-                    for (int i = 0; i < 40; i++) {
-                        c.bf("Mountain", c.ai);
-                        final Card bolt = c.hand("Lightning Bolt", c.ai);
-                        final SpellAbility sa = bolt.getFirstSpellAbility();
-                        sa.setActivatingPlayer(c.ai);
-                        sa.getTargets().add(c.opp);
-                        c.resolve(sa);
-                        final long treasures = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().startsWith("Treasure")).count();
-                        // the card that was cast and the card that comes back to the hand are different objects (a zone change
-                        // makes a new one), so the spell is looked for in the hand by name
-                        final List<Card> back = CardLists.filter(c.ai.getCardsIn(ZoneType.Hand),
-                                CardPredicates.nameEquals("Lightning Bolt"));
-                        if (back.isEmpty()) { // not bounced: the flip was won and the spell copied
-                            return treasures == 2 ? null : "the flip was won but there are " + treasures + " Treasure tokens" + c.trace;
-                        }
-                        if (treasures != 0) { return "a lost flip made " + treasures + " Treasure tokens"; }
-                        for (final Card k : back) { c.ai.getZone(ZoneType.Hand).remove(k); } // out of the way for the next try
-                    }
-                    return "no flip was won in 40 tries";
+                    c.bf("Krark, the Thumbless", c.ai);
+                    c.bf("Tavern Scoundrel", c.ai);
+                    c.bf("Edgar, King of Figaro", c.ai); // Two-Headed Coin: the first flip each turn is won, so the test is not random
+                },
+                c -> {
+                    c.bf("Mountain", c.ai);
+                    final Card bolt = c.hand("Lightning Bolt", c.ai);
+                    final SpellAbility sa = bolt.getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    sa.getTargets().add(c.opp);
+                    c.resolve(sa);
+                    final long treasures = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().startsWith("Treasure")).count();
+                    return treasures == 2 ? null : "the flip was won but there are " + treasures + " Treasure tokens" + c.trace;
                 }));
         l.add(new Scenario("5896", "a second Pithing Needle names a different card than the first", Fid.APPROX, M1, true,
                 c -> {

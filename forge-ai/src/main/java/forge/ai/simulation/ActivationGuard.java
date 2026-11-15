@@ -207,6 +207,9 @@ public final class ActivationGuard {
             return idle ? Verdict.IDLE_TARGETS : Verdict.USEFUL;
         }
         final ApiType api = node.getApi();
+        if (alreadyDone(node)) {
+            return Verdict.IDLE;
+        }
         if (api == null || node.hasParam("Defined") && api != ApiType.Sacrifice) {
             return Verdict.USEFUL;
         }
@@ -235,6 +238,50 @@ public final class ActivationGuard {
             default:
                 return Verdict.USEFUL;
         }
+    }
+
+    /** The parameters of a Pump that do more than hand out keywords (a Pump with any of them is not judged here). */
+    private static final String[] PUMP_EXTRAS = { "NumAtt", "NumDef", "RemoveKW", "KWChoice", "RandomKeyword",
+            "RandomKWNum", "DefinedKW", "DefinedLandwalk", "AtEOT", "RememberObjects", "ImprintCards", "RememberPumped",
+            "Radiance", "SharedKeywordsZone", "CanBlockAmount", "CanBlockAny", "ThisDefinedAndTgts" };
+
+    /**
+     * An effect that the game has already done to the host and that cannot be done twice:
+     * <ul>
+     *   <li>Adapt (Emperor of Bones, Sharktocrab): nothing happens while the creature has a +1/+1 counter, unless a
+     *   static ability lets it adapt anyway;</li>
+     *   <li>Monstrosity: nothing happens to a creature that is already monstrous;</li>
+     *   <li>a keyword ability ("{1}: gains flying until end of turn") when the creature has all the keywords already.</li>
+     * </ul>
+     * The activation costs mana and gains nothing, and Flat Monte Carlo cannot tell a repeat from the first.
+     */
+    static boolean alreadyDone(final SpellAbility node) {
+        final Card host = node.getHostCard();
+        if (host == null || node.usesTargeting()
+                || node.hasParam("Defined") && !"Self".equals(node.getParam("Defined"))) {
+            return false;
+        }
+        if (node.getApi() == ApiType.PutCounter) {
+            if (node.hasParam("Adapt")) {
+                return host.getCounters(CounterEnumType.P1P1) > 0
+                        && !forge.game.staticability.StaticAbilityAdapt.anyWithAdapt(node, host);
+            }
+            return node.hasParam("Monstrosity") && host.isMonstrous();
+        }
+        if (node.getApi() == ApiType.Pump && node.hasParam("KW")) {
+            for (final String extra : PUMP_EXTRAS) {
+                if (node.hasParam(extra)) {
+                    return false;
+                }
+            }
+            for (final String kw : node.getParam("KW").split(" & ")) {
+                if (!host.hasKeyword(kw)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

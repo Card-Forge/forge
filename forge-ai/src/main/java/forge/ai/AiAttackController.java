@@ -843,6 +843,10 @@ public class AiAttackController {
         List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
         List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
         List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        // not a battle whose back is a legend the AI already has (see LegalityGuard.redundantDefeat)
+        final int battleDamage = ComputerUtilCombat.totalCombatDamage(attackers);
+        prefBattleList = CardLists.filter(prefBattleList,
+                b -> !forge.ai.simulation.LegalityGuard.redundantDefeat(ai, b, battleDamage));
         if (!prefBattleList.isEmpty()) {
             // TODO try to be less predictable here, should really check if something would make the back uncastable
             return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
