@@ -230,13 +230,15 @@ public class QuestLogScene extends UIScene {
         Actor nameCell = done ? struckOut(name, DONE + quest.getName(), nameWidth, shrink) : unseenQuest ? growable(newTagged(quest, name, shrink), nameWidth) : name;
         row.add(nameCell).width(nameWidth).left().padLeft(2).padTop(-shrink / 2).padBottom(shrink * 1.5f);
         TextraLabel progress = Controls.newTextraLabel(stages == 0 ? "" : progressText(done ? DONE : INK_SOFT, completed, stages));
+        Container<TextraLabel> count = new Container<>(progress).right();
         int fresh = unseenCompleted(quest).size();
         if (animate && !done && fresh > 0) {
             progress.setText(progressText(INK_SOFT, completed - fresh, stages));
-            progress.addAction(Actions.sequence(Actions.delay(1), Actions.run(() -> progress.setText(progressText(DONE, completed, stages))),
-                    Actions.delay(1.6f), Actions.run(() -> progress.setText(progressText(INK_SOFT, completed, stages)))));
+            count.setTransform(true);
+            count.addAction(Actions.sequence(Actions.delay(1), Actions.run(() -> progress.setText(progressText(DONE, completed, stages))),
+                    grow(count, Align.right), Actions.delay(1.1f), Actions.run(() -> progress.setText(progressText(INK_SOFT, completed, stages)))));
         }
-        row.add(new Container<>(progress).right()).width(progressWidth).top().padTop(2);
+        row.add(count).width(progressWidth).top().padTop(2);
         if (!split) {
             Chevron chevron = new Chevron(INK_SOFT_COLOR, true);
             chevron.setVisible(!done);
@@ -266,7 +268,7 @@ public class QuestLogScene extends UIScene {
             public void end() {
                 name.setTypingListener(null);
                 Actor box = name.getParent().getParent();
-                box.addAction(Actions.sequence(grow(box), Actions.run(() -> {
+                box.addAction(Actions.sequence(grow(box, Align.left), Actions.run(() -> {
                     name.setText(INK + quest.getName());
                     name.skipToTheEnd();
                     NewTag tag = newTags.get(quest);
@@ -412,8 +414,8 @@ public class QuestLogScene extends UIScene {
         return box;
     }
 
-    private static Action grow(Actor actor) {
-        return Actions.sequence(Actions.run(() -> actor.setOrigin(Align.left)),
+    private static Action grow(Actor actor, int origin) {
+        return Actions.sequence(Actions.run(() -> actor.setOrigin(origin)),
                 Actions.scaleTo(1.14f, 1.14f, 0.22f, Interpolation.sineOut),
                 Actions.scaleTo(1, 1, 0.28f, Interpolation.sineIn));
     }
@@ -424,7 +426,7 @@ public class QuestLogScene extends UIScene {
         box.addAction(Actions.sequence(Actions.delay(1), Actions.run(() -> {
             label.setText(doneText);
             strike.start();
-        }), Actions.delay(0.7f), grow(box)));
+        }), Actions.delay(0.7f), grow(box, Align.left)));
         return box;
     }
 
