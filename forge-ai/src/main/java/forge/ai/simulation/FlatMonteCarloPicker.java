@@ -11,8 +11,10 @@ import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1248,7 +1250,7 @@ public final class FlatMonteCarloPicker {
             return false;
         }
         final Player owner = host.getController();
-        return !forge.game.card.CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
+        return !CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
     }
 
     /**
@@ -2120,7 +2122,7 @@ public final class FlatMonteCarloPicker {
         } else if (sa.usesTargeting() && sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
             cards.addAll(sa.getTargets().getTargetCards());
         } else if (sa.hasParam("Defined")) {
-            cards.addAll(forge.game.ability.AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
+            cards.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
         }
         if (cards.isEmpty()) {
             return false;
@@ -2162,7 +2164,7 @@ public final class FlatMonteCarloPicker {
             }
             boolean any = false;
             for (final Player opp : player.getOpponents()) {
-                for (final Card c : forge.game.card.CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield),
+                for (final Card c : CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield),
                         a.getParam("ValidCards"), sa.getHostCard().getController(), sa.getHostCard(), a)) {
                     if (!ComputerUtilCard.isHarmlessCreature(player, c)) {
                         return false;
@@ -2230,7 +2232,7 @@ public final class FlatMonteCarloPicker {
                     || kw.contains("Protection");
             if (!answers && threat == ApiType.DealDamage) {
                 try {
-                    answers = forge.game.ability.AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
+                    answers = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
                 } catch (final RuntimeException e) {
                     answers = false;
                 }
@@ -2479,8 +2481,8 @@ public final class FlatMonteCarloPicker {
                 times = Math.max(1, ComputerUtilMana.getAvailableManaEstimate(sa.getHostCard().getController())
                         / sa.getPayCosts().getTotalMana().getCMC());
             }
-            final int att = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
-            final int def = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
+            final int att = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
+            final int def = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
             // under Doran, the Siege Tower the damage is the toughness: +P does nothing and +T is the damage
             final boolean byToughness = mine.toughnessAssignsDamage();
             final int myAtt = byToughness ? def : att;
