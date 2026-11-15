@@ -2,18 +2,25 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.Font;
+import com.github.tommyettinger.textra.Line;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingAdapter;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Adventure;
 import forge.Forge;
 import forge.adventure.data.AdventureQuestData;
@@ -24,7 +31,10 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class QuestLogScene extends UIScene {
@@ -32,6 +42,8 @@ public class QuestLogScene extends UIScene {
     private static final String INK_SOFT = "[#5d5244]";
     private static final String TRACKED = "[#12808f]";
     private static final Color INK_SOFT_COLOR = new Color(0.36f, 0.32f, 0.27f, 1);
+    private static final String DONE = "[#3b8a33]";
+    private static final Color DONE_COLOR = new Color(0.23f, 0.54f, 0.2f, 1);
 
     private final Table root, detailRoot;
     private final Table listTable = new Table();
@@ -44,6 +56,9 @@ public class QuestLogScene extends UIScene {
     private final Button.ButtonStyle rowStyle = new Button.ButtonStyle(), selectedRowStyle = new Button.ButtonStyle();
     private final List<Button> rows = new ArrayList<>();
     private final Font nameFont = new Font(Controls.getTextraFont()).adjustLineHeight(0.75f);
+    private final Map<AdventureQuestData, NewTag> newTags = new HashMap<>();
+    private List<AdventureQuestData> finished = new ArrayList<>();
+    private boolean animate;
     private final boolean split;
     private AdventureQuestData selected;
     private boolean showCompleted;
@@ -93,7 +108,7 @@ public class QuestLogScene extends UIScene {
             detailScroll.setScrollY(scrollY);
             updateNavigation();
         });
-        completedLink.add(completedChevron).padRight(2);
+        completedLink.add(completedChevron).padLeft(2).padRight(2);
         if (!split) {
             detailRoot.add(backLink).left().padBottom(4);
             detailRoot.row();
@@ -134,7 +149,12 @@ public class QuestLogScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
+        List<AdventureQuestData> unseen = Current.player().getUnseenFinishedQuests();
+        finished = new ArrayList<>(unseen);
+        unseen.clear();
+        animate = true;
         buildList();
+        animate = false;
     }
 
     public void buildList() {
@@ -144,12 +164,13 @@ public class QuestLogScene extends UIScene {
             selected = split ? defaultSelection(story, side) : null;
 
         rows.clear();
+        newTags.clear();
         listTable.clear();
         listTable.top();
         if (story.isEmpty() && side.isEmpty())
             listTable.add(label(INK_SOFT + Forge.getLocalizer().getMessage("lblNoActiveQuests"), root.getWidth())).width(root.getWidth());
-        addGroup(story, "lblStoryQuests");
-        addGroup(side, "lblSideQuests");
+        addGroup(story, true, "lblStoryQuests");
+        addGroup(side, false, "lblSideQuests");
 
         root.setVisible(split || selected == null);
         detailRoot.setVisible(selected != null);
@@ -172,36 +193,58 @@ public class QuestLogScene extends UIScene {
         return shown.stream().filter(q -> q.isTracked).findFirst().orElse(shown.isEmpty() ? null : shown.get(0));
     }
 
-    private void addGroup(List<AdventureQuestData> group, String header) {
-        if (group.isEmpty())
+    private void addGroup(List<AdventureQuestData> group, boolean story, String header) {
+        List<AdventureQuestData> done = animate ? finished.stream().filter(q -> q.storyQuest == story).collect(Collectors.toList()) : new ArrayList<>();
+        if (group.isEmpty() && done.isEmpty())
             return;
-        listTable.add(label("[%80]" + INK_SOFT + Forge.getLocalizer().getMessage(header), root.getWidth() - 3))
+        TextraLabel title = label("[%80]" + INK_SOFT + Forge.getLocalizer().getMessage(header), root.getWidth() - 3);
+        listTable.add(group.isEmpty() ? fold(title, false, 2.5f) : title)
                 .width(root.getWidth() - 3).padTop(listTable.getRows() == 0 ? 0 : 6).padLeft(3);
         listTable.row();
         for (AdventureQuestData quest : group) {
-            listTable.add(questRow(quest)).expandX().fillX();
+            Button row = questRow(quest);
+            listTable.add(animate && isNew(quest) ? fold(row, true, 0.8f) : row).expandX().fillX();
+            listTable.row();
+        }
+        for (AdventureQuestData quest : done) {
+            listTable.add(fold(questRow(quest), false, 2.5f)).expandX().fillX();
             listTable.row();
         }
     }
 
     private Button questRow(AdventureQuestData quest) {
+        boolean done = finished.contains(quest);
+        boolean unseenQuest = !done && isNew(quest);
         Button row = new Button(split && quest == selected ? selectedRowStyle : rowStyle);
         row.setUserObject(quest);
         int stages = quest.stages.length;
+        int completed = done ? stages : quest.getCompletedStages().size();
         float progressWidth = 30;
         float nameWidth = root.getWidth() - progressWidth - (split ? 13 : 33);
         row.add(label(TRACKED + (quest.isTracked ? "•" : ""), 8)).width(8).top().padLeft(3);
-        TextraLabel name = Controls.newTextraLabel(INK + quest.getName(), nameFont);
+        TextraLabel name = unseenQuest && animate ? typedName(quest) : Controls.newTextraLabel(INK + quest.getName(), nameFont);
         name.setWrap(true);
         name.setWidth(nameWidth);
         // restores the first line's position and the row height after the shorter line height
         float shrink = Controls.getTextraFont().cellHeight - nameFont.cellHeight;
-        row.add(name).width(nameWidth).left().padLeft(2).padTop(-shrink / 2).padBottom(shrink * 1.5f);
-        TextraLabel progress = Controls.newTextraLabel("[%80]" + INK_SOFT + (stages == 0 ? "" : quest.getCompletedStages().size() + "/" + stages));
+        Actor nameCell = done ? struckOut(name, DONE + quest.getName(), nameWidth, shrink) : unseenQuest ? growable(newTagged(quest, name, shrink), nameWidth) : name;
+        row.add(nameCell).width(nameWidth).left().padLeft(2).padTop(-shrink / 2).padBottom(shrink * 1.5f);
+        TextraLabel progress = Controls.newTextraLabel(stages == 0 ? "" : progressText(done ? DONE : INK_SOFT, completed, stages));
+        int fresh = unseenCompleted(quest).size();
+        if (animate && !done && fresh > 0) {
+            progress.setText(progressText(INK_SOFT, completed - fresh, stages));
+            progress.addAction(Actions.sequence(Actions.delay(1), Actions.run(() -> progress.setText(progressText(DONE, completed, stages))),
+                    Actions.delay(1.6f), Actions.run(() -> progress.setText(progressText(INK_SOFT, completed, stages)))));
+        }
         row.add(new Container<>(progress).right()).width(progressWidth).top().padTop(2);
-        if (!split)
-            row.add(new Chevron(INK_SOFT_COLOR, true)).top().padTop(0.5f).padLeft(7).padRight(3);
+        if (!split) {
+            Chevron chevron = new Chevron(INK_SOFT_COLOR, true);
+            chevron.setVisible(!done);
+            row.add(chevron).top().padTop(0.5f).padLeft(7).padRight(3);
+        }
         row.pad(3, 0, 3, 0);
+        if (done)
+            return row;
         row.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -210,6 +253,55 @@ public class QuestLogScene extends UIScene {
         });
         rows.add(row);
         return row;
+    }
+
+    private static String progressText(String color, int completed, int stages) {
+        return "[%80]" + color + completed + "/" + stages;
+    }
+
+    private TypingLabel typedName(AdventureQuestData quest) {
+        TypingLabel name = new TypingLabel("{WAIT=1}" + DONE + quest.getName(), Controls.getSkin(), nameFont);
+        name.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                name.setTypingListener(null);
+                Actor box = name.getParent().getParent();
+                box.addAction(Actions.sequence(grow(box), Actions.run(() -> {
+                    name.setText(INK + quest.getName());
+                    name.skipToTheEnd();
+                    NewTag tag = newTags.get(quest);
+                    if (tag != null)
+                        tag.setVisible(true);
+                })));
+            }
+        });
+        return name;
+    }
+
+    private Stack newTagged(AdventureQuestData quest, TextraLabel name, float drop) {
+        NewTag tag = new NewTag(name, drop);
+        tag.setVisible(!animate);
+        newTags.put(quest, tag);
+        return new Stack(name, tag);
+    }
+
+    private static boolean isNew(AdventureQuestData quest) {
+        List<AdventureQuestStage> started = Arrays.stream(quest.stages)
+                .filter(stage -> stage.getStatus() != AdventureQuestController.QuestStatus.INACTIVE).collect(Collectors.toList());
+        return !started.isEmpty() && started.stream().allMatch(stage -> stage.unseen && stage.getStatus() != AdventureQuestController.QuestStatus.COMPLETE);
+    }
+
+    private static List<AdventureQuestStage> unseenCompleted(AdventureQuestData quest) {
+        return Arrays.stream(quest.stages)
+                .filter(stage -> stage.unseen && stage.getStatus() == AdventureQuestController.QuestStatus.COMPLETE).collect(Collectors.toList());
+    }
+
+    private void markSeen(AdventureQuestData quest) {
+        for (AdventureQuestStage stage : quest.stages)
+            stage.unseen = false;
+        NewTag tag = newTags.remove(quest);
+        if (tag != null)
+            tag.setVisible(false);
     }
 
     private void select(AdventureQuestData quest) {
@@ -245,6 +337,7 @@ public class QuestLogScene extends UIScene {
 
     private void fillDetails(AdventureQuestData quest) {
         float width = detailRoot.getWidth() - 4;
+        completedLink.clearActions();
         detailTable.clear();
         detailTable.top().left();
         detailTable.defaults().left().padBottom(3);
@@ -263,6 +356,17 @@ public class QuestLogScene extends UIScene {
             detailTable.add(rule).width(width).height(1).padTop(2).padBottom(5);
             detailTable.row();
         }
+        List<AdventureQuestStage> fresh = unseenCompleted(quest);
+        for (AdventureQuestStage stage : fresh) {
+            TextraLabel box = Controls.newTextraLabel(INK + "☑ ");
+            box.addAction(Actions.delay(1, Actions.run(() -> box.setText(DONE + "☑ "))));
+            float nameWidth = width - box.getPrefWidth();
+            Table line = new Table();
+            line.add(box).top();
+            line.add(struckOut(label(INK + stage.name, nameWidth), DONE + stage.name, nameWidth, 0)).top();
+            detailTable.add(fold(line, false, 2.5f)).width(width);
+            detailTable.row();
+        }
         for (AdventureQuestStage stage : quest.getActiveStages()) {
             detailTable.add(label(INK + "☐ " + stage.name, width)).width(width);
             detailTable.row();
@@ -273,10 +377,13 @@ public class QuestLogScene extends UIScene {
         }
         List<AdventureQuestStage> completed = quest.getCompletedStages();
         if (!completed.isEmpty()) {
-            completedLabel.setText(INK_SOFT + "☑ " + Forge.getLocalizer().getMessage("lblCompletedStages", completed.size()));
+            int seen = completed.size() - fresh.size();
+            setCompletedCount(seen > 0 ? seen : completed.size());
             completedChevron.up = showCompleted;
             completedLink.invalidateHierarchy();
-            detailTable.add(completedLink).padLeft(-2);
+            if (seen > 0 && !fresh.isEmpty())
+                completedLink.addAction(Actions.delay(2.8f, Actions.run(() -> setCompletedCount(completed.size()))));
+            detailTable.add(seen == 0 && !fresh.isEmpty() ? fold(completedLink, true, 2.8f) : completedLink).padLeft(-2);
             detailTable.row();
         }
         if (showCompleted) {
@@ -290,6 +397,41 @@ public class QuestLogScene extends UIScene {
         updateTrackButton(quest.isTracked);
         trackButton.setVisible(true);
         abandonButton.setVisible(!quest.storyQuest);
+        markSeen(quest);
+    }
+
+    private void setCompletedCount(int count) {
+        completedLabel.setText(INK_SOFT + "☑ " + Forge.getLocalizer().getMessage("lblCompletedStages", count));
+        // setText only measures the text roughly until the label is drawn
+        completedLabel.getFont().calculateSize(completedLabel.layout);
+    }
+
+    private static Container<Actor> growable(Actor content, float width) {
+        Container<Actor> box = new Container<>(content).width(width).left();
+        box.setTransform(true);
+        return box;
+    }
+
+    private static Action grow(Actor actor) {
+        return Actions.sequence(Actions.run(() -> actor.setOrigin(Align.left)),
+                Actions.scaleTo(1.14f, 1.14f, 0.22f, Interpolation.sineOut),
+                Actions.scaleTo(1, 1, 0.28f, Interpolation.sineIn));
+    }
+
+    private static Container<Actor> struckOut(TextraLabel label, String doneText, float width, float drop) {
+        Strike strike = new Strike(label, drop);
+        Container<Actor> box = growable(new Stack(label, strike), width);
+        box.addAction(Actions.sequence(Actions.delay(1), Actions.run(() -> {
+            label.setText(doneText);
+            strike.start();
+        }), Actions.delay(0.7f), grow(box)));
+        return box;
+    }
+
+    private static Fold fold(Actor content, boolean opening, float delay) {
+        Fold fold = new Fold(content, !opening);
+        fold.addAction(Actions.delay(delay, Actions.run(() -> fold.setOpen(opening))));
+        return fold;
     }
 
     private TextraLabel label(String text, float width) {
@@ -409,6 +551,112 @@ public class QuestLogScene extends UIScene {
                     batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + row * PX, PX, (7 - row * 2) * PX);
                 else
                     batch.draw(Forge.getAssets().getWhiteTexture(), getX() + row * PX, getY() + bob() + (up ? row : 3 - row) * PX, (7 - row * 2) * PX, PX);
+            }
+            batch.setPackedColor(packed);
+        }
+    }
+
+    private static class Fold extends Container<Actor> {
+        private float open, target;
+        private boolean opening;
+
+        Fold(Actor content, boolean open) {
+            super(content);
+            fillX().top();
+            setClip(true);
+            this.open = target = open ? 1 : 0;
+            getColor().a = this.open;
+        }
+
+        void setOpen(boolean open) {
+            target = open ? 1 : 0;
+            opening = open;
+        }
+
+        @Override
+        public void act(float delta) {
+            super.act(delta);
+            if (open == target)
+                return;
+            open = MathUtils.clamp(open + Math.signum(target - open) * delta / 0.45f, 0, 1);
+            getColor().a = open;
+            invalidateHierarchy();
+            // UIScene scrolls to a selected actor by its own position, which only works for a direct child of the table
+            if (opening && open == 1 && getParent() instanceof Table)
+                ((Table) getParent()).getCell(this).setActor(getActor());
+        }
+
+        @Override
+        public float getPrefHeight() {
+            return super.getPrefHeight() * open;
+        }
+
+        @Override
+        public float getMinHeight() {
+            return 0;
+        }
+    }
+
+    private static class NewTag extends WidgetGroup {
+        private final TextraLabel name;
+        private final float drop;
+        private final TypingLabel tag = Controls.newTypingLabel("{WAVE}{STYLE=SHADOW}{COLOR=LIME}[%85]" + Forge.getLocalizer().getMessage("lblNew"));
+
+        NewTag(TextraLabel name, float drop) {
+            this.name = name;
+            this.drop = drop;
+            tag.skipToTheEnd();
+            addActor(tag);
+            setTouchable(Touchable.disabled);
+        }
+
+        @Override
+        public void layout() {
+            tag.pack();
+            float bottom = getHeight() - drop;
+            float width = 0;
+            for (int i = 0; i < name.layout.lines(); i++) {
+                Line line = name.layout.getLine(i);
+                bottom -= line.height;
+                width = line.width;
+            }
+            tag.setPosition(width + 4, bottom + 2);
+        }
+    }
+
+    private static class Strike extends Actor {
+        private final TextraLabel label;
+        private final float drop;
+        private float progress = -1;
+
+        Strike(TextraLabel label, float drop) {
+            this.label = label;
+            this.drop = drop;
+            setTouchable(Touchable.disabled);
+        }
+
+        void start() {
+            progress = 0;
+        }
+
+        @Override
+        public void act(float delta) {
+            super.act(delta);
+            if (progress >= 0)
+                progress = Math.min(1, progress + delta / 0.45f);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            if (progress <= 0)
+                return;
+            float packed = batch.getPackedColor();
+            batch.setColor(DONE_COLOR.r, DONE_COLOR.g, DONE_COLOR.b, parentAlpha);
+            float top = getY() + getHeight() - drop;
+            for (int i = 0; i < label.layout.lines(); i++) {
+                Line line = label.layout.getLine(i);
+                top -= line.height;
+                batch.draw(Forge.getAssets().getWhiteTexture(), getX(), top + line.height * 0.45f, line.width * progress, 1);
             }
             batch.setPackedColor(packed);
         }
