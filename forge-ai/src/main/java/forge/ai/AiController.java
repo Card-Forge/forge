@@ -2224,6 +2224,10 @@ public class AiController {
         }
         if (flatMc && game.getStack().isEmpty()) {
             // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
+            final SpellAbility evasion = FlatMonteCarloPicker.sureEvasion(player, saList);
+            if (evasion != null) {
+                return evasion; // menace, fear... for an attacker that the blockers would stop: the last moment before they are declared
+            }
             final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
             if (sureStifle != null) {
                 return sureStifle;
@@ -2419,6 +2423,11 @@ public class AiController {
             extras.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
             approved.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
             approved.removeIf(FlatMonteCarloPicker::grantsBlockingKeyword); // too late to block with it
+        }
+        if (game.getStack().isEmpty() && (mode == FlatMonteCarloPicker.Mode.RESPOND || mode == FlatMonteCarloPicker.Mode.BLOCKED)) {
+            // deathtouch, first strike, indestructible... for a creature that is not in the fight
+            extras.removeIf(sa -> FlatMonteCarloPicker.pointlessKeywordTrick(player, sa));
+            approved.removeIf(sa -> FlatMonteCarloPicker.pointlessKeywordTrick(player, sa));
         }
         final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
         FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
@@ -2893,6 +2902,7 @@ public class AiController {
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !(afterBlocks && FlatMonteCarloPicker.isCombatTrick(sa))
                 && !FlatMonteCarloPicker.enablesGoodBlock(player, sa)
+                && !FlatMonteCarloPicker.enablesEvasion(player, sa)
                 && !FlatMonteCarloPicker.isSavingPlay(player, sa)
                 && !isRemoveDeckManaPermanent(sa)
                 && !isRemoveDeckCostReductionPermanent(sa)
