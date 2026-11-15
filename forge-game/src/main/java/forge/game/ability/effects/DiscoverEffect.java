@@ -41,7 +41,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
         final PlayerCollection players = getDefinedPlayersOrTargeted(sa);
         final String verb = players.size() == 1 ? " discovers " : " discover ";
 
-        return Lang.joinHomogenous(players) + verb + sa.getParamOrDefault("Num", "1") + ".";
+        return Lang.joinHomogenous(players) + verb + AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("Num", "1"), sa) + ".";
     }
 
     @Override

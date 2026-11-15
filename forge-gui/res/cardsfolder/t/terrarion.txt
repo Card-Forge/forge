@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-AI:RemoveDeck:All
 Oracle:Terrarion enters tapped.\n{2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors.\nWhen Terrarion is put into a graveyard from the battlefield, draw a card.

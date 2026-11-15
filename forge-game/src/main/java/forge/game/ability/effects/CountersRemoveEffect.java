@@ -55,7 +55,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         if (amount != 1) {
             sb.append("s");
         }
-        sb.append(" from");
+        sb.append(" from ");
 
         sb.append(Lang.joinHomogenous(getTargetCards(sa)));
 

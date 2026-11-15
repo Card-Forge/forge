@@ -135,7 +135,7 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            CardCollection viable = ComputerUtilCard.filterOutFatalCopies(targets, sa.getActivatingPlayer());
+            CardCollection viable = ComputerUtilCard.filterOutFatalCopies(targets, sa.getActivatingPlayer(), false);
             if (!viable.isEmpty()) {
                 targets = viable;
             } else if (!mandatory) {

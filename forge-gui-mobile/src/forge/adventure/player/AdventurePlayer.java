@@ -75,6 +75,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final HashMap<String, Long> equippedItems = new HashMap<>();
     private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
+    private final List<AdventureQuestData> unseenFinishedQuests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
     private final Predicate<PaperCard> isUnsupported = pc -> pc != null && pc.getRules() != null && pc.getRules().isUnsupported();
@@ -137,6 +138,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
+        unseenFinishedQuests.clear();
         events.clear();
         cards.clear();
         statistic.clear();
@@ -651,6 +653,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     quests.add((AdventureQuestData) itsReallyAQuest);
             }
         }
+        if (data.containsKey("unseenFinishedQuests")) {
+            Object[] q = (Object[]) data.readObject("unseenFinishedQuests");
+            if (q != null) {
+                for (Object quest : q)
+                    unseenFinishedQuests.add((AdventureQuestData) quest);
+            }
+        }
         if (data.containsKey("events")) {
             events.clear();
             Object[] q = (Object[]) data.readObject("events");
@@ -922,6 +931,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("questFlagsKey", questFlagsKey.toArray(new String[0]));
         data.storeObject("questFlagsValue", questFlagsValue.toArray(new Byte[0]));
         data.storeObject("quests", quests.toArray());
+        data.storeObject("unseenFinishedQuests", unseenFinishedQuests.toArray());
         data.storeObject("events", events.toArray());
 
         data.storeObject("deckCards", deck.getMain().toCardList("\n").split("\n"));
@@ -1611,6 +1621,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void removeQuest(AdventureQuestData quest) {
         quests.remove(quest);
+    }
+
+    public List<AdventureQuestData> getUnseenFinishedQuests() {
+        return unseenFinishedQuests;
     }
 
     /**

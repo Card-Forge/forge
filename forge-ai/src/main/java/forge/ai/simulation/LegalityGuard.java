@@ -11,6 +11,7 @@ import forge.game.card.CardLists;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -213,6 +214,43 @@ public final class LegalityGuard {
         } catch (final RuntimeException e) {
             return false;
         }
+    }
+
+    // ------------------------------------------------------------------------------------------ defeating a battle
+
+    /**
+     * Attacking a battle of the AI's own that it can defeat now, when what it turns into is a legendary permanent that
+     * the AI already controls (Invasion of Ikoria while Zilortha, Apex of Ikoria is in play; Fiora, Kaladesh, Segovia,
+     * Theros, Ulgrotha): the second one only goes to the legend rule. Fine when the legend in play does nothing (it can
+     * neither attack nor block: Pacifism, a stun counter), and when the attack cannot take the last defense counter.
+     * A Planeswalker back (Invasion of New Phyrexia) is left to the usual rules: a new one with more loyalty is a plan.
+     *
+     * @param damage the combat damage the AI can attack the battle with
+     */
+    public static boolean redundantDefeat(final Player ai, final Card battle, final int damage) {
+        try {
+            if (battle == null || !battle.isBattle() || damage < battle.getCounters(CounterEnumType.DEFENSE)) {
+                return false;
+            }
+            final forge.game.card.CardState back = battle.getAlternateState();
+            if (back == null || !back.getType().isLegendary() || back.getType().isPlaneswalker()) {
+                return false;
+            }
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (c != battle && back.getName().equals(c.getName()) && !doesNothing(c)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** A creature that can neither attack nor block for the time being. */
+    private static boolean doesNothing(final Card c) {
+        return c.isCreature() && (c.getCounters(CounterEnumType.STUN) > 0
+                || c.hasKeyword("CARDNAME can't attack or block."));
     }
 
     // ------------------------------------------------------------------------------------------ a second copy
