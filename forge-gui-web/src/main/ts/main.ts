@@ -103,6 +103,14 @@ const actions = {
     wire.answerHostChoice(id, value);
     schedule();
   },
+  commitImport: c => {
+    model.nameTaken = null;
+    wire.commitImport(c);
+  },
+  addDeckFile: (text, format, clash) => {
+    model.nameTaken = null;
+    wire.addDeckFile(text, format, clash);
+  },
 } as Actions;
 
 // A change made inside a view transition must draw at once, so it does not start a slide of its own
@@ -284,6 +292,30 @@ function apply(msg: ServerMessage): void {
         void listDeviceDecks().then(decks => actions.deviceDecks(decks));
       }
       break;
+    case 'editor':
+      // When the editor closes on a pool's deck, the pools are requested again, because the new deck changes them
+      if (!msg.state && model.editor && model.screen === 'event') wire.limitedOpen(model.eventKind ?? 'sealed', false);
+      model.editor = msg.state ?? null;
+      break;
+    // Scrolling requests the next page of the same query. That page is appended to the rows already shown
+    case 'catalogue':
+      if (msg.request !== asked.catalogue) return;
+      model.catalogue = msg.offset > 0 && model.catalogue ? { ...msg, rows: [...model.catalogue.rows, ...msg.rows] } : msg;
+      break;
+    case 'importResult':
+      if (msg.request !== asked.import) return;
+      model.importResult = msg;
+      break;
+    case 'nameTaken': model.nameTaken = msg.name; break;
+    case 'formats': model.formats = msg.formats; break;
+    case 'cardSets': model.cardSets = msg.sets; break;
+    case 'decks':
+      model.decks = msg.decks;
+      model.deckCardPool = msg.cardPool ?? null;
+      model.deckGen = msg.deckGen ?? null;
+      break;
+    case 'deckDetails': model.deckDetails = msg.deck; break;
+    case 'deckMatches': model.deckMatches = { ...model.deckMatches, [msg.kind]: msg }; break;
     case 'hostChoice': model.hostChoice = msg; break;
     case 'error':
       // A stored name can belong to someone else on this server. It is forgotten so the player is asked for another
@@ -344,6 +376,7 @@ function apply(msg: ServerMessage): void {
     case 'notice': showNotice(msg); break;
     case 'devState': model.devState = msg; break;
     case 'devDump': saveText(msg.text, 'game-state.txt', 'text/plain'); return;
+    case 'deckFileText': saveText(msg.text, `${msg.name}.dck`, 'text/plain'); return;
     case 'flash': flash(); return;
     case 'pictureReady': pictureArrived(msg.key, msg.art); break;
   }

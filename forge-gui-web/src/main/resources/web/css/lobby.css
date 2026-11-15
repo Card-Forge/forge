@@ -105,6 +105,10 @@ html[data-motion="reduced"] .wait-card.joining .wait-mark { animation: none; }
 .setup-aside { display: flex; align-items: center; gap: 10px; }
 .setup-sub { margin: -2px 0 0; font-size: 13px; color: var(--muted); }
 button.ghost { background: none; border-color: transparent; color: var(--muted); }
+.dk-star { flex: none; width: 22px; text-align: center; font-size: 15px; line-height: 1; color: var(--faint); cursor: pointer; }
+.dk-star:hover { color: var(--text); }
+.dk-star.on { color: var(--accent-2); }
+.dk-star.blank { cursor: auto; }
 button.ghost:hover { color: var(--text); background: var(--surface-2); }
 /* On the start page, the trail and question are placed above the plaques, at the same width as the chooser after it */
 .start-step { display: grid; gap: 14px; width: min(100%, 920px); }
@@ -196,6 +200,200 @@ html[data-way] :is(.modes .mode, .kind-card).plaque { animation-duration: 0s; an
 /* As tall as a text button, so a header is the same height with or without its Back button */
 .page-head .head-right { min-height: 34px; }
 
+.finder-back, .sleeves-back { position: fixed; inset: 0; background: var(--scrim); display: grid; place-items: center; z-index: 60; }
+.finder, .sleeves { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; width: min(1500px, 94vw); height: min(880px, 92vh); display: grid; grid-template-rows: auto 1fr auto; }
+.finder-head, .sleeves-head, .imp-head { display: flex; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+.finder-head h2, .sleeves-head h2, .imp-head h2 { margin: 0; font-size: 17px; }
+.finder-head .dk-close, .sleeves-head .dk-close, .imp-head .dk-close { margin-left: auto; }
+.finder-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--line); }
+
+.finder-body { display: grid; grid-template-columns: 230px 560px minmax(0, 1fr); min-height: 0; }
+.rail { display: flex; flex-direction: column; gap: 18px; padding: 16px 12px; border-right: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 80%, var(--bg)); overflow-y: auto; scrollbar-width: thin; min-height: 0; }
+.rail section { display: flex; flex-direction: column; gap: 2px; }
+.rail h4 { margin: 0 0 6px; padding: 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rail .source { display: flex; justify-content: space-between; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border: 0; border-radius: 6px; background: none; text-align: left; }
+.rail .source:hover { background: var(--surface-2); }
+.rail .source[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-2); box-shadow: inset 2px 0 0 var(--accent-2); }
+.rail .dk-count { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.net-cats { display: flex; flex-direction: column; gap: 2px; margin-left: 12px; padding-left: 6px; border-left: 2px solid var(--line); }
+.net-cats .source { height: 28px; font-size: 13px; }
+.net-cats .get-net { align-self: flex-start; height: 28px; padding: 0 12px; border: 1px dashed var(--line-bright); border-radius: 14px; background: none; color: var(--muted); font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+/* In landscape, the deck finder shows the list next to the chosen deck. The sources become tabs across the top. The buttons are placed under the deck they act on. Each row takes only the height it needs, and the list takes the rest. */
+html:not([data-form="portrait"]) .finder:has(.rail) { grid-template-columns: minmax(0, 1fr) clamp(440px, 42%, 600px); grid-template-rows: auto auto minmax(0, 1fr) auto; }
+html:not([data-form="portrait"]) .finder:has(.rail) > .finder-head { grid-column: 1 / -1; border-bottom: 0; padding-bottom: 4px; }
+html:not([data-form="portrait"]) .finder:has(.rail) > .finder-body { display: contents; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail { grid-column: 1 / -1; flex-direction: row; gap: 0; padding: 0 12px; border-right: 0; border-bottom: 1px solid var(--line); background: none; overflow-x: auto; overflow-y: hidden; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail section { flex: 1; flex-flow: row wrap; align-items: center; gap: 0 2px; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail h4 { display: none; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail .source { flex: none; height: 38px; gap: 6px; border-radius: 0; border-bottom: 2px solid transparent; color: var(--muted); white-space: nowrap; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail .source:hover { background: none; color: var(--text); }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail .source[aria-pressed="true"] { background: none; box-shadow: none; color: var(--accent-2); border-bottom-color: var(--accent-2); }
+/* A tab's count is drawn as a badge, so it reads as a number and not as part of the tab's name */
+html:not([data-form="portrait"]) .finder:has(.rail) .rail section > .source .dk-count { min-width: 12px; padding: 0 6px; border-radius: 9px; background: var(--surface-2); font-size: 11px; font-weight: 600; line-height: 18px; text-align: center; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail section > .source[aria-pressed="true"] .dk-count { background: var(--accent-soft); color: var(--accent-2); }
+/* Net decks have their own categories. When net decks are listed, the categories take a row under the tabs. */
+html:not([data-form="portrait"]) .finder:has(.rail) .net-cats { order: 1; flex: 0 0 100%; flex-flow: row wrap; gap: 6px; margin: 0; padding: 8px 10px; border-left: 0; border-top: 1px solid var(--line); }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail .net-cats .source { height: 28px; padding: 0 11px; border: 1px solid var(--line); border-radius: 14px; font-size: 12.5px; }
+html:not([data-form="portrait"]) .finder:has(.rail) .rail .net-cats .source[aria-pressed="true"] { border-color: var(--accent-2); background: var(--accent-soft); }
+html:not([data-form="portrait"]) .finder:has(.rail) .results { grid-column: 1; grid-row: 3; }
+html:not([data-form="portrait"]) .finder:has(.rail) .finder-actions { grid-column: 1; grid-row: 4; }
+html:not([data-form="portrait"]) .finder:has(.rail) .dk-chosen { grid-column: 2; grid-row: 3; }
+html:not([data-form="portrait"]) .finder:has(.rail) > .finder-foot { grid-column: 2; grid-row: 4; flex-wrap: wrap; }
+.results { display: grid; grid-template-rows: auto auto auto minmax(0, 1fr); gap: 10px; padding: 14px; border-right: 1px solid var(--line); min-height: 0; }
+/* The list and the chosen deck are separate boxes on the dialog's background, as in the draft. Each box is its content over its buttons */
+html:not([data-form="portrait"]) .finder:has(.rail) { column-gap: 16px; background: var(--bg); }
+html:not([data-form="portrait"]) .finder:has(.rail) :is(.results, .dk-chosen, .finder-actions, .finder-foot) { background: var(--surface); border: 1px solid var(--line); }
+html:not([data-form="portrait"]) .finder:has(.rail) :is(.results, .dk-chosen) { margin-top: 14px; border-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+html:not([data-form="portrait"]) .finder:has(.rail) :is(.finder-actions, .finder-foot) { margin-bottom: 18px; border-radius: 0 0 12px 12px; }
+html:not([data-form="portrait"]) .finder:has(.rail) :is(.results, .finder-actions) { margin-left: 18px; }
+html:not([data-form="portrait"]) .finder:has(.rail) :is(.dk-chosen, .finder-foot) { margin-right: 18px; }
+.finder-find { display: flex; align-items: center; gap: 8px; }
+.finder-find .find { flex: 1; min-width: 0; }
+.finder-find .select:has(> .sort-by) { align-self: stretch; }
+/* The Net decks tab explains net decks while none are downloaded, and offers the download there */
+.net-empty { display: grid; justify-items: center; gap: 10px; padding: 48px 24px; text-align: center; }
+.net-empty h3 { margin: 0; color: var(--text); font-size: 16px; }
+.net-empty p { margin: 0; max-width: 380px; }
+.find { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; color: var(--text); font: inherit; }
+.random { display: flex; align-items: center; gap: 7px; border-color: var(--accent-2); background: var(--accent-soft); color: var(--accent-2); font-weight: 600; white-space: nowrap; }
+.random svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+.random svg circle { fill: currentColor; stroke: none; }
+.dk-hits { overflow: auto; display: grid; align-content: start; }
+
+.dk-hit { min-width: 0; display: flex; align-items: center; gap: 10px; text-align: left; background: none; border: 0; border-left: 3px solid transparent; border-bottom: 1px solid color-mix(in srgb, var(--text) 4%, transparent); border-radius: 0; padding: 9px 10px; }
+.dk-hit:nth-child(even) { background: color-mix(in srgb, var(--text) 3%, transparent); }
+.dk-hit:hover { background: var(--surface-2); }
+.dk-hit[aria-pressed="true"] { background: var(--accent-soft); border-left-color: var(--accent-2); }
+/* The name takes the free width, so the colour pips after it line up in their own column */
+.dk-hit-title { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.dk-hit-title .pips { flex: none; width: 88px; }
+.dk-hit-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dk-hit-title .pip { width: 16px; height: 16px; }
+.tag { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.dk-hit .tag { flex: none; width: 84px; text-align: right; }
+/* A tag that shows the deck is being chosen for a computer player. This matters because it changes which decks are good choices. */
+.finder-head .for-ai { display: inline-flex; align-items: center; gap: 6px; margin-left: 12px; padding: 2px 10px 2px 7px; border: 1px solid var(--line-bright); border-radius: 99px; color: var(--muted); font-size: 12px; }
+:is(.for-ai, .ai-skips-tag, .ai-skips-note) svg { flex: none; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* A deck with cards the computer will not play gets a text tag next to the robot icon. So the amber colour is never the only sign. */
+.dk-hit .ai-skips-tag { flex: none; display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px 1px 6px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent); background: color-mix(in srgb, var(--danger) 10%, transparent); color: var(--danger); font-size: 11.5px; font-weight: 650; white-space: nowrap; }
+.dk-hit.ai-poor .dk-hit-name { color: var(--muted); }
+.ai-skips-note { margin: 0; padding: 9px 12px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent); background: color-mix(in srgb, var(--danger) 8%, transparent); display: grid; gap: 3px; font-size: 13px; }
+.ai-skips-note b { display: flex; align-items: center; gap: 7px; }
+.ai-skips-note b svg { color: var(--danger); }
+.ai-skips-note span { color: var(--muted); }
+/* Legal and illegal decks differ by word, font weight and a ! mark, as well as by colour */
+.legal { flex: none; min-width: 66px; text-align: right; font-size: 11px; font-weight: 600; }
+.legal.yes { color: var(--faint); font-weight: 400; }
+.legal.no { color: var(--danger); }
+.legal.no::before { content: '!'; display: inline-block; width: 13px; height: 13px; margin-right: 4px; border-radius: 50%; background: var(--danger); color: var(--bg); font-size: 10px; line-height: 13px; text-align: center; }
+
+.dk-chosen { display: grid; grid-template-rows: auto 1fr; min-height: 0; }
+.dk-chosen-head { padding: 14px 18px; border-bottom: 1px solid var(--line); }
+/* A coloured deck's head is tinted as the card preview tints its rules text, running from the deck's first colour to its last */
+.dk-banner:not(.bare) { margin: -14px -18px 10px; padding: 14px 18px 10px; border-bottom: 1px solid color-mix(in srgb, var(--tint-a) 45%, transparent);
+  background: linear-gradient(165deg, color-mix(in srgb, var(--tint-a) 40%, #1b2029), color-mix(in srgb, var(--tint-b) 16%, #0d1016)); }
+.dk-banner:not(.bare) .sizes { color: var(--text); }
+.dk-chosen-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.dk-chosen-title h3 { margin: 0; min-width: 0; }
+.dk-chosen-title .seg { flex: none; }
+.dk-chosen-title .seg button { padding: 2px 9px; font-size: 11.5px; }
+.verdict { margin: 0; font-size: 13px; }
+.verdict.yes { color: var(--muted); }
+
+/* A Commander deck's bracket, shown as a small mark in lists and on seats. It is a bronze medal, so it is not mistaken for a count or a deck size */
+.bracket-mark, .bnum { --bronze: linear-gradient(180deg, #f0c493 0%, #c98a52 48%, #9a5f2f 100%);
+  background: var(--bronze); color: #2b1608; border: 1px solid #5c3416; box-shadow: inset 0 1px 0 #ffe3c288, 0 1px 2px #0008; }
+.bracket-mark { display: inline-grid; place-items: center; min-width: 21px; height: 19px; padding: 0 5px; border-radius: 6px; flex: none;
+  font: 800 11.5px ui-monospace, Consolas, monospace; }
+/* In the deck panel, the bracket is one row. It expands to show the cards behind each reason. */
+.bracket { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); padding: 7px 9px; display: grid; gap: 8px; }
+.bracket-sum { all: unset; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 6px; }
+.bracket-sum:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.bnum { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; flex: none; font: 800 17px ui-monospace, Consolas, monospace; }
+.bmid { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.bline { display: flex; gap: 6px; align-items: baseline; }
+.bline b { font-size: 13px; }
+.bline span { font-size: 11.5px; color: var(--muted); }
+.bwhy { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bsteps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; width: 64px; flex: none; }
+.bsteps i { height: 5px; border-radius: 3px; background: var(--surface-2); }
+.bsteps i.on { background: color-mix(in srgb, var(--accent-2) 70%, transparent); }
+.bsteps i.mark { background: var(--accent-2); }
+.bracket-sum .chev { width: 15px; height: 15px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s ease; }
+.bracket-sum[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.bracket-more { display: grid; gap: 6px; padding-top: 6px; border-top: 1px solid var(--line); }
+.bracket-more .reason { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 6px 8px; border-radius: 7px; background: var(--surface-2); }
+.bracket-more .reason b { font-size: 12.5px; }
+.bracket-more .to { font-size: 10.5px; font-weight: 700; color: var(--accent-2); align-self: center; }
+.bracket-more .cards { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.bracket-more .clearline { margin: 0; font-size: 11.5px; color: var(--muted); }
+/* A game changer card, highlighted in the deck's list */
+.dk-line.changer { background: color-mix(in srgb, var(--accent-2) 9%, transparent); }
+.dk-line .gc { margin-left: auto; font: 700 9.5px ui-monospace, Consolas, monospace; color: var(--accent-2); }
+.verdict.no { color: var(--danger); }
+.dk-cards { overflow: auto; padding: 14px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; align-content: start; }
+/* The chosen deck shown as card stacks, as in the editor (editor.css). The stacks are for viewing only. */
+.dk-cards.deck-cols { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px 10px; }
+.dk-cards .deck-stack { cursor: default; }
+.deck-stack .gc { position: absolute; left: 4px; top: 4px; padding: 0 5px; border-radius: 999px; background: #000c; font: 700 9.5px/15px ui-monospace, Consolas, monospace; color: var(--accent-2); }
+/* The board's rows also have groups, which this spacing is not for */
+.group:not(:where(#match *)) { margin-bottom: 14px; }
+.group h4 { display: flex; justify-content: space-between; margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+/* A lighter count keeps it from reading as part of the next column's name */
+.group h4 > span:last-child:not(.hn) { color: color-mix(in srgb, var(--muted) 50%, var(--text)); }
+.none { color: var(--muted); padding: 18px; }
+
+@media (max-width: 1200px) {
+  .dk-cards { grid-template-columns: 1fr; }
+}
+
+.count-row { display: flex; gap: 10px; align-items: center; }
+.count-row .shown { flex: 1; }
+.count-row .select-button, :is(.fbar, .finder-find, .tool-line) .sort-by { font-size: 13px; }
+
+/* One strip of colour pips. With none selected, every deck is shown. Selecting some dims the unselected pips. */
+.colours { display: flex; gap: 2px; margin: 0 10px; padding: 3px; background: var(--bg); border: 1px solid var(--line); border-radius: 9px; align-self: flex-start; }
+.colour { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 6px; background: none; }
+.colour[aria-pressed="true"] { background: var(--surface-3); box-shadow: inset 0 0 0 1px var(--accent-2); }
+.colours:has([aria-pressed="true"]) .colour[aria-pressed="false"] .pip { opacity: .38; }
+
+/* A pip is the colour's mana symbol. Its shape shows which colour it is, so colour identity does not depend on hue alone. */
+.pip { display: inline-block; width: 17px; height: 17px; border-radius: 50%; }
+.pips { display: inline-flex; gap: 2px; vertical-align: middle; }
+
+.shown { margin: 0; color: var(--faint); font-size: 12px; }
+.dk-hit .size { flex: none; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; width: 46px; text-align: right; }
+.dk-hit .legal { flex: none; width: 64px; text-align: right; }
+
+.sizes { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.stats { display: grid; grid-template-columns: auto 1fr; gap: 18px; margin-top: 12px; }
+.curve h4, .types h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.bars { display: flex; align-items: flex-end; gap: 4px; }
+.bars .bar { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 22px; gap: 3px; }
+/* Each bar shows permanents in brass below instants and sorceries in pale steel (deckview.tsx). The two colours differ in lightness as well as hue. */
+.bars .bar .stack { width: 100%; display: flex; flex-direction: column; border-radius: 3px 3px 1px 1px; overflow: hidden; }
+.bars .bar .stack.empty { background: var(--surface-3); }
+.bars .bar .stack i { display: block; width: 100%; flex-basis: 0; }
+.bars .permanent, .curve-key .permanent { background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 55%, #fff), var(--accent-2)); }
+.bars .spell, .curve-key .spell { background: #6f86a8; }
+.curve-key { display: flex; gap: 10px; margin-top: 5px; font-size: 10px; color: var(--muted); }
+.curve-key i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.bars .bar em { font-style: normal; font-size: 10px; color: var(--muted); }
+.types { display: grid; align-content: start; gap: 1px; }
+.types .type { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+.types .type b { color: var(--text); font-variant-numeric: tabular-nums; }
+.types .type.avg { margin-top: 4px; }
+
+.dk-line { display: flex; gap: 8px; font-size: 13px; padding: 1px 0; cursor: default; }
+.dk-line:hover { background: var(--surface-2); }
+.dk-line .n { color: var(--muted); min-width: 16px; text-align: right; }
+
+.finder { position: relative; }
+
+.deck-formats { margin: 2px 0 0; color: var(--faint); font-size: 12px; }
+
+.dk-hit .note { flex: none; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; color: var(--muted); font-size: 12px; }
+
 /* A question that blocks the host until it is answered, so it is drawn above every other dialog */
 .host-back { position: fixed; inset: 0; background: rgba(6, 8, 12, .75); display: grid; place-items: center; z-index: 80; }
 .host-choice { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; width: min(520px, 92vw); display: grid; gap: 12px; }
@@ -209,6 +407,27 @@ html[data-way] :is(.modes .mode, .kind-card).plaque { animation-duration: 0s; an
 .menu-note { color: var(--muted); min-height: 1.2em; max-width: 520px; text-align: center; }
 /* A failure note is marked by bold text and a side bar, not by colour alone */
 .menu-note.bad { color: var(--text); font-weight: 600; border-left: 3px solid var(--danger); padding-left: 8px; text-align: left; }
+
+.finder-head .head-tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.finder-head .legality { margin-left: 16px; }
+.select:has(> .source-pick) { display: none; }
+.finder-actions { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+.finder-foot .delete-deck { margin-right: auto; color: var(--danger); }
+/* Delete asks for confirmation once, in the footer, because the finder is already a dialog */
+.finder-foot :is(.delete-line, .linked-line) { margin-right: auto; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12.5px; }
+.finder-foot .delete-line b { color: var(--text); }
+.finder-foot .danger { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, var(--line)); }
+.dialog.new-deck { width: min(92vw, 440px); gap: 16px; }
+.new-deck section { display: grid; gap: 8px; }
+.new-deck h4 { margin: 0; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-2); }
+.new-deck p { margin: 0; font-size: 12.5px; color: var(--muted); }
+.new-deck .linkfield { margin: 0; }
+.new-deck .way { display: flex; align-items: center; gap: 12px; padding: 10px 12px; text-align: left; border-radius: 8px; }
+.new-deck .way:hover, .new-deck .way:focus-visible { border-color: var(--accent-2); background: var(--accent-soft); }
+.new-deck .way svg { flex: none; width: 22px; height: 22px; stroke: var(--accent-2); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.new-deck .way span { display: grid; flex: 1; min-width: 0; }
+.new-deck .way small { color: var(--muted); font-size: 12.5px; }
+.new-deck .way::after { content: "\203A"; color: var(--faint); }
 
 .page-head .wordmark-block { justify-items: start; }
 .icon-button { width: 32px; height: 30px; padding: 0; display: grid; place-items: center; }

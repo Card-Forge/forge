@@ -26,6 +26,7 @@ export interface Model {
   /** The page the server shows the browser. 'opening' means a seat is being taken, between the menu and the table. */
   screen: Screen;
   playerName: string;
+  decks: DeckSummary[];
   error: string | null;
   host: boolean;
   canClaimHost: boolean;
@@ -38,6 +39,14 @@ export interface Model {
   playerDetails: Map<number, PlayerDetail>;
   /** The options for a right-click on a stack item, from the server's last answer. */
   stackMenu: StackMenu | null;
+  /** The host's deck generator settings. It is null for a guest, who cannot change them. */
+  deckGen: DeckGenOptions | null;
+  /** The card pool the lobby limits decks to. The deck finder pins it as a filter. */
+  deckCardPool: string | null;
+  /** The deck last requested, with its card list and statistics. */
+  deckDetails: DeckDetails | null;
+  /** The server's last deck search result for each kind of card or set filter, with the search words. */
+  deckMatches: Partial<Record<string, DeckMatches>>;
   /** A question outside a match that the host is waiting for an answer to. */
   hostChoice: HostChoice | null;
   /** This browser has sent its saved name to the server, and the answer has not arrived yet. */
@@ -49,6 +58,18 @@ export interface Model {
   autoDecisions: AutoDecisions | null;
   /** The dev mode switch settings for the host's seat, once requested. */
   devState: DevState | null;
+  /** The deck open in the editor. The editor page is shown while this is set. */
+  editor: EditorState | null;
+  /** The catalogue rows loaded so far. These are the pages requested since the query last changed. */
+  catalogue: CataloguePage | null;
+  /** The result of the last parse of the importer's list. */
+  importResult: ImportResult | null;
+  /** An import or pool name that is already in use. The page asks the player what to do. */
+  nameTaken: string | null;
+  /** Every entry of the Format menu, in its order. They do not change while the server runs, so they are sent once per connection. */
+  formats: Format[];
+  /** Every edition, newest first. They are requested the first time the catalogue's set filter opens. */
+  cardSets: LimitedEdition[] | null;
 }
 
 export function createModel(): Model {
@@ -67,6 +88,7 @@ export function createModel(): Model {
     looks: null,
     screen: 'menu',
     playerName: '',
+    decks: [],
     error: null,
     host: true,
     canClaimHost: false,
@@ -75,12 +97,22 @@ export function createModel(): Model {
     cardDetails: new Map(),
     playerDetails: new Map(),
     stackMenu: null,
+    deckGen: null,
+    deckCardPool: null,
+    deckDetails: null,
+    deckMatches: {},
     hostChoice: null,
     nameSent: false,
     notices: [],
     drawOffer: null,
     autoDecisions: null,
     devState: null,
+    editor: null,
+    catalogue: null,
+    importResult: null,
+    nameTaken: null,
+    formats: [],
+    cardSets: null,
   } as Model;
 }
 

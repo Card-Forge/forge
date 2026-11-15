@@ -48,9 +48,40 @@ export interface PageActions {
   /** Sets the name and avatar this browser plays under. The server refuses a name another player already has. */
   setName(name: string, avatar: number, sleeve: number | undefined): void;
   claimHost(password?: string): void;
+  /** Requests every edition for the catalogue's set filter. The list arrives later in the model. */
+  askCardSets(): void;
+  /** Sets the host's deck generator options: one copy of each card, and no artifacts. */
+  setDeckGen(singletons: boolean, noArtifacts: boolean): void;
+  /** Requests a deck's card list and statistics. They arrive later in the model. */
+  askDeckDetails(key: string): void;
+  /** Asks which listed decks contain a card, in the sideboard or anywhere, or contain cards from a set. */
+  deckQuery(kind: DeckQuery['kind'], value: string): void;
+  fetchNetDecks(): void;
   /** Answers a question the host asked outside a match. An empty choice cancels. */
   answerHostChoice(id: number, value: number[]): void;
+
+  /** Sets the format the start page's deck finder lists. */
+  browseFormat(format: string): void;
+  openEditor(o: { key?: string; newFormat?: string; seat?: number; copy?: boolean }): void;
+  closeEditor(): void;
+  editorUndo(): void;
+  edit(e: Omit<EditorEdit, 't'>): void;
+  renameDeck(name: string): void;
+  setCheck(format: string, cardPool: string | null, unrestricted: boolean): void;
+  deckOp(op: DeckOp): void;
+  /** Deletes one of your own decks by its finder key. */
+  deleteDeck(key: string): void;
+  favouriteDeck(key: string, on: boolean): void;
+  queryCatalogue(q: Omit<CatalogueQuery, 't' | 'request'>): void;
+  readImport(text: string, format: string, cardPool: string | null, unrestricted: boolean): void;
+  fetchImport(url: string): void;
+  commitImport(c: Omit<ImportCommit, 't'>): void;
+  /** Saves the deck in a .dck file under the format, without the importer. clash says what to do if the name is taken. */
+  addDeckFile(text: string, format: string, clash?: 'replace' | 'keep'): void;
 }
+
+/** The numbers of the newest catalogue and import queries. An answer to an older query has a lower number and is dropped. */
+export const asked = { catalogue: 0, import: 0 };
 
 export interface Actions extends PageActions {}
 
@@ -87,6 +118,29 @@ export function createActions(send: Send): PageActions {
     setSetting: (key, value) => send({ t: 'setSetting', key, value }),
     setName: (name, avatar, sleeve) => send({ t: 'setName', name, avatar, sleeve }),
     claimHost: (password?: string) => send({ t: 'claimHost', password }),
+    askCardSets: () => send({ t: 'cardSets' }),
+    setDeckGen: (singletons, noArtifacts) => send({ t: 'setDeckGen', singletons, noArtifacts }),
+    askDeckDetails: key => send({ t: 'deckDetails', key }),
+    deckQuery: (kind, value) => send({ t: 'deckQuery', kind, value }),
+    fetchNetDecks: () => send({ t: 'netDecks' }),
+    browseFormat: format => send({ t: 'browseFormat', format }),
+    openEditor: o => send({ t: 'editorOpen', ...o, copy: !!o.copy }),
+    closeEditor: () => send({ t: 'editorClose' }),
+    editorUndo: () => send({ t: 'editorUndo' }),
+    edit: e => send({ t: 'editorEdit', ...e }),
+    renameDeck: name => send({ t: 'editorRename', name }),
+    setCheck: (format, cardPool, unrestricted) => send(cardPool ? { t: 'editorCheck', format, cardPool, unrestricted } : { t: 'editorCheck', format, unrestricted }),
+    deckOp: op => send({ t: 'editorDeck', op }),
+    deleteDeck: key => send({ t: 'deckDelete', key }),
+    favouriteDeck: (key, on) => send({ t: 'deckFavourite', key, on }),
+    queryCatalogue: q => send({ t: 'catalogue', request: ++asked.catalogue, ...q }),
+    readImport: (text, format, cardPool, unrestricted) => {
+      const request = ++asked.import;
+      send(cardPool ? { t: 'importRead', request, text, format, cardPool, unrestricted } : { t: 'importRead', request, text, format, unrestricted });
+    },
+    fetchImport: url => send({ t: 'importFetch', request: ++asked.import, url }),
+    commitImport: c => send({ t: 'importCommit', ...c }),
+    addDeckFile: (text, format, clash) => send({ t: 'deckFile', text, format, clash }),
     answerHostChoice: (id, value) => send({ t: 'hostChoice', id, value }),
   };
 }

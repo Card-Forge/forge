@@ -44,6 +44,10 @@ export interface UiState {
   volumeOpen: boolean;
   /** The play choice whose game kinds the start page shows. It is kept so that going back from a table returns there. */
   menuChoice: 'play' | 'friends' | null;
+  /** The deck finder opened from the start page with no seat, and the format it lists. A hello does not close it. */
+  browse: { format: string } | null;
+  /** The open importer, and where it was opened from: a seat's deck finder, the start page, or the editor. */
+  importer: { from: 'seat' | 'start' | 'editor'; seat?: number; text?: string; url?: string; sync?: boolean } | null;
   hover: Hover | null;
   /** Which face of the hovered card the zoom panel shows. */
   faceIndex: number;
@@ -88,6 +92,8 @@ export const ui: UiState = {
   macro: 'none',
   volumeOpen: false,
   menuChoice: null,
+  browse: null,
+  importer: null,
   hover: null,
   faceIndex: 0,
   cardText: false,

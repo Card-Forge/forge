@@ -1,0 +1,69 @@
+/* The importer is drawn above the deck finder, because it can be opened from the deck finder */
+.importer-back { z-index: 70; }
+.importer {
+  width: min(1240px, 94vw); height: min(760px, 92vh); display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+.imp-head { gap: 14px; }
+.imp-head .muted { color: var(--muted); font-size: 12.5px; }
+.imp-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 9px 18px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 80%, var(--bg)); }
+.imp-sub .legality { margin-left: auto; }
+.namefield { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12.5px; }
+.namefield input { min-width: 260px; }
+.imp-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); min-height: 0; }
+.paste { border-right: 1px solid var(--line); display: grid; grid-template-rows: auto auto auto minmax(0, 1fr); min-height: 0; }
+.paste > h4, .read > h4 { margin: 0; padding: 10px 16px 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; gap: 10px; }
+.paste > h4 span { text-transform: none; letter-spacing: 0; color: var(--faint); font-weight: 400; margin-left: auto; }
+.linkfield { display: flex; gap: 8px; margin: 0 12px 4px; }
+.linkfield .find { flex: 1; padding: 6px 10px; font-size: 12.5px; }
+.fetching { margin: 0 12px 12px; padding: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; display: flex; gap: 10px; align-items: center; color: var(--muted); }
+.spinner { width: 14px; height: 14px; border-radius: 50%; border: 2.4px solid var(--accent-2); border-right-color: transparent; display: inline-block; animation: wait-spin 1.1s linear infinite; }
+html[data-motion="reduced"] .spinner { animation: none; }
+
+.text-box { margin: 0 12px 12px; display: grid; grid-template-columns: 52px minmax(0, 1fr); min-height: 0; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.text-box:focus-within { outline: 2px solid var(--accent-2); outline-offset: -1px; }
+.gutter { overflow: hidden; background: #0b0e14; font: 12.5px/22px ui-monospace, monospace; padding: 6px 0; }
+.gl { height: 22px; display: grid; grid-template-columns: 30px 22px; align-items: center; }
+.gl .ln { color: var(--faint); text-align: right; padding-right: 6px; font-size: 11px; }
+.gl .mk { text-align: center; font-family: system-ui, sans-serif; font-weight: 700; font-size: 12px; }
+/* The mark classes use a k- prefix. Without it, a line marked read would match the result panel's .read rules. */
+.gl.k-read .mk { color: var(--muted); }
+.gl.k-problem .mk { color: var(--select); }
+.gl.k-ignored .mk { color: var(--faint); }
+.gl.lit { box-shadow: inset 2px 0 0 var(--accent-2); }
+.text-wrap { position: relative; overflow: hidden; }
+.washes { position: absolute; left: 0; right: 0; top: 6px; pointer-events: none; }
+.wash { position: absolute; left: 0; right: 0; height: 22px; }
+.wash.k-problem { background: repeating-linear-gradient(135deg, #ffffff0a 0 5px, #0000 5px 11px), color-mix(in srgb, var(--select) 7%, transparent); }
+.wash.lit { background: var(--surface-2); }
+.text-wrap textarea {
+  position: relative; width: 100%; height: 100%; resize: none; border: 0; outline: 0; background: transparent; color: var(--text);
+  font: 12.5px/22px ui-monospace, monospace; padding: 6px 10px; white-space: pre; overflow: auto;
+}
+.text-wrap textarea[readonly] { color: var(--muted); }
+
+.read { display: flex; flex-direction: column; min-height: 0; }
+.read .readlist { flex: 1; min-height: 0; }
+.read .summary { padding: 0 16px 8px; display: grid; gap: 3px; }
+.read .summary .big { font-size: 15px; font-weight: 650; display: flex; align-items: center; gap: 8px; }
+.read .summary .sub { color: var(--muted); font-size: 12.5px; }
+.read .summary .verdict { margin: 0; }
+.attn { margin: 0 12px 10px; border: 1px solid var(--line-bright); border-radius: 8px; background: var(--bg); max-height: 230px; overflow: auto; }
+.attn h5 { margin: 0; padding: 7px 12px 5px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
+.issue {
+  display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 6px 12px; font-size: 12.5px;
+  background: repeating-linear-gradient(135deg, #ffffff0a 0 5px, #0000 5px 11px);
+}
+.issue + .issue { border-top: 1px solid var(--line); }
+.issue .g { font-weight: 700; text-align: center; color: var(--select); }
+.issue .what b { font-weight: 600; }
+.issue .what span { color: var(--muted); display: block; font-size: 11.5px; }
+.issue .acts { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.issue .quiet { background: none; border: 0; padding: 0 4px; color: var(--muted); font-weight: 600; font-size: 12px; }
+.readlist { overflow: auto; padding: 0 16px 12px; }
+.readlist.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; align-content: start; }
+.guide { padding: 6px 16px; color: var(--text); font-size: 13px; }
+.guide pre { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.guide .muted { color: var(--muted); }
+.imp-foot { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--line); }
+.imp-foot .grow { flex: 1; }

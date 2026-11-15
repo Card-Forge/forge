@@ -3,6 +3,9 @@
 import { render } from 'preact';
 import { Menu, NamePrompt } from './menu';
 import { rememberedName } from './identity';
+import { Editor } from './deck/editor';
+import { Importer } from './deck/importer';
+import { DeckFinder } from './deck/deckfinder';
 import { Requests, StackMenu } from './match/questions';
 import { HostChoice } from './hostchoice';
 import { Options } from './options';
@@ -15,6 +18,10 @@ import { byId } from './dom';
 import { changeUi, ui } from './ui';
 import type { Actions } from './actions';
 import type { Model } from './model';
+
+/** Whether the deck editor was open at the last render, and how many times it has closed. */
+let editing = false;
+let edits = 0;
 
 /** The depth of each page from the first one. A move to a lower number is a move back. */
 const DEPTH = { name: 0, menu: 1, lobby: 2, limited: 2, drafting: 2, editor: 3, match: 4 };
@@ -38,8 +45,12 @@ export function renderScreens(model: Model, actions: Actions): void {
     document.documentElement.toggleAttribute('data-back', shown !== null && DEPTH[page] < DEPTH[shown]);
     shown = page;
   }
+  // The page under the editor is rebuilt when the editor closes, because it may show what was edited
+  if (editing && page !== 'editor') edits++;
+  editing = page === 'editor';
   render(under === 'name' ? <NamePrompt model={model} actions={actions} initial={rememberedName() ?? ''} />
     : under === 'menu' ? <Menu key={edits} model={model} actions={actions} /> : null, byId('menu'));
+  render(page === 'editor' ? <Editor model={model} actions={actions} /> : null, byId('editor'));
   render(<>
     {page === 'match' && <Requests model={model} actions={actions} />}
     {page === 'match' && <StackMenu model={model} actions={actions} />}
@@ -58,6 +69,12 @@ export function renderScreens(model: Model, actions: Actions): void {
     {ui.gameMenu === 'stops' && <AutoPassStops close={() => changeUi(u => { u.gameMenu = null; })} />}
     {page === 'match' && ui.gameMenu === 'devSetup' && <DevSetupDialog actions={actions} close={() => changeUi(u => { u.gameMenu = null; })} />}
     {page === 'match' && <DrawOfferQuestion model={model} actions={actions} />}
+    {page !== 'match' && ui.importer && (
+      <Importer model={model} actions={actions} from={ui.importer.from} seat={ui.importer.seat} initialText={ui.importer.text}
+        initialUrl={ui.importer.url} sync={ui.importer.sync}
+        close={() => changeUi(u => { u.importer = null; })} />
+    )}
+    {page === 'menu' && ui.browse && <DeckFinder model={model} actions={actions} close={() => changeUi(u => { u.browse = null; })} />}
     {model.hostChoice && <HostChoice key={model.hostChoice.id} question={model.hostChoice} actions={actions} />}
   </>, byId('dialog-layer'));
   render(<Notices model={model} />, byId('notices'));
