@@ -48,6 +48,24 @@
     },
 	{
       "type": "TextButton",
+      "name": "abandon",
+      "text": "tr(lblAbandonQuest)",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 104
+    },
+	{
+      "type": "TextButton",
+      "name": "track",
+      "binding": "Bookmark",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 144
+    },
+	{
+      "type": "TextButton",
       "name": "status",
       "text": "tr(lblStatus)",
       "binding": "Status",

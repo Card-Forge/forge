@@ -69,18 +69,17 @@ public class QuestLogScene extends UIScene {
         root.row();
         root.add(new MoreArrow(listScroll)).height(11).expandX();
 
-        trackButton = Controls.newTextButton("", () -> toggleTracked(selected));
-        abandonButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbandonQuest"), () -> {
-            AdventureQuestData quest = selected;
-            showDialog(createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),
-                    Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), () -> {
-                        removeDialog();
-                        abandonQuest(quest);
-                    }, () -> {
-                        removeDialog();
-                        updateNavigation();
-                    }));
-        });
+        // the landscape layout puts the quest actions in the side column beside Status and Back
+        TextraButton sideTrack = ui.findActor("track");
+        if (sideTrack != null) {
+            trackButton = sideTrack;
+            abandonButton = ui.findActor("abandon");
+            ui.onButtonPress("track", () -> toggleTracked(selected));
+            ui.onButtonPress("abandon", this::confirmAbandon);
+        } else {
+            trackButton = Controls.newTextButton("", () -> toggleTracked(selected));
+            abandonButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbandonQuest"), this::confirmAbandon);
+        }
         abandonButton.setColor(Color.RED);
         backLink = link(Controls.newTextraLabel(INK_SOFT + "< " + Forge.getLocalizer().getMessage("lblQuestList")), () -> {
             selected = null;
@@ -103,11 +102,13 @@ public class QuestLogScene extends UIScene {
         detailRoot.add(detailScroll).expand().fill().top();
         detailRoot.row();
         detailRoot.add(new MoreArrow(detailScroll)).height(11).expandX();
-        detailRoot.row();
-        Table actions = new Table();
-        actions.add(trackButton).left().padRight(12);
-        actions.add(abandonButton).left();
-        detailRoot.add(actions).left().padTop(2);
+        if (sideTrack == null) {
+            detailRoot.row();
+            Table actions = new Table();
+            actions.add(trackButton).left().padRight(12);
+            actions.add(abandonButton).left();
+            detailRoot.add(actions).left().padTop(2);
+        }
 
         if (split) {
             Image divider = new Image(Forge.getAssets().getWhiteTexture());
@@ -153,8 +154,12 @@ public class QuestLogScene extends UIScene {
 
         root.setVisible(split || selected == null);
         detailRoot.setVisible(selected != null);
-        if (selected != null)
+        if (selected != null) {
             fillDetails(selected);
+        } else {
+            trackButton.setVisible(false);
+            abandonButton.setVisible(false);
+        }
         updateNavigation();
     }
 
@@ -286,6 +291,7 @@ public class QuestLogScene extends UIScene {
         detailScroll.setScrollY(0);
         detailScroll.layout();
         updateTrackButton(quest.isTracked);
+        trackButton.setVisible(true);
         abandonButton.setVisible(!quest.storyQuest);
     }
 
@@ -359,6 +365,18 @@ public class QuestLogScene extends UIScene {
         //Needed so long as quest log and stats are separate scenes that link to each other
         Forge.switchScene(lastGameScene==null ? GameScene.instance() : lastGameScene);
         return true;
+    }
+
+    private void confirmAbandon() {
+        AdventureQuestData quest = selected;
+        showDialog(createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),
+                Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), () -> {
+                    removeDialog();
+                    abandonQuest(quest);
+                }, () -> {
+                    removeDialog();
+                    updateNavigation();
+                }));
     }
 
     private void abandonQuest(AdventureQuestData quest) {
