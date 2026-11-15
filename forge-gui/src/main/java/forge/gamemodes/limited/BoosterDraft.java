@@ -58,8 +58,6 @@ public class BoosterDraft implements IBoosterDraft {
     public static final List<DraftOptions.DoublePick> PICK_RULES = List.of(
             DraftOptions.DoublePick.NEVER, DraftOptions.DoublePick.FIRST_PICK, DraftOptions.DoublePick.ALWAYS);
     public static final String FILE_EXT = ".draft";
-    /** Marks the human deck of a Commander draft, so the deck editor and match setup treat it as one. */
-    public static final String COMMANDER_DRAFT_TAG = "CommanderDraft";
 
     int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
@@ -795,7 +793,7 @@ public class BoosterDraft implements IBoosterDraft {
         final Deck humanDeck = (Deck) human.getDeck().copyTo(name);
         humanDeck.setDraftNotes(human.getSerializedDraftNotes());
         if (isCommanderDraft) {
-            humanDeck.getTags().add(COMMANDER_DRAFT_TAG);
+            CommanderDraftUtil.markCommanderDraftDeck(humanDeck);
         }
         final DeckGroup group = new DeckGroup(name);
         group.setHumanDeck(humanDeck);

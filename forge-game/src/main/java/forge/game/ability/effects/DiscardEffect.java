@@ -66,12 +66,25 @@ public class DiscardEffect extends SpellAbilityEffect {
                     validD = "named"; // Cabal Therapy: the name is in the game log, not in the script text
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
+                } else if (!sa.hasParam("DiscardValidDesc") && validD.matches("[A-Za-z]+[.+].*")) {
+                    validD = Lang.getInstance().buildValidCardDesc(java.util.Arrays.asList(validD.split(",")), false);
                 }
-                valid = validD.contains(" card") ? validD : validD + " " + valid;
+                valid = validD.matches("(?i).*\\bcards?$") ? validD : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {
                 sb.append(oneTgtP ? "their hand" : "their hands");
+            } else if (mode.equals("Defined")) {
+                // the cards are named by the script ("Remembered", "ChosenCard"): say which ones are meant, not the whole list
+                final List<Card> toDiscard = sa.getHostCard() == null ? Lists.<Card>newArrayList()
+                        : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
+                if (toDiscard.size() == 1) {
+                    sb.append(toDiscard.get(0).toString());
+                } else if (toDiscard.size() > 1 && toDiscard.size() <= 3) {
+                    sb.append(TextUtil.join(toDiscard.stream().map(Card::toString).collect(java.util.stream.Collectors.toList()), ", "));
+                } else {
+                    sb.append(toDiscard.isEmpty() ? "that card" : "the rest");
+                }
             } else if (revealDiscardAll) {
                 sb.append("all");
             } else if (sa.hasParam("AnyNumber")) {
@@ -88,25 +101,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 sb.append(oneTgtP ? " discards " : " discard ");
                 sb.append(oneCard ? "that card" : "those cards");
             } else if (revealDiscardAll) {
-                sb.append(" of type: ").append(valid);
-            }
-
-            if (mode.equals("Defined")) {
-                sb.append(" defined cards");
-
-                if (sa.getHostCard() != null) {
-                    final List<Card> toDiscard = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
-                    if (!toDiscard.isEmpty()) {
-                        sb.append(": ");
-
-                        List<String> definedNames = Lists.newArrayList();
-                        for (Card discarded : toDiscard) {
-                            definedNames.add(discarded.toString());
-                        }
-
-                        sb.append(TextUtil.join(definedNames, ","));
-                    }
-                }
+                sb.append(" ").append(Lang.getPlural(valid));
             }
 
             if (mode.equals("Random")) {

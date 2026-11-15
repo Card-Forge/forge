@@ -55,7 +55,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Radiance") && sa.usesTargeting()) {
-                sb.append(" and each other ").append(sa.getParam("ValidTgts"))
+                sb.append(" and each other ").append(Lang.getInstance().describeValidList(sa.getParam("ValidTgts")))
                         .append(" that shares a color with ");
                 if (tgtCards.size() > 1) {
                     sb.append("them");

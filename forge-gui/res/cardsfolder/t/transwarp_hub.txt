@@ -1,7 +1,7 @@
 Name:Transwarp Hub
 ManaCost:2 U
 Types:Artifact Spacecraft
-K:Station:3
+K:Station
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this Spacecraft enters, mill five cards. You may put up to two artifact cards from among them into your hand.
 SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Artifact.IsRemembered | SelectPrompt$ You may select up to two artifact cards | SubAbility$ DBCleanup

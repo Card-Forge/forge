@@ -576,6 +576,26 @@ public class AiController {
         return false;
     }
 
+    /** An Urza's land of a kind that is not in play yet, when the choice also holds one of a kind that is. */
+    private Card chooseMissingUrzaLand(final CardCollection landList) {
+        final String[] kinds = { "Mine", "Power-Plant", "Tower" };
+        Card missing = null;
+        boolean duplicate = false;
+        for (final Card land : landList) {
+            for (final String kind : kinds) {
+                if (!land.getType().hasSubtype(kind) || !land.getType().hasSubtype("Urza's")) {
+                    continue;
+                }
+                if (player.getLandsInPlay().anyMatch(l -> l.getType().hasSubtype(kind) && l.getType().hasSubtype("Urza's"))) {
+                    duplicate = true;
+                } else if (missing == null) {
+                    missing = land;
+                }
+            }
+        }
+        return duplicate ? missing : null;
+    }
+
     private Card chooseBestLandToPlay(CardCollection landList) {
         if (landList.isEmpty()) {
             return null;
@@ -625,6 +645,14 @@ public class AiController {
         final Card forCombo = deckPlan(player).combos.chooseLand(player, landList);
         if (forCombo != null) {
             return forCombo;
+        }
+
+        // Urza's Mine, Power-Plant and Tower are worth more together: a second Tower is the one to hold back
+        if (landList.size() > 1) {
+            final Card tron = chooseMissingUrzaLand(landList);
+            if (tron != null) {
+                return tron;
+            }
         }
 
         // Plan the next land drops against the spells in hand (and the commander): which colours are needed when, and
@@ -1014,6 +1042,28 @@ public class AiController {
         return AiPlayDecision.WillPlay;
     }
 
+    /**
+     * A spell cast without spending mana (Snuff Out paying life, an evoke/alternative cost...) while a permanent such as
+     * Roiling Vortex punishes exactly that ("whenever a player casts a spell, if no mana was spent to cast it, ...").
+     */
+    public static boolean isPunishedForFreeCast(final SpellAbility sa) {
+        if (!sa.isSpell() || sa.getPayCosts() == null || !sa.getPayCosts().getTotalMana().isZero() || sa.costHasManaX()) {
+            return false;
+        }
+        for (final Card c : sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.SpellCast) {
+                    continue;
+                }
+                final String valid = t.getParam("ValidSA");
+                if (valid != null && valid.contains("ManaSpent EQ0")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         if (hasFailedToCast(sa)) {
             return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
@@ -1039,6 +1089,10 @@ public class AiController {
         }
 
         final Card card = sa.getHostCard();
+
+        if (isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS) && card.hasKeyword(Keyword.BUYBACK)
@@ -1066,6 +1120,19 @@ public class AiController {
 
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
+            }
+            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
+                // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
+                // nothing (a 0/0 animate, a 0-point pump) and the AI repeats it at every priority pass. Size X to the mana
+                // that can be spared, and don't activate when there is none.
+                final SpellAbility root = sa.getRootAbility();
+                Integer x = root.getXManaCostPaid();
+                if (x == null || x <= 0) {
+                    x = ComputerUtilCost.setMaxXValue(sa, player, sa.isTrigger());
+                }
+                if (x <= 0 && sa.getSVar("X").equals("Count$xPaid")) {
+                    return AiPlayDecision.CantAffordX;
+                }
             }
         } else {
             Cost payCosts = sa.getPayCosts();
@@ -1146,6 +1213,9 @@ public class AiController {
                 if (damage >= player.getLife()) {
                     return AiPlayDecision.BadEtbEffects;
                 }
+            }
+            if (!sa.isLandAbility() && sa.isSpell() && LegalityGuard.etbWithoutTarget(player, card)) {
+                return AiPlayDecision.BadEtbEffects; // Journey to Nowhere, Oblivion Ring, Necromancy ... with nothing to aim at
             }
             if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
                 return AiPlayDecision.BadEtbEffects;
@@ -1505,16 +1575,16 @@ public class AiController {
     }
 
     /** In a simulated game: the attack to declare instead of asking the heuristics (set by a rollout, used once). */
-    private java.util.Map<Card, GameEntity> attackOverride;
+    private Map<Card, GameEntity> attackOverride;
 
-    public void setAttackOverride(final java.util.Map<Card, GameEntity> attackers) {
+    public void setAttackOverride(final Map<Card, GameEntity> attackers) {
         attackOverride = attackers;
     }
 
     private void declareOverriddenAttackers(final Combat combat) {
-        final java.util.Map<Card, GameEntity> attackers = attackOverride;
+        final Map<Card, GameEntity> attackers = attackOverride;
         attackOverride = null;
-        for (final java.util.Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
@@ -1538,7 +1608,7 @@ public class AiController {
         if (cfg == null) {
             return;
         }
-        final java.util.Map<Card, GameEntity> before = new java.util.LinkedHashMap<>();
+        final Map<Card, GameEntity> before = new LinkedHashMap<>();
         for (final Card c : combat.getAttackers()) {
             before.put(c, combat.getDefenderByAttacker(c));
         }
@@ -1553,8 +1623,53 @@ public class AiController {
             return;
         }
         combat.clearAttackers();
-        for (final java.util.Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
+        for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
             if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {
+        final Map<Card, GameEntity> committed = new LinkedHashMap<>();
+        if (attacker != player || simMode != null || attackOverride != null
+                || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return committed;
+        }
+        GameEntity defender = null;
+        for (final Card c : combat.getAttackers()) {
+            if (attacker.equals(c.getController()) && combat.getDefenderByAttacker(c) != null) {
+                defender = combat.getDefenderByAttacker(c); // whoever the others attack
+                break;
+            }
+        }
+        if (defender == null) {
+            defender = AiAttackController.choosePreferredDefenderPlayer(attacker);
+        }
+        final Integer attackMax = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Card c : attacker.getCreaturesInPlay()) {
+            if (!c.isLand() || c.isTapped()) {
+                continue;
+            }
+            final GameEntity already = combat.getDefenderByAttacker(c);
+            if (already != null) {
+                committed.put(c, already);
+                continue;
+            }
+            if (defender == null || !CombatUtil.canAttack(c, defender)
+                    || attackMax != null && combat.getAttackers().size() >= attackMax) {
+                continue;
+            }
+            combat.addAttacker(c, defender);
+            committed.put(c, defender);
+        }
+        return committed;
+    }
+
+    /** Puts back the committed attackers (see {@link #commitAttackers}) that the attack search took out. */
+    private void restoreCommittedAttackers(final Combat combat, final Map<Card, GameEntity> committed) {
+        for (final Map.Entry<Card, GameEntity> e : committed.entrySet()) {
+            if (!combat.isAttacking(e.getKey()) && CombatUtil.canAttack(e.getKey(), e.getValue())) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -1576,7 +1691,10 @@ public class AiController {
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
+            // a creature for this attack commited
+            final Map<Card, GameEntity> committed = commitAttackers(attacker, combat);
             refineAttackWithFlatMonteCarlo(attacker, combat);
+            restoreCommittedAttackers(combat, committed);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
@@ -1753,6 +1871,14 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
+            if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
+                // a land that makes no mana yet (Temple of the False God with four lands to come) waits for the others
+                final CardCollection working = CardLists.filter(landsWannaPlay,
+                        l -> !forge.ai.simulation.LegalityGuard.isDormantLand(player, l));
+                if (!working.isEmpty()) {
+                    landsWannaPlay = working;
+                }
+            }
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -2263,7 +2389,7 @@ public class AiController {
                     continue; // without discovery only a ramp deck's key card gets this far
                 }
                 try {
-                    if (counter.canPlay() && counter.canTargetSpellAbility(top)) {
+                    if (counter.checkRestrictions(player) && counter.canPlay() && counter.canTargetSpellAbility(top)) {
                         // aim first: a cost that depends on the target (a discard of its mana value) cannot be checked before
                         counter.resetTargets();
                         counter.getTargets().add(top);
@@ -2357,7 +2483,7 @@ public class AiController {
     }
 
     /**
-     * Plays that Flat Monte Carlo never spends a card on (see {@link forge.ai.simulation.ComboGuard}): bringing back
+     * Plays that Flat Monte Carlo never spends a card on (see {@link ComboGuard}): bringing back
      * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
      * and a cantrip while the AI is confident to win this turn or the next. Returns the reason, or null for a fine play.
      */
@@ -2430,6 +2556,22 @@ public class AiController {
         if (result.hold) {
             return null; // pass priority with the mana still available
         }
+        if (result.choice != null && result.choice.isSpell() && result.choice.getHostCard() != null) {
+            // a permanent without targets that pays off for the chosen spell (Up the Beanstalk draws for one of mana
+            // value 5 or more) comes first when the mana covers both, whether or not the heuristics approved it (#4278)
+            final int mana = ComputerUtilMana.getAvailableManaEstimate(player);
+            final List<SpellAbility> pool = new ArrayList<>(approved);
+            pool.addAll(extras);
+            for (final SpellAbility sa : pool) {
+                if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && !sa.usesTargeting()
+                        && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                        && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= mana
+                        && guardProblem(sa, null, saveCantrips) == null) {
+                    sa.setActivatingPlayer(player);
+                    return sa;
+                }
+            }
+        }
         if (extras.contains(result.choice)) {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
             // it is still aimed where the rollouts liked it, and that it can still be paid for.
@@ -2445,9 +2587,20 @@ public class AiController {
         // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
         // fall back to the other approved plays in heuristic order if the heuristics no longer like it.
         final List<SpellAbility> order = new ArrayList<>();
+        // a permanent that pays off for the chosen spell (Up the Beanstalk draws for a spell of mana value 5 or more) goes
+        // first when the mana covers both: cast after the spell it only misses the card (#4278)
+        final int manaNow = ComputerUtilMana.getAvailableManaEstimate(player);
+        for (final SpellAbility sa : approved) {
+            if (sa != result.choice && sa.isSpell() && sa.getHostCard() != null && result.choice.isSpell()
+                    && ComputerUtilAbility.paysOffFor(sa, result.choice)
+                    && sa.getHostCard().getCMC() + result.choice.getHostCard().getCMC() <= manaNow) {
+                order.add(sa);
+                break;
+            }
+        }
         order.add(result.choice);
         for (final SpellAbility sa : approved) {
-            if (sa != result.choice) {
+            if (sa != result.choice && !order.contains(sa)) {
                 order.add(sa);
             }
         }
@@ -2566,7 +2719,7 @@ public class AiController {
 
     private DeckPlan flatMcDeckPlan;
 
-    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link DeckPlan}. */
     public DeckPlan deckPlan(final Player p) {
         if (flatMcDeckPlan == null) {
             flatMcDeckPlan = DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
@@ -2697,12 +2850,22 @@ public class AiController {
             return false; // an exile or removal on entering with nothing worth aiming at: the heuristics found no target
         }
 
+        if (forge.ai.ability.ChangeZoneAi.onlyReturnsCreaturesThatDie(player, sa)) {
+            return false; // Persist with nothing but 1/1s to return: the rollouts like the trigger, the card is still wasted
+        }
+
+        if (!forge.ai.ability.UntapAi.worthUntapping(player, sa)) {
+            return false; // Sleep-Cursed Faerie untapped itself in response to any spell: the rollouts cannot see the wasted mana
+        }
+
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
         }
         // ChangeZoneAi rejects a hidden-origin activation when no eligible card is in hand.
         // Broad discovery must not add it back just because the activation cost itself is payable.
-        if (isHandToBattlefieldChangeZone(sa)
+        // Stoneforge Mystic and the like (an eligible card is in hand, see isCheatFromHand) are the exception: the rollouts
+        // judge what the card is worth in play, the heuristics' "can't play" is about the ability, not the card.
+        if (isHandToBattlefieldChangeZone(sa) && !FlatMonteCarloPicker.isCheatFromHand(sa)
                 && (opinion == AiPlayDecision.CantPlayAi || opinion == AiPlayDecision.MissingNeededCards)) {
             return false;
         }
@@ -2808,6 +2971,7 @@ public class AiController {
         if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
             reportSortFallback(all);
         }
+        ComputerUtilAbility.putCastPayoffsFirst(all);
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
         final ComboPlan combos = deckPlan(player).combos;
@@ -3206,7 +3370,7 @@ public class AiController {
                     return slot;
                 }
 
-                return Aggregates.random(options);
+                return NumberChoice.choose(sa, options, relatedPlayer);
             default:
                 return options.get(0);
         }

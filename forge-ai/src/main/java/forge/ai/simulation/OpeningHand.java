@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
+import forge.card.CardStateName;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -145,7 +146,7 @@ public final class OpeningHand {
     private static int handColors(final CardCollectionView hand) {
         byte colors = 0;
         for (final Card c : hand) {
-            if (c.isLand()) {
+            if (c.isLand() || isMdfcLand(c)) {
                 colors |= producedColors(c);
             }
         }
@@ -160,7 +161,7 @@ public final class OpeningHand {
         int lands = 0;
         int cheapSources = 0;
         for (final Card c : kept) {
-            if (c.isLand()) {
+            if (c.isLand() || isMdfcLand(c)) {
                 if (isManaLand(c)) {
                     lands++;
                 }
@@ -186,7 +187,7 @@ public final class OpeningHand {
         int lands = 0;
         byte colors = 0;
         for (final Card c : kept) {
-            if (c.isLand() && CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+            if ((c.isLand() && CardPredicates.LANDS_PRODUCING_MANA.test(c)) || (isMdfcLand(c) && isManaLand(c))) {
                 lands++;
                 colors |= producedColors(c);
             }
@@ -267,7 +268,9 @@ public final class OpeningHand {
 
     static byte producedColors(final Card land) {
         byte colors = 0;
-        for (final SpellAbility sa : land.getManaAbilities()) {
+        final Iterable<SpellAbility> abilities = isMdfcLand(land)
+                ? land.getState(CardStateName.Backside).getManaAbilities() : land.getManaAbilities();
+        for (final SpellAbility sa : abilities) {
             colors |= ManaConversion.producedColors(sa); // short letters ("R"), and it sets the activator itself
         }
         return colors;
@@ -302,7 +305,7 @@ public final class OpeningHand {
                 stage |= ComboPlan.isStage(c);
                 quickWiper |= ComboPlan.isCounterWiper(c);
             }
-            if (c.isLand()) {
+            if (c.isLand() || isMdfcLand(c)) {
                 if (isManaLand(c)) {
                     lands++;
                     final byte own = producedColors(c);
@@ -445,7 +448,16 @@ public final class OpeningHand {
 
     /** A land that makes mana, or one that finds a land (a fetch land is a land drop that gets the colour needed). */
     static boolean isManaLand(final Card c) {
+        if (isMdfcLand(c)) {
+            return !c.getState(CardStateName.Backside).getManaAbilities().isEmpty();
+        }
         return c.isLand() && (CardPredicates.LANDS_PRODUCING_MANA.test(c) || fetchesLand(c));
+    }
+
+    /** A modal double-faced card with a land on its back (Agadeem's Awakening): a land drop as well as a spell. */
+    static boolean isMdfcLand(final Card c) {
+        return c.isModal() && !c.isLand() && c.getState(CardStateName.Backside) != null
+                && c.getState(CardStateName.Backside).getType().isLand();
     }
 
     /** The colours the rest of the library can make: what a fetch land in the hand can turn into. */

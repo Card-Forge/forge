@@ -16,8 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -1033,6 +1035,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         dispose();
     }
 
+    public void addTooltipTo(Actor actor) {
+        if (tooltip != null)
+            actor.addListener(tooltip);
+    }
+
     public void clearLabel() {
         if (autoSell != null)
             autoSell.remove();
@@ -1407,10 +1414,28 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return computedTransform;
     }
 
+    /** Scroll offset of text that overflows its box: it rests at the top, scrolls down, rests at the bottom, then repeats. */
+    public static float autoScrollOffset(float elapsed, float overflow, float boxHeight) {
+        float scroll = overflow / boxHeight * 3f;
+        float t = elapsed % (2.5f + scroll + 1.5f) - 2.5f;
+        return MathUtils.clamp(t / scroll, 0f, 1f) * overflow;
+    }
+
+    /** Draws a 7x4 pixel down arrow centred on x that rises and falls over time. */
+    public static void drawMoreArrow(Batch batch, float x, float y, float px, float elapsed, float alpha) {
+        float bob = px * (1 - MathUtils.cos(elapsed * MathUtils.PI2 / 1.2f));
+        float color = batch.getPackedColor();
+        batch.setColor(1f, 1f, 1f, 0.9f * alpha);
+        for (int row = 0; row < 4; row++)
+            batch.draw(Forge.getAssets().getWhiteTexture(), x - 3.5f * px + row * px, y + bob + (3 - row) * px, (7 - row * 2) * px, px);
+        batch.setPackedColor(color);
+    }
+
     class ComplexTooltip extends Group {
         private TextraLabel cLabel;
         private Image cImage, altcImage, cBackDrop;
-        private float inset, width, x, y;
+        private ScrollPane cPane;
+        private float inset, width, x, y, overflow, elapsed;
         private int ARP;
 
         public ComplexTooltip(Image i) {
@@ -1428,14 +1453,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             ARP = Forge.isLandscapeMode() ? 100 : 150;
             String text = reward.type.equals(Reward.Type.CardPack)
                 ? "[%" + ARP + "][%?SHADOW]" + description
-                : "[%" + ARP + "]" + description;
+                : "[%" + ARP + "]" + description.stripTrailing();
             cLabel = Controls.newTextraLabel(text);
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
             cLabel.setWidth(width);
-            cLabel.setY(reward.type.equals(Reward.Type.CardPack) ? y - 30 : y);
-            cLabel.setX(x);
             if (reward.type.equals(Reward.Type.CardPack)) {
+                cLabel.setY(y - 30);
+                cLabel.setX(x);
                 //FIXME: this is needed until the cLabel.style = labelstyle override works for the description text backdrop
                 cBackDrop = new Image(Forge.getAssets().getGrayTexture());
                 cBackDrop.setBounds(cImage.getX(), 0, getWidth(), getHeight() / 3.5f);
@@ -1443,9 +1468,49 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 addActorAt(1, cBackDrop);
                 addActorAt(2, cLabel);
             } else {
+                // the description fills the space between the icon and the corner ornaments of the 48x64 card back
+                float top = cImage.getPrefHeight() / 2f;
+                float bottom = cImage.getPrefHeight() * 8f / 64f;
+                float px = getWidth() / 122f;
+                float arrowY = bottom - 3 * px;
+                cLabel.layout();
+                cLabel.setHeight(cLabel.getPrefHeight());
+                // overflowing text leaves room below it for the more-text arrow
+                if (cLabel.getHeight() > top - bottom + 2f)
+                    bottom += 6 * px;
+                cPane = new ScrollPane(cLabel);
+                cPane.setSmoothScrolling(false);
+                cPane.setBounds(x, bottom, width, top - bottom);
+                cPane.layout();
+                overflow = cPane.getMaxY();
                 addActorAt(0, cImage);
-                addActorAt(1, cLabel);
+                addActorAt(1, cPane);
+                Actor more = new Actor() {
+                    @Override
+                    public void draw(Batch batch, float parentAlpha) {
+                        if (overflow > 2f && cPane.getScrollY() < overflow)
+                            drawMoreArrow(batch, getX(), getY(), px, elapsed, parentAlpha);
+                    }
+                };
+                more.setPosition(getWidth() / 2, arrowY);
+                addActor(more);
             }
+        }
+
+        @Override
+        protected void setStage(Stage stage) {
+            super.setStage(stage);
+            elapsed = 0;
+        }
+
+        @Override
+        public void act(float delta) {
+            super.act(delta);
+            if (cPane == null || overflow <= 2f)
+                return;
+            elapsed += delta;
+            cPane.setScrollY(autoScrollOffset(elapsed, overflow, cPane.getHeight()));
+            cPane.updateVisualScroll();
         }
 
         public Image getStoredImage() {

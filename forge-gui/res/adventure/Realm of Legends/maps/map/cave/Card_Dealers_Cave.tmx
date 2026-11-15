@@ -34,7 +34,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;You scurry down into this small, sandy cave. A giant stands before you, ancient-looking spell scrolls tucked into his large coat. 
+   &quot;text&quot;: &quot;You scurry down into this small, sandy cave. A giant stands before you, ancient-looking spell scrolls tucked into his large coat.
 
 'Got something real special for sale, small one.' he calls out.&quot;,
    &quot;options&quot;: [{
@@ -306,7 +306,7 @@
        {
           &quot;count&quot;:1,
           &quot;editions&quot;: [&quot;LEB&quot;],
-          &quot;cardName&quot;: &quot;Illusory Mask&quot;
+          &quot;cardName&quot;: &quot;Illusionary Mask&quot;
        },
        {
           &quot;count&quot;:1,
@@ -367,7 +367,7 @@
     },
     {
       &quot;type&quot;: &quot;card&quot;,
-      &quot;count&quot;:14,   
+      &quot;count&quot;:14,
       &quot;rarity&quot;: [&quot;common&quot;, &quot;uncommon&quot;],
       &quot;editions&quot;: [&quot;LEB&quot;]
     }
