@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -190,7 +189,7 @@ public class QuestLogScene extends UIScene {
         row.setUserObject(quest);
         int stages = quest.stages.length;
         float progressWidth = 30;
-        float nameWidth = root.getWidth() - progressWidth - (split ? 20 : 33);
+        float nameWidth = root.getWidth() - progressWidth - (split ? 13 : 33);
         row.add(label(TRACKED + (quest.isTracked ? "•" : ""), 8)).width(8).top().padLeft(3);
         TextraLabel name = Controls.newTextraLabel(INK + quest.getName(), nameFont);
         name.setWrap(true);
@@ -199,11 +198,9 @@ public class QuestLogScene extends UIScene {
         float shrink = Controls.getTextraFont().cellHeight - nameFont.cellHeight;
         row.add(name).width(nameWidth).left().padLeft(2).padTop(-shrink / 2).padBottom(shrink * 1.5f);
         TextraLabel progress = Controls.newTextraLabel("[%80]" + INK_SOFT + (stages == 0 ? "" : quest.getCompletedStages().size() + "/" + stages));
-        row.add(progress).width(progressWidth).top().right().padTop(2).padRight(split ? 3 : 0);
-        if (!split) {
-            progress.setAlignment(Align.right);
+        row.add(new Container<>(progress).right()).width(progressWidth).top().padTop(2);
+        if (!split)
             row.add(new Chevron(INK_SOFT_COLOR, true)).top().padTop(0.5f).padLeft(7).padRight(3);
-        }
         row.pad(3, 0, 3, 0);
         row.addListener(new ClickListener() {
             @Override
