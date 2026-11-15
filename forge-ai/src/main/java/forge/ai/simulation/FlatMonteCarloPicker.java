@@ -2104,8 +2104,67 @@ public final class FlatMonteCarloPicker {
             return true; // swap an unblocked attacker for the ninja: the classic bait, the block cannot be changed any more
         }
         final ApiType api = sa.getApi();
+        if (grantsBlockingKeyword(sa) && blockersDeclared(sa)) {
+            return false; // flying, reach, shadow... decide who may block: once the blockers are down it changes nothing
+        }
         return api == ApiType.Pump || api == ApiType.PumpAll || api == ApiType.Protection || api == ApiType.Regenerate
                 || isInteraction(sa) && api != ApiType.Counter;
+    }
+
+    /** A pump that grants a keyword which decides who can block whom (Flying, Reach, Shadow, Horsemanship). */
+    public static boolean grantsBlockingKeyword(final SpellAbility sa) {
+        if (sa == null || (sa.getApi() != ApiType.Pump && sa.getApi() != ApiType.PumpAll) || !sa.hasParam("KW")) {
+            return false;
+        }
+        for (final String kw : sa.getParam("KW").split(" & ")) {
+            if (kw.equals("Flying") || kw.equals("Reach") || kw.equals("Shadow") || kw.equals("Horsemanship")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Past the declare attackers step the blockers are chosen (or done): such a keyword cannot help any more. */
+    private static boolean blockersDeclared(final SpellAbility sa) {
+        final PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
+        return ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
+    }
+
+    /**
+     * The opponent attacks with a creature that the AI's one could block if it had the keyword that this ability grants
+     * (Crovax the Cursed's flying against a Serra Angel), and the block would be a good one: it kills the attacker or
+     * survives it. Offered to the rollouts in the declare attackers step, the last moment it is not too late.
+     */
+    public static boolean enablesGoodBlock(final Player player, final SpellAbility sa) {
+        if (!grantsBlockingKeyword(sa) || sa.usesTargeting() || !sa.isActivatedAbility() || sa.getHostCard() == null) {
+            return false;
+        }
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        final forge.game.combat.Combat combat = ph.getCombat();
+        final Card host = sa.getHostCard();
+        if (combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.isPlayerTurn(player)
+                || !host.isInZone(ZoneType.Battlefield) || !player.equals(host.getController())
+                || !forge.game.combat.CombatUtil.canBlock(host)) {
+            return false;
+        }
+        if (!"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
+            return false;
+        }
+        final List<String> kws = Arrays.asList(sa.getParam("KW").split(" & "));
+        for (final Card attacker : combat.getAttackersOf(player)) {
+            for (final String kw : kws) {
+                final boolean needs = switch (kw) {
+                    case "Flying", "Reach" -> attacker.hasKeyword(Keyword.FLYING) && !host.hasKeyword(Keyword.FLYING) && !host.hasKeyword(Keyword.REACH);
+                    case "Shadow" -> attacker.hasKeyword(Keyword.SHADOW) && !host.hasKeyword(Keyword.SHADOW);
+                    case "Horsemanship" -> attacker.hasKeyword(Keyword.HORSEMANSHIP) && !host.hasKeyword(Keyword.HORSEMANSHIP);
+                    default -> false;
+                };
+                if (needs && (host.getNetPower() >= attacker.getNetToughness() || host.getNetToughness() > attacker.getNetPower())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
