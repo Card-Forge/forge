@@ -7,16 +7,32 @@ import { reducedMotion } from './dom';
 /** The card or player under the pointer. src is empty when the viewer may not see the card. at is the hovered element. */
 type Hover = { card: number | null; src: string; from?: string; at?: HTMLElement } | { player: number };
 
+/** How an open zone is sorted: in zone order, by name, by card type, or by mana value. */
+export type ZoneSort = 'order' | 'name' | 'type' | 'mana';
+
 /** resetMatchUi clears the fields that belong to one match. main.ts clears the fields used by only one layout when the layout changes. */
 export interface UiState {
   /** Battlefield piles the player has expanded to show each card, keyed by the pile's signature. */
   openPiles: Set<string>;
+  /** Zone panels the player has opened by clicking a tile, as `${playerKey}/${zone}`. */
+  openZones: Set<string>;
+  /** The open zones are collapsed to a bar so the board is visible. They are still open. */
+  zonesMinimised: boolean;
   /** The id of the request collapsed to a bar so the board is visible. It is still open. */
   requestFolded: number | null;
   /** Where the player last clicked a card, where a spell's optional costs then open. */
   cardClickedAt: { x: number; y: number } | null;
+  /** Filters the open zone to cards whose name contains this text, in lower case. */
+  zoneSearch: string;
+  zoneSort: ZoneSort;
+  /** Of several zones the game shows for one question, the one whose cards are drawn, as `${playerKey}/${zone}`. Null draws the first with a card to choose. */
+  zoneChoice: string | null;
+  stackCollapsed: boolean;
+  /** The stack item under the pointer. Arrows are drawn to its targets. */
+  hoveredStackItem: number | null;
   /** The position of a right-click on a stack item. It is kept until the server answers and the menu opens there. */
   stackMenuAt: { key: number; x: number; y: number } | null;
+  stopsOpen: boolean;
   optionsOpen: boolean;
   /** The concede confirmation is open, from the game menu or its shortcut. */
   concedeAsk: boolean;
@@ -37,12 +53,16 @@ export interface UiState {
   sidePanels: { log: boolean; chat: boolean };
   /** The hovered card or player is pinned open as a sheet, after a long press on a phone. */
   inspect: boolean;
+  /** The hand is open as a drawer over the board, on a phone. */
+  handOpen: boolean;
   /** For layouts that show one opponent at a time. These hold the shown seat, the turn the player last chose one, and whether the phone's seat list is open. */
   openSeat: number | null;
   seatChosenTurn: number;
   seatsOpen: boolean;
   /** The permanents each opponent had when their seat was last shown, keyed by player. */
   seenOnField: Map<number, Set<number>>;
+  /** On a phone, the player whose zones are opened from their bar. The bar itself shows only the counts. */
+  zonesFor: number | null;
   /** The phone's menu sheet, and which of its tabs is shown. */
   menuSheet: 'log' | 'chat' | 'players' | null;
 }
@@ -51,9 +71,17 @@ const SIDE_KEY = 'forge.sidePanels';
 
 export const ui: UiState = {
   openPiles: new Set(),
+  openZones: new Set(),
+  zonesMinimised: false,
   requestFolded: null,
   cardClickedAt: null,
+  zoneSearch: '',
+  zoneSort: 'order',
+  zoneChoice: null,
+  stackCollapsed: false,
+  hoveredStackItem: null,
   stackMenuAt: null,
+  stopsOpen: false,
   optionsOpen: false,
   concedeAsk: false,
   gameMenu: null,
@@ -65,7 +93,9 @@ export const ui: UiState = {
   cardText: false,
   sidePanels: { log: true, chat: true, ...storedSidePanels() },
   inspect: false,
+  handOpen: false,
   openSeat: null,
+  zonesFor: null,
   seatChosenTurn: 0,
   seatsOpen: false,
   seenOnField: new Map(),

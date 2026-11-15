@@ -14,7 +14,14 @@ export interface Model {
   root: number;
   visible: Set<number>;
   localPlayers: number[];
+  prompt: Prompt | null;
+  zones: ShownZone[];
   requests: Map<number, Request>;
+  gameOver: boolean;
+  /** Each player's games won in the match. It is sent when a game ends and is empty until then. */
+  matchScore: MatchScore[];
+  controls: Controls | null;
+  playable: Playable | null;
   looks: Looks | null;
   /** The page the server shows the browser. 'opening' means a seat is being taken, between the menu and the table. */
   screen: Screen;
@@ -50,7 +57,13 @@ export function createModel(): Model {
     root: -1,
     visible: new Set(),
     localPlayers: [],
+    prompt: null,
+    zones: [],
     requests: new Map(),
+    gameOver: false,
+    matchScore: [],
+    controls: null,
+    playable: null,
     looks: null,
     screen: 'menu',
     playerName: '',
@@ -151,10 +164,26 @@ export function cardMenu(model: Model): ChoicesRequest | null {
     && oldest.options.every(o => !o.card && !o.imageKey && !o.player) ? oldest : null;
 }
 
+/** Whether the prompt lets the player pick a card, a player or a stack item. */
+export function offersPicks(p: Prompt): boolean {
+  return p.selectable.length > 0 || p.selectablePlayers.length > 0 || p.selectableStack.length > 0;
+}
+
 /** Whether a request is about cards. It is laid out on the dimmed board, not in a dialog. Words, numbers and colours still use a dialog. */
 export function cardPrompt(req: Request): boolean {
   if (req.kind === 'order' || req.kind === 'manipulate' || req.kind === 'distribute') return true;
   return req.kind === 'choices' && !req.atX && !req.atY && !req.stackKeys && req.options.some(o => o.card || o.imageKey || o.name || o.player);
+}
+
+export function stackTopSource(model: Model): Ref | undefined {
+  const top = derefAll(model, game(model)?.Stack)[0] as { SourceCard?: Ref } | undefined;
+  return top?.SourceCard ?? undefined;
+}
+
+/** The card a request comes from. This is the card it names. A scry names none, but is only asked while its spell resolves, so it is the top of the stack. */
+export function askingCard(model: Model, req: Request): Ref | undefined {
+  const named = 'card' in req ? req.card : undefined;
+  return named ?? (req.kind === 'manipulate' ? stackTopSource(model) : undefined);
 }
 
 /** The open request when it asks which spell on the stack to choose. It is answered by clicking the spell on the stack. */
@@ -208,4 +237,10 @@ export function concedingEndsGame(model: Model): boolean {
   const mineFoes = foes(mine);
   const left = players(model).filter(p => p !== mine && !p.HasLost);
   return left.every(p => mineFoes.has(p.$key) && left.every(q => !foes(p).has(q.$key)));
+}
+
+/** What the player can attack: their opponents still in the game, and those opponents' planeswalkers and battles. */
+export function attackTargets(model: Model, player: PlayerView | undefined): number[] {
+  return derefAll(model, player?.Opponents).filter(p => !p.HasLost).flatMap(p => [p.$key,
+    ...zone(model, p, 'Battlefield').filter(c => /Planeswalker|Battle/.test(stateOf(model, c).Type ?? '')).map(c => c.$key)]);
 }

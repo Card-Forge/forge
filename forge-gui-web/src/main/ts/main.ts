@@ -7,18 +7,24 @@ import { changeUi, initUi, resetMatchUi, transition, ui } from './ui';
 import { initForm, isPortrait } from './form';
 import { initPress } from './press';
 import { initSheets, matchHistory } from './sheet';
+import { keyCommand, type KeyCommand } from './keys';
 import { rememberName, rememberedAvatar, rememberedName, rememberedSleeve } from './identity';
 import { renderScreens, pageUnder, screenOf, slideWay } from './screens';
+import { confirmShown } from './match/questionparts';
 import { renderMatch, renderSky, resetTable } from './match/board';
 import { arriveAtMatch, dimIntoMatch } from './match/matchentry';
 import { renderPrompt, flash, pressPromptButton } from './match/prompt';
 import { appendLog, initLog, logTints } from './match/log';
 import { initSide, renderSide, showLog } from './match/side';
 import { initDetail, nextFace, renderDetail } from './preview';
+import { initStack, showStack } from './match/stack';
+import { recordMacro } from './match/gamemenu';
+import { showShortcuts } from './options';
 import { initOverlay, drawOverlay } from './match/overlay';
 import { afterCombatDrags, initCombatDrag, renderCombatDrag } from './match/combatdrag';
 import { boundKeys, initSettings, onServerSettings, rememberGuestAutoPass, restoreGuestSettings, setGuest, setting, shortcutKeys } from './settings';
 import { behindItsBoard, passingFor } from './match/pauserules';
+import { createPacer } from './match/pacer';
 import { setVersion } from './links';
 import { goBack } from './header';
 import { applyAudioSettings, playMusic, playSound } from './audio';
@@ -29,8 +35,10 @@ import { initNotices, showNotice } from './notices';
 import { forgetWakeLock, keepAwake } from './wakelock';
 import { deleteDeviceDeck, listDeviceDecks, putDeviceDeck } from './deck/devicedecks';
 import type { Send, ServerMessage } from './protocol';
+import { closeShownZones } from './match/zones';
 
 const model = createModel();
+const pacer = createPacer(model, apply);
 let scheduled = false;
 // A guest's settings are kept in its server session, so the browser sends the settings it stored to each session it is given.
 // A seat handed over moves the browser to another session on the same connection
@@ -54,13 +62,29 @@ const report = (text: string): void => {
 window.addEventListener('error', e => report(String((e.error as Error | undefined)?.stack ?? e.message)));
 window.addEventListener('unhandledrejection', e => report(String((e.reason as Error | undefined)?.stack ?? e.reason)));
 
+// While messages are held, the prompt on screen is from an earlier board. An answer sent now would go to a prompt the player has not seen
+const HELD_INPUT = new Set(['selectCard', 'selectPlayer', 'selectStackItem', 'useMana', 'ok', 'cancel', 'endTurn', 'undo']);
+const sendNow: Send = msg => {
+  if (!pacer.holding() || !HELD_INPUT.has(msg.t)) send(msg);
+  else console.warn(`Not sent while the page catches up: ${msg.t}`);
+};
 const wire = createActions(sendNow);
 const actions = {
   ...wire,
+  // Cancel during a pass stops the pass. The host accepts that at any time, even while the page catches up
+  cancel: () => (pacer.holding() && passingFor(model.controls) ? wire.stopYield() : wire.cancel()),
   // When the concession ends the game, the plays the player would have watched are skipped
   concede: () => {
     if (concedingEndsGame(model)) pacer.hurry();
     wire.concede();
+  },
+  // The zones the game shows close at once, as an answered dialog does. Not while the page catches up, because then OK is not sent
+  ok: () => {
+    if (!pacer.holding()) {
+      closeShownZones(model);
+      schedule();
+    }
+    afterCombatDrags(() => wire.ok());
   },
   // An answered request is removed from the model at once, so its dialog closes without waiting for the server
   answer: (id, value) => {
@@ -96,12 +120,106 @@ initNotices(model, schedule);
 initPress();
 initSheets();
 initDetail(actions);
+initStack(actions);
+initOverlay(schedule);
+initCombatDrag(actions);
 initLog();
 initSide();
 initSettings(actions.setSetting, () => {
   applyAudioSettings();
   schedule();
 });
+
+// keys.ts decides what each key does, based on what is open, except Escape inside a dialog or menu
+document.addEventListener('keydown', e => {
+  const target = e.target instanceof HTMLElement ? e.target : null;
+  // Enter on a dialog button focused with Tab presses that button instead of confirming the answer
+  if (e.key === 'Enter' && target instanceof HTMLButtonElement && target.matches(':focus-visible') && target.closest('#dialog-layer')) return;
+  const command = keyCommand({
+    key: e.key,
+    code: e.keyCode,
+    ctrl: e.ctrlKey,
+    shift: e.shiftKey,
+    alt: e.altKey,
+    meta: e.metaKey,
+    typing: isTyping(target),
+  }, model, ui, boundKeys(), shortcutKeys());
+  if (!command) {
+    return;
+  }
+  e.preventDefault();
+  runKey(command);
+});
+
+function runKey(command: KeyCommand): void {
+  switch (command) {
+    case 'closeOptions': changeUi(u => { u.optionsOpen = false; }); break;
+    case 'closeConcede': changeUi(u => { u.concedeAsk = false; }); break;
+    case 'closeGameMenu': changeUi(u => { u.gameMenu = null; }); break;
+    case 'confirmRequest': {
+      const req = oldestRequest(model);
+      if (req) confirmShown(req.id);
+      break;
+    }
+    case 'foldRequest': changeUi(u => { u.requestFolded = oldestRequest(model)?.id ?? null; }); break;
+    case 'unfoldRequest': changeUi(u => { u.requestFolded = null; }); break;
+    case 'closeReveal': {
+      const reveal = oldestRequest(model);
+      if (reveal) actions.answer(reveal.id, []);
+      break;
+    }
+    case 'closeVolume': changeUi(u => { u.volumeOpen = false; }); break;
+    case 'closeStackMenu': changeUi(u => { u.stackMenuAt = null; }); break;
+    case 'alwaysYes': actions.autoYieldTop(true); break;
+    case 'alwaysNo': actions.autoYieldTop(false); break;
+    case 'showStack': showStack(); break;
+    case 'showLog': showLog(); break;
+    // Desktop shows its dev panel only in dev mode. On the web only the host gets the dev menu
+    case 'showDev': if (setting('devMode') && model.host && !model.spectating) changeUi(u => { u.gameMenu = 'dev'; }); break;
+    case 'concede': if (!model.spectating) changeUi(u => { u.concedeAsk = true; }); break;
+    case 'yieldOptions': changeUi(u => { u.gameMenu = 'stops'; }); break;
+    case 'macroRecord': recordMacro(actions); break;
+    case 'macroRepeat': actions.macroRepeat(); break;
+    case 'showShortcuts': showShortcuts(); break;
+    case 'closeStops': changeUi(u => { u.stopsOpen = false; }); break;
+    case 'closeZones': changeUi(u => { u.openZones.clear(); u.zonesMinimised = false; }); break;
+    case 'closePicker': changeUi(u => { u.picker = null; }); break;
+    case 'closeImporter': changeUi(u => { u.importer = null; }); break;
+    case 'closeBrowse': changeUi(u => { u.browse = null; }); break;
+    // An open dialog or popup hears the same press and closes itself, so the page stays where it is
+    case 'back': if (!ui.volumeOpen && !document.querySelector('.backdrop, [role=menu], .popup')) goBack(); break;
+    case 'editorUndo': actions.editorUndo(); break;
+    case 'declineHostChoice': if (model.hostChoice) actions.answerHostChoice(model.hostChoice.id, []); break;
+    case 'ok': pressPromptButton('ok'); actions.ok(); break;
+    case 'cancel': {
+      pressPromptButton('cancel');
+      const pick = stackPick(model);
+      if (pick) actions.answer(pick.id, []); else actions.cancel();
+      break;
+    }
+    case 'toggleAutoPass': pressPromptButton('auto-pass'); actions.toggleAutoPass(); break;
+    case 'endTurn': pressPromptButton('end-turn'); if (model.controls?.untilEndOfTurn) actions.stopYield(); else actions.endTurn(); break;
+    case 'undo': pressPromptButton('undo'); actions.undo(); break;
+    case 'nextFace': nextFace(model); break;
+    case 'cardText': changeUi(u => { u.cardText = !u.cardText; }); break;
+    case 'startMatch': dimIntoMatch(byId('lobby'), () => actions.startMatch(ui.spectate)); break;
+    case 'castWithoutCost':
+    case 'castWithCost': {
+      const req = oldestRequest(model);
+      if (req?.kind === 'costs') actions.answer(req.id, command === 'castWithCost' ? [0] : []);
+      break;
+    }
+    case 'closeCardMenu': {
+      const menu = cardMenu(model);
+      if (menu) actions.answer(menu.id, []);
+      break;
+    }
+    default: {
+      const menu = cardMenu(model);
+      if (menu && command.startsWith('pickCardMenu')) actions.answer(menu.id, [Number(command.slice(-1)) - 1]);
+    }
+  }
+}
 
 function apply(msg: ServerMessage): void {
   switch (msg.t) {
@@ -192,12 +310,31 @@ function apply(msg: ServerMessage): void {
         resetTable();
       }
       break;
+    case 'prompt': model.prompt = msg; break;
+    case 'zones': model.zones = msg.show; break;
     case 'request':
       model.requests.set(msg.id, msg);
       break;
     case 'drawOffer': model.drawOffer = msg.open ? msg : null; break;
     case 'autoDecisions': model.autoDecisions = msg; break;
+    case 'gameOver':
+      model.gameOver = true;
+      model.matchScore = msg.score;
+      model.drawOffer = null;
+      break;
     case 'sound': playSound(msg); return;
+    case 'playable':
+      model.playable = msg;
+      break;
+    case 'controls':
+      model.controls = msg;
+      onServerSettings(msg.settings);
+      applyAudioSettings();
+      if (!model.host) {
+        rememberStops(msg);
+        rememberGuestAutoPass(msg.autoPass);
+      }
+      break;
     case 'log':
       appendLog(msg, logTints(players(model).map(p => ({ name: p.Name ?? '', local: isLocal(model, p) }))));
       return;
@@ -207,6 +344,8 @@ function apply(msg: ServerMessage): void {
     case 'notice': showNotice(msg); break;
     case 'devState': model.devState = msg; break;
     case 'devDump': saveText(msg.text, 'game-state.txt', 'text/plain'); return;
+    case 'flash': flash(); return;
+    case 'pictureReady': pictureArrived(msg.key, msg.art); break;
   }
   schedule();
 }
@@ -224,6 +363,11 @@ function offerRememberedName(): void {
 for (const kind of ['dragover', 'drop']) {
   addEventListener(kind, e => { if ((e as DragEvent).dataTransfer?.types.includes('Files')) e.preventDefault(); });
 }
+// The browser releases the wake lock when the page is hidden, so the next draw requests it again
+document.addEventListener('visibilitychange', () => {
+  forgetWakeLock();
+  schedule();
+});
 
 function schedule(): void {
   if (scheduled) return;

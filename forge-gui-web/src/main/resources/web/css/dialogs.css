@@ -6,6 +6,9 @@
 @keyframes menu-out { to { opacity: 0; scale: .96; } }
 .backdrop { animation: backdrop-in .15s ease-out; }
 .dialog, .host-choice, .zone-panel, .zone-bar { animation: box-in .16s ease-out; }
+/* A zone window opened from a pile on the board grows out of that pile instead (zones.ts sets the start point) */
+.zone-panel[data-opened="pile"] { animation: zone-grow .24s cubic-bezier(.2, .8, .2, 1); }
+@keyframes zone-grow { from { opacity: 0; scale: .06; } 35% { opacity: 1; } }
 .card-menu, .deck-menu { animation: menu-in .14s cubic-bezier(.2,.7,.3,1); transform-origin: 0 0; }
 /* The game menu grows upward out of its button, and an editor menu grows downward out of its own. Any other menu grows from the pointer. */
 .game-menu { transform-origin: 100% 100%; }
