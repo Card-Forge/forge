@@ -65,6 +65,34 @@ export function Menu({ model, actions }: { model: Model; actions: Actions }) {
   );
 }
 
+/** The choice of game kind, shown the same way for AI and friend opponents. Greyed kinds are not available yet. */
+function Chooser({ who, model, actions, back }: { who: 'play' | 'friends'; model: Model; actions: Actions; back: () => void }) {
+  const computer = who === 'play';
+  return (
+    <div class="chooser">
+      <SetupHead trail={[{ label: t('lblStart'), go: back }, { label: WAY_NAMES[who] }]} title={t('lblWebMenuWhatMode')} />
+      <div class="chooser-kinds">
+        <Kind id="constructed" name={t('lblConstructed')} onClick={() => actions.openLobby(!computer)}
+          blurb={t('lblWebMenuConstructedBlurb')} />
+        <Kind id="draft" name={t('lblDraft')} onClick={() => (computer ? actions.limitedOpen('draft', false) : actions.openLimitedTable('draft'))}
+          blurb={t('lblWebMenuDraftBlurb')}
+          resume={computer && model.draftPools > 0 ? () => actions.limitedOpen('draft', true) : undefined} />
+        <Kind id="sealed" name={t('lblSealed')} onClick={() => (computer ? actions.limitedOpen('sealed', false) : actions.openLimitedTable('sealed'))}
+          blurb={t('lblWebMenuSealedBlurb')}
+          resume={computer && model.sealedPools > 0 ? () => actions.limitedOpen('sealed', true) : undefined} />
+      </div>
+    </div>
+  );
+}
+
+// A fanned deck for Constructed. Two packs passing between players for Draft. An opened pack with cards rising out for Sealed
+const KIND_ICONS: Record<string, ComponentChildren> = {
+  constructed: <><rect x="16" y="11" width="21" height="29" rx="3" /><path d="M12 15v21M8 19v13" /></>,
+  draft: <><rect x="7" y="16" width="14" height="22" rx="2" /><rect x="27" y="16" width="14" height="22" rx="2" /><path d="M17 9h13l-3-3M31 45H18l3 3" /></>,
+  sealed: <><path d="M13 22v19h22V22" /><path d="M13 22l2.75-2.5 2.75 2.5 2.75-2.5 2.75 2.5 2.75-2.5 2.75 2.5 2.75-2.5 2.75 2.5" />
+    <rect x="16" y="6" width="10" height="15" rx="1.5" transform="rotate(-12 21 13.5)" /><rect x="23" y="5" width="10" height="15" rx="1.5" transform="rotate(10 28 12.5)" /></>,
+};
+
 // The card art behind each tile, pinned to one printing so the picture does not change
 const MENU_ART: Record<string, string> = {
   play: 'c:Mirror Match|C15|1',
@@ -89,6 +117,33 @@ function useArt(id: string): string | null {
     return () => { img.onload = null; };
   }, [src]);
   return loaded;
+}
+
+/** A kind of game, drawn as a plaque like the start page's. It holds two buttons because a button cannot contain another. It is greyed when onClick is missing. icon replaces the kind's own icon. */
+export function Kind({ id, icon, name, blurb, resume, resumeLabel, onClick }: {
+  id: string; icon?: ComponentChildren; name: string; blurb: string; resume?: () => void; resumeLabel?: string; onClick?: () => void;
+}) {
+  const art = useArt(id);
+  const drawn = <svg viewBox="0 0 48 48">{icon ?? KIND_ICONS[id]}</svg>;
+  return (
+    <div class={`kind-card plaque${art ? ' has-art' : ''}${resume ? ' has-resume' : ''}`} style={art ? { '--art': art } : undefined}>
+      <span class="plaque-rim" aria-hidden="true" />
+      <span class="plaque-mark" aria-hidden="true">{drawn}</span>
+      <button class="kind-main" data-kind={id} disabled={!onClick} onClick={onClick}>
+        <span class="mode-art" aria-hidden="true">{drawn}</span>
+        <span class="mode-text">
+          <span class="mode-name">{name}</span>
+          <span class="mode-blurb">{blurb}</span>
+        </span>
+      </button>
+      {resume && (
+        <button class="kind-resume" onClick={resume}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /><path d="M10 9l5 3-5 3z" /></svg>
+          {resumeLabel ?? t('lblWebMenuResumeLastEvent')}
+        </button>
+      )}
+    </div>
+  );
 }
 
 // A robot for the computer, two people for friends, a deck for the editor
@@ -199,4 +254,44 @@ export function NamePrompt({ model, actions, initial = '', cancel }: {
 function HostPassword({ value, set }: { value: string; set: (value: string) => void }) {
   return <input type="password" class="host-password" placeholder={t('lblWebConsoleHostPassword')} aria-label={t('lblWebConsoleHostPassword')}
     autocomplete="current-password" value={value} onInput={e => set(e.currentTarget.value)} />;
+}
+
+/** The page for a browser with no seat. A seat is being taken, the last attempt failed, or nobody has opened a table yet. */
+function Waiting({ model, actions }: { model: Model; actions: Actions }) {
+  const [password, setPassword] = useState('');
+  const failed = model.screen !== 'opening' && !!model.error;
+  const state = model.screen === 'opening' ? 'joining' : failed ? 'failed' : 'idle';
+  // A match in progress takes no new players, so the guest waits for the host to give up a seat or open the next table
+  const midMatch = state === 'idle' && model.presence.some(p => p.host && (p.doing === 'playing' || p.doing === 'watching'));
+  return (
+    <div class="menu-page">
+      <Wordmark />
+      <section class={`wait-card ${state}`}>
+        <ol class="trail">
+          <Step name={t('lblWebMenuStepConnected')} done />
+          <Step name={t('lblWebMenuStepNamed')} done={!!model.playerName} />
+          <Step name={t('lblWebMenuStepSeated')} state={state} />
+        </ol>
+        <div class="wait-head">
+          <span class="wait-mark" aria-hidden="true" />
+          <b>{t(model.screen === 'opening' ? 'lblWebMenuTakingSeat' : failed ? 'lblWebMenuCouldNotTakeSeat' : midMatch ? 'lblWebMenuMatchInProgress' : 'lblWebMenuNoTableYet')}</b>
+        </div>
+        <p class="wait-body">
+          {model.screen === 'opening' ? t('lblWebMenuMakingRoom')
+            : failed ? model.error
+              : t(midMatch ? 'lblWebMenuSeatedAfterMatch' : model.canClaimHost ? 'lblWebMenuNobodyHosting' : 'lblWebMenuSeatedWhenOpens')}
+        </p>
+        <div class="wait-buttons">
+          {failed && <button onClick={() => actions.join()}>{t('lblTryAgain')}</button>}
+          {model.canClaimHost && model.hostPassword && <HostPassword value={password} set={setPassword} />}
+          {model.canClaimHost && <button class="primary" onClick={() => actions.claimHost(password)}>{t('lblWebMenuHostTable')}</button>}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Step({ name, done = false, state }: { name: string; done?: boolean; state?: string }) {
+  const mark = state === undefined ? (done ? 'done' : 'todo') : state === 'joining' ? 'now' : state === 'failed' ? 'failed' : 'todo';
+  return <li class={`step ${mark}`}><span class="dot" aria-hidden="true" />{name}</li>;
 }

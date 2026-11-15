@@ -12,6 +12,7 @@
 .card-menu, .deck-menu { animation: menu-in .14s cubic-bezier(.2,.7,.3,1); transform-origin: 0 0; }
 /* The game menu grows upward out of its button, and an editor menu grows downward out of its own. Any other menu grows from the pointer. */
 .game-menu { transform-origin: 100% 100%; }
+.deck-menu { transform-origin: 100% 0; }
 /* A closing element plays its exit animation before it is removed (closing.ts) */
 /* Each exit animation has its own keyframes name. The same name with only the direction changed would not run again. */
 @keyframes backdrop-out { to { opacity: 0; } }
@@ -23,6 +24,14 @@
 .backdrop.on-board.closing, .backdrop.on-board.closing > * { animation-duration: .2s; }
 /* A screen rises in when it opens, as a box does (index.html holds a root for each screen) */
 :is(#menu, #lobby, #editor, #limited, #drafting) > * { animation: box-in .18s ease-out; }
+/* A page that starts a match dims and blurs under the rising coin. The board then fades in over it when its seats are drawn (match/matchentry.ts).
+   The page is fixed where it was scrolled to, so the board can be drawn while it dims. The board comes later in the page, so it is drawn on top */
+.to-match { position: fixed; inset: var(--scrolled, 0) 0 auto; pointer-events: none; animation: to-match .3s ease-out forwards; }
+@keyframes to-match { to { filter: blur(6px) brightness(.3); } }
+html:has(.to-match) { overflow: hidden; }
+#match.held { opacity: 0; }
+#match.arriving { animation: match-arrive .35s ease-out both; }
+@keyframes match-arrive { from { opacity: 0; } }
 /* Going back to an earlier screen shows it at once (screens.tsx) */
 html[data-back] :is(#menu, #lobby, #editor, #limited, #drafting) > *, html[data-back] :is(.modes .mode, .kind-card).plaque { animation: none; }
 /* A move to another page (main.ts render), or through an ordered set such as a step of the start menu (ui.ts eased), slides in the direction of the order, deeper pages to the left. The header has its own name, so it stays in place while the page under it slides */

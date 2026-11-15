@@ -58,6 +58,8 @@ html[data-side="open"]::view-transition-old(side-column) { animation: side-fade-
 #match.side-folded { --side-gap: 48px; grid-template-areas: "opp opp" "phase phase" "me me" "hand hand"; }
 #match.side-folded #side { position: fixed; right: 0; top: 8px; z-index: 26; }
 #match.side-folded .side-toggle { writing-mode: vertical-rl; padding: 10px 4px; border-radius: 6px 0 0 6px; }
+/* The chat is drawn into its own container. Its log and input are the rows of the panel. */
+#match-chat { display: flex; flex: 1; min-height: 0; }
 #hand { grid-area: hand; }
 #opponent.many { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; min-height: 0; }
 /* The tabbed layout shows one opponent at a time. The other opponents are tabs along the top edge of the seat. Only the open tab has a full outline. */

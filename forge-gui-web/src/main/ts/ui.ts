@@ -7,6 +7,12 @@ import { reducedMotion } from './dom';
 /** The card or player under the pointer. src is empty when the viewer may not see the card. at is the hovered element. */
 type Hover = { card: number | null; src: string; from?: string; at?: HTMLElement } | { player: number };
 
+/** A picker open over match setup, for one seat. */
+export interface Picker {
+  kind: 'deck' | 'sleeve' | 'avatar' | 'planes' | 'schemes' | 'vanguard' | 'commander';
+  seat: number;
+}
+
 /** How an open zone is sorted: in zone order, by name, by card type, or by mana value. */
 export type ZoneSort = 'order' | 'name' | 'type' | 'mana';
 
@@ -42,12 +48,17 @@ export interface UiState {
   macro: 'none' | 'recording' | 'recorded';
   /** The volume control beside the options button is open. */
   volumeOpen: boolean;
+  /** The menu shows the name and avatar form, opened by the dock's edit button. */
+  renaming: boolean;
   /** The play choice whose game kinds the start page shows. It is kept so that going back from a table returns there. */
   menuChoice: 'play' | 'friends' | null;
+  picker: Picker | null;
   /** The deck finder opened from the start page with no seat, and the format it lists. A hello does not close it. */
   browse: { format: string } | null;
   /** The open importer, and where it was opened from: a seat's deck finder, the start page, or the editor. */
   importer: { from: 'seat' | 'start' | 'editor'; seat?: number; text?: string; url?: string; sync?: boolean } | null;
+  /** The host has chosen to watch the computer play its seat. */
+  spectate: boolean;
   hover: Hover | null;
   /** Which face of the hovered card the zoom panel shows. */
   faceIndex: number;
@@ -55,6 +66,7 @@ export interface UiState {
   cardText: boolean;
   /** Which side column panels are open. Stored in the browser across sessions. */
   sidePanels: { log: boolean; chat: boolean };
+  draftHidden: boolean;
   /** The hovered card or player is pinned open as a sheet, after a long press on a phone. */
   inspect: boolean;
   /** The hand is open as a drawer over the board, on a phone. */
@@ -91,13 +103,17 @@ export const ui: UiState = {
   gameMenu: null,
   macro: 'none',
   volumeOpen: false,
+  renaming: false,
   menuChoice: null,
+  picker: null,
   browse: null,
   importer: null,
+  spectate: false,
   hover: null,
   faceIndex: 0,
   cardText: false,
   sidePanels: { log: true, chat: true, ...storedSidePanels() },
+  draftHidden: false,
   inspect: false,
   handOpen: false,
   openSeat: null,

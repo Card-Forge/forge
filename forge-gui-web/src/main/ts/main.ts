@@ -40,9 +40,13 @@ import { closeShownZones } from './match/zones';
 const model = createModel();
 const pacer = createPacer(model, apply);
 let scheduled = false;
+// Requested once, so a slow answer is not requested again by every message that arrives meanwhile
+let askedAddresses = false;
 // A guest's settings are kept in its server session, so the browser sends the settings it stored to each session it is given.
 // A seat handed over moves the browser to another session on the same connection
 let restoredFor: number | null = null;
+// A guest's decks are stored in its browser, so each connection sends the server the list
+let sentDeviceDecks = false;
 // A sound or log line arrives before its board update. It is applied after that board, or alone after 300 ms if no board follows (pauserules.ts)
 const send = connect(behindItsBoard(msg => pacer.receive(msg), 300), online => {
   byId('banner').hidden = online;
@@ -110,6 +114,11 @@ const actions = {
   addDeckFile: (text, format, clash) => {
     model.nameTaken = null;
     wire.addDeckFile(text, format, clash);
+  },
+  sealedCreate: c => {
+    model.nameTaken = null;
+    model.error = null;
+    wire.sealedCreate(c);
   },
 } as Actions;
 
@@ -307,15 +316,48 @@ function apply(msg: ServerMessage): void {
       model.importResult = msg;
       break;
     case 'nameTaken': model.nameTaken = msg.name; break;
+    case 'limitedOptions': model.limitedOptions = msg; break;
     case 'formats': model.formats = msg.formats; break;
     case 'cardSets': model.cardSets = msg.sets; break;
+    case 'limitedPools': model.limitedPools = msg; break;
+    case 'limitedResult': model.limitedResult = msg; break;
+    case 'draft':
+      model.draft = msg;
+      model.error = null;
+      break;
+    case 'deviceDeck':
+      void (msg.text ? putDeviceDeck({ id: msg.id, text: msg.text, format: msg.format }) : deleteDeviceDeck(msg.id));
+      return;
+    case 'extraChoices':
+      model.extraChoices = msg;
+      break;
     case 'decks':
       model.decks = msg.decks;
       model.deckCardPool = msg.cardPool ?? null;
       model.deckGen = msg.deckGen ?? null;
       break;
+    case 'lobby': {
+      model.lobby = msg.table ?? null;
+      // Renaming your seat renames you, so the name is stored for the next server you join
+      const mine = model.lobby?.seats[model.lobby.mySeat]?.name;
+      if (mine) rememberName(mine);
+      // The host makes a web request to find its external address, so it is requested once per lobby
+      if (!model.lobby?.shareable) {
+        askedAddresses = false;
+      } else if (!model.addresses && !askedAddresses) {
+        askedAddresses = true;
+        send({ t: 'addresses' });
+      }
+      break;
+    }
+    case 'addresses': model.addresses = msg.list; break;
+    case 'chat': model.chat = [...model.chat, { from: msg.from ?? '', text: msg.text, earlier: msg.earlier }]; break;
+    // The server sends the whole list on every change, so it replaces the old one
+    case 'presence': model.presence = msg.people; break;
     case 'deckDetails': model.deckDetails = msg.deck; break;
     case 'deckMatches': model.deckMatches = { ...model.deckMatches, [msg.kind]: msg }; break;
+    case 'cardSearch': model.cardNames = msg.names ?? []; break;
+    case 'printings': model.printings = { name: msg.name, list: msg.printings ?? [] }; break;
     case 'hostChoice': model.hostChoice = msg; break;
     case 'error':
       // A stored name can belong to someone else on this server. It is forgotten so the player is asked for another

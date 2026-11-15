@@ -3,7 +3,10 @@
 import { render } from 'preact';
 import { Menu, NamePrompt } from './menu';
 import { rememberedName } from './identity';
+import { Lobby } from './lobby/lobby';
 import { Editor } from './deck/editor';
+import { Limited } from './limited/limited';
+import { Drafting } from './limited/drafting';
 import { Importer } from './deck/importer';
 import { DeckFinder } from './deck/deckfinder';
 import { Requests, StackMenu } from './match/questions';
@@ -13,6 +16,7 @@ import { AutoDecisionsDialog, AutoPassStops, ConcedeQuestion, DrawOfferQuestion,
 import { DevSetupDialog } from './match/devmenu';
 import { Volume } from './volume';
 import { Notices } from './notices';
+import { Dock } from './dock';
 import { isPortrait } from './form';
 import { byId } from './dom';
 import { changeUi, ui } from './ui';
@@ -50,7 +54,15 @@ export function renderScreens(model: Model, actions: Actions): void {
   editing = page === 'editor';
   render(under === 'name' ? <NamePrompt model={model} actions={actions} initial={rememberedName() ?? ''} />
     : under === 'menu' ? <Menu key={edits} model={model} actions={actions} /> : null, byId('menu'));
+  // The page a match starts from keeps what it last showed until the board covers it (match/matchentry.ts)
+  if (!byId('lobby').classList.contains('to-match')) render(under === 'lobby' ? <Lobby key={edits} model={model} actions={actions} /> : null, byId('lobby'));
   render(page === 'editor' ? <Editor model={model} actions={actions} /> : null, byId('editor'));
+  render(under === 'limited' ? <Limited key={edits} model={model} actions={actions} /> : null, byId('limited'));
+  render(under === 'drafting' ? <Drafting key={edits} model={model} actions={actions} /> : null, byId('drafting'));
+  // The dock is at the bottom edge before a match and in the side column under the log during one
+  render(page === 'match' && model.networked ? <Dock model={model} actions={actions} /> : null, byId('match-chat'));
+  render(page !== 'match' ? <Dock model={model} actions={actions}
+    rename={page === 'menu' ? () => changeUi(u => { u.renaming = true; }) : undefined} /> : null, byId('dock'));
   render(<>
     {page === 'match' && <Requests model={model} actions={actions} />}
     {page === 'match' && <StackMenu model={model} actions={actions} />}

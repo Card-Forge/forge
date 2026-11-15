@@ -8,6 +8,9 @@ interface Looks {
   sleeveCount: number;
 }
 
+/** A line of chat. from is empty for a netplay announcement. earlier marks a line sent before this browser joined. */
+export interface ChatEntry { from: string; text: string; earlier: boolean }
+
 // All the state the browser holds. objects is its copy of the game's objects. forge.web.match.BrowserModel applies and prunes them by the same rules
 export interface Model {
   objects: Map<number, TrackedObject>;
@@ -23,11 +26,14 @@ export interface Model {
   controls: Controls | null;
   playable: Playable | null;
   looks: Looks | null;
+  spectating: boolean;
   /** The page the server shows the browser. 'opening' means a seat is being taken, between the menu and the table. */
   screen: Screen;
   playerName: string;
   decks: DeckSummary[];
   error: string | null;
+  lobby: LobbyTable | null;
+  addresses: Address[] | null;
   host: boolean;
   canClaimHost: boolean;
   /** Whether the host's seat needs the host password from this browser. */
@@ -39,14 +45,26 @@ export interface Model {
   playerDetails: Map<number, PlayerDetail>;
   /** The options for a right-click on a stack item, from the server's last answer. */
   stackMenu: StackMenu | null;
+  chat: ChatEntry[];
+  /** Everyone on this server who has set a name. */
+  presence: Person[];
+  /** Another person is at the table, so chat is useful. */
+  networked: boolean;
   /** The host's deck generator settings. It is null for a guest, who cannot change them. */
   deckGen: DeckGenOptions | null;
   /** The card pool the lobby limits decks to. The deck finder pins it as a filter. */
   deckCardPool: string | null;
+  /** What the seat being edited may choose for a planar deck, scheme deck or avatar. */
+  extraChoices: ExtraChoices | null;
   /** The deck last requested, with its card list and statistics. */
   deckDetails: DeckDetails | null;
   /** The server's last deck search result for each kind of card or set filter, with the search words. */
   deckMatches: Partial<Record<string, DeckMatches>>;
+  /** For picking sleeve art: card names that match the last search, and the printings of the last name requested. */
+  cardNames: string[];
+  printings: { name: string; list: Printing[] } | null;
+  /** Card art this installation has already used as a deck sleeve. */
+  savedSleeveArt: SavedSleeveArt[];
   /** A question outside a match that the host is waiting for an answer to. */
   hostChoice: HostChoice | null;
   /** This browser has sent its saved name to the server, and the answer has not arrived yet. */
@@ -66,10 +84,24 @@ export interface Model {
   importResult: ImportResult | null;
   /** An import or pool name that is already in use. The page asks the player what to do. */
   nameTaken: string | null;
+  /** On the Limited pages, the pool whose opponents screen is shown. */
+  eventPool: string | null;
+  /** How many sealed pools are saved, for the menu. */
+  sealedPools: number;
+  draftPools: number;
+  /** Which Limited pages are open: 'sealed' or 'draft'. */
+  eventKind: EventKind | null;
+  /** Whether a draft is running. draft holds its latest state. */
+  drafting: boolean;
+  draft: DraftState | null;
+  /** The state of a limited gauntlet after its last game. It is null outside a gauntlet. */
+  limitedResult: LimitedResult | null;
+  limitedOptions: LimitedOptions | null;
   /** Every entry of the Format menu, in its order. They do not change while the server runs, so they are sent once per connection. */
   formats: Format[];
   /** Every edition, newest first. They are requested the first time the catalogue's set filter opens. */
   cardSets: LimitedEdition[] | null;
+  limitedPools: LimitedPools | null;
 }
 
 export function createModel(): Model {
@@ -86,10 +118,13 @@ export function createModel(): Model {
     controls: null,
     playable: null,
     looks: null,
+    spectating: false,
     screen: 'menu',
     playerName: '',
     decks: [],
     error: null,
+    lobby: null,
+    addresses: null,
     host: true,
     canClaimHost: false,
     hostPassword: false,
@@ -97,10 +132,17 @@ export function createModel(): Model {
     cardDetails: new Map(),
     playerDetails: new Map(),
     stackMenu: null,
+    chat: [],
+    presence: [],
+    networked: false,
     deckGen: null,
     deckCardPool: null,
+    extraChoices: null,
     deckDetails: null,
     deckMatches: {},
+    cardNames: [],
+    printings: null,
+    savedSleeveArt: [],
     hostChoice: null,
     nameSent: false,
     notices: [],
@@ -111,8 +153,17 @@ export function createModel(): Model {
     catalogue: null,
     importResult: null,
     nameTaken: null,
+    eventPool: null,
+    sealedPools: 0,
+    draftPools: 0,
+    eventKind: null,
+    drafting: false,
+    draft: null,
+    limitedResult: null,
+    limitedOptions: null,
     formats: [],
     cardSets: null,
+    limitedPools: null,
   } as Model;
 }
 
