@@ -228,8 +228,8 @@ public class ComputerUtilCard {
     /**
      * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
      * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry.
-     * A toughness-setting characteristic-defining ability reads its controller's board, so an
-     * opponent's 8/8 can also be a 0/0 for us.
+     * Static abilities and entry replacements read the copy's controller, so a copy of an opponent's
+     * creature is judged under {@code newController}: their 8/8 Nightmare can be a 0/0 for us.
      */
     public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
         final Game game = newController.getGame();
@@ -238,17 +238,22 @@ public class ComputerUtilCard {
             if (!c.isCreature()) {
                 return true;
             }
-            int toughness = c.getNetToughness();
-            if (!c.getController().equals(newController)
-                    && c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
-                final Card copy = CardCopyService.getLKICopy(c);
+            Card copy = c;
+            if (!c.getController().equals(newController)) {
+                // a copy keeps base toughness, so only a printed 0 or a toughness-setting CDA can arrive dead
+                if (c.getBaseToughness() > 0
+                        && c.getStaticAbilities().stream().noneMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                    return true;
+                }
+                copy = CardCopyService.getLKICopy(c);
                 copy.setController(newController, game.getNextTimestamp());
+                // the LKI keeps the original's boosts, which the static pass below does not remove
+                copy.getPTBoostTable().clear();
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                toughness = copy.getNetToughness();
             }
-            toughness += c.getCounters(CounterEnumType.M1M1) - c.getCounters(CounterEnumType.P1P1);
-            return toughness > 0 || toughness + countersOnEntry(c) > 0;
+            final int toughness = copy.getNetToughness() + copy.getCounters(CounterEnumType.M1M1) - copy.getCounters(CounterEnumType.P1P1);
+            return toughness > 0 || toughness + countersOnEntry(copy) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);

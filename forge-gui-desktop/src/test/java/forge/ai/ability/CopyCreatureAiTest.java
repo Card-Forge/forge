@@ -1,8 +1,11 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import forge.ai.AITest;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -145,5 +148,60 @@ public class CopyCreatureAiTest extends AITest {
 
         assertTrue(SpellApiToAi.Converter.get(sa).canPlayWithSubs(ai, sa).willingToPlay());
         assertEquals("Arcbound Worker", sa.getTargets().getFirstTargetedCard().getName());
+    }
+
+    @Test
+    public void countsOurEntryCountersOnACopyOfTheirCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        // the copy has X as 0, so only our Grumgully keeps it alive
+        Card walker = addCard("Hangarback Walker", opp);
+        walker.setCounters(CounterEnumType.P1P1, 2);
+        addCard("Grumgully, the Generous", ai);
+
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).contains(walker));
+    }
+
+    @Test
+    public void ignoresTheirEntryCountersOnACopyOfTheirCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card walker = addCard("Hangarback Walker", opp);
+        walker.setCounters(CounterEnumType.P1P1, 2);
+        addCard("Grumgully, the Generous", opp);
+
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).isEmpty());
+    }
+
+    @Test
+    public void countsOurAnthemOnACopyOfTheirCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card walker = addCard("Hangarback Walker", opp);
+        walker.setCounters(CounterEnumType.P1P1, 2);
+        addCard("Glorious Anthem", ai);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).contains(walker));
+    }
+
+    @Test
+    public void ignoresTheirAnthemOnACopyOfTheirCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card walker = addCard("Hangarback Walker", opp);
+        walker.setCounters(CounterEnumType.P1P1, 2);
+        addCard("Glorious Anthem", opp);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(ComputerUtilCard.filterOutFatalCopies(List.of(walker), ai).isEmpty());
     }
 }
