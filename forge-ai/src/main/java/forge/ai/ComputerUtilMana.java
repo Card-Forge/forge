@@ -203,8 +203,7 @@ public class ComputerUtilMana {
         final boolean filtersFirst = freeMana < cost.getConvertedManaCost();
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
-            final Collection<SpellAbility> abilities = sourcesForShards.get(shard);
-            final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
+            final List<SpellAbility> newAbilities = new ArrayList<>(sourcesForShards.get(shard));
 
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("Unsorted Abilities: " + newAbilities);
@@ -214,6 +213,7 @@ public class ComputerUtilMana {
                 int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
                 boolean checkFurther = false;
 
+                // Mana abilities on different cards
                 if (preOrder != 0) {
                     // on identical score (most likely basics) try keep access to more colors longer
                     if (shard.isGeneric() && manaCardMap.get(ability1.getHostCard()).equals(manaCardMap.get(ability2.getHostCard()))) {
@@ -236,13 +236,9 @@ public class ComputerUtilMana {
                         // preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
                         return preOrder;
                     }
-                }
-
-                // Mana abilities on the same card
-                // more mana is only better when it costs the same kind of resource and does nothing else
-                if (ability1.getHostCard() == ability2.getHostCard()
-                        && ability1.getPayCosts().isReusuableResource() == ability2.getPayCosts().isReusuableResource()
+                } else if (ability1.getPayCosts().isReusuableResource() == ability2.getPayCosts().isReusuableResource()
                         && ability1.getSubAbility() == null && ability2.getSubAbility() == null) {
+                    // more mana is only better when it costs the same kind of resource and does nothing else
                     final int moreMana = ability2.amountOfManaGenerated(true) - ability1.amountOfManaGenerated(true);
                     if (moreMana != 0) {
                         return moreMana;
@@ -276,38 +272,23 @@ public class ComputerUtilMana {
                 System.out.println("Sorted Abilities: " + newAbilities);
             }
 
-            sourcesForShards.replaceValues(shard, newAbilities);
-
             // Sort the first N abilities so that the preferred shard is selected, e.g. Adamant
             String manaPref = sa.getParamOrDefault("AIManaPref", "");
             if (manaPref.isEmpty() && sa.getHostCard() != null && sa.getHostCard().hasSVar("AIManaPref")) {
                 manaPref = sa.getHostCard().getSVar("AIManaPref");
             }
-
             if (!manaPref.isEmpty()) {
                 final String[] prefShardInfo = manaPref.split(":");
                 final String preferredShard = prefShardInfo[0];
                 final int preferredShardAmount = prefShardInfo.length > 1 ? Integer.parseInt(prefShardInfo[1]) : 3;
-
                 if (!preferredShard.isEmpty()) {
-                    final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
-                    final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
-
-                    prefSortedAbilities.sort(Comparator.comparing((SpellAbility ab) -> !ab.getManaPart().mana(ab).contains(preferredShard)));
-                    otherSortedAbilities.sort(Comparator.comparing((SpellAbility ab) -> ab.getManaPart().mana(ab).contains(preferredShard)));
-
-                    final List<SpellAbility> finalAbilities = new ArrayList<>();
-                    for (int i = 0; i < preferredShardAmount && i < prefSortedAbilities.size(); i++) {
-                        finalAbilities.add(prefSortedAbilities.get(i));
-                    }
-                    for (SpellAbility ab : otherSortedAbilities) {
-                        if (!finalAbilities.contains(ab))
-                            finalAbilities.add(ab);
-                    }
-
-                    sourcesForShards.replaceValues(shard, finalAbilities);
+                    final List<SpellAbility> prefAbilities = newAbilities.stream().filter(ab -> ab.getManaPart().mana(ab).contains(preferredShard)).limit(preferredShardAmount).collect(Collectors.toList());
+                    newAbilities.removeAll(prefAbilities);
+                    newAbilities.addAll(0, prefAbilities);
                 }
             }
+
+            sourcesForShards.replaceValues(shard, newAbilities);
         }
     }
 
