@@ -389,5 +389,22 @@
                 <module>forge-gui-ios</module>
             </modules>
         </profile>
+
+        <!--
+          The web module is kept out of the default reactor for the same reason as the iOS one: its build needs
+          something a plain `mvn install` does not have. It compiles a browser client from TypeScript, which means
+          downloading a Node toolchain and running `npm ci` at generate-resources, so a default build would need
+          the network and would stop working offline.
+
+          A default build never needs it. The windows-linux profile below also builds it, for the desktop download.
+          To build it alone:
+              mvn -Pweb ...
+        -->
+        <profile>
+            <id>web</id>
+            <modules>
+                <module>forge-gui-web</module>
+            </modules>
+        </profile>
     </profiles>
 </project>
