@@ -184,4 +184,109 @@ public class LegalityGuardTest extends FlatMcTestBase {
         final SpellAbility second = spellOf(put("Glorious Anthem", ai, ZoneType.Hand));
         AssertJUnit.assertNull(LegalityGuard.problem(ai, second));
     }
+
+    // ------------------------------------------------------------------------------------------ repeating what is done
+
+    private static void counters(final Card c, final String type, final int n, final forge.game.player.Player ai) {
+        c.addCounterInternal(forge.game.card.CounterType.getType(type), n, ai, false, null, null);
+    }
+
+    private SpellAbility adapt(final Card emperor) {
+        for (final SpellAbility sa : emperor.getSpellAbilities()) {
+            if (sa.hasParam("Adapt")) {
+                sa.setActivatingPlayer(ai);
+                return sa;
+            }
+        }
+        throw new AssertionError("no Adapt ability");
+    }
+
+    @Test
+    public void adaptIsNotActivatedAgainWhileTheCreatureHasCounters() {
+        final Card emperor = put("Emperor of Bones", ai, ZoneType.Battlefield);
+        final SpellAbility adapt = adapt(emperor);
+        AssertJUnit.assertNull(ActivationGuard.problem(ai, adapt));
+        counters(emperor, "P1P1", 2, ai);
+        AssertJUnit.assertEquals("nothing-to-affect", ActivationGuard.problem(ai, adapt));
+    }
+
+    @Test
+    public void monstrosityIsNotActivatedAgain() {
+        final Card lion = put("Fleecemane Lion", ai, ZoneType.Battlefield);
+        SpellAbility monstrosity = null;
+        for (final SpellAbility sa : lion.getSpellAbilities()) {
+            if (sa.hasParam("Monstrosity")) {
+                sa.setActivatingPlayer(ai);
+                monstrosity = sa;
+            }
+        }
+        AssertJUnit.assertNotNull(monstrosity);
+        AssertJUnit.assertNull(ActivationGuard.problem(ai, monstrosity));
+        lion.setMonstrous(true);
+        AssertJUnit.assertEquals("nothing-to-affect", ActivationGuard.problem(ai, monstrosity));
+    }
+
+    @Test
+    public void aKeywordTheCreatureHasIsNotGrantedAgain() {
+        final Card angel = put("Serra Angel", ai, ZoneType.Battlefield); // flying
+        final SpellAbility fly = forge.game.ability.AbilityFactory.getAbility("AB$ Pump | Cost$ 1 | Defined$ Self | KW$ Flying", angel);
+        fly.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals("nothing-to-affect", ActivationGuard.problem(ai, fly));
+        final SpellAbility trample = forge.game.ability.AbilityFactory.getAbility("AB$ Pump | Cost$ 1 | Defined$ Self | KW$ Trample", angel);
+        trample.setActivatingPlayer(ai);
+        AssertJUnit.assertNull(ActivationGuard.problem(ai, trample));
+    }
+
+    // ------------------------------------------------------------------------------------------ defeating a battle
+
+    @Test
+    public void aBattleIsNotDefeatedForALegendThatIsAlreadyInPlay() {
+        final Card battle = put("Invasion of Ikoria", ai, ZoneType.Battlefield);
+        // a Siege may already come with its defense counters: work from what is there
+        if (battle.getCounters(forge.game.card.CounterEnumType.DEFENSE) == 0) {
+            counters(battle, "DEFENSE", 6, ai);
+        }
+        final int defense = battle.getCounters(forge.game.card.CounterEnumType.DEFENSE);
+        AssertJUnit.assertFalse("no Zilortha yet", LegalityGuard.redundantDefeat(ai, battle, defense + 4));
+        // the legend is the back face of a second Siege (a card is not found by its back name)
+        final Card zilortha = put("Invasion of Ikoria", ai, ZoneType.Battlefield);
+        zilortha.setState(forge.card.CardStateName.Backside, true);
+        AssertJUnit.assertEquals("Zilortha, Apex of Ikoria", zilortha.getName());
+        AssertJUnit.assertTrue(LegalityGuard.redundantDefeat(ai, battle, defense + 4));
+        AssertJUnit.assertFalse("the attack cannot take the last counter", LegalityGuard.redundantDefeat(ai, battle, defense - 1));
+        counters(zilortha, "STUN", 1, ai);
+        AssertJUnit.assertFalse("Zilortha does nothing", LegalityGuard.redundantDefeat(ai, battle, defense + 4));
+    }
+
+    // ------------------------------------------------------------------------------------------ Birthing Ritual
+
+    private boolean ritualWouldSacrifice() {
+        final Card ritual = put("Birthing Ritual", ai, ZoneType.Battlefield);
+        final SpellAbility sac = forge.game.ability.AbilityFactory.getAbility(ritual.getSVar("DBSacrifice"), ritual);
+        sac.setActivatingPlayer(ai);
+        return forge.ai.ability.SacrificeAi.birthingRitualPaysOff(ai, sac);
+    }
+
+    @Test
+    public void birthingRitualDoesNotSacrificeWithNothingToPutInItsPlace() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Forest", 7, ai, ZoneType.Library);
+        AssertJUnit.assertFalse(ritualWouldSacrifice());
+    }
+
+    @Test
+    public void birthingRitualDoesNotSacrificeForACreatureThatIsTooExpensive() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield); // mana value 2: up to 3
+        put("Forest", 6, ai, ZoneType.Library);
+        put("Serra Angel", ai, ZoneType.Library);
+        AssertJUnit.assertFalse(ritualWouldSacrifice());
+    }
+
+    @Test
+    public void birthingRitualSacrificesForABetterCreatureItCanPut() {
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Forest", 6, ai, ZoneType.Library);
+        put("Centaur Courser", ai, ZoneType.Library); // mana value 3, 3/3
+        AssertJUnit.assertTrue(ritualWouldSacrifice());
+    }
 }

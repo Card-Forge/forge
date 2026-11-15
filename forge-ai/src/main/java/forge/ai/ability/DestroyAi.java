@@ -153,6 +153,9 @@ public class DestroyAi extends SpellAbilityAi {
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
+            if (!sa.isTrigger()) {
+                list = ComputerUtilCard.withoutHarmlessCreatures(ai, list); // a creature that cannot do anything is not worth the removal
+            }
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }

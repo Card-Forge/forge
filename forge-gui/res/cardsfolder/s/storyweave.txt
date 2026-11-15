@@ -7,7 +7,7 @@ SVar:Lore:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Sa
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ ReplaceETB | Triggers$ TrigRemove
 SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.Enchantment | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
 SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ DBImprint
-SVar:DBImprint:DB$ Pump | ImprintCards$ ReplacedCard
+SVar:DBImprint:DB$ Bookkeeping | ImprintCards$ ReplacedCard
 SVar:TrigRemove:Mode$ ChangesZoneAll | CheckSVar$ Z | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:Z:Imprinted$Amount

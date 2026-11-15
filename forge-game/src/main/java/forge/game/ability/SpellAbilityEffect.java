@@ -784,7 +784,7 @@ public abstract class SpellAbilityEffect {
     }
 
     protected static SpellAbility getForgetSpellAbility(final Card card) {
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String forgetEffect = "DB$ Bookkeeping | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
                 + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
 

@@ -76,6 +76,14 @@ public class DestroyAllAi extends SpellAbilityAi {
             if (opplist.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            // a wipe is for what threatens us: a lone Spellskite, or a creature that cannot attack (Moat), is not worth the card
+            if (CardLists.getNotType(opplist, "Creature").isEmpty() && !"Always".equals(logic)) {
+                final CardCollection threats = ComputerUtilCard.withoutHarmlessCreatures(ai, opplist);
+                if (threats.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                opplist = threats;
+            }
 
             if (sa.usesTargeting()) {
                 sa.resetTargets();

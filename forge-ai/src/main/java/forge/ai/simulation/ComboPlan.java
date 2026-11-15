@@ -292,13 +292,17 @@ public final class ComboPlan {
      */
     public String selfDiscardName(final Player ai, final Card host) {
         final boolean big = bigDiscardWanted(ai);
+        // what escape, flashback, unearth or dredge bring back, and what works from the graveyard, is only fuel in a deck
+        // built around the graveyard (reanimator, Living End, dredge, Replenish): in any other deck it is a card to be cast
+        // (Nethergoyf for {B}, Lightning Bolt with flashback). The DiscardMe hint of a script counts in every deck.
+        final boolean graveyardDeck = wantsGraveyardFuel();
         final Map<String, Integer> total = new HashMap<>();
         final Map<String, Integer> tiebreak = new HashMap<>();
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             if (c == host || c.isLand()) {
                 continue;
             }
-            int v = graveyardValue(c);
+            int v = graveyardDeck ? graveyardValue(c) : discardMeValue(c);
             int tie = 0;
             if (big && c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
                 v += 5;
@@ -330,14 +334,7 @@ public final class ComboPlan {
      * trigger / ability / static (Bridge from Below), and the keywords that work from the graveyard.
      */
     static int graveyardValue(final Card c) {
-        int v = 0;
-        if (c.hasSVar("DiscardMe")) {
-            try {
-                v += Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
-            } catch (final NumberFormatException e) {
-                v += 1;
-            }
-        }
+        int v = discardMeValue(c);
         boolean fromGraveyard = false;
         for (final Trigger t : c.getTriggers()) {
             if (zoneParamHasGraveyard(t.getParam("TriggerZones"))) {
@@ -368,6 +365,18 @@ public final class ComboPlan {
 
     private static boolean zoneParamHasGraveyard(final String zones) {
         return zones != null && zones.contains("Graveyard");
+    }
+
+    /** The DiscardMe hint of the card's script: its author says it wants to be in the graveyard, in any deck. */
+    static int discardMeValue(final Card c) {
+        if (!c.hasSVar("DiscardMe")) {
+            return 0;
+        }
+        try {
+            return Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
+        } catch (final NumberFormatException e) {
+            return 1;
+        }
     }
 
     static boolean isTargetedDiscard(final SpellAbility sa) {

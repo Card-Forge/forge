@@ -11,8 +11,10 @@ import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -897,6 +899,9 @@ public final class FlatMonteCarloPicker {
                 continue; // the heuristics have set the target up again, or no longer want the play
             }
             for (final GameObject target : alternativeTargets(player, sa, variantsLeft)) {
+                if (wastedOnHarmless(player, sa, target)) {
+                    continue;
+                }
                 cands.add(new Candidate(sa, target));
                 variantsLeft--;
             }
@@ -978,6 +983,12 @@ public final class FlatMonteCarloPicker {
                 if (target == null) {
                     continue; // a targeted play with nothing sensible to aim at is not worth a rollout
                 }
+            }
+            if (shieldAlreadyUp(sa, target)) {
+                continue; // a regeneration shield that is up cannot be improved by paying for another one
+            }
+            if (wastedOnHarmless(player, sa, target)) {
+                continue; // removal or a wipe whose only victims are creatures that cannot hurt us: the rollouts would still count the card they remove
             }
             cands.add(new Candidate(sa, target, true));
             extrasLeft--;
@@ -1239,7 +1250,7 @@ public final class FlatMonteCarloPicker {
             return false;
         }
         final Player owner = host.getController();
-        return !forge.game.card.CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
+        return !CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
     }
 
     /**
@@ -2093,8 +2104,136 @@ public final class FlatMonteCarloPicker {
             return true; // swap an unblocked attacker for the ninja: the classic bait, the block cannot be changed any more
         }
         final ApiType api = sa.getApi();
+        if (grantsBlockingKeyword(sa) && blockersDeclared(sa)) {
+            return false; // flying, reach, shadow... decide who may block: once the blockers are down it changes nothing
+        }
         return api == ApiType.Pump || api == ApiType.PumpAll || api == ApiType.Protection || api == ApiType.Regenerate
                 || isInteraction(sa) && api != ApiType.Counter;
+    }
+
+    /** A pump that grants a keyword which decides who can block whom (Flying, Reach, Shadow, Horsemanship). */
+    public static boolean grantsBlockingKeyword(final SpellAbility sa) {
+        if (sa == null || (sa.getApi() != ApiType.Pump && sa.getApi() != ApiType.PumpAll) || !sa.hasParam("KW")) {
+            return false;
+        }
+        for (final String kw : sa.getParam("KW").split(" & ")) {
+            if (kw.equals("Flying") || kw.equals("Reach") || kw.equals("Shadow") || kw.equals("Horsemanship")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Past the declare attackers step the blockers are chosen (or done): such a keyword cannot help any more. */
+    private static boolean blockersDeclared(final SpellAbility sa) {
+        final PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
+        return ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
+    }
+
+    /**
+     * The opponent attacks with a creature that the AI's one could block if it had the keyword that this ability grants
+     * (Crovax the Cursed's flying against a Serra Angel), and the block would be a good one: it kills the attacker or
+     * survives it. Offered to the rollouts in the declare attackers step, the last moment it is not too late.
+     */
+    public static boolean enablesGoodBlock(final Player player, final SpellAbility sa) {
+        if (!grantsBlockingKeyword(sa) || sa.usesTargeting() || !sa.isActivatedAbility() || sa.getHostCard() == null) {
+            return false;
+        }
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        final forge.game.combat.Combat combat = ph.getCombat();
+        final Card host = sa.getHostCard();
+        if (combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.isPlayerTurn(player)
+                || !host.isInZone(ZoneType.Battlefield) || !player.equals(host.getController())
+                || !forge.game.combat.CombatUtil.canBlock(host)) {
+            return false;
+        }
+        if (!"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
+            return false;
+        }
+        final List<String> kws = Arrays.asList(sa.getParam("KW").split(" & "));
+        for (final Card attacker : combat.getAttackersOf(player)) {
+            for (final String kw : kws) {
+                final boolean needs = switch (kw) {
+                    case "Flying", "Reach" -> attacker.hasKeyword(Keyword.FLYING) && !host.hasKeyword(Keyword.FLYING) && !host.hasKeyword(Keyword.REACH);
+                    case "Shadow" -> attacker.hasKeyword(Keyword.SHADOW) && !host.hasKeyword(Keyword.SHADOW);
+                    case "Horsemanship" -> attacker.hasKeyword(Keyword.HORSEMANSHIP) && !host.hasKeyword(Keyword.HORSEMANSHIP);
+                    default -> false;
+                };
+                if (needs && (host.getNetPower() >= attacker.getNetToughness() || host.getNetToughness() > attacker.getNetPower())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Regenerate for creatures that all have a shield already: the rollouts would keep scoring "protect my creature" and
+     * pay again on every priority pass (Mischievous Poltergeist paid its life away for one destruction).
+     */
+    static boolean shieldAlreadyUp(final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getApi() != ApiType.Regenerate || sa.getHostCard() == null) {
+            return false;
+        }
+        final List<Card> cards = new ArrayList<>();
+        if (target instanceof Card c) {
+            cards.add(c);
+        } else if (sa.usesTargeting() && sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
+            cards.addAll(sa.getTargets().getTargetCards());
+        } else if (sa.hasParam("Defined")) {
+            cards.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
+        }
+        if (cards.isEmpty()) {
+            return false;
+        }
+        for (final Card c : cards) {
+            if (c.getShieldCount() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Removal or a wipe whose only victims are opposing creatures that cannot hurt the AI (Spellskite, anything under
+     * Moat): not a candidate, the rollouts only see one creature fewer on the other side and would take the trade.
+     */
+    static boolean wastedOnHarmless(final Player player, final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getHostCard() == null || !sa.isSpell() && !sa.isActivatedAbility()) {
+            return false;
+        }
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts != null) {
+            final ApiType api = ts.getApi();
+            final boolean removal = api == ApiType.Destroy || api == ApiType.DealDamage
+                    || api == ApiType.ChangeZone && ts.getParamOrDefault("Origin", "").contains("Battlefield");
+            if (!removal) {
+                return false;
+            }
+            Card victim = target instanceof Card c ? c : null;
+            if (victim == null && ts.getTargets() != null && ts.getTargets().getTargetCards().size() == 1) {
+                victim = ts.getTargets().getTargetCards().get(0);
+            }
+            return victim != null && ComputerUtilCard.isHarmlessCreature(player, victim);
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api != ApiType.DestroyAll && api != ApiType.DamageAll || !a.hasParam("ValidCards") || a.usesTargeting()) {
+                continue;
+            }
+            boolean any = false;
+            for (final Player opp : player.getOpponents()) {
+                for (final Card c : CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield),
+                        a.getParam("ValidCards"), sa.getHostCard().getController(), sa.getHostCard(), a)) {
+                    if (!ComputerUtilCard.isHarmlessCreature(player, c)) {
+                        return false;
+                    }
+                    any = true;
+                }
+            }
+            return any;
+        }
+        return false;
     }
 
     /** The AI's permanents that the opponent's spell or ability on top of the stack is aimed at. */
@@ -2152,7 +2291,7 @@ public final class FlatMonteCarloPicker {
                     || kw.contains("Protection");
             if (!answers && threat == ApiType.DealDamage) {
                 try {
-                    answers = forge.game.ability.AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
+                    answers = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
                 } catch (final RuntimeException e) {
                     answers = false;
                 }
@@ -2401,8 +2540,8 @@ public final class FlatMonteCarloPicker {
                 times = Math.max(1, ComputerUtilMana.getAvailableManaEstimate(sa.getHostCard().getController())
                         / sa.getPayCosts().getTotalMana().getCMC());
             }
-            final int att = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
-            final int def = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
+            final int att = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
+            final int def = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
             // under Doran, the Siege Tower the damage is the toughness: +P does nothing and +T is the damage
             final boolean byToughness = mine.toughnessAssignsDamage();
             final int myAtt = byToughness ? def : att;

@@ -1831,6 +1831,23 @@ public class PlayerControllerAi extends PlayerController {
                 if (pool.isEmpty()) {
                     pool = list;
                 }
+                // the opponent lists its key cards in the order it wants them answered: the first one that is still to come
+                // (not taken by another copy, not already on the battlefield) is the name, and only then the next one
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() == null || opp.getRegisteredPlayer().getDeck() == null) {
+                        continue;
+                    }
+                    final CardCollectionView inPlay = opp.getCardsIn(ZoneType.Battlefield);
+                    for (final String key : opp.getRegisteredPlayer().getDeck().getKeyCards()) {
+                        if (taken.contains(key) || CardLists.count(inPlay, c -> c.getName().equals(key)) > 0) {
+                            continue;
+                        }
+                        if (CardLists.count(pool, c -> c.getName().equals(key)) > 0) {
+                            return key;
+                        }
+                    }
+                }
+                // none of them is left to name: the best of the key cards in the pool (even one already in play), then the best card
                 final CardCollection keyCards = new CardCollection();
                 for (final Player opp : player.getOpponents()) {
                     if (opp.getRegisteredPlayer() != null && opp.getRegisteredPlayer().getDeck() != null) {
