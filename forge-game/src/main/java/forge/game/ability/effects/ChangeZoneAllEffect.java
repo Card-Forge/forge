@@ -40,15 +40,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final String[] desc = sa.getDescription().split(":");
 
-        String text = desc.length > 1 ? desc[1] : desc[0];
-        if (sa.getSubAbility() != null) {
-            // the card's whole text is the description of its first part: the parts after it describe themselves
-            final int end = text.indexOf(". ");
-            if (end > 0) {
-                text = text.substring(0, end + 1);
-            }
+        if (desc.length > 1) {
+            return desc[1];
+        } else {
+            return desc[0];
         }
-        return text;
     }
 
     @Override
@@ -102,7 +98,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final String imprint = sa.getParam("Imprint");
         final boolean random = sa.hasParam("RandomOrder");
         final boolean remLKI = sa.hasParam("RememberLKI");
-        final boolean alwaysRemLKI = sa.hasParam("AlwaysRemember");
         final boolean movingToDeck = destination.isDeck();
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
@@ -131,9 +126,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             final Card lkiCopy = remLKI ? CardCopyService.getLKICopy(c) : null;
-            if (remLKI && alwaysRemLKI) {
-                source.addRemembered(lkiCopy);
-            }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
@@ -172,7 +164,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (remLKI && !alwaysRemLKI && movedCard.getZone().is(destination)) {
+            if (lkiCopy != null && movedCard.getZone().is(destination)) {
                 source.addRemembered(lkiCopy);
             }
 

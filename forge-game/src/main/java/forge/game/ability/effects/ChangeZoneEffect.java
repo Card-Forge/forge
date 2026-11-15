@@ -70,7 +70,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
 
-        final boolean optional = sa.hasParam("Optional");
+        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
+            sb.append("(OPTIONAL) ");
+        }
 
         // Player whose cards will change zones
         List<Player> fetchers = null;
@@ -84,7 +86,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchers = Lists.newArrayList(host.getController());
         }
 
-        final String fetcherNames = fetchers.isEmpty() ? "that player" : Lang.joinHomogenous(fetchers, GameEntity::getName);
+        final String fetcherNames = Lang.joinHomogenous(fetchers, GameEntity::getName);
 
         // Player who chooses the cards to move
         List<Player> choosers = Lists.newArrayList();
@@ -92,8 +94,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa);
         }
         if (choosers.isEmpty()) {
-            // without a Chooser the player whose library is searched decides (see changeHiddenOriginResolve), not the activator
-            choosers.addAll(fetchers);
+            choosers.add(sa.getActivatingPlayer());
         }
 
         final boolean oneChooser = choosers.size() == 1;
@@ -109,9 +110,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             origin = sa.getParam("Origin");
         }
         final String destination = sa.getParam("Destination");
-        // "may search ... put it": a may takes the base form of the verbs after it
-        final boolean thirdPerson = oneChooser && !optional;
-        final String may = optional ? " may" : "";
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1;
         String type = "card";
@@ -128,7 +126,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             type = Lang.joinHomogenous(tgts);
             defined = true;
         } else if (sa.hasParam("ChangeType") && !sa.getParam("ChangeType").equals("Card")) {
-            type = Lang.getInstance().buildValidCardDesc(Arrays.asList(sa.getParam("ChangeType").split(",")), num != 1);
+            type = Lang.getInstance().buildValidDesc(Arrays.asList(sa.getParam("ChangeType").split(",")), num != 1);
         }
         final String cardTag = type.contains("card") ? "" : " card";
 
@@ -153,7 +151,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         } else if (origin.equals("Library")) {
             final boolean originAlt = sa.hasParam("OriginAlternative");
-            sb.append(chooserNames).append(optional ? " may search " : " search" + (thirdPerson ? "es " : " "));
+            sb.append(chooserNames).append(" search").append(!oneChooser ? " " : "es ");
             sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ").append("library");
             if (originAlt) {
                 sb.append(sa.getParam("OriginAlternative").contains("Hand") ? ", hand, and/or graveyard for " :
@@ -166,7 +164,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination) != null && ZoneType.smartValueOf(destination).isHidden()) {
-                if (thirdPerson) {
+                if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
                     sb.append(num > 1 ? "reveal them, " : "reveal it, ");
@@ -175,13 +173,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (destination.equals("Exile")) {
                 if (num == 1) {
-                    sb.append(thirdPerson ? "exiles it" : "exile it");
+                    sb.append("exiles it");
                 } else {
-                    sb.append(thirdPerson ? "exiles them" : "exile them");
+                    sb.append("exiles them");
                 }
             } else {
-                final String put = thirdPerson ? "puts " : "put ";
-                sb.append(num == 1 ? put + "it " : put + "them ");
+                if (num == 1) {
+                    sb.append("puts it ");
+                } else {
+                    sb.append("puts them ");
+                }
 
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
@@ -208,7 +209,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            sb.append(thirdPerson ? ", then shuffles" : ", then shuffle").append(originAlt ? " if they searched their library." : ".");
+            sb.append(", then shuffles").append(originAlt ? " if they searched their library." : ".");
         } else if (origin.equals("Sideboard")) {
             sb.append(chooserNames);
             //currently Reveal is always True in ChangeZone
@@ -232,15 +233,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         } else if (origin.equals("Hand")) {
             sb.append(chooserNames);
             if (!chooserNames.equals(fetcherNames)) {
-                sb.append(optional ? " looks at " : thirdPerson ? " looks at " : " look at ").append(fetcherNames).append("'s hand and ");
-                sb.append(optional ? "may " : "").append(destination.equals("Exile") ? (thirdPerson ? "exiles " : "exile ") : (thirdPerson ? "puts " : "put "));
-                sb.append(num == 1 ? "one" : Lang.getNumeral(num)).append(" of those ");
-                final String ofThose = type.replaceFirst("(?i)\\s*cards?$", "");
-                sb.append(ofThose.isEmpty() ? "" : ofThose + " ").append(num == 1 ? "card" : "cards");
+                sb.append(" looks at ").append(fetcherNames).append("'s hand and ");
+                sb.append(destination.equals("Exile") ? "exiles " : "puts ");
+                sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
                 String verb = destination.equals("Exile") ? " exiles " : " puts ";
                 if (!oneChooser) verb = verb.replace("s", "");
-                if (optional) verb = " may " + verb.trim().replaceFirst("s$", "") + " ";
                 sb.append(verb);
                 if (defined) {
                     sb.append(type);
@@ -281,21 +279,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             sb.append(".");
         } else if (origin.equals("Battlefield")) {
+            // TODO Expand on this Description as more cards use it
             // for the non-targeted SAs when you choose what is returned on resolution
-            String what = type;
-            if (!defined && sa.hasParam("ChangeType") && !sa.hasParam("ChangeTypeDesc") && !sa.getParam("ChangeType").equals("Card")) {
-                what = Lang.getInstance().buildValidDesc(Arrays.asList(sa.getParam("ChangeType").split(",")), num != 1);
-            } else if (type.equals("card")) {
-                what = "permanent";
-            }
-            final boolean exile = destination.equals("Exile");
-            final String verb = exile ? "exile" : "return";
-            sb.append(chooserNames).append(optional ? " may " + verb + " " : thirdPerson ? " " + verb + "s " : " " + verb + " ");
-            sb.append(defined ? what : Lang.nounWithNumeralExceptOne(num, what));
-            if (!exile) {
-                sb.append(destination.equals("Hand") ? " to their hand" : " to the " + destination.toLowerCase());
-            }
-            sb.append(".");
+            sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
+            sb.append(" to your ").append(destination).append(".");
         } else if (origin.equals("Graveyard")) {
             // for non-targeted SAs when you choose what is moved on resolution
             // this will need expansion as more cards use it
@@ -313,7 +300,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final boolean toHand = destination.equals("Hand");
             String verb = destination.equals("Exile") ? " exiles " : " returns ";
             if (!oneChooser) verb = verb.replace("s", "");
-            if (optional) verb = " may " + verb.trim().replaceFirst("s$", "") + " ";
             sb.append(chooserNames).append(verb).append(mandatory || changeNumDesc ? "" : "up to ");
             sb.append(changed);
             // so far, it seems non-targeted only lets you return from your own graveyard
@@ -333,20 +319,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(".");
         } else if (origin.equals("Exile")) {
             // for non-targeted, moved cards are chosen on resolution – will need expansion as more cards use it
-            sb.append(chooserNames).append(optional ? " may put " : thirdPerson ? " puts " : " put ")
-                    .append(Lang.nounWithNumeralExceptOne(num, type + cardTag));
+            sb.append(chooserNames).append(" puts ").append(Lang.nounWithNumeralExceptOne(num, type + cardTag));
             sb.append(" into their ").append(destination.toLowerCase()).append(".");
-        } else if (!origin.isEmpty() && destination != null) {
-            // several origins ("Hand,Graveyard") or one without a wording of its own ("Command")
-            final List<String> from = Lists.newArrayList();
-            for (final String o : origin.split(",")) {
-                from.add("Command".equals(o) ? "the command zone" : "their " + o.toLowerCase());
-            }
-            sb.append(chooserNames).append(optional ? " may put " : thirdPerson ? " puts " : " put ")
-                    .append(defined ? type : Lang.nounWithNumeralExceptOne(num, type + cardTag))
-                    .append(" from ").append(Lang.joinHomogenous(from, null, "or"))
-                    .append("Battlefield".equals(destination) ? " onto the battlefield" : " into their " + destination.toLowerCase())
-                    .append(".");
         }
 
         return sb.toString();
@@ -378,9 +352,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
 
-        if (!sa.hasParam("DefinedDesc") && sa.usesTargeting() && Iterables.isEmpty(tgts)) {
-            return ""; // no target chosen (a kicker-only or "up to" part): nothing to say about it yet
-        }
         sbTargets.append(" ").append(sa.getParamOrDefault("DefinedDesc", Lang.joinHomogenous(tgts)));
 
         final String targetname = sbTargets.toString();
@@ -588,9 +559,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final Card lkiCopy = sa.hasParam("RememberLKI") ? CardCopyService.getLKICopy(gameCard) : null;
-            if (lkiCopy != null && sa.hasParam("AlwaysRemember")) {
-                hostCard.addRemembered(lkiCopy);
-            }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", gameCard.getTranslatedName(), Lang.joinHomogenous(origin, ZoneType::getTranslatedName), destination.getTranslatedName()));
             if (optional && !chooser.getController().confirmAction(sa, null, prompt, gameCard, null)) {
@@ -815,9 +783,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setDiscarded(true);
                 }
             }
-            if (lkiCopy != null && !sa.hasParam("AlwaysRemember") && movedCard.getZone().is(destination)) {
+            if (lkiCopy != null && movedCard.getZone().is(destination)) {
                 hostCard.addRemembered(lkiCopy);
             }
+
             if (!movedCard.getZone().equals(originZone)) {
                 Card meld = null;
                 if (gameCard.getMeldedWith() != null) {
@@ -1529,7 +1498,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-                if (sa.hasParam("RememberLKI") && (sa.hasParam("AlwaysRemember") || movedCard.getZone().is(destination))) {
+                if (sa.hasParam("RememberLKI") && movedCard.getZone().is(destination)) {
                     source.addRemembered(CardCopyService.getLKICopy(c));
                 }
                 if (forget) {
