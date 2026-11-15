@@ -256,14 +256,8 @@ public final class TimedAbilityGuard {
     static int[] thresholds(final Card host) {
         final java.util.TreeSet<Integer> found = new java.util.TreeSet<>();
         for (final StaticAbility st : host.getStaticAbilities()) {
-            for (final String key : new String[] { "Affected", "Condition", "IsPresent" }) {
-                final String value = st.getParam(key);
-                if (value == null) {
-                    continue;
-                }
-                if (st.hasParam("Station")) {
-                    found.add(Integer.parseInt(st.getParam("Station")));
-                }
+            if (st.hasParam("Station")) {
+                found.add(Integer.parseInt(st.getParam("Station")));
             }
         }
         final int[] result = new int[found.size()];
