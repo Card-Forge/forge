@@ -43,6 +43,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public final class WebSession implements IHasForgeLog {
     private static final int CARD_SEARCH_LIMIT = 60;
+    /** Chat is shown to every player, so a message is limited to a length that a chat box can hold. */
+    private static final int MOST_CHAT_CHARS = 500;
     /** Long enough for any name a player types, short enough to fit on a seat plate. */
     static final int MAX_NAME_LENGTH = 24;
     private static final AtomicInteger SESSIONS = new AtomicInteger();
@@ -50,12 +52,25 @@ public final class WebSession implements IHasForgeLog {
     public static final Commands<WebSession> COMMANDS = new Commands<WebSession>()
             .on(PageError.class, (s, ch, e) -> netLog.warn("Page error for {}: {}", s.label(), LogSafe.forLog(e.text(), 1500)))
             .on(SetName.class, (s, ch, n) -> s.rename(ch, n.name(), n.avatar(), n.sleeve()))
+            // A join that found no seat leaves the browser on the waiting page, which offers to try again
+            .on(Plain.join, (s, ch, c) -> s.joinHostGame())
             .on(ClaimHost.class, (s, ch, c) -> s.claimHost(ch, c.password()))
             // Opening a game connects a client to the server, which is done on the host UI thread
             .on(Plain.lobby, (s, ch, c) -> s.ui.invokeInEdtLater(() -> s.openLobby(ch, false, null)))
+            .on(Invite.class, (s, ch, i) -> s.ui.invokeInEdtLater(() -> s.openLobby(ch, true, i.limited())))
             .on(Plain.leaveLobby, (s, ch, c) -> s.ui.invokeInEdtLater(s::leaveLobby))
+            .on(GiveSeat.class, host((s, ch, g) -> s.sessions.giveSeat(g.from(), g.to())))
+            .on(DropPlayer.class, host((s, ch, d) -> s.sessions.dropPlayer(d.name())))
+            .on(Say.class, (s, ch, say) -> {
+                final String text = say.text();
+                if (text != null && !text.isBlank()) {
+                    s.sessions.say(s, text.length() > MOST_CHAT_CHARS ? text.substring(0, MOST_CHAT_CHARS) : text);
+                }
+            })
             // One set of host questions serves the whole process, so only the host's browser may answer them
             .on(HostChoiceAnswer.class, host((s, ch, a) -> s.ui.hostQuestions().answer(a.id(), a.value())))
+            // Finding the external address is a web request, so it cannot run on the socket thread
+            .on(Plain.addresses, host((s, ch, c) -> s.ui.runBackgroundTask("Addresses", () -> ch.send(new Addresses(s.sessions.inviteUrls())))))
             .on(Plain.cardSets, (s, ch, c) -> ch.send(CardCatalog.sets()))
             .on(SearchCards.class, (s, ch, q) -> s.decks.inTurn(() -> ch.send(new CardSearch(CardCatalog.searchCardNames(q.query(), CARD_SEARCH_LIMIT)))))
             .on(AskPrintings.class, (s, ch, a) -> s.decks.inTurn(() -> ch.send(new Printings(a.name(), CardCatalog.printings(a.name(),
@@ -103,6 +118,8 @@ public final class WebSession implements IHasForgeLog {
     private volatile String name;
     /** The avatar chosen next to the name, held here before any seat exists. Null until it chooses one. */
     private volatile Integer avatar;
+    /** A guest's last chosen sleeve, from its browser. Null until it chooses one, and the seat then keeps the sleeve it was given. */
+    private volatile Integer sleeve;
     /**
      * Tells sessions apart. A browser that is moved to another session, such as a seat handed over, sees the number change. The log also uses it,
      * because the player may have no name yet, or the same name as another.
@@ -240,8 +257,22 @@ public final class WebSession implements IHasForgeLog {
         return lobby;
     }
 
+    NetplaySeat local() {
+        return local;
+    }
+
     public boolean attached() {
         return browser != null;
+    }
+
+    public BrowserChannel browser() {
+        return browser;
+    }
+
+    /** Whether this guest holds a seat at the host's table. It keeps the seat while its browser is gone. */
+    boolean seatedAsGuest() {
+        final Stage now = stage;
+        return !isHost && (now instanceof Setup || now instanceof Playing p && p.invited());
     }
 
     /** Whether this browser holds the host's seat. It can hold the seat before it opens a table, unlike {@link NetplaySeat#isHost}. */
@@ -253,6 +284,18 @@ public final class WebSession implements IHasForgeLog {
     public int avatarIndex() {
         final Integer face = avatar;
         return face == null ? 0 : face;
+    }
+
+    /** What this session is doing, for the panel that says who is here. */
+    Doing doing() {
+        final Stage now = stage;
+        if (now instanceof Playing p) {
+            return p.spectating() ? Doing.watching : Doing.playing;
+        }
+        if (now instanceof Setup) {
+            return Doing.table;
+        }
+        return now instanceof Opening ? Doing.joining : Doing.waiting;
     }
 
     public void tell(final Record message) {
@@ -434,6 +477,64 @@ public final class WebSession implements IHasForgeLog {
         sessions.hostGameOpened();
     }
 
+    /** Takes a seat in the host's game. Runs off the host UI thread, because taking a seat waits for the server. */
+    void joinHostGame() {
+        final String seatName = name;
+        final Opening joining = new Opening();
+        final Stage from = stage;
+        // Only one seat is taken at a time. The stage shows that a join is in progress until it succeeds or fails
+        if (isHost || !(from instanceof Menu) || !sessions.hostHasGame() || sessions.hostPlaying() || browser == null || seatName == null
+                || !move(from, joining)) {
+            return;
+        }
+        ui.runBackgroundTask("Joining", () -> {
+            ui.invokeInEdtAndWait(lobby::forget);
+            final WebGuiGame gui = new WebGuiGame(settings);
+            gui.whenOpened(() -> guestMatchOpened(gui));
+            eventSeat.newTable(gui);
+            try {
+                local.openGuest(seatName, gui, this::lobbyChanged, this::chatted, this::gameGone);
+            } catch (final RuntimeException e) {
+                netLog.error(e, "Could not take a seat");
+                gui.close();
+                move(joining, new Menu());
+                // The waiting card already says "Could not take a seat", so only the reason is sent
+                tell(error(e.getMessage()));
+                return;
+            }
+            if (!move(joining, new Setup(gui, true))) {
+                // The game closed while the seat was being taken
+                gui.close();
+                local.endMatch();
+                return;
+            }
+            ui.invokeInEdtLater(() -> {
+                applyChosenAvatar();
+                final BrowserChannel b = browser;
+                if (b != null) {
+                    lobby.queueDecks(b, decks::inTurn);
+                    lobby.sendState(b);
+                }
+            });
+        });
+    }
+
+    /** The host started the match, so this guest's browser follows its seat into the game. */
+    private void guestMatchOpened(final WebGuiGame gui) {
+        final Stage now = stage;
+        if (now instanceof Setup s && s.gui() == gui && move(now, new Playing(gui, true, false, null))) {
+            attach(gui);
+        }
+    }
+
+    /** The host's game ended for this guest. Its seat is removed and its browser waits for the next game. */
+    void gameGone() {
+        final Stage now = stage;
+        if (!(now instanceof Menu) && move(now, new Menu())) {
+            local.endMatch();
+        }
+    }
+
     /** The table changed. The browser is shown it only once it is set up. Until then it is still being built. */
     void lobbyChanged() {
         ui.invokeInEdtLater(() -> {
@@ -447,6 +548,15 @@ public final class WebSession implements IHasForgeLog {
                 lobby.sendState(b);
             }
         });
+    }
+
+    private void chatted(final String from, final String text) {
+        if (from == null) {
+            tell(new ChatLine(null, text, false));
+        } else if (isHost) {
+            // Lines typed in a browser here already went out through WebHub.say, so relay passes on only desktop and mobile players' lines
+            sessions.relay(from, text);
+        }
     }
 
     /** Takes the name this browser asked for, unless the name has a problem. A guest waiting for a name then takes its seat. */

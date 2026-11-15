@@ -25,6 +25,13 @@ public final class FromBrowser {
     public record Bare(Plain t) {
     }
 
+    public enum EventKind { sealed, draft }
+
+    /** Opens a table others can join. When limited is not null, the table is set up from the start for a draft or sealed event. */
+    @Command("invite")
+    public record Invite(@Nullable EventKind limited) {
+    }
+
     /** Takes the host's seat. A browser on another machine gives the host password when one is set. */
     @Command("claimHost")
     public record ClaimHost(@Nullable String password) {
@@ -35,9 +42,23 @@ public final class FromBrowser {
     public record SetName(String name, @Nullable Integer avatar, @Nullable Integer sleeve) {
     }
 
+    @Command("chat")
+    public record Say(String text) {
+    }
+
     /** A script error in the page. Without this message, the server's log would never record it. */
     @Command("pageError")
     public record PageError(String text) {
+    }
+
+    /** The host gives a disconnected player's seat to a waiting player. That player continues from where the seat was left. */
+    @Command("giveSeat")
+    public record GiveSeat(String from, String to) {
+    }
+
+    /** The host takes away a disconnected player's seat. At the table the seat becomes open. In a match the AI plays it. */
+    @Command("dropPlayer")
+    public record DropPlayer(String name) {
     }
 
     @Command("ready")
@@ -220,6 +241,15 @@ public final class FromBrowser {
     /** A .dck file's text, saved as a deck of the format without using the importer. */
     @Command("deckFile")
     public record DeckFile(String text, String format, @Nullable Clash clash) {
+    }
+
+    /** A deck a guest keeps in its browser: the id it is stored under, the deck as .dck text, and its format. */
+    public record DeviceDeckText(String id, String text, String format) {
+    }
+
+    /** Every deck a guest keeps in its browser. It is sent once each time the guest connects. */
+    @Command("deviceDecks")
+    public record DeviceDecks(List<DeviceDeckText> decks) {
     }
 
     @Command("reply")

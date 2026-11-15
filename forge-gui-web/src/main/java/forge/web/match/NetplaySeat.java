@@ -150,6 +150,13 @@ public final class NetplaySeat implements IHasForgeLog {
         return false;
     }
 
+    /** Takes a seat in a game another browser on this machine is hosting. Nothing is served from here. */
+    public void openGuest(final String playerName, final WebGuiGame gui,
+            final Runnable onUpdate, final BiConsumer<String, String> onChat, final Runnable onClosed) {
+        endMatch();
+        connect(playerName, gui, onUpdate, onChat, onClosed);
+    }
+
     /** Every seat, including the host's, connects to the game as a netplay client. */
     private void connect(final String playerName, final WebGuiGame gui,
             final Runnable onUpdate, final BiConsumer<String, String> onChat, final Runnable onClosed) {
@@ -208,6 +215,27 @@ public final class NetplaySeat implements IHasForgeLog {
         final String[] stored = FModel.getPreferences().getPref(pref).split(",");
         final Integer v = seat < stored.length ? Ints.tryParse(stored[seat].trim()) : null;
         return v == null || v < 0 ? seat : v;
+    }
+
+    /** Gives the web seat to an AI so the browser spectates. Only the host can do this, because the seat belongs to its server. */
+    public void spectate() {
+        if (hosted == null) {
+            netLog.warn("Only the host can hand its seat to the AI");
+            return;
+        }
+        final RemoteClient seat = server.getClientBySlotIndex(webSeat);
+        if (seat == null) {
+            netLog.warn("No web seat to hand to the AI");
+            return;
+        }
+        server.convertToAI(seat);
+    }
+
+    /** Gives another seat of the running match to an AI. Only the host can do this. Outside a match it does nothing. */
+    public void handToAi(final int seat) {
+        if (hosted != null) {
+            server.replaceWithAI(seat);
+        }
     }
 
     public HostedMatch hostedMatch() {
@@ -304,4 +332,13 @@ public final class NetplaySeat implements IHasForgeLog {
         @Override public ClientGameLobby getLobby() { return clientLobby; }
     }
 
+    /** The host gets chat through this listener. A joined client gets chat through the client's listener. */
+    private record HostChat(BiConsumer<String, String> onChat) implements ILobbyListener {
+        @Override public void message(final String source, final String message, final ChatMessage.MessageType type) {
+            onChat.accept(source, message);
+        }
+        @Override public void update(final GameLobbyData state, final int slot) { }
+        @Override public void close() { }
+        @Override public ClientGameLobby getLobby() { return null; }
+    }
 }

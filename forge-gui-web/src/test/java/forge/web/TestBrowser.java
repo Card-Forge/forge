@@ -34,6 +34,7 @@ final class TestBrowser implements BrowserChannel {
     private static final int MAX_RETRIES = 12;
 
     final List<JsonObject> got = new CopyOnWriteArrayList<>();
+    private volatile JsonObject decks;
     final BrowserModel model = new BrowserModel();
     final CountDownLatch gameOver = new CountDownLatch(1);
     /** Counted down when a held browser reaches its own first main phase. It then waits there for {@link #release}. */
@@ -252,6 +253,14 @@ final class TestBrowser implements BrowserChannel {
     private static JsonObject found(final JsonObject message, final String why) {
         Assert.assertNotNull(message, why);
         return message;
+    }
+
+    /** The browser's deck list. {@link #forget} keeps it, because the server does not resend a list the browser already has. */
+    JsonObject awaitDecks() throws InterruptedException {
+        for (int i = 0; decks == null && i < WAIT_MILLIS / POLL_MILLIS; i++) {
+            Thread.sleep(POLL_MILLIS);
+        }
+        return decks;
     }
 
     /** Clears the messages received so far, so an earlier message cannot satisfy a later wait. */
