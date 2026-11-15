@@ -1,27 +1,20 @@
 package forge.screens.home.sanctioned;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.limited.BoosterDraft;
-import forge.gamemodes.limited.CommanderDraftUtil;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.LimitedPoolType;
-import forge.gamemodes.match.HostedMatch;
-import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.views.VProbabilities;
@@ -35,7 +28,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -114,18 +106,13 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        final boolean isCommanderDraft = CommanderDraftUtil.isCommanderDraftDeck(humanDeck.getDeck());
-        final GameType effectiveGameType = isCommanderDraft ? GameType.CommanderDraft : gameType;
-
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = effectiveGameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-            if (null != errorMessage) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
-                return;
-            }
+        final LimitedMatch limitedMatch = FModel.getLimitedMatch();
+        final String errorMessage = limitedMatch.getDeckProblem(gameType, humanDeck.getDeck());
+        if (null != errorMessage) {
+            FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+            return;
         }
 
-        FModel.getGauntletMini().resetGauntletDraft();
         String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
 
         if (duelType == null) {
@@ -133,11 +120,10 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+        final List<Deck> aiDecks = limitedMatch.getAiDecks(gameType, humanDeck.getDeck());
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
-                final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), effectiveGameType);
+                limitedMatch.launchGauntlet(gameType, humanDeck.getDeck(), aiDecks.size());
             } else if ("Tournament".equals(duelType)) {
                 // TODO Allow for tournament style draft, instead of always a gauntlet
                 // Most of the time this will be a single elimination bracket
@@ -151,66 +137,15 @@ public enum CSubmenuDraft implements ICDoc {
             SOverlayUtils.showOverlay();
         });
 
-        Map<Integer, Deck> aiMap = Maps.newHashMap();
+        final List<Deck> opponents;
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
-            // Restore Zero Indexing
-            final int aiIndex = Integer.parseInt(duelType)-1;
-            final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
-            if (aiDeck == null) {
-                throw new IllegalStateException("Draft: Computer deck is null!");
-            }
-
-            aiMap.put(aiIndex + 1, aiDeck);
+            opponents = List.of(aiDecks.get(Integer.parseInt(duelType) - 1));
         } else {
-            final int numOpponents = Integer.parseInt(duelType);
-
-            int maxDecks = opponentDecks.getAiDecks().size();
-            if (numOpponents > maxDecks) {
-                throw new IllegalStateException("Draft: Not enough decks for the number of opponents!");
-            }
-
-            List<Integer> aiIndices = Lists.newArrayList();
-            for(int i = 0; i < maxDecks; i++) {
-                aiIndices.add(i);
-            }
-            Collections.shuffle(aiIndices);
-            aiIndices = aiIndices.subList(0, numOpponents);
-
-            for(int i : aiIndices) {
-                final Deck aiDeck = opponentDecks.getAiDecks().get(i);
-                if (aiDeck == null) {
-                    throw new IllegalStateException("Draft: Computer deck is null!");
-                }
-
-                aiMap.put(i + 1, aiDeck);
-            }
+            final List<Deck> shuffled = new ArrayList<>(aiDecks);
+            Collections.shuffle(shuffled);
+            opponents = shuffled.subList(0, Integer.parseInt(duelType));
         }
-
-        final List<RegisteredPlayer> starter = new ArrayList<>();
-        // Human is 0
-        final RegisteredPlayer human = isCommanderDraft
-                ? RegisteredPlayer.forCommander(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer())
-                : new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-        starter.add(human);
-        human.setId(0);
-        human.assignConspiracies();
-        for(Map.Entry<Integer, Deck> aiDeck : aiMap.entrySet()) {
-            final RegisteredPlayer aiPlayer = isCommanderDraft
-                    ? RegisteredPlayer.forCommander(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer())
-                    : new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
-            aiPlayer.setId(aiDeck.getKey());
-            starter.add(aiPlayer);
-            aiPlayer.assignConspiracies();
-        }
-
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        if (isCommanderDraft) {
-            hostedMatch.startMatch(GameType.CommanderDraft,
-                    java.util.EnumSet.of(GameType.Commander),
-                    starter, human, GuiBase.getInterface().getNewGuiGame());
-        } else {
-            hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
-        }
+        limitedMatch.startMatch(gameType, humanDeck.getDeck(), opponents);
 
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }

@@ -60,6 +60,10 @@ public class Ward extends KeywordWithCost {
             costString = costString.replace("Discard", "discards");
         } else if (c.isOnlyManaCost()) {
             costString = "pays " + costString;
+        } else if (costString.matches("(?:Sacrifice|Exile|Tap|Remove|Return|Reveal|Mill|Put|Untap|Unattach|Collect) .*")) {
+            // "that player Sacrifice a permanent" is "that player sacrifices a permanent"
+            final String verb = costString.substring(0, costString.indexOf(' '));
+            costString = verb.toLowerCase() + "s" + costString.substring(verb.length());
         }
         return costString;
     }

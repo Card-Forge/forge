@@ -7,3 +7,6 @@ ScryfallCode=PW27
 
 [cards]
 1 M Vivien Reid @Eli Minaya
+2 R Broadside Barrage @Javier Charro
+3 R Unexpected Windfall @Lorenzo Mastroianni
+4 R Gene Pollinator @Milivoj Ćeran

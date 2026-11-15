@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Snake Wall
 PT:2/4
 K:Defender
-A:AB$ Pump | Cost$ 3 | Defined$ Self | Activator$ Player | AILogic$ Destroy | IsCurse$ True | SubAbility$ SnakeBite | SpellDescription$ Destroy CARDNAME and target creature it's blocking. Any player may activate this ability.
+A:AB$ Nothing | Cost$ 3 | Defined$ Self | Activator$ Player | AILogic$ Destroy | IsCurse$ True | SubAbility$ SnakeBite | SpellDescription$ Destroy CARDNAME and target creature it's blocking. Any player may activate this ability.
 SVar:SnakeBite:DB$ TargetOnly | ValidTgts$ Creature.blockedBySource | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 AI:RemoveDeck:All
