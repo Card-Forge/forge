@@ -61,6 +61,10 @@ public class AttachAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
         }
 
+        if (opponentMayRedirect(ai, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         // Attach spells always have a target
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -752,15 +756,51 @@ public class AttachAi extends SpellAbilityAi {
             // Enchantments and Artifacts are probably "not good enough"
         }
 
-        final Card c = ComputerUtilCard.getBestAI(list);
+        // a permanent that names one of the AI's own cards (Pithing Needle) would turn against the AI once it controls it (#4300)
+        final Player controller = sa.getActivatingPlayer();
+        final List<Card> usable = new ArrayList<>(list);
+        if (controller != null) {
+            usable.removeIf(k -> namesOneOfCardsOf(k, controller));
+        }
+        final Card c = ComputerUtilCard.getBestAI(usable);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return chooseLessPreferred(mandatory, usable);
         }
 
         return acceptableChoice(c, mandatory);
+    }
+
+    private static boolean namesOneOfCardsOf(final Card namer, final Player p) {
+        if (namer.getNamedCards().isEmpty()) {
+            return false;
+        }
+        for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Hand }) {
+            for (final Card k : p.getCardsIn(z)) {
+                if (namer.getNamedCards().contains(k.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** An opposing Spellskite-like permanent answers the aura with a new target: the buff would end up on it (#12766). */
+    private static boolean opponentMayRedirect(final Player ai, final SpellAbility sa) {
+        final String logic = sa.getHostCard().getSVar("AttachAILogic");
+        if (!isAuraSpell(sa) || "Curse".equals(logic) || "GainControl".equals(logic)) {
+            return false;
+        }
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ab : c.getSpellAbilities()) {
+                if (ab.getApi() == ApiType.ChangeTargets && ab.isActivatedAbility() && sa.canTarget(c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

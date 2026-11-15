@@ -11,6 +11,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -40,6 +41,22 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             }
         }
         return false;
+    }
+
+    /**
+     * A burn spell that can only go to the face has no other use, and holding it for a "better" moment never comes when the
+     * opponent stays above 5 life with a small hand (Boltwave, Skullcrack). Once the AI is done with its own turn, the mana
+     * that is left goes into the damage: in the second main phase, or at the end of the opponent's turn for an instant.
+     */
+    protected static boolean isFaceBurnWorthCasting(final Player ai, final SpellAbility sa) {
+        if (!sa.getRootAbility().isSpell()) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            return true;
+        }
+        return !isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai);
     }
 
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
@@ -101,6 +118,11 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         if ((enemy.getLife() - restDamage) < 5) {
             // drop the human to less than 5 life
             return true;
+        }
+
+        final TargetRestrictions restrictions = sa.getTargetRestrictions();
+        if (restrictions != null && restrictions.canTgtPlayer() && !restrictions.canTgtCreature() && isFaceBurnWorthCasting(comp, sa)) {
+            return true; // nothing else it could hit
         }
 
         if (sa.isSpell()) {

@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="151022">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="26497" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="36609" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="38401" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <layer id="1" name="Ground" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,31559,31559,31559,31712,31712,31559,31559,31712,31558,0,8060,8060,8060,8060,8060,8060,6164,0,0,0,
+0,0,0,0,31559,31559,31713,31559,31559,0,31559,31559,31714,31559,31712,31557,31559,31559,31559,2684388803,8060,8060,8060,8060,8060,8060,6164,0,0,0,
+0,0,0,0,31712,31712,31713,31712,31557,31558,31712,31559,31714,31559,31558,31559,31559,31712,31559,2684388803,8060,2374,2374,8060,8060,8060,31712,0,0,0,
+0,0,0,0,31712,31721,31559,31559,31557,0,31559,31712,31713,31559,31714,31559,31712,31559,31558,0,8060,2374,2374,2374,8060,8060,6164,0,0,0,
+0,0,0,0,0,0,31721,31557,5218,0,31557,31714,5215,31713,31559,31558,5215,31714,5215,0,31557,0,0,0,8060,8060,31559,0,0,0,
+0,0,0,0,5215,31558,31558,31712,31559,31557,31712,31713,31558,31721,31721,31557,31721,31714,31712,31557,31557,8060,8060,8060,8060,6164,6164,0,0,0,
+0,0,0,0,6164,31713,31559,2147515362,31558,31557,31558,31712,31559,31721,31713,31557,31721,31712,31714,31712,31559,31558,31559,31714,31712,0,31715,0,0,0,
+0,31559,31559,31721,31713,31559,31712,31712,31559,31721,31721,31721,31721,31721,31558,31557,31721,31559,31713,31721,31721,31721,31721,31721,31721,0,8060,8060,31721,0,
+0,31557,31559,31558,31559,2147515362,31559,31712,31711,31711,31559,31557,31711,31711,31711,31557,31557,31713,31712,31721,1610636421,1610636421,1610636421,1610636421,1610636421,31559,31721,31712,31712,0,
+0,31559,31559,31713,31712,31558,31712,31712,31711,31713,31712,31713,31558,31721,31713,31558,31721,31559,31711,31711,1610636421,31557,2147515362,31559,31559,5219,31559,31714,31559,0,
+0,31558,31711,31721,31711,31712,31559,31557,31721,31721,31721,31721,31713,31711,31557,31711,31721,31711,31712,31712,1610636421,31711,31712,31559,31712,5215,5219,31559,31559,0,
+0,31711,31557,31557,31557,31559,31712,31712,31557,31559,31712,31712,31558,31712,31558,31557,31711,31559,31713,31714,31721,31711,31714,31559,31712,5215,31721,31557,31721,0,
+0,31712,31714,31712,31711,31558,31559,31559,31712,31559,31558,31559,31559,31712,31713,31557,31559,31713,31559,31713,31559,31712,31559,31558,31559,31558,31558,31559,31713,0,
+31721,31558,31712,31713,31711,31559,31714,31713,31714,31711,31713,31559,31558,31558,31711,31557,31559,31558,31559,31712,31559,31713,31713,31557,31559,5218,31559,31712,31712,0,
+0,31711,31712,31558,31712,31559,31559,31711,31559,31559,31559,31558,31559,31711,31559,2147515362,31711,31712,2147515362,31714,31714,31557,31557,31713,2147515362,5217,31712,31557,5215,0,
+0,31559,31713,31559,31712,31558,2147515362,31711,31713,31711,31714,31711,31711,31559,31712,31559,31714,31721,2147515362,2147515362,31711,31559,31711,31557,31559,5061,31559,31721,31559,0,
+0,31557,31712,31713,31711,31712,31713,31559,31559,31721,31721,31557,31559,31558,31559,31559,31559,31721,31714,31559,31558,31712,31557,31721,31712,31559,31712,31712,31559,0,
+0,31558,31558,31559,31712,31559,31713,31558,31558,31558,31557,31558,31559,31711,31559,31558,31712,31721,31558,31714,31557,31559,31558,31721,31713,5218,31559,31557,31558,0,
+0,0,31557,0,0,31559,0,0,0,0,0,0,0,31559,31712,31559,0,0,0,0,0,0,0,0,6164,5216,5063,0,0,0,
+0,5063,31557,31713,31712,31558,31714,5216,0,0,0,0,0,0,31714,31713,0,0,0,0,0,0,5217,31558,31712,31559,31713,31714,6164,0,
+0,21505,21506,21506,21506,21506,21506,21507,0,0,0,31721,31557,6164,31712,31559,31558,31559,31721,0,0,0,6164,31721,31713,31712,31714,6164,31559,0,
+0,21633,33625,33469,33469,33469,33624,21635,0,0,31721,31559,31558,31713,31559,31711,31559,31558,31557,31721,0,0,5217,31712,31559,31712,31559,6164,5217,0,
+0,21633,33469,6973,6973,6973,33469,21635,0,0,5225,31712,2147515362,31711,31712,31713,31558,2147515362,31558,5225,0,0,6164,31558,31558,31559,31713,31712,5062,0,
+0,21633,33467,33469,33469,33469,33466,21635,0,0,31721,31558,31713,31557,31559,31557,31559,31714,31558,31721,0,0,5219,31559,31713,31714,31559,5216,5217,0,
+0,21761,21762,21762,21762,21762,21762,21763,0,0,31721,31559,31714,31559,31713,31712,31712,31557,31559,31721,0,0,6164,31558,31559,31713,31557,5215,5216,0,
+0,0,0,0,0,0,0,0,0,0,31721,31557,31559,31713,31559,31712,2147515362,31559,31711,31721,0,0,0,31557,31557,31712,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,31721,31559,31714,31712,31558,31557,31712,31712,31558,31721,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,31721,31558,31559,31557,31559,31558,31559,31558,31557,31721,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,31721,31559,31713,31713,31713,31713,31559,31721,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="Clutter" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,5377,5378,5378,5378,5378,5378,5378,5378,5378,5378,5375,5378,5378,5378,5378,5378,5378,5378,5379,0,0,
+0,0,0,5374,5378,5378,5378,5378,5378,5534,0,94,14250,14251,14252,14253,94,0,0,5689,2684387382,6328,6328,6328,0,0,0,5537,0,0,
+0,0,0,5531,11689,11690,10639,10640,10641,5689,9734,0,0,0,0,0,0,9734,0,1610636711,32823,7428,7428,7428,7428,2684361988,0,5537,0,0,
+0,0,0,5531,94,0,0,0,0,0,0,0,0,12073,0,12074,11948,0,2684378536,0,32823,5698,0,2147515208,1610645401,2684361988,0,5537,0,0,
+0,0,0,5531,6672,6673,1559,0,0,5373,0,0,0,0,0,0,0,0,0,5373,32660,0,11809,0,1610645561,2684361988,0,5537,0,0,
+0,0,0,5532,5849,5378,5850,0,0,5531,0,0,0,0,0,0,0,0,0,5535,1073774646,32667,32667,32667,1610645558,2684361988,0,5537,0,0,
+0,0,0,5531,292,0,0,0,0,5535,0,0,0,5377,5378,5378,5379,0,0,5693,5849,5849,5849,5849,5849,5850,0,5537,0,0,
+5377,5378,5378,5692,0,0,0,0,0,5537,10382,10379,10378,5535,11406,11279,5531,0,0,0,0,0,0,0,0,6164,0,5537,0,0,
+5531,10381,10121,10122,0,0,0,0,10382,5693,5694,5694,5694,5534,0,0,5689,0,0,5377,5378,5694,5694,5694,5694,5694,5694,5691,5849,5379,
+5531,10252,10251,0,0,0,0,0,11150,10383,0,0,10256,5531,25261,0,0,0,0,5535,0,38684,10631,10632,38685,0,12600,12601,12602,5537,
+5531,10380,10379,10378,0,0,0,0,0,0,0,0,0,5531,11274,11275,5373,0,0,5535,0,13412,13412,13412,13413,0,12728,12729,12730,5537,
+5535,5694,5694,5694,5850,0,0,5848,5694,5694,5849,5849,5849,5533,5849,5849,5695,0,0,5535,13799,6183,0,0,38401,38684,38685,38684,38685,5537,
+5531,0,0,0,0,0,0,0,6027,6026,0,0,0,5537,38750,38751,38752,0,0,5693,5694,5850,0,0,5848,5849,5849,5849,5849,5534,
+5531,0,0,0,0,0,0,0,0,0,0,0,0,5531,0,0,0,0,0,0,0,0,0,0,0,9890,0,9893,1878,5537,
+5531,0,0,0,0,0,0,0,0,0,0,0,0,5689,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5537,
+5535,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5377,5849,5850,0,5848,5849,5379,0,0,12309,12565,12310,5537,
+5531,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5535,0,0,0,0,0,5537,0,0,12693,13077,12694,5537,
+5531,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5535,0,0,0,0,0,5537,0,0,12437,12566,12438,5537,
+5531,0,0,0,0,0,0,0,2684378535,0,0,0,0,0,0,0,0,5535,0,0,0,0,0,5537,0,0,0,0,0,5537,
+5532,5850,0,5218,5215,0,2147488864,5848,5375,5694,5849,5849,5849,5379,0,0,5377,5691,5849,5694,5849,5375,5694,5691,5850,0,5848,5849,5378,5534,
+5531,0,0,0,0,0,0,0,5531,0,0,5377,5694,5695,0,0,5693,5694,5376,0,0,5535,40405,0,0,0,0,0,40405,5537,
+5531,0,0,0,5224,5226,0,0,5531,0,0,5535,5541,0,0,0,0,5541,5537,0,0,5535,0,40405,0,0,0,40405,0,5537,
+5531,0,0,25627,5224,5226,0,0,5531,0,5377,5695,32365,0,0,0,0,32365,5690,5376,0,5535,40405,0,0,0,0,0,40405,5537,
+5531,0,0,25755,5382,5384,0,0,5531,0,5535,0,0,0,0,0,0,0,0,5531,0,5535,0,40405,0,0,0,40405,0,5537,
+5531,0,0,0,0,0,0,0,5531,0,5535,0,0,0,0,0,0,0,0,5531,0,5535,40405,0,0,0,0,0,40405,5537,
+5531,0,0,0,0,0,0,0,5531,0,5535,0,32039,0,0,0,0,32041,0,5531,0,5693,5379,0,11785,11786,11787,0,5377,5695,
+5690,5849,5849,5849,5849,5849,5849,5849,5692,0,5535,1880,32515,0,0,0,0,32513,1880,5531,0,0,5693,5694,5694,5694,5694,5694,5695,0,
+0,0,0,0,0,0,0,0,0,0,5535,0,0,10883,0,0,5545,0,0,5531,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,5535,0,0,32041,0,0,10755,0,0,5531,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,5693,5850,14520,14521,0,0,14524,14525,5848,5692,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Clutter2" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,14120,14121,14120,14121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,11561,11562,10511,10512,10513,0,10386,2147494034,0,0,0,0,0,11949,11950,0,32037,32037,1610644932,3221257825,6170,2684360884,0,0,0,0,
+0,0,0,0,0,0,0,0,5543,0,0,0,0,0,0,0,0,0,14136,14137,0,5540,0,0,0,5542,0,0,0,0,
+0,0,0,0,6514,6515,0,0,0,0,0,0,11948,0,0,0,0,0,14392,14393,0,0,11809,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5543,0,0,0,0,0,0,0,
+0,0,0,0,0,10123,10124,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3221257825,1610644932,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,10253,10254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,10382,0,0,0,0,0,0,10255,10123,10124,10252,0,0,0,0,0,0,0,0,10497,10503,10504,13672,13673,12471,13697,13698,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,38401,0,38685,38684,0,13801,12727,13825,13826,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,38401,1610636936,1610636936,1610636936,1610636936,0,0,0,8691,0,
+0,3758107401,3758107273,3758107401,3758107145,0,0,0,10126,10127,10128,10129,14270,0,2147522333,2147522332,38688,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,13670,13672,13673,0,0,0,31567,0,0,13798,13797,14398,0,0,0,0,0,0,0,0,0,0,0,0,0,10042,0,0,0,
+0,12667,13800,13801,0,0,0,0,0,0,0,0,32678,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,12795,12796,0,0,0,0,0,0,0,0,0,14506,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,12923,12924,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9891,0,0,
+0,13051,13052,0,0,0,0,0,12669,12670,12671,12672,0,0,0,0,0,0,17347,17348,0,17347,17348,0,0,0,9890,9733,9893,0,
+0,32679,0,0,0,0,0,0,12797,12798,12799,12800,0,0,0,0,0,0,1610630082,0,0,0,2684371905,0,0,0,0,9892,0,0,
+0,32678,0,0,0,0,0,31884,12925,12926,12927,12928,26746,0,0,0,0,0,1610630081,0,17345,17346,2684371906,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,14314,14315,0,0,0,0,28376,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11858,0,0,0,0,0,1073763732,0,
+0,0,0,14139,0,0,0,0,0,0,0,0,28372,33938,0,0,34096,28372,0,0,0,0,0,32513,0,0,0,10525,0,0,
+0,0,0,11809,14396,14397,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147492819,0,0,0,0,0,22027,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28530,0,0,0,3758108597,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13414,0,0,0,12477,0,0,0,0,0,11529,0,
+0,0,0,0,0,0,0,0,0,0,0,13414,0,0,0,0,0,3136,13286,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,32367,32368,0,0,0,3136,32367,32368,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,32525,32526,3136,0,0,0,32525,32526,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1610627903,2684369983,2684369727,2684370628,2684370628,1610627903,2684369983,2684369727,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="Clutter3" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32673,0,0,0,32672,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14140,14138,0,32671,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2684364682,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5698,0,0,0,2684387231,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3221254185,2684384380,2684384380,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13288,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,12668,0,0,0,0,0,0,0,0,0,14378,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,23976,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610638107,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,14395,2684364682,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3221235802,0,0,0,0,0,7763,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="5" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23973,23975,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073766573,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="7" name="Ceiling" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14137,14140,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,10254,10250,10252,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,10253,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,10250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,14140,14141,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26630,0,0,0,26630,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="8" name="Ceiling2" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23975,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="6" name="Objects">
+  <object id="9260" template="../../../../../../common/maps/obj/dialog.tx" name="Dwarven Hold faction setup" x="60" y="132" width="24" height="22">
+   <properties>
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 42005}, {&quot;deleteMapObject&quot;: 42006}, {&quot;deleteMapObject&quot;: 42016}, {&quot;deleteMapObject&quot;: 42020}, {&quot;deleteMapObject&quot;: 42022}, {&quot;deleteMapObject&quot;: 42023}, {&quot;deleteMapObject&quot;: 42024}, {&quot;deleteMapObject&quot;: 42025}, {&quot;deleteMapObject&quot;: 42026}, {&quot;deleteMapObject&quot;: 42027}, {&quot;deleteMapObject&quot;: 42028}, {&quot;deleteMapObject&quot;: 42029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}, {&quot;deleteMapObject&quot;: 52005}, {&quot;deleteMapObject&quot;: 52006}, {&quot;deleteMapObject&quot;: 52016}, {&quot;deleteMapObject&quot;: 52020}, {&quot;deleteMapObject&quot;: 52022}, {&quot;deleteMapObject&quot;: 52023}, {&quot;deleteMapObject&quot;: 52024}, {&quot;deleteMapObject&quot;: 52025}, {&quot;deleteMapObject&quot;: 52026}, {&quot;deleteMapObject&quot;: 52027}, {&quot;deleteMapObject&quot;: 52028}, {&quot;deleteMapObject&quot;: 52029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;}], &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}]}]" />
+    <property name="hidden" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="9261" template="../../../../../../common/maps/obj/dialog.tx" name="Dwarven Hold faction setup" x="222" y="478" width="36" height="20">
+   <properties>
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 42005}, {&quot;deleteMapObject&quot;: 42006}, {&quot;deleteMapObject&quot;: 42016}, {&quot;deleteMapObject&quot;: 42020}, {&quot;deleteMapObject&quot;: 42022}, {&quot;deleteMapObject&quot;: 42023}, {&quot;deleteMapObject&quot;: 42024}, {&quot;deleteMapObject&quot;: 42025}, {&quot;deleteMapObject&quot;: 42026}, {&quot;deleteMapObject&quot;: 42027}, {&quot;deleteMapObject&quot;: 42028}, {&quot;deleteMapObject&quot;: 42029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}, {&quot;deleteMapObject&quot;: 52005}, {&quot;deleteMapObject&quot;: 52006}, {&quot;deleteMapObject&quot;: 52016}, {&quot;deleteMapObject&quot;: 52020}, {&quot;deleteMapObject&quot;: 52022}, {&quot;deleteMapObject&quot;: 52023}, {&quot;deleteMapObject&quot;: 52024}, {&quot;deleteMapObject&quot;: 52025}, {&quot;deleteMapObject&quot;: 52026}, {&quot;deleteMapObject&quot;: 52027}, {&quot;deleteMapObject&quot;: 52028}, {&quot;deleteMapObject&quot;: 52029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;}], &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}]}]" />
+    <property name="hidden" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="9262" template="../../../../../../common/maps/obj/dialog.tx" name="Dwarven Hold faction setup" x="384" y="68" width="20" height="32">
+   <properties>
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 42005}, {&quot;deleteMapObject&quot;: 42006}, {&quot;deleteMapObject&quot;: 42016}, {&quot;deleteMapObject&quot;: 42020}, {&quot;deleteMapObject&quot;: 42022}, {&quot;deleteMapObject&quot;: 42023}, {&quot;deleteMapObject&quot;: 42024}, {&quot;deleteMapObject&quot;: 42025}, {&quot;deleteMapObject&quot;: 42026}, {&quot;deleteMapObject&quot;: 42027}, {&quot;deleteMapObject&quot;: 42028}, {&quot;deleteMapObject&quot;: 42029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;You enter the Dwarven Hold. Your allies recognize you, while the opposing faction prepares for battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}, {&quot;deleteMapObject&quot;: 52005}, {&quot;deleteMapObject&quot;: 52006}, {&quot;deleteMapObject&quot;: 52016}, {&quot;deleteMapObject&quot;: 52020}, {&quot;deleteMapObject&quot;: 52022}, {&quot;deleteMapObject&quot;: 52023}, {&quot;deleteMapObject&quot;: 52024}, {&quot;deleteMapObject&quot;: 52025}, {&quot;deleteMapObject&quot;: 52026}, {&quot;deleteMapObject&quot;: 52027}, {&quot;deleteMapObject&quot;: 52028}, {&quot;deleteMapObject&quot;: 52029}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;, &quot;val&quot;: 1}}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_Configured_dwarven_hold_interior_lvl1&quot;}], &quot;action&quot;: [{&quot;activateMapObject&quot;: 42005}, {&quot;activateMapObject&quot;: 42006}, {&quot;activateMapObject&quot;: 42016}, {&quot;activateMapObject&quot;: 42020}, {&quot;activateMapObject&quot;: 42022}, {&quot;activateMapObject&quot;: 42023}, {&quot;activateMapObject&quot;: 42024}, {&quot;activateMapObject&quot;: 42025}, {&quot;activateMapObject&quot;: 42026}, {&quot;activateMapObject&quot;: 42027}, {&quot;activateMapObject&quot;: 42028}, {&quot;activateMapObject&quot;: 42029}]}]" />
+    <property name="hidden" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="2" template="../../../../../../common/maps/obj/entry_right.tx" x="368" y="64.0303">
+   <properties>
+    <property name="direction" value="left" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fallen_empires/dwarven_hold_interior_lvl2.tmx" />
+    <property name="teleportObjectId" value="14" />
+   </properties>
+  </object>
+  <object id="42005" template="../../../../../../common/maps/obj/enemy.tx" x="240.083" y="447.333">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Song|LEG&quot;, &quot;count&quot;: 1}]" />
+    <property name="Type" value="FEM Dwarven Soldier" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
+    <property name="displayNameOverride" value="Dwarven Soldier" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Soldier" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52005" template="../../../../../../common/maps/obj/enemy.tx" x="240.083" y="447.333">
+   <properties>
+    <property name="Type" value="FEM Dwarven Soldier" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Soldier" />
+    <property name="enemy" value="FEM Dwarven Soldier" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42006" template="../../../../../../common/maps/obj/enemy.tx" x="223.583" y="454.583">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Song|LEG&quot;, &quot;count&quot;: 1}]" />
+    <property name="Type" value="FEM Dwarven Berserker" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
+    <property name="displayNameOverride" value="Dwarven Berserker" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Berserker|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Berserker" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52006" template="../../../../../../common/maps/obj/enemy.tx" x="223.583" y="454.583">
+   <properties>
+    <property name="Type" value="FEM Dwarven Berserker" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Berserker" />
+    <property name="enemy" value="FEM Dwarven Berserker" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="7" template="../../../../../../common/maps/obj/collision.tx" x="166.5" y="399.75" width="41" height="80.2727" />
+  <object id="8" template="../../../../../../common/maps/obj/collision.tx" x="272.432" y="400.25" width="40.9545" height="80.0152" />
+  <object id="9" template="../../../../../../common/maps/obj/collision.tx" x="206.182" y="433.159" width="17.8636" height="46.75" />
+  <object id="10" template="../../../../../../common/maps/obj/collision.tx" x="256.068" y="433" width="17.8636" height="47.75" />
+  <object id="11" template="../../../../../../common/maps/obj/collision.tx" x="288.068" y="384.25" width="15.8636" height="16" />
+  <object id="12" template="../../../../../../common/maps/obj/collision.tx" x="182.568" y="343.5" width="25.1136" height="24.5" />
+  <object id="13" template="../../../../../../common/maps/obj/collision.tx" x="272.943" y="343" width="25.1136" height="24.5" />
+  <object id="14" template="../../../../../../common/maps/obj/collision.tx" x="207.943" y="335.75" width="16.1136" height="15.5" />
+  <object id="15" template="../../../../../../common/maps/obj/collision.tx" x="256.443" y="336" width="16.1136" height="15.5" />
+  <object id="42016" template="../../../../../../common/maps/obj/enemy.tx" x="255.5" y="368.75">
+   <properties>
+    <property name="Type" value="FEM Dwarven Lieutenant" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;We'll never give up our home here in the Crimson Peaks. Just need tae hold this gate till our reinforcements arrive from Gurn Keep. Any day now.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
+    <property name="displayNameOverride" value="Dwarven Lieutenant" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Heartstone|STH&quot;, &quot;Dwarven Lieutenant|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Lieutenant" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52016" template="../../../../../../common/maps/obj/enemy.tx" x="255.25" y="368.5">
+   <properties>
+    <property name="Type" value="FEM Dwarven Lieutenant" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;We'll never give up our home here in the Crimson Peaks. Just need tae hold this gate till our reinforcements arrive from Gurn Keep. Any day now.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Lieutenant" />
+    <property name="enemy" value="FEM Dwarven Lieutenant" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="17" template="../../../../../../common/maps/obj/scroll.tx" x="176.25" y="385.5">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Catapult|FEM&quot;, &quot;count&quot;: 1}]" />
+   </properties>
+  </object>
+  <object id="18" template="../../../../../../common/maps/obj/scroll.tx" x="288.25" y="383.75">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Aeolipile|FEM&quot;, &quot;count&quot;: 1}]" />
+   </properties>
+  </object>
+  <object id="19" template="../../../../../../common/maps/obj/entry_down.tx" x="64.25" y="112.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fallen_empires/dwarven_hold_exterior.tmx" />
+    <property name="teleportObjectId" value="77" />
+   </properties>
+  </object>
+  <object id="42020" template="../../../../../../common/maps/obj/enemy.tx" x="79.9773" y="109.295">
+   <properties>
+    <property name="Type" value="FEM Dwarven Trader" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ye'd sell us oot tae the orcs? Then ye'll no' be buyin' anythin' here!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Trader" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Trader|HML|[72b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Trader" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52020" template="../../../../../../common/maps/obj/enemy.tx" x="80.1875" y="109.375">
+   <properties>
+    <property name="Type" value="FEM Dwarven Trader" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Welcome, pal. As ye can see, we've got a wee bit o' a situation wi' that orc and goblin raiding party outside. But make yersel' comfortable till help arrives. Or, even better, help us yersel'.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Trader" />
+    <property name="enemy" value="FEM Dwarven Trader" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="21" template="../../../../../../common/maps/obj/treasure.tx" x="191.875" y="175.625" />
+  <object id="42022" template="../../../../../../common/maps/obj/enemy.tx" x="200.216" y="48.6705">
+   <properties>
+    <property name="Type" value="FEM Dwarven Armorer" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Few of us left, now. We'd best hide here with the weapons.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Armorer" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Armory|ICE&quot;, &quot;Anvil of Bogardan|VIS&quot;, &quot;Dwarven Armorer|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Armorer" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52022" template="../../../../../../common/maps/obj/enemy.tx" x="200.216" y="48.7614">
+   <properties>
+    <property name="Type" value="FEM Dwarven Armorer" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Few of us left, now. We'd best hide here with the weapons.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Armorer" />
+    <property name="enemy" value="FEM Dwarven Armorer" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42023" template="../../../../../../common/maps/obj/enemy.tx" x="231.58" y="49.5341">
+   <properties>
+    <property name="Type" value="FEM Dwarven Weaponsmith" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Work with zeal as hammers peal! Melt, anneal, and pound the steel!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Weaponsmith" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Iron Star|3ED&quot;, &quot;Scalding Tongs|TMP&quot;, &quot;Dwarven Weaponsmith|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Weaponsmith" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52023" template="../../../../../../common/maps/obj/enemy.tx" x="231.489" y="49.5341">
+   <properties>
+    <property name="Type" value="FEM Dwarven Weaponsmith" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Work with zeal as hammers peal! Melt, anneal, and pound the steel!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Weaponsmith" />
+    <property name="enemy" value="FEM Dwarven Weaponsmith" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42024" template="../../../../../../common/maps/obj/enemy.tx" x="416.208" y="240.542">
+   <properties>
+    <property name="Type" value="FEM Dwarven Lieutenant" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Rally the troops an' boost the morale. Hmm... nae easy when everyone's seen the kitchen.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Lieutenant" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Heartstone|STH&quot;, &quot;Dwarven Lieutenant|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Lieutenant" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52024" template="../../../../../../common/maps/obj/enemy.tx" x="416.208" y="240.542">
+   <properties>
+    <property name="Type" value="FEM Dwarven Lieutenant" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Rally the troops an' boost the morale. Hmm... nae easy when everyone's seen the kitchen.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Lieutenant" />
+    <property name="enemy" value="FEM Dwarven Lieutenant" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42025" template="../../../../../../common/maps/obj/enemy.tx" x="239.284" y="144.114">
+   <properties>
+    <property name="Type" value="FEM Dwarven Berserker" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Let them come! There's plenty o' fight left in this hauld.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Berserker" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Berserker|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Berserker" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="86,87" />
+   </properties>
+  </object>
+  <object id="52025" template="../../../../../../common/maps/obj/enemy.tx" x="239.284" y="144.114">
+   <properties>
+    <property name="Type" value="FEM Dwarven Berserker" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Let them come! There's plenty o' fight left in this hauld.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Berserker" />
+    <property name="enemy" value="FEM Dwarven Berserker" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+    <property name="waypoints" value="86,87" />
+   </properties>
+  </object>
+  <object id="42026" template="../../../../../../common/maps/obj/enemy.tx" x="119.685" y="287.67" width="16" height="16">
+   <properties>
+    <property name="Type" value="FEM Dwarven Soldier" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ye'll no' pass this room while I still draw breath!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Soldier" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Soldier" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52026" template="../../../../../../common/maps/obj/enemy.tx" x="119.685" y="287.67" width="16" height="16">
+   <properties>
+    <property name="Type" value="FEM Dwarven Soldier" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Let no one say we did not fight until the last...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Soldier" />
+    <property name="enemy" value="FEM Dwarven Soldier" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42027" template="../../../../../../common/maps/obj/enemy.tx" x="112.057" y="47.3864">
+   <properties>
+    <property name="Type" value="FEM Dwarven Thaumaturgist" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Transmutation is nae exclusively a blue or black magic art. Here, let me gie ye a wee taste o' distilled chaos tae show ye what I mean.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Thaumaturgist" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Red Mana Battery|LEG&quot;, &quot;Jayemdae Tome|3ED&quot;, &quot;Chaos Orb|2ED&quot;, &quot;Dwarven Thaumaturgist|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Thaumaturgist" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52027" template="../../../../../../common/maps/obj/enemy.tx" x="112.057" y="47.4773">
+   <properties>
+    <property name="Type" value="FEM Dwarven Thaumaturgist" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;Transmutation is nae exclusively a blue or black magic art. Here, let me gie ye a wee taste o' distilled chaos tae show ye what I mean.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Accept the Chaoslace)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;, &quot;val&quot;: 1}}, {&quot;grantRewards&quot;: [{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chaoslace|LEA&quot;, &quot;count&quot;: 1}]}]}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_ChaoslaceGiven&quot;}], &quot;text&quot;: &quot;\&quot;Mind ye, a wee taste is a' ye get. Chaos is best served in sma' doses.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Thaumaturgist" />
+    <property name="enemy" value="FEM Dwarven Thaumaturgist" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="42028" template="../../../../../../common/maps/obj/enemy.tx" x="320.875" y="288.375">
+   <properties>
+    <property name="Type" value="FEM Dwarven Warrior" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;I wis amang the first tae get here. Nae chance I'm leavin' now.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Warrior" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Warriors|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Warrior" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="42,43" />
+   </properties>
+  </object>
+  <object id="52028" template="../../../../../../common/maps/obj/enemy.tx" x="320.875" y="288.375">
+   <properties>
+    <property name="Type" value="FEM Dwarven Warrior" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;I wis amang the first tae get here. Nae chance I'm leavin' now.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Warrior" />
+    <property name="enemy" value="FEM Dwarven Warrior" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+    <property name="waypoints" value="42,43" />
+   </properties>
+  </object>
+  <object id="42029" template="../../../../../../common/maps/obj/enemy.tx" x="398.333" y="399.667">
+   <properties>
+    <property name="Type" value="FEM Dwarven Recruiter" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The sanctity o' this shrine must be respected!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Recruiter" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Shrine|ODY&quot;, &quot;Dwarven Recruiter|ODY&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="enemy" value="FEM Dwarven Recruiter" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="52029" template="../../../../../../common/maps/obj/enemy.tx" x="398.333" y="399.667">
+   <properties>
+    <property name="Type" value="FEM Dwarven Recruiter" />
+    <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The sanctity o' this shrine must be respected!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="displayNameOverride" value="Dwarven Recruiter" />
+    <property name="enemy" value="FEM Dwarven Recruiter" />
+    <property name="pursueRange" type="int" value="0" />
+    <property name="threatRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="30" template="../../../../../../common/maps/obj/collision.tx" x="16.6667" y="336" width="47.1667" height="81.8333" />
+  <object id="31" template="../../../../../../common/maps/obj/collision.tx" x="95.75" y="336.083" width="34.5" height="81.8333" />
+  <object id="32" template="../../../../../../common/maps/obj/collision.tx" x="62.0833" y="384.083" width="35.8334" height="33.8333" />
+  <object id="33" template="../../../../../../common/maps/obj/treasure.tx" x="79.625" y="383.292" />
+  <object id="34" template="../../../../../../common/maps/obj/collision.tx" x="17.3333" y="210.667" width="26.1667" height="57.8333" />
+  <object id="35" template="../../../../../../common/maps/obj/collision.tx" x="140.667" y="272.333" width="38.8333" height="31.8333" />
+  <object id="37" template="../../../../../../common/maps/obj/treasure.tx" x="400.125" y="416" />
+  <object id="38" template="../../../../../../common/maps/obj/collision.tx" x="223.25" y="183.75" width="43.5" height="16.0682" />
+  <object id="39" template="../../../../../../common/maps/obj/manashards.tx" x="63.75" y="62.75" />
+  <object id="40" template="../../../../../../common/maps/obj/collision.tx" x="79.625" y="352.25" width="18.125" height="14.875" />
+  <object id="41" template="../../../../../../common/maps/obj/entry_up.tx" x="224.25" y="490.25" width="31" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fallen_empires/dwarven_hold_exterior.tmx" />
+    <property name="teleportObjectId" value="20" />
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/waypoint.tx" x="319.818" y="299.636" />
+  <object id="43" template="../../../../../../common/maps/obj/waypoint.tx" x="399.818" y="186.727" />
+  <object id="44" template="../../../../../../common/maps/obj/collision.tx" x="320" y="144.727" width="79.3182" height="26.6818" />
+  <object id="45" template="../../../../../../common/maps/obj/collision.tx" x="416.159" y="143.568" width="47.8637" height="26.6818" />
+  <object id="46" template="../../../../../../common/maps/obj/collision.tx" x="320.159" y="165.568" width="16.9546" height="26.6818" />
+  <object id="47" template="../../../../../../common/maps/obj/collision.tx" x="400.341" y="185.932" width="63.3182" height="6.49998" />
+  <object id="48" template="../../../../../../common/maps/obj/collision.tx" x="351.614" y="319.75" width="16.4091" height="81.5909" />
+  <object id="49" template="../../../../../../common/maps/obj/collision.tx" x="447.795" y="319.932" width="16.2273" height="79.4091" />
+  <object id="50" template="../../../../../../common/maps/obj/collision.tx" x="367.523" y="337.932" width="16.2273" height="13.5909" />
+  <object id="51" template="../../../../../../common/maps/obj/collision.tx" x="431.705" y="336.659" width="16.2273" height="13.5909" />
+  <object id="52" template="../../../../../../common/maps/obj/collision.tx" x="431.159" y="368.477" width="16.2273" height="13.5909" />
+  <object id="53" template="../../../../../../common/maps/obj/collision.tx" x="368.432" y="370.295" width="16.2273" height="13.5909" />
+  <object id="54" template="../../../../../../common/maps/obj/collision.tx" x="384.977" y="403.205" width="46.0455" height="13.5909" />
+  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="224.614" y="165.568" width="31.1364" height="11.0454" />
+  <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="224.068" y="112.477" width="31.8637" height="15.0454" />
+  <object id="62" template="../../../../../../common/maps/obj/collision.tx" x="15.8863" y="128.295" width="32.2273" height="47.5909" />
+  <object id="63" template="../../../../../../common/maps/obj/collision.tx" x="48.25" y="160.659" width="14.7728" height="15.0454" />
+  <object id="64" template="../../../../../../common/maps/obj/collision.tx" x="127.886" y="128.295" width="16.0455" height="31.2272" />
+  <object id="65" template="../../../../../../common/maps/obj/collision.tx" x="144.25" y="144.295" width="14.7728" height="15.0454" />
+  <object id="66" template="../../../../../../common/maps/obj/collision.tx" x="191.705" y="144.114" width="16.7728" height="15.0454" />
+  <object id="67" template="../../../../../../common/maps/obj/collision.tx" x="160.068" y="112.841" width="48.0455" height="15.0454" />
+  <object id="68" template="../../../../../../common/maps/obj/collision.tx" x="193.705" y="54.6591" width="11.8637" height="8.49995" />
+  <object id="69" template="../../../../../../common/maps/obj/collision.tx" x="257.705" y="54.4773" width="11.8637" height="8.49995" />
+  <object id="70" template="../../../../../../common/maps/obj/collision.tx" x="282.977" y="21.75" width="11.8637" height="8.49995" />
+  <object id="71" template="../../../../../../common/maps/obj/collision.tx" x="211.523" y="53.75" width="10.4092" height="7.77268" />
+  <object id="72" template="../../../../../../common/maps/obj/collision.tx" x="241.159" y="54.1137" width="10.9546" height="7.40904" />
+  <object id="73" template="../../../../../../common/maps/obj/collision.tx" x="160.614" y="15.9318" width="57.5001" height="14.5" />
+  <object id="74" template="../../../../../../common/maps/obj/collision.tx" x="63.8863" y="30.6591" width="68.591" height="8.49995" />
+  <object id="75" template="../../../../../../common/maps/obj/collision.tx" x="38.6136" y="192.295" width="18.2273" height="25.7727" />
+  <object id="76" template="../../../../../../common/maps/obj/collision.tx" x="15.8863" y="271.932" width="14.4092" height="31.7727" />
+  <object id="78" template="../../../../../../common/maps/obj/collision.tx" x="16.4318" y="319.75" width="15.3183" height="16.1363" />
+  <object id="79" template="../../../../../../common/maps/obj/collision.tx" x="193.341" y="209.023" width="14.2274" height="27.9545" />
+  <object id="80" template="../../../../../../common/maps/obj/collision.tx" x="160.25" y="191.205" width="47.3183" height="16.1363" />
+  <object id="81" template="../../../../../../common/maps/obj/collision.tx" x="114.25" y="195.568" width="11.6819" height="10.8636" />
+  <object id="83" template="../../../../../../common/maps/obj/collision.tx" x="299.341" y="31.9318" width="20.2274" height="32.6818" />
+  <object id="84" template="../../../../../../common/maps/obj/collision.tx" x="227.886" y="15.75" width="22.591" height="14.6818" />
+  <object id="85" template="../../../../../../common/maps/obj/collision.tx" x="399.886" y="143.568" width="16.591" height="11.5908" />
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="231.818" y="302.909" />
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="223.273" y="143.636" />
+  <object id="151020" template="../../../../../../common/maps/obj/dialog.tx" x="68.1875" y="121.375" width="56" height="80" name="Allied proximity greeting">
+   <properties>
+    <property name="hidden" value="true" type="bool" />
+    <property name="dialog" value="[{&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;actorID&quot;: 52020}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_TraderGreeting&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;Welcome, pal. As ye can see, we've got a wee bit o' a situation wi' that orc and goblin raiding party outside. But make yersel' comfortable till help arrives. Or, even better, help us yersel'.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_TraderGreeting&quot;, &quot;val&quot;: 1}}]}]}]" />
+   </properties>
+  </object>
+  <object id="151021" template="../../../../../../common/maps/obj/scroll.tx" x="399.75" y="319.75">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Shrine|ODY&quot;, &quot;count&quot;: 1}]" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

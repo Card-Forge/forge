@@ -50,7 +50,7 @@ public class NewDraftScreen extends LaunchScreen {
             if (poolType == null) { return; }
 
             final BoosterDraft draft = BoosterDraft.createDraft(poolType);
-            if (draft == null) { return; }
+            if (draft == null || !draft.choosePicks()) { return; }
 
             FThreads.invokeInEdtLater(() -> Forge.openScreen(new DraftingProcessScreen(draft, FDeckEditor.EditorConfigDraft)));
         });

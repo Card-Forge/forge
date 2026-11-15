@@ -43,6 +43,7 @@ public class VPhaseIndicator extends FContainer {
     private final PlayerView player;
     private float expand; //landscape only: 0 = phase name, 1 = phase stops
     private boolean expandTarget;
+    private boolean tutorialOpen; //the "How to Play" tutorial is pointing at the stops: keep them open
     private float idleTime;
     private ExpandAnimation expandAnimation;
     private Color scratchColor = new Color();
@@ -75,6 +76,22 @@ public class VPhaseIndicator extends FContainer {
     }
 
     private static boolean isCompact() { return VPlayerPanel.isCompactLayout(); }
+
+    /**
+     * Used by the "How to Play" tutorial: opens the phase stops (landscape layouts, where they fold away) and keeps them
+     * open while it explains them, and lets them fold away again afterwards. Does nothing for the unified phase label,
+     * which opens its own list, and in portrait, where the stops are always showing.
+     */
+    public void setTutorialOpen(final boolean open) {
+        if (tutorialOpen == open) { return; }
+        tutorialOpen = open;
+        if (VPlayerPanel.isUnifiedPhase() || !Forge.isLandscapeMode()) { return; }
+        if (open) {
+            setExpanded(true);
+        } else if (expandTarget) {
+            setExpanded(false);
+        }
+    }
 
     /** Compact layout: opens the phase stops if they are hidden, hides them if they are showing. */
     public void toggleStops() {
@@ -311,7 +328,7 @@ public class VPhaseIndicator extends FContainer {
                 if (isCompact()) { //compact layout: the stops stay open until the phase button closes them
                     more = expand < 1f;
                 } else {
-                    if (expand >= 1f) {
+                    if (expand >= 1f && !tutorialOpen) {
                         idleTime += dt;
                         if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
                     }

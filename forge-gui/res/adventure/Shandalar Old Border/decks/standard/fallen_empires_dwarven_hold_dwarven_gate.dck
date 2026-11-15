@@ -1,0 +1,39 @@
+[metadata]
+Name=Dwarven Gate
+[Main]
+8 Mountain|3ED
+4 Plateau|3ED
+2 Battlefield Forge|APC
+2 Scabland|TMP
+1 Ravaged Highlands|ODY
+1 Dormant Volcano|VIS
+1 Dwarven Hold|FEM
+4 Dwarven Ruins|FEM
+4 Dwarven Catapult|FEM
+1 Dwarven Lieutenant|FEM
+1 Dwarven Soldier|FEM|[53a]
+1 Dwarven Soldier|FEM|[53b]
+1 Dwarven Soldier|FEM|[53c]
+3 Wall of Stone|3ED
+3 Wall of Granite|POR
+3 Aeolipile|FEM
+1 Shower of Coals|ODY
+2 Sphere of Law|ODY
+2 Rune of Protection: Red|USG
+1 Dwarven Song|LEG
+1 Aftershock|TMP
+1 Red Mana Battery|LEG
+1 Stonehands|ICE
+1 Volley of Boulders|ODY
+3 Mana Flare|3ED
+1 Howling Mine|3ED
+2 Earthquake|3ED
+2 Fault Line|USG
+2 Walking Wall|ICE
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Crevasse|LEG
+1 Great Wall|LEG
+1 Gravity Sphere|LEG
+1 Sphere of Law|ODY
+1 Wall of Stone|3ED

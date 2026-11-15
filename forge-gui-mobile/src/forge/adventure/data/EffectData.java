@@ -18,6 +18,7 @@ public class EffectData implements Serializable {
     //Saves store items with their EffectData. Keep this value so saves made before a field was added still load.
     private static final long serialVersionUID = -1350202758899129612L;
     public String name = null;           //Effect name. Can be checked for.
+    public String description;           //Shown in place of the generic intro line in effect dialogs and on the Statistics screen.
 
     //Duel effects.
     public int lifeModifier = 0;         //Amount to add to starting Life.
@@ -25,6 +26,7 @@ public class EffectData implements Serializable {
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
     public String[] startBattleScript; //Card-script lines run after mulligans. "SVar:Name:Value" lines set SVars the others can use.
+    public boolean allowIllegalCommander = false; //Keeps a commander that is not legal: any creature or planeswalker.
 
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
@@ -39,6 +41,7 @@ public class EffectData implements Serializable {
     public EffectData() {}
     public EffectData(EffectData effect) {
         name=effect.name;
+        description=effect.description;
         lifeModifier=effect.lifeModifier;
         changeStartCards=effect.changeStartCards;
         startBattleWithCard=effect.startBattleWithCard;
@@ -91,7 +94,26 @@ public class EffectData implements Serializable {
         return ret.toString();
     }
 
+    public String getIntro(String fallback) {
+        return description != null ? description : fallback;
+    }
+
     public String getDescription() {
+        return getDescription(null, "Gives Opponent:");
+    }
+
+    /** Describes an effect whose top level is the player's and whose opponent block goes to every enemy. */
+    public String getPlayerSideDescription() {
+        return getDescription(Forge.getLocalizer().getMessage("lblEffectDataHeaderPlayer"), Forge.getLocalizer().getMessage("lblEffectDataHeader"));
+    }
+
+    /** Describes an effect whose top level goes to every enemy and whose opponent block is the player's. */
+    public String getEnemySideDescription() {
+        return getDescription(Forge.getLocalizer().getMessage("lblEffectDataHeader"), Forge.getLocalizer().getMessage("lblEffectDataHeaderPlayer"));
+    }
+
+    /** @param ownHeader shown above the top level only when it has text; null for none */
+    private String getDescription(String ownHeader, String opponentHeader) {
         String description = "";
         if(colorView) description += "Manasight.\n";
         if(lifeModifier != 0)
@@ -110,15 +132,19 @@ public class EffectData implements Serializable {
         }
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
+        if(allowIllegalCommander)
+            description+="Any creature or planeswalker can be commander\n";
         if(moveSpeed!=0 && moveSpeed != 1)
             description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)
             description+="Shop discount: x" + (goldModifier) + "\n";
         if(cardRewardBonus > 0)
             description += Forge.getLocalizer().getMessage("advBonusEnemyDeckRewards", cardRewardBonus);
+        if(ownHeader != null && !description.isEmpty())
+            description = ownHeader + "\n" + description;
         if(this.opponent != null) {
             String oppEffect = this.opponent.getDescription();
-            description += "Gives Opponent:\n";
+            description += opponentHeader + "\n";
             if(!oppEffect.isEmpty()) {
                 description += oppEffect;
             }

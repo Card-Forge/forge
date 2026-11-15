@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.List;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.GameEntity;
@@ -186,6 +187,51 @@ public final class XChoice {
         }
         try {
             final int max = sa.getHostCard().getCounters(CounterEnumType.LOYALTY) - 1;
+            if (max < 1) {
+                return null;
+            }
+            sa.setActivatingPlayer(ai);
+            if (sa.getApi() == ApiType.DealDamage && "X".equals(sa.getParamOrDefault("NumDmg", "")) && sa.usesTargeting()) {
+                return damagePlan(ai, sa, max);
+            }
+            if (sa.getApi() == ApiType.DamageAll && "X".equals(sa.getParamOrDefault("NumDmg", ""))
+                    && sa.hasParam("ValidCards") && !sa.hasParam("ValidPlayers")) {
+                return sweepPlan(ai, sa, max);
+            }
+        } catch (final RuntimeException e) {
+            // a refinement only: no plan, nothing discovered
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------------------------ mana X
+
+    /** An activated ability of a permanent in play whose cost has an X of mana: "{X}{W}, {T}: X damage to target attacking creature". */
+    public static boolean isManaX(final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        return sa != null && sa.isActivatedAbility() && !sa.isSpell() && !sa.isPwAbility() && !sa.isManaAbility()
+                && host != null && host.isInZone(ZoneType.Battlefield) && sa.getPayCosts() != null && sa.costHasManaX();
+    }
+
+    /** How many X the mana cost has ({X}{X} is two): the mana paid for one point of X. */
+    public static int xCount(final SpellAbility sa) {
+        return sa == null || sa.getPayCosts() == null || sa.getPayCosts().getCostMana() == null ? 1
+                : Math.max(1, sa.getPayCosts().getCostMana().getAmountOfX());
+    }
+
+    /**
+     * The X and the target of an activated ability with an X of mana, chosen the careful way and only when it is plainly
+     * worth it: the same plans as the loyalty "-X" (the damage that kills the best creature or planeswalker it can reach, or
+     * the opponent; the smallest X that kills more of theirs than of the AI's own for damage to each creature), within the mana
+     * left after the rest of the cost. Any other X ability gets no plan: nothing is discovered, the heuristics may still play it.
+     */
+    public static LoyaltyPlan manaXPlan(final Player ai, final SpellAbility sa) {
+        if (ai == null || !isManaX(sa)) {
+            return null;
+        }
+        try {
+            final int fixed = sa.getPayCosts().getTotalMana() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+            final int max = (ComputerUtilMana.getAvailableManaEstimate(ai) - fixed) / xCount(sa);
             if (max < 1) {
                 return null;
             }

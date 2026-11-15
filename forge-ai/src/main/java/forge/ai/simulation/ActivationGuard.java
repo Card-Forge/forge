@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.ai.ComputerUtilCard;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -18,8 +19,10 @@ import forge.game.cost.CostReturn;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTapType;
 import forge.game.cost.CostUntapType;
+import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 /**
@@ -75,6 +78,9 @@ public final class ActivationGuard {
         if (costUnpayable(ai, sa)) {
             return "cost-unpayable";
         }
+        if (onlyValuableSacrifice(ai, sa)) {
+            return "valuable-sacrifice";
+        }
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
@@ -124,6 +130,43 @@ public final class ActivationGuard {
         return false;
     }
 
+    /** The most a creature may be worth to be sacrificed to an outlet for what the outlet gives (a weak token or creature). */
+    static final int FODDER_VALUE = 140;
+
+    /**
+     * A sacrifice outlet (Viscera Seer, Ashnod's Altar, Carrion Feeder) offered to the rollouts only when there is fodder:
+     * a token, a creature marked to be sacrificed, or a weak one. The cost is paid with the AI's worst creature, and
+     * the rollouts cannot see what a sacrificed good creature was worth beyond the evaluator's number.
+     */
+    private static boolean onlyValuableSacrifice(final Player ai, final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostSacrifice)) {
+                continue;
+            }
+            final String type = part.getType();
+            if (type == null || "CARDNAME".equals(type) || part.payCostFromSource()) {
+                continue; // the permanent itself: a sacrifice of its own
+            }
+            boolean any = false;
+            for (final Card c : CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split("/")[0],
+                    ai, sa.getHostCard(), sa)) {
+                any = true;
+                if (!c.isCreature() || c.isToken() || c.hasSVar("SacMe")
+                        || ComputerUtilCard.evaluateCreature(c) <= FODDER_VALUE) {
+                    return false;
+                }
+            }
+            if (any) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** A loyalty ability that puts loyalty counters on the Planeswalker (+N, or an X it cannot read). */
     public static boolean gainsLoyalty(final SpellAbility sa) {
         return loyaltyGain(sa);
@@ -153,6 +196,10 @@ public final class ActivationGuard {
             if (node.getTargetRestrictions() == null) {
                 return Verdict.USEFUL;
             }
+            final Verdict refined = targetedRefinement(ai, node);
+            if (refined != null) {
+                return refined;
+            }
             final int min = node.getMinTargets();
             final boolean idle = min > 0
                     ? node.getTargetRestrictions().getNumCandidates(node) < min
@@ -160,6 +207,9 @@ public final class ActivationGuard {
             return idle ? Verdict.IDLE_TARGETS : Verdict.USEFUL;
         }
         final ApiType api = node.getApi();
+        if (alreadyDone(node)) {
+            return Verdict.IDLE;
+        }
         if (api == null || node.hasParam("Defined") && api != ApiType.Sacrifice) {
             return Verdict.USEFUL;
         }
@@ -188,6 +238,119 @@ public final class ActivationGuard {
             default:
                 return Verdict.USEFUL;
         }
+    }
+
+    /** The parameters of a Pump that do more than hand out keywords (a Pump with any of them is not judged here). */
+    private static final String[] PUMP_EXTRAS = { "NumAtt", "NumDef", "RemoveKW", "KWChoice", "RandomKeyword",
+            "RandomKWNum", "DefinedKW", "DefinedLandwalk", "AtEOT", "RememberObjects", "ImprintCards", "RememberPumped",
+            "Radiance", "SharedKeywordsZone", "CanBlockAmount", "CanBlockAny", "ThisDefinedAndTgts" };
+
+    /**
+     * An effect that the game has already done to the host and that cannot be done twice:
+     * <ul>
+     *   <li>Adapt (Emperor of Bones, Sharktocrab): nothing happens while the creature has a +1/+1 counter, unless a
+     *   static ability lets it adapt anyway;</li>
+     *   <li>Monstrosity: nothing happens to a creature that is already monstrous;</li>
+     *   <li>a keyword ability ("{1}: gains flying until end of turn") when the creature has all the keywords already.</li>
+     * </ul>
+     * The activation costs mana and gains nothing, and Flat Monte Carlo cannot tell a repeat from the first.
+     */
+    static boolean alreadyDone(final SpellAbility node) {
+        final Card host = node.getHostCard();
+        if (host == null || node.usesTargeting()
+                || node.hasParam("Defined") && !"Self".equals(node.getParam("Defined"))) {
+            return false;
+        }
+        if (node.getApi() == ApiType.PutCounter) {
+            if (node.hasParam("Adapt")) {
+                return host.getCounters(CounterEnumType.P1P1) > 0
+                        && !forge.game.staticability.StaticAbilityAdapt.anyWithAdapt(node, host);
+            }
+            return node.hasParam("Monstrosity") && host.isMonstrous();
+        }
+        if (node.getApi() == ApiType.Pump && node.hasParam("KW")) {
+            for (final String extra : PUMP_EXTRAS) {
+                if (node.hasParam(extra)) {
+                    return false;
+                }
+            }
+            for (final String kw : node.getParam("KW").split(" & ")) {
+                if (!host.hasKeyword(kw)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * The counters go on something that is not a creature yet, and a later part of the same ability makes it one
+     * (Case of the Filched Falcon: counters on a noncreature artifact, which then becomes a 0/0 creature).
+     */
+    static boolean animatesTargetToCreature(final SpellAbility node) {
+        for (SpellAbility a = node; a != null; a = a.getSubAbility()) {
+            if (a.getApi() == ApiType.Animate && a.getParamOrDefault("Types", "").contains("Creature")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Two targeted effects whose candidates are not all worth the ability. A +1/+1 counter belongs on a creature
+     * (Ozolith, the Shattered Spire and its like also name noncreature artifacts, and a counter there does nothing),
+     * and an Equipment moved onto the creature it is already attached to does nothing, unless something in play
+     * pays for every attachment (a "becomes attached" trigger), which is what makes an equip {0} loop worth going round.
+     */
+    private static Verdict targetedRefinement(final Player ai, final SpellAbility node) {
+        final TargetRestrictions tr = node.getTargetRestrictions();
+        final ApiType api = node.getApi();
+        if (api == ApiType.PutCounter && "P1P1".equals(node.getParam("CounterType")) && !animatesTargetToCreature(node)) {
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (e instanceof Card && ((Card) e).isCreature()) {
+                    return null; // a real target exists: the ordinary count decides
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        if (api == ApiType.Attach && node.isEquip() && node.getHostCard().isEquipping()
+                && !attachPayoff(ai, node.getHostCard())) {
+            final Card current = node.getHostCard().getEquipping();
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (e != current) {
+                    return null;
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        return null;
+    }
+
+    /**
+     * Moving an Equipment onto the creature it is already on does nothing by itself, so it is only worth doing as a step
+     * of a combo the AI knows (ai-combos.txt) that is whole on its side of the table, with the Equipment or a permanent
+     * that triggers when something becomes attached as one of its pieces. A "becomes attached" trigger on its own is no
+     * reason: most of them pay once, and an equip {0} loop for a trickle of value is how the AI burns its turn.
+     */
+    private static boolean attachPayoff(final Player ai, final Card equipment) {
+        final CardCollection mine = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        for (final ComboCatalog.Entry e : ComboCatalog.entries()) {
+            if (!e.assembledBy(mine)) {
+                continue;
+            }
+            if (e.fillsSomeSlot(equipment)) {
+                return true;
+            }
+            for (final Card c : e.fillers(mine)) {
+                for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                    if (t.getMode() == forge.game.trigger.TriggerType.Attached) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private static Verdict allEffect(final Player ai, final SpellAbility node, final ApiType api, final Card host) {

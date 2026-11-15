@@ -3546,7 +3546,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
                                 sa.setCastFromPlayEffect(true);
+                                final int stackSize = getGame().getStack().size();
                                 PlaySpellAbility.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
+                                if (getGame().getStack().size() > stackSize) {
+                                    // as if p had just cast it: everyone gets to respond before it resolves (CR 117.3c)
+                                    getGame().getPhaseHandler().setPriority(p);
+                                }
                             }
                             // playSa could fire some triggers
                             getGame().getStack().addAllTriggeredAbilitiesToStack();

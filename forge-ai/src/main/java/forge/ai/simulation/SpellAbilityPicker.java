@@ -350,9 +350,23 @@ public class SpellAbilityPicker {
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
         }
+        if (forge.ai.AiController.isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
+        if (forge.ai.ability.UntapAi.isPointlessSelfUntap(player, sa)) {
+            return AiPlayDecision.TimingRestrictions;
+        }
         // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
         if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
             return AiPlayDecision.DoesntImpactCombat;
+        }
+        if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()
+                && sa.getSVar("X").equals("Count$xPaid")
+                && (ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), player, false) <= 0
+                    || AnimateAi.isRedundantPermanentPtSet(player, sa))) {
+            // an {X} ability paid with X=0, or one that would change nothing: the simulation would happily "play" it at
+            // every priority pass
+            return AiPlayDecision.CantAffordX;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;

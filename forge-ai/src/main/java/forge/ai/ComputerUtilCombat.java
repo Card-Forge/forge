@@ -182,13 +182,32 @@ public class ComputerUtilCombat {
                 return 0;
             }
 
-            damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
+            damage += attackerDamageBonus(attacker, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
                 sum *= 2;
             }
         }
         return sum;
+    }
+
+    /** What pumps add to the combat damage of the attacker: its power bonus, or its toughness bonus under Doran. */
+    public static int attackerDamageBonus(final Card attacker, final Combat combat, final boolean withoutAbilities) {
+        return attacker.toughnessAssignsDamage()
+                ? predictToughnessBonusOfAttacker(attacker, null, combat, withoutAbilities)
+                : predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
+    }
+
+    /**
+     * The combat damage a group of creatures would assign: their power, or their toughness while a static ability
+     * (Doran, the Siege Tower, Assault Formation, High Alert ...) says they assign damage equal to toughness.
+     */
+    public static int totalCombatDamage(final Iterable<Card> cards) {
+        int total = 0;
+        for (final Card c : cards) {
+            total += Math.max(0, c.getNetCombatDamage());
+        }
+        return total;
     }
 
     // Returns the poison an unblocked attacker would deal
@@ -207,8 +226,7 @@ public class ComputerUtilCombat {
         if (!attacked.canReceiveCounters(CounterEnumType.POISON)) {
             return 0;
         }
-        int damage = attacker.getNetCombatDamage() +
-                predictPowerBonusOfAttacker(attacker, null, null, false);
+        int damage = attacker.getNetCombatDamage() + attackerDamageBonus(attacker, null, false);
         int poison = 0;
         if (attacker.isInfectDamage(attacked)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
@@ -376,7 +394,7 @@ public class ComputerUtilCombat {
 
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = Lists.newArrayList();
-        for (Card c : combat.getAttackersOf(ai)) {
+        for (Card c : attackersOfTeam(ai, combat)) {
             if (c.isCommander()) {
                 CardCollection blockers = combat.getBlockers(c);
                 int currentCommanderDamage = ai.getCommanderDamage(c);

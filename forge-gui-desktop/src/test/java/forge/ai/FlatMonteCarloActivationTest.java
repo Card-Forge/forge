@@ -287,8 +287,11 @@ public class FlatMonteCarloActivationTest extends AITest {
         final SpellAbility sa = mine("Blood Host");
         AssertJUnit.assertEquals("sacrifice another creature, and there is none", "cost-unpayable",
                 ActivationGuard.problem(ai, sa));
-        addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
-        AssertJUnit.assertNull("with a creature to sacrifice", ActivationGuard.problem(ai, sa));
+        final Card bears = addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("a creature worth more than the outlet gives is not fodder", "valuable-sacrifice",
+                ActivationGuard.problem(ai, sa));
+        bears.setSVar("SacMe", "1");
+        AssertJUnit.assertNull("with fodder to sacrifice", ActivationGuard.problem(ai, sa));
     }
 
     @Test

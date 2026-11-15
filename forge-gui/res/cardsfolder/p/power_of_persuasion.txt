@@ -1,7 +1,7 @@
 Name:Power of Persuasion
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBRollDice | SpellDescription$ Choose target creature an opponent controls,
+A:SP$ TargetOnly | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBRollDice | SpellDescription$ Choose target creature an opponent controls,
 SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBHand,10-19:DBLibrary,20:DBControl | SpellDescription$ then roll a d20.
 SVar:DBHand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ParentTarget | SpellDescription$ 1—9 VERT Return it to its owner's hand.
 SVar:DBLibrary:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDecider$ TargetedOwner

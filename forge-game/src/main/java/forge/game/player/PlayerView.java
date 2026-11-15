@@ -143,12 +143,22 @@ public class PlayerView extends GameEntityView {
         sb.append(Localizer.getInstance().getMessage("lblCommanderCastCard", getCommanderCast(v)));
         sb.append("\n");
 
+        final String name = CardTranslation.getTranslatedName(v.getName());
+        final Set<PlayerView> listed = new HashSet<>();
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
             final int damage = p.getCommanderDamage(v);
-            if (damage > 0) {
-                sb.append(Localizer.getInstance().getMessage("lblCommanderDealNDamageToPlayer", p, CardTranslation.getTranslatedName(v.getName()), damage));
-                sb.append("\n");
+            if (damage <= 0 || listed.contains(p)) {
+                continue;
             }
+            final TrackableCollection<PlayerView> team = p.get(TrackableProperty.SharedTeam);
+            // in Two-Headed Giant both teammates hold the team's total, so it is listed once
+            if (team != null && team.size() == 2) {
+                listed.addAll(team);
+                sb.append(Localizer.getInstance().getMessage("lblCommanderDealNDamageToTeam", team.get(0), team.get(1), name, damage));
+            } else {
+                sb.append(Localizer.getInstance().getMessage("lblCommanderDealNDamageToPlayer", p, name, damage));
+            }
+            sb.append("\n");
         }
         return sb.toString();
     }

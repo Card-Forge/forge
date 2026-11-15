@@ -19,7 +19,7 @@ PT:7/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/2 green Wolf creature tokens.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/2 green Wolf creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_wolf
-A:AB$ Pump | Cost$ 2 G G | ValidTgts$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | TgtPrompt$ Select another target Wolf or Werewolf you control | AILogic$ Fight | SubAbility$ DBFight | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Another target Wolf or Werewolf you control fights target creature you don't control.
+A:AB$ TargetOnly | Cost$ 2 G G | ValidTgts$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | TgtPrompt$ Select another target Wolf or Werewolf you control | AILogic$ Fight | SubAbility$ DBFight | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Another target Wolf or Werewolf you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | StackDescription$ fights {c:ThisTargetedCard}.
 K:Nightbound
 DeckHints:Type$Wolf|Werewolf

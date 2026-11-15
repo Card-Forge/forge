@@ -872,8 +872,18 @@ public class PlayerControllerAi extends PlayerController {
         return Aggregates.random(swapChoices);
     }
 
+    /** Momir Basic and MoJhoSto: every deck is basic lands, the avatar in the command zone is the whole game. */
+    private boolean isBasicLandDeckVariant() {
+        final forge.game.GameRules rules = player.getGame().getRules();
+        return rules.hasAppliedVariant(forge.game.GameType.MomirBasic) || rules.hasAppliedVariant(forge.game.GameType.MoJhoSto)
+                || player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
+    }
+
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        if (isBasicLandDeckVariant()) {
+            return true; // Momir Basic / MoJhoSto: the deck is all basic lands and the avatar does the work, there is nothing to mulligan for
+        }
         if (brains.useSmartMulligan()) {
             try {
                 return OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
@@ -1494,7 +1504,7 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
-    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+    void chooseNewTargetsForCopy(final SpellAbility copy) {
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1525,6 +1535,10 @@ public class PlayerControllerAi extends PlayerController {
             for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
                 s.setTargets(oldTargets.get(i++));
             }
+        }
+        if (!targetingPlayer) {
+            // a copy that would do what the original or another copy already does goes for another target
+            CopyTargets.awayFromTheOthers(player, copy);
         }
     }
 
@@ -1796,7 +1810,7 @@ public class PlayerControllerAi extends PlayerController {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
-            } else if (logic.equals(NamedDiscard.LOGIC)) {
+            } else if (NamedDiscard.isNamingLogic(logic)) {
                 name = NamedDiscard.chooseName(player, sa, valid);
             }
 
@@ -1811,7 +1825,37 @@ public class PlayerControllerAi extends PlayerController {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {
-                return list.get(0).getName();
+                // Meddling Mage: not the name another copy already holds, and a key card of the opponent's deck first (#12801)
+                final Set<String> taken = SpecialCardAi.namesTakenByOtherCopies(player, sa);
+                CardCollectionView pool = CardLists.filter(list, c -> !taken.contains(c.getName()));
+                if (pool.isEmpty()) {
+                    pool = list;
+                }
+                // the opponent lists its key cards in the order it wants them answered: the first one that is still to come
+                // (not taken by another copy, not already on the battlefield) is the name, and only then the next one
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() == null || opp.getRegisteredPlayer().getDeck() == null) {
+                        continue;
+                    }
+                    final CardCollectionView inPlay = opp.getCardsIn(ZoneType.Battlefield);
+                    for (final String key : opp.getRegisteredPlayer().getDeck().getKeyCards()) {
+                        if (taken.contains(key) || CardLists.count(inPlay, c -> c.getName().equals(key)) > 0) {
+                            continue;
+                        }
+                        if (CardLists.count(pool, c -> c.getName().equals(key)) > 0) {
+                            return key;
+                        }
+                    }
+                }
+                // none of them is left to name: the best of the key cards in the pool (even one already in play), then the best card
+                final CardCollection keyCards = new CardCollection();
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() != null && opp.getRegisteredPlayer().getDeck() != null) {
+                        final List<String> keys = opp.getRegisteredPlayer().getDeck().getKeyCards();
+                        keyCards.addAll(CardLists.filter(pool, c -> keys.contains(c.getName())));
+                    }
+                }
+                return ComputerUtilCard.getBestAI(keyCards.isEmpty() ? pool : keyCards).getName();
             }
         }
         return "Morphling";
@@ -1908,6 +1952,11 @@ public class PlayerControllerAi extends PlayerController {
             return 0;
         }
 
+        if (keyword.getKeyword() == Keyword.REPLICATE) {
+            // a copy is worth its mana only with a target of its own when a second go at one target does nothing
+            max = Math.min(max, replicateCopiesWorthPaying(sa));
+        }
+
         int chosenAmount = 0;
 
         Cost costSoFar = sa.getPayCosts().copy();
@@ -1923,6 +1972,39 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         return chosenAmount;
+    }
+
+    private int replicateTargetCount(final SpellAbility sa) {
+        if (sa.getApi() == ApiType.Counter) {
+            int n = 0;
+            for (final SpellAbilityStackInstance si : player.getGame().getStack()) {
+                final SpellAbility onStack = si.getSpellAbility();
+                if (onStack.getActivatingPlayer() != null && onStack.getActivatingPlayer().isOpponentOf(player)
+                        && sa.canTargetSpellAbility(onStack)) {
+                    n++;
+                }
+            }
+            return n;
+        }
+        return sa.getTargetRestrictions().getAllCandidates(sa, false).size();
+    }
+    /**
+     * How many times replicate is worth paying: a counterspell, a tap, a bounce or a removal spell does nothing the
+     * second time on the same target (Consign to Memory, Gigadrowse, Vacuumelt), so the copies are limited to the
+     * other targets there are (one spell and each copy aimed at its own). Burn, pumps and the like stack, and an
+     * untargeted spell does its work for each copy: those are paid for as far as the mana goes.
+     */
+    private int replicateCopiesWorthPaying(final SpellAbility sa) {
+        if (!sa.usesTargeting() || sa.getTargetRestrictions() == null) {
+            return Integer.MAX_VALUE;
+        }
+        if (!CopyTargets.repeatsDoNothing(sa)) {
+            return Integer.MAX_VALUE;
+        }
+        sa.setActivatingPlayer(player);
+        final int perCopy = Math.max(1, sa.getTargetRestrictions().getMaxTargets(sa.getHostCard(), sa));
+        final int candidates = replicateTargetCount(sa);
+        return Math.max(0, candidates / perCopy - 1);
     }
 
     @Override

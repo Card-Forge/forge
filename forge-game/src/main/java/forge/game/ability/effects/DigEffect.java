@@ -64,10 +64,23 @@ public class DigEffect extends SpellAbilityEffect {
             if (numToDig != numToChange) {
                 String destZone1 = sa.hasParam("DestinationZone") ?
                         sa.getParam("DestinationZone").toLowerCase() : "hand";
-                String destZone2 = sa.hasParam("DestinationZone2") ?
-                        sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
-                if (sa.hasParam("RestRandomOrder")) {
-                    destZone2 = destZone2.replace("any", "a random");
+                final String rawZone2 = sa.hasParam("DestinationZone2") ? sa.getParam("DestinationZone2").toLowerCase() : "library";
+                String destZone2;
+                boolean exileRest = false;
+                switch (rawZone2) {
+                    case "library":
+                        destZone2 = ("0".equals(sa.getParam("LibraryPosition2")) ? "on top of their library" : "on the bottom of their library")
+                                + (sa.hasParam("RestRandomOrder") ? " in a random order." : " in any order.");
+                        break;
+                    case "exile":
+                        exileRest = true;
+                        destZone2 = ".";
+                        break;
+                    case "hand":
+                        destZone2 = "into their hand.";
+                        break;
+                    default:
+                        destZone2 = "into their " + rawZone2 + ".";
                 }
 
                 String verb2 = "put ";
@@ -83,7 +96,7 @@ public class DigEffect extends SpellAbilityEffect {
                 sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
                 if (sa.hasParam("ChangeValid")) {
                     String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
-                        sa.getParam("ChangeValid").toLowerCase();
+                        Lang.getInstance().buildValidCardDesc(Arrays.asList(sa.getParam("ChangeValid").split(",")), numToChange != 1);
                     if (!StringUtils.containsIgnoreCase(what, "card")) {
                         what = what + " card";
                     }
@@ -101,7 +114,7 @@ public class DigEffect extends SpellAbilityEffect {
                 } else {
                     sb.append("and ");
                 }
-                sb.append("put the rest ").append(destZone2);
+                sb.append(exileRest ? "exile the rest." : "put the rest " + destZone2);
             }
         }
         return sb.toString();
@@ -196,7 +209,9 @@ public class DigEffect extends SpellAbilityEffect {
                     game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
-                    hasRevealed = p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), null);
+                    final Card cardToShow = top.size() == 1 ? top.get(0) : null;
+                    hasRevealed = p.getController().confirmAction(sa, null,
+                            Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), cardToShow, null);
                     if (hasRevealed) {
                         game.getAction().reveal(top, p);
                     }
@@ -249,7 +264,9 @@ public class DigEffect extends SpellAbilityEffect {
                 // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                 if (optional && mayBeSkipped && !valid.isEmpty()) {
                     String prompt = optionalAbilityPrompt != null ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + host + "?\n\n(" + sa.getDescription() + ")";
-                    if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", host.getTranslatedName()), null)) {
+                    final Card cardToShow = valid.size() == 1 ? valid.get(0) : null;
+                    if (!p.getController().confirmAction(sa, null,
+                            TextUtil.fastReplace(prompt, "CARDNAME", host.getTranslatedName()), cardToShow, null)) {
                         return;
                     }
                 }
@@ -424,9 +441,14 @@ public class DigEffect extends SpellAbilityEffect {
                 }
 
                 // now, move the rest to destZone2
-                if (!rest.isEmpty() && (!sa.hasParam("DestZone2Optional") || p.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone",
-                                destZone2.getTranslatedName()), null))) {
+                boolean moveRest = !rest.isEmpty();
+                if (moveRest && sa.hasParam("DestZone2Optional")) {
+                    final Card cardToShow = rest.size() == 1 ? rest.get(0) : null;
+                    moveRest = p.getController().confirmAction(sa, null,
+                            Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone",
+                                    destZone2.getTranslatedName()), cardToShow, null);
+                }
+                if (moveRest) {
                     if (destZone2.isDeck() || destZone2 == ZoneType.Graveyard) {
                         CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {

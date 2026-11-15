@@ -4,7 +4,7 @@ Types:Land Planet
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-K:Station:12
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE12_CHARGE | AddAbility$ EvendoMana | Description$ STATION 12+ {G}, {T}: Add {G} for each creature you control.
 SVar:EvendoMana:AB$ Mana | Cost$ G T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl

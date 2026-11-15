@@ -4,7 +4,7 @@ Types:Legendary Artifact Spacecraft
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 1/1 red Officer creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_officer | TokenOwner$ You
-K:Station:6
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AtkTrig | Description$ STATION 6+ Flying,,,Whenever CARDNAME attacks, up to seven target attacking creatures gain flying until end of turn.
 SVar:AtkTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, up to seven target attacking creatures gain flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | ValidTgtsDesc$ attacking creature | TargetMin$ 0 | TargetMax$ 7 | KW$ Flying

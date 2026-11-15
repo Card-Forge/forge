@@ -842,7 +842,7 @@ public class CardFactoryUtil {
                     if (secondary) {
                         trigStr.append(" | Secondary$ True");
                     }
-                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
+                    trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription().trim());
                     final Trigger t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
                     t.setOverridingAbility(sa);
                     inst.addTrigger(t);
@@ -916,7 +916,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
-            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True | IgnoreFreeze$ True";
+            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True";
             final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True";
@@ -947,7 +947,7 @@ public class CardFactoryUtil {
             final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+!token | TriggerZones$ Battlefield" +
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
             final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
-            final String puSt = "DB$ Pump | RememberObjects$ Self";
+            final String puSt = "DB$ Bookkeeping | RememberObjects$ Self";
             final String anSt = "DB$ Animate | Duration$ Perpetual | Defined$ Remembered | RemoveKeywords$ Double team";
             final String clSt = "DB$ Cleanup | ClearRemembered$ True";
             final Trigger trigger = TriggerHandler.parseTrigger(trigString, card, intrinsic);
@@ -1144,7 +1144,9 @@ public class CardFactoryUtil {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
             sbTrig.append("ValidCard$ Card.Self+PromisedGift | Secondary$ True | TriggerDescription$ ");
-            sbTrig.append("Gift a ").append(giftDescription).append(" to ").append(card.getPromisedGift());
+            // the description brings its own article ("a card", "an Octopus", "a tapped Fish")
+            sbTrig.append("Gift ").append(giftDescription.matches("(?i)an? .*") ? "" : "a ").append(giftDescription)
+                    .append(" to ").append(card.getPromisedGift() == null ? "an opponent" : card.getPromisedGift());
 
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
             etbTrigger.setOverridingAbility(saGift);
@@ -1389,9 +1391,9 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            StringBuilder desc = new StringBuilder("Play Madness ");
+            StringBuilder desc = new StringBuilder("Play Madness");
             if (!"ManaCost".equals(manacost)) {
-                desc.append(ManaCostParser.parse(manacost)).append(" ");
+                desc.append(" ").append(ManaCostParser.parse(manacost));
             }
             desc.append(" - " + card.getDisplayName());
 
@@ -1845,7 +1847,7 @@ public class CardFactoryUtil {
             StringBuilder playTrig = new StringBuilder();
 
             playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True");
-            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able.  ");
+            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able. ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
             String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
@@ -1933,7 +1935,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
-            String descStr = "Visit — " + sa.getDescription();
+            String descStr = "Visit — " + sa.getDescription().trim();
 
             final String trigStr = "Mode$ VisitAttraction | TriggerZones$ Battlefield | ValidCard$ Card.Self" +
                     "| TriggerDescription$ " + descStr;
@@ -1945,7 +1947,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
-            String descStr = "Prize — " + sa.getDescription();
+            String descStr = "Prize — " + sa.getDescription().trim();
 
             final String trigStr = "Mode$ ClaimPrize | Static$ True | TriggerZones$ Battlefield | ValidCard$ Card.Self" +
                     "| TriggerDescription$ " + descStr;
@@ -1964,7 +1966,7 @@ public class CardFactoryUtil {
                 String roomName = sa.getParam("RoomName");
                 StringBuilder trigStr = new StringBuilder("Mode$ RoomEntered | TriggerZones$ Command");
                 trigStr.append(" | ValidCard$ Card.Self | ValidRoom$ ").append(roomName);
-                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription());
+                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription().trim());
                 if (sa.hasParam("NextRoom")) {
                     boolean first = true;
                     StringBuilder nextRoomParam = new StringBuilder();
@@ -2026,7 +2028,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("MayFlashSac")) {
             String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
-                    + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
+                    + "the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
 
             final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | RememberObjects$ Self | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
             final String strSac = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
@@ -3466,7 +3468,7 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Station")) {
+        } else if (keyword.equals("Station")) {
             String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +
                     "| CounterType$ CHARGE | CounterNum$ StationX | SorcerySpeed$ True " +
                     "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";
@@ -3601,7 +3603,7 @@ public class CardFactoryUtil {
 
             final StringBuilder sbStack = new StringBuilder();
             sbStack.append(card.getName()).append(" suspending for ");
-            sbStack.append(Lang.nounWithNumeral(k[1], "turn")).append(".)");
+            sbStack.append(Lang.nounWithNumeral(k[1], "turn")).append(".");
             suspend.setStackDescription(sbStack.toString());
 
             suspend.getRestrictions().setZone(ZoneType.Hand);

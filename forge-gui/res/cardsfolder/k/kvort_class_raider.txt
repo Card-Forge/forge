@@ -2,7 +2,7 @@ Name:K'Vort-Class Raider
 ManaCost:4
 Types:Artifact Spacecraft
 PT:5/3
-K:Station:4
+K:Station
 S:Mode$ Continuous | Condition$ PlayerTurn | Affected$ Card.Self,Creature.YouCtrl | AddKeyword$ Hexproof | Description$ During your turn, this Spacecraft and creatures you control have hexproof.
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE4_CHARGE | AddType$ Creature | AddKeyword$ Flying & Menace & Haste | Description$ STATION 4+ Flying, menace, haste
 SVar:PlayMain1:TRUE

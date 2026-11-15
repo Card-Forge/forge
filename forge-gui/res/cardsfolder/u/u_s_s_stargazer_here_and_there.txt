@@ -2,7 +2,7 @@ Name:U.S.S. Stargazer, Here and There
 ManaCost:3
 Types:Legendary Artifact Spacecraft
 PT:4/3
-K:Station:6
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AtkTrig | Description$ STATION 6+ Flying,,,Picard Maneuver — Whenever NICKNAME attacks, create a tapped and attacking 4/3 colorless Spacecraft Illusion artifact creature token with flying. Exile that token at end of combat.
 SVar:AtkTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Picard Maneuver — Whenever NICKNAME attacks, create a tapped and attacking 4/3 colorless Spacecraft Illusion artifact creature token with flying. Exile that token at end of combat.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_3_a_spacecraft_illusion_flying | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat

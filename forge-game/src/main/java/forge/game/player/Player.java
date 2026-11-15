@@ -718,10 +718,13 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
             // In case that commander is merged permanent, get the real commander card
             final Card realCommander = source.getRealCommander();
-            addCommanderDamage(realCommander, amount);
-            view.updateCommanderDamage(this);
-            if (realCommander != source) {
-                view.updateMergedCommanderDamage(source, realCommander);
+            // not in the CR: the Two-Headed Giant format page counts commander damage per team
+            for (final Player p : getSharedTeam()) {
+                p.addCommanderDamage(realCommander, amount);
+                p.view.updateCommanderDamage(p);
+                if (realCommander != source) {
+                    p.view.updateMergedCommanderDamage(source, realCommander);
+                }
             }
         }
 
@@ -893,7 +896,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (counterType.is(CounterEnumType.RAD) && newValue > 0) {
             String setCode = null;
-            if (params.containsKey(AbilityKey.Cause)) {
+            if (params != null && params.containsKey(AbilityKey.Cause)) {
                 SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
                 setCode = cause.getHostCard().getSetCode();
             }
