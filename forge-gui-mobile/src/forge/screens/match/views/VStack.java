@@ -290,6 +290,15 @@ public class VStack extends FDropDown {
     protected void updateSizeAndPosition() {
         if (!getRotate90()) {
             super.updateSizeAndPosition();
+            //Move only the stack dropdown panel; keep its menu-bar tab in its original position.
+            if (VPlayerPanel.isCompactLayout()) {
+                final MatchScreen match = MatchController.getView();
+                final VPlayerPanel topPanel = match == null ? null : match.getTopPlayerPanel();
+                if (topPanel != null && topPanel.isCompactRight()) {
+                    final float left = Math.max(0f, getLeft() - topPanel.getColumnWidth() - Utils.scale(4));
+                    setBounds(left, getTop(), getWidth(), getHeight());
+                }
+            }
             if (Forge.isLandscapeMode()) { //a long stack scrolls instead of covering the match
                 final float limit = Math.round(Forge.getScreenHeight() * LANDSCAPE_MAX_HEIGHT_RATIO);
                 if (getHeight() > limit) {
@@ -435,7 +444,7 @@ public class VStack extends FDropDown {
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
                     final VPlayerPanel panel = MatchScreen.getPlayerPanel(p);
-                    if (panel != null) { drawTargetArrow(g, arrowOrigin, panel.getAvatar().getTargetingArrowOrigin(), conn); }
+                    if (panel != null) { TargetingOverlay.drawPlayerArrow(g, arrowOrigin, panel.getTargetingArrowOrigin(), conn, panel.isCompactRight()); }
                 }
 
                 // Stack items aimed at other stack items (counterspells and the like) point at that item's entry in this view.
