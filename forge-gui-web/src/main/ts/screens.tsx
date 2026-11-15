@@ -3,8 +3,11 @@
 import { render } from 'preact';
 import { Menu, NamePrompt } from './menu';
 import { rememberedName } from './identity';
+import { Requests, StackMenu } from './match/questions';
 import { HostChoice } from './hostchoice';
 import { Options } from './options';
+import { AutoDecisionsDialog, AutoPassStops, ConcedeQuestion, DrawOfferQuestion, GameMenu } from './match/gamemenu';
+import { DevSetupDialog } from './match/devmenu';
 import { Volume } from './volume';
 import { Notices } from './notices';
 import { isPortrait } from './form';
@@ -38,10 +41,23 @@ export function renderScreens(model: Model, actions: Actions): void {
   render(under === 'name' ? <NamePrompt model={model} actions={actions} initial={rememberedName() ?? ''} />
     : under === 'menu' ? <Menu key={edits} model={model} actions={actions} /> : null, byId('menu'));
   render(<>
+    {page === 'match' && <Requests model={model} actions={actions} />}
+    {page === 'match' && <StackMenu model={model} actions={actions} />}
     {/* A phone has no speaker among the tools. Its volume is opened from the game menu, so it opens by that menu's button */}
     {page === 'match' && ui.volumeOpen && <Volume anchor={isPortrait() ? '#match .tools .more' : '#match .tools .volume'} close={() => changeUi(u => { u.volumeOpen = false; })} />}
     {page !== 'match' && ui.volumeOpen && <Volume anchor=".page-head .volume, .ph-more" close={() => changeUi(u => { u.volumeOpen = false; })} />}
     {page !== 'name' && ui.optionsOpen && <Options close={() => changeUi(u => { u.optionsOpen = false; })} />}
+    {page === 'match' && (ui.gameMenu === 'menu' || ui.gameMenu === 'dev') && (
+      <GameMenu model={model} actions={actions} close={() => changeUi(u => { u.gameMenu = null; })}
+        open={dialog => changeUi(u => { u.gameMenu = dialog; })} dev={ui.gameMenu === 'dev'} />
+    )}
+    {page === 'match' && ui.concedeAsk && <ConcedeQuestion actions={actions} />}
+    {page === 'match' && ui.gameMenu === 'decisions' && (
+      <AutoDecisionsDialog model={model} actions={actions} close={() => changeUi(u => { u.gameMenu = null; })} />
+    )}
+    {ui.gameMenu === 'stops' && <AutoPassStops close={() => changeUi(u => { u.gameMenu = null; })} />}
+    {page === 'match' && ui.gameMenu === 'devSetup' && <DevSetupDialog actions={actions} close={() => changeUi(u => { u.gameMenu = null; })} />}
+    {page === 'match' && <DrawOfferQuestion model={model} actions={actions} />}
     {model.hostChoice && <HostChoice key={model.hostChoice.id} question={model.hostChoice} actions={actions} />}
   </>, byId('dialog-layer'));
   render(<Notices model={model} />, byId('notices'));

@@ -12,6 +12,7 @@ import { renderScreens, pageUnder, screenOf, slideWay } from './screens';
 import { renderMatch, renderSky, resetTable } from './match/board';
 import { arriveAtMatch, dimIntoMatch } from './match/matchentry';
 import { renderPrompt, flash, pressPromptButton } from './match/prompt';
+import { appendLog, initLog, logTints } from './match/log';
 import { initSide, renderSide, showLog } from './match/side';
 import { initDetail, nextFace, renderDetail } from './preview';
 import { initOverlay, drawOverlay } from './match/overlay';
@@ -56,6 +57,22 @@ window.addEventListener('unhandledrejection', e => report(String((e.reason as Er
 const wire = createActions(sendNow);
 const actions = {
   ...wire,
+  // When the concession ends the game, the plays the player would have watched are skipped
+  concede: () => {
+    if (concedingEndsGame(model)) pacer.hurry();
+    wire.concede();
+  },
+  // An answered request is removed from the model at once, so its dialog closes without waiting for the server
+  answer: (id, value) => {
+    model.requests.delete(id);
+    wire.answer(id, value);
+    schedule();
+  },
+  // A previous answer belongs to a previous menu, so the new menu opens only when its own answer arrives
+  askStackMenu: key => {
+    model.stackMenu = null;
+    wire.askStackMenu(key);
+  },
   // The engine thread waits for the answer, so the question is cleared as soon as it is answered
   answerHostChoice: (id, value) => {
     model.hostChoice = null;
@@ -77,6 +94,10 @@ initForm(() => {
 });
 initNotices(model, schedule);
 initPress();
+initSheets();
+initDetail(actions);
+initLog();
+initSide();
 initSettings(actions.setSetting, () => {
   applyAudioSettings();
   schedule();
@@ -154,7 +175,38 @@ function apply(msg: ServerMessage): void {
       }
       model.error = msg.message;
       break;
+    case 'state':
+      applyState(model, msg);
+      // The next game of a match reuses the previous game's card keys, so all state keyed on them is cleared
+      if (msg.full) {
+        model.gameOver = false;
+        model.matchScore = [];
+        model.prompt = null;
+        model.drawOffer = null;
+        model.zones = [];
+        model.playable = null;
+        model.cardDetails.clear();
+        model.playerDetails.clear();
+        model.stackMenu = null;
+        resetMatchUi();
+        resetTable();
+      }
+      break;
+    case 'request':
+      model.requests.set(msg.id, msg);
+      break;
+    case 'drawOffer': model.drawOffer = msg.open ? msg : null; break;
+    case 'autoDecisions': model.autoDecisions = msg; break;
+    case 'sound': playSound(msg); return;
+    case 'log':
+      appendLog(msg, logTints(players(model).map(p => ({ name: p.Name ?? '', local: isLocal(model, p) }))));
+      return;
+    case 'detail': model.cardDetails.set(msg.key, msg); break;
+    case 'playerDetail': model.playerDetails.set(msg.key, msg); break;
+    case 'stackMenu': model.stackMenu = msg; break;
     case 'notice': showNotice(msg); break;
+    case 'devState': model.devState = msg; break;
+    case 'devDump': saveText(msg.text, 'game-state.txt', 'text/plain'); return;
   }
   schedule();
 }
