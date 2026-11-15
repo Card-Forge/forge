@@ -37,6 +37,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  */
 public class SettingsScene extends UIScene {
     private final Table settingGroup;
+    private boolean rebuildOnEnter;
     TextraButton backButton;
     TextraButton newPlane;
     ScrollPane scrollPane;
@@ -104,12 +105,41 @@ public class SettingsScene extends UIScene {
 
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
-        Localizer localizer = Forge.getLocalizer();
 
         settingGroup = new Table();
         selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
+        fillSettings();
+
+        backButton = ui.findActor("return");
+        ui.onButtonPress("return", SettingsScene.this::back);
+        ui.onButtonPress("general", () -> {
+            rebuildOnEnter = true;
+            Forge.switchScene(GeneralSettingsScene.instance());
+        });
+        TextraButton general = ui.findActor("general");
+        general.getTextraLabel().setWrap(true);
+        general.getTextraLabel().setAlignment(Align.center);
+
+        scrollPane = ui.findActor("settings");
+        scrollPane.setActor(settingGroup);
+        addToSelectable(settingGroup);
+    }
+
+    @Override
+    public void enter() {
+        // General Settings can change preferences that rows here also show
+        if (rebuildOnEnter) {
+            rebuildOnEnter = false;
+            fillSettings();
+        }
+        super.enter();
+    }
+
+    private void fillSettings() {
+        Localizer localizer = Forge.getLocalizer();
+        settingGroup.clear();
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
@@ -422,12 +452,6 @@ public class SettingsScene extends UIScene {
         addCheckBox(localizer.getMessage("lblVibrateOnShopAction"), ForgePreferences.FPref.UI_VIBRATE_ON_SHOP_ACTION);
 
         settingGroup.row();
-        backButton = ui.findActor("return");
-        ui.onButtonPress("return", SettingsScene.this::back);
-
-        scrollPane = ui.findActor("settings");
-        scrollPane.setActor(settingGroup);
-        addToSelectable(settingGroup);
     }
 
 
