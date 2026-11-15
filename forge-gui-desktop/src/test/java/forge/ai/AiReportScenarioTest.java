@@ -730,6 +730,17 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); final Card v = c.bf("Aether Vial", c.ai); c.counters(v, CounterEnumType.CHARGE, 1); c.hand("Aether Vial", c.ai); }));
         l.add(noPlay("12766", "Aura on its creature while the opponent's Spellskite can redirect it", Fid.APPROX, M1, true, "Rancor",
                 c -> { c.bf("Forest", c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Rancor", c.ai); c.bf("Spellskite", c.opp); }));
+        // a deck that is not built around the graveyard: Nethergoyf (escape) is a card to cast, not one to Thoughtseize away
+        l.add(new Scenario("12888", "Thoughtseize aimed at the AI itself to discard Nethergoyf", Fid.EXACT, "MAIN2", true,
+                c -> { c.bf("Swamp", 2, c.ai); c.hand("Thoughtseize", c.ai); c.hand("Thoughtseize", c.ai); c.hand("Nethergoyf", c.ai); c.hand("Lightning Bolt", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.first();
+                    if (sa == null || !sa.getHostCard().getName().equals("Thoughtseize") || !sa.usesTargeting()) { return null; }
+                    for (final forge.game.GameEntity e : sa.getTargets().getTargetEntities()) {
+                        if (e == c.ai) { return "Thoughtseize aimed at the AI itself"; }
+                    }
+                    return null;
+                }));
         return l;
     }
 
