@@ -17,6 +17,7 @@ import { DevSetupDialog } from './match/devmenu';
 import { Volume } from './volume';
 import { Notices } from './notices';
 import { Dock } from './dock';
+import { MenuSheet } from './match/menusheet';
 import { isPortrait } from './form';
 import { byId } from './dom';
 import { changeUi, ui } from './ui';
@@ -81,6 +82,7 @@ export function renderScreens(model: Model, actions: Actions): void {
     {ui.gameMenu === 'stops' && <AutoPassStops close={() => changeUi(u => { u.gameMenu = null; })} />}
     {page === 'match' && ui.gameMenu === 'devSetup' && <DevSetupDialog actions={actions} close={() => changeUi(u => { u.gameMenu = null; })} />}
     {page === 'match' && <DrawOfferQuestion model={model} actions={actions} />}
+    {page === 'match' && isPortrait() && ui.menuSheet && <MenuSheet model={model} />}
     {page !== 'match' && ui.importer && (
       <Importer model={model} actions={actions} from={ui.importer.from} seat={ui.importer.seat} initialText={ui.importer.text}
         initialUrl={ui.importer.url} sync={ui.importer.sync}
