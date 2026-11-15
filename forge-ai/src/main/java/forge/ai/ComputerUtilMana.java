@@ -37,7 +37,9 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -52,6 +54,24 @@ import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
+
+    /**
+     * A spell's own mana conversion (Prismatic: "spend mana as though it were mana of any color") belongs to a static
+     * ability that only works while the spell is on the stack. The AI asks whether it can pay while the card is still in
+     * its hand, so the conversion is applied from the card itself, or the AI never casts it without the right colors.
+     */
+    private static void applyOwnManaConvert(final ManaPool pool, final Player ai, final SpellAbility sa, final boolean effect) {
+        final Card host = sa.getHostCard();
+        if (effect || host == null || !sa.isSpell() || host.isInZone(ZoneType.Stack)) {
+            return;
+        }
+        for (final StaticAbility stAb : host.getStaticAbilities()) {
+            if (stAb.checkMode(StaticAbilityMode.ManaConvert) && "Stack".equals(stAb.getParam("EffectZone"))
+                    && StaticAbilityManaConvert.checkManaConvert(stAb, ai, host, sa)) {
+                AbilityUtils.applyManaColorConversion(pool, stAb.getParam("ManaConversion"));
+            }
+        }
+    }
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         //check copy of cost so it doesn't modify the exist cost being paid
@@ -666,6 +686,7 @@ public class ComputerUtilMana {
                 AbilityUtils.applyManaColorConversion(manapool, sa.getParam("ManaConversion"));
             }
             StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
+            applyOwnManaConvert(manapool, ai, sa, effect);
         }
 
         // not worth checking if it makes sense to not spend floating first

@@ -371,6 +371,10 @@ public class ComputerUtilCost {
                     if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
                     }
+                    // Vampire Hexmage: giving up the source is the point when it frees an impending permanent or the like
+                    if (sourceAbility != null && forge.ai.ability.CountersRemoveAi.worthwhileOwnTarget(ai, sourceAbility) != null) {
+                        continue;
+                    }
                     if (source.isCreature()) {
                         // e.g. Sakura-Tribe Elder
                         final Combat combat = ai.getGame().getCombat();

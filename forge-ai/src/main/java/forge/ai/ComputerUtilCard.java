@@ -1,13 +1,7 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -2153,6 +2147,44 @@ public class ComputerUtilCard {
             return true;
         }
         return false;
+    }
+
+    /** Abilities that do nothing to the AI on their own (Spellskite redirects, a regeneration, a shield). */
+    private static final Set<ApiType> INERT_APIS = EnumSet.of(ApiType.ChangeTargets, ApiType.Regenerate, ApiType.Protection);
+
+    /**
+     * An opposing creature that cannot hurt the AI and does nothing for its owner: it is not able to attack (Moat,
+     * defender, can't attack), has no power to hurt with, no triggers or static abilities, and only abilities that do
+     * nothing to the AI on their own (Spellskite). Removal, and certainly a board wipe, is wasted on it; the AI should keep
+     * it for a real threat. (A deck that wins by targeting, burn, would value Spellskite: that is for its own logic.)
+     */
+    public static boolean isHarmlessCreature(final Player ai, final Card c) {
+        if (c == null || !c.isCreature() || c.getController() == null || !c.getController().isOpponentOf(ai)) {
+            return false;
+        }
+        if (isUselessCreature(c.getController(), c)) {
+            return true;
+        }
+        if (ComputerUtilCombat.getAttack(c) > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
+            return false;
+        }
+        if (!c.getTriggers().isEmpty() || !c.getStaticAbilities().isEmpty() || !c.getReplacementEffects().isEmpty()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() || sa.isLandAbility()) {
+                continue;
+            }
+            if (sa.isManaAbility() || sa.getApi() == null || !INERT_APIS.contains(sa.getApi())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The cards without the opposing creatures that are harmless (see isHarmlessCreature). */
+    public static CardCollection withoutHarmlessCreatures(final Player ai, final CardCollection cards) {
+        return CardLists.filter(cards, c -> !isHarmlessCreature(ai, c));
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {

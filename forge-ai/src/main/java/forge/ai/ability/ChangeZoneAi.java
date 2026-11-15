@@ -1182,6 +1182,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // See if maybe there's a special priority applicable for this, in case the opponent
             // has dangerous unblockables in play
+            if (!sa.isTrigger() && origin.contains(ZoneType.Battlefield)) {
+                list = ComputerUtilCard.withoutHarmlessCreatures(ai, list); // exile or bounce of a creature that cannot do anything is a waste
+            }
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }

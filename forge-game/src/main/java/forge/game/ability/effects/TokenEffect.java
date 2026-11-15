@@ -27,6 +27,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.token.TokenInfo;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
@@ -40,6 +41,13 @@ public class TokenEffect extends TokenEffectBase {
         if (sa.hasParam("SpellDescription")) {
             final Card host = sa.getHostCard();
             String desc = sa.getParam("SpellDescription");
+            // reminder text is not part of what happens, and its own "Create" must not be taken for the effect's
+            desc = desc.replaceAll("\\s*\\([^)]*\\)", "");
+            final SpellAbility next = sa.getSubAbility();
+            if (next != null && next.hasParam("Populate")) {
+                // the populate that follows tells itself
+                desc = desc.replaceAll(",? then populate\\.?$", ".");
+            }
             List<String> words = Arrays.asList(desc.split(" "));
             final List<Player> creators = getDefinedPlayersOrTargeted(sa, "TokenOwner");
             if (!words.get(0).equalsIgnoreCase("Create") && desc.contains(" create")) {
@@ -55,8 +63,8 @@ public class TokenEffect extends TokenEffectBase {
                 String verb = creators.size() == 1 ? "creates" : "create";
                 String start = Lang.joinHomogenous(creators) + " " + verb;
                 String create = desc.contains("Create") ? "Create" : "create";
-                desc = desc.replaceFirst(".*" + create, "");
-                desc = start + desc;
+                desc = desc.replaceFirst("^.*?" + create, "");
+                desc = start + desc.replaceAll("\\. Create ", ". " + Lang.joinHomogenous(creators) + " " + verb + " ");
                 //try to put the right amount of tokens for X calculations and the like
                 if (sa.hasParam("TokenAmount") && !StringUtils.isNumeric(sa.getParam("TokenAmount"))) {
                     final int numTokens = AbilityUtils.calculateAmount(host, sa.getParam("TokenAmount"), sa);
@@ -89,7 +97,54 @@ public class TokenEffect extends TokenEffectBase {
             }
             return desc;
         }
-        return sa.getDescription();
+        return tokenDescriptionFromScript(sa);
+    }
+
+    /** A token ability without text of its own tells what its script makes: "p1 creates two 1/1 white Spirit creature tokens with flying." */
+    private String tokenDescriptionFromScript(final SpellAbility sa) {
+        final String scripts = sa.getParam("TokenScript");
+        if (scripts == null) {
+            return sa.getDescription();
+        }
+        final List<Player> creators = getDefinedPlayersOrTargeted(sa, "TokenOwner");
+        final String rawAmount = sa.getParamOrDefault("TokenAmount", "1");
+        int amount = AbilityUtils.calculateAmount(sa.getHostCard(), rawAmount, sa);
+        final boolean variable = !StringUtils.isNumeric(rawAmount) && amount == 0;
+        final List<String> made = new java.util.ArrayList<>();
+        for (final String script : scripts.split(",")) {
+            final Card proto = TokenInfo.getProtoType(script, sa, creators.isEmpty() ? sa.getActivatingPlayer() : creators.get(0), false);
+            if (proto == null) {
+                continue;
+            }
+            final StringBuilder t = new StringBuilder();
+            if (proto.getCurrentState().getType().isCreature()) {
+                t.append(proto.getNetPower()).append("/").append(proto.getNetToughness()).append(" ");
+            }
+            final List<String> colors = new java.util.ArrayList<>();
+            for (final forge.card.MagicColor.Color c : proto.getColor()) {
+                colors.add(c.getName());
+            }
+            t.append(colors.isEmpty() ? "" : Lang.joinHomogenous(colors) + " ");
+            t.append(proto.getName()).append(" ").append(proto.getType().isCreature() ? "creature " : "")
+                    .append(variable || amount != 1 ? "tokens" : "token");
+            final List<String> kws = new java.util.ArrayList<>();
+            for (final forge.game.keyword.KeywordInterface k : proto.getKeywords()) {
+                kws.add(k.getOriginal().toLowerCase());
+            }
+            if (!kws.isEmpty()) {
+                t.append(" with ").append(Lang.joinHomogenous(kws));
+            }
+            made.add(t.toString());
+        }
+        if (made.isEmpty()) {
+            return sa.getDescription();
+        }
+        final String count = variable ? "X" : amount == 1 ? "a" : Lang.getNumeral(amount);
+        String body = Lang.joinHomogenous(made);
+        if (!variable && amount == 1) {
+            body = body.replaceFirst(" tokens", " token");
+        }
+        return playersOrDescribed(sa, creators, "TokenOwner") + (creators.size() > 1 ? " create " : " creates ") + count + " " + body + ".";
     }
 
     @Override
