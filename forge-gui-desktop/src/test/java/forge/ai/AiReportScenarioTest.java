@@ -517,6 +517,17 @@ public class AiReportScenarioTest extends AITest {
         l.add(noPlay("poltergeist-shield-up", "no second shield for a blocker that already has one (it drained its life, 1 per pass)", Fid.EXACT, "COMBAT_DECLARE_BLOCKERS", false,
                 "Mischievous Poltergeist", c -> { poltergeistBlocks.run(c);
                     c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Mischievous Poltergeist")).forEach(Card::incShieldCount); }));
+        // the board before the spell: a creature that cannot hurt the AI (Spellskite, or anything under Moat) is not worth a wipe or removal
+        l.add(noPlay("harmless-wrath", "Wrath of God for a lone Spellskite", Fid.EXACT, "MAIN2", true, "Wrath of God",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Spellskite", c.opp); }));
+        l.add(noPlay("harmless-wrath-moat", "Wrath of God for a creature that cannot attack because of Moat", Fid.EXACT, "MAIN2", true, "Wrath of God",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Moat", c.ai); c.bf("Hill Giant", c.opp); }));
+        l.add(noPlay("harmless-removal", "Doom Blade for a lone Spellskite", Fid.EXACT, "MAIN2", true, "Doom Blade",
+                c -> { c.bf("Swamp", 2, c.ai); c.hand("Doom Blade", c.ai); c.bf("Spellskite", c.opp); }));
+        l.add(play("harmful-wrath", "Wrath of God for three Hill Giants is still fine", Fid.EXACT, "MAIN2", true, "Wrath of God",
+                c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Hill Giant", 3, c.opp); }));
+        l.add(play("harmful-removal", "Doom Blade for a Hill Giant is still fine", Fid.EXACT, "MAIN2", true, "Doom Blade",
+                c -> { c.bf("Swamp", 2, c.ai); c.hand("Doom Blade", c.ai); c.bf("Hill Giant", c.opp); }));
         l.add(noPlay("4435", "Quicksilver Amulet for a 1-mana creature", Fid.EXACT, M1, true, "Quicksilver Amulet",
                 c -> { c.bf("Island", 4, c.ai); c.bf("Quicksilver Amulet", c.ai); c.hand("Mother of Runes", c.ai); }));
         l.add(noPlay("5604", "abilities used as soon as possible for no reason (Mother of Runes, empty board)", Fid.APPROX, M1, true, "Mother of Runes",
