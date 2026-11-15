@@ -897,6 +897,9 @@ public final class FlatMonteCarloPicker {
                 continue; // the heuristics have set the target up again, or no longer want the play
             }
             for (final GameObject target : alternativeTargets(player, sa, variantsLeft)) {
+                if (wastedOnHarmless(player, sa, target)) {
+                    continue;
+                }
                 cands.add(new Candidate(sa, target));
                 variantsLeft--;
             }
@@ -981,6 +984,9 @@ public final class FlatMonteCarloPicker {
             }
             if (shieldAlreadyUp(sa, target)) {
                 continue; // a regeneration shield that is up cannot be improved by paying for another one
+            }
+            if (wastedOnHarmless(player, sa, target)) {
+                continue; // removal or a wipe whose only victims are creatures that cannot hurt us: the rollouts would still count the card they remove
             }
             cands.add(new Candidate(sa, target, true));
             extrasLeft--;
@@ -2125,6 +2131,48 @@ public final class FlatMonteCarloPicker {
             }
         }
         return true;
+    }
+
+    /**
+     * Removal or a wipe whose only victims are opposing creatures that cannot hurt the AI (Spellskite, anything under
+     * Moat): not a candidate, the rollouts only see one creature fewer on the other side and would take the trade.
+     */
+    static boolean wastedOnHarmless(final Player player, final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getHostCard() == null || !sa.isSpell() && !sa.isActivatedAbility()) {
+            return false;
+        }
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts != null) {
+            final ApiType api = ts.getApi();
+            final boolean removal = api == ApiType.Destroy || api == ApiType.DealDamage
+                    || api == ApiType.ChangeZone && ts.getParamOrDefault("Origin", "").contains("Battlefield");
+            if (!removal) {
+                return false;
+            }
+            Card victim = target instanceof Card c ? c : null;
+            if (victim == null && ts.getTargets() != null && ts.getTargets().getTargetCards().size() == 1) {
+                victim = ts.getTargets().getTargetCards().get(0);
+            }
+            return victim != null && ComputerUtilCard.isHarmlessCreature(player, victim);
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api != ApiType.DestroyAll && api != ApiType.DamageAll || !a.hasParam("ValidCards") || a.usesTargeting()) {
+                continue;
+            }
+            boolean any = false;
+            for (final Player opp : player.getOpponents()) {
+                for (final Card c : forge.game.card.CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield),
+                        a.getParam("ValidCards"), sa.getHostCard().getController(), sa.getHostCard(), a)) {
+                    if (!ComputerUtilCard.isHarmlessCreature(player, c)) {
+                        return false;
+                    }
+                    any = true;
+                }
+            }
+            return any;
+        }
+        return false;
     }
 
     /** The AI's permanents that the opponent's spell or ability on top of the stack is aimed at. */
