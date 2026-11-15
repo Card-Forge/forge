@@ -4,7 +4,7 @@ Types:Legendary Artifact Spacecraft
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When NICKNAME enters, you may search your library for a Whale card, reveal it, put it into your hand, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Hand | ChangeType$ Whale | ChangeNum$ 1 | Reveal$ True | Shuffle$ True
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ DamageTrig | Description$ STATION 8+ Flying,,,Whenever NICKNAME deals combat damage to a player, draw a card. If you control a Whale and haven't begun an extra turn this game, take an extra turn after this one.
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card. If you control a Whale and haven't begun an extra turn this game, take an extra turn after this one.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBExtraTurn

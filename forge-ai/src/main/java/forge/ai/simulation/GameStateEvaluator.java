@@ -177,6 +177,7 @@ public class GameStateEvaluator {
 
         // TODO evaluate holding mana open for counterspells
 
+        boolean millConversion = false;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
             boolean phasedOut = c.isPhasedOut();
@@ -189,6 +190,9 @@ public class GameStateEvaluator {
             // keep track of the score while treating summon sick creatures as having a value of 0.
             if (phasedOut || (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer)) {
                 availableValue = 0;
+            }
+            if (c.getController() == aiPlayer && !phasedOut && convertsDamageToMill(c)) {
+                millConversion = true;
             }
             String str = cardToString(c);
             // A DonateMe permanent owned by the AI is intentionally harmful to the opponent who now controls it.
@@ -203,8 +207,37 @@ public class GameStateEvaluator {
             }
         }
 
+        if (millConversion) {
+            // The Mindskinner and the like: our damage becomes a mill, so the opponent's library counts like a life total
+            // (a card per point of damage, worth what a life point is worth above) and the rollouts can see an attack paying off
+            int libraryCards = 0;
+            int libraryOpponents = 0;
+            for (Player opponent : aiPlayer.getOpponents()) {
+                libraryCards += opponent.getCardsIn(ZoneType.Library).size();
+                libraryOpponents++;
+            }
+            if (libraryOpponents > 0) {
+                score -= 2 * libraryCards / libraryOpponents;
+                availableScore -= 2 * libraryCards / libraryOpponents;
+                debugPrint("  Their library (damage is milled): -" + libraryCards / libraryOpponents);
+            }
+        }
+
         debugPrint("Score = " + score);
         return new Score(score, availableScore);
+    }
+
+    /** @return true if the permanent has a replacement that prevents our damage to opponents and mills them instead. */
+    private static boolean convertsDamageToMill(final Card c) {
+        for (final forge.game.replacement.ReplacementEffect re : c.getReplacementEffects()) {
+            if (re.getMode() == forge.game.replacement.ReplacementType.DamageDone && re.hasParam("ReplaceWith")) {
+                final forge.game.spellability.SpellAbility ex = re.getOverridingAbility();
+                if (ex != null && ex.getApi() == forge.game.ability.ApiType.Mill) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int evalManaBase(Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {

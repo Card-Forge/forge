@@ -59,6 +59,7 @@ public class AdventureQuestStage implements Serializable {
     private transient List<Integer> _parsedPrerequisiteNames;
     private transient List<PointOfInterest> validPOIs;
     public boolean allowInactivePOI = false;
+    public boolean unseen; // status changed since the quest log last showed this quest
 
     public UUID stageID;
 
@@ -78,6 +79,7 @@ public class AdventureQuestStage implements Serializable {
             }
         }
         status = ACTIVE;
+        unseen = true;
     }
 
     public AdventureQuestController.QuestStatus getStatus() {
@@ -205,6 +207,7 @@ public class AdventureQuestStage implements Serializable {
 
     public AdventureQuestStage(AdventureQuestStage other) {
         this.status = other.status;
+        this.unseen = other.unseen;
         this.prologueDisplayed = other.prologueDisplayed;
         this.prologue = new DialogData(other.prologue);
         this.epilogueDisplayed = other.epilogueDisplayed;
@@ -266,6 +269,14 @@ public class AdventureQuestStage implements Serializable {
     }
 
     public AdventureQuestController.QuestStatus handleEvent(AdventureQuestEvent event) {
+        boolean wasComplete = status == COMPLETE;
+        updateStatus(event);
+        if (!wasComplete && status == COMPLETE)
+            unseen = true;
+        return status;
+    }
+
+    private AdventureQuestController.QuestStatus updateStatus(AdventureQuestEvent event) {
         if (objective == Fetch && hasRequiredFetchItems()) {
             status = COMPLETE;
             return status;

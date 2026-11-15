@@ -152,6 +152,7 @@
     "CN2"
   ],
   "usePriceListPrices": false,
+  "eventRerollPrice": 10,
   "chaosDeckFormat": "Commander",
   "difficulties": [
     {
@@ -287,6 +288,28 @@
       "Jumpstart 25",
       "The Last Airbender",
       "(All)"
-    ]
+    ],
+  "modifiers": [
+    {
+      "name": "Permadeath",
+      "description": "Lose a match: lose your commander and 5 random cards.",
+      "icon": "BasilicaSkullbomb",
+      "type": "CardLoss",
+      "lostCards": 5,
+      "loseCommander": true
+    },
+    {
+      "name": "Rarity limit",
+      "description": "Cards must be this rarity or lower.",
+      "icon": "Treasure",
+      "type": "RarityLimit"
+    },
+    {
+      "name": "Color limit",
+      "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
+      "icon": "Shard",
+      "type": "ColorLimit"
+    }
+  ]
 }
 

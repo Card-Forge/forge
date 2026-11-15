@@ -36,6 +36,10 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
             if (color != null) {
                 type = "Card." + StringUtils.capitalize(color.getName());
                 descType = color.getName();
+            } else if (getKeyword() == Keyword.PARTNER_WITH) {
+                // a card name, and a name can have a comma of its own ("Owen Grady, Raptor Trainer")
+                type = details;
+                descType = details;
             } else {
                 type = details;
                 descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), false);

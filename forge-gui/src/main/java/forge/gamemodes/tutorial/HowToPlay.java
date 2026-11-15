@@ -21,20 +21,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entry point for the "How to Play" tutorial, called by the desktop and mobile home screens.
- *
- * <p>The tutorial is one fixed practice game (res/tutorial/howtoplay/HowToPlay.pzl, a normal Forge puzzle state), so
- * nothing in it is random. A {@link TutorialDirector} plays it in one of two modes: {@code WATCH}, where the director
- * makes the moves for the player with explanations, and {@code TRY}, where the same game starts again and the player
- * makes the moves, guided by the same explanations.
- *
- * <p>All text shown to the player lives in the language files (keys starting with lblTut, msgTut and btnTut).
- */
 public final class HowToPlay implements IHasForgeLog {
     public enum Mode { WATCH, TRY }
 
-    private static final String PUZZLE_FILE = ForgeConstants.TUTORIAL_DIR + "howtoplay/HowToPlay.pzl";
+    private static final String PUZZLE_FILE = ForgeConstants.TUTORIAL_DIR + "HowToPlay.pzl";
 
     /** The mode the next (re)start of the practice game uses; the end screen's restart button restarts with it. */
     private static volatile Mode nextMode = Mode.WATCH;

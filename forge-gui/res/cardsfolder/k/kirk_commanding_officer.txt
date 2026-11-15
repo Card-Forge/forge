@@ -7,7 +7,7 @@ SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | R
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Exile the top card of your library. You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Destroy | Cost$ Sac<1/CARDNAME/NICKNAME> | ValidTgts$ Artifact,Enchantment | ValidTgtsDesc$ artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:AB$ Destroy | Cost$ 2 Sac<1/CARDNAME/NICKNAME> | ValidTgts$ Artifact,Enchantment | ValidTgtsDesc$ artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:X:Count$Valid Creature.YouCtrl$CardPower
 SVar:PlayMain1:TRUE
 Oracle:Whenever you attack while creatures you control have total power 8 or greater, exile the top card of your library. You may play that card this turn.\n{2}, Sacrifice Kirk: Destroy target artifact or enchantment.

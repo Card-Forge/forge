@@ -69,7 +69,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
             // Redirect rules read 'you MAY choose new targets' ... okay!
             // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
-            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()), null)) {
+            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()), tgtSA.getHostCard(), null)) {
                 continue;
             }
             if (sa.hasParam("ChangeSingleTarget")) {

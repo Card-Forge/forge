@@ -140,7 +140,10 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final ComboPlan combos = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
-        if (combos.selfDiscardWanted(ai, sa.getHostCard()) && sa.canTarget(ai)) {
+        // The graveyard-fuel exception is only safe when the AI can choose
+        // which card to discard. Random discard (e.g. Mind Twist) cannot.
+        if (!"Random".equalsIgnoreCase(sa.getParam("Mode"))
+                && combos.selfDiscardWanted(ai, sa.getHostCard()) && sa.canTarget(ai)) {
             sa.resetTargets();
             sa.getTargets().add(ai);
             return true;

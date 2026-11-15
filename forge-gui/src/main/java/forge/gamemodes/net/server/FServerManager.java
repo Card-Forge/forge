@@ -3,10 +3,6 @@ package forge.gamemodes.net.server;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
-import forge.game.GameLogEntry;
-import forge.game.GameView;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.gamemodes.match.HostedMatch;
@@ -326,8 +322,9 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
         try {
             if (bossGroup != null) {
-                bossGroup.shutdownGracefully().sync();
-                workerGroup.shutdownGracefully().sync();
+                // Netty's default 2 s quiet period per group made every stop take about 4 s
+                bossGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                workerGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
             }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -935,26 +932,11 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         netGui.resume();
 
         // Reset delta sync state — reconnecting client has no prior baseline
-        netGui.resetForReconnect();
+        netGui.resetSync();
         netLog.info("[Reconnect] Delta sync state reset for slot {}", slotIndex);
 
-        // Send game state via setGameView protocol (client needs gameView set before openView)
-        netGui.updateGameView();
         netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
-        netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
-
-        // Replay the host's log entries to rebuild the client's log on re-connect
-        final GameView gameView = netGui.getGameView();
-        if (gameView != null && gameView.getGameLog() != null) {
-            final List<GameEvent> logEvents = new ArrayList<>();
-            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
-                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
-            }
-            if (!logEvents.isEmpty()) {
-                netGui.replayEvents(logEvents);
-                netLog.info("[Reconnect] Replayed {} game log entries for slot {} ({})", logEvents.size(), slotIndex, client.getUsername());
-            }
-        }
+        netLog.info("[Reconnect] Sent game state, openView and the game log to slot {}", slotIndex);
 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);

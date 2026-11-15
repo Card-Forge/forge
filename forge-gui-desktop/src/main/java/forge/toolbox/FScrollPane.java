@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
@@ -59,6 +60,19 @@ public class FScrollPane extends SkinnedScrollPane {
             getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
             getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
             arrowButtons = new ArrowButton[4];
+
+            // The arrows are not children of this pane. FAbsolutePositioner parks them on
+            // a shared overlay above every screen, and only paint() and setVisible(false)
+            // ever take them off it again. A pane removed from its container, or one whose
+            // parent is hidden, gets neither: it stops painting, so it cannot correct
+            // itself, and its arrows stay on the overlay over whatever is drawn next, even
+            // on a different screen. Clean up whenever this pane stops showing; paint()
+            // puts back whichever arrow is warranted as soon as it shows again.
+            addHierarchyListener(e -> {
+                if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0 && !isShowing()) {
+                    hideArrowButtons();
+                }
+            });
         }
         else {
             arrowButtons = null;
