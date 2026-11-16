@@ -172,6 +172,9 @@ public class SacrificeAi extends SpellAbilityAi {
         if ("BirthingRitual".equals(sa.getParam("AILogic"))) {
             return birthingRitualPaysOff(player, sa);
         }
+        if (SacrificeWorth.applies(sa)) {
+            return SacrificeWorth.confirm(player, sa);
+        }
         return !sacrificesOnlyItselfForItsOwnBenefit(player, sa);
     }
 

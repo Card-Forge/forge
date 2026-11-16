@@ -91,6 +91,7 @@ public class AiReportScenarioTest extends AITest {
         Card hand(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Hand); }
         Card gy(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Graveyard); }
         Card lib(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Library); }
+        Card exile(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Exile); }
 
         /** Plenty of mana of every colour for the AI. */
         void richMana() { for (final String l : new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" }) { bf(l, 3, ai); } }
@@ -540,6 +541,136 @@ public class AiReportScenarioTest extends AITest {
                 "Crovax the Cursed", crovaxVsSerra));
         l.add(noPlay("12895-flying-after-blocks", "no flying for Crovax once the blockers are declared (too late to block)", Fid.EXACT, "COMBAT_DECLARE_BLOCKERS", false,
                 "Crovax the Cursed", crovaxVsSerra));
+        // keywords that win the fight (after the blocks, only for a creature that is in it) and keywords that decide the block (before it)
+        final Setup impBlocks = c -> {
+            c.bf("Swamp", c.ai);
+            final Card blocker = c.bf("Fetid Imp", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("kw-deathtouch-blocker", "Fetid Imp blocks the Hill Giant: deathtouch makes it a trade", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Fetid Imp", impBlocks));
+        l.add(noPlay("kw-deathtouch-not-in-combat", "Fetid Imp stays out of the fight: no deathtouch for nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Fetid Imp", c -> {
+                    c.bf("Swamp", c.ai); c.bf("Fetid Imp", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("kw-indestructible-blocker", "Drudge Sentinel blocks the Hill Giant: indestructible saves it", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Sentinel", c -> {
+                    c.bf("Swamp", 3, c.ai);
+                    final Card blocker = c.bf("Drudge Sentinel", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-indestructible-not-in-combat", "Drudge Sentinel is not in the fight and nothing threatens it", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Sentinel", c -> {
+                    c.bf("Swamp", 3, c.ai); c.bf("Drudge Sentinel", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        final Setup askariAttacks = c -> {
+            c.bf("Mountain", 2, c.ai);
+            final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("kw-menace-before-blocks", "Searing Spear Askari attacks into a lone Hill Giant: menace before the blockers", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", askariAttacks));
+        l.add(noPlay("kw-menace-after-blocks", "no menace once the blockers are declared (too late)", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", true,
+                "Searing Spear Askari", askariAttacks));
+        // evasion before the blockers has to be worth it: the keyword must dodge the bad blocker, and the mana must be spare
+        l.add(play("kw-fear-dodges", "Hooded Kavu attacks into a Hill Giant (red): fear dodges the bad block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Hooded Kavu", c -> {
+                    c.bf("Swamp", c.ai); final Card kavu = c.bf("Hooded Kavu", c.ai); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(kavu, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-fear-black-blocker", "Hooded Kavu against a black Black Knight: fear changes nothing", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Hooded Kavu", c -> {
+                    c.bf("Swamp", c.ai); final Card kavu = c.bf("Hooded Kavu", c.ai); c.bf("Black Knight", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(kavu, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-menace-two-blockers", "Searing Spear Askari against two Hill Giants: they can still double-block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", c -> {
+                    c.bf("Mountain", 2, c.ai); final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-menace-mana-wanted", "Searing Spear Askari: the mana is for the Gray Ogre in hand, not for menace", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", c -> {
+                    c.bf("Mountain", 3, c.ai); final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp);
+                    c.hand("Gray Ogre", c.ai); // {2}{R}: castable with the three Mountains, but not with menace paid for first
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // X spells: no Epiphany at the Drownyard for X=0 (it reveals one card), a random target stays random
+        l.add(noPlay("epiphany-x0", "Epiphany at the Drownyard with a single Island (X=0)", Fid.APPROX, "END_OF_TURN", false,
+                "Epiphany at the Drownyard", c -> { c.bf("Island", c.ai); c.hand("Epiphany at the Drownyard", c.ai); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("goblin-test-pilot", "Goblin Test Pilot's target is random: the AI does not aim it", Fid.APPROX, "MAIN1", true,
+                c -> { c.bf("Goblin Test Pilot", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Goblin Test Pilot");
+                    return sa != null && sa.getTargets() != null && !sa.getTargets().isEmpty() ? "the AI chose the target itself: " + sa.getTargets() : null;
+                }));
+        // a suspended Rift Bolt that comes out of exile: free, and lost if not cast, so any legal target will do
+        l.add(new Scenario("rift-bolt-suspended-cast", "suspended Rift Bolt with only Shalai, Voice of Plenty to aim at (the player is hexproof)", Fid.APPROX, "UPKEEP", true,
+                c -> { c.exile("Rift Bolt", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); },
+                c -> {
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Exile).stream().filter(k -> k.getName().equals("Rift Bolt")).findFirst().get();
+                    final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
+                            .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
+                    final SpellAbility playSa = play.ensureAbility();
+                    playSa.setActivatingPlayer(c.ai);
+                    return SpellApiToAi.Converter.get(playSa).doTriggerNoCostWithSubs(c.ai, playSa, false).willingToPlay() ? null
+                            : "the AI would not cast the suspended Rift Bolt at Shalai";
+                }));
+        // keyword abilities that aim at a creature (Arnjlot's Ascent) follow the same timing, and shields only for a creature in the fight
+        l.add(aimed("kw-targeted-flying-block", "Wind Drake attacks: flying for the blocker, in the declare attackers step", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                "Arnjlot's Ascent", "Grizzly Bears", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-too-late", "the same, once the blockers are declared", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(aimed("kw-targeted-flying-attack", "Hill Giant attacks into a Craw Wurm: flying for the attacker, before the blockers", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", "Hill Giant", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card giant = c.bf("Hill Giant", c.ai); c.bf("Craw Wurm", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(giant, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-no-bad-block", "Craw Wurm attacks into a Hill Giant: nobody would block it badly, flying is a waste", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card wurm = c.bf("Craw Wurm", c.ai); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(wurm, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("regenerate-not-in-fight", "Drudge Skeletons is not in the fight: no regeneration shield for nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Skeletons", c -> {
+                    c.bf("Swamp", c.ai); c.bf("Drudge Skeletons", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // pacts: free now, {3}{U}{U} at the next upkeep or the game is lost: only when that can be paid
+        l.add(noPlay("pact-wrong-colors", "Pact of Negation with five Mountains: {3}{U}{U} could never be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Mountain", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(noPlay("pact-too-few-lands", "Pact of Negation with three Islands: five mana are needed at the upkeep", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 3, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(play("pact-payable", "Pact of Negation with five Islands against a Serra Angel: it can be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        // Seal of Fire against Shalai, Voice of Plenty: the player is hexproof, the 2 damage cannot kill a 4-toughness flyer
+        l.add(noPlay("seal-of-fire-shalai", "Seal of Fire aimed at Shalai that it cannot kill (the player at 2 life is hexproof)", Fid.APPROX, "END_OF_TURN", false,
+                "Seal of Fire", c -> { c.bf("Seal of Fire", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.opp.setLife(2, null); }));
+        l.add(play("seal-of-fire-face", "Seal of Fire for the last 2 life of the opponent", Fid.APPROX, "END_OF_TURN", false,
+                "Seal of Fire", c -> { c.bf("Seal of Fire", c.ai); c.opp.setLife(2, null); }));
         l.add(new Scenario("12895-sacrifice-itself", "Crovax alone does not agree to sacrifice a creature (it would be itself)", Fid.EXACT, "UPKEEP", true,
                 c -> { c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 3); },
                 c -> {

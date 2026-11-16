@@ -219,6 +219,9 @@ public class DiscardAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (mode == PlayerActionConfirmMode.Random) {
             // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
+            if ("Hand".equals(sa.getParam("Mode"))) {
+                return MayDecisions.discardHandForNew(player, sa); // each player may discard their hand and draw N
+            }
             return true;
         }
         return super.confirmAction(player, sa, mode, message, params);

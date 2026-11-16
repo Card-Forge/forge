@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
+import forge.game.keyword.Keyword;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
@@ -81,9 +82,54 @@ public final class ActivationGuard {
         if (onlyValuableSacrifice(ai, sa)) {
             return "valuable-sacrifice";
         }
+        if (poorSacrifice(ai, sa)) {
+            return "poor-sacrifice";
+        }
+        if (declinedByAristocratLogic(ai, sa)) {
+            return "aristocrat-declines";
+        }
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
+        return idleChain(ai, sa);
+    }
+
+    /**
+     * An instant or sorcery that would do nothing when cast (Doom Blade with no creature to destroy, Wrath of God with
+     * an empty board): the heuristics refuse these, the rollouts' own discovery did not. Permanent spells, abilities
+     * and spells that need something that is not there yet (a counterspell: the stack) are left to their own checks.
+     *
+     * @return "no-valid-targets" or "nothing-to-affect", else null
+     */
+    public static String spellProblem(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || !sa.isSpell() || sa.getHostCard() == null || sa.getHostCard().isPermanent()
+                || sa.isCopied() || sa.getApi() == null || sa.getApi() == ApiType.Counter) {
+            return null;
+        }
+        final Card host = sa.getHostCard();
+        // a spell with a second use (Cascade, Storm, Rebound, Gravestorm) is worth casting for it: Violent Outburst with no creature
+        // to pump still cascades
+        if (host.hasKeyword(Keyword.CASCADE) || host.hasKeyword(Keyword.STORM) || host.hasKeyword(Keyword.REBOUND)
+                || host.hasKeyword(Keyword.GRAVESTORM)) {
+            return null;
+        }
+        try {
+            for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+                // an aim at a spell (Misdirection, Counterspell, Spell Pierce) is for the stack, which is empty until the
+                // opponent casts something
+                if (node.usesTargeting() && node.getTargetRestrictions() != null
+                        && node.getTargetRestrictions().getZone() != null
+                        && node.getTargetRestrictions().getZone().contains(ZoneType.Stack)) {
+                    return null;
+                }
+            }
+            return idleChain(ai, sa);
+        } catch (final RuntimeException e) {
+            return null; // a refinement only
+        }
+    }
+
+    private static String idleChain(final Player ai, final SpellAbility sa) {
         boolean providerIdle = false;
         boolean rootTargeted = false;
         int index = 0;
@@ -165,6 +211,76 @@ public final class ActivationGuard {
             }
         }
         return false;
+    }
+
+    /**
+     * A sacrifice outlet that gives a creature up for less than it is worth, or gives the host up for its own sake
+     * (Carrion Feeder, which fed its whole team to itself, and then itself). The creature that pays is the one the AI's
+     * own cost payment would choose; it is fine to give up when it is fodder (a token, a creature marked SacMe, a weak
+     * one), when it is about to die anyway, or when what the ability gives is worth at least as much as the creature.
+     */
+    static boolean poorSacrifice(final Player ai, final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        final Card host = sa.getHostCard();
+        if (cost == null || host == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostSacrifice) || part.payCostFromSource()) {
+                continue;
+            }
+            final String type = part.getType();
+            if (type == null || "CARDNAME".equals(type) || !"1".equals(part.getAmount())) {
+                continue; // a sacrifice of its own, or of several: not judged here
+            }
+            final CardCollection paid = forge.ai.ComputerUtil.chooseSacrificeType(ai, type, sa, null, false, 1, null);
+            if (paid == null || paid.isEmpty()) {
+                continue; // cannot be paid: costUnpayable says so
+            }
+            final Card c = paid.get(0);
+            if (c.equals(host)) {
+                if (benefitsOnlyHost(sa)) {
+                    return true; // fed to itself for its own benefit: nothing is left to benefit
+                }
+                continue;
+            }
+            if (!c.isCreature() || c.isToken() || c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= FODDER_VALUE
+                    || ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                continue;
+            }
+            if (forge.ai.ComputerUtil.predictThreatenedObjects(ai, null, true).contains(c)) {
+                continue; // it is lost anyway
+            }
+            if (forge.ai.ability.SacrificeWorth.rewardWithRoot(sa) < forge.ai.ability.SacrificeWorth.cost(ai, c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Every step of the ability acts on the host alone (counters on itself, a keyword for itself). */
+    private static boolean benefitsOnlyHost(final SpellAbility sa) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() == ApiType.Cleanup) {
+                continue;
+            }
+            if (node.usesTargeting() || !"Self".equals(node.getParamOrDefault("Defined", "Self"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * An outlet with its own logic for when to use it (AILogic$ AristocratCounters: Carrion Feeder and its kind) is
+     * asked, because the rollouts' own list of abilities does not go through that logic.
+     */
+    private static boolean declinedByAristocratLogic(final Player ai, final SpellAbility sa) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        if (!logic.startsWith("AristocratCounters")) {
+            return false;
+        }
+        return !forge.ai.SpecialAiLogic.doAristocratWithCountersLogic(ai, sa).willingToPlay();
     }
 
     /** A loyalty ability that puts loyalty counters on the Planeswalker (+N, or an X it cannot read). */
@@ -284,6 +400,26 @@ public final class ActivationGuard {
         return false;
     }
 
+    /** A pump with numbers it can read, none of them negative, and no keyword that hurts (Giant Growth, not a curse). */
+    static boolean beneficialPump(final SpellAbility node) {
+        if (!node.hasParam("NumAtt") && !node.hasParam("NumDef") && !node.hasParam("KW")) {
+            return false;
+        }
+        for (final String param : new String[] { "NumAtt", "NumDef" }) {
+            if (node.hasParam(param)) {
+                try {
+                    if (Integer.parseInt(node.getParam(param).trim()) < 0) {
+                        return false;
+                    }
+                } catch (final NumberFormatException e) {
+                    return false; // an X it cannot read: not judged
+                }
+            }
+        }
+        final String kw = node.getParamOrDefault("KW", "");
+        return !kw.contains("can't") && !kw.contains("Defender") && !node.hasParam("RemoveKW");
+    }
+
     /**
      * The counters go on something that is not a creature yet, and a later part of the same ability makes it one
      * (Case of the Filched Falcon: counters on a noncreature artifact, which then becomes a 0/0 creature).
@@ -310,6 +446,15 @@ public final class ActivationGuard {
             for (final GameEntity e : tr.getAllCandidates(node)) {
                 if (e instanceof Card && ((Card) e).isCreature()) {
                     return null; // a real target exists: the ordinary count decides
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        if (api == ApiType.Pump && beneficialPump(node)) {
+            // a pump that only helps (Giant Growth) when every creature it could go on is an opponent's: it helps him
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (!(e instanceof Card) || !((Card) e).getController().isOpponentOf(ai)) {
+                    return null; // something of its own (or a player): the ordinary count decides
                 }
             }
             return Verdict.IDLE_TARGETS;
@@ -442,13 +587,26 @@ public final class ActivationGuard {
         if (!node.hasParam("Origin") || !node.hasParam("ChangeType") || readsRuntime(node.getParam("ChangeType"))) {
             return Verdict.USEFUL;
         }
+        if (node.hasParam("Hidden") || node.hasParam("Reveal")) {
+            return Verdict.USEFUL; // a hidden search or a wish: the cards are not readable from the game state
+        }
         final List<ZoneType> origin = ZoneType.listValueOf(node.getParam("Origin"));
-        if (origin.contains(ZoneType.Library) || origin.contains(ZoneType.Stack)) {
-            return Verdict.USEFUL; // a search shuffles, and the stack is not read here
+        // the AI's own hand is readable (Sorin, Imperious Bloodlord's -3 with no Vampire in it does nothing), unless the
+        // ability names another player's hand or lets someone else choose
+        final boolean ownHandOnly = !node.hasParam("DefinedPlayer") && !node.hasParam("Chooser") && !node.hasParam("Defined")
+                && !node.hasParam("ChoiceZone") && !node.hasParam("GainControl");
+        for (final ZoneType z : origin) {
+            if (z == ZoneType.Hand && ownHandOnly) {
+                continue;
+            }
+            if (z != ZoneType.Battlefield && z != ZoneType.Graveyard && z != ZoneType.Exile) {
+                // Library, Sideboard (outside the game), another hand, Stack, Command: not judged, a tutor or wish is never idle
+                return Verdict.USEFUL;
+            }
         }
         final CardCollection cards = new CardCollection();
         for (final ZoneType z : origin) {
-            cards.addAll(ai.getGame().getCardsIn(z));
+            cards.addAll(z == ZoneType.Hand ? ai.getCardsIn(ZoneType.Hand) : ai.getGame().getCardsIn(z));
         }
         return CardLists.getValidCards(cards, node.getParam("ChangeType"), ai, host, node).isEmpty()
                 ? Verdict.IDLE_CHOICE : Verdict.USEFUL;

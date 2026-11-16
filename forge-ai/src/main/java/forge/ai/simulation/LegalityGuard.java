@@ -61,10 +61,157 @@ public final class LegalityGuard {
             if (xIsZero(ai, sa)) {
                 return "x-zero";
             }
+            if (drawsPastTheLibrary(ai, sa)) {
+                return "draw-would-lose";
+            }
+            if (takesAllItsLife(ai, sa)) {
+                return "suicide";
+            }
             return null;
         } catch (final RuntimeException e) {
             return null; // a refinement only: never let it break a turn
         }
+    }
+
+    /**
+     * A spell or ability that makes the AI draw more cards than its library has loses the game at the next state check
+     * (unless something says it cannot lose, or it is the plan: Laboratory Maniac, Jace, Wielder of Mysteries).
+     */
+    static boolean drawsPastTheLibrary(final Player ai, final SpellAbility sa) {
+        if (ai.cantLose()) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Laboratory Maniac") || c.getName().equals("Jace, Wielder of Mysteries")) {
+                return false;
+            }
+        }
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() != ApiType.Draw || node.hasParam("ConditionCheckSVar") || node.hasParam("ConditionPresent")
+                    || node.hasParam("UnlessCost") || !affects(ai, node, "You")) {
+                continue;
+            }
+            if (amountOf(node, "NumCards", "1") > library) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the step is aimed at the AI: its chosen targets, else the players it names ("You", "Player" for each). */
+    static boolean affects(final Player ai, final SpellAbility node, final String defaultDefined) {
+        try {
+            if (node.usesTargeting()) {
+                if (node.getTargets() == null) {
+                    return false;
+                }
+                for (final Player p : node.getTargets().getTargetPlayers()) {
+                    if (p.equals(ai)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            final String defined = node.getParamOrDefault("Defined", defaultDefined);
+            if (defined.isEmpty()) {
+                return false;
+            }
+            return forge.game.ability.AbilityUtils.getDefinedPlayers(node.getHostCard(), defined, node).contains(ai);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /**
+     * The number of a step as the game reads it now: a Count$ expression is counted on the board, so "draw a card for
+     * each creature you control" is what it would be if cast now. An X paid in mana is not known before it is paid (the
+     * AI's own X choices are capped by the library in DrawAi, and the rollouts do not offer X spells).
+     */
+    static int amountOf(final SpellAbility node, final String param, final String fallback) {
+        return forge.game.ability.AbilityUtils.calculateAmount(node.getHostCard(), node.getParamOrDefault(param, fallback), node);
+    }
+
+    /** A step that makes the AI lose all the life it has (or more), with nothing in the same ability to gain it back. */
+    static boolean takesAllItsLife(final Player ai, final SpellAbility sa) {
+        if (!ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() == ApiType.GainLife) {
+                return false;
+            }
+        }
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (node.hasParam("ConditionCheckSVar") || node.hasParam("ConditionPresent")) {
+                continue;
+            }
+            if ((api == ApiType.LoseLife && affects(ai, node, "") && amountOf(node, "LifeAmount", "0") >= ai.getLife())
+                    || (api == ApiType.DealDamage && affects(ai, node, "") && amountOf(node, "NumDmg", "0") >= ai.getLife())) {
+                return true;
+            }
+            if (api == ApiType.DamageAll && damagesAi(ai, node) && amountOf(node, "NumDmg", "0") >= ai.getLife()
+                    && ai.getLife() <= ai.getOpponentsSmallestLifeTotal()) {
+                return true; // each player takes it and the AI is the one who dies first (or with him)
+            }
+        }
+        return false;
+    }
+
+    private static boolean damagesAi(final Player ai, final SpellAbility node) {
+        final String valid = node.getParamOrDefault("ValidPlayers", "");
+        return !valid.isEmpty() && ai.isValid(valid, node.getActivatingPlayer(), node.getHostCard(), node);
+    }
+
+    // ------------------------------------------------------------------------------------------ wasted burn
+
+    /**
+     * Damage that does nothing or far too much: all of it prevented, a creature that is already dead (damage marked
+     * for its toughness), or a very big burn spell on a small creature (8 damage on a 2/2 when the opponent has
+     * something worth the spell).
+     *
+     * @param aim the target it is going to be aimed at when the targets are not chosen yet, else null
+     * @return "burn-prevented", "burn-dead-already" or "overkill", else null
+     */
+    public static String wastedBurn(final Player ai, final SpellAbility sa, final forge.game.GameObject aim) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() != ApiType.DealDamage || !node.usesTargeting()) {
+                continue;
+            }
+            final List<GameEntity> aimed = new java.util.ArrayList<>();
+            if (aim instanceof GameEntity && node == FlatMonteCarloPicker.singleTargetingAbility(sa)) {
+                aimed.add((GameEntity) aim);
+            } else if (node.getTargets() != null) {
+                for (final GameEntity t : node.getTargets().getTargetEntities()) {
+                    aimed.add(t);
+                }
+            }
+            if (aimed.isEmpty()) {
+                continue;
+            }
+            final int damage = amountOf(node, "NumDmg", "0");
+            if (damage <= 0) {
+                continue;
+            }
+            for (final GameEntity e : aimed) {
+                final int dealt = forge.ai.ComputerUtilCombat.predictDamageTo(e, damage, node.getHostCard(), false);
+                if (dealt <= 0) {
+                    return "burn-prevented";
+                }
+                if (e instanceof Card && ((Card) e).isCreature() && !((Card) e).isPlaneswalker()) {
+                    final Card c = (Card) e;
+                    final int lethal = c.getLethalDamage();
+                    if (lethal <= 0) {
+                        return "burn-dead-already";
+                    }
+                    if (dealt >= 6 && dealt >= lethal * 3 && forge.ai.ComputerUtilCard.evaluateCreature(c) < 250) {
+                        return "overkill";
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
