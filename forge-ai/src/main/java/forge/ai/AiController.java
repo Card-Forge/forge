@@ -2234,6 +2234,10 @@ public class AiController {
         }
         if (flatMc && game.getStack().isEmpty()) {
             // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
+            final SpellAbility blockGrant = FlatMonteCarloPicker.sureBlock(player, saList);
+            if (blockGrant != null) {
+                return blockGrant; // flying, reach... for the creature that blocks the attacker well: now or never
+            }
             final SpellAbility evasion = FlatMonteCarloPicker.sureEvasion(player, saList);
             if (evasion != null) {
                 return evasion; // menace, fear... for an attacker that the blockers would stop: the last moment before they are declared
