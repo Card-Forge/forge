@@ -219,6 +219,65 @@ public class AnimateAi extends SpellAbilityAi {
         return ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS);
     }
 
+    /**
+     * Bait for a combat trick: an animated land that would only trade with the one creature that can block it is still
+     * worth the mana when an instant pump in hand, paid for with mana left over after the animation (and not from the
+     * land itself, which attacks), wins that fight. Deliberately narrow: exactly one possible blocker, a plain +N/+M
+     * pump, and the pumped land has to kill the blocker and survive it. Several blockers, keywords and tricks of other
+     * kinds are left to the ordinary attack decision.
+     *
+     * @param sa the animate ability of the AI's own permanent (a manland)
+     */
+    public static boolean hasBackingTrick(final Player ai, SpellAbility sa) {
+        sa = sa.getRootAbility();
+        final Card host = sa.getHostCard();
+        if (host == null || !host.isLand() || !host.isInZone(ZoneType.Battlefield) || sa.getApi() != ApiType.Animate
+                || sa.usesTargeting()) {
+            return false;
+        }
+        final Card animated = becomeAnimated(host, sa);
+        final List<Card> blockers = Lists.newArrayList();
+        for (final Card c : ai.getWeakestOpponent().getCreaturesInPlay()) {
+            if (CardPredicates.possibleBlockers(animated).test(c)) {
+                blockers.add(c);
+            }
+        }
+        if (blockers.size() != 1) {
+            return false; // nothing to bait, or a double block the trick cannot be counted on to beat
+        }
+        final Card blocker = blockers.get(0);
+        final int animateCost = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()
+                ? sa.getPayCosts().getTotalMana().getCMC() : 0;
+        // the animated land attacks and cannot pay for the trick
+        final int spare = ComputerUtilMana.getAvailableManaEstimate(ai, true) - 1 - animateCost;
+        for (final Card card : ai.getCardsIn(ZoneType.Hand)) {
+            if (!card.isInstant()) {
+                continue;
+            }
+            for (final SpellAbility trick : card.getSpellAbilities()) {
+                if (!trick.isSpell() || trick.getApi() != ApiType.Pump || trick.getPayCosts() == null
+                        || trick.getPayCosts().hasXInAnyCostPart() || trick.hasParam("KW")) {
+                    continue;
+                }
+                final int cost = trick.getPayCosts().hasManaCost() ? trick.getPayCosts().getTotalMana().getCMC() : 0;
+                if (cost > spare) {
+                    continue;
+                }
+                final int att = AbilityUtils.calculateAmount(card, trick.getParamOrDefault("NumAtt", "0"), trick);
+                final int def = AbilityUtils.calculateAmount(card, trick.getParamOrDefault("NumDef", "0"), trick);
+                if (att < 0 || def < 0 || att + def == 0) {
+                    continue;
+                }
+                final boolean kills = animated.getNetPower() + att >= blocker.getNetToughness();
+                final boolean survives = animated.getNetToughness() + def > blocker.getNetPower();
+                if (kills && survives) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -290,7 +349,8 @@ public class AnimateAi extends SpellAbilityAi {
                 }
                 Card animatedCopy = becomeAnimated(c, sa);
                 if (ph.isPlayerTurn(aiPlayer)
-                        && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
+                        && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)
+                        && !hasBackingTrick(aiPlayer, sa)) {
                     return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                 }
                 if (ph.getPlayerTurn().isOpponentOf(aiPlayer)

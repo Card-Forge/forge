@@ -43,7 +43,8 @@ public class FlatMonteCarloVintageSmokeTest extends AITest {
             ai.drawCards(7);
             boolean landInHand = false; // a hand without a land (or a free spell) can do nothing: not a failure of the AI
             for (final forge.game.card.Card c : ai.getCardsIn(ZoneType.Hand)) {
-                landInHand |= c.isLand() || c.getCMC() == 0;
+                // a free permanent that makes no mana (Urza's Bauble) is a card the AI may keep: it only pays off with mana to use it
+                landInHand |= c.isLand() || c.getCMC() == 0 && (!c.isPermanent() || !c.getManaAbilities().isEmpty());
             }
             game.AI_FLAT_MONTE_CARLO = true;
             game.AI_TIMEOUT = 2;

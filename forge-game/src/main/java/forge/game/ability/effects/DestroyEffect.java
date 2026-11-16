@@ -30,7 +30,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         sb.append("Destroy ").append(Lang.joinHomogenous(tgtCards));
 
         if (sa.hasParam("Radiance")) {
-            final String thing = sa.getParamOrDefault("ValidTgts", "thing");
+            final String thing = sa.hasParam("ValidTgts") ? Lang.getInstance().describeValidList(sa.getParam("ValidTgts")) : "thing";
             sb.append(" and each other ").append(thing).append(" that shares a color with ");
             sb.append(justOne ? "it" : "them");
         }

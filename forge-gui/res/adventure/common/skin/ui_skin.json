@@ -592,6 +592,13 @@
 		"unpressedOffsetX": 6,
 		"checkedOffsetX": 6
 	},
+	"goldframe": {
+		"parent": "default",
+		"up": "TenPatchGold",
+		"down": "TenPatchGold",
+		"over": "TenPatchGold",
+		"focused": "TenPatchGold"
+	},
 	"menu": {
 		"font": "default",
 		"up": "Button10Patch",

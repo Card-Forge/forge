@@ -61,6 +61,8 @@ public class FDeckImportDialog extends FDialog {
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
 
     private boolean showOptions;
+    private boolean clipboardLoaded; // clipboard text has arrived (async on iOS)
+    private boolean parseRequested;  // initParse() was called before it arrived
     private final Deck currentDeck;
     private boolean createNewDeckControl;
     private final DeckImportController controller;
@@ -76,10 +78,17 @@ public class FDeckImportDialog extends FDialog {
         this.editorConfig = editorConfig;
         ItemPool<PaperCard> cardPool = editorConfig.getCardPool();
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
-        String contents = Forge.getClipboard().getContents();
-        if (contents == null)
-            contents = ""; //prevent NPE
-        txtInput.setText(contents);
+        // On iOS the clipboard is read in the background (the read may wait on the system
+        // "Allow Paste" prompt), so the text can arrive after initParse() has been called.
+        // Other platforms deliver it synchronously, before this constructor returns.
+        Forge.readClipboard(contents -> {
+            txtInput.setText(contents);
+            clipboardLoaded = true;
+            if (parseRequested) {
+                parseClipboard();
+                revalidate();
+            }
+        });
 
         GameType gameType = editorConfig.getGameType();
         controller.setGameFormat(gameType);
@@ -104,6 +113,9 @@ public class FDeckImportDialog extends FDialog {
 
         initButton(0, Forge.getLocalizer().getMessage("lblImport"), e -> FThreads.invokeInBackgroundThread(this::performImport));
         initButton(1, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());
+        if (!clipboardLoaded) {
+            setButtonEnabled(0, false); // re-enabled once the clipboard text has been parsed
+        }
 
         dateTimeCheck.setCommand(e -> updateDropDownEnabled());
         newEditionCheck.setCommand(e -> setArtPreferenceInController());
@@ -156,6 +168,13 @@ public class FDeckImportDialog extends FDialog {
     }
 
     public void initParse() {
+        parseRequested = true;
+        if (clipboardLoaded) {
+            parseClipboard();
+        }
+    }
+
+    private void parseClipboard() {
         boolean usingInventory = editorConfig.usePlayerInventory();
         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
         if (usingInventory)
@@ -165,6 +184,7 @@ public class FDeckImportDialog extends FDialog {
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
             if (token.getType() == TokenType.LEGAL_CARD || token.getType() == TokenType.FREE_CARD_NOT_IN_INVENTORY) {
+                setButtonEnabled(0, true);
 
                 if(usingInventory) {
                     //Settings aren't compatible with player inventories.

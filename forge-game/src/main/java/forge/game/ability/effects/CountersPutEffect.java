@@ -65,19 +65,24 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         sb.append(pronoun ? "they" : who).append(" ");
-        final String typeName = sa.hasParam("CounterType") ? CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase() : "";
+        final String typeName = sa.hasParam("CounterType") && !"ExistingCounter".equals(sa.getParam("CounterType"))
+                ? CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase() : "";
 
         final List<String> playerCounters = Arrays.asList("energy", "experience", "poison", "ticket");
         if (playerCounters.contains(typeName)) {
             sb.append(pronoun ? "get " : "gets ");
             sb.append(Lang.nounWithNumeralExceptOne(AbilityUtils.calculateAmount(card,
-                    sa.getParamOrDefault("CounterNum", "1"), sa), typeName + " counter"));
+                    sa.getParamOrDefault("CounterNum", "1"), sa), (typeName.isEmpty() ? "counter" : typeName + " counter")));
             sb.append(".");
             return sb.toString();
         }
 
         String desc = sa.getDescription();
-        boolean forEach = desc.contains("for each");
+        // a "for each" after ", then" belongs to the next part of the ability ("put a counter, then draw a card for each ...")
+        // and one inside a quoted ability ("... unless you pay {1} for each music counter on it") is not this effect's
+        final int quote = desc.indexOf('"');
+        boolean forEach = desc.contains(" for each") && (!desc.contains(", then") || desc.indexOf(", then") > desc.indexOf(" for each"))
+                && (quote < 0 || desc.indexOf(" for each") < quote);
         if (sa.hasParam("CounterTypes")) {
             if (desc.contains("Put ") && desc.contains(" on ")) {
                 desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)
@@ -90,7 +95,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.usesTargeting()) {
             final List<Card> targetCards = getTargetCards(sa);
             if (targetCards.isEmpty()) {
-                return sb.toString();
+                return "";
             }
         }
 
@@ -113,7 +118,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             sb.append("up to ");
         }
 
-        sb.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter"));
+        sb.append(Lang.nounWithNumeralExceptOne(amount, (typeName.isEmpty() ? "counter" : typeName + " counter")));
         sb.append(divAsChoose || divRandom ? " among " : " on ");
 
         // special handling for multiple Defined
@@ -124,7 +129,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         .replaceAll("[\\[\\]]", ""));
                 if (i + 1 < def.length) {
                     sb.append(" and ");
-                    sb.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter")).append(" on ");
+                    sb.append(Lang.nounWithNumeralExceptOne(amount, (typeName.isEmpty() ? "counter" : typeName + " counter"))).append(" on ");
                 }
             }
             // if use targeting we show all targets and corresponding counters
@@ -145,7 +150,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Choices")) {
             int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
-            String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
+            String what = sa.hasParam("ChoicesDesc") ? sa.getParam("ChoicesDesc") : Lang.getInstance().describeValidList(sa.getParam("Choices"));
             sb.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
             final List<Card> targetCards = getTargetCards(sa);

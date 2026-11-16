@@ -168,7 +168,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override public DeckFormat getDeckFormat() { return deckFormat; }
         @Override public IDeckController getController() { return controller; }
         @Override public Predicate<PaperCard> getCardFilter() { return cardFilter; }
-        @Override public boolean isLimited() { return deckFormat == DeckFormat.Limited; }
+        @Override public boolean isLimited() { return deckFormat == DeckFormat.Limited || deckFormat == DeckFormat.CommanderDraft; }
         @Override public boolean isDraft() { return gameType.isDraft(); }
         @Override public boolean hasCommander() { return deckFormat.hasCommander(); }
 
@@ -2843,7 +2843,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public void setDeckGroup(DeckGroup deckGroup) {
             this.setModel(deckGroup);
-            this.setDeck(deckGroup.getHumanDeck());
         }
     }
 
