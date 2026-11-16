@@ -289,4 +289,66 @@ public class LegalityGuardTest extends FlatMcTestBase {
         put("Centaur Courser", ai, ZoneType.Library); // mana value 3, 3/3
         AssertJUnit.assertTrue(ritualWouldSacrifice());
     }
+
+    // ------------------------------------------------------------------------------------------ "you may" answers
+
+    private boolean mayDo(final String script, final Card host) {
+        final SpellAbility sa = forge.game.ability.AbilityFactory.getAbility(script, host);
+        sa.setActivatingPlayer(ai);
+        return ((forge.ai.PlayerControllerAi) ai.getController()).getAi().confirmAction(sa, null, "", null);
+    }
+
+    @Test
+    public void aGoodCounterIsAlwaysTakenAndABadOneNever() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        for (int i = 0; i < 20; i++) { // it used to be a coin flip
+            AssertJUnit.assertTrue(mayDo("DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Optional$ True", host));
+            AssertJUnit.assertFalse(mayDo("DB$ PutCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1 | Optional$ True", host));
+        }
+    }
+
+    @Test
+    public void ownLibraryIsNotMilledDownToNothing() {
+        final Card host = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        for (final Card c : new java.util.ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
+            ai.getZone(ZoneType.Library).remove(c); // start from an empty library
+        }
+        put("Forest", 5, ai, ZoneType.Library);
+        AssertJUnit.assertFalse(mayDo("DB$ Mill | NumCards$ 3 | Defined$ You | Optional$ True", host));
+        put("Forest", 20, ai, ZoneType.Library);
+        AssertJUnit.assertTrue(mayDo("DB$ Mill | NumCards$ 3 | Defined$ You | Optional$ True", host));
+    }
+
+    // ------------------------------------------------------------------------------------------ sacrifice outlets
+
+    private SpellAbility feed(final Card feeder) {
+        for (final SpellAbility sa : feeder.getSpellAbilities()) {
+            if (sa.getApi() == forge.game.ability.ApiType.PutCounter) {
+                sa.setActivatingPlayer(ai);
+                return sa;
+            }
+        }
+        throw new AssertionError("no ability on " + feeder);
+    }
+
+    @Test
+    public void aGoodCreatureIsNotFedToCarrionFeeder() {
+        final Card feeder = put("Carrion Feeder", ai, ZoneType.Battlefield);
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(ActivationGuard.poorSacrifice(ai, feed(feeder)));
+        AssertJUnit.assertNotNull(ActivationGuard.problem(ai, feed(feeder)));
+    }
+
+    @Test
+    public void carrionFeederDoesNotFeedOnItself() {
+        final Card feeder = put("Carrion Feeder", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(ActivationGuard.poorSacrifice(ai, feed(feeder)));
+    }
+
+    @Test
+    public void aWeakCreatureIsFodderForCarrionFeeder() {
+        final Card feeder = put("Carrion Feeder", ai, ZoneType.Battlefield);
+        put("Ornithopter", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse(ActivationGuard.poorSacrifice(ai, feed(feeder)));
+    }
 }

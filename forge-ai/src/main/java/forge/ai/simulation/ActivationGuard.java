@@ -81,6 +81,12 @@ public final class ActivationGuard {
         if (onlyValuableSacrifice(ai, sa)) {
             return "valuable-sacrifice";
         }
+        if (poorSacrifice(ai, sa)) {
+            return "poor-sacrifice";
+        }
+        if (declinedByAristocratLogic(ai, sa)) {
+            return "aristocrat-declines";
+        }
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
@@ -165,6 +171,76 @@ public final class ActivationGuard {
             }
         }
         return false;
+    }
+
+    /**
+     * A sacrifice outlet that gives a creature up for less than it is worth, or gives the host up for its own sake
+     * (Carrion Feeder, which fed its whole team to itself, and then itself). The creature that pays is the one the AI's
+     * own cost payment would choose; it is fine to give up when it is fodder (a token, a creature marked SacMe, a weak
+     * one), when it is about to die anyway, or when what the ability gives is worth at least as much as the creature.
+     */
+    static boolean poorSacrifice(final Player ai, final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        final Card host = sa.getHostCard();
+        if (cost == null || host == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostSacrifice) || part.payCostFromSource()) {
+                continue;
+            }
+            final String type = part.getType();
+            if (type == null || "CARDNAME".equals(type) || !"1".equals(part.getAmount())) {
+                continue; // a sacrifice of its own, or of several: not judged here
+            }
+            final CardCollection paid = forge.ai.ComputerUtil.chooseSacrificeType(ai, type, sa, null, false, 1, null);
+            if (paid == null || paid.isEmpty()) {
+                continue; // cannot be paid: costUnpayable says so
+            }
+            final Card c = paid.get(0);
+            if (c.equals(host)) {
+                if (benefitsOnlyHost(sa)) {
+                    return true; // fed to itself for its own benefit: nothing is left to benefit
+                }
+                continue;
+            }
+            if (!c.isCreature() || c.isToken() || c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= FODDER_VALUE
+                    || ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                continue;
+            }
+            if (forge.ai.ComputerUtil.predictThreatenedObjects(ai, null, true).contains(c)) {
+                continue; // it is lost anyway
+            }
+            if (forge.ai.ability.SacrificeWorth.rewardWithRoot(sa) < forge.ai.ability.SacrificeWorth.cost(ai, c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Every step of the ability acts on the host alone (counters on itself, a keyword for itself). */
+    private static boolean benefitsOnlyHost(final SpellAbility sa) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() == ApiType.Cleanup) {
+                continue;
+            }
+            if (node.usesTargeting() || !"Self".equals(node.getParamOrDefault("Defined", "Self"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * An outlet with its own logic for when to use it (AILogic$ AristocratCounters: Carrion Feeder and its kind) is
+     * asked, because the rollouts' own list of abilities does not go through that logic.
+     */
+    private static boolean declinedByAristocratLogic(final Player ai, final SpellAbility sa) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        if (!logic.startsWith("AristocratCounters")) {
+            return false;
+        }
+        return !forge.ai.SpecialAiLogic.doAristocratWithCountersLogic(ai, sa).willingToPlay();
     }
 
     /** A loyalty ability that puts loyalty counters on the Planeswalker (+N, or an X it cannot read). */
