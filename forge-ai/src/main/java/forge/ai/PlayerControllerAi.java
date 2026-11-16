@@ -1140,7 +1140,20 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         switch (kindOfChoice) {
-            case TapOrUntap: return true;
+            case TapOrUntap:
+                // the effect says what is natural for the target (tap an opponent's permanent, untap one's own); with no
+                // such hint (Turnabout) the player it is aimed at decides: untap one's own, tap the opponent's
+                if (defaultVal != null) {
+                    return defaultVal;
+                }
+                for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+                    if (node.usesTargeting() && node.getTargets() != null) {
+                        for (final forge.game.player.Player p : node.getTargets().getTargetPlayers()) {
+                            return !p.equals(player);
+                        }
+                    }
+                }
+                return true;
             case UntapOrLeaveTapped:
                 Card source = sa.getHostCard();
                 if (source != null && source.hasSVar("AIUntapPreference")) {

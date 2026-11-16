@@ -2521,7 +2521,10 @@ public class ComputerUtil {
             // TODO
             // computer will need to choose a type based on whether it needs a creature or land,
             // otherwise, lib search for most common type left then, reveal chosenType to Human
-            if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
+            if ("Turnabout".equals(logic)) {
+                // the lands are what a mana loop untaps
+                chosen = validTypes.contains("Land") ? "Land" : "";
+            } else if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : validTypes) {
                     CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), CardPredicates.TAPPED);

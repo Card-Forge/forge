@@ -318,6 +318,10 @@ public final class DeckPlan {
         if (ai == null || pool == null || n <= 0) {
             return null;
         }
+        final CardCollection fromTide = TidePlan.picks(ai, pool, n); // High Tide: the finisher, High Tide, an untap
+        if (fromTide != null) {
+            return fromTide;
+        }
         final CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
         if (fromCombo != null) {
             return fromCombo;

@@ -278,7 +278,14 @@ public class FlatMonteCarloActivationTest extends AITest {
         addCardToZone("Forest", ai, ZoneType.Battlefield);
         AssertJUnit.assertEquals("one land: not the two it untaps", "no-valid-targets", ActivationGuard.problem(ai, untap));
         addCardToZone("Forest", ai, ZoneType.Battlefield);
-        AssertJUnit.assertNull("two lands", ActivationGuard.problem(ai, untap));
+        AssertJUnit.assertEquals("two lands, but both untapped already: nothing to untap", "no-valid-targets",
+                ActivationGuard.problem(ai, untap));
+        for (final Card forest : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (forest.isLand()) {
+                forest.tap(true, null, null);
+            }
+        }
+        AssertJUnit.assertNull("two tapped lands", ActivationGuard.problem(ai, untap));
     }
 
     @Test
@@ -348,5 +355,83 @@ public class FlatMonteCarloActivationTest extends AITest {
         final java.util.List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
         final String play = chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
         AssertJUnit.assertFalse("no green creature entered: the AI chose " + play, "Oran-Rief, the Vastwood".equals(play));
+    }
+
+    /** Wanderbrine Trapper: tap target creature an opponent controls (it taps another creature of its own as a cost). */
+    @Test
+    public void tappingWhatIsTappedAlready() {
+        setUp();
+        final SpellAbility trapper = ability(addCardToZone("Wanderbrine Trapper", ai, ZoneType.Battlefield));
+        addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield); // the creature that is tapped to pay
+        addCardToZone("Hill Giant", game.getPlayers().get(0), ZoneType.Battlefield).tap(true, null, null);
+        AssertJUnit.assertEquals("the only opposing creature is tapped", "no-valid-targets", ActivationGuard.problem(ai, trapper));
+        addCardToZone("Serra Angel", game.getPlayers().get(0), ZoneType.Battlefield);
+        AssertJUnit.assertNull("an untapped opposing creature", ActivationGuard.problem(ai, trapper));
+    }
+
+    /** Seeker of Skybreak: untap target creature. */
+    @Test
+    public void untappingWhatIsUntappedAlready() {
+        setUp();
+        final SpellAbility seeker = ability(addCardToZone("Seeker of Skybreak", ai, ZoneType.Battlefield));
+        AssertJUnit.assertEquals("every creature is untapped", "no-valid-targets", ActivationGuard.problem(ai, seeker));
+        addCardToZone("Hill Giant", ai, ZoneType.Battlefield).tap(true, null, null);
+        AssertJUnit.assertNull("a tapped creature of its own", ActivationGuard.problem(ai, seeker));
+    }
+
+    /** Arnjlot's Ascent: target creature gains flying, nothing to give it to that lacks it. */
+    @Test
+    public void aKeywordGrantToCreaturesThatHaveItAlready() {
+        setUp();
+        final SpellAbility ascent = ability(addCardToZone("Arnjlot's Ascent", ai, ZoneType.Battlefield));
+        addCardToZone("Wind Drake", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("a flyer already", "no-valid-targets", ActivationGuard.problem(ai, ascent));
+        addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
+        AssertJUnit.assertNull("a creature that can gain it", ActivationGuard.problem(ai, ascent));
+    }
+
+    /** Kiki-Jiki, Mirror Breaker: no more copies when the hasty ones in play are lethal or as many as a turn needs. */
+    @Test
+    public void aCopyLoopStopsWhenTheCopiesAreEnough() {
+        setUp();
+        final SpellAbility kiki = ability(addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield));
+        addCardToZone("Goblin Piker", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("no copies yet", ActivationGuard.enoughCopies(ai, kiki));
+        for (int i = 0; i < ActivationGuard.MAX_COPIES; i++) {
+            final Card token = addCardToZone("Goblin Piker", ai, ZoneType.Battlefield);
+            token.setGamePieceType(forge.card.GamePieceType.TOKEN);
+            token.addIntrinsicKeywords(java.util.Collections.singletonList("Haste"));
+        }
+        AssertJUnit.assertTrue("as many hasty copies as a turn needs", ActivationGuard.enoughCopies(ai, kiki));
+    }
+
+    /** Pestermite's tap-or-untap goes to the tapped Kiki-Jiki (or the Splinter Twin creature) that copies it again. */
+    @Test
+    public void pestermiteUntapsTheCopyEngine() {
+        setUp();
+        final Card kiki = addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield);
+        kiki.tap(true, null, null);
+        final Card pestermite = addCardToZone("Pestermite", ai, ZoneType.Battlefield);
+        final SpellAbility trigger = pestermite.getTriggers().get(0).ensureAbility();
+        trigger.setActivatingPlayer(ai);
+        AssertJUnit.assertSame("the tapped engine", kiki, forge.ai.ability.TapOrUntapAi.untapEngine(ai, trigger));
+        kiki.untap();
+        AssertJUnit.assertNull("nothing tapped: no untap target", forge.ai.ability.TapOrUntapAi.untapEngine(ai, trigger));
+    }
+
+    /** Pestermite copied by Kiki-Jiki: its trigger untaps the tapped Kiki-Jiki (the combo), not a permanent that is tapped already. */
+    @Test
+    public void aPestermiteCopyUntapsTheTappedEngine() {
+        setUp();
+        final Card kiki = addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield);
+        kiki.tap(true, null, null);
+        final Card tarn = addCardToZone("Candelabra of Tawnos", game.getPlayers().get(0), ZoneType.Battlefield);
+        tarn.tap(true, null, null);
+        final Card pestermite = addCardToZone("Pestermite", ai, ZoneType.Battlefield);
+        final SpellAbility trigger = pestermite.getTriggers().get(0).ensureAbility();
+        trigger.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("the trigger is played", SpellApiToAi.Converter.get(trigger)
+                .doTriggerNoCostWithSubs(ai, trigger, false).willingToPlay());
+        AssertJUnit.assertEquals("it untaps Kiki-Jiki", kiki, trigger.getTargets().getFirstTargetedCard());
     }
 }

@@ -301,4 +301,215 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
                         + ai.getCardsIn(ZoneType.Graveyard).size() + " cards there)\n" + trace + gameStateToString(game),
                 0, opp.getCardsIn(ZoneType.Library).size());
     }
+
+    @Test(timeOut = 120000)
+    public void highTideWithTurnaboutIsCastWhenTheHandMakesEnoughMana() {
+        islandsAndTheTurnaboutDeck(12);
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("twelve Islands, two Turnabouts and a Stroke are enough for a library of twenty", step);
+        AssertJUnit.assertEquals("High Tide first", "High Tide", step.getHostCard().getName());
+        AssertJUnit.assertFalse(LoopRunner.held(ai, spellOf("High Tide")) && LoopRunner.held(ai, spellOf("Turnabout")));
+    }
+
+    @Test(timeOut = 120000)
+    public void highTideStrokeAndTurnaboutAreHeldWhenTheHandIsTooSmall() {
+        islandsAndTheTurnaboutDeck(3);
+        AssertJUnit.assertNull(LoopRunner.next(ai, playsOf(), s -> true));
+        AssertJUnit.assertTrue("High Tide is kept", LoopRunner.held(ai, spellOf("High Tide")));
+        AssertJUnit.assertTrue("Stroke is kept", LoopRunner.held(ai, spellOf("Stroke of Genius")));
+        AssertJUnit.assertTrue("Turnabout is kept", LoopRunner.held(ai, spellOf("Turnabout")));
+    }
+
+    @Test(timeOut = 120000)
+    public void theAiUntapsItsOwnLandsAndOnlyTapsAnOpponents() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        final Card mom = addCard("Mind Over Matter", ai);
+        final SpellAbility untap = mom.getFirstSpellAbility();
+        AssertJUnit.assertFalse("one's own land is untapped", ai.getController().chooseBinary(untap, "", 
+                forge.game.player.PlayerController.BinaryChoiceType.TapOrUntap, Boolean.FALSE));
+        AssertJUnit.assertTrue("an opponent's land is tapped", ai.getController().chooseBinary(untap, "",
+                forge.game.player.PlayerController.BinaryChoiceType.TapOrUntap, Boolean.TRUE));
+    }
+
+    @Test(timeOut = 120000)
+    public void theLoopKeepsItsKeyCardsWhenThrowingCardsAway() {
+        islandsAndTheTurnaboutDeck(5);
+        final Card bears = addCard("Grizzly Bears", ai);
+        ai.getZone(ZoneType.Battlefield).remove(bears);
+        ai.getZone(ZoneType.Hand).add(bears);
+        addCardToZone("Arcane Denial", ai, ZoneType.Hand);
+        final forge.game.card.CardCollection safe = LoopRunner.withoutTideKeys(ai,
+                new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand)));
+        AssertJUnit.assertEquals("only the Grizzly Bears may go: " + safe, 1, safe.size());
+        AssertJUnit.assertEquals("Grizzly Bears", safe.getFirst().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void aCounterspellInTheHandKeepsItsPriceBackFromTheStroke() {
+        islandsAndTheTurnaboutDeck(5);
+        AssertJUnit.assertEquals("no counterspell: nothing kept back", 0, LoopRunner.counterReserve(ai));
+        addCardToZone("Arcane Denial", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("Arcane Denial costs two", 2, LoopRunner.counterReserve(ai));
+        addCardToZone("Force of Will", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("Force of Will is free", 0, LoopRunner.counterReserve(ai));
+    }
+
+    private void islandsAndTheTurnaboutDeck(final int islands) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Plains", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCards("Island", islands, ai);
+        addCardToZone("High Tide", ai, ZoneType.Hand);
+        addCardToZone("Turnabout", ai, ZoneType.Hand);
+        addCardToZone("Turnabout", ai, ZoneType.Hand);
+        addCardToZone("Stroke of Genius", ai, ZoneType.Hand);
+    }
+
+    private void tideDeckWith(final int islands, final String... hand) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Plains", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCards("Island", islands, ai);
+        for (final String name : hand) {
+            addCardToZone(name, ai, ZoneType.Hand);
+        }
+    }
+
+    @Test(timeOut = 120000)
+    public void highTideStartsWithBlueSunsZenithAndCandelabra() {
+        tideDeckWith(10, "High Tide", "Blue Sun's Zenith", "Candelabra of Tawnos");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("ten Islands, High Tide, Candelabra and a Zenith: start", step);
+        AssertJUnit.assertEquals("High Tide first", "High Tide", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void moreHighTidesRaiseTheProjection() {
+        tideDeckWith(6, "High Tide", "Blue Sun's Zenith", "Turnabout");
+        final int one = LoopRunner.projectedTideMana(ai);
+        addCardToZone("High Tide", ai, ZoneType.Hand);
+        addCardToZone("High Tide", ai, ZoneType.Hand);
+        AssertJUnit.assertTrue("three High Tides make more than one: " + one + " -> " + LoopRunner.projectedTideMana(ai),
+                LoopRunner.projectedTideMana(ai) > one);
+    }
+
+    @Test(timeOut = 120000)
+    public void brainFreezeIsAFinisherAndIsKept() {
+        tideDeckWith(3, "High Tide", "Brain Freeze", "Turnabout");
+        AssertJUnit.assertTrue("no storm to mill the library with: Brain Freeze is kept", LoopRunner.held(ai, spellOf("Brain Freeze")));
+    }
+
+    @Test(timeOut = 120000)
+    public void theZenithIsNotThrownAwayForMindOverMatter() {
+        tideDeckWith(5, "High Tide", "Blue Sun's Zenith", "Mind Over Matter", "Island", "Force of Will");
+        final forge.game.card.CardCollection safe = LoopRunner.withoutTideKeys(ai,
+                new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand)));
+        AssertJUnit.assertEquals("only the Island may go: " + safe, 1, safe.size());
+        AssertJUnit.assertEquals("Island", safe.getFirst().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void aTutorFetchesTheFinisherFirstThenTheMissingPieces() {
+        tideDeckWith(8, "High Tide", "Turnabout");
+        addCardToZone("Brain Freeze", ai, ZoneType.Library);
+        addCardToZone("Mind Over Matter", ai, ZoneType.Library);
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        final forge.game.card.CardCollection pool = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Library));
+        final forge.game.card.CardCollection one = forge.ai.simulation.TidePlan.picks(ai, pool, 1);
+        AssertJUnit.assertNotNull("a finisher is missing", one);
+        AssertJUnit.assertEquals("the draw spell comes before Brain Freeze", "Stroke of Genius", one.getFirst().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void aTutorFetchesTheUntapWhenTheFinisherIsInHand() {
+        tideDeckWith(8, "High Tide", "Stroke of Genius");
+        addCardToZone("Island", ai, ZoneType.Library);
+        addCardToZone("Candelabra of Tawnos", ai, ZoneType.Library);
+        addCardToZone("Turnabout", ai, ZoneType.Library);
+        final forge.game.card.CardCollection one = forge.ai.simulation.TidePlan.picks(ai,
+                new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Library)), 1);
+        AssertJUnit.assertNotNull(one);
+        AssertJUnit.assertEquals("Turnabout", one.getFirst().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void aTutorHasNoOpinionWhenTheLoopIsComplete() {
+        tideDeckWith(8, "High Tide", "Stroke of Genius", "Turnabout");
+        addCardToZone("Turnabout", ai, ZoneType.Library);
+        AssertJUnit.assertNull(forge.ai.simulation.TidePlan.picks(ai,
+                new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Library)), 1));
+    }
+
+    @Test(timeOut = 300000)
+    public void theTideTurnIsPlayedOutInACopyBeforeItIsStarted() {
+        tideDeckWith(12, "High Tide", "Stroke of Genius", "Turnabout", "Turnabout");
+        playsOf(); // the main phase of the AI
+        AssertJUnit.assertTrue("twelve Islands, two Turnabouts and a Stroke win against a library of twenty: "
+                + forge.ai.simulation.TideSolver.lastNote, forge.ai.simulation.TideSolver.wins(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void twoHighTidesAndTurnaboutBeforeTimeSpiralWhenThereIsNoFinisher() {
+        tideDeckWith(7, "High Tide", "High Tide", "Turnabout", "Time Spiral", "Time Spiral");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library); // a finisher left to draw
+        final SpellAbility first = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("seven Islands, two High Tides, Turnabout and Time Spiral: start", first);
+        AssertJUnit.assertEquals("High Tide first", "High Tide", first.getHostCard().getName());
+        AssertJUnit.assertTrue("Time Spiral is kept for after them", LoopRunner.held(ai, spellOf("Turnabout")) == false);
+    }
+
+    @Test(timeOut = 120000)
+    public void splinterTwinIsNotPutOnSpellskite() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        addCardToZone("Spellskite", ai, ZoneType.Battlefield);
+        final Card twin = addCardToZone("Splinter Twin", ai, ZoneType.Hand);
+        addCards("Mountain", 4, ai);
+        playsOf();
+        final AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(twin.getFirstSpellAbility());
+        AssertJUnit.assertNotSame("nothing worth copying: Splinter Twin stays in hand", AiPlayDecision.WillPlay, decision);
+    }
+
+    @Test(timeOut = 120000)
+    public void aSecondMindOverMatterOrCandelabraIsRedundant() {
+        tideDeckWith(8, "High Tide", "Mind Over Matter", "Candelabra of Tawnos");
+        addCardToZone("Mind Over Matter", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("duplicate-engine", LoopRunner.redundantEngine(ai, spellOf("Mind Over Matter")));
+        AssertJUnit.assertNull("Candelabra is not in play yet", LoopRunner.redundantEngine(ai, spellOf("Candelabra of Tawnos")));
+        addCardToZone("Candelabra of Tawnos", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("duplicate-engine", LoopRunner.redundantEngine(ai, spellOf("Candelabra of Tawnos")));
+    }
+
+    @Test(timeOut = 120000)
+    public void theSetupPutsCandelabraInPlayWhenTheTurnCannotWinYet() {
+        tideDeckWith(3, "High Tide", "Candelabra of Tawnos", "Stroke of Genius", "Turnabout");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("three Islands cannot win, so the setup casts the engine", step);
+        AssertJUnit.assertEquals("Candelabra of Tawnos", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theFinishersAreKeptWhenHighTideIsInEffectAndTheLoopCannotWin() {
+        tideDeckWith(4, "High Tide", "Blue Sun's Zenith", "Brain Freeze", "Turnabout");
+        final SpellAbility zenith = spellOf("Blue Sun's Zenith");
+        final SpellAbility freeze = spellOf("Brain Freeze");
+        AssertJUnit.assertFalse("High Tide is not in effect yet", LoopRunner.keptForTheLoop(ai, zenith));
+        final SpellAbility tide = spellOf("High Tide");
+        tide.setActivatingPlayer(ai);
+        forge.game.ability.AbilityUtils.resolve(tide);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertTrue("Blue Sun's Zenith is not drawn at oneself", LoopRunner.keptForTheLoop(ai, zenith));
+        AssertJUnit.assertTrue("Brain Freeze is not spent short of the library", LoopRunner.keptForTheLoop(ai, freeze));
+        AssertJUnit.assertFalse("Turnabout is not a finisher", LoopRunner.keptForTheLoop(ai, spellOf("Turnabout")));
+    }
 }
