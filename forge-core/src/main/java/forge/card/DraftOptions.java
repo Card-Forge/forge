@@ -69,4 +69,8 @@ public class DraftOptions {
     public String getImpliedPartner() {
         return impliedPartner;
     }
+    /** Commander Masters treats every monocolored or colorless legend as having partner. */
+    public boolean impliesMonocoloredPartnership() {
+        return "SingleIdentity".equals(impliedPartner);
+    }
 }

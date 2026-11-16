@@ -37,6 +37,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -739,46 +740,34 @@ public enum DeckFormat {
     }
 
     private boolean canPartner(Deck deck, CardRules a, CardRules b) {
-        return a.canBePartnerCommanders(b, this == CommanderDraft && hasImpliedPartnership(getDraftedCards(deck)));
+        return a.canBePartnerCommanders(b, this == CommanderDraft
+                && hasImpliedPartnership(deck.getAllCardsInASinglePool(false, false).toFlatList()));
     }
 
-    /** The main deck and sideboard, which hold every drafted card that is not a commander. */
-    public static List<PaperCard> getDraftedCards(Deck deck) {
-        List<PaperCard> drafted = new ArrayList<>();
-        if (deck.has(DeckSection.Main)) {
-            drafted.addAll(deck.getMain().toFlatList());
-        }
-        if (deck.has(DeckSection.Sideboard)) {
-            drafted.addAll(deck.get(DeckSection.Sideboard).toFlatList());
-        }
-        return drafted;
-    }
-
-    /** Commander Draft rules come from the sets the cards were drafted from. Basic lands are added after the draft. */
-    private static List<DraftOptions> getCommanderDraftOptions(Collection<PaperCard> drafted) {
-        return drafted.stream().filter(pc -> !pc.getRules().getType().isBasicLand())
-                .map(DeckFormat::getCommanderDraftOptions).filter(Objects::nonNull).distinct()
-                .collect(Collectors.toList());
-    }
-
-    private static DraftOptions getCommanderDraftOptions(PaperCard card) {
-        CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
-        return edition != null && edition.getDraftType() == CardEdition.DraftType.Commander ? edition.getDraftOptions() : null;
+    /**
+     * The Commander Draft rules of each drafted card's set, or null for a card from another set.
+     * Basic lands are added after the draft. A draft that mixes sets gets every set's rules.
+     */
+    private static Stream<DraftOptions> getCommanderDraftOptions(Collection<PaperCard> drafted) {
+        return drafted.stream().filter(pc -> !pc.getRules().getType().isBasicLand()).map(pc -> {
+            CardEdition edition = StaticData.instance().getEditions().get(pc.getEdition());
+            return edition != null && edition.getDraftType() == CardEdition.DraftType.Commander ? edition.getDraftOptions() : null;
+        });
     }
 
     /** True only if every card comes from a Commander Draft set, since cubes and Full drafts mix in printings from those sets. */
     public static boolean isCommanderDraft(Collection<PaperCard> drafted) {
-        return drafted.stream().filter(pc -> !pc.getRules().getType().isBasicLand())
-                .allMatch(pc -> getCommanderDraftOptions(pc) != null);
+        return getCommanderDraftOptions(drafted).anyMatch(Objects::nonNull)
+                && getCommanderDraftOptions(drafted).allMatch(Objects::nonNull);
     }
 
     public static boolean hasImpliedPartnership(Collection<PaperCard> drafted) {
-        return getCommanderDraftOptions(drafted).stream().anyMatch(o -> "SingleIdentity".equals(o.getImpliedPartner()));
+        return getCommanderDraftOptions(drafted).filter(Objects::nonNull).anyMatch(DraftOptions::impliesMonocoloredPartnership);
     }
 
     /** The commanders a player may use without drafting them, such as The Prismatic Piper. */
     public static List<String> getFreeCommanders(Collection<PaperCard> drafted) {
-        return getCommanderDraftOptions(drafted).stream().map(DraftOptions::getFreeCommander)
+        return getCommanderDraftOptions(drafted).filter(Objects::nonNull).map(DraftOptions::getFreeCommander)
                 .filter(name -> !name.isEmpty()).distinct().collect(Collectors.toList());
     }
 

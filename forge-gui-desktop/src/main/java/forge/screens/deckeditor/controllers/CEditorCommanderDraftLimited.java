@@ -321,7 +321,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup
     }
 
     private List<String> getFreeCommanders() {
-        return DeckFormat.getFreeCommanders(DeckFormat.getDraftedCards(getHumanDeck()));
+        return DeckFormat.getFreeCommanders(getHumanDeck().getAllCardsInASinglePool(false, false).toFlatList());
     }
 }
 

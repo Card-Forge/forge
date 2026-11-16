@@ -51,7 +51,6 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
 
     private PaperCard commander = null;
     private PaperCard partner = null;
-    private boolean partnerEligible = false;
 
     /**
      * Construct a commander-draft AI player.
@@ -85,8 +84,8 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             return pickCommander(chooseFrom);
         }
 
-        // Phase 2 — partner selection (if eligible)
-        if (partnerEligible && partner == null) {
+        // Phase 2 — partner selection
+        if (partner == null) {
             final PaperCard partnerPick = tryPickPartner(chooseFrom);
             if (partnerPick != null) {
                 return partnerPick;
@@ -134,16 +133,9 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
         final ColorSet identity = commander.getRules().getColorIdentity();
         ((CommanderDeckColors) deckCols).lockToColorIdentity(identity);
 
-        // Partner-eligible: ≤1-color rule of the drafted sets, explicit Partner keyword,
-        // "Choose a Background" (pairs with Background enchantments), or Background
-        // itself (pairs with a "Choose a Background" legend).
-        partnerEligible = (identity.countColors() <= 1 && hasImpliedPartnership(pack))
-                || commander.getRules().canBePartnerCommander();
-
         if (ForgePreferences.DEV_MODE) {
             System.out.println("Player[" + order + "] selected commander: " + commander
-                    + " identity=" + identity
-                    + " partnerEligible=" + partnerEligible);
+                    + " identity=" + identity);
         }
         return commander;
     }
@@ -247,6 +239,7 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
     }
 
     private boolean hasImpliedPartnership(final DraftPack pack) {
+        // The pack shows its set's rules before any card from that set is drafted
         final List<PaperCard> seen = new ArrayList<>(pack);
         seen.addAll(deck.getOrCreate(DeckSection.Sideboard).toFlatList());
         return DeckFormat.hasImpliedPartnership(seen);
