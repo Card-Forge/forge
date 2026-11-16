@@ -418,4 +418,20 @@ public class FlatMonteCarloActivationTest extends AITest {
         kiki.untap();
         AssertJUnit.assertNull("nothing tapped: no untap target", forge.ai.ability.TapOrUntapAi.untapEngine(ai, trigger));
     }
+
+    /** Pestermite copied by Kiki-Jiki: its trigger untaps the tapped Kiki-Jiki (the combo), not a permanent that is tapped already. */
+    @Test
+    public void aPestermiteCopyUntapsTheTappedEngine() {
+        setUp();
+        final Card kiki = addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield);
+        kiki.tap(true, null, null);
+        final Card tarn = addCardToZone("Candelabra of Tawnos", game.getPlayers().get(0), ZoneType.Battlefield);
+        tarn.tap(true, null, null);
+        final Card pestermite = addCardToZone("Pestermite", ai, ZoneType.Battlefield);
+        final SpellAbility trigger = pestermite.getTriggers().get(0).ensureAbility();
+        trigger.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("the trigger is played", SpellApiToAi.Converter.get(trigger)
+                .doTriggerNoCostWithSubs(ai, trigger, false).willingToPlay());
+        AssertJUnit.assertEquals("it untaps Kiki-Jiki", kiki, trigger.getTargets().getFirstTargetedCard());
+    }
 }

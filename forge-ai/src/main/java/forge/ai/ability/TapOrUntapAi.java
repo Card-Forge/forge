@@ -47,6 +47,36 @@ public class TapOrUntapAi extends TapAiBase {
     }
 
 
+    /**
+     * The trigger of a Pestermite or Deceiver Exarch that has just entered (a copy of Splinter Twin or Kiki-Jiki made it):
+     * untap the engine so that it makes the next copy, which is the combo; the opponent's permanents are tapped only when
+     * there is no engine to untap, and a permanent that is tapped already is no target for a tap.
+     */
+    @Override
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            final Card engine = untapEngine(ai, sa);
+            if (engine != null) {
+                sa.getTargets().add(engine);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+        }
+        final AiAbilityDecision decision = super.doTriggerNoCost(ai, sa, mandatory);
+        if (decision.willingToPlay() && !mandatory && sa.usesTargeting() && sa.getTargets() != null
+                && !sa.getTargets().getTargetCards().isEmpty()) {
+            boolean useful = false;
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                useful |= c.getController().equals(ai) ? c.isTapped() : c.isUntapped();
+            }
+            if (!useful) {
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+        }
+        return decision;
+    }
+
     /** A "{T}: create a hasty copy" ability: Splinter Twin on a creature (it grants one), Kiki-Jiki, Zealous Conscripts' like. */
     private static boolean isCopyEngine(final Card c) {
         if ("True".equals(c.getSVar("UntapMe"))) {

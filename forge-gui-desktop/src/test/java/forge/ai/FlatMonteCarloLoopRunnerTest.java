@@ -497,4 +497,19 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertNotNull("three Islands cannot win, so the setup casts the engine", step);
         AssertJUnit.assertEquals("Candelabra of Tawnos", step.getHostCard().getName());
     }
+
+    @Test(timeOut = 120000)
+    public void theFinishersAreKeptWhenHighTideIsInEffectAndTheLoopCannotWin() {
+        tideDeckWith(4, "High Tide", "Blue Sun's Zenith", "Brain Freeze", "Turnabout");
+        final SpellAbility zenith = spellOf("Blue Sun's Zenith");
+        final SpellAbility freeze = spellOf("Brain Freeze");
+        AssertJUnit.assertFalse("High Tide is not in effect yet", LoopRunner.keptForTheLoop(ai, zenith));
+        final SpellAbility tide = spellOf("High Tide");
+        tide.setActivatingPlayer(ai);
+        forge.game.ability.AbilityUtils.resolve(tide);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertTrue("Blue Sun's Zenith is not drawn at oneself", LoopRunner.keptForTheLoop(ai, zenith));
+        AssertJUnit.assertTrue("Brain Freeze is not spent short of the library", LoopRunner.keptForTheLoop(ai, freeze));
+        AssertJUnit.assertFalse("Turnabout is not a finisher", LoopRunner.keptForTheLoop(ai, spellOf("Turnabout")));
+    }
 }

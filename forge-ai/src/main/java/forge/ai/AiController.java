@@ -2221,6 +2221,8 @@ public class AiController {
             if (loop != null) {
                 return loop; // a loop of the combo list is on the table: one more round of it
             }
+            // the loop declined its finishers this time: they are for the turn that wins, not for a draw or a mill that falls short
+            saList.removeIf(sa -> LoopRunner.keptForTheLoop(player, sa));
             final SpellAbility finish = ComboAssembly.finish(player, saList, this::assemblyApproved);
             if (finish != null) {
                 return finish; // a draw that takes the opponent's whole library: they lose at their next draw

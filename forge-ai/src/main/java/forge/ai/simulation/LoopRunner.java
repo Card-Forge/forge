@@ -304,6 +304,21 @@ public final class LoopRunner {
                 && !tideActive(ai) && untappedIslands(ai) < ISLANDS_NEEDED;
     }
 
+    /**
+     * The finishers of a High Tide deck while High Tide is in effect: the loop casts them at the opponent when the mana
+     * is there (see {@link #next}); when it has declined, a Blue Sun's Zenith that draws five for the AI itself shuffles
+     * the finisher away, and a Brain Freeze that cannot mill the library is spent for nothing. They stay in the hand
+     * (and are kept off the discards by {@link #withoutTideKeys}) for the turn that can win.
+     */
+    public static boolean keptForTheLoop(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || !ai.equals(host.getController())
+                || !(drawsX(host.getName()) || host.getName().equals(BRAIN_FREEZE))) {
+            return false;
+        }
+        return tideActive(ai) && TidePlan.isTideDeck(ai);
+    }
+
     private static SpellAbility highTideAndPalinchron(final Player ai, final List<SpellAbility> candidates,
                                                       final Player opp, final Predicate<SpellAbility> approve) {
         final SpellAbility stroke = castFromHand(ai, candidates, STROKE);
