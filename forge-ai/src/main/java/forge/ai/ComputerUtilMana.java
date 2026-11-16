@@ -1038,12 +1038,13 @@ public class ComputerUtilMana {
         final Comparator<SpellAbility> byAny = Comparator.comparingInt(ma -> Integer.bitCount(drained.applyAsInt(ma)));
 
         // stable sorts: ties keep the existing order, including the hand colour tie-break
-        final Iterator<SpellAbility> reusable = list.stream().filter(ma -> !usesUpSource(ma)).sorted(byHeld).iterator();
-        list.replaceAll(ma -> usesUpSource(ma) ? ma : reusable.next());
+        final List<SpellAbility> reusable = list.stream().filter(ma -> !usesUpSource(ma)).sorted(byHeld).collect(Collectors.toList());
+        final Iterator<SpellAbility> nextReusable = reusable.iterator();
+        list.replaceAll(ma -> usesUpSource(ma) ? ma : nextReusable.next());
 
         final int lead = scoreManaProducingCard(list.get(0).getHostCard());
-        int end = 1;
-        while (end < list.size() && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
+        int end = 0;
+        while (end < list.size() && !usesUpSource(list.get(end)) && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
             end++;
         }
         if (end > 1) {
@@ -1053,7 +1054,8 @@ public class ComputerUtilMana {
     }
 
     private static boolean usesUpSource(final SpellAbility ma) {
-        return ma.getPayCosts().getCostParts().stream().anyMatch(part -> !part.isReusable() && part.payCostFromSource());
+        return ma.getPayCosts().getCostParts().stream().anyMatch(part -> part.payCostFromSource()
+                && (part instanceof CostSacrifice || part instanceof CostExile || part instanceof CostReturn || part instanceof CostDiscard));
     }
 
     private static int producedColors(final SpellAbility ma) {
