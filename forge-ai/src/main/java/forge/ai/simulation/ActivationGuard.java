@@ -587,9 +587,15 @@ public final class ActivationGuard {
         if (!node.hasParam("Origin") || !node.hasParam("ChangeType") || readsRuntime(node.getParam("ChangeType"))) {
             return Verdict.USEFUL;
         }
+        if (node.hasParam("Hidden") || node.hasParam("Reveal")) {
+            return Verdict.USEFUL; // a hidden search or a wish: the cards are not readable from the game state
+        }
         final List<ZoneType> origin = ZoneType.listValueOf(node.getParam("Origin"));
-        if (origin.contains(ZoneType.Library) || origin.contains(ZoneType.Stack)) {
-            return Verdict.USEFUL; // a search shuffles, and the stack is not read here
+        for (final ZoneType z : origin) {
+            if (z != ZoneType.Battlefield && z != ZoneType.Graveyard && z != ZoneType.Exile) {
+                // Library, Sideboard (outside the game), Hand, Stack, Command: not judged, a tutor or wish is never idle
+                return Verdict.USEFUL;
+            }
         }
         final CardCollection cards = new CardCollection();
         for (final ZoneType z : origin) {

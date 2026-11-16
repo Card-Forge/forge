@@ -451,4 +451,17 @@ public class LegalityGuardTest extends FlatMcTestBase {
         AssertJUnit.assertNull("8 damage on a 4 toughness angel is fine", LegalityGuard.wastedBurn(ai, sa, angel));
         AssertJUnit.assertNull("the face is not judged", LegalityGuard.wastedBurn(ai, sa, opp));
     }
+
+    @Test
+    public void aWishIsNotJudgedIdleBecauseTheSideboardIsEmpty() {
+        final Card wish = put("Cunning Wish", ai, ZoneType.Hand);
+        AssertJUnit.assertNull("outside the game is not readable, so a wish is never idle",
+                ActivationGuard.spellProblem(ai, cast(wish)));
+    }
+
+    @Test
+    public void aTutorIsNotJudgedIdle() {
+        final Card tutor = put("Demonic Tutor", ai, ZoneType.Hand);
+        AssertJUnit.assertNull(ActivationGuard.spellProblem(ai, cast(tutor)));
+    }
 }
