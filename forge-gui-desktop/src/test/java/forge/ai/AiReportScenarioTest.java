@@ -691,7 +691,7 @@ public class AiReportScenarioTest extends AITest {
                         if (sa.getApi() == forge.game.ability.ApiType.Animate) { sa.setActivatingPlayer(c.ai); c.resolve(sa); break; }
                     }
                 }));
-        l.add(play("animate-attack", "Mutavault against an empty board: animate it and attack", Fid.APPROX, "MAIN1", true,
+        l.add(play("animate-attack", "Mutavault against an empty board: animate it and attack (at the start of combat, where the AI animates)", Fid.APPROX, "COMBAT_BEGIN", true,
                 "Mutavault", c -> { c.bf("Mountain", 2, c.ai); c.bf("Mutavault", c.ai); }));
         l.add(noPlay("destroy-no-tapped-creature", "Royal Assassin with only untapped creatures to aim at", Fid.APPROX, M1, true,
                 "Royal Assassin", c -> { c.bf("Swamp", c.ai); c.bf("Royal Assassin", c.ai); c.bf("Hill Giant", c.opp); }));
