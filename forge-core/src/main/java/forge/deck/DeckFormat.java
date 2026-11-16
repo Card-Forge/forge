@@ -755,7 +755,7 @@ public enum DeckFormat {
         });
     }
 
-    /** True only if every card comes from a Commander Draft set, since cubes and Full drafts mix in printings from those sets. */
+    /** True only if every non-basic card comes from a Commander Draft set, since cubes and Full drafts mix in printings from those sets. */
     public static boolean isCommanderDraft(Collection<PaperCard> drafted) {
         return getCommanderDraftOptions(drafted).anyMatch(Objects::nonNull)
                 && getCommanderDraftOptions(drafted).allMatch(Objects::nonNull);

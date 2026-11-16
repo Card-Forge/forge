@@ -146,9 +146,8 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
      * @return the partner card if one was found and selected, {@code null} otherwise
      */
     private PaperCard tryPickPartner(final DraftPack pack) {
-        final boolean impliedPartnership = hasImpliedPartnership(pack);
         final List<PaperCard> candidates = pack.stream()
-                .filter(c -> c.getRules().canBePartnerCommanders(commander.getRules(), impliedPartnership))
+                .filter(c -> c.getRules().canBePartnerCommanders(commander.getRules()))
                 .collect(Collectors.toList());
 
         if (candidates.isEmpty()) {
@@ -236,13 +235,6 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             }
         }
         return null;
-    }
-
-    private boolean hasImpliedPartnership(final DraftPack pack) {
-        // The pack shows its set's rules before any card from that set is drafted
-        final List<PaperCard> seen = new ArrayList<>(pack);
-        seen.addAll(deck.getOrCreate(DeckSection.Sideboard).toFlatList());
-        return DeckFormat.hasImpliedPartnership(seen);
     }
 
     /** @return the drafted commander card, or {@code null} if not yet chosen. */
