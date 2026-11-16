@@ -29,6 +29,7 @@ import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
@@ -51,7 +52,7 @@ import java.util.Map;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode, String message, java.util.Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return MayDecisions.gainControl(player, sa);
     }
 

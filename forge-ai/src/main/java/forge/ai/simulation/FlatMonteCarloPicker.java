@@ -1,12 +1,6 @@
 package forge.ai.simulation;
 
-import forge.ai.AiAttackController;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
+import forge.ai.*;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -23,7 +17,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.ai.ComputerUtilCard;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
@@ -2200,7 +2193,7 @@ public final class FlatMonteCarloPicker {
             }
             try {
                 sa.setActivatingPlayer(player);
-                if (sa.checkRestrictions(player) && sa.canPlay() && forge.ai.ComputerUtilCost.canPayCost(sa, player, false)) {
+                if (sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)) {
                     return sa;
                 }
             } catch (final RuntimeException e) {
