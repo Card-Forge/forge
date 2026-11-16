@@ -1303,6 +1303,11 @@ public class AiController {
 
     public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() > min) {
+            // the High Tide loop keeps its Stroke of Genius, High Tide, untap spells and counterspells
+            final CardCollection tideSafe = forge.ai.simulation.LoopRunner.withoutTideKeys(player, validCards);
+            if (tideSafe.size() >= min && tideSafe.size() < validCards.size()) {
+                return chooseCardsToDiscard(min, max, tideSafe, sa);
+            }
             final ComboPlan combos = deckPlan(player).combos;
             // a deck that wants creatures in the graveyard throws away the right ones
             final CardCollection forCombo = combos.preferredDiscards(player, validCards, min);
