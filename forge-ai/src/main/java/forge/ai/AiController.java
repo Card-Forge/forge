@@ -1080,6 +1080,9 @@ public class AiController {
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
+        if (ComputerUtil.cannotPayPact(player, sa)) {
+            return AiPlayDecision.CantAfford; // the pact would cost the game at the next upkeep
+        }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }

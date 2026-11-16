@@ -626,6 +626,46 @@ public class AiReportScenarioTest extends AITest {
                     return SpellApiToAi.Converter.get(playSa).doTriggerNoCostWithSubs(c.ai, playSa, false).willingToPlay() ? null
                             : "the AI would not cast the suspended Rift Bolt at Shalai";
                 }));
+        // keyword abilities that aim at a creature (Arnjlot's Ascent) follow the same timing, and shields only for a creature in the fight
+        l.add(aimed("kw-targeted-flying-block", "Wind Drake attacks: flying for the blocker, in the declare attackers step", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                "Arnjlot's Ascent", "Grizzly Bears", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-too-late", "the same, once the blockers are declared", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(aimed("kw-targeted-flying-attack", "Hill Giant attacks into a Craw Wurm: flying for the attacker, before the blockers", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", "Hill Giant", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card giant = c.bf("Hill Giant", c.ai); c.bf("Craw Wurm", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(giant, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-no-bad-block", "Craw Wurm attacks into a Hill Giant: nobody would block it badly, flying is a waste", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card wurm = c.bf("Craw Wurm", c.ai); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(wurm, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("regenerate-not-in-fight", "Drudge Skeletons is not in the fight: no regeneration shield for nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Skeletons", c -> {
+                    c.bf("Swamp", c.ai); c.bf("Drudge Skeletons", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // pacts: free now, {3}{U}{U} at the next upkeep or the game is lost: only when that can be paid
+        l.add(noPlay("pact-wrong-colors", "Pact of Negation with five Mountains: {3}{U}{U} could never be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Mountain", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(noPlay("pact-too-few-lands", "Pact of Negation with three Islands: five mana are needed at the upkeep", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 3, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(play("pact-payable", "Pact of Negation with five Islands against a Serra Angel: it can be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
         // Seal of Fire against Shalai, Voice of Plenty: the player is hexproof, the 2 damage cannot kill a 4-toughness flyer
         l.add(noPlay("seal-of-fire-shalai", "Seal of Fire aimed at Shalai that it cannot kill (the player at 2 life is hexproof)", Fid.APPROX, "END_OF_TURN", false,
                 "Seal of Fire", c -> { c.bf("Seal of Fire", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.opp.setLife(2, null); }));

@@ -3421,4 +3421,77 @@ public class ComputerUtil {
         }
         return result;
     }
+
+    /**
+     * What a pact (Pact of Negation, Slaughter Pact...) asks for at the beginning of its controller's next upkeep, or
+     * null for any other spell: the spell has a delayed "pay this or lose the game" clause, written as an SVar that
+     * loses the game for its owner unless they pay.
+     */
+    public static String pactCost(final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || sa.getHostCard() == null) {
+            return null;
+        }
+        for (final String svar : sa.getHostCard().getSVars().values()) {
+            if (svar.startsWith("DB$ LosesGame") && svar.contains("UnlessPayer$ You")) {
+                final int at = svar.indexOf("UnlessCost$ ");
+                if (at < 0) {
+                    continue;
+                }
+                String cost = svar.substring(at + "UnlessCost$ ".length());
+                final int end = cost.indexOf(" |");
+                return (end >= 0 ? cost.substring(0, end) : cost).trim();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * A pact that the AI could not pay for at its next upkeep (it loses the game then): the mana sources it has (they
+     * untap before the upkeep, a land played later is too late) cannot make the cost, together with the pacts it has
+     * already cast this turn. Checks the total and each colour, which "five lands" (NumLands GE5) does not: five Mountains
+     * cannot pay {3}{U}{U}.
+     */
+    public static boolean cannotPayPact(final Player ai, final SpellAbility sa) {
+        final String cost = pactCost(sa);
+        if (cost == null) {
+            return false;
+        }
+        final List<String> owed = new ArrayList<>();
+        owed.add(cost);
+        for (final SpellAbility cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            if (cast != sa && ai.equals(cast.getActivatingPlayer()) && pactCost(cast) != null) {
+                owed.add(pactCost(cast));
+            }
+        }
+        int total = 0;
+        final Map<String, Integer> colors = new HashMap<>();
+        for (final String c : owed) {
+            for (final String symbol : c.split(" ")) {
+                if (symbol.matches("\\d+")) {
+                    total += Integer.parseInt(symbol);
+                } else if (!symbol.isEmpty()) {
+                    total++;
+                    colors.merge(symbol, 1, Integer::sum);
+                }
+            }
+        }
+        if (ComputerUtilMana.getAvailableManaEstimate(ai, false) < total) {
+            return true;
+        }
+        for (final Map.Entry<String, Integer> need : colors.entrySet()) {
+            int sources = 0;
+            for (final Card src : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (final SpellAbility ma : src.getManaAbilities()) {
+                    if (ma.canProduce(need.getKey())) {
+                        sources++;
+                        break;
+                    }
+                }
+            }
+            if (sources < need.getValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
