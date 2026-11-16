@@ -479,4 +479,22 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         final AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(twin.getFirstSpellAbility());
         AssertJUnit.assertNotSame("nothing worth copying: Splinter Twin stays in hand", AiPlayDecision.WillPlay, decision);
     }
+
+    @Test(timeOut = 120000)
+    public void aSecondMindOverMatterOrCandelabraIsRedundant() {
+        tideDeckWith(8, "High Tide", "Mind Over Matter", "Candelabra of Tawnos");
+        addCardToZone("Mind Over Matter", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("duplicate-engine", LoopRunner.redundantEngine(ai, spellOf("Mind Over Matter")));
+        AssertJUnit.assertNull("Candelabra is not in play yet", LoopRunner.redundantEngine(ai, spellOf("Candelabra of Tawnos")));
+        addCardToZone("Candelabra of Tawnos", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("duplicate-engine", LoopRunner.redundantEngine(ai, spellOf("Candelabra of Tawnos")));
+    }
+
+    @Test(timeOut = 120000)
+    public void theSetupPutsCandelabraInPlayWhenTheTurnCannotWinYet() {
+        tideDeckWith(3, "High Tide", "Candelabra of Tawnos", "Stroke of Genius", "Turnabout");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("three Islands cannot win, so the setup casts the engine", step);
+        AssertJUnit.assertEquals("Candelabra of Tawnos", step.getHostCard().getName());
+    }
 }

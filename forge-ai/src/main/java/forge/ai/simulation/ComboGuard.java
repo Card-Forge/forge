@@ -109,6 +109,10 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        final String duplicate = LoopRunner.redundantEngine(ai, sa);
+        if (duplicate != null) {
+            return duplicate; // a second Mind Over Matter or Candelabra of Tawnos
+        }
         // A second working copy of a legendary permanent is wasted even when it is cast directly (not reanimated).
         // Respect cards with an explicit AI legendary exception; Mirror Gallery is handled by duplicatesWorkingLegend.
         if (sa.isSpell() && host.isPermanent() && !host.ignoreLegendRule() && !host.hasSVar("AILegendaryException")

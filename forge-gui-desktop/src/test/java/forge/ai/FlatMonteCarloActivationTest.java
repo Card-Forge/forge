@@ -389,4 +389,19 @@ public class FlatMonteCarloActivationTest extends AITest {
         addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield);
         AssertJUnit.assertNull("a creature that can gain it", ActivationGuard.problem(ai, ascent));
     }
+
+    /** Kiki-Jiki, Mirror Breaker: no more copies when the hasty ones in play are lethal or as many as a turn needs. */
+    @Test
+    public void aCopyLoopStopsWhenTheCopiesAreEnough() {
+        setUp();
+        final SpellAbility kiki = ability(addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield));
+        addCardToZone("Goblin Piker", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("no copies yet", ActivationGuard.enoughCopies(ai, kiki));
+        for (int i = 0; i < ActivationGuard.MAX_COPIES; i++) {
+            final Card token = addCardToZone("Goblin Piker", ai, ZoneType.Battlefield);
+            token.setGamePieceType(forge.card.GamePieceType.TOKEN);
+            token.addIntrinsicKeywords(java.util.Collections.singletonList("Haste"));
+        }
+        AssertJUnit.assertTrue("as many hasty copies as a turn needs", ActivationGuard.enoughCopies(ai, kiki));
+    }
 }

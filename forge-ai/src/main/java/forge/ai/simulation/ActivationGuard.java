@@ -85,6 +85,9 @@ public final class ActivationGuard {
         if (poorSacrifice(ai, sa)) {
             return "poor-sacrifice";
         }
+        if (enoughCopies(ai, sa)) {
+            return "enough-copies";
+        }
         if (declinedByAristocratLogic(ai, sa)) {
             return "aristocrat-declines";
         }
@@ -219,6 +222,33 @@ public final class ActivationGuard {
      * own cost payment would choose; it is fine to give up when it is fodder (a token, a creature marked SacMe, a weak
      * one), when it is about to die anyway, or when what the ability gives is worth at least as much as the creature.
      */
+    /** The most hasty copies a turn needs: a copy loop (Splinter Twin, Kiki-Jiki) stops here whatever the life total. */
+    public static final int MAX_COPIES = 40;
+
+    /**
+     * A "tap: create a hasty copy that goes away at the end of turn" ability (Splinter Twin, Kiki-Jiki) is used for as
+     * long as it makes something: the copy's enters trigger is worth it, or another attacker. It stops when the copies
+     * already in play are lethal (their power covers the life of the weakest opponent) or there are as many as a
+     * turn needs ({@link #MAX_COPIES}); more is the loop going round for nothing.
+     */
+    public static boolean enoughCopies(final Player ai, final SpellAbility sa) {
+        final SpellAbility root = sa == null ? null : sa.getRootAbility();
+        if (root == null || root.getApi() != ApiType.CopyPermanent || !root.hasParam("AtEOT")
+                || !root.getParamOrDefault("AddKeywords", "").contains("Haste")) {
+            return false;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        int copies = 0;
+        int power = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isToken() && c.isCreature() && c.hasKeyword(Keyword.HASTE) && !c.isTapped()) {
+                copies++;
+                power += Math.max(0, c.getNetPower());
+            }
+        }
+        return copies >= MAX_COPIES || opp != null && copies > 0 && power >= opp.getLife() + 3;
+    }
+
     static boolean poorSacrifice(final Player ai, final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final Card host = sa.getHostCard();

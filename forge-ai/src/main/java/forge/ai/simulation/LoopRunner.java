@@ -87,7 +87,11 @@ public final class LoopRunner {
         if (deck != null) {
             return deck;
         }
-        return tideRefill(ai, candidates, approve);
+        final SpellAbility refill = tideRefill(ai, candidates, approve);
+        if (refill != null) {
+            return refill;
+        }
+        return tideSetup(ai, candidates, approve);
     }
 
     private static Card inPlay(final Player ai, final String name) {
@@ -432,7 +436,7 @@ public final class LoopRunner {
     private static boolean isTideKey(final Player ai, final Card c) {
         final String n = c.getName();
         return drawsX(n) || n.equals(BRAIN_FREEZE) || n.equals(HIGH_TIDE) || n.equals(TURNABOUT)
-                || n.equals(MIND_OVER_MATTER) || n.equals(CANDELABRA) || isCounter(c);
+                || n.equals(MIND_OVER_MATTER) || n.equals(CANDELABRA) || n.equals("Time Spiral") || isCounter(c);
     }
 
     /**
@@ -645,6 +649,17 @@ public final class LoopRunner {
         if (other != null) {
             return other;
         }
+        return engineStep(ai, candidates, approve, pool);
+    }
+
+    /**
+     * What untaps the lands, in the order that makes the most mana: Turnabout (all the lands, every time they are
+     * tapped), Candelabra of Tawnos (X Islands for X mana, once, with the lands tapped again), Mind Over Matter (an
+     * Island for every card thrown away). Each is cast (once: never a second Mind Over Matter or Candelabra) when it
+     * is not in play and the mana is in the pool. Null when there is nothing left to untap with.
+     */
+    private static SpellAbility engineStep(final Player ai, final List<SpellAbility> candidates,
+                                           final Predicate<SpellAbility> approve, final int pool) {
         final SpellAbility turnabout = castFromHand(ai, candidates, TURNABOUT);
         if (turnabout != null && pool >= 4) {
             turnabout.setActivatingPlayer(ai);
@@ -737,34 +752,9 @@ public final class LoopRunner {
                 && TidePlan.isTideDeck(ai);
     }
 
-    /** The mana the hand makes with its High Tides and Turnabouts, to pay for Time Spiral (six) and keep some over. */
+    /** The mana the hand makes (High Tides, Turnabouts, Candelabra, Mind Over Matter), to pay for Time Spiral (six) and keep some over. */
     private static int refillMana(final Player ai) {
-        int islands = 0;
-        int others = 0;
-        int untappedIslands = 0;
-        int untappedOthers = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (!c.isLand()) {
-                continue;
-            }
-            final boolean island = c.getType().hasSubtype("Island");
-            islands += island ? 1 : 0;
-            others += island ? 0 : 1;
-            if (!c.isTapped()) {
-                untappedIslands += island ? 1 : 0;
-                untappedOthers += island ? 0 : 1;
-            }
-        }
-        final int copies = count(ai, HIGH_TIDE);
-        final int mult = 1 + tideCount(ai) + copies;
-        int mana = ai.getManaPool().totalMana() + mult * untappedIslands + untappedOthers - 2 * copies;
-        final int all = mult * islands + others;
-        for (int i = 0; i < count(ai, TURNABOUT); i++) {
-            if (mana >= 4) {
-                mana += all - 4;
-            }
-        }
-        return mana;
+        return projectedTideMana(ai);
     }
 
     /** Whether the High Tide turn without a finisher in hand is worth starting: Time Spiral is paid for, or the copy shows a win. */
@@ -810,25 +800,70 @@ public final class LoopRunner {
             }
         }
         final int pool = ai.getManaPool().totalMana();
-        final SpellAbility turnabout = castFromHand(ai, candidates, TURNABOUT);
-        if (turnabout != null && pool >= 4) {
-            turnabout.setActivatingPlayer(ai);
-            for (SpellAbility node = turnabout; node != null; node = node.getSubAbility()) {
-                if (node.usesTargeting()) {
-                    node.resetTargets();
-                    if (!node.canTarget(ai)) {
-                        return null;
-                    }
-                    node.getTargets().add(ai);
-                }
-            }
-            return approve.test(turnabout) ? turnabout : null;
+        final SpellAbility engine = engineStep(ai, candidates, approve, pool);
+        if (engine != null) {
+            return engine;
         }
-        if (turnabout == null && pool >= 6) {
+        if (pool >= 6) {
             final SpellAbility spiral = castFromHand(ai, candidates, TIME_SPIRAL);
             if (spiral != null) {
                 spiral.setActivatingPlayer(ai);
                 return approve.test(spiral) ? spiral : null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * A second Mind Over Matter or Candelabra of Tawnos is wasted mana: one of them does everything that two would (they
+     * untap lands, and each can do it for as long as the mana and cards last). Returns the reason, or null.
+     */
+    public static String redundantEngine(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (ai == null || host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand)) {
+            return null;
+        }
+        final String n = host.getName();
+        if ((n.equals(MIND_OVER_MATTER) || n.equals(CANDELABRA)) && inPlay(ai, n) != null) {
+            return "duplicate-engine";
+        }
+        return null;
+    }
+
+    /**
+     * A High Tide turn that cannot win yet puts its permanents in play for the turn that can: Candelabra of Tawnos for
+     * a mana, Mind Over Matter when six mana are left over (one of each, see {@link #redundantEngine}). They are what
+     * turns High Tide into an untap loop next turn, and the mana would not be used otherwise.
+     */
+    private static SpellAbility tideSetup(final Player ai, final List<SpellAbility> candidates,
+                                          final Predicate<SpellAbility> approve) {
+        if (tideActive(ai) || !TidePlan.isTideDeck(ai) || TideSolver.running()) {
+            return null;
+        }
+        boolean tide = inHand(ai, HIGH_TIDE);
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            tide |= c.getName().equals(HIGH_TIDE);
+        }
+        if (!tide) {
+            return null;
+        }
+        int untapped = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.isTapped()) {
+                untapped++;
+            }
+        }
+        for (final String name : new String[] { CANDELABRA, MIND_OVER_MATTER }) {
+            final int needed = name.equals(CANDELABRA) ? 1 : 8; // six for Mind Over Matter and a margin
+            if (untapped >= needed && inPlay(ai, name) == null) {
+                final SpellAbility cast = castFromHand(ai, candidates, name);
+                if (cast != null) {
+                    cast.setActivatingPlayer(ai);
+                    cast.resetTargets();
+                    if (approve.test(cast)) {
+                        return cast;
+                    }
+                }
             }
         }
         return null;
