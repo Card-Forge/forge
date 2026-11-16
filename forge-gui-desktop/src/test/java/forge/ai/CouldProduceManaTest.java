@@ -33,6 +33,21 @@ public class CouldProduceManaTest extends AITest {
     }
 
     @Test
+    public void reflectedManaFollowsAnotherReflectingLand() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        Card mine = addCard("Exotic Orchard", ai);
+        addCard("Forest", ai);
+        Card theirs = addCard("Exotic Orchard", opponent);
+
+        // The rule's own example: the opposing Orchard reflects the Forest, and this Orchard reflects the opposing one
+        AssertJUnit.assertEquals(Set.of("green"), CardUtil.getReflectableManaColors(mine.getManaAbilities().get(0)));
+        AssertJUnit.assertEquals(Set.of("green"), CardUtil.getReflectableManaColors(theirs.getManaAbilities().get(0)));
+    }
+
+    @Test
     public void everyOrderOfReplacementEffectsCounts() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
