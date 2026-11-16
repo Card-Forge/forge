@@ -1,0 +1,22 @@
+Name:Unclaimed Bird
+ManaCost:3 U
+Types:Creature Bird
+PT:3/4
+K:Flying
+K:MayEffectFromOpeningDeck:ChooseTeam
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$ When CARDNAME enters the battlefield, if you're on the Mirran team, choose any number of permanents, then remove from each a counter of each kind already there. If you're on the Phyrexian team, proliferate.
+SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
+SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamMirran | AddTrigger$ MirranTrigger
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamPhyrexian | AddTrigger$ PhyrexianTrigger
+SVar:MirranTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseMirran | TriggerDescription$ When CARDNAME enters the battlefield, choose any number of permanents, then remove from each a counter of each kind already there.
+SVar:ChooseMirran:DB$ ChooseCard | Choices$ Permanent.HasCounters | Mandatory$ True | MinAmount$ 0 | Amount$ X | ChoiceTitle$ choose any number of permanents | SubAbility$ CountersMirran
+SVar:CountersMirran:DB$ RemoveCounter | Defined$ ChosenCard | CounterType$ ExistingCounter
+SVar:X:Count$Valid Permanent.HasCounters
+SVar:PhyrexianTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ CountersPhyrexian | TriggerDescription$ When CARDNAME enters the battlefield, proliferate.
+SVar:CountersPhyrexian:DB$ Proliferate
+SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
+SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
+SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
+AI:RemoveDeck:All
+Oracle:Flying\nWhen Unclaimed Bird enters the battlefield, if you're on the Mirran team, choose any number of permanents, then remove from each a counter of each kind already there. If you're on the Phyrexian team, proliferate.

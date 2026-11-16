@@ -83,7 +83,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         CounterType counterType = null;
 
-        if (!type.equals("Any") && !type.equals("All")) {
+        if (!type.equals("Any") && !type.equals("All") && !type.equals("ExistingCounter")) {
             try {
                 counterType = CounterType.getType(type);
             } catch (Exception e) {
@@ -176,6 +176,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 game.updateLastStateForCard(gameCard);
             } else if (type.equals("Any")) {
                 totalRemoved += removeAnyType(gameCard, cntToRemove, sa);
+            } else if (type.equals("ExistingCounter")) {
+                for (Multiset.Entry<CounterType> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
+                    totalRemoved += gameCard.subtractCounter(e.getElement(), cntToRemove, activator);
+                }
+                game.updateLastStateForCard(gameCard);
             } else {
                 if (!gameCard.canRemoveCounters(counterType)) {
                     continue;

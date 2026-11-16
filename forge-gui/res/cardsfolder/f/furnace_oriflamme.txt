@@ -1,0 +1,16 @@
+Name:Furnace Oriflamme
+ManaCost:2 R
+Types:Enchantment
+K:MayEffectFromOpeningDeck:ChooseTeam
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$ If you’re on the Mirran team, creatures you control have haste.\nIf you’re on the Phyrexian team, creatures you control have trample.
+SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
+SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamMirran | AddStaticAbility$ MirranMode
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamPhyrexian | AddStaticAbility$ PhyrexianMode
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
+SVar:MirranMode:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste
+SVar:PhyrexianMode:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
+SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
+SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
+SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
+Oracle:Creatures you control get +1/+0.\nIf you’re on the Mirran team, creatures you control have haste.\nIf you’re on the Phyrexian team, creatures you control have trample.

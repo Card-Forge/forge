@@ -1,0 +1,8 @@
+Name:Point to the Scoreboard
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target tapped creature an opponent controls to its owner's hand. Scry 1. Score one point for your team.\nExile CARDNAME.
+SVar:DBScry:DB$ Scry | SubAbility$ DBScore
+SVar:DBScore:DB$ Pump | Defined$ You | NoteNumber$ 1 | ScoreForTeam$ YourTeam | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Return target tapped creature an opponent controls to its owner's hand. Scry 1. Score one point for your team.\nExile Point to the Scoreboard.
