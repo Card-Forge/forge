@@ -23,6 +23,7 @@
 
   - [Modding & content creation](Adventure/Modding.md)
     - [Create Enemies](Adventure/Create-Enemies.md)
+    - [Create Creature Sprites](Adventure/Create-New-Creature-Sprites.md)
     - [Create Rewards](Adventure/Create-Rewards.md)
     - [Create Maps](Adventure/Create-new-Maps.md)
     - [Configure Planes](Adventure/Configure-Planes.md)
