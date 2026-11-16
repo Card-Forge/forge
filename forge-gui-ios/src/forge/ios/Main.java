@@ -293,11 +293,15 @@ public class Main extends IOSApplication.Delegate {
     private static final class IOSClipboard implements com.badlogic.gdx.utils.Clipboard {
         @Override
         public boolean hasContents() {
-            return UIPasteboard.getGeneralPasteboard().toString().length() > 0;
+            // hasStrings() checks without reading, so it never triggers the "Allow Paste" prompt
+            // (the old toString() check measured the object description and was always true)
+            return UIPasteboard.getGeneralPasteboard().hasStrings();
         }
 
         @Override
         public String getContents() {
+            // May block while iOS shows its "Allow Paste" prompt, so Forge.readClipboard calls
+            // this from a background thread on iOS; the main thread must stay free.
             return UIPasteboard.getGeneralPasteboard().getString();
         }
 
