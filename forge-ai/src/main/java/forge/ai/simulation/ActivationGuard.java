@@ -591,15 +591,22 @@ public final class ActivationGuard {
             return Verdict.USEFUL; // a hidden search or a wish: the cards are not readable from the game state
         }
         final List<ZoneType> origin = ZoneType.listValueOf(node.getParam("Origin"));
+        // the AI's own hand is readable (Sorin, Imperious Bloodlord's -3 with no Vampire in it does nothing), unless the
+        // ability names another player's hand or lets someone else choose
+        final boolean ownHandOnly = !node.hasParam("DefinedPlayer") && !node.hasParam("Chooser") && !node.hasParam("Defined")
+                && !node.hasParam("ChoiceZone") && !node.hasParam("GainControl");
         for (final ZoneType z : origin) {
+            if (z == ZoneType.Hand && ownHandOnly) {
+                continue;
+            }
             if (z != ZoneType.Battlefield && z != ZoneType.Graveyard && z != ZoneType.Exile) {
-                // Library, Sideboard (outside the game), Hand, Stack, Command: not judged, a tutor or wish is never idle
+                // Library, Sideboard (outside the game), another hand, Stack, Command: not judged, a tutor or wish is never idle
                 return Verdict.USEFUL;
             }
         }
         final CardCollection cards = new CardCollection();
         for (final ZoneType z : origin) {
-            cards.addAll(ai.getGame().getCardsIn(z));
+            cards.addAll(z == ZoneType.Hand ? ai.getCardsIn(ZoneType.Hand) : ai.getGame().getCardsIn(z));
         }
         return CardLists.getValidCards(cards, node.getParam("ChangeType"), ai, host, node).isEmpty()
                 ? Verdict.IDLE_CHOICE : Verdict.USEFUL;
