@@ -290,6 +290,9 @@ public class ControlGainAi extends SpellAbilityAi {
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
+            if ("DonateJunk".equals(sa.getParam("AILogic"))) {
+                return PlaceholderTargetAi.donate(ai, sa);
+            }
             if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);

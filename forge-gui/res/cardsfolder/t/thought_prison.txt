@@ -6,7 +6,7 @@ SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeT
 T:Mode$ SpellCast | ValidCard$ Card.SharesCMCWith Imprinted.ExiledWithSource,Card.SharesColorWith Imprinted.ExiledWithSource | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or mana value with the exiled card, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredActivator
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:DBForget:DB$ Bookkeeping | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All

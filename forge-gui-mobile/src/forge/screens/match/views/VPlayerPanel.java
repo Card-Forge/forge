@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -689,6 +690,12 @@ public class VPlayerPanel extends FContainer {
 
     public VAvatar getAvatar() {
         return avatar;
+    }
+
+    /** The endpoint faces into the battlefield, away from this panel's life and zone text. */
+    public Vector2 getTargetingArrowOrigin() {
+        if (!isVisible()) { return null; }
+        return avatar.getTargetingArrowOrigin(isCompactRight());
     }
 
     public void updateLife() {

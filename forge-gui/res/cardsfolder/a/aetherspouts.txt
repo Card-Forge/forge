@@ -1,7 +1,7 @@
 Name:Aetherspouts
 ManaCost:3 U U
 Types:Instant
-A:SP$ Pump | ImprintCards$ Valid Creature.attacking | StackDescription$ None | SubAbility$ DBRepeatPlayer
+A:SP$ Bookkeeping | ImprintCards$ Valid Creature.attacking | StackDescription$ None | SubAbility$ DBRepeatPlayer
 SVar:DBRepeatPlayer:DB$ RepeatEach | RepeatPlayers$ ImprintedOwner | RepeatSubAbility$ DBRepeatCard | SubAbility$ DBCleanup | SpellDescription$ For each attacking creature, its owner puts it on the top or bottom of their library.
 SVar:DBRepeatCard:DB$ RepeatEach | RepeatCards$ Card.IsImprinted+RememberedPlayerOwn | ChooseOrder$ RememberedPlayer | RepeatSubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Defined$ RememberedOwner | ShowCurrentCard$ Remembered | Choices$ DBTop,DBBottom

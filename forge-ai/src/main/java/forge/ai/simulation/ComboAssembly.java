@@ -34,7 +34,11 @@ public final class ComboAssembly {
     static final Set<String> COVERED = new HashSet<>(Arrays.asList(
             "Channel", "Time Vault", "Thassa's Oracle", "Doomsday", "Demonic Consultation", "Hermit Druid", "Tinker",
             "Ad Nauseam", "Tendrils", "Yawgmoth's Will", "Illusions of Grandeur", "Painter's Servant", "Hive Mind",
-            "Dark Depths"));
+            "Dark Depths",
+            // an instant is the other half: Faith's Reward only brings back what died this turn, Early Harvest only
+            // untaps lands Heartbeat of Spring doubles; cast from the hand in the main phase either is a wasted card,
+            // so the rollouts (which see the turn through) are left to time them
+            "Time Sieve", "Heartbeat of Spring"));
 
     private ComboAssembly() {
     }
