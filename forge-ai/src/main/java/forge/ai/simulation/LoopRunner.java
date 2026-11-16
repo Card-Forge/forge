@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.List;
 import java.util.function.Predicate;
 
+import forge.ai.ComputerUtilCost;
 import forge.ai.RunawayLoop;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -191,7 +192,7 @@ public final class LoopRunner {
         if (ai.getManaPool().totalMana() >= manaNeeded(opp)) {
             cast.setActivatingPlayer(ai);
             cast.resetTargets();
-            if (forge.ai.ComputerUtilCost.setMaxXValue(cast, ai, false) >= 1 && approve.test(cast)) {
+            if (ComputerUtilCost.setMaxXValue(cast, ai, false) >= 1 && approve.test(cast)) {
                 return cast;
             }
             return null;
@@ -309,7 +310,7 @@ public final class LoopRunner {
             stroke.setActivatingPlayer(ai);
             stroke.resetTargets();
             stroke.getTargets().add(opp);
-            if (forge.ai.ComputerUtilCost.setMaxXValue(stroke, ai, false) >= library && approve.test(stroke)) {
+            if (ComputerUtilCost.setMaxXValue(stroke, ai, false) >= library && approve.test(stroke)) {
                 return stroke;
             }
         }

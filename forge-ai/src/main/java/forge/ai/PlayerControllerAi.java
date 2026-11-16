@@ -351,7 +351,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message) {
-        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, false, min == 0);
+        final CardCollectionView sacrificed = ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, false, min == 0);
+        if (sacrificed != null && min == 0 && max > 1 && forge.ai.ability.SacrificeWorth.applies(sa)) {
+            return forge.ai.ability.MayDecisions.limitSacrifices(player, sa, sacrificed); // "any number": not all of them
+        }
+        return sacrificed;
     }
 
     @Override

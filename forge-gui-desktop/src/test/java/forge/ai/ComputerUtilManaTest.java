@@ -1,11 +1,13 @@
 package forge.ai;
 
+import com.google.common.collect.Lists;
 import forge.ai.simulation.SimulationTest;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CounterEnumType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -20,12 +22,14 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
  * Auto payment should not tap every untapped source of one colour when the same cost can be paid
  * while leaving at least one source of each colour untapped. The number of sources used never changes.
  * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
+ * A source that removes X counters to make mana removes only as many as the other sources leave unpaid.
  */
 public class ComputerUtilManaTest extends SimulationTest {
 
@@ -144,6 +148,13 @@ public class ComputerUtilManaTest extends SimulationTest {
         return ComputerUtilMana.canPayManaCost(sa, p, 0, false);
     }
 
+    private void payForReal(final Player p, final String manaCost) {
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(manaCost)));
+        assertTrue(ComputerUtilMana.payManaCost(cost, sa, p, false) && cost.isPaid());
+    }
+
     @Test
     public void sacrificeSourceIsUsedOncePerFodder() {
         // Phyrexian Altar with three tokens pays for a three-drop on its own, but not for a four-drop
@@ -218,5 +229,140 @@ public class ComputerUtilManaTest extends SimulationTest {
             assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
             assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
         }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void batteryRemovesOnlyTheCountersItNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "2 U U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 2, "its first {U} needs no counter");
+    }
+
+    @Test
+    public void batteryKeepsItsCountersWhenLandsCanPay() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Swamp", 3, p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "3 U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 5);
+    }
+
+    @Test
+    public void batteryAddsCountersForWhatTheLandsCannotPay() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Swamp", p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "3 U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 3);
+        assertTrue(AiCardMemory.getMemorySet(p, AiCardMemory.MemorySetMana.UNPAID_COSTS).isEmpty(),
+                "trials with too few counters are not unpaid costs");
+    }
+
+    @Test
+    public void testPaymentCountsBatteryCounters() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Island", p);
+        addCard("Blue Mana Battery", p).setCounters(CounterEnumType.CHARGE, 3);
+        assertTrue(canPay(p, "Air Elemental"), "{3}{U}{U}: the Island and the Battery's free {U} pay two, its counters the rest");
+    }
+
+    @Test
+    public void twoCounterSourcesRemoveOnlyWhatTheCostNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Wastes", 2, p);
+        final Card battery = addCard("Black Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+        final Card silos = addCard("Sand Silos", p);
+        silos.setCounters(CounterEnumType.STORAGE, 5);
+
+        payForReal(p, "2 U U B");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 5, "Silos makes {U}{U}, the Battery its free {B}, the Wastes {2}");
+        assertEquals(silos.getCounters(CounterEnumType.STORAGE), 3);
+    }
+
+    @Test
+    public void signetIsPaidByACounterSourceThatAlsoPaysAColor() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Azorius Signet", p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 3);
+
+        payForReal(p, "W W U U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 2);
+    }
+
+    @Test
+    public void haruspexDoesNotRemoveTheCountersKeepingItAlive() {
+        final Player p = sacrificeBoard(0, "Forest");
+        final Card haruspex = addCard("Haruspex", p); // 2/2
+        haruspex.setSickness(false);
+        haruspex.setCounters(CounterEnumType.P1P1, 2);
+        haruspex.setDamage(3);
+        assertFalse(canPay(p, "Grizzly Bears"));
+    }
+
+    @Test
+    public void haruspexWithUndyingMayRemoveItsLastCounters() {
+        final Player p = sacrificeBoard(0, "Forest");
+        final Card haruspex = addCard("Haruspex", p); // 2/2
+        haruspex.setSickness(false);
+        haruspex.setCounters(CounterEnumType.P1P1, 2);
+        haruspex.setDamage(3);
+        haruspex.addChangedCardKeywords(Lists.newArrayList("Undying"), null, false, p.getGame().getNextTimestamp(), null);
+        assertTrue(canPay(p, "Grizzly Bears"));
+    }
+
+    @Test
+    public void batteryPayingASignetsCostAddsNoCounterForItsOwnMana() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 3);
+        final SpellAbility signet = addCard("Azorius Signet", p).getManaAbilities().get(0);
+        signet.setActivatingPlayer(p);
+
+        // a mana ability's own cost is paid without caps on X
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(new ManaCost(new ManaCostParser("1")));
+        assertTrue(ComputerUtilMana.payManaCost(cost, signet, p, false) && cost.isPaid());
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 3);
+    }
+
+    @Test
+    public void testPaymentWithAStorageLandLeavesNoXBehind() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card vault = addCard("Bottomless Vault", p);
+        vault.setCounters(CounterEnumType.STORAGE, 4);
+
+        assertTrue(canPay(p, "Gravedigger")); // {3}{B}
+        assertNull(vault.getManaAbilities().get(0).getXManaCostPaid());
+    }
+
+    @Test
+    public void snowStorageLandStillMakesManaForASnowShard() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card vault = addCard("Bottomless Vault", p);
+        vault.addType("Snow");
+        vault.setCounters(CounterEnumType.STORAGE, 3);
+
+        payForReal(p, "S");
+        assertEquals(vault.getCounters(CounterEnumType.STORAGE), 2);
+    }
+
+    @Test
+    public void manaEstimateCountsRemovableCounters() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Blue Mana Battery", p).setCounters(CounterEnumType.CHARGE, 3);
+        addCard("Bottomless Vault", p).setCounters(CounterEnumType.STORAGE, 2);
+
+        // Plains 1, Battery {U} plus one per counter, Vault one per counter
+        assertEquals(ComputerUtilMana.getAvailableManaEstimate(p), 1 + 4 + 2);
     }
 }

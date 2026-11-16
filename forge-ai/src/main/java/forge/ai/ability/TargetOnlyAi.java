@@ -9,13 +9,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.ai.AiAbilityDecision;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.PlaceholderTargetAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -322,7 +316,7 @@ public class TargetOnlyAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
         CardLists.sortByPowerDesc(list);
         if (list.contains(source) && sa.getPayCosts() != null
-                && (sa.getPayCosts().hasTapCost() || forge.ai.ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts()))) {
+                && (sa.getPayCosts().hasTapCost() || ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts()))) {
             list.remove(source);
         }
         if (list.isEmpty()) {
