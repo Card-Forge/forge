@@ -10,6 +10,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 
 public class ChangeTargetsAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode, String message, java.util.Map<String, Object> params) {
+        return MayDecisions.changeTargets(player, sa);
+    }
+
 
     /*
      * (non-Javadoc)

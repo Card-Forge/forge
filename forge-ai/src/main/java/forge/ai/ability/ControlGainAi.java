@@ -51,6 +51,11 @@ import java.util.Map;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
+    public boolean confirmAction(Player player, SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode, String message, java.util.Map<String, Object> params) {
+        return MayDecisions.gainControl(player, sa);
+    }
+
+    @Override
     protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         final List<String> lose = Lists.newArrayList();
 

@@ -24,6 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CountersRemoveAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode, String message, java.util.Map<String, Object> params) {
+        return MayDecisions.removeCounter(player, sa);
+    }
+
 
     /*
      * (non-Javadoc)
