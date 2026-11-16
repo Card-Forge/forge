@@ -606,6 +606,8 @@ public class AiReportScenarioTest extends AITest {
                     c.game.getPhaseHandler().setCombat(combat);
                 }));
         // X spells: no Epiphany at the Drownyard for X=0 (it reveals one card), a random target stays random
+        l.add(noPlay("omarthis-elesh-norn", "Omarthis with four lands under Elesh Norn: X=2 dies as it enters (-2/-2)", Fid.APPROX, "MAIN1", true,
+                "Omarthis, Ghostfire Initiate", c -> { c.bf("Mountain", 4, c.ai); c.hand("Omarthis, Ghostfire Initiate", c.ai); c.bf("Elesh Norn, Grand Cenobite", c.opp); }));
         l.add(noPlay("epiphany-x0", "Epiphany at the Drownyard with a single Island (X=0)", Fid.APPROX, "END_OF_TURN", false,
                 "Epiphany at the Drownyard", c -> { c.bf("Island", c.ai); c.hand("Epiphany at the Drownyard", c.ai); c.bf("Grizzly Bears", c.opp); }));
         l.add(new Scenario("goblin-test-pilot", "Goblin Test Pilot's target is random: the AI does not aim it", Fid.APPROX, "MAIN1", true,

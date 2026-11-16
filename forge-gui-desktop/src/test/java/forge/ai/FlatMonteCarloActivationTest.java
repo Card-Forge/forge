@@ -434,4 +434,26 @@ public class FlatMonteCarloActivationTest extends AITest {
                 .doTriggerNoCostWithSubs(ai, trigger, false).willingToPlay());
         AssertJUnit.assertEquals("it untaps Kiki-Jiki", kiki, trigger.getTargets().getFirstTargetedCard());
     }
+
+    /** Removal into an untapped Mother of Runes or Giver of Runes is answered by the protection: kept in hand until it cannot be. */
+    @Test
+    public void removalIntoAProtectorIsHeldBack() {
+        setUp();
+        final Player opp = game.getPlayers().get(0);
+        final Card bears = addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        final Card mother = addCardToZone("Mother of Runes", opp, ZoneType.Battlefield);
+        final SpellAbility blade = addCardToZone("Doom Blade", ai, ZoneType.Hand).getFirstSpellAbility();
+        blade.setActivatingPlayer(ai);
+        mother.setSickness(true);
+        AssertJUnit.assertNotSame("a summoning sick Mother cannot tap yet", "protector-answers",
+                ComboGuard.problem(ai, blade, bears, ComboPlan.EMPTY));
+        mother.setSickness(false);
+        AssertJUnit.assertEquals("an untapped Mother answers it", "protector-answers",
+                ComboGuard.problem(ai, blade, bears, ComboPlan.EMPTY));
+        AssertJUnit.assertEquals("and protects itself", "protector-answers",
+                ComboGuard.problem(ai, blade, mother, ComboPlan.EMPTY));
+        mother.tap(true, null, null);
+        AssertJUnit.assertNotSame("a tapped Mother cannot", "protector-answers",
+                ComboGuard.problem(ai, blade, bears, ComboPlan.EMPTY));
+    }
 }

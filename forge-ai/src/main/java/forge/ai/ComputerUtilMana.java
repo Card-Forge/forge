@@ -1816,6 +1816,9 @@ public class ComputerUtilMana {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
                 ai.getCardsIn(ZoneType.Command));
         final List<Card> manaSources = CardLists.filter(list, c -> {
+            if (ComputerUtil.sacrificePunished(ai, c) && c.isInZone(ZoneType.Battlefield)) {
+                return false; // a Treasure that gives the AI poison counters when it is sacrificed (Bloodroot Apothecary)
+            }
             for (final SpellAbility am : getAIPlayableMana(c)) {
                 am.setActivatingPlayer(ai);
                 if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
