@@ -266,6 +266,14 @@ public class ComputerUtilManaTest extends SimulationTest {
     }
 
     @Test
+    public void testPaymentCountsBatteryCounters() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Island", p);
+        addCard("Blue Mana Battery", p).setCounters(CounterEnumType.CHARGE, 3);
+        assertTrue(canPay(p, "Air Elemental"), "{3}{U}{U}: the Island and the Battery's free {U} pay two, its counters the rest");
+    }
+
+    @Test
     public void twoCounterSourcesRemoveOnlyWhatTheCostNeeds() {
         final Player p = initAndCreateGame().getPlayers().get(1);
         addCards("Wastes", 2, p);
