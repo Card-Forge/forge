@@ -24,6 +24,8 @@ import forge.item.PaperCard;
 
 /**
  * Shared utility methods for Commander Draft deck-building.
+ *
+ * <p>Contains helper predicates used by both the desktop and mobile UIs.</p>
  */
 public final class CommanderDraftUtil {
 

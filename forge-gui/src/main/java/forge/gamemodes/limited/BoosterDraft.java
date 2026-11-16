@@ -377,6 +377,10 @@ public class BoosterDraft implements IBoosterDraft {
         return new LimitedPlayerAI(seatingOrder, this);
     }
 
+    /**
+     * Activate commander-draft mode and replace the AI players
+     * with {@link CommanderLimitedPlayerAI} instances.
+     */
     private void activateCommanderDraft() {
         this.isCommanderDraft = true;
         for (int i = 0; i < this.players.size(); i++) {
