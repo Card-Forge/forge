@@ -64,7 +64,7 @@ public class ReadDraftRankings {
     private Map<String, Map<String, Double>> readFile(List<String> lines, Map<String, Map<String, Double>> map) {
         record Entry(String edition, String name, int rank) {}
         final List<Entry> entries = new ArrayList<>();
-        int fileSize = 0;
+        final Map<String, Integer> maxRank = new HashMap<>();
         for (String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
@@ -82,16 +82,16 @@ public class ReadDraftRankings {
 
             try {
                 final int rank = Integer.parseInt(rankStr);
-                fileSize = Math.max(fileSize, rank);
+                maxRank.merge(edition, rank, Math::max);
                 entries.add(new Entry(edition, name, rank));
             } catch (NumberFormatException nfe) {
                 System.err.println("NumberFormatException: " + nfe.getMessage());
             }
         }
 
-        // Scale by this file's own length, so files sharing a set code don't rescale each other.
+        // Scale within this file only, so files sharing a set code don't rescale each other.
         for (Entry e : entries) {
-            map.computeIfAbsent(e.edition(), k -> new HashMap<>()).put(e.name(), e.rank() / (double) fileSize);
+            map.computeIfAbsent(e.edition(), k -> new HashMap<>()).put(e.name(), e.rank() / (double) maxRank.get(e.edition()));
         }
 
         return map;
