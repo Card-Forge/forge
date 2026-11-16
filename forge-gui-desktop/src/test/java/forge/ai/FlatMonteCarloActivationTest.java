@@ -404,4 +404,18 @@ public class FlatMonteCarloActivationTest extends AITest {
         }
         AssertJUnit.assertTrue("as many hasty copies as a turn needs", ActivationGuard.enoughCopies(ai, kiki));
     }
+
+    /** Pestermite's tap-or-untap goes to the tapped Kiki-Jiki (or the Splinter Twin creature) that copies it again. */
+    @Test
+    public void pestermiteUntapsTheCopyEngine() {
+        setUp();
+        final Card kiki = addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield);
+        kiki.tap(true, null, null);
+        final Card pestermite = addCardToZone("Pestermite", ai, ZoneType.Battlefield);
+        final SpellAbility trigger = pestermite.getTriggers().get(0).ensureAbility();
+        trigger.setActivatingPlayer(ai);
+        AssertJUnit.assertSame("the tapped engine", kiki, forge.ai.ability.TapOrUntapAi.untapEngine(ai, trigger));
+        kiki.untap();
+        AssertJUnit.assertNull("nothing tapped: no untap target", forge.ai.ability.TapOrUntapAi.untapEngine(ai, trigger));
+    }
 }
