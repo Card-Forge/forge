@@ -1054,8 +1054,8 @@ public class ComputerUtilMana {
     }
 
     private static boolean usesUpSource(final SpellAbility ma) {
-        return ma.getPayCosts().getCostParts().stream().anyMatch(part -> part.payCostFromSource()
-                && (part instanceof CostSacrifice || part instanceof CostExile || part instanceof CostReturn || part instanceof CostDiscard));
+        return ComputerUtilCost.isSacrificeSelfCost(ma.getPayCosts())
+                || ma.getPayCosts().getCostParts().stream().anyMatch(part -> part instanceof CostExile && part.payCostFromSource());
     }
 
     private static int producedColors(final SpellAbility ma) {
