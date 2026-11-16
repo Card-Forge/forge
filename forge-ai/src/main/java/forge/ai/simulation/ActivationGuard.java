@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
+import forge.game.keyword.Keyword;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
@@ -90,6 +91,45 @@ public final class ActivationGuard {
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
+        return idleChain(ai, sa);
+    }
+
+    /**
+     * An instant or sorcery that would do nothing when cast (Doom Blade with no creature to destroy, Wrath of God with
+     * an empty board): the heuristics refuse these, the rollouts' own discovery did not. Permanent spells, abilities
+     * and spells that need something that is not there yet (a counterspell: the stack) are left to their own checks.
+     *
+     * @return "no-valid-targets" or "nothing-to-affect", else null
+     */
+    public static String spellProblem(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || !sa.isSpell() || sa.getHostCard() == null || sa.getHostCard().isPermanent()
+                || sa.isCopied() || sa.getApi() == null || sa.getApi() == ApiType.Counter) {
+            return null;
+        }
+        final Card host = sa.getHostCard();
+        // a spell with a second use (Cascade, Storm, Rebound, Gravestorm) is worth casting for it: Violent Outburst with no creature
+        // to pump still cascades
+        if (host.hasKeyword(Keyword.CASCADE) || host.hasKeyword(Keyword.STORM) || host.hasKeyword(Keyword.REBOUND)
+                || host.hasKeyword(Keyword.GRAVESTORM)) {
+            return null;
+        }
+        try {
+            for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+                // an aim at a spell (Misdirection, Counterspell, Spell Pierce) is for the stack, which is empty until the
+                // opponent casts something
+                if (node.usesTargeting() && node.getTargetRestrictions() != null
+                        && node.getTargetRestrictions().getZone() != null
+                        && node.getTargetRestrictions().getZone().contains(ZoneType.Stack)) {
+                    return null;
+                }
+            }
+            return idleChain(ai, sa);
+        } catch (final RuntimeException e) {
+            return null; // a refinement only
+        }
+    }
+
+    private static String idleChain(final Player ai, final SpellAbility sa) {
         boolean providerIdle = false;
         boolean rootTargeted = false;
         int index = 0;
@@ -360,6 +400,26 @@ public final class ActivationGuard {
         return false;
     }
 
+    /** A pump with numbers it can read, none of them negative, and no keyword that hurts (Giant Growth, not a curse). */
+    static boolean beneficialPump(final SpellAbility node) {
+        if (!node.hasParam("NumAtt") && !node.hasParam("NumDef") && !node.hasParam("KW")) {
+            return false;
+        }
+        for (final String param : new String[] { "NumAtt", "NumDef" }) {
+            if (node.hasParam(param)) {
+                try {
+                    if (Integer.parseInt(node.getParam(param).trim()) < 0) {
+                        return false;
+                    }
+                } catch (final NumberFormatException e) {
+                    return false; // an X it cannot read: not judged
+                }
+            }
+        }
+        final String kw = node.getParamOrDefault("KW", "");
+        return !kw.contains("can't") && !kw.contains("Defender") && !node.hasParam("RemoveKW");
+    }
+
     /**
      * The counters go on something that is not a creature yet, and a later part of the same ability makes it one
      * (Case of the Filched Falcon: counters on a noncreature artifact, which then becomes a 0/0 creature).
@@ -386,6 +446,15 @@ public final class ActivationGuard {
             for (final GameEntity e : tr.getAllCandidates(node)) {
                 if (e instanceof Card && ((Card) e).isCreature()) {
                     return null; // a real target exists: the ordinary count decides
+                }
+            }
+            return Verdict.IDLE_TARGETS;
+        }
+        if (api == ApiType.Pump && beneficialPump(node)) {
+            // a pump that only helps (Giant Growth) when every creature it could go on is an opponent's: it helps him
+            for (final GameEntity e : tr.getAllCandidates(node)) {
+                if (!(e instanceof Card) || !((Card) e).getController().isOpponentOf(ai)) {
+                    return null; // something of its own (or a player): the ordinary count decides
                 }
             }
             return Verdict.IDLE_TARGETS;

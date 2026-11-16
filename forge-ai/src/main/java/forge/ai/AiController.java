@@ -2891,7 +2891,8 @@ public class AiController {
             // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
             return false;
         }
-        final String problem = ActivationGuard.problem(player, sa);
+        final String problem = ActivationGuard.problem(player, sa) != null ? ActivationGuard.problem(player, sa)
+                : ActivationGuard.spellProblem(player, sa);
         if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
             return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }

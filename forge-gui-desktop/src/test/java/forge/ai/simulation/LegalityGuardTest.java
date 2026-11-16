@@ -351,4 +351,104 @@ public class LegalityGuardTest extends FlatMcTestBase {
         put("Ornithopter", ai, ZoneType.Battlefield);
         AssertJUnit.assertFalse(ActivationGuard.poorSacrifice(ai, feed(feeder)));
     }
+
+    // ------------------------------------------------------------------------------------------ spells that do nothing
+
+    private SpellAbility cast(final Card spell) {
+        final SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        return sa;
+    }
+
+    @Test
+    public void removalWithNothingToDestroyIsNotCast() {
+        final Card blade = put("Doom Blade", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("no-valid-targets", ActivationGuard.spellProblem(ai, cast(blade)));
+        put("Serra Angel", opp, ZoneType.Battlefield);
+        AssertJUnit.assertNull(ActivationGuard.spellProblem(ai, cast(blade)));
+    }
+
+    @Test
+    public void aSweeperOverAnEmptyBoardIsNotCast() {
+        final Card wrath = put("Wrath of God", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("nothing-to-affect", ActivationGuard.spellProblem(ai, cast(wrath)));
+        put("Serra Angel", opp, ZoneType.Battlefield);
+        AssertJUnit.assertNull(ActivationGuard.spellProblem(ai, cast(wrath)));
+    }
+
+    @Test
+    public void aPermanentSpellIsLeftToItsOwnChecks() {
+        final Card bears = put("Grizzly Bears", ai, ZoneType.Hand);
+        AssertJUnit.assertNull(ActivationGuard.spellProblem(ai, cast(bears)));
+    }
+
+    @Test
+    public void aPumpIsNotCastWhenOnlyAnOpponentsCreatureCanTakeIt() {
+        final Card growth = put("Giant Growth", ai, ZoneType.Hand);
+        put("Serra Angel", opp, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("no-valid-targets", ActivationGuard.spellProblem(ai, cast(growth)));
+        put("Grizzly Bears", ai, ZoneType.Battlefield);
+        AssertJUnit.assertNull(ActivationGuard.spellProblem(ai, cast(growth)));
+    }
+
+    @Test
+    public void drawingMoreCardsThanTheLibraryHasIsNotCast() {
+        final Card divination = put("Divination", ai, ZoneType.Hand);
+        for (final Card c : new java.util.ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
+            ai.getZone(ZoneType.Library).remove(c);
+        }
+        put("Forest", 1, ai, ZoneType.Library);
+        AssertJUnit.assertEquals("draw-would-lose", LegalityGuard.problem(ai, cast(divination)));
+        put("Forest", 10, ai, ZoneType.Library);
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, cast(divination)));
+    }
+
+    // ------------------------------------------------------------------------------------------ self-harm and burn
+
+    @Test
+    public void burnAimedAtItselfForAllItsLifeIsNotCast() {
+        final Card bolt = put("Lightning Bolt", ai, ZoneType.Hand);
+        final SpellAbility sa = cast(bolt);
+        ai.setLife(3, null);
+        sa.getTargets().add(ai);
+        AssertJUnit.assertEquals("suicide", LegalityGuard.problem(ai, sa));
+        ai.setLife(20, null);
+        AssertJUnit.assertNull(LegalityGuard.problem(ai, sa));
+    }
+
+    @Test
+    public void aLossOfLifeThatIsCountedOnTheBoardIsRead() {
+        final Card bolt = put("Lightning Bolt", ai, ZoneType.Hand);
+        bolt.setSVar("X", "Count$Valid Creature.YouCtrl");
+        final SpellAbility sa = forge.game.ability.AbilityFactory.getAbility("SP$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X", bolt);
+        sa.setActivatingPlayer(ai);
+        ai.setLife(3, null);
+        AssertJUnit.assertNull("no creatures: nothing lost", LegalityGuard.problem(ai, sa));
+        put("Grizzly Bears", 3, ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("suicide", LegalityGuard.problem(ai, sa));
+    }
+
+    @Test
+    public void eachPlayerDrawingMoreThanTheLibraryHasIsNotCast() {
+        final Card bolt = put("Lightning Bolt", ai, ZoneType.Hand);
+        final SpellAbility sa = forge.game.ability.AbilityFactory.getAbility("SP$ Draw | Cost$ 0 | Defined$ Player | NumCards$ 3", bolt);
+        sa.setActivatingPlayer(ai);
+        for (final Card c : new java.util.ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
+            ai.getZone(ZoneType.Library).remove(c);
+        }
+        put("Forest", 1, ai, ZoneType.Library);
+        AssertJUnit.assertEquals("draw-would-lose", LegalityGuard.problem(ai, sa));
+    }
+
+    @Test
+    public void aHugeBurnSpellIsNotSpentOnALittleCreature() {
+        final Card bolt = put("Lightning Bolt", ai, ZoneType.Hand);
+        final SpellAbility sa = forge.game.ability.AbilityFactory.getAbility("SP$ DealDamage | Cost$ 0 | ValidTgts$ Any | NumDmg$ 8", bolt);
+        sa.setActivatingPlayer(ai);
+        final Card elves = put("Llanowar Elves", opp, ZoneType.Battlefield);
+        final Card angel = put("Serra Angel", opp, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("overkill", LegalityGuard.wastedBurn(ai, sa, elves));
+        AssertJUnit.assertNull("8 damage on a 4 toughness angel is fine", LegalityGuard.wastedBurn(ai, sa, angel));
+        AssertJUnit.assertNull("the face is not judged", LegalityGuard.wastedBurn(ai, sa, opp));
+    }
 }
