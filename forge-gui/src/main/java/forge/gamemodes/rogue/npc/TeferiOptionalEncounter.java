@@ -52,12 +52,10 @@ public enum TeferiOptionalEncounter implements NPCOptionalEncounter {
             return ImmutableList.of(
                 "Umm...It might be a bad timing but...Just a quick reminder that you can (and probably should) check 'Content Downloaders' (on the left) and then select 'Check for Updates' from time to time.\n"
                     + "That way you won't miss any new features, fixes and content.",
-                "Make sure 'Auto updater' in 'Preferences' is set to 'Snapshot.\n'"
-                    + "Then return to 'Content Downloaders' and select 'Check for Updates'. If a new version is " +
-                    "available, choose 'Update Now'. Skip all Proxy settings unless you know what you are doing. Press 'Start'. Once the download finishes, confirm with 'OK'. Forge will " +
-                    "close and launch the installer.",
-                "In the installer, just tell the game where you want to put the game files. You probably just want to choose the folder where your game is located at the moment as well.\n"
-                    + "That's it, the new Game version will install and you can open it as usual.",
+                "If Forge asks which update channel to check, choose 'Release' for a release build or " +
+                    "'Snapshot' for a snapshot build. You can also set the channel under 'Auto updater' in 'Preferences'.",
+                "If a new version is available, choose 'Update Now' and follow Forge's prompts to download " +
+                    "and install it.",
                 "That...probably sounded more complicated than it is..."
             );
         }

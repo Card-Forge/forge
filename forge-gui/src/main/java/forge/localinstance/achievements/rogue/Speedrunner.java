@@ -1,18 +1,19 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class BazaarFullyUpgraded extends Achievement {
-    public BazaarFullyUpgraded() {
-        super("BazaarFullyUpgraded", "Bazaar",
-              "Upgrade Bazaar to its highest level",
-              "Gonti saves the strangest shelf for you.", 0);
+public class Speedrunner extends Achievement {
+    public Speedrunner() {
+        super("Speedrunner", "Speedrunner",
+              "Win a Rogue Commander run in under 20 minutes",
+              "No time to loot.", 0);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateUpgradeAchievements()
+        return 0; // Not used; evaluated via evaluateRunAchievements()
     }
 
     @Override

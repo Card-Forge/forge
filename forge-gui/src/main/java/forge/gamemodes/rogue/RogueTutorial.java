@@ -42,8 +42,8 @@ public enum RogueTutorial {
       "Your First Match",
       "Surprise, I'm still here. Don't worry, I'll leave you alone soon.\n" +
           "Take a moment to look around. In the default layout, your hand and battlefield are below your " +
-          "opponent's area. Keep an eye on both life totals as the battle progresses. Double-click a card " +
-          "to cast it when the rules allow and you can pay its costs.",
+          "opponent's area. Keep an eye on both life totals as the battle progresses. Click a card in your " +
+          "hand to cast it when the rules allow and you can pay its costs.",
       "Use the zone icons in your player panel to open your Command Zone, Graveyard, or Exile. " +
           "Your Commander (which is you, sure, but that would make it sound slightly awkward) can be cast " +
           "from the Command Zone. " +
@@ -98,8 +98,9 @@ public enum RogueTutorial {
           "Rogue Deck'.\n" +
           "If you gained life above your Run's Max Life during the battle, it will reset back to your Max " +
           "Life after the battle.",
-      "Your Run progress is saved automatically after every match. When you need a break, Commander, " +
-          "you can return to your unfinished Run through 'Continue Run' in the main navigation."
+      "Your progress is saved automatically when you finish a node. If you need a break, Commander, " +
+          "choose 'Save and Quit' on the map. You'll find 'Continue Run' in the main sidebar when " +
+          "you're ready to pick up where you left off."
   ),
 
   ELITE_PLANEBOUND(

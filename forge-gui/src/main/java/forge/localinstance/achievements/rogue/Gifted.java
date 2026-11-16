@@ -1,13 +1,14 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class LegendaryArmy extends Achievement {
-    public LegendaryArmy() {
-        super("LegendaryArmy", "Legendary Army",
-              "Have more than 20 legendary permanents in your Rogue deck",
-              "Legends answer the call.", 0);
+public class Gifted extends Achievement {
+    public Gifted() {
+        super("Gifted", "Gifted",
+              "Win a Rogue Commander run with 3 or more active Traits",
+              "Power leaves its mark.", 0);
     }
 
     @Override

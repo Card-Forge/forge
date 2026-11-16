@@ -1,13 +1,14 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class Gifted extends Achievement {
-    public Gifted() {
-        super("Gifted", "Gifted",
-              "Win a Rogue Commander run with 3 or more active Traits",
-              "Power leaves its mark.", 0);
+public class LifeAbundance extends Achievement {
+    public LifeAbundance() {
+        super("LifeAbundance", "Life Abundant",
+              "Finish a Rogue Commander match with 50 or more life",
+              "Overflowing with vitality.", 0);
     }
 
     @Override

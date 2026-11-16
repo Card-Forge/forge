@@ -1,19 +1,19 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class NarsetBoonsUnlocked extends Achievement {
-    public NarsetBoonsUnlocked() {
-        super("NarsetBoonsUnlocked", "Narset",
-              "Unlock Narset's run-start boons",
-              "The planes begin to answer.", 0);
-        setHidden(true);
+public class GoldHoarder extends Achievement {
+    public GoldHoarder() {
+        super("GoldHoarder", "Gold Hoarder",
+              "Have 15 or more Gold during a Rogue Commander run",
+              "Fortune favors the bold.", 0);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateNpcBoonUnlockAchievements()
+        return 0; // Not used; evaluated via evaluateRunAchievements()
     }
 
     @Override

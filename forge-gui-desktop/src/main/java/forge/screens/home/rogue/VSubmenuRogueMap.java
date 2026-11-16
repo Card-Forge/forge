@@ -26,6 +26,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Window;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -100,9 +102,11 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
   private final JPanel pnlCarryCards;
   private final FScrollPane scrollCarryCards;
   private final RogueMapPanel mapPanel;
+  private final JPanel pnlActions = new JPanel(new MigLayout());
   private final FButton btnEnterNode;
   private final FButton btnEditDeck;
   private final FButton btnRerollPlane;
+  private final FButton btnBackToHome;
   private final FButton btnAbandonRun;
   private final FButton btnDevWinRun = new FButton(localizer.getMessage("lblRogueDevWinRun"));
   private final FButton btnDevNextNode = new FButton(localizer.getMessage("lblRogueDevNextNode"));
@@ -129,8 +133,19 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
     btnRerollPlane.setIcon(FSkin.getImage(FSkinProp.ICO_FLIPCARD).resize(24, 24).getIcon());
     btnRerollPlane.setVisible(false);
 
+    btnBackToHome = new FButton(localizer.getMessage("btnSaveQuit"));
+    btnBackToHome.setIcon(FSkin.getImage(FSkinProp.ICO_OPEN).resize(24, 24).getIcon());
+
     btnAbandonRun = new FButton(localizer.getMessage("lblRogueAbandonRun"));
     btnAbandonRun.setIcon(FSkin.getImage(FSkinProp.ICO_DELETE).resize(24, 24).getIcon());
+
+    pnlActions.setOpaque(false);
+    pnlActions.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentResized(ComponentEvent e) {
+        updateActionButtonLayout();
+      }
+    });
 
     pnlEffects = RogueUIHelper.createEffectPanel();
     scrollEffects = new FScrollPane(pnlEffects, false,
@@ -226,28 +241,33 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
 
   @Override
   public void populate() {
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+    VHomeUI.PnlDisplay display = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
+    display.removeAll();
+    display.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+    display.add(mapPanel, "w 100%!, gap 0, pushy, growy");
 
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay()
-        .add(mapPanel, "w 100%!, gap 0, pushy, growy");
-
-    JPanel buttonRow = new JPanel(new MigLayout("insets 0, gap 10, fillx"));
-    buttonRow.setOpaque(false);
-    final String buttonConstraints = "wmin 0, growx, shrinkx, h 40px!";
-    buttonRow.add(btnEnterNode, buttonConstraints);
-    buttonRow.add(btnEditDeck, buttonConstraints);
-    buttonRow.add(btnRerollPlane, buttonConstraints + ", hidemode 3");
-    buttonRow.add(btnAbandonRun, buttonConstraints);
+    pnlActions.removeAll();
+    pnlActions.add(btnEnterNode);
+    pnlActions.add(btnEditDeck);
+    pnlActions.add(btnRerollPlane);
+    pnlActions.add(btnBackToHome);
+    pnlActions.add(btnAbandonRun);
     if (ForgePreferences.DEV_MODE) {
-      buttonRow.add(btnDevNextNode, buttonConstraints);
-      buttonRow.add(btnDevWinRun, buttonConstraints);
+      pnlActions.add(btnDevNextNode);
+      pnlActions.add(btnDevWinRun);
     }
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay()
-        .add(buttonRow, "w 96%!, h 40px!, gap 2% 2% 10px 20px, ax center");
+    display.add(pnlActions, "w 96%!, h pref!, gap 2% 2% 10px 20px, ax center");
+    updateActionButtonLayout();
 
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
-    VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+    display.repaintSelf();
+    display.revalidate();
+  }
+
+  void updateActionButtonLayout() {
+    VHomeUI.PnlDisplay display = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
+    if (pnlActions.getParent() == display) {
+      RogueUIHelper.layoutActionButtons(pnlActions, Math.round(display.getWidth() * 0.96f));
+    }
   }
 
   public JButton getBtnEnterNode() {
@@ -260,6 +280,10 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
 
   public JButton getBtnRerollPlane() {
     return btnRerollPlane;
+  }
+
+  public JButton getBtnBackToHome() {
+    return btnBackToHome;
   }
 
   public JButton getBtnAbandonRun() {

@@ -1,7 +1,8 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
 public class AetherFullyUpgraded extends Achievement {
     public AetherFullyUpgraded() {

@@ -22,6 +22,7 @@ import forge.gamemodes.rogue.npc.TyvarEncounter;
 import forge.item.PaperCard;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
+import forge.localinstance.achievements.rogue.*;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.sound.SoundEffectType;

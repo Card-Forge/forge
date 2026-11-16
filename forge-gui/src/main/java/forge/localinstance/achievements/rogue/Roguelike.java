@@ -1,13 +1,14 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class PlaneboundSlayer extends Achievement {
-    public PlaneboundSlayer() {
-        super("PlaneboundSlayer", "Planebound Slayer",
-              "Defeat every Planebound at least once",
-              "Every Planebound knows your name.", 0);
+public class Roguelike extends Achievement {
+    public Roguelike() {
+        super("Roguelike", "Roguelike",
+              "Win a Rogue Commander run without active Aetherworks",
+              "No echoes. No shortcuts.", 0);
     }
 
     @Override

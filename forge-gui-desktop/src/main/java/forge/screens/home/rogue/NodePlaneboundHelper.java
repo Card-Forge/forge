@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
@@ -48,20 +47,19 @@ class NodePlaneboundHelper {
 
         handlePlaneboundEffects(node, currentRun);
 
+        if (ForgePreferences.DEV_MODE) {
+            RoguePlanebound current = node.getRoguePlanebound();
+            RoguePlanebound picked = RogueUIHelper.chooseDevOverride(
+                Localizer.getInstance().getMessage("lblRogueDevPickPlanebound"), RogueConfig.loadPlanebounds(), current);
+            if (picked != current) {
+                node.setRoguePlanebound(picked);
+            }
+        }
+
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay();
             SOverlayUtils.showOverlay();
         });
-
-        if (ForgePreferences.DEV_MODE) {
-            RoguePlanebound picked = (RoguePlanebound) JOptionPane.showInputDialog(
-                null, Localizer.getInstance().getMessage("lblRogueDevOverridePlanebound"), Localizer.getInstance().getMessage("lblRogueDevPickPlanebound"),
-                JOptionPane.PLAIN_MESSAGE, null,
-                RogueConfig.loadPlanebounds().toArray(), node.getRoguePlanebound());
-            if (picked != null) {
-                node.setRoguePlanebound(picked);
-            }
-        }
 
         try {
             MatchSetupContext setupCtx = new MatchSetupContext();

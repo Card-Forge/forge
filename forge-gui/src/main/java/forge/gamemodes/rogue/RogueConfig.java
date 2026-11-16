@@ -45,10 +45,9 @@ public class RogueConfig {
     private RogueConfig() {
     }
 
-    private static final Set<String> EXCLUDED_RANDOM_DRAW_SET_CODES = ImmutableSet.of("UNK", "UNH");
-    private static final Set<String> DEPRIORITIZED_RANDOM_PRINT_SET_CODES =
-        ImmutableSet.of("SLZ", "MAR", "FCA", "TLE", "PF25", "PF26", "SLD", "PSPL", "MBC", "SCH", "HOC",
-            "PZA", "OTP", "PIO", "KLR", "EA2", "PSVC", "PRM");
+    private static final Set<String> DEPRIORITIZED_PRINT_SET_CODES =
+        ImmutableSet.of("SLZ", "MAR", "FCA", "TLE", "PF25", "PF26", "SLD", "SLC",  "PSPL", "MBC",
+            "SCH", "HOC", "PZA", "OTP", "PIO", "PSVC", "OLGC", "PLG21", "30A", "P30A");
     private static final String FALLBACK_LAND_SET = "MH3";
     private static final String WASTES_FALLBACK_LAND_SET = "M3C";
 
@@ -61,6 +60,8 @@ public class RogueConfig {
 
     private static final Supplier<Map<String, PaperCard>> rogueCards =
             Suppliers.memoize(RogueConfig::loadRogueCards);
+    private static final Supplier<Set<String>> excludedRogueCardNames =
+            Suppliers.memoize(RogueConfig::loadExcludedRogueCardNames);
 
     public static PaperCard getRogueCard(String name) {
         return name == null ? null : rogueCards.get().get(name);
@@ -221,50 +222,100 @@ public class RogueConfig {
         return cachedPlanarPool;
     }
 
-    /**
-     * Load the shared Gamechanger card pool from res/rogue/util/gamechangers.dck.
-     * Returns a cached copy to avoid repeated deck file parsing.
-     */
+    /** Load Gamechangers from Forge's shared Commander bracket list. */
     public static List<PaperCard> getGamechangerCards() {
         if (cachedGamechangerCards == null) {
-            File deckFile = new File(ForgeConstants.RES_DIR, "rogue/util/gamechangers.dck");
-            if (!deckFile.exists()) {
-                Logger.warn("Gamechanger deck not found: {}", deckFile.getAbsolutePath());
-                cachedGamechangerCards = ImmutableList.of();
-            } else {
-                Deck deck = DeckSerializer.fromFile(deckFile);
-                if (deck == null) {
-                    Logger.warn("Failed to load Gamechanger deck from {}", deckFile.getAbsolutePath());
-                    cachedGamechangerCards = ImmutableList.of();
-                } else {
-                    cachedGamechangerCards = new ArrayList<>(deck.getMain().toFlatList());
-                }
+            File cardList = new File(ForgeConstants.COMMANDER_BRACKET_GAMECHANGERS_FILE);
+            if (!cardList.exists()) {
+                Logger.warn("Gamechanger list not found: {}", cardList.getAbsolutePath());
             }
+            cachedGamechangerCards = loadSpecialPoolCards(readCardNames(cardList),
+                List.of("2X2", "DMR", "2XM", "CMM"));
         }
         return new ArrayList<>(cachedGamechangerCards);
     }
 
-    /**
-     * Load the shared Commander banlist card pool from res/rogue/util/commander_banlist.dck.
-     * Returns a cached copy to avoid repeated deck file parsing.
-     */
+    /** Load Commander-banned cards that Rogue may offer as forbidden rewards. */
     public static List<PaperCard> getCommanderBanlistCards() {
         if (cachedCommanderBanlistCards == null) {
-            File deckFile = new File(ForgeConstants.RES_DIR, "rogue/util/commander_banlist.dck");
-            if (!deckFile.exists()) {
-                Logger.warn("Commander banlist deck not found: {}", deckFile.getAbsolutePath());
-                cachedCommanderBanlistCards = ImmutableList.of();
-            } else {
-                Deck deck = DeckSerializer.fromFile(deckFile);
-                if (deck == null) {
-                    Logger.warn("Failed to load Commander banlist deck from {}", deckFile.getAbsolutePath());
-                    cachedCommanderBanlistCards = ImmutableList.of();
-                } else {
-                    cachedCommanderBanlistCards = new ArrayList<>(deck.getMain().toFlatList());
-                }
-            }
+            cachedCommanderBanlistCards = loadSpecialPoolCards(
+                FModel.getFormats().getFormat("Commander").getBannedCardNames(),
+                List.of("2X2", "2XM", "MM2", "UMA"));
         }
         return new ArrayList<>(cachedCommanderBanlistCards);
+    }
+
+    private static List<String> readCardNames(File file) {
+        List<String> names = new ArrayList<>();
+        for (String line : FileUtil.readFile(file)) {
+            String name = line.split("#", 2)[0].trim();
+            if (!name.isEmpty()) {
+                names.add(name);
+            }
+        }
+        return names;
+    }
+
+    private static Set<String> loadExcludedRogueCardNames() {
+        File cardList = new File(ForgeConstants.RES_DIR, "rogue/util/rogue_commander_banlist.txt");
+        if (!cardList.exists()) {
+            Logger.warn("Rogue Commander banlist not found: {}", cardList.getAbsolutePath());
+        }
+        Set<String> names = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        names.addAll(readCardNames(cardList));
+        return Collections.unmodifiableSet(names);
+    }
+
+    private static List<PaperCard> loadSpecialPoolCards(List<String> names, List<String> preferredSetCodes) {
+        List<PaperCard> cards = new ArrayList<>();
+        for (String name : names) {
+            if (excludedRogueCardNames.get().contains(name)) {
+                continue;
+            }
+            PaperCard card = db.getCommonCards().getCardFromEditions(name,
+                candidate -> preferredSetCodes.contains(candidate.getEdition()) && isEligibleSpecialPoolCard(candidate));
+            if (card == null) {
+                card = db.getCommonCards().getCardFromEditions(name,
+                    candidate -> !DEPRIORITIZED_PRINT_SET_CODES.contains(candidate.getEdition())
+                        && isEligibleSpecialPoolCard(candidate));
+            }
+            if (card == null) {
+                card = db.getCommonCards().getCardFromEditions(name, RogueConfig::isEligibleSpecialPoolCard);
+            }
+            if (card != null) {
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+
+    /** Eligibility for ordinary Rogue card candidates. */
+    static boolean isEligibleRogueCard(PaperCard card) {
+        return passesOrdinaryCardRestrictions(card) && isEligibleRoguePrinting(card);
+    }
+
+    /** Special pools can contain Commander-banned cards. */
+    private static boolean isEligibleSpecialPoolCard(PaperCard card) {
+        return passesRogueCardExclusions(card) && isEligibleRoguePrinting(card);
+    }
+
+    private static boolean passesOrdinaryCardRestrictions(PaperCard card) {
+        return passesRogueCardExclusions(card) && DeckFormat.RogueCommander.isLegalCard(card);
+    }
+
+    /** Exclusions that cannot change with a different printing. */
+    private static boolean passesRogueCardExclusions(PaperCard card) {
+        return card != null && !card.getRules().isCustom()
+            && !excludedRogueCardNames.get().contains(card.getName());
+    }
+
+    private static boolean isEligibleRoguePrinting(PaperCard card) {
+        if (card.isRebalanced()) {
+            return false;
+        }
+        CardEdition edition = db.getCardEdition(card.getEdition());
+        return edition != null && edition.getType() != CardEdition.Type.FUNNY
+            && edition.getType() != CardEdition.Type.ONLINE;
     }
 
     /**
@@ -358,7 +409,10 @@ public class RogueConfig {
         Predicate<PaperCard> effectiveFilter = getAllFilters(filter);
 
         return FModel.getMagicDb().getCommonCards().getUniqueCards().stream()
-                .filter(effectiveFilter)
+                .filter(card -> passesOrdinaryCardRestrictions(card) && (filter == null || filter.test(card)))
+                .map(card -> isEligibleRogueCard(card) ? card
+                    : findPreferredPrint(card, effectiveFilter, null).orElse(null))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
@@ -439,7 +493,7 @@ public class RogueConfig {
                 .filter(filter)
                 .filter(candidate -> !candidate.hasFlavorName())
                 .min(Comparator.comparing((PaperCard candidate) ->
-                            DEPRIORITIZED_RANDOM_PRINT_SET_CODES.contains(candidate.getEdition()))
+                            DEPRIORITIZED_PRINT_SET_CODES.contains(candidate.getEdition()))
                         .thenComparing(candidate -> !candidate.getEdition().equals(preferredEdition))
                         .thenComparing(candidate -> !candidate.getEdition().equals("CMM"))
                         .thenComparing(candidate -> !candidate.getEdition().equals("FDC"))
@@ -494,21 +548,10 @@ public class RogueConfig {
     }
 
     private static @NonNull Predicate<PaperCard> getAllFilters(Predicate<PaperCard> filter) {
-        Predicate<PaperCard> rogueBaseFilter =
-            card -> !card.getRules().isCustom()
-                && !EXCLUDED_RANDOM_DRAW_SET_CODES.contains(card.getEdition());
-        Predicate<PaperCard> nonDigitalFilter =
-            card -> {
-                CardEdition edition = db.getCardEdition(card.getEdition());
-                return !card.isRebalanced()
-                    && edition != null
-                    && edition.getType() != CardEdition.Type.ONLINE
-                    && edition.getType() != CardEdition.Type.FUNNY;
-            };
-        Predicate<PaperCard> commanderLegalFilter = DeckFormat.RogueCommander::isLegalCard;
+        Predicate<PaperCard> rogueFilter = RogueConfig::isEligibleRogueCard;
         return filter != null
-                ? rogueBaseFilter.and(nonDigitalFilter).and(commanderLegalFilter).and(filter)
-                : rogueBaseFilter.and(nonDigitalFilter).and(commanderLegalFilter);
+                ? rogueFilter.and(filter)
+                : rogueFilter;
     }
 
     /**

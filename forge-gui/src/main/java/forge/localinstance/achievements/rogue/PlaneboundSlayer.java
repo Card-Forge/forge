@@ -1,13 +1,14 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class Carrier extends Achievement {
-    public Carrier() {
-        super("Carrier", "Carrier",
-              "Win a Rogue Commander run with 4 or more Carry Cards",
-              "Packed for every contingency.", 0);
+public class PlaneboundSlayer extends Achievement {
+    public PlaneboundSlayer() {
+        super("PlaneboundSlayer", "Planebound Slayer",
+              "Defeat every Planebound at least once",
+              "Every Planebound knows your name.", 0);
     }
 
     @Override

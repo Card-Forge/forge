@@ -7,13 +7,19 @@ import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RoguePlanebound;
 import forge.gamemodes.rogue.RogueTutorial;
 import forge.gamemodes.rogue.effect.RogueEffect;
+import forge.gamemodes.rogue.npc.NPC;
+import forge.gamemodes.rogue.npc.TeferiEncounter;
+import forge.gamemodes.rogue.npc.TeferiOptionalEncounter;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.achievements.RogueCommanderAchievements;
 import forge.localinstance.properties.ForgePreferences;
 import forge.screens.home.CHomeUI;
+import forge.screens.home.rogue.VSubmenuRogueCodex.JournalEntry;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +94,35 @@ public enum CSubmenuRogueCodex implements ICDoc {
         });
       }
       case TRAITS -> view.showTraits(loadTraits(), progress);
+      case JOURNAL -> showJournal(progress);
     }
+  }
+
+  private void showJournal(RogueMetaProgress progress) {
+    List<JournalEntry> tutorials = Arrays.stream(RogueTutorial.values())
+        .filter(progress::hasSeenTutorial)
+        .map(tutorial -> new JournalEntry(tutorial.getId(), tutorial.getTitle(),
+            String.join("\n\n", tutorial.getMessageChunks())))
+        .toList();
+
+    Localizer localizer = Localizer.getInstance();
+    List<JournalEntry> story = new ArrayList<>();
+    int storyLevel = progress.getNPCLevel(NPC.TEFERI.id);
+    for (TeferiEncounter chapter : TeferiEncounter.values()) {
+      if (chapter.getRequiredLevel() >= storyLevel) {
+        continue;
+      }
+      List<String> text = chapter.getJournalText();
+      if (!text.isEmpty()) {
+        story.add(new JournalEntry("teferi:" + chapter.name(), chapter.getTitle(), String.join("\n\n", text)));
+      }
+    }
+    TeferiOptionalEncounter anchor = TeferiOptionalEncounter.TEMPORAL_ANCHOR;
+    if (progress.hasSeenNPCEncounter(anchor.getId())) {
+      story.add(new JournalEntry(anchor.getId(), localizer.getMessage("lblRogueJournalTemporalAnchor"),
+          String.join("\n\n", anchor.getStoryTextChunks())));
+    }
+    view.showJournal(tutorials, story);
   }
 
   private List<RogueDeck> loadCommanders() {

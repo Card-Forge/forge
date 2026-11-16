@@ -15,7 +15,6 @@ import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 class NodeEventHelper {
 
@@ -98,11 +97,8 @@ class NodeEventHelper {
             return event;
         }
 
-        RogueEvent picked = (RogueEvent) JOptionPane.showInputDialog(
-            null, Localizer.getInstance().getMessage("lblRogueDevOverrideEvent"), Localizer.getInstance().getMessage("lblRogueDevPickEvent"),
-            JOptionPane.PLAIN_MESSAGE, null,
-            RogueEvent.values(), event);
-        return picked != null ? picked : event;
+        return RogueUIHelper.chooseDevOverride(
+            Localizer.getInstance().getMessage("lblRogueDevPickEvent"), List.of(RogueEvent.values()), event);
     }
 
     private NodeFlowOutcome handleEventChoice(NodeEvent eventNode, RogueEvent event,

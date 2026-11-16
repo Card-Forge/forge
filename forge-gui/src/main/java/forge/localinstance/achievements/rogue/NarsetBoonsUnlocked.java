@@ -1,18 +1,20 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class Speedrunner extends Achievement {
-    public Speedrunner() {
-        super("Speedrunner", "Speedrunner",
-              "Win a Rogue Commander run in under 20 minutes",
-              "No time to loot.", 0);
+public class NarsetBoonsUnlocked extends Achievement {
+    public NarsetBoonsUnlocked() {
+        super("NarsetBoonsUnlocked", "Narset",
+              "Unlock Narset's run-start boons",
+              "The planes begin to answer.", 0);
+        setHidden(true);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateRunAchievements()
+        return 0; // Not used; evaluated via evaluateNpcBoonUnlockAchievements()
     }
 
     @Override

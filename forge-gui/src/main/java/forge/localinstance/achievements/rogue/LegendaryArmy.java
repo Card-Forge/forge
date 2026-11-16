@@ -1,13 +1,14 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class GoldHoarder extends Achievement {
-    public GoldHoarder() {
-        super("GoldHoarder", "Gold Hoarder",
-              "Have 15 or more Gold during a Rogue Commander run",
-              "Fortune favors the bold.", 0);
+public class LegendaryArmy extends Achievement {
+    public LegendaryArmy() {
+        super("LegendaryArmy", "Legendary Army",
+              "Have more than 20 legendary permanents in your Rogue deck",
+              "Legends answer the call.", 0);
     }
 
     @Override

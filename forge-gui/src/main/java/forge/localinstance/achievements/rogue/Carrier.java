@@ -1,18 +1,19 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class CodexComplete extends Achievement {
-    public CodexComplete() {
-        super("CodexComplete", "Codex",
-              "Complete the Codex",
-              "All records have been uncovered.", 0);
+public class Carrier extends Achievement {
+    public Carrier() {
+        super("Carrier", "Carrier",
+              "Win a Rogue Commander run with 4 or more Carry Cards",
+              "Packed for every contingency.", 0);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateCodexAchievements()
+        return 0; // Not used; evaluated via evaluateRunAchievements()
     }
 
     @Override

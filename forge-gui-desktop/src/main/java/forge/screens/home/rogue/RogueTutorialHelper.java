@@ -7,10 +7,11 @@ import forge.game.event.GameEventTurnBegan;
 import forge.game.player.Player;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueTutorial;
-import forge.gamemodes.rogue.effect.ChoiceRerollContext;
 import forge.gamemodes.rogue.npc.NPC;
 import forge.gamemodes.rogue.npc.NPCContext;
 import forge.gui.FThreads;
+import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class RogueTutorialHelper {
     RogueMetaProgress progress = RogueMetaProgress.getInstance();
     for (RogueTutorial tutorial : tutorials) {
       progress.markTutorialSeen(tutorial);
-      showTutorialDialog(tutorial);
+      showTutorialDialog(tutorial, progress);
     }
   }
 
@@ -45,7 +46,7 @@ public class RogueTutorialHelper {
     for (RogueTutorial tutorial : tutorials) {
       if (!hasSeenTutorial(tutorial)) {
         progress.markTutorialSeen(tutorial);
-        showTutorialDialog(tutorial);
+        showTutorialDialog(tutorial, progress);
       }
     }
   }
@@ -68,14 +69,25 @@ public class RogueTutorialHelper {
     }
   }
 
-  private static void showTutorialDialog(RogueTutorial tutorial) {
+  private static void showTutorialDialog(RogueTutorial tutorial, RogueMetaProgress progress) {
     NPCContext context = new NPCContext(
         NPC.TEFERI,
         tutorial.getMessageChunks(),
         List.of(),
         null,
         null);
-    new NPCDialog(context, new ChoiceRerollContext()).show();
+    NPCDialog.forTutorial(context, () -> confirmSkipTutorials(progress)).show();
+  }
+
+  private static boolean confirmSkipTutorials(RogueMetaProgress progress) {
+    Localizer localizer = Localizer.getInstance();
+    String skipLabel = localizer.getMessage("lblRogueSkipAllTutorials");
+    if (!FOptionPane.showConfirmDialog(localizer.getMessage("lblRogueSkipAllTutorialsConfirm"),
+        skipLabel, skipLabel, localizer.getMessage("lblCancel"), false)) {
+      return false;
+    }
+    progress.markAllTutorialsSeen();
+    return true;
   }
 
   private static final class MatchTutorialListener {

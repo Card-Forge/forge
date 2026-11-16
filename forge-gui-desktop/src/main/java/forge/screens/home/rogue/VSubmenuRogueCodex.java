@@ -24,11 +24,13 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTabbedPane;
+import forge.toolbox.FTextArea;
 import forge.util.ImageFetcher;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -48,6 +50,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,8 +59,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
@@ -74,12 +80,33 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     GLOBAL_STATS("lblRogueGlobalStats"),
     COMMANDERS("lblRogueCommanders"),
     PLANEBOUNDS("lblRoguePlanebounds"),
-    TRAITS("lblRogueTraits");
+    TRAITS("lblRogueTraits"),
+    JOURNAL("lblRogueJournal");
 
     private final String labelKey;
 
     CodexTab(String labelKey) {
       this.labelKey = labelKey;
+    }
+  }
+
+  record JournalEntry(String id, String title, String text) {
+    @Override
+    public String toString() {
+      return title;
+    }
+  }
+
+  private enum JournalSection {
+    TUTORIALS("lblRogueJournalTutorials", "lblRogueJournalNoTutorials"),
+    STORY("lblRogueJournalStory", "lblRogueJournalNoStory");
+
+    private final String labelKey;
+    private final String emptyKey;
+
+    JournalSection(String labelKey, String emptyKey) {
+      this.labelKey = labelKey;
+      this.emptyKey = emptyKey;
     }
   }
 
@@ -100,6 +127,8 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private final DragTab tab = new DragTab(localizer.getMessage("lblRogueCodex"));
   private final FTabbedPane codexTabs = new FTabbedPane();
   private final Map<CodexTab, SkinnedPanel> tabPanels = new EnumMap<>(CodexTab.class);
+  private final Set<JournalSection> collapsedJournalSections = EnumSet.noneOf(JournalSection.class);
+  private String selectedJournalEntryId;
   private CardUtil zoomUtil;
   private Consumer<CodexTab> tabSelectionCallback;
   private boolean updatingSelectedTab;
@@ -213,6 +242,111 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     pnlContent.add(createPlaneboundDetails(selectedPlanebound, progress), FILL_CONTENT);
     refreshContent();
     restoreSidebarScrollValue(sidebarScroller, sidebarScrollValue);
+  }
+
+  void showJournal(List<JournalEntry> tutorials, List<JournalEntry> story) {
+    setActiveTab(CodexTab.JOURNAL);
+    SkinnedPanel panel = getContentPanel(CodexTab.JOURNAL);
+    int sidebarScrollValue = getSidebarScrollValue(panel);
+    panel.removeAll();
+    panel.setLayout(new MigLayout(SPACED_LAYOUT, "[240px!]" + GROW_AXIS, GROW_AXIS));
+
+    JPanel details = new SkinnedPanel(new MigLayout("insets 8, gap 8, fill, wrap 1", GROW_AXIS, "[][grow]"));
+    details.setOpaque(false);
+    FLabel title = new FLabel.Builder().fontSize(16).fontStyle(Font.BOLD).build();
+    FTextArea text = new FTextArea();
+    text.setFont(FSkin.getFont(14));
+    text.setFocusable(true);
+    FScrollPane reader = new FScrollPane(text, false,
+        ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    details.add(title, "growx");
+    details.add(reader, "wmin 0, hmin 0, grow, push");
+
+    Consumer<JournalEntry> selectEntry = entry -> {
+      selectedJournalEntryId = entry.id();
+      title.setText(entry.title());
+      text.setText(entry.text());
+      text.setCaretPosition(0);
+      reader.scrollToTop();
+    };
+
+    JournalEntry initialEntry = Stream.concat(tutorials.stream(), story.stream())
+        .filter(entry -> entry.id().equals(selectedJournalEntryId))
+        .findFirst()
+        .orElseGet(() -> !tutorials.isEmpty() ? tutorials.get(0) : story.isEmpty() ? null : story.get(0));
+    List<FList<JournalEntry>> entryLists = new ArrayList<>();
+    JPanel sidebar = new CodexSectionsPanel(new MigLayout("insets 4 8, gap 12, wrap 1", GROW_AXIS, ""));
+    sidebar.add(createJournalSection(JournalSection.TUTORIALS, tutorials, initialEntry, entryLists, selectEntry),
+        "growx");
+    sidebar.add(createJournalSection(JournalSection.STORY, story, initialEntry, entryLists, selectEntry),
+        "growx");
+    FScrollPane sidebarScroller = createSidebarScrollPane(sidebar);
+    panel.add(sidebarScroller, "grow");
+    panel.add(details, "wmin 0, hmin 0, grow, push");
+
+    if (initialEntry != null) {
+      selectEntry.accept(initialEntry);
+    } else {
+      selectedJournalEntryId = null;
+    }
+    refreshContent();
+    restoreSidebarScrollValue(sidebarScroller, sidebarScrollValue);
+  }
+
+  private JPanel createJournalSection(JournalSection section, List<JournalEntry> entries,
+      JournalEntry initialEntry, List<FList<JournalEntry>> entryLists, Consumer<JournalEntry> selectEntry) {
+    JPanel group = new SkinnedPanel(new MigLayout("insets 0, gap 2, wrap 1, hidemode 3", GROW_AXIS, ""));
+    group.setOpaque(false);
+    String label = localizer.getMessage(section.labelKey);
+    FLabel header = new FLabel.Builder().fontSize(14).fontStyle(Font.BOLD)
+        .fontAlign(SwingConstants.LEFT).hoverable().build();
+    header.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 0));
+
+    JPanel body = new SkinnedPanel(new MigLayout("insets 0 0 0 16", GROW_AXIS, ""));
+    body.setOpaque(false);
+    if (entries.isEmpty()) {
+      body.add(new FLabel.Builder().text(localizer.getMessage(section.emptyKey))
+          .fontAlign(SwingConstants.LEFT).fontStyle(Font.ITALIC).build(), "wmin 0, growx");
+    } else {
+      FList<JournalEntry> entryList = new FList<>();
+      entryList.getAccessibleContext().setAccessibleName(label);
+      entryList.setFont(FSkin.getFont(13));
+      entryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+      entryList.setListData(entries.toArray(JournalEntry[]::new));
+      entryList.setSelectedValue(initialEntry, false);
+      entryList.addListSelectionListener(e -> {
+        JournalEntry entry = entryList.getSelectedValue();
+        if (e.getValueIsAdjusting() || entry == null) {
+          return;
+        }
+        for (FList<JournalEntry> otherList : entryLists) {
+          if (otherList != entryList) {
+            otherList.clearSelection();
+          }
+        }
+        selectEntry.accept(entry);
+      });
+      entryLists.add(entryList);
+      body.add(entryList, "wmin 0, growx");
+    }
+
+    Runnable updateVisibility = () -> {
+      boolean expanded = !collapsedJournalSections.contains(section);
+      header.setText((expanded ? "- " : "+ ") + label);
+      body.setVisible(expanded);
+      group.revalidate();
+      group.repaint();
+    };
+    header.setCommand((Runnable) () -> {
+      if (!collapsedJournalSections.remove(section)) {
+        collapsedJournalSections.add(section);
+      }
+      updateVisibility.run();
+    });
+    group.add(header, "wmin 0, hmin 28, growx");
+    group.add(body, "wmin 0, growx");
+    updateVisibility.run();
+    return group;
   }
 
   public void showTraits(Map<CodexHelper.TraitCategory, List<RogueEffect>> traitsByCategory,

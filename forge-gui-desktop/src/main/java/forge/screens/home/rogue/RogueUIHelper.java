@@ -5,7 +5,9 @@ import forge.gamemodes.rogue.PreviewReference;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRunHistoryEntry;
 import forge.gamemodes.rogue.effect.RogueEffect;
+import forge.gui.GuiChoose;
 import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -27,9 +29,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -73,6 +80,56 @@ public final class RogueUIHelper {
     return (int) (getUsableDefaultScreenSize().height * 0.9) - 80;
   }
 
+  static void layoutActionButtons(JPanel panel, int availableWidth) {
+    if (availableWidth <= 0) {
+      return;
+    }
+
+    final int minimumButtonWidth = 150;
+    final int buttonGap = 10;
+    List<Component> buttons = Arrays.stream(panel.getComponents()).filter(Component::isVisible).toList();
+    int[] widths = buttons.stream()
+        .mapToInt(button -> Math.min(availableWidth, Math.max(minimumButtonWidth, button.getPreferredSize().width)))
+        .toArray();
+
+    int[] buttonColumns = new int[widths.length];
+    for (int rows = 1; rows <= widths.length; rows++) {
+      int buttonsPerRow = widths.length / rows;
+      int extraButtons = widths.length % rows;
+      int[] columnWidths = new int[buttonsPerRow + (extraButtons == 0 ? 0 : 1)];
+      int index = 0;
+      for (int row = 0; row < rows; row++) {
+        int rowSize = buttonsPerRow + (row < extraButtons ? 1 : 0);
+        for (int column = 0; column < rowSize; column++) {
+          buttonColumns[index] = column;
+          columnWidths[column] = Math.max(columnWidths[column], widths[index]);
+          index++;
+        }
+      }
+      if (Arrays.stream(columnWidths).sum() + (columnWidths.length - 1) * buttonGap <= availableWidth) {
+        break;
+      }
+    }
+
+    MigLayout layout = (MigLayout) panel.getLayout();
+    String grid = "insets 0, gap " + buttonGap + "px, fillx, hidemode 3";
+    if (!grid.equals(layout.getLayoutConstraints())) {
+      layout.setLayoutConstraints(grid);
+    }
+    for (int i = 0; i < buttons.size(); i++) {
+      Component button = buttons.get(i);
+      String size = "wmin " + widths[i] + "px, growx, h 40px!";
+      if (i + 1 < buttonColumns.length && buttonColumns[i + 1] == 0) {
+        size += ", wrap";
+      }
+      if (!size.equals(layout.getComponentConstraints(button))) {
+        layout.setComponentConstraints(button, size);
+      }
+    }
+    panel.revalidate();
+    panel.repaint();
+  }
+
   static void prepareChoiceDialog(FOptionPane optionPane, JComponent panel, int viewDeckOption,
                                   int viewMapOption) {
     configureChoicePane(optionPane);
@@ -105,8 +162,59 @@ public final class RogueUIHelper {
     optionPane.getTitleBar().setVisible(false);
   }
 
-  static FOptionPane createChoiceOverridePane(String title, String heading, FLabel infoLabel,
-                                              JComponent choices) {
+  static <T> T chooseDevOverride(String title, List<T> choices, T currentChoice) {
+    List<T> preselected = currentChoice == null ? List.of() : List.of(currentChoice);
+    List<T> selected = GuiChoose.getChoices(title, 0, 1, choices, preselected, null);
+    return selected == null || selected.isEmpty() ? currentChoice : selected.get(0);
+  }
+
+  static <T extends RogueEffect> List<T> chooseDevEffects(String title, String heading,
+      String selectionMessageKey, List<T> choices, List<T> preselected, int requiredSelections) {
+    SkinnedPanel checkBoxPanel = new SkinnedPanel();
+    checkBoxPanel.setOpaque(false);
+    checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
+    Map<FCheckBox, T> effectsByCheckBox = new LinkedHashMap<>();
+    for (T effect : choices) {
+      FCheckBox checkBox = new FCheckBox(effect.getDisplayName(), preselected.contains(effect));
+      effectsByCheckBox.put(checkBox, effect);
+      checkBoxPanel.add(checkBox);
+    }
+
+    FLabel infoLabel = new FLabel.Builder()
+        .text("")
+        .fontSize(14)
+        .fontAlign(SwingConstants.CENTER)
+        .build();
+    FOptionPane optionPane = createChoiceOverridePane(title, heading, infoLabel, checkBoxPanel);
+    Localizer localizer = Localizer.getInstance();
+    Runnable updateSelection = () -> {
+      long selectedCount = effectsByCheckBox.keySet().stream().filter(FCheckBox::isSelected).count();
+      infoLabel.setText(localizer.getMessage(selectionMessageKey, requiredSelections, selectedCount));
+      optionPane.setButtonEnabled(0, selectedCount == requiredSelections);
+    };
+    effectsByCheckBox.keySet().forEach(checkBox -> checkBox.addActionListener(e -> updateSelection.run()));
+    updateSelection.run();
+
+    try {
+      optionPane.setVisible(true);
+      if (optionPane.getResult() != 0) {
+        return List.of();
+      }
+
+      List<T> selected = new ArrayList<>();
+      effectsByCheckBox.forEach((checkBox, effect) -> {
+        if (checkBox.isSelected()) {
+          selected.add(effect);
+        }
+      });
+      return selected;
+    } finally {
+      optionPane.dispose();
+    }
+  }
+
+  private static FOptionPane createChoiceOverridePane(String title, String heading, FLabel infoLabel,
+                                                      JComponent choices) {
     SkinnedPanel wrapper = new SkinnedPanel(new BorderLayout(0, 10));
     wrapper.setOpaque(false);
 
@@ -127,8 +235,9 @@ public final class RogueUIHelper {
     Dimension size = new Dimension(420, 420);
     wrapper.setPreferredSize(size);
     wrapper.setMinimumSize(size);
+    Localizer localizer = Localizer.getInstance();
     return new FOptionPane(null, title, null, wrapper,
-        List.of("OK", Localizer.getInstance().getMessage("lblCancel")), 0);
+        List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblCancel")), 0);
   }
 
   public static void disableSpacebarButtonActivation(Component component) {

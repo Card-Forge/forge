@@ -10,7 +10,7 @@ import java.util.List;
  */
 public enum TeferiEncounter implements NPCEncounter {
 
-    BEFORE_FIRST_RUN(0) {
+    MEETING_TEFERI(0, "Meeting Teferi") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -44,7 +44,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    FIRST_EVIDENCE(1) {
+    FIRST_EVIDENCE(1, "First Evidence") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -64,7 +64,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    PATTERN_SPREADS(2) {
+    PATTERN_SPREADS(2, "Pattern Spreads") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -86,7 +86,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    PHYREXIA(3) {
+    PHYREXIA(3, "Phyrexia") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -116,7 +116,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    RELAY(4) {
+    RELAY(4, "Relay") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -140,7 +140,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    NETWORK(5) {
+    NETWORK(5, "Network") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -159,7 +159,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    ARTIFICIAL_ROUTE(6) {
+    ARTIFICIAL_ROUTE(6, "Artificial Route") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -190,7 +190,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    DIRECTIVE(7) {
+    DIRECTIVE(7, "Directive") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -211,7 +211,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    FIRST_BREACH(8) {
+    FIRST_BREACH(8, "First Breach") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -233,7 +233,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    SYNCHRONIZATION(9) {
+    SYNCHRONIZATION(9, "Synchronization") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -253,7 +253,7 @@ public enum TeferiEncounter implements NPCEncounter {
             );
         }
     },
-    NEMESIS(10) {
+    NEMESIS(10, "Nemesis") {
         @Override
         protected List<String> getStoryTextChunks() {
             return ImmutableList.of(
@@ -289,9 +289,11 @@ public enum TeferiEncounter implements NPCEncounter {
     };
 
     private final int requiredLevel;
+    private final String title;
 
-    TeferiEncounter(int requiredLevel) {
+    TeferiEncounter(int requiredLevel, String title) {
         this.requiredLevel = requiredLevel;
+        this.title = title;
     }
 
     @Override
@@ -308,7 +310,7 @@ public enum TeferiEncounter implements NPCEncounter {
     public NPCContext onBetweenRuns(RogueMetaProgress progress) {
         List<String> storyTextChunks = getStoryTextChunks();
         if (!storyTextChunks.isEmpty()) {
-            if (this == BEFORE_FIRST_RUN && progress.getProgressionTotalRunsStarted() > 0) {
+            if (this == MEETING_TEFERI && progress.getProgressionTotalRunsStarted() > 0) {
                 progress.setNPCLevel(getNpc().id, getFirstFutureStoryLevel(progress));
                 return null;
             }
@@ -323,6 +325,14 @@ public enum TeferiEncounter implements NPCEncounter {
         return null;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public List<String> getJournalText() {
+        return List.copyOf(getStoryTextChunks());
+    }
+
     protected List<String> getStoryTextChunks() {
         return ImmutableList.of();
     }
@@ -333,7 +343,7 @@ public enum TeferiEncounter implements NPCEncounter {
             return false;
         }
         return switch (this) {
-            case BEFORE_FIRST_RUN -> progress.getProgressionTotalRunsStarted() == 0;
+            case MEETING_TEFERI -> progress.getProgressionTotalRunsStarted() == 0;
             case FIRST_EVIDENCE -> progress.getDistinctCommandersWon() >= 1;
             case PATTERN_SPREADS -> progress.getDistinctCommandersWon() >= 2;
             case PHYREXIA -> progress.getDistinctCommandersWon() >= 3;

@@ -870,6 +870,16 @@ public class RogueMetaProgress {
         save();
     }
 
+    public void markAllTutorialsSeen() {
+        if (seenTutorials == null) {
+            seenTutorials = new HashSet<>();
+        }
+        for (RogueTutorial tutorial : RogueTutorial.values()) {
+            seenTutorials.add(tutorial.getId());
+        }
+        save();
+    }
+
     /**
      * Reset all tutorials to unseen state.
      */

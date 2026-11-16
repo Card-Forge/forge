@@ -1,18 +1,19 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class LifeAbundance extends Achievement {
-    public LifeAbundance() {
-        super("LifeAbundance", "Life Abundant",
-              "Finish a Rogue Commander match with 50 or more life",
-              "Overflowing with vitality.", 0);
+public class CodexComplete extends Achievement {
+    public CodexComplete() {
+        super("CodexComplete", "Codex",
+              "Complete the Codex",
+              "All records have been uncovered.", 0);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateRunAchievements()
+        return 0; // Not used; evaluated via evaluateCodexAchievements()
     }
 
     @Override

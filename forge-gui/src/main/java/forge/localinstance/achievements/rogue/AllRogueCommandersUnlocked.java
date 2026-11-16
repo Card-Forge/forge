@@ -1,19 +1,19 @@
-package forge.localinstance.achievements;
+package forge.localinstance.achievements.rogue;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.localinstance.achievements.Achievement;
 
-public class HenzieBoonsUnlocked extends Achievement {
-    public HenzieBoonsUnlocked() {
-        super("HenzieBoonsUnlocked", "Henzie",
-              "Unlock Henzie's run-start boons",
-              "The contract is signed.", 0);
-        setHidden(true);
+public class AllRogueCommandersUnlocked extends Achievement {
+    public AllRogueCommandersUnlocked() {
+        super("AllRogueCommandersUnlocked", "Full Party",
+              "Unlock all Rogue Commanders",
+              "Every legend answers the call.", 0);
     }
 
     @Override
     protected int evaluate(Player player, Game game) {
-        return 0; // Not used; evaluated via evaluateNpcBoonUnlockAchievements()
+        return 0; // Not used; evaluated via evaluateCommanderUnlockAchievements()
     }
 
     @Override

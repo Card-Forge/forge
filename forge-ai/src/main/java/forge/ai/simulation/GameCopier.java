@@ -310,6 +310,10 @@ public class GameCopier {
             // TODO CardsAddedThisTurn is now messed up
         }
         gameObjectMap = new CopiedGameObjectMap(newGame);
+        final List<Card> activePlanes = origGame.getActivePlanes();
+        if (activePlanes != null) {
+            newGame.setActivePlanes(gameObjectMap.mapList(activePlanes));
+        }
 
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);

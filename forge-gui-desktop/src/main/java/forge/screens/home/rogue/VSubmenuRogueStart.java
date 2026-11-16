@@ -39,8 +39,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private static final int OUTER_CARD_WIDTH = 140;
   private static final int CARD_SPACING = 15;
   private static final int CARD_PADDING = 15;
-  private static final int ACTION_BUTTON_WIDTH = 150;
-  private static final int ACTION_BUTTON_GAP = 10;
   private static final int COMMANDER_CAROUSEL_HEIGHT =
       Math.round(CENTER_CARD_WIDTH * CardPanel.ASPECT_RATIO) + 2 * CARD_PADDING + 20;
 
@@ -107,7 +105,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
   private JPanel pnlDetails;
   private JPanel descriptionHeader;
   private JPanel pnlActions;
-  private int actionColumns;
   private int lastDisplayWidth = -1;
   private int lastViewportHeight = -1;
   private final ComponentAdapter resizeListener = new ComponentAdapter() {
@@ -250,7 +247,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     display.addComponentListener(resizeListener);
     lastDisplayWidth = display.getWidth();
     lastViewportHeight = display.getParent() != null ? display.getParent().getHeight() : -1;
-    actionColumns = 0;
 
     display.repaintSelf();
     display.revalidate();
@@ -351,40 +347,19 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     panel.add(pnlDescensionLevel, "cell 0 6, span 2, growx, gaptop 10px, hidemode 3");
 
     // Row 7: Buttons
-    pnlActions = new JPanel(new MigLayout("insets 0, gap " + ACTION_BUTTON_GAP));
+    pnlActions = new JPanel(new MigLayout());
     pnlActions.setOpaque(false);
-    addActionButtons();
+    pnlActions.add(btnBeginRun);
+    pnlActions.add(btnAether);
+    pnlActions.add(btnHistory);
+    pnlActions.add(btnStats);
+    if (ForgePreferences.DEV_MODE) {
+      pnlActions.add(btnDevUnlockAll);
+      pnlActions.add(btnDevNPCProgress);
+    }
     panel.add(pnlActions, "cell 0 7, span 2, alignx center, gaptop 20px");
 
     return panel;
-  }
-
-  private void addActionButtons() {
-    final String buttonSize = "w " + ACTION_BUTTON_WIDTH + "px!, h 40px!";
-    pnlActions.add(btnBeginRun, buttonSize);
-    pnlActions.add(btnAether, buttonSize);
-    pnlActions.add(btnHistory, buttonSize);
-    pnlActions.add(btnStats, buttonSize);
-    if (ForgePreferences.DEV_MODE) {
-      pnlActions.add(btnDevUnlockAll, buttonSize);
-      pnlActions.add(btnDevNPCProgress, buttonSize);
-    }
-  }
-
-  private static int getActionColumnCount(int availableWidth) {
-    int maxColumns = Math.max(1,
-        (availableWidth + ACTION_BUTTON_GAP) / (ACTION_BUTTON_WIDTH + ACTION_BUTTON_GAP));
-    if (ForgePreferences.DEV_MODE) {
-      if (maxColumns >= 6) {
-        return 6;
-      }
-      if (maxColumns >= 3) {
-        return 3;
-      }
-    } else if (maxColumns >= 4) {
-      return 4;
-    }
-    return maxColumns >= 2 ? 2 : 1;
   }
 
   private void updateResponsiveLayout() {
@@ -394,14 +369,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
       return;
     }
 
-    int availableWidth = Math.round(display.getWidth() * 0.98f);
-    int columns = getActionColumnCount(availableWidth);
-    if (columns != actionColumns) {
-      actionColumns = columns;
-      pnlActions.removeAll();
-      pnlActions.setLayout(new MigLayout("insets 0, gap " + ACTION_BUTTON_GAP + ", wrap " + columns));
-      addActionButtons();
-    }
+    RogueUIHelper.layoutActionButtons(pnlActions, Math.round(display.getWidth() * 0.98f));
 
     int availableHeight = display.getParent().getHeight() - display.getY();
     boolean expanded = scrollCustomModifications.isVisible();
