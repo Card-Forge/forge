@@ -215,7 +215,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Commander:
             if (!items.iterator().hasNext()) { return; }
             PaperCard newCard = items.iterator().next().getKey(); //can only add one card at a time when on commander section
-            if (!confirmCommander(editor.gameType, newCard, null)) { return; }
+            if (!confirmCommander(editor.gameType, controller.getModel(), newCard, null)) { return; }
             int count = editor.getDeckManager().getItemCount();
             if (count > 0) {
                 if (editor.gameType == GameType.Oathbreaker) { //replace oathbreaker or signature spell if needed
@@ -482,7 +482,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (ce.controller.getModel().getOrCreate(DeckSection.Commander).countByName(card) > 0) { return; }
         // A catalog add obeys the same copy limit as a normal add
         if (isAdd && ce.getAllowedAdditions(Collections.singletonMap(card, 1).entrySet()).isEmpty()) { return; }
-        if (!confirmCommander(ce.gameType, card, partnerOf)) { return; }
+        if (!confirmCommander(ce.gameType, ce.controller.getModel(), card, partnerOf)) { return; }
         if (!isAdd) {
             ce.deckManager.removeItem(card, 1);
         }
@@ -492,8 +492,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         ce.getCbxSection().setSelectedItem(DeckSection.Commander);
     }
 
-    private static boolean confirmCommander(GameType gt, PaperCard card, PaperCard partnerOf) {
-        String warning = gt.getDeckFormat().getIllegalCommanderWarning(card, partnerOf);
+    private static boolean confirmCommander(GameType gt, Deck deck, PaperCard card, PaperCard partnerOf) {
+        String warning = gt.getDeckFormat().getIllegalCommanderWarning(deck, card, partnerOf);
         return warning == null || FOptionPane.showConfirmDialog(warning);
     }
 
