@@ -126,6 +126,22 @@ public class ComputerUtilManaTest extends SimulationTest {
         assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
     }
 
+    @Test
+    public void spiritGuideIsNotExiledToKeepAHeldColour() {
+        // the last Stomping Ground is the only green source for Giant Growth, but the lands pay {5} on their own
+        final Map<String, Integer> untapped = payAndCountUntapped("5", 5,
+                new String[] { "Simian Spirit Guide", "Giant Growth" }, "Stomping Ground:5");
+        assertEquals((int) untapped.get("Stomping Ground"), 0, "expected every land tapped, got " + untapped);
+    }
+
+    @Test
+    public void spiritGuideDoesNotCountAsASourceOfItsColour() {
+        // Stomping Ground is the only land that makes green, so Steam Vents has to pay the {R}
+        final Map<String, Integer> untapped = payAndCountUntapped("3 R G", 5,
+                new String[] { "Elvish Spirit Guide" }, "Island:3", "Stomping Ground:1", "Steam Vents:1");
+        assertEquals((int) untapped.get("Steam Vents"), 0, "expected every land tapped, got " + untapped);
+    }
+
     /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
     private Player sacrificeBoard(final int tokens, final String... permanents) {
         Game game = initAndCreateGame();
