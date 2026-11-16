@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
+import forge.ai.PlaceholderTargetAi;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -168,7 +169,74 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        return true;
+        if ("BirthingRitual".equals(sa.getParam("AILogic"))) {
+            return birthingRitualPaysOff(player, sa);
+        }
+        return !sacrificesOnlyItselfForItsOwnBenefit(player, sa);
+    }
+
+    /**
+     * "You may sacrifice a creature. If you do, put a +1/+1 counter on CARDNAME" (Crovax the Cursed): when the creature
+     * the AI would give up is the source itself, the counter it would get is for a card that is gone. The same goes for
+     * any other reward that only the source itself could use.
+     */
+    private static boolean sacrificesOnlyItselfForItsOwnBenefit(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || !sa.hasParam("Optional") || "Self".equals(sa.getParamOrDefault("SacValid", "Self"))) {
+            return false;
+        }
+        boolean benefitsSource = false;
+        for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            final String defined = sub.getParam("Defined");
+            if (sub.getApi() == forge.game.ability.ApiType.PutCounter && (defined == null || "Self".equals(defined))
+                    || sub.getApi() == forge.game.ability.ApiType.Pump && "Self".equals(defined)) {
+                benefitsSource = true;
+                break;
+            }
+        }
+        if (!benefitsSource) {
+            return false;
+        }
+        final CardCollection options = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                c -> c.isValid(sa.getParam("SacValid"), ai, host, sa) && c.canBeSacrificedBy(sa, true));
+        if (options.isEmpty()) {
+            return true;
+        }
+        final CardCollection sac = forge.ai.ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sa, false, true);
+        return sac == null || sac.isEmpty() || sac.get(0) == host;
+    }
+
+    /**
+     * Birthing Ritual: "look at the top seven, then you may sacrifice a creature; if you do, you may put a creature card
+     * with mana value 1 greater than the sacrificed creature's or less from among them onto the battlefield". Sacrificing
+     * without a card to put in its place is just throwing a creature away, so only do it when one of the seven cards
+     * (the top of the library has not moved yet) is a creature worth more than the creature that is given up.
+     */
+    public static boolean birthingRitualPaysOff(final Player ai, final SpellAbility sa) {
+        final int look = 7;
+        final CardCollection top = new CardCollection();
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (top.size() >= look) {
+                break;
+            }
+            top.add(c);
+        }
+        final CardCollection mine = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                c -> c.isCreature() && c.canBeSacrificedBy(sa, true));
+        // the creature the AI would sacrifice (its least valuable one)
+        final CardCollection sac = forge.ai.ComputerUtil.choosePermanentsToSacrifice(ai, mine, 1, sa, false, true);
+        if (sac == null || sac.isEmpty()) {
+            return false;
+        }
+        final Card given = sac.get(0);
+        final int limit = given.getCMC() + 1;
+        final int giveUp = ComputerUtilCard.evaluateCreature(given);
+        for (final Card c : top) {
+            if (c.isCreature() && c.getCMC() <= limit && ComputerUtilCard.evaluateCreature(c) > giveUp) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static AiAbilityDecision doSacOneEachLogic(Player ai, SpellAbility sa) {
@@ -209,6 +277,9 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        if ("PayIfBigger".equals(sa.getParam("AILogic"))) {
+            return !alreadyPaid && PlaceholderTargetAi.worthPaying(payer, sa, cost);
+        }
         // Icy Prison
         if (payers.size() > 1) {
             final Player p = sa.getActivatingPlayer();

@@ -4,7 +4,7 @@ Types:Legendary Artifact Spacecraft
 PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put four charge counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 4
-K:Station:16
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE16_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ DamageTrig | Description$ STATION 16+ Flying,,,Whenever CARDNAME deals combat damage to a player, draw that many cards.
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw that many cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X

@@ -33,6 +33,7 @@ import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Protection;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -42,6 +43,8 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -105,7 +108,7 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = false;
         this.attackers = new ArrayList<>();
-        if (CombatUtil.canAttack(attacker, defendingOpponent)) {
+        if (CombatUtil.canAttack(attacker, defendingOpponent) && !isPointlessAttackOnProtectedPlayer(attacker, defendingOpponent)) {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
@@ -119,11 +122,39 @@ public class AiAttackController {
         }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
-            if (canAttackWrapper(c, defender)) {
+            if (canAttackWrapper(c, defender) && !isPointlessAttackOnProtectedPlayer(c, defender)) {
                 attackers.add(c);
             }
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+    }
+
+    /**
+     * Attacking is legal into a player with protection (e.g. Teferi's Protection: protection from everything), but
+     * every point of damage is prevented, so the attack gains nothing and only exposes the creature. Creatures that
+     * have to attack anyway stay in the list.
+     */
+    private boolean isPointlessAttackOnProtectedPlayer(final Card attacker, final GameEntity defender) {
+        if (nextTurn || !(defender instanceof Player) || attacker.getSVar("MustAttack").equals("True")) {
+            return false;
+        }
+        return isDamageProtected((Player) defender, attacker);
+    }
+
+    /** @return true if the player has protection (from everything, a colour, a type ...) that prevents damage from the source. */
+    public static boolean isDamageProtected(final Player p, final Card source) {
+        for (final KeywordInterface kw : p.getKeywords()) {
+            final String orig = kw.getOriginal();
+            if (!orig.startsWith("Protection")) {
+                continue;
+            }
+            final String valid = Protection.getProtectionValid(orig, true);
+            // getProtectionValid is a comma list ("Card.ControlledBy Player.PlayerUID_1,Emblem.ControlledBy ..."): one restriction each
+            if (valid.isEmpty() || source.isValid(valid.split(","), p, null, null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -255,6 +286,23 @@ public class AiAttackController {
         return result;
     }
 
+    /**
+     * @return true if a permanent the AI controls prevents the attacker's damage to the defender and replaces it with
+     * an effect of its own ("prevent that damage and each opponent mills that many cards").
+     */
+    private static boolean hasOwnDamageConversion(final Player ai, final Card attacker, final GameEntity defender) {
+        for (final Card c : ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Command))) {
+            for (final ReplacementEffect re : c.getReplacementEffects()) {
+                // combat damage only ("IsCombat$ False" is for noncombat damage); the valid lists are comma separated and matchesValidParam tries each
+                if (re.getMode() == ReplacementType.DamageDone && re.hasParam("ReplaceWith") && !"False".equals(re.getParam("IsCombat"))
+                        && re.matchesValidParam("ValidSource", attacker) && re.matchesValidParam("ValidTarget", defender)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Is there any reward for attacking? (for 0/1 creatures there is not)
     /**
      * <p>
@@ -291,6 +339,10 @@ public class AiAttackController {
             if (!onlyIfExalted || this.attackers.size() == 1 || aiAggression == 6 /* 6 is Exalted attack */) {
                 return true;
             }
+        }
+        // The Mindskinner: no damage gets through, but a replacement we control turns it into an effect (a mill), so the attack still does something
+        if (defender instanceof Player && hasOwnDamageConversion(ai, attacker, defender)) {
+            return true;
         }
         // Poison opponent if unblocked
         if (defender instanceof Player player
@@ -382,7 +434,7 @@ public class AiAttackController {
                 return false;
             }
             int dmg = c.getNetCombatDamage();
-            if (dmg <= 0 && ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) - dmg <= 0) {
+            if (dmg <= 0 && ComputerUtilCombat.attackerDamageBonus(c, null, true) - dmg <= 0) {
                 return false;
             }
             return ComputerUtilCombat.canAttackNextTurn(c);
@@ -536,7 +588,7 @@ public class AiAttackController {
             for (Card c : bandingCreatures) {
                 Card bestBand = null;
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     // Don't band a zero power creature if there's already a banding creature in a band
                     attackers = CardLists.filter(attackers, card -> combat.getBandOfAttacker(card).getAttackers().size() == 1);
                 }
@@ -558,7 +610,7 @@ public class AiAttackController {
                     bestBand = bestAttacker;
                 }
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     attackers = combat.getAttackers(); // restore the unfiltered attackers
                 }
 
@@ -791,6 +843,10 @@ public class AiAttackController {
         List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
         List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
         List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        // not a battle whose back is a legend the AI already has (see LegalityGuard.redundantDefeat)
+        final int battleDamage = ComputerUtilCombat.totalCombatDamage(attackers);
+        prefBattleList = CardLists.filter(prefBattleList,
+                b -> !forge.ai.simulation.LegalityGuard.redundantDefeat(ai, b, battleDamage));
         if (!prefBattleList.isEmpty()) {
             // TODO try to be less predictable here, should really check if something would make the back uncastable
             return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
@@ -1437,7 +1493,7 @@ public class AiAttackController {
             );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, null);
+            defPower = ComputerUtilCombat.totalCombatDamage(validBlockers); // Doran: toughness, not power
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant
@@ -1474,7 +1530,7 @@ public class AiAttackController {
                                     && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
-                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;
+                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetCombatDamage() <= 0;
 
                             // We are attacking too recklessly if we can't kill a single blocker and:
                             // - our creature will die for sure (chump attack)
@@ -1523,7 +1579,7 @@ public class AiAttackController {
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
             // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
-            if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
+            if (Math.max(0, attacker.getNetCombatDamage()) * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
                     // Do not attack if we can afford using the ability.
@@ -1780,7 +1836,7 @@ public class AiAttackController {
             // running simulations.
             CardCollection blkSorted = new CardCollection(this.blockers);
             CardLists.sortByPowerDesc(blkSorted);
-            refPowerValue += blkSorted.get(0).getCurrentPower();
+            refPowerValue += Math.max(0, blkSorted.get(0).getNetCombatDamage());
         }
 
         for (Card cre : attSorted) {

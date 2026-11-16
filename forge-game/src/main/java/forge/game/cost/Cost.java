@@ -951,7 +951,10 @@ public class Cost implements Serializable {
         if (1 != i) {
             String [] typewords = type.split(" ");
             String lastWord = typewords[typewords.length - 1];
-            sb.append(CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
+            // a script that already wrote the plural ("untapYType<15/Creature.YouCtrl/creatures>") is not pluralized twice
+            final boolean plural = lastWord.endsWith("s") && !lastWord.endsWith("us") && !lastWord.endsWith("ss")
+                    && !CardType.isASubType(lastWord);
+            sb.append(plural ? type : CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
                     : type + "s");
         } else {
             sb.append(type);

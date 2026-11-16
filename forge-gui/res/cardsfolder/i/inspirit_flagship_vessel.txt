@@ -2,7 +2,7 @@ Name:Inspirit, Flagship Vessel
 ManaCost:U R W
 Types:Legendary Artifact Spacecraft
 PT:5/5
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE1_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 1+ At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.
 SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.
 SVar:TrigChoose:DB$ GenericChoice | ValidTgts$ Artifact.Other | TgtPrompt$ Select up to one other target artifact | TargetMin$ 0 | TargetMax$ 1 | Choices$ P1P1Counter,ChargeCounters | ConditionDefined$ Targeted | ConditionPresent$ Card | Defined$ You

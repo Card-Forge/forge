@@ -22,6 +22,18 @@ public class TapAi extends TapAiBase {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        if (ManaDenial.isLandTapper(sa)) {
+            // Rishadan Port, Rishadan Dockhand: which land and when is ManaDenial's call; the generic logic below
+            // only looks at creatures and permanents with tap abilities, so it never taps a land
+            final Card land = ManaDenial.choose(ai, sa);
+            if (land == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            sa.resetTargets();
+            sa.getTargets().add(land);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
 
         if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -107,8 +119,9 @@ public class TapAi extends TapAiBase {
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         for (Card c : playable) {
                             // Check if the AI can pay for the card with the mana it has and intends to play it
-                            if (c.getManaCost().canBePaidWithAvailable(availableColors)
-                                    && ComputerUtil.hasReasonToPlayCardThisTurn(payer, c)) {
+                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
+                            // card always looks unaffordable. A nonland card that needs exactly this land's mana will do
+                            if (!c.isLand() && c.getManaCost().canBePaidWithAvailable(availableColors)) {
                                 return true;
                             }
                         }

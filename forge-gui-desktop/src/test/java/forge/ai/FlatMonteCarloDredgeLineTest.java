@@ -9,6 +9,7 @@ import forge.ai.simulation.ComboGuard;
 import forge.ai.simulation.ComboPlan;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.DredgeLine;
+import forge.ai.simulation.LegalityGuard;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -164,7 +165,10 @@ public class FlatMonteCarloDredgeLineTest extends AITest {
         AssertJUnit.assertEquals("no Diamond in play", "dredge-line-incomplete",
                 ComboGuard.problem(p, cast, null, plan.combos));
         addCardToZone("Lion's Eye Diamond", p, ZoneType.Battlefield);
-        AssertJUnit.assertNull("the line is complete", ComboGuard.problem(p, cast, null, plan.combos));
+        AssertJUnit.assertEquals("generic guard sees an X=0 spell", "x-zero",
+                LegalityGuard.problem(p, cast));
+        AssertJUnit.assertNull("completed Dredge line deliberately uses X=0",
+                ComboGuard.problem(p, cast, null, plan.combos));
     }
 
     @Test
