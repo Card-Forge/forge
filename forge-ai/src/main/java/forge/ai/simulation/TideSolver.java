@@ -94,7 +94,19 @@ public final class TideSolver {
                     lastNote = "wins after " + i + " plays";
                     return true;
                 }
-                final List<SpellAbility> moves = StormSolver.movesOf(simAi);
+                final List<SpellAbility> moves = new java.util.ArrayList<>(StormSolver.movesOf(simAi));
+                // the picker leaves mana abilities out, and the loop taps every land for mana
+                for (final Card land : simAi.getCardsIn(ZoneType.Battlefield)) {
+                    if (land.isLand() && !land.isTapped()) {
+                        for (final SpellAbility ma : land.getManaAbilities()) {
+                            ma.setActivatingPlayer(simAi);
+                            if (ma.canPlay()) {
+                                moves.add(ma);
+                                break;
+                            }
+                        }
+                    }
+                }
                 final SpellAbility step = LoopRunner.next(simAi, moves, s -> true);
                 if (step == null) {
                     lastNote = "no win: the loop ended after " + i + " plays";
