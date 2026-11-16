@@ -457,4 +457,26 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("twelve Islands, two Turnabouts and a Stroke win against a library of twenty: "
                 + forge.ai.simulation.TideSolver.lastNote, forge.ai.simulation.TideSolver.wins(ai));
     }
+
+    @Test(timeOut = 120000)
+    public void twoHighTidesAndTurnaboutBeforeTimeSpiralWhenThereIsNoFinisher() {
+        tideDeckWith(7, "High Tide", "High Tide", "Turnabout", "Time Spiral", "Time Spiral");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library); // a finisher left to draw
+        final SpellAbility first = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("seven Islands, two High Tides, Turnabout and Time Spiral: start", first);
+        AssertJUnit.assertEquals("High Tide first", "High Tide", first.getHostCard().getName());
+        AssertJUnit.assertTrue("Time Spiral is kept for after them", LoopRunner.held(ai, spellOf("Turnabout")) == false);
+    }
+
+    @Test(timeOut = 120000)
+    public void splinterTwinIsNotPutOnSpellskite() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        addCardToZone("Spellskite", ai, ZoneType.Battlefield);
+        final Card twin = addCardToZone("Splinter Twin", ai, ZoneType.Hand);
+        addCards("Mountain", 4, ai);
+        playsOf();
+        final AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(twin.getFirstSpellAbility());
+        AssertJUnit.assertNotSame("nothing worth copying: Splinter Twin stays in hand", AiPlayDecision.WillPlay, decision);
+    }
 }

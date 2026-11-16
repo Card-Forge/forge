@@ -19,6 +19,9 @@ import forge.game.zone.ZoneType;
  */
 public final class TideSolver {
     private static final int MAX_STEPS = 400;
+    /** Orders of the hidden library tried, and how many of them have to win. */
+    private static final int VARIANTS = 5;
+    private static final int NEEDED = 2;
     private static final ThreadLocal<Boolean> RUNNING = ThreadLocal.withInitial(() -> Boolean.FALSE);
     private static final Map<String, Boolean> KNOWN = new HashMap<>();
     /** What the last run saw, for tests and traces. */
@@ -66,7 +69,18 @@ public final class TideSolver {
         boolean won = false;
         RUNNING.set(Boolean.TRUE);
         try {
-            won = playOut(ai);
+            // the library is only a guess: a line that draws (Time Spiral) is played out in several orders of it, and is a
+            // plan when enough of them end in a win; a line that draws nothing wins in all of them or none
+            int wins = 0;
+            for (int variant = 0; variant < VARIANTS; variant++) {
+                if (playOut(ai, variant)) {
+                    wins++;
+                }
+                if (wins >= NEEDED || wins + (VARIANTS - 1 - variant) < NEEDED) {
+                    break;
+                }
+            }
+            won = wins >= NEEDED;
         } catch (final RuntimeException e) {
             lastNote = "solver error: " + e;
         } finally {
@@ -78,9 +92,12 @@ public final class TideSolver {
         return won;
     }
 
-    private static boolean playOut(final Player ai) {
+    private static boolean playOut(final Player ai, final int variant) {
         final Game game = ai.getGame();
         final GameSimulator sim = new GameSimulator(game, ai);
+        HiddenInfoShuffler.shuffle(sim.getSimulatedGameState(), sim.getGameCopier(), ai,
+                new java.util.Random(game.getPhaseHandler().getTurn() * 31L + 7919L * variant), c -> false);
+        sim.releaseCopier();
         try {
             final Player simAi = sim.getSimulatedAiPlayer();
             final Game simGame = sim.getSimulatedGameState();

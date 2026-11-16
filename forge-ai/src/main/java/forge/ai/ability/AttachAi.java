@@ -1090,7 +1090,44 @@ public class AttachAi extends SpellAbilityAi {
         return affected != null && (affected.contains(stCheck) || affected.contains("AttachedBy"));
     }
 
+    /**
+     * Splinter Twin and the other auras that let a creature copy itself: only a creature that gains from a hasty
+     * copy is worth it. One with an enters-the-battlefield trigger is the deck's reason for the aura (Pestermite,
+     * Deceiver Exarch, Zealous Conscripts); without one, a creature that can attack for at least two, doubled. A blocker
+     * or a utility creature (Spellskite) gains nothing, and the aura is not cast on it.
+     */
+    private static Card attachAICopyEnabler(final Player ai, final List<Card> list) {
+        Card best = null;
+        int bestScore = 0;
+        for (final Card c : list) {
+            if (!c.isCreature() || !c.getController().equals(ai) || c.isEnchanted()) {
+                continue;
+            }
+            int score = 0;
+            for (final Trigger t : c.getTriggers()) {
+                if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Destination"))
+                        && t.getParam("ValidCard") != null && t.getParam("ValidCard").startsWith("Card.Self")) {
+                    score += 100;
+                }
+            }
+            if (score == 0 && c.getNetPower() >= 2 && !c.hasKeyword(Keyword.DEFENDER)) {
+                score = 10 * c.getNetPower();
+            }
+            if (score > 0) {
+                score += ComputerUtilCard.evaluateCreature(c) / 100;
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = c;
+            }
+        }
+        return best;
+    }
+
     private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
+        if ("SplinterTwin".equals(attachSource.getSVar("AttachAIPick"))) {
+            return attachAICopyEnabler(ai, list);
+        }
         // AI For choosing a Card to Pump
         Card card = null;
         List<Card> magnetList = null;

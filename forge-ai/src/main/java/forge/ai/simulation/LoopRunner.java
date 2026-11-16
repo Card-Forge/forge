@@ -293,6 +293,9 @@ public final class LoopRunner {
         if (tideDeckPieces(ai) && !tideActive(ai)) {
             return !tideReadyOrSolved(ai);
         }
+        if (refillPieces(ai) && !tideActive(ai) && (host.getName().equals(HIGH_TIDE) || host.getName().equals(TURNABOUT))) {
+            return !refillReady(ai);
+        }
         return !host.getName().equals(TURNABOUT) && !host.getName().equals(BRAIN_FREEZE) && tidePieces(ai)
                 && !tideActive(ai) && untappedIslands(ai) < ISLANDS_NEEDED;
     }
@@ -728,15 +731,74 @@ public final class LoopRunner {
 
     private static final String TIME_SPIRAL = "Time Spiral";
 
+    /** A hand without a finisher but with Time Spiral: the draw of seven is what it is played for. */
+    private static boolean refillPieces(final Player ai) {
+        return !hasFinisher(ai) && inHand(ai, TIME_SPIRAL) && (inHand(ai, HIGH_TIDE) || tideActive(ai))
+                && TidePlan.isTideDeck(ai);
+    }
+
+    /** The mana the hand makes with its High Tides and Turnabouts, to pay for Time Spiral (six) and keep some over. */
+    private static int refillMana(final Player ai) {
+        int islands = 0;
+        int others = 0;
+        int untappedIslands = 0;
+        int untappedOthers = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isLand()) {
+                continue;
+            }
+            final boolean island = c.getType().hasSubtype("Island");
+            islands += island ? 1 : 0;
+            others += island ? 0 : 1;
+            if (!c.isTapped()) {
+                untappedIslands += island ? 1 : 0;
+                untappedOthers += island ? 0 : 1;
+            }
+        }
+        final int copies = count(ai, HIGH_TIDE);
+        final int mult = 1 + tideCount(ai) + copies;
+        int mana = ai.getManaPool().totalMana() + mult * untappedIslands + untappedOthers - 2 * copies;
+        final int all = mult * islands + others;
+        for (int i = 0; i < count(ai, TURNABOUT); i++) {
+            if (mana >= 4) {
+                mana += all - 4;
+            }
+        }
+        return mana;
+    }
+
+    /** Whether the High Tide turn without a finisher in hand is worth starting: Time Spiral is paid for, or the copy shows a win. */
+    static boolean refillReady(final Player ai) {
+        return TideSolver.running() || refillMana(ai) >= 8 || TideSolver.wins(ai);
+    }
+
     /**
-     * High Tide is in effect and the hand has no finisher: every land is tapped for mana and Time Spiral is cast with
-     * it, which untaps six lands and draws seven new cards (a finisher among them, and more untaps). It is not cast
-     * while the hand has a finisher, since the hand is shuffled into the library.
+     * High Tide decks without a finisher in the hand, with Time Spiral: every High Tide first (each is another mana for
+     * every Island), every land tapped, Turnabout on the lands to tap them again, and with all that mana floating
+     * Time Spiral, which untaps six lands more and draws seven new cards, a finisher among them. The hand is shuffled
+     * away by it, so Turnabout is cast before it, and it is not cast while the hand holds a finisher.
      */
     private static SpellAbility tideRefill(final Player ai, final List<SpellAbility> candidates,
                                            final Predicate<SpellAbility> approve) {
-        if (!tideActive(ai) || hasFinisher(ai) || !inHand(ai, TIME_SPIRAL) || !tideDeckWorthRefilling(ai)) {
+        if (!refillPieces(ai)) {
             return null;
+        }
+        if (!tideActive(ai)) {
+            final SpellAbility tide = castFromHand(ai, candidates, HIGH_TIDE);
+            if (tide == null || !refillReady(ai)) {
+                return null;
+            }
+            tide.setActivatingPlayer(ai);
+            return approve.test(tide) ? tide : null;
+        }
+        if (untappedIslands(ai) >= 2) {
+            final SpellAbility more = castFromHand(ai, candidates, HIGH_TIDE);
+            if (more != null) {
+                more.setActivatingPlayer(ai);
+                if (approve.test(more)) {
+                    return more;
+                }
+            }
         }
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
@@ -747,7 +809,22 @@ public final class LoopRunner {
                 }
             }
         }
-        if (ai.getManaPool().totalMana() >= 6) {
+        final int pool = ai.getManaPool().totalMana();
+        final SpellAbility turnabout = castFromHand(ai, candidates, TURNABOUT);
+        if (turnabout != null && pool >= 4) {
+            turnabout.setActivatingPlayer(ai);
+            for (SpellAbility node = turnabout; node != null; node = node.getSubAbility()) {
+                if (node.usesTargeting()) {
+                    node.resetTargets();
+                    if (!node.canTarget(ai)) {
+                        return null;
+                    }
+                    node.getTargets().add(ai);
+                }
+            }
+            return approve.test(turnabout) ? turnabout : null;
+        }
+        if (turnabout == null && pool >= 6) {
             final SpellAbility spiral = castFromHand(ai, candidates, TIME_SPIRAL);
             if (spiral != null) {
                 spiral.setActivatingPlayer(ai);
@@ -755,10 +832,5 @@ public final class LoopRunner {
             }
         }
         return null;
-    }
-
-    /** A deck that has a finisher left to find (in the library or the sideboard to wish for). */
-    private static boolean tideDeckWorthRefilling(final Player ai) {
-        return TidePlan.isTideDeck(ai);
     }
 }
