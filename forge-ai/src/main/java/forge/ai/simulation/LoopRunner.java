@@ -83,6 +83,14 @@ public final class LoopRunner {
         if (palinchron != null) {
             return palinchron;
         }
+        final SpellAbility elves = ElfLoop.next(ai, candidates, target, approve);
+        if (elves != null) {
+            return elves;
+        }
+        final SpellAbility affinity = AffinityPlan.next(ai, candidates, approve);
+        if (affinity != null) {
+            return affinity;
+        }
         final SpellAbility deck = highTideDeck(ai, candidates, target, approve);
         if (deck != null) {
             return deck;
@@ -94,7 +102,7 @@ public final class LoopRunner {
         return tideSetup(ai, candidates, approve);
     }
 
-    private static Card inPlay(final Player ai, final String name) {
+    static Card inPlay(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {
                 return c;
@@ -256,7 +264,7 @@ public final class LoopRunner {
         return n;
     }
 
-    private static boolean inHand(final Player ai, final String name) {
+    static boolean inHand(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             if (c.getName().equals(name)) {
                 return true;
@@ -266,7 +274,7 @@ public final class LoopRunner {
     }
 
     /** The spell of that name from the hand, or null. */
-    private static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
+    static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host != null && sa.isSpell() && !sa.isLandAbility() && host.isInZone(ZoneType.Hand)
@@ -288,6 +296,9 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
+        if (ElfLoop.held(ai, sa)) {
+            return true;
+        }
         final Card host = sa == null ? null : sa.getHostCard();
         if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || !ai.equals(host.getController())
                 || !(host.getName().equals(HIGH_TIDE) || drawsX(host.getName()) || host.getName().equals(BRAIN_FREEZE)
