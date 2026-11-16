@@ -344,7 +344,6 @@ public class CountersPutAi extends CountersAi {
             if (type.equals("P1P1")) {
                 nPump = amount;
             }
-            sa.resetTargets();
             return FightAi.canFight(ai, sa, nPump, nPump);
         }
 
@@ -807,7 +806,6 @@ public class CountersPutAi extends CountersAi {
                 if (type.equals("P1P1")) {
                     nPump = amount;
                 }
-                sa.resetTargets();
                 AiAbilityDecision decision = FightAi.canFight(ai, sa, nPump, nPump);
                 if (decision.willingToPlay()) {
                     return decision;
