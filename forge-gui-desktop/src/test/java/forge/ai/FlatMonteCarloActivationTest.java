@@ -1,5 +1,6 @@
 package forge.ai;
 
+import forge.ai.simulation.VetoLog;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -42,6 +43,22 @@ public class FlatMonteCarloActivationTest extends AITest {
 
     private SpellAbility oran() {
         return ability(addCardToZone("Oran-Rief, the Vastwood", ai, ZoneType.Battlefield));
+    }
+
+    @Test
+    public void theVetoLogRecordsARefusedPlay() {
+        setUp();
+        VetoLog.reset();
+        VetoLog.setEnabled(true);
+        try {
+            final SpellAbility sa = oran();
+            VetoLog.refused(ai, sa, ActivationGuard.problem(ai, sa), "test");
+            AssertJUnit.assertTrue(VetoLog.summary(),
+                    VetoLog.summary().contains("1x Oran-Rief, the Vastwood | nothing-to-affect"));
+        } finally {
+            VetoLog.setEnabled(false);
+            VetoLog.reset();
+        }
     }
 
     @Test

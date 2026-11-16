@@ -940,7 +940,9 @@ public class AiController {
      */
     private boolean assemblyApproved(final SpellAbility sa) {
         try {
-            if (ComboGuard.problem(player, sa, null, deckPlan(player).combos) != null) {
+            final String assemblyProblem = ComboGuard.problem(player, sa, null, deckPlan(player).combos);
+            if (assemblyProblem != null) {
+                VetoLog.refused(player, sa, assemblyProblem, "assembly");
                 return false;
             }
             sa.setActivatingPlayer(player);
@@ -1304,7 +1306,7 @@ public class AiController {
     public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() > min) {
             // the High Tide loop keeps its Stroke of Genius, High Tide, untap spells and counterspells
-            final CardCollection tideSafe = forge.ai.simulation.LoopRunner.withoutTideKeys(player, validCards);
+            final CardCollection tideSafe = LoopRunner.withoutTideKeys(player, validCards);
             if (tideSafe.size() >= min && tideSafe.size() < validCards.size()) {
                 return chooseCardsToDiscard(min, max, tideSafe, sa);
             }
@@ -1882,7 +1884,7 @@ public class AiController {
             if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
                 // a land that makes no mana yet (Temple of the False God with four lands to come) waits for the others
                 final CardCollection working = CardLists.filter(landsWannaPlay,
-                        l -> !forge.ai.simulation.LegalityGuard.isDormantLand(player, l));
+                        l -> !LegalityGuard.isDormantLand(player, l));
                 if (!working.isEmpty()) {
                     landsWannaPlay = working;
                 }
@@ -2161,11 +2163,11 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
-                    || (flatMc && LoopRunner.held(player, spellAbility))
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
+                    || (flatMc && LoopRunner.held(player, spellAbility) && vetoed(spellAbility, "held-for-loop"))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
-                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
+                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility) && vetoed(spellAbility, "waits-for-combat"))
                     // an equip is an investment: it does not take the mana of a creature that could be cast instead
                     || (flatMc && spellAbility.isEquip() && !FlatMonteCarloPicker.sparesMana(player, spellAbility))
                     // the upkeep is for a forecast ability, if its cost costs nothing the first main phase needs
@@ -2507,6 +2509,12 @@ public class AiController {
         return cfg;
     }
 
+    /** Logs a play dropped from the list of candidates (see {@link VetoLog}); always true, so it chains onto a test. */
+    private boolean vetoed(final SpellAbility sa, final String reason) {
+        VetoLog.refused(player, sa, reason, "list");
+        return true;
+    }
+
     /**
      * Plays that Flat Monte Carlo never spends a card on (see {@link ComboGuard}): bringing back
      * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
@@ -2516,9 +2524,14 @@ public class AiController {
         final ComboPlan plan = deckPlan(player).combos;
         final String problem = ComboGuard.problem(player, sa, aim, plan);
         if (problem != null) {
+            VetoLog.refused(player, sa, problem, "guard");
             return problem;
         }
-        return saveCantrips && ComboGuard.isCantrip(sa) ? "cantrip-saved" : null;
+        if (saveCantrips && ComboGuard.isCantrip(sa)) {
+            VetoLog.refused(player, sa, "cantrip-saved", "guard");
+            return "cantrip-saved";
+        }
+        return null;
     }
 
     private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approvedIn, final List<SpellAbility> extras,
@@ -2908,6 +2921,7 @@ public class AiController {
         final String problem = ActivationGuard.problem(player, sa) != null ? ActivationGuard.problem(player, sa)
                 : ActivationGuard.spellProblem(player, sa);
         if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
+            VetoLog.refused(player, sa, problem, "discovery");
             return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }
         final Card host = sa.getHostCard();
