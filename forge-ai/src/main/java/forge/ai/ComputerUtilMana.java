@@ -947,6 +947,8 @@ public class ComputerUtilMana {
      * This never changes how many sources get tapped, only which.
      * A colour that a card in hand needs outranks the source scores, so a held spell stays castable;
      * leaving a colour untapped just to hide information only reorders equally scored sources.
+     * A source that uses itself up, such as a spirit guide or a Treasure, keeps its scored place
+     * and does not count as keeping a colour available.
      */
     private static Collection<SpellAbility> sparingSourcesFirst(final Collection<SpellAbility> candidates,
             final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final SpellAbility sa, final Player ai) {
@@ -957,7 +959,9 @@ public class ComputerUtilMana {
         // untapped sources per colour; a card counts once for every colour it can make
         final Map<Card, Integer> colorsOf = new HashMap<>();
         for (final SpellAbility ma : sourcesForShards.values()) {
-            colorsOf.merge(ma.getHostCard(), producedColors(ma), (a, b) -> a | b);
+            if (!usesUpSource(ma)) {
+                colorsOf.merge(ma.getHostCard(), producedColors(ma), (a, b) -> a | b);
+            }
         }
         final int[] perColor = new int[MagicColor.WUBRG.length];
         for (final int mask : colorsOf.values()) {
@@ -999,17 +1003,24 @@ public class ComputerUtilMana {
         final Comparator<SpellAbility> byAny = Comparator.comparingInt(ma -> Integer.bitCount(drained.applyAsInt(ma)));
 
         // stable sorts: ties keep the existing order, including the hand colour tie-break
-        list.sort(byHeld);
+        final List<SpellAbility> reusable = list.stream().filter(ma -> !usesUpSource(ma)).sorted(byHeld).collect(Collectors.toList());
+        final Iterator<SpellAbility> nextReusable = reusable.iterator();
+        list.replaceAll(ma -> usesUpSource(ma) ? ma : nextReusable.next());
 
         final int lead = scoreManaProducingCard(list.get(0).getHostCard());
-        int end = 1;
-        while (end < list.size() && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
+        int end = 0;
+        while (end < list.size() && !usesUpSource(list.get(end)) && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
             end++;
         }
         if (end > 1) {
             list.subList(0, end).sort(byHeld.thenComparing(byAny));
         }
         return list;
+    }
+
+    private static boolean usesUpSource(final SpellAbility ma) {
+        return ComputerUtilCost.isSacrificeSelfCost(ma.getPayCosts())
+                || ma.getPayCosts().getCostParts().stream().anyMatch(part -> part instanceof CostExile && part.payCostFromSource());
     }
 
     private static int producedColors(final SpellAbility ma) {
