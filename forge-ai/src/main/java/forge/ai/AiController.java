@@ -1126,7 +1126,7 @@ public class AiController {
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
             }
-            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
+            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX() && sa.getApi() != ApiType.RollPlanarDice) {
                 // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
                 // nothing (a 0/0 animate, a 0-point pump) and the AI repeats it at every priority pass. Size X to the mana
                 // that can be spared, and don't activate when there is none.
