@@ -1,8 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.card.Card;
@@ -25,11 +23,18 @@ public final class VetoLog {
 
     private static final Set<String> SEEN = ConcurrentHashMap.newKeySet();
     private static final Map<String, Integer> COUNTS = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Integer>> BY_PLAYER = new ConcurrentHashMap<>();
+    private static volatile boolean echo = true;
 
     private VetoLog() { }
 
     public static boolean isEnabled() {
         return enabled;
+    }
+
+    /** Whether each new refusal is also printed to stderr (a sweep of many games turns this off and reads the summaries). */
+    public static void setEcho(final boolean on) {
+        echo = on;
     }
 
     /** For tests (and a debugger): the property sets the starting value. */
@@ -46,6 +51,9 @@ public final class VetoLog {
             final Card host = sa.getHostCard();
             final String card = host == null ? "?" : host.getName();
             COUNTS.merge(card + " | " + reason, 1, Integer::sum);
+            if (ai != null) {
+                BY_PLAYER.computeIfAbsent(ai.getName(), k -> new ConcurrentHashMap<>()).merge(card + " | " + reason, 1, Integer::sum);
+            }
             String when = "";
             if (ai != null && ai.getGame() != null) {
                 final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
@@ -53,7 +61,7 @@ public final class VetoLog {
             }
             final String line = "[veto] " + when + (ai == null ? "" : ai.getName()) + " | " + card + " | "
                     + (sa.isSpell() ? "spell" : sa.isLandAbility() ? "land" : "ability") + " | reason=" + reason + " | at=" + site;
-            if (SEEN.add(line)) {
+            if (SEEN.add(line) && echo) {
                 System.err.println(line);
             }
         } catch (final RuntimeException e) {
@@ -70,9 +78,21 @@ public final class VetoLog {
         return sb.toString();
     }
 
+    /** The refusals of one player (by the name of the player), "card | reason" with a count, most frequent first. */
+    public static List<String> summaryOf(final String player) {
+        final Map<String, Integer> mine = BY_PLAYER.get(player);
+        final java.util.List<String> out = new ArrayList<>();
+        if (mine != null) {
+            mine.entrySet().stream().sorted((a, b) -> b.getValue() - a.getValue())
+                    .forEach(e -> out.add(e.getValue() + "x " + e.getKey()));
+        }
+        return out;
+    }
+
     /** Forgets everything (between tests). */
     public static void reset() {
         SEEN.clear();
         COUNTS.clear();
+        BY_PLAYER.clear();
     }
 }
