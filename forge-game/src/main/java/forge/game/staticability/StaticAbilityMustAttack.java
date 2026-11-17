@@ -18,20 +18,12 @@ public class StaticAbilityMustAttack {
 
     public static List<GameEntity> entitiesMustAttack(final Card attacker) {
         final List<GameEntity> entityList = new ArrayList<>();
-        final Game game = attacker.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(StaticAbilityMode.MustAttack)) {
-                    continue;
-                }
-                if (stAb.matchesValidParam("ValidCreature", attacker)) {
-                    if (stAb.hasParam("MustAttack")) {
-                        entityList.addAll(definedMustAttack(stAb));
-                    } else {
-                        // if the list is only the attacker, the attacker must attack, but no specific entity
-                        entityList.add(attacker);
-                    }
-                }
+        for (final StaticAbility stAb : mustAttackSources(attacker)) {
+            if (stAb.hasParam("MustAttack")) {
+                entityList.addAll(definedMustAttack(stAb));
+            } else {
+                // if the list is only the attacker, the attacker must attack, but no specific entity
+                entityList.add(attacker);
             }
         }
         return entityList;
