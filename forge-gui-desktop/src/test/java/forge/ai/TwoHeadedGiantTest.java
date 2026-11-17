@@ -23,6 +23,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatExplainer;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.GameLossReason;
@@ -343,6 +344,25 @@ public class TwoHeadedGiantTest extends AITest {
         assertFalse(CombatUtil.validateAttackers(combat), "the first player skipped the attack Trove of Temptation requires");
         combat.addAttacker(bear1, b1);
         assertTrue(CombatUtil.validateAttackers(combat));
+    }
+
+    /** Fails if the explanation counts the teammate's attack toward the first player's requirement (CR 805.10a). */
+    @Test
+    public void theExplanationNamesTheRequirementATeammateSkipped() {
+        Game game = twoHeadedGiant();
+        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1), b1 = game.getPlayers().get(2);
+        addCard("Trove of Temptation", b1);
+        Card bear1 = addCard("Grizzly Bears", a1), bear2 = addCard("Grizzly Bears", a2);
+        bear1.setSickness(false);
+        bear2.setSickness(false);
+        game.getAction().checkStaticAbilities();
+
+        Combat combat = new Combat(a1);
+        combat.initConstraints();
+        combat.addAttacker(bear2, b1);
+        List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        assertEquals(reasons.size(), 1, reasons.toString());
+        assertTrue(reasons.get(0).contains("Trove of Temptation"), reasons.get(0));
     }
 
     /** Fails if a lone blocker on a menace creature is rejected while the teammate can still add the second blocker (CR 805.10d). */

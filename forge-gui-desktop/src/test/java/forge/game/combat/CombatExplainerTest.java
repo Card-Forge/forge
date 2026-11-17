@@ -127,6 +127,27 @@ public class CombatExplainerTest extends SimulationTest {
         assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat)), bear.toString(), "goaded");
     }
 
+    // CR 508.1d: nobody is required to pay an attack cost, so a goaded creature may attack its goader instead
+    @Test
+    public void testGoadedCreatureMayAttackGoaderIfOtherOpponentHasAttackCost() {
+        game = initAndCreateThreePlayerGame();
+        attacking = game.getPlayers().get(1);
+        Player goader = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, attacking);
+        Card bear = addCreature("Grizzly Bears", attacking);
+        bear.addGoad(game.getNextTimestamp(), goader);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertFalse(CombatUtil.canAttack(bear, goader));
+        assertContains(CombatExplainer.whyCantAttack(bear, goader), bear.toString(), "goaded");
+
+        addCard("Propaganda", game.getPlayers().get(2));
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(CombatUtil.canAttack(bear, goader));
+        AssertJUnit.assertNull(CombatExplainer.whyCantAttack(bear, goader));
+    }
+
     @Test
     public void testCantAttackAlone() {
         setUp();
