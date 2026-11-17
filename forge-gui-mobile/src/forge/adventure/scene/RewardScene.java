@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
@@ -78,6 +79,10 @@ public class RewardScene extends UIScene {
     public Image marketBackgroundImg = null;
     private Actor cachedCardsContainerActor = null;
     private Drawable origDrawable = null;
+    private final TypingLabel deckSlotLabel;
+    private final Array<Deck> pendingDecks = new Array<>();
+    private ShopActor deckShop;
+    private String deckSlotMessage;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -97,6 +102,13 @@ public class RewardScene extends UIScene {
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
         origDrawable = getBGDrawable();
+        deckSlotLabel = Controls.newTypingLabel("");
+        deckSlotLabel.setX(cachedCardsContainerActor.getX());
+        deckSlotLabel.setWidth(cachedCardsContainerActor.getWidth());
+        deckSlotLabel.setWrap(true);
+        deckSlotLabel.setAlignment(Align.center);
+        deckSlotLabel.setVisible(false);
+        stage.addActor(deckSlotLabel);
     }
 
     @Override
@@ -180,7 +192,7 @@ public class RewardScene extends UIScene {
         }
         shown = false;
         clearGenerated();
-        quitScene();
+        quitOrRevealDeck();
         return true;
     }
 
@@ -191,15 +203,52 @@ public class RewardScene extends UIScene {
                 continue;
             }
             if (type == Type.Loot || type == Type.EventReward)
-                AdventurePlayer.current().addReward(rewardActor.getReward());
+                claimReward(rewardActor.getReward());
             if (type == Type.QuestReward)
-                AdventurePlayer.current().addReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
+                claimReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
             rewardActor.clearLabel();
             try {
                 stage.getActors().removeValue(rewardActor, true);
             } catch (Exception e) {
             }
         }
+    }
+
+    private static boolean isDeckReward(Reward reward) {
+        return reward.getDeck() != null && reward.getDeck().getTags().contains(Reward.DECK_TAG);
+    }
+
+    private void claimReward(Reward reward) {
+        if (isDeckReward(reward))
+            pendingDecks.add(reward.getDeck());
+        else
+            AdventurePlayer.current().addReward(reward);
+    }
+
+    /** Reveals any decks claimed on this screen before leaving, then returns to the shop they were bought in. */
+    private void quitOrRevealDeck() {
+        if (pendingDecks.notEmpty()) {
+            revealDeck(pendingDecks.removeIndex(0));
+        } else if (deckShop != null) {
+            ShopActor shop = deckShop;
+            deckShop = null;
+            loadRewards(shop.getRewardData(), Type.Shop, shop);
+        } else {
+            quitScene();
+        }
+    }
+
+    private void revealDeck(Deck reward) {
+        // The shop keeps the reward, and an unlimited shop sells it again, so the slot gets its own copy
+        Deck deck = (Deck) reward.copyTo(reward.getName());
+        deck.getTags().remove(Reward.DECK_TAG);
+        int slot = AdventurePlayer.current().addDeckToEmptySlot(deck);
+        // Textra reads square brackets as markup, and commander precon names carry set and year in brackets
+        String name = deck.getName().replace("[", "[[");
+        deckSlotMessage = slot >= 0
+                ? Forge.getLocalizer().getMessage("lblDeckAddedToSlot", name, slot + 1)
+                : Forge.getLocalizer().getMessage("lblDeckSlotsFull", name);
+        loadRewards(deck, Type.EventReward, null, deck.getTags().contains("noSell"));
     }
 
     public List<RewardActor> getGeneratedRewards() {
@@ -447,6 +496,15 @@ public class RewardScene extends UIScene {
 
         float targetWidth = card.getWidth();
         float targetHeight = card.getHeight();
+        deckSlotLabel.setVisible(deckSlotMessage != null);
+        if (deckSlotMessage != null) {
+            deckSlotLabel.setText("[%?SHINY]" + deckSlotMessage);
+            deckSlotLabel.layout();
+            deckSlotLabel.setHeight(deckSlotLabel.getPrefHeight());
+            deckSlotLabel.setY(headerLabelOrigPos.y + headerLabel.getHeight() - deckSlotLabel.getHeight());
+            targetHeight = Math.min(targetHeight, deckSlotLabel.getY() - card.getY());
+            deckSlotMessage = null;
+        }
         float xOff = card.getX();
         float yOff = card.getY();
 
@@ -656,7 +714,7 @@ public class RewardScene extends UIScene {
                             changes.buyCard(objectID, index);
 
                         Current.player().takeGold(price);
-                        Current.player().addReward(rewardActor.getReward());
+                        claimReward(rewardActor.getReward());
 
                         HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
@@ -670,6 +728,10 @@ public class RewardScene extends UIScene {
                         updateCollectionPool();
                         updateBuyButtons();
                         removeListener(this);
+                        if (pendingDecks.notEmpty()) {
+                            deckShop = shopActor;
+                            revealDeck(pendingDecks.removeIndex(0));
+                        }
                     }
                 }
             });
@@ -728,7 +790,7 @@ public class RewardScene extends UIScene {
                     if (remainingSelections >= 1) {
 
                         remainingSelections--;
-                        Current.player().addReward(rewardActor.getReward());
+                        claimReward(rewardActor.getReward());
 
                         headerLabel.setVisible(remainingSelections > 0);
                         headerLabel.setText("Select " + remainingSelections + " rewards");

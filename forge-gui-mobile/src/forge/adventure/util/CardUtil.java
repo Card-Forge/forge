@@ -417,6 +417,12 @@ public class CardUtil {
     public static int getBoosterPrice(Deck booster) {
     	if (booster == null)
             return 0;
+        if (booster.getTags().contains(Reward.DECK_TAG)) {
+            int price = 0;
+            for (PaperCard card : booster.getAllCardsInASinglePool(true, true).toFlatList())
+                price += getCardPrice(card);
+            return price;
+        }
     	String editionCode = booster.getComment();
         AdventureReadPriceList.PriceData data = getPriceData();
         boolean useCustomPrices = data.mode == AdventureReadPriceList.PriceMode.FORCED
@@ -446,7 +452,7 @@ public class CardUtil {
         if (reward.getType() == Reward.Type.Gold)
             return reward.getCount();
 		if(reward.getType() == Reward.Type.CardPack)                // TODO: Heitor - Price by card count and type of boosterPack.
-         return getBoosterPrice(booster);
+         return reward.getCost() > 0 ? reward.getCost() : getBoosterPrice(booster);
 		
         return 1000;
     }
