@@ -21,7 +21,6 @@ public class FightAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        sa.resetTargets();
         final Card source = sa.getHostCard();
 
         // everything is defined or targeted above, can't do anything there unless a specific logic is set
@@ -38,10 +37,11 @@ public class FightAi extends SpellAbilityAi {
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, humCreatures, sa);
 
-        //prevent IndexOutOfBoundsException on MOJHOSTO variant
         if (humCreatures.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
+
+        sa.resetTargets();
 
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
