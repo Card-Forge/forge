@@ -2708,6 +2708,7 @@ J25-48 U General Kreat, the Boltbringer @Takeuchi Moto
 J25-49 R Gornog, the Red Reaper @Ishikawa Kenta
 J25-54 R Shroofus Sproutsire @Yukihiro Maruo
 J25-140 C Krenko's Command @Lucas Graciano
+J25-231 U Nyx-Fleece Ram @Hasani Claxton
 J25-270 C Take Up the Shield @Manuel Castañón
 J25-533 C Crimson Wisps @Jim Nelson
 J25-556 R Goblin Dark-Dwellers @Steven Belledin
