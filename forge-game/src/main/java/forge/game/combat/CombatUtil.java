@@ -79,6 +79,23 @@ public class CombatUtil {
     // ////////// ATTACK METHODS //////////
     // ////////////////////////////////////
 
+    /**
+     * Under shared team turns each teammate adds their own creatures to the one attack in turn,
+     * so it can only be checked once the last of them has declared (CR 805.10b).
+     *
+     * @return whether attacker is the last active player to declare attackers this combat
+     */
+    public static boolean isLastAttackDeclarer(final Player attacker) {
+        Player last = null;
+        // same order in which PhaseHandler asks each active player to declare
+        for (final Player p : attacker.getGame().getPhaseHandler().getActivePlayers()) {
+            if (canAttack(p)) {
+                last = p;
+            }
+        }
+        return last == null || last.equals(attacker);
+    }
+
     public static boolean validateAttackers(final Combat combat) {
         final AttackConstraints constraints = combat.getAttackConstraints();
         final int myViolations = constraints.countViolations(combat.getAttackersAndDefenders());

@@ -365,6 +365,44 @@ public class TwoHeadedGiantTest extends AITest {
         assertTrue(reasons.get(0).contains("Trove of Temptation"), reasons.get(0));
     }
 
+    /** Fails if the first teammate's attack prompt checks the team's attack before the second teammate has declared (CR 805.10b). */
+    @Test
+    public void onlyTheLastTeammateToDeclareCompletesTheAttack() {
+        Game game = twoHeadedGiant();
+        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1);
+        addCard("Grizzly Bears", a1).setSickness(false);
+        Card bear2 = addCard("Grizzly Bears", a2);
+        bear2.setSickness(false);
+        assertFalse(CombatUtil.isLastAttackDeclarer(a1), "the teammate still declares after the first player");
+        assertTrue(CombatUtil.isLastAttackDeclarer(a2));
+
+        // a teammate without a creature that can attack isn't asked to declare
+        bear2.tap(true, null, null);
+        assertTrue(CombatUtil.isLastAttackDeclarer(a1));
+
+        Game ordinary = teamGame(false);
+        addCard("Grizzly Bears", ordinary.getPlayers().get(0)).setSickness(false);
+        addCard("Grizzly Bears", ordinary.getPlayers().get(1)).setSickness(false);
+        assertTrue(CombatUtil.isLastAttackDeclarer(ordinary.getPlayers().get(0)), "an ordinary team game has no shared attack");
+    }
+
+    /** Fails if the legal attacks suggested to a player leave out their teammate's creatures (CR 805.10b). */
+    @Test
+    public void theSuggestedAttacksIncludeTheTeammatesCreatures() {
+        Game game = twoHeadedGiant();
+        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1), b1 = game.getPlayers().get(2);
+        Card bear = addCard("Grizzly Bears", a1), juggernaut = addCard("Juggernaut", a2);
+        bear.setSickness(false);
+        juggernaut.setSickness(false);
+        game.getAction().checkStaticAbilities();
+
+        Combat combat = new Combat(a1);
+        combat.initConstraints();
+        combat.addAttacker(bear, b1);
+        String suggestions = CombatExplainer.suggestLegalAttacks(combat);
+        assertTrue(suggestions.contains(bear + " attacking " + b1 + ", " + juggernaut + " attacking "), suggestions);
+    }
+
     /** Fails if a lone blocker on a menace creature is rejected while the teammate can still add the second blocker (CR 805.10d). */
     @Test
     public void aTeammateCanCompleteAMenaceBlock() {

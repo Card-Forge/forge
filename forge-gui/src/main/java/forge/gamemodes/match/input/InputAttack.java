@@ -105,7 +105,9 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onOk() {
-        final List<String> invalidReasons = CombatExplainer.explainInvalidAttack(combat);
+        // a teammate still to declare can complete the attack, the game checks it once everyone has declared
+        final List<String> invalidReasons = CombatUtil.isLastAttackDeclarer(playerAttacks)
+                ? CombatExplainer.explainInvalidAttack(combat) : List.of();
         if (!invalidReasons.isEmpty()) {
             final String attackErrors = String.join("\n", invalidReasons);
             //must run in game thread to prevent problems for mobile game
