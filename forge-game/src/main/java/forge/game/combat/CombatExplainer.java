@@ -184,7 +184,8 @@ public final class CombatExplainer {
     private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Map<Card, GameEntity> declared,
             final Map<Card, GameEntity> best) {
         final Map<Card, GameEntity> result = new LinkedHashMap<>();
-        for (final Card c : combat.getAttackingPlayer().getCreaturesInPlay()) {
+        // CR 805.10b: under shared team turns the teammates' creatures can attack too
+        for (final Card c : combat.getAttackingPlayer().getSharedTeam().getCreaturesInPlay()) {
             if (declared.containsKey(c) || !combat.getAttackConstraints().getRestrictions().containsKey(c)) {
                 continue;
             }
