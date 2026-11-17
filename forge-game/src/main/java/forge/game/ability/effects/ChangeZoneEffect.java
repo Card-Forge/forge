@@ -1342,6 +1342,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             for (final Card c : chosenCards) {
                 Card movedCard;
                 final Zone originZone = game.getZoneOf(c);
+                final Card lkiCopy = sa.hasParam("RememberLKI") ? CardCopyService.getLKICopy(c) : null;
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
@@ -1527,8 +1528,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-                if (sa.hasParam("RememberLKI") && movedCard.getZone().is(destination)) {
-                    source.addRemembered(CardCopyService.getLKICopy(c));
+                if (lkiCopy != null && movedCard.getZone().is(destination)) {
+                    source.addRemembered(lkiCopy);
                 }
                 if (forget) {
                     source.removeRemembered(movedCard);
