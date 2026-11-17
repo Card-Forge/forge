@@ -14,8 +14,7 @@ public class StaticAbilityAttackRestrict {
     static public Integer globalAttackRestrict(Game game) {
         Integer max = null;
         for (final StaticAbility stAb : attackRestrictSources(game, null)) {
-            int stMax = AbilityUtils.calculateAmount(stAb.getHostCard(),
-                    stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
+            int stMax = maxAttackers(stAb);
             if (null == max || stMax < max) {
                 max = stMax;
             }
@@ -26,13 +25,16 @@ public class StaticAbilityAttackRestrict {
     static public Integer attackRestrictNum(GameEntity defender) {
         Integer num = null;
         for (final StaticAbility stAb : attackRestrictSources(defender.getGame(), defender)) {
-            int stNum = AbilityUtils.calculateAmount(stAb.getHostCard(),
-                    stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
+            int stNum = maxAttackers(stAb);
             if (null == num || stNum < num) {
                 num = stNum;
             }
         }
         return num;
+    }
+
+    static public int maxAttackers(StaticAbility stAb) {
+        return AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
     }
 
     /**

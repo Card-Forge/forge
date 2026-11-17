@@ -220,6 +220,8 @@ public final class CombatExplainer {
         final Integer max = global.getMax();
         if (max != null && declared.size() > max) {
             final List<StaticAbility> sources = StaticAbilityAttackRestrict.attackRestrictSources(combat.getAttackingPlayer().getGame(), null);
+            // only the abilities setting this maximum, a higher overall limit doesn't explain it
+            sources.removeIf(stAb -> StaticAbilityAttackRestrict.maxAttackers(stAb) != max);
             if (sources.isEmpty()) {
                 // the maximum is the sum of the limits of each defender
                 for (GameEntity defender : global.getDefenderMax().keySet()) {
