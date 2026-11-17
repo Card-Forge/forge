@@ -122,6 +122,7 @@ Dominaria Remastered, 3/6/DMR, DMR
 Phyrexia: All Will Be One, 3/6/ONE, ONE
 Phyrexia: All Will Be One Jumpstart, -/2/ONE, Meta-Choose(S(ONE Mite-y 1)Mite-y 1;S(ONE Mite-y 2)Mite-y 2;S(ONE Progress 1)Progress 1;S(ONE Progress 2)Progress 2;S(ONE Corruption 1)Corruption 1;S(ONE Corruption 2)Corruption 2;S(ONE Rebellious 1)Rebellious 1;S(ONE Rebellious 2)Rebellious 2;S(ONE Toxic 1)Toxic 1;S(ONE Toxic 2)Toxic 2)Themes
 Alchemy: Phyrexia, 3/6/ONE, YONE
+Unknown Event Philadelphia 23, -/2/ONE, UNKP23 Meta-Combo(B(ONE); B(ONE); B(ONE); B(ONE); B(MB1); B(MB1))4ONE2MB1
 Shadows over Innistrad Remastered, 3/6/SIR, SIR
 March of the Machine, 3/6/MOM, MOM
 March of the Machine Jumpstart, -/2/MOM, Meta-Choose(S(MOM Brood 1)Brood 1;S(MOM Brood 2)Brood 2 ;S(MOM Overachiever 1)Overachiever 1;S(MOM Overachiever 2)Overachiever 2;S(MOM Expendable 1)Expendable  1;S(MOM Expendable 2)Expendable 2;S(MOM Reinforcement 1)Reinforcement 1;S(MOM Reinforcement 2)Reinforcement 2;S(MOM Buff  1)Buff 1;S(MOM Buff 2)Buff 2)Themes

@@ -20,14 +20,20 @@ public class DraftOptions {
     private final CardEdition.DraftType deckType; // Normal or Commander
     private final String freeCommander;
     private final String impliedPartner;
+    private final String[] teams;
 
-    public DraftOptions(String doublePickOption, int maxPodSize, int recommendedPodSize, int maxMatchPlayers, CardEdition.DraftType deckType, String freeCommander, String impliedPartner) {
+    public DraftOptions(String doublePickOption, int maxPodSize, int recommendedPodSize, int maxMatchPlayers, CardEdition.DraftType deckType, String freeCommander, String impliedPartner, String teams) {
         this.maxPodSize = maxPodSize;
         this.recommendedPodSize = recommendedPodSize;
         this.maxMatchPlayers = maxMatchPlayers;
         this.deckType = deckType;
         this.freeCommander = freeCommander;
         this.impliedPartner = impliedPartner;
+        if (!teams.isEmpty()) {
+            this.teams = teams.split(",");
+        } else {
+            this.teams = new String[0];
+        }
         if (doublePickOption != null) {
             switch (doublePickOption.toLowerCase()) {
                 case "firstpick":
@@ -69,4 +75,5 @@ public class DraftOptions {
     public String getImpliedPartner() {
         return impliedPartner;
     }
+    public String[] getTeams() { return teams;}
 }

@@ -1,0 +1,70 @@
+[metadata]
+Code=UNKP23
+Date=2023-02-17
+Name=Unknown Event Philadelphia 2023
+Type=Funny
+Teams=Mirrans,Phyrexian
+Booster=5 Common:fromSheet("UNKP23 Philadelphia 23"), 3 Uncommon:fromSheet("UNKP23 Philadelphia 23"), 2 Rare:fromSheet("UNKP23 Philadelphia 23")
+ScryfallCode=UNK
+
+[Philadelphia 23]
+Phyrexian Ornithopter|UNK
+The Forgotten Place|UNK
+Nim Mongoose|UNK
+Good Knight|UNK
+Naturalize the Phyresis|UNK
+Unclaimed Cat|UNK
+Goblin Savant|UNK
+Bringer of Green Zenith's Twilight|UNK
+Locus Cobra|UNK
+Memnarchitect|UNK
+Bad Knight|UNK
+Red Priest of Yawgmoth|UNK
+Unclaimed Battle Axe|UNK
+Artifact Unknown Shores|UNK
+Join the Winning Team|UNK
+Drake with Set's Mechanic|UNK
+Incisor Steed|UNK
+Old Way Phyrexian|UNK
+Pulse of the Hunter Maze|UNK
+Tricky Mage|UNK
+Phyrexian Esthetician|UNK
+Unclaimed Bird|UNK
+Hidetsugu's Poison Rite|UNK
+Leech Medic|UNK
+Forestfolk|UNK
+Arcbound Mamba|UNK
+Glorious Dragon-Kin|UNK
+Oilskelion|UNK
+Snapsail Rider|UNK
+Compleated Clone Shell|UNK
+Phyrexian Chimney Imp|UNK
+Rosewater's Nemesis|UNK
+Sojourner's Enforcermite|UNK
+Platinum Persecutor|UNK
+Soul of Mirrodin|UNK
+Who's That Praetor?|UNK
+Hound of Urabrask|UNK
+Sawtooth Avenger|UNK
+Unclaimed Tanadon|UNK
+Chancellor of the Mulligan|UNK
+Call Up Emrakul to Help|UNK
+Then, Dreadmaws Ate Everyone|UNK
+Phyrexian Broodstar|UNK
+Unclaimed Blessing|UNK
+Point to the Scoreboard|UNK
+Mindslaver Toolkit|UNK
+Mox Poison|UNK
+Original Skullclamp|UNK
+Echoing Echo|UNK
+Melira's Snacks|UNK
+Untap, Upkeep, Draw|UNK
+Sheoldred's Terror|UNK
+Long-Term Phyresis Study|UNK
+Take the High Ground|UNK
+Burn the Phyresis|UNK
+More of That Strange Oil...|UNK
+Sort of _____ and _____|UNK
+Life Cloud|UNK
+Furnace Oriflamme|UNK
+Crux of Mirrodin|UNK
