@@ -2,6 +2,7 @@ Name:Delphia, Undecided
 ManaCost:W U B R G
 Types:Legendary Creature Elephant
 PT:6/6
+Oracle:<Unsupported Variant>
 
 # --- Mirrans Won ---
 
