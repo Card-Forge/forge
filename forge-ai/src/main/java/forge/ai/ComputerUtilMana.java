@@ -9,6 +9,9 @@ import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.SetMultimap;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
+import forge.ai.simulation.ComboCatalog;
+import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.VetoLog;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -886,6 +889,24 @@ public class ComputerUtilMana {
                 }
             } else {
                 System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
+                if (VetoLog.isEnabled()) {
+                    // what the payer could use, for the report: the estimate said yes and the payer did not find it
+                    int lands = 0;
+                    int creatures = 0;
+                    for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                        if (c.isTapped() || c.isCreature() && c.isSick() && !c.hasKeyword(Keyword.HASTE)) {
+                            continue;
+                        }
+                        if (c.isLand()) {
+                            lands++;
+                        } else if (c.isCreature()) {
+                            creatures++;
+                        }
+                    }
+                    VetoLog.note(ai, "pay-failed " + sa.getHostCard().getName() + " toPay=" + toPay
+                            + " convoke=" + sa.getHostCard().hasKeyword(Keyword.CONVOKE) + " x=" + sa.getXManaCostPaid()
+                            + " pool=" + ai.getManaPool().totalMana() + " untappedLands=" + lands + " readyCreatures=" + creatures);
+                }
                 sa.setSkip(true);
             }
             return null;
@@ -1327,8 +1348,8 @@ public class ComputerUtilMana {
         // A Command-zone mana effect that is a piece of a known win combo is reserved for that combo's payoff.
         // Other Command-zone mana abilities (including unrelated commanders) keep their normal payment behavior.
         if (ai.isAI() && sourceCard.isInZone(ZoneType.Command)
-                && forge.ai.simulation.ComboCatalog.isWinComboPiece(sourceCard)
-                && !forge.ai.simulation.ComboCatalog.canUseCommandManaSourceFor(ai, sourceCard, sa)) {
+                && ComboCatalog.isWinComboPiece(sourceCard)
+                && !ComboCatalog.canUseCommandManaSourceFor(ai, sourceCard, sa)) {
             return false;
         }
 
@@ -1340,7 +1361,7 @@ public class ComputerUtilMana {
         // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
         if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
                 && ai.getController() instanceof PlayerControllerAi
-                && forge.ai.simulation.ComboPlan.holdsKillPiece(ai)) {
+                && ComboPlan.holdsKillPiece(ai)) {
             return false;
         }
 
