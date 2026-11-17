@@ -393,7 +393,7 @@ public class SealedCardPoolGenerator {
      */
     private void handleTeams(DeckGroup deck) {
         if (teams.isEmpty()) return;
-        String playerTeam = SGuiChoose.one("Choose Team", teams);
+        String playerTeam = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseTeam"), teams);
         deck.getHumanDeck().getDraftNotes().put("Team", playerTeam);
         List<String> remainingTeams = new ArrayList<>(teams);
         remainingTeams.remove(playerTeam);
