@@ -1724,11 +1724,13 @@ public class AiAttackController {
     }
 
     /**
-     * Whether giving up an attacker that its attack costs pays: all-out attack, it wants to die (SacMe) or has an attack effect, or the
+     * Whether giving up an attacker that its attack costs pays: it wants to die (SacMe) or has an attack effect, or the
      * attackers that the blockers cannot all stop are lethal on the defending player.
      */
     private boolean lostAttackerIsWorthIt(final Card attacker, final GameEntity defender) {
-        if (aiAggression >= 5 || attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect")) {
+        // not aggression 5: "attack at all costs" is a war of attrition, which a creature that is gone after one attack
+        // cannot wage (an empty opposing board is enough to set it)
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect")) {
             return true;
         }
         // a token nothing can block is damage for nothing (it can't block either, or it would not be lost for attacking)
