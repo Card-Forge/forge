@@ -2157,4 +2157,15 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         assertEquals(adCard.getName(), deserterSide);
     }
 
+    @Test
+    void testFilteredLookupDoesNotFallBackToAnotherCardsFace() {
+        // Emeritus of Conflict (SOS) carries a copy of Lightning Bolt as its prepared spell
+        Predicate<PaperCard> legalInSos = (Predicate<PaperCard>) this.cardDb.isLegal(List.of("SOS"));
+        assertNull(this.cardDb.getCardFromEditions("Lightning Bolt", legalInSos));
+
+        PaperCard sanar = this.cardDb.getCardFromEditions("Wild Idea", legalInSos);
+        assertNotNull(sanar);
+        assertEquals(sanar.getName(), "Sanar, Unfinished Genius");
+    }
+
 }

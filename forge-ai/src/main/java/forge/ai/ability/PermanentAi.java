@@ -116,6 +116,8 @@ public class PermanentAi extends SpellAbilityAi {
                 }
             } else if (xPay <= 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
+            } else if (diesAsItEnters(ai, source, xPay)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
         } else if (mana.isZero()) {
             // if mana is zero, but card mana cost does have X, then something is wrong
@@ -439,4 +441,39 @@ public class PermanentAi extends SpellAbilityAi {
         }
         return checkApiLogic(ai, sa);
      }
+
+    /**
+     * A creature that enters with X +1/+1 counters on a base toughness of 0 (Omarthis, Ghostfire Initiate) and is made too
+     * small by what is on the battlefield (Elesh Norn, Grand Cenobite's -2/-2): it dies as it enters, whatever X the
+     * mana allows, and the cast only costs mana and (for a commander) tax.
+     */
+    static boolean diesAsItEnters(final Player ai, final Card source, final int x) {
+        if (!source.isCreature()) {
+            return false;
+        }
+        boolean xCounters = false;
+        for (final KeywordInterface k : source.getKeywords()) {
+            if (k.getOriginal().startsWith("etbCounter:P1P1:X")) {
+                xCounters = true;
+            }
+        }
+        if (!xCounters) {
+            return false;
+        }
+        int toughness = source.getState(CardStateName.Original).getBaseToughness() + x;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final StaticAbility st : c.getStaticAbilities()) {
+                if (!st.checkMode(StaticAbilityMode.Continuous) || !st.hasParam("AddToughness") || !st.hasParam("Affected")
+                        || !source.isValid(st.getParam("Affected"), c.getController(), c, st)) {
+                    continue;
+                }
+                try {
+                    toughness += Integer.parseInt(st.getParam("AddToughness").trim());
+                } catch (final NumberFormatException e) {
+                    // a count: not known here
+                }
+            }
+        }
+        return toughness <= 0;
+    }
 }

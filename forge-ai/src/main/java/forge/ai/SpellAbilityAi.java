@@ -183,8 +183,8 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         }
 
         // a mandatory SA without target candidates doesn't need to go any deeper
-        if (sa.usesTargeting() && mandatory && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
-            return sa.isTargetNumberValid();
+        if (mandatory && !ComputerUtilAbility.isFullyTargetable(sa)) {
+            return false;
         }
 
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory).willingToPlay();

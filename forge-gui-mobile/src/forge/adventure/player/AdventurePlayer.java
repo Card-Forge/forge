@@ -1659,18 +1659,40 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
+        int i = findEmptyDeckSlot();
+        if (i < 0)
+            return -1;
+        decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
+        // Copy loadout from source deck to new slot
+        ensureDeckLoadoutsSize();
+        HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
+        deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
+        return i;
+    }
+
+    /**
+     * Puts a deck into the first empty deck slot.
+     *
+     * @return int - index of the slot used, or -1 if no slot was available
+     */
+    public int addDeckToEmptySlot(Deck newDeck) {
+        int i = findEmptyDeckSlot();
+        if (i < 0)
+            return -1;
+        decks.set(i, newDeck);
+        // The player may have the empty slot selected, so refresh the selected deck from it
+        if (i == selectedDeckIndex)
+            setSelectedDeckSlot(i, false);
+        return i;
+    }
+
+    /** Adds deck slots up to the maximum while searching, so a returned index is always valid. */
+    private int findEmptyDeckSlot() {
         for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
-            if (isEmptyDeck(i)) {
-                decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
-                // Copy loadout from source deck to new slot
-                ensureDeckLoadoutsSize();
-                HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
-                deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
+            if (isEmptyDeck(i))
                 return i;
-            }
         }
-
         return -1;
     }
 

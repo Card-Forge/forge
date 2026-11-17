@@ -322,6 +322,10 @@ public final class DeckPlan {
         if (fromTide != null) {
             return fromTide;
         }
+        final CardCollection fromElves = ElfLoop.picks(ai, pool, n); // Elves: Craterhoof once Glimpse is there, else Glimpse
+        if (fromElves != null) {
+            return fromElves;
+        }
         final CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
         if (fromCombo != null) {
             return fromCombo;
@@ -330,6 +334,10 @@ public final class DeckPlan {
         final List<Card> pieces = ComboCatalog.missingPieces(ai, pool);
         if (pieces.size() >= n) {
             return new CardCollection(pieces.subList(0, n));
+        }
+        final CardCollection fromPod = PodPlan.picks(ai, pool, n); // Birthing Pod: the enters trigger, a rung to climb to
+        if (fromPod != null) {
+            return fromPod;
         }
         if (n != 1) {
             return null;

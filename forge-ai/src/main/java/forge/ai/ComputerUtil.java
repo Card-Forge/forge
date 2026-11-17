@@ -3497,4 +3497,27 @@ public class ComputerUtil {
         }
         return false;
     }
+
+    /**
+     * Sacrificing this noncreature token would cost the AI: an opposing permanent punishes it (Bloodroot Apothecary: the
+     * player who sacrifices a noncreature token gets two poison counters, and a Treasure or a Clue is such a token).
+     */
+    public static boolean sacrificePunished(final Player ai, final Card card) {
+        if (card == null || !card.isToken() || card.isCreature()) {
+            return false;
+        }
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.Sacrificed || !t.hasParam("ValidCard")
+                        || !t.getParam("ValidCard").contains("token") || !t.getParam("ValidCard").toLowerCase().contains("noncreature")) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidPlayer", "");
+                if (valid.contains("Opponent") || valid.contains("Player")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

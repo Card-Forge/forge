@@ -36,7 +36,7 @@ public class SacrificeAi extends SpellAbilityAi {
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         // AI should only activate this during Human's turn
 
-        return sacrificeTgtAI(ai, sa, false);
+        return sacrificeTgtAI(ai, sa, sa.isTrigger() && !sa.isOptionalTrigger());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             // If the Human has at least half rounded up of the amount to be
             // sacrificed, cast the spell
-            if (!sa.isTrigger() && list.size() < half) {
+            if (list.size() < half) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
@@ -116,7 +116,7 @@ public class SacrificeAi extends SpellAbilityAi {
         if (valid.equals("Self")) {
             // Self Sacrifice.
         } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")
-                || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
+                || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !mandatory)) {
             // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
 
             // If Sacrifice hits both players:
@@ -135,7 +135,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             return humanList.size() >= amount ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if (defined.equals("You")) {
+        } else if (defined.equals("You") && !mandatory) {
             List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             for (Card c : computerList) {
                 if ("Lethal".equals(aiLogic)) {

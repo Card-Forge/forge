@@ -464,7 +464,7 @@ Replace=.0167F fromSheet("TRK away team basic")+
 366 M Dr. Beverly Crusher @Anna Czeszejko
 367 R Peace in Our Time @Mintautas Šukys
 368 R Primary Unimatrix Adjunct @Julia Vasilyeva
-369 U There's Coffee in that Nebula @Anna Czeszejko
+369 U There's Coffee in that Nebula @Anna Czeszejko & Rutger van de Steeg
 370 R Deep Space Scan @Maxim Ruabtsev
 371 M Lieutenant Commander Data @Mintautas Šukys
 372 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik
@@ -600,7 +600,7 @@ Replace=.0167F fromSheet("TRK away team basic")+
 500 M Dr. Beverly Crusher @Anna Czeszejko
 501 R Peace in Our Time @Mintautas Šukys
 502 R Primary Unimatrix Adjunct @Julia Vasilyeva
-503 U There's Coffee in that Nebula @Anna Czeszejko
+503 U There's Coffee in that Nebula @Anna Czeszejko & Rutger van de Steeg
 504 R Deep Space Scan @Maxim Ruabtsev
 505 M Lieutenant Commander Data @Mintautas Šukys
 506 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik

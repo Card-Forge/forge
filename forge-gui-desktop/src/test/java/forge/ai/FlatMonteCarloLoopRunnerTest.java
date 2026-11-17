@@ -6,7 +6,9 @@ import java.util.List;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.ElfLoop;
 import forge.ai.simulation.LoopRunner;
+import forge.ai.simulation.PodPlan;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -511,5 +513,143 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("Blue Sun's Zenith is not drawn at oneself", LoopRunner.keptForTheLoop(ai, zenith));
         AssertJUnit.assertTrue("Brain Freeze is not spent short of the library", LoopRunner.keptForTheLoop(ai, freeze));
         AssertJUnit.assertFalse("Turnabout is not a finisher", LoopRunner.keptForTheLoop(ai, spellOf("Turnabout")));
+    }
+
+    private void elfDeckWith(final int forests, final String... hand) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCards("Forest", forests, ai);
+        for (final String name : hand) {
+            addCardToZone(name, ai, ZoneType.Hand);
+        }
+    }
+
+    private void glimpseInEffect() {
+        final SpellAbility glimpse = spellOf("Glimpse of Nature");
+        glimpse.setActivatingPlayer(ai);
+        forge.game.ability.AbilityUtils.resolve(glimpse);
+        game.getAction().checkStateEffects(true);
+    }
+
+    @Test(timeOut = 120000)
+    public void theElfChainCastsTheCheapCreatureFirstAndKeepsCraterhoof() {
+        elfDeckWith(5, "Glimpse of Nature", "Craterhoof Behemoth", "Elvish Visionary", "Heritage Druid");
+        glimpseInEffect();
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("Glimpse is in effect: a creature is next", step);
+        AssertJUnit.assertEquals("Heritage Druid", step.getHostCard().getName()); // the cheapest: one mana, a card
+    }
+
+    @Test(timeOut = 120000)
+    public void noCreatureIsHeldWhenGlimpseIsNotInTheHand() {
+        elfDeckWith(5, "Craterhoof Behemoth", "Elvish Visionary", "Heritage Druid");
+        addCardToZone("Glimpse of Nature", ai, ZoneType.Library);
+        AssertJUnit.assertFalse("nothing to wait for", ElfLoop.held(ai, spellOf("Elvish Visionary")));
+    }
+
+    @Test(timeOut = 120000)
+    public void anElfTutorFetchesCraterhoofOnceGlimpseIsHere() {
+        elfDeckWith(5, "Glimpse of Nature", "Elvish Visionary");
+        final Card hoof = addCardToZone("Craterhoof Behemoth", ai, ZoneType.Library);
+        final Card visionary = addCardToZone("Elvish Visionary", ai, ZoneType.Library);
+        final forge.game.card.CardCollection pool = new forge.game.card.CardCollection();
+        pool.add(visionary);
+        pool.add(hoof);
+        final forge.game.card.CardCollection picks = ElfLoop.picks(ai, pool, 1);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("Craterhoof Behemoth", picks.get(0).getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void anElfTutorFetchesGlimpseWhenItIsMissing() {
+        elfDeckWith(5, "Elvish Visionary");
+        final Card glimpse = addCardToZone("Glimpse of Nature", ai, ZoneType.Library);
+        final Card hoof = addCardToZone("Craterhoof Behemoth", ai, ZoneType.Library);
+        final forge.game.card.CardCollection pool = new forge.game.card.CardCollection();
+        pool.add(hoof);
+        pool.add(glimpse);
+        final forge.game.card.CardCollection picks = ElfLoop.picks(ai, pool, 1);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("Glimpse of Nature", picks.get(0).getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void birthingPodFetchesTheCreatureThatPaysBackAndLeavesARung() {
+        elfDeckWith(5, "Birthing Pod");
+        addCardToZone("Birthing Pod", ai, ZoneType.Battlefield);
+        final Card finks = addCardToZone("Kitchen Finks", ai, ZoneType.Library); // cmc 3, an enters trigger
+        final Card hill = addCardToZone("Hill Giant", ai, ZoneType.Library);     // cmc 3, nothing
+        addCardToZone("Restoration Angel", ai, ZoneType.Library);                 // cmc 4: the next rung
+        final forge.game.card.CardCollection pool = new forge.game.card.CardCollection();
+        pool.add(hill);
+        pool.add(finks);
+        final forge.game.card.CardCollection picks = PodPlan.picks(ai, pool, 1);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("Kitchen Finks", picks.get(0).getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void noPodOpinionWithoutBirthingPod() {
+        elfDeckWith(5, "Elvish Visionary");
+        final Card finks = addCardToZone("Kitchen Finks", ai, ZoneType.Library);
+        final forge.game.card.CardCollection pool = new forge.game.card.CardCollection();
+        pool.add(finks);
+        AssertJUnit.assertNull(PodPlan.picks(ai, pool, 1));
+    }
+
+    private void affinityDeckWith(final String... hand) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < 18; i++) {
+            addCardToZone("Ornithopter", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
+        addCards("Plains", 4, ai);
+        for (final String name : hand) {
+            addCardToZone(name, ai, ZoneType.Hand);
+        }
+    }
+
+    @Test(timeOut = 120000)
+    public void affinityCastsTheFreeArtifactBeforeTheOneThatGetsCheaper() {
+        affinityDeckWith("Frogmite", "Memnite", "Cranial Plating");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Memnite", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void affinityKeepsCranialPlatingForLast() {
+        affinityDeckWith("Cranial Plating", "Frogmite");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Frogmite", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void aDeckWithoutEnoughArtifactsIsNotAnAffinityDeck() {
+        elfDeckWith(4, "Frogmite", "Memnite");
+        AssertJUnit.assertFalse(forge.ai.simulation.AffinityPlan.isAffinityDeck(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void glimpseGoesFirstEvenWithoutCraterhoof() {
+        elfDeckWith(5, "Glimpse of Nature", "Elvish Visionary", "Llanowar Elves");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("two creatures in the hand: Glimpse first", step);
+        AssertJUnit.assertEquals("Glimpse of Nature", step.getHostCard().getName());
+        AssertJUnit.assertTrue("and the creatures wait", ElfLoop.held(ai, spellOf("Llanowar Elves")));
+    }
+
+    @Test(timeOut = 120000)
+    public void glimpseDoesNotWaitForOneCreature() {
+        elfDeckWith(5, "Glimpse of Nature", "Llanowar Elves");
+        AssertJUnit.assertFalse("one creature is no reason to hold it", ElfLoop.held(ai, spellOf("Llanowar Elves")));
     }
 }

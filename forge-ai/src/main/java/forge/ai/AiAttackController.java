@@ -831,8 +831,8 @@ public class AiAttackController {
             return prefDefender;
         }
 
-        // 2. attack planeswalkers
-        List<Card> pwDefending = c.getDefendingPlaneswalkers();
+        // 2. attack planeswalkers (unless Sanctum Lurker keeps them alive)
+        List<Card> pwDefending = c.getDefendingPlaneswalkers().filter(pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0);
         if (!pwDefending.isEmpty()) {
             final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
@@ -1371,7 +1371,9 @@ public class AiAttackController {
                 System.out.println("attackersLeft = " + left);
 
             FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
-            possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
+            // a planeswalker with no loyalty left that stays in play (Sanctum Lurker) is a waste of an attack
+            possibleDefenders.addAll(CardLists.filter(defendingOpponent.getPlaneswalkersInPlay(),
+                    pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0));
 
             while (!left.isEmpty()) {
                 AITimeoutTracker.check();

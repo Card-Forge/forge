@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import com.google.common.base.Enums;
 import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.util.Aggregates;
@@ -98,16 +99,21 @@ public class AiProfileUtil {
 
         List<String> lines = FileUtil.readFile(buildFileName(profileName));
         for (String line : lines) {
-            if (line.startsWith("#") || (line.length() == 0)) {
+            if (line.startsWith("#") || line.length() == 0) {
                 continue;
             }
 
             final String[] split = line.split("=");
 
+            AiProps prop = Enums.getIfPresent(AiProps.class, split[0]).orNull();
+            if (prop == null) {
+                continue;
+            }
+
             if (split.length == 2) {
-                profileMap.put(AiProps.valueOf(split[0]), split[1]);
+                profileMap.put(prop, split[1]);
             } else if (split.length == 1 && line.endsWith("=")) {
-                profileMap.put(AiProps.valueOf(split[0]), "");
+                profileMap.put(prop, "");
             }
         }
 

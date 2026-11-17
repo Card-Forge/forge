@@ -72,8 +72,11 @@ public final class TideSolver {
             // the library is only a guess: a line that draws (Time Spiral) is played out in several orders of it, and is a
             // plan when enough of them end in a win; a line that draws nothing wins in all of them or none
             int wins = 0;
+            final StringBuilder notes = new StringBuilder();
             for (int variant = 0; variant < VARIANTS; variant++) {
-                if (playOut(ai, variant)) {
+                final boolean variantWon = playOut(ai, variant);
+                notes.append(notes.length() > 0 ? " | " : "").append("v").append(variant).append(": ").append(lastNote);
+                if (variantWon) {
                     wins++;
                 }
                 if (wins >= NEEDED || wins + (VARIANTS - 1 - variant) < NEEDED) {
@@ -81,6 +84,7 @@ public final class TideSolver {
                 }
             }
             won = wins >= NEEDED;
+            lastNote = wins + " of " + VARIANTS + " variants won: " + notes;
         } catch (final RuntimeException e) {
             lastNote = "solver error: " + e;
         } finally {
@@ -88,6 +92,18 @@ public final class TideSolver {
         }
         synchronized (KNOWN) {
             KNOWN.put(key, won);
+        }
+        if (VetoLog.isEnabled()) {
+            // what the solver was looking at: the hand (the pieces it has or lacks), the lands, the High Tides in play
+            final StringBuilder seen = new StringBuilder();
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                if (seen.length() > 0) {
+                    seen.append(',');
+                }
+                seen.append(c.getName().length() > 14 ? c.getName().substring(0, 14) : c.getName());
+            }
+            VetoLog.note(ai, "tide-solver " + (won ? "win" : "no win") + " (" + lastNote + ") hand=[" + seen + "] lands="
+                    + ai.getLandsInPlay().size() + " tides=" + LoopRunner.tideCount(ai));
         }
         return won;
     }
@@ -126,7 +142,8 @@ public final class TideSolver {
                 }
                 final SpellAbility step = LoopRunner.next(simAi, moves, s -> true);
                 if (step == null) {
-                    lastNote = "no win: the loop ended after " + i + " plays";
+                    lastNote = "no win: the loop ended after " + i + " plays, hand=" + simAi.getCardsIn(ZoneType.Hand)
+                            + " pool=" + simAi.getManaPool().totalMana();
                     return false;
                 }
                 if (!sim.applySpellAbility(step)) {

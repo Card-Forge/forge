@@ -53,8 +53,9 @@ public final class LoopRunner {
             return null;
         }
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        if (!ph.isPlayerTurn(ai) || !ai.getGame().getStack().isEmpty()
-                || !(ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2))) {
+        final boolean dip = doubleDip(ai);
+        if (!ai.getGame().getStack().isEmpty()
+                || !(dip || ph.isPlayerTurn(ai) && (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)))) {
             return null;
         }
         Player target = null;
@@ -66,6 +67,11 @@ public final class LoopRunner {
         }
         if (target == null) {
             return null;
+        }
+        if (dip) {
+            // the opponent's end step: the lands untap again before the AI's own turn, so what is spent now is free.
+            // Time Spiral and the permanents are sorceries, so only the loop (instants) that the solver sees win goes here
+            return highTideDeck(ai, candidates, target, approve);
         }
         final SpellAbility heliod = heliodAndBallista(ai, candidates, target, approve);
         if (heliod != null) {
@@ -83,6 +89,14 @@ public final class LoopRunner {
         if (palinchron != null) {
             return palinchron;
         }
+        final SpellAbility elves = ElfLoop.next(ai, candidates, target, approve);
+        if (elves != null) {
+            return elves;
+        }
+        final SpellAbility affinity = AffinityPlan.next(ai, candidates, approve);
+        if (affinity != null) {
+            return affinity;
+        }
         final SpellAbility deck = highTideDeck(ai, candidates, target, approve);
         if (deck != null) {
             return deck;
@@ -91,10 +105,43 @@ public final class LoopRunner {
         if (refill != null) {
             return refill;
         }
-        return tideSetup(ai, candidates, approve);
+        final SpellAbility setup = tideSetup(ai, candidates, approve);
+        return setup != null ? setup : tideDig(ai, candidates, approve);
     }
 
-    private static Card inPlay(final Player ai, final String name) {
+    /**
+     * The turns before the one that goes off: a High Tide player casts every cantrip with the mana that is left over
+     * (the cheapest first), looking for High Tide, what untaps, the finisher and the lands to go round with. The mana
+     * kept back is the price of a counterspell of the hand, and the library is not dug into when it is nearly empty.
+     * Not while the loop is running (or being tried in a copy), and not when the hand can already go off.
+     */
+    private static SpellAbility tideDig(final Player ai, final List<SpellAbility> candidates,
+                                        final Predicate<SpellAbility> approve) {
+        if (tideActive(ai) || TideSolver.running() || !TidePlan.isTideDeck(ai)
+                || ai.getCardsIn(ZoneType.Library).size() < 8 || tideReady(ai)) {
+            return null;
+        }
+        int untapped = ai.getManaPool().totalMana();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.isTapped()) {
+                untapped++;
+            }
+        }
+        final int spare = untapped - counterReserve(ai);
+        for (final String name : TidePlan.CANTRIPS) {
+            final SpellAbility cast = castFromHand(ai, candidates, name);
+            if (cast != null && cast.getHostCard().getCMC() <= spare) {
+                cast.setActivatingPlayer(ai);
+                cast.resetTargets();
+                if (approve.test(cast)) {
+                    return cast;
+                }
+            }
+        }
+        return null;
+    }
+
+    static Card inPlay(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {
                 return c;
@@ -256,7 +303,7 @@ public final class LoopRunner {
         return n;
     }
 
-    private static boolean inHand(final Player ai, final String name) {
+    static boolean inHand(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             if (c.getName().equals(name)) {
                 return true;
@@ -266,7 +313,7 @@ public final class LoopRunner {
     }
 
     /** The spell of that name from the hand, or null. */
-    private static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
+    static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host != null && sa.isSpell() && !sa.isLandAbility() && host.isInZone(ZoneType.Hand)
@@ -288,6 +335,9 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
+        if (ElfLoop.held(ai, sa)) {
+            return true;
+        }
         final Card host = sa == null ? null : sa.getHostCard();
         if (host == null || !sa.isSpell() || !host.isInZone(ZoneType.Hand) || !ai.equals(host.getController())
                 || !(host.getName().equals(HIGH_TIDE) || drawsX(host.getName()) || host.getName().equals(BRAIN_FREEZE)
@@ -425,7 +475,7 @@ public final class LoopRunner {
     }
 
     /** How many High Tides are in effect (each is another blue mana for every Island). */
-    private static int tideCount(final Player ai) {
+    static int tideCount(final Player ai) {
         int n = 0;
         for (final Card c : ai.getGame().getCardsIn(ZoneType.Command)) {
             if (c.getName().startsWith(HIGH_TIDE)) {
@@ -444,7 +494,8 @@ public final class LoopRunner {
     /** A finisher with High Tide and something to untap the lands, and no Palinchron: the loop of the High Tide decks. */
     private static boolean tideDeckPieces(final Player ai) {
         return (inHand(ai, HIGH_TIDE) || tideActive(ai)) && hasFinisher(ai)
-                && !inHand(ai, PALINCHRON) && inPlay(ai, PALINCHRON) == null && hasUntapper(ai);
+                && !inHand(ai, PALINCHRON) && inPlay(ai, PALINCHRON) == null
+                && (tideActive(ai) || hasUntapper(ai)); // with High Tide in effect the untap may be spent already (Time Spiral is exiled)
     }
 
     /** The cards the loop needs: the finishers, High Tide, what untaps, and the counterspells that protect them. */
@@ -664,7 +715,49 @@ public final class LoopRunner {
         if (other != null) {
             return other;
         }
-        return engineStep(ai, candidates, approve, pool);
+        final SpellAbility engine = engineStep(ai, candidates, approve, pool);
+        return engine != null ? engine : drawForMana(ai, candidates, approve, pool, reserve);
+    }
+
+    /** Finisher cards left to find: the other draw spell and Brain Freeze of the hand, and those of the library. */
+    private static int finishersOutside(final Player ai, final String drawn) {
+        int n = 0;
+        for (final ZoneType zone : new ZoneType[] { ZoneType.Hand, ZoneType.Library }) {
+            for (final Card c : ai.getCardsIn(zone)) {
+                if (drawsX(c.getName()) || c.getName().equals(BRAIN_FREEZE)) {
+                    n++;
+                }
+            }
+        }
+        return inHand(ai, drawn) ? n - 1 : n; // the one that is cast does not count
+    }
+
+    /**
+     * The loop has made all the mana it can and still cannot pay for the finisher: Stroke of Genius or Blue Sun's
+     * Zenith is cast on the AI itself with the mana that is floating, to draw into more High Tides, Turnabouts and a
+     * Time Spiral (more mana again, which is a better chance at the finisher). Only when another finisher is left to
+     * win with, in the hand or the library, and never deeper into the library than leaves a margin before it is empty.
+     */
+    private static SpellAbility drawForMana(final Player ai, final List<SpellAbility> candidates,
+                                            final Predicate<SpellAbility> approve, final int pool, final int reserve) {
+        final int own = ai.getCardsIn(ZoneType.Library).size();
+        for (final String name : new String[] { ZENITH, STROKE }) {
+            final SpellAbility draw = castFromHand(ai, candidates, name);
+            if (draw == null || pool < 5 + reserve || finishersOutside(ai, name) < 1 || own < 14
+                    || aimedAtPlayer(ai, draw, ai) == null) {
+                continue;
+            }
+            final int x = Math.min(forge.ai.ComputerUtilCost.setMaxXValue(draw, ai, false) - reserve,
+                    Math.min(own - 10, 12));
+            if (x >= 3) {
+                draw.setXManaCostPaid(x);
+                if (approve.test(draw)) {
+                    return draw;
+                }
+            }
+            draw.resetTargets();
+        }
+        return null;
     }
 
     /**
@@ -756,7 +849,36 @@ public final class LoopRunner {
                 return approve.test(cast) ? cast : null;
             }
         }
-        return null;
+        return timeSpiralStep(ai, candidates, approve, pool);
+    }
+
+    /**
+     * Time Spiral is the last untap of the turn (a sorcery, so it is cast in the main phase): it costs five, untaps six
+     * lands (each Island a mana more for every High Tide), shuffles the graveyard back into the library and draws seven
+     * cards, which are more Turnabouts and High Tides, and fodder for Mind Over Matter. It is cast only when what it
+     * untaps is worth the five, and only once the cheaper untaps are done with.
+     */
+    private static SpellAbility timeSpiralStep(final Player ai, final List<SpellAbility> candidates,
+                                               final Predicate<SpellAbility> approve, final int pool) {
+        if (pool < 5) {
+            return null;
+        }
+        final SpellAbility spiral = castFromHand(ai, candidates, TIME_SPIRAL);
+        if (spiral == null) {
+            return null;
+        }
+        int tapped = 0;
+        for (final Card land : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (land.isLand() && land.isTapped()) {
+                tapped++;
+            }
+        }
+        if (tapped < 4) {
+            return null;
+        }
+        spiral.setActivatingPlayer(ai);
+        spiral.resetTargets();
+        return approve.test(spiral) ? spiral : null;
     }
 
     private static final String TIME_SPIRAL = "Time Spiral";
@@ -775,6 +897,16 @@ public final class LoopRunner {
     /** Whether the High Tide turn without a finisher in hand is worth starting: Time Spiral is paid for, or the copy shows a win. */
     static boolean refillReady(final Player ai) {
         return TideSolver.running() || refillMana(ai) >= 8 || TideSolver.wins(ai);
+    }
+
+    /**
+     * The opponent's end step of a High Tide deck: High Tide, Turnabout and the finishers are instants the lands pay
+     * for now, and they untap in the AI's own untap step, so the mana is a second turn's worth (the double dip).
+     */
+    static boolean doubleDip(final Player ai) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        return !ph.isPlayerTurn(ai) && ph.is(PhaseType.END_OF_TURN) && ai.getGame().getStack().isEmpty()
+                && TidePlan.isTideDeck(ai);
     }
 
     /**

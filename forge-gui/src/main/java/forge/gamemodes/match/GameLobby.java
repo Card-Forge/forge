@@ -3,7 +3,6 @@ package forge.gamemodes.match;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.LobbyPlayer;
@@ -164,7 +163,7 @@ public abstract class GameLobby implements IHasGameType {
         for (final String field : StringUtils.split(FModel.getPreferences().getPref(FPref.UI_LOBBY_SETUP), SETUP_SEPARATOR)) {
             if (field.startsWith(SETUP_VARIANTS)) {
                 for (final String name : StringUtils.split(field.substring(SETUP_VARIANTS.length()), ',')) {
-                    final GameType variant = EnumUtils.getEnum(GameType.class, name);
+                    final GameType variant = GameType.smartValueOf(name);
                     if (variant != null && (choices.contains(variant) || FormatChoices.VARIANTS.contains(variant))) {
                         applyVariant(variant);
                     }

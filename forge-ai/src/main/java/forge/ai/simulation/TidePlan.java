@@ -23,7 +23,35 @@ public final class TidePlan {
     private static final List<String> UNTAPPERS = List.of("Turnabout", "Candelabra of Tawnos", "Mind Over Matter");
     private static final List<String> BACKUP = List.of("Force of Will", "Force of Negation", "Pact of Negation");
 
+    private static final List<String> DIG = List.of("Ponder", "Preordain", "Brainstorm", "Impulse", "Merchant Scroll", "Intuition",
+            "Cunning Wish", "Time Spiral");
+
+    /** The cantrips played before the turn that goes off, cheapest first. */
+    static final List<String> CANTRIPS = List.of("Ponder", "Preordain", "Brainstorm", "Impulse", "Merchant Scroll");
+
     private TidePlan() {
+    }
+
+    /**
+     * The opening hand of a High Tide deck, judged as the players of it do: two to five lands and at least two cards of
+     * the plan (High Tide, what untaps, a finisher, or a card that digs for them). Hands that are lands and
+     * counterspells, or one piece and nothing to find the rest with, go back: the loop needs most of its cards.
+     */
+    public static boolean keepsHand(final Iterable<Card> kept, final int size) {
+        if (size <= 5) {
+            return true;
+        }
+        int lands = 0;
+        int pieces = 0;
+        for (final Card c : kept) {
+            final String n = c.getName();
+            if (c.isLand()) {
+                lands++;
+            } else if (n.equals(HIGH_TIDE) || FINISHERS.contains(n) || UNTAPPERS.contains(n) || DIG.contains(n)) {
+                pieces++;
+            }
+        }
+        return lands >= 2 && lands <= 5 && pieces >= 2;
     }
 
     private static boolean isTideCard(final Card c) {
