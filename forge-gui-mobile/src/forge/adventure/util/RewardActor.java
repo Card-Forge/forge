@@ -48,7 +48,6 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardSplitType;
 import forge.deck.DeckFormat;
-import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -530,7 +529,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 processSprite(backSprite, item, isBooster
                     ? Controls.newTextraLabel("[%200]" + editionCode + " Booster")
-                    : Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10, isBooster);
+                    : Controls.newTextraLabel("[%200]" + (reward.getDeck().getTags().contains(Reward.DECK_TAG)
+                        ? reward.getDeck().getName().replace("[", "[[") : "Event Reward Pack")), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -967,7 +967,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 float div = (float) preview_h / preview_w;
                 BitmapFont font = Controls.getBitmapFont("default", 4 / div);
                 if(reward.getType().equals(Reward.Type.CardPack)) {
-                    layout.setText(font, reward.getDeck().get(DeckSection.Main).countAll() +" Cards",
+                    layout.setText(font, reward.getDeck().getAllCardsInASinglePool(true, true).countAll() +" Cards",
                             Color.WHITE,
                             preview_w - 64,
                             Align.center, true);
@@ -980,7 +980,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     description = item.getDescription();
                     layout.reset();
                 } else if (getReward().getDeck() != null) {
-                    description = getReward().getDeck().getName();
+                    description = getReward().getDeck().getName().replace("[", "[[");
                 } else {
                     description = "Adds " + getReward().getCount() + " " + getReward().type;
                 }

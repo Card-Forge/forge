@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -10,10 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -32,7 +36,9 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -41,6 +47,7 @@ import forge.util.ItemPool;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -251,6 +258,45 @@ public class RewardScene extends UIScene {
 
     private static boolean isDeckReward(Reward reward) {
         return reward.getDeck() != null && reward.getDeck().getTags().contains(Reward.DECK_TAG);
+    }
+
+    private void showDecklist(Deck deck) {
+        List<DeckSection> sections = new ArrayList<>(List.of(DeckSection.values()));
+        sections.remove(DeckSection.Commander);
+        sections.add(0, DeckSection.Commander);
+        StringBuilder list = new StringBuilder();
+        for (DeckSection section : sections) {
+            CardPool pool = deck.get(section);
+            if (pool == null || pool.isEmpty())
+                continue;
+            list.append("[%?SHINY]").append(section.getLocalizedName()).append("[%]\n");
+            List<Map.Entry<PaperCard, Integer>> entries = new ArrayList<>();
+            pool.forEach(entries::add);
+            entries.sort(Comparator.comparing(entry -> entry.getKey().getName()));
+            for (Map.Entry<PaperCard, Integer> entry : entries)
+                list.append(entry.getValue()).append(' ').append(entry.getKey().getName().replace("[", "[[")).append('\n');
+            list.append('\n');
+        }
+        TextraLabel label = Controls.newTextraLabel(list.toString().stripTrailing());
+        label.setWrap(true);
+        TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
+        ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
+        barStyle.vScroll = white.tint(new Color(1, 1, 1, 0.15f));
+        barStyle.vScroll.setMinWidth(2);
+        barStyle.vScrollKnob = white.tint(new Color(1, 1, 1, 0.7f));
+        barStyle.vScrollKnob.setMinWidth(2);
+        barStyle.vScrollKnob.setMinHeight(8);
+        ScrollPane pane = new ScrollPane(label, barStyle);
+        pane.setScrollingDisabled(true, false);
+        pane.setFadeScrollBars(false);
+        Dialog dialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblClose"), null, this::removeDialog, null);
+        Table content = dialog.getContentTable();
+        content.add(Controls.newTextraLabel("[%?SHINY]" + deck.getName().replace("[", "[["))).left().padTop(4).padBottom(4);
+        content.row();
+        content.add(pane).width(stage.getWidth() * 0.6f).height(stage.getHeight() * 0.55f).padRight(4);
+        content.row();
+        content.add(new MoreArrow(pane)).padTop(4);
+        showDialog(dialog);
     }
 
     private void claimReward(Reward reward) {
@@ -595,7 +641,13 @@ public class RewardScene extends UIScene {
         // Needed before the grid search so rows and columns are counted with the final card width.
         float correction = ScreenAspectCorrection.widthCorrection(Scene.getIntendedWidth(), Scene.getIntendedHeight(),
                 Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        float buttonHeight = type == Type.Shop || type == Type.RewardChoice ? doneButton.getHeight() : 0;
+        boolean sellsDeck = false;
+        if (type == Type.Shop) {
+            for (Reward reward : new Array.ArrayIterator<>(newRewards))
+                sellsDeck |= isDeckReward(reward);
+        }
+        // A deck for sale gets a decklist button under its price, so every cell in that shop reserves two button rows
+        float buttonHeight = type == Type.Shop || type == Type.RewardChoice ? doneButton.getHeight() * (sellsDeck ? 2 : 1) : 0;
         for (int h = 1; h < targetHeight; h++) {
             cardHeight = h + buttonHeight;
             //cardHeight=targetHeight/i;
@@ -669,6 +721,17 @@ public class RewardScene extends UIScene {
                 if (!skipCard) {
                     cardGroup.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
+                }
+                if (isDeckReward(reward)) {
+                    TextraButton decklistButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblViewDecklist"),
+                            () -> showDecklist(reward.getDeck()));
+                    decklistButton.setBounds(buyCardButton.getX(), buyCardButton.getY() - doneButton.getHeight(),
+                            buyCardButton.getWidth(), doneButton.getHeight());
+                    generated.add(decklistButton);
+                    if (!skipCard) {
+                        cardGroup.addActor(decklistButton);
+                        addToSelectable(decklistButton);
+                    }
                 }
             } else if (type == Type.RewardChoice) {
                 if (currentRow != ((i + 1) / numberOfColumns))
