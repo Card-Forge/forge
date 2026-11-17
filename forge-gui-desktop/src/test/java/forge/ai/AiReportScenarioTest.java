@@ -1014,7 +1014,7 @@ public class AiReportScenarioTest extends AITest {
             throw t;
         }
         SUMMARY.add((failure == null ? "OK     " : "BUG    ") + s + (failure == null ? "" : " -> " + failure));
-        AssertJUnit.assertNull(s.toString(), failure);
+        AssertJUnit.assertNull(s + (failure == null ? "" : " -> " + failure), failure); // the reason is in the assertion, not only in the summary
     }
 
     @AfterClass

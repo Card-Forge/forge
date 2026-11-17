@@ -53,8 +53,9 @@ public final class LoopRunner {
             return null;
         }
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        if (!ph.isPlayerTurn(ai) || !ai.getGame().getStack().isEmpty()
-                || !(ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2))) {
+        final boolean dip = doubleDip(ai);
+        if (!ai.getGame().getStack().isEmpty()
+                || !(dip || ph.isPlayerTurn(ai) && (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)))) {
             return null;
         }
         Player target = null;
@@ -66,6 +67,11 @@ public final class LoopRunner {
         }
         if (target == null) {
             return null;
+        }
+        if (dip) {
+            // the opponent's end step: the lands untap again before the AI's own turn, so what is spent now is free.
+            // Time Spiral and the permanents are sorceries, so only the loop (instants) that the solver sees win goes here
+            return highTideDeck(ai, candidates, target, approve);
         }
         final SpellAbility heliod = heliodAndBallista(ai, candidates, target, approve);
         if (heliod != null) {
@@ -786,6 +792,16 @@ public final class LoopRunner {
     /** Whether the High Tide turn without a finisher in hand is worth starting: Time Spiral is paid for, or the copy shows a win. */
     static boolean refillReady(final Player ai) {
         return TideSolver.running() || refillMana(ai) >= 8 || TideSolver.wins(ai);
+    }
+
+    /**
+     * The opponent's end step of a High Tide deck: High Tide, Turnabout and the finishers are instants the lands pay
+     * for now, and they untap in the AI's own untap step, so the mana is a second turn's worth (the double dip).
+     */
+    static boolean doubleDip(final Player ai) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        return !ph.isPlayerTurn(ai) && ph.is(PhaseType.END_OF_TURN) && ai.getGame().getStack().isEmpty()
+                && TidePlan.isTideDeck(ai);
     }
 
     /**
