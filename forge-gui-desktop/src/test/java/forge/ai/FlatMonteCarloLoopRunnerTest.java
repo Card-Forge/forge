@@ -637,4 +637,19 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         elfDeckWith(4, "Frogmite", "Memnite");
         AssertJUnit.assertFalse(forge.ai.simulation.AffinityPlan.isAffinityDeck(ai));
     }
+
+    @Test(timeOut = 120000)
+    public void glimpseGoesFirstEvenWithoutCraterhoof() {
+        elfDeckWith(5, "Glimpse of Nature", "Elvish Visionary", "Llanowar Elves");
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("two creatures in the hand: Glimpse first", step);
+        AssertJUnit.assertEquals("Glimpse of Nature", step.getHostCard().getName());
+        AssertJUnit.assertTrue("and the creatures wait", ElfLoop.held(ai, spellOf("Llanowar Elves")));
+    }
+
+    @Test(timeOut = 120000)
+    public void glimpseDoesNotWaitForOneCreature() {
+        elfDeckWith(5, "Glimpse of Nature", "Llanowar Elves");
+        AssertJUnit.assertFalse("one creature is no reason to hold it", ElfLoop.held(ai, spellOf("Llanowar Elves")));
+    }
 }

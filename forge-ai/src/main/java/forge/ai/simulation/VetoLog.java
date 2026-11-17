@@ -78,7 +78,8 @@ public final class VetoLog {
             return;
         }
         try {
-            final String key = "EVENT | " + event.replaceAll("[0-9]+", "#");
+            // numbers are blurred so that the same event counts as one, except a number written "name=12" (lands=, tides=)
+            final String key = "EVENT | " + event.replaceAll("(?<![=0-9])[0-9]+", "#");
             COUNTS.merge(key, 1, Integer::sum);
             BY_PLAYER.computeIfAbsent(ai.getName(), k -> new ConcurrentHashMap<>()).merge(key, 1, Integer::sum);
         } catch (final RuntimeException e) {

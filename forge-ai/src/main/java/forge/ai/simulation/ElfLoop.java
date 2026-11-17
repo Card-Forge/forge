@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import forge.ai.ComputerUtilMana;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -23,6 +24,7 @@ import forge.game.zone.ZoneType;
  * drawing the next, until Craterhoof Behemoth is in the hand and the creatures in play are enough for it to be lethal.
  * Nothing is cast before Glimpse, or the cards it would have drawn are lost; and Glimpse is held in the hand until a
  * copy of the game, played through with the library shuffled, shows the chain ending in a lethal Craterhoof.
+ * (A Glimpse deck without Craterhoof has no chain to solve: Glimpse still goes first, ahead of the creatures.)
  * Craterhoof is never wasted on a board that cannot kill: the chain goes on, and each creature is one more point for
  * every attacker.
  */
@@ -44,16 +46,19 @@ public final class ElfLoop {
         return RUNNING.get();
     }
 
-    /** A deck with Glimpse of Nature and Craterhoof Behemoth among the cards the AI owns. */
+    /** A deck with Glimpse of Nature among the cards the AI owns (Craterhoof Behemoth, Mirror Entity, Grapeshot, ... finish it). */
     public static boolean isElfDeck(final Player ai) {
-        boolean glimpse = false;
-        boolean hoof = false;
+        return owns(ai, GLIMPSE);
+    }
+
+    private static boolean owns(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Battlefield,
                 ZoneType.Sideboard)) {
-            glimpse |= c.getName().equals(GLIMPSE);
-            hoof |= c.getName().equals(CRATERHOOF);
+            if (c.getName().equals(name)) {
+                return true;
+            }
         }
-        return glimpse && hoof;
+        return false;
     }
 
     private static boolean glimpseActive(final Player ai) {
@@ -113,6 +118,53 @@ public final class ElfLoop {
         return out;
     }
 
+    private static int creaturesInHand(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.isCreature() && !c.getName().equals(CRATERHOOF)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** Whether Glimpse of Nature can be paid for now, with the mana the AI has before any creature is cast. */
+    private static boolean glimpseAffordable(final Player ai) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(GLIMPSE)) {
+                final SpellAbility sa = c.getFirstSpellAbility();
+                if (sa != null) {
+                    sa.setActivatingPlayer(ai);
+                    return ComputerUtilMana.canPayManaCost(sa, ai, 0, false);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Glimpse of Nature first, win or not: every creature cast after it draws a card, every one cast before it does
+     * not, so with two creatures in the hand it is card advantage even when the chain does not end in a Craterhoof.
+     * (The chain that does is {@link #wins}; this is the rule for the turns where it does not.)
+     */
+    private static boolean glimpseFirst(final Player ai) {
+        if (creaturesInHand(ai) < 2 || ai.getCardsIn(ZoneType.Library).size() <= 3 || !glimpseAffordable(ai)) {
+            return false;
+        }
+        // Glimpse and the cheapest creature behind it: a Glimpse that leaves nothing to cast is a turn lost
+        int cheapest = Integer.MAX_VALUE;
+        int glimpse = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(GLIMPSE)) {
+                glimpse = c.getCMC();
+            } else if (c.isCreature() && !c.getName().equals(CRATERHOOF)) {
+                cheapest = Math.min(cheapest, c.getCMC());
+            }
+        }
+        return cheapest != Integer.MAX_VALUE
+                && ComputerUtilMana.getAvailableManaEstimate(ai) >= glimpse + cheapest;
+    }
+
     /**
      * Whether the creature spell is kept in the hand: Glimpse of Nature is in the hand, not cast yet, and the chain is
      * a win. Every creature cast before Glimpse would be a card it does not draw.
@@ -124,7 +176,7 @@ public final class ElfLoop {
                 || !LoopRunner.inHand(ai, GLIMPSE) || !isElfDeck(ai)) {
             return false;
         }
-        return wins(ai);
+        return glimpseFirst(ai) || wins(ai);
     }
 
     /**
@@ -138,7 +190,7 @@ public final class ElfLoop {
         }
         if (!glimpseActive(ai)) {
             final SpellAbility glimpse = LoopRunner.castFromHand(ai, candidates, GLIMPSE);
-            if (glimpse != null && (running() || wins(ai))) {
+            if (glimpse != null && (running() || glimpseFirst(ai) || wins(ai))) {
                 glimpse.setActivatingPlayer(ai);
                 glimpse.resetTargets();
                 return approve.test(glimpse) ? glimpse : null;
@@ -167,7 +219,7 @@ public final class ElfLoop {
 
     /** Whether playing the chain out in a copy of the game ends in a lethal Craterhoof. */
     public static boolean wins(final Player ai) {
-        if (ai == null || running() || !LoopRunner.inHand(ai, GLIMPSE)) {
+        if (ai == null || running() || !LoopRunner.inHand(ai, GLIMPSE) || !owns(ai, CRATERHOOF)) {
             return false;
         }
         final String key = key(ai);
@@ -201,7 +253,18 @@ public final class ElfLoop {
         synchronized (KNOWN) {
             KNOWN.put(key, won);
         }
-        VetoLog.note(ai, "elf-solver " + (won ? "win" : "no win") + " (" + lastNote + ")");
+        if (VetoLog.isEnabled()) {
+            final StringBuilder seen = new StringBuilder();
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                if (seen.length() > 0) {
+                    seen.append(',');
+                }
+                seen.append(c.getName().length() > 14 ? c.getName().substring(0, 14) : c.getName());
+            }
+            VetoLog.note(ai, "elf-solver " + (won ? "win" : "no win") + " (" + lastNote + ") hand=[" + seen + "] creatures="
+                    + ai.getCreaturesInPlay().size() + " mana=" + ComputerUtilMana.getAvailableManaEstimate(ai)
+                    + " library=" + ai.getCardsIn(ZoneType.Library).size());
+        }
         return won;
     }
 

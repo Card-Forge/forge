@@ -89,7 +89,18 @@ public final class TideSolver {
         synchronized (KNOWN) {
             KNOWN.put(key, won);
         }
-        VetoLog.note(ai, "tide-solver " + (won ? "win" : "no win") + " (" + lastNote + ")");
+        if (VetoLog.isEnabled()) {
+            // what the solver was looking at: the hand (the pieces it has or lacks), the lands, the High Tides in play
+            final StringBuilder seen = new StringBuilder();
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                if (seen.length() > 0) {
+                    seen.append(',');
+                }
+                seen.append(c.getName().length() > 14 ? c.getName().substring(0, 14) : c.getName());
+            }
+            VetoLog.note(ai, "tide-solver " + (won ? "win" : "no win") + " (" + lastNote + ") hand=[" + seen + "] lands="
+                    + ai.getLandsInPlay().size() + " tides=" + LoopRunner.tideCount(ai));
+        }
         return won;
     }
 

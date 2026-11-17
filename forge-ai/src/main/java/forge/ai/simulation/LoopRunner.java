@@ -436,7 +436,7 @@ public final class LoopRunner {
     }
 
     /** How many High Tides are in effect (each is another blue mana for every Island). */
-    private static int tideCount(final Player ai) {
+    static int tideCount(final Player ai) {
         int n = 0;
         for (final Card c : ai.getGame().getCardsIn(ZoneType.Command)) {
             if (c.getName().startsWith(HIGH_TIDE)) {
