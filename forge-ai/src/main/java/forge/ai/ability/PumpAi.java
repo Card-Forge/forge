@@ -354,7 +354,10 @@ public class PumpAi extends PumpAiBase {
                 : Lists.newArrayList();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
-        final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
+
+        if ("Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"))) {
+            return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
+        }
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
@@ -364,8 +367,7 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && !"ReplaySpell".equals(sa.getParam("AILogic"))
-                && !isFight) {
+                && !"ReplaySpell".equals(sa.getParam("AILogic"))) {
             return false;
         }
 
@@ -382,70 +384,64 @@ public class PumpAi extends PumpAiBase {
         }
 
         CardCollection list;
-        if (sa.hasParam("AILogic")) {
-            if (sa.getParam("AILogic").equals("HighestPower") || sa.getParam("AILogic").equals("ContinuousBonus")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
-                list = CardLists.getTargetableCards(list, sa);
-                CardLists.sortByPowerDesc(list);
+        if ("HighestPower".equals(sa.getParam("AILogic")) || "ContinuousBonus".equals(sa.getParam("AILogic"))) {
+            list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
+            list = CardLists.getTargetableCards(list, sa);
+            CardLists.sortByPowerDesc(list);
 
-                if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
-                    list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+            if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
+                list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+            }
+
+            // Try not to kill own creatures with this pump
+            CardCollection canDieToPump = new CardCollection();
+            for (Card c : list) {
+                if (c.isCreature() && c.getController() == ai
+                        && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
+                    canDieToPump.add(c);
                 }
-
-                // Try not to kill own creatures with this pump
-                CardCollection canDieToPump = new CardCollection();
-                for (Card c : list) {
-                    if (c.isCreature() && c.getController() == ai
-                            && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
-                        canDieToPump.add(c);
-                    }
-                    // Also, don't pump itself if the SA involves a sacrifice self cost
-                    if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
-                        canDieToPump.add(c);
-                    }
+                // Also, don't pump itself if the SA involves a sacrifice self cost
+                if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                    canDieToPump.add(c);
                 }
-                list.removeAll(canDieToPump);
+            }
+            list.removeAll(canDieToPump);
 
-                // Generally, don't pump anything that your opponents control
-                if ("ContinuousBonus".equals(sa.getParam("AILogic"))) {
-                    // TODO: make it possible for the AI to use this logic to kill opposing creatures
-                    // when a toughness debuff is applied
-                    list = CardLists.filter(list, CardPredicates.isController(ai));
-                }
+            // Generally, don't pump anything that your opponents control
+            if ("ContinuousBonus".equals(sa.getParam("AILogic"))) {
+                // TODO: make it possible for the AI to use this logic to kill opposing creatures
+                // when a toughness debuff is applied
+                list = CardLists.filter(list, CardPredicates.isController(ai));
+            }
 
-                if (!list.isEmpty()) {
-                    sa.getTargets().add(list.get(0));
-                    return true;
-                }
-                return false;
-            } else if (sa.getParam("AILogic").equals("Destroy")) {
-                List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
-                if (tgts.isEmpty()) {
-                    return false;
-                }
-
-                List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
-                List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
-
-                Card destroyTgt = null;
-                if (!oppTgts.isEmpty()) {
-                    destroyTgt = ComputerUtilCard.getBestAI(oppTgts);
-                } else {
-                    // TODO: somehow limit this so that the AI doesn't always destroy own stuff when able?
-                    destroyTgt = ComputerUtilCard.getWorstAI(alliedTgts);
-                }
-
-                if (destroyTgt != null) {
-                    sa.getTargets().add(destroyTgt);
-                    return true;
-                }
-
+            if (!list.isEmpty()) {
+                sa.getTargets().add(list.get(0));
+                return true;
+            }
+            return false;
+        } else if ("Destroy".equals(sa.getParam("AILogic"))) {
+            List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+            if (tgts.isEmpty()) {
                 return false;
             }
 
-            if (isFight) {
-                return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
+            List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
+            List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
+
+            Card destroyTgt = null;
+            if (!oppTgts.isEmpty()) {
+                destroyTgt = ComputerUtilCard.getBestAI(oppTgts);
+            } else {
+                // TODO: somehow limit this so that the AI doesn't always destroy own stuff when able?
+                destroyTgt = ComputerUtilCard.getWorstAI(alliedTgts);
             }
+
+            if (destroyTgt != null) {
+                sa.getTargets().add(destroyTgt);
+                return true;
+            }
+
+            return false;
         }
 
         if (sa.isCurse()) {
