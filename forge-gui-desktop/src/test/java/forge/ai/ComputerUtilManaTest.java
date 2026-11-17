@@ -5,6 +5,7 @@ import forge.ai.simulation.SimulationTest;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CounterEnumType;
@@ -380,5 +381,74 @@ public class ComputerUtilManaTest extends SimulationTest {
 
         // Plains 1, Battery {U} plus one per counter, Vault one per counter
         assertEquals(ComputerUtilMana.getAvailableManaEstimate(p), 1 + 4 + 2);
+    }
+
+    @Test
+    public void nykthosChoosesTheColorThePaymentNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Island", 2, p);
+        addCard("Nykthos, Shrine to Nyx", p);
+        addCard("Leatherback Baloth", p);
+        // blue is the most prominent color, but green has as much devotion
+        addCards("Merfolk of the Pearl Trident", 3, p);
+
+        payForReal(p, "G G G");
+    }
+
+    @Test
+    public void failedTestPaymentClearsTheColorPickedForNykthos() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Azorius Signet", p);
+        final Card nykthos = addCard("Nykthos, Shrine to Nyx", p);
+        addCard("White Knight", p);
+        addCards("Merfolk of the Pearl Trident", 3, p);
+
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertNull(ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("W W W W"))), sa, p, false));
+
+        final SpellAbility devotion = nykthos.getManaAbilities().stream().filter(ma -> ma.getApi() == ApiType.ChooseColor).findFirst().orElseThrow();
+        assertEquals(devotion.getSubAbility().getManaPart().getExpressChoice(), "", "a color left behind would steer Nykthos's next activation");
+    }
+
+    @Test
+    public void testPaymentCountsDevotionMana() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Nyx Lotus", p);
+        addCard("Leatherback Baloth", p);
+        assertTrue(canPay(p, "Leatherback Baloth"), "{G}{G}{G}: Nyx Lotus adds one {G} for each of the Baloth's");
+    }
+
+    @Test
+    public void chosenPlayerManaGoesToTheAi() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Victory Chimes", p);
+        payForReal(p, "1");
+    }
+
+    @Test
+    public void chosenPlayerChoosesTheColorThePaymentNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Spectral Searchlight", p);
+        payForReal(p, "U");
+    }
+
+    @Test
+    public void chosenPlayerManaPaysWithASacrificeCost() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        addCard("Valleymaker", p).setSickness(false);
+        addCard("Forest", p);
+        payForReal(p, "G G G");
+    }
+
+    @Test
+    public void colorChoosingFilterFixesColor() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Forest", p);
+        addCard("Foraging Wickermaw", p);
+        payForReal(p, "U");
     }
 }
