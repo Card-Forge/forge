@@ -461,7 +461,8 @@ public final class LoopRunner {
     /** A finisher with High Tide and something to untap the lands, and no Palinchron: the loop of the High Tide decks. */
     private static boolean tideDeckPieces(final Player ai) {
         return (inHand(ai, HIGH_TIDE) || tideActive(ai)) && hasFinisher(ai)
-                && !inHand(ai, PALINCHRON) && inPlay(ai, PALINCHRON) == null && hasUntapper(ai);
+                && !inHand(ai, PALINCHRON) && inPlay(ai, PALINCHRON) == null
+                && (tideActive(ai) || hasUntapper(ai)); // with High Tide in effect the untap may be spent already (Time Spiral is exiled)
     }
 
     /** The cards the loop needs: the finishers, High Tide, what untaps, and the counterspells that protect them. */
@@ -773,7 +774,36 @@ public final class LoopRunner {
                 return approve.test(cast) ? cast : null;
             }
         }
-        return null;
+        return timeSpiralStep(ai, candidates, approve, pool);
+    }
+
+    /**
+     * Time Spiral is the last untap of the turn (a sorcery, so it is cast in the main phase): it costs five, untaps six
+     * lands (each Island a mana more for every High Tide), shuffles the graveyard back into the library and draws seven
+     * cards, which are more Turnabouts and High Tides, and fodder for Mind Over Matter. It is cast only when what it
+     * untaps is worth the five, and only once the cheaper untaps are done with.
+     */
+    private static SpellAbility timeSpiralStep(final Player ai, final List<SpellAbility> candidates,
+                                               final Predicate<SpellAbility> approve, final int pool) {
+        if (pool < 5) {
+            return null;
+        }
+        final SpellAbility spiral = castFromHand(ai, candidates, TIME_SPIRAL);
+        if (spiral == null) {
+            return null;
+        }
+        int tapped = 0;
+        for (final Card land : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (land.isLand() && land.isTapped()) {
+                tapped++;
+            }
+        }
+        if (tapped < 4) {
+            return null;
+        }
+        spiral.setActivatingPlayer(ai);
+        spiral.resetTargets();
+        return approve.test(spiral) ? spiral : null;
     }
 
     private static final String TIME_SPIRAL = "Time Spiral";
