@@ -105,4 +105,36 @@ public class FlatMonteCarloPactGuardTest extends AITest {
         sa.setActivatingPlayer(ai);
         AssertJUnit.assertNull(ComboGuard.problem(ai, sa, null, ComboPlan.EMPTY));
     }
+
+    /** From a real game: Summoner's Pact with a Chrome Mox and one land in play cannot be paid (2GG) and lost the game. */
+    @Test
+    public void summonersPactWithAChromeMoxAndOneLandIsRefused() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        addCard("Chrome Mox", ai);
+        addCard("Valakut Stoneforge", ai);
+        for (final String storm : new String[] { "Tendrils of Agony", "Infernal Tutor", "Dark Ritual", "Cabal Ritual", "Elvish Spirit Guide" }) {
+            addCardToZone(storm, ai, ZoneType.Library);
+        }
+        final SpellAbility sa = addCardToZone("Summoner's Pact", ai, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        final ComboPlan plan = ComboPlan.scan(ai);
+        AssertJUnit.assertEquals("with the plan " + plan.summary(), "pact-unpayable", ComboGuard.problem(ai, sa, null, plan));
+        AssertJUnit.assertEquals("pact-unpayable", ComboGuard.problem(ai, sa, null, ComboPlan.EMPTY));
+    }
+
+    /** From a real game: two Gemstone Mines and a Vault of Whispers make three mana, not 2GG. */
+    @Test
+    public void summonersPactWithTwoGemstoneMinesAndABlackLandIsRefused() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        addCard("Gemstone Mine", ai);
+        addCard("Gemstone Mine", ai);
+        addCard("Vault of Whispers", ai);
+        final SpellAbility sa = addCardToZone("Summoner's Pact", ai, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals("pact-unpayable", ComboGuard.problem(ai, sa, null, ComboPlan.EMPTY));
+    }
 }

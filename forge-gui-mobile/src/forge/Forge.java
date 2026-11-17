@@ -437,6 +437,7 @@ public class Forge implements ApplicationListener {
         if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
             enableControllerListener();
         loadAdventureResources(true);
+        WorldSave.backupOnVersionChange();
     }
     private static void loadAdventureResources(boolean startScene) {
         try {
@@ -650,6 +651,33 @@ public class Forge implements ApplicationListener {
 
     public static Clipboard getClipboard() {
         return clipboard;
+    }
+
+    /**
+     * Reads the clipboard and hands the text (never null) to {@code onText} on the UI thread.
+     * <p>
+     * On iOS the read happens on a background thread: reading text copied in another app
+     * makes iOS show its "Allow Paste" prompt, and the read blocks until the user answers.
+     * libGDX renders on the iOS main thread, and a blocking read there leaves the app frozen
+     * after the prompt is answered. Other platforms read synchronously as before
+     * (LWJGL's clipboard must be accessed from the main thread).
+     */
+    public static void readClipboard(final java.util.function.Consumer<String> onText) {
+        if (Gdx.app.getType() == Application.ApplicationType.iOS) {
+            FThreads.invokeInBackgroundThread(() -> {
+                String contents = null;
+                try {
+                    contents = clipboard.getContents();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                final String text = contents == null ? "" : contents;
+                FThreads.invokeInEdtLater(() -> onText.accept(text));
+            });
+        } else {
+            final String contents = clipboard.getContents();
+            onText.accept(contents == null ? "" : contents);
+        }
     }
 
     public static IDeviceAdapter getDeviceAdapter() {
@@ -1172,7 +1200,7 @@ public class Forge implements ApplicationListener {
         currentScene = newScene;
 
         currentScene.enter();
-        if (currentScene instanceof DuelScene)
+        if (currentScene instanceof DuelScene duel && !duel.isGeneratingDecks())
             Forge.clearTransitionScreen(true);
         return true;
     }

@@ -57,6 +57,8 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
 import forge.adventure.util.NavArrowActor;
+import forge.adventure.util.Reward;
+import forge.adventure.util.RewardActor;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -93,6 +95,7 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
+    private final Array<RewardActor> abilityPreviews = new Array<>();
     private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
     private final Vector2 chevronStageCoordinates = new Vector2();
     private final Vector2 chevronNavigation = new Vector2();
@@ -228,16 +231,16 @@ public class GameHUD extends Stage {
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
 
-        ui.addActor(notificationPane);
-        //move touchpad here so z-index is over notificationPane and we can still move the player
-        if (GuiBase.isAndroid()) //add touchpad for android
-            ui.addActor(touchpad);
-        //MAP
+        //MAP (added before notificationPane so notifications are drawn over the minimap)
         mapGroup.addActor(miniMap);
         mapGroup.addActor(mapborder);
         mapGroup.addActor(openMapActor);
         mapGroup.addActor(miniMapPlayer);
         ui.addActor(mapGroup);
+        ui.addActor(notificationPane);
+        //move touchpad here so z-index is over notificationPane and we can still move the player
+        if (GuiBase.isAndroid()) //add touchpad for android
+            ui.addActor(touchpad);
         //HUD
         hudGroup.addActor(gamehud);
         hudGroup.addActor(keyCollection);
@@ -541,6 +544,10 @@ public class GameHUD extends Stage {
             button.remove();
         }
         abilityButtonMap.clear();
+        for (RewardActor preview : abilityPreviews) {
+            preview.removeTooltip();
+        }
+        abilityPreviews.clear();
     }
 
     void updateAbility() {
@@ -576,6 +583,9 @@ public class GameHUD extends Stage {
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
             }, "menu");
+            RewardActor preview = new RewardActor(new Reward(data), false, null, false);
+            preview.addTooltipTo(button);
+            abilityPreviews.add(preview);
             abilityButtonMap.add(button);
         }
     }
@@ -1127,7 +1137,7 @@ public class GameHUD extends Stage {
                 notificationText.setWrap(false);
                 notificationText.setText(text);
                 notificationText.setColor(Color.BLACK);
-                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
+                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : gamehud.getX() - 20));
                 notificationText.setWrap(true);
                 notificationText.layout();
 
@@ -1159,6 +1169,10 @@ public class GameHUD extends Stage {
         }
 
         notificationPane.addAction(newNotification);
+    }
+
+    public boolean isShowingNotification() {
+        return notificationPane.hasActions();
     }
 
     public void clearNotifications() {

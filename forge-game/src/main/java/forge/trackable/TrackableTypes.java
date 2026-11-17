@@ -30,9 +30,6 @@ public class TrackableTypes {
 
         protected void updateObjLookup(Tracker tracker, T newObj) {
         }
-        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
-            to.set(prop, from.get(prop));
-        }
 
         protected T getDefaultValue() {
             return defaultValue;
@@ -62,22 +59,6 @@ public class TrackableTypes {
                 newObj.updateObjLookup();
             }
         }
-
-        @Override
-        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
-            T newObj = from.get(prop);
-            if (newObj != null) {
-                T existingObj = newObj.getTracker().getObj(this, newObj.getId());
-                if (existingObj != null) { //if object exists already, update its changed properties
-                    existingObj.copyChangedProps(newObj);
-                    newObj = existingObj;
-                }
-                else { //if object is new, cache in object lookup
-                    newObj.getTracker().putObj(this, newObj.getId(), newObj);
-                }
-            }
-            to.set(prop, newObj);
-        }
     }
 
     private static class TrackableCollectionType<T extends TrackableObject> extends TrackableType<TrackableCollection<T>> {
@@ -97,35 +78,6 @@ public class TrackableTypes {
                     }
                 }
             }
-        }
-
-        @Override
-        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
-            TrackableCollection<T> newCollection = from.get(prop);
-            if (newCollection != null) {
-                // Snapshot via toArray: the loop below clears and rebuilds the collection,
-                // so direct iteration would throw ConcurrentModificationException
-                @SuppressWarnings("unchecked")
-                T[] items = (T[]) newCollection.toArray(new TrackableObject[0]);
-                newCollection.clear();
-                for (T newObj : items) {
-                    if (newObj != null) {
-                        T existingObj = from.getTracker().getObj(itemType, newObj.getId());
-                        if (existingObj != null) {
-                            // Skip CardView collections — cross-zone refs like Commander hold stale copies
-                            if (prop.getType() != TrackableTypes.CardViewCollectionType &&
-                                    prop.getType() != TrackableTypes.StackItemViewListType) {
-                                existingObj.copyChangedProps(newObj);
-                            }
-                            newCollection.add(existingObj);
-                        } else {
-                            from.getTracker().putObj(itemType, newObj.getId(), newObj);
-                            newCollection.add(newObj);
-                        }
-                    }
-                }
-            }
-            to.set(prop, newCollection);
         }
     }
 
@@ -148,23 +100,7 @@ public class TrackableTypes {
     public static final TrackableType<IPaperCard> IPaperCardType = new TrackableType<IPaperCard>(null);
 
     public static final TrackableCollectionType<CardView> CardViewCollectionType = new TrackableCollectionType<CardView>(CardViewType);
-    public static final TrackableObjectType<CardStateView> CardStateViewType = new TrackableObjectType<CardStateView>() {
-        @Override
-        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
-            // CardStateViews share their parent CardView's ID, so multiple states
-            // (CurrentState, AlternateState) have the same (type, id) key. The base
-            // implementation uses tracker.getObj(type, id) which returns the wrong
-            // state. Instead, look up the existing state directly via the property.
-            CardStateView newCsv = from.get(prop);
-            CardStateView existingCsv = to.get(prop);
-            if (newCsv != null && existingCsv != null) {
-                existingCsv.copyChangedProps(newCsv);
-                to.set(prop, existingCsv);
-            } else {
-                to.set(prop, newCsv);
-            }
-        }
-    };
+    public static final TrackableObjectType<CardStateView> CardStateViewType = new TrackableObjectType<>();
     public static final TrackableType<CardTypeView> CardTypeViewType = new TrackableType<>(CardType.EMPTY);
     public static final TrackableObjectType<PlayerView> PlayerViewType = new TrackableObjectType<>();
     public static final TrackableCollectionType<PlayerView> PlayerViewCollectionType = new TrackableCollectionType<>(PlayerViewType);

@@ -520,8 +520,9 @@ public class CombatUtil {
             }
 
             // Rule 802.4a: A player can block only creatures attacking him/her or a planeswalker he/she controls
+            // CR 805.10d: under shared team turns, creatures attacking any player of their team
             Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
-            if (attacked != null && attacked != defendingPlayer) {
+            if (attacked != null && !attacked.sharesTeamWith(defendingPlayer)) {
                 return false;
             }
         }
@@ -694,6 +695,20 @@ public class CombatUtil {
             }
         }
 
+        // CR 805.10d: a team declares one combined block, which the game checks once all its players have declared
+        if (defending.getGame().getRules().hasSharedTeamTurns()) {
+            return null;
+        }
+        return validateBlockRestrictions(combat, defending, blockers);
+    }
+
+    /** Checks the combined block of the defender's team, which must be legal as a whole once all its players have declared (CR 805.10d). */
+    public static String validateTeamBlock(final Combat combat, final Player defender) {
+        return validateBlockRestrictions(combat, defender, CardLists.filterControlledBy(combat.getAllBlockers(), defender.getSharedTeam()));
+    }
+
+    /** Checks the restrictions that depend on the other blockers and on the number of blockers per attacker. */
+    public static String validateBlockRestrictions(final Combat combat, final Player defending, final List<Card> blockers) {
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
             boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
@@ -722,7 +737,7 @@ public class CombatUtil {
             return TextUtil.concatWithSpace("No more than", String.valueOf(maxBlockers), "creatures can block each combat.");
         }
 
-        for (final Card attacker : attackers) {
+        for (final Card attacker : combat.getAttackers()) {
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
             if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers, combat))

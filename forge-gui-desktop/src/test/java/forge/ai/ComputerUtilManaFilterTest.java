@@ -148,4 +148,123 @@ public class ComputerUtilManaFilterTest extends AITest {
         List<SpellAbility> play = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
         AssertJUnit.assertEquals("the Gate alone can't make {W}", plains, play.get(0).getHostCard());
     }
+
+    @Test
+    public void barbedSextantPaysAColorTheLandsLack() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        fillLibrary(ai, 10);
+        addCard("Plains", ai);
+        addCard("Barbed Sextant", ai); // {1}, {T}, Sacrifice: Add one mana of any color. Draw a card next upkeep
+        Card flyingMen = addCardToZone("Flying Men", ai, ZoneType.Hand); // {U}
+
+        AssertJUnit.assertTrue(payForReal(flyingMen, ai));
+        AssertJUnit.assertEquals(1, countCardsWithName(game, "Barbed Sextant", ZoneType.Graveyard));
+    }
+
+    @Test
+    public void paymentCheckWithChromaticStarChangesNothing() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        fillLibrary(ai, 10);
+        Card plains = addCard("Plains", ai);
+        Card star = addCard("Chromatic Star", ai); // draws a card when it is put into a graveyard
+        Card flyingMen = addCardToZone("Flying Men", ai, ZoneType.Hand);
+        int handSize = ai.getCardsIn(ZoneType.Hand).size();
+
+        SpellAbility sa = flyingMen.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
+        AssertJUnit.assertTrue(star.isInZone(ZoneType.Battlefield));
+        AssertJUnit.assertFalse(star.isTapped() || plains.isTapped());
+        AssertJUnit.assertEquals(handSize, ai.getCardsIn(ZoneType.Hand).size());
+        AssertJUnit.assertEquals("", star.getManaAbilities().get(0).getManaPart().getExpressChoice());
+    }
+
+    @Test
+    public void implementsOfSacrificeTurnsOneManaIntoTwoOfAColor() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Plains", ai);
+        addCard("Implements of Sacrifice", ai); // {1}, {T}, Sacrifice: Add two mana of any one color
+        Card counterspell = addCardToZone("Counterspell", ai, ZoneType.Hand); // {U}{U}
+
+        AssertJUnit.assertTrue(payForReal(counterspell, ai));
+        AssertJUnit.assertEquals(1, countCardsWithName(game, "Implements of Sacrifice", ZoneType.Graveyard));
+    }
+
+    @Test
+    public void colorFixerStaysLastWhenTheLandIsTheOnlySourceOfAHeldColor() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Scoured Barrens", ai); // Add {W} or {B}
+        addCard("Agent of Stromgald", ai).setSickness(false); // {R}: Add {B}
+        addCardToZone("Savannah Lions", ai, ZoneType.Hand); // the Barrens is the only {W} source
+        Card carnophage = addCardToZone("Carnophage", ai, ZoneType.Hand); // {B}
+
+        SpellAbility sa = carnophage.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("no source makes the Agent's {R}, so the Barrens pays", ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
+    }
+
+    @Test
+    public void creatureIsNotSacrificedAsAColorFixer() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Island", 3, ai);
+        addCard("Coal Golem", ai); // {3}, Sacrifice: Add {R}{R}{R}
+        Card bolt = addCardToZone("Lightning Bolt", ai, ZoneType.Hand);
+
+        SpellAbility sa = bolt.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse(ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
+    }
+
+    @Test
+    public void preferredColorDoesNotPutTheColorFixerFirst() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Plains", 4, ai);
+        Card kaleidostone = addCard("Kaleidostone", ai); // {5}, {T}, Sacrifice: Add {W}{U}{B}{R}{G}
+        Card paladin = addCardToZone("Ardenvale Paladin", ai, ZoneType.Hand); // {3}{W}, prefers {W} for adamant
+
+        AssertJUnit.assertTrue(payForReal(paladin, ai));
+        AssertJUnit.assertTrue(kaleidostone.isInZone(ZoneType.Battlefield));
+    }
+
+    @Test
+    public void colorFixerGoesAfterTheFilterWhenFiltersGoFirst() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Forest", ai);
+        addCard("Plains", ai);
+        addCard("Knotvine Mystic", ai).setSickness(false); // {1}, {T}: Add {R}{G}{W}
+        Card sprites = addCard("Fire Sprites", ai); // {G}, {T}: Add {R}
+        sprites.setSickness(false);
+        Card giant = addCardToZone("Hill Giant", ai, ZoneType.Hand); // {3}{R}
+
+        AssertJUnit.assertTrue(payForReal(giant, ai));
+        AssertJUnit.assertFalse(sprites.isTapped());
+    }
+
+    @Test
+    public void exhaustManaAbilityIsNotSpentOnAPayment() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Forest", ai);
+        addCard("Loot, the Pathfinder", ai); // {G}, {T}, Exhaust: Add three mana of any one color
+        Card flyingMen = addCardToZone("Flying Men", ai, ZoneType.Hand); // {U}
+
+        SpellAbility sa = flyingMen.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse(ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
+    }
 }

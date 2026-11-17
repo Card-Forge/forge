@@ -158,6 +158,44 @@ public class ComputerUtilAbility {
         return result;
     }
 
+    /**
+     * A permanent that pays off for each spell its controller casts (Up the Beanstalk draws a card for each spell of mana
+     * value 5 or more) goes before the first spell of the list it would pay off for: cast after it, it only misses the card (#4278).
+     */
+    public static void putCastPayoffsFirst(final List<SpellAbility> list) {
+        for (int i = 1; i < list.size(); i++) {
+            final SpellAbility payoff = list.get(i);
+            if (!payoff.isSpell() || payoff.getHostCard() == null || !payoff.getHostCard().isPermanent()) {
+                continue;
+            }
+            for (int j = 0; j < i; j++) {
+                if (paysOffFor(payoff, list.get(j))) {
+                    list.remove(i);
+                    list.add(j, payoff);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
+        final Card host = payoff.getHostCard();
+        final Card cast = spell.getHostCard();
+        if (!spell.isSpell() || cast == null || cast == host) {
+            return false;
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))
+                    || !t.hasParam("TriggerZones") || !t.getParam("TriggerZones").contains("Battlefield")) {
+                continue;
+            }
+            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard"), host.getController(), host, t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
         Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
 
@@ -253,7 +291,7 @@ public class ComputerUtilAbility {
      * (e.g. "FreeSpellAI" returned -1 in both directions) and so could contradict itself.
      */
     public static final class SortKey implements Comparable<SortKey> {
-        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score;
+        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, enablerFirst, score;
 
         private SortKey(SpellAbility sa, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
@@ -271,6 +309,8 @@ public class ComputerUtilAbility {
             zeroCmcFirst = cmc == 0 && ApiType.Mana != sa.getApi() ? 0 : 1;
             final Card host = sa.getHostCard();
             freeSpellFirst = host != null && host.hasSVar("FreeSpellAI") ? 0 : 1;
+            // a cheap permanent that rewards casting big spells (Up the Beanstalk) goes before the big spell it pays off on (#4278)
+            enablerFirst = sa.isSpell() && rewardsBigSpellInHand(sa) ? 0 : 1;
 
             int s = cmc + getSpellAbilityPriority(sa);
             // if both are creature spells sort them after
@@ -293,8 +333,39 @@ public class ComputerUtilAbility {
             if (r != 0) return r;
             r = Integer.compare(freeSpellFirst, o.freeSpellFirst);
             if (r != 0) return r;
+            r = Integer.compare(enablerFirst, o.enablerFirst);
+            if (r != 0) return r;
             // higher score first
             return Integer.compare(o.score, score);
+        }
+
+        /** The permanent has a "whenever you cast a spell with mana value N or greater" trigger and another spell in hand qualifies. */
+        private static boolean rewardsBigSpellInHand(SpellAbility sa) {
+            final Card host = sa.getHostCard();
+            if (host == null || !host.isPermanent() || !host.isInZone(ZoneType.Hand) || host.getController() == null) {
+                return false;
+            }
+            for (final Trigger t : host.getTriggers()) {
+                if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidCard", "");
+                final int at = valid.indexOf("cmcGE");
+                if (at < 0) {
+                    continue;
+                }
+                try {
+                    final int min = Integer.parseInt(valid.substring(at + 5).replaceAll("\\D.*$", ""));
+                    for (final Card c : host.getController().getCardsIn(ZoneType.Hand)) {
+                        if (c != host && !c.isLand() && c.getCMC() >= min) {
+                            return true;
+                        }
+                    }
+                } catch (final NumberFormatException e) {
+                    // not a plain number: no preference
+                }
+            }
+            return false;
         }
 
         private static boolean isLowPriorityPlanarDieRoll(SpellAbility sa) {

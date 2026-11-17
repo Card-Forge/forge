@@ -25,6 +25,7 @@ TokensCode=PLST
 2XM-3 C Ancestral Blade @Scott Murphy
 2XM-10 R Boon Reflection @Chris Seaman
 2XM-32 R Stonehewer Giant @Steve Prescott
+2XM-40 C Apprentice Wizard @Richard Kane Ferguson
 2XM-52 C Frogify @Chris Seaman
 2XM-64 R Reshape @Jon Foster
 2XM-68 U Serra Sphinx @Daren Bader
@@ -1826,7 +1827,6 @@ DRB-9 R Kokusho, the Evening Star @Tsutomu Kawade
 DRC-48 R Chaos Warp @Mathias Kollros
 DRC-66 M God-Eternal Oketra @Grzegorz Rutkowski
 DRC-101 R Blasphemous Act @Daarken
-DRK-21 R Apprentice Wizard @Dan Frazier
 DSC-73 C Ponder @Ernanda Souza
 DSC-86 U Deathreap Ritual @GodMachine
 DSC-96 C Command Tower @Eddie Mendoza

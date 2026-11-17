@@ -1,0 +1,31 @@
+[metadata]
+Name=Dwarven Lieutenant
+[Main]
+19 Mountain|3ED
+1 Dwarven Hold|FEM
+3 Dwarven Ruins|FEM
+4 Dwarven Lieutenant|FEM
+1 Dwarven Soldier|FEM|[53a]
+1 Dwarven Soldier|FEM|[53b]
+1 Dwarven Soldier|FEM|[53c]
+2 Dwarven Recruiter|ODY
+4 Dwarven Warriors|3ED
+2 Dwarven Vigilantes|VIS
+2 Dwarven Weaponsmith|3ED
+1 Dwarven Nomad|MIR
+3 Heart Wolf|HML
+1 Ring of Renewal|FEM
+1 Spirit Shield|FEM
+1 Zelyon Sword|FEM
+2 Aeolipile|FEM
+1 Dwarven Catapult|FEM
+2 Volcanic Hammer|POR
+2 Heartstone|STH
+2 Mana Flare|3ED
+1 Baton of Morale|ICE
+2 Howling Mine|3ED
+1 Ambush|HML
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Heartstone|STH
+1 Dwarven Lieutenant|FEM

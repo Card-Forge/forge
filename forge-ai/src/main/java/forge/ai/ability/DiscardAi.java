@@ -140,7 +140,10 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final ComboPlan combos = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
-        if (combos.selfDiscardWanted(ai, sa.getHostCard()) && sa.canTarget(ai)) {
+        // The graveyard-fuel exception is only safe when the AI can choose
+        // which card to discard. Random discard (e.g. Mind Twist) cannot.
+        if (!"Random".equalsIgnoreCase(sa.getParam("Mode"))
+                && combos.selfDiscardWanted(ai, sa.getHostCard()) && sa.canTarget(ai)) {
             sa.resetTargets();
             sa.getTargets().add(ai);
             return true;
@@ -216,6 +219,9 @@ public class DiscardAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (mode == PlayerActionConfirmMode.Random) {
             // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
+            if ("Hand".equals(sa.getParam("Mode"))) {
+                return MayDecisions.discardHandForNew(player, sa); // each player may discard their hand and draw N
+            }
             return true;
         }
         return super.confirmAction(player, sa, mode, message, params);

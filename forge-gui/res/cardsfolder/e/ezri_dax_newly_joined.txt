@@ -1,0 +1,8 @@
+Name:Ezri Dax, Newly Joined
+ManaCost:1 W
+Types:Legendary Creature Trill Advisor
+PT:2/2
+K:Flash
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other+YouOwn+ThisTurnEnteredFrom_Battlefield | ChoiceZone$ Graveyard | NewName$ Ezri Dax, Newly Joined | AddTypes$ Legendary & Trill | SpellDescription$ You may have NICKNAME enter as a copy of any creature card in your graveyard that was put there from the battlefield this turn, except her name is Ezri Dax, Newly Joined and she's a legendary Trill in addition to her other types.
+Oracle:Flash\nYou may have Ezri Dax enter as a copy of any creature card in your graveyard that was put there from the battlefield this turn, except her name is Ezri Dax, Newly Joined and she's a legendary Trill in addition to her other types.

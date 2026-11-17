@@ -83,7 +83,7 @@ import forge.game.zone.ZoneType;
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
         MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE,
-        LIBRARY_OUT, PAIR, LIBRARY_CUT }
+        LIBRARY_OUT, PAIR, LIBRARY_CUT, DOOMSDAY }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -118,6 +118,17 @@ public final class ComboPlan {
             }
         }
         return false;
+    }
+
+    /**
+     * Whether a cascade spell may be cast just for the free spell it brings along, when the spell itself does nothing
+     * (Violent Outburst with no creature to pump). A Living End style deck decides on all its cascade spells in
+     * {@link #massReanimationRuling}: before the graveyard is ready a cascade would waste the payoff, and with a full board
+     * the swap would cost the AI its own creatures. Any other deck, a cascade deck that can only find its payoff included,
+     * has nothing to lose: the cascade is a free spell on top.
+     */
+    public boolean mayCascadeForTheFreeSpell(final Player ai) {
+        return !isMassReanimationDeck(ai);
     }
 
     /**
@@ -281,13 +292,17 @@ public final class ComboPlan {
      */
     public String selfDiscardName(final Player ai, final Card host) {
         final boolean big = bigDiscardWanted(ai);
+        // what escape, flashback, unearth or dredge bring back, and what works from the graveyard, is only fuel in a deck
+        // built around the graveyard (reanimator, Living End, dredge, Replenish): in any other deck it is a card to be cast
+        // (Nethergoyf for {B}, Lightning Bolt with flashback). The DiscardMe hint of a script counts in every deck.
+        final boolean graveyardDeck = wantsGraveyardFuel();
         final Map<String, Integer> total = new HashMap<>();
         final Map<String, Integer> tiebreak = new HashMap<>();
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             if (c == host || c.isLand()) {
                 continue;
             }
-            int v = graveyardValue(c);
+            int v = graveyardDeck ? graveyardValue(c) : discardMeValue(c);
             int tie = 0;
             if (big && c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
                 v += 5;
@@ -319,14 +334,7 @@ public final class ComboPlan {
      * trigger / ability / static (Bridge from Below), and the keywords that work from the graveyard.
      */
     static int graveyardValue(final Card c) {
-        int v = 0;
-        if (c.hasSVar("DiscardMe")) {
-            try {
-                v += Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
-            } catch (final NumberFormatException e) {
-                v += 1;
-            }
-        }
+        int v = discardMeValue(c);
         boolean fromGraveyard = false;
         for (final Trigger t : c.getTriggers()) {
             if (zoneParamHasGraveyard(t.getParam("TriggerZones"))) {
@@ -357,6 +365,18 @@ public final class ComboPlan {
 
     private static boolean zoneParamHasGraveyard(final String zones) {
         return zones != null && zones.contains("Graveyard");
+    }
+
+    /** The DiscardMe hint of the card's script: its author says it wants to be in the graveyard, in any deck. */
+    static int discardMeValue(final Card c) {
+        if (!c.hasSVar("DiscardMe")) {
+            return 0;
+        }
+        try {
+            return Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
+        } catch (final NumberFormatException e) {
+            return 1;
+        }
     }
 
     static boolean isTargetedDiscard(final SpellAbility sa) {
@@ -480,6 +500,7 @@ public final class ComboPlan {
         addIfFound(found, libraryOut(spells));
         addIfFound(found, pair(spells));
         addIfFound(found, libraryCut(spells, lands));
+        addIfFound(found, doomsday(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -805,6 +826,9 @@ public final class ComboPlan {
                     break;
                 case LIBRARY_CUT:
                     sum += libraryCutTerm(ai, combo);
+                    break;
+                case DOOMSDAY:
+                    sum += DoomsdayPile.term(ai);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -2447,7 +2471,7 @@ public final class ComboPlan {
         int rituals = 0;
         int cantrips = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName())) {
+            if (isStormFinisher(c)) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.getCMC() <= 2 && !c.isCreature() && hasApi(c, ApiType.Mana)) {
@@ -2470,7 +2494,8 @@ public final class ComboPlan {
 
     /** A storm card that wins the game: Tendrils of Agony, Grapeshot, Brain Freeze, Empty the Warrens. */
     public static boolean isStormFinisher(final Card c) {
-        return !c.isLand() && !c.isCreature()
+        // a counterspell with storm (Flusterstorm) copies itself, it does not win the game
+        return !c.isLand() && !c.isCreature() && !hasApi(c, ApiType.Counter)
                 && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
     }
 
@@ -3578,6 +3603,93 @@ public final class ComboPlan {
         return flashback && ai.getCreaturesInPlay().size() >= LIBRARY_OUT_FODDER;
     }
 
+    /** Doomsday with the Oracle: two copies of Doomsday, a winner and eight cards that draw or make mana for the pile. */
+    private static Combo doomsday(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int doomsdays = 0;
+        int winners = 0;
+        int pile = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.DOOMSDAY, c.getName())) {
+                enablers.add(c.getName());
+                doomsdays++;
+            } else if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                winners++;
+            } else if (AiCardLists.has(AiCardLists.Role.DOOMSDAY_DRAW, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.DOOMSDAY_MANA, c.getName())) {
+                pile++;
+            }
+        }
+        if (doomsdays < 2 || winners < 1 || pile < 8) {
+            return null;
+        }
+        return new Combo(Kind.DOOMSDAY, 30 + 4 * Math.min(doomsdays, 4) + 8 * Math.min(winners, 3) + Math.min(pile, 16), payoffs,
+                enablers, Collections.<String>emptySet(), false,
+                "doomsday=" + doomsdays + ", winners=" + payoffs + ", pile cards=" + pile);
+    }
+
+    /**
+     * Whether milling its own library out can be followed by the win: the winner (Thassa's Oracle) is in hand or in play,
+     * or it is in the library or graveyard with a way back that is certain: a reanimation spell in hand, or Dread Return
+     * in the graveyard or the library (it is milled with the rest) and three creatures to pay its flashback (the
+     * creatures in play and the Narcomoebas of the library, which come into play as they are milled). True for a deck
+     * that is not a library-out deck: there is nothing to say about it.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai) {
+        return libraryOutSelfMillSafe(ai, 0);
+    }
+
+    /**
+     * Like {@link #libraryOutSelfMillSafe(Player)} with {@code extraCreatures} more creatures than the ones in play to
+     * pay the flashback of Dread Return with: the Balustrade Spy that is about to be cast is one of them, and its
+     * trigger is what mills the library.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai, final int extraCreatures) {
+        final Combo combo = find(Kind.LIBRARY_OUT);
+        if (combo == null) {
+            return true;
+        }
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs) || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs) && !anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs)) {
+            return false; // exiled, or gone: nothing left to win with
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName())) {
+                return true;
+            }
+        }
+        boolean flashback = false;
+        int fodder = ai.getCreaturesInPlay().size() + extraCreatures;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+            if (entersFromMill(c)) {
+                fodder++;
+            }
+        }
+        return flashback && fodder >= LIBRARY_OUT_FODDER;
+    }
+
+    /** Narcomoeba: a creature that comes into play when it is put into the graveyard from the library. */
+    private static boolean entersFromMill(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+            if ("Library".equals(t.getParam("Origin")) && "Graveyard".equals(t.getParam("Destination"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
      * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
@@ -3647,6 +3759,13 @@ public final class ComboPlan {
         if (combos.isEmpty() || options == null || options.isEmpty()) {
             return null;
         }
+        if (has(Kind.DOOMSDAY) && destination == ZoneType.Library && origin.contains(ZoneType.Graveyard)
+                && origin.contains(ZoneType.Library)) {
+            final Card kept = DoomsdayPile.pick(ai, options); // Doomsday: the five cards of the pile
+            if (kept != null) {
+                return kept;
+            }
+        }
         final Combo tutorStorm = find(Kind.TUTOR_STORM);
         if (tutorStorm != null && (destination == ZoneType.Hand || destination == ZoneType.Exile)
                 && (origin.contains(ZoneType.Library) || origin.contains(ZoneType.Sideboard))) {
@@ -3660,6 +3779,12 @@ public final class ComboPlan {
         }
         if (tutorStorm != null && destination == ZoneType.Library && origin.contains(ZoneType.Hand)) {
             return tutorStormPutBack(ai, options); // Brainstorm: what goes back is what the kill needs least
+        }
+        if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && has(Kind.PAIR)) {
+            final Card piece = VaultLoop.pick(ai, options); // Goblin Engineer: the vault, then what untaps it
+            if (piece != null) {
+                return piece;
+            }
         }
         Card best = null;
         int bestValue = Integer.MIN_VALUE;

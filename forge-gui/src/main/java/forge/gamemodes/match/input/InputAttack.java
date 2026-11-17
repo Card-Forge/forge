@@ -22,6 +22,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
@@ -83,7 +84,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     //determine whether currently attackers can be called back (undeclared)
     private boolean canCallBackAttackers() {
-        return !combat.getAttackers().isEmpty();
+        return !CardLists.filterControlledBy(combat.getAttackers(), playerAttacks).isEmpty();
     }
 
     private void updatePrompt() {
@@ -108,8 +109,7 @@ public class InputAttack extends InputSyncronizedBase {
         //either alpha strike or undeclare all attackers based on whether any attackers have been declared
         if (canCallBackAttackers()) {
             //undeclare all attackers
-            List<Card> attackers = new ArrayList<>(combat.getAttackers()); //must copy list since it will be modified
-            for (Card c : attackers) {
+            for (Card c : CardLists.filterControlledBy(combat.getAttackers(), playerAttacks)) {
                 undeclareAttacker(c);
             }
         } else {

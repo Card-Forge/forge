@@ -141,7 +141,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             if (!sa.hasParam("Choices") && optional && !activator.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblGainControlConfirm", newController,
-                            tgtC.getTranslatedName()), null)) {
+                            tgtC.getTranslatedName()), tgtC, null)) {
                 continue;
             }
 

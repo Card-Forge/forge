@@ -1,0 +1,32 @@
+[metadata]
+Name=Orcish Captain
+[Main]
+15 Mountain|3ED
+3 Dwarven Ruins|FEM
+4 Forgotten Cave|ONS
+4 Orcish Captain|FEM
+1 Orcish Spy|FEM|[61a]
+1 Orcish Spy|FEM|[61b]
+4 Ironclaw Orcs|4ED
+1 Orcish Veteran|FEM|[62a]
+1 Orcish Veteran|FEM|[62b]
+1 Orcish Veteran|FEM|[62c]
+1 Orcish Veteran|FEM|[62d]
+3 Orcish Artillery|3ED
+3 Orcish Cannoneers|ICE
+2 Aeolipile|FEM
+1 Spirit Shield|FEM
+2 Goblin Kites|FEM
+1 Aleatory|MIR
+2 Chance Encounter|ODY
+2 Goblin Bomb|WTH
+1 Chaotic Strike|INV
+1 Gamble|USG
+1 Game of Chaos|ICE
+1 Goblin Lyre|ICE
+2 Goblin Festival|UDS
+2 Fighting Chance|EXO
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Orcish Captain|FEM
+1 Chance Encounter|ODY

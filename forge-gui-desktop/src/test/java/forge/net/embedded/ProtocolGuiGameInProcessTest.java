@@ -282,7 +282,7 @@ public class ProtocolGuiGameInProcessTest {
                 || n.endsWith("ObjectEncoder") || n.endsWith("CObjectOutputStream") || n.endsWith("TrackableSerializer")
                 || n.endsWith("RemoteClient") || n.endsWith("FGameClient") || n.endsWith("FServerManager")),
                 "no network or serialization class loaded");
-        assertTrue(remote.fullStates >= 1, "full state (setGameView) reached the remote");
+        assertEquals(remote.fullStates, 1, "one full state (setGameView) per game reached the remote");
         assertTrue(remote.deltasWithState >= 2, "state deltas reached the remote after init");
         assertTrue(askedThenWithdrawn(remote.questions), "the priority question reached the remote and was withdrawn once answered");
         assertTrue(playedLand, "the human played a land");

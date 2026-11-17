@@ -18,8 +18,12 @@
 package forge.game.spellability;
 
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Sets;
 
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
@@ -34,9 +38,13 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.ability.effects.ManaEffect;
+import forge.game.ability.effects.ReplaceManaEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostTap;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -51,10 +59,13 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -161,11 +172,8 @@ public class AbilityManaPart implements java.io.Serializable {
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
         if (root != null) {
-            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+            final Map<AbilityKey, Object> repParams = produceManaParams(source, player, root, root.getActivatingPlayer());
             repParams.put(AbilityKey.Mana, afterReplace);
-            repParams.put(AbilityKey.Player, player);
-            repParams.put(AbilityKey.AbilityMana, root);
-            repParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
             switch (game.getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
             case NotReplaced:
@@ -522,6 +530,132 @@ public class AbilityManaPart implements java.io.Serializable {
         return produced;
     }
 
+    private static Map<AbilityKey, Object> produceManaParams(final Card source, final Player player, final SpellAbility root, final Player activator) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+        repParams.put(AbilityKey.Player, player);
+        repParams.put(AbilityKey.AbilityMana, root);
+        repParams.put(AbilityKey.Activator, activator);
+        return repParams;
+    }
+
+    /**
+     * CR 106.7: the types of mana this would add if it resolved now, after replacement effects applied in any order.
+     * @param reflected the colors a ManaReflected ability chooses from, null for other abilities
+     */
+    public final Set<String> couldProduce(final SpellAbility sa, final Iterable<String> reflected) {
+        final Set<String> types = Sets.newHashSet();
+        final Card source = sa.getHostCard();
+        final Player controller = source.getController();
+        final SpellAbility root = sa.getRootAbility();
+        // an effect can ask who controls the ability, which nobody has activated yet
+        if (root.getActivatingPlayer() == null) {
+            root.setActivatingPlayer(controller);
+        }
+        final Map<AbilityKey, Object> repParams = produceManaParams(source, controller, root, controller);
+        // with no mana given yet, this finds the effects whatever amount they need
+        final List<ReplacementEffect> effects = source.getGame().getReplacementHandler()
+                .getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other);
+
+        // effects that only multiply the mana leave its types alone, so with no other effect there is nothing to search
+        if (Iterables.all(effects, effect -> ReplaceManaEffect.onlyChangesAmount(effect.ensureAbility()))) {
+            effects.clear();
+        }
+
+        final List<String> options = manaOptions(sa, reflected);
+        for (final byte color : MagicColor.WUBRGC) {
+            final Set<Pair<String, Set<ReplacementEffect>>> tried = Sets.newHashSet();
+            for (final String mana : options) {
+                if (couldBecome(color, mana, repParams, effects, tried)) {
+                    types.add(MagicColor.toLongString(color));
+                    break;
+                }
+            }
+        }
+        return types;
+    }
+
+    /** Each mana string this would add if it resolved now, one for each choice it offers. */
+    private List<String> manaOptions(final SpellAbility sa, final Iterable<String> reflected) {
+        final List<String> options = Lists.newArrayList();
+        final Card host = sa.getHostCard();
+        // an amount that is only set as the ability is activated or resolves counts as at least one
+        final int amount = amountIsSettled(sa) ? sa.amountOfManaGenerated(false) : Math.max(1, sa.amountOfManaGenerated(false));
+        if (reflected == null && !isComboMana() && getOrigProduced().contains("Chosen") && !host.hasChosenColor() && choosesColor(sa)) {
+            // an amount that counts by the chosen color is worked out on a copy that has each color chosen
+            final Card copy = sa.getSVar(sa.getParamOrDefault("Amount", "")).contains("Chosen") ? CardCopyService.getLKICopy(host) : null;
+            for (final String color : MagicColor.Constant.ONLY_COLORS) {
+                if (copy != null) {
+                    copy.setChosenColors(Lists.newArrayList(color));
+                }
+                addOption(options, getOrigProduced().replace("Chosen", MagicColor.toShortString(color)),
+                        copy == null ? amount : AbilityUtils.calculateAmount(copy, sa.getParam("Amount"), sa));
+            }
+            return options;
+        }
+        final Iterable<String> choices = reflected != null ? Iterables.transform(reflected, MagicColor::toShortString)
+                : isComboMana() ? List.of(getComboColors(sa).split(" "))
+                : isAnyMana() ? List.of("W", "U", "B", "R", "G")
+                : List.of(mana(sa));
+        for (final String choice : choices) {
+            addOption(options, choice, amount);
+        }
+        return options;
+    }
+
+    /** Whether nothing can still set the amount: no trigger event, no earlier part of the ability, and no cost beyond tapping and fixed mana. */
+    private static boolean amountIsSettled(final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        return sa.getParent() == null && !sa.isTrigger() && cost != null && !cost.hasXInAnyCostPart()
+                && cost.getCostParts().stream().allMatch(part -> part instanceof CostTap || part instanceof CostPartMana);
+    }
+
+    private static void addOption(final List<String> options, final String mana, final int amount) {
+        if (amount > 0 && !mana.isEmpty()) {
+            options.add(StringUtils.repeat(mana, " ", amount));
+        }
+    }
+
+    private static boolean choosesColor(final SpellAbility sa) {
+        for (SpellAbility parent = sa.getParent(); parent != null; parent = parent.getParent()) {
+            if (parent.getApi() == ApiType.ChooseColor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether some order of the effects not yet applied turns the mana into one that has the color.
+     * @param tried the mana and unapplied effects already looked at for the color, which different orders reach again
+     */
+    private static boolean couldBecome(final byte color, final String mana, final Map<AbilityKey, Object> repParams,
+            final List<ReplacementEffect> unapplied, final Set<Pair<String, Set<ReplacementEffect>>> tried) {
+        if (!tried.add(Pair.of(mana, ImmutableSet.copyOf(unapplied)))) {
+            return false;
+        }
+        repParams.put(AbilityKey.Mana, mana);
+        final List<ReplacementEffect> applicable = Lists.newArrayList(Iterables.filter(unapplied, effect -> effect.canReplace(repParams)));
+        if (applicable.isEmpty()) {
+            return Arrays.stream(mana.split(" ")).anyMatch(part -> MagicColor.fromName(part) == color);
+        }
+        // an effect that has its controller choose a color gets the one looked for, or each color in turn for colorless
+        final byte[] choices = color == MagicColor.COLORLESS ? MagicColor.WUBRG : new byte[] { color };
+        for (final ReplacementEffect effect : applicable) {
+            final List<ReplacementEffect> rest = Lists.newArrayList(unapplied);
+            rest.remove(effect);
+            final Set<String> replaced = Sets.newHashSet();
+            for (final byte choice : choices) {
+                replaced.add(ReplaceManaEffect.replaceMana(effect.ensureAbility(), mana, MagicColor.toShortString(choice)));
+            }
+            for (final String next : replaced) {
+                if (couldBecome(color, next, repParams, rest, tried)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * setAnyChoice.
@@ -749,10 +883,8 @@ public class AbilityManaPart implements java.io.Serializable {
         // check for produce mana replacement effects - they mess this up, so just use the mana ability
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+        final Map<AbilityKey, Object> repParams = produceManaParams(source, activator, am.getRootAbility(), activator);
         repParams.put(AbilityKey.Mana, getOrigProduced());
-        repParams.put(AbilityKey.Activator, activator);
-        repParams.put(AbilityKey.AbilityMana, am.getRootAbility());
 
         if (!source.getGame().getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other).isEmpty()) {
             return true;

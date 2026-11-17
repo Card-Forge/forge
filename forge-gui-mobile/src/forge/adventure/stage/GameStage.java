@@ -142,14 +142,21 @@ public abstract class GameStage extends Stage {
     }
 
     public void effectDialog(EffectData effectData) {
+        effectDialog(effectData.getIntro(Forge.getLocalizer().getMessage("lblEffectDialogDescription")), effectData.getEnemySideDescription(), null);
+    }
+
+    /** @param details the effect text, starting with the header that says which side gets it */
+    public void effectDialog(String intro, String details, Runnable onClose) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
-        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        TextraButton ok = Controls.newTextButton("OK", () -> {
+            hideDialog();
+            if (onClose != null)
+                onClose.run();
+        });
         ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" +
-                Forge.getLocalizer().getMessage("lblEffectDialogDescription") + "{ENDGRADIENT}\n" +
-                Forge.getLocalizer().getMessage("lblEffectDataHeader") + "\n" + effectData.getDescription());
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" + intro + "{ENDGRADIENT}\n" + details);
         L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override
@@ -488,7 +495,7 @@ public abstract class GameStage extends Stage {
                 noQuicksaveDialog.activate();
             } else {
                 getPlayerSprite().storePos();
-                WorldSave.requestPreview();
+                WorldSave.requestPreview(true); // saved right away, so no stale preview and no cooldown
                 WorldSave.getCurrentSave().quickSave();
             }
         }

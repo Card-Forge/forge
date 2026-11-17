@@ -1,0 +1,13 @@
+Name:Ensign Pavel Chekov
+ManaCost:3 U
+Types:Legendary Creature Human Pilot
+PT:1/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Strange new worlds — When NICKNAME enters, each opponent exiles the top X cards of their library, where X is the number of differently named lands you control. For each opponent, choose a land card that player owns exiled this way. You may play the chosen cards for as long as they remain exiled.
+SVar:TrigExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBEffect
+SVar:DBChoose:DB$ ChooseCard | Choices$ Land.IsRemembered+RememberedPlayerOwn | ChoiceZone$ Exile | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose an exiled land card this player owns | ImprintChosen$ True
+SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen cards for as long as they remain exiled.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Strange new worlds — When Ensign Chekov enters, each opponent exiles the top X cards of their library, where X is the number of differently named lands you control. For each opponent, choose a land card that player owns exiled this way. You may play the chosen cards for as long as they remain exiled.

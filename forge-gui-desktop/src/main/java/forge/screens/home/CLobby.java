@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
@@ -343,43 +342,23 @@ public class CLobby implements IDraftEventHandler {
             for (int n = floor; n <= BoosterDraft.N_PLAYERS; n++) {
                 podSizes.add(n);
             }
-            List<DraftOptions.DoublePick> pickRules = Arrays.asList(
-                    DraftOptions.DoublePick.NEVER,
-                    DraftOptions.DoublePick.FIRST_PICK,
-                    DraftOptions.DoublePick.ALWAYS);
-
             FComboBox<String> podCombo = new FComboBox<>();
             for (int n : podSizes) {
-                podCombo.addItem(NetworkEvent.markSetDefault(
+                podCombo.addItem(BoosterDraft.markSetDefault(
                         NetworkEvent.podSizeLabel(n), n == recommendedPod));
             }
             podCombo.setSelectedIndex(Math.max(0, podSizes.indexOf(recommendedPod)));
 
-            FComboBox<String> picksCombo = new FComboBox<>();
-
             FLabel podLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPodSizeLabel")).build();
             FLabel podHelp = new FLabel.Builder().fontSize(11).text(localizer.getMessage("lblNetworkPodSizeHelp")).build();
-            FLabel picksLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPicksLabel")).build();
-            FLabel picksHelp = new FLabel.Builder().fontSize(11).text(localizer.getMessage("lblNetworkPicksHelp")).build();
             FTextField pickField = new FTextField.Builder().text(String.valueOf(timerSeconds)).build();
             FTextField graceField = new FTextField.Builder().text(String.valueOf(graceSeconds)).build();
             FLabel pickLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPickTimerPrompt")).build();
             FLabel graceLbl1 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine1")).build();
             FLabel graceLbl2 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine2")).build();
 
-            // A set's pick rule can depend on pod size, so both the marker and the selection follow it.
-            Runnable refreshPicks = () -> {
-                DraftOptions.DoublePick defaultPicks = NetworkEvent.defaultPicksFor(
-                        podDraft, podSizes.get(podCombo.getSelectedIndex()));
-                picksCombo.removeAllItems();
-                for (DraftOptions.DoublePick rule : pickRules) {
-                    picksCombo.addItem(NetworkEvent.markSetDefault(
-                            NetworkEvent.picksLabel(rule), rule == defaultPicks));
-                }
-                picksCombo.setSelectedIndex(pickRules.indexOf(defaultPicks));
-            };
-            refreshPicks.run();
-            podCombo.addActionListener(e -> refreshPicks.run());
+            DraftPicksSelector picks = new DraftPicksSelector(podDraft, podSizes.get(podCombo.getSelectedIndex()));
+            podCombo.addActionListener(e -> picks.refresh(podSizes.get(podCombo.getSelectedIndex())));
 
             JPanel panel = new JPanel(new MigLayout("insets 4, gap 2 4, wrap 1"));
             panel.setOpaque(false);
@@ -390,9 +369,7 @@ public class CLobby implements IDraftEventHandler {
                 panel.add(new FLabel.Builder().fontSize(11)
                         .text(localizer.getMessage("lblNetworkPodSizeFloor", floor)).build());
             }
-            panel.add(picksLbl, "gaptop 10");
-            panel.add(picksCombo, "w 200!");
-            panel.add(picksHelp);
+            picks.addTo(panel);
             panel.add(pickLbl, "gaptop 10");
             panel.add(pickField, "w 80!");
             panel.add(graceLbl1, "gaptop 10");
@@ -401,7 +378,7 @@ public class CLobby implements IDraftEventHandler {
 
             int result = FOptionPane.showOptionDialog(
                     null,
-                    localizer.getMessage("lblNetworkDraftSettingsTitle"),
+                    localizer.getMessage("lblDraftSettingsTitle"),
                     null,
                     panel,
                     Arrays.asList(
@@ -410,7 +387,7 @@ public class CLobby implements IDraftEventHandler {
             if (result != 0) return;
 
             podDraft.setPodSize(podSizes.get(podCombo.getSelectedIndex()));
-            podDraft.setDoublePick(pickRules.get(picksCombo.getSelectedIndex()));
+            podDraft.setDoublePick(picks.getSelected());
             try {
                 int parsed = Integer.parseInt(pickField.getText().trim());
                 if (parsed >= 0) timerSeconds = parsed;

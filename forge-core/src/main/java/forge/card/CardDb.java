@@ -834,31 +834,59 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
+    // A Black Border preference is a hard requirement: a translated white-bordered print must not
+    // beat a black-bordered one. The preferred language only decides among equally acceptable borders.
     private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
-        return cards.stream()
-                .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
-                // A Black Border preference is a hard requirement: a translated white-bordered print must not
-                // beat a black-bordered one. The preferred language only decides among equally acceptable borders.
-                .min(Comparator.comparing((PaperCard pc) -> isBorderMismatch(pc) ? 1 : 0)
-                        .thenComparing((PaperCard pc) -> isPreferredLanguagePrint(pc) ? 0 : 1)
-                        .thenComparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
-                        .thenComparing((PaperCard pc) -> isTraditionalFramePrint(pc) ? 0 : 1)
-                        .thenComparing(PaperCard::getCollectorNumber))
-                .orElseGet(() -> cards.iterator().next());
+        PaperCard best = null;
+        CardEdition bestEdition = null;
+        int bestBorder = 0;
+        int bestLanguage = 0;
+        int bestFrame = -1;
+        for (PaperCard pc : cards) {
+            if (pc.getRarity().equals(CardRarity.Special))
+                continue;
+            CardEdition edition = editions.get(pc.getEdition());
+            int border = isBorderMismatch(edition) ? 1 : 0;
+            int language = isPreferredLanguagePrint(pc, edition) ? 0 : 1;
+            int frame = -1;
+            if (best != null) {
+                // A full tie keeps the earlier print
+                int c = Integer.compare(bestBorder, border);
+                if (c == 0)
+                    c = Integer.compare(bestLanguage, language);
+                if (c == 0)
+                    c = defaultCardArtPreference.compare(bestEdition, edition);
+                if (c == 0) {
+                    // The frame check is costly, so it only runs when the editions tie
+                    if (bestFrame < 0)
+                        bestFrame = isTraditionalFramePrint(best) ? 0 : 1;
+                    frame = isTraditionalFramePrint(pc) ? 0 : 1;
+                    c = Integer.compare(bestFrame, frame);
+                }
+                if (c == 0)
+                    c = best.getCollectorNumber().compareTo(pc.getCollectorNumber());
+                if (c <= 0)
+                    continue;
+            }
+            best = pc;
+            bestEdition = edition;
+            bestBorder = border;
+            bestLanguage = language;
+            bestFrame = frame;
+        }
+        return best != null ? best : cards.iterator().next();
     }
 
-    private boolean isBorderMismatch(PaperCard pc) {
+    private boolean isBorderMismatch(CardEdition edition) {
         if (defaultCardArtPreference == null || !defaultCardArtPreference.blackBorderOnly)
             return false;
-        CardEdition edition = editions.get(pc.getEdition());
         return edition != null && edition.getBorderColor() != CardEdition.BorderColor.BLACK;
     }
 
-    private boolean isPreferredLanguagePrint(PaperCard pc) {
+    private boolean isPreferredLanguagePrint(PaperCard pc, CardEdition edition) {
         if (preferredLanguageAvailability == null) {
             return false;
         }
-        CardEdition edition = editions.get(pc.getEdition());
         if (edition == null) {
             return false;
         }
@@ -896,6 +924,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void setPreferredLanguageAvailability(BiPredicate<String, String> availability) {
+        if (availability == this.preferredLanguageAvailability) {
+            return;
+        }
         this.preferredLanguageAvailability = availability;
         if (initialized) {
             reIndex();

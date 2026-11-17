@@ -37,7 +37,7 @@ import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gui.GuiBase;
 import forge.gui.download.CdnUuidCache;
-import forge.gamemodes.limited.GauntletMini;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.ThemedChaosDraft;
 import forge.gamemodes.planarconquest.ConquestController;
 import forge.gamemodes.planarconquest.ConquestPlane;
@@ -126,7 +126,7 @@ public final class FModel {
     // Someone should take care of 2 gauntlets here
     private static TournamentData tournamentData;
     private static GauntletData gauntletData;
-    private static final Supplier<GauntletMini> gauntletMini = Suppliers.memoize(GauntletMini::new);
+    private static final Supplier<LimitedMatch> limitedMatch = Suppliers.memoize(LimitedMatch::new);
 
     private static final Supplier<QuestController> quest = Suppliers.memoize(QuestController::new);
     private static final Supplier<ConquestController> conquest = Suppliers.memoize(ConquestController::new);
@@ -299,6 +299,11 @@ public final class FModel {
                 () -> forge.util.FileUtil.readFile(ForgeConstants.AI_CARD_ROLES_FILE),
                 () -> forge.util.FileUtil.readFile(ForgeConstants.COMMANDER_BRACKET_COMBOS_FILE),
                 () -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMMANDER_COMBOS_FILE));
+        // the combos of the Vintage, Legacy and Modern metagame, as data (ai-combos.txt)
+        forge.ai.simulation.ComboCatalog.configure(() -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMBOS_FILE));
+        // decks built for the AI keep the AI:RemoveDeck:All cards that Flat MC plays, while it is on
+        forge.card.CardAiHints.setKeptForFlatMc(name -> getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO)
+                && AiCardLists.isFlatMcPlayable(name));
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
@@ -457,8 +462,8 @@ public final class FModel {
         gauntletData = data0;
     }
 
-    public static GauntletMini getGauntletMini() {
-        return gauntletMini.get();
+    public static LimitedMatch getLimitedMatch() {
+        return limitedMatch.get();
     }
 
     public static CardCollections getDecks() {

@@ -4,7 +4,47 @@ Date=2025-04-29
 Name=Alchemy: Tarkir
 Type=Online
 ScryfallCode=YTDM
-Booster=1 UncommonRareMythic:fromsheet("YTDM cards"), 8 Common:fromsheet("TDM cards"), 3 Uncommon:fromSheet("TDM cards"), 1 UncommonRareMythic:fromSheet("TDM cards"), 1 RareMythic:fromSheet("TDM cards"), 1 BasicLand:fromSheet("TDM cards")
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard
+
+[Common]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+Replace=.015625F fromSheet("TDM special guests")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YTDM cards")
+Replace=0.385714F Rare:fromSheet("YTDM cards")
+Replace=0.064286F Mythic:fromSheet("YTDM cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TDM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("TDM cards")
+Replace=.077F Rare:fromSheet("TDM borderless")
+Replace=.015F Mythic:fromSheet("TDM borderless")
+
+[AnyLand]
+Base=fromSheet("TDM gain lands")
+Replace=.174F fromSheet("TDM gain lands")+
+Replace=.105F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")
+Replace=.026F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")+
+
+[Wildcard]
+Base=Uncommon:fromSheet("TDM cards")
+Replace=.171F Common:fromSheet("TDM cards")
+Replace=.179F Rare:fromSheet("TDM cards")
+Replace=.028F Mythic:fromSheet("TDM cards")
+
+[FoilWildcard]
+Base=Common:fromSheet("TDM cards")+
+Replace=.334F Uncommon:fromSheet("TDM cards")
+Replace=.072F Rare:fromSheet("TDM cards")
+Replace=.012F Mythic:fromSheet("TDM cards")
 
 [cards]
 1 M Lam, Storm Crane Elder @Irina Nordsol

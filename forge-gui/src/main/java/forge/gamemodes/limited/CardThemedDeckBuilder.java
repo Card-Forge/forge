@@ -588,8 +588,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 return format.isLegalCard(card)
                         && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                         && !deckListNames.contains(card.getName())
-                        && !card.getRules().getAiHints().getRemAIDecks()
-                        && !card.getRules().getAiHints().getRemRandomDecks()
+                        && !forge.card.CardAiHints.isRemovedFromAiDecks(card.getRules())
+                        && !forge.card.CardAiHints.isRemovedFromRandomDecks(card.getRules())
                         && !card.getRules().getMainPart().getType().isLand();
             }
         };
@@ -802,8 +802,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         Predicate<PaperCard> possibleFromFullPool = card -> format.isLegalCard(card)
                 && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                 && !deckListNames.contains(card.getName())
-                && !card.getRules().getAiHints().getRemAIDecks()
-                && !card.getRules().getAiHints().getRemRandomDecks()
+                && !forge.card.CardAiHints.isRemovedFromAiDecks(card.getRules())
+                && !forge.card.CardAiHints.isRemovedFromRandomDecks(card.getRules())
                 && !card.getRules().getMainPart().getType().isLand();
 
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));

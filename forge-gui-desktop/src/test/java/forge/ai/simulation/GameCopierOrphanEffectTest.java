@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -14,9 +15,19 @@ import forge.game.zone.ZoneType;
  */
 public class GameCopierOrphanEffectTest extends SimulationTest {
 
+    /**
+     * A game whose first turn has not started has no turn player, and the copy would fire a turn-phase event with a
+     * null player (the game log then throws on it). A live game always has one, so the tests give theirs a phase.
+     */
+    private Game newGameInMain1() {
+        final Game game = initAndCreateGame();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, game.getPlayers().get(1));
+        return game;
+    }
+
     @Test
     public void aStaticEffectWhoseSourceIsNoLongerInAZoneDoesNotBreakTheCopy() {
-        final Game game = initAndCreateGame();
+        final Game game = newGameInMain1();
         final Player p = game.getPlayers().get(1);
         addCard("Grizzly Bears", p);
         addCardToZone("Grizzly Bears", p, ZoneType.Graveyard);
@@ -37,7 +48,7 @@ public class GameCopierOrphanEffectTest extends SimulationTest {
     /** The usual cause: the effect holds a last-known-information copy of the card (same id, another object). */
     @Test
     public void anEffectOfAnOldCopyOfACardIsUndoneOnTheCardInTheCopy() {
-        final Game game = initAndCreateGame();
+        final Game game = newGameInMain1();
         final Player p = game.getPlayers().get(1);
         addCardToZone("Grizzly Bears", p, ZoneType.Graveyard);
         final Card barrowgoyf = addCard("Barrowgoyf", p);
@@ -54,7 +65,7 @@ public class GameCopierOrphanEffectTest extends SimulationTest {
 
     @Test
     public void aBarrowgoyfThatIsStillInPlayIsCopiedWithItsPower() {
-        final Game game = initAndCreateGame();
+        final Game game = newGameInMain1();
         final Player p = game.getPlayers().get(1);
         addCardToZone("Grizzly Bears", p, ZoneType.Graveyard); // one card type in the graveyards: power 1, toughness 2
         final Card barrowgoyf = addCard("Barrowgoyf", p);
@@ -73,7 +84,7 @@ public class GameCopierOrphanEffectTest extends SimulationTest {
 
     @Test
     public void aSourceThatIsStillInPlayHasItsEffectAppliedOnceInTheCopy() {
-        final Game game = initAndCreateGame();
+        final Game game = newGameInMain1();
         final Player p = game.getPlayers().get(1);
         final Card bears = addCard("Grizzly Bears", p);
         addCard("Glorious Anthem", p);

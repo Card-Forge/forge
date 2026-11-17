@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Server-side proxy for one remote client's GUI. One instance per connected remote player,
  * constructed at lobby time and reused across the match (and across reconnects, via
- * {@link #resetForReconnect}).
+ * {@link #resetSync}).
  *
  * <p>Adds the network transport to {@link ProtocolGuiGame}: events are wrapped for Java
  * serialization, the channel codec follows the current game's tracker, and bandwidth can

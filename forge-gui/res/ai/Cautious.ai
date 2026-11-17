@@ -324,3 +324,32 @@ SIDEBOARDING_CHANCE_ON_WIN=0
 SIDEBOARDING_SHARED_TYPE_ONLY=true
 # Allow replacing a creature with a planeswalker and vice versa when sideboarding
 SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false
+
+# Flat Monte Carlo, cautious: more samples, a heavy weight on risk and on keeping mana open, a bigger bonus for the
+# heuristic play (rollouts must clearly beat it), and a look at the opponent's reply. It holds back more, answers
+# spells on the stack, and values card advantage over tempo.
+FLAT_MC_ENABLED=true
+FLAT_MC_MAX_CANDIDATES=5
+FLAT_MC_ROLLOUTS_PER_CANDIDATE=5
+FLAT_MC_MAX_PLAYOUT_PLAYS=6
+FLAT_MC_COMBO_PLAYOUT_PLAYS=14
+FLAT_MC_DECISION_BUDGET_MS=600
+FLAT_MC_TURN_BUDGET_MS=2500
+FLAT_MC_HEURISTIC_BONUS=110
+FLAT_MC_CONSIDER_HOLDING=true
+FLAT_MC_HOLD_MANA_WEIGHT=150
+FLAT_MC_RISK_WEIGHT=160
+FLAT_MC_OVERRIDE_MAJORITY=65
+FLAT_MC_EXTRA_ROUNDS=3
+FLAT_MC_PRUNING=true
+FLAT_MC_CATEGORY_HOLD=true
+FLAT_MC_ADAPTIVE_PLAYOUT=true
+FLAT_MC_TARGET_VARIANTS=2
+FLAT_MC_STRATEGIC_WEIGHT=120
+FLAT_MC_DISCOVERY=true
+FLAT_MC_EXTRA_CANDIDATES=3
+FLAT_MC_BROAD_DISCOVERY=false
+FLAT_MC_ATTACK=false
+FLAT_MC_OPPONENT_LOOKAHEAD=40
+FLAT_MC_LAND_CHOICE=true
+FLAT_MC_REACTIVE=true

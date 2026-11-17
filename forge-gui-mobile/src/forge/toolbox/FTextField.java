@@ -75,11 +75,11 @@ public class FTextField extends FDisplayObject implements ITextField {
                 addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCopy"), e -> Forge.getClipboard().setContents(getSelectedText())));
             }
             if (!readOnly) {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), e -> {
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), e -> Forge.readClipboard(contents -> {
                     textBeforeKeyInput = text;
-                    insertText(Forge.getClipboard().getContents());
+                    insertText(contents);
                     endEdit();
-                }));
+                })));
             }
         }
     };
@@ -367,7 +367,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                     break;
                 case Keys.V: //paste on Ctrl+V
                     if (KeyInputAdapter.isCtrlKeyDown()) {
-                        insertText(Forge.getClipboard().getContents());
+                        Forge.readClipboard(FTextField.this::insertText);
                         return true;
                     }
                     break;

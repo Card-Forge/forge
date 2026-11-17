@@ -422,6 +422,11 @@ Replace=.0167F fromSheet("TRK away team basic")+
 326 L Forest @Leon Tukker
 
 [borderless]
+327 R Nyota Uhura, Communications @Darius Zablockis
+328 M Scotty, Miracle Worker @Darius Zablockis
+329 R Dr. Leonard "Bones" McCoy @Michael MacRae
+330 U Kirk, Commanding Officer @Vlad Petruchik
+331 U Spock, Always Your Friend @Rytis Sabaliauskas
 332 R Federation Outpost @Paulius Daščioras
 333 R Ni'Var Science Academy @Rimas Valeikis
 334 R Q Continuum @Vlad Petruchik

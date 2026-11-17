@@ -1,0 +1,9 @@
+Name:Armus, Skin of Evil
+ManaCost:5 B B
+Types:Legendary Creature Ooze Horror
+PT:6/6
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, target opponent discards two cards.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose
+A:AB$ Pump | Cost$ 2 B Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
+Oracle:Menace\nAt the beginning of your end step, target opponent discards two cards.\n{2}{B}, Discard this card: Target creature gets -4/-4 until end of turn.
