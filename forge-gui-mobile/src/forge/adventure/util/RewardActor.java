@@ -41,6 +41,7 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
 import forge.adventure.scene.ViewRewardsScene;
+import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
@@ -48,6 +49,8 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardSplitType;
 import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -134,6 +137,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     // Path of a booster image that was queued on the asset manager and is not decoded yet, see act().
     private String pendingPackImagePath;
+    private PaperCard deckCover;
+    private boolean deckCoverPending;
+    private float deckCoverRetry;
 
     @Override
     public void dispose() {
@@ -460,6 +466,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     processSprite(backSprite, null, null, 0, 0, false);
                     break;
                 }
+                if (isDeckReward()) {
+                    List<PaperCard> commanders = reward.getDeck().getCommanders();
+                    deckCover = commanders.isEmpty()
+                            ? new DeckProxy(reward.getDeck(), "Constructed", GameType.Constructed, null).getHighestCMCCard()
+                            : commanders.get(0);
+                    renderDeckReward();
+                    needsToBeDisposed = true;
+                    break;
+                }
                 boolean isBooster = false;
                 imageKey = "";
                 String editionCode = "";
@@ -529,8 +544,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 processSprite(backSprite, item, isBooster
                     ? Controls.newTextraLabel("[%200]" + editionCode + " Booster")
-                    : Controls.newTextraLabel("[%200]" + (reward.getDeck().getTags().contains(Reward.DECK_TAG)
-                        ? reward.getDeck().getName().replace("[", "[[") : "Event Reward Pack")), 0, -10, isBooster);
+                    : Controls.newTextraLabel("[%200]Event Reward Pack"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -912,6 +926,84 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         image.bind();
     }
 
+    private boolean isDeckReward() {
+        return reward.getDeck() != null && reward.getDeck().getTags().contains(Reward.DECK_TAG);
+    }
+
+    /** Draws a deck reward's tile and hover preview, again once its cover art has loaded. */
+    private void renderDeckReward() {
+        Sprite back = Config.instance().getItemSprite("CardBack");
+        processDeckBox(back);
+        if (generatedTooltip != null) {
+            generatedTooltip.dispose();
+            generatedTooltip = null;
+        }
+        setItemTooltips(null, back, false);
+    }
+
+    /** Draws a deck reward's tile: the deck box on a card back. */
+    private void processDeckBox(Sprite back) {
+        if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
+            return;
+        }
+        FImageComplex art = CardRenderer.getCardArt(deckCover);
+        // The art may still be downloading, so act() redraws the tile once it arrives
+        deckCoverPending = deckCover != null && art == CardImageRenderer.forgeArt;
+
+        int pw = 192;
+        int ph = 256;
+        FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(pw, ph, false);
+        if (frameBuffer == null) {
+            return;
+        }
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, ph, pw, -ph);
+        frameBuffer.begin();
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Forge.getGraphics().begin(pw, ph);
+        Forge.getGraphics().setProjectionMatrix(matrix);
+        Forge.getGraphics().startClip();
+        Batch batch = Forge.getGraphics().getBatch();
+        batch.setColor(Color.WHITE);
+        batch.draw(back, 0, 0, pw, ph);
+        drawDeckBox(batch, art, pw, ph);
+        Forge.getGraphics().endClip();
+        Forge.getGraphics().end();
+        frameBuffer.end();
+        image = frameBuffer.getColorBufferTexture();
+        image.bind();
+    }
+
+    /** Draws the deck box with its cover art, colour symbols and name centred on a card back of the given size, laid out for a 192-wide tile. */
+    private void drawDeckBox(Batch batch, FImageComplex art, float pw, float ph) {
+        float scale = pw / 192;
+        // y runs upward here. Box and window proportions match the deck award dialog: a 60x80 box with a 58x46 window 1 below its top
+        float boxW = 120 * scale, boxH = boxW * 80 / 60, boxX = (pw - boxW) / 2, boxY = (ph - boxH) / 2;
+        if (!deckCoverPending && art.getTextureRegion() != null)
+            batch.draw(art.getTextureRegion(), boxX + boxW / 60, boxY + boxH * 33 / 80, boxW * 58 / 60, boxH * 46 / 80);
+        batch.draw(FSkinImage.ADV_DECKBOX.getTextureRegion(), boxX, boxY, boxW, boxH);
+        // Colour symbols run down the left edge of the window, as in the deck award dialog
+        // Textra caps inline sizes well below what the preview needs, so the symbols are scaled with the batch instead
+        TextraLabel colors = Controls.newTextraLabel("[%200]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(reward.getDeck()), true));
+        colors.setAlignment(Align.top);
+        colors.setBounds(0, 0, 28, boxH * 46 / 80 / scale);
+        Matrix4 transform = batch.getTransformMatrix().cpy();
+        batch.setTransformMatrix(transform.cpy().translate(boxX - 12 * scale, boxY + boxH * 33 / 80, 0).scale(scale, scale, 1));
+        colors.draw(batch, 1);
+        batch.setTransformMatrix(transform);
+        // The name fills the box's front panel, the part below the window
+        TextraLabel name = Controls.newTextraLabel("[%" + Math.round(160 * scale) + "]" + reward.getDeck().getName().replace("[", "[["));
+        float panelInset = boxW / 20;
+        name.setWrap(true);
+        name.setAlignment(1);
+        name.setWidth(boxW - panelInset * 2);
+        name.setHeight(ph);
+        name.setX(boxX + panelInset);
+        name.setY(boxY + boxH * 33 / 160 - ph / 2f);
+        name.draw(batch, 1);
+    }
+
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
         int align = Align.left;
 
@@ -961,7 +1053,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Forge.getGraphics().setProjectionMatrix(m);
                 Forge.getGraphics().startClip();
                 Forge.getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
-                if (!isBooster)
+                if (isDeckReward())
+                    drawDeckBox(Forge.getGraphics().getBatch(), CardRenderer.getCardArt(deckCover), preview_w, preview_h);
+                else if (!isBooster)
                     Forge.getGraphics().drawImage(icon, preview_w / 2f - 75, 160, 160, 160);
                 else
                     Forge.getGraphics().drawImage(icon, 74, 100, 345, 480);
@@ -981,6 +1075,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (itemExists) {
                     description = item.getDescription();
                     layout.reset();
+                } else if (isDeckReward()) {
+                    description = "";
                 } else if (getReward().getDeck() != null) {
                     description = getReward().getDeck().getName().replace("[", "[[");
                 } else {
@@ -1106,6 +1202,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             hideTooltip(tooltip);
         if (Forge.getAssets() != null && Forge.getAssets().manager() != null) {
             Forge.getAssets().manager().update(16);
+            if (deckCoverPending && (deckCoverRetry -= delta) <= 0) {
+                deckCoverRetry = 0.5f;
+                if (CardRenderer.getCardArt(deckCover) != CardImageRenderer.forgeArt)
+                    renderDeckReward();
+            }
             if (pendingPackImagePath != null) {
                 Texture packTexture = Forge.getAssets().manager().get(pendingPackImagePath, Texture.class, false);
                 if (packTexture != null) {
@@ -1468,8 +1569,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 cBackDrop = new Image(Forge.getAssets().getGrayTexture());
                 cBackDrop.setBounds(cImage.getX(), 0, getWidth(), getHeight() / 3.5f);
                 addActorAt(0, cImage);
-                addActorAt(1, cBackDrop);
-                addActorAt(2, cLabel);
+                // A deck box already shows its name, so it has no name band
+                if (!description.isEmpty()) {
+                    addActorAt(1, cBackDrop);
+                    addActorAt(2, cLabel);
+                }
             } else {
                 // the description fills the space between the icon and the corner ornaments of the 48x64 card back
                 float top = cImage.getPrefHeight() / 2f;
