@@ -253,7 +253,7 @@ public class DrawAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
-        if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
+        if (targetAI(ai, sa, sa.isTrigger() && !sa.isOptionalTrigger())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
