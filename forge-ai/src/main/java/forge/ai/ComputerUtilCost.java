@@ -365,6 +365,9 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
                 if (sac.payCostFromSource()) {
+                    if (ComputerUtil.sacrificePunished(ai, source)) {
+                        return false; // the sacrifice is punished (Bloodroot Apothecary's poison)
+                    }
                     if (!important) {
                         return false;
                     }

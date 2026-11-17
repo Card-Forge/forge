@@ -955,6 +955,11 @@ public final class FlatMonteCarloPicker {
                 if (!aimAtOpponent(player, targeting)) {
                     continue;
                 }
+            } else if (targeting != null && (targeting.getApi() == ApiType.Reveal || targeting.getApi() == ApiType.RevealHand)
+                    && targeting.getTargetRestrictions() != null && targeting.getTargetRestrictions().canTgtPlayer()) {
+                if (!aimAtOpponent(player, targeting)) {
+                    continue; // Urza's Bauble looks at the opponent's hand: looking at one's own tells nothing
+                }
             } else if (targeting != null && targeting.getApi() == ApiType.Counter) {
                 // aimed at the spell on the stack by the caller, which no GameEntity target can express
                 if (targeting.getTargets().isEmpty()) {
@@ -2247,6 +2252,35 @@ public final class FlatMonteCarloPicker {
     public static SpellAbility sureEvasion(final Player player, final List<SpellAbility> candidates) {
         for (final SpellAbility sa : candidates) {
             final Card subject = evasionSubject(player, sa, true);
+            if (subject == null) {
+                continue;
+            }
+            try {
+                sa.setActivatingPlayer(player);
+                if (sa.usesTargeting() && !applyTarget(sa, subject)) {
+                    continue;
+                }
+                if (sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)) {
+                    return sa;
+                }
+                if (sa.usesTargeting()) {
+                    sa.resetTargets();
+                }
+            } catch (final RuntimeException e) {
+                // not payable after all
+            }
+        }
+        return null;
+    }
+
+    /**
+     * The keyword ability that lets a creature block an attacker it could not (flying for Grizzly Bears against a Wind
+     * Drake) when the block kills the attacker or stops it unharmed: the declare attackers step is the last moment, and
+     * the mana is spared, so it is not a gamble for the rollouts (whose noise left the block undone now and then).
+     */
+    public static SpellAbility sureBlock(final Player player, final List<SpellAbility> candidates) {
+        for (final SpellAbility sa : candidates) {
+            final Card subject = blockerSubject(player, sa);
             if (subject == null) {
                 continue;
             }

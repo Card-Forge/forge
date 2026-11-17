@@ -37,6 +37,7 @@ public final class ComboAssembly {
             "Dark Depths",
             // High Tide with an untapper and a finisher (Stroke of Genius, Blue Sun's Zenith, Brain Freeze): LoopRunner
             "High Tide + Stroke of Genius + Turnabout", "High Tide + Blue Sun's Zenith", "High Tide + Brain Freeze",
+            "Glimpse of Nature + Craterhoof Behemoth",
             // an instant is the other half: Faith's Reward only brings back what died this turn, Early Harvest only
             // untaps lands Heartbeat of Spring doubles; cast from the hand in the main phase either is a wasted card,
             // so the rollouts (which see the turn through) are left to time them

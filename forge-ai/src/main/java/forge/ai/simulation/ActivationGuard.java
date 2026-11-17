@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ability.AnimateAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -78,6 +79,9 @@ public final class ActivationGuard {
     private static String problemImpl(final Player ai, final SpellAbility sa) {
         if (costUnpayable(ai, sa)) {
             return "cost-unpayable";
+        }
+        if (AnimateAi.needsItsOwnMana(ai, sa)) {
+            return "cost-unpayable"; // the land would tap itself to animate itself: a tapped creature
         }
         if (onlyValuableSacrifice(ai, sa)) {
             return "valuable-sacrifice";

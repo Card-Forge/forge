@@ -36,6 +36,11 @@ public class TapAi extends TapAiBase {
 
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
 
+        final AiAbilityDecision cantrip = cantripAtTheirEnd(ai, sa, phase);
+        if (cantrip != null) {
+            return cantrip;
+        }
+
         if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
         } else if (phase.isPlayerTurn(ai)) {
@@ -95,6 +100,32 @@ public class TapAi extends TapAiBase {
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+    }
+
+    /**
+     * A tap with a card drawn (Ice of Fire // Ice) is a cantrip that costs two mana: at the end of the opponent's turn,
+     * with the mana otherwise unused, it is cast on their best untapped land (or other permanent): they untap it at once,
+     * but the card is drawn, which is the point. Not at sorcery speed; the rest of this class judges the other times.
+     */
+    private static AiAbilityDecision cantripAtTheirEnd(final Player ai, final SpellAbility sa, final PhaseHandler phase) {
+        if (!sa.isSpell() || sa.getSubAbility() == null || sa.getSubAbility().getApi() != forge.game.ability.ApiType.Draw
+                || !sa.usesTargeting() || isSorcerySpeed(sa, ai)
+                || !phase.is(PhaseType.END_OF_TURN) || !phase.getPlayerTurn().isOpponentOf(ai) || !ai.canDraw()) {
+            return null;
+        }
+        Card best = null;
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            if (c.isUntapped() && sa.canTarget(c) && (best == null || c.isLand() && !best.isLand()
+                    || c.isLand() == best.isLand() && ComputerUtilCard.evaluatePermanentList(new CardCollection(c)) > ComputerUtilCard.evaluatePermanentList(new CardCollection(best)))) {
+                best = c;
+            }
+        }
+        if (best == null) {
+            return null;
+        }
+        sa.resetTargets();
+        sa.getTargets().add(best);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

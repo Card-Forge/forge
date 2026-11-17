@@ -126,6 +126,9 @@ public final class OpeningHand {
         if (plan != null && plan.combos.has(ComboPlan.Kind.TUTOR_STORM)) {
             return plan.combos.keepsTutorStormHand(kept, finalSize); // judged as the combo player would, not by the generic score
         }
+        if (TidePlan.isTideDeck(ai)) {
+            return TidePlan.keepsHand(kept, finalSize); // High Tide: lands and the pieces of the loop, not the generic score
+        }
         final double score = score(kept, lib, onPlay, plan);
         return score >= keepBar(finalSize);
     }
