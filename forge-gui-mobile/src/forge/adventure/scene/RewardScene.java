@@ -3,11 +3,15 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
@@ -79,6 +83,13 @@ public class RewardScene extends UIScene {
     public Image marketBackgroundImg = null;
     private Actor cachedCardsContainerActor = null;
     private Drawable origDrawable = null;
+    // Below this card height the grid stops shrinking and scrolls instead, so screens of up to about 24 cards keep their layout.
+    private static final float MIN_CARD_HEIGHT = 60f;
+    // Room under a scrolling grid for the more-cards arrow, which is 6 units tall at the top of its bob, with 10 clear above and 6 below.
+    private static final float CHEVRON_SPACE = 22f;
+    private final Group cardGroup = new Group();
+    private final ScrollPane cardScroller = new ScrollPane(cardGroup);
+    private final MoreArrow cardArrow = new MoreArrow(cardScroller);
     private final TypingLabel deckSlotLabel;
     private final Array<Deck> pendingDecks = new Array<>();
     private ShopActor deckShop;
@@ -102,6 +113,11 @@ public class RewardScene extends UIScene {
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
         origDrawable = getBGDrawable();
+        cardGroup.setTouchable(Touchable.childrenOnly);
+        cardScroller.setScrollingDisabled(true, false);
+        cardScroller.setOverscroll(false, false);
+        stage.addActor(cardScroller);
+        stage.addActor(cardArrow);
         deckSlotLabel = Controls.newTypingLabel("");
         deckSlotLabel.setX(cachedCardsContainerActor.getX());
         deckSlotLabel.setWidth(cachedCardsContainerActor.getWidth());
@@ -207,10 +223,29 @@ public class RewardScene extends UIScene {
             if (type == Type.QuestReward)
                 claimReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
             rewardActor.clearLabel();
-            try {
-                stage.getActors().removeValue(rewardActor, true);
-            } catch (Exception e) {
-            }
+            rewardActor.remove();
+        }
+    }
+
+    /** The bobbing down-arrow from the item preview, shown while its pane has more below. */
+    private static class MoreArrow extends Actor {
+        private final ScrollPane pane;
+        private float elapsed;
+
+        MoreArrow(ScrollPane pane) {
+            this.pane = pane;
+            setSize(7, 6);
+        }
+
+        @Override
+        public void act(float delta) {
+            elapsed += delta;
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            if (pane.getScrollY() < pane.getMaxY() - 1)
+                RewardActor.drawMoreArrow(batch, getX() + getWidth() / 2, getY(), 1, elapsed, parentAlpha);
         }
     }
 
@@ -434,6 +469,7 @@ public class RewardScene extends UIScene {
         }));
         clearSelectable();
         this.type = type;
+        autoSell = false;
         doneClicked = false;
         playerGold.setVisible(type != Type.Lost);
         playerShards.setVisible(type != Type.Lost);
@@ -505,8 +541,8 @@ public class RewardScene extends UIScene {
             targetHeight = Math.min(targetHeight, deckSlotLabel.getY() - card.getY());
             deckSlotMessage = null;
         }
-        float xOff = card.getX();
-        float yOff = card.getY();
+        float xOff;
+        float yOff;
 
         int numberOfRows = 0;
         float cardWidth = 0;
@@ -559,11 +595,9 @@ public class RewardScene extends UIScene {
         // Needed before the grid search so rows and columns are counted with the final card width.
         float correction = ScreenAspectCorrection.widthCorrection(Scene.getIntendedWidth(), Scene.getIntendedHeight(),
                 Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        float buttonHeight = type == Type.Shop || type == Type.RewardChoice ? doneButton.getHeight() : 0;
         for (int h = 1; h < targetHeight; h++) {
-            cardHeight = h;
-            if (type == Type.Shop || type == Type.RewardChoice) {
-                cardHeight += doneButton.getHeight();
-            }
+            cardHeight = h + buttonHeight;
             //cardHeight=targetHeight/i;
             cardWidth = h / CARD_WIDTH_TO_HEIGHT * correction;
             newArea = newRewards.size * cardWidth * cardHeight;
@@ -577,11 +611,32 @@ public class RewardScene extends UIScene {
                 bestCardHeight = h;
             }
         }
+        boolean scrolls = bestCardHeight < MIN_CARD_HEIGHT;
+        if (scrolls)
+            bestCardHeight = MIN_CARD_HEIGHT;
         cardHeight = bestCardHeight * 0.90f;
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * correction;
-
-        yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
-        xOff += (targetWidth - (cardWidth * numberOfColumns)) / 2f;
+        if (scrolls) {
+            numberOfColumns = Math.max(1, (int) (targetWidth / cardWidth));
+            numberOfRows = (int) Math.ceil(newRewards.size / (double) numberOfColumns);
+            yOff = buttonHeight;
+        } else {
+            yOff = (targetHeight - (cardHeight * numberOfRows)) / 2f;
+        }
+        xOff = (targetWidth - (cardWidth * numberOfColumns)) / 2f;
+        float viewBottom = card.getY();
+        if (scrolls) {
+            Actor gold = ui.findActor("playerGold");
+            // The portrait layout puts the gold counter inside the card area, which a full scrolling grid would cover
+            if (gold.getX() < card.getX() + targetWidth)
+                viewBottom = Math.max(viewBottom, gold.getY() + gold.getHeight());
+            viewBottom += CHEVRON_SPACE;
+        }
+        // The card area overlaps buttons in portrait, so only the cards themselves take touches unless the grid scrolls
+        cardScroller.setTouchable(scrolls ? Touchable.enabled : Touchable.childrenOnly);
+        cardScroller.setBounds(card.getX(), viewBottom, targetWidth, card.getY() + targetHeight - viewBottom);
+        cardArrow.setPosition(card.getX() + (targetWidth - cardArrow.getWidth()) / 2, viewBottom - CHEVRON_SPACE + 6);
+        cardGroup.setSize(targetWidth, scrolls ? numberOfRows * (cardHeight + buttonHeight) : targetHeight);
 
         float spacing = 2;
         int i = 0;
@@ -607,12 +662,12 @@ public class RewardScene extends UIScene {
 
             if (type == Type.Shop) {
                 if (currentRow != ((i + 1) / numberOfColumns))
-                    yOff += doneButton.getHeight();
+                    yOff += buttonHeight;
 
                 BuyButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, actor, reward, doneButton, shopActor.getPriceModifier());
                 generated.add(buyCardButton);
                 if (!skipCard) {
-                    stage.addActor(buyCardButton);
+                    cardGroup.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
                 }
             } else if (type == Type.RewardChoice) {
@@ -620,7 +675,7 @@ public class RewardScene extends UIScene {
                     yOff += doneButton.getHeight();
                 ChooseRewardButton chooseRewardButton = new ChooseRewardButton(i, actor, reward, doneButton);
                 generated.add(chooseRewardButton);
-                stage.addActor(chooseRewardButton);
+                cardGroup.addActor(chooseRewardButton);
                 addToSelectable(chooseRewardButton);
             } else {
                 if (type == Type.Lost)
@@ -629,10 +684,14 @@ public class RewardScene extends UIScene {
             }
             generated.add(actor);
             if (!skipCard) {
-                stage.addActor(actor);
+                cardGroup.addActor(actor);
             }
             i++;
         }
+        cardScroller.layout();
+        cardScroller.setScrollY(0);
+        cardScroller.updateVisualScroll();
+        stage.setScrollFocus(cardScroller);
         if (type == Type.Shop) {
             updateBuyButtons();
             updateRestockButton();

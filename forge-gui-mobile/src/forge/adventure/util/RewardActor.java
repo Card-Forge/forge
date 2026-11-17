@@ -1049,14 +1049,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     public void flip() {
-        if (clicked)
+        // A scheduled flip can arrive after the reward screen has closed and removed this card
+        if (clicked || getParent() == null)
             return;
         clicked = true;
         flipProcess = 0;
         SoundSystem.instance.play(SoundEffectType.FlipCard, false);
         if (canAutoSell && autoSell != null) {
             autoSell.setPosition(this.getX(), this.getY());
-            getStage().addActor(autoSell);
+            getParent().addActor(autoSell);
             autoSell.setVisible(false);
         }
 
@@ -1074,7 +1075,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
             
             ownedLabel.setVisible(false);
-            getStage().addActor(ownedLabel);
+            getParent().addActor(ownedLabel);
         }
     }
 
