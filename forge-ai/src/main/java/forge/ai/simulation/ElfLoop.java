@@ -201,6 +201,7 @@ public final class ElfLoop {
         synchronized (KNOWN) {
             KNOWN.put(key, won);
         }
+        VetoLog.note(ai, "elf-solver " + (won ? "win" : "no win") + " (" + lastNote + ")");
         return won;
     }
 

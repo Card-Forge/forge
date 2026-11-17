@@ -2221,6 +2221,7 @@ public class AiController {
             }
             final SpellAbility loop = LoopRunner.next(player, saList, this::loopApproved);
             if (loop != null) {
+                VetoLog.note(player, "loop-play " + loop.getHostCard().getName());
                 return loop; // a loop of the combo list is on the table: one more round of it
             }
             // the loop declined its finishers this time: they are for the turn that wins, not for a draw or a mill that falls short

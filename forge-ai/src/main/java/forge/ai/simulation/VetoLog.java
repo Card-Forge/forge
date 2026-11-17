@@ -69,6 +69,23 @@ public final class VetoLog {
         }
     }
 
+    /**
+     * Counts something that happened (a loop started, a solver found a win or not), next to the refusals, under
+     * "EVENT | ..." so a sweep can tell a deck that never tried its combo from one that tried and failed.
+     */
+    public static void note(final Player ai, final String event) {
+        if (!enabled || ai == null || event == null) {
+            return;
+        }
+        try {
+            final String key = "EVENT | " + event.replaceAll("[0-9]+", "#");
+            COUNTS.merge(key, 1, Integer::sum);
+            BY_PLAYER.computeIfAbsent(ai.getName(), k -> new ConcurrentHashMap<>()).merge(key, 1, Integer::sum);
+        } catch (final RuntimeException e) {
+            // a log must never break a turn
+        }
+    }
+
     /** The count of each refusal, "card | reason" per line, for the end of a game or a test. */
     public static String summary() {
         final StringBuilder sb = new StringBuilder();

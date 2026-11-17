@@ -89,6 +89,7 @@ public final class TideSolver {
         synchronized (KNOWN) {
             KNOWN.put(key, won);
         }
+        VetoLog.note(ai, "tide-solver " + (won ? "win" : "no win") + " (" + lastNote + ")");
         return won;
     }
 
