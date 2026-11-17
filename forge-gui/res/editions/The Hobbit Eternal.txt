@@ -49,7 +49,7 @@ ScryfallCode=HOC
 41 M Bilbo's Ring @Mark Poole
 42 M Glamdring @Franz Vohwinkel
 43 M Mithril Coat @Ellie Livingston
-44 M The One Ring @Dan Frazier
+44 M The One Ring @Dan Frazier & Marta Nael
 45 M Palantír of Orthanc @Chris Seaman
 46 M Relic of Sauron @Warren Mahy
 47 M The Black Gate @John Jude Palencar
@@ -89,7 +89,7 @@ ScryfallCode=HOC
 81 M Bilbo's Ring @Mark Poole
 82 M Glamdring @Franz Vohwinkel
 83 M Mithril Coat @Ellie Livingston
-84 M The One Ring @Dan Frazier
+84 M The One Ring @Dan Frazier & Marta Nael
 85 M Palantír of Orthanc @Chris Seaman
 86 M Relic of Sauron @Warren Mahy
 87 M The Black Gate @John Jude Palencar

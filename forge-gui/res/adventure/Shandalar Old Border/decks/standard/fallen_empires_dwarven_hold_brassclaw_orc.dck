@@ -1,0 +1,26 @@
+[metadata]
+Name=Brassclaw Orcs
+[Main]
+19 Mountain|3ED
+3 Dwarven Ruins|FEM
+2 Brassclaw Orcs|FEM|[49a]
+2 Brassclaw Orcs|FEM|[49b]
+2 Brassclaw Orcs|FEM|[49c]
+2 Brassclaw Orcs|FEM|[49d]
+2 Orcish Captain|FEM
+2 Orc General|DRK
+3 Aeolipile|FEM
+4 Orcish Conscripts|ICE
+4 Ironclaw Orcs|4ED
+3 Battering Ram|ATQ
+3 Orcish Artillery|3ED
+2 Orcish Oriflamme|3ED
+2 Downhill Charge|NMS
+1 Pillage|ALL
+1 Whirling Catapult|ALL
+1 Barreling Attack|MIR
+1 Orcish Squatters|ICE
+1 Headlong Rush|USG
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Brassclaw Orcs|FEM

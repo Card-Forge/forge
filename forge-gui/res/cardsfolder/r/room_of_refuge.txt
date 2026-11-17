@@ -1,6 +1,6 @@
 Name:Room of Refuge
 ManaCost:no cost
-Types:Land Cave
+Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:ChooseColor

@@ -1,7 +1,7 @@
 Name:Spellgyre
 ManaCost:2 U U
 Types:Instant
-A:SP$ Charm | Choices$ DBCounter,DBSurveil | Defined$ You
+A:SP$ Charm | Choices$ DBCounter,DBSurveil
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
 SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2

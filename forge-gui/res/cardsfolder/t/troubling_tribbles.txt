@@ -1,0 +1,8 @@
+Name:Troubling Tribbles
+ManaCost:2 W
+Types:Creature Tribble
+PT:0/1
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of this creature.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
+Oracle:This creature can't block.\nAt the beginning of your upkeep, create a token that's a copy of this creature.

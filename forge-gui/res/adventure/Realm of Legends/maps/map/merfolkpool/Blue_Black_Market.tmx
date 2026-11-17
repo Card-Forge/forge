@@ -61,7 +61,7 @@
     &quot;text&quot;: &quot;'The forbidden spell I'm selling is Intuition. Search for three cards. Your opponent gives you one, while the other two go to the graveyard. If you do it right, there is no right answer.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000 }
         ],
@@ -77,7 +77,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],
@@ -101,7 +101,7 @@
     &quot;text&quot;: &quot;'I have two powerful free counterspells for sale. Force of Will stops anything by exiling another blue card, while Fierce Guardianship counters any noncreature for free if you have your commander.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Force of Will. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Force of Will. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -116,7 +116,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Force of Will. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Force of Will. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -124,7 +124,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Fierce Guardianship. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Fierce Guardianship. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -139,7 +139,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Fierce Guardianship. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Fierce Guardianship. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -163,7 +163,7 @@
     &quot;text&quot;: &quot;'I have two powerful pieces of removal for sale. Mana Drain counters a spell and gives you the mana it cost. Cyclonic Rift can sweep away everything your opponent has.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Mana Drain. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mana Drain. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -178,7 +178,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Mana Drain. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Mana Drain. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -186,7 +186,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Cyclonic Rift. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Cyclonic Rift. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -201,7 +201,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Cyclonic Rift. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Cyclonic Rift. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -225,7 +225,7 @@
     &quot;text&quot;: &quot;'I have two powerful spells to find what you need. Sea Gate Restoration draws many cards and can be a land when needed and Gifts Ungiven searches for cards. Your opponent picks which you get but there's nothing stopping you from making everything good.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Sea Gate Restoration. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Sea Gate Restoration. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -240,7 +240,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Sea Gate Restoration. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Sea Gate Restoration. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -248,7 +248,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Gifts Ungiven. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Gifts Ungiven. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -263,7 +263,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Gifts Ungiven. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Gifts Ungiven. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],

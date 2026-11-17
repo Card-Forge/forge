@@ -110,7 +110,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         return lifeCritical || ComputerUtil.activateForCost(sa, ai)
-                || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                || (ph.isPlayerNextTurn(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 || sa.hasParam("PlayerTurn") || isSorcerySpeed(sa, ai);
     }
 

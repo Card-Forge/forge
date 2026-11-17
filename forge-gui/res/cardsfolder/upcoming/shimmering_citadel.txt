@@ -1,0 +1,11 @@
+Name:Shimmering Citadel
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
+A:AB$ Draw | Exhaust$ True | Cost$ 3 W U T | SubAbility$ DBGainLife | SpellDescription$ You draw two cards and gain 1 life. Put a depletion counter on this land. (Activate each exhaust ability only once.)
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+DeckHas:Ability$Lifegain|Counters
+Oracle:This land enters tapped.\n{T}: Add {W} or {U}.\nExhaust — {3}{W}{U}, {T}: You draw two cards and gain 1 life. Put a depletion counter on this land. (Activate each exhaust ability only once.)

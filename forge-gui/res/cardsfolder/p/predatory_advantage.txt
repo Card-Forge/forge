@@ -3,5 +3,5 @@ ManaCost:3 R G
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, create a 2/2 green Lizard creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_lizard | TokenOwner$ You
-SVar:X:Count$ThisTurnCast_Creature.ActivePlayerCtrl
+SVar:X:Count$ThisTurnCast_Creature.ControlledBy TriggeredPlayer
 Oracle:At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, create a 2/2 green Lizard creature token.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Shibata_Yuuki_-_Boros_Tokens_(Standard,_#900698).dck
+Deck Type=constructed
+
+[Main]
+4 Voice of Victory
+4 Stadium Headliner
+1 Suki, Courageous Rescuer
+4 Belladonna Took
+3 Torch the Tower
+4 Frontline Rush
+4 The Last Ronin's Technique
+4 Song of Totentanz
+4 Warleader's Call
+2 Seam Rip
+4 Political Triumph
+1 Plains
+5 Mountain
+4 Inspiring Vantage
+4 Sacred Foundry
+1 Fountainport
+4 Sunbillow Verge
+2 Dalkovan Encampment
+1 Multiversal Passage
+[Sideboard]
+1 Torch the Tower
+2 Seam Rip
+4 Rest in Peace
+3 Sunspine Lynx
+2 Pyrrhic Strike
+3 Bilbo's Gambit

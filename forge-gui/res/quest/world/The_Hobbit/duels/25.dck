@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Edward Scissorhands
+Title=Edward Scissorhands
+Icon=Edward Scissorhands.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Fred_-_Azorius_Aggro_(Standard,_#888007).dck
+Deck Type=constructed
+
+[Main]
+4 Floodfarm Verge
+4 Hallowed Fountain
+4 Meticulous Archive
+3 Island
+2 Plains
+2 Multiversal Passage
+1 Agna Qel'a
+1 Abandoned Air Temple
+4 Most Decrepit Old Bird
+4 Cosmogrand Zenith
+4 Abhorrent Oculus
+4 Picklock Prankster
+1 Kiora, the Rising Tide
+1 Namor the Sub-Mariner
+4 Helping Hand
+3 Practiced Offense
+3 Opt
+3 Erode
+2 Spell Snare
+2 Spell Pierce
+2 Leonardo's Technique
+2 No More Lies
+[Sideboard]
+2 No More Lies
+2 Aang, Swift Savior
+3 Doorkeeper Thrull
+2 Flashfreeze
+4 Settle the Wreckage
+2 Soul-Guide Lantern

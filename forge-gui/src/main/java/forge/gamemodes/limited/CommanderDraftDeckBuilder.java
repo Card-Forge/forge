@@ -124,7 +124,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
 
     @Override
     public Deck buildDeck(final String landSetCode) {
-
         // 1. Select commander(s) from pool if not pre-assigned during the draft
         if (selectedCommander == null) {
             selectCommanders();
@@ -355,8 +354,7 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
 
     private void addFreeCommanderIfAbsent(final List<PaperCard> candidates, final String name) {
         if (name == null || name.isEmpty()) { return; }
-        final boolean present = candidates.stream().anyMatch(c -> c.getName().equals(name));
-        if (!present) {
+        if (!candidates.stream().anyMatch(c -> c.getName().equals(name))) {
             final PaperCard card = FModel.getMagicDb().getCommonCards().getCard(name);
             if (card != null) {
                 candidates.add(card);
@@ -364,17 +362,12 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Size-fixing
-    // -------------------------------------------------------------------------
-
     /**
      * Trim or pad {@code deckList} until it equals {@code target} cards.
      * Mirrors the logic in {@link LimitedDeckBuilder#buildDeck} but with an
      * arbitrary target size.
      */
-    private void fixCommanderDeckSize(final int[] clrCnts, final String landSetCode,
-            final int target) {
+    private void fixCommanderDeckSize(final int[] clrCnts, final String landSetCode, final int target) {
         while (deckList.size() > target) {
             final PaperCard c = deckList.get(MyRandom.getRandom().nextInt(deckList.size()));
             deckList.remove(c);
@@ -400,10 +393,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             }
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Accessors
-    // -------------------------------------------------------------------------
 
     /** @return the selected (or pre-supplied) primary commander, or {@code null}. */
     public PaperCard getSelectedCommander() { return selectedCommander; }

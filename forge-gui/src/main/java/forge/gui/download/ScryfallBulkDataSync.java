@@ -3,7 +3,7 @@ package forge.gui.download;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import forge.util.BuildInfo;
+import forge.gui.GuiBase;
 import forge.util.ScryfallRateLimiter;
 import org.tinylog.Logger;
 
@@ -105,7 +105,7 @@ public final class ScryfallBulkDataSync {
             conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
             conn.setReadTimeout(CONNECT_TIMEOUT_MS);
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             conn.connect();
 
             int status = conn.getResponseCode();
@@ -149,7 +149,7 @@ public final class ScryfallBulkDataSync {
         HttpURLConnection conn = (HttpURLConnection) new URL(downloadUrl).openConnection();
         conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
         conn.setReadTimeout(READ_TIMEOUT_MS);
-        conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
         // downloadUrl is a *.scryfall.io file origin, not api.scryfall.com -- unthrottled, no acquire() needed.
         conn.connect();
 

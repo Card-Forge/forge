@@ -21,6 +21,7 @@ import com.google.common.collect.Multimaps;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAttackRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
@@ -301,17 +302,27 @@ public final class CombatExplainer {
             }
         }
 
-        // players required to be attacked with at least one creature
-        final Multimap<StaticAbility, GameEntity> playerReqs = Multimaps.invertFrom(constraints.getPlayerRequirements(),
-                MultimapBuilder.hashKeys().arrayListValues().<StaticAbility, GameEntity>build());
-        for (final Map.Entry<StaticAbility, Collection<GameEntity>> e : playerReqs.asMap().entrySet()) {
-            final Collection<GameEntity> defenders = e.getValue();
-            if (Collections.disjoint(defenders, declared.values()) && !Collections.disjoint(defenders, best.values())) {
-                lines.add(loc.getMessage("lblWhyAttackPlayerMustAttack", Lang.joinHomogenous(defenders), describeSource(e.getKey())));
+        // players required to be attacked with at least one creature of each attacking player
+        for (final Map.Entry<Player, Multimap<GameEntity, StaticAbility>> requirementsOf : constraints.getPlayerRequirements().entrySet()) {
+            final Player attacking = requirementsOf.getKey();
+            final Multimap<StaticAbility, GameEntity> playerReqs = Multimaps.invertFrom(requirementsOf.getValue(),
+                    MultimapBuilder.hashKeys().arrayListValues().<StaticAbility, GameEntity>build());
+            final List<GameEntity> declaredByPlayer = attackedBy(attacking, declared);
+            final List<GameEntity> bestByPlayer = attackedBy(attacking, best);
+            for (final Map.Entry<StaticAbility, Collection<GameEntity>> e : playerReqs.asMap().entrySet()) {
+                final Collection<GameEntity> defenders = e.getValue();
+                if (Collections.disjoint(defenders, declaredByPlayer) && !Collections.disjoint(defenders, bestByPlayer)) {
+                    lines.add(loc.getMessage("lblWhyAttackPlayerMustAttack", Lang.joinHomogenous(defenders), describeSource(e.getKey())));
+                }
             }
         }
 
         result.addAll(lines);
+    }
+
+    private static List<GameEntity> attackedBy(final Player attacking, final Map<Card, GameEntity> attack) {
+        return attack.entrySet().stream().filter(e -> e.getKey().getController().equals(attacking))
+                .map(Map.Entry::getValue).collect(Collectors.toList());
     }
 
     private static String describeAttack(final Map<Card, GameEntity> attack) {

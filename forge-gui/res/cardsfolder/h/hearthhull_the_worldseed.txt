@@ -2,7 +2,7 @@ Name:Hearthhull, the Worldseed
 ManaCost:1 B R G
 Types:Legendary Artifact Spacecraft
 PT:6/7
-K:Station:8
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE2_CHARGE | AddAbility$ HearthhullDraw | Description$ STATION 2+ {1}, {T}, Sacrifice a land: Draw two cards. You may play an additional land this turn.
 SVar:HearthhullDraw:AB$ Draw | Cost$ 1 T Sac<1/Land> | NumCards$ 2 | SubAbility$ DBEffect | SpellDescription$ Draw two cards. You may play an additional land this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration

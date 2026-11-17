@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (TRK)
+Type:Archived
+Subtype:Arena
+Effective:2026-11-10
+Sets:ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, SPM, OM1, TLA, ECL, YECL, TMT, SOS, YSOS, MSH, HOB, FRA, YFRA, TRK
+Banned:Sewer-veillance Cam

@@ -35,13 +35,13 @@ public class TriggerDamageDoneOnceByController extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         Object target = runParams.get(AbilityKey.DamageTarget);
         if (target instanceof Card) {
             target = CardCopyService.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));
         }
-        sa.setTriggeringObject(AbilityKey.Target, target);
-        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
+        objects.put(AbilityKey.Target, target);
+        objects.put(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
     }
 
     @Override

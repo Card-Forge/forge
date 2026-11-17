@@ -2,7 +2,7 @@ Name:Kobold Warcaller
 ManaCost:R
 Types:Creature Kobold
 PT:1/1
-A:AB$ ChooseCard | Cost$ T | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature card in your hand | ChoiceDesc$ creature | SubAbility$ DBPump | SpellDescription$ Choose a creature card in your hand.
+A:AB$ ChooseCard | Mandatory$ True | Cost$ T | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature card in your hand | ChoiceDesc$ creature | SubAbility$ DBPump | SpellDescription$ Choose a creature card in your hand.
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Haste | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains haste.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:Random

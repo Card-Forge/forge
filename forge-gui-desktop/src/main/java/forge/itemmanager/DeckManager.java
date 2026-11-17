@@ -27,6 +27,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -40,7 +41,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
-import forge.deck.DeckSection;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorCommanderDraftLimited;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
@@ -66,6 +66,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
+    private GameFormat requiredFormat;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -155,6 +156,36 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (this.getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
 
         addFilter(new DeckColorFilter(this));
+        if (requiredFormat != null) {
+            addFilter(new DeckFormatFilter(this, requiredFormat));
+        }
+    }
+
+    /** Shows only decks legal in the format, or every deck when it is null. Restoring or resetting the filters keeps it. */
+    public void setRequiredFormat(final GameFormat format) {
+        if (format == requiredFormat) { return; }
+
+        requiredFormat = format;
+        applyRequiredFormat();
+    }
+
+    private void applyRequiredFormat() {
+        final DeckFormatFilter current = getFilter(DeckFormatFilter.class);
+        if (current != null) {
+            removeFilter(current);
+        }
+        if (requiredFormat != null && this.getConfig() != ItemManagerConfig.STRING_ONLY) {
+            addFilter(new DeckFormatFilter(this, requiredFormat));
+        }
+    }
+
+    @Override
+    public void resetFilters() {
+        super.resetFilters();
+        if (requiredFormat != null) {
+            applyRequiredFormat();
+            applyFilters();
+        }
     }
 
     @Override
@@ -374,8 +405,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                if (deck != null && (deck.getDeck().getTags().contains("CommanderDraft")
-                        || deck.getDeck().has(DeckSection.Commander))) {
+                if (deck != null && CommanderDraftUtil.isCommanderDraftDeck(deck.getDeck())) {
                     editorCtrl = new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
                             screen, getCDetailPicture(), null);
                 } else {

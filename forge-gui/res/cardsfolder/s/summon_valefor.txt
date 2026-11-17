@@ -8,6 +8,6 @@ SVar:DBChooseReturn:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.gre
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBStun | SpellDescription$ Tap up to one target creature and put a stun counter on it.
-SVar:DBStun:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:DBStun:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1
 K:Flying
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Sonic Wings — Each opponent chooses a creature with the greatest mana value among creatures they control. Return those creatures to their owners' hands.\nII, III, IV — Tap up to one target creature and put a stun counter on it.\nFlying

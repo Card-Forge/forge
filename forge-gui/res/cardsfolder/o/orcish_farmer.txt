@@ -2,7 +2,7 @@ Name:Orcish Farmer
 ManaCost:1 R R
 Types:Creature Orc
 PT:2/2
-A:AB$ Effect | Cost$ T | ValidTgts$ Land | Duration$ Permanent | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | StaticAbilities$ Animate | Triggers$ ExileEff
+A:AB$ Effect | Cost$ T | ValidTgts$ Land | Duration$ Permanent | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | StaticAbilities$ Animate | Triggers$ ExileEff | SpellDescription$ Target land becomes a Swamp until its controller's next untap step.
 SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Swamp | RemoveLandTypes$ True | Description$ Target land becomes a Swamp until its controller's next untap step.
 SVar:ExileEff:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.controlsCard.IsRemembered | Execute$ Exile | Static$ True
 SVar:Exile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

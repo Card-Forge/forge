@@ -1040,7 +1040,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * updateView
      */
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
-        final boolean useFilter = (forceFilter && (this.filterPredicate != null)) || !isUnfiltered();
+        final boolean useFilter = (forceFilter && this.filterPredicate != null) || !isUnfiltered();
 
         if (useFilter || this.wantUnique || forceFilter) {
             this.model.clear();

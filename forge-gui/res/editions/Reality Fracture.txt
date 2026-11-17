@@ -9,6 +9,7 @@ BoosterSlots=Common,Common-SPG,Uncommon,RareMythic,Land,Wildcard,WildcardFoil,Ec
 Booster=5 Common, 1 Common-SPG, 1 Uncommon, 3 EchoedPair, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
+BoosterCovers=3
 
 [Common]
 Base=Common:fromSheet("FRA cards")

@@ -20,7 +20,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "selectable": true,
       "width": 48,
       "height": 20,

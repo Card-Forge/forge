@@ -1,6 +1,6 @@
 Name:Writhing Chrysalis
 ManaCost:2 R G
-Types:Creature Eldrazi
+Types:Creature Eldrazi Drone
 PT:2/3
 K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."

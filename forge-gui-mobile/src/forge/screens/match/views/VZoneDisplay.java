@@ -146,6 +146,10 @@ public class VZoneDisplay extends VCardDisplayArea {
         float dx = cardWidth;
 
         float totalWidth = cardWidth * cardPanels.get().size();
+        final boolean centered = VPlayerPanel.isCompactLayout() && totalWidth < visibleWidth; //compact popup zones center their cards
+        if (centered) {
+            x = (visibleWidth - totalWidth) / 2;
+        }
         if (totalWidth > visibleWidth && totalWidth <= visibleWidth * 2) {
             //allow overlapping cards up to one half of the card,
             //otherwise don't overlap and allow scrolling horizontally
@@ -165,7 +169,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             x += dx;
         }
 
-        return new ScrollBounds(x, visibleHeight);
+        return new ScrollBounds(centered ? visibleWidth : x, visibleHeight);
     }
 
     private ScrollBounds layoutAndGetScrollBoundsLandscape(float visibleWidth, float visibleHeight) {

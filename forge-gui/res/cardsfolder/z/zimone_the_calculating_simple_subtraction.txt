@@ -1,0 +1,17 @@
+Name:Zimone the Calculating
+ManaCost:U B
+Types:Legendary Creature Human Warlock
+PT:-1/4
+S:Mode$ CombatDamageNegatePower | ValidCard$ Card.Self+powerLT0 | Description$ NICKNAME assigns combat damage as though her power were positive.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ Whenever one or more cards are put into your graveyard from your library, NICKNAME becomes prepared.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Zimone assigns combat damage as though her power were positive.\nWhenever one or more cards are put into your graveyard from your library, Zimone becomes prepared.
+
+ALTERNATE
+
+Name:Simple Subtraction
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | IsCurse$ True | Duration$ Perpetual | StackDescription$ {c:Targeted} perpetually gets -3/-0. | SpellDescription$ Target creature perpetually gets -3/-0.
+Oracle:Target creature perpetually gets -3/-0.

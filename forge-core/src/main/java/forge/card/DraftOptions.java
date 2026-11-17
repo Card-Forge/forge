@@ -57,7 +57,6 @@ public class DraftOptions {
         return doublePick.resolve(podSize);
     }
 
-
     public int getMaxMatchPlayers() {
         return maxMatchPlayers;
     }

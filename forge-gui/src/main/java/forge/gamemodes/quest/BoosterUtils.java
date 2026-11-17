@@ -99,7 +99,6 @@ public final class BoosterUtils {
         final List<PaperCard> cards = new ArrayList<>();
 
         if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
-
             Predicate<CardEdition> editionLegalPredicate = formatStartingPool == null
                     ? cardEdition -> true
                     : formatStartingPool.editionLegalPredicate;
@@ -108,7 +107,6 @@ public final class BoosterUtils {
             }
 
             return cards;
-
         }
 
         Predicate<PaperCard> filter = CardDb.EDITION_NON_PROMO;
@@ -146,7 +144,6 @@ public final class BoosterUtils {
         }
 
         return cards;
-
     }
 
     /**
@@ -182,7 +179,6 @@ public final class BoosterUtils {
      * @return A list containing the booster packs
      */
     public static List<InventoryItem> generateRandomBoosterPacks(final int quantity, final Predicate<CardEdition> editionFilter) {
-
         List<InventoryItem> output = new ArrayList<>();
 
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
@@ -207,17 +203,14 @@ public final class BoosterUtils {
     }
 
     private static List<Predicate<CardRules>> getColorFilters(final StartingPoolPreferences userPrefs, final List<PaperCard> cardPool) {
-
         final List<Predicate<CardRules>> colorFilters = new ArrayList<>();
 
         if (userPrefs != null) {
-
             boolean includeArtifacts = userPrefs.includeArtifacts();
 
             final List<Byte> preferredColors = userPrefs.getPreferredColors();
 
             switch (userPrefs.getPoolType()) {
-
                 case RANDOM_BALANCED:
                     preferredColors.clear();
                     int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (MyRandom.getRandom().nextDouble() * COLOR_COUNT_PROBABILITIES.length)];
@@ -239,9 +232,7 @@ public final class BoosterUtils {
                     break;
                 default:
                     // Do nothing
-
             }
-
         }
 
         return colorFilters;
@@ -262,11 +253,9 @@ public final class BoosterUtils {
             }
             colorFilters.add(predicate);
         }
-
     }
 
     private static void populateBalancedFilters(final List<Predicate<CardRules>> colorFilters, final List<Byte> preferredColors, final List<PaperCard> cardPool, final boolean includeArtifacts) {
-
         final List<Byte> otherColors = new ArrayList<>(possibleColors);
         otherColors.removeAll(preferredColors);
 
@@ -285,9 +274,7 @@ public final class BoosterUtils {
         final int preferredReps = Math.max(1, otherColors.size());
 
         for (int i = 0; i < MAX_BIAS; i++) {
-
             if (i < colorBias) {
-
                 int index = (int) ((double) i / preferredBias);
                 for (int rep = 0; rep < preferredReps; rep++) {
 
@@ -313,7 +300,6 @@ public final class BoosterUtils {
                                 usedPhyrexian++;
                                 continue;
                             }
-
                         }
 
                         //Try to get multicolored cards that fit into the preferred colors.
@@ -331,14 +317,11 @@ public final class BoosterUtils {
                             //Exceeded multicolor-specific ratio, so here we add a more generic filter.
                             colorFilters.add(CardRulesPredicates.isColor(preferredColors.get(index)));
                         }
-
                     } else {
                         colorFilters.add(CardRulesPredicates.isMonoColor(preferredColors.get(index)));
                     }
                 }
-
             } else {
-
                 for (Byte color : otherColors) {
                     if (i % 6 == 0) {
                         colorFilters.add(CardRulesPredicates.isColor(color).and(CardRulesPredicates.IS_MULTICOLOR));
@@ -348,9 +331,7 @@ public final class BoosterUtils {
                 }
 
             }
-
         }
-
     }
 
     /**
@@ -371,7 +352,6 @@ public final class BoosterUtils {
     private static List<PaperCard> generateCards(
             final Iterable<PaperCard> source, final Predicate<PaperCard> filter, final int cntNeeded,
             final List<Predicate<CardRules>> allowedColors, final boolean allowDuplicates) {
-
         //If color is null, use colorOrder progression to grab cards
         final List<PaperCard> result = new ArrayList<>();
 
@@ -463,7 +443,6 @@ public final class BoosterUtils {
      * @return List<CardPrinted>
      */
     private static List<InventoryItem> parseReward(final String s) {
-
         String[] temp = s.split(" ");
         List<InventoryItem> rewards = new ArrayList<>();
 
@@ -516,7 +495,6 @@ public final class BoosterUtils {
         // Return the duplicate, a specified card, or an empty list
         return rewards;
     }
-
 
     /**
      * <p>

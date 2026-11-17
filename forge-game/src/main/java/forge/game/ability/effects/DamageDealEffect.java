@@ -50,9 +50,9 @@ public class DamageDealEffect extends DamageBaseEffect {
         // if use targeting we show all targets and corresponding damage
         if (spellAbility.usesTargeting()) {
             if (spellAbility.hasParam("DivideEvenly")) {
-                stringBuilder.append("divided evenly (rounded down) to \n");
+                stringBuilder.append("divided evenly (rounded down) to\n");
             } else if (spellAbility.isDividedAsYouChoose()) {
-                stringBuilder.append("divided to \n");
+                stringBuilder.append("divided to\n");
             } else
                 stringBuilder.append("to ");
 
@@ -100,7 +100,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
 
         if (spellAbility.hasParam("Radiance")) {
-            stringBuilder.append(" and each other ").append(spellAbility.getParam("ValidTgts"))
+            stringBuilder.append(" and each other ").append(Lang.getInstance().describeValidList(spellAbility.getParam("ValidTgts")))
                     .append(" that shares a color with ");
             if (targets.size() > 1) {
                 stringBuilder.append("them");
@@ -179,7 +179,9 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         if (sa.hasParam("OptionalDecider")) {
             Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
-            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", dmg, tgts), null)) {
+            final Card cardToShow = tgts.size() == 1 && tgts.get(0) instanceof Card ? (Card) tgts.get(0) : null;
+            if (decider != null && !decider.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", dmg, tgts), cardToShow, null)) {
                 return;
             }
         }

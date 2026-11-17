@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.EnemyData;
 import forge.adventure.scene.ArenaScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -30,7 +31,7 @@ public class TransitionScreen extends FContainer {
     Runnable runnable;
     TextureRegion textureRegion, screenUIBackground, playerAvatar;
     Texture vsTexture;
-    String enemyAtlasPath, playerAvatarName, enemyAvatarName;
+    String enemyAtlasPath, playerAvatarName, enemyAvatarName, enemyDisplayName;
     private String message = "", playerRecord = "", enemyRecord = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene, isAlternate;
     public boolean afterMatch, eventDuel, afterEvent;
@@ -87,6 +88,7 @@ public class TransitionScreen extends FContainer {
         playerAvatar = player;
         playerAvatarName = playerName;
         enemyAvatarName = enemyName;
+        enemyDisplayName = EnemyData.getDisplayName(enemyName);
         enemyAtlasPath = enemyAtlas;
         vsTexture = Forge.getAssets().fallback_skins().get("vs");
         layout = new GlyphLayout();
@@ -221,8 +223,8 @@ public class TransitionScreen extends FContainer {
                     float enemyAvatarX = screenW - screenW / 4 - (scale / 2 * percentage);
                     float enemyAvatarY = centerY - scale / 2;
                     g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
-                    layout.setText(font, enemyAvatarName);
-                    g.drawText(enemyAvatarName, font, screenW - screenW / 4 - layout.width / 2, enemyAvatarY - layout.height, Color.WHITE, percentage);
+                    layout.setText(font, enemyDisplayName);
+                    g.drawText(enemyDisplayName, font, screenW - screenW / 4 - layout.width / 2, enemyAvatarY - layout.height, Color.WHITE, percentage);
                     layout.setText(font, p2Record);
                     g.drawText(p2Record, font, screenW - screenW / 4 - layout.width / 2, enemyAvatarY - layout.height * 2.5f, Color.WHITE, percentage);
                     //vs
@@ -241,8 +243,8 @@ public class TransitionScreen extends FContainer {
                     float vsScale = (screenW / 3.2f);
                     g.drawHueShift(vsTexture, centerY - vsScale / 2, centerX - vsScale / 2, vsScale, vsScale, percentage * 4);
                     //names
-                    layout.setText(font, enemyAvatarName);
-                    g.drawText(enemyAvatarName, font, centerY - layout.width / 2, screenW - scale / 4, Color.WHITE, percentage);
+                    layout.setText(font, enemyDisplayName);
+                    g.drawText(enemyDisplayName, font, centerY - layout.width / 2, screenW - scale / 4, Color.WHITE, percentage);
                     layout.setText(font, playerAvatarName);
                     g.drawText(playerAvatarName, font, centerY - layout.width / 2, 0 + scale / 4, Color.WHITE, percentage);
                 }
