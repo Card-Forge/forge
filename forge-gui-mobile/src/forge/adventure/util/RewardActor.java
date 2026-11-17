@@ -895,11 +895,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Forge.getGraphics().getBatch().draw(item, pw / 4f, ph / 4f, pw / 2f, ph / 2f);
         }
         if (itemText != null) {
+            // Keeps wrapped text inside the card back's ornamented border
+            float inset = pw / 8f;
             itemText.setWrap(true);
             itemText.setAlignment(1);
-            itemText.setWidth(pw);
+            itemText.setWidth(pw - inset * 2);
             itemText.setHeight(ph);
-            itemText.setX(itemText.getX() + (modX * 4));
+            itemText.setX(itemText.getX() + inset + (modX * 4));
             itemText.setY(itemText.getY() + (modY * 8));
             itemText.draw(Forge.getGraphics().getBatch(), 1);
         }
