@@ -269,7 +269,7 @@ public class RewardScene extends UIScene {
             CardPool pool = deck.get(section);
             if (pool == null || pool.isEmpty())
                 continue;
-            list.append("[%?SHINY]").append(section.getLocalizedName()).append("[%]\n");
+            list.append("[%?SHINY]").append(section.getLocalizedName()).append(" (").append(pool.countAll()).append(")[%]\n");
             List<Map.Entry<PaperCard, Integer>> entries = new ArrayList<>();
             pool.forEach(entries::add);
             entries.sort(Comparator.comparing(entry -> entry.getKey().getName()));
@@ -291,7 +291,8 @@ public class RewardScene extends UIScene {
         pane.setFadeScrollBars(false);
         Dialog dialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblClose"), null, this::removeDialog, null);
         Table content = dialog.getContentTable();
-        content.add(Controls.newTextraLabel("[%?SHINY]" + deck.getName().replace("[", "[["))).left().padTop(4).padBottom(4);
+        content.add(Controls.newTextraLabel("[%?SHINY]" + deck.getName().replace("[", "[[") + "[%]\n"
+                + Forge.getLocalizer().getMessage("lblNCards", deck.getAllCardsInASinglePool(true, true).countAll()))).left().padTop(4).padBottom(4);
         content.row();
         content.add(pane).width(stage.getWidth() * (Forge.isLandscapeMode() ? 0.6f : 0.8f)).height(stage.getHeight() * 0.55f).padRight(4);
         content.row();
