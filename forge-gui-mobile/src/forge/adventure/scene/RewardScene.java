@@ -293,7 +293,7 @@ public class RewardScene extends UIScene {
         Table content = dialog.getContentTable();
         content.add(Controls.newTextraLabel("[%?SHINY]" + deck.getName().replace("[", "[["))).left().padTop(4).padBottom(4);
         content.row();
-        content.add(pane).width(stage.getWidth() * 0.6f).height(stage.getHeight() * 0.55f).padRight(4);
+        content.add(pane).width(stage.getWidth() * (Forge.isLandscapeMode() ? 0.6f : 0.8f)).height(stage.getHeight() * 0.55f).padRight(4);
         content.row();
         content.add(new MoreArrow(pane)).padTop(4);
         showDialog(dialog);
