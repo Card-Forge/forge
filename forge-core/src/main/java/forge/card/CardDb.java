@@ -1178,8 +1178,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // Check no-alt cards first. Exact name matches are prioritized more highly than an alt face or half of a split
         // card. That way "Ancestral Recall" won't return Emeritus of Ideation but "Wild Idea" can return Sanar, Unfinished Genius.
+        // A filter that drops every exact match must not fall through to an alt face of another card.
         cards = getAllCardsNoAlt(cr.cardName, cardQueryFilter);
-        if(cards.isEmpty())
+        if (cards.isEmpty() && getRules(cr.cardName, false) == null)
             cards = getAllCards(cr.cardName, cardQueryFilter);
 
         if (cards.isEmpty())
