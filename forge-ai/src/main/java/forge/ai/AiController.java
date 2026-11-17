@@ -1638,6 +1638,28 @@ public class AiController {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
+        // Sure damage is not called back: an attacker that no creature of theirs can block was weighed by the heuristics
+        // against staying home as a blocker already, and the rollouts value a point of damage far below a creature on
+        // the board (so they would withdraw any attacker whose attack costs it anything, or that is simply tapped).
+        final Integer max = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Map.Entry<Card, GameEntity> e : before.entrySet()) {
+            final Card c = e.getKey();
+            if (combat.isAttacking(c) || max != null && combat.getAttackers().size() >= max
+                    || !CombatUtil.canAttack(c, e.getValue())
+                    || AiAttackController.canBeBlockedByAnyOpponent(c) && !backedByATrick(c)) {
+                continue;
+            }
+            combat.addAttacker(c, e.getValue());
+        }
+    }
+
+    /**
+     * The heuristics remembered the creature to attack into a block that a trick wins (the lure). Only that memory is
+     * used, never the hand: restoring attackers because a pump is held would make the AI attack differently when it
+     * holds a trick, which the opponent could read.
+     */
+    private boolean backedByATrick(final Card c) {
+        return AiCardMemory.isRememberedCard(player, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
     }
 
     private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {

@@ -490,6 +490,12 @@ public class AiReportScenarioTest extends AITest {
                     if (c.plays("Giver of Runes")) { return "activated Giver of Runes precombat"; }
                     return c.attackers().isEmpty() ? "AI did not attack into an empty board" : null;
                 }));
+        l.add(new Scenario("decayed-not-thrown-away", "A decayed 5/5 does not attack an empty board for 5 of 20 (it would be sacrificed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); },
+                c -> c.attackers().isEmpty() ? null : "attacked with a decayed creature for no lethal"));
+        l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
+                c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
         l.add(play("4430", "Elvish Piper when a creature is also castable", Fid.EXACT, M1, true, "Elvish Piper",
                 c -> { c.bf("Forest", 3, c.ai); c.bf("Elvish Piper", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Craterhoof Behemoth", c.ai); }));
         l.add(new Scenario("4439", "Might of Old Krosa goes on the creature that is in combat", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
