@@ -79,7 +79,7 @@ public class ComputerUtilAbility {
             }
         }
         all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()
-                || c.getSpellAbilities().stream().anyMatch(sa -> sa.getApi() == ApiType.RollPlanarDice)));
+            || "Planar Dice".equals(c.getName())));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
