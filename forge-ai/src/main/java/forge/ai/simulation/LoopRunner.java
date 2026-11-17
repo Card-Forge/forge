@@ -105,7 +105,40 @@ public final class LoopRunner {
         if (refill != null) {
             return refill;
         }
-        return tideSetup(ai, candidates, approve);
+        final SpellAbility setup = tideSetup(ai, candidates, approve);
+        return setup != null ? setup : tideDig(ai, candidates, approve);
+    }
+
+    /**
+     * The turns before the one that goes off: a High Tide player casts every cantrip with the mana that is left over
+     * (the cheapest first), looking for High Tide, what untaps, the finisher and the lands to go round with. The mana
+     * kept back is the price of a counterspell of the hand, and the library is not dug into when it is nearly empty.
+     * Not while the loop is running (or being tried in a copy), and not when the hand can already go off.
+     */
+    private static SpellAbility tideDig(final Player ai, final List<SpellAbility> candidates,
+                                        final Predicate<SpellAbility> approve) {
+        if (tideActive(ai) || TideSolver.running() || !TidePlan.isTideDeck(ai)
+                || ai.getCardsIn(ZoneType.Library).size() < 8 || tideReady(ai)) {
+            return null;
+        }
+        int untapped = ai.getManaPool().totalMana();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.isTapped()) {
+                untapped++;
+            }
+        }
+        final int spare = untapped - counterReserve(ai);
+        for (final String name : TidePlan.CANTRIPS) {
+            final SpellAbility cast = castFromHand(ai, candidates, name);
+            if (cast != null && cast.getHostCard().getCMC() <= spare) {
+                cast.setActivatingPlayer(ai);
+                cast.resetTargets();
+                if (approve.test(cast)) {
+                    return cast;
+                }
+            }
+        }
+        return null;
     }
 
     static Card inPlay(final Player ai, final String name) {
@@ -682,7 +715,49 @@ public final class LoopRunner {
         if (other != null) {
             return other;
         }
-        return engineStep(ai, candidates, approve, pool);
+        final SpellAbility engine = engineStep(ai, candidates, approve, pool);
+        return engine != null ? engine : drawForMana(ai, candidates, approve, pool, reserve);
+    }
+
+    /** Finisher cards left to find: the other draw spell and Brain Freeze of the hand, and those of the library. */
+    private static int finishersOutside(final Player ai, final String drawn) {
+        int n = 0;
+        for (final ZoneType zone : new ZoneType[] { ZoneType.Hand, ZoneType.Library }) {
+            for (final Card c : ai.getCardsIn(zone)) {
+                if (drawsX(c.getName()) || c.getName().equals(BRAIN_FREEZE)) {
+                    n++;
+                }
+            }
+        }
+        return inHand(ai, drawn) ? n - 1 : n; // the one that is cast does not count
+    }
+
+    /**
+     * The loop has made all the mana it can and still cannot pay for the finisher: Stroke of Genius or Blue Sun's
+     * Zenith is cast on the AI itself with the mana that is floating, to draw into more High Tides, Turnabouts and a
+     * Time Spiral (more mana again, which is a better chance at the finisher). Only when another finisher is left to
+     * win with, in the hand or the library, and never deeper into the library than leaves a margin before it is empty.
+     */
+    private static SpellAbility drawForMana(final Player ai, final List<SpellAbility> candidates,
+                                            final Predicate<SpellAbility> approve, final int pool, final int reserve) {
+        final int own = ai.getCardsIn(ZoneType.Library).size();
+        for (final String name : new String[] { ZENITH, STROKE }) {
+            final SpellAbility draw = castFromHand(ai, candidates, name);
+            if (draw == null || pool < 5 + reserve || finishersOutside(ai, name) < 1 || own < 14
+                    || aimedAtPlayer(ai, draw, ai) == null) {
+                continue;
+            }
+            final int x = Math.min(forge.ai.ComputerUtilCost.setMaxXValue(draw, ai, false) - reserve,
+                    Math.min(own - 10, 12));
+            if (x >= 3) {
+                draw.setXManaCostPaid(x);
+                if (approve.test(draw)) {
+                    return draw;
+                }
+            }
+            draw.resetTargets();
+        }
+        return null;
     }
 
     /**

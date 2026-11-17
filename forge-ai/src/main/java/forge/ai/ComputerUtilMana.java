@@ -1472,13 +1472,21 @@ public class ComputerUtilMana {
             return false;
         }
 
+        final AiController flatMcAi = ((PlayerControllerAi)ai.getController()).getAi();
+        if (flatMcAi.flatMonteCarloActive()) {
+            // Flat Monte Carlo compares plays with every source free, and the heuristics reserve sources for the "next
+            // spell" while they judge each candidate: a play it picked then found itself one or two mana short of its
+            // own cost (Regal Force with six of seven, Force of Will with four of five) and was not cast
+            return false;
+        }
+
         // reserved for spell synchronization
         if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
             return true;
         }
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        AiController aic = flatMcAi;
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
