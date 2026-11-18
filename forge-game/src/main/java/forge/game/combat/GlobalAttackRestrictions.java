@@ -9,7 +9,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbilityAttackRestrict;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.util.collect.FCollectionView;
 
 public class GlobalAttackRestrictions {
@@ -59,10 +59,10 @@ public class GlobalAttackRestrictions {
         final Map<GameEntity, Integer> defenderMax = Maps.newHashMapWithExpectedSize(possibleDefenders.size());
         final Game game = attackingPlayer.getGame();
 
-        Integer max = StaticAbilityAttackRestrict.globalAttackRestrict(game);
+        Integer max = StaticAbilityAttackBlockRestrict.globalAttackRestrictNum(game);
 
         for (final GameEntity defender : possibleDefenders) {
-            final Integer defMax = StaticAbilityAttackRestrict.attackRestrictNum(defender);
+            final Integer defMax = StaticAbilityAttackBlockRestrict.attackRestrictNum(defender);
             if (defMax != null) {
                 defenderMax.put(defender, defMax);
             }

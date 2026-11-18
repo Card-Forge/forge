@@ -2,5 +2,5 @@ Name:Ember Beast
 ManaCost:2 R
 Types:Creature Beast
 PT:3/4
-K:CARDNAME can't attack or block alone.
+S:Mode$ AttackRestrict,BlockRestrict | ValidCard$ Card.Self | Description$ CARDNAME can't attack or block alone.
 Oracle:Ember Beast can't attack or block alone.
