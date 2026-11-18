@@ -899,7 +899,7 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         alurenDeckWith(4, "Cabal Therapy", "Maggot Carrier", "Cavern Harpy");
         final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
         AssertJUnit.assertNotNull(step);
-        AssertJUnit.assertNotSame("Cabal Therapy", step.getHostCard().getName());
+        AssertJUnit.assertFalse("nothing to name in an empty hand", "Cabal Therapy".equals(step.getHostCard().getName()));
     }
 
     @Test(timeOut = 120000)
@@ -909,6 +909,31 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         final Card savage = addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
         savage.setSickness(false);
         AssertJUnit.assertNull("two power ready, two life: attack, do not loop", LoopRunner.next(ai, alurenPlays(), s -> true));
+    }
+
+    @Test(timeOut = 120000)
+    public void withStrokeAndCloudInTheHandTheKillIsNotPostponedForTheCarrier() {
+        alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Cavern Harpy");
+        addCardToZone("Maggot Carrier", ai, ZoneType.Sideboard);
+        addCardToZone("Living Wish", ai, ZoneType.Library);
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.MANA, forge.ai.simulation.AlurenPlan.stage(ai, opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithStrokeCloudAndHarpyDrawsTheOpponentsLibrary() {
+        alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Cavern Harpy");
+        runTurn();
+        AssertJUnit.assertEquals("the Cloud untaps two lands a round, the pool pays for Stroke of Genius\n" + trace
+                + gameStateToString(game), 0, opp.getCardsIn(ZoneType.Library).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithTheCarrierAndTheHarpyDrainsTheOpponent() {
+        alurenDeckWith(4, "Maggot Carrier", "Cavern Harpy");
+        opp.setLife(4, null);
+        runTurn();
+        AssertJUnit.assertTrue("each Carrier enter costs both players a life\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
     }
 
     @Test(timeOut = 120000)

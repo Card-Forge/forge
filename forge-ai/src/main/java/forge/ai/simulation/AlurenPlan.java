@@ -255,17 +255,20 @@ public final class AlurenPlan {
             return Stage.DRAIN;
         }
 
-        // Find the primary kill before committing to the Stroke backup.
-        final boolean drawEngine = accessible(ai, FAMILIAR) || accessible(ai, SAVAGE);
-        if (needsCards(ai, opp) && drawEngine && librarySafeForNextRound(ai)) {
-            return Stage.CARDS;
-        }
-
+        // A Carrier in the hand drains first (above); otherwise the kill that is in the hand wins before any digging: Stroke of Genius with the Cloud of Faeries is ready, so nothing is
+        // dug for, and no longer round of the Carrier is started (the screenshot of PR 12937: the loop kept digging for
+        // the Carrier while Stroke and Cloud were already there).
         final boolean canDeckThem = opp.canDraw() && !opp.cantLoseCheck(forge.game.player.GameLossReason.Milled)
                 && !opp.getCardsIn(ZoneType.Library).isEmpty();
         if (canDeckThem && LoopRunner.inHand(ai, STROKE) && accessible(ai, CLOUD) && lifeOk(ai, opp)
                 && lands(ai) >= 2) {
             return Stage.MANA;
+        }
+
+        // Find the primary kill before committing to the Stroke backup.
+        final boolean drawEngine = accessible(ai, FAMILIAR) || accessible(ai, SAVAGE);
+        if (needsCards(ai, opp) && drawEngine && librarySafeForNextRound(ai)) {
+            return Stage.CARDS;
         }
 
         // Optional life gain is finite and only useful when a real finish
@@ -877,6 +880,10 @@ public final class AlurenPlan {
                 continue;
             }
 
+            if (flashback && sacrificesAPiece(ai, sa)) {
+                continue; // the flashback sacrifices a creature of the loop: never
+            }
+
             // Set the target after resetting the ability. NamedDiscard
             // recognizes revealed cards and prepares the discard sub-ability.
             sa.setActivatingPlayer(ai);
@@ -890,6 +897,27 @@ public final class AlurenPlan {
             VetoLog.note(ai, "aluren-step-refused " + THERAPY);
         }
         return null;
+    }
+
+    /** Whether the creature the AI would sacrifice for the cost is one of the pieces of the kill. */
+    private static boolean sacrificesAPiece(final Player ai, final SpellAbility sa) {
+        final CostSacrifice cost = sa.getPayCosts() == null ? null : sa.getPayCosts().getCostPartByType(CostSacrifice.class);
+        if (cost == null || cost.payCostFromSource()) {
+            return false;
+        }
+        final forge.game.card.CardCollectionView chosen = forge.ai.ComputerUtil.chooseSacrificeType(ai, cost.getType(), sa,
+                sa.getTargetCard(), false, Math.max(1, cost.getAbilityAmount(sa)), CardCollection.EMPTY);
+        if (chosen == null) {
+            return false;
+        }
+        for (final Card c : chosen) {
+            for (final String key : KEYS) {
+                if (c.getName().equals(key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static SpellAbility brainstorm(final Player ai, final List<SpellAbility> candidates,
