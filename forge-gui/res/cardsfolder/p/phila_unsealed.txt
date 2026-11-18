@@ -2,6 +2,7 @@ Name:Phila, Unsealed
 ManaCost:4
 Types:Legendary Artifact Golem
 PT:4/4
+Oracle:<Unsupported Variant>
 
 # --- Mirrans Won ---
 
