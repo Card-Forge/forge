@@ -3,24 +3,29 @@ package forge.ai.simulation;
 import java.util.List;
 import java.util.function.Predicate;
 
-import forge.ai.ComputerUtilMana;
+import forge.ai.RunawayLoop;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
- * The Aluren deck (Mattias Jorstedt's): with Aluren in play every creature of three or less is free, and the creatures
- * of the deck feed on each other. Wirewood Savage draws for every Beast, Cavern Harpy is one, and its enter trigger
- * bounces a blue or black creature (Raven Familiar digs again, Soul Warden pays the life back); "pay 1 life: return
- * Cavern Harpy to its hand" lets it be cast again. The AI had Aluren and the Harpy in hand and cast neither the way the
- * deck does: Aluren was one more four-drop for the rollouts, the free casts were weighed as creature spells, and the
- * life payment of the Harpy was never made.
+ * The Aluren deck (Mattias Jorstedt's, Pro Tour Houston 2002): with Aluren in play every creature of three or less is
+ * free, and the deck wins by drawing its library and then the opponent's. Cavern Harpy's enter trigger returns a blue or
+ * black creature, "pay 1 life: return Cavern Harpy to its hand" returns the Harpy, so a round is: cast the creature, cast
+ * the Harpy (it sends the creature back), pay a life, again. Soul Warden pays the life of every round back.
  *
- * <p>Everything here is a step of {@link LoopRunner}: Aluren when two pieces wait in the hand, then the free creatures
- * in the order of the deck, then the Harpy back to the hand while a draw engine or a creature to bounce is in play,
- * with a cap on the casts of a turn and the library kept out of reach of its own draws. Stroke of Genius for the
- * opponent's library ends it when the mana is there. Untested against a real game: the caps are what keep it safe.
+ * <ul>
+ *   <li><b>Cards</b>: Raven Familiar in the round digs three cards deep each time, until Stroke of Genius, Cloud of
+ *       Faeries and the life for the rounds are in hand ({@link #picks} says which card of the three).</li>
+ *   <li><b>Mana</b>: Cloud of Faeries untaps two lands each time it is cast. Every land goes into the mana pool, each
+ *       round adds two, and when the pool covers the opponent's library Stroke of Genius for that much draws all of it.</li>
+ *   <li><b>Drain</b> (sideboard): Maggot Carrier in the round, each cast costs both players a life, with the Warden
+ *       paying ours back.</li>
+ * </ul>
+ * {@link #harpyBounce} chooses the creature the Harpy returns for the loop that is running. The caps on the spells of a
+ * turn and the library floor keep it from running away. Untested against a real game.
  */
 public final class AlurenPlan {
     private static final String ALUREN = "Aluren";
@@ -33,9 +38,11 @@ public final class AlurenPlan {
     private static final String STROKE = "Stroke of Genius";
 
     /** The most spells of one turn this plan casts, and the cards that stay in the library out of reach of the draws. */
-    private static final int SPELL_CAP = 70;
-    private static final int RETURN_CAP = 30;
+    private static final int SPELL_CAP = 150;
+    private static final int RETURN_CAP = 80;
     private static final int LIBRARY_FLOOR = 8;
+    /** The life kept in hand as a buffer on top of what a loop pays, when no Soul Warden pays it back. */
+    private static final int LIFE_BUFFER = 4;
 
     private AlurenPlan() {
     }
@@ -51,19 +58,127 @@ public final class AlurenPlan {
         return aluren && harpy;
     }
 
-    private static boolean piece(final String name) {
-        return name.equals(HARPY) || name.equals(SAVAGE) || name.equals(FAMILIAR) || name.equals(WARDEN)
-                || name.equals(CARRIER) || name.equals(CLOUD);
+    /** What the loop is working on: the cards to draw, the mana for Stroke of Genius, or the drain of Maggot Carrier. */
+    public enum Stage { NONE, CARDS, MANA, DRAIN }
+
+    private static boolean accessible(final Player ai, final String name) {
+        return LoopRunner.inHand(ai, name) || LoopRunner.inPlay(ai, name) != null;
     }
 
     private static int piecesInHand(final Player ai) {
         int n = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-            if (piece(c.getName())) {
+            final String name = c.getName();
+            if (name.equals(HARPY) || name.equals(SAVAGE) || name.equals(FAMILIAR) || name.equals(WARDEN)
+                    || name.equals(CARRIER) || name.equals(CLOUD)) {
                 n++;
             }
         }
         return n;
+    }
+
+    /** Rounds of the mana loop to cover the library of the opponent with Stroke of Genius: two mana a round. */
+    private static int roundsNeeded(final Player opp) {
+        return (opp.getCardsIn(ZoneType.Library).size() + 3 + 1) / 2;
+    }
+
+    /** Life enough for the rounds of the loop: a Soul Warden pays the life back, otherwise a round costs one. */
+    private static boolean lifeOk(final Player ai, final Player opp) {
+        return LoopRunner.inPlay(ai, WARDEN) != null || ai.getLife() >= roundsNeeded(opp) + LIFE_BUFFER;
+    }
+
+    /** Whether cards are still missing for the kill: Stroke of Genius, Cloud of Faeries, or the life for the rounds. */
+    private static boolean needsCards(final Player ai, final Player opp) {
+        return !LoopRunner.inHand(ai, STROKE) || !accessible(ai, CLOUD)
+                || !lifeOk(ai, opp) && !accessible(ai, WARDEN);
+    }
+
+    /**
+     * Which loop is to be run now, from what is in the hand and on the table. The mana loop wins (Stroke of Genius in
+     * the hand, Cloud of Faeries and the life for it); until then the cards are drawn with Raven Familiar; Maggot
+     * Carrier drains the opponent when there is no Stroke of Genius to find and the life lead is there for it.
+     */
+    public static Stage stage(final Player ai, final Player opp) {
+        if (opp == null || !accessible(ai, HARPY) || ai.getLife() < 3) {
+            return Stage.NONE;
+        }
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        final boolean canDeckThem = opp.canDraw() && !opp.cantLoseCheck(forge.game.player.GameLossReason.Milled)
+                && !opp.getCardsIn(ZoneType.Library).isEmpty();
+        if (canDeckThem && LoopRunner.inHand(ai, STROKE) && accessible(ai, CLOUD) && lifeOk(ai, opp)
+                && lands(ai) >= 2) {
+            return Stage.MANA;
+        }
+        if (needsCards(ai, opp) && library > LIBRARY_FLOOR && accessible(ai, FAMILIAR)) {
+            return Stage.CARDS;
+        }
+        if (accessible(ai, CARRIER) && opp.canLoseLife()
+                && (LoopRunner.inPlay(ai, WARDEN) != null || ai.getLife() > opp.getLife() + 2 * LIFE_BUFFER)) {
+            return Stage.DRAIN;
+        }
+        return Stage.NONE;
+    }
+
+    private static int lands(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand()) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /**
+     * The creature that Cavern Harpy's enter trigger returns to the hand: the one the running loop casts again (Cloud
+     * of Faeries untaps two lands each time, Raven Familiar looks at three cards, Maggot Carrier drains), or the Harpy
+     * itself when nothing else is wanted back. Null for no opinion.
+     */
+    public static Card harpyBounce(final Player ai, final Iterable<Card> choices) {
+        if (ai == null || !isAlurenDeck(ai) || LoopRunner.inPlay(ai, ALUREN) == null) {
+            return null;
+        }
+        final Stage stage = stage(ai, ai.getWeakestOpponent());
+        final String wanted = stage == Stage.MANA ? CLOUD : stage == Stage.CARDS ? FAMILIAR : stage == Stage.DRAIN ? CARRIER : null;
+        Card harpy = null;
+        for (final Card c : choices) {
+            if (wanted != null && c.getName().equals(wanted)) {
+                return c;
+            }
+            if (c.getName().equals(HARPY)) {
+                harpy = c;
+            }
+        }
+        return harpy; // the life loop with Soul Warden: it comes back by itself and gains a life each time
+    }
+
+    /**
+     * What to take from the library, the hand-piece that is missing for the kill first: Aluren, Cavern Harpy, Stroke of
+     * Genius, Soul Warden, Cloud of Faeries, Raven Familiar, and Maggot Carrier as the other way to win.
+     */
+    public static CardCollection picks(final Player ai, final Iterable<Card> pool, final int n) {
+        if (ai == null || pool == null || n <= 0 || !isAlurenDeck(ai)) {
+            return null;
+        }
+        final String[] order = { ALUREN, HARPY, STROKE, WARDEN, CLOUD, FAMILIAR, CARRIER };
+        final CardCollection picks = new CardCollection();
+        for (final String name : order) {
+            if (picks.size() >= n) {
+                break;
+            }
+            final boolean have = name.equals(ALUREN) ? LoopRunner.inPlay(ai, name) != null || LoopRunner.inHand(ai, name)
+                    : accessible(ai, name);
+            if (have) {
+                continue;
+            }
+            for (final Card c : pool) {
+                if (c.getName().equals(name)) {
+                    picks.add(c);
+                    break;
+                }
+            }
+        }
+        return picks.size() == n ? picks : null;
     }
 
     /** The free cast of the creature (the one Aluren grants, not the one that pays its mana cost), or null. */
@@ -115,52 +230,76 @@ public final class AlurenPlan {
         if (stroke != null) {
             return stroke;
         }
-        final int library = ai.getCardsIn(ZoneType.Library).size();
-        final boolean savage = LoopRunner.inPlay(ai, SAVAGE) != null;
-        final boolean warden = LoopRunner.inPlay(ai, WARDEN) != null;
-        final boolean bounceTarget = LoopRunner.inPlay(ai, FAMILIAR) != null || LoopRunner.inPlay(ai, CLOUD) != null
-                || LoopRunner.inPlay(ai, CARRIER) != null;
-        // the cheap engines first: the one that draws for the Beasts, the one that pays the life back
-        for (final String name : new String[] { SAVAGE, WARDEN }) {
-            final SpellAbility sa = freeCast(ai, candidates, name);
-            if (tryCast(ai, sa, approve)) {
-                return sa;
+        // Soul Warden pays the life of every round back: the first thing, and free
+        final SpellAbility warden = freeCast(ai, candidates, WARDEN);
+        if (LoopRunner.inPlay(ai, WARDEN) == null && tryCast(ai, warden, approve)) {
+            return warden;
+        }
+        final Stage stage = stage(ai, opp);
+        switch (stage) {
+            case MANA: {
+                final SpellAbility tap = tapForTheMana(ai, candidates, approve);
+                return tap != null ? tap : round(ai, candidates, approve, CLOUD);
+            }
+            case CARDS:
+                return round(ai, candidates, approve, FAMILIAR);
+            case DRAIN:
+                return round(ai, candidates, approve, CARRIER);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Every land that is untapped goes into the mana pool: Cloud of Faeries untaps two tapped lands each time it is
+     * cast, which is the gain, and the pool keeps the mana for the rest of the phase, for Stroke of Genius.
+     */
+    private static SpellAbility tapForTheMana(final Player ai, final List<SpellAbility> candidates,
+                                              final Predicate<SpellAbility> approve) {
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isManaAbility() && host.isLand() && !host.isTapped() && ai.equals(host.getController())
+                    && host.isInZone(ZoneType.Battlefield)) {
+                sa.setActivatingPlayer(ai);
+                if (!RunawayLoop.exceeded(sa, LoopRunner.MAX_ACTIVATIONS) && approve.test(sa)) {
+                    return sa;
+                }
             }
         }
-        if (library > LIBRARY_FLOOR) {
-            final SpellAbility familiar = freeCast(ai, candidates, FAMILIAR);
-            if (tryCast(ai, familiar, approve)) {
-                return familiar;
+        return null;
+    }
+
+    /**
+     * One step of a round of the loop around Cavern Harpy and a creature that does something when it enters: cast the
+     * creature, cast the Harpy (its trigger sends the creature back), pay a life to send the Harpy back, and again.
+     */
+    private static SpellAbility round(final Player ai, final List<SpellAbility> candidates,
+                                      final Predicate<SpellAbility> approve, final String creature) {
+        final boolean creatureInHand = LoopRunner.inHand(ai, creature);
+        final Card creatureInPlay = LoopRunner.inPlay(ai, creature);
+        final Card harpyInPlay = LoopRunner.inPlay(ai, HARPY);
+        final boolean harpyInHand = LoopRunner.inHand(ai, HARPY);
+        if (creatureInHand) {
+            final SpellAbility cast = freeCast(ai, candidates, creature);
+            if (tryCast(ai, cast, approve)) {
+                return cast;
             }
         }
-        final SpellAbility cloud = freeCast(ai, candidates, CLOUD);
-        if (tryCast(ai, cloud, approve)) {
-            return cloud;
-        }
-        // Maggot Carrier drains both players: with Soul Warden to pay it back, or when it is the last point
-        if (warden || opp.getLife() <= 2) {
-            final SpellAbility carrier = freeCast(ai, candidates, CARRIER);
-            if (tryCast(ai, carrier, approve)) {
-                return carrier;
+        if (creatureInPlay != null && harpyInHand) {
+            final SpellAbility cast = freeCast(ai, candidates, HARPY);
+            if (tryCast(ai, cast, approve)) {
+                return cast;
             }
         }
-        // Cavern Harpy bounces a blue or black creature: it needs a draw engine to be worth it, or a creature to bounce
-        if (library > LIBRARY_FLOOR && ai.getLife() > 3 && (savage || bounceTarget)) {
-            final SpellAbility harpy = freeCast(ai, candidates, HARPY);
-            if (tryCast(ai, harpy, approve)) {
-                return harpy;
-            }
+        if (creatureInPlay != null && harpyInPlay != null && ai.getLife() >= 2) {
+            return harpyBackToTheHand(ai, candidates, approve);
         }
-        return harpyBackToTheHand(ai, candidates, approve, library, savage || bounceTarget, warden);
+        return null;
     }
 
     /** "Pay 1 life: return Cavern Harpy to its owner's hand": the loop that casts it again. */
     private static SpellAbility harpyBackToTheHand(final Player ai, final List<SpellAbility> candidates,
-                                                   final Predicate<SpellAbility> approve, final int library,
-                                                   final boolean engine, final boolean warden) {
-        if (!engine || library <= LIBRARY_FLOOR || ai.getLife() < (warden ? 3 : 6)) {
-            return null;
-        }
+                                                   final Predicate<SpellAbility> approve) {
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host != null && host.getName().equals(HARPY) && sa.isAbility() && !sa.isManaAbility()
@@ -172,7 +311,7 @@ public final class AlurenPlan {
         return null;
     }
 
-    /** Stroke of Genius for the whole of the opponent's library, when the mana for it is there. */
+    /** Stroke of Genius for the whole of the opponent's library, when the mana for it is in the pool. */
     private static SpellAbility strokeForTheLibrary(final Player ai, final List<SpellAbility> candidates,
                                                     final Player opp, final Predicate<SpellAbility> approve) {
         final SpellAbility stroke = LoopRunner.castFromHand(ai, candidates, STROKE);
@@ -180,8 +319,7 @@ public final class AlurenPlan {
         if (stroke == null || library < 1 || !opp.canDraw()) {
             return null;
         }
-        final int mana = ComputerUtilMana.getAvailableManaEstimate(ai) + ai.getManaPool().totalMana();
-        if (mana < library + 3 || LoopRunner.aimedAtPlayer(ai, stroke, opp) == null) {
+        if (ai.getManaPool().totalMana() < library + 3 || LoopRunner.aimedAtPlayer(ai, stroke, opp) == null) {
             return null;
         }
         stroke.setXManaCostPaid(library);
