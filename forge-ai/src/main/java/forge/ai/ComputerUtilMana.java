@@ -366,6 +366,14 @@ public class ComputerUtilMana {
             maList = uncounterableLast;
         }
 
+        // prefer sources that won't make their controller lose life, e.g. tap Caves of Koilos for {C} (no damage)
+        // before a source that always hurts when tapped, like City of Brass
+        if (ai.canLoseLife()) { // otherwise the pain doesn't matter
+            final List<SpellAbility> painlessFirst = Lists.newArrayList(maList);
+            painlessFirst.sort(Comparator.comparing(ComputerUtilMana::isPainfulManaAbility));
+            maList = painlessFirst;
+        }
+
         for (final SpellAbility ma : maList) {
             // this rarely seems like a good idea
             if (ma.getHostCard() == saHost) {
@@ -450,6 +458,28 @@ public class ComputerUtilMana {
             return paymentChoice;
         }
         return null;
+    }
+
+    private static boolean isPainfulManaAbility(final SpellAbility ma) {
+        for (SpellAbility sub = ma.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (isPainToController(sub)) {
+                return true;
+            }
+        }
+        if (ma.getPayCosts().hasTapCost() && ma.getHostCard() != null) {
+            for (Trigger t : ma.getHostCard().getTriggers()) {
+                if (isPainToController(t.getOverridingAbility())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isPainToController(final SpellAbility sa) {
+        return sa != null
+                && (sa.getApi() == ApiType.DealDamage || sa.getApi() == ApiType.LoseLife)
+                && "You".equals(sa.getParamOrDefault("Defined", ""));
     }
 
     public static String predictMana(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
