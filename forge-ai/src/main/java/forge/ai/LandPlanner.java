@@ -387,6 +387,9 @@ public final class LandPlanner {
                     return;
                 }
             }
+            if (addChosenColorSources(out, ma, from)) {
+                return;
+            }
         }
         byte mask = 0;
         int amount = 1;
@@ -405,6 +408,28 @@ public final class LandPlanner {
         for (int i = 0; i < Math.min(amount, 4); i++) {
             out.add(new Src(mask, from));
         }
+    }
+
+    /** For "choose a colour" abilities (Nyx Lotus): sources of the one colour that makes the most, false when this is not that. */
+    private static boolean addChosenColorSources(final List<Src> out, final SpellAbility ma, final int from) {
+        for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
+            final AbilityManaPart mp = part.getManaPart();
+            if (mp == null || !mp.choosesColorOnResolution(part)) {
+                continue;
+            }
+            final int[] amounts = mp.amountsIfChosen(part);
+            int best = 0;
+            for (int i = 1; i < amounts.length; i++) {
+                if (amounts[i] > amounts[best]) {
+                    best = i;
+                }
+            }
+            for (int i = 0; i < Math.min(amounts[best], 4); i++) {
+                out.add(new Src(TYPE_BITS[best], from));
+            }
+            return true;
+        }
+        return false;
     }
 
     /** For "{W}{U}" style abilities: one mask per type made at the same time, null when this is not that. */

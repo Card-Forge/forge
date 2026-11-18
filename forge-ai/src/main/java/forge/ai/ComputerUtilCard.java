@@ -59,6 +59,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -1228,6 +1229,16 @@ public class ComputerUtilCard {
     };
 
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
+        // during a payment, a mana ability chooses the color that the payment picked for it
+        for (SpellAbility part = sa.getSubAbility(); part != null; part = part.getSubAbility()) {
+            final AbilityManaPart mp = part.getManaPart();
+            if (mp != null && mp.choosesColorOnResolution(part) && !mp.getExpressChoice().isEmpty()) {
+                final String color = MagicColor.toLongString(MagicColor.fromName(mp.getExpressChoice()));
+                if (colorChoices.contains(color)) {
+                    return Lists.newArrayList(color);
+                }
+            }
+        }
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
