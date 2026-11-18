@@ -555,6 +555,48 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void grapeshotIsCastOnceTheStormCountIsLethal() {
+        elfDeckWith(3, "Glimpse of Nature", "Grapeshot", "Elvish Visionary");
+        addCards("Mountain", 2, ai);
+        opp.setLife(1, null);
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull("one life left: Grapeshot kills by itself", step);
+        AssertJUnit.assertEquals("Grapeshot", step.getHostCard().getName());
+        AssertJUnit.assertTrue(step.getTargets().contains(opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void naturalOrderIsLethalWhenCraterhoofWouldKill() {
+        elfDeckWith(3, "Natural Order");
+        addCardToZone("Craterhoof Behemoth", ai, ZoneType.Library);
+        addCards("Llanowar Elves", 3, ai);
+        opp.setLife(12, null);
+        AssertJUnit.assertTrue("Craterhoof with three elves and a haste attack kills from twelve",
+                ElfLoop.orderLethal(ai, opp));
+        opp.setLife(60, null);
+        AssertJUnit.assertFalse("but not from sixty", ElfLoop.orderLethal(ai, opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void withAlurenInPlayTheDrawEngineIsCastForNothing() {
+        elfDeckWith(2, "Wirewood Savage", "Cavern Harpy");
+        addCardToZone("Aluren", ai, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true); // the static ability that makes the creatures free
+        // every way to play the cards, the free casts that Aluren grants among them (playsOf lists the printed ones only)
+        final List<SpellAbility> plays = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            plays.addAll(c.getAllPossibleAbilities(ai, true));
+        }
+        for (final SpellAbility sa : plays) {
+            sa.setActivatingPlayer(ai);
+        }
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility step = LoopRunner.next(ai, plays, s -> true);
+        AssertJUnit.assertNotNull("Aluren is in play: the creatures are free", step);
+        AssertJUnit.assertEquals("Wirewood Savage", step.getHostCard().getName()); // before the Harpy, which is a Beast
+    }
+
+    @Test(timeOut = 120000)
     public void noCreatureIsHeldWhenGlimpseIsNotInTheHand() {
         elfDeckWith(5, "Craterhoof Behemoth", "Elvish Visionary", "Heritage Druid");
         addCardToZone("Glimpse of Nature", ai, ZoneType.Library);

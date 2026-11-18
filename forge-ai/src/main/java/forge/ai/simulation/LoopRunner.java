@@ -93,6 +93,10 @@ public final class LoopRunner {
         if (elves != null) {
             return elves;
         }
+        final SpellAbility aluren = AlurenPlan.next(ai, candidates, target, approve);
+        if (aluren != null) {
+            return aluren;
+        }
         final SpellAbility affinity = AffinityPlan.next(ai, candidates, approve);
         if (affinity != null) {
             return affinity;
@@ -638,7 +642,7 @@ public final class LoopRunner {
     }
 
     /** The first spell of that name in the hand as a play of the list, or null; a copy with the targets cleared. */
-    private static SpellAbility aimedAtPlayer(final Player ai, final SpellAbility sa, final Player target) {
+    static SpellAbility aimedAtPlayer(final Player ai, final SpellAbility sa, final Player target) {
         sa.setActivatingPlayer(ai);
         sa.resetTargets();
         if (!sa.canTarget(target)) {
