@@ -1941,10 +1941,18 @@ public class PlayerControllerAi extends PlayerController {
         SpellAbility oldSA = sa;
         // TODO maybe add some more Logic into it
         for (final Card c : cards) {
+            final SpellAbility first = c.getFirstSpellAbility();
+            if (first != null && "ManaRitual".equals(first.getParam("AILogic"))) {
+                continue; // a ritual spliced onto a ritual earns one mana for {1}{R} more, and the second red was not there
+            }
             SpellAbility newSA = oldSA.copy();
             AbilityUtils.addSpliceEffect(newSA, c);
             // check if AI still wants or can play the card with spliced effect
-            if (AiPlayDecision.WillPlay == getAi().canPlayFromEffectAI((Spell) newSA, false, false)) {
+            // the splice cost is paid with the spell's: without this check the AI spliced a second Desperate Ritual onto the
+            // first with one red source and was left unable to pay, and the spell was lost
+            newSA.setActivatingPlayer(player);
+            if (ComputerUtilCost.canPayCost(newSA, player, false)
+                    && AiPlayDecision.WillPlay == getAi().canPlayFromEffectAI((Spell) newSA, false, false)) {
                 oldSA = newSA;
                 result.add(c);
             }
