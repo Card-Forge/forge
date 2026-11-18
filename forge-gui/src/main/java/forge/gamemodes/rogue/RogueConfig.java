@@ -60,6 +60,8 @@ public class RogueConfig {
 
     private static final Supplier<Map<String, PaperCard>> rogueCards =
             Suppliers.memoize(RogueConfig::loadRogueCards);
+    private static final Supplier<Set<String>> gamechangerCardNames =
+            Suppliers.memoize(RogueConfig::loadGamechangerCardNames);
     private static final Supplier<Set<String>> excludedRogueCardNames =
             Suppliers.memoize(RogueConfig::loadExcludedRogueCardNames);
 
@@ -225,14 +227,14 @@ public class RogueConfig {
     /** Load Gamechangers from Forge's shared Commander bracket list. */
     public static List<PaperCard> getGamechangerCards() {
         if (cachedGamechangerCards == null) {
-            File cardList = new File(ForgeConstants.COMMANDER_BRACKET_GAMECHANGERS_FILE);
-            if (!cardList.exists()) {
-                Logger.warn("Gamechanger list not found: {}", cardList.getAbsolutePath());
-            }
-            cachedGamechangerCards = loadSpecialPoolCards(readCardNames(cardList),
+            cachedGamechangerCards = loadSpecialPoolCards(gamechangerCardNames.get(),
                 List.of("2X2", "DMR", "2XM", "CMM"));
         }
         return new ArrayList<>(cachedGamechangerCards);
+    }
+
+    public static boolean isGamechanger(PaperCard card) {
+        return card != null && card.getAllSearchableNames().stream().anyMatch(gamechangerCardNames.get()::contains);
     }
 
     /** Load Commander-banned cards that Rogue may offer as forbidden rewards. */
@@ -256,6 +258,16 @@ public class RogueConfig {
         return names;
     }
 
+    private static Set<String> loadGamechangerCardNames() {
+        File cardList = new File(ForgeConstants.COMMANDER_BRACKET_GAMECHANGERS_FILE);
+        if (!cardList.exists()) {
+            Logger.warn("Gamechanger list not found: {}", cardList.getAbsolutePath());
+        }
+        Set<String> names = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        names.addAll(readCardNames(cardList));
+        return Collections.unmodifiableSet(names);
+    }
+
     private static Set<String> loadExcludedRogueCardNames() {
         File cardList = new File(ForgeConstants.RES_DIR, "rogue/util/rogue_commander_banlist.txt");
         if (!cardList.exists()) {
@@ -266,7 +278,7 @@ public class RogueConfig {
         return Collections.unmodifiableSet(names);
     }
 
-    private static List<PaperCard> loadSpecialPoolCards(List<String> names, List<String> preferredSetCodes) {
+    private static List<PaperCard> loadSpecialPoolCards(Iterable<String> names, List<String> preferredSetCodes) {
         List<PaperCard> cards = new ArrayList<>();
         for (String name : names) {
             if (excludedRogueCardNames.get().contains(name)) {
@@ -380,11 +392,12 @@ public class RogueConfig {
         int avatarIndex = metadata.getInt("avatarIndex", 1);
         int typeIndex = metadata.getInt("type", 0); // Default to NORMAL (0)
         RoguePlaneboundType type = RoguePlaneboundType.fromIndex(typeIndex);
+        int minRow = metadata.getInt("minRow", 0);
 
         // Build relative deck path
         String deckPath = "rogue/planebounds/" + deckFile.getName();
 
-        return new RoguePlanebound(planeName, planeboundName, deckPath, avatarIndex, type);
+        return new RoguePlanebound(planeName, planeboundName, deckPath, avatarIndex, type, minRow);
     }
 
     public static Deck loadPlaneboundDeck(RoguePlanebound planebound) {
@@ -485,8 +498,20 @@ public class RogueConfig {
         return card != null && card.hasFlavorName() ? getCard(card.getName(), null, null) : card;
     }
 
+    /** Returns an eligible print of the same rarity on or after the cutoff, or null. */
+    public static PaperCard getPreferredRecentPrint(PaperCard card, Date cutoff) {
+        Predicate<PaperCard> recent = print -> isEligibleRoguePrinting(print)
+                && !db.getCardEdition(print.getEdition()).getDate().before(cutoff);
+        if (recent.test(card)) {
+            return card;
+        }
+
+        return findPreferredPrint(card, recent.and(print -> print.getRarity() == card.getRarity()), null)
+                .orElse(null);
+    }
+
     /** Prefers non-deprioritized prints, then the chosen edition, CMM, FDC, FDN, and newest set. */
-    private static Optional<PaperCard> findPreferredPrint(PaperCard card, Predicate<PaperCard> filter,
+    static Optional<PaperCard> findPreferredPrint(PaperCard card, Predicate<PaperCard> filter,
             String preferredEdition) {
         return FModel.getMagicDb().getCommonCards()
                 .getAllCards(card).stream()

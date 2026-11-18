@@ -104,7 +104,7 @@ public enum RogueTutorial {
   ),
 
   ELITE_PLANEBOUND(
-      "Elite Planebound",
+      "Elite Planebounds",
       "An Elite awaits in the next row on the Trail (marked with a star)! Elite Planebounds are tougher " +
           "than regular opponents but offer greater rewards:\n" +
           "double Echoes, double Gold, and an additional Mythic card reward. Risk-reward, Commander, and " +
@@ -142,13 +142,13 @@ public enum RogueTutorial {
   ),
 
   EVENT(
-      "An Event",
+      "Events",
       "Events are random encounters that can have a variety of choices and outcomes for your Run.\n" +
           "Some events may offer powerful rewards, but often at a cost."
   ),
 
   CHEST(
-      "A Chest",
+      "Chests",
       "Chests contain two random Loot rewards - gold, cards from your Reward Pool, or permanent positive " +
           "Traits that last for the rest of the Run.",
       "Choose which one to keep."
@@ -186,7 +186,7 @@ public enum RogueTutorial {
   ),
 
   AETHER(
-      "Welcome to the Aether",
+      "The Aether",
       "Welcome to my realm. Before the Phyrexian invasion, the Aether was filled with buildings and machines " +
           "that have since been lost. The Echoes you recover preserve memories of what once stood here. Spend " +
           "them to rebuild and upgrade these Aetherworks.",
@@ -197,7 +197,7 @@ public enum RogueTutorial {
   ),
 
   DESCENSION_UNLOCKED(
-      "Descension Mode Unlocked",
+      "Descension Mode",
       "Descension Mode adds stacking difficulty modifiers to your Runs. Select a Commander you have already " +
           "won with to enable it.",
       "Winning at a Descension Level unlocks the next level for that Commander and earns you a Spark. " +

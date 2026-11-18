@@ -30,17 +30,17 @@ public enum CustomRunModification implements RogueEffect {
     EXPERIMENT("custom:experiment", "Experiment",
         "Choose from Rogue Commanders that are not or not yet in the official roster.", false),
     CHOSEN_ONE("custom:choose_rogue_commander", "Chosen One",
-        "Choose any legendary creature as your Commander.", false) {
+        "Choose any eligible Commander.", false) {
         @Override
-        public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+        public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
                 BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
-            return RogueCustomDeckGenerator.generateForChosenCommander(commander);
+            return RogueCustomDeckGenerator.generateForChosenCommander(chosenCommanders);
         }
     },
     MANIA("custom:random_rogue_commander", "Mania",
-        "A random legendary creature will be chosen as your Commander.", false) {
+        "A random eligible Commander will be chosen for you.", false) {
         @Override
-        public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+        public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
                 BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
             return RogueCustomDeckGenerator.generate();
         }
@@ -48,7 +48,7 @@ public enum CustomRunModification implements RogueEffect {
     RANDOM_START("custom:random_start", "Random Start",
         "Start with an automatically created Start Deck according to synergy and color identity for the selected Commander instead of its default deck.", true) {
         @Override
-        public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+        public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
                 BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
             return RogueCustomDeckGenerator.generateStartingDeck(selectedDeck);
         }
@@ -56,7 +56,7 @@ public enum CustomRunModification implements RogueEffect {
     RANDOM_REWARDS("custom:random_rewards", "Random Rewards",
         "Start with an automatically created Reward Pool according to synergy and color identity for the selected Commander instead of its default pool.", false) {
         @Override
-        public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+        public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
                 BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
             return RogueCustomDeckGenerator.generateRewardPool(selectedDeck);
         }
@@ -65,7 +65,7 @@ public enum CustomRunModification implements RogueEffect {
         "Choose 25 out of 60 non-mythic cards from the Start and Reward Pool as your Start Deck. "
             + "(also works with automatically generated decks and pools)", true) {
         @Override
-        public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+        public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
                 BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
             int pickCount = 25;
             CardPool startingMain = selectedDeck.getStartDeck().getMain();
@@ -219,7 +219,7 @@ public enum CustomRunModification implements RogueEffect {
     @Override
     public String getRawDescription() { return description; }
 
-    public RogueDeck createRogueDeck(RogueDeck selectedDeck, PaperCard commander,
+    public RogueDeck createRogueDeck(RogueDeck selectedDeck, List<PaperCard> chosenCommanders,
             BiFunction<RogueDeck, EffectResultContext, List<PaperCard>> selectCards) {
         return selectedDeck;
     }

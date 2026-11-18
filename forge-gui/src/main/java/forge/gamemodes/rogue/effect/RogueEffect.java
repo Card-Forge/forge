@@ -532,7 +532,7 @@ public interface RogueEffect {
         String randomPlaneName = planes.isEmpty() ? opponent.planeName() : planes.get(0).getName();
 
         ctx.planebound = new RoguePlanebound(randomPlaneName, opponent.planeboundName(),
-            opponent.deckPath(), opponent.avatarIndex(), opponent.type());
+            opponent.deckPath(), opponent.avatarIndex(), opponent.type(), opponent.minRow());
         ctx.trigger = EffectResultContext.ActionTriggerType.PLANEBOUND;
     }
 

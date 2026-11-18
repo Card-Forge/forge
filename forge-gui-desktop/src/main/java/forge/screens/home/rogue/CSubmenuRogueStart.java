@@ -534,19 +534,19 @@ public enum CSubmenuRogueStart implements ICDoc {
     }
 
     boolean chosenOne = modifications.contains(CustomRunModification.CHOSEN_ONE);
-    PaperCard chosenCommander = chosenOne
-        ? new CommanderSelectionDialog().show() : null;
-    if (chosenOne && chosenCommander == null) {
+    List<PaperCard> chosenCommanders = chosenOne
+        ? new CommanderSelectionDialog().show() : List.of();
+    if (chosenOne && chosenCommanders.isEmpty()) {
       return;
     }
-    RogueDeck runDeck = createRunDeck(modifications, chosenCommander);
+    RogueDeck runDeck = createRunDeck(modifications, chosenCommanders);
     if (runDeck == null) {
       FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueCouldNotGenerateDeck"),
           Localizer.getInstance().getMessage("lblRogueCustomRun"));
       return;
     }
     if (chosenOne) {
-      chooseCommanderAvatar(runDeck, chosenCommander);
+      chooseCommanderAvatar(runDeck, chosenCommanders.get(0));
     }
 
     RogueMetaProgress progress = RogueMetaProgress.getInstance();
@@ -612,11 +612,11 @@ public enum CSubmenuRogueStart implements ICDoc {
     return selectedDeck != null;
   }
 
-  private RogueDeck createRunDeck(List<CustomRunModification> modifications, PaperCard chosenCommander) {
+  private RogueDeck createRunDeck(List<CustomRunModification> modifications, List<PaperCard> chosenCommanders) {
     RogueDeck runDeck = selectedDeck;
     try {
       for (CustomRunModification modification : modifications) {
-        runDeck = modification.createRogueDeck(runDeck, chosenCommander,
+        runDeck = modification.createRogueDeck(runDeck, chosenCommanders,
             (deck, ctx) -> new CardSelectionDialog(
                 Localizer.getInstance().getMessage("lblRogueStartingDeck"), ctx.cardSelectionSubtitle,
                 ctx.candidateCards, new RogueRun(deck), ctx.cardSelectionMinCount,

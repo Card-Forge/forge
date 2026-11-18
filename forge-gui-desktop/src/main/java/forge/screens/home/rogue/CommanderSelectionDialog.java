@@ -18,6 +18,7 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,13 +28,28 @@ import javax.swing.SwingUtilities;
 
 /** Searchable image browser for choosing a generated run's Commander. */
 public class CommanderSelectionDialog {
-  public PaperCard show() {
+  public List<PaperCard> show() {
     List<PaperCard> commanders = RogueCustomDeckGenerator.getEligibleCommanders();
     if (commanders.isEmpty()) {
       FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRogueNoLegalCommanders"), Localizer.getInstance().getMessage("lblRogueChooseAnyCommander"));
-      return null;
+      return List.of();
     }
 
+    List<PaperCard> selected = selectCommander(commanders,
+        Localizer.getInstance().getMessage("lblRogueChooseAnyCommander"), null);
+    if (selected.isEmpty()) {
+      return selected;
+    }
+    PaperCard commander = selected.get(0);
+    List<PaperCard> partners = RogueCustomDeckGenerator.getEligiblePartnerCommanders(commander);
+    if (partners.isEmpty()) {
+      return selected;
+    }
+    return selectCommander(partners,
+        Localizer.getInstance().getMessage("lblChoosePartnerFor", commander.getName()), commander);
+  }
+
+  private List<PaperCard> selectCommander(List<PaperCard> commanders, String title, PaperCard chosenCommander) {
     CardManager cardManager = new CardManager(null, false, false, false) {
       @Override
       protected ImageView<PaperCard> createImageView(ItemManagerModel<PaperCard> model) {
@@ -59,8 +75,14 @@ public class CommanderSelectionDialog {
     content.setMinimumSize(dialogSize);
     content.setSize(dialogSize);
 
-    FOptionPane pane = new FOptionPane(null, Localizer.getInstance().getMessage("lblRogueChooseAnyCommander"), null, content,
-        List.of(Localizer.getInstance().getMessage("lblRogueChooseCommander"), Localizer.getInstance().getMessage("lblCancel")), 0);
+    Localizer localizer = Localizer.getInstance();
+    List<String> options = new ArrayList<>();
+    options.add(localizer.getMessage("lblRogueChooseCommander"));
+    if (chosenCommander != null) {
+      options.add(localizer.getMessage("lblSkip"));
+    }
+    options.add(localizer.getMessage("lblCancel"));
+    FOptionPane pane = new FOptionPane(null, title, null, content, options, 0);
     pane.setButtonEnabled(0, cardManager.getSelectedItem() != null);
     cardManager.addSelectionListener(e ->
         pane.setButtonEnabled(0, cardManager.getSelectedItem() != null));
@@ -72,8 +94,15 @@ public class CommanderSelectionDialog {
     SwingUtilities.invokeLater(cardManager::focusSearch);
     pane.setVisible(true);
     PaperCard selected = pane.getResult() == 0 ? cardManager.getSelectedItem() : null;
+    boolean skipped = chosenCommander != null && pane.getResult() == 1;
     pane.dispose();
-    return selected;
+    if (skipped) {
+      return List.of(chosenCommander);
+    }
+    if (selected == null) {
+      return List.of();
+    }
+    return chosenCommander == null ? List.of(selected) : List.of(chosenCommander, selected);
   }
 
   private static final class CommanderImageView extends ImageView<PaperCard> {

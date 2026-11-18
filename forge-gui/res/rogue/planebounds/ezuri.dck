@@ -3,6 +3,7 @@ name=Ezuri, Renegade Leader
 planeName=Llanowar
 avatarIndex=14
 type=0
+minRow=3
 [Commander]
 1 Ezuri, Renegade Leader|DDU|1
 [Main]

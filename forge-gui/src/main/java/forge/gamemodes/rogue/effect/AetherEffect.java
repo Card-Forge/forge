@@ -1,6 +1,6 @@
 package forge.gamemodes.rogue.effect;
 
-import forge.card.CardRules;
+import forge.card.CardType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.rogue.AetherUpgrade;
 import forge.gamemodes.rogue.RogueConfig;
@@ -10,10 +10,14 @@ import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.MyRandom;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -179,11 +183,11 @@ public enum AetherEffect implements RogueEffect {
 
     ZHALFIRIN_WARD("zhalfirin_ward", "Zhalfirin Ward",
         "Fellows and Items you control have hexproof and indestructible. "
-            + "Start each Run by choosing %s of 20 rare legendary colorless Fellows and Items.",
+            + "Start each Run by choosing %s from up to 20 legendary rare Fellows and rare Items.",
         new EffectRankContext(
-            new int[]{10, 15, 20}, // Echo costs (rank 1-3)
-            new int[]{1, 2, 3},    // Starting Carry Cards
-            2, 2),
+            new int[]{10, 20}, // Echo costs (rank 1-2)
+            new int[]{1, 2},   // Starting Carry Cards
+            1, 2),
         EffectType.PERMANENT, "Aetherwork - Zhalfirin Ward") {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
@@ -200,21 +204,23 @@ public enum AetherEffect implements RogueEffect {
         @Override
         public void onRunStart(RogueRun run, Consumer<EffectResultContext> handleResult) {
             chooseStartingCarryCards(run, handleResult, card -> {
-                CardRules rules = card.getRules();
-                return PaperCardPredicates.IS_RARE.test(card) && rules.getColor().isColorless()
-                    && rules.getType().isLegendary()
-                    && (rules.getType().isCreature() || rules.getType().isArtifact());
-            }, card -> card.getRules().getType().isCreature() ? CarryCardType.FELLOW : CarryCardType.ITEM);
+                CardType type = card.getRules().getType();
+                return PaperCardPredicates.IS_RARE.test(card)
+                    && (type.isArtifact() || (type.isCreature() && type.isLegendary()));
+            }, card -> {
+                CardType type = card.getRules().getType();
+                return type.isCreature() && type.isLegendary() ? CarryCardType.FELLOW : CarryCardType.ITEM;
+            });
         }
     },
 
     SPELLWRIGHTS_PRESS("spellwrights_press", "Spellwright's Press",
         "Scrolls you cast cannot be countered. "
-            + "Start each Run by choosing %s of 20 mythic rare Scrolls.",
+            + "Start each Run by choosing %s from up to 20 rare Scrolls.",
         new EffectRankContext(
-            new int[]{10, 15, 20}, // Echo costs (rank 1-3)
-            new int[]{1, 2, 3},    // Starting Scrolls
-            2, 2),
+            new int[]{10, 15, 20, 25}, // Echo costs (rank 1-4)
+            new int[]{1, 2, 3, 4},    // Starting Scrolls
+            3, 2),
         EffectType.PERMANENT, "Aetherwork - Spellwright's Press") {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
@@ -231,7 +237,7 @@ public enum AetherEffect implements RogueEffect {
         @Override
         public void onRunStart(RogueRun run, Consumer<EffectResultContext> handleResult) {
             chooseStartingCarryCards(run, handleResult,
-                card -> PaperCardPredicates.IS_MYTHIC_RARE.test(card)
+                card -> PaperCardPredicates.IS_RARE.test(card)
                     && RogueConfig.getBazaarCarryCardType(card) == CarryCardType.SCROLL,
                 card -> CarryCardType.SCROLL);
         }
@@ -321,12 +327,17 @@ public enum AetherEffect implements RogueEffect {
             return;
         }
 
-        List<PaperCard> candidates = new ArrayList<>(RogueConfig.getRandomCards(filter));
+        List<PaperCard> candidates = new ArrayList<>(
+            RogueConfig.getRandomCards(filter.and(Predicate.not(RogueConfig::isGamechanger))));
         candidates.removeIf(card -> !run.canAddCardAsCarryCard(card));
         Collections.shuffle(candidates, MyRandom.getRandom());
 
+        Date minimumReleaseDate = Date.from(LocalDate.of(2012, 1, 1)
+            .atStartOfDay(ZoneId.systemDefault()).toInstant());
         Set<String> offeredNames = new HashSet<>();
         List<PaperCard> offers = candidates.stream()
+            .map(card -> RogueConfig.getPreferredRecentPrint(card, minimumReleaseDate))
+            .filter(Objects::nonNull)
             .filter(card -> offeredNames.add(card.getRules().getNormalizedName()))
             .limit(20)
             .collect(Collectors.toList());

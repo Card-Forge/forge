@@ -60,6 +60,11 @@ public class RoguePathGeneratorTest {
                     assertEquals(node.getColumnIndex(), column);
                     assertEquals(node.getRowIndex(), row);
                     assertEquals(node instanceof NodePlanebound, row % 2 == 0);
+                    if (node instanceof NodePlanebound planebound) {
+                        assertTrue(planebound.getRoguePlanebound().minRow()
+                            <= path.countPlaneboundRowsUpTo(row),
+                            "Planebound placed before its minimum combat row");
+                    }
                 }
             }
 
@@ -83,7 +88,7 @@ public class RoguePathGeneratorTest {
     @Test
     public void fillsMissingSideNodes() {
         RoguePlanebound planebound = new RoguePlanebound("Plane", "Boss", "boss.dck", 1,
-            RoguePlaneboundType.BOSS);
+            RoguePlaneboundType.BOSS, 0);
         NodePlanebound boss = new NodePlanebound(planebound);
         List<RoguePathNode> nodes = new ArrayList<>();
         nodes.add(boss);
@@ -149,7 +154,8 @@ public class RoguePathGeneratorTest {
                 : type == RoguePlaneboundType.ELITE ? 3 : 1;
             for (int i = 0; i < count; i++) {
                 String name = type.name() + i;
-                planebounds.add(new RoguePlanebound(name, name, name + ".dck", 1, type));
+                int minRow = type == RoguePlaneboundType.NORMAL && i < 5 ? 3 : 0;
+                planebounds.add(new RoguePlanebound(name, name, name + ".dck", 1, type, minRow));
             }
         }
         return planebounds;

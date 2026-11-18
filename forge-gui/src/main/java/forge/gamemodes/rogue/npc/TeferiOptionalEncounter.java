@@ -35,7 +35,7 @@ public enum TeferiOptionalEncounter implements NPCOptionalEncounter {
         public List<String> getStoryTextChunks() {
             return ImmutableList.of(
                 "Back already? I meant...keep it up, Commander. You're getting stronger every second that I am watching you.",
-                "Oh, and did you know that I try to keep track of your memories ad findings during your Runs?\n"
+                "Oh, and did you know that I try to keep track of your memories and findings during your Runs?\n"
                     + "Open the 'Codex' to view and reset your overall game progress, stats, unlocked cards and tutorials.\n"
                     + "View all your past Runs and Rogue Decks in the 'History'."
             );

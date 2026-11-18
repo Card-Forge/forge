@@ -438,20 +438,21 @@ public enum EventEffect implements RogueEffect {
 
         @Override
         public void applyEffect(RogueRun run, EffectResultContext ctx) {
-            if (run.getSelectableDeckCards(getDeckCardFilter()).size() < 9) {
-                return;
-            }
             removeCardsFromDeck(run, ctx, getDeckCardFilter(), 9);
             addCardsToDeck(run, ctx, getDBCardsFilter(), 1, 9, ImmutableList.of());
         }
 
         @Override
         public boolean isChoiceAvailable(RogueRun run) {
-            return run.canAddCardToDeck(RogueConfig.getCard("Nazgûl", null, null));
+            return run.getSelectableDeckCards(getDeckCardFilter()).size() >= 9
+                && run.canAddCardToDeck(RogueConfig.getCard("Nazgûl", null, null));
         }
 
         @Override
         public String getUnavailableReason(RogueRun run) {
+            if (run.getSelectableDeckCards(getDeckCardFilter()).size() < 9) {
+                return "You need at least 9 creatures in your deck.";
+            }
             return isChoiceAvailable(run) ? null : "Your commander or deck does not allow Nazgûl.";
         }
     },

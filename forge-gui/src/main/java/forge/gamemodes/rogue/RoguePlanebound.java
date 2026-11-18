@@ -12,14 +12,16 @@ public class RoguePlanebound {
     private final String deckPath;
     private final int avatarIndex;
     private final RoguePlaneboundType type;
+    private final int minRow;
 
     public RoguePlanebound(String planeName, String planeboundName, String deckPath,
-                           int avatarIndex, RoguePlaneboundType type) {
+                           int avatarIndex, RoguePlaneboundType type, int minRow) {
         this.planeName = planeName;
         this.planeboundName = planeboundName;
         this.deckPath = deckPath;
         this.avatarIndex = avatarIndex;
         this.type = type;
+        this.minRow = minRow;
     }
 
     public String planeName() {
@@ -40,6 +42,11 @@ public class RoguePlanebound {
 
     public RoguePlaneboundType type() {
         return type;
+    }
+
+    /** Minimum one-based Planebound row; zero means unrestricted. */
+    public int minRow() {
+        return minRow;
     }
 
     @Override

@@ -19,7 +19,6 @@ public class RoguePathGenerator {
     }
 
 
-    private static int normalPlaneboundIndex;
     private static int currentRowIndex;
 
   /**
@@ -27,8 +26,7 @@ public class RoguePathGenerator {
     */
     public static void generateRandomPath(RogueRun run) {
         currentRowIndex = 0;
-        normalPlaneboundIndex = 0;
-        int elitePlaneboundIndex = 0;
+        int planeboundRow = 1;
         int eventIndex = 0;
         int lootIndex = 0;
 
@@ -47,10 +45,7 @@ public class RoguePathGenerator {
         List<RoguePlanebound> bossPlanebounds = getPlaneboundsOfType(
             availablePlanebounds, RoguePlaneboundType.BOSS);
 
-        // Validate we have enough unique planebounds of each type
-        validateSize(16, normalPlanebounds.size());
-        validateSize(3, elitePlanebounds.size());
-        validateSize(1, bossPlanebounds.size());
+        // Validate Event and Chest content; Planebound availability is checked at selection.
         validateSize(7, events.size());
         validateSize(10, chestEffect.size());
 
@@ -65,7 +60,7 @@ public class RoguePathGenerator {
         List<RoguePathNode> nodes = new ArrayList<>();
 
         // Row 0: NORMAL planes
-        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 4));
+        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 4), planeboundRow++);
 
         // Row 1: Special Nodes (with higher chance for Event)
         List<RoguePathNode> specialNodes = new ArrayList<>();
@@ -80,7 +75,7 @@ public class RoguePathGenerator {
         addSpecialNodesRow(nodes, specialNodes, createRandomNodeCount(2, 4));
 
         // Row 2: NORMAL planes
-        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 4));
+        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 4), planeboundRow++);
 
         // Row 3: Special Nodes (with higher chance for Sanctum)
         specialNodes = new ArrayList<>();
@@ -96,14 +91,15 @@ public class RoguePathGenerator {
 
         // Row 4: NORMAL / ELITE planes
         List<RoguePlanebound> planeboundNodes = new ArrayList<>();
-        planeboundNodes.add(normalPlanebounds.get(normalPlaneboundIndex++));
-        planeboundNodes.add(elitePlanebounds.get(elitePlaneboundIndex++));
-        planeboundNodes.add(normalPlanebounds.get(normalPlaneboundIndex++));
+        planeboundNodes.add(selectPlanebound(normalPlanebounds, RoguePlaneboundType.NORMAL, planeboundRow));
+        planeboundNodes.add(selectPlanebound(elitePlanebounds, RoguePlaneboundType.ELITE, planeboundRow));
+        planeboundNodes.add(selectPlanebound(normalPlanebounds, RoguePlaneboundType.NORMAL, planeboundRow));
 
         if (MyRandom.getRandom().nextBoolean()) {
-            planeboundNodes.add(elitePlanebounds.get(elitePlaneboundIndex++));
+            planeboundNodes.add(selectPlanebound(elitePlanebounds, RoguePlaneboundType.ELITE, planeboundRow));
         }
         addMixedPlanebundRow(nodes, planeboundNodes);
+        planeboundRow++;
 
         // Row 5: Special Nodes (with higher chance for Bazaar)
         specialNodes = new ArrayList<>();
@@ -122,13 +118,14 @@ public class RoguePathGenerator {
 
         int randomPlanecount  = createRandomNodeCount(2, 3);
         for  (int i = 0; i < randomPlanecount; i++) {
-            planeboundNodes.add(normalPlanebounds.get(normalPlaneboundIndex++));
+            planeboundNodes.add(selectPlanebound(normalPlanebounds, RoguePlaneboundType.NORMAL, planeboundRow));
         }
 
         if (MyRandom.getRandom().nextBoolean()) {
-            planeboundNodes.add(elitePlanebounds.get(elitePlaneboundIndex));
+            planeboundNodes.add(selectPlanebound(elitePlanebounds, RoguePlaneboundType.ELITE, planeboundRow));
         }
         addMixedPlanebundRow(nodes, planeboundNodes);
+        planeboundRow++;
 
         // Row 7: Special Nodes (with higher chance for Event)
         specialNodes = new ArrayList<>();
@@ -143,7 +140,7 @@ public class RoguePathGenerator {
         addSpecialNodesRow(nodes, specialNodes, createRandomNodeCount(2, 4));
 
         // Row 8: NORMAL planes
-        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 3));
+        addNormalPlanebundRow(nodes, normalPlanebounds, createRandomNodeCount(2, 3), planeboundRow++);
 
         // Row 9: Special Nodes (no higher chance for any type)
         specialNodes = new ArrayList<>();
@@ -157,7 +154,7 @@ public class RoguePathGenerator {
         addSpecialNodesRow(nodes, specialNodes, createRandomNodeCount(2, 3));
 
         // Row 10: BOSS plane
-        addPlaneboundNode(nodes, bossPlanebounds.get(0), 0);
+        addPlaneboundNode(nodes, selectPlanebound(bossPlanebounds, RoguePlaneboundType.BOSS, planeboundRow), 0);
 
         // Create path and set on run
         run.setPath(new RoguePath(nodes));
@@ -220,14 +217,26 @@ public class RoguePathGenerator {
     private static void validateSize(int required, int size) {
         if (size < required) {
             throw new IllegalStateException(
-                "Not enough available node content for Path (Planebounds / Events / Chest Loot).");
+                "Not enough available node content for Path (Events / Chest Loot).");
         }
     }
 
+    private static RoguePlanebound selectPlanebound(List<RoguePlanebound> planebounds,
+        RoguePlaneboundType type, int planeboundRow) {
+        for (int i = 0; i < planebounds.size(); i++) {
+            if (planebounds.get(i).minRow() <= planeboundRow) {
+                return planebounds.remove(i);
+            }
+        }
+        throw new IllegalStateException("No eligible " + type
+            + " Planebound available for Planebound row " + planeboundRow + ".");
+    }
+
     private static void addNormalPlanebundRow(List<RoguePathNode> allNodes,
-        List<RoguePlanebound> planebounds, int columnCount) {
+        List<RoguePlanebound> planebounds, int columnCount, int planeboundRow) {
         for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-            addPlaneboundNode(allNodes, planebounds.get(normalPlaneboundIndex++), columnIndex);
+            addPlaneboundNode(allNodes,
+                selectPlanebound(planebounds, RoguePlaneboundType.NORMAL, planeboundRow), columnIndex);
         }
         currentRowIndex++;
     }

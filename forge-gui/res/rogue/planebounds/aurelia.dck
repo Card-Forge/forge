@@ -3,6 +3,7 @@ name=Aurelia, the Warleader
 planeName=Bloodhill Bastion
 avatarIndex=40
 type=0
+minRow=3
 [Commander]
 1 Aurelia, the Warleader|FDN|1
 [Main]

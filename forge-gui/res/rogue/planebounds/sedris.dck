@@ -3,6 +3,7 @@ name=Sedris, the Traitor King
 planeName=Grixis
 avatarIndex=62
 type=0
+minRow=3
 [Commander]
 1 Sedris, the Traitor King|2X2|1
 [Main]
