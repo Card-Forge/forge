@@ -73,18 +73,28 @@ public final class CombatExplainer {
     }
 
     /**
-     * Explain why {@link CombatUtil#validateAttackers(Combat)} rejects the declared attack.
+     * Explain why {@link CombatUtil#validateAttackers(Combat)} rejects the declared attack, as far as the declarer can fix it.
+     * <p>
+     * Under shared team turns each teammate only declares their own creatures (CR 805.10b). When no change to the
+     * declarer's own creatures makes the attack legal, nothing is explained: the game checks the team's attack once
+     * everyone has declared and asks each teammate again.
      *
-     * @return the reasons, or an empty list if the attack is valid
+     * @return the reasons, or an empty list if the attack is valid or the declarer alone can't make it legal
      */
-    public static List<String> explainInvalidAttack(final Combat combat) {
-        if (CombatUtil.validateAttackers(combat)) {
+    public static List<String> explainInvalidAttack(final Combat combat, final Player declarer) {
+        final AttackConstraints constraints = combat.getAttackConstraints();
+        final Map<Card, GameEntity> declared = combat.getAttackersAndDefenders();
+        final Pair<Map<Card, GameEntity>, Integer> best = constraints.getLegalAttackers();
+        if (isLegalAttack(constraints, declared, best.getRight())) {
+            return Collections.emptyList();
+        }
+        final Map<Card, GameEntity> ownBest = withOwnAttack(declared, best.getLeft(), declarer);
+        final List<Map<Card, GameEntity>> reachable = getReachableLegalAttacks(combat, declarer, declared, ownBest, best.getRight());
+        if (reachable.isEmpty()) {
             return Collections.emptyList();
         }
         final Localizer loc = Localizer.getInstance();
         final List<String> result = Lists.newArrayList();
-        final AttackConstraints constraints = combat.getAttackConstraints();
-        final Map<Card, GameEntity> declared = combat.getAttackersAndDefenders();
 
         explainGlobalRestrictions(combat, constraints.getGlobalRestrictions(), declared, result);
 
@@ -106,7 +116,8 @@ public final class CombatExplainer {
         }
 
         if (result.isEmpty()) {
-            explainRequirements(constraints, declared, constraints.getLegalAttackers().getLeft(), result);
+            // compare with a legal attack the declarer can reach, so the teammates' creatures are never blamed
+            explainRequirements(constraints, declared, reachable.contains(ownBest) ? ownBest : reachable.get(0), result);
         }
         if (result.isEmpty()) {
             result.add(loc.getMessage("lblWhyAttackRequirementsGeneric"));
@@ -117,26 +128,48 @@ public final class CombatExplainer {
     private static final int MAX_SUGGESTIONS = 3;
 
     /**
-     * Describe a few legal attacks close to the declared one: without one of the declared attackers,
-     * with additional attackers, and the attack fulfilling the most requirements.
+     * Describe a few legal attacks close to the declared one that the declarer can make with their own creatures:
+     * without one of their attackers, with more of their creatures attacking, and the attack fulfilling the most requirements.
      * Only meant to be shown when the player asks for it.
      */
-    public static String suggestLegalAttacks(final Combat combat) {
+    public static String suggestLegalAttacks(final Combat combat, final Player declarer) {
         final Localizer loc = Localizer.getInstance();
         final AttackConstraints constraints = combat.getAttackConstraints();
         final Map<Card, GameEntity> declared = combat.getAttackersAndDefenders();
         final Pair<Map<Card, GameEntity>, Integer> best = constraints.getLegalAttackers();
-        final int maxViolations = best.getRight();
+        final Map<Card, GameEntity> ownBest = withOwnAttack(declared, best.getLeft(), declarer);
 
+        final List<Map<Card, GameEntity>> reachable = getReachableLegalAttacks(combat, declarer, declared, ownBest, best.getRight());
+        final List<Map<Card, GameEntity>> legal = Lists.newArrayList(reachable.subList(0, Math.min(MAX_SUGGESTIONS, reachable.size())));
+        // always include the attack fulfilling the most requirements
+        if (reachable.contains(ownBest) && !legal.contains(ownBest)) {
+            legal.set(legal.size() - 1, ownBest);
+        }
+
+        final StringBuilder sb = new StringBuilder(loc.getMessage("lblWhyAttackLegalOptions"));
+        for (final Map<Card, GameEntity> attack : legal) {
+            sb.append("\n- ").append(describeAttack(attack));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @return the legal attacks that differ from the declared one only in the declarer's own creatures, closest first
+     */
+    private static List<Map<Card, GameEntity>> getReachableLegalAttacks(final Combat combat, final Player declarer,
+            final Map<Card, GameEntity> declared, final Map<Card, GameEntity> ownBest, final int maxViolations) {
+        final AttackConstraints constraints = combat.getAttackConstraints();
         final List<Map<Card, GameEntity>> candidates = Lists.newArrayList();
         // without one of the declared attackers
         for (final Card attacker : declared.keySet()) {
-            final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
-            attack.remove(attacker);
-            candidates.add(attack);
+            if (attacker.getController().equals(declarer)) {
+                final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
+                attack.remove(attacker);
+                candidates.add(attack);
+            }
         }
         // with one more attacker
-        final Map<Card, GameEntity> additional = getAdditionalAttackers(combat, declared, best.getLeft());
+        final Map<Card, GameEntity> additional = getAdditionalAttackers(combat, declarer, declared, ownBest);
         for (final Map.Entry<Card, GameEntity> e : additional.entrySet()) {
             final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
             attack.put(e.getKey(), e.getValue());
@@ -151,26 +184,32 @@ public final class CombatExplainer {
                 break;
             }
         }
+        candidates.add(ownBest);
 
-        final List<Map<Card, GameEntity>> legal = candidates.stream()
+        return candidates.stream()
                 .filter(attack -> isLegalAttack(constraints, attack, maxViolations))
                 .distinct()
                 .sorted(Comparator.comparingInt(attack -> countDifferences(declared, attack)))
-                .limit(MAX_SUGGESTIONS)
-                .collect(Collectors.toCollection(Lists::newArrayList));
-        // always include the attack fulfilling the most requirements
-        if (!legal.contains(best.getLeft())) {
-            if (legal.size() == MAX_SUGGESTIONS) {
-                legal.remove(MAX_SUGGESTIONS - 1);
-            }
-            legal.add(best.getLeft());
-        }
+                .collect(Collectors.toList());
+    }
 
-        final StringBuilder sb = new StringBuilder(loc.getMessage("lblWhyAttackLegalOptions"));
-        for (final Map<Card, GameEntity> attack : legal) {
-            sb.append("\n- ").append(describeAttack(attack));
-        }
-        return sb.toString();
+    /**
+     * @return the declared attack with the declarer's own creatures attacking as in attack instead
+     */
+    private static Map<Card, GameEntity> withOwnAttack(final Map<Card, GameEntity> declared, final Map<Card, GameEntity> attack,
+            final Player declarer) {
+        final Map<Card, GameEntity> result = new LinkedHashMap<>();
+        declared.forEach((c, defender) -> {
+            if (!c.getController().equals(declarer)) {
+                result.put(c, defender);
+            }
+        });
+        attack.forEach((c, defender) -> {
+            if (c.getController().equals(declarer)) {
+                result.put(c, defender);
+            }
+        });
+        return result;
     }
 
     private static boolean isLegalAttack(final AttackConstraints constraints, final Map<Card, GameEntity> attack, final int maxViolations) {
@@ -181,11 +220,11 @@ public final class CombatExplainer {
     /**
      * @return the creatures that could additionally attack without paying a cost, mapped to the defender they'd attack
      */
-    private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Map<Card, GameEntity> declared,
-            final Map<Card, GameEntity> best) {
+    private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Player declarer,
+            final Map<Card, GameEntity> declared, final Map<Card, GameEntity> best) {
         final Map<Card, GameEntity> result = new LinkedHashMap<>();
-        // CR 805.10b: under shared team turns the teammates' creatures can attack too
-        for (final Card c : combat.getAttackingPlayer().getSharedTeam().getCreaturesInPlay()) {
+        // only the declarer's own creatures, the teammates declare theirs (CR 805.10b)
+        for (final Card c : declarer.getCreaturesInPlay()) {
             if (declared.containsKey(c) || !combat.getAttackConstraints().getRestrictions().containsKey(c)) {
                 continue;
             }
@@ -255,7 +294,7 @@ public final class CombatExplainer {
     }
 
     /**
-     * Only explain the requirements the declared attack violates while the best legal attack doesn't,
+     * Only explain the requirements the declared attack violates while the given legal attack doesn't,
      * so requirements which can't be fulfilled anyway aren't reported.
      */
     private static void explainRequirements(final AttackConstraints constraints,

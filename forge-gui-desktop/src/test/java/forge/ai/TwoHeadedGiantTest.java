@@ -360,47 +360,52 @@ public class TwoHeadedGiantTest extends AITest {
         Combat combat = new Combat(a1);
         combat.initConstraints();
         combat.addAttacker(bear2, b1);
-        List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        List<String> reasons = CombatExplainer.explainInvalidAttack(combat, a1);
         assertEquals(reasons.size(), 1, reasons.toString());
         assertTrue(reasons.get(0).contains("Trove of Temptation"), reasons.get(0));
     }
 
-    /** Fails if the first teammate's attack prompt checks the team's attack before the second teammate has declared (CR 805.10b). */
+    /**
+     * Walks through both teammates declaring in turn, as the game asks them (CR 805.10b). A teammate's OK may only be
+     * refused for something they can fix with their own creatures, since they can't select their teammate's.
+     */
     @Test
-    public void onlyTheLastTeammateToDeclareCompletesTheAttack() {
+    public void eachTeammateIsOnlyHeldToTheirOwnCreatures() {
         Game game = twoHeadedGiant();
         Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1);
-        addCard("Grizzly Bears", a1).setSickness(false);
-        Card bear2 = addCard("Grizzly Bears", a2);
-        bear2.setSickness(false);
-        assertFalse(CombatUtil.isLastAttackDeclarer(a1), "the teammate still declares after the first player");
-        assertTrue(CombatUtil.isLastAttackDeclarer(a2));
-
-        // a teammate without a creature that can attack isn't asked to declare
-        bear2.tap(true, null, null);
-        assertTrue(CombatUtil.isLastAttackDeclarer(a1));
-
-        Game ordinary = teamGame(false);
-        addCard("Grizzly Bears", ordinary.getPlayers().get(0)).setSickness(false);
-        addCard("Grizzly Bears", ordinary.getPlayers().get(1)).setSickness(false);
-        assertTrue(CombatUtil.isLastAttackDeclarer(ordinary.getPlayers().get(0)), "an ordinary team game has no shared attack");
-    }
-
-    /** Fails if the legal attacks suggested to a player leave out their teammate's creatures (CR 805.10b). */
-    @Test
-    public void theSuggestedAttacksIncludeTheTeammatesCreatures() {
-        Game game = twoHeadedGiant();
-        Player a1 = game.getPlayers().get(0), a2 = game.getPlayers().get(1), b1 = game.getPlayers().get(2);
-        Card bear = addCard("Grizzly Bears", a1), juggernaut = addCard("Juggernaut", a2);
-        bear.setSickness(false);
-        juggernaut.setSickness(false);
+        Player b1 = game.getPlayers().get(2), b2 = game.getPlayers().get(3);
+        Card goaded = addCard("Grizzly Bears", a1), spare = addCard("Grizzly Bears", a1);
+        Card bear = addCard("Grizzly Bears", a2), juggernaut = addCard("Juggernaut", a2);
+        for (Card c : List.of(goaded, spare, bear, juggernaut)) {
+            c.setSickness(false);
+        }
+        goaded.addGoad(game.getNextTimestamp(), b1);
         game.getAction().checkStaticAbilities();
-
         Combat combat = new Combat(a1);
         combat.initConstraints();
+
+        // first round: a1 leaves the goaded creature home, while a2's Juggernaut isn't declared yet either
+        assertTrue(CombatExplainer.explainInvalidAttack(combat, a1).isEmpty(), "a1 is held to a2's Juggernaut");
         combat.addAttacker(bear, b1);
-        String suggestions = CombatExplainer.suggestLegalAttacks(combat);
-        assertTrue(suggestions.contains(bear + " attacking " + b1 + ", " + juggernaut + " attacking "), suggestions);
+        combat.addAttacker(juggernaut, b1);
+        assertFalse(CombatUtil.validateAttackers(combat));
+        assertTrue(CombatExplainer.explainInvalidAttack(combat, a2).isEmpty(), "a2 is held to a1's goaded creature");
+
+        // the game asks again: now a2 has declared, a1 is held to their own goaded creature
+        List<String> reasons = CombatExplainer.explainInvalidAttack(combat, a1);
+        assertEquals(reasons.size(), 1, reasons.toString());
+        assertTrue(reasons.get(0).contains(goaded.toString()), reasons.get(0));
+        combat.addAttacker(goaded, b2);
+        assertTrue(CombatUtil.validateAttackers(combat));
+
+        // a2 leaving Juggernaut home is theirs to fix, and only their own creatures are suggested
+        combat.removeFromCombat(juggernaut);
+        reasons = CombatExplainer.explainInvalidAttack(combat, a2);
+        assertEquals(reasons.size(), 1, reasons.toString());
+        assertTrue(reasons.get(0).contains(juggernaut.toString()), reasons.get(0));
+        String suggestions = CombatExplainer.suggestLegalAttacks(combat, a2);
+        assertTrue(suggestions.contains(juggernaut + " attacking "), suggestions);
+        assertFalse(suggestions.contains(spare.toString()), suggestions);
     }
 
     /** Fails if a lone blocker on a menace creature is rejected while the teammate can still add the second blocker (CR 805.10d). */

@@ -81,7 +81,7 @@ public class CombatExplainerTest extends SimulationTest {
         AssertJUnit.assertNull(CombatExplainer.whyCantAttack(bear, defending));
         combat.addAttacker(bear, defending);
         AssertJUnit.assertTrue(CombatUtil.validateAttackers(combat));
-        AssertJUnit.assertTrue(CombatExplainer.explainInvalidAttack(combat).isEmpty());
+        AssertJUnit.assertTrue(CombatExplainer.explainInvalidAttack(combat, attacking).isEmpty());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addAttacker(bear2, defending);
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        List<String> reasons = CombatExplainer.explainInvalidAttack(combat, attacking);
         assertContains(reasons.get(0), "1", "Silent Arbiter", "2");
     }
 
@@ -108,11 +108,11 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addAttacker(bear, defending);
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        List<String> reasons = CombatExplainer.explainInvalidAttack(combat, attacking);
         AssertJUnit.assertEquals(reasons.toString(), 1, reasons.size());
         assertContains(reasons.get(0), juggernaut.toString(), "attacks each combat if able");
         // the closest legal attack suggested on demand adds the Juggernaut
-        assertContains(CombatExplainer.suggestLegalAttacks(combat),
+        assertContains(CombatExplainer.suggestLegalAttacks(combat, attacking),
                 bear + " attacking " + defending + ", " + juggernaut + " attacking " + defending);
     }
 
@@ -124,7 +124,7 @@ public class CombatExplainerTest extends SimulationTest {
         Combat combat = startCombat();
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat)), bear.toString(), "goaded");
+        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat, attacking)), bear.toString(), "goaded");
     }
 
     // CR 508.1d: nobody is required to pay an attack cost, so a goaded creature may attack its goader instead
@@ -157,9 +157,9 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addAttacker(mogg, defending);
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat)), mogg.toString(), "can't attack or block alone.");
+        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat, attacking)), mogg.toString(), "can't attack or block alone.");
         // both not attacking and attacking together with another creature are suggested
-        assertContains(CombatExplainer.suggestLegalAttacks(combat), "Not attacking at all",
+        assertContains(CombatExplainer.suggestLegalAttacks(combat, attacking), "Not attacking at all",
                 mogg + " attacking " + defending + ", " + bear + " attacking " + defending);
     }
 
@@ -192,10 +192,10 @@ public class CombatExplainerTest extends SimulationTest {
             combat.addAttacker(t, designated);
         }
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        String explanation = String.join("\n", CombatExplainer.explainInvalidAttack(combat));
+        String explanation = String.join("\n", CombatExplainer.explainInvalidAttack(combat, attacking));
         GameEntity otherDesignated = StaticAbilityMustAttack.entitiesMustAttack(otherToken).get(0);
         assertContains(explanation, otherToken + " must attack " + otherDesignated + " if able", "Furygale Flocking");
         AssertJUnit.assertFalse(explanation, explanation.contains(token + " must attack"));
-        assertContains(CombatExplainer.suggestLegalAttacks(combat), otherToken + " attacking " + otherDesignated);
+        assertContains(CombatExplainer.suggestLegalAttacks(combat, attacking), otherToken + " attacking " + otherDesignated);
     }
 }

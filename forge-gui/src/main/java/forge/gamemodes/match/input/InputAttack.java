@@ -105,9 +105,8 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onOk() {
-        // a teammate still to declare can complete the attack, the game checks it once everyone has declared
-        final List<String> invalidReasons = CombatUtil.isLastAttackDeclarer(playerAttacks)
-                ? CombatExplainer.explainInvalidAttack(combat) : List.of();
+        // only refused when this player can make the attack legal with their own creatures (CR 805.10b)
+        final List<String> invalidReasons = CombatExplainer.explainInvalidAttack(combat, playerAttacks);
         if (!invalidReasons.isEmpty()) {
             final String attackErrors = String.join("\n", invalidReasons);
             //must run in game thread to prevent problems for mobile game
@@ -117,7 +116,7 @@ public class InputAttack extends InputSyncronizedBase {
                 final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalAttacks"));
                 // only suggest legal attacks when asked for, closing the dialog counts as OK
                 if (getController().getGui().showOptionDialog(attackErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
-                    getController().getGui().message(CombatExplainer.suggestLegalAttacks(combat), title);
+                    getController().getGui().message(CombatExplainer.suggestLegalAttacks(combat, playerAttacks), title);
                 }
             });
             return;
