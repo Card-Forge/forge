@@ -5,11 +5,8 @@ PT:12/12
 K:Trample
 K:Indestructible
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy all artifacts and enchantments. For each player who controlled a permanent destroyed this way, search your library for a basic land card or a Desert card. Put those cards onto the battlefield tapped, then shuffle.
-SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBRepeat
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRemember | SubAbility$ DBSearch
-SVar:DBRemember:DB$ Bookkeeping | RememberObjects$ RememberedPlayer | ConditionCheckSVar$ X
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic,Desert | ChangeTypeDesc$ basic land or Desert | Tapped$ True | ChangeNum$ Y | SubAbility$ DBCleanupo
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBSearch
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic,Desert | ChangeTypeDesc$ basic land or Desert | Tapped$ True | ChangeNum$ X | SubAbility$ DBCleanupo
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:RememberedLKI$Valid Card.RememberedPlayerCtrl
-SVar:Y:Remembered$Valid Player
+SVar:X:PlayerCountRememberedController$Amount
 Oracle:When this creature enters, destroy all artifacts and enchantments. For each player who controlled a permanent destroyed this way, search your library for a basic land card or a Desert card. Put those cards onto the battlefield tapped, then shuffle.
