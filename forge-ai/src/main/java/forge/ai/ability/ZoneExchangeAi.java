@@ -38,8 +38,10 @@ public class ZoneExchangeAi extends SpellAbilityAi {
         if (object1 == null || object2 == null || !object1.isInZone(zone1) || !object1.getOwner().equals(ai)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        if (type.equals("Aura")) {
-            Card c = object1.getEnchantingCard();
+        // 701.12e: mirrors the legality check ZoneExchangeEffect makes on resolution, so the AI
+        // doesn't activate an exchange (Aura swap, Equipment swap, ...) it knows will do nothing.
+        if (type != null && object1.getAttachedTo() != null) {
+            Card c = object1.getAttachedTo();
             if (!c.canBeAttached(object2, sa)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
