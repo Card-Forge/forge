@@ -607,6 +607,37 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Ancient Dingus - Wishing for a random card from a stack of "visible unsleeved cards" probably has to be adapted to just wishing for a random sideboard card.
 1. (Uk) Colorless Ultimatum - No idea if multiple generic costs works, but could be converted to {4} if not.
 1. (Uk) The Goblin Mastermind - Gives all your cards Kindred Goblin?
+1. (Uk) Tarelily, Lovestruck Archer
+1. (Uk) The Swamp Kitten
+1. (Uk) Bobby, Another Dwarf
+1. (Uk) Emerin, Shivan Angel
+1. (Uk) CGI Fight Sequence
+1. (Uk) The Countess of Counterspells
+1. (Uk) The No Mana Bard
+1. (Uk) Throw Shade
+1. (Uk) Red Smothering Tithe
+1. (Uk) Strixhaven Film Student
+1. (Uk) Raccoon
+1. (Uk) The Lorwyn Lizard
+1. (Uk) The Queen of Wolves
+1. (Uk) Shroomsday, Feast Spoiler
+1. (Uk) The Radioactive Gravymaker
+1. (Uk) The King of Grixis - Cares about cards that are exactly blue, black, and red
+1. (Uk) Critter, Behind the Camera
+1. (Uk) Ham Sandwich
+1. (Uk) Alena, Frontline Rush
+1. (Uk) Halana, Covering Fire
+1. (Uk) Ashiok, Genderfear
+1. (Uk) Felothar, Rights and Wrongs 13
+1. (Uk) King Kynaios of Meletis
+1. (Uk) King Tiro of Meletis
+1. (Uk) Niko, Spark of Victory
+1. (Uk) Rocco, Snack Supplier
+1. (Uk) Segante, Doing Crimes
+1. (Uk) Xantcha, Contains Multitudes - Assuming that you can only choose creature names.
+1. (Uk) Yahenni, Slayer
+1. (Uk) Yuma, Plant Parent
+1. (Uk) Zinnia, Born for the Stage
 
 #### Black Lotus Lounge Planes
 (Not mechanically distinct, but a huge number of these have landed in tier 1. They aren't all on Scryfall.)
@@ -759,7 +790,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) You Encounter a Beholder! - (Phenomenon) "Roll with advantage". Like Krark's Other Thumb but only affecting a single roll. Might be possible currently?
 1. (Uk) Gravitational Capture - (Phenomenon) Unsure if we can have each player dig for something and have it enter under the control of the next player in a direction.
 1. (Uk) Bagel Valley - (Plane) Defines rules for everything counters in reminder text, unlike Omo, who applies their effects through card text. Could apply the static effect to the chosen permanents separately? 
-
+1. (Uk) Split into Three Parts - Not sure if creating a token in exile and casting it later works or not.
+1. (Uk) Robby, Another Dwarf - Grants squad and tokens created this way aren't legendary.
+1. (Uk) Niv-Mizzet's Diary - Cast a spell but it can't cause you to take extra turns.
+1. (UK) I'm Going On An Adventure! - Exile creature and treat it as being on a Adventure.
+1. (Uk) Proud Parent - Grants offspring and tokens created this way aren't legendary.
+1. (Uk) The Charitable Kids - Permantly grant ownership of a card from your sideboard to the opponent. (You lose the card forever). Remove from match, almost gets there.
+1. (Uk) The Rhystic Friends - Triggers when a optional cost of exactly {1} is not paid.
+1. (Uk) The Tale of Jimothy - The token its creates is treated as your commander. Unsure if commander damage caries over if you make a new one.
+1. (Uk) The Kinnan Hirer - activate a specific ability of each specific named card on the battlefield.
 
 #### Unique but Simple Keywords
 (These have custom keywords or named mechanics that could probably be reproduced within a card script. See "Keyword or Mechanic Recreated via Card Script", Tier 0.5)
@@ -889,6 +928,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Sad Creaturez - Shared feelings
 1. (Uk) Goldengrave - (Plane) Join a Tarkir clan for as long as you're on a plane.
 1. (Uk) Strixhaven Rivalry - (Plane) Join a Strixhaven college for as long as you're on a plane. College colors matter.
+1. (Uk) Ms. Bumbleflower, No Longer Kind - You become the Head Chef which is tracked like the monarch.
 
 #### Maintaining lists
 (Similar to noting things, but not just card IDs)
@@ -921,6 +961,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) All-Star Kicker - Via "Pass the Ball". Also Assist Kicker.
 1. (Uk) Trash Panda - Also "Opponent dredge".
 1. (Uk) X, Mystery Racer
+2. (UK) Wheel of Not Ideal
 
 #### Other Un-Games
 (It would be fun to include concurrent games running in other tabs. Aside from that, seeing only the current game misses the spirit of the card but technically works fine, and these would otherwise be in Tier 6 or 7.)
@@ -958,6 +999,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Across the Multiverse - Only includes the main set, no bonus sheets.
 1. (Uk) Must Be Knights - Specifically printings from Enchanting Tales (WOT).
 1. (Uk) Secret Lair - (Plane) - "Shiny" category, which is a set filter plus foil-matters. Not to be confused with "The Secret Lair", tier 2.
+1. (Uk) The Generational Historian - "Choose a year your deck can contain only cards released in that year."
 1. (See also: "War of the Spark", tier 0)
 1. (See also: "Apocalypse Chime" and "City in a Bottle", Black Border)
 1. (See also: City in a Bottle Effect, tier 1)
@@ -984,6 +1026,12 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Knight of Land Drops - Partner with any legendary knight.
 1. (P) Mothers Yamazaki - Might mostly work if just written as "Partners with Mothers Yamazaki", though will need a rule bend to allow 2 copies in singleton formats.
 1. (HTR) Ormacar, Relic Wraith - Partners with a legendary noncreature artifact.
+1. (Uk) Chandra, Pride of Avishkar - Partner with any Nissa
+1. (Uk) Nissa, Pride of Zendikar - Partner with any Chandra
+1. (Uk) Huatli, Inventor's Inspiration - Partner with any Saheeli
+1. (Uk) Saheeli, Poet's Muse - Partner with any Huatli
+1. (Uk) Ral, Smitten with Order - Partner with any Tomik
+1. (Uk) Tomik, Devoted to Chaos - Partner with any Ral
 
 ##### Spell Commander
 (From the Unknown Event in Barcelona, 2023. These are meant to use the ruling that mono-color legendaries all have Partner in Limited Commander events, which isn't currently implemented. Also they all have normalized name collisions.)
@@ -1005,9 +1053,16 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 
 #### Mana from Particular Source
 (Similar to snow costs)
-1. (P) Experiment Five - Mana from a source that could produce two or more colors of mana. Use some production awareness like Exotic Orchard?
 1. (P) Keeper of the Crown // Coronation of the Wilds - {L}, one mana from a legendary source.
 1. (P) Yawgmoth's Day Planner - Mana produced by abilities that caused you to lose life.
+
+### Rainbow Mana
+(Mana from a source that could produce two or more colors of mana. Use some production awareness like Exotic Orchard?)
+1. (P) Experiment Five
+1. (Uk) Gigi Wellplayed
+1. (Uk) The Alien Spellslayer
+1. (Uk) The Sayer of Don't
+1. (Uk) The Stylish Spellslayer
 
 #### Unknown Event Team
 (During the Philadelphia 2023 Unknown Event, players were split into two teams. These cards changed behavior based on which team you were on. Could be imitated by having the player pick a team once then retain that for all cards.) (They did it again in 2025.)
@@ -1032,6 +1087,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Pledge Mechanic
 1. (Uk) Guildmark
 1. (Uk) Guilded Lotus
+1. (Uk) The Roaming Guild Pack - Doesn't have pledge but would interact with them.
 
 #### Poison Tolerance
 1. (Uk) Rosewater's Nemesis
@@ -1162,6 +1218,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) (Uk) The Colossal Dreadmaw - Specifically as Colossal Dreadmaw.
 1. (Uk) Elonc, Perfect Clone - As a copy of your commander. 
 1. (Uk) Fourth Stage of Magic Design - Same as Richard Garfield but only once per turn. Unclear if they share a list of chosen cards.
+1. (Uk) The Wonderous Architect - treats a basic land as one of the Urza lands.
 
 #### Super Haste
 (Essentially a Pact, but as a keyword and the cost can be paid any time on the next turn. Unclear how this interacts with cost adjustments. FAQ also adamant that Super haste is not a form of Haste.)
@@ -1180,6 +1237,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Grusilda, Monster Masher - Merges two dead creatures into one living one.
 1. It Came from Planet Glurg - Becomes a copy of X different creatures.
 1. (Uk) Monster Mash-Up - Grusilda as a sorcery.
+1. (Uk) The Meld Hound - Grusilda merges are creature while it's still on the stack, possibly more than 2 if you have multiple triggers. Also arbitrary names
 
 #### Multi-Split Cards
 (Most split card logic currently assumes only two parts)
@@ -1264,6 +1322,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Valko Indorian, Researcher
 1. (Uk) The Paradise Bird
 1. (Uk) Mister Cheddar, Cheese Sliver - Exempts Slivers from singleton rules. Also "Ratmanship" keyword.
+1. (Uk) The Mystery Booster - Also Set Matters and Playtest Matters, tier 2.
 1. (See also: "The Waffle Restaurant", tier 4)
 
 #### Land as Commander
@@ -1415,6 +1474,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Chic // Ago
 1. (Uk) The Karfell Rocker
 1. (Uk) Georgia echnical Ins i u e - (Plane)
+1. (Uk) The Urza Finder - Also legality matters
+1. (Uk) The Sabertooth Wizard
 
 ##### Text Box Text Matters
 1. Tainted Monkey
@@ -1430,6 +1491,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 ##### Reminder Text Matters
 1. Duh
 1. Old Guard
+1. (Uk) The Gaming Explainer
 
 ##### Flavor Text Matters
 1. Ineffable Blessing A
@@ -1453,6 +1515,19 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Secret Base
 1. Watermarket
 
+#### Art Elements
+(Scryfall supports tagger tags in their API)
+1. Knight of the Kitchen Sink C
+1. Sly Spy B
+1. Sly Spy D
+1. Selfie Preservation
+1. Acornelia, Fashionable Filcher
+1. Don't Try This at Home
+1. Ignacio of Myra's Marvels
+1. Nightmare Moon - (Also, Friendship)
+1. Pinkie Pie
+1. Alesha, Who Makes History - Trans characters. Tagger supports this but it also counts genderless characters. Also Rulebreaker.
+(See also: Art Elements(unsupported by tagger), tier 5)
 
 ### Tier 4
 **Either poorly defined rules, or other logistical complications exist. Often can be figured out case-by-case but general solutions are hard to come up with.**
@@ -1484,7 +1559,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Vast Scrier - Triggers "whenever this creature attacks" triggers. Unclear if this requires literal wording match or if keywords and looser attack triggers qualify.
 1. (Uk) The Snapstone Wielder - Each turn, lets you spend an amount of any-colored mana equal to the amount of counters you have. Also affects starting hand size, and casts spells with random targets (and it's unclear what to do with spells which have variable numbers of targets)
 1. (Uk) The Octopus Official - Unclear what zone the tournament piles are in, or if casting a spell 4 times means to cast once and copy 3 times.
-
+1. (Uk) Mysterious Hero - Put it into the same sleeve than another card during deckbuilding and remove the other card during the game.
 
 #### Rerolling Dice (using the stack)
 (Would probably be best to approximate these as static abilities)
@@ -1570,6 +1645,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Madlands - Land with Madness. Played as a land drop when madness cost is paid.
 1. (Uk) Blustering Barnyard - "Storm (Pretend it works on a land)". Also pawprint charm on an ability. May work fine?
 1. (P) Barry's Land - Art includes the text "Domain +1", meaning the card's existence introduces "Cloud" into the game's basic land types.
+1. (Uk) The Bird Poo - Land with mana cost thats also a creature.
 
 #### Share attachment effects
 (Could possibly get 90% there with a static ability meddling with EquippedBy or AttachedBy, but plenty of edge cases out there.)
@@ -1593,7 +1669,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 **Theoretically possible to do digitally, but in practice there is no good way to do these in Forge**
 
 1. R&D's Secret Lair - Would have to maintain separate cardscripts for every print that functions differently. 
-1. Vorthos, Steward of Myth - Named character, appearing in art, name, or flavor text. Besides the art (see Art Elements below), would need the list of named characters and any variants of their name to look for.
+1. Vorthos, Steward of Myth - Named character, appearing in art, name, or flavor text. Besides the art (see Art Elements tier 3), would need the list of named characters and any variants of their name to look for.
 1. Spelling Bee - Beyond the issues of "Text Matters" from Tier 3 and "Memory" from Tier 4, the biggest issue here is prompting a player to spell a word without showing them how to spell the word. Would need a Text-to-speech implementation.
 1. (Uk) Hero's Uncle - Tutors legendary team up cards. List is short enough to hard code but having to maintain it would not be ideal.
 1. (Uk) Minnea, Planar Tourist - Choose a plane, affects cards from chosen plane. Tagger has planes for artwork and character origins. That might cover enough?
@@ -1601,6 +1677,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Mox Painter - Tournament legal moxen. Reminder text gives a fixed list, but not future proof. Also depends on a card in this tier (See: "Mox Lotus").
 1. (Uk) Advanced Tactics - Puts all creatures onto a 5x5 grid and lets their controllers move them around. Unclear what happens when there's more than 25 creatures in play. Biggest hurdle would be the UI overhaul needed to actually display the grid.
 1. (Uk) Welcome to Valley - (Plane) "Animal" batch that specifies that the animal must exist in real life. Can't be determined from type line; e.g. Leonin are typed as Cats but wouldn't count.
+1. (Uk) The Flavormancer - Cares about cards that are flavorfully Heroes or Villains which is objective. Also adds creature types to planeswalkers.
 
 #### Noninteger Numbers
 1. Bosom Buddy
@@ -1657,23 +1734,12 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental
 1. Garbage Elemental E
 
-#### Art Elements
-(If Scryfall included tagger tags in their API, these could go up to tier 3)
-1. Knight of the Kitchen Sink C
-1. Sly Spy B
-1. Sly Spy D
-1. Selfie Preservation
-1. Acornelia, Fashionable Filcher
-1. Don't Try This at Home
-1. Ignacio of Myra's Marvels
-1. Nightmare Moon - (Also, Friendship)
-1. Pinkie Pie
-
 #### Art Elements, (unsupported by tagger)
 1. Bar Entry - Head above the bar in Bar Entry's art.
 1. Jermane, Pride of the Circus - Four or more legs.
 1. Assembled Ensemble - "artifact creature in its art"; could possibly cross together a bunch of other tags for artificial creature types.
 1. (Uk) Unstickerify - The card that a playtest card is stickered onto. Might also consider Unfinity stickers?
+(See also: Art Elements, tier 3)
 
 #### Hat Wearing
 (Tagger's "Hat" tag doesn't exactly fit this. Per ruling: "The creature that the card represents must be wearing a hat to have menace. A background character or a scale bird wearing a hat wouldn’t count." Could ignore that caveat and have it fit for the majority of cases though.)
@@ -1789,6 +1855,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Photo Op - Scrape Twitter?
 1. (Uk) A-Town - Acquire local IP and test it against a Geolocation database?
 1. (Uk) Explore the Local Scene - (Phenomenon) Fetch local restaurants and tourist attractions via a maps API?
+1. (UK) The Local Guides - Name of the city your in. Similar to the above.
 
 
 ### Tier 7
