@@ -90,6 +90,34 @@ public final class AlurenPlan {
         return n;
     }
 
+    /** Stroke of Genius is in the hand or still in the library: the only two places the mana kill can get it from. */
+    private static boolean strokeReachable(final Player ai) {
+        return LoopRunner.inHand(ai, STROKE) || inLibrary(ai, STROKE);
+    }
+
+    /**
+     * The scan of the deck before the loops: whether the mana kill can still happen at all. There is one Stroke of Genius
+     * and two Clouds of Faeries; once the Stroke is in the graveyard (Intuition puts two cards there, the cleanup step
+     * discards, Brainstorm) or both Clouds are, no amount of drawing makes the kill, and the loop has to go for the other
+     * one (Maggot Carrier from the sideboard) instead of drawing the library down to the floor.
+     */
+    public static boolean manaKillAlive(final Player ai) {
+        // dead only when the card is really lost: a deck that never had one (another Aluren list) is not judged by it
+        final boolean stroke = strokeReachable(ai) || !lost(ai, STROKE);
+        final boolean cloud = accessible(ai, CLOUD) || inLibrary(ai, CLOUD) || !lost(ai, CLOUD);
+        return stroke && cloud;
+    }
+
+    /** The card is in the graveyard or in exile: spent for this game. */
+    private static boolean lost(final Player ai, final String name) {
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard, ZoneType.Exile)) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Rounds of the mana loop to cover the library of the opponent with Stroke of Genius: two mana a round. */
     private static int roundsNeeded(final Player opp) {
         return (opp.getCardsIn(ZoneType.Library).size() + 3 + 1) / 2;
@@ -102,6 +130,9 @@ public final class AlurenPlan {
 
     /** Whether cards are still missing for the kill: Stroke of Genius, Cloud of Faeries, or the life for the rounds. */
     private static boolean needsCards(final Player ai, final Player opp) {
+        if (!manaKillAlive(ai)) {
+            return false; // nothing in the library is the kill any more: drawing it away only loses the game
+        }
         return !LoopRunner.inHand(ai, STROKE) || !accessible(ai, CLOUD)
                 || !lifeOk(ai, opp) && !accessible(ai, WARDEN);
     }
@@ -235,24 +266,40 @@ public final class AlurenPlan {
         return rest;
     }
 
+    /**
+     * The cast of a card of the hand: Aluren's free cast first (it is not always in the list of the AI), then the cast
+     * for its mana cost. In the screenshot of PR 12937 three Living Wishes and three Intuitions stayed in the hand while
+     * the loop ran out of things to do: both were taken from the list as "the spell of that name" and, when that one was
+     * refused, nothing else was tried.
+     */
+    private static SpellAbility castAny(final Player ai, final List<SpellAbility> candidates, final String name,
+                                        final Predicate<SpellAbility> approve) {
+        if (LoopRunner.inPlay(ai, ALUREN) != null) {
+            final SpellAbility free = freeCast(ai, candidates, name);
+            if (tryCast(ai, free, approve)) {
+                return free;
+            }
+        }
+        final SpellAbility paid = LoopRunner.castFromHand(ai, candidates, name);
+        return tryCast(ai, paid, approve) ? paid : null;
+    }
+
     /** Intuition for the piece that is missing (the tutor takes three: the wanted one first, see picks), mana from the lands. */
     private static SpellAbility intuition(final Player ai, final List<SpellAbility> candidates,
                                           final Predicate<SpellAbility> approve) {
-        final SpellAbility spell = LoopRunner.castFromHand(ai, candidates, INTUITION);
-        if (spell == null || wanted(ai, ai.getCardsIn(ZoneType.Library)) == null) {
+        if (!LoopRunner.inHand(ai, INTUITION) || wanted(ai, ai.getCardsIn(ZoneType.Library)) == null) {
             return null;
         }
-        return tryCast(ai, spell, approve) ? spell : null;
+        return castAny(ai, candidates, INTUITION, approve);
     }
 
     /** Living Wish before anything else: it fetches what the loops need, while the lands are still untapped. */
     private static SpellAbility livingWish(final Player ai, final List<SpellAbility> candidates,
                                            final Predicate<SpellAbility> approve) {
-        final SpellAbility wish = LoopRunner.castFromHand(ai, candidates, WISH);
-        if (wish == null || wanted(ai, ai.getCardsIn(ZoneType.Sideboard)) == null) {
+        if (!LoopRunner.inHand(ai, WISH) || wanted(ai, ai.getCardsIn(ZoneType.Sideboard)) == null) {
             return null;
         }
-        return tryCast(ai, wish, approve) ? wish : null;
+        return castAny(ai, candidates, WISH, approve);
     }
 
     /** The dungeon of the Acererak loop: Lost Mine of Phandelver, whose Dark Pool drains. Null: no opinion. */
@@ -410,8 +457,22 @@ public final class AlurenPlan {
      */
     public static boolean pointlessHarpy(final Player ai, final SpellAbility sa) {
         final Card host = sa == null ? null : sa.getHostCard();
-        if (host == null || !host.getName().equals(HARPY) || !host.isInZone(ZoneType.Hand) || !ai.equals(host.getController())
-                || !isAlurenDeck(ai) || LoopRunner.inPlay(ai, ALUREN) == null || LoopRunner.inPlay(ai, SAVAGE) != null) {
+        if (host == null || !host.getName().equals(HARPY) || !ai.equals(host.getController()) || !isAlurenDeck(ai)) {
+            return false;
+        }
+        final boolean aluren = LoopRunner.inPlay(ai, ALUREN) != null;
+        if (host.isInZone(ZoneType.Battlefield) && sa.isAbility() && !sa.isManaAbility()) {
+            // "pay 1 life: return Cavern Harpy": only the loop does that. In the recording of PR 12937 the AI cast the Harpy
+            // and paid the life to take it back with no Aluren in play: a life for nothing, the mana of the cast wasted
+            return !aluren || stage(ai, ai.getWeakestOpponent()) == Stage.NONE;
+        }
+        if (!host.isInZone(ZoneType.Hand) || !sa.isSpell()) {
+            return false;
+        }
+        if (!aluren) {
+            return true; // for its mana it is a 2/1 flyer that sends a creature back: the Harpy is a piece of the loop
+        }
+        if (LoopRunner.inPlay(ai, SAVAGE) != null) {
             return false;
         }
         for (final Card c : ai.getCreaturesInPlay()) {
@@ -424,11 +485,36 @@ public final class AlurenPlan {
                 || LoopRunner.inHand(ai, ACERERAK) || LoopRunner.inHand(ai, SAVAGE);
     }
 
+    private static String lastState;
+
+    /** One line of the veto log whenever the state of the plan changes: why it is doing what it does, or nothing. */
+    private static void explain(final Player ai, final Player opp, final String step) {
+        final StringBuilder sb = new StringBuilder("aluren-state stage=").append(stage(ai, opp)).append(" step=").append(step)
+                .append(" stroke=").append(LoopRunner.inHand(ai, STROKE) ? "hand" : inLibrary(ai, STROKE) ? "library" : "GONE")
+                .append(" cloud=").append(accessible(ai, CLOUD) ? "ready" : inLibrary(ai, CLOUD) ? "library" : "GONE")
+                .append(" manaKill=").append(manaKillAlive(ai)).append(" life=").append(ai.getLife())
+                .append(" library=").append(ai.getCardsIn(ZoneType.Library).size())
+                .append(" pool=").append(ai.getManaPool().totalMana()).append(" oppLibrary=")
+                .append(opp.getCardsIn(ZoneType.Library).size());
+        final String line = sb.toString();
+        if (!line.equals(lastState)) {
+            lastState = line;
+            VetoLog.note(ai, line);
+        }
+    }
+
     static SpellAbility next(final Player ai, final List<SpellAbility> candidates, final Player opp,
                              final Predicate<SpellAbility> approve) {
         if (opp == null || !isAlurenDeck(ai)) {
             return null;
         }
+        final SpellAbility step = step(ai, candidates, opp, approve);
+        explain(ai, opp, step == null ? "none" : step.getHostCard().getName());
+        return step;
+    }
+
+    private static SpellAbility step(final Player ai, final List<SpellAbility> candidates, final Player opp,
+                                     final Predicate<SpellAbility> approve) {
         final SpellAbility wish = livingWish(ai, candidates, approve);
         if (wish != null) {
             return wish; // the setup comes first: the missing piece, then Aluren, then the loops

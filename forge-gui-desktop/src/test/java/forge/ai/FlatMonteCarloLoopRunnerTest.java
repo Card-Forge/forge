@@ -728,6 +728,69 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void withTheStrokeInTheGraveyardTheLoopStopsDrawingAndDrains() {
+        // the one Stroke of Genius is gone: the library holds nothing that is the kill, the Carrier is the way left
+        alurenDeckWith(4, "Raven Familiar", "Cavern Harpy", "Maggot Carrier");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Graveyard);
+        for (int i = 0; i < 15; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertFalse(forge.ai.simulation.AlurenPlan.manaKillAlive(ai));
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.DRAIN, forge.ai.simulation.AlurenPlan.stage(ai, opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void withTheStrokeInTheLibraryTheLoopKeepsDrawing() {
+        alurenDeckWith(4, "Raven Familiar", "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        for (int i = 0; i < 15; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
+        AssertJUnit.assertTrue(forge.ai.simulation.AlurenPlan.manaKillAlive(ai));
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.CARDS, forge.ai.simulation.AlurenPlan.stage(ai, opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void livingWishFetchesTheCarrierWhenTheStrokeIsGone() {
+        alurenDeckWith(4, "Living Wish", "Raven Familiar", "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Graveyard);
+        addCardToZone("Maggot Carrier", ai, ZoneType.Sideboard);
+        AssertJUnit.assertEquals("Maggot Carrier", forge.ai.simulation.AlurenPlan.wanted(ai,
+                ai.getCardsIn(ZoneType.Sideboard)));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Living Wish", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theHarpyIsNotCastForItsManaCostWithoutAluren() {
+        elfDeckWith(0, "Cavern Harpy", "Aluren");
+        addCards("Island", 3, ai);
+        addCards("Swamp", 3, ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
+        AssertJUnit.assertNotNull(harpy);
+        AssertJUnit.assertTrue("no Aluren in play: the Harpy is a piece of the loop, not a 2/1 for three mana",
+                LoopRunner.held(ai, harpy));
+    }
+
+    @Test(timeOut = 120000)
+    public void theHarpyIsNotPaidBackToTheHandForNothing() {
+        alurenDeckWith(4, "Forest");
+        final Card harpy = addCardToZone("Cavern Harpy", ai, ZoneType.Battlefield);
+        SpellAbility back = null;
+        for (final SpellAbility sa : harpy.getAllPossibleAbilities(ai, true)) {
+            if (sa.isAbility() && !sa.isManaAbility()) {
+                back = sa;
+            }
+        }
+        AssertJUnit.assertNotNull(back);
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.NONE, forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        AssertJUnit.assertTrue("nothing to loop: a life is not paid to return the Harpy", LoopRunner.held(ai, back));
+    }
+
+    @Test(timeOut = 120000)
     public void theDiscardKeepsThePiecesOfTheKill() {
         alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Intuition", "Intuition", "Cavern Harpy");
         final forge.game.card.CardCollection hand = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand));
