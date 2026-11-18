@@ -308,7 +308,7 @@ public class ComputerUtilMana {
     }
 
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
-            Collection<SpellAbility> maList, boolean checkCosts) {
+            Collection<SpellAbility> maList, boolean checkCosts, List<SpellAbility> paidSoFar) {
         Card saHost = sa.getHostCard();
 
         // CastTotalManaSpent (AIPreference:ManaFrom$Type or AIManaPref$ Type)
@@ -331,6 +331,9 @@ public class ComputerUtilMana {
                     break;
                 case "Treasure":
                     // Try to spend only one Treasure if possible
+                    if (paidSoFar.stream().anyMatch(paid -> paid.getHostCard() != null && paid.getHostCard().getType().hasSubtype("Treasure"))) {
+                        break;
+                    }
                     filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
                             && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1);
                     SpellAbility first = filteredList.get(0);
@@ -738,7 +741,7 @@ public class ComputerUtilMana {
                 }
             }
 
-            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test, paymentList);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
                 // not a good idea to sac a card that you're targeting with the SA you're paying for

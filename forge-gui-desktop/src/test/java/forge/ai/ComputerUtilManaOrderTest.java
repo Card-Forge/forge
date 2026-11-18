@@ -424,6 +424,20 @@ public class ComputerUtilManaOrderTest extends SimulationTest {
     }
 
     @Test
+    public void treasurePreferenceSpendsOneTreasure() {
+        // Hired Hexblade is stronger when Treasure mana is spent on it, and one Treasure is enough for that
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        addCards("Swamp", 2, p);
+        addTokens("c_a_treasure_sac", 2, p);
+
+        final CardCollection used = sourcesToPay(p, "Hired Hexblade", "1 B");
+        assertEquals(used.stream().filter(c -> c.getType().hasSubtype("Treasure")).count(), 1L,
+                "expected exactly one Treasure, got " + used);
+    }
+
+    @Test
     public void cavernOfSoulsPaysGenericSoTheSpellCantBeCountered() {
         // Mind Stone ranks below Cavern of Souls, but still pays the {C} and leaves the Cavern for the generic part
         Game game = initAndCreateGame();
