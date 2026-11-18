@@ -895,6 +895,23 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void noTherapyAgainstAnEmptyHand() {
+        alurenDeckWith(4, "Cabal Therapy", "Maggot Carrier", "Cavern Harpy");
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertNotSame("Cabal Therapy", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theBoardThatKillsByAttackingIsLeftAlone() {
+        alurenDeckWith(4, "Maggot Carrier", "Cavern Harpy");
+        opp.setLife(2, null);
+        final Card savage = addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        savage.setSickness(false);
+        AssertJUnit.assertNull("two power ready, two life: attack, do not loop", LoopRunner.next(ai, alurenPlays(), s -> true));
+    }
+
+    @Test(timeOut = 120000)
     public void theDiscardKeepsThePiecesOfTheKill() {
         alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Intuition", "Intuition", "Cavern Harpy");
         final forge.game.card.CardCollection hand = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand));

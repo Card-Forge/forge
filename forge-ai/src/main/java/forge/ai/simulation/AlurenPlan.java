@@ -178,14 +178,15 @@ public final class AlurenPlan {
         return strokeReachable(ai) && cloudRouteAlive(ai);
     }
 
-    /** Rounds of the mana loop to cover the library of the opponent with Stroke of Genius: two mana a round. */
-    private static int roundsNeeded(final Player opp) {
-        return (opp.getCardsIn(ZoneType.Library).size() + 3 + 1) / 2;
-    }
-
     /** Life enough for the rounds of the loop: a Soul Warden pays the life back, otherwise a round costs one. */
     private static boolean lifeOk(final Player ai, final Player opp) {
-        return LoopRunner.inPlay(ai, WARDEN) != null || ai.getLife() >= roundsNeeded(opp) + LIFE_BUFFER;
+        if (LoopRunner.inPlay(ai, WARDEN) != null) {
+            return true;
+        }
+        // a round costs a life and adds two mana: the lands and the pool already cover part of the library
+        final int missing = Math.max(0, opp.getCardsIn(ZoneType.Library).size() + 3 - lands(ai)
+                - ai.getManaPool().totalMana());
+        return ai.getLife() >= (missing + 1) / 2 + 2;
     }
 
     /** Whether a real win condition still needs a card from the library. */
@@ -679,6 +680,9 @@ public final class AlurenPlan {
 
     private static SpellAbility step(final Player ai, final List<SpellAbility> candidates, final Player opp,
                                      final Predicate<SpellAbility> approve) {
+        if (lethalByAttack(ai, opp)) {
+            return null; // the loop would send the attackers back to the hand, sick: they attack first
+        }
         // Ramp first, but do not delay Aluren when it is already payable with
         // a real combo route assembled.
         final SpellAbility ramp = setupRamp(ai, candidates, approve);
@@ -768,6 +772,29 @@ public final class AlurenPlan {
         }
     }
 
+    /**
+     * Before combat, with a board that kills by attacking (nothing of the opponent's can block, the power that is ready
+     * covers the life): in the screenshot of the endless Harpy the opponent was at 3 life with no creatures.
+     */
+    private static boolean lethalByAttack(final Player ai, final Player opp) {
+        final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.is(forge.game.phase.PhaseType.MAIN1) || !ph.isPlayerTurn(ai)) {
+            return false;
+        }
+        for (final Card b : opp.getCreaturesInPlay()) {
+            if (!b.isTapped()) {
+                return false;
+            }
+        }
+        int power = 0;
+        for (final Card c : ai.getCreaturesInPlay()) {
+            if (!c.isTapped() && !c.isSick() && c.getNetPower() > 0) {
+                power += c.getNetPower();
+            }
+        }
+        return power >= opp.getLife();
+    }
+
     private static SpellAbility setupRamp(final Player ai, final List<SpellAbility> candidates,
             final Predicate<SpellAbility> approve) {
         if (LoopRunner.inPlay(ai, ALUREN) != null) {
@@ -796,8 +823,46 @@ public final class AlurenPlan {
         return tryCast(ai, birds, approve) ? birds : null;
     }
 
+    /**
+     * Cabal Therapy is for before the combo goes off: it needs cards in the opponent's hand to hit, it never comes after
+     * the first Harpy of the turn (the loop has begun), at most twice a turn, and the B for it must not be the mana that
+     * Aluren is waiting for. The flashback is paid with a Birds of Paradise: the other creatures are the loop.
+     */
+    private static boolean therapyTime(final Player ai, final Player opp) {
+        if (opp == null || opp.getCardsIn(ZoneType.Hand).isEmpty()) {
+            return false;
+        }
+        int cast = 0;
+        for (final SpellAbility sa : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            final Card h = sa.getHostCard();
+            if (h != null && h.getName().equals(HARPY)) {
+                return false;
+            }
+            if (h != null && h.getName().equals(THERAPY)) {
+                cast++;
+            }
+        }
+        if (cast >= 2) {
+            return false;
+        }
+        if (LoopRunner.inPlay(ai, ALUREN) != null || !LoopRunner.inHand(ai, ALUREN)) {
+            return true;
+        }
+        // Aluren in the hand: Therapy must not take the mana that is exactly enough for it (with less, Aluren waits anyway)
+        int cmc = 4;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(ALUREN)) {
+                cmc = c.getCMC();
+            }
+        }
+        return ComputerUtilMana.getAvailableManaEstimate(ai) != cmc;
+    }
+
     private static SpellAbility cabalTherapy(final Player ai, final List<SpellAbility> candidates,
             final Predicate<SpellAbility> approve) {
+        if (!therapyTime(ai, ai.getWeakestOpponent())) {
+            return null;
+        }
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host == null || !host.getName().equals(THERAPY) || !sa.isSpell()
@@ -808,7 +873,7 @@ public final class AlurenPlan {
             final boolean flashback = host.isInZone(ZoneType.Graveyard)
                     && sa.getPayCosts() != null
                     && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class);
-            if (!fromHand && !flashback) {
+            if (!fromHand && !(flashback && LoopRunner.inPlay(ai, BIRDS) != null)) {
                 continue;
             }
 
