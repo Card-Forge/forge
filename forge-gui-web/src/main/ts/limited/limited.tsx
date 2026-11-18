@@ -79,7 +79,7 @@ function Events({ pools, draft, actions, create }: { pools: PoolRow[]; draft: bo
         ? <><button class="primary" onClick={() => actions.poolOpen(p.name)}>{t('lblPlay')}</button>
             <button onClick={() => actions.poolEdit(p.name)}>{t('btnEditDeck')}</button></>
         : <button class="primary" onClick={() => actions.poolEdit(p.name)}>{t('lblWebLimitedBuildDeck')}</button>)}
-      remove={{ item: t('lblWebLimitedDeletePool'), ask: () => t('lblWebLimitedDeletePoolAsk'), keep: t('lblWebLimitedKeep'), go: p => actions.poolDelete(p.name) }} />
+      remove={{ item: t('lblWebLimitedDeletePool'), ask: () => t('lblWebLimitedDeletePoolAsk'), keep: t('lblKeep'), go: p => actions.poolDelete(p.name) }} />
   );
 }
 
@@ -122,7 +122,7 @@ function DraftSetup({ model, actions }: { model: Model; actions: Actions }) {
   return (
     <div class="setup">
       <StepForm steps={draftSteps(options)} value={value} onChange={setValue} ticket={draftTicket()}
-        action={t('lblWebLimitedStartDrafting')} busy={busy} submit={() => {
+        action={t('lblNetworkStartDraft')} busy={busy} submit={() => {
           setBusy(true);
           actions.draftStart({ product: value.product!, block: value.block, combo: draftCombo(value), cube: value.cube,
             theme: value.theme, cubeId: value.cubeId, pickRule: value.pickRule });
@@ -166,7 +166,7 @@ function Opponents({ pool, draft, actions }: { pool: PoolRow; draft: boolean; ac
       <div class="opp-head">
         <span class="kicker">{t('lblWebSetupOpponents')}</span>
         <span class="kicker">{t('lblWebLimitedGames')}</span>
-        <span class="count" role="group" aria-label={t('lblWebLimitedGamesInMatch')}>
+        <span class="count" role="group" aria-label={t('lblGamesInMatch')}>
           {GAMES.map(n => <button key={n} aria-pressed={games === n} onClick={() => setGames(n)}>
             {n === 1 ? t('lblWebLimitedOneGame') : t('lblWebLimitedBestOf', n)}</button>)}
         </span>
@@ -183,7 +183,7 @@ function Opponents({ pool, draft, actions }: { pool: PoolRow; draft: boolean; ac
         ))}
       </ol>
       <div class="opp-foot">
-        <span class="say">{tNodes('lblWebLimitedGauntletSay', <b>{t('lblWebLimitedGauntlet')}</b>, pool.opponents.length)}</span>
+        <span class="say">{tNodes('lblWebLimitedGauntletSay', <b>{t('lblGauntlet')}</b>, pool.opponents.length)}</span>
         <button class="outline" onClick={() => play('gauntlet')}>{t('lblWebLimitedStartGauntlet')}</button>
       </div>
       {several && (

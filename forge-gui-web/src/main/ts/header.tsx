@@ -3,7 +3,7 @@
 import type { ComponentChildren } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { changeUi, redrawUi, ui } from './ui';
-import { t } from './text';
+import { t, tSentence } from './text';
 import { isPortrait } from './form';
 import { Dropdown } from './dialog';
 import { ICONS, Icon } from './icons';
@@ -51,13 +51,13 @@ export function PhoneHead({ back, title, line, action, more, dev, tabs, inert }:
         {action}
         <span class="ph-chat" />
         <Dropdown cls="ph-more" button={(open, toggle) => (
-          <button class="ph-icon" title={t('lblWebHeadMore')} aria-label={t('lblWebHeadMore')} aria-expanded={open} onClick={toggle}><Icon d={ICONS.ellipsis} /></button>
+          <button class="ph-icon" title={t('lblMore')} aria-label={t('lblMore')} aria-expanded={open} onClick={toggle}><Icon d={ICONS.ellipsis} /></button>
         )}>
           {close => (
             <div class="ph-menu" role="menu">
               <button role="menuitem" onClick={() => { close(); changeUi(u => { u.volumeOpen = true; }); }}><Icon d={ICONS.volume} />{t('lblWebHeadVolume')}</button>
               {more?.(close)}
-              <button role="menuitem" onClick={() => { close(); changeUi(u => { u.optionsOpen = true; }); }}><Icon d={ICONS.cog} />{t('lblWebHeadOptions')}</button>
+              <button role="menuitem" onClick={() => { close(); changeUi(u => { u.optionsOpen = true; }); }}><Icon d={ICONS.cog} />{tSentence('lblOptions')}</button>
               {dev}
             </div>
           )}
@@ -141,7 +141,7 @@ export function HeadControls() {
         onClick={() => changeUi(u => { u.volumeOpen = !u.volumeOpen; })}>
         <Icon d={ICONS.volume} />
       </button>
-      <button class="icon-button" title={t('lblWebHeadOptions')} aria-label={t('lblWebHeadOptions')} onClick={() => changeUi(u => { u.optionsOpen = true; })}><Icon d={ICONS.cog} /></button>
+      <button class="icon-button" title={tSentence('lblOptions')} aria-label={tSentence('lblOptions')} onClick={() => changeUi(u => { u.optionsOpen = true; })}><Icon d={ICONS.cog} /></button>
     </>
   );
 }

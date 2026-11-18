@@ -24,7 +24,8 @@ export async function loadText(): Promise<void> {
 
 /** Sets the page's text directly. The tests use this. */
 export function setText(lang: string, text: Record<string, string>): void {
-  patterns = text;
+  // Forge's keys end an unfinished label with three dots and the page's with an ellipsis, so the page shows only the ellipsis
+  patterns = Object.fromEntries(Object.entries(text).map(([key, value]) => [key, value.replace(/\.\.\.$/, '…')]));
   language = lang;
   numbers = new Intl.NumberFormat(lang);
 }
@@ -49,6 +50,14 @@ export function t(key: TextKey, ...args: Arg[]): string {
 export function tCap(key: TextKey, ...args: Arg[]): string {
   const text = t(key, ...args);
   return text.charAt(0).toLocaleUpperCase(language) + text.slice(1);
+}
+
+/** Like t(), in sentence case when the text is all capitals, as some of desktop's panel headings are. */
+export function tSentence(key: TextKey, ...args: Arg[]): string {
+  const text = t(key, ...args);
+  if (text !== text.toLocaleUpperCase(language)) return text;
+  const lower = text.toLocaleLowerCase(language);
+  return lower.charAt(0).toLocaleUpperCase(language) + lower.slice(1);
 }
 
 /** Like t(), but the arguments can be markup. An element can then go inside a sentence without splitting its words. */

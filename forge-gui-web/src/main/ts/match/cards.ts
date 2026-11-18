@@ -95,7 +95,7 @@ export function updateCard(el: HTMLElement, model: Model, card: CardView): void 
   q(el, '.combat-tag').textContent = blockThis ? t('lblWebPortraitBlockingThis') : '';
   el.classList.toggle('blocking', !!card.Blocking);
   el.classList.toggle('phased', !!card.PhasedOut);
-  q(el, '.phase-tag').textContent = card.PhasedOut ? t('lblWebCardPhasedOut') : '';
+  q(el, '.phase-tag').textContent = card.PhasedOut ? t('lblPhasedOut') : '';
   // The chains animate on and off when the card is detained or released. A newly drawn board shows them without animation
   const detained = !!card.Detained;
   if (el.dataset.detained !== undefined && (el.dataset.detained === '1') !== detained && el.closest('.battlefield') && !reducedMotion()) {

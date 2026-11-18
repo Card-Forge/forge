@@ -87,7 +87,7 @@ export function FilterBar<F>({ kinds, filter, set, clearAll, narrowed, children 
           </div>
         )}
       </span>
-      {narrowed && <button class="clear-all" onClick={clearAll}>{t('lblWebEditorClearFilters')}</button>}
+      {narrowed && <button class="clear-all" onClick={clearAll}>{t('lblClearFilter')}</button>}
     </div>
   );
 }

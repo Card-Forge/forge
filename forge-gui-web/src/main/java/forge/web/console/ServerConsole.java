@@ -190,7 +190,8 @@ public final class ServerConsole implements IProgressBar, IHasForgeLog {
 
     private void busy(final String what) {
         up = false;
-        state.setText(what);
+        // Forge's keys end with three dots and the console's own with an ellipsis
+        state.setText(what.endsWith("...") ? what.substring(0, what.length() - 3) + "\u2026" : what);
         keepOpen.setVisible(false);
         startStop.setVisible(false);
         startHelp.setVisible(false);
@@ -323,7 +324,7 @@ public final class ServerConsole implements IProgressBar, IHasForgeLog {
         if (stopping && service.playersHere() > 0 && !confirmed("lblWebConsoleStopAsk", "lblWebConsoleStopServer")) {
             return;
         }
-        busy(TEXT.getMessage(stopping ? "lblWebConsoleStoppingServer" : "lblWebConsoleStartingServer"));
+        busy(TEXT.getMessage(stopping ? "lblWebConsoleStoppingServer" : "lblStartingServer"));
         FThreads.invokeInBackgroundThread(() -> {
             Exception failure = null;
             try {

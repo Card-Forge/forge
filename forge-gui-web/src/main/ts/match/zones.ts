@@ -43,8 +43,8 @@ export function shownZones(model: Model): Model['zones'] {
   return answered && model.prompt === answered ? [] : model.zones;
 }
 
-const SORTS: [ZoneSort, TextKey][] = [['order', 'lblWebZoneSortOrder'], ['name', 'lblWebZoneSortName'], ['type', 'lblWebZoneSortType'],
-  ['mana', 'lblWebZoneSortManaValue']];
+const SORTS: [ZoneSort, TextKey][] = [['order', 'lblWebZoneSortOrder'], ['name', 'lblName'], ['type', 'lblType'],
+  ['mana', 'lblCMC']];
 
 const ZONE_NAMES: Record<ZoneType, TextKey> = {
   Hand: 'lblHandZone', Library: 'lblLibrary', Graveyard: 'lblGraveyard', Battlefield: 'lblBattlefieldZone',
@@ -193,8 +193,8 @@ function updatePanel(el: HTMLElement, model: Model, actions: Actions, p: Panel, 
   }
   find.oninput = () => changeUi(u => { u.zoneSearch = find.value; });
   // A search orders the zone by how well each name matches, so the sort is disabled until the search is cleared
-  render(h(Select<ZoneSort>, { label: t('lblSort'), prefix: t('lblSort'), value: ui.zoneSort, disabled: !!normalize(ui.zoneSearch),
-    change: sort => changeUi(u => { u.zoneSort = sort; }), choices: SORTS.map(([id, name]) => ({ value: id, label: t(name) })) }), q(el, '.zone-sort'));
+  render(h(Select<ZoneSort>, { label: t('lblSort'), value: ui.zoneSort, disabled: !!normalize(ui.zoneSearch),
+    change: sort => changeUi(u => { u.zoneSort = sort; }), choices: SORTS.map(([id, name]) => ({ value: id, label: t('lblWebSortBy', t(name)) })) }), q(el, '.zone-sort'));
   const fold = q(el, '.zone-fold');
   fold.onclick = () => changeUi(u => { u.zonesMinimised = true; });
   // A pile the player opened already has Done to close it

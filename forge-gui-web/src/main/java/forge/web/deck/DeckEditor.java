@@ -612,7 +612,7 @@ public final class DeckEditor {
 
     private void nameAfterCommander() {
         named = true;
-        final String wanted = Localizer.getInstance().getMessage("lblWebImportCommanderDeck", deck.getCommanders().get(0).getName());
+        final String wanted = Localizer.getInstance().getMessage("lblDeckUrlDefaultDeckName", deck.getCommanders().get(0).getName());
         if (target instanceof Stored s) {
             renameTo(DeckStore.freeName(s.storage(), wanted, owned));
         } else {

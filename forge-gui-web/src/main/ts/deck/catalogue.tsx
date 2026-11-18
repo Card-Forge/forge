@@ -18,8 +18,8 @@ import { GROUP_NAMES, groupsOf, isCardPool } from '../formatmenu';
 import { Select } from '../select';
 
 const TYPES: [string, TextKey][] = [['any', 'lblWebCatalogueAnyType'], ...CARD_TYPES.map(([type, , heading]): [string, TextKey] => [type.toLowerCase(), heading])];
-const SORTS: [string, TextKey][] = [['name', 'lblWebEditorSortName'], ['mv', 'lblWebDraftSortManaValue'], ['colour', 'lblWebEditorSortColour'],
-  ['type', 'lblWebCatalogueSortType']];
+const SORTS: [string, TextKey][] = [['name', 'lblName'], ['mv', 'lblCMC'], ['colour', 'lblColor'],
+  ['type', 'lblType']];
 const VIEW_KEY = 'forge.catalogueView';
 // Tips for Forge's card search syntax, the same syntax desktop's card search reads
 const SEARCH_TIPS: [string, TextKey][] = [
@@ -156,8 +156,8 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
       <div class="count-row">
         <p class={wanted ? 'shown commanders-only' : 'shown'}>{shownLine(page?.total, searched, wanted)}</p>
         {text.trim() && page?.ranked !== false
-          ? <Select cls="sort-by" label={t('lblSort')} disabled value="best" change={() => {}} choices={[{ value: 'best', label: t('lblWebEditorSortBestMatch') }]} />
-          : <Select cls="sort-by" label={t('lblSort')} value={sort} change={setSort} choices={SORTS.map(([id, name]) => ({ value: id, label: t(name) }))} />}
+          ? <Select cls="sort-by" label={t('lblSort')} disabled value="best" change={() => {}} choices={[{ value: 'best', label: t('lblWebSortBy', t('lblWebEditorSortBestMatch')) }]} />
+          : <Select cls="sort-by" label={t('lblSort')} value={sort} change={setSort} choices={SORTS.map(([id, name]) => ({ value: id, label: t('lblWebSortBy', t(name)) }))} />}
         <span class="seg" role="group" aria-label={t('lblView')}>
           <button aria-pressed={view === 'cards'} onClick={() => { setView('cards'); store(VIEW_KEY, 'cards'); }}>{t('lblCards')}</button>
           <button aria-pressed={view === 'table'} onClick={() => { setView('table'); store(VIEW_KEY, 'table'); }}>{t('lblWebDraftList')}</button>
@@ -292,7 +292,7 @@ function SetsPanel({ sets, ask, value, apply }: { sets: readonly LimitedEdition[
   const [find, setFind] = useState('');
   const [ticked, setTicked] = useState<Set<string>>(() => new Set(value));
   useEffect(() => { if (!sets) ask(); }, []);
-  if (!sets) return <p class="fnote">{t('lblWebEventLoading')}</p>;
+  if (!sets) return <p class="fnote">{t('lblLoadingEllipsis')}</p>;
   const words = find.trim().toLowerCase();
   const shown = sets.filter(s => ticked.has(s.code) || !words || s.name.toLowerCase().includes(words) || s.code.toLowerCase() === words);
   return (

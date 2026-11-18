@@ -66,8 +66,8 @@ export function EventHead({ model, lobby, actions, preview, start }: {
               : view === 'earlier'
                 ? <PastEvents events={lim.pastEvents} actions={actions} back={() => setView('choose')} />
                 : <>
-                    {lim.pastEvents.length > 0 && !lim.product && <button class="link setup-back" onClick={() => setView('choose')}>{t('lblWebEventBack')}</button>}
-                    {!model.limitedOptions ? <p class="muted">{t('lblWebEventLoading')}</p>
+                    {lim.pastEvents.length > 0 && !lim.product && <button class="link setup-back" onClick={() => setView('choose')}>‹ {t('lblBack')}</button>}
+                    {!model.limitedOptions ? <p class="muted">{t('lblLoadingEllipsis')}</p>
                       : draft ? <DraftForm model={model} lobby={lobby} actions={actions} done={close} />
                       : <SealedForm model={model} actions={actions} done={close} />}
                   </>}
@@ -161,7 +161,7 @@ function PastEvents({ events, actions, back }: { events: PastEvent[]; actions: A
   const [deleting, setDeleting] = useState<string | null>(null);
   return (
     <div class="past-events">
-      <button class="link setup-back" onClick={back}>{t('lblWebEventBack')}</button>
+      <button class="link setup-back" onClick={back}>‹ {t('lblBack')}</button>
       <h3>{t('lblWebEventEarlierEvents')}</h3>
       {events.length === 0 && <p class="muted">{t('lblWebEventNoEarlierEvents')}</p>}
       <div class="past-list">
@@ -172,7 +172,7 @@ function PastEvents({ events, actions, back }: { events: PastEvent[]; actions: A
             {deleting === p.id
               ? <>
                   <span class="past-ask">{t('lblWebEventDeleteItsPools')}</span>
-                  <button onClick={() => setDeleting(null)}>{t('lblWebLimitedKeep')}</button>
+                  <button onClick={() => setDeleting(null)}>{t('lblKeep')}</button>
                   <button class="danger" onClick={() => { setDeleting(null); actions.eventForget(p.id); }}>{t('lblDelete')}</button>
                 </>
               : <>

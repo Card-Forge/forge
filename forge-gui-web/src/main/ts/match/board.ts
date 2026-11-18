@@ -335,7 +335,7 @@ function renderSeat(root: HTMLElement, model: Model, player: PlayerView | undefi
     q(root, '.skull-mark').title = t('lblWebBoardOutOfGame');
     q(root, '.ai-badge').title = t('lblWebBoardComputerPlayer');
     q(root, '.role-tag').textContent = t('lblArchenemy');
-    q(root, '.mana-label').textContent = t('lblWebBoardFloatingMana');
+    q(root, '.mana-label').textContent = t('lblManaFloating');
     const avatarEl = q(root, '.avatar');
     // The text of the mark that board.css draws on the portrait of the player who goes first
     avatarEl.dataset.firstLabel = t('lblWebBoardFirst');

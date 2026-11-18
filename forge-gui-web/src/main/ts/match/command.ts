@@ -128,7 +128,7 @@ export function renderEmblems(root: HTMLElement, model: Model, player: PlayerVie
         }
       }
       const tax = commanderTax(player, card);
-      el.title = tax > 0 ? t('lblWebBoardEffectCostsMoreHere', state.Name ?? '', tax)
+      el.title = tax > 0 ? t('lblWebBoardCostsMoreHere', state.Name ?? '', tax)
         : members.length > 1 ? [...new Set(members.map(m => sourceName(stateOf(model, m).Name)))].join('\n') : state.Name ?? '';
       el.classList.toggle('selectable', (model.prompt?.selectable ?? []).some(r => members.some(m => m.$key === r.ref)));
       if (el.classList.contains('cmd-tile')) {

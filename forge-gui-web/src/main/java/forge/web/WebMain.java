@@ -48,7 +48,7 @@ public final class WebMain implements IHasForgeLog {
         Runtime.getRuntime().addShutdownHook(new Thread(service::stop, "ForgeWebShutdown"));
         try {
             if (console != null) {
-                console.starting(Localizer.getInstance().getMessage("lblWebConsoleStartingServer"));
+                console.starting(Localizer.getInstance().getMessage("lblStartingServer"));
             }
             Exception failure = null;
             try {

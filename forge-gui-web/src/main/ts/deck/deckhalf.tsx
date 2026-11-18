@@ -11,7 +11,7 @@ import type { Actions } from '../actions';
 import type { CardHandlers } from './drag';
 import type { DeckSection, EditorCard, EditorSection, EditorState, LandSet } from '../protocol';
 import { store, stored } from '../storage';
-import { t, tCap } from '../text';
+import { t, tCap, tSentence } from '../text';
 import { Backdrop, Dropdown } from '../dialog';
 import { Select } from '../select';
 
@@ -65,7 +65,7 @@ export function DeckHalf({ actions, state, handlers, check, adding, addTo }: {
             : <p class="verdict yes">{t('lblWebEditorLegalFor', state.check)}</p>}
           {state.commanders.filter(c => c.problem).map(c => <p key={c.name} class="flag">! {c.problem}</p>)}
           {check && <div class="deck-check">{check}</div>}
-          <button class="small" disabled={!state.stats.main} onClick={() => setHand(drawHand(state, HAND))}>{t('lblWebEditorSampleHand')}</button>
+          <button class="small" disabled={!state.stats.main} onClick={() => setHand(drawHand(state, HAND))}>{tSentence('lblSampleHand')}</button>
         </div>
         <div class="deck-numbers">
           <Curve curve={state.stats.curve} spells={state.stats.spells} average={state.stats.averageMana} px={34} />
@@ -80,11 +80,11 @@ export function DeckHalf({ actions, state, handlers, check, adding, addTo }: {
             <button aria-pressed={cards} onClick={() => view(true)}>{t('lblCards')}</button>
             <button aria-pressed={!cards} onClick={() => view(false)}>{t('lblWebDraftList')}</button>
           </span>
-          <Select<GroupBy> label={tCap('lblGroupby')} value={by} change={next => {
+          <Select<GroupBy> label={tCap('lblGroupby')} prefix={tCap('lblGroupby')} value={by} change={next => {
             setBy(next);
             store(GROUP_KEY, next);
-          }} choices={[{ value: 'type', label: t('lblWebEditorGroupType') }, { value: 'mv', label: t('lblWebEditorGroupManaValue') },
-            { value: 'colour', label: t('lblWebEditorGroupColour') }]} />
+          }} choices={[{ value: 'type', label: t('lblType') }, { value: 'mv', label: t('lblCMC') },
+            { value: 'colour', label: t('lblColor') }]} />
         </h4>
         <div class={cards ? 'zone-body deck-cols' : 'zone-body cols'}>
           {state.main.length === 0 && <p class="none">{state.commanderWanted ? t('lblWebEditorChooseCommanderFirst') : t('lblWebEditorClickToAdd')}</p>}
@@ -221,7 +221,7 @@ function Commanders({ actions, state, handlers }: { actions: Actions; state: Edi
             <img alt={c.name} src={smallImage(imageUrl(c.image))} draggable={false} />
             <span class="cmd-tag">{t('lblCommander')}</span>
           </div>
-          <button class="link" onClick={() => actions.edit({ op: 'move', name: c.name, from: 'Commander', to: 'Main', count: 1 })}>{t('lblWebEditorChangeCommander')}</button>
+          <button class="link" onClick={() => actions.edit({ op: 'move', name: c.name, from: 'Commander', to: 'Main', count: 1 })}>{t('lblWebMenuChange')}</button>
         </div>
       ))}
     </div>
@@ -360,7 +360,7 @@ function SampleHand({ hand, again, more, close }: { hand: EditorCard[]; again: (
   return (
     <Backdrop dismiss={close}>
       <div class="dialog sample-hand">
-        <h3>{t('lblWebEditorSampleHand')}</h3>
+        <h3>{tSentence('lblSampleHand')}</h3>
         <p class="hint">{t('lblWebEditorSampleHandHint')}</p>
         <div class="hand-cards">{hand.map((c, i) => <img key={i} alt={c.name} title={c.name} src={imageUrl(c.image)} />)}</div>
         <div class="actions">

@@ -93,7 +93,7 @@ export function Importer({ model, actions, from, seat, initialText, initialUrl, 
     store(DRAFT_KEY, next || null);
   };
   const summary = result?.summary;
-  const name = typedName ?? result?.name ?? (summary?.commander ? t('lblWebImportCommanderDeck', summary.commander) : t('lblWebImportDefaultName'));
+  const name = typedName ?? result?.name ?? (summary?.commander ? t('lblDeckUrlDefaultDeckName', summary.commander) : t('lblWebImportDefaultName'));
   const commit = (action: ImportAction, clash?: 'replace' | 'keep') => {
     const [format, pool] = check.split('|');
     setSent({ action, decks: model.decks, editor: model.editor });
@@ -123,7 +123,7 @@ export function Importer({ model, actions, from, seat, initialText, initialUrl, 
     <Backdrop cls="importer-back" dismiss={close}>
       <div class="importer">
         <header class="imp-head">
-          <h2>{t('lblWebImportTitle')}</h2>
+          <h2>{t('lblImportDeck')}</h2>
           <span class="muted">{t('lblWebImportSubtitle')}</span>
           <CloseButton onClick={close} />
         </header>

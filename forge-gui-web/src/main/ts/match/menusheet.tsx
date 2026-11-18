@@ -7,7 +7,7 @@ import { sheet, swipeDown } from '../sheet';
 import { inspectPlayer } from '../preview';
 import { players, type Model } from '../model';
 import { playerAvatarUrl } from '../avatarsleeves';
-import { t } from '../text';
+import { t, tSentence } from '../text';
 
 const TABS = ['log', 'chat', 'players'] as const;
 type Tab = typeof TABS[number];
@@ -66,7 +66,7 @@ export function MenuSheet({ model }: { model: Model }) {
         ))}
       </div>
       <div class="menu-foot">
-        <button type="button" onClick={() => changeUi(u => { u.menuSheet = null; u.optionsOpen = true; })}>{t('lblWebHeadOptions')}</button>
+        <button type="button" onClick={() => changeUi(u => { u.menuSheet = null; u.optionsOpen = true; })}>{tSentence('lblOptions')}</button>
         <button type="button" class="concede" disabled={model.spectating} onClick={() => {
           close();
           changeUi(u => { u.concedeAsk = true; });

@@ -61,7 +61,7 @@ public final class LobbyFormats {
         }
         final int duel = startingLife(type, 2);
         final int more = startingLife(type, 3);
-        return duel == more ? text.getMessage("lblWebFactLife", duel) : text.getMessage("lblWebFactLifeByPlayers", duel, more);
+        return duel == more ? text.getMessage("lblLifeHas", duel) : text.getMessage("lblWebFactLifeByPlayers", duel, more);
     }
 
     private static int startingLife(final GameType type, final int players) {

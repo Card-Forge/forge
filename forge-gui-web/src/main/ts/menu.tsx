@@ -225,7 +225,7 @@ export function NamePrompt({ model, actions, initial = '', cancel }: {
           <label class="host-box">
             <input type="checkbox" checked={takeHost} onChange={e => setTakeHost(e.currentTarget.checked)} />
             <span class="host-text">
-              <b>{t('lblWebMenuHostGame')}</b>
+              <b>{t('lblHostGame')}</b>
               <span>{t('lblWebMenuHostGameBlurb')}</span>
             </span>
           </label>

@@ -117,6 +117,7 @@ button.primary {
 button.primary:hover:not(:disabled) { background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 52%, #fff) 0%, color-mix(in srgb, var(--accent-2) 88%, #fff) 52%, var(--accent-2) 100%); }
 button.primary:active:not(:disabled) { box-shadow: none; transform: translateY(1px); }
 #banner { position: fixed; top: 0; left: 50%; transform: translateX(-50%); background: var(--danger); color: #000; padding: 4px 16px; border-radius: 0 0 6px 6px; z-index: 100; }
+#banner::after { content: '\2026'; }
 .forge-links { display: grid; gap: 2px; }
 .forge-links a { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: var(--muted); font-size: 13px; text-decoration: none; }
 .forge-links a:hover { color: var(--text); background: var(--surface-2); }

@@ -225,7 +225,7 @@ public final class DeckImport {
         for (final PaperCard c : candidates.subList(0, Math.min(MOST_COMMANDER_CHOICES, candidates.size()))) {
             fixes.add(new ImportFix(ImportFixKind.commander, c.getName(), c.getName()));
         }
-        fixes.add(new ImportFix(ImportFixKind.other, Localizer.getInstance().getMessage("lblWebImportOther"), null));
+        fixes.add(new ImportFix(ImportFixKind.other, Localizer.getInstance().getMessage("lblOther") + "\u2026", null));
         problems.add(new ImportProblem(-1, Localizer.getInstance().getMessage("lblWebImportNoCommander"), candidates.isEmpty()
                 ? Localizer.getInstance().getMessage("lblWebImportNoLeader")
                 : Localizer.getInstance().getMessage("lblWebImportNoCommanderSection"), fixes));

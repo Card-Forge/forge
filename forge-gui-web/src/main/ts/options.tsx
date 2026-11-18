@@ -8,7 +8,7 @@ import { saveText } from './dom';
 import { keyName, rebind, shortcutCodes, shortcutName } from './keys';
 import { PLAYMATS, SETTINGS, boundKeys, isGuest, resetKeys, set, setKeys, setShortcut, setting, shortcutKeys, shortcutSettings, type SettingDef } from './settings';
 import { normalize, rankByName } from './search';
-import { t, textLanguage } from './text';
+import { t, textLanguage, tSentence } from './text';
 import { changeUi, easedLocal } from './ui';
 import { useClosing } from './closing';
 import { Backdrop } from './dialog';
@@ -80,7 +80,7 @@ export function Options({ close }: { close: () => void }) {
   }, (): Record<string, string> => (i === at ? {} : { rail: i > at ? 'on' : 'back' }));
   const version = buildVersion();
   return (
-    <OptionsDialog title={t('lblWebHeadOptions')} kind="tabbed" close={close}
+    <OptionsDialog title={tSentence('lblOptions')} kind="tabbed" close={close}
       head={<input ref={search} class="search" type="search" placeholder={t('lblWebOptionsSearch')} aria-label={t('lblWebOptionsSearch')}
         value={query} onInput={e => setQuery(e.currentTarget.value)} />}
       rail={<>
@@ -218,7 +218,7 @@ export function OptionsDialog({ title, label, kind, head, rail, footer, close, c
         <header>
           <b>{title}</b>
           {head ?? <span class="spacer" />}
-          <button class="close" title={t('lblWebOptionsCloseEsc')} onClick={shut}><Icon d={ICONS.x} /></button>
+          <button class="close" title={`${t('lblClose')} (Esc)`} onClick={shut}><Icon d={ICONS.x} /></button>
         </header>
         {rail ? <div class="split"><nav class="rail" role="tablist">{rail}</nav><div class="rows">{children}</div></div> : <div class="rows">{children}</div>}
         {footer && <footer>{footer}</footer>}
@@ -237,7 +237,7 @@ export function Row({ def, onChange }: { def: SettingDef; onChange?: () => void 
         {def.hint && <div class="hint">{def.hint}</div>}
       </div>
       {def.type === 'css'
-        ? <button class="edit" aria-expanded={editing} onClick={() => setEditing(!editing)}>{editing ? t('lblDone') : t('lblWebOptionsEdit')}</button>
+        ? <button class="edit" aria-expanded={editing} onClick={() => setEditing(!editing)}>{editing ? t('lblDone') : `${t('lblEdit')}…`}</button>
         : <Control def={def} onChange={onChange} />}
       {def.type === 'css' && editing && <CssEditor def={def} value={String(setting(def.key) ?? '')} />}
     </div>
@@ -280,7 +280,7 @@ function Control({ def, onChange }: { def: SettingDef; onChange?: () => void }) 
     case 'playmat':
       return <PlaymatChoice />;
     case 'dialog':
-      return <button class="edit" onClick={() => changeUi(u => { u.gameMenu = def.dialog; })}>{t('lblWebOptionsEdit')}</button>;
+      return <button class="edit" onClick={() => changeUi(u => { u.gameMenu = def.dialog; })}>{t('lblEdit')}…</button>;
     case 'css':
       // Row draws the CSS editor's button and the editor itself, because the editor is too big for the control column
       return null;

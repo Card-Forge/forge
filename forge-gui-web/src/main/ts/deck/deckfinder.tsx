@@ -24,8 +24,8 @@ const NET = 'net';
 const isNet = (source: string) => source.startsWith(`${NET} `);
 const netName = (source: string) => source.slice(NET.length + 1);
 type SortKey = 'name' | 'colors' | 'formats' | 'size' | 'legal' | 'bracket';
-const SORTS: [SortKey, TextKey][] = [['name', 'lblWebEditorSortName'], ['colors', 'lblWebEditorSortColour'], ['formats', 'lblWebFinderSortFormat'],
-  ['size', 'lblWebFinderSortSize'], ['legal', 'lblWebFinderSortLegalFirst'], ['bracket', 'lblWebFinderSortBracket']];
+const SORTS: [SortKey, TextKey][] = [['name', 'lblName'], ['colors', 'lblColor'], ['formats', 'lblFormat'],
+  ['size', 'lblWebFinderSortSize'], ['legal', 'lblWebFinderSortLegalFirst'], ['bracket', 'lblBracket']];
 
 /** The filters the server answers, because only the server reads every deck's cards. */
 type DeckQueryKind = DeckQuery['kind'];
@@ -254,7 +254,7 @@ export function DeckFinder({ model, actions, seat, close }: {
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" /><circle cx="8.5" cy="8.5" r="1.2" /><circle cx="15.5" cy="15.5" r="1.2" /><circle cx="12" cy="12" r="1.2" /><circle cx="15.5" cy="8.5" r="1.2" /><circle cx="8.5" cy="15.5" r="1.2" /></svg>
         <span class="label">{t('lblRandomDeck')}</span>
       </button>
-      <button class="new-deck" onClick={() => setAdding(true)}>{t('lblWebFinderNewDeck')}</button>
+      <button class="new-deck" onClick={() => setAdding(true)}>+ {t('lblNewDeck')}</button>
     </>
   );
   return (
@@ -333,9 +333,9 @@ export function DeckFinder({ model, actions, seat, close }: {
                 title={(c, name) => t('lblWebFinderColourDecks', name, decks.filter(d => (d.colors ?? '').includes(c)).length)} />
               {/* A search orders the list by how well each name matches, so the sort is disabled until the search is cleared */}
               {normalize(filter.query)
-                ? <Select cls="sort-by" label={t('lblSort')} disabled value="best" change={() => {}} choices={[{ value: 'best', label: t('lblWebEditorSortBestMatch') }]} />
+                ? <Select cls="sort-by" label={t('lblSort')} disabled value="best" change={() => {}} choices={[{ value: 'best', label: t('lblWebSortBy', t('lblWebEditorSortBestMatch')) }]} />
                 : <Select cls="sort-by" label={t('lblSort')} value={filter.sort} change={sort => change({ sort })}
-                    choices={SORTS.filter(([id]) => id !== 'bracket' || decks.some(d => d.bracket != null)).map(([id, name]) => ({ value: id, label: t(name) }))} />}
+                    choices={SORTS.filter(([id]) => id !== 'bracket' || decks.some(d => d.bracket != null)).map(([id, name]) => ({ value: id, label: t('lblWebSortBy', t(name)) }))} />}
             </div>
             <FilterBar kinds={kinds} filter={filter} set={setFilter} clearAll={clearAll} narrowed={narrowed} />
             {/* On a phone the count ends the chip line, so it gives only the decks shown */}
@@ -481,7 +481,7 @@ function finderKinds(model: Model, decks: readonly DeckSummary[], actions: Actio
     },
     {
       id: 'ai', group: legality, label: t('lblWebFilterAiSkips'),
-      chip: f => (f.aiPlays ? t('lblWebFilterAiSkipsNone') : null),
+      chip: f => (f.aiPlays ? t('lblNone') : null),
       clear: f => ({ ...f, aiPlays: false }),
       panel: (f, set, done) => <OneOf options={[['none', t('lblWebFilterAiSkipsOnlyNone')], ['any', t('lblWebFilterAiSkipsAny')]] as const}
         value={f.aiPlays ? 'none' : 'any'} pick={v => { set({ ...f, aiPlays: v === 'none' }); done(); }} />,
@@ -576,7 +576,7 @@ function Hit({ deck: d, chosen, choose, use, source, forComputer, star }: {
       {/* A row is a button, so the star inside it is a span that stops its click from reaching the row */}
       {(
         <span class={d.favourite ? 'dk-star on' : 'dk-star'} role="button" aria-pressed={!!d.favourite}
-          aria-label={t(d.favourite ? 'lblWebFinderUnstar' : 'lblWebFinderStar')} title={t(d.favourite ? 'lblWebFinderUnstar' : 'lblWebFinderStar')}
+          aria-label={t(d.favourite ? 'lblRemoveFavorites' : 'lblAddFavorites')} title={t(d.favourite ? 'lblRemoveFavorites' : 'lblAddFavorites')}
           onClick={e => { e.stopPropagation(); star(!d.favourite); }} onDblClick={e => e.stopPropagation()}>{d.favourite ? '\u2605' : '\u2606'}</span>
       )}
       <Title deck={d} />

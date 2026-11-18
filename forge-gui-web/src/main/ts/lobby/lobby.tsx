@@ -331,7 +331,7 @@ function Ready({ seat, actions, disabled }: { seat: Seat; actions: Actions; disa
   return seat.mine
     ? <button class={`deck-row ready-toggle${seat.ready ? '' : ' unset'}`} disabled={disabled}
         aria-pressed={seat.ready} title={seat.ready ? t('lblWebLobbyNotReadyAfterAll') : ''}
-        onClick={() => actions.ready(!seat.ready)}>{t(seat.ready ? 'lblWebLobbyReadyTick' : 'lblWebLobbyPressWhenReady')}</button>
+        onClick={() => actions.ready(!seat.ready)}>{seat.ready ? `✓ ${t('lblReady')}` : t('lblWebLobbyPressWhenReady')}</button>
     : <p class="deck-row fixed">{t(seat.ready ? 'lblReady' : 'lblWebLobbyNotReadyYet')}</p>;
 }
 

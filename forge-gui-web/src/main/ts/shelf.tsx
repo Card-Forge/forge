@@ -57,7 +57,7 @@ export function Shelf<Row extends { name: string }>({ rows, create, cls, art, su
                   <span class="sp" />
                   {/* The menu is only shown when a save can be removed, because removing is its main item */}
                   {remove && <Dropdown cls="ev-more" button={(open, toggle) => (
-                    <button class="more" title={t('lblWebHeadMore')} aria-label={t('lblWebLimitedMoreFor', r.name)} aria-expanded={open}
+                    <button class="more" title={t('lblMore')} aria-label={t('lblWebLimitedMoreFor', r.name)} aria-expanded={open}
                       onClick={toggle}>⋯</button>
                   )}>
                     {close => (

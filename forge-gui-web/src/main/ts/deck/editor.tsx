@@ -138,7 +138,7 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
         {check}
         <div class="head-right">
           <span class="save-state">{saveState(state)}</span>
-          <button disabled={!state.canUndo} onClick={() => actions.editorUndo()} title={t('lblWebEditorUndoTip')} aria-label={t('lblUndo')}>&#8630;<span class="word"> {t('lblUndo')}</span></button>
+          <button disabled={!state.canUndo} onClick={() => actions.editorUndo()} title={`${t('lblUndo')} (Ctrl+Z)`} aria-label={t('lblUndo')}>&#8630;<span class="word"> {t('lblUndo')}</span></button>
           <HeadControls />
           <button class="primary" onClick={() => actions.closeEditor()}>{t('lblDone')}</button>
         </div>

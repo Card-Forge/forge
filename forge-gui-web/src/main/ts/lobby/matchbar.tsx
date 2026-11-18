@@ -39,9 +39,9 @@ function Field({ name, grow, children }: { name: string; grow?: boolean; childre
 function limitedFormats(): (Format & { kind: 'draft' | 'sealed' })[] {
   return [
     { id: 'Draft', kind: 'draft', name: t('lblDraft'), group: 'Limited', desc: t('lblWebMatchBarDescDraft'),
-      facts: [t('lblWebMatchBarFactPicks'), t('lblWebFactLife', 20)], play: t('lblWebMatchBarPlayDraft'), deckCards: 40, deckAtLeast: false },
+      facts: [t('lblWebMatchBarFactPicks'), t('lblLifeHas', 20)], play: t('lblWebMatchBarPlayDraft'), deckCards: 40, deckAtLeast: false },
     { id: 'Sealed', kind: 'sealed', name: t('lblSealed'), group: 'Limited', desc: t('lblWebMatchBarDescSealed'),
-      facts: [t('lblWebMatchBarFactPool'), t('lblWebFactLife', 20)], play: t('lblWebMatchBarPlaySealed'), deckCards: 40, deckAtLeast: false },
+      facts: [t('lblWebMatchBarFactPool'), t('lblLifeHas', 20)], play: t('lblWebMatchBarPlaySealed'), deckCards: 40, deckAtLeast: false },
   ];
 }
 
@@ -170,14 +170,14 @@ function Teams({ lobby, actions }: { lobby: LobbyTable; actions: Actions }) {
   );
 }
 
-const MATCH_LENGTHS = [[1, 'lblWebMatchBarBestOfOne'], [3, 'lblWebMatchBarBestOfThree'], [5, 'lblWebMatchBarBestOfFive']] as const;
+const MATCH_LENGTHS = [1, 3, 5] as const;
 
 /** Best-of-one, three or five, stored in the host's own preferences. Only the host may change it. */
 function MatchLength({ lobby, actions }: { lobby: LobbyTable; actions: Actions }) {
   return (
     <span class="count" role="group" aria-label={t('lblMatch')}>
-      {MATCH_LENGTHS.map(([n, name]) => (
-        <button key={n} aria-pressed={n === lobby.gamesPerMatch} disabled={!lobby.host} title={t(name)}
+      {MATCH_LENGTHS.map(n => (
+        <button key={n} aria-pressed={n === lobby.gamesPerMatch} disabled={!lobby.host} title={t('lblWebLimitedBestOf', n)}
           onClick={() => actions.setMatchLength(n)}>{t('lblWebMatchBarBestOfShort', n)}</button>
       ))}
     </span>

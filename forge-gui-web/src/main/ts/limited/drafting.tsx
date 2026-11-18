@@ -245,7 +245,7 @@ function Pack({ state, faces, actions, log }: { state: DraftState; faces: string
         {next !== null && <span class="chip more">{tNodes('lblWebDraftNextFrom', seat(next))}</span>}
         {depths[busiest] > 2 && <span class="chip more">{busiest === 0 ? t('lblWebDraftYouHoldingPacks', depths[busiest]) : t('lblWebDraftSeatHoldingPacks', state.seats[busiest].name, depths[busiest])}</span>}
         <span class="head-end">
-          <Select<PackSort> cls="sort-by" label={t('lblSort')} value={by} change={setSort} choices={sorts.map(([id, name]) => ({ value: id, label: t(name) }))} />
+          <Select<PackSort> cls="sort-by" label={t('lblSort')} value={by} change={setSort} choices={sorts.map(([id, name]) => ({ value: id, label: t('lblWebSortBy', t(name)) }))} />
           {log && <HeadMenu label={t('lblWebDraftLog')}>{() => <DraftLog lines={state.log} />}</HeadMenu>}
           <TableMenu state={state} faces={faces} />
         </span>
@@ -268,14 +268,14 @@ function Pack({ state, faces, actions, log }: { state: DraftState; faces: string
             {i === selected && <span class="confirm">{t('lblWebDraftPickConfirm')}</span>}
           </div>
         ); })}
-        {state.cards.length === 0 && !state.done && <p class="muted">{t('lblWebDraftWaitingForPack')}</p>}
+        {state.cards.length === 0 && !state.done && <p class="muted">{t('lblDraftOverlayWaitingForPack')}</p>}
       </div>
     </section>
   );
 }
 
-const PACK_SORTS: [PackSort, TextKey][] = [['rarity', 'lblWebDraftSortRarity'], ['colour', 'lblWebDraftSortColor'], ['mv', 'lblWebDraftSortManaValue'],
-  ['rank', 'lblWebDraftSortRanking']];
+const PACK_SORTS: [PackSort, TextKey][] = [['rarity', 'lblRarity'], ['colour', 'lblColor'], ['mv', 'lblCMC'],
+  ['rank', 'lblDraftRanking']];
 const RARITY: Record<string, number> = { M: 4, S: 3, R: 3, U: 2, C: 1 };
 
 /** Mono-coloured cards in WUBRG order, then multicoloured, then colourless. */

@@ -90,7 +90,7 @@ export function sealedSteps(options: LimitedOptions): Step<SealedValue>[] {
         : <p class="hint">{t('lblWebSetupNoPools')}</p>,
     },
     {
-      id: 'cubeId', label: t('lblWebSetupCube'), hint: t('lblWebSetupHintCubeCobra'), fields: ['cubeId'], applies: v => v.product === 'Import',
+      id: 'cubeId', label: t('lblWebSetupCube'), hint: t('lblWebSetupCubeCobraField'), fields: ['cubeId'], applies: v => v.product === 'Import',
       answer: v => v.cubeId ?? null,
       render: (_, set) => <TextStep placeholder={t('lblWebSetupCubeCobraField')} initial="" done={id => set({ cubeId: id })} />,
     },
@@ -297,12 +297,12 @@ export function draftSteps(options: LimitedOptions, table?: DraftTable): Step<Dr
         : <p class="hint">{t('lblWebSetupNoCubes')}</p>,
     },
     {
-      id: 'theme', label: t('lblWebSetupTheme'), hint: t('lblWebSetupHintWhichSets'), fields: ['theme'], applies: v => v.product === 'Chaos',
+      id: 'theme', label: t('lblTheme'), hint: t('lblWebSetupHintWhichSets'), fields: ['theme'], applies: v => v.product === 'Chaos',
       answer: v => v.theme ?? null,
       render: (_, set) => <Pick items={options.themes.map(th => [th, th])} placeholder={t('lblWebSetupFindTheme')} pick={th => set({ theme: th })} />,
     },
     {
-      id: 'cubeId', label: t('lblWebSetupCube'), hint: t('lblWebSetupHintCubeCobra'), fields: ['cubeId'], applies: v => v.product === 'Import',
+      id: 'cubeId', label: t('lblWebSetupCube'), hint: t('lblWebSetupCubeCobraField'), fields: ['cubeId'], applies: v => v.product === 'Import',
       answer: v => v.cubeId ?? null,
       render: (_, set) => <TextStep placeholder={t('lblWebSetupCubeCobraField')} initial={options.lastCube ?? ''} done={id => set({ cubeId: id })} />,
     },

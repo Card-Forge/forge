@@ -349,7 +349,7 @@ function drawWaiting(pill: HTMLElement, model: Model): void {
   you.textContent = tCap('lblYou');
   const words = onMe
     ? (people.length === 1 ? tNodes('lblWebPhaseWaitingOnYou', people[0].Name ?? '', you) : tNodes('lblWebPhasePlayersWaitingOnYou', people.length, you))
-    : [t('lblWebPhaseWaitingOn', holder.Name ?? '')];
+    : [t('lblWaitingForPlayer', holder.Name ?? '')];
   q(chip, '.who').replaceChildren(...words.map(w => (w instanceof Node ? w : String(w))));
   // A short wait shows no chip. A chip that first appeared at 0s looked stuck
   const show = () => {

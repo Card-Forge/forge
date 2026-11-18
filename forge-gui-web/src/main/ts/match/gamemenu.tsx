@@ -8,7 +8,7 @@ import { DevItems } from './devmenu';
 import type { Actions } from '../actions';
 import type { AutoDecision } from '../protocol';
 import { deref, type Model } from '../model';
-import { t, type TextKey } from '../text';
+import { t, tSentence, type TextKey } from '../text';
 import { useClosing } from '../closing';
 import { changeUi, ui } from '../ui';
 import { Backdrop, Confirm } from '../dialog';
@@ -75,12 +75,12 @@ export function GameMenu({ model, actions, close, open, dev: atDev }: {
           <MenuIcon d={ICONS.volume} />{t('lblWebHeadVolume')}
         </button>}
         <button type="button" role="menuitem" class="card-menu-item" onClick={() => { close(); changeUi(u => { u.optionsOpen = true; }); }}>
-          <MenuIcon d={ICONS.cog} />{t('lblWebHeadOptions')}
+          <MenuIcon d={ICONS.cog} />{tSentence('lblOptions')}
         </button>
         <div class="card-menu-sep" role="separator" />
         <button type="button" role="menuitem" class="card-menu-item" disabled={!!offer || model.spectating}
           onClick={() => { actions.drawOffer('OFFER'); close(); }}>
-          <MenuIcon d={ICONS.draw} />{offer?.mine ? t('lblWebGameMenuDrawOffered') : t('lblWebGameMenuOfferDraw')}
+          <MenuIcon d={ICONS.draw} />{offer?.mine ? t('lblWebGameMenuDrawOffered') : t('lblOfferDraw')}
         </button>
         <button type="button" role="menuitem" class="card-menu-item concede" disabled={model.spectating} onClick={() => {
           close();
