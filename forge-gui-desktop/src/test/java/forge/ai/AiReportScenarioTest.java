@@ -888,6 +888,13 @@ public class AiReportScenarioTest extends AITest {
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
                     return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? null : "mulliganed a hand with four MDFC lands";
                 }));
+        l.add(new Scenario("12929-lands-and-auras", "a hand of lands and Auras for creatures, no creature, is sent back", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Grizzly Bears", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept lands and Auras without a creature" : null;
+                }));
         l.add(noPlay("5860", "edict against a player with nothing to sacrifice", Fid.EXACT, M1, true, "Diabolic Edict",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));
         l.add(noPlay("5879", "free spell under the opponent's Roiling Vortex", Fid.EXACT, M1, true, "Snuff Out",
