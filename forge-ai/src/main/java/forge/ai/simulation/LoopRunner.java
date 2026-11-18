@@ -317,7 +317,7 @@ public final class LoopRunner {
     }
 
     /** The spell of that name from the hand, or null. */
-    static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
+    public static SpellAbility castFromHand(final Player ai, final List<SpellAbility> candidates, final String name) {
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host != null && sa.isSpell() && !sa.isLandAbility() && host.isInZone(ZoneType.Hand)
@@ -339,7 +339,7 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
-        if (ElfLoop.held(ai, sa)) {
+        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa)) {
             return true;
         }
         final Card host = sa == null ? null : sa.getHostCard();

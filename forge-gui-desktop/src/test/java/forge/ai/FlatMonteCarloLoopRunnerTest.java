@@ -672,6 +672,73 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void livingWishIsCastFirstForTheMissingUntapper() {
+        alurenDeckWith(4, "Living Wish", "Stroke of Genius", "Cavern Harpy");
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Sideboard);
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull("Stroke is here, the Cloud is not: Living Wish first", step);
+        AssertJUnit.assertEquals("Living Wish", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theWishAndTheTutorsTakeTheMissingPiece() {
+        alurenDeckWith(4, "Stroke of Genius", "Cavern Harpy");
+        final Card familiar = addCardToZone("Raven Familiar", ai, ZoneType.Sideboard);
+        final Card cloud = addCardToZone("Cloud of Faeries", ai, ZoneType.Sideboard);
+        AssertJUnit.assertEquals("Cloud of Faeries", forge.ai.simulation.AlurenPlan.wanted(ai, cards(familiar, cloud)));
+        final forge.game.card.CardCollection picks = forge.ai.simulation.AlurenPlan.picks(ai, cards(familiar, cloud), 1);
+        AssertJUnit.assertEquals(cloud, picks.getFirst());
+    }
+
+    @Test(timeOut = 120000)
+    public void acererakIsItsOwnLoopWithoutTheHarpy() {
+        alurenDeckWith(3, "Acererak the Archlich");
+        AssertJUnit.assertTrue(forge.ai.simulation.AlurenPlan.isAlurenDeck(ai));
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.ACERERAK,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull("Aluren is in play: Acererak is free and comes back every time", step);
+        AssertJUnit.assertEquals("Acererak the Archlich", step.getHostCard().getName());
+        AssertJUnit.assertEquals("Lost Mine of Phandelver", forge.ai.simulation.AlurenPlan.dungeon(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void theSavageAndTheHarpyDrawEvenWithEightCardsInHand() {
+        alurenDeckWith(4, "Cavern Harpy", "Forest", "Forest", "Forest", "Forest", "Forest", "Forest", "Forest");
+        for (int i = 0; i < 15; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.CARDS, forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        AssertJUnit.assertTrue("over seven cards is no reason to stop the draws", forge.ai.simulation.AlurenPlan.drawLoop(ai));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Cavern Harpy", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theHarpyAloneWaitsForTheFamiliar() {
+        alurenDeckWith(4, "Cavern Harpy", "Raven Familiar");
+        final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
+        AssertJUnit.assertNotNull(harpy);
+        AssertJUnit.assertTrue("the Harpy returns only itself: the Familiar goes first", LoopRunner.held(ai, harpy));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Raven Familiar", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theDiscardKeepsThePiecesOfTheKill() {
+        alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Intuition", "Intuition", "Cavern Harpy");
+        final forge.game.card.CardCollection hand = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand));
+        final forge.game.card.CardCollection rest = forge.ai.simulation.AlurenPlan.withoutKeys(ai, hand);
+        for (final Card c : rest) {
+            AssertJUnit.assertEquals("only the Intuitions may go", "Intuition", c.getName());
+        }
+        AssertJUnit.assertEquals(2, rest.size());
+    }
+
+    @Test(timeOut = 120000)
     public void noCreatureIsHeldWhenGlimpseIsNotInTheHand() {
         elfDeckWith(5, "Craterhoof Behemoth", "Elvish Visionary", "Heritage Druid");
         addCardToZone("Glimpse of Nature", ai, ZoneType.Library);
