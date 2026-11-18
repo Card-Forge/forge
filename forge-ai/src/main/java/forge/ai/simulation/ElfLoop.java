@@ -51,6 +51,17 @@ public final class ElfLoop {
         return owns(ai, GLIMPSE);
     }
 
+    /**
+     * The decks that play for a combo of their elves whether or not the catalog has the exact pair: Glimpse of Nature
+     * (most of them have no Craterhoof, and the catalog line needs both) and Heritage Druid with Nettle Sentinel (three
+     * elves for GGG, and the Sentinel untaps for every green creature). Read as the creature decks they look like, these
+     * were plans of an aggro deck: the rollouts counted the damage and cast a creature with every mana, Glimpse of Nature
+     * stayed in the hand.
+     */
+    public static boolean isComboElfDeck(final Player ai) {
+        return isElfDeck(ai) || owns(ai, "Heritage Druid") && owns(ai, "Nettle Sentinel");
+    }
+
     private static boolean owns(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Battlefield,
                 ZoneType.Sideboard)) {

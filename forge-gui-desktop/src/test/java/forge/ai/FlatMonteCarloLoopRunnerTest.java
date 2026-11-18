@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.ai.simulation.DeckPlan;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -543,6 +544,14 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
         AssertJUnit.assertNotNull("Glimpse is in effect: a creature is next", step);
         AssertJUnit.assertEquals("Heritage Druid", step.getHostCard().getName()); // the cheapest: one mana, a card
+    }
+
+    @Test(timeOut = 120000)
+    public void aGlimpseDeckWithoutCraterhoofIsAComboDeckNotAnAggroDeck() {
+        // the catalog line is Glimpse + Craterhoof; a deck of elves without the second card was read as aggro
+        elfDeckWith(5, "Glimpse of Nature", "Elvish Visionary", "Heritage Druid");
+        addCards("Llanowar Elves", 12, ai);
+        AssertJUnit.assertEquals(DeckPlan.Archetype.COMBO, DeckPlan.forSetting("auto", ai).archetype);
     }
 
     @Test(timeOut = 120000)

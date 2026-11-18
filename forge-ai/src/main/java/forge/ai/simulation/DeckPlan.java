@@ -169,7 +169,8 @@ public final class DeckPlan {
         // whatever its cheap spells look like to the archetype counters below
         final ComboPlan combos = ComboPlan.scan(player);
         final CommanderPlan cmd = CommanderPlan.scan(player);
-        Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        Archetype arch = combos.isEmpty() && !ElfLoop.isComboElfDeck(player) && !TidePlan.isTideDeck(player)
+                ? classify(player) : Archetype.COMBO;
         if (combos.has(ComboPlan.Kind.DARK_DEPTHS) && classify(player) == Archetype.LANDS) {
             // Legacy Lands: Dark Depths with Thespian's Stage is its win condition, but the deck is still about its
             // lands (the long playouts of a combo plan stay: the plan keeps the combo)
