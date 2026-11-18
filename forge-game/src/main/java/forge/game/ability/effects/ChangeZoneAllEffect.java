@@ -129,9 +129,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getStack().remove(c);
             }
 
-            if (remLKI) {
-                source.addRemembered(CardCopyService.getLKICopy(c));
-            }
+            final Card lkiCopy = remLKI ? CardCopyService.getLKICopy(c) : null;
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
@@ -168,6 +166,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
                 }
+            }
+
+            if (lkiCopy != null && movedCard.getZone().is(destination)) {
+                source.addRemembered(lkiCopy);
             }
 
             if (!movedCard.getZone().equals(originZone)) {

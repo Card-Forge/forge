@@ -156,12 +156,12 @@ An array of the possible colors for `card` and `deckCard`.
 `{..., "colors": ["red", "black"], ...}`
 
 ## **rarity**
-An array of the possible raritys for `card` and `deckCard`.
+An array of the possible raritys for `card` and `deckCard`. Without `editions`, the rarity is checked against the card's default printing only, so a card that has this rarity in another set can still be left out.
 
 `{..., "rarity": ["basicland", "common", "uncommon", "rare", "mythicrare"], ...}`
 
 ## **editions**
-An array of the possible editions for `card` and `deckCard`, referenced by their 3 character set code.
+An array of the possible editions for `card` and `deckCard`, referenced by their 3 character set code. The reward is the card's printing from one of these editions, and `rarity` is checked against that printing. Without `editions`, the reward is always the card's default printing, not a random one.
 
 `{..., "editions": ["ONE", "MOM", "MAT"], ...}`
 
@@ -182,9 +182,11 @@ An array of the possible superTypes for `card` and `deckCard`.
 `{..., "superTypes ": ["Legendary", "Basic", "Snow"], ...}`
 
 ## **cardName**
-The exact name of a `card` to use.
+The exact name of a `card` to use. Add a set code after a `|`, or set `editions`, to grant a specific printing.
 
 `{..., "cardName": "Llanowar Elves", ...}`
+
+`{..., "cardName": "Llanowar Elves|M19", ...}`
 
 ## **cardText**
 A regular expression defining text that must appear on the card. A sequence of plain text alphanumeric (A-Z, 0-9) characters can function here if you are unfamiliar with regular expressions, but many special characters will change the functionality. Useful for denoting keywords or identifying helper cards that are associated with but do not actually have a given type.

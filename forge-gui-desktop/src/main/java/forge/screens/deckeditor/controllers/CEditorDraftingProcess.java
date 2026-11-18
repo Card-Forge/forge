@@ -275,8 +275,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
                     new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
-                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture(),
-                            ((BoosterDraft) boosterDraft).getFreeCommanderName()));
+                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         } else {
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
