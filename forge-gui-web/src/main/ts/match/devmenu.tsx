@@ -15,12 +15,12 @@ type Entry = [DevAction, TextKey];
 /** The cheats that come in families. Each family is one row of the menu with its cheats in a submenu. */
 const FAMILIES: Record<string, { name: TextKey; items: (Entry | 'sep')[] }> = {
   place: { name: 'lblWebDevPlaceCard', items: [['addCardToHand', 'lblHandZone'], ['addCardToBattlefield', 'lblBattlefieldZone'], ['addCardToLibrary', 'lblLibrary'],
-    ['addCardToGraveyard', 'lblGraveyard'], ['addCardToExile', 'lblExile'], 'sep', ['addTokenToBattlefield', 'lblWebDevAddToken']] },
-  exile: { name: 'lblWebDevExileCards', items: [['exileCardsFromHand', 'lblWebDevExileFromHand'], ['exileCardsFromBattlefield', 'lblWebDevExileFromBattlefield'], 'sep',
-    ['removeCardsFromGame', 'lblWebDevRemoveFromGame']] },
-  counters: { name: 'lblCounters', items: [['addCountersToPermanent', 'lblWebDevAddCounters'], ['removeCountersFromPermanent', 'lblWebDevRemoveCounters']] },
+    ['addCardToGraveyard', 'lblGraveyard'], ['addCardToExile', 'lblExile'], 'sep', ['addTokenToBattlefield', 'lblTokenToBattlefield']] },
+  exile: { name: 'lblWebDevExileCards', items: [['exileCardsFromHand', 'lblExileFromHand'], ['exileCardsFromBattlefield', 'lblExileFromPlay'], 'sep',
+    ['removeCardsFromGame', 'lblRemoveFromGame']] },
+  counters: { name: 'lblCounters', items: [['addCountersToPermanent', 'lblAddCounterPermanent'], ['removeCountersFromPermanent', 'lblSubCounterPermanent']] },
   tap: { name: 'lblWebDevTapUntap', items: [['tapPermanents', 'lblTapPermanent'], ['untapPermanents', 'lblUntapPermanent']] },
-  planechase: { name: 'lblPlanechase', items: [['riggedPlanarRoll', 'lblWebDevRiggedPlanarRoll'], ['planeswalkTo', 'lblWebDevPlaneswalkTo']] },
+  planechase: { name: 'lblPlanechase', items: [['riggedPlanarRoll', 'lblRiggedRoll'], ['planeswalkTo', 'lblWalkTo']] },
 };
 const FAMILY_ICONS: Record<string, string> = { place: ICONS.plus, exile: ICONS.bin, counters: ICONS.yields, tap: ICONS.next, state: ICONS.folder, planechase: ICONS.dev };
 
@@ -57,8 +57,8 @@ export function DevItems({ model, actions, back, close, setUp }: {
   const familyName = (family: string): string => tCap(family === 'state' ? 'lblWebDevGameState' : FAMILIES[family].name);
   const subItems = (family: string) => (family === 'state'
     ? <>
-        <button type="button" role="menuitem" class="card-menu-item" onClick={setUp}>{t('lblWebDevSetUpState')}</button>
-        {item('dumpGameState', 'lblWebDevDumpState')}
+        <button type="button" role="menuitem" class="card-menu-item" onClick={setUp}>{t('lblSetupGame')}</button>
+        {item('dumpGameState', 'lblDumpGame')}
       </>
     : FAMILIES[family].items.map((e, i) => (e === 'sep' ? <div key={i} class="card-menu-sep" role="separator" /> : item(e[0], e[1]))));
   const show = (family: string, row: HTMLElement) => setOpen({ family, top: row.offsetTop });
@@ -97,18 +97,18 @@ export function DevItems({ model, actions, back, close, setUp }: {
         <button type="button" role="menuitem" class="card-menu-item dev-back" onMouseEnter={leave} onClick={back}>‹ {t('lblDevMode')}</button>
         <div class="card-menu-sep" role="separator" />
       </>}
-      {toggle('unlimitedLands', t('lblWebDevUnlimitedLands'), model.devState?.unlimitedLands)}
-      {toggle('viewAll', t('lblWebDevViewAll'), model.devState?.viewAll)}
+      {toggle('unlimitedLands', t('lblUnlimitedLands'), model.devState?.unlimitedLands)}
+      {toggle('viewAll', t('lblViewAll'), model.devState?.viewAll)}
       <div class="card-menu-sep" role="separator" />
       {familyRow('place')}
-      {plain('repeatLastAddition', 'lblWebDevRepeatLastAddition', ICONS.undo)}
-      {plain('castASpell', 'lblWebDevCastSpell', ICONS.autoPass)}
-      {plain('tutorForCard', 'lblWebDevTutor', ICONS.eye)}
+      {plain('repeatLastAddition', 'lblRepeatAddCard', ICONS.undo)}
+      {plain('castASpell', 'lblCastSpellOrPlayLand', ICONS.autoPass)}
+      {plain('tutorForCard', 'lblTutor', ICONS.eye)}
       {families.filter(f => f !== 'place' && f !== 'state' && f !== 'planechase').map(familyRow)}
       <div class="card-menu-sep" role="separator" />
-      {plain('generateMana', 'lblWebDevAddMana', ICONS.plus)}
-      {plain('setPlayerLife', 'lblWebDevSetLife', ICONS.user)}
-      {plain('winGame', 'lblWebDevWinGame', ICONS.crown)}
+      {plain('generateMana', 'lblGenerateMana', ICONS.plus)}
+      {plain('setPlayerLife', 'lblSetLife', ICONS.user)}
+      {plain('winGame', 'lblWinGame', ICONS.crown)}
       {familyRow('state')}
       {planechase && familyRow('planechase')}
       {open && !phone && (
@@ -126,8 +126,7 @@ export function DevSetupDialog({ actions, close }: { actions: Actions; close: ()
   const [text, setText] = useState('');
   const file = useRef<HTMLInputElement>(null);
   return (
-    <OptionsDialog title={t('lblWebDevSetUpTitle')} kind="dev-setup" close={close} footer={<>
-      <span class="hint">{t('lblWebDevSetUpHint')}</span>
+    <OptionsDialog title={t('lblSetupGame')} kind="dev-setup" close={close} footer={<>
       <button onClick={() => file.current?.click()}>{t('lblWebDevLoadFile')}</button>
       <button class="primary" disabled={!text.trim()} onClick={() => { actions.dev('setupGameState', text); close(); }}>{t('lblWebEventSetUp')}</button>
     </>}>
