@@ -1634,7 +1634,10 @@ public class AiController {
         }
         combat.clearAttackers();
         for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
-            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+            // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
+            // (Dryad Arbor into Lyra Dawnbringer)
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())
+                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -2456,6 +2459,15 @@ public class AiController {
                     && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
                     && !FlatMonteCarloPicker.enablesGoodBlock(player, sa) // flying/reach for the block: only now, not after the blocks
                     && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()
+                && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
+            // Nothing to answer in an upkeep or draw step: an instant waits for the main phase, the attack or the end step,
+            // when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the draw step)
+            final Predicate<SpellAbility> tooEarly = sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
+                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa);
+            extras.removeIf(tooEarly);
+            approved.removeIf(tooEarly);
         }
         if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
             extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter

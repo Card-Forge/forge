@@ -1607,6 +1607,11 @@ public class AiAttackController {
             return false;
         }
 
+        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing
+        if (attacker.isLand() && aiAggression < 5 && isGiftToABlocker(ai, attacker, combat)) {
+            return false;
+        }
+
         SpellAbilityFactors saf = new SpellAbilityFactors(attacker);
         if (aiAggression != 5) {
             saf.calculate(defenders, combat);
@@ -1674,6 +1679,25 @@ public class AiAttackController {
                 break;
         }
         return false; // don't attack
+    }
+
+    /**
+     * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
+     * make that worth it: attacking just hands the blocker a free kill.
+     */
+    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
+            return false;
+        }
+        for (final Player opp : ai.getOpponents()) {
+            for (final Card blocker : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canBlock(attacker, blocker) && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
+                        && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /** Whether some creature of an opponent of {@code attacker}'s controller could block it. */

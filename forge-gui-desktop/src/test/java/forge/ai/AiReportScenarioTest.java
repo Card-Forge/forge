@@ -496,6 +496,15 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
                 c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
                 c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
+        l.add(noPlay("12930-ephemerate", "Ephemerate in its own upkeep with a Grizzly Bears to blink: wait for the main phase", Fid.APPROX, "UPKEEP", true, "Ephemerate",
+                c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
+        l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
+                c -> { c.bf("Wastes", 4, c.ai); c.bf("Grizzly Bears", c.opp); c.hand("Kozilek's Command", c.ai); }));
+        l.add(noPlay("12934-thraben-charm-yard", "Thraben Charm / Endurance do not exile a graveyard holding only a fetch land", Fid.APPROX, M1, true, "Thraben Charm",
+                c -> { c.bf("Plains", c.ai); c.bf("Plains", c.ai); c.hand("Thraben Charm", c.ai); c.gy("Wooded Foothills", c.opp); }));
+        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
         l.add(play("4430", "Elvish Piper when a creature is also castable", Fid.EXACT, M1, true, "Elvish Piper",
                 c -> { c.bf("Forest", 3, c.ai); c.bf("Elvish Piper", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Craterhoof Behemoth", c.ai); }));
         l.add(new Scenario("4439", "Might of Old Krosa goes on the creature that is in combat", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
