@@ -426,7 +426,7 @@ public class ComputerUtilMana {
             } else if (sa.getApi() == ApiType.Pump) {
                 if ((saHost.isInstant() || saHost.isSorcery())
                         && ma.getHostCard().isCreature()
-                        && ai.getController().isAI()
+                        && ai.isAI()
                         && ma.getPayCosts().hasTapCost()
                         && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
                     // do not activate pump instants/sorceries targeting creatures by tapping targeted
@@ -786,7 +786,8 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (saPayment != null && "BlackLotus".equals(saPayment.getParam("AILogic")) && !SpecialCardAi.BlackLotus.consider(ai, sa, cost)) {
+            // a human may spend a Lotus on any spell, so auto-pay and the playable scan must count it
+            if (saPayment != null && ai.isAI() && "BlackLotus".equals(saPayment.getParam("AILogic")) && !SpecialCardAi.BlackLotus.consider(ai, sa, cost)) {
                 // since we checked this already, do not loop indefinitely checking again
                 saExcludeList.add(saPayment);
                 continue;
@@ -1287,7 +1288,7 @@ public class ComputerUtilMana {
         // a mana ability that discards the hand (Lion's Eye Diamond) is not for paying a spell while the hand holds the
         // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
         if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
-                && ai.getController() instanceof PlayerControllerAi
+                && ai.isAI()
                 && forge.ai.simulation.ComboPlan.holdsKillPiece(ai)) {
             return false;
         }
