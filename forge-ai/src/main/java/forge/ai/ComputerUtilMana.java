@@ -203,7 +203,7 @@ public class ComputerUtilMana {
         // mana doesn't count, since tapping the land for it uses up the filter.
         final int freeMana = orderedCards.stream().map(ComputerUtilMana::getAIPlayableMana)
                 .filter(abilities -> abilities.stream().noneMatch(m -> getManaToActivate(m) > 0))
-                .mapToInt(abilities -> abilities.stream().mapToInt(m -> m.amountOfManaGenerated(true)).max().orElse(0)).sum();
+                .mapToInt(abilities -> abilities.stream().mapToInt(ComputerUtilMana::mostManaGenerated).max().orElse(0)).sum();
         final boolean filtersFirst = freeMana < cost.getConvertedManaCost();
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
@@ -251,8 +251,8 @@ public class ComputerUtilMana {
 
                 String shardMana = shard.toShortString();
 
-                boolean payWithAb1 = shardMana.contains(ability1.getManaPart().mana(ability1));
-                boolean payWithAb2 = shardMana.contains(ability2.getManaPart().mana(ability2));
+                boolean payWithAb1 = shardMana.contains(manaOf(ability1));
+                boolean payWithAb2 = shardMana.contains(manaOf(ability2));
 
                 if (payWithAb1 && !payWithAb2) {
                     return -1;
@@ -286,7 +286,7 @@ public class ComputerUtilMana {
                 final String preferredShard = prefShardInfo[0];
                 final int preferredShardAmount = prefShardInfo.length > 1 ? Integer.parseInt(prefShardInfo[1]) : 3;
                 if (!preferredShard.isEmpty()) {
-                    final List<SpellAbility> prefAbilities = newAbilities.stream().filter(ab -> ab.getManaPart().mana(ab).contains(preferredShard)).limit(preferredShardAmount).collect(Collectors.toList());
+                    final List<SpellAbility> prefAbilities = newAbilities.stream().filter(ab -> manaOf(ab).contains(preferredShard)).limit(preferredShardAmount).collect(Collectors.toList());
                     newAbilities.removeAll(prefAbilities);
                     newAbilities.addAll(0, prefAbilities);
                 }
@@ -867,6 +867,8 @@ public class ComputerUtilMana {
             }
         }
 
+        // clear the color or X picked for each source that was tried and then not used
+        resetPayment(saExcludeList);
         CostPayment.handleOfferings(sa, test, cost.isPaid());
 
 //        if (DEBUG_MANA_PAYMENT) {
@@ -1071,6 +1073,11 @@ public class ComputerUtilMana {
             }
         }
         return ma;
+    }
+
+    private static String manaOf(final SpellAbility ma) {
+        final SpellAbility part = activeManaPart(ma);
+        return part.getManaPart().mana(part);
     }
 
     private static void resetPayment(List<SpellAbility> payments) {
@@ -1428,6 +1435,31 @@ public class ComputerUtilMana {
                 }
             }
             return false;
+        }
+
+        // pick the color for an ability that chooses it on resolution (Nykthos), and chooseColor uses this pick
+        if (m.choosesColorOnResolution(part)) {
+            final int[] amounts = m.amountsIfChosen(part);
+            byte best = 0;
+            int most = 0;
+            for (int i = 0; i < amounts.length; i++) {
+                final byte c = MagicColor.WUBRG[i];
+                if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(c), xManaCostPaidByColor)) {
+                    continue;
+                }
+                if (!sa.allowsPayingWithShard(sourceCard, c) || !ai.getManaPool().canPayForShardWithColor(toPay, c)) {
+                    continue;
+                }
+                if (amounts[i] > most) {
+                    best = c;
+                    most = amounts[i];
+                }
+            }
+            if (best == 0) {
+                return false;
+            }
+            m.setExpressChoice(MagicColor.toShortString(best));
+            return true;
         }
 
         if (!sa.allowsPayingWithShard(sourceCard, MagicColor.fromName(m.getOrigProduced()))) {
@@ -1923,7 +1955,7 @@ public class ComputerUtilMana {
             final List<SpellAbility> manaAbilities = getAIPlayableMana(card);
 
             for (final SpellAbility m : manaAbilities) {
-                if (m.getManaPart().isAnyMana()) {
+                if (activeManaPart(m).getManaPart().isAnyMana()) {
                     producesAnyColor = true;
                 }
 
@@ -1964,7 +1996,7 @@ public class ComputerUtilMana {
             } else if (producesAnyColor) {
                 anyColorManaSources.add(card);
             } else if (usableManaAbilities == 1) {
-                if (manaAbilities.get(0).getManaPart().mana(manaAbilities.get(0)).equals("C")) {
+                if (manaOf(manaAbilities.get(0)).equals("C")) {
                     colorlessManaSources.add(card);
                 } else {
                     oneManaSources.add(card);
@@ -2175,7 +2207,6 @@ public class ComputerUtilMana {
         return player.getLife() - lifeAlreadySpent - lifeCost >= minimumLife;
     }
 
-    // Returns basic mana abilities plus "reflected mana" abilities
     /**
      * <p>
      * getAIPlayableMana.
@@ -2186,8 +2217,9 @@ public class ComputerUtilMana {
     public static List<SpellAbility> getAIPlayableMana(Card c) {
         final List<SpellAbility> res = new ArrayList<>();
         for (final SpellAbility a : c.getManaAbilities()) {
-            // if there is a parent ability the AI can't use it
-            if (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected) {
+            // the payment picks the color for a ChooseColor root, and a ChoosePlayer root chooses the payer
+            final ApiType api = a.getApi();
+            if (api != ApiType.Mana && api != ApiType.ManaReflected && api != ApiType.ChooseColor && api != ApiType.ChoosePlayer) {
                 continue;
             }
             // a mana ability that itself costs mana is only usable if it's a filter
@@ -2209,6 +2241,16 @@ public class ComputerUtilMana {
             }
         }
         return res;
+    }
+
+    /** The most mana the ability can add, using the best color if it chooses a color on resolution. */
+    private static int mostManaGenerated(final SpellAbility ma) {
+        final SpellAbility part = activeManaPart(ma);
+        final AbilityManaPart mp = part.getManaPart();
+        if (mp == null || !mp.choosesColorOnResolution(part)) {
+            return part.amountOfManaGenerated(true);
+        }
+        return Arrays.stream(mp.amountsIfChosen(part)).max().orElse(0);
     }
 
     /** The pool's mana that may be spent on the ability. */
@@ -2243,7 +2285,7 @@ public class ComputerUtilMana {
      */
     private static boolean isFilterManaAbility(final SpellAbility ma) {
         // an exhaust ability works only once per game
-        if (ma.getApi() != ApiType.Mana || ma.isExhaust()) {
+        if (ma.getApi() == ApiType.ManaReflected || ma.isExhaust()) {
             return false;
         }
         final Cost cost = ma.getPayCosts();
@@ -2258,19 +2300,17 @@ public class ComputerUtilMana {
                 return false;
             }
         }
-        final AbilityManaPart mp = ma.getManaPart();
-        if (mp == null || mp.isSpecialMana() || mp.getOrigProduced().contains("Chosen")) {
+        final AbilityManaPart mp = activeManaPart(ma).getManaPart();
+        if (mp == null || mp.isSpecialMana()) {
             return false;
         }
-        final int amount = AbilityUtils.calculateAmount(ma.getHostCard(), ma.getParamOrDefault("Amount", "1"), ma);
-        final int produced = mp.isComboMana() ? amount : mp.getOrigProduced().split(" ").length * amount;
-        return produced >= manaCost.getCMC();
+        return mostManaGenerated(ma) >= manaCost.getCMC();
     }
 
     /** A filter that produces no more mana than it costs, so it only changes the color. */
     private static boolean onlyFixesColor(final SpellAbility ma) {
         final int toActivate = getManaToActivate(ma);
-        return toActivate > 0 && ma.amountOfManaGenerated(true) <= toActivate;
+        return toActivate > 0 && mostManaGenerated(ma) <= toActivate;
     }
 
     /**

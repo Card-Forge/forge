@@ -86,20 +86,8 @@ public class CardUtil {
 
         @Override
         public boolean test(final PaperCard card) {
-            if (!this.rarities.isEmpty() && !this.rarities.contains(card.getRarity()))
+            if (getPrinting(card) == null)
                 return !this.shouldBeEqual;
-            if (!this.editions.isEmpty() && !this.editions.contains(card.getEdition())) {
-                boolean found = false;
-                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card);
-                for (PaperCard c : allPrintings) {
-                    if (this.editions.contains(c.getEdition())) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                    return !this.shouldBeEqual;
-            }
             if (!this.minDate.isEmpty()) {
                 boolean found = false;
                 List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card);
@@ -244,6 +232,24 @@ public class CardUtil {
             return this.shouldBeEqual;
         }
 
+        /** The printing that meets the rarity and edition filters, preferring the given one, or null if none does. */
+        private PaperCard getPrinting(final PaperCard card) {
+            if (matchesPrinting(card))
+                return card;
+            if (this.editions.isEmpty())
+                return null;
+            for (PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
+                if (matchesPrinting(c))
+                    return c;
+            }
+            return null;
+        }
+
+        private boolean matchesPrinting(final PaperCard card) {
+            return (this.rarities.isEmpty() || this.rarities.contains(card.getRarity()))
+                    && (this.editions.isEmpty() || this.editions.contains(card.getEdition()));
+        }
+
         private Pattern getPattern(RewardData type) {
             if (type.cardText == null || type.cardText.isEmpty())
                 return null;
@@ -326,7 +332,7 @@ public class CardUtil {
 
         for (final PaperCard item : cards) {
             if (pre.test(item))
-                result.add(item);
+                result.add(pre.getPrinting(item));
         }
         return result;
     }

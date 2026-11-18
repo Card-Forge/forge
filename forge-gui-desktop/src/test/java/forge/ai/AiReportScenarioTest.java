@@ -490,6 +490,36 @@ public class AiReportScenarioTest extends AITest {
                     if (c.plays("Giver of Runes")) { return "activated Giver of Runes precombat"; }
                     return c.attackers().isEmpty() ? "AI did not attack into an empty board" : null;
                 }));
+        l.add(new Scenario("decayed-not-thrown-away", "A decayed 5/5 does not attack an empty board for 5 of 20 (it would be sacrificed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); },
+                c -> c.attackers().isEmpty() ? null : "attacked with a decayed creature for no lethal"));
+        l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
+                c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
+        l.add(noPlay("12930-ephemerate", "Ephemerate in its own upkeep with a Grizzly Bears to blink: wait for the main phase", Fid.APPROX, "UPKEEP", true, "Ephemerate",
+                c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
+        l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
+                c -> { c.bf("Wastes", 4, c.ai); c.bf("Grizzly Bears", c.opp); c.hand("Kozilek's Command", c.ai); }));
+        l.add(noPlay("12934-thraben-charm-yard", "Thraben Charm / Endurance do not exile a graveyard holding only a fetch land", Fid.APPROX, M1, true, "Thraben Charm",
+                c -> { c.bf("Plains", c.ai); c.bf("Plains", c.ai); c.hand("Thraben Charm", c.ai); c.gy("Wooded Foothills", c.opp); }));
+        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
+        l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("5907-path-birds", "Path to Exile against a lone Birds of Paradise", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Birds of Paradise", c.opp); }));
+        l.add(noPlay("5907-erode-harbinger", "Erode against a lone Treefolk Harbinger only gives them a land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Treefolk Harbinger", c.opp); }));
+        l.add(noPlay("5907-trophy-halfling", "Assassin's Trophy against a lone Delighted Halfling only gives them a land", Fid.APPROX, M1, true, "Assassin's Trophy",
+                c -> { c.bf("Swamp", 2, c.ai); c.bf("Forest", 2, c.ai); c.hand("Assassin's Trophy", c.ai); c.bf("Delighted Halfling", c.opp); }));
+        l.add(play("5907-path-angel", "Path to Exile still goes at a real threat", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(aimed("5907-path-angel-not-dork", "Path to Exile at the Angel, not at the mana dork beside it", Fid.APPROX, M1, true, "Path to Exile", "Baneslayer Angel",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(play("5907-erode-serra", "Erode on a Serra Angel is worth the land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Serra Angel", c.opp); }));
         l.add(play("4430", "Elvish Piper when a creature is also castable", Fid.EXACT, M1, true, "Elvish Piper",
                 c -> { c.bf("Forest", 3, c.ai); c.bf("Elvish Piper", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Craterhoof Behemoth", c.ai); }));
         l.add(new Scenario("4439", "Might of Old Krosa goes on the creature that is in combat", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
@@ -872,6 +902,13 @@ public class AiReportScenarioTest extends AITest {
                     for (final String n : new String[] { "Agadeem's Awakening", "Emeria's Call", "Shatterskull Smashing", "Hagra Mauling", "Lightning Bolt", "Lightning Bolt", "Lightning Bolt" }) { c.hand(n, c.ai); }
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
                     return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? null : "mulliganed a hand with four MDFC lands";
+                }));
+        l.add(new Scenario("12929-lands-and-auras", "a hand of lands and Auras for creatures, no creature, is sent back", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Grizzly Bears", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept lands and Auras without a creature" : null;
                 }));
         l.add(noPlay("5860", "edict against a player with nothing to sacrifice", Fid.EXACT, M1, true, "Diabolic Edict",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));
