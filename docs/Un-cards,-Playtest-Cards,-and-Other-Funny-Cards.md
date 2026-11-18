@@ -1855,7 +1855,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Photo Op - Scrape Twitter?
 1. (Uk) A-Town - Acquire local IP and test it against a Geolocation database?
 1. (Uk) Explore the Local Scene - (Phenomenon) Fetch local restaurants and tourist attractions via a maps API?
-1. (UK) The Local Guides - Name of the city your in. Similar to the above.
+1. (UK) The Local Guides - Name of the city you are in. Similar to the above.
 
 
 ### Tier 7
