@@ -499,6 +499,9 @@ public class ComputerUtilCost {
                     if (alreadyTapped != null) {
                         exclude.addAll(alreadyTapped);
                     }
+                    if (sa != null) {
+                        exclude.addAll(sa.getTappedForConvoke());
+                    }
                     CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, sa.isCrew() || !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
                     if (tapChoices != null) {
                         if (alreadyTapped != null) {
@@ -517,6 +520,9 @@ public class ComputerUtilCost {
                 CardCollection exclude = new CardCollection();
                 if (alreadyTapped != null) {
                     exclude.addAll(alreadyTapped);
+                }
+                if (sa != null) {
+                    exclude.addAll(sa.getTappedForConvoke());
                 }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {

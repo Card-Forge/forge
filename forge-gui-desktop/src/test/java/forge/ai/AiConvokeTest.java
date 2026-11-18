@@ -59,6 +59,30 @@ public class AiConvokeTest extends AITest {
     }
 
     @Test
+    public void aiKeepsElvesForHeritageDruidBeforeConvoking() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Card forest = addCard("Forest", ai);
+        Card heritage = addCard("Heritage Druid", ai);
+        Card visionary = addCard("Elvish Visionary", ai);
+        Card nettle = addCard("Nettle Sentinel", ai);
+        SpellAbility chord = inHand("Chord of Calling", ai);
+        chord.setXManaCostPaid(1);
+
+        // Heritage Druid plus the two supporting Elves make {G}{G}{G}; the Forest pays {1}.
+        // Convoking either supporting Elf first would make Heritage Druid's tap-three-Elves
+        // ability unavailable and incorrectly make this otherwise payable Chord fail.
+        AssertJUnit.assertTrue(ComputerUtil.handlePlayingSpellAbility(ai, chord, null));
+        AssertJUnit.assertFalse(game.getStack().isEmpty());
+        AssertJUnit.assertNotNull(game.getStack().getSpellMatchingHost(chord.getHostCard()));
+        AssertJUnit.assertTrue(chord.getTappedForConvoke().isEmpty());
+        AssertJUnit.assertTrue(forest.isTapped());
+        AssertJUnit.assertTrue(heritage.isTapped());
+        AssertJUnit.assertTrue(visionary.isTapped());
+        AssertJUnit.assertTrue(nettle.isTapped());
+    }
+
+    @Test
     public void aiRatherAttacksThanConvokesWithItsAttackers() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
