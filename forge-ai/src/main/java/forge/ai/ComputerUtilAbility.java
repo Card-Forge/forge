@@ -78,9 +78,8 @@ public class ComputerUtilAbility {
                 all.add(p.getCardsIn(ZoneType.Library).get(0));
             }
         }
-        // The planar die is an immutable effect with an action the AI can take.
         all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()
-                || c.getSpellAbilities().stream().anyMatch(sa -> sa.getApi() == ApiType.RollPlanarDice)));
+            || "Planar Dice".equals(c.getName())));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;

@@ -521,7 +521,8 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         String produced = this.getOrigProduced();
         if (produced.contains("Chosen")) {
-            produced = produced.replace("Chosen", getChosenColor(sa));
+            // before the ability chooses its color, use the color that the payment picked
+            produced = produced.replace("Chosen", choosesColorOnResolution(sa) ? getExpressChoice() : getChosenColor(sa));
         }
         if (isSpecialMana()) {
             ManaEffect.handleSpecialMana(sa.getActivatingPlayer(), this, sa, false);
@@ -577,21 +578,15 @@ public class AbilityManaPart implements java.io.Serializable {
     /** Each mana string this would add if it resolved now, one for each choice it offers. */
     private List<String> manaOptions(final SpellAbility sa, final Iterable<String> reflected) {
         final List<String> options = Lists.newArrayList();
-        final Card host = sa.getHostCard();
-        // an amount that is only set as the ability is activated or resolves counts as at least one
-        final int amount = amountIsSettled(sa) ? sa.amountOfManaGenerated(false) : Math.max(1, sa.amountOfManaGenerated(false));
-        if (reflected == null && !isComboMana() && getOrigProduced().contains("Chosen") && !host.hasChosenColor() && choosesColor(sa)) {
-            // an amount that counts by the chosen color is worked out on a copy that has each color chosen
-            final Card copy = sa.getSVar(sa.getParamOrDefault("Amount", "")).contains("Chosen") ? CardCopyService.getLKICopy(host) : null;
-            for (final String color : MagicColor.Constant.ONLY_COLORS) {
-                if (copy != null) {
-                    copy.setChosenColors(Lists.newArrayList(color));
-                }
-                addOption(options, getOrigProduced().replace("Chosen", MagicColor.toShortString(color)),
-                        copy == null ? amount : AbilityUtils.calculateAmount(copy, sa.getParam("Amount"), sa));
+        if (reflected == null && !isComboMana() && choosesColorOnResolution(sa)) {
+            final int[] amounts = amountsIfChosen(sa);
+            for (int i = 0; i < amounts.length; i++) {
+                addOption(options, getOrigProduced().replace("Chosen", MagicColor.toShortString(MagicColor.WUBRG[i])), amounts[i]);
             }
             return options;
         }
+        // an amount that is only set as the ability is activated or resolves counts as at least one
+        final int amount = amountIsSettled(sa) ? sa.amountOfManaGenerated(false) : Math.max(1, sa.amountOfManaGenerated(false));
         final Iterable<String> choices = reflected != null ? Iterables.transform(reflected, MagicColor::toShortString)
                 : isComboMana() ? List.of(getComboColors(sa).split(" "))
                 : isAnyMana() ? List.of("W", "U", "B", "R", "G")
@@ -613,6 +608,40 @@ public class AbilityManaPart implements java.io.Serializable {
         if (amount > 0 && !mana.isEmpty()) {
             options.add(StringUtils.repeat(mana, " ", amount));
         }
+    }
+
+    /** Whether the ability chooses the color of its "Chosen" mana on resolution and has not chosen it yet. */
+    public boolean choosesColorOnResolution(final SpellAbility sa) {
+        return getOrigProduced().contains("Chosen") && !sa.getHostCard().hasChosenColor() && choosesColor(sa);
+    }
+
+    /** The amount the ability adds if it chooses this color. A color of 0 gives the amount with no color chosen. */
+    public int amountIfChosen(final SpellAbility sa, final byte color) {
+        final String amount = sa.getParamOrDefault("Amount", "1");
+        if (color == 0 || !sa.getSVar(amount).contains("Chosen")) {
+            return AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+        }
+        return amountWithChosenColor(CardCopyService.getLKICopy(sa.getHostCard()), amount, sa, color);
+    }
+
+    /** The amount the ability adds for each color it can choose, in {@link MagicColor#WUBRG} order, from a single copy of the host. */
+    public int[] amountsIfChosen(final SpellAbility sa) {
+        final String amount = sa.getParamOrDefault("Amount", "1");
+        final int[] amounts = new int[MagicColor.WUBRG.length];
+        if (!sa.getSVar(amount).contains("Chosen")) {
+            Arrays.fill(amounts, AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa));
+            return amounts;
+        }
+        final Card copy = CardCopyService.getLKICopy(sa.getHostCard());
+        for (int i = 0; i < amounts.length; i++) {
+            amounts[i] = amountWithChosenColor(copy, amount, sa, MagicColor.WUBRG[i]);
+        }
+        return amounts;
+    }
+
+    private static int amountWithChosenColor(final Card copy, final String amount, final SpellAbility sa, final byte color) {
+        copy.setChosenColors(Lists.newArrayList(MagicColor.toLongString(color)));
+        return AbilityUtils.calculateAmount(copy, amount, sa);
     }
 
     private static boolean choosesColor(final SpellAbility sa) {

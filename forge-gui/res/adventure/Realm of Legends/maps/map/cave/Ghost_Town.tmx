@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="149">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="151">
  <editorsettings>
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztWEtOwzAQHUQLLVK7YtUgNbBqVVggEHtW9AIsuAzKHQq06hHgAuWz6EVAiDMAZQESdlKrxrKT8S8Jap9k1UkdZ57ffBwDrLACDqMQoqJtKAKTCkDwT9tDZcHjvCrnd1Xzv4aHdbvnedv5/qBWjE8e7QMckxY009//3AF46SyuVTx84CbEjTtZ059bh8fpFkCrGa/VH7S56yFpsx7AVy/73XcBwGMze1waSC6LgeGxsZ40ysMFWLxNCYcn4j/j0H5ODI/LRvLrigcP4kPRd9t+niweAy5XUR4sDl1C1GNgkB9lPLqKHOhDDwad9ZHVAd04V4H4OYwAIqw9rnR9205+RR5pmr4SHpv19FYU8qwfPqHD4zawe5fP/U0aD1ZjVNizrGEugdFDjJkdS/tlMR5yc5ropuLB8oApVLa4qN0ylCXO24LGU03NdXi0DPxJtzab7lFc6cH7POtfH+DG0X2vGDO7HvXAgH5jDEP9/2xhyoPq/zP3gXHGecbFfL88a+DmzqpTsm8WEx4fuGEx8vi2p1DxEGO6U0+aCuxb6548d9YF6Hfx8SH2TVCWvMuD8petgQhS4yLWT+OBPYvBnh/Mx0ay+0PFfWzettUD4/9Ztkwc7NNc+hVm7bB7Zl1uvO3vVb/nlbF9ns5FPzU1ENc8y69EjcuSS3SxjDzyqpkmWEY9eJRNm2XXo2zIm8cv4t5zgw==
+   eJztWMtOAjEUvUZQMIGVK8aE0RUEDTEaH0tXulcW/oyZf0CF8An6A/hY8CMa4zcouNDEdoYJtWlnbh/zMHCShs7Q6dzTcx+dAiywAA59F7ysbcgCwwKA80/bY2HGo1MU87suJb+Gu2Wz51nb2X63lI1P7m0D7JPmVKPf/9IAeG3MrmU8ksCtixt3sKQ+twqPkzWAWtVfqz+oM9c90iYtgK9W/LvvHYCnavy4KJBc5gPDY2U5aJSHDYTxNiIcnon/DFzzOTE8rirBry0eLIgPed9183nieHSZXEV5hHFoE7weXY38KOLRlORAXT0O2wBHpB235WNU1kdUB1TjXAbi59AH8ET2nBP7L0jrMDxs6fq+HvzyPKI0fSM8VsvRLSukWT+ShAqPO8fsXUnub6J4hDVGhi3DGmYTGD34mNkwtF8U4y4zp45uMh5hHtCFzBYbtVuEvMR5ndN4pKi5Co+ahj+p1mbdPYotPVifD/s3O7hxdN/Lx8xmgnpgQL8xeq76f6bQ5UH1/5n6wCDmPONyul+eVHBzx9Up0TeLDo9P3DAfaXzbU8h48DHdKAdNhvBb64E8d9oEOGvi44Pv6yAveZcF5S9aAx6kxnlhP4oH9iwGe34wHeuJ7vck97F521QPjP/H2TK0sE+z6VeYtcPumVW5sbZ/FJM9r/TtS+hcdKyoAb/mcX7Fa5yXXKKKeeSRVs3UwTzqwSJv2sy7HnlD2jx+AacSdkE=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="50" height="40">
@@ -251,6 +251,23 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/door_up.tx" x="369.167" y="226.5" width="46.2499" height="12.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Commanders_Library.tmx"/>
+    <property name="teleportObjectId" value="89"/>
+   </properties>
+  </object>
+  <object id="150" template="../../../../common/maps/obj/dialog.tx" x="354.5" y="233.083" width="75.0001" height="21.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Ahead, you see a library swirling with spirits. You feel you might find great power within, if you are wealthy enough to claim it.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
    </properties>
   </object>
  </objectgroup>

@@ -103,7 +103,9 @@ public class FlatMonteCarloVetoSweep extends AITest {
             if (seen.add(key)) {
                 real.println(text);
             } else if (!text.startsWith("\tat ")) {
-                dropped.merge("repeated: " + (key.length() > 110 ? key.substring(0, 110) : key), 1, Integer::sum);
+                // the head names the spell and the tail holds what comes after the description (the targets that were chosen)
+                dropped.merge("repeated: " + (key.length() > 230 ? key.substring(0, 80) + " ... " + key.substring(key.length() - 140) : key),
+                        1, Integer::sum);
             }
         }
 

@@ -148,7 +148,11 @@ public class TapAi extends TapAiBase {
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
+                        final boolean creatureInPlay = payer.getGame().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CREATURES);
                         for (Card c : playable) {
+                            if (c.isAura() && !creatureInPlay) {
+                                continue; // an Aura with nothing to enchant is not a reason to pay 2 life
+                            }
                             // Check if the AI can pay for the card with the mana it has and intends to play it
                             // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
                             // card always looks unaffordable. A nonland card that needs exactly this land's mana will do

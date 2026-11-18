@@ -339,7 +339,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         int result = 0;
         AbilityManaPart mp = getManaPart();
         if (mp != null && metConditions()) {
-            int amount = hasParam("Amount") ? AbilityUtils.calculateAmount(getHostCard(), getParam("Amount"), this) : 1;
+            int amount = mp.amountIfChosen(this, mp.choosesColorOnResolution(this) ? MagicColor.fromName(mp.getExpressChoice()) : 0);
 
             if (!multiply || mp.isAnyMana() || mp.isComboMana() || mp.isSpecialMana()) {
                 result += amount;

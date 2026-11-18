@@ -19,6 +19,7 @@ package forge.screens.deckeditor.controllers;
 
 import forge.card.ColorSet;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
@@ -54,20 +55,16 @@ import java.util.Map.Entry;
  */
 public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup> {
 
-    private final String freeCommanderName;
     private final Localizer localizer = Localizer.getInstance();
 
     /**
      * @param deckMap0          storage backing this draft's deck group
      * @param screen0           the FScreen this editor lives on
      * @param cDetailPicture0   detail-picture controller
-     * @param freeCommanderName edition's free commander name (may be {@code null})
      */
     public CEditorCommanderDraftLimited(final IStorage<DeckGroup> deckMap0,
-            final FScreen screen0, final CDetailPicture cDetailPicture0,
-            final String freeCommanderName) {
+            final FScreen screen0, final CDetailPicture cDetailPicture0) {
         super(deckMap0, DeckGroup::new, screen0, cDetailPicture0);
-        this.freeCommanderName = freeCommanderName;
         sectionMode = DeckSection.Commander;
 
         // Insert the Commander section at position 0 so it appears first
@@ -241,13 +238,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup
         final CardPool cmdPool = getHumanDeck().getOrCreate(DeckSection.Commander);
         final List<PaperCard> current = new ArrayList<>(cmdPool.toFlatList());
 
-        boolean isValidPartnerAdd = false;
-        if (current.size() == 1) {
-            final PaperCard first = current.get(0);
-            isValidPartnerAdd = newCard.getRules().canBePartnerCommanders(first.getRules())
-                    || (CommanderDraftUtil.isPartnerEligible(first)
-                            && CommanderDraftUtil.isPartnerEligible(newCard));
-        }
+        final boolean isValidPartnerAdd = DeckFormat.CommanderDraft.getPartnerableCommander(getHumanDeck(), newCard, true) != null;
 
         if (!isValidPartnerAdd) {
             // Replace all existing commanders
@@ -304,16 +295,14 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup
             }
             catalog.add(card, 1);
         }
-        addFreeOption(catalog, sideboard, freeCommanderName);
-        for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {
-            addFreeOption(catalog, sideboard, fallback);
+        for (final String name : getFreeCommanders()) {
+            addFreeOption(catalog, sideboard, name);
         }
         return catalog;
     }
 
     private static void addFreeOption(final ItemPool<PaperCard> catalog,
             final CardPool sideboard, final String name) {
-        if (name == null || name.isEmpty()) { return; }
         final boolean inPool = sideboard.toFlatList().stream()
                 .anyMatch(c -> c.getName().equals(name));
         final boolean inCatalog = catalog.toFlatList().stream()
@@ -328,12 +317,11 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup
 
     /** Returns true when a card is a free-option commander (not from the draft pool). */
     private boolean isFreeOption(final PaperCard card) {
-        final String name = card.getName();
-        if (name.equals(freeCommanderName)) { return true; }
-        for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {
-            if (name.equals(fallback)) { return true; }
-        }
-        return false;
+        return getFreeCommanders().contains(card.getName());
+    }
+
+    private List<String> getFreeCommanders() {
+        return DeckFormat.getFreeCommanders(getHumanDeck().getAllCardsInASinglePool(false, false).toFlatList());
     }
 }
 

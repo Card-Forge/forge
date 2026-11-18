@@ -1019,6 +1019,12 @@ public class AiController {
             return canPlay;
         }
 
+        if (ActivationGuard.givesMoreThanItTakes(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "gift-exceeds-target", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
+        }
+
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
@@ -1126,7 +1132,7 @@ public class AiController {
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
             }
-            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
+            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX() && sa.getApi() != ApiType.RollPlanarDice) {
                 // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
                 // nothing (a 0/0 animate, a 0-point pump) and the AI repeats it at every priority pass. Size X to the mana
                 // that can be spared, and don't activate when there is none.
@@ -1634,10 +1640,35 @@ public class AiController {
         }
         combat.clearAttackers();
         for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
-            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+            // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
+            // (Dryad Arbor into Lyra Dawnbringer)
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())
+                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
+        // Sure damage is not called back: an attacker that no creature of theirs can block was weighed by the heuristics
+        // against staying home as a blocker already, and the rollouts value a point of damage far below a creature on
+        // the board (so they would withdraw any attacker whose attack costs it anything, or that is simply tapped).
+        final Integer max = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Map.Entry<Card, GameEntity> e : before.entrySet()) {
+            final Card c = e.getKey();
+            if (combat.isAttacking(c) || max != null && combat.getAttackers().size() >= max
+                    || !CombatUtil.canAttack(c, e.getValue())
+                    || AiAttackController.canBeBlockedByAnyOpponent(c) && !backedByATrick(c)) {
+                continue;
+            }
+            combat.addAttacker(c, e.getValue());
+        }
+    }
+
+    /**
+     * The heuristics remembered the creature to attack into a block that a trick wins (the lure). Only that memory is
+     * used, never the hand: restoring attackers because a pump is held would make the AI attack differently when it
+     * holds a trick, which the opponent could read.
+     */
+    private boolean backedByATrick(final Card c) {
+        return AiCardMemory.isRememberedCard(player, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
     }
 
     private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {
@@ -2434,6 +2465,15 @@ public class AiController {
                     && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
                     && !FlatMonteCarloPicker.enablesGoodBlock(player, sa) // flying/reach for the block: only now, not after the blocks
                     && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()
+                && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
+            // Nothing to answer in an upkeep or draw step: an instant waits for the main phase, the attack or the end step,
+            // when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the draw step)
+            final Predicate<SpellAbility> tooEarly = sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
+                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa);
+            extras.removeIf(tooEarly);
+            approved.removeIf(tooEarly);
         }
         if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
             extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter

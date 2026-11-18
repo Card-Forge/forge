@@ -2097,6 +2097,18 @@ public final class FlatMonteCarloPicker {
      * The tricks worth looking at once the blocks are down: a pump (a combat trick, firebreathing, bloodrush), protection or
      * regeneration, damage or removal to finish the fight. Not judged here whether it is a good idea: the rollouts do that.
      */
+    /**
+     * A spell that has to be cast in an upkeep or draw step on an empty stack: a "cast only during" phase restriction (its
+     * only window) or a card marked MustCastInUpkeep. Everything else waits for the main phase, the attack or the end step.
+     */
+    public static boolean mustBeCastNow(final Player player, final SpellAbility sa) {
+        if (sa.getRestrictions() != null && sa.getRestrictions().getPhases() != null
+                && !sa.getRestrictions().getPhases().isEmpty()) {
+            return true; // "cast only during your upkeep" and the like: that is its only window
+        }
+        return sa.getHostCard() != null && (sa.getHostCard().hasSVar("MustCastInUpkeep") || sa.isTrigger());
+    }
+
     public static boolean isCombatTrick(final SpellAbility sa) {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null || sa.isPwAbility()) {
             return false;
