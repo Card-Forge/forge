@@ -31,6 +31,8 @@ import static org.testng.Assert.assertTrue;
  * while leaving at least one source of each colour untapped. The number of sources used never changes.
  * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
  * A source that removes X counters to make mana removes only as many as the other sources leave unpaid.
+ * A source that hurts when tapped for mana ranks between the free sources and those spent for good,
+ * and a life loss on any other trigger is not charged as pain.
  */
 public class ComputerUtilManaTest extends SimulationTest {
 
@@ -145,6 +147,42 @@ public class ComputerUtilManaTest extends SimulationTest {
         final Map<String, Integer> untapped = payAndCountUntapped("3 R G", 5,
                 new String[] { "Elvish Spirit Guide" }, "Island:3", "Stomping Ground:1", "Steam Vents:1");
         assertEquals((int) untapped.get("Steam Vents"), 0, "expected every land tapped, got " + untapped);
+    }
+
+    @Test
+    public void painlessTapBeforePainfulTapBeforeSpentSource() {
+        // {1} with Caves of Koilos, City of Brass and a Spirit Guide: the Caves' free {C} pays,
+        // the City tap that loses 1 life comes second, and exiling the Guide stays the last resort
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "Caves of Koilos:1", "City of Brass:1");
+        assertEquals((int) untapped.get("Caves of Koilos"), 0, "expected the Caves to pay, got " + untapped);
+        assertEquals((int) untapped.get("City of Brass"), 1, "expected the City to stay untapped, got " + untapped);
+    }
+
+    @Test
+    public void painLandIsTappedBeforeASpiritGuideIsSpent() {
+        // losing 1 life to City of Brass still beats exiling a card from the hand for good
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "City of Brass:1");
+        assertEquals((int) untapped.get("City of Brass"), 0, "expected the City to pay, got " + untapped);
+    }
+
+    @Test
+    public void lifeLostOnEnteringIsNotTapPain() {
+        // Oscorp Industries only loses life when it enters from a graveyard, so tapping it costs nothing
+        // and it pays before a painless one-shot source is spent
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "Oscorp Industries:1");
+        assertEquals((int) untapped.get("Oscorp Industries"), 0, "expected the Oscorp to pay, got " + untapped);
+    }
+
+    @Test
+    public void painIsWeighedAgainstOtherCostsWithoutHeldColours() {
+        // {1} with Caves of Koilos and City of Brass and nothing in hand to steer by colour:
+        // the Caves' free {C} still pays, since a tap that loses 1 life is scored as a cost
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1, "Caves of Koilos:1", "City of Brass:1");
+        assertEquals((int) untapped.get("Caves of Koilos"), 0, "expected the Caves to pay, got " + untapped);
+        assertEquals((int) untapped.get("City of Brass"), 1, "expected the City to stay untapped, got " + untapped);
     }
 
     /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
