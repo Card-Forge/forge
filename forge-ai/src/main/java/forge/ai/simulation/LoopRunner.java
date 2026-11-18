@@ -344,17 +344,18 @@ public final class LoopRunner {
                         || host.getName().equals(TURNABOUT))) {
             return false;
         }
-        if ((drawsX(host.getName()) || host.getName().equals(BRAIN_FREEZE)) && TidePlan.isTideDeck(ai)) {
-            // the finishers are only ever cast by the loop (at the opponent, or on the AI itself by drawForMana, which
-            // counts what it draws): left to the rollouts they went on the AI itself for X=1 when the hand had no
-            // High Tide, and the one card that wins the game was spent to draw one
-            return true;
-        }
         if (tideDeckPieces(ai) && !tideActive(ai)) {
             return !tideReadyOrSolved(ai);
         }
         if (refillPieces(ai) && !tideActive(ai) && (host.getName().equals(HIGH_TIDE) || host.getName().equals(TURNABOUT))) {
             return !refillReady(ai);
+        }
+        if ((drawsX(host.getName()) || host.getName().equals(BRAIN_FREEZE)) && !tideActive(ai) && !tidePieces(ai)
+                && TidePlan.isTideDeck(ai)) {
+            // the finishers are only cast by the loop (at the opponent, or on the AI itself by drawForMana, which counts
+            // what it draws): left to the rollouts they went on the AI itself for X=1 when the hand had no High Tide.
+            // The loop casts from this list too, so it is not applied while High Tide is in effect or the loop has its pieces
+            return true;
         }
         return !host.getName().equals(TURNABOUT) && !host.getName().equals(BRAIN_FREEZE) && tidePieces(ai)
                 && !tideActive(ai) && untappedIslands(ai) < ISLANDS_NEEDED;
