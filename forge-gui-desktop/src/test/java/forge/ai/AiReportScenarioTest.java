@@ -505,6 +505,21 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
+        l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("5907-path-birds", "Path to Exile against a lone Birds of Paradise", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Birds of Paradise", c.opp); }));
+        l.add(noPlay("5907-erode-harbinger", "Erode against a lone Treefolk Harbinger only gives them a land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Treefolk Harbinger", c.opp); }));
+        l.add(noPlay("5907-trophy-halfling", "Assassin's Trophy against a lone Delighted Halfling only gives them a land", Fid.APPROX, M1, true, "Assassin's Trophy",
+                c -> { c.bf("Swamp", 2, c.ai); c.bf("Forest", 2, c.ai); c.hand("Assassin's Trophy", c.ai); c.bf("Delighted Halfling", c.opp); }));
+        l.add(play("5907-path-angel", "Path to Exile still goes at a real threat", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(aimed("5907-path-angel-not-dork", "Path to Exile at the Angel, not at the mana dork beside it", Fid.APPROX, M1, true, "Path to Exile", "Baneslayer Angel",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(play("5907-erode-serra", "Erode on a Serra Angel is worth the land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Serra Angel", c.opp); }));
         l.add(play("4430", "Elvish Piper when a creature is also castable", Fid.EXACT, M1, true, "Elvish Piper",
                 c -> { c.bf("Forest", 3, c.ai); c.bf("Elvish Piper", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Craterhoof Behemoth", c.ai); }));
         l.add(new Scenario("4439", "Might of Old Krosa goes on the creature that is in combat", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,

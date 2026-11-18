@@ -130,10 +130,75 @@ public final class ActivationGuard {
                     return null;
                 }
             }
+            if (givesMoreThanItTakes(ai, sa)) {
+                return "gift-exceeds-target";
+            }
             return idleChain(ai, sa);
         } catch (final RuntimeException e) {
             return null; // a refinement only
         }
+    }
+
+    /** What a basic land is worth to the player who gets it, on the scale of {@link ComputerUtilCard#evaluateCreature}. */
+    static final int LAND_GIFT = 130;
+    /** What a 3/3 token is worth to the player who gets it (Beast Within, Generous Gift). */
+    static final int TOKEN_GIFT = 190;
+
+    /**
+     * Removal that pays its victim's controller (Path to Exile, Erode, Assassin's Trophy: a land; Beast Within, Generous
+     * Gift: a 3/3) is only worth it for a target that is worth more than the gift: aimed at a mana dork or a small body
+     * it spends the card to ramp the opponent, and the removal is gone for something that matters. Judged on the chosen
+     * targets, else on everything the spell could be aimed at, so a real threat in play still gets the spell.
+     */
+    public static boolean givesMoreThanItTakes(final Player ai, final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || !sa.usesTargeting()) {
+            return false;
+        }
+        int gift = 0;
+        for (SpellAbility node = sa.getSubAbility(); node != null; node = node.getSubAbility()) {
+            if (node.getApi() == ApiType.ChangeZone && "Library".equals(node.getParam("Origin"))
+                    && "Battlefield".equals(node.getParam("Destination"))
+                    && node.getParamOrDefault("ChangeType", "").contains("Land")
+                    && "TargetedController".equals(node.getParam("DefinedPlayer"))) {
+                gift = Math.max(gift, LAND_GIFT);
+            } else if (node.getApi() == ApiType.Token && "TargetedController".equals(node.getParam("TokenOwner"))) {
+                gift = Math.max(gift, TOKEN_GIFT);
+            }
+        }
+        if (gift == 0) {
+            return false;
+        }
+        final List<Card> candidates = new ArrayList<>();
+        if (sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
+            candidates.addAll(sa.getTargets().getTargetCards());
+        } else {
+            for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+                if (sa.canTarget(c)) {
+                    candidates.add(c);
+                }
+            }
+        }
+        if (candidates.isEmpty()) {
+            return false;
+        }
+        for (final Card c : candidates) {
+            if (!c.isCreature() || c.isLand()) {
+                return false; // a planeswalker, an artifact, an enchantment: not judged here
+            }
+            if (!isSmallBody(c) && ComputerUtilCard.evaluateCreature(c) >= gift) {
+                return false; // something that is worth the gift
+            }
+        }
+        return true;
+    }
+
+    /** A creature worth less than what a removal spell gives away for it: a mana creature or another body with no use of its own. */
+    private static boolean isSmallBody(final Card c) {
+        // no ability but mana (Stoneforge Mystic, Mother of Runes are worth removing), no continuous effect on others (a lord), power 1 at most
+        // (a 0/3 Treefolk Harbinger has nothing left to do once it has fetched its card)
+        return c.getCMC() <= 2 && c.getNetPower() <= 1 && c.getStaticAbilities().stream().noneMatch(st -> st.checkMode(forge.game.staticability.StaticAbilityMode.Continuous)) // (flying and the like are statics too, but no lord's)
+                && c.getSpellAbilities().stream().noneMatch(a -> a.isAbility() && !a.isManaAbility()) // (the cast of the card itself is a Spell, not an ability)
+                && !c.hasSVar("HasAttackEffect") && c.getAttachedCards().isEmpty() && c.getCounters(CounterEnumType.P1P1) == 0;
     }
 
     private static String idleChain(final Player ai, final SpellAbility sa) {

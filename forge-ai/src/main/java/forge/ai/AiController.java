@@ -1019,6 +1019,12 @@ public class AiController {
             return canPlay;
         }
 
+        if (ActivationGuard.givesMoreThanItTakes(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "gift-exceeds-target", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
+        }
+
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
