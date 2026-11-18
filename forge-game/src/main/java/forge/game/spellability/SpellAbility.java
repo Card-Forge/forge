@@ -2439,8 +2439,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // If the primary ability has a sub, it's probably "more expensive"
             score += 2;
         }
+        if (payCosts != null && payCosts.hasTapCost() && hostCard != null) {
+            for (final Trigger t : hostCard.getTriggers()) {
+                if ((t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana)
+                        && hurtsController(t.getOverridingAbility())) {
+                    score += 10;
+                }
+            }
+        }
 
         return score;
+    }
+
+    private static boolean hurtsController(final SpellAbility sa) {
+        return sa != null
+                && (sa.getApi() == ApiType.DealDamage || sa.getApi() == ApiType.LoseLife)
+                && "You".equals(sa.getParamOrDefault("Defined", ""));
     }
 
     public CardDamageTable getDamageMap() {
