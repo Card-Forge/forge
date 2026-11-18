@@ -628,7 +628,7 @@ public final class AlurenPlan {
             return false;
         }
         if (LoopRunner.inPlay(ai, ALUREN) == null) {
-            return true;
+            return !(handCast && paidSavageDraw(ai)); // the Savage draws for the Harpy that is cast for its mana
         }
 
         final Stage current = stage(ai, ai.getWeakestOpponent());
@@ -717,6 +717,12 @@ public final class AlurenPlan {
             final SpellAbility aluren = LoopRunner.castFromHand(ai, candidates, ALUREN);
             if (aluren != null && canStartCombo(ai) && tryCast(ai, aluren, approve)) {
                 return aluren;
+            }
+            if (paidSavageDraw(ai)) {
+                final SpellAbility harpy = LoopRunner.castFromHand(ai, candidates, HARPY);
+                if (harpy != null && tryCast(ai, harpy, approve)) {
+                    return harpy;
+                }
             }
             return null;
         }
@@ -920,6 +926,38 @@ public final class AlurenPlan {
         return false;
     }
 
+    /**
+     * The mana is exactly what Aluren costs: nothing else is cast first. With less the Aluren waits anyway, with more the
+     * cantrip is paid out of the rest (the AI sat on its Brainstorm with Aluren in the hand it could not cast yet).
+     */
+    private static boolean alurenNeedsAllTheMana(final Player ai) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(ALUREN)) {
+                return ComputerUtilMana.getAvailableManaEstimate(ai) == c.getCMC();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Wirewood Savage without Aluren: the Harpy is cast for its mana, draws a card as the Beast that enters, and returns
+     * itself (two mana for a card, again and again while the mana is there). Not with the mana Aluren needs, not with a
+     * hand that would be discarded down at the end of the turn, not into the floor of the library.
+     */
+    private static boolean paidSavageDraw(final Player ai) {
+        if (LoopRunner.inPlay(ai, ALUREN) != null || LoopRunner.inPlay(ai, SAVAGE) == null || ai.getLife() < 3
+                || ai.getCardsIn(ZoneType.Hand).size() > 6
+                || ai.getCardsIn(ZoneType.Library).size() <= LIBRARY_FLOOR + 3) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equals(ALUREN) && ComputerUtilMana.getAvailableManaEstimate(ai) - 2 < c.getCMC()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static SpellAbility brainstorm(final Player ai, final List<SpellAbility> candidates,
             final Player opp, final Predicate<SpellAbility> approve) {
         if (!LoopRunner.inHand(ai, BRAINSTORM)
@@ -927,7 +965,7 @@ public final class AlurenPlan {
             return null;
         }
         final boolean setupNeeded = LoopRunner.inPlay(ai, ALUREN) == null
-                && (!LoopRunner.inHand(ai, ALUREN) || !canStartCombo(ai));
+                && (!LoopRunner.inHand(ai, ALUREN) || !canStartCombo(ai) || !alurenNeedsAllTheMana(ai));
         final boolean loopNeedsCards = LoopRunner.inPlay(ai, ALUREN) != null && needsCards(ai, opp);
         if (!setupNeeded && !loopNeedsCards) {
             return null;

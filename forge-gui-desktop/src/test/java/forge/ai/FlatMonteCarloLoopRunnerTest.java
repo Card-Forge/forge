@@ -937,6 +937,38 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void theHarpyIsCastForManaWhenTheSavageDrawsForIt() {
+        elfDeckWith(0, "Cavern Harpy");
+        addCardToZone("Aluren", ai, ZoneType.Library);
+        for (int i = 0; i < 15; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        addCards("Island", 2, ai);
+        addCards("Swamp", 2, ai);
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
+        AssertJUnit.assertNotNull(harpy);
+        AssertJUnit.assertFalse("the Savage draws a card for every Beast: the Harpy is not held", LoopRunner.held(ai, harpy));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Cavern Harpy", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theCantripIsCastWhileAlurenWaitsForMana() {
+        elfDeckWith(0, "Brainstorm", "Aluren", "Cavern Harpy", "Maggot Carrier");
+        for (int i = 0; i < 15; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        addCards("Island", 2, ai); // Aluren costs three: it waits, the Brainstorm does not
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Brainstorm", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
     public void theDiscardKeepsThePiecesOfTheKill() {
         alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Intuition", "Intuition", "Cavern Harpy");
         final forge.game.card.CardCollection hand = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand));
