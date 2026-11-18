@@ -1,11 +1,14 @@
 package forge.ai;
 
+import com.google.common.collect.Lists;
 import forge.ai.simulation.SimulationTest;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CounterEnumType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -20,12 +23,16 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
  * Auto payment should not tap every untapped source of one colour when the same cost can be paid
  * while leaving at least one source of each colour untapped. The number of sources used never changes.
  * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
+ * A source that removes X counters to make mana removes only as many as the other sources leave unpaid.
+ * A source that hurts when tapped for mana ranks between the free sources and those spent for good,
+ * and a life loss on any other trigger is not charged as pain.
  */
 public class ComputerUtilManaTest extends SimulationTest {
 
@@ -126,6 +133,58 @@ public class ComputerUtilManaTest extends SimulationTest {
         assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
     }
 
+    @Test
+    public void spiritGuideIsNotExiledToKeepAHeldColour() {
+        // the last Stomping Ground is the only green source for Giant Growth, but the lands pay {5} on their own
+        final Map<String, Integer> untapped = payAndCountUntapped("5", 5,
+                new String[] { "Simian Spirit Guide", "Giant Growth" }, "Stomping Ground:5");
+        assertEquals((int) untapped.get("Stomping Ground"), 0, "expected every land tapped, got " + untapped);
+    }
+
+    @Test
+    public void spiritGuideDoesNotCountAsASourceOfItsColour() {
+        // Stomping Ground is the only land that makes green, so Steam Vents has to pay the {R}
+        final Map<String, Integer> untapped = payAndCountUntapped("3 R G", 5,
+                new String[] { "Elvish Spirit Guide" }, "Island:3", "Stomping Ground:1", "Steam Vents:1");
+        assertEquals((int) untapped.get("Steam Vents"), 0, "expected every land tapped, got " + untapped);
+    }
+
+    @Test
+    public void painlessTapBeforePainfulTapBeforeSpentSource() {
+        // {1} with Caves of Koilos, City of Brass and a Spirit Guide: the Caves' free {C} pays,
+        // the City tap that loses 1 life comes second, and exiling the Guide stays the last resort
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "Caves of Koilos:1", "City of Brass:1");
+        assertEquals((int) untapped.get("Caves of Koilos"), 0, "expected the Caves to pay, got " + untapped);
+        assertEquals((int) untapped.get("City of Brass"), 1, "expected the City to stay untapped, got " + untapped);
+    }
+
+    @Test
+    public void painLandIsTappedBeforeASpiritGuideIsSpent() {
+        // losing 1 life to City of Brass still beats exiling a card from the hand for good
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "City of Brass:1");
+        assertEquals((int) untapped.get("City of Brass"), 0, "expected the City to pay, got " + untapped);
+    }
+
+    @Test
+    public void lifeLostOnEnteringIsNotTapPain() {
+        // Oscorp Industries only loses life when it enters from a graveyard, so tapping it costs nothing
+        // and it pays before a painless one-shot source is spent
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1,
+                new String[] { "Simian Spirit Guide" }, "Oscorp Industries:1");
+        assertEquals((int) untapped.get("Oscorp Industries"), 0, "expected the Oscorp to pay, got " + untapped);
+    }
+
+    @Test
+    public void painIsWeighedAgainstOtherCostsWithoutHeldColours() {
+        // {1} with Caves of Koilos and City of Brass and nothing in hand to steer by colour:
+        // the Caves' free {C} still pays, since a tap that loses 1 life is scored as a cost
+        final Map<String, Integer> untapped = payAndCountUntapped("1", 1, "Caves of Koilos:1", "City of Brass:1");
+        assertEquals((int) untapped.get("Caves of Koilos"), 0, "expected the Caves to pay, got " + untapped);
+        assertEquals((int) untapped.get("City of Brass"), 1, "expected the City to stay untapped, got " + untapped);
+    }
+
     /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
     private Player sacrificeBoard(final int tokens, final String... permanents) {
         Game game = initAndCreateGame();
@@ -142,6 +201,13 @@ public class ComputerUtilManaTest extends SimulationTest {
         final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
         sa.setActivatingPlayer(p);
         return ComputerUtilMana.canPayManaCost(sa, p, 0, false);
+    }
+
+    private void payForReal(final Player p, final String manaCost) {
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(manaCost)));
+        assertTrue(ComputerUtilMana.payManaCost(cost, sa, p, false) && cost.isPaid());
     }
 
     @Test
@@ -218,5 +284,209 @@ public class ComputerUtilManaTest extends SimulationTest {
             assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
             assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
         }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void batteryRemovesOnlyTheCountersItNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "2 U U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 2, "its first {U} needs no counter");
+    }
+
+    @Test
+    public void batteryKeepsItsCountersWhenLandsCanPay() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Swamp", 3, p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "3 U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 5);
+    }
+
+    @Test
+    public void batteryAddsCountersForWhatTheLandsCannotPay() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Swamp", p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+
+        payForReal(p, "3 U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 3);
+        assertTrue(AiCardMemory.getMemorySet(p, AiCardMemory.MemorySetMana.UNPAID_COSTS).isEmpty(),
+                "trials with too few counters are not unpaid costs");
+    }
+
+    @Test
+    public void testPaymentCountsBatteryCounters() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Island", p);
+        addCard("Blue Mana Battery", p).setCounters(CounterEnumType.CHARGE, 3);
+        assertTrue(canPay(p, "Air Elemental"), "{3}{U}{U}: the Island and the Battery's free {U} pay two, its counters the rest");
+    }
+
+    @Test
+    public void twoCounterSourcesRemoveOnlyWhatTheCostNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Wastes", 2, p);
+        final Card battery = addCard("Black Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 5);
+        final Card silos = addCard("Sand Silos", p);
+        silos.setCounters(CounterEnumType.STORAGE, 5);
+
+        payForReal(p, "2 U U B");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 5, "Silos makes {U}{U}, the Battery its free {B}, the Wastes {2}");
+        assertEquals(silos.getCounters(CounterEnumType.STORAGE), 3);
+    }
+
+    @Test
+    public void signetIsPaidByACounterSourceThatAlsoPaysAColor() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Azorius Signet", p);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 3);
+
+        payForReal(p, "W W U U");
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 2);
+    }
+
+    @Test
+    public void haruspexDoesNotRemoveTheCountersKeepingItAlive() {
+        final Player p = sacrificeBoard(0, "Forest");
+        final Card haruspex = addCard("Haruspex", p); // 2/2
+        haruspex.setSickness(false);
+        haruspex.setCounters(CounterEnumType.P1P1, 2);
+        haruspex.setDamage(3);
+        assertFalse(canPay(p, "Grizzly Bears"));
+    }
+
+    @Test
+    public void haruspexWithUndyingMayRemoveItsLastCounters() {
+        final Player p = sacrificeBoard(0, "Forest");
+        final Card haruspex = addCard("Haruspex", p); // 2/2
+        haruspex.setSickness(false);
+        haruspex.setCounters(CounterEnumType.P1P1, 2);
+        haruspex.setDamage(3);
+        haruspex.addChangedCardKeywords(Lists.newArrayList("Undying"), null, false, p.getGame().getNextTimestamp(), null);
+        assertTrue(canPay(p, "Grizzly Bears"));
+    }
+
+    @Test
+    public void batteryPayingASignetsCostAddsNoCounterForItsOwnMana() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card battery = addCard("Blue Mana Battery", p);
+        battery.setCounters(CounterEnumType.CHARGE, 3);
+        final SpellAbility signet = addCard("Azorius Signet", p).getManaAbilities().get(0);
+        signet.setActivatingPlayer(p);
+
+        // a mana ability's own cost is paid without caps on X
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(new ManaCost(new ManaCostParser("1")));
+        assertTrue(ComputerUtilMana.payManaCost(cost, signet, p, false) && cost.isPaid());
+        assertEquals(battery.getCounters(CounterEnumType.CHARGE), 3);
+    }
+
+    @Test
+    public void testPaymentWithAStorageLandLeavesNoXBehind() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card vault = addCard("Bottomless Vault", p);
+        vault.setCounters(CounterEnumType.STORAGE, 4);
+
+        assertTrue(canPay(p, "Gravedigger")); // {3}{B}
+        assertNull(vault.getManaAbilities().get(0).getXManaCostPaid());
+    }
+
+    @Test
+    public void snowStorageLandStillMakesManaForASnowShard() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        final Card vault = addCard("Bottomless Vault", p);
+        vault.addType("Snow");
+        vault.setCounters(CounterEnumType.STORAGE, 3);
+
+        payForReal(p, "S");
+        assertEquals(vault.getCounters(CounterEnumType.STORAGE), 2);
+    }
+
+    @Test
+    public void manaEstimateCountsRemovableCounters() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Blue Mana Battery", p).setCounters(CounterEnumType.CHARGE, 3);
+        addCard("Bottomless Vault", p).setCounters(CounterEnumType.STORAGE, 2);
+
+        // Plains 1, Battery {U} plus one per counter, Vault one per counter
+        assertEquals(ComputerUtilMana.getAvailableManaEstimate(p), 1 + 4 + 2);
+    }
+
+    @Test
+    public void nykthosChoosesTheColorThePaymentNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCards("Island", 2, p);
+        addCard("Nykthos, Shrine to Nyx", p);
+        addCard("Leatherback Baloth", p);
+        // blue is the most prominent color, but green has as much devotion
+        addCards("Merfolk of the Pearl Trident", 3, p);
+
+        payForReal(p, "G G G");
+    }
+
+    @Test
+    public void failedTestPaymentClearsTheColorPickedForNykthos() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Azorius Signet", p);
+        final Card nykthos = addCard("Nykthos, Shrine to Nyx", p);
+        addCard("White Knight", p);
+        addCards("Merfolk of the Pearl Trident", 3, p);
+
+        final SpellAbility sa = addCardToZone("Grizzly Bears", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertNull(ComputerUtilMana.getManaSourcesToPayCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("W W W W"))), sa, p, false));
+
+        final SpellAbility devotion = nykthos.getManaAbilities().stream().filter(ma -> ma.getApi() == ApiType.ChooseColor).findFirst().orElseThrow();
+        assertEquals(devotion.getSubAbility().getManaPart().getExpressChoice(), "", "a color left behind would steer Nykthos's next activation");
+    }
+
+    @Test
+    public void testPaymentCountsDevotionMana() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Nyx Lotus", p);
+        addCard("Leatherback Baloth", p);
+        assertTrue(canPay(p, "Leatherback Baloth"), "{G}{G}{G}: Nyx Lotus adds one {G} for each of the Baloth's");
+    }
+
+    @Test
+    public void chosenPlayerManaGoesToTheAi() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Victory Chimes", p);
+        payForReal(p, "1");
+    }
+
+    @Test
+    public void chosenPlayerChoosesTheColorThePaymentNeeds() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Spectral Searchlight", p);
+        payForReal(p, "U");
+    }
+
+    @Test
+    public void chosenPlayerManaPaysWithASacrificeCost() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        addCard("Valleymaker", p).setSickness(false);
+        addCard("Forest", p);
+        payForReal(p, "G G G");
+    }
+
+    @Test
+    public void colorChoosingFilterFixesColor() {
+        final Player p = initAndCreateGame().getPlayers().get(1);
+        addCard("Forest", p);
+        addCard("Foraging Wickermaw", p);
+        payForReal(p, "U");
     }
 }

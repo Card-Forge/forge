@@ -30,7 +30,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -56,6 +58,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -217,30 +221,67 @@ public class ComputerUtilCard {
      */
 
     /**
-     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
-     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
-     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
+     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry, and none if
+     * {@code enters} is false because an existing permanent becomes the copy.
+     * Static abilities and entry replacements read the copy's controller, so a copy of an opponent's
+     * creature is judged under {@code newController}: their 8/8 Nightmare can be a 0/0 for us.
      */
-    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController, final boolean enters) {
         final Game game = newController.getGame();
         final MutableBoolean reset = new MutableBoolean(false);
         final CardCollection kept = CardLists.filter(list, c -> {
-            if (!c.isCreature() || c.getController().equals(newController)) {
+            if (!c.isCreature()) {
                 return true;
             }
-            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
-                final Card copy = CardCopyService.getLKICopy(c);
+            Card copy = c;
+            if (!c.getController().equals(newController)) {
+                // a copy keeps base toughness, so only a printed 0 or a toughness-setting CDA can arrive dead
+                if (c.getBaseToughness() > 0
+                        && c.getStaticAbilities().stream().noneMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                    return true;
+                }
+                copy = CardCopyService.getLKICopy(c);
                 copy.setController(newController, game.getNextTimestamp());
+                // the LKI keeps the original's boosts, which the static pass below does not remove
+                copy.getPTBoostTable().clear();
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                return copy.getNetToughness() > 0;
             }
-            return true;
+            final int toughness = copy.getNetToughness() + copy.getCounters(CounterEnumType.M1M1) - copy.getCounters(CounterEnumType.P1P1);
+            if (toughness > 0) {
+                return true;
+            }
+            return enters && toughness + countersOnEntry(copy) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);
         }
         return kept;
+    }
+
+    /** The +1/+1 counters entry replacements would put on {@code c} if it entered now. */
+    private static int countersOnEntry(final Card c) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        final GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
+
+        int amount = 0;
+        for (final ReplacementEffect re : c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            final SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || reSA.getApi() != ApiType.PutCounter || !"P1P1".equals(reSA.getParam("CounterType"))) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                // outside an actual entry, X counts as 0, as it does for a copy
+                amount += AbilityUtils.calculateAmount(reSA.getHostCard(), reSA.getParamOrDefault("CounterNum", "1"), reSA);
+            }
+        }
+        return amount;
     }
 
     public static Card getBestLandAI(final Iterable<Card> list) {
@@ -1188,6 +1229,16 @@ public class ComputerUtilCard {
     };
 
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
+        // during a payment, a mana ability chooses the color that the payment picked for it
+        for (SpellAbility part = sa.getSubAbility(); part != null; part = part.getSubAbility()) {
+            final AbilityManaPart mp = part.getManaPart();
+            if (mp != null && mp.choosesColorOnResolution(part) && !mp.getExpressChoice().isEmpty()) {
+                final String color = MagicColor.toLongString(MagicColor.fromName(mp.getExpressChoice()));
+                if (colorChoices.contains(color)) {
+                    return Lists.newArrayList(color);
+                }
+            }
+        }
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();

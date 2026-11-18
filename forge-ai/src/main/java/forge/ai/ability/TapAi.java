@@ -36,6 +36,11 @@ public class TapAi extends TapAiBase {
 
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
 
+        final AiAbilityDecision cantrip = cantripAtTheirEnd(ai, sa, phase);
+        if (cantrip != null) {
+            return cantrip;
+        }
+
         if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
         } else if (phase.isPlayerTurn(ai)) {
@@ -97,6 +102,32 @@ public class TapAi extends TapAiBase {
         }
     }
 
+    /**
+     * A tap with a card drawn (Ice of Fire // Ice) is a cantrip that costs two mana: at the end of the opponent's turn,
+     * with the mana otherwise unused, it is cast on their best untapped land (or other permanent): they untap it at once,
+     * but the card is drawn, which is the point. Not at sorcery speed; the rest of this class judges the other times.
+     */
+    private static AiAbilityDecision cantripAtTheirEnd(final Player ai, final SpellAbility sa, final PhaseHandler phase) {
+        if (!sa.isSpell() || sa.getSubAbility() == null || sa.getSubAbility().getApi() != forge.game.ability.ApiType.Draw
+                || !sa.usesTargeting() || isSorcerySpeed(sa, ai)
+                || !phase.is(PhaseType.END_OF_TURN) || !phase.getPlayerTurn().isOpponentOf(ai) || !ai.canDraw()) {
+            return null;
+        }
+        Card best = null;
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            if (c.isUntapped() && sa.canTarget(c) && (best == null || c.isLand() && !best.isLand()
+                    || c.isLand() == best.isLand() && ComputerUtilCard.evaluatePermanentList(new CardCollection(c)) > ComputerUtilCard.evaluatePermanentList(new CardCollection(best)))) {
+                best = c;
+            }
+        }
+        if (best == null) {
+            return null;
+        }
+        sa.resetTargets();
+        sa.getTargets().add(best);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Check for shocklands and similar ETB replacement effects
@@ -117,7 +148,11 @@ public class TapAi extends TapAiBase {
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
+                        final boolean creatureInPlay = payer.getGame().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CREATURES);
                         for (Card c : playable) {
+                            if (c.isAura() && !creatureInPlay) {
+                                continue; // an Aura with nothing to enchant is not a reason to pay 2 life
+                            }
                             // Check if the AI can pay for the card with the mana it has and intends to play it
                             // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
                             // card always looks unaffordable. A nonland card that needs exactly this land's mana will do

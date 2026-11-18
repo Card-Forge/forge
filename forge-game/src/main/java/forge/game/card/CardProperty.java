@@ -802,13 +802,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("canProduceManaColor")) {
-            final String color = property.split("canProduceManaColor ")[1];
-            for (SpellAbility ma : card.getManaAbilities()) {
-                if (ma.canProduce(MagicColor.toShortString(color))) {
-                    return true;
-                }
-            }
-            return false;
+            return card.canProduceColorMana(Set.of(MagicColor.toLongString(MagicColor.fromName(property.split("canProduceManaColor ")[1]))));
         } else if (property.equals("canProduceMana")) {
             return !card.getManaAbilities().isEmpty();
         } else if (property.startsWith("sameName")) {

@@ -554,7 +554,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             if (dmg > 0 && lastTgt != null) {
-                sa.addDividedAllocation(lastTgt, sa.getDividedValue(lastTgt) + dmg);
+                final Integer already = sa.getDividedValue(lastTgt);
+                sa.addDividedAllocation(lastTgt, (already == null ? 0 : already) + dmg); // a target without a share yet is 0, not a crash
                 dmg = 0;
                 return true;
             }

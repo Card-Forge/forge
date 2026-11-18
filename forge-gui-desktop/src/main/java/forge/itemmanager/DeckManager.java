@@ -407,7 +407,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 screen = FScreen.DECK_EDITOR_DRAFT;
                 if (deck != null && CommanderDraftUtil.isCommanderDraftDeck(deck.getDeck())) {
                     editorCtrl = new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
-                            screen, getCDetailPicture(), null);
+                            screen, getCDetailPicture());
                 } else {
                     editorCtrl = new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, screen, getCDetailPicture());
                 }

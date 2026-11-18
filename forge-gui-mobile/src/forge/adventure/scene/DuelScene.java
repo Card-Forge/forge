@@ -875,7 +875,7 @@ public class DuelScene extends ForgeScene {
                 if (removals.contains(mainCommander)) {
                     if (!format.isAllowedCommander(partnerCommander.getRules(), enforceLegality))
                         removals.add(partnerCommander); //Main is invalid but partner is valid.
-                } else if (!format.isAllowedPartnership(mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
+                } else if (!format.isAllowedPartnership(playerDeck, mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
                     removals.add(partnerCommander); //Invalid partnership.
             }
         }

@@ -36,7 +36,7 @@ public class SacrificeAi extends SpellAbilityAi {
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         // AI should only activate this during Human's turn
 
-        return sacrificeTgtAI(ai, sa, false);
+        return sacrificeTgtAI(ai, sa, sa.isTrigger() && !sa.isOptionalTrigger());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             // If the Human has at least half rounded up of the amount to be
             // sacrificed, cast the spell
-            if (!sa.isTrigger() && list.size() < half) {
+            if (list.size() < half) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
@@ -116,7 +116,7 @@ public class SacrificeAi extends SpellAbilityAi {
         if (valid.equals("Self")) {
             // Self Sacrifice.
         } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")
-                || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
+                || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !mandatory)) {
             // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
 
             // If Sacrifice hits both players:
@@ -135,7 +135,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             return humanList.size() >= amount ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if (defined.equals("You")) {
+        } else if (defined.equals("You") && !mandatory) {
             List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             for (Card c : computerList) {
                 if ("Lethal".equals(aiLogic)) {
@@ -172,7 +172,41 @@ public class SacrificeAi extends SpellAbilityAi {
         if ("BirthingRitual".equals(sa.getParam("AILogic"))) {
             return birthingRitualPaysOff(player, sa);
         }
-        return true;
+        if (SacrificeWorth.applies(sa)) {
+            return SacrificeWorth.confirm(player, sa);
+        }
+        return !sacrificesOnlyItselfForItsOwnBenefit(player, sa);
+    }
+
+    /**
+     * "You may sacrifice a creature. If you do, put a +1/+1 counter on CARDNAME" (Crovax the Cursed): when the creature
+     * the AI would give up is the source itself, the counter it would get is for a card that is gone. The same goes for
+     * any other reward that only the source itself could use.
+     */
+    private static boolean sacrificesOnlyItselfForItsOwnBenefit(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || !sa.hasParam("Optional") || "Self".equals(sa.getParamOrDefault("SacValid", "Self"))) {
+            return false;
+        }
+        boolean benefitsSource = false;
+        for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            final String defined = sub.getParam("Defined");
+            if (sub.getApi() == forge.game.ability.ApiType.PutCounter && (defined == null || "Self".equals(defined))
+                    || sub.getApi() == forge.game.ability.ApiType.Pump && "Self".equals(defined)) {
+                benefitsSource = true;
+                break;
+            }
+        }
+        if (!benefitsSource) {
+            return false;
+        }
+        final CardCollection options = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                c -> c.isValid(sa.getParam("SacValid"), ai, host, sa) && c.canBeSacrificedBy(sa, true));
+        if (options.isEmpty()) {
+            return true;
+        }
+        final CardCollection sac = forge.ai.ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sa, false, true);
+        return sac == null || sac.isEmpty() || sac.get(0) == host;
     }
 
     /**

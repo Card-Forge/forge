@@ -1783,7 +1783,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         private void confirmCommander(PaperCard card, PaperCard partnerOf, Runnable place) {
-            String warning = getCommanderFormat().getIllegalCommanderWarning(card, partnerOf);
+            String warning = getCommanderFormat().getIllegalCommanderWarning(parentScreen.getDeck(), card, partnerOf);
             if (warning == null) {
                 place.run();
                 return;

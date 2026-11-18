@@ -831,8 +831,8 @@ public class AiAttackController {
             return prefDefender;
         }
 
-        // 2. attack planeswalkers
-        List<Card> pwDefending = c.getDefendingPlaneswalkers();
+        // 2. attack planeswalkers (unless Sanctum Lurker keeps them alive)
+        List<Card> pwDefending = c.getDefendingPlaneswalkers().filter(pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0);
         if (!pwDefending.isEmpty()) {
             final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
@@ -1371,7 +1371,9 @@ public class AiAttackController {
                 System.out.println("attackersLeft = " + left);
 
             FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
-            possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
+            // a planeswalker with no loyalty left that stays in play (Sanctum Lurker) is a waste of an attack
+            possibleDefenders.addAll(CardLists.filter(defendingOpponent.getPlaneswalkersInPlay(),
+                    pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0));
 
             while (!left.isEmpty()) {
                 AITimeoutTracker.check();
@@ -1598,6 +1600,18 @@ public class AiAttackController {
             return false;
         }
 
+        // a creature that is sacrificed for attacking (decayed, "sacrifice it at end of combat") is not "free damage" while
+        // nothing can block it, so it goes in only when that sacrifice buys something (otherwise the Monte Carlo
+        // refinement would call the attack back)
+        if (isLostByAttacking(attacker) && !lostAttackerIsWorthIt(attacker, defender)) {
+            return false;
+        }
+
+        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing
+        if (attacker.isLand() && aiAggression < 5 && isGiftToABlocker(ai, attacker, combat)) {
+            return false;
+        }
+
         SpellAbilityFactors saf = new SpellAbilityFactors(attacker);
         if (aiAggression != 5) {
             saf.calculate(defenders, combat);
@@ -1665,6 +1679,99 @@ public class AiAttackController {
                 break;
         }
         return false; // don't attack
+    }
+
+    /**
+     * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
+     * make that worth it: attacking just hands the blocker a free kill.
+     */
+    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
+            return false;
+        }
+        for (final Player opp : ai.getOpponents()) {
+            for (final Card blocker : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canBlock(attacker, blocker) && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
+                        && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Whether some creature of an opponent of {@code attacker}'s controller could block it. */
+    static boolean canBeBlockedByAnyOpponent(final Card attacker) {
+        for (final Player opp : attacker.getController().getOpponents()) {
+            for (final Card blocker : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canBlock(attacker, blocker)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** The creature is sacrificed, destroyed or exiled by its own attack (decayed, or a mandatory self trigger on attack / at end of combat). */
+    static boolean isLostByAttacking(final Card attacker) {
+        if (attacker.hasKeyword(Keyword.DECAYED)) {
+            return true;
+        }
+        for (final Trigger t : attacker.getTriggers()) {
+            final boolean onAttack = TriggerType.Attacks.equals(t.getMode()) && "Card.Self".equals(t.getParam("ValidCard"));
+            final boolean atEndOfCombat = TriggerType.Phase.equals(t.getMode()) && "End of Combat".equals(t.getParam("Phase"));
+            if (!(onAttack || atEndOfCombat) || t.hasParam("OptionalDecider")) {
+                continue;
+            }
+            if (removesItself(t.ensureAbility(), 0)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean removesItself(final SpellAbility sa, final int depth) {
+        if (sa == null || depth > 4) {
+            return false;
+        }
+        if (!sa.hasParam("UnlessCost") && !sa.hasParam("Optional") && !sa.hasParam("OptionalDecider") && !sa.hasParam("ConditionCheckSVar")
+                && !sa.hasParam("ConditionPresent")) {
+            if (ApiType.Sacrifice.equals(sa.getApi()) && "Self".equals(sa.getParam("SacValid"))) {
+                return true;
+            }
+            if ((ApiType.Destroy.equals(sa.getApi()) || ApiType.ChangeZone.equals(sa.getApi())) && "Self".equals(sa.getParam("Defined"))
+                    && (ApiType.Destroy.equals(sa.getApi()) || "Battlefield".equals(sa.getParam("Origin")))) {
+                return true;
+            }
+        }
+        return removesItself(sa.getSubAbility(), depth + 1);
+    }
+
+    /**
+     * Whether giving up an attacker that its attack costs pays: it wants to die (SacMe) or has an attack effect, or the
+     * attackers that the blockers cannot all stop are lethal on the defending player.
+     */
+    private boolean lostAttackerIsWorthIt(final Card attacker, final GameEntity defender) {
+        // not aggression 5: "attack at all costs" is a war of attrition, which a creature that is gone after one attack
+        // cannot wage (an empty opposing board is enough to set it)
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect")) {
+            return true;
+        }
+        // a token nothing can block is damage for nothing (it can't block either, or it would not be lost for attacking)
+        if (aiAggression >= 4 && attacker.isToken() && !canBeBlockedByAnyOpponent(attacker)) {
+            return true;
+        }
+        if (!(defender instanceof Player)) {
+            return false;
+        }
+        final List<Card> byPower = new ArrayList<>(this.attackers);
+        CardLists.sortByPowerDesc(byPower);
+        int damage = 0;
+        // the strongest ones are the ones that get blocked
+        for (int i = this.blockers.size(); i < byPower.size(); i++) {
+            damage += ComputerUtilCombat.damageIfUnblocked(byPower.get(i), defender, null, false);
+        }
+        return damage >= ((Player) defender).getLife();
     }
 
     public static List<Card> exertAttackers(final List<Card> attackers, int aggression) {

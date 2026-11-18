@@ -91,6 +91,7 @@ public class AiReportScenarioTest extends AITest {
         Card hand(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Hand); }
         Card gy(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Graveyard); }
         Card lib(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Library); }
+        Card exile(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Exile); }
 
         /** Plenty of mana of every colour for the AI. */
         void richMana() { for (final String l : new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" }) { bf(l, 3, ai); } }
@@ -489,6 +490,36 @@ public class AiReportScenarioTest extends AITest {
                     if (c.plays("Giver of Runes")) { return "activated Giver of Runes precombat"; }
                     return c.attackers().isEmpty() ? "AI did not attack into an empty board" : null;
                 }));
+        l.add(new Scenario("decayed-not-thrown-away", "A decayed 5/5 does not attack an empty board for 5 of 20 (it would be sacrificed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); },
+                c -> c.attackers().isEmpty() ? null : "attacked with a decayed creature for no lethal"));
+        l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
+                c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
+                c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
+        l.add(noPlay("12930-ephemerate", "Ephemerate in its own upkeep with a Grizzly Bears to blink: wait for the main phase", Fid.APPROX, "UPKEEP", true, "Ephemerate",
+                c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
+        l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
+                c -> { c.bf("Wastes", 4, c.ai); c.bf("Grizzly Bears", c.opp); c.hand("Kozilek's Command", c.ai); }));
+        l.add(noPlay("12934-thraben-charm-yard", "Thraben Charm / Endurance do not exile a graveyard holding only a fetch land", Fid.APPROX, M1, true, "Thraben Charm",
+                c -> { c.bf("Plains", c.ai); c.bf("Plains", c.ai); c.hand("Thraben Charm", c.ai); c.gy("Wooded Foothills", c.opp); }));
+        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
+        l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("5907-path-birds", "Path to Exile against a lone Birds of Paradise", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Birds of Paradise", c.opp); }));
+        l.add(noPlay("5907-erode-harbinger", "Erode against a lone Treefolk Harbinger only gives them a land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Treefolk Harbinger", c.opp); }));
+        l.add(noPlay("5907-trophy-halfling", "Assassin's Trophy against a lone Delighted Halfling only gives them a land", Fid.APPROX, M1, true, "Assassin's Trophy",
+                c -> { c.bf("Swamp", 2, c.ai); c.bf("Forest", 2, c.ai); c.hand("Assassin's Trophy", c.ai); c.bf("Delighted Halfling", c.opp); }));
+        l.add(play("5907-path-angel", "Path to Exile still goes at a real threat", Fid.APPROX, M1, true, "Path to Exile",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(aimed("5907-path-angel-not-dork", "Path to Exile at the Angel, not at the mana dork beside it", Fid.APPROX, M1, true, "Path to Exile", "Baneslayer Angel",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Baneslayer Angel", c.opp); }));
+        l.add(play("5907-erode-serra", "Erode on a Serra Angel is worth the land", Fid.APPROX, M1, true, "Erode",
+                c -> { c.bf("Plains", 2, c.ai); c.hand("Erode", c.ai); c.bf("Serra Angel", c.opp); }));
         l.add(play("4430", "Elvish Piper when a creature is also castable", Fid.EXACT, M1, true, "Elvish Piper",
                 c -> { c.bf("Forest", 3, c.ai); c.bf("Elvish Piper", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Craterhoof Behemoth", c.ai); }));
         l.add(new Scenario("4439", "Might of Old Krosa goes on the creature that is in combat", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
@@ -528,6 +559,219 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Plains", 4, c.ai); c.hand("Wrath of God", c.ai); c.bf("Hill Giant", 3, c.opp); }));
         l.add(play("harmful-removal", "Doom Blade for a Hill Giant is still fine", Fid.EXACT, "MAIN2", true, "Doom Blade",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Doom Blade", c.ai); c.bf("Hill Giant", c.opp); }));
+        // #12895 Crovax the Cursed: flying has to be there when the blockers are declared, and it never sacrifices itself for its own counter
+        final Setup crovaxVsSerra = c -> {
+            c.bf("Swamp", c.ai);
+            c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 6);
+            final Card serra = c.bf("Serra Angel", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(serra, c.ai);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("12895-flying-before-blocks", "Crovax gains flying when the Serra Angel attacks, before blockers", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", false,
+                "Crovax the Cursed", crovaxVsSerra));
+        l.add(noPlay("12895-flying-after-blocks", "no flying for Crovax once the blockers are declared (too late to block)", Fid.EXACT, "COMBAT_DECLARE_BLOCKERS", false,
+                "Crovax the Cursed", crovaxVsSerra));
+        // keywords that win the fight (after the blocks, only for a creature that is in it) and keywords that decide the block (before it)
+        final Setup impBlocks = c -> {
+            c.bf("Swamp", c.ai);
+            final Card blocker = c.bf("Fetid Imp", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("kw-deathtouch-blocker", "Fetid Imp blocks the Hill Giant: deathtouch makes it a trade", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Fetid Imp", impBlocks));
+        l.add(noPlay("kw-deathtouch-not-in-combat", "Fetid Imp stays out of the fight: no deathtouch for nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Fetid Imp", c -> {
+                    c.bf("Swamp", c.ai); c.bf("Fetid Imp", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("kw-indestructible-blocker", "Drudge Sentinel blocks the Hill Giant: indestructible saves it", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Sentinel", c -> {
+                    c.bf("Swamp", 3, c.ai);
+                    final Card blocker = c.bf("Drudge Sentinel", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-indestructible-not-in-combat", "Drudge Sentinel is not in the fight and nothing threatens it", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Sentinel", c -> {
+                    c.bf("Swamp", 3, c.ai); c.bf("Drudge Sentinel", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        final Setup askariAttacks = c -> {
+            c.bf("Mountain", 2, c.ai);
+            final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("kw-menace-before-blocks", "Searing Spear Askari attacks into a lone Hill Giant: menace before the blockers", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", askariAttacks));
+        l.add(noPlay("kw-menace-after-blocks", "no menace once the blockers are declared (too late)", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", true,
+                "Searing Spear Askari", askariAttacks));
+        // evasion before the blockers has to be worth it: the keyword must dodge the bad blocker, and the mana must be spare
+        l.add(play("kw-fear-dodges", "Hooded Kavu attacks into a Hill Giant (red): fear dodges the bad block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Hooded Kavu", c -> {
+                    c.bf("Swamp", c.ai); final Card kavu = c.bf("Hooded Kavu", c.ai); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(kavu, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-fear-black-blocker", "Hooded Kavu against a black Black Knight: fear changes nothing", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Hooded Kavu", c -> {
+                    c.bf("Swamp", c.ai); final Card kavu = c.bf("Hooded Kavu", c.ai); c.bf("Black Knight", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(kavu, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-menace-two-blockers", "Searing Spear Askari against two Hill Giants: they can still double-block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", c -> {
+                    c.bf("Mountain", 2, c.ai); final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-menace-mana-wanted", "Searing Spear Askari: the mana is for the Gray Ogre in hand, not for menace", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Searing Spear Askari", c -> {
+                    c.bf("Mountain", 3, c.ai); final Card askari = c.bf("Searing Spear Askari", c.ai); c.bf("Hill Giant", c.opp);
+                    c.hand("Gray Ogre", c.ai); // {2}{R}: castable with the three Mountains, but not with menace paid for first
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(askari, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // X spells: no Epiphany at the Drownyard for X=0 (it reveals one card), a random target stays random
+        l.add(noPlay("omarthis-elesh-norn", "Omarthis with four lands under Elesh Norn: X=2 dies as it enters (-2/-2)", Fid.APPROX, "MAIN1", true,
+                "Omarthis, Ghostfire Initiate", c -> { c.bf("Mountain", 4, c.ai); c.hand("Omarthis, Ghostfire Initiate", c.ai); c.bf("Elesh Norn, Grand Cenobite", c.opp); }));
+        l.add(noPlay("fire-ice-not-at-the-face", "Fire // Ice in the second main phase against a player with no creatures: Fire is not thrown at their face", Fid.APPROX, "MAIN2", true,
+                "Fire // Ice", c -> { c.bf("Mountain", c.ai); c.bf("Island", c.ai); c.hand("Fire // Ice", c.ai); c.hand("Grizzly Bears", c.ai); c.hand("Forest", c.ai); c.hand("Island", c.ai); }));
+        l.add(play("fire-ice-cantrip-at-their-end", "Ice at the end of the opponent's turn: a card for two mana that were not used", Fid.APPROX, "END_OF_TURN", false,
+                "Fire // Ice", c -> { c.bf("Mountain", c.ai); c.bf("Island", c.ai); c.hand("Fire // Ice", c.ai); c.bf("Forest", c.opp); }));
+        l.add(noPlay("epiphany-x0", "Epiphany at the Drownyard with a single Island (X=0)", Fid.APPROX, "END_OF_TURN", false,
+                "Epiphany at the Drownyard", c -> { c.bf("Island", c.ai); c.hand("Epiphany at the Drownyard", c.ai); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("goblin-test-pilot", "Goblin Test Pilot's target is random: the AI does not aim it", Fid.APPROX, "MAIN1", true,
+                c -> { c.bf("Goblin Test Pilot", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Goblin Test Pilot");
+                    return sa != null && sa.getTargets() != null && !sa.getTargets().isEmpty() ? "the AI chose the target itself: " + sa.getTargets() : null;
+                }));
+        // a suspended Rift Bolt that comes out of exile: free, and lost if not cast, so any legal target will do
+        l.add(new Scenario("rift-bolt-suspended-cast", "suspended Rift Bolt with only Shalai, Voice of Plenty to aim at (the player is hexproof)", Fid.APPROX, "UPKEEP", true,
+                c -> { c.exile("Rift Bolt", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); },
+                c -> {
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Exile).stream().filter(k -> k.getName().equals("Rift Bolt")).findFirst().get();
+                    final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
+                            .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
+                    final SpellAbility playSa = play.ensureAbility();
+                    playSa.setActivatingPlayer(c.ai);
+                    return SpellApiToAi.Converter.get(playSa).doTriggerNoCostWithSubs(c.ai, playSa, false).willingToPlay() ? null
+                            : "the AI would not cast the suspended Rift Bolt at Shalai";
+                }));
+        // keyword abilities that aim at a creature (Arnjlot's Ascent) follow the same timing, and shields only for a creature in the fight
+        l.add(aimed("kw-targeted-flying-block", "Wind Drake attacks: flying for the blocker, in the declare attackers step", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                "Arnjlot's Ascent", "Grizzly Bears", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-too-late", "the same, once the blockers are declared", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); c.bf("Grizzly Bears", c.ai);
+                    final Card drake = c.bf("Wind Drake", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(drake, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(aimed("kw-targeted-flying-attack", "Hill Giant attacks into a Craw Wurm: flying for the attacker, before the blockers", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", "Hill Giant", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card giant = c.bf("Hill Giant", c.ai); c.bf("Craw Wurm", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(giant, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("kw-targeted-flying-no-bad-block", "Craw Wurm attacks into a Hill Giant: nobody would block it badly, flying is a waste", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                "Arnjlot's Ascent", c -> {
+                    c.bf("Island", c.ai); c.bf("Arnjlot's Ascent", c.ai); final Card wurm = c.bf("Craw Wurm", c.ai); c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.ai); combat.addAttacker(wurm, c.opp);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("regenerate-not-in-fight", "Drudge Skeletons is not in the fight: no regeneration shield for nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Skeletons", c -> {
+                    c.bf("Swamp", c.ai); c.bf("Drudge Skeletons", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // pacts: free now, {3}{U}{U} at the next upkeep or the game is lost: only when that can be paid
+        l.add(noPlay("pact-wrong-colors", "Pact of Negation with five Mountains: {3}{U}{U} could never be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Mountain", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(noPlay("pact-too-few-lands", "Pact of Negation with three Islands: five mana are needed at the upkeep", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 3, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        l.add(play("pact-payable", "Pact of Negation with five Islands against a Serra Angel: it can be paid", Fid.APPROX, M1, false, "Pact of Negation",
+                c -> { c.bf("Island", 5, c.ai); c.hand("Pact of Negation", c.ai); c.stack(c.opp, "Serra Angel"); }));
+        // Regenerate, Animate and Destroy abilities: used when they do something, never when they do nothing
+        final Setup skeletonsBlock = c -> {
+            c.bf("Swamp", 2, c.ai);
+            final Card blocker = c.bf("Drudge Skeletons", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(play("regen-blocker", "Drudge Skeletons blocks a Hill Giant: the shield saves it", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Skeletons", skeletonsBlock));
+        l.add(noPlay("regen-shield-up", "Drudge Skeletons already has a shield: no second one", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Drudge Skeletons", c -> { skeletonsBlock.run(c);
+                    c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Drudge Skeletons")).forEach(Card::incShieldCount); }));
+        l.add(noPlay("regen-idle", "Drudge Skeletons with nothing happening: no shield for nothing", Fid.APPROX, M1, true,
+                "Drudge Skeletons", c -> { c.bf("Swamp", 2, c.ai); c.bf("Drudge Skeletons", c.ai); c.bf("Hill Giant", c.opp); }));
+        l.add(play("regen-in-response", "Lightning Bolt aimed at Drudge Skeletons: regenerate in response", Fid.APPROX, M1, false,
+                "Drudge Skeletons", c -> { c.bf("Swamp", 2, c.ai); final Card sk = c.bf("Drudge Skeletons", c.ai); c.stack(c.opp, "Lightning Bolt", sk); }));
+        l.add(noPlay("regen-bolt-at-face", "Lightning Bolt aimed at the AI itself: nothing to regenerate", Fid.APPROX, M1, false,
+                "Drudge Skeletons", c -> { c.bf("Swamp", 2, c.ai); c.bf("Drudge Skeletons", c.ai); c.stack(c.opp, "Lightning Bolt", c.ai); }));
+        l.add(noPlay("animate-already", "Mutavault is a creature already this turn: no second animation", Fid.APPROX, M1, true,
+                "Mutavault", c -> {
+                    c.bf("Mountain", 3, c.ai); final Card mv = c.bf("Mutavault", c.ai); c.bf("Hill Giant", c.opp);
+                    for (final SpellAbility sa : mv.getSpellAbilities()) {
+                        if (sa.getApi() == forge.game.ability.ApiType.Animate) { sa.setActivatingPlayer(c.ai); c.resolve(sa); break; }
+                    }
+                }));
+        l.add(noPlay("animate-own-mana", "Mutavault alone: it would tap itself for its own {1} and be a tapped creature", Fid.APPROX, "COMBAT_BEGIN", true,
+                "Mutavault", c -> { c.bf("Mutavault", c.ai); }));
+        l.add(play("animate-attack", "Mutavault against an empty board: animate it and attack (at the start of combat, where the AI animates)", Fid.APPROX, "COMBAT_BEGIN", true,
+                "Mutavault", c -> { c.bf("Mountain", 2, c.ai); c.bf("Mutavault", c.ai); }));
+        l.add(noPlay("destroy-no-tapped-creature", "Royal Assassin with only untapped creatures to aim at", Fid.APPROX, M1, true,
+                "Royal Assassin", c -> { c.bf("Swamp", c.ai); c.bf("Royal Assassin", c.ai); c.bf("Hill Giant", c.opp); }));
+        l.add(play("destroy-tapped-creature", "Royal Assassin with a tapped Hill Giant to destroy", Fid.APPROX, M1, true,
+                "Royal Assassin", c -> { c.bf("Swamp", c.ai); c.bf("Royal Assassin", c.ai); c.bf("Hill Giant", c.opp).tap(true, null, null); }));
+        l.add(noPlay("destroy-indestructible", "Royal Assassin against a tapped indestructible Darksteel Colossus", Fid.APPROX, M1, true,
+                "Royal Assassin", c -> { c.bf("Swamp", c.ai); c.bf("Royal Assassin", c.ai); c.bf("Darksteel Colossus", c.opp).tap(true, null, null); }));
+        l.add(noPlay("destroy-own-creature", "Royal Assassin with only its own tapped creature to destroy", Fid.APPROX, M1, true,
+                "Royal Assassin", c -> { c.bf("Swamp", c.ai); c.bf("Royal Assassin", c.ai); c.bf("Hill Giant", c.ai).tap(true, null, null); }));
+        // Seal of Fire against Shalai, Voice of Plenty: the player is hexproof, the 2 damage cannot kill a 4-toughness flyer
+        l.add(noPlay("seal-of-fire-shalai", "Seal of Fire aimed at Shalai that it cannot kill (the player at 2 life is hexproof)", Fid.APPROX, "END_OF_TURN", false,
+                "Seal of Fire", c -> { c.bf("Seal of Fire", c.ai); c.bf("Shalai, Voice of Plenty", c.opp); c.opp.setLife(2, null); }));
+        l.add(play("seal-of-fire-face", "Seal of Fire for the last 2 life of the opponent", Fid.APPROX, "END_OF_TURN", false,
+                "Seal of Fire", c -> { c.bf("Seal of Fire", c.ai); c.opp.setLife(2, null); }));
+        l.add(new Scenario("12895-sacrifice-itself", "Crovax alone does not agree to sacrifice a creature (it would be itself)", Fid.EXACT, "UPKEEP", true,
+                c -> { c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 3); },
+                c -> {
+                    final Card crovax = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Crovax the Cursed")).findFirst().get();
+                    SpellAbility sac = crovax.getTriggers().get(0).ensureAbility();
+                    sac.setActivatingPlayer(c.ai);
+                    return ((PlayerControllerAi) c.ai.getController()).confirmAction(sac, null, "", null) ? "agreed to sacrifice Crovax to its own ability" : null;
+                }));
+        l.add(new Scenario("12895-sacrifice-other", "Crovax with a Grizzly Bears to spare may sacrifice it (the counter is worth a 2/2)", Fid.APPROX, "UPKEEP", true,
+                c -> { c.counters(c.bf("Crovax the Cursed", c.ai), CounterEnumType.P1P1, 3); c.bf("Llanowar Elves", c.ai); },
+                c -> {
+                    final Card crovax = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Crovax the Cursed")).findFirst().get();
+                    SpellAbility sac = crovax.getTriggers().get(0).ensureAbility();
+                    sac.setActivatingPlayer(c.ai);
+                    return ((PlayerControllerAi) c.ai.getController()).confirmAction(sac, null, "", null) ? null : "refused to sacrifice an Elf for a counter";
+                }));
+        // #12892 Garruk, Veiled Butcher: the -3 discards, even though creature cards in hand match his "creature an opponent controls would die" replacement
+        l.add(new Scenario("12892", "Garruk, Veiled Butcher -3: each opponent discards two cards (creature cards in the hand included)", Fid.EXACT, "MAIN1", true,
+                c -> { c.counters(c.bf("Garruk, Veiled Butcher", c.ai), CounterEnumType.LOYALTY, 5);
+                    c.hand("Grizzly Bears", c.opp); c.hand("Hill Giant", c.opp); },
+                c -> {
+                    final Card garruk = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Garruk, Veiled Butcher")).findFirst().get();
+                    final SpellAbility discard = garruk.getSpellAbilities().stream().filter(a -> a.getDescription().contains("discards two")).findFirst().get();
+                    discard.setActivatingPlayer(c.ai);
+                    c.resolve(discard);
+                    final int left = c.opp.getCardsIn(ZoneType.Hand).size();
+                    return left == 0 ? null : "the opponent still has " + left + " cards in hand";
+                }));
         l.add(noPlay("4435", "Quicksilver Amulet for a 1-mana creature", Fid.EXACT, M1, true, "Quicksilver Amulet",
                 c -> { c.bf("Island", 4, c.ai); c.bf("Quicksilver Amulet", c.ai); c.hand("Mother of Runes", c.ai); }));
         l.add(noPlay("5604", "abilities used as soon as possible for no reason (Mother of Runes, empty board)", Fid.APPROX, M1, true, "Mother of Runes",
@@ -658,6 +902,13 @@ public class AiReportScenarioTest extends AITest {
                     for (final String n : new String[] { "Agadeem's Awakening", "Emeria's Call", "Shatterskull Smashing", "Hagra Mauling", "Lightning Bolt", "Lightning Bolt", "Lightning Bolt" }) { c.hand(n, c.ai); }
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
                     return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? null : "mulliganed a hand with four MDFC lands";
+                }));
+        l.add(new Scenario("12929-lands-and-auras", "a hand of lands and Auras for creatures, no creature, is sent back", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Grizzly Bears", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept lands and Auras without a creature" : null;
                 }));
         l.add(noPlay("5860", "edict against a player with nothing to sacrifice", Fid.EXACT, M1, true, "Diabolic Edict",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));
@@ -804,7 +1055,7 @@ public class AiReportScenarioTest extends AITest {
             throw t;
         }
         SUMMARY.add((failure == null ? "OK     " : "BUG    ") + s + (failure == null ? "" : " -> " + failure));
-        AssertJUnit.assertNull(s.toString(), failure);
+        AssertJUnit.assertNull(s + (failure == null ? "" : " -> " + failure), failure); // the reason is in the assertion, not only in the summary
     }
 
     @AfterClass

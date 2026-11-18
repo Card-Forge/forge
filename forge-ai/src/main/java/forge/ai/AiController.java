@@ -940,7 +940,9 @@ public class AiController {
      */
     private boolean assemblyApproved(final SpellAbility sa) {
         try {
-            if (ComboGuard.problem(player, sa, null, deckPlan(player).combos) != null) {
+            final String assemblyProblem = ComboGuard.problem(player, sa, null, deckPlan(player).combos);
+            if (assemblyProblem != null) {
+                VetoLog.refused(player, sa, assemblyProblem, "assembly");
                 return false;
             }
             sa.setActivatingPlayer(player);
@@ -1017,6 +1019,12 @@ public class AiController {
             return canPlay;
         }
 
+        if (ActivationGuard.givesMoreThanItTakes(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "gift-exceeds-target", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
+        }
+
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
@@ -1080,6 +1088,9 @@ public class AiController {
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
+        if (ComputerUtil.cannotPayPact(player, sa)) {
+            return AiPlayDecision.CantAfford; // the pact would cost the game at the next upkeep
+        }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
@@ -1121,7 +1132,7 @@ public class AiController {
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
             }
-            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()) {
+            if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX() && sa.getApi() != ApiType.RollPlanarDice) {
                 // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
                 // nothing (a 0/0 animate, a 0-point pump) and the AI repeats it at every priority pass. Size X to the mana
                 // that can be spared, and don't activate when there is none.
@@ -1300,6 +1311,11 @@ public class AiController {
 
     public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() > min) {
+            // the High Tide loop keeps its Stroke of Genius, High Tide, untap spells and counterspells
+            final CardCollection tideSafe = LoopRunner.withoutTideKeys(player, validCards);
+            if (tideSafe.size() >= min && tideSafe.size() < validCards.size()) {
+                return chooseCardsToDiscard(min, max, tideSafe, sa);
+            }
             final ComboPlan combos = deckPlan(player).combos;
             // a deck that wants creatures in the graveyard throws away the right ones
             final CardCollection forCombo = combos.preferredDiscards(player, validCards, min);
@@ -1624,10 +1640,35 @@ public class AiController {
         }
         combat.clearAttackers();
         for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
-            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+            // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
+            // (Dryad Arbor into Lyra Dawnbringer)
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())
+                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
+        // Sure damage is not called back: an attacker that no creature of theirs can block was weighed by the heuristics
+        // against staying home as a blocker already, and the rollouts value a point of damage far below a creature on
+        // the board (so they would withdraw any attacker whose attack costs it anything, or that is simply tapped).
+        final Integer max = combat.getAttackConstraints().getGlobalRestrictions().getMax();
+        for (final Map.Entry<Card, GameEntity> e : before.entrySet()) {
+            final Card c = e.getKey();
+            if (combat.isAttacking(c) || max != null && combat.getAttackers().size() >= max
+                    || !CombatUtil.canAttack(c, e.getValue())
+                    || AiAttackController.canBeBlockedByAnyOpponent(c) && !backedByATrick(c)) {
+                continue;
+            }
+            combat.addAttacker(c, e.getValue());
+        }
+    }
+
+    /**
+     * The heuristics remembered the creature to attack into a block that a trick wins (the lure). Only that memory is
+     * used, never the hand: restoring attackers because a pump is held would make the AI attack differently when it
+     * holds a trick, which the opponent could read.
+     */
+    private boolean backedByATrick(final Card c) {
+        return AiCardMemory.isRememberedCard(player, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
     }
 
     private Map<Card, GameEntity> commitAttackers(final Player attacker, final Combat combat) {
@@ -1874,7 +1915,7 @@ public class AiController {
             if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
                 // a land that makes no mana yet (Temple of the False God with four lands to come) waits for the others
                 final CardCollection working = CardLists.filter(landsWannaPlay,
-                        l -> !forge.ai.simulation.LegalityGuard.isDormantLand(player, l));
+                        l -> !LegalityGuard.isDormantLand(player, l));
                 if (!working.isEmpty()) {
                     landsWannaPlay = working;
                 }
@@ -2153,11 +2194,11 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || ComboAssembly.deadOnArrival(player, spellAbility)
-                    || (flatMc && LoopRunner.held(player, spellAbility))
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
+                    || (flatMc && LoopRunner.held(player, spellAbility) && vetoed(spellAbility, "held-for-loop"))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
-                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility))
+                    || (flatMc && SpecialActions.waitsForCombat(player, spellAbility) && vetoed(spellAbility, "waits-for-combat"))
                     // an equip is an investment: it does not take the mana of a creature that could be cast instead
                     || (flatMc && spellAbility.isEquip() && !FlatMonteCarloPicker.sparesMana(player, spellAbility))
                     // the upkeep is for a forecast ability, if its cost costs nothing the first main phase needs
@@ -2211,8 +2252,11 @@ public class AiController {
             }
             final SpellAbility loop = LoopRunner.next(player, saList, this::loopApproved);
             if (loop != null) {
+                VetoLog.note(player, "loop-play " + loop.getHostCard().getName());
                 return loop; // a loop of the combo list is on the table: one more round of it
             }
+            // the loop declined its finishers this time: they are for the turn that wins, not for a draw or a mill that falls short
+            saList.removeIf(sa -> LoopRunner.keptForTheLoop(player, sa));
             final SpellAbility finish = ComboAssembly.finish(player, saList, this::assemblyApproved);
             if (finish != null) {
                 return finish; // a draw that takes the opponent's whole library: they lose at their next draw
@@ -2224,6 +2268,14 @@ public class AiController {
         }
         if (flatMc && game.getStack().isEmpty()) {
             // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
+            final SpellAbility blockGrant = FlatMonteCarloPicker.sureBlock(player, saList);
+            if (blockGrant != null) {
+                return blockGrant; // flying, reach... for the creature that blocks the attacker well: now or never
+            }
+            final SpellAbility evasion = FlatMonteCarloPicker.sureEvasion(player, saList);
+            if (evasion != null) {
+                return evasion; // menace, fear... for an attacker that the blockers would stop: the last moment before they are declared
+            }
             final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
             if (sureStifle != null) {
                 return sureStifle;
@@ -2411,12 +2463,28 @@ public class AiController {
             final boolean blocksDown = game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
             extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa)
                     && !(blocksDown && FlatMonteCarloPicker.isCombatTrick(sa))
+                    && !FlatMonteCarloPicker.enablesGoodBlock(player, sa) // flying/reach for the block: only now, not after the blocks
                     && !(SurpriseEntry.isEntryAbility(sa) && SurpriseEntry.offered(player, sa)));
+        }
+        if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()
+                && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
+            // Nothing to answer in an upkeep or draw step: an instant waits for the main phase, the attack or the end step,
+            // when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the draw step)
+            final Predicate<SpellAbility> tooEarly = sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
+                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa);
+            extras.removeIf(tooEarly);
+            approved.removeIf(tooEarly);
         }
         if (mode == FlatMonteCarloPicker.Mode.BLOCKED) {
             extras.removeIf(sa -> !FlatMonteCarloPicker.isCombatTrick(sa)); // after the blocks only tricks matter
             extras.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
             approved.removeIf(sa -> FlatMonteCarloPicker.pointlessPump(player, sa));
+            approved.removeIf(FlatMonteCarloPicker::grantsBlockingKeyword); // too late to block with it
+        }
+        if (game.getStack().isEmpty() && (mode == FlatMonteCarloPicker.Mode.RESPOND || mode == FlatMonteCarloPicker.Mode.BLOCKED)) {
+            // deathtouch, first strike, indestructible... for a creature that is not in the fight
+            extras.removeIf(sa -> FlatMonteCarloPicker.pointlessKeywordTrick(player, sa));
+            approved.removeIf(sa -> FlatMonteCarloPicker.pointlessKeywordTrick(player, sa));
         }
         final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
         FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
@@ -2482,6 +2550,12 @@ public class AiController {
         return cfg;
     }
 
+    /** Logs a play dropped from the list of candidates (see {@link VetoLog}); always true, so it chains onto a test. */
+    private boolean vetoed(final SpellAbility sa, final String reason) {
+        VetoLog.refused(player, sa, reason, "list");
+        return true;
+    }
+
     /**
      * Plays that Flat Monte Carlo never spends a card on (see {@link ComboGuard}): bringing back
      * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
@@ -2491,9 +2565,14 @@ public class AiController {
         final ComboPlan plan = deckPlan(player).combos;
         final String problem = ComboGuard.problem(player, sa, aim, plan);
         if (problem != null) {
+            VetoLog.refused(player, sa, problem, "guard");
             return problem;
         }
-        return saveCantrips && ComboGuard.isCantrip(sa) ? "cantrip-saved" : null;
+        if (saveCantrips && ComboGuard.isCantrip(sa)) {
+            VetoLog.refused(player, sa, "cantrip-saved", "guard");
+            return "cantrip-saved";
+        }
+        return null;
     }
 
     private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approvedIn, final List<SpellAbility> extras,
@@ -2880,8 +2959,10 @@ public class AiController {
             // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
             return false;
         }
-        final String problem = ActivationGuard.problem(player, sa);
+        final String problem = ActivationGuard.problem(player, sa) != null ? ActivationGuard.problem(player, sa)
+                : ActivationGuard.spellProblem(player, sa);
         if (problem != null && !("valuable-sacrifice".equals(problem) && deckPlan(player).combos.isKeyCard(sa.getHostCard()))) {
+            VetoLog.refused(player, sa, problem, "discovery");
             return false; // nothing to act on: a discovered tap or mana for no effect (Oran-Rief with no new green creature)
         }
         final Card host = sa.getHostCard();
@@ -2890,6 +2971,8 @@ public class AiController {
         final boolean afterBlocks = discoveryPhase.is(PhaseType.COMBAT_DECLARE_BLOCKERS);
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !(afterBlocks && FlatMonteCarloPicker.isCombatTrick(sa))
+                && !FlatMonteCarloPicker.enablesGoodBlock(player, sa)
+                && !FlatMonteCarloPicker.enablesEvasion(player, sa)
                 && !FlatMonteCarloPicker.isSavingPlay(player, sa)
                 && !isRemoveDeckManaPermanent(sa)
                 && !isRemoveDeckCostReductionPermanent(sa)
