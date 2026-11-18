@@ -587,8 +587,21 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
 
     /** The Aluren deck with Aluren and Soul Warden in play, {@code lands} Islands, and the hand. */
     private void alurenDeckWith(final int lands, final String... hand) {
-        elfDeckWith(0, hand);
+        alurenDeckWithLibrary(lands, 20, hand);
+    }
+
+    private void alurenDeckWithLibrary(final int lands, final int librarySize, final String... hand) {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        opp = game.getPlayers().get(0);
+        for (int i = 0; i < librarySize; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+            addCardToZone("Plains", opp, ZoneType.Library);
+        }
         addCards("Island", lands, ai);
+        for (final String name : hand) {
+            addCardToZone(name, ai, ZoneType.Hand);
+        }
         addCardToZone("Aluren", ai, ZoneType.Battlefield);
         addCardToZone("Soul Warden", ai, ZoneType.Battlefield);
         game.getAction().checkStateEffects(true); // the static ability that makes the creatures free
@@ -649,6 +662,7 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     @Test(timeOut = 120000)
     public void withoutStrokeTheFamiliarDigsForIt() {
         alurenDeckWith(4, "Raven Familiar", "Cloud of Faeries", "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
         AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.CARDS,
                 forge.ai.simulation.AlurenPlan.stage(ai, opp));
         final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
@@ -708,6 +722,8 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         for (int i = 0; i < 15; i++) {
             addCardToZone("Forest", ai, ZoneType.Library);
         }
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
         addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
         AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.CARDS, forge.ai.simulation.AlurenPlan.stage(ai, opp));
         AssertJUnit.assertTrue("over seven cards is no reason to stop the draws", forge.ai.simulation.AlurenPlan.drawLoop(ai));
@@ -719,12 +735,100 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     @Test(timeOut = 120000)
     public void theHarpyAloneWaitsForTheFamiliar() {
         alurenDeckWith(4, "Cavern Harpy", "Raven Familiar");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
         final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
         AssertJUnit.assertNotNull(harpy);
         AssertJUnit.assertTrue("the Harpy returns only itself: the Familiar goes first", LoopRunner.held(ai, harpy));
         final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
         AssertJUnit.assertNotNull(step);
         AssertJUnit.assertEquals("Raven Familiar", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void soulWardenAndHarpyDoNotLoopWithoutAWinCondition() {
+        alurenDeckWith(4, "Cavern Harpy");
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.NONE,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
+        AssertJUnit.assertNotNull(harpy);
+        AssertJUnit.assertTrue("life gain alone is not a win condition",
+                LoopRunner.held(ai, harpy));
+    }
+
+    @Test(timeOut = 120000)
+    public void twoSavagesStopBeforeTheLibraryReserveIsConsumed() {
+        // Three Forests plus Stroke and Cloud: five cards. Two Savages would draw two.
+        alurenDeckWithLibrary(4, 3, "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals(5, ai.getCardsIn(ZoneType.Library).size());
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.NONE,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility harpy = LoopRunner.castFromHand(ai, alurenPlays(), "Cavern Harpy");
+        AssertJUnit.assertNotNull(harpy);
+        AssertJUnit.assertTrue("do not cast Harpy when two Savage triggers exceed the reserve",
+                LoopRunner.held(ai, harpy));
+    }
+
+    @Test(timeOut = 120000)
+    public void twoSavagesCanDrawWhenTheLibraryHasOneSafeRound() {
+        // Four Forests plus Stroke and Cloud: six cards. The round leaves four.
+        alurenDeckWithLibrary(4, 4, "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        addCardToZone("Wirewood Savage", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals(6, ai.getCardsIn(ZoneType.Library).size());
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.CARDS,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Cavern Harpy", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void maggotCarrierIsPreferredOverTheStrokeBackup() {
+        alurenDeckWith(4, "Cavern Harpy", "Maggot Carrier",
+                "Stroke of Genius", "Cloud of Faeries");
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.DRAIN,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Maggot Carrier", step.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void soulWardenLifeLoopStopsAtTwenty() {
+        alurenDeckWith(4, "Cavern Harpy");
+        addCardToZone("Stroke of Genius", ai, ZoneType.Library);
+        addCardToZone("Cloud of Faeries", ai, ZoneType.Library);
+        ai.setLife(19, null);
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.LIFE,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Cavern Harpy", step.getHostCard().getName());
+        final Card harpy = addCardToZone("Cavern Harpy", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals(harpy, forge.ai.simulation.AlurenPlan.harpyBounce(ai, cards(harpy)));
+        ai.setLife(20, null);
+        AssertJUnit.assertEquals(forge.ai.simulation.AlurenPlan.Stage.NONE,
+                forge.ai.simulation.AlurenPlan.stage(ai, opp));
+    }
+
+    @Test(timeOut = 120000)
+    public void cabalTherapyUsesARevealedCounterspellBeforeAluren() {
+        elfDeckWith(4, "Aluren", "Cavern Harpy", "Maggot Carrier", "Cabal Therapy");
+        addCard("Swamp", ai);
+        final Card revealed = addCardToZone("Counterspell", opp, ZoneType.Hand);
+        AiCardMemory.rememberCard(ai, revealed, AiCardMemory.MemorySet.REVEALED_CARDS);
+        final SpellAbility step = LoopRunner.next(ai, alurenPlays(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Cabal Therapy", step.getHostCard().getName());
+        AssertJUnit.assertEquals("Counterspell",
+                NamedDiscard.chooseName(ai, step, "Card.nonLand"));
     }
 
     @Test(timeOut = 120000)
