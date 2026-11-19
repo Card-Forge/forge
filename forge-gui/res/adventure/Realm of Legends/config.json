@@ -316,6 +316,12 @@
       "description": "Your gold stays at 0.",
       "icon": "BronzeChallengeCoin",
       "maxGold": 0
+    },
+    {
+      "name": "Limited Looting",
+      "description": "Enemies drop no random cards. Gold, shards, items and named cards still drop.",
+      "icon": "SteelSword",
+      "blockedEnemyRewards": ["deckCard", "randomCard"]
     }
   ]
 }
