@@ -2,10 +2,10 @@ package forge.ai;
 
 import com.google.common.collect.Multiset;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.keyword.Keyword;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -62,31 +62,73 @@ public final class BounceValue {
     }
 
     /**
-     * The attacker is why the AI is in trouble: it is unblocked and, without its damage, the AI would not be in danger
-     * (or would not die). A small attacker beside the one that is lethal does not count.
+     * The attacker is a cause of the danger to the AI. Compare the normal combat forecast with the same combat after
+     * removing only this attacker. Using the shared forecast keeps double strike, trample, infect, poison, damage
+     * replacement/prevention and the other attackers consistent with ComputerUtilCombat.
      */
-    private static boolean savesTheCombat(final Player ai, final Card c) {
+    static boolean savesTheCombat(final Player ai, final Card c) {
         final Combat combat = ai.getGame().getPhaseHandler().getCombat();
         if (combat == null || !combat.isAttacking(c) || !c.getController().isOpponentOf(ai)) {
             return false;
         }
-        int power = c.getNetCombatDamage();
-        if (combat.isBlocked(c)) {
-            // a blocked trampler still hits the AI with what its blockers cannot soak up; any other blocked attacker is held
-            if (!c.hasKeyword(Keyword.TRAMPLE) || c.hasKeyword(Keyword.INFECT)) {
-                return false;
-            }
-            power -= ComputerUtilCombat.totalShieldDamage(c, combat.getBlockers(c));
-        }
-        final int dmg = Math.max(0, ComputerUtilCombat.predictDamageTo(ai, Math.max(0, power), c, true));
-        if (dmg == 0) {
+
+        final Combat withoutAttacker = withoutAttacker(ai, combat, c);
+        if (withoutAttacker == null) {
             return false;
         }
-        final int remaining = ComputerUtilCombat.lifeThatWouldRemain(ai, combat);
-        if (remaining < 1 && remaining + dmg >= 1) {
-            return true; // without it the AI lives
+
+        // Serious danger includes lethal poison as well as lethal life damage. Check it first so the comparison is
+        // deterministic for the cases where bouncing the attacker prevents the loss.
+        if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+            return !ComputerUtilCombat.lifeInSeriousDanger(ai, withoutAttacker);
         }
-        return ComputerUtilCombat.lifeInDanger(ai, combat) && !ComputerUtilCombat.lifeInDanger(ai, combat, -dmg);
+        final int poisonDangerFloor = Math.max(7, ai.getPoisonCounters());
+        if (ComputerUtilCombat.resultingPoison(ai, combat) > poisonDangerFloor
+                && ComputerUtilCombat.resultingPoison(ai, withoutAttacker) <= poisonDangerFloor) {
+            return true;
+        }
+        if (!ComputerUtilCombat.lifeInDanger(ai, combat)
+                || ComputerUtilCombat.resultingPoison(ai, withoutAttacker) > poisonDangerFloor) {
+            return false;
+        }
+
+        // lifeInDanger randomizes its threshold between these bounds. Requiring the reduced combat to clear the upper
+        // bound avoids a second random draw changing the verdict for the same attacker.
+        final int safeThreshold = Math.min(Math.max(AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD),
+                AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_MAX_THRESHOLD)), ai.getLife());
+        return ComputerUtilCombat.lifeThatWouldRemain(ai, withoutAttacker) >= safeThreshold;
+    }
+
+    /**
+     * Make a lightweight combat view containing the attackers that can damage the AI's team, except one card. The
+     * actual cards and blockers are reused; Combat does not update the live game view for this separate instance.
+     * Return null when the live combat cannot be represented safely, in which case bounce evaluation stays conservative.
+     */
+    private static Combat withoutAttacker(final Player ai, final Combat combat, final Card excluded) {
+        final Combat reduced = new Combat(combat.getAttackingPlayer());
+        for (final Card attacker : combat.getAttackers()) {
+            if (attacker == excluded) {
+                continue;
+            }
+            final GameEntity defender = combat.getDefenderByAttacker(attacker);
+            if (!(defender instanceof Player) || !ai.sharesTeamWith((Player) defender)) {
+                continue; // damage to a planeswalker/battle or another player does not change this player's life/poison forecast
+            }
+            if (!reduced.getDefenders().contains(defender)) {
+                return null;
+            }
+            reduced.addAttacker(attacker, defender);
+            if (!reduced.isAttacking(attacker)) {
+                return null;
+            }
+            if (combat.isBlocked(attacker)) {
+                reduced.setBlocked(attacker, true);
+            }
+            for (final Card blocker : combat.getBlockers(attacker)) {
+                reduced.addBlocker(attacker, blocker);
+            }
+        }
+        return reduced;
     }
 
     /**

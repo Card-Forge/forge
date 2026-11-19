@@ -1,5 +1,6 @@
 package forge.ai;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,16 @@ public class AiReportScenarioTest extends AITest {
     private static final boolean FLAT_MC = !"false".equals(System.getProperty("forge.test.flatmc", "true"));
     private static final String ONLY = System.getProperty("forge.test.issue", "");
     private static final List<String> SUMMARY = new ArrayList<>();
+
+    private static void forceAttackAggression(final AiAttackController controller, final int aggression) {
+        try {
+            final Field field = AiAttackController.class.getDeclaredField("aiAggression");
+            field.setAccessible(true);
+            field.setInt(controller, aggression);
+        } catch (final ReflectiveOperationException e) {
+            throw new AssertionError("Could not set the attack aggression for the regression scenario", e);
+        }
+    }
 
     private enum Fid { EXACT, APPROX, SMOKE }
 
@@ -959,6 +970,23 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.ai.setLife(5, null); final Card wurm = c.bf("Craw Wurm", c.ai); final Card herd = c.bf("Crested Herdcaller", c.opp);
                        final Combat combat = new Combat(c.opp); combat.addAttacker(herd, c.ai); combat.addBlocker(herd, wurm); c.game.getPhaseHandler().setCombat(combat); },
                 c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? "bounced an attacker that the block stops completely" : null));
+        l.add(new Scenario("bounce-lethal-infect", "An unblocked infect attacker that takes the AI from 9 to 10 poison is worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(9, null); final Card elf = c.bf("Glistener Elf", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal poison attacker was not recognized"));
+        l.add(new Scenario("bounce-poison-danger-floor", "An infect attack from 7 to 8 poison crosses the AI's nonlethal danger floor", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(7, null); final Card elf = c.bf("Glistener Elf", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the nonlethal poison danger was not recognized"));
+        l.add(new Scenario("bounce-blocked-infect-trampler", "Blightsteel Colossus still deals lethal poison through a Grizzly Bears blocker", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(9, null); final Card blocker = c.bf("Grizzly Bears", c.ai); final Card colossus = c.bf("Blightsteel Colossus", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(colossus, c.ai); combat.addBlocker(colossus, blocker); combat.setBlocked(colossus, true);
+                       c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the blocked infect trampler's poison damage was missed"));
+        l.add(new Scenario("bounce-double-strike-lethal", "An unblocked double-striker that deals lethal damage is worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(2, null); final Card blade = c.bf("Boros Swiftblade", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(blade, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "double-strike damage was not included in the combat forecast"));
         // ---- Zagorka, Mother of Sanctum: the land is not worth an attack that never comes
         final java.util.function.Function<Ctx, SpellAbility> sanctum = c -> {
             final Card z = c.bf("Zagorka, Mother of Sanctum", c.opp);
@@ -981,6 +1009,24 @@ public class AiReportScenarioTest extends AITest {
                 c -> {
                     final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
                     return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai)) ? null : "the Arbor was not recognised as a gift";
+                }));
+        l.add(new Scenario("land-creature-all-out-gift", "Even at all-out aggression 5, Dryad Arbor stays home when a blocker kills it for free", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    final AiAttackController attack = new AiAttackController(c.ai);
+                    forceAttackAggression(attack, 5);
+                    return attack.shouldAttack(arbor, c.opp.getCreaturesInPlay(), new Combat(c.ai), c.opp)
+                            ? "the animated land was sent into a free kill at aggression 5" : null;
+                }));
+        l.add(new Scenario("land-creature-exalted-gate", "Only the dedicated Exalted strategy bypasses the animated-land gift guard", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    final Combat combat = new Combat(c.ai);
+                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, false);
+                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, true);
+                    return ordinary && !exalted ? null : "the land-gift guard was not limited to the explicit Exalted path";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
