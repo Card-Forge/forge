@@ -688,7 +688,7 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("bounce-value", "Which permanents of the opponent a bounce is worth a card for", Fid.APPROX, M1, true,
                 c -> {
                     c.bf("Vendilion Clique", c.opp); c.bf("Mulldrifter", c.opp); c.bf("Snapcaster Mage", c.opp);
-                    c.bf("Llanowar Elves", c.opp); c.bf("Craw Wurm", c.opp); c.bf("Forest", c.opp);
+                    c.bf("Llanowar Elves", c.opp); c.bf("Craw Wurm", c.opp); c.bf("Forest", c.opp); c.bf("Gaea's Revenge", c.opp);
                     c.counters(c.bf("Grizzly Bears", c.opp), CounterEnumType.P1P1, 2);
                 },
                 c -> {
@@ -699,6 +699,7 @@ public class AiReportScenarioTest extends AITest {
                     expected.put("Snapcaster Mage", false);    // flash and a trigger
                     expected.put("Llanowar Elves", false);     // costs one mana to cast again
                     expected.put("Craw Wurm", true);           // six mana for a vanilla body
+                    expected.put("Gaea's Revenge", true);      // flash alone is no reason: five mana to cast again, no trigger
                     expected.put("Forest", true);              // a land drop
                     expected.put("Grizzly Bears", true);       // loses its counters
                     for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
@@ -831,6 +832,106 @@ public class AiReportScenarioTest extends AITest {
                     re.setActivatingPlayer(c.ai);
                     final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
                     return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        // ---- which creatures a pump can still matter to (before / after the attackers and the blockers are declared)
+        l.add(new Scenario("relevance-attacker-before-declaring", "Own turn, declare attackers, none declared yet: the untapped Colossus can still attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Chameleon Colossus", c.ai); c.game.getPhaseHandler().setCombat(new Combat(c.ai)); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "an untapped creature that can attack was ruled out"));
+        l.add(new Scenario("relevance-blocker-before-blocks", "Their declare attackers: the untapped Colossus can still block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                c -> { c.bf("Chameleon Colossus", c.ai); final Card att = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "an untapped creature that can block was ruled out"));
+        l.add(new Scenario("relevance-tapped-before-blocks", "Their declare attackers: the tapped Colossus cannot block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                c -> { c.bf("Chameleon Colossus", c.ai).setTapped(true); final Card att = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? "a tapped creature counted as a blocker" : null));
+        l.add(new Scenario("relevance-blockers-declared", "After the blocks the one that blocks is in the fight, the one that stays out is not", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { final Card blocker = c.bf("Craw Wurm", c.ai); c.bf("Grizzly Bears", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker); c.game.getPhaseHandler().setCombat(combat); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        final boolean want = k.getName().equals("Craw Wurm");
+                        if (PlayRelevance.combatRelevant(k) != want) { return k.getName() + (want ? " blocks and was ruled out" : " does not block and was counted"); }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("relevance-main-phase", "Before combat an untapped creature can matter, a tapped one cannot", Fid.APPROX, M1, true,
+                c -> { c.bf("Chameleon Colossus", c.ai); c.bf("Grizzly Bears", c.ai).setTapped(true); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        final boolean want = k.getName().equals("Chameleon Colossus");
+                        if (PlayRelevance.combatRelevant(k) != want) { return k.getName() + " was judged " + !want; }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("pump-in-response-to-burn", "A pump in response to burn is not outside combat: the toughness can save the creature", Fid.APPROX, M1, true,
+                c -> { c.bf("Forest", c.ai); final Card giant = c.bf("Hill Giant", c.ai); giant.setTapped(true); c.hand("Giant Growth", c.ai); c.stack(c.opp, "Lightning Bolt", giant); },
+                c -> {
+                    final SpellAbility sa = c.hand("Giant Growth", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return PlayRelevance.pointlessPump(c.ai, sa) == null ? null : "a pump with burn on the stack was thrown out";
+                }));
+        l.add(new Scenario("counter-pump-in-response", "The opponent's pump in response to burn is not a bluff", Fid.APPROX, M1, false,
+                c -> { c.bf("Island", 2, c.ai); c.hand("Counterspell", c.ai); final Card g = c.bf("Hill Giant", c.opp); g.setTapped(true);
+                       c.stack(c.opp, "Lightning Bolt", c.ai); c.stack(c.opp, "Giant Growth", g); },
+                c -> PlayRelevance.isBait(c.ai, c.game.getStack().peekAbility()) ? "a pump on top of a spell was taken for a bluff" : null));
+        // ---- bounce: the attacker that is lethal, and the one that is not
+        l.add(new Scenario("bounce-lethal-attacker", "A Vendilion Clique that is lethal is worth bouncing: without it the AI lives", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(3, null); final Card clique = c.bf("Vendilion Clique", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(clique, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal Clique was refused"));
+        l.add(new Scenario("bounce-irrelevant-attacker", "A Vendilion Clique beside a Craw Wurm that is lethal anyway: bouncing it saves nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card clique = c.bf("Vendilion Clique", c.opp); final Card wurm = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(clique, c.ai); combat.addAttacker(wurm, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> {
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Vendilion Clique") && BounceValue.worthBouncing(c.ai, k)) { return "bounced the Clique although the Wurm kills anyway"; }
+                    }
+                    return null;
+                }));
+        l.add(aimed("bounce-prefers-craw-wurm", "Mulldrifter and Craw Wurm: the Wurm is the one to send back", Fid.APPROX, M1, true, "Unsummon", "Craw Wurm",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Unsummon", c.ai); c.bf("Mulldrifter", c.opp); c.bf("Craw Wurm", c.opp); }));
+        // ---- which spell on the stack is worth the counterspell
+        l.add(new Scenario("counter-value-removal-aim", "A Terminate on the AI's creature outranks a Terminate on their own", Fid.APPROX, M1, false,
+                c -> { c.bf("Grizzly Bears", c.ai); c.bf("Hill Giant", c.opp); c.hand("Terminate", c.opp); c.hand("Terminate", c.opp); },
+                c -> {
+                    final Card mine = c.ai.getCardsIn(ZoneType.Battlefield).get(0), theirs = c.opp.getCardsIn(ZoneType.Battlefield).get(0);
+                    final java.util.List<Card> terminates = new java.util.ArrayList<>(c.opp.getCardsIn(ZoneType.Hand));
+                    final SpellAbility onMine = terminates.get(0).getFirstSpellAbility(), onTheirs = terminates.get(1).getFirstSpellAbility();
+                    onMine.setActivatingPlayer(c.opp); onMine.getTargets().add(mine);
+                    onTheirs.setActivatingPlayer(c.opp); onTheirs.getTargets().add(theirs);
+                    return PlayRelevance.stackValue(c.ai, onMine) > PlayRelevance.stackValue(c.ai, onTheirs) ? null
+                            : "removal on their own creature was valued like removal on the AI's";
+                }));
+        // ---- shocklands: what the opponent can really hit for next turn
+        l.add(new Scenario("shock-tapped-attackers-untap", "Their tapped Craw Wurm and Hill Giant untap before they attack: 15 life does not pay", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(15, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai);
+                       c.bf("Craw Wurm", c.opp).setTapped(true); c.bf("Hill Giant", c.opp).setTapped(true); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? "paid with nine power ready to untap against 15 life" : null;
+                }));
+        l.add(new Scenario("shock-blockers-cover", "Two untapped Grizzly Bears stop the Wurm and the Giant: 12 life pays", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai);
+                       c.bf("Grizzly Bears", 2, c.ai); c.bf("Craw Wurm", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? null : "refused although the blockers stop everything";
+                }));
+        l.add(new Scenario("shock-defender-ignored", "A Wall of Stone cannot attack: it adds nothing to the threat", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); c.bf("Wall of Stone", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? null : "a defender was counted as an attacker";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },

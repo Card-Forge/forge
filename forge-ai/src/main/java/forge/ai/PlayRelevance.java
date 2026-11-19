@@ -1,12 +1,12 @@
 package forge.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -25,7 +25,11 @@ public final class PlayRelevance {
     private PlayRelevance() {
     }
 
-    /** The creature is in the fight, or can still be put into it, this turn. */
+    /**
+     * The creature is in the fight, or can still be put into it, this turn. The blockers are declared on entering the
+     * declare-blockers step, so what has not blocked by then is out of the fight; before that (the declare-attackers step of
+     * the opponent's turn) every untapped creature can still block.
+     */
     public static boolean combatRelevant(final Card c) {
         if (c == null || !c.isCreature()) {
             return true; // not judged here
@@ -45,18 +49,57 @@ public final class PlayRelevance {
                 return combat != null && (combat.isAttacking(c) || combat.isBlocking(c));
             case COMBAT_DECLARE_ATTACKERS:
                 if (controllersTurn) {
-                    return combat != null && combat.isAttacking(c);
+                    // declared attackers are in; before any are declared an untapped creature still can be
+                    return combat != null && combat.isAttacking(c)
+                            || c.isUntapped() && (combat == null || combat.getAttackers().isEmpty());
                 }
-                return CombatUtil.canBlock(c); // the blockers are not declared yet: only an untapped creature can still block
+                return CombatUtil.canBlock(c); // the blockers are not declared yet: an untapped creature can still block
             case COMBAT_END:
             case MAIN2:
             case END_OF_TURN:
             case CLEANUP:
                 return false;
             default:
-                // before the attackers: the creature of the player whose turn it is can attack, the other one can block
-                return controllersTurn ? CombatUtil.canAttack(c) : CombatUtil.canBlock(c);
+                // before the attackers: an untapped creature can attack (or block) still; a tapped one cannot do either
+                return c.isUntapped();
         }
+    }
+
+    /** One of these creatures is part of, or can still join, the fight. */
+    private static boolean anyRelevant(final Iterable<Card> cards) {
+        for (final Card c : cards) {
+            if (combatRelevant(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the creatures that this pump is aimed at are all out of the fight, with an empty list meaning "nothing known".
+     * Targets chosen are the answer; otherwise every creature of {@code owner} that it could be aimed at, or its defined cards.
+     */
+    private static boolean allOutOfTheFight(final Player owner, final SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            if (sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
+                return !anyRelevant(sa.getTargets().getTargetCards());
+            }
+            boolean any = false;
+            for (final Card c : owner.getCreaturesInPlay()) {
+                if (sa.canTarget(c)) {
+                    any = true;
+                    if (combatRelevant(c)) {
+                        return false;
+                    }
+                }
+            }
+            return any;
+        }
+        if (sa.hasParam("Defined")) {
+            final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            return !defined.isEmpty() && !anyRelevant(defined);
+        }
+        return false;
     }
 
     /**
@@ -69,29 +112,7 @@ public final class PlayRelevance {
         if (!isPlainPump(sa) || !ai.getGame().getStack().isEmpty()) {
             return null;
         }
-        final List<Card> affected = new ArrayList<>();
-        if (sa.usesTargeting()) {
-            if (sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
-                affected.addAll(sa.getTargets().getTargetCards());
-            } else {
-                for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-                    if (c.isCreature() && sa.canTarget(c)) {
-                        affected.add(c);
-                    }
-                }
-            }
-        } else if (sa.hasParam("Defined")) {
-            affected.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
-        }
-        if (affected.isEmpty()) {
-            return null;
-        }
-        for (final Card c : affected) {
-            if (combatRelevant(c)) {
-                return null;
-            }
-        }
-        return "pump-outside-combat";
+        return allOutOfTheFight(ai, sa) ? "pump-outside-combat" : null;
     }
 
     private static boolean isPlainPump(final SpellAbility sa) {
@@ -111,33 +132,48 @@ public final class PlayRelevance {
     }
 
     /**
-     * The opponent's pump spell on the stack that changes nothing: it is alone on the stack and the creatures it pumps are
-     * not part of the fight. Countering it spends a counterspell on a bluff.
+     * The opponent's pump spell on the stack that changes nothing: it is alone on the stack (nothing for a toughness boost
+     * or protection to answer) and the creatures it pumps are not part of the fight. Countering it spends a counterspell on a
+     * bluff.
      */
     public static boolean isBait(final Player ai, final SpellAbility spell) {
         if (spell == null || spell.getActivatingPlayer() == null || !spell.getActivatingPlayer().isOpponentOf(ai)
-                || !isPlainPump(spell)) {
+                || !isPlainPump(spell) || ai.getGame().getStack().size() != 1) {
             return false;
         }
-        final Game game = ai.getGame();
-        if (game.getStack().size() != 1) {
-            return false; // it answers something: a toughness boost against burn is a real play
-        }
-        final List<Card> affected = new ArrayList<>();
+        return allOutOfTheFight(spell.getActivatingPlayer(), spell);
+    }
+
+    /**
+     * Whether the spell or ability does harm to the AI: it is aimed at the AI or its permanents, or its effect reaches more
+     * of the AI's permanents than of its caster's.
+     */
+    private static boolean threatensAi(final Player ai, final SpellAbility spell) {
+        final ApiType api = spell.getApi();
         if (spell.usesTargeting()) {
-            affected.addAll(spell.getTargets().getTargetCards());
-        } else if (spell.hasParam("Defined")) {
-            affected.addAll(AbilityUtils.getDefinedCards(spell.getHostCard(), spell.getParam("Defined"), spell));
-        }
-        if (affected.isEmpty()) {
-            return false;
-        }
-        for (final Card c : affected) {
-            if (combatRelevant(c)) {
+            if (spell.getTargets() == null) {
                 return false;
             }
+            for (final Card c : spell.getTargets().getTargetCards()) {
+                if (c.getController().equals(ai)) {
+                    return true;
+                }
+            }
+            for (final Player p : spell.getTargets().getTargetPlayers()) {
+                if (p.equals(ai)) {
+                    return true;
+                }
+            }
+            return false;
         }
-        return true;
+        if ((api == ApiType.DestroyAll || api == ApiType.DamageAll) && spell.hasParam("ValidCards")) {
+            final String valid = spell.getParam("ValidCards");
+            final Player caster = spell.getActivatingPlayer();
+            final int mine = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, caster, spell.getHostCard(), spell).size();
+            final int theirs = CardLists.getValidCards(caster.getCardsIn(ZoneType.Battlefield), valid, caster, spell.getHostCard(), spell).size();
+            return mine > theirs;
+        }
+        return spell.getParamOrDefault("Defined", "").contains("Opponent");
     }
 
     /** What an opposing spell or ability on the stack is worth to its caster, for choosing the one to counter. */
@@ -155,9 +191,9 @@ public final class PlayRelevance {
             value = Math.max(value, ComputerUtilCard.evaluateCreature(host));
         }
         final ApiType api = spell.getApi();
-        if (api == ApiType.Destroy || api == ApiType.DestroyAll || api == ApiType.DealDamage || api == ApiType.DamageAll
-                || api == ApiType.ChangeZone && spell.usesTargeting() || api == ApiType.Sacrifice) {
-            value += 60; // aimed at the AI's side: a counter saves a card of its own
+        if ((api == ApiType.Destroy || api == ApiType.DestroyAll || api == ApiType.DealDamage || api == ApiType.DamageAll
+                || api == ApiType.ChangeZone && spell.usesTargeting() || api == ApiType.Sacrifice) && threatensAi(ai, spell)) {
+            value += 60; // it hits the AI's side: a counter saves a card of its own
         }
         return value;
     }

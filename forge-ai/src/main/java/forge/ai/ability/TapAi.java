@@ -11,6 +11,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayLife;
+import forge.ai.simulation.ActivationGuard;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -133,20 +134,13 @@ public class TapAi extends TapAiBase {
     private static final int LOW_LIFE_FOR_ONE_DROP = 14;
 
     /**
-     * Whether the AI can afford to pay life for a land to enter untapped: it must stay above a floor of 10 (the burn that
-     * the deck across the table may hold, a life total of 10 in Adventure mode is already low) and above what the creatures
-     * on the other side hit for, plus five.
+     * Whether the AI can afford to pay life for a land to enter untapped: it must stay at or above 10 (the burn that the deck
+     * across the table may hold; a life total of 10 in Adventure mode is already low) and at or above what the opponent's
+     * creatures hit for on their next turn plus five. That estimate is the one of the Manabarbs reserve: their tapped
+     * creatures untap, the creatures that cannot attack and the ones that the AI's untapped blockers stop are not counted.
      */
     static boolean lifeCanBeSpared(final Player payer, final int amount) {
-        int threat = 0;
-        for (final Player opp : payer.getOpponents()) {
-            for (final Card c : opp.getCreaturesInPlay()) {
-                if (!c.hasKeyword(Keyword.DEFENDER) && c.getNetCombatDamage() > 0) {
-                    threat += c.getNetCombatDamage();
-                }
-            }
-        }
-        return payer.getLife() - amount >= Math.max(10, threat + 5);
+        return payer.getLife() - amount >= Math.max(10, ActivationGuard.nextTurnThreat(payer) + 5);
     }
 
     @Override

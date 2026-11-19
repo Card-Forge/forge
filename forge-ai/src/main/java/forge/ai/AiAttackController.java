@@ -1609,8 +1609,9 @@ public class AiAttackController {
             return false;
         }
 
-        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing
-        if (attacker.isLand() && aiAggression < 5 && isGiftToABlocker(ai, attacker, combat)) {
+        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing, not even when the
+        // attack is all-out (aggression 5): only a lethal attack (6) takes it along
+        if (attacker.isLand() && aiAggression < 6 && isGiftToABlocker(ai, attacker, combat)) {
             return false;
         }
 
