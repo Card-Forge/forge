@@ -601,6 +601,75 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp).setTapped(true); }));
         l.add(play("manabarbs-tapped-small", "6 life, a tapped 1/1 on their side: the same two taps are fine", Fid.APPROX, "MAIN2", true, "Grizzly Bears",
                 c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Llanowar Elves", c.opp).setTapped(true); }));
+        l.add(new Scenario("manabarbs-spent-dork", "A Llanowar Elves tapped to pay cannot also block the Craw Wurm", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(6, null); c.bf("Forest", c.ai); c.bf("Llanowar Elves", c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the Elf was counted as a blocker even though it pays for the spell";
+                }));
+        l.add(new Scenario("manabarbs-trample-reserve", "A 2/2 blocker does not absorb all the damage from an 8/8 trampler", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(8, null); c.bf("Forest", 2, c.ai); c.bf("Llanowar Elves", c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Centaur Courser", c.ai); c.bf("Manabarbs", c.opp); c.bf("Terra Stomper", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Centaur Courser", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the estimate treated the Grizzly Bears as stopping all trample damage";
+                }));
+        l.add(new Scenario("manabarbs-menace-reserve", "A single blocker cannot block the opponent's menace creature", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(5, null); c.bf("Forest", 2, c.ai); c.bf("Llanowar Elves", c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Centaur Courser", c.ai); c.bf("Manabarbs", c.opp); c.bf("Boggart Brute", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Centaur Courser", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "one blocker was incorrectly counted against menace";
+                }));
+        l.add(new Scenario("manabarbs-removal-threat", "Doom Blade removes the only attacker before the life reserve is calculated", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", 2, c.ai); c.hand("Doom Blade", c.ai); c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Doom Blade", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Craw Wurm")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? "the removed Craw Wurm was still counted as next-turn damage" : null;
+                }));
+        l.add(new Scenario("manabarbs-remove-one-source", "Destroying Manabarbs does not ignore a second source such as Burning Earth", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(5, null); c.bf("Plains", c.ai); c.bf("Plateau", c.ai); c.hand("Disenchant", c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Disenchant", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Manabarbs")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "removing only Manabarbs incorrectly granted the life-to-one exception";
+                }));
+        l.add(new Scenario("manabarbs-remove-source-but-threat-remains", "Removing Manabarbs does not ignore a Craw Wurm that will attack next turn", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(4, null); c.bf("Plains", 2, c.ai); c.hand("Disenchant", c.ai); c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Disenchant", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Manabarbs")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the life-to-one exception ignored the Craw Wurm's next attack";
+                }));
+        l.add(new Scenario("manabarbs-indestructible-source", "Disenchant does not get the exception when Manabarbs is indestructible", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(4, null); c.bf("Plains", 2, c.ai); c.bf("Serra Angel", c.ai); c.hand("Disenchant", c.ai); c.bf("Manabarbs", c.opp); c.bf("Avacyn, Angel of Hope", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Disenchant", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Manabarbs")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "an indestructible Manabarbs was treated as removed";
+                }));
+        l.add(new Scenario("manabarbs-ojer-replacement", "Ojer Axonil increases each Manabarbs trigger to its power", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(10, null); c.bf("Mountain", 2, c.ai); c.hand("Mind Stone", c.ai); c.bf("Manabarbs", c.opp); c.bf("Ojer Axonil, Deepest Might", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int damage = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return damage == 8 ? null : "expected 8 damage from two taps with Ojer Axonil, estimated " + damage;
+                }));
         // review of the Effigy patch: what the AI really becomes when the Effigy enters
         l.add(new Scenario("effigy-picks-etb", "The Effigy becomes a Mulldrifter (its enters trigger) and not the Hill Giant", Fid.APPROX, M1, true,
                 c -> { c.bf("Island", 4, c.ai); c.bf("Hill Giant", c.opp); c.bf("Mulldrifter", c.opp); c.lib("Island", 8, c.ai); },

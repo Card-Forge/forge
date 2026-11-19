@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.ability.AnimateAi;
@@ -17,6 +19,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.keyword.Keyword;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -167,13 +170,13 @@ public final class ActivationGuard {
         if (damage <= 0) {
             return false;
         }
-        if (removesTapDamage(ai, sa)) {
-            return ai.getLife() - damage < 1;
-        }
-        // the reserve is judged on the board as the play leaves it: what the play removes does not attack, and a creature
-        // that is tapped for the mana stays tapped through their turn, so it does not block
+        final boolean clearsTapDamage = removesAllTapDamage(ai, sa);
+        // Judge survival on the board the play leaves behind: removed attackers are gone, and creatures tapped for mana
+        // cannot block during the opponent's next turn. Clearing the tap-damage source lowers the fixed reserve to 1,
+        // but it must not make the AI ignore an attacker that will still hit it next turn.
         final int threat = nextTurnThreat(ai, removedByPlay(ai, sa), creaturesSpentOnMana(payment));
-        return ai.getLife() - damage < Math.max(3, threat + 1);
+        final int reserve = clearsTapDamage ? Math.max(1, threat + 1) : Math.max(3, threat + 1);
+        return ai.getLife() - damage < reserve;
     }
 
     /**
@@ -191,6 +194,7 @@ public final class ActivationGuard {
      */
     static int nextTurnThreat(final Player ai, final Collection<Card> gone, final Collection<Card> spent) {
         final List<Card> attackers = new ArrayList<>();
+        final List<Card> availableBlockers = new ArrayList<>();
         for (final Player opp : ai.getOpponents()) {
             for (final Card c : opp.getCreaturesInPlay()) {
                 if (!gone.contains(c) && c.getNetPower() > 0 && !c.hasKeyword(Keyword.DEFENDER)
@@ -199,23 +203,87 @@ public final class ActivationGuard {
                 }
             }
         }
-        attackers.sort((a, b) -> b.getNetPower() - a.getNetPower());
         for (final Card blocker : ai.getCreaturesInPlay()) {
-            if (blocker.isTapped() || gone.contains(blocker) || spent.contains(blocker)) {
-                continue;
+            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker)) {
+                availableBlockers.add(blocker);
             }
-            for (int i = 0; i < attackers.size(); i++) {
-                if (CombatUtil.canBlock(attackers.get(i), blocker)) {
-                    attackers.remove(i);
-                    break;
+        }
+
+        // Assign scarce blockers to the attackers with the fewest legal options first. In particular, one ground
+        // blocker must not be spent on an attacker that another blocker could handle while a flyer goes through.
+        final List<ThreatTarget> assignments = new ArrayList<>(attackers.size());
+        for (final Card attacker : attackers) {
+            final Pair<Integer, Integer> limits = StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, ai);
+            final List<Card> candidates = new ArrayList<>();
+            for (final Card blocker : availableBlockers) {
+                if (CombatUtil.canBlock(attacker, blocker, true)) {
+                    candidates.add(blocker);
                 }
             }
+            assignments.add(new ThreatTarget(attacker, candidates, Math.max(1, limits.getLeft()), limits.getRight()));
         }
+
+        assignments.sort((a, b) -> {
+            final int aSlack = a.blockers.size() - a.minBlockers;
+            final int bSlack = b.blockers.size() - b.minBlockers;
+            final int bySlack = Integer.compare(aSlack, bSlack);
+            if (bySlack != 0) {
+                return bySlack;
+            }
+            final int byRequirement = Integer.compare(b.minBlockers, a.minBlockers);
+            return byRequirement != 0 ? byRequirement : Integer.compare(b.attacker.getNetPower(), a.attacker.getNetPower());
+        });
+
         int threat = 0;
-        for (final Card c : attackers) {
-            threat += c.getNetPower();
+        for (final ThreatTarget assignment : assignments) {
+            final Card attacker = assignment.attacker;
+            final List<Card> candidates = new ArrayList<>();
+            for (final Card blocker : assignment.blockers) {
+                if (availableBlockers.contains(blocker)) {
+                    candidates.add(blocker);
+                }
+            }
+            final int power = Math.max(0, attacker.getNetPower());
+            if (assignment.maxBlockers < assignment.minBlockers || candidates.size() < assignment.minBlockers) {
+                threat += power; // menace / a blocker restriction: not enough legal blockers
+                continue;
+            }
+
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                // For trample, assign the minimum legal group and credit only the damage those blockers can absorb.
+                // This intentionally errs on the cautious side when additional blockers could also be assigned.
+                candidates.sort((a, b) -> Integer.compare(b.getNetToughness(), a.getNetToughness()));
+            }
+            int blockedDamage = 0;
+            for (int i = 0; i < assignment.minBlockers; i++) {
+                final Card blocker = candidates.get(i);
+                availableBlockers.remove(blocker);
+                if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                    // Existing marked damage reduces what must be assigned as lethal; deathtouch needs only one.
+                    blockedDamage += attacker.hasKeyword(Keyword.DEATHTOUCH) ? 1 : Math.max(0, blocker.getLethalDamage());
+                }
+            }
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                // Double strike can deal damage in both combat-damage steps. Do not assume a blocker survives the first one.
+                final int damage = attacker.hasDoubleStrike() ? power * 2 : power;
+                threat += Math.max(0, damage - blockedDamage);
+            }
         }
         return threat;
+    }
+
+    private static final class ThreatTarget {
+        final Card attacker;
+        final List<Card> blockers;
+        final int minBlockers;
+        final int maxBlockers;
+
+        ThreatTarget(final Card attacker, final List<Card> blockers, final int minBlockers, final int maxBlockers) {
+            this.attacker = attacker;
+            this.blockers = blockers;
+            this.minBlockers = minBlockers;
+            this.maxBlockers = maxBlockers;
+        }
     }
 
     /** The creatures of the AI that the payment taps (or sacrifices) for mana: they are not there to block next turn. */
@@ -333,22 +401,47 @@ public final class ActivationGuard {
      * The play really takes the damage source away: a spell aimed at it (the chosen target, not any legal one), or a
      * mass effect that takes it with the rest. A Disenchant aimed at another permanent does not qualify.
      */
-    private static boolean removesTapDamage(final Player ai, final SpellAbility sa) {
-        final ApiType api = sa.getApi();
-        if (api != ApiType.Destroy && api != ApiType.DestroyAll && api != ApiType.ChangeZone && api != ApiType.ChangeZoneAll) {
-            return false;
-        }
+    private static boolean removesAllTapDamage(final Player ai, final SpellAbility sa) {
+        boolean found = false;
         for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             if (!ComputerUtilMana.damagesWhoeverTaps(c, ai)) {
                 continue;
             }
-            if (sa.usesTargeting()) {
-                if (sa.getTargets().getTargetCards().contains(c)) {
+            found = true;
+            if (!removesTapDamageSource(ai, sa, c)) {
+                return false; // one recognized source remains active; do not grant the life-to-one exception
+            }
+        }
+        return found;
+    }
+
+    /** True only when this play will actually remove this particular tap-damage permanent. */
+    private static boolean removesTapDamageSource(final Player ai, final SpellAbility sa, final Card source) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (api == ApiType.Destroy || api == ApiType.ChangeZone) {
+                for (final Card target : aimedCards(node)) {
+                    if (target != source) {
+                        continue;
+                    }
+                    if (api == ApiType.Destroy && destroyable(source, node)
+                            || api == ApiType.ChangeZone && leavesBattlefield(node)) {
+                        return true;
+                    }
+                }
+            } else if (api == ApiType.DestroyAll) {
+                final String valid = node.getParam("ValidCards");
+                if (valid != null && source.isValid(valid, ai, node.getHostCard(), node)
+                        && destroyable(source, node)) {
                     return true;
                 }
-            } else if ((api == ApiType.DestroyAll || api == ApiType.ChangeZoneAll) && sa.hasParam("ValidCards")
-                    && c.isValid(sa.getParam("ValidCards"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                return true;
+            } else if (api == ApiType.ChangeZoneAll) {
+                // ChangeZoneAll uses ChangeType, not ValidCards.
+                final String changeType = node.getParam("ChangeType");
+                if (leavesBattlefield(node) && changeType != null
+                        && source.isValid(changeType, ai, node.getHostCard(), node)) {
+                    return true;
+                }
             }
         }
         return false;

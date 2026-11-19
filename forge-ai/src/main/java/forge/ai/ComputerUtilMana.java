@@ -747,12 +747,12 @@ public class ComputerUtilMana {
             final boolean ordinaryOrder = !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref");
             if (ordinaryOrder) {
                 saList = sparingSourcesFirst(saList, sourcesForShards, sa, ai);
+                if (toPay == ManaCostShard.GENERIC) {
+                    saList = requiredSourcesFirst(saList, cost, sa);
+                }
             }
-            // Manabarbs and its kin: the sources that cost the least life go first, whatever the scores above say
+            // Manabarbs and its kin: this is the final ordering, after mana preferences and multi-mana requirements
             saList = painfulSourcesLast(saList, ai, painSources);
-            if (ordinaryOrder && toPay == ManaCostShard.GENERIC) {
-                saList = requiredSourcesFirst(saList, cost, sa);
-            }
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test, paymentList);
 
@@ -1987,10 +1987,38 @@ public class ComputerUtilMana {
                 continue;
             }
             int dmg = AbilityUtils.calculateAmount(d.host, d.effect.getParamOrDefault("NumDmg", "1"), d.effect);
-            dmg = ai.staticReplaceDamage(dmg, d.host, false); // Axonil, Furnace of Rath
+            dmg = replaceTapDamage(ai, dmg, d.host);
             total += Math.max(0, dmg);
         }
         return total;
+    }
+
+    /**
+     * Applies the damage replacements that can affect a tap trigger. Player.staticReplaceDamage covers the older global
+     * replacements, while Ojer Axonil is a card-specific DamageDone replacement and is not included there yet.
+     * Check both possible orders with the existing replacements and keep the larger result: underestimating this cost
+     * can make the AI spend life it needs to survive.
+     */
+    private static int replaceTapDamage(final Player ai, final int damage, final Card source) {
+        int replaced = ai.staticReplaceDamage(damage, source, false);
+        if (damage <= 0 || !source.isRed()) {
+            return replaced;
+        }
+        for (final Card ojer : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (!"Ojer Axonil, Deepest Might".equals(ojer.getName())
+                    || !ojer.getController().equals(source.getController())
+                    || !ai.getOpponents().contains(ojer.getController())) {
+                continue;
+            }
+            final int power = ojer.getNetPower();
+            if (damage < power) {
+                // Ojer first, then the other replacements (e.g. Furnace of Rath).
+                final int ojerFirst = ai.staticReplaceDamage(power, source, false);
+                // Or the other replacements first, then Ojer. Use the conservative order for the life estimate.
+                replaced = Math.max(replaced, Math.max(power, ojerFirst));
+            }
+        }
+        return replaced;
     }
 
     /**
