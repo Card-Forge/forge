@@ -174,19 +174,36 @@ public final class ActivationGuard {
         return ai.getLife() - damage < Math.max(3, threat + 1);
     }
 
-    /** The play is aimed at a permanent that damages whoever taps a land (it can target one, or it is chosen on resolution). */
+    /**
+     * The play really takes the damage source away: a spell aimed at it (the chosen target, not any legal one), or a
+     * mass effect that takes it with the rest. A Disenchant aimed at another permanent does not qualify.
+     */
     private static boolean removesTapDamage(final Player ai, final SpellAbility sa) {
         final ApiType api = sa.getApi();
-        if (api != ApiType.Destroy && api != ApiType.ChangeZone && api != ApiType.Counter) {
+        if (api != ApiType.Destroy && api != ApiType.DestroyAll && api != ApiType.ChangeZone && api != ApiType.ChangeZoneAll) {
             return false;
         }
         for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            for (final Trigger t : c.getTriggers()) {
-                if (t.getMode() != TriggerType.TapsForMana) {
-                    continue;
+            if (!damagesWhoeverTaps(c)) {
+                continue;
+            }
+            if (sa.usesTargeting()) {
+                if (sa.getTargets().getTargetCards().contains(c)) {
+                    return true;
                 }
+            } else if ((api == ApiType.DestroyAll || api == ApiType.ChangeZoneAll) && sa.hasParam("ValidCards")
+                    && c.isValid(sa.getParam("ValidCards"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean damagesWhoeverTaps(final Card c) {
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getMode() == TriggerType.TapsForMana) {
                 final SpellAbility effect = t.ensureAbility();
-                if (effect != null && effect.getApi() == ApiType.DealDamage && (!sa.usesTargeting() || sa.canTarget(c))) {
+                if (effect != null && effect.getApi() == ApiType.DealDamage) {
                     return true;
                 }
             }

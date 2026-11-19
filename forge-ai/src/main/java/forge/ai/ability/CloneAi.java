@@ -304,12 +304,20 @@ public class CloneAi extends SpellAbilityAi {
         return sa.hasParam("RemoveCardTypes") && "True".equalsIgnoreCase(sa.getParam("RemoveCardTypes"));
     }
 
-    /** Whether the AI already has a creature of that name under the legend rule: the copy would cost it one of the two. */
+    /**
+     * The legend rule: the copy of a legendary permanent is legendary, and the AI keeps only one of two with the same name. That
+     * is the AI's own legend, and also the opponent's one when the AI has a permanent of that name already.
+     */
     private static boolean ownLegend(final Player ai, final Card c) {
-        if (!c.getType().isLegendary() || !c.getController().equals(ai)) {
+        if (!c.getType().isLegendary()) {
             return false;
         }
-        return true;
+        for (final Card mine : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (mine.getName().equals(c.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected Card getCloneTarget(final SpellAbility sa) {

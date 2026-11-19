@@ -1690,35 +1690,55 @@ public class AiAttackController {
     }
 
     /**
-     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough): each blocks one attacker and takes the most
-     * valuable one it can, and each dies to what it blocks. So the attack is held back only while the AI has no more
-     * attackers than they have deathtouch blockers. Beyond that the creatures that are not the likely victims go in, and
-     * the likely victims go in when the trade is even (they are worth no more than the blocker that takes them).
-     * Nothing else of theirs may be able to kill the attacker, that is for the ordinary checks to weigh.
+     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough): each blocks one attacker, takes the most
+     * valuable one it can, and dies to it. So the attack is held back only while the AI has no more attackers that those
+     * blockers can block and kill than they have such blockers. Beyond that the creatures that are not the likely victims
+     * go in, and the likely victims go in when the trade is even (worth no more than the blocker that takes them).
+     * Only the blocks that are possible count (flying, protection, "can't be blocked by"), and only the blockers that kill:
+     * a deathtouch blocker with first strike or indestructible kills the attacker and lives, which is a wall and no tax;
+     * so does any other blocker that kills the attacker. Those are for the ordinary checks.
      */
     private boolean worthTheDeathtouchTax(final Card attacker, final List<Card> defenders, final Combat combat) {
-        final List<Card> deathtouch = new ArrayList<>();
+        boolean taxed = false;
         for (final Card blocker : defenders) {
-            if (CombatUtil.canBlock(attacker, blocker)) {
-                if (blocker.hasKeyword(Keyword.DEATHTOUCH)) {
-                    deathtouch.add(blocker);
-                } else if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
-                    return false; // something else of theirs kills it: not a deathtouch question
+            if (!CombatUtil.canBlock(attacker, blocker) || !ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
+                continue;
+            }
+            if (!blocker.hasKeyword(Keyword.DEATHTOUCH) || !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
+                return false; // it kills the attacker and lives (first strike, indestructible, a bigger body): a wall
+            }
+            taxed = true;
+        }
+        if (!taxed) {
+            return false;
+        }
+        // the deathtouch blockers that can take one of the attackers, and the attackers that they can take
+        final List<Card> takers = new ArrayList<>();
+        final List<Card> exposed = new ArrayList<>();
+        for (final Card a : attackers) {
+            boolean isExposed = false;
+            for (final Card blocker : defenders) {
+                if (blocker.hasKeyword(Keyword.DEATHTOUCH) && CombatUtil.canBlock(a, blocker)
+                        && ComputerUtilCombat.canDestroyAttacker(ai, a, blocker, combat, false)) {
+                    isExposed = true;
+                    if (!takers.contains(blocker)) {
+                        takers.add(blocker);
+                    }
                 }
             }
+            if (isExposed) {
+                exposed.add(a);
+            }
         }
-        if (deathtouch.isEmpty() || attackers.size() <= deathtouch.size()) {
-            return false; // every attacker could be blocked and killed
+        if (exposed.size() <= takers.size()) {
+            return false; // every attacker that they can take could be taken
         }
-        // the attackers that can go in, the best first: those are the ones the deathtouch blockers take
-        final List<Card> byValue = new ArrayList<>(attackers);
-        byValue.sort((a, b) -> ComputerUtilCard.evaluateCreature(b) - ComputerUtilCard.evaluateCreature(a));
-        final List<Card> likelyVictims = byValue.subList(0, deathtouch.size());
-        if (!likelyVictims.contains(attacker)) {
+        exposed.sort((x, y) -> ComputerUtilCard.evaluateCreature(y) - ComputerUtilCard.evaluateCreature(x));
+        if (!exposed.subList(0, takers.size()).contains(attacker)) {
             return true;
         }
         int cheapest = Integer.MAX_VALUE;
-        for (final Card blocker : deathtouch) {
+        for (final Card blocker : takers) {
             cheapest = Math.min(cheapest, ComputerUtilCard.evaluateCreature(blocker));
         }
         return ComputerUtilCard.evaluateCreature(attacker) <= cheapest + 40; // an even trade, with a little for the card

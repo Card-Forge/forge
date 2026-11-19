@@ -15,11 +15,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.ActivationGuard;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.OpeningHand;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -91,6 +93,7 @@ public class AiReportScenarioTest extends AITest {
         Card hand(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Hand); }
         Card gy(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Graveyard); }
         Card lib(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Library); }
+        void lib(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { lib(name, p); } }
         Card exile(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Exile); }
 
         /** Plenty of mana of every colour for the AI. */
@@ -260,6 +263,21 @@ public class AiReportScenarioTest extends AITest {
     }
 
     // ------------------------------------------------------------------------------------------ scenarios
+
+    /** Casts the Machine God's Effigy for the AI, lets it resolve, and checks what it became (the name of the copied card, or its own). */
+    private String effigyBecame(final Ctx c, final String expected) {
+        final Card effigy = c.hand("Machine God's Effigy", c.ai);
+        final SpellAbility sa = effigy.getFirstSpellAbility();
+        sa.setActivatingPlayer(c.ai);
+        c.resolve(sa);
+        final Card now = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getId() == effigy.getId()).findFirst()
+                .orElse(c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals(expected)).findFirst().orElse(null));
+        if (now == null) { return "the Effigy is not on the battlefield" + c.trace; }
+        final boolean named = now.getName().equals(expected);
+        final boolean noCreature = !now.isCreature() && now.isArtifact();
+        return named && (noCreature || expected.startsWith("Machine")) ? null
+                : "the Effigy became " + now.getName() + (now.isCreature() ? " (a creature)" : "") + ", expected " + expected + c.trace;
+    }
 
     private List<Scenario> scenarios() {
         final List<Scenario> l = new ArrayList<>();
@@ -512,8 +530,61 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Plains", 3, c.ai); c.hand("Savannah Lions", c.ai); c.bf("Manabarbs", c.opp); }));
         l.add(play("manabarbs-answer", "At 4 life the AI still casts Disenchant on the Manabarbs", Fid.APPROX, M1, true, "Disenchant",
                 c -> { c.ai.setLife(4, null); c.bf("Plains", 2, c.ai); c.hand("Disenchant", c.ai); c.bf("Manabarbs", c.opp); }));
-        l.add(play("manabarbs-creature-mana", "Mana from a creature costs no life: the Elf pays for the Lions", Fid.APPROX, "MAIN2", true, "Savannah Lions",
-                c -> { c.ai.setLife(3, null); c.bf("Plains", c.ai); c.bf("Llanowar Elves", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Manabarbs", c.opp); }));
+        l.add(play("manabarbs-creature-mana", "Mana from a creature costs no life: the Elf pays the {G} of a Scryb Sprites", Fid.APPROX, "MAIN2", true, "Scryb Sprites",
+                c -> { c.ai.setLife(3, null); c.bf("Plains", c.ai); c.bf("Llanowar Elves", c.ai); c.hand("Scryb Sprites", c.ai); c.bf("Manabarbs", c.opp); }));
+        // review of the Manabarbs patch: the estimate is the payment that the AI would make (colours, creature mana, multi-mana lands),
+        // the life budget buys the cheapest lands first, and only a removal that is really aimed at the source is exempt
+        l.add(new Scenario("manabarbs-estimate-colour", "A white spell needs a Plains tapped: the Elves cannot pay the {W}, so it costs a life", Fid.APPROX, M1, true,
+                c -> { c.bf("Plains", 2, c.ai); c.bf("Forest", 2, c.ai); c.bf("Llanowar Elves", c.ai); c.bf("Manabarbs", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Savannah Lions", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d == 1 ? null : "{W} should cost 1 life, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-estimate-elves", "The Elves pay the {G} of Grizzly Bears, one land pays the {1}", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Llanowar Elves", c.ai); c.bf("Manabarbs", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d == 1 ? null : "the Elves and one land pay it (1 life), the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-estimate-multi", "A land that makes two mana is tapped once: Mind Stone ({2}) from Ancient Tomb costs one tap", Fid.APPROX, M1, true,
+                c -> { c.bf("Ancient Tomb", c.ai); c.bf("Mountain", c.ai); c.bf("Manabarbs", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d <= 1 ? null : "Mind Stone ({2}) from the Tomb is one tap, 1 life at most, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
+                c -> {
+                    final CardCollection sources = ComputerUtilMana.getAvailableManaSources(c.ai, true);
+                    return sources.size() == 2 && sources.stream().noneMatch(k -> k.getName().equals("Plateau")) ? null
+                            : "the cheap lands should buy the mana: " + sources;
+                }));
+        l.add(new Scenario("manabarbs-removal-other-target", "A Disenchant aimed at another permanent gets no exemption from the cost", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(3, null); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Sol Ring", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Disenchant", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Sol Ring")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "aimed at the Sol Ring it is no answer to the Manabarbs, but it was allowed";
+                }));
+        l.add(new Scenario("manabarbs-removal-aimed", "A Disenchant aimed at the Manabarbs itself is exempt", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(3, null); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Sol Ring", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Disenchant", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Manabarbs")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? "aimed at the Manabarbs it should be allowed" : null;
+                }));
         // Machine God's Effigy copies as a non-creature: a vanilla 8/8 is only a mana rock then
         l.add(new Scenario("effigy-copy-value", "Machine God's Effigy copies what a non-creature does, not what a creature weighs", Fid.APPROX, M1, true,
                 c -> { c.bf("Island", 4, c.ai); c.hand("Machine God's Effigy", c.ai); c.bf("Hill Giant", c.opp); c.bf("Mulldrifter", c.opp); c.bf("Glorious Anthem", c.opp); },
@@ -525,6 +596,19 @@ public class AiReportScenarioTest extends AITest {
                     }
                     return bears > 0 ? "a vanilla creature is worth a copy (" + bears + ")" : drifter <= 0 ? "the enters trigger of Mulldrifter is worth nothing" : null;
                 }));
+        // review of the Effigy patch: what the AI really becomes when the Effigy enters
+        l.add(new Scenario("effigy-picks-etb", "The Effigy becomes a Mulldrifter (its enters trigger) and not the Hill Giant", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 4, c.ai); c.bf("Hill Giant", c.opp); c.bf("Mulldrifter", c.opp); c.lib("Island", 8, c.ai); },
+                c -> effigyBecame(c, "Mulldrifter")));
+        l.add(new Scenario("effigy-declines-vanilla", "Only a vanilla creature on the table: the Effigy stays the rock that it is", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 4, c.ai); c.bf("Craw Wurm", c.opp); },
+                c -> effigyBecame(c, "Machine God's Effigy")));
+        l.add(new Scenario("effigy-own-legend", "The AI has Kiora already: the copy of the opponent's Kiora would be lost to the legend rule", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 4, c.ai); c.bf("Kiora, the Rising Tide", c.ai); c.bf("Kiora, the Rising Tide", c.opp); c.bf("Craw Wurm", c.opp); c.lib("Island", 8, c.ai); },
+                c -> effigyBecame(c, "Machine God's Effigy")));
+        l.add(new Scenario("effigy-copies-opp-legend", "Without a Kiora of its own the AI copies the opponent's one", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 4, c.ai); c.bf("Kiora, the Rising Tide", c.opp); c.bf("Craw Wurm", c.opp); c.lib("Island", 8, c.ai); },
+                c -> effigyBecame(c, "Kiora, the Rising Tide")));
         // a deathtouch blocker takes one attacker: it does not hold back a whole army
         l.add(new Scenario("deathtouch-swarm", "Four 2/2s attack into one Typhoid Rats: it can block only one", Fid.APPROX, M1, true,
                 c -> { c.bf("Grizzly Bears", 4, c.ai); c.bf("Typhoid Rats", c.opp); },
@@ -532,6 +616,16 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("deathtouch-lone", "A lone Hill Giant does not attack into the Typhoid Rats", Fid.APPROX, M1, true,
                 c -> { c.bf("Hill Giant", c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().isEmpty() ? null : "the Hill Giant attacked into a deathtouch blocker with nothing else"));
+        // review of the deathtouch patch: only the blocks that are possible count, and only blockers that kill and die
+        l.add(new Scenario("deathtouch-flyer", "A Serra Angel that the Rats cannot block attacks, the Hill Giant stays", Fid.APPROX, M1, true,
+                c -> { c.bf("Serra Angel", c.ai); c.bf("Hill Giant", c.ai); c.bf("Typhoid Rats", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Serra Angel")) ? null : "the flyer did not attack past a ground deathtouch blocker"));
+        l.add(new Scenario("deathtouch-protection", "White Knights with protection from black are not blocked by the Rats, they attack", Fid.APPROX, M1, true,
+                c -> { c.bf("White Knight", 2, c.ai); c.bf("Typhoid Rats", c.opp); },
+                c -> c.attackers().isEmpty() ? "protection from black attackers stayed home against a black deathtouch blocker" : null));
+        l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) is a wall: three Hill Giants do not feed it one by one", Fid.APPROX, M1, true,
+                c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Glissa Sunslayer", c.opp); },
+                c -> c.attackers().isEmpty() ? null : c.attackers().size() + " Hill Giants attacked into a first strike deathtouch blocker"));
         // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
         l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
