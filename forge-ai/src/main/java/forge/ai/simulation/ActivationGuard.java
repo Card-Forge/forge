@@ -198,7 +198,9 @@ public final class ActivationGuard {
         for (final Player opp : ai.getOpponents()) {
             for (final Card c : opp.getCreaturesInPlay()) {
                 // what it deals in combat (toughness under Doran), and whether it may attack at all (a defender under Arcades may)
-                if (!gone.contains(c) && c.getNetCombatDamage() > 0 && !StaticAbilityCantAttackBlock.cantAttack(c, ai)
+                if (!gone.contains(c) && c.getNetCombatDamage() > 0
+                        && StaticAbilityCantAttackBlock.getCantAttackKeyword(c) == null && !c.isDetained()
+                        && StaticAbilityCantAttackBlock.findCantAttackAbility(c, ai) == null
                         && !(c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step."))) {
                     attackers.add(c);
                 }
