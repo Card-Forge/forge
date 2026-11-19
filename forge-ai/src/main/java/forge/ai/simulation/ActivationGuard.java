@@ -8,6 +8,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.ability.AnimateAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
@@ -26,8 +27,6 @@ import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -165,13 +164,42 @@ public final class ActivationGuard {
         if (removesTapDamage(ai, sa)) {
             return ai.getLife() - damage < 1;
         }
-        int threat = 0;
-        for (final Card c : ai.getWeakestOpponent() == null ? new CardCollection() : ai.getWeakestOpponent().getCreaturesInPlay()) {
-            if (!c.isTapped() && !c.isSick()) {
-                threat += Math.max(0, c.getNetPower());
+        final int threat = nextTurnThreat(ai);
+        return ai.getLife() - damage < Math.max(3, threat + 1);
+    }
+
+    /**
+     * What the opponent's creatures can hit for on their next turn, not on this one: a tapped attacker untaps, a creature that
+     * came this turn is no longer sick. Each untapped creature of the AI that can block takes the strongest attacker that it can
+     * block out of the sum (a rough count: no tricks, no gang blocks). Defenders do not attack.
+     */
+    static int nextTurnThreat(final Player ai) {
+        final List<Card> attackers = new ArrayList<>();
+        for (final Player opp : ai.getOpponents()) {
+            for (final Card c : opp.getCreaturesInPlay()) {
+                if (c.getNetPower() > 0 && !c.hasKeyword(Keyword.DEFENDER)
+                        && !(c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step."))) {
+                    attackers.add(c);
+                }
             }
         }
-        return ai.getLife() - damage < Math.max(3, threat + 1);
+        attackers.sort((a, b) -> b.getNetPower() - a.getNetPower());
+        for (final Card blocker : ai.getCreaturesInPlay()) {
+            if (blocker.isTapped()) {
+                continue;
+            }
+            for (int i = 0; i < attackers.size(); i++) {
+                if (CombatUtil.canBlock(attackers.get(i), blocker)) {
+                    attackers.remove(i);
+                    break;
+                }
+            }
+        }
+        int threat = 0;
+        for (final Card c : attackers) {
+            threat += c.getNetPower();
+        }
+        return threat;
     }
 
     /**
@@ -184,7 +212,7 @@ public final class ActivationGuard {
             return false;
         }
         for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            if (!damagesWhoeverTaps(c)) {
+            if (!ComputerUtilMana.damagesWhoeverTaps(c, ai)) {
                 continue;
             }
             if (sa.usesTargeting()) {
@@ -194,18 +222,6 @@ public final class ActivationGuard {
             } else if ((api == ApiType.DestroyAll || api == ApiType.ChangeZoneAll) && sa.hasParam("ValidCards")
                     && c.isValid(sa.getParam("ValidCards"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                 return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean damagesWhoeverTaps(final Card c) {
-        for (final Trigger t : c.getTriggers()) {
-            if (t.getMode() == TriggerType.TapsForMana) {
-                final SpellAbility effect = t.ensureAbility();
-                if (effect != null && effect.getApi() == ApiType.DealDamage) {
-                    return true;
-                }
             }
         }
         return false;

@@ -1901,19 +1901,38 @@ public class ComputerUtilMana {
      * The permanents of the table that damage the one who taps a land, found in one pass over the battlefield. Empty (and
      * no allocation beyond that) in the games without a Manabarbs, which are nearly all of them.
      */
+    /**
+     * The effect of this trigger of the host when it damages the one who taps a land for mana (to the player of {@code ai}),
+     * or null. The one criterion for "a permanent that hurts the tapper": the damage sources and the removal exemption share it.
+     */
+    public static SpellAbility tapDamageEffect(final Card host, final Trigger t, final Player ai) {
+        if (t.getMode() != TriggerType.TapsForMana) {
+            return null;
+        }
+        final SpellAbility effect = t.ensureAbility();
+        if (effect == null || effect.getApi() != ApiType.DealDamage) {
+            return null;
+        }
+        final String defined = effect.getParamOrDefault("Defined", "");
+        return defined.equals("TriggeredActivator") || defined.equals("You") && host.getController().equals(ai) ? effect : null;
+    }
+
+    /** The permanent damages the one who taps a land for mana: it has a trigger that {@link #tapDamageEffect} accepts. */
+    public static boolean damagesWhoeverTaps(final Card host, final Player ai) {
+        for (final Trigger t : host.getTriggers()) {
+            if (tapDamageEffect(host, t, ai) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static List<TapDamageSource> tapDamageSources(final Player ai) {
         List<TapDamageSource> found = null;
         for (final Card host : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final Trigger t : host.getTriggers()) {
-                if (t.getMode() != TriggerType.TapsForMana) {
-                    continue;
-                }
-                final SpellAbility effect = t.ensureAbility();
-                if (effect == null || effect.getApi() != ApiType.DealDamage) {
-                    continue;
-                }
-                final String defined = effect.getParamOrDefault("Defined", "");
-                if (defined.equals("TriggeredActivator") || defined.equals("You") && host.getController().equals(ai)) {
+                final SpellAbility effect = tapDamageEffect(host, t, ai);
+                if (effect != null) {
                     if (found == null) {
                         found = new ArrayList<>(2);
                     }

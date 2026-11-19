@@ -1383,7 +1383,9 @@ public class AiAttackController {
                     final Card attacker = left.get(i);
                     if (aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                             && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, defendingOpponent)
-                            >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
+                            >= ComputerUtilCombat.getDamageToKill(attacker, false)
+                            // a first strike deathtouch blocker takes only one attacker: the rest are for shouldAttack to judge
+                            && !(aiAggression >= 2 && worthTheDeathtouchTax(attacker, this.blockers, combat))) {
                         continue;
                     }
 
@@ -1690,13 +1692,13 @@ public class AiAttackController {
     }
 
     /**
-     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough): each blocks one attacker, takes the most
-     * valuable one it can, and dies to it. So the attack is held back only while the AI has no more attackers that those
-     * blockers can block and kill than they have such blockers. Beyond that the creatures that are not the likely victims
-     * go in, and the likely victims go in when the trade is even (worth no more than the blocker that takes them).
-     * Only the blocks that are possible count (flying, protection, "can't be blocked by"), and only the blockers that kill:
-     * a deathtouch blocker with first strike or indestructible kills the attacker and lives, which is a wall and no tax;
-     * so does any other blocker that kills the attacker. Those are for the ordinary checks.
+     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough). Each blocks ONE attacker, so what it costs
+     * the AI is an assignment, not a wall: the opponent takes the most valuable attackers that the blockers can block and kill
+     * (a maximum matching, the most valuable attacker first; a blocker that takes an attacker and lives, first strike or
+     * indestructible, is preferred). The attackers that are not taken go in, whatever kills the one that is taken. A taken
+     * attacker goes in only when it is an even trade: the blocker dies to it and is worth about as much. Nothing goes in when
+     * every attacker that they can kill would be taken, or when another blocker of theirs (not deathtouch) kills the attacker:
+     * that is for the ordinary checks.
      */
     private boolean worthTheDeathtouchTax(final Card attacker, final List<Card> defenders, final Combat combat) {
         boolean taxed = false;
@@ -1704,44 +1706,68 @@ public class AiAttackController {
             if (!CombatUtil.canBlock(attacker, blocker) || !ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
                 continue;
             }
-            if (!blocker.hasKeyword(Keyword.DEATHTOUCH) || !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
-                return false; // it kills the attacker and lives (first strike, indestructible, a bigger body): a wall
+            if (!blocker.hasKeyword(Keyword.DEATHTOUCH)) {
+                return false; // something else kills it
             }
             taxed = true;
         }
         if (!taxed) {
             return false;
         }
-        // the deathtouch blockers that can take one of the attackers, and the attackers that they can take
-        final List<Card> takers = new ArrayList<>();
-        final List<Card> exposed = new ArrayList<>();
+        final Map<Card, List<Card>> takes = new HashMap<>(); // the deathtouch blockers that can block and kill each attacker
         for (final Card a : attackers) {
-            boolean isExposed = false;
+            final List<Card> killers = new ArrayList<>();
             for (final Card blocker : defenders) {
                 if (blocker.hasKeyword(Keyword.DEATHTOUCH) && CombatUtil.canBlock(a, blocker)
                         && ComputerUtilCombat.canDestroyAttacker(ai, a, blocker, combat, false)) {
-                    isExposed = true;
-                    if (!takers.contains(blocker)) {
-                        takers.add(blocker);
-                    }
+                    killers.add(blocker);
                 }
             }
-            if (isExposed) {
-                exposed.add(a);
+            // the ones that live first: the opponent prefers to take an attacker for free
+            killers.sort((x, y) -> Boolean.compare(ComputerUtilCombat.canDestroyBlocker(ai, x, a, combat, false),
+                    ComputerUtilCombat.canDestroyBlocker(ai, y, a, combat, false)));
+            if (!killers.isEmpty()) {
+                takes.put(a, killers);
             }
         }
-        if (exposed.size() <= takers.size()) {
-            return false; // every attacker that they can take could be taken
-        }
+        final List<Card> exposed = new ArrayList<>(takes.keySet());
         exposed.sort((x, y) -> ComputerUtilCard.evaluateCreature(y) - ComputerUtilCard.evaluateCreature(x));
-        if (!exposed.subList(0, takers.size()).contains(attacker)) {
-            return true;
+        final Map<Card, Card> takenBy = new HashMap<>(); // blocker -> the attacker that it takes
+        for (final Card a : exposed) {
+            takeAttacker(a, takes, takenBy, new HashSet<>());
         }
-        int cheapest = Integer.MAX_VALUE;
-        for (final Card blocker : takers) {
-            cheapest = Math.min(cheapest, ComputerUtilCard.evaluateCreature(blocker));
+        if (takenBy.size() >= exposed.size()) {
+            return false; // every attacker that they can kill would be taken
         }
-        return ComputerUtilCard.evaluateCreature(attacker) <= cheapest + 40; // an even trade, with a little for the card
+        Card blockerOfAttacker = null;
+        for (final Map.Entry<Card, Card> e : takenBy.entrySet()) {
+            if (e.getValue() == attacker) {
+                blockerOfAttacker = e.getKey();
+            }
+        }
+        if (blockerOfAttacker == null) {
+            return true; // the opponent's blockers are busy with more valuable attackers: this one goes through
+        }
+        if (!ComputerUtilCombat.canDestroyBlocker(ai, blockerOfAttacker, attacker, combat, false)) {
+            return false; // it is the one that the wall takes for free
+        }
+        return ComputerUtilCard.evaluateCreature(attacker) <= ComputerUtilCard.evaluateCreature(blockerOfAttacker) + 40; // an even trade
+    }
+
+    /** One step of the matching of attackers to the blockers that take them (augmenting path: a taken attacker may be moved). */
+    private static boolean takeAttacker(final Card attacker, final Map<Card, List<Card>> takes, final Map<Card, Card> takenBy,
+                                        final Set<Card> visited) {
+        for (final Card blocker : takes.get(attacker)) {
+            if (!visited.add(blocker)) {
+                continue;
+            }
+            final Card current = takenBy.get(blocker);
+            if (current == null || takeAttacker(current, takes, takenBy, visited)) {
+                takenBy.put(blocker, attacker);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

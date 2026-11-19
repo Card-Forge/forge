@@ -556,7 +556,7 @@ public class AiReportScenarioTest extends AITest {
                     final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
                     sa.setActivatingPlayer(c.ai);
                     final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
-                    return d <= 1 ? null : "Mind Stone ({2}) from the Tomb is one tap, 1 life at most, the estimate is " + d;
+                    return d == 1 ? null : "Mind Stone ({2}) from the Tomb is one tap (1 life), the estimate is " + d;
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
@@ -596,6 +596,11 @@ public class AiReportScenarioTest extends AITest {
                     }
                     return bears > 0 ? "a vanilla creature is worth a copy (" + bears + ")" : drifter <= 0 ? "the enters trigger of Mulldrifter is worth nothing" : null;
                 }));
+        // the reserve is what the opponent hits for next turn: a tapped creature untaps
+        l.add(noPlay("manabarbs-tapped-threat", "6 life, a tapped 6/4 on their side: two taps (2 life) would leave 4, not enough for its next attack", Fid.APPROX, "MAIN2", true, "Grizzly Bears",
+                c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp).setTapped(true); }));
+        l.add(play("manabarbs-tapped-small", "6 life, a tapped 1/1 on their side: the same two taps are fine", Fid.APPROX, "MAIN2", true, "Grizzly Bears",
+                c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Llanowar Elves", c.opp).setTapped(true); }));
         // review of the Effigy patch: what the AI really becomes when the Effigy enters
         l.add(new Scenario("effigy-picks-etb", "The Effigy becomes a Mulldrifter (its enters trigger) and not the Hill Giant", Fid.APPROX, M1, true,
                 c -> { c.bf("Island", 4, c.ai); c.bf("Hill Giant", c.opp); c.bf("Mulldrifter", c.opp); c.lib("Island", 8, c.ai); },
@@ -623,9 +628,9 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("deathtouch-protection", "White Knights with protection from black are not blocked by the Rats, they attack", Fid.APPROX, M1, true,
                 c -> { c.bf("White Knight", 2, c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().isEmpty() ? "protection from black attackers stayed home against a black deathtouch blocker" : null));
-        l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) is a wall: three Hill Giants do not feed it one by one", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) takes ONE Hill Giant: the other two still attack", Fid.APPROX, M1, true,
                 c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Glissa Sunslayer", c.opp); },
-                c -> c.attackers().isEmpty() ? null : c.attackers().size() + " Hill Giants attacked into a first strike deathtouch blocker"));
+                c -> c.attackers().size() >= 2 ? null : "only " + c.attackers().size() + " of 3 Hill Giants attacked, she can block only one"));
         // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
         l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
