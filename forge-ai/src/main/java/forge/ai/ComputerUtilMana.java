@@ -25,7 +25,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ReplaceManaEffect;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -2147,13 +2146,9 @@ public class ComputerUtilMana {
         final CardCollection painfulManaSources = new CardCollection();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
-            if (card.isCreature()) {
-                if (card.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
-                    Combat combat = card.getGame().getCombat();
-                    if (combat.getAttackers().indexOf(card) != -1 && !card.hasKeyword(Keyword.VIGILANCE)) {
-                        continue;
-                    }
-                }
+            if (card.isCreature() && !card.hasKeyword(Keyword.VIGILANCE)
+                    && ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ai.getGame().getCombat().getAttackers().contains(card)) {
+                continue;
             }
             // exclude cards that will deal lethal damage when tapped
             if (canDieToTapDamage) {
