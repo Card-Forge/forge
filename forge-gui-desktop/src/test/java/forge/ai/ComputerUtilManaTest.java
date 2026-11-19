@@ -43,6 +43,10 @@ public class ComputerUtilManaTest extends SimulationTest {
         return p;
     }
 
+    private void settleBoard(final Player p) {
+        p.getGame().getAction().checkStateEffects(true);
+    }
+
     private boolean canPay(final Player p, final String spell) {
         final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
         sa.setActivatingPlayer(p);
@@ -367,5 +371,35 @@ public class ComputerUtilManaTest extends SimulationTest {
         addCard("Forest", p);
         addCard("Foraging Wickermaw", p);
         payForReal(p, "U");
+    }
+
+    @Test
+    public void tapsForManaTriggerPaysChosenColorShard() {
+        // two Forests enchanted by Utopia Sprawl with white chosen tap for {G} each plus {W}
+        // from the auras' triggers, enough for Armadillo Cloak's {1}{G}{W} without a white source
+        final Player p = sacrificeBoard(0);
+        final Card forest1 = addCard("Forest", p);
+        final Card forest2 = addCard("Forest", p);
+        for (final Card forest : Lists.newArrayList(forest1, forest2)) {
+            final Card sprawl = addCard("Utopia Sprawl", p);
+            sprawl.attachToEntity(forest, null);
+            sprawl.setChosenColors(java.util.Collections.singletonList("White"));
+        }
+        settleBoard(p);
+        assertTrue(canPay(p, "Armadillo Cloak"), "{1}{G}{W} from the forests' {G} and the sprawls' trigger {W}");
+        final CardCollection sources = sourcesToPay(p, "1 G W");
+        assertEquals(sources.size(), 2, "both enchanted forests should be tapped");
+        assertTrue(sources.contains(forest1) && sources.contains(forest2));
+    }
+
+    @Test
+    public void tapsForManaTriggerPaysFixedColorShard() {
+        // Wild Growth's trigger adds {G}, so its Forest alone can pay {G}{G}
+        final Player p = sacrificeBoard(0);
+        final Card forest = addCard("Forest", p);
+        addCard("Wild Growth", p).attachToEntity(forest, null);
+        settleBoard(p);
+        assertTrue(canPay(p, "Kalonian Tusker"), "{G}{G} from the forest and its Wild Growth");
+        assertEquals(sourcesToPay(p, "G G"), new CardCollection(forest));
     }
 }

@@ -487,6 +487,14 @@ public class ComputerUtilMana {
                 String produced = trSA.getParam("Produced");
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
+                } else if (produced.contains("Any")) {
+                    // the color is chosen as the trigger resolves, so expect one that pays the shard
+                    for (final byte c : MagicColor.WUBRG) {
+                        if (toPay.canBePaidWithManaOfColor(c)) {
+                            produced = MagicColor.toShortString(c);
+                            break;
+                        }
+                    }
                 }
                 manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
@@ -2075,7 +2083,11 @@ public class ComputerUtilMana {
 
                 manaMap.put(ManaAtom.GENERIC, m);
 
-                for (final String color : CardUtil.canProduce(6, m, new HashSet<>())) {
+                final Set<String> colors = CardUtil.canProduce(6, m, new HashSet<>());
+                // a TapsForMana trigger may add mana on top of the ability's own output
+                // (e.g. Utopia Sprawl or Wild Growth on the tapped land)
+                colors.addAll(getTapsForManaTriggerColors(m, ai));
+                for (final String color : colors) {
                     manaMap.put((int) ManaAtom.fromName(color), m);
                 }
 
@@ -2089,6 +2101,60 @@ public class ComputerUtilMana {
         } // end of mana sources loop
 
         return manaMap;
+    }
+
+    private static Set<String> getTapsForManaTriggerColors(final SpellAbility ma, final Player ai) {
+        final Set<String> colors = new HashSet<>();
+        // such triggers only run when the source is tapped for mana (AbilityManaPart#tapsForMana)
+        if (!ma.isManaAbility() || ma.getPayCosts() == null || !ma.getPayCosts().hasTapCost()) {
+            return colors;
+        }
+        final Set<String> ownColors = CardUtil.canProduce(6, ma, new HashSet<>());
+        if (ownColors.isEmpty()) {
+            return colors; // the source taps for no mana, so no trigger fires for it either
+        }
+
+        final Card hostCard = ma.getHostCard();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
+        runParams.put(AbilityKey.Activator, ai);
+        runParams.put(AbilityKey.AbilityMana, ma);
+        runParams.put(AbilityKey.Produced, String.join(" ", ownColors));
+
+        for (final Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
+            final SpellAbility trSA = tr.ensureAbility();
+            if (trSA == null) {
+                continue;
+            }
+            if (ApiType.Mana.equals(trSA.getApi())) {
+                String produced = trSA.getParam("Produced");
+                if (produced == null) {
+                    continue;
+                }
+                if (produced.contains("Chosen")) {
+                    if (!trSA.getHostCard().hasChosenColor()) {
+                        continue; // a color still to be chosen can't be predicted for grouping
+                    }
+                    produced = produced.replace("Chosen", MagicColor.toShortString(trSA.getHostCard().getChosenColor()));
+                }
+                if (produced.contains("Any")) {
+                    produced = produced.replace("Any", "W U B R G"); // the color is chosen on resolution
+                }
+                if (produced.startsWith("Combo ")) {
+                    produced = produced.substring("Combo ".length());
+                }
+                for (final String c : TextUtil.split(produced, ' ')) {
+                    final byte mask = ManaAtom.fromName(c);
+                    if (mask != 0) {
+                        colors.add(MagicColor.toShortString(mask));
+                    }
+                }
+            } else if (ApiType.ManaReflected.equals(trSA.getApi())
+                    && "Produced".equals(trSA.getParam("ReflectProperty"))) {
+                // adds mana of a type that the tapped source produced
+                colors.addAll(ownColors);
+            }
+        }
+        return colors;
     }
 
     /**
