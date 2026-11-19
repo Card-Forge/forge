@@ -687,6 +687,9 @@ public class ComputerUtilMana {
         int testLifeSpent = 0;
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
+        // the lands that cost life to tap (Manabarbs and its kin): none in nearly every game
+        final List<TapDamageSource> painSources = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()
+                ? tapDamageSources(ai) : Collections.<TapDamageSource>emptyList();
 
         // Loop over mana needed
         while (!cost.isPaid()) {
@@ -741,12 +744,15 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            if (!hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
+            final boolean ordinaryOrder = !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref");
+            if (ordinaryOrder) {
                 saList = sparingSourcesFirst(saList, sourcesForShards, sa, ai);
                 if (toPay == ManaCostShard.GENERIC) {
                     saList = requiredSourcesFirst(saList, cost, sa);
                 }
             }
+            // Manabarbs and its kin: this is the final ordering, after mana preferences and multi-mana requirements
+            saList = painfulSourcesLast(saList, ai, painSources);
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test, paymentList);
 
@@ -974,6 +980,30 @@ public class ComputerUtilMana {
             }
         }
         return required;
+    }
+
+    /**
+     * Manabarbs and its kin: among the sources for a shard the ones that cost the least life come first (a creature or a
+     * rock costs none, a land under Manabarbs one, a nonbasic one under Burning Earth two). The sort is stable, so the
+     * scores of {@link #scoreManaProducingCard} still decide between sources that cost the same. Nothing changes
+     * without a permanent that damages the one who taps a land.
+     */
+    private static Collection<SpellAbility> painfulSourcesLast(final Collection<SpellAbility> candidates, final Player ai,
+            final List<TapDamageSource> sources) {
+        if (sources.isEmpty() || candidates.size() < 2) {
+            return candidates;
+        }
+        final Map<SpellAbility, Integer> damage = new IdentityHashMap<>();
+        boolean any = false;
+        for (final SpellAbility ma : candidates) {
+            any |= damage.computeIfAbsent(ma, m -> tapDamage(ai, m, sources)) > 0;
+        }
+        if (!any) {
+            return candidates;
+        }
+        final List<SpellAbility> list = new ArrayList<>(candidates);
+        list.sort(Comparator.comparingInt((SpellAbility ma) -> damage.get(ma)));
+        return list;
     }
 
     /**
@@ -1884,6 +1914,196 @@ public class ComputerUtilMana {
         return sources;
     }
 
+    /** A permanent of the table that damages whoever taps a land for mana (Manabarbs): its trigger and the effect of it. */
+    private static final class TapDamageSource {
+        final Card host;
+        final Trigger trigger;
+        final SpellAbility effect;
+
+        TapDamageSource(final Card host, final Trigger trigger, final SpellAbility effect) {
+            this.host = host;
+            this.trigger = trigger;
+            this.effect = effect;
+        }
+    }
+
+    /**
+     * The permanents of the table that damage the one who taps a land, found in one pass over the battlefield. Empty (and
+     * no allocation beyond that) in the games without a Manabarbs, which are nearly all of them.
+     */
+    /**
+     * The effect of this trigger of the host when it damages the one who taps a land for mana (to the player of {@code ai}),
+     * or null. The one criterion for "a permanent that hurts the tapper": the damage sources and the removal exemption share it.
+     */
+    public static SpellAbility tapDamageEffect(final Card host, final Trigger t, final Player ai) {
+        if (t.getMode() != TriggerType.TapsForMana) {
+            return null;
+        }
+        final SpellAbility effect = t.ensureAbility();
+        if (effect == null || effect.getApi() != ApiType.DealDamage) {
+            return null;
+        }
+        final String defined = effect.getParamOrDefault("Defined", "");
+        return defined.equals("TriggeredActivator") || defined.equals("You") && host.getController().equals(ai) ? effect : null;
+    }
+
+    /** The permanent damages the one who taps a land for mana: it has a trigger that {@link #tapDamageEffect} accepts. */
+    public static boolean damagesWhoeverTaps(final Card host, final Player ai) {
+        for (final Trigger t : host.getTriggers()) {
+            if (tapDamageEffect(host, t, ai) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static List<TapDamageSource> tapDamageSources(final Player ai) {
+        List<TapDamageSource> found = null;
+        for (final Card host : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final Trigger t : host.getTriggers()) {
+                final SpellAbility effect = tapDamageEffect(host, t, ai);
+                if (effect != null) {
+                    if (found == null) {
+                        found = new ArrayList<>(2);
+                    }
+                    found.add(new TapDamageSource(host, t, effect));
+                }
+            }
+        }
+        return found == null ? Collections.<TapDamageSource>emptyList() : found;
+    }
+
+    private static int tapDamage(final Player ai, final Card source, final List<TapDamageSource> sources) {
+        if (sources.isEmpty() || source == null || !source.isLand()) {
+            return 0;
+        }
+        int total = 0;
+        for (final TapDamageSource d : sources) {
+            if (d.host == source) {
+                continue; // the own triggers of a land (pain lands) are weighed by the sorting
+            }
+            final String valid = d.trigger.getParam("ValidCard");
+            if (valid != null && !source.isValid(valid, d.host.getController(), d.host, null)) {
+                continue;
+            }
+            int dmg = AbilityUtils.calculateAmount(d.host, d.effect.getParamOrDefault("NumDmg", "1"), d.effect);
+            dmg = replaceTapDamage(ai, dmg, d.host);
+            total += Math.max(0, dmg);
+        }
+        return total;
+    }
+
+    /**
+     * The life that this one mana ability costs: what the permanents of the table do to whoever taps its land, plus the
+     * damage of the ability itself (Ancient Tomb, the coloured ability of a pain land, City of Brass). Karplusan Forest's
+     * colourless ability costs only the former, its coloured ones both.
+     */
+    private static int tapDamage(final Player ai, final SpellAbility ma, final List<TapDamageSource> sources) {
+        return tapDamage(ai, ma.getHostCard(), sources) + ownTapDamage(ai, ma);
+    }
+
+    /** The damage to the controller that the mana ability itself deals: its own sub-abilities and the Taps triggers of its host. */
+    private static int ownTapDamage(final Player ai, final SpellAbility ma) {
+        final Card host = ma.getHostCard();
+        if (host == null) {
+            return 0;
+        }
+        int total = 0;
+        for (SpellAbility sub = ma.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() == ApiType.DealDamage && sub.getParamOrDefault("Defined", "").equals("You")) {
+                total += Math.max(0, replaceTapDamage(ai,
+                        AbilityUtils.calculateAmount(host, sub.getParamOrDefault("NumDmg", "1"), sub), host));
+            }
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.Taps && t.getMode() != TriggerType.TapsForMana) {
+                continue;
+            }
+            final SpellAbility effect = t.ensureAbility();
+            if (effect != null && effect.getApi() == ApiType.DealDamage && effect.getParamOrDefault("Defined", "").equals("You")) {
+                total += Math.max(0, replaceTapDamage(ai,
+                        AbilityUtils.calculateAmount(host, effect.getParamOrDefault("NumDmg", "1"), effect), host));
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Applies the damage replacements that can affect a tap trigger. Player.staticReplaceDamage covers the older global
+     * replacements, while Ojer Axonil is a card-specific DamageDone replacement and is not included there yet.
+     * Check both possible orders with the existing replacements and keep the larger result: underestimating this cost
+     * can make the AI spend life it needs to survive.
+     */
+    private static int replaceTapDamage(final Player ai, final int damage, final Card source) {
+        int replaced = ai.staticReplaceDamage(damage, source, false);
+        if (damage <= 0 || !source.isRed()) {
+            return replaced;
+        }
+        for (final Card ojer : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (!"Ojer Axonil, Deepest Might".equals(ojer.getName())
+                    || !ojer.getController().equals(source.getController())
+                    || !ai.getOpponents().contains(ojer.getController())) {
+                continue;
+            }
+            final int power = ojer.getNetPower();
+            if (damage < power) {
+                // Ojer first, then the other replacements (e.g. Furnace of Rath).
+                final int ojerFirst = ai.staticReplaceDamage(power, source, false);
+                // Or the other replacements first, then Ojer. Use the conservative order for the life estimate.
+                replaced = Math.max(replaced, Math.max(power, ojerFirst));
+            }
+        }
+        return replaced;
+    }
+
+    /**
+     * The damage the AI takes when it taps this land for mana because of the permanents of the table, whoever controls
+     * them: Manabarbs ("whenever a player taps a land for mana, 1 damage to that player"), Burning Earth for the nonbasic
+     * lands, Scald for the Islands, and the like. A damage doubler is counted through the replacement.
+     */
+    public static int tapDamage(final Player ai, final Card source) {
+        return ai == null ? 0 : tapDamage(ai, source, tapDamageSources(ai));
+    }
+
+    /**
+     * The life that paying for this play costs through Manabarbs and its kin. The payment is the one the AI would make:
+     * the sources that the payment logic picks for the cost (colours, the mana that a source makes more than one of, the
+     * mana pool, the costs that are not mana), each tap of a land that hurts counted once. Zero with nothing on the table
+     * that hurts, without a payment being worked out.
+     */
+    public static int estimateTapDamage(final Player ai, final SpellAbility sa) {
+        return tapDamage(ai, estimateTapPayment(ai, sa));
+    }
+
+    /**
+     * The mana abilities that the payment logic would tap for this play: empty when nothing on the table hurts the one who
+     * taps a land (no payment is worked out then) or when it is not payable (the other checks say so).
+     */
+    public static List<SpellAbility> estimateTapPayment(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.getPayCosts() == null || sa.getPayCosts().getTotalMana() == null) {
+            return Collections.emptyList();
+        }
+        if (tapDamageSources(ai).isEmpty()) {
+            return Collections.emptyList();
+        }
+        final ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
+        final List<SpellAbility> payment = payManaCost(cost, sa, ai, true, true, false);
+        return payment == null ? Collections.<SpellAbility>emptyList() : payment;
+    }
+
+    /** The life that tapping the hosts of these mana abilities costs, each tap of a land that hurts counted once. */
+    public static int tapDamage(final Player ai, final List<SpellAbility> payment) {
+        if (payment.isEmpty()) {
+            return 0;
+        }
+        final List<TapDamageSource> sources = tapDamageSources(ai);
+        int damage = 0;
+        for (final SpellAbility tap : payment) {
+            damage += tapDamage(ai, tap, sources);
+        }
+        return damage;
+    }
+
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
                 ai.getCardsIn(ZoneType.Command));
@@ -1923,6 +2143,8 @@ public class ComputerUtilMana {
         // 4. all other sources (creature, costs, drawback, etc.)
 
         final boolean canDieToTapDamage = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
+        final List<TapDamageSource> tapDamageSources = tapDamageSources(ai);
+        final CardCollection painfulManaSources = new CardCollection();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
             if (card.isCreature()) {
@@ -1952,6 +2174,12 @@ public class ComputerUtilMana {
                 if (dealsLethalOnTap) {
                     continue;
                 }
+            }
+
+            // Manabarbs and its kin: a land that hurts is used last (and only as far as the life goes, below)
+            if (canDieToTapDamage && !tapDamageSources.isEmpty() && tapDamage(ai, card, tapDamageSources) > 0) {
+                painfulManaSources.add(card);
+                continue;
             }
 
             if (card.isCreature() || card.isEnchanted()) {
@@ -2037,6 +2265,23 @@ public class ComputerUtilMana {
         ComputerUtilCard.sortByEvaluateCreature(useLastManaSources);
         Collections.reverse(useLastManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), useLastManaSources);
+        if (!painfulManaSources.isEmpty()) {
+            // the cheapest lands first, so the life that they may cost (never the last point) buys the most mana
+            final Map<Card, Integer> cost = new HashMap<>();
+            for (final Card c : painfulManaSources) {
+                cost.put(c, tapDamage(ai, c, tapDamageSources));
+            }
+            final List<Card> cheapestFirst = new ArrayList<>(painfulManaSources);
+            cheapestFirst.sort(Comparator.comparingInt(cost::get));
+            int tapBudget = ai.getLife() - 1;
+            for (final Card c : cheapestFirst) {
+                final int dmg = cost.get(c);
+                if (dmg <= tapBudget) {
+                    tapBudget -= dmg;
+                    sortedManaSources.add(c);
+                }
+            }
+        }
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);

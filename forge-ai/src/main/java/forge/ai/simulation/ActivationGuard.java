@@ -1,15 +1,25 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
 import forge.ai.ability.AnimateAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.keyword.Keyword;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -143,6 +153,320 @@ public final class ActivationGuard {
     static final int LAND_GIFT = 130;
     /** What a 3/3 token is worth to the player who gets it (Beast Within, Generous Gift). */
     static final int TOKEN_GIFT = 190;
+
+    /**
+     * Manabarbs and its kin: what a play costs in life through the lands that it taps, against the life the AI can
+     * spare. The reserve is what the opponent's creatures could hit for next turn (at least three). A play that removes
+     * the source of the damage is the exception, it may take the life down to one; so is a play that costs nothing.
+     * Returns true when the cost is too high.
+     */
+    public static boolean tooPainfulToPay(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.isManaAbility() || sa.isTrigger() || !ai.canLoseLife()
+                || ai.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        final List<SpellAbility> payment = ComputerUtilMana.estimateTapPayment(ai, sa);
+        final int damage = ComputerUtilMana.tapDamage(ai, payment);
+        if (damage <= 0) {
+            return false;
+        }
+        final boolean clearsTapDamage = removesAllTapDamage(ai, sa);
+        // Judge survival on the board the play leaves behind: removed attackers are gone, and creatures tapped for mana
+        // cannot block during the opponent's next turn. Clearing the tap-damage source lowers the fixed reserve to 1,
+        // but it must not make the AI ignore an attacker that will still hit it next turn.
+        final int threat = nextTurnThreat(ai, removedByPlay(ai, sa), creaturesSpentOnMana(payment));
+        final int reserve = clearsTapDamage ? Math.max(1, threat + 1) : Math.max(3, threat + 1);
+        return ai.getLife() - damage < reserve;
+    }
+
+    /**
+     * What the opponent's creatures can hit for on their next turn, not on this one: a tapped attacker untaps, a creature that
+     * came this turn is no longer sick. Each untapped creature of the AI that can block takes the strongest attacker that it can
+     * block out of the sum (a rough count: no tricks, no gang blocks). Defenders do not attack.
+     */
+    static int nextTurnThreat(final Player ai) {
+        return nextTurnThreat(ai, Collections.<Card>emptySet(), Collections.<Card>emptySet());
+    }
+
+    /**
+     * {@link #nextTurnThreat(Player)} for the board that a play leaves behind: {@code gone} are creatures the play takes
+     * off the table (neither attack nor block), {@code spent} are creatures of the AI tapped to pay for it (no block).
+     */
+    static int nextTurnThreat(final Player ai, final Collection<Card> gone, final Collection<Card> spent) {
+        final List<Card> attackers = new ArrayList<>();
+        final List<Card> availableBlockers = new ArrayList<>();
+        for (final Player opp : ai.getOpponents()) {
+            for (final Card c : opp.getCreaturesInPlay()) {
+                // what it deals in combat (toughness under Doran), and whether it may attack at all (a defender under Arcades may)
+                if (!gone.contains(c) && c.getNetCombatDamage() > 0 && !StaticAbilityCantAttackBlock.cantAttack(c, ai)
+                        && !(c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step."))) {
+                    attackers.add(c);
+                }
+            }
+        }
+        for (final Card blocker : ai.getCreaturesInPlay()) {
+            // A creature that already carries lethal damage (or deathtouch damage, e.g. in Main 2) is dead before it can
+            // block, unless it cannot be destroyed (indestructible). One that regenerates is tapped by it and cannot block
+            // either, so a regeneration shield changes nothing here.
+            final boolean doomed = (blocker.getLethalDamage() <= 0 || blocker.hasBeenDealtDeathtouchDamage())
+                    && blocker.canBeDestroyed();
+            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker) && !doomed) {
+                availableBlockers.add(blocker);
+            }
+        }
+
+        // Assign scarce blockers to the attackers with the fewest legal options first. In particular, one ground
+        // blocker must not be spent on an attacker that another blocker could handle while a flyer goes through.
+        final List<ThreatTarget> assignments = new ArrayList<>(attackers.size());
+        for (final Card attacker : attackers) {
+            final Pair<Integer, Integer> limits = StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, ai);
+            final List<Card> candidates = new ArrayList<>();
+            for (final Card blocker : availableBlockers) {
+                if (CombatUtil.canBlock(attacker, blocker, true)) {
+                    candidates.add(blocker);
+                }
+            }
+            int min = Math.max(1, limits.getLeft());
+            if (attacker.hasKeyword("CARDNAME must be blocked by two or more creatures if able.")) {
+                min = Math.max(min, 2); // Gorm the Great: with fewer blockers than that, the estimate treats it as unblocked
+            }
+            assignments.add(new ThreatTarget(attacker, candidates, min, limits.getRight()));
+        }
+
+        assignments.sort((a, b) -> {
+            final int aSlack = a.blockers.size() - a.minBlockers;
+            final int bSlack = b.blockers.size() - b.minBlockers;
+            final int bySlack = Integer.compare(aSlack, bSlack);
+            if (bySlack != 0) {
+                return bySlack;
+            }
+            final int byRequirement = Integer.compare(b.minBlockers, a.minBlockers);
+            return byRequirement != 0 ? byRequirement : Integer.compare(b.attacker.getNetCombatDamage(), a.attacker.getNetCombatDamage());
+        });
+
+        int threat = 0;
+        for (final ThreatTarget assignment : assignments) {
+            final Card attacker = assignment.attacker;
+            final List<Card> candidates = new ArrayList<>();
+            for (final Card blocker : assignment.blockers) {
+                if (availableBlockers.contains(blocker)) {
+                    candidates.add(blocker);
+                }
+            }
+            final int power = Math.max(0, attacker.getNetCombatDamage());
+            if (assignment.maxBlockers < assignment.minBlockers || candidates.size() < assignment.minBlockers) {
+                // menace / a blocker restriction: not enough legal blockers
+                threat += combatDamage(ai, attacker, attacker.hasDoubleStrike() ? power * 2 : power);
+                continue;
+            }
+
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                // For trample, assign the minimum legal group and credit only the damage those blockers can absorb.
+                // This intentionally errs on the cautious side when additional blockers could also be assigned.
+                candidates.sort((a, b) -> Integer.compare(b.getNetToughness(), a.getNetToughness()));
+            }
+            int blockedDamage = 0;
+            for (int i = 0; i < assignment.minBlockers; i++) {
+                final Card blocker = candidates.get(i);
+                availableBlockers.remove(blocker);
+                if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                    // Existing marked damage reduces what must be assigned as lethal; deathtouch needs only one.
+                    blockedDamage += attacker.hasKeyword(Keyword.DEATHTOUCH) ? 1 : Math.max(0, blocker.getLethalDamage());
+                }
+            }
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
+                // Double strike can deal damage in both combat-damage steps. Do not assume a blocker survives the first one.
+                final int damage = attacker.hasDoubleStrike() ? power * 2 : power;
+                threat += combatDamage(ai, attacker, Math.max(0, damage - blockedDamage));
+            }
+        }
+        return threat;
+    }
+
+    /** What this much combat damage from the attacker comes to after the replacement effects on the AI (Dictate of the Twin Gods, Furnace of Rath). */
+    private static int combatDamage(final Player ai, final Card attacker, final int damage) {
+        return damage <= 0 ? 0 : Math.max(0, ai.staticReplaceDamage(damage, attacker, true));
+    }
+
+    private static final class ThreatTarget {
+        final Card attacker;
+        final List<Card> blockers;
+        final int minBlockers;
+        final int maxBlockers;
+
+        ThreatTarget(final Card attacker, final List<Card> blockers, final int minBlockers, final int maxBlockers) {
+            this.attacker = attacker;
+            this.blockers = blockers;
+            this.minBlockers = minBlockers;
+            this.maxBlockers = maxBlockers;
+        }
+    }
+
+    /** The creatures of the AI that the payment taps (or sacrifices) for mana: they are not there to block next turn. */
+    static Set<Card> creaturesSpentOnMana(final List<SpellAbility> payment) {
+        final Set<Card> spent = new HashSet<>();
+        for (final SpellAbility tap : payment) {
+            final Card host = tap.getHostCard();
+            if (host != null && host.isCreature()) {
+                spent.add(host);
+            }
+        }
+        return spent;
+    }
+
+    /**
+     * The creatures that the play takes off the table before their next turn: the chosen targets (or the defined cards) of
+     * a destroy, an exile or bounce, damage that is lethal, a shrink to nothing, and the creatures that a mass effect names.
+     * Tapping and enchanting (Pacifism) are not counted: that threat stays in the reserve.
+     */
+    static Set<Card> removedByPlay(final Player ai, final SpellAbility sa) {
+        final Set<Card> gone = new HashSet<>();
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (api == null) {
+                continue;
+            }
+            final Card host = node.getHostCard();
+            switch (api) {
+                case Destroy:
+                    for (final Card c : aimedCards(node)) {
+                        if (destroyable(c, node)) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                case ChangeZone:
+                    if (leavesBattlefield(node)) {
+                        gone.addAll(aimedCards(node));
+                    }
+                    break;
+                case DealDamage: {
+                    final int dmg = AbilityUtils.calculateAmount(host, node.getParamOrDefault("NumDmg", "0"), node);
+                    for (final Card c : aimedCards(node)) {
+                        if (c.isCreature() && dmg > 0 && destroyable(c, node) && c.getLethalDamage() <= dmg) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                }
+                case Pump: {
+                    final int def = AbilityUtils.calculateAmount(host, node.getParamOrDefault("NumDef", "0"), node);
+                    for (final Card c : aimedCards(node)) {
+                        if (c.isCreature() && def < 0 && c.getNetToughness() + def <= 0) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                }
+                case DestroyAll:
+                case DamageAll:
+                case ChangeZoneAll:
+                    gone.addAll(sweptBy(ai, node, api));
+                    break;
+                default:
+                    break;
+            }
+        }
+        return gone;
+    }
+
+    private static List<Card> aimedCards(final SpellAbility node) {
+        if (node.usesTargeting()) {
+            return new ArrayList<>(node.getTargets().getTargetCards());
+        }
+        if (node.hasParam("Defined")) {
+            return new ArrayList<>(AbilityUtils.getDefinedCards(node.getHostCard(), node.getParam("Defined"), node));
+        }
+        return new ArrayList<>();
+    }
+
+    private static boolean destroyable(final Card c, final SpellAbility node) {
+        return c.canBeDestroyed() && !regenerates(c, node);
+    }
+
+    /** A regeneration shield saves the creature from this destruction (it stays, tapped) unless the effect forbids it. */
+    private static boolean regenerates(final Card c, final SpellAbility node) {
+        return !node.hasParam("NoRegen") && c.getShieldCount() > 0 && c.canBeShielded();
+    }
+
+    private static boolean leavesBattlefield(final SpellAbility node) {
+        return node.getParamOrDefault("Origin", "Battlefield").contains("Battlefield")
+                && !"Battlefield".equals(node.getParam("Destination"));
+    }
+
+    /** The creatures of both sides that a mass effect (Wrath of God, Pyroclasm, a sweeping exile) takes. */
+    private static List<Card> sweptBy(final Player ai, final SpellAbility node, final ApiType api) {
+        final List<Card> swept = new ArrayList<>();
+        final String valid = api == ApiType.ChangeZoneAll ? node.getParam("ChangeType") : node.getParam("ValidCards");
+        if (valid == null || api == ApiType.ChangeZoneAll && !leavesBattlefield(node)) {
+            return swept;
+        }
+        final int dmg = api == ApiType.DamageAll
+                ? AbilityUtils.calculateAmount(node.getHostCard(), node.getParamOrDefault("NumDmg", "0"), node) : 0;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isCreature() || !c.isValid(valid, ai, node.getHostCard(), node)) {
+                continue;
+            }
+            if (api == ApiType.DestroyAll && !destroyable(c, node)) {
+                continue;
+            }
+            if (api == ApiType.DamageAll && (dmg <= 0 || !destroyable(c, node) || c.getLethalDamage() > dmg)) {
+                continue;
+            }
+            swept.add(c);
+        }
+        return swept;
+    }
+
+    /**
+     * The play really takes the damage source away: a spell aimed at it (the chosen target, not any legal one), or a
+     * mass effect that takes it with the rest. A Disenchant aimed at another permanent does not qualify.
+     */
+    private static boolean removesAllTapDamage(final Player ai, final SpellAbility sa) {
+        boolean found = false;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (!ComputerUtilMana.damagesWhoeverTaps(c, ai)) {
+                continue;
+            }
+            found = true;
+            if (!removesTapDamageSource(ai, sa, c)) {
+                return false; // one recognized source remains active; do not grant the life-to-one exception
+            }
+        }
+        return found;
+    }
+
+    /** True only when this play will actually remove this particular tap-damage permanent. */
+    private static boolean removesTapDamageSource(final Player ai, final SpellAbility sa, final Card source) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (api == ApiType.Destroy || api == ApiType.ChangeZone) {
+                for (final Card target : aimedCards(node)) {
+                    if (target != source) {
+                        continue;
+                    }
+                    if (api == ApiType.Destroy && destroyable(source, node)
+                            || api == ApiType.ChangeZone && leavesBattlefield(node)) {
+                        return true;
+                    }
+                }
+            } else if (api == ApiType.DestroyAll) {
+                final String valid = node.getParam("ValidCards");
+                if (valid != null && source.isValid(valid, ai, node.getHostCard(), node)
+                        && destroyable(source, node)) {
+                    return true;
+                }
+            } else if (api == ApiType.ChangeZoneAll) {
+                // ChangeZoneAll uses ChangeType, not ValidCards.
+                final String changeType = node.getParam("ChangeType");
+                if (leavesBattlefield(node) && changeType != null
+                        && source.isValid(changeType, ai, node.getHostCard(), node)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Removal that pays its victim's controller (Path to Exile, Erode, Assassin's Trophy: a land; Beast Within, Generous
