@@ -788,14 +788,44 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) takes ONE Hill Giant: the other two still attack", Fid.APPROX, M1, true,
                 c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Glissa Sunslayer", c.opp); },
                 c -> c.attackers().size() >= 2 ? null : "only " + c.attackers().size() + " of 3 Hill Giants attacked, she can block only one"));
-        l.add(new Scenario("deathtouch-group-damage", "Two Grizzly Bears attack together into a Palace Guard with Gorgon's Head: combined damage kills it, but its 1 power only kills one", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-group-damage",
+                "Two Grizzly Bears attack together into a Palace Guard with Gorgon's Head: combined damage kills it, but its 1 power only kills one",
+                Fid.APPROX, M1, true,
                 c -> {
                     c.bf("Grizzly Bears", 2, c.ai);
+
                     final Card guard = c.bf("Palace Guard", c.opp);
                     c.bf("Gorgon's Head", c.opp).attachToEntity(guard, null);
                 },
-                c -> c.attackers().size() == 2 ? null : "only " + c.attackers().size()
-                        + " of 2 Bears attacked; the Guard was treated as killing both despite only assigning 1 damage"));
+                c -> {
+                    final Card guard = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Palace Guard"))
+                            .findFirst().orElse(null);
+
+                    final Card head = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Gorgon's Head"))
+                            .findFirst().orElse(null);
+
+                    if (guard == null || head == null || !head.isAttachedToEntity(guard)) {
+                        return "Gorgon's Head was not attached to Palace Guard";
+                    }
+
+                    if (!guard.hasKeyword("Deathtouch")) {
+                        return "Gorgon's Head did not grant deathtouch to Palace Guard";
+                    }
+
+                    if (!guard.canBlockAny()) {
+                        return "Palace Guard cannot block multiple attackers";
+                    }
+
+                    final long attackingBears = c.attackers().stream()
+                            .filter(a -> a.getName().equals("Grizzly Bears"))
+                            .count();
+
+                    return attackingBears == 2 ? null
+                            : "only " + attackingBears
+                            + " of 2 Bears attacked; combined damage should kill the Guard";
+                }));
         // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
         l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));
