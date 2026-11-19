@@ -607,6 +607,14 @@ public class AiReportScenarioTest extends AITest {
                     sa.setActivatingPlayer(c.ai);
                     return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the dying Bears was counted as a blocker";
                 }));
+        l.add(new Scenario("manabarbs-indestructible-blocker", "A Darksteel Myr with lethal damage marked survives and still blocks the Hill Giant", Fid.APPROX, "MAIN2", true,
+                c -> { c.ai.setLife(5, null); c.bf("Mountain", c.ai); c.bf("Plains", c.ai); c.bf("Darksteel Myr", c.ai).setDamage(1); c.hand("Boros Swiftblade", c.ai);
+                       c.bf("Manabarbs", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Boros Swiftblade", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? "the indestructible Myr was dropped as a blocker" : null;
+                }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
                 c -> {

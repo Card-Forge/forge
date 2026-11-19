@@ -204,9 +204,11 @@ public final class ActivationGuard {
             }
         }
         for (final Card blocker : ai.getCreaturesInPlay()) {
-            // A creature that already carries lethal damage (or deathtouch damage, e.g. in Main 2) is dead before it can block.
-            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker)
-                    && blocker.getLethalDamage() > 0 && !blocker.hasBeenDealtDeathtouchDamage()) {
+            // A creature that already carries lethal damage (or deathtouch damage, e.g. in Main 2) is dead before it can
+            // block, unless it cannot be destroyed (indestructible).
+            final boolean doomed = (blocker.getLethalDamage() <= 0 || blocker.hasBeenDealtDeathtouchDamage())
+                    && blocker.canBeDestroyed();
+            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker) && !doomed) {
                 availableBlockers.add(blocker);
             }
         }
