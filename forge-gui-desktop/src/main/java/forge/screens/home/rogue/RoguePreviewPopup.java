@@ -14,6 +14,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.arcane.CardPanel;
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.Insets;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -36,8 +38,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
+import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -63,7 +64,7 @@ public class RoguePreviewPopup {
     private final Timer hideTimer = new Timer(HIDE_DELAY_MS, e -> hideNow());
     private final Timer zoomWatchTimer = new Timer(ZOOM_WATCH_DELAY_MS, e -> handleZoomWatch());
     private final List<CardPreviewPanel> currentCardPanels = new ArrayList<>();
-    private Popup popup;
+    private JWindow popup;
     private CardUtil zoomUtil;
     private Window zoomWindow;
     private JComponent activeSourceComponent;
@@ -146,9 +147,19 @@ public class RoguePreviewPopup {
             y = screenTop;
         }
 
-        popup = PopupFactory.getSharedInstance().getPopup(component, previewPanel, x, y);
-        popup.show();
-        makePopupHostTransparent();
+        boolean translucent = gc.getDevice().isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSLUCENT);
+        previewPanel.setOpaque(!translucent);
+        previewPanel.setBackground(translucent ? new Color(0, 0, 0, 0)
+                : FSkin.getColor(FSkin.Colors.CLR_THEME2).getColor());
+
+        popup = new JWindow(SwingUtilities.getWindowAncestor(component), gc);
+        popup.setType(Window.Type.POPUP);
+        popup.setFocusableWindowState(false);
+        popup.setBackground(previewPanel.getBackground());
+        popup.setContentPane(previewPanel);
+        popup.pack();
+        popup.setLocation(x, y);
+        popup.setVisible(true);
     }
 
     private void buildPreviewPanels(List<ResolvedPreviewItem> previewItems, int availableWidth) {
@@ -231,7 +242,7 @@ public class RoguePreviewPopup {
 
     private void hideNow() {
         if (popup != null) {
-            popup.hide();
+            popup.dispose();
             popup = null;
         }
         activeSourceComponent = null;
@@ -239,18 +250,6 @@ public class RoguePreviewPopup {
         previewPanel.removeAll();
         previewPanel.revalidate();
         previewPanel.repaint();
-    }
-
-    private void makePopupHostTransparent() {
-        if (previewPanel.getParent() instanceof JComponent parent) {
-            parent.setOpaque(false);
-            parent.setBackground(new Color(0, 0, 0, 0));
-        }
-
-        Window popupWindow = SwingUtilities.getWindowAncestor(previewPanel);
-        if (popupWindow != null) {
-            popupWindow.setBackground(new Color(0, 0, 0, 0));
-        }
     }
 
     private void handleZoomWatch() {
@@ -440,6 +439,17 @@ public class RoguePreviewPopup {
             super(new FlowLayout(FlowLayout.LEFT, 0, 0));
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            if (!isOpaque()) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setComposite(AlphaComposite.Clear);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+            super.paintComponent(g);
         }
     }
 
