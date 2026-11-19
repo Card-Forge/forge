@@ -1772,6 +1772,7 @@ public class AiAttackController {
                 going.add(a); // the opponent has no blocker left for it
             }
         }
+        addFavorableDeathtouchGroupTrades(plan, held);
         for (final Map.Entry<Card, List<Card>> e : held.entrySet()) {
             for (final Card a : e.getValue()) {
                 final Card b = e.getKey();
@@ -1795,6 +1796,64 @@ public class AiAttackController {
             plan.go.addAll(going);
         }
         return plan.go.isEmpty() ? DeathtouchPlan.NONE : plan;
+    }
+
+    /**
+     * A deathtouch blocker can block multiple creatures, but it must still assign at least one damage to each creature
+     * it wants to kill. If the blocked group kills it and it cannot assign lethal damage to every attacker, the group
+     * can be a favorable trade: the blocker dies, while only its damage-assignment capacity is lost.
+     *
+     * This handles the ordinary damage step. Strike-step groups remain on the existing per-attacker path because their
+     * damage assignment depends on which creatures survive the first-strike step.
+     */
+    private void addFavorableDeathtouchGroupTrades(final DeathtouchPlan plan,
+            final Map<Card, List<Card>> held) {
+        for (final Map.Entry<Card, List<Card>> entry : held.entrySet()) {
+            final Card blocker = entry.getKey();
+            final List<Card> blockedAttackers = entry.getValue();
+            final int killCapacity = Math.max(0, blocker.getNetCombatDamage());
+            if (blockedAttackers.size() <= killCapacity || blocker.hasFirstStrike() || blocker.hasDoubleStrike()) {
+                continue;
+            }
+
+            boolean hasStrikeAttacker = false;
+            for (final Card attacker : blockedAttackers) {
+                if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
+                    hasStrikeAttacker = true;
+                    break;
+                }
+            }
+            if (hasStrikeAttacker) {
+                continue;
+            }
+
+            // The defending player assigns the blocker's limited damage to the most valuable attackers first.
+            final List<Card> likelyKilled = new ArrayList<>(blockedAttackers);
+            likelyKilled.sort((x, y) -> Integer.compare(ComputerUtilCard.evaluateCreature(y),
+                    ComputerUtilCard.evaluateCreature(x)));
+            int attackersLostValue = 0;
+            for (int i = 0; i < killCapacity; i++) {
+                attackersLostValue += ComputerUtilCard.evaluateCreature(likelyKilled.get(i));
+            }
+            if (attackersLostValue > ComputerUtilCard.evaluateCreature(blocker) + 40) {
+                continue;
+            }
+
+            // Reuse the combat damage estimator with all of these attackers assigned to this blocker. A single
+            // attacker is not enough to kill (for example) a 1/4 Palace Guard, but their combined damage is.
+            final Combat groupCombat = new Combat(ai);
+            final Player defender = blocker.getController();
+            for (final Card attacker : blockedAttackers) {
+                groupCombat.addAttacker(attacker, defender);
+                groupCombat.addBlocker(attacker, blocker);
+            }
+            for (final Card attacker : blockedAttackers) {
+                if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, groupCombat, false)) {
+                    plan.go.addAll(blockedAttackers);
+                    break;
+                }
+            }
+        }
     }
 
     /** How many attackers this blocker can take: one, more with an effect that lets it block additional creatures or any number. */
