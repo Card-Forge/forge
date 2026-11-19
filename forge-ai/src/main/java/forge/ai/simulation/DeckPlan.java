@@ -169,7 +169,8 @@ public final class DeckPlan {
         // whatever its cheap spells look like to the archetype counters below
         final ComboPlan combos = ComboPlan.scan(player);
         final CommanderPlan cmd = CommanderPlan.scan(player);
-        Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        Archetype arch = combos.isEmpty() && !ElfLoop.isComboElfDeck(player) && !TidePlan.isTideDeck(player) && !AlurenPlan.isAlurenDeck(player)
+                ? classify(player) : Archetype.COMBO;
         if (combos.has(ComboPlan.Kind.DARK_DEPTHS) && classify(player) == Archetype.LANDS) {
             // Legacy Lands: Dark Depths with Thespian's Stage is its win condition, but the deck is still about its
             // lands (the long playouts of a combo plan stay: the plan keeps the combo)
@@ -325,6 +326,10 @@ public final class DeckPlan {
         final CardCollection fromElves = ElfLoop.picks(ai, pool, n); // Elves: Craterhoof once Glimpse is there, else Glimpse
         if (fromElves != null) {
             return fromElves;
+        }
+        final CardCollection fromAluren = AlurenPlan.picks(ai, pool, n); // Aluren: the piece of the kill that is missing
+        if (fromAluren != null) {
+            return fromAluren;
         }
         final CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
         if (fromCombo != null) {

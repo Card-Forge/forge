@@ -1316,6 +1316,10 @@ public class AiController {
             if (tideSafe.size() >= min && tideSafe.size() < validCards.size()) {
                 return chooseCardsToDiscard(min, max, tideSafe, sa);
             }
+            final CardCollection alurenSafe = forge.ai.simulation.AlurenPlan.withoutKeys(player, validCards);
+            if (alurenSafe.size() >= min && alurenSafe.size() < validCards.size()) {
+                return chooseCardsToDiscard(min, max, alurenSafe, sa); // the pieces of the Aluren kill are kept
+            }
             final ComboPlan combos = deckPlan(player).combos;
             // a deck that wants creatures in the graveyard throws away the right ones
             final CardCollection forCombo = combos.preferredDiscards(player, validCards, min);

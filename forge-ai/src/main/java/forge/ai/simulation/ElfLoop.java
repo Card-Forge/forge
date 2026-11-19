@@ -12,6 +12,8 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -49,6 +51,17 @@ public final class ElfLoop {
     /** A deck with Glimpse of Nature among the cards the AI owns (Craterhoof Behemoth, Mirror Entity, Grapeshot, ... finish it). */
     public static boolean isElfDeck(final Player ai) {
         return owns(ai, GLIMPSE);
+    }
+
+    /**
+     * The decks that play for a combo of their elves whether or not the catalog has the exact pair: Glimpse of Nature
+     * (most of them have no Craterhoof, and the catalog line needs both) and Heritage Druid with Nettle Sentinel (three
+     * elves for GGG, and the Sentinel untaps for every green creature). Read as the creature decks they look like, these
+     * were plans of an aggro deck: the rollouts counted the damage and cast a creature with every mana, Glimpse of Nature
+     * stayed in the hand.
+     */
+    public static boolean isComboElfDeck(final Player ai) {
+        return isElfDeck(ai) || owns(ai, "Heritage Druid") && owns(ai, "Nettle Sentinel");
     }
 
     private static boolean owns(final Player ai, final String name) {
@@ -185,6 +198,10 @@ public final class ElfLoop {
      */
     static SpellAbility next(final Player ai, final List<SpellAbility> candidates, final Player opp,
                              final Predicate<SpellAbility> approve) {
+        final SpellAbility finish = finishers(ai, candidates, opp, approve);
+        if (finish != null) {
+            return finish;
+        }
         if (!isElfDeck(ai)) {
             return null;
         }
@@ -217,9 +234,167 @@ public final class ElfLoop {
         return null;
     }
 
+    private static final String NATURAL_ORDER = "Natural Order";
+    private static final String GRAPESHOT = "Grapeshot";
+    private static final String MIRROR_ENTITY = "Mirror Entity";
+    private static final String PREDATOR_DRAGON = "Predator Dragon";
+
+    /**
+     * The other ways an elf deck ends the game, each only when it kills: Grapeshot with the storm count of the chain,
+     * Predator Dragon devouring every creature (4 and two counters for each, flying and haste), Natural Order for
+     * Craterhoof, and Mirror Entity for the X of the lands. Nothing here is a plan to make one of them work: a hand that
+     * is not lethal plays the chain as before.
+     */
+    static SpellAbility finishers(final Player ai, final List<SpellAbility> candidates, final Player opp,
+                                  final Predicate<SpellAbility> approve) {
+        if (opp == null || !opp.canLoseLife() || opp.cantLoseForZeroOrLessLife()) {
+            return null;
+        }
+        final SpellAbility grapeshot = LoopRunner.castFromHand(ai, candidates, GRAPESHOT);
+        if (grapeshot != null && ai.getGame().getStack().getSpellsCastThisTurn().size() + 1 >= opp.getLife()
+                && LoopRunner.aimedAtPlayer(ai, grapeshot, opp) != null && approve.test(grapeshot)) {
+            return grapeshot; // a copy for every spell of the turn so far, and one more for Grapeshot itself
+        }
+        final SpellAbility dragon = LoopRunner.castFromHand(ai, candidates, PREDATOR_DRAGON);
+        if (dragon != null && dragonLethal(ai, opp)) {
+            dragon.setActivatingPlayer(ai);
+            if (approve.test(dragon)) {
+                return dragon;
+            }
+        }
+        final SpellAbility order = LoopRunner.castFromHand(ai, candidates, NATURAL_ORDER);
+        if (order != null && orderLethal(ai, opp)) {
+            order.setActivatingPlayer(ai);
+            order.resetTargets();
+            if (approve.test(order)) {
+                return order;
+            }
+        }
+        return mirrorEntity(ai, candidates, opp, approve);
+    }
+
+    private static boolean inLibrary(final Player ai, final String name) {
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Predator Dragon with every creature devoured: 4 and two counters each, in the air. */
+    static boolean dragonLethal(final Player ai, final Player opp) {
+        return !hasFlyingBlocker(opp) && 4 + 2 * ai.getCreaturesInPlay().size() >= opp.getLife();
+    }
+
+    private static boolean hasFlyingBlocker(final Player opp) {
+        for (final Card b : opp.getCreaturesInPlay()) {
+            if (!b.isTapped() && (b.hasKeyword(Keyword.FLYING) || b.hasKeyword(Keyword.REACH))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the AI should devour everything with this Predator Dragon: it is the kill. */
+    public static boolean devourAll(final Player ai, final Card source) {
+        if (ai == null || source == null || !source.getName().equals(PREDATOR_DRAGON)) {
+            return false;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        return opp != null && dragonLethal(ai, opp);
+    }
+
+    /**
+     * Natural Order for Craterhoof: a green creature goes (the weakest one), Craterhoof comes with haste, every creature
+     * gets +X/+X for the X creatures there then are, and the blockers are trampled over.
+     */
+    public static boolean orderLethal(final Player ai, final Player opp) {
+        if (!inLibrary(ai, CRATERHOOF)) {
+            return false;
+        }
+        Card weakest = null;
+        for (final Card c : ai.getCreaturesInPlay()) {
+            if (c.isGreen() && (weakest == null || c.getNetPower() < weakest.getNetPower())) {
+                weakest = c;
+            }
+        }
+        if (weakest == null) {
+            return false;
+        }
+        final int x = ai.getCreaturesInPlay().size(); // one goes, Craterhoof comes
+        int dmg = 5 + x;
+        for (final Card c : ai.getCreaturesInPlay()) {
+            if (c != weakest && !c.isTapped()) {
+                dmg += Math.max(0, c.getNetPower()) + x; // haste from Craterhoof: sick creatures attack too
+            }
+        }
+        int blocked = 0;
+        for (final Card b : opp.getCreaturesInPlay()) {
+            if (!b.isTapped()) {
+                blocked += Math.max(0, b.getNetToughness());
+            }
+        }
+        return dmg - blocked >= opp.getLife();
+    }
+
+    /** For the combo guard: this Natural Order is the kill, so the creature it sacrifices is no key card. */
+    public static boolean orderIsTheKill(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        final Player opp = ai == null ? null : ai.getWeakestOpponent();
+        return host != null && opp != null && host.getName().equals(NATURAL_ORDER) && orderLethal(ai, opp);
+    }
+
+    /**
+     * Mirror Entity in play before combat: every creature that can attack becomes X/X for the X of the untapped lands
+     * (the mana creatures are not counted, they would be tapped for it), and the opponent's untapped creatures block
+     * one attacker each. Once a turn.
+     */
+    private static SpellAbility mirrorEntity(final Player ai, final List<SpellAbility> candidates, final Player opp,
+                                             final Predicate<SpellAbility> approve) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.isPlayerTurn(ai) || !ph.is(PhaseType.MAIN1) || LoopRunner.inPlay(ai, MIRROR_ENTITY) == null) {
+            return null;
+        }
+        int lands = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.isTapped()) {
+                lands++;
+            }
+        }
+        int attackers = 0;
+        for (final Card c : ai.getCreaturesInPlay()) {
+            if (!c.isTapped() && (!c.isSick() || c.hasKeyword(Keyword.HASTE))) {
+                attackers++;
+            }
+        }
+        int blockers = 0;
+        for (final Card b : opp.getCreaturesInPlay()) {
+            if (!b.isTapped()) {
+                blockers++;
+            }
+        }
+        if (lands < 1 || (long) lands * Math.max(0, attackers - blockers) < opp.getLife()) {
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && host.getName().equals(MIRROR_ENTITY) && sa.isAbility() && sa.costHasManaX()
+                    && sa.getActivationsThisTurn() == 0 && ai.equals(host.getController())) {
+                sa.setActivatingPlayer(ai);
+                sa.setXManaCostPaid(lands);
+                if (approve.test(sa)) {
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
     /** Whether playing the chain out in a copy of the game ends in a lethal Craterhoof. */
     public static boolean wins(final Player ai) {
-        if (ai == null || running() || !LoopRunner.inHand(ai, GLIMPSE) || !owns(ai, CRATERHOOF)) {
+        if (ai == null || running() || !LoopRunner.inHand(ai, GLIMPSE)
+                || !(owns(ai, CRATERHOOF) || owns(ai, GRAPESHOT) || owns(ai, PREDATOR_DRAGON))) {
             return false;
         }
         final String key = key(ai);
@@ -298,6 +473,15 @@ public final class ElfLoop {
                 return false;
             }
             for (int i = 0; i < MAX_STEPS; i++) {
+                if (simOpp.getLife() <= 0 || simOpp.hasLost()) {
+                    lastNote = "wins after " + i + " plays (the opponent is dead)"; // Grapeshot
+                    return true;
+                }
+                final Card dragon = LoopRunner.inPlay(simAi, PREDATOR_DRAGON);
+                if (dragon != null && dragon.getNetPower() >= simOpp.getLife() && !hasFlyingBlocker(simOpp)) {
+                    lastNote = "wins after " + i + " plays (Predator Dragon)";
+                    return true;
+                }
                 if (LoopRunner.inPlay(simAi, CRATERHOOF) != null && lethalNow(simAi, simOpp)) {
                     lastNote = "wins after " + i + " plays";
                     return true;
