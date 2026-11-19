@@ -35,7 +35,7 @@ import java.util.stream.Stream;
  *
  * @param <T> element type
  */
-public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, Serializable {
+public class FCollection<T> implements List<T>, RandomAccess, FCollectionView<T>, Cloneable, Serializable {
     private static final long serialVersionUID = -1664555336364294106L;
 
     private static final FCollection<?> EMPTY = new EmptyFCollection<>();
