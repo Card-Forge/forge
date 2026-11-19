@@ -413,11 +413,8 @@ public class SealedCardPoolGenerator {
         // TODO These permutations really should be completely generated
         String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         List<String> setCombos = new ArrayList<>();
-        if (nPacks == 2) {
-            if (sets.length == 2) {
-                setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[1]));
-            }
-        } else if (nPacks == 3) {
+
+        if (nPacks == 3) {
             if (sets.length >= 2) {
                 setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[0], ", ", sets[0]));
                 setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[0], ", ", sets[0]));
