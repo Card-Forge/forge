@@ -33,6 +33,8 @@ public class ModifierData {
     public boolean loseCommander;  //CardLoss: the deck's commanders are lost too.
     public int maxGold = -1;       //The most gold the player can hold. -1 sets no limit.
     public String[] blockedEnemyRewards; //Reward types enemies don't drop. A card reward without a cardName counts as "randomCard".
+    public int maxLifeBonus;       //Added to max life while the modifier is on.
+    public int maxLifeLostOnDefeat; //Max life lost for good each time the player loses a fight.
     public EffectData effect;      //Added to every duel, written for the enemies like the plane's global effect.
 
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */

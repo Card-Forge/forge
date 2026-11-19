@@ -253,7 +253,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void updateDifficulty(DifficultyData diff) {
-        maxLife = diff.startingLife;
+        maxLife = diff.startingLife + getModifiersMaxLifeBonus();
         this.difficultyData.startingShards = diff.startingShards;
         this.difficultyData.startingLife = diff.startingLife;
         this.difficultyData.startingMoney = diff.startingMoney;
@@ -355,10 +355,30 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setModifiers(Map<String, String> chosen) {
+        int oldMaxLifeBonus = getModifiersMaxLifeBonus();
         modifiers.clear();
         modifiers.putAll(chosen);
         gold = Math.min(gold, getMaxGold());
         onGoldChangeList.emit();
+        changeMaxLifeAndLife(getModifiersMaxLifeBonus() - oldMaxLifeBonus);
+    }
+
+    private int getModifiersMaxLifeBonus() {
+        return getActiveModifiers().stream().mapToInt(modifier -> modifier.maxLifeBonus).sum();
+    }
+
+    /** Takes the max life the chosen modifiers cost for losing a fight. */
+    public void loseModifierMaxLife() {
+        changeMaxLifeAndLife(-getActiveModifiers().stream().mapToInt(modifier -> modifier.maxLifeLostOnDefeat).sum());
+    }
+
+    /** Changes max life and life by the same amount, keeping both at 1 or more. */
+    private void changeMaxLifeAndLife(int amount) {
+        if (amount == 0)
+            return;
+        maxLife = Math.max(1, maxLife + amount);
+        life = Math.max(1, life + amount);
+        onLifeTotalChangeList.emit();
     }
 
     /** @return the most gold the chosen modifiers let the player hold, or Integer.MAX_VALUE when none sets a limit */
