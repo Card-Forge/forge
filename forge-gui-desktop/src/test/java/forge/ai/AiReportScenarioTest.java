@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.CardLists;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
@@ -128,6 +129,14 @@ public class AiReportScenarioTest extends AITest {
         SpellAbility first() { final List<SpellAbility> l = plays(); return l.isEmpty() ? null : l.get(0); }
         Card target(final SpellAbility sa) {
             return sa != null && sa.usesTargeting() ? sa.getTargets().getFirstTargetedCard() : null;
+        }
+        SpellAbility tokenAbility(final String card) {
+            for (final SpellAbility sa : plays()) {
+                if (sa.getHostCard() != null && card.equals(sa.getHostCard().getName()) && sa.getApi() == ApiType.Token) {
+                    return sa;
+                }
+            }
+            return null;
         }
         /** The land drops the AI would make, best first. */
         List<Card> landPlays() {
@@ -1717,6 +1726,29 @@ public class AiReportScenarioTest extends AITest {
                         if (e == c.ai) { return "Thoughtseize aimed at the AI itself"; }
                     }
                     return null;
+                }));
+        l.add(new Scenario("estrid-mask-own-target", "Estrid's Mask uses its friendly attachment preference instead of enchanting an opposing permanent", Fid.EXACT, M1, true,
+                c -> {
+                    final Card estrid = c.bf("Estrid, the Masked", c.ai);
+                    c.counters(estrid, CounterEnumType.LOYALTY, 3);
+                    c.bf("Grizzly Bears", c.ai);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
+                    if (sa == null) { return "Estrid did not activate its Mask ability" + c.why("Estrid, the Masked"); }
+                    final Card target = c.target(sa);
+                    return target != null && target.getController() == c.ai ? null : "Mask targeted " + target + " instead of an AI permanent";
+                }));
+        l.add(new Scenario("estrid-mask-no-friendly-target", "Estrid does not spend loyalty to give an opponent an Umbra Armor Aura when it has no friendly target", Fid.EXACT, M1, true,
+                c -> {
+                    final Card estrid = c.bf("Estrid, the Masked", c.ai);
+                    c.counters(estrid, CounterEnumType.LOYALTY, 3);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
+                    return sa == null ? null : "used the Mask ability on " + c.target(sa);
                 }));
         return l;
     }

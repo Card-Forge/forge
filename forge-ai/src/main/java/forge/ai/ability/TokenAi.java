@@ -161,6 +161,12 @@ public class TokenAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
+            if (isTargetedAuraToken(actualToken, sa)) {
+                return chooseTargetedAuraToken(ai, sa, actualToken, false)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
                 if (sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
@@ -291,7 +297,11 @@ public class TokenAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (sa.canTarget(ai)) {
+            if (isTargetedAuraToken(actualToken, sa)) {
+                if (!chooseTargetedAuraToken(ai, sa, actualToken, mandatory)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
+            } else if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
             } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -417,6 +427,27 @@ public class TokenAi extends SpellAbilityAi {
         // Apply static abilities
         ComputerUtilCard.applyStaticContPT(ai.getGame(), result, null);
         return result;
+    }
+
+    /**
+     * Targeted Aura tokens with an attachment AI logic must use the same controller preference as Aura spells.
+     * In particular, "Pump" is beneficial and should prefer our own permanents, not the opponent's.
+     */
+    private static boolean isTargetedAuraToken(final Card token, final SpellAbility sa) {
+        return token.isAura() && "Targeted".equals(sa.getParam("AttachedTo")) && token.hasSVar("AttachAILogic");
+    }
+
+    /** Select and add the target using the token's own AttachAILogic (e.g. Pump for Estrid's Mask). */
+    private static boolean chooseTargetedAuraToken(final Player ai, final SpellAbility sa,
+            final Card token, final boolean mandatory) {
+        // attachGeneralAI may filter the collection in place, so do not pass CardUtil's shared target list directly.
+        final CardCollection targetable = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+        final Card target = AttachAi.attachGeneralAI(ai, sa, targetable, mandatory, token, token.getSVar("AttachAILogic"));
+        if (target == null) {
+            return false;
+        }
+        sa.getTargets().add(target);
+        return true;
     }
 
     private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {
