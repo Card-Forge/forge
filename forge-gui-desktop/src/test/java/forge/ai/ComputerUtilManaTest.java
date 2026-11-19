@@ -5,6 +5,7 @@ import forge.ai.simulation.SimulationTest;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -129,6 +130,39 @@ public class ComputerUtilManaTest extends SimulationTest {
             assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
             assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
         }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiCountsLotusForACheapSpell() {
+        final Player p = sacrificeBoard(0, "Lotus Bloom");
+        assertFalse(canPay(p, "Savannah Lions"), "the AI keeps a Lotus for a spell of mana value 4 or more");
+
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Savannah Lions")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiPaysChannelLifeAtLowLife() {
+        final Player p = sacrificeBoard(0);
+        p.setLife(5, null);
+        final Card channelEffect = addCardToZone("Channel", p, ZoneType.Command);
+        channelEffect.addSpellAbility(AbilityFactory.getAbility(channelEffect, "ABMana"));
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Sol Ring")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiCountsATreasureWhoseSacrificeIsPunished() {
+        final Player p = sacrificeBoard(0);
+        addToken("c_a_treasure_sac", p);
+        addCard("Bloodroot Apothecary", p.getGame().getPlayers().get(0));
+        assertFalse(canPay(p, "Savannah Lions"), "the AI won't take two poison counters for a Treasure");
+
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Savannah Lions")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
     }
 
     @Test
