@@ -13,6 +13,10 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
@@ -102,6 +106,16 @@ public class CloneAi extends SpellAbilityAi {
                         sa.getParam("Choices"), host.getController(), host, sa);
 
                 chance = !choices.isEmpty();
+                if (chance && copyIsNoCreature(sa) && !mandatory) {
+                    boolean worth = false;
+                    for (final Card c : choices) {
+                        if (!ownLegend(aiPlayer, c) && nonCreatureCopyValue(aiPlayer, c) > 0) {
+                            worth = true;
+                            break;
+                        }
+                    }
+                    chance = worth; // a copy that is no creature of a vanilla one is the rock that it already is
+                }
             }
         }
 
@@ -218,6 +232,25 @@ public class CloneAi extends SpellAbilityAi {
             options = CardLists.filter(options, CardPredicates.sharesNameWith(host).negate());
         }
 
+        if (copyIsNoCreature(sa)) {
+            Card best = null;
+            int bestValue = 0;
+            for (final Card c : options) {
+                if (ownLegend(ai, c)) {
+                    continue;
+                }
+                final int value = nonCreatureCopyValue(ai, c);
+                if (value > bestValue) {
+                    bestValue = value;
+                    best = c;
+                }
+            }
+            if (best != null) {
+                return best;
+            }
+            // nothing on the table is worth the copy: the vanilla ones are only a name, take the least harmful (not a legend of its own)
+        }
+
         Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);
 
         // Superior Spider-Man: copy Doomsday Excruciator only when emptying the libraries wins (see ComboPlan.cloneChoice)
@@ -230,6 +263,61 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         return choice;
+    }
+
+    /**
+     * A copy that is not a creature (Machine God's Effigy: "except it's an artifact", "it's not a creature") has no body: the
+     * 8/8 that makes the original the best creature on the table is a vanilla mana rock as a copy. Only what a permanent
+     * does without fighting is worth copying: the enters-the-battlefield trigger (it fires for the copy), the abilities
+     * that are not about combat, and the static ones that work on the rest of the table. 0 for the vanilla.
+     */
+    public static int nonCreatureCopyValue(final Player ai, final Card c) {
+        int value = 0;
+        for (final Trigger t : c.getTriggers()) {
+            final TriggerType mode = t.getMode();
+            if (mode == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Destination"))
+                    && t.getParamOrDefault("ValidCard", "").startsWith("Card.Self")) {
+                value += 60;
+            } else if (mode == TriggerType.Phase || mode == TriggerType.Drawn || mode == TriggerType.SpellCast
+                    || mode == TriggerType.ChangesZone || mode == TriggerType.LifeGained) {
+                value += 25;
+            }
+        }
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (st.checkMode(StaticAbilityMode.Continuous) && !"Self".equals(st.getParam("Affected"))
+                    && !"Card.Self".equals(st.getParam("Affected"))) {
+                value += 40;
+            } else if (!st.checkMode(StaticAbilityMode.Continuous)) {
+                value += 20;
+            }
+        }
+        for (final SpellAbility a : c.getSpellAbilities()) {
+            if (a.isAbility() && !a.isManaAbility()) {
+                value += 35;
+            }
+        }
+        return value;
+    }
+
+    /** The copy is not a creature, so its value is what it does and not what it weighs. */
+    private static boolean copyIsNoCreature(final SpellAbility sa) {
+        return sa.hasParam("RemoveCardTypes") && "True".equalsIgnoreCase(sa.getParam("RemoveCardTypes"));
+    }
+
+    /**
+     * The legend rule: the copy of a legendary permanent is legendary, and the AI keeps only one of two with the same name. That
+     * is the AI's own legend, and also the opponent's one when the AI has a permanent of that name already.
+     */
+    private static boolean ownLegend(final Player ai, final Card c) {
+        if (!c.getType().isLegendary()) {
+            return false;
+        }
+        for (final Card mine : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (mine.getName().equals(c.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected Card getCloneTarget(final SpellAbility sa) {

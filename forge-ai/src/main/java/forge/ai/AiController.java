@@ -1019,6 +1019,12 @@ public class AiController {
             return canPlay;
         }
 
+        if (ActivationGuard.tooPainfulToPay(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "tap-damage", "heuristic");
+            return AiPlayDecision.CantAfford; // Manabarbs: the lands that pay for it cost more life than the AI can spare
+        }
+
         if (ActivationGuard.givesMoreThanItTakes(player, sa)) {
             sa.resetTargets();
             VetoLog.refused(player, sa, "gift-exceeds-target", "heuristic");
