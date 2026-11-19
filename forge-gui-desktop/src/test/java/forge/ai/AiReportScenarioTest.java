@@ -615,6 +615,37 @@ public class AiReportScenarioTest extends AITest {
                     sa.setActivatingPlayer(c.ai);
                     return ActivationGuard.tooPainfulToPay(c.ai, sa) ? "the indestructible Myr was dropped as a blocker" : null;
                 }));
+        l.add(new Scenario("manabarbs-doran-threat", "Under Doran, the Siege Tower a 0/5 deals 5 in combat: it is a threat", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(7, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Doran, the Siege Tower", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "Doran assigns damage by toughness: 5 next turn was not in the reserve";
+                }));
+        l.add(new Scenario("manabarbs-arcades-defender", "Under Arcades a Wall of Stone attacks for its toughness", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(8, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp); c.bf("Arcades, the Strategist", c.opp); c.bf("Wall of Stone", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the defender that Arcades lets attack was left out of the reserve";
+                }));
+        l.add(new Scenario("manabarbs-regenerating-victim", "A Hill Giant with a regeneration shield is not removed by a Lightning Bolt: it still attacks", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(4, null); c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Manabarbs", c.opp); c.bf("Hill Giant", c.opp).incShieldCount(); },
+                c -> {
+                    final SpellAbility sa = c.hand("Lightning Bolt", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Hill Giant")) { sa.getTargets().add(k); }
+                    }
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the shielded Hill Giant was counted as removed by the Bolt";
+                }));
+        l.add(new Scenario("deathtouch-plan-stays-consistent", "The Craw Wurm that stays home does not send a Grizzly Bears alone into the blocker meant for it", Fid.APPROX, M1, true,
+                c -> { c.bf("Craw Wurm", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Typhoid Rats", c.opp); },
+                c -> {
+                    final boolean bears = c.attackers().stream().anyMatch(a -> a.getName().equals("Grizzly Bears"));
+                    final boolean wurm = c.attackers().stream().anyMatch(a -> a.getName().equals("Craw Wurm"));
+                    return bears && !wurm ? "the Bears went in alone against the blocker that was counted as busy with the Wurm" : null;
+                }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
                 c -> {

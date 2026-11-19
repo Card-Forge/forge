@@ -197,7 +197,8 @@ public final class ActivationGuard {
         final List<Card> availableBlockers = new ArrayList<>();
         for (final Player opp : ai.getOpponents()) {
             for (final Card c : opp.getCreaturesInPlay()) {
-                if (!gone.contains(c) && c.getNetPower() > 0 && !c.hasKeyword(Keyword.DEFENDER)
+                // what it deals in combat (toughness under Doran), and whether it may attack at all (a defender under Arcades may)
+                if (!gone.contains(c) && c.getNetCombatDamage() > 0 && !StaticAbilityCantAttackBlock.cantAttack(c, ai)
                         && !(c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step."))) {
                     attackers.add(c);
                 }
@@ -205,7 +206,8 @@ public final class ActivationGuard {
         }
         for (final Card blocker : ai.getCreaturesInPlay()) {
             // A creature that already carries lethal damage (or deathtouch damage, e.g. in Main 2) is dead before it can
-            // block, unless it cannot be destroyed (indestructible).
+            // block, unless it cannot be destroyed (indestructible). One that regenerates is tapped by it and cannot block
+            // either, so a regeneration shield changes nothing here.
             final boolean doomed = (blocker.getLethalDamage() <= 0 || blocker.hasBeenDealtDeathtouchDamage())
                     && blocker.canBeDestroyed();
             if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker) && !doomed) {
@@ -239,7 +241,7 @@ public final class ActivationGuard {
                 return bySlack;
             }
             final int byRequirement = Integer.compare(b.minBlockers, a.minBlockers);
-            return byRequirement != 0 ? byRequirement : Integer.compare(b.attacker.getNetPower(), a.attacker.getNetPower());
+            return byRequirement != 0 ? byRequirement : Integer.compare(b.attacker.getNetCombatDamage(), a.attacker.getNetCombatDamage());
         });
 
         int threat = 0;
@@ -251,7 +253,7 @@ public final class ActivationGuard {
                     candidates.add(blocker);
                 }
             }
-            final int power = Math.max(0, attacker.getNetPower());
+            final int power = Math.max(0, attacker.getNetCombatDamage());
             if (assignment.maxBlockers < assignment.minBlockers || candidates.size() < assignment.minBlockers) {
                 // menace / a blocker restriction: not enough legal blockers
                 threat += combatDamage(ai, attacker, attacker.hasDoubleStrike() ? power * 2 : power);
@@ -341,7 +343,7 @@ public final class ActivationGuard {
                 case DealDamage: {
                     final int dmg = AbilityUtils.calculateAmount(host, node.getParamOrDefault("NumDmg", "0"), node);
                     for (final Card c : aimedCards(node)) {
-                        if (c.isCreature() && dmg > 0 && c.canBeDestroyed() && c.getLethalDamage() <= dmg) {
+                        if (c.isCreature() && dmg > 0 && destroyable(c, node) && c.getLethalDamage() <= dmg) {
                             gone.add(c);
                         }
                     }
@@ -379,7 +381,12 @@ public final class ActivationGuard {
     }
 
     private static boolean destroyable(final Card c, final SpellAbility node) {
-        return c.canBeDestroyed() && (node.hasParam("NoRegen") || c.getShieldCount() == 0);
+        return c.canBeDestroyed() && !regenerates(c, node);
+    }
+
+    /** A regeneration shield saves the creature from this destruction (it stays, tapped) unless the effect forbids it. */
+    private static boolean regenerates(final Card c, final SpellAbility node) {
+        return !node.hasParam("NoRegen") && c.getShieldCount() > 0 && c.canBeShielded();
     }
 
     private static boolean leavesBattlefield(final SpellAbility node) {
@@ -403,7 +410,7 @@ public final class ActivationGuard {
             if (api == ApiType.DestroyAll && !destroyable(c, node)) {
                 continue;
             }
-            if (api == ApiType.DamageAll && (dmg <= 0 || !c.canBeDestroyed() || c.getLethalDamage() > dmg)) {
+            if (api == ApiType.DamageAll && (dmg <= 0 || !destroyable(c, node) || c.getLethalDamage() > dmg)) {
                 continue;
             }
             swept.add(c);
