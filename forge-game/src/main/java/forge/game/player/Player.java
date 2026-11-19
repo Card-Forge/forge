@@ -1921,6 +1921,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         attackedThisTurn.computeIfAbsent(e, k -> Lists.newArrayList()).add(c);
     }
 
+    /** For a copy of the game (GameCopier): what was attacked this turn, a defender that has since left included. */
+    public final List<GameEntity> getDefendersAttackedThisTurn() {
+        return Lists.newArrayList(attackedThisTurn.keySet());
+    }
+
     public final Iterable<Player> getAttackedPlayersMyTurn() {
         return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
     }

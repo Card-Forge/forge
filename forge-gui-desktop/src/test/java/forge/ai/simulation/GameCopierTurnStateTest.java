@@ -58,6 +58,40 @@ public class GameCopierTurnStateTest extends SimulationTest {
         AssertJUnit.assertEquals(1, copy.getPlayers().get(1).getCreaturesAttackedThisTurn().size());
     }
 
+    /** Raid: the only attack this turn killed a planeswalker, which is no longer there to be a defender. */
+    @Test
+    public void anAttackOnAPlaneswalkerThatHasLeftIsKeptForRaid() {
+        final Game game = newGameInMain2(3);
+        final Player p = game.getPlayers().get(1);
+        final Card bears = addCard("Grizzly Bears", p);
+        final Card jace = addCard("Jace Beleren", game.getPlayers().get(0));
+        p.addCreaturesAttackedThisTurn(forge.game.card.CardCopyService.getLKICopy(bears), jace);
+        game.getAction().moveToGraveyard(jace, null);
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        AssertJUnit.assertEquals(1, copy.getPlayers().get(1).getCreaturesAttackedThisTurn().size());
+    }
+
+    /** Morbid with YouCtrl: a stolen creature that died is recorded under who controlled it, not its owner. */
+    @Test
+    public void aStolenCreatureThatDiedKeepsItsController() {
+        final Game game = newGameInMain2(3);
+        final Player owner = game.getPlayers().get(0);
+        final Player thief = game.getPlayers().get(1);
+        final Card bears = addCard("Grizzly Bears", owner);
+        bears.setController(thief, game.getNextTimestamp());
+        game.getAction().moveToGraveyard(bears, null);
+        final Card died = owner.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield).get(0);
+        AssertJUnit.assertEquals(thief, died.getController());
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final Card copied = copy.getPlayers().get(0).getZone(ZoneType.Graveyard)
+                .getCardsAddedThisTurn(ZoneType.Battlefield).get(0);
+        AssertJUnit.assertEquals(copy.getPlayers().get(1), copied.getController());
+    }
+
     /** The copy sets the life from the starting total: a loss there must not undo a gain this turn, nor a gain add one. */
     @Test
     public void theLifeGainedThisTurnIsCountedAsInTheGame() {

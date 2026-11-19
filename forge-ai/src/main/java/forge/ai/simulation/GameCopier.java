@@ -378,10 +378,10 @@ public class GameCopier {
             if (newPlayer == null) {
                 continue;
             }
-            final List<GameEntity> defenders = new ArrayList<>(origGame.getPlayers());
-            defenders.addAll(origGame.getCardsIn(ZoneType.Battlefield));
-            for (GameEntity defender : defenders) {
-                final GameEntity newDefender = defender instanceof Player p ? playerMap.get(p) : cardMap.get((Card) defender);
+            for (GameEntity defender : origPlayer.getDefendersAttackedThisTurn()) {
+                // a planeswalker or battle that has since left the battlefield: its last known information
+                final GameEntity newDefender = defender instanceof Player p ? playerMap.get(p)
+                        : cardMap.containsKey((Card) defender) ? cardMap.get((Card) defender) : lkiCopy(newGame, (Card) defender, aiPlayer);
                 for (Card lki : origPlayer.getCreaturesAttackedThisTurn(defender)) {
                     final Card copy = lkiCopy(newGame, lki, aiPlayer);
                     if (copy != null && newDefender != null) {
@@ -425,7 +425,13 @@ public class GameCopier {
                 }
                 base = createCardCopy(newGame, owner, lki, aiPlayer);
             }
-            return CardCopyService.getLKICopy(base);
+            final Card copy = CardCopyService.getLKICopy(base);
+            // a stolen creature is recorded under who controlled it, not its owner (morbid with YouCtrl)
+            final Player controller = lki.getController() == null ? null : playerMap.get(lki.getController());
+            if (controller != null && !controller.equals(copy.getController())) {
+                copy.setController(controller, copy.getGameTimestamp());
+            }
+            return copy;
         } catch (final RuntimeException e) {
             return null; // history is a refinement: a card that cannot be rebuilt is left out
         }
@@ -439,29 +445,14 @@ public class GameCopier {
         for (int pass = 0; pass < 2; pass++) {
             final List<Card> origList = pass == 0 ? origGame.getLeftBattlefieldThisTurn() : origGame.getLeftGraveyardThisTurn();
             for (Card lki : new ArrayList<>(origList)) {
-                try {
-                    final Card now = origGame.findById(lki.getId());
-                    Card base = now == null ? null : cardMap.get(now);
-                    if (base == null) {
-                        // a token (it ceased to exist): rebuild it from the last known information
-                        final Player owner = playerMap.get(lki.getOwner());
-                        if (owner == null) {
-                            continue;
-                        }
-                        base = createCardCopy(newGame, owner, lki, aiPlayer);
-                    }
-                    final Card copy = CardCopyService.getLKICopy(base);
-                    final Player controller = lki.getController() == null ? null : playerMap.get(lki.getController());
-                    if (controller != null && !controller.equals(copy.getController())) {
-                        copy.setController(controller, copy.getGameTimestamp());
-                    }
-                    if (pass == 0) {
-                        newGame.addLeftBattlefieldThisTurn(copy);
-                    } else {
-                        newGame.addLeftGraveyardThisTurn(copy);
-                    }
-                } catch (final RuntimeException e) {
-                    // history is a refinement: a card that cannot be rebuilt is left out
+                final Card copy = lkiCopy(newGame, lki, aiPlayer);
+                if (copy == null) {
+                    continue;
+                }
+                if (pass == 0) {
+                    newGame.addLeftBattlefieldThisTurn(copy);
+                } else {
+                    newGame.addLeftGraveyardThisTurn(copy);
                 }
             }
         }
