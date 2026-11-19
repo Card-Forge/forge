@@ -11,6 +11,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayLife;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -128,6 +129,26 @@ public class TapAi extends TapAiBase {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    /** Above this life even a one-drop on curve is worth two life for the land. */
+    private static final int LOW_LIFE_FOR_ONE_DROP = 14;
+
+    /**
+     * Whether the AI can afford to pay life for a land to enter untapped: it must stay above a floor of 10 (the burn that
+     * the deck across the table may hold, a life total of 10 in Adventure mode is already low) and above what the creatures
+     * on the other side hit for, plus five.
+     */
+    static boolean lifeCanBeSpared(final Player payer, final int amount) {
+        int threat = 0;
+        for (final Player opp : payer.getOpponents()) {
+            for (final Card c : opp.getCreaturesInPlay()) {
+                if (!c.hasKeyword(Keyword.DEFENDER) && c.getNetCombatDamage() > 0) {
+                    threat += c.getNetCombatDamage();
+                }
+            }
+        }
+        return payer.getLife() - amount >= Math.max(10, threat + 5);
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Check for shocklands and similar ETB replacement effects
@@ -137,7 +158,7 @@ public class TapAi extends TapAiBase {
                 if (part instanceof CostPayLife) {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
-                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
+                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa) && lifeCanBeSpared(payer, amount)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
                         // Check if the AI has enough lands to play the card
                         final CardCollection playable = CardLists.filter(
@@ -152,6 +173,12 @@ public class TapAi extends TapAiBase {
                         for (Card c : playable) {
                             if (c.isAura() && !creatureInPlay) {
                                 continue; // an Aura with nothing to enchant is not a reason to pay 2 life
+                            }
+                            if (c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
+                                continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
+                            }
+                            if (c.getCMC() < 2 && payer.getLife() < LOW_LIFE_FOR_ONE_DROP) {
+                                continue; // a one-drop is not worth the life while it is not plentiful
                             }
                             // Check if the AI can pay for the card with the mana it has and intends to play it
                             // canPlaySa can't be asked here: the land is not on the battlefield yet, so the

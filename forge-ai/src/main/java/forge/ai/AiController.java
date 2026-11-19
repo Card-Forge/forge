@@ -1031,6 +1031,18 @@ public class AiController {
             return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
         }
 
+        if (PlayRelevance.pointlessPump(player, sa) != null) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "pump-outside-combat", "heuristic");
+            return AiPlayDecision.DoesntImpactCombat; // +X/+X for a creature that is tapped and not in the fight
+        }
+
+        if (ActivationGuard.badBounce(player, sa) != null) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "bounce-feeds-opponent", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Unsummon on a Vendilion Clique: they cast it again for another trigger
+        }
+
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
