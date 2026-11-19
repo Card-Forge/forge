@@ -550,13 +550,62 @@ public class AiReportScenarioTest extends AITest {
                     final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
                     return d == 1 ? null : "the Elves and one land pay it (1 life), the estimate is " + d;
                 }));
-        l.add(new Scenario("manabarbs-estimate-multi", "A land that makes two mana is tapped once: Mind Stone ({2}) from Ancient Tomb costs one tap", Fid.APPROX, M1, true,
-                c -> { c.bf("Ancient Tomb", c.ai); c.bf("Mountain", c.ai); c.bf("Manabarbs", c.opp); },
+        l.add(new Scenario("manabarbs-estimate-multi", "A land that makes two mana is tapped once: Mind Stone ({2}) from Ancient Tomb costs Manabarbs 1 plus its own 2", Fid.APPROX, M1, true,
+                c -> { c.bf("Ancient Tomb", c.ai); c.bf("Manabarbs", c.opp); },
                 c -> {
                     final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
                     sa.setActivatingPlayer(c.ai);
                     final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
-                    return d == 1 ? null : "Mind Stone ({2}) from the Tomb is one tap (1 life), the estimate is " + d;
+                    return d == 3 ? null : "Mind Stone ({2}) from the Tomb is one tap: Manabarbs 1 + the Tomb's own 2, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-pain-colourless", "Karplusan Forest tapped for its colourless ability costs only Manabarbs (1), Mountain 1 more", Fid.APPROX, M1, true,
+                c -> { c.bf("Karplusan Forest", c.ai); c.bf("Mountain", c.ai); c.bf("Manabarbs", c.opp); c.hand("Mind Stone", c.ai); },
+                c -> {
+                    final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d == 2 ? null : "the colourless ability should cost 1 and the Mountain 1, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-pain-coloured", "The {G} of Karplusan Forest also hurts (1 + 1), Mountain adds 1", Fid.APPROX, M1, true,
+                c -> { c.bf("Karplusan Forest", c.ai); c.bf("Mountain", c.ai); c.bf("Manabarbs", c.opp); c.hand("Grizzly Bears", c.ai); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d == 3 ? null : "Forest {G} (2) + Mountain (1) expected, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-pain-river", "Underground River's coloured ability counts its own damage under Manabarbs", Fid.APPROX, M1, true,
+                c -> { c.bf("Underground River", c.ai); c.bf("Island", c.ai); c.bf("Manabarbs", c.opp); c.hand("Mind Stone", c.ai); },
+                c -> {
+                    final SpellAbility sa = c.hand("Mind Stone", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final int d = ComputerUtilMana.estimateTapDamage(c.ai, sa);
+                    return d == 2 ? null : "colourless River (1) + Island (1) expected, the estimate is " + d;
+                }));
+        l.add(new Scenario("manabarbs-gorm-needs-two", "Gorm the Great must be blocked by two creatures: one blocker cannot stop it", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp);
+                       c.bf("Glorious Anthem", 2, c.opp); c.bf("Gorm the Great", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the lone Bears was counted as blocking Gorm";
+                }));
+        l.add(new Scenario("manabarbs-dictate-threat", "Dictate of the Twin Gods doubles the next attack: a 3/3 hits for 6", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(10, null); c.bf("Forest", 2, c.ai); c.hand("Grizzly Bears", c.ai); c.bf("Manabarbs", c.opp);
+                       c.bf("Dictate of the Twin Gods", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final SpellAbility sa = c.hand("Grizzly Bears", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the doubled combat damage was not in the reserve";
+                }));
+        l.add(new Scenario("manabarbs-doomed-blocker", "A Grizzly Bears with lethal damage marked does not block next turn", Fid.APPROX, "MAIN2", true,
+                c -> { c.ai.setLife(6, null); c.bf("Forest", 2, c.ai); c.bf("Grizzly Bears", c.ai).setDamage(2); c.hand("Grizzly Bears", c.ai);
+                       c.bf("Manabarbs", c.opp); c.bf("Craw Wurm", c.opp); },
+                c -> {
+                    SpellAbility sa = null;
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Hand)) { sa = k.getFirstSpellAbility(); }
+                    sa.setActivatingPlayer(c.ai);
+                    return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the dying Bears was counted as a blocker";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },

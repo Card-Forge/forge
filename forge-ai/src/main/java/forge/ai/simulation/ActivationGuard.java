@@ -204,7 +204,9 @@ public final class ActivationGuard {
             }
         }
         for (final Card blocker : ai.getCreaturesInPlay()) {
-            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker)) {
+            // A creature that already carries lethal damage (or deathtouch damage, e.g. in Main 2) is dead before it can block.
+            if (!blocker.isTapped() && !gone.contains(blocker) && !spent.contains(blocker)
+                    && blocker.getLethalDamage() > 0 && !blocker.hasBeenDealtDeathtouchDamage()) {
                 availableBlockers.add(blocker);
             }
         }
@@ -220,7 +222,11 @@ public final class ActivationGuard {
                     candidates.add(blocker);
                 }
             }
-            assignments.add(new ThreatTarget(attacker, candidates, Math.max(1, limits.getLeft()), limits.getRight()));
+            int min = Math.max(1, limits.getLeft());
+            if (attacker.hasKeyword("CARDNAME must be blocked by two or more creatures if able.")) {
+                min = Math.max(min, 2); // Gorm the Great: with fewer blockers than that, the estimate treats it as unblocked
+            }
+            assignments.add(new ThreatTarget(attacker, candidates, min, limits.getRight()));
         }
 
         assignments.sort((a, b) -> {
@@ -245,7 +251,8 @@ public final class ActivationGuard {
             }
             final int power = Math.max(0, attacker.getNetPower());
             if (assignment.maxBlockers < assignment.minBlockers || candidates.size() < assignment.minBlockers) {
-                threat += power; // menace / a blocker restriction: not enough legal blockers
+                // menace / a blocker restriction: not enough legal blockers
+                threat += combatDamage(ai, attacker, attacker.hasDoubleStrike() ? power * 2 : power);
                 continue;
             }
 
@@ -266,10 +273,15 @@ public final class ActivationGuard {
             if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 // Double strike can deal damage in both combat-damage steps. Do not assume a blocker survives the first one.
                 final int damage = attacker.hasDoubleStrike() ? power * 2 : power;
-                threat += Math.max(0, damage - blockedDamage);
+                threat += combatDamage(ai, attacker, Math.max(0, damage - blockedDamage));
             }
         }
         return threat;
+    }
+
+    /** What this much combat damage from the attacker comes to after the replacement effects on the AI (Dictate of the Twin Gods, Furnace of Rath). */
+    private static int combatDamage(final Player ai, final Card attacker, final int damage) {
+        return damage <= 0 ? 0 : Math.max(0, ai.staticReplaceDamage(damage, attacker, true));
     }
 
     private static final class ThreatTarget {

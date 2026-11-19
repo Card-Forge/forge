@@ -993,16 +993,16 @@ public class ComputerUtilMana {
         if (sources.isEmpty() || candidates.size() < 2) {
             return candidates;
         }
-        final Map<Card, Integer> damage = new HashMap<>();
+        final Map<SpellAbility, Integer> damage = new IdentityHashMap<>();
         boolean any = false;
         for (final SpellAbility ma : candidates) {
-            any |= damage.computeIfAbsent(ma.getHostCard(), c -> tapDamage(ai, c, sources)) > 0;
+            any |= damage.computeIfAbsent(ma, m -> tapDamage(ai, m, sources)) > 0;
         }
         if (!any) {
             return candidates;
         }
         final List<SpellAbility> list = new ArrayList<>(candidates);
-        list.sort(Comparator.comparingInt((SpellAbility ma) -> damage.get(ma.getHostCard())));
+        list.sort(Comparator.comparingInt((SpellAbility ma) -> damage.get(ma)));
         return list;
     }
 
@@ -1994,6 +1994,41 @@ public class ComputerUtilMana {
     }
 
     /**
+     * The life that this one mana ability costs: what the permanents of the table do to whoever taps its land, plus the
+     * damage of the ability itself (Ancient Tomb, the coloured ability of a pain land, City of Brass). Karplusan Forest's
+     * colourless ability costs only the former, its coloured ones both.
+     */
+    private static int tapDamage(final Player ai, final SpellAbility ma, final List<TapDamageSource> sources) {
+        return tapDamage(ai, ma.getHostCard(), sources) + ownTapDamage(ai, ma);
+    }
+
+    /** The damage to the controller that the mana ability itself deals: its own sub-abilities and the Taps triggers of its host. */
+    private static int ownTapDamage(final Player ai, final SpellAbility ma) {
+        final Card host = ma.getHostCard();
+        if (host == null) {
+            return 0;
+        }
+        int total = 0;
+        for (SpellAbility sub = ma.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() == ApiType.DealDamage && sub.getParamOrDefault("Defined", "").equals("You")) {
+                total += Math.max(0, replaceTapDamage(ai,
+                        AbilityUtils.calculateAmount(host, sub.getParamOrDefault("NumDmg", "1"), sub), host));
+            }
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.Taps && t.getMode() != TriggerType.TapsForMana) {
+                continue;
+            }
+            final SpellAbility effect = t.ensureAbility();
+            if (effect != null && effect.getApi() == ApiType.DealDamage && effect.getParamOrDefault("Defined", "").equals("You")) {
+                total += Math.max(0, replaceTapDamage(ai,
+                        AbilityUtils.calculateAmount(host, effect.getParamOrDefault("NumDmg", "1"), effect), host));
+            }
+        }
+        return total;
+    }
+
+    /**
      * Applies the damage replacements that can affect a tap trigger. Player.staticReplaceDamage covers the older global
      * replacements, while Ojer Axonil is a card-specific DamageDone replacement and is not included there yet.
      * Check both possible orders with the existing replacements and keep the larger result: underestimating this cost
@@ -2064,7 +2099,7 @@ public class ComputerUtilMana {
         final List<TapDamageSource> sources = tapDamageSources(ai);
         int damage = 0;
         for (final SpellAbility tap : payment) {
-            damage += tapDamage(ai, tap.getHostCard(), sources);
+            damage += tapDamage(ai, tap, sources);
         }
         return damage;
     }
