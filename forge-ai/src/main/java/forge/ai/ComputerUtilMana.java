@@ -392,7 +392,7 @@ public class ComputerUtilMana {
 
                 // If a manland was previously animated this turn, do not tap it to animate another manland
                 if (saHost.isLand() && ma.getHostCard().isLand()
-                        && ai.getController().isAI()
+                        && ai.isAI()
                         && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
                     continue;
                 }
@@ -1501,7 +1501,7 @@ public class ComputerUtilMana {
     // for the future spell to be cast in another phase. However, if the spell ability that is
     // being considered for casting is high priority, then mana source reservation will be ignored.
     private static boolean isManaSourceReserved(Player ai, Card sourceCard) {
-        if (!(ai.getController() instanceof PlayerControllerAi)) {
+        if (!ai.isAI() || !(ai.getController() instanceof PlayerControllerAi)) {
             return false;
         }
 
@@ -1878,7 +1878,7 @@ public class ComputerUtilMana {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
                 ai.getCardsIn(ZoneType.Command));
         final List<Card> manaSources = CardLists.filter(list, c -> {
-            if (ComputerUtil.sacrificePunished(ai, c) && c.isInZone(ZoneType.Battlefield)) {
+            if (ai.isAI() && ComputerUtil.sacrificePunished(ai, c) && c.isInZone(ZoneType.Battlefield)) {
                 return false; // a Treasure that gives the AI poison counters when it is sacrificed (Bloodroot Apothecary)
             }
             for (final SpellAbility am : getAIPlayableMana(c)) {
@@ -2175,7 +2175,7 @@ public class ComputerUtilMana {
         if (lifeCost <= 0) {
             return 1;
         }
-        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        int minimumLife = player.isAI() && sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
         if (player.cantLoseForZeroOrLessLife()) {
             minimumLife = 0;
         }
@@ -2201,7 +2201,7 @@ public class ComputerUtilMana {
                 return false;
             }
         }
-        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        int minimumLife = player.isAI() && sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
         if (player.cantLoseForZeroOrLessLife()) {
             minimumLife = 0;
         }
