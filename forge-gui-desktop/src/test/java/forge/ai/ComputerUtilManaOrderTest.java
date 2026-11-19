@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -404,6 +405,22 @@ public class ComputerUtilManaOrderTest extends SimulationTest {
         final CardCollection used = sourcesToPay(p, "Grizzly Bears", "1");
         assertEquals(used.size(), 1);
         assertTrue(used.contains(city), "expected City of Brass to pay, got " + used);
+    }
+
+    @Test
+    public void cityOfBrassDoesNotPayAtOneLife() {
+        // at 1 life the City's damage would be lethal, so a Treasure or a Lotus Petal pays instead
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        p.setLife(1, null);
+        final Card city = addCard("City of Brass", p);
+        addCard("Lotus Petal", p);
+        addToken("c_a_treasure_sac", p);
+
+        final CardCollection used = sourcesToPay(p, "Grizzly Bears", "1");
+        assertEquals(used.size(), 1);
+        assertFalse(used.contains(city), "expected City of Brass to stay untapped, got " + used);
     }
 
     @Test

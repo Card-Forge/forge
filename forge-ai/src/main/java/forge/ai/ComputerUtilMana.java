@@ -331,7 +331,14 @@ public class ComputerUtilMana {
                     break;
                 case "Treasure":
                     // Try to spend only one Treasure if possible
-                    if (paidSoFar.stream().anyMatch(paid -> paid.getHostCard() != null && paid.getHostCard().getType().hasSubtype("Treasure"))) {
+                    boolean treasurePaid = false;
+                    for (SpellAbility paid : paidSoFar) {
+                        if (paid.getHostCard() != null && paid.getHostCard().getType().hasSubtype("Treasure")) {
+                            treasurePaid = true;
+                            break;
+                        }
+                    }
+                    if (treasurePaid) {
                         break;
                     }
                     filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
