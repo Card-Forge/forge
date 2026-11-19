@@ -120,6 +120,10 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return true;
         }
 
+        if (sa.isSpell() && hasAnotherUseThanDamage(hostcard)) {
+            return false; // Fire // Ice: the other half draws a card; two damage to the face is not what the card is for
+        }
+
         final TargetRestrictions restrictions = sa.getTargetRestrictions();
         if (restrictions != null && restrictions.canTgtPlayer() && !restrictions.canTgtCreature() && isFaceBurnWorthCasting(comp, sa)) {
             return true; // nothing else it could hit
@@ -170,6 +174,21 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             }
         }
 
+        return false;
+    }
+
+    /** A split card (Fire // Ice) whose other half does something else than damage. */
+    private static boolean hasAnotherUseThanDamage(final Card host) {
+        if (host == null || !host.isSplitCard()) {
+            return false;
+        }
+        for (final forge.card.CardStateName name : new forge.card.CardStateName[] { forge.card.CardStateName.LeftSplit, forge.card.CardStateName.RightSplit }) {
+            final forge.game.card.CardState state = host.getState(name);
+            final SpellAbility first = state == null ? null : state.getFirstAbility();
+            if (first != null && first.getApi() != forge.game.ability.ApiType.DealDamage) {
+                return true;
+            }
+        }
         return false;
     }
 }

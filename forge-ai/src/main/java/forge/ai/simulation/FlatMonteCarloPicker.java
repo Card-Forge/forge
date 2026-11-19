@@ -1,18 +1,14 @@
 package forge.ai.simulation;
 
-import forge.ai.AiAttackController;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
+import forge.ai.*;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -21,7 +17,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.ai.ComputerUtilCard;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
@@ -122,7 +117,7 @@ public final class FlatMonteCarloPicker {
         private static final long serialVersionUID = 1L;
 
         RolloutTooSlow() {
-            super("rollout too slow", null, false, false);
+            super("rollout too slow");
         }
     }
 
@@ -897,6 +892,9 @@ public final class FlatMonteCarloPicker {
                 continue; // the heuristics have set the target up again, or no longer want the play
             }
             for (final GameObject target : alternativeTargets(player, sa, variantsLeft)) {
+                if (wastedOnHarmless(player, sa, target)) {
+                    continue;
+                }
                 cands.add(new Candidate(sa, target));
                 variantsLeft--;
             }
@@ -946,10 +944,21 @@ public final class FlatMonteCarloPicker {
                 extrasLeft--;
                 continue;
             }
+            if (ComputerUtil.cannotPayPact(player, sa)) {
+                continue; // a pact that cannot be paid at the next upkeep loses the game
+            }
             final SpellAbility targeting = singleTargetingAbility(sa);
+            if (targeting != null && targeting.getTargetRestrictions() != null && targeting.getTargetRestrictions().isRandomTarget()) {
+                continue; // "chosen at random" (Goblin Test Pilot): aiming it would make the AI the one who chooses
+            }
             if (targeting != null && TutorPlan.isLibraryTutor(sa)) {
                 if (!aimAtOpponent(player, targeting)) {
                     continue;
+                }
+            } else if (targeting != null && (targeting.getApi() == ApiType.Reveal || targeting.getApi() == ApiType.RevealHand)
+                    && targeting.getTargetRestrictions() != null && targeting.getTargetRestrictions().canTgtPlayer()) {
+                if (!aimAtOpponent(player, targeting)) {
+                    continue; // Urza's Bauble looks at the opponent's hand: looking at one's own tells nothing
                 }
             } else if (targeting != null && targeting.getApi() == ApiType.Counter) {
                 // aimed at the spell on the stack by the caller, which no GameEntity target can express
@@ -963,6 +972,12 @@ public final class FlatMonteCarloPicker {
                 }
             } else if (targeting != null) {
                 target = hostileTarget(player, sa);
+                if (target == null && grantsBlockingKeyword(targeting)) {
+                    target = keywordGrantTarget(player, sa); // flying for the blocker, menace for the attacker: the creature it is for
+                    if (target == null) {
+                        continue;
+                    }
+                }
                 if (target == null && isSavingPlay(player, sa)) {
                     target = savingTarget(player, sa);
                 } else if (target == null && (mode == Mode.BLOCKED || defendingWindow(player, mode))) {
@@ -978,6 +993,12 @@ public final class FlatMonteCarloPicker {
                 if (target == null) {
                     continue; // a targeted play with nothing sensible to aim at is not worth a rollout
                 }
+            }
+            if (shieldAlreadyUp(sa, target)) {
+                continue; // a regeneration shield that is up cannot be improved by paying for another one
+            }
+            if (wastedOnHarmless(player, sa, target)) {
+                continue; // removal or a wipe whose only victims are creatures that cannot hurt us: the rollouts would still count the card they remove
             }
             cands.add(new Candidate(sa, target, true));
             extrasLeft--;
@@ -1239,7 +1260,7 @@ public final class FlatMonteCarloPicker {
             return false;
         }
         final Player owner = host.getController();
-        return !forge.game.card.CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
+        return !CardLists.getValidCards(owner.getCardsIn(ZoneType.Hand), valid, owner, host, sa).isEmpty();
     }
 
     /**
@@ -2076,6 +2097,18 @@ public final class FlatMonteCarloPicker {
      * The tricks worth looking at once the blocks are down: a pump (a combat trick, firebreathing, bloodrush), protection or
      * regeneration, damage or removal to finish the fight. Not judged here whether it is a good idea: the rollouts do that.
      */
+    /**
+     * A spell that has to be cast in an upkeep or draw step on an empty stack: a "cast only during" phase restriction (its
+     * only window) or a card marked MustCastInUpkeep. Everything else waits for the main phase, the attack or the end step.
+     */
+    public static boolean mustBeCastNow(final Player player, final SpellAbility sa) {
+        if (sa.getRestrictions() != null && sa.getRestrictions().getPhases() != null
+                && !sa.getRestrictions().getPhases().isEmpty()) {
+            return true; // "cast only during your upkeep" and the like: that is its only window
+        }
+        return sa.getHostCard() != null && (sa.getHostCard().hasSVar("MustCastInUpkeep") || sa.isTrigger());
+    }
+
     public static boolean isCombatTrick(final SpellAbility sa) {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null || sa.isPwAbility()) {
             return false;
@@ -2093,8 +2126,418 @@ public final class FlatMonteCarloPicker {
             return true; // swap an unblocked attacker for the ninja: the classic bait, the block cannot be changed any more
         }
         final ApiType api = sa.getApi();
+        if (grantsBlockingKeyword(sa) && blockersDeclared(sa)) {
+            return false; // flying, reach, shadow... decide who may block: once the blockers are down it changes nothing
+        }
         return api == ApiType.Pump || api == ApiType.PumpAll || api == ApiType.Protection || api == ApiType.Regenerate
                 || isInteraction(sa) && api != ApiType.Counter;
+    }
+
+    private static final Set<String> BLOCKING_KEYWORDS = Set.of("Flying", "Reach", "Shadow", "Horsemanship", "Fear", "Intimidate", "Menace", "Skulk");
+
+    /** A pump that grants a keyword which decides who can block whom (Flying, Reach, Shadow, Fear, Menace...). */
+    public static boolean grantsBlockingKeyword(final SpellAbility sa) {
+        if (sa == null || (sa.getApi() != ApiType.Pump && sa.getApi() != ApiType.PumpAll) || !sa.hasParam("KW")) {
+            return false;
+        }
+        for (final String kw : sa.getParam("KW").split(" & ")) {
+            if (BLOCKING_KEYWORDS.contains(kw)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * An attacker of the AI's own that has not been blocked yet, with an opposing creature that could block it, and a
+     * pump that makes it harder to block (Searing Spear Askari's menace, Hooded Kavu's fear): the attack is declared and
+     * the blockers are not, which is the last moment for it.
+     */
+    public static boolean enablesEvasion(final Player player, final SpellAbility sa) {
+        return evasionSubject(player, sa, false) != null;
+    }
+
+    /**
+     * The creatures a keyword ability is for: the host itself ({@code Defined$ Self}), or for an ability with a single
+     * target every legal creature of the AI's own (Arnjlot's Ascent: "target creature gains flying").
+     */
+    private static List<Card> grantSubjects(final Player player, final SpellAbility sa) {
+        final List<Card> out = new ArrayList<>();
+        if (sa == null || sa.getHostCard() == null || !(sa.isActivatedAbility() || sa.isSpell())) {
+            return out;
+        }
+        if (!sa.usesTargeting()) {
+            if ("Self".equals(sa.getParamOrDefault("Defined", "Self")) && sa.isActivatedAbility()
+                    && player.equals(sa.getHostCard().getController()) && sa.getHostCard().isInZone(ZoneType.Battlefield)) {
+                out.add(sa.getHostCard());
+            }
+            return out;
+        }
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null) {
+            return out;
+        }
+        try {
+            sa.setActivatingPlayer(player);
+            for (final Card c : forge.game.card.CardUtil.getValidCardsToTarget(ts)) {
+                if (player.equals(c.getController()) && c.isCreature()) {
+                    out.add(c);
+                }
+            }
+        } catch (final RuntimeException e) {
+            out.clear(); // a refinement only
+        }
+        return out;
+    }
+
+    private static boolean grantsNewKeyword(final SpellAbility sa, final Card subject) {
+        for (final String kw : sa.getParam("KW").split(" & ")) {
+            if (BLOCKING_KEYWORDS.contains(kw) && !subject.hasKeyword(kw)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The attacker that a pump should make harder to block (or null): an attacker of the AI's own that has not been
+     * blocked yet, with an opposing creature that could block it, in the declare attackers step, the last moment for it.
+     * With {@code strict} the keyword must also take away a block that would kill the attacker or stop it for free
+     * (menace against a single possible blocker, fear against a creature that is not black...).
+     */
+    private static Card evasionSubject(final Player player, final SpellAbility sa, final boolean strict) {
+        if (!grantsBlockingKeyword(sa)) {
+            return null;
+        }
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        final forge.game.combat.Combat combat = ph.getCombat();
+        if (combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || !ph.isPlayerTurn(player) || !sparesMana(player, sa)) {
+            return null;
+        }
+        final List<String> kws = Arrays.asList(sa.getParam("KW").split(" & "));
+        Card best = null;
+        for (final Card subject : grantSubjects(player, sa)) {
+            if (!combat.isAttacking(subject) || combat.isBlocked(subject) || subject.getNetPower() <= 0
+                    || !grantsNewKeyword(sa, subject)) {
+                continue;
+            }
+            final List<Card> blockers = new ArrayList<>();
+            for (final Card blk : player.getOpponents().getCreaturesInPlay()) {
+                if (forge.game.combat.CombatUtil.canBlock(subject, blk)) {
+                    blockers.add(blk);
+                }
+            }
+            if (blockers.isEmpty()) {
+                continue;
+            }
+            if (strict) {
+                // who can still block it once it has the keyword: the ability only helps when the bad blockers are gone
+                final List<Card> remaining = new ArrayList<>();
+                for (final Card blk : blockers) {
+                    if (stillBlocksWith(subject, blk, kws)) {
+                        remaining.add(blk);
+                    }
+                }
+                if (kws.contains("Menace")) {
+                    if (remaining.size() > 1) {
+                        continue; // two of them can still block it together
+                    }
+                    remaining.clear(); // a single creature cannot block it alone
+                }
+                if (!hasBadBlock(subject, blockers) || hasBadBlock(subject, remaining)) {
+                    continue;
+                }
+            }
+            if (best == null || ComputerUtilCard.evaluateCreature(subject) > ComputerUtilCard.evaluateCreature(best)) {
+                best = subject;
+            }
+        }
+        return best;
+    }
+
+    /**
+     * The evasion ability of an attacker that would be blocked badly: the AI's attacker is declared, an opposing creature
+     * could block it and kill it (or stop it for free), and the keyword takes that block away. Not a gamble for the
+     * rollouts: the attacker is lost or stopped otherwise, and the ability costs little. For an ability that targets, the
+     * attacker is aimed at before it is returned. Null when there is no such ability.
+     */
+    public static SpellAbility sureEvasion(final Player player, final List<SpellAbility> candidates) {
+        for (final SpellAbility sa : candidates) {
+            final Card subject = evasionSubject(player, sa, true);
+            if (subject == null) {
+                continue;
+            }
+            try {
+                sa.setActivatingPlayer(player);
+                if (sa.usesTargeting() && !applyTarget(sa, subject)) {
+                    continue;
+                }
+                if (sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)) {
+                    return sa;
+                }
+                if (sa.usesTargeting()) {
+                    sa.resetTargets();
+                }
+            } catch (final RuntimeException e) {
+                // not payable after all
+            }
+        }
+        return null;
+    }
+
+    /**
+     * The keyword ability that lets a creature block an attacker it could not (flying for Grizzly Bears against a Wind
+     * Drake) when the block kills the attacker or stops it unharmed: the declare attackers step is the last moment, and
+     * the mana is spared, so it is not a gamble for the rollouts (whose noise left the block undone now and then).
+     */
+    public static SpellAbility sureBlock(final Player player, final List<SpellAbility> candidates) {
+        for (final SpellAbility sa : candidates) {
+            final Card subject = blockerSubject(player, sa);
+            if (subject == null) {
+                continue;
+            }
+            try {
+                sa.setActivatingPlayer(player);
+                if (sa.usesTargeting() && !applyTarget(sa, subject)) {
+                    continue;
+                }
+                if (sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false)) {
+                    return sa;
+                }
+                if (sa.usesTargeting()) {
+                    sa.resetTargets();
+                }
+            } catch (final RuntimeException e) {
+                // not payable after all
+            }
+        }
+        return null;
+    }
+
+    private static boolean hasBadBlock(final Card host, final List<Card> blockers) {
+        for (final Card blk : blockers) {
+            if (blk.getNetPower() >= host.getNetToughness() || blk.getNetToughness() > host.getNetPower()) {
+                return true; // it kills the attacker, or stops it without dying
+            }
+        }
+        return false;
+    }
+
+    /** Whether the blocker can still block the attacker once it has all of these keywords (menace is counted by the caller). */
+    private static boolean stillBlocksWith(final Card host, final Card blk, final List<String> kws) {
+        for (final String kw : kws) {
+            final boolean ok = switch (kw) {
+                case "Flying", "Reach" -> blk.hasKeyword(Keyword.FLYING) || blk.hasKeyword(Keyword.REACH);
+                case "Shadow" -> blk.hasKeyword(Keyword.SHADOW);
+                case "Horsemanship" -> blk.hasKeyword(Keyword.HORSEMANSHIP);
+                case "Fear" -> blk.isArtifact() || blk.getColor().hasBlack();
+                case "Intimidate" -> blk.isArtifact() || blk.sharesColorWith(host);
+                case "Skulk" -> blk.getNetPower() <= host.getNetPower();
+                default -> true;
+            };
+            if (!ok) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A keyword for the creature itself that only matters in a fight (Deathtouch, First Strike, Wither, Trample,
+     * Indestructible) or in combat at all (Lifelink, Double Strike, Infect), granted to a creature that is not in it:
+     * the rollouts would still pay for it, and the mana is gone. Indestructible also helps a creature that is threatened
+     * (a removal spell on the stack). Keywords that are not listed are never called pointless.
+     */
+    public static boolean pointlessKeywordTrick(final Player player, final SpellAbility sa) {
+        if (sa != null && (sa.getApi() == ApiType.Regenerate || sa.getApi() == ApiType.Protection) && !sa.usesTargeting()
+                && sa.isActivatedAbility() && sa.getHostCard() != null && "Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
+            // a shield or protection for the creature itself: only for one that is in a fight or is about to be destroyed
+            final Card self = sa.getHostCard();
+            final forge.game.combat.Combat cmb = player.getGame().getPhaseHandler().getCombat();
+            final boolean inFight = cmb != null && (cmb.isAttacking(self) && cmb.isBlocked(self) || cmb.isBlocking(self));
+            try {
+                return !inFight && !ComputerUtil.predictThreatenedObjects(player, null, true).contains(self);
+            } catch (final RuntimeException e) {
+                return false; // a refinement only
+            }
+        }
+        if (sa == null || sa.getApi() != ApiType.Pump || !sa.hasParam("KW") || sa.usesTargeting() || sa.getHostCard() == null
+                || grantsBlockingKeyword(sa) || !sa.isActivatedAbility() || !"Self".equals(sa.getParamOrDefault("Defined", "Self"))
+                || sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
+        final boolean inCombat = combat != null && (combat.isAttacking(host) || combat.isBlocking(host));
+        final boolean fighting = combat != null && (combat.isAttacking(host) && combat.isBlocked(host) || combat.isBlocking(host));
+        boolean threatened = false;
+        try {
+            threatened = ComputerUtil.predictThreatenedObjects(player, null, true).contains(host);
+        } catch (final RuntimeException e) {
+            return false; // a refinement only
+        }
+        for (final String kw : sa.getParam("KW").split(" & ")) {
+            switch (kw) {
+                case "Deathtouch", "First Strike", "Wither", "Trample" -> { if (fighting) { return false; } }
+                case "Indestructible" -> { if (fighting || threatened) { return false; } }
+                case "Lifelink", "Double Strike", "Infect" -> { if (inCombat) { return false; } }
+                default -> { return false; }
+            }
+        }
+        return true;
+    }
+
+    /** Past the declare attackers step the blockers are chosen (or done): such a keyword cannot help any more. */
+    private static boolean blockersDeclared(final SpellAbility sa) {
+        final PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
+        return ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
+    }
+
+    /**
+     * The opponent attacks with a creature that the AI's one could block if it had the keyword that this ability grants
+     * (Crovax the Cursed's flying against a Serra Angel), and the block would be a good one: it kills the attacker or
+     * survives it. Offered to the rollouts in the declare attackers step, the last moment it is not too late.
+     */
+    public static boolean enablesGoodBlock(final Player player, final SpellAbility sa) {
+        return blockerSubject(player, sa) != null;
+    }
+
+    /**
+     * The creature that a keyword ability should give flying, reach, shadow or horsemanship for a block (or null): the
+     * opponent attacks with a creature that it could block if it had the keyword, and the block would be a good one (it
+     * kills the attacker or survives it). Only in the declare attackers step, the last moment it is not too late.
+     */
+    private static Card blockerSubject(final Player player, final SpellAbility sa) {
+        if (!grantsBlockingKeyword(sa)) {
+            return null;
+        }
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        final forge.game.combat.Combat combat = ph.getCombat();
+        if (combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || ph.isPlayerTurn(player) || !sparesMana(player, sa)) {
+            return null;
+        }
+        final List<String> kws = Arrays.asList(sa.getParam("KW").split(" & "));
+        Card best = null;
+        for (final Card subject : grantSubjects(player, sa)) {
+            if (!forge.game.combat.CombatUtil.canBlock(subject)) {
+                continue;
+            }
+            boolean useful = false;
+            for (final Card attacker : combat.getAttackersOf(player)) {
+                for (final String kw : kws) {
+                    final boolean needs = switch (kw) {
+                        case "Flying", "Reach" -> attacker.hasKeyword(Keyword.FLYING) && !subject.hasKeyword(Keyword.FLYING) && !subject.hasKeyword(Keyword.REACH);
+                        case "Shadow" -> attacker.hasKeyword(Keyword.SHADOW) && !subject.hasKeyword(Keyword.SHADOW);
+                        case "Horsemanship" -> attacker.hasKeyword(Keyword.HORSEMANSHIP) && !subject.hasKeyword(Keyword.HORSEMANSHIP);
+                        default -> false;
+                    };
+                    if (needs && (subject.getNetPower() >= attacker.getNetToughness() || subject.getNetToughness() > attacker.getNetPower())) {
+                        useful = true;
+                    }
+                }
+            }
+            if (useful && (best == null || ComputerUtilCard.evaluateCreature(subject) > ComputerUtilCard.evaluateCreature(best))) {
+                best = subject;
+            }
+        }
+        return best;
+    }
+
+    /** The creature to aim a keyword ability at, for the block (opponent's attack) or for the attack (the AI's own). */
+    static Card keywordGrantTarget(final Player player, final SpellAbility sa) {
+        final Card blocker = blockerSubject(player, sa);
+        return blocker != null ? blocker : evasionSubject(player, sa, false);
+    }
+
+    /**
+     * Regenerate for creatures that all have a shield already: the rollouts would keep scoring "protect my creature" and
+     * pay again on every priority pass (Mischievous Poltergeist paid its life away for one destruction).
+     */
+    static boolean shieldAlreadyUp(final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getApi() != ApiType.Regenerate || sa.getHostCard() == null) {
+            return false;
+        }
+        final List<Card> cards = new ArrayList<>();
+        if (target instanceof Card c) {
+            cards.add(c);
+        } else if (sa.usesTargeting() && sa.getTargets() != null && !sa.getTargets().getTargetCards().isEmpty()) {
+            cards.addAll(sa.getTargets().getTargetCards());
+        } else if (sa.hasParam("Defined")) {
+            cards.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
+        }
+        if (cards.isEmpty()) {
+            return false;
+        }
+        for (final Card c : cards) {
+            if (c.getShieldCount() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Removal or a wipe whose only victims are opposing creatures that cannot hurt the AI (Spellskite, anything under
+     * Moat): not a candidate, the rollouts only see one creature fewer on the other side and would take the trade.
+     */
+    static boolean wastedOnHarmless(final Player player, final SpellAbility sa, final GameObject target) {
+        if (sa == null || sa.getHostCard() == null || !sa.isSpell() && !sa.isActivatedAbility()) {
+            return false;
+        }
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts != null) {
+            final ApiType api = ts.getApi();
+            final boolean removal = api == ApiType.Destroy || api == ApiType.DealDamage
+                    || api == ApiType.ChangeZone && ts.getParamOrDefault("Origin", "").contains("Battlefield");
+            if (!removal) {
+                return false;
+            }
+            Card victim = target instanceof Card c ? c : null;
+            if (victim == null && ts.getTargets() != null && ts.getTargets().getTargetCards().size() == 1) {
+                victim = ts.getTargets().getTargetCards().get(0);
+            }
+            return victim != null && (ComputerUtilCard.isHarmlessCreature(player, victim) || damageFallsShort(player, ts, victim));
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api != ApiType.DestroyAll && api != ApiType.DamageAll || !a.hasParam("ValidCards") || a.usesTargeting()) {
+                continue;
+            }
+            boolean any = false;
+            for (final Player opp : player.getOpponents()) {
+                for (final Card c : CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield),
+                        a.getParam("ValidCards"), sa.getHostCard().getController(), sa.getHostCard(), a)) {
+                    if (!ComputerUtilCard.isHarmlessCreature(player, c)) {
+                        return false;
+                    }
+                    any = true;
+                }
+            }
+            return any;
+        }
+        return false;
+    }
+
+    /**
+     * Damage that does not kill the creature it is aimed at (Seal of Fire's 2 at Shalai, Voice of Plenty), with no other
+     * effect and no fight to finish: the card is spent for a creature that is still there afterwards, and the rollouts
+     * only see it as "one more of my permanents gone", which is no worse than keeping it for a later, better target.
+     */
+    static boolean damageFallsShort(final Player player, final SpellAbility ts, final Card victim) {
+        if (ts == null || ts.getApi() != ApiType.DealDamage || ts.getSubAbility() != null || !victim.isCreature()
+                || ts.getHostCard() == null) {
+            return false;
+        }
+        try {
+            final forge.game.combat.Combat combat = player.getGame().getPhaseHandler().getCombat();
+            if (combat != null && (combat.isAttacking(victim) || combat.isBlocking(victim))) {
+                return false; // it can still die in the fight with a little help
+            }
+            final int dmg = forge.game.ability.AbilityUtils.calculateAmount(ts.getHostCard(), ts.getParamOrDefault("NumDmg", "0"), ts);
+            return dmg > 0 && ComputerUtilCombat.getEnoughDamageToKill(victim, dmg, ts.getHostCard(), false, false) > dmg;
+        } catch (final RuntimeException e) {
+            return false; // a refinement only
+        }
     }
 
     /** The AI's permanents that the opponent's spell or ability on top of the stack is aimed at. */
@@ -2152,7 +2595,7 @@ public final class FlatMonteCarloPicker {
                     || kw.contains("Protection");
             if (!answers && threat == ApiType.DealDamage) {
                 try {
-                    answers = forge.game.ability.AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
+                    answers = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("NumDef", "0"), sa) > 0;
                 } catch (final RuntimeException e) {
                     answers = false;
                 }
@@ -2401,12 +2844,16 @@ public final class FlatMonteCarloPicker {
                 times = Math.max(1, ComputerUtilMana.getAvailableManaEstimate(sa.getHostCard().getController())
                         / sa.getPayCosts().getTotalMana().getCMC());
             }
-            final int att = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
-            final int def = times * forge.game.ability.AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
-            final boolean diesNow = other.getNetPower() >= mine.getNetToughness();
-            final boolean killsNow = mine.getNetPower() >= other.getNetToughness();
-            final boolean diesThen = other.getNetPower() >= mine.getNetToughness() + def;
-            final boolean killsThen = mine.getNetPower() + att >= other.getNetToughness();
+            final int att = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumAtt", "0"), ts);
+            final int def = times * AbilityUtils.calculateAmount(sa.getHostCard(), ts.getParamOrDefault("NumDef", "0"), ts);
+            // under Doran, the Siege Tower the damage is the toughness: +P does nothing and +T is the damage
+            final boolean byToughness = mine.toughnessAssignsDamage();
+            final int myAtt = byToughness ? def : att;
+            final int myDef = def;
+            final boolean diesNow = other.getNetCombatDamage() >= mine.getNetToughness();
+            final boolean killsNow = mine.getNetCombatDamage() >= other.getNetToughness();
+            final boolean diesThen = other.getNetCombatDamage() >= mine.getNetToughness() + myDef;
+            final boolean killsThen = mine.getNetCombatDamage() + myAtt >= other.getNetToughness();
             return diesNow != diesThen || killsNow != killsThen;
         } catch (final RuntimeException e) {
             return true;

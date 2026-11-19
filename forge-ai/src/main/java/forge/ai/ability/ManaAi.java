@@ -19,7 +19,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.IterableUtil;
 
 import java.util.Arrays;
@@ -158,16 +157,9 @@ public class ManaAi extends SpellAbilityAi {
         String produced = sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
 
-        int numCounters = 0;
-        int manaSurplus = 0;
         if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
             CounterType ctrType = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class).counter;
-            numCounters = host.getCounters(ctrType);
-            manaReceived = numCounters;
-            if (logic.startsWith("ManaRitualBattery.")) {
-                manaSurplus = Integer.parseInt(logic.substring(18)); // adds an extra mana even if no counters removed
-                manaReceived += manaSurplus;
-            }
+            manaReceived = host.getCounters(ctrType);
         }
 
         int searchCMC = numManaSrcs - selfCost + manaReceived;
@@ -241,13 +233,6 @@ public class ManaAi extends SpellAbilityAi {
                         CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
                         CardPredicates.lessCMC(searchCMC),
                         CardPredicates.isColorless().or(CardPredicates.isColor(producedColor))));
-
-        if (logic.startsWith("ManaRitualBattery")) {
-            // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
-            // otherwise the AI grabs too many counters at once.
-            int maxCtrs = Aggregates.max(castableSpells, Card::getCMC) - manaSurplus;
-            sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
-        }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;

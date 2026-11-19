@@ -119,6 +119,7 @@ public class FlatMonteCarloTimedAbilityTest extends AITest {
     private Card manland() {
         final Card vault = addCard("Mutavault", ai);
         vault.setSickness(false);
+        addCard("Mountain", ai); // the {1} is paid by another land: a manland that taps itself for it is a tapped creature
         return vault;
     }
 
@@ -229,6 +230,9 @@ public class FlatMonteCarloTimedAbilityTest extends AITest {
         setUp();
         final Card wildwood = addCard("Stirring Wildwood", ai);
         wildwood.setSickness(false);
+        addCard("Forest", ai);
+        addCard("Plains", ai);
+        addCard("Mountain", ai);
         final SpellAbility animate = animateOf(wildwood);
         phase(PhaseType.MAIN1, ai);
         assertAllowed("Stirring Wildwood before combat", animate);

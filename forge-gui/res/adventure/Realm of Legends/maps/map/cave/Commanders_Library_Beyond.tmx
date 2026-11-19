@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B3Fo3gUj+JRPIpH8SgexVTDAA08eeE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYA8zBI8Ue+UFGBgUBahj1kGgOYeIxO38DAmqAgwJxKo/TCU3UtO/A2VvIz8DQxORWAVop7IA8eqb+fH7QYFGGF/Y7AXK7SMStwHd38pPvPr9o+kKDkbzL33sHQ1n7IBXHWEviE0vsF0CFQ8lAAD6WmkA
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBmB2ByILwGxsgomvsRHGGPTh26GGRZ7TYEYBA6q4Mcg4MnJAAcwNjH6jPHYS0uAz15C4aWsgmmeEpF68NlLKLwOYrH3AJF6BmM4s6gh1OFi4wKE9A5G/8LSAXJaAbIb8KUrYtMiPnsZpQhjdECsnsEYzgNl72FofsNFY8u/hPQcHsT5lxBoFMcUa8YiRqy9M3kZGKYRidEBsfpm8FJWV6ODgW47kIIBmC6PMg==
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyEBZBRUPFuDJOdAuGAWjYBSMVIBeLmLD6EAVKo6PHgVDAzSLEyc2ClABAHuBB6s=
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="1" template="../../../../common/maps/obj/collision.tx" x="-32" y="-12" width="32" height="338"/>
+  <object id="2" template="../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../../../common/maps/obj/collision.tx" x="481.333" y="-12.6667" width="32" height="336.667"/>
+  <object id="4" template="../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="45" template="../../../../common/maps/obj/dialog.tx" x="196.167" y="266.333" width="86" height="16">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The library ahead is pasted with colorful advertisements for a variety of otherworldly products. Preconstructed decks for sale! One sign proclaims. Universes Beyond at your fingertips!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/shop.tx" x="65" y="240.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon1"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/shop.tx" x="97" y="239.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon2"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="127.5" y="240.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon3"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="161" y="240.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon4"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="273.5" y="239.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon5"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="304.5" y="239.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon6"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="335.5" y="239.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon7"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="368.5" y="240.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon8"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="401" y="238.5">
+   <properties>
+    <property name="commonShopList" value="UBPrecon9"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/door_up.tx" x="199.167" y="303.5" width="82.6666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Otherworldly_Market.tmx"/>
+    <property name="teleportObjectId" value="89"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints"/>
+</map>

@@ -1182,6 +1182,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // See if maybe there's a special priority applicable for this, in case the opponent
             // has dangerous unblockables in play
+            if (!sa.isTrigger() && origin.contains(ZoneType.Battlefield)) {
+                list = ComputerUtilCard.withoutHarmlessCreatures(ai, list); // exile or bounce of a creature that cannot do anything is a waste
+            }
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
@@ -1603,6 +1606,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             String logic = sa.getParamOrDefault("AILogic", "");
             if ("NeverBounceItself".equals(logic)) {
                 Card source = sa.getHostCard();
+                // Cavern Harpy in the Aluren deck: the creature the running loop casts again, or the Harpy itself
+                final Card loopChoice = "Cavern Harpy".equals(source.getName()) && decider == player
+                        ? forge.ai.simulation.AlurenPlan.harpyBounce(decider, fetchList) : null;
+                if (loopChoice != null) {
+                    return loopChoice;
+                }
                 if (fetchList.contains(source) && (fetchList.size() > 1 || !sa.getRootAbility().isMandatory())) {
                     // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
                     fetchList.remove(source);

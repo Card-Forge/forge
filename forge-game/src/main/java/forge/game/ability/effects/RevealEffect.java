@@ -96,7 +96,7 @@ public class RevealEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (tgtPlayers.size() > 0) {
-            sb.append(Lang.joinHomogenous(tgtPlayers)).append(" reveals ");
+            sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() > 1 ? " reveal " : " reveals ");
             if (sa.hasParam("AnyNumber")) {
                 sb.append("any number of cards ");
             } else if (sa.hasParam("NumCards")) {
@@ -110,7 +110,7 @@ public class RevealEffect extends SpellAbilityEffect {
             if (sa.hasParam("Random")) {
                 sb.append("at random ");
             }
-            sb.append("from their hand.");
+            sb.append(tgtPlayers.size() > 1 ? "from their hands." : "from their hand.");
         } else {
             sb.append("Error - no target players for RevealHand. ");
         }
