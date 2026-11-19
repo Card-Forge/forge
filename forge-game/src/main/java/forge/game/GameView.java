@@ -49,6 +49,7 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.IsCommander, rules.hasCommander());
         set(TrackableProperty.GameType, rules.getGameType());
         set(TrackableProperty.PoisonCountersToLose, rules.getPoisonCountersToLose());
+        set(TrackableProperty.CommanderDamageLoses, rules.hasAppliedVariant(GameType.Commander));
         set(TrackableProperty.NumGamesInMatch, rules.getGamesPerMatch());
 
         set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getOutcomes().size());
@@ -75,6 +76,11 @@ public class GameView extends TrackableObject {
 
     public boolean isCommander() {
         return get(TrackableProperty.IsCommander);
+    }
+
+    /** True when 21 combat damage from one commander loses the game, as in {@link forge.game.player.Player#checkLoseCondition}. */
+    public boolean isCommanderDamageLoss() {
+        return get(TrackableProperty.CommanderDamageLoses);
     }
 
     public GameType getGameType() {

@@ -252,6 +252,7 @@ public enum TrackableProperty {
     Stack(TrackableTypes.StackItemViewListType),
     StormCount(TrackableTypes.IntegerType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
+    CommanderDamageLoses(TrackableTypes.BooleanType),
     Object(TrackableTypes.ObjectType, FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
 

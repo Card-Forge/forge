@@ -18,6 +18,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
@@ -252,6 +253,8 @@ public class VPlayerPanel extends FContainer {
     private final VField field;
     private final VAvatar avatar;
     private final LifeLabel lblLife;
+    private int lifeLabelRows; //rows the landscape layout last made room for, see getLandscapeLifeHeight
+    private boolean lifeRelayoutPosted;
     private final InfoTab tabManaPool;
     private final Map<ZoneType, InfoTabZone> zoneTabs = new HashMap<>();
     private final InfoTabExtra extraTab;
@@ -706,6 +709,13 @@ public class VPlayerPanel extends FContainer {
         lblLife.updateShards();
     }
 
+    //landscape height of the life label in the standard layout: one line, growing by half a line for a third row,
+    //when commander damage and a counter both show under the life total
+    private float getLandscapeLifeHeight() {
+        lifeLabelRows = lblLife.getRowCount();
+        return LIFE_FONT.getLineHeight() * Math.max(2, lifeLabelRows) / 2;
+    }
+
     public void updateManaPool() {
         tabManaPool.update();
     }
@@ -866,7 +876,7 @@ public class VPlayerPanel extends FContainer {
         avatar.setPosition(x + (tabColWidth - avatar.getWidth()) / 2, y);
         y += avatar.getHeight();
 
-        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, tabColWidth, Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : LIFE_FONT.getLineHeight());
+        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, tabColWidth, Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : getLandscapeLifeHeight());
         if (Forge.altPlayerLayout) {
             if (adjustHeight > 2)
                 y += INFO_FONT.getLineHeight() / 2;
@@ -919,7 +929,7 @@ public class VPlayerPanel extends FContainer {
         if (compactAvatarSize < 0 || Math.abs(avatar.getWidth() - compactAvatarSize) > 0.5f) {
             compactAvatarNatural = Math.min(avatar.getWidth(), VAvatar.HEIGHT); //set from outside (game size changes)
         }
-        final float lifeHeight = Forge.altPlayerLayout ? (adjustHeight > 2 ? INFO_FONT.getLineHeight() / 2 : 0) : LIFE_FONT.getLineHeight();
+        final float lifeHeight = Forge.altPlayerLayout ? (adjustHeight > 2 ? INFO_FONT.getLineHeight() / 2 : 0) : getLandscapeLifeHeight();
         final boolean doubleTabs = isDoubleTabs();
         final float minCell = doubleTabs ? COMPACT_MIN_CELL : Math.max(COMPACT_MIN_CELL, getCompactMinColumnWidth() * COMPACT_MIN_CELL_RATIO);
         final float budget = height - COMPACT_PANEL_PAD_TOP - lifeHeight - getCompactPhaseSpace() - 2 * TAB_COLUMN_PAD - (doubleTabs ? COMPACT_DOUBLE_ROWS : COMPACT_MAX_VISIBLE_TABS) * minCell;
@@ -1727,6 +1737,49 @@ public class VPlayerPanel extends FContainer {
             manaShards = player.getNumManaShards();
         }
 
+        //rows in the standard layouts: the life total, commander damage, then one counter (poison, energy or shards),
+        //each of the last two only once it isn't 0
+        private int getRowCount() {
+            return getRowCount(getCommanderDamageText());
+        }
+        private int getRowCount(final String cmdDamage) {
+            int rows = 1;
+            if (!cmdDamage.isEmpty()) { rows++; }
+            if (poisonCounters > 0 || energyCounters > 0 || manaShards > 0) { rows++; }
+            return rows;
+        }
+
+        //The other side's commanders, whose combat damage to this player counts toward 21: a local player's label
+        //counts the opponents' commanders, an opponent's label counts the local player's. Empty without that rule.
+        private List<CardView> getOpposingCommanders() {
+            final List<CardView> result = new ArrayList<>();
+            final MatchController match = MatchController.instance;
+            final GameView gameView = match.getGameView();
+            if (gameView == null || !gameView.isCommanderDamageLoss()) { return result; }
+            final Iterable<PlayerView> sources = match.isLocalPlayer(player) ? player.getOpponents() : match.getLocalPlayers();
+            for (final PlayerView source : sources) {
+                final List<CardView> commanders = source.getCommanders();
+                if (commanders != null && source.isOpponentOf(player)) { //no teammates in Two-Headed Giant
+                    result.addAll(commanders);
+                }
+            }
+            return result;
+        }
+
+        //e.g. "12", or "12/0" with several commanders (partners, more opponents) since each one's 21 counts
+        //separately; empty until one of them has dealt combat damage to this player
+        private String getCommanderDamageText() {
+            final StringBuilder sb = new StringBuilder();
+            boolean dealt = false;
+            for (final CardView commander : getOpposingCommanders()) {
+                final int damage = player.getCommanderDamage(commander);
+                dealt |= damage > 0;
+                if (sb.length() > 0) { sb.append('/'); }
+                sb.append(damage);
+            }
+            return dealt ? sb.toString() : "";
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             MatchController.instance.getGameController().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
@@ -1735,10 +1788,22 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
+            //read every frame rather than in update(), since commander damage can change without the life total changing
+            final String cmdDamage = getCommanderDamageText();
+            final boolean showCmd = !cmdDamage.isEmpty();
+            final int rows = getRowCount(cmdDamage);
+            if (rows != lifeLabelRows && !lifeRelayoutPosted && Forge.isLandscapeMode() && !Forge.altPlayerLayout) {
+                //a row came or went under the life total: lay out again so the label gets its new height
+                lifeRelayoutPosted = true;
+                Gdx.app.postRunnable(() -> {
+                    lifeRelayoutPosted = false;
+                    VPlayerPanel.this.revalidate();
+                });
+            }
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
             if (Forge.altPlayerLayout && Forge.isLandscapeMode()) {
-                if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
+                if (!showCmd && poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width + 1, INFO2_FONT.getBounds(lifeStr).height + 1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
@@ -1749,10 +1814,16 @@ public class VPlayerPanel extends FContainer {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO_FONT.getBounds(lifeStr).width + halfHeight + 1, INFO_FONT.getBounds(lifeStr).height + 1);
                     g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
                     g.drawText(lifeStr, INFO_FONT, getInfoForeColor().getColor(), textStart, 0, textWidth, halfHeight, false, Align.left, false);
+                    if (showCmd) {
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(cmdDamage).width + halfHeight + 1, INFO_FONT.getBounds(cmdDamage).height + 1);
+                        g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(cmdDamage, INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
+                    }
                     if (poisonCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, halfHeight + 2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height + 1);
-                        g.drawImage(FSkinImage.POISON, 0, halfHeight + 2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, halfHeight + 2, textWidth, halfHeight, false, Align.left, false);
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height + 1);
+                        g.drawImage(FSkinImage.POISON, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
                         mod += 1;
                     }
                     if (energyCounters > 0) {
@@ -1788,23 +1859,29 @@ public class VPlayerPanel extends FContainer {
                     adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight * mod) ? mod : 1;
                 }
             } else {
-                if (poisonCounters == 0 && energyCounters == 0 && manaShards == 0) {
+                if (rows == 1) {
                     g.drawText(lifeStr, LIFE_FONT, getInfoForeColor(), 0, 0, getWidth(), getHeight(), false, Align.center, true);
                 } else {
-                    float halfHeight = getHeight() / 2;
-                    float textStart = halfHeight + Utils.scale(1);
+                    float rowHeight = getHeight() / rows;
+                    float textStart = rowHeight + Utils.scale(1);
                     float textWidth = getWidth() - textStart;
-                    g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
-                    g.drawText(lifeStr, INFO_FONT, getInfoForeColor(), textStart, 0, textWidth, halfHeight, false, Align.center, true);
+                    g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, rowHeight, rowHeight);
+                    g.drawText(lifeStr, INFO_FONT, getInfoForeColor(), textStart, 0, textWidth, rowHeight, false, Align.center, true);
+                    float y = rowHeight;
+                    if (showCmd) {
+                        g.drawImage(FSkinImage.COMMANDER, 0, y, rowHeight, rowHeight);
+                        g.drawText(cmdDamage, INFO_FONT, getInfoForeColor(), textStart, y, textWidth, rowHeight, false, Align.center, true);
+                        y += rowHeight;
+                    }
                     if (poisonCounters > 0) { //prioritize showing poison counters over energy counters
-                        g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
+                        g.drawImage(FSkinImage.POISON, 0, y, rowHeight, rowHeight);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor(), textStart, y, textWidth, rowHeight, false, Align.center, true);
                     } else if (energyCounters > 0) { //prioritize showing energy counters over mana shards
-                        g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
-                    } else {
-                        g.drawImage(FSkinImage.MANASHARD, 0, halfHeight, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
+                        g.drawImage(FSkinImage.ENERGY, 0, y, rowHeight, rowHeight);
+                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor(), textStart, y, textWidth, rowHeight, false, Align.center, true);
+                    } else if (manaShards > 0) {
+                        g.drawImage(FSkinImage.MANASHARD, 0, y, rowHeight, rowHeight);
+                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor(), textStart, y, textWidth, rowHeight, false, Align.center, true);
                     }
                 }
             }
