@@ -357,6 +357,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void setModifiers(Map<String, String> chosen) {
         modifiers.clear();
         modifiers.putAll(chosen);
+        gold = Math.min(gold, getMaxGold());
+        onGoldChangeList.emit();
+    }
+
+    /** @return the most gold the chosen modifiers let the player hold, or Integer.MAX_VALUE when none sets a limit */
+    private int getMaxGold() {
+        return getActiveModifiers().stream().filter(modifier -> modifier.maxGold >= 0)
+                .mapToInt(modifier -> modifier.maxGold).min().orElse(Integer.MAX_VALUE);
+    }
+
+    /** @return how much more gold the player can gain, or Integer.MAX_VALUE when no modifier limits it */
+    public int getGoldRoom() {
+        int max = getMaxGold();
+        return max == Integer.MAX_VALUE ? max : Math.max(0, max - gold);
     }
 
     /** @return the plane's modifiers that this run has turned on, in the plane's order */
@@ -1075,7 +1089,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private void addGold(int goldCount) {
-        gold += goldCount;
+        gold = Math.min(gold + goldCount, getMaxGold());
         onGoldChangeList.emit();
     }
 
@@ -1175,7 +1189,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void takeGold(int price) {
-        gold -= price;
+        gold = Math.min(gold - price, getMaxGold());
         onGoldChangeList.emit();
         //play sfx
         SoundSystem.instance.play(SoundEffectType.CoinsDrop, false);
@@ -1346,7 +1360,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
-        return (int) (basePrice * (2.0f - townPriceModifier));
+        return Math.min((int) (basePrice * (2.0f - townPriceModifier)), getGoldRoom());
     }
 
     /**

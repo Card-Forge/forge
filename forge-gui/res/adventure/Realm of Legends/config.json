@@ -310,6 +310,12 @@
       "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
       "icon": "Shard",
       "type": "ColorLimit"
+    },
+    {
+      "name": "Vow of Poverty",
+      "description": "Your gold stays at 0.",
+      "icon": "BronzeChallengeCoin",
+      "maxGold": 0
     }
   ]
 }

@@ -30,6 +30,7 @@ public class ModifierData {
     public Type type;              //Optional rule implemented in code.
     public int lostCards;          //CardLoss: random nonbasic cards lost from the main deck.
     public boolean loseCommander;  //CardLoss: the deck's commanders are lost too.
+    public int maxGold = -1;       //The most gold the player can hold. -1 sets no limit.
     public EffectData effect;      //Added to every duel, written for the enemies like the plane's global effect.
 
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */

@@ -495,6 +495,7 @@ public class RewardScene extends UIScene {
             }
         }
         newRewards.clear();
+        totalGold = Math.min(totalGold, AdventurePlayer.current().getGoldRoom());
         if (totalGold > 0) {
             newRewards.add(new Reward(Reward.Type.Gold, totalGold));
         }
