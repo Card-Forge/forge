@@ -49,9 +49,9 @@ public final class PlayRelevance {
                 return combat != null && (combat.isAttacking(c) || combat.isBlocking(c));
             case COMBAT_DECLARE_ATTACKERS:
                 if (controllersTurn) {
-                    // declared attackers are in; before any are declared an untapped creature still can be
+                    // declared attackers are in; before any are declared a creature that may attack still can
                     return combat != null && combat.isAttacking(c)
-                            || c.isUntapped() && (combat == null || combat.getAttackers().isEmpty());
+                            || (combat == null || combat.getAttackers().isEmpty()) && CombatUtil.canAttack(c);
                 }
                 return CombatUtil.canBlock(c); // the blockers are not declared yet: an untapped creature can still block
             case COMBAT_END:
@@ -60,8 +60,9 @@ public final class PlayRelevance {
             case CLEANUP:
                 return false;
             default:
-                // before the attackers: an untapped creature can attack (or block) still; a tapped one cannot do either
-                return c.isUntapped();
+                // before the attackers: the creature that may attack (summoning sickness, defender, tapped and the effects that
+                // stop it count) on its controller's turn, the one that may block on the other's
+                return controllersTurn ? CombatUtil.canAttack(c) : CombatUtil.canBlock(c);
         }
     }
 
@@ -126,9 +127,14 @@ public final class PlayRelevance {
         if (sa.hasParam("AtEOT") || sa.hasParam("RememberObjects") || sa.hasParam("Optional")) {
             return false;
         }
-        // a keyword that opens the combat to the creature (haste) or is not about the fight at all is not judged here
-        final String kw = sa.getParamOrDefault("KW", "");
-        return !kw.contains("Haste");
+        // a keyword that opens the combat to the creature (haste) is not judged here
+        if (sa.getParamOrDefault("KW", "").contains("Haste")) {
+            return false;
+        }
+        // only a real boost: a grant of keywords alone (Arnjlot's Ascent) is the business of the other checks
+        final Card host = sa.getHostCard();
+        return sa.hasParam("NumAtt") && AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa) > 0
+                || sa.hasParam("NumDef") && AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa) > 0;
     }
 
     /**

@@ -5,6 +5,7 @@ import com.google.common.collect.Multiset;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -66,10 +67,18 @@ public final class BounceValue {
      */
     private static boolean savesTheCombat(final Player ai, final Card c) {
         final Combat combat = ai.getGame().getPhaseHandler().getCombat();
-        if (combat == null || !combat.isAttacking(c) || combat.isBlocked(c) || !c.getController().isOpponentOf(ai)) {
+        if (combat == null || !combat.isAttacking(c) || !c.getController().isOpponentOf(ai)) {
             return false;
         }
-        final int dmg = Math.max(0, ComputerUtilCombat.predictDamageTo(ai, c.getNetCombatDamage(), c, true));
+        int power = c.getNetCombatDamage();
+        if (combat.isBlocked(c)) {
+            // a blocked trampler still hits the AI with what its blockers cannot soak up; any other blocked attacker is held
+            if (!c.hasKeyword(Keyword.TRAMPLE) || c.hasKeyword(Keyword.INFECT)) {
+                return false;
+            }
+            power -= ComputerUtilCombat.totalShieldDamage(c, combat.getBlockers(c));
+        }
+        final int dmg = Math.max(0, ComputerUtilCombat.predictDamageTo(ai, Math.max(0, power), c, true));
         if (dmg == 0) {
             return false;
         }

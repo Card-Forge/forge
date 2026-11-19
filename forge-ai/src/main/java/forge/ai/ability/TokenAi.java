@@ -344,8 +344,31 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxLand".equals(sa.getParam("AILogic"))) {
+            return takesTheAttackTaxLand(player, sa);
+        }
         // TODO: AILogic
         return true;
+    }
+
+    /**
+     * Zagorka, Mother of Sanctum: each player may make a tapped land, and each opponent who does cannot attack her controller
+     * during their next turn. Her controller takes it. An opponent takes it only when the land is worth more than the attack
+     * it gives up: it has no creature that could attack next turn, and not so many lands that one more adds nothing. Taking it
+     * always would build a board that never attacks, until the library is empty.
+     */
+    private static boolean takesTheAttackTaxLand(final Player player, final SpellAbility sa) {
+        final Player owner = sa.getHostCard().getController();
+        if (player.equals(owner) || !player.isOpponentOf(owner)) {
+            return true;
+        }
+        for (final Card c : player.getCreaturesInPlay()) {
+            // next turn it is untapped and no longer sick: what can attack then is what would stay at home
+            if (c.getNetCombatDamage() > 0 && CombatUtil.canAttackNextTurn(c, owner)) {
+                return false;
+            }
+        }
+        return player.getLandsInPlay().size() < 7;
     }
 
     /*

@@ -542,6 +542,16 @@ public final class ActivationGuard {
         if (sa == null || sa.isTrigger() || sa.getHostCard() == null) {
             return null;
         }
+        try {
+            return bounceVerdict(ai, sa);
+        } catch (final RuntimeException e) {
+            // a refinement of the targeting: an odd game state must not stop the AI's turn, but it is not swept under
+            System.err.println("badBounce could not judge " + sa + ": " + e);
+            return null;
+        }
+    }
+
+    private static String bounceVerdict(final Player ai, final SpellAbility sa) {
         for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
             if (node.getApi() != ApiType.ChangeZone || !node.usesTargeting()
                     || !"Battlefield".equals(node.getParam("Origin")) || !"Hand".equals(node.getParam("Destination"))) {

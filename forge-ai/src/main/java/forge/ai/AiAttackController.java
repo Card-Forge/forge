@@ -1609,8 +1609,8 @@ public class AiAttackController {
             return false;
         }
 
-        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing, not even when the
-        // attack is all-out (aggression 5): only a lethal attack (6) takes it along
+        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing, not even in an
+        // all-out attack (aggression 5); only the Exalted strategy (6), which expects to kill an equal blocker or go unblocked, takes it
         if (attacker.isLand() && aiAggression < 6 && isGiftToABlocker(ai, attacker, combat)) {
             return false;
         }

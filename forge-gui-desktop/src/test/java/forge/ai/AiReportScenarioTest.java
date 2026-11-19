@@ -933,6 +933,55 @@ public class AiReportScenarioTest extends AITest {
                     return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
                             ? null : "a defender was counted as an attacker";
                 }));
+        // ---- who can still take part in a fight: summoning sickness and defender are no part of it
+        l.add(new Scenario("relevance-sick-and-defender", "Before combat on their own turn a summoning-sick creature and a Wall of Stone cannot attack: a pump is wasted on them", Fid.APPROX, M1, true,
+                c -> { c.bf("Chameleon Colossus", c.ai).setSickness(true); c.bf("Wall of Stone", c.ai); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        if (PlayRelevance.combatRelevant(k)) { return k.getName() + " cannot attack but was counted"; }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("pump-keyword-only", "Arnjlot's Ascent grants flying and no P/T: it is not a combat pump to be thrown out", Fid.APPROX, "MAIN2", true,
+                c -> { c.bf("Arnjlot's Ascent", c.ai); c.bf("Hill Giant", c.ai).setTapped(true); },
+                c -> {
+                    final Card ascent = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Arnjlot's Ascent")).findFirst().get();
+                    final SpellAbility sa = ascent.getSpellAbilities().stream().filter(SpellAbility::isActivatedAbility).findFirst().get();
+                    sa.setActivatingPlayer(c.ai);
+                    return PlayRelevance.pointlessPump(c.ai, sa) == null ? null : "a keyword grant was classified as a +X/+X pump";
+                }));
+        // ---- a blocked trampler can still be lethal; a blocked one without trample cannot
+        l.add(new Scenario("bounce-blocked-trampler", "Ghalta (12/12 trample) blocked by a Grizzly Bears still kills the AI at 5: worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card bears = c.bf("Grizzly Bears", c.ai); final Card ghalta = c.bf("Ghalta, Stampede Tyrant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(ghalta, c.ai); combat.addBlocker(ghalta, bears); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal blocked trampler was refused"));
+        l.add(new Scenario("bounce-blocked-no-trample", "A Crested Herdcaller (trample) blocked by a Craw Wurm deals nothing through: with an ETB it is not worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card wurm = c.bf("Craw Wurm", c.ai); final Card herd = c.bf("Crested Herdcaller", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(herd, c.ai); combat.addBlocker(herd, wurm); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? "bounced an attacker that the block stops completely" : null));
+        // ---- Zagorka, Mother of Sanctum: the land is not worth an attack that never comes
+        final java.util.function.Function<Ctx, SpellAbility> sanctum = c -> {
+            final Card z = c.bf("Zagorka, Mother of Sanctum", c.opp);
+            return z.getTriggers().get(0).ensureAbility().getAdditionalAbility("RepeatSubAbility");
+        };
+        l.add(new Scenario("zagorka-declines-with-attackers", "With a Grizzly Bears that can attack next turn the AI does not take the Sanctum", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 3, c.ai); c.bf("Grizzly Bears", c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? "took the land and gave up its attack" : null));
+        l.add(new Scenario("zagorka-accepts-without-attackers", "With nothing that could attack the land is free", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 3, c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? null : "refused a free land with no attacker"));
+        l.add(new Scenario("zagorka-declines-flooded", "Seven lands already: another adds nothing, no creature or not", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 7, c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? "took a land at seven" : null));
+        l.add(new Scenario("zagorka-controller-takes-it", "Her controller always takes the Sanctum", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 7, c.opp); c.bf("Grizzly Bears", c.opp); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.opp, sanctum.apply(c), null, "", null) ? null : "Zagorka's controller refused"));
+        l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai)) ? null : "the Arbor was not recognised as a gift";
+                }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
                 c -> {
