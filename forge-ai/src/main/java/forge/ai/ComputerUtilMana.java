@@ -687,6 +687,9 @@ public class ComputerUtilMana {
         int testLifeSpent = 0;
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
+        // the lands that cost life to tap (Manabarbs and its kin): none in nearly every game
+        final List<TapDamageSource> painSources = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()
+                ? tapDamageSources(ai) : Collections.<TapDamageSource>emptyList();
 
         // Loop over mana needed
         while (!cost.isPaid()) {
@@ -741,11 +744,14 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            if (!hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
+            final boolean ordinaryOrder = !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref");
+            if (ordinaryOrder) {
                 saList = sparingSourcesFirst(saList, sourcesForShards, sa, ai);
-                if (toPay == ManaCostShard.GENERIC) {
-                    saList = requiredSourcesFirst(saList, cost, sa);
-                }
+            }
+            // Manabarbs and its kin: the sources that cost the least life go first, whatever the scores above say
+            saList = painfulSourcesLast(saList, ai, painSources);
+            if (ordinaryOrder && toPay == ManaCostShard.GENERIC) {
+                saList = requiredSourcesFirst(saList, cost, sa);
             }
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test, paymentList);
@@ -974,6 +980,30 @@ public class ComputerUtilMana {
             }
         }
         return required;
+    }
+
+    /**
+     * Manabarbs and its kin: among the sources for a shard the ones that cost the least life come first (a creature or a
+     * rock costs none, a land under Manabarbs one, a nonbasic one under Burning Earth two). The sort is stable, so the
+     * scores of {@link #scoreManaProducingCard} still decide between sources that cost the same. Nothing changes
+     * without a permanent that damages the one who taps a land.
+     */
+    private static Collection<SpellAbility> painfulSourcesLast(final Collection<SpellAbility> candidates, final Player ai,
+            final List<TapDamageSource> sources) {
+        if (sources.isEmpty() || candidates.size() < 2) {
+            return candidates;
+        }
+        final Map<Card, Integer> damage = new HashMap<>();
+        boolean any = false;
+        for (final SpellAbility ma : candidates) {
+            any |= damage.computeIfAbsent(ma.getHostCard(), c -> tapDamage(ai, c, sources)) > 0;
+        }
+        if (!any) {
+            return candidates;
+        }
+        final List<SpellAbility> list = new ArrayList<>(candidates);
+        list.sort(Comparator.comparingInt((SpellAbility ma) -> damage.get(ma.getHostCard())));
+        return list;
     }
 
     /**
@@ -1979,18 +2009,31 @@ public class ComputerUtilMana {
      * that hurts, without a payment being worked out.
      */
     public static int estimateTapDamage(final Player ai, final SpellAbility sa) {
+        return tapDamage(ai, estimateTapPayment(ai, sa));
+    }
+
+    /**
+     * The mana abilities that the payment logic would tap for this play: empty when nothing on the table hurts the one who
+     * taps a land (no payment is worked out then) or when it is not payable (the other checks say so).
+     */
+    public static List<SpellAbility> estimateTapPayment(final Player ai, final SpellAbility sa) {
         if (ai == null || sa == null || sa.getPayCosts() == null || sa.getPayCosts().getTotalMana() == null) {
-            return 0;
+            return Collections.emptyList();
         }
-        final List<TapDamageSource> sources = tapDamageSources(ai);
-        if (sources.isEmpty()) {
-            return 0;
+        if (tapDamageSources(ai).isEmpty()) {
+            return Collections.emptyList();
         }
         final ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         final List<SpellAbility> payment = payManaCost(cost, sa, ai, true, true, false);
-        if (payment == null) {
-            return 0; // not payable: the other checks say so
+        return payment == null ? Collections.<SpellAbility>emptyList() : payment;
+    }
+
+    /** The life that tapping the hosts of these mana abilities costs, each tap of a land that hurts counted once. */
+    public static int tapDamage(final Player ai, final List<SpellAbility> payment) {
+        if (payment.isEmpty()) {
+            return 0;
         }
+        final List<TapDamageSource> sources = tapDamageSources(ai);
         int damage = 0;
         for (final SpellAbility tap : payment) {
             damage += tapDamage(ai, tap.getHostCard(), sources);

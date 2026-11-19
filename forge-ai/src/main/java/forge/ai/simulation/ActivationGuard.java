@@ -1,11 +1,16 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.ability.AnimateAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.combat.CombatUtil;
@@ -157,14 +162,17 @@ public final class ActivationGuard {
                 || ai.cantLoseForZeroOrLessLife()) {
             return false;
         }
-        final int damage = ComputerUtilMana.estimateTapDamage(ai, sa);
+        final List<SpellAbility> payment = ComputerUtilMana.estimateTapPayment(ai, sa);
+        final int damage = ComputerUtilMana.tapDamage(ai, payment);
         if (damage <= 0) {
             return false;
         }
         if (removesTapDamage(ai, sa)) {
             return ai.getLife() - damage < 1;
         }
-        final int threat = nextTurnThreat(ai);
+        // the reserve is judged on the board as the play leaves it: what the play removes does not attack, and a creature
+        // that is tapped for the mana stays tapped through their turn, so it does not block
+        final int threat = nextTurnThreat(ai, removedByPlay(ai, sa), creaturesSpentOnMana(payment));
         return ai.getLife() - damage < Math.max(3, threat + 1);
     }
 
@@ -174,10 +182,18 @@ public final class ActivationGuard {
      * block out of the sum (a rough count: no tricks, no gang blocks). Defenders do not attack.
      */
     static int nextTurnThreat(final Player ai) {
+        return nextTurnThreat(ai, Collections.<Card>emptySet(), Collections.<Card>emptySet());
+    }
+
+    /**
+     * {@link #nextTurnThreat(Player)} for the board that a play leaves behind: {@code gone} are creatures the play takes
+     * off the table (neither attack nor block), {@code spent} are creatures of the AI tapped to pay for it (no block).
+     */
+    static int nextTurnThreat(final Player ai, final Collection<Card> gone, final Collection<Card> spent) {
         final List<Card> attackers = new ArrayList<>();
         for (final Player opp : ai.getOpponents()) {
             for (final Card c : opp.getCreaturesInPlay()) {
-                if (c.getNetPower() > 0 && !c.hasKeyword(Keyword.DEFENDER)
+                if (!gone.contains(c) && c.getNetPower() > 0 && !c.hasKeyword(Keyword.DEFENDER)
                         && !(c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step."))) {
                     attackers.add(c);
                 }
@@ -185,7 +201,7 @@ public final class ActivationGuard {
         }
         attackers.sort((a, b) -> b.getNetPower() - a.getNetPower());
         for (final Card blocker : ai.getCreaturesInPlay()) {
-            if (blocker.isTapped()) {
+            if (blocker.isTapped() || gone.contains(blocker) || spent.contains(blocker)) {
                 continue;
             }
             for (int i = 0; i < attackers.size(); i++) {
@@ -200,6 +216,117 @@ public final class ActivationGuard {
             threat += c.getNetPower();
         }
         return threat;
+    }
+
+    /** The creatures of the AI that the payment taps (or sacrifices) for mana: they are not there to block next turn. */
+    static Set<Card> creaturesSpentOnMana(final List<SpellAbility> payment) {
+        final Set<Card> spent = new HashSet<>();
+        for (final SpellAbility tap : payment) {
+            final Card host = tap.getHostCard();
+            if (host != null && host.isCreature()) {
+                spent.add(host);
+            }
+        }
+        return spent;
+    }
+
+    /**
+     * The creatures that the play takes off the table before their next turn: the chosen targets (or the defined cards) of
+     * a destroy, an exile or bounce, damage that is lethal, a shrink to nothing, and the creatures that a mass effect names.
+     * Tapping and enchanting (Pacifism) are not counted: that threat stays in the reserve.
+     */
+    static Set<Card> removedByPlay(final Player ai, final SpellAbility sa) {
+        final Set<Card> gone = new HashSet<>();
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (api == null) {
+                continue;
+            }
+            final Card host = node.getHostCard();
+            switch (api) {
+                case Destroy:
+                    for (final Card c : aimedCards(node)) {
+                        if (destroyable(c, node)) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                case ChangeZone:
+                    if (leavesBattlefield(node)) {
+                        gone.addAll(aimedCards(node));
+                    }
+                    break;
+                case DealDamage: {
+                    final int dmg = AbilityUtils.calculateAmount(host, node.getParamOrDefault("NumDmg", "0"), node);
+                    for (final Card c : aimedCards(node)) {
+                        if (c.isCreature() && dmg > 0 && c.canBeDestroyed() && c.getLethalDamage() <= dmg) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                }
+                case Pump: {
+                    final int def = AbilityUtils.calculateAmount(host, node.getParamOrDefault("NumDef", "0"), node);
+                    for (final Card c : aimedCards(node)) {
+                        if (c.isCreature() && def < 0 && c.getNetToughness() + def <= 0) {
+                            gone.add(c);
+                        }
+                    }
+                    break;
+                }
+                case DestroyAll:
+                case DamageAll:
+                case ChangeZoneAll:
+                    gone.addAll(sweptBy(ai, node, api));
+                    break;
+                default:
+                    break;
+            }
+        }
+        return gone;
+    }
+
+    private static List<Card> aimedCards(final SpellAbility node) {
+        if (node.usesTargeting()) {
+            return new ArrayList<>(node.getTargets().getTargetCards());
+        }
+        if (node.hasParam("Defined")) {
+            return new ArrayList<>(AbilityUtils.getDefinedCards(node.getHostCard(), node.getParam("Defined"), node));
+        }
+        return new ArrayList<>();
+    }
+
+    private static boolean destroyable(final Card c, final SpellAbility node) {
+        return c.canBeDestroyed() && (node.hasParam("NoRegen") || c.getShieldCount() == 0);
+    }
+
+    private static boolean leavesBattlefield(final SpellAbility node) {
+        return node.getParamOrDefault("Origin", "Battlefield").contains("Battlefield")
+                && !"Battlefield".equals(node.getParam("Destination"));
+    }
+
+    /** The creatures of both sides that a mass effect (Wrath of God, Pyroclasm, a sweeping exile) takes. */
+    private static List<Card> sweptBy(final Player ai, final SpellAbility node, final ApiType api) {
+        final List<Card> swept = new ArrayList<>();
+        final String valid = api == ApiType.ChangeZoneAll ? node.getParam("ChangeType") : node.getParam("ValidCards");
+        if (valid == null || api == ApiType.ChangeZoneAll && !leavesBattlefield(node)) {
+            return swept;
+        }
+        final int dmg = api == ApiType.DamageAll
+                ? AbilityUtils.calculateAmount(node.getHostCard(), node.getParamOrDefault("NumDmg", "0"), node) : 0;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isCreature() || !c.isValid(valid, ai, node.getHostCard(), node)) {
+                continue;
+            }
+            if (api == ApiType.DestroyAll && !destroyable(c, node)) {
+                continue;
+            }
+            if (api == ApiType.DamageAll && (dmg <= 0 || !c.canBeDestroyed() || c.getLethalDamage() > dmg)) {
+                continue;
+            }
+            swept.add(c);
+        }
+        return swept;
     }
 
     /**
