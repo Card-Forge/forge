@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.game.card.*;
 import forge.util.Lang;
@@ -219,8 +221,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
             if (sa.hasParam("SacMessage")) {
                 msg = sa.getParam("SacMessage");
                 // "Creature" in the script is a noun in the sentence ("non-Zombie Creature" keeps its subtype)
-                msg = java.util.regex.Pattern.compile("\\b(?:Creature|Permanent|Artifact|Enchantment|Land|Planeswalker|Battle|Card)\\b")
-                        .matcher(msg).replaceAll(m -> m.group().toLowerCase());
+                final StringBuffer sbMsg = new StringBuffer(); // StringBuffer: the StringBuilder overloads are API 34 too
+                final Matcher tm = Pattern.compile("\\b(?:Creature|Permanent|Artifact|Enchantment|Land|Planeswalker|Battle|Card)\\b").matcher(msg);
+                while (tm.find()) {
+                    tm.appendReplacement(sbMsg, Matcher.quoteReplacement(tm.group().toLowerCase()));
+                }
+                tm.appendTail(sbMsg);
+                msg = sbMsg.toString();
             } else {
                 msg = Lang.getInstance().buildValidDesc(List.of(valid.split(",")), false);
             }

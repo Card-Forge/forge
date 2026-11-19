@@ -227,7 +227,7 @@ public abstract class SpellAbilityEffect {
             final String afterDesc = sa.getParam("AfterDescription");
             String effectDesc = this.getStackDescription(sa);
             // an effect with nothing to say for itself is told in the card's own words
-            if ((effectDesc == null || effectDesc.isBlank()) && sa.hasParam("SpellDescription")
+            if (StringUtils.isBlank(effectDesc) && sa.hasParam("SpellDescription")
                     && !EMPTY_SPELL_DESCRIPTION.matcher(sa.getParam("SpellDescription")).matches()) {
                 effectDesc = REMOVE_REMINDER_TEXT.matcher(sa.getParam("SpellDescription")).replaceAll("");
             }
@@ -248,18 +248,10 @@ public abstract class SpellAbilityEffect {
             if (abSub != null) {
                 String subText = abSub.getStackDescription();
                 // a part that starts a new sentence gets a capital, one that goes on after a comma does not
-                final int lead = subText.length() - subText.stripLeading().length();
+                final int lead = subText.length() - StringUtils.stripStart(subText, null).length();
                 if (lead < subText.length() && Character.isLowerCase(subText.charAt(lead))
                         && endsWithSentence(sb)) {
                     subText = subText.substring(0, lead) + Character.toUpperCase(subText.charAt(lead)) + subText.substring(lead + 1);
-                }
-                // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
-                if (sb.toString().stripTrailing().endsWith(",")) {
-                    final Matcher vm = Pattern.compile("^(\\s*)([A-Z])((?:oll|raw|reate|ut|ap|ntap|estroy|xile|eturn|acrifice|iscard|ain|ose|cry|urveil|ill|eveal|earch|huffle|dd|hoose|ook|ttach|ight|nvestigate|roliferate|xplore|onnive|oad|egenerate|ounter|opy|eal)\\b.*)$",
-                            Pattern.DOTALL).matcher(subText);
-                    if (vm.matches()) {
-                        subText = vm.group(1) + vm.group(2).toLowerCase() + vm.group(3);
-                    }
                 }
                 // after a comma ("choose target creature an opponent controls, roll a d20") the next effect goes on in the same sentence
                 if (endsWithComma(sb)) {
@@ -362,11 +354,11 @@ public abstract class SpellAbilityEffect {
         t = TIDY_PUNCTUATION_SPACE.matcher(t).replaceAll("$1");
         t = TIDY_DUPLICATE_CONJUNCTION.matcher(t).replaceAll("$1");
         // a part that starts a sentence ("then discard a card.") is written with a capital
-        final int first = t.length() - t.stripLeading().length();
+        final int first = t.length() - StringUtils.stripStart(t, null).length();
         if (!isSubPart && first < t.length() && Character.isLowerCase(t.charAt(first))) {
             t = t.substring(0, first) + Character.toUpperCase(t.charAt(first)) + t.substring(first + 1);
         }
-        return isSubPart ? t : t.stripTrailing();
+        return isSubPart ? t : StringUtils.stripEnd(t, null);
     }
 
     // Common functions that all SAEffects will probably use
