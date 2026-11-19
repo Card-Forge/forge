@@ -190,7 +190,7 @@ public class ComputerUtilAbility {
                     || !t.hasParam("TriggerZones") || !t.getParam("TriggerZones").contains("Battlefield")) {
                 continue;
             }
-            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard"), host.getController(), host, t)) {
+            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard").split(","), host.getController(), host, t)) {
                 return true;
             }
         }
