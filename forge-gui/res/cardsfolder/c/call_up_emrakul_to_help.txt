@@ -7,6 +7,6 @@ SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ 
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
 SVar:DBMake:DB$ MakeCard | Name$ Emrakul, the Promised End | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
 SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
-SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+SVar:DBClearNamed:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TimesKicked
 Oracle:Kicker {6} (You may pay an additional {6} as you cast this spell.)\nExile target nonland permanent. Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}." If Call Up Emrakul to Help was kicked, instead create a token that's a copy of Emrakul, the Promised End.
