@@ -505,6 +505,33 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        // Manabarbs: the lands that pay for a spell cost life, and the AI ran into it until it died
+        l.add(noPlay("manabarbs-low-life", "At 3 life under Manabarbs the AI does not pay four lands for a Hill Giant", Fid.APPROX, "MAIN2", true, "Hill Giant",
+                c -> { c.ai.setLife(3, null); c.bf("Mountain", 4, c.ai); c.hand("Hill Giant", c.ai); c.bf("Manabarbs", c.opp); }));
+        l.add(play("manabarbs-healthy", "At 20 life under Manabarbs a cheap creature is still cast", Fid.APPROX, "MAIN2", true, "Savannah Lions",
+                c -> { c.bf("Plains", 3, c.ai); c.hand("Savannah Lions", c.ai); c.bf("Manabarbs", c.opp); }));
+        l.add(play("manabarbs-answer", "At 4 life the AI still casts Disenchant on the Manabarbs", Fid.APPROX, M1, true, "Disenchant",
+                c -> { c.ai.setLife(4, null); c.bf("Plains", 2, c.ai); c.hand("Disenchant", c.ai); c.bf("Manabarbs", c.opp); }));
+        l.add(play("manabarbs-creature-mana", "Mana from a creature costs no life: the Elf pays for the Lions", Fid.APPROX, "MAIN2", true, "Savannah Lions",
+                c -> { c.ai.setLife(3, null); c.bf("Plains", c.ai); c.bf("Llanowar Elves", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Manabarbs", c.opp); }));
+        // Machine God's Effigy copies as a non-creature: a vanilla 8/8 is only a mana rock then
+        l.add(new Scenario("effigy-copy-value", "Machine God's Effigy copies what a non-creature does, not what a creature weighs", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 4, c.ai); c.hand("Machine God's Effigy", c.ai); c.bf("Hill Giant", c.opp); c.bf("Mulldrifter", c.opp); c.bf("Glorious Anthem", c.opp); },
+                c -> {
+                    int bears = 0, drifter = 0;
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Hill Giant")) { bears = forge.ai.ability.CloneAi.nonCreatureCopyValue(c.ai, k); }
+                        if (k.getName().equals("Mulldrifter")) { drifter = forge.ai.ability.CloneAi.nonCreatureCopyValue(c.ai, k); }
+                    }
+                    return bears > 0 ? "a vanilla creature is worth a copy (" + bears + ")" : drifter <= 0 ? "the enters trigger of Mulldrifter is worth nothing" : null;
+                }));
+        // a deathtouch blocker takes one attacker: it does not hold back a whole army
+        l.add(new Scenario("deathtouch-swarm", "Four 2/2s attack into one Typhoid Rats: it can block only one", Fid.APPROX, M1, true,
+                c -> { c.bf("Grizzly Bears", 4, c.ai); c.bf("Typhoid Rats", c.opp); },
+                c -> c.attackers().size() < 2 ? "only " + c.attackers().size() + " attacked into a single deathtouch blocker" : null));
+        l.add(new Scenario("deathtouch-lone", "A lone Hill Giant does not attack into the Typhoid Rats", Fid.APPROX, M1, true,
+                c -> { c.bf("Hill Giant", c.ai); c.bf("Typhoid Rats", c.opp); },
+                c -> c.attackers().isEmpty() ? null : "the Hill Giant attacked into a deathtouch blocker with nothing else"));
         // #5907: removal that hands its victim's controller a land is a card spent to ramp them when it hits a mana dork
         l.add(noPlay("5907-path-hierarch", "Path to Exile against a lone Noble Hierarch only gives them a land", Fid.APPROX, M1, true, "Path to Exile",
                 c -> { c.bf("Plains", 2, c.ai); c.hand("Path to Exile", c.ai); c.bf("Noble Hierarch", c.opp); }));

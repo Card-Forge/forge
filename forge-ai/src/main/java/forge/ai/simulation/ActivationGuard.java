@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
 import forge.ai.ability.AnimateAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -25,6 +26,8 @@ import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -143,6 +146,53 @@ public final class ActivationGuard {
     static final int LAND_GIFT = 130;
     /** What a 3/3 token is worth to the player who gets it (Beast Within, Generous Gift). */
     static final int TOKEN_GIFT = 190;
+
+    /**
+     * Manabarbs and its kin: what a play costs in life through the lands that it taps, against the life the AI can
+     * spare. The reserve is what the opponent's creatures could hit for next turn (at least three). A play that removes
+     * the source of the damage is the exception, it may take the life down to one; so is a play that costs nothing.
+     * Returns true when the cost is too high.
+     */
+    public static boolean tooPainfulToPay(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.isManaAbility() || sa.isTrigger() || !ai.canLoseLife()
+                || ai.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        final int damage = ComputerUtilMana.estimateTapDamage(ai, sa);
+        if (damage <= 0) {
+            return false;
+        }
+        if (removesTapDamage(ai, sa)) {
+            return ai.getLife() - damage < 1;
+        }
+        int threat = 0;
+        for (final Card c : ai.getWeakestOpponent() == null ? new CardCollection() : ai.getWeakestOpponent().getCreaturesInPlay()) {
+            if (!c.isTapped() && !c.isSick()) {
+                threat += Math.max(0, c.getNetPower());
+            }
+        }
+        return ai.getLife() - damage < Math.max(3, threat + 1);
+    }
+
+    /** The play is aimed at a permanent that damages whoever taps a land (it can target one, or it is chosen on resolution). */
+    private static boolean removesTapDamage(final Player ai, final SpellAbility sa) {
+        final ApiType api = sa.getApi();
+        if (api != ApiType.Destroy && api != ApiType.ChangeZone && api != ApiType.Counter) {
+            return false;
+        }
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final Trigger t : c.getTriggers()) {
+                if (t.getMode() != TriggerType.TapsForMana) {
+                    continue;
+                }
+                final SpellAbility effect = t.ensureAbility();
+                if (effect != null && effect.getApi() == ApiType.DealDamage && (!sa.usesTargeting() || sa.canTarget(c))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Removal that pays its victim's controller (Path to Exile, Erode, Assassin's Trophy: a land; Beast Within, Generous

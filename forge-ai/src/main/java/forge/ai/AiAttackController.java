@@ -1630,6 +1630,14 @@ public class AiAttackController {
             return true;
         }
 
+        // a deathtouch blocker kills what it blocks, but it blocks one attacker, dies to it, and costs the opponent a card:
+        // it is a tax on the attack, not a wall
+        if (aiAggression >= 2 && aiAggression < 5 && worthTheDeathtouchTax(attacker, defenders, combat)) {
+            if (LOG_AI_ATTACKS)
+                System.out.println(attacker.getName() + " = attacking into deathtouch: more attackers than they have deathtouch blockers");
+            return true;
+        }
+
         // decide if the creature should attack based on the prevailing strategy choice in aiAggression
         switch (aiAggression) {
             case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
@@ -1679,6 +1687,41 @@ public class AiAttackController {
                 break;
         }
         return false; // don't attack
+    }
+
+    /**
+     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough): each blocks one attacker and takes the most
+     * valuable one it can, and each dies to what it blocks. So the attack is held back only while the AI has no more
+     * attackers than they have deathtouch blockers. Beyond that the creatures that are not the likely victims go in, and
+     * the likely victims go in when the trade is even (they are worth no more than the blocker that takes them).
+     * Nothing else of theirs may be able to kill the attacker, that is for the ordinary checks to weigh.
+     */
+    private boolean worthTheDeathtouchTax(final Card attacker, final List<Card> defenders, final Combat combat) {
+        final List<Card> deathtouch = new ArrayList<>();
+        for (final Card blocker : defenders) {
+            if (CombatUtil.canBlock(attacker, blocker)) {
+                if (blocker.hasKeyword(Keyword.DEATHTOUCH)) {
+                    deathtouch.add(blocker);
+                } else if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
+                    return false; // something else of theirs kills it: not a deathtouch question
+                }
+            }
+        }
+        if (deathtouch.isEmpty() || attackers.size() <= deathtouch.size()) {
+            return false; // every attacker could be blocked and killed
+        }
+        // the attackers that can go in, the best first: those are the ones the deathtouch blockers take
+        final List<Card> byValue = new ArrayList<>(attackers);
+        byValue.sort((a, b) -> ComputerUtilCard.evaluateCreature(b) - ComputerUtilCard.evaluateCreature(a));
+        final List<Card> likelyVictims = byValue.subList(0, deathtouch.size());
+        if (!likelyVictims.contains(attacker)) {
+            return true;
+        }
+        int cheapest = Integer.MAX_VALUE;
+        for (final Card blocker : deathtouch) {
+            cheapest = Math.min(cheapest, ComputerUtilCard.evaluateCreature(blocker));
+        }
+        return ComputerUtilCard.evaluateCreature(attacker) <= cheapest + 40; // an even trade, with a little for the card
     }
 
     /**

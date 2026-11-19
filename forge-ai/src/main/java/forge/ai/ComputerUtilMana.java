@@ -1884,6 +1884,89 @@ public class ComputerUtilMana {
         return sources;
     }
 
+    /**
+     * The damage the AI takes when it taps this source for mana because of the permanents of the table, whoever controls
+     * them: Manabarbs ("whenever a player taps a land for mana, 1 damage to that player"), Burning Earth for the nonbasic
+     * lands, Scald for the Islands, and the like. A damage doubler (Axonil, Furnace of Rath) is counted through the
+     * replacement. The own triggers of the source (pain lands) are not part of it, they are weighed by the sorting.
+     */
+    public static int tapDamage(final Player ai, final Card source) {
+        if (ai == null || source == null || !source.isLand()) {
+            return 0;
+        }
+        int total = 0;
+        for (final Card host : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (host == source) {
+                continue;
+            }
+            for (final Trigger t : host.getTriggers()) {
+                if (t.getMode() != TriggerType.TapsForMana) {
+                    continue;
+                }
+                final String valid = t.getParam("ValidCard");
+                if (valid != null && !source.isValid(valid, host.getController(), host, null)) {
+                    continue;
+                }
+                final SpellAbility trigSa = t.ensureAbility();
+                if (trigSa == null || trigSa.getApi() != ApiType.DealDamage) {
+                    continue;
+                }
+                final String defined = trigSa.getParamOrDefault("Defined", "");
+                final boolean hitsTheTapper = defined.equals("TriggeredActivator")
+                        || defined.equals("You") && host.getController().equals(ai);
+                if (!hitsTheTapper) {
+                    continue;
+                }
+                int dmg = AbilityUtils.calculateAmount(host, trigSa.getParamOrDefault("NumDmg", "1"), trigSa);
+                dmg = ai.staticReplaceDamage(dmg, host, false);
+                total += Math.max(0, dmg);
+            }
+        }
+        return total;
+    }
+
+    /** The damage per tap of the lands of the table that hurt the AI, the lowest first (what paying with them costs). */
+    private static List<Integer> painfulTaps(final Player ai) {
+        final List<Integer> dmg = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.isTapped() && !getAIPlayableMana(c).isEmpty()) {
+                final int d = tapDamage(ai, c);
+                if (d > 0) {
+                    dmg.add(d);
+                }
+            }
+        }
+        Collections.sort(dmg);
+        return dmg;
+    }
+
+    /**
+     * The life that paying for this play costs through Manabarbs and its kin: the mana that the sources without damage
+     * (creatures, rocks, lands the trigger does not hit) cannot cover is paid with the cheapest hurting lands. Zero with
+     * nothing on the table that hurts.
+     */
+    public static int estimateTapDamage(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.getPayCosts() == null || sa.getPayCosts().getTotalMana() == null) {
+            return 0;
+        }
+        final List<Integer> painful = painfulTaps(ai);
+        if (painful.isEmpty()) {
+            return 0;
+        }
+        int free = ai.getManaPool().totalMana();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isTapped() && !getAIPlayableMana(c).isEmpty() && (!c.isLand() || tapDamage(ai, c) == 0)) {
+                free++;
+            }
+        }
+        final int needed = Math.max(0, sa.getPayCosts().getTotalMana().getCMC() - free);
+        int damage = 0;
+        for (int i = 0; i < Math.min(needed, painful.size()); i++) {
+            damage += painful.get(i);
+        }
+        return damage;
+    }
+
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
                 ai.getCardsIn(ZoneType.Command));
@@ -1923,6 +2006,8 @@ public class ComputerUtilMana {
         // 4. all other sources (creature, costs, drawback, etc.)
 
         final boolean canDieToTapDamage = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
+        int tapBudget = ai.getLife() - 1; // the life that the hurting lands may cost: never the last point
+        final CardCollection painfulManaSources = new CardCollection();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
             if (card.isCreature()) {
@@ -1952,6 +2037,17 @@ public class ComputerUtilMana {
                 if (dealsLethalOnTap) {
                     continue;
                 }
+            }
+
+            // Manabarbs and its kin: a land that hurts is used last, and never so often that the AI dies of it
+            final int tapDmg = tapDamage(ai, card);
+            if (tapDmg > 0 && canDieToTapDamage) {
+                if (tapDmg > tapBudget) {
+                    continue;
+                }
+                tapBudget -= tapDmg;
+                painfulManaSources.add(card);
+                continue;
             }
 
             if (card.isCreature() || card.isEnchanted()) {
@@ -2037,6 +2133,7 @@ public class ComputerUtilMana {
         ComputerUtilCard.sortByEvaluateCreature(useLastManaSources);
         Collections.reverse(useLastManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), useLastManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), painfulManaSources);
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
