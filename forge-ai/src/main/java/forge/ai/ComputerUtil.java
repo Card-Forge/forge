@@ -972,8 +972,9 @@ public class ComputerUtil {
                     sacThreshold = considerSacThreshold;
                 }
 
-                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
-                    return true;
+                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold
+                        || source.isKeyword(Keyword.DEVOUR) && forge.ai.simulation.ElfLoop.devourAll(ai, source.getHostCard())) {
+                    return true; // a Predator Dragon that kills this turn eats the whole board
                 }
 
                 if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {

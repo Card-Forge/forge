@@ -487,8 +487,8 @@ public final class ComboGuard {
             return false;
         }
         final CostSacrifice cost = sa.getPayCosts().getCostPartByType(CostSacrifice.class);
-        if (cost == null || cost.payCostFromSource()) {
-            return false;
+        if (cost == null || cost.payCostFromSource() || ElfLoop.orderIsTheKill(ai, sa)) {
+            return false; // Natural Order for a lethal Craterhoof: the elf it sacrifices is the price of the win
         }
         final CardCollectionView chosen = ComputerUtil.chooseSacrificeType(ai, cost.getType(), sa, sa.getTargetCard(),
                 false, Math.max(1, cost.getAbilityAmount(sa)), CardCollection.EMPTY);

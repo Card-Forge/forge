@@ -5,6 +5,7 @@ import forge.ai.simulation.SimulationTest;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -17,135 +18,18 @@ import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.PlayerControllerForTests;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
- * Auto payment should not tap every untapped source of one colour when the same cost can be paid
- * while leaving at least one source of each colour untapped. The number of sources used never changes.
+ * Whether {@link ComputerUtilMana} can pay a cost with a source, and how much mana the source makes.
+ * {@link ComputerUtilManaOrderTest} covers which source pays when several could.
  * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
  * A source that removes X counters to make mana removes only as many as the other sources leave unpaid.
  */
 public class ComputerUtilManaTest extends SimulationTest {
-
-    /**
-     * Pays the cost in test mode with the given basic lands and returns how many of each land
-     * name stay untapped. Land specs look like "Swamp:4".
-     */
-    private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String... landSpecs) {
-        return payAndCountUntapped(cost, expectedTapped, new String[0], landSpecs);
-    }
-
-    private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String[] hand, final String... landSpecs) {
-        Game game = initAndCreateGame();
-        final Player p = game.getPlayers().get(1);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
-
-        final Map<String, Integer> untapped = new HashMap<>();
-        for (final String spec : landSpecs) {
-            final String[] parts = spec.split(":");
-            final int count = Integer.parseInt(parts[1]);
-            for (int i = 0; i < count; i++) {
-                // creatures that make mana must be able to tap right away
-                addCard(parts[0], p).setSickness(false);
-            }
-            untapped.put(parts[0], count);
-        }
-
-        for (final String name : hand) {
-            addCardToZone(name, p, ZoneType.Hand);
-        }
-
-        // any spell will do as the host, only the cost matters
-        final Card host = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
-        final SpellAbility sa = host.getFirstSpellAbility();
-        sa.setActivatingPlayer(p);
-
-        final ManaCostBeingPaid toPay = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(cost)));
-        final CardCollection used = ComputerUtilMana.getManaSourcesToPayCost(toPay, sa, p, false);
-        assertNotNull(used, "cost " + cost + " should be payable");
-        assertEquals(used.size(), expectedTapped, "number of sources tapped for " + cost);
-
-        for (final Card c : used) {
-            untapped.merge(c.getName(), -1, Integer::sum);
-        }
-        return untapped;
-    }
-
-    private static void assertLeft(final Map<String, Integer> untapped, final String... lands) {
-        for (final String land : lands) {
-            assertTrue(untapped.get(land) >= 1, "expected at least one untapped " + land + ", got " + untapped);
-        }
-    }
-
-    @Test
-    public void genericPartKeepsBothColoursAvailable() {
-        // {3}{B} with 4 Swamp + 2 Island: 3 Swamp + 1 Island leaves one of each
-        assertLeft(payAndCountUntapped("3 B", 4, "Swamp:4", "Island:2"), "Swamp", "Island");
-    }
-
-    @Test
-    public void genericPartPrefersTheOtherColour() {
-        // {1}{B} with 2 Swamp + 4 Island: must not use both Swamps
-        assertLeft(payAndCountUntapped("1 B", 2, "Swamp:2", "Island:4"), "Swamp", "Island");
-    }
-
-    @Test
-    public void hybridShardLeavesBothColoursAvailable() {
-        // {U/B} with 1 Swamp + 2 Island: pay with an Island so the Swamp stays
-        assertLeft(payAndCountUntapped("U/B", 1, "Swamp:1", "Island:2"), "Swamp", "Island");
-    }
-
-    @Test
-    public void coloredShardDoesNotDrainItsColour() {
-        // {3}{W} with 2 Plains + 4 Island: only one Plains is needed
-        assertLeft(payAndCountUntapped("3 W", 4, "Plains:2", "Island:4"), "Plains", "Island");
-    }
-
-    @Test
-    public void threeColoursAreAllKept() {
-        // {2}{R} with 2 of each of three types: one Mountain for R, the generic from Forest and Plains
-        assertLeft(payAndCountUntapped("2 R", 3, "Mountain:2", "Forest:2", "Plains:2"), "Mountain", "Forest", "Plains");
-    }
-
-    @Test
-    public void multiColourSourcesKeepWhatTheHandNeeds() {
-        // {X}{G}{G} with X=2: Vigorbloom Charm {G}{W} is in hand, so a Plains and a green source must stay
-        final Map<String, Integer> untapped = payAndCountUntapped("2 G G", 4, new String[] { "Vigorbloom Charm" },
-                "Plains:2", "Forest:1", "Formidable Commons:2", "Greenhouse Propagator:1");
-        assertLeft(untapped, "Plains");
-        assertTrue(untapped.get("Forest") + untapped.get("Formidable Commons") + untapped.get("Greenhouse Propagator") >= 1,
-                "expected a green source to stay untapped, got " + untapped);
-    }
-
-    @Test
-    public void unavoidableDrainStillPaysWithSameNumberOfLands() {
-        // {2}{B} with 2 Swamp + 2 Island taps 3 of 4 lands, so one colour is gone either way
-        final Map<String, Integer> untapped = payAndCountUntapped("2 B", 3, "Swamp:2", "Island:2");
-        assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
-    }
-
-    @Test
-    public void spiritGuideIsNotExiledToKeepAHeldColour() {
-        // the last Stomping Ground is the only green source for Giant Growth, but the lands pay {5} on their own
-        final Map<String, Integer> untapped = payAndCountUntapped("5", 5,
-                new String[] { "Simian Spirit Guide", "Giant Growth" }, "Stomping Ground:5");
-        assertEquals((int) untapped.get("Stomping Ground"), 0, "expected every land tapped, got " + untapped);
-    }
-
-    @Test
-    public void spiritGuideDoesNotCountAsASourceOfItsColour() {
-        // Stomping Ground is the only land that makes green, so Steam Vents has to pay the {R}
-        final Map<String, Integer> untapped = payAndCountUntapped("3 R G", 5,
-                new String[] { "Elvish Spirit Guide" }, "Island:3", "Stomping Ground:1", "Steam Vents:1");
-        assertEquals((int) untapped.get("Steam Vents"), 0, "expected every land tapped, got " + untapped);
-    }
 
     /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
     private Player sacrificeBoard(final int tokens, final String... permanents) {
@@ -246,6 +130,39 @@ public class ComputerUtilManaTest extends SimulationTest {
             assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
             assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
         }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiCountsLotusForACheapSpell() {
+        final Player p = sacrificeBoard(0, "Lotus Bloom");
+        assertFalse(canPay(p, "Savannah Lions"), "the AI keeps a Lotus for a spell of mana value 4 or more");
+
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Savannah Lions")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiPaysChannelLifeAtLowLife() {
+        final Player p = sacrificeBoard(0);
+        p.setLife(5, null);
+        final Card channelEffect = addCardToZone("Channel", p, ZoneType.Command);
+        channelEffect.addSpellAbility(AbilityFactory.getAbility(channelEffect, "ABMana"));
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Sol Ring")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+
+    @Test
+    public void humanScannedByAiCountsATreasureWhoseSacrificeIsPunished() {
+        final Player p = sacrificeBoard(0);
+        addToken("c_a_treasure_sac", p);
+        addCard("Bloodroot Apothecary", p.getGame().getPlayers().get(0));
+        assertFalse(canPay(p, "Savannah Lions"), "the AI won't take two poison counters for a Treasure");
+
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        p.runWithController(() -> assertTrue(canPay(p, "Savannah Lions")),
+                new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
     }
 
     @Test

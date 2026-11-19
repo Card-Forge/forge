@@ -308,7 +308,7 @@ public class ComputerUtilMana {
     }
 
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
-            Collection<SpellAbility> maList, boolean checkCosts) {
+            Collection<SpellAbility> maList, boolean checkCosts, List<SpellAbility> paidSoFar) {
         Card saHost = sa.getHostCard();
 
         // CastTotalManaSpent (AIPreference:ManaFrom$Type or AIManaPref$ Type)
@@ -331,6 +331,16 @@ public class ComputerUtilMana {
                     break;
                 case "Treasure":
                     // Try to spend only one Treasure if possible
+                    boolean treasurePaid = false;
+                    for (SpellAbility paid : paidSoFar) {
+                        if (paid.getHostCard() != null && paid.getHostCard().getType().hasSubtype("Treasure")) {
+                            treasurePaid = true;
+                            break;
+                        }
+                    }
+                    if (treasurePaid) {
+                        break;
+                    }
                     filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
                             && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1);
                     SpellAbility first = filteredList.get(0);
@@ -392,14 +402,14 @@ public class ComputerUtilMana {
 
                 // If a manland was previously animated this turn, do not tap it to animate another manland
                 if (saHost.isLand() && ma.getHostCard().isLand()
-                        && ai.getController().isAI()
+                        && ai.isAI()
                         && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
                     continue;
                 }
             } else if (sa.getApi() == ApiType.Pump) {
                 if ((saHost.isInstant() || saHost.isSorcery())
                         && ma.getHostCard().isCreature()
-                        && ai.getController().isAI()
+                        && ai.isAI()
                         && ma.getPayCosts().hasTapCost()
                         && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
                     // do not activate pump instants/sorceries targeting creatures by tapping targeted
@@ -738,7 +748,7 @@ public class ComputerUtilMana {
                 }
             }
 
-            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test, paymentList);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
                 // not a good idea to sac a card that you're targeting with the SA you're paying for
@@ -746,7 +756,8 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (saPayment != null && "BlackLotus".equals(saPayment.getParam("AILogic")) && !SpecialCardAi.BlackLotus.consider(ai, sa, cost)) {
+            // a human may spend a Lotus on any spell, so auto-pay and the playable scan must count it
+            if (saPayment != null && ai.isAI() && "BlackLotus".equals(saPayment.getParam("AILogic")) && !SpecialCardAi.BlackLotus.consider(ai, sa, cost)) {
                 // since we checked this already, do not loop indefinitely checking again
                 saExcludeList.add(saPayment);
                 continue;
@@ -1367,7 +1378,7 @@ public class ComputerUtilMana {
         // a mana ability that discards the hand (Lion's Eye Diamond) is not for paying a spell while the hand holds the
         // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
         if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
-                && ai.getController() instanceof PlayerControllerAi
+                && ai.isAI()
                 && ComboPlan.holdsKillPiece(ai)) {
             return false;
         }
@@ -1500,7 +1511,7 @@ public class ComputerUtilMana {
     // for the future spell to be cast in another phase. However, if the spell ability that is
     // being considered for casting is high priority, then mana source reservation will be ignored.
     private static boolean isManaSourceReserved(Player ai, Card sourceCard) {
-        if (!(ai.getController() instanceof PlayerControllerAi)) {
+        if (!ai.isAI() || !(ai.getController() instanceof PlayerControllerAi)) {
             return false;
         }
 
@@ -1877,7 +1888,7 @@ public class ComputerUtilMana {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand),
                 ai.getCardsIn(ZoneType.Command));
         final List<Card> manaSources = CardLists.filter(list, c -> {
-            if (ComputerUtil.sacrificePunished(ai, c) && c.isInZone(ZoneType.Battlefield)) {
+            if (ai.isAI() && ComputerUtil.sacrificePunished(ai, c) && c.isInZone(ZoneType.Battlefield)) {
                 return false; // a Treasure that gives the AI poison counters when it is sacrificed (Bloodroot Apothecary)
             }
             for (final SpellAbility am : getAIPlayableMana(c)) {
@@ -2174,7 +2185,7 @@ public class ComputerUtilMana {
         if (lifeCost <= 0) {
             return 1;
         }
-        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        int minimumLife = player.isAI() && sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
         if (player.cantLoseForZeroOrLessLife()) {
             minimumLife = 0;
         }
@@ -2200,7 +2211,7 @@ public class ComputerUtilMana {
                 return false;
             }
         }
-        int minimumLife = sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
+        int minimumLife = player.isAI() && sa.hasParam("AILifeThreshold") ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 1;
         if (player.cantLoseForZeroOrLessLife()) {
             minimumLife = 0;
         }

@@ -1745,31 +1745,107 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         final Map<Card, ManaCostShard> chosen = ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
-        // improvise and waterbend don't record the cards they tap, which the AI checks before casting
-        if (kept.isEmpty() || !creatures || artifacts) {
+        // Improvise and waterbend don't record the cards they tap. Their existing selection
+        // logic is intentionally left unchanged here.
+        if (!creatures || artifacts) {
             return chosen;
         }
+        final boolean hasTapTypeManaSource = !chosen.isEmpty() && hasTapTypeManaAbility(ai);
+        if (!hasTapTypeManaSource && (kept.isEmpty() || sa.costHasManaX())) {
+            return chosen;
+        }
+
+        ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
+        for (final ManaCostShard shard : chosen.values()) {
+            rest.decreaseShard(shard, 1);
+        }
+
+        // CostAdjustment records the selected convoke creatures only after this callback returns.
+        // Include them temporarily when estimating the remaining mana so a tap-type mana ability
+        // cannot count the same Elves again (for example, Heritage Druid's tap-three-Elves cost).
+        if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
+            return chosen;
+        }
+
+        // If the remaining cost cannot be paid with the chosen creatures tapped, try releasing
+        // them from convoke. A creature may be more valuable as part of a mana ability's tap cost
+        // than as a one-mana convoke payment.
+        final Map<Card, ManaCostShard> originalChoice = new HashMap<>(chosen);
+        final List<Card> releaseCandidates = new ArrayList<>(chosen.keySet());
+        releaseCandidates.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c))
+                .thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
+        for (final Card c : releaseCandidates) {
+            final ManaCostShard shard = chosen.remove(c);
+            if (shard == null) {
+                continue;
+            }
+            rest.increaseShard(shard, 1);
+            if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
+                return chosen;
+            }
+        }
+
+        // No convoke subset made the remaining cost payable. Keep the original choice and retain
+        // the existing combat-preservation behavior below.
+        chosen.clear();
+        chosen.putAll(originalChoice);
+        rest = new ManaCostBeingPaid(manaCost);
+        for (final ManaCostShard shard : chosen.values()) {
+            rest.decreaseShard(shard, 1);
+        }
+
         // an X spell would size X to include the creatures kept for combat
         if (sa.costHasManaX()) {
             return chosen;
         }
-        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
-        final ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
-        chosen.values().forEach(shard -> rest.decreaseShard(shard, 1));
-        if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+        if (kept.isEmpty()) {
             return chosen;
         }
+        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
         kept.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c)).thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
         for (final Card c : kept) {
-            ComputerUtilMana.getConvokeOrImproviseFromList(rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures).forEach((card, shard) -> {
-                chosen.put(card, shard);
-                rest.decreaseShard(shard, 1);
-            });
-            if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+            final Map<Card, ManaCostShard> additional = ComputerUtilMana.getConvokeOrImproviseFromList(
+                    rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures);
+            for (final Map.Entry<Card, ManaCostShard> entry : additional.entrySet()) {
+                chosen.put(entry.getKey(), entry.getValue());
+                rest.decreaseShard(entry.getValue(), 1);
+            }
+            if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
                 break;
             }
         }
         return chosen;
+    }
+
+    private static boolean hasTapTypeManaAbility(final Player ai) {
+        for (final ZoneType zone : Arrays.asList(ZoneType.Battlefield, ZoneType.Command)) {
+            for (final Card source : ai.getCardsIn(zone)) {
+                for (final SpellAbility mana : source.getManaAbilities()) {
+                    final Cost cost = mana.getPayCosts();
+                    if (cost != null && cost.hasSpecificCostType(CostTapType.class)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean canPayWithConvokeSelection(final SpellAbility sa, final ManaCostBeingPaid remainingCost,
+            final Player ai, final Collection<Card> convoked) {
+        if (remainingCost.isPaid()) {
+            return true;
+        }
+
+        final CardCollection previous = new CardCollection(sa.getTappedForConvoke());
+        sa.clearTappedForConvoke();
+        sa.getTappedForConvoke().addAll(convoked);
+        try {
+            return ComputerUtilMana.canPayManaCost(remainingCost, sa, ai, false);
+        } finally {
+            sa.clearTappedForConvoke();
+            sa.getTappedForConvoke().addAll(previous);
+        }
     }
 
     @Override
