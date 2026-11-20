@@ -632,6 +632,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxDraw".equals(sa.getParam("AILogic"))
+                && !forge.ai.AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController())) {
+            return false; // The Second Doctor: the card is not worth an attack it wants to make
+        }
         int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
         if (numCards < player.getZone(ZoneType.Library).size())

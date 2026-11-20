@@ -854,6 +854,9 @@ public class EffectAi extends SpellAbilityAi {
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
+        if ("AttackTaxDraw".equals(aiLogic) && !AttackRestrictionDeal.worthTaking(payer, sa.getHostCard().getController())) {
+            return false; // Willie Lumpkin: the card is not worth an attack it wants to make
+        }
         if ("WillAttack".equals(aiLogic)) {
             // TODO use AiController::getPredictedCombat
             AiAttackController aiAtk = new AiAttackController(payer);
