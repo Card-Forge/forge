@@ -1,0 +1,6 @@
+Name:Mindless-One Token
+ManaCost:no cost
+Colors:black
+Types:Creature Mindless-One
+PT:3/1
+Oracle:

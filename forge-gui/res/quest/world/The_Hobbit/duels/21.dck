@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/CuteChandra19_-_Jeskai_Control_(Standard,_#893352).dck
+Deck Type=constructed
+
+[Main]
+4 Starting Town
+4 Castle Doom
+4 Sacred Foundry
+3 Hallowed Fountain
+2 Cori Mountain Monastery
+2 Island
+2 Sundown Pass
+1 Steam Vents
+1 Plains
+1 Mountain
+4 Aang's Iceberg
+4 Weapons Manufacturing
+4 Legion Extruder
+4 United Battlefront
+4 Pinnacle Starcage
+4 Cryogen Relic
+3 Lodestone Needle
+2 Spring-Loaded Sawblades
+2 Tezzeret, Cruel Captain
+2 Dusk Rose Reliquary
+1 Thrór's Map
+1 Candy Trail
+1 Soul-Guide Lantern
+[Sideboard]
+2 Tezzeret, Cruel Captain
+4 Page, Loose Leaf
+4 Seam Rip
+1 Scene of the Crime
+4 Torpor Orb

@@ -40,7 +40,12 @@ public class PrintSheet {
 
     public PrintSheet(String name0, ItemPool<PaperCard> pool) {
         name = name0;
-        cardsWithWeights = pool != null ? pool : new ItemPool<>(PaperCard.class);
+        cardsWithWeights = new ItemPool<>(PaperCard.class);
+        if (pool != null) {
+            for (Entry<PaperCard, Integer> entry : pool) {
+                add(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     public void add(PaperCard card) {
@@ -48,6 +53,10 @@ public class PrintSheet {
     }
 
     public void add(PaperCard card, int weight) {
+        // Skip missing/unsupported scripts so boosters never deal placeholder cards.
+        if (card == null || card.getRules() == null || card.getRules().isUnsupported()) {
+            return;
+        }
         cardsWithWeights.add(card, weight);
     }
 
@@ -57,7 +66,25 @@ public class PrintSheet {
 
     public void addAll(Iterable<PaperCard> cards, int weight) {
         for (PaperCard card : cards)
-            cardsWithWeights.add(card, weight);
+            add(card, weight);
+    }
+
+    /**
+     * Returns a new sheet with the same weights for every card whose name is not
+     * in {@code excludedNames}. Does not mutate this sheet. If {@code excludedNames}
+     * is null or empty, returns this sheet.
+     */
+    public PrintSheet copyWithoutNames(Collection<String> excludedNames) {
+        if (excludedNames == null || excludedNames.isEmpty()) {
+            return this;
+        }
+        PrintSheet copy = new PrintSheet(name);
+        for (Entry<PaperCard, Integer> entry : cardsWithWeights) {
+            if (!excludedNames.contains(entry.getKey().getName())) {
+                copy.add(entry.getKey(), entry.getValue());
+            }
+        }
+        return copy;
     }
 
     /** Cuts cards out of a sheet - they won't be printed again.

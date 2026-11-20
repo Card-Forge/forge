@@ -1,0 +1,11 @@
+Name:Combadge
+ManaCost:3
+Types:Artifact Communicator Equipment
+K:Equip:2
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddTrigger$ TrigAttack | AddSVar$ TrigUnblockable & Unblockable | Description$ Equipped creature has "Whenever this creature attacks while you control another creature with a Communicator attached to it, this creature can't be blocked this turn."
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Communicator+AttachedTo Creature.Other+YouCtrl | Execute$ TrigUnblockable | TriggerDescription$ Whenever this creature attacks while you control another creature with a Communicator attached to it, this creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:When you cast this spell, copy it. (The copy becomes a token.)\nEquipped creature has "Whenever this creature attacks while you control another creature with a Communicator attached to it, this creature can't be blocked this turn."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

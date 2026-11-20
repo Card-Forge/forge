@@ -35,6 +35,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class QuestWinLoseController {
     private final GameView lastGame;
@@ -571,7 +572,7 @@ public class QuestWinLoseController {
             final CardEdition chooseEd = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseBonusBoosterSet"), options);
 
             if (customBooster) {
-                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.printedInSet(chooseEd.getCode()));
+                List<PaperCard> cards = FModel.getQuest().getAllAllowedCards().filter(PaperCardPredicates.printedInSet(chooseEd.getCode())).collect(Collectors.toList());
                 final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
                 cardsWon = product.get();
             } else {

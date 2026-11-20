@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;The Echoverse Fulcrum&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJzFVNEOgyAMLG/yYXOGH102/Ssz4mcMszbrTsTCTHYJgYDcXYst0RuPjv6Cqz+HZ/U/pjEZ44hJ9w7fBvbi1NC8vf8e69mT78zerj1AzKgrvNqHK/AFYw51zLc0L6A7KM3gt/Gi75qYI99dFIdoiS/RxXhLb3WE3n9mzKdoO/aVy/Nezn7VlX08R20iu2arbonjDN09zpK3EqQmdb3X5rlFV///M6+nrl1Xeq61hjSk9rAfjexnz1drz8ohxy+cuC+9Bf1bIbWn443wXhfoZ0TbnlULa59BoLda1NR8C16fd0IQ
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7Zs7AcGwUj+JRPIpH8SgexSMCAwA4PvgW
+  </data>
+ </layer>
+ <layer id="12" name="Shroud" width="30" height="17" opacity="0.15">
+  <data encoding="base64" compression="zlib">
+   eJydVYENwjAMa1ceQfuBbzaOGRwxOGZwV0GilRrNy5K0I1KFEHHcOG5wbh9zcO6ePj+dfM6+PXdKvz2DQFJiSDnXbv3e+y32BofXwVzEPILNmSOm3MWv3BH4JCzek/PWesQgvTL3mLCX0x6bucZy3n69Z8bm3m5CjxnzKjVRT4k73/nLcobCxfVEjSRNEMNrYkQlJ3ZtPrMwFi/1rPGSX8hjOZfzkrbUa4vHSBuu3xxkj5EfaYZjt+XTfCn1S30Qt+YNbeY1/a2gt7H4bW2sxedXe+ctoe0hnHtknNo7J/013/OQPIxz773NyWuQD2r80v7Dnmlf1PaLpZkUM+wg1LwFZ/1XLAf81jfunVbuf3hrcxoMjY/youb8fXNOi28q2B+WMM/d
+  </data>
+ </layer>
+ <layer id="10" name="Lower Ground" width="30" height="17" opacity="0.3">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMKrgZGCq5iVBIRQCyk972wuy8w8XAIM5DP3vFeCCYnnaCQDU3Ao8C2oGbwPR0C4hvc9HXTike4vMQPjfC5G4R4f5ybtLyLky9BA+m3chmEQKiPKTlI5D6e1wQs6vQzCfFXnKAKA53IruJVnbjcxOu8KAlAJU9ILvv0rnMRbZ/JJZ/ABKlIbM=
+  </data>
+ </layer>
+ <layer id="9" name="Lower Bridges" width="30" height="17" opacity="0.3">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwEocw6MvQdH7aULUBogewcSqAD9fIAAVh0E4YLuzsHgplEwCmgJAFbyDA8=
+  </data>
+ </layer>
+ <layer id="11" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVUkOwjAMzJGmuaGyfaMU+Bgq2zsQ8DL2f3AjlmNhgtNIrVoxkg+tnZlJWjtKIS5aqVWqOscuRV0edQD+rzZu+vOurODMjFJPW7tPMKBmI9RJvDw3Mbh2ZLAG3vUdN2n7vOArt/mpjVfvN89514In2tfCrYea0nlYpqh9tzE08p5hrZQHjkLHdXN3bqAHex0Y5MrMLyfXfgiavi/QPetwvspfHWTMfyhfdWZtIubtH+B/qy5APRnqy7Y0qSep35vqV80WH9TvM/09b3y+scGA3NbrkbOWZ1ZMl/odZk1onvFzkThL5z9Wx3VJW+o9vo9jEuYkb4WnHUNodu/c88Fqzi3nKcFnv47PjTp3mnQXAWbuWywa/vdvxy9dUQ==
+  </data>
+ </layer>
+ <layer id="13" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFldsOwiAMhv9LuBp36gNpfCVPz7N5eKtNt8ewhJGQWklQrE16QWn+b4OWAsF6C9wMsLGvfqH43aLYcpo870p5Q5L/KTOnyblS/jdMSXOY/Wzq6ZbY409sf9bbimdZwtX+57ZSzZbwRuJMc21pML2t3/SvJlfzXlOur6nO6PCld1Orlzj7l70U6zjq92xG5Ni7BtiTHxp5LbG6pG+4Pp9Pfm9kfM84ki8dsHIhtnBhfWLsyJusPP8iW9rj3xYZEjeNtRke134CR5hSwA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lMsNwjAMhp1bcwFmaEFMwg5loS4AA8ESvCQ4ABPwkuBEAon4axxIKvglqyix/TnBMdFnKfedlURzY4vytbdVYkiyRhnRuk+06de51g6GdzR2Kl9rlquoblhriq6GeRO4rSFR21jHWEXv+5wtaZzF1yHltdbVRBNmPS3zRw15fJ37hGJjhH1T6Pr/9602jEXmLpAfhX0z1c81z+UxBbtPqedQNg/6oLBvPNeficdMGRdjfUwBOSyX+0jiXIxRwEUf/1VCjlj5mFAvS1zJ5x9cZEq+KdyBi8mFdyidl/cx+uUJ3ND50CqoK9THlfu9NHNv5WZf6B1JXD6T+Dzi/cbtbJgXxw29I+T6ekM12r19/DU+FPOOvKR7TJmBTSXV+CvuHTYPavc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="199.974" y="271.026" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="188.694" y="74.3844">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="28.9129" y="186.082"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="78.955" y="205.51">
+   <properties>
+    <property name="enemy" value="Titanbones"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/collision.tx" x="480.333" y="0.666667" width="16" height="272"/>
+  <object id="63" template="../../../../common/maps/obj/collision.tx" x="-16.3333" y="1.66667" width="16" height="272"/>
+  <object id="64" template="../../../../common/maps/obj/collision.tx" x="-0.118731" y="271.667" width="488.286" height="16"/>
+  <object id="65" template="../../../../common/maps/obj/collision.tx" x="1.1665" y="-15.6667" width="479.667" height="16"/>
+  <object id="66" template="../../../../common/maps/obj/manashards.tx" x="336" y="97.8333"/>
+  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="47.0214" y="189.551"/>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="351.286" y="155.214">
+   <properties>
+    <property name="enemy" value="Echo Tamiyo"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="353.441" y="204.771">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Transguild Courier&quot;, &quot;Glimmervoid&quot;]}"/>
+    <property name="enemy" value="Echo Karn"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="77.147" y="81.8403">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Yargle, Glutton of Urborg&quot;]}"/>
+    <property name="enemy" value="Echo Yargle"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="79.2629" y="152.861">
+   <properties>
+    <property name="enemy" value="Echo Lyra"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="209.838" y="152.621">
+   <properties>
+    <property name="enemy" value="Echo Yuriko"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="147.673" y="223.085">
+   <properties>
+    <property name="enemy" value="Echo Edgar"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="319.964" y="65.603">
+   <properties>
+    <property name="enemy" value="Echo Ghalta"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="262.407" y="62.0258">
+   <properties>
+    <property name="enemy" value="Echo Kiora"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="208.08" y="96.8016">
+   <properties>
+    <property name="enemy" value="Echo Ruric Thar"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="174.5" y="238.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A disorienting tangle of bridges criss-crosses over echoed alternate versions of familiar places. Seemingly fittingly, the place is swarming with echoed versions of legends you've heard tales of, clinging to the bridges to avoid falling into the nothingness of the void below and above.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="67.5" y="123.25" width="43.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A huge frog spirit with the thickest thighs you've ever seen looms ahead. He croaks out!
+
+'Tibbirhppakkhggahhsng!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="335" y="181.75" width="52" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A golem gilded in gold and wearing a flowing red cape sits before you. He says something, but it seems to be more to himself than to you.
+
+'To have achieved paradise and find it so very fleeting... what a tragedy.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/booster.tx" x="343" y="236">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/booster.tx" x="97.5" y="59">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/booster.tx" x="369" y="96">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;FRA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

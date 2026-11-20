@@ -130,7 +130,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
 
             //make unblockable
-            if (ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1) {
+            if (ph.isPlayerTurn(ai) && ph.getPhase() == PhaseType.MAIN1) {
                 AiAttackController aiAtk = new AiAttackController(ai, c);
                 String s = aiAtk.toProtectAttacker(sa);
                 if (s == null) {
@@ -149,7 +149,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
+        final boolean notAiMain1 = !(ph.isPlayerTurn(ai) && ph.getPhase() == PhaseType.MAIN1);
         // sorceries can only give protection in order to create an unblockable attacker
         return !isSorcerySpeed(sa, ai) || !notAiMain1;
     }

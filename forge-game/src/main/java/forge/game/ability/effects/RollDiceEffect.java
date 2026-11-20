@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.event.GameEventRollDice;
 import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -423,14 +424,16 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
+        List<Integer> rolled = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
-            // Play the die roll sound
-            player.getGame().fireEvent(new GameEventRollDie());
+            player.getGame().fireEvent(new GameEventRollDie(sides, roll));
             player.roll();
             naturalRolls.add(roll);
+            rolled.add(roll);
         }
+        player.getGame().fireEvent(new GameEventRollDice(sides, rolled));
 
         naturalRolls.sort(null);
 

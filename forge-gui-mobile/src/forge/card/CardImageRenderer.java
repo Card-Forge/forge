@@ -1,12 +1,11 @@
 package forge.card;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
-import static forge.card.CardRenderer.CROP_MULTIPLIER;
-import static forge.card.CardRenderer.isModernFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.ImageKeys;
@@ -23,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.google.common.collect.ImmutableList;
 
 import forge.CachedCardImage;
@@ -200,13 +200,8 @@ public class CardImageRenderer {
         }
         //space for artist
         textBoxHeight -= 2 * getCapHeight(PT_FONT);
-        PaperCard paperCard = null;
-        try {
-            paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
-        } catch (Exception e) {}
-        String artist = "WOTC";
-        if (paperCard != null && !paperCard.getArtist().isEmpty())
-            artist = paperCard.getArtist();
+        // the artist is only needed (and only looked up in the card database) when it is actually shown
+        String artist = showArtist ? getArtist(state.getImageKey()) : "WOTC";
         float minTextBoxHeight = 2 * headerHeight;
         if (textBoxHeight < minTextBoxHeight) {
             artHeight -= (minTextBoxHeight - textBoxHeight); //subtract from art height if text box not big enough otherwise
@@ -292,6 +287,33 @@ public class CardImageRenderer {
         if (showArtist)
             g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (getCapHeight(TYPE_FONT) / 2), y + (getCapHeight(TYPE_FONT) / 2), w, h, false, Align.left, false);
     }
+    // drawCardImage() ran a carddb search for every card on every frame just to find the artist's name, so cache it
+    private static final ConcurrentHashMap<String, String> artistByImageKey = new ConcurrentHashMap<>();
+
+    private static String getArtist(String imageKey) {
+        if (imageKey == null) {
+            return "WOTC";
+        }
+        final String cached = artistByImageKey.get(imageKey);
+        if (cached != null) {
+            return cached;
+        }
+        String artist = "WOTC";
+        try {
+            final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard != null && !paperCard.getArtist().isEmpty()) {
+                artist = paperCard.getArtist();
+            }
+        } catch (Exception e) {
+            return artist; // not remembered, so a lookup that failed once is tried again
+        }
+        if (artistByImageKey.size() > 500) {
+            artistByImageKey.clear(); // stays bounded
+        }
+        artistByImageKey.put(imageKey, artist);
+        return artist;
+    }
+
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
         if (colors == null)
             return;
@@ -826,6 +848,39 @@ public class CardImageRenderer {
             ImageCache.getInstance().clear();
         }
     }
+    private static CardView scrollingCard;
+    private static long scrollingSince, scrollingDrawn;
+
+    /** Draws an item description inside the box between the icon and the corner ornaments, scrolling it when it overflows. */
+    private static void drawScrollingDescription(Graphics g, TextraLabel label, CardView card, float x, float top, float w, float bottom, float px) {
+        boolean current = CardZoom.isCurrent(card);
+        float arrowY = bottom + 3 * px;
+        label.setAlignment(Align.topLeft);
+        label.layout();
+        float textHeight = label.getPrefHeight();
+        // overflowing text leaves room below it for the more-text arrow
+        if (textHeight > bottom - top + 2f)
+            bottom -= 6 * px;
+        float boxHeight = bottom - top;
+        float overflow = textHeight - boxHeight;
+        // restart when the card changes or the zoom view was closed and reopened
+        if (current && (card != scrollingCard || TimeUtils.timeSinceMillis(scrollingDrawn) > 500)) {
+            scrollingCard = card;
+            scrollingSince = TimeUtils.millis();
+        }
+        if (current)
+            scrollingDrawn = TimeUtils.millis();
+        float elapsed = current ? TimeUtils.timeSinceMillis(scrollingSince) / 1000f : 0;
+        float offset = overflow > 2f ? RewardActor.autoScrollOffset(elapsed, overflow, boxHeight) : 0;
+        label.setSize(w, textHeight);
+        label.setPosition(g.adjustX(x), g.adjustY(top, 0) - textHeight + offset);
+        g.startClip(x, top, w, boxHeight);
+        label.draw(g.getBatch(), g.getfloatAlphaComposite());
+        g.endClip();
+        if (overflow > 2f && offset < overflow)
+            RewardActor.drawMoreArrow(g.getBatch(), g.adjustX(x + w / 2), g.adjustY(arrowY, 0), px, elapsed, g.getfloatAlphaComposite());
+    }
+
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         drawZoom(g, card, gameView, altState, x, y, w, h, dispW, dispH, isCurrentCard, 1f);
     }
@@ -871,14 +926,16 @@ public class CardImageRenderer {
                     itemName.draw(g.getBatch(), g.getfloatAlphaComposite());
 
                     // Description
-                    TextraLabel itemDescription = Controls.newTextraLabel(header + TextUtil.fastReplace(card.getCurrentState().getOracleText(), "{M}", "[+Shards]"));
+                    TextraLabel itemDescription = Controls.newTextraLabel(header + TextUtil.fastReplace(card.getCurrentState().getOracleText(), "{M}", "[+Shards]").stripTrailing());
                     itemDescription.setWidth(w - (inset * 2));
                     itemDescription.setWrap(true);
-                    float div = center ? 2.5f : 3.5f;
-                    itemDescription.setPosition(x + inset, y + h / div);
-                    if (center)
+                    if (center) {
+                        itemDescription.setPosition(x + inset, y + h / 2.5f);
                         itemDescription.setAlignment(1);
-                    itemDescription.draw(g.getBatch(), g.getfloatAlphaComposite());
+                        itemDescription.draw(g.getBatch(), g.getfloatAlphaComposite());
+                        return;
+                    }
+                    drawScrollingDescription(g, itemDescription, card, x + inset, itemY + itemW + h / 64f, w - inset * 2, y + h - h * 8f / 64f, w / 122f);
                     return;
                 }
             } else if (card.getObject() instanceof InventoryItem item) {
@@ -894,23 +951,16 @@ public class CardImageRenderer {
         if (image == null || image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || card.useCardArt())) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
-            float radius = (h - w) / 8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f : 1.0f;
             float new_w = w * wh_Adj;
             float new_h = h * wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2 : x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2 : y;
-            float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
-            float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
             boolean displayFlipped = card.isFlipped();
             if (card.isFlipCard() && altState) {
                 displayFlipped = !displayFlipped;
             }
 
-            if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
-                croppedArea = 0.975f;
-                minusxy = 0.135f * radius;
-            }
             if (canshow && displayFlipped) {
                 if (Forge.enableUIMask.equals("Full")) {
                     g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 1f, CardRendererUtils.getFoilIndex(card));
@@ -919,40 +969,15 @@ public class CardImageRenderer {
                 } else {
                     g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.getFoilIndex(card));
                 }
-            } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState)) {
-                if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 1f, CardRendererUtils.getFoilIndex(card));
-                } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
-                } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
-            } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState)) {
-                boolean isAftermath = CardRendererUtils.hasAftermath(card);
-                if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
-                } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
-                } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
             } else {
                 if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
                     if (card.isForeTold() || altState) {
-                        if (CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState) && isCurrentCard) {
-                            boolean isAftermath = CardRendererUtils.hasAftermath(card);
-                            if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
-                            } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
-                            } else
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
+                        if (Forge.enableUIMask.equals("Full")) {
+                            g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
+                        } else if (Forge.enableUIMask.equals("Crop")) {
+                            g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
                         } else {
-                            if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
-                            } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
-                            } else {
-                                g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
-                            }
+                            g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
                         }
                     } else {
                         //show sleeves instead

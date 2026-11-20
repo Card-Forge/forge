@@ -205,6 +205,19 @@ public class CharmEffect extends SpellAbilityEffect {
         return "";
     }
 
+    private static void faceDilemma(final Player chooser, final boolean random) {
+        chooser.incDilemmasFacedThisTurn();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(chooser);
+        if (random) {
+            runParams.put(AbilityKey.Random, true);
+        }
+        // Modes are chosen while casting/activating, before costs are paid and before the stack is frozen.
+        // Hold the trigger as waiting so it only goes on the stack once the spell/ability was actually put on
+        // the stack (unfreezeStack runs waiting triggers); if the player backs out, GameActionUtil.rollbackAbility
+        // clears the waiting triggers so "whenever you face a dilemma" doesn't fire for a cancelled cast.
+        chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, true);
+    }
+
     public static boolean makeChoices(SpellAbility sa) {
         // CR 700.2g
         if (sa.isCopied()) {
@@ -253,9 +266,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 List<AbilitySub> randomChosen = Aggregates.random(choices, num);
                 chainAbilities(sa, randomChosen);
                 if (!randomChosen.isEmpty()) {
-                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(activator);
-                    runParams.put(AbilityKey.Random, true);
-                    activator.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+                    faceDilemma(activator, true);
                 }
                 return true;
             }
@@ -277,8 +288,7 @@ public class CharmEffect extends SpellAbilityEffect {
         chainAbilities(sa, chosen);
 
         if (chosen != null && !chosen.isEmpty()) {
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(chooser);
-            chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+            faceDilemma(chooser, false);
         }
 
         // trigger without chosen modes are removed from stack

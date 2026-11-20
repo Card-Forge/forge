@@ -203,7 +203,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                        if (ai.getGame().getPhaseHandler().isPlayerTurn(tgt.getController())) {
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
@@ -262,11 +262,12 @@ public class DamageDealAi extends DamageAiBase {
                 // won't play it even in chain
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
-                // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
+            if (!chainDmg.getKey().canTarget(sa.getTargets().get(0))) {
+                // we might be trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
                 if (!damageTargetAI(ai, sa, dmg, false)) {
+                    // could try to find another chain candidate
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
@@ -352,6 +353,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+        if (!mandatory) {
+            killables = ComputerUtilCard.withoutHarmlessCreatures(ai, killables);
+        }
 
         // Try not to target anything which will already be dead by the time the spell resolves
         killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
@@ -553,7 +557,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             if (dmg > 0 && lastTgt != null) {
-                sa.addDividedAllocation(lastTgt, sa.getDividedValue(lastTgt) + dmg);
+                final Integer already = sa.getDividedValue(lastTgt);
+                sa.addDividedAllocation(lastTgt, (already == null ? 0 : already) + dmg); // a target without a share yet is 0, not a crash
                 dmg = 0;
                 return true;
             }
@@ -686,7 +691,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
                         freePing = true;
                     }
                     if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
@@ -698,8 +703,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if ((freePing && !avoidTargetP(ai, sa))
-                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || ProwessTiming.worthBeforeCombat(ai, sa) // before combat, so the prowess trigger counts
+                        || isFaceBurnWorthCasting(ai, sa) // an instant that can only hit the player (Skullcrack)
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
                         && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
                         || shouldTgtP(ai, sa, dmg, noPrevention)))) {
@@ -801,7 +808,8 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
         if (!urgent && !playReusable(ai, saMe)) {
-            return false;
+            // a spell that can only hurt the opponent has no other use, so it is not kept for later (Boltwave at 6+ life)
+            return positive && (isFaceBurnWorthCasting(ai, saMe) || ProwessTiming.worthBeforeCombat(ai, saMe));
         }
         return true;
     }
@@ -1073,6 +1081,9 @@ public class DamageDealAi extends DamageAiBase {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
                     }
+                    if (ab.getActivatingPlayer() == null) {
+                        ab.setActivatingPlayer(ai); // a spell still in hand has none, and canPlay() checks need one
+                    }
                     if (!ab.canPlay()) {
                         continue;
                     }
@@ -1092,11 +1103,9 @@ public class DamageDealAi extends DamageAiBase {
                         if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
-                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
-                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
-                                String[] validTgtsSa = tgtSa.getValidTgts();
-                                String[] validTgtsAb = tgtAb.getValidTgts();
-                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                String[] validTgtsSa = sa.getTargetRestrictions().getValidTgts();
+                                String[] validTgtsAb = ab.getTargetRestrictions().getValidTgts();
+                                if (!validTgtsAb[0].equals("Any") && !Arrays.asList(validTgtsAb).containsAll(Arrays.asList(validTgtsSa))) {
                                     continue;
                                 }
 

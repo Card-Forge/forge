@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import forge.ai.*;
+import forge.ai.ability.AnimateAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -48,7 +49,7 @@ public class SpellAbilityPicker {
 
     private void printPhaseInfo() {
         String phaseStr = game.getPhaseHandler().getPhase().toString();
-        if (game.getPhaseHandler().getPlayerTurn() != player) {
+        if (!game.getPhaseHandler().isPlayerTurn(player)) {
             phaseStr = "opponent " + phaseStr;
         }
         print("---- choose ability  (phase = " + phaseStr + ")");
@@ -78,6 +79,24 @@ public class SpellAbilityPicker {
         }
         candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
         return candidateSAs;
+    }
+
+    /** For diagnostics: what the picker thinks of every ability it looked at, including those it left out. */
+    public List<String> explainCandidates() {
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        cards = ComputerUtilCard.dedupeCards(cards);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
+        List<String> out = new java.util.ArrayList<>();
+        for (SpellAbility sa : candidateSAs) {
+            if (sa.isManaAbility()) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            out.add(sa.getHostCard() + " [" + sa.getHostCard().getZone() + "] " + canPlayAndPayForSim(sa)
+                    + (sa.isOptionalCostPaid(forge.game.spellability.OptionalCost.Bargain) ? " (bargained)" : ""));
+        }
+        return out;
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
@@ -330,6 +349,24 @@ public class SpellAbilityPicker {
         }
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
+        }
+        if (forge.ai.AiController.isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
+        if (forge.ai.ability.UntapAi.isPointlessSelfUntap(player, sa)) {
+            return AiPlayDecision.TimingRestrictions;
+        }
+        // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
+        if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
+            return AiPlayDecision.DoesntImpactCombat;
+        }
+        if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()
+                && sa.getSVar("X").equals("Count$xPaid")
+                && (ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), player, false) <= 0
+                    || AnimateAi.isRedundantPermanentPtSet(player, sa))) {
+            // an {X} ability paid with X=0, or one that would change nothing: the simulation would happily "play" it at
+            // every priority pass
+            return AiPlayDecision.CantAffordX;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;

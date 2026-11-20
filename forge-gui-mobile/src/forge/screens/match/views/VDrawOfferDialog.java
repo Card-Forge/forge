@@ -97,9 +97,10 @@ public class VDrawOfferDialog extends FDialog {
     }
 
     private void respond(final boolean accept) {
+        // Hide first: a local vote is tallied before this returns and can show the dialog again for the next player
+        hide();
         MatchController.instance.getGameController(localResponder).drawOfferAction(
                 accept ? DrawOfferMessage.Action.ACCEPT : DrawOfferMessage.Action.DECLINE);
-        hide();
     }
 
     private static String voteText(final DrawOffer.Vote vote) {

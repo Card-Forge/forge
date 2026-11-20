@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwL42RgCKMyvslNfTOJxXEDZC81sTMfBI9Ee2HsgXAHOj7GiooH2j2kYHQwau/wsncUj2JKMAAJYrkS
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlEsOgjAQhrvQCC338RHXhnAAz2BiPJDPuDNRz+ENBMMBlFtoG5gwlCkUiMY/+TZM24+WDmeHsUtHrpJzTX3mFvElcwvWnLGNZMvLNZypYGwkeYh8fODSXpvExHpUwAuMBe21ib4WrKcC+z0OcvY8JZRjohqvfl62Xgj23vopkLb7VTnwopf6vuDDXlXv4r2L9NzgDCNRHvN2i1R5fe2dTfe0rlYVG6++fhsPBPfer7zKGaM7aNO/pn9HU+eqx9guuwvf3i92KiaG/qW8baM7Ya+Jwbv07P7RVHB9qDlPTupU0b1PycuSBN2HgJgLPR5mvZ1kzynvwmsG9jaZ9y/eDx1Go0g=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVVEFqw0AM3EthBU1uBd/7iDwgOCn+qJukD2iv+Upc109ob12xO3i8yBvnUEoGRLJrSyNpJDv3f3jfOPcR7PFpvGu9cwe/zP8izn3K9I5jWdDY34HzZzO9r0OcXua5Na8vmdqrj7YkX46NWHrWGt7C7wvVca6ioUZ9vpNox/D/5ONdL2OcOexSXZrnkPy1Z20672XeV7k7GbmQL+5KvsgXBv+acgCeq2iKA+lXJ1/mYZ20hu06GnD0036Bu1Rrm3SEroOR44X6oM+Zk985kT7gh7Y82y3p0ZFfPs+5DhavlQP0AU9fqO3aztQz9TI0Bs9UQ7VpLjknUNp3izffUe6jxuf5sL4P2L1B7H3XOhqDl/fG6mNjzCr4sHs8k9YslvrMs8U1NWL3FjMDny6drX48rK7ra+Vj6bkEzHkr7y3Iv9cK9P8vee8BvyHNkW8=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhegEd0oF1AHkB293sxBoYPYvR3Q684A0OfOP3tRQcV5gwMleYD7QoIuMXCwHCbhbA6Wrj5sSYDwxNNwur+qwMJDQaGQwakuQWbuq1WQPNAdmoR1i8NtFNGgzTziQG/iFQH8+9QBj+A+OdAO4JO4KvVQLtgFMAAAPbkGFw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="390.871" y="48.703"/>
+  <object id="55" template="../../../../common/maps/obj/gold.tx" x="390.667" y="66.3333"/>
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="391.333" y="28"/>
+  <object id="57" template="../../../../common/maps/obj/gold.tx" x="66.337" y="52.319"/>
+  <object id="58" template="../../../../common/maps/obj/gold.tx" x="39" y="60"/>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="280.593" y="41.6899">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Triumphant Getaway&quot;, &quot;Thieving Aven&quot;, &quot;Thieving Varmint&quot;, &quot;Stolen Strategy&quot;, &quot;Cunning Rhetoric&quot; ] }"/>
+    <property name="enemy" value="Gwendlyn Di Corci"/>
+    <property name="hidden" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="342.5" y="161.833">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'Why hello dearie, its your Auntie Blyte! Say, heard of tokens? Powerful items in their own special slot? Capitols charge a fortune for them, but I have some unique and very strong ones for no gold at all! They just cost a few slivers of your soul, no big deal really. You'd look great with a bit less soul anyway. Fitter. Sleeker. Sexier. So, why take some for a spin?!'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;This sounds like a bad idea.&quot;,
+        &quot;text&quot;: &quot;'But the bad ideas are the most fun! I'll be here if you decide to play things less safe.'&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;(Continue)&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Tell me about what you're offering.&quot;,
+        &quot;text&quot;: &quot;'Of course, darling! I have a 1/1 devil token that deals 1 damage to anything when it dies, a 1/1 changeling that's every creature type, a munitions artifact token that deals 2 damage to anything when it goes to the graveyard, and my ultimate token - a 1/1 ninja that can't be blocked!'&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Alright, what about prices.&quot;,
+            &quot;text&quot;: &quot;'I think you'll find them a steal!'&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;I'll take the devil token! (PAY 4 MAX LIFE.)&quot;,
+                &quot;text&quot;: &quot;'Excellent choice! Just between us, that one's my favorite! But then, I'm a bit biased.'&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Continue)&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;grantRewards&quot;: [
+                          {
+                            &quot;type&quot;: &quot;life&quot;,
+                            &quot;count&quot;: -4
+                          },
+                          {
+                            &quot;type&quot;: &quot;item&quot;,
+                            &quot;count&quot;: 1,
+                            &quot;itemName&quot;: &quot;Token of the Devil&quot;
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;I'll take the changeling token! (PAY 3 MAX LIFE.)&quot;,
+                &quot;text&quot;: &quot;'Excellent choice! Versatile and useful for any deck! I hear they can really do ANYTHING if you know what I mean...'&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Continue)&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;grantRewards&quot;: [
+                          {
+                            &quot;type&quot;: &quot;life&quot;,
+                            &quot;count&quot;: -3
+                          },
+                          {
+                            &quot;type&quot;: &quot;item&quot;,
+                            &quot;count&quot;: 1,
+                            &quot;itemName&quot;: &quot;Token of Change&quot;
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;I'll take the munitions token! (PAY 2 MAX LIFE.)&quot;,
+                &quot;text&quot;: &quot;'Excellent choice! Nothing like blowing things up to improve your day!'&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Continue)&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;grantRewards&quot;: [
+                          {
+                            &quot;type&quot;: &quot;life&quot;,
+                            &quot;count&quot;: -2
+                          },
+                          {
+                            &quot;type&quot;: &quot;item&quot;,
+                            &quot;count&quot;: 1,
+                            &quot;itemName&quot;: &quot;Token of Munitions&quot;
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;I'll take the Ninja token! (PAY 6 MAX LIFE.)&quot;,
+                &quot;text&quot;: &quot;'Excellent choice! I respect you going for the most opulent and expensive! Nothing beats the power of money!'&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Continue)&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;grantRewards&quot;: [
+                          {
+                            &quot;type&quot;: &quot;life&quot;,
+                            &quot;count&quot;: -6
+                          },
+                          {
+                            &quot;type&quot;: &quot;item&quot;,
+                            &quot;count&quot;: 1,
+                            &quot;itemName&quot;: &quot;Token of Ninjutsu&quot;
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;I think I'll pass.&quot;,
+                &quot;text&quot;: &quot;'Perhaps some other time, hmm darling? I'll be waiting with tea when you get back!'&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Continue)&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  ]</property>
+    <property name="enemy" value="Auntie Blyte"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/shop.tx" x="23.5" y="164.167">
+   <properties>
+    <property name="commonShopList" value="ThievesItems"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" x="186.004" y="231.583" width="59.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Muttering and shaded eyes glance about in this cave. To your left, someone selling stolen goods. To your right, a tiny winged devil holds a cup of tea and gives you an inviting smile. Ahead, you can see some gold glimmering unguarded - might have to rob the robbers...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="11.0038" y="188.25" width="59.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A shaded figure calls out from the stall ahead. 
+
+'I got what you need to succeed in the cutthroat world out there. Unique items for the cunning rogue. Cash only, no refunds.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/scroll.tx" x="90.6667" y="74.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rogue's Passage&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/scroll.tx" x="344" y="189.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Auntie Blyte, Bad Influence&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/treasure.tx" x="389" y="86.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Triumphant Getaway&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Stolen Strategy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Thieving Aven&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Thieving Varmint&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Impetuous Lootmonger&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Polterheist&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Cunning Rhetoric&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Stolen Goods&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

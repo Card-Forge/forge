@@ -1,0 +1,10 @@
+Name:The Measure of a Man
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:3:DBExile,DBInvestigate,DBReturn
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.!token,Creature.!token | ValidTgtsDesc$ nontoken artifact or creature | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | SpellDescription$ Exile up to one target nontoken artifact or creature.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBGainLife | SpellDescription$ Return the exiled card to the battlefield under its owner's control. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile up to one target nontoken artifact or creature.\nII — Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")\nIII — Return the exiled card to the battlefield under its owner's control. You gain 2 life.

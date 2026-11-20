@@ -8,7 +8,9 @@ import javax.swing.JLabel;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
+import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckStatistics;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -120,6 +122,12 @@ public enum CStatistics implements ICDoc {
                 String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalManaCost").toUpperCase(), tmc));
         VStatistics.SINGLETON_INSTANCE.getLblAMC().setText(String.format("%s: %.2f",
                 Localizer.getInstance().getMessage("lblAverageManaCost").toUpperCase(), amc));
+        final DeckController<TModel> controller = ed.getDeckController();
+        final DeckBase model = controller == null ? null : controller.getModel();
+        final Deck wholeDeck = model == null ? null : model.getHumanDeck();
+        final String points = wholeDeck == null ? null : DeckStatistics.pointsSummary(wholeDeck);
+        VStatistics.SINGLETON_INSTANCE.getLblPoints().setText(points == null ? "" : points.toUpperCase());
+        VStatistics.SINGLETON_INSTANCE.getLblPoints().setVisible(points != null);
     }
 
     /**

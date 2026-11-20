@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="280">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Siege Veteran&quot;, &quot;In the Trenches&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="17793" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjZQJSdvvYtEEVgeoOBtHsUjIJRMApGwcABN04EHij7R5K9Qw3Awgk9vJDTDbY0RGm6Gih7BwMgp/0Zy0J/e0F20steWJzC7KRG/BJrL7Kd1LQXZi61wpEUe2EA3Q3Y3AIATfAWBA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwFE2QfGThgeBdQHbYwMDO1ImN5gAzsmHgWjYBSMglFAGXg00A4YAaCNc+DsRW4bkYIptTeWhTw8lOyF6dXhHhj/jtpLPAYA/dUsOw==
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BshuI2O9iBjUXZMNYtlaGNfH9Q+GEZWxwq086EsAxhQyy5kDLIPlxw1/EeOm2iVVtDjmB52IqvBpvYaKwODEDsCF2BJd+TYiW4vuh6Qvch4IwF7SbWTkD5a2IvsT3z6kP1Nqr3oaQgbxmcvKH5BNDHmDHZMSpiM4lE8ikcxtXAnFwPDSW7iMUgPMptcrAPUz2bIwMCOhGNZ8GOYemraS8hOWtmLD3MYjkx7YZhe9qJjAMzx6B8=
+  </data>
+ </layer>
+ <layer id="8" name="ForegroundBis" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIwnMYWZg+M/EwPAPikFsWgIdRghtxQJkA7EuEj7DQlu7cYFM1oG1P52VNuZ+4kDlf0Hj08peDh4GBn0uBoaPHNjlaWUvMsBmN3o893FS394JUDNjmDHlaOnvn0D7ZgH99QuLvSB/0zJtg+IaF4D52dMRFQew0849yPbSG+DyLwjjAxnS1LGXFMAqw8DABsRLZSi3l1T/goCDLOX2kgPuD5C9lICBsPeCPcReEA0Chg4MDEYOhGkQiAXScQ6o5nUCy4kuKO7GU2a8gdr7BmqvL9AcPwfCNAhUAukqJHtBdp7iZmDQgOIT3PjtTmNFbZMQgzOQ9CDbGcsCwcTYjS1+2Q1xYw5DTD1Hgeb3cWHaC8Ja3Jjm6wPVnANiQ7S6gVR78dmNzd6zUHvPE1kn/QSmg1/QNAFjo9t9DIh7uRD4OBXsFXVgYBBzgNgLY5MDSLUXBjLR0hW97EUGAJuBY8Q=
+  </data>
+ </layer>
+ <layer id="1" name="Walls" width="30" height="30" offsetx="0" offsety="-0.666667">
+  <data encoding="base64" compression="zlib">
+   eJytVUtOwzAQddJC1DUfiT2CZMH3BEWwQOIGPQBH4Agpi4hLcAQk2BdE71GUayAySp7yMp60psqTRk3Hjt+b57HjXDgWsXNviXNfsT92XOVOYn9+VsVh4s+fR849R/Vz2eTyqM3fB2oS3u+4XYvz74mfz9R84VxW/w+SOj+PutoYJT2jttCaj4lD1oaXHNBm8eeUY69LxWHxpg1XOfFrgubP2OZnrnVeM2/e1Gf1iUYa2fxL4l2oMcRS8co89gM9FI+c+43bYMgY1pf9SZXun0mtjUPvb9748bTb1WcFvBMd6D3N2Qf2Ge8iD+1ap+QluE+5R3NDWx8vnxWsc5TYPaO9/CWtci4/qniZ1GH1FObKGDz6VDWgRpxz8Fr3jYwJV6r8sbgXNIfPzCxrf/n8W35iTaz1pbT3cWvg3BdZyw9f+AxY9xE8X6naQriZA/cx+4KaStd/L2iEcPO+Si2oWcDP3Iv6Dt7EbfX6rPFXf8ckB+/5vOo93cSt+21n1I4Xme+39X4on+B0Wumc+u+/jrrzLG0C3KOh32HgtuK8m/r5m3G7Hu+jro3HCnp+3HHubLw+zsfhOlEfOPZS5/bTLj9jZaeDMMvsdSV3UXFepl1NQwB9y9B7qce3xcNVG31a9HOfz0Pwcu19PPBa+mpIoI80+npgW0A/1kQfFZl/hobk/S/i6/X/t4He38Lor6F4Q7xjDUPWa+2d3veh6/0D6EzFVQ==
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBh6wGWgHTAKRsEoGAWjgGgwgWOgXTAKRsEooAXwNhxZ9o6CUTBcAQCZ+wHV
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="320.083" y="229.663" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;The sign reads 'We honor the fallen in the brother's war.'&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Leave&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/entry_up.tx" x="210.75" y="484.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="-16.75" y="-26" width="17" height="539"/>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="361.781" y="304.212" width="16" height="16" visible="1">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Toacsia's Welcome&quot;, &quot;Forbidding Watchtower&quot;, &quot;Veteran's Armaments&quot;]}"/>
+    <property name="enemy" value="Myrel"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="251" template="../../../../common/maps/obj/shop.tx" x="303.667" y="368.29" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Soldier4Red"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="252" template="../../../../common/maps/obj/shop.tx" x="336.334" y="368.46" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Soldier4White"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="253" template="../../../../common/maps/obj/shop.tx" x="370" y="368.46" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Equip"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="264" template="../../../../common/maps/obj/shop.tx" x="272" y="367.79" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Soldier"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="265" template="../../../../common/maps/obj/shop.tx" x="401.667" y="369.12" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="Golem"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="267" template="../../../../common/maps/obj/collision.tx" x="478.167" y="-14.1667" width="17" height="539"/>
+  <object id="268" template="../../../../common/maps/obj/dialog.tx" x="193.167" y="414.917" width="77.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A bustling military camp sprawls ahead, golems and soldiers resting between sorties. They seem friendly, at least for now.
+
+Your manasight stone glows, sensing the power of the legend here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="269" template="../../../../common/maps/obj/collision.tx" x="259.5" y="414.5" width="6.33333" height="67.6667"/>
+  <object id="270" template="../../../../common/maps/obj/collision.tx" x="194.833" y="415.5" width="6.33333" height="67.6667"/>
+  <object id="271" template="../../../../common/maps/obj/collision.tx" x="-33.2702" y="478" width="543.874" height="26.6667"/>
+  <object id="272" template="../../../../common/maps/obj/collision.tx" x="-35.937" y="-29.3334" width="543.874" height="26.6667"/>
+  <object id="273" template="../../../../common/maps/obj/scroll.tx" x="83" y="96">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;In the Trenches&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="274" template="../../../../common/maps/obj/scroll.tx" x="78.5" y="434">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Field Marshal&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="275" template="../../../../common/maps/obj/scroll.tx" x="433" y="462">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rescue Retriever&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="276" template="../../../../common/maps/obj/scroll.tx" x="111.5" y="276">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Siege Veteran&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="277" template="../../../../common/maps/obj/scroll.tx" x="39" y="313.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Daru Encampment&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="278" template="../../../../common/maps/obj/scroll.tx" x="236.5" y="236">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Valiant Veteran&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="279" template="../../../../common/maps/obj/enemy.tx" x="359.406" y="305.739" width="16" height="16" visible="1">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forbidding Watchtower&quot;, &quot;Veteran's Armaments&quot;]}"/>
+    <property name="enemy" value="Myrel"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

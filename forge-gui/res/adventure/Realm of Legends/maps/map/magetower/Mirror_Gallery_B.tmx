@@ -21,7 +21,7 @@
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1zEKgDAMQFFXF+kBRLyO9z+BN5HgIDg5GVPfg9CxfwrtMAAAfMc+ZRcA1DO381xabgcAPBXv/vtUs43XVFS5HXqQvfey74e/6uH/vhZuD/pz6c8T+yf67Z88b/QftbkLoQ==
+   eJzt17ENgCAARFFcwDCAMe6/lUxiiJ2Vlaf4ihdKfnWBNpXSAABeYp/zDQBfs9TzXGu+BQDu6O/+q3QTwJPSu5e+H/5qhP/79uF2/Xn6c/r+9H77M3b/ATA28e4=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -29,12 +29,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEsOwyAMRLPtIj1NThA1kXrP/o7V5iQtapAQtfGEb6UYaXbIfiGAxwzHrhtUKpVKpVKpCmr+6AXKDHTuVIn/tHLlHqPy74L/0XfdFdCt/3JdwPn3vv5ZRv5TrXXdCz96fy4r/xOcr/en8it/uXM5VeJH7gfqrEtcYyV+JD71r2L50frK1edc/I81Jsdj67sfP3bfcnE4f+KycV7DxJR4uLzuvj0ffiWdIyQvN8fmNjVTqpcLk9flofilfYLktXP885tyJnPxx+QswU+xK3+Yf2tPEuLnvgHhL93rUDlz8qd4CKpumyF5hxCPz47yz15+pE8I7UckJ7qfU2Nx/2jv/P4dwL0/cD6kNT8Xb0u+FP6QfwutGVf3pf7d9yEuG3WfW7bQ3Sn5t1LeX1pbiQ31b9Sa5RxS7hL+rcXI6X9ajFj/E9MfxvaXrd96//X9U/nz6g3SmFBR
+   eJztmOsNgzAMhNMB6DRMgAqT9sFYLZO0UUFKozi+gp0gYaT7hYU/hdi+pD0715pMJpPJZDIpavjoBWo64bF9If7LzCWtzvgPwT82zt0A3Zsv1xWMfzTlaxn5T6XW9Sj8aP+cZv4nGG/90/iNX68u+0L8SH9I1brnyj1dIX6OI2SR4EfnKzWfpfjH+ZsUzzLfY/61+5b6DuVPQjbKa/hvcjxU3nDfpvYHV0dIXipmye1nJjcvJyIvWhdUPJJ3iYnrd0tNSvFv6bXGX5f/3zOJFr/2WSeVU5J/i4dIzW3/cN5Bg3+I8iPnhNzcQ3JK8iMsxv+bM+4B1P0D5UNq81O1zr2X4s/5t9yaUXOfO7/HPiT3L0P/luudnH/T8v5I/5Twb6k1kxSXW8O/1ZCk/9kDP+p/1pwP154va9/17vX+0/hl9QZ3Dk/+
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJgDAQRuG/tUrjGCfO4SLqFCo4S/Y0IhaCbUiOvA+uyJHiVYFIAAAAANC2LUh7miOULskrjtLUPePR2+61/+a9HwAA5NMPpQsAoH5e/++rSad9d0s6z/Z/H0B9vL4/aMsF3UgKug==
+   eJzt17EJgEAMRuHf0uoWCTiHi6hTqOAsLnaTeCCClgoSwr3iK3LVSxO43EgZAAAAACo2J2kp1uTf8qe9k/r25N3yxdUetf++g3cHAAAAAEQU9f8+mbTZ820s82A+PQDei3p/UJcDKV/zQw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

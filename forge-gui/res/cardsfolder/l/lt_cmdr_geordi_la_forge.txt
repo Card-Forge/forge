@@ -1,0 +1,8 @@
+Name:Lt. Cmdr. Geordi La Forge
+ManaCost:2 U
+Types:Legendary Creature Human Artificer
+PT:3/2
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ You | ValidCard$ Artifact.YouCtrl+inZoneBattlefield | ValidCounterType$ CHARGE | ReplaceWith$ DoubleCounters | Description$ If you would put one or more charge counters on an artifact you control, put twice that many charge counters on that artifact instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidCounterType$ CHARGE | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:If you would put one or more charge counters on an artifact you control, put twice that many charge counters on that artifact instead.

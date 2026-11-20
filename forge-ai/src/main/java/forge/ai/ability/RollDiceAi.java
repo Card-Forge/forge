@@ -35,7 +35,7 @@ public class RollDiceAi extends SpellAbilityAi {
         }
 
         if (cost != null && (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost())) {
-            boolean result = ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
+            boolean result = ph.isPlayerNextTurn(aiPlayer) && ph.is(PhaseType.END_OF_TURN);
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 

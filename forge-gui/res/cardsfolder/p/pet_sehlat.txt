@@ -1,0 +1,6 @@
+Name:Pet Sehlat
+ManaCost:2 W
+Types:Creature Bear
+PT:4/3
+K:CARDNAME can't attack alone.
+Oracle:This creature can't attack alone.

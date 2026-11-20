@@ -157,6 +157,8 @@ public class ProtocolGuiGameInProcessTest {
     public void humanControllerRunsThroughInProcessRemote() throws Exception {
         TestUtils.ensureFModelInitialized();
         FModel.getPreferences().setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, false);
+        // Recording a replay encodes with the netplay codec, which is exactly what this test shows the game does not need
+        FModel.getPreferences().setPref(FPref.UI_RECORD_REPLAYS, false);
         MyRandom.setRandom(new Random(7));
 
         final List<String> loadedBefore = loadedTransportClasses();
@@ -237,7 +239,7 @@ public class ProtocolGuiGameInProcessTest {
                 || n.endsWith("ObjectEncoder") || n.endsWith("CObjectOutputStream") || n.endsWith("TrackableSerializer")
                 || n.endsWith("RemoteClient") || n.endsWith("FGameClient") || n.endsWith("FServerManager")),
                 "no network or serialization class loaded");
-        assertTrue(remote.fullStates >= 1, "full state (setGameView) reached the remote");
+        assertEquals(remote.fullStates, 1, "one full state (setGameView) per game reached the remote");
         assertTrue(remote.deltasWithState >= 2, "state deltas reached the remote after init");
         assertTrue(remote.blockingCalls.stream().anyMatch(s -> s.startsWith("getAbilityToPlay")), "a synchronous decision reached sendAndWait");
         assertTrue(playedLand, "the human played a land");

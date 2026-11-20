@@ -14,6 +14,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class DamageAllEffect extends DamageBaseEffect {
     /* (non-Javadoc)
@@ -23,8 +24,10 @@ public class DamageAllEffect extends DamageBaseEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final String desc = sa.getParamOrDefault("ValidDescription",
-                sa.getParamOrDefault("ValidCards", "something"));
+        final String desc = sa.hasParam("ValidDescription") ? sa.getParam("ValidDescription")
+                : sa.hasParam("ValidCards") ? "each " + Lang.joinHomogenous(java.util.Arrays.asList(sa.getParam("ValidCards").split(",")),
+                        v -> Lang.getInstance().formatValidDesc(v), "or")
+                : "something";
 
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);

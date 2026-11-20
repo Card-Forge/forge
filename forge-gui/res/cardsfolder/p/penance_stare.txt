@@ -1,0 +1,5 @@
+Name:Penance Stare
+ManaCost:W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.attacking+cmcLE3 | SpellDescription$ Destroy target attacking creature with mana value 3 or less.
+Oracle:Destroy target attacking creature with mana value 3 or less.

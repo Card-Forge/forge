@@ -47,9 +47,13 @@ ScryfallCode=ANA
 33 L Forest @Edward P. Beard, Jr.
 34 L Forest @Christopher Rush
 35 L Forest @Pete Venters
-36 U Urza's Bauble @Ernanda Souza
-37 C Shorecomber Crab @Chris Seaman
-38 U Rise from the Grave @Kieran Yanner
+36 C Shorecomber Crab @Chris Seaman
+37 U Rise from the Grave @Kieran Yanner
+38 U Urza's Bauble @Ernanda Souza
+39 R Echo of Eons @Victor Adame Minguez
+40 U Dismember @Jason Felix
+41 R Mind Twist @John Di Giovanni
+42 R Winds of Abandon @James Paick
 95846 C Snow-Covered Plains @Mark Romanoski
 95847 C Snow-Covered Island @Franz Vohwinkel
 95848 C Snow-Covered Swamp @Rob Alexander

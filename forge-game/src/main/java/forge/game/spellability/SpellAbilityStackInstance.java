@@ -134,6 +134,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             stackDescription = ability.getStackDescription();
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
+            view.updateTargetStackItems(this);
             view.updateText(this);
 
             for (final GameObject tgt : ability.getTargets()) {

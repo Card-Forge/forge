@@ -99,6 +99,10 @@ public class FComboBoxPanel<E> extends JPanel {
         }
     }
 
+    public FComboBox<E> getComboBox() {
+        return comboBox;
+    }
+
     public void addActionListener(final ActionListener l) {
         comboBox.addActionListener(l);
     }

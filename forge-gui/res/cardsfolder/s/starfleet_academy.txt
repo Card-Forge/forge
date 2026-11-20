@@ -1,0 +1,7 @@
+Name:Starfleet Academy
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | PrecostDesc$ Federation — | Cost$ 5 T | Produced$ Any | Amount$ X | SpellDescription$ Choose a color. Add an amount of mana of that color equal to the number of creature types among non-Borg creatures you control.
+SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
+Oracle:{T}: Add {C}.\nFederation — {5}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creature types among non-Borg creatures you control.

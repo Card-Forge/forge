@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="132">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="17793" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="34177" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <layer id="10" name="Background" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyr5GRgqBzFo5hOmDuRNEyOHVxTScODyQ5SzSXHvlE7Ru0YtWP4lyX0tmMUDwwGADhBVZA=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzNlk0OgjAQhQdXUL0B/h3CeAUTb8HCYyCGrQtXwvGM4EHsBBqeBZsWaeJLXoy1na8zMqVEfT1Coq0gOked1/L7MxyYPEJD8ZGzGcHimLgmH4hdyd9fYZ9ly0vlmiwyMzgm58aspfysgWlTQ157MTA4bt3GXoluXiw6Ho4PqdLmpG1skRDNLb1IzAysk9of703c3ezCULqdiI6FnXmuSfhfYH1cGaa6IUPNV3ZhoFHcGzrjV+9mn/H5uc08MfC88JUHP5+qTzGPa2K2yzzMA/tvD7UcK5VHCuccakpG3J49udZ/UzKUYu0sY0YZND4UjW1UBN06tq1cctL3/m+M8ksN9HFTfR4O72Xcq22Oqkd8CXsQx3zdbXBsqjuUfid4A4X7u/0=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B+oC+dMO5PRWBygBkTgu1liBuDgAkTdjNIsYMQIMUOZD/3ZUBomFuRAboYTC0xAJvbibEDGRDyEyV2wOKHHDtIBYTsQE6L2DDMrYTUUeIP5PRKrj/Q7SDGTErtIAcQsmM6I4LtPg2CiQHTGAmrwQZolc/pbQd3KiYmRm4UDH4AAKNnM0Y=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="25" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lU0KwjAQhWejIlK7VPcWBFcuvYK3ECS9hKA78QeFbtTz+IdX8DSmtINpOomT2vrgoWTi+2bSUAHKUVADGEjfCdu09PiMmyH/G2PMRxRmuOjyBwZy+hUzAsYcL+V7e5rPOAqAk/RZZNf9dC91XlfLHCpjMgJYRQCdEKAr3QuTtdgqAzmzemJbvi/73GuMR5Tfh4w1MTNqrt1/tXdffHIoq7VMfxYeMjh5trqNsfDMDFMeZc4cv4rLoM75ID7rB5H/rSvDJIqt11znsGXq+fiJjJdhr+vzKPLMN7K+Te0x7hj235R7W6l3zD7xHnOFvS8c/tNicRjc8/mFgSrKMGnYKDeP0pNgmO7pt5oLwyb93V4FI9YbRC5sPQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="176.166" y="354.166" width="33.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-52.6667" y="-16.6667" width="512" height="16"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="-75.3333" y="400" width="512" height="16"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-16.6667" y="-7.477" width="16" height="410.954"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="400" y="-4.14367" width="16" height="410.954"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="50.9168" y="216.617" width="124.833" height="8.7667"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="208.25" y="216.283" width="124.833" height="8.7667"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="329.727" y="135.768" width="5.87853" height="151.797"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="49.0607" y="136.768" width="5.87853" height="151.797"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="96.3941" y="90.1015" width="5.87853" height="53.797"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="281.061" y="87.1015" width="5.87853" height="53.797"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="282.394" y="281.768" width="5.87853" height="53.797"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="95.0607" y="282.435" width="5.87853" height="53.797"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="46.2502" y="278.283" width="54.1663" height="8.7667"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="280.917" y="278.283" width="54.1663" height="8.7667"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="283.584" y="130.95" width="54.1663" height="8.7667"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="48.9169" y="134.283" width="54.1663" height="8.7667"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="96.2502" y="83.6166" width="186.833" height="8.7667"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="212.25" y="331.617" width="76.1663" height="8.7667"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="98.2502" y="333.617" width="74.1663" height="8.7667"/>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="151.333" y="330.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You enter a throne room made entirely from solid gold. Gold floor, gold walls, gold ceiling. A man sits alone, his head in his hands, wallowing in misery across the room on a throne of gold, a solid gold cat at his side.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="191.5" y="148.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'No! Don't come closer! Don't touch me! But... since you're here... I have a quest for you - revenge on the gods that cursed me.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The guilds are broken.&quot;,
+                    &quot;text&quot;: &quot;'HELL YEAH! LET'S PARTYYYYYYY!!!!!!!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Token of Gold&quot;},
+		      {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 10000},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;King Macar, the Gold-Cursed&quot;}           
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Cloudcrest Cloak&quot;}, {&quot;item&quot;: &quot;Lantern-Lit Cloak&quot;}, {&quot;item&quot;: &quot;Pinecrest Cloak&quot;}, {&quot;item&quot;: &quot;Tranquil Cloak&quot;}, {&quot;item&quot;: &quot;Waterveil Cloak&quot;}, {&quot;item&quot;: &quot;Amnesiac Prayerbook&quot;}, {&quot;item&quot;: &quot;Ephemeral Prayerbook&quot;}, {&quot;item&quot;: &quot;Nascent Prayerbook&quot;}, {&quot;item&quot;: &quot;Malign Prayerbook&quot;}, {&quot;item&quot;: &quot;Volatile Prayerbook&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Revenge, eh?&quot;,
+					&quot;text&quot;: &quot;'The gods of my home plane of Theros came together cursed me. Everything I touch turns to gold. EVERYTHING. But if you killed them all...'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;You'd be free of the curse?&quot;,
+					&quot;text&quot;: &quot;'That's the hope. There are two temples of Nyx here in the wastes. Kill all ten gods within and show me the cloaks and prayerbooks they once had and I'll give you more gold than you'll know what to do with - plus one piece of specially enchanted gold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Deicide, here we come.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I don't mess with gods.&quot;,
+					&quot;text&quot;: &quot;'Leave me to my misery then...'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="King Macar"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/scroll.tx" x="63.3333" y="253.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gild&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/gold.tx" x="109.167" y="116.833">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/gold.tx" x="128.5" y="116.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/gold.tx" x="144.5" y="117">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/gold.tx" x="228.5" y="116">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/gold.tx" x="246.5" y="115.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/gold.tx" x="263" y="117">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/gold.tx" x="58" y="161">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/gold.tx" x="58.5" y="181.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/gold.tx" x="58" y="207.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/gold.tx" x="308.25" y="162.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/gold.tx" x="308.75" y="183.25">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/gold.tx" x="308.25" y="209.25">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/scroll.tx" x="302.667" y="252.167">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Aurification&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

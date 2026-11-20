@@ -15,11 +15,13 @@ public class SwingPrefBinders {
         (b, s) -> b.setSelectedItem(s),
         s -> s,
         s -> s);
+    }
 
-      box.addItemListener(e -> {
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-          this.save();
-        }
+    @Override
+    public void bind() {
+      load();
+      getComponent().addItemListener(e -> {
+        if (e.getStateChange() == ItemEvent.SELECTED) save();
       });
     }
   }

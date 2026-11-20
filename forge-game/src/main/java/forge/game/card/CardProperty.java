@@ -802,13 +802,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("canProduceManaColor")) {
-            final String color = property.split("canProduceManaColor ")[1];
-            for (SpellAbility ma : card.getManaAbilities()) {
-                if (ma.canProduce(MagicColor.toShortString(color))) {
-                    return true;
-                }
-            }
-            return false;
+            return card.canProduceColorMana(Set.of(MagicColor.toLongString(MagicColor.fromName(property.split("canProduceManaColor ")[1]))));
         } else if (property.equals("canProduceMana")) {
             return !card.getManaAbilities().isEmpty();
         } else if (property.startsWith("sameName")) {
@@ -1429,7 +1423,7 @@ public class CardProperty {
         } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
                 || property.startsWith("totalPT") || property.startsWith("numColors")
                 || property.startsWith("basePower") || property.startsWith("baseToughness") || property.startsWith("numTypes")
-                || property.startsWith("numCreatureTypes")) {
+                || property.startsWith("numCreatureTypes") || property.startsWith("baseLoyalty")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1461,6 +1455,9 @@ public class CardProperty {
             } else if (property.startsWith("numCreatureTypes")) {
                 rhs = property.substring(18);
                 y = card.getType().getCreatureTypes().size();
+            } else if (property.startsWith("baseLoyalty")) {
+                rhs = property.substring(13);
+                y = AbilityUtils.calculateAmount(card, card.getBaseLoyalty(), card.getCastSA());
             }
             if (rhs.equals("Chosen")) {
                 if (!source.hasChosenNumber()) {
@@ -1519,7 +1516,7 @@ public class CardProperty {
                 }
             }
             if (property.equals("attackingBattle")) {
-                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                final GameEntity attacked = combat.getDefenderByAttacker(card);
                 if (!(attacked instanceof Card)) {
                     return false;
                 }
@@ -1887,7 +1884,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("canBeBeamedUp")) {
-            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card)) {
+            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card, spellAbility)) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {
