@@ -100,7 +100,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
     private static final SkinBorder HEADER_BORDER = new FSkin.CompoundSkinBorder(new FSkin.MatteSkinBorder(0, 0, 1, 1, GRID_COLOR), new EmptyBorder(0, 1, 0, 0));
     private static final SkinFont ROW_FONT = FSkin.getFont();
-    private static final int ROW_HEIGHT = 19;
+    private static final int MIN_ROW_HEIGHT = 19;
 
     private final ItemTable table = new ItemTable();
     private final ItemTableModel tableModel;
@@ -213,7 +213,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             this.table.getTableHeader().setPreferredSize(new Dimension(0, 0));
         }
         else {
-            this.table.getTableHeader().setPreferredSize(new Dimension(0, ROW_HEIGHT));
+            this.table.getTableHeader().setPreferredSize(null);
         }
 
         this.tableModel.addListeners();
@@ -369,7 +369,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             });
 
             this.setBorder((Border)null);
-            this.setRowHeight(ROW_HEIGHT);
+            this.addPropertyChangeListener("font", e -> updateRowHeight());
+            this.updateRowHeight();
             this.setRowMargin(0);
             this.setShowHorizontalLines(false);
             this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -391,9 +392,19 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             final KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
             this.registerKeyboardAction(listener, "Copy", stroke, JComponent.WHEN_FOCUSED);
         }
+        private void updateRowHeight() {
+            setRowHeight(Math.max(MIN_ROW_HEIGHT, getFontMetrics(getFont()).getHeight() + 4));
+        }
+
         @Override
         protected JTableHeader createDefaultTableHeader() {
             final SkinnedTableHeader header = new SkinnedTableHeader(columnModel) {
+                @Override
+                public Dimension getPreferredSize() {
+                    final Dimension size = super.getPreferredSize();
+                    return isPreferredSizeSet() ? size : new Dimension(size.width, Math.max(MIN_ROW_HEIGHT, size.height + 3));
+                }
+
                 @Override
                 public String getToolTipText(final MouseEvent e) {
                     final int col = columnModel.getColumnIndexAtX(e.getPoint().x);
@@ -408,6 +419,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             header.setBorder((Border)null);
             header.setBackground(HEADER_BACK_COLOR);
             header.setForeground(FORE_COLOR);
+            header.setFont(ROW_FONT);
 
             final DefaultTableCellRenderer renderer = ((DefaultTableCellRenderer)header.getDefaultRenderer());
             header.setDefaultRenderer(new DefaultTableCellRenderer() {
