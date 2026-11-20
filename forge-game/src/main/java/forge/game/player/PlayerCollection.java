@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -49,6 +50,13 @@ public class PlayerCollection extends FCollection<Player> {
             }
         }
         return result;
+    }
+
+    public final Stream<Card> streamCardsIn(final ZoneType zone) {
+        return stream().flatMap(p -> p.streamCardsIn(zone));
+    }
+    public final Stream<Card> streamCardsIn(final Iterable<ZoneType> zones) {
+        return stream().flatMap(p -> p.streamCardsIn(zones));
     }
     
     public final CardCollection getCreaturesInPlay() {
