@@ -72,8 +72,8 @@ public final class AbilityFactory implements IHasForgeParams {
         );
 
     public static final String[] OPTIONAL_PARAMS = {
-        "Choices", "Cost", "Execute", "NonBasicSpell", "PreventionSubAbility", "RepeatSubAbility",
-        "ResultSubAbilities", "SpellDescription", "SubAbility", "ValidTgts",
+        "Choices", "Cost", "NonBasicSpell", "PreventionSubAbility", "SpellDescription",
+        "SubAbility", "ValidTgts",
     };
 
     public enum AbilityRecordType {

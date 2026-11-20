@@ -74,7 +74,7 @@ final class EngineParams {
             throw new UncheckedIOException(e);
         }
         List<Read> reads = scanner.result();
-        Map<String, Set<String>> origins = origins(scanner.callGraph());
+        Map<String, Set<String>> origins = origins(scanner.callGraph(false), scanner.callGraph(true));
         Set<String> declaring = new TreeSet<>();
         CardScriptParams.FRAMEWORK.forEach(c -> declaring.add(c.getName().replace('.', '/')));
         // AI helpers read effect params of other abilities too (e.g. the stack); only AI-only hints count
@@ -134,12 +134,17 @@ final class EngineParams {
             }
             // a helper only effects reach reads their params; one shared code reaches, every ability's
             Set<String> from = origins.get(r.method());
-            if (from != null && from.stream().allMatch(h -> handlerBase(h) == SpellAbilityEffect.class)) {
+            if (from != null && from.stream()
+                    .allMatch(h -> h.equals(API_CHECKED) || handlerBase(h) == SpellAbilityEffect.class)) {
                 if (r.own()) {
-                    from.forEach(h -> handlers.computeIfAbsent(h, c -> new TreeSet<>()).add(r.name()));
-                } else {
+                    from.stream().filter(h -> !h.equals(API_CHECKED))
+                        .forEach(h -> handlers.computeIfAbsent(h, c -> new TreeSet<>()).add(r.name()));
+                }
+                if (!r.own() || from.contains(API_CHECKED)) {
                     foreign.add(r);
                 }
+            } else if (r.apiChecked()) {
+                foreign.add(r); // shared code that checks an ability's API first reads an effect's params
             } else {
                 addShared(r, cls);
             }
@@ -168,21 +173,29 @@ final class EngineParams {
     }
 
     private static final String GENERIC = "*";
+    /** The origin of a method called after an API check: whatever handler reads the param. */
+    private static final String API_CHECKED = "?";
 
     /**
      * Which handler classes each method runs on behalf of, following the call graph from its roots: a
      * handler's own methods run for that handler, a method nothing calls (an entry point, or one only
-     * reached through an interface) for everything (GENERIC), and any other method for its callers.
+     * reached through an interface) for everything (GENERIC), and any other method for its callers. A method
+     * called after an API check also runs for API_CHECKED.
      */
-    private Map<String, Set<String>> origins(Map<String, Set<String>> callees) {
+    private Map<String, Set<String>> origins(Map<String, Set<String>> callees, Map<String, Set<String>> checked) {
         Map<String, Set<String>> callers = new HashMap<>();
         callees.forEach((m, ts) -> ts.forEach(t -> callers.computeIfAbsent(t, k -> new HashSet<>()).add(m)));
+        Set<String> calledChecked = new HashSet<>();
+        checked.values().forEach(calledChecked::addAll);
         Map<String, Set<String>> origins = new HashMap<>();
         Deque<String> work = new ArrayDeque<>();
         for (String m : callees.keySet()) {
             String cls = outer(m.substring(0, m.lastIndexOf('.', m.indexOf('('))));
             if (handlerBase(cls) != null) {
                 origins.put(m, Set.of(cls));
+                work.add(m);
+            } else if (calledChecked.contains(m)) {
+                origins.put(m, new HashSet<>(Set.of(API_CHECKED)));
                 work.add(m);
             } else if (!callers.containsKey(m)) {
                 origins.put(m, Set.of(GENERIC));

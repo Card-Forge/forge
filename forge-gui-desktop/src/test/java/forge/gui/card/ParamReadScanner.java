@@ -36,8 +36,10 @@ final class ParamReadScanner {
      * One param name passed to an accessor by a method ("forge/game/Foo.bar(desc)") of a class. {@code own}
      * is false for {@code x.getParam("X")} on a local or a returned value, such as another ability on the
      * stack or a sub-ability, rather than on one of the method's parameters (or a SAME_ABILITY call on one).
+     * {@code apiChecked} is true for a read in a range {@link #apiChecked} finds.
      */
-    record Read(String cls, String method, Kind kind, Context context, String name, boolean own) { }
+    record Read(String cls, String method, Kind kind, Context context, String name, boolean own,
+                boolean apiChecked) { }
 
     /** Engine methods whose first String argument is a param name (or, for SVAR, an SVar name). */
     private static final Map<String, Kind> ACCESSORS = Map.ofEntries(
@@ -61,7 +63,8 @@ final class ParamReadScanner {
      * A call: what it can take a key from, a constant (String) or the caller's n-th String parameter
      * (Integer), and whose param map it's made on, if it's made on one.
      */
-    private record Call(String target, List<Object> args, List<Boolean> afterParam, Context paramMap) { }
+    private record Call(String target, List<Object> args, List<Boolean> afterParam, Context paramMap,
+                        boolean apiChecked) { }
     private record Method(String owner, String key, List<Call> calls) { }
     private record Accessor(Kind kind, int keyArg, Context context) { }
 
@@ -101,7 +104,7 @@ final class ParamReadScanner {
             if (refs[i] != null && refs[i][0] == 8) {
                 Matcher m = SCRIPT_KEY.matcher((String) cp[refs[i][1]]);
                 while (m.find()) {
-                    scriptWrites.add(new Read(self, null, Kind.WRITE, Context.ANY, m.group(1), true));
+                    scriptWrites.add(new Read(self, null, Kind.WRITE, Context.ANY, m.group(1), true, false));
                 }
             }
         }
@@ -133,7 +136,7 @@ final class ParamReadScanner {
                 boolean isStatic = (access & 0x0008) != 0;
                 methods.add(new Method(self, self + "." + name + desc, calls(code, cp, refs,
                     slots(desc, isStatic, "Ljava/lang/String;"), paramMapSlots(desc, signature, isStatic),
-                    slots(desc, isStatic, null))));
+                    slots(desc, isStatic, null), apiChecked(code, cp, refs))));
             }
         }
     }
@@ -219,7 +222,7 @@ final class ParamReadScanner {
             for (Call c : m.calls()) {
                 for (Accessor a : accessors(c)) {
                     if (key(c, a) instanceof String s && NAME.matcher(s).matches()) {
-                        out.add(new Read(m.owner(), m.key(), a.kind(), a.context(), s, onParameter(c)));
+                        out.add(new Read(m.owner(), m.key(), a.kind(), a.context(), s, onParameter(c), c.apiChecked()));
                     }
                 }
             }
@@ -227,14 +230,20 @@ final class ParamReadScanner {
         return out;
     }
 
-    /** Which scanned methods each scanned method calls, inherited calls resolved to where they're declared. */
-    Map<String, Set<String>> callGraph() {
+    /**
+     * Which scanned methods each scanned method calls outside an API check (inside one with
+     * {@code apiChecked}), inherited calls resolved to where they're declared.
+     */
+    Map<String, Set<String>> callGraph(boolean apiChecked) {
         Set<String> known = new HashSet<>();
         methods.forEach(m -> known.add(m.key()));
         Map<String, Set<String>> out = new HashMap<>();
         for (Method m : methods) {
             Set<String> callees = out.computeIfAbsent(m.key(), k -> new HashSet<>());
             for (Call c : m.calls()) {
+                if (c.apiChecked() != apiChecked) {
+                    continue;
+                }
                 String target = c.target();
                 String owner = target.substring(0, target.lastIndexOf('.', target.indexOf('(')));
                 String member = target.substring(owner.length());
@@ -336,7 +345,7 @@ final class ParamReadScanner {
      * (the end of an expression) clears them.
      */
     private static List<Call> calls(byte[] code, Object[] cp, int[][] refs, List<Integer> stringSlots, List<Integer> mapSlots,
-            List<Integer> paramSlots) {
+            List<Integer> paramSlots, List<int[]> apiChecked) {
         List<Call> calls = new ArrayList<>();
         List<Object> args = new ArrayList<>();
         // for each pending value: whether it was loaded straight after one of the method's parameters
@@ -411,7 +420,9 @@ final class ParamReadScanner {
                     int[] nat = refs[mref[2]];
                     String name = (String) cp[nat[1]];
                     String target = cp[refs[mref[1]][1]] + "." + name + cp[nat[2]];
-                    calls.add(new Call(target, List.copyOf(args), List.copyOf(afterParam), paramMap));
+                    int at = pc;
+                    calls.add(new Call(target, List.copyOf(args), List.copyOf(afterParam), paramMap,
+                        apiChecked.stream().anyMatch(r -> at >= r[0] && at < r[1])));
                     paramLoaded = paramJustLoaded && SAME_ABILITY.contains(name);
                     // runParams.get(AbilityKey.X) takes an enum key, not the pending name of an enclosing
                     // matchesValidParam("X", ...): only a param map's lookup takes a pending name
@@ -478,6 +489,47 @@ final class ParamReadScanner {
                 i = desc.indexOf(';', i);
             }
             out.add(desc.substring(start, i + 1));
+        }
+        return out;
+    }
+
+    /**
+     * The code ranges after an ability's API is checked: from {@code api == ApiType.X} or
+     * {@code ApiType.X.equals(api)} to where the test jumps when it fails, and the body of a {@code switch}
+     * on an ApiType. Approximate, as a condition joined to the check by || lands in the range too.
+     */
+    private static List<int[]> apiChecked(byte[] code, Object[] cp, int[][] refs) {
+        List<int[]> out = new ArrayList<>();
+        boolean compare = false, equals = false;
+        int switchMap = -1;
+        for (int pc = 0; pc < code.length; pc += length(code, pc)) {
+            int op = code[pc] & 0xff;
+            if (op == 0xa6 && compare || op == 0x99 && equals) {             // if_acmpne, ifeq
+                out.add(new int[] {pc + 3, pc + (short) u2(code, pc + 1)});
+            } else if ((op == 0xaa || op == 0xab) && switchMap >= 0 && pc - switchMap <= 16) { // $SwitchMap[api.ordinal()]
+                int p = (pc + 4) & ~3;
+                int end = pc + s4(code, p);
+                int n = op == 0xaa ? s4(code, p + 8) - s4(code, p + 4) + 1 : s4(code, p + 4);
+                for (int i = 0; i < n; i++) {
+                    end = Math.max(end, pc + s4(code, op == 0xaa ? p + 12 + 4 * i : p + 12 + 8 * i));
+                }
+                out.add(new int[] {pc, end});
+            }
+            compare = false;
+            equals = false;
+            if (op == 0xb2) {                                                // getstatic
+                int[] fref = refs[u2(code, pc + 1)];
+                String owner = (String) cp[refs[fref[1]][1]];
+                String field = (String) cp[refs[fref[2]][1]];
+                compare = owner.equals("forge/game/ability/ApiType");
+                if (field.endsWith("$forge$game$ability$ApiType")) {
+                    switchMap = pc;
+                }
+            } else if (op == 0xb6) {                                         // invokevirtual
+                int[] mref = refs[u2(code, pc + 1)];
+                equals = cp[refs[mref[1]][1]].equals("forge/game/ability/ApiType")
+                    && cp[refs[mref[2]][1]].equals("equals");
+            }
         }
         return out;
     }
