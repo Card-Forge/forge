@@ -1020,6 +1020,59 @@ public class AiReportScenarioTest extends AITest {
                     final List<Card> drops = c.landPlays();
                     return !drops.isEmpty() && drops.get(0).getName().equals("Temple of the False God") ? "played the Temple on turn one" : null;
                 }));
+        l.add(new Scenario("birthing-ritual-legend-copy", "Phelia in play and another Phelia among the seven: the copy is no reward (legend rule), a different creature is", Fid.APPROX, "END_OF_TURN", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.lib("Phelia, Exuberant Shepherd", c.ai); c.lib("Grizzly Bears", c.ai); },
+                c -> {
+                    final Card phelia = c.ai.getCardsIn(ZoneType.Library).stream().filter(k -> k.getName().startsWith("Phelia")).findFirst().get();
+                    final Card bears = c.ai.getCardsIn(ZoneType.Library).stream().filter(k -> k.getName().equals("Grizzly Bears")).findFirst().get();
+                    final Card inPlay = c.ai.getCardsIn(ZoneType.Battlefield).get(0);
+                    if (!forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, phelia, null)) { return "a second Phelia was thought fine"; }
+                    if (forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, phelia, inPlay)) { return "the Phelia that is sacrificed still counted"; }
+                    return forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, bears, null) ? "a plain creature was called a legend copy" : null;
+                }));
+        l.add(play("forcefield-unblocked", "Forcefield: one unblocked Hill Giant is a reason to pay one mana", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false, "Forcefield",
+                c -> { c.bf("Mountain", 5, c.ai); c.bf("Forcefield", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.setBlocked(att, false); c.game.getPhaseHandler().setCombat(combat); }));
+        l.add(new Scenario("attack-deal-nothing-to-attack-with", "The Second Doctor / Advokist: nothing that could attack, so take the card or the counters", Fid.APPROX, "END_OF_TURN", false,
+                c -> { },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-small-attack", "One Grizzly Bears against 20 life is a small attack: take the card", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Grizzly Bears", c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-real-attack", "Three Hill Giants against 20 life and no blockers is the plan: refuse", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Hill Giant", 3, c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == false ? null : "the deal was judged wrongly (should be refused)"));
+        l.add(new Scenario("attack-deal-blocked-anyway", "Three Hill Giants against three blockers get nowhere: take the card", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-lethal", "Three Grizzly Bears against 5 life is lethal: refuse", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Grizzly Bears", 3, c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == false ? null : "the deal was judged wrongly (should be refused)"));
+        // ---- the real cards that offer "take X, then you can't attack me": The Second Doctor, Orzhov Advokist, Willie Lumpkin
+        final java.util.function.Function<Ctx, SpellAbility> doctor = c -> c.bf("The Second Doctor", c.opp).getTriggers().get(0).ensureAbility();
+        final java.util.function.Function<Ctx, SpellAbility> advokist = c -> c.bf("Orzhov Advokist", c.opp).getTriggers().get(0).ensureAbility();
+        final java.util.function.Function<Ctx, SpellAbility> willie = c -> {
+            final SpellAbility effect = c.bf("Willie Lumpkin, Postman", c.opp).getTriggers().get(0).ensureAbility().getSubAbility();
+            effect.setActivatingPlayer(c.opp);
+            return effect;
+        };
+        final java.util.function.BiFunction<Ctx, SpellAbility, Boolean> willieDraws = (c, sa) ->
+                new forge.ai.ability.EffectAi().willPayUnlessCost(c.ai, sa, forge.game.cost.Cost.Zero, false,
+                        new forge.util.collect.FCollection<Player>(c.ai));
+        final Setup bigBoard = c -> c.bf("Hill Giant", 3, c.ai);
+        final Setup wallOnly = c -> c.bf("Wall of Stone", c.ai); // cannot attack: nothing is given up
+        l.add(new Scenario("second-doctor-takes-card-free", "The Second Doctor: with nothing that could attack, the AI draws", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> new forge.ai.ability.DrawAi().confirmAction(c.ai, doctor.apply(c), null, "", null) ? null : "refused a free card"));
+        l.add(new Scenario("second-doctor-refuses-card-for-attack", "The Second Doctor: three Hill Giants ready to attack are worth more than a card", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> new forge.ai.ability.DrawAi().confirmAction(c.ai, doctor.apply(c), null, "", null) ? "drew and gave up its attack" : null));
+        l.add(new Scenario("advokist-takes-counters-free", "Orzhov Advokist: with only a Wall the AI takes the counters", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> new forge.ai.ability.ChooseCardAi().chooseSingleCard(c.ai, advokist.apply(c), c.ai.getCreaturesInPlay(), true, null, null) != null ? null : "refused free counters"));
+        l.add(new Scenario("advokist-refuses-counters-for-attack", "Orzhov Advokist: three Hill Giants ready to attack, so no counters and no restriction", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> new forge.ai.ability.ChooseCardAi().chooseSingleCard(c.ai, advokist.apply(c), c.ai.getCreaturesInPlay(), true, null, null) == null ? null : "took the counters and gave up its attack"));
+        l.add(new Scenario("willie-draws-free", "Willie Lumpkin: with nothing that could attack, the AI takes the card", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> willieDraws.apply(c, willie.apply(c)) ? null : "refused a free card"));
+        l.add(new Scenario("willie-refuses-card-for-attack", "Willie Lumpkin: three Hill Giants ready to attack are worth more than a card", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> willieDraws.apply(c, willie.apply(c)) ? "drew and gave up its attack" : null));
         l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
                 c -> {

@@ -357,6 +357,9 @@ public class TokenAi extends SpellAbilityAi {
         if ("AttackTaxLand".equals(sa.getParam("AILogic"))) {
             return takesTheAttackTaxLand(player, sa);
         }
+        if ("AttackTax".equals(sa.getParam("AILogic"))) {
+            return AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController()); // City Hall: two Treasures
+        }
         // TODO: AILogic
         return true;
     }
