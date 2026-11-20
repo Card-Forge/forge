@@ -75,7 +75,18 @@ public class MapDialog {
     public MapDialog(String S, MapStage stage, int parentID, String sourceMapFile) {
         this.stage = stage;
         this.parentID = parentID;
-        this.signalChangeListener = null;
+        // An "issueQuest" action in a map object's dialog gives the player that quest (unless they already have it).
+        this.signalChangeListener = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (questAccepted == null || questAccepted.isEmpty())
+                    return;
+                int questID = Integer.parseInt(questAccepted);
+                if (Current.player().getQuests().stream().noneMatch(q -> q.getID() == questID))
+                    Current.player().addQuest(questID, false);
+            }
+        };
+        addQuestAcceptedListener(signalChangeListener);
         this.skipClickListener = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -208,7 +219,7 @@ public class MapDialog {
         Sprite sprite = null;
 
         Actor actor = stage.getByID(parentID);
-        if (actor instanceof CharacterSprite)
+        if (actor instanceof CharacterSprite && !dialog.narrator)
             sprite = ((CharacterSprite) actor).getAvatar();
         String text; //Check for localized string (locname), otherwise print text.
         if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessageorUseDefault(dialog.loctext, dialog.text);

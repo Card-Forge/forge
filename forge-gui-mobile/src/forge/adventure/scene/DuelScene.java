@@ -999,6 +999,7 @@ public class DuelScene extends ForgeScene {
     }
 
     private FBufferedImage getFBEnemyAvatar() {
+        enemyAvatar.clear(); // Force a redraw of cached profile image
         return enemyAvatar;
     }
 }

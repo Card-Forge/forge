@@ -11295,5 +11295,126 @@
 			}
 		],
 		"storyQuest": true
+	},
+	{
+		"id": 54,
+		"isTemplate": true,
+		"name": "The Doom of Shandalar",
+		"description": "With Emrakul gone, the last of the Great Barrier has crumbled. Something ancient has returned to Shandalar.",
+		"offerDialog": {},
+		"prologue": {},
+		"epilogue": {},
+		"failureDialog": {},
+		"declinedDialog": {},
+		"stages": [
+			{
+				"id": 1,
+				"name": "Seek Out the Mage",
+				"description": "Return to the spawn point at the center of the wastes and ask the mage what Emrakul's fall means.",
+				"mapFlag": "ArzakonRevealed",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Spawn"
+				],
+				"objective": "QuestFlag"
+			},
+			{
+				"id": 2,
+				"name": "Find Arzakon's Castle",
+				"description": "Find the castle that has risen in the wastes.",
+				"count3": 1,
+				"POITags": [
+					"Arzakon"
+				],
+				"objective": "Travel",
+				"prerequisiteIDs": [
+					1
+				],
+				"allowInactivePOI": true
+			},
+			{
+				"id": 3,
+				"name": "Defeat Arzakon",
+				"description": "Defeat Arzakon, the Doom of Shandalar, inside his castle.",
+				"mapFlag": "ArzakonDefeated",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Arzakon"
+				],
+				"objective": "QuestFlag",
+				"prerequisiteIDs": [
+					2
+				],
+				"allowInactivePOI": true
+			},
+			{
+				"id": 4,
+				"name": "Return to the Mage",
+				"description": "Return to the spawn point at the center of the wastes and tell the mage that Arzakon is gone.",
+				"mapFlag": "ArzakonEpilogue",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Spawn"
+				],
+				"objective": "QuestFlag",
+				"prerequisiteIDs": [
+					3
+				]
+			}
+		],
+		"storyQuest": true
+	},
+	{
+		"id": 55,
+		"isTemplate": true,
+		"name": "The Eldrazi Titan",
+		"description": "The mage traded your five keys for the key to Emrakul's castle. Something far older than the guardians waits inside.",
+		"offerDialog": {},
+		"prologue": {},
+		"epilogue": {},
+		"failureDialog": {},
+		"declinedDialog": {},
+		"stages": [
+			{
+				"id": 1,
+				"name": "Find Emrakul's Castle",
+				"description": "Find Emrakul's castle in the wastes.",
+				"count3": 1,
+				"POITags": [
+					"Emrakul"
+				],
+				"objective": "Travel",
+				"allowInactivePOI": true
+			},
+			{
+				"id": 2,
+				"name": "Defeat Emrakul",
+				"description": "Use the strange key to reach Emrakul and defeat her.",
+				"mapFlag": "EmrakulDefeated",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Emrakul"
+				],
+				"objective": "QuestFlag",
+				"prerequisiteIDs": [
+					1
+				],
+				"allowInactivePOI": true,
+				"epilogue": {
+					"text": "With Emrakul gone, you feel the last of the Great Barrier crumble. The mage at the Secluded Encampment will want to know.",
+					"options": [
+						{
+							"name": "(Continue)"
+						}
+					],
+					"action": [
+						{
+							"issueQuest": "54"
+						}
+					]
+				}
+			}
+		],
+		"storyQuest": true
 	}
 ]
