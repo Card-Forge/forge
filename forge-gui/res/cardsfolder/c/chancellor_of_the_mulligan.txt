@@ -2,19 +2,20 @@ Name:Chancellor of the Mulligan
 ManaCost:7
 Types:Artifact Creature Phyrexian Construct
 PT:7/7
+K:Menace
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ ShuffleOnUpkeep | SpellDescription$ You may reveal CARDNAME from your opening hand. If you do, at the beginning of the first upkeep, shuffle it into your library and draw a card.
 SVar:ShuffleOnUpkeep:DB$ Effect | Triggers$ TrigShuffle | RememberObjects$ Self
-SVar:TrigShuffle:Mode$ Phase | Phase$ Upkeep | Execute$ DBShuffle | OneOff$ True | IsPresent$ Card.IsRemembered | PresentZone$ Hand | TriggerDescription$ Shuffle CARDNAME into your library and draw a card.
-SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Defined$ Remembered | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
+SVar:TrigShuffle:Mode$ Phase | Phase$ Upkeep | Execute$ DBShuffleSelf | OneOff$ True | IsPresent$ Card.IsRemembered | PresentZone$ Hand | TriggerDescription$ Shuffle CARDNAME into your library and draw a card.
+SVar:DBShuffleSelf:DB$ ChangeZone | Origin$ Hand | Defined$ Remembered | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards. When you do, any number of target players mulligan. (They shuffle their hand into their library, then draw that many cards and put one of them on the bottom of their library.)
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigEachTarget | TriggerDescription$ When you do, any number of target players mulligan.
-SVar:TrigEachTarget:DB$ RepeatEach | RepeatSubAbility$ DBShuffle | RepeatPlayers$ Targeted | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt
-SVar:DBShuffle:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Defined$ Remembered | ChangeType$ Card | Shuffle$ True | RememberChanged$ True | SubAbility$ DBDrawNewHand
+SVar:TrigEachTarget:DB$ RepeatEach | RepeatSubAbility$ DBShuffleHand | RepeatPlayers$ Targeted | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt
+SVar:DBShuffleHand:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Defined$ Remembered | ChangeType$ Card | Shuffle$ True | RememberChanged$ True | SubAbility$ DBDrawNewHand
 SVar:DBDrawNewHand:DB$ Draw | Defined$ Remembered | NumCards$ X | SubAbility$ DBPutOneBack
-SVar:DBPutOneBack:DB$ ChangeZone | Origin$ Hand | DefinedPlayer$ Remembered | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Hidden$ True | Chooser$ Remembered | SubAbility$ DBCleanup
+SVar:DBPutOneBack:DB$ ChangeZone | Mandatory$ True | Origin$ Hand | DefinedPlayer$ Remembered | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Hidden$ True | Chooser$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:MaxTgt:PlayerCountPlayers$Amount
