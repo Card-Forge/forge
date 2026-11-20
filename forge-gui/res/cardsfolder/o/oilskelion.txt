@@ -1,0 +1,12 @@
+Name:Oilskelion
+ManaCost:5
+Types:Creature Construct
+PT:4/4
+K:etbCounter:OIL:Sunburst:no Condition:Oil Sunburst (This enters the battlefield with an oil counter on it for each color of mana spent to cast it.)
+A:AB$ DealDamage | Cost$ SubCounter<1/OIL> | NumDmg$ 1 | ValidTgts$ Any | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:Sunburst:Count$Converge
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:All
+DeckHints:Ability$Proliferate
+Oracle:Oil Sunburst (This enters the battlefield with an oil counter on it for each color of mana spent to cast it.)\nRemove an oil counter from Oilskelion: Oilskelion deals 1 damage to any target.

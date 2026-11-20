@@ -1,7 +1,18 @@
 Name:Phila, Unsealed
 ManaCost:4
-Types:Legendary Artifact Creature Rebel Golem
+Types:Legendary Artifact Creature Golem
 PT:4/4
-S:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get poison counters.
-A:AB$ ChangeZone | Cost$ W U B R G | ValidTgts$ Artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
-Oracle:You can't get poison counters.\n{W}{U}{B}{R}{G}: Exile target artifact.
+Oracle:<Unsupported Variant>
+
+# --- Mirrans Won ---
+
+Variant:A:Types:Legendary Artifact Creature Rebel Golem
+Variant:A:S:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get poison counters.
+Variant:A:A:AB$ ChangeZone | Cost$ W U B R G | ValidTgts$ Artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
+Variant:A:Oracle:You can't get poison counters.\n{W}{U}{B}{R}{G}: Exile target artifact.
+
+# --- Phyrexians Won ---
+
+Variant:B:Types:Legendary Artifact Creature Phyrexian Golem
+Variant:B:S:Mode$ Continuous | Affected$ Creature.Phyrexian+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Toxic:1 | Description$ Other Phyrexians you control get +1/+1 and gain Toxic 1.
+Variant:B:Oracle:Other Phyrexians you control get +1/+1 and gain Toxic 1.

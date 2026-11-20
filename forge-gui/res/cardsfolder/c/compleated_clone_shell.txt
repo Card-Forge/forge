@@ -1,0 +1,14 @@
+Name:Compleated Clone Shell
+ManaCost:5
+Types:Artifact Creature Phyrexian Shapeshifter
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseRandom | TriggerDescription$ Imprint — When Compleated Clone Shell enters the battlefield, look at four random cards from your sideboard and exile one face down.
+SVar:TrigChooseRandom:DB$ ChooseCard | ChoiceZone$ Sideboard | ControlledByPlayer$ You | AtRandom$ True | Amount$ 4 | SubAbility$ TrigChooseOne
+SVar:TrigChooseOne:DB$ ChooseCard | DefinedCards$ ChosenCard | Mandatory$ True | ChoiceZone$ Sideboard | SubAbility$ DBImprint
+SVar:DBImprint:DB$ ChangeZone | Chooser$ You | Defined$ ChosenCard | Origin$ Sideboard | Destination$ Exile | ExileFaceDown$ True | WithMayLook$ True | Mandatory$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerDescription$ When CARDNAME dies, turn the exiled card face up. You may cast it without paying its mana cost.
+SVar:TrigFaceUp:DB$ SetState | Defined$ ExiledWithSource | SubAbility$ DBPlay | Mode$ TurnFaceUp
+SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Card.ExiledWithSource+nonLand | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:SacMe:5
+Oracle:Imprint — When Compleated Clone Shell enters the battlefield, look at four random cards from your sideboard and exile one face down.\nWhen Compleated Clone Shell dies, turn the exiled card face up. You may cast it without paying its mana cost.

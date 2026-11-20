@@ -513,7 +513,8 @@ RR16 R Math is for Blockers @
 RZ16 R The Beleaguered Boxer @
 UB16 U Ransack, the Lab @
 RZ24 R The Dogronmaster @
-MA30 M Phila, Unsealed @
+MA30 M Phila, Unsealed @ ${"variant": "A"}
+MA30b M Phila, Unsealed @ ${"variant": "B"}
 RA31 R The Rebellious Intelligence @
 RZ34 R The Duke of Midrange @
 RW35a R The Asker of More Mana @

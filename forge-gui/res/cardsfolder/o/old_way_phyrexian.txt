@@ -1,0 +1,7 @@
+Name:Old Way Phyrexian
+ManaCost:2 B
+Types:Creature Phyrexian Cleric
+PT:2/2
+K:Infect
+S:Mode$ Continuous | Affected$ Creature.withToxic+YouCtrl | RemoveKeyword$ Toxic | AddKeyword$ Infect | Description$ Creatures you control with toxic lose toxic and gain infect.
+Oracle:Infect (A creature with infect deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nCreatures you control with toxic lose toxic and gain infect.

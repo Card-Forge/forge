@@ -1,0 +1,9 @@
+Name:Goblin Savant
+ManaCost:2
+Types:Artifact Creature Goblin Wizard
+PT:2/1
+A:AB$ Dig | Cost$ T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. If that card is a Goblin or an artifact card, you may play it this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile | ConditionDefined$ RememberedCard | ConditionPresent$ Goblin,Artifact
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}: Exile the top card of your library. If that card is a Goblin or an artifact card, you may play it this turn.

@@ -1,0 +1,7 @@
+Name:Echoing Echo
+ManaCost:W
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | KW$ Echo:3 | Duration$ UntilTheEndOfYourNextTurn | IsCurse$ True | SubAbility$ PumpRest
+SVar:PumpRest:DB$ PumpAll | ValidCards$ Creature.NotDefinedTargeted+sharesNameWith Targeted | IsCurse$ True | Duration$ UntilTheEndOfYourNextTurn | KW$ Echo:3
+AI:RemoveDeck:All
+Oracle:Target creature and all creatures that share a name with that creature gain echo {3} until the end of your next turn. (At the beginning of the upkeep of each of those creature’s controllers, if that creature came under its owner’s control since the beginning of their last upkeep, they sacrifice it unless they pay its echo cost.)

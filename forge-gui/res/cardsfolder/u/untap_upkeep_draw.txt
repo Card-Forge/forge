@@ -1,0 +1,10 @@
+Name:Untap, Upkeep, Draw
+ManaCost:1 U
+Types:Sorcery
+K:Entwine:3
+A:SP$ Charm | Choices$ ExtraDrawStep,ExtraUpkeep,ExtraUntap
+SVar:ExtraUntap:DB$ AddPhase | ExtraPhase$ Untap | SpellDescription$ After this phase, there is an additional untap step
+SVar:ExtraUpkeep:DB$ AddPhase | ExtraPhase$ Upkeep | SpellDescription$ After this phase, there is an additional upkeep step
+SVar:ExtraDrawStep:DB$ AddPhase | ExtraPhase$ Draw | SpellDescription$ After this phase, there is an additional draw step
+AI:RemoveDeck:All
+Oracle:Choose one —\n• After this phase, there is an additional untap step.\n• After this phase, there is an additional upkeep step.\n• After this phase, there is an additional draw step.\nEntwine {3} (Choose all of them if you pay the entwine cost.)
