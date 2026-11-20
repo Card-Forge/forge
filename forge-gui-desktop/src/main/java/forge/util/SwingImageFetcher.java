@@ -42,7 +42,8 @@ public class SwingImageFetcher extends ImageFetcher {
             }
 
             boolean isScryfallUrl = urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)
-                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN);
+                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN)
+                    || urlToDownload.startsWith(getCardArtApiBaseUrl());
             String newdespath = urlToDownload.contains(".fullborder.jpg") || isScryfallUrl ?
                     TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
             if (!newdespath.contains(".full") && !newdespath.contains(".artcrop") && isScryfallUrl && !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR))

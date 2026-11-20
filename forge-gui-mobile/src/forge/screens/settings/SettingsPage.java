@@ -658,6 +658,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 applyPreferredLanguageAvailability();
             }
         }, 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_ALTERNATE_CARD_ART_API,
+            Forge.getLocalizer().getMessage("cbUseAlternateArtApi"),
+            Forge.getLocalizer().getMessage("nlUseAlternateArtApi")), 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
             Forge.getLocalizer().getMessage("lblPreferredArt"),
             Forge.getLocalizer().getMessage("nlPreferredArt"),
