@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AdventureDeckEditor extends FDeckEditor {
     @Override
@@ -778,15 +779,39 @@ public class AdventureDeckEditor extends FDeckEditor {
     /** The main deck and command zone when the editor opened, or null when the deck isn't locked. */
     private CardPool lockedCards;
     private boolean lockCheckPending;
+    private FTextArea lockRules;
 
     private void lockDeckCards() {
         boolean locked = editsRunDeck() && Current.player().hasModifierRule(modifier -> modifier.lockDeckCards);
         lockedCards = locked ? lockedSectionsPool() : null;
+        if (locked && lockRules == null) {
+            lockRules = add(new FTextArea(false));
+            lockRules.setFont(FSkinFont.get(12));
+            lockRules.setAlignment(Align.center);
+            lockRules.setCenterVertically(true);
+        }
+        if (locked)
+            lockRules.setText(Current.player().getActiveModifiers().stream().filter(modifier -> modifier.lockDeckCards)
+                    .map(modifier -> modifier.description == null ? modifier.name : modifier.name + ": " + modifier.description)
+                    .collect(Collectors.joining("\n")));
+        if (lockRules != null)
+            lockRules.setVisible(locked);
+        revalidate();
     }
 
     /** @return whether this editor shows the run's own deck, not an event deck, the shop or a preview */
     private boolean editsRunDeck() {
         return getCurrentEvent() == null && !(getEditorConfig() instanceof ShopConfig) && !(getEditorConfig() instanceof DeckPreviewConfig);
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        if (lockedCards != null) {
+            float rulesHeight = lockRules.getPreferredHeight(width) + Utils.scale(6);
+            lockRules.setBounds(0, startY, width, rulesHeight);
+            startY += rulesHeight;
+        }
+        super.doLayout(startY, width, height);
     }
 
     private CardPool lockedSectionsPool() {
