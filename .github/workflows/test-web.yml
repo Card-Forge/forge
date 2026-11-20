@@ -1,0 +1,61 @@
+name: Test web GUI
+
+# The web module is outside the default reactor (its build downloads Node), so test-build.yaml never builds it.
+# This runs its Java and browser-client tests beside that workflow on changes that could break it, here or in the code it builds on.
+
+on:
+  push:
+    paths:
+      - 'forge-gui-web/**'
+      # The module builds on forge-gui and the modules under it, and nothing else in Forge
+      - 'pom.xml'
+      - 'forge-core/**'
+      - 'forge-game/**'
+      - 'forge-ai/**'
+      - 'forge-gui/pom.xml'
+      - 'forge-gui/src/**'
+      # The page reads the English language file, and the tests read these data folders
+      - 'forge-gui/res/languages/en-US.properties'
+      - 'forge-gui/res/formats/**'
+      - 'forge-gui/res/blockdata/**'
+      - '.github/workflows/test-web.yml'
+  pull_request:
+    paths:
+      - 'forge-gui-web/**'
+      # The module builds on forge-gui and the modules under it, and nothing else in Forge
+      - 'pom.xml'
+      - 'forge-core/**'
+      - 'forge-game/**'
+      - 'forge-ai/**'
+      - 'forge-gui/pom.xml'
+      - 'forge-gui/src/**'
+      # The page reads the English language file, and the tests read these data folders
+      - 'forge-gui/res/languages/en-US.properties'
+      - 'forge-gui/res/formats/**'
+      - 'forge-gui/res/blockdata/**'
+      - '.github/workflows/test-web.yml'
+  workflow_dispatch:
+
+# A newer push to the same pull request makes its older run worth nothing, so that run is stopped
+concurrency:
+  group: test-web-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Test web GUI with Java 17
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Run tests
+        run: |
+          # -am builds the modules the web module needs. The filter runs only the web module's tests, which the main jobs do not run
+          mvn -U -B -Pweb -pl forge-gui-web -am test -Dtest='forge.web.**' -Dsurefire.failIfNoSpecifiedTests=false

@@ -1,0 +1,218 @@
+/* The prompt console is at the bottom of the side column, under the log. The question is shown above one wide answer bar. */
+#prompt { position: relative; flex: none; width: var(--prompt-w); align-self: flex-end; margin-bottom: 14px; z-index: 30; display: grid; gap: 10px; padding: 10px 12px 12px; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 34px #000a; }
+/* When the log and chat are folded, the side column holds only tabs. So the console is fixed to the corner on its own. */
+#match.side-folded #prompt { position: fixed; right: 8px; bottom: 14px; }
+#prompt.waiting { border-color: var(--accent-2); }
+/* While a question is answered on the board, the prompt only says what is resolving. Its border stays plain so it does not ask for a press. */
+#prompt.answering { border-color: var(--line-bright); }
+/* A rail down the left edge says whose move it is. It is brass while the game waits on you, also for a question on the board, and grey while another player acts.
+   The brass is a layer over the grey, because a gradient cannot fade. The phone's dock has no rail. */
+html:not([data-form="portrait"]) #prompt { padding-left: 18px; }
+/* The rail is drawn wider than it shows, because a 7px box would shrink its 12px corners. Its corners then match the border's, which the glints follow */
+html:not([data-form="portrait"]) #prompt::before, html:not([data-form="portrait"]) #prompt::after { content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 14px; clip-path: inset(0 7px 0 0); border-radius: 12px 0 0 12px; pointer-events: none; }
+html:not([data-form="portrait"]) #prompt::before { background: var(--line-bright); }
+html:not([data-form="portrait"]) #prompt::after { background: var(--brass); opacity: 0; }
+html:not([data-form="portrait"]) #prompt:is(.waiting, .answering)::after { opacity: 1; }
+html:not([data-form="portrait"]) #prompt:not(.waiting, .answering) :is(.step, .message) { color: var(--muted); }
+/* When the game turns to you, the prompt fades to its own colours. It switches back to grey at once */
+html:not([data-form="portrait"]) #prompt:is(.waiting, .answering) { transition: border-color .7s ease-out; }
+html:not([data-form="portrait"]) #prompt:is(.waiting, .answering)::after { transition: opacity .7s ease-out; }
+html:not([data-form="portrait"]) #prompt:is(.waiting, .answering) :is(.step, .message) { transition: color .7s ease-out; }
+html[data-motion="reduced"] #prompt, html[data-motion="reduced"] #prompt::after, html[data-motion="reduced"] #prompt :is(.step, .message) { transition: none !important; }
+/* Two glints run around the gold border while you hold priority, over the outer edge of the rail. Each glint is three dashes centred on one point and blurred. */
+#prompt .glints { position: absolute; z-index: 1; left: -1px; top: -1px; overflow: visible; pointer-events: none; filter: blur(.6px); opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+#prompt.priority .glints { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+#prompt .glints rect { fill: none; stroke-linecap: round; animation: 7s linear infinite; }
+/* Each layer starts offset by half its dash length, so all three centre on one point. The values are literal because var() does not animate here. */
+#prompt .glints .halo { stroke: var(--accent-2); stroke-opacity: .2; stroke-width: 2.5; stroke-dasharray: 76 424; animation-name: glint-halo; }
+#prompt .glints .mid { stroke: #f7d77a; stroke-opacity: .35; stroke-width: 2; stroke-dasharray: 40 460; animation-name: glint-mid; }
+#prompt .glints .core { stroke: #fbe9b0; stroke-opacity: .6; stroke-width: 1.5; stroke-dasharray: 16 484; animation-name: glint-core; }
+@keyframes glint-halo { from { stroke-dashoffset: 38; } to { stroke-dashoffset: -962; } }
+@keyframes glint-mid { from { stroke-dashoffset: 20; } to { stroke-dashoffset: -980; } }
+@keyframes glint-core { from { stroke-dashoffset: 8; } to { stroke-dashoffset: -992; } }
+html[data-motion="reduced"] #prompt .glints { display: none; }
+/* The tools have their own row, so a long step name never pushes them out of the console */
+#match .tools { display: flex; align-items: center; justify-content: flex-end; gap: 2px; margin: -4px -6px -6px 0; }
+#prompt .step { margin: 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--accent-2); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+#match .tools button { width: 26px; height: 24px; padding: 0; display: grid; place-items: center; background: none; border-color: transparent; border-radius: 6px; }
+#match .tools button:hover { background: var(--surface-2); }
+#match .tools svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#match .tools button:hover svg { stroke: var(--text); }
+/* A pass that is running (auto-pass or end turn) has a brass background. A divider separates the three game actions from the game menu. */
+#match .tools .on, #match .tools .on:hover { background: var(--brass); }
+#match .tools .on svg, #match .tools .on:hover svg { stroke: var(--on-brass); }
+#match .tools :is(.more, .volume).open { background: var(--surface-2); }
+#match .tools .macro { width: auto; padding: 0 9px; font-size: 12px; font-weight: 600; border-radius: 13px; border: 1px solid var(--accent-2); color: var(--accent-2); white-space: nowrap; }
+#match .tools .macro.recording { border-color: var(--error); color: #ffb4ac; background: color-mix(in srgb, var(--error) 18%, transparent); }
+#match .tools .macro.recording::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--error); vertical-align: 1px; }
+/* The margins make the gaps on each side of the divider match the gaps between icons */
+#match .tools .tools-gap { width: 1px; height: 14px; margin: 0 6px; background: var(--line-bright); }
+#prompt .prompt-body { display: flex; gap: 10px; align-items: flex-start; }
+#prompt .prompt-body:not(:has(.message:not(:empty))):not(:has(img:not([hidden]))) { display: none; }
+#prompt .prompt-card { width: 44px; border-radius: 4px; flex: none; }
+#prompt .message { margin: 0; min-height: 0; max-height: 8em; overflow-y: auto; white-space: pre-line; scrollbar-width: thin; color: var(--text); font-size: 13.5px; line-height: 1.35; }
+/* The answers form one bar of two equal segments, because the two always come as a pair.
+   When both labels do not fit on one row, the secondary answer moves to a row of its own. */
+#prompt .buttons { display: flex; flex-wrap: wrap; gap: 2px; }
+/* With nothing to answer, the console is only as tall as its text. On a phone, the dock keeps its single row. */
+html:not([data-form="portrait"]) #prompt .buttons:not(:has(button:not(:disabled))) { display: none; }
+/* The key is shown as a separate keycap next to the label. This makes it read as the key to press, not as part of the answer. */
+#prompt .buttons button { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 5px; min-width: 0; min-height: 36px; padding: 0 9px; border-radius: 4px; font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+/* On a shared row the two answers are equally wide. A label too wide for its half moves the secondary answer to a row of its own, and there each fills the row. */
+#prompt :is(.ok, .cancel) { min-width: min(max-content, 100%); }
+#prompt .ok { flex: 1 1 0; border-radius: 8px 4px 4px 8px; }
+#prompt .cancel { flex: 1 1 0; background: var(--surface-2); border-color: var(--line); color: var(--muted); border-radius: 4px 8px 8px 4px; }
+/* A label only breaks onto a second line when it is wider than the whole prompt by itself */
+#prompt .buttons .label { text-align: center; line-height: 1.1; }
+/* Answers on separate rows are separate buttons, so each gets all its corners rounded (prompt.ts sets the class) */
+html:not([data-form="portrait"]) #prompt .buttons.stacked button { border-radius: 8px; }
+#prompt .cancel:hover:not(:disabled) { color: var(--text); }
+#prompt .ok:last-child, #prompt .cancel:first-child { border-radius: 8px; }
+/* When declaring attackers, the answer has its own row. The shortcut button is on a quieter row below it, so attacking with everything is not mistaken for the way out. */
+html:not([data-form="portrait"]) #prompt.attack .buttons { flex-direction: column; gap: 6px; }
+html:not([data-form="portrait"]) #prompt.attack .ok { flex: none; border-radius: 8px; }
+html:not([data-form="portrait"]) #prompt.attack .cancel { max-width: none; height: 30px; border-radius: 8px; border-style: dashed; background: none; font-size: 11.5px; }
+html:not([data-form="portrait"]) #prompt.attack .cancel::before { content: ''; flex: none; width: 14px; height: 14px; background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* When declaring blockers, Cancel is never an answer, so the one answer uses the whole row */
+html:not([data-form="portrait"]) #prompt.blocks .cancel { display: none; }
+html:not([data-form="portrait"]) #prompt.strike .cancel::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l10 10M4 4v4M4 4h4M20 4L10 14M20 4v4M20 4h-4M7 17l-3 3M17 17l3 3M9 15l-2 2M15 15l2 2'/%3E%3C/svg%3E"); }
+/* Attacking or blocking with nothing is a pass. So the button is not brass until there is something to confirm. */
+#prompt.strike .ok:not(:disabled), #prompt.no-blocks .ok:not(:disabled) { background: var(--surface-3); border-color: var(--line-bright); box-shadow: none; color: var(--text); }
+#prompt .ok.focus:not(:disabled) { box-shadow: 0 0 6px color-mix(in srgb, var(--accent-2) 30%, transparent); }
+/* On a gold button, the key is drawn dark on gold, not grey */
+:is(#prompt, .zone-answer, .dialog .actions, .first-answers) .primary kbd { background: #00000059; opacity: 1; }
+#prompt kbd, .zone-answer kbd, .dialog .actions kbd, .first-answers kbd { flex: none; display: inline-grid; place-items: center; box-sizing: border-box; min-width: 16px; height: 13px; padding: 0 4px; border-radius: 3px;
+  background: #00000040; box-shadow: inset 0 -1px 0 #00000059; font: 700 8.5px/1 system-ui, sans-serif; color: inherit; opacity: .8; letter-spacing: 0; text-transform: none; }
+/* Spectating two AI players leaves nothing to answer */
+#match .tools.watching :is(.end-turn, .auto-pass, .undo, .macro, .tools-gap) { display: none; }
+#prompt.spectating .buttons, #prompt.spectating .prompt-card { display: none; }
+#prompt.spectating { border-color: var(--line); box-shadow: 0 12px 34px #000a; }
+#prompt.flash { animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+/* A button just used, by click or by its key, darkens for a moment so the press is visible */
+#prompt button.pressed { animation: pressed .18s ease-out; }
+@keyframes pressed { from { filter: brightness(.6); } }
+/* The options dialog has tabs down a side rail, each with a short list. A search box above them searches all tabs. */
+#options .options-dialog { width: min(640px, 92vw); max-height: 86vh; display: grid; grid-template-rows: auto 1fr auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+#options header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+#options header .search { flex: 1; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; color: var(--text); font: inherit; padding: 5px 9px; }
+#options header .spacer { flex: 1; }
+#options .tabbed { width: min(720px, 92vw); height: min(560px, 86vh); }
+#options .split { display: grid; grid-template-columns: 168px minmax(0, 1fr); min-height: 0; }
+#options .rail { display: flex; flex-direction: column; gap: 2px; padding: 10px 8px; background: var(--bg); border-right: 1px solid var(--line); }
+#options .rail button { display: flex; align-items: center; gap: 9px; padding: 8px 10px; background: none; border: 1px solid transparent; border-radius: 8px; color: var(--muted); font-size: 13px; text-align: left; }
+#options .rail button:hover { color: var(--text); background: var(--surface); }
+#options .rail button[aria-selected="true"] { color: var(--text); background: var(--surface-2); border-color: var(--line-bright); }
+/* The host tab's name is in the gold of the host-only marks, and a gap sets it apart from the player's own tabs */
+#options .rail button.host, #options .rail button.host:hover, #options .rail button.host[aria-selected="true"] { margin-bottom: 8px; color: var(--accent-2); }
+/* The open tab's gold edge is a separate element, so a tab change animates it to the new tab. The page slides too (dialogs.css). */
+#options .rail button { position: relative; }
+#options .rail-mark { position: absolute; left: -1px; top: 6px; bottom: 6px; width: 3px; border-radius: 2px; background: var(--accent-2); view-transition-name: rail-mark; }
+#options .split .rows { view-transition-name: rail-page; }
+/* During a tab change, named parts of the screen behind are drawn over everything unnamed. So the dialog has a name of its own to stay above them. */
+#options { view-transition-name: options; }
+#options .stops-dialog { width: min(440px, 92vw); }
+#options .decisions-dialog { width: min(620px, 92vw); }
+#options .decision { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+#options .decision-kind { flex: none; width: 104px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+#options .decision-kind.accept { color: var(--select); }
+#options .decision-kind.yield { color: var(--accent-2); }
+#options .decision-key { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+#options .decision-forget { flex: none; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; background: none; border: 0; color: var(--muted); }
+#options .decision-forget:hover { color: var(--text); background: var(--surface-2); }
+#options .decision-forget svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+#options .clear-all.armed { border-color: var(--danger); color: var(--danger); }
+#options header .close { background: none; border: none; color: var(--muted); display: grid; place-items: center; padding: 4px; }
+#options svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#options .rows { overflow-y: auto; scrollbar-width: thin; padding: 6px 14px 12px; }
+#options h4 { display: flex; align-items: baseline; justify-content: space-between; margin: 20px 0 2px; color: var(--muted); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+#options h4:first-child { margin-top: 8px; }
+#options .section-action { padding: 0; background: none; border: 0; color: var(--muted); font-size: 11px; letter-spacing: 0; text-transform: none; }
+#options .section-action:hover { color: var(--text); text-decoration: underline; }
+#options .setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 24px; min-height: 30px; padding: 9px 0; border-top: 1px solid var(--line); }
+#options h4 + .setting, #options .rows > .setting:first-child { border-top: 0; }
+/* The host's own settings are in one accent-coloured frame, so it is clear where they begin and end */
+#options .host-group { margin: 14px 0 8px; padding: 2px 12px 4px; border: 1px solid color-mix(in srgb, var(--accent-2) 45%, var(--line)); border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-2) 4%, transparent); }
+#options .rows > .host-group:first-child { margin-top: 8px; }
+#options .host-group h4 { justify-content: flex-start; gap: 8px; margin: 10px 0 0; }
+#options .host-group > .hint { margin: 2px 0 2px; }
+#options .host-group > .hint + .setting { border-top: 0; }
+#options .host-only { display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px 1px 5px; border: 1px solid var(--accent-2); border-radius: 999px;
+  color: var(--accent-2); font-size: 10.5px; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+#options .host-only svg { width: 11px; height: 11px; }
+#options .setting .host-only { margin-left: 8px; vertical-align: 1px; }
+/* A choice shown as pictures takes the row under its name */
+#options .setting.wide { grid-template-columns: minmax(0, 1fr); }
+#options .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+#options .tiles button { display: flex; flex-direction: column; gap: 2px; padding: 8px 8px 9px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); text-align: left; }
+#options .tiles button[aria-checked="true"] { border-color: var(--accent-2); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent-2); }
+#options .tiles button:disabled { opacity: .4; cursor: default; }
+#options .tiles svg { width: 100%; height: auto; margin-bottom: 6px; border-radius: 6px; background: var(--bg-deep); stroke-width: 1; }
+#options .tiles b { font-size: 13px; }
+#options .tiles small { color: var(--muted); font-size: 11.5px; line-height: 1.3; }
+#options .tiles :is(.theirs, .tab) { fill: var(--surface-3); stroke: var(--line-bright); }
+#options .tiles .tab.on { fill: #8fc3ff; stroke: none; }
+#options .tiles .yours { fill: color-mix(in srgb, var(--text) 22%, var(--surface-3)); stroke: var(--muted); }
+#options .hint { color: var(--muted); font-size: 11.5px; line-height: 1.4; margin-top: 1px; }
+#options .switch { justify-self: end; position: relative; width: 38px; height: 22px; padding: 0; border: 1px solid var(--line-bright); border-radius: 999px; background: var(--surface-2); }
+#options .switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--muted); transition: left .12s; }
+#options .switch[aria-checked="true"] { background: var(--accent-2); border-color: var(--accent-2); }
+#options .switch[aria-checked="true"]::after { left: 18px; background: var(--on-brass); }
+#options .select:has(.pick) { justify-self: end; }
+#options .pick { min-width: 150px; height: 30px; font-size: 12.5px; }
+#options .slider { display: grid; grid-template-columns: minmax(0, 1fr) 38px; align-items: center; gap: 8px; width: 220px; height: 28px; }
+#options .slider input { width: 100%; margin: 0; }
+/* The slider is drawn here, not by the browser. The browser colours the bar up to the middle of the handle, even at zero.
+   Here the bar fills to the middle of the handle. At the lowest value the bar is empty and the handle is a hollow ring at the far left. */
+input.level { --knob: 14px; -webkit-appearance: none; appearance: none; height: 16px; margin: 0; padding: 0; border: 0; background: none; cursor: pointer; }
+input.level::-webkit-slider-runnable-track { height: 4px; border-radius: 2px;
+  background: linear-gradient(to right, var(--accent-2) calc(var(--knob) / 2 + (100% - var(--knob)) * var(--level, 0)), var(--line-bright) 0); }
+input.level::-webkit-slider-thumb { -webkit-appearance: none; width: var(--knob); height: var(--knob); margin-top: -5px; box-sizing: border-box; border-radius: 50%; background: var(--accent-2); border: 2px solid var(--surface); }
+input.level::-moz-range-track { height: 4px; border-radius: 2px; background: var(--line-bright); }
+input.level::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--accent-2); }
+input.level::-moz-range-thumb { width: var(--knob); height: var(--knob); box-sizing: border-box; border-radius: 50%; background: var(--accent-2); border: 2px solid var(--surface); }
+input.level.off::-webkit-slider-runnable-track { background: var(--line-bright); }
+input.level.off::-webkit-slider-thumb { background: var(--surface); border-color: var(--muted); }
+input.level.off::-moz-range-progress { background: none; }
+input.level.off::-moz-range-thumb { background: var(--surface); border-color: var(--muted); }
+input.level:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; border-radius: 4px; }
+#options .slider span { color: var(--muted); font-size: 11.5px; text-align: right; font-variant-numeric: tabular-nums; }
+#options .setting .key-bind, #options .setting .edit { justify-self: end; height: 30px; padding: 0 14px; background: linear-gradient(180deg, var(--surface-3), var(--surface-2)); border: 1px solid var(--line-bright); border-radius: 6px; color: var(--text); font-size: 12px; box-shadow: 0 1px 2px #0009, inset 0 1px 0 #ffffff12; }
+#options .setting .key-bind:hover, #options .setting .edit:hover { border-color: var(--accent-2); }
+#options .backup { display: flex; gap: 8px; justify-self: end; }
+/* Browser storage is kept per web address, so the Advanced tab opens with that warning above the backup */
+#options .storage-note { margin: 10px 0; padding: 10px 12px; border: 1px solid var(--line-bright); border-left: 3px solid var(--accent-2); border-radius: 8px; background: var(--accent-soft); }
+#options .storage-note b { font-size: 13px; }
+#options .storage-note p { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+#options .key-bind { min-width: 56px; border-bottom-width: 3px; font: 700 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+#options .key-bind.listening { background: var(--brass); border-color: var(--accent-2); color: var(--on-brass); }
+#options .css-editor { grid-column: 1 / -1; display: grid; gap: 6px; }
+#options .css-buttons { display: flex; gap: 6px; }
+#options .css-buttons button { padding: 4px 10px; font-size: 12px; }
+#options .css { width: 100%; box-sizing: border-box; resize: vertical; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; color: var(--text); font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 8px; }
+@media (max-width: 560px) {
+  #options .setting { grid-template-columns: minmax(0, 1fr); }
+  #options .switch, #options .pick, #options .slider, #options .setting .key-bind, #options .setting .edit { justify-self: start; }
+  #options .split { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  #options .rail { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+#options footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--line); }
+/* The links to Forge's project and players are small, so they do not compete with the settings */
+#options footer .forge-links { grid-auto-flow: column; gap: 2px; margin-left: -8px; }
+#options footer .forge-links a { gap: 6px; padding: 4px 8px; font-size: 12px; }
+#options footer .forge-links svg { width: 14px; height: 14px; fill: currentColor; stroke: none; }
+#options footer .forge-links .leaves { display: none; }
+/* Gold marks a choice. The search box has focus whenever the dialog opens, so its focus is shown in grey */
+#options .search:focus { outline: none; border-color: var(--line-bright); }
+/* The volume control is a small panel over its button. It changes the sound level without opening the options. */
+#volume .volume-panel { position: fixed; display: grid; gap: 8px; padding: 10px 12px; min-width: 240px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 34px #000a; }
+#volume .volume-row { display: grid; grid-template-columns: 48px 1fr 34px; align-items: center; gap: 8px; font-size: 12.5px; }
+#volume .volume-row .value { color: var(--muted); font-size: 11.5px; text-align: right; }
+/* Buttons for players a prompt lets you pick, when their seat is not on the board to click (prompt.ts) */
+#prompt .choose-players { display: flex; flex-wrap: wrap; gap: 6px; }
+#prompt .choose-player { display: flex; align-items: center; gap: 7px; padding: 3px 10px 3px 3px; border-radius: 999px; font-size: 12.5px; font-weight: 600; }
+#prompt .choose-player img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+#prompt .choose-player:hover { border-color: var(--accent-2); }

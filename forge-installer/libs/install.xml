@@ -83,8 +83,14 @@
 			<file src="adventure-editor.command" targetdir="$INSTALL_PATH/" override="true">
 				<additionaldata key="permission.file" value="775"/>
 			</file>
+			<file src="forge-web.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<file src="forge-web.command" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
 			<executable stage="never" failure="ignore" keep="true">
-				<fileset targetdir="$INSTALL_PATH/" includes="forge.sh,forge.command,forge-adventure.sh,forge-adventure.command,adventure-editor.sh,adventure-editor.command"/>
+				<fileset targetdir="$INSTALL_PATH/" includes="forge.sh,forge.command,forge-adventure.sh,forge-adventure.command,adventure-editor.sh,adventure-editor.command,forge-web.sh,forge-web.command"/>
 			</executable>
 		</pack>
 	</packs>

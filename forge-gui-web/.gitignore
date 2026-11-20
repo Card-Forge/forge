@@ -1,0 +1,10 @@
+# npm packages, and the Node that Maven downloads to run them
+node_modules/
+node/
+
+# Built from src/main/ts by `npm run build` (Maven runs it)
+src/main/resources/web/js/
+
+# Written by forge.web.protocol.ProtocolTypes from the Java records and the language keys (Maven runs it)
+src/main/ts/protocol.gen.ts
+src/main/ts/text.gen.ts

@@ -1,0 +1,55 @@
+/* The filter bar used by both the deck finder and the deck editor */
+.fbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; position: relative; z-index: 3; }
+.fbar .find { flex: 1 1 180px; min-width: 140px; }
+.fbar .colours { margin: 0; }
+.fbar .colour { width: 26px; height: 26px; }
+
+.fbar .chip { display: inline-flex; align-items: center; height: 28px; border-radius: 999px; background: var(--surface-3); border: 1px solid var(--line-bright); font-size: 12.5px; white-space: nowrap; }
+.chip .chip-body { display: inline-flex; align-items: center; gap: 6px; height: 100%; padding: 0 4px 0 10px; border: 0; border-radius: 999px 0 0 999px; background: none; color: var(--text); font-size: inherit; }
+.chip .chip-body:last-child { padding-right: 10px; border-radius: 999px; }
+.chip .k { color: var(--faint); }
+.chip b { font-weight: 600; }
+.chip .x { display: grid; place-items: center; width: 22px; height: 22px; margin-right: 3px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--muted); font-size: 14px; line-height: 1; }
+.chip .x:hover { background: var(--surface-2); color: var(--text); }
+/* A filter chip set by the table, not by the player */
+.chip.set-by { border-color: color-mix(in srgb, var(--accent-2) 55%, transparent); background: var(--accent-soft); }
+.chip.set-by .k { color: var(--accent-2); }
+
+.add-wrap { position: relative; }
+.fbar .add { height: 28px; padding: 0 12px; border: 1px dashed var(--line-bright); border-radius: 999px; background: none; color: var(--muted); font-size: 12.5px; font-weight: 600; }
+.fbar .add:hover, .fbar .add.open { border-style: solid; border-color: var(--accent-2); color: var(--accent-2); background: var(--accent-soft); }
+.fbar .clear-all { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted); font-size: 12.5px; font-weight: 600; }
+.fbar .clear-all:hover { color: var(--text); }
+
+.filter-menu { position: fixed; z-index: 70; display: flex; gap: 6px; align-items: flex-start; }
+.filter-menu .mlist, .filter-menu .fpanel { background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 16px 40px #000c; padding: 6px; }
+.mlist { width: 230px; display: grid; gap: 1px; max-height: 60vh; overflow-y: auto; scrollbar-width: thin; }
+.mfind, .fpanel input { background: var(--bg); border: 1px solid var(--line); border-radius: 7px; padding: 6px 9px; color: var(--text); font: inherit; font-size: 13px; }
+.mfind { margin: 2px 2px 6px; }
+.mgroup { display: grid; gap: 1px; }
+.mhead { padding: 6px 10px 2px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+.mi { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 5px 10px; border: 0; border-radius: 7px; background: none; color: var(--text); font-size: 13px; text-align: left; }
+.mi:hover, .mi.on { background: var(--surface-3); }
+.mi .mi-note { color: var(--faint); font-size: 11px; }
+.mi.used { color: var(--muted); }
+.mnone { margin: 4px 10px 8px; color: var(--faint); font-size: 12.5px; }
+
+.fpanel, .filter-menu .fpanel { width: 260px; display: grid; gap: 10px; padding: 10px; }
+.fpanel h5 { margin: 0; font-size: 13px; }
+.fpanel .colours { align-self: auto; justify-self: start; margin: 0; }
+.fnote { margin: 0; color: var(--muted); font-size: 12.5px; }
+.fopts { display: grid; gap: 2px; max-height: 280px; overflow-y: auto; scrollbar-width: thin; }
+.fopt { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border: 0; border-radius: 6px; background: none; color: var(--text); font-size: 13px; text-align: left; }
+.fopt:hover { background: var(--surface-2); }
+.fopt .dot { flex: none; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid var(--line-bright); }
+.fopt.box .dot { border-radius: 4px; }
+.fopt.on { background: var(--accent-soft); }
+.fopt.on .dot { background: var(--accent-2); border-color: var(--accent-2); box-shadow: inset 0 0 0 2px var(--surface); }
+.fopts .mhead { padding: 6px 8px 2px; }
+.fopt .fset { flex: 1; min-width: 0; }
+.fopt .fcode { color: var(--faint); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.frange { display: flex; align-items: center; gap: 8px; }
+.frange input { width: 0; flex: 1; }
+.frange span { color: var(--faint); }
+.fwords { display: grid; gap: 10px; }
+.fapply { display: flex; justify-content: flex-end; }
