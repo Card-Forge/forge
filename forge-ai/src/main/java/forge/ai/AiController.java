@@ -1932,6 +1932,18 @@ public class AiController {
         }
 
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && flatMonteCarloActive()) {
+            // landfall: a landfall permanent the lands in play already pay for is cast first, so the land triggers it.
+            // Only a payoff the AI wants to cast goes first: the land is never held for a spell it is needed to cast
+            final List<SpellAbility> payoffs = forge.ai.simulation.LandfallGuard.payoffsFirst(player);
+            if (!payoffs.isEmpty()) {
+                final SpellAbility first = chooseSpellAbilityToPlayFromList(payoffs, false);
+                if (first != null) {
+                    forge.ai.simulation.VetoLog.note(player, "landfall-payoff-before-land | " + first.getHostCard().getName());
+                    return singleSpellAbilityList(first);
+                }
+            }
+        }
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             if (landsWannaPlay != null && landsWannaPlay.size() > 1) {

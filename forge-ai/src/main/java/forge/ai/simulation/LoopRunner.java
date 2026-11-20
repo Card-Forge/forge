@@ -339,7 +339,12 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
-        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa)) {
+        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa) || RampPlan.wolfRunWaits(ai, sa)) {
+            return true;
+        }
+        final String landfall = LandfallGuard.fetchProblem(ai, sa);
+        if (landfall != null) {
+            VetoLog.note(ai, landfall + " | " + (sa.getHostCard() == null ? "?" : sa.getHostCard().getName()));
             return true;
         }
         final Card host = sa == null ? null : sa.getHostCard();

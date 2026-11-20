@@ -969,6 +969,41 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void aHeritageDruidDeckCastsItsEngineBeforeRegalForce() {
+        elfDeckWith(2, "Regal Force", "Nettle Sentinel", "Heritage Druid", "Elvish Visionary");
+        AssertJUnit.assertTrue(ElfLoop.isDruidDeck(ai));
+        final SpellAbility force = LoopRunner.castFromHand(ai, playsOf(), "Regal Force");
+        AssertJUnit.assertNotNull(force);
+        AssertJUnit.assertTrue("a card more for every green creature cast first", LoopRunner.held(ai, force));
+        final SpellAbility step = LoopRunner.next(ai, playsOf(), s -> true);
+        AssertJUnit.assertNotNull(step);
+        final String name = step.getHostCard().getName();
+        AssertJUnit.assertTrue("the engine first, not " + name, name.equals("Nettle Sentinel") || name.equals("Heritage Druid"));
+    }
+
+    @Test(timeOut = 120000)
+    public void regalForceIsNotHeldWhenNothingCheaperIsLeft() {
+        elfDeckWith(7, "Regal Force");
+        addCardToZone("Nettle Sentinel", ai, ZoneType.Library);
+        addCardToZone("Heritage Druid", ai, ZoneType.Library);
+        final SpellAbility force = LoopRunner.castFromHand(ai, playsOf(), "Regal Force");
+        AssertJUnit.assertNotNull(force);
+        AssertJUnit.assertFalse(LoopRunner.held(ai, force));
+    }
+
+    @Test(timeOut = 120000)
+    public void theTutorsOfADruidDeckTakeTheMissingPieceOfTheEngine() {
+        elfDeckWith(2, "Heritage Druid");
+        addCardToZone("Nettle Sentinel", ai, ZoneType.Library);
+        final Card visionary = addCardToZone("Elvish Visionary", ai, ZoneType.Library);
+        final Card sentinel = ai.getCardsIn(ZoneType.Library).stream().filter(c -> c.getName().equals("Nettle Sentinel"))
+                .findFirst().get();
+        final forge.game.card.CardCollection picks = ElfLoop.picks(ai, cards(visionary, sentinel), 1);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("the Druid is in the hand: the Sentinel is the piece that is missing", sentinel, picks.getFirst());
+    }
+
+    @Test(timeOut = 120000)
     public void theDiscardKeepsThePiecesOfTheKill() {
         alurenDeckWith(4, "Stroke of Genius", "Cloud of Faeries", "Intuition", "Intuition", "Cavern Harpy");
         final forge.game.card.CardCollection hand = new forge.game.card.CardCollection(ai.getCardsIn(ZoneType.Hand));
@@ -1085,5 +1120,97 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     public void glimpseDoesNotWaitForOneCreature() {
         elfDeckWith(5, "Glimpse of Nature", "Llanowar Elves");
         AssertJUnit.assertFalse("one creature is no reason to hold it", ElfLoop.held(ai, spellOf("Llanowar Elves")));
+    }
+
+    @Test(timeOut = 120000)
+    public void aLandfallPermanentThatIsPaidForGoesBeforeTheLand() {
+        elfDeckWith(3, "Scute Swarm", "Forest");
+        playsOf();
+        final List<SpellAbility> first = forge.ai.simulation.LandfallGuard.payoffsFirst(ai);
+        AssertJUnit.assertEquals(1, first.size());
+        AssertJUnit.assertEquals("Scute Swarm", first.get(0).getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theLandIsNotHeldForALandfallPermanentItIsNeededToCast() {
+        elfDeckWith(2, "Scute Swarm", "Forest");
+        playsOf();
+        AssertJUnit.assertTrue("two Forests do not pay {2}{G}: the land comes first",
+                forge.ai.simulation.LandfallGuard.payoffsFirst(ai).isEmpty());
+    }
+
+    @Test(timeOut = 120000)
+    public void aLandfallPumpOnASickCreatureIsNoReasonToCastItFirst() {
+        elfDeckWith(3, "Steppe Lynx", "Forest");
+        playsOf();
+        AssertJUnit.assertTrue(forge.ai.simulation.LandfallGuard.payoffsFirst(ai).isEmpty());
+    }
+
+    @Test(timeOut = 120000)
+    public void aFetchLandIsNotCrackedForAPumpThatCannotAttack() {
+        elfDeckWith(2);
+        final Card lynx = addCardToZone("Steppe Lynx", ai, ZoneType.Battlefield);
+        lynx.setSickness(true);
+        final Card heath = addCardToZone("Windswept Heath", ai, ZoneType.Battlefield);
+        playsOf();
+        SpellAbility crack = null;
+        for (final SpellAbility sa : heath.getSpellAbilities()) {
+            if (forge.ai.simulation.LandfallGuard.isFetch(sa)) {
+                crack = sa;
+            }
+        }
+        AssertJUnit.assertNotNull(crack);
+        AssertJUnit.assertEquals("landfall-pump-useless", forge.ai.simulation.LandfallGuard.fetchProblem(ai, crack));
+        addCardToZone("Scute Swarm", ai, ZoneType.Battlefield);
+        AssertJUnit.assertNull("a token for every land needs no combat", forge.ai.simulation.LandfallGuard.fetchProblem(ai, crack));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftCountsAValakutStillInTheLibrary() {
+        elfDeckWith(7, "Scapeshift");
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        for (int i = 0; i < 6; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertEquals("seven lands: Valakut and six Mountains, three damage each",
+                18, forge.ai.simulation.RampPlan.scapeshiftDamage(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftWaitsWhileTheMountainsAreTooFew() {
+        elfDeckWith(5, "Scapeshift");
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertEquals(0, forge.ai.simulation.RampPlan.scapeshiftDamage(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void theLandSearchTakesValakutThenAMountain() {
+        elfDeckWith(2, "Scapeshift");
+        final Card forest = addCardToZone("Forest", ai, ZoneType.Library);
+        final Card mountain = addCardToZone("Mountain", ai, ZoneType.Library);
+        final Card valakut = addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        final forge.game.card.CardCollection picks =
+                forge.ai.simulation.RampPlan.picks(ai, cards(forest, mountain, valakut), 2);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals(valakut, picks.get(0));
+        AssertJUnit.assertEquals(mountain, picks.get(1));
+    }
+
+    @Test(timeOut = 120000)
+    public void kessigWolfRunWaitsOutsideTheCombat() {
+        elfDeckWith(1);
+        final Card run = addCardToZone("Kessig Wolf Run", ai, ZoneType.Battlefield);
+        playsOf();
+        SpellAbility pump = null;
+        for (final SpellAbility sa : run.getSpellAbilities()) {
+            if (sa.getApi() == ApiType.Pump) {
+                pump = sa;
+            }
+        }
+        AssertJUnit.assertNotNull(pump);
+        AssertJUnit.assertTrue(forge.ai.simulation.RampPlan.wolfRunWaits(ai, pump));
     }
 }
