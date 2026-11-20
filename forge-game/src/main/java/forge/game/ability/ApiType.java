@@ -82,6 +82,7 @@ public enum ApiType {
     Discover (DiscoverEffect.class),
     DrainMana (DrainManaEffect.class),
     Draft (DraftEffect.class),
+    DraftAbility(DraftAbilityEffect.class),
     Draw (DrawEffect.class),
     EachDamage (DamageEachEffect.class),
     Earthbend (EarthbendEffect.class),
