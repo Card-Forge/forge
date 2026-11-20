@@ -607,9 +607,14 @@ public final class StaticAbilityContinuous {
                     if (!allValid.isEmpty()) {
                         Card first = allValid.getFirst();
 
-                        // for Volrath’s Shapeshifter, respect flipped state if able?
-                        CardState state = first.getState(affectedCard.isFlipped() && first.isFlipCard() ? CardStateName.Flipped : first.getCurrentStateName());
-
+                        CardState state;
+                        if (params.containsKey("FromState")) {
+                            CardStateName stateName = CardStateName.smartValueOf(params.get("FromState"));
+                            state = first.getState(stateName != null ? stateName : first.getCurrentStateName());
+                        } else {
+                            // for Volrath’s Shapeshifter, respect flipped state if able?
+                            state = first.getState(affectedCard.isFlipped() && first.isFlipCard() ? CardStateName.Flipped : first.getCurrentStateName());
+                        }
                         List<SpellAbility> spellAbilities = Lists.newArrayList();
                         List<Trigger> trigger = Lists.newArrayList();
                         List<ReplacementEffect> replacementEffects = Lists.newArrayList();
@@ -641,12 +646,14 @@ public final class StaticAbilityContinuous {
 
                         // Volrath’s Shapeshifter has that card’s name, mana cost, color, types, abilities, power, and toughness.
 
-                        // name
-                        affectedCard.addChangedName(state.getName(), false, se.getTimestamp(), stAb.getId());
-                        // Mana cost
-                        affectedCard.addChangedManaCost(state.getManaCost(), false, se.getTimestamp(), stAb.getId());
-                        // color
-                        affectedCard.addColorByText(state.getColor(), false, se.getTimestamp(), stAb);
+                        if (!params.containsKey("TextBoxOnly")) {
+                            // name
+                            affectedCard.addChangedName(state.getName(), false, se.getTimestamp(), stAb.getId());
+                            // Mana cost
+                            affectedCard.addChangedManaCost(state.getManaCost(), false, se.getTimestamp(), stAb.getId());
+                            // color
+                            affectedCard.addColorByText(state.getColor(), false, se.getTimestamp(), stAb);
+                        }
                         // type
                         affectedCard.addChangedCardTypesByText(state.getType(), se.getTimestamp(), stAb.getId());
                         // abilities

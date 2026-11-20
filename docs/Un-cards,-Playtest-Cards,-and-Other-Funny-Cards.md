@@ -425,7 +425,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Battle of Dragon Brothers // Fate Reforged - Notes choices by card name similar to a draft choice.
 1. (P) Bolshack Dragon - Using the relevant HTML tags, strikethrough does work for the Card Detail. However it doesn't display properly on the generated card image, showing the tags verbatim with no line over text (as of 2025-05-27). Thus, the relevant bits of text were removed pending suitable game engine changes. The Armored type wasn't added to TypesList.txt on the convenient assumption that an editorial lapse prevented it from being printed struck through.
 1. (P) Liliana's Other Contract // Liliana's Undead Minion - The back face is assumed, lacking any other information, to be colorless. May need some hack to display the front face image as the back face when it transforms.
-
+1. Curse of the Fire Penguin - Implemented as a Flip card which isn't 100% correct. Doesn't override set-symbol or artist. 
 
 #### Banned and Restricted as an effect
 (These cards "ban" themselves or other cards via their text, but won't register alongside format bans. Can matter for wish effects.)
@@ -669,7 +669,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Team Spirit - Defined player logic needs something like TargetedAndTeam.
 1. Psychic Network - Top cards of decks visible to all opponents. Maybe not by holding it against the player's head but revealing it would work fine.
 1. Get a Life - Exchange life with teammates. Unclear how this exchange works with more than 2 players on a team, but could probably dig that info up somewhere.
-1. Curse of the Fire Penguin - Enchantment that replaces typeline, stats, and textbox. Unsure if this is a different layer than normal.
 1. Six-y Beast - May need its own AI flag. It would want to favor higher numbers both when placing counters and guessing them. Also needs to account for counter-doublers in play.
 1. By Gnome Means - "Choose any kind of counter a printed card refers to"
 1. Rules Lawyer - Think there are a few complications to just skipping over SBA's, but seemed doable.
