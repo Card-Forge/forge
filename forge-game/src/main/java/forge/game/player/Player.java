@@ -2145,12 +2145,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 // check if this is still the affected player
                 if (this.equals(repParams.get(AbilityKey.Affected))) {
                     poisonRequired = (int) repParams.get(AbilityKey.CounterNum);
-                } else {
-                    return poisonRequired;
                 }
-                break;
-            default:
-                return poisonRequired;
         }
         return poisonRequired;
     }
