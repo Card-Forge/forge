@@ -41,7 +41,7 @@ public final class PlayRelevance {
             return true;
         }
         final Combat combat = ph.getCombat();
-        final boolean controllersTurn = c.getController().equals(ph.getPlayerTurn());
+        final boolean controllersTurn = ph.isPlayerTurn(c.getController()); // a teammate's turn is ours too (Two-Headed Giant)
         switch (phase) {
             case COMBAT_DECLARE_BLOCKERS:
             case COMBAT_FIRST_STRIKE_DAMAGE:

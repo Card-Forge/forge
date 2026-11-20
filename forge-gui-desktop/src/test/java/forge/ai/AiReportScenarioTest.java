@@ -980,15 +980,15 @@ public class AiReportScenarioTest extends AITest {
                        final Combat combat = new Combat(c.opp); combat.addAttacker(herd, c.ai); combat.addBlocker(herd, wurm); c.game.getPhaseHandler().setCombat(combat); },
                 c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? "bounced an attacker that the block stops completely" : null));
         l.add(new Scenario("bounce-lethal-infect", "An unblocked infect attacker that takes the AI from 9 to 10 poison is worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
-                c -> { c.ai.setPoisonCounters(9, null); final Card elf = c.bf("Glistener Elf", c.opp);
+                c -> { c.ai.setPoisonCounters(9, c.opp); final Card elf = c.bf("Glistener Elf", c.opp);
                        final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
                 c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal poison attacker was not recognized"));
         l.add(new Scenario("bounce-poison-danger-floor", "An infect attack from 7 to 8 poison crosses the AI's nonlethal danger floor", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
-                c -> { c.ai.setPoisonCounters(7, null); final Card elf = c.bf("Glistener Elf", c.opp);
+                c -> { c.ai.setPoisonCounters(7, c.opp); final Card elf = c.bf("Glistener Elf", c.opp);
                        final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
                 c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the nonlethal poison danger was not recognized"));
         l.add(new Scenario("bounce-blocked-infect-trampler", "Blightsteel Colossus still deals lethal poison through a Grizzly Bears blocker", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
-                c -> { c.ai.setPoisonCounters(9, null); final Card blocker = c.bf("Grizzly Bears", c.ai); final Card colossus = c.bf("Blightsteel Colossus", c.opp);
+                c -> { c.ai.setPoisonCounters(9, c.opp); final Card blocker = c.bf("Grizzly Bears", c.ai); final Card colossus = c.bf("Blightsteel Colossus", c.opp);
                        final Combat combat = new Combat(c.opp); combat.addAttacker(colossus, c.ai); combat.addBlocker(colossus, blocker); combat.setBlocked(colossus, true);
                        c.game.getPhaseHandler().setCombat(combat); },
                 c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the blocked infect trampler's poison damage was missed"));
@@ -1013,6 +1013,13 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("zagorka-controller-takes-it", "Her controller always takes the Sanctum", Fid.APPROX, "END_OF_TURN", false,
                 c -> { c.bf("Forest", 7, c.opp); c.bf("Grizzly Bears", c.opp); },
                 c -> new forge.ai.ability.TokenAi().confirmAction(c.opp, sanctum.apply(c), null, "", null) ? null : "Zagorka's controller refused"));
+        l.add(new Scenario("temple-of-the-false-god-last", "Turn one with the Temple and four Mountains in hand: the Temple is not the land drop", Fid.APPROX, M1, true,
+                c -> { c.hand("Temple of the False God", c.ai); c.hand("Mountain", c.ai); c.hand("Mountain", c.ai); c.hand("Mountain", c.ai);
+                       c.hand("Mountain", c.ai); c.hand("Goblin Guide", c.ai); },
+                c -> {
+                    final List<Card> drops = c.landPlays();
+                    return !drops.isEmpty() && drops.get(0).getName().equals("Temple of the False God") ? "played the Temple on turn one" : null;
+                }));
         l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
                 c -> {

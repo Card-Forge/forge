@@ -50,6 +50,14 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void aTempleOfTheFalseGodIsNoLandForTheFirstTurns() {
+        setUp(9, 8);
+        // one Mountain and the Temple: the Temple makes no mana before the fifth land, so this is a one-lander
+        AssertJUnit.assertFalse(keeps(DeckPlan.of(DeckPlan.Archetype.MIDRANGE), true,
+                mix(SPELLS, "Mountain", "Temple of the False God", "Grizzly Bears")));
+    }
+
+    @Test
     public void keepsThreeLandsAndFourSpells() {
         setUp(9, 8);
         AssertJUnit.assertTrue(keeps(DeckPlan.of(DeckPlan.Archetype.MIDRANGE), true,
