@@ -1931,6 +1931,16 @@ public class AiController {
             }
         }
 
+        {
+            // Khalni Heart Expedition: cast first, reached by a fetch land, fed with land entries, activated at three counters
+            // (for every AI, not only Flat Monte Carlo: the classic land choice prefers a fetch land for the thinning)
+            final SpellAbility ramp = forge.ai.simulation.RampPlan.expeditionStep(player, this::loopApproved, this::landEntersTapped);
+            if (ramp != null) {
+                forge.ai.simulation.VetoLog.note(player, "ramp-plan | " + ramp.getHostCard().getName());
+                return singleSpellAbilityList(ramp);
+            }
+        }
+
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && flatMonteCarloActive()) {
             // landfall: a landfall permanent the lands in play already pay for is cast first, so the land triggers it.

@@ -1213,4 +1213,141 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertNotNull(pump);
         AssertJUnit.assertTrue(forge.ai.simulation.RampPlan.wolfRunWaits(ai, pump));
     }
+
+    // ---- Khalni Heart Expedition: the ramp plan, step by step
+
+    private SpellAbility rampStep() {
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        return forge.ai.simulation.RampPlan.expeditionStep(ai,
+                sa -> { sa.setActivatingPlayer(ai); return sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false); }, land -> false);
+    }
+
+    private void quest(final Card expedition, final int n) {
+        expedition.addCounterInternal(CounterEnumType.QUEST, n, ai, false, null, null);
+    }
+
+    /** What a land that is played or cracked does to the table, by hand: the land goes, a basic comes, a quest counter. */
+    private void crackedFor(final Card fetch, final Card expedition) {
+        game.getAction().moveToGraveyard(fetch, null);
+        addCardToZone("Forest", ai, ZoneType.Battlefield);
+        quest(expedition, 1);
+    }
+
+    private void playedFor(final Card land, final Card expedition) {
+        ai.getZone(ZoneType.Hand).remove(land);
+        ai.getZone(ZoneType.Battlefield).add(land);
+        ai.addLandPlayedThisTurn();
+        quest(expedition, 1);
+    }
+
+    @Test(timeOut = 120000)
+    public void theExpeditionIsCastBeforeTheFetchLandIsCracked() {
+        elfDeckWith(2, "Khalni Heart Expedition");
+        addCardToZone("Wooded Foothills", ai, ZoneType.Battlefield);
+        final SpellAbility step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Khalni Heart Expedition", step.getHostCard().getName());
+        AssertJUnit.assertTrue(step.isSpell());
+    }
+
+    @Test(timeOut = 120000)
+    public void theExpeditionBecomesPayableAfterTheFetchAndIsCastBeforeExplore() {
+        elfDeckWith(1, "Khalni Heart Expedition", "Explore");
+        final Card heath = addCardToZone("Windswept Heath", ai, ZoneType.Battlefield);
+        final SpellAbility crack = rampStep();
+        AssertJUnit.assertNotNull("one mana short: the fetch land that is in play brings the second", crack);
+        AssertJUnit.assertEquals("Windswept Heath", crack.getHostCard().getName());
+        game.getAction().moveToGraveyard(heath, null);
+        addCardToZone("Forest", ai, ZoneType.Battlefield);
+        final SpellAbility next = rampStep();
+        AssertJUnit.assertNotNull(next);
+        AssertJUnit.assertEquals("the new land pays for the Expedition, not for Explore", "Khalni Heart Expedition", next.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theExpeditionKeepsTheLandDropAndUsesTheFetchLandInPlay() {
+        elfDeckWith(1, "Khalni Heart Expedition", "Forest");
+        addCardToZone("Wooded Foothills", ai, ZoneType.Battlefield);
+        final SpellAbility step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("the crack, not the land drop that earns a counter after the Expedition", "Wooded Foothills", step.getHostCard().getName());
+        AssertJUnit.assertFalse(step.isLandAbility());
+    }
+
+    @Test(timeOut = 120000)
+    public void foothillsExploreHeathSequenceFeedsTheExpedition() {
+        elfDeckWith(2, "Explore", "Wooded Foothills", "Windswept Heath");
+        final Card expedition = addCardToZone("Khalni Heart Expedition", ai, ZoneType.Battlefield);
+        // 1. the land drop is a fetch land: it enters, and it is cracked as well
+        SpellAbility step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertTrue("a fetch land is the land drop", step.isLandAbility());
+        final Card first = step.getHostCard();
+        AssertJUnit.assertTrue(first.getName().equals("Wooded Foothills") || first.getName().equals("Windswept Heath"));
+        playedFor(first, expedition);
+        // 2. crack it
+        step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals(first, step.getHostCard());
+        AssertJUnit.assertFalse(step.isLandAbility());
+        crackedFor(first, expedition);
+        // 3. the land drop is spent and a land is still in the hand: Explore
+        step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals("Explore", step.getHostCard().getName());
+        ai.resetLandsPlayedThisTurn(); // Explore's extra land drop
+        // 4. the other fetch land
+        step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertTrue(step.isLandAbility());
+        final Card second = step.getHostCard();
+        AssertJUnit.assertNotSame(first, second);
+        playedFor(second, expedition);
+        AssertJUnit.assertEquals("three counters", 3, expedition.getCounters(CounterEnumType.QUEST));
+        // 5. the Expedition is activated before the second fetch land is cracked
+        step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals(expedition, step.getHostCard());
+        AssertJUnit.assertFalse(step.isSpell());
+    }
+
+    @Test(timeOut = 120000)
+    public void theExpeditionIsActivatedAtThreeQuestCounters() {
+        elfDeckWith(2, "Explore");
+        final Card expedition = addCardToZone("Khalni Heart Expedition", ai, ZoneType.Battlefield);
+        quest(expedition, 3);
+        addCardToZone("Windswept Heath", ai, ZoneType.Battlefield);
+        final SpellAbility step = rampStep();
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals(expedition, step.getHostCard());
+        AssertJUnit.assertEquals(ApiType.ChangeZone, step.getApi());
+    }
+
+    @Test(timeOut = 120000)
+    public void theExpeditionIsNoPlanWithoutBasicLandsToFetch() {
+        elfDeckWith(2, "Khalni Heart Expedition");
+        for (final Card c : new ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
+            game.getAction().moveToGraveyard(c, null);
+        }
+        AssertJUnit.assertNull("nothing to fetch: not cast first", rampStep());
+        final Card expedition = addCardToZone("Khalni Heart Expedition", ai, ZoneType.Battlefield);
+        quest(expedition, 3);
+        AssertJUnit.assertNull("nothing to fetch: not activated first", rampStep());
+    }
+
+    @Test(timeOut = 120000)
+    public void anExpeditionOneManaShortUsesTheBasicLandDropBeforeAFetchLand() {
+        elfDeckWith(0, "Khalni Heart Expedition");
+        addCardToZone("Mountain", ai, ZoneType.Battlefield);
+        addCardToZone("Wooded Foothills", ai, ZoneType.Hand);
+        addCardToZone("Forest", ai, ZoneType.Hand);
+
+        final SpellAbility step = rampStep();
+
+        AssertJUnit.assertNotNull(step);
+        AssertJUnit.assertEquals(
+                "Forest",
+                step.getHostCard().getName());
+        AssertJUnit.assertTrue(step.isLandAbility());
+    }
 }

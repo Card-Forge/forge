@@ -1,13 +1,20 @@
 package forge.ai.simulation;
 
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilMana;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * The land-ramp decks: Scapeshift and Valakut, Primeval Titan, Kessig Wolf Run.
@@ -18,6 +25,9 @@ import forge.game.zone.ZoneType;
  * leaves the five that Valakut needs).</li>
  * <li><b>Land searches</b> (Primeval Titan, Scapeshift, Prismatic Vista...) take Valakut first while it is not in play,
  * then Mountains (the AI took Forests and utility lands with Valakut waiting).</li>
+ * <li><b>Khalni Heart Expedition</b> is a ramp engine, see {@link #expeditionStep}: cast before anything else spends the
+ * mana, reached by a fetch land or a land drop when it is one mana short, fed with land entries (fetch lands first,
+ * Explore for another drop) and activated at three quest counters.</li>
  * <li><b>Kessig Wolf Run</b> pumps a creature of the AI that is attacking, after the blockers: used before or outside
  * combat it spent {X}{R}{G} and the land for a creature that then did nothing.</li>
  * </ul>
@@ -149,5 +159,210 @@ public final class RampPlan {
             }
         }
         return true;
+    }
+
+    private static final String EXPEDITION = "Khalni Heart Expedition";
+    private static final String EXPLORE = "Explore";
+    private static final int QUESTS = 3;
+
+    /** The basic lands left in the library: what the Expedition can still fetch. */
+    public static int basicsInLibrary(final Player ai) {
+        int basics = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (c.isBasicLand()) {
+                basics++;
+            }
+        }
+        return basics;
+    }
+
+    private static Card named(final Player ai, final ZoneType zone, final String name) {
+        for (final Card c : ai.getCardsIn(zone)) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private static List<SpellAbility> abilitiesOf(final Player ai, final Card c) {
+        return ComputerUtilAbility.getSpellAbilities(new CardCollection(c), ai);
+    }
+
+    private static SpellAbility approved(final Player ai, final SpellAbility sa, final Predicate<SpellAbility> approve) {
+        sa.setActivatingPlayer(ai);
+        sa.resetTargets();
+        return approve.test(sa) ? sa : null;
+    }
+
+    /**
+     * Identifies fetch lands even while they are in hand.
+     *
+     * Do not use ComputerUtilAbility.getSpellAbilities() here:
+     * it filters abilities that cannot currently be activated,
+     * including fetch abilities whose source is still in hand.
+     */
+    private static boolean isFetchLand(final Card land) {
+        if (land == null || !land.isLand()) {
+            return false;
+        }
+        for (final SpellAbility sa : land.getSpellAbilities()) {
+            if (LandfallGuard.isFetch(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The land drops that the hand can make now. */
+    private static List<Card> landsToPlay(final Player ai) {
+        final List<Card> out = new ArrayList<>();
+        final CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(ai.getGame(), ai);
+        if (lands != null) {
+            for (final Card c : lands) {
+                if (c.isInZone(ZoneType.Hand)) {
+                    out.add(c);
+                }
+            }
+        }
+        return out;
+    }
+
+    /** The land play of this card, or null. */
+    private static SpellAbility landPlay(final Player ai, final Card land, final Predicate<SpellAbility> approve) {
+        for (final SpellAbility sa : abilitiesOf(ai, land)) {
+            if (sa.isLandAbility()) {
+                final SpellAbility ok = approved(ai, sa, approve);
+                if (ok != null) {
+                    return ok;
+                }
+            }
+        }
+        return null;
+    }
+
+    /** The crack of a fetch land of the battlefield (only the ones that bring the land in untapped when asked to). */
+    private static SpellAbility crack(final Player ai, final boolean untappedOnly, final Predicate<SpellAbility> approve) {
+        for (final Card land : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!land.isLand()) {
+                continue;
+            }
+            for (final SpellAbility sa : abilitiesOf(ai, land)) {
+                if (LandfallGuard.isFetch(sa) && !(untappedOnly && "True".equals(sa.getParam("Tapped")))) {
+                    final SpellAbility ok = approved(ai, sa, approve);
+                    if (ok != null) {
+                        return ok;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * The next step of the Khalni Heart Expedition ramp, or null when it has no opinion (no Expedition, no basic land
+     * left to fetch, not the AI's main phase, something on the stack). Every call looks at the table as it is, so a land
+     * that a fetch land has just brought in is seen at once. In this order:
+     * <ol>
+     * <li>three quest counters: activate it (two basic lands) before anything else is done with the mana;</li>
+     * <li>in the hand and payable: cast it, before a fetch land is cracked or Explore is cast;</li>
+     * <li>in the hand and one mana short: a fetch land of the battlefield that brings an untapped land (the land drop
+     * stays for after the Expedition, where it earns a counter), else an untapped land of the hand;</li>
+     * <li>in play with fewer counters: crack a fetch land, play a land (a fetch land first, it enters twice), and when the
+     * land drop is spent and a land is still in the hand, cast Explore for another one.</li>
+     * </ol>
+     * @param approve the AI's own check that the play can be made
+     * @param entersTapped whether a land of the hand enters tapped
+     */
+    public static SpellAbility expeditionStep(final Player ai, final Predicate<SpellAbility> approve,
+                                              final Predicate<Card> entersTapped) {
+        if (ai == null || ai.getGame() == null || !ai.getGame().getStack().isEmpty()) {
+            return null;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.isPlayerTurn(ai) || !(ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2))) {
+            return null;
+        }
+        try {
+            final Card inHand = named(ai, ZoneType.Hand, EXPEDITION);
+            final Card inPlay = named(ai, ZoneType.Battlefield, EXPEDITION);
+            if ((inHand == null && inPlay == null) || basicsInLibrary(ai) < 1) {
+                return null; // nothing to fetch: the Expedition is no plan
+            }
+            if (inPlay != null && inPlay.getCounters(CounterEnumType.QUEST) >= QUESTS) {
+                for (final SpellAbility sa : abilitiesOf(ai, inPlay)) {
+                    if (!sa.isSpell() && sa.getApi() == ApiType.ChangeZone) {
+                        final SpellAbility ok = approved(ai, sa, approve);
+                        if (ok != null) {
+                            return ok;
+                        }
+                    }
+                }
+            }
+            if (inHand != null) {
+                for (final SpellAbility sa : abilitiesOf(ai, inHand)) {
+                    if (sa.isSpell()) {
+                        final SpellAbility ok = approved(ai, sa, approve);
+                        if (ok != null) {
+                            return ok;
+                        }
+                    }
+                }
+                final int sources = ComputerUtilMana.getAvailableManaSources(ai, true).size();
+                if (sources + 1 < inHand.getCMC() || sources >= inHand.getCMC()) {
+                    return null; // two short, or short of something other than lands
+                }
+                final SpellAbility fetched = crack(ai, true, approve);
+                if (fetched != null) {
+                    return fetched;
+                }
+                final List<Card> drops = landsToPlay(ai);
+                for (final boolean fetch : new boolean[] { false, true }) {
+                    for (final Card land : drops) {
+                        if (isFetchLand(land) == fetch && (fetch || !entersTapped.test(land))) {
+                            final SpellAbility ok = landPlay(ai, land, approve);
+                            if (ok != null) {
+                                return ok;
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            // in play, counters to collect: every land that enters is one
+            final SpellAbility cracked = crack(ai, false, approve);
+            if (cracked != null) {
+                return cracked;
+            }
+            final List<Card> drops = landsToPlay(ai);
+            for (final boolean fetch : new boolean[] { true, false }) {
+                for (final Card land : drops) {
+                    if (isFetchLand(land) == fetch) {
+                        final SpellAbility ok = landPlay(ai, land, approve);
+                        if (ok != null) {
+                            return ok;
+                        }
+                    }
+                }
+            }
+            final Card explore = named(ai, ZoneType.Hand, EXPLORE);
+            boolean landInHand = false;
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                landInHand |= c.isLand();
+            }
+            if (explore != null && drops.isEmpty() && landInHand) {
+                for (final SpellAbility sa : abilitiesOf(ai, explore)) {
+                    if (sa.isSpell()) {
+                        final SpellAbility ok = approved(ai, sa, approve);
+                        if (ok != null) {
+                            return ok;
+                        }
+                    }
+                }
+            }
+            return null;
+        } catch (final RuntimeException e) {
+            return null;
+        }
     }
 }

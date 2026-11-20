@@ -1091,6 +1091,13 @@ public class AiReportScenarioTest extends AITest {
                 c -> willieDraws.apply(c, willie.apply(c)) ? null : "refused a free card"));
         l.add(new Scenario("willie-refuses-card-for-attack", "Willie Lumpkin: three Hill Giants ready to attack are worth more than a card", Fid.APPROX, "END_OF_TURN", false, bigBoard,
                 c -> willieDraws.apply(c, willie.apply(c)) ? "drew and gave up its attack" : null));
+        l.add(new Scenario("expedition-forest-before-fetch", "Khalni Heart Expedition one mana short: the untapped Forest is the land drop, not the fetch land", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.hand("Wooded Foothills", c.ai); c.hand("Forest", c.ai); c.hand("Khalni Heart Expedition", c.ai);
+                       c.hand("Sakura-Tribe Elder", c.ai); c.lib("Forest", c.ai); c.lib("Mountain", c.ai); },
+                c -> {
+                    final List<Card> drops = c.landPlays();
+                    return !drops.isEmpty() && !drops.get(0).getName().equals("Forest") ? "played " + drops.get(0).getName() + " first" : null;
+                }));
         l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
                 c -> {
