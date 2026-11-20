@@ -165,7 +165,7 @@ public final class OpeningHand {
         int cheapSources = 0;
         for (final Card c : kept) {
             if (c.isLand() || isMdfcLand(c)) {
-                if (isManaLand(c)) {
+                if (isEarlyManaLand(c)) {
                     lands++;
                 }
             } else if (isCheapManaSource(c)) {
@@ -309,7 +309,7 @@ public final class OpeningHand {
                 quickWiper |= ComboPlan.isCounterWiper(c);
             }
             if (c.isLand() || isMdfcLand(c)) {
-                if (isManaLand(c)) {
+                if (isEarlyManaLand(c)) {
                     lands++;
                     final byte own = producedColors(c);
                     colors |= own != 0 ? own : libraryColors(lib);
@@ -459,6 +459,14 @@ public final class OpeningHand {
     }
 
     /** A land that makes mana, or one that finds a land (a fetch land is a land drop that gets the colour needed). */
+    /**
+     * A land that makes mana in the first turns: not one that asks for many lands before it works (Temple of the False God
+     * with its five), which is a land drop in the hand and no mana for the plays of turns one to four.
+     */
+    static boolean isEarlyManaLand(final Card c) {
+        return isManaLand(c) && LegalityGuard.landsNeededToWork(c) <= 2;
+    }
+
     /** An Aura that enchants a creature. */
     static boolean isCreatureAura(final Card c) {
         if (!c.isAura()) {

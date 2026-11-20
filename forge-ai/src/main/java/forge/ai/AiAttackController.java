@@ -1110,7 +1110,7 @@ public class AiAttackController {
                         System.out.println("Exalted");
                     aiAggression = 6;
                     for (Card attacker : this.attackers) {
-                        if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
+                        if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender, true)) {
                             combat.addAttacker(attacker, defender);
                             return aiAggression;
                         }
@@ -1576,6 +1576,12 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat, final GameEntity defender) {
+        return shouldAttack(attacker, defenders, combat, defender, false);
+    }
+
+    /** The dedicated Exalted solo-attacker path is the only strategy allowed to bypass the animated-land gift check. */
+    private final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat, final GameEntity defender,
+                                       final boolean exaltedStrategy) {
         AITimeoutTracker.check();
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if (attacker.hasSVar("NonCombatPriority") && !attacker.hasKeyword(Keyword.VIGILANCE)) {
@@ -1609,8 +1615,8 @@ public class AiAttackController {
             return false;
         }
 
-        // a land that is a creature is a land first: it is not thrown at a blocker that kills it for nothing
-        if (attacker.isLand() && aiAggression < 5 && isGiftToABlocker(ai, attacker, combat)) {
+        // Aggression 6 is also used by attack-limit and Reconnaissance paths; only the explicit Exalted path may bypass this.
+        if (shouldDeclineLandGift(ai, attacker, combat, exaltedStrategy)) {
             return false;
         }
 
@@ -1887,6 +1893,11 @@ public class AiAttackController {
      * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
      * make that worth it: attacking just hands the blocker a free kill.
      */
+    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat, final boolean exaltedStrategy) {
+        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat);
+    }
+
+    /** Shared blocker check used by the attack decision and report scenarios. */
     static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
         if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
             return false;

@@ -1178,6 +1178,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (origin.contains(ZoneType.Battlefield)) {
                     list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
                 }
+                if (origin.contains(ZoneType.Battlefield) && destination.equals(ZoneType.Hand)) {
+                    // a bounce is tempo: not for the creature that gives them a second trigger, or comes back with flash
+                    // (a bounce that is forced takes the best of what is left, whatever it is)
+                    final CardCollection worth = CardLists.filter(list, c -> BounceValue.worthBouncing(ai, c));
+                    if (!mandatory || !worth.isEmpty()) {
+                        list = worth;
+                    }
+                }
             }
 
             // See if maybe there's a special priority applicable for this, in case the opponent

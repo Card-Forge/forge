@@ -10,7 +10,9 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.BounceValue;
 import forge.ai.ComputerUtilMana;
+import forge.ai.PlayRelevance;
 import forge.ai.ability.AnimateAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -108,7 +110,12 @@ public final class ActivationGuard {
         if (loyaltyGain(sa)) {
             return null; // a Planeswalker's plus ability is worth its loyalty whatever the effect does
         }
-        return idleChain(ai, sa);
+        final String idle = idleChain(ai, sa);
+        if (idle != null) {
+            return idle; // the more specific reason first
+        }
+        final String pump = PlayRelevance.pointlessPump(ai, sa);
+        return pump != null ? pump : badBounce(ai, sa);
     }
 
     /**
@@ -143,7 +150,12 @@ public final class ActivationGuard {
             if (givesMoreThanItTakes(ai, sa)) {
                 return "gift-exceeds-target";
             }
-            return idleChain(ai, sa);
+            final String idle = idleChain(ai, sa);
+            if (idle != null) {
+                return idle;
+            }
+            final String pump = PlayRelevance.pointlessPump(ai, sa);
+            return pump != null ? pump : badBounce(ai, sa);
         } catch (final RuntimeException e) {
             return null; // a refinement only
         }
@@ -184,7 +196,7 @@ public final class ActivationGuard {
      * came this turn is no longer sick. Each untapped creature of the AI that can block takes the strongest attacker that it can
      * block out of the sum (a rough count: no tricks, no gang blocks). Defenders do not attack.
      */
-    static int nextTurnThreat(final Player ai) {
+    public static int nextTurnThreat(final Player ai) {
         return nextTurnThreat(ai, Collections.<Card>emptySet(), Collections.<Card>emptySet());
     }
 
@@ -516,6 +528,60 @@ public final class ActivationGuard {
             }
         }
         return true;
+    }
+
+    /**
+     * A bounce spell or ability aimed at the permanent of an opponent that is not worth the card (see {@link BounceValue}):
+     * the creature that gives them a second enter-the-battlefield trigger (Vendilion Clique, Mulldrifter), that comes back
+     * with flash, or that costs nothing to cast again. Judged on the chosen targets, else on everything it could be aimed at:
+     * a creature of the AI's own among them (a rescue, a second trigger of its own) keeps the play open.
+     *
+     * @return "bounce-feeds-opponent", else null
+     */
+    public static String badBounce(final Player ai, final SpellAbility sa) {
+        if (sa == null || sa.isTrigger() || sa.getHostCard() == null) {
+            return null;
+        }
+        try {
+            return bounceVerdict(ai, sa);
+        } catch (final RuntimeException e) {
+            // a refinement of the targeting: an odd game state must not stop the AI's turn, but it is not swept under
+            System.err.println("badBounce could not judge " + sa + ": " + e);
+            return null;
+        }
+    }
+
+    private static String bounceVerdict(final Player ai, final SpellAbility sa) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() != ApiType.ChangeZone || !node.usesTargeting()
+                    || !"Battlefield".equals(node.getParam("Origin")) || !"Hand".equals(node.getParam("Destination"))) {
+                continue;
+            }
+            final List<Card> candidates = new ArrayList<>();
+            if (node.getTargets() != null && !node.getTargets().getTargetCards().isEmpty()) {
+                candidates.addAll(node.getTargets().getTargetCards());
+            } else {
+                for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+                    if (node.canTarget(c)) {
+                        candidates.add(c);
+                    }
+                }
+            }
+            if (candidates.isEmpty()) {
+                continue;
+            }
+            boolean worth = false;
+            for (final Card c : candidates) {
+                if (BounceValue.worthBouncing(ai, c)) {
+                    worth = true;
+                    break;
+                }
+            }
+            if (!worth) {
+                return "bounce-feeds-opponent";
+            }
+        }
+        return null;
     }
 
     /** A creature worth less than what a removal spell gives away for it: a mana creature or another body with no use of its own. */

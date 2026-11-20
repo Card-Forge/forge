@@ -78,6 +78,10 @@ public class SpellAbilityPicker {
             writeIndex++;
         }
         candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
+        // a land that makes no mana yet (Temple of the False God) waits while another land can be played
+        if (candidateSAs.stream().anyMatch(sa -> sa.isLandAbility() && !LegalityGuard.isDormantLand(player, sa.getHostCard()))) {
+            candidateSAs.removeIf(sa -> sa.isLandAbility() && LegalityGuard.isDormantLand(player, sa.getHostCard()));
+        }
         return candidateSAs;
     }
 

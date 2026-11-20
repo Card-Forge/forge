@@ -111,6 +111,9 @@ Each modifier has a `name`, and an optional `description` and `icon` (an item ic
 - `blockedEnemyRewards`: reward types enemies don't drop, such as `deckCard` and `randomCard`. A `card` or `randomCard` reward counts as `randomCard` unless it sets a `cardName`. A `Union` reward counts as `Union`, so it needs its own entry. In chaos battles against a copy of the player's deck, `deckCard` also blocks the cards taken from that deck.
 - `maxLifeBonus`: added to the player's max life while the modifier is on.
 - `maxLifeLostOnDefeat`: max life lost for good each time the player loses a fight, quitting a match and arena duels included. Life drops by the same amount. Neither goes below 1. Event duels are not affected.
+- `singleDeck`: only the deck in use is shown on the deck screen, and no deck can be added or copied. A deck reward goes into that slot only if it is empty. Otherwise its cards go to the collection.
+- `lockDeckCards`: cards in the main deck and command zone when the deck editor opens can't be removed, moved to the sideboard or deleted with the deck. Cards added during an edit can be taken out again until the editor closes. Swapping a card for another printing is allowed. The commander can change: a commander can move into the main deck, and a replaced commander moves there too. A new commander's color identity must include every card in the deck. While it is on, cards that break a `RarityLimit` or `ColorLimit` can't be added. The deck editor shows the modifier's name and description. Losing cards to `CardLoss` is not affected.
+- `noMaxDeckSize`: duel decks have no maximum size. The minimum still applies.
 - `type`: a rule implemented in code.
   - `RarityLimit`: the player picks the highest rarity allowed: Common, Uncommon or Rare. A card is allowed if any printing of it was at that rarity or lower. Basic lands are always allowed.
   - `ColorLimit`: the player picks the colors the deck may use. Colorless cards are always allowed.
