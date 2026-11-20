@@ -235,7 +235,7 @@ public class RewardScene extends UIScene {
     }
 
     /** The bobbing down-arrow from the item preview, shown while its pane has more below. */
-    private static class MoreArrow extends Actor {
+    static class MoreArrow extends Actor {
         private final ScrollPane pane;
         private float elapsed;
 
@@ -254,6 +254,18 @@ public class RewardScene extends UIScene {
             if (pane.getScrollY() < pane.getMaxY() - 1)
                 RewardActor.drawMoreArrow(batch, getX() + getWidth() / 2, getY(), 1, elapsed, parentAlpha);
         }
+    }
+
+    /** @return a style with a thin white scroll bar, for a scrolling list in a dialog */
+    static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
+        TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
+        ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
+        barStyle.vScroll = white.tint(new Color(1, 1, 1, 0.15f));
+        barStyle.vScroll.setMinWidth(2);
+        barStyle.vScrollKnob = white.tint(new Color(1, 1, 1, 0.7f));
+        barStyle.vScrollKnob.setMinWidth(2);
+        barStyle.vScrollKnob.setMinHeight(8);
+        return barStyle;
     }
 
     private static boolean isDeckReward(Reward reward) {
@@ -279,14 +291,7 @@ public class RewardScene extends UIScene {
         }
         TextraLabel label = Controls.newTextraLabel(list.toString().stripTrailing());
         label.setWrap(true);
-        TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
-        ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
-        barStyle.vScroll = white.tint(new Color(1, 1, 1, 0.15f));
-        barStyle.vScroll.setMinWidth(2);
-        barStyle.vScrollKnob = white.tint(new Color(1, 1, 1, 0.7f));
-        barStyle.vScrollKnob.setMinWidth(2);
-        barStyle.vScrollKnob.setMinHeight(8);
-        ScrollPane pane = new ScrollPane(label, barStyle);
+        ScrollPane pane = new ScrollPane(label, thinScrollBarStyle());
         pane.setScrollingDisabled(true, false);
         pane.setFadeScrollBars(false);
         Dialog dialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblClose"), null, this::removeDialog, null);
@@ -495,6 +500,7 @@ public class RewardScene extends UIScene {
             }
         }
         newRewards.clear();
+        totalGold = Math.min(totalGold, AdventurePlayer.current().getGoldRoom());
         if (totalGold > 0) {
             newRewards.add(new Reward(Reward.Type.Gold, totalGold));
         }
