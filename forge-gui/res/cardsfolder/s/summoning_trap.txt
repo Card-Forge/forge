@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Instant Trap
 # Keep track of countered cards even while in other zones, so no TriggerZones param. Remembered cards survive zone changes, an SVar value does not. Clear tracked cards each cleanup.
 T:Mode$ Countered | ValidCause$ SpellAbility.OppCtrl | ValidSA$ Spell.Creature+wasCastByYou | Execute$ TrackValidCounters | Static$ True
-SVar:TrackValidCounters:DB$ Pump | RememberObjects$ TriggeredCard
+SVar:TrackValidCounters:DB$ Bookkeeping | RememberObjects$ TriggeredCard
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
 SVar:SetTrap:Remembered$Amount

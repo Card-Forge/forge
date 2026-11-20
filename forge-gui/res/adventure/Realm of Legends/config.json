@@ -14,6 +14,7 @@
     "Humility",
     "Drannith Magistrate",
     "Back to Basics",
+    "Erayo, Soratami Ascendant",
     "Limited Resources",
     "Karakas",
     "The Tabernacle at Pendrell Vale",
@@ -309,6 +310,25 @@
       "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
       "icon": "Shard",
       "type": "ColorLimit"
+    },
+    {
+      "name": "Vow of Poverty",
+      "description": "Your gold stays at 0.",
+      "icon": "BronzeChallengeCoin",
+      "maxGold": 0
+    },
+    {
+      "name": "Limited Looting",
+      "description": "Enemies drop no random cards. Gold, shards, items and named cards still drop.",
+      "icon": "SteelSword",
+      "blockedEnemyRewards": ["deckCard", "randomCard"]
+    },
+    {
+      "name": "Lingering Wounds",
+      "description": "+10 max life. Lose a fight: lose 1 max life for good.",
+      "icon": "TokenofBlood",
+      "maxLifeBonus": 10,
+      "maxLifeLostOnDefeat": 1
     }
   ]
 }

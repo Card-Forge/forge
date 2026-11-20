@@ -936,7 +936,16 @@ public class CountersPutAi extends CountersAi {
                 }
             }
         }
-        return MyRandom.getRandom().nextBoolean();
+        // "you may put a counter": a good counter on the host is taken, a bad one is not (it was a coin flip)
+        final String type = sa.getParam("CounterType");
+        if (type != null && !type.startsWith("Choose") && !type.contains(",")) {
+            try {
+                return !ComputerUtil.isNegativeCounter(CounterType.getType(type), source);
+            } catch (final RuntimeException e) {
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override

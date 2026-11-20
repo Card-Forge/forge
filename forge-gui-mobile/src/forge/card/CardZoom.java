@@ -209,6 +209,10 @@ public class CardZoom extends FOverlay {
         return cardZoom.isVisible();
     }
 
+    public static boolean isCurrent(CardView cv) {
+        return cv != null && cv == viewAt(currentIndex);
+    }
+
     public static void hideZoom() {
         if (isAdvBack) {
             requestClose();

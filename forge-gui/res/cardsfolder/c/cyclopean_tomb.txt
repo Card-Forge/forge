@@ -9,7 +9,7 @@ SVar:TrigEffect:DB$ Effect | RememberObjects$ RememberedCard | Triggers$ UpkeepR
 SVar:UpkeepRemove:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRemove | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, remove all mire counters from a land that a mire counter was put onto with EFFECTSOURCE but that a mire counter has not been removed from with EFFECTSOURCE.
 SVar:TrigRemove:DB$ ChooseCard | Choices$ Card.IsRemembered | Mandatory$ True | SubAbility$ DBRemoveCounter
 SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ MIRE | CounterNum$ All | Defined$ ChosenCard | SubAbility$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ ChosenCard | SubAbility$ DBClearChosen
+SVar:DBForget:DB$ Bookkeeping | ForgetObjects$ ChosenCard | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
 SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True

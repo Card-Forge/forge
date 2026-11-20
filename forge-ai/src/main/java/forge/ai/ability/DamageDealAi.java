@@ -350,6 +350,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+        if (!mandatory) {
+            killables = ComputerUtilCard.withoutHarmlessCreatures(ai, killables);
+        }
 
         // Try not to target anything which will already be dead by the time the spell resolves
         killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
@@ -551,7 +554,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             if (dmg > 0 && lastTgt != null) {
-                sa.addDividedAllocation(lastTgt, sa.getDividedValue(lastTgt) + dmg);
+                final Integer already = sa.getDividedValue(lastTgt);
+                sa.addDividedAllocation(lastTgt, (already == null ? 0 : already) + dmg); // a target without a share yet is 0, not a crash
                 dmg = 0;
                 return true;
             }

@@ -16,6 +16,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
+import forge.game.ability.ApiType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
@@ -222,7 +223,12 @@ public class PlayAi extends SpellAbilityAi {
                     // good moment" heuristics have nothing left to decide, only whether the madness cost can be paid
                     return ComputerUtilCost.canPayCost(spell, ai, true);
                 }
-                if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !(isOptional || sa.hasParam("Optional")), true)) {
+                // A suspended burn or removal spell is free and stays in exile for good if it is not cast now (Rift Bolt
+                // with only Shalai or Crystal Barricade to aim at): any legal target is better than none, so it is cast
+                // as if it were mandatory
+                final boolean lostIfNotCast = c.isInZone(ZoneType.Exile) && c.hasSuspend()
+                        && (spell.getApi() == ApiType.DealDamage || spell.getApi() == ApiType.Destroy);
+                if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, lostIfNotCast || !(isOptional || sa.hasParam("Optional")), true)) {
                     // Before accepting, see if the spell has a valid number of targets (it should at this point).
                     // Proceeding past this point if the spell is not correctly targeted will result
                     // in "Failed to add to stack" error and the card disappearing from the game completely.

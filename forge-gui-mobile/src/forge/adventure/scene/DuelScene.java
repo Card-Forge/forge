@@ -204,6 +204,8 @@ public class DuelScene extends ForgeScene {
             e.printStackTrace();
         }
         List<PaperCard> modifierLosses = winner || eventData != null ? Collections.emptyList() : loseModifierCards();
+        if (!winner && eventData == null)
+            Current.player().loseModifierMaxLife();
         String enemyName = enemy.getName();
         String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
@@ -875,7 +877,7 @@ public class DuelScene extends ForgeScene {
                 if (removals.contains(mainCommander)) {
                     if (!format.isAllowedCommander(partnerCommander.getRules(), enforceLegality))
                         removals.add(partnerCommander); //Main is invalid but partner is valid.
-                } else if (!format.isAllowedPartnership(mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
+                } else if (!format.isAllowedPartnership(playerDeck, mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
                     removals.add(partnerCommander); //Invalid partnership.
             }
         }

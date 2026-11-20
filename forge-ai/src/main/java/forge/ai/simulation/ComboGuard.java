@@ -87,6 +87,12 @@ public final class ComboGuard {
     }
 
     private static String problemImpl(final Player ai, final SpellAbility sa, final GameObject aim, final ComboPlan plan) {
+        if (answeredByAProtector(ai, sa, aim)) {
+            return "protector-answers";
+        }
+        if (flickersAnOpposingCommander(ai, sa, aim)) {
+            return "commander-escapes";
+        }
         final Card host = sa.getHostCard();
         final SpellAbility single = FlatMonteCarloPicker.singleTargetingAbility(sa);
         // the legend rule: what a reanimation spell is aimed at
@@ -108,6 +114,10 @@ public final class ComboGuard {
         }
         if (host == null) {
             return null;
+        }
+        final String duplicate = LoopRunner.redundantEngine(ai, sa);
+        if (duplicate != null) {
+            return duplicate; // a second Mind Over Matter or Candelabra of Tawnos
         }
         // A second working copy of a legendary permanent is wasted even when it is cast directly (not reanimated).
         // Respect cards with an explicit AI legendary exception; Mirror Gallery is handled by duplicatesWorkingLegend.
@@ -161,6 +171,14 @@ public final class ComboGuard {
             return untimely;
         }
         // an activated ability with nothing to act on (Oran-Rief with no new green creature): see ActivationGuard
+        final String burn = LegalityGuard.wastedBurn(ai, sa, aim);
+        if (burn != null) {
+            return burn;
+        }
+        final String idleSpell = ActivationGuard.spellProblem(ai, sa);
+        if (idleSpell != null) {
+            return idleSpell; // an instant or sorcery with nothing to act on
+        }
         final String idle = ActivationGuard.problem(ai, sa);
         // "valuable-sacrifice" is the outlet guard's own reading of the evaluator: the combo guard has the sacrifice rules of
         // the deck plan (sacrifice-key), and a deck without a combo plan sacrifices as the heuristics decide
@@ -469,8 +487,8 @@ public final class ComboGuard {
             return false;
         }
         final CostSacrifice cost = sa.getPayCosts().getCostPartByType(CostSacrifice.class);
-        if (cost == null || cost.payCostFromSource()) {
-            return false;
+        if (cost == null || cost.payCostFromSource() || ElfLoop.orderIsTheKill(ai, sa)) {
+            return false; // Natural Order for a lethal Craterhoof: the elf it sacrifices is the price of the win
         }
         final CardCollectionView chosen = ComputerUtil.chooseSacrificeType(ai, cost.getType(), sa, sa.getTargetCard(),
                 false, Math.max(1, cost.getAbilityAmount(sa)), CardCollection.EMPTY);
@@ -826,5 +844,83 @@ public final class ComboGuard {
             }
         }
         return false;
+    }
+
+    /**
+     * Removal aimed at a creature that an untapped Mother of Runes or Giver of Runes of the opponent can protect: the
+     * protection comes in response (the colour of the spell, or colourless) and the spell is wasted. Only a protector that
+     * can use its ability now counts (untapped, not summoning sick when it needs to tap); a protector that is the target
+     * protects itself.
+     */
+    static boolean answeredByAProtector(final Player ai, final SpellAbility sa, final GameObject aim) {
+        final SpellAbility single = FlatMonteCarloPicker.singleTargetingAbility(sa);
+        if (single == null || !hostileRemoval(single)) {
+            return false;
+        }
+        Card target = aim instanceof Card c ? c : null;
+        if (target == null && single.getTargets() != null && single.getTargets().size() == 1
+                && single.getTargets().getFirstTargetedCard() != null) {
+            target = single.getTargets().getFirstTargetedCard();
+        }
+        if (target == null || !target.isCreature() || !target.isInPlay() || target.getController().equals(ai)
+                || target.getController().isOpponentOf(ai) == false) {
+            return false;
+        }
+        for (final Card c : target.getController().getCardsIn(forge.game.zone.ZoneType.Battlefield)) {
+            if (!c.isCreature()) {
+                continue;
+            }
+            for (final SpellAbility ab : c.getSpellAbilities()) {
+                if (!ab.isAbility() || ab.getApi() != ApiType.Protection || !ab.usesTargeting()
+                        || ab.getPayCosts() == null || ab.getPayCosts().hasManaCost() || ab.getPayCosts().hasSpecificCostType(forge.game.cost.CostSacrifice.class)) {
+                    continue;
+                }
+                if (ab.getPayCosts().hasTapCost() && (c.isTapped() || c.isSick())) {
+                    continue;
+                }
+                final String valid = ab.getParamOrDefault("ValidTgts", "");
+                if (valid.contains("Other") && c == target) {
+                    continue; // Giver of Runes cannot protect itself
+                }
+                if (valid.contains("Creature")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean hostileRemoval(final SpellAbility ab) {
+        final ApiType api = ab.getApi();
+        if (api == ApiType.Destroy || api == ApiType.DealDamage || api == ApiType.Sacrifice) {
+            return true;
+        }
+        return api == ApiType.ChangeZone && "Battlefield".equals(ab.getParam("Origin"))
+                && !"Battlefield".equals(ab.getParam("Destination"));
+    }
+
+    /**
+     * "Exile target creature, return it at the end of the turn" (Angel of Condemnation, Flicker) aimed at an opposing
+     * commander: its owner puts it into the command zone instead of exile, and it is not coming back: all that is done is
+     * to let them recast it, which they could not do while it was in play.
+     */
+    static boolean flickersAnOpposingCommander(final Player ai, final SpellAbility sa, final GameObject aim) {
+        final SpellAbility single = FlatMonteCarloPicker.singleTargetingAbility(sa);
+        if (single == null || single.getApi() != ApiType.ChangeZone || !"Exile".equals(single.getParam("Destination"))
+                || !"Battlefield".equals(single.getParam("Origin"))) {
+            return false;
+        }
+        boolean returns = false;
+        for (SpellAbility sub = single.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            returns |= sub.getApi() == ApiType.DelayedTrigger;
+        }
+        if (!returns) {
+            return false;
+        }
+        Card target = aim instanceof Card c ? c : null;
+        if (target == null && single.getTargets() != null && single.getTargets().getFirstTargetedCard() != null) {
+            target = single.getTargets().getFirstTargetedCard();
+        }
+        return target != null && target.isCommander() && target.getController().isOpponentOf(ai);
     }
 }

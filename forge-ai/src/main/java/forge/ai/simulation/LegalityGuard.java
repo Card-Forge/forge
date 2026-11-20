@@ -11,6 +11,7 @@ import forge.game.card.CardLists;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -54,13 +55,163 @@ public final class LegalityGuard {
                     && sacrificesItselfOnEntering(ai, host)) {
                 return "etb-self-sacrifice";
             }
+            if (host != null && sa.isSpell() && host.isInZone(ZoneType.Hand) && redundantCopy(ai, host)) {
+                return "redundant-copy";
+            }
             if (xIsZero(ai, sa)) {
                 return "x-zero";
+            }
+            if (drawsPastTheLibrary(ai, sa)) {
+                return "draw-would-lose";
+            }
+            if (takesAllItsLife(ai, sa)) {
+                return "suicide";
             }
             return null;
         } catch (final RuntimeException e) {
             return null; // a refinement only: never let it break a turn
         }
+    }
+
+    /**
+     * A spell or ability that makes the AI draw more cards than its library has loses the game at the next state check
+     * (unless something says it cannot lose, or it is the plan: Laboratory Maniac, Jace, Wielder of Mysteries).
+     */
+    static boolean drawsPastTheLibrary(final Player ai, final SpellAbility sa) {
+        if (ai.cantLose()) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Laboratory Maniac") || c.getName().equals("Jace, Wielder of Mysteries")) {
+                return false;
+            }
+        }
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() != ApiType.Draw || node.hasParam("ConditionCheckSVar") || node.hasParam("ConditionPresent")
+                    || node.hasParam("UnlessCost") || !affects(ai, node, "You")) {
+                continue;
+            }
+            if (amountOf(node, "NumCards", "1") > library) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the step is aimed at the AI: its chosen targets, else the players it names ("You", "Player" for each). */
+    static boolean affects(final Player ai, final SpellAbility node, final String defaultDefined) {
+        try {
+            if (node.usesTargeting()) {
+                if (node.getTargets() == null) {
+                    return false;
+                }
+                for (final Player p : node.getTargets().getTargetPlayers()) {
+                    if (p.equals(ai)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            final String defined = node.getParamOrDefault("Defined", defaultDefined);
+            if (defined.isEmpty()) {
+                return false;
+            }
+            return forge.game.ability.AbilityUtils.getDefinedPlayers(node.getHostCard(), defined, node).contains(ai);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /**
+     * The number of a step as the game reads it now: a Count$ expression is counted on the board, so "draw a card for
+     * each creature you control" is what it would be if cast now. An X paid in mana is not known before it is paid (the
+     * AI's own X choices are capped by the library in DrawAi, and the rollouts do not offer X spells).
+     */
+    static int amountOf(final SpellAbility node, final String param, final String fallback) {
+        return forge.game.ability.AbilityUtils.calculateAmount(node.getHostCard(), node.getParamOrDefault(param, fallback), node);
+    }
+
+    /** A step that makes the AI lose all the life it has (or more), with nothing in the same ability to gain it back. */
+    static boolean takesAllItsLife(final Player ai, final SpellAbility sa) {
+        if (!ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() == ApiType.GainLife) {
+                return false;
+            }
+        }
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            final ApiType api = node.getApi();
+            if (node.hasParam("ConditionCheckSVar") || node.hasParam("ConditionPresent")) {
+                continue;
+            }
+            if ((api == ApiType.LoseLife && affects(ai, node, "") && amountOf(node, "LifeAmount", "0") >= ai.getLife())
+                    || (api == ApiType.DealDamage && affects(ai, node, "") && amountOf(node, "NumDmg", "0") >= ai.getLife())) {
+                return true;
+            }
+            if (api == ApiType.DamageAll && damagesAi(ai, node) && amountOf(node, "NumDmg", "0") >= ai.getLife()
+                    && ai.getLife() <= ai.getOpponentsSmallestLifeTotal()) {
+                return true; // each player takes it and the AI is the one who dies first (or with him)
+            }
+        }
+        return false;
+    }
+
+    private static boolean damagesAi(final Player ai, final SpellAbility node) {
+        final String valid = node.getParamOrDefault("ValidPlayers", "");
+        return !valid.isEmpty() && ai.isValid(valid, node.getActivatingPlayer(), node.getHostCard(), node);
+    }
+
+    // ------------------------------------------------------------------------------------------ wasted burn
+
+    /**
+     * Damage that does nothing or far too much: all of it prevented, a creature that is already dead (damage marked
+     * for its toughness), or a very big burn spell on a small creature (8 damage on a 2/2 when the opponent has
+     * something worth the spell).
+     *
+     * @param aim the target it is going to be aimed at when the targets are not chosen yet, else null
+     * @return "burn-prevented", "burn-dead-already" or "overkill", else null
+     */
+    public static String wastedBurn(final Player ai, final SpellAbility sa, final forge.game.GameObject aim) {
+        for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+            if (node.getApi() != ApiType.DealDamage || !node.usesTargeting()) {
+                continue;
+            }
+            final List<GameEntity> aimed = new java.util.ArrayList<>();
+            if (aim instanceof GameEntity && node == FlatMonteCarloPicker.singleTargetingAbility(sa)) {
+                aimed.add((GameEntity) aim);
+            } else if (node.getTargets() != null) {
+                for (final GameEntity t : node.getTargets().getTargetEntities()) {
+                    aimed.add(t);
+                }
+            }
+            if (aimed.isEmpty()) {
+                continue;
+            }
+            final int damage = amountOf(node, "NumDmg", "0");
+            if (damage <= 0) {
+                continue;
+            }
+            for (final GameEntity e : aimed) {
+                final int dealt = forge.ai.ComputerUtilCombat.predictDamageTo(e, damage, node.getHostCard(), false);
+                if (dealt <= 0) {
+                    return "burn-prevented";
+                }
+                if (e instanceof Card && ((Card) e).isCreature() && !((Card) e).isPlaneswalker()) {
+                    final Card c = (Card) e;
+                    final int lethal = c.getLethalDamage();
+                    if (lethal <= 0) {
+                        return "burn-dead-already";
+                    }
+                    if (dealt >= 6 && dealt >= lethal * 3 && forge.ai.ComputerUtilCard.evaluateCreature(c) < 250) {
+                        return "overkill";
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -204,6 +355,88 @@ public final class LegalityGuard {
                 final Matcher n = PRESENT_COMPARE.matcher(m.getParamOrDefault("PresentCompare", ""));
                 if (!present.startsWith("Land") || !n.matches() || Integer.parseInt(n.group(1)) <= lands) {
                     return false;
+                }
+            }
+            return true;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------ defeating a battle
+
+    /**
+     * Attacking a battle of the AI's own that it can defeat now, when what it turns into is a legendary permanent that
+     * the AI already controls (Invasion of Ikoria while Zilortha, Apex of Ikoria is in play; Fiora, Kaladesh, Segovia,
+     * Theros, Ulgrotha): the second one only goes to the legend rule. Fine when the legend in play does nothing (it can
+     * neither attack nor block: Pacifism, a stun counter), and when the attack cannot take the last defense counter.
+     * A Planeswalker back (Invasion of New Phyrexia) is left to the usual rules: a new one with more loyalty is a plan.
+     *
+     * @param damage the combat damage the AI can attack the battle with
+     */
+    public static boolean redundantDefeat(final Player ai, final Card battle, final int damage) {
+        try {
+            if (battle == null || !battle.isBattle() || damage < battle.getCounters(CounterEnumType.DEFENSE)) {
+                return false;
+            }
+            final forge.game.card.CardState back = battle.getAlternateState();
+            if (back == null || !back.getType().isLegendary() || back.getType().isPlaneswalker()) {
+                return false;
+            }
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (c != battle && back.getName().equals(c.getName()) && !doesNothing(c)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** A creature that can neither attack nor block for the time being. */
+    private static boolean doesNothing(final Card c) {
+        return c.isCreature() && (c.getCounters(CounterEnumType.STUN) > 0
+                || c.hasKeyword("CARDNAME can't attack or block."));
+    }
+
+    // ------------------------------------------------------------------------------------------ a second copy
+
+    private static final String[] STACKING = { "AddPower", "AddToughness", "SetPower", "SetToughness", "AddHiddenKeyword",
+            "AddCost", "RaiseCost", "Amount", "AddType", "RemoveType", "SetColor", "AddColor" };
+
+    /**
+     * A second copy of a permanent whose whole job is a static grant that does not add up (Resonating Lute: "lands you
+     * control have ..."): the lands already have the ability, and a second one gives them nothing more. Equipment,
+     * Auras, creatures and cards with an enters or other trigger have uses of their own and are left alone.
+     */
+    static boolean redundantCopy(final Player ai, final Card host) {
+        try {
+            if (host.isCreature() || host.isEquipment() || host.isAura() || host.isLand() || host.isPlaneswalker()
+                    || host.isSaga() || host.getType().hasSubtype("Vehicle") || !host.getTriggers().isEmpty()
+                    || host.getStaticAbilities().isEmpty()) {
+                return false;
+            }
+            boolean copy = false;
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                copy |= c != host && c.getName().equals(host.getName());
+            }
+            if (!copy) {
+                return false;
+            }
+            for (final forge.game.staticability.StaticAbility st : host.getStaticAbilities()) {
+                if (!"Continuous".equals(st.getParam("Mode")) || st.getParam("Affected") == null
+                        || !(st.hasParam("AddAbility") || st.hasParam("AddKeyword") || st.hasParam("AddTrigger"))) {
+                    return false;
+                }
+                final String affected = st.getParam("Affected");
+                if (affected.contains("Self") || affected.contains("Equipped") || affected.contains("Enchanted")) {
+                    return false;
+                }
+                for (final String key : STACKING) {
+                    if (st.hasParam(key)) {
+                        return false;
+                    }
                 }
             }
             return true;

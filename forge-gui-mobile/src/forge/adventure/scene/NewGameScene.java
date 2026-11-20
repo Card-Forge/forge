@@ -430,9 +430,9 @@ public class NewGameScene extends MenuScene {
         Map<String, String> edited = new LinkedHashMap<>(chosenModifiers);
         boolean portrait = stage.getHeight() > stage.getWidth();
         float width = Math.min(330, stage.getWidth() - 40);
-        float textWidth = width - 70;
+        float textWidth = width - 79;
         Table rows = new Table();
-        rows.top();
+        rows.top().padRight(9);
         for (ModifierData modifier : Config.instance().getConfigData().modifiers) {
             rows.add(divider()).colspan(3).growX().row();
             //A setting survives turning the modifier off and on again while the dialog is open.
@@ -478,9 +478,11 @@ public class NewGameScene extends MenuScene {
         dialog.getContentTable().add(Controls.newTextraLabel("[+ChallengeCoin] " + localizer.getMessage("lblModifiers"))).row();
         String intro = "[#A9A5C2]" + localizer.getMessage("lblModifiersIntro");
         dialog.getContentTable().add(portrait ? wrappedLabel(intro, width - 10) : Controls.newTextraLabel(intro)).width(width - 10).padTop(2).row();
-        ScrollPane scroll = new ScrollPane(rows);
+        ScrollPane scroll = new ScrollPane(rows, RewardScene.thinScrollBarStyle());
         scroll.setScrollingDisabled(true, false);
-        dialog.getContentTable().add(scroll).width(width).height(Math.min(rows.getPrefHeight(), stage.getHeight() - (portrait ? 150 : 96))).padTop(2);
+        scroll.setFadeScrollBars(false);
+        dialog.getContentTable().add(scroll).width(width).height(Math.min(rows.getPrefHeight(), stage.getHeight() - (portrait ? 170 : 116))).padTop(2).row();
+        dialog.getContentTable().add(new RewardScene.MoreArrow(scroll)).center().padTop(4);
         dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblCancel"), this::removeDialog, "goldframe")).width(70).height(24).padRight(8);
         dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblOK"), () -> {
             chosenModifiers.clear();
@@ -489,6 +491,7 @@ public class NewGameScene extends MenuScene {
             removeDialog();
         }, "goldframe")).width(70).height(24);
         showDialog(dialog);
+        stage.setScrollFocus(scroll);
     }
 
     private static Image divider() {
