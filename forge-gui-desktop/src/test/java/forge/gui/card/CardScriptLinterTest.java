@@ -61,6 +61,7 @@ public class CardScriptLinterTest {
             "AbilityUtils reads Destination on a trigger, so it's a trigger param");
         assertTrue(!PARAMS.forApi(ApiType.Animate).contains("SacValid"), "AnimateAi reads SacValid on the ability on the stack");
         assertTrue(!PARAMS.forApi(ApiType.Dig).contains("Attacker"), "DigAi reads Attacker from its options map");
+        assertTrue(!PARAMS.forApi(ApiType.Draw).contains("Tickets"), "Sticker reads Tickets from a sticker's own params");
         assertTrue(PARAMS.forApi(ApiType.Untap).contains("Radiance"), "read on sa.getSATargetingCard(), often sa itself");
         assertTrue(PARAMS.forTrigger(TriggerType.AttackersDeclared).contains("AttackingPlayer"),
             "matchesValidParam(\"AttackingPlayer\", runParams.get(...))");
