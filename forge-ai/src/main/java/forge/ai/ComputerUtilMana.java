@@ -1011,8 +1011,8 @@ public class ComputerUtilMana {
      * This never changes how many sources get tapped, only which.
      * A colour that a card in hand needs outranks the source scores, so a held spell stays castable;
      * leaving a colour untapped just to hide information only reorders equally scored sources.
-     * A source that uses itself up, such as a spirit guide or a Treasure, keeps its scored place
-     * and does not count as keeping a colour available.
+     * A source that uses itself up (a spirit guide, a Treasure) or sacrifices another permanent (Ashnod's Altar)
+     * keeps its scored place and does not count as keeping a colour available.
      */
     private static Collection<SpellAbility> sparingSourcesFirst(final Collection<SpellAbility> candidates,
             final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final SpellAbility sa, final Player ai) {
@@ -1083,7 +1083,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean usesUpSource(final SpellAbility ma) {
-        return ComputerUtilCost.isSacrificeSelfCost(ma.getPayCosts())
+        return ComputerUtilCost.isSacrificeSelfCost(ma.getPayCosts()) || ManaSacrifice.isSacrificeMana(ma)
                 || ma.getPayCosts().getCostParts().stream().anyMatch(part -> part instanceof CostExile && part.payCostFromSource());
     }
 

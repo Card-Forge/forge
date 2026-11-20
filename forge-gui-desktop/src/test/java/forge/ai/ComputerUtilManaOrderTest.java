@@ -15,6 +15,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gamesimulationtests.util.PlayerControllerForTests;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -470,6 +471,30 @@ public class ComputerUtilManaOrderTest extends SimulationTest {
         assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
         assertTrue(sa.getPayingMana().stream().anyMatch(m -> m.addsNoCounterMagic(sa)),
                 "expected Cavern of Souls mana to be spent on the spell");
+    }
+
+    @Test
+    public void humanAutoPayTapsALandBeforeSacrificingToKeepAColour() {
+        // Hall of Oracles is the only blue source for the Counterspell in hand, but sparing it is not worth a creature
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        addCard("Mountain", p);
+        final Card hall = addCard("Hall of Oracles", p);
+        addCard("Ashnod's Altar", p);
+        final Card spirit = addToken("w_1_1_spirit_flying", p);
+        addCardToZone("Counterspell", p, ZoneType.Hand);
+
+        // the Auto button pays for a human seat under a temporary AI controller
+        p.dangerouslySetController(new PlayerControllerForTests(game, p, p.getLobbyPlayer()));
+        p.runWithController(() -> {
+            final SpellAbility sa = addCardToZone("Lightning Strike", p, ZoneType.Hand).getFirstSpellAbility();
+            sa.setActivatingPlayer(p);
+            final ManaCostBeingPaid cost = new ManaCostBeingPaid(new ManaCost(new ManaCostParser("1 R")));
+            assertTrue(ComputerUtilMana.payManaCost(cost, sa, p, false) && cost.isPaid());
+        }, new PlayerControllerAi(game, p, p.getLobbyPlayer()));
+        assertTrue(hall.isTapped(), "expected Hall of Oracles to pay");
+        assertTrue(spirit.isInPlay(), "expected the Spirit to stay on the battlefield");
     }
 
     @Test
