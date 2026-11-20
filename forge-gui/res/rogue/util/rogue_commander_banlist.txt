@@ -1,4 +1,4 @@
-# Commander-banned cards that Rogue Commander never offers.
+# Cards that Rogue Commander never offers.
 
 # Conspiracies
 Adriana's Valor
@@ -46,3 +46,11 @@ Invoke Prejudice
 Jihad
 Pradesh Gypsies
 Stone-Throwing Devils
+
+# Funny cards
+Blacker Lotus
+Booster Tutor
+Mise
+Incoming!
+Discord, Lord of Disharmony
+Rainbow Dash
