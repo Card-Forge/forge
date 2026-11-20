@@ -1,7 +1,7 @@
 Name:Long-Term Phyresis Study
 ManaCost:2 B
 Types:Enchantment
-R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Layer$ CantHappen | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
+R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
 SVar:PoisonTolerance:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ ReplaceCount$CounterNum/Plus.1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return up to one target creature card from your graveyard to your hand. Then, draw a card.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBDraw

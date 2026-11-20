@@ -1,7 +1,7 @@
 Name:Naturalize the Phyresis
 ManaCost:1 G
 Types:Enchantment
-R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Layer$ CantHappen | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
+R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
 SVar:PoisonTolerance:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ ReplaceCount$CounterNum/Plus.1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact or enchantment an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls.

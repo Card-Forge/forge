@@ -1,7 +1,7 @@
 Name:Burn the Phyresis
 ManaCost:2 R
 Types:Enchantment
-R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Layer$ CantHappen | Description$ Poison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)
+R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Description$ Poison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)
 SVar:PoisonTolerance:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ ReplaceCount$CounterNum/Plus.2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
