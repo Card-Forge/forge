@@ -1,5 +1,6 @@
 package forge.gamemodes.limited;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
 
     public CardThemedCommanderDeckBuilder(PaperCard commanderCard0, PaperCard partner0, final List<PaperCard> dList, boolean isForAI, DeckFormat format) {
         super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), format);
-        this.availableList = dList;
+        this.availableList = new ArrayList<>(dList);
         keyCard = commanderCard0;
         secondKeyCard = partner0;
         // remove Unplayables
@@ -56,6 +57,13 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
     @Override
     protected void addLandKeyCards(){
         //do nothing as keycards are commander/partner and are added by the DeckGenUtils
+    }
+
+    @Override
+    protected void extendPlaysets(int numSpellsNeeded) {
+        // Commander-family formats are singleton except for basic lands and cards
+        // with explicit deckbuilding exceptions. Do not fill gaps by duplicating
+        // cards already selected for the main deck.
     }
 
     @Override
