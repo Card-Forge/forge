@@ -64,7 +64,8 @@ public class VDrawOfferDialog extends FDialog {
 
     private void addTally(final DrawOfferMessage.Status update) {
         body.add(add(new FLabel.Builder()
-                .text(Forge.getLocalizer().getMessage("lblDrawOfferedBy", update.offerer().getName()))
+                .text(update.offerer() == null ? update.reason()
+                        : Forge.getLocalizer().getMessage("lblDrawOfferedBy", update.offerer().getName()))
                 .align(Align.left)
                 .build()));
         for (final DrawOfferMessage.Entry entry : update.entries()) {

@@ -6,7 +6,8 @@ import java.util.Map;
 import forge.game.player.Player;
 
 /**
- * Transient state of an in-flight draw offer: the offerer (who accepts implicitly)
+ * Transient state of an in-flight draw offer: the offerer (who accepts implicitly),
+ * or a reason when the game itself offers,
  * and each responder's vote. Pure data — no GUI or network references. Orchestration
  * lives in forge-gui's DrawOfferCoordinator.
  */
@@ -14,16 +15,24 @@ public class DrawOffer {
     public enum Vote { PENDING, ACCEPTED, DECLINED }
 
     private final Player offerer;
+    private final String reason;
     private final Map<Player, Vote> votes = new LinkedHashMap<>();
 
     public DrawOffer(final Player offerer, final Iterable<Player> responders) {
+        this(offerer, null, responders);
+    }
+
+    /** An offer the game makes itself has no offerer and gives its reason instead. */
+    public DrawOffer(final Player offerer, final String reason, final Iterable<Player> responders) {
         this.offerer = offerer;
+        this.reason = reason;
         for (final Player p : responders) {
             votes.put(p, Vote.PENDING);
         }
     }
 
     public Player getOfferer() { return offerer; }
+    public String getReason() { return reason; }
     public Map<Player, Vote> getVotes() { return votes; }
 
     public void record(final Player responder, final boolean accepted) {
