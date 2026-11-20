@@ -2,6 +2,7 @@ package forge.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
+import forge.ImageKeys;
 import forge.adventure.data.ConfigData;
 import forge.adventure.util.Config;
 import forge.gui.GuiBase;
@@ -118,7 +119,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
             if (ImageUtil.isWebp(destFile.file()))
-                newdespath = webpPath(newdespath);
+                newdespath = ImageKeys.withExtension(newdespath, ".webp");
             destFile.moveTo(new FileHandle(newdespath));
             c.disconnect();
 

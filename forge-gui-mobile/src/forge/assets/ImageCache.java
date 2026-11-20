@@ -55,7 +55,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 
 /**
@@ -248,7 +247,7 @@ public class ImageCache {
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
             File tokenFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename);
-            return ImageFetcher.cachedFile(tokenFile) != null;
+            return ImageKeys.getCachedFile(tokenFile) != null;
         }
 
         return true;

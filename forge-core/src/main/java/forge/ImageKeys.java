@@ -81,6 +81,34 @@ public final class ImageKeys {
     // the last, empty, string is for keys that come in with an extension already in place
     private static final String[] FILE_EXTENSIONS = { ".jpg", ".png", ".webp", "" };
 
+    /** The file if it exists, otherwise the same name under the first extension in FILE_EXTENSIONS that exists, or null. */
+    public static File getCachedFile(File file) {
+        if (file.exists())
+            return file;
+        for (String ext : FILE_EXTENSIONS) {
+            if (ext.isEmpty())
+                continue;
+            File cached = new File(withExtension(file.getPath(), ext));
+            if (cached.exists())
+                return cached;
+        }
+        return null;
+    }
+
+    public static String withExtension(String path, String ext) {
+        String name = new File(path).getName();
+        int dot = name.lastIndexOf('.');
+        return dot < 0 ? path : path.substring(0, path.length() - name.length() + dot) + ext;
+    }
+
+    private static String imageExtension(String filename) {
+        for (String ext : FILE_EXTENSIONS) {
+            if (!ext.isEmpty() && filename.endsWith(ext))
+                return ext;
+        }
+        return null;
+    }
+
     public static String getTokenKey(String tokenName) {
         return ImageKeys.TOKEN_PREFIX + tokenName;
     }
@@ -439,15 +467,15 @@ public final class ImageKeys {
                 File f = new File(CACHE_CARD_PICS_DIR + setFolder);  // no need to check this, otherwise editionHasImage would be false!
                 HashSet<String> setFolderContent = new HashSet<>();
                 for (String filename : Arrays.asList(f.list())) {
-                    // TODO: should this use FILE_EXTENSIONS ?
-                    if (!filename.endsWith(".jpg") && !filename.endsWith(".png") && !filename.endsWith(".webp"))
+                    String ext = imageExtension(filename);
+                    if (ext == null)
                         continue;  // not image - not interested
                     setFolderContent.add(filename.split("\\.")[0]);  // get rid of any full or fullborder
                     //preload cachedCards at startUp
-                    String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "").replace(".webp", "");
+                    String key = setFolder + "/" + StringUtils.removeEnd(filename, ext).replace(".fullborder", ".full");
                     File value = new File(CACHE_CARD_PICS_DIR + setFolder + "/" + filename);
                     // findFile prefers a JPEG over other formats of the same picture
-                    if (filename.endsWith(".jpg"))
+                    if (ext.equals(FILE_EXTENSIONS[0]))
                         cachedCards.put(key, value);
                     else
                         cachedCards.putIfAbsent(key, value);

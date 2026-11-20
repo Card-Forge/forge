@@ -1,5 +1,6 @@
 package forge.util;
 
+import forge.ImageKeys;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -74,7 +75,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 bytes = is.readAllBytes();
             }
             if (ImageUtil.isWebp(bytes)) {
-                return saveAsSent(bytes, webpPath(newdespath));
+                return saveAsSent(bytes, ImageKeys.withExtension(newdespath, ".webp"));
             }
 
             BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));

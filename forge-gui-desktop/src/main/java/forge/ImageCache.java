@@ -59,7 +59,6 @@ import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.imaging.FCardImageRenderer;
-import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 
@@ -333,7 +332,7 @@ public class ImageCache {
         if (key == null || key.isEmpty()) {
             return null;
         }
-        final File f = ImageFetcher.cachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
+        final File f = ImageKeys.getCachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
         if (f == null) {
             return null;
         }
@@ -350,7 +349,7 @@ public class ImageCache {
         if (key == null || key.isEmpty()) {
             return null;
         }
-        final File f = ImageFetcher.cachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
+        final File f = ImageKeys.getCachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
         if (f == null) {
             return null;
         }

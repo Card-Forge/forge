@@ -19,6 +19,7 @@ package forge.gui.download;
 
 import org.tinylog.Logger;
 
+import forge.ImageKeys;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -29,7 +30,6 @@ import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.ScryfallRateLimiter;
 import forge.util.TextUtil;
@@ -322,7 +322,7 @@ public abstract class GuiDownloadService implements Runnable {
                         }
                         fos.close();
                         if (ImageUtil.isWebp(fileDest)) {
-                            File webp = new File(ImageFetcher.webpPath(fileDest.getPath()));
+                            File webp = new File(ImageKeys.withExtension(fileDest.getPath(), ".webp"));
                             if (!fileDest.renameTo(webp)) {
                                 fileDest.delete();
                                 System.out.println("  Could not save " + webp.getName());

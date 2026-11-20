@@ -18,12 +18,12 @@
 package forge.gui.download;
 
 import com.google.common.collect.Iterables;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -91,10 +91,10 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
         String modifier = !filename.contains(".full") ? ".fullborder" : "";
         final File fullborder = new File(ForgeConstants.CACHE_CARD_PICS_DIR, TextUtil.fastReplace(filename, ".full", ".fullborder") + modifier + ".jpg");
 
-        if (ImageFetcher.cachedFile(fullborder) != null)
+        if (ImageKeys.getCachedFile(fullborder) != null)
             return; //don't add on download if you have an existing fullborder image in this set...
 
-        if (ImageFetcher.cachedFile(destFile) == null) {
+        if (ImageKeys.getCachedFile(destFile) == null) {
             downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
         }
     }

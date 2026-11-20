@@ -17,6 +17,7 @@
  */
 package forge.gui.download;
 
+import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -29,7 +30,6 @@ import java.util.*;
 public class GuiDownloadPicturesHQ extends GuiDownloadService {
     final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     Set<String> existingSets;
-    ArrayList<String> existingImages;
 
     @Override
     public String getTitle() {
@@ -38,8 +38,6 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        File f = new File(ForgeConstants.CACHE_CARD_PICS_DIR);
-        existingImages = new ArrayList<>(Arrays.asList(f.list()));
         existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
@@ -63,7 +61,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         final String imageKey = ImageUtil.getImageKey(c, face, false);
         final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
 
-        if (existingImages.contains(imageKey + ".jpg") || existingImages.contains(imageKey + ".webp")) {
+        if (ImageKeys.getCachedFile(new File(destPath)) != null) {
             return;
         }
 
