@@ -1,0 +1,8 @@
+Name:Tyvar Trait - Master Chef Commander
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddReplacementEffect$ This & Other | EffectZone$ Command | Description$ Commander creatures you own have "This creature enters with an additional +1/+1 counter on it" and "Other creatures you control enter with an additional +1/+1 counter on them."
+SVar:This:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | Description$ This creature enters with an additional +1/+1 counter on it.
+SVar:Other:Event$ Moved | ValidCard$ Creature.Other+YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | Description$ Other creatures you control enter with an additional +1/+1 counter on them.
+SVar:ExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1
+Oracle:Commander creatures you own have "This creature enters with an additional +1/+1 counter on it" and "Other creatures you control enter with an additional +1/+1 counter on them."

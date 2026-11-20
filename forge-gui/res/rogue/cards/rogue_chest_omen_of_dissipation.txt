@@ -1,0 +1,6 @@
+Name:Chest Trait - Omen Of Dissipation
+ManaCost:no cost
+Types:Trait
+T:Mode$ DamageDone | ValidSource$ Permanent.OppCtrl+inZoneBattlefield | ValidTarget$ You | TriggerZones$ Command | Execute$ TrigChange | TriggerDescription$ Whenever a permanent an opponent controls deals damage to you, return it to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredSourceLKICopy
+Oracle:Whenever a permanent an opponent controls deals damage to you, return it to its owner's hand.

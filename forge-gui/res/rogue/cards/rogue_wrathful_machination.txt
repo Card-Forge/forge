@@ -1,0 +1,6 @@
+Name:Wrathful - Machination
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on each opponent's turn, target creature that player controls gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.ControlledBy TriggeredPlayer | TgtPrompt$ Select target creature you control | TargetingPlayer$ TriggeredPlayer | KW$ Indestructible
+Oracle:At the beginning of combat on each opponent's turn, target creature that player controls gains indestructible until end of turn.

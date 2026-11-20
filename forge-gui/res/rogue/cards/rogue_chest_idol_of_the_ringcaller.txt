@@ -1,0 +1,6 @@
+Name:Chest Trait - Idol Of The Ringcaller
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigTempt | TriggerDescription$ At the beginning of your upkeep, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:At the beginning of your upkeep, the Ring tempts you.

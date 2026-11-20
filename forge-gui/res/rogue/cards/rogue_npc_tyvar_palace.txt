@@ -1,0 +1,4 @@
+Name:Tyvar Trait - Tyvar's Palace
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with an Opal Palace on the battlefield.
