@@ -1128,12 +1128,17 @@ public class MapStage extends GameStage {
 
                     if (rewards.size == 1) {
                         Reward reward = rewards.get(0);
+                        int goldRoom = AdventurePlayer.current().getGoldRoom();
+                        if (reward.getType() == Reward.Type.Gold && reward.getCount() > goldRoom)
+                            reward = new Reward(goldRoom);
                         final String rewardTypeName = reward.getType().name();
 
                         switch (reward.getType()) {
                             case Life:
                             case Shards:
                             case Gold:
+                                if (reward.getCount() == 0)
+                                    break;
                                 String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);

@@ -257,6 +257,7 @@ public class Assets implements Disposable {
         if (manager == null) {
             HybridFileHandleResolver resolver = new HybridFileHandleResolver();
             manager = new MemoryTrackingAssetManager(resolver);
+            manager.setLoader(Texture.class, new GreyscaleTextureLoader(resolver));
             manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
             manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         }

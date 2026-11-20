@@ -50,7 +50,7 @@ final class CardTextureData implements TextureData {
     public void prepare() {
         if (prepared)
             throw new GdxRuntimeException("Already prepared");
-        Pixmap p = downscale(decodeFromDisk(path));
+        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path));
         pixmap = p;
         width = p.getWidth();
         height = p.getHeight();
