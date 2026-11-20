@@ -213,6 +213,47 @@ public class AiReportScenarioTest extends AITest {
             ComputerUtil.playStack(sa, ai, game);
             resolveAll();
         }
+
+        /** Cast Overlord using its real Impending alternative cost, then restore the scenario's phase/turn. */
+        Card impendingOverlord() {
+            final PhaseType previousPhase = game.getPhaseHandler().getPhase();
+            final Player previousTurn = game.getPhaseHandler().getPlayerTurn();
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+            final Card spell = hand("Overlord of the Balemurk", ai);
+            SpellAbility impending = null;
+            for (final SpellAbility sa : spell.getSpellAbilities()) {
+                if (sa.isSpell() && sa.isImpending()) {
+                    impending = sa;
+                    break;
+                }
+            }
+            if (impending == null) {
+                throw new AssertionError("Overlord has no Impending spell ability");
+            }
+
+            impending.setActivatingPlayer(ai);
+            try {
+                if (!ComputerUtil.playStack(impending, ai, game)) {
+                    throw new AssertionError("Could not cast Overlord using its Impending cost");
+                }
+                resolveAll();
+            } finally {
+                game.getPhaseHandler().devModeSet(previousPhase, previousTurn);
+            }
+
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                if ("Overlord of the Balemurk".equals(c.getName())) {
+                    if (c.getCastSA() == null || !c.getCastSA().isImpending() || c.isCreature()
+                            || c.getCounters(CounterEnumType.TIME) != 5) {
+                        throw new AssertionError("Overlord did not enter as an impending noncreature: " + c);
+                    }
+                    return c;
+                }
+            }
+            throw new AssertionError("Impending Overlord did not enter the battlefield");
+        }
+
         /** Resolves the stack until nothing is left, putting triggered abilities (enter-the-battlefield ...) on it as the real game does. */
         final StringBuilder trace = new StringBuilder();
         void resolveAll() {
@@ -413,16 +454,43 @@ public class AiReportScenarioTest extends AITest {
                     }));
         }
         // Vampire Hexmage: "remove all counters" frees an impending permanent (Overlord of the Balemurk is no creature until the last time counter is gone)
-        l.add(play("hexmage-impending-end-step", "Vampire Hexmage frees the impending Overlord of the Balemurk at the end of the opponent's turn", Fid.EXACT, "END_OF_TURN", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
-        l.add(play("hexmage-impending-removal", "Vampire Hexmage frees the impending Overlord of the Balemurk in response to removal aimed at it", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); final Card overlord = c.bf("Overlord of the Balemurk", c.ai); c.counters(overlord, CounterEnumType.TIME, 5);
+        l.add(aimed("hexmage-impending-end-step", "Vampire Hexmage frees the impending Overlord at the opponent's end step", Fid.EXACT, "END_OF_TURN", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord(); c.bf("Vampire Hexmage", c.ai); }));
+        l.add(aimed("hexmage-impending-removal", "Vampire Hexmage frees Overlord in response to Disenchant", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); final Card overlord = c.impendingOverlord();
                     c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Disenchant", overlord); }));
-        l.add(play("hexmage-in-danger", "Vampire Hexmage frees the impending Overlord of the Balemurk when Hexmage itself is about to be destroyed", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5);
+        l.add(aimed("hexmage-in-danger", "Vampire Hexmage frees Overlord before Hexmage is destroyed", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord();
                     final Card hexmage = c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Terror", hexmage); }));
+        l.add(aimed("hexmage-haywire-mite", "Vampire Hexmage frees Overlord in response to Haywire Mite", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> {
+                    c.bf("Swamp", 2, c.ai);
+                    final Card overlord = c.impendingOverlord();
+                    c.bf("Vampire Hexmage", c.ai);
+                    final Card mite = c.bf("Haywire Mite", c.opp);
+                    SpellAbility exile = null;
+                    for (final SpellAbility sa : mite.getSpellAbilities()) {
+                        if (sa.getApi() == ApiType.ChangeZone && "Exile".equals(sa.getParam("Destination"))) {
+                            exile = sa;
+                            break;
+                        }
+                    }
+                    if (exile == null) {
+                        throw new AssertionError("Haywire Mite has no exile ability");
+                    }
+                    exile.setActivatingPlayer(c.opp);
+                    if (!exile.canTarget(overlord)) {
+                        throw new AssertionError("Haywire Mite cannot target impending Overlord");
+                    }
+                    exile.getTargets().add(overlord);
+                    c.game.getStack().add(exile);
+                }));
         l.add(noPlay("hexmage-idle", "Vampire Hexmage keeps itself while nothing threatens it and it is not the end of the opponent's turn", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord(); c.bf("Vampire Hexmage", c.ai); }));
         // Tavern Scoundrel + Krark, the Thumbless: winning the coin flip of Krark's trigger is winning a coin flip
         l.add(new Scenario("krark-tavern-scoundrel", "Krark's coin flip won: Tavern Scoundrel creates two Treasure tokens", Fid.EXACT, M1, true,
                 c -> {

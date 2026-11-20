@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
+import forge.ai.ability.CountersRemoveAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.*;
 import forge.card.CardStateName;
@@ -2149,6 +2150,38 @@ public class AiController {
         return true;
     }
 
+    /**
+     * Hexmage's impending line is a narrow, deliberate response, not an ordinary value trade.
+     * Once the normal AI rules approve the activation and choose the impending permanent, do not
+     * let candidate pruning or FlatMC choose to pass instead.
+     */
+    private SpellAbility sureHexmageImpending(final List<SpellAbility> candidates) {
+        for (final SpellAbility sa : candidates) {
+            final Card source = sa.getHostCard();
+            if (source == null || !"Vampire Hexmage".equals(source.getName())
+                    || !source.isInZone(ZoneType.Battlefield) || sa.isSkip()
+                    || sa.getApi() != ApiType.RemoveCounter || !"All".equals(sa.getParam("CounterType"))
+                    || !sa.usesTargeting() || !ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                continue;
+            }
+
+            sa.setActivatingPlayer(player);
+            sa.resetTargets();
+            final Card impending = CountersRemoveAi.worthwhileOwnTarget(player, sa);
+            if (!CountersRemoveAi.isImpendingPermanent(impending)) {
+                continue;
+            }
+
+            // Reuse the complete AI approval path: timing, target selection, costs and card-specific restrictions.
+            final AiPlayDecision decision = canPlaySa(sa);
+            if (decision == AiPlayDecision.WillPlay && sa.getTargets().getFirstTargetedCard() == impending) {
+                return sa;
+            }
+            sa.resetTargets();
+        }
+        return null;
+    }
+
     private SpellAbility getSpellAbilityToPlay() {
         if (skipped != null) {
             //FIXME: this is for failed SA to skip temporarily, don't know why AI computation for mana fails, maybe due to auto mana compute?
@@ -2227,6 +2260,11 @@ public class AiController {
 
         if (saList.isEmpty()) {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        }
+
+        final SpellAbility hexmage = sureHexmageImpending(saList);
+        if (hexmage != null) {
+            return hexmage;
         }
 
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
