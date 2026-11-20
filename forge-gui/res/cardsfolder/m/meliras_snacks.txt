@@ -1,8 +1,7 @@
 Name:Melira's Snacks
 ManaCost:2
 Types:Artifact Food
-R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Description$ Poison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
-SVar:PoisonTolerance:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ ReplaceCount$CounterNum/Plus.3
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 3 | Description$ Poison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigChangeZone:DB$ Draw
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.

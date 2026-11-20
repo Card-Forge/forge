@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int maxHandSize = 7;
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
+    private int poisonCountersToLose;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
     private int numExtraDrawnThisTurn;
@@ -225,9 +226,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
             zones.put(z, toPut);
         }
+        poisonCountersToLose = game.getRules().getPoisonCountersToLose();
 
         view = new PlayerView(id0, game.getTracker());
         view.updateMaxHandSize(this);
+        view.updatePoisonCountersToLose(this);
         view.updateKeywords(this);
         view.updateMaxLandPlay(this);
         view.setDraftNotes(this.getDraftNotes());
@@ -2135,19 +2138,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getPoisonCountersToLose() {
-        int poisonRequired = game.getRules().getPoisonCountersToLose();
-        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.CounterNum, poisonRequired);
-        switch (getGame().getReplacementHandler().run(ReplacementType.LethalPoison, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated:
-                // check if this is still the affected player
-                if (this.equals(repParams.get(AbilityKey.Affected))) {
-                    poisonRequired = (int) repParams.get(AbilityKey.CounterNum);
-                }
-        }
-        return poisonRequired;
+        return poisonCountersToLose;
+    }
+    public final void setPoisonCountersToLose(int amount) {
+        this.poisonCountersToLose = amount;
+        view.updatePoisonCountersToLose(this);
     }
 
     public final boolean hasLost() {

@@ -449,7 +449,7 @@ public class VAssignCombatDamage extends FDialog {
         if (source == null) {
             if (defender instanceof PlayerView) {
                 PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? MatchController.instance.getGameView().getPoisonCountersToLose() - p.getCounters(CounterEnumType.POISON) : p.getLife();
+                lethalDamage = attackerHasInfect ? p.getPoisonCountersToLose() - p.getCounters(CounterEnumType.POISON) : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;

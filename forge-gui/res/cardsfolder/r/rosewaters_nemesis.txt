@@ -4,6 +4,5 @@ Types:Creature Monkey Cleric
 PT:4/6
 K:Vigilance
 K:Protection:Phyrexian
-R:Event$ LethalPoison | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PoisonTolerance | Description$ Poison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
-SVar:PoisonTolerance:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ ReplaceCount$CounterNum/Plus.3
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 3 | Description$ Poison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
 Oracle:Vigilance, protection from Phyrexians\nPoison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
