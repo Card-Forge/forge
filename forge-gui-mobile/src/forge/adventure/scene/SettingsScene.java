@@ -12,6 +12,7 @@ import forge.adventure.data.RewardData;
 import forge.adventure.util.AdventureBackgroundDownloader;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.adventure.util.WindowMode;
 import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
 import forge.gui.GuiBase;
@@ -182,17 +183,15 @@ public class SettingsScene extends UIScene {
             settingGroup.add(videomode).align(Align.right).pad(2);
         }
         if (!GuiBase.isAndroid()) {
-            addSettingField(localizer.getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    boolean value = ((CheckBox) actor).isChecked();
-                    Config.instance().getSettingData().fullScreen = value;
-                    Config.instance().saveSettings();
-                    //update
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_FULLSCREEN_MODE, Config.instance().getSettingData().fullScreen);
-                    FModel.getPreferences().save();
+            SelectBox<String> displayMode = Controls.newComboBox(WindowMode.getAvailableLabels(), WindowMode.getCurrent().getLabel(), o -> {
+                WindowMode mode = WindowMode.fromLabel((String) o);
+                if (mode != null && mode != WindowMode.getCurrent()) {
+                    mode.apply();
                 }
+                return null;
             });
+            addLabel(localizer.getMessage("lblDisplayMode"));
+            settingGroup.add(displayMode).align(Align.right).pad(2);
             addCheckBox(localizer.getMessage("lblKeepMouseInFullscreen"),
                     ForgePreferences.FPref.UI_KEEP_MOUSE_IN_FULLSCREEN, Forge::updateMouseConfine);
         }
