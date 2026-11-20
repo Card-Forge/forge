@@ -41,6 +41,9 @@ import forge.util.collect.FCollectionView;
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 public class TokenAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts",
+    };
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
