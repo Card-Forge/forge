@@ -25,11 +25,16 @@ public final class WebTestSupport {
         if (GuiBase.getInterface() == null) {
             GuiBase.setInterface(new WebGuiBase());
         }
+        // Keeps tests in target/test-home, so they never read a real Forge profile
+        GuiBase.setUsingAppDirectory(true);
         if (StaticData.instance() == null) {
             FModel.initialize(null, prefs -> {
                 prefs.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
                 prefs.setPref(FPref.UI_LANGUAGE, "en-US");
                 prefs.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
+                prefs.setPref(FPref.UI_MATCHES_PER_GAME, "3");
+                prefs.setPref(FPref.UI_ENABLE_SOUNDS, true);
+                prefs.setPref(FPref.UI_VOL_SOUNDS, "100");
                 return null;
             }, false);
         }
