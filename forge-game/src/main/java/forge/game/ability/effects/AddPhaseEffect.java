@@ -20,6 +20,11 @@ import forge.game.trigger.TriggerHandler;
  *
  */
 public class AddPhaseEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AfterPhase", "BeforeFirstPostCombatMainEnd", "ExtraPhaseDelayedTrigger",
+        "ExtraPhaseDelayedTriggerExecute", "FollowedBy", "NumPhases",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"ExtraPhase"}};
 
     @Override
     public void resolve(SpellAbility sa) {
