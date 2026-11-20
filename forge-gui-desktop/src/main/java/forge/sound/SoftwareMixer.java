@@ -19,11 +19,12 @@
 package forge.sound;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -65,9 +66,12 @@ final class SoftwareMixer {
     private static final long LINE_IDLE_CLOSE_MS = 3_000L;
     /** A device that refused the line is asked again no more often than this. */
     private static final long LINE_RETRY_MS = 30_000L;
+    private static final Set<String> SLOW_REPEAT_SOUNDS = Set.of("draw.mp3", "tap.mp3", "untap.mp3");
 
-    /** Voices still to be mixed. Added from any thread, removed only by the mixer thread. */
+    /** Voices still to be mixed. All access is synchronized on this list. */
     private static final List<Voice> voices = new ArrayList<>();
+    // Guarded by voices.
+    private static long frameCursor;
 
     // The fields below belong to the mixer thread alone.
     private static SourceDataLine line;
@@ -88,17 +92,19 @@ final class SoftwareMixer {
         private final byte[] pcm;
         private final float volume;
         private final boolean loop;
+        private final long startFrame;
         /** Read cursor into {@link #pcm}; mixer thread only. */
         private int position;
         /** Frames of silence still owed before this voice sounds; mixer thread only. */
         private int silentFrames;
         private volatile boolean playing = true;
 
-        private Voice(byte[] pcm, float volume, boolean loop, int delayFrames) {
+        private Voice(byte[] pcm, float volume, boolean loop, int delayFrames, long startFrame) {
             this.pcm = pcm;
             this.volume = volume;
             this.loop = loop;
             this.silentFrames = delayFrames;
+            this.startFrame = startFrame;
         }
 
         void stop() {
@@ -133,49 +139,72 @@ final class SoftwareMixer {
         return (int) (millis * FORMAT.getSampleRate() / 1000L);
     }
 
+    static int repeatDelayMillis(String filename) {
+        return SLOW_REPEAT_SOUNDS.contains(new File(filename).getName()) ? 70 : SoundSystem.DELAY;
+    }
+
     /**
-     * Start {@code pcm} (already in {@link #FORMAT}), silent for its first {@code delayFrames}.
+     * Start {@code pcm} (already in {@link #FORMAT}), spacing repeats on the mixer's sample clock.
      * Returns at once: the caller never waits for the device.
      */
-    static Voice play(byte[] pcm, float volume, boolean loop, int delayFrames) {
-        final Voice voice = new Voice(pcm, volume, loop, delayFrames);
+    static Voice play(byte[] pcm, float volume, boolean loop, int repeatDelayMillis) {
         synchronized (voices) {
+            voices.removeIf(voice -> !voice.isPlaying());
+            if (pcm.length == 0) {
+                final Voice skipped = new Voice(pcm, volume, loop, 0, frameCursor);
+                skipped.stop();
+                return skipped;
+            }
+            long start = frameCursor;
+            if (repeatDelayMillis > 0) {
+                // Cancelled voices must not reserve time ahead of the remaining repeats.
+                for (Voice active : voices) {
+                    if (active.pcm == pcm && !active.loop && active.isPlaying()) {
+                        start = Math.max(start, active.startFrame + framesForMillis(repeatDelayMillis));
+                    }
+                }
+            }
+            final Voice voice = new Voice(pcm, volume, loop, (int) (start - frameCursor), start);
             voices.add(voice);
             voices.notifyAll();
+            return voice;
         }
-        return voice;
     }
 
     private static void run() {
         final int[] accumulator = new int[FRAMES_PER_WRITE * FORMAT.getChannels()];
         final byte[] block = new byte[FRAMES_PER_WRITE * FORMAT.getFrameSize()];
         while (true) {
-            final List<Voice> playing = playingVoices();
-            if (!playing.isEmpty()) {
-                lastSound = System.currentTimeMillis();
-            } else if (System.currentTimeMillis() - lastSound >= LINE_IDLE_CLOSE_MS) {
-                closeLine();
-                awaitVoice();
-                continue;
+            try {
+                if (hasVoices()) {
+                    lastSound = System.currentTimeMillis();
+                } else if (System.currentTimeMillis() - lastSound >= LINE_IDLE_CLOSE_MS) {
+                    closeLine();
+                    awaitVoice();
+                    continue;
+                }
+                if (!openLine()) {
+                    // Drop queued audio instead of saving a backlog for a device that may return.
+                    dropVoices();
+                    awaitVoice();
+                    continue;
+                }
+                synchronized (voices) {
+                    fill(voices, accumulator, block);
+                    frameCursor += FRAMES_PER_WRITE;
+                }
+                // Blocks until the device has room, which is what paces this loop.
+                line.write(block, 0, block.length);
+            } catch (RuntimeException ex) {
+                handleLineFailure(ex);
             }
-            if (!openLine()) {
-                // No usable output. Drop what is queued rather than banking a backlog that would
-                // all sound at once if a device did appear.
-                dropVoices();
-                awaitVoice();
-                continue;
-            }
-            fill(playing, accumulator, block);
-            // Blocks until the device has room, which is what paces this loop.
-            line.write(block, 0, block.length);
         }
     }
 
-    /** The voices worth mixing, with the finished ones forgotten. */
-    private static List<Voice> playingVoices() {
+    private static boolean hasVoices() {
         synchronized (voices) {
             voices.removeIf(voice -> !voice.isPlaying());
-            return voices.isEmpty() ? Collections.emptyList() : new ArrayList<>(voices);
+            return !voices.isEmpty();
         }
     }
 
@@ -208,6 +237,9 @@ final class SoftwareMixer {
         Arrays.fill(accumulator, 0);
         final int channels = FORMAT.getChannels();
         for (Voice voice : playing) {
+            if (!voice.isPlaying()) {
+                continue;
+            }
             int sample = 0;
             while (sample < accumulator.length && voice.silentFrames > 0) {
                 voice.silentFrames--;
@@ -241,17 +273,26 @@ final class SoftwareMixer {
             return false;
         }
         try {
-            final SourceDataLine opened = AudioSystem.getSourceDataLine(FORMAT);
-            opened.open(FORMAT, LINE_BUFFER_FRAMES * FORMAT.getFrameSize());
-            opened.start();
-            line = opened;
+            line = AudioSystem.getSourceDataLine(FORMAT);
+            line.open(FORMAT, LINE_BUFFER_FRAMES * FORMAT.getFrameSize());
+            line.start();
             return true;
         } catch (LineUnavailableException | IllegalArgumentException ex) {
             // Asked for once rather than per sound, so a busy or absent device costs one message
             // and one retry timer instead of a stall on every effect for the rest of the session.
-            System.err.println("Error initializing sound system: " + ex);
-            lineUnavailableUntil = System.currentTimeMillis() + LINE_RETRY_MS;
+            handleLineFailure(ex);
             return false;
+        }
+    }
+
+    private static void handleLineFailure(Exception failure) {
+        lineUnavailableUntil = System.currentTimeMillis() + LINE_RETRY_MS;
+        dropVoices();
+        System.err.println("Error playing sound: " + failure);
+        try {
+            closeLine();
+        } catch (RuntimeException ex) {
+            System.err.println("Error closing sound output: " + ex);
         }
     }
 
@@ -261,9 +302,16 @@ final class SoftwareMixer {
         }
         // Everything still audible was written during the idle timeout, so there is no tail to
         // drain. close() can block in the driver, which is safe here and would not be on a caller.
-        line.stop();
-        line.flush();
-        line.close();
+        final SourceDataLine closing = line;
         line = null;
+        try {
+            closing.stop();
+        } finally {
+            try {
+                closing.flush();
+            } finally {
+                closing.close();
+            }
+        }
     }
 }
