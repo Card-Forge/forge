@@ -223,6 +223,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     protected boolean animateEntry() { return false; }
 
+    protected boolean usesSharedCardPanels() { return true; }
+
     /**
      * Adds the cards of the last layout to {@code out} without allocating. orderedCards is cleared and refilled
      * by layout, so an iterator (or addAll) throws ConcurrentModificationException if a relayout lands
@@ -260,7 +262,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         CardAreaPanel newCardPanel = null;
         if (model != null) {
             for (CardView card : model) {
-                CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                CardAreaPanel cardPanel = usesSharedCardPanels() ? CardAreaPanel.get(card) : new CardAreaPanel(card);
                 if (animate) {
                     current.add(card);
                     shownScratch.add(cardPanel);
@@ -623,7 +625,6 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private static final Color GHOST_TINT = new Color(90 / 255f, 120 / 255f, 175 / 255f, 0.45f);
         private GhostKind ghostKind = GhostKind.NONE;
 
-        //use static get(card) function instead
         private CardAreaPanel(CardView card0) {
             super(card0);
         }
