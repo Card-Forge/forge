@@ -41,12 +41,13 @@ public class DeckSelectScene extends UIScene {
         Window window = ui.findActor("deckSlots");
         Table root = new Table();
         layout = new Table();
+        layout.top();
         scrollPane = new ScrollPane(layout);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
         root.row();
         root.add(header).colspan(2);
         root.row();
-        root.add(scrollPane).expand().width(window.getWidth() - 20);
+        root.add(scrollPane).colspan(2).grow().minSize(0).pad(5);
         this.layoutDeckButtons();
 
         textInput = Controls.newTextField("");
@@ -64,7 +65,7 @@ public class DeckSelectScene extends UIScene {
         ui.onButtonPress("delete", DeckSelectScene.this::promptDelete);
         ui.onButtonPress("add", DeckSelectScene.this::addDeck);
         defColor = ui.findActor("return").getColor();
-        window.add(root);
+        window.add(root).grow().minSize(0);
     }
 
     private void refreshDeckButtons(){
@@ -235,8 +236,8 @@ public class DeckSelectScene extends UIScene {
         refreshDeckButtons();
         GameHUD.getInstance().updateBGM();
         select(Current.player().getSelectedDeckIndex());
-        performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
         super.enter();
+        stage.setScrollFocus(scrollPane);
     }
 
 
