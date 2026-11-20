@@ -54,7 +54,7 @@ public final class RampPlan {
     public static boolean isValakutDeck(final Player ai) {
         boolean valakut = false;
         boolean way = false;
-        for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Battlefield)) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Battlefield, ZoneType.Stack)) {
             valakut |= isValakut(c);
             way |= c.getName().equals(SCAPESHIFT) || c.getName().equals("Primeval Titan")
                     || c.getName().equals("Prismatic Vista");
@@ -100,6 +100,62 @@ public final class RampPlan {
         final int keptMountains = mountainsInPlay - Math.max(0, sacrificed - nonMountains);
         // each Mountain that enters sees the others: the ones that stay and the ones that enter with it
         return keptMountains + entering - 1 >= OTHER_MOUNTAINS ? DAMAGE * entering : 0;
+    }
+
+    /** Whether a Scapeshift should be held because its current Valakut line is not lethal. */
+    public static boolean scapeshiftMustWait(final Player ai) {
+        final int damage = scapeshiftDamage(ai);
+        for (final Player opponent : ai.getOpponents()) {
+            if (opponent.canLoseLife() && !opponent.cantLoseForZeroOrLessLife() && damage >= opponent.getLife()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The number of lands to sacrifice for the best Scapeshift fetch this turn. Valakut itself is not sacrificed. */
+    public static int scapeshiftLandsToSacrifice(final Player ai) {
+        boolean valakutInPlay = false;
+        boolean valakutInLibrary = false;
+        int lands = 0;
+        int mountainsInLibrary = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (isValakut(c)) {
+                valakutInPlay = true;
+            } else if (c.isLand()) {
+                lands++;
+            }
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (isValakut(c)) {
+                valakutInLibrary = true;
+            } else if (isMountain(c)) {
+                mountainsInLibrary++;
+            }
+        }
+        if (!valakutInPlay && !valakutInLibrary) {
+            return 0;
+        }
+        final int valakutSlot = valakutInPlay ? 0 : 1;
+        return Math.min(lands, mountainsInLibrary + valakutSlot);
+    }
+
+    /** Existing Mountains that the Scapeshift sacrifice chooser must preserve for the fetched Mountains to trigger. */
+    public static int scapeshiftMountainsToKeep(final Player ai) {
+        int lands = 0;
+        int mountainsInPlay = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (isValakut(c) || !c.isLand()) {
+                continue;
+            }
+            lands++;
+            if (isMountain(c)) {
+                mountainsInPlay++;
+            }
+        }
+        final int nonMountains = lands - mountainsInPlay;
+        final int sacrificedMountains = Math.max(0, scapeshiftLandsToSacrifice(ai) - nonMountains);
+        return Math.max(0, mountainsInPlay - sacrificedMountains);
     }
 
     /**

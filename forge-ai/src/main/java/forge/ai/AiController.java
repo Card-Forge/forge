@@ -99,6 +99,7 @@ public class AiController {
     private List<SpellAbility> skipped;
     // flat Monte Carlo bookkeeping: time spent on rollouts during one turn, to keep slow devices responsive
     private int flatMcTurn = -1;
+    private int simultaneousValakutDamageTriggers;
     private long flatMcTurnSpentNanos;
     private FlatMonteCarloPicker.Result lastFlatMcResult;
     /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
@@ -173,6 +174,14 @@ public class AiController {
 
     public int getAttackAggression() {
         return lastAttackAggression;
+    }
+
+    public int getSimultaneousValakutDamageTriggers() {
+        return simultaneousValakutDamageTriggers;
+    }
+
+    void setSimultaneousValakutDamageTriggers(final int count) {
+        simultaneousValakutDamageTriggers = Math.max(0, count);
     }
 
     public SpellAbilityPicker getSimulationPicker() {
@@ -1119,6 +1128,14 @@ public class AiController {
         }
 
         final Card card = sa.getHostCard();
+
+        if (shouldHoldSelfSacrificeForDeclaredBlock(sa)) {
+            return AiPlayDecision.CantPlayAi;
+        }
+        // A Scapeshift is only worth spending when the Valakut lands it can fetch are lethal.
+        if ("Scapeshift".equals(card.getName()) && RampPlan.scapeshiftMustWait(player)) {
+            return AiPlayDecision.AnotherTime;
+        }
 
         if (isPunishedForFreeCast(sa)) {
             return AiPlayDecision.CantAfford;
@@ -2182,6 +2199,72 @@ public class AiController {
         return null;
     }
 
+    /**
+     * Do not let the ordinary ability picker undo the post-block decision: sacrificing a blocker is harmful when
+     * its block also kills the attacker, or when it would let a trampler deal damage to the defending player.
+     * A full Fog is the exception because it prevents all combat damage, not merely a fixed amount.
+     */
+    private boolean shouldHoldSelfSacrificeForDeclaredBlock(final SpellAbility sa) {
+        if (sa == null || !ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())
+                || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            return false;
+        }
+        final Card blocker = sa.getHostCard();
+        final Combat combat = game.getCombat();
+        if (blocker == null || combat == null) {
+            return false;
+        }
+        final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
+        if (attackers.isEmpty() || ComputerUtilCost.preventsCombatDamage(sa)) {
+            return false;
+        }
+        for (final Card attacker : attackers) {
+            if (ComputerUtilCombat.attackerWouldBeDestroyed(player, attacker, combat)
+                    || attacker.hasKeyword(Keyword.TRAMPLE)) {
+                return true;
+            }
+        }
+        return blocker.hasKeyword(Keyword.BANDING);
+    }
+
+    /**
+     * Give a blocker that is going to die an early chance to use a worthwhile activated ability.
+     * The normal ability AI remains the authority on whether the effect is useful and payable;
+     * self-sacrifice still preserves profitable trades and avoids giving attackers trample damage.
+     */
+    private SpellAbility choosePostBlockValueAbility(final List<SpellAbility> candidates) {
+        final Combat combat = game.getCombat();
+        if (combat == null || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                || !game.getStack().isEmpty() || candidates == null || candidates.isEmpty()) {
+            return null;
+        }
+
+        for (final Card blocker : combat.getAllBlockers()) {
+            if (!player.equals(blocker.getController()) || !blocker.isCreature()
+                    || !ComputerUtil.predictCreatureWillDieThisTurn(player, blocker, null, false)) {
+                continue;
+            }
+            for (final SpellAbility sa : candidates) {
+                if (sa.getHostCard() != blocker || !sa.isActivatedAbility() || sa.isManaAbility() || sa.isSkip()) {
+                    continue;
+                }
+                // A self-sacrifice must not throw away a profitable block or let trample through.
+                // A real Fog is the exception; a small damage shield is not enough against trample.
+                if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())
+                        && (ComputerUtilCombat.willOpposingCreatureDieInCombat(player, blocker, combat)
+                        || (ComputerUtilCombat.isDangerousToSacInCombat(player, blocker, combat)
+                        && !ComputerUtilCost.preventsCombatDamage(sa)))) {
+                    continue;
+                }
+                sa.setActivatingPlayer(player);
+                if (canPlaySa(sa) == AiPlayDecision.WillPlay) {
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
     private SpellAbility getSpellAbilityToPlay() {
         if (skipped != null) {
             //FIXME: this is for failed SA to skip temporarily, don't know why AI computation for mana fails, maybe due to auto mana compute?
@@ -2267,6 +2350,22 @@ public class AiController {
             return hexmage;
         }
 
+        // Let a dying blocker cash in a useful ability before candidate pruning or FlatMC can pass priority.
+        final SpellAbility postBlockValue = choosePostBlockValueAbility(saList);
+        if (postBlockValue != null) {
+            return postBlockValue;
+        }
+        // A lethal Valakut line is a deterministic win; do not let deck-removal heuristics hide Scapeshift.
+        for (final SpellAbility candidate : saList) {
+            final Card host = candidate.getHostCard();
+            if (host != null && "Scapeshift".equals(host.getName()) && !RampPlan.scapeshiftMustWait(player)) {
+                candidate.setActivatingPlayer(player);
+                if (!hasFailedToCast(candidate) && canPlaySa(candidate) == AiPlayDecision.WillPlay) {
+                    return candidate;
+                }
+            }
+        }
+
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
         // Flat MC compares them with rollouts, the heuristics still decide for every other card
         // Every other card marked AI:RemoveDeck:All stays in the list too, for Flat MC alone: see isFlatMcOnlyPlay
@@ -2276,7 +2375,10 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc
+                    && !("Scapeshift".equals(h.getName()) && !RampPlan.scapeshiftMustWait(player)))
+                    || ("Scapeshift".equals(h.getName()) && RampPlan.scapeshiftMustWait(player))
+                    || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
                     || (flatMc && LoopRunner.held(player, spellAbility) && vetoed(spellAbility, "held-for-loop"))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
@@ -3807,6 +3909,11 @@ public class AiController {
                     ? VaultLoop.tinkerPick(player, fetchList) : null; // Tinker: the vault or its key, whatever the deck's plan
             if (tinkered != null) {
                 return tinkered;
+            }
+            final CardCollection rampPicks = destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
+                    ? RampPlan.picks(player, fetchList, 1) : null;
+            if (rampPicks != null && !rampPicks.isEmpty()) {
+                return rampPicks.get(0);
             }
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {

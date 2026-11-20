@@ -113,6 +113,17 @@ public class AiReportScenarioTest extends AITest {
         void richMana() { for (final String l : new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" }) { bf(l, 3, ai); } }
         void counters(final Card c, final CounterEnumType t, final int n) { c.setCounters(t, n); }
 
+        /** Evaluate a trigger without depending on AiController's convenience wrapper. */
+        boolean shouldRunAiTrigger(final SpellAbility sa, final boolean mandatory) {
+            if (sa instanceof forge.game.trigger.WrappedAbility) {
+                return shouldRunAiTrigger(((forge.game.trigger.WrappedAbility) sa).getWrappedAbility(), mandatory);
+            }
+            if (sa.getApi() != null) {
+                return SpellApiToAi.Converter.get(sa).doTrigger(ai, sa, mandatory);
+            }
+            return sa.getPayCosts().isFree() && !sa.usesTargeting();
+        }
+
         AiController controller() { return ((PlayerControllerAi) ai.getController()).getAi(); }
 
         List<SpellAbility> plays() {
@@ -161,7 +172,7 @@ public class AiReportScenarioTest extends AITest {
                             sb.append(" [etbCheck=").append(controller().checkETBEffects(k, main, null));
                             for (final forge.game.replacement.ReplacementEffect re : k.getReplacementEffects()) {
                                 final SpellAbility ex = re.getOverridingAbility();
-                                if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(controller().doTrigger(ex.copy(ai), false))
+                                if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(shouldRunAiTrigger(ex.copy(ai), false))
                                         .append(" decision=").append(SpellApiToAi.Converter.get(ex).doTriggerNoCostWithSubs(ai, ex.copy(ai), false))
                                         .append(" opposing permanents with an activated ability=").append(CardLists.getValidCards(
                                                 ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, k, ex)); }
@@ -170,7 +181,7 @@ public class AiReportScenarioTest extends AITest {
                                 if (tr.getMode() != forge.game.trigger.TriggerType.ChangesZone || !"Battlefield".equals(tr.getParam("Destination"))) { continue; }
                                 sb.append(" trigger(stack=").append(game.getStack().size()).append("):");
                                 for (SpellAbility ex = tr.ensureAbility().copy(ai); ex != null; ex = ex.getSubAbility()) {
-                                    sb.append(' ').append(ex.getApi()).append('=').append(controller().doTrigger(ex, false));
+                                    sb.append(' ').append(ex.getApi()).append('=').append(shouldRunAiTrigger(ex, false));
                                 }
                             }
                             sb.append(']');
@@ -756,6 +767,57 @@ public class AiReportScenarioTest extends AITest {
                     final Card blocker = c.bf("Chameleon Colossus", c.ai);
                     final Card att = c.bf("Craw Wurm", c.opp);
                     final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("sakura-tribe-elder-after-block", "Sakura-Tribe Elder cashes in after blocking a creature that would kill it", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.bf("Forest", c.ai); c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("sakura-tribe-elder-keeps-profitable-trade", "Sakura-Tribe Elder does not sacrifice itself when its block also kills the attacker", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Sakura-Tribe Elder", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("sakura-tribe-elder-stays-to-stop-trample", "Sakura-Tribe Elder blocks a trampler instead of sacrificing itself and letting all damage through", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("spore-frog-after-block-trample", "Spore Frog uses its combat-damage prevention after blocking a trampler", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Spore Frog", c -> {
+                    c.ai.setLife(4, null);
+                    final Card blocker = c.bf("Spore Frog", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("goblin-legionnaire-insufficient-trample-prevention", "Goblin Legionnaire does not sacrifice itself for a two-damage shield that still leaves lethal trample damage", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Goblin Legionnaire", c -> {
+                    c.ai.setLife(2, null);
+                    c.bf("Plains", c.ai); // can pay the white activation cost
+                    final Card blocker = c.bf("Goblin Legionnaire", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
                     c.game.getPhaseHandler().setCombat(combat);
                 }));
         // ---- bounce: a tempo play, not for the creature that gives them another trigger
@@ -1523,9 +1585,58 @@ public class AiReportScenarioTest extends AITest {
                     final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
                             .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
                     final SpellAbility playSa = play.ensureAbility();
+                    playSa.setTrigger(play);
                     playSa.setActivatingPlayer(c.ai);
-                    return SpellApiToAi.Converter.get(playSa).doTriggerNoCostWithSubs(c.ai, playSa, false).willingToPlay() ? null
-                            : "the AI would not cast the suspended Rift Bolt at Shalai";
+                    if (bolt.hasSuspend() || !"TIME".equals(play.getParam("CounterType"))
+                            || !"0".equals(play.getParam("NewCounterAmount"))) {
+                        return "scenario did not model the removal of the last TIME counter";
+                    }
+                    final Card shalai = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Shalai, Voice of Plenty")).findFirst().get();
+                    if (!ComputerUtil.playNoStack(c.ai, playSa, c.game, true)) {
+                        return "the suspended Rift Bolt Play effect did not resolve";
+                    }
+                    if (c.game.getStack().isEmpty()) {
+                        return "the suspended Rift Bolt was not cast; the stack is empty";
+                    }
+                    final SpellAbility cast = c.game.getStack().peekAbility();
+                    return cast != null && "Rift Bolt".equals(cast.getHostCard().getName())
+                            && cast.getTargets().contains(shalai) ? null
+                            : "the suspended Rift Bolt was not cast targeting Shalai; stack=" + c.game.getStack();
+                }));
+        l.add(new Scenario("rift-bolt-suspended-crystal-barricade", "suspended Rift Bolt with only Crystal Barricade to aim at (the player is hexproof)", Fid.APPROX,
+                "UPKEEP", true, c -> { c.exile("Rift Bolt", c.ai); c.bf("Crystal Barricade", c.opp); },
+                c -> {
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Exile).stream().filter(k -> k.getName().equals("Rift Bolt")).findFirst().get();
+                    final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
+                            .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
+                    final SpellAbility playSa = play.ensureAbility();
+                    playSa.setTrigger(play);
+                    playSa.setActivatingPlayer(c.ai);
+                    if (bolt.hasSuspend() || !"TIME".equals(play.getParam("CounterType"))
+                            || !"0".equals(play.getParam("NewCounterAmount"))) {
+                        return "scenario did not model the removal of the last TIME counter";
+                    }
+                    final Card barricade = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Crystal Barricade")).findFirst().get();
+                    if (!ComputerUtil.playNoStack(c.ai, playSa, c.game, true)) {
+                        return "the suspended Rift Bolt Play effect did not resolve";
+                    }
+                    if (c.game.getStack().isEmpty()) {
+                        return "the suspended Rift Bolt was not cast; the stack is empty";
+                    }
+                    final SpellAbility cast = c.game.getStack().peekAbility();
+                    return cast != null && "Rift Bolt".equals(cast.getHostCard().getName())
+                            && cast.getTargets().contains(barricade) ? null
+                            : "the suspended Rift Bolt was not cast targeting Crystal Barricade; stack=" + c.game.getStack();
+                }));
+        l.add(play("scapeshift-valakut-library-lethal", "Scapeshift fetches Valakut and seven Mountains as a lethal batch", Fid.APPROX,
+                M1, true, "Scapeshift", c -> {
+                    c.richMana(); c.hand("Scapeshift", c.ai); c.lib("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 7, c.ai);
+                }));
+        l.add(noPlay("scapeshift-valakut-not-lethal", "Scapeshift waits when its six fetched Mountains only deal 18", Fid.APPROX,
+                M1, true, "Scapeshift", c -> {
+                    c.richMana(); c.hand("Scapeshift", c.ai); c.bf("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 6, c.ai);
                 }));
         // keyword abilities that aim at a creature (Arnjlot's Ascent) follow the same timing, and shields only for a creature in the fight
         l.add(aimed("kw-targeted-flying-block", "Wind Drake attacks: flying for the blocker, in the declare attackers step", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,

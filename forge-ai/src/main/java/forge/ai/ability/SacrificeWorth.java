@@ -39,7 +39,8 @@ public final class SacrificeWorth {
     /** Whether this is an optional sacrifice of the AI's permanents that has no logic of its own. */
     public static boolean applies(final SpellAbility sa) {
         return sa != null && !sa.hasParam("AILogic") && sa.getActivatingPlayer() != null
-                && !"Self".equals(sa.getParamOrDefault("SacValid", "Self"));
+                && !"Self".equals(sa.getParamOrDefault("SacValid", "Self"))
+                && (sa.getHostCard() == null || !"Scapeshift".equals(sa.getHostCard().getName()));
     }
 
     /** The answer to "do you want to sacrifice?". */
