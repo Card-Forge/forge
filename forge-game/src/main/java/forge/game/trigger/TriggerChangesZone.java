@@ -108,10 +108,19 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if ("Battlefield".equals(getParam("Origin")) && getActiveZone() != null && getActiveZone().contains(ZoneType.Graveyard)) {
-            // extra check for Boneyard Scourge
-            CardCollectionView lastState = (CardCollectionView) runParams.get(AbilityKey.LastStateGraveyard);
-            if (!lastState.contains(getHostCard())) {
+        // CR 603.10a: a leaves-the-battlefield trigger looks back in time, so its host must already have been
+        // where the trigger works before the event. On the battlefield: a card returned by "exile until this
+        // leaves the battlefield" (#9484). In the graveyard: a card that only just got there (Boneyard Scourge).
+        // A delayed trigger has no active zone and is left alone; a host that has itself left is not in play,
+        // so its own leaves trigger (registered from its last known information) still fires.
+        if ("Battlefield".equals(runParams.get(AbilityKey.Origin)) && getActiveZone() != null) {
+            CardCollectionView lastState = null;
+            if (getActiveZone().contains(ZoneType.Battlefield) && getHostCard().isInPlay()) {
+                lastState = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            } else if ("Battlefield".equals(getParam("Origin")) && getActiveZone().contains(ZoneType.Graveyard)) {
+                lastState = (CardCollectionView) runParams.get(AbilityKey.LastStateGraveyard);
+            }
+            if (lastState != null && !lastState.contains(getHostCard())) {
                 return false;
             }
         }
