@@ -133,6 +133,7 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
+    private static boolean borderlessFullscreen; //the launcher opened Borderless Fullscreen, see setBorderlessFullscreen
     public static final int HIGH_SPRITES_CAP = 1500; // Adventure and Classic sprites capacity
     public static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
@@ -292,7 +293,7 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid() || deviceAdapter == null || Gdx.graphics == null) {
             return;
         }
-        boolean confine = Gdx.graphics.isFullscreen()
+        boolean confine = (Gdx.graphics.isFullscreen() || borderlessFullscreen)
                 && FModel.getPreferences().getPrefBoolean(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN);
         deviceAdapter.setMouseConfined(confine);
     }
@@ -1807,5 +1808,10 @@ public class Forge implements ApplicationListener {
 
     public static void setDesktopAutoOrientation(boolean auto) {
         desktopAutoOrientation = auto;
+    }
+
+    /** Set by the desktop launcher when it opened Borderless Fullscreen instead of regular fullscreen. */
+    public static void setBorderlessFullscreen(boolean borderless) {
+        borderlessFullscreen = borderless;
     }
 }

@@ -13,6 +13,7 @@ public class SettingData {
     public int height;
     public String plane;
     public boolean fullScreen;
+    public boolean borderlessFullScreen; //with fullScreen: fill the screen without minimizing when another app or monitor takes focus, see GameLauncher
     public String videomode;
     public String lastActiveSave;
     // Legacy ratio adjustments, no longer used (cards keep their ratio automatically). Kept so older settings.json files still parse.
