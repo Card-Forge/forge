@@ -410,6 +410,8 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         for (int i = 0; i < 7; i++) {
             addCardToZone("Mountain", ai, ZoneType.Library);
         }
+        // a creature that three damage would kill is a legal target too: only the lethal batch makes the opponent the pick
+        final Card bears = addCardToZone("Grizzly Bears", opponent, ZoneType.Battlefield);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
 
         AssertJUnit.assertTrue("the lethal Scapeshift was not cast", ComputerUtil.playStack(cast, ai, game));
@@ -423,6 +425,41 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         }
         AssertJUnit.assertTrue("the simultaneous Valakut triggers did not send 21 damage to the opponent",
                 game.isGameOver() || opponent.getLife() <= 0);
+        AssertJUnit.assertTrue("the Valakut triggers went at a creature instead of the opponent", bears.isInZone(ZoneType.Battlefield));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftIsOrdinaryRampWithoutAValakut() {
+        setUp();
+        mana(2);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertFalse("no Valakut to wait for: no lethal-only rule", RampPlan.scapeshiftMustWait(ai));
+        AssertJUnit.assertFalse("no Valakut line to force either", RampPlan.scapeshiftLethal(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftCountsASecondValakutFetchedWithTheMountains() {
+        setUp();
+        addCards("Mountain", 7, ai);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        game.getPlayers().get(0).setLife(9, null);
+
+        // three lands sacrificed fetch a second Valakut and two Mountains: two Valakuts see two Mountains each
+        AssertJUnit.assertEquals(12, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertEquals(3, RampPlan.scapeshiftLandsToSacrifice(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
+        final CardCollection pool = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        final CardCollection picks = RampPlan.picks(ai, pool, 3);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("Valakut, the Molten Pinnacle", picks.get(0).getName());
+        AssertJUnit.assertEquals(3, picks.size());
     }
 
     @Test(timeOut = 120000)
@@ -455,5 +492,20 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
         AssertJUnit.assertNull("no Dreams: no kill",
                 ComboAssembly.finish(ai, java.util.Collections.singletonList(peer.getFirstSpellAbility()), s -> true));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftCountsEveryValakutInPlay() {
+        setUp();
+        addCards("Mountain", 6, ai);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        game.getPlayers().get(0).setLife(9, null);
+
+        // two lands sacrificed, two Mountains in: four Valakut triggers of three damage
+        AssertJUnit.assertEquals(12, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
     }
 }

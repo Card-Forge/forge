@@ -62,14 +62,39 @@ public final class RampPlan {
         return valakut && way;
     }
 
-    /** The damage a Scapeshift cast now would do through Valakut, in play or still in the library: 0 for none. */
-    public static int scapeshiftDamage(final Player ai) {
-        boolean valakutInPlay = false;
+    private static boolean isValakutLand(final Card c) {
+        return isValakut(c) && c.isLand();
+    }
+
+    /** Whether a Valakut land is in hand, in play or in the library: only then is Scapeshift a Valakut spell. */
+    public static boolean valakutAccessible(final Player ai) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Battlefield)) {
+            if (isValakutLand(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** One Scapeshift: lands sacrificed, Valakuts among the lands fetched, and the damage that comes of it. */
+    private static final class Line {
+        int damage;
+        int sacrificed;
+        int valakuts;
+    }
+
+    /**
+     * The best Scapeshift line. Every Valakut that is in play, or that enters together
+     * with the Mountains, triggers for each Mountain that enters: fetching another Valakut doubles the damage for the
+     * price of one Mountain.
+     */
+    private static Line bestLine(final Player ai) {
+        int valakutsInPlay = 0;
         int lands = 0;
         int mountainsInPlay = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (isValakut(c)) {
-                valakutInPlay = true;
+            if (isValakutLand(c)) {
+                valakutsInPlay++;
             } else if (c.isLand()) {
                 lands++;
                 if (isMountain(c)) {
@@ -77,75 +102,85 @@ public final class RampPlan {
                 }
             }
         }
-        boolean valakutInLibrary = false;
+        int valakutsInLibrary = 0;
         int mountainsInLibrary = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Library)) {
-            if (isValakut(c)) {
-                valakutInLibrary = true;
+            if (isValakutLand(c)) {
+                valakutsInLibrary++;
             } else if (isMountain(c)) {
                 mountainsInLibrary++;
             }
         }
-        if (!valakutInPlay && !valakutInLibrary) {
-            return 0;
+        final Line best = new Line();
+        if (valakutsInPlay + valakutsInLibrary == 0) {
+            return best;
         }
-        final int extra = !valakutInPlay ? 1 : 0; // the Valakut fetched takes one of the searched lands
-        final int sacrificed = Math.min(lands, mountainsInLibrary + extra);
-        final int entering = sacrificed - extra;
-        if (entering <= 0) {
+        // the plain line: one Valakut fetched when none is in play, as many lands as there are to fetch
+        best.valakuts = valakutsInPlay == 0 ? 1 : 0;
+        best.sacrificed = Math.min(lands, mountainsInLibrary + best.valakuts);
+        best.damage = lineDamage(valakutsInPlay, lands, mountainsInPlay, mountainsInLibrary, best.sacrificed, best.valakuts);
+        for (int j = 0; j <= valakutsInLibrary; j++) {
+            for (int s = j + 1; s <= Math.min(lands, mountainsInLibrary + j); s++) {
+                final int damage = lineDamage(valakutsInPlay, lands, mountainsInPlay, mountainsInLibrary, s, j);
+                if (damage > best.damage) {
+                    best.damage = damage;
+                    best.sacrificed = s;
+                    best.valakuts = j;
+                }
+            }
+        }
+        return best;
+    }
+
+    private static int lineDamage(final int valakutsInPlay, final int lands, final int mountainsInPlay,
+                                  final int mountainsInLibrary, final int sacrificed, final int valakutsFetched) {
+        final int entering = sacrificed - valakutsFetched;
+        final int active = valakutsInPlay + valakutsFetched;
+        if (active <= 0 || entering <= 0 || entering > mountainsInLibrary) {
             return 0;
         }
         // the lands sacrificed are the ones that are not Mountains first
         final int nonMountains = lands - mountainsInPlay;
         final int keptMountains = mountainsInPlay - Math.max(0, sacrificed - nonMountains);
         // each Mountain that enters sees the others: the ones that stay and the ones that enter with it
-        return keptMountains + entering - 1 >= OTHER_MOUNTAINS ? DAMAGE * entering : 0;
+        return keptMountains + entering - 1 >= OTHER_MOUNTAINS ? DAMAGE * entering * active : 0;
     }
 
-    /** Whether a Scapeshift should be held because its current Valakut line is not lethal. */
-    public static boolean scapeshiftMustWait(final Player ai) {
+    /** The damage a Scapeshift cast now would do through Valakut, in play or still in the library: 0 for none. */
+    public static int scapeshiftDamage(final Player ai) {
+        return bestLine(ai).damage;
+    }
+
+    /** Whether the Valakut line kills an opponent now. */
+    public static boolean scapeshiftLethal(final Player ai) {
         final int damage = scapeshiftDamage(ai);
         for (final Player opponent : ai.getOpponents()) {
             if (opponent.canLoseLife() && !opponent.cantLoseForZeroOrLessLife() && damage >= opponent.getLife()) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
+    }
+
+    /**
+     * Whether a Scapeshift should be held because its Valakut line is not lethal. A deck without an accessible Valakut
+     * uses Scapeshift as ordinary ramp: no opinion, the normal evaluation decides.
+     */
+    public static boolean scapeshiftMustWait(final Player ai) {
+        return valakutAccessible(ai) && !scapeshiftLethal(ai);
     }
 
     /** The number of lands to sacrifice for the best Scapeshift fetch this turn. Valakut itself is not sacrificed. */
     public static int scapeshiftLandsToSacrifice(final Player ai) {
-        boolean valakutInPlay = false;
-        boolean valakutInLibrary = false;
-        int lands = 0;
-        int mountainsInLibrary = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (isValakut(c)) {
-                valakutInPlay = true;
-            } else if (c.isLand()) {
-                lands++;
-            }
-        }
-        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
-            if (isValakut(c)) {
-                valakutInLibrary = true;
-            } else if (isMountain(c)) {
-                mountainsInLibrary++;
-            }
-        }
-        if (!valakutInPlay && !valakutInLibrary) {
-            return 0;
-        }
-        final int valakutSlot = valakutInPlay ? 0 : 1;
-        return Math.min(lands, mountainsInLibrary + valakutSlot);
+        return bestLine(ai).sacrificed;
     }
 
-    /** Existing Mountains that the Scapeshift sacrifice chooser must preserve for the fetched Mountains to trigger. */
+    /** Existing Mountains that the Scapeshift sacrifice chooser must preserve for the fetched Mountains to trigger it. */
     public static int scapeshiftMountainsToKeep(final Player ai) {
         int lands = 0;
         int mountainsInPlay = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (isValakut(c) || !c.isLand()) {
+            if (isValakutLand(c) || !c.isLand()) {
                 continue;
             }
             lands++;
@@ -158,13 +193,32 @@ public final class RampPlan {
         return Math.max(0, mountainsInPlay - sacrificedMountains);
     }
 
-    /**
-     * The lands to search for, or null for no opinion: Valakut first while it is not in play, then Mountains. The pool has to be lands (a creature search is not this plan's).
-     */
-    public static CardCollection picks(final Player ai, final Iterable<Card> pool, final int n) {
-        if (ai == null || pool == null || n <= 0 || !isValakutDeck(ai)) {
-            return null;
+    /** How many of the {@code total} lands searched for should be Valakuts: the count that deals the most damage. */
+    private static int valakutsToFetch(final Player ai, final int total, final int valakutsInLibrary) {
+        int valakutsInPlay = 0;
+        int mountainsInPlay = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (isValakutLand(c)) {
+                valakutsInPlay++;
+            } else if (c.isLand() && isMountain(c)) {
+                mountainsInPlay++;
+            }
         }
+        int best = valakutsInPlay == 0 && valakutsInLibrary > 0 ? 1 : 0;
+        int bestDamage = 0;
+        for (int j = 0; j <= Math.min(valakutsInLibrary, total); j++) {
+            final int entering = total - j;
+            final int damage = valakutsInPlay + j > 0 && entering > 0 && mountainsInPlay + entering - 1 >= OTHER_MOUNTAINS
+                    ? DAMAGE * entering * (valakutsInPlay + j) : 0;
+            if (damage > bestDamage) {
+                bestDamage = damage;
+                best = j;
+            }
+        }
+        return best;
+    }
+
+    private static CardCollection landsOnly(final Iterable<Card> pool) {
         final CardCollection lands = new CardCollection();
         for (final Card c : pool) {
             if (!c.isLand()) {
@@ -172,16 +226,14 @@ public final class RampPlan {
             }
             lands.add(c);
         }
-        boolean valakutInPlay = false;
-        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            valakutInPlay |= isValakut(c);
-        }
+        return lands;
+    }
+
+    private static CardCollection order(final CardCollection lands, final int valakuts, final int n) {
         final CardCollection out = new CardCollection();
-        if (!valakutInPlay) {
-            for (final Card c : lands) {
-                if (isValakut(c) && out.size() < n) {
-                    out.add(c);
-                }
+        for (final Card c : lands) {
+            if (isValakutLand(c) && out.size() < Math.min(n, valakuts)) {
+                out.add(c);
             }
         }
         // basic Mountains first: they thin the deck of the lands that count, and nothing else is needed from them
@@ -195,7 +247,53 @@ public final class RampPlan {
                 out.add(c);
             }
         }
+        return out;
+    }
+
+    private static int count(final Iterable<Card> cards) {
+        int n = 0;
+        for (final Card c : cards) {
+            if (isValakutLand(c)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /**
+     * The lands to search for, or null for no opinion: the Valakuts that add damage (one while none is in play, more
+     * when another Valakut sees the Mountains that enter with it), then Mountains. The pool has to be lands (a creature
+     * search is not this plan's).
+     */
+    public static CardCollection picks(final Player ai, final Iterable<Card> pool, final int n) {
+        if (ai == null || pool == null || n <= 0 || !isValakutDeck(ai)) {
+            return null;
+        }
+        final CardCollection lands = landsOnly(pool);
+        if (lands == null) {
+            return null;
+        }
+        final CardCollection out = order(lands, valakutsToFetch(ai, n, count(lands)), n);
         return out.isEmpty() ? null : out;
+    }
+
+    /**
+     * The next land of a search that is made one card at a time, {@code total} cards in all: the cards picked already
+     * are gone from the pool but still in the library, which tells how many Valakuts are done.
+     */
+    public static Card nextPick(final Player ai, final Iterable<Card> pool, final int total) {
+        if (ai == null || pool == null || total <= 0 || !isValakutDeck(ai)) {
+            return null;
+        }
+        final CardCollection lands = landsOnly(pool);
+        if (lands == null) {
+            return null;
+        }
+        final int inLibrary = count(ai.getCardsIn(ZoneType.Library));
+        final int picked = inLibrary - count(lands);
+        final int wanted = valakutsToFetch(ai, total, inLibrary) - picked;
+        final CardCollection out = order(lands, Math.max(0, wanted), 1);
+        return out.isEmpty() ? null : out.get(0);
     }
 
     /** Whether Kessig Wolf Run's pump waits: it is for an attacker of the AI after the blockers are declared. */

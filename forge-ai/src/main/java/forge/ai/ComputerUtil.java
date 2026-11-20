@@ -932,7 +932,7 @@ public class ComputerUtil {
             // Otherwise, continue to choose permanents to sacrifice to avoid dying
         }
 
-        if ("Scapeshift".equals(host.getName())) {
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
             // Keep the payoff and the existing Mountains needed for the fetched Mountains to trigger it.
             remaining.removeIf(c -> c.getName().startsWith("Valakut"));
             final CardCollection mountains = CardLists.filter(remaining, c -> c.getType().hasSubtype("Mountain"));
@@ -1002,7 +1002,7 @@ public class ComputerUtil {
         }
 
         int max = Math.min(remaining.size(), amount);
-        if ("Scapeshift".equals(host.getName())) {
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
             max = Math.min(max, RampPlan.scapeshiftLandsToSacrifice(ai));
         }
 

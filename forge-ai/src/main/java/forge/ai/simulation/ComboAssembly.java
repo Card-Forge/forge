@@ -72,11 +72,7 @@ public final class ComboAssembly {
         if (!piece.getName().equals("Scapeshift")) {
             return false;
         }
-        int life = Integer.MAX_VALUE;
-        for (final Player opp : ai.getOpponents()) {
-            life = Math.min(life, opp.getLife());
-        }
-        return RampPlan.scapeshiftDamage(ai) < life;
+        return RampPlan.scapeshiftMustWait(ai); // a deck without a Valakut uses Scapeshift as ordinary ramp
     }
 
     /**

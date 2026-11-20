@@ -2358,7 +2358,8 @@ public class AiController {
         // A lethal Valakut line is a deterministic win; do not let deck-removal heuristics hide Scapeshift.
         for (final SpellAbility candidate : saList) {
             final Card host = candidate.getHostCard();
-            if (host != null && "Scapeshift".equals(host.getName()) && !RampPlan.scapeshiftMustWait(player)) {
+            if (host != null && "Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(player)
+                    && RampPlan.scapeshiftLethal(player)) {
                 candidate.setActivatingPlayer(player);
                 if (!hasFailedToCast(candidate) && canPlaySa(candidate) == AiPlayDecision.WillPlay) {
                     return candidate;
@@ -2376,7 +2377,7 @@ public class AiController {
             }
             final Card h = spellAbility.getHostCard();
             return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc
-                    && !("Scapeshift".equals(h.getName()) && !RampPlan.scapeshiftMustWait(player)))
+                    && !("Scapeshift".equals(h.getName()) && RampPlan.valakutAccessible(player) && RampPlan.scapeshiftLethal(player)))
                     || ("Scapeshift".equals(h.getName()) && RampPlan.scapeshiftMustWait(player))
                     || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
                     || (flatMc && LoopRunner.held(player, spellAbility) && vetoed(spellAbility, "held-for-loop"))
@@ -3910,10 +3911,11 @@ public class AiController {
             if (tinkered != null) {
                 return tinkered;
             }
-            final CardCollection rampPicks = destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
-                    ? RampPlan.picks(player, fetchList, 1) : null;
-            if (rampPicks != null && !rampPicks.isEmpty()) {
-                return rampPicks.get(0);
+            final Card rampPick = destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
+                    ? RampPlan.nextPick(player, fetchList, Math.max(1, AbilityUtils.calculateAmount(sa.getHostCard(),
+                    sa.getParamOrDefault("ChangeNum", "1"), sa))) : null;
+            if (rampPick != null) {
+                return rampPick;
             }
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {
