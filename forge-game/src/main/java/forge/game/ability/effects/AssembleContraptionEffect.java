@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AssembleContraptionEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "DefinedAssembler", "DefinedContraption", "Reassemble", "Remember",
+    };
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

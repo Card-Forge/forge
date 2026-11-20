@@ -15,6 +15,9 @@ import forge.game.zone.ZoneType;
 import java.util.List;
 
 public class AssembleContraptionAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "DefinedContraption",
+    };
 
     private static CardCollectionView getDeck(Player ai, SpellAbility sa) {
         return ai.getCardsIn(sa.getApi() == ApiType.OpenAttraction ?
