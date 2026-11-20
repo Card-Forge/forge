@@ -31,6 +31,7 @@ public class QuestEdit extends FormPanel {
     public JTextField description=new JTextField();
     public JTextField synopsis=new JTextField();
     public JCheckBox storyQuest = new JCheckBox();
+    public JCheckBox oneTime = new JCheckBox();
     public JTextField rewardDescription=new JTextField();
     public QuestStageEditor stages =new QuestStageEditor();
 
@@ -61,6 +62,8 @@ public class QuestEdit extends FormPanel {
         center.add("Description:",description);
         center.add("Reward Description:",rewardDescription);
         center.add("Storyline Quest", storyQuest);
+        center.add("One-time quest", oneTime);
+        oneTime.setToolTipText("Prevent duplicate active quests and repeat offers after successful completion. Resets in New Game+.");
 
         add(center);
 
@@ -196,6 +199,7 @@ public class QuestEdit extends FormPanel {
         description.getDocument().addDocumentListener(new DocumentChangeListener(QuestEdit.this::updateQuest));
         synopsis.getDocument().addDocumentListener(new DocumentChangeListener(QuestEdit.this::updateQuest));
         storyQuest.getModel().addChangeListener(q -> QuestEdit.this.updateQuest());
+        oneTime.getModel().addChangeListener(q -> QuestEdit.this.updateQuest());
         rewardDescription.getDocument().addDocumentListener(new DocumentChangeListener(QuestEdit.this::updateQuest));
         stages.addChangeListener(e -> QuestEdit.this.updateQuest());
         offerEditor.addChangeListener(e -> QuestEdit.this.updateQuest());
@@ -264,6 +268,7 @@ public class QuestEdit extends FormPanel {
 
         currentData.name                   = name.getText();
         currentData.storyQuest             = storyQuest.isSelected();
+        currentData.oneTime                = oneTime.isSelected();
         currentData.synopsis               = synopsis.getText();
         currentData.description            = description.getText();
         currentData.rewardDescription      = rewardDescription.getText();
@@ -303,6 +308,7 @@ public class QuestEdit extends FormPanel {
         description.setText(currentData.description);
         synopsis.setText(currentData.synopsis);
         storyQuest.getModel().setSelected(currentData.storyQuest);
+        oneTime.setSelected(currentData.oneTime);
         rewardDescription.setText(currentData.rewardDescription);
         stages.setStages(currentData);
 
