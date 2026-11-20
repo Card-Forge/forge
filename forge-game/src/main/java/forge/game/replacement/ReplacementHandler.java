@@ -70,9 +70,10 @@ public class ReplacementHandler {
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         // only the ETB (Moved to battlefield) path needs a prelist; avoid allocating one for every check
-        final boolean etbCheck = ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination));
+        final boolean etbCheck = isEtbCheck(event, runParams);
         final CardCollection preList = etbCheck ? new CardCollection() : null;
         Card affectedLKI = null;
+        boolean lookedAhead = false;
         Card affectedCard = null;
 
         if (etbCheck) {
@@ -80,7 +81,7 @@ public class ReplacementHandler {
             // otherwise the RIOT card would cause a StackError
             final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
             if (causeRE != null && !causeRE.getOtherChoices().isEmpty()
-                    && ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
+                    && ReplacementType.Moved.equals(causeRE.getMode()) && layer != null && layer.equals(causeRE.getLayer())) {
                 // only return for same layer
                 return causeRE.getOtherChoices();
             }
@@ -103,7 +104,11 @@ public class ReplacementHandler {
             if (table != null && table.containsColumn(ZoneType.Battlefield)) {
                 entering = Sets.newHashSet(Iterables.concat(table.column(ZoneType.Battlefield).values()));
             }
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList, entering);
+            // the lookahead (and the reset below) is a full static check: skip both when it provably changes nothing
+            lookedAhead = game.getAction().canStaticLookaheadChangeAnything(ZoneType.Battlefield, affectedLKI, affectedCard);
+            if (lookedAhead) {
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList, entering);
+            }
 
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
@@ -189,7 +194,9 @@ public class ReplacementHandler {
             runParams.put(AbilityKey.Affected, affectedCard);
             runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
 
-            game.getAction().checkStaticAbilities(false);
+            if (lookedAhead) {
+                game.getAction().checkStaticAbilities(false);
+            }
         }
 
         return possibleReplacers;
@@ -242,19 +249,48 @@ public class ReplacementHandler {
             decider = ((Card) affected).getController();
         }
 
+        // The ETB lookahead is a full static check (plus a reset), so do it once for all layers instead of once per layer.
+        // The lists stay valid only until something was actually replaced: after a layer had replacers to choose from
+        // (and so may have changed the game), the remaining layers are computed fresh again.
+        Map<ReplacementLayer, List<ReplacementEffect>> precomputed = null;
+        if (isEtbCheck(event, runParams)) {
+            final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
+            if (causeRE == null || causeRE.getOtherChoices().isEmpty()) {
+                precomputed = new EnumMap<>(ReplacementLayer.class);
+                for (final ReplacementEffect re : getReplacementList(event, runParams, null)) {
+                    precomputed.computeIfAbsent(re.getLayer(), k -> new ArrayList<>()).add(re);
+                }
+            }
+        }
+
         // try out all layer
         for (ReplacementLayer layer : ReplacementLayer.values()) {
-            ReplacementResult res = run(event, runParams, layer, decider);
+            List<ReplacementEffect> known = null;
+            if (precomputed != null) {
+                known = new ArrayList<>(precomputed.getOrDefault(layer, Collections.emptyList()));
+                if (layer == ReplacementLayer.CantHappen && known.size() > 1) {
+                    known = new ArrayList<>(known.subList(0, 1)); // a scan for CantHappen stops at the first one
+                }
+            }
+            final boolean hadReplacers = known != null && !known.isEmpty();
+            ReplacementResult res = run(event, runParams, layer, decider, known);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
+            }
+            if (hadReplacers) {
+                precomputed = null; // the game may have changed
             }
         }
 
         return ReplacementResult.NotReplaced;
     }
 
-    private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider) {
-        final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
+    private static boolean isEtbCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination));
+    }
+
+    private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider, final List<ReplacementEffect> known) {
+        final List<ReplacementEffect> possibleReplacers = known != null ? known : getReplacementList(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
             return ReplacementResult.NotReplaced;
