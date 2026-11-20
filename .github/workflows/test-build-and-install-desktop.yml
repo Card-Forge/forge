@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         java: ['17', '21']
-    name: Test with Java ${{ matrix.Java }}
+    name: Test, build, and install Desktop (Java ${{ matrix.Java }})
     steps:
       - uses: actions/checkout@v3
 
@@ -27,3 +27,7 @@ jobs:
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
           mvn -U -B clean test
+
+      - name: Install (windows-linux)
+        run:
+          mvn -U -B clean -P windows-linux install
