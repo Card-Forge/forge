@@ -96,11 +96,9 @@ public final class PlayRelevance {
             }
             return any;
         }
-        if (sa.hasParam("Defined")) {
-            final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            return !defined.isEmpty() && !anyRelevant(defined);
-        }
-        return false;
+        // a pump with neither a target nor a "Defined" is for its own creature (Putrid Leech's "Pay 2 life: +2/+2" has none)
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParamOrDefault("Defined", "Self"), sa);
+        return !defined.isEmpty() && !anyRelevant(defined);
     }
 
     /**
@@ -113,7 +111,33 @@ public final class PlayRelevance {
         if (!isPlainPump(sa) || !ai.getGame().getStack().isEmpty()) {
             return null;
         }
-        return allOutOfTheFight(ai, sa) ? "pump-outside-combat" : null;
+        if (allOutOfTheFight(ai, sa)) {
+            return "pump-outside-combat";
+        }
+        return lifeForNothing(ai, sa);
+    }
+
+    /**
+     * A pump paid with life on an attacker nobody blocked (Putrid Leech): the extra damage is worth the life only when it
+     * kills the opponent. The pump on a creature that is blocked, or that blocks, is the fight's business (it can save the
+     * creature), and a pump paid with mana is left to the rollouts: spare mana for more damage costs nothing.
+     *
+     * @return "pump-life-unblocked", else null
+     */
+    private static String lifeForNothing(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (!sa.isActivatedAbility() || sa.usesTargeting() || !host.isCreature() || !ai.equals(host.getController())
+                || !"Self".equals(sa.getParamOrDefault("Defined", "Self")) || sa.getPayCosts() == null
+                || !sa.getPayCosts().hasSpecificCostType(forge.game.cost.CostPayLife.class)) {
+            return null;
+        }
+        final Combat combat = ai.getGame().getPhaseHandler().getCombat();
+        if (combat == null || !combat.isAttacking(host) || combat.isBlocked(host)) {
+            return null;
+        }
+        final Player defender = combat.getDefenderPlayerByAttacker(host);
+        final int att = sa.hasParam("NumAtt") ? AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa) : 0;
+        return defender != null && host.getNetCombatDamage() + att < defender.getLife() ? "pump-life-unblocked" : null;
     }
 
     private static boolean isPlainPump(final SpellAbility sa) {
