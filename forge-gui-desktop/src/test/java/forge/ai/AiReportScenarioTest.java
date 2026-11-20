@@ -1054,6 +1054,18 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("attack-deal-incompatible-blockers", "Three Wind Drakes against three ground blockers: the blockers cannot stop the lethal attack", Fid.APPROX, "END_OF_TURN", false,
                 c -> { c.opp.setLife(5, null); c.bf("Wind Drake", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
                 c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "ground blockers were incorrectly counted against flying attackers" : null));
+        l.add(new Scenario("attack-deal-double-strike-lethal", "A double striker deals both combat-damage steps", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(3, null); c.bf("Mirran Crusader", c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "double-strike damage was counted only once" : null));
+        l.add(new Scenario("attack-deal-trample-lethal", "A trampler gets lethal excess damage through its blocker", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(3, null); c.bf("Colossal Dreadmaw", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "trample damage through the blocker was ignored" : null));
+        l.add(new Scenario("attack-deal-trample-extra-blockers", "The defender may use multiple blockers to stop a trampler", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Colossal Dreadmaw", c.ai); c.bf("Grizzly Bears", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? null : "additional legal blockers were not assigned to stop trample"));
+        l.add(new Scenario("attack-deal-assign-as-unblocked", "An attacker that assigns damage as unblocked still hits the player when blocked", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Thorn Elemental", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "damage-as-unblocked was incorrectly treated as stopped by a blocker" : null));
         // ---- the real cards that offer "take X, then you can't attack me": The Second Doctor, Orzhov Advokist, Willie Lumpkin
         final java.util.function.Function<Ctx, SpellAbility> doctor = c -> c.bf("The Second Doctor", c.opp).getTriggers().get(0).ensureAbility();
         final java.util.function.Function<Ctx, SpellAbility> advokist = c -> c.bf("Orzhov Advokist", c.opp).getTriggers().get(0).ensureAbility();
