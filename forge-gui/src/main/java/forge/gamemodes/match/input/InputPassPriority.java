@@ -180,10 +180,10 @@ public class InputPassPriority extends InputSyncronizedBase {
             final UndoManager um = getController().getGame().getUndoManager();
             final int n = um.undosLeft();
             final String undoLabel = localizer.getMessage("lblUndo") + (n > 0 ? " (" + n + ")" : "");
-            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), undoLabel, true, true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblMatchPassPriority"), undoLabel, true, true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
-            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblMatchPassPriority"), localizer.getMessage("lblEndTurn"), true, true, true);
         }
 
         getController().getGui().alertUser();
