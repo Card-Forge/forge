@@ -21,7 +21,11 @@ import com.google.common.collect.ImmutableMap;
 import forge.LobbyPlayer;
 import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.DeckgenUtil;
+import forge.deck.DeckFormat;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -52,6 +56,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * <p>
@@ -602,6 +608,12 @@ public class QuestUtil {
         if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){
             variant.add(GameType.Commander);
         }
+        if(FModel.getQuest().isPlanechase()){
+            variant.add(GameType.Planechase);
+        }
+        if(FModel.getQuest().isArchenemyRumble()){
+            variant.add(GameType.ArchenemyRumble);
+        }
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
@@ -616,11 +628,38 @@ public class QuestUtil {
      * @return A newly made RegisteredPlayer specific to the quest's variant
      */
     private static RegisteredPlayer getRegisteredPlayerByVariant(Deck deck){
-        switch (FModel.getQuest().getDeckConstructionRules()) {
-            case Default:
-                return new RegisteredPlayer(deck);
-            case Commander:
-                return RegisteredPlayer.forCommander(deck);
+        QuestController quest = FModel.getQuest();
+        if (quest.isVariantFormat()) {
+            Set<GameType> appliedVariants = new HashSet<GameType>();
+            CardPool schemes = null;
+            CardPool planes = null;
+            if (quest.getDeckConstructionRules().equals(DeckConstructionRules.Commander)) {
+                appliedVariants.add(GameType.Commander);
+            }
+            if (quest.isPlanechase()) {
+                planes = deck.get(DeckSection.Planes);
+                if (planes == null || planes.isEmpty()) {
+                    planes = DeckgenUtil.generatePlanarPool();
+                }
+                appliedVariants.add(GameType.Planechase);
+            }
+            if (quest.isArchenemyRumble()) {
+                schemes = deck.get(DeckSection.Schemes);
+                if (schemes == null || schemes.isEmpty()) {
+                    schemes = DeckgenUtil.generateSchemePool();
+                }
+                appliedVariants.add(GameType.ArchenemyRumble);
+            }
+            return RegisteredPlayer.forVariants(1, appliedVariants, deck,
+                    schemes != null ? schemes.toFlatList() : null, true,
+                    planes != null ? planes.toFlatList(): null, null);
+        } else {
+            switch (quest.getDeckConstructionRules()) {
+                case Default:
+                    return new RegisteredPlayer(deck);
+                case Commander:
+                    return RegisteredPlayer.forCommander(deck);
+            }
         }
         return null;
     }
@@ -688,6 +727,16 @@ public class QuestUtil {
         if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.WORLD_RULES_CONFORMANCE) == 1) {
             if(FModel.getQuest().getFormat() != null)
                 errorMessage = FModel.getQuest().getFormat().getDeckConformanceProblem(deck);
+        }
+
+        if(FModel.getQuest().isPlanechase()) {
+            errorMessage = DeckFormat.getPlaneSectionConformanceProblem(deck.get(DeckSection.Planes));
+            if(errorMessage != null) return errorMessage;
+        }
+
+        if(FModel.getQuest().isArchenemyRumble()) {
+            errorMessage = DeckFormat.getSchemeSectionConformanceProblem(deck.get(DeckSection.Schemes));
+            if(errorMessage != null) return errorMessage;
         }
 
         return errorMessage;

@@ -21,8 +21,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.io.QuestDataIO;
 import forge.localinstance.properties.ForgeConstants;
@@ -75,6 +77,8 @@ public class QuestData {
      */
     public DeckConstructionRules deckConstructionRules = DeckConstructionRules.Default;
 
+    public Set<GameType> appliedVariants = new HashSet<GameType>();
+
     public QuestData() { //needed for XML serialization
     }
 
@@ -96,7 +100,7 @@ public class QuestData {
      *      deck construction rules e.g. Commander
      */
     public QuestData(String name0, int diff, QuestMode mode0, GameFormat userFormat,
-                     boolean allowSetUnlocks, final String startingWorld, DeckConstructionRules dcr) {
+                     boolean allowSetUnlocks, final String startingWorld, DeckConstructionRules dcr, Set<GameType> appliedVariants) {
         this.name = name0;
 
         if (userFormat != null) {
@@ -107,6 +111,7 @@ public class QuestData {
         this.assets = new QuestAssets(format);
         this.worldId = startingWorld;
         this.deckConstructionRules = dcr;
+        this.appliedVariants = appliedVariants;
     }
 
     /**

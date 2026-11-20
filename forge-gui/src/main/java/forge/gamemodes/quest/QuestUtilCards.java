@@ -265,6 +265,13 @@ public final class QuestUtilCards {
         final int nR = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty) * variantModifier);
 
         addAllCards(BoosterUtils.getQuestStarterDeck(formatStartingPool, nC, nU, nR, userPrefs));
+        if (FModel.getQuest().isPlanechase()) {
+            addAllCards(BoosterUtils.generatePlanarDeck());
+        }
+        if (FModel.getQuest().isArchenemyRumble()) {
+            addAllCards(BoosterUtils.generateSchemeDeck());
+        }
+
     }
 
     /**
@@ -632,6 +639,16 @@ public final class QuestUtilCards {
         questAssets.getShopList().addAllOfTypeFlat(decks);
     }
 
+    private void generatePlanesInShop(final int count) {
+        List<PaperCard> planes = FModel.getPlanechaseCards().toFlatList().stream().collect(StreamUtil.random(count));
+        questAssets.getShopList().addAllOfTypeFlat(planes);
+    }
+
+    private void generateSchemesInShop(final int count) {
+        List<PaperCard> schemes = FModel.getArchenemyCards().toFlatList().stream().collect(StreamUtil.random(count));
+        questAssets.getShopList().addAllOfTypeFlat(schemes);
+    }
+
     @SuppressWarnings("unchecked")
     private SealedTemplate getShopBoosterTemplate() {
         return new SealedTemplate(Lists.newArrayList(
@@ -703,6 +720,12 @@ public final class QuestUtilCards {
         generateAttractionsInShop(4);
         generateStickersInShop(4);
         generateContraptionsInShop(4);
+        if (questController.isPlanechase()) {
+            generatePlanesInShop(totalPacks);
+        }
+        if (questController.isArchenemyRumble()) {
+            generateSchemesInShop(totalPacks);
+        }
 
         if (questController.getFormat() == null || questController.getFormat().hasSnowLands()) {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
