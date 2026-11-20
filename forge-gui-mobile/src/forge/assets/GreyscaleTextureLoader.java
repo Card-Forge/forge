@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 
+import forge.gui.error.BugReporter;
+import io.sentry.Sentry;
+
 /**
  * libGDX decodes a one-channel image (a greyscale JPEG, as Scryfall serves for some mostly white cards) to an Alpha
  * pixmap, which draws its grey levels as transparency over black. This loader turns such images into RGB888.
@@ -28,7 +31,10 @@ class GreyscaleTextureLoader extends TextureLoader {
             TextureData data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
             if (data instanceof FileTextureData && data.getFormat() == Format.Alpha) {
                 data.prepare();
-                data = new GreyscaleFileTextureData(file, toRgb(data.consumePixmap()), format, genMipMaps);
+                Pixmap pixmap = toRgb(data.consumePixmap(), file.path());
+                data = pixmap.getFormat() == Format.Alpha
+                        ? new FileTextureData(file, pixmap, format, genMipMaps)
+                        : new GreyscaleFileTextureData(file, pixmap, format, genMipMaps);
             }
             // getTextureFilter() is shared, never store per-file data in it
             TextureParameter decoded = new TextureParameter();
@@ -39,13 +45,25 @@ class GreyscaleTextureLoader extends TextureLoader {
         super.loadAsync(manager, fileName, file, parameter);
     }
 
-    /** Copies each grey level of an Alpha pixmap into R, G and B, and disposes the source. */
-    static Pixmap toRgb(Pixmap alpha) {
+    /** Copies each grey level of an Alpha pixmap into R, G and B, and disposes the source. Returns the source if that fails. */
+    static Pixmap toRgb(Pixmap alpha, String source) {
         if (alpha.getFormat() != Format.Alpha)
             return alpha;
         int width = alpha.getWidth();
         int height = alpha.getHeight();
-        Pixmap rgb = new Pixmap(width, height, Format.RGB888);
+        Pixmap rgb;
+        try {
+            rgb = new Pixmap(width, height, Format.RGB888);
+        } catch (RuntimeException e) {
+            String error = "Greyscale image not converted, it will draw dark: " + source;
+            System.err.println(error);
+            e.printStackTrace();
+            if (BugReporter.isSentryEnabled()) {
+                Sentry.addBreadcrumb(error);
+                Sentry.captureException(e);
+            }
+            return alpha;
+        }
         ByteBuffer src = alpha.getPixels();
         ByteBuffer dst = rgb.getPixels();
         for (int i = 0, n = width * height; i < n; i++) {
@@ -66,7 +84,7 @@ class GreyscaleTextureLoader extends TextureLoader {
 
         @Override
         public Pixmap consumePixmap() {
-            return toRgb(super.consumePixmap());
+            return toRgb(super.consumePixmap(), getFileHandle().path());
         }
     }
 }
