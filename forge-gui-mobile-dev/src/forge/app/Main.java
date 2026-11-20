@@ -2,6 +2,7 @@ package forge.app;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
+import com.twelvemonkeys.imageio.stream.ByteArrayImageInputStream;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
@@ -12,6 +13,7 @@ import javax.imageio.ImageIO;
 import java.awt.Desktop;
 import java.awt.SplashScreen;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -150,6 +152,22 @@ public class Main {
         public void convertToPNG(InputStream input, OutputStream output) throws IOException {
             BufferedImage image = ImageIO.read(input);
             ImageIO.write(image, "png", output);
+        }
+
+        @Override
+        public DecodedImage decodeWebp(byte[] data) throws IOException {
+            BufferedImage image = ImageIO.read(new ByteArrayImageInputStream(data));
+            if (image == null)
+                throw new IOException("Not a WebP image");
+            int w = image.getWidth(), h = image.getHeight();
+            if (image.getType() != BufferedImage.TYPE_3BYTE_BGR)
+                return new DecodedImage(w, h, image.getRGB(0, 0, w, h, null, 0, w));
+            // getRGB converts each pixel through the colour model, which costs more than this copy
+            byte[] bgr = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+            int[] argb = new int[w * h];
+            for (int i = 0, j = 0; i < argb.length; i++, j += 3)
+                argb[i] = 0xFF000000 | (bgr[j + 2] & 0xFF) << 16 | (bgr[j + 1] & 0xFF) << 8 | (bgr[j] & 0xFF);
+            return new DecodedImage(w, h, argb);
         }
 
         @Override

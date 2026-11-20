@@ -33,6 +33,12 @@ public interface IDeviceAdapter {
     boolean needFileAccess();
     void requestFileAcces();
 
+    /** Decodes a WebP image, which libGDX cannot read. */
+    DecodedImage decodeWebp(byte[] data) throws IOException;
+
+    /** One ARGB int per pixel, rows from the top. */
+    record DecodedImage(int width, int height, int[] argb) {}
+
     /** Confine the mouse cursor to the window (desktop LibGDX only). Default no-op. */
     default void setMouseConfined(boolean confined) {
     }

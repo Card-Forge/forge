@@ -6,12 +6,14 @@ import forge.localinstance.properties.ForgeConstants;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
 
 public class SwingImageFetcher extends ImageFetcher {
 
@@ -67,10 +69,15 @@ public class SwingImageFetcher extends ImageFetcher {
                 }
             }
 
-            BufferedImage image;
+            byte[] bytes;
             try (InputStream is = connection.getInputStream()) {
-                image = ImageIO.read(is);
+                bytes = is.readAllBytes();
             }
+            if (ImageUtil.isWebp(bytes)) {
+                return saveAsSent(bytes, webpPath(newdespath));
+            }
+
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
             // First, save to a temporary file so that nothing tries to read
             // a partial download.
             File destFile = new File(newdespath + ".tmp");
@@ -102,6 +109,20 @@ public class SwingImageFetcher extends ImageFetcher {
                 return false;
             }
 
+            return true;
+        }
+
+        // Saved unchanged because re-encoding as JPEG loses quality and makes the file larger
+        private boolean saveAsSent(byte[] bytes, String path) throws IOException {
+            File destFile = new File(path + ".tmp");
+            destFile.getParentFile().mkdirs();
+            Files.write(destFile.toPath(), bytes);
+            if (!destFile.renameTo(new File(path))) {
+                System.err.println("Failed to rename image to " + path);
+                return false;
+            }
+            System.out.println("Saved image to " + path);
+            SwingUtilities.invokeLater(notifyObservers);
             return true;
         }
 

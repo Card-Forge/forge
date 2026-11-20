@@ -117,6 +117,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 c.disconnect();
                 return false;
             }
+            if (ImageUtil.isWebp(destFile.file()))
+                newdespath = webpPath(newdespath);
             destFile.moveTo(new FileHandle(newdespath));
             c.disconnect();
 

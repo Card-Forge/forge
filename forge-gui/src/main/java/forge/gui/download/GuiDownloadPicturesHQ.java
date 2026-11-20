@@ -63,7 +63,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         final String imageKey = ImageUtil.getImageKey(c, face, false);
         final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
 
-        if (existingImages.contains(imageKey + ".jpg")) {
+        if (existingImages.contains(imageKey + ".jpg") || existingImages.contains(imageKey + ".webp")) {
             return;
         }
 
@@ -96,7 +96,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         String scryfallurl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + "named?fuzzy=" + cardname;
         if(!setCode.equals(CardEdition.UNKNOWN_CODE)) scryfallurl += "&set=" + setCode.toLowerCase();
         if(face.equals("back")) scryfallurl += "&face=back";
-        scryfallurl += "&format=image";
+        scryfallurl += "&format=image&version=display";
 
         downloads.put(destPath, scryfallurl);
     }

@@ -872,6 +872,21 @@ public class Main extends AndroidApplication {
         }
 
         @Override
+        public DecodedImage decodeWebp(byte[] data) throws IOException {
+            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            if (bmp == null)
+                throw new IOException("Not a WebP image");
+            try {
+                int w = bmp.getWidth(), h = bmp.getHeight();
+                int[] argb = new int[w * h];
+                bmp.getPixels(argb, 0, w, 0, 0, w, h);
+                return new DecodedImage(w, h, argb);
+            } finally {
+                bmp.recycle();
+            }
+        }
+
+        @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             //app size
             WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);

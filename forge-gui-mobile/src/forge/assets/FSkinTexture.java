@@ -331,6 +331,8 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile;
         if (isPlanechaseBG) {
             preferredFile = FSkin.getCachePlanechaseFile(filename);
+            if (!preferredFile.exists())
+                preferredFile = FSkin.getCachePlanechaseFile(ImageFetcher.webpPath(filename));
         } else if (isAdventureBackground()) {
             // For adventure backgrounds, check adventure directories first
             preferredFile = getAdventureBackgroundFile();

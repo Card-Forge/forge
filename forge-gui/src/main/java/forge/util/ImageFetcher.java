@@ -85,7 +85,7 @@ public abstract class ImageFetcher {
                 && face != null && !face.isEmpty() && !"back".equals(face);
 
         if (!specVariant && !StringUtils.isBlank(setCode)) {
-            String size = useArtCrop ? "art_crop" : "normal";
+            String size = useArtCrop ? "art" : "grid";
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(setCode, card.getCollectorNumber(), langCode, face, size);
             if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
@@ -93,6 +93,27 @@ public abstract class ImageFetcher {
         String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD
                 + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
         if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
+    }
+
+    /** The image cached for a download path under any extension Forge reads, or null. Download paths are named .jpg before the format is known. */
+    public static File cachedFile(File file) {
+        for (String ext : new String[] { ".jpg", ".png", ".webp" }) {
+            File cached = new File(withExtension(file.getPath(), ext));
+            if (cached.exists()) {
+                return cached;
+            }
+        }
+        return file.exists() ? file : null;
+    }
+
+    public static String webpPath(String path) {
+        return withExtension(path, ".webp");
+    }
+
+    private static String withExtension(String path, String ext) {
+        String name = new File(path).getName();
+        int dot = name.lastIndexOf('.');
+        return dot < 0 ? path : path.substring(0, path.length() - name.length() + dot) + ext;
     }
 
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
@@ -170,7 +191,7 @@ public abstract class ImageFetcher {
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
-                    if (destFile.exists())
+                    if (cachedFile(destFile) != null)
                         return;
 
                     setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
@@ -308,7 +329,7 @@ public abstract class ImageFetcher {
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
             if (ImageKeys.missingCards.contains(filename)
                     || filename.equalsIgnoreCase("null.jpg")
-                    || destFile.exists())
+                    || cachedFile(destFile) != null)
                 return;
 
             // token-images.txt lets mods route specific tokens to hosted URLs.
@@ -378,7 +399,7 @@ public abstract class ImageFetcher {
             return;
         }
 
-        if (destFile.exists()) {
+        if (cachedFile(destFile) != null) {
             // TODO: Figure out why this codepath gets reached.
             // Ideally, fetchImage() wouldn't be called if we already have the image.
             if (prefix.equals(ImageKeys.CARD_PREFIX)) {
@@ -394,7 +415,7 @@ public abstract class ImageFetcher {
 
     /**
      * Fetch the Scryfall art-crop image for a card image key and cache it as the player's deck
-     * sleeve. Forces art_crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
+     * sleeve. Forces the art crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
      * under CACHE_SLEEVE_PICS_DIR keyed by a hash of the image key.
      */
     public void fetchSleeveArt(final String sleeveArtKey, final Callback callback) {
@@ -413,7 +434,7 @@ public abstract class ImageFetcher {
             return;
         }
         final File destFile = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(sleeveArtKey));
-        if (destFile.exists()) {
+        if (cachedFile(destFile) != null) {
             return;
         }
         final ArrayList<String> downloadUrls = new ArrayList<>();

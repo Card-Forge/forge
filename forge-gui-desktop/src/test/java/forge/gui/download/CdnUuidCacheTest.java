@@ -76,11 +76,11 @@ public class CdnUuidCacheTest {
     public void cdnUrl_matchesScryfallFormula() {
         String uuid = "4e7a547f-d1b0-4f4e-9a99-3c44fc89c048";
         Assert.assertEquals(
-                CdnUuidCache.cdnUrl(uuid, "front", "normal"),
-                "https://cards.scryfall.io/normal/front/4/e/" + uuid + ".jpg");
+                CdnUuidCache.cdnUrl(uuid, "front", "grid"),
+                "https://cards.scryfall.io/grid/front/4/e/" + uuid + ".webp");
         Assert.assertEquals(
-                CdnUuidCache.cdnUrl(uuid, "back", "art_crop"),
-                "https://cards.scryfall.io/art_crop/back/4/e/" + uuid + ".jpg");
+                CdnUuidCache.cdnUrl(uuid, "back", "art"),
+                "https://cards.scryfall.io/art/back/4/e/" + uuid + ".webp");
     }
 
     // --- happy path ---

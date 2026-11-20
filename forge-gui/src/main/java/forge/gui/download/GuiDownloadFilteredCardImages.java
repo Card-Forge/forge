@@ -8,6 +8,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.ScryfallRateLimiter;
 import forge.util.TextUtil;
@@ -130,7 +131,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                              (!imageKey.contains(".full") ? ".fullborder" : "");
         final File destFb = new File(ForgeConstants.CACHE_CARD_PICS_DIR, fbKey + ".jpg");
 
-        if (destFull.exists() || destFb.exists()) return;
+        if (ImageFetcher.cachedFile(destFull) != null || ImageFetcher.cachedFile(destFb) != null) return;
         if (downloads.containsKey(destFull.getAbsolutePath())) return;
         if (downloads.containsKey(destFb.getAbsolutePath())) return;
 
@@ -160,7 +161,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         // below if the warm-up loop above didn't resolve this set.
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(
-                    scryfallCode, collectorNum, langCode, face, "normal");
+                    scryfallCode, collectorNum, langCode, face, "grid");
             if (cdnUrl != null) return cdnUrl;
         }
 

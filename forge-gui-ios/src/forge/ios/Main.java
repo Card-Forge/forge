@@ -9,11 +9,19 @@ import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.robovm.apple.coregraphics.CGBitmapContext;
+import org.robovm.apple.coregraphics.CGBitmapInfo;
+import org.robovm.apple.coregraphics.CGColorSpace;
+import org.robovm.apple.coregraphics.CGImage;
+import org.robovm.apple.coregraphics.CGImageAlphaInfo;
+import org.robovm.apple.coregraphics.CGRect;
 import org.robovm.apple.foundation.NSAutoreleasePool;
+import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSTimeZone;
 import org.robovm.apple.foundation.NSBundle;
 import org.robovm.apple.foundation.NSProcessInfo;
 import org.robovm.apple.uikit.UIApplication;
+import org.robovm.apple.uikit.UIImage;
 import org.robovm.apple.uikit.UIPasteboard;
 import java.io.File;
 
@@ -404,6 +412,29 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void convertToPNG(InputStream input, OutputStream output) throws IOException {
             convertToJPEG(input, output);
+        }
+
+        @Override
+        public DecodedImage decodeWebp(byte[] data) throws IOException {
+            try (NSAutoreleasePool pool = new NSAutoreleasePool()) {
+                CGImage cg;
+                try {
+                    cg = new UIImage(new NSData(data)).getCGImage();
+                } catch (RuntimeException e) {
+                    throw new IOException("Not a WebP image", e);
+                }
+                if (cg == null)
+                    throw new IOException("Not a WebP image");
+                int w = (int) cg.getWidth(), h = (int) cg.getHeight();
+                int[] argb = new int[w * h];
+                // CoreGraphics only draws premultiplied alpha, which leaves opaque card images unchanged
+                CGBitmapContext ctx = CGBitmapContext.create(argb, w, h, 8, w * 4L, CGColorSpace.createDeviceRGB(),
+                        new CGBitmapInfo(CGBitmapInfo.ByteOrder32Little.value() | CGImageAlphaInfo.PremultipliedFirst.value()));
+                if (ctx == null)
+                    throw new IOException("No bitmap for a " + w + "x" + h + " image");
+                ctx.drawImage(new CGRect(0, 0, w, h), cg);
+                return new DecodedImage(w, h, argb);
+            }
         }
 
         @Override
