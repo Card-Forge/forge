@@ -35,6 +35,9 @@ public class ModifierData {
     public String[] blockedEnemyRewards; //Reward types enemies don't drop. A card reward without a cardName counts as "randomCard".
     public int maxLifeBonus;       //Added to max life while the modifier is on.
     public int maxLifeLostOnDefeat; //Max life lost for good each time the player loses a fight.
+    public boolean singleDeck;     //The player has one deck slot.
+    public boolean lockDeckCards;  //Cards can't leave the main deck or command zone after the deck editor closes.
+    public boolean noMaxDeckSize;  //Decks have no maximum size outside events.
     public EffectData effect;      //Added to every duel, written for the enemies like the plane's global effect.
 
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */

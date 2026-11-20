@@ -324,6 +324,14 @@
       "blockedEnemyRewards": ["deckCard", "randomCard"]
     },
     {
+      "name": "Endless Library",
+      "description": "You have only one deck. Cards cannot be removed once added. Your deck has no size limit.",
+      "icon": "TomeoftheBuilder",
+      "singleDeck": true,
+      "lockDeckCards": true,
+      "noMaxDeckSize": true
+    },
+    {
       "name": "Lingering Wounds",
       "description": "+10 max life. Lose a fight: lose 1 max life for good.",
       "icon": "TokenofBlood",
