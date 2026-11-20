@@ -1048,6 +1048,12 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("attack-deal-lethal", "Three Grizzly Bears against 5 life is lethal: refuse", Fid.APPROX, "END_OF_TURN", false,
                 c -> { c.opp.setLife(5, null); c.bf("Grizzly Bears", 3, c.ai); },
                 c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == false ? null : "the deal was judged wrongly (should be refused)"));
+        l.add(new Scenario("attack-deal-blocked-lethal", "Three 2/2 attackers against three 3/3 blockers: the nominal six damage is stopped", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Grizzly Bears", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? null : "suitable blockers stop the nominally lethal attack"));
+        l.add(new Scenario("attack-deal-incompatible-blockers", "Three Wind Drakes against three ground blockers: the blockers cannot stop the lethal attack", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Wind Drake", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "ground blockers were incorrectly counted against flying attackers" : null));
         // ---- the real cards that offer "take X, then you can't attack me": The Second Doctor, Orzhov Advokist, Willie Lumpkin
         final java.util.function.Function<Ctx, SpellAbility> doctor = c -> c.bf("The Second Doctor", c.opp).getTriggers().get(0).ensureAbility();
         final java.util.function.Function<Ctx, SpellAbility> advokist = c -> c.bf("Orzhov Advokist", c.opp).getTriggers().get(0).ensureAbility();
