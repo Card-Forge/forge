@@ -3,7 +3,6 @@ package forge.assets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.ByteOrder;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -11,7 +10,6 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import forge.Forge;
-import forge.interfaces.IDeviceAdapter.DecodedImage;
 import forge.util.ImageUtil;
 
 /**
@@ -20,8 +18,8 @@ import forge.util.ImageUtil;
  * TextureLoader honours a preset textureData and ignores the resolved FileHandle, so the AssetManager
  * owns the whole lifecycle (load/get/unload/dispose/context-loss reload) while the actual decode stays
  * a plain java.io byte read — iOS can't reliably load a libGDX FileHandle from Documents, but reading
- * bytes directly is proven. iOS card images are downscaled to at most {@link #MAX_CARD_TEX_DIM}px on the longest
- * side since the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so GL context-loss
+ * bytes directly is proven. WebP images are decoded by the platform, straight into the pixmap. iOS card
+ * images are downscaled to at most {@link #MAX_CARD_TEX_DIM}px on the longest side since the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so GL context-loss
  * reload re-decodes from disk. The border colour is sampled while decoding, so ImageCache doesn't decode again.
  */
 final class CardTextureData implements TextureData {
@@ -126,6 +124,8 @@ final class CardTextureData implements TextureData {
     // Proven iOS read: java.io bytes, not a libGDX FileHandle.
     private static Pixmap decodeFromDisk(String path) {
         File f = new File(path);
+        if (ImageUtil.isWebp(f))
+            return decodeWebp(f);
         byte[] bytes = new byte[(int) f.length()];
         FileInputStream fis = null;
         try {
@@ -140,43 +140,20 @@ final class CardTextureData implements TextureData {
                 try { fis.close(); } catch (IOException ignored) {}
             }
         }
-        if (ImageUtil.isWebp(bytes))
-            return decodeWebp(bytes, path);
         return new Pixmap(bytes, 0, bytes.length);
     }
 
-    private static Pixmap decodeWebp(byte[] bytes, String path) {
-        DecodedImage image;
+    private static Pixmap decodeWebp(File f) {
+        Pixmap[] pixmap = new Pixmap[1];
         try {
-            image = Forge.getDeviceAdapter().decodeWebp(bytes);
-        } catch (IOException e) {
-            throw new GdxRuntimeException("Failed decoding card image: " + path, e);
+            // a duplicate, so the platform's writes don't move the position GL uploads from
+            Forge.getDeviceAdapter().decodeWebp(f, (w, h) -> (pixmap[0] = new Pixmap(w, h, Format.RGBA8888)).getPixels().duplicate());
+        } catch (IOException | RuntimeException e) {
+            if (pixmap[0] != null)
+                pixmap[0].dispose();
+            throw new GdxRuntimeException("Failed decoding card image: " + f, e);
         }
-        int[] pixels = image.argb();
-        boolean opaque = true;
-        for (int c : pixels) {
-            if (c >>> 24 != 0xFF) {
-                opaque = false;
-                break;
-            }
-        }
-        if (!opaque) {
-            for (int i = 0; i < pixels.length; i++)
-                pixels[i] = (pixels[i] << 8) | (pixels[i] >>> 24);
-            Pixmap p = new Pixmap(image.width(), image.height(), Format.RGBA8888);
-            p.getPixels().duplicate().order(ByteOrder.BIG_ENDIAN).asIntBuffer().put(pixels);
-            return p;
-        }
-        // RGB888 like a decoded JPEG, a quarter less memory than RGBA8888
-        byte[] rgb = new byte[pixels.length * 3];
-        for (int i = 0, j = 0; i < pixels.length; i++, j += 3) {
-            rgb[j] = (byte) (pixels[i] >> 16);
-            rgb[j + 1] = (byte) (pixels[i] >> 8);
-            rgb[j + 2] = (byte) pixels[i];
-        }
-        Pixmap p = new Pixmap(image.width(), image.height(), Format.RGB888);
-        p.getPixels().duplicate().put(rgb);
-        return p;
+        return pixmap[0];
     }
 
     // Cap the longest side at MAX_CARD_TEX_DIM; returns src unchanged when already small enough,

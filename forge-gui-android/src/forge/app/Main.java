@@ -76,10 +76,12 @@ import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 public class Main extends AndroidApplication {
     private static final TaggedLogger netLog = Logger.tag("NETWORK");
@@ -872,15 +874,17 @@ public class Main extends AndroidApplication {
         }
 
         @Override
-        public DecodedImage decodeWebp(byte[] data) throws IOException {
-            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+        public void decodeWebp(File file, BiFunction<Integer, Integer, ByteBuffer> rgba) throws IOException {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            // ARGB_8888 is stored as R, G, B, A bytes, so it copies straight into the buffer
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            // Android premultiplies alpha by default, a Pixmap doesn't
+            options.inPremultiplied = false;
+            Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
             if (bmp == null)
                 throw new IOException("Not a WebP image");
             try {
-                int w = bmp.getWidth(), h = bmp.getHeight();
-                int[] argb = new int[w * h];
-                bmp.getPixels(argb, 0, w, 0, 0, w, h);
-                return new DecodedImage(w, h, argb);
+                bmp.copyPixelsToBuffer(rgba.apply(bmp.getWidth(), bmp.getHeight()));
             } finally {
                 bmp.recycle();
             }

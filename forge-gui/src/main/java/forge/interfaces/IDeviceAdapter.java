@@ -7,9 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 public interface IDeviceAdapter {
     boolean isConnectedToInternet();
@@ -33,11 +35,11 @@ public interface IDeviceAdapter {
     boolean needFileAccess();
     void requestFileAcces();
 
-    /** Decodes a WebP image, which libGDX cannot read. */
-    DecodedImage decodeWebp(byte[] data) throws IOException;
-
-    /** One ARGB int per pixel, rows from the top. */
-    record DecodedImage(int width, int height, int[] argb) {}
+    /**
+     * Decodes a WebP image, which libGDX cannot read, into the buffer {@code rgba} returns for its width and
+     * height: four bytes per pixel in R, G, B, A order, rows from the top.
+     */
+    void decodeWebp(File file, BiFunction<Integer, Integer, ByteBuffer> rgba) throws IOException;
 
     /** Confine the mouse cursor to the window (desktop LibGDX only). Default no-op. */
     default void setMouseConfined(boolean confined) {
