@@ -213,6 +213,24 @@ public class EventScene extends MenuScene implements IAfterMatch {
         blessing.setActor(blessingScroll);
         blessingScroll.setWidth(blessing.getWidth() - 5);
         blessing.layout();
+        if (blessingScroll.getHeight() > blessing.getHeight()) {
+            Color ink = new Color(0.12f, 0.11f, 0.09f, 1);
+            blessing.setStyle(RewardScene.thinScrollBarStyle(ink));
+            blessing.setFadeScrollBars(false);
+            blessing.setScrollingDisabled(true, false);
+            Table padded = new Table();
+            padded.add(blessingScroll).growX().top().padRight(6);
+            blessing.setActor(padded);
+            // the bar sits 12 below the page's top and 8 in from its thin right edge, and the arrow on the page below the text
+            Actor page = ui.findActor("stats");
+            RewardScene.MoreArrow arrow = new RewardScene.MoreArrow(blessing);
+            arrow.setColor(ink);
+            float bottom = page.getY() + 8 + arrow.getHeight() + 4;
+            blessing.setBounds(blessing.getX(), bottom, page.getRight() - 8 - blessing.getX(), page.getTop() - 12 - bottom);
+            arrow.setPosition(blessing.getX() + (blessing.getWidth() - arrow.getWidth()) / 2, page.getY() + 8);
+            blessing.layout();
+            blessing.getParent().addActor(arrow);
+        }
         window.add(root);
 
         metaDraftTable = ui.findActor("metaDraftTable");
