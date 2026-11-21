@@ -3,11 +3,12 @@ ManaCost:1 R
 Types:Artifact Equipment
 K:Equip:4 R
 K:MayEffectFromOpeningDeck:ChooseTeam
-SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$ If you're on the Mirran team, CARDNAME costs {2} more to cast and has For Mirrodin!\nIf you're on the Phyrexian team, CARDNAME has Living Weapon.
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0
 SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
 SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
-S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamMirran | ManaCost$ 3 R | AddKeyword$ For Mirrodin
-S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamPhyrexian | AddKeyword$ Living Weapon
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ TeamMirran
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamMirran | AddKeyword$ For Mirrodin | Description$ If you're on the Mirran team, CARDNAME costs {2} more to cast and has For Mirrodin!
+S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamPhyrexian | AddKeyword$ Living Weapon | Description$ If you're on the Phyrexian team, CARDNAME has Living Weapon.
 S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+1 and has trample.
 SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
 SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
