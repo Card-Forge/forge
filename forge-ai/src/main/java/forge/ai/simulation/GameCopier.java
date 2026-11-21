@@ -647,7 +647,17 @@ public class GameCopier {
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
-        String saDesc = sa.getDescription();
+        final String saDesc = sa.getDescription();
+        // two abilities of a card can share a description, cost included (Skyblade's Boon): the copy is built from the
+        // same script, so the ability in the same place is the same one
+        final Card host = sa.getHostCard();
+        if (host != null) {
+            final int index = host.getAllSpellAbilities().indexOf(sa);
+            final List<SpellAbility> all = Lists.newArrayList(c.getAllSpellAbilities());
+            if (index >= 0 && index < all.size() && saDesc.equals(all.get(index).getDescription())) {
+                return all.get(index);
+            }
+        }
         for (SpellAbility cardSa : c.getAllSpellAbilities()) {
             if (saDesc.equals(cardSa.getDescription())) {
                 return cardSa;

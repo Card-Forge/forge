@@ -1,5 +1,8 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -153,5 +156,58 @@ public class GameCopierTurnStateTest extends SimulationTest {
         final SpellAbility copied = find(copy, "Mild-Mannered Librarian").getSpellAbilities().getFirst();
         AssertJUnit.assertEquals(0, copied.getActivationsThisTurn());
         AssertJUnit.assertEquals(1, copied.getActivationsThisGame());
+    }
+
+    /** The card's activated abilities (not its spell), in the order of its script. */
+    private static List<SpellAbility> activated(Card c) {
+        final List<SpellAbility> res = new ArrayList<>();
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility()) {
+                res.add(sa);
+            }
+        }
+        return res;
+    }
+
+    /** "Activate only once each turn": activated twice this turn, it counts twice this turn and this game. */
+    @Test
+    public void anAbilityActivatedThisTurnKeepsEachActivation() {
+        final Game game = newGameInMain2(5);
+        final Player p = game.getPlayers().get(1);
+        final Card librarian = addCard("Mild-Mannered Librarian", p);
+        final SpellAbility animate = activated(librarian).get(0);
+        animate.setActivatingPlayer(p);
+        librarian.addAbilityActivated(animate);
+        librarian.addAbilityActivated(animate);
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final SpellAbility copied = activated(find(copy, "Mild-Mannered Librarian")).get(0);
+        AssertJUnit.assertEquals(2, copied.getActivationsThisTurn());
+        AssertJUnit.assertEquals(2, copied.getActivationsThisGame());
+    }
+
+    /**
+     * Skyblade's Boon has two abilities with the same cost and text (one from the battlefield, one from the graveyard):
+     * the second one's activations stay with the second one, not the first one with that description.
+     */
+    @Test
+    public void twoAbilitiesWithTheSameDescriptionKeepTheirOwnActivations() {
+        final Game game = newGameInMain2(5);
+        final Player p = game.getPlayers().get(1);
+        final Card boon = addCard("Skyblade's Boon", p);
+        boon.attachToEntity(addCard("Grizzly Bears", p), null); // an aura on nothing would go to the graveyard
+        final List<SpellAbility> abilities = activated(boon);
+        AssertJUnit.assertEquals(2, abilities.size());
+        AssertJUnit.assertEquals(abilities.get(0).getDescription(), abilities.get(1).getDescription());
+        final SpellAbility second = abilities.get(1);
+        second.setActivatingPlayer(p);
+        boon.addAbilityActivated(second);
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final List<SpellAbility> copied = activated(find(copy, "Skyblade's Boon"));
+        AssertJUnit.assertEquals(0, copied.get(0).getActivationsThisTurn());
+        AssertJUnit.assertEquals(1, copied.get(1).getActivationsThisTurn());
     }
 }
