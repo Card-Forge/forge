@@ -1,7 +1,6 @@
 Name:Introduction to Annihilation
 ManaCost:5
 Types:Sorcery Lesson
-A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Exile target nonland permanent. Its controller draws a card.
-SVar:DBDraw:DB$ Draw | Defined$ RememberedController | NumCards$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBDraw | SpellDescription$ Exile target nonland permanent. Its controller draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1
 Oracle:Exile target nonland permanent. Its controller draws a card.

@@ -123,11 +123,14 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        sortedPlayers.sort((p1, p2) -> {
-            final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            return Integer.compare(v1, v2);
-        });
+        // teammates must keep their adjacent seats (CR 805.1)
+        if (!gameRules.hasSharedTeamTurns()) {
+            sortedPlayers.sort((p1, p2) -> {
+                final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            });
+        }
 
         if (sortedPlayers.size() == 2) {
             title = TextUtil.concatNoSpace(sortedPlayers.get(0).getPlayer().getName(), " vs ", sortedPlayers.get(1).getPlayer().getName());
@@ -162,6 +165,8 @@ public class HostedMatch {
         game.AI_FLAT_MONTE_CARLO = FModel.getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO);
         // Desktop auto-detection: phones and tablets keep the light settings, a PC gets the maximum strength.
         game.AI_FLAT_MONTE_CARLO_MAX = !forge.gui.GuiBase.isMobile();
+        // ...and a phone gets the lite settings (attack search, cheap lookahead) instead of the bare profile values.
+        game.AI_FLAT_MONTE_CARLO_LITE = forge.gui.GuiBase.isMobile();
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -217,7 +222,6 @@ public class HostedMatch {
             if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
-                gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
@@ -263,7 +267,6 @@ public class HostedMatch {
 
         if (humanCount == 0) { //watch game but do not participate
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-            gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
             registerSpectator(gui, new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui));
         }
@@ -473,11 +476,9 @@ public class HostedMatch {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         humanController.setGui(gui);
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
                         event.subgame().subscribeToEvents(humanController.getYieldController());
@@ -505,11 +506,9 @@ public class HostedMatch {
                 for (final Player p : event.maingame().getPlayers()) {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.handleGameEvent(new GameEventTurnPhase(
                                 gameView.getPlayerTurn(), gameView.getPhase(), ""));

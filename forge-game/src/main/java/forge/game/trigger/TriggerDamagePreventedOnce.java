@@ -82,9 +82,9 @@ public class TriggerDamagePreventedOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        objects.put(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.DamageAmount);
     }
 
     @Override

@@ -135,6 +135,7 @@ public class CardFactory {
             copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
             copySA = targetSA.copy(c, controller, false);
+            copySA.setCastFromPlayEffect(false);
             // need to copy keyword
             if (targetSA.getKeyword() != null) {
                 KeywordInterface kw = targetSA.getKeyword().copy(c, false);

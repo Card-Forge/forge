@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -60,6 +62,7 @@ public class VStack extends FDropDown {
     private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.18f);
     private static final Color GLASS_PANE = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.6f);
     private static final TextRenderer textRenderer = new TextRenderer(true);
+    private static final float LANDSCAPE_MAX_HEIGHT_RATIO = 0.4f; //landscape: a long stack takes at most this share of the screen height and scrolls
 
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
@@ -80,6 +83,18 @@ public class VStack extends FDropDown {
 
     private static boolean slides() {
         return COMPACT_SLIDE_ANIMATED && VPlayerPanel.isCompactLayout();
+    }
+
+    /** Screen y of the stack list's bottom edge while it is showing, else 0; the tutorial note sits below it. */
+    public float getShownBottom() {
+        return isVisible() ? getTop() + getHeight() : 0f;
+    }
+
+    @Override
+    public void setVisible(final boolean visible0) {
+        final boolean changed = isVisible() != visible0;
+        super.setVisible(visible0);
+        if (changed) { notifyCoach(); } // now visible and positioned (or hidden), whoever opened or closed it
     }
 
     @Override
@@ -108,6 +123,12 @@ public class VStack extends FDropDown {
         }
         compactSlideTarget = 0f;
         startCompactSlide();
+    }
+
+    private void notifyCoach() {
+        if (MatchController.getView() != null) {
+            MatchController.getView().layoutCoach();
+        }
     }
 
     private void startCompactSlide() {
@@ -269,10 +290,26 @@ public class VStack extends FDropDown {
     protected void updateSizeAndPosition() {
         if (!getRotate90()) {
             super.updateSizeAndPosition();
+            //Move only the stack dropdown panel; keep its menu-bar tab in its original position.
+            if (VPlayerPanel.isCompactLayout()) {
+                final MatchScreen match = MatchController.getView();
+                final VPlayerPanel topPanel = match == null ? null : match.getTopPlayerPanel();
+                if (topPanel != null && topPanel.isCompactRight()) {
+                    final float left = Math.max(0f, getLeft() - topPanel.getColumnWidth() - Utils.scale(4));
+                    setBounds(left, getTop(), getWidth(), getHeight());
+                }
+            }
+            if (Forge.isLandscapeMode()) { //a long stack scrolls instead of covering the match
+                final float limit = Math.round(Forge.getScreenHeight() * LANDSCAPE_MAX_HEIGHT_RATIO);
+                if (getHeight() > limit) {
+                    setBounds(getLeft(), getTop(), getWidth(), limit);
+                }
+            }
             if (slides()) { //shift what the drop down placed by how far it has slid in
                 compactRestX = getLeft();
                 applyCompactSlide();
             }
+            if (isVisible()) { notifyCoach(); }   // new
             return;
         }
         
@@ -290,8 +327,44 @@ public class VStack extends FDropDown {
 
     @Override
     protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        if (Forge.isLandscapeMode() && activeItem != null && paneSize != null) {
+            //scroll to the active item: the newest one, the last in the list, unless another item was tapped
+            final float max = Math.max(0f, paneSize.getHeight() - getHeight());
+            float top = Math.max(0f, Math.min(activeItem.getBottom() - getHeight(), max));
+            if (activeItem.getTop() < top) { top = activeItem.getTop(); } //an item taller than the view shows its start
+            super.setScrollPositionsAfterLayout(0, top);
+            return;
+        }
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
     }
+
+    /**
+     * Header line "Name (id) [optional cost]" followed by the description. The description from the game already
+     * starts with "Name (id) - " for spells/abilities, so only that leading prelude is removed; the rest of the
+     * text is shown untouched (no string hacks that could drop or garble parts of it).
+     */
+    private static String buildStackText(String name, String cId, String optionalCost, String rawText) {
+        String body = rawText == null ? "" : rawText.trim();
+        String optional = "";
+        if (body.startsWith(OPTIONAL_PREFIX)) {
+            optional = OPTIONAL_PREFIX;
+            body = body.substring(OPTIONAL_PREFIX.length()).trim();
+        }
+        if (body.startsWith(name)) {
+            final Matcher m = PRELUDE.matcher(body);
+            m.region(name.length(), body.length());
+            if (m.lookingAt()) { // only the "Name (id) -" prelude
+                body = body.substring(m.end()).trim();
+            }
+        }
+        body = TextUtil.fastReplace(body, "CARDNAME", name);
+        body = TextUtil.fastReplace(body, "  ", " ");
+        String header = name + " " + (name.length() > 1 ? cId : "") + optionalCost;
+        body = (optional + body).trim();
+        return body.isEmpty() ? header : header + "\n" + body;
+    }
+    private static final String OPTIONAL_PREFIX = "(OPTIONAL) ";
+    private static final Pattern PRELUDE = Pattern.compile("\\s*(?:\\(\\d+\\)\\s*-?|-)\\s*");
 
     //frosted cards sit on translucent glass over any battlefield, so the card name gets a thin dark outline
     private static void drawStackText(Graphics g, String text, int nameLength, FSkinFont font, Color color, float x, float y, float w, float h, float visibleY, float visibleH, boolean wrap, int align, boolean center) {
@@ -320,7 +393,30 @@ public class VStack extends FDropDown {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        if (!VPlayerPanel.isCompactLayout()) { super.drawOverlay(g); }
+        if (!VPlayerPanel.isCompactLayout()) {
+            super.drawOverlay(g);
+            return;
+        }
+        //compact layout: no frame, but a long stack still shows that there is more above or below
+        try {
+            if (getScrollTop() > 0) {
+                final float x = getWidth() / 2;
+                final float y = getIndicatorMargin();
+                g.fillTriangle(getIndicatorColor(), x, y, x - getIndicatorSize(), y + getIndicatorSize(), x + getIndicatorSize(), y + getIndicatorSize());
+            }
+            if (getScrollTop() < getMaxScrollTop()) {
+                final float x = getWidth() / 2;
+                final float y = getHeight() - getIndicatorSize();
+                g.fillTriangle(getIndicatorColor(), x, y, x - getIndicatorSize(), y - getIndicatorSize(), x + getIndicatorSize(), y - getIndicatorSize());
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    //skips a target that is hidden: off screen, or behind this stack or another open menu (see TargetingOverlay.isVisible)
+    private static void drawTargetArrow(final Graphics g, final Vector2 from, final Vector2 to, final TargetingOverlay.ArcConnection connects) {
+        if (to == null || !TargetingOverlay.isVisible(to.x, to.y)) { return; }
+        TargetingOverlay.drawArrow(g, from, to, connects);
     }
 
     @Override
@@ -332,7 +428,10 @@ public class VStack extends FDropDown {
                     activeItem.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
 
             PlayerView activator = activeStackInstance == null ? null : activeStackInstance.getActivatingPlayer();
-            arrowOrigin = arrowOrigin.add(screenPos.x, screenPos.y);
+            arrowOrigin = arrowOrigin.add(screenPos.x - getScrollLeft(), screenPos.y - getScrollTop()); //the items scroll, the arrows follow them
+            if (arrowOrigin.y < screenPos.y || arrowOrigin.y > screenPos.y + getHeight()) {
+                return; //the active item is scrolled out of view, so its arrows would start from nothing
+            }
 
             // one arrow per targeted stack entry, however many modes aim at it; created on first use, as this runs every frame
             Set<Integer> drawnStackTargets = null;
@@ -340,11 +439,12 @@ public class VStack extends FDropDown {
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(c.getController()) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
+                    drawTargetArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
+                    final VPlayerPanel panel = MatchScreen.getPlayerPanel(p);
+                    if (panel != null) { TargetingOverlay.drawPlayerArrow(g, arrowOrigin, panel.getTargetingArrowOrigin(), conn, panel.isCompactRight()); }
                 }
 
                 // Stack items aimed at other stack items (counterspells and the like) point at that item's entry in this view.
@@ -361,7 +461,8 @@ public class VStack extends FDropDown {
                         if (td == null || td == activeItem || !drawnStackTargets.add(targeted.getId())) { continue; }
                         // aim at the visible top part of the entry, the lower part is covered by the next item
                         final Vector2 to = new Vector2(edge + td.getLeft(),
-                                screenPos.y + td.getTop() + BORDER_THICKNESS + PADDING + CARD_HEIGHT * 0.25f);
+                                screenPos.y - getScrollTop() + td.getTop() + BORDER_THICKNESS + PADDING + CARD_HEIGHT * 0.25f);
+                        if (to.y < screenPos.y || to.y > screenPos.y + getHeight()) { continue; } //that entry is scrolled out of view
                         final PlayerView owner = targeted.getActivatingPlayer();
                         final TargetingOverlay.ArcConnection conn = activator != null && owner != null && activator.isOpponentOf(owner)
                                 ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
@@ -377,7 +478,8 @@ public class VStack extends FDropDown {
         public final StackItemView stackInstance;
         private final Color foreColor, backColor, backColor2; //backColor2: the far end of the gradient on glass cards
         private Color glassStart, glassEnd; //the frosted gradient, built on the first glass draw
-        private String text;
+        private final String text;
+        private final int nameLength;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
         private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
@@ -386,13 +488,21 @@ public class VStack extends FDropDown {
             stackInstance = stackInstance0;
             CardView card = stackInstance.getSourceCard();
 
-            text = stackInstance.getText()
+            String rawText = stackInstance.getText()
                 .replace("\\r", "\r")
                 .replace("\\n", "\n");
             if (stackInstance.isOptionalTrigger() &&
                     stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
-                text = "(OPTIONAL) " + text;
+                rawText = "(OPTIONAL) " + rawText;
             }
+
+            // Format once when the display entry is created, not every rendering frame.
+            final String name = card.getName();
+            final String cId = "(" + card.getId() + ")";
+            final String optionalCost = !stackInstance.getOptionalCostString().isEmpty()
+                    ? " (" + stackInstance.getOptionalCostString() + ")" : "";
+            text = buildStackText(name, cId, optionalCost, rawText);
+            nameLength = name.length();
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final boolean isFaceDown = card.isFaceDown();
@@ -560,48 +670,16 @@ public class VStack extends FDropDown {
             yy = y;
             if (!launched && !stackInstance.isAbility()) { // record the rect only while the card is really here
                 CardFlightOverlay.noteStackRect(sourceCard.getId(),
-                    VStack.this.screenPos.x + getLeft() + cardBounds.x,
-                    VStack.this.screenPos.y + getTop() + cardBounds.y,
+                    VStack.this.screenPos.x - VStack.this.getScrollLeft() + getLeft() + cardBounds.x,
+                    VStack.this.screenPos.y - VStack.this.getScrollTop() + getTop() + cardBounds.y,
                     cardBounds.width, cardBounds.height);
             }
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
 
-            String name = sourceCard.getName();
-            int index = text.indexOf(name);
-            String newtext = "";
-            String cId =  "(" + sourceCard.getId() + ")";
-            String optionalCostString = !stackInstance.getOptionalCostString().isEmpty() ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
-
-            if (index == -1) {
-                newtext = TextUtil.fastReplace(text.trim(), "  ", " ");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,"--","-"),"- -","-");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
-                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
-                newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
-                drawStackText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""), name.length(),
-                    FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-
-            } else {
-                String modifier = (text.substring(0, index).length() > 0) ? "CARDNAME" : "";
-                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + modifier + text.substring(index + name.length()), "- -", "-");
-                String trimSecond = TextUtil.fastReplace(trimFirst, name+" "+cId, name);
-                newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
-
-                if(newtext.equals("\n"+name))
-                    drawStackText(g, name + " " + cId + optionalCostString, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-                else {
-                    newtext = TextUtil.fastReplace(newtext, "  ", " ");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
-                    newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
-                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
-                    newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
-                    newtext = TextUtil.fastReplace(newtext, name+name, name);
-                    drawStackText(g, name+" "+cId + optionalCostString +newtext, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
-                }
-            }
+            drawStackText(g, text, nameLength,
+                FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
             if (!launched) { // replaces the early return
                 CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
             } else {

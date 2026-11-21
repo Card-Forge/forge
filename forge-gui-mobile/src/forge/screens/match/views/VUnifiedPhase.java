@@ -170,6 +170,7 @@ public class VUnifiedPhase extends FDisplayObject {
         private boolean openTarget;
         private float progress; //0 closed, 1 fully open
         private float areaW, top, maxH;
+        private float rightInset;
         private float rowH = Utils.scale(30), avatarW = Utils.scale(26), nameW = Utils.scale(60);
 
         private Menu() {
@@ -205,9 +206,15 @@ public class VUnifiedPhase extends FDisplayObject {
          * @param maxH0 room available below it
          */
         public void layoutFor(float areaW0, float top0, float maxH0) {
+            layoutFor(areaW0, top0, maxH0, 0f);
+        }
+
+        /** Keep the dropdown's original size and alignment, but leave a right-side player column uncovered. */
+        public void layoutFor(float areaW0, float top0, float maxH0, float rightInset0) {
             areaW = areaW0;
             top = top0;
             maxH = maxH0;
+            rightInset = Math.max(0f, rightInset0);
             if (openTarget || progress > 0f) {
                 sync();
                 applyBounds();
@@ -241,7 +248,7 @@ public class VUnifiedPhase extends FDisplayObject {
             final float fixed = pad + avatarW + gap + nameW + gap + pad;
             final float cell = Math.max(Utils.scale(16), Math.min(Utils.scale(30), (areaW - fixed) / ORDER.length));
             final float w = Math.min(areaW, Math.round(fixed + cell * ORDER.length));
-            setBounds(areaW - w, top, w, 2 * pad + rowH * n);
+            setBounds(Math.max(0f, areaW - w - rightInset), top, w, 2 * pad + rowH * n);
             revalidate();
         }
 
@@ -318,7 +325,7 @@ public class VUnifiedPhase extends FDisplayObject {
             public void drawBackground(Graphics g) {
                 final float w = getWidth(), h = getHeight();
                 final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
-                final boolean turn = gv != null && player.equals(gv.getPlayerTurn());
+                final boolean turn = gv != null && player.sharesTeamWith(gv.getPlayerTurn());
                 if (turn) { //the player whose turn it is gets a lit row and an accent bar
                     g.fillRect(ROW_TURN, 0, 0, w, h);
                     final Color accent = VPhaseIndicator.getPhaseColor(true, true).getColor();

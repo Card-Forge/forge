@@ -3,8 +3,8 @@ ManaCost:B G
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Sultai,Abzan | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Sultai or Abzan.
-SVar:Sultai:DB$ Pump | SpellDescription$ Sultai
-SVar:Abzan:DB$ Pump | SpellDescription$ Abzan
+SVar:Sultai:DB$ Nothing | SpellDescription$ Sultai
+SVar:Abzan:DB$ Nothing | SpellDescription$ Abzan
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeSultai | AddTrigger$ SultaiTrigger | Description$ • Sultai — Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.
 SVar:SultaiTrigger:Mode$ CounterAdded | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ DBDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.
 SVar:DBDraw:DB$ Draw

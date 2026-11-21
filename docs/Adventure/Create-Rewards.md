@@ -94,6 +94,29 @@ As a contrasting and complicated example that will return no matching results, c
     }
 ```
 
+`deck` rewards give the player a whole deck, named by exactly one of `precon`, `commanderPrecon` or `sourceDeck`. Claiming the reward reveals every card in the deck, puts the deck into the player's first empty deck slot and adds its cards to the collection. If every deck slot is full, only the cards are added. In a shop the deck is priced at `cost` if it is set, otherwise at the total price of its cards, and a View Decklist button lets the player check its contents before buying.
+
+```json
+    {
+      "type": "deck",
+      "precon": "Abzan Siege"
+    }
+```
+
+```json
+    {
+      "type": "deck",
+      "commanderPrecon": "Abzan Armor [TDC] [2025]",
+      "cost": 25000
+    }
+```
+
+```json
+    {
+      "type": "deck",
+      "sourceDeck": "decks/standard/goblinking.dck"
+    }
+```
 
 
 # Fields:
@@ -107,6 +130,7 @@ Valid options are:
 * `item` will give items to be added to the player's inventory.
 * `card` will create one or more cards matching a detailed set of filters to follow.
 * `union` is a wrapper for multiple `card` instances that can have mutually exclusive filters.
+* `deck` will give the player a whole deck, named by `precon`, `commanderPrecon` or `sourceDeck`.
 * `deckCard` is only used with rewards from [enemies](Create-Enemies.md), this functions as a `card` reward that is limited to cards found in that enemy's deck.
 
 `{"type": "card", ...}`
@@ -132,12 +156,12 @@ An array of the possible colors for `card` and `deckCard`.
 `{..., "colors": ["red", "black"], ...}`
 
 ## **rarity**
-An array of the possible raritys for `card` and `deckCard`.
+An array of the possible raritys for `card` and `deckCard`. Without `editions`, the rarity is checked against the card's default printing only, so a card that has this rarity in another set can still be left out.
 
 `{..., "rarity": ["basicland", "common", "uncommon", "rare", "mythicrare"], ...}`
 
 ## **editions**
-An array of the possible editions for `card` and `deckCard`, referenced by their 3 character set code.
+An array of the possible editions for `card` and `deckCard`, referenced by their 3 character set code. The reward is the card's printing from one of these editions, and `rarity` is checked against that printing. Without `editions`, the reward is always the card's default printing, not a random one.
 
 `{..., "editions": ["ONE", "MOM", "MAT"], ...}`
 
@@ -158,9 +182,11 @@ An array of the possible superTypes for `card` and `deckCard`.
 `{..., "superTypes ": ["Legendary", "Basic", "Snow"], ...}`
 
 ## **cardName**
-The exact name of a `card` to use.
+The exact name of a `card` to use. Add a set code after a `|`, or set `editions`, to grant a specific printing.
 
 `{..., "cardName": "Llanowar Elves", ...}`
+
+`{..., "cardName": "Llanowar Elves|M19", ...}`
 
 ## **cardText**
 A regular expression defining text that must appear on the card. A sequence of plain text alphanumeric (A-Z, 0-9) characters can function here if you are unfamiliar with regular expressions, but many special characters will change the functionality. Useful for denoting keywords or identifying helper cards that are associated with but do not actually have a given type.
@@ -174,5 +200,25 @@ This is a functional but partially implemented concept at best, as the result se
 
 `{..., "deckNeeds": ["Ability$Graveyard"], ...}`
 
+## **sourceDeck**
+The path of a `.dck` file, relative to the plane's folder or to `adventure/common`. A `deck` reward gives the whole deck. A `card` reward, or an entry inside a `Union`, picks its cards at random from the deck instead.
+
+`{..., "sourceDeck": "decks/standard/goblinking.dck", ...}`
+
+## **precon**
+The name of a preconstructed deck from `res/quest/precons`, the decks sold in Quest mode's shop. Used by `deck`.
+
+`{..., "precon": "Abzan Siege", ...}`
+
+## **commanderPrecon**
+The name of a Commander preconstructed deck from `res/quest/commanderprecons`, including the set code and year as the deck editor lists it. Used by `deck`.
+
+`{..., "commanderPrecon": "Abzan Armor [TDC] [2025]", ...}`
+
+## **cost**
+A fixed shop price for a `deck` reward. If it is not set, the deck costs the total price of its cards. Town and shop price modifiers apply either way, as they do for items.
+
+`{..., "cost": 25000, ...}`
+
 ## **cardPack**
-This element should not be seen or used in JSON definitions of reward data. `cardPack` rewards are a type that represent a collection of cards whose contents have been pre-determined in game logic (such as a drafted deck that can be kept after an event), but that were not pre-determined at the time when the reward data was written. To manually implement granting specific or randomized cards we should use one or more `card` rewards, detailed above. When granted, this will create an item in the player's inventory that can subsequently be opened by the player to award the individual card contents of the associated deck.
+This element should not be seen or used in JSON definitions of reward data. `cardPack` rewards are a type that represent a collection of cards whose contents have been pre-determined in game logic (such as a drafted deck that can be kept after an event), but that were not pre-determined at the time when the reward data was written. To manually implement granting specific or randomized cards we should use one or more `card` rewards, detailed above. When granted, this will create an item in the player's inventory that can subsequently be opened by the player to award the individual card contents of the associated deck. To give a whole fixed deck from JSON, use a `deck` reward instead.

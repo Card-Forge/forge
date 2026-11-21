@@ -1,0 +1,8 @@
+Name:Voq, Torchbearer
+ManaCost:3 B
+Types:Legendary Creature Klingon Spy
+PT:4/3
+K:Menace
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | ChoiceZone$ Graveyard | AddTypes$ Klingon & Spy | AddKeywords$ Menace | SpellDescription$ ChoH'a' — You may have NICKNAME enter as a copy of a creature card in a graveyard, except he's a Klingon Spy in addition to his other types and has menace.
+Oracle:Menace\nChoH'a' — You may have Voq enter as a copy of a creature card in a graveyard, except he's a Klingon Spy in addition to his other types and has menace.

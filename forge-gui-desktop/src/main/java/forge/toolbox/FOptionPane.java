@@ -320,4 +320,8 @@ public class FOptionPane extends FDialog {
     public void setButtonEnabled(final int index, final boolean enabled) {
         buttons[index].setEnabled(enabled);
     }
+
+    public FButton getButton(final int index) {
+        return buttons[index];
+    }
 }

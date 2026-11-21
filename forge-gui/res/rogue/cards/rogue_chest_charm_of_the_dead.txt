@@ -1,0 +1,7 @@
+Name:Chest Trait - Charm Of The Dead
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ Y | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your end step, if one or more creatures died this turn, you gain that much life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y
+SVar:Y:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:At the beginning of your end step, if one or more creatures died this turn, you gain that much life.

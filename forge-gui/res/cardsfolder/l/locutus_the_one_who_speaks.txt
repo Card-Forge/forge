@@ -1,0 +1,9 @@
+Name:Locutus, the One Who Speaks
+ManaCost:W B
+Types:Legendary Artifact Creature Borg
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Artifact creatures you control get +1/+1.
+A:AB$ DealDamage | Cost$ W B Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ It deals 2 damage to target creature. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:PlayMain1:TRUE
+Oracle:Artifact creatures you control get +1/+1.\n{W}{B}, Discard this card: It deals 2 damage to target creature. You gain 2 life.

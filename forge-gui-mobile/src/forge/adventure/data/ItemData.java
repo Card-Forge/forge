@@ -19,6 +19,7 @@ public class ItemData implements Serializable, Cloneable {
     public String description; //Manual description of the item.
     public String iconName;
     public boolean questItem=false;
+    public boolean unique=false; // If true, cannot be obtained while already in inventory
     public int cost=1000;
     
     public boolean usableOnWorldMap;
@@ -43,6 +44,7 @@ public class ItemData implements Serializable, Cloneable {
         description       = cpy.description;
         iconName          = cpy.iconName;
         questItem         = cpy.questItem;
+        unique            = cpy.unique;
         cost              = cpy.cost;
         usableInPoi       = cpy.usableInPoi;
         usableOnWorldMap  = cpy.usableOnWorldMap;

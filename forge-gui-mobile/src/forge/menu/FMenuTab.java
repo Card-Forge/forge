@@ -43,7 +43,7 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
     }
     public static final float PADDING = Utils.scale(2);
     private static final float SEPARATOR_WIDTH = Utils.scale(1);
-    private static final FSkinFont BADGE_FONT = FSkinFont.get(9);
+    private static final FSkinFont BADGE_FONT = FSkinFont.get(11); //the unread chat count and the stack count
     private static final FSkinColor BADGE_COLOR = FSkinColor.getStandardColor(192, 50, 50);
     private static final FSkinColor BADGE_TEXT_COLOR = FSkinColor.getStandardColor(255, 255, 255);
     private static final long FLASH_DURATION_MS = 900;

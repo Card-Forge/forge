@@ -5,6 +5,6 @@ A:SP$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature a
 SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
 SVar:KWPump:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.!IsRemembered+RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Other creatures that player controls can't block this turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDesc | SpellDescription$ Untap that creature.
-SVar:DBDesc:DB$ Pump | StackDescription$ SpellDescription | SpellDescription$ Other creatures that player controls can't block this turn.
+SVar:DBDesc:DB$ Nothing | StackDescription$ SpellDescription | SpellDescription$ Other creatures that player controls can't block this turn.
 AI:RemoveDeck:All
 Oracle:Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.

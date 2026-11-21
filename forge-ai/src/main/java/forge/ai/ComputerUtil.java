@@ -22,6 +22,7 @@ import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.ai.simulation.RampPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -83,8 +84,23 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        RunawayLoop.note(ai, sa);
+        if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
+            if (pc.getAi().hasFailedToCast(sa)) {
+                return false;
+            }
+            // Costs must not be paid for something that can't go on the stack: if the targets are not legal now, they
+            // won't be after paying either. A caller that chooses the targets itself (chooseTargets) does that later.
+            if (chooseTargets == null && !game.getStack().hasLegalTargeting(sa)) {
+                pc.getAi().noteFailedCast(AiController.castKey(sa));
+                game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                        source + " - [AI did not cast, no legal targets] - " + sa.getDescription()));
+                return false;
+            }
+        }
         final Card host = sa.getHostCard();
         final Zone hz = host.isCopiedSpell() ? null : host.getZone();
+        boolean movedToStack = false;
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -101,6 +117,7 @@ public class ComputerUtil {
             }
 
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            movedToStack = true;
         }
 
         if (!sa.isCopied()) {
@@ -112,17 +129,21 @@ public class ComputerUtil {
 
         if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
+            abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
             return false;
         }
         if (chooseTargets != null) {
             chooseTargets.accept(sa);
             if (!sa.isTargetNumberValid()) {
+                // the spell is already in the stack zone: it has to go back, or it is lost
+                abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
                 return false;
             }
         }
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
+        final boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack(sa);
 
         final CostPayment pay = new CostPayment(cost, sa);
@@ -133,16 +154,36 @@ public class ComputerUtil {
             }
             return true;
         }
-        // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        // Should not arrive here: the costs could not be paid after all. What was paid is given back and the card goes
+        // back to where it was cast from (it used to stay in the stack zone, gone from the game).
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        if (!refreeze) {
+            game.getStack().unfreezeStack();
+        }
         sa.setSkip(true);
-        if (host != null && hz != null && hz.is(ZoneType.Stack)) {
-            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
-            for (SpellAbility csa : c.getSpellAbilities()) {
+        final Card back = abandonCast(game, sa, hz, movedToStack, pay);
+        if (back != null) {
+            for (SpellAbility csa : back.getSpellAbilities()) {
                 csa.setSkip(true);
             }
         }
         return false;
+    }
+
+    /**
+     * Takes back a cast that stops before the spell is on the stack: what was paid is refunded, and a spell that was
+     * already moved to the stack zone goes back to the zone it came from.
+     *
+     * @return the card as it is now
+     */
+    private static Card abandonCast(final Game game, final SpellAbility sa, final Zone fromZone,
+                                    final boolean movedToStack, final CostPayment pay) {
+        pay.refundPayment();
+        final Card onStack = sa.getHostCard();
+        if (movedToStack && fromZone != null && onStack != null && onStack.isInZone(ZoneType.Stack)) {
+            return game.getStack().returnStrandedSpell(onStack, fromZone);
+        }
+        return onStack;
     }
 
     private static boolean hasDiscardHandCost(final Cost cost) {
@@ -224,6 +265,7 @@ public class ComputerUtil {
         }
 
         final Card source = sa.getHostCard();
+        final int waitingMark = game.getTriggerHandler().getWaitingTriggerCount();
 
         Zone fromZone = game.getZoneOf(source);
         int zonePosition = 0;
@@ -241,7 +283,7 @@ public class ComputerUtil {
 
         // do this after card got added to stack
         if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source, waitingMark);
             return false;
         }
 
@@ -387,7 +429,7 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+            if (PhaseType.COMBAT_DECLARE_BLOCKERS.equals(game.getPhaseHandler().getPhase()) && ComputerUtil.protectRecursion(sa,
                         () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
                 final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
                 if (!nonCreatures.isEmpty()) {
@@ -399,6 +441,13 @@ public class ComputerUtil {
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
+            if (ai.getController() instanceof PlayerControllerAi) {
+                final Card madness = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                        .madnessDiscard(ai, typeList);
+                if (madness != null) {
+                    return madness; // it comes back as a cheap spell
+                }
+            }
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
@@ -576,6 +625,10 @@ public class ComputerUtil {
 
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
+            if (prefCard == null && ability.isManaAbility()) {
+                // paying for mana: give up what the AI would miss least (a token, a creature that comes back)
+                prefCard = ManaSacrifice.chooseFodder(ai, typeList);
+            }
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }
@@ -633,6 +686,20 @@ public class ComputerUtil {
 
         if (typeList.size() < amount) {
             return null;
+        }
+
+        if (ai.getController() instanceof PlayerControllerAi) {
+            // never pay with the win card of the deck (Grief's evoke must not exile Living End): without anything
+            // else to pay with, a cost is not paid at all
+            final CardCollection safe = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.withoutProtected(typeList);
+            if (safe.size() < typeList.size()) {
+                if (safe.size() < amount && !effect) {
+                    return null;
+                }
+                if (safe.size() >= amount) {
+                    typeList = safe;
+                }
+            }
         }
 
         CardLists.sortByPowerAsc(typeList);
@@ -864,6 +931,21 @@ public class ComputerUtil {
             }
             // Otherwise, continue to choose permanents to sacrifice to avoid dying
         }
+
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            // Keep the payoff and the existing Mountains needed for the fetched Mountains to trigger it.
+            remaining.removeIf(c -> c.getName().startsWith("Valakut"));
+            final CardCollection mountains = CardLists.filter(remaining, c -> c.getType().hasSubtype("Mountain"));
+            for (int i = 0; i < RampPlan.scapeshiftMountainsToKeep(ai) && !mountains.isEmpty(); i++) {
+                final Card keep = ComputerUtilCard.getBestLandAI(mountains);
+                if (keep == null) {
+                    break;
+                }
+                remaining.remove(keep);
+                mountains.remove(keep);
+            }
+        }
+
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
@@ -906,8 +988,9 @@ public class ComputerUtil {
                     sacThreshold = considerSacThreshold;
                 }
 
-                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
-                    return true;
+                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold
+                        || source.isKeyword(Keyword.DEVOUR) && forge.ai.simulation.ElfLoop.devourAll(ai, source.getHostCard())) {
+                    return true; // a Predator Dragon that kills this turn eats the whole board
                 }
 
                 if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
@@ -918,7 +1001,10 @@ public class ComputerUtil {
             });
         }
 
-        final int max = Math.min(remaining.size(), amount);
+        int max = Math.min(remaining.size(), amount);
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            max = Math.min(max, RampPlan.scapeshiftLandsToSacrifice(ai));
+        }
 
         if (exceptSelf && max < remaining.size()) {
             removedSelf = remaining.remove(host);
@@ -1141,7 +1227,7 @@ public class ComputerUtil {
         return sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
+                        && !ph.isPlayerNextTurn(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
                 && !sa.hasParam("ActivationPhases");
     }
@@ -1312,6 +1398,11 @@ public class ComputerUtil {
             return true;
         }
 
+        // an instant or sorcery before combat pumps a prowess creature that is going to attack
+        if (ProwessTiming.worthBeforeCombat(ai, sa)) {
+            return true;
+        }
+
         if (sub != null) {
             final ApiType api = sub.getApi();
             if (ApiType.Encode == api && !ai.getCreaturesInPlay().isEmpty()) {
@@ -1371,6 +1462,10 @@ public class ComputerUtil {
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
         if (!sa.isActivatedAbility()) {
             return false;
+        }
+
+        if (RunawayLoop.exceeded(sa)) {
+            return true;
         }
 
         int activations = sa.getActivationsThisTurn();
@@ -1635,7 +1730,7 @@ public class ComputerUtil {
         // currently confirming optional threat ability:
         // need to ignore it so AI doesn't think some of its objects are already taken care of
         if (stack.isResolving() && sa == null) {
-            sa = stack.peekAbility();
+            sa = stack.getResolvingAbility();
             saviour = null;
         }
 
@@ -1647,13 +1742,15 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            // account for copied abilities on the stack as well
+            SpellAbility original = spell;
             if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
-                spell = spell.getOriginalAbility();
+                original = spell.getOriginalAbility();
             }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
-            if (sa == null || (sa != spell && sa != sub)) {
+            if (sa == null || (sa != spell && sa != original && sa != sub)) {
                 predictThreatenedObjects(ai, saviour, spell).forEach(objects::add);
             }
             if (top) {
@@ -1817,7 +1914,7 @@ public class ComputerUtil {
                     }
                 } else if (o instanceof Player p) {
                     if (source.hasKeyword(Keyword.INFECT)) {
-                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
+                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getGame().getRules().getPoisonCountersToLose() - p.getPoisonCounters()) {
                             threatened.add(p);
                         }
                     } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {
@@ -2444,7 +2541,10 @@ public class ComputerUtil {
             // TODO
             // computer will need to choose a type based on whether it needs a creature or land,
             // otherwise, lib search for most common type left then, reveal chosenType to Human
-            if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
+            if ("Turnabout".equals(logic)) {
+                // the lands are what a mana loop untaps
+                chosen = validTypes.contains("Land") ? "Land" : "";
+            } else if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : validTypes) {
                     CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), CardPredicates.TAPPED);
@@ -3210,6 +3310,60 @@ public class ComputerUtil {
         return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
+    /**
+     * The combat the opponent could attack with at the next opportunity and how the AI would block it, or null when
+     * the opponent has nothing that can attack.
+     */
+    private static Combat predictNextCombat(Player ai, Player opp, final CardCollection excludedBlockers) {
+        Combat combat = new Combat(opp);
+        boolean containsAttacker = false;
+        boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+
+        // TODO !thisCombat should include cards that will phase in
+        for (Card att : opp.getCreaturesInPlay()) {
+            // TODO should be limited based on how much getAttackCost the opp can pay
+            if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
+                // TODO need to copy the card
+                // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
+                combat.addAttacker(att, ai);
+                containsAttacker = true;
+            }
+        }
+        if (!containsAttacker) {
+            return null;
+        }
+        // TODO if it's next turn ignore mustBlockCards
+        AiBlockController block = new AiBlockController(ai, false);
+        // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
+        block.assignBlockersForCombat(combat, excludedBlockers);
+        return combat;
+    }
+
+    /**
+     * How threatened the AI's life is by the opponents' next attacks, both questions answered from one blocking
+     * prediction (asking them one after the other builds and blocks the same combat twice):
+     * 2 = in serious danger (would lose), 1 = in danger, 0 = neither.
+     */
+    public static int predictNextCombatsDanger(Player ai, final List<Player> opps) {
+        if (ai.cantLose()) {
+            return 0;
+        }
+        int level = 0;
+        for (Player opp : opps) {
+            final Combat combat = predictNextCombat(ai, opp, null);
+            if (combat == null) {
+                continue;
+            }
+            if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, 0)) {
+                return 2;
+            }
+            if (level == 0 && ComputerUtilCombat.lifeInDanger(ai, combat, 0)) {
+                level = 1;
+            }
+        }
+        return level;
+    }
+
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
@@ -3226,31 +3380,10 @@ public class ComputerUtil {
         // TODO should also consider them as teams (with increased likelihood to be attacked by multiple if ai is biggest threat)
         // TODO worth it to sort by creature amount for chance to terminate earlier?
         for (Player opp: opps) {
-            Combat combat = new Combat(opp);
-            boolean containsAttacker = false;
-            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
-
-            // TODO !thisCombat should include cards that will phase in
-            for (Card att : opp.getCreaturesInPlay()) {
-                // TODO should be limited based on how much getAttackCost the opp can pay
-                if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
-                    // TODO need to copy the card
-                    // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
-                    combat.addAttacker(att, ai);
-                    containsAttacker = true;
-                }
-            }
-            if (!containsAttacker) {
+            final Combat combat = predictNextCombat(ai, opp, excludedBlockers);
+            if (combat == null) {
                 continue;
             }
-            // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
-            // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
-            block.assignBlockersForCombat(combat, excludedBlockers);
-
-            // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
-            // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
-            // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;
@@ -3310,5 +3443,101 @@ public class ComputerUtil {
             sa.setSkip(false);
         }
         return result;
+    }
+
+    /**
+     * What a pact (Pact of Negation, Slaughter Pact...) asks for at the beginning of its controller's next upkeep, or
+     * null for any other spell: the spell has a delayed "pay this or lose the game" clause, written as an SVar that
+     * loses the game for its owner unless they pay.
+     */
+    public static String pactCost(final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || sa.getHostCard() == null) {
+            return null;
+        }
+        for (final String svar : sa.getHostCard().getSVars().values()) {
+            if (svar.startsWith("DB$ LosesGame") && svar.contains("UnlessPayer$ You")) {
+                final int at = svar.indexOf("UnlessCost$ ");
+                if (at < 0) {
+                    continue;
+                }
+                String cost = svar.substring(at + "UnlessCost$ ".length());
+                final int end = cost.indexOf(" |");
+                return (end >= 0 ? cost.substring(0, end) : cost).trim();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * A pact that the AI could not pay for at its next upkeep (it loses the game then): the mana sources it has (they
+     * untap before the upkeep, a land played later is too late) cannot make the cost, together with the pacts it has
+     * already cast this turn. Checks the total and each colour, which "five lands" (NumLands GE5) does not: five Mountains
+     * cannot pay {3}{U}{U}.
+     */
+    public static boolean cannotPayPact(final Player ai, final SpellAbility sa) {
+        final String cost = pactCost(sa);
+        if (cost == null) {
+            return false;
+        }
+        final List<String> owed = new ArrayList<>();
+        owed.add(cost);
+        for (final SpellAbility cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            if (cast != sa && ai.equals(cast.getActivatingPlayer()) && pactCost(cast) != null) {
+                owed.add(pactCost(cast));
+            }
+        }
+        int total = 0;
+        final Map<String, Integer> colors = new HashMap<>();
+        for (final String c : owed) {
+            for (final String symbol : c.split(" ")) {
+                if (symbol.matches("\\d+")) {
+                    total += Integer.parseInt(symbol);
+                } else if (!symbol.isEmpty()) {
+                    total++;
+                    colors.merge(symbol, 1, Integer::sum);
+                }
+            }
+        }
+        if (ComputerUtilMana.getAvailableManaEstimate(ai, false) < total) {
+            return true;
+        }
+        for (final Map.Entry<String, Integer> need : colors.entrySet()) {
+            int sources = 0;
+            for (final Card src : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (final SpellAbility ma : src.getManaAbilities()) {
+                    if (ma.canProduce(need.getKey())) {
+                        sources++;
+                        break;
+                    }
+                }
+            }
+            if (sources < need.getValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sacrificing this noncreature token would cost the AI: an opposing permanent punishes it (Bloodroot Apothecary: the
+     * player who sacrifices a noncreature token gets two poison counters, and a Treasure or a Clue is such a token).
+     */
+    public static boolean sacrificePunished(final Player ai, final Card card) {
+        if (card == null || !card.isToken() || card.isCreature()) {
+            return false;
+        }
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.Sacrificed || !t.hasParam("ValidCard")
+                        || !t.getParam("ValidCard").contains("token") || !t.getParam("ValidCard").toLowerCase().contains("noncreature")) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidPlayer", "");
+                if (valid.contains("Opponent") || valid.contains("Player")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

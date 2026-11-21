@@ -90,10 +90,12 @@ public class Console extends Window {
                             break;
                         case Input.Keys.V:
                             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                                if (Forge.getClipboard().hasContents()) {
-                                    textField.appendText(Forge.getClipboard().getContents());
-                                    textField.setCursorPosition(Integer.MAX_VALUE);
-                                }
+                                Forge.readClipboard(contents -> {
+                                    if (!contents.isEmpty()) {
+                                        textField.appendText(contents);
+                                        textField.setCursorPosition(Integer.MAX_VALUE);
+                                    }
+                                });
                             }
                         default:
                             break;

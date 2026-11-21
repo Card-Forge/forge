@@ -286,7 +286,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
+    public CardCollection chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal) {
         return chooseItems(validCards, min);
     }
 
@@ -621,6 +621,9 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
+            if (playedByTeammate(sa)) {
+                continue;
+            }
             prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, getGame());
         }

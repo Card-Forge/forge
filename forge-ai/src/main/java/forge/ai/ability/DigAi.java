@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
+import forge.ai.simulation.DeckPlan;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -78,7 +79,7 @@ public class DigAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if ((!game.getPhaseHandler().getNextTurn().equals(ai)
+        if ((!game.getPhaseHandler().isPlayerNextTurn(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
             && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
             && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
@@ -129,6 +130,19 @@ public class DigAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
+    /** A legendary card whose namesake the player already controls (other than {@code leaving}, which is about to go). */
+    public static boolean legendIsAlreadyHere(final Player ai, final Card c, final Card leaving) {
+        if (c == null || !c.getType().isLegendary()) {
+            return false;
+        }
+        for (final Card p : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (p != leaving && p.getType().isLegendary() && p.getName().equals(c.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer, Map<String, Object> params) {
         String logic = sa.getParamOrDefault("AILogic", "");
@@ -152,6 +166,37 @@ public class DigAi extends SpellAbilityAi {
                 }
             }
             return null;
+        }
+
+        if ("Battlefield".equalsIgnoreCase(sa.getParamOrDefault("DestinationZone", "")) && relatedPlayer == ai
+                && sa.getActivatingPlayer() == ai) {
+            // a second copy of a legend it already controls only goes to the legend rule (Birthing Ritual, Phelia)
+            final CardCollection fresh = new CardCollection();
+            for (final Card c : valid) {
+                if (!legendIsAlreadyHere(ai, c, null)) {
+                    fresh.add(c);
+                }
+            }
+            if (fresh.isEmpty()) {
+                return isOptional ? null : ComputerUtilCard.getWorstAI(valid);
+            }
+            return ComputerUtilCard.getBestAI(fresh);
+        }
+
+        // For an ordinary self-dig that puts a card from the AI's library into its hand, prefer a missing
+        // combo/commander/ramp piece when the deck plan has a concrete opinion. Keep special AILogic paths
+        // (e.g. DigForCreature and EmulateScry) and other zones/players on their existing choices.
+        if (logic.isEmpty()
+                && sa.getActivatingPlayer() == ai
+                && relatedPlayer == ai
+                && "Library".equalsIgnoreCase(sa.getParamOrDefault("SourceZone", "Library"))
+                && "Hand".equalsIgnoreCase(sa.getParamOrDefault("DestinationZone", "Hand"))
+                && ai.getController() instanceof PlayerControllerAi) {
+            final DeckPlan plan = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai);
+            final Card planned = plan.tutorPick(ai, valid);
+            if (planned != null) {
+                return planned;
+            }
         }
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai) && !"ChooseBestForOpponent".equals(logic)) {

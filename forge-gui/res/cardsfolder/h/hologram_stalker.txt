@@ -1,0 +1,9 @@
+Name:Hologram Stalker
+ManaCost:4 G G
+Types:Creature Hirogen Warrior
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target permanent card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | ValidTgtsDesc$ permanent card in your graveyard
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | ValidCard$ Card.YouOwn | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever a card leaves your graveyard, create a 3/3 colorless Illusion artifact creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_illusion | TokenOwner$ You
+Oracle:When this creature enters, return target permanent card from your graveyard to your hand.\nWhenever a card leaves your graveyard, create a 3/3 colorless Illusion artifact creature token. This ability triggers only once each turn.

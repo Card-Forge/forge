@@ -1,16 +1,20 @@
 package forge.ai;
 
 import java.util.List;
+import java.util.Random;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.ability.ScryAi;
+import forge.ai.ability.SurveilAi;
 import forge.ai.simulation.FlatMonteCarloStats;
 import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 /**
  * Decision tests for the strategic side of the Monte Carlo AI: does it use card draw and selection, does it keep up
@@ -74,6 +78,23 @@ public class FlatMonteCarloStrategyTest extends AITest {
         AssertJUnit.assertEquals("with three open Islands and nothing else to do the AI should cast Opt", "Opt", play);
     }
 
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void doesNotActivateHandToBattlefieldAbilitiesWithoutACreatureInHand() {
+        for (final String cardName : new String[] {
+                "Aether Vial", "Quicksilver Amulet", "Belbe's Portal", "Elvish Piper" }) {
+            final Game game = newGame(true);
+            final Player ai = game.getPlayers().get(1);
+            final Player opp = game.getPlayers().get(0);
+            addCards("Forest", 6, ai); // enough to activate each ability, including Quicksilver Amulet
+            addCard(cardName, ai).setSickness(false);
+            fill(ai, "Forest", "Grizzly Bears", "Air Elemental"); // creatures in the library do not satisfy an Origin$ Hand cost
+            fill(opp, "Mountain");
+            setPhase(game, PhaseType.MAIN2, ai);
+
+            AssertJUnit.assertNull(cardName + " must not activate when there is no eligible creature in hand", nextPlay(ai));
+        }
+    }
+
     // ------------------------------------------------------------------ helpers for the opponent's turn
 
     /** Makes the opponent (the other player) cast the card for real, leaving the spell on the stack. */
@@ -105,6 +126,50 @@ public class FlatMonteCarloStrategyTest extends AITest {
         game.getAction().checkStateEffects(true);
     }
 
+    /**
+     * Force the old 40% heuristic to receive an unfavourable random value. At the AI's opponent-end-step window,
+     * instant-speed Scry and Surveil must now be accepted deterministically after their safety checks.
+     */
+    private void assertSelectionIsAcceptedAtOpponentsEndStep(final String cardName, final SpellAbilityAi spellAi) {
+        final Game game = newGame(false);
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 2, ai);
+        final forge.game.card.Card spell = addCardToZone(cardName, ai, ZoneType.Hand);
+        fill(ai, "Island", "Grizzly Bears");
+        setPhase(game, PhaseType.END_OF_TURN, opp);
+        final SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+
+        final Random previousRandom = MyRandom.getRandom();
+        try {
+            // CountingRandom delegates nextInt() to this source; -1 makes nextFloat() almost 1.0.
+            MyRandom.setRandom(new Random() {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public int nextInt() {
+                    return -1;
+                }
+            });
+            final AiAbilityDecision decision = spellAi.canPlay(ai, sa);
+            AssertJUnit.assertTrue(cardName + " should be accepted at the opponent's end step: " + decision,
+                    decision.willingToPlay());
+        } finally {
+            MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    @Test
+    public void instantScryIsAcceptedAtOpponentsEndStepWithoutRandomChance() {
+        assertSelectionIsAcceptedAtOpponentsEndStep("Opt", new ScryAi());
+    }
+
+    @Test
+    public void instantSurveilIsAcceptedAtOpponentsEndStepWithoutRandomChance() {
+        assertSelectionIsAcceptedAtOpponentsEndStep("Consider", new SurveilAi());
+    }
+
     // ------------------------------------------------------------------ opponent's end step
 
     @Test(timeOut = LONG_TIMEOUT_MS)
@@ -121,6 +186,35 @@ public class FlatMonteCarloStrategyTest extends AITest {
         final String play = nextPlay(ai);
         System.out.println("drawsACardAtTheOpponentsEndStep -> " + play);
         AssertJUnit.assertEquals("unused mana at the opponent's end step should be turned into a card", "Opt", play);
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void impulseIsCastAtTheOpponentsEndStep() {
+        final Game game = newGame(true);
+        game.AI_FLAT_MONTE_CARLO_MAX = true;
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 3, ai);
+        addCardToZone("Impulse", ai, ZoneType.Hand);
+        fill(ai, "Island", "Grizzly Bears", "Air Elemental");
+        fill(opp, "Mountain");
+        setPhase(game, PhaseType.END_OF_TURN, opp);
+        // FlatMC seeds each rollout from MyRandom. Pin the decision's starting state so that CI and local runs
+        // compare the same hidden library order and rollout samples.
+        final String play = nextPlayWithSeed(ai, 0x494D50554C53454CL);
+        System.out.println("impulseIsCastAtTheOpponentsEndStep -> " + play);
+        AssertJUnit.assertEquals("a Dig spell that selects a card should use otherwise-unused end-step mana", "Impulse", play);
+    }
+
+    /** Runs one FlatMC decision from a known random state and restores the shared RNG afterwards. */
+    private static String nextPlayWithSeed(final Player ai, final long seed) {
+        final Random previousRandom = MyRandom.getRandom();
+        try {
+            MyRandom.setRandom(new Random(seed));
+            return nextPlay(ai);
+        } finally {
+            MyRandom.setRandom(previousRandom);
+        }
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)

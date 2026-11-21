@@ -2,9 +2,7 @@ package forge.ai.simulation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -160,11 +158,11 @@ public class FlatMonteCarloEnhancementTest extends AITest {
         addCardToZone("Runeclaw Bear", ai, ZoneType.Hand);
         addCardToZone("Divination", ai, ZoneType.Hand);
         addCardToZone("Doom Blade", ai, ZoneType.Hand);
-        final java.util.List<SpellAbility> plays = new java.util.ArrayList<>();
+        final List<SpellAbility> plays = new ArrayList<>();
         for (final Card c : ai.getZone(ZoneType.Hand).getCards()) {
             plays.add(c.getSpellAbilities().get(0));
         }
-        final java.util.List<SpellAbility> picked = FlatMonteCarloPicker.diversify(plays, 3);
+        final List<SpellAbility> picked = FlatMonteCarloPicker.diversify(plays, 3);
         AssertJUnit.assertEquals(3, picked.size());
         AssertJUnit.assertSame("the heuristic favourite stays first", plays.get(0), picked.get(0));
         boolean draw = false;
@@ -333,6 +331,13 @@ public class FlatMonteCarloEnhancementTest extends AITest {
         expected.put("Giant Growth", FlatMonteCarloPicker.HoldKind.TRICK);       // pump
         expected.put("Ambush Viper", FlatMonteCarloPicker.HoldKind.FLASH_CREATURE);
         expected.put("Brineborn Cutthroat", FlatMonteCarloPicker.HoldKind.FLASH_CREATURE);
+        expected.put("Tishana's Tidebinder", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION);
+        expected.put("Sister of Silence", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION);
+        expected.put("Ertai Resurrected", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION); // modal counter
+        expected.put("Frilled Mystic", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION);
+        expected.put("Mystic Snake", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION);
+        expected.put("Spell Queller", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION); // exiles a spell
+        expected.put("Venser, Shaper Savant", FlatMonteCarloPicker.HoldKind.FLASH_ETB_INTERACTION); // can return a spell
         expected.put("Brainstorm", FlatMonteCarloPicker.HoldKind.OTHER);         // draws, nothing to aim at
         expected.put("Opt", FlatMonteCarloPicker.HoldKind.OTHER);
 
@@ -378,6 +383,62 @@ public class FlatMonteCarloEnhancementTest extends AITest {
 
         addCardToZone("Runeclaw Bear", opp, ZoneType.Hand);
         AssertJUnit.assertTrue("the opponent can cast something: worth holding", FlatMonteCarloPicker.holdUpBonus(ai, cfg) > 0);
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void testFlashEtbAbilityInteractionIsWorthHoldingAgainstNonManaAbilities() {
+        final Game game = newGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 3, ai);
+        addCardToZone("Tishana's Tidebinder", ai, ZoneType.Hand);
+
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.categoryHold = true;
+        final int noTarget = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+
+        addCard("Llanowar Elves", opp); // its mana ability is not a legal Tidebinder target
+        final int manaAbilityOnly = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+        AssertJUnit.assertEquals("mana abilities do not make Tidebinder more valuable", noTarget, manaAbilityOnly);
+
+        addCard("Eladamri, Korvecdal", opp);
+        final int withActivatedAbility = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+        AssertJUnit.assertTrue("hold up Tidebinder for an opposing activated ability",
+                withActivatedAbility > manaAbilityOnly);
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void testFlashEtbAbilityInteractionIsWorthHoldingAgainstTriggeredAbilities() {
+        final Game game = newGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 3, ai);
+        addCardToZone("Tishana's Tidebinder", ai, ZoneType.Hand);
+
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.categoryHold = true;
+        final int withoutTarget = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+
+        addCard("Soul Warden", opp);
+        final int withTrigger = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+        AssertJUnit.assertTrue("hold up Tidebinder for an opposing triggered ability", withTrigger > withoutTarget);
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void testSpellCounterFlashCreatureIsWorthHoldingWhenOpponentHasCards() {
+        final Game game = newGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        addCards("Island", 4, ai);
+        addCardToZone("Frilled Mystic", ai, ZoneType.Hand);
+
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.categoryHold = true;
+        final int withoutSpell = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+
+        addCardToZone("Runeclaw Bear", opp, ZoneType.Hand);
+        final int withSpell = FlatMonteCarloPicker.holdUpBonus(ai, cfg);
+        AssertJUnit.assertTrue("hold up Frilled Mystic for an opposing spell", withSpell > withoutSpell);
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)

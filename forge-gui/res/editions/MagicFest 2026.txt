@@ -23,3 +23,5 @@ F11 R Bicycle Elemental @Mark Rosewater
 15 R Tana, the Bloodsower @Ernanda Souza
 16 R Tymna the Weaver @Justyna Dura
 F17 R Auspicious Aquarium @Mark Rosewater
+18 R Encounter the Unknown @Joan Piqué Llorens
+19 R Nyota Uhura, Communications @Wei Guan

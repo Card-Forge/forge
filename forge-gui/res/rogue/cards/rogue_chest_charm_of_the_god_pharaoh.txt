@@ -1,0 +1,7 @@
+Name:Chest Trait - Charm Of The God-Pharaoh
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the number of tapped creatures you control.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.Opponent
+SVar:X:Count$Valid Creature.YouCtrl+tapped
+Oracle:At the beginning of your end step, each opponent loses life equal to the number of tapped creatures you control.

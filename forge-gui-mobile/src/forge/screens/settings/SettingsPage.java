@@ -392,6 +392,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             }
         }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_DOUBLE_TABS,
+            Forge.getLocalizer().getMessageorUseDefault("lblCompactDoubleTabs", "Double Zone Tabs (Compact Layout)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCompactDoubleTabs", "Shows every zone tab at once in two columns, like the desktop version, instead of one scrolling column. The counts are shown under the icons.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadDoubleTabs();
+                if (MatchController.instance != null) {
+                    MatchController.instance.resetPlayerPanels();
+                }
+                if (MatchController.getView() != null) {
+                    MatchController.getView().revalidate();
+                }
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_ZONE_TABS,
             Forge.getLocalizer().getMessageorUseDefault("lblCompactZoneTabs", "Compact Zone Tabs (Landscape Mode)"),
             Forge.getLocalizer().getMessageorUseDefault("nlCompactZoneTabs", "When a zone tab is opened, the zone is shown over the battlefield instead of shrinking it.")) {

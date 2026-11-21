@@ -1,7 +1,9 @@
 Name:Running Is Useless
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDestroy | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetsWithDifferentCMC$ True | TargetMax$ AmountToChoose | TargetMin$ 0 | TgtPrompt$ Choose any number of creatures with different mana values.
-SVar:AmountToChoose:Count$Valid Creature
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.
+SVar:TrigChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ Max | Choices$ Creature | WithDifferentManaValues$ True | ChoiceTitle$ Choose a creature with a different mana value | AILogic$ OppPreferred | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:Max:Count$Valid Creature$DifferentCardManaCost
 Oracle:When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.

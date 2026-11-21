@@ -1,0 +1,8 @@
+Name:Spatial Anomaly
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ DealDamage | Cost$ 4 R T Sac<1/CARDNAME/this land> | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ It deals 2 damage to target creature. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+SVar:DBToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {C}.\n{4}{R}, {T}, Sacrifice this land: It deals 2 damage to target creature. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."

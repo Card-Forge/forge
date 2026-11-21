@@ -8,12 +8,15 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -22,6 +25,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CountersRemoveAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return MayDecisions.removeCounter(player, sa);
+    }
+
 
     /*
      * (non-Javadoc)
@@ -34,7 +42,9 @@ public class CountersRemoveAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         final String type = sa.getParam("CounterType");
 
-        if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases") && !type.equals("M1M1")) {
+        // "remove all counters" (Vampire Hexmage) is also an answer to something on the stack, in any phase
+        final boolean respondsToStack = type.equals("All") && !ai.getGame().getStack().isEmpty();
+        if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases") && !type.equals("M1M1") && !respondsToStack) {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
@@ -62,6 +72,83 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
 
         return super.checkApiLogic(ai, sa);
+    }
+
+    /** True only while a card was actually cast for Impending and still has time counters. */
+    public static boolean isImpendingPermanent(final Card card) {
+        if (card == null || card.getCounters(CounterEnumType.TIME) <= 0 || card.isCreature()
+                || !card.hasStartOfKeyword("Impending") || card.getRules() == null
+                || !card.getRules().getType().isCreature()) {
+            return false;
+        }
+        // The keyword is printed on the card even when it was cast normally. Check the actual cast so
+        // that an ordinary Overlord with unrelated time counters is not mistaken for an impending one.
+        final SpellAbility cast = card.getCastSA();
+        return cast != null && cast.isImpending();
+    }
+
+    /**
+     * "Remove all counters from target permanent" paid for with the source itself (Vampire Hexmage): the own permanent
+     * that is better off without its counters, or null when there is none or this is not the moment to give up the source.
+     * Impending permanents (Overlord of the Balemurk: not a creature until the last time counter is gone) become what they
+     * are at once, creatures held down by negative counters are freed. It is worth the source at the end of the opponent's
+     * turn (the counters would otherwise keep ticking down only on our own end step), when the source is about to be
+     * removed anyway, and when the target is about to be removed while it is not a creature.
+     */
+    public static Card worthwhileOwnTarget(final Player ai, final SpellAbility sa) {
+        if (sa.getApi() != ApiType.RemoveCounter || !"All".equals(sa.getParam("CounterType")) || !sa.usesTargeting()) {
+            return null;
+        }
+        final Card source = sa.getHostCard();
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final boolean endOfOpponentTurn = ph.is(PhaseType.END_OF_TURN) && !ph.isPlayerTurn(ai);
+        // with this ability as the "saviour" the prediction only knows the answers it was written for (regenerate, bounce,
+        // a pump): ask what the opponent's spells threaten at all, giving up the source is the answer worked out below
+        final List<GameObject> threatened = ComputerUtil.predictThreatenedObjects(ai, null);
+        final boolean sourceThreatened = threatened.contains(source);
+        final int sourceValue = source.isCreature() ? ComputerUtilCard.evaluateCreature(source) : 0;
+
+        Card best = null;
+        int bestValue = Integer.MIN_VALUE;
+        final CardCollection ownTargets = new CardCollection();
+        ownTargets.addAll(CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa));
+        // canTarget() rejects a target already selected by this ability (unique-target check). Include it
+        // explicitly because this method is also called again while the AI is checking the sacrifice cost.
+        for (final Card selected : sa.getTargets().getTargetCards()) {
+            if (selected.isInZone(ZoneType.Battlefield) && selected.getController() == ai && !ownTargets.contains(selected)) {
+                ownTargets.add(selected);
+            }
+        }
+        for (final Card c : ownTargets) {
+            if (c == source) {
+                continue;
+            }
+            int value;
+            if (isImpendingPermanent(c)) {
+                value = 10000 + ComputerUtilCard.evaluateCreature(c); // it turns into the creature it is
+            } else if (c.isCreature() && hasNegativeCounter(c) && ComputerUtilCard.evaluateCreature(c) > sourceValue) {
+                value = ComputerUtilCard.evaluateCreature(c);
+            } else {
+                continue;
+            }
+            if (!(endOfOpponentTurn || sourceThreatened || threatened.contains(c))) {
+                continue;
+            }
+            if (value > bestValue) {
+                best = c;
+                bestValue = value;
+            }
+        }
+        return best;
+    }
+
+    private static boolean hasNegativeCounter(final Card c) {
+        for (final CounterType t : c.getCounters().elementSet()) {
+            if (ComputerUtil.isNegativeCounter(t, c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private AiAbilityDecision doTgt(Player ai, SpellAbility sa, boolean mandatory) {
@@ -101,6 +188,14 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 }
             }
 
+            // An impending permanent is about to become a creature (or is being saved from removal).
+            // Prefer freeing it over stripping loyalty from an opposing planeswalker.
+            final Card own = worthwhileOwnTarget(ai, sa);
+            if (isImpendingPermanent(own)) {
+                sa.getTargets().add(own);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
             // Get rid of Planeswalkers:
             list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
@@ -110,6 +205,11 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
             if (!planeswalkerList.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList));
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            if (own != null) {
+                sa.getTargets().add(own);
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         } else if (type.matches("Any")) {

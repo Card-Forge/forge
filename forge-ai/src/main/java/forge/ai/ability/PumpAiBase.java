@@ -193,7 +193,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return true;
             }
             Predicate<Card> flyingOrReach = CardPredicates.hasKeyword(Keyword.FLYING).or(CardPredicates.hasKeyword(Keyword.REACH));
+            // flying is for blocking a flyer, so it has to be there when the blockers are declared, not after
             if (ph.isPlayerTurn(opp) && combat != null
+                    && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && !attackingFlyer.isEmpty()
                     && CombatUtil.canBlock(card)) {
                 // Use defensively to destroy the opposing Flying creature when possible, or to block with an indestructible

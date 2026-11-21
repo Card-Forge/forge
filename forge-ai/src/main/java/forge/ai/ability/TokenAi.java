@@ -41,10 +41,16 @@ import forge.util.collect.FCollectionView;
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 public class TokenAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts",
+    };
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card source = sa.getHostCard();
+        if ("DiscardFattyForReanimation".equals(sa.getParam("AILogic"))) {
+            return true; // the logic decides by the cards in hand, at any time of the turn
+        }
         // Planeswalker-related flags
         boolean pwMinus = false;
         boolean pwPlus = false;
@@ -135,6 +141,10 @@ public class TokenAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
+        if ("DiscardFattyForReanimation".equals(sa.getParam("AILogic"))) {
+            return discardFattyForReanimation(ai, sa);
+        }
+
         Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens
@@ -152,6 +162,12 @@ public class TokenAi extends SpellAbilityAi {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+
+            if (isTargetedAuraToken(actualToken, sa)) {
+                return chooseTargetedAuraToken(ai, sa, actualToken, false)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
@@ -212,6 +228,32 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     /**
+     * The Underworld Cookbook: a card is discarded for a Food only when that is the card's best use, a creature too
+     * expensive to ever cast (the card script's DiscardCost preference) while a reanimation spell in hand will bring
+     * it back from the graveyard.
+     */
+    private static AiAbilityDecision discardFattyForReanimation(final Player ai, final SpellAbility sa) {
+        final CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
+        final Card fatty = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DiscardCost", hand);
+        if (fatty == null || fatty.getCMC() <= ai.getLandsInPlay().size() + 1) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+        for (final Card c : hand) {
+            if (c == fatty) {
+                continue;
+            }
+            for (final SpellAbility spell : c.getSpellAbilities()) {
+                if (spell.getApi() == ApiType.ChangeZone && spell.hasParam("Origin") && spell.hasParam("Destination")
+                        && ZoneType.listValueOf(spell.getParam("Origin")).contains(ZoneType.Graveyard)
+                        && "Battlefield".equals(spell.getParam("Destination"))) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
      * Checks if the token(s) can save a creature from a sacrifice effect
      */
     private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
@@ -258,7 +300,11 @@ public class TokenAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (sa.canTarget(ai)) {
+            if (isTargetedAuraToken(actualToken, sa)) {
+                if (!chooseTargetedAuraToken(ai, sa, actualToken, mandatory)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
+            } else if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
             } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -311,8 +357,34 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxLand".equals(sa.getParam("AILogic"))) {
+            return takesTheAttackTaxLand(player, sa);
+        }
+        if ("AttackTax".equals(sa.getParam("AILogic"))) {
+            return AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController()); // City Hall: two Treasures
+        }
         // TODO: AILogic
         return true;
+    }
+
+    /**
+     * Zagorka, Mother of Sanctum: each player may make a tapped land, and each opponent who does cannot attack her controller
+     * during their next turn. Her controller takes it. An opponent takes it only when the land is worth more than the attack
+     * it gives up: it has no creature that could attack next turn, and not so many lands that one more adds nothing. Taking it
+     * always would build a board that never attacks, until the library is empty.
+     */
+    private static boolean takesTheAttackTaxLand(final Player player, final SpellAbility sa) {
+        final Player owner = sa.getHostCard().getController();
+        if (player.equals(owner) || !player.isOpponentOf(owner)) {
+            return true;
+        }
+        for (final Card c : player.getCreaturesInPlay()) {
+            // next turn it is untapped and no longer sick: what can attack then is what would stay at home
+            if (c.getNetCombatDamage() > 0 && CombatUtil.canAttackNextTurn(c, owner)) {
+                return false;
+            }
+        }
+        return player.getLandsInPlay().size() < 7;
     }
 
     /*
@@ -361,6 +433,27 @@ public class TokenAi extends SpellAbilityAi {
         // Apply static abilities
         ComputerUtilCard.applyStaticContPT(ai.getGame(), result, null);
         return result;
+    }
+
+    /**
+     * Targeted Aura tokens with an attachment AI logic must use the same controller preference as Aura spells.
+     * In particular, "Pump" is beneficial and should prefer our own permanents, not the opponent's.
+     */
+    private static boolean isTargetedAuraToken(final Card token, final SpellAbility sa) {
+        return token.isAura() && "Targeted".equals(sa.getParam("AttachedTo")) && token.hasSVar("AttachAILogic");
+    }
+
+    /** Select and add the target using the token's own AttachAILogic (e.g. Pump for Estrid's Mask). */
+    private static boolean chooseTargetedAuraToken(final Player ai, final SpellAbility sa,
+            final Card token, final boolean mandatory) {
+        // attachGeneralAI may filter the collection in place, so do not pass CardUtil's shared target list directly.
+        final CardCollection targetable = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+        final Card target = AttachAi.attachGeneralAI(ai, sa, targetable, mandatory, token, token.getSVar("AttachAILogic"));
+        if (target == null) {
+            return false;
+        }
+        sa.getTargets().add(target);
+        return true;
     }
 
     private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {

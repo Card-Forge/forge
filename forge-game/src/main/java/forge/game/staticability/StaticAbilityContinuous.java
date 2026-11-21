@@ -1055,10 +1055,18 @@ public final class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for (Player p : controller.getGame().getPlayersInTurnOrder()) {
+        final Game game = controller.getGame();
+        for (Player p : game.getPlayers()) {
             if (p.isValid(strngs, controller, hostCard, stAb)) {
                 players.add(p);
             }
+        }
+        // Turn order only matters when 2+ players were matched. Asking for it up front (getPlayersInTurnOrder)
+        // scans every static ability on every card in play for a turn-reversing effect, and this method runs
+        // for every static ability on every static-ability pass: a copy of all those cards each time.
+        // Most statics match no player at all (e.g. "Affected$ Creature.YouCtrl").
+        if (players.size() > 1 && !game.getTurnOrder().isDefaultDirection()) {
+            Collections.reverse(players);
         }
         players.removeAll(stAb.getIgnoreEffectPlayers());
 
