@@ -27,8 +27,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -105,7 +103,6 @@ public abstract class CountersAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
         } else if (counterType.is(CounterEnumType.CHARGE)) {
-            final Pattern stationPattern = Pattern.compile("counters_GE(\\d+)_CHARGE");
             final String removePattern = ".*(for|number|emove) \\w+ (?:charge )counter.*";
             final CardCollection boon = CardLists.filter(list, c ->  {
                 if (c.getOracleText().matches(removePattern)) {
@@ -114,14 +111,10 @@ public abstract class CountersAi extends SpellAbilityAi {
                 if (c.hasKeyword(Keyword.STATION)) {
                     Integer maxStation = null;
                     for (StaticAbility st : c.getStaticAbilities()) {
-                        if (!st.isIntrinsic() || !st.hasParam("Affected")) {
+                        if (!st.isIntrinsic() || !st.hasParam("Station")) {
                             continue;
                         }
-                        Matcher m = stationPattern.matcher(st.getParam("Affected"));
-                        if (!m.find()) {
-                            continue;
-                        }
-                        int value = Integer.valueOf(m.group(1));
+                        int value = Integer.valueOf(st.getParam("Station"));
                         maxStation = maxStation == null ? value : Math.max(maxStation, value);
                     }
                     if (maxStation != null && c.getCounters(CounterEnumType.CHARGE) < maxStation) {
