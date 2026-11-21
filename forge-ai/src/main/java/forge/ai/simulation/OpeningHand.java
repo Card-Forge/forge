@@ -194,7 +194,8 @@ public final class OpeningHand {
             if (c.isLand() || isMdfcLand(c)) {
                 if (isEarlyManaLand(c)) {
                     final byte own = producedColors(c);
-                    final byte available = own != 0 ? own : libraryColors(lib);
+                    // only a land that fetches another land inherits the library's colours; a colourless one (Wastes) stays colourless
+                    final byte available = fetchesLand(c) ? libraryColors(lib) : own;
                     colors |= available;
                     sources.add(available);
                 }
@@ -350,7 +351,7 @@ public final class OpeningHand {
                 if (isEarlyManaLand(c)) {
                     lands++;
                     final byte own = producedColors(c);
-                    colors |= own != 0 ? own : libraryColors(lib);
+                    colors |= fetchesLand(c) ? libraryColors(lib) : own; // a colourless land (Wastes) must not borrow the library's colours
                 }
                 if (depths && ComboPlan.isDepthsPiece(c)) {
                     landKeys++; // Dark Depths and the Stage are lands, and the pieces the deck is built around

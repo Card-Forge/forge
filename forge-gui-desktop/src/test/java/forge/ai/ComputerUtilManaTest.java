@@ -418,6 +418,7 @@ public class ComputerUtilManaTest extends SimulationTest {
         assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
         p.getGame().getPlayers().get(0).setLife(1, null);
         assertTrue(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
 
     /** A player in their own main phase. */
     private Player auraBoard() {

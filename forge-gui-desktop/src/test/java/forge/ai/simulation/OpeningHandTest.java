@@ -190,4 +190,26 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertTrue("the Sea can cover black while the Island covers blue",
                 castsSomething(hand("Underground Sea", "Island", "Baleful Strix")));
     }
+
+    @Test
+    public void colorlessLandDoesNotBorrowTheLibraryColors() {
+        setUp(0, 1); // a Mountain is left in the library, but the hand has no red source
+        AssertJUnit.assertFalse("Wastes makes only {C} and must not pretend to find the library's Mountain",
+                castsSomething(hand("Wastes", "Plains", "Lightning Bolt")));
+    }
+
+    @Test
+    public void handWithOnlyColorlessAndOffColorLandsIsNotKept() {
+        setUp(0, 1);
+        // Wastes and Plains cast none of the red spells, whatever the library still holds
+        AssertJUnit.assertFalse(keeps(DeckPlan.of(DeckPlan.Archetype.BURN), true,
+                "Wastes", "Plains", "Lightning Bolt", "Shock", "Lightning Bolt", "Shock", "Lightning Bolt"));
+    }
+
+    @Test
+    public void fetchLandStillGetsTheLibraryColors() {
+        setUp(0, 1);
+        AssertJUnit.assertTrue("Evolving Wilds can fetch the Mountain that is left in the library",
+                castsSomething(hand("Evolving Wilds", "Plains", "Lightning Bolt")));
+    }
 }
