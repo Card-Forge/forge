@@ -14,4 +14,4 @@ SVar:TotalOpponents:PlayerCountOpponents$Amount
 SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
 SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
 SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
-Oracle:First Strike\nYou can't cast Good Knight if you’re on the Phyrexian team.\nIf Good Knight is on the battlefield at the end of the game, score an additional point for the Mirran team.
+Oracle:First Strike\nYou can't cast Good Knight if you're on the Phyrexian team.\nIf Good Knight is on the battlefield at the end of the game, score an additional point for the Mirran team.

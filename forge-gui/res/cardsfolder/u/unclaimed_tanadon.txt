@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Artifact Creature Beast
 PT:8/6
 K:MayEffectFromOpeningDeck:ChooseTeam
-SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$ If you're on the Mirran team, this card costs {1} less to cast.\nIf you’re on the Phyrexian team, the colored mana symbols in Unclaimed Tanadon's mana cost are Phyrexian mana. (You can pay them either with {G} or 2 life.)
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$ If you're on the Mirran team, this card costs {1} less to cast.\nIf you're on the Phyrexian team, the colored mana symbols in Unclaimed Tanadon's mana cost are Phyrexian mana. (You can pay them either with {G} or 2 life.)
 SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
 SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
 S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | ManaCost$ 4 G G | CheckSVar$ TeamMirran
@@ -11,4 +11,4 @@ S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | Mana
 SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
 SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
 SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
-Oracle:If you're on the Mirran team, this card costs {1} less to cast.\nIf you’re on the Phyrexian team, the colored mana symbols in Unclaimed Tanadon's mana cost are Phyrexian mana. (You can pay them either with {G} or 2 life.)
+Oracle:If you're on the Mirran team, this card costs {1} less to cast.\nIf you're on the Phyrexian team, the colored mana symbols in Unclaimed Tanadon's mana cost are Phyrexian mana. (You can pay them either with {G} or 2 life.)
