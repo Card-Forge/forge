@@ -65,7 +65,6 @@ Defines the type of reward. Type names are case-sensitive. A reward with an unkn
 | [`deck`](#deck) | Gives the player a whole deck, named by `precon`, `commanderPrecon` or `sourceDeck`. |
 | [`cardPackShop`](#cardpackshop-booster-packs) | Gives sealed booster packs, from `editions`, from a range of years, or of one color. |
 | [`landSketchbookShop`](#landsketchbookshop) | Gives random Landscape Sketchbook items. |
-| [`cardPack`](#cardpack) | Set by game logic only. |
 
 `{"type": "card", ...}`
 
