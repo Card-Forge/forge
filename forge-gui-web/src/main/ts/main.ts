@@ -66,10 +66,11 @@ const report = (text: string): void => {
 window.addEventListener('error', e => report(String((e.error as Error | undefined)?.stack ?? e.message)));
 window.addEventListener('unhandledrejection', e => report(String((e.reason as Error | undefined)?.stack ?? e.reason)));
 
-// While messages are held, the prompt on screen is from an earlier board. An answer sent now would go to a prompt the player has not seen
+// While messages are held, the prompt on screen is from an earlier board. An answer sent now would go to a prompt the player has not seen.
+// A spectator's buttons control playback and answer no prompt, so they are sent at once
 const HELD_INPUT = new Set(['selectCard', 'selectPlayer', 'selectStackItem', 'useMana', 'ok', 'cancel', 'endTurn', 'undo']);
 const sendNow: Send = msg => {
-  if (!pacer.holding() || !HELD_INPUT.has(msg.t)) send(msg);
+  if (!pacer.holding() || !HELD_INPUT.has(msg.t) || model.spectating) send(msg);
   else console.warn(`Not sent while the page catches up: ${msg.t}`);
 };
 const wire = createActions(sendNow);
@@ -193,7 +194,7 @@ function runKey(command: KeyCommand): void {
     case 'showLog': showLog(); break;
     // Desktop shows its dev panel only in dev mode. On the web only the host gets the dev menu
     case 'showDev': if (setting('devMode') && model.host && !model.spectating) changeUi(u => { u.gameMenu = 'dev'; }); break;
-    case 'concede': if (!model.spectating) changeUi(u => { u.concedeAsk = true; }); break;
+    case 'concede': changeUi(u => { u.concedeAsk = true; }); break;
     case 'yieldOptions': changeUi(u => { u.gameMenu = 'stops'; }); break;
     case 'macroRecord': recordMacro(actions); break;
     case 'macroRepeat': actions.macroRepeat(); break;

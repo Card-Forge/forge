@@ -208,8 +208,14 @@ export function keyCommand(press: KeyPress, model: Model, ui: UiState, keys: Key
   }
   // A request in a dialog is answered in the dialog. The prompt buttons under it get no keys
   const pick = stackPick(model);
-  if ((request && !pick) || model.spectating) {
+  if (request && !pick) {
     return null;
+  }
+  // A spectator's two buttons pause, step and change the speed, as on desktop. The concede shortcut asks to stop watching
+  if (model.spectating) {
+    if (ok && model.prompt?.ok?.enabled) return 'ok';
+    if (escape && model.prompt?.cancel?.enabled) return 'cancel';
+    return shortcut === 'SHORTCUT_CONCEDE' ? 'concede' : null;
   }
   // A pick from the stack is declined with the prompt's Cancel, if declining is allowed
   if (pick) {

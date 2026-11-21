@@ -870,7 +870,6 @@ html[data-motion="reduced"] .dock-new { animation: none; }
 .count button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-2); font-weight: 700; }
 .count button:disabled:not([aria-pressed="true"]) { opacity: .4; }
 .plate.leaving { opacity: .38; border-style: dashed; }
-.seat-note { margin: 0; font-size: 12.5px; color: var(--muted); }
 
 .popup-anchor { position: relative; }
 .popup.wide { width: min(560px, calc(100vw - 32px)); }

@@ -75,7 +75,7 @@ export function renderScreens(model: Model, actions: Actions): void {
       <GameMenu model={model} actions={actions} close={() => changeUi(u => { u.gameMenu = null; })}
         open={dialog => changeUi(u => { u.gameMenu = dialog; })} dev={ui.gameMenu === 'dev'} />
     )}
-    {page === 'match' && ui.concedeAsk && <ConcedeQuestion actions={actions} />}
+    {page === 'match' && ui.concedeAsk && <ConcedeQuestion model={model} actions={actions} />}
     {page === 'match' && ui.gameMenu === 'decisions' && (
       <AutoDecisionsDialog model={model} actions={actions} close={() => changeUi(u => { u.gameMenu = null; })} />
     )}

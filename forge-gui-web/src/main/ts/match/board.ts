@@ -83,7 +83,7 @@ export function renderMatch(model: Model, actions: Actions, events: readonly Gam
   renderStack(model, events);
   renderOpponents(byId('opponent'), model, onField, actions, select);
   renderSeat(byId('me'), model, me(model), onField, actions, select);
-  renderOut(model, actions);
+  renderOut(model);
   announceTurn(model, g);
   renderPhaseBar(model, g, actions);
   renderPlanes(model, actions);
@@ -273,7 +273,7 @@ const PLAYERS_ICON = `${iconSvg(ICONS.users)}<i class="dot" aria-hidden="true"><
 /** Whether the banner for a player out of a game that continues was shown. It shows once, and offers a leave button only in a local game. */
 let outSaid = false;
 
-function renderOut(model: Model, actions: Actions): void {
+function renderOut(model: Model): void {
   const mine = me(model);
   const out = !!mine?.HasLost && !model.gameOver;
   let banner = document.getElementById('out-banner');
@@ -288,7 +288,7 @@ function renderOut(model: Model, actions: Actions): void {
   banner.id = 'out-banner';
   banner.setAttribute('role', 'status');
   banner.innerHTML = `<span class="skull">${SKULL}</span><div><b></b><p></p></div>`
-    + '<button class="watch"></button>' + (model.networked ? '' : '<button class="leave primary"></button>');
+    + '<button class="watch"></button>' + (model.networked ? '' : '<button class="leave"></button>');
   q(banner, 'b').textContent = t('lblWebBoardYoureOut');
   q(banner, 'p').textContent = t('lblWebBoardGameGoesOn');
   q(banner, '.watch').textContent = t('lblWebBoardKeepWatching');
@@ -296,10 +296,7 @@ function renderOut(model: Model, actions: Actions): void {
   const leave = banner.querySelector<HTMLButtonElement>('.leave');
   if (leave) {
     leave.textContent = t('lblWebBoardLeaveMatch');
-    leave.onclick = () => {
-      actions.quitMatch();
-      actions.leave();
-    };
+    leave.onclick = () => changeUi(u => { u.concedeAsk = true; });
   }
   byId('match').append(banner);
 }

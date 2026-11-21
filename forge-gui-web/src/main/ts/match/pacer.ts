@@ -31,12 +31,13 @@ export function createPacer(model: Model, apply: (msg: ServerMessage) => void): 
     } else if (!held) {
       // Each release applies only to this hold. So an earlier banner that ends late cannot release a later turn early
       const releaseThis = () => { if (held?.[0] === msg) release(); };
+      // The host's playback speed paces a spectator's game, so nothing is held for it. announceComing runs first so the turn banner still shows
       // A sound or a log line arrives after its own board. It is held with that board when the board is held, but never starts a hold
       if (msg.t === 'state' && !msg.full && Date.now() < showUntil) {
         held = [msg];
         setBoardBehind(true);
         setTimeout(releaseThis, showUntil - Date.now());
-      } else if (msg.t === 'state' && announceComing(model, msg, releaseThis)) {
+      } else if (msg.t === 'state' && announceComing(model, msg, releaseThis) && !model.spectating) {
         held = [msg];
         setBoardBehind(true);
         announcing = true;
@@ -44,7 +45,7 @@ export function createPacer(model: Model, apply: (msg: ServerMessage) => void): 
         setTimeout(releaseThis, HOLD_LIMIT_MS);
       } else {
         apply(msg);
-        if (msg.t === 'state' && worthSeeing(msg.events, msg.localPlayers)) {
+        if (msg.t === 'state' && !model.spectating && worthSeeing(msg.events, msg.localPlayers)) {
           showUntil = Date.now() + Number(setting('pace'));
         } else if (msg.t === 'request' || (msg.t === 'prompt' && asksPlayer(msg, passingFor(model.controls)))) {
           // When the player is asked something, they are looking at the current board. So what they do next is shown at once

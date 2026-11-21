@@ -85,9 +85,9 @@ html:not([data-form="portrait"]) #prompt.strike .cancel::before {
 :is(#prompt, .zone-answer, .dialog .actions, .first-answers) .primary kbd { background: #00000059; opacity: 1; }
 #prompt kbd, .zone-answer kbd, .dialog .actions kbd, .first-answers kbd { flex: none; display: inline-grid; place-items: center; box-sizing: border-box; min-width: 16px; height: 13px; padding: 0 4px; border-radius: 3px;
   background: #00000040; box-shadow: inset 0 -1px 0 #00000059; font: 700 8.5px/1 system-ui, sans-serif; color: inherit; opacity: .8; letter-spacing: 0; text-transform: none; }
-/* Spectating two AI players leaves nothing to answer */
+/* A spectator has no turn to pass or undo. Its buttons control the playback */
 #match .tools.watching :is(.end-turn, .auto-pass, .undo, .macro, .tools-gap) { display: none; }
-#prompt.spectating .buttons, #prompt.spectating .prompt-card { display: none; }
+#prompt.spectating .prompt-card { display: none; }
 #prompt.spectating { border-color: var(--line); box-shadow: 0 12px 34px #000a; }
 #prompt.flash { animation: shake .3s; }
 @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }

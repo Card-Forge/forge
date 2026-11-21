@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
+import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -412,7 +413,12 @@ public final class WebSession implements IHasForgeLog {
             deckCommand(channel, command);
         } else if (WebGuiGame.COMMANDS.handles(command)) {
             if (stage instanceof Playing p) {
-                p.gui().onCommand(channel, command);
+                // HostedMatch ignores the next-game choice of a seat the AI took, so the spectator starts the next game itself
+                if (p.spectating() && command instanceof NextGame n && n.decision() == NextGameDecision.CONTINUE) {
+                    local.continueMatch();
+                } else {
+                    p.gui().onCommand(channel, command);
+                }
             }
         }
     }

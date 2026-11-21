@@ -1,9 +1,11 @@
 package forge.web.match;
 
 import com.google.common.primitives.Ints;
+import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -19,6 +21,8 @@ import forge.gamemodes.net.server.HostingServer;
 import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gamemodes.net.server.ServerGameLobby;
+import forge.gui.FThreads;
+import forge.gui.control.FControlGamePlayback;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
@@ -57,6 +61,10 @@ public final class NetplaySeat implements IHasForgeLog {
     private volatile ClientGameLobby joined;
     private volatile FGameClient client;
     private volatile int webSeat = -1;
+    private volatile FControlGamePlayback playback;
+    /** While the browser spectates: the web seat, and the human player the browser seats there again before each game. */
+    private volatile RegisteredPlayer spectated;
+    private volatile LobbyPlayer spectator;
     /** Receives the draft and pool events the host sends this seat. Set before a table is opened or joined. */
     private volatile IDraftEventHandler draftHandler;
 
@@ -258,7 +266,25 @@ public final class NetplaySeat implements IHasForgeLog {
             netLog.warn("No web seat to hand to the AI");
             return;
         }
+        final Player own = ownPlayer();
+        if (own == null) {
+            netLog.warn("The web seat has no player to hand to the AI");
+            return;
+        }
+        final PlayerControllerHuman watcher = (PlayerControllerHuman) own.getController();
+        spectated = own.getRegisteredPlayer();
+        spectator = spectated.getPlayer();
         server.convertToAI(seat);
+        // A pause stops the game for everyone, so the controls are given only when no other human plays
+        final Game game = own.getGame();
+        if (game.getPlayers().stream().anyMatch(p -> p.getController() instanceof PlayerControllerHuman)) {
+            return;
+        }
+        // The seat's old controller still feeds the browser's prompt, so desktop's playback control attaches to it
+        playback = new FControlGamePlayback(watcher);
+        playback.setGame(game);
+        game.subscribeToEvents(playback);
+        watcher.getInputQueue().setInput(playback.getInput());
     }
 
     /** Gives another seat of the running match to an AI. Only the host can do this. Outside a match it does nothing. */
@@ -266,6 +292,21 @@ public final class NetplaySeat implements IHasForgeLog {
         if (hosted != null) {
             server.replaceWithAI(seat);
         }
+    }
+
+    /** Starts the next game of a match the browser spectates. */
+    public void continueMatch() {
+        final HostedMatch match = hostedMatch();
+        final RegisteredPlayer seat = spectated;
+        if (match == null || seat == null) {
+            return;
+        }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // The browser takes its seat back first. Otherwise the AI keeps it, and the web has no GUI for a match without a human seat
+            seat.setPlayer(spectator);
+            match.continueMatch();
+            spectate();
+        });
     }
 
     public HostedMatch hostedMatch() {
@@ -307,6 +348,8 @@ public final class NetplaySeat implements IHasForgeLog {
         hosted = null;
         joined = null;
         webSeat = -1;
+        spectated = null;
+        spectator = null;
     }
 
     /** Ends a game that is still running at a closing table. Otherwise its thread would wait forever for players who have left. */
@@ -323,8 +366,14 @@ public final class NetplaySeat implements IHasForgeLog {
                 humans.add(human);
             }
         }
+        final FControlGamePlayback watching = playback;
+        playback = null;
         game.getAction().invoke(() -> {
             game.setGameOver(GameEndReason.Draw);
+            // A paused spectator holds the game thread at its next priority
+            if (watching != null) {
+                watching.onGameStopRequested();
+            }
             for (final PlayerControllerHuman human : humans) {
                 human.getInputQueue().onGameOver(true);
             }

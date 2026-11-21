@@ -178,8 +178,17 @@ function drawPrompt(model: Model, actions: Actions): void {
   volume.classList.toggle('open', ui.volumeOpen);
   if (model.spectating) {
     renderPlayerChoices(root, model, [], actions);
-    q(root, '.step').textContent = stepName(game(model)?.Phase);
-    setSymbolText(q(root, '.message'), t('lblWebPromptSpectating'));
+    q(root, '.step').textContent = t('lblWebPromptSpectating');
+    // The host's playback control names the turn and fills the two buttons: Pause and a speed, or Resume and Step
+    const p = model.prompt;
+    setSymbolText(q(root, '.message'), p?.message?.trim());
+    const ok = q<HTMLButtonElement>(root, '.ok');
+    const cancel = q<HTMLButtonElement>(root, '.cancel');
+    setButton(ok, p?.ok);
+    setButton(cancel, p?.cancel);
+    ok.onclick = () => actions.ok();
+    cancel.onclick = () => actions.cancel();
+    q(root, '.buttons .cancel kbd').textContent = 'Esc';
     return;
   }
   const autoPass = !!model.controls?.autoPass;

@@ -103,9 +103,10 @@ const kindName = (type: string): string => (KIND[type] ? tCap(KIND[type]) : type
 
 const PLAYER_ICON = <Icon d={ICONS.user} />;
 
-/** Who plays a seat the host may change. A chip opens the two choices, each with a line that explains it. */
-function SeatKind({ type, toAi, toOpen }: { type: string; toAi: () => void; toOpen: () => void }) {
-  const ai = type === 'AI';
+/** Who plays a seat the host may change: the AI or someone else. A chip opens the two choices, each with a line that explains it. */
+function SeatKind({ ai, name, aiHint, other, otherHint, toAi, toOther }: {
+  ai: boolean; name: string; aiHint: string; other: string; otherHint?: string; toAi: () => void; toOther: () => void;
+}) {
   // Choosing the seat's current type only closes the menu, because asking again would give the AI a new name
   const choose = (close: () => void, change: boolean, act: () => void) => () => {
     close();
@@ -114,13 +115,13 @@ function SeatKind({ type, toAi, toOpen }: { type: string; toAi: () => void; toOp
   return (
     <Dropdown cls="popup-anchor" button={(open, toggle) => (
       <button class="kind chip" title={t('lblWebLobbyWhoPlaysSeat')} aria-expanded={open} onClick={toggle}>
-        {ai ? AI_ICON : PLAYER_ICON}{kindName(type)}<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+        {ai ? AI_ICON : PLAYER_ICON}{name}<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
       </button>
     )}>
       {close => (
         <div class="popup kind-menu" role="menu">
-          <button role="menuitemradio" aria-checked={ai} onClick={choose(close, !ai, toAi)}>{AI_ICON}<span>{t('lblAI')}</span><small>{t('lblWebLobbyAiPlaysSeat')}</small></button>
-          <button role="menuitemradio" aria-checked={!ai} onClick={choose(close, ai, toOpen)}>{PLAYER_ICON}<span>{t('lblWebLobbyOpenForPlayer')}</span><small>{t('lblWebLobbyOpenForPlayerHint')}</small></button>
+          <button role="menuitemradio" aria-checked={ai} onClick={choose(close, !ai, toAi)}>{AI_ICON}<span>{t('lblAI')}</span><small>{aiHint}</small></button>
+          <button role="menuitemradio" aria-checked={!ai} onClick={choose(close, ai, toOther)}>{PLAYER_ICON}<span>{other}</span>{otherHint && <small>{otherHint}</small>}</button>
         </div>
       )}
     </Dropdown>
@@ -278,10 +279,11 @@ function Plate({ seat, index, lobby, format, actions, leaving, joinable, avatarC
             <img alt="" src={avatarUrl(seat.avatar)} /></button>
           <SeatName seat={seat} rename={name => actions.setSeat(index, { name })} />
           {watchable
-            ? <button class="kind" title={t('lblWebLobbyWhoPlaysSeat')} aria-pressed={ui.spectate}
-                onClick={() => changeUi(u => { u.spectate = !u.spectate; })}>{t(ui.spectate ? 'lblAI' : KIND.LOCAL)}</button>
+            ? <SeatKind ai={ui.spectate} name={kindName(ui.spectate ? 'AI' : 'LOCAL')} aiHint={t('lblWebLobbyComputerPlaysSeat')} other={kindName('LOCAL')}
+                toAi={() => changeUi(u => { u.spectate = true; })} toOther={() => changeUi(u => { u.spectate = false; })} />
             : swappable
-              ? <SeatKind type={seat.type} toAi={() => actions.aiSeat(index)} toOpen={() => actions.openSeat(index)} />
+              ? <SeatKind ai={seat.type === 'AI'} name={kindName(seat.type)} aiHint={t('lblWebLobbyAiPlaysSeat')} other={t('lblWebLobbyOpenForPlayer')}
+                otherHint={t('lblWebLobbyOpenForPlayerHint')} toAi={() => actions.aiSeat(index)} toOther={() => actions.openSeat(index)} />
               : <span class="kind">{mine ? t(KIND.LOCAL) : kindName(seat.type)}</span>}
           {seat.aiProfile && <PlayStyle profile={seat.aiProfile} profiles={lobby.aiProfiles}
             change={lobby.host && seat.mayEdit ? aiProfile => actions.setSeat(index, { aiProfile }) : null} />}
@@ -290,7 +292,6 @@ function Plate({ seat, index, lobby, format, actions, leaving, joinable, avatarC
             <button class="make-archenemy" onClick={() => actions.setArchenemy(index)}>{t('lblWebLobbyMakeArchenemy')}</button>
           )}
         </div>
-        {watchable && ui.spectate && <p class="seat-note">{t('lblWebLobbyComputerPlaysSeat')}</p>}
         {dealt && !waiting && <p class="deck-row fixed">{format?.facts[0]}</p>}
         {beforePools && !waiting && <Ready seat={seat} actions={actions} disabled={lim.started} />}
         {/* Sitting out only matters when the table has more players than a match needs */}
@@ -397,6 +398,7 @@ function Verdict({ lobby, start }: { lobby: LobbyTable; start: () => void }) {
       <button id="play" class="primary play" disabled={!lobby.canStart} onClick={play} title={over.length ? '' : t('ttWebEventEnterStarts')}>
         {t(asking ? 'lblWebLobbyPlayAnyway' : 'lblPlay')}
       </button>
+      {ui.spectate && <p class="match-line">{t('lblWebLobbyYouSpectate')}</p>}
       <div class="not-yet" hidden={lobby.canStart}>
         <b>{t('lblWebLobbyNotPlayableYet')}</b>
         <ul>{problems.map(p => <li key={p}>{p}</li>)}</ul>

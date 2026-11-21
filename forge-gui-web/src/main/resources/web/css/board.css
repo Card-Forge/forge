@@ -170,6 +170,7 @@ html[data-motion="reduced"] #opponent.tabbed > .seat > * { animation: none; }
 #out-banner .skull { width: 26px; height: 26px; color: var(--muted); flex: none; }
 #out-banner b { font-size: 14px; }
 #out-banner p { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; }
+#out-banner .leave { color: var(--concede); border-color: color-mix(in srgb, var(--concede) 45%, var(--line)); }
 @keyframes out-in { from { opacity: 0; transform: translate(calc(-50% - var(--side-w) / 2), -10px); } }
 /* A seat's card size (battlefield.ts) animates to its new value while a card flies. So the board does not jump when the card lands. */
 @property --fit { syntax: '<number>'; inherits: true; initial-value: 1; }

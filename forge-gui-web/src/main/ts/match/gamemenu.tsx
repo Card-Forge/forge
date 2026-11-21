@@ -7,7 +7,7 @@ import { SETTINGS, setting, type SettingDef } from '../settings';
 import { DevItems } from './devmenu';
 import type { Actions } from '../actions';
 import type { AutoDecision } from '../protocol';
-import { deref, type Model } from '../model';
+import { deref, me, type Model } from '../model';
 import { t, tSentence, type TextKey } from '../text';
 import { useClosing } from '../closing';
 import { changeUi, ui } from '../ui';
@@ -22,9 +22,26 @@ export function recordMacro(actions: Actions): void {
   changeUi(u => { u.macro = u.macro === 'recording' ? 'recorded' : 'recording'; });
 }
 
-/** Asks the player to confirm before conceding, as desktop does. */
-export function ConcedeQuestion({ actions }: { actions: Actions }) {
+/** The player has lost, and the local game goes on without them. As on the out banner, only a local game offers to leave */
+const outOfLocalGame = (model: Model): boolean => !model.spectating && !model.networked && !!me(model)?.HasLost && !model.gameOver;
+
+/** A spectator stops watching and a player out of a local game leaves, so the concede action takes their name */
+export const concedeLabel = (model: Model): TextKey =>
+  model.spectating ? 'lblStopWatching' : outOfLocalGame(model) ? 'lblWebBoardLeaveMatch' : 'lblConcede';
+
+/** Asks before conceding, as desktop does. A spectator or a player out of a local game is asked before leaving */
+export function ConcedeQuestion({ model, actions }: { model: Model; actions: Actions }) {
   const close = () => changeUi(u => { u.concedeAsk = false; });
+  const out = outOfLocalGame(model);
+  if (model.spectating || out) {
+    return <Confirm title={t('lblCloseGame')} text={t('lblCloseGameSpectator')} back={close} backLabel={t('lblCancel')}
+      go={() => {
+        close();
+        // The player still holds a seat in the match, so the match is quit first
+        if (out) actions.quitMatch();
+        actions.leave();
+      }} goLabel={t(concedeLabel(model))} danger cls="concede-ask" />;
+  }
   return <Confirm title={t('lblConcedeTitle')} text={t('lblConcedeCurrentGame')} back={close} backLabel={t('lblCancel')}
     go={() => { close(); actions.concede(); }} goLabel={t('lblConcede')} danger cls="concede-ask" />;
 }
@@ -82,11 +99,11 @@ export function GameMenu({ model, actions, close, open, dev: atDev }: {
           onClick={() => { actions.drawOffer('OFFER'); close(); }}>
           <MenuIcon d={ICONS.draw} />{offer?.mine ? t('lblWebGameMenuDrawOffered') : t('lblOfferDraw')}
         </button>
-        <button type="button" role="menuitem" class="card-menu-item concede" disabled={model.spectating} onClick={() => {
+        <button type="button" role="menuitem" class="card-menu-item concede" onClick={() => {
           close();
           changeUi(u => { u.concedeAsk = true; });
         }}>
-          <MenuIcon d={ICONS.concede} />{t('lblConcede')}
+          <MenuIcon d={ICONS.concede} />{t(concedeLabel(model))}
         </button>
         {/* Only the host gets dev mode. The host's seat runs in the same process as the server, and a guest's does not */}
         {setting('devMode') && model.host && !model.spectating && <>

@@ -6,6 +6,9 @@ import com.google.gson.JsonObject;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameState;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
+import forge.player.PlayerControllerHuman;
 import forge.web.match.BrowserModel;
 import forge.web.match.MatchProbe;
 import org.testng.Assert;
@@ -72,8 +75,9 @@ public class BatchBoundaryTest {
                     "humanbattlefield=Mountain;Mountain;Mountain;" + SPARK, "humanhand=" + hand, "humanlibrary=" + library,
                     "aibattlefield=Mountain;Mountain;Mountain;" + SPARK, "aihand=" + hand, "ailibrary=" + library));
             TestMatch.apply(state, played);
-            // The computer takes the web seat, so both sides cast spells and nobody is asked anything
-            local.spectate();
+            // The computer takes the web seat, so both sides cast spells and nobody is asked anything. Spectating would add the playback delays
+            final PlayerControllerHuman seat = (PlayerControllerHuman) local.ownPlayer().getController();
+            FServerManager.getInstance().convertToAI(((RemoteClientGuiGame) seat.getGui()).getClient());
             browser.release();
             // Ten turns of this deck cover every case below many times, and a whole game takes much longer
             for (int i = 0; i < 30000 && browser.gameOver.getCount() > 0 && browser.turn() < 10; i++) {
