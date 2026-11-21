@@ -178,28 +178,28 @@ public abstract class GameStage extends Stage {
             }
         });
         dialog.getButtonTable().add(ok).width(240f);
-        addScrollingText(L);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         showDialog();
     }
 
     /** Adds the dialog's text last, scrolling with a more-arrow when the rest of the dialog leaves too little room. */
-    private void addScrollingText(TypingLabel label) {
+    public void addScrollingText(TypingLabel label, float width) {
         label.setWrap(true);
-        label.setWidth(250f);
+        label.setWidth(width);
         label.layout();
         float room = GameHUD.getInstance().getHeight() - dialog.getPrefHeight() - 30;
         boolean overflows = label.getPrefHeight() > room;
         Table text = new Table();
         if (overflows) {
-            // 237 text + 6 gap + 2 scroll bar + 5 right margin keeps the dialog at 250
-            label.setWidth(237f);
+            // 6 gap + 2 scroll bar + 5 right margin keeps the dialog at the same width
+            label.setWidth(width - 13);
             label.layout();
-            text.add(label).width(237f).padRight(6);
+            text.add(label).width(width - 13).padRight(6);
             // typing would carry on below the visible part, so show it all at once
             label.skipToTheEnd();
         } else {
-            text.add(label).width(250f);
+            text.add(label).width(width);
         }
         ScrollPane pane = new ScrollPane(text, RewardScene.thinScrollBarStyle());
         pane.setName(SCROLLING_TEXT);
@@ -215,10 +215,13 @@ public abstract class GameStage extends Stage {
         });
         Table content = dialog.getContentTable();
         if (overflows) {
-            content.add(pane).width(245f).height(room - 5).padTop(5).padRight(5).row();
+            int column = content.add(pane).width(width - 5).height(room - 5).padTop(5).padRight(5).getColumn();
+            content.row();
+            for (int i = 0; i < column; i++)
+                content.add();
             content.add(new RewardScene.MoreArrow(pane)).padTop(4);
         } else {
-            content.add(pane).width(250f).height(label.getPrefHeight()).row();
+            content.add(pane).width(width).height(label.getPrefHeight()).row();
         }
     }
 
@@ -326,7 +329,7 @@ public abstract class GameStage extends Stage {
                 runnable.run();
             }
         })).width(240f);
-        addScrollingText(L);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -383,7 +386,7 @@ public abstract class GameStage extends Stage {
             if (runnable != null)
                 runnable.run();
         })).width(240);
-        addScrollingText(L);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
