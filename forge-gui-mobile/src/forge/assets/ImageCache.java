@@ -108,7 +108,7 @@ public class ImageCache {
 
     private Set<String> getCardsLoaded() {
         if (cardsLoaded == null) {
-            cardsLoaded = new HashSet<>(400);
+            cardsLoaded = new HashSet<>(maxCardCapacity + (maxCardCapacity / 3));
         }
         return cardsLoaded;
     }
@@ -254,6 +254,50 @@ public class ImageCache {
     }
 
     /**
+     * Helper for normalizing imageKey
+     */
+    private static String normalizeImageKey(String imageKey) {
+        if (StringUtils.isBlank(imageKey)) return "";
+
+        // detect suffixes
+        boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String specColor = "";
+        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) specColor = "white";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) specColor = "blue";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) specColor = "black";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) specColor = "red";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) specColor = "green";
+
+        // strip suffixes
+        if (altState) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        } else if (!specColor.isEmpty()) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
+        }
+
+        // resolve to actual card/token key
+        if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
+            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (card != null) {
+                if (altState) {
+                    imageKey = card.getCardAltImageKey();
+                } else if (!specColor.isEmpty()) {
+                    imageKey = ImageUtil.getImageKey(card, specColor, true);
+                } else {
+                    imageKey = card.getCardImageKey();
+                }
+            }
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
+            if (token != null) {
+                imageKey = token.getCardImageKey();
+            }
+        }
+
+        return imageKey;
+    }
+
+    /**
      * This requests the original unscaled image from the cache for the given key.
      * If the image does not exist then it can return a default image if desired.
      * <p>
@@ -273,39 +317,7 @@ public class ImageCache {
             return null;
         }
 
-        boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String specColor = "";
-        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
-            specColor = "white";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
-            specColor = "blue";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
-            specColor = "black";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
-            specColor = "red";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
-            specColor = "green";
-        }
-        if (altState)
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-        if (!specColor.isEmpty())
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
-        if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-            if (card != null) {
-                if (altState) {
-                    imageKey = card.getCardAltImageKey();
-                } else if (!specColor.isEmpty()) {
-                    imageKey = ImageUtil.getImageKey(card, specColor, true);
-                } else {
-                    imageKey = card.getCardImageKey();
-                }
-            }
-        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
-            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
-            if (token != null)
-                imageKey = token.getCardImageKey();
-        }
+        imageKey = normalizeImageKey(imageKey);
 
         if (StringUtils.isBlank(imageKey)) {
             if (useDefaultIfNotFound)
@@ -404,7 +416,7 @@ public class ImageCache {
                 // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
                 // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
                 // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
-                updateImageRecord(textureKey, isCloserToWhite(getpixelColor(check)), radius, isFullBorder);
+                updateImageRecord(check, textureKey, radius, isFullBorder);
             }
             return check;
         }
@@ -581,7 +593,9 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public void updateImageRecord(String textureString, Pair<String, Boolean> data, int radius, boolean fullborder) {
+    public void updateImageRecord(Texture t, String textureString, int radius, boolean fullborder) {
+        String colorString = getpixelColorOnce(t);
+        Pair<String, Boolean> data = isCloserToWhite(colorString);
         imageRecord.get().put(textureString, new ImageRecord(data.getLeft(), data.getRight(), radius, fullborder));
     }
 
@@ -658,16 +672,20 @@ public class ImageCache {
         return borderColor(t);
     }
 
-    public String getpixelColor(Texture i) {
-        if (!i.getTextureData().isPrepared()) {
-            i.getTextureData().prepare(); //prepare texture
+    private String getpixelColorOnce(Texture t) {
+        try {
+            TextureData data = t.getTextureData();
+            if (!data.isPrepared()) data.prepare();
+            // Sample the same spot as before the optimization: just inside the cropped card border. The raw corner
+            // (1,1) is transparent or scan-white on images with rounded corners and misclassifies the border color.
+            final com.badlogic.gdx.graphics.g2d.TextureRegion region = croppedBorderImage(t);
+            Pixmap pixmap = data.consumePixmap();
+            Color color = new Color(pixmap.getPixel(region.getRegionX() + 1, region.getRegionY() + 1));
+            pixmap.dispose();
+            return color.toString();
+        } catch (Exception e) {
+            return Color.valueOf("#171717").toString();
         }
-        //get pixmap from texture data
-        Pixmap pixmap = i.getTextureData().consumePixmap();
-        //get pixel color from x,y texture coordinate based on the image fullborder or not
-        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX() + 1, croppedBorderImage(i).getRegionY() + 1));
-        pixmap.dispose();
-        return color.toString();
     }
 
     public Pair<String, Boolean> isCloserToWhite(String c) {

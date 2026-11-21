@@ -1,6 +1,7 @@
 package forge.gamemodes.limited;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,7 @@ public class ReadDraftRankings {
     /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
 
-    private final Map<String, Map<String, Integer>> draftRankings;
-    private final Map<String, Integer> setSizes;
+    private final Map<String, Map<String, Double>> draftRankings;
 
     /**
      * <p>
@@ -27,17 +27,15 @@ public class ReadDraftRankings {
      * </p>
      */
     public ReadDraftRankings() {
-        this.setSizes = new HashMap<>();
         this.draftRankings = readRankingFolder();
     } // setup()
 
     public ReadDraftRankings(String customFile) {
-        this.setSizes = new HashMap<>();
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_DIR + customFile));
     }
 
-    private Map<String, Map<String, Integer>> readRankingFolder() {
-        Map<String, Map<String, Integer>> map = new HashMap<>();
+    private Map<String, Map<String, Double>> readRankingFolder() {
+        Map<String, Map<String, Double>> map = new HashMap<>();
 
         File rankingDirectory = new File(ForgeConstants.DRAFT_RANKINGS_FOLDER);
 
@@ -58,12 +56,15 @@ public class ReadDraftRankings {
     }
 
 
-    private Map<String, Map<String, Integer>> readFile(List<String> lines) {
-        final Map<String, Map<String, Integer>> map = new HashMap<>();
+    private Map<String, Map<String, Double>> readFile(List<String> lines) {
+        final Map<String, Map<String, Double>> map = new HashMap<>();
 
         return readFile(lines, map);
     }
-    private Map<String, Map<String, Integer>> readFile(List<String> lines, Map<String, Map<String, Integer>> map) {
+    private Map<String, Map<String, Double>> readFile(List<String> lines, Map<String, Map<String, Double>> map) {
+        record Entry(String edition, String name, int rank) {}
+        final List<Entry> entries = new ArrayList<>();
+        final Map<String, Integer> maxRank = new HashMap<>();
         for (String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
@@ -81,18 +82,16 @@ public class ReadDraftRankings {
 
             try {
                 final int rank = Integer.parseInt(rankStr);
-                if (!map.containsKey(edition)) {
-                    map.put(edition, new HashMap<>());
-                }
-                map.get(edition).put(name, rank);
-                if (setSizes.containsKey(edition)) {
-                    setSizes.put(edition, Math.max(setSizes.get(edition), rank));
-                } else {
-                    setSizes.put(edition, rank);
-                }
+                maxRank.merge(edition, rank, Math::max);
+                entries.add(new Entry(edition, name, rank));
             } catch (NumberFormatException nfe) {
                 System.err.println("NumberFormatException: " + nfe.getMessage());
             }
+        }
+
+        // Scale within this file only, so files sharing a set code don't rescale each other.
+        for (Entry e : entries) {
+            map.computeIfAbsent(e.edition(), k -> new HashMap<>()).put(e.name(), e.rank() / (double) maxRank.get(e.edition()));
         }
 
         return map;
@@ -117,12 +116,7 @@ public class ReadDraftRankings {
             // handle split cards
             safeName = safeName.replace(" // ", " ");
 
-            // If a card has no ranking, don't try to look it up --BBU
-            if (draftRankings.get(edition).get(safeName) == null) {
-                // System.out.println("WARNING! " + safeName + " NOT found in " + edition);
-                return null;
-            }
-            rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
+            rank = draftRankings.get(edition).get(safeName);
         }
         return rank;
     }

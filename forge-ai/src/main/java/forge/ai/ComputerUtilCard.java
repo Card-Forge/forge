@@ -1,13 +1,7 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -36,7 +30,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -62,6 +58,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -223,30 +221,67 @@ public class ComputerUtilCard {
      */
 
     /**
-     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
-     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
-     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     * Drops creatures whose copy would arrive dead under {@code newController}. A copy gets no counters,
+     * so a 0/0 grown by +1/+1 counters keeps only the counters it gets on entry, and none if
+     * {@code enters} is false because an existing permanent becomes the copy.
+     * Static abilities and entry replacements read the copy's controller, so a copy of an opponent's
+     * creature is judged under {@code newController}: their 8/8 Nightmare can be a 0/0 for us.
      */
-    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController, final boolean enters) {
         final Game game = newController.getGame();
         final MutableBoolean reset = new MutableBoolean(false);
         final CardCollection kept = CardLists.filter(list, c -> {
-            if (!c.isCreature() || c.getController().equals(newController)) {
+            if (!c.isCreature()) {
                 return true;
             }
-            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
-                final Card copy = CardCopyService.getLKICopy(c);
+            Card copy = c;
+            if (!c.getController().equals(newController)) {
+                // a copy keeps base toughness, so only a printed 0 or a toughness-setting CDA can arrive dead
+                if (c.getBaseToughness() > 0
+                        && c.getStaticAbilities().stream().noneMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                    return true;
+                }
+                copy = CardCopyService.getLKICopy(c);
                 copy.setController(newController, game.getNextTimestamp());
+                // the LKI keeps the original's boosts, which the static pass below does not remove
+                copy.getPTBoostTable().clear();
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
                 reset.setTrue();
-                return copy.getNetToughness() > 0;
             }
-            return true;
+            final int toughness = copy.getNetToughness() + copy.getCounters(CounterEnumType.M1M1) - copy.getCounters(CounterEnumType.P1P1);
+            if (toughness > 0) {
+                return true;
+            }
+            return enters && toughness + countersOnEntry(copy) > 0;
         });
         if (reset.isTrue()) {
             game.getAction().checkStaticAbilities(false);
         }
         return kept;
+    }
+
+    /** The +1/+1 counters entry replacements would put on {@code c} if it entered now. */
+    private static int countersOnEntry(final Card c) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        final GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
+
+        int amount = 0;
+        for (final ReplacementEffect re : c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            final SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || reSA.getApi() != ApiType.PutCounter || !"P1P1".equals(reSA.getParam("CounterType"))) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                // outside an actual entry, X counts as 0, as it does for a copy
+                amount += AbilityUtils.calculateAmount(reSA.getHostCard(), reSA.getParamOrDefault("CounterNum", "1"), reSA);
+            }
+        }
+        return amount;
     }
 
     public static Card getBestLandAI(final Iterable<Card> list) {
@@ -589,16 +624,82 @@ public class ComputerUtilCard {
         return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 
+    /** An effect that changes the whole board for everyone (Doran, the Siege Tower): removing it matters more than its stats. */
+    private static final int BOARD_WIDE_EFFECT_BONUS = 160;
+    /** An anthem for its controller's creatures. */
+    private static final int ANTHEM_BONUS = 40;
+    /** "Whenever another creature you control dies ..." (Zulaport Cutthroat, Blood Artist): slightly more than a single use. */
+    private static final int DEATH_ENGINE_BONUS = 60;
+
+    /**
+     * What a creature does besides its stats that makes it worth removing first, read from its own abilities: a static
+     * ability on creatures of every player, one on the controller's creatures, a trigger on other creatures dying (#4129, #4171).
+     */
+    public static int removalEffectBonus(final Card c) {
+        int bonus = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            final String valid = st.getParamOrDefault("ValidCard", st.getParamOrDefault("Affected", ""));
+            if (!valid.startsWith("Creature") || valid.contains("Self")) {
+                continue;
+            }
+            if (valid.contains("YouCtrl")) {
+                bonus = Math.max(bonus, ANTHEM_BONUS);
+            } else if (!valid.contains("OppCtrl")) {
+                bonus = Math.max(bonus, BOARD_WIDE_EFFECT_BONUS);
+            }
+        }
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))
+                    && "Graveyard".equals(t.getParam("Destination")) && t.getParamOrDefault("ValidCard", "").contains("Creature")) {
+                bonus = Math.max(bonus, DEATH_ENGINE_BONUS);
+            }
+        }
+        return bonus;
+    }
+
+    /** A permanent that stops the AI's creatures from attacking: worth about a good creature, and more with every creature it locks down. */
+    private static final int ATTACK_LOCK_BASE = 150;
+    private static final int ATTACK_LOCK_PER_CREATURE = 50;
+    private static final int ATTACK_LOCK_CAP = 400;
+
+    /**
+     * How many of the AI's creatures a static ability of the card stops from attacking (Moat). Read from the card's own
+     * CantAttack statics, so it is the situation (what the AI has in play) and not the mana value that decides.
+     */
+    public static int creaturesLockedFromAttacking(final Player ai, final Card c) {
+        if (c.isCreature() || c.getController().equals(ai)) {
+            return 0;
+        }
+        int most = 0;
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (!st.checkMode(StaticAbilityMode.CantAttack) || st.hasParam("Unless")) {
+                continue;
+            }
+            int n = 0;
+            for (final Card mine : ai.getCreaturesInPlay()) {
+                if (st.matchesValidParam("ValidCard", mine)) {
+                    n++;
+                }
+            }
+            most = Math.max(most, n);
+        }
+        return most;
+    }
+
     private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
         int value;
         if (c.isCreature()) {
-            value = evaluateCreature(c);
+            value = evaluateCreature(c) + removalEffectBonus(c);
         } else if (c.isLand()) {
             value = evaluateLandRemovalPriority(ai, c, null, false);
         } else {
             value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {
                 value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+            final int locked = creaturesLockedFromAttacking(ai, c);
+            if (locked > 0) {
+                value += Math.min(ATTACK_LOCK_CAP, ATTACK_LOCK_BASE + ATTACK_LOCK_PER_CREATURE * locked);
             }
         }
 
@@ -765,10 +866,6 @@ public class ComputerUtilCard {
         Map<Card, Integer> cache = new IdentityHashMap<>();
         return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
     }
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
-        // TODO ideally we could reuse the value from the previous pass with false
-        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -1132,6 +1229,16 @@ public class ComputerUtilCard {
     };
 
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
+        // during a payment, a mana ability chooses the color that the payment picked for it
+        for (SpellAbility part = sa.getSubAbility(); part != null; part = part.getSubAbility()) {
+            final AbilityManaPart mp = part.getManaPart();
+            if (mp != null && mp.choosesColorOnResolution(part) && !mp.getExpressChoice().isEmpty()) {
+                final String color = MagicColor.toLongString(MagicColor.fromName(mp.getExpressChoice()));
+                if (colorChoices.contains(color)) {
+                    return Lists.newArrayList(color);
+                }
+            }
+        }
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
@@ -1166,8 +1273,11 @@ public class ComputerUtilCard {
             } else if (logic.equals("MostProminentInActivePlayerHand")) {
                 chosen.add(getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
             } else if (logic.equals("MostProminentInComputerDeckButGreen")) {
-                List<String> prominence = getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
-                if (prominence.get(0).equals(MagicColor.Constant.GREEN)) {
+                CardCollection aiCards = CardLists.filterControlledBy(game.getCardsInGame(), ai);
+                List<String> prominence = getColorByProminence(aiCards);
+                // a mono-green deck is better served by green than by a color it has no cards of
+                if (prominence.get(0).equals(MagicColor.Constant.GREEN)
+                        && aiCards.anyMatch(c -> c.getColor().hasAnyColor(MagicColor.ALL_COLORS & ~MagicColor.GREEN))) {
                     chosen.add(prominence.get(1));
                 } else {
                     chosen.add(prominence.get(0));
@@ -1429,6 +1539,10 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
+        // a permanent that stops the AI's creatures from attacking (Moat): it is the whole board, not a tempo play
+        if (!c.isCreature() && creaturesLockedFromAttacking(ai, c) > 0) {
+            threat = Math.max(threat, 1.0f);
+        }
         if (!c.getManaAbilities().isEmpty() && !landGrantingRemoval(sa)) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
@@ -1519,11 +1633,29 @@ public class ComputerUtilCard {
         }
         */
 
+        // what the pump adds to the combat damage: the power, or the toughness while creatures assign combat damage
+        // equal to toughness (Doran, the Siege Tower), when +P does nothing and +T is the damage
+        final int dmgGain = c.toughnessAssignsDamage() ? toughness : power;
+
+        // check if the pump only gives a keyword and the target already has that keyword, in which case skip it
+        if (power == 0 && toughness == 0) {
+            boolean hasAll = true;
+            for (String kw : keywords) {
+                if (!c.hasKeyword(kw) || !Keyword.smartValueOf(kw).isMultipleRedundant()) {
+                    hasAll = false;
+                    break;
+                }
+            }
+            if (hasAll) {
+                return false;
+            }
+        }
+
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
                 && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
-                && power > 0
+                && dmgGain > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;
         }
@@ -1585,7 +1717,7 @@ public class ComputerUtilCard {
                 if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
-                if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0) {
+                if (c.getNetCombatDamage() == 0 && c == sa.getHostCard() && dmgGain > 0) {
                     threat *= 4; //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
@@ -1597,7 +1729,7 @@ public class ComputerUtilCard {
                 if (holdCombatTricks && sa.getApi() == ApiType.Pump
                         && sa.hasParam("NumAtt") && sa.getHostCard() != null
                         && sa.getHostCard().isInZone(ZoneType.Hand)
-                        && c.getNetPower() > 0 // too obvious if attacking with a 0-power creature
+                        && c.getNetCombatDamage() > 0 // too obvious if attacking with a 0-power creature
                         && sa.getHostCard().isInstant() // only do it for instant speed spells in hand
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(sa, ai)) {
                     combatTrick = true;
@@ -1771,12 +1903,12 @@ public class ComputerUtilCard {
                 }
 
                 float value = pumpedDmg - dmg;
-                if (c == sa.getHostCard() && power > 0) {
+                if (c == sa.getHostCard() && dmgGain > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= (float) power / divisor;
+                    value *= (float) dmgGain / divisor;
                 } else {
                     value /= opp.getLife();
                 }
@@ -2069,6 +2201,44 @@ public class ComputerUtilCard {
             return true;
         }
         return false;
+    }
+
+    /** Abilities that do nothing to the AI on their own (Spellskite redirects, a regeneration, a shield). */
+    private static final Set<ApiType> INERT_APIS = EnumSet.of(ApiType.ChangeTargets, ApiType.Regenerate, ApiType.Protection);
+
+    /**
+     * An opposing creature that cannot hurt the AI and does nothing for its owner: it is not able to attack (Moat,
+     * defender, can't attack), has no power to hurt with, no triggers or static abilities, and only abilities that do
+     * nothing to the AI on their own (Spellskite). Removal, and certainly a board wipe, is wasted on it; the AI should keep
+     * it for a real threat. (A deck that wins by targeting, burn, would value Spellskite: that is for its own logic.)
+     */
+    public static boolean isHarmlessCreature(final Player ai, final Card c) {
+        if (c == null || !c.isCreature() || c.getController() == null || !c.getController().isOpponentOf(ai)) {
+            return false;
+        }
+        if (isUselessCreature(c.getController(), c)) {
+            return true;
+        }
+        if (ComputerUtilCombat.getAttack(c) > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
+            return false;
+        }
+        if (!c.getTriggers().isEmpty() || !c.getStaticAbilities().isEmpty() || !c.getReplacementEffects().isEmpty()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() || sa.isLandAbility()) {
+                continue;
+            }
+            if (sa.isManaAbility() || sa.getApi() == null || !INERT_APIS.contains(sa.getApi())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The cards without the opposing creatures that are harmless (see isHarmlessCreature). */
+    public static CardCollection withoutHarmlessCreatures(final Player ai, final CardCollection cards) {
+        return CardLists.filter(cards, c -> !isHarmlessCreature(ai, c));
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {

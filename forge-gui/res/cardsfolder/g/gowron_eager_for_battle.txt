@@ -1,0 +1,12 @@
+Name:Gowron, Eager for Battle
+ManaCost:2 B R
+Types:Legendary Creature Klingon Warrior
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Creature.Other | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Trample | SubAbility$ DBDraw | SpellDescription$ NICKNAME gains trample until end of turn. If you sacrificed a Klingon this way, you draw a card and lose 1 life.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | ConditionCheckSVar$ X
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | ConditionCheckSVar$ X
+SVar:X:Sacrificed$Valid Card.Klingon
+DeckHints:Type$Klingon
+Oracle:Whenever another creature dies, put a +1/+1 counter on Gowron.\nSacrifice another creature: Gowron gains trample until end of turn. If you sacrificed a Klingon this way, you draw a card and lose 1 life.

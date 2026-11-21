@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.game.Game;
@@ -23,6 +22,22 @@ public class ChooseCardAi extends SpellAbilityAi {
     /**
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
+    /**
+     * The creature is already named by an effect this permanent made (Forcefield): paying again for the same creature
+     * protects nothing more, it only empties the lands.
+     */
+    private static boolean alreadyShielded(final Card source, final Card creature) {
+        if (source == null) {
+            return false;
+        }
+        for (final Card e : source.getGame().getCardsIn(ZoneType.Command)) {
+            if (e.getEffectSource() == source && e.getChosenCards().contains(creature)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         if (sa.usesTargeting()) {
@@ -34,7 +49,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            sa.getTargets().add(Iterables.getFirst(oppList, null));
+            sa.getTargets().add(oppList.get(0));
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
@@ -58,9 +73,10 @@ public class ChooseCardAi extends SpellAbilityAi {
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
-        if (sa.hasParam("TargetControls")) {
+        if ("Chooser".equals(sa.getParam("ControlledByPlayer"))) {
             choices = CardLists.filterControlledBy(choices, ai.getOpponents());
         }
+
         if (aiLogic.equals("AtLeast1") || aiLogic.equals("OppPreferred")) {
             return !choices.isEmpty();
         } else if (aiLogic.equals("AtLeast2") || aiLogic.equals("BestBlocker")) {
@@ -77,7 +93,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             final Combat combat = game.getCombat();
             choices = CardLists.filter(choices, c -> {
-                if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c) || alreadyShielded(host, c)) {
                     return false;
                 }
                 int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
@@ -188,7 +204,8 @@ public class ChooseCardAi extends SpellAbilityAi {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
             CardCollectionView better = CardLists.filter(options, c -> {
-                if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)
+                        || alreadyShielded(sa.getHostCard(), c)) {
                     return false;
                 }
                 int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
@@ -203,7 +220,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             CardCollectionView oppControlled = CardLists.filterControlledBy(options, ai.getOpponents());
             if (!oppControlled.isEmpty()) {
                 choice = ComputerUtilCard.getBestAI(oppControlled);
-            } else {
+            } else if (!isOptional) {
                 CardCollectionView aiControlled = CardLists.filterControlledBy(options, ai);
                 choice = ComputerUtilCard.getWorstAI(aiControlled);
             }
@@ -251,9 +268,8 @@ public class ChooseCardAi extends SpellAbilityAi {
             Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
             return chosen;
         } else if ("OrzhovAdvokist".equals(logic)) {
-            if (ai.equals(sa.getActivatingPlayer()) || // who cares if you can't attack yourself
-                    (ai.getOpponents().size() > 1 && // if there is another opponent good to attack, take the counters
-                    !AiAttackController.choosePreferredDefenderPlayer(ai).equals(sa.getActivatingPlayer()))) {
+            // the counters are taken unless the attack they cost is worth making (against the controller of the card)
+            if (forge.ai.AttackRestrictionDeal.worthTaking(ai, sa.getHostCard().getController())) {
                 choice = ComputerUtilCard.getBestAI(options);
                 // TODO: would also be nice to take the counters if not in a good position to attack anyway
                 //  – might also be good to do a separate AI for Noble Heritage

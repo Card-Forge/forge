@@ -7,12 +7,15 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * A grant clears the restriction zone, so it is the grant that has to reach another player's
@@ -83,6 +86,39 @@ public class GrantedCastTest extends AITest {
 
         assertEquals("Weftwalking still offers me the free cast of my own card", 2, playable(mine));
         assertEquals("but not of a card I do not own", 0, playable(theirs));
+    }
+
+    @Test
+    public void aCostReductionAloneDoesNotListAnotherPlayersCards() {
+        newGame();
+        addCard("Grenzo, Crooked Jailer", me);
+        Card inGraveyard = addCardToZone("Lightning Bolt", opp, ZoneType.Graveyard);
+        Card inHand = addCardToZone("Lightning Bolt", opp, ZoneType.Hand);
+        Card onLibrary = addCardToZone("Lightning Bolt", opp, ZoneType.Library);
+        settle();
+
+        CardCollectionView listed = me.getCardsIn(ZoneType.Flashback);
+        assertFalse("Grenzo lists their graveyard card", listed.contains(inGraveyard));
+        assertFalse("Grenzo lists their hand card", listed.contains(inHand));
+        assertFalse("Grenzo lists their top library card", listed.contains(onLibrary));
+
+        resolve(addCardToZone("Mnemonic Betrayal", me, ZoneType.Hand).getFirstSpellAbility(), null);
+        assertTrue("Mnemonic Betrayal's grant still lists the exiled card",
+                me.getCardsIn(ZoneType.Flashback).contains(game.getCardState(inGraveyard, inGraveyard)));
+    }
+
+    @Test
+    public void aCostReductionAloneDoesNotListMyGraveyard() {
+        newGame();
+        addCard("Conspiracy Unraveler", me);
+        Card bolt = addCardToZone("Lightning Bolt", me, ZoneType.Graveyard);
+        settle();
+
+        assertFalse("Conspiracy Unraveler lists my graveyard card",
+                me.getCardsIn(ZoneType.Flashback).contains(bolt));
+
+        resolve(addCardToZone("Yawgmoth's Will", me, ZoneType.Hand).getFirstSpellAbility(), null);
+        assertTrue("Yawgmoth's Will's grant still lists it", me.getCardsIn(ZoneType.Flashback).contains(bolt));
     }
 
     private void newGame() {

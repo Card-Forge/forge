@@ -21,8 +21,8 @@ public class TriggerManifestDread extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.Cards, runParams.get(AbilityKey.Cards));
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        objects.put(AbilityKey.Cards, runParams.get(AbilityKey.Cards));
 
     }
 

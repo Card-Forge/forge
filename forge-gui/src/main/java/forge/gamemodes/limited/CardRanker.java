@@ -75,7 +75,7 @@ public class CardRanker {
             final PaperCard card = cache.get(i);
 
             double score = getRawScore(card);
-            if (card.getRules().getAiHints().getRemAIDecks()) {
+            if (forge.card.CardAiHints.isRemovedFromAiDecks(card.getRules())) {
                 score -= 20.0;
             }
 
@@ -98,7 +98,7 @@ public class CardRanker {
 
         for (PaperCard card : cardsInPack) {
             double score = getRawScore(card);
-            if (card.getRules().getAiHints().getRemAIDecks()) {
+            if (forge.card.CardAiHints.isRemovedFromAiDecks(card.getRules())) {
                 score -= 20.0;
             }
             if (!canAddMoreColors && !card.getRules().getDeckbuildingColors().hasNoColorsExcept(chosenColors)) {

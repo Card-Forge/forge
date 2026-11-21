@@ -28,8 +28,8 @@ public class CObjectInputStream extends ObjectInputStream implements IHasForgeLo
 
     /**
      * Resolution is enabled whenever a tracker is present. The encoder's
-     * replacement, by contrast, is gated per-message via the
-     * {@code replaceTrackables} flag — the encoder knows which messages
+     * replacement, by contrast, is gated per-message by
+     * {@link CompatibleObjectEncoder} — the encoder knows which messages
      * carry compressible references; the decoder does not, so it stays
      * ready for any frame.
      */

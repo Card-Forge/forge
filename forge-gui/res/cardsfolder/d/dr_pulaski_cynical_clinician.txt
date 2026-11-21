@@ -1,0 +1,7 @@
+Name:Dr. Pulaski, Cynical Clinician
+ManaCost:1 W
+Types:Legendary Creature Human Doctor
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Seek out — Whenever you draw your second card each turn, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
+Oracle:Seek out — Whenever you draw your second card each turn, you gain 4 life.

@@ -1,0 +1,8 @@
+Name:Starfleet Spanner Jockey
+ManaCost:1 U
+Types:Creature Human Artificer
+PT:3/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you've cast a noncreature spell this turn, this creature can attack as though it didn't have defender.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+Oracle:Defender\nAs long as you've cast a noncreature spell this turn, this creature can attack as though it didn't have defender.

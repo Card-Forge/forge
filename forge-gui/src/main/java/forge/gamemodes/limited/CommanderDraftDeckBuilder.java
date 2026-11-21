@@ -22,6 +22,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
@@ -47,8 +48,7 @@ import java.util.stream.Collectors;
  * <p>If commanders are not supplied at construction time the builder scores every
  * commander-legal card in the drafted pool against the color distribution of the
  * non-commander cards, then picks the candidate whose color identity best covers
- * the colors already in the pool.  Per Commander Draft rules a commander with
- * ≤1 color identity (or explicit Partner) is partner-eligible; in that case a
+ * the colors already in the pool.  If the commander can have a partner, a
  * second commander is sought whose combined identity extends the coverage.</p>
  */
 public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
@@ -62,7 +62,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
     /** Main deck size when using two partner commanders (60 − 2). */
     private static final int MAIN_PARTNER = 58;
 
-    private final String freeCommanderName;
     private PaperCard selectedCommander;
     private PaperCard selectedPartner;
 
@@ -76,12 +75,10 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
      *
      * @param draftedCards      all cards the AI drafted (the sideboard pool)
      * @param deckColors        color preferences determined during the draft
-     * @param freeCommanderName edition-specific free commander name, or {@code null}
      */
     public CommanderDraftDeckBuilder(final List<PaperCard> draftedCards,
-            final DeckColors deckColors, final String freeCommanderName) {
+            final DeckColors deckColors) {
         super(draftedCards, deckColors);
-        this.freeCommanderName = freeCommanderName;
         this.selectedCommander = null;
         this.selectedPartner   = null;
     }
@@ -98,7 +95,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             final DeckColors deckColors,
             final PaperCard commander, final PaperCard partner) {
         super(draftedCards, deckColors);
-        this.freeCommanderName = null;
         this.selectedCommander = commander;
         this.selectedPartner   = partner;
     }
@@ -124,7 +120,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
 
     @Override
     public Deck buildDeck(final String landSetCode) {
-
         // 1. Select commander(s) from pool if not pre-assigned during the draft
         if (selectedCommander == null) {
             selectCommanders();
@@ -265,9 +260,8 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
                 .filter(c -> c.getRules().canBeCommander())
                 .collect(Collectors.toList());
 
-        addFreeCommanderIfAbsent(candidates, freeCommanderName);
-        for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {
-            addFreeCommanderIfAbsent(candidates, fallback);
+        for (final String name : DeckFormat.getFreeCommanders(getDraftedCards())) {
+            addFreeCommanderIfAbsent(candidates, name);
         }
 
         if (candidates.isEmpty()) {
@@ -294,36 +288,36 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
                 .filter(c -> c.getRules().canBeCommander())
                 .collect(Collectors.toList());
 
-        addFreeCommanderIfAbsent(candidates, freeCommanderName);
-        for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {
-            addFreeCommanderIfAbsent(candidates, fallback);
+        for (final String name : DeckFormat.getFreeCommanders(getDraftedCards())) {
+            addFreeCommanderIfAbsent(candidates, name);
         }
 
         candidates.remove(selectedCommander);
 
-        // --- Optionally pick a partner ---
-        if (CommanderDraftUtil.isPartnerEligible(selectedCommander) && !candidates.isEmpty()) {
-            PaperCard bestPartner = null;
-            int bestScore = -1;
-            for(int i = 0; i < candidates.size(); i++) {
-                final PaperCard candidate = candidates.get(i);
-                // For now just allow all commander draft to imply partnership
-                // But ideally this would only be allowed for Commander Masters draft
-                if (!candidate.getRules().canBePartnerCommanders(selectedCommander.getRules(), true)) {
-                    continue;
-                }
-                final int score = scoreCommanderFit(candidate, selectedCommander);
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestPartner = candidate;
-                }
+        final boolean impliedPartnership = DeckFormat.hasImpliedPartnership(getDraftedCards());
+        PaperCard bestPartner = null;
+        int bestScore = -1;
+        for (final PaperCard candidate : candidates) {
+            if (!candidate.getRules().canBePartnerCommanders(selectedCommander.getRules(), impliedPartnership)) {
+                continue;
             }
-            selectedPartner = bestPartner;
-            if (selectedPartner != null && ForgePreferences.DEV_MODE) {
-                System.out.println("CommanderDraftDeckBuilder: selected partner "
-                        + selectedPartner);
+            final int score = scoreCommanderFit(candidate, selectedCommander);
+            if (score > bestScore) {
+                bestScore = score;
+                bestPartner = candidate;
             }
         }
+        selectedPartner = bestPartner;
+        if (selectedPartner != null && ForgePreferences.DEV_MODE) {
+            System.out.println("CommanderDraftDeckBuilder: selected partner "
+                    + selectedPartner);
+        }
+    }
+
+    private List<PaperCard> getDraftedCards() {
+        final List<PaperCard> drafted = new ArrayList<>(aiPlayables);
+        drafted.addAll(availableList);
+        return drafted;
     }
 
     /**
@@ -354,9 +348,7 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
     }
 
     private void addFreeCommanderIfAbsent(final List<PaperCard> candidates, final String name) {
-        if (name == null || name.isEmpty()) { return; }
-        final boolean present = candidates.stream().anyMatch(c -> c.getName().equals(name));
-        if (!present) {
+        if (!candidates.stream().anyMatch(c -> c.getName().equals(name))) {
             final PaperCard card = FModel.getMagicDb().getCommonCards().getCard(name);
             if (card != null) {
                 candidates.add(card);
@@ -364,17 +356,12 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Size-fixing
-    // -------------------------------------------------------------------------
-
     /**
      * Trim or pad {@code deckList} until it equals {@code target} cards.
      * Mirrors the logic in {@link LimitedDeckBuilder#buildDeck} but with an
      * arbitrary target size.
      */
-    private void fixCommanderDeckSize(final int[] clrCnts, final String landSetCode,
-            final int target) {
+    private void fixCommanderDeckSize(final int[] clrCnts, final String landSetCode, final int target) {
         while (deckList.size() > target) {
             final PaperCard c = deckList.get(MyRandom.getRandom().nextInt(deckList.size()));
             deckList.remove(c);
@@ -400,10 +387,6 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             }
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Accessors
-    // -------------------------------------------------------------------------
 
     /** @return the selected (or pre-supplied) primary commander, or {@code null}. */
     public PaperCard getSelectedCommander() { return selectedCommander; }

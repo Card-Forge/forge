@@ -14,6 +14,7 @@
     "Humility",
     "Drannith Magistrate",
     "Back to Basics",
+    "Erayo, Soratami Ascendant",
     "Limited Resources",
     "Karakas",
     "The Tabernacle at Pendrell Vale",
@@ -73,7 +74,6 @@
     "Extrapolate the Impossible",
     "Vivien, Arkbow Ranger",
     "Invasion of Arcavios",
-    "Spawnsire of Ulamog",
     "Ancestral Recall",
     "Time Walk",
     "Balance",
@@ -91,6 +91,7 @@
     "Fabled Path of Searo Point",
     "Cleanse",
     "Crusade",
+    "Vexing Bauble",
     "Invoke Prejudice",
     "Imprison",
     "Jihad",
@@ -152,6 +153,7 @@
     "CN2"
   ],
   "usePriceListPrices": false,
+  "eventRerollPrice": 10,
   "chaosDeckFormat": "Commander",
   "difficulties": [
     {
@@ -287,6 +289,55 @@
       "Jumpstart 25",
       "The Last Airbender",
       "(All)"
-    ]
+    ],
+  "modifiers": [
+    {
+      "name": "Permadeath",
+      "description": "Lose a match: lose your commander and 5 random cards.",
+      "icon": "BasilicaSkullbomb",
+      "type": "CardLoss",
+      "lostCards": 5,
+      "loseCommander": true
+    },
+    {
+      "name": "Rarity limit",
+      "description": "Cards must be this rarity or lower.",
+      "icon": "Treasure",
+      "type": "RarityLimit"
+    },
+    {
+      "name": "Color limit",
+      "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
+      "icon": "Shard",
+      "type": "ColorLimit"
+    },
+    {
+      "name": "Vow of Poverty",
+      "description": "Your gold stays at 0.",
+      "icon": "BronzeChallengeCoin",
+      "maxGold": 0
+    },
+    {
+      "name": "Limited Looting",
+      "description": "Enemies drop no random cards. Gold, shards, items and named cards still drop.",
+      "icon": "SteelSword",
+      "blockedEnemyRewards": ["deckCard", "randomCard"]
+    },
+    {
+      "name": "Endless Library",
+      "description": "You have only one deck. Cards cannot be removed once added. Your deck has no size limit.",
+      "icon": "TomeoftheBuilder",
+      "singleDeck": true,
+      "lockDeckCards": true,
+      "noMaxDeckSize": true
+    },
+    {
+      "name": "Lingering Wounds",
+      "description": "+10 max life. Lose a fight: lose 1 max life for good.",
+      "icon": "TokenofBlood",
+      "maxLifeBonus": 10,
+      "maxLifeLostOnDefeat": 1
+    }
+  ]
 }
 

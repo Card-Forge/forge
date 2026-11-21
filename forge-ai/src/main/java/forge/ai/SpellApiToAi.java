@@ -32,6 +32,7 @@ public enum SpellApiToAi {
             .put(ApiType.Attach, AttachAi.class)
             .put(ApiType.AssembleContraption, AssembleContraptionAi.class)
             .put(ApiType.AssignGroup, AssignGroupAi.class)
+            .put(ApiType.Assimilate, AssimilateAi.class)
             .put(ApiType.Balance, BalanceAi.class)
             .put(ApiType.BecomeMonarch, BecomeMonarchAi.class)
             .put(ApiType.BecomesBlocked, BecomesBlockedAi.class)
@@ -116,6 +117,7 @@ public enum SpellApiToAi {
             .put(ApiType.HealDamage, AlwaysPlayAi.class)
             .put(ApiType.Heist, AlwaysPlayAi.class)
             .put(ApiType.ImmediateTrigger, ImmediateTriggerAi.class)
+            .put(ApiType.Incubate, AlwaysPlayAi.class)
             .put(ApiType.Investigate, InvestigateAi.class)
             .put(ApiType.Learn, LearnAi.class)
             .put(ApiType.LoseLife, LifeLoseAi.class)
@@ -193,6 +195,10 @@ public enum SpellApiToAi {
             .put(ApiType.Subgame, AlwaysPlayAi.class)
             .put(ApiType.Surveil, SurveilAi.class)
             .put(ApiType.TakeInitiative, AlwaysPlayAi.class)
+            .put(ApiType.Bookkeeping, NothingAi.class)
+            .put(ApiType.EndOfTurn, NothingAi.class)
+            .put(ApiType.Nothing, NothingAi.class)
+            .put(ApiType.TargetOnly, TargetOnlyAi.class)
             .put(ApiType.Tap, TapAi.class)
             .put(ApiType.TapAll, TapAllAi.class)
             .put(ApiType.TapOrUntap, TapOrUntapAi.class)
@@ -221,6 +227,11 @@ public enum SpellApiToAi {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return get(api);
+    }
+
+    /** The AI class assigned to an API, or null if it has none. */
+    public Class<? extends SpellAbilityAi> getAiClass(final ApiType api) {
+        return apiToClass.get(api);
     }
 
     public SpellAbilityAi get(final ApiType api) {

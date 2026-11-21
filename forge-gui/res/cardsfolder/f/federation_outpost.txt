@@ -1,0 +1,11 @@
+Name:Federation Outpost
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control two or more other lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl+Other | ConditionCompare$ LT2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigCharm | TriggerDescription$ When this land enters untapped, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBSurveil
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:This land enters tapped unless you control two or more other lands.\nWhen this land enters untapped, choose one —\n• You gain 2 life.\n• Surveil 1.\n{T}: Add {W}.

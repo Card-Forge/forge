@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Jarosand_-_Dimir_Oculus_(Standard,_#898048).dck
+Deck Type=constructed
+
+[Main]
+5 Swamp
+4 Watery Grave
+4 Gloomlake Verge
+3 Starting Town
+3 Fabled Passage
+2 Hidden Lair
+1 Island
+1 Restless Reef
+3 Winternight Stories
+4 Bitter Triumph
+4 Ral Zarek, Guest Lecturer
+1 Proft, Sinister Mastermind
+2 Qarsi Revenant
+3 Overlord of the Balemurk
+4 Dark Matter Manipulator
+4 Likeness Looter
+4 Moonshadow
+4 Seasoned Cryomancer
+4 Abhorrent Oculus
+[Sideboard]
+4 Strategic Betrayal
+1 Duress
+2 Precise Redaction
+2 Terminal Criticism
+2 Flashfreeze
+2 Deadly Cover-Up
+2 Mai, Scornful Striker

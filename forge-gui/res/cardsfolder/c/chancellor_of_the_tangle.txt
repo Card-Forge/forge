@@ -2,7 +2,7 @@ Name:Chancellor of the Tangle
 ManaCost:4 G G G
 Types:Creature Phyrexian Beast
 PT:6/7
-K:MayEffectFromOpeningHand:ManaOnMain
+K:MayEffectFromOpeningHand:RevealCard
 K:Vigilance
 K:Reach
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ ManaOnMain | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.google.common.collect.Multiset;
 
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -76,21 +77,19 @@ public class ReplaceAddCounter extends ReplacementEffect {
     public boolean hasAnyInCounterMap(Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
         Map<Optional<Player>, Multiset<CounterType>> counterMap = (Map<Optional<Player>, Multiset<CounterType>>) runParams.get(AbilityKey.CounterMap);
+        GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
 
         for (Map.Entry<Optional<Player>, Multiset<CounterType>> e : counterMap.entrySet()) {
             if (!matchesValidParam("ValidSource", e.getKey().orElse(null))) {
                 continue;
             }
-            if (hasParam("ValidCounterType")) {
-                CounterType ct = CounterType.getType(getParam("ValidCounterType"));
-                if (!e.getValue().contains(ct)) {
+            for (CounterType ct : e.getValue().elementSet()) {
+                if (hasParam("ValidCounterType") && !ct.equals(CounterType.getType(getParam("ValidCounterType")))) {
                     continue;
                 }
-                return true;
-            }
-
-            if (!e.getValue().isEmpty()) {
-                return true;
+                if (!runParams.containsKey(AbilityKey.Destination) || affected.canReceiveCounters(ct, runParams)) {
+                    return true;
+                }
             }
         }
 
@@ -99,12 +98,9 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
     @Override
     public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
-        if (super.modeCheck(event, runParams)) {
-            return true;
-        }
         if (event.equals(ReplacementType.Moved) && runParams.containsKey(AbilityKey.CounterMap)) {
             return true;
         }
-        return false;
+        return super.modeCheck(event, runParams);
     }
 }

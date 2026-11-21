@@ -33,7 +33,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
         } else if ("AtEOT".equals(aiLogic)) {
             if (ph.is(PhaseType.END_OF_TURN)) {
-                if (ph.getPlayerTurn() == aiPlayer) {
+                if (ph.isPlayerTurn(aiPlayer)) {
                     // If it's the AI's turn, it can activate at EOT
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 } else {
@@ -182,7 +182,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     } else {
                         if (!sa.hasParam("SetToughness")) {
                             // the copy would land under our control, where a toughness-setting CDA reads a different board
-                            list = ComputerUtilCard.filterOutFatalCopies(list, aiPlayer);
+                            list = ComputerUtilCard.filterOutFatalCopies(list, aiPlayer, true);
                         }
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }

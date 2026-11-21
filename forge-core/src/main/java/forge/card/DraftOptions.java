@@ -57,7 +57,6 @@ public class DraftOptions {
         return doublePick.resolve(podSize);
     }
 
-
     public int getMaxMatchPlayers() {
         return maxMatchPlayers;
     }
@@ -67,7 +66,8 @@ public class DraftOptions {
     public String getFreeCommander() {
         return freeCommander;
     }
-    public String getImpliedPartner() {
-        return impliedPartner;
+    /** Commander Masters treats every monocolored or colorless legend as having partner. */
+    public boolean impliesMonocoloredPartnership() {
+        return "SingleIdentity".equals(impliedPartner);
     }
 }

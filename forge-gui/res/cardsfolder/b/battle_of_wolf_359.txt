@@ -1,0 +1,6 @@
+Name:Battle of Wolf 359
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.nonArtifact | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ All nonartifact creatures get -X/-X until end of turn, where X is the number of artifact creatures you control.
+SVar:X:Count$Valid Creature.Artifact+YouCtrl
+Oracle:All nonartifact creatures get -X/-X until end of turn, where X is the number of artifact creatures you control.

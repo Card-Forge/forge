@@ -1,0 +1,26 @@
+[metadata]
+Name:How to Play - Your First Game
+URL:https://www.cardforge.org
+Goal:Win
+Turns:12
+HideGoal:true
+Difficulty:Common
+Description:A fixed practice game that teaches Forge's match controls and the basics of playing a land, casting a spell, attacking, blocking, and winning. Goblin Brigand can block your first attack; it must attack during its controller's combat if able.
+[state]
+humanlife=20
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Mountain;Mountain;Raging Goblin;Mountain
+humanlibrary=Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+humangraveyard=
+humanbattlefield=Hill Giant
+humanexile=
+humancommand=
+aihand=
+ailibrary=Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp
+aigraveyard=
+aibattlefield=Goblin Brigand
+aiexile=
+aicommand=

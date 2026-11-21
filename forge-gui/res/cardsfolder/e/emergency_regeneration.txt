@@ -1,0 +1,5 @@
+Name:Emergency Regeneration
+ManaCost:1 W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Artifact.YouCtrl | KW$ Hexproof & Indestructible | SpellDescription$ Artifacts you control gain hexproof and indestructible until end of turn.
+Oracle:Artifacts you control gain hexproof and indestructible until end of turn.

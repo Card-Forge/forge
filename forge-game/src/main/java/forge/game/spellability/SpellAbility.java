@@ -75,6 +75,19 @@ import forge.game.zone.ZoneType;
  * @version $Id$
  */
 public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable, Comparable<SpellAbility> {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AlternateCost", "Announce", "Boast", "CantCopy", "CostDesc", "DividedAsYouChoose",
+        "Exhaust", "IsCurse", "ManaRestriction", "MaxTotalTargetCMC", "MaxTotalTargetPower",
+        "Monstrosity", "Planeswalker", "PowerUp", "PrecostDesc",
+        "TargetType", "TargetingPlayer", "TargetingPlayerControls",
+        "TargetsWithControllerProperty", "TargetsWithDefinedController",
+        "TargetsWithRelatedProperty", "TargetsWithSharedCardType", "TargetsWithSharedTypes",
+        "ValidAfterStack", "WithoutManaCost", "XColor",
+    };
+    public static final String[] INTERNAL_PARAMS = {
+        "CloakUp", "CumulativeUpkeep", "DisguiseUp", "ManifestUp", "MorphUp", "Unlock",
+    };
+
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
@@ -218,9 +231,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final int getId() {
         return id;
     }
+    private static final int CLASS_HASH = SpellAbility.class.hashCode();
     @Override
     public int hashCode() {
-        return Objects.hash(SpellAbility.class, getId());
+        return 31 * (31 + CLASS_HASH) + getId();
     }
     @Override
     public boolean equals(final Object obj) {
@@ -338,7 +352,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         int result = 0;
         AbilityManaPart mp = getManaPart();
         if (mp != null && metConditions()) {
-            int amount = hasParam("Amount") ? AbilityUtils.calculateAmount(getHostCard(), getParam("Amount"), this) : 1;
+            int amount = mp.amountIfChosen(this, mp.choosesColorOnResolution(this) ? MagicColor.fromName(mp.getExpressChoice()) : 0);
 
             if (!multiply || mp.isAnyMana() || mp.isComboMana() || mp.isSpecialMana()) {
                 result += amount;
@@ -977,14 +991,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setTriggeringObject(final AbilityKey type, final Object o) {
         triggeringObjects.put(type, o);
-    }
-
-    public void setTriggeringObjectsFrom(final Map<AbilityKey, Object> runParams, final AbilityKey... types) {
-        for (AbilityKey type : types) {
-            if (runParams.containsKey(type)) {
-                triggeringObjects.put(type, runParams.get(type));
-            }
-        }
     }
 
     public boolean hasTriggeringObject(final AbilityKey type) {
@@ -2158,6 +2164,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 } else {
                     targetingPlayer = getActivatingPlayer();
                 }
+                if (targetingPlayer == null) {
+                    // nobody to choose the targets, so they cannot be chosen
+                    return false;
+                }
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
@@ -2442,8 +2452,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // If the primary ability has a sub, it's probably "more expensive"
             score += 2;
         }
+        if (payCosts != null && payCosts.hasTapCost() && hostCard != null) {
+            for (final Trigger t : hostCard.getTriggers()) {
+                if ((t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana)
+                        && hurtsController(t.getOverridingAbility())) {
+                    score += 10;
+                }
+            }
+        }
 
         return score;
+    }
+
+    private static boolean hurtsController(final SpellAbility sa) {
+        return sa != null
+                && (sa.getApi() == ApiType.DealDamage || sa.getApi() == ApiType.LoseLife)
+                && "You".equals(sa.getParamOrDefault("Defined", ""));
     }
 
     public CardDamageTable getDamageMap() {

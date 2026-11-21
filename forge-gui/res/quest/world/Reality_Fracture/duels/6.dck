@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Capriccioso_-_Superior_Reanimator_(Standard,_#898249).dck
+Deck Type=constructed
+
+[Main]
+1 Island
+4 Breeding Pool
+2 Deceit
+4 Cache Grab
+3 Cavern of Souls
+4 Bringer of the Last Gift
+4 Formidable Speaker
+2 Ardyn, the Usurper
+3 Oblivious Bookworm
+3 Overlord of the Balemurk
+4 Seasoned Cryomancer
+3 Starting Town
+4 Superior Spider-Man
+1 Terror of the Peaks
+2 Wastewood Verge
+3 Watery Grave
+2 Willowrush Verge
+3 Wistfulness
+1 Swamp
+4 Overgrown Tomb
+1 Forest
+2 Analyze the Pollen
+[Sideboard]
+2 Awaken the Honored Dead
+1 Disruptive Stormbrood
+4 Duress
+2 Keen-Eyed Curator
+1 Negate
+2 Requiting Hex
+2 Strategic Betrayal
+1 Flashfreeze

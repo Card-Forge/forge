@@ -24,6 +24,7 @@ public enum GameType {
     Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
     Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
     CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommanderGauntlet", "lblCommanderDesc"),
+    RogueCommander      (DeckFormat.RogueCommander, true, false, false, "lblRogueCommander", "lblRogueCommanderDesc"),
     Quest               (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
     QuestCommander      (DeckFormat.Commander, true, true, false, "lblQuestCommander", ""),
     QuestDraft          (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
@@ -42,6 +43,7 @@ public enum GameType {
     Planechase          (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
     Archenemy           (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
     ArchenemyRumble     (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
+    TwoHeadedGiant      (DeckFormat.Constructed, false, true, true, "lblTwoHeadedGiant", "lblTwoHeadedGiantDesc"),
     MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();

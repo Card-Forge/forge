@@ -30,7 +30,7 @@ public record AiAbilityDecision(int rating, AiPlayDecision decision) {
                 + CardUtil.getThisTurnCast("Spell.YouCtrl", sa.getHostCard(), sa, ai).size();
         if (actionsThisTurn == 0) {
             PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
-            if (ph.getNextTurn() == ai) {
+            if (ph.isPlayerNextTurn(ai)) {
                 // try not to waste open mana
                 boosted += 10;
             } else if (ph.getPhase() == PhaseType.MAIN2 && SpellAbilityAi.isSorcerySpeed(sa, ai)) {

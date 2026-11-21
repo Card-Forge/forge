@@ -77,7 +77,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],
@@ -101,7 +101,7 @@
     &quot;text&quot;: &quot;'I have two powerful tutors to find what you need. Recruiter of the Guard gets small but powerful creatures. Arena Rector cheats out any planeswalker.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Recruiter of the Guard. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Recruiter of the Guard. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -116,7 +116,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Recruiter of the Guard. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Recruiter of the Guard. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -124,7 +124,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Arena Rector. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Arena Rector. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -139,7 +139,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Arena Rector. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Arena Rector. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -163,7 +163,7 @@
     &quot;text&quot;: &quot;'I have two cheap and powerful sources of card advantage. Esper Sentinel taxes noncreature spells or you draw, and Land Tax grabs three lands whenever you're behind on lands.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Esper Sentinel. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Esper Sentinel. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -178,7 +178,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Esper Sentinel. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Esper Sentinel. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -186,7 +186,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Land Tax. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Land Tax. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -201,7 +201,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Land Tax. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Land Tax. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -225,7 +225,7 @@
     &quot;text&quot;: &quot;'I have two powerful spells to wreak mass havoc or avoid it for free. Farewell exiles almost anything or everything. Flawless Maneuver provides indestructibility for free.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Farewell. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Farewell. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -240,7 +240,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Farewell. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Farewell. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -248,7 +248,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Flawless Maneuver. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Flawless Maneuver. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -263,7 +263,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Flawless Maneuver. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Flawless Maneuver. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],

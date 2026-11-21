@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Durotan97_-_Orzhov_Aggro_(Standard,_#901490).dck
+Deck Type=constructed
+
+[Main]
+3 Ajani Resolute
+1 Bleachbone Verge
+4 Case of the Uneaten Feast
+3 Haliya, Guided by Light
+1 Dalkovan Encampment
+2 Deep-Cavern Bat
+2 Emptiness
+4 Godless Shrine
+2 Erode
+3 Enlightened Confidant
+3 Plains
+4 Hinterland Sanctifier
+3 Liliana the Faultless
+3 Lunar Convocation
+3 Moseo, Vein's New Dean
+4 Shattered Sanctum
+2 Starscape Cleric
+4 Starting Town
+3 Concealed Courtyard
+4 Amalia Benavides Aguirre
+2 Swamp
+[Sideboard]
+1 Lunar Convocation
+1 Starscape Cleric
+2 Curious Farm Animals
+3 Duress
+1 Decorum Dissertation
+1 Requisition Raid
+1 Seam Rip
+2 Shoot the Sheriff
+3 Strategic Betrayal

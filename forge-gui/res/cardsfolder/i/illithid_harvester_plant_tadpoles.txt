@@ -13,7 +13,7 @@ ALTERNATE
 Name:Plant Tadpoles
 ManaCost:X U U
 Types:Sorcery Adventure
-A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | AlwaysRemember$ True | SubAbility$ DBPump | SpellDescription$ Tap X target creatures.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | SubAbility$ DBPump | SpellDescription$ Tap X target creatures.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | StackDescription$ SpellDescription | SpellDescription$ They don't untap during their controllers' next untap steps.
 SVar:X:Count$xPaid
 Oracle:Tap X target creatures. They don't untap during their controllers' next untap steps. (Then exile this card. You may cast the creature later from exile.)

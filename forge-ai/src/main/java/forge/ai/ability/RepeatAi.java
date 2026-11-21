@@ -29,7 +29,7 @@ public class RepeatAi extends SpellAbilityAi {
             sa.getTargets().add(opp);
         }
         if ("MaxX".equals(logic) || "MaxXAtOppEOT".equals(logic)) {
-            if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
+            if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().isPlayerNextTurn(ai))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             final int max = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
