@@ -512,6 +512,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
+    public Multimap<String, EditionEntry> getOther() { return otherMap; }
 
     public String getTokenSet(String token) {
         if (tokenMap.containsKey(token)) {

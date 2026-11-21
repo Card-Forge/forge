@@ -50,7 +50,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
-            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
+            if (isHostedDownloadDisabled(urlToDownload)) {
                 // Don't try to download card images from cardforge servers
                 return false;
             }
@@ -69,6 +69,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             ScryfallRateLimiter.acquire(urlToDownload);
+            if (ScryfallRateLimiter.shouldSkip(urlToDownload)) {
+                return false; // a 429 came in while this download waited for its turn
+            }
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
             c.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
@@ -84,8 +87,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
 
                 if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
                 }
+                ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
 
                 c.disconnect();
                 return false;
