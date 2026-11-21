@@ -265,7 +265,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Urza, Academy Headmaster - Just chooses a random effect from his list, no internet connection required.
 1. B.O.B. (Bevy of Beebles) - Link between loyalty counters and beebles is implemented as a state based action and static trigger. Probably fine? May need an exception to implement Rules Lawyer.
 1. (P) Slivdrazi Monstrosity - Granting devoid made to work by actually removing their colors.
-1. (Uk) Phila, Unsealed - Oracle replaced with the winning team's text rather than an always-on characteristic defining ability. Probably makes more sense this way.
 1. (Uk) Disguise Agent - Loses some of its flare when commanders are public knowledge. See "Face Down Commanders", Tier 3.
 1. (Uk) The Keeper of Dark Pacts - Done via Intesify. Unclear if this should affect other copies of the same card.
 1. (Uk) The Rebellious Intelligence - Random card in sideboard. May need special attention if we ever rework Wish.
@@ -299,6 +298,20 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Crab Queen
 1. (Uk) The Scholar of Seas
 1. (Uk) The Wise Sable
+1. (Uk) Memnarchitect
+1. (Uk) Echoing Echo
+1. (Uk) Old Way Phyrexian
+1. (Uk) Hidetsugu's Poison Rite
+1. (Uk) Pulse of the Hunter Maze
+1. (Uk) Goblin Savant
+1. (Uk) Platinum Persecutor
+1. (Uk) Mindslaver Toolkit
+1. (Uk) Call Up Emrakul to Help
+1. (Uk) Chancellor of the Mulligan
+1. (Uk) Compleated Clone Shell
+1. (Uk) Untap, Upkeep, Draw - Order of options reversed to make it work with entwine as intended.
+1. (Uk) Crux of Mirrodin
+1. (Uk) Sheoldred's Terror - Argentum expansion are listed in the script and needs to be updated when a new releases. Latest implemented: ONE
 
 
 #### Functional Variants
@@ -306,6 +319,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Garbage Elemental C
 1. Garbage Elemental D
 1. Everythingamajig C
+1. (Uk) Phila, Unsealed - Both possible outcomes implemented as variants.
+1. (Uk) Delphia, Undecided - Both possible outcomes implemented as variants.
 
 #### Subgames
 1. Enter the Dungeon
@@ -319,6 +334,16 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Change Commanders
 1. (P) You're in Command
 1. (HTR) Champions of Archery // Join the Group
+
+#### Unknown Event Team
+(During the Philadelphia 2023 Unknown Event, players were split into two teams. These cards changed behavior based on which team you were on. If you have any in your deck you pick your team before the game starts)
+1. (Uk) Unclaimed Cat
+1. (Uk) Unclaimed Bird
+1. (Uk) Unclaimed Blessing
+1. (Uk) Tricky Mage
+1. (Uk) Unclaimed Battle Axe
+1. (Uk) Furnace Oriflamme
+1. (Uk) Unclaimed Tanadon
 
 #### Contraptions
 1. Accessories to Murder
@@ -468,6 +493,27 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Phyrexian Esthetician - Oil Scavenge
 1. (Uk) Hound of Urabrask - "Oildying" (Undying but oil counters.)
 1. (Uk) Incubob - "Incubate Dark Confidant 1"
+1. (Uk) Arcbound Mamba - Poison Modular, +1/+1 counters placed on players by it become poison counters.
+1. (Uk) Sawtooth Avenger - Megasunburst
+1. (Uk) Oilskelion - Oil Sunburst
+
+#### Poison Tolerance
+(Keyword recreated via Card Script)
+1. (Uk) Rosewater's Nemesis
+1. (Uk) Drake with Set's Mechanic
+1. (Uk) Long Term Phyresis Study
+1. (Uk) Burn the Phyresis
+1. (Uk) Naturalize the Phyresis
+1. (Uk) Melira's Snacks
+
+#### Unknown Event Scoring
+(At the Philadelphia 2023 Unknown Event, players were split into two teams. These cards, when played, scored points for your team. The additional score is being kept track of, but there is currently no format where they are relevant)
+1. (Uk) Good Knight
+1. (Uk) Point to the Scoreboard
+1. (Uk) Bad Knight
+1. (Uk) Join the Winning Team
+1. (Uk) Snapsail Rider - Affects point value for the surrounding match
+1. (Uk) Take the High Ground
 
 
 ### Tier 1
@@ -497,14 +543,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Search Elemental
 1. (P) Wrath of Leknif
 1. (P) Wowzer, the Aspirational
-1. (Uk) Echoing Echo
-1. (Uk) Old Way Phyrexian
-1. (Uk) Hidetsugu's Poison Rite
-1. (Uk) Pulse of the Hunter Maze
-1. (Uk) Goblin Savant
-1. (Uk) Platinum Persecutor
-1. (Uk) Mindslaver Toolkit
-1. (Uk) Call Up Emrakul to Help
 1. (Uk) Kylem All-Star
 1. (Uk) Gerrard and Hanna
 1. (Uk) Invasion Specialist
@@ -585,8 +623,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Alberix, the Trade Planet - Resources seem mostly equivalent to "card exiled by CARDNAME", barring linked ability issues.
 1. (P) Lich's Duel Mastery - Like Alberix, Shields seem like another "card exiled by CARDNAME".
 1. (P) Luxior, Ignited - Nothing in the rules says a Planeswalker can't be attached to a creature...
-1. (Uk) Untap, Upkeep, Draw - Similar to Obeka, Splitter of Seconds.
-1. (Uk) Compleated Clone Shell - Think there should be some way to look at 4 random cards in the sideboard?
 1. (Uk) Azorius Traffic Enforcement - DisableTriggersEffect looks like it could focus on Backup abilities? Detain as a keyword action probably doesn't need special treatment.
 1. (Uk) That's No Moonmist - Can use the existing "FrontFace" property.
 1. (Uk) Praetorhoof Behemoth - Adds number of revealed cards to number of matching cards in zones. Should be doable.
@@ -607,6 +643,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Ancient Dingus - Wishing for a random card from a stack of "visible unsleeved cards" probably has to be adapted to just wishing for a random sideboard card.
 1. (Uk) Colorless Ultimatum - No idea if multiple generic costs works, but could be converted to {4} if not.
 1. (Uk) The Goblin Mastermind - Gives all your cards Kindred Goblin?
+1. (Uk) Underdog Racer - Could be adapted per reminder text, but kinda loses the point of the card.
 
 #### Black Lotus Lounge Planes
 (Not mechanically distinct, but a huge number of these have landed in tier 1. They aren't all on Scryfall.)
@@ -647,17 +684,18 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Abbot of the Sacred Meeple
 1. (P) Spuzzem Strategist - Unless R&D's Secret Lair is implemented and they're playing Floral Spuzzem...
 
-#### City in a Bottle Effect
-(i.e. cares about cards that were printed in one or more specific expansions)
-1. (Uk) Crux of Mirrodin
-1. (Uk) Sheoldred's Terror - May change if Argentum is revisited
-1. (Uk) Delphia, Undecided
-1. (See also: Set Matters, tier 2)
-
 #### Commander-tron Lands
 (Urzatron lands have special support, but could probably be scripted without it.)
 1. (Uk) Command Mine
 1. (Uk) Command Power Plant
+
+#### Unknown Event Team
+(Similar to Unknown Event Team in tier 0, but diferent teams)
+1. (Uk) Team Perseverance
+1. (Uk) Team Acceleration
+1. (Uk) Team Mage
+1. (Uk) Draw Team Lines
+1. (Uk) Now THIS Is Aether Racing
 
 
 ### Tier 2
@@ -782,8 +820,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Sliver of Hope - Hope, prevent damage to it while attacking.
 1. (P) Vuzzle Spaceship - Spaceship and spaceship abilities.
 1. (P) You Compleat Me - Maximum life total becomes 10 for the rest of the game. Emblem with activated ability?
-1. (Uk) Sawtooth Avenger - Megasunburst
-1. (Uk) Oilskelion - Oil Sunburst
 1. (Uk) Rattatwotwo - Chef Role
 1. (Uk) Wistful Puppeteer - Animated Role
 1. (Uk) The Miniaturizer - "Soospect", granting First Strike and can't block. Designation never checked.
@@ -809,8 +845,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Variations on Existing Keywords
 (More complex than above; need engine changes rather than just scripting them. Nothing unprecedented though.)
 1. (P) Friarball - Coststorm keyword, count different mana values among spells and lands this turn.
-1. (Uk) Arcbound Mamba - Poison Modular, +1/+1 counters placed on players by it become poison counters.
-1. (Uk) Memnarchitect - Affinity for artifact creatures that weren't originally artifact creatures. Check changed types?
 1. (Uk) Shadowmoor Draw Spell - Untap Convoke. 
 1. (Uk) Farseeing Flockmate - Flying backup, variant of backup that gives flying counters.
 1. (Uk) Azra Matchthrower - Battlebond, soulbond except it pairs with Battles.
@@ -960,7 +994,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Secret Lair - (Plane) - "Shiny" category, which is a set filter plus foil-matters. Not to be confused with "The Secret Lair", tier 2.
 1. (See also: "War of the Spark", tier 0)
 1. (See also: "Apocalypse Chime" and "City in a Bottle", Black Border)
-1. (See also: City in a Bottle Effect, tier 1)
 
 #### Legality Matters
 1. Standard Procedure - "currently legal in Standard"
@@ -1009,21 +1042,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Keeper of the Crown // Coronation of the Wilds - {L}, one mana from a legendary source.
 1. (P) Yawgmoth's Day Planner - Mana produced by abilities that caused you to lose life.
 
-#### Unknown Event Team
-(During the Philadelphia 2023 Unknown Event, players were split into two teams. These cards changed behavior based on which team you were on. Could be imitated by having the player pick a team once then retain that for all cards.) (They did it again in 2025.)
-1. (Uk) Unclaimed Cat
-1. (Uk) Unclaimed Bird
-1. (Uk) Unclaimed Blessing
-1. (Uk) Tricky Mage
-1. (Uk) Unclaimed Battle Axe
-1. (Uk) Furnace Oriflamme
-1. (Uk) Unclaimed Tanadon
-1. (Uk) Team Perseverance
-1. (Uk) Team Acceleration
-1. (Uk) Team Mage
-1. (Uk) Draw Team Lines
-1. (Uk) Now THIS Is Aether Racing
-
 ##### Event Team Restriction
 (Can't be used by certain Unknown Event teams, but that doesn't matter outside of such an event.)
 1. (Uk) Winter's Demonmech
@@ -1032,14 +1050,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Pledge Mechanic
 1. (Uk) Guildmark
 1. (Uk) Guilded Lotus
-
-#### Poison Tolerance
-1. (Uk) Rosewater's Nemesis
-1. (Uk) Drake with Set's Mechanic
-1. (Uk) Long Term Phyresis Study
-1. (Uk) Burn the Phyresis
-1. (Uk) Naturalize the Phyresis
-1. (Uk) Melira's Snacks
 
 #### Unknown Event Planes
 (During the Minneapolis 2023 Unknown Event, Planechase-like planes were in effect for all games across the event. These ones could be implemented as normal Planechase cards.) (These currently aren't on Scryfall)
@@ -1476,7 +1486,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Pithing Spyglass - Remove ability words and their corresponding abilities. Could possibly search for them in a trigger or ability description?
 1. (HTR) Elusen, the Giving - "Whenever a player donates a permanent to another player". Whenever a spell or ability they control would give a permanent they control to another player?
 1. (P) Brigid, Who's Seen Some Stuff - Unsure if granting a keyword that grants keywords creates a dependency or layering issue. Also Nimble keyword.
-1. (Uk) Chancellor of the Mulligan - Mulligan as an action mid-game. Unclear if this should be affected by format's mulligan rules, or its interaction with Serum Powder.
 1. (Uk) The Beleaguered Boxer - Would need special handling in the deck editor, turning a constructed deck into sealed, preventing future editing, then modifying it from in game. Complicated but not impossible.
 1. (P) Terry Pin, Turboturtle - Unclear if this includes keywords like Equip, or just when those exact words are printed in the ability text.
 1. (Uk) The Zonian Brawler - "Bite" effects matter. (Also Rulebreaker, Tier 3)
@@ -1698,16 +1707,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Trivia Contest - (Attraction)
 1. (Uk) Blue Screen of Death
 1. (Uk) Noyd, Keeper of the Void
-
-#### Unknown Event Scoring
-(At the Philadelphia 2023 Unknown Event, players were split into two teams. These cards, when played, scored points for your team. The whole event would have to be recreated for these to be relevant.) (They did more of this in 2025, too.)
-1. (Uk) Good Knight
-1. (Uk) Point to the Scoreboard
-1. (Uk) Bad Knight
-1. (Uk) Join the Winning Team
-1. (Uk) Snapsail Rider - Affects point value for the surrounding match
-1. (Uk) Take the High Ground
-1. (Uk) Underdog Racer - Could be adapted per reminder text, but kinda loses the point of the card.
 
 #### Unknown Event Meta-game Planes
 (At the Minneapolis 2023 Unknown Event, Planechase-like planes were in effect across all games in the event. Some of these could be implemented as normal Planechase cards, but the ones here would not translate well.) (These currently aren't on Scryfall)

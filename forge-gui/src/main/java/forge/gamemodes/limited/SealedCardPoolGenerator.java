@@ -37,6 +37,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.model.UnOpenedMeta;
+import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -71,6 +72,9 @@ public class SealedCardPoolGenerator {
 
     /** Human-readable name of the specific block / edition / custom pool chosen (null for Full). */
     private String productName = null;
+
+    /** Used for some events where the players are split into teams */
+    private List<String> teams = new ArrayList<>();
 
     public static DeckGroup generateSealedDeck(final boolean addBasicLands) {
         final String prompt = Localizer.getInstance().getMessage("lblChooseSealedDeckFormat");
@@ -150,6 +154,7 @@ public class SealedCardPoolGenerator {
 
         // Rank the AI decks
         sealed.rankAiDecks(new LimitedDeckEvaluator.LimitedDeckComparer());
+        sd.handleTeams(sealed);
 
         FModel.getDecks().getSealed().add(sealed);
         return sealed;
@@ -251,6 +256,7 @@ public class SealedCardPoolGenerator {
 
                 for (CardEdition edition : block.getSets()) {
                     sets.add(edition.getCode());
+                    Collections.addAll(teams, edition.getDraftOptions().getTeams());
                 }
 
                 for (String ms : block.getMetaSetNames()) {
@@ -378,6 +384,22 @@ public class SealedCardPoolGenerator {
             this.product.add(product1);
         }
         return true;
+    }
+
+    /**
+     * Used for some events where the players are split into teams.
+     * All Ai Opponents are in opposition to the player.
+     * @param deck
+     */
+    private void handleTeams(DeckGroup deck) {
+        if (teams.isEmpty()) return;
+        String playerTeam = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseTeam"), teams);
+        deck.getHumanDeck().getDraftNotes().put("Team", playerTeam);
+        List<String> remainingTeams = new ArrayList<>(teams);
+        remainingTeams.remove(playerTeam);
+        for (Deck aiDeck: deck.getAiDecks()) {
+            aiDeck.getDraftNotes().put("Team", Aggregates.random(remainingTeams));
+        }
     }
 
     /**
