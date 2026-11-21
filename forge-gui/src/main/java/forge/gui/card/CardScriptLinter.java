@@ -71,7 +71,7 @@ public final class CardScriptLinter {
     private static final Set<String> SVAR_NAME_LISTS = Set.of("AddSVars", "sVars");
     /** Params naming a single SVar: the whole value is looked up. */
     private static final Set<String> SVAR_NAMES = Set.of("TriggersWhenSpent", "ExtraTurnDelayedTrigger",
-        "ExtraTurnDelayedTriggerExecute", "ExtraPhaseDelayedTrigger", "ExtraPhaseDelayedTriggerExcute");
+        "ExtraTurnDelayedTriggerExecute", "ExtraPhaseDelayedTrigger", "ExtraPhaseDelayedTriggerExecute");
     /** The same, split on " & " by StaticAbilityContinuous. */
     private static final Map<String, Kind> SVAR_AMP_LISTS = Map.of(
         "AddAbility", Kind.ABILITY, "AddTrigger", Kind.TRIGGER, "AddStaticAbility", Kind.STATIC,

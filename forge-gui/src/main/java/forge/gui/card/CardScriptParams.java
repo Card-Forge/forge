@@ -101,7 +101,10 @@ public final class CardScriptParams {
             // the params only the AI reads are declared on its AI class
             Class<?> ai = SpellApiToAi.Converter.getAiClass(api);
             for (Class<?> c = ai; c != null && c != SpellAbilityAi.class; c = c.getSuperclass()) {
+                String[] intern = IHasForgeParams.internalParams(c);
                 params.addAll(List.of(orEmpty(IHasForgeParams.optionalParams(c))));
+                params.addAll(List.of(orEmpty(intern)));
+                internal.addAll(List.of(orEmpty(intern)));
             }
             if (declared.contains(api)) {
                 own.put(api, params);

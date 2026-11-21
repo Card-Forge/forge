@@ -46,6 +46,9 @@ import java.util.Map;
  */
 
 public class AnimateAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts", "AITgtsStrict", "ValidCards",
+    };
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {

@@ -6,7 +6,7 @@ package forge.game.ability;
  *   <li>{@code String[] OPTIONAL_PARAMS}: params a script may set;</li>
  *   <li>{@code String[][] REQUIRED_PARAMS} (effects): groups of params, one of each group must be set;</li>
  *   <li>{@code String[] INTERNAL_PARAMS}: params the engine sets itself (keyword abilities and the
- *       like), which a script shouldn't.</li>
+ *       like), which a script shouldn't. Framework, effect and AI classes can declare them.</li>
  * </ul>
  * The framework classes' declarations apply to every ability; an effect's add to them. The card-script
  * linter reads them, and CardScriptParamDeclarationTest keeps them in sync with the code.

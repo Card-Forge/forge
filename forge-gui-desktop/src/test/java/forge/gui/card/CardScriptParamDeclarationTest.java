@@ -175,11 +175,16 @@ public class CardScriptParamDeclarationTest {
         }
     }
 
-    /** INTERNAL_PARAMS, on a framework class or a declaring effect, must be params the engine really sets. */
+    /** INTERNAL_PARAMS, on a framework class, an effect or an AI class, must be params the engine really sets. */
     private void checkInternal(List<String> errors) {
         Set<Class<?>> declarers = new LinkedHashSet<>(CardScriptParams.FRAMEWORK);
         for (Class<?> effect : effectClasses().keySet()) {
             for (Class<?> c = effect; c != SpellAbilityEffect.class; c = c.getSuperclass()) {
+                declarers.add(c);
+            }
+        }
+        for (Class<?> ai : aiClasses().keySet()) {
+            for (Class<?> c = ai; c != SpellAbilityAi.class; c = c.getSuperclass()) {
                 declarers.add(c);
             }
         }
