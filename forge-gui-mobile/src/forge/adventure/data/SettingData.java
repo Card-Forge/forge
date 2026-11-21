@@ -13,6 +13,7 @@ public class SettingData {
     public int height;
     public String plane;
     public boolean fullScreen;
+    public boolean borderlessFullScreen; //with fullScreen: a borderless window over the monitor instead of exclusive fullscreen
     public String videomode;
     public String lastActiveSave;
     // Legacy ratio adjustments, no longer used (cards keep their ratio automatically). Kept so older settings.json files still parse.

@@ -6,7 +6,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.MulliganDefs;
 import forge.StaticData;
-import forge.adventure.util.Config;
+import forge.adventure.util.WindowMode;
 import forge.ai.AiProfileUtil;
 import forge.assets.*;
 import forge.game.GameLogEntryType;
@@ -144,15 +144,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("lblMinimizeScreenLock"),
                 Forge.getLocalizer().getMessage("nlMinimizeScreenLock")), 0);*/
         } else {
-            //fullscreen
-            lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
-                Forge.getLocalizer().getMessage("lblFullScreenMode"),
-                Forge.getLocalizer().getMessage("nlFullScreenMode")) {
+            //windowed, fullscreen or borderless fullscreen, stored as two settings, see WindowMode
+            lstSettings.addItem(new CustomSelectSetting(FPref.UI_FULLSCREEN_MODE,
+                Forge.getLocalizer().getMessage("lblDisplayMode"),
+                Forge.getLocalizer().getMessage("nlDisplayMode"),
+                WindowMode.getAvailableLabels()) {
                     @Override
-                    public void select() {
-                        super.select();
-                        Config.instance().getSettingData().fullScreen = FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE);
-                        Config.instance().saveSettings();
+                    protected String getCurrentValue() {
+                        return WindowMode.getCurrent().getLabel();
+                    }
+                    @Override
+                    public void valueChanged(String newValue) {
+                        WindowMode mode = WindowMode.fromLabel(newValue);
+                        if (mode != null) {
+                            mode.apply();
+                        }
                     }
                 }, 0);
             lstSettings.addItem(new BooleanSetting(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN,
@@ -1017,19 +1023,23 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.openScreen(new CustomSelectScreen());
         }
 
+        //the option shown as selected; override when the value isn't stored in this one preference
+        protected String getCurrentValue() {
+            if(pref instanceof FPref) {
+                return FModel.getPreferences().getPref((FPref) pref);
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                return FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+            }
+            return null;
+        }
+
         private class CustomSelectScreen extends FScreen {
             private final FList<String> lstOptions;
             private final String currentValue;
 
             private CustomSelectScreen() {
                 super("Select " + label.substring(0, label.length() - 1));
-                if(pref instanceof FPref) {
-                    currentValue = FModel.getPreferences().getPref((FPref) pref);
-                } else if(pref instanceof ForgeNetPreferences.FNetPref) {
-                    currentValue = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
-                } else {
-                    currentValue = null;
-                }
+                currentValue = getCurrentValue();
                 lstOptions = add(new FList<>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
@@ -1078,15 +1088,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         @Override
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
-            String value;
-            if(pref instanceof FPref) {
-                value = FModel.getPreferences().getPref((FPref)pref);
-            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
-                value = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref)pref);
-            } else {
-                value = "";
-            }
-            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+            String value = getCurrentValue();
+            g.drawText(value == null ? "" : value, font, color, x, y, w, h, false, Align.right, false);
         }
     }
 
