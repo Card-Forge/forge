@@ -130,6 +130,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAiPicker = new OptionsCheckBox(localizer.getMessage("lblAiPickerSettings"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
+    private final FLabel btnExcludedSets = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final JCheckBox cbShowDraftRanking = new OptionsCheckBox(localizer.getMessage("lblShowDraftRankingOverlay"));
     private final JCheckBox cbOrderHand = new OptionsCheckBox(localizer.getMessage("cbOrderHand"));
 
@@ -356,6 +357,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbSmartCardArtSelectionOpt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h pref!, gap 28px 0 0 0, span 2 1");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
+
+        pnlPrefs.add(btnExcludedSets, "w 38%!, h 30px!, gap 25px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExcludedSets")), descriptionConstraints);
 
         //Draft Ranking Overlay
         pnlPrefs.add(cbShowDraftRanking, titleConstraints);
@@ -1004,6 +1008,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbSmartCardArtSelectionOpt() { return cbSmartCardArtSelectionOpt; }
+
+    public FLabel getBtnExcludedSets() { return btnExcludedSets; }
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowDraftRanking() { return cbShowDraftRanking; }

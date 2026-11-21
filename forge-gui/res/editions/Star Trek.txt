@@ -3,6 +3,7 @@ Code=TRK
 Date=2026-11-13
 Name=Star Trek
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=TRK
 #https://magic.wizards.com/en/news/feature/collecting-star-trek
 BoosterSlots=Common,Common-SDS,Common-Klingon,Uncommon,RareMythic,Land,Wildcard,WildcardFoil,EchoedPair
