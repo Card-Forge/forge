@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Artifact Equipment
 K:Equip:4 R
 K:MayEffectFromOpeningDeck:ChooseTeam
-SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$
 SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
 SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
 S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ TeamMirran

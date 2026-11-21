@@ -11,7 +11,7 @@ S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | Chec
 S:Mode$ Continuous | CharacteristicDefining$ True | AffectedDefined$ Self | CheckSVar$ TeamPhyrexian | AddTrigger$ PhyrexianTrigger
 SVar:MirranTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseMirran | TriggerDescription$ When CARDNAME enters the battlefield, choose any number of permanents, then remove from each a counter of each kind already there.
 SVar:ChooseMirran:DB$ ChooseCard | Choices$ Permanent.HasCounters | Mandatory$ True | MinAmount$ 0 | Amount$ X | ChoiceTitle$ choose any number of permanents | SubAbility$ CountersMirran
-SVar:CountersMirran:DB$ RemoveCounter | Defined$ ChosenCard | CounterType$ ExistingCounter
+SVar:CountersMirran:DB$ RemoveCounter | Defined$ ChosenCard | CounterType$ EachExistingCounter
 SVar:X:Count$Valid Permanent.HasCounters
 SVar:PhyrexianTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ CountersPhyrexian | TriggerDescription$ When CARDNAME enters the battlefield, proliferate.
 SVar:CountersPhyrexian:DB$ Proliferate
