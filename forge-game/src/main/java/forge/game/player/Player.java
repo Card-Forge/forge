@@ -148,7 +148,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
     private Table<Long, Long, IKeywordsChange> changedKeywords = TreeBasedTable.create();
 
-    private Map<GameEntity, List<Card>> attackedThisTurn = new HashMap<>();
+    // combat number, defender -> a copy of each creature that attacked there
+    private Table<Integer, GameEntity, List<Card>> attackedThisTurn = HashBasedTable.create();
     private List<Player> attackedPlayersLastTurn = new ArrayList<>();
     private List<Player> attackedPlayersThisCombat = new ArrayList<>();
 
@@ -1901,19 +1902,26 @@ public class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
     public final List<Card> getCreaturesAttackedThisTurn(final GameEntity e) {
-        return attackedThisTurn.getOrDefault(e, Lists.newArrayList());
+        return Lists.newArrayList(Iterables.concat(attackedThisTurn.column(e).values()));
+    }
+    public final Map<Integer, Map<GameEntity, List<Card>>> getCreaturesAttackedThisTurnByCombat() {
+        return attackedThisTurn.rowMap();
     }
     public final void addCreaturesAttackedThisTurn(final Card c, final GameEntity e) {
-        final List<Card> creatures = attackedThisTurn.getOrDefault(e, Lists.newArrayList());
+        final int combat = game.getPhaseHandler().getNumCombat();
+        List<Card> creatures = attackedThisTurn.get(combat, e);
+        if (creatures == null) {
+            creatures = Lists.newArrayList();
+            attackedThisTurn.put(combat, e, creatures);
+        }
         creatures.add(c);
-        attackedThisTurn.putIfAbsent(e, creatures);
         if (e instanceof Player && !attackedPlayersThisCombat.contains(e)) {
             attackedPlayersThisCombat.add((Player) e);
         }
     }
 
     public final Iterable<Player> getAttackedPlayersMyTurn() {
-        return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
+        return IterableUtil.filter(attackedThisTurn.columnKeySet(), Player.class);
     }
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;

@@ -136,6 +136,8 @@ Goes off after attackers are declared, if any attackers were declared, once a co
 Parameters:
 - `AttackingPlayer` - The attacking player must match this
 - `AttackedTarget` - One of the game entities in TriggeredAttackedTarget must match this
+- `AttackersTotalPower` - The total power of the attacking creatures must match this, e.g. `GE12`
+- `FirstTime` - Only if no attack in an earlier combat this turn already matched the attacker parameters (`ValidAttackers`, `ValidAttackersAmount`, `AttackersTotalPower`). `AttackedTarget` is not applied to the earlier attacks
 
 TriggeredObjects:
 - `Attackers` - Collection of attacking creatures
