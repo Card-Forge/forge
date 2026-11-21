@@ -1,0 +1,5 @@
+Name:Chest Trait - Relic Of Endless Water
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | EffectZone$ Command | Description$ You have no maximum hand size.
+Oracle:You have no maximum hand size.

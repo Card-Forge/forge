@@ -1,0 +1,12 @@
+Name:Craftwork Crusher
+ManaCost:3 R R G G
+Types:Artifact Creature Boar Construct
+PT:7/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBToken,DBDraw | CharmNum$ 2
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | SpellDescription$ This creature deals 4 damage to target creature or planeswalker.
+SVar:DBToken:DB$ Token | TokenScript$ cadet | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Token & Type$Wizard|Soldier
+Oracle:Trample\nWhen this creature enters, choose two —\n• This creature deals 4 damage to target creature or planeswalker.\n• Create a 2/2 colorless Wizard Soldier creature token named Cadet.\n• Draw a card.

@@ -3,15 +3,14 @@ package forge.gamemodes.net.server;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
-import forge.game.GameLogEntry;
-import forge.game.GameView;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputSynchronized;
+import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
@@ -53,6 +52,7 @@ import org.jupnp.model.meta.Device;
 import org.jupnp.registry.Registry;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
+import org.jupnp.util.SpecificationViolationReporter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
-public final class FServerManager implements IHasForgeLog {
+public final class FServerManager implements IHasForgeLog, HostingServer.Server {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
 
@@ -147,18 +147,17 @@ public final class FServerManager implements IHasForgeLog {
         }, deadline, TimeUnit.SECONDS);
     }
 
-    private boolean isHosting = false;
-    private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-    private EventLoopGroup workerGroup = new NioEventLoopGroup();
+    // Created by startServer: an offline game reaches getInstance() but never needs the selectors
+    private EventLoopGroup bossGroup;
+    private EventLoopGroup workerGroup;
     private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private IDraftEventHandler draftHandler;
-    private boolean UPnPMapped = false;
     private int port;
     private static final Localizer localizer = Localizer.getInstance();
     private final Thread shutdownHook = new Thread(() -> {
-        if (isHosting()) {
+        if (HostingServer.isHosting()) {
             stopServer(false);
         }
     });
@@ -234,6 +233,8 @@ public final class FServerManager implements IHasForgeLog {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
         netLog.info("Starting Multiplayer Server");
+        bossGroup = new NioEventLoopGroup(1);
+        workerGroup = new NioEventLoopGroup();
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -273,7 +274,7 @@ public final class FServerManager implements IHasForgeLog {
                 mapNatPort();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
-            isHosting = true;
+            HostingServer.set(this);
         } catch (final InterruptedException e) {
             netLog.error(e, "Server start interrupted");
         }
@@ -305,8 +306,11 @@ public final class FServerManager implements IHasForgeLog {
     public void stopServer() {
         stopServer(true);
     }
-
-    private void stopServer(final boolean removeShutdownHook) {
+    private synchronized void stopServer(final boolean removeShutdownHook) {
+        // The shutdown hook and the channel-close thread both stop the server; only the first does the work
+        if (!HostingServer.isHosting()) {
+            return;
+        }
         // Cancel all reconnect timers
         for (final Timer timer : reconnectTimers.values()) {
             timer.cancel();
@@ -317,32 +321,28 @@ public final class FServerManager implements IHasForgeLog {
         afkSlots.clear();
 
         try {
-            bossGroup.shutdownGracefully().sync();
-            workerGroup.shutdownGracefully().sync();
+            if (bossGroup != null) {
+                // Netty's default 2 s quiet period per group made every stop take about 4 s
+                bossGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                workerGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+            }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
         }
         if (upnpService != null) {
-            upnpService.shutdown();
+            try {
+                upnpService.shutdown();
+            } catch (Exception | AssertionError e) {
+                // The JDK wraps a failed multicast leave in AssertionError, which jupnp doesn't catch
+                netLog.debug("UPnP shutdown incomplete: {}", e.toString());
+            }
             upnpService = null;
         }
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
-        isHosting = false;
-        UPnPMapped = false;
+        HostingServer.set(null);
         NetworkLogConfig.deactivateNetworkLogging();
-        // create new EventLoopGroups for potential restart
-        bossGroup = new NioEventLoopGroup(1);
-        workerGroup = new NioEventLoopGroup();
-    }
-
-    public boolean isHosting() {
-        return isHosting;
-    }
-
-    public boolean isUPnPMapped() {
-        return UPnPMapped;
     }
 
     public int getTotalSendErrors() {
@@ -397,12 +397,6 @@ public final class FServerManager implements IHasForgeLog {
 
     private final Set<Integer> afkSlots = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
-    @FunctionalInterface
-    public interface AfkTimeout {
-        AfkTimeout NOOP = () -> {};
-        void cancel();
-    }
-
     /**
      * {@code cancelAll()} is safe here only because this is armed exclusively from
      * {@code InputPassPriority}: the sole replies that can be pending on the channel
@@ -410,8 +404,9 @@ public final class FServerManager implements IHasForgeLog {
      * Extending to other server-side waits (assignCombatDamage, getChoices, order,
      * ...) is blocked on those methods not being null-safe.
      */
+    @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!isHosting() || localLobby == null) {
+        if (!HostingServer.isHosting() || localLobby == null) {
             return AfkTimeout.NOOP;
         }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
@@ -581,6 +576,17 @@ public final class FServerManager implements IHasForgeLog {
             }
         }
         return null;
+    }
+
+    /** The client holding a removed slot loses it. The slots above move down, and their clients move with them. */
+    public void slotRemoved(final int index) {
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == index) {
+                client.setIndex(RemoteClient.UNASSIGNED_SLOT);
+            } else if (client.getIndex() > index) {
+                client.setIndex(client.getIndex() - 1);
+            }
+        }
     }
 
     public void clearPlayerGuis() {
@@ -759,6 +765,9 @@ public final class FServerManager implements IHasForgeLog {
                 upnpService.shutdown();
             }
 
+            // Gateways routinely break the UPnP spec in ways jupnp tolerates; don't log each one
+            SpecificationViolationReporter.disableReporting();
+
             // Create a new UPnP service instance
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
@@ -774,6 +783,7 @@ public final class FServerManager implements IHasForgeLog {
                 public void run() {
                     if (!listener.isCompleted()) {
                         listener.setCompleted();
+                        netLog.warn("UPnP: no gateway confirmed a mapping for port {} within 5 seconds", port);
                         onUPnPResult(false);
                     }
                 }
@@ -815,7 +825,6 @@ public final class FServerManager implements IHasForgeLog {
             super.deviceAdded(registry, device);
             if (!completed && !activePortMappings.isEmpty()) {
                 completed = true;
-                UPnPMapped = true;
                 onUPnPResult(true);
             }
         }
@@ -923,30 +932,22 @@ public final class FServerManager implements IHasForgeLog {
         netGui.resume();
 
         // Reset delta sync state — reconnecting client has no prior baseline
-        netGui.resetForReconnect();
+        netGui.resetSync();
         netLog.info("[Reconnect] Delta sync state reset for slot {}", slotIndex);
 
-        // Send game state via setGameView protocol (client needs gameView set before openView)
-        netGui.updateGameView();
         netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
-        netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
-
-        // Replay the host's log entries to rebuild the client's log on re-connect
-        final GameView gameView = netGui.getGameView();
-        if (gameView != null && gameView.getGameLog() != null) {
-            final List<GameEvent> logEvents = new ArrayList<>();
-            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
-                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
-            }
-            if (!logEvents.isEmpty()) {
-                netGui.replayEvents(logEvents);
-                netLog.info("[Reconnect] Replayed {} game log entries for slot {} ({})", logEvents.size(), slotIndex, client.getUsername());
-            }
-        }
+        netLog.info("[Reconnect] Sent game state, openView and the game log to slot {}", slotIndex);
 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
         if (pch != null) {
+            // openView gives the client new controllers with empty yield caches, so resend the active yields
+            final PlayerView local = pch.getLocalPlayerView();
+            if (local != null) {
+                for (final YieldUpdate u : pch.getYieldController().activeYieldUpdates(local)) {
+                    netGui.applyYieldUpdate(u);
+                }
+            }
             pch.getInputQueue().updateObservers();
             netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
         }
@@ -986,18 +987,22 @@ public final class FServerManager implements IHasForgeLog {
         final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
         final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
         p.dangerouslySetController(aiCtrl);
+        // The match's later games seat players from here
+        p.getRegisteredPlayer().setPlayer(aiLobbyPlayer);
         netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
         // Clear InputQueue to unblock the game thread (waiting on cdlDone)
         pch.getInputQueue().clearInputs();
         netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
+        hostedMatch.tallyNextGameDecisions();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             if (msg instanceof HeartbeatEvent) {
-                return; // Consumed — arrival resets IdleStateHandler read timer
+                ctx.writeAndFlush(new HeartbeatEvent());
+                return;
             }
             if (msg instanceof MessageEvent) {
                 final String raw = ((MessageEvent) msg).getMessage();
@@ -1094,7 +1099,6 @@ public final class FServerManager implements IHasForgeLog {
                     clients.put(ctx.channel(), disconnected);
                     netLog.info("[Reconnect] Channel swapped for {} (slot {})", username, disconnected.getIndex());
 
-                    // Resume and resync
                     resumeAndResync(disconnected);
 
                     // Draft-side resync: re-send the current pack and clear grace state.
@@ -1113,6 +1117,16 @@ public final class FServerManager implements IHasForgeLog {
                         broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
                     }
                     netLog.info("[Reconnect] Player reconnected: {}", username);
+                } else if (isMatchActive()) {
+                    // Match is in progress and this user isn't on the disconnected list —
+                    // either their reconnect window expired, or they were never in this match.
+                    // Tell them explicitly so the client surfaces the seat-lost modal instead
+                    // of inferring it from a lobby update.
+                    netLog.info("[Reconnect] LoginEvent for {} during active match - seat unavailable", username);
+                    if (client != null) {
+                        broadcastTo(new SeatLostEvent(), client);
+                    }
+                    ctx.close();
                 } else {
                     // Normal login flow
                     final int index = localLobby.connectPlayer(username, event.getAvatarIndex(), event.getSleeveIndex());

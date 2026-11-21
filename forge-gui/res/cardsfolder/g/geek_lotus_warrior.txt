@@ -1,0 +1,18 @@
+Name:Geek Lotus Warrior
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Geek
+SVar:STK2:Kind$ Name | Word$ Lotus
+SVar:STK3:Kind$ Name | Word$ Warrior
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {2}: This creature gets +2/+0 until end of turn. | Ability$ STK7Pump
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever a creature enters under your control, this permanent deals 2 damage to target player. | Triggers$ STK8Enters
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 3 | Toughness$ 6
+SVar:STK7Pump:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+SVar:STK8Enters:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ STK8Damage | TriggerDescription$ Whenever a creature enters under your control, this permanent deals 2 damage to target player.
+SVar:STK8Damage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ 2
+Oracle:{TK}{TK} — {2}: This creature gets +2/+0 until end of turn.\n{TK}{TK}{TK}{TK} — Whenever a creature enters under your control, this permanent deals 2 damage to target player.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 3/6

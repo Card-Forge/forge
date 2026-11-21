@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted land has indestructible.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Land | AddKeyword$ Indestructible | Description$ Enchanted land has indestructible.
 S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Land.EnchantedBy | Description$ Enchanted land can't be enchanted by other Auras.
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:Random

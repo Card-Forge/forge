@@ -17,5 +17,5 @@ Name:Mycoid Maze
 ManaCost:no cost
 Types:Land Cave
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Dig | Cost$ 3 G T | ForceRevealToController$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+A:AB$ Dig | Cost$ 3 G T | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
 Oracle:(Transforms from Twists and Turns.)\n{T}: Add {G}.\n{3}{G}, {T}: Look at the top four cards of your library. You may reveal a creature card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.

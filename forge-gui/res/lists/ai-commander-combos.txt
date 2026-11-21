@@ -1,0 +1,8 @@
+# Two card combos that the AI knows in Commander games, on top of commander-bracket-combos.txt.
+# Same format as that file:  category | Card A | Card B    (category: early_game or late_game; it only labels the line here)
+# Pairs that are already in commander-bracket-combos.txt (in either order) are ignored, so duplicates are harmless.
+# These are NOT used for bracket calculation: add a pair here, not there, when it should only change how the AI plays.
+early_game | Devoted Druid | Melira, Sylvok Outcast
+early_game | Palinchron | Peregrine Drake
+early_game | Thopter Foundry | Sword of the Meek
+early_game | Dockside Extortionist | Temur Sabertooth

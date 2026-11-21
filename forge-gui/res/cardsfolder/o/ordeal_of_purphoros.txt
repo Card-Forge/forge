@@ -8,7 +8,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | Counter
 SVar:DBSac:DB$ Sacrifice | ConditionDefined$ TriggeredAttackerLKICopy | ConditionPresent$ Card.counters_GE3_P1P1
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME, it deals 3 damage to any target.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Any
-S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+S:Mode$ Continuous | AffectedDefined$ AttachedBy Self | Affected$ Creature | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:SacMe:4
 DeckHas:Ability$Counters

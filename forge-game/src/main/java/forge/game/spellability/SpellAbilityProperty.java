@@ -34,6 +34,13 @@ public class SpellAbilityProperty {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
             return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
+        } else if (property.startsWith("CountersRemovedToPay")) {
+            String comparator = property.substring(20, 22);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(22), sa);
+            Integer removed = sa.getSVarInt("CostCountersRemoved");
+            return Expressions.compare(removed == null ? 0 : removed, comparator, y);
+        } else if (property.equals("SacrificedToPay")) {
+            return sa.getPaidList("Sacrificed").iterator().hasNext();
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
@@ -158,7 +165,11 @@ public class SpellAbilityProperty {
             if (root instanceof WrappedAbility wa) {
                 root = wa.getWrappedAbility();
             }
-            if (!sa.equals(Objects.requireNonNullElse(root.getOriginalAbility(), root))) {
+            sa = sa.getRootAbility();
+            if (sa instanceof WrappedAbility wa) {
+                sa = wa.getWrappedAbility();
+            }
+            if (!sa.equals(root)) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {
@@ -201,6 +212,11 @@ public class SpellAbilityProperty {
                 return false;
             }
             return source.equals(m.getHostCard());
+        } else if (property.equals("KeywordSource")) {
+            if (sa.getKeyword() == null || sa.getKeyword().getStatic() == null) {
+                return false;
+            }
+            return source.equals(sa.getKeyword().getStatic().getHostCard());
         } else if (property.startsWith("singleTarget")) {
             // this doesn't allow a second target, even if same object
             int num = 0;

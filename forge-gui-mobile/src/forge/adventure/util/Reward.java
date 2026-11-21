@@ -8,13 +8,23 @@ import forge.item.PaperCard;
  * Reward class that may contain gold,cards or items
  */
 public class Reward {
+    /** Marks a card pack that holds a whole deck, which goes into an empty deck slot when opened. */
+    public static final String DECK_TAG = "deckReward";
+
     public enum Type {
         Card,
         Gold,
         Item,
         Life,
         Shards,
-        CardPack
+        CardPack;
+        private final String labelKey = "lbl" + this.name();
+        /**
+         * @return The pre-cached localizer key name (e.g., "lblLife", "lblShards", "lblGold").
+         */
+        public String getLabelKey() {
+            return this.labelKey;
+        }
     }
 
     Type type;
@@ -23,6 +33,7 @@ public class Reward {
     Deck deck;
     boolean isNoSell, isAutoSell;
     private final int count;
+    private int cost;
 
     public Reward(ItemData item) {
         type = Type.Item;
@@ -68,6 +79,12 @@ public class Reward {
         //handle that later.
     }
 
+    /** A card pack with a fixed shop cost. A cost of 0 prices the pack by its contents. */
+    public Reward(Deck deck, boolean isNoSell, int cost) {
+        this(deck, isNoSell);
+        this.cost = cost;
+    }
+
     public PaperCard getCard() {
         return card;
     }
@@ -86,6 +103,10 @@ public class Reward {
 
     public int getCount() {
         return count;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     public boolean isNoSell() {

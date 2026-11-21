@@ -18,7 +18,7 @@ public class InvestigateAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
-        boolean result = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
+        boolean result = ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(aiPlayer);
         return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
     }
 

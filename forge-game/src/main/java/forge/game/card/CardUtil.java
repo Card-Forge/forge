@@ -25,12 +25,15 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.ICardFace;
+import forge.card.CardSplitType;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetRestrictions;
@@ -40,6 +43,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -339,28 +343,38 @@ public final class CardUtil {
                     break;
                 }
 
-                colors = CardUtil.getReflectableManaColors(sa, ab, colors, parents);
+                addTypes(maxChoices, ab.getManaPart().couldProduce(ab, getReflectableManaColors(sa, ab, Sets.newHashSet(), parents)), colors);
             }
         }
         return colors;
     }
 
+    /** CR 106.7: adds each type of mana the ability could produce. */
     public static Set<String> canProduce(final int maxChoices, final SpellAbility sa,
             final Set<String> colors) {
-        if (sa == null) {
-            return colors;
-        }
-        for (final String col : MagicColor.Constant.ONLY_COLORS) {
-            if (sa.canProduce(MagicColor.toShortString(col))) {
-                colors.add(col);
+        for (SpellAbility tail = sa; tail != null; tail = tail.getSubAbility()) {
+            final AbilityManaPart mp = tail.getManaPart();
+            if (mp == null || !tail.metConditions()) {
+                continue;
             }
+            Set<String> reflected = null;
+            if (tail.getApi() == ApiType.ManaReflected) {
+                // this kind only adds mana in response to other mana
+                if ("Produced".equals(tail.getParam("ReflectProperty"))) {
+                    continue;
+                }
+                reflected = getReflectableManaColors(tail);
+            }
+            addTypes(maxChoices, mp.couldProduce(tail, reflected), colors);
         }
-
-        if (maxChoices == 6 && sa.canProduce("C")) {
-            colors.add(MagicColor.Constant.COLORLESS);
-        }
-
         return colors;
+    }
+
+    private static void addTypes(final int maxChoices, final Set<String> types, final Set<String> colors) {
+        if (maxChoices < 6) {
+            types.remove(MagicColor.Constant.COLORLESS);
+        }
+        colors.addAll(types);
     }
 
     // these have been copied over from CardFactoryUtil as they need two extra
@@ -388,5 +402,23 @@ public final class CardUtil {
         choices.removeAll(targeted);
 
         return choices;
+    }
+
+    public static void turnToRightFace(String faceName, Card forgeCard) {
+        if (!forgeCard.getName().equals(faceName)) {
+            if (forgeCard.getRules().getSplitType().equals(CardSplitType.Specialize)) {
+                for (Map.Entry<CardStateName, ICardFace> e : forgeCard.getRules().getSpecializeParts().entrySet()) {
+                    if (faceName.equals(e.getValue().getName())) {
+                        forgeCard.changeToState(e.getKey());
+                        return;
+                    }
+                }
+            } else {
+                forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
+                if (forgeCard.getCurrentStateName().equals(CardStateName.Backside)) {
+                    forgeCard.setBackSide(true);
+                }
+            }
+        }
     }
 }

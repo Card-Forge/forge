@@ -1,0 +1,16 @@
+Name:Notorious Sliver War
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Notorious
+SVar:STK2:Kind$ Name | Word$ Sliver
+SVar:STK3:Kind$ Name | Word$ War
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {5}: Creatures you control get +1/+1 until end of turn. | Ability$ STK7PumpAll
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Protection from creatures with two or more creature types | Keywords$ Protection:Creature.numCreatureTypesGE2:creatures with two or more creature types
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 9 | Toughness$ 6
+SVar:STK7PumpAll:AB$ PumpAll | Cost$ 5 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{TK}{TK} — {5}: Creatures you control get +1/+1 until end of turn.\n{TK}{TK}{TK} — Protection from creatures with two or more creature types\n{TK}{TK} — 3/3\n{TK}{TK}{TK}{TK}{TK} — 9/6

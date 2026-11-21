@@ -241,7 +241,7 @@
 						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ambitious Farmhand&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stoic Farmer&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Irrigated Farmland&quot;, &quot;count&quot;: 1 },
-                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Farmland &quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Farmland&quot;, &quot;count&quot;: 1 },
                         {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
                       ]
                     },

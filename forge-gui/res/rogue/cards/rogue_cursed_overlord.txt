@@ -1,0 +1,6 @@
+Name:Cursed - Overlord
+ManaCost:no cost
+Types:Cursed
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | OptionalDecider$ TriggeredPlayer | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ At the beginning of each opponent's upkeep, that player may create a token that's a copy of up to one target nonland permanent they control.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.nonLand+ControlledBy TriggeredPlayer | TgtPrompt$ Select up to one target nonland permanent you control | TargetMin$ 0 | TargetMax$ 1 | TargetingPlayer$ TriggeredPlayer | Controller$ TriggeredPlayer
+Oracle:At the beginning of each opponent's upkeep, that player may create a token that's a copy of up to one target nonland permanent they control.

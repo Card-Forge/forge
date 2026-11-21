@@ -17,23 +17,33 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.IntConsumer;
+import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import forge.StaticData;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckFormat;
+import forge.deck.DeckRule;
+import forge.deck.DeckRuleColorIdentity;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.GuiBase;
@@ -55,6 +65,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.menus.CDeckEditorUIMenus;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -462,37 +473,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          * Add context menu entries for foiling cards
          */
         public void addMakeFoils() {
-            final int max = getMaxMoveQuantity();
-            if (max == 0) { return; }
-
-            addMakeFoil(1);
-            if (max == 1) { return; }
-
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
-            }
-
-            addMakeFoil(qty);
-            if (max == 2) { return; }
-
-            addMakeFoil(-max);
-        }
-
-        /**
-         * Adds the individual context menu entry for foiling the requested number of cards
-         *
-         * @param qty           a negative quantity will prompt the user for a number
-         */
-        private void addMakeFoil(final int qty) {
-            String label = localizer.getMessage("lblConvertToFoil") + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-
-            GuiUtils.addMenuItem(menu, label, null, () -> {
-                Integer quantity = qty;
-                if (quantity < 0) {
-                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                    if (quantity == null) { return; }
-                }
+            final String foil = localizer.getMessage("lblConvertToFoil");
+            addQuantityItems(foil, itemText -> foil + " " + itemText, null, true, quantity -> {
                 // get the currently selected card from the editor
                 CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                 PaperCard existingCard = cardManager.getSelectedItem();
@@ -503,26 +485,77 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 // add *quantity* into the deck and set them as selected
                 cardManager.addItem(foiledCard, quantity);
                 cardManager.setSelectedItem(foiledCard);
-            }, true, true);
+            });
         }
-        //TODO: need to translate getItemDisplayString
-        private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
-            String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-            if (dest != null && !dest.isEmpty()) {
-                label += " " + dest;
+
+        public void addChangePrintings() {
+            // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
+            if (!catalogManager.isInfinite()) { return; }
+            final CardManager cardManager = (CardManager) getItemManager();
+            final PaperCard card = cardManager.getSelectedItem();
+            if (card == null) { return; }
+            if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) { return; }
+
+            addQuantityItems(localizer.getMessage("lblChangePrinting"), itemText -> localizer.getMessage("lblChangePrintingOf", itemText), null, true, quantity -> {
+                PaperCard chosen = ChangePrintingDialog.show(card);
+                if (chosen == null) { return; }
+                PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
+                if (newCard.equals(card)) { return; }
+                cardManager.removeItem(card, quantity);
+                cardManager.addItem(newCard, quantity);
+                getDeckController().notifyModelChanged();
+            });
+        }
+
+        /**
+         * Adds one entry when only one copy can be chosen, otherwise a submenu for one copy,
+         * the default card limit and a prompted X copies.
+         * @param shortcuts     Space modifiers for each entry, or null for no shortcuts
+         */
+        private void addQuantityItems(final String title, final Function<String, String> label, final int[] shortcuts,
+                                      final boolean bold, final IntConsumer action) {
+            final int max = getMaxMoveQuantity();
+            if (max == 0) { return; }
+
+            if (max == 1) {
+                menu.add(createQuantityItem(label.apply(getQuantityText(1)), 1, shortcuts, 0, bold, action));
+                return;
             }
-            GuiUtils.addMenuItem(menu, label, KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), () -> {
+
+            final List<Integer> quantities = new ArrayList<>(List.of(1, Math.min(FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT), max)));
+            if (max > 2) {
+                quantities.add(-max);
+            }
+            final JMenu submenu = GuiUtils.createMenu(title);
+            if (bold) {
+                submenu.setFont(submenu.getFont().deriveFont(Font.BOLD));
+            }
+            for (int i = 0; i < quantities.size(); i++) {
+                final int qty = quantities.get(i);
+                submenu.add(createQuantityItem(TextUtil.capitalize(getQuantityText(qty)), qty, shortcuts, i, false, action));
+            }
+            menu.add(submenu);
+        }
+
+        //TODO: need to translate getItemDisplayString
+        private String getQuantityText(final int qty) {
+            return SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+        }
+
+        /**
+         * @param qty           a negative quantity will prompt the user for a number
+         */
+        private JMenuItem createQuantityItem(final String label, final int qty, final int[] shortcuts, final int index,
+                                             final boolean bold, final IntConsumer action) {
+            final KeyStroke shortcut = shortcuts == null ? null : KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcuts[index]);
+            return GuiUtils.createMenuItem(label, shortcut, () -> {
                 Integer quantity = qty;
                 if (quantity < 0) {
                     quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
                     if (quantity == null) { return; }
                 }
-                if (isAddContextMenu) {
-                    CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                } else {
-                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
-                }
-            }, true, shortcutModifiers == 0);
+                action.accept(quantity);
+            }, true, bold);
         }
 
         /**
@@ -597,21 +630,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         private void addItems(final String verb, final String dest, final boolean toAlternate, final int shortcutModifiers1, final int shortcutModifiers2, final int shortcutModifiers3) {
-            final int max = getMaxMoveQuantity();
-            if (max == 0) { return; }
-
-            addItem(verb, dest, toAlternate, 1, shortcutModifiers1);
-            if (max == 1) { return; }
-
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
-            }
-
-            addItem(verb, dest, toAlternate, qty, shortcutModifiers2);
-            if (max == 2) { return; }
-
-            addItem(verb, dest, toAlternate, -max, shortcutModifiers3); //pass -max as quantity to indicate to prompt for specific quantity
+            final boolean hasDest = dest != null && !dest.isEmpty();
+            addQuantityItems(hasDest ? verb + " " + dest : verb,
+                    itemText -> verb + " " + itemText + (hasDest ? " " + dest : ""),
+                    new int[] { shortcutModifiers1, shortcutModifiers2, shortcutModifiers3 },
+                    shortcutModifiers1 == 0, quantity -> {
+                        if (isAddContextMenu) {
+                            CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
+                        } else {
+                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
+                        }
+                    });
         }
 
         public void addMoveItems(final String verb, final String dest) {
@@ -643,6 +672,69 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     // add *quantity* into the deck and set them as selected
                     cardManager.addItem(updated, 1);
                     cardManager.setSelectedItem(updated);
+                }, true, true);
+            }
+        }
+
+        /**
+         * Commander-only counterpart to {@link #addSetColorID()}. For a commander whose card
+         * grants a DeckRule:ColorIdentity AllowedAdditionalColor$ budget, lets the player choose
+         * (up to that budget's count) which colors outside the commander's own color identity
+         * their matching off-color cards may use. It's the same upfront, Cryptic Spires-style
+         * choice {@link #addSetColorID()} offers for SETCOLORID, stored the same way - as the
+         * commander's own marked colors - and read directly by
+         * {@link DeckRuleColorIdentity#approvesAdditionalColor(forge.card.CardRules, byte)}.
+         */
+        public void addAllowedAdditionalColors() {
+            final ItemManager im = getItemManager();
+            if (im == null || im.getSelectedItems().isEmpty()) { return; }
+
+            final CardManager cardManager = (CardManager) im;
+            final PaperCard existingCard = cardManager.getSelectedItem();
+            if (existingCard == null) { return; }
+
+            final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
+            if (currentDeck == null) { return; }
+
+            for (final DeckRule rule : DeckRule.parseAll(existingCard)) {
+                if (!(rule instanceof DeckRuleColorIdentity) || !rule.isActiveFor(DeckSection.Commander)) {
+                    continue;
+                }
+                final DeckRuleColorIdentity ciRule = (DeckRuleColorIdentity) rule;
+                if (!ciRule.hasAllowedAdditionalColorBudget()) {
+                    continue;
+                }
+
+                final int additionalColorCount = ciRule.getAdditionalColorCount();
+                // Union across all commanders (partners included) so an already-covered color isn't offered again.
+                byte commanderCI = 0;
+                for (final PaperCard cmd : currentDeck.getCommanders()) {
+                    commanderCI |= cmd.getRules().getColorIdentity().getColor();
+                }
+                final byte finalCommanderCI = commanderCI;
+                final List<String> colorChoices = new ArrayList<>();
+                for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                    if ((finalCommanderCI & MagicColor.WUBRG[i]) == 0) {
+                        colorChoices.add(MagicColor.Constant.ONLY_COLORS.get(i));
+                    }
+                }
+
+                final String label = localizer.getMessage("lblAllowedAdditionalColors");
+                GuiUtils.addMenuItem(menu, label, null, () -> {
+                    final Set<String> currentColors = existingCard.getMarkedColors() != null
+                            ? existingCard.getMarkedColors().stream().map(MagicColor.Color::getName).collect(Collectors.toSet())
+                            : null;
+                    List<String> colors = GuiChoose.getChoices(label, 0, additionalColorCount, colorChoices, currentColors, null);
+                    // make an updated version
+                    PaperCard updated = existingCard.copyWithMarkedColors(ColorSet.fromNames(colors));
+                    // remove *quantity* instances of existing card
+                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
+                    // add *quantity* into the deck and set them as selected
+                    cardManager.addItem(updated, 1);
+                    cardManager.setSelectedItem(updated);
+                    if (catalogManager != null) {
+                        catalogManager.refresh(); //refresh so cards shown match the new allowed additional colors
+                    }
                 }, true, true);
             }
         }

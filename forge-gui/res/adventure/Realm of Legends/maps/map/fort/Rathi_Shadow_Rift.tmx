@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="61">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Wall of Diffusion&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6IARCdMTLOdgYHjOiR2v5KCdvV6cEIzsbxD2AIq5c9LXXgYa2guzA2TnYyBeDQzTp2hsatsLsu8F0MxnOMIYhmlhrxsnAoP8h+zfJ1D8lAb2ruFA2IsvD+EKC3LtRbb7GZ6whsUJshspzevo/iYGU6t8IcVuapZr+MIX2U30LkcHouweagAA95omZQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlN0JwjAUhYNY23QJn5xA0I7gZm5QjTs4guAsPriCqH0wB4m5XNJEkiv48NEf2nw5JyG9Vqr/U4ZJGmnno1HKaA91HadvfuE17HlRe7Yz38dnXo1cVty7bBz4adelftpvymu079v9cyhw3uz1Hpm389J1Buu2zMkdY3m5N2ef7RM9OQf9XtK7ZF3tIpkB7yfXG8qMdQvRWea2702l1LXK865a70UOnnuMi/Wd63yvc9MOv3HDCUq6DvnROfb6k4CzAe9Ogk6+f2NI+lIddBlng0QHpWO8AFO/SIc=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GcQ4t9AvE0AP5YSoK6d0kDzZjIzMLQwQHArAypohoptBapTZKSeGyQFIOa3sTEwtLMh3NAKtXM2kK/MCFGzH0jHM0HcQIn9IL9uh9qrws7AsIaFAQOsA4odZETwYXaDgDgZ9iLbSchemN9hcQCzm1R70e2E2evFysDgDcSvoBjE9mGFhD1yeFfyQ+K6hp+8OAUBeaB9CuwQe4MZsGM1oFwsEyS8QXaSah82e58C/fOQFWL3YShO4oBgGP8IO8TPrWTGKTZ79wLNdAHa+xyIQcGIC4P8Wc0PSevUsBdmdx0bxM+47N0KTRNbKcg/MHvjkMyF2a0EpD1YseNHrJTFby00zNAByO44YLy2sGFiFwrtRLa7Cof96KASqpZSO7HZj4xhbqGFfYTin5HCPDOQ9gIA6adqxw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBicQFoAQu8A0owMqHiHAO3s3Y5mHzqAiW+jshtg5k4DEtPR8AwoRlYHCwdsbiTFPnT9j3ggGAbMmHDrJddeYgC6vfYU2EkKQLYX5s8qfuqZ/4kd1Xx0MWRxaoFLaGFJKG1TCiqB4VUNDbM2AubPZGZgEBegTpraKgDJv+hyyObGoonjy+v47EPWA6J/45DHZQe17IVhWJhjE2PAoY8ce9ExLMwJiVHqX3xmUCvdkuOeoQoAK0oZKg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="199.974" y="271.026" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/manashards.tx" x="339.436" y="84.6495"/>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="199.923" y="140.67">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Wall of Shadows&quot;, &quot;Thunder Wall&quot;, &quot;Shimmering Barrier&quot;]}"/>
+    <property name="enemy" value="Lyna"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/dialog.tx" x="177.387" y="237.34" width="74" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cramped area ahead swirls with shadowy shapes, flitting on the edges of your sight. Bubbling acid and broken metal litter the ground. A distorted woman floats ahead across the acid river. 
+
+'This piece of rath lies in ruins, but it is mine, and I will defend it with my dying breath.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/treasure.tx" x="198.845" y="96.5001">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 15,
+    &quot;cardTypes&quot;: [ &quot;Creature&quot; ],
+    &quot;cardText&quot;: &quot;Shadow&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

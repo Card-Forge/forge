@@ -1,0 +1,17 @@
+Name:Heartwood Crafter
+ManaCost:G
+Types:Creature Elf Artificer
+PT:1/1
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCastSpellFromHand | SpellDescription$ Add {C}. This mana can't be spent to cast spells from your hand.
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}: Add {C}. This mana can't be spent to cast spells from your hand.
+
+ALTERNATE
+
+Name:Soul Tether
+ManaCost:2 RG
+Types:Sorcery
+A:SP$ Token | TokenScript$ rg_a_heartwood | SpellDescription$ Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+Oracle:Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")

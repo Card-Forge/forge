@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Very Hard
+Description=./Modern/Reality_Fracture/gurtmcgee_-_Valakut_(Modern,_#897853).dck
+Deck Type=constructed
+
+[Main]
+1 Prismatic Omen
+1 Lightning Bolt
+4 Galvanic Discharge
+4 Malevolent Rumble
+4 Wrenn and Six
+4 Green Sun's Zenith
+3 Hexhaven Invigorator
+4 Dryad of the Ilysian Grove
+4 Icetill Explorer
+4 Arboreal Grazer
+1 Arid Mesa
+1 Cinder Glade
+1 Forest
+1 Dryad Arbor
+1 Mountain
+2 Shifting Woodland
+2 Windswept Heath
+3 Commercial District
+3 Misty Rainforest
+4 Valakut, the Molten Pinnacle
+4 Wooded Foothills
+4 Stomping Ground
+[Sideboard]
+3 Boseiju, Who Endures
+2 Soulless Jailer
+2 Disruptor Flute
+2 Vexing Bauble
+1 Insidious Fungus
+1 Ghost Quarter
+2 Pyroclasm
+2 Damping Sphere

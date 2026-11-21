@@ -1,6 +1,8 @@
 package forge.ai;
 
 public enum AiPlayDecision {
+    // ordered from generic to board-specific
+
     // Play decision reasons
     WillPlay,
     MandatoryPlay,

@@ -1,0 +1,10 @@
+Name:Sky Deck
+ManaCost:no cost
+Types:Plane Chicago
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ Whenever you planeswalk here, at the beginning of your upkeep, or whenever chaos ensues, put a glass counter on up to one target nonland permanent.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigCounter | TriggerDescription$ Whenever you planeswalk here, at the beginning of your upkeep, or whenever chaos ensues, put a glass counter on up to one target nonland permanent.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigCounter | TriggerDescription$ Whenever you planeswalk here, at the beginning of your upkeep, or whenever chaos ensues, put a glass counter on up to one target nonland permanent.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target nonland permanent | CounterType$ GLASS | CounterNum$ 1
+T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ TrigDestroy | TriggerDescription$ When you planeswalk away from CARDNAME, destroy all permanents with glass counters on them.
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Permanent.counters_GE1_GLASS
+Oracle:Whenever you planeswalk here, at the beginning of your upkeep, or whenever chaos ensues, put a glass counter on up to one target nonland permanent.\nWhen you planeswalk away from here, destroy all permanents with glass counters on them.

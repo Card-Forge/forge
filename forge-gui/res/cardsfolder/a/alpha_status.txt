@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Battlefield | Description$ Enchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Battlefield | Description$ Enchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
 SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other/Times.2
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="12" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4AywCeAiellL73BXF4GBhu+UTtpBegdpyB/guykt1+He9qFhSstwxbZDhCgR9mDKwyLRRgYrgnT105a2k1sWqGm3aSmT5DdyHUOue6gNH2SEwbUSqek2k3N/IEe/vjMpnd5R++2CLKd9AAAgmsXKA==
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1j/UmpjByT0kqqqqq8PRiUWYg==
+  </data>
+ </layer>
+ <layer id="8" name="Dirt" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy9Vm1uwjAMze/mQIUpx2HcCdbtDhNcBdr1N/B7R5gj5UnGzYcTqll6SpU2frbjvHRjjdkwbAm1dqE1n50xX92zL4+B5q40joQDPf/QeIx828LL+a8hBmC0z+8xP4vYxgwv4kXMfvzo2mIscXquY8Bsl3WcQgy1/CVOzvX7veQF3sL63cmYd8L+lOfN1bZPcMQwhZrfiO9OeBR4U5wyVw18T+7OlC9hf87zrsXJa91qvt9jZzGH0lmQea3BXcs52+UcP5PQgZQOYV5bX3AOTAc8l0toFtchjD4/zJdyPbDzj9rwXkRtJ9uuQzFzdtl7qBe4wP2KTnPzueJu4H5j9XKRWrdyziFHPOf8XhR7pjHcP94Xag09/w/jOoSat/io7Tmu87Jntf76Bj3k9z16C+e3tOeITfNdKYZR6FEuD75H4EWNpM5pTOpIypzYI6ybrG69NK57KdPci2vpjOQc2D8iYsX+1OaqsT7j173A+QcRZLkM
+  </data>
+ </layer>
+ <layer id="9" name="Water" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4Ay0BnGwMCJhulibzh97EGxE+i3zuhRO2lmL53jFJZ26R6+wzztIpcJnRG0twNuVyJt7EK2E1sYcgLjk5NGYUso3mhhN7FphZp2k5o+QXZ3RiIwOe6gRp4gJwyolf9JtZua5Q56+IMwPewlBgxEuU7P8hUAuvwuZw==
+  </data>
+ </layer>
+ <layer id="10" name="Forest" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJylVktOG0EQLcIGFuwYhywSOysksuMCOUGOAQ4J2GYLSDBhhZScIuzBNkFZ5ALJMWIbBOaXG/Aad2mqa6p7jPKkJ8+0u+vX1a+HqMBgkWgErnWJ1sFmlwLsLJCJ1fnJ2qFfb6FeI3oL5hnRlyz0+Qbjhxgbwd8FeAl2bTNP+LsYrnX2DrPyPI5p6OftZ+E69+5iWushX7DZK9v4PjOhw/FM6FP75bhcjs52A/MOvA+uQaNWvI/g7wK87BW1t6B9xvKt10JfKQxEXZytjT7RJ/Bzv5iTZ6HPfZFLFWL7J2vjbF3B3zU4Fn65Tg1Vr6pcdP1cX5775/cvynZ+VuTwdY7o21yxr1Yuci9Se2jhR2R8BXG/m4+vq/u+Yr+5eE6dGyvfX/637xnD3kLZVz2xN1y7/4GLh2Nmv5sY3AJbYNsH7Oq+OzupPdfuN/gnUcMYtMZxjjfwdQvegff94j+3D69rae2TWFUxXeHsX4Nj8Aa8VRq0eYZ8wRbYPgvjmvZ8xCD1cWicoUFkPIUPL6t9ai3Tesa5HRg6p+vHGCu/8o6Q+s92pZ7pc5jqa42jJXtcaif3h7xzJKx7lWOKac/yK3tca6fuEdYotps68xLP1bYW+rgNdnw/574O00Df79P2gMMd/N2DD72w13T82sbDCdG/k8mzvqcdzsVcjk+ukZB7wHnHatc5JdoGt2CnBbbBjmHTWpOClYNE7FtOook4PoIbPp5pekBrhdW/Vd862kZu6IC2VfVtEuslhtRy9q11QOoEx2TZk72VZ+XY9JnT9zlD1k5/rz0CKjnl/w==
+  </data>
+ </layer>
+ <layer id="11" name="Encampment" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuIADEwPDssUMDMuBeDEjfewE2VPHzMCgtoSBQX0JfeyEgQ8bIbTyUvraOxCgehoDQw0Ql89jYKgA4sq5CLmli6lnz10mVDNhYfsdaOePeahiqlSMb5i9IDN/LcCUxyZGTXsHC6BmXJICqBmXo2BwAlh5OQpGwSgYBfQEAJnYIGE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="180.5" y="398.5" width="90.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="205.236" y="150.409">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'The guilds need to burn! Smash the system! Tear down the buildings of the oppressors stone by stone!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The guilds are broken.&quot;,
+                    &quot;text&quot;: &quot;'HELL YEAH! LET'S PARTYYYYYYY!!!!!!!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Gate Smasher&quot;},
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Riot Helm&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Wilderness Reclamation&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Renounce the Guilds&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Enemy of the Guildpact&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Rhythm of the Wild&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;End-Raze Forerunners&quot;}              
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Cloak of Orzhova&quot;}, {&quot;item&quot;: &quot;Cloak of Prahv&quot;}, {&quot;item&quot;: &quot;Cloak of Svogthos&quot;}, {&quot;item&quot;: &quot;Mantle of Dusk&quot;}, {&quot;item&quot;: &quot;Novijen Cloak&quot;}, {&quot;item&quot;: &quot;Rix Maadi Cloak&quot;}, {&quot;item&quot;: &quot;Skargg Cloak&quot;}, {&quot;item&quot;: &quot;Sunhome Cloak&quot;}, {&quot;item&quot;: &quot;Vitu-Ghazi Cloak&quot;}, {&quot;item&quot;: &quot;Nivix Vest&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Hell yeah!&quot;,
+					&quot;text&quot;: &quot;'They said obey and you’ll be happy. They said you’ll be safe. But we’re not safe. We’re not happy. And we will not obey. No peace accord will save Ravnica. You don’t build on rot. You burn it down and start again!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So we're smashing the guilds then?&quot;,
+					&quot;text&quot;: &quot;'Hell yeah we are! Kill all ten guild leaders and show me their bloodied cloaks as proof of victory and I'll give you my best stuff as a reward.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Time to start smashing.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Yeah sounds a bit too intense for me.&quot;,
+					&quot;text&quot;: &quot;'Go back to licking boots, guildie scum!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Domri Rade"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="12.5" y="298.5"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="4.5" y="20"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-16" y="0.528" width="16" height="400.944"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="480" y="0.028" width="16" height="400.944"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-12.3133" y="-16.5" width="508.293" height="16"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="-10.48" y="400" width="500.96" height="16"/>
+  <object id="88" template="../../../../common/maps/obj/manashards.tx" x="388.5" y="17.5"/>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="192.5" y="233.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Rugged foliage grows around the long-destroyed remnants of what was once another developed part of the city-plane of Ravnica. Up ahead, you see someone tending to boar-like beasts, much less aggressive-seeming than you might expect from his appearance.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="130" y="113.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Domri, Anarch of Bolas&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="230.667" y="146.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Domri Rade&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="278.833" y="146">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Domri, Chaos Bringer&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

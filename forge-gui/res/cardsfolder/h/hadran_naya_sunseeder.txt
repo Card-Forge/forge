@@ -1,0 +1,9 @@
+Name:Hadran, Naya Sunseeder
+ManaCost:1 R G
+Types:Legendary Creature Cat Warrior
+PT:2/2
+DeckRule:ColorIdentity:Exempt$ Creature.powerGE4 | ActiveSection$ Commander | Description$ Rulebreaker — If CARDNAME is your commander, you may include creature cards of power 4 or greater of any color in your deck regardless of color identity.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Rulebreaker — If Hadran, Naya Sunseeder is your commander, you may include creature cards of power 4 or greater of any color in your deck regardless of color identity.\n{T}: Add one mana of any color.\nWhenever a creature with power 4 or greater enters the battlefield under your control, draw a card.

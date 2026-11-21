@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Abyssal Gatekeeper&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="SubBackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFxIIm7pFnL73thtlJa7uRzUa3C90N1HQHuj3Y5Iezvehm09JeQhibG2kJBsreUTAK0AEATPcacQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqBGARI1SPLM3TtJQcPlL27aWTvjigExuc3dHXkxNlIthdmJjFxiayOGvbiwtgAshyt7B3Fo5iaWIYHgSkxBwBVXhi5
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91FEKgzAMBuC+Wx99Ui/mjiJuV9kx1Lm72TyEhdDYJJX9EERs+zUVusYQ1j/UwEoz59GGsEe5pvY+F7+D+UlPSM88zKawLf1SE10pJVvrgslz5ZZsjcv7pOvi+e7CHiRb445R/pe5M+Djeme/mjOlbi41/Xpdb7/gav4lJDeuxq0Juu/O5n5TvRqfuaR5h7PfwWmjmVvXck9a7CvTek9q7ZJpdan9bH4Fmcl7yfS4fA6Ndf+0Tqsi2wg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcYIUoBBMSo7adK3GYv5JGdhNrJjXtfqzJwPAEiA+LEa+WUgBy/3+QOVoMDOJsqHIt/Kh8kDxMLS0ADzQslQRQ+dQCsjwQuo6XgcEciH3R5EH2pmYyMKRlIsQK0xkYitIhbGkeyuwvBppTAsSlUPPcgfH8JAPhX3dovH9NY2D4CFTzKZ0y+5ABclyC8kxKJsJe5LyFHueUApgd5IiRCxqBfmgH4iY0jEusmUp+3gv0wz4S8H4q+hkdyCKlVVC6beKGsGE0veylFxgoe6kFAKYVNvY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="105" template="../../../../common/maps/obj/entry_up.tx" x="203.559" y="253.317" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/scroll.tx" x="128.281" y="177.838">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Tempted by the Oriq&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="287.724" y="178.376">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Oriq Loremage&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="207.464" y="73.8763">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'You are bold, to approach me here. I have need of agents to execture a vendetta. Serve me, and you will be generously rewarded'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The dragons are dead.&quot;,
+                    &quot;text&quot;: &quot;'Excellent. Strixhaven's demise is assured!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Graduation Cap&quot;},
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 50},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Extus, Oriq Overlord&quot;}            
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Explorer's Cloak&quot;}, {&quot;item&quot;: &quot;Librarian's Robes&quot;}, {&quot;item&quot;: &quot;Oracle's Robes&quot;}, {&quot;item&quot;: &quot;Witch's Cloak&quot;}, {&quot;item&quot;: &quot;Student's Robes&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Who do you need dead?&quot;,
+					&quot;text&quot;: &quot;'Straight to the point. Excellent. Kill the five founder dragons of the Strixhaven colleges. One resides in each biome. Show me the items they carried and receive your reward.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;You mentioned a reward?&quot;,
+					&quot;text&quot;: &quot;'I have a unique item taken from a fallen Strixhaven dean, and a great many mana shards to offer.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll consider it.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;No thanks, creep.&quot;,
+					&quot;text&quot;: &quot;'Stay out of my way.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Extus"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="184.711" y="206.637" width="77.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The metallic scent of freshly spilled blood is thick in this chamber. Unholy mana swirls about, centering on a masked figure at the back of the room. Perhaps strangely, they don't appear to be hostile.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

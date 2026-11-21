@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
@@ -18,6 +19,8 @@ import forge.assets.FSkinImage;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
@@ -43,8 +46,15 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AdventureDeckEditor extends FDeckEditor {
+    @Override
+    public void drawBackground(Graphics g) {
+        if (backDrop != null)
+            g.drawPix(backDrop, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+    }
+
     protected static class AdventureEditorConfig extends DeckEditorConfig {
         @Override
         public GameType getGameType() {
@@ -104,6 +114,10 @@ public class AdventureDeckEditor extends FDeckEditor {
                 editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
                 editionsByName.put(e.getName().replace("'", "").toLowerCase(), e);
             }
+            // Older names of renamed items, still present in saved games
+            editionsByName.put("thrones of eldraine", FModel.getMagicDb().getEditions().get("ELD"));
+            editionsByName.put("magic 2021", FModel.getMagicDb().getEditions().get("M21"));
+            editionsByName.put("sixth edition", FModel.getMagicDb().getEditions().get("6ED"));
 
             String sketchbookPrefix = "landscape sketchbook - ";
             for (ItemData itemData : AdventurePlayer.current().getItems()) {
@@ -254,7 +268,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                     case Entered:
                         if (event.getDraft() != null)
                             return new DeckEditorPage[]{
-                                    new DraftPackPage(new AdventureCardManager()),
+                                    new AdventureDraftPackPage(new AdventureCardManager()),
                                     new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                                     new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
                             };
@@ -301,6 +315,11 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         protected void onCardActivated(PaperCard card) {
             CardZoom.show(card);
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -404,6 +423,11 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected boolean allowFavoriteCards() {
             return true;
         }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
+        }
     }
 
     private static class CollectionCatalogPage extends CatalogPage {
@@ -423,6 +447,13 @@ public class AdventureDeckEditor extends FDeckEditor {
             ItemPool<PaperCard> pool = super.getCardPool();
             pool.removeAll(Current.player().autoSellCards);
             return pool;
+        }
+
+        @Override
+        protected void setCommander(PaperCard card) {
+            if (parentScreen instanceof AdventureDeckEditor editor && editor.refusesCommander(card))
+                return;
+            super.setCommander(card);
         }
 
         @Override
@@ -534,6 +565,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                 }
             });
         }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
+        }
     }
 
     protected static class CollectionAutoSellPage extends CatalogPage {
@@ -614,6 +650,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                 removeCard(card, 1);
             }
             //Move to deck? Back to catalog? Unclear.
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -733,8 +774,135 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     private static ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<>(InventoryItem.class);
 
+    private static final List<DeckSection> LOCKED_SECTIONS = List.of(DeckSection.Main, DeckSection.Commander);
+
+    /** The main deck and command zone when the editor opened, or null when the deck isn't locked. */
+    private CardPool lockedCards;
+    private boolean lockCheckPending;
+    private FTextArea lockRules;
+
+    private void lockDeckCards() {
+        boolean locked = editsRunDeck() && Current.player().hasModifierRule(modifier -> modifier.lockDeckCards);
+        lockedCards = locked ? lockedSectionsPool() : null;
+        if (locked && lockRules == null) {
+            lockRules = add(new FTextArea(false));
+            lockRules.setFont(FSkinFont.get(12));
+            lockRules.setAlignment(Align.center);
+            lockRules.setCenterVertically(true);
+        }
+        if (locked)
+            lockRules.setText(Current.player().getActiveModifiers().stream().filter(modifier -> modifier.lockDeckCards)
+                    .map(modifier -> modifier.description == null ? modifier.name : modifier.name + ": " + modifier.description)
+                    .collect(Collectors.joining("\n")));
+        if (lockRules != null)
+            lockRules.setVisible(locked);
+        revalidate();
+    }
+
+    /** @return whether this editor shows the run's own deck, not an event deck, the shop or a preview */
+    private boolean editsRunDeck() {
+        return getCurrentEvent() == null && !(getEditorConfig() instanceof ShopConfig) && !(getEditorConfig() instanceof DeckPreviewConfig);
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        if (lockedCards != null) {
+            float rulesHeight = lockRules.getPreferredHeight(width) + Utils.scale(6);
+            lockRules.setBounds(0, startY, width, rulesHeight);
+            startY += rulesHeight;
+        }
+        super.doLayout(startY, width, height);
+    }
+
+    private CardPool lockedSectionsPool() {
+        CardPool pool = new CardPool();
+        for (DeckSection section : LOCKED_SECTIONS) {
+            if (getDeck().has(section))
+                pool.addAll(getDeck().get(section));
+        }
+        return pool;
+    }
+
+    private static boolean isLockedSection(CardManagerPage page) {
+        return page instanceof DeckSectionPage sectionPage && LOCKED_SECTIONS.contains(sectionPage.deckSection);
+    }
+
+    @Override
+    protected int getMaxMovable(PaperCard card, CardManagerPage source, CardManagerPage destination, int numAvailable) {
+        int max = super.getMaxMovable(card, source, destination, numAvailable);
+        if (lockedCards == null || isLockedSection(source) == isLockedSection(destination))
+            return max;
+        //A card a modifier forbids could never be removed from a locked deck
+        if (isLockedSection(destination))
+            return Current.player().modifiersAllowCard(card) ? max : 0;
+        String name = card.getName();
+        return Math.min(max, lockedSectionsPool().countByName(name) - lockedCards.countByName(name));
+    }
+
+    /** @return true, after showing a message, when the card's color identity doesn't cover the locked deck */
+    private boolean refusesCommander(PaperCard card) {
+        if (lockedCards == null)
+            return false;
+        byte deckColors = MagicColor.COLORLESS;
+        for (PaperCard deckCard : lockedSectionsPool().toFlatList())
+            deckColors |= deckCard.getRules().getColorIdentity().getColor();
+        //The deck's colors include the old commander, which moves to the main deck
+        if (ColorSet.fromMask(deckColors).hasNoColorsExcept(card.getRules().getColorIdentity()))
+            return false;
+        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCommanderMustIncludeDeckColors"));
+        return true;
+    }
+
+    /** Returns locked cards that a deck import removed. Runs on the next frame because a printing swap removes the old card before it adds the new one. */
+    private void scheduleLockCheck() {
+        if (lockedCards == null || lockCheckPending)
+            return;
+        lockCheckPending = true;
+        FThreads.invokeInEdtLater(() -> {
+            lockCheckPending = false;
+            restoreLockedCards();
+        });
+    }
+
+    private void restoreLockedCards() {
+        DeckSectionPage main = getMainDeckPage();
+        if (lockedCards == null || main == null)
+            return;
+        CardPool deckCards = lockedSectionsPool();
+        int restored = 0;
+        for (Map.Entry<PaperCard, Integer> entry : lockedCards) {
+            String name = entry.getKey().getName();
+            int missing = Math.min(entry.getValue(), lockedCards.countByName(name) - deckCards.countByName(name));
+            if (missing <= 0)
+                continue;
+            deckCards.add(entry.getKey(), missing);
+            restored += missing;
+            CardPool sideboard = getDeck().get(DeckSection.Sideboard);
+            if (sideboard != null) {
+                for (Map.Entry<PaperCard, Integer> copy : sideboard.getFilteredPool(card -> card.getName().equals(name))) {
+                    int amount = Math.min(missing, copy.getValue());
+                    getSideboardPage().moveCard(copy.getKey(), main, amount);
+                    missing -= amount;
+                }
+            }
+            if (missing > 0)
+                main.addCard(entry.getKey(), missing);
+        }
+        if (restored > 0)
+            getCatalogPage().refresh();
+    }
+
+    /** No warning when a modifier removes the maximum deck size. */
+    private boolean isOverAllowedMaxSize() {
+        if (!editsRunDeck() || !Current.player().hasModifierRule(modifier -> modifier.noMaxDeckSize))
+            return false;
+        int partners = Math.max(0, getDeck().getCommanders().size() - 1);
+        return getDeck().getMain().countAll() + partners > getEditorConfig().getDeckFormat().getMainRange().getMaximum();
+    }
+
     @Override
     public void onActivate() {
+        lockDeckCards();
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
         for (int i = 0; i < Current.player().getDeckCount(); i++) {
             final Deck deck = Current.player().getDeck(i);
@@ -784,15 +952,17 @@ public class AdventureDeckEditor extends FDeckEditor {
     protected AdventureDeckHeader deckHeader;
     protected FDraftLog draftLog;
     protected CollectionAutoSellPage autoSellPage;
+    protected TextureRegion backDrop;
 
-    public AdventureDeckEditor(boolean createAsShop) {
+    public AdventureDeckEditor(boolean createAsShop, TextureRegion backdrop) {
         super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(),
                 createAsShop ? null : Current.player().getSelectedDeck());
         if (createAsShop)
             setHeaderText(Forge.getLocalizer().getMessage("lblSell"));
+        backDrop = backdrop;
     }
 
-    public AdventureDeckEditor(AdventureEventData event) {
+    public AdventureDeckEditor(AdventureEventData event, TextureRegion backdrop) {
         super(new AdventureEventEditorConfig(event), event.registeredDeck);
         currentEvent = event;
 
@@ -801,6 +971,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             event.getDraft().setLogEntry(this.draftLog);
             deckHeader.initDraftLog(this.draftLog, this);
         }
+        backDrop = backdrop;
     }
 
     public AdventureDeckEditor(Deck deckToPreview) {
@@ -933,6 +1104,8 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (!(getEditorConfig() instanceof ShopConfig))
         {
             deckError = getEditorConfig().getDeckFormat().getDeckConformanceProblem(getDeck());
+            if (isOverAllowedMaxSize())
+                deckError = null;
 
             if (deckError != null) {
                 //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
@@ -966,6 +1139,18 @@ public class AdventureDeckEditor extends FDeckEditor {
         getCatalogPage().scheduleRefresh();
     }
 
+    private static final HashMap<Integer, String> priceStringsMap = new HashMap<>(256);
+    // container to draw the sellIconFile
+    private static final FImage fImageSellIcon = new FImage() {
+        @Override public float getWidth() { return 100f; }
+        @Override public float getHeight() { return 100f; }
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            if (AdventureDeckHeader.sellIconFile != null) {
+                g.drawImage(Forge.getAssets().getTexture(AdventureDeckHeader.sellIconFile), x, y, w, h);
+            }
+        }
+    };
     protected static class AdventureCardManager extends CardManager {
 
         public AdventureCardManager() {
@@ -1002,42 +1187,37 @@ public class AdventureDeckEditor extends FDeckEditor {
                         float totalHeight = h + 2 * FList.PADDING;
                         float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
-                        String price = String.valueOf(Current.player().cardSellPrice(value.getKey()));
+                        int priceRawVal = Current.player().cardSellPrice(value.getKey());
+
+                        String priceStr = priceStringsMap.get(priceRawVal);
+                        if (priceStr == null) {
+                            priceStr = String.valueOf(priceRawVal);
+                            priceStringsMap.put(priceRawVal, priceStr);
+                        }
+
                         float priceHeight = font.getLineHeight();
-                        y += totalHeight - priceHeight - FList.PADDING;
-                        g.fillRect(backColor, x - FList.PADDING, y, cardArtWidth, priceHeight);
-                        g.drawImage(FSkinImage.QUEST_COINSTACK, x, y, priceHeight, priceHeight);
+                        float drawY = y + totalHeight - priceHeight - FList.PADDING;
+
+                        g.fillRect(backColor, x - FList.PADDING, drawY, cardArtWidth, priceHeight);
+                        g.drawImage(FSkinImage.QUEST_COINSTACK, x, drawY, priceHeight, priceHeight);
                         float offset = priceHeight * 1.1f;
-                        g.drawText(price, font, foreColor, x + offset, y, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
+
+                        g.drawText(priceStr, font, foreColor, x + offset, drawY, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
                     }
                 }
             };
         }
+
     }
 
     protected static class AdventureDeckHeader extends DeckHeader {
-        private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
+        private static final FileHandle sellIconFile = Config.instance().getFile("ui/sell.png");
         public final FLabel lblGold;
 
         protected AdventureDeckHeader() {
             super();
-            this.lblGold = new FLabel.Builder().text("0").icon(Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
-                    new FImage() {
-                        @Override
-                        public float getWidth() {
-                            return 100f;
-                        }
-
-                        @Override
-                        public float getHeight() {
-                            return 100f;
-                        }
-
-                        @Override
-                        public void draw(Graphics g, float x, float y, float w, float h) {
-                            g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
-                        }
-                    }
+            this.lblGold = new FLabel.Builder().text("0").icon(
+                    Forge.getAssets().getTexture(sellIconFile) == null ? FSkinImage.QUEST_COINSTACK : fImageSellIcon
             ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
             this.add(lblGold);
         }
@@ -1046,7 +1226,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected List<FDisplayObject> layoutHeaderElements(float height, float availableWidth) {
             List<FDisplayObject> out = super.layoutHeaderElements(height, availableWidth);
             float remainingWidth = availableWidth - (float) out.stream().mapToDouble(FDisplayObject::getWidth).sum();
-            float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth)); // Will push out name label if it has to.
+            float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth));
             lblGold.setSize(width, height);
             out.add(lblGold);
             return out;
@@ -1055,12 +1235,70 @@ public class AdventureDeckEditor extends FDeckEditor {
         public void updateGold() {
             lblGold.setText(String.valueOf(Current.player().getGold()));
         }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), HEADER_HEIGHT);
+        }
+    }
+
+
+    protected static class AdventureDraftPackPage extends DraftPackPage {
+        public AdventureDraftPackPage(CardManager cardManager) {
+            super(cardManager);
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
+        }
     }
 
     protected static class AdventureDeckSectionPage extends DeckSectionPage {
         protected AdventureDeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
             super(new AdventureCardManager(), deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
             cardManager.setBtnAdvancedSearchOptions(deckSection == DeckSection.Main);
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
+        }
+
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            if (parentScreen instanceof AdventureDeckEditor editor && editor.getMaxMovable(card, this, getCardSourcePage()) <= 0)
+                return;
+            super.onCardActivated(card);
+        }
+
+        @Override
+        protected void setCommander(PaperCard card) {
+            if (parentScreen instanceof AdventureDeckEditor editor && editor.refusesCommander(card))
+                return;
+            super.setCommander(card);
+        }
+
+        /** A locked commander can move to the main deck instead of the collection. The catalog then lists every commander. */
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            super.buildMenu(menu, card);
+            if (deckSection != DeckSection.Commander || !(parentScreen instanceof AdventureDeckEditor editor) || editor.lockedCards == null)
+                return;
+            addMoveCardMenuItem(menu, this, editor.getMainDeckPage(), amount -> {
+                moveCard(card, editor.getMainDeckPage(), amount);
+                editor.getCatalogPage().refresh();
+                editor.setSelectedPage(editor.getCatalogPage());
+            });
+        }
+
+        @Override
+        public void ejectCards() {
+            if (deckSection == DeckSection.Commander && parentScreen instanceof AdventureDeckEditor editor && editor.lockedCards != null) {
+                moveCards(cardManager.getPool(), editor.getMainDeckPage());
+                return;
+            }
+            super.ejectCards();
         }
     }
 
@@ -1107,7 +1345,9 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void notifyModelChanged() {
-        } //
+            if (editor instanceof AdventureDeckEditor adventureEditor)
+                adventureEditor.scheduleLockCheck();
+        }
 
         @Override
         public void exitWithoutSaving() {

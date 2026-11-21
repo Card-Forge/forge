@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Deathtouch & Indestructible | Description$ Enchanted creature has deathtouch and indestructible.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Deathtouch & Indestructible | Description$ Enchanted creature has deathtouch and indestructible.
 K:Morph:Sac<1/Creature.Other/another creature>
 R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ DBAttach | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, you may attach it to a creature.
 SVar:DBAttach:DB$ Attach | Choices$ Creature | ChoiceTitle$ Choose a creature | Object$ Self | Optional$ True | AILogic$ Pump

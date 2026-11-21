@@ -1,0 +1,9 @@
+Name:Join the Collective
+ManaCost:5 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBToken | RememberDestroyed$ True | SpellDescription$ Destroy all creatures. Create X 1/1 colorless Borg artifact creature tokens, where X is the number of nonartifact creatures destroyed this way.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_borg | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature.nonArtifact
+DeckHas:Ability$Token
+Oracle:Destroy all creatures. Create X 1/1 colorless Borg artifact creature tokens, where X is the number of nonartifact creatures destroyed this way.

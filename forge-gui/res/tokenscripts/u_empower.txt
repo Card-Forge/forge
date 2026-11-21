@@ -1,0 +1,8 @@
+Name:Token
+ManaCost:no cost
+Colors:blue
+Types:Planeswalker
+Loyalty:0
+A:AB$ Surveil | Cost$ SubCounter<1/LOYALTY> | Amount$ 1 | Planeswalker$ True | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:[-1]: Surveil 1.\n[-3]: Draw a card.

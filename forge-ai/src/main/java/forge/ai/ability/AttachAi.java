@@ -61,6 +61,10 @@ public class AttachAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
         }
 
+        if (opponentMayRedirect(ai, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         // Attach spells always have a target
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -184,7 +188,7 @@ public class AttachAi extends SpellAbilityAi {
         boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
         boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
         boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
+                && game.getPhaseHandler().isPlayerNextTurn(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
 
         boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
 
@@ -700,7 +704,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int powerBuff = 0;
         for (StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
-            if ("Card.EquippedBy".equals(stAb.getParam("Affected")) && stAb.hasParam("AddPower")) {
+            if ("Equipped".equals(stAb.getParam("AffectedDefined")) && !stAb.hasParam("Affected") && stAb.hasParam("AddPower")) {
                 powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), stAb);
             }
         }
@@ -752,15 +756,51 @@ public class AttachAi extends SpellAbilityAi {
             // Enchantments and Artifacts are probably "not good enough"
         }
 
-        final Card c = ComputerUtilCard.getBestAI(list);
+        // a permanent that names one of the AI's own cards (Pithing Needle) would turn against the AI once it controls it (#4300)
+        final Player controller = sa.getActivatingPlayer();
+        final List<Card> usable = new ArrayList<>(list);
+        if (controller != null) {
+            usable.removeIf(k -> namesOneOfCardsOf(k, controller));
+        }
+        final Card c = ComputerUtilCard.getBestAI(usable);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return chooseLessPreferred(mandatory, usable);
         }
 
         return acceptableChoice(c, mandatory);
+    }
+
+    private static boolean namesOneOfCardsOf(final Card namer, final Player p) {
+        if (namer.getNamedCards().isEmpty()) {
+            return false;
+        }
+        for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Hand }) {
+            for (final Card k : p.getCardsIn(z)) {
+                if (namer.getNamedCards().contains(k.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** An opposing Spellskite-like permanent answers the aura with a new target: the buff would end up on it (#12766). */
+    private static boolean opponentMayRedirect(final Player ai, final SpellAbility sa) {
+        final String logic = sa.getHostCard().getSVar("AttachAILogic");
+        if (!isAuraSpell(sa) || "Curse".equals(logic) || "GainControl".equals(logic)) {
+            return false;
+        }
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ab : c.getSpellAbilities()) {
+                if (ab.getApi() == ApiType.ChangeTargets && ab.isActivatedAbility() && sa.canTarget(c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -828,12 +868,7 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
 
-            final String affected = stAbility.getParam("Affected");
-
-            if (affected == null) {
-                continue;
-            }
-            if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
+            if (affectsAttached(stAbility, stCheck)) {
                 totToughness += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddToughness"), sa);
                 totPower += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddPower"), sa);
 
@@ -1044,7 +1079,55 @@ public class AttachAi extends SpellAbilityAi {
      *            the attach source
      * @return the card
      */
+    // stCheck is EnchantedBy or EquippedBy; a static on the attached card
+    // says so through AffectedDefined$ or through the Affected$ text
+    private static boolean affectsAttached(final StaticAbility stAb, final String stCheck) {
+        final String defined = stAb.getParam("AffectedDefined");
+        if (defined != null) {
+            return defined.equals("EnchantedBy".equals(stCheck) ? "Enchanted" : "Equipped") || defined.startsWith("AttachedBy");
+        }
+        final String affected = stAb.getParam("Affected");
+        return affected != null && (affected.contains(stCheck) || affected.contains("AttachedBy"));
+    }
+
+    /**
+     * Splinter Twin and the other auras that let a creature copy itself: only a creature that gains from a hasty
+     * copy is worth it. One with an enters-the-battlefield trigger is the deck's reason for the aura (Pestermite,
+     * Deceiver Exarch, Zealous Conscripts); without one, a creature that can attack for at least two, doubled. A blocker
+     * or a utility creature (Spellskite) gains nothing, and the aura is not cast on it.
+     */
+    private static Card attachAICopyEnabler(final Player ai, final List<Card> list) {
+        Card best = null;
+        int bestScore = 0;
+        for (final Card c : list) {
+            if (!c.isCreature() || !c.getController().equals(ai) || c.isEnchanted()) {
+                continue;
+            }
+            int score = 0;
+            for (final Trigger t : c.getTriggers()) {
+                if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Destination"))
+                        && t.getParam("ValidCard") != null && t.getParam("ValidCard").startsWith("Card.Self")) {
+                    score += 100;
+                }
+            }
+            if (score == 0 && c.getNetPower() >= 2 && !c.hasKeyword(Keyword.DEFENDER)) {
+                score = 10 * c.getNetPower();
+            }
+            if (score > 0) {
+                score += ComputerUtilCard.evaluateCreature(c) / 100;
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = c;
+            }
+        }
+        return best;
+    }
+
     private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
+        if ("SplinterTwin".equals(attachSource.getSVar("AttachAIPick"))) {
+            return attachAICopyEnabler(ai, list);
+        }
         // AI For choosing a Card to Pump
         Card card = null;
         List<Card> magnetList = null;
@@ -1141,12 +1224,7 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
 
-            final String affected = stAbility.getParam("Affected");
-
-            if (affected == null) {
-                continue;
-            }
-            if (affected.contains(stCheck) || affected.contains("AttachedBy")) {
+            if (affectsAttached(stAbility, stCheck)) {
                 totToughness += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddToughness"), stAbility);
                 totPower += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddPower"), stAbility);
 

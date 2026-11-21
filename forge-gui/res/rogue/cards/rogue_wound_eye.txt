@@ -1,0 +1,4 @@
+Name:Wound - Eye
+ManaCost:no cost
+Types:Wound
+Oracle:Planes on the path are not revealed when you reach them.

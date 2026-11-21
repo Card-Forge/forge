@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | AddTrigger$ ShadowUpkeepTrig | Description$ Enchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Haste | AddTrigger$ ShadowUpkeepTrig | Description$ Enchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order."
 SVar:ShadowUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ShadowDestroyEnchanted | TriggerDescription$ At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order.
 SVar:ShadowDestroyEnchanted:DB$ Destroy | Defined$ Self | SubAbility$ ShadowRevealCards
 SVar:ShadowRevealCards:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ ShadowReattach

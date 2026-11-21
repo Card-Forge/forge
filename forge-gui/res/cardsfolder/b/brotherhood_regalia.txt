@@ -1,7 +1,7 @@
 Name:Brotherhood Regalia
 ManaCost:2
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Ward:2 | AddType$ Assassin | Description$ Equipped creature has ward {2}, is an Assassin in addition to its other types, and can't be blocked.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Ward:2 | AddType$ Assassin | Description$ Equipped creature has ward {2}, is an Assassin in addition to its other types, and can't be blocked.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy
 K:Equip:1:Creature.Legendary+YouCtrl:legendary creature
 K:Equip:3

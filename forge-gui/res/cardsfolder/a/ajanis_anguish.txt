@@ -1,0 +1,8 @@
+Name:Ajani's Anguish
+ManaCost:X R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this enchantment enters, it deals X damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$xPaid
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
+Oracle:When this enchantment enters, it deals X damage to any target.\nCreatures you control have trample.

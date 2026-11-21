@@ -1,0 +1,9 @@
+Name:Konstrari Charm
+ManaCost:R G
+Types:Instant
+A:SP$ Charm | Choices$ DBDamage,DBPutCounter,DBMana
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | ValidTgtsDesc$ creature with flying | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature with flying.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on target creature. It gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
+SVar:DBMana:DB$ Mana | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
+Oracle:Choose one —\n• Konstrari Charm deals 6 damage to target creature with flying.\n• Put two +1/+1 counters on target creature. It gains trample until end of turn.\n• Add {C}{C}{C}.

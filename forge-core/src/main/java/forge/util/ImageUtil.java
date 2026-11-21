@@ -207,7 +207,7 @@ public class ImageUtil {
     }
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop) {
-        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+[a-z]?");
         String editionCode;
         if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;

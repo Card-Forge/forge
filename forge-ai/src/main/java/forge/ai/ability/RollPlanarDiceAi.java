@@ -7,7 +7,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 public class RollPlanarDiceAi extends SpellAbilityAi {
@@ -28,19 +27,26 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
-    private boolean willRollOnPlane(Player ai, Card plane) {
+    boolean willRollOnPlane(Player ai, Card plane) {
         boolean decideToRoll = false;
         boolean rollInMain1 = false;
-        String modeName = "never";
+        // a plane with hints has to name its mode; a plane without them rolls by the profile defaults
+        final boolean hinted = plane.hasSVar("AIRollPlanarDieParams");
+        String modeName = hinted ? "never" : "random";
         int maxActivations = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
         int chance = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
         int hesitationChance = AiProfileUtil.getIntProperty(ai, AiProps.PLANAR_DIE_ROLL_HESITATION_CHANCE);
         int minTurnToRoll = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE);
         
-        if (plane.hasSVar("AIRollPlanarDieParams")) {
+        if (hinted) {
             String[] params = plane.getSVar("AIRollPlanarDieParams").toLowerCase().trim().split("\\|");
             for (String param : params) {
                 String[] paramData = param.split("\\$");
+                if (paramData.length < 2) {
+                    // a malformed hint must not throw: an exception here makes the AI pass its whole priority
+                    System.out.println(TextUtil.concatNoSpace("Malformed AI hint parameter in card ", plane.getName(), " in RollPlanarDiceAi: ", param, "."));
+                    continue;
+                }
                 String paramName = paramData[0].trim();
                 String paramValue = paramData[1].trim();
 
@@ -63,7 +69,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                         }
                         break;
                     case "lowpriority":
-                        // this is handled in AiController.saComparator at the moment
+                        // this is handled in ComputerUtilAbility.SortKey
                         break;
                     case "cardsinhandle": // num of cards in hand less than or equal to N
                         if (ai.getCardsIn(ZoneType.Hand).size() > Integer.parseInt(paramValue)) {
@@ -119,39 +125,79 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                         break;
                 }
             }
-            
-            switch (modeName) {
-                case "always":
+        }
+
+        switch (modeName) {
+            case "always":
+                decideToRoll = true;
+                break;
+            case "random":
+                if (stablePercent(ai, plane, 1, chance)) {
                     decideToRoll = true;
-                    break;
-                case "random":
-                    if (MyRandom.getRandom().nextInt(100) < chance) {
-                        decideToRoll = true;
-                    }
-                    break;
-                case "never":
-                    return false;
-                default:
-                    return false;
-            }
+                }
+                break;
+            case "never":
+                return false;
+            default:
+                return false;
+        }
 
-            if (ai.getGame().getPhaseHandler().getTurn() < minTurnToRoll) {
-                decideToRoll = false;
-            } else if (!rollInMain1 && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                decideToRoll = false;
-            }
+        if (ai.getGame().getPhaseHandler().getTurn() < minTurnToRoll) {
+            decideToRoll = false;
+        } else if (!rollInMain1 && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+            decideToRoll = false;
+        }
 
-            if (ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn() >= maxActivations) {
-                decideToRoll = false;
-            }
-        
-            // check if the AI hesitates
-            if (MyRandom.getRandom().nextInt(100) < hesitationChance) {
-                decideToRoll = false; // hesitate
-            }
+        final int rollsThisTurn = ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+        if (rollsThisTurn >= maxActivations) {
+            decideToRoll = false;
+        } else if (rollsThisTurn > 0 && !hasSpareManaForExtraRoll(ai, rollsThisTurn)) {
+            decideToRoll = false; // every roll after the first costs mana a spell in hand may need
+        }
+
+        // check if the AI hesitates
+        if (stablePercent(ai, plane, 2, hesitationChance)) {
+            decideToRoll = false; // hesitate
         }
 
         return decideToRoll;
+    }
+
+    /**
+     * A chance that is decided once per turn and roll count, not again at every priority pass: the AI asks several
+     * times per phase (and the Monte Carlo layer asks again to confirm a play), so a fresh die each time would make
+     * even a low chance come true almost surely. Every ask in the same situation gets the same answer.
+     * Package-private for RollPlanarDiceAiTest.
+     */
+    static boolean stablePercent(Player ai, Card plane, int salt, int percent) {
+        if (percent <= 0) {
+            return false;
+        }
+        if (percent >= 100) {
+            return true;
+        }
+        final int turn = ai.getGame().getPhaseHandler().getTurn();
+        final int rolls = ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+        long z = (((ai.getId() * 31L + plane.getId()) * 31L + turn) * 31L + rolls) * 31L + salt;
+        z *= 0x9E3779B97F4A7C15L;
+        z = (z ^ (z >>> 30)) * 0xBF58476D1CE4E5B9L;
+        z = (z ^ (z >>> 27)) * 0x94D049BB133111EBL;
+        z ^= z >>> 31;
+        return Math.floorMod(z, 100L) < percent;
+    }
+
+    /** An extra roll costs one more mana each time: only worth it when no nonland card in hand could use that mana (package-private for RollPlanarDiceAiTest). */
+    boolean hasSpareManaForExtraRoll(Player ai, int rollCost) {
+        final int available = ComputerUtilMana.getAvailableManaEstimate(ai);
+        if (available < rollCost) {
+            return false;
+        }
+        for (Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!c.isLand() && c.getCMC() <= available) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /* (non-Javadoc)

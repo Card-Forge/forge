@@ -1,0 +1,8 @@
+Name:A Good Day to Pie
+ManaCost:1 W
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures.
+T:Mode$ StickerPlaced | ValidPlayer$ You | ValidCard$ Creature | StickerKind$ Name | TriggerZones$ Graveyard | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever you put a name sticker on a creature, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+Oracle:Tap up to two target creatures.\nWhenever you put a name sticker on a creature, you may return this card from your graveyard to your hand.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Carlo_Gamboa_-_Rakdos_Lizards_(Standard,_#898232).dck
+Deck Type=constructed
+
+[Main]
+2 Bitter Triumph
+4 Blazemire Verge
+4 Blood Crypt
+2 Burst Lightning
+1 Cavern of Souls
+2 Fireglass Mentor
+4 Flamecache Gecko
+3 Gastal Thrillseeker
+3 Gev, Scaled Scorch
+3 Haunted Ridge
+4 Hired Claw
+3 Ingris Stingerquill
+4 Iridescent Vinelasher
+4 Master of Barbs
+3 Mountain
+2 Rockface Village
+1 Shoot the Sheriff
+2 Starting Town
+2 Stingerquill Charm
+3 Swamp
+2 Tomik, Izzet Sparkmage
+2 Valley Flamecaller
+[Sideboard]
+2 Chandra, Torch of Defiance
+2 Duress
+1 Essence Burn
+1 Hazoret, Godseeker
+1 Laughing Jasper Flint
+2 Lively Dirge
+1 Ral Zarek, Guest Lecturer
+1 Scales of Shale
+2 Stinging Vitriol
+2 Thought-Stalker Warlock

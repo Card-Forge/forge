@@ -21,8 +21,8 @@ public class TriggerMutates extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.Card));
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        objects.put(AbilityKey.Card, runParams.get(AbilityKey.Card));
     }
 
     @Override

@@ -1,0 +1,9 @@
+Name:Test of Loyalty
+ManaCost:B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPlainSimpleGarak,DBOfTheObsidianOrder
+SVar:DBPlainSimpleGarak:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ValidTgtsDesc$ card in a graveyard | SubAbility$ DBDraw | SpellDescription$ Plain, Simple Garak — Exile target card from a graveyard. Draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBOfTheObsidianOrder:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard | SpellDescription$ Of the Obsidian Order — Return target creature card from your graveyard to your hand.
+DeckHas:Ability$Counters
+Oracle:Choose one —\n• Plain, Simple Garak — Exile target card from a graveyard. Draw a card.\n• Of the Obsidian Order — Return target creature card from your graveyard to your hand.

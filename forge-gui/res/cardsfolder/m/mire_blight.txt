@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ MireDestroy
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddSVar$ MireDestroy
 SVar:MireDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EnchantedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature is dealt damage, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy

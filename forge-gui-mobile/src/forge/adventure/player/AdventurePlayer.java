@@ -55,6 +55,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Commander mode
     private AdventureModes adventureMode;
+    private final Map<String, String> modifiers = new LinkedHashMap<>(); //Chosen modifier names and their settings.
 
     // Game data.
     private float worldPosX;
@@ -74,6 +75,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final HashMap<String, Long> equippedItems = new HashMap<>();
     private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
+    private final List<AdventureQuestData> unseenFinishedQuests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
     private final Predicate<PaperCard> isUnsupported = pc -> pc != null && pc.getRules() != null && pc.getRules().isUnsupported();
@@ -121,6 +123,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = false;
         usingCustomDeck = false;
         adventureMode = null;
+        modifiers.clear();
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -135,6 +138,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
+        unseenFinishedQuests.clear();
         events.clear();
         cards.clear();
         statistic.clear();
@@ -249,7 +253,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void updateDifficulty(DifficultyData diff) {
-        maxLife = diff.startingLife;
+        maxLife = diff.startingLife + getModifiersMaxLifeBonus();
         this.difficultyData.startingShards = diff.startingShards;
         this.difficultyData.startingLife = diff.startingLife;
         this.difficultyData.startingMoney = diff.startingMoney;
@@ -317,6 +321,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Boolean isFemale() {
         return isFemale;
     }
@@ -339,6 +347,90 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public AdventureModes getAdventureMode(){
         return adventureMode;
+    }
+
+    /** @return the chosen modifiers by name, each with its setting */
+    public Map<String, String> getModifiers() {
+        return Collections.unmodifiableMap(modifiers);
+    }
+
+    public void setModifiers(Map<String, String> chosen) {
+        int oldMaxLifeBonus = getModifiersMaxLifeBonus();
+        modifiers.clear();
+        modifiers.putAll(chosen);
+        gold = Math.min(gold, getMaxGold());
+        onGoldChangeList.emit();
+        changeMaxLifeAndLife(getModifiersMaxLifeBonus() - oldMaxLifeBonus);
+    }
+
+    private int getModifiersMaxLifeBonus() {
+        return getActiveModifiers().stream().mapToInt(modifier -> modifier.maxLifeBonus).sum();
+    }
+
+    /** Takes the max life the chosen modifiers cost for losing a fight. */
+    public void loseModifierMaxLife() {
+        changeMaxLifeAndLife(-getActiveModifiers().stream().mapToInt(modifier -> modifier.maxLifeLostOnDefeat).sum());
+    }
+
+    /** Changes max life and life by the same amount, keeping both at 1 or more. */
+    private void changeMaxLifeAndLife(int amount) {
+        if (amount == 0)
+            return;
+        maxLife = Math.max(1, maxLife + amount);
+        life = Math.max(1, life + amount);
+        onLifeTotalChangeList.emit();
+    }
+
+    /** @return the most gold the chosen modifiers let the player hold, or Integer.MAX_VALUE when none sets a limit */
+    private int getMaxGold() {
+        return getActiveModifiers().stream().filter(modifier -> modifier.maxGold >= 0)
+                .mapToInt(modifier -> modifier.maxGold).min().orElse(Integer.MAX_VALUE);
+    }
+
+    /** @return how much more gold the player can gain, or Integer.MAX_VALUE when no modifier limits it */
+    public int getGoldRoom() {
+        int max = getMaxGold();
+        return max == Integer.MAX_VALUE ? max : Math.max(0, max - gold);
+    }
+
+    /** @return whether any chosen modifier has the rule */
+    public boolean hasModifierRule(Predicate<ModifierData> rule) {
+        return getActiveModifiers().stream().anyMatch(rule);
+    }
+
+    /** @return whether every chosen RarityLimit and ColorLimit modifier allows the card */
+    public boolean modifiersAllowCard(PaperCard card) {
+        return getActiveModifiers().stream().allMatch(modifier -> modifier.allowedCards(modifiers.get(modifier.name)).test(card));
+    }
+
+    /** @return the plane's modifiers that this run has turned on, in the plane's order */
+    public List<ModifierData> getActiveModifiers() {
+        List<ModifierData> active = new ArrayList<>();
+        ModifierData[] all = Config.instance().getConfigData().modifiers;
+        if (all == null)
+            return active;
+        for (ModifierData modifier : all) {
+            if (modifiers.containsKey(modifier.name))
+                active.add(modifier);
+        }
+        return active;
+    }
+
+    /** @return each chosen modifier with its setting and description, or its duel effect when it has no description */
+    public String getModifiersDescription() {
+        StringBuilder text = new StringBuilder();
+        for (ModifierData modifier : getActiveModifiers()) {
+            String value = modifier.describeValue(modifiers.get(modifier.name));
+            text.append(modifier.name);
+            if (!value.isEmpty())
+                text.append(" (").append(value).append(")");
+            text.append("\n");
+            if (modifier.description != null)
+                text.append(modifier.description).append("\n");
+            else if (modifier.effect != null)
+                text.append(modifier.effect.getEnemySideDescription());
+        }
+        return text.toString();
     }
 
     public boolean isCommanderMode() {
@@ -573,6 +665,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
             unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
         }
+        if (data.containsKey("modifierNames") && data.containsKey("modifierValues")) {
+            String[] names = (String[]) data.readObject("modifierNames");
+            String[] values = (String[]) data.readObject("modifierValues");
+            for (int i = 0; i < names.length; i++) {
+                modifiers.put(names[i], values[i]);
+            }
+        }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
             Byte[] values = (Byte[]) data.readObject("characterFlagsValue");
@@ -596,6 +695,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (q != null) {
                 for (Object itsReallyAQuest : q)
                     quests.add((AdventureQuestData) itsReallyAQuest);
+            }
+        }
+        if (data.containsKey("unseenFinishedQuests")) {
+            Object[] q = (Object[]) data.readObject("unseenFinishedQuests");
+            if (q != null) {
+                for (Object quest : q)
+                    unseenFinishedQuests.add((AdventureQuestData) quest);
             }
         }
         if (data.containsKey("events")) {
@@ -854,6 +960,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             characterFlagsKey.add(entry.getKey());
             characterFlagsValue.add(entry.getValue());
         }
+        data.storeObject("modifierNames", modifiers.keySet().toArray(new String[0]));
+        data.storeObject("modifierValues", modifiers.values().toArray(new String[0]));
         data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
         data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 
@@ -867,6 +975,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("questFlagsKey", questFlagsKey.toArray(new String[0]));
         data.storeObject("questFlagsValue", questFlagsValue.toArray(new Byte[0]));
         data.storeObject("quests", quests.toArray());
+        data.storeObject("unseenFinishedQuests", unseenFinishedQuests.toArray());
         data.storeObject("events", events.toArray());
 
         data.storeObject("deckCards", deck.getMain().toCardList("\n").split("\n"));
@@ -1004,13 +1113,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private void refreshEditor() {
-        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance(null).getScreen());
         if (editor != null)
             editor.refresh();
     }
 
     private void addGold(int goldCount) {
-        gold += goldCount;
+        gold = Math.min(gold + goldCount, getMaxGold());
         onGoldChangeList.emit();
     }
 
@@ -1110,7 +1219,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void takeGold(int price) {
-        gold -= price;
+        gold = Math.min(gold - price, getMaxGold());
         onGoldChangeList.emit();
         //play sfx
         SoundSystem.instance.play(SoundEffectType.CoinsDrop, false);
@@ -1281,7 +1390,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
-        return (int) (basePrice * (2.0f - townPriceModifier));
+        return Math.min((int) (basePrice * (2.0f - townPriceModifier)), getGoldRoom());
     }
 
     /**
@@ -1402,10 +1511,16 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         ItemData item = ItemListData.getItem(name);
         if (item == null)
             return false;
+        if (item.unique && hasItem(name))
+            return false;
         inventoryItems.add(item);
         if (updateEvent)
             AdventureQuestController.instance().updateItemReceived(item);
         return true;
+    }
+
+    public boolean canObtainItem(ItemData item) {
+        return item != null && !(item.unique && hasItem(item.name));
     }
 
     public void removeAllQuestItems(){
@@ -1473,8 +1588,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return (int) questFlags.getOrDefault(key, (byte) 0);
     }
 
+    /**
+     * Character flags that exist only to stop a quest from being offered twice. Data checks them
+     * with checkCharacterFlag, so they survive a quest wipe unless cleared here: "noQuest" is the
+     * New Game+ "skip the main quest" choice and hides the intro mage's main quest option, and
+     * "dungeonMasterQuestGiven" gates the lair-clearing quest offered in dungeons.
+     */
+    private static final String[] QUEST_GATE_CHARACTER_FLAGS = {"noQuest", "dungeonMasterQuestGiven"};
+
+    /** Forget all global quest progress so every quest can be offered again (New Game+, resetQuests) */
     public void resetQuestFlags() {
         questFlags.clear();
+        for (String flag : QUEST_GATE_CHARACTER_FLAGS) {
+            setCharacterFlag(flag, 0);
+        }
     }
 
     public void addQuest(String questID, boolean isNewGame) {
@@ -1540,6 +1667,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         quests.remove(quest);
     }
 
+    public List<AdventureQuestData> getUnseenFinishedQuests() {
+        return unseenFinishedQuests;
+    }
+
     /**
      * Clears a deck by replacing the current selected deck with a new deck
      */
@@ -1572,18 +1703,42 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
+        int i = findEmptyDeckSlot();
+        if (i < 0)
+            return -1;
+        decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
+        // Copy loadout from source deck to new slot
+        ensureDeckLoadoutsSize();
+        HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
+        deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
+        return i;
+    }
+
+    /**
+     * Puts a deck into the first empty deck slot.
+     *
+     * @return int - index of the slot used, or -1 if no slot was available
+     */
+    public int addDeckToEmptySlot(Deck newDeck) {
+        int i = findEmptyDeckSlot();
+        if (i < 0)
+            return -1;
+        decks.set(i, newDeck);
+        // The player may have the empty slot selected, so refresh the selected deck from it
+        if (i == selectedDeckIndex)
+            setSelectedDeckSlot(i, false);
+        return i;
+    }
+
+    /** Adds deck slots up to the maximum while searching, so a returned index is always valid. */
+    private int findEmptyDeckSlot() {
+        if (hasModifierRule(modifier -> modifier.singleDeck))
+            return isEmptyDeck(selectedDeckIndex) ? selectedDeckIndex : -1;
         for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
-            if (isEmptyDeck(i)) {
-                decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
-                // Copy loadout from source deck to new slot
-                ensureDeckLoadoutsSize();
-                HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
-                deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
+            if (isEmptyDeck(i))
                 return i;
-            }
         }
-
         return -1;
     }
 

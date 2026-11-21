@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Enchantment Aura
 K:Enchant:Planeswalker
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Planeswalker.EnchantedBy | AddAbility$ ElspethPlus | Description$ Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Planeswalker | AddAbility$ ElspethPlus | Description$ Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens."
 SVar:ElspethPlus:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create three 1/1 white Soldier creature tokens.
 T:Mode$ AbilityCast | ValidCard$ Planeswalker.EnchantedBy+inRealZoneBattlefield | ValidSA$ Activated.Loyalty | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance

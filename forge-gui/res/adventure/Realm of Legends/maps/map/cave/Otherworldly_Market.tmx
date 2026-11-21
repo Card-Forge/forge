@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="170">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="174">
  <editorsettings>
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
@@ -24,12 +24,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEtOwzAQhgfRQoNUVuyygGUiNQsEF2AFF2DBUdig3CFF6hmAAyDOUI4AQj0Djw0LYoIVM4yTsR0nQeknWXVUJ5nf87AdgDVreCwOIO3ahi64HwGE/7Q9jEod52Na33zifw4Pg9/Xd7tm96u2q/1sYh+Twga1mXCZFK3uvqcI4Dkqr3U6fCDs42Cj30THyU45Xzr7HhO6UdyG5vZi5P0cHVubRRM6mkDmm23sUXB0XE2L36Z0qLSlI1NqlS6uXMHPyyzqI6UjDuixPvwhMZkfah0wzXMdy9yGBUDKtedoBnA8qx9Xx2qv+MU6qnz6kuvYDqpbV7S5fvjERMdN6PYun/ubKh35frmSZcN1ywWOP3DOuNZ7NcdlXzxT9m3quk6HrAO26GLIlw/7kufYxz73iTbxtNowG/+5b/4OQVP+oGL+Ovm73lHjxL4Xj/PpDw4i/nU5UPWfK7Y61H1q3dxd/OyXP6a8Z1PrlPoO6n02Ot54w75p42wv0OnAmqOgaDrkWUvEzWkMcBYX+YGh8gP3behL3VUR+qk5wORrXCr7VTrwtxgdJrmrG6vLMe6ZytUfnPivs6Wt8zkXztxx98wu68fr2O/3SoGvb6/vhj7Ac14XV9jHfaklpgxRR1trpg1D9IdK33wzdH/0jbZ1fAHz74UH
+   eJztmL1OwzAQxw/RQoNUJrYOMKZSOyCQgJEJdujAo7CgvkNB6jMAD4B4hvIIINRn4GNhwCZYNcddcrbjNKj8JKuO6iT3933YDsA//8gYb8Fw3jbMg7sGQOePtvvGTMegSeu7bMWfw+3k5/Xtutv9tu12f9Tyj0ltg91cOO9nrei+xxTgKZ1dczpioO2T4KPfRcfh2my+OPse+nSjuOm424sx90t0rCxnTesoA5NvvrFHIdFx0c5+y9JhU5WOkVWruLgKBT9v5FEfKR3dhB7r6489VVf2VTtI+TEu80OtA655zjFRNowBhpQ9J8r+U9UGlo6dHsBur9jmIqYb2S/WkefTZ6VjNclv86LK9SMmLjquO2Hvirm/ydOh9su5TEquWyFI/IFzJrTe2zlu+vqZpu9T1zkdpg74wsVQLB/WJc+xj2PuE33iabrkNv5j0/0dmrL8QcX8Vf/3ekeN0/tePC6mPyTo+OdyIO+/UHx12PvUork7+94vv7dlz6bWKfsd1Pt8dLzKhn1Rxdlew+nAmtMkaxzmrKXj5qgLcNzN8gND5Qfu+1CXumuj9VNzgFFr3ND083TgbzEcLrnLjeVyTHqmCvWHJP6LbKnqfC5FMnfSPXPI+vHSjPu9UhPr2+ubow/wnBfFFfZxXWqJK4uoo6o104dF9IdN3Xyz6P6oG1Xr+ARBiIeb
   </data>
  </layer>
  <layer id="5" name="Overlay" width="50" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt11EKgkAQBuCBIPDF1zqC0todOkrdooeEDtEtvIS9d6cUCRZ3tLE2nd3+Dwb2YRVnnFlYIgAAmSp1Y4pz0cU7dUZ0zz77Rgkuj6m5aPEo3AB/1qsuYiKdwxBcD37f96qNpvpIv2djiLbGfVYT3/8L4J/YMz60DsVt5GzSdm7Bcrg+b3un3/MhzIbd8+16aAb6+7j1LxybOp2U1OoblyaHMoI8JOw7yi4nMjm/T/t8cHetfcLvXWo+5jZ2RoQkhhwAAAAAnrkdLFU=
+   eJzt10EKwjAQBdABQXDjVo/QYOodPIq9hQsFD+FCz+BW97r3TqZEITTTmkiwk/ofDGSRls50JhAiAIAw56kfMTaljU9uBdG9+O4bQ3B5xOYixaP0A9IZj2wMSegc5mC/Svu+d20k1Sf0e2aaaK79ZyVJ/b8A/ok7423rXBw6ziZp5xb0h+vzuneaPZ/DbLg9X6/bZqC5j1unclREJ2XXa1OnSkitYl1MDtdXHluTwy7TPGK5d5SFyV8rfp/0+eDuWssJv/eX89GnrjMiJ0PIAQAAAOAJaS8vlw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -171,6 +171,31 @@
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="170" template="../../../../common/maps/obj/shop.tx" x="68.6667" y="403" width="13.6667" height="16">
+   <properties>
+    <property name="commonShopList" value="AlchemyShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="172" template="../../../../common/maps/obj/dialog.tx" x="354.197" y="237.932" width="75.0001" height="21.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Ahead, you see a library pulsing with otherworldly energy. You feel you might find great power within, if you are wealthy enough to claim it.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="173" template="../../../../common/maps/obj/door_down.tx" x="369.455" y="231.636" width="44.5455" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Commanders_Library_Beyond.tmx"/>
+    <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
  </objectgroup>

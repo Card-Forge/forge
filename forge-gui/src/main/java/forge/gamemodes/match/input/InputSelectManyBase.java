@@ -5,13 +5,12 @@ import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.match.Selection;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
@@ -101,7 +100,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     protected void onCancel() {
         bCancelled = true;
-        resetUsedToPay();
         this.getSelected().clear();
         this.stop();
     }
@@ -115,7 +113,10 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     @Override
     protected final void onOk() {
-        resetUsedToPay();
+        // The button is disabled until enough is chosen, but a remote client can still send the press
+        if (!hasEnoughTargets()) {
+            return;
+        }
         this.stop();
     }
 
@@ -123,14 +124,9 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.message = message0;
     }
 
-    protected void onSelectStateChanged(final GameEntity ge, final boolean newState) {
-        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), newState);
-    }
-
-    private void resetUsedToPay() {
-        final List<GameEntityView> views = new ArrayList<>();
-        for (final GameEntity ge : getSelected()) views.add(GameEntityView.get(ge));
-        getController().getGui().setHighlighted(views, false);
+    @Override
+    protected Selection getSelection() {
+        return Selection.ofChosen(GameEntityView.getEntityCollection(getSelected()));
     }
 
     public final void setCancelAllowed(boolean allow) {

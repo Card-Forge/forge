@@ -1,0 +1,7 @@
+Name:Icy Reception
+ManaCost:1 U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBPump
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature,Card.Legendary | ValidTgtsDesc$ creature or legendary spell | UnlessCost$ 3 | SpellDescription$ Counter target creature or legendary spell unless its controller pays {3}.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-0 until end of turn.
+Oracle:Choose one —\n• Counter target creature or legendary spell unless its controller pays {3}.\n• Target creature gets -5/-0 until end of turn.

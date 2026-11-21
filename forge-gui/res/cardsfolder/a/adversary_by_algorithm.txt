@@ -1,0 +1,6 @@
+Name:Adversary by Algorithm
+ManaCost:2 G
+Types:Sorcery
+K:Beam me up:3 G
+A:SP$ Token | TokenScript$ c_3_3_a_illusion | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Illusion artifact creature token.
+Oracle:Create a 3/3 colorless Illusion artifact creature token.\nBeam me up {3}{G} (You may cast this card from your graveyard for {3}{G} if you also return a creature you control to its owner's hand. Then exile this spell.)

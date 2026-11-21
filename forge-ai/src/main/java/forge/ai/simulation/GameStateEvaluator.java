@@ -38,7 +38,8 @@ public class GameStateEvaluator {
     }
     private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
-        if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
+        // Test games and partially initialized simulation states may not have entered a phase yet.
+        if (phase == null || phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
         }
         // If the current player has no creatures in play, there won't be any combat. This avoids
@@ -176,6 +177,7 @@ public class GameStateEvaluator {
 
         // TODO evaluate holding mana open for counterspells
 
+        boolean millConversion = false;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
             boolean phasedOut = c.isPhasedOut();
@@ -189,8 +191,13 @@ public class GameStateEvaluator {
             if (phasedOut || (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer)) {
                 availableValue = 0;
             }
+            if (c.getController() == aiPlayer && !phasedOut && convertsDamageToMill(c)) {
+                millConversion = true;
+            }
             String str = cardToString(c);
-            int multiplier = c.getController().isOpponentOf(aiPlayer) ? -1 : 1;
+            // A DonateMe permanent owned by the AI is intentionally harmful to the opponent who now controls it.
+            // Keep its value on the AI's side of the score instead of treating Donate as handing the opponent a gift.
+            int multiplier = c.getController().isOpponentOf(aiPlayer) && !DonateCombo.isGiftedTarget(aiPlayer, c) ? -1 : 1;
             debugPrint("  Battlefield: " + str + " = " + (multiplier < 0 ? "-" : "") + value);
             score += multiplier * value;
             availableScore += multiplier * availableValue;
@@ -200,8 +207,37 @@ public class GameStateEvaluator {
             }
         }
 
+        if (millConversion) {
+            // The Mindskinner and the like: our damage becomes a mill, so the opponent's library counts like a life total
+            // (a card per point of damage, worth what a life point is worth above) and the rollouts can see an attack paying off
+            int libraryCards = 0;
+            int libraryOpponents = 0;
+            for (Player opponent : aiPlayer.getOpponents()) {
+                libraryCards += opponent.getCardsIn(ZoneType.Library).size();
+                libraryOpponents++;
+            }
+            if (libraryOpponents > 0) {
+                score -= 2 * libraryCards / libraryOpponents;
+                availableScore -= 2 * libraryCards / libraryOpponents;
+                debugPrint("  Their library (damage is milled): -" + libraryCards / libraryOpponents);
+            }
+        }
+
         debugPrint("Score = " + score);
         return new Score(score, availableScore);
+    }
+
+    /** @return true if the permanent has a replacement that prevents our damage to opponents and mills them instead. */
+    private static boolean convertsDamageToMill(final Card c) {
+        for (final forge.game.replacement.ReplacementEffect re : c.getReplacementEffects()) {
+            if (re.getMode() == forge.game.replacement.ReplacementType.DamageDone && re.hasParam("ReplaceWith")) {
+                final forge.game.spellability.SpellAbility ex = re.getOverridingAbility();
+                if (ex != null && ex.getApi() == forge.game.ability.ApiType.Mill) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int evalManaBase(Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {
@@ -212,6 +248,10 @@ public class GameStateEvaluator {
         // this logic taken from ManaCost.getColorShardCounts()
         int[] counts = new int[6]; // in WUBRGC order
 
+        // Signets and filter lands (Mystic Gate) only make mana, or only make their colors, when something else pays
+        // for them: a lone one is not a source, so it must not be counted as one
+        final ManaConversion.Profile conversion = ManaConversion.analyzeIfNeeded(player, true);
+
         // Strategic evaluation includes lands guaranteed to phase in normally; availability does not.
         for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
             if (c.isPhasedOut() && (!includeNormalPhasing || !phasesInNormally(c))) {
@@ -220,6 +260,9 @@ public class GameStateEvaluator {
             int max_produced = 0;
             for (SpellAbility m: c.getManaAbilities()) {
                 m.setActivatingPlayer(c.getController());
+                if (conversion.isLocked(m)) {
+                    continue;
+                }
                 int mana_cost = m.getPayCosts().getTotalMana().getCMC();
                 max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
                 for (AbilityManaPart mp : m.getAllManaParts()) {

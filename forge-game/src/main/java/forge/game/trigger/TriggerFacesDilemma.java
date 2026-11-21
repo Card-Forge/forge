@@ -14,12 +14,20 @@ public class TriggerFacesDilemma extends Trigger {
 
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        return matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player));
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (hasParam("Random")) {
+            if (!(boolean) runParams.getOrDefault(AbilityKey.Random, false)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player);
     }
 
     @Override

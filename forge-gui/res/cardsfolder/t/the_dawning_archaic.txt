@@ -8,5 +8,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$
 SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | ValidTgtsDesc$ instant or sorcery card in your graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:HasAttackEffect:TRUE
-ODeckHints:Ability$Graveyard
+DeckHints:Ability$Graveyard
 Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nReach\nWhenever The Dawning Archaic attacks, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.

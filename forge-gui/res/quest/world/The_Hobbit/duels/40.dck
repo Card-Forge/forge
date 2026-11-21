@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Invisible Man
+Title=Invisible Man
+Icon=Invisible Man.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/AgrusKos93_-_Boros_Tokens_(Standard,_#888241).dck
+Deck Type=constructed
+
+[Main]
+4 Sacred Foundry
+3 Dalkovan Encampment
+2 Erode
+2 Fountainport
+4 Frontline Rush
+2 Hop to It
+4 Political Triumph
+4 Inspiring Vantage
+4 Song of Totentanz
+4 Stadium Headliner
+4 Sunbillow Verge
+3 The Last Ronin's Technique
+3 Torch the Tower
+4 Voice of Victory
+4 Belladonna Took
+4 Warleader's Call
+1 Plains
+4 Mountain
+[Sideboard]
+1 Erode
+3 Sunspine Lynx
+2 Pyrrhic Strike
+2 Requisition Raid
+4 Rest in Peace
+3 Bilbo's Gambit

@@ -1,0 +1,6 @@
+Name:No Admittance
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBEmpower | SpellDescription$ CARDNAME deals 3 damage to any target.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 1 | SpellDescription$ Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+Oracle:No Admittance deals 3 damage to any target.\nEmpower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

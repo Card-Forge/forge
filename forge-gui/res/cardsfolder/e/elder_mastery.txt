@@ -3,7 +3,7 @@ ManaCost:3 U B R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | Description$ Enchanted creature gets +3/+3 and has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | Description$ Enchanted creature gets +3/+3 and has flying.
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage to a player, that player discards two cards.
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has flying.\nWhenever enchanted creature deals damage to a player, that player discards two cards.

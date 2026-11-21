@@ -1,0 +1,7 @@
+Name:Troi, Winging It
+ManaCost:3 W
+Types:Legendary Creature Betazoid Human Advisor
+PT:3/2
+T:Mode$ Drawn | ValidPlayer$ Opponent | PlayerTurn$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws a card during your turn, create a 1/1 blue Faerie creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You
+Oracle:Whenever an opponent draws a card during your turn, create a 1/1 blue Faerie creature token with flying.

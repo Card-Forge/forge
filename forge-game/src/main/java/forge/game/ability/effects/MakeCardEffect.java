@@ -79,6 +79,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("Choices")) {
                 faces.addAll(parseFaces(sa, "Choices"));
             } else if (sa.hasParam("Booster")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 SealedTemplate booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
@@ -155,8 +156,12 @@ public class MakeCardEffect extends SpellAbilityEffect {
                             String editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;
                             pc = StaticData.instance().getCommonCards().getCard(name, editionCode);
                         }
+                        if (pc == null) {
+                            System.err.println("MakeCard: no card named " + name + " - " + source);
+                            break;
+                        }
                         Card card = Card.fromPaperCard(pc, player);
-
+                        CardUtil.turnToRightFace(name, card);
                         if (sa.hasParam("TokenCard")) {
                             card.setTokenCard(true);
                         }

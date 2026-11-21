@@ -582,6 +582,7 @@ public class PlaySpellAbility {
         final Player player = ability.getActivatingPlayer();
         final Game game = player.getGame();
         boolean refreeze = game.getStack().isFrozen();
+        final int waitingMark = game.getTriggerHandler().getWaitingTriggerCount();
 
         if (!skipStack) {
             if (!refreeze) {
@@ -591,7 +592,7 @@ public class PlaySpellAbility {
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
-                    needX = ability.costHasX();
+                    needX = ability.getPayCosts().hasXInAnyCostPart();
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
@@ -691,13 +692,13 @@ public class PlaySpellAbility {
             if (ability.isTrigger()) {
                 // Only roll back triggers if they were not paid for
                 if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
-                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c, waitingMark);
                 } else {
                     // If precost requsities failed, then there probably isn't anything to refund during experimental
                     payment.refundPayment();
                 }
             } else {
-                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c, waitingMark);
             }
 
             if (!refreeze) {

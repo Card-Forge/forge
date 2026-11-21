@@ -20,11 +20,15 @@ public class DummySprite extends MapActor {
     }
 
     @Override
-    public void onPlayerCollide() { if (blocking) stage.resetPosition(); }
+    public void onPlayerCollide() {
+        if (blocking && stage != null)
+            stage.resetPosition();
+    }
 
     @Override
     public void draw(Batch batch, float alpha) {
-        batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
+        if (textureRegion != null)
+            batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, alpha);
     }
 }

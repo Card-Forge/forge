@@ -1,0 +1,8 @@
+Name:Starfleet Security
+ManaCost:R
+Types:Creature Human Officer
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | PlayerTurn$ True | Execute$ TrigInvestigate | TriggerDescription$ When this creature dies during your turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+Oracle:Haste\nWhen this creature dies during your turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.badlogic.gdx.utils.Disposable;
 import forge.Graphics;
 
-public class GifAnimation extends ForgeAnimation {
+public class GifAnimation extends ForgeAnimation implements Disposable {
     private final Animation<TextureRegion> animation;
     private TextureRegion currentFrame;
     private float stateTime;
@@ -43,12 +44,18 @@ public class GifAnimation extends ForgeAnimation {
     protected void onEnd(boolean endingAll) {
     }
 
+    @Override
     public void dispose() {
         if (animation != null) {
-            for (TextureRegion tr: animation.getKeyFrames()) {
-                try {
-                    tr.getTexture().dispose();
-                } catch (Exception e) {}
+            Object[] keyFrames = animation.getKeyFrames();
+            for (Object keyFrame : keyFrames) {
+                if (keyFrame instanceof TextureRegion textureRegion) {
+                    try {
+                        textureRegion.getTexture().dispose();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

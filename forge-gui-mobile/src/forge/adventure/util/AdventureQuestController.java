@@ -211,6 +211,8 @@ public class AdventureQuestController implements Serializable {
             }
 
             Current.player().removeQuest(toRemove);
+            if (!toRemove.failed)
+                Current.player().getUnseenFinishedQuests().add(toRemove);
             //Todo: Add quest to a separate "completed / failed" log?
         }
     }

@@ -15,24 +15,16 @@ public abstract class InParser {
      * @return Predicate
      */
     public static Predicate<PaperCard> handle(String tokenValue) {
-        Predicate<PaperCard> predicate = null;
         CardRarity rarity = RarityParser.ParseRarityFromStr(tokenValue);
-
-        if (rarity == null) {
-             // Not a rarity. Assume it is a set
-            predicate = c -> {
-                    CardEdition e = StaticData.instance().getEditions().get(tokenValue);
-                    
-                    if (e == null) {
-                        return false;
-                    }
-
-                    return e.isCardObtainable(c.getName());
-                };
-        } else {
-            predicate = PaperCardPredicates.printedWithRarity(rarity);
+        if (rarity != null) {
+            return PaperCardPredicates.printedWithRarity(rarity);
         }
-        
-        return predicate;
+
+        CardEdition edition = StaticData.instance().getEditions().get(tokenValue);
+        if (edition == null) {
+            return card -> false;
+        }
+
+        return card -> edition.getObtainableCards().stream().anyMatch(e -> e.name().equals(card.getName()));
     }
 }

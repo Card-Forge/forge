@@ -1,7 +1,7 @@
 Name:Iconic Shield
 ManaCost:W
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddTrigger$ AttackTrigger | Description$ Equipped creature gets +1/+2 and has "Whenever this creature attacks, another target attacking creature gains indestructible until end of turn." (Damage and effects that say "destroy" don't destroy it.)
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 1 | AddToughness$ 2 | AddTrigger$ AttackTrigger | Description$ Equipped creature gets +1/+2 and has "Whenever this creature attacks, another target attacking creature gains indestructible until end of turn." (Damage and effects that say "destroy" don't destroy it.)
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, another target attacking creature gains indestructible until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking | ValidTgtsDesc$ another attacking creature | KW$ Indestructible
 K:Equip:3

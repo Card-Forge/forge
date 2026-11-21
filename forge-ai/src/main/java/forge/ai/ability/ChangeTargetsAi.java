@@ -6,10 +6,18 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 
+import java.util.Map;
+
 public class ChangeTargetsAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return MayDecisions.changeTargets(player, sa);
+    }
+
 
     /*
      * (non-Javadoc)
@@ -87,6 +95,11 @@ public class ChangeTargetsAi extends SpellAbilityAi {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            if (!canPay && !threatensUs(topTargets, aiPlayer)) {
+                // life is the price and nothing of ours is at stake: stealing a buff or wasting an untap is not worth it
+                // (the AI paid 2 life each time the opponent untapped a land)
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         Card firstCard = topTargets.getFirstTargetedCard();
@@ -102,5 +115,18 @@ public class ChangeTargetsAi extends SpellAbilityAi {
         sa.resetTargets();
         sa.getTargets().add(topSa);
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /** Whether the AI itself or one of its permanents is among the targets. */
+    private static boolean threatensUs(final TargetChoices targets, final Player ai) {
+        if (targets.contains(ai)) {
+            return true;
+        }
+        for (final Card c : targets.getTargetCards()) {
+            if (ai.equals(c.getController())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

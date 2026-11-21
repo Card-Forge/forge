@@ -1,0 +1,11 @@
+Name:Pia, Determined Rebuilder
+ManaCost:2 R
+Types:Legendary Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+A:AB$ Pump | Cost$ 5 R | ValidTgts$ Creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of artifacts you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:When Pia enters, create a 1/1 colorless Thopter artifact creature token with flying.\n{5}{R}: Target creature gets +X/+0 until end of turn, where X is the number of artifacts you control.

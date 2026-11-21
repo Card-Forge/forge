@@ -3,6 +3,6 @@ ManaCost:4 U U
 Types:Legendary Enchantment Aura
 K:Enchant:Permanent
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddType$ Legendary | Description$ Enchanted permanent is legendary.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Permanent | GainControl$ You | Description$ You control enchanted permanent.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Permanent | AddType$ Legendary | Description$ Enchanted permanent is legendary.
 Oracle:Enchant permanent\nYou control enchanted permanent.\nEnchanted permanent is legendary.

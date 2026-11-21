@@ -3,7 +3,7 @@ ManaCost:1 B R
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 for each creature in your party and has menace. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+S:Mode$ Continuous | AffectedDefined$ Equipped | AddPower$ X | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 for each creature in your party and has menace. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
 SVar:X:Count$Party
 K:Equip:2 B R
 SVar:NeedsToPlay:Creature.YouCtrl

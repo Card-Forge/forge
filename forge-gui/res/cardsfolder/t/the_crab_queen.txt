@@ -1,0 +1,10 @@
+Name:The Crab Queen
+ManaCost:3 U
+Types:Legendary Creature Crab Human
+PT:1/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopyToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a token that’s a copy of one of the following at random: Skitter Eel; Skittering Crustacean; Ruin Crab; Charix, the Raging Isle; Scuttletide; or Heartstone.
+SVar:TrigCopyToken:DB$ NameCard | Defined$ You | AtRandom$ True | ChooseFromList$ Skitter Eel,Skittering Crustacean,Ruin Crab,Charix; the Raging Isle,Scuttletide,Heartstone| SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Whenever CARDNAME attacks, create a token that’s a copy of one of the following at random: Skitter Eel; Skittering Crustacean; Ruin Crab; Charix, the Raging Isle; Scuttletide; or Heartstone.

@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed & Valid Creature.sharesCreatureTypeWith AttachedBy Sacrificed | KW$ Flying | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Crown of Ascension: Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.

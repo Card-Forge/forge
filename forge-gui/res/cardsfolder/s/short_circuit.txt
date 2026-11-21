@@ -5,5 +5,5 @@ K:Flash
 K:Enchant:Creature,Artifact:artifact or creature
 SVar:AttachAITgts:Creature,Vehicle
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | RemoveKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it gets -3/-0 and loses flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ -3 | RemoveKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it gets -3/-0 and loses flying.
 Oracle:Flash\nEnchant artifact or creature\nAs long as enchanted permanent is a creature, it gets -3/-0 and loses flying.

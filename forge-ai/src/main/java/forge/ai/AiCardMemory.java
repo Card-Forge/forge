@@ -66,7 +66,7 @@ public class AiCardMemory {
     }
 
     public enum MemorySetMana implements MemoryType<ManaCostBeingPaid> {
-        UNPAID_COSTS
+        UNPAID_COSTS // all partial costs AI couldn't pay, stored globally so individual effects don't need to run expensive checks themselves
     }
 
     public interface MemoryType<T> {

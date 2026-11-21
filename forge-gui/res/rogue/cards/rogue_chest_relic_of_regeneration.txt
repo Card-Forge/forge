@@ -1,0 +1,4 @@
+Name:Chest Trait - Relic Of Regeneration
+ManaCost:no cost
+Types:Trait
+Oracle:Gain up to 5 life after each match victory.

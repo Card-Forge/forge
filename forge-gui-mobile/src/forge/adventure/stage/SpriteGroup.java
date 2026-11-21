@@ -7,13 +7,20 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.SnapshotArray;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
  * Sprite group to order actors based on the Y position on the map, the render sprites further up first.
  */
 public class SpriteGroup extends Group {
+
+
+    private static final Comparator<Actor> yDepthComparator = new Comparator<Actor>() {
+        @Override
+        public int compare(Actor o1, Actor o2) {
+            return Float.compare(o2.getY(), o1.getY());
+        }
+    };
 
     /**
      * Draws all children. {@link #applyTransform(Batch, Matrix4)} should be called before and {@link #resetTransform(Batch)}
@@ -23,25 +30,21 @@ public class SpriteGroup extends Group {
      */
     @Override
     protected void drawChildren(Batch batch, float parentAlpha) {
+        // snatch the native backing snapshot collection directly from the parent group
+        SnapshotArray<Actor> children = getChildren();
 
-        Actor[] actors = getChildren().toArray();
-        Arrays.sort(actors, Comparator.comparingInt(o -> (int) -o.getY()));
+        // bypasses .toArray(), lambda creations, and heavy .setZIndex() array copies
+        children.sort(yDepthComparator);
 
-        for(int i=0;i<actors.length;i++)
-        {
-            if(i!=actors[i].getZIndex())
-                actors[i].setZIndex(i);
-        }
         super.drawChildren(batch, parentAlpha);
-
     }
 
     @Override
     public void addActor(Actor actor) {
-
-        for (Actor child : getChildren()) {
-            if (child.getY() < actor.getY()) {
-                super.addActorBefore(child, actor);
+        SnapshotArray<Actor> children = getChildren();
+        for (int i = 0; i < children.size; i++) {
+            if (children.get(i).getY() < actor.getY()) {
+                super.addActorBefore(children.get(i), actor);
                 return;
             }
         }

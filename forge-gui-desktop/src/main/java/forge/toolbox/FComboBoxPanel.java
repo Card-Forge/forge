@@ -99,6 +99,10 @@ public class FComboBoxPanel<E> extends JPanel {
         }
     }
 
+    public FComboBox<E> getComboBox() {
+        return comboBox;
+    }
+
     public void addActionListener(final ActionListener l) {
         comboBox.addActionListener(l);
     }
@@ -117,6 +121,15 @@ public class FComboBoxPanel<E> extends JPanel {
 
     public void setSelectedIndex(final int index) {
         comboBox.setSelectedIndex(index);
+    }
+
+    /** JPanel.setEnabled does not reach children, so forward it to the combo box. */
+    @Override
+    public void setEnabled(final boolean enabled) {
+        super.setEnabled(enabled);
+        if (comboBox != null) {
+            comboBox.setEnabled(enabled);
+        }
     }
 
     private void refreshSkin() {

@@ -4,6 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 R:Event$ Moved | ActiveZones$ Battlefield | ValidCard$ Card.YouCtrl | ValidCause$ SpellAbility.OppCtrl | ReplaceWith$ DBReveal | Optional$ True | EffectOnly$ True | Discard$ True | Description$ If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ ReplacedCard | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard
+SVar:DBDiscard:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | NoShuffle$ True | Defined$ ReplacedCard
 SVar:NonStackingEffect:True
 Oracle:If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.\n{T}: Add {C}.

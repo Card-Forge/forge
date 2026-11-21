@@ -1,0 +1,7 @@
+Name:Gaseous Anomaly
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 5 U T Sac<1/CARDNAME/this land> | NumCards$ 2 | SubAbility$ DBToken | SpellDescription$ Draw two cards. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+SVar:DBToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
+Oracle:{T}: Add {C}.\n{5}{U}, {T}, Sacrifice this land: Draw two cards. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
