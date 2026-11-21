@@ -923,7 +923,11 @@ public class ComputerUtilMana {
                     }
                     VetoLog.note(ai, "pay-failed " + sa.getHostCard().getName() + " toPay=" + toPay
                             + " convoke=" + sa.getHostCard().hasKeyword(Keyword.CONVOKE) + " x=" + sa.getXManaCostPaid()
-                            + " pool=" + ai.getManaPool().totalMana() + " untappedLands=" + lands + " readyCreatures=" + creatures);
+                            + " pool=" + ai.getManaPool().totalMana() + "(W" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.WHITE) + " U" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.BLUE)
+                            + " B" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.BLACK) + " R" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.RED)
+                            + " G" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.GREEN) + ")" + " untappedLands=" + lands + " readyCreatures=" + creatures
+                            // the sources the payer gave up on (a cost it could not pay: Lion's Eye Diamond's discard, a sacrifice)
+                            + " excluded=" + saExcludeList.stream().map(x -> x.getHostCard().getName()).distinct().sorted().collect(java.util.stream.Collectors.toList()));
                 }
                 sa.setSkip(true);
             }

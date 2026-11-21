@@ -368,4 +368,31 @@ public class ComputerUtilManaTest extends SimulationTest {
         addCard("Foraging Wickermaw", p);
         payForReal(p, "U");
     }
+
+    /**
+     * The estimate and the payment have to agree. Lion's Eye Diamond is left out on purpose: the payer never takes it for
+     * a spell (it is an instant-speed ability that discards the hand, and the loops crack it by themselves), so the
+     * estimate says no and the payment says no.
+     */
+    private void estimateAndPaymentAgree(final Player p, final String spell) {
+        final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate for " + spell);
+        assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "the payment of " + spell);
+    }
+
+    @Test
+    public void lotusPetalPaysForBrainstorm() {
+        final Player p = sacrificeBoard(0, "Lotus Petal");
+        estimateAndPaymentAgree(p, "Brainstorm");
+    }
+
+    @Test
+    public void lionsEyeDiamondIsNotAnAutomaticSourceForASpell() {
+        final Player p = sacrificeBoard(0, "Lion's Eye Diamond");
+        final SpellAbility sa = addCardToZone("Burning Wish", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertFalse(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate must not count the Diamond");
+        assertFalse(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "and the payer must not take it");
+    }
 }
