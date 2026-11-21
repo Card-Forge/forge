@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -40,6 +41,7 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.UIScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -226,6 +228,74 @@ public abstract class GameStage extends Stage {
             return false;
         pane.setScrollY(pane.getScrollY() + (down ? 0.5f : -0.5f) * pane.getHeight());
         return true;
+    }
+
+    public boolean dialogInput(int keycode) {
+        if (dialogOnlyInput) {
+            if (KeyBinding.Up.isPressed(keycode) && !scrollDialogText(false)) {
+                selectPreviousDialogButton();
+            }
+            if (KeyBinding.Down.isPressed(keycode) && !scrollDialogText(true)) {
+                selectNextDialogButton();
+            }
+            if (KeyBinding.ScrollUp.isPressed(keycode)) {
+                scrollDialogText(false);
+            }
+            if (KeyBinding.ScrollDown.isPressed(keycode)) {
+                scrollDialogText(true);
+            }
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(dialogStage.getKeyboardFocus());
+            }
+        }
+        return true;
+    }
+
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(UIScene.eventTouchDown());
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(UIScene.eventTouchUp());
+            }
+        }, 0.10f);
+    }
+
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
+    }
+
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 
     public void showImageDialog(String message, FBufferedImage fb, Runnable runnable) {
