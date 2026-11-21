@@ -8,9 +8,12 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
@@ -419,12 +422,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (supportAutoPay()) {
             ensureAutoPayManaSources();
             if (autoPayManaSources != null) { //enabled Auto button if mana cost can be paid
-                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
+                // Don't default to paying when declining is allowed and paying would accomplish nothing
+                final boolean focusAuto = mandatory || !isPaymentPointless();
+                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, focusAuto);
             }
         }
         // Just-tapped sources leave the highlights, and the AI's auto-tap plan is emphasized
         showSelection();
         showMessage(getMessage(), saPaidFor.getView());
+    }
+
+    /**
+     * Whether paying this cost would have no effect, e.g. Mana Vault's optional
+     * "pay {4}, untap this artifact" trigger while it is already untapped.
+     * Used only to pick the default (focused) button, never to block payment.
+     */
+    protected boolean isPaymentPointless() {
+        if (saPaidFor == null || saPaidFor.getApi() != ApiType.Untap || saPaidFor.getSubAbility() != null) {
+            return false;
+        }
+        final CardCollectionView toUntap;
+        if (saPaidFor.usesTargeting()) {
+            toUntap = saPaidFor.getTargets().getTargetCards();
+        } else {
+            toUntap = AbilityUtils.getDefinedCards(saPaidFor.getHostCard(), saPaidFor.getParamOrDefault("Defined", "Self"), saPaidFor);
+        }
+        if (toUntap.isEmpty()) {
+            return false;
+        }
+        for (final Card c : toUntap) {
+            if (c.isTapped()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
