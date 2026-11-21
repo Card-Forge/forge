@@ -29,6 +29,13 @@ ORI Prerelease Liliana: 4 Common:fromSheet("ORI Liliana"), 2 Uncommon:fromSheet(
 ORI Prerelease Chandra: 4 Common:fromSheet("ORI Chandra"), 2 Uncommon:fromSheet("ORI Chandra"), 1 RareMythic:fromSheet("ORI Chandra")
 ORI Prerelease Nissa: 4 Common:fromSheet("ORI Nissa"), 2 Uncommon:fromSheet("ORI Nissa"), 1 RareMythic:fromSheet("ORI Nissa")
 
+# TDM Prerelease, the seeded faction boosters
+TDM Prerelease Abzan: 9 fromSheet("TDM seeded abzan common"), 3 fromSheet("TDM seeded abzan uncommon"), 1 RareMythic:fromSheet("TDM seeded abzan rare mythic"), 1 fromSheet("TDM seeded abzan land")
+TDM Prerelease Jeskai: 9 fromSheet("TDM seeded jeskai common"), 3 fromSheet("TDM seeded jeskai uncommon"), 1 RareMythic:fromSheet("TDM seeded jeskai rare mythic"), 1 fromSheet("TDM seeded jeskai land")
+TDM Prerelease Mardu: 9 fromSheet("TDM seeded mardu common"), 3 fromSheet("TDM seeded mardu uncommon"), 1 RareMythic:fromSheet("TDM seeded mardu rare mythic"), 1 fromSheet("TDM seeded mardu land")
+TDM Prerelease Sultai: 9 fromSheet("TDM seeded sultai common"), 3 fromSheet("TDM seeded sultai uncommon"), 1 RareMythic:fromSheet("TDM seeded sultai rare mythic"), 1 fromSheet("TDM seeded sultai land")
+TDM Prerelease Temur: 9 fromSheet("TDM seeded temur common"), 3 fromSheet("TDM seeded temur uncommon"), 1 RareMythic:fromSheet("TDM seeded temur rare mythic"), 1 fromSheet("TDM seeded temur land")
+
 # Jump Start
 JMP Above the Clouds 1: 1 wholeSheet("JMP Above the Clouds 1")
 JMP Above the Clouds 2: 1 wholeSheet("JMP Above the Clouds 2")

@@ -10,6 +10,7 @@ public class BoosterSlot {
     private String baseRarity;
     private float startRange = 0.0f;
     private final TreeMap<Float, String> slotPercentages = new TreeMap<>();
+    private boolean excludeDrawnNames = false;
 
     public BoosterSlot(final String slotName, final List<String> contents) {
         this.slotName = slotName;
@@ -19,6 +20,13 @@ public class BoosterSlot {
 
     public final String getSlotName() {
         return slotName;
+    }
+
+    /**
+     * Whether this slot never draws a card whose name was already drawn by an earlier slot of the same booster
+     */
+    public final boolean isExcludeDrawnNames() {
+        return excludeDrawnNames;
     }
 
     public static BoosterSlot parseSlot(final String slotName, final List<String> contents) {
@@ -42,6 +50,8 @@ public class BoosterSlot {
                 float pct = Float.parseFloat(replaceParts[0]);
                 startRange += pct;
                 slotPercentages.put(startRange, replaceParts[1]);
+            } else if (key.equalsIgnoreCase("ExcludeDrawnNames")) {
+                excludeDrawnNames = Boolean.parseBoolean(value);
             }
         }
     }
