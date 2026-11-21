@@ -1366,4 +1366,31 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
                 step.getHostCard().getName());
         AssertJUnit.assertTrue(step.isLandAbility());
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithKikiJikiAndPestermiteKillsTheOpponent() {
+        elfDeckWith(0, "Pestermite");
+        addCards("Island", 3, ai);
+        final Card kiki = addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Battlefield);
+        kiki.setSickness(false); // it has been there since the start of the turn
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("Pestermite untaps Kiki-Jiki, who copies it again, and the hasty fliers attack\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithStoneforgeMysticPutsBatterskullIntoPlay() {
+        elfDeckWith(0, "Batterskull");
+        addCards("Plains", 2, ai);
+        final Card mystic = addCardToZone("Stoneforge Mystic", ai, ZoneType.Battlefield);
+        mystic.setSickness(false); // it has been there since the start of the turn: it can tap
+        runTurn();
+        boolean inPlay = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            inPlay |= c.getName().equals("Batterskull");
+        }
+        AssertJUnit.assertTrue("{1}{W}, {T}: the Equipment from the hand comes in without its five mana\n" + trace
+                + gameStateToString(game), inPlay);
+    }
 }

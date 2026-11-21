@@ -272,4 +272,14 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertTrue("each Evolving Wilds can fetch its own Island for Counterspell",
                 castsSomething(hand("Evolving Wilds", "Evolving Wilds", "Counterspell")));
     }
+
+    @Test
+    public void aDualLandMakesOneColourOfTheTwoPips() {
+        setUp(0, 0);
+        final Card charm = addCardToZone("Simic Charm", ai, ZoneType.Library); // {G}{U}
+        AssertJUnit.assertFalse("one Tropical Island pays {G} or {U}, not both",
+                OpeningHand.makesColorsOf(hand("Tropical Island"), ai, charm));
+        AssertJUnit.assertTrue("a Forest beside it pays the other pip",
+                OpeningHand.makesColorsOf(hand("Tropical Island", "Forest"), ai, charm));
+    }
 }

@@ -271,7 +271,9 @@ public final class OpeningHand {
                 return test.test(sources);
             }
             if (++nodes[0] > MAX_NODES) {
-                return true; // too many ways to split the library: not judged by this, as before
+                // too many ways to split the library to try them all: the best split found greedily, which is checked
+                // like any other, so a yes is a verified yes and a no is the cautious answer
+                return test.test(greedy(fetch, used, sources));
             }
             final Set<Long> tried = new HashSet<>();
             boolean finds = false;
@@ -298,19 +300,43 @@ public final class OpeningHand {
             return !finds && allocate(fetch + 1, used, sources, test, nodes);
         }
 
+        /** The sources when each remaining fetch land takes the unused land that adds the most colours. */
+        private List<Byte> greedy(final int from, final boolean[] used, final List<Byte> sources) {
+            final List<Byte> out = new ArrayList<>(sources);
+            final boolean[] taken = used.clone();
+            byte have = 0;
+            for (final byte s : out) {
+                have |= s;
+            }
+            for (int f = from; f < fetches; f++) {
+                int best = -1;
+                int bestNew = -1;
+                for (int i = 0; i < finders.length; i++) {
+                    if (taken[i] || (finders[i] & (1 << f)) == 0) {
+                        continue;
+                    }
+                    final int added = Integer.bitCount(lib.landMasks.get(i) & ~have & 0xFF);
+                    if (added > bestNew) {
+                        bestNew = added;
+                        best = i;
+                    }
+                }
+                if (best >= 0) {
+                    taken[best] = true;
+                    out.add(lib.landMasks.get(best));
+                    have |= lib.landMasks.get(best);
+                }
+            }
+            return out;
+        }
+
         /** Whether the colours of the spell are all made together by some choice of what the fetch lands find. */
         boolean makesColorsOf(final Card spell) {
-            final byte need = spell.getManaCost().getColorProfile();
-            if (need == 0) {
+            if (spell.getManaCost().getColorProfile() == 0) {
                 return true;
             }
-            return allocate(sources -> {
-                byte colors = 0;
-                for (final byte s : sources) {
-                    colors |= s;
-                }
-                return (need & ~colors) == 0;
-            });
+            // one source for each coloured pip: a Tropical Island makes green or blue, never {G}{U} by itself
+            return allocate(sources -> ManaSourceAllocation.canPayColoredPips(spell.getManaCost(), sources));
         }
     }
 
@@ -347,6 +373,11 @@ public final class OpeningHand {
             }
         }
         return false;
+    }
+
+    /** Whether the lands of the hand (and what its fetch lands find) pay for the coloured pips of the spell together. */
+    static boolean makesColorsOf(final CardCollectionView hand, final Player ai, final Card spell) {
+        return new HandMana(hand, new Library(ai)).makesColorsOf(spell);
     }
 
     static boolean castsSomething(final CardCollectionView kept, final Player ai) {

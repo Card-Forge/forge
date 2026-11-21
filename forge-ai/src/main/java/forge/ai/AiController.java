@@ -2370,7 +2370,10 @@ public class AiController {
             if (host != null && "Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(player)
                     && RampPlan.scapeshiftLethal(player)) {
                 candidate.setActivatingPlayer(player);
-                if (!hasFailedToCast(candidate) && canPlaySa(candidate) == AiPlayDecision.WillPlay) {
+                // the lethal line is not a reason to try a cast the mana cannot pay: {2}{G}{G} with the Forests tapped, or no
+                // untapped land at all, failed 60 times in one sweep ("Didn't find what to pay for {G}")
+                if (!hasFailedToCast(candidate) && ComputerUtilMana.canPayManaCost(candidate, player, 0, false)
+                        && canPlaySa(candidate) == AiPlayDecision.WillPlay) {
                     return candidate;
                 }
             }
