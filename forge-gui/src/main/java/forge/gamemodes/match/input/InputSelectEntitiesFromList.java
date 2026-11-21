@@ -59,7 +59,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 players.add(p.getView());
             }
         }
-        return new Selection(cards, min, max, players, new ArrayList<>(GameEntityView.getEntityCollection(selected)));
+        return new Selection(cards, min, max, players, new ArrayList<>(GameEntityView.getEntityCollection(selected)), List.of());
     }
 
     @Override

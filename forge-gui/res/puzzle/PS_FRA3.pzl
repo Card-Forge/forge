@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Reality Fracture #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/10/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has Restoration Magic (and nothing else) in their hand. Make sure your solution wins whether they cast it or not! Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=War Squeak;Erode;Voice of Victory;Gollum the Abandoned;Lorehold Charm
+p0battlefield=Team Avatar;Omni-Cheese Pizza;June, Bounty Hunter;Vengeful Bloodwitch;Stingerquill Annex;Stingerquill Annex;Plains;Plains;Plains
+p1life=10
+p1hand=Restoration Magic
+p1battlefield=Garruk, Veiled Butcher|Counters:LOYALTY=2;T:g_4_4_beast;Plains

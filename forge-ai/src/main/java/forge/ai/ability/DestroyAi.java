@@ -153,6 +153,9 @@ public class DestroyAi extends SpellAbilityAi {
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
+            if (!sa.isTrigger()) {
+                list = ComputerUtilCard.withoutHarmlessCreatures(ai, list); // a creature that cannot do anything is not worth the removal
+            }
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
@@ -439,7 +442,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
+        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedMyLastTurn() == 0 && ph.isPlayerTurn(ai))
                 || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
         boolean canManaLock = oppLandsOTB <= amountLandsToManalock && oppSkippedLandDrop;
 

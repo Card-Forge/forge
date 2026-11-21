@@ -23,6 +23,7 @@
 
   - [Modding & content creation](Adventure/Modding.md)
     - [Create Enemies](Adventure/Create-Enemies.md)
+    - [Create Creature Sprites](Adventure/Create-New-Creature-Sprites.md)
     - [Create Rewards](Adventure/Create-Rewards.md)
     - [Create Maps](Adventure/Create-new-Maps.md)
     - [Configure Planes](Adventure/Configure-Planes.md)
@@ -53,6 +54,7 @@
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
   - [UI Guidelines](Development/UI-Guidelines.md)
+  - [Card-script Linting](Development/Card-Script-Linting.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

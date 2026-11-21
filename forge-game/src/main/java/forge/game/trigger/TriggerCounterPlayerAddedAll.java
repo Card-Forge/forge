@@ -36,9 +36,9 @@ public class TriggerCounterPlayerAddedAll extends Trigger {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Source, AbilityKey.Object, AbilityKey.CounterMap);
-        sa.setTriggeringObject(AbilityKey.Amount, ((Multiset<CounterType>) runParams.get(AbilityKey.CounterMap)).size());
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Source, AbilityKey.Object, AbilityKey.CounterMap);
+        objects.put(AbilityKey.Amount, ((Multiset<CounterType>) runParams.get(AbilityKey.CounterMap)).size());
     }
 
     @Override

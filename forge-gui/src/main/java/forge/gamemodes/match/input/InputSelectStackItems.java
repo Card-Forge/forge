@@ -50,7 +50,7 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         for (final SpellAbilityStackInstance si : selected) {
             chosen.add(si.getView());
         }
-        return new Selection(List.of(), 0, 0, offered, chosen);
+        return new Selection(List.of(), 0, 0, offered, chosen, List.of());
     }
 
     @Override

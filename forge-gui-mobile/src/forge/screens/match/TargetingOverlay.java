@@ -28,6 +28,7 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
+import forge.screens.match.views.VPlayerPanel;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Utils;
@@ -68,17 +69,65 @@ public class TargetingOverlay {
     private TargetingOverlay() {
     }
 
+    // The area arrows may be drawn in, and the areas drawn on top of the field (stack, open menus) that hide what is under them.
+    // Plain floats and one reused array, so deciding visibility allocates nothing per frame (GC pauses are felt on Android).
+    private static float clipLeft, clipTop, clipRight, clipBottom;
+    private static boolean hasClip = false;
+    private static float[] occluders = new float[4 * 8]; // left, top, right, bottom of each rect
+    private static int occluderCount = 0;
+
+    public static void setVisibleArea(final float x, final float y, final float w, final float h) {
+        clipLeft = x;
+        clipTop = y;
+        clipRight = x + w;
+        clipBottom = y + h;
+        hasClip = w > 0 && h > 0;
+    }
+
+    public static void clearOccluders() {
+        occluderCount = 0;
+    }
+
+    public static void addOccluder(final float x, final float y, final float w, final float h) {
+        if (w <= 0 || h <= 0) { return; }
+        final int i = occluderCount * 4;
+        if (i + 4 > occluders.length) {
+            occluders = Arrays.copyOf(occluders, occluders.length * 2);
+        }
+        occluders[i] = x;
+        occluders[i + 1] = y;
+        occluders[i + 2] = x + w;
+        occluders[i + 3] = y + h;
+        occluderCount++;
+    }
+
+    /** False when the point is outside the visible area or covered by an occluder; arrows to or from it are not drawn. */
+    public static boolean isVisible(final float x, final float y) {
+        if (hasClip && (x < clipLeft || x > clipRight || y < clipTop || y > clipBottom)) { return false; }
+        final float[] o = occluders;
+        for (int i = 0, n = occluderCount * 4; i < n; i += 4) {
+            if (x >= o[i] && x <= o[i + 2] && y >= o[i + 1] && y <= o[i + 3]) { return false; }
+        }
+        return true;
+    }
+
     // assembleArrows collects arrows here, then draws them all with ONE Graphics.drawArrowBatch
     private static final class PendingArrow {
         Vector2 start, end;
         ArcConnection connects;
         boolean solid; // see the attacker -> player arrows in assembleArrows
+        float bulge;
     }
     private static final ArrayList<PendingArrow> pendingArrows = new ArrayList<>(); // reused every frame (UI thread only)
     private static int pendingCount = 0;
 
     private static void queueArrow(final Vector2 start, final Vector2 end, final ArcConnection connects, final boolean solid) {
+        queueArrow(start, end, connects, solid, 0f);
+    }
+
+    private static void queueArrow(final Vector2 start, final Vector2 end, final ArcConnection connects, final boolean solid, final float bulge) {
         if (start == null || end == null) { return; }
+        if (!isVisible(start.x, start.y) || !isVisible(end.x, end.y)) { return; } // hidden, off screen or covered
         final PendingArrow a;
         if (pendingCount < pendingArrows.size()) {
             a = pendingArrows.get(pendingCount);
@@ -90,6 +139,7 @@ public class TargetingOverlay {
         a.end = end;
         a.connects = connects;
         a.solid = solid;
+        a.bulge = bulge;
         pendingCount++;
     }
 
@@ -101,7 +151,7 @@ public class TargetingOverlay {
         g.drawArrowBatch(() -> {
             for (int i = 0; i < count; i++) {
                 final PendingArrow a = pendingArrows.get(i);
-                drawArrowStyled(g, a.start, a.end, a.connects, style, a.solid);
+                drawArrowStyled(g, a.start, a.end, a.connects, style, a.solid, a.bulge);
             }
         });
     }
@@ -113,6 +163,7 @@ public class TargetingOverlay {
             a.start = null;
             a.end = null;
             a.connects = null;
+            a.bulge = 0f;
         }
         pendingCount = 0;
     }
@@ -180,12 +231,12 @@ public class TargetingOverlay {
                     final GameEntityView defender = combat.getDefender(c);
                     // if c is attacking a planeswalker or battle
                     if (defender instanceof CardView) {
-                        queueArrow(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking, false);
+                        queueArrow(endpoints.get(c.getId()), endpoints.get(defender.getId()), ArcConnection.FoesAttacking, false);
                     }
                     // if c is a planeswalker that's being attacked
-                    for (final CardView pwAttacker : combat.getAttackersOf(c)) {
+                    /*for (final CardView pwAttacker : combat.getAttackersOf(c)) {
                         queueArrow(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking, false);
-                    }
+                    }*/
                     // blocker -> attacker arrows that involve this card
                     final List<CardView> pairs = blockPairs.get(c);
                     if (pairs != null) {
@@ -201,10 +252,14 @@ public class TargetingOverlay {
                 for (final CardView attackingCard : blockInfoAttackers) {
                     for (final PlayerView p : playerViewSet) {
                         if (attackersOfPlayer.get(p).contains(attackingCard)) {
-                            final Vector2 vPlayer = MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin();
-                            // solid = true: the old repeated drawing stacked the translucent 0.8/0.9 alphas up to fully opaque,
-                            // so drawing once at full alpha keeps the same look. Pass false for the intended translucent look.
-                            queueArrow(endpoints.get(attackingCard.getId()), vPlayer, ArcConnection.FoesAttacking, true);
+                            final VPlayerPanel panel = MatchScreen.getPlayerPanel(p);
+                            if (panel != null) {
+                                final Vector2 start = endpoints.get(attackingCard.getId());
+                                final Vector2 vPlayer = panel.getTargetingArrowOrigin();
+                                // Bend toward the battlefield on either side, keeping the arrow clear of panel labels.
+                                queueArrow(start, vPlayer, ArcConnection.FoesAttacking, true,
+                                        playerArrowBulge(start, vPlayer, panel.isCompactRight()));
+                            }
                         }
                     }
                 }
@@ -219,7 +274,31 @@ public class TargetingOverlay {
     // immediate mode, unchanged behavior: used by any other caller that draws a single arrow
     public static void drawArrow(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects) {
         if (start == null || end == null) { return; }
-        drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false);
+        drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false, 0f);
+    }
+
+    /** Draw a stack-target arrow to a player, curving it toward the battlefield rather than across the panel labels. */
+    public static void drawPlayerArrow(final Graphics g, final Vector2 start, final Vector2 end,
+                                       final ArcConnection connects, final boolean playerOnRight) {
+        if (start == null || end == null || !isVisible(end.x, end.y)) { return; } // only the target can be hidden; the start sits on the stack itself
+        final float bulge = playerArrowBulge(start, end, playerOnRight);
+        drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false, bulge);
+    }
+
+    private static float playerArrowBulge(final Vector2 start, final Vector2 end, final boolean playerOnRight) {
+        if (!VPlayerPanel.isCompactLayout() || start == null || end == null) { return 0f; }
+        final float dx = end.x - start.x;
+        final float dy = end.y - start.y;
+        if (dx * dx + dy * dy < 120f * 120f) { return 0f; } //Keep short arrows straight.
+        final float amount = Utils.scale(60);
+        if (Math.abs(dy) >= 1f) {
+            // Graphics uses the perpendicular (-dy, dx): this sign moves a right-side arrow left (inward), and vice versa.
+            return (playerOnRight ? 1f : -1f) * Math.signum(dy) * amount;
+        }
+        if (Math.abs(dx) < 1f) { return 0f; }
+        // Nearly horizontal arrows bend toward the vertical centre of the battlefield instead.
+        final float towardCenterY = end.y < Forge.getScreenHeight() / 2f ? 1f : -1f;
+        return Math.signum(dx) * towardCenterY * amount;
     }
 
     /**
@@ -241,6 +320,10 @@ public class TargetingOverlay {
     }
 
     private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid) {
+        drawArrowStyled(g, start, end, connects, style, solid, 0f);
+    }
+
+    private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid, final float bulge) {
         if (start == null || end == null) { return; }
 
         FSkinColor color = foeDefColor;
@@ -264,7 +347,7 @@ public class TargetingOverlay {
             default -> g.drawCurvedArrow(Utils.scale(3),
                     solid ? color.alphaColor(1f).getColor() : color.alphaColor(0.8f).getColor(),
                     solid ? Color.WHITE : FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(),
-                    start.x, start.y, end.x, end.y, ArcConnection.Friends.equals(connects));
+                    start.x, start.y, end.x, end.y, ArcConnection.Friends.equals(connects), bulge);
         }
     }
 }

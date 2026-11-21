@@ -4,7 +4,7 @@ Types:Land Planet
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-K:Station:12
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE12_CHARGE | AddAbility$ KavaronToken | Description$ STATION 12+ {1}{R}, {T}: Sacrifice a land: Create a 2/2 colorless Robot artifact creature token, then creatures you control get +1/+0 and gain haste until end of turn.
 SVar:KavaronToken:AB$ Token | Cost$ 1 R T Sac<1/Land> | TokenScript$ c_2_2_a_robot | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ Create a 2/2 colorless Robot artifact creature token, then creatures you control get +1/+0 and gain haste until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Haste

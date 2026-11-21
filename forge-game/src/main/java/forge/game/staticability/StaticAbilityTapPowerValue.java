@@ -2,6 +2,7 @@ package forge.game.staticability;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
@@ -49,7 +50,7 @@ public class StaticAbilityTapPowerValue {
                 if (!stAb.matchesValidParam("ValidSA", ctb)) {
                     continue;
                 }
-                i += Integer.parseInt(stAb.getParam("Value"));
+                i += AbilityUtils.calculateAmount(card, stAb.getParam("Value"), stAb);
             }
         }
         return i;

@@ -1,0 +1,7 @@
+Name:Red Alert!
+ManaCost:2 R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ This spell costs {2} less to cast if a creature is attacking you.
+SVar:X:Count$Valid Creature.attackingYou
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+Oracle:This spell costs {2} less to cast if a creature is attacking you.\nCreatures you control get +2/+0 until end of turn.

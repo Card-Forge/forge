@@ -967,4 +967,67 @@ public class World implements Disposable, SaveFileContent {
         }
         return globalTexture;
     }
+
+    public static final class AsyncSaveSnapshot implements Disposable {
+        private final SaveFileData data;
+        private Pixmap biomeImage;
+
+        private AsyncSaveSnapshot(SaveFileData data, Pixmap biomeImage) {
+            this.data = data;
+            this.biomeImage = biomeImage;
+        }
+
+        public SaveFileData encode() {
+            Pixmap image = biomeImage;
+            if (image == null) {
+                throw new IllegalStateException("Snapshot already consumed");
+            }
+
+            try {
+                data.store("biomeImage", image);
+                return data;
+            } finally {
+                image.dispose();
+                biomeImage = null;
+            }
+        }
+
+        @Override
+        public void dispose() {
+            if (biomeImage != null) {
+                biomeImage.dispose();
+                biomeImage = null;
+            }
+        }
+    }
+
+    public AsyncSaveSnapshot snapshotForAsyncSave() {
+        if (biomeImage == null) {
+            throw new IllegalStateException("World biome image is unavailable");
+        }
+
+        // Capture the image while still on the calling thread.
+        Pixmap imageCopy = new Pixmap(
+                biomeImage.getWidth(),
+                biomeImage.getHeight(),
+                biomeImage.getFormat());
+
+        try {
+            imageCopy.drawPixmap(biomeImage, 0, 0);
+
+            SaveFileData saveData = new SaveFileData();
+            saveData.storeObject("biomeMap", biomeMap);
+            saveData.storeObject("terrainMap", terrainMap);
+            saveData.store("width", width);
+            saveData.store("height", height);
+            saveData.store("mapObjectIds", mapObjectIds.save());
+            saveData.store("mapPoiIds", mapPoiIds.save());
+            saveData.store("seed", seed);
+
+            return new AsyncSaveSnapshot(saveData, imageCopy);
+        } catch (RuntimeException | Error e) {
+            imageCopy.dispose();
+            throw e;
+        }
+    }
 }

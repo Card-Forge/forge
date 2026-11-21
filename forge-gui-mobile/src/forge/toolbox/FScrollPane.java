@@ -165,9 +165,7 @@ public abstract class FScrollPane extends FContainer {
             for (FDisplayObject obj : getChildren()) {
                 if (obj != null) {
                     if (obj instanceof FCardPanel panel) { // don't animate while moving the field
-                        panel.getCard().updateNeedsTransformAnimation(false);
-                        panel.getCard().updateNeedsUntapAnimation(false);
-                        panel.getCard().updateNeedsTapAnimation(false);
+                        panel.stopAnimations();
                     }
                     obj.setPosition(obj.getLeft() + dx, obj.getTop() + dy);
                 }

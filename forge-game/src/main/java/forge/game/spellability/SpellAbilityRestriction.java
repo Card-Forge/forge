@@ -27,6 +27,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -48,7 +49,14 @@ import forge.util.collect.FCollection;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityRestriction extends SpellAbilityVariables {
+public class SpellAbilityRestriction extends SpellAbilityVariables implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Activation", "ActivationAfterBlockers", "ActivationFirstCombat", "ActivationGameTypes",
+        "ActivationLifeAmount", "ActivationLifeTotal", "ActivationLimit", "ActivationPhases",
+        "ActivationZone", "Activator", "AdditionalActivationZone", "GameActivationLimit",
+        "InstantSpeed", "OpponentTurn", "PlayerTurn", "SorcerySpeed",
+    };
+
     // A class for handling SpellAbility Restrictions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
@@ -193,24 +201,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
-        Card cp = c;
-
-        // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.isBestow()) {
-            // already bestowed or in battlefield, no need to check for spell
-            if (c.isInPlay()) {
-                return false;
-            }
-
-            // if card is lki and bestowed, then do nothing there, it got already animated
-            if (!(c.isLKI() && c.isBestowed())) {
-                if (!c.isLKI()) {
-                    cp = CardCopyService.getLKICopy(c);
-                }
-
-                cp.animateBestow(false);
-            }
-        }
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -237,13 +227,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
                     if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
-                            && !c.mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
+                            && !sa.getHostCard().mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
                         return false;
                     }
 
                     Map<String,String> params = sa.getMayPlay().getMapParams();
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
+                        if (!c.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }

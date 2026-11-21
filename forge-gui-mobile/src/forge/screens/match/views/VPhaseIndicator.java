@@ -43,6 +43,7 @@ public class VPhaseIndicator extends FContainer {
     private final PlayerView player;
     private float expand; //landscape only: 0 = phase name, 1 = phase stops
     private boolean expandTarget;
+    private boolean tutorialOpen; //the "How to Play" tutorial is pointing at the stops: keep them open
     private float idleTime;
     private ExpandAnimation expandAnimation;
     private Color scratchColor = new Color();
@@ -76,8 +77,25 @@ public class VPhaseIndicator extends FContainer {
 
     private static boolean isCompact() { return VPlayerPanel.isCompactLayout(); }
 
+    /**
+     * Used by the "How to Play" tutorial: opens the phase stops (landscape layouts, where they fold away) and keeps them
+     * open while it explains them, and lets them fold away again afterwards. Does nothing for the unified phase label,
+     * which opens its own list, and in portrait, where the stops are always showing.
+     */
+    public void setTutorialOpen(final boolean open) {
+        if (tutorialOpen == open) { return; }
+        tutorialOpen = open;
+        if (VPlayerPanel.isUnifiedPhase() || !Forge.isLandscapeMode()) { return; }
+        if (open) {
+            setExpanded(true);
+        } else if (expandTarget) {
+            setExpanded(false);
+        }
+    }
+
     /** Compact layout: opens the phase stops if they are hidden, hides them if they are showing. */
     public void toggleStops() {
+        if (VPlayerPanel.isUnifiedPhase()) { return; } //the unified phase label owns the stops
         setExpanded(!expandTarget);
     }
 
@@ -99,7 +117,7 @@ public class VPhaseIndicator extends FContainer {
 
     /** The stops column only takes touches while it is open, so it never blocks the field underneath. */
     public void syncCompactVisibility() {
-        setVisible(!isCompact() || expand > 0f || expandTarget);
+        setVisible(!isCompact() || (!VPlayerPanel.isUnifiedPhase() && (expand > 0f || expandTarget)));
     }
 
     //the colours a phase stop label uses: whether it is the current phase, and whether the game stops at it
@@ -109,7 +127,7 @@ public class VPhaseIndicator extends FContainer {
     private static final Color COMPACT_BAND = new Color(1f, 1f, 1f, 0.07f);
     private static final Color FROST_FILL = new Color(), FROST_TEXT = new Color(); //scratch colours for the stop labels, render thread only
 
-    private static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
+    static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
         final boolean adv = Forge.isMobileAdventureMode;
         if (active) {
             return FSkinColor.get(stopAtPhase ? (adv ? Colors.ADV_CLR_PHASE_ACTIVE_ENABLED : Colors.CLR_PHASE_ACTIVE_ENABLED)
@@ -129,7 +147,7 @@ public class VPhaseIndicator extends FContainer {
     public void drawPhaseButton(Graphics g, float w, float h) {
         final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
         final PhaseType phase = gv == null ? null : gv.getPhase();
-        final boolean myTurn = gv != null && phase != null && gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+        final boolean myTurn = phase != null && player.sharesTeamWith(gv.getPlayerTurn());
 
         final String text;
         final Color textColor;
@@ -156,7 +174,7 @@ public class VPhaseIndicator extends FContainer {
     private void setExpanded(boolean open) {
         expandTarget = open;
         idleTime = 0;
-        if (open && isCompact()) { setVisible(true); }
+        if (open && isCompact() && !VPlayerPanel.isUnifiedPhase()) { setVisible(true); }
         if (expandAnimation == null) {
             expandAnimation = new ExpandAnimation();
             expandAnimation.start();
@@ -243,7 +261,7 @@ public class VPhaseIndicator extends FContainer {
 
         if (expand < 1f && phase != null) {
             final float a = 1f - expand;
-            final boolean myTurn = gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+            final boolean myTurn = player.sharesTeamWith(gv.getPlayerTurn());
             String text = null;
             Color base;
             if (myTurn) {
@@ -307,11 +325,15 @@ public class VPhaseIndicator extends FContainer {
             final boolean more;
             if (expandTarget) {
                 expand = Math.min(1f, expand + step);
-                if (expand >= 1f) {
-                    idleTime += dt;
-                    if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
+                if (isCompact()) { //compact layout: the stops stay open until the phase button closes them
+                    more = expand < 1f;
+                } else {
+                    if (expand >= 1f && !tutorialOpen) {
+                        idleTime += dt;
+                        if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
+                    }
+                    more = true;
                 }
-                more = true;
             } else {
                 expand = Math.max(0f, expand - step);
                 if (expand <= 0f && isCompact()) { setVisible(false); }
@@ -432,6 +454,24 @@ public class VPhaseIndicator extends FContainer {
         }
         public void setYieldMarked(boolean v) {
             this.yieldMarked = v;
+        }
+
+        /** The short caption of the label (UP, DR, M1...). */
+        public String getCaption() {
+            return caption;
+        }
+
+        /** Flips the stop exactly like a tap on the label does, for the unified phase label's dropdown. */
+        public void toggleStop() {
+            stopAtPhase = !stopAtPhase;
+            if (onToggled != null) { onToggled.run(); }
+        }
+
+        /** Runs the long press action (yield marking) like a long press on the label does. @return false if there is none */
+        public boolean fireLongPress() {
+            if (onLongPress == null) { return false; }
+            onLongPress.run();
+            return true;
         }
 
         /** Fires after the user toggles this label by tapping. */

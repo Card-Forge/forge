@@ -73,7 +73,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final Class<T> genericType;
     private ItemManagerConfig config;
     private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet, fnFavoriteGet;
-    private boolean viewUpdating, needSecondUpdate;
+    private Object pendingFilter;
     private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
 
@@ -827,19 +827,23 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         filterPredicate = newFilterPredicate;
         if (pool != null) {
-            if (viewUpdating) {
-                needSecondUpdate = true;
-            } else {
-                viewUpdating = true;
-                FThreads.invokeInBackgroundThread(() -> {
-                    do {
-                        needSecondUpdate = false;
-                        updateView(true, null);
-                        Gdx.graphics.requestRendering();
-                    } while (needSecondUpdate);
-                    viewUpdating = false;
+            // Filtering a large pool is slow, so it runs on a copy in the background and the result is applied on the GL thread
+            final Object filter = new Object();
+            pendingFilter = filter;
+            final List<Entry<T, Integer>> entries = new ArrayList<>();
+            pool.forEach(entries::add);
+            FThreads.invokeInBackgroundThread(() -> {
+                final List<Entry<T, Integer>> filtered = filterEntries(entries, newFilterPredicate);
+                FThreads.invokeInEdtLater(() -> {
+                    if (pendingFilter != filter) { return; }
+                    pendingFilter = null;
+                    final Collection<T> selection = getSelectedItems();
+                    model.clear();
+                    model.addItems(filtered);
+                    refreshView(selection, true);
+                    Gdx.graphics.requestRendering();
                 });
-            }
+            });
         }
         return true;
     }
@@ -914,34 +918,31 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         //TO-maybe-DO: Share logic between this and identical method in desktop.
-        final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
-
-        if (useFilter || this.wantUnique || forceFilter) {
+        // A pending background filter result was built from an older pool, so rebuild here instead
+        final boolean filterWasPending = pendingFilter != null;
+        pendingFilter = null;
+        if (forceFilter || this.wantUnique || !isUnfiltered() || filterWasPending) {
             this.model.clear();
+            this.model.addItems(filterEntries(this.pool, filterPredicate));
         }
+        refreshView(itemsToSelect, forceFilter);
+    }
 
-        if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
-            final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
-            this.model.addItems(items);
-        }
-        else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
-            this.model.addItems(IterableUtil.filter(this.pool, pred));
-        }
-        else if (this.wantUnique) {
-            final Iterable<Entry<T, Integer>> items = getUnique(this.pool);
-            this.model.addItems(items);
-        }
-        else if (forceFilter) {
-            this.model.addItems(this.pool);
-        }
-        currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
+    /** The entries the predicate keeps, one per card name when unique. A null predicate keeps every entry. */
+    private List<Entry<T, Integer>> filterEntries(final Iterable<Entry<T, Integer>> source, final Predicate<? super T> predicate) {
+        final Iterable<Entry<T, Integer>> kept = predicate == null ? source : IterableUtil.filter(source, x -> predicate.test(x.getKey()));
+        final List<Entry<T, Integer>> result = new ArrayList<>();
+        (wantUnique ? getUnique(kept) : kept).forEach(result::add);
+        return result;
+    }
+
+    private void refreshView(final Iterable<T> itemsToSelect, final boolean scrollToTop) {
+        currentView.refresh(itemsToSelect, getSelectedIndex(), scrollToTop ? 0 : currentView.getScrollValue());
 
         //update ratio of # in filtered pool / # in total pool
         ItemPool<T> filteredItems = getFilteredItems();
         int filteredCount = filteredItems.countAll();
-        int totalCount = useFilter ? pool.countAll() : filteredCount;
+        int totalCount = isUnfiltered() ? filteredCount : pool.countAll();
 
         searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }

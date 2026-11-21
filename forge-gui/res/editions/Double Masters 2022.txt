@@ -3,7 +3,6 @@ Code=2X2
 Date=2022-07-08
 Name=Double Masters 2022
 Type=Reprint
-BoosterCovers=3
 Booster=8 Common:fromSheet("2X2 cards"), 3 Uncommon:fromSheet("2X2 cards"), 2 RareMythic:fromSheet("2X2 cards"), 2 fromSheet("2X2 foils"), 1 fromSheet("2X2 spire")
 Foil=NotSupported
 DoublePick=FirstPick

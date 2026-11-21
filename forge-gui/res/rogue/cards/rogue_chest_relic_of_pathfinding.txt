@@ -1,0 +1,4 @@
+Name:Chest Trait - Relic Of Pathfinding
+ManaCost:no cost
+Types:Trait
+Oracle:You can always choose any node of the next row on the map.

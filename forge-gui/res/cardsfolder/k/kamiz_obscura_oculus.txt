@@ -6,7 +6,7 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZo
 SVar:TrigPump:DB$ Effect | RememberObjects$ Targeted | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | StaticAbilities$ Unblockable | SubAbility$ DBConnive
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBConnive:DB$ Connive | Defined$ Targeted | SubAbility$ DBChooseCard
-SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.attacking+NotDefinedTargeted+powerLTX | ChoiceTitle$ Choose another attacking creature with lesser power | SubAbility$ DBPump
+SVar:DBChooseCard:DB$ ChooseCard | Mandatory$ True | Defined$ You | Choices$ Creature.attacking+NotDefinedTargeted+powerLTX | ChoiceTitle$ Choose another attacking creature with lesser power | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | KW$ Double Strike | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Targeted$CardPower

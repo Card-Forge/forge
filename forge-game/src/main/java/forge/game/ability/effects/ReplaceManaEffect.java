@@ -10,7 +10,6 @@ import forge.card.MagicColor;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
 
@@ -18,9 +17,6 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Player player = sa.getActivatingPlayer();
-
         // outside of Replacement Effect, unwanted result
         if (!sa.isReplacementAbility()) {
             return;
@@ -29,20 +25,33 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> params = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
 
-        String replaced = (String)sa.getReplacingObject(AbilityKey.Mana);
+        String anyColor = null;
+        if ("Any".equals(sa.getParam("ReplaceMana")) || "Any".equals(sa.getParam("ReplaceType"))) {
+            anyColor = MagicColor.toShortString(sa.getActivatingPlayer().getController().chooseColor("Choose a color", sa, ColorSet.WUBRG));
+        }
+        params.put(AbilityKey.Mana, replaceMana(sa, (String) sa.getReplacingObject(AbilityKey.Mana), anyColor));
+        // effect was updated
+        params.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
+    }
+
+    public static boolean onlyChangesAmount(final SpellAbility sa) {
+        return sa.hasParam("ReplaceAmount") && !sa.hasParam("ReplaceMana") && !sa.hasParam("ReplaceType") && !sa.hasParam("ReplaceColor");
+    }
+
+    /** @param anyColor the color to use where the effect lets its controller choose one */
+    public static String replaceMana(final SpellAbility sa, String replaced, final String anyColor) {
+        final Card card = sa.getHostCard();
         if (sa.hasParam("ReplaceMana")) {
             // replace type and amount
             replaced = sa.getParam("ReplaceMana");
             if ("Any".equals(replaced)) {
-                byte rs = player.getController().chooseColor("Choose a color", sa, ColorSet.WUBRG);
-                replaced = MagicColor.toShortString(rs);
+                replaced = anyColor;
             }
         } else if (sa.hasParam("ReplaceType")) {
             // replace color and colorless
             String color = sa.getParam("ReplaceType");
             if ("Any".equals(color)) {
-                byte rs = player.getController().chooseColor("Choose a color", sa, ColorSet.WUBRG);
-                color = MagicColor.toShortString(rs);
+                color = anyColor;
             } else {
                 // convert in case Color Word used
                 color = MagicColor.toShortString(color);
@@ -74,9 +83,7 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
             // replace amount = multiples
             replaced = StringUtils.repeat(replaced, " ", Integer.parseInt(sa.getParam("ReplaceAmount")));
         }
-        params.put(AbilityKey.Mana, replaced);
-        // effect was updated
-        params.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
+        return replaced;
     }
 
 }

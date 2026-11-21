@@ -10,8 +10,10 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -93,28 +95,46 @@ public class AttackRequirement {
         if (!hasRequirement()) {
             return 0;
         }
+        return countOwnViolations(defender) + getViolatedCausesToAttack(defender, attackers).size();
+    }
 
+    /**
+     * @return the number of violated requirements for this creature itself to attack (goad, "attacks each combat if able", ...)
+     */
+    public int countOwnViolations(final GameEntity defender) {
+        if (!hasRequirement()) {
+            return 0;
+        }
         final boolean isAttacking = defender != null;
-        int violations = defenderSpecific.values().stream().mapToInt(Integer::intValue).sum()
+        return defenderSpecific.values().stream().mapToInt(Integer::intValue).sum()
                 - (isAttacking ? defenderSpecific.getOrDefault(defender, 0) : 0);
-        if (isAttacking) {
-            final Combat combat = defender.getGame().getCombat();
-            final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
+    }
 
-            // check if a restriction will apply such that the requirement is no longer relevant
-            if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
-                for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
-                    if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
-                    int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
+    /**
+     * @return the other creatures that are required to attack because this creature attacks, but don't,
+     *         mapped to the static abilities requiring it
+     */
+    public Multimap<Card, StaticAbility> getViolatedCausesToAttack(final GameEntity defender, final Map<Card, GameEntity> attackers) {
+        if (defender == null || causesToAttack.isEmpty()) {
+            return ImmutableMultimap.of();
+        }
+        final Multimap<Card, StaticAbility> violated = MultimapBuilder.hashKeys().arrayListValues().build();
+        final Combat combat = defender.getGame().getCombat();
+        final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
 
-                    // only count violations if the forced creature can actually attack and has no cost incurred for doing so
-                    if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue().size();
-                    }
+        // check if a restriction will apply such that the requirement is no longer relevant
+        if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
+            for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
+                if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
+                int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
+
+                // only count violations if the forced creature can actually attack and has no cost incurred for doing so
+                if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
+                    violated.putAll(mustAttack.getKey(), mustAttack.getValue());
                 }
             }
         }
-        return violations;
+        return violated;
     }
 
     public List<Pair<GameEntity, Integer>> getSortedRequirements() {

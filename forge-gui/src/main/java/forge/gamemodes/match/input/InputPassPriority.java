@@ -20,6 +20,7 @@ package forge.gamemodes.match.input;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -64,11 +65,6 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
-    }
-
-    @Override
-    protected void onStop() {
-        getController().clearActionableCards();
     }
 
     @Override
@@ -164,11 +160,16 @@ public class InputPassPriority extends InputSyncronizedBase {
         getController().getGui().alertUser();
     }
 
+    @Override
+    protected List<CardView> getActionable() {
+        return pendingSuggestion == null ? getController().getActionableCards(false, null) : List.of();
+    }
+
     private void showNormalPrompt() {
         pendingSuggestion = null;
         pendingSuggestionMessage = null;
 
-        getController().pushActionableCards(false);
+        showSelection();
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
@@ -179,7 +180,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             final UndoManager um = getController().getGame().getUndoManager();
             final int n = um.undosLeft();
             final String undoLabel = localizer.getMessage("lblUndo") + (n > 0 ? " (" + n + ")" : "");
-            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), undoLabel, true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), undoLabel, true, true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
             getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true, true, true);
@@ -218,7 +219,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         FCollectionView<StackItemView> stack = gv.getStack();
         if (stack != null && !stack.isEmpty()) return false;
         PlayerView currentTurn = gv.getPlayerTurn();
-        if (currentTurn != null && currentTurn.equals(pv)) {
+        if (pv.sharesTeamWith(currentTurn)) {
             // Always suppress on player's first turn (no lands/mana yet)
             if (gv.getTurn() <= gv.getPlayers().size()) return false;
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_ON_OWN_TURN)) return false;

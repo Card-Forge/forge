@@ -33,6 +33,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     String targets;
     int targetCount = 1;
     boolean humanControl = false;
+    /** The tutorial is a fixed practice game, not a puzzle: no "Puzzle Goal" card and no turn limit. */
+    boolean hideGoal = false;
     int turns;
     boolean completed;
 
@@ -71,6 +73,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 this.targetCount = Integer.parseInt(split[1]);
             } else if ("HumanControl".equalsIgnoreCase(split[0])) {
                 this.humanControl = "true".equalsIgnoreCase(split[1].trim());
+            } else if ("HideGoal".equalsIgnoreCase(split[0])) {
+                this.hideGoal = "true".equalsIgnoreCase(split[1].trim());
             }
         }
     }
@@ -229,7 +233,9 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     protected void applyGameOnThread(final Game game) {
         setupMaxPlayerHandSize(game, 7);
         super.applyGameOnThread(game);
-        addGoalEnforcement(game);
+        if (!hideGoal) {
+            addGoalEnforcement(game);
+        }
         game.getRules().setAppliedVariants(Sets.newHashSet(GameType.Puzzle));
 
         // for puzzles that are tricky to implement for the AI, they can be fully controlled by the human player

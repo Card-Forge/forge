@@ -6,4 +6,5 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ X | SVarCompare$ G
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:X:Count$Valid Creature.YouCtrl$CardPower
+SVar:PlayMain1:TRUE
 Oracle:Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.

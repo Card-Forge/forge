@@ -77,15 +77,15 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
-        cardSelectLocked = true;
-        done();
+        getController().getGame().getView().updateIsMulligan(false);
+        stop();
     }
 
     @Override
     protected final void onCancel() {
         int cardsLeft = toReturn - selected.size();
         int count = 0;
-        for(Card c : player.getZone(ZoneType.Hand).getCards()) {
+        for (Card c : player.getZone(ZoneType.Hand).getCards()) {
             if (selected.contains(c)) { continue; }
 
             selected.add(c);
@@ -99,17 +99,10 @@ public class InputLondonMulligan extends InputSyncronizedBase {
         onOk();
     }
 
-    private void done() {
-        getController().getGame().getView().updateIsMulligan(false);
-        stop();
-    }
-
-    volatile boolean cardSelectLocked = false;
-
     @Override
     protected boolean onCardSelected(final Card c0, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
         final boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
-        if (!fromHand || cardSelectLocked) {
+        if (!fromHand) {
             return false;
         }
 

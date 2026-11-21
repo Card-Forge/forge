@@ -1,0 +1,14 @@
+Name:Captain Benjamin Sisko
+ManaCost:1 W
+Types:Legendary Creature Human Officer
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 red Officer creature token for each dilemma you've faced this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_officer | TokenOwner$ You
+SVar:X:Count$YouFaceDilemmaThisTurn
+A:AB$ Dig | Cost$ 2 W U B R G T | Defined$ You | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile the top five cards of your library. You may cast any number of spells with mana value less than or equal to the number of Officers you control from among those cards without paying their mana costs.
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered+YouOwn | ValidZone$ Exile | ValidSA$ Spell.cmcLEY | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$Valid Officer.YouCtrl
+DeckHas:Ability$Token & Type$Officer
+DeckHints:Type$Officer
+Oracle:At the beginning of your end step, create a 1/1 red Officer creature token for each dilemma you've faced this turn.\n{2}{W}{U}{B}{R}{G}, {T}: Exile the top five cards of your library. You may cast any number of spells with mana value less than or equal to the number of Officers you control from among those cards without paying their mana costs.

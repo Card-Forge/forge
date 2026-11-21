@@ -9,6 +9,7 @@ import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,6 +20,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
 
     private final SealedTemplate tpl;
     private final Map<String, PrintSheet> sheets;
+    private final Collection<String> excludedNames;
     private boolean poolLimited = false; // if true after successful generation cards are removed from printsheets.
 
     public final boolean isPoolLimited() {
@@ -31,8 +33,19 @@ public class UnOpenedProduct implements IUnOpenedProduct {
 
     // Means to select from all unique cards (from base game, ie. no schemes or avatars)
     public UnOpenedProduct(SealedTemplate template) {
+        this(template, (Collection<String>) null);
+    }
+
+    /**
+     * Open a sealed product while excluding cards by name from every print sheet
+     * used to fill the pack. Cached sheets are never mutated.
+     *
+     * @param excludedNames card names that must not be rolled; null or empty means no filter
+     */
+    public UnOpenedProduct(SealedTemplate template, Collection<String> excludedNames) {
         tpl = template;
         sheets = null;
+        this.excludedNames = excludedNames;
     }
 
     // Invoke this constructor only if you are sure that the pool is not equal to default carddb
@@ -43,6 +56,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     public UnOpenedProduct(SealedTemplate template, Iterable<PaperCard> cards) {
         tpl = template;
         sheets = new TreeMap<>();
+        excludedNames = null;
         prebuildSheets(cards);
     }
 
@@ -62,7 +76,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
             return getBoosterPack();
         }
 
-        return BoosterGenerator.getBoosterPack(tpl);
+        return BoosterGenerator.getBoosterPack(tpl, excludedNames);
     }
 
     // If they request cards from an arbitrary pool, there's no use to cache printsheets.

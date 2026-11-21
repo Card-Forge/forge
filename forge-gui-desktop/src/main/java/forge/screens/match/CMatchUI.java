@@ -355,6 +355,40 @@ public final class CMatchUI
         return targetingOverlay;
     }
 
+    // ---- "How to Play" tutorial: note and outline, drawn over the match screen ----
+    private TutorialOverlayPanel tutorialOverlay;
+
+    private TutorialOverlayPanel getTutorialOverlay() {
+        if (tutorialOverlay == null) {
+            tutorialOverlay = new TutorialOverlayPanel(this);
+        }
+        return tutorialOverlay;
+    }
+
+    /** One of the match screen's docked panels, or null when this match has none with that id. */
+    IVDoc<? extends ICDoc> getTutorialDoc(final EDocID id) {
+        return myDocs.get(id);
+    }
+
+    /** Shows a tutorial note over the board. Call on the UI thread. */
+    public void showTutorialCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        getTutorialOverlay().showCoach(title, text, nextLabel, onNext);
+    }
+
+    /** Removes the tutorial note. Call on the UI thread. */
+    public void hideTutorialCoach() {
+        if (tutorialOverlay != null) {
+            tutorialOverlay.hideCoach();
+        }
+    }
+
+    /** Outlines parts of the match screen for the tutorial; an empty set clears it. Call on the UI thread. */
+    public void highlightTutorial(final java.util.EnumSet<forge.gamemodes.tutorial.TutorialTarget> targets) {
+        if (tutorialOverlay != null || !targets.isEmpty()) {
+            getTutorialOverlay().highlight(targets);
+        }
+    }
+
     /**
      * View deck list.
      */
@@ -681,16 +715,19 @@ public final class CMatchUI
         final Selection prev = getSelection();
         super.setSelection(selection);
         final boolean cardsChanged = !prev.cards().equals(selection.cards());
+        final boolean actionableChanged = !prev.actionable().equals(selection.actionable());
         final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
         // a maximum of 0 marks display-only highlighting, whose caller shows its own window
         final PlayerZoneUpdates zones = cardsChanged && selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         FThreads.invokeInEdtNowOrLater(() -> {
-            if (cardsChanged) {
+            if (cardsChanged || actionableChanged) {
                 // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
                 for (final PlayerView p : getGameView().getPlayers()) {
                     updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                     updateCardsNetSafe(p.getCards(ZoneType.Hand));
                 }
+            }
+            if (cardsChanged) {
                 if (selection.cards().isEmpty()) {
                     hideZones(selectionZonesShown);
                     selectionZonesShown.clear();
@@ -699,6 +736,8 @@ public final class CMatchUI
                     updateZones(zones);
                     selectionZonesShown.addAll(tempShowZones(zones));
                 }
+            }
+            if (cardsChanged || actionableChanged) {
                 FloatingZone.refreshAll();
             }
             if (stackOffered) { // stack entries are picked in the stack panel, so bring it up
@@ -713,7 +752,7 @@ public final class CMatchUI
 
     @Override
     public void showRevealedCards(final Iterable<CardView> cards) {
-        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        // only hands open: cards revealed from any other zone show in the reveal dialog
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
             if (update.getZones().contains(ZoneType.Hand)) {
@@ -747,30 +786,6 @@ public final class CMatchUI
             }
         }
         getCStack().getView().repaintSelection();
-    }
-
-    @Override
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        super.setWeaklySelectable(cards);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearWeaklySelectable() {
-        super.clearWeaklySelectable();
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
     }
 
     @Override
@@ -940,20 +955,22 @@ public final class CMatchUI
 
     @Override
     public void updatePhase(boolean saveState) {
-        final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
-        // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
-        PhaseLabel lbl = null;
-        if (ph != null) {
-            lbl = p == null ? null : getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
-        } else {
-            // not sure what debugging information would help here, log for now
+        if (ph == null) {
+            // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
             System.err.println("getGameView().getPhase() returned 'null'");
         }
 
         resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
+        if (ph != null) {
+            // a team that shares its turns shows the phase on each of its players
+            final PlayerView turnPlayer = getGameView().getPlayerTurn();
+            for (final PlayerView p : getGameView().getPlayers()) {
+                final PhaseLabel lbl = p.sharesTeamWith(turnPlayer) ? getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph) : null;
+                if (lbl != null) {
+                    lbl.setActive(true);
+                }
+            }
         }
 
         if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases
@@ -1317,6 +1334,9 @@ public final class CMatchUI
     public void afterGameEnd() {
         super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
+        if (tutorialOverlay != null) {
+            tutorialOverlay.detach();
+        }
         FThreads.invokeInEdtNowOrLater(() -> {
             if (isReplay()) {
                 SOverlayUtils.hideOverlay(); // the end-of-game screen would otherwise stay over the whole window

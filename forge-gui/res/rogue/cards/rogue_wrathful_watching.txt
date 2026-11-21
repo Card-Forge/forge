@@ -1,0 +1,5 @@
+Name:Wrathful - Watching
+ManaCost:no cost
+Types:Wrathful
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | EffectZone$ Command | Description$ Creatures your opponents control get +1/+1 and have vigilance.
+Oracle:Creatures your opponents control get +1/+1 and have vigilance.

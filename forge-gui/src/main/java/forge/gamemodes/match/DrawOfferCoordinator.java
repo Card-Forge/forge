@@ -106,8 +106,11 @@ public final class DrawOfferCoordinator {
         releaseInputQueues(game);
     }
 
-    /** Mirror concede: remote-client controllers have no event handler, so release their input queues. */
-    private static void releaseInputQueues(final Game game) {
+    // Remote-client controllers on the server have no FControlGameEventHandler,
+    // so their input queues won't be released by the normal event path.
+    // Iterate registered players (not getPlayers(), which excludes the
+    // conceding player after onPlayerLost removes them from ingamePlayers).
+    public static void releaseInputQueues(final Game game) {
         if (!game.isGameOver()) {
             return;
         }

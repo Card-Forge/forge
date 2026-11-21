@@ -91,7 +91,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             // for Simic Fluxmage and other
-            return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
 
         } else if (cType != null && cType.is(CounterEnumType.P1P1) && sa.hasParam("Defined")) {
             // something like Cyptoplast Root-kin
@@ -101,7 +101,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 }
             }
             // for Simic Fluxmage and other
-            if (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
+            if (!ph.isPlayerNextTurn(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
                 return false;
             }
             // Make sure that removing the last counter doesn't kill the creature
