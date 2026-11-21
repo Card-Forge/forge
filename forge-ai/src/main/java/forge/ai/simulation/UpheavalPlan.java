@@ -1,0 +1,178 @@
+package forge.ai.simulation;
+
+import forge.card.MagicColor;
+import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+/**
+ * Psychatog and Upheaval. Upheaval ({4}{U}{U}) returns every permanent to its owner's hand, the lands too, so the
+ * turn it is cast is the turn the lands are gone: the deck wins by floating the mana for Psychatog before the spell
+ * resolves, casting the Psychatog from the pool (with the land drop, if it is still free) onto a board that the opponent
+ * has to start again, and attacking with it next turn, fed by the cards of the hand and the graveyard.
+ * <ul>
+ * <li><b>When.</b> Upheaval is held until the lands (and what is already in the pool) are six for the spell and three
+ * for Psychatog, one less when the land drop is free, with a blue source for each of the three blue pips and a black
+ * one, a Psychatog in the hand or on the battlefield (it comes back to the hand), and the opponent has something to
+ * lose: four permanents or more.</li>
+ * <li><b>How.</b> Every untapped land is tapped for mana first, the colours that Psychatog needs first, so that the pool
+ * holds what the Upheaval does not use; the Upheaval is then paid from the pool.</li>
+ * <li><b>After.</b> In the same turn: Psychatog from the pool; when the pool is short, a land from the hand first.</li>
+ * </ul>
+ */
+public final class UpheavalPlan {
+    private static final String UPHEAVAL = "Upheaval";
+    private static final String PSYCHATOG = "Psychatog";
+    private static final int UPHEAVAL_COST = 6;
+    private static final int PSYCHATOG_COST = 3;
+    private static final int OPPONENT_PERMANENTS = 4;
+
+    private UpheavalPlan() {
+    }
+
+    /** Whether the deck has both cards: only then is Upheaval a combo piece and not a spell on its own. */
+    public static boolean isUpheavalDeck(final Player ai) {
+        boolean upheaval = false;
+        boolean atog = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Battlefield, ZoneType.Graveyard)) {
+            upheaval |= c.getName().equals(UPHEAVAL);
+            atog |= c.getName().equals(PSYCHATOG);
+        }
+        return upheaval && atog;
+    }
+
+    private static boolean upheavalCastThisTurn(final Player ai) {
+        return ai.getGame().getStack().getSpellsCastThisTurn().stream()
+                .anyMatch(sp -> ai.equals(sp.getActivatingPlayer()) && sp.getHostCard() != null
+                        && sp.getHostCard().getName().equals(UPHEAVAL));
+    }
+
+    private static boolean landDropFree(final Player ai) {
+        return ai.getLandsPlayedThisTurn() < ai.getMaxLandPlays();
+    }
+
+    /** Mana from the untapped lands and the pool, and the sources of blue and black among them. */
+    private static int[] mana(final Player ai) {
+        int total = ai.getManaPool().totalMana();
+        int blue = ai.getManaPool().getAmountOfColor(MagicColor.BLUE);
+        int black = ai.getManaPool().getAmountOfColor(MagicColor.BLACK);
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isLand() || c.isTapped()) {
+                continue;
+            }
+            total++;
+            final byte colors = OpeningHand.producedColors(c);
+            if ((colors & MagicColor.BLUE) != 0) {
+                blue++;
+            }
+            if ((colors & MagicColor.BLACK) != 0) {
+                black++;
+            }
+        }
+        return new int[] {total, blue, black};
+    }
+
+    /** Whether Upheaval is worth casting now: the mana, the Psychatog to put back, and something to bounce. */
+    public static boolean ready(final Player ai) {
+        if (!isUpheavalDeck(ai) || !LoopRunner.inHand(ai, UPHEAVAL)) {
+            return false;
+        }
+        boolean atog = LoopRunner.inHand(ai, PSYCHATOG);
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            atog |= c.getName().equals(PSYCHATOG);
+        }
+        if (!atog) {
+            return false;
+        }
+        final int[] m = mana(ai);
+        final int need = UPHEAVAL_COST + PSYCHATOG_COST - (landDropFree(ai) ? 1 : 0);
+        if (m[0] < need || m[1] < 3 || m[2] < 1) {
+            return false;
+        }
+        int theirs = 0;
+        for (final Player opp : ai.getOpponents()) {
+            theirs = Math.max(theirs, opp.getCardsIn(ZoneType.Battlefield).size());
+        }
+        return theirs >= OPPONENT_PERMANENTS;
+    }
+
+    /** The Upheaval waits for {@link #ready}: cast by the generic code it was a six-mana spell that took the AI's lands away. */
+    public static boolean held(final Player ai, final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        return host != null && sa.isSpell() && host.getName().equals(UPHEAVAL) && host.isInZone(ZoneType.Hand)
+                && isUpheavalDeck(ai) && !ready(ai) && !upheavalCastThisTurn(ai);
+    }
+
+    static SpellAbility next(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        if (!isUpheavalDeck(ai) || !ai.getGame().getStack().isEmpty()
+                || !(ai.getGame().getPhaseHandler().is(forge.game.phase.PhaseType.MAIN1, ai)
+                || ai.getGame().getPhaseHandler().is(forge.game.phase.PhaseType.MAIN2, ai))) {
+            return null;
+        }
+        if (upheavalCastThisTurn(ai)) {
+            return afterwards(ai, candidates, approve);
+        }
+        if (!ready(ai)) {
+            return null;
+        }
+        final SpellAbility tap = floatMana(ai, candidates, approve);
+        if (tap != null) {
+            return tap;
+        }
+        final SpellAbility upheaval = LoopRunner.castFromHand(ai, candidates, UPHEAVAL);
+        if (upheaval != null && approve.test(upheaval)) {
+            VetoLog.note(ai, "upheaval-plan | cast with the pool");
+            return upheaval;
+        }
+        return null;
+    }
+
+    /** One untapped land into the pool, black and blue first while the pool lacks them. */
+    private static SpellAbility floatMana(final Player ai, final List<SpellAbility> candidates,
+                                          final Predicate<SpellAbility> approve) {
+        final boolean needBlack = ai.getManaPool().getAmountOfColor(MagicColor.BLACK) == 0;
+        final boolean needBlue = ai.getManaPool().getAmountOfColor(MagicColor.BLUE) < 3;
+        SpellAbility any = null;
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host == null || !sa.isManaAbility() || !host.isLand() || host.isTapped() || !ai.equals(host.getController())
+                    || !host.isInZone(ZoneType.Battlefield)) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (!approve.test(sa)) {
+                continue;
+            }
+            final byte colors = ManaConversion.producedColors(sa);
+            if (needBlack && (colors & MagicColor.BLACK) != 0 || needBlue && (colors & MagicColor.BLUE) != 0) {
+                return sa;
+            }
+            if (any == null) {
+                any = sa;
+            }
+        }
+        return any;
+    }
+
+    /** The same turn: Psychatog out of the pool, and a land first when the pool is short of it. */
+    private static SpellAbility afterwards(final Player ai, final List<SpellAbility> candidates,
+                                           final Predicate<SpellAbility> approve) {
+        final SpellAbility atog = LoopRunner.castFromHand(ai, candidates, PSYCHATOG);
+        if (atog != null && forge.ai.ComputerUtilMana.canPayManaCost(atog, ai, 0, false) && approve.test(atog)) {
+            return atog;
+        }
+        if (atog != null && landDropFree(ai)) {
+            for (final SpellAbility sa : candidates) {
+                final Card host = sa == null ? null : sa.getHostCard();
+                if (host != null && sa.isLandAbility() && host.isInZone(ZoneType.Hand) && approve.test(sa)) {
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+}

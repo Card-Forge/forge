@@ -42,7 +42,7 @@ win | Entomb + Reanimate | Entomb | Reanimate / Animate Dead / Exhume
 win | Exquisite Blood + Sanguine Bond | Exquisite Blood | Sanguine Bond
 win | Exquisite Blood + Vizkopa Guildmage | Exquisite Blood | Vizkopa Guildmage
 win | Fblthp + Proteus Staff | Fblthp, the Lost | Proteus Staff
-win | Felidar Sovereign + Test of Endurance | Test of Endurance | Felidar Sovereign
+win | Felidar Sovereign + Test of Endurance | Serra Ascendant | Test of Endurance / Felidar Sovereign
 win | Flash + Protean Hulk | Flash | Protean Hulk
 win | Food Chain + Squee / Misthollow Griffin | Food Chain | Squee, the Immortal / Misthollow Griffin / Eternal Scourge
 win | Freed from the Real + Bloom Tender | Freed from the Real | Bloom Tender
@@ -51,7 +51,7 @@ win | Ghave + Ashnod's Altar | Ghave, Guru of Spores | Ashnod's Altar / Phyrexia
 win | Glimpse of Nature + Craterhoof Behemoth | Glimpse of Nature | Craterhoof Behemoth
 win | Godo + Helm of the Host | Godo, Bandit Warlord | Helm of the Host
 win | Grim Monolith + Power Artifact | Grim Monolith | Power Artifact
-win | Guiltfeeder + Mindcrank | Guiltfeeder | Mindcrank
+win | Guiltfeeder + Mindcrank | Mindcrank | Guiltfeeder / Syr Konrad, the Grim
 win | Heartbeat of Spring + Early Harvest | Heartbeat of Spring | Early Harvest
 win | Heliod, Sun-Crowned + Walking Ballista | Heliod, Sun-Crowned | Walking Ballista
 win | Hermit Druid + Dread Return | Hermit Druid | Dread Return
@@ -103,6 +103,7 @@ win | Sliver Queen + Mana Echoes | Sliver Queen | Mana Echoes
 win | Sneak Attack + Emrakul | Sneak Attack | Emrakul, the Aeons Torn / Griselbrand
 win | Spike Feeder + Archangel of Thune | Spike Feeder | Archangel of Thune
 win | Splinter Twin + Deceiver Exarch / Pestermite | Splinter Twin | Deceiver Exarch / Pestermite / Zealous Conscripts / Village Bell-Ringer
+win | Upheaval + Psychatog | Upheaval | Psychatog
 win | Tendrils + Lion's Eye Diamond + Infernal Tutor | Tendrils of Agony | Lion's Eye Diamond | Infernal Tutor
 win | Teysa + Painter's Servant + Blood Artist | Teysa, Orzhov Scion | Painter's Servant | Blood Artist
 win | Thassa's Oracle + Demonic Consultation | Thassa's Oracle | Demonic Consultation

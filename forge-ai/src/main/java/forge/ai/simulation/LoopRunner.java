@@ -85,6 +85,10 @@ public final class LoopRunner {
         if (tender != null) {
             return tender;
         }
+        final SpellAbility melira = meliraAndRedcap(ai, candidates, approve);
+        if (melira != null) {
+            return melira;
+        }
         final SpellAbility palinchron = highTideAndPalinchron(ai, candidates, target, approve);
         if (palinchron != null) {
             return palinchron;
@@ -96,6 +100,10 @@ public final class LoopRunner {
         final SpellAbility aluren = AlurenPlan.next(ai, candidates, target, approve);
         if (aluren != null) {
             return aluren;
+        }
+        final SpellAbility upheaval = UpheavalPlan.next(ai, candidates, approve);
+        if (upheaval != null) {
+            return upheaval;
         }
         final SpellAbility affinity = AffinityPlan.next(ai, candidates, approve);
         if (affinity != null) {
@@ -224,6 +232,33 @@ public final class LoopRunner {
                 MAX_ACTIVATIONS);
     }
 
+    /**
+     * Melira, Sylvok Outcast stops the -1/-1 counter of persist, so a Murderous Redcap that is sacrificed to Viscera Seer
+     * comes back at once with the same power and its enter trigger hits for two again: every Seer activation is two damage.
+     * Melira also gives the persist creature the SacMe mark, which is what makes the Seer pay with the Redcap.
+     */
+    private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
+                                                final Predicate<SpellAbility> approve) {
+        final Card melira = inPlay(ai, "Melira, Sylvok Outcast");
+        final Card redcap = inPlay(ai, "Murderous Redcap");
+        final Card seer = inPlay(ai, "Viscera Seer");
+        if (melira == null || redcap == null || seer == null || !redcap.hasKeyword(Keyword.PERSIST)
+                || redcap.getCounters(CounterEnumType.M1M1) > 0) {
+            return null;
+        }
+        final SpellAbility scry = activated(candidates, seer, ApiType.Scry);
+        if (scry == null) {
+            return null;
+        }
+        scry.setActivatingPlayer(ai);
+        scry.resetTargets();
+        if (RunawayLoop.exceeded(scry, MAX_ACTIVATIONS) || !approve.test(scry)) {
+            return null;
+        }
+        VetoLog.note(ai, "melira-loop | Seer sacrifices the Redcap");
+        return scry;
+    }
+
     /** Mana an X of the opponent's life needs from the Ballista (XX) and the pool must hold before it is cast. */
     private static int manaNeeded(final Player opp) {
         return Math.min(80, 2 * Math.max(1, opp.getLife()) + 2);
@@ -339,7 +374,7 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
-        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa) || RampPlan.wolfRunWaits(ai, sa)) {
+        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa) || RampPlan.wolfRunWaits(ai, sa) || UpheavalPlan.held(ai, sa)) {
             return true;
         }
         final String landfall = LandfallGuard.fetchProblem(ai, sa);

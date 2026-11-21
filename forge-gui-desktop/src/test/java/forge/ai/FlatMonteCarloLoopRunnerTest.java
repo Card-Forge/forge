@@ -1393,4 +1393,59 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("{1}{W}, {T}: the Equipment from the hand comes in without its five mana\n" + trace
                 + gameStateToString(game), inPlay);
     }
+
+    private void upheavalBoard(final int islands, final int swamps, final int opponentLands) {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", islands, ai);
+        addCards("Swamp", swamps, ai);
+        addCards("Plains", opponentLands, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalWaitsForTheManaOfPsychatogToo() {
+        upheavalBoard(5, 1, 5); // six lands: the spell, and nothing to float
+        final SpellAbility upheaval = spellOf("Upheaval");
+        AssertJUnit.assertFalse(forge.ai.simulation.UpheavalPlan.ready(ai));
+        AssertJUnit.assertTrue("the generic code does not take the lands away", LoopRunner.held(ai, upheaval));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsReadyWithNineLandsAndAnOpponentToReset() {
+        upheavalBoard(7, 2, 5);
+        AssertJUnit.assertTrue(forge.ai.simulation.UpheavalPlan.ready(ai));
+        AssertJUnit.assertFalse(LoopRunner.held(ai, spellOf("Upheaval")));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsNotCastOnAnEmptyBoard() {
+        upheavalBoard(7, 2, 1); // the opponent has a land and a creature: nothing worth the lands
+        AssertJUnit.assertFalse(forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithUpheavalPutsPsychatogOnAClearBoard() {
+        upheavalBoard(7, 2, 5);
+        runTurn();
+        boolean atog = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            atog |= c.getName().equals("Psychatog");
+        }
+        AssertJUnit.assertTrue("Upheaval from the pool, then Psychatog\n" + trace + gameStateToString(game), atog);
+        AssertJUnit.assertEquals("the opponent starts again", 0, opp.getCardsIn(ZoneType.Battlefield).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithMeliraRedcapAndSeerKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Forest", 2, ai);
+        for (final String name : new String[] {"Melira, Sylvok Outcast", "Murderous Redcap", "Viscera Seer"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Seer sacrifices the Redcap, Melira lets it persist back with no counter, and it hits for two\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
