@@ -1,0 +1,5 @@
+Name:Aetherwork - Spellwright's Press
+ManaCost:no cost
+Types:Trait
+R:Event$ Counter | ValidSA$ Spell | ValidCard$ Instant.!IsCommander+!copiedSpell+wasCastFromYourCommandByYou,Sorcery.!IsCommander+!copiedSpell+wasCastFromYourCommandByYou | Layer$ CantHappen | ActiveZones$ Command | Description$ Scrolls you cast cannot be countered.
+Oracle:Scrolls you cast cannot be countered.

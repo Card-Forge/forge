@@ -42,7 +42,12 @@ import java.util.regex.Pattern;
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 
-public abstract class SpellAbilityEffect {
+public abstract class SpellAbilityEffect implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AfterDescription", "ConditionDescription", "DefinedExiler", "ExiledWithEffectSource",
+        "Forecast", "GiftDescription", "Named", "ReturnAbility", "ReturnValid", "StackDescription",
+        "StartingWith", "ThisDefinedAndTgts",
+    };
 
     private static final Pattern IF_CONDITION_SENTENCE =
             Pattern.compile("(?s)If [^.]*\\.");
