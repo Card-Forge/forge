@@ -12,7 +12,7 @@
     - [deckCard](#deckcard)
     - [Union](#union)
     - [deck](#deck)
-    - [cardPackShop](#cardpackshop)
+    - [cardPackShop (Booster Packs)](#cardpackshop-booster-packs)
     - [landSketchbookShop](#landsketchbookshop)
     - [cardPack](#cardpack)
 - [Card filters](#card-filters)
@@ -63,7 +63,7 @@ Defines the type of reward. Type names are case-sensitive. A reward with an unkn
 | [`deckCard`](#deckcard) | Only used with rewards from [enemies](Create-Enemies.md). Functions as a `card` reward that is limited to cards found in that enemy's deck. |
 | [`Union`](#union) | A wrapper for multiple `card` instances that can have mutually exclusive filters. |
 | [`deck`](#deck) | Gives the player a whole deck, named by `precon`, `commanderPrecon` or `sourceDeck`. |
-| [`cardPackShop`](#cardpackshop) | Gives sealed booster packs, from `editions`, from a range of years, or of one color. |
+| [`cardPackShop`](#cardpackshop-booster-packs) | Gives sealed booster packs, from `editions`, from a range of years, or of one color. |
 | [`landSketchbookShop`](#landsketchbookshop) | Gives random Landscape Sketchbook items. |
 | [`cardPack`](#cardpack) | Set by game logic only. |
 
@@ -241,7 +241,7 @@ Claiming the reward reveals every card in the deck, puts the deck into the playe
 
 `count` and `addMaxCount` have no effect. A `deck` reward always gives one deck. If `precon` or `commanderPrecon` names a deck that does not exist, the reward gives nothing.
 
-## cardPackShop
+## cardPackShop (Booster Packs)
 `cardPackShop` rewards give sealed booster packs. Despite the name, they work anywhere a reward does, not only in shops. The edition's booster template decides the cards in each pack, so a Fallen Empires pack holds 8 cards with that set's rarity layout. A plane can override an edition's template. The plane's restricted cards never appear in any pack. The player receives each pack unopened and can open it later. Each pack's edition is chosen separately.
 
 ```json
