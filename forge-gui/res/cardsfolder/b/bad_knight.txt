@@ -1,0 +1,18 @@
+Name:Bad Knight
+ManaCost:B B
+Types:Creature Phyrexian Knight
+PT:2/2
+K:MayEffectFromOpeningDeck:ChooseTeam
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ChoicePrompt$ Join a Team | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$
+SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
+SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
+K:First Strike
+S:Mode$ CantBeCast | ValidCard$ Card.Self | Caster$ Player | EffectZone$ All | CheckSVar$ TeamMirran | Description$ You can't cast CARDNAME if you're on the Mirran team.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ ScorePoint | ReplacementResult$ NotReplaced | Description$ If CARDNAME is on the battlefield at the end of the game, score an additional point for the Phyrexian team.
+SVar:ScorePoint:DB$ Pump | Defined$ You | NoteNumber$ 1 | ConditionCheckSVar$ TotalOpponents | ConditionSVarCompare$ EQ1 | ScoreForTeam$ Phyrexian
+SVar:TotalOpponents:PlayerCountOpponents$Amount
+SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
+SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
+SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
+AI:RemoveDeck:All
+Oracle:First Strike\nYou can't cast Bad Knight if you're on the Mirran team.\nIf Bad Knight is on the battlefield at the end of the game, score an additional point for the Phyrexian team.

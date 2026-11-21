@@ -1,0 +1,17 @@
+Name:Unclaimed Blessing
+ManaCost:B
+Types:Instant
+K:MayEffectFromOpeningDeck:ChooseTeam
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0
+SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
+SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
+A:SP$ Branch | ValidTgts$ Creature | BranchConditionSVar$ TeamMirran | TrueSubAbility$ PutCounterMirran | FalseSubAbility$ Branch2 | SpellDescription$ Choose target creature. If you're on the Mirran team, put a +1/+1 counter on that creature and it gains lifelink until end of turn. If you're on the Phyrexian team, put a -1/-1 counter on that creature and it gains deathtouch until end of turn.
+SVar:PutCounterMirran:DB$ PutCounter | Defined$ ParentTarget | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpMirran | StackDescription$ Put a +1/+1 counter on that creature and it gains lifelink until end of turn.
+SVar:DBPumpMirran:DB$ Pump | Defined$ ParentTarget | KW$ Lifelink
+SVar:Branch2:DB$ Branch | BranchConditionSVar$ TeamPhyrexian | TrueSubAbility$ PutCounterPhyrexian
+SVar:PutCounterPhyrexian:DB$ PutCounter | Defined$ ParentTarget | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBPumpPhyrexian | StackDescription$ Put a -1/-1 counter on that creature and it gains deathtouch until end of turn.
+SVar:DBPumpPhyrexian:DB$ Pump | Defined$ ParentTarget | KW$ Deathtouch
+SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
+SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
+SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
+Oracle:Choose target creature. If you're on the Mirran team, put a +1/+1 counter on that creature and it gains lifelink until end of turn. If you're on the Phyrexian team, put a -1/-1 counter on that creature and it gains deathtouch until end of turn.

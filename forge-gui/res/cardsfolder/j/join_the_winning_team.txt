@@ -1,0 +1,10 @@
+Name:Join the Winning Team
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature,Planeswalker,Equipment | LoseControl$ EOT | Untap$ True | RememberControlled$ True | AddKWs$ Haste | SubAbility$ DBAttach | SpellDescription$ Gain control of target creature, planeswalker, or equipment until end of turn. Untap that permanent. It gains haste until end of turn. If it's an equipment, attach it to a creature you control. Score one point for your team.\nExile Join the Winning Team.
+SVar:DBAttach:DB$ Attach | Object$ Remembered | Move$ True | Choices$ Creature.YouCtrl | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBScore
+SVar:DBScore:DB$ Pump | Defined$ You | NoteNumber$ 1 | ScoreForTeam$ YourTeam | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:ALWAYS
+Oracle:Gain control of target creature, planeswalker, or equipment until end of turn. Untap that permanent. It gains haste until end of turn. If it's an equipment, attach it to a creature you control. Score one point for your team.\nExile Join the Winning Team.
