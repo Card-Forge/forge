@@ -107,20 +107,20 @@ public class ScryfallSetSyncTest {
     }
 
     private static String cdnUrl(String uuid) {
-        return "https://cards.scryfall.io/normal/front/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".jpg";
+        return "https://cards.scryfall.io/grid/front/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".webp";
     }
 
     private static String singleFaced(String id, String cn, String lang) {
         return String.format(
-                "{\"id\":\"%s\",\"collector_number\":\"%s\",\"lang\":\"%s\",\"image_uris\":{\"normal\":\"%s\"}}",
+                "{\"id\":\"%s\",\"collector_number\":\"%s\",\"lang\":\"%s\",\"image_uris\":{\"grid\":\"%s\"}}",
                 id, cn, lang, cdnUrl(id));
     }
 
     private static String doubleFaced(String id, String cn, String lang, String frontUuid, String backUuid) {
         return String.format(
                 "{\"id\":\"%s\",\"collector_number\":\"%s\",\"lang\":\"%s\",\"card_faces\":["
-                        + "{\"image_uris\":{\"normal\":\"%s\"}},"
-                        + "{\"image_uris\":{\"normal\":\"%s\"}}]}",
+                        + "{\"image_uris\":{\"grid\":\"%s\"}},"
+                        + "{\"image_uris\":{\"grid\":\"%s\"}}]}",
                 id, cn, lang, cdnUrl(frontUuid), cdnUrl(backUuid));
     }
 
@@ -144,10 +144,10 @@ public class ScryfallSetSyncTest {
         pages.put(1, page(false, 1,
                 singleFaced("11111111-1111-1111-1111-111111111111", "1", "en")));
 
-        String url = resolveAfterSync("neo", "1", "en", "front", "normal");
+        String url = resolveAfterSync("neo", "1", "en", "front", "grid");
 
         Assert.assertEquals(url,
-                CdnUuidCache.cdnUrl("11111111-1111-1111-1111-111111111111", "front", "normal"));
+                CdnUuidCache.cdnUrl("11111111-1111-1111-1111-111111111111", "front", "grid"));
         Assert.assertTrue(new File(localCacheDir, "neo.json.gz").exists());
     }
 
@@ -158,12 +158,12 @@ public class ScryfallSetSyncTest {
                         "aaaaaaaa-0000-0000-0000-000000000001",
                         "bbbbbbbb-0000-0000-0000-000000000002")));
 
-        String front = resolveAfterSync("sld", "5", "en", "front", "normal");
-        String back  = CdnUuidCache.getCdnUrl("sld", "5", "en", "back", "normal"); // set already synced by now
+        String front = resolveAfterSync("sld", "5", "en", "front", "grid");
+        String back  = CdnUuidCache.getCdnUrl("sld", "5", "en", "back", "grid"); // set already synced by now
 
-        Assert.assertEquals(front, CdnUuidCache.cdnUrl("aaaaaaaa-0000-0000-0000-000000000001", "front", "normal"),
+        Assert.assertEquals(front, CdnUuidCache.cdnUrl("aaaaaaaa-0000-0000-0000-000000000001", "front", "grid"),
                 "front face UUID should come from card_faces[0].image_uris, not the card id");
-        Assert.assertEquals(back, CdnUuidCache.cdnUrl("bbbbbbbb-0000-0000-0000-000000000002", "back", "normal"),
+        Assert.assertEquals(back, CdnUuidCache.cdnUrl("bbbbbbbb-0000-0000-0000-000000000002", "back", "grid"),
                 "back face UUID should come from card_faces[1].image_uris, distinct from front");
     }
 
@@ -174,9 +174,9 @@ public class ScryfallSetSyncTest {
                         "cccccccc-0000-0000-0000-000000000003",
                         "cccccccc-0000-0000-0000-000000000003")));
 
-        String back = resolveAfterSync("neo", "6", "en", "back", "normal");
+        String back = resolveAfterSync("neo", "6", "en", "back", "grid");
 
-        Assert.assertEquals(back, CdnUuidCache.cdnUrl("cccccccc-0000-0000-0000-000000000003", "back", "normal"));
+        Assert.assertEquals(back, CdnUuidCache.cdnUrl("cccccccc-0000-0000-0000-000000000003", "back", "grid"));
     }
 
     @Test
@@ -184,8 +184,8 @@ public class ScryfallSetSyncTest {
         pages.put(1, page(true, 1, singleFaced("dddddddd-0000-0000-0000-000000000001", "1", "en")));
         pages.put(2, page(false, 2, singleFaced("eeeeeeee-0000-0000-0000-000000000002", "2", "en")));
 
-        String url1 = resolveAfterSync("neo", "1", "en", "front", "normal");
-        String url2 = CdnUuidCache.getCdnUrl("neo", "2", "en", "front", "normal"); // set already synced by now
+        String url1 = resolveAfterSync("neo", "1", "en", "front", "grid");
+        String url2 = CdnUuidCache.getCdnUrl("neo", "2", "en", "front", "grid"); // set already synced by now
 
         Assert.assertNotNull(url1);
         Assert.assertNotNull(url2);
@@ -195,7 +195,7 @@ public class ScryfallSetSyncTest {
     @Test
     public void unknownSet_returns404_lookupIsNullWithoutThrowing() throws UnsupportedEncodingException {
         // No page registered for "xyz" -> handle() serves a 404, same as Scryfall for no matches.
-        String url = resolveAfterSync("xyz", "1", "en", "front", "normal");
+        String url = resolveAfterSync("xyz", "1", "en", "front", "grid");
 
         Assert.assertNull(url);
         Assert.assertFalse(new File(localCacheDir, "xyz.json.gz").exists());
@@ -214,8 +214,8 @@ public class ScryfallSetSyncTest {
         pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "1", "en")));
         ScryfallSetSync.sync("neo"); // direct call, bypassing CdnUuidCache's backgrounding entirely
 
-        String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "normal");
-        Assert.assertEquals(url, CdnUuidCache.cdnUrl("ffffffff-0000-0000-0000-000000000001", "front", "normal"),
+        String url = CdnUuidCache.getCdnUrl("neo", "1", "en", "front", "grid");
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl("ffffffff-0000-0000-0000-000000000001", "front", "grid"),
                 "pre-existing entries must win over a freshly-synced one");
     }
 
@@ -223,7 +223,7 @@ public class ScryfallSetSyncTest {
     public void searchQuery_scopesToSetAndEnglish() throws UnsupportedEncodingException {
         pages.put(1, page(false, 1, singleFaced("11111111-2222-3333-4444-555555555555", "1", "en")));
 
-        resolveAfterSync("ltr", "1", "en", "front", "normal");
+        resolveAfterSync("ltr", "1", "en", "front", "grid");
 
         Assert.assertNotNull(lastQuery);
         String decoded = URLDecoder.decode(lastQuery, StandardCharsets.UTF_8);
@@ -250,7 +250,7 @@ public class ScryfallSetSyncTest {
                 "{\"1\":{\"en\":\"11111111-0000-0000-0000-000000000001\"},"
                         + "\"9\":{\"en\":{\"miss\":\"" + java.time.Instant.now() + "\"}}}");
 
-        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "grid");
 
         Assert.assertNull(url);
         Assert.assertEquals(requestCount.get(), 0, "a fresh miss must not hit Scryfall again");
@@ -262,12 +262,12 @@ public class ScryfallSetSyncTest {
                 "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
         pages.put(1, page(false, 1, singleFaced("99999999-0000-0000-0000-000000000009", "9", "en")));
 
-        String immediate = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        String immediate = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "grid");
         Assert.assertNull(immediate, "the retry is only queued, not run synchronously");
         CdnUuidCache.syncPendingSets();
 
-        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
-        Assert.assertEquals(url, CdnUuidCache.cdnUrl("99999999-0000-0000-0000-000000000009", "front", "normal"));
+        String url = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "grid");
+        Assert.assertEquals(url, CdnUuidCache.cdnUrl("99999999-0000-0000-0000-000000000009", "front", "grid"));
         Assert.assertEquals(requestCount.get(), 1, "a stale miss should trigger exactly one retry");
     }
 
@@ -277,11 +277,11 @@ public class ScryfallSetSyncTest {
                 "{\"9\":{\"en\":{\"miss\":\"2020-01-01T00:00:00Z\"}}}");
         // No page registered -> 404, same as Scryfall finding nothing for this set.
 
-        CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal"); // queues the retry
+        CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "grid"); // queues the retry
         CdnUuidCache.syncPendingSets();
         Assert.assertEquals(requestCount.get(), 1, "the stale miss should have triggered one retry");
 
-        String second = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "normal");
+        String second = CdnUuidCache.getCdnUrl("neo", "9", "en", "front", "grid");
         Assert.assertNull(second);
         Assert.assertEquals(requestCount.get(), 1, "the refreshed miss timestamp should prevent an immediate second retry");
     }

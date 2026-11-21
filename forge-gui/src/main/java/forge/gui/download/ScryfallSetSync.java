@@ -92,17 +92,17 @@ final class ScryfallSetSync {
         String front;
         String back = null;
         if (card.has("image_uris") && card.get("image_uris").isJsonObject()) {
-            front = uuidFromUrl(normalUrl(card.getAsJsonObject("image_uris")));
+            front = uuidFromUrl(gridUrl(card.getAsJsonObject("image_uris")));
         } else if (card.has("card_faces") && card.get("card_faces").isJsonArray()) {
             JsonArray faces = card.getAsJsonArray("card_faces");
             if (faces.size() == 0) return null;
             JsonObject face0 = faces.get(0).getAsJsonObject();
             if (!face0.has("image_uris") || !face0.get("image_uris").isJsonObject()) return null;
-            front = uuidFromUrl(normalUrl(face0.getAsJsonObject("image_uris")));
+            front = uuidFromUrl(gridUrl(face0.getAsJsonObject("image_uris")));
             if (faces.size() > 1) {
                 JsonObject face1 = faces.get(1).getAsJsonObject();
                 if (face1.has("image_uris") && face1.get("image_uris").isJsonObject()) {
-                    back = uuidFromUrl(normalUrl(face1.getAsJsonObject("image_uris")));
+                    back = uuidFromUrl(gridUrl(face1.getAsJsonObject("image_uris")));
                 }
             }
         } else {
@@ -111,9 +111,9 @@ final class ScryfallSetSync {
         return front == null ? null : new String[]{front, back};
     }
 
-    /** Reads an {@code image_uris} object and returns the value of the {@code normal} key. */
-    private static String normalUrl(JsonObject imageUris) {
-        return imageUris.has("normal") ? imageUris.get("normal").getAsString() : null;
+    /** Reads an {@code image_uris} object and returns the value of the {@code grid} key. */
+    private static String gridUrl(JsonObject imageUris) {
+        return imageUris.has("grid") ? imageUris.get("grid").getAsString() : null;
     }
 
     /** UUID segment of a Scryfall CDN URL, or {@code null} for a non-CDN placeholder URL. */

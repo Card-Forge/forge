@@ -1,5 +1,6 @@
 package forge.assets;
 
+import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.Aggregates;
@@ -330,7 +332,8 @@ public enum FSkinTexture implements FImage {
 
         FileHandle preferredFile;
         if (isPlanechaseBG) {
-            preferredFile = FSkin.getCachePlanechaseFile(filename);
+            File cached = ImageKeys.getCachedFile(new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename));
+            preferredFile = FSkin.getCachePlanechaseFile(cached == null ? filename : cached.getName());
         } else if (isAdventureBackground()) {
             // For adventure backgrounds, check adventure directories first
             preferredFile = getAdventureBackgroundFile();

@@ -247,7 +247,7 @@ public class ImageCache {
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
             File tokenFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename);
-            return tokenFile.exists();
+            return ImageKeys.getCachedFile(tokenFile) != null;
         }
 
         return true;
@@ -457,18 +457,22 @@ public class ImageCache {
         }
     }
 
-    // iOS downloaded images (Documents/cache) decode via CardTextureData so the AssetManager owns their
-    // whole lifecycle; every other card image uses the stock file decode. This selects a decode PARAMETER
-    // only — it caches/gets/unloads nothing.
+    // Card images decode via CardTextureData, which samples the border colour on the loader thread, so
+    // getpixelColorOnce doesn't decode the file again on the render thread. iOS downloaded images
+    // (Documents/cache) are also downscaled. This selects a decode PARAMETER only — it caches/gets/unloads nothing.
     private static TextureParameter cardTextureParameter(String fileName) {
+        TextureParameter p = new TextureParameter();
         if (isDownloadedCardImage(fileName)) {
-            TextureParameter p = new TextureParameter();
-            p.textureData = new CardTextureData(fileName);
+            p.textureData = new CardTextureData(fileName, false, true);
             p.minFilter = Texture.TextureFilter.Linear;
             p.magFilter = Texture.TextureFilter.Linear;
-            return p;
+        } else {
+            TextureParameter shared = Forge.getAssets().getTextureFilter();
+            p.textureData = new CardTextureData(fileName, shared.genMipMaps, false);
+            p.minFilter = shared.minFilter;
+            p.magFilter = shared.magFilter;
         }
-        return Forge.getAssets().getTextureFilter();
+        return p;
     }
 
     private static boolean isDownloadedCardImage(String absolutePath) {
@@ -546,10 +550,10 @@ public class ImageCache {
         }
     }
 
-    // The path key for a texture, derived from the manager-owned TextureData: CardTextureData for iOS
-    // downloaded cards, FileTextureData for everything loaded from a file. Both resolve to the same
-    // absolute path loadAsset keyed updateImageRecord by, so border lookups match. Non-file textures
-    // fall back to toString().
+    // The path key for a texture, derived from the manager-owned TextureData: CardTextureData for card
+    // images and WebP images, FileTextureData for everything else loaded from a file. Both
+    // resolve to the same absolute path loadAsset keyed updateImageRecord by, so border lookups match.
+    // Non-file textures fall back to toString().
     private String getTextureKey(Texture t) {
         if (t == null) return null;
         TextureData d = t.getTextureData();
@@ -675,17 +679,29 @@ public class ImageCache {
     private String getpixelColorOnce(Texture t) {
         try {
             TextureData data = t.getTextureData();
+            if (data instanceof CardTextureData card && card.getBorderColor() != null)
+                return card.getBorderColor();
             if (!data.isPrepared()) data.prepare();
-            // Sample the same spot as before the optimization: just inside the cropped card border. The raw corner
-            // (1,1) is transparent or scan-white on images with rounded corners and misclassifies the border color.
-            final com.badlogic.gdx.graphics.g2d.TextureRegion region = croppedBorderImage(t);
             Pixmap pixmap = data.consumePixmap();
-            Color color = new Color(pixmap.getPixel(region.getRegionX() + 1, region.getRegionY() + 1));
+            String color = sampleBorderColor(pixmap, getTextureKey(t));
             pixmap.dispose();
-            return color.toString();
+            return color;
         } catch (Exception e) {
             return Color.valueOf("#171717").toString();
         }
+    }
+
+    // Sample just inside the cropped card border. The raw corner
+    // (1,1) is transparent or scan-white on images with rounded corners and misclassifies the border color.
+    static String sampleBorderColor(Pixmap pixmap, String textureKey) {
+        int x = 1, y = 1;
+        // the corner of the region croppedBorderImage keeps
+        if (textureKey != null && (textureKey.contains(".fullborder.") || textureKey.contains("tokens"))) {
+            int w = pixmap.getWidth(), h = pixmap.getHeight();
+            x += Math.round((w - Math.round(w * 0.96f)) / 2f);
+            y += Math.round((h - Math.round(h * 0.96f)) / 2f) - 2;
+        }
+        return new Color(pixmap.getPixel(x, y)).toString();
     }
 
     public Pair<String, Boolean> isCloserToWhite(String c) {

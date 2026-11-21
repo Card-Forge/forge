@@ -332,8 +332,8 @@ public class ImageCache {
         if (key == null || key.isEmpty()) {
             return null;
         }
-        final File f = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key));
-        if (!f.exists()) {
+        final File f = ImageKeys.getCachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
+        if (f == null) {
             return null;
         }
         try {
@@ -349,8 +349,8 @@ public class ImageCache {
         if (key == null || key.isEmpty()) {
             return null;
         }
-        final File f = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key));
-        if (!f.exists()) {
+        final File f = ImageKeys.getCachedFile(new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key)));
+        if (f == null) {
             return null;
         }
         try {

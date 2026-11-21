@@ -3,17 +3,26 @@ package forge.ios;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
+import java.util.function.BiFunction;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.robovm.apple.coregraphics.CGBitmapContext;
+import org.robovm.apple.coregraphics.CGBitmapInfo;
+import org.robovm.apple.coregraphics.CGColorSpace;
+import org.robovm.apple.coregraphics.CGImage;
+import org.robovm.apple.coregraphics.CGImageAlphaInfo;
+import org.robovm.apple.coregraphics.CGRect;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.foundation.NSTimeZone;
 import org.robovm.apple.foundation.NSBundle;
 import org.robovm.apple.foundation.NSProcessInfo;
 import org.robovm.apple.uikit.UIApplication;
+import org.robovm.apple.uikit.UIImage;
 import org.robovm.apple.uikit.UIPasteboard;
 import java.io.File;
 
@@ -404,6 +413,29 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void convertToPNG(InputStream input, OutputStream output) throws IOException {
             convertToJPEG(input, output);
+        }
+
+        @Override
+        public void decodeWebp(File file, BiFunction<Integer, Integer, ByteBuffer> rgba) throws IOException {
+            try (NSAutoreleasePool pool = new NSAutoreleasePool()) {
+                CGImage cg;
+                try {
+                    cg = new UIImage(file).getCGImage();
+                } catch (RuntimeException e) {
+                    throw new IOException("Not a WebP image", e);
+                }
+                if (cg == null)
+                    throw new IOException("Not a WebP image");
+                int w = (int) cg.getWidth(), h = (int) cg.getHeight();
+                byte[] pixels = new byte[w * h * 4];
+                // CoreGraphics only draws premultiplied alpha, which leaves opaque card images unchanged
+                CGBitmapContext ctx = CGBitmapContext.create(pixels, w, h, 8, w * 4L, CGColorSpace.createDeviceRGB(),
+                        new CGBitmapInfo(CGBitmapInfo.ByteOrder32Big.value() | CGImageAlphaInfo.PremultipliedLast.value()));
+                if (ctx == null)
+                    throw new IOException("No bitmap for a " + w + "x" + h + " image");
+                ctx.drawImage(new CGRect(0, 0, w, h), cg);
+                rgba.apply(w, h).put(pixels);
+            }
         }
 
         @Override

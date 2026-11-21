@@ -9,31 +9,44 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import forge.Forge;
+import forge.util.ImageUtil;
+
 /**
- * TextureData for downloaded card images (iOS Documents/cache), supplied to the AssetManager via
- * {@link com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter#textureData}. The stock
+ * TextureData for card images and for WebP images on every platform,
+ * supplied to the AssetManager via {@link com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter#textureData}. The stock
  * TextureLoader honours a preset textureData and ignores the resolved FileHandle, so the AssetManager
  * owns the whole lifecycle (load/get/unload/dispose/context-loss reload) while the actual decode stays
  * a plain java.io byte read — iOS can't reliably load a libGDX FileHandle from Documents, but reading
- * bytes directly is proven. Downscales to at most {@link #MAX_CARD_TEX_DIM}px on the longest side since
- * the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so getpixelColor's
- * prepare/consumePixmap border sampling and GL context-loss reload both re-decode from disk.
+ * bytes directly is proven. WebP images are decoded by the platform, straight into the pixmap. iOS card
+ * images are downscaled to at most {@link #MAX_CARD_TEX_DIM}px on the longest side since the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so GL context-loss
+ * reload re-decodes from disk. The border colour is sampled while decoding, so ImageCache doesn't decode again.
  */
 final class CardTextureData implements TextureData {
     private static final int MAX_CARD_TEX_DIM = 512;
 
     private final String path;
+    // a mipmap min filter samples black from a texture uploaded without mipmaps
+    private final boolean useMipMaps;
+    private final boolean downscale;
+    private volatile String borderColor;
     private int width, height;
     private Format format = Format.RGBA8888; // real format set in prepare(); safe default pre-prepare
     private Pixmap pixmap;
     private boolean prepared;
 
-    CardTextureData(String path) {
+    CardTextureData(String path, boolean useMipMaps, boolean downscale) {
         this.path = path;
+        this.useMipMaps = useMipMaps;
+        this.downscale = downscale;
     }
 
     String getPath() {
         return path;
+    }
+
+    String getBorderColor() {
+        return borderColor;
     }
 
     @Override
@@ -50,7 +63,10 @@ final class CardTextureData implements TextureData {
     public void prepare() {
         if (prepared)
             throw new GdxRuntimeException("Already prepared");
-        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path));
+        Pixmap p = GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path);
+        if (downscale)
+            p = downscale(p);
+        borderColor = ImageCache.sampleBorderColor(p, path);
         pixmap = p;
         width = p.getWidth();
         height = p.getHeight();
@@ -63,7 +79,7 @@ final class CardTextureData implements TextureData {
         if (!prepared)
             throw new GdxRuntimeException("Call prepare() before consumePixmap()");
         // mirror FileTextureData: hand off the pixmap and un-prepare so the data can be re-prepared
-        // (getpixelColor border sampling, GL context-loss reload)
+        // (GL context-loss reload)
         prepared = false;
         Pixmap p = pixmap;
         pixmap = null;
@@ -92,7 +108,7 @@ final class CardTextureData implements TextureData {
 
     @Override
     public boolean useMipMaps() {
-        return false;
+        return useMipMaps;
     }
 
     @Override
@@ -108,6 +124,8 @@ final class CardTextureData implements TextureData {
     // Proven iOS read: java.io bytes, not a libGDX FileHandle.
     private static Pixmap decodeFromDisk(String path) {
         File f = new File(path);
+        if (ImageUtil.isWebp(f))
+            return decodeWebp(f);
         byte[] bytes = new byte[(int) f.length()];
         FileInputStream fis = null;
         try {
@@ -123,6 +141,19 @@ final class CardTextureData implements TextureData {
             }
         }
         return new Pixmap(bytes, 0, bytes.length);
+    }
+
+    private static Pixmap decodeWebp(File f) {
+        Pixmap[] pixmap = new Pixmap[1];
+        try {
+            // a duplicate, so the platform's writes don't move the position GL uploads from
+            Forge.getDeviceAdapter().decodeWebp(f, (w, h) -> (pixmap[0] = new Pixmap(w, h, Format.RGBA8888)).getPixels().duplicate());
+        } catch (IOException | RuntimeException e) {
+            if (pixmap[0] != null)
+                pixmap[0].dispose();
+            throw new GdxRuntimeException("Failed decoding card image: " + f, e);
+        }
+        return pixmap[0];
     }
 
     // Cap the longest side at MAX_CARD_TEX_DIM; returns src unchanged when already small enough,

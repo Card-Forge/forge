@@ -1,6 +1,7 @@
 package forge.gui.download;
 
 import com.google.common.collect.Iterables;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
@@ -130,7 +131,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                              (!imageKey.contains(".full") ? ".fullborder" : "");
         final File destFb = new File(ForgeConstants.CACHE_CARD_PICS_DIR, fbKey + ".jpg");
 
-        if (destFull.exists() || destFb.exists()) return;
+        if (ImageKeys.getCachedFile(destFull) != null || ImageKeys.getCachedFile(destFb) != null) return;
         if (downloads.containsKey(destFull.getAbsolutePath())) return;
         if (downloads.containsKey(destFb.getAbsolutePath())) return;
 
@@ -160,7 +161,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         // below if the warm-up loop above didn't resolve this set.
         if (edition != null && hasCollectorNum && hasScryfallCode) {
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(
-                    scryfallCode, collectorNum, langCode, face, "normal");
+                    scryfallCode, collectorNum, langCode, face, "grid");
             if (cdnUrl != null) return cdnUrl;
         }
 

@@ -12,13 +12,16 @@ import javax.imageio.ImageIO;
 import java.awt.Desktop;
 import java.awt.SplashScreen;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public class Main {
     private static final String versionString = BuildInfo.getVersionString();
@@ -150,6 +153,31 @@ public class Main {
         public void convertToPNG(InputStream input, OutputStream output) throws IOException {
             BufferedImage image = ImageIO.read(input);
             ImageIO.write(image, "png", output);
+        }
+
+        @Override
+        public void decodeWebp(File file, BiFunction<Integer, Integer, ByteBuffer> rgba) throws IOException {
+            BufferedImage image = ImageIO.read(file);
+            if (image == null)
+                throw new IOException("Not a WebP image");
+            int w = image.getWidth(), h = image.getHeight();
+            byte[] pixels = new byte[w * h * 4];
+            if (image.getType() == BufferedImage.TYPE_3BYTE_BGR) {
+                // getRGB converts each pixel through the colour model, which costs more than this copy
+                byte[] bgr = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+                for (int i = 0, j = 0; j < bgr.length; i += 4, j += 3) {
+                    pixels[i] = bgr[j + 2];
+                    pixels[i + 1] = bgr[j + 1];
+                    pixels[i + 2] = bgr[j];
+                    pixels[i + 3] = (byte) 0xFF;
+                }
+            } else {
+                int[] argb = image.getRGB(0, 0, w, h, null, 0, w);
+                for (int i = 0; i < argb.length; i++)
+                    argb[i] = argb[i] << 8 | argb[i] >>> 24;
+                ByteBuffer.wrap(pixels).asIntBuffer().put(argb);
+            }
+            rgba.apply(w, h).put(pixels);
         }
 
         @Override

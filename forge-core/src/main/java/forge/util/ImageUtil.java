@@ -14,6 +14,9 @@ import forge.item.PaperToken;
 import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URLEncoder;
 
 public class ImageUtil {
@@ -230,7 +233,7 @@ public class ImageUtil {
             cardCollectorNumber = cardCollectorNumber.substring(1);
         }
 
-        String versionParam = useArtCrop ? "art_crop" : "normal";
+        String versionParam = useArtCrop ? "art" : "grid";
         String faceParam = "";
 
         if (cp.getRules().getSplitType() == CardSplitType.Meld) {
@@ -262,7 +265,7 @@ public class ImageUtil {
     }
 
     public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam) {
-        String versionParam = "normal";
+        String versionParam = "grid";
         if (!faceParam.isEmpty()) {
             faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
         }
@@ -287,6 +290,22 @@ public class ImageUtil {
             // Unlikely, for the possibility that "UTF-8" is not supported.
             System.err.println("UTF-8 encoding not supported on this device.");
             return s;
+        }
+    }
+
+    public static boolean isWebp(byte[] head) {
+        return head.length >= 12
+                && head[0] == 'R' && head[1] == 'I' && head[2] == 'F' && head[3] == 'F'
+                && head[8] == 'W' && head[9] == 'E' && head[10] == 'B' && head[11] == 'P';
+    }
+
+    /** Whether the file holds WebP data, whatever it is named. */
+    public static boolean isWebp(File file) {
+        byte[] head = new byte[12];
+        try (FileInputStream in = new FileInputStream(file)) {
+            return in.read(head) == head.length && isWebp(head);
+        } catch (IOException e) {
+            return false;
         }
     }
 
