@@ -1273,8 +1273,11 @@ public class ComputerUtilCard {
             } else if (logic.equals("MostProminentInActivePlayerHand")) {
                 chosen.add(getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
             } else if (logic.equals("MostProminentInComputerDeckButGreen")) {
-                List<String> prominence = getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
-                if (prominence.get(0).equals(MagicColor.Constant.GREEN)) {
+                CardCollection aiCards = CardLists.filterControlledBy(game.getCardsInGame(), ai);
+                List<String> prominence = getColorByProminence(aiCards);
+                // a mono-green deck is better served by green than by a color it has no cards of
+                if (prominence.get(0).equals(MagicColor.Constant.GREEN)
+                        && aiCards.anyMatch(c -> c.getColor().hasAnyColor(MagicColor.ALL_COLORS & ~MagicColor.GREEN))) {
                     chosen.add(prominence.get(1));
                 } else {
                     chosen.add(prominence.get(0));
