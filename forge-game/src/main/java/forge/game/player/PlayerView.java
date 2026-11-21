@@ -293,6 +293,9 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumLandThisTurn, p.getLandsPlayedThisTurn());
     }
 
+    public int getPoisonCountersToLose() { return get(TrackableProperty.PoisonCountersToLose);}
+    void updatePoisonCountersToLose(Player p) { set(TrackableProperty.PoisonCountersToLose, p.getPoisonCountersToLose());}
+
     public int getNumManaShards() {
         return get(TrackableProperty.NumManaShards);
     }

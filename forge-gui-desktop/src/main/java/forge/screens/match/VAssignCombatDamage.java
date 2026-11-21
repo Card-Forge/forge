@@ -461,7 +461,7 @@ public class VAssignCombatDamage {
         if (card == null) {
             if (defender instanceof PlayerView) {
                 final PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? matchUI.getGameView().getPoisonCountersToLose() - p.getCounters(CounterEnumType.POISON) : p.getLife();
+                lethalDamage = attackerHasInfect ? p.getPoisonCountersToLose() - p.getCounters(CounterEnumType.POISON) : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;

@@ -1,0 +1,8 @@
+Name:Long-Term Phyresis Study
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 1 | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return up to one target creature card from your graveyard to your hand. Then, draw a card.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)\nWhen Long-Term Phyresis Study enters the battlefield, return up to one target creature card from your graveyard to your hand. Then, draw a card.
