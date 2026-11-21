@@ -20,7 +20,7 @@ win | Bloodchief Ascension + Mindcrank | Bloodchief Ascension | Mindcrank
 win | Bloodletter of Aclazotz + Unstoppable Slasher | Bloodletter of Aclazotz | Unstoppable Slasher
 win | Bomberman + Walking Ballista | Auriok Salvagers | Lion's Eye Diamond | Walking Ballista
 win | Bruvac + Maddening Cacophony | Bruvac the Grandiloquent | Maddening Cacophony / Traumatize
-win | Cephali Illusionist + Nomads en-Kor | Cephalid Illusionist | Nomads en-Kor / Shuko
+win | Cephalid Illusionist + Nomads en-Kor | Cephalid Illusionist | Nomads en-Kor / Shuko
 win | Channel + Banefire | Channel | Banefire
 win | Channel + Fireball | Channel | Fireball
 win | Channel + Ulamog, the Ceaseless Hunger | Channel | Ulamog, the Ceaseless Hunger
@@ -42,7 +42,7 @@ win | Entomb + Reanimate | Entomb | Reanimate / Animate Dead / Exhume
 win | Exquisite Blood + Sanguine Bond | Exquisite Blood | Sanguine Bond
 win | Exquisite Blood + Vizkopa Guildmage | Exquisite Blood | Vizkopa Guildmage
 win | Fblthp + Proteus Staff | Fblthp, the Lost | Proteus Staff
-win | Felidar Sovereign + Test of Endurance | Serra Ascendant | Felidar Sovereign
+win | Felidar Sovereign + Test of Endurance | Test of Endurance | Felidar Sovereign
 win | Flash + Protean Hulk | Flash | Protean Hulk
 win | Food Chain + Squee / Misthollow Griffin | Food Chain | Squee, the Immortal / Misthollow Griffin / Eternal Scourge
 win | Freed from the Real + Bloom Tender | Freed from the Real | Bloom Tender
@@ -51,7 +51,7 @@ win | Ghave + Ashnod's Altar | Ghave, Guru of Spores | Ashnod's Altar / Phyrexia
 win | Glimpse of Nature + Craterhoof Behemoth | Glimpse of Nature | Craterhoof Behemoth
 win | Godo + Helm of the Host | Godo, Bandit Warlord | Helm of the Host
 win | Grim Monolith + Power Artifact | Grim Monolith | Power Artifact
-win | Guiltfeeder + Mindcrank | Syr Konrad, the Grim | Mindcrank
+win | Guiltfeeder + Mindcrank | Guiltfeeder | Mindcrank
 win | Heartbeat of Spring + Early Harvest | Heartbeat of Spring | Early Harvest
 win | Heliod, Sun-Crowned + Walking Ballista | Heliod, Sun-Crowned | Walking Ballista
 win | Hermit Druid + Dread Return | Hermit Druid | Dread Return
@@ -123,7 +123,7 @@ win | Yawgmoth + Undying | Yawgmoth, Thran Physician | Young Wolf / Butcher Ghou
 win | Yawgmoth's Will + Black Lotus + Dark Ritual + Tendrils | Yawgmoth's Will | Black Lotus | Dark Ritual | Tendrils of Agony
 win | Zirda + Basalt Monolith | Zirda, the Dawnwaker | Basalt Monolith / Grim Monolith
 lock | Collector Ouphe + Mycosynth Lattice | Collector Ouphe / Null Rod | Mycosynth Lattice
-lock | Contagion Engine + Magistrate's Scepter | Magistrate's Scepter | Coretrap / Contagion Engine / Vorel of the Hull Clade
+lock | Contagion Engine + Magistrate's Scepter | Magistrate's Scepter | Coretapper / Contagion Engine / Vorel of the Hull Clade
 lock | Counterbalance + Sensei's Divining Top | Counterbalance | Sensei's Divining Top
 lock | Crucible of Worlds + Strip Mine | Crucible of Worlds / Ramunap Excavator | Strip Mine / Wasteland
 lock | Drana and Linvala + Urborg + Kormus Bell | Drana and Linvala | Urborg, Tomb of Yawgmoth / Kormus Bell
