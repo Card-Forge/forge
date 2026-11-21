@@ -3,8 +3,10 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -20,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.keyword.Keyword;
@@ -635,6 +638,70 @@ public final class ActivationGuard {
                 if (!part.canPay(sa, ai, false)) {
                     return true;
                 }
+            }
+        }
+        return sacrificesNeedMoreCards(ai, sa, cost);
+    }
+
+    /**
+     * Whether the sacrifice parts of a cost cannot be paid with different permanents. Each part passes {@code canPay}
+     * on its own, but a permanent is sacrificed once: one creature that is blue, black and red (Grixis Grimblade) is
+     * not the blue, the black and the red creature that Demon's Herald asks for.
+     */
+    static boolean sacrificesNeedMoreCards(final Player ai, final SpellAbility sa, final Cost cost) {
+        final Card host = sa.getHostCard();
+        final List<CardCollection> slots = new ArrayList<>(); // one for each permanent the cost sacrifices
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostSacrifice)) {
+                continue;
+            }
+            if (part.payCostFromSource()) {
+                slots.add(new CardCollection(host));
+            } else if ("OriginalHost".equals(part.getType())) {
+                if (sa.getOriginalHost() != null) {
+                    slots.add(new CardCollection(sa.getOriginalHost()));
+                }
+            } else {
+                final int amount;
+                try {
+                    amount = Integer.parseInt(part.getAmount());
+                } catch (final NumberFormatException e) {
+                    continue; // X or all: not counted here
+                }
+                final String type = part.getType().replace("+WithDifferentNames", "");
+                if (type.contains("X")) {
+                    continue; // what it asks for depends on X
+                }
+                final CardCollection fit = CardLists.filter(CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield),
+                        type.split(";"), ai, host, sa), CardPredicates.canBeSacrificedBy(sa, false));
+                for (int i = 0; i < amount; i++) {
+                    slots.add(fit);
+                }
+            }
+        }
+        if (slots.size() < 2) {
+            return false;
+        }
+        final Map<Card, Integer> takenBy = new HashMap<>();
+        for (int slot = 0; slot < slots.size(); slot++) {
+            if (!giveDistinctCard(slot, slots, takenBy, new HashSet<>())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Matches the slot to a card that no other slot uses, moving another slot to a different card when it must. */
+    private static boolean giveDistinctCard(final int slot, final List<CardCollection> slots,
+                                            final Map<Card, Integer> takenBy, final Set<Card> seen) {
+        for (final Card c : slots.get(slot)) {
+            if (!seen.add(c)) {
+                continue;
+            }
+            final Integer other = takenBy.get(c);
+            if (other == null || giveDistinctCard(other, slots, takenBy, seen)) {
+                takenBy.put(c, slot);
+                return true;
             }
         }
         return false;

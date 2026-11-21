@@ -469,6 +469,9 @@ public class SpellAbilityPicker {
             Card source = ability.getHostCard();
             CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
             cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability, effect));
+            if (exclude != null) {
+                cardList.removeAll(exclude); // already chosen for another part of the same cost
+            }
             if (cardList.size() >= 2) {
                 if (interceptor != null) {
                     return new CardCollection(interceptor.chooseCard(cardList));

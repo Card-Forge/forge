@@ -226,6 +226,46 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void fetchLandCannotFindAnIneligibleNonbasicLand() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+
+        AssertJUnit.assertFalse(
+                "Evolving Wilds cannot fetch a nonbasic Tropical Island",
+                castsSomething(hand(
+                        "Evolving Wilds",
+                        "Plains",
+                        "Coral Merfolk")));
+    }
+
+    @Test
+    public void twoFetchLandsCannotReuseTheSameDualLand() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+
+        AssertJUnit.assertFalse(
+                "one Tropical Island cannot pay both green and blue through two fetch lands",
+                castsSomething(hand(
+                        "Flooded Strand",
+                        "Windswept Heath",
+                        "Coiling Oracle")));
+    }
+
+    @Test
+    public void twoFetchLandsCanFindTwoDifferentLibraryLands() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+        addCardToZone("Forest", ai, ZoneType.Library);
+
+        AssertJUnit.assertTrue(
+                "Flooded Strand finds the Tropical Island for blue, Windswept Heath the Forest for green",
+                castsSomething(hand(
+                        "Flooded Strand",
+                        "Windswept Heath",
+                        "Coiling Oracle")));
+    }
+
+    @Test
     public void twoFetchLandsCanUseTwoLibraryIslands() {
         setUp(2, 0);
 
