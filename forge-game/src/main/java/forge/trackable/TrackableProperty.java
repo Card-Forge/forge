@@ -93,6 +93,7 @@ public enum TrackableProperty {
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
     PreparedSpell(TrackableTypes.CardViewType),
+    Augment(TrackableTypes.CardViewType),
 
     MarkedColors(TrackableTypes.ColorSetType),
 
@@ -121,7 +122,9 @@ public enum TrackableProperty {
     ManaCost(TrackableTypes.ManaCostType),
     OriginalManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
+    AdditionalSetCodes(TrackableTypes.StringListType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
+    AdditionalRarities(TrackableTypes.EnumListType(CardRarity.class)),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     HasPrintedPT(TrackableTypes.BooleanType),
@@ -131,6 +134,8 @@ public enum TrackableProperty {
     Defense(TrackableTypes.StringType),
     FunctionalVariant(TrackableTypes.StringType),
     AttractionLights(TrackableTypes.IntegerSetType),
+    PowerModifier(TrackableTypes.StringType),
+    ToughnessModifier(TrackableTypes.StringType),
     ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),

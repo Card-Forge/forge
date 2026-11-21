@@ -173,7 +173,11 @@ public class CardDetailUtil {
         }
 
         if (card.isCreature() || card.hasPrintedPT()) {
-            ptText.append(card.getPower()).append(" / ").append(card.getToughness());
+            if (card.isAugment()) {
+                ptText.append(card.getPowerModifier()).append(" / ").append(card.getToughnessModifier());
+            } else {
+                ptText.append(card.getPower()).append(" / ").append(card.getToughness());
+            }
         }
 
         if (card.hasPrintedPT() && !card.isCreature()) {
@@ -601,6 +605,15 @@ public class CardDetailUtil {
         //show current storm count for storm cards
         if (state.hasStorm() && gameView != null) {
             area.append("\n\nCurrent Storm Count: ").append(gameView.getStormCount());
+        }
+
+        if (state.hasAdditionalRarities()) {
+            area.append("\n\n");
+            area.append("Additional Rarities: ").append(state.getAdditionalRarities());
+        }
+        if (state.hasAdditionalSetCodes()) {
+            area.append("\n\n");
+            area.append("Additional Set Codes: ").append(state.getAdditionalSetCodes());
         }
 
         //show owner if being controlled by a different player

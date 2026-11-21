@@ -2,6 +2,8 @@ Name:Eager Beaver
 ManaCost:2 G
 Types:Host Creature Beaver
 PT:3/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may untap target permanent.
-SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent
+K:Augment Host:Beaver:LeftSide:TrigUntap
+SVar:LeftSide:T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may untap target permanent.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent | SpellDescription$ you may untap target permanent.
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, you may untap target permanent.
