@@ -251,11 +251,46 @@ public final class RampPlan {
         return lands;
     }
 
-    private static CardCollection order(final CardCollection lands, final int valakuts, final int n) {
+    /**
+     * The colours that the nonland cards of the hand need and that no land in play makes. Zero while the Valakut line
+     * is live or a Scapeshift is resolving: there the Mountains are the plan.
+     */
+    private static byte colorsNeededByHand(final Player ai) {
+        if (scapeshiftResolving(ai) || bestLine(ai).damage > 0) {
+            return 0;
+        }
+        byte need = 0;
+        for (final Card card : ai.getCardsIn(ZoneType.Hand)) {
+            if (!card.isLand() && !card.getName().equals(SCAPESHIFT)) {
+                need |= card.getManaCost().getColorProfile();
+            }
+        }
+        byte have = 0;
+        for (final Card card : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (card.isLand()) {
+                have |= landColors(card);
+            }
+        }
+        return (byte) (need & ~have);
+    }
+
+    private static CardCollection order(final Player ai, final CardCollection lands, final int valakuts, final int n) {
         final CardCollection out = new CardCollection();
         for (final Card c : lands) {
             if (isValakutLand(c) && out.size() < Math.min(n, valakuts)) {
                 out.add(c);
+            }
+        }
+        // a colour the hand is stuck on comes before the Mountains: basic lands first, then the rest
+        final byte need = colorsNeededByHand(ai);
+        if (need != 0) {
+            for (final boolean basic : new boolean[] { true, false }) {
+                for (final Card land : lands) {
+                    if (out.size() < n && !out.contains(land) && !isValakutLand(land)
+                            && land.getType().isBasic() == basic && (landColors(land) & need) != 0) {
+                        out.add(land);
+                    }
+                }
             }
         }
         // basic Mountains first: they thin the deck of the lands that count, and nothing else is needed from them
@@ -324,7 +359,7 @@ public final class RampPlan {
         if (lands == null) {
             return null;
         }
-        final CardCollection out = order(lands, valakutsToFetch(ai, n, count(lands)), n);
+        final CardCollection out = order(ai, lands, valakutsToFetch(ai, n, count(lands)), n);
         return out.isEmpty() ? null : out;
     }
 
@@ -343,7 +378,7 @@ public final class RampPlan {
         final int inLibrary = count(ai.getCardsIn(ZoneType.Library));
         final int picked = inLibrary - count(lands);
         final int wanted = valakutsToFetch(ai, total, inLibrary) - picked;
-        final CardCollection out = order(lands, Math.max(0, wanted), 1);
+        final CardCollection out = order(ai, lands, Math.max(0, wanted), 1);
         return out.isEmpty() ? null : out.get(0);
     }
 
