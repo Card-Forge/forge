@@ -893,6 +893,24 @@ public class AiReportScenarioTest extends AITest {
                     final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
                     return pays == true ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
                 }));
+        l.add(new Scenario("shock-dual-source", "A dual land only pays for one coloured shard", Fid.EXACT, M1, true,
+                c -> { c.bf("Underground Sea", c.ai); c.hand("Baleful Strix", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI counted Underground Sea as both a blue and a black mana source" : null;
+                }));
+        l.add(new Scenario("shock-phyrexian-life-budget", "Do not spend life on a shockland if it is needed for a Phyrexian cost", Fid.EXACT, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Phyrexian Metamorph", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI paid 2 life for the Foundry and left no life to pay Phyrexian Metamorph's blue symbol" : null;
+                }));
         l.add(new Scenario("shock-low-life", "At 11 life the Foundry enters tapped, whatever is in hand", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(11, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); },
                 c -> {

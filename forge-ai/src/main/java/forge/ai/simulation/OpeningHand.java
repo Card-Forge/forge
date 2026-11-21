@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -186,22 +187,36 @@ public final class OpeningHand {
      * A colour that the deck makes plentifully may still come, but a hand whose every spell waits for it is no keep.
      */
     static boolean castsSomething(final CardCollectionView kept, final Library lib) {
+        final List<Byte> sources = new ArrayList<>();
         byte colors = 0;
         boolean spell = false;
         for (final Card c : kept) {
             if (c.isLand() || isMdfcLand(c)) {
                 if (isEarlyManaLand(c)) {
                     final byte own = producedColors(c);
-                    colors |= own != 0 ? own : libraryColors(lib);
+                    final byte available = own != 0 ? own : libraryColors(lib);
+                    colors |= available;
+                    sources.add(available);
                 }
             } else if (!isCreatureAura(c)) {
                 spell = true;
-                if (c.getManaCost().canBePaidWithAvailable(colors)) { // hybrid shards: either colour pays
-                    return true;
-                }
             }
         }
-        return !spell; // only lands: judged by the other rules
+        if (!spell) {
+            return true; // only lands: judged by the other rules
+        }
+        for (final Card c : kept) {
+            if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)
+                    && c.getManaCost().canBePaidWithAvailable(colors) // hybrid shards: either colour pays
+                    && ManaSourceAllocation.canPayColoredPips(c.getManaCost(), sources)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean castsSomething(final CardCollectionView kept, final Player ai) {
+        return castsSomething(kept, new Library(ai));
     }
 
     /** One land and a 1 mana outlet in a dredge deck: Faithless Looting on turn one is a normal keep. */

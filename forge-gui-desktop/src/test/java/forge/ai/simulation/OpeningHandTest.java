@@ -164,4 +164,30 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertTrue(OpeningHand.isKeyCard(counter, DeckPlan.Archetype.CONTROL));
         AssertJUnit.assertFalse(OpeningHand.isKeyCard(elves, DeckPlan.Archetype.CONTROL));
     }
+
+    private boolean castsSomething(final CardCollection cards) {
+        ai.getGame().getAction().checkStateEffects(true);
+        return OpeningHand.castsSomething(cards, ai);
+    }
+
+    @Test
+    public void oneDualLandCannotPayBothColoredPips() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse("one Underground Sea only pays one of {U} or {B}",
+                castsSomething(hand("Underground Sea", "Baleful Strix")));
+    }
+
+    @Test
+    public void dualLandAndOffColorLandStillCannotPayBothColoredPips() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse("the Mountain cannot cover the second blue/black pip",
+                castsSomething(hand("Underground Sea", "Mountain", "Baleful Strix")));
+    }
+
+    @Test
+    public void dualLandCanPayEitherColorWhenAnotherSourceCoversTheOther() {
+        setUp(0, 0);
+        AssertJUnit.assertTrue("the Sea can cover black while the Island covers blue",
+                castsSomething(hand("Underground Sea", "Island", "Baleful Strix")));
+    }
 }

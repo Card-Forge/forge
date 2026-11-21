@@ -4,7 +4,6 @@ import forge.ai.*;
 import java.util.ArrayList;
 import java.util.List;
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -143,8 +142,12 @@ public class TapAi extends TapAiBase {
      * creatures hit for on their next turn plus five. That estimate is the one of the Manabarbs reserve: their tapped
      * creatures untap, the creatures that cannot attack and the ones that the AI's untapped blockers stop are not counted.
      */
+    private static int lifeReserve(final Player payer) {
+        return Math.max(10, ActivationGuard.nextTurnThreat(payer) + 5);
+    }
+
     static boolean lifeCanBeSpared(final Player payer, final int amount) {
-        return payer.getLife() - amount >= Math.max(10, ActivationGuard.nextTurnThreat(payer) + 5);
+        return payer.getLife() - amount >= lifeReserve(payer);
     }
 
     /** A spell that only aims at the AI's own permanents (Ephemerate, Cloudshift) is no play while it has none. */
@@ -167,31 +170,31 @@ public class TapAi extends TapAiBase {
     }
 
     /** The most mana of the cards that the AI can spend with {@code mana} from lands, counting the mana tokens they make. */
-    private static void countColors(final int[] have, final byte colors) {
-        for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-            if ((colors & MagicColor.WUBRG[i]) != 0) {
-                have[i]++;
-            }
-        }
-    }
-
-    private static int spendable(final List<Card> cards, final int mana, final int[] have) {
+    private static int spendable(final List<Card> cards, final int mana, final List<Byte> sourceColors,
+                                 final int phyrexianLife) {
         final int n = Math.min(cards.size(), 10);
         int best = 0;
+        final List<Byte> requirements = new ArrayList<>();
+        final List<Byte> phyrexianRequirements = new ArrayList<>();
         for (int mask = 1; mask < (1 << n); mask++) {
             int cost = 0;
             int bonus = 0;
-            final int[] need = new int[MagicColor.WUBRG.length];
+            requirements.clear();
+            phyrexianRequirements.clear();
             for (int i = 0; i < n; i++) {
                 if ((mask & (1 << i)) != 0) {
                     final Card c = cards.get(i);
                     cost += c.getCMC();
                     for (final ManaCostShard shard : c.getManaCost()) {
-                        if (shard.isMonoColor() && !shard.isHybrid()) { // {B}{B}{B} needs three black sources
-                            for (int k = 0; k < need.length; k++) {
-                                if ((shard.getColorMask() & MagicColor.WUBRG[k]) != 0) {
-                                    need[k]++;
-                                }
+                        if (shard.isPhyrexian()) {
+                            final byte colors = shard.getColorMask();
+                            if (colors != 0) {
+                                phyrexianRequirements.add(colors);
+                            }
+                        } else if (!shard.isOr2Generic() && !shard.isColorless()) {
+                            final byte colors = shard.getColorMask();
+                            if (colors != 0) {
+                                requirements.add(colors);
                             }
                         }
                     }
@@ -200,11 +203,21 @@ public class TapAi extends TapAiBase {
                     }
                 }
             }
-            boolean coloursOk = true;
-            for (int k = 0; k < need.length; k++) {
-                coloursOk &= need[k] <= have[k];
+            final int phyrexianPaidWithMana = ManaSourceAllocation.maxPayableOptionalColoredPips(
+                    requirements, phyrexianRequirements, sourceColors);
+            if (phyrexianPaidWithMana < 0) {
+                continue;
             }
-            if (coloursOk && cost <= mana + bonus && cost > best) {
+            final int maxLifePaidPips = Math.min(phyrexianRequirements.size(), Math.max(0, phyrexianLife) / 2);
+            boolean payable = false;
+            for (int lifePaidPips = 0; lifePaidPips <= maxLifePaidPips; lifePaidPips++) {
+                if (phyrexianPaidWithMana >= phyrexianRequirements.size() - lifePaidPips
+                        && cost - lifePaidPips <= mana + bonus) {
+                    payable = true;
+                    break;
+                }
+            }
+            if (payable && cost > best) {
                 best = cost;
             }
         }
@@ -221,18 +234,21 @@ public class TapAi extends TapAiBase {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa) && lifeCanBeSpared(payer, amount)) {
+                        final int lifeFloor = lifeReserve(payer);
+                        final int lifeAvailableNow = Math.max(0, payer.getLife() - lifeFloor);
+                        final int lifeAvailableWith = Math.max(0, payer.getLife() - amount - lifeFloor);
                         // the mana of the lands that are untapped now, and what the cards in hand can spend with and without this one
                         int untapped = 0;
-                        final int[] haveNow = new int[MagicColor.WUBRG.length];
+                        final List<Byte> sourcesNow = new ArrayList<>();
                         for (final Card land : payer.getLandsInPlay()) {
                             if (land.isUntapped()) {
                                 untapped++;
-                                countColors(haveNow, forge.ai.simulation.RampPlan.landColors(land));
+                                sourcesNow.add(forge.ai.simulation.RampPlan.landColors(land));
                             }
                         }
-                        // how many sources make each colour: a union of colours does not show that BBB can be paid
-                        final int[] haveWith = haveNow.clone();
-                        countColors(haveWith, forge.ai.simulation.RampPlan.landColors(source));
+                        // A dual land is one source: it can pay one coloured shard, not one shard of each colour.
+                        final List<Byte> sourcesWith = new ArrayList<>(sourcesNow);
+                        sourcesWith.add(forge.ai.simulation.RampPlan.landColors(source));
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
@@ -259,7 +275,8 @@ public class TapAi extends TapAiBase {
                         }
                         // a land that lets the hand spend more this turn is worth the life: a card that needs exactly
                         // this land, or two cards that fit together once a Malevolent Rumble's Spawn is counted
-                        if (spendable(candidates, untapped + 1, haveWith) > spendable(candidates, untapped, haveNow)) {
+                        if (spendable(candidates, untapped + 1, sourcesWith, lifeAvailableWith)
+                                > spendable(candidates, untapped, sourcesNow, lifeAvailableNow)) {
                             return true;
                         }
                     }
