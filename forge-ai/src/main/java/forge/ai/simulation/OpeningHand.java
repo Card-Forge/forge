@@ -188,16 +188,16 @@ public final class OpeningHand {
      */
     static boolean castsSomething(final CardCollectionView kept, final Library lib) {
         final List<Byte> sources = new ArrayList<>();
-        byte colors = 0;
+        int fetches = 0;
         boolean spell = false;
         for (final Card c : kept) {
             if (c.isLand() || isMdfcLand(c)) {
                 if (isEarlyManaLand(c)) {
-                    final byte own = producedColors(c);
-                    // only a land that fetches another land inherits the library's colours; a colourless one (Wastes) stays colourless
-                    final byte available = fetchesLand(c) ? libraryColors(lib) : own;
-                    colors |= available;
-                    sources.add(available);
+                    if (fetchesLand(c)) {
+                        fetches++; // gets a colour of its own below; a colourless land (Wastes) stays colourless
+                    } else {
+                        sources.add(producedColors(c));
+                    }
                 }
             } else if (!isCreatureAura(c)) {
                 spell = true;
@@ -205,6 +205,39 @@ public final class OpeningHand {
         }
         if (!spell) {
             return true; // only lands: judged by the other rules
+        }
+        return castsWithFetches(kept, lib, sources, fetches, 0);
+    }
+
+    /**
+     * Gives each fetch land one colour from the library, no colour more often than the library still has lands that
+     * make it (two Evolving Wilds cannot both find the only Island), and asks whether some split casts a spell.
+     */
+    private static boolean castsWithFetches(final CardCollectionView kept, final Library lib, final List<Byte> sources,
+                                            final int fetches, final int colorIndex) {
+        if (colorIndex == MagicColor.WUBRG.length) {
+            return castsWith(kept, sources);
+        }
+        final byte color = MagicColor.WUBRG[colorIndex];
+        final int most = Math.min(fetches, lib.producersOf(color));
+        for (int n = 0; n <= most; n++) {
+            for (int i = 0; i < n; i++) {
+                sources.add(color);
+            }
+            final boolean ok = castsWithFetches(kept, lib, sources, fetches - n, colorIndex + 1);
+            sources.subList(sources.size() - n, sources.size()).clear();
+            if (ok) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether a spell of the hand can be paid with these sources, one source for each coloured pip. */
+    private static boolean castsWith(final CardCollectionView kept, final List<Byte> sources) {
+        byte colors = 0;
+        for (final byte s : sources) {
+            colors |= s;
         }
         for (final Card c : kept) {
             if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)

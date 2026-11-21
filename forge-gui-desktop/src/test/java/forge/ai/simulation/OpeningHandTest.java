@@ -212,4 +212,24 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertTrue("Evolving Wilds can fetch the Mountain that is left in the library",
                 castsSomething(hand("Evolving Wilds", "Plains", "Lightning Bolt")));
     }
+
+    @Test
+    public void twoFetchLandsCannotBothUseTheOnlyLibraryIsland() {
+        setUp(1, 0);
+
+        AssertJUnit.assertFalse(
+                "two Evolving Wilds cannot both fetch the only Island for Counterspell",
+                castsSomething(hand(
+                        "Evolving Wilds",
+                        "Evolving Wilds",
+                        "Counterspell")));
+    }
+
+    @Test
+    public void twoFetchLandsCanUseTwoLibraryIslands() {
+        setUp(2, 0);
+
+        AssertJUnit.assertTrue("each Evolving Wilds can fetch its own Island for Counterspell",
+                castsSomething(hand("Evolving Wilds", "Evolving Wilds", "Counterspell")));
+    }
 }
