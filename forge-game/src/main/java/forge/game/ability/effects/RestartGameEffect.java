@@ -64,6 +64,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.setStartingLife(p.getStartingLife());
             p.clearCounters();
             p.resetSpellCastThisGame();
+            p.resetLifeGainedThisGame();
             p.onCleanupPhase();
             p.setLandsPlayedMyLastTurn(0);
             p.setSpellsCastLastTurn(0);

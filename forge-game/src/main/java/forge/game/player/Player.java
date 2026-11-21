@@ -86,6 +86,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeLostThisTurn;
     private int lifeLostLastTurn;
     private int lifeGainedThisTurn;
+    private int lifeGainedThisGame;
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
     private int maxHandSize = 7;
@@ -486,6 +487,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         shareLifeWithTeam();
         boolean firstGain = lifeGainedTimesThisTurn == 0;
         lifeGainedThisTurn += lifeGain;
+        lifeGainedThisGame += lifeGain;
         lifeGainedTimesThisTurn++;
 
         // team mates need to be notified about life gained
@@ -2415,6 +2417,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setLifeGainedThisTurn(final int n) {
         lifeGainedThisTurn = n;
+    }
+
+    public final int getLifeGainedThisGame() {
+        return lifeGainedThisGame;
+    }
+    public final void setLifeGainedThisGame(final int n) {
+        lifeGainedThisGame = n;
+    }
+    public final void resetLifeGainedThisGame() {
+        lifeGainedThisGame = 0;
     }
 
     public final int getLifeGainedTimesThisTurn() {
