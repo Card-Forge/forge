@@ -3,7 +3,7 @@ Code=UNKP23
 Date=2023-02-17
 Name=Unknown Event Philadelphia 2023
 Type=Funny
-Teams=Mirrans,Phyrexian
+Teams=Mirran,Phyrexian
 Booster=5 Common:fromSheet("UNKP23 Philadelphia 23"), 3 Uncommon:fromSheet("UNKP23 Philadelphia 23"), 2 Rare:fromSheet("UNKP23 Philadelphia 23")
 ScryfallCode=UNK
 
