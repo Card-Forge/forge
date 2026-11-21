@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -270,6 +272,47 @@ public class GameCopierTurnStateTest extends SimulationTest {
         final List<Card> died = q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield);
         AssertJUnit.assertEquals(1, died.size());
         AssertJUnit.assertTrue(died.get(0).isToken());
+    }
+
+    /**
+     * Raid after a real combat: a creature and a token attack, the game plays on through combat damage into the second
+     * main phase, the token dies and ceases to exist; then the copy is made.
+     */
+    @Test
+    public void aCopyAfterARealCombatKeepsItsAttackers() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        final Card bears = addCard("Grizzly Bears", p);
+        bears.setSickness(false);
+        final Card token = addToken("g_2_2_bear", p);
+        token.setSickness(false);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, p, false, 3);
+        final Combat combat = new Combat(p);
+        game.getPhaseHandler().setCombat(combat);
+        combat.addAttacker(bears, opp);
+        combat.addAttacker(token, opp);
+        for (final Card attacker : combat.getAttackers()) {
+            CombatUtil.checkDeclaredAttacker(game, attacker, combat, true);
+        }
+        AssertJUnit.assertTrue(game.getPhaseHandler().devAdvanceToPhase(PhaseType.MAIN2));
+        AssertJUnit.assertEquals(16, opp.getLife());
+        game.getAction().destroy(token, null, false, null);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertNull(game.findById(token.getId()));
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final List<Card> attacked = copy.getPlayers().get(1).getCreaturesAttackedThisTurn();
+        AssertJUnit.assertEquals(2, attacked.size());
+        int tokens = 0;
+        for (final Card c : attacked) {
+            AssertJUnit.assertSame(copy, c.getGame());
+            if (c.isToken()) {
+                tokens++;
+            }
+        }
+        AssertJUnit.assertEquals(1, tokens);
     }
 
     /** Making a copy reads the original's history and leaves it as it was: the same cards, of the original game. */
