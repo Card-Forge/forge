@@ -36,6 +36,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -78,11 +80,20 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
+    RogueCommander ( Range.of(40, 45),                    Range.of(0, 10), 1, null,
+            card -> StaticData.instance().getCommanderPredicate().test(card)
+    ) {
+        @Override
+        public boolean hasCommander() {
+            return true;
+        }
+    },
+    CommanderDraft ( Range.of(59, 99),                     null, Integer.MAX_VALUE),
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
-    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
+    Brawl      ( Range.is(99), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {
@@ -170,7 +181,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == CommanderDraft || this == Oathbreaker || this == TinyLeaders || this == Brawl;
     }
 
     public boolean hasSignatureSpell() {
@@ -226,16 +237,15 @@ public enum DeckFormat {
     public int getMaxCardCopies(PaperCard card) {
         if(canHaveSpecificNumberInDeck(card) != null)
             return canHaveSpecificNumberInDeck(card);
-        else if (canHaveAnyNumberOf(card))
+        if (canHaveAnyNumberOf(card))
             return Integer.MAX_VALUE;
-        else if (card.getRules().isVariant()) {
+        if (card.getRules().isVariant()) {
             DeckSection section = DeckSection.matchingSection(card);
             if(section == DeckSection.Planes && card.getRules().getType().isPhenomenon())
                 return 2; //These are two-of.
             return getExtraSectionMaxCopies(section);
         }
-        else
-            return this.getMaxCardCopies();
+        return this.getMaxCardCopies();
     }
 
     public int getExtraSectionMaxCopies(DeckSection section) {
@@ -413,7 +423,8 @@ public enum DeckFormat {
 
     /**
      * Checks only the commander part of a deck: the commander(s) themselves, partnerships,
-     * and that every card in the main deck and sideboard fits their color identity.
+     * and that every card in the main deck and sideboard fits their color identity
+     * (the main deck only for Commander Draft).
      * Deck size and card copies are not checked.
      * @return a description of the problem, or null if the commanders are fine
      */
@@ -471,7 +482,7 @@ public enum DeckFormat {
                 PaperCard a = commanders.get(0);
                 PaperCard b = commanders.get(1);
 
-                if (!a.getRules().canBePartnerCommanders(b.getRules())) {
+                if (!canPartner(deck, a.getRules(), b.getRules())) {
                     return "has an illegal commander partnership";
                 }
             }
@@ -504,7 +515,8 @@ public enum DeckFormat {
                 }
             }
         }
-        if (deck.has(DeckSection.Sideboard)) {
+        // A commander draft sideboard holds the rest of the drafted pool
+        if (deck.has(DeckSection.Sideboard) && this != CommanderDraft) {
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
                 if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
                     continue;
@@ -686,6 +698,85 @@ public enum DeckFormat {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
+    }
+
+    /** Without legality checks any creature or planeswalker may command, except in signature spell formats. */
+    public boolean isAllowedCommander(CardRules rules, boolean enforceLegality) {
+        if (isLegalCommander(rules)) {
+            return true;
+        }
+        return !enforceLegality && !hasSignatureSpell() && (rules.canBeCreature() || rules.getType().isPlaneswalker());
+    }
+
+    /** Without legality checks any two allowed commanders may command together. */
+    public boolean isAllowedPartnership(Deck deck, CardRules a, CardRules b, boolean enforceLegality) {
+        if (canPartner(deck, a, b)) {
+            return !enforceLegality || isLegalCommander(a) && isLegalCommander(b);
+        }
+        return !enforceLegality && isAllowedCommander(a, false) && isAllowedCommander(b, false);
+    }
+
+    /** The deck's only commander, if the card may join it as a partner. */
+    public PaperCard getPartnerableCommander(Deck deck, PaperCard card, boolean enforceLegality) {
+        // Oathbreaker partners would need to track whose signature spell is whose
+        if (hasSignatureSpell()) {
+            return null;
+        }
+        List<PaperCard> commanders = deck.getCommanders();
+        if (commanders.size() != 1) {
+            return null;
+        }
+        PaperCard commander = commanders.get(0);
+        if (maxCardCopies == 1 && commander.getName().equals(card.getName())) {
+            return null;
+        }
+        return isAllowedPartnership(deck, commander.getRules(), card.getRules(), enforceLegality) ? commander : null;
+    }
+
+    /**
+     * @param partnerOf the commander the card joins, or null when it replaces the current commander
+     * @return the warning to confirm before placing the card, or null if the placement is legal
+     */
+    public String getIllegalCommanderWarning(Deck deck, PaperCard card, PaperCard partnerOf) {
+        if (partnerOf != null && !canPartner(deck, partnerOf.getRules(), card.getRules())) {
+            return Localizer.getInstance().getMessage("lblConfirmIllegalPartner", card.getName(), partnerOf.getName());
+        }
+        if (hasSignatureSpell() || isLegalCommander(card.getRules())) {
+            return null;
+        }
+        return Localizer.getInstance().getMessage("lblConfirmIllegalCommander", card.getName());
+    }
+
+    private boolean canPartner(Deck deck, CardRules a, CardRules b) {
+        return a.canBePartnerCommanders(b, this == CommanderDraft
+                && hasImpliedPartnership(deck.getAllCardsInASinglePool(false, false).toFlatList()));
+    }
+
+    /**
+     * The Commander Draft rules of each drafted card's set, or null for a card from another set.
+     * Basic lands are added after the draft. A draft that mixes sets gets every set's rules.
+     */
+    private static Stream<DraftOptions> getCommanderDraftOptions(Collection<PaperCard> drafted) {
+        return drafted.stream().filter(pc -> !pc.getRules().getType().isBasicLand()).map(pc -> {
+            CardEdition edition = StaticData.instance().getEditions().get(pc.getEdition());
+            return edition != null && edition.getDraftType() == CardEdition.DraftType.Commander ? edition.getDraftOptions() : null;
+        });
+    }
+
+    /** True only if every non-basic card comes from a Commander Draft set, since cubes and Full drafts mix in printings from those sets. */
+    public static boolean isCommanderDraft(Collection<PaperCard> drafted) {
+        return getCommanderDraftOptions(drafted).anyMatch(Objects::nonNull)
+                && getCommanderDraftOptions(drafted).allMatch(Objects::nonNull);
+    }
+
+    public static boolean hasImpliedPartnership(Collection<PaperCard> drafted) {
+        return getCommanderDraftOptions(drafted).filter(Objects::nonNull).anyMatch(DraftOptions::impliesMonocoloredPartnership);
+    }
+
+    /** The commanders a player may use without drafting them, such as The Prismatic Piper. */
+    public static List<String> getFreeCommanders(Collection<PaperCard> drafted) {
+        return getCommanderDraftOptions(drafted).filter(Objects::nonNull).map(DraftOptions::getFreeCommander)
+                .filter(name -> !name.isEmpty()).distinct().collect(Collectors.toList());
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {

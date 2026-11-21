@@ -1,0 +1,5 @@
+Name:Tyvar Trait - Might
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | EffectZone$ Command | Description$ Your commander gets +2/+2.
+Oracle:Your commander gets +2/+2.

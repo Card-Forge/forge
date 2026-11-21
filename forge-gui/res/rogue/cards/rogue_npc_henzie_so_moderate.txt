@@ -1,0 +1,7 @@
+Name:Henzie Trait - So Moderate
+ManaCost:no cost
+Types:Trait
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | NumLimitEachTurn$ 1 | EffectZone$ Command | Description$ You can't cast more than one spell each turn.
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ Whenever you cast a spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:You can't cast more than one spell each turn.\nWhenever you cast a spell, draw a card.

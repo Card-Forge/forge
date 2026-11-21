@@ -103,7 +103,7 @@
    <properties>
     <property name="effect">{
 &quot;lifeModifier&quot;: 20, 
-&quot;startBattleWithCard&quot;: [&quot;Temple of Silence&quot;, &quot;Hidden Stockpile&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Scholar of Atheros|THS&quot;, &quot;Grim Guardian|JOU&quot;]}</property>
+&quot;startBattleWithCard&quot;: [&quot;Temple of Silence&quot;, &quot;Hidden Stockpile&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Scholar of Athreos|THS&quot;, &quot;Grim Guardian|JOU&quot;]}</property>
     <property name="enemy" value="Athreos"/>
    </properties>
   </object>

@@ -69,11 +69,11 @@ public class TriggerLifeLostAll extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         final Map<Player, Integer> map = filteredMap((Map<Player, Integer>) runParams.get(AbilityKey.Map));
 
-        sa.setTriggeringObject(AbilityKey.Map, map);
-        sa.setTriggeringObject(AbilityKey.Player, map.keySet());
+        objects.put(AbilityKey.Map, map);
+        objects.put(AbilityKey.Player, map.keySet());
     }
 
     @Override

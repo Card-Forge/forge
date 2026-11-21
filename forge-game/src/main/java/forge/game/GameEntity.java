@@ -332,22 +332,16 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     abstract public boolean canRemoveCounters(final CounterType type);
 
-    abstract public boolean canReceiveCounters(final CounterType type);
+    public boolean canReceiveCounters(final CounterType type) {
+        return canReceiveCounters(type, null);
+    }
+    abstract public boolean canReceiveCounters(final CounterType type, Map<AbilityKey, Object> params);
     abstract public int subtractCounter(final CounterType counterName, final int n, final Player remover);
     abstract public void clearCounters();
 
     public final void addCounter(final CounterType counterType, int n, final Player source, GameEntityCounterTable table) {
-        if (n <= 0 || !canReceiveCounters(counterType)) {
-            // As per rule 107.1b
+        if (n <= 0 || !canReceiveCounters(counterType, null)) {
             return;
-        }
-
-        Integer max = getCounterMax(counterType);
-        if (max != null) {
-            n = Math.min(n, max - getCounters(counterType));
-            if (n <= 0) {
-                return;
-            }
         }
 
         // doesn't really add counters, but is just a helper to add them to the Table

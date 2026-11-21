@@ -2,7 +2,7 @@ Name:Uthros Research Craft
 ManaCost:2 U
 Types:Artifact Spacecraft
 PT:0/8
-K:Station:12
+K:Station
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddTrigger$ CastTrig | Description$ STATION 3+ Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.
 SVar:CastTrig:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBPutCounter

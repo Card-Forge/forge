@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hexhaven Dueling Arena&quot;, &quot;Repurposed Enforcer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9RGrHiQPw5SYQ469pKijpr208q8MDwIPZPzSIz2TYjY54qQCUJgPBBhp9iLbD8OUAAD9PQw2
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj3jMBMQyPJiYZQDspKXdyHa2sTEwtCPhDjba2Y3sLxV2BhSgxo4qTy970cN7qNprw4XAdlwIcw8B7T2MhJHtdOCirh9BfGS7samlhp3Y7AZhkN313Jji1LQTl93UNn+w2YstrgfCbmq6AwC4xxqv
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzF1F0KwzAIAGDfY0+QbAfbzrKfY7Vdd7dVRkBEG03HKkgJwXzY2owIMP4hi0hPzXUAmNHOy/A7t+6T+VqfWzE57Ei/HtNre11u3hLA2XjHz3Xvkdq2x9VMq+/JaXvck2HK2oK6nTv7rW4WfVputXndXpfHlktxhEvfZK/L55Wfb7lyDnrdN35nRHNkSpPWS6dbmG31WXvVTO3cyD3J7Yz6veExo/ckt+WM8WiZUZfb5N6Tni2zx5U11n8VOYPyA9y87e4=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcYIUoAmPjj4JRQGswUGmNEntVGAfGXkoAufbK8jAw7IJieto72EEt90C7gPZAlYJ0Tg6oGyZhCgB4nwsx
+  </data>
+ </layer>
+ <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdRBqSoYkKYNRe+oCbTKP2jto7CkbBKBiuAABzcgZw
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="56" template="../../../../common/maps/obj/door_up.tx" x="97" y="143">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Hexhaven_Tower_3.tmx"/>
+    <property name="teleportObjectId" value="59"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/door_right.tx" x="192.5" y="238.833">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Hexhaven_Tower_1.tmx"/>
+    <property name="teleportObjectId" value="55"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="158.87" y="53.6447">
+   <properties>
+    <property name="enemy" value="Aerid Konstrari"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

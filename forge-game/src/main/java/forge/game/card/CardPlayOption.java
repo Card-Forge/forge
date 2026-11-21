@@ -5,7 +5,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 public final class CardPlayOption {
@@ -16,19 +18,19 @@ public final class CardPlayOption {
         NO
     }
 
-    private final Player player;
+    private final PlayerCollection players;
     private final StaticAbility sta;
     private final PayManaCost payManaCost;
     private final boolean withFlash;
     private final boolean grantsZonePermissions;
     private final Cost altManaCost;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
-        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, withFlash, grantZonePermissions);
+    public CardPlayOption(final PlayerCollection players, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
+        this(players, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, withFlash, grantZonePermissions);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean withFlash,
+    private CardPlayOption(final PlayerCollection players, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean withFlash,
                            final boolean grantZonePermissions) {
-        this.player = player;
+        this.players = players;
         this.sta = sta;
         this.payManaCost = payManaCost;
         this.withFlash = withFlash;
@@ -37,8 +39,12 @@ public final class CardPlayOption {
     }
 
 
-    public Player getPlayer() {
-        return player;
+    public PlayerCollection getPlayers() {
+        return players;
+    }
+
+    public boolean appliesTo(final Player player) {
+        return players.contains(player);
     }
 
     public Card getHost() {
@@ -94,7 +100,7 @@ public final class CardPlayOption {
     }
 
     public String toString(final boolean withPlayer) {
-        StringBuilder sb = new StringBuilder(withPlayer ? this.player.toString() : StringUtils.EMPTY);
+        StringBuilder sb = new StringBuilder(withPlayer ? Lang.joinHomogenous(players) : StringUtils.EMPTY);
 
         switch (getPayManaCost()) {
             case YES:

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VUkSwjAM84lJ4G0U/sZDwvYVXtHS9sKd+uDBceU0bJrhgBtLTiK1RETXQNTE/HeeahrjVLutiHaRIIapfgrz+ujwMdo4173H+Rqez9Y1dxNxHWkibcSNkEKuqflrNLU20mR+dIbbwr20b+4BQWbvAUdX4P5Gk6HvAGl/AnR+CNrzveNdD3xPR7Ne8wyFvSDP12ingM/Kcnn5ZKCcL2mPZr1o232UvCAZ1uv3C/fNPZfw6tO+l2e1/hP9mmzqniV+L6//hLyDfpWXWrzzfvP6eWbvO1HStJ5Ppv+xzv9rfuu7mqyjHplF9x42+Uz6Ocp5jXYHsmLPXOuKt4U7gYwj7SelS3er
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVUFuwkAM3BvKAa79Ask/2tDChQMP6Cug8IpKfUrVb4RvEB7RxkpGGQY7CR3J2l3b67VnnU1KPc5ZO9akqxzdcX5rXzl6w0nWfEZkV9SObj2+bRLKbuS8p+RkQF4fnf+mW4OLiupcyVr3REAsywnCeo0H6D0ofhbtyHdRLWme3fJgtkd5MVy68TPzxXBtYu9m93FMd6WcEBc5gwPthQPl+Vr4gnh5nlLRyNeyFawPDp9RLOVlP2/7CjXWNAfvz80ZL438Wn15v/4vwMVb4Yti4+wFJ7BPjWXgftPe5L5SeLbvRewfxsnudegr1PT+lNJ21veV3rEXA7CeW9P8InbrAe+dGoL35pS+6yjKNPx9sm3o7VRODKhL3x715Xvn/op4OTt8e7lF+00/5X/D/vvAjvv0corAZ429t49g6FuK6vV4g477mnP+A+AFXs8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="201.5" y="272" width="32.75" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="274.072" y="133.993"/>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="154.337" y="135.124"/>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="240.5" y="182.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;Honoring those who died in the ancient Phyrexian Invasion.
+Gone but not forgotten.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="215.5" y="154">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Capenna deserves better than the five families. Will you help me bring a better tomorrow?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The five families have fallen.&quot;,
+                    &quot;text&quot;: &quot;'Your actions will bring a new dawn of justice to my people. I thank you.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Hero's Heirloom&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Elspeth Resplendent&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Elspeth, Knight-Errant&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Archangel Elspeth&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Elspeth, Storm Slayer&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Elspeth Tirel&quot;}              
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Brokers Boots&quot;}, {&quot;item&quot;: &quot;Cabaretti Kicks&quot;}, {&quot;item&quot;: &quot;Obscura Shoes&quot;}, {&quot;item&quot;: &quot;Riveteer Greaves&quot;}, {&quot;item&quot;: &quot;Maestro Loafers&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Can you tell me more?&quot;,
+					&quot;text&quot;: &quot;'Long ago, Phyrexians invaded Capenna. They killed almost everyone on the plane. The survivors piled into the last city, named New Capenna. But demons soon took it over, making it a place of crime and fear.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So what do you need me to do?&quot;,
+					&quot;text&quot;: &quot;'In each biome, one member of the five families has a headquarters. Defeat each crime lord and show me their items as proof of your victory and I'll reward you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll get to work then.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Capenna doesn't concern me.&quot;,
+					&quot;text&quot;: &quot;'Very well. I will just have to avenge my people myself.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Elspeth"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="181.667" y="234.25" width="77.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A memorial stands ahead, graves stretching out to either side. An angel clad in warrior's armor kneels before the fountain at the memorial's center in silent prayer.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

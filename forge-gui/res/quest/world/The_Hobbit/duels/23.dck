@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Andriy_Boyko_-_Monogreen_Landfall_(Standard,_#885692).dck
+Deck Type=constructed
+
+[Main]
+4 Sazh's Chocobo
+1 Keen-Eyed Curator
+4 Fabled Passage
+4 Escape Tunnel
+4 Icetill Explorer
+3 Mightform Harmonizer
+3 Ba Sing Se
+4 Earthbender Ascension
+4 Esper Origins
+4 Llanowar Elves
+4 Sapling Nursery
+2 Shared Roots
+14 Forest
+1 Mossborn Hydra
+1 Lumbering Worldwagon
+1 Meltstrider's Resolve
+1 Surrak, Elusive Hunter
+1 Emeritus of Abundance
+[Sideboard]
+1 Keen-Eyed Curator
+3 Mossborn Hydra
+2 Meltstrider's Resolve
+2 Surrak, Elusive Hunter
+3 Torpor Orb
+2 Warg Tactics
+1 Leatherhead, Swamp Stalker
+1 Demolition Field

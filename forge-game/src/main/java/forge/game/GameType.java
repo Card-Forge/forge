@@ -19,10 +19,12 @@ public enum GameType {
 
     Sealed              (DeckFormat.Limited, true, true, true, "lblSealed", ""),
     Draft               (DeckFormat.Limited, true, true, true, "lblDraft", ""),
+    CommanderDraft      (DeckFormat.CommanderDraft, true, true, true, "lblCommanderDraft", "lblCommanderDraftDesc"),
     Winston             (DeckFormat.Limited, true, true, true, "lblWinston", ""),
     Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
     Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
     CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommanderGauntlet", "lblCommanderDesc"),
+    RogueCommander      (DeckFormat.RogueCommander, true, false, false, "lblRogueCommander", "lblRogueCommanderDesc"),
     Quest               (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
     QuestCommander      (DeckFormat.Commander, true, true, false, "lblQuestCommander", ""),
     QuestDraft          (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
@@ -41,6 +43,7 @@ public enum GameType {
     Planechase          (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
     Archenemy           (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
     ArchenemyRumble     (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
+    TwoHeadedGiant      (DeckFormat.Constructed, false, true, true, "lblTwoHeadedGiant", "lblTwoHeadedGiantDesc"),
     MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
@@ -70,7 +73,7 @@ public enum GameType {
         return deck;
     });
 
-    private static final EnumSet<GameType> DRAFT_FORMATS = EnumSet.of(Draft, QuestDraft, AdventureEvent);
+    private static final EnumSet<GameType> DRAFT_FORMATS = EnumSet.of(Draft, CommanderDraft, QuestDraft, AdventureEvent);
 
     private final DeckFormat deckFormat;
     private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;

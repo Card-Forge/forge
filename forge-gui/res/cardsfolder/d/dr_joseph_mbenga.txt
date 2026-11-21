@@ -1,0 +1,9 @@
+Name:Dr. Joseph M'Benga
+ManaCost:2 G G
+Types:Legendary Creature Human Doctor
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+HasCounters | AddKeyword$ Hexproof | Description$ Other creatures you control with counters on them have hexproof.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ You | ValidObject$ Creature.YouCtrl+inZoneBattlefield | ReplaceWith$ DoubleCounters | Description$ If you would put one or more counters on a creature you control, put twice that many of each of those kinds of counters on that creature instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidSource$ You | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:Other creatures you control with counters on them have hexproof.\nIf you would put one or more counters on a creature you control, put twice that many of each of those kinds of counters on that creature instead.

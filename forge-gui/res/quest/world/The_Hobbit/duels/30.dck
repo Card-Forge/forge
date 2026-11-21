@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Curtisaxel_-_Selesnya_Aggro_(Standard,_#893331).dck
+Deck Type=constructed
+
+[Main]
+1 Gathering Place
+2 Plains
+2 Abandoned Air Temple
+3 Multiversal Passage
+4 Hushwood Verge
+4 Temple Garden
+7 Forest
+4 Brightglass Gearhulk
+4 Llanowar Elves
+4 Leatherhead, Swamp Stalker
+3 Spider Manifestation
+3 Pawpatch Recruit
+3 Surrak, Elusive Hunter
+3 Bejeweled Warg
+2 Great Divide Guide
+2 Ouroboroid
+1 Goldvein Hydra
+4 Practiced Offense
+2 Seam Rip
+1 Meltstrider's Resolve
+1 Skateboard
+[Sideboard]
+1 Meltstrider's Resolve
+4 Rest in Peace
+3 Dawn's Truce
+2 Sheltered by Ghosts
+3 Erode
+2 Elspeth, Storm Slayer

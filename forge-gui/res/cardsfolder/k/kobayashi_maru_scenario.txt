@@ -1,0 +1,10 @@
+Name:Kobayashi Maru Scenario
+ManaCost:1 U U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBHail,DBSensors,DBTransport,DBAbandonShip | ChoiceRestriction$ ThisGame
+SVar:DBHail:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+cmcLE3 | ValidTgtsDesc$ creature an opponent controls with mana value 3 or less | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Hail — Return up to one target creature an opponent controls with mana value 3 or less to its owner's hand.
+SVar:DBSensors:DB$ Draw | NumCards$ 2 | SpellDescription$ Sensors — Draw two cards.
+SVar:DBTransport:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_officer | TokenOwner$ You | SpellDescription$ Transport — Create two 1/1 red Officer creature tokens.
+SVar:DBAbandonShip:DB$ LosesGame | Defined$ You | SpellDescription$ Abandon Ship — You lose the game.
+Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Hail — Return up to one target creature an opponent controls with mana value 3 or less to its owner's hand.\n• Sensors — Draw two cards.\n• Transport — Create two 1/1 red Officer creature tokens.\n• Abandon Ship — You lose the game.

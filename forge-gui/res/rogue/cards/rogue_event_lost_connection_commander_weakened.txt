@@ -1,0 +1,5 @@
+Name:Event Trait - Commander Weakened
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ -1 | AddToughness$ -1 | EffectZone$ Command | Description$ Your commander gets -1/-1.
+Oracle:Your commander gets -1/-1.

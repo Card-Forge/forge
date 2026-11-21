@@ -90,7 +90,7 @@ This might be different in OSX or Linux systems (file permission related).
 ## Manual Extraction (tar.bz2)
 
 ### Desktop Windows
-* Unpack "forge...*tar.bz2*" with any unpacking/unzipping app (e.g. 7-zip, winrar, etc)
+* Unpack "forge...*tar.bz2*" with any unpacking app (e.g. 7-Zip, Winrar, etc.)
   * You'll end up with "forge...*tar*".
 * Unpack that ".tar" file once more into its own folder.
 * Run Forge app/exe
@@ -102,7 +102,7 @@ This might be different in OSX or Linux systems (file permission related).
 * Run Forge script:
   * Linux: Run the ".sh" file in a terminal (double clicking might work.)
   * MacOS/OSX: Run the ".command" file by double clicking in Finder, or run from the terminal.
-    * If the command file doesn't appear to do anything, you'll need to [modify the permissions to be executable.](https://support.apple.com/guide/terminal/make-a-file-executable-apdd100908f-06b3-4e63-8a87-32e71241bab4/mac) (This is a temporary bug in the build process.)
+    * If the command file doesn't appear to do anything, you'll need to [modify the permissions to be executable.](https://support.apple.com/guide/terminal/make-a-file-executable-apdd100908f-06b3-4e63-8a87-32e71241bab4/mac)
     * Additionally OSX needs to have a JRE AND a JDK installed because reasons.
 
 ### Android / iOS
@@ -189,10 +189,10 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 
 Forge offers several yield options depending on how long you want to skip prompts:
 
-- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon and the **P** hotkey, or on **Mobile** from the in-match Game menu.
-- **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
-- **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell. Each (player, phase) cell is independent, so in multiplayer you can yield to a specific opponent's end step.
 - **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
+- **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
+- **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell.
+- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon and the **P** hotkey, or on **Mobile** from the in-match Game menu.
 
 > [!NOTE]
 > For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](Advanced-Yield-Options.md).
@@ -209,7 +209,7 @@ The granularity and lifetime of these decisions are controlled by the **Auto Yie
 
 Pick a longer-lived scope when you want recurring triggers (e.g. routine ETBs, upkeep optional triggers) to stay yielded across many games; pick a shorter scope when you want a clean slate each game.
 
-The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from Game → Auto-Yields and Triggers, where individual entries can be cleared.
+The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from the menu *Game → Auto-Yields and Triggers*, where individual entries can be cleared.
 
 ## Shift Key helper
 * When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, hold SHIFT to see other state of that card at the side panel that displays card picture and details.
@@ -240,7 +240,6 @@ For troubleshooting, macro replay logging can be enabled from the command line w
 # Desktop User Interface
 
 ## Interface Overview
-
 The match screen is divided into resizable panels. The numbers below identify each major component in the default layout.
 
 ![Interface overview](interface-overview.png)
@@ -292,7 +291,6 @@ Your preference is saved per zone and remembered separately for your own zones a
 ## Battlefield Display
 
 ### Stacking and Grouping Cards
-
 You can customise how identical cards are displayed on the battlefield through the **Game > Stack/Group Permanents** submenu.
 
 | Mode                                                                                                                                                                                                                                 | Example                                      |
@@ -324,7 +322,6 @@ Toggle **Game > Tokens in Separate Row** to render tokens in a dedicated row bel
 Toggle **Game > Separate Combatants from Stacks** to spread stacked creatures apart while they are attacking or blocking, so combat arrows stay easy to follow.
 
 ## Sort Player Fields in Turn Order
-
 By default additional player fields in 3+ player games are added as tabs to existing panels without regard to turn order.
 
 Forge can automatically arrange opponent battlefield panels in turn order via *Layout > View > Sort Multiplayer Fields** during a match.

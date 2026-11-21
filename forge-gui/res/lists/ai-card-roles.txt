@@ -1,0 +1,163 @@
+# Card roles read by the AI (Flat Monte Carlo combo plan and combo guard).
+# Format:  role | Card Name | Card Name | ...   A role may appear on several lines; names are matched case-insensitively.
+# Lines starting with # are comments. Add new cards here as they are released: no code change needed.
+
+# Mass reanimation payoffs cast from the library by cascade or suspend (Living End and kin)
+mass_payoff | Living End | Living Death | Rise of the Dark Realms | Pyrrhic Revival | Patriarch's Bidding | Twilight's Call
+
+# Spells that bring a creature back from a graveyard
+reanimation_spell | Reanimate | Animate Dead | Exhume | Necromancy | Unburial Rites | Dance of the Dead
+reanimation_spell | Dance of the Manse | Goryo's Vengeance | Shallow Grave | Zombify | Rise from the Grave | Persist
+reanimation_spell | Footsteps of the Goryo | Priest of Gix
+
+# Creatures worth far more reanimated than cast (never discarded for value)
+big_target | Griselbrand | Sheoldred, the Apocalypse | Archon of Cruelty | Atraxa, Grand Unifier | Bringer of the Last Gift | Elesh Norn, Grand Cenobite
+
+# Storm and storm-like payoffs
+storm_payoff | Grapeshot | Tendrils of Agony | Brain Freeze | Empty the Warrens | Mind's Desire | Hellkite Tyrant
+
+# Spells and permanents that put creatures from hand onto the battlefield for free
+cheat_spell | Show and Tell | Sneak Attack | Through the Breach | Natural Order | Elvish Piper | Hypergenesis
+cheat_spell | Eureka | Tooth and Nail | Quicksilver Amulet | Primeval Titan | Dream Halls | Emergence Zone
+cheat_spell | Neoform | Omniscience
+
+# Huge creatures worth cheating into play
+cheat_target | Emrakul, the Aeons Torn | Griselbrand | Inferno Titan | Ulamog, the Ceaseless Hunger | Ulamog, the Infinite Gyre | Kozilek, Butcher of Truth
+cheat_target | Archon of Cruelty | Elesh Norn, Grand Cenobite | Atraxa, Grand Unifier | Craterhoof Behemoth | Terastodon | Woodfall Primus
+cheat_target | Blightsteel Colossus | Sundering Titan | Void Winnower
+
+# Overrun style finishers that wait in hand until the board makes them lethal
+overrun | Craterhoof Behemoth | Overrun | Triumph of the Hordes | Tooth and Claw | Rally the Ranks | Coat of Arms
+overrun | Mutagenic Growth | Finale of Devastation | Warstorm Surge | Hall of Triumph
+
+# Engines that copy a creature (with a copy_target)
+copy_engine | Splinter Twin | Kiki-Jiki, Mirror Breaker
+
+# Creatures that pair with a copy_engine
+copy_target | Pestermite | Deceiver Exarch | Zealous Conscripts | Restoration Angel | Felidar Guardian | Village Bell-Ringer
+
+# Cards that make a mill deck win
+mill_payoff | Hedron Crab | Ruin Crab | Fractured Sanity | Bruvac the Grandiloquent | Maddening Cacophony | Mind Funeral
+mill_payoff | Traumatize | Glimpse the Unthinkable | Tome Scour | Magus of the Mind | Increasing Confusion
+
+# Payoffs of a dredge deck
+dredge_payoff | Bridge from Below | Narcomoeba | Prized Amalgam | Ichorid | Dread Return | Creeping Chill
+
+# Permanents of which a second copy does nothing (do not stack, or the first one is already the combo)
+combo_engine | Omniscience | Dream Halls | Sneak Attack | Quicksilver Amulet | Aluren | Splinter Twin
+combo_engine | Food Chain
+
+# Spells that put cards from hand onto the battlefield when they resolve (not the engines: casting those is only setup)
+hand_cheat | Show and Tell | Through the Breach | Eureka | Hypergenesis
+
+# Free cast engines (a creature with mana value 3 or less costs nothing under Aluren, every spell under Omniscience)
+free_cast_engine | Aluren | Omniscience
+
+# Cheap creatures that loop or win under a free cast engine (Acererak bounces itself and ventures; Cavern Harpy and
+# Raven Familiar return each other; the others are the classic Aluren pieces)
+free_cast_target | Acererak the Archlich | Cavern Harpy | Raven Familiar | Dream Stalker | Imperial Recruiter
+free_cast_target | Maggot Carrier | Wirewood Savage
+
+# Artifacts that chain artifacts: cast from the top of the library, untap them, copy their mana, tutor for them
+artifact_engine | Mystic Forge | Paradox Engine | Manifold Key | Voltaic Key | Grim Monolith | Basalt Monolith
+artifact_engine | Transmute Artifact
+
+# What an artifact engine deck wins or swings the game with
+artifact_payoff | Karn, the Great Creator | The One Ring | Tezzeret, Cruel Captain | Kozilek's Command
+artifact_payoff | Ugin, Eye of the Storms | Extinguisher Battleship | Mycosynth Lattice
+
+# Spells that fetch an overrun finisher from the library (the finisher itself stays in the overrun role)
+finisher_tutor | Green Sun's Zenith | Natural Order | Chord of Calling | Eldritch Evolution
+
+# Cards that win when the library is (nearly) empty
+library_out_payoff | Thassa's Oracle | Laboratory Maniac | Jace, Wielder of Mysteries
+
+# Cards that empty the AI's own library on purpose. Cephalid Illusionist mills three every time it is targeted, and
+# Shuko (equip {0}) and Nomads en-Kor ({0}) target it as often as the player likes. Balustrade Spy and Undercity
+# Informer reveal until a land: a deck without lands (Oops! All Spells) mills everything
+self_mill_outlet | Balustrade Spy | Undercity Informer | Cephalid Illusionist | Shuko | Nomads en-Kor
+
+# Cards that bring the winner back from the graveyard once the library is gone (Oops! All Spells: Dread Return, from
+# the graveyard for three sacrificed creatures, onto Thassa's Oracle). Reanimation spells count too, from the hand
+library_out_recursion | Dread Return
+
+# Two card kills: Painter's Servant makes every card share a color, so Grindstone mills the whole library
+pair_engine | Grindstone
+pair_partner | Painter's Servant
+
+# Draw spells that throw the rest of the hand away (X=0): with dredgers in the graveyard every draw is a dredge, and
+# with Lion's Eye Diamond cracked in response the dredgers are in the graveyard before the first draw
+dredge_refill | Breakthrough
+
+# ------------------------------------------------------------------------------------------------ Vintage metagame
+# Oath of Druids: a second Oath does nothing (Atraxa, the creature it fetches, is already a cheat_target, and Show and
+# Tell with four Atraxa is read as the cheat deck by the cheat lists above)
+combo_engine | Oath of Druids
+
+# Oath of Druids needs the opponent to control more creatures at the upkeep of the Oath's controller: Forbidden Orchard
+# gives them a token when it is tapped for mana, at the end of their turn (OathTiming)
+gives_opponent_creature | Forbidden Orchard
+
+# Time Vault wins an extra turn per untap (Manifold Key, Voltaic Key): it counts with the artifact payoffs
+artifact_payoff | Time Vault
+
+# AI:RemoveDeck:All and AI:RemoveDeck:Random cards Flat MC plays on its own: free cantrips and tutors, the fast mana and
+# the lands of the combo decks. Decks built for the AI keep them (the combo pieces are kept through their own roles)
+flat_mc_plays | Gitaxian Probe | Mishra's Bauble | Urza's Bauble | Vampiric Tutor | Demonic Consultation | Merchant Scroll | Springleaf Drum
+flat_mc_plays | Mana Crypt | Mana Vault | Lotus Petal | Mox Opal | Ancient Tomb | Mishra's Workshop | Tolarian Academy | Eldrazi Temple
+flat_mc_plays | Demonic Tutor | Mystical Tutor | Tinker | Lion's Eye Diamond | Bazaar of Baghdad
+
+# Doomsday: kept with Thassa's Oracle in hand; the pile is cards that draw (the most for the least), then mana
+doomsday | Doomsday
+doomsday_draw | Gitaxian Probe | Street Wraith | Gush | Ancestral Recall | Preordain
+doomsday_mana | Dark Ritual | Lotus Petal | Black Lotus | Mox Jet | Mox Sapphire | Mox Opal
+
+# Sphere Shops: Smelting Vat sacrifices one artifact for the better ones in the top eight cards, chaining the deck's artifacts
+artifact_engine | Smelting Vat
+
+# Lurrus Vault Key: Goblin Engineer puts Time Vault in the graveyard and returns it (as does Goblin Welder against an
+# artifact), Manifold Key untaps it: the two vault pieces and the two goblins are held together as one pair
+pair_engine | Time Vault | Manifold Key
+pair_partner | Goblin Engineer | Goblin Welder
+
+# ------------------------------------------------------------------------------------------------ Standard metagame
+# Superior Spider-Man enters as a copy of any creature card in a graveyard and "if you cast it" triggers still work:
+# discard or mill Bringer of the Last Gift (or Uldaros Theorix) and cast Spider-Man for four mana
+reanimation_spell | Superior Spider-Man
+big_target | Uldaros Theorix
+
+# Doc Aurlock makes spells cast from exile cost {2} less, and airbend (Aang, Swift Savior; Appa, Steadfast Guardian;
+# Airbender Ascension) lets the owner cast the exiled card for {2}: every airbent creature is recast for free and
+# airbends the next one (Appa makes an Ally token for each). Under Omniscience (4c Kona) the same cards, the wish
+# creature and the tutor are free; Kona and Formidable Speaker (untaps Kona) put Omniscience in from the hand
+free_cast_engine | Doc Aurlock, Grizzled Genius | Semblance Anvil
+free_cast_target | Aang, Swift Savior | Appa, Steadfast Guardian | Marang River Regent | North Wind Avatar
+free_cast_target | Formidable Speaker | Kona, Rescue Beastie
+free_cast_target | Aang, Airbending Master | Aang, the Last Airbender | Appa, Loyal Sky Bison
+
+# Devastating Onslaught makes X hasty copies of a creature: with Temur Battlecrier and a power 4 creature it is cheap, and
+# the enter triggers of Marang River Regent, Dragonhawk and Quantum Riddler happen X times
+copy_engine | Devastating Onslaught
+copy_target | Marang River Regent | Dragonhawk, Fate's Tempest | Quantum Riddler | Outcaster Trailblazer
+
+# Dimir Excruciator: Doomsday Excruciator (cast, or copied by Superior Spider-Man) leaves both players six cards in the
+# library; Restless Reef (mills four whenever it attacks) and Insatiable Avarice (the opponent draws three) then empty the
+# opponent's library first. The AI never cuts the libraries without one of them
+library_cut | Doomsday Excruciator
+library_cut_finisher | Restless Reef | Insatiable Avarice
+
+# The airbend loop: every airbend (Aang, Appa) exiles a creature that its owner may cast for {2}, which a reducer of two
+# makes free (Semblance Anvil counts only with a creature imprinted). Each recast airbends the other one again, so the loop
+# never ends by itself; the AI stops it after a number of casts (see ComboPlan.airbendLoopCap) unless a payoff drains the
+# opponent for every cast or creature that enters: Bontu's Monument (each creature spell), Kalastria Healer (each Ally,
+# and Appa makes an Ally token for every spell cast from exile), the other drain creatures
+airbend_reducer | Doc Aurlock, Grizzled Genius | Semblance Anvil
+airbend_payoff | Bontu's Monument | Kalastria Healer | Zulaport Cutthroat | Cruel Celebrant | Blood Artist
+
+# AntiCombo (see forge.ai.simulation.AntiCombo): what the AI must not let an opponent keep or cast. KEY cards win or
+# are the heart of a combo (counted at full weight when an opponent has them on the battlefield, on the stack or in the
+# graveyard as something to bring back), PIECE cards are what a combo deck needs around the keys (half the weight).
+anti_combo_key | Time Vault | Doomsday | Thassa's Oracle | Laboratory Maniac | Jace, Wielder of Mysteries | Underworld Breach | Brain Freeze | Tendrils of Agony | Grapeshot | Past in Flames | Yawgmoth's Will | Oath of Druids | Show and Tell | Sneak Attack | Tinker | Reanimate | Animate Dead | Exhume | Necromancy | Entomb | Griselbrand | Archon of Cruelty | Atraxa, Grand Unifier | Blightsteel Colossus | Emrakul, the Aeons Torn | Bolas's Citadel | Hullbreaker Horror | Kiki-Jiki, Mirror Breaker | Splinter Twin | Narcomoeba | Dread Return | Balustrade Spy | Painter's Servant | Grindstone | Hypergenesis | Through the Breach | Natural Order | Food Chain | Omniscience | Dream Halls | Basalt Monolith | Isochron Scepter | Dramatic Reversal | Demonic Consultation | Tainted Pact | Mind's Desire | Empty the Warrens | Living End | Goblin Welder | Goblin Engineer | Manifold Key
+# the cards of the combo catalog an opponent shows (ComboCatalog): weighed as keys, but not kept in AI decks for it
+anti_combo_seen | Channel | Flash | Protean Hulk | Melira, Sylvok Outcast | Hermit Druid | Ad Nauseam | High Tide | Palinchron | Tolarian Academy | Mind Over Matter | Saheeli Rai | Jeskai Ascendancy | Exquisite Blood | Sanguine Bond | Krark-Clan Ironworks | Worldgorger Dragon | Sliver Queen | Hive Mind | Peer into the Abyss | Scapeshift | Dark Depths | Illusions of Grandeur | Donate | Helm of Obedience | Near-Death Experience | Aetherworks Marvel | Second Sunrise | Counterbalance | Mindslaver | Knowledge Pool | Solemnity | Decree of Silence | Maralen of the Mornsong | Opposition Agent | Mycosynth Lattice | Thopter Foundry | Urza, Lord High Artificer
+anti_combo_piece | Dark Ritual | Cabal Ritual | Lotus Petal | Mox Opal | Gitaxian Probe | Street Wraith | Gush | Preordain | Ponder | Brainstorm | Vampiric Tutor | Mystical Tutor | Demonic Tutor | Imperial Seal | Grim Tutor | Burning Wish | Soul-Guide Lantern

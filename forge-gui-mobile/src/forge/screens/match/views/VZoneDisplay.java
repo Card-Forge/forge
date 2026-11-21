@@ -16,7 +16,6 @@ public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;
     private final ZoneType zoneType;
     private FCardPanel revealedPanel;
-
     public VZoneDisplay(PlayerView player0, ZoneType zoneType0) {
         player = player0;
         zoneType = zoneType0;
@@ -56,8 +55,11 @@ public class VZoneDisplay extends VCardDisplayArea {
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
-            return super.pan(x, y, deltaX, deltaY, moreVertical);
+            return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
         }
+        /*if (Forge.isLandscapeMode()) {
+            updateDragPanel(x, y);
+        }*/
         int idx = cardPanels.get().size() - 1;
         for (int i = idx - 1; i >= 0; i--) {
             if (cardPanels.get().get(i).contains(x, y)) {
@@ -76,7 +78,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             return;
 
         clearChildren();
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && layoutVerticallyForLandscapeMode()) {
             //for landscape mode, just show revealed card on top
             for (CardAreaPanel cardPanel : cardPanels.get()) {
                 if (cardPanel != revealedPanel) {
@@ -117,7 +119,12 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     protected boolean layoutVerticallyForLandscapeMode() {
-        return !Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
+        return !VPlayerPanel.isAltZoneLayout();
+    }
+
+    @Override
+    protected boolean isHorizontalStrip() {
+        return Forge.isLandscapeMode() && !layoutVerticallyForLandscapeMode();
     }
 
     @Override
@@ -139,6 +146,10 @@ public class VZoneDisplay extends VCardDisplayArea {
         float dx = cardWidth;
 
         float totalWidth = cardWidth * cardPanels.get().size();
+        final boolean centered = VPlayerPanel.isCompactLayout() && totalWidth < visibleWidth; //compact popup zones center their cards
+        if (centered) {
+            x = (visibleWidth - totalWidth) / 2;
+        }
         if (totalWidth > visibleWidth && totalWidth <= visibleWidth * 2) {
             //allow overlapping cards up to one half of the card,
             //otherwise don't overlap and allow scrolling horizontally
@@ -158,7 +169,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             x += dx;
         }
 
-        return new ScrollBounds(x, visibleHeight);
+        return new ScrollBounds(centered ? visibleWidth : x, visibleHeight);
     }
 
     private ScrollBounds layoutAndGetScrollBoundsLandscape(float visibleWidth, float visibleHeight) {

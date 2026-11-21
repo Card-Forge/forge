@@ -71,7 +71,7 @@ public class VReveal extends FDropDown {
         if (entryWidth < minWidth) {
             entryWidth = minWidth;
         }
-        if (MatchController.instance.getGameView().getRevealedCollection() == null || MatchController.instance.getGameView().getRevealedCollection().isEmpty()) {
+        if (MatchController.instance.getRevealedCards().isEmpty()) {
             FLabel label = add(new FLabel.Builder().text("[" + Forge.getLocalizer().getMessage("lblEmpty") + "]").font(FSkinFont.get(11)).align(Align.center).build());
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
@@ -79,14 +79,14 @@ public class VReveal extends FDropDown {
 
             return new ScrollBounds(totalWidth, y + height + MARGINS);
         } else {
-            if (MatchController.instance.getGameView().getRevealedCollection().size() > revealed.size()) {
+            if (MatchController.instance.getRevealedCards().size() > revealed.size()) {
                 clear();
                 revealed.clear();
                 boolean isAltRow = false;
                 RevealEntryDisplay revealEntryDisplay;
                 x = getMenuTab().screenPos.x;
                 y = 1;
-                for (CardView c :  MatchController.instance.getGameView().getRevealedCollection()) {
+                for (CardView c :  MatchController.instance.getRevealedCards()) {
                     //the card may be returned to hidden zone and cannot be viewed currently (ie Capsize), to fix this just get the imagekey and get the papercard
                     PaperCard pc = ImageUtil.getPaperCardFromImageKey(c.getCurrentState().getTrackableImageKey());
                     if (pc != null) {

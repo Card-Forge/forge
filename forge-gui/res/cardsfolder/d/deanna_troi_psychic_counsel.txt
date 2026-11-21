@@ -1,0 +1,8 @@
+Name:Deanna Troi, Psychic Counsel
+ManaCost:1 W
+Types:Legendary Creature Betazoid Human Advisor
+PT:2/2
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+Other
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Other creatures you control enter with an additional +1/+1 counter on them.
+DeckHas:Ability$Counters
+Oracle:Other creatures you control enter with an additional +1/+1 counter on them.

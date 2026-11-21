@@ -1,0 +1,12 @@
+Name:Nog, Ambitious Cadet
+ManaCost:B G
+Types:Legendary Creature Ferengi Rogue
+PT:2/2
+K:Menace
+A:AB$ Animate | Cost$ 1 | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Card.Rogue | Types$ Ferengi,Scout | RemoveCreatureTypes$ True | Power$ 3 | Toughness$ 4 | Triggers$ SurveilTrig | Duration$ Permanent | SpellDescription$ If NICKNAME is a Rogue, he becomes a Ferengi Scout with base power and toughness 3/4 and gains "Whenever NICKNAME becomes tapped, surveil 2."
+SVar:SurveilTrig:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ Whenever NICKNAME becomes tapped, surveil 2.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+A:AB$ Animate | Cost$ 3 | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Card.Scout | Types$ Ferengi,Officer | RemoveCreatureTypes$ True | staticAbilities$ PlayLands,ExtraLand | Duration$ Permanent | SpellDescription$ If NICKNAME is a Scout, he becomes a Ferengi Officer and gains "You may play lands from your graveyard" and "You may play an additional land on each of your turns."
+SVar:PlayLands:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Battlefield | Description$ You may play lands from your graveyard.
+SVar:ExtraLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+Oracle:Menace\n{1}: If Nog is a Rogue, he becomes a Ferengi Scout with base power and toughness 3/4 and gains "Whenever Nog becomes tapped, surveil 2."\n{3}: If Nog is a Scout, he becomes a Ferengi Officer and gains "You may play lands from your graveyard" and "You may play an additional land on each of your turns."

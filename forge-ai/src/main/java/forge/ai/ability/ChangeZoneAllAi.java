@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
@@ -70,6 +71,12 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             return SpecialCardAi.LivingDeath.consider(ai, sa);
         } else if ("Timetwister".equals(aiLogic)) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
+        } else if ("ShuffleBackAndRedraw".equals(aiLogic)) {
+            // Glimpse of Tomorrow: reshuffling the board is only a gain when it holds little but lands and small bodies (#4113)
+            final CardCollection own = CardLists.filter(computerType, CardPredicates.NON_LANDS);
+            final boolean cheap = own.size() <= 3 && ComputerUtilCard.evaluateCreatureList(CardLists.filter(own, CardPredicates.CREATURES)) <= 450;
+            return cheap && !ai.getCardsIn(ZoneType.Library).isEmpty() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             boolean result = !ai.getDiscardedThisTurn().isEmpty() && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -181,7 +188,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(changeType, origin, sa));
                 int countChangeType = AbilityUtils.filterListByType(oppTarget.getCardsIn(ZoneType.Graveyard), changeType, sa).size();
                 // Assumes the SpellAbility is only useful when 1 or more ChangeType will change zones
-                if (countChangeType > 0) {
+                if (countChangeType > 0 && worthHatingTheYard(ai, sa, oppTarget)) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
@@ -337,7 +344,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 Player oppTarget = oppList.max(
                         AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty() || mandatory) {
+                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty() && (mandatory || worthHatingTheYard(ai, sa, oppTarget))
+                        || mandatory) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
@@ -368,4 +376,28 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+
+    /**
+     * Exiling (or shuffling away) an opponent's graveyard is a card or a mana spent for nothing while it holds only a
+     * fetch land or a spent spell: the hate is held for a graveyard that is used (creatures to reanimate, flashback and
+     * the like, or a pile that feeds threshold / delirium).
+     */
+    private static boolean worthHatingTheYard(final Player ai, final SpellAbility sa, final Player opp) {
+        final CardCollection yard = CardLists.filter(AbilityUtils.filterListByType(opp.getCardsIn(ZoneType.Graveyard),
+                sa.getParamOrDefault("ChangeType", "Card"), sa), c -> !c.isLand());
+        if (yard.isEmpty()) {
+            return false;
+        }
+        if (opp.hasDelirium() || opp.hasThreshold() || yard.size() >= 5) {
+            return true;
+        }
+        for (final Card c : yard) {
+            if (c.isCreature() || c.isPlaneswalker() || c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.ESCAPE)
+                    || c.hasKeyword(Keyword.UNEARTH) || c.hasKeyword(Keyword.DREDGE) || c.hasKeyword(Keyword.JUMP_START)
+                    || c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.DISTURB)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

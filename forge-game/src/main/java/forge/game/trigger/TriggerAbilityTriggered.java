@@ -93,11 +93,11 @@ public class TriggerAbilityTriggered extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         final SpellAbility triggeredSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-        sa.setTriggeringObject(AbilityKey.Source, triggeredSA.getHostCard());
-        sa.setTriggeringObjectsFrom(
-                runParams,
+        objects.put(AbilityKey.Source, triggeredSA.getHostCard());
+        AbilityKey.copyKeys(
+                runParams, objects,
                 AbilityKey.SpellAbility,
                 AbilityKey.Cause);
     }

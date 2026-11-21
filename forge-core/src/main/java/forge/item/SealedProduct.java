@@ -67,6 +67,10 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         return contents.getEdition();
     }
 
+    public SealedTemplate getSealedTemplate() {
+        return contents;
+    }
+
     public List<PaperCard> getCards() {
         if (null == cards) {
             cards = generate();

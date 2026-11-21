@@ -17,9 +17,6 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblTutor"), e ->
                 ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().cheat().tutorForCard())
         ));
-        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRollbackPhase"), e ->
-                ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().cheat().rollbackPhase())
-        ));
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCastSpellOrPlayLand"), e ->
                 ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().cheat().castASpell())
         ));

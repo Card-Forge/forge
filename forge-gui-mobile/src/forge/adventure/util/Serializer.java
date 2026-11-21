@@ -16,6 +16,38 @@ import java.io.ObjectOutputStream;
 public abstract class Serializer {
 
 
+    /**
+     * Encodes a Pixmap into detached PNG bytes.
+     *
+     * Call this on the LibGDX render thread while the Pixmap is valid.
+     * The returned byte array can safely be passed to a background writer.
+     */
+    public static byte[] EncodePixmap(Pixmap pixmap, boolean flip) throws IOException {
+        if (pixmap == null) {
+            return new byte[0];
+        }
+
+        PixmapIO.PNG png = new PixmapIO.PNG();
+        png.setFlipY(flip);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        png.write(stream, pixmap);
+        return stream.toByteArray();
+    }
+
+    /**
+     * Writes PNG bytes in the same length-prefixed format as WritePixmap().
+     */
+    public static void WritePixmapData(
+            ObjectOutputStream out, byte[] data) throws IOException {
+        if (data == null || data.length == 0) {
+            out.writeInt(0);
+            return;
+        }
+
+        out.writeInt(data.length);
+        out.write(data);
+    }
+
     static public void WritePixmap(ObjectOutputStream out, Pixmap pixmap) throws IOException {
 
         if (pixmap != null) {

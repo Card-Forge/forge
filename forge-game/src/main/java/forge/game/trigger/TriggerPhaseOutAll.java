@@ -25,14 +25,14 @@ public class TriggerPhaseOutAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
         if (hasParam("ValidCards")) {
             cards = IterableUtil.filter(cards, CardPredicates.restriction(getParam("ValidCards").split(","),
                     getHostCard().getController(), getHostCard(), this));
         }
 
-        sa.setTriggeringObject(AbilityKey.Cards, cards);
+        objects.put(AbilityKey.Cards, cards);
     }
 
     @Override

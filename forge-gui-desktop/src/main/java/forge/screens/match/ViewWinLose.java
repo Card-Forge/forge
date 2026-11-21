@@ -15,7 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameType;
 import forge.game.GameView;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IWinLoseView;
@@ -42,6 +44,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     private final FScrollPane scrLog;
     private final FButton btnContinue, btnRestart, btnQuit;
+    private final SkinnedLabel lblQuitHint = new SkinnedLabel();
     private final SkinnedPanel pnlCustom;
 
     private final SkinnedLabel lblTitle = new SkinnedLabel("WinLoseFrame > lblTitle needs updating.");
@@ -77,24 +80,27 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getGameType()) {
+        // a recording only shows what happened: no rewards, no saving results, no next game
+        final boolean replay = matchUI.isReplay();
+        switch (replay ? GameType.Constructed : game0.getGameType()) {
             case Quest:
                 control = new QuestWinLose(this, game0, matchUI);
                 break;
             case QuestDraft:
                 control = new QuestDraftWinLose(this, game0, matchUI);
                 break;
-            case Draft:
-                if (!FModel.getGauntletMini().isGauntletDraft()) {
+            case Draft, CommanderDraft, Sealed:
+                if (!FModel.getLimitedMatch().isGauntletRound(game0)) {
                     break;
                 }
-                //$FALL-THROUGH$
-            case Sealed:
                 control = new LimitedWinLose(this, game0, matchUI);
                 break;
             case CommanderGauntlet:
             case Gauntlet:
                 control = new GauntletWinLose(this, game0, matchUI);
+                break;
+            case RogueCommander:
+                control = new RogueWinLose(this, game0, matchUI);
                 break;
             default: // will catch it after switch
                 break;
@@ -118,13 +124,23 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         lblStats.setFont(FSkin.getRelativeFont(26));
 
         final Localizer localizer = Localizer.getInstance();
+        // A puzzle is one fixed game: there is no "next game" and no new match to start, only trying it again.
+        final boolean puzzle = !replay && game0.getGameType() == GameType.Puzzle;
+        final boolean tutorial = !replay && HowToPlay.isTutorialGame(game0);
         btnContinue.setText(localizer.getMessage("btnNextGame"));
         btnContinue.setFont(FSkin.getRelativeFont(22));
-        btnRestart.setText(localizer.getMessage("btnStartNewMatch"));
+        btnRestart.setText(tutorial ? HowToPlay.restartLabel()
+            : puzzle ? localizer.getMessage("lblRestartPuzzle") : localizer.getMessage("btnStartNewMatch"));
         btnRestart.setFont(FSkin.getRelativeFont(22));
-        btnQuit.setText(localizer.getMessage("btnQuitMatch"));
+        btnQuit.setText(replay ? "Close replay" : tutorial ? HowToPlay.quitLabel()
+            : puzzle ? localizer.getMessage("lblQuitPuzzle") : localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
+        lblQuitHint.setFont(FSkin.getRelativeFont(14));
+        lblQuitHint.setForeground(FORE_COLOR);
+        lblQuitHint.setHorizontalAlignment(SwingConstants.CENTER);
+        lblQuitHint.setIconTextGap(8);
+        lblQuitHint.setVisible(false);
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
@@ -159,16 +175,25 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlOutcomes.setOpaque(false);
         pnlLeft.add(lblTitle, "h 60px!, center");
         pnlLeft.add(pnlOutcomes, "center");
-        pnlLeft.add(lblStats, "h 60px!, center");
+        if (control.shouldShowPlayerScores()) {
+            pnlLeft.add(lblStats, "h 60px!, center");
+        }
 
         // A container must be made to ensure proper centering.
         final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, wrap, ax center"));
         pnlButtons.setOpaque(false);
 
         final String constraints = "w 300px!, h 50px!, gap 0 0 20px 0";
-        pnlButtons.add(btnContinue, constraints);
-        pnlButtons.add(btnRestart, constraints);
+        if (!replay) {
+            if (!puzzle) {
+                pnlButtons.add(btnContinue, constraints);
+            }
+            pnlButtons.add(btnRestart, constraints);
+        }
         pnlButtons.add(btnQuit, constraints);
+        if (lblQuitHint.isVisible()) {
+            pnlButtons.add(lblQuitHint, "w 300px!, h 46px!, center");
+        }
         pnlLeft.add(pnlButtons, "w 100%!");
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
@@ -183,7 +208,8 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
-        lblTitle.setText(composeTitle(game0));
+        final String titleOverride = control.getOutcomeTitleOverride();
+        lblTitle.setText(titleOverride == null ? (replay ? "Replay: " : "") + composeTitle(game0) : titleOverride);
     }
 
     public final void show() {
@@ -257,6 +283,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showPlayerScores() {
+        if (!control.shouldShowPlayerScores()) {
+            return;
+        }
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message()));
         }
@@ -274,6 +303,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     @Override
     public void showRewards(final Runnable runnable) {
         runnable.run(); //just run on GUI thread
+    }
+
+    void showQuitButtonHint(String message, FSkinProp icon) {
+        lblQuitHint.setText(message);
+        lblQuitHint.setIcon(FSkin.getIcon(icon).scale(0.35));
+        lblQuitHint.setVisible(true);
     }
 
     @Override
