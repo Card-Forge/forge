@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import java.util.ArrayList;
+import java.util.List;
 import forge.card.ColorSet;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -143,6 +145,48 @@ public class TapAi extends TapAiBase {
         return payer.getLife() - amount >= Math.max(10, ActivationGuard.nextTurnThreat(payer) + 5);
     }
 
+    /** A spell that only aims at the AI's own permanents (Ephemerate, Cloudshift) is no play while it has none. */
+    private static boolean needsAnOwnTargetThatIsNotThere(final Player payer, final Card c) {
+        boolean any = false;
+        for (final SpellAbility spell : c.getSpellAbilities()) {
+            if (!spell.isSpell()) {
+                continue;
+            }
+            final String valid = spell.getParam("ValidTgts");
+            if (valid == null || !valid.contains("YouCtrl")) {
+                return false;
+            }
+            any = true;
+            if (!CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), valid, payer, c, spell).isEmpty()) {
+                return false;
+            }
+        }
+        return any;
+    }
+
+    /** The most mana of the cards that the AI can spend with {@code mana} from lands, counting the mana tokens they make. */
+    private static int spendable(final List<Card> cards, final int mana) {
+        final int n = Math.min(cards.size(), 10);
+        int best = 0;
+        for (int mask = 1; mask < (1 << n); mask++) {
+            int cost = 0;
+            int bonus = 0;
+            for (int i = 0; i < n; i++) {
+                if ((mask & (1 << i)) != 0) {
+                    final Card c = cards.get(i);
+                    cost += c.getCMC();
+                    if (c.getCMC() <= mana) {
+                        bonus += forge.ai.simulation.RampPlan.tokenMana(c);
+                    }
+                }
+            }
+            if (cost <= mana + bonus && cost > best) {
+                best = cost;
+            }
+        }
+        return best;
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Check for shocklands and similar ETB replacement effects
@@ -153,33 +197,41 @@ public class TapAi extends TapAiBase {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa) && lifeCanBeSpared(payer, amount)) {
-                        final int landsize = payer.getLandsInPlay().size() + 1;
-                        // Check if the AI has enough lands to play the card
-                        final CardCollection playable = CardLists.filter(
-                                payer.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(landsize));
-                        if (playable.isEmpty()) {
-                            return false;
+                        // the mana of the lands that are untapped now, and what the cards in hand can spend with and without this one
+                        int untapped = 0;
+                        for (final Card land : payer.getLandsInPlay()) {
+                            if (land.isUntapped()) {
+                                untapped++;
+                            }
                         }
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
                         final boolean creatureInPlay = payer.getGame().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CREATURES);
-                        for (Card c : playable) {
+                        final List<Card> candidates = new ArrayList<>();
+                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
+                            if (c.isLand() || c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
+                                continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
+                            }
                             if (c.isAura() && !creatureInPlay) {
                                 continue; // an Aura with nothing to enchant is not a reason to pay 2 life
-                            }
-                            if (c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
-                                continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
                             }
                             if (c.getCMC() < 2 && payer.getLife() < LOW_LIFE_FOR_ONE_DROP) {
                                 continue; // a one-drop is not worth the life while it is not plentiful
                             }
-                            // Check if the AI can pay for the card with the mana it has and intends to play it
-                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the
-                            // card always looks unaffordable. A nonland card that needs exactly this land's mana will do
-                            if (!c.isLand() && c.getManaCost().canBePaidWithAvailable(availableColors)) {
-                                return true;
+                            if (needsAnOwnTargetThatIsNotThere(payer, c)) {
+                                continue; // Ephemerate with no creature to blink
                             }
+                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the card always
+                            // looks unaffordable. The colours of the sources with this land are what can be checked
+                            if (c.getManaCost().canBePaidWithAvailable(availableColors)) {
+                                candidates.add(c);
+                            }
+                        }
+                        // a land that lets the hand spend more this turn is worth the life: a card that needs exactly
+                        // this land, or two cards that fit together once a Malevolent Rumble's Spawn is counted
+                        if (spendable(candidates, untapped + 1) > spendable(candidates, untapped)) {
+                            return true;
                         }
                     }
                     return false;

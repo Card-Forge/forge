@@ -1959,6 +1959,15 @@ public class AiController {
             }
         }
 
+        {
+            // Malevolent Rumble and the like: the spell whose token pays for the next one goes first
+            final SpellAbility tokenMana = forge.ai.simulation.RampPlan.tokenManaStep(player, this::loopApproved);
+            if (tokenMana != null) {
+                forge.ai.simulation.VetoLog.note(player, "token-mana-first | " + tokenMana.getHostCard().getName());
+                return singleSpellAbilityList(tokenMana);
+            }
+        }
+
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && flatMonteCarloActive()) {
             // landfall: a landfall permanent the lands in play already pay for is cast first, so the land triggers it.

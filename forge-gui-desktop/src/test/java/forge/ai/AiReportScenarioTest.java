@@ -983,6 +983,39 @@ public class AiReportScenarioTest extends AITest {
                     final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
                     return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
                 }));
+        // 12986: Malevolent Rumble's Spawn pays for a second spell, so the third Overgrown Tomb is worth the two life
+        l.add(new Scenario("12986-rumble-shockland", "Two Tombs and Malevolent Rumble with Emperor of Bones in hand: the third Tomb is worth two life", Fid.APPROX, M1, true,
+                c -> { c.bf("Overgrown Tomb", 2, c.ai); c.hand("Malevolent Rumble", c.ai); c.hand("Emperor of Bones", c.ai); c.hand("Overgrown Tomb", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Overgrown Tomb")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? null : "the AI let the third Overgrown Tomb enter tapped (life " + c.ai.getLife() + ")";
+                }));
+        l.add(play("12986-rumble-first", "With three untapped lands, Malevolent Rumble is cast before Emperor of Bones: the Spawn pays for it", Fid.APPROX,
+                M1, true, "Malevolent Rumble", c -> {
+                    c.bf("Overgrown Tomb", 3, c.ai); c.hand("Malevolent Rumble", c.ai); c.hand("Emperor of Bones", c.ai);
+                    c.lib("Forest", 4, c.ai);
+                }));
+        // 12982: a spell that only aims at the AI's own permanents is no reason to pay for the land
+        l.add(new Scenario("12982-ephemerate-fountain", "Hallowed Fountain and Ephemerate on turn one with no creature: the Fountain enters tapped", Fid.APPROX, M1, true,
+                c -> { c.hand("Ephemerate", c.ai); c.hand("Hallowed Fountain", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Hallowed Fountain")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI paid 2 life for a Hallowed Fountain with only Ephemerate and no creature" : null;
+                }));
+        // 12984: a Plains and green one-drops
+        l.add(new Scenario("12984-wrong-colour-land", "A Plains and green one-drops is no keep", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Forest", c.ai); c.lib("Llanowar Elves", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Llanowar Elves", "Llanowar Elves", "Elvish Mystic", "Elvish Mystic", "Fyndhorn Elves" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept a Plains with green one-drops" : null;
+                }));
         // ---- which creatures a pump can still matter to (before / after the attackers and the blockers are declared)
         l.add(new Scenario("relevance-attacker-before-declaring", "Own turn, declare attackers, none declared yet: the untapped Colossus can still attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Chameleon Colossus", c.ai); c.game.getPhaseHandler().setCombat(new Combat(c.ai)); },

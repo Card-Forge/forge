@@ -508,4 +508,34 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         AssertJUnit.assertEquals(12, RampPlan.scapeshiftDamage(ai));
         AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
     }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftFetchesOnlyTheValakutsTheKeptMountainsSupport() {
+        setUp();
+        addCards("Mountain", 6, ai);
+        addCardToZone("Forest", ai, ZoneType.Battlefield);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        for (int i = 0; i < 2; i++) {
+            addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        }
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        game.getPlayers().get(0).setLife(9, null);
+
+        // four lands go (the Forest and three Mountains): three Mountains stay, one Valakut and three Mountains come in
+        AssertJUnit.assertEquals(9, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertEquals(4, RampPlan.scapeshiftLandsToSacrifice(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
+
+        final CardCollection pool = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        final java.util.List<String> chosen = new java.util.ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            final Card pick = RampPlan.nextPick(ai, pool, 4);
+            AssertJUnit.assertNotNull(pick);
+            chosen.add(pick.getName());
+            pool.remove(pick);
+        }
+        AssertJUnit.assertEquals(java.util.Arrays.asList("Valakut, the Molten Pinnacle", "Mountain", "Mountain", "Mountain"), chosen);
+    }
 }

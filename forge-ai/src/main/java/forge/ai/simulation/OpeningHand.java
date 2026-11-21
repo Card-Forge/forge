@@ -120,7 +120,7 @@ public final class OpeningHand {
         }
         final CardCollection kept = new CardCollection(hand);
         kept.removeAll(bottom(ai, hand, cardsToReturn, onPlay, plan, lib));
-        if (!playable(kept, finalSize) && !dredgeOneLander(kept, plan)) {
+        if ((!playable(kept, finalSize) || !castsSomething(kept, lib)) && !dredgeOneLander(kept, plan)) {
             return false; // no key card, combo piece or good score makes up for a hand that cannot cast anything
         }
         if (plan != null && plan.combos.has(ComboPlan.Kind.TUTOR_STORM)) {
@@ -179,6 +179,29 @@ public final class OpeningHand {
             return false;
         }
         return !(size >= 6 && lands >= size - 1);
+    }
+
+    /**
+     * Whether a spell of the hand can be cast with the colours of the lands in it (#12984: a Plains and green one-drops).
+     * A colour that the deck makes plentifully may still come, but a hand whose every spell waits for it is no keep.
+     */
+    static boolean castsSomething(final CardCollectionView kept, final Library lib) {
+        byte colors = 0;
+        boolean spell = false;
+        for (final Card c : kept) {
+            if (c.isLand() || isMdfcLand(c)) {
+                if (isEarlyManaLand(c)) {
+                    final byte own = producedColors(c);
+                    colors |= own != 0 ? own : libraryColors(lib);
+                }
+            } else if (!isCreatureAura(c)) {
+                spell = true;
+                if ((c.getManaCost().getColorProfile() & ~colors) == 0) {
+                    return true;
+                }
+            }
+        }
+        return !spell; // only lands: judged by the other rules
     }
 
     /** One land and a 1 mana outlet in a dredge deck: Faithless Looting on turn one is a normal keep. */

@@ -195,6 +195,14 @@ public final class RampPlan {
 
     /** How many of the {@code total} lands searched for should be Valakuts: the count that deals the most damage. */
     private static int valakutsToFetch(final Player ai, final int total, final int valakutsInLibrary) {
+        if (!scapeshiftResolving(ai)) {
+            // Before the sacrifice the lands about to go are still in play: the Scapeshift line already knows which
+            // Mountains stay, so its Valakut count is the one to use (counting them here fetched one Valakut too many)
+            final Line line = bestLine(ai);
+            if (line.damage > 0 && line.sacrificed == total) {
+                return line.valakuts;
+            }
+        }
         int valakutsInPlay = 0;
         int mountainsInPlay = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -216,6 +224,16 @@ public final class RampPlan {
             }
         }
         return best;
+    }
+
+    /** Whether a Scapeshift is on the stack: its lands are sacrificed already and the board is the one that stays. */
+    private static boolean scapeshiftResolving(final Player ai) {
+        for (final Card c : ai.getCardsIn(ZoneType.Stack)) {
+            if (c.getName().equals(SCAPESHIFT)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static CardCollection landsOnly(final Iterable<Card> pool) {
@@ -409,6 +427,77 @@ public final class RampPlan {
                     }
                 }
             }
+        }
+        return null;
+    }
+
+    /** The mana a spell leaves behind as a token that is sacrificed for it (Malevolent Rumble's Eldrazi Spawn, Treasure). */
+    public static int tokenMana(final Card c) {
+        int mana = 0;
+        for (final SpellAbility spell : c.getSpellAbilities()) {
+            if (!spell.isSpell()) {
+                continue;
+            }
+            for (SpellAbility sa = spell; sa != null; sa = sa.getSubAbility()) {
+                final String script = sa.getParamOrDefault("TokenScript", "");
+                if (sa.getApi() == ApiType.Token && (script.contains("eldrazi_spawn") || script.contains("treasure"))) {
+                    int amount = 1;
+                    try {
+                        amount = Integer.parseInt(sa.getParamOrDefault("TokenAmount", "1"));
+                    } catch (final NumberFormatException e) {
+                        // a variable amount: one is what is certain
+                    }
+                    mana += amount;
+                }
+            }
+            return mana;
+        }
+        return 0;
+    }
+
+    /**
+     * A spell that makes mana (Malevolent Rumble) is cast before the card that its token pays for: with two lands and a
+     * third that came in untapped, the Rumble first and the Spawn for a two-drop is four mana out of three lands, the
+     * other way round is one spell.
+     */
+    public static SpellAbility tokenManaStep(final Player ai, final Predicate<SpellAbility> approve) {
+        if (ai == null || ai.getGame() == null || !ai.getGame().getStack().isEmpty()) {
+            return null;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.isPlayerTurn(ai) || !(ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2))) {
+            return null;
+        }
+        try {
+            final int mana = ComputerUtilMana.getAvailableManaEstimate(ai);
+            for (final Card maker : ai.getCardsIn(ZoneType.Hand)) {
+                final int bonus = maker.isLand() ? 0 : tokenMana(maker);
+                if (bonus <= 0 || maker.getCMC() > mana) {
+                    continue;
+                }
+                // another card that only fits because of the token: more than the lands pay, no more than lands and token
+                boolean needed = false;
+                for (final Card other : ai.getCardsIn(ZoneType.Hand)) {
+                    if (other != maker && !other.isLand() && !other.isInstant() && !other.hasKeyword(forge.game.keyword.Keyword.FLASH)
+                            && maker.getCMC() + other.getCMC() > mana && maker.getCMC() + other.getCMC() <= mana + bonus) {
+                        needed = true;
+                        break;
+                    }
+                }
+                if (!needed) {
+                    continue;
+                }
+                for (final SpellAbility sa : abilitiesOf(ai, maker)) {
+                    if (sa.isSpell()) {
+                        final SpellAbility ok = approved(ai, sa, approve);
+                        if (ok != null) {
+                            return ok;
+                        }
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            VetoLog.note(ai, "token-mana-step failed: " + e);
         }
         return null;
     }
