@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import forge.GuiDesktop;
 import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
@@ -148,7 +149,7 @@ public final class HelpMenu {
     protected static File getFile(String filename) {
         // !! Linux is case-sensitive so file name and extension need to match exactly !!
         File file = null;
-        String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
+        String filePath = FileUtil.pathCombine(GuiDesktop.getInstallDir(), filename);
         if (FileUtil.doesFileExist(filePath)) {
             file = new File(filePath);
         }

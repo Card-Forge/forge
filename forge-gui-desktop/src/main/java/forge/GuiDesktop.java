@@ -90,8 +90,18 @@ public class GuiDesktop implements IGuiBase {
         return "Forge/" + getCurrentVersion() + " (gui-desktop)";
     }
 
+    /** Install folder (README, CHANGES.txt): -Dforge.assetsDir if set, else the working directory. */
+    public static String getInstallDir() {
+        return StringUtils.defaultIfBlank(System.getProperty("forge.assetsDir"), System.getProperty("user.dir"));
+    }
+
     @Override
     public String getAssetsDir() {
+        // For launchers that don't start in the install folder
+        final String override = System.getProperty("forge.assetsDir");
+        if (StringUtils.isNotBlank(override)) {
+            return override.endsWith(File.separator) ? override : override + File.separator;
+        }
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
                 // FIXME: replace this hardcoded value!!
                 "../forge-gui/" : "";
