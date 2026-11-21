@@ -1200,6 +1200,22 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void theLandSearchFillsRemainingSlotsAfterItsValakutPriority() {
+        elfDeckWith(2, "Scapeshift");
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        final Card mountain = addCardToZone("Mountain", ai, ZoneType.Library);
+        final Card utility = addCardToZone("Kessig Wolf Run", ai, ZoneType.Library);
+
+        final forge.game.card.CardCollection picks =
+                forge.ai.simulation.RampPlan.picks(ai, cards(mountain, utility), 2);
+
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("the search fills both available slots", 2, picks.size());
+        AssertJUnit.assertEquals("the useful Mountain keeps priority", mountain, picks.get(0));
+        AssertJUnit.assertTrue("the remaining slot uses the available utility land", picks.contains(utility));
+    }
+
+    @Test(timeOut = 120000)
     public void kessigWolfRunWaitsOutsideTheCombat() {
         elfDeckWith(1);
         final Card run = addCardToZone("Kessig Wolf Run", ai, ZoneType.Battlefield);

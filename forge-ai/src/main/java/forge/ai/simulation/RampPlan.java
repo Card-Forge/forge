@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -267,6 +268,35 @@ public final class RampPlan {
             if (out.size() < n && !out.contains(c) && isMountain(c)) {
                 out.add(c);
             }
+        }
+
+        // The Valakut line is a priority, not a restriction on the rest of the search.
+        // Fill any remaining slots with the normal AI land preference rather than returning
+        // fewer cards than the search can legally find. Prefer other lands over extra Valakuts
+        // that the damage calculation deliberately chose not to fetch.
+        final CardCollection remaining = new CardCollection();
+        final CardCollection extraValakuts = new CardCollection();
+        for (final Card c : lands) {
+            if (out.contains(c)) {
+                continue;
+            }
+            if (isValakutLand(c)) {
+                extraValakuts.add(c);
+            } else {
+                remaining.add(c);
+            }
+        }
+        while (out.size() < n) {
+            Card best = ComputerUtilCard.getBestLandAI(remaining);
+            if (best == null) {
+                best = ComputerUtilCard.getBestLandAI(extraValakuts);
+            }
+            if (best == null) {
+                break;
+            }
+            out.add(best);
+            remaining.remove(best);
+            extraValakuts.remove(best);
         }
         return out;
     }

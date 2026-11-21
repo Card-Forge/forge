@@ -1720,6 +1720,58 @@ public class AiReportScenarioTest extends AITest {
                 M1, true, "Scapeshift", c -> {
                     c.richMana(); c.hand("Scapeshift", c.ai); c.lib("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 7, c.ai);
                 }));
+        l.add(new Scenario("scapeshift-valakut-trigger-batch-resolves",
+                "Scapeshift resolves and all seven Valakut triggers target the opponent as a lethal batch", Fid.APPROX, M1, true,
+                c -> {
+                    // Eight lands are sacrificed: three Mountains and five Forests. The seven fetched Mountains
+                    // enter together with Valakut, so each one sees at least five other Mountains.
+                    c.bf("Mountain", 3, c.ai);
+                    c.bf("Forest", 5, c.ai);
+                    c.hand("Scapeshift", c.ai);
+                    c.lib("Valakut, the Molten Pinnacle", c.ai);
+                    c.lib("Mountain", 7, c.ai);
+                },
+                c -> {
+                    final SpellAbility scapeshift = c.playOf("Scapeshift");
+                    if (scapeshift == null) {
+                        return "AI did not choose Scapeshift" + c.why("Scapeshift");
+                    }
+                    if (!ComputerUtil.playStack(scapeshift, c.ai, c.game)) {
+                        return "Scapeshift could not be cast";
+                    }
+
+                    int valakutTriggers = 0;
+                    final List<String> misdirected = new ArrayList<>();
+                    for (int i = 0; i < 50; i++) {
+                        c.game.getStack().addAllTriggeredAbilitiesToStack();
+                        if (c.game.getStack().isEmpty()) {
+                            break;
+                        }
+                        final SpellAbility top = c.game.getStack().peekAbility();
+                        c.trace.append(" [resolving ").append(top)
+                                .append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
+                        final Card source = top.getHostCard();
+                        if (top.isTrigger() && top.getApi() == ApiType.DealDamage && source != null
+                                && "Valakut, the Molten Pinnacle".equals(source.getName())) {
+                            valakutTriggers++;
+                            if (top.getTargets() == null || !top.getTargets().contains(c.opp)) {
+                                misdirected.add(String.valueOf(top.getTargets()));
+                            }
+                        }
+                        c.game.getStack().resolveStack();
+                        c.game.getAction().checkStateEffects(true);
+                    }
+
+                    if (valakutTriggers != 7) {
+                        return "expected seven simultaneous Valakut triggers, observed " + valakutTriggers
+                                + " | " + c.trace;
+                    }
+                    if (!misdirected.isEmpty()) {
+                        return "Valakut triggers were not all aimed at the opponent: " + misdirected;
+                    }
+                    return c.opp.getLife() <= 0 ? null
+                            : "the seven 3-damage triggers did not finish the opponent (life " + c.opp.getLife() + ")";
+                }));
         l.add(noPlay("scapeshift-valakut-not-lethal", "Scapeshift waits when its six fetched Mountains only deal 18", Fid.APPROX,
                 M1, true, "Scapeshift", c -> {
                     c.richMana(); c.hand("Scapeshift", c.ai); c.bf("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 6, c.ai);
