@@ -1297,11 +1297,17 @@ public class MapStage extends GameStage {
 
     public boolean dialogInput(int keycode) {
         if (dialogOnlyInput) {
-            if (KeyBinding.Up.isPressed(keycode)) {
+            if (KeyBinding.Up.isPressed(keycode) && !scrollDialogText(false)) {
                 selectPreviousDialogButton();
             }
-            if (KeyBinding.Down.isPressed(keycode)) {
+            if (KeyBinding.Down.isPressed(keycode) && !scrollDialogText(true)) {
                 selectNextDialogButton();
+            }
+            if (KeyBinding.ScrollUp.isPressed(keycode)) {
+                scrollDialogText(false);
+            }
+            if (KeyBinding.ScrollDown.isPressed(keycode)) {
+                scrollDialogText(true);
             }
             if (KeyBinding.Use.isPressed(keycode)) {
                 performTouch(dialogStage.getKeyboardFocus());

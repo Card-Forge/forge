@@ -235,11 +235,11 @@ public class RewardScene extends UIScene {
     }
 
     /** The bobbing down-arrow from the item preview, shown while its pane has more below. */
-    static class MoreArrow extends Actor {
+    public static class MoreArrow extends Actor {
         private final ScrollPane pane;
         private float elapsed;
 
-        MoreArrow(ScrollPane pane) {
+        public MoreArrow(ScrollPane pane) {
             this.pane = pane;
             setSize(7, 6);
         }
@@ -257,7 +257,7 @@ public class RewardScene extends UIScene {
     }
 
     /** @return a style with a thin white scroll bar, for a scrolling list in a dialog */
-    static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
+    public static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
         TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
         ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
         barStyle.vScroll = white.tint(new Color(1, 1, 1, 0.15f));
