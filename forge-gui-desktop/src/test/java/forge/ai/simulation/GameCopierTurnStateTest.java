@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.testng.AssertJUnit;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -209,5 +211,97 @@ public class GameCopierTurnStateTest extends SimulationTest {
         final List<SpellAbility> copied = activated(find(copy, "Skyblade's Boon"));
         AssertJUnit.assertEquals(0, copied.get(0).getActivationsThisTurn());
         AssertJUnit.assertEquals(1, copied.get(1).getActivationsThisTurn());
+    }
+
+    /** A card moved twice this turn (battlefield, exile, graveyard): each zone keeps where its card came from. */
+    @Test
+    public void aCardMovedTwiceThisTurnKeepsEachMove() {
+        final Game game = newGameInMain2(3);
+        final Player p = game.getPlayers().get(1);
+        final Card bears = addCard("Grizzly Bears", p);
+        final Card exiled = game.getAction().exile(bears, null, null);
+        game.getAction().moveToGraveyard(exiled, null);
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final Player q = copy.getPlayers().get(1);
+        AssertJUnit.assertEquals(1, q.getZone(ZoneType.Exile).getCardsAddedThisTurn(ZoneType.Battlefield).size());
+        AssertJUnit.assertEquals(1, q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Exile).size());
+        AssertJUnit.assertEquals(0, q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield).size());
+    }
+
+    @Test
+    public void everyCreatureThatDiedThisTurnIsKept() {
+        final Game game = newGameInMain2(3);
+        final Player p = game.getPlayers().get(1);
+        final List<String> names = List.of("Grizzly Bears", "Hill Giant", "Llanowar Elves");
+        for (final String name : names) {
+            game.getAction().moveToGraveyard(addCard(name, p), null);
+        }
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final List<String> died = new ArrayList<>();
+        final Player q = copy.getPlayers().get(1);
+        for (final Card c : q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield)) {
+            died.add(c.getName());
+        }
+        Collections.sort(died);
+        AssertJUnit.assertEquals(names, died);
+    }
+
+    /** Raid and morbid: a token that attacked, died and ceased to exist is rebuilt from what was last known of it. */
+    @Test
+    public void aTokenThatAttackedAndCeasedToExistIsKept() {
+        final Game game = newGameInMain2(3);
+        final Player p = game.getPlayers().get(1);
+        final Card token = addToken("g_2_2_bear", p);
+        p.addCreaturesAttackedThisTurn(CardCopyService.getLKICopy(token), game.getPlayers().get(0));
+        final Card dead = game.getAction().moveToGraveyard(token, null);
+        game.getAction().ceaseToExist(dead, true);
+        AssertJUnit.assertNull(game.findById(token.getId()));
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        final Player q = copy.getPlayers().get(1);
+        final List<Card> attacked = q.getCreaturesAttackedThisTurn();
+        AssertJUnit.assertEquals(1, attacked.size());
+        AssertJUnit.assertTrue(attacked.get(0).isToken());
+        final List<Card> died = q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield);
+        AssertJUnit.assertEquals(1, died.size());
+        AssertJUnit.assertTrue(died.get(0).isToken());
+    }
+
+    /** Making a copy reads the original's history and leaves it as it was: the same cards, of the original game. */
+    @Test
+    public void makingACopyLeavesTheOriginalHistoryAlone() {
+        final Game game = newGameInMain2(3);
+        final Player p = game.getPlayers().get(1);
+        final Card bears = addCard("Grizzly Bears", p);
+        p.addCreaturesAttackedThisTurn(CardCopyService.getLKICopy(bears), game.getPlayers().get(0));
+        game.getAction().moveToGraveyard(bears, null);
+        final List<Card> attacked = p.getCreaturesAttackedThisTurn();
+        final List<Card> died = p.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield);
+        final List<Card> left = new ArrayList<>(game.getLeftBattlefieldThisTurn());
+        AssertJUnit.assertEquals(1, left.size());
+
+        final Game copy = new GameCopier(game).makeCopy();
+
+        assertSameCards(game, attacked, p.getCreaturesAttackedThisTurn());
+        assertSameCards(game, died, p.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield));
+        assertSameCards(game, left, game.getLeftBattlefieldThisTurn());
+        final Player q = copy.getPlayers().get(1);
+        AssertJUnit.assertSame(copy, q.getCreaturesAttackedThisTurn().get(0).getGame());
+        final Card diedInCopy = q.getZone(ZoneType.Graveyard).getCardsAddedThisTurn(ZoneType.Battlefield).get(0);
+        AssertJUnit.assertSame(copy, diedInCopy.getGame());
+    }
+
+    /** The same card objects (cards are equal by id, so a copy's card would pass equals), still of {@code game}. */
+    private static void assertSameCards(Game game, List<Card> before, List<Card> after) {
+        AssertJUnit.assertEquals(before.size(), after.size());
+        for (int i = 0; i < before.size(); i++) {
+            AssertJUnit.assertSame(before.get(i), after.get(i));
+            AssertJUnit.assertSame(game, after.get(i).getGame());
+        }
     }
 }
