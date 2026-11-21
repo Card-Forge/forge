@@ -169,8 +169,26 @@ public class TapAi extends TapAiBase {
         return any;
     }
 
+    /**
+     * Life can replace a Phyrexian pip only when the real payment path permits it for every cast mode of the card.
+     * Being conservative here avoids paying life for a land based on a spell that cannot use the life alternative.
+     */
+    private static boolean canPayPhyrexianWithLife(final Player payer, final Card card) {
+        boolean foundSpell = false;
+        for (final SpellAbility spell : card.getSpellAbilities()) {
+            if (!spell.isSpell()) {
+                continue;
+            }
+            foundSpell = true;
+            if (!ComputerUtilMana.canPayLifeForManaShard(payer, spell, 2)) {
+                return false;
+            }
+        }
+        return foundSpell;
+    }
+
     /** The most mana of the cards that the AI can spend with {@code mana} from lands, counting the mana tokens they make. */
-    private static int spendable(final List<Card> cards, final int mana, final List<Byte> sourceColors,
+    private static int spendable(final Player payer, final List<Card> cards, final int mana, final List<Byte> sourceColors,
                                  final int phyrexianLife) {
         final int n = Math.min(cards.size(), 10);
         int best = 0;
@@ -189,7 +207,11 @@ public class TapAi extends TapAiBase {
                         if (shard.isPhyrexian()) {
                             final byte colors = shard.getColorMask();
                             if (colors != 0) {
-                                phyrexianRequirements.add(colors);
+                                if (canPayPhyrexianWithLife(payer, c)) {
+                                    phyrexianRequirements.add(colors);
+                                } else {
+                                    requirements.add(colors); // rules or card policy require mana for this pip
+                                }
                             }
                         } else if (!shard.isOr2Generic() && !shard.isColorless()) {
                             final byte colors = shard.getColorMask();
@@ -275,8 +297,8 @@ public class TapAi extends TapAiBase {
                         }
                         // a land that lets the hand spend more this turn is worth the life: a card that needs exactly
                         // this land, or two cards that fit together once a Malevolent Rumble's Spawn is counted
-                        if (spendable(candidates, untapped + 1, sourcesWith, lifeAvailableWith)
-                                > spendable(candidates, untapped, sourcesNow, lifeAvailableNow)) {
+                        if (spendable(payer, candidates, untapped + 1, sourcesWith, lifeAvailableWith)
+                                > spendable(payer, candidates, untapped, sourcesNow, lifeAvailableNow)) {
                             return true;
                         }
                     }

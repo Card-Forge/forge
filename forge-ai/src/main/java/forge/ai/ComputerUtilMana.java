@@ -84,6 +84,36 @@ public class ComputerUtilMana {
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
+
+    /**
+     * Whether the AI may use life instead of a mana shard while paying a cost.
+     * Keep the life-payment restrictions here so mana estimation and actual payment use the same rules.
+     */
+    public static boolean canPayLifeForManaShard(final Player ai, final SpellAbility sa, final int lifeAmount) {
+        if (ai == null || sa == null || !ai.canPayLife(lifeAmount, false, sa)
+                || (ai.getLife() <= lifeAmount && !ai.cantLoseForZeroOrLessLife())) {
+            return false;
+        }
+        if (sa.hasParam("AIPhyrexianPayment")) {
+            final String policy = sa.getParam("AIPhyrexianPayment");
+            if ("Never".equals(policy)) {
+                return false;
+            }
+            if (policy.startsWith("OnFatalDamage.")) {
+                final int damage;
+                try {
+                    damage = Integer.parseInt(policy.substring(14));
+                } catch (final NumberFormatException e) {
+                    return false;
+                }
+                if (ai.getOpponents().stream().noneMatch(PlayerPredicates.lifeLessOrEqualTo(damage))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return payManaCost(cost, sa, ai, true, extraMana, true, effect);
     }
@@ -770,8 +800,8 @@ public class ComputerUtilMana {
 
             if (saPayment == null) {
                 boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(phyLifeToPay, false, sa)
-                        || (ai.getLife() <= phyLifeToPay && !ai.cantLoseForZeroOrLessLife())) {
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack)
+                        || !canPayLifeForManaShard(ai, sa, phyLifeToPay)) {
                     // cannot pay
                     break;
                 }

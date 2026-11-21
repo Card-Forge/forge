@@ -395,4 +395,28 @@ public class ComputerUtilManaTest extends SimulationTest {
         assertFalse(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate must not count the Diamond");
         assertFalse(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "and the payer must not take it");
     }
+
+    @Test
+    public void phyrexianLifePaymentRespectsKarnsSylex() {
+        final Player p = sacrificeBoard(0, "Karn's Sylex");
+        p.setLife(14, null);
+        final SpellAbility sa = addCardToZone("Phyrexian Metamorph", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsNeverPolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Mental Misstep", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsOnFatalDamagePolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Gut Shot", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+        p.getGame().getPlayers().get(0).setLife(1, null);
+        assertTrue(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
 }
