@@ -2118,6 +2118,29 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); final Card v = c.bf("Aether Vial", c.ai); c.counters(v, CounterEnumType.CHARGE, 1); c.hand("Aether Vial", c.ai); }));
         l.add(noPlay("12766", "Aura on its creature while the opponent's Spellskite can redirect it", Fid.APPROX, M1, true, "Rancor",
                 c -> { c.bf("Forest", c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Rancor", c.ai); c.bf("Spellskite", c.opp); }));
+        // Spellskite's {U/P} paid with life: the AI redirected every untap of the opponent's land (16 -> 6 life) because only a few cards opt in to a limit
+        l.add(noPlay("phyrexian-spellskite-untap", "Spellskite paying 2 life to redirect the untap of the opponent's own land", Fid.EXACT, M1, false, "Spellskite",
+                c -> { c.ai.setLife(16, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai);
+                    final Card follower = c.bf("Kiora's Follower", c.opp); final Card coast = c.bf("Yavimaya Coast", c.opp);
+                    final SpellAbility untap = follower.getSpellAbilities().stream().filter(sa -> sa.getApi() == ApiType.Untap).findFirst().get();
+                    untap.setActivatingPlayer(c.opp); untap.getTargets().add(coast); c.game.getStack().add(untap);
+                    if (c.game.getStack().isEmpty()) { throw new IllegalStateException("the opponent's ability did not reach the stack"); } }));
+        l.add(play("phyrexian-spellskite-bolt", "Spellskite paying 2 life to keep its creature from a Lightning Bolt", Fid.APPROX, M1, false, "Spellskite",
+                c -> { c.ai.setLife(16, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
+        l.add(noPlay("phyrexian-spellskite-low-life", "Spellskite paying life at 5 life, even to keep its creature from a Lightning Bolt", Fid.APPROX, M1, false, "Spellskite",
+                c -> { c.ai.setLife(5, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
+        l.add(new Scenario("phyrexian-activated-life-floor", "An activated ability's Phyrexian mana never takes the AI below 4 life", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final Card skite = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Spellskite")).findFirst().get();
+                    final SpellAbility sa = skite.getSpellAbilities().stream().filter(s -> s.getApi() == ApiType.ChangeTargets).findFirst().get();
+                    sa.setActivatingPlayer(c.ai);
+                    c.ai.setLife(6, null);
+                    if (!ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 2)) { return "at 6 life, which leaves the 4 that a PayLife cost keeps, the AI refused to pay"; }
+                    c.ai.setLife(5, null);
+                    if (ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 2)) { return "at 5 life the AI paid 2 for Spellskite and was left with 3"; }
+                    return ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 4) ? "a second Phyrexian pip would have left 1 life" : null;
+                }));
         // a deck that is not built around the graveyard: Nethergoyf (escape) is a card to cast, not one to Thoughtseize away
         l.add(new Scenario("12888", "Thoughtseize aimed at the AI itself to discard Nethergoyf", Fid.EXACT, "MAIN2", true,
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Thoughtseize", c.ai); c.hand("Thoughtseize", c.ai); c.hand("Nethergoyf", c.ai); c.hand("Lightning Bolt", c.opp); },

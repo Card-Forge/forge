@@ -260,6 +260,21 @@ public class ComputerUtilCost {
         return true;
     }
 
+    /**
+     * The life the AI keeps when an activated ability costs it life: the script's AILifeThreshold, else the default
+     * (what {@link #checkLifeCost} is given for a PayLife cost; Phyrexian mana paid with life has to respect it too).
+     */
+    public static int lifeToKeep(final SpellAbility sa, final int defaultLife) {
+        if (sa != null && sa.hasParam("AILifeThreshold")) {
+            try {
+                return Integer.parseInt(sa.getParam("AILifeThreshold"));
+            } catch (final NumberFormatException e) {
+                return defaultLife;
+            }
+        }
+        return defaultLife;
+    }
+
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final SpellAbility sourceAbility, final boolean effect) {
         // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
         if (cost == null || !ai.isAI()) {

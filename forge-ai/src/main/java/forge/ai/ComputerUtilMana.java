@@ -94,6 +94,12 @@ public class ComputerUtilMana {
                 || (ai.getLife() <= lifeAmount && !ai.cantLoseForZeroOrLessLife())) {
             return false;
         }
+        // an activated ability can be used again and again, so, like a PayLife cost (ComputerUtilCost.checkLifeCost),
+        // its Phyrexian mana never takes the AI below the life it keeps; no card needs to opt in to this one
+        if (ai.isAI() && sa.isActivatedAbility() && !ai.cantLoseForZeroOrLessLife()
+                && ai.getLife() - lifeAmount < ComputerUtilCost.lifeToKeep(sa, 4)) {
+            return false;
+        }
         if (sa.hasParam("AIPhyrexianPayment")) {
             final String policy = sa.getParam("AIPhyrexianPayment");
             if ("Never".equals(policy)) {
