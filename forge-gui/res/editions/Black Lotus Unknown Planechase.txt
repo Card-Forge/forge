@@ -1,9 +1,9 @@
 [metadata]
-Code=PUNK
+Code=OUNK
 Date=2024-02-24
 Name=Black Lotus Unknown Planechase
 Type=Funny
-ScryfallCode=PUNK
+ScryfallCode=OUNK
 
 [cards]
 PLA001 C Artist Alley @
