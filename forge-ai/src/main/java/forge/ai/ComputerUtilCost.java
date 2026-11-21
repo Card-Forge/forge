@@ -386,7 +386,8 @@ public class ComputerUtilCost {
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
+                        if (creatureInDanger && (!ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)
+                                || preventsCombatDamage(sourceAbility))) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;
@@ -454,6 +455,16 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice && part.payCostFromSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A Fog prevents all combat damage; a bounded PreventDamage shield may not stop trample. */
+    public static boolean preventsCombatDamage(final SpellAbility sa) {
+        for (SpellAbility ability = sa; ability != null; ability = ability.getSubAbility()) {
+            if (ability.getApi() == ApiType.Fog && ability.metConditions()) {
                 return true;
             }
         }

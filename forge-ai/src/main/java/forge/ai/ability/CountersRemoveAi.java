@@ -74,6 +74,19 @@ public class CountersRemoveAi extends SpellAbilityAi {
         return super.checkApiLogic(ai, sa);
     }
 
+    /** True only while a card was actually cast for Impending and still has time counters. */
+    public static boolean isImpendingPermanent(final Card card) {
+        if (card == null || card.getCounters(CounterEnumType.TIME) <= 0 || card.isCreature()
+                || !card.hasStartOfKeyword("Impending") || card.getRules() == null
+                || !card.getRules().getType().isCreature()) {
+            return false;
+        }
+        // The keyword is printed on the card even when it was cast normally. Check the actual cast so
+        // that an ordinary Overlord with unrelated time counters is not mistaken for an impending one.
+        final SpellAbility cast = card.getCastSA();
+        return cast != null && cast.isImpending();
+    }
+
     /**
      * "Remove all counters from target permanent" paid for with the source itself (Vampire Hexmage): the own permanent
      * that is better off without its counters, or null when there is none or this is not the moment to give up the source.
@@ -97,13 +110,21 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
         Card best = null;
         int bestValue = Integer.MIN_VALUE;
-        for (final Card c : CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa)) {
+        final CardCollection ownTargets = new CardCollection();
+        ownTargets.addAll(CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa));
+        // canTarget() rejects a target already selected by this ability (unique-target check). Include it
+        // explicitly because this method is also called again while the AI is checking the sacrifice cost.
+        for (final Card selected : sa.getTargets().getTargetCards()) {
+            if (selected.isInZone(ZoneType.Battlefield) && selected.getController() == ai && !ownTargets.contains(selected)) {
+                ownTargets.add(selected);
+            }
+        }
+        for (final Card c : ownTargets) {
             if (c == source) {
                 continue;
             }
             int value;
-            if (c.getCounters(CounterEnumType.TIME) > 0 && c.hasStartOfKeyword("Impending")
-                    && c.getRules() != null && c.getRules().getType().isCreature()) {
+            if (isImpendingPermanent(c)) {
                 value = 10000 + ComputerUtilCard.evaluateCreature(c); // it turns into the creature it is
             } else if (c.isCreature() && hasNegativeCounter(c) && ComputerUtilCard.evaluateCreature(c) > sourceValue) {
                 value = ComputerUtilCard.evaluateCreature(c);
@@ -167,6 +188,14 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 }
             }
 
+            // An impending permanent is about to become a creature (or is being saved from removal).
+            // Prefer freeing it over stripping loyalty from an opposing planeswalker.
+            final Card own = worthwhileOwnTarget(ai, sa);
+            if (isImpendingPermanent(own)) {
+                sa.getTargets().add(own);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
             // Get rid of Planeswalkers:
             list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
@@ -179,8 +208,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            // counters of our own that are better off gone (an impending permanent, a creature held down by -1/-1 counters)
-            final Card own = worthwhileOwnTarget(ai, sa);
             if (own != null) {
                 sa.getTargets().add(own);
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

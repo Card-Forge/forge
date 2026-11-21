@@ -369,6 +369,57 @@ public class ComputerUtilManaTest extends SimulationTest {
         payForReal(p, "U");
     }
 
+    /**
+     * The estimate and the payment have to agree. Lion's Eye Diamond is left out on purpose: the payer never takes it for
+     * a spell (it is an instant-speed ability that discards the hand, and the loops crack it by themselves), so the
+     * estimate says no and the payment says no.
+     */
+    private void estimateAndPaymentAgree(final Player p, final String spell) {
+        final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate for " + spell);
+        assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "the payment of " + spell);
+    }
+
+    @Test
+    public void lotusPetalPaysForBrainstorm() {
+        final Player p = sacrificeBoard(0, "Lotus Petal");
+        estimateAndPaymentAgree(p, "Brainstorm");
+    }
+
+    @Test
+    public void lionsEyeDiamondIsNotAnAutomaticSourceForASpell() {
+        final Player p = sacrificeBoard(0, "Lion's Eye Diamond");
+        final SpellAbility sa = addCardToZone("Burning Wish", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertFalse(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate must not count the Diamond");
+        assertFalse(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "and the payer must not take it");
+    }
+
+    @Test
+    public void phyrexianLifePaymentRespectsKarnsSylex() {
+        final Player p = sacrificeBoard(0, "Karn's Sylex");
+        p.setLife(14, null);
+        final SpellAbility sa = addCardToZone("Phyrexian Metamorph", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsNeverPolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Mental Misstep", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsOnFatalDamagePolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Gut Shot", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+        p.getGame().getPlayers().get(0).setLife(1, null);
+        assertTrue(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
     /** A player in their own main phase. */
     private Player auraBoard() {
         final Game game = initAndCreateGame();

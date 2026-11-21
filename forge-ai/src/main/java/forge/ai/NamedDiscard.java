@@ -217,6 +217,35 @@ public final class NamedDiscard {
     }
 
     /**
+     * Aims the effect behind the naming when nothing has aimed it yet. The simulator copies the targets of the ability
+     * it was given, and a rollout candidate was never run through {@link #consider}, so its "target player" was empty:
+     * the cast failed ("Couldn't add to stack, failed to target", 2946 times in one sweep). The AI itself when its deck
+     * wants a card thrown away, else the opponent with the most cards in hand.
+     */
+    public static void aimIfUntargeted(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || !isNamingLogic(sa.getParamOrDefault("AILogic", "")) || discardTarget(sa) != null) {
+            return;
+        }
+        try {
+            if (!EXILE_LOGIC.equals(sa.getParam("AILogic")) && combosOf(ai).selfDiscardName(ai, sa.getHostCard()) != null
+                    && aimAt(sa, ai)) {
+                return;
+            }
+            Player best = null;
+            for (final Player opp : ai.getOpponents()) {
+                if (best == null || opp.getCardsIn(ZoneType.Hand).size() > best.getCardsIn(ZoneType.Hand).size()) {
+                    best = opp;
+                }
+            }
+            if (best != null) {
+                aimAt(sa, best);
+            }
+        } catch (final RuntimeException e) {
+            // a refinement only: the cast fails as it did before
+        }
+    }
+
+    /**
      * Unmoored Ego and its kin: worth the mana when the opponent holds a card seen revealed, or at least two cards (the
      * name is a guess, but the spell also reaches the library and the graveyard). The opponent is aimed at here, because
      * the effects behind the naming only ask for "target player" and the AI would otherwise not pick one.

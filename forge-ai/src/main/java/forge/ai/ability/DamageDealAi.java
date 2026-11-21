@@ -474,7 +474,36 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory(), immediately);
+        // The last suspend counter has already been removed when PlayEffect builds this spell.
+        final Card host = saMe.getHostCard();
+        final boolean castFromSuspend = saMe.isCastFromPlayEffect() && host != null
+                && host.isInZone(ZoneType.Exile) && host.hasKeyword(Keyword.SUSPEND)
+                && host.getCounters(CounterEnumType.TIME) == 0;
+        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory() || castFromSuspend,
+                immediately || castFromSuspend);
+    }
+
+    /** Aim the simultaneous Valakut triggers at an opponent when the full batch is lethal. */
+    private boolean chooseLethalValakutBatchTarget(final Player ai, final SpellAbility sa,
+                                                   final TargetRestrictions restrictions, final int damage) {
+        final Card source = sa.getHostCard();
+        if (!sa.isTrigger() || source == null || !"Valakut, the Molten Pinnacle".equals(source.getName())
+                || sa.getApi() != ApiType.DealDamage || restrictions == null || !restrictions.canTgtPlayer()) {
+            return false;
+        }
+        final int triggers = Math.max(1,
+                ((PlayerControllerAi) ai.getController()).getAi().getSimultaneousValakutDamageTriggers());
+        for (final Player opponent : ai.getOpponents()) {
+            if (!opponent.canLoseLife() || opponent.cantLoseForZeroOrLessLife() || !sa.canTarget(opponent)) {
+                continue;
+            }
+            final int damagePerTrigger = ComputerUtilCombat.predictDamageTo(opponent, damage, source, false);
+            if (damagePerTrigger > 0 && (long) damagePerTrigger * triggers >= opponent.getLife()) {
+                sa.getTargets().add(opponent);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -525,6 +554,10 @@ public class DamageDealAi extends DamageAiBase {
 
         sa.resetTargets();
         TargetChoices tcs = sa.getTargets();
+
+        if (chooseLethalValakutBatchTarget(ai, sa, tgt, dmg)) {
+            return true;
+        }
 
         // Do not use if would kill self
         if ("SelfDamage".equals(logic) && ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount"))) {
@@ -943,7 +976,12 @@ public class DamageDealAi extends DamageAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+        // Suspend's Play effect is optional, but the spell is lost if it is not cast after the last TIME counter.
+        final boolean castFromSuspend = sa.isCastFromPlayEffect() && source != null && source.isInZone(ZoneType.Exile)
+                && source.hasKeyword(Keyword.SUSPEND) && source.getCounters(CounterEnumType.TIME) == 0;
+        final boolean mustChooseTarget = mandatory || castFromSuspend;
+        final boolean targetsChosen = damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mustChooseTarget, true);
+        if ((!targetsChosen && !mustChooseTarget) || (castFromSuspend && !sa.isTargetNumberValid())) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
