@@ -26,6 +26,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -433,7 +434,10 @@ public class GameCopier {
             }
             return copy;
         } catch (final RuntimeException e) {
-            return null; // history is a refinement: a card that cannot be rebuilt is left out
+            // history is a refinement: a card that cannot be rebuilt is left out, but say so
+            Logger.debug(e, "GameCopier: no last known information for {} ({}), left out of this turn's history",
+                    lki, lki.getId());
+            return null;
         }
     }
 
