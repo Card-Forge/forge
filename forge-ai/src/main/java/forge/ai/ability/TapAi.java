@@ -4,6 +4,8 @@ import forge.ai.*;
 import java.util.ArrayList;
 import java.util.List;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -165,22 +167,44 @@ public class TapAi extends TapAiBase {
     }
 
     /** The most mana of the cards that the AI can spend with {@code mana} from lands, counting the mana tokens they make. */
-    private static int spendable(final List<Card> cards, final int mana) {
+    private static void countColors(final int[] have, final byte colors) {
+        for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+            if ((colors & MagicColor.WUBRG[i]) != 0) {
+                have[i]++;
+            }
+        }
+    }
+
+    private static int spendable(final List<Card> cards, final int mana, final int[] have) {
         final int n = Math.min(cards.size(), 10);
         int best = 0;
         for (int mask = 1; mask < (1 << n); mask++) {
             int cost = 0;
             int bonus = 0;
+            final int[] need = new int[MagicColor.WUBRG.length];
             for (int i = 0; i < n; i++) {
                 if ((mask & (1 << i)) != 0) {
                     final Card c = cards.get(i);
                     cost += c.getCMC();
+                    for (final ManaCostShard shard : c.getManaCost()) {
+                        if (shard.isMonoColor() && !shard.isHybrid()) { // {B}{B}{B} needs three black sources
+                            for (int k = 0; k < need.length; k++) {
+                                if ((shard.getColorMask() & MagicColor.WUBRG[k]) != 0) {
+                                    need[k]++;
+                                }
+                            }
+                        }
+                    }
                     if (c.getCMC() <= mana) {
                         bonus += forge.ai.simulation.RampPlan.tokenMana(c);
                     }
                 }
             }
-            if (cost <= mana + bonus && cost > best) {
+            boolean coloursOk = true;
+            for (int k = 0; k < need.length; k++) {
+                coloursOk &= need[k] <= have[k];
+            }
+            if (coloursOk && cost <= mana + bonus && cost > best) {
                 best = cost;
             }
         }
@@ -199,11 +223,16 @@ public class TapAi extends TapAiBase {
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa) && lifeCanBeSpared(payer, amount)) {
                         // the mana of the lands that are untapped now, and what the cards in hand can spend with and without this one
                         int untapped = 0;
+                        final int[] haveNow = new int[MagicColor.WUBRG.length];
                         for (final Card land : payer.getLandsInPlay()) {
                             if (land.isUntapped()) {
                                 untapped++;
+                                countColors(haveNow, forge.ai.simulation.RampPlan.landColors(land));
                             }
                         }
+                        // how many sources make each colour: a union of colours does not show that BBB can be paid
+                        final int[] haveWith = haveNow.clone();
+                        countColors(haveWith, forge.ai.simulation.RampPlan.landColors(source));
                         // the same sources answer this for every card in hand, so ask once
                         final byte availableColors = ColorSet.fromNames(
                                 ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
@@ -230,7 +259,7 @@ public class TapAi extends TapAiBase {
                         }
                         // a land that lets the hand spend more this turn is worth the life: a card that needs exactly
                         // this land, or two cards that fit together once a Malevolent Rumble's Spawn is counted
-                        if (spendable(candidates, untapped + 1) > spendable(candidates, untapped)) {
+                        if (spendable(candidates, untapped + 1, haveWith) > spendable(candidates, untapped, haveNow)) {
                             return true;
                         }
                     }

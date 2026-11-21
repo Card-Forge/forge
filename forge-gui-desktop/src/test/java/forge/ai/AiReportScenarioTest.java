@@ -1016,6 +1016,31 @@ public class AiReportScenarioTest extends AITest {
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
                     return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept a Plains with green one-drops" : null;
                 }));
+        l.add(new Scenario("shock-colour-sources", "Swamp, Forest and a Sacred Foundry for Geralf's Messenger: one black source is not BBB", Fid.APPROX, M1, true,
+                c -> { c.bf("Swamp", c.ai); c.bf("Forest", c.ai); c.hand("Geralf's Messenger", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "paid 2 life for a Sacred Foundry that cannot make black for Geralf's Messenger" : null;
+                }));
+        l.add(new Scenario("shock-colour-sources-enough", "Two Swamps and an Overgrown Tomb for Geralf's Messenger: the third black source is worth the life", Fid.APPROX, M1, true,
+                c -> { c.bf("Swamp", 2, c.ai); c.hand("Geralf's Messenger", c.ai); c.hand("Overgrown Tomb", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Overgrown Tomb")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? null : "did not pay 2 life for the third black source (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("12984-hybrid-keep", "Three Plains and Kitchen Finks: the hybrid cost is white, a keep", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Kitchen Finks", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Kitchen Finks", "Kitchen Finks", "Plains", "Kitchen Finks" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? null : "sent back Plains and Kitchen Finks, a hybrid cost that white pays";
+                }));
         // ---- which creatures a pump can still matter to (before / after the attackers and the blockers are declared)
         l.add(new Scenario("relevance-attacker-before-declaring", "Own turn, declare attackers, none declared yet: the untapped Colossus can still attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Chameleon Colossus", c.ai); c.game.getPhaseHandler().setCombat(new Combat(c.ai)); },

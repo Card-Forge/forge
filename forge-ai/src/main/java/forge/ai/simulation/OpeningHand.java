@@ -196,7 +196,7 @@ public final class OpeningHand {
                 }
             } else if (!isCreatureAura(c)) {
                 spell = true;
-                if ((c.getManaCost().getColorProfile() & ~colors) == 0) {
+                if (c.getManaCost().canBePaidWithAvailable(colors)) { // hybrid shards: either colour pays
                     return true;
                 }
             }

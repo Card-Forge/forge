@@ -538,4 +538,48 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         }
         AssertJUnit.assertEquals(java.util.Arrays.asList("Valakut, the Molten Pinnacle", "Mountain", "Mountain", "Mountain"), chosen);
     }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftIsNotLethalAgainstAHexproofOpponent() {
+        setUp();
+        mana(2);
+        final Player opponent = game.getPlayers().get(0);
+        opponent.setLife(20, null);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertTrue("21 damage kills an opponent who can be targeted", RampPlan.scapeshiftLethal(ai));
+
+        addCardToZone("Leyline of Sanctity", opponent, ZoneType.Battlefield);
+        game.getAction().checkStaticAbilities();
+        AssertJUnit.assertTrue("Leyline of Sanctity gives the player hexproof", opponent.hasKeyword(forge.game.keyword.Keyword.HEXPROOF));
+        AssertJUnit.assertFalse("Valakut cannot target a hexproof opponent", RampPlan.scapeshiftLethal(ai));
+        AssertJUnit.assertTrue(RampPlan.scapeshiftMustWait(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void theTokenSpellGoesFirstWhenItsMannaPaysForTheNextOne() {
+        setUp();
+        addCards("Swamp", 3, ai);
+        addCardToZone("Malevolent Rumble", ai, ZoneType.Hand);
+        addCardToZone("Emperor of Bones", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        final SpellAbility first = RampPlan.tokenManaStep(ai, sa -> true);
+        AssertJUnit.assertNotNull("two two-drops from three lands and a Spawn", first);
+        AssertJUnit.assertEquals("Malevolent Rumble", first.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theTokenSpellHasNoPriorityWhenTheSpawnPaysForNothing() {
+        setUp();
+        addCards("Swamp", 2, ai);
+        addCardToZone("Malevolent Rumble", ai, ZoneType.Hand);
+        addCardToZone("Emperor of Bones", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        AssertJUnit.assertNull("two lands and a Spawn do not pay for both", RampPlan.tokenManaStep(ai, sa -> true));
+    }
 }

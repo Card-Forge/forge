@@ -155,7 +155,10 @@ public final class RampPlan {
     public static boolean scapeshiftLethal(final Player ai) {
         final int damage = scapeshiftDamage(ai);
         for (final Player opponent : ai.getOpponents()) {
-            if (opponent.canLoseLife() && !opponent.cantLoseForZeroOrLessLife() && damage >= opponent.getLife()) {
+            // Valakut's triggers aim at the player: hexproof (Leyline of Sanctity) and shroud keep them away
+            if (opponent.canLoseLife() && !opponent.cantLoseForZeroOrLessLife() && damage >= opponent.getLife()
+                    && !opponent.hasKeyword(forge.game.keyword.Keyword.HEXPROOF)
+                    && !opponent.hasKeyword(forge.game.keyword.Keyword.SHROUD)) {
                 return true;
             }
         }
@@ -429,6 +432,15 @@ public final class RampPlan {
             }
         }
         return null;
+    }
+
+    /** The colours a land can make (a mana colour mask). */
+    public static byte landColors(final Card land) {
+        byte colors = 0;
+        for (final SpellAbility sa : land.getManaAbilities()) {
+            colors |= ManaConversion.producedColors(sa);
+        }
+        return colors;
     }
 
     /** The mana a spell leaves behind as a token that is sacrificed for it (Malevolent Rumble's Eldrazi Spawn, Treasure). */
