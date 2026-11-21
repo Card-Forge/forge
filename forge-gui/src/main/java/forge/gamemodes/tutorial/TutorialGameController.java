@@ -6,6 +6,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
@@ -76,6 +77,13 @@ final class TutorialGameController implements IGameController {
     public void selectButtonOk() {
         if (!locked) {
             real.selectButtonOk();
+        }
+    }
+
+    @Override
+    public void answer(final Answer answer) {
+        if (!locked) {
+            real.answer(answer);
         }
     }
 

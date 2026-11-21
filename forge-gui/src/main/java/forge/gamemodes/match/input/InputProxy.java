@@ -22,6 +22,8 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.match.Answer;
+import forge.gamemodes.match.Question;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -44,6 +47,10 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<>();
+    /** Player whose priority question is pending in the GUI; it stays pending only while the priority input is on top. */
+    private final AtomicReference<PlayerView> askedPlayer = new AtomicReference<>();
+    /** Shared by a player and any player they control, whose inputs use this proxy too, so ids never collide. */
+    private final AtomicInteger questionIds = new AtomicInteger();
     private final PlayerControllerHuman controller;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
@@ -61,6 +68,9 @@ public class InputProxy implements Observer {
                             game.getPhaseHandler().debugPrintState(), Singletons.getControl().getInputQueue().printInputStack());
 */
         input.set(nextInput);
+        if (!(nextInput instanceof InputPassPriority)) {
+            withdrawQuestion();
+        }
         if (!(nextInput instanceof InputLockUI)) {
             controller.getGui().setCurrentPlayer(nextInput.getOwner());
         }
@@ -152,6 +162,35 @@ public class InputProxy implements Observer {
             }
         }
         return false;
+    }
+
+    public final void answer(final Answer answer) {
+        if (getInput() instanceof InputPassPriority priority) {
+            priority.answer(answer);
+        }
+    }
+
+    int nextQuestionId() {
+        return questionIds.incrementAndGet();
+    }
+
+    /** Asks only while {@code asker} is the current input, so a question shown late cannot outlive its input. */
+    void askQuestion(final Input asker, final Question question) {
+        if (getInput() != asker) {
+            return;
+        }
+        askedPlayer.set(question.player());
+        controller.getGui().setQuestion(question.player(), question);
+        if (getInput() != asker) {
+            withdrawQuestion();
+        }
+    }
+
+    void withdrawQuestion() {
+        final PlayerView player = askedPlayer.getAndSet(null);
+        if (player != null) {
+            controller.getGui().setQuestion(player, null);
+        }
     }
 
     public final void alphaStrike() {
