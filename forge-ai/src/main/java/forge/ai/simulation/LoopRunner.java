@@ -89,6 +89,10 @@ public final class LoopRunner {
         if (melira != null) {
             return melira;
         }
+        final SpellAbility manaLoop = ManaLoopPlan.next(ai, candidates, approve);
+        if (manaLoop != null) {
+            return manaLoop;
+        }
         final SpellAbility palinchron = highTideAndPalinchron(ai, candidates, target, approve);
         if (palinchron != null) {
             return palinchron;

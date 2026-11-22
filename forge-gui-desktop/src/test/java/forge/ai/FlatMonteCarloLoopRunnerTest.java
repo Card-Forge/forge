@@ -1448,4 +1448,58 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("Seer sacrifices the Redcap, Melira lets it persist back with no counter, and it hits for two\n"
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    private SpellAbility abilityOf(final Card host, final forge.game.ability.ApiType api) {
+        for (final SpellAbility sa : host.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && sa.getApi() == api) {
+                return sa;
+            }
+        }
+        throw new IllegalStateException(host + " has no " + api);
+    }
+
+    @Test(timeOut = 120000)
+    public void theUntapOfAMonolithIsPricedWithWhatCutsIt() {
+        elfDeckWith(0);
+        final Card grim = addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        final SpellAbility untap = abilityOf(grim, ApiType.Untap);
+        final SpellAbility tap = abilityOf(grim, ApiType.Mana);
+        AssertJUnit.assertEquals("three for four: no net mana", 4, forge.ai.simulation.ManaLoopPlan.untapCost(ai, untap));
+        AssertJUnit.assertEquals(3, forge.ai.simulation.ManaLoopPlan.produced(ai, grim, tap));
+        addCardToZone("Zirda, the Dawnwaker", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("Zirda: two less", 2, forge.ai.simulation.ManaLoopPlan.untapCost(ai, untap));
+    }
+
+    @Test(timeOut = 120000)
+    public void kinnanAddsOneToTheTapOfABasalt() {
+        elfDeckWith(0);
+        final Card basalt = addCardToZone("Basalt Monolith", ai, ZoneType.Battlefield);
+        final SpellAbility tap = abilityOf(basalt, ApiType.Mana);
+        AssertJUnit.assertEquals(3, forge.ai.simulation.ManaLoopPlan.produced(ai, basalt, tap));
+        addCardToZone("Kinnan, Bonder Prodigy", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("a nonland permanent: one more", 4, forge.ai.simulation.ManaLoopPlan.produced(ai, basalt, tap));
+    }
+
+    @Test(timeOut = 120000)
+    public void aMonolithAloneIsNotLoopedForMana() {
+        elfDeckWith(0, "Blaze");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("three for four makes nothing: the Blaze for what the Monolith gives once is not lethal\n" + trace,
+                opp.getLife() > 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithGrimMonolithAndZirdaPaysForABlaze() {
+        elfDeckWith(0, "Blaze");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        addCardToZone("Zirda, the Dawnwaker", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap for three, untap for two, round again: the pool pays the X of the Blaze\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
