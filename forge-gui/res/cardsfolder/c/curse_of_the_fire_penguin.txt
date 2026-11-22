@@ -17,7 +17,7 @@ Types:Creature Penguin
 Colors:Red
 PT:6/5
 K:Trample
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature dies, return Curse of the Fire Penguin to the battlefield.
-SVar:TrigChoose:DB$ ChooseCard | Defined$ OriginalHostController | ControlledByPlayer$ Chooser | Choices$ Card.namedCurse of the Fire Penguin | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Battlefield
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigRemember | TriggerDescription$ When this creature dies, return Curse of the Fire Penguin to the battlefield.
+SVar:TrigRemember:DB$ Pump | Defined$ Self | RememberObjects$ OriginalHost | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield
 Oracle:Trample\nWhen this creature dies, return Curse of the Fire Penguin to the battlefield.
