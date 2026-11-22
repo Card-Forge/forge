@@ -1,0 +1,8 @@
+Name:Tolabow, Loch Rascal
+ManaCost:2 U U
+Types:Legendary Creature Otter
+PT:3/2
+DeckRule:ColorIdentity:AllowedAdditionalColor$ 1 | AllowedAdditionalColorType$ Instant,Sorcery | Exempt$ Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — If CARDNAME is your commander, the color identity of instant and sorcery cards in your deck can include one color of your choice not in your commander's color identity, and your deck can have any basic land cards.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end of turn.)
+SVar:TrigToken:DB$ Token | TokenScript$ ur_1_1_otter_prowess | TokenOwner$ You
+Oracle:Rulebreaker — If Tolabow, Loch Rascal is your commander, the color identity of instant and sorcery cards in your deck can include one color of your choice not in your commander's color identity, and your deck can have any basic land cards.\nWhenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end of turn.)

@@ -3,5 +3,5 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from green & Protection from blue | Description$ Enchanted creature has protection from green and from blue.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Protection from green & Protection from blue | Description$ Enchanted creature has protection from green and from blue.
 Oracle:Enchant creature\nEnchanted creature has protection from green and from blue.

@@ -3,5 +3,5 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender | RemoveKeyword$ Flying | Description$ Enchanted creature has defender and loses flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Defender | RemoveKeyword$ Flying | Description$ Enchanted creature has defender and loses flying.
 Oracle:Enchant creature\nEnchanted creature has defender and loses flying.

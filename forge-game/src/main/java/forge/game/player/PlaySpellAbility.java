@@ -571,10 +571,6 @@ public class PlaySpellAbility {
         req.playAbility(mayChooseNewTargets, true, false);
     }
 
-    public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa) {
-        return playSpellAbilityNoStack(controller, player, sa, false);
-    }
-
     public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
@@ -586,6 +582,7 @@ public class PlaySpellAbility {
         final Player player = ability.getActivatingPlayer();
         final Game game = player.getGame();
         boolean refreeze = game.getStack().isFrozen();
+        final int waitingMark = game.getTriggerHandler().getWaitingTriggerCount();
 
         if (!skipStack) {
             if (!refreeze) {
@@ -595,7 +592,7 @@ public class PlaySpellAbility {
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
-                    needX = ability.costHasX();
+                    needX = ability.getPayCosts().hasXInAnyCostPart();
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
@@ -676,7 +673,6 @@ public class PlaySpellAbility {
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
-
         boolean preCostRequisites = announceType() && announceValuesLikeX() &&
             ability.checkRestrictions(player) &&
             (!mayChooseTargets || ability.setupTargets()) &&
@@ -684,7 +680,7 @@ public class PlaySpellAbility {
             ability.isLegalAfterStack();
 
         // Freeze the stack just before we start paying costs but after the ability is fully set up
-        game.getStack().freezeStack(ability);
+        game.getStack().freezeStack(skipStack ? null : ability);
         final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(controller.getCostDecisionMaker(player, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
@@ -696,13 +692,13 @@ public class PlaySpellAbility {
             if (ability.isTrigger()) {
                 // Only roll back triggers if they were not paid for
                 if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
-                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c, waitingMark);
                 } else {
                     // If precost requsities failed, then there probably isn't anything to refund during experimental
                     payment.refundPayment();
                 }
             } else {
-                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c, waitingMark);
             }
 
             if (!refreeze) {

@@ -2,7 +2,7 @@ Name:Dire Wolves
 ManaCost:2 G
 Types:Creature Wolf
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Banding | IsPresent$ Plains.YouCtrl | Description$ CARDNAME has banding as long as you control a Plains.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Banding | IsPresent$ Plains.YouCtrl | Description$ CARDNAME has banding as long as you control a Plains.
 SVar:BuffedBy:Plains
 AI:RemoveDeck:All
 DeckNeeds:Type$Plains

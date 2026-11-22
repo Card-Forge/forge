@@ -1,0 +1,5 @@
+Name:Henzie Trait - Dramatic Entrance
+ManaCost:no cost
+Types:Trait
+S:Mode$ RaiseCost | ValidCard$ Permanent | Activator$ You | Type$ Spell | Amount$ 1 | EffectZone$ Command | Description$ Permanent spells you cast cost {1} more to cast.
+Oracle:Permanent spells you cast cost {1} more to cast.\nStart each match with two random nonland permanent cards with mana value 3 or less from your deck on the battlefield.

@@ -1,0 +1,6 @@
+Name:Predictive Preparations
+ManaCost:1 W
+Types:Sorcery
+A:SP$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Put a +1/+1 counter on each of one or two target creatures.
+K:Flashback:3 W
+Oracle:Put a +1/+1 counter on each of one or two target creatures.\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

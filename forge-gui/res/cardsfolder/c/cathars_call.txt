@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | AddTrigger$ CatharTrig | Description$ Enchanted creature has vigilance and "At the beginning of your end step, create a 1/1 white Human creature token."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Vigilance | AddTrigger$ CatharTrig | Description$ Enchanted creature has vigilance and "At the beginning of your end step, create a 1/1 white Human creature token."
 SVar:CatharTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 white Human creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human | TokenOwner$ You
 DeckHas:Ability$Token

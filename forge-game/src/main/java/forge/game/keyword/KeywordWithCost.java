@@ -2,8 +2,8 @@ package forge.game.keyword;
 
 import forge.game.cost.Cost;
 
-public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements KeywordWithCostInterface
-{
+public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements KeywordWithCostInterface {
+
     protected Cost cost;
     protected String costString;
 
@@ -27,12 +27,20 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements
     }
 
     @Override
+    public String costReminderText() {
+        // granted without a cost, it uses the card's mana cost
+        if (costString.isEmpty()) {
+            return new Cost(getHostCard().getManaCost(), false).toSimpleString();
+        }
+        return KeywordWithCostInterface.super.costReminderText();
+    }
+
+    @Override
     protected String formatReminderText(String reminderText) {
         // some reminder does not contain cost
         if (reminderText.contains("%")) {
             return String.format(reminderText, costReminderText());
-        } else {
-            return reminderText;
         }
+        return reminderText;
     }
 }

@@ -1,0 +1,9 @@
+Name:Iron Hills
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
+A:AB$ PutCounter | Cost$ 2 R W T Sac<1/CARDNAME/this land> | ValidTgts$ Dwarf.YouCtrl | ValidTgtsDesc$ Dwarf you control | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target Dwarf you control. Activate only as a sorcery.
+DeckHints:Type$Dwarf
+Oracle:This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}, {T}, Sacrifice this land: Put two +1/+1 counters on target Dwarf you control. Activate only as a sorcery.

@@ -16,6 +16,9 @@ import java.util.HashMap;
  */
 
 public class CharacterSprite extends MapActor {
+    private static final float DEFAULT_ANIMATION_FRAME_DURATION = 0.2f;
+    private static final float MAX_DEATH_ANIMATION_DURATION = 3f;
+    private static final float MAX_ACTION_ANIMATION_DURATION = 5f;
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
     float timer;
     private Animation<TextureRegion> currentAnimation = null;
@@ -27,7 +30,8 @@ public class CharacterSprite extends MapActor {
     private String atlasPath;
     private float wakeTimer = 0.0f;
     public DialogData.ConditionData[] spawnConditions = new DialogData.ConditionData[0]; //List of conditions for the sprite to spawn.
-
+    private static final Color batchColor = new Color();
+    private static final Vector2 moveAngle = new Vector2();
     public CharacterSprite(int id, String path) {
         super(id);
         collisionHeight = 0.4f;
@@ -62,7 +66,11 @@ public class CharacterSprite extends MapActor {
                     anim = Config.instance().getAnimatedSprites(path, stand.toString() + dir.toString());
 
                 if (anim.size != 0) {
-                    dirs.put(dir, new Animation<>(0.2f, anim));
+                    float frameDuration = DEFAULT_ANIMATION_FRAME_DURATION;
+                    if (stand == AnimationTypes.Death) {
+                        frameDuration = Math.min(frameDuration, MAX_DEATH_ANIMATION_DURATION / anim.size);
+                    }
+                    dirs.put(dir, new Animation<>(frameDuration, anim));
                     if (getWidth() == 0.0)//init size onload
                     {
                         setWidth(anim.first().getWidth());
@@ -128,30 +136,54 @@ public class CharacterSprite extends MapActor {
     }
 
     public void setAnimation(AnimationTypes type) {
-        if (currentAnimationType != type) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        if (animation == null) {
+            return;
+        }
+
+        if (currentAnimationType != type || currentAnimation != animation || isOneShotAnimation(type)) {
             currentAnimationType = type;
-            updateAnimation();
+            currentAnimation = animation;
+            if (isOneShotAnimation(type)) {
+                timer = 0.0f;
+            }
         }
     }
 
-    private void updateAnimation() {
-        AnimationTypes aniType = currentAnimationType;
-        AnimationDirections aniDir = currentAnimationDir;
-        if (!animations.containsKey(aniType)) {
-            aniType = AnimationTypes.Idle;
-        }
-        if (!animations.containsKey(aniType)) {
-            return;
-        }
-        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(aniType);
+    /**
+     * Returns the capped duration of an action animation in the sprite's current direction.
+     * Uses the supplied fallback when the atlas does not define that animation.
+     */
+    public float getActionAnimationDuration(AnimationTypes type, float fallbackDuration) {
+        Animation<TextureRegion> animation = getAnimation(type, currentAnimationDir);
+        float duration = animation == null ? fallbackDuration : animation.getAnimationDuration();
+        return Math.min(duration, MAX_ACTION_ANIMATION_DURATION);
+    }
 
-        if (!dirs.containsKey(aniDir)) {
-            aniDir = AnimationDirections.Right;
+    private Animation<TextureRegion> getAnimation(AnimationTypes type, AnimationDirections direction) {
+        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(type);
+        if (dirs == null || dirs.isEmpty()) {
+            return null;
         }
-        if (!dirs.containsKey(aniDir)) {
-            return;
+
+        Animation<TextureRegion> animation = dirs.get(direction);
+        return animation == null ? dirs.get(AnimationDirections.Right) : animation;
+    }
+
+    private boolean isOneShotAnimation(AnimationTypes type) {
+        return type == AnimationTypes.Attack
+                || type == AnimationTypes.Death
+                || type == AnimationTypes.Hit;
+    }
+
+    private void updateAnimation() {
+        Animation<TextureRegion> animation = getAnimation(currentAnimationType, currentAnimationDir);
+        if (animation == null) {
+            animation = getAnimation(AnimationTypes.Idle, currentAnimationDir);
         }
-        currentAnimation = dirs.get(aniDir);
+        if (animation != null) {
+            currentAnimation = animation;
+        }
     }
 
     public void setDirection(AnimationDirections dir) {
@@ -177,7 +209,6 @@ public class CharacterSprite extends MapActor {
     }
 
     public void moveBy(float x, float y, float delta) {
-
         if (inactive) {
             return;
         }
@@ -195,37 +226,40 @@ public class CharacterSprite extends MapActor {
             wakeTimer += delta;
             return;
         }
+
         super.moveBy(x, y);
         if (x == 0 && y == 0) {
             return;
         }
-        Vector2 vec = new Vector2(x, y);
-        float degree = vec.angleDeg();
+
+        moveAngle.set(x, y);
+        float degree = moveAngle.angleDeg();
 
         if (!hidden)
             setAnimation(AnimationTypes.Walk);
-        if (degree < 22.5)
+        if (degree < 22.5f)
             setDirection(AnimationDirections.Right);
-        else if (degree < 22.5 + 45)
+        else if (degree < 22.5f + 45f)
             setDirection(AnimationDirections.RightUp);
-        else if (degree < 22.5 + 45 * 2)
+        else if (degree < 22.5f + 45f * 2f)
             setDirection(AnimationDirections.Up);
-        else if (degree < 22.5 + 45 * 3)
+        else if (degree < 22.5f + 45f * 3f)
             setDirection(AnimationDirections.LeftUp);
-        else if (degree < 22.5 + 45 * 4)
+        else if (degree < 22.5f + 45f * 4f)
             setDirection(AnimationDirections.Left);
-        else if (degree < 22.5 + 45 * 5)
+        else if (degree < 22.5f + 45f * 5f)
             setDirection(AnimationDirections.LeftDown);
-        else if (degree < 22.5 + 45 * 6)
+        else if (degree < 22.5f + 45f * 6f)
             setDirection(AnimationDirections.Down);
-        else if (degree < 22.5 + 45 * 7)
+        else if (degree < 22.5f + 45f * 7f)
             setDirection(AnimationDirections.RightDown);
         else
             setDirection(AnimationDirections.Right);
-
     }
 
     public Vector2 pos() {
+        // The movement system requires an independent instance copy to prevent
+        // player and NPC coordinates from cross-contaminating each other..
         return new Vector2(getX(), getY());
     }
 
@@ -249,7 +283,7 @@ public class CharacterSprite extends MapActor {
         if (currentAnimationType.equals(AnimationTypes.Wake)) {
             currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
         } else {
-            currentFrame = currentAnimation.getKeyFrame(timer, true);
+            currentFrame = currentAnimation.getKeyFrame(timer, !isOneShotAnimation(currentAnimationType));
         }
 
         float scale = 1f;
@@ -259,15 +293,17 @@ public class CharacterSprite extends MapActor {
 
         setHeight(currentFrame.getRegionHeight() * scale);
         setWidth(currentFrame.getRegionWidth() * scale);
-        Color oldColor = batch.getColor().cpy();
+
+        Color originalBatchColor = batch.getColor();
+        batchColor.set(originalBatchColor.r, originalBatchColor.g, originalBatchColor.b, originalBatchColor.a);
+
         batch.setColor(getColor());
-
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
-        batch.setColor(oldColor);
-        super.draw(batch, parentAlpha);
-        //batch.draw(getDebugTexture(),getX(),getY());
+        batch.setColor(batchColor);
 
+        super.draw(batch, parentAlpha);
     }
+
 
 
     public Sprite getAvatar() {

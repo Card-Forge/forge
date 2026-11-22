@@ -1,0 +1,10 @@
+Name:Chest Trait - Charm Of The Wasteland
+ManaCost:no cost
+Types:Trait
+R:Event$ BeginPhase | ActiveZones$ Command | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ExileTwo | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, exile the top two cards of your library. You may play those cards this turn.
+SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ EndOfTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Skip your draw step.\nAt the beginning of your upkeep, exile the top two cards of your library. You may play those cards this turn.

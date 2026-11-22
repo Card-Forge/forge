@@ -1,0 +1,5 @@
+Name:Gin'tak Charge
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:Gin'tak Charge deals 2 damage to any target.

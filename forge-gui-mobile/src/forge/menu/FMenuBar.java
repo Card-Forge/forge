@@ -2,8 +2,10 @@ package forge.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import forge.Graphics;
 import forge.screens.FScreen.Header;
@@ -12,6 +14,26 @@ import forge.screens.match.MatchController;
 public class FMenuBar extends Header {
     private final List<FMenuTab> tabs = new ArrayList<>();
     private int selected = -1;
+    private BooleanSupplier glass = () -> false;
+    private BooleanSupplier iconMode = () -> false;
+    private float revealWidth; //icon mode: width of the reveal tab, 0 for its own minimum
+    private static final Color GLASS = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.88f);
+
+    /** Frosted look used by the match screen's compact layout. */
+    public void setGlass(BooleanSupplier glass0) { glass = glass0; }
+    public boolean isGlass() { return glass.getAsBoolean(); }
+
+    /** Compact layout: the tabs show their topmenu atlas icon, the reveal tab keeps a fixed width and the others share the rest equally. */
+    public void setIconMode(BooleanSupplier iconMode0) { iconMode = iconMode0; }
+    public boolean isIconMode() { return Forge.isLandscapeMode() && iconMode.getAsBoolean(); }
+
+    /** Icon mode: the width of the reveal tab, the match screen sets it to the width of the player panels' control column. */
+    public void setRevealWidth(float revealWidth0) {
+        if (revealWidth != revealWidth0) {
+            revealWidth = revealWidth0;
+            revalidate();
+        }
+    }
 
     public FMenuTab addTab(String text0, FDropDown dropDown0) {
         return addTab(text0, dropDown0, false);
@@ -32,8 +54,38 @@ public class FMenuBar extends Header {
         return tabs.size();
     }
 
+    //icon mode: the reveal tab is as wide as the player panels' control column, every other tab gets the same share of what is left
+    private void layoutIcons(float width, float height) {
+        float x = 0;
+        int count = 0;
+        for (FMenuTab tab : tabs) {
+            if (!tab.isVisible()) { continue; }
+            if (tab.iconOnly) {
+                tab.setActiveIcon(!MatchController.instance.getRevealedCards().isEmpty());
+                final float w = Math.min(width / 2, revealWidth > 0 ? revealWidth : Math.round(tab.getMinWidth() + FMenuTab.PADDING * 2));
+                tab.setBounds(x, 0, w, height);
+                x += w;
+            } else {
+                count++;
+            }
+        }
+        if (count == 0) { return; }
+        final float cell = (width - x) / count;
+        for (FMenuTab tab : tabs) {
+            if (!tab.isVisible() || tab.iconOnly) { continue; }
+            final float left = Math.round(x);
+            final float right = Math.min(width, Math.round(x + cell));
+            tab.setBounds(left, 0, right - left, height);
+            x += cell;
+        }
+    }
+
     @Override
     protected void doLayout(float width, float height) {
+        if (isIconMode()) {
+            layoutIcons(width, height);
+            return;
+        }
         int visibleTabCount = 0;
         float minWidth = 0;
         int iconOnlyTabCount = 0;
@@ -60,7 +112,7 @@ public class FMenuBar extends Header {
         for (FMenuTab tab : tabs) {
             if (tab.isVisible()) {
                 if (tab.iconOnly) {
-                    tab.setActiveIcon(MatchController.instance.getGameView().getRevealedCollection() != null);
+                    tab.setActiveIcon(!MatchController.instance.getRevealedCards().isEmpty());
                 }
                 tabWidth = Math.round(tab.getMinWidth() + dx);
                 if (x + tabWidth > width) {
@@ -76,7 +128,7 @@ public class FMenuBar extends Header {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.fillRect(getBackColor(), 0, 0, w, h);
+        g.fillRect(isGlass() ? GLASS : getBackColor().getColor(), 0, 0, w, h);
     }
 
     @Override
@@ -120,6 +172,23 @@ public class FMenuBar extends Header {
         for (FMenuTab fMenuTab : tabs) {
             fMenuTab.hideDropDown();
         }
+    }
+
+    /** closes every drop-down except the given one (e.g. the stack, which must outlive a popup bar) */
+    public void closeAllExcept(FDropDown keep) {
+        for (FMenuTab fMenuTab : tabs) {
+            if (fMenuTab.getDropDown() != keep)
+                fMenuTab.hideDropDown();
+        }
+    }
+
+    /** true when a drop-down other than the given one is open */
+    public boolean isShowingMenuExcept(FDropDown skip) {
+        for (FMenuTab fMenuTab : tabs) {
+            if (fMenuTab.getDropDown() != skip && fMenuTab.getDropDown().isVisible())
+                return true;
+        }
+        return false;
     }
 
     public boolean isShowingMenu(boolean anyDropdown) {

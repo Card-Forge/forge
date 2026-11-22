@@ -1,0 +1,9 @@
+Name:Saavik, Stoic Student
+ManaCost:4 W
+Types:Legendary Creature Vulcan Advisor
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Federation — When NICKNAME enters, she deals X damage to target attacking or blocking creature an opponent controls, where X is the number of creature types among non-Borg creatures you control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.attacking+OppCtrl,Creature.blocking+OppCtrl | ValidTgtsDesc$ attacking or blocking creature an opponent controls | NumDmg$ X
+SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
+Oracle:Flash\nFederation — When Saavik enters, she deals X damage to target attacking or blocking creature an opponent controls, where X is the number of creature types among non-Borg creatures you control.

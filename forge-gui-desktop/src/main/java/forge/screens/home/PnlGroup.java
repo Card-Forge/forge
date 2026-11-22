@@ -36,7 +36,6 @@ public class PnlGroup extends SkinnedPanel {
     @Override
     public void paintComponent(Graphics g) {
         final JLabel lbl = CHomeUI.SINGLETON_INSTANCE.getLblSelected();
-        int yTop = (lbl.getY() + lbl.getParent().getY());
 
         //super.paintComponent(g);
         final Graphics2D g2d = (Graphics2D) g.create();
@@ -46,7 +45,7 @@ public class PnlGroup extends SkinnedPanel {
         FSkin.setGraphicsColor(g2d, d20);
 
         // Selected in this group, don't draw background under selected label.
-        if (getY() < yTop && yTop < getY() + h) {
+        if (lbl != null && lbl.getParent() == this) {
             g2d.fillRect(0, 0, w, lbl.getY());
             g2d.fillRect(0, lbl.getY() + lbl.getHeight(), w, h);
 

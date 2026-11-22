@@ -5,6 +5,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
@@ -86,8 +87,8 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void passPriority() {
-        send(ProtocolMethod.passPriority);
+    public void selectStackItem(final StackItemView item) {
+        send(ProtocolMethod.selectStackItem, item);
     }
 
     @Override
@@ -146,7 +147,7 @@ public class NetGameController implements IGameController {
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield));
     }
 
     @Override
@@ -158,17 +159,13 @@ public class NetGameController implements IGameController {
     @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision));
     }
 
     @Override
     public void setDisableAutoTriggers(final boolean disable) {
         yieldController.setDisableAutoTriggers(disable);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableTriggers(disable));
-    }
-
-    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SkipPhase(turnPlayer, phase, shouldSkip));
     }
 
     @Override
@@ -209,6 +206,8 @@ public class NetGameController implements IGameController {
         return macros;
     }
     public class NetMacroSystem implements IMacroSystem {
+        private volatile State state = new State(false, false, false);
+
         @Override
         public void addRememberedAction(PlayerAction action) {
             // DO i need to send this?
@@ -223,6 +222,25 @@ public class NetGameController implements IGameController {
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
         }
+
+        @Override
+        public void repeatRememberedActions() {
+            send(ProtocolMethod.repeatRememberedActions);
+        }
+
+        @Override
+        public void applyState(final State state) {
+            this.state = state;
+        }
+
+        @Override
+        public boolean isRecording() { return state.recording(); }
+
+        @Override
+        public boolean isReplaying() { return state.replaying(); }
+
+        @Override
+        public boolean hasRememberedActions() { return state.hasActions(); }
 
         @Override
         public String playbackText() {

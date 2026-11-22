@@ -1,0 +1,7 @@
+Name:Resistance Is Futile
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroy,DBReturn
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact | ValidTgtsDesc$ nonartifact creature | SpellDescription$ Destroy target nonartifact creature.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Artifact+cmcLE3+YouOwn | ValidTgtsDesc$ artifact creature card with mana value 3 or less in your graveyard | SpellDescription$ Return target artifact creature card with mana value 3 or less from your graveyard to the battlefield.
+Oracle:Choose one —\n• Destroy target nonartifact creature.\n• Return target artifact creature card with mana value 3 or less from your graveyard to the battlefield.

@@ -1,0 +1,8 @@
+Name:Rage into the Valley
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Goblin | Num$ 2 | SpellDescription$ Amass Goblins 2. (Put two +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+DeckHas:Ability$Token|Counters
+Oracle:You draw a card and lose 1 life.\nAmass Goblins 2. (Put two +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)

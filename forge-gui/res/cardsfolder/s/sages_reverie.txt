@@ -5,7 +5,7 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card for each aura you control that's attached to a creature.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each aura you control that's attached to a creature.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each aura you control that's attached to a creature.
 SVar:X:Count$Valid Aura.YouCtrl+AttachedTo Creature
 SVar:BuffedBy:Aura
 Oracle:Enchant creature\nWhen Sage's Reverie enters, draw a card for each Aura you control that's attached to a creature.\nEnchanted creature gets +1/+1 for each Aura you control that's attached to a creature.

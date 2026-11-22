@@ -1,0 +1,10 @@
+Name:Vinelasher Adept
+ManaCost:4 G G
+Types:Creature Rhino Soldier
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put three +1/+1 counters on target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 3
+K:TypeCycling:Basic:2
+DeckHas:Ability$Counters
+Oracle:Reach\nWhen this creature enters, put three +1/+1 counters on target creature.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

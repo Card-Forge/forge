@@ -1,0 +1,8 @@
+Name:The Everforger
+ManaCost:6
+Types:Legendary Artifact Creature Construct
+PT:4/5
+DeckRule:ColorIdentity:Exempt$ Artifact.Creature,Equipment,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have artifact creature and Equipment cards of any color identity and any basic land cards.
+T:Mode$ SpellCast | ValidCard$ Creature.Artifact,Equipment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ResolvedLimit$ 1 | OptionalDecider$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an artifact creature or Equipment spell, you may copy that spell. Do this only once each turn. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+Oracle:Rulebreaker — A deck with this commander can have artifact creature and Equipment cards of any color identity and any basic land cards.\nWhenever you cast an artifact creature or Equipment spell, you may copy that spell. Do this only once each turn. (The copy becomes a token.)

@@ -279,7 +279,7 @@ public class VAssignCombatDamage {
      * TODO: Write javadoc for this method.
      * @param source
      * @param meta
-     * @param isLMB
+     * @param isAdding
      */
     private void assignDamageTo(CardView source, final boolean meta, final boolean isAdding) {
         if (!damage.containsKey(source))
@@ -322,6 +322,9 @@ public class VAssignCombatDamage {
             return;
 
         addDamage(source, damageToAdd);
+
+        btnAuto.setEnabled(allDamageToAssign());
+
         checkDamageQueue();
         updateLabels();
     }
@@ -373,8 +376,10 @@ public class VAssignCombatDamage {
 
     /** Reset Assign Damage back to how it was at the beginning. */
     private void resetAssignedDamage() {
-        for (DamageTarget dt : defenders)
+        for (DamageTarget dt : defenders) {
             dt.damage = 0;
+        }
+        btnAuto.setEnabled(true);
     }
 
     private void addDamage(final CardView card, int addedDamage) {
@@ -400,8 +405,17 @@ public class VAssignCombatDamage {
         return totalDamageToAssign - spent;
     }
 
+    private boolean allDamageToAssign() {
+        for (DamageTarget dt : defenders) {
+            if (dt.damage > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** Updates labels and other UI elements.
-     * @param index index of the last assigned damage*/
+     **/
     private void updateLabels() {
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
@@ -425,6 +439,9 @@ public class VAssignCombatDamage {
 
         lblTotalDamage.setText(TextUtil.concatNoSpace(localizer.getMessage("lblAvailableDamagePoints"), ": " , String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         btnOK.setEnabled(damageLeft == 0);
+        if (btnOK.isEnabled()) {
+            btnOK.requestFocus();
+        }
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }
 

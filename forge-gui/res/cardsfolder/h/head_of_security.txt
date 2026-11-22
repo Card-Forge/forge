@@ -1,0 +1,6 @@
+Name:Head of Security
+ManaCost:1 W
+Types:Creature Andorian Soldier
+PT:2/2
+K:First Strike
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Jonny_Gu_-_Izzet_Spellementals_(Standard,_#896862).dck
+Deck Type=constructed
+
+[Main]
+2 Seasoned Cryomancer
+4 Eddymurk Crab
+4 Sunderflock
+4 Hearth Elemental
+4 Burst Lightning
+4 Opt
+2 Spell Pierce
+2 Spell Snare
+2 Get Out
+4 Prismari Charm
+3 Traumatic Critique
+4 Sleight of Hand
+1 Winternight Stories
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Stormcarved Coast
+[Sideboard]
+1 Spell Snare
+2 Annul
+2 Shore Up
+2 Disdainful Stroke
+2 Hydro-Man, Fluid Felon
+1 Sear
+1 Avengers Disassembled
+3 Colorstorm Stallion
+1 Chandra, Torch of Defiance

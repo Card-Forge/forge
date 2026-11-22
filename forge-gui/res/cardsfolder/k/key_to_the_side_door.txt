@@ -1,0 +1,7 @@
+Name:Key to the Side-Door
+ManaCost:1
+Types:Artifact
+A:AB$ Effect | Cost$ 2 T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+A:AB$ Draw | Cost$ 1 T Discard<1/Card.Legendary+sharesNameWith Valid Permanent.Legendary+YouCtrl/legendary card with the same name as a legendary permanent you control>| NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{2}, {T}: Target creature can't be blocked this turn.\n{1}, {T}, Discard a legendary card with the same name as a legendary permanent you control: Draw two cards.

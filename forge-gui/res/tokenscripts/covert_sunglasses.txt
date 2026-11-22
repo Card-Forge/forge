@@ -1,0 +1,6 @@
+Name:Covert Sunglasses
+ManaCost:no cost
+Types:Artifact Equipment
+K:Equip:2 WU
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Description$ Equipped creature can't be blocked.
+Oracle:Equipped creature can’t be blocked.\nEquip {2}{W/U}

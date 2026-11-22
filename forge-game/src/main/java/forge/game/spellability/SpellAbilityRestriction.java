@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -28,6 +27,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -49,7 +49,14 @@ import forge.util.collect.FCollection;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityRestriction extends SpellAbilityVariables {
+public class SpellAbilityRestriction extends SpellAbilityVariables implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Activation", "ActivationAfterBlockers", "ActivationFirstCombat", "ActivationGameTypes",
+        "ActivationLifeAmount", "ActivationLifeTotal", "ActivationLimit", "ActivationPhases",
+        "ActivationZone", "Activator", "AdditionalActivationZone", "GameActivationLimit",
+        "InstantSpeed", "OpponentTurn", "PlayerTurn", "SorcerySpeed",
+    };
+
     // A class for handling SpellAbility Restrictions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
@@ -194,24 +201,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
-        Card cp = c;
-
-        // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.isBestow()) {
-            // already bestowed or in battlefield, no need to check for spell
-            if (c.isInPlay()) {
-                return false;
-            }
-
-            // if card is lki and bestowed, then do nothing there, it got already animated
-            if (!(c.isLKI() && c.isBestowed())) {
-                if (!c.isLKI()) {
-                    cp = CardCopyService.getLKICopy(c);
-                }
-
-                cp.animateBestow(!cp.isLKI());
-            }
-        }
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -230,53 +219,40 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
             if (sa.isSpell()) {
-                final CardPlayOption o = c.mayPlay(sa.getMayPlay());
+                final CardPlayOption o = sa.getMayPlayOption();
                 if (o == null || sa.isCastFromPlayEffect()) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
-                } else if (o.getPlayer() == activator) {
-                    Map<String,String> params = sa.getMayPlay().getMapParams();
-
+                } else if (o.appliesTo(activator)) {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
-                        final List<CardPlayOption> opts = c.mayPlay(activator);
-                        boolean hasOtherGrantor = false;
-                        for (CardPlayOption opt : opts) {
-                            if (opt.grantsZonePermissions()) {
-                                hasOtherGrantor = true;
-                                break;
-                            }
-                        }
-                        if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
-                            // Special exclusion for Aftermath, useful for e.g. As Foretold
-                            return true;
-                        }
-                        if (!hasOtherGrantor) {
-                            return false;
-                        }
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
+                            && !sa.getHostCard().mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
+                        return false;
                     }
 
+                    Map<String,String> params = sa.getMayPlay().getMapParams();
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
+                        if (!c.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
                     if (params.containsKey("ValidSA")) {
                         if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
-                    // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
-                        return false;
-                    }
-
                     return true;
                 }
             }
+            return false;
+        }
+
+        // Reaching here means the card is in a zone of the restricted type, and that has to be
+        // the activator's own. CR 109.5: a card outside the battlefield has no controller, so the
+        // "you" in "your graveyard" is its owner. Shaman's Trance makes every graveyard theirs.
+        if (sa.isSpell() && activator != c.getOwner()
+                && !(this.getZone() == ZoneType.Graveyard && activator.hasKeyword("Shaman's Trance"))) {
             return false;
         }
 
@@ -351,7 +327,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (sa.isSpell()) {
             // Spells should always default to "controller" but use mayPlay check.
             final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-            if (o != null && o.getPlayer() == activator) {
+            if (o != null && o.appliesTo(activator)) {
                 return true;
             }
         }
@@ -371,7 +347,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Explicit Aftermath check there
-        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb() || sa.isVengeance()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 
@@ -570,10 +546,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsInfo(sa, c, activator)) {
-            if (!sa.canCastTiming(c, activator)) {
-                return false;
-            }
+        if (!sa.canCastTiming(c, activator) && !StaticAbilityCastWithFlash.anyWithFlashNeedsInfo(sa, c, activator)) {
+            return false;
         }
 
         // Special check for Lion's Eye Diamond

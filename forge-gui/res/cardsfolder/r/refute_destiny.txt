@@ -1,0 +1,6 @@
+Name:Refute Destiny
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.Green,Creature.Blue,Planeswalker.Green,Planeswalker.Blue | ValidTgtsDesc$ creature or planeswalker that's green or blue | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBSurveil | SpellDescription$ Exile target creature or planeswalker that's green or blue. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+Oracle:Exile target creature or planeswalker that's green or blue. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

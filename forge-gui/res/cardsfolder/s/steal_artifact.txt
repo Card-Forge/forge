@@ -3,5 +3,5 @@ ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant:Artifact
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted artifact.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted artifact.
 Oracle:Enchant artifact\nYou control enchanted artifact.

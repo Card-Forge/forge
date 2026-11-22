@@ -1,0 +1,411 @@
+//Rank|Name|Rarity|Set
+#1|Primeval Titan|S|TSR
+#2|Crovax, Ascendant Hero|M|TSR
+#3|Thragtusk|S|TSR
+#4|Akroma, Angel of Fury|M|TSR
+#5|Yawgmoth, Thran Physician|S|TSR
+#6|True-Name Nemesis|S|TSR
+#7|Grenzo, Dungeon Warden|S|TSR
+#8|Alesha, Who Smiles at Death|S|TSR
+#9|Tasigur, the Golden Fang|S|TSR
+#10|Mystic Confluence|S|TSR
+#11|Mirri the Cursed|R|TSR
+#12|Kaervek the Merciless|R|TSR
+#13|Jaya Ballard, Task Mage|R|TSR
+#14|Harvester of Souls|S|TSR
+#15|Shriekmaw|S|TSR
+#16|Restoration Angel|S|TSR
+#17|Draining Whelk|R|TSR
+#18|Talrand, Sky Summoner|S|TSR
+#19|Sengir Nosferatu|R|TSR
+#20|Palace Jailer|S|TSR
+#21|Teferi, Mage of Zhalfir|M|TSR
+#22|Lingering Souls|S|TSR
+#23|Cloudshredder Sliver|S|TSR
+#24|Angel of Salvation|R|TSR
+#25|Akroma's Memorial|M|TSR
+#26|Zealous Conscripts|S|TSR
+#27|Thelonite Hermit|R|TSR
+#28|Path to Exile|S|TSR
+#29|Mortify|S|TSR
+#30|Mirror Entity|S|TSR
+#31|Kiki-Jiki, Mirror Breaker|S|TSR
+#32|Etali, Primal Storm|S|TSR
+#33|Courser of Kruphix|S|TSR
+#34|Consuming Aberration|S|TSR
+#35|Beast Whisperer|S|TSR
+#36|Venser, Shaper Savant|R|TSR
+#37|Radha, Heir to Keld|R|TSR
+#38|Mulldrifter|S|TSR
+#39|Feather, the Redeemed|S|TSR
+#40|Exquisite Firecraft|S|TSR
+#41|Dammnation|M|TSR
+#42|Banishing Light|S|TSR
+#43|Arcades, the Strategist|S|TSR
+#44|Ancestral Vision|M|TSR
+#45|Vesuvan Shapeshifter|R|TSR
+#46|Sram, Senior Edificer|S|TSR
+#47|Solemn Simulacrum|S|TSR
+#48|Slaughter Pact|R|TSR
+#49|Pact of The Titan|R|TSR
+#50|Ith, High Acranist|R|TSR
+#51|Hearthwood Storyteller|R|TSR
+#52|Bedlam Reveler|S|TSR
+#53|Young Pyromancer|S|TSR
+#54|Tombstalker|R|TSR
+#55|Serra Avenger|R|TSR
+#56|Panharmonicon|S|TSR
+#57|Managara of Corondor|R|TSR
+#58|Knight of the Reliquary|S|TSR
+#59|Flickerwisp|S|TSR
+#60|Bloodbraid Elf|S|TSR
+#61|Slimefoot, the Stowaway|S|TSR
+#62|Riftwing Cloudskate|S|TSR
+#63|Necrotic Sliver|U|TSR
+#64|Ichor Slick|C|TSR
+#65|Hollow One|S|TSR
+#66|Dismember|S|TSR
+#67|Crystal Shards|S|TSR
+#68|Abrupt Decay|S|TSR
+#69|Trygon Predator|S|TSR
+#70|Sudden Death|U|TSR
+#71|Sedge Sliver|R|TSR
+#72|Rift Bolt|C|TSR
+#73|Pulmonic Sliver|R|TSR
+#74|Fungus Sliver|R|TSR
+#75|Eternal Witness|S|TSR
+#76|Cautery Sliver|U|TSR
+#77|Boom Bust|R|TSR
+#78|Tromp the Domains|U|TSR
+#79|Thoughtseize|S|TSR
+#80|Stuffy Doll|R|TSR
+#81|Stonecloaker|U|TSR
+#82|Sporesower Thallid|U|TSR
+#83|Secret Plans|S|TSR
+#84|Nightshade Assassin|U|TSR
+#85|Lightning Axe|U|TSR
+#86|Hivestone|R|TSR
+#87|Greater Gargadon|R|TSR
+#88|Enslave|U|TSR
+#89|Dead Gone|C|TSR
+#90|Big Game Hunter|U|TSR
+#91|Zulaport Cutthroat|S|TSR
+#92|Summoner's Pact|R|TSR
+#93|Reclamation Sage|S|TSR
+#94|Qasali Pridemage|S|TSR
+#95|Bound in Silence|C|TSR
+#96|Yavimaya Dryad|U|TSR
+#97|Tidehollow Sculler|S|TSR
+#98|Thelon of Havenwood|R|TSR
+#99|Sliver Legion|M|TSR
+#100|Sigil of the Empty Throne|S|TSR
+#101|Riftmarked Knight|U|TSR
+#102|Reckless Wurm|C|TSR
+#103|Poultice Sliver|U|TSR
+#104|Phthisis|U|TSR
+#105|Phantom Wurm|U|TSR
+#106|Mire Boa|U|TSR
+#107|Magnus of the Future|R|TSR
+#108|Life and Limb|R|TSR
+#109|Firewake Sliver|U|TSR
+#110|Firespeaker Sliver|U|TSR
+#111|Firemaw Kavu|U|TSR
+#112|Feldon of the Third Path|S|TSR
+#113|Elvish Mystic|S|TSR
+#114|Dralnu, Lich Lord|R|TSR
+#115|Benalish Commander|R|TSR
+#116|Anger of the Gods|S|TSR
+#117|Treasure Cruise|S|TSR
+#118|Tendrils of Corruption|C|TSR
+#119|Temur Ascendancy|S|TSR
+#120|Temporal Isolation|C|TSR
+#121|Tarmogoyf|M|TSR
+#122|Sulfur Elemental|U|TSR
+#123|Shivan Meteor|U|TSR
+#124|Scryb Ranger|U|TSR
+#125|Ranthi Trapper|C|TSR
+#126|Prized Amalgam|S|TSR
+#127|Penumbra Spider|C|TSR
+#128|Outrider en-Kor|U|TSR
+#129|Ninja of the Deep Hours|S|TSR
+#130|Hedron Archive|S|TSR
+#131|Gray Merchant of Asphodel|S|TSR
+#132|Gaea's Anthem|U|TSR
+#133|Dunerider Outlaw|U|TSR
+#134|Dormant Sliver|U|TSR
+#135|Darkheart Sliver|U|TSR
+#136|Celestial Crusader|S|TSR
+#137|Balar, Chief of Compliance|S|TSR
+#138|Arch of Orazca|S|TSR
+#139|Aeon Chronicler|R|TSR
+#140|Vanquisher's Banner|S|TSR
+#141|Thraben Inspector|S|TSR
+#142|Thick-Skinned Goblin|U|TSR
+#143|Temur Battle Rage|S|TSR
+#144|Sudden Shock|U|TSR
+#145|Strangling Soot|C|TSR
+#146|Sliversmith|U|TSR
+#147|Shivan Sand-Mage|U|TSR
+#148|Shaper Parasite|U|TSR
+#149|Search for Tomorrow|C|TSR
+#150|Repeal|S|TSR
+#151|Muck Drubb|U|TSR
+#152|Might Sliver|U|TSR
+#153|Looter io-Kor|C|TSR
+#154|Living End|M|TSR
+#155|Lavinia, Azorius Renegade|S|TSR
+#156|Kor Dirge|U|TSR
+#157|Knight of the Holy Nimbus|U|TSR
+#158|Jodah's Avenger|U|TSR
+#159|Jhoira of the Ghitu|R|TSR
+#160|Griffin Guide|U|TSR
+#161|Fury Sliver|U|TSR
+#162|Fblthp, the Lost|S|TSR
+#163|Everflowing Chalice|S|TSR
+#164|Dreadhorde Arcanist|S|TSR
+#165|Dread Return|U|TSR
+#166|Crookclaw Transmuter|C|TSR
+#167|Coalition Relic|R|TSR
+#168|Brine Elemental|U|TSR
+#169|Become Immense|S|TSR
+#170|Ajani's Pridemate|S|TSR
+#171|Wheel of Fate|M|TSR
+#172|Stormfront Riders|U|TSR
+#173|Storm Entity|U|TSR
+#174|Stinkweed Imp|S|TSR
+#175|Stingscourger|C|TSR
+#176|Spell Burst|U|TSR
+#177|Saltfield Recluse|U|TSR
+#178|Saltblast|U|TSR
+#179|Saffi Eriksdotter|R|TSR
+#180|Reiterate|R|TSR
+#181|Read the Bones|S|TSR
+#182|Prismatic Lens|C|TSR
+#183|Premature Burial|U|TSR
+#184|Nether Traitor|R|TSR
+#185|Mystical Teachings|U|TSR
+#186|Mystic Sanctuary|S|TSR
+#187|Monastery Swiftspear|S|TSR
+#188|Lost Auramancers|U|TSR
+#189|Kher Keep|R|TSR
+#190|Intangible Virtue|S|TSR
+#191|Imperiosaur|U|TSR
+#192|Henchfiend of Ukor|U|TSR
+#193|Harmonic Sliver|U|TSR
+#194|Gurmag Angler|S|TSR
+#195|Gauntlet of Power|M|TSR
+#196|Evolution Charm|C|TSR
+#197|Errant Ephemeron|C|TSR
+#198|Epic Experiment|S|TSR
+#199|Edge of Autumn|C|TSR
+#200|Duskrider Peregrine|U|TSR
+#201|Dryad Arbor|R|TSR
+#202|Cranial Plating|S|TSR
+#203|Containment Priest|S|TSR
+#204|Cloudseeder|U|TSR
+#205|Char-Rumbler|U|TSR
+#206|Careful Consideration|U|TSR
+#207|Calciderm|U|TSR
+#208|Assassinate|C|TSR
+#209|Arc Blade|U|TSR
+#210|Whip-Spine Drake|U|TSR
+#211|Walk the Aeons|R|TSR
+#212|Vampire Hexmage|S|TSR
+#213|Urza's Factory|U|TSR
+#214|Trinket Mage|S|TSR
+#215|Thornweald Archer|C|TSR
+#216|Sunlace|C|TSR
+#217|Street Wraith|U|TSR
+#218|Spiketail Drakeling|C|TSR
+#219|Remand|S|TSR
+#220|Prodigal Pyromancer|U|TSR
+#221|Ponder|S|TSR
+#222|Orchish Cannonade|C|TSR
+#223|Nantuko Shaman|C|TSR
+#224|Mogg War Marshal|C|TSR
+#225|Minions' Murmurs|U|TSR
+#226|Mana Tithe|C|TSR
+#227|Keen Sense|U|TSR
+#228|Kavu Primarch|C|TSR
+#229|Judge Unworthy|C|TSR
+#230|Haze of Rage|U|TSR
+#231|Grave Scrabber|C|TSR
+#232|Gemhide Sliver|C|TSR
+#233|Farseek|S|TSR
+#234|Evolutionary Leap|S|TSR
+#235|Empty the Warrens|C|TSR
+#236|Delay|U|TSR
+#237|Deadly Grub|C|TSR
+#238|Dark Withering|C|TSR
+#239|Citanul Woodreaders|C|TSR
+#240|Bonded Fetch|U|TSR
+#241|Blighted Woodland|S|TSR
+#242|Benalish Cavalry|C|TSR
+#243|Beast Within|S|TSR
+#244|Basalt Gargoyle|U|TSR
+#245|Amrou Scout|C|TSR
+#246|Wipe Away|U|TSR
+#247|Watcher Sliver|C|TSR
+#248|Urborg, Tomb of Yawgmoth|R|TSR
+#249|Two-Headed Sliver|C|TSR
+#250|Trespasser il-Vec|C|TSR
+#251|Tolaria West|R|TSR
+#252|Timebender|U|TSR
+#253|Thallid Germinator|C|TSR
+#254|Terramorphic Expanse|C|TSR
+#255|Sudden Spoiling|R|TSR
+#256|Stronghold Rats|U|TSR
+#257|Stormcloud Djinn|U|TSR
+#258|Stonehorn Dignitary|S|TSR
+#259|Sporoloth Ancient|C|TSR
+#260|Skittering Monstrosity|U|TSR
+#261|Sidewinder Sliver|C|TSR
+#262|Shade of Trokair|C|TSR
+#263|Saltcrusted Steppe|U|TSR
+#264|Rough Tumble|U|TSR
+#265|Riptide Pilferer|U|TSR
+#266|Riddle of Lightning|C|TSR
+#267|Primal Plasma|C|TSR
+#268|Pongify|U|TSR
+#269|Pendelhaven Elder|U|TSR
+#270|Paradoxical Outcome|S|TSR
+#271|Pact of Negation|R|TSR
+#272|Mycologist|U|TSR
+#273|Molten Slagheap|U|TSR
+#274|Lotus Bloom|R|TSR
+#275|Logic Knot|C|TSR
+#276|Llanowar Elves|U|TSR
+#277|Knight of Sursi|C|TSR
+#278|Keldon Halberdier|C|TSR
+#279|Gossamer Phantasm|C|TSR
+#280|Gorgon Recluse|C|TSR
+#281|Goblin Engineer|S|TSR
+#282|Gaint Dustwasp|C|TSR
+#283|Fungal Reaches|U|TSR
+#284|Foresee|C|TSR
+#285|Fathom Seer|C|TSR
+#286|Faceless Devourer|U|TSR
+#287|Durkwood Baloth|C|TSR
+#288|Dreadship Reef|U|TSR
+#289|Coral Trickster|C|TSR
+#290|Contagion Clasp|S|TSR
+#291|Conflagrate|U|TSR
+#292|Coal Stoker|C|TSR
+#293|Cloud Key|R|TSR
+#294|Clockwork Hydra|U|TSR
+#295|Chromatic Star|C|TSR
+#296|Castle Raptors|C|TSR
+#297|Calciform Pools|U|TSR
+#298|Brute Force|C|TSR
+#299|Bonesplitter Sliver|C|TSR
+#300|Blightspeaker|C|TSR
+#301|Aven Mindcensor|C|TSR
+#302|Whitemane Lion|C|TSR
+#303|Vesuva|M|TSR
+#304|Veiling Oddity|C|TSR
+#305|Utopia Vow|C|TSR
+#306|Think Twice|C|TSR
+#307|Spinneret Sliver|C|TSR
+#308|Smallpox|U|TSR
+#309|Sinew Sliver|C|TSR
+#310|Sangrophage|C|TSR
+#311|Reflex Sliver|C|TSR
+#312|Rakdos Charm|S|TSR
+#313|Primal Forcemage|U|TSR
+#314|Porphyry Nodes|R|TSR
+#315|Piracy Charm|C|TSR
+#316|Pallid Mycoderm|C|TSR
+#317|Momentary Blink|C|TSR
+#318|Might of Old Krosa|U|TSR
+#319|Master of the Pearl Trident|S|TSR
+#320|Manifold Key|S|TSR
+#321|Lymph Sliver|C|TSR
+#322|Liliana's Triumph|S|TSR
+#323|Jhoira's Timebug|C|TSR
+#324|Ivory Giant|C|TSR
+#325|Infiltrator il-Kor|C|TSR
+#326|Grinning Ignus|C|TSR
+#327|Grapeshot|C|TSR
+#328|Gemstone Caverns|M|TSR
+#329|Gathan Raiders|C|TSR
+#330|Flagstones of Trokair|R|TSR
+#331|Feebleness|C|TSR
+#332|Errant Doomsayers|C|TSR
+#333|Dreamscape Artist|C|TSR
+#334|Disdainful Stroke|S|TSR
+#335|Deepcavern Imp|C|TSR
+#336|Deathspore Thallid|C|TSR
+#337|Cutthroat il-Dal|C|TSR
+#338|Cryptic Annelid|U|TSR
+#339|Bojuka Bog|S|TSR
+#340|Aven Riftwatcher|C|TSR
+#341|Amrou Seekers|C|TSR
+#342|Virulent Sliver|C|TSR
+#343|Utopia Mycon|U|TSR
+#344|Urborg Syphon-Mage|C|TSR
+#345|Uktabi Drake|C|TSR
+#346|Tolarian Sentinel|C|TSR
+#347|Time of Need|S|TSR
+#348|Thrill of the Hunt|C|TSR
+#349|Thallid Shell-Dweller|C|TSR
+#350|Sylvan Scrying|S|TSR
+#351|Snapback|C|TSR
+#352|Slipstream Serpent|C|TSR
+#353|Skirk Shaman|C|TSR
+#354|Sarcomite Myr|C|TSR
+#355|Ridged Kusite|C|TSR
+#356|Restore Balance|M|TSR
+#357|Ramunap Ruins|S|TSR
+#358|Pit Keeper|C|TSR
+#359|Past in Flames|S|TSR
+#360|Needlepeak Spider|C|TSR
+#361|Mindstab|C|TSR
+#362|Homing Sliver|C|TSR
+#363|Ethereal Armor|S|TSR
+#364|Erratic Mutation|C|TSR
+#365|Blade of the Sixth Pride|C|TSR
+#366|Bewilder|C|TSR
+#367|Battering Sliver|C|TSR
+#368|Ancient Den|S|TSR
+#369|Yixlid Jailer|U|TSR
+#370|Strength in Numbers|C|TSR
+#371|Simian Spirit Guide|C|TSR
+#372|Rift Elemental|C|TSR
+#373|Rebuff the Wicked|U|TSR
+#374|Reality Acid|C|TSR
+#375|Psychotic Episode|C|TSR
+#376|Paradise Plume|U|TSR
+#377|Muraganda Petroglyphs|R|TSR
+#378|Molten Rain|S|TSR
+#379|Mass of Ghouls|C|TSR
+#380|Lava Spike|S|TSR
+#381|Hypergenesis|M|TSR
+#382|Greenseeker|C|TSR
+#383|Fortify|C|TSR
+#384|Drifter il-Dal|C|TSR
+#385|Dream Stalker|C|TSR
+#386|Corpulent Corpse|C|TSR
+#387|Vandalblast|S|TSR
+#388|Swarmyard|R|TSR
+#389|Seal of Primordium|C|TSR
+#390|Sanguine Bond|S|TSR
+#391|Return to Dust|U|TSR
+#392|Relentless Rats|S|TSR
+#393|Magnus of the Moon|R|TSR
+#394|Laboratory Maniac|S|TSR
+#395|Field of Ruin|S|TSR
+#396|Dovin's Veto|S|TSR
+#397|Children of Korlis|C|TSR
+#398|Chalice of the Void|S|TSR
+#399|Angel's Grace|R|TSR
+#400|Ancient Stirrings|S|TSR
+#401|Ancient Grudge|C|TSR
+#402|Sorcerous Spyglass|S|TSR
+#403|Silence|S|TSR
+#404|Nature's Claim|S|TSR
+#405|Leyline of the Void|S|TSR
+#406|Krosan Grip|U|TSR
+#407|Glittering Wish|R|TSR
+#408|Wastes|S|TSR
+#409|Leveler|S|TSR
+#410|Extirpate|R|TSR

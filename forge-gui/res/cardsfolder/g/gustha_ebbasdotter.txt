@@ -1,0 +1,9 @@
+Name:Gustha Ebbasdotter
+ManaCost:3 U U
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Protection from red
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever you cast your first spell during each opponent's turn, draw three cards, then put two cards from your hand on top of your library in any order.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | Reorder$ True
+Oracle:Protection from red\nWhenever you cast your first spell during each opponent's turn, draw three cards, then put two cards from your hand on top of your library in any order.

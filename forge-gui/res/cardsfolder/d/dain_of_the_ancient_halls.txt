@@ -1,0 +1,11 @@
+Name:Dáin of the Ancient Halls
+ManaCost:3 R W
+Types:Legendary Creature Dwarf Noble
+PT:4/5
+K:Vigilance
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever NICKNAME attacks, he deals damage equal to the number of Dwarves you control to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:X:Count$Valid Dwarf.YouCtrl
+DeckNeeds:Type$Dwarf
+Oracle:Vigilance, haste\nWhenever Dáin attacks, he deals damage equal to the number of Dwarves you control to each opponent.

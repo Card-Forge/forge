@@ -54,11 +54,9 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Object a = runParams.get(AbilityKey.Attacker),
-                b = runParams.get(AbilityKey.Blocker);
+        final Card attacker = (Card) runParams.get(AbilityKey.Attacker),
+                blocker = (Card) runParams.get(AbilityKey.Blocker);
 
-        final Card attacker = (Card) a,
-                blocker = (Card) b;
         if (hasParam("ValidCard")) {
             final String validCard = getParam("ValidCard");
             if (validCard.equals("LessPowerThanBlocker")) {
@@ -86,8 +84,8 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attacker, AbilityKey.Blocker);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Attacker, AbilityKey.Blocker);
     }
 
     @Override

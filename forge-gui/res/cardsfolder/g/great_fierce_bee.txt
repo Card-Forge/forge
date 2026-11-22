@@ -1,0 +1,8 @@
+Name:Great Fierce Bee
+ManaCost:2 B
+Types:Creature Insect
+PT:2/2
+K:Flying
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigScry | TriggerDescription$ Whenever one or more other creatures die, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhenever one or more other creatures die, scry 1. (Look at the top card of your library. You may put that card on the bottom.)

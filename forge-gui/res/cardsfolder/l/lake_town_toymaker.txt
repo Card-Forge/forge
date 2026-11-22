@@ -1,0 +1,9 @@
+Name:Lake-town Toymaker
+ManaCost:3 W
+Types:Creature Human Artificer
+PT:3/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you've drawn two or more cards this turn, another target creature you control gets +3/+0 and gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | NumAtt$ +3 | KW$ First Strike
+SVar:X:Count$YouDrewThisTurn
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, if you've drawn two or more cards this turn, another target creature you control gets +3/+0 and gains first strike until end of turn.

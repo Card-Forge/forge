@@ -75,6 +75,10 @@ public class CounterAi extends SpellAbilityAi {
                 // TODO check if Player can pay the unless cost?
             }
 
+            if (PlayRelevance.isBait(ai, topSA)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // a pump on a creature that is out of the fight: a bluff
+            }
+
             sa.resetTargets();
             if (sa.canTargetSpellAbility(topSA)) {
                 sa.getTargets().add(topSA);
@@ -327,15 +331,13 @@ public class CounterAi extends SpellAbilityAi {
                 continue;
             }
 
+            if (PlayRelevance.isBait(ai, tgtSA) && !mandatory) {
+                continue; // a bluff is no target for a counterspell that is not forced
+            }
             if (bestOption == null) {
                 bestOption = tgtSA;
-            } else {
-                // TODO Determine if this option is better than the current best option
-                boolean betterThanBest = false;
-                if (betterThanBest) {
-                    bestOption = tgtSA;
-                }
-                // Don't really need to keep updating leastBadOption once we have a bestOption
+            } else if (PlayRelevance.stackValue(ai, tgtSA) > PlayRelevance.stackValue(ai, bestOption)) {
+                bestOption = tgtSA; // the spell that is worth the most to its caster
             }
         }
 

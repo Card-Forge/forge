@@ -1,0 +1,8 @@
+Name:Gleaming Splendor
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws their second card each turn, you create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+A:AB$ Draw | Cost$ 2 W | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Two target players each draw a card.
+DeckHas:Ability$Token
+Oracle:Whenever an opponent draws their second card each turn, you create a Treasure token.\n{2}{W}: Two target players each draw a card.

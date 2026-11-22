@@ -1,0 +1,12 @@
+Name:Thranduil's Company
+ManaCost:2 G U
+Types:Creature Elf Soldier
+PT:3/4
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | IsPresent$ Elf.YouCtrl+Other | Description$ As long as you control another Elf, you may play an additional land on each of your turns.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put two +1/+1 counters on target creature you control. It gains vigilance until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Elf
+Oracle:As long as you control another Elf, you may play an additional land on each of your turns.\nLandfall — Whenever a land you control enters, put two +1/+1 counters on target creature you control. It gains vigilance until end of turn.

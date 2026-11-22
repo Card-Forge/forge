@@ -1,0 +1,8 @@
+Name:Pelia, Immortal Innovator
+ManaCost:3 U
+Types:Legendary Creature Lanthanite Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, return target creature an opponent controls to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+Oracle:When Pelia enters, return target creature an opponent controls to its owner's hand.

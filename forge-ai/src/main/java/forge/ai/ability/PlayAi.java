@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.ai.simulation.ComboPlan;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.game.Game;
@@ -15,6 +16,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
+import forge.game.ability.ApiType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
@@ -63,9 +65,8 @@ public class PlayAi extends SpellAbilityAi {
         if ("ReplaySpell".equals(logic)) {
             if (ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
             if (sa.getPayCosts().getCostMana() != null) {
@@ -74,9 +75,8 @@ public class PlayAi extends SpellAbilityAi {
             cards = CardLists.filter(cards, CardPredicates.greaterCMC(minCMC));
             if (chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         } else if ("WithTotalCMC".equals(logic)) {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
@@ -104,9 +104,8 @@ public class PlayAi extends SpellAbilityAi {
 
             if (t.isPermanent() && !t.isLand()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -166,6 +165,26 @@ public class PlayAi extends SpellAbilityAi {
         } else {
             validSA = null;
         }
+        // Beseech the Mirror (and the like) offers the engine it found for free (Gaea's Will, Yawgmoth's Will). The generic
+        // check below wants several castable cards in the graveyard and declines, and the engine goes to the hand instead.
+        // Not read from the deck plan: the player of a simulated copy does not see the same deck as the real one.
+        final boolean freeCast = sa.hasParam("WithoutManaCost");
+        if (freeCast) {
+            for (final Card c : options) {
+                final CardState real = c.getState(CardStateName.Original);
+                if (!c.isFaceDown() || real == null) {
+                    continue;
+                }
+                if (real.hasKeyword(Keyword.STORM)) {
+                    return c; // only found for a free cast when it is lethal (see ComboPlan.tutorStormPick)
+                }
+                if (real.hasKeyword(Keyword.BARGAIN)) {
+                    return c; // a second Beseech the Mirror found by the first
+                }
+                if (ComboPlan.isRecursionAbility(real.getSpellAbilities()))
+                    return c;
+            }
+        }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
             // of which spell was the reason for the choice can be used there
@@ -199,7 +218,22 @@ public class PlayAi extends SpellAbilityAi {
 
                     spell = (Spell) spell.copyWithManaCostReplaced(spell.getActivatingPlayer(), abCost);
                 }
-                if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !(isOptional || sa.hasParam("Optional")), true)) {
+                if (sa.isKeyword(Keyword.MADNESS) && !spell.usesTargeting()) {
+                    // The card is already in exile and goes to the graveyard if it is not cast: the usual "is this a
+                    // good moment" heuristics have nothing left to decide, only whether the madness cost can be paid
+                    return ComputerUtilCost.canPayCost(spell, ai, true);
+                }
+                // A suspended burn or removal spell is free and stays in exile for good if it is not cast now (Rift Bolt
+                // with only Shalai or Crystal Barricade to aim at): any legal target is better than none, so it is cast
+                // as if it were mandatory. After the final TIME counter is removed, hasSuspend() is false;
+                // the printed Suspend keyword remains, so detect the ready-to-cast card from its state instead
+                // of depending on which wrapper/root ability retained the CounterRemoved trigger.
+                final boolean lastSuspendCounterRemoved = c == sa.getHostCard() && c.isInZone(ZoneType.Exile)
+                        && c.hasKeyword(Keyword.SUSPEND)
+                        && c.getCounters(forge.game.card.CounterEnumType.TIME) == 0;
+                final boolean lostIfNotCast = c.isInZone(ZoneType.Exile) && (c.hasSuspend() || lastSuspendCounterRemoved)
+                        && (spell.getApi() == ApiType.DealDamage || spell.getApi() == ApiType.Destroy);
+                if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, lostIfNotCast || !(isOptional || sa.hasParam("Optional")), true)) {
                     // Before accepting, see if the spell has a valid number of targets (it should at this point).
                     // Proceeding past this point if the spell is not correctly targeted will result
                     // in "Failed to add to stack" error and the card disappearing from the game completely.

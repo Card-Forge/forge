@@ -1,0 +1,10 @@
+Name:Bolg, Erebor's Reckoning
+ManaCost:4 B R
+Types:Legendary Creature Goblin Soldier
+PT:6/6
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of each combat, other Goblins and Orcs you control get +2/+2 until end of turn. Creatures your opponents control get -1/-1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Goblin.YouCtrl+StrictlyOther,Orc.YouCtrl+StrictlyOther | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:PlayMain1:TRUE
+Oracle:Trample\nAt the beginning of each combat, other Goblins and Orcs you control get +2/+2 until end of turn. Creatures your opponents control get -1/-1 until end of turn.

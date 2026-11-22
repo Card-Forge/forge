@@ -3,6 +3,6 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
 DeckHas:Keyword$Vigilance
 Oracle:Enchant creature\nEnchanted creature has vigilance.

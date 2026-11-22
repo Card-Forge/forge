@@ -1,0 +1,8 @@
+Name:Germinate Recruits
+ManaCost:2 W
+Types:Instant
+A:SP$ Token | TokenAmount$ X | TokenScript$ cadet | TokenOwner$ You | SpellDescription$ Create X 2/2 colorless Wizard Soldier creature tokens named Cadet, where X is the amount of life you gained this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Token
+DeckHints:Ability$LifeGain
+Oracle:Create X 2/2 colorless Wizard Soldier creature tokens named Cadet, where X is the amount of life you gained this turn.

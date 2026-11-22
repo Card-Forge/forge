@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.ai.simulation.AiCardLists;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -34,7 +35,9 @@ import forge.game.GameType;
 import forge.game.card.CardUtil;
 import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
-import forge.gamemodes.limited.GauntletMini;
+import forge.gui.GuiBase;
+import forge.gui.download.CdnUuidCache;
+import forge.gamemodes.limited.LimitedMatch;
 import forge.gamemodes.limited.ThemedChaosDraft;
 import forge.gamemodes.planarconquest.ConquestController;
 import forge.gamemodes.planarconquest.ConquestPlane;
@@ -63,6 +66,7 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 /**
@@ -85,7 +89,20 @@ public final class FModel {
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
-            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)));
+            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
+            buildPreferredLanguageAvailability()));
+
+    private static BiPredicate<String, String> buildPreferredLanguageAvailability() {
+        if (!getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {
+            return null;
+        }
+        String preferredLang = getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        if (preferredLang == null || preferredLang.isEmpty() || "en".equalsIgnoreCase(preferredLang)) {
+            return null;
+        }
+        return (setCode, collectorNumber) -> CdnUuidCache.isAvailableInLanguage(setCode, collectorNumber, preferredLang);
+    }
+
     private static final Supplier<QuestPreferences> questPreferences = Suppliers.memoize(QuestPreferences::new);
     private static final Supplier<ConquestPreferences> conquestPreferences = Suppliers.memoize(() -> {
        final ConquestPreferences cp = new ConquestPreferences();
@@ -103,13 +120,14 @@ public final class FModel {
         a.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         a.put(GameType.Puzzle, new PuzzleAchievements());
         a.put(GameType.Adventure, new AdventureAchievements());
+        a.put(GameType.RogueCommander, new RogueCommanderAchievements());
         return a;
     });
 
     // Someone should take care of 2 gauntlets here
     private static TournamentData tournamentData;
     private static GauntletData gauntletData;
-    private static final Supplier<GauntletMini> gauntletMini = Suppliers.memoize(GauntletMini::new);
+    private static final Supplier<LimitedMatch> limitedMatch = Suppliers.memoize(LimitedMatch::new);
 
     private static final Supplier<QuestController> quest = Suppliers.memoize(QuestController::new);
     private static final Supplier<ConquestController> conquest = Suppliers.memoize(ConquestController::new);
@@ -142,6 +160,7 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> attractionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> stickerSheetPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
@@ -169,22 +188,40 @@ public final class FModel {
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
+        //the card, token and custom readers each report 0..total on their own, which made the bar fill up and start over.
+        //Every restart is treated as the next stage of one overall run, weighted by its usual share of the work, and the bar only moves forward.
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
+            private final float[] stageWeights = {0.8f, 0.1f, 0.05f, 0.05f}; //cards, tokens, custom cards, custom tokens
+            private int stage = 0;
+            private float lastFraction = 0f, shown = 0f;
+            private int lastPosted = -1; //the bar has few steps, so most reports change nothing and are not posted to the UI thread
+
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
                 FThreads.invokeInEdtLater(() -> {
                     progressBar.setDescription(name);
-                    progressBar.setPercentMode(usePercents);
+                    progressBar.setPercentMode(true);
                 });
             }
 
             @Override
-            public void report(final int current, final int total) {
-                FThreads.invokeInEdtLater(() -> {
-                    progressBar.setMaximum(total);
-                    progressBar.setValue(current);
-                });
+            public synchronized void report(final int current, final int total) {
+                final float fraction = total <= 0 ? 0f : Math.min(1f, (float) current / total);
+                if (fraction < lastFraction - 0.5f && stage < stageWeights.length - 1) {
+                    stage++; //a new reader started counting again from the beginning
+                }
+                lastFraction = fraction;
+                float base = 0f;
+                for (int i = 0; i < stage; i++) {
+                    base += stageWeights[i];
+                }
+                shown = Math.max(shown, base + stageWeights[stage] * fraction);
+                final int value = Math.round(shown * progressCeiling);
+                if (value != lastPosted) { //tens of thousands of cards report, only a few hundred bar steps are worth a UI post
+                    lastPosted = value;
+                    updateProgressBar(progressBar, value);
+                }
             }
         };
 
@@ -193,9 +230,12 @@ public final class FModel {
         loadDynamicGamedata();
 
         // Load card database
-        // Lazy loading currently disabled
+        // Custom cards and tokens always load eagerly: StaticData.attemptToLoadCard only
+        // consults the main card reader, so a lazy custom reader would never be read.
+        // NOTE: UNLESS PROVEN to work on mobile version with no hitches or bugs, don't remove this check.
+        final boolean loadCardsLazily = GuiBase.isMobile() ? false : getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                false);
+                loadCardsLazily);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 false);
 
@@ -254,16 +294,37 @@ public final class FModel {
 
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+
+        // Card lists of the AI's combo logic: roles of cards, and the two card combos of Commander (the bracket list first)
+        AiCardLists.configure(
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_CARD_ROLES_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.COMMANDER_BRACKET_COMBOS_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMMANDER_COMBOS_FILE));
+        // the combos of the Vintage, Legacy and Modern metagame, as data (ai-combos.txt)
+        forge.ai.simulation.ComboCatalog.configure(() -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMBOS_FILE));
+        // decks built for the AI keep the AI:RemoveDeck:All cards that Flat MC plays, while it is on
+        forge.card.CardAiHints.setKeptForFlatMc(name -> getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO)
+                && AiCardLists.isFlatMcPlayable(name));
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED) && !loadCardsLazily) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){
                 deckGenMatrixLoaded=false;
             }
         }
+    }
+
+    //mobile lowers this to leave room on the bar for its own startup steps after the card databases are loaded
+    public static volatile int progressCeiling = 1000;
+
+    private static void updateProgressBar(IProgressBar progressBar, int value) {
+        FThreads.invokeInEdtLater(() -> {
+            progressBar.setMaximum(1000);
+            progressBar.setValue(value);
+        });
     }
 
     private static boolean deckGenMatrixLoaded = false;
@@ -328,6 +389,10 @@ public final class FModel {
         return contraptionPool.get();
     }
 
+    public static ItemPool<PaperCard> getStickerSheetPool() {
+        return stickerSheetPool.get();
+    }
+
     private static boolean keywordsLoaded = false;
 
     /**
@@ -335,9 +400,9 @@ public final class FModel {
      */
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
-            
+
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE));
-            
+
             for (String sectionName: contents.keySet()) {
                 CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
             }
@@ -379,7 +444,8 @@ public final class FModel {
     public static AchievementCollection getAchievements(GameType gameType) {
         // Translate gameType to appropriate type if needed
         return switch (gameType) {
-            case Constructed, Draft, Sealed, Quest, PlanarConquest, Puzzle, Adventure -> achievements.get().get(gameType);
+            case Constructed, Draft, Sealed, Quest, PlanarConquest, Puzzle, Adventure, RogueCommander ->
+                    achievements.get().get(gameType);
             case AdventureEvent -> achievements.get().get(GameType.Adventure);
             case QuestDraft -> achievements.get().get(GameType.Quest);
             default -> achievements.get().get(GameType.Constructed);
@@ -398,8 +464,8 @@ public final class FModel {
         gauntletData = data0;
     }
 
-    public static GauntletMini getGauntletMini() {
-        return gauntletMini.get();
+    public static LimitedMatch getLimitedMatch() {
+        return limitedMatch.get();
     }
 
     public static CardCollections getDecks() {

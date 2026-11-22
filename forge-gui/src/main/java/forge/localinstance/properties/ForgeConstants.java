@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class ForgeConstants {
+
     private static final Localizer localizer = Localizer.getInstance();
     public static final String GITHUB_FORGE_URL                 = "https://github.com/Card-Forge/forge/";
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
@@ -50,6 +51,7 @@ public final class ForgeConstants {
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
     public static final String SPECIAL_CARD_ACHIEVEMENT_LIST_FILE    = LISTS_DIR + "special-card-achievements.txt";
     public static final String PLANESWALKER_ACHIEVEMENT_LIST_FILE    = LISTS_DIR + "planeswalker-achievements.txt";
+    public static final String ROGUE_COMMANDER_ACHIEVEMENT_LIST_FILE = LISTS_DIR + "rogue-commander-achievements.txt";
     public static final String ALTWIN_ACHIEVEMENT_LIST_FILE          = LISTS_DIR + "altwin-achievements.txt";
     public static final String IMAGE_LIST_TOKENS_FILE                = LISTS_DIR + "token-images.txt";
     public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = LISTS_DIR + "quest-opponent-icons.txt";
@@ -76,7 +78,11 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String NET_ARCHIVE_COMMANDER_DECKS_LIST_FILE = LISTS_DIR + "net-decks-archive-duel-commander.txt";
     public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
+    public static final String AI_COMMANDER_COMBOS_FILE              = LISTS_DIR + "ai-commander-combos.txt";
+    public static final String AI_CARD_ROLES_FILE                    = LISTS_DIR + "ai-card-roles.txt";
+    public static final String AI_COMBOS_FILE                        = LISTS_DIR + "ai-combos.txt";
     public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
     public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
     public static final String COMMANDER_BRACKET_EXTRA_TURNS_FILE    = LISTS_DIR + "extra-turns.txt";
@@ -89,8 +95,7 @@ public final class ForgeConstants {
     public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
 
     public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
-    public static final String DRAFT_RANKINGS_FILE          = DRAFT_DIR + "rankings.txt";
-    public static final String DRAFT_RANKINGS_FOLDER          = DRAFT_DIR + "rankings/";
+    public static final String DRAFT_RANKINGS_FOLDER        = DRAFT_DIR + "rankings/";
     public static final String SEALED_DIR                   = RES_DIR + "sealed" + PATH_SEPARATOR;
     public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
     public static final String TOKEN_DATA_DIR               = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
@@ -242,11 +247,13 @@ public final class ForgeConstants {
     }
 
     // data that is only in the profile dirs
+    public static final String CACHE_CDN_UUID_DIR         = CACHE_DIR + "cdn_uuid" + PATH_SEPARATOR;
     public static final String USER_QUEST_DIR             = USER_DIR + "quest" + PATH_SEPARATOR;
     public static final String USER_QUEST_WORLD_DIR       = USER_QUEST_DIR + "world" + PATH_SEPARATOR;
     public static final String USER_CONQUEST_DIR          = USER_DIR + "conquest" + PATH_SEPARATOR;
     public static final String USER_PREFS_DIR             = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR             = USER_DIR + "games" + PATH_SEPARATOR;
+    public static final String USER_REPLAYS_DIR           = USER_DIR + "replays" + PATH_SEPARATOR;
     public static final String USER_PUZZLE_DIR            = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE                   = USER_DIR + "forge.log";
     public static final String NETWORK_LOGS_DIR           = USER_DIR + "networklogs" + PATH_SEPARATOR;
@@ -258,6 +265,7 @@ public final class ForgeConstants {
     public static final String USER_FORMATS_DIR           = USER_CUSTOM_DIR + "formats" + PATH_SEPARATOR;
     public static final String CUSTOM_STARTER_DECK_DIR    = USER_CUSTOM_DIR + "starterdecks" + PATH_SEPARATOR;
     public static final String USER_ADVENTURE_DIR         = USER_DIR + "adventure" + PATH_SEPARATOR;
+    public static final String USER_ADVENTURE_BACKUP_DIR  = USER_DIR + "adventure_backups" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR             = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
     public static final String DECK_WINSTON_DIR           = DECK_BASE_DIR + "winston" + PATH_SEPARATOR;
     public static final String DECK_SEALED_DIR            = DECK_BASE_DIR + "sealed" + PATH_SEPARATOR;
@@ -280,6 +288,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE           = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE        = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE       = USER_PREFS_DIR + "item_view.preferences";
+
     public static final String CLOSE_CONN_COMMAND         = "<<_EM_ESOLC_<<";
     public static final String INVALID_HOST_COMMAND       = "<<_TSOH_DILAVNI_<<";
     public static final String CONN_ERROR_PREFIX          = "<<_CONN_ERROR_>>:";
@@ -348,6 +357,7 @@ public final class ForgeConstants {
     public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
+    public static final String URL_SCRYFALL_CDN = "https://cards.scryfall.io/";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
@@ -366,6 +376,10 @@ public final class ForgeConstants {
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";
     public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";
     public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
+
+    public static final String UNDO_MODE_OFF = "Off";
+    public static final String UNDO_MODE_SINGLE = "Single step";
+    public static final String UNDO_MODE_FREE = "Free";
 
     // Constants for Stack effect addition notification policy
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
@@ -395,6 +409,22 @@ public final class ForgeConstants {
                 localizer.getMessage("lblAlways"), "ALWAYS",
                 localizer.getMessage("lblNever"), "NEVER"
         );
+    }
+
+    public static Map<String, String> getScryfallCardLanguageMapping() {
+        final java.util.LinkedHashMap<String, String> map = new java.util.LinkedHashMap<>();
+        map.put("English", "en");
+        map.put("Spanish", "es");
+        map.put("French", "fr");
+        map.put("German", "de");
+        map.put("Italian", "it");
+        map.put("Portuguese", "pt");
+        map.put("Japanese", "ja");
+        map.put("Korean", "ko");
+        map.put("Russian", "ru");
+        map.put("Chinese Simplified", "zhs");
+        map.put("Chinese Traditional", "zht");
+        return map;
     }
 
     /** Locale codes for each {@code <locale>.properties} file under {@link #LANG_DIR}, sorted alphabetically.

@@ -1,5 +1,5 @@
 Name:Bebop, Warthog Warrior
-ManaCost:4 U4 B
+ManaCost:4 B
 Types:Legendary Creature Boar Mutant Warrior
 PT:5/4
 K:Menace

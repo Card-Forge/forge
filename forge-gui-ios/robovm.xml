@@ -27,12 +27,10 @@
       <directory>res</directory>
       <skipPngCrush>true</skipPngCrush>
     </resource>
-    <!-- Icon*.png are consumed by SpringBoard, not libGDX - CgBI is fine there -->
+    <!-- Assets.xcassets (app icon) - RoboVM compiles asset catalogs with actool
+         and merges the resulting CFBundleIcons/CFBundleIconName into Info.plist -->
     <resource>
-      <directory>.</directory>
-      <includes>
-        <include>Icon*.png</include>
-      </includes>
+      <directory>resources</directory>
     </resource>
     <resource>
       <directory>fallback_skin</directory>
@@ -55,6 +53,12 @@
     <pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
     <pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
     <pattern>org.apache.xalan.processor.TransformerFactoryImpl</pattern>
+    <!-- Xalan picks its output serializer by name: SerializerFactory reads the class from
+         org/apache/xml/serializer/output_{xml,html,text}.properties and Class.forName()s it,
+         which the tree-shaker can't see. Without this every XmlUtil.saveDocument() call fails with
+         WrappedRuntimeException: ToXMLStream — achievements plus the card/deck/item-view
+         preference writers, so none of them persisted on iOS. -->
+    <pattern>org.apache.xml.serializer.**</pattern>
     <pattern>java.util.logging.**</pattern>
     <pattern>com.badlogic.gdx.**</pattern>
     <!-- adventure ui_skin.json references TenPatchDrawable by NAME (libGDX skin
@@ -95,6 +99,10 @@
     <!-- image pipeline nested classes (hybrid resolver, LRU caches) -->
     <pattern>forge.assets.Assets$*</pattern>
     <pattern>forge.assets.ImageCache$*</pattern>
+    <!-- iOS downloaded-card TextureData (supplied to the AssetManager via TextureParameter) -->
+    <pattern>forge.assets.CardTextureData</pattern>
+    <!-- iOS AVAudioPlayer-backed sound effects -->
+    <pattern>forge.sound.MusicAudioClip</pattern>
     <!-- Sentry crash reporting: the SDK wires integrations/transports via
          reflection and ServiceLoader, which the tree-shaker cannot see.
          Missing classes here historically killed the game thread with

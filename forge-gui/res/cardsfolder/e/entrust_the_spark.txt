@@ -1,0 +1,6 @@
+Name:Entrust the Spark
+ManaCost:3 G U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Planeswalker | ChangeTypeDesc$ planeswalker | ChangeNum$ 1 | UnlessCost$ Sac<1/Planeswalker> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may sacrifice a planeswalker. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle.
+DeckNeeds:Type$Planeswalker
+Oracle:You may sacrifice a planeswalker. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle.

@@ -1,0 +1,6 @@
+Name:Xenobotanist
+ManaCost:1 G
+Types:Creature Vulcan Scientist
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

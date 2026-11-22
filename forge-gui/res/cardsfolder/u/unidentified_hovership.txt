@@ -4,9 +4,8 @@ Types:Artifact Vehicle
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, exile up to one target creature with toughness 5 or less.
-SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.toughnessLE5 | TgtPrompt$ Select target creature with toughness 5 or less. | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
+SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.toughnessLE5 | TgtPrompt$ Select target creature with toughness 5 or less. | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ When CARDNAME leaves the battlefield, the exiled card's owner manifests dread.
-SVar:TrigDread:DB$ ManifestDread | DefinedPlayer$ RememberedOwner | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigDread:DB$ ManifestDread | DefinedPlayer$ Player.HasCardsInExile_Card.ExiledWithSource_GE1
 K:Crew:1
 Oracle:Flying\nWhen Unidentified Hovership enters, exile up to one target creature with toughness 5 or less.\nWhen Unidentified Hovership leaves the battlefield, the exiled card's owner manifests dread.\nCrew 1

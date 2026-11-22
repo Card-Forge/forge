@@ -74,7 +74,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
         int lost = 0;
         if (pLife > num) {
-            lost = p.loseLife(pLife - num, false, false);
+            lost = p.loseLife(pLife - num, false, false, sa);
         } else if (num > pLife) {
             p.gainLife(num - pLife, source, sa);
         }

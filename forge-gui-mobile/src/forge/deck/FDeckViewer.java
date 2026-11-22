@@ -39,6 +39,7 @@ public class FDeckViewer extends FScreen {
                 }
                 addItem(item);
             }
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.DECKSTATS, e -> FDeckStatsScreen.show(deckViewer.deck)));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> copyDeckToClipboard(deckViewer.deck)));
         }
     };
@@ -76,7 +77,7 @@ public class FDeckViewer extends FScreen {
     public static void show(final Deck deck0, boolean noPreload, boolean showRanking) {
         if (deck0 == null) { return; }
 
-        if (!noPreload){
+        if (!noPreload) {
             /*preload deck to cache*/
             ImageCache.getInstance().preloadCache(deck0);
         }

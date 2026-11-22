@@ -1,0 +1,9 @@
+Name:Lyra, Archangel of Dawn
+ManaCost:2 W
+Types:Legendary Creature Angel Knight
+PT:3/3
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on each Angel you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Angel.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Lifegain & Type$Angel
+Oracle:Flying\nWhenever you gain life, put a +1/+1 counter on each Angel you control.

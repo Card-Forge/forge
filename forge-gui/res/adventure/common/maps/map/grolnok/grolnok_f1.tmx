@@ -84,13 +84,16 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
     {      
-        &quot;name&quot;:&quot;Unlock with Grolnok's Key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Grolnok's Key&quot;,
+        &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n3.name&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnok's Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
+        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.168.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -154,13 +157,16 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
     {      
-        &quot;name&quot;:&quot;Unlock with Rusty Old Key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Rusty Old Key&quot;,
+        &quot;locname&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n3.name&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Rusty Old Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
+        &quot;loctext&quot;: &quot;adv.grolnok_grolnok_f1.183.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
     }
     ]
 }]</property>

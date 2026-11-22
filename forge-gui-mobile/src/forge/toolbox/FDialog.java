@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -11,7 +12,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.screens.FScreen;
-import forge.screens.match.MatchController;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
@@ -45,12 +45,6 @@ public abstract class FDialog extends FOverlay {
         return FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
     }
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
-
-    private static int openDialogCount = 0;
-
-    public static boolean isDialogOpen() {
-        return openDialogCount > 0;
-    }
 
     private final VPrompt prompt;
     private final FButton btnMiddle;
@@ -112,20 +106,6 @@ public abstract class FDialog extends FOverlay {
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
         }
-    }
-
-    @Override
-    public void setVisible(boolean visible0) {
-        if (this.isVisible() == visible0) { return; }
-
-        if (visible0) {
-            openDialogCount++;
-            MatchController.instance.cancelAwaitNextInput(); //ensure "Waiting for opponent..." prompt doesn't appear while dialog awaiting input
-        }
-        else if (openDialogCount > 0) {
-            openDialogCount--;
-        }
-        super.setVisible(visible0);
     }
 
     protected abstract float layoutAndGetHeight(float width, float maxHeight);
@@ -205,6 +185,10 @@ public abstract class FDialog extends FOverlay {
         float y = getHeight() - (totalHeight + getBottomMargin()) * revealPercent;
         float w = getWidth();
         float h = totalHeight - VPrompt.HEIGHT;
+        if (VPrompt.isFrostedMatch()) { //frosted slate sheet
+            g.fillRect(VPrompt.GLASS_SOLID, x, y, w, h);
+            return;
+        }
         g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, x, y, w, h);
         g.fillRect(FScreen.getTextureOverlayColor(), x, y, w, h);
     }
@@ -220,31 +204,33 @@ public abstract class FDialog extends FOverlay {
         float dotRadius = SWIPE_BAR_HEIGHT / 6;
         float dotTop = y + SWIPE_BAR_HEIGHT / 2;
         int dotCount = 3;
-        g.fillRect(getSwipeBarColor(), 0, y, w, SWIPE_BAR_HEIGHT);
+        final boolean glass = VPrompt.isFrostedMatch();
+        final Color dotColor = new Color(1f, 1f, 1f, 0.45f);
+        g.fillRect(glass ? VPrompt.GLASS_SOLID : getSwipeBarColor().getColor(), 0, y, w, SWIPE_BAR_HEIGHT);
         for (int i = 0; i < dotCount; i++) {
-            g.fillCircle(getSwipeBarDotColor(), x, dotTop, dotRadius);
+            g.fillCircle(glass ? dotColor : getSwipeBarDotColor().getColor(), x, dotTop, dotRadius);
             x += dx;
         }
         x = w - startX;
         for (int i = 0; i < dotCount; i++) {
-            g.fillCircle(getBorderColor(), x, dotTop, dotRadius);
+            g.fillCircle(glass ? dotColor : getBorderColor().getColor(), x, dotTop, dotRadius);
             x -= dx;
         }
-        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
+        if (glass) { g.drawLine(1, VPrompt.GLASS_EDGE, 0, y, w, y); } else { g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y); }
 
         if (revealPercent == 0) { return; } //skip rest if hidden
 
         y += SWIPE_BAR_HEIGHT;
-        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
+        if (glass) { g.drawLine(1, VPrompt.GLASS_EDGE, 0, y, w, y); } else { g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y); }
 
         //draw border above prompt
         y = prompt.getTop();
         if (btnMiddle != null && !title.isEmpty()) { //render title above prompt if middle button present
             y -= MSG_HEIGHT;
-            g.fillRect(VPrompt.getBackColor(), 0, y, w, MSG_HEIGHT);
+            g.fillRect(glass ? VPrompt.GLASS_SOLID : VPrompt.getBackColor().getColor(), 0, y, w, MSG_HEIGHT);
             g.drawText(title, VPrompt.FONT, VPrompt.getForeColor(), 0, y, w, MSG_HEIGHT, false, Align.center, true);
         }
-        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
+        if (glass) { g.drawLine(1, VPrompt.GLASS_EDGE, 0, y, w, y); } else { g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y); }
     }
 
     @Override

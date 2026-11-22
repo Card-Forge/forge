@@ -40,6 +40,7 @@ final class CardFace implements ICardFace, Cloneable {
 
     private String nonAbilityText = null;
     private List<String> keywords = null;
+    private List<String> deckRules = null;
     private List<String> abilities = null;
     private List<String> staticAbilities = null;
     private List<String> triggers = null;
@@ -67,6 +68,7 @@ final class CardFace implements ICardFace, Cloneable {
         
     // these are raw and unparsed used for Card creation
     @Override public Iterable<String> getKeywords()   { return keywords; }
+    @Override public Iterable<String> getDeckRules()  { return deckRules; }
     @Override public Iterable<String> getAbilities()  { return abilities; }
     @Override public Iterable<String> getStaticAbilities() { return staticAbilities; }
     @Override public Iterable<String> getTriggers()   { return triggers; }
@@ -131,6 +133,7 @@ final class CardFace implements ICardFace, Cloneable {
     // Raw fields used for Card creation
     void setNonAbilityText(String value)     { this.nonAbilityText = value; }
     void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<>(); } this.keywords.add(value); }
+    void addDeckRule(String value)           { if (null == this.deckRules) { this.deckRules = new ArrayList<>(); } this.deckRules.add(value); }
     void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<>(); } this.abilities.add(value);}
     void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<>(); } this.triggers.add(value);}
     void addDraftAction(String value)        { if (null == this.draftActions) { this.draftActions = new ArrayList<>(); } this.draftActions.add(value);}
@@ -163,13 +166,15 @@ final class CardFace implements ICardFace, Cloneable {
     }
 
     
-    void assignMissingFields() { // Most scripts do not specify color explicitly
+    void assignMissingFields() {
         if ( null == oracleText ) { System.err.println(name + " has no Oracle text."); oracleText = ""; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( manaCost == null ) manaCost = ManaCost.NO_COST;
+        // Most scripts do not specify color explicitly
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
 
         if ( keywords == null ) keywords = emptyList;
+        if ( deckRules == null ) deckRules = emptyList;
         if ( abilities == null ) abilities = emptyList;
         if ( staticAbilities == null ) staticAbilities = emptyList;
         if ( triggers == null ) triggers = emptyList;
@@ -206,8 +211,9 @@ final class CardFace implements ICardFace, Cloneable {
             else
                 variant.oracleText = this.oracleText;
         }
+
+        if(variant.color == null) variant.color = variant.manaCost == null ? this.color : ColorSet.fromManaCost(this.manaCost);
         if(variant.manaCost == null) variant.manaCost = this.manaCost;
-        if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
 
         if(variant.type == null) variant.type = this.type;
 
@@ -225,6 +231,9 @@ final class CardFace implements ICardFace, Cloneable {
 
         if(variant.keywords == null) variant.keywords = this.keywords;
         else variant.keywords.addAll(0, this.keywords);
+
+        if(variant.deckRules == null) variant.deckRules = this.deckRules;
+        else variant.deckRules.addAll(0, this.deckRules);
 
         if(variant.abilities == null) variant.abilities = this.abilities;
         else variant.abilities.addAll(0, this.abilities);

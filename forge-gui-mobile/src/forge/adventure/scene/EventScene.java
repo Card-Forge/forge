@@ -1,6 +1,8 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -21,8 +23,10 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
@@ -30,7 +34,11 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
+import forge.util.Localizer;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +47,10 @@ import static forge.adventure.util.AdventureEventController.EventStatus.*;
 
 public class EventScene extends MenuScene implements IAfterMatch {
     TextraLabel money, shards;
-    TextraButton advance, back, editDeck, nextPage, previousPage;
+    TextraButton advance, back, editDeck, nextPage, previousPage, reroll;
     private Table scrollContainer;
+    private float rerollLift, rerollJoinDrop, rerollJoinWiden;
+    private boolean rerollLayout;
     ScrollPane scroller;
     Table root, headerTable, metaDraftTable;
     int pageIndex = 0;
@@ -58,6 +68,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private EventScene() {
         super(Forge.isLandscapeMode() ? "ui/event.json" : "ui/event_portrait.json");
+        Localizer localizer = Forge.getLocalizer();
         // TODO: Add translation
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         DialogData introDialog = new DialogData();
@@ -78,7 +89,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         enterWithShards.condition = new DialogData.ConditionData[]{hasShards};
 
         if (currentEvent.eventRules.acceptsChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemChallengeCoin");
 
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Challenge Coin";
@@ -88,7 +99,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsSilverChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+SilverChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemSilverChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Silver Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -97,7 +108,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsBronzeChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+BronzeChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemBronzeChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Bronze Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -180,6 +191,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
         editDeck = ui.findActor("editDeck");
 
+        ui.onButtonPress("reroll", EventScene.this::reroll);
+        reroll = ui.findActor("reroll");
+        if (reroll != null) {
+            rerollLift = reroll.getY() - back.getY();
+            rerollJoinDrop = advance.getY() - (reroll.getY() - 4 - advance.getHeight());
+            rerollJoinWiden = back.getRight() - advance.getRight();
+        }
+
         Window window = ui.findActor("scrollWindow");
         root = ui.findActor("enemies");
 
@@ -194,6 +213,24 @@ public class EventScene extends MenuScene implements IAfterMatch {
         blessing.setActor(blessingScroll);
         blessingScroll.setWidth(blessing.getWidth() - 5);
         blessing.layout();
+        if (blessingScroll.getHeight() > blessing.getHeight()) {
+            Color ink = new Color(0.12f, 0.11f, 0.09f, 1);
+            blessing.setStyle(RewardScene.thinScrollBarStyle(ink));
+            blessing.setFadeScrollBars(false);
+            blessing.setScrollingDisabled(true, false);
+            Table padded = new Table();
+            padded.add(blessingScroll).growX().top().padRight(6);
+            blessing.setActor(padded);
+            // the bar sits 12 below the page's top and 8 in from its thin right edge, and the arrow on the page below the text
+            Actor page = ui.findActor("stats");
+            RewardScene.MoreArrow arrow = new RewardScene.MoreArrow(blessing);
+            arrow.setColor(ink);
+            float bottom = page.getY() + 8 + arrow.getHeight() + 4;
+            blessing.setBounds(blessing.getX(), bottom, page.getRight() - 8 - blessing.getX(), page.getTop() - 12 - bottom);
+            arrow.setPosition(blessing.getX() + (blessing.getWidth() - arrow.getWidth()) / 2, page.getY() + 8);
+            blessing.layout();
+            blessing.getParent().addActor(arrow);
+        }
         window.add(root);
 
         metaDraftTable = ui.findActor("metaDraftTable");
@@ -246,8 +283,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 List<AdventureEventData.AdventureEventMatch> matches = currentEvent.getMatches(i + 1);
 
                 if (matches == null) {
-                    //todo: add translation
-                    round.add(Controls.newTextraLabel("Pairings not yet generated"));
+                    round.add(Controls.newTextraLabel(Forge.getLocalizer().getMessage("advPairingsNotGenerated")));
                 } else {
                     Table roundScrollContainer = new Table(Controls.getSkin());
                     for (AdventureEventData.AdventureEventMatch match : matches) {
@@ -315,6 +351,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
         scroller.clear();
         scroller.setActor(eventPages[pageIndex]);
         performTouch(scroller);
+
+        if (reroll != null) {
+            int price = Config.instance().getConfigData().eventRerollPrice;
+            reroll.setVisible(canReroll());
+            layoutForReroll(canReroll());
+            reroll.setText("[+Refresh][+shards]" + price);
+            reroll.setDisabled(Current.player().getShards() < price);
+        }
 
         //todo: add translations
         switch (currentEvent.eventStatus) {
@@ -427,8 +471,52 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        DeckEditScene.getInstance().loadEvent(currentEvent);
-        Forge.switchScene(DeckEditScene.getInstance());
+        TextureRegion textureRegion = null;
+        if (lastGameScene instanceof UIScene uiScene)
+            textureRegion = uiScene.getUIBackground();
+        DeckEditScene.getInstance(textureRegion).loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance(textureRegion));
+    }
+
+    private boolean canReroll() {
+        return reroll != null && Config.instance().getConfigData().eventRerollPrice > 0 && currentEvent.eventStatus == Available;
+    }
+
+    // Puts Back beside the reroll button with a full width Join Event below, and shortens the info panel above.
+    private void layoutForReroll(boolean show) {
+        if (show == rerollLayout)
+            return;
+        rerollLayout = show;
+        int sign = show ? 1 : -1;
+        back.moveBy(0, sign * rerollLift);
+        advance.moveBy(0, -sign * rerollJoinDrop);
+        advance.setWidth(advance.getWidth() + sign * rerollJoinWiden);
+        for (String name : Forge.isLandscapeMode() ? new String[]{"stats", "blessingInfo"} : new String[]{"scrollWindow"}) {
+            Actor panel = ui.findActor(name);
+            panel.setHeight(panel.getHeight() - sign * rerollLift);
+            panel.moveBy(0, sign * rerollLift);
+        }
+    }
+
+    private void reroll() {
+        AdventureEventData rerolled = null;
+        //A realm with few event sets can still offer the same event after these tries.
+        for (int attempt = 0; attempt < 5; attempt++) {
+            AdventureEventData candidate = AdventureEventController.instance().createEvent(Current.world().getRandom().nextLong());
+            if (candidate == null)
+                continue;
+            rerolled = candidate;
+            if (candidate.format != currentEvent.format || !candidate.cardBlockName.equals(currentEvent.cardBlockName))
+                break;
+        }
+        if (rerolled == null)
+            return;
+
+        Current.player().takeShards(Config.instance().getConfigData().eventRerollPrice);
+        SoundSystem.instance.play(SoundEffectType.Shuffle, false);
+        Current.player().removeEvent(currentEvent);
+        AdventureEventController.instance().initializeEvent(rerolled, currentEvent.sourceID, currentEvent.eventOrigin, changes);
+        Forge.switchScene(EventScene.instance(lastGameScene, rerolled, changes));
     }
 
     public void advance() {
@@ -524,11 +612,15 @@ public class EventScene extends MenuScene implements IAfterMatch {
             EnemySprite enemy = humanMatch.p2.getSprite();
             currentEvent.nextOpponent = humanMatch.p2;
             advance.setDisabled(true);
-            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+            TransitionScreen transitionScreen = new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
+                duelScene.setEffectLayers(null, null, MapStage.getInstance().ignoresGlobalEffect());
                 advance.setDisabled(false);
                 Forge.switchScene(duelScene);
-            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord())));
+            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false,"",
+            Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord());
+            transitionScreen.eventDuel = true;
+            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(transitionScreen));
         } else {
             finishRound();
             advance.setDisabled(false);

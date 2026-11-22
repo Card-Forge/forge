@@ -17,6 +17,7 @@
  */
 package forge.gui.error;
 
+import forge.game.ability.IllegalAbilityException;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SOptionPane;
@@ -79,7 +80,7 @@ public class BugReporter {
         else {
             sb.append(swStr);
         }
-        if (isSentryEnabled()) {
+        if ((!(exception instanceof IllegalAbilityException iae) || !iae.isCustom()) && isSentryEnabled()) {
             sendSentry();
         } else {
             GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("lblReportCrash", "Report a Crash"), sb.toString(), true);

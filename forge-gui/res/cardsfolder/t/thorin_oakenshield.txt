@@ -1,0 +1,8 @@
+Name:Thorin Oakenshield
+ManaCost:R W
+Types:Legendary Creature Dwarf Noble
+PT:3/2
+K:Trample
+K:Storied
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl,Creature.YouCtrl | AddKeyword$ Ward:1 | Condition$ EnduringStory | Description$ As long as you have an enduring story, artifacts and creatures you control have ward {1}.
+Oracle:Trample\nStoried (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, artifacts and creatures you control have ward {1}.

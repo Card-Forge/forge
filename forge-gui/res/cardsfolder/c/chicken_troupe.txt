@@ -1,0 +1,9 @@
+Name:Chicken Troupe
+ManaCost:1 G
+Types:Creature Bird Performer
+PT:2/2
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTicket | TriggerDescription$ When CARDNAME enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | SubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Chicken Troupe enters, you get {TK}, then you may put a sticker on a nonland permanent you own.

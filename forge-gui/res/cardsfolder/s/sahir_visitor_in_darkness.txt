@@ -1,0 +1,12 @@
+Name:Sahir, Visitor in Darkness
+ManaCost:1 B B
+Types:Legendary Creature Human Wizard
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Command,Battlefield | TriggerDescription$ Eminence — At the beginning of your upkeep, NICKNAME deals 1 damage to you. This ability triggers only if NICKNAME is in the command zone or on the battlefield.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+T:Mode$ DamageDone | ValidTarget$ You | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | DamageAmount$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a source you control deals exactly 1 damage to you and whenever a spell or ability you control causes you to lose exactly 1 life, put a +1/+1 counter on NICKNAME. If this is the second time this ability has resolved this turn, draw a card.
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | ValidCause$ SpellAbility.YouCtrl | LifeAmount$ EQ1 | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever a source you control deals exactly 1 damage to you and whenever a spell or ability you control causes you to lose exactly 1 life, put a +1/+1 counter on NICKNAME. If this is the second time this ability has resolved this turn, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2
+SVar:X:Count$ResolvedThisTurn
+Oracle:Eminence — At the beginning of your upkeep, Sahir deals 1 damage to you. This ability triggers only if Sahir is in the command zone or on the battlefield.\nWhenever a source you control deals exactly 1 damage to you and whenever a spell or ability you control causes you to lose exactly 1 life, put a +1/+1 counter on Sahir. If this is the second time this ability has resolved this turn, draw a card.

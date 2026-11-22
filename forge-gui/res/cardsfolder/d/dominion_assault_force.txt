@@ -1,0 +1,11 @@
+Name:Dominion Assault Force
+ManaCost:3 G
+Types:Creature Jem'Hadar Warrior
+PT:4/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBExile,DBSurveil
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Card | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Exile | ValidTgtsDesc$ card in a graveyard | SpellDescription$ Exile target card from a graveyard.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Vigilance\nWhen this creature enters, choose one —\n• Exile target card from a graveyard.\n• Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

@@ -1,6 +1,7 @@
 package forge.game.card;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.player.Player;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -37,10 +39,13 @@ public class CardDamageHistory {
     private final List<Player> damagedThisCombat = Lists.newArrayList();
     // only needed for The Fallen
     private final FCollection<GameEntity> damagedThisGame = new FCollection<>();
-    boolean hasdealtDamagetoAny = false;
+    Set<Boolean> hasdealtDamagetoAny = Sets.newHashSet();
 
     public final boolean getHasdealtDamagetoAny() {
-        return hasdealtDamagetoAny;
+        return !hasdealtDamagetoAny.isEmpty();
+    }
+    public final boolean getHasdealtCombatDamagetoAny() {
+        return hasdealtDamagetoAny.contains(Boolean.TRUE);
     }
 
     // used to see if an attacking creature with a triggering attack ability
@@ -233,7 +238,7 @@ public class CardDamageHistory {
             return;
         }
         damagedThisGame.add(target);
-        hasdealtDamagetoAny = true;
+        hasdealtDamagetoAny.add(isCombat);
         if (isCombat && target instanceof Player) {
             final Player pTgt = (Player) target;
             damagedThisCombat.add(pTgt);

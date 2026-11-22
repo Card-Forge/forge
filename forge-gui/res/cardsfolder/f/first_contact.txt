@@ -1,0 +1,11 @@
+Name:First Contact
+ManaCost:1 G
+Types:Instant
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigStoreSVar | Static$ True
+SVar:TrigStoreSVar:DB$ StoreSVar | SVar$ X | Type$ Calculate | Expression$ Count$YouCastThisGame
+#Necessary because even if you cast this as the first spell, you could response with another, so it needs to store which spell this is right away.
+A:SP$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards. You may put a permanent card from among them into your hand. If this spell is the first spell you've cast this game, you gain 2 life. (To mill four cards, put the top four cards of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Permanent.IsRemembered | Hidden$ True | Optional$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill four cards. You may put a permanent card from among them into your hand. If this spell is the first spell you've cast this game, you gain 2 life. (To mill four cards, put the top four cards of your library into your graveyard.)

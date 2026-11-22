@@ -8,11 +8,12 @@ import forge.util.Localizer;
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
 public enum EMenuGroup {
-    SANCTIONED ("lblSanctionedFormats"),
+    SANCTIONED ("lblPlayMode"),
     ONLINE ("lblOnlineMultiplayer"),
-    QUEST ("lblQuestMode"),
-    PUZZLE ("lblPuzzleMode"),
+    QUEST ("lblQuests"),
+    PUZZLE ("lblPuzzles"),
     GAUNTLET ("lblGauntlets"),
+    ROGUE ("lblRogueCommander"),
     SETTINGS ("lblGameSettings");
 
     private final String strTitle;

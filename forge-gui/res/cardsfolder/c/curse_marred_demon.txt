@@ -1,0 +1,11 @@
+Name:Curse-Marred Demon
+ManaCost:2 R R
+Types:Creature Demon
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, search your library for a card, put it into your hand, shuffle, then discard a card at random.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBDiscard | Mandatory$ True
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
+DeckHas:Ability$Discard
+Oracle:Flying, trample\nWhen this creature enters, search your library for a card, put it into your hand, shuffle, then discard a card at random.

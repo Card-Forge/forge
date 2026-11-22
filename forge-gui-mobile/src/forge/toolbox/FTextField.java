@@ -9,6 +9,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.gui.GuiBase;
 import forge.gui.interfaces.ITextField;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -53,6 +54,11 @@ public class FTextField extends FDisplayObject implements ITextField {
     private int alignment;
     private int selStart, selLength;
     private boolean isEditing, readOnly, isNumeric;
+    // CHANGE fires only on commit (endEdit) unless a field opts into live per-keystroke events.
+    // Several consumers treat CHANGE as a committed value — the online chat sends a network message
+    // per event and the lobby name field broadcasts full slot state per event — so per-keystroke
+    // firing must be opt-in, reserved for local-only uses like search filters.
+    private boolean liveChangeEvents;
 
     private final FPopupMenu contextMenu = new FPopupMenu() {
         @Override
@@ -69,11 +75,11 @@ public class FTextField extends FDisplayObject implements ITextField {
                 addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCopy"), e -> Forge.getClipboard().setContents(getSelectedText())));
             }
             if (!readOnly) {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), e -> {
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), e -> Forge.readClipboard(contents -> {
                     textBeforeKeyInput = text;
-                    insertText(Forge.getClipboard().getContents());
+                    insertText(contents);
                     endEdit();
-                }));
+                })));
             }
         }
     };
@@ -90,6 +96,12 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     public String getText() {
         return text;
+    }
+    public boolean isEditing() {
+        return isEditing;
+    }
+    public void setLiveChangeEvents(boolean liveChangeEvents0) {
+        liveChangeEvents = liveChangeEvents0;
     }
     public void setText(String text0) {
         if (text0 == null) {
@@ -268,7 +280,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                             selLength = 1;
                         }
                         insertText("");
-                        if (changedHandler != null) { //live-filter search fields as characters are removed
+                        if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are removed
                             changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
                         }
                     }
@@ -278,7 +290,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                     return false;
                 }
                 insertText(String.valueOf(ch));
-                if (changedHandler != null) { //live-filter search fields as characters are typed
+                if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are typed
                     changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
                 }
                 return true;
@@ -296,6 +308,14 @@ public class FTextField extends FDisplayObject implements ITextField {
                     Forge.endKeyInput();
                     return true;
                 case Keys.BACKSPACE: //also handles Delete since those are processed the same by libgdx
+                    // iOS: a hardware backspace arrives twice while editing — this queued keyDown
+                    // plus keyTyped('\b') from gdx's invisible-UITextField delegate (the same path
+                    // the software keyboard uses; the backend suppresses its own queued KEY_TYPED
+                    // while that field is active, but not this keyDown). Skip here so the keyTyped
+                    // path performs the one deletion whichever keyboard sent it.
+                    if (GuiBase.isIOS()) {
+                        return true;
+                    }
                     if (text.length() > 0) {
                         if (selLength == 0) { //delete previous or next character if selection empty
                             if (selStart > 0) {
@@ -304,6 +324,9 @@ public class FTextField extends FDisplayObject implements ITextField {
                             selLength = 1;
                         }
                         insertText("");
+                        if (liveChangeEvents && changedHandler != null) { //live-filter search fields as characters are removed
+                            changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                        }
                     }
                     return true;
                 case Keys.LEFT:
@@ -344,7 +367,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                     break;
                 case Keys.V: //paste on Ctrl+V
                     if (KeyInputAdapter.isCtrlKeyDown()) {
-                        insertText(Forge.getClipboard().getContents());
+                        Forge.readClipboard(FTextField.this::insertText);
                         return true;
                     }
                     break;
@@ -406,7 +429,12 @@ public class FTextField extends FDisplayObject implements ITextField {
         float h = getHeight();
         boolean drawBackground = !readOnly; //don't draw background or border if read-only
 
-        if (drawBackground) {
+        final boolean frost = drawBackground && Frost.isOn();
+        if (frost) { //frosted: a rounded slate field with a faint light edge
+            final float radius = Utils.scale(2);//Math.min(h * 0.22f, Utils.scale(8));
+            g.fillRoundRect(Frost.EDGE, 0, 0, w, h, radius);
+            g.fillRoundRect(Frost.slate(0.62f), 1, 1, w - 2, h - 2, Math.max(0, radius - 1));
+        } else if (drawBackground) {
             g.fillRect(getBackColor(), 0, 0, w, h);
         }
 
@@ -447,7 +475,7 @@ public class FTextField extends FDisplayObject implements ITextField {
             drawText(g, w, h);
         }
 
-        if (drawBackground) {
+        if (drawBackground && !frost) {
             g.drawRect(BORDER_THICKNESS, getForeColor(), BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
         }
     }

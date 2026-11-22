@@ -1,0 +1,65 @@
+[metadata]
+Code=YMKM
+Date=2024-03-05
+Name=Alchemy: Murders at Karlov Manor
+Type=Online
+ScryfallCode=YMKM
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,BasicLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Wildcard+
+
+[Common]
+Base=Common:fromSheet("MKM cards")
+
+[Common-Guest]
+Base=Common:fromSheet("MKM cards")
+Replace=.125F fromSheet("MKM karlov surprise")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YMKM cards")
+Replace=0.385714F Rare:fromSheet("YMKM cards")
+Replace=0.064286F Mythic:fromSheet("YMKM cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MKM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("MKM cards")
+
+[BasicLand]
+Base=BasicLand:fromSheet("MKM cards")
+
+[Wildcard]
+Base=Any:fromSheet("MKM cards")
+
+[cards]
+1 U Scrutiny of the Guildpact @Camille Alquier
+2 R Sleuth Instructor @Chris Rahn
+3 R Spotlight Falcon @Julia Metzger
+4 M Case of the Lost Witness @Yeong-Hao Han
+5 U Emporium Thopterist @Ryan Alexander Lee
+6 R Excogitator Sphinx @Aaron Miller
+7 U Mapping the Maze @Inkognit
+8 R Ominous Lockbox @Nicholas Gregory
+9 R Cackling Observer @Gabor Szikszai
+10 U Lurking Spinecrawler @Michele Giorgi
+11 M Perforator Crocodile @Loïc Canavaggia
+12 U Snarlfang Vermin @Ernanda Souza
+13 U Case of the Market Melee @Carlos Palma Cruchaga
+14 U Concert Kaboomist @Olivier Bernard
+15 R Construction Arsonist @Samuel Perin
+16 U Shove Aside @Julia Metzger
+17 R Guildpact Greenwalker @Monztre
+18 R Rampaging Ursaguana @Slawomir Maniak
+19 R Relics of the Rubblebelt @Alexandre Honoré
+20 R Sproutwatch Dryad @Nereida
+21 U Woodland Investigation @Constantin Marin
+22 R Emmara, Voice of the Conclave @Nereida
+23 R Furgul, Quag Nurturer @Warren Mahy
+24 R Izzet Polarizer @Michele Giorgi
+25 M Juggle the Performance @Domenico Cava
+26 M Roalesk, Prime Specimen @Maxime Minard
+27 U Scour the Scene @Francisco Miyara
+28 M Tajic, Legion's Valor @Julia Metzger
+29 R Thought-String Analyst @Diana Cearley
+30 R Veko, Death's Doorkeeper @Nereida

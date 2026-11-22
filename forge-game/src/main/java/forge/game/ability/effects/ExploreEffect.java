@@ -26,6 +26,11 @@ import java.util.Map;
 
 public class ExploreEffect extends SpellAbilityEffect {
 
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
@@ -35,7 +40,7 @@ public class ExploreEffect extends SpellAbilityEffect {
 
         List<Card> tgt = getTargetCards(sa);
 
-        sb.append(Lang.joinHomogenous(tgt));
+        sb.append(tgt == null || tgt.isEmpty() ? "That creature" : Lang.joinHomogenous(tgt));
         sb.append(" ");
         sb.append(tgt.size() > 1 ? "explore" : "explores");
         sb.append(". ");

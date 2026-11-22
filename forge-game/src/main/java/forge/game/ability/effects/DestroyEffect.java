@@ -16,6 +16,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 public class DestroyEffect extends SpellAbilityEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final boolean noRegen = sa.hasParam("NoRegen");
@@ -29,7 +30,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         sb.append("Destroy ").append(Lang.joinHomogenous(tgtCards));
 
         if (sa.hasParam("Radiance")) {
-            final String thing = sa.getParamOrDefault("ValidTgts", "thing");
+            final String thing = sa.hasParam("ValidTgts") ? Lang.getInstance().describeValidList(sa.getParam("ValidTgts")) : "thing";
             sb.append(" and each other ").append(thing).append(" that shares a color with ");
             sb.append(justOne ? "it" : "them");
         }
@@ -88,7 +89,6 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         final boolean noRegen = sa.hasParam("NoRegen");
-        final boolean alwaysRem = sa.hasParam("AlwaysRemember");
 
         SpellAbility cause = sa;
         if (sa.isReplacementAbility()) {
@@ -99,7 +99,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         if (destroyed && remDestroyed) {
             host.addRemembered(gameCard);
         }
-        if ((destroyed || alwaysRem) && sa.hasParam("RememberLKI")) {
+        if (destroyed && sa.hasParam("RememberLKI")) {
             host.addRemembered(zoneMovements.getLastStateBattlefield().get(gameCard));
         }
     }

@@ -1,0 +1,17 @@
+Name:Vampire Champion Fury
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Vampire
+SVar:STK2:Kind$ Name | Word$ Champion
+SVar:STK3:Kind$ Name | Word$ Fury
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Hellbent — This creature gets +3/+3 as long as you have no cards in hand. | Statics$ STK7Hellbent
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ {2}, Sacrifice this creature: It deals X damage divided as you choose among any number of target creatures, where X is its power. | Ability$ STK8Damage
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 1 | Toughness$ 5
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 6 | Toughness$ 3
+SVar:STK7Hellbent:Mode$ Continuous | AffectedDefined$ Self | AddPower$ 3 | AddToughness$ 3 | Condition$ Hellbent | Description$ Hellbent — This creature gets +3/+3 as long as you have no cards in hand.
+SVar:STK8Damage:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures to distribute damage to | NumDmg$ Count$CardPower | TargetMin$ 0 | TargetMax$ Count$CardPower | DividedAsYouChoose$ Count$CardPower | SpellDescription$ It deals X damage divided as you choose among any number of target creatures, where X is its power.
+Oracle:{TK}{TK} — Hellbent — This creature gets +3/+3 as long as you have no cards in hand.\n{TK}{TK}{TK}{TK} — {2}, Sacrifice this creature: It deals X damage divided as you choose among any number of target creatures, where X is its power.\n{TK}{TK} — 1/5\n{TK}{TK}{TK} — 6/3

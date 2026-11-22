@@ -23,6 +23,7 @@
 
   - [Modding & content creation](Adventure/Modding.md)
     - [Create Enemies](Adventure/Create-Enemies.md)
+    - [Create Creature Sprites](Adventure/Create-New-Creature-Sprites.md)
     - [Create Rewards](Adventure/Create-Rewards.md)
     - [Create Maps](Adventure/Create-new-Maps.md)
     - [Configure Planes](Adventure/Configure-Planes.md)
@@ -30,7 +31,7 @@
 
   - Tutorials
     - [Tutorial 1, Create your first Plane](Adventure/Tutorial-1-Create-your-First-Plane.md)
-    - [Tutorial 2, A New Look (creating your first map.)](Adventure/Tutorial-2-A-New-Look.md)
+    - [Tutorial 2, A New Look (creating your first map)](Adventure/Tutorial-2-A-New-Look.md)
     - [Tutorial 3, Configuration (Configuring your Plane)](Adventure/Tutorial-3-Configuration.md)
 
 - [Card Scripting API](Card-scripting-API/Card-scripting-API.md)
@@ -53,6 +54,7 @@
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
   - [UI Guidelines](Development/UI-Guidelines.md)
+  - [Card-script Linting](Development/Card-Script-Linting.md)
 
 - Customization & Themes
   - [Skins](Skins.md)
@@ -63,6 +65,6 @@
   - [Fantasy Blocks](fantasy-blocks.md)
 
 - [Missing Cards in Forge](Missing-Cards-in-Forge.md)
-  - [Un‐cards, Playtest Cards, and Other Funny Cards](Un‐cards,-Playtest-Cards,-and-Other-Funny-Cards.md)
+  - [Un-cards, Playtest Cards, and Other Funny Cards](Un-cards,-Playtest-Cards,-and-Other-Funny-Cards.md)
 
 - [Credit & Thanks](Credit-and-Thanks.md)

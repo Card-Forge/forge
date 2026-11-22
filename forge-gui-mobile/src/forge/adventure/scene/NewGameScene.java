@@ -1,17 +1,25 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
+import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.data.ModifierData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -27,8 +35,11 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
+import forge.util.Localizer;
 import forge.util.NameGenerator;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -59,6 +70,8 @@ public class NewGameScene extends MenuScene {
     private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
+    private final TextraButton modifiersButton;
+    private final Map<String, String> chosenModifiers = new LinkedHashMap<>(); //Modifier names and their settings.
 
     private NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -233,6 +246,11 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
+        modifiersButton = ui.findActor("modifiers");
+        ModifierData[] modifiers = Config.instance().getConfigData().modifiers;
+        modifiersButton.setVisible(modifiers != null && modifiers.length > 0);
+        ui.onButtonPress("modifiers", NewGameScene.this::showModifiers);
+        updateModifiersButton();
     }
 
     // class field
@@ -341,6 +359,7 @@ public class NewGameScene extends MenuScene {
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
                     getStartingEdition(), 0);
+            AdventurePlayer.current().setModifiers(chosenModifiers);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -397,49 +416,191 @@ public class NewGameScene extends MenuScene {
         super.enter();
     }
 
+    private void updateModifiersButton() {
+        Localizer localizer = Forge.getLocalizer();
+        String label = "[+ChallengeCoin] " + localizer.getMessage("lblModifiers");
+        if (!chosenModifiers.isEmpty())
+            label += " (" + chosenModifiers.size() + ")";
+        modifiersButton.setText(label);
+    }
+
+    /** Edits a copy of the chosen modifiers, kept only when the player presses OK. */
+    private void showModifiers() {
+        Localizer localizer = Forge.getLocalizer();
+        Map<String, String> edited = new LinkedHashMap<>(chosenModifiers);
+        boolean portrait = stage.getHeight() > stage.getWidth();
+        float width = Math.min(330, stage.getWidth() - 40);
+        float textWidth = width - 79;
+        Table rows = new Table();
+        rows.top().padRight(9);
+        for (ModifierData modifier : Config.instance().getConfigData().modifiers) {
+            rows.add(divider()).colspan(3).growX().row();
+            //A setting survives turning the modifier off and on again while the dialog is open.
+            String[] value = {chosenModifiers.getOrDefault(modifier.name, modifier.defaultValue(getStartingColor()))};
+            Actor setting = modifierSetting(modifier, value, edited);
+            TextraButton toggle = Controls.newTextButton("");
+            Runnable showState = () -> {
+                boolean on = edited.containsKey(modifier.name);
+                toggle.setStyle(Controls.getTextButtonStyle(on ? "goldframe" : "default"));
+                toggle.setText(on ? "[GOLD]" + localizer.getMessage("lblOn") : localizer.getMessage("lblOff"));
+                if (setting != null) {
+                    setting.getColor().a = on ? 1f : 0.4f;
+                    setting.setTouchable(on ? Touchable.enabled : Touchable.disabled);
+                }
+            };
+            toggle.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (edited.containsKey(modifier.name))
+                        edited.remove(modifier.name);
+                    else
+                        edited.put(modifier.name, value[0]);
+                    showState.run();
+                }
+            });
+            showState.run();
+            Table text = new Table();
+            text.defaults().left();
+            text.add(Controls.newTextraLabel(modifier.name)).row();
+            if (modifier.description != null)
+                text.add(wrappedLabel("[#A9A5C2]" + modifier.description, textWidth)).width(textWidth).row();
+            if (setting != null)
+                text.add(setting).padTop(2).padBottom(4).row();
+            rows.add(Controls.newTextraLabel(modifier.icon == null ? "" : "[+" + modifier.icon + "]")).width(20).padRight(4);
+            rows.add(text).width(textWidth).left().padTop(2).padBottom(3);
+            rows.add(toggle).width(36).height(18).padLeft(4).padRight(6).row();
+        }
+        Dialog dialog = Controls.newDialog("");
+        dialog.setBackground(Controls.getSkin().getDrawable("TenPatchGold"));
+        dialog.pad(6, 12, 6, 12);
+        dialog.getButtonTable().padTop(4);
+        dialog.getContentTable().defaults().left();
+        dialog.getContentTable().add(Controls.newTextraLabel("[+ChallengeCoin] " + localizer.getMessage("lblModifiers"))).row();
+        String intro = "[#A9A5C2]" + localizer.getMessage("lblModifiersIntro");
+        dialog.getContentTable().add(portrait ? wrappedLabel(intro, width - 10) : Controls.newTextraLabel(intro)).width(width - 10).padTop(2).row();
+        ScrollPane scroll = new ScrollPane(rows, RewardScene.thinScrollBarStyle());
+        scroll.setScrollingDisabled(true, false);
+        scroll.setFadeScrollBars(false);
+        dialog.getContentTable().add(scroll).width(width).height(Math.min(rows.getPrefHeight(), stage.getHeight() - (portrait ? 170 : 116))).padTop(2).row();
+        dialog.getContentTable().add(new RewardScene.MoreArrow(scroll)).center().padTop(4);
+        dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblCancel"), this::removeDialog, "goldframe")).width(70).height(24).padRight(8);
+        dialog.getButtonTable().add(Controls.newTextButton(localizer.getMessage("lblOK"), () -> {
+            chosenModifiers.clear();
+            chosenModifiers.putAll(edited);
+            updateModifiersButton();
+            removeDialog();
+        }, "goldframe")).width(70).height(24);
+        showDialog(dialog);
+        stage.setScrollFocus(scroll);
+    }
+
+    private static Image divider() {
+        Image line = new Image(Controls.getSkin().newDrawable("white-pixel", new Color(1f, 1f, 1f, 0.12f)));
+        line.setHeight(1);
+        return line;
+    }
+
+    /** @return the control for a modifier's setting, or null when it has none */
+    private Actor modifierSetting(ModifierData modifier, String[] value, Map<String, String> edited) {
+        if (modifier.type == ModifierData.Type.RarityLimit) {
+            Selector choice = new Selector();
+            String[] names = new String[ModifierData.RARITIES.length];
+            int current = 0;
+            for (int i = 0; i < names.length; i++) {
+                names[i] = ModifierData.RARITIES[i].name();
+                if (names[i].equals(value[0]))
+                    current = i;
+            }
+            choice.setTextList(names);
+            choice.setCurrentIndex(current);
+            choice.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    value[0] = names[choice.getCurrentIndex()];
+                    if (edited.containsKey(modifier.name))
+                        edited.put(modifier.name, value[0]);
+                }
+            });
+            choice.setSize(120, 16);
+            Table holder = new Table();
+            holder.add(choice).width(120).height(16);
+            return holder;
+        }
+        if (modifier.type == ModifierData.Type.ColorLimit) {
+            Table colors = new Table();
+            for (char color : "WUBRG".toCharArray()) {
+                String colorName = String.valueOf(color);
+                TextraButton toggle = Controls.newTextButton("[+" + colorName + "]");
+                toggle.getColor().a = value[0].contains(colorName) ? 1f : 0.35f;
+                toggle.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        value[0] = value[0].contains(colorName) ? value[0].replace(colorName, "")
+                                : ColorSet.fromNames((value[0] + colorName).toCharArray()).toString();
+                        toggle.getColor().a = value[0].contains(colorName) ? 1f : 0.35f;
+                        if (edited.containsKey(modifier.name))
+                            edited.put(modifier.name, value[0]);
+                    }
+                });
+                colors.add(toggle).size(16).padRight(1);
+            }
+            return colors;
+        }
+        return null;
+    }
+
+    private static TypingLabel wrappedLabel(String text, float width) {
+        TypingLabel label = Controls.newTypingLabel(text);
+        label.skipToTheEnd();
+        label.setWrap(true);
+        label.setWidth(width);
+        label.layout();
+        return label;
+    }
+
     private void showDifficultyHelp() {
+        Localizer localizer = Forge.getLocalizer();
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
         String startingEquipment = selectedDifficulty.startItems == null || selectedDifficulty.startItems.length == 0
-                ? "None"
+                ? localizer.getMessage("lblNone")
                 : String.join(", ", selectedDifficulty.startItems);
 
         difficultySummary = new DialogData();
-        difficultySummary.name = "Summary";
+        difficultySummary.name = localizer.getMessage("lblSummary");
         switch (selectedDifficulty.name) {
             case "Easy":
-                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryEasy", selectedDifficulty.name, startingEquipment);
                 break;
             case "Normal":
-                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryNormal", selectedDifficulty.name, startingEquipment);
                 break;
             case "Hard":
                 if (enableGeneticAI) {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                    difficultySummary.text = localizer.getMessage("advDifficultySummaryHardGenetic", selectedDifficulty.name, startingEquipment);
                 } else {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                    difficultySummary.text = localizer.getMessage("advDifficultySummaryHard", selectedDifficulty.name, startingEquipment);
                 }
                 break;
             case "Insane":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryInsane", selectedDifficulty.name, startingEquipment);
                 break;
             default:
-                difficultySummary.text = "((Custom difficulty settings))";
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryCustom");
                 break;
         }
 
 
         DialogData dismiss = new DialogData();
-        //todo: add translation
-        dismiss.name = "OK";
+        dismiss.name = localizer.getMessage("lblOK");
 
         DialogData matchImpacts = new DialogData();
-        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
-        matchImpacts.name = "Duels";
+        matchImpacts.text = localizer.getMessage("advDifficultyMatchImpacts", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
+        matchImpacts.name = localizer.getMessage("lblDuels");
 
         DialogData economyImpacts = new DialogData();
-        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.startingMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
-        economyImpacts.name = "Economy";
+        economyImpacts.text = localizer.getMessage("advDifficultyEconomyImpacts", selectedDifficulty.name, selectedDifficulty.startingMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
+        economyImpacts.name = localizer.getMessage("lblEconomy");
 
         difficultySummary.options = new DialogData[3];
         difficultySummary.options[0] = matchImpacts;
@@ -459,103 +620,104 @@ public class NewGameScene extends MenuScene {
 
     private void showModeHelp() {
 
+        Localizer localizer = Forge.getLocalizer();
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
-        modeSummary.name = "Summary";
+        modeSummary.name = localizer.getMessage("lblSummary");
 
         StringBuilder summaryText = new StringBuilder();
         switch (selectedMode) {
             case Standard:
-                summaryText.append("Mode: Standard\n\nYour starting deck is built from 2-3 Jumpstart packs of twenty cards each.\n\n");
+                summaryText.append(localizer.getMessage("advModeStandardSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, you will receive three jumpstart packs of your chosen color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyStandard"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, you will receive two jumpstart packs of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffNormalStandard"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffHardStandard"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        summaryText.append(localizer.getMessage("advDiffInsaneStandard"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Constructed:
-                summaryText.append("Mode: Constructed\n\nYou will receive a specific preconstructed deck based on your chosen color and difficulty.\n\n");
+                summaryText.append(localizer.getMessage("advModeConstructedSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyConstructed"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and one allied color.");
+                        summaryText.append(localizer.getMessage("advDiffNormalConstructed"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(localizer.getMessage("advDiffHardConstructed"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and one opposing color.");
+                        summaryText.append(localizer.getMessage("advDiffInsaneConstructed"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Pile:
-                summaryText.append("Mode: Pile\n\nYou will receive a random pile of cards based on your chosen color and difficulty.\n\n");
+                summaryText.append(localizer.getMessage("advModePileSummary"));
                 switch (selectedDifficulty.name) {
                     case "Easy":
-                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color and one allied color.");
+                        summaryText.append(localizer.getMessage("advDiffEasyPile"));
                         break;
                     case "Normal":
-                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and two allied colors.");
+                        summaryText.append(localizer.getMessage("advDiffNormalPile"));
                         break;
                     case "Hard":
-                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(localizer.getMessage("advDiffHardPile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     case "Insane":
-                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and two allied colors.\n\n");
-                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        summaryText.append(localizer.getMessage("advDiffInsanePile"));
+                        summaryText.append(localizer.getMessage("advPileLessRareReward"));
                         break;
                     default:
-                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        difficultySummary.text = localizer.getMessage("advCannotDetermineStarterDeck");
                         break;
                 }
                 break;
             case Chaos:
-                summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                summaryText.append(localizer.getMessage("advModeChaosSummary"));
                 break;
             case Custom:
                 if (enableGeneticAI) {
-                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                    summaryText.append(localizer.getMessage("advModeCustomGeneticSummary"));
                 } else {
-                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck.");
+                    summaryText.append(localizer.getMessage("advModeCustomSummary"));
                 }
                 break;
             case Precon:
-                summaryText.append("Mode: Precon\n\nYou will receive a specific preconstructed deck. You can choose a random or a specific preconstructed deck from an edition of your choice.\n\n");
+                summaryText.append(localizer.getMessage("advModePreconSummary"));
                 break;
             case Commander:
-                summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
+                summaryText.append(localizer.getMessage("advModeCommanderSummary"));
                 break;
             case CommanderPrecon:
-                summaryText.append("Mode: Commander Precon\n\nChoose a named commander preconstructed deck to start the playthrough.\n\nThis uses Commander deckbuilding and game rules, but lets you pick from the curated commander precon folder.");
+                summaryText.append(localizer.getMessage("advModeCommanderPreconSummary"));
                 break;
             default:
-                summaryText.append("No summary available for this game mode.");
+                summaryText.append(localizer.getMessage("advNoModeSummaryAvailable"));
                 break;
         }
 
         DialogData dismiss = new DialogData();
-        dismiss.name = "OK";
+        dismiss.name = localizer.getMessage("lblOK");
         modeSummary.text = summaryText.toString();
         modeSummary.options = new DialogData[1];
         modeSummary.options[0] = dismiss;

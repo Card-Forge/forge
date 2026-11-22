@@ -29,3 +29,4 @@ ScryfallCode=PW26
 21 R Crystal Ball @Ron Spencer
 22 R Tragic Trajectory @Ovidio Cartagena
 23 R Leyline of Anticipation @Alexandr Leskinen
+24 R Deep Space Scan @Leon Tukker

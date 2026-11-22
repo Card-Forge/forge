@@ -5,8 +5,11 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.match.LobbySlotType;
+import forge.util.LogSafe;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public final class UpdateLobbyPlayerEvent implements NetEvent {
@@ -29,7 +32,6 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private String PlanarDeckName = null;
     private String DeckName = null;
     private String aiProfile = null;
-
 
     public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
         return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isDevMode, aiOptions, aiProfile);
@@ -127,6 +129,31 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.aiProfile = aiProfile;
     }
 
+    /**
+     * Clear the fields a remote client has no business setting, returning
+     * whether any were present. Slot type is server-owned lifecycle state
+     * ({@code connectPlayer} sets REMOTE, {@code disconnectPlayer} OPEN) and
+     * the AI fields configure AI slots, which a REMOTE slot is not; the client
+     * UI offers none of them, so this is a no-op for honest traffic.
+     *
+     * <p>Left alone deliberately: {@code isDevMode} and {@code isArchenemy},
+     * which clients do set legitimately today — whether they should be able to
+     * is a game-design question, not a protocol-authorization one.
+     *
+     * <p>In place rather than into a copy: the event is freshly deserialized
+     * and never re-broadcast, and a field-by-field copy would silently drop any
+     * field added later.
+     */
+    public boolean clearServerOwnedFields() {
+        if (type == null && aiOptions == null && aiProfile == null) {
+            return false;
+        }
+        type = null;
+        aiOptions = null;
+        aiProfile = null;
+        return true;
+    }
+
     public LobbySlotType getType() {
         return type;
     }
@@ -160,19 +187,42 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public CardPool getCards() {
         return cards;
     }
-    public Set<AIOption> getAiOptions() {
-        return aiOptions == null ? null : Collections.unmodifiableSet(aiOptions);
-    }
     public String getAvatarVanguard() { return AvatarVanguard; }
     public String getSchemeDeckName() { return SchemeDeckName; }
     public String getPlanarDeckName() { return PlanarDeckName; }
     public String getDeckName() { return DeckName; }
 
+    /** Lets the server replace a client-supplied name with a sanitised one. */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<AIOption> getAiOptions() {
+        return aiOptions == null ? null : Collections.unmodifiableSet(aiOptions);
+    }
+
     public void setAiProfile(String aiProfile) {
         this.aiProfile = aiProfile;
     }
-
     public String getAiProfile() {
         return aiProfile;
+    }
+
+    @Override
+    public String toString() {
+        final List<String> set = new ArrayList<>();
+        if (type != null) { set.add("type=" + type); }
+        if (name != null) { set.add("name=" + LogSafe.forLog(name)); }
+        if (avatarIndex != -1) { set.add("avatar=" + avatarIndex); }
+        if (sleeveIndex != -1) { set.add("sleeve=" + sleeveIndex); }
+        if (team != -1) { set.add("team=" + team); }
+        if (isArchenemy != null) { set.add("archenemy=" + isArchenemy); }
+        if (isReady != null) { set.add("ready=" + isReady); }
+        if (isDevMode != null) { set.add("devMode=" + isDevMode); }
+        if (deck != null) { set.add("deck=" + LogSafe.forLog(deck.getName())); }
+        if (section != null) { set.add(section + "=" + (cards == null ? 0 : cards.countAll()) + " cards"); }
+        if (DeckName != null) { set.add("deckName=" + LogSafe.forLog(DeckName)); }
+        if (aiProfile != null) { set.add("aiProfile=" + LogSafe.forLog(aiProfile)); }
+        return "UpdateLobbyPlayer: " + String.join(", ", set);
     }
 }

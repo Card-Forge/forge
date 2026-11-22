@@ -1,0 +1,11 @@
+Name:The Ash Lizard
+ManaCost:4 R G
+Types:Legendary Creature Lizard Warrior
+PT:5/5
+S:Mode$ Continuous | Affected$ Lizard.Other+YouCtrl,Treefolk.Other+YouCtrl,Warrior.Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Lizards, Treefolk, And Warriors you control get +2/+2.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopyToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a token that’s a copy of one of the following cards at random: Ash Zealot; Bog-Strider Ash; Grotag ThrASHer; Seedguide Ash; Unstoppable Ash; ViASHino Warrior. (You’re probably going to need to look these cards up.)
+SVar:TrigCopyToken:DB$ NameCard | AtRandom$ True | Defined$ You | ChooseFromList$ Ash Zealot,Bog-Strider Ash,Grotag Thrasher,Seedguide Ash,Unstoppable Ash,Viashino Warrior| SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Other Lizards, Treefolk, And Warriors you control get +2/+2.\nWhenever The Ash Lizard attacks, create a token that’s a copy of one of the following cards at random: Ash Zealot; Bog-Strider Ash; Grotag ThrASHer; Seedguide Ash; Unstoppable Ash; ViASHino Warrior. (You’re probably going to need to look these cards up.)

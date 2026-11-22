@@ -1,0 +1,9 @@
+Name:Optimization Annex
+ManaCost:1 U
+Types:Artifact Creature Borg
+PT:1/3
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Artifact.YouCtrl+inZoneBattlefield | ValidCounterType$ CHARGE | ReplaceWith$ AddOneMoreCounters | Description$ If one or more charge counters would be put on an artifact you control, that many plus one charge counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ CHARGE | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+DeckNeeds:Ability$Counters
+Oracle:If one or more charge counters would be put on an artifact you control, that many plus one charge counters are put on it instead.

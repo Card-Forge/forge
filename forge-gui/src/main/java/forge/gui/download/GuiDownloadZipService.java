@@ -6,7 +6,6 @@ import com.google.common.io.Files;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IProgressBar;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
 import java.io.*;
@@ -91,7 +90,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             if (url.getPath().endsWith(".php")) {
                 //ensure file can be downloaded if returned from PHP script
-                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+                conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             }
 
             conn.connect();
@@ -171,13 +170,21 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            final Charset charset = Charset.forName("IBM437");
+            Charset charset;
+            try {
+                charset = Charset.forName("IBM437");
+            } catch (java.nio.charset.UnsupportedCharsetException e) {
+                // Fallback for environments like iOS/RoboVM that lack legacy charsets
+                charset = java.nio.charset.StandardCharsets.UTF_8;
+            }
+
             ZipFile zipFile;
             try {
                 zipFile = new ZipFile(zipFilename, charset);
             } catch (Throwable e) { //some older Android versions need the old method
                 zipFile = new ZipFile(zipFilename);
             }
+
             final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             if (progressBar != null) {

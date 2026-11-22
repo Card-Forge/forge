@@ -1,0 +1,16 @@
+Name:Glóin the Mighty
+ManaCost:3 R
+Types:Legendary Creature Dwarf Warrior
+PT:4/3
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add {R}{R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 2
+AlternateMode:Adventure
+Oracle:At the beginning of your first main phase, add {R}{R}.
+
+ALTERNATE
+
+Name:Easy Pickings
+ManaCost:2 R
+Types:Sorcery Adventure
+A:SP$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Easy Pickings deals 1 damage to each creature your opponents control. (Then exile this card. You may cast the creature later from exile.)

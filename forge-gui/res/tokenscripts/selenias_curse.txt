@@ -1,0 +1,9 @@
+Name:Selenia's Curse
+ManaCost:no cost
+Colors:black
+Types:Legendary Enchantment Aura Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
+R:Event$ LifeReduced | ValidPlayer$ Player.EnchantedBy | ReplaceWith$ LoseTwice | ActiveZones$ Battlefield | Description$ If enchanted player would lose life, they lose twice that much life instead.
+SVar:LoseTwice:DB$ ReplaceEffect | VarName$ Amount | VarValue$ ReplaceCount$Amount/Twice
+Oracle:Enchant player\nIf enchanted player would lose life, they lose twice that much life instead.

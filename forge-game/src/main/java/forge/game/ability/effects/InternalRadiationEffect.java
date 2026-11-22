@@ -35,7 +35,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
             p.gainLife(n, sa.getHostCard(), sa);
         } else {
             final Map<Player, Integer> lossMap = Maps.newHashMap();
-            final int lost = p.loseLife(n, false, false);
+            final int lost = p.loseLife(n, false, false, sa);
             if (lost > 0) {
                 lossMap.put(p, lost);
             }

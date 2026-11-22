@@ -19,12 +19,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        final List<String> onlyColors = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+        final List<String> onlyColors = MagicColor.Constant.ONLY_COLORS;
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {
@@ -32,7 +31,6 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         final String protection = "Protection from " + color;
-
         return card.hasKeyword(protection);
     }
 
@@ -132,7 +130,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
 
             //make unblockable
-            if (ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1) {
+            if (ph.isPlayerTurn(ai) && ph.getPhase() == PhaseType.MAIN1) {
                 AiAttackController aiAtk = new AiAttackController(ai, c);
                 String s = aiAtk.toProtectAttacker(sa);
                 if (s == null) {
@@ -151,7 +149,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
+        final boolean notAiMain1 = !(ph.isPlayerTurn(ai) && ph.getPhase() == PhaseType.MAIN1);
         // sorceries can only give protection in order to create an unblockable attacker
         return !isSorcerySpeed(sa, ai) || !notAiMain1;
     }

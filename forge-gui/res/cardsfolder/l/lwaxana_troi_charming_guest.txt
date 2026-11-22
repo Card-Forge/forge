@@ -1,0 +1,8 @@
+Name:Lwaxana Troi, Charming Guest
+ManaCost:1 R
+Types:Legendary Creature Betazoid Advisor
+PT:2/2
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Effect | Cost$ 2 T | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | StaticAbilities$ STExtraTrigger | Duration$ UntilUntaps | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Choose another target creature you control. For as long as NICKNAME remains tapped, if a triggered ability of that creature triggers, that ability triggers an additional time.
+SVar:STExtraTrigger:Mode$ Panharmonicon | ValidCard$ Card.IsRemembered
+Oracle:You may choose not to untap Lwaxana Troi during your untap step.\n{2}, {T}: Choose another target creature you control. For as long as Lwaxana Troi remains tapped, if a triggered ability of that creature triggers, that ability triggers an additional time.

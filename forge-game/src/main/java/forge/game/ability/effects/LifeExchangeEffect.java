@@ -63,7 +63,7 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
             p1 = tmp;
         }
         if (diff > 0 && p1.canLoseLife() && p2.canGainLife()) {
-            final int lost = p1.loseLife(diff, false, false);
+            final int lost = p1.loseLife(diff, false, false, sa);
             p2.gainLife(diff, source, sa);
             if (lost > 0) {
                 final Map<Player, Integer> lossMap = Maps.newHashMap();

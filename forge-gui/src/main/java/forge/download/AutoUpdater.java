@@ -38,18 +38,16 @@ public class AutoUpdater {
     private String packageUrl;
     private String packagePath;
     private String buildDate = "";
-    private String snapsBuildDate = "";
+    private Date snapsBuildDate;
 
     public AutoUpdater(boolean loading) {
-        // What do I need? Preferences? Splashscreen? UI? Skins?
         isLoading = loading;
         updateChannel = FModel.getPreferences().getPref(ForgePreferences.FPref.AUTO_UPDATE);
         buildVersion = BuildInfo.getVersionString();
     }
 
-    public boolean updateAvailable() {
-        // TODO Check if an update is available, and add a UI element to notify the user.
-        return verifyUpdateable();
+    public Date getSnapsBuildDate() {
+        return snapsBuildDate;
     }
 
     public boolean attemptToUpdate(CompletableFuture<String> cf) {
@@ -60,7 +58,7 @@ public class AutoUpdater {
             if (downloadUpdate(cf)) {
                 extractAndRestart();
             }
-        } catch(IOException | URISyntaxException | ExecutionException | InterruptedException e) {
+        } catch (IOException | URISyntaxException | ExecutionException | InterruptedException e) {
             return false;
         }
         return true;
@@ -71,7 +69,7 @@ public class AutoUpdater {
         restartForge();
     }
 
-    private boolean verifyUpdateable() {
+    public boolean verifyUpdateable() {
         if (buildVersion.contains("GIT")) {
             //return false;
         }
@@ -104,7 +102,6 @@ public class AutoUpdater {
             versionUrlString = RELEASE_URL + "forge/forge-gui-desktop/version.txt";
         }
 
-        // Check the internet connection
         if (!testNetConnection()) {
             return false;
         }
@@ -137,15 +134,13 @@ public class AutoUpdater {
             if (buildVersion.contains("SNAPSHOT")) {
                 URL url = new URL(GITHUB_SNAPSHOT_URL + "build.txt");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
-                snapsBuildDate = snapsTimestamp.toString();
+                snapsBuildDate = simpleDateFormat.parse(FileUtil.readFileToString(url));
                 buildDate = BuildInfo.getTimestamp().toString();
-                return BuildInfo.verifyTimestamp(snapsTimestamp);
+                return BuildInfo.verifyTimestamp(snapsBuildDate);
             }
             if (StringUtils.isEmpty(version) ) {
                 return false;
             }
-
             if (buildVersion.equals(version)) {
                 return false;
             }
@@ -191,8 +186,8 @@ public class AutoUpdater {
             // splashScreen.prepareForDialogs();
             return downloadFromBrowser();
         }
-        String logs = snapsBuildDate.isEmpty() ? "" : cf.get();
-        String v = snapsBuildDate.isEmpty() ? version : version + TextUtil.enclosedParen(snapsBuildDate);
+        String logs = snapsBuildDate == null ? "" : cf.get();
+        String v = snapsBuildDate == null ? version : version + TextUtil.enclosedParen(snapsBuildDate.toString());
         String b = buildDate.isEmpty() ? buildVersion : buildVersion + TextUtil.enclosedParen(buildDate);
         String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + logs;
         final List<String> options = List.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));

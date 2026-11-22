@@ -1,0 +1,10 @@
+Name:Automated Warfare System
+ManaCost:2 B
+Types:Artifact Creature Construct
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Artifact.Other;Creature.Other/another creature or artifact>
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nWhenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.

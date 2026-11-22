@@ -1,0 +1,15 @@
+Name:The Unluckiest Planeswalker
+ManaCost:2 R
+Types:Legendary Planeswalker
+Loyalty:4
+DeckRule:ColorIdentity:Exempt$ Aura,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have Aura cards of any color identity and any basic land cards.
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Produced$ Any | Planeswalker$ True | TriggersWhenSpent$ TrigToken | SpellDescription$ Add one mana of any color. When you spend this mana to cast an Aura spell this turn, create a 1/1 red Gremlin creature token.
+SVar:TrigToken:Mode$ SpellCast | ValidCard$ Aura | Execute$ TrigTokenMain | TriggerDescription$ When you spend this mana to cast an Aura spell this turn, create a 1/1 red Gremlin creature token.
+SVar:TrigTokenMain:DB$ Token | TokenScript$ r_1_1_gremlin | TokenOwner$ You
+A:AB$ Discard | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw cards equal to twice the number of Auras you control. For each Aura attached to you, attach it to an opponent of your choice.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBReattach
+SVar:X:Count$Valid Aura.YouCtrl/Twice
+SVar:DBReattach:DB$ RepeatEach | RepeatSubAbility$ DBAttachOpp | RepeatCards$ Aura.AttachedTo Player.You
+SVar:DBAttachOpp:DB$ Attach | Object$ Remembered | PlayerChoices$ Opponent | ChoiceTitle$ Choose an opponent to attach it to
+Text:CARDNAME can be your commander.
+Oracle:Rulebreaker — A deck with this commander can have Aura cards of any color identity and any basic land cards.\n+1: Add one mana of any color. When you spend this mana to cast an Aura spell this turn, create a 1/1 red Gremlin creature token.\n−3: Discard your hand, then draw cards equal to twice the number of Auras you control. For each Aura attached to you, attach it to an opponent of your choice.\nThe Unluckiest Planeswalker can be your commander.

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="168">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Firdoch Core&quot;, &quot;Moon-Vigil Adherents&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="SubBackground" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztk00KgCAQRm1h4UGKTtJJOkKbNt1Ngs5VotEgaln5E82DDxeKb8ZBQiQdO+LCdq6mhLQqzZaRuXN235l3UutCZQTc4NbrCuHd3UNxBMIDeKE7FMJp6ze0FzJv3r6M4zbh43/6j2glo/tjeU1+Hbj/ttflj+H1qecOOXiv1JEjcJZXZv91byr0/mK+cwov8k1S/cW/eREEQZ6wAoAkL5I=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9l8ENwjAMRXugFAoSlViBHViII2eObNAd2AXBChzYgzNYxcKy7CROHCx9BQXFz/lOIhhnTTMW6LycRms8FvlMCBxvrY2bw3vty7mnpZ47Jk8uzx2qCXoLgrh+uDsDm3JDLI1Lew1xmNfhal7wiPF5npDHoR5YA/dr4Wp3yhKW8xuqKZdL2W2XzsN1JVzqNxXWAaPWb4/95ogG9UuLSyd7Z3kzLT0JaTX8pH3nzaVMiS1xU94VLv4+a1xtTuPG9pfCPW70OnL6mMrtA33+J3c9+HHxPnEftd8FNbgwR7mSB7W4nIdzkry4nKetK2FzLs8B8yjtPNbgct1bX24sB9ZFuR4+p9YucUvOVep5AS7Kc79SDfwz8kvuVO5a9FuqsdTnGBeVyw55wPfl2W9eN2VjvhSvredcqpdyJS+t7+fz+/9+20/jG5ugGuU=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy1lk1uE0EQhTsWtsfjoEQKrABDsIi4gYn5OQdCLNnCihBYxAb2nAAR4mTFERCrQBSOQEBIBMMZEEEKUE/dpakpV8+MjSjpKfFk0l+/qu4qO+fc05ZzA1K9OZ34f56dcDPFhXR6JnMh5u7XM/1vpuRq9mWht2pPT07aa+Hz3XlbV1dtrmSWCSGZmrE8cO4iqTvIPH2KcKdha6/M4xgRb5u0o7i6vsy+0yhndg2/n2nNo17GWB6SX1J36D9fo7+v95370cvfAWZX4e+RHvW9uGbMZfaIeNuknWHGlDlmcWi+9Ii9gIm/HYSccc3W+hlXS9fV4mr+O8VjrYQaPxS+wb6+OqmYV4urves8jMSdjHniiDHHic0tiufEqzW9b+ZafQKh7zh430jn0um5W7TWMeV/M/jlfFcV6jJLHIea32x7D+ki3d+Farq34PPz1cjzRsmseR+YLHDbBeLA7/OLntuhPB8S+3ya7UHPOMQcfobPe4p7qz09V9b8MelL4ueN7vcvm76uLuyjClcGP2Ou7LXwrpnMfRG40G64v5Ir12bJuhZxY+J3wL6ReLasMfvV3ixpboxtnSvtWeZ5Fi70p+F7Qk2cI4sL3S6p7yuhIi6YvcTnEtr8B+5rOidH7by4b6Bny/VQvxirKpd5v8Bp5YX3ys5SUa0196fwpHmX6r6PW1z06rO0z+/JbFw5r8C5P5eJz77F7YRedaaEXYXLM3tLvLdUi/vlubQRYeLMOcHt1rN+ac1p8DUX9Xgj+tJQzGl4xnzUvnHmriT+fjETa32gZwekj0mcvStqLNmddHIu6ZzLfsVMaI30gLTesn3L3irZusYcej7IeyTP6xK9c4p0Os3zuIda+eY7IH1jJh4WMOU8kELwnUGucD/4e4GVb6veZT3a4rK3/bA2P+M1ZL5xv6x6l/WrFTX35dmKsWW+Zc4lu4yL75O8Z6wrz5blm73w86Kca9Y43K1xkt8z1pVnS+Zcfw9D4PnvxiRbnrVY/AUxi6W3
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJytV81qFEEQLtBF3E3AXV9AEeKeNgYjJrvx9w0EDyJ5ATV5gJzccU5Z8OYDJM/gD9mdJJoQ8OAaTfARPATJVQRPVtFTmZqa6vkx+aCYn+6pr6q6qroHwGGjDzBEGfUhhbshwD2UvVdO5LxhHeBvAyBS3zyahkIsoM47KHMBwDxKN0jzbaN8FLxy3iJyvj4P0AsSfYuC820H4F3H5t1EnVsoG/jtEGUU69B8bIeeR7xRkPXZgrSpdsFd51D3PEqXrqi/i9IL3djyRGKHnMf+EtjnxyVizOBYM4Z4P0KJBC9LD/netN3738i7XXf3UQAm3mOcP3TSNpHf1xpJrCU/6WcQDwlz38c5D1Aehs5nC2XizmB+DeZl7k84ZwdlN0z7LCFzzYp9f9JdZX1IX4lHwqo34t6qp/mtuOsYrFzM1pHklvd58yx+iZ6yhXhlffA6S50n/qo6suCLPcdgE8c+12J/RX1Y68w2yHl6jHBuIe27lukmwA2UHeRto9y04mL4m/feN4e5SJ63AL40k7G9WrEuH3SfkXiJefu16bgor5aQd7nl7g/jOU8wNk899ZgH3WcIHG8JmVc6xyTv93Z6bKyeq4LzKpxM15let2Pk+Xk9kSN8blzK6mPffLVnYeoU61oWlFczzex7H7eOq467D+w/9yfKq28Gr6+HH6k4H+fwclylLs4d5r2lvwnOJt7kp8zTSPA+a7lYU139mkiPnwUsXS+Qcxxzc/84LcrWO3EvxTKuyCtrg3oM9fc/ileeCXTvWFsFWF91NlTFQXy1OAnyTKBxZQBwdeDWOA/cP609Q6LMPkFYQ871gbvXNXT5djkdVTh/iHv2QffnPMzG1zJnNmtfkPifGrJsJZ68/ZDjcpAdOjmDF8Fnq7UfVgHxaxvK2sT/HxL8j8PnDmuPyLPBx1203vyPQ/1yP+5bVc710gar/1vQZ6v9mLtKPjO35rLWm/NI9kcp9E1RX9C8/O85K95X0SFxWDwlw131O4l/6nciMA==
+  </data>
+ </layer>
+ <layer id="8" name="Walls" width="30" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMBiBKRCboYnNZyasjxg1pAJbFuqooQSIlzMwSACxZDlt7UEH04H2zQDimXS2dxQMLKA0H10BYhMi1HELIDAI0CIf0aJMwAauoPFpXSYMJMBWPuMCF2npkBEAiMlHA2knKWmBVgA971ETXCIgPxzTN8jP6GkAFg60jO+BSOu0BADMJhH8
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="79" y="302.667">
+   <properties>
+    <property name="enemy" value="Trystan"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/collision.tx" x="-15.6667" y="-19.4007" width="16" height="579.801"/>
+  <object id="67" template="../../../../common/maps/obj/collision.tx" x="-14.6667" y="561.333" width="511" height="16"/>
+  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="144.75" y="274.75">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Morcant's Loyalist&quot;, &quot;Morcant's Eyes&quot;, &quot;Blight Sickle&quot;, &quot;Elderfang Venom&quot; ] }"/>
+    <property name="enemy" value="Morcant"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" x="325.667" y="239.666">
+   <properties>
+    <property name="enemy" value="The Grand Goatnapper"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/enemy.tx" x="142" y="105">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Hoofprints of the Stag&quot;, &quot;Evershrike&quot;, &quot;Deathrender&quot; ] }"/>
+    <property name="enemy" value="Eirdu"/>
+    <property name="pursueRange" type="int" value="40"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/enemy.tx" x="296" y="134.167">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Faerie Tauntings&quot;, &quot;Bitterblossom&quot;, &quot;Polluted Bonds&quot; ] }"/>
+    <property name="enemy" value="Oura"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="222.083" y="279.5">
+   <properties>
+    <property name="enemy" value="Maralen"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/enemy.tx" x="319.666" y="419.333">
+   <properties>
+    <property name="enemy" value="Thorna and Twigtooth"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="479" y="-12.9005" width="16" height="579.801"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="-16.0361" y="-18.323" width="511" height="16"/>
+  <object id="147" template="../../../../common/maps/obj/scroll.tx" x="413" y="239.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Eclipsed Realms&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/gold.tx" x="114.167" y="320.833"/>
+  <object id="150" template="../../../../common/maps/obj/dialog.tx" x="-3" y="499.583" width="117.333" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A strange realm stretches out ahead, enveloped in a twilight aurora. An eclipse hangs in the sky overhead and the muttering of elves, faeries, and many other stranger creatures besides can be heard in the distance.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="151" template="../../../../common/maps/obj/entry_up.tx" x="64" y="560" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="152" template="../../../../common/maps/obj/dialog.tx" x="32.6668" y="406.917" width="91.333" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Step not lightly into the court of the fae.' A delicate but sinister woman calls out from the throne ahead. 'I do not let those I fancy leave again.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="153" template="../../../../common/maps/obj/enemy.tx" x="145.667" y="273.5">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Morcant's Loyalist&quot;, &quot;Morcant's Eyes&quot;, &quot;Blight Sickle&quot; ] }"/>
+    <property name="enemy" value="Morcant"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/booster.tx" x="318.5" y="112.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/scroll.tx" x="132.5" y="58">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Celestial Reunion&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/enemy.tx" x="142" y="106.5">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Hoofprints of the Stag&quot;, &quot;Evershrike&quot; ] }"/>
+    <property name="enemy" value="Eirdu"/>
+    <property name="pursueRange" type="int" value="40"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="158" template="../../../../common/maps/obj/enemy.tx" x="299" y="134.5">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Faerie Tauntings&quot;, &quot;Bitterblossom&quot; ] }"/>
+    <property name="enemy" value="Oura"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/booster.tx" x="133.5" y="77.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="160" template="../../../../common/maps/obj/gold.tx" x="176.5" y="320.5"/>
+  <object id="161" template="../../../../common/maps/obj/gold.tx" x="158" y="320.5"/>
+  <object id="162" template="../../../../common/maps/obj/gold.tx" x="137" y="320"/>
+  <object id="163" template="../../../../common/maps/obj/booster.tx" x="400.5" y="556">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/scroll.tx" x="413.75" y="388.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Firdoch Core&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/scroll.tx" x="145.5" y="303">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Trystan's Command&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="166" template="../../../../common/maps/obj/scroll.tx" x="196" y="254">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Morcant's Eyes&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="167" template="../../../../common/maps/obj/scroll.tx" x="93.75" y="254">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Morcant's Loyalist&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

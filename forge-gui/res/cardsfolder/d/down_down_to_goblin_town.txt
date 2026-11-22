@@ -1,0 +1,9 @@
+Name:Down, Down to Goblin-town
+ManaCost:2 B
+Types:Enchantment Saga
+K:Chapter:4:DBDiscard,DBAmass,DBDrain,DBDrain
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:DBAmass:DB$ Amass | Type$ Goblin | Num$ 1 | SpellDescription$ Amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:DBDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nII — Amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)\n III, IV — Target opponent loses 1 life and you gain 1 life.

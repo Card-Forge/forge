@@ -28,12 +28,12 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
+import forge.screens.match.views.VPlayerPanel;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Utils;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TargetingOverlay {
     private static final float BORDER_THICKNESS = Utils.scale(1);
@@ -68,58 +68,262 @@ public class TargetingOverlay {
 
     private TargetingOverlay() {
     }
+
+    // The area arrows may be drawn in, and the areas drawn on top of the field (stack, open menus) that hide what is under them.
+    // Plain floats and one reused array, so deciding visibility allocates nothing per frame (GC pauses are felt on Android).
+    private static float clipLeft, clipTop, clipRight, clipBottom;
+    private static boolean hasClip = false;
+    private static float[] occluders = new float[4 * 8]; // left, top, right, bottom of each rect
+    private static int occluderCount = 0;
+
+    public static void setVisibleArea(final float x, final float y, final float w, final float h) {
+        clipLeft = x;
+        clipTop = y;
+        clipRight = x + w;
+        clipBottom = y + h;
+        hasClip = w > 0 && h > 0;
+    }
+
+    public static void clearOccluders() {
+        occluderCount = 0;
+    }
+
+    public static void addOccluder(final float x, final float y, final float w, final float h) {
+        if (w <= 0 || h <= 0) { return; }
+        final int i = occluderCount * 4;
+        if (i + 4 > occluders.length) {
+            occluders = Arrays.copyOf(occluders, occluders.length * 2);
+        }
+        occluders[i] = x;
+        occluders[i + 1] = y;
+        occluders[i + 2] = x + w;
+        occluders[i + 3] = y + h;
+        occluderCount++;
+    }
+
+    /** False when the point is outside the visible area or covered by an occluder; arrows to or from it are not drawn. */
+    public static boolean isVisible(final float x, final float y) {
+        if (hasClip && (x < clipLeft || x > clipRight || y < clipTop || y > clipBottom)) { return false; }
+        final float[] o = occluders;
+        for (int i = 0, n = occluderCount * 4; i < n; i += 4) {
+            if (x >= o[i] && x <= o[i + 2] && y >= o[i + 1] && y <= o[i + 3]) { return false; }
+        }
+        return true;
+    }
+
+    // assembleArrows collects arrows here, then draws them all with ONE Graphics.drawArrowBatch
+    private static final class PendingArrow {
+        Vector2 start, end;
+        ArcConnection connects;
+        boolean solid; // see the attacker -> player arrows in assembleArrows
+        float bulge;
+    }
+    private static final ArrayList<PendingArrow> pendingArrows = new ArrayList<>(); // reused every frame (UI thread only)
+    private static int pendingCount = 0;
+
+    private static void queueArrow(final Vector2 start, final Vector2 end, final ArcConnection connects, final boolean solid) {
+        queueArrow(start, end, connects, solid, 0f);
+    }
+
+    private static void queueArrow(final Vector2 start, final Vector2 end, final ArcConnection connects, final boolean solid, final float bulge) {
+        if (start == null || end == null) { return; }
+        if (!isVisible(start.x, start.y) || !isVisible(end.x, end.y)) { return; } // hidden, off screen or covered
+        final PendingArrow a;
+        if (pendingCount < pendingArrows.size()) {
+            a = pendingArrows.get(pendingCount);
+        } else {
+            a = new PendingArrow();
+            pendingArrows.add(a);
+        }
+        a.start = start;
+        a.end = end;
+        a.connects = connects;
+        a.solid = solid;
+        a.bulge = bulge;
+        pendingCount++;
+    }
+
+    private static void flushArrows(final Graphics g) {
+        final int count = pendingCount;
+        if (count == 0) { return; }
+        final String style = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION); // read once, not per arrow per pass
+        // the runnable is executed 2-3 times by drawArrowBatch, so it only draws from the prepared list
+        g.drawArrowBatch(() -> {
+            for (int i = 0; i < count; i++) {
+                final PendingArrow a = pendingArrows.get(i);
+                drawArrowStyled(g, a.start, a.end, a.connects, style, a.solid, a.bulge);
+            }
+        });
+    }
+
+    private static void clearPending() {
+        // drop references to this frame's endpoints so nothing is kept alive between frames
+        for (int i = 0; i < pendingCount; i++) {
+            final PendingArrow a = pendingArrows.get(i);
+            a.start = null;
+            a.end = null;
+            a.connects = null;
+            a.bulge = 0f;
+        }
+        pendingCount = 0;
+    }
+
+    private static void addBlockPair(final Map<CardView, List<CardView>> pairs, final CardView key, final CardView blocker, final CardView attacker) {
+        final List<CardView> list = pairs.computeIfAbsent(key, k -> new ArrayList<>());
+        list.add(blocker);
+        list.add(attacker);
+    }
+
     public static void assembleArrows(final Graphics g, final Set<CardView> cardsonBattlefield, final Map<Integer, Vector2> endpoints, final CombatView combat, final Set<PlayerView> playerViewSet) {
         if (cardsonBattlefield.isEmpty())
             return;
-        for (CardView c : cardsonBattlefield) {
-            final CardView attachedTo = c.getAttachedTo();
-            final CardView paired = c.getPairedWith();
-            if (null != attachedTo) {
-                if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
-                    drawArrow(g, endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                }
-            }
-            if (null != attachedTo && c == attachedTo.getAttachedTo()) {
-                drawArrow(g, endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-            }
-            for (final CardView enc : c.getAttachedCards()) {
-                if (enc.getController() != null && !enc.getController().equals(c.getController())) {
-                    drawArrow(g, endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
-                }
-            }
-            if (null != paired) {
-                drawArrow(g, endpoints.get(paired.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-            }
+        try {
+            // Snapshot the combat data ONCE per frame. CombatView.getAttackers() / getAttackersOf(p) build a new collection on every
+            // call, and this used to run for every card on the battlefield (a JFR profile showed it at about a third of the render
+            // thread's Java time). Same arrows come out, same numbers of them.
+            final List<CardView> blockInfoAttackers = new ArrayList<>(); // attackers that have planned-blocker info (old "cards == null -> continue")
+            final Map<CardView, List<CardView>> blockPairs = new HashMap<>(); // card -> blocker, attacker, blocker, attacker, ...
+            final Map<PlayerView, Set<CardView>> attackersOfPlayer = new HashMap<>();
             if (null != combat) {
-                final GameEntityView defender = combat.getDefender(c);
-                // if c is attacking a planeswalker or battle
-                if (defender instanceof CardView) {
-                    drawArrow(g, endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
-                }
-                // if c is a planeswalker that's being attacked
-                for (final CardView pwAttacker : combat.getAttackersOf(c)) {
-                    drawArrow(g, endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking);
-                }
                 for (final CardView attackingCard : combat.getAttackers()) {
-                    final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
-                    if (cards == null) continue;
-                    for (final CardView blockingCard : cards) {
-                        if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                        drawArrow(g, endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
+                    final Iterable<CardView> blockers = combat.getPlannedBlockers(attackingCard);
+                    if (blockers == null) continue;
+                    blockInfoAttackers.add(attackingCard);
+                    for (final CardView blockingCard : blockers) {
+                        // as before, a blocker arrow is drawn once while visiting the attacker and once while visiting the blocker
+                        addBlockPair(blockPairs, attackingCard, blockingCard, attackingCard);
+                        if (!blockingCard.equals(attackingCard)) {
+                            addBlockPair(blockPairs, blockingCard, blockingCard, attackingCard);
+                        }
                     }
-                    if (playerViewSet != null) {
-                        for (final PlayerView p : playerViewSet) {
-                            if (combat.getAttackersOf(p).contains(attackingCard)) {
-                                final Vector2 vPlayer = MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin();
-                                drawArrow(g, endpoints.get(attackingCard.getId()), vPlayer, TargetingOverlay.ArcConnection.FoesAttacking);
+                }
+                if (playerViewSet != null) {
+                    for (final PlayerView p : playerViewSet) {
+                        final Set<CardView> attackers = new HashSet<>();
+                        for (final CardView a : combat.getAttackersOf(p)) {
+                            attackers.add(a);
+                        }
+                        attackersOfPlayer.put(p, attackers);
+                    }
+                }
+            }
+
+            for (CardView c : cardsonBattlefield) {
+                final CardView attachedTo = c.getAttachedTo();
+                final CardView paired = c.getPairedWith();
+                if (null != attachedTo) {
+                    if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
+                        queueArrow(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends, false);
+                    }
+                }
+                if (null != attachedTo && c == attachedTo.getAttachedTo()) {
+                    queueArrow(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends, false);
+                }
+                for (final CardView enc : c.getAttachedCards()) {
+                    if (enc.getController() != null && !enc.getController().equals(c.getController())) {
+                        queueArrow(endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends, false);
+                    }
+                }
+                if (null != paired) {
+                    queueArrow(endpoints.get(paired.getId()), endpoints.get(c.getId()), ArcConnection.Friends, false);
+                }
+                if (null != combat) {
+                    final GameEntityView defender = combat.getDefender(c);
+                    // if c is attacking a planeswalker or battle
+                    if (defender instanceof CardView) {
+                        queueArrow(endpoints.get(c.getId()), endpoints.get(defender.getId()), ArcConnection.FoesAttacking, false);
+                    }
+                    // if c is a planeswalker that's being attacked
+                    /*for (final CardView pwAttacker : combat.getAttackersOf(c)) {
+                        queueArrow(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking, false);
+                    }*/
+                    // blocker -> attacker arrows that involve this card
+                    final List<CardView> pairs = blockPairs.get(c);
+                    if (pairs != null) {
+                        for (int i = 0; i < pairs.size(); i += 2) {
+                            queueArrow(endpoints.get(pairs.get(i).getId()), endpoints.get(pairs.get(i + 1).getId()), ArcConnection.FoesBlocking, false);
+                        }
+                    }
+                }
+            }
+
+            // attacker -> player arrows do not depend on the card being iterated, so they are queued once
+            if (null != combat && playerViewSet != null) {
+                for (final CardView attackingCard : blockInfoAttackers) {
+                    for (final PlayerView p : playerViewSet) {
+                        if (attackersOfPlayer.get(p).contains(attackingCard)) {
+                            final VPlayerPanel panel = MatchScreen.getPlayerPanel(p);
+                            if (panel != null) {
+                                final Vector2 start = endpoints.get(attackingCard.getId());
+                                final Vector2 vPlayer = panel.getTargetingArrowOrigin();
+                                // Bend toward the battlefield on either side, keeping the arrow clear of panel labels.
+                                queueArrow(start, vPlayer, ArcConnection.FoesAttacking, true,
+                                        playerArrowBulge(start, vPlayer, panel.isCompactRight()));
                             }
                         }
                     }
                 }
             }
+
+            flushArrows(g);
+        } finally {
+            clearPending(); // also covers an exception thrown half way through collecting
         }
     }
+
+    // immediate mode, unchanged behavior: used by any other caller that draws a single arrow
     public static void drawArrow(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects) {
+        if (start == null || end == null) { return; }
+        drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false, 0f);
+    }
+
+    /** Draw a stack-target arrow to a player, curving it toward the battlefield rather than across the panel labels. */
+    public static void drawPlayerArrow(final Graphics g, final Vector2 start, final Vector2 end,
+                                       final ArcConnection connects, final boolean playerOnRight) {
+        if (start == null || end == null || !isVisible(end.x, end.y)) { return; } // only the target can be hidden; the start sits on the stack itself
+        final float bulge = playerArrowBulge(start, end, playerOnRight);
+        drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false, bulge);
+    }
+
+    private static float playerArrowBulge(final Vector2 start, final Vector2 end, final boolean playerOnRight) {
+        if (!VPlayerPanel.isCompactLayout() || start == null || end == null) { return 0f; }
+        final float dx = end.x - start.x;
+        final float dy = end.y - start.y;
+        if (dx * dx + dy * dy < 120f * 120f) { return 0f; } //Keep short arrows straight.
+        final float amount = Utils.scale(60);
+        if (Math.abs(dy) >= 1f) {
+            // Graphics uses the perpendicular (-dy, dx): this sign moves a right-side arrow left (inward), and vice versa.
+            return (playerOnRight ? 1f : -1f) * Math.signum(dy) * amount;
+        }
+        if (Math.abs(dx) < 1f) { return 0f; }
+        // Nearly horizontal arrows bend toward the vertical centre of the battlefield instead.
+        final float towardCenterY = end.y < Forge.getScreenHeight() / 2f ? 1f : -1f;
+        return Math.signum(dx) * towardCenterY * amount;
+    }
+
+    /**
+     * Arrow between two items of the stack view. They sit close together in one column, so a plain arrow would be a short
+     * straight line hidden over the card art; this one always bows out to the left of the column so it reads as a curve.
+     */
+    public static void drawStackArrow(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects) {
+        if (start == null || end == null) { return; }
+        final String style = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION);
+        if ("Point".equals(style) || "Line".equals(style)) {
+            drawArrowStyled(g, start, end, connects, style, false);
+            return;
+        }
+        final FSkinColor color = connects == ArcConnection.FoesStackTargeting ? foeDefColor : friendColor;
+        final float side = end.y >= start.y ? 1f : -1f; // keeps the bow on the left whichever way the arrow points
+        g.drawCurvedArrow(Utils.scale(3), color.alphaColor(0.8f).getColor(),
+                FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(),
+                start.x, start.y, end.x, end.y, false, side * Utils.scale(60));
+    }
+
+    private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid) {
+        drawArrowStyled(g, start, end, connects, style, solid, 0f);
+    }
+
+    private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid, final float bulge) {
         if (start == null || end == null) { return; }
 
         FSkinColor color = foeDefColor;
@@ -137,9 +341,13 @@ public class TargetingOverlay {
                 color = foeDefColor;
         }
 
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_LASER_ARROWS))
-            g.drawLineArrow(Utils.scale(3), color, start.x, start.y, end.x, end.y);
-        else
-            g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
+        switch (style) {
+            case "Point" -> g.drawCurvedLinePointer(Utils.scale(3), color.getColor(), Color.WHITE, start.x, start.y, end.x, end.y);
+            case "Line" -> g.drawLinePointer(Utils.scale(3), color.getColor(), start.x, start.y, end.x, end.y);
+            default -> g.drawCurvedArrow(Utils.scale(3),
+                    solid ? color.alphaColor(1f).getColor() : color.alphaColor(0.8f).getColor(),
+                    solid ? Color.WHITE : FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(),
+                    start.x, start.y, end.x, end.y, ArcConnection.Friends.equals(connects), bulge);
+        }
     }
 }

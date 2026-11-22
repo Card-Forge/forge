@@ -11,7 +11,7 @@ import forge.game.zone.ZoneType;
 
 public class ConniveAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (!ai.canDraw()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -63,11 +63,10 @@ public class ConniveAi extends SpellAbilityAi {
                 list.clear();
             }
         }
-        if (!sa.getTargets().isEmpty() && sa.isTargetNumberValid()) {
+        if (!sa.usesTargeting() || (!sa.getTargets().isEmpty() && sa.isTargetNumberValid())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override

@@ -1,0 +1,13 @@
+Name:Jace, Multiverse Architect
+ManaCost:1 W U B R
+Types:Legendary Planeswalker Jace
+Loyalty:4
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TrigCantAttack | TriggerDescription$ At the beginning of combat on each opponent's turn, they may pay {2}. If they don't, creatures they control can't attack Jaces you control this turn.
+SVar:TrigCantAttack:DB$ Effect | StaticAbilities$ STCantAttack | UnlessCost$ 2 | UnlessPayer$ TriggeredPlayer | RememberObjects$ TriggeredPlayer
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.ControlledBy Remembered | Target$ Jace.YouCtrl | Description$ Creatures can't attack Jaces you control.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 2 | SubAbility$ DBChangeZone | Planeswalker$ True | SpellDescription$ Draw two cards, then put a card from your hand on the bottom of your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | LibraryPosition$ -1 | Mandatory$ True
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Planeswalker.Other+YouCtrl,Creature.Other+YouCtrl | ValidTgtsDesc$ another planeswalker or creature you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDigUntil | SpellDescription$ Exile another target planeswalker or creature you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature,Planeswalker | ValidDescription$ creature or planeswalker | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+Text:CARDNAME can be your commander.
+Oracle:At the beginning of combat on each opponent's turn, they may pay {2}. If they don't, creatures they control can’t attack Jaces you control this turn.\n[+1]: Draw two cards, then put a card from your hand on the bottom of your library.\n[-3]: Exile another target planeswalker or creature you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\nJace, Multiverse Architect can be your commander.

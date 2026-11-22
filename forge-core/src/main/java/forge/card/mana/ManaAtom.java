@@ -89,7 +89,7 @@ public abstract class ManaAtom {
         return -1; // somehow the mana is not colored or colorless?
     }
 
-    public static int getIndexFromName(final String s){
+    public static int getIndexFromName(final String s) {
         return getIndexOfFirstManaType(fromName(s));
     }
 }

@@ -3,10 +3,22 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
@@ -24,13 +36,18 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -53,22 +70,37 @@ public class RewardScene extends UIScene {
         return object;
     }
 
-    private boolean showTooltips = false;
-
     public enum Type {
         Shop,
         Loot,
         QuestReward,
-        RewardChoice
+        RewardChoice,
+        EventReward,
+        Lost
     }
 
     Type type;
-    Array<Actor> generated = new Array<>();
+    Array<Actor> generated = new Array<>(32);
+    private final List<RewardActor> rewardList = new ArrayList<>(32);
     static public final float CARD_WIDTH = 550f;
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
     ItemPool<PaperCard> collectionPool = null;
     private int remainingSelections = 0;
+    public Image marketBackgroundImg = null;
+    private Actor cachedCardsContainerActor = null;
+    private Drawable origDrawable = null;
+    // Below this card height the grid stops shrinking and scrolls instead, so screens of up to about 24 cards keep their layout.
+    private static final float MIN_CARD_HEIGHT = 60f;
+    // Room under a scrolling grid for the more-cards arrow, which is 6 units tall at the top of its bob, with 10 clear above and 6 below.
+    private static final float CHEVRON_SPACE = 22f;
+    private final Group cardGroup = new Group();
+    private final ScrollPane cardScroller = new ScrollPane(cardGroup);
+    private final MoreArrow cardArrow = new MoreArrow(cardScroller);
+    private final TypingLabel deckSlotLabel;
+    private final Array<Deck> pendingDecks = new Array<>();
+    private ShopActor deckShop;
+    private String deckSlotMessage;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -77,6 +109,9 @@ public class RewardScene extends UIScene {
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         headerLabel = ui.findActor("shopName");
         headerLabelOrigPos = new Vector2(headerLabel.getX(), headerLabel.getY());
+        if (ui.findActor("market_background") instanceof Image image)
+            this.marketBackgroundImg = image;
+        this.cachedCardsContainerActor = ui.findActor("cards");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -84,6 +119,19 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
+        origDrawable = getBGDrawable();
+        cardGroup.setTouchable(Touchable.childrenOnly);
+        cardScroller.setScrollingDisabled(true, false);
+        cardScroller.setOverscroll(false, false);
+        stage.addActor(cardScroller);
+        stage.addActor(cardArrow);
+        deckSlotLabel = Controls.newTypingLabel("");
+        deckSlotLabel.setX(cachedCardsContainerActor.getX());
+        deckSlotLabel.setWidth(cachedCardsContainerActor.getWidth());
+        deckSlotLabel.setWrap(true);
+        deckSlotLabel.setAlignment(Align.center);
+        deckSlotLabel.setVisible(false);
+        stage.addActor(deckSlotLabel);
     }
 
     @Override
@@ -108,19 +156,15 @@ public class RewardScene extends UIScene {
         if (selectable == null)
             return;
         RewardActor actor;
-        if (selectable.actor instanceof BuyButton) {
-            actor = ((BuyButton) selectable.actor).rewardActor;
+        if (selectable.actor instanceof BuyButton buyButton) {
+            actor = buyButton.rewardActor;
         } else if (selectable.actor instanceof RewardActor) {
             actor = (RewardActor) selectable.actor;
         } else {
             return;
         }
-        if (actor.toolTipIsVisible()) {
-            actor.hideTooltip();
-        } else {
-            if (!actor.isFlipped())
-                actor.showTooltip();
-        }
+        if (!actor.isFlipped())
+            performTouch(actor);
 
     }
 
@@ -129,12 +173,11 @@ public class RewardScene extends UIScene {
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
     public void quitScene() {
-        //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor A : new Array.ArrayIterator<>(generated)) {
-            if (A instanceof RewardActor) {
-                ((RewardActor) A).removeTooltip();
-                ((RewardActor) A).dispose();
-                A.remove();
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.removeTooltip();
+                actor.remove();
             }
         }
         //save RAM
@@ -172,26 +215,146 @@ public class RewardScene extends UIScene {
         }
         shown = false;
         clearGenerated();
-        quitScene();
+        quitOrRevealDeck();
         return true;
     }
 
     void clearGenerated() {
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
-            if (type == Type.Loot)
-                AdventurePlayer.current().addReward(reward.getReward());
+            if (type == Type.Loot || type == Type.EventReward)
+                claimReward(rewardActor.getReward());
             if (type == Type.QuestReward)
-                AdventurePlayer.current().addReward(reward.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
-            reward.clearHoldToolTip();
-            try {
-                stage.getActors().removeValue(reward, true);
-            } catch (Exception e) {
-            }
+                claimReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
+            rewardActor.clearLabel();
+            rewardActor.remove();
         }
+    }
+
+    /** The bobbing down-arrow from the item preview, shown while its pane has more below. */
+    public static class MoreArrow extends Actor {
+        private final ScrollPane pane;
+        private float elapsed;
+
+        public MoreArrow(ScrollPane pane) {
+            this.pane = pane;
+            setSize(7, 6);
+        }
+
+        @Override
+        public void act(float delta) {
+            elapsed += delta;
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            if (pane.getScrollY() < pane.getMaxY() - 1)
+                RewardActor.drawMoreArrow(batch, getX() + getWidth() / 2, getY(), 1, elapsed, parentAlpha, getColor());
+        }
+    }
+
+    /** @return a style with a thin white scroll bar, for a scrolling list in a dialog */
+    public static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
+        return thinScrollBarStyle(Color.WHITE);
+    }
+
+    public static ScrollPane.ScrollPaneStyle thinScrollBarStyle(Color tint) {
+        TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
+        ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
+        barStyle.vScroll = white.tint(new Color(tint.r, tint.g, tint.b, 0.15f));
+        barStyle.vScroll.setMinWidth(2);
+        barStyle.vScrollKnob = white.tint(new Color(tint.r, tint.g, tint.b, 0.7f));
+        barStyle.vScrollKnob.setMinWidth(2);
+        barStyle.vScrollKnob.setMinHeight(8);
+        return barStyle;
+    }
+
+    private static boolean isDeckReward(Reward reward) {
+        return reward.getDeck() != null && reward.getDeck().getTags().contains(Reward.DECK_TAG);
+    }
+
+    private void showDecklist(Deck deck) {
+        List<DeckSection> sections = new ArrayList<>(List.of(DeckSection.values()));
+        sections.remove(DeckSection.Commander);
+        sections.add(0, DeckSection.Commander);
+        StringBuilder list = new StringBuilder();
+        for (DeckSection section : sections) {
+            CardPool pool = deck.get(section);
+            if (pool == null || pool.isEmpty())
+                continue;
+            list.append("[%?SHINY]").append(section.getLocalizedName()).append(" (").append(pool.countAll()).append(")[%]\n");
+            List<Map.Entry<PaperCard, Integer>> entries = new ArrayList<>();
+            pool.forEach(entries::add);
+            entries.sort(Comparator.comparing(entry -> entry.getKey().getName()));
+            for (Map.Entry<PaperCard, Integer> entry : entries)
+                list.append(entry.getValue()).append(' ').append(entry.getKey().getName().replace("[", "[[")).append('\n');
+            list.append('\n');
+        }
+        TextraLabel label = Controls.newTextraLabel(list.toString().stripTrailing());
+        label.setWrap(true);
+        ScrollPane pane = new ScrollPane(label, thinScrollBarStyle());
+        pane.setScrollingDisabled(true, false);
+        pane.setFadeScrollBars(false);
+        Dialog dialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblClose"), null, this::removeDialog, null);
+        Table content = dialog.getContentTable();
+        content.add(Controls.newTextraLabel("[%?SHINY]" + deck.getName().replace("[", "[[") + "[%]\n"
+                + Forge.getLocalizer().getMessage("lblNCards", deck.getAllCardsInASinglePool(true, true).countAll()))).left().padTop(4).padBottom(4);
+        content.row();
+        content.add(pane).width(stage.getWidth() * (Forge.isLandscapeMode() ? 0.6f : 0.8f)).height(stage.getHeight() * 0.55f).padRight(4);
+        content.row();
+        content.add(new MoreArrow(pane)).padTop(4);
+        showDialog(dialog);
+    }
+
+    private void claimReward(Reward reward) {
+        if (isDeckReward(reward))
+            pendingDecks.add(reward.getDeck());
+        else
+            AdventurePlayer.current().addReward(reward);
+    }
+
+    /** Reveals any decks claimed on this screen before leaving, then returns to the shop they were bought in. */
+    private void quitOrRevealDeck() {
+        if (pendingDecks.notEmpty()) {
+            revealDeck(pendingDecks.removeIndex(0));
+        } else if (deckShop != null) {
+            ShopActor shop = deckShop;
+            deckShop = null;
+            loadRewards(shop.getRewardData(), Type.Shop, shop);
+        } else {
+            quitScene();
+        }
+    }
+
+    private void revealDeck(Deck reward) {
+        // The shop keeps the reward, and an unlimited shop sells it again, so the slot gets its own copy
+        Deck deck = (Deck) reward.copyTo(reward.getName());
+        deck.getTags().remove(Reward.DECK_TAG);
+        int slot = AdventurePlayer.current().addDeckToEmptySlot(deck);
+        // Textra reads square brackets as markup, and commander precon names carry set and year in brackets
+        String name = deck.getName().replace("[", "[[");
+        deckSlotMessage = slot >= 0
+                ? Forge.getLocalizer().getMessage("lblDeckAddedToSlot", name, slot + 1)
+                : Forge.getLocalizer().getMessage("lblDeckSlotsFull", name);
+        loadRewards(deck, Type.EventReward, null, deck.getTags().contains("noSell"));
+    }
+
+    public List<RewardActor> getGeneratedRewards() {
+        rewardList.clear();
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
+            if (!(actor instanceof RewardActor rewardActor)) {
+                continue;
+            }
+            if (!rewardActor.frontSideUp()) {
+                continue;
+            }
+            rewardList.add(rewardActor);
+        }
+        return rewardList;
     }
 
     @Override
@@ -199,9 +362,9 @@ public class RewardScene extends UIScene {
         stage.act(delta);
         ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
-            if (type == Type.Loot || type == Type.QuestReward) {
-                flipCountDown -= Gdx.graphics.getDeltaTime();
-                exitCountDown += Gdx.graphics.getDeltaTime();
+            if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
+                flipCountDown -= delta;
+                exitCountDown += delta;
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
@@ -214,37 +377,40 @@ public class RewardScene extends UIScene {
     public void enter() {
         autoSell = false;
         updateDetailButton();
+        if ((type == Type.Loot || type == Type.Lost) && Forge.lastPreview != null) {
+            setUIBackground(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
+        } else {
+            setUIBackground(origDrawable);
+        }
         super.enter();
     }
 
     private void showLootOrDone() {
         boolean exit = true;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
-            if (!reward.isFlipped()) {
+            if (!rewardActor.isFlipped()) {
                 exit = false;
                 break;
             }
         }
         if (exit)
             done(true);
-        else if ((type == Type.Loot || type == Type.QuestReward) && !shown) {
+        else if ((type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) && !shown) {
             shown = true;
             float delay = 0.09f;
             generated.shuffle();
             for (Actor actor : new Array.ArrayIterator<>(generated)) {
-                if (!(actor instanceof RewardActor)) {
+                if (!(actor instanceof RewardActor rewardActor)) {
                     continue;
                 }
-                RewardActor reward = (RewardActor) actor;
-                if (!reward.isFlipped()) {
+                if (!rewardActor.isFlipped()) {
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
-                            reward.flip();
+                            rewardActor.flip();
                         }
                     }, delay);
                     delay += 0.12f;
@@ -338,6 +504,7 @@ public class RewardScene extends UIScene {
             }
         }
         newRewards.clear();
+        totalGold = Math.min(totalGold, AdventurePlayer.current().getGoldRoom());
         if (totalGold > 0) {
             newRewards.add(new Reward(Reward.Type.Gold, totalGold));
         }
@@ -359,7 +526,10 @@ public class RewardScene extends UIScene {
         }));
         clearSelectable();
         this.type = type;
+        autoSell = false;
         doneClicked = false;
+        playerGold.setVisible(type != Type.Lost);
+        playerShards.setVisible(type != Type.Lost);
         updateCollectionPool();
         if (type == Type.Shop) {
             this.shopActor = shopActor;
@@ -370,26 +540,26 @@ public class RewardScene extends UIScene {
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
-            if (actor instanceof RewardActor) {
-                ((RewardActor) actor).dispose();
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.dispose();
             }
         }
         addToSelectable(doneButton);
         generated.clear();
 
-        Actor card = ui.findActor("cards");
+        Actor card = this.cachedCardsContainerActor;
         //reset pos
         headerLabel.setPosition(headerLabelOrigPos.x, headerLabelOrigPos.y);
         headerLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (type == Type.Loot || type == Type.QuestReward) {
+                if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
-                    for (Actor A : new Array.ArrayIterator<>(generated)) {
-                        if (A instanceof RewardActor) {
-                            ((RewardActor) A).setAutoSell(autoSell);
+                    for (Actor actor : new Array.ArrayIterator<>(generated)) {
+                        if (actor instanceof RewardActor rewardActor) {
+                            rewardActor.setAutoSell(autoSell);
                         }
                     }
                 }
@@ -404,21 +574,32 @@ public class RewardScene extends UIScene {
             } else {
                 headerLabel.setVisible(false);
             }
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(true);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(true);
+            }
         } else {
             headerLabel.setVisible(false);
             headerLabel.setText("");
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(false);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(false);
+            }
         }
 
         float targetWidth = card.getWidth();
         float targetHeight = card.getHeight();
-        float xOff = card.getX();
-        float yOff = card.getY();
+        deckSlotLabel.setVisible(deckSlotMessage != null);
+        if (deckSlotMessage != null) {
+            deckSlotLabel.setText("[%?SHINY]" + deckSlotMessage);
+            deckSlotLabel.layout();
+            deckSlotLabel.setHeight(deckSlotLabel.getPrefHeight());
+            deckSlotLabel.setY(headerLabelOrigPos.y + headerLabel.getHeight() - deckSlotLabel.getHeight());
+            targetHeight = Math.min(targetHeight, deckSlotLabel.getY() - card.getY());
+            deckSlotMessage = null;
+        }
+        float xOff;
+        float yOff;
 
         int numberOfRows = 0;
         float cardWidth = 0;
@@ -446,10 +627,18 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
+            case EventReward:
             case Loot:
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
                 headerLabel.setText("[%?SHINY][;]\u2610 " + Forge.getLocalizer().getMessage("lblAll"));
+                headerLabel.skipToTheEnd();
+                restockButton.setVisible(false);
+                break;
+            case Lost:
+                headerLabel.setPosition(restockButton.getX(), restockButton.getY());
+                headerLabel.setVisible(true);
+                headerLabel.setText("[%?SHINY]" + Forge.getLocalizer().getMessage("lblYouLost"));
                 headerLabel.skipToTheEnd();
                 restockButton.setVisible(false);
                 break;
@@ -459,13 +648,21 @@ public class RewardScene extends UIScene {
                 headerLabel.setText(Forge.getLocalizer().getMessage("lblSelectRewards", remainingSelections));
                 doneButton.setDisabled(remainingSelections > 0);
         }
+        // The stage is stretched over the window, so compensate to keep the card's real ratio at any screen size.
+        // Needed before the grid search so rows and columns are counted with the final card width.
+        float correction = ScreenAspectCorrection.widthCorrection(Scene.getIntendedWidth(), Scene.getIntendedHeight(),
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        boolean sellsDeck = false;
+        if (type == Type.Shop) {
+            for (Reward reward : new Array.ArrayIterator<>(newRewards))
+                sellsDeck |= isDeckReward(reward);
+        }
+        // A deck for sale gets a decklist button under its price, so every cell in that shop reserves two button rows
+        float buttonHeight = type == Type.Shop || type == Type.RewardChoice ? doneButton.getHeight() * (sellsDeck ? 2 : 1) : 0;
         for (int h = 1; h < targetHeight; h++) {
-            cardHeight = h;
-            if (type == Type.Shop || type == Type.RewardChoice) {
-                cardHeight += doneButton.getHeight();
-            }
+            cardHeight = h + buttonHeight;
             //cardHeight=targetHeight/i;
-            cardWidth = h / CARD_WIDTH_TO_HEIGHT;
+            cardWidth = h / CARD_WIDTH_TO_HEIGHT * correction;
             newArea = newRewards.size * cardWidth * cardHeight;
 
             int rows = (int) (targetHeight / cardHeight);
@@ -477,44 +674,32 @@ public class RewardScene extends UIScene {
                 bestCardHeight = h;
             }
         }
-        float AR = 480f / 270f;
-        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
-        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
-        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
-        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
-        float fW = Math.max(x, y);
-        float fH = Math.min(x, y);
-        float mul = fW / fH < AR ? AR / (fW / fH) : (fW / fH) / AR;
-        if (fW / fH >= 2f) {//tall display
-            mul = (fW / fH) - ((fW / fH) / AR);
-            if ((fW / fH) >= 2.1f && (fW / fH) < 2.2f)
-                mul *= 0.9f;
-            else if ((fW / fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
-                mul *= 0.8f;
-        }
+        boolean scrolls = bestCardHeight < MIN_CARD_HEIGHT;
+        if (scrolls)
+            bestCardHeight = MIN_CARD_HEIGHT;
         cardHeight = bestCardHeight * 0.90f;
-        Float custom = Forge.isLandscapeMode()
-            ? Config.instance().getSettingData().rewardCardAdjLandscape
-            : Config.instance().getSettingData().rewardCardAdj;
-        if (custom != null && custom != 1f) {
-            mul *= custom;
+        cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * correction;
+        if (scrolls) {
+            numberOfColumns = Math.max(1, (int) (targetWidth / cardWidth));
+            numberOfRows = (int) Math.ceil(newRewards.size / (double) numberOfColumns);
+            yOff = buttonHeight;
         } else {
-            if (realX > x || realY > y) {
-                mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
-            } else {
-                //immersive | no navigation and/or showing cutout cam
-                if (fW / fH > 2.2f)
-                    mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
-                else if (fW / fH >= 2.1f)
-                    mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
-                else if (fW / fH >= 2f)
-                    mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
-            }
+            yOff = (targetHeight - (cardHeight * numberOfRows)) / 2f;
         }
-        cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * mul;
-
-        yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
-        xOff += (targetWidth - (cardWidth * numberOfColumns)) / 2f;
+        xOff = (targetWidth - (cardWidth * numberOfColumns)) / 2f;
+        float viewBottom = card.getY();
+        if (scrolls) {
+            Actor gold = ui.findActor("playerGold");
+            // The portrait layout puts the gold counter inside the card area, which a full scrolling grid would cover
+            if (gold.getX() < card.getX() + targetWidth)
+                viewBottom = Math.max(viewBottom, gold.getY() + gold.getHeight());
+            viewBottom += CHEVRON_SPACE;
+        }
+        // The card area overlaps buttons in portrait, so only the cards themselves take touches unless the grid scrolls
+        cardScroller.setTouchable(scrolls ? Touchable.enabled : Touchable.childrenOnly);
+        cardScroller.setBounds(card.getX(), viewBottom, targetWidth, card.getY() + targetHeight - viewBottom);
+        cardArrow.setPosition(card.getX() + (targetWidth - cardArrow.getWidth()) / 2, viewBottom - CHEVRON_SPACE + 6);
+        cardGroup.setSize(targetWidth, scrolls ? numberOfRows * (cardHeight + buttonHeight) : targetHeight);
 
         float spacing = 2;
         int i = 0;
@@ -534,36 +719,53 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
+            RewardActor actor = new RewardActor(reward, type == Type.EventReward || type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
             if (type == Type.Shop) {
                 if (currentRow != ((i + 1) / numberOfColumns))
-                    yOff += doneButton.getHeight();
+                    yOff += buttonHeight;
 
                 BuyButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, actor, reward, doneButton, shopActor.getPriceModifier());
                 generated.add(buyCardButton);
                 if (!skipCard) {
-                    stage.addActor(buyCardButton);
+                    cardGroup.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
+                }
+                if (isDeckReward(reward)) {
+                    TextraButton decklistButton = Controls.newTextButton(Forge.getLocalizer().getMessage("lblViewDecklist"),
+                            () -> showDecklist(reward.getDeck()));
+                    decklistButton.setBounds(buyCardButton.getX(), buyCardButton.getY() - doneButton.getHeight(),
+                            buyCardButton.getWidth(), doneButton.getHeight());
+                    generated.add(decklistButton);
+                    if (!skipCard) {
+                        cardGroup.addActor(decklistButton);
+                        addToSelectable(decklistButton);
+                    }
                 }
             } else if (type == Type.RewardChoice) {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
                 ChooseRewardButton chooseRewardButton = new ChooseRewardButton(i, actor, reward, doneButton);
                 generated.add(chooseRewardButton);
-                stage.addActor(chooseRewardButton);
+                cardGroup.addActor(chooseRewardButton);
                 addToSelectable(chooseRewardButton);
             } else {
+                if (type == Type.Lost)
+                    actor.sold();
                 addToSelectable(actor);
             }
             generated.add(actor);
             if (!skipCard) {
-                stage.addActor(actor);
+                cardGroup.addActor(actor);
             }
             i++;
         }
+        cardScroller.layout();
+        cardScroller.setScrollY(0);
+        cardScroller.updateVisualScroll();
+        stage.setScrollFocus(cardScroller);
         if (type == Type.Shop) {
             updateBuyButtons();
             updateRestockButton();
@@ -572,16 +774,16 @@ public class RewardScene extends UIScene {
 
     private void updateBuyButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof BuyButton) {
-                ((BuyButton) actor).update();
+            if (actor instanceof BuyButton buyButton) {
+                buyButton.update();
             }
         }
     }
 
     private void updateChooseRewardButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof ChooseRewardButton) {
-                ((ChooseRewardButton) actor).update();
+            if (actor instanceof ChooseRewardButton chooseRewardButton) {
+                chooseRewardButton.update();
             }
         }
     }
@@ -595,11 +797,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || WorldSave.getCurrentSave().getPlayer().getGold() < price);
             if (isSold)
                 setText("SOLD");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -629,12 +840,14 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (Current.player().getGold() >= price) {
                         if (!shopActor.isUnlimited())
                             changes.buyCard(objectID, index);
 
                         Current.player().takeGold(price);
-                        Current.player().addReward(rewardActor.getReward());
+                        claimReward(rewardActor.getReward());
 
                         HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
@@ -648,6 +861,10 @@ public class RewardScene extends UIScene {
                         updateCollectionPool();
                         updateBuyButtons();
                         removeListener(this);
+                        if (pendingDecks.notEmpty()) {
+                            deckShop = shopActor;
+                            revealDeck(pendingDecks.removeIndex(0));
+                        }
                     }
                 }
             });
@@ -661,11 +878,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(remainingSelections <= 0);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || remainingSelections <= 0);
             if (isSold)
                 setText("SELECTED");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -692,10 +918,12 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (remainingSelections >= 1) {
 
                         remainingSelections--;
-                        Current.player().addReward(rewardActor.getReward());
+                        claimReward(rewardActor.getReward());
 
                         headerLabel.setVisible(remainingSelections > 0);
                         headerLabel.setText("Select " + remainingSelections + " rewards");

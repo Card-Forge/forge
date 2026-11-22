@@ -1,0 +1,12 @@
+Name:Balin, Loremaster
+ManaCost:3 R R
+Types:Legendary Creature Dwarf Bard
+PT:4/4
+K:Storied
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Dwarf.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME or another Dwarf you control enters, you may discard your hand. Draw X cards, where X is the number of cards discarded this way. If you have an enduring story, NICKNAME deals X damage to each opponent.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | RememberDiscarded$ True
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Player.Opponent | Condition$ EnduringStory | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nWhenever Balin or another Dwarf you control enters, you may discard your hand. Draw X cards, where X is the number of cards discarded this way. If you have an enduring story, Balin deals X damage to each opponent.

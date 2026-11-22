@@ -1,9 +1,11 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.ImmutableList;
+import forge.Adventure;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -19,6 +21,7 @@ import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.adventure.util.Reward;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.card.ColorSet;
@@ -45,12 +48,14 @@ import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
-import forge.util.StreamUtil;
+import forge.util.Localizer;
+import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -73,7 +78,9 @@ public class DuelScene extends ForgeScene {
     EnemySprite enemy;
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
+    private EffectData biomeEffect;
     private EffectData dungeonEffect;
+    private boolean ignoreGlobalEffect;
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
@@ -85,7 +92,49 @@ public class DuelScene extends ForgeScene {
     FOptionPane bossDialogue;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
+    // Enemy decks generated off the GL thread; consumed (and cleared) by enter()
+    private List<Deck> pregenDecks = null;
+    private int pregenToken = 0;
+    private volatile boolean pregenInFlight = false;
+    private static final HashMap<Integer, String> introKeysMap = new HashMap<>(64);
+    private static final HashMap<Integer, String> insultKeysMap = new HashMap<>(64);
+    private static final cardFDisplayObject cardDisplay = new cardFDisplayObject();
+    private static final enemyAvatarBufferedImage enemyAvatar = new enemyAvatarBufferedImage();
 
+    static {
+        for (int i = 1; i <= 44; i++) {
+            insultKeysMap.put(i, "AdvBossInsult" + i);
+        }
+        for (int i = 1; i <= 35; i++) {
+            introKeysMap.put(i, "AdvBossIntro" + i);
+        }
+    }
+
+    private static class cardFDisplayObject extends FDisplayObject {
+        private CardView cardView;
+        public void setCard(CardView card) { this.cardView = card; }
+        @Override public boolean tap(float x, float y, int count) { if (cardView != null) CardZoom.show(cardView); return true; }
+        @Override public boolean longPress(float x, float y) { if (cardView != null) CardZoom.show(cardView); return true; }
+        @Override
+        public void draw(Graphics g) {
+            if (cardView == null) return;
+            float h = getHeight();
+            float w = h / FCardPanel.ASPECT_RATIO;
+            float xPos = (getWidth() - w) / 2;
+            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top);
+        }
+    }
+
+    private static class enemyAvatarBufferedImage extends FBufferedImage {
+        public enemyAvatarBufferedImage() { super(120, 120); }
+        @Override
+        protected void draw(Graphics g, float w, float h) {
+            TextureRegion region = FSkin.getAvatars().get(90001); // Read direct key pointer address
+            if (region != null) {
+                g.drawImage(region, 0, 0, w, h);
+            }
+        }
+    }
 
     private DuelScene() {
     }
@@ -97,6 +146,10 @@ public class DuelScene extends ForgeScene {
 
     public boolean hasCallbackExit() {
         return callbackExit;
+    }
+
+    public EnemySprite getEnemy() {
+        return enemy;
     }
 
     public void GameEnd() {
@@ -149,6 +202,9 @@ public class DuelScene extends ForgeScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        List<PaperCard> modifierLosses = winner || eventData != null ? Collections.emptyList() : loseModifierCards();
+        if (!winner && eventData == null)
+            Current.player().loseModifierMaxLife();
         String enemyName = enemy.getName();
         String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
@@ -160,14 +216,14 @@ public class DuelScene extends ForgeScene {
 
         // No popups needed, preserve original behavior
         if (!hasAnteResults && !isBossLoss) {
-            afterGameEnd(enemyName, finalWinner);
+            afterGameEnd(enemyName, finalWinner, modifierLosses);
             return;
         }
 
         // Build popup chain: ante results -> boss dialogue -> exit
         callbackExit = true;
         Runnable exitChain = () -> {
-            afterGameEnd(enemyName, finalWinner);
+            afterGameEnd(enemyName, finalWinner, modifierLosses);
             exitDuelScene();
         };
 
@@ -175,13 +231,13 @@ public class DuelScene extends ForgeScene {
         if (isBossLoss) {
             afterAnte = () -> {
                 final FBufferedImage fb = getFBEnemyAvatar();
-                String bossInsultMsg = insult != null ? insult
-                        : Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44));
-                bossDialogue = createFOption(bossInsultMsg,
-                        enemyName, fb, () -> {
-                            exitChain.run();
-                            fb.dispose();
-                        });
+                int randomKey = Aggregates.randomInt(1, 44);
+                String lookupKey = insultKeysMap.get(randomKey);
+
+                String bossInsultMsg = insult != null ? insult : Forge.getLocalizer().getMessage(lookupKey);
+                bossDialogue = createFOption(bossInsultMsg, enemy.getDisplayName(), fb, () -> {
+                    exitChain.run();
+                });
                 FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
             };
         } else {
@@ -195,13 +251,22 @@ public class DuelScene extends ForgeScene {
         }
     }
 
+    /** Takes the cards the run's modifiers cost for losing this fight out of the collection. */
+    private static List<PaperCard> loseModifierCards() {
+        List<PaperCard> lost = new ArrayList<>();
+        for (ModifierData modifier : Current.player().getActiveModifiers())
+            lost.addAll(modifier.lostCards(Current.player().getSelectedDeck()));
+        for (PaperCard card : lost)
+            Current.player().removeLostCardFromPools(card);
+        return lost;
+    }
+
     Runnable endRunnable = null;
 
-    void afterGameEnd(String enemyName, boolean winner) {
+    void afterGameEnd(String enemyName, boolean winner, List<PaperCard> lost) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
             GameHUD.getInstance().updateBGM();
-            dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
             Forge.clearScreenStack();
@@ -212,18 +277,42 @@ public class DuelScene extends ForgeScene {
             if (last instanceof IAfterMatch) {
                 ((IAfterMatch) last).setWinner(winner, isArena);
             }
+            if (!lost.isEmpty()) {
+                Array<Reward> rewards = new Array<>();
+                for (PaperCard card : lost)
+                    rewards.add(new Reward(card));
+                RewardScene.instance().loadRewards(rewards, RewardScene.Type.Lost, null);
+                Forge.switchScene(RewardScene.instance());
+            }
         });
     }
 
     public void exitDuelScene() {
-        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
+        TransitionScreen transitionScreen = new TransitionScreen(endRunnable, ScreenUtil.getInstance().getLastScreenTexture(), false, false);
+        transitionScreen.afterMatch = !isArena;
+        transitionScreen.afterEvent = eventData != null;
+        Forge.setTransitionScreen(transitionScreen);
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
         return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, result -> {
             if (runnable != null)
                 runnable.run();
-        });
+        }){
+            // Override FOptionPane keydown so it will not soft lock..
+            @Override
+            public boolean keyDown(final int keyCode) {
+                switch (keyCode) {
+                    case Input.Keys.ESCAPE:
+                    case Input.Keys.BACK:
+                        FButton button = this.getButton(0);
+                        if (button != null)
+                            button.trigger();
+                        return true;
+                }
+                return super.keyDown(keyCode);
+            }
+        };
     }
 
     private void showAnteResults(List<PaperCard> wonCards, List<PaperCard> lostCards, Runnable onDone) {
@@ -243,28 +332,11 @@ public class DuelScene extends ForgeScene {
     }
 
     private void showAnteCardPopup(String title, PaperCard card, boolean won, Runnable onDone) {
+        Localizer localizer = Forge.getLocalizer();
         CardView cardView = CardView.getCardForUi(card);
 
-        FDisplayObject cardDisplay = new FDisplayObject() {
-            @Override
-            public boolean tap(float x, float y, int count) {
-                CardZoom.show(cardView);
-                return true;
-            }
-            @Override
-            public boolean longPress(float x, float y) {
-                CardZoom.show(cardView);
-                return true;
-            }
-            @Override
-            public void draw(Graphics g) {
-                float h = getHeight();
-                float w = h / FCardPanel.ASPECT_RATIO;
-                float xPos = (getWidth() - w) / 2;
-                CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
-            }
-        };
-        cardDisplay.setHeight(Forge.getScreenHeight() / 3);
+        cardDisplay.setCard(cardView);
+        cardDisplay.setHeight(Forge.getScreenHeight() / 3f);
 
         int ownedCount = Current.player().getCollectionCards(true).count(card);
         String ownedInfo = won
@@ -272,13 +344,14 @@ public class DuelScene extends ForgeScene {
                 : (ownedCount > 0 ? " (Remaining: " + ownedCount + ")" : "");
         String message = card.getName() + ownedInfo;
         List<String> buttons;
+
         if (won && eventData == null) {
             int sellPrice = Current.player().cardSellPrice(card);
             buttons = sellPrice > 0
-                    ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), "Auto-Sell (" + sellPrice + " gold)")
-                    : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+                    ? ImmutableList.of(localizer.getMessage("lblOK"), "Auto-Sell (" + sellPrice + " gold)")
+                    : ImmutableList.of(localizer.getMessage("lblOK"));
         } else {
-            buttons = ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+            buttons = ImmutableList.of(localizer.getMessage("lblOK"));
         }
 
         FOptionPane popup = new FOptionPane(message, null, title, null, cardDisplay, buttons, 0, result -> {
@@ -304,24 +377,104 @@ public class DuelScene extends ForgeScene {
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
             startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
+            if (data.startBattleScript != null)
+                player.addStartGameScript(Arrays.asList(data.startBattleScript));
             extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
         player.addExtraCardsInCommandZone(startCardsInCommandZone);
         if (lifeMod != 0)
             player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
-        player.setStartingHand(player.getStartingHand() + changeStartCards);
+        player.setStartingHand(Math.max(0, player.getStartingHand() + changeStartCards));
         player.setManaShards((player.getManaShards() + extraManaShards));
         player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
     }
 
-    public void setDungeonEffect(EffectData E) {
-        dungeonEffect = E;
+    /** The enemy's own opt-outs are applied when the duel starts, so callers pass only the place's layers and opt-out. */
+    public void setEffectLayers(EffectData biomeEffect, EffectData dungeonEffect, boolean ignoreGlobalEffect) {
+        this.biomeEffect = biomeEffect;
+        this.dungeonEffect = dungeonEffect;
+        this.ignoreGlobalEffect = ignoreGlobalEffect;
+    }
+
+    private static void addEffect(Array<EffectData> ownSide, Array<EffectData> otherSide, EffectData effect) {
+        if (effect == null)
+            return;
+        ownSide.add(effect);
+        if (effect.opponent != null)
+            otherSide.add(effect.opponent);
+    }
+
+    /** True while enemy decks are being generated in the background (Forge.switchScene must keep the VS screen up). */
+    public boolean isGeneratingDecks() {
+        return pregenInFlight;
+    }
+
+    private boolean needsEnemyDeckGeneration() {
+        if (chaosBattle) return false;
+        //Sealed events build an opponent's deck the first time it is faced, see AdventureEventData.generateOpponentDeck.
+        if (eventData != null && !arenaBattleChallenge) return eventData.needsOpponentDeck(eventData.nextOpponent);
+        return arenaBattleChallenge || (eventData == null && !enemy.getData().copyPlayerDeck);
+    }
+
+    private Deck generateEnemyDeck(EnemyData e) {
+        if (arenaBattleChallenge) {
+            if (Config.instance().getConfigData().enableGeneticAI)
+                return Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
+            return e.generateDeck(Current.player().isFantasyMode(), false);
+        }
+        boolean useGeneticAI = Config.instance().getConfigData().enableGeneticAI
+                && (Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
+        return e.generateDeck(Current.player().isFantasyMode(), useGeneticAI);
+    }
+
+    private void startDeckPregeneration() {
+        final int token = ++pregenToken;
+        pregenInFlight = true;
+        new Thread(() -> {
+            List<Deck> decks = new ArrayList<>();
+            try {
+                if (eventData != null && !arenaBattleChallenge) {
+                    //The opponent's deck is stored on the event participant, there is nothing to hand back in the list.
+                    eventData.generateOpponentDeck(eventData.nextOpponent);
+                } else {
+                    EnemyData e = enemy.getData();
+                    for (int i = 0; i < 9 && e != null; i++) {
+                        decks.add(!arenaBattleChallenge && e.copyPlayerDeck ? null : generateEnemyDeck(e));
+                        e = e.nextEnemy;
+                    }
+                }
+            } catch (Throwable t) {
+                t.printStackTrace();
+                decks = new ArrayList<>(); // empty: enter() falls back to inline generation
+            }
+            final List<Deck> result = decks;
+            Gdx.app.postRunnable(() -> {
+                if (token != pregenToken) return; // scene was left while generating
+                pregenDecks = result;
+                enter();
+            });
+        }, "AdventureDeckGen").start();
+    }
+
+    private Deck pregenDeck(List<Deck> list, int i) {
+        return list != null && i < list.size() ? list.get(i) : null;
     }
 
     @Override
     public void enter() {
+        Adventure.getInstance().renderTransitionScreen = false;
+        Localizer localizer = Forge.getLocalizer();
         SoundSystem.instance.stopBackgroundMusic();
+
+        if (pregenDecks == null && needsEnemyDeckGeneration()) {
+            startDeckPregeneration();
+            return; // VS screen stays up; we re-enter when decks are ready
+        }
+        final boolean resumedAfterPregen = pregenDecks != null;
+        final List<Deck> pregen = pregenDecks;
+        pregenDecks = null;
+        pregenInFlight = false;
         GameType mainGameType;
         boolean isDeckMissing = false;
         String isDeckMissingMsg = "";
@@ -338,7 +491,6 @@ public class DuelScene extends ForgeScene {
 
         List<RegisteredPlayer> players = new ArrayList<>();
 
-        applyAdventureDeckRules(mainGameType.getDeckFormat());
         int playerCount = 1;
         EnemyData currentEnemy = enemy.getData();
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
@@ -346,6 +498,43 @@ public class DuelScene extends ForgeScene {
             currentEnemy = currentEnemy.nextEnemy;
         }
 
+        Array<EffectData> playerEffects = new Array<>();
+        Array<EffectData> oppEffects = new Array<>();
+
+        if (eventData == null || eventData.eventRules.allowsItems) {
+            //Collect and add items effects first.
+            for (Long id : advPlayer.getEquippedItems()) {
+                ItemData item = Current.player().getEquippedItem(id);
+                if (item != null && item.effect != null) {
+                    playerEffects.add(item.effect);
+                    if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+                } else {
+                    System.err.printf("Item %s not found.%n", id);
+                }
+            }
+        }
+        if (eventData == null || eventData.eventRules.allowsBlessings) {
+            //Collect and add player blessings.
+            if (advPlayer.getBlessing() != null) {
+                playerEffects.add(advPlayer.getBlessing());
+                if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
+            }
+        }
+        //Every layer is written for the enemies, as dungeon effects always were, so its opponent block goes to the player.
+        if (!ignoreGlobalEffect && !enemy.ignoreGlobalEffect)
+            addEffect(oppEffects, playerEffects, Config.instance().getConfigData().globalEffect);
+        if (eventData == null) {
+            for (ModifierData modifier : advPlayer.getActiveModifiers())
+                addEffect(oppEffects, playerEffects, modifier.effect);
+        }
+        if (!enemy.ignoreBiomeEffect)
+            addEffect(oppEffects, playerEffects, biomeEffect);
+        if (!enemy.ignoreDungeonEffect)
+            addEffect(oppEffects, playerEffects, dungeonEffect);
+        if (eventData == null || eventData.eventRules.allowsBlessings)
+            addEffect(oppEffects, playerEffects, enemy.effect);
+
+        applyAdventureDeckRules(mainGameType.getDeckFormat(), allowsIllegalCommander(playerEffects));
         humanPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
         FSkin.getAvatars().put(playerAvatarKey, advPlayer.avatar());
@@ -355,9 +544,6 @@ public class DuelScene extends ForgeScene {
         humanPlayer.setStartingLife(eventData != null ? eventData.eventRules.startingLife : advPlayer.getLife());
         if (eventData == null || eventData.eventRules.allowsShards)
             humanPlayer.setManaShards(advPlayer.getShards());
-
-        Array<EffectData> playerEffects = new Array<>();
-        Array<EffectData> oppEffects = new Array<>();
 
         Map<DeckProxy, Pair<List<String>, List<String>>> deckProxyMapMap = null;
         DeckProxy deckProxy = null;
@@ -370,39 +556,6 @@ public class DuelScene extends ForgeScene {
                 playerCards.add(QuestUtil.readExtraCard(s));
             }
             humanPlayer.addExtraCardsOnBattlefield(playerCards);
-        }
-
-        if (eventData == null || eventData.eventRules.allowsItems) {
-            //Collect and add items effects first.
-            for (Long id : advPlayer.getEquippedItems()) {
-                ItemData item = Current.player().getEquippedItem(id);
-                if (item != null && item.effect != null) {
-                    playerEffects.add(item.effect);
-                    if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
-                } else {
-                    System.err.printf("Item %s not found.", id);
-                }
-            }
-        }
-        if (eventData == null || eventData.eventRules.allowsBlessings) {
-            //Collect and add player blessings.
-            if (advPlayer.getBlessing() != null) {
-                playerEffects.add(advPlayer.getBlessing());
-                if (advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
-            }
-
-            //Collect and add enemy effects (same as blessings but for individual enemies).
-            if (enemy.effect != null) {
-                oppEffects.add(enemy.effect);
-                if (enemy.effect.opponent != null)
-                    playerEffects.add(enemy.effect.opponent);
-            }
-        }
-        //Collect and add dungeon-wide effects.
-        if (dungeonEffect != null) {
-            oppEffects.add(dungeonEffect);
-            if (dungeonEffect.opponent != null)
-                playerEffects.add(dungeonEffect.opponent);
         }
 
         addEffects(humanPlayer, playerEffects);
@@ -423,28 +576,33 @@ public class DuelScene extends ForgeScene {
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
             } else if (this.arenaBattleChallenge) {
-                if (Config.instance().getConfigData().enableGeneticAI) {
-                    deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
-                } else {
-                    deck = currentEnemy.generateDeck(Current.player().isFantasyMode(), false);
-                }
+                deck = pregenDeck(pregen, i);
+                if (deck == null) deck = generateEnemyDeck(currentEnemy);
             } else if (this.eventData != null) {
                 deck = eventData.nextOpponent.getDeck();
             } else {
-                boolean useGeneticAI = Config.instance().getConfigData().enableGeneticAI && (Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), useGeneticAI);
+                if (currentEnemy.copyPlayerDeck) {
+                    deck = this.playerDeck;
+                } else {
+                    deck = pregenDeck(pregen, i);
+                    if (deck == null) deck = generateEnemyDeck(currentEnemy);
+                }
             }
             if (deck == null) {
                 isDeckMissing = true;
                 boolean canUseGeneticAI = Config.instance().getConfigData().enableGeneticAI;
-                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? (canUseGeneticAI ? "Genetic AI deck will be used." : "Player deck will be used.") : "Player deck will be used.");
+                isDeckMissingMsg = localizer.getMessage("advDeckMissingForEnemy", currentEnemy.getDisplayName())
+                        + (this.eventData == null ? (canUseGeneticAI ? localizer.getMessage("advGeneticAiDeckWillBeUsed") : localizer.getMessage("advPlayerDeckWillBeUsed")) : localizer.getMessage("advPlayerDeckWillBeUsed"));
                 System.err.println(isDeckMissingMsg);
                 deck = this.eventData == null && canUseGeneticAI ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
+            //A copy of the player's deck keeps the player's commander, already checked by applyAdventureDeckRules.
+            if (deck != this.playerDeck && mainGameType.getDeckFormat().hasCommander() && !allowsIllegalCommander(oppEffects))
+                deck = withoutIllegalCommanders(deck, mainGameType.getDeckFormat());
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
-            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
-            enemyPlayer.setName(enemy.getName()); //Override name if defined in the map.(only supported for 1 enemy atm)
+            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai, bossBattle && eventData == null));
+            enemyPlayer.setName(enemy.getDisplayName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
             FSkin.getAvatars().put(enemyAvatarKey + i, enemyAvatar);
@@ -512,22 +670,28 @@ public class DuelScene extends ForgeScene {
         rules.setWarnAboutAICards(false);
 
         //hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
+        final boolean showIntro = chaosBattle || isDeckMissing || enemy.getData().boss
+            || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        MatchController.setIntroShowing(showIntro);
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
+            final Runnable introDone = () -> MatchController.setIntroShowing(false);
             String Intro = enemy.getBossIntro();
-            if (Intro != null){
-                bossDialogue = createFOption((Intro), enemy.getName(), fb, fb::dispose);
-                }
-                else {
-                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
-                enemy.getName(), fb, fb::dispose);
-                }
+            if (Intro != null) {
+                bossDialogue = createFOption((Intro), enemy.getDisplayName(), fb, introDone);
+            } else {
+                int randomKey = Aggregates.randomInt(1, 35);
+                String lookupKey = introKeysMap.get(randomKey);
+
+                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : localizer.getMessage(lookupKey),
+                        enemy.getDisplayName(), fb, introDone);
+            }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-            bossDialogue.show())), false, true);
+                    bossDialogue.show())), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }
@@ -541,6 +705,8 @@ public class DuelScene extends ForgeScene {
         }
         super.enter();
         matchOverlay.show();
+        if (resumedAfterPregen)
+            Forge.clearTransitionScreen(true); // Forge.switchScene skipped this while we were generating
     }
 
     private static final String PLACEHOLDER_MAIN = "Wastes";
@@ -548,7 +714,30 @@ public class DuelScene extends ForgeScene {
     private static final String PLACEHOLDER_ATTRACTION = "Coin-Operated Pony";
     private static final String PLACEHOLDER_CONTRAPTION = "Automatic Fidget Spinner";
 
-    private void applyAdventureDeckRules(DeckFormat format) {
+    private static boolean allowsIllegalCommander(Array<EffectData> effects) {
+        for (EffectData effect : effects) {
+            if (effect.allowIllegalCommander)
+                return true;
+        }
+        return false;
+    }
+
+    private static Deck withoutIllegalCommanders(Deck deck, DeckFormat format) {
+        List<PaperCard> illegal = new ArrayList<>();
+        for (PaperCard commander : deck.getCommanders()) {
+            if (!format.isLegalCommander(commander.getRules()))
+                illegal.add(commander);
+        }
+        if (illegal.isEmpty())
+            return deck;
+        //Edit a copy, because the deck can be one that is reused.
+        Deck copy = new Deck(deck);
+        copy.get(DeckSection.Commander).removeAllFlat(illegal);
+        copy.getMain().add(illegal);
+        return copy;
+    }
+
+    private void applyAdventureDeckRules(DeckFormat format, boolean allowIllegalCommander) {
         if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_MODE_ENABLED)
                 && !FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.ENFORCE_DECK_LEGALITY))
             return;
@@ -556,8 +745,11 @@ public class DuelScene extends ForgeScene {
         //Can't just keep the player from entering a battle if their deck is invalid. So instead we'll just edit their deck.
         CardPool mainSection = playerDeck.getMain(), attractions = playerDeck.get(DeckSection.Attractions), contraptions = playerDeck.get(DeckSection.Contraptions);
 
+        if (eventData == null)
+            removeCardsModifiersDisallow();
+
         if(format.hasCommander()) {
-            applyAdventureCommandZoneRules(playerDeck, format);
+            applyAdventureCommandZoneRules(playerDeck, format, allowIllegalCommander);
         }
 
         removeExcessCopies(mainSection, format);
@@ -573,7 +765,10 @@ public class DuelScene extends ForgeScene {
             //If they have a partner commander, it counts toward the 99.
             int commandExtras = Math.max(0, playerDeck.get(DeckSection.Commander).countAll() - 1);
             mainSize += commandExtras;
+            maxDeckSize = applyCommanderSizeRule(playerDeck.getCommanders(), maxDeckSize);
         }
+        if (eventData == null && Current.player().hasModifierRule(modifier -> modifier.noMaxDeckSize))
+            maxDeckSize = Integer.MAX_VALUE;
 
         int excessCards = mainSize - maxDeckSize;
         if (excessCards > 0) {
@@ -597,6 +792,15 @@ public class DuelScene extends ForgeScene {
         }
     }
 
+    /** The rules after this replace a removed commander and fill the deck up to its minimum size. */
+    private void removeCardsModifiersDisallow() {
+        for (DeckSection section : List.of(DeckSection.Main, DeckSection.Commander)) {
+            CardPool pool = playerDeck.get(section);
+            if (pool != null)
+                pool.retainIf(Current.player()::modifiersAllowCard);
+        }
+    }
+
     private static void removeExcessCopies(CardPool section, DeckFormat format) {
         if(section == null)
             return;
@@ -617,31 +821,60 @@ public class DuelScene extends ForgeScene {
     }
 
     private static List<PaperCard> getItemsToRemove(CardPool section, String cardName, int copies) {
-        return section.toFlatList().stream()
-                .filter(e -> e.getCardName().equals(cardName))
-                .collect(StreamUtil.random(copies));
+        List<PaperCard> matchedList = new ArrayList<>();
+        List<PaperCard> flatList = section.toFlatList();
+
+        for (int i = 0; i < flatList.size(); i++) {
+            PaperCard card = flatList.get(i);
+            if (card != null && card.getCardName().equals(cardName)) {
+                matchedList.add(card);
+            }
+        }
+
+        Collections.shuffle(matchedList);
+        if (matchedList.size() > copies) {
+            return matchedList.subList(0, copies);
+        }
+        return matchedList;
     }
 
-    private static void applyAdventureCommandZoneRules(Deck playerDeck, DeckFormat format) {
+    //Applies DeckRule:Size:AdjustMax$ from any commander that has one (e.g. Whtz, the Bibliophile).
+    private static int applyCommanderSizeRule(List<PaperCard> commanders, int maxDeckSize) {
+        for(PaperCard commander : commanders) {
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(!(rule instanceof DeckRuleSize) || !rule.isActiveFor(DeckSection.Commander))
+                    continue;
+                DeckRuleSize sizeRule = (DeckRuleSize) rule;
+                if(sizeRule.removesMaxDeckSize())
+                    maxDeckSize = Integer.MAX_VALUE;
+                else if(maxDeckSize != Integer.MAX_VALUE)
+                    maxDeckSize += sizeRule.getMaxDelta();
+            }
+        }
+        return maxDeckSize;
+    }
+
+    private static void applyAdventureCommandZoneRules(Deck playerDeck, DeckFormat format, boolean allowIllegalCommander) {
         CardPool commandPool = playerDeck.getOrCreate(DeckSection.Commander);
 
         //1. Validate command section.
         List<PaperCard> removals = new ArrayList<>();
         List<PaperCard> commanders = playerDeck.getCommanders(); //ordered flat list
+        boolean enforceLegality = !allowIllegalCommander && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.ENFORCE_DECK_LEGALITY);
         if (commanders.size() > 2) {
             removals.addAll(commanders.subList(2, commanders.size()));
             commanders = commanders.subList(0, 2);
         }
         if (!commanders.isEmpty()) {
             PaperCard mainCommander = commanders.get(0);
-            if (!format.isLegalCommander(mainCommander.getRules()))
+            if (!format.isAllowedCommander(mainCommander.getRules(), enforceLegality))
                 removals.add(mainCommander);
             if (commanders.size() > 1) {
                 PaperCard partnerCommander = commanders.get(1);
                 if (removals.contains(mainCommander)) {
-                    if (!format.isLegalCommander(partnerCommander.getRules()))
+                    if (!format.isAllowedCommander(partnerCommander.getRules(), enforceLegality))
                         removals.add(partnerCommander); //Main is invalid but partner is valid.
-                } else if (!mainCommander.getRules().canBePartnerCommanders(partnerCommander.getRules()))
+                } else if (!format.isAllowedPartnership(playerDeck, mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
                     removals.add(partnerCommander); //Invalid partnership.
             }
         }
@@ -672,12 +905,20 @@ public class DuelScene extends ForgeScene {
         //4. Filter for color identity.
         byte cmdCI = 0;
         int wildColors = 0; //For Prismatic Piper and friends.
+        List<DeckRuleColorIdentity> ciRules = new ArrayList<>();
         for(PaperCard commander : playerDeck.getCommanders()) {
             cmdCI |= commander.getRules().getColorIdentity().getColor();
             wildColors += commander.getRules().getAddsWildCardColor() ? 1 : 0;
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander))
+                    ciRules.add((DeckRuleColorIdentity) rule);
+            }
         }
         for(Map.Entry<PaperCard, Integer> e : mainPool) {
             PaperCard card = e.getKey();
+            if(DeckFormat.allowsOffColorIdentity(ciRules, card.getRules())
+                    || DeckFormat.approvesAdditionalColor(ciRules, card.getRules(), cmdCI))
+                continue; //Exempted or covered by the commander's DeckRule:ColorIdentity.
             ColorSet missingColors = card.getRules().getColorIdentity().getMissingColors(cmdCI);
             if (missingColors.countColors() > 0) {
                 if (missingColors.countColors() <= wildColors) {
@@ -695,6 +936,15 @@ public class DuelScene extends ForgeScene {
         return MatchController.getView();
     }
 
+    @Override
+    public boolean leave() {
+        pregenToken++;
+        pregenInFlight = false;
+        pregenDecks = null;
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
+    }
+
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
         initDuels(playerSprite, enemySprite, false, null);
     }
@@ -702,8 +952,12 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena, AdventureEventData eventData) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        //Discard the previous opponent's cached portrait before the next duel.
+        enemyAvatar.clear();
         this.isArena = isArena;
         this.eventData = eventData;
+        //Each caller sets the layers of its own place after this call.
+        setEffectLayers(null, null, false);
         if (eventData != null && eventData.eventRules == null)
             eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
         this.arenaBattleChallenge = isArena && Current.player().isHardorInsaneDifficulty();
@@ -716,7 +970,12 @@ public class DuelScene extends ForgeScene {
         this.playerExtras.clear();
     }
 
-    private String selectAI(String ai) { //Decide opponent AI.
+    /**
+     * Decide the opponent's AI profile. An enemy that names a profile in its data gets that one. Otherwise bosses
+     * (and the minions that fight next to them) always use the hardest profile, whatever the player has chosen for
+     * regular games, and everybody else follows the user's AI setting.
+     */
+    private String selectAI(String ai, boolean boss) {
         String AI = ""; //Use user settings if it's null.
         if (ai != null) {
             AI = switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
@@ -725,19 +984,18 @@ public class DuelScene extends ForgeScene {
                 case "reckless" -> "Reckless";
                 case "cautious" -> "Cautious";
                 case "experimental" -> "Experimental";
+                case "hard" -> "Hard";
+                case "hardest" -> "Hardest";
                 default -> ""; //User settings.
             };
+        }
+        if (AI.isEmpty() && boss) {
+            AI = "Hardest";
         }
         return AI;
     }
 
     private FBufferedImage getFBEnemyAvatar() {
-        return new FBufferedImage(120, 120) {
-            @Override
-            protected void draw(Graphics g, float w, float h) {
-                if (FSkin.getAvatars().get(enemyAvatarKey) != null)
-                    g.drawImage(FSkin.getAvatars().get(enemyAvatarKey), 0, 0, w, h);
-            }
-        };
+        return enemyAvatar;
     }
 }

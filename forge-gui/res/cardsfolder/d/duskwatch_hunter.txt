@@ -1,0 +1,9 @@
+Name:Duskwatch Hunter
+ManaCost:2 BG
+Types:Creature Wolf
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Permanent.token | Description$ This creature can't be blocked by tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:This creature can't be blocked by tokens.\nWhen this creature enters, put a +1/+1 counter on target creature.

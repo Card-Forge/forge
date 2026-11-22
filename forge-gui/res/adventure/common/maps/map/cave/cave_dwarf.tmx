@@ -141,8 +141,9 @@
     <property name="dialog">[
   {
     &quot;text&quot;:&quot;The inscription reads: Don't enter, dead inside&quot;,
+    &quot;loctext&quot;: &quot;adv.cave_cave_dwarf.84.d.n0.text&quot;,
     &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Leave&quot; }
+      { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; }
 ]
 }
 ]</property>

@@ -10,10 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -33,9 +37,11 @@ import forge.adventure.data.DialogData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.UIScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -46,6 +52,7 @@ import forge.adventure.world.WorldSave;
 import forge.assets.FBufferedImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinImage;
+import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -55,6 +62,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.CoverScreen;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +83,12 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance = 1.5f;
     public static float minimumScrollDistance = 0.3f;
+    private final Vector2 keyboardInput = new Vector2();
+    private final Vector2 controllerInput = new Vector2();
+    private final Vector2 touchInput = new Vector2();
+    protected final Vector2 touchKnobInput = new Vector2();
 
+    private static final String SCROLLING_TEXT = "scrollingText";
     private String extraAnnouncement = "";
 
     protected final Dialog dialog;
@@ -83,6 +96,12 @@ public abstract class GameStage extends Stage {
     protected boolean dialogOnlyInput;
     protected final Array<TextraButton> dialogButtonMap = new Array<>();
     TextraButton selectedKey;
+    private final Vector2 inputPriorityDir = new Vector2();
+    private final Vector2 touchConversionVec = new Vector2();
+    private final Vector2 touchDiffVec = new Vector2();
+    private final Vector2 collisionAdjX = new Vector2();
+    private final Vector2 collisionAdjY = new Vector2();
+    private final Rectangle collisionBounds = new Rectangle();
 
     public Dialog getDialog() {
         return dialog;
@@ -130,15 +149,21 @@ public abstract class GameStage extends Stage {
     }
 
     public void effectDialog(EffectData effectData) {
+        effectDialog(effectData.getIntro(Forge.getLocalizer().getMessage("lblEffectDialogDescription")), effectData.getEnemySideDescription(), null);
+    }
+
+    /** @param details the effect text, starting with the header that says which side gets it */
+    public void effectDialog(String intro, String details, Runnable onClose) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
-        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        TextraButton ok = Controls.newTextButton("OK", () -> {
+            hideDialog();
+            if (onClose != null)
+                onClose.run();
+        });
         ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" +
-                Forge.getLocalizer().getMessage("lblEffectDialogDescription") + "{ENDGRADIENT}\n" +
-                Forge.getLocalizer().getMessage("lblEffectDataHeader") + "\n" + effectData.getDescription());
-        L.setWrap(true);
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" + intro + "{ENDGRADIENT}\n" + details);
         L.setTypingListener(new TypingAdapter() {
             @Override
             public void end() {
@@ -153,9 +178,127 @@ public abstract class GameStage extends Stage {
             }
         });
         dialog.getButtonTable().add(ok).width(240f);
-        dialog.getContentTable().add(L).width(250f);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         showDialog();
+    }
+
+    /** Adds the dialog's text last, scrolling with a more-arrow when the rest of the dialog leaves too little room. */
+    public void addScrollingText(TypingLabel label, float width) {
+        label.setWrap(true);
+        label.setWidth(width);
+        label.layout();
+        float room = GameHUD.getInstance().getHeight() - dialog.getPrefHeight() - 30;
+        boolean overflows = label.getPrefHeight() > room;
+        Table text = new Table();
+        if (overflows) {
+            // 6 gap + 2 scroll bar + 5 right margin keeps the dialog at the same width
+            label.setWidth(width - 13);
+            label.layout();
+            text.add(label).width(width - 13).padRight(6);
+            // typing would carry on below the visible part, so show it all at once
+            label.skipToTheEnd();
+        } else {
+            text.add(label).width(width);
+        }
+        ScrollPane pane = new ScrollPane(text, RewardScene.thinScrollBarStyle());
+        pane.setName(SCROLLING_TEXT);
+        pane.setScrollingDisabled(true, false);
+        pane.setFadeScrollBars(false);
+        // a ScrollPane only takes scroll focus on touch-down, so hovering hands it the mouse wheel
+        pane.addListener(new InputListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                if (pointer == -1)
+                    event.getStage().setScrollFocus(pane);
+            }
+        });
+        Table content = dialog.getContentTable();
+        if (overflows) {
+            int column = content.add(pane).width(width - 5).height(room - 5).padTop(5).padRight(5).getColumn();
+            content.row();
+            for (int i = 0; i < column; i++)
+                content.add();
+            content.add(new RewardScene.MoreArrow(pane)).padTop(4);
+        } else {
+            content.add(pane).width(width).height(label.getPrefHeight()).row();
+        }
+    }
+
+    /** Scrolls the dialog's text half a page, for keys and controllers. @return false when the text has nothing to scroll */
+    protected boolean scrollDialogText(boolean down) {
+        if (!(dialog.findActor(SCROLLING_TEXT) instanceof ScrollPane pane) || pane.getMaxY() <= 0)
+            return false;
+        pane.setScrollY(pane.getScrollY() + (down ? 0.5f : -0.5f) * pane.getHeight());
+        return true;
+    }
+
+    public boolean dialogInput(int keycode) {
+        if (dialogOnlyInput) {
+            if (KeyBinding.Up.isPressed(keycode) && !scrollDialogText(false)) {
+                selectPreviousDialogButton();
+            }
+            if (KeyBinding.Down.isPressed(keycode) && !scrollDialogText(true)) {
+                selectNextDialogButton();
+            }
+            if (KeyBinding.ScrollUp.isPressed(keycode)) {
+                scrollDialogText(false);
+            }
+            if (KeyBinding.ScrollDown.isPressed(keycode)) {
+                scrollDialogText(true);
+            }
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(dialogStage.getKeyboardFocus());
+            }
+        }
+        return true;
+    }
+
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(UIScene.eventTouchDown());
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(UIScene.eventTouchUp());
+            }
+        }, 0.10f);
+    }
+
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
+    }
+
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 
     public void showImageDialog(String message, FBufferedImage fb, Runnable runnable) {
@@ -169,12 +312,10 @@ public abstract class GameStage extends Stage {
             Image image = new Image(tr);
             image.setScaling(Scaling.fit);
             dialog.getContentTable().add(image).height(100);
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         }
         TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
         L.skipToTheEnd();
-        dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
             Timer.schedule(new Timer.Task() {
@@ -188,6 +329,7 @@ public abstract class GameStage extends Stage {
                 runnable.run();
             }
         })).width(240f);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -199,8 +341,11 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
-            Image art = new Image(cardArt.getTextureRegion());
+        if (cardArt != null && cardArt.getTextureRegion() != null) {
+            TextureRegion textureRegion = cardArt.getTextureRegion();
+            if (CardImageRenderer.forgeArt == cardArt)
+                textureRegion.flip(false, true); // fix inverted
+            Image art = new Image(textureRegion);
             art.setWidth(58);
             art.setHeight(46);
             art.setPosition(25, 43);
@@ -224,41 +369,39 @@ public abstract class GameStage extends Stage {
             group.addActor(deckColors);
             group.addActor(deckname);
             dialog.getContentTable().add(group).height(100).width(100).center();
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         } else {
             TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             dialog.getContentTable().add(label).align(Align.center);
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         }
 
         TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
         L.skipToTheEnd();
 
-        dialog.getContentTable().add(L).width(250);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
             if (runnable != null)
                 runnable.run();
         })).width(240);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
     }
 
-
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
-        player.getMovementDirection().x = controller.getAxis(0);
-        player.getMovementDirection().y = -controller.getAxis(1);
-        if (player.getMovementDirection().len() < 0.2) {
-            player.stop();
-        }
+        controllerInput.set(controller.getAxis(0), -controller.getAxis(1));
         return true;
+    }
+
+    public void setTouchKnobInput(float x, float y) {
+        touchKnobInput.set(x, y);
     }
 
     enum PlayerModification {
@@ -267,7 +410,6 @@ public abstract class GameStage extends Stage {
         Fly
 
     }
-
 
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
@@ -306,7 +448,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()), Forge.getGraphics().getBatch());
         WorldSave.getCurrentSave().onLoad(() -> {
             if (player == null)
                 return;
@@ -360,6 +502,7 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
+
         Array<PlayerModification> modsToRemove = new Array<>();
         for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
             mod.setValue(mod.getValue() - delta);
@@ -371,28 +514,57 @@ public abstract class GameStage extends Stage {
             onRemoveEffect(mod);
         }
 
-        if (isPaused()) {
-            return;
-        }
-
-
         if (onEndAction != null) {
-
             onEndAction.run();
             onEndAction = null;
         }
 
-        if (touchX >= 0) {
-            Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-            target.x -= player.getWidth() / 2f;
-            Vector2 diff = target.sub(player.pos());
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls) {
+            keyboardInput.setZero();
+            controllerInput.setZero();
+            touchInput.setZero();
+            touchKnobInput.setZero();
+            player.getMovementDirection().setZero();
+            player.stop();
+        } else {
+            keyboardInput.setZero();
+            if (KeyBinding.Left.isPressed())  keyboardInput.x -= 1;
+            if (KeyBinding.Right.isPressed()) keyboardInput.x += 1;
+            if (KeyBinding.Up.isPressed())    keyboardInput.y += 1;
+            if (KeyBinding.Down.isPressed())  keyboardInput.y -= 1;
 
-            if (diff.len() < 2) {
-                diff.setZero();
-                player.stop();
+            // Input priority: touch > controller > keyboard
+            inputPriorityDir.setZero();
+            if (touchX >= 0 && touchInput.len() > 0.2f) {
+                inputPriorityDir.set(touchInput);
+            } else if (controllerInput.len() > 0.2f) {
+                inputPriorityDir.set(controllerInput);
+            } else if (touchKnobInput.len() > 0.2f) {
+                inputPriorityDir.set(touchKnobInput);
+            } else {
+                inputPriorityDir.set(keyboardInput);
             }
-            player.setMovementDirection(diff);
+
+            if (inputPriorityDir.len() < 0.01f) {
+                player.stop();
+            } else {
+                player.getMovementDirection().set(inputPriorityDir);
+            }
+
+            if (touchX >= 0) {
+                Vector2 target = this.screenToStageCoordinates(touchConversionVec.set(touchX, touchY));
+                target.x -= player.getWidth() / 2f;
+                touchDiffVec.set(target.sub(player.pos()));
+
+                if (touchDiffVec.len() < 2) {
+                    touchInput.setZero();
+                    player.stop();
+                } else {
+                    touchInput.set(touchDiffVec);
+                }
+            }
         }
+
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
@@ -415,38 +587,37 @@ public abstract class GameStage extends Stage {
 
     abstract protected void onActing(float delta);
 
-
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode)) {
-            player.getMovementDirection().x = -1;
+            keyboardInput.x = -1;
         }
         if (KeyBinding.Right.isPressed(keycode)) {
-            player.getMovementDirection().x = +1;
+            keyboardInput.x = +1;
         }
         if (KeyBinding.Up.isPressed(keycode)) {
-            player.getMovementDirection().y = +1;
+            keyboardInput.y = +1;
         }
         if (KeyBinding.Down.isPressed(keycode)) {
-            player.getMovementDirection().y = -1;
+            keyboardInput.y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
         {
             if (TileMapScene.instance().currentMap().isInMap()) {
                 DialogData noQuicksave = new DialogData();
                 DialogData noQuicksaveOK = new DialogData();
-                noQuicksave.text = "Game not saved. Quicksave is only available on the world map.";
-                noQuicksaveOK.name = "OK";
+                noQuicksave.text = Forge.getLocalizer().getMessageorUseDefault("lblQuicksaveOnlyOnWorldMap", "Game not saved. Quicksave is only available on the world map.");
+                noQuicksaveOK.name = Forge.getLocalizer().getMessage("lblOK");
                 noQuicksave.options = new DialogData[]{noQuicksaveOK};
                 MapDialog noQuicksaveDialog = new MapDialog(noQuicksave, MapStage.getInstance(), -1, null);
                 showDialog();
                 noQuicksaveDialog.activate();
             } else {
                 getPlayerSprite().storePos();
-                WorldSave.getCurrentSave().header.createPreview();
+                WorldSave.requestPreview(true); // saved right away, so no stale preview and no cooldown
                 WorldSave.getCurrentSave().quickSave();
             }
         }
@@ -542,6 +713,10 @@ public abstract class GameStage extends Stage {
     public void stop() {
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        touchInput.setZero();
+        touchKnobInput.setZero();
+        keyboardInput.setZero();
+        controllerInput.setZero();
         touchX = -1;
         touchY = -1;
         player.stop();
@@ -579,7 +754,7 @@ public abstract class GameStage extends Stage {
     public void openMenu() {
         if (Forge.advFreezePlayerControls)
             return;
-        WorldSave.getCurrentSave().header.createPreview();
+        WorldSave.requestPreview();
         Forge.switchScene(StartScene.instance());
     }
 
@@ -602,44 +777,52 @@ public abstract class GameStage extends Stage {
     }
 
     public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
-        Vector2 adjDirX = direction.cpy();
-        Vector2 adjDirY = direction.cpy();
+        // populate our local cars in-place via .set() instead of .cpy()
+        collisionAdjX.set(direction);
+        collisionAdjY.set(direction);
         boolean foundX = false;
         boolean foundY = false;
-        while (true) {
 
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {
+        while (true) {
+            collisionBounds.set(boundingRect.x + collisionAdjX.x, boundingRect.y + collisionAdjX.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundX = true;
                 break;
             }
-            if (adjDirX.x == 0)
+            if (collisionAdjX.x == 0)
                 break;
 
-            if (adjDirX.x >= 0)
-                adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
+            if (collisionAdjX.x >= 0)
+                collisionAdjX.x = Math.max(0, collisionAdjX.x - 0.2f);
             else
-                adjDirX.x = Math.min(0, adjDirX.x + 0.2f);
+                collisionAdjX.x = Math.min(0, collisionAdjX.x + 0.2f);
         }
+
         while (true) {
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
+            collisionBounds.set(boundingRect.x + collisionAdjY.x, boundingRect.y + collisionAdjY.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundY = true;
                 break;
             }
-            if (adjDirY.y == 0)
+            if (collisionAdjY.y == 0)
                 break;
 
-            if (adjDirY.y >= 0)
-                adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
+            if (collisionAdjY.y >= 0)
+                collisionAdjY.y = Math.max(0, collisionAdjY.y - 0.2f);
             else
-                adjDirY.y = (Math.min(0, adjDirY.y + 0.2f));
+                collisionAdjY.y = Math.min(0, collisionAdjY.y + 0.2f);
         }
-        if (foundY && foundX)
-            return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
-        else if (foundY)
-            return adjDirY;
-        else if (foundX)
-            return adjDirX;
-        return Vector2.Zero.cpy();
+
+        if (foundY && foundX) {
+            return collisionAdjX.len() > collisionAdjY.len() ? collisionAdjX : collisionAdjY;
+        } else if (foundY) {
+            return collisionAdjY;
+        } else if (foundX) {
+            return collisionAdjX;
+        }
+
+        collisionAdjX.setZero();
+        return collisionAdjX;
     }
 
     protected void teleported(Vector2 position) {
@@ -655,8 +838,10 @@ public abstract class GameStage extends Stage {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
-            getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Death);
-            getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            PlayerSprite playerSprite = getPlayerSprite();
+            playerSprite.setAnimation(CharacterSprite.AnimationTypes.Death);
+            playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            float deathDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -667,9 +852,9 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().loadPOI(poi);
                         WorldSave.getCurrentSave().autoSave();
                         Forge.clearTransitionScreen();
-                    }, Forge.takeScreenshot()))));
+                    }, ScreenUtil.getInstance().takeScreenshot()))));
                 }
-            }, 1f);
+            }, deathDuration);
         }//Spawn shouldn't be null
     }
 
@@ -677,14 +862,16 @@ public abstract class GameStage extends Stage {
         if (!Current.player().hasEquippedItem())
             return;
         Forge.advFreezePlayerControls = true;
-        getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Hit);
-        getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        PlayerSprite playerSprite = getPlayerSprite();
+        playerSprite.setAnimation(CharacterSprite.AnimationTypes.Hit);
+        playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        float hitDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 showImageDialog(Current.generateDefeatMessage(false), getDefeatBadge(), () -> Forge.advFreezePlayerControls = false);
             }
-        }, 1f);
+        }, hitDuration);
     }
 
     private FBufferedImage getDefeatBadge() {

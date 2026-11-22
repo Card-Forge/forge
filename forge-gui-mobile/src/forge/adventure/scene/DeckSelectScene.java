@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -76,18 +77,27 @@ public class DeckSelectScene extends UIScene {
         for (int i = count; i >= 0; i--){
             clearDeckButton(i);
         }
+        clearSelectable();
         layout.clearChildren();
         buttons.clear();
         labels.clear();
     }
 
     private void layoutDeckButtons() {
+        if (isSingleDeck()) {
+            addDeckButton(Current.player().getSelectedDeckIndex());
+            return;
+        }
         for (int i = 0; i < AdventurePlayer.current().getDeckCount(); i++)
             addDeckButton(i);
     }
 
+    private static boolean isSingleDeck() {
+        return Current.player().hasModifierRule(modifier -> modifier.singleDeck);
+    }
+
     private void addDeck(){
-        if (Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
+        if (isSingleDeck() || Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblAddDeck"), Forge.getLocalizer().getMessage("lblMaxDeckCountReached"),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
             return;
@@ -114,6 +124,11 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void promptDelete() {
+        if (Current.player().hasModifierRule(modifier -> modifier.lockDeckCards)) {
+            showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblDeckCardsLocked"),
+                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
+            return;
+        }
         Dialog deleteDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"),
             Forge.getLocalizer().getMessage("lblOK"),
             Forge.getLocalizer().getMessage("lblAbort"), this::clearOrDelete, this::removeDialog);
@@ -125,7 +140,7 @@ public class DeckSelectScene extends UIScene {
      * Clears or deletes the currently selected deck.
      */
     private void clearOrDelete(){
-        if (currentSlot >= AdventurePlayer.MIN_DECK_COUNT){
+        if (currentSlot >= AdventurePlayer.MIN_DECK_COUNT && !isSingleDeck()){
             Current.player().deleteDeck();
         }
         else {
@@ -133,7 +148,7 @@ public class DeckSelectScene extends UIScene {
         }
 
         refreshDeckButtons();
-        select(0);
+        select(isSingleDeck() ? currentSlot : 0);
         removeDialog();
     }
 
@@ -195,8 +210,9 @@ public class DeckSelectScene extends UIScene {
 
         button.setText(Current.player().getDeck(i).getName());
         Label label = Controls.newLabel(name);
-        layout.add(Controls.newLabel(name)).pad(2);
+        layout.add(label).pad(2);
         layout.add(button).fill(true, false).expand(true, false).align(Align.left).expandX().pad(2);
+
         buttons.put(i, button);
         labels.put(i, label);
         addToSelectable(new Selectable(button));
@@ -208,9 +224,15 @@ public class DeckSelectScene extends UIScene {
     public boolean select(int slot) {
         currentSlot = slot;
 
-        for (IntMap.Entry<TextraButton> butt : new IntMap.Entries<TextraButton>(buttons)) {
-            butt.value.setColor(defColor);
+        IntMap.Keys keys = buttons.keys();
+        while (keys.hasNext) {
+            int key = keys.next();
+            TextraButton button = buttons.get(key);
+            if (button != null) {
+                button.setColor(defColor);
+            }
         }
+
         if (buttons.containsKey(slot)) {
             TextraButton button = buttons.get(slot);
             button.setColor(Color.RED);
@@ -238,7 +260,12 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        DeckEditScene editScene = DeckEditScene.getInstance();
+        TextureRegion textureRegion;
+        if (Forge.lastPreview != null)
+            textureRegion = new TextureRegion(Forge.lastPreview);
+        else
+            textureRegion = getUIBackground();
+        DeckEditScene editScene = DeckEditScene.getInstance(textureRegion);
         editScene.loadEvent(null);
         Forge.switchScene(editScene);
     }

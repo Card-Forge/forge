@@ -1,13 +1,15 @@
 package forge.ai;
 
 public enum AiPlayDecision {
+    // ordered from generic to board-specific
+
     // Play decision reasons
     WillPlay,
     MandatoryPlay,
     PlayToEmptyHand,
+    AddBoardPresence,
     ImpactCombat,
     ResponseToStackResolve,
-    AddBoardPresence,
     Removal,
     Tempo,
     CardAdvantage,
@@ -19,29 +21,29 @@ public enum AiPlayDecision {
     StackNotEmpty,
     AnotherTime,
 
-    // Don't play decision reasons
+    // Don't play reasons
     CantPlaySa,
     CantPlayAi,
     CantAfford,
     CantAffordX,
+    TargetingFailed,
+    StopRunawayActivations,
+    CostNotAcceptable,
     DoesntImpactCombat,
     DoesntImpactGame,
-    MissingLogic,
-    MissingNeededCards,
     TimingRestrictions,
     MissingPhaseRestrictions,
-    ConditionsNotMet,
+    MissingLogic,
+    MissingNeededCards,
     NeedsToPlayCriteriaNotMet,
-    StopRunawayActivations,
-    TargetingFailed,
-    CostNotAcceptable,
-    LifeInDanger,
-    WouldDestroyLegend,
-    WouldDestroyOtherPlaneswalker,
-    WouldBecomeZeroToughnessCreature,
-    WouldDestroyWorldEnchantment,
+    ConditionsNotMet,
+    IncreasesLifeInDanger,
     BadEtbEffects,
-    CurseEffects;
+    CurseEffects,
+    WouldBecomeZeroToughnessCreature,
+    WouldDestroyLegend,
+    WouldDestroyWorldEnchantment,
+    HybridSimRejected;
 
     public boolean willingToPlay() {
         return switch (this) {

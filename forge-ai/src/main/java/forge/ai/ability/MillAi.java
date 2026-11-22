@@ -41,14 +41,14 @@ public class MillAi extends SpellAbilityAi {
         }
         if (!sa.isPwAbility()) { // Planeswalker abilities are only activated at sorcery speed
             if ("You".equals(sa.getParam("Defined")) && !(!isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN)
-                    && ph.getNextTurn().equals(ai))) {
+                    && ph.isPlayerNextTurn(ai))) {
                 return false; // only self-mill at opponent EOT
             }
         }
         if (sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) {
             // creatures with a tap cost to mill (e.g. Doorkeeper) should be activated at the opponent's end step
             // because they are also potentially useful for combat
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+            return ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai);
         }
         return !ph.getPhase().isBefore(PhaseType.MAIN2) || sa.hasParam("ActivationPhases")
                 || ComputerUtil.castSpellInMain1(ai, sa);
@@ -183,6 +183,11 @@ public class MillAi extends SpellAbilityAi {
             return SpecialCardAi.TimmerianFiends.consider(player, sa);
         }
 
+        // "you may mill N" of one's own library: not when it would leave next to nothing to draw
+        if ("You".equals(sa.getParam("Defined")) && sa.hasParam("NumCards")) {
+            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            return player.getCardsIn(ZoneType.Library).size() > amount + 6;
+        }
         return true;
     }
 

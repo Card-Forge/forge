@@ -34,7 +34,7 @@ Name=Ajani
 1 Fabled Passage|BLB
 1 Felidar Retreat|ZNR
 1 Felidar Savior|FDN
-1 Fleeting Flight|FDN
+1 Ajani Unrelenting|FRA
 1 Furycalm Snarl|MOC
 1 Generous Gift|BLC
 1 Great Train Heist|OTJ
@@ -42,7 +42,7 @@ Name=Ajani
 1 Idol of Oblivion|BRC
 1 Ironpaw Aspirant|LCI
 1 Jazal Goldmane|BLC
-1 Kindred Boon|LCC
+1 AJani Resolute|FRA
 1 King of the Pride|H1R
 1 Legion Leadership|MH3
 1 Leonin of the Lost Pride|THB
@@ -56,14 +56,13 @@ Name=Ajani
 1 Ajani Vengeant|ALA
 1 Qala, Ajani's Pridemate|J25
 3 Mountain|SNC
-3 Mountain|SNC
-1 Myriad Landscape|NCC
+4 Mountain|SNC
 1 Needleverge Pathway|ZNR
 1 Ocelot Pride|MH3
 1 Patch Up|SNC
 1 Path of Ancestry|MOC
 1 Path to Exile|BLC
-3 Plains|SNC
+4 Plains|SNC
 4 Plains|FDN
 3 Plains|FDN
 1 Prideful Parent|FDN
@@ -86,7 +85,6 @@ Name=Ajani
 1 Swords to Plowshares|BLC
 1 Temple of Triumph|MOC
 1 Thought Vessel|DSC
-1 Three Tree City|BLB
 1 Unbreakable Formation|RNA
 1 Uncivil Unrest|MOC
 1 White Sun's Zenith|MBS

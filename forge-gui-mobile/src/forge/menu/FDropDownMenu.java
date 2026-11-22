@@ -45,8 +45,8 @@ public abstract class FDropDownMenu extends FDropDown {
         //set bounds for each item
         float y = 0;
         for (FMenuItem item : items) {
-            item.setBounds(0, y, width, FMenuItem.HEIGHT);
-            y += FMenuItem.HEIGHT;
+            item.setBounds(0, y, width, item.getItemHeight());
+            y += item.getItemHeight();
         }
 
         return new ScrollBounds(width, y);

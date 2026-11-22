@@ -24,6 +24,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -45,7 +46,19 @@ import java.util.function.Predicate;
  * @version $Id$
  * @since 1.0.15
  */
-public class SpellAbilityCondition extends SpellAbilityVariables {
+public class SpellAbilityCondition extends SpellAbilityVariables implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Condition", "ConditionActivationLimit", "ConditionCheckSVar", "ConditionChosenColor",
+        "ConditionCompare", "ConditionCompare2", "ConditionDefined", "ConditionDefined2",
+        "ConditionFirstCombat", "ConditionGameTypes", "ConditionLifeAmount", "ConditionLifeTotal",
+        "ConditionManaNotSpent", "ConditionManaSpent", "ConditionNoDifferentColors",
+        "ConditionNotPresent", "ConditionOpponentTurn", "ConditionOptionalPaid", "ConditionPhases",
+        "ConditionPlayerContains", "ConditionPlayerDefined", "ConditionPlayerTurn",
+        "ConditionPresent", "ConditionPresent2", "ConditionSVarCompare", "ConditionSorcerySpeed",
+        "ConditionTargetValidTargeting", "ConditionTargetsSingleTarget", "ConditionZone",
+        "OrConditionCheckSVar", "OrOtherConditionSVarCompare",
+    };
+
     // A class for handling SpellAbility Conditions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
@@ -90,6 +103,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
+            }
+            if (value.equals("EnduringStory")) {
+                this.setEnduringStory(true);
             }
             if (value.equals("Kicked")) {
                 this.kicked = true;
@@ -266,6 +282,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isDelirium() && !activator.hasDelirium()) return false;
         if (this.isRevolt() && !activator.hasRevolt()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
+        if (this.isEnduringStory() && !activator.hasEnduringStory()) return false;
 
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
@@ -348,7 +365,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());
@@ -376,7 +393,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());
@@ -443,7 +460,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                     }
                 }
 
-                abSub = sa.getSubAbility();
+                abSub = abSub.getSubAbility();
             }
 
             if (!result) {
@@ -458,7 +475,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             Set<GameObject> targets = new HashSet<>();
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
+            for (TargetChoices tc : matchTgt.getFirstTargetedSpell().getAllTargetChoices()) {
                 targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;

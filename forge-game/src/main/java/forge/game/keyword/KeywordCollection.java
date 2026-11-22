@@ -183,6 +183,9 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
 
     @Override
     public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+        if (map.isEmpty()) {
+            return list;
+        }
         for (KeywordInterface k : getValues()) {
             k.applySpellAbility(list);
         }
@@ -190,6 +193,9 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     }
     @Override
     public List<Trigger> applyTrigger(List<Trigger> list) {
+        if (map.isEmpty()) {
+            return list;
+        }
         for (KeywordInterface k : getValues()) {
             k.applyTrigger(list);
         }
@@ -197,6 +203,9 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     }
     @Override
     public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+        if (map.isEmpty()) {
+            return list;
+        }
         for (KeywordInterface k : getValues()) {
             k.applyReplacementEffect(list);
         }
@@ -204,6 +213,11 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     }
     @Override
     public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+        // most cards carry no keywords, and building the multimap's iterator to discover that
+        // is the bulk of this call's cost
+        if (map.isEmpty()) {
+            return list;
+        }
         for (KeywordInterface k : getValues()) {
             k.applyStaticAbility(list);
         }
@@ -218,7 +232,7 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
         return result;
     }
 
-    public void applyChanges(Iterable<IKeywordsChange> changes) {
+    public void applyChanges(Iterable<? extends IKeywordsChange> changes) {
         for (final IKeywordsChange ck : changes) {
             ck.applyKeywords(this);
         }

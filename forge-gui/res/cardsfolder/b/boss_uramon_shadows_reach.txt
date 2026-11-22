@@ -1,0 +1,9 @@
+Name:Boss Uramon, Shadow's Reach
+ManaCost:3 B
+Types:Legendary Creature Human Rogue
+PT:2/2
+K:Shadow
+S:Mode$ Continuous | Affected$ Ninja.attacking+YouCtrl,Rogue.attacking+YouCtrl | AddKeyword$ Deathtouch | Description$ Attacking Ninjas and Rogues you control have deathtouch.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Ninja.YouCtrl,Rogue.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more Ninjas and/or Rogues you control deal combat damage to a player, create a 1/1 black Rat Rogue creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_rat_rogue
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nAttacking Ninjas and Rogues you control have deathtouch.\nWhenever one or more Ninjas and/or Rogues you control deal combat damage to a player, create a 1/1 black Rat Rogue creature token.

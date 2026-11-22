@@ -1,4 +1,5 @@
-app.version=1.0
+# Marketing version (CFBundleShortVersionString) — keep in sync with the pom.xml versionCode.
+app.version=2.0.14
 app.id=@APP_ID@
 app.mainclass=forge.ios.Main
 app.executable=forge.ios.Main

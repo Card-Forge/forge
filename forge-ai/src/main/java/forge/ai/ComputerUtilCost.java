@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.card.MagicColor;
 import forge.game.GameObject;
+import forge.game.ability.ApiType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -163,6 +165,12 @@ public class ComputerUtilCost {
                             // Better do something than just discard stuff
                             return true;
                         }
+                        // a card that cannot be cast any time soon is worth more as its own ability (Waker of Waves, seven
+                        // mana with three lands); cycling has its own decision
+                        if (sa != null && !sa.isCycling() && source.isInZone(ZoneType.Hand) && !source.isLand()
+                                && source.getCMC() > ai.getLandsInPlay().size() + 1) {
+                            continue;
+                        }
                         return false;
                     }
                     typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
@@ -175,6 +183,10 @@ public class ComputerUtilCost {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
                         return false;
+                    }
+                    if (pref.hasKeyword(Keyword.MADNESS) && ai.getController() instanceof PlayerControllerAi
+                            && !((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.madnessDiscardAllowed(ai, sa)) {
+                        return false; // a madness card is only thrown away inside the madness window
                     }
                     typeList.remove(pref);
                     hand.remove(pref);
@@ -236,7 +248,7 @@ public class ComputerUtilCost {
                 int amount = payLife.getAbilityAmount(sourceAbility);
 
                 // check if there's override for the remainingLife threshold
-                if (sourceAbility != null && sourceAbility.hasParam("AILifeThreshold")) {
+                if (sourceAbility != null && ai.isAI() && sourceAbility.hasParam("AILifeThreshold")) {
                     remainingLife = Integer.parseInt(sourceAbility.getParam("AILifeThreshold"));
                 }
 
@@ -246,6 +258,21 @@ public class ComputerUtilCost {
             }
         }
         return true;
+    }
+
+    /**
+     * The life the AI keeps when an activated ability costs it life: the script's AILifeThreshold, else the default
+     * (what {@link #checkLifeCost} is given for a PayLife cost; Phyrexian mana paid with life has to respect it too).
+     */
+    public static int lifeToKeep(final SpellAbility sa, final int defaultLife) {
+        if (sa != null && sa.hasParam("AILifeThreshold")) {
+            try {
+                return Integer.parseInt(sa.getParam("AILifeThreshold"));
+            } catch (final NumberFormatException e) {
+                return defaultLife;
+            }
+        }
+        return defaultLife;
     }
 
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final SpellAbility sourceAbility, final boolean effect) {
@@ -353,21 +380,29 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
                 if (sac.payCostFromSource()) {
+                    if (ComputerUtil.sacrificePunished(ai, source)) {
+                        return false; // the sacrifice is punished (Bloodroot Apothecary's poison)
+                    }
                     if (!important) {
                         return false;
                     }
                     if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
                     }
+                    // Vampire Hexmage: giving up the source is the point when it frees an impending permanent or the like
+                    if (sourceAbility != null && forge.ai.ability.CountersRemoveAi.worthwhileOwnTarget(ai, sourceAbility) != null) {
+                        continue;
+                    }
                     if (source.isCreature()) {
                         // e.g. Sakura-Tribe Elder
                         final Combat combat = ai.getGame().getCombat();
-                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai) && ComputerUtilCard.evaluateCreature(source) <= 150;
+                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().isPlayerNextTurn(ai) && ComputerUtilCard.evaluateCreature(source) <= 150;
                         final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false)
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
+                        if (creatureInDanger && (!ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)
+                                || preventsCombatDamage(sourceAbility))) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;
@@ -441,6 +476,16 @@ public class ComputerUtilCost {
         return false;
     }
 
+    /** A Fog prevents all combat damage; a bounded PreventDamage shield may not stop trample. */
+    public static boolean preventsCombatDamage(final SpellAbility sa) {
+        for (SpellAbility ability = sa; ability != null; ability = ability.getSubAbility()) {
+            if (ability.getApi() == ApiType.Fog && ability.metConditions()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Check TapType cost.
      *
@@ -458,24 +503,36 @@ public class ComputerUtilCost {
             if (part instanceof CostTapType) {
                 String type = part.getType();
 
-                /*
-                 * Only crew with creatures weaker than vehicle
-                 *
-                 * Possible improvements:
-                 * - block against evasive (flyers, intimidate, etc.)
-                 * - break board stall by racing with evasive vehicle
-                 */
-                if (sa.isCrew()) {
-                    Card vehicle = AnimateAi.becomeAnimated(source, sa);
-                    final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                // "tap any number of creatures with total power N or more" costs (e.g. Crew, Saddle, Teamwork)
+                // have the amount "Any", so check them the same way AiCostDecision pays them
+                if (type.contains("+withTotalPowerGE")) {
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
-                    CardCollection exclude = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa);
-                    exclude = CardLists.filter(exclude, c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue); // exclude creatures >= vehicle
-                    exclude.addAll(alreadyTapped);
-                    CardCollection tappedCrew = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true, Integer.parseInt(totalP), exclude);
-                    if (tappedCrew != null) {
-                        alreadyTapped.addAll(tappedCrew);
+                    CardCollection exclude = new CardCollection();
+                    /*
+                     * Only crew with creatures weaker than vehicle
+                     *
+                     * Possible improvements:
+                     * - block against evasive (flyers, intimidate, etc.)
+                     * - break board stall by racing with evasive vehicle
+                     */
+                    if (sa.isCrew()) {
+                        Card vehicle = AnimateAi.becomeAnimated(source, sa);
+                        final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                        exclude.addAll(CardLists.filter(CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa),
+                                c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue)); // exclude creatures >= vehicle
+                    }
+                    if (alreadyTapped != null) {
+                        exclude.addAll(alreadyTapped);
+                    }
+                    if (sa != null) {
+                        exclude.addAll(sa.getTappedForConvoke());
+                    }
+                    CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, sa.isCrew() || !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
+                    if (tapChoices != null) {
+                        if (alreadyTapped != null) {
+                            alreadyTapped.addAll(tapChoices);
+                        }
                         return true;
                     }
                     return false;
@@ -489,6 +546,9 @@ public class ComputerUtilCost {
                 CardCollection exclude = new CardCollection();
                 if (alreadyTapped != null) {
                     exclude.addAll(alreadyTapped);
+                }
+                if (sa != null) {
+                    exclude.addAll(sa.getTappedForConvoke());
                 }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {
@@ -611,6 +671,17 @@ public class ComputerUtilCost {
                                 extraManaNeeded += wardCost.getTotalMana().getCMC();
                             }
                         }
+                        // the same tax written as a trigger (Unsettled Mariner): counter it unless its controller pays
+                        final Cost tax = targetingTax(tgt, sa.getHostCard().getController());
+                        if (tax != null) {
+                            final SpellAbilityAi topAI = new SpellAbilityAi() {};
+                            if (!topAI.willPayCosts(payer, sa, tax, sa.getHostCard())) {
+                                return false;
+                            }
+                            if (tax.hasManaCost()) {
+                                extraManaNeeded += tax.getTotalMana().getCMC();
+                            }
+                        }
                     }
                 }
             }
@@ -635,6 +706,46 @@ public class ComputerUtilCost {
                 && CostPayment.canPayAdditionalCosts(cost, sa, effect, payer);
     }
 
+    /**
+     * "Whenever it becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its
+     * controller pays {N}" on an opposing permanent that does not use the Ward keyword (Unsettled Mariner, #4054).
+     */
+    private static Cost targetingTax(final Card tgt, final Player attacker) {
+        if (!tgt.isInPlay() || !tgt.getController().isOpponentOf(attacker)) {
+            return null;
+        }
+        Cost total = null;
+        for (final Card c : tgt.getController().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.BecomesTarget || !t.hasParam("Execute") || !t.hasParam("ValidTarget")) {
+                    continue;
+                }
+                final String exec = c.getSVar(t.getParam("Execute"));
+                final java.util.regex.Matcher m = java.util.regex.Pattern.compile("DB\\$ Counter\\b.*UnlessCost\\$ ([^|]+?)\\s*(\\||$)").matcher(exec);
+                if (!m.find()) {
+                    continue;
+                }
+                boolean valid = false;
+                for (final String v : t.getParam("ValidTarget").split(",")) {
+                    if (tgt.isValid(v, c.getController(), c, null)) {
+                        valid = true;
+                        break;
+                    }
+                }
+                if (!valid) {
+                    continue;
+                }
+                try {
+                    final Cost one = new Cost(m.group(1).trim(), false);
+                    total = total == null ? one : total.add(one);
+                } catch (final RuntimeException e) {
+                    // a cost the AI cannot read (X ...): left to the trigger
+                }
+            }
+        }
+        return total;
+    }
+
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
@@ -647,10 +758,9 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
@@ -677,6 +787,10 @@ public class ComputerUtilCost {
         if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
         }
+        // another mode already decided
+        if (root.getApi() == ApiType.Charm && root.getXManaCostPaid() != null) {
+            return root.getXManaCostPaid();
+        }
 
         Integer val = null;
 
@@ -684,7 +798,7 @@ public class ComputerUtilCost {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
             // TODO find a way to consider lower value due to Ward
             if (sa.hasParam("AIXMax")) {
-                sa.setXManaCostPaid(val);
+                root.setXManaCostPaid(val);
                 int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
                 val = Math.min(val, calculated);
             }
@@ -694,12 +808,6 @@ public class ComputerUtilCost {
             // if announce is used as min targets, check what the max possible number would be
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
                 val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa).size());
-            }
-
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 
@@ -732,8 +840,8 @@ public class ComputerUtilCost {
             }
         }
 
-        int x = ObjectUtils.defaultIfNull(val, 0);
-        sa.setXManaCostPaid(x);
+        int x = ObjectUtils.getIfNull(val, 0);
+        root.setXManaCostPaid(x);
         return x;
     }
 

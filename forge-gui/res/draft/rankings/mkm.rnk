@@ -7,11 +7,11 @@
 #6|Ezrim, Agency Chief|R|MKM
 #7|Cryptic Coat|R|MKM
 #8|Hide in Plain Sight|R|MKM
-#9|Baleful Mastery|R|PLIST
+#9|Baleful Mastery|R|PLST
 #10|Doppelgang|R|MKM
 #11|Crashing Footfalls|M|SPG
 #12|Teysa, Opulent Oligarch|R|MKM
-#13|Enlisted Wurm|U|PLIST
+#13|Enlisted Wurm|U|PLST
 #14|Tireless Tracker|M|SPG
 #15|Wojek Investigator|R|MKM
 #16|Aurelia, the Law Above|R|MKM
@@ -24,7 +24,7 @@
 #23|Steamcore Scholar|R|MKM
 #24|Kellan, Inquisitive Prodigy|R|MKM
 #25|Ill-Timed Explosion|R|MKM
-#26|Maverick Thopterist|U|PLIST
+#26|Maverick Thopterist|U|PLST
 #27|Novice Inspector|C|MKM
 #28|Kaya, Spirits' Justice|M|MKM
 #29|Buried in the Garden|U|MKM
@@ -60,7 +60,7 @@
 #59|Coerced to Kill|U|MKM
 #60|Homicide Investigator|R|MKM
 #61|Perimeter Enforcer|U|MKM
-#62|Ranger-Captain of Eos|M|PLIST
+#62|Ranger-Captain of Eos|M|PLST
 #63|Shock|C|MKM
 #64|Sumala Sentry|U|MKM
 #65|Lazav, Wearer of Faces|R|MKM
@@ -80,7 +80,7 @@
 #79|Yarus, Roar of the Old Gods|R|MKM
 #80|Exit Specialist|U|MKM
 #81|Niv-Mizzet, Guildpact|R|MKM
-#82|Hard Evidence|C|PLIST
+#82|Hard Evidence|C|PLST
 #83|Fanatical Strength|C|MKM
 #84|Elegant Parlor|R|MKM
 #85|Galvanize|C|MKM
@@ -111,8 +111,8 @@
 #110|Reasonable Doubt|C|MKM
 #111|On the Job|C|MKM
 #112|The Chase Is On|C|MKM
-#113|Jace, Wielder of Mysteries|R|PLIST
-#114|Leonin Relic-Warder|U|PLIST
+#113|Jace, Wielder of Mysteries|R|PLST
+#114|Leonin Relic-Warder|U|PLST
 #115|Not on My Watch|U|MKM
 #116|Out Cold|C|MKM
 #117|Meddling Youths|U|MKM
@@ -129,8 +129,8 @@
 #128|Haazda Vigilante|C|MKM
 #129|Cold Case Cracker|C|MKM
 #130|Unauthorized Exit|C|MKM
-#131|Krosan Tusker|C|PLIST
-#132|Treacherous Terrain|U|PLIST
+#131|Krosan Tusker|C|PLST
+#132|Treacherous Terrain|U|PLST
 #133|Deduce|C|MKM
 #134|Topiary Panther|C|MKM
 #135|Undercity Sewers|R|MKM
@@ -141,7 +141,7 @@
 #140|Unscrupulous Agent|C|MKM
 #141|Crowd-Control Warden|C|MKM
 #142|Leering Onlooker|U|MKM
-#143|Consign Oblivion|U|PLIST
+#143|Consign Oblivion|U|PLST
 #144|Hotshot Investigators|C|MKM
 #145|Deadly Complication|U|MKM
 #146|Analyze the Pollen|R|MKM
@@ -159,9 +159,9 @@
 #158|Make Your Move|C|MKM
 #159|Murder|C|MKM
 #160|Vengeful Tracker|U|MKM
-#161|Nyx Weaver|U|PLIST
-#162|Putrid Warrior|C|PLIST
-#163|Syr Konrad, the Grim|U|PLIST
+#161|Nyx Weaver|U|PLST
+#162|Putrid Warrior|C|PLST
+#163|Syr Konrad, the Grim|U|PLST
 #164|Raucous Theater|R|MKM
 #165|Meticulous Archive|R|MKM
 #166|Scene of the Crime|U|MKM
@@ -192,7 +192,7 @@
 #191|Audience with Trostani|R|MKM
 #192|Slimy Dualleech|U|MKM
 #193|Worldsoul's Rage|R|MKM
-#194|Magmaw|U|PLIST
+#194|Magmaw|U|PLST
 #195|Assassin's Trophy|R|MKM
 #196|Nightdrinker Moroii|U|MKM
 #197|Case of the Filched Falcon|U|MKM
@@ -204,7 +204,7 @@
 #203|Sudden Setback|U|MKM
 #204|Bubble Smuggler|C|MKM
 #205|Gravestone Strider|C|MKM
-#206|Mentor of the Meek|U|PLIST
+#206|Mentor of the Meek|U|PLST
 #207|Benthic Criminologists|C|MKM
 #208|Branch of Vitu-Ghazi|U|MKM
 #209|Convenient Target|U|MKM
@@ -217,7 +217,7 @@
 #216|Jaded Analyst|C|MKM
 #217|Griffnaut Tracker|C|MKM
 #218|Case of the Shattered Pact|U|MKM
-#219|Mystery Key|U|PLIST
+#219|Mystery Key|U|PLST
 #220|Public Thoroughfare|C|MKM
 #221|Shady Informant|C|MKM
 #222|Rakish Scoundrel|C|MKM
@@ -286,34 +286,34 @@
 #285|Illicit Masquerade|R|MKM
 #286|Reenact the Crime|R|MKM
 #287|Rope|U|MKM
-#288|Combine Chrysalis|U|PLIST
-#289|Kuldotha Rebirth|R|PLIST
+#288|Combine Chrysalis|U|PLST
+#289|Kuldotha Rebirth|R|PLST
 #290|Case of the Ransacked Lab|R|MKM
 #291|Undergrowth Recon|M|MKM
 #292|Expedited Inheritance|M|MKM
 #293|Anzrag's Rampage|R|MKM
-#294|Bishop of the Bloodstained|U|PLIST
-#295|Burden of Guilt|C|PLIST
-#296|Cavalier of Thorns|M|PLIST
-#297|Death Cloud|R|PLIST
-#298|Duskmantle, House of Shadow|U|PLIST
-#299|Ghost Quarter|U|PLIST
-#300|Gnaw to the Bone|C|PLIST
-#301|Goblin Warchief|U|PLIST
-#302|High Alert|U|PLIST
-#303|Ixidor, Reality Sculptor|R|PLIST
-#304|Laid to Rest|U|PLIST
-#305|Mass Hysteria|R|PLIST
-#306|Metalspinner's Puzzleknot|C|PLIST
-#307|Millstone|U|PLIST
-#308|Mistveil Plains|U|PLIST
-#309|Molten Psyche|R|PLIST
-#310|Monologue Tax|R|PLIST
-#311|Quintorius, Field Historian|U|PLIST
-#312|Shard of Broken Glass|C|PLIST
-#313|Spell Snare|U|PLIST
-#314|Stromkirk Captain|U|PLIST
-#315|Worldspine Wurm|M|PLIST
+#294|Bishop of the Bloodstained|U|PLST
+#295|Burden of Guilt|C|PLST
+#296|Cavalier of Thorns|M|PLST
+#297|Death Cloud|R|PLST
+#298|Duskmantle, House of Shadow|U|PLST
+#299|Ghost Quarter|U|PLST
+#300|Gnaw to the Bone|C|PLST
+#301|Goblin Warchief|U|PLST
+#302|High Alert|U|PLST
+#303|Ixidor, Reality Sculptor|R|PLST
+#304|Laid to Rest|U|PLST
+#305|Mass Hysteria|R|PLST
+#306|Metalspinner's Puzzleknot|C|PLST
+#307|Millstone|U|PLST
+#308|Mistveil Plains|U|PLST
+#309|Molten Psyche|R|PLST
+#310|Monologue Tax|R|PLST
+#311|Quintorius, Field Historian|U|PLST
+#312|Shard of Broken Glass|C|PLST
+#313|Spell Snare|U|PLST
+#314|Stromkirk Captain|U|PLST
+#315|Worldspine Wurm|M|PLST
 #316|Ghostly Prison|M|SPG
 #317|Fabricate|M|SPG
 #318|Show and Tell|M|SPG

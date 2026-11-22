@@ -127,8 +127,6 @@ public class DestroyAi extends SpellAbilityAi {
                     ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid"))) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                // need to set XPaid to get the right number for
-                sa.getRootAbility().setXManaCostPaid(maxTargets);
                 // need to check for maxTargets
                 maxTargets = Math.min(maxTargets, sa.getMaxTargets());
             } else {
@@ -155,6 +153,9 @@ public class DestroyAi extends SpellAbilityAi {
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
+            if (!sa.isTrigger()) {
+                list = ComputerUtilCard.withoutHarmlessCreatures(ai, list); // a creature that cannot do anything is not worth the removal
+            }
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
@@ -186,21 +187,19 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
-            // If NoRegen is not set, filter out creatures that have a
-            // regeneration shield
+            // If NoRegen is not set, filter out creatures that have a regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
                 list = CardLists.filter(list, c -> c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c));
             }
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
             if (list.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             // target loop
-            // TODO use can add more Targets
             while (sa.getTargets().size() < maxTargets) {
                 // filter by MustTarget requirement
                 CardCollection originalList = new CardCollection(list);
@@ -341,7 +340,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
@@ -443,7 +442,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
+        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedMyLastTurn() == 0 && ph.isPlayerTurn(ai))
                 || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
         boolean canManaLock = oppLandsOTB <= amountLandsToManalock && oppSkippedLandDrop;
 

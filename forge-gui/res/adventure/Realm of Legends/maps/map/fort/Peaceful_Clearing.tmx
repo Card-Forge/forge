@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="92">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Loxodon Peacekeeper&quot;, &quot;Enduring Innocence&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVcsKAjEMLFSlraD+5F49+JOrshcfH6ShBLPLNE0riANhD5tkptO0de7/MAbnLuF3dVx7jDlKPUr9fcp1m9TOG9KH9wp6S10IU9A11zgp1kD3Kdb9KP0fQf4Q55xorYSt0LYr+El+LzWzTyhXW6fEU3ht2cva3iCdpbzJMH+MQ9J5W8Ee1bT6Tl5tPV7hlOeNPUI5CDzjrfcB76nmBeegGZEeWbktnAR5hjRuy8wNlXOI+mrn0sLJWDXkSu67QSt5Tn6e37FP+XvrfBPoLnoYapf3qYze9+gbTgv3CxE0QwE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVVUFSwzAMFMxADs0vUkhhOHMoV17Th0AZSo4M32kKKbyHC0esiZeIrWyDZjRJbEW7Wsv2XERW0W+PRe5m07e+n9Ui58Hbepzncc9fTsuuuSTiiMEDh13I8xr8rR6/v0583CbGwa8rkecMrshvXM1pn9CBOe0IB7wQq89lBtvmZev94R9THPCDDTJpoqbYN9VYv9VgRblSHP5ryAsO0GoZ8W3MYP5rzPuCcl4ciWxpbB+frRxqgF65D/4UfD37W32siTXGsGb5KmZv+tDmbTP5tUa1z6rMC1qoZh/i9z/qvcpgQn/LCzxKBj0Y13LdR+6lPrbzTTJqxNzENe0dXK2Z+8Rbdx7z1p1jLhNnGuK4Z2GpNU/FM6/3gLFwcLWnu7j/rWZcf8lS/DRvCnsb8R8ye4L3C3h562E567x67h7BnWPPaPRF5+x1bx4xyKHn1cbpK667m008bTzmBsJFHY8RG72GO7OEyZqvnfi2njDncngGgRvO4xzmN1snfZw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="159.636" y="51.0834">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;FDN&quot; ],
+  &quot;cardName&quot;: &quot;Good-Fortune Unicorn&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;CMM&quot; ],
+  &quot;cardName&quot;: &quot;Loyal Unicorn&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;WOE&quot; ],
+  &quot;cardName&quot;: &quot;Regal Bunnicorn&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;OTJ&quot; ],
+  &quot;cardName&quot;: &quot;Seraphic Steed&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;CSP&quot; ],
+  &quot;cardName&quot;: &quot;Ronom Unicorn&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;HOU&quot; ],
+  &quot;cardName&quot;: &quot;Crested Sunmare&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;DFT&quot; ],
+  &quot;cardName&quot;: &quot;Guardian Sunmare&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;J21&quot; ],
+  &quot;cardName&quot;: &quot;Wingsteed Trainer&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;C18&quot; ],
+  &quot;cardName&quot;: &quot;Boreas Charger&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;GPT&quot; ],
+  &quot;cardName&quot;: &quot;Storm Herd&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;SNC&quot; ],
+  &quot;cardName&quot;: &quot;Park Heights Pegasus&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;editions&quot;: [ &quot;M21&quot; ],
+  &quot;cardName&quot;: &quot;Vryn Wingmare&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="77.409" y="113.493" visible="1">
+   <properties>
+    <property name="enemy" value="Phelia"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="70,78,68,71"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="48.6663" y="28.5"/>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="185.441" y="109.578">
+   <properties>
+    <property name="enemy" value="Cerise"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="158.48" y="72.18" visible="1">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Wingsteed Trainer&quot;, &quot;Pegasus Refuge&quot; ] }"/>
+    <property name="enemy" value="Thurid"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="213.454" y="120.83">
+   <properties>
+    <property name="enemy" value="Grakk"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="41.5406" y="183.652"/>
+  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="112.469" y="122.618"/>
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="42.747" y="103.643"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="345.675" y="118.732"/>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="297.247" y="121.414"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="288.98" y="203.372"/>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="339.286" y="208.667"/>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="342.376" y="156.739" visible="1">
+   <properties>
+    <property name="enemy" value="Emiel"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="72,73,74,75"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="113.313" y="205.696"/>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="369.877" y="56.9154"/>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="367" y="96.5" visible="1">
+   <properties>
+    <property name="enemy" value="Kwain"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="47.5" y="62" visible="1">
+   <properties>
+    <property name="enemy" value="Preston"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/scroll.tx" x="47.75" y="45.4167">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mandate of Peace&quot;, &quot;editions&quot;: [ &quot;C19&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/scroll.tx" x="369" y="76.1667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Moment's Peace&quot;, &quot;editions&quot;: [ &quot;ODY&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/scroll.tx" x="362" y="216">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blessed Sanctuary&quot;, &quot;editions&quot;: [ &quot;JMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/scroll.tx" x="71.3333" y="214">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Peace and Quiet&quot;, &quot;editions&quot;: [ &quot;ULG&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="159" y="236.25" width="107" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A grove of trees parts, revealing a clearing with green grass and soft sunlight shining overhead. Unicorns, corgis, pegasi, and peaceful folk gather ahead, relaxing and laying about, free from worry.
+
+Despite the calm attitude of the place, there is a lingering sense of danger behind it all, as you can tell the curse of violence still clings, even in a place like this, driving the beings ahead to fight if you confront them.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="163" y="109">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Enduring Innocence&quot;, &quot;editions&quot;: [ &quot;DSK&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
