@@ -996,15 +996,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final ZoneType secondPile) {
         List<Card> result = manipulateCardList(title, cards, manipulable, secondPile);
+        if (result.isEmpty()) { // the remote player disconnected
+            return ImmutablePair.of(new CardCollection(manipulable), new CardCollection());
+        }
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
         for (int i = 0; i < cards.size() && manipulable.contains(result.get(i)); i++) {
             toTop.add(result.get(i));
         }
-        if (toTop.size() < cards.size()) { // the top isn't everything
-            for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(0, result.get(i));
-            }
+        for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
+            toBottom.add(0, result.get(i));
         }
         return ImmutablePair.of(toTop, toBottom);
     }

@@ -277,7 +277,7 @@ public class GuiChoose {
         final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
             @Override
             public List<CardView> call()  {
-                return ListCardArea.show(gui, title, cards, manipulable, secondPile).getArrangedCards();
+                return ListCardArea.arrange(gui, title, cards, manipulable, secondPile);
             }
         };
         final FutureTask<List<CardView>> ft = new FutureTask<>(callable);

@@ -23,8 +23,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,76 +53,41 @@ public class ListCardArea extends FloatingCardArea {
     private static final int DIVIDER_TEXT_GAP = 8;
     private static final int CARD_GAP = 6;
 
-    private static ListCardArea storedArea;
+    private static Rectangle lastBounds;
 
-    private final FButton doneButton = new FButton(Localizer.getInstance().getMessage("lblDone"));
     private final List<CardView> topSection = new ArrayList<>();
     private final List<CardView> bottomSection = new ArrayList<>();
     private final List<CardView> otherCards = new ArrayList<>();
+    private final String topLabel;
+    private final String bottomLabel;
+    private final String dividerText;
 
-    private ZoneType secondPile;
     private int dividerY;
 
-    private ListCardArea(final CMatchUI matchUI) {
+    private ListCardArea(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
         super(matchUI);
+        this.title = title;
+        for (final CardView card : cards) {
+            (Iterables.contains(moveableCards, card) ? topSection : otherCards).add(card);
+        }
+        final Localizer localizer = Localizer.getInstance();
+        topLabel = localizer.getMessage("lblTopOfLibrary");
+        bottomLabel = localizer.getMessage(secondPile == ZoneType.Library ? "lblBottomOfLibrary" : "lblGraveyard");
+        dividerText = secondPile == ZoneType.Library ? localizer.getMessage("lblOtherCardsInLibrary", otherCards.size()) : "";
+
         window.add(getScrollPane(), "grow, push, wrap, gap 6 6 6 6");
         window.setModal(true);
         // Only Done closes the dialog, so that a stray Esc doesn't accept the arrangement
         window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         getScrollPane().setViewportView(this);
-        doneButton.addActionListener(e -> window.setVisible(false));
+        final FButton doneButton = new FButton(localizer.getMessage("lblDone"));
+        doneButton.addActionListener(e -> {
+            lastBounds = window.getBounds();
+            window.dispose();
+        });
         window.add(doneButton, "align center, gapbottom 8, w 140, h 24");
         setOpaque(false);
         setDragEnabled(true);
-    }
-
-    public static ListCardArea show(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
-        if (storedArea == null || storedArea.getMatchUI() != matchUI) {
-            storedArea = new ListCardArea(matchUI);
-        }
-        storedArea.title = title;
-        storedArea.secondPile = secondPile;
-        storedArea.setCards(cards, moveableCards);
-        storedArea.showWindow();
-        return storedArea;
-    }
-
-    private void setCards(final Iterable<CardView> cards, final Iterable<CardView> moveableCards) {
-        topSection.clear();
-        bottomSection.clear();
-        otherCards.clear();
-        for (final CardView card : cards) {
-            (Iterables.contains(moveableCards, card) ? topSection : otherCards).add(card);
-        }
-    }
-
-    public List<CardView> getArrangedCards() {
-        final List<CardView> arranged = new ArrayList<>(topSection);
-        arranged.addAll(otherCards);
-        arranged.addAll(bottomSection);
-        return arranged;
-    }
-
-    @Override
-    protected Iterable<CardView> getCards() {
-        return Iterables.concat(topSection, bottomSection);
-    }
-
-    @Override
-    protected void showWindow() {
-        onShow();
-        getWindow().setFocusableWindowState(true);
-        getWindow().setVisible(true);
-    }
-
-    // Not calling super, which closes the window on a double-click of its title bar
-    @Override
-    protected void onShow() {
-        if (hasBeenShown) {
-            return;
-        }
-        final FFrame mainFrame = Singletons.getView().getFrame();
-        getWindow().setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3 - 50);
         addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
             public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY, final MouseEvent evt) {
@@ -138,14 +101,31 @@ public class ListCardArea extends FloatingCardArea {
                 refresh();
             }
         });
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    doneButton.doClick();
-                }
-            }
-        });
+    }
+
+    public static List<CardView> arrange(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
+        final ListCardArea area = new ListCardArea(matchUI, title, cards, moveableCards, secondPile);
+        area.showWindow();
+        final List<CardView> arranged = new ArrayList<>(area.topSection);
+        arranged.addAll(area.otherCards);
+        arranged.addAll(area.bottomSection);
+        return arranged;
+    }
+
+    @Override
+    protected Iterable<CardView> getCards() {
+        return Iterables.concat(topSection, bottomSection);
+    }
+
+    @Override
+    protected void showWindow() {
+        if (lastBounds == null) {
+            final FFrame mainFrame = Singletons.getView().getFrame();
+            window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3 - 50);
+        } else {
+            window.setBounds(lastBounds);
+        }
+        window.setVisible(true);
     }
 
     @Override
@@ -215,21 +195,14 @@ public class ListCardArea extends FloatingCardArea {
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        final Localizer localizer = Localizer.getInstance();
-
         FSkin.setGraphicsFont(g2, FSkin.getBoldFont(13));
         FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        drawCentered(g2, localizer.getMessage("lblTopOfLibrary"), GUTTER_Y + HEADER_HEIGHT / 2);
-        drawCentered(g2, localizer.getMessage(secondPile == ZoneType.Library ? "lblBottomOfLibrary" : "lblGraveyard"), dividerY + DIVIDER_GAP + HEADER_HEIGHT / 2);
+        drawCentered(g2, topLabel, GUTTER_Y + HEADER_HEIGHT / 2);
+        drawCentered(g2, bottomLabel, dividerY + DIVIDER_GAP + HEADER_HEIGHT / 2);
 
         FSkin.setGraphicsFont(g2, FSkin.getFont(12));
         FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        if (secondPile != ZoneType.Library) {
-            g2.drawLine(GUTTER_X, dividerY, getWidth() - GUTTER_X, dividerY);
-            return;
-        }
-        final String dividerText = localizer.getMessage("lblOtherCardsInLibrary", otherCards.size());
-        final int lineEnd = (getWidth() - g2.getFontMetrics().stringWidth(dividerText)) / 2 - DIVIDER_TEXT_GAP;
+        final int lineEnd = dividerText.isEmpty() ? getWidth() / 2 : (getWidth() - g2.getFontMetrics().stringWidth(dividerText)) / 2 - DIVIDER_TEXT_GAP;
         g2.drawLine(GUTTER_X, dividerY, lineEnd, dividerY);
         g2.drawLine(getWidth() - lineEnd, dividerY, getWidth() - GUTTER_X, dividerY);
         drawCentered(g2, dividerText, dividerY);
