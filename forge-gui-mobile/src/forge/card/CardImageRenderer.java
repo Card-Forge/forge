@@ -36,6 +36,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
+import forge.gui.card.CardTextRows;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
@@ -55,6 +56,9 @@ public class CardImageRenderer {
     private static final ArrayList<String> ptPieces = new ArrayList<>(8);
     private static final float[] ptWidths = new float[8];
     private static final String[] landTypesStrings = new String[0];
+    private static float textBoxInset; //how far the text box is inset from the inner edge of the card
+    private static final Color LOYALTY_BOX_COLOR = Color.BLACK;
+    private static final List<TextRenderer> rowTextRenderers = new ArrayList<>();
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -172,6 +176,7 @@ public class CardImageRenderer {
         Color[] colors = useCardBGTexture && Forge.allowCardBG ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
 
         float artInset = blackBorderThickness * 0.5f;
+        textBoxInset = artInset;
         float outerBorderThickness = 2 * blackBorderThickness - artInset;
         x += outerBorderThickness;
         y += outerBorderThickness;
@@ -773,6 +778,16 @@ public class CardImageRenderer {
                 return;
             }
 
+            // Station levels and loyalty abilities get a badge on the left of their text
+            if (!drawAdventure && state != null) {
+                List<CardTextRows.Row> rows = CardTextRows.parse(state, text);
+                if (!rows.isEmpty()) {
+                    boolean hasBottomPtBox = state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle();
+                    drawTextRows(g, state, rows, x, y, w, h, hasBottomPtBox);
+                    return;
+                }
+            }
+
             float padding = getCapHeight(TEXT_FONT) * 0.75f;
             x += padding;
             y += padding;
@@ -784,6 +799,96 @@ public class CardImageRenderer {
 
     private static void drawAlphaLines(Graphics g, float x, float y, float w, float h) {
         g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("overlay_alpha.png")), x, y, w, h);
+    }
+
+    private static TextRenderer getRowTextRenderer(int index) {
+        while (rowTextRenderers.size() <= index) {
+            rowTextRenderers.add(new TextRenderer(true));
+        }
+        return rowTextRenderers.get(index);
+    }
+
+    /**
+     * Draws the text of a card with Station levels or loyalty abilities. Every row is centered on its own slot,
+     * so the badge on the left, the text and the P/T box on the right of a row are aligned with each other.
+     * The badge sticks out of the left side of the text box, the P/T box of a Station level out of the right side.
+     *
+     * @param hasBottomPtBox true if the P/T box of the card itself overlaps the bottom right of the text box
+     */
+    private static void drawTextRows(Graphics g, CardStateView state, List<CardTextRows.Row> rows, float x, float y, float w, float h, boolean hasBottomPtBox) {
+        final int count = rows.size();
+        final float padding = getCapHeight(TEXT_FONT) * 0.75f;
+        final float boxPadding = Math.round(getCapHeight(PT_FONT) / 4);
+        final float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * boxPadding;
+
+        // all badges have the same width, so they line up
+        float badgeWidth = PT_BOX_WIDTH * 0.8f;
+        for (CardTextRows.Row row : rows) {
+            if (row.hasBadge()) {
+                badgeWidth = Math.max(badgeWidth, getBoundsWidth(row.badge, PT_FONT) + 2 * boxPadding);
+            }
+        }
+        final float badgeOverhang = badgeWidth * 0.4f;
+        final float ptOverlap = PT_BOX_WIDTH - textBoxInset; //how far a P/T box reaches into the text box
+        final float ptRight = x + w + textBoxInset; //right side of the card's inner area, where the P/T box of a card ends
+
+        // measure the rows
+        float[] textX = new float[count];
+        float[] textW = new float[count];
+        float[] needed = new float[count];
+        float total = 0;
+        for (int i = 0; i < count; i++) {
+            CardTextRows.Row row = rows.get(i);
+            float left = x + padding + (row.hasBadge() ? badgeWidth - badgeOverhang : 0);
+            float right = x + w - padding;
+            if (row.pt != null || (hasBottomPtBox && i == count - 1)) {
+                right -= ptOverlap;
+            }
+            textX[i] = left;
+            textW[i] = Math.max(right - left, 1);
+            float textHeight = getRowTextRenderer(i).getWrappedBounds(row.text, TEXT_FONT, textW[i]).height;
+            needed[i] = textHeight + padding;
+            if (row.hasBadge() || row.pt != null) {
+                needed[i] = Math.max(needed[i], boxHeight + padding);
+            }
+            total += needed[i];
+        }
+
+        // spread the space that is left evenly over the rows, or squeeze the rows if there is not enough
+        final float scale = total > h ? h / total : 1;
+        final float extra = total > h ? 0 : (h - total) / count;
+        float rowTop = y;
+        for (int i = 0; i < count; i++) {
+            CardTextRows.Row row = rows.get(i);
+            float slot = needed[i] * scale + extra;
+            float centerY = rowTop + slot / 2;
+            getRowTextRenderer(i).drawText(g, row.text, TEXT_FONT, Color.BLACK, textX[i], rowTop, textW[i], slot, rowTop, slot, true, Align.left, true);
+            if (row.hasBadge()) {
+                drawRowBox(g, state, row.badge, row.isStation, x - badgeOverhang, centerY, badgeWidth, boxHeight);
+            }
+            if (row.pt != null) {
+                float ptWidth = Math.max(PT_BOX_WIDTH, getBoundsWidth(row.pt, PT_FONT) + 2 * boxPadding);
+                drawRowBox(g, state, row.pt, true, ptRight - ptWidth, centerY, ptWidth, boxHeight);
+            }
+            rowTop += slot;
+        }
+    }
+
+    /**
+     * Draws a box with white text, vertically centered on centerY: gray like the P/T box of a Spacecraft for
+     * Station, black like the loyalty box of a planeswalker for loyalty abilities.
+     */
+    private static void drawRowBox(Graphics g, CardStateView state, String text, boolean isStation, float x, float centerY, float w, float h) {
+        float y = centerY - h / 2;
+        if (isStation) {
+            g.fillRect(SPACECRAFT_PTBOX_COLOR[0], x, y, w, h);
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
+            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        } else {
+            g.fillRect(LOYALTY_BOX_COLOR, x, y, w, h);
+            g.drawRect(BORDER_THICKNESS, Color.WHITE, x, y, w, h);
+        }
+        g.drawText(text, PT_FONT, Color.WHITE, x, y, w, h, false, Align.center, true);
     }
 
     private static void drawPtBox(Graphics g, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
@@ -824,16 +929,23 @@ public class CardImageRenderer {
         w = boxWidth;
         h = boxHeight;
 
-        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
-        //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        //loyalty and defense boxes are black with white text and outline, like on the desktop
+        final boolean isDarkBox = !state.isCreature() && (state.isPlaneswalker() || state.isBattle());
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : isDarkBox ? new Color[] { LOYALTY_BOX_COLOR } : colors, x, y, w, h);
+        if (isDarkBox) {
+            g.drawRect(BORDER_THICKNESS, Color.WHITE, x, y, w, h);
+        } else {
+            //draw outline color here
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
+            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        }
 
         if (noText)
             return;
+        final Color ptTextColor = state.isVehicle() || state.isSpaceCraft() || isDarkBox ? Color.WHITE : Color.BLACK;
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < piecesSize; i++) {
-            g.drawText(ptPieces.get(i), PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, false, Align.left, true);
+            g.drawText(ptPieces.get(i), PT_FONT, ptTextColor, x, y, w, h, false, Align.left, true);
             x += ptWidths[i];
         }
     }
