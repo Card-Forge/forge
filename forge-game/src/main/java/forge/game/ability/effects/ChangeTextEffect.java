@@ -17,6 +17,10 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class ChangeTextEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "Duration", "ForbiddenNewTypes",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"ChangeColorWord", "ChangeTypeWord"}};
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)
