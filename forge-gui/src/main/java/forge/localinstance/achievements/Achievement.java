@@ -261,7 +261,11 @@ public abstract class Achievement {
         if (timestamp == 0) { return null; }
 
         final DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
-        return formatter.format(new Date(timestamp));
+
+        // Since JDK 20 (CLDR 42) many locales use special spaces such as U+202F (narrow no-break space)
+        // in date/time formats. The skin font has no glyphs for them, and fonts loaded via Font.createFont
+        // get no fallback, so they render as boxes. Normalize all horizontal whitespace to a plain space.
+        return formatter.format(new Date(timestamp)).replaceAll("\\h", " ");
     }
 
     public String getSubTitle(final boolean includeTimestamp) {
