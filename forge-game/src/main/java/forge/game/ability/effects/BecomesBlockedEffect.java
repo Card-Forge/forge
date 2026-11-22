@@ -16,6 +16,9 @@ import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
 public class BecomesBlockedEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
