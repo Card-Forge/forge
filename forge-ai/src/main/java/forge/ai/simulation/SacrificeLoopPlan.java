@@ -41,7 +41,11 @@ public final class SacrificeLoopPlan {
             return melira;
         }
         final SpellAbility yawgmoth = yawgmothAndUndying(ai, candidates, approve);
-        return yawgmoth != null ? yawgmoth : ironworks(ai, candidates, approve);
+        if (yawgmoth != null) {
+            return yawgmoth;
+        }
+        final SpellAbility works = ironworks(ai, candidates, approve);
+        return works != null ? works : deathmantle(ai, candidates, approve);
     }
 
     private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
@@ -263,6 +267,99 @@ public final class SacrificeLoopPlan {
             return null;
         }
         VetoLog.note(ai, "ironworks-loop | the Ironworks takes " + victim.getName() + ", pool " + ai.getManaPool().totalMana()
+                + " of " + goal);
+        return sac;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Deathmantle
+
+    /** The tokens that come with a creature each time it comes to the battlefield or dies, for the creatures that make them. */
+    private static int tokensWith(final Card c) {
+        switch (c.getName()) {
+            case "Wurmcoil Engine":
+                return 2; // when it dies: a deathtouch Wurm and a lifelink Wurm
+            case "Myr Battlesphere":
+                return 4; // when it enters: four Myr
+            case "Grave Titan":
+                return 2; // when it enters: two Zombies
+            default:
+                return 0;
+        }
+    }
+
+    /** The mana of a round of the Deathmantle loop: the creature and its tokens sacrificed, the {4} of the Deathmantle paid. */
+    public static int deathmantleNet(final int tokens) {
+        return 2 + 2 * tokens - 4;
+    }
+
+    /**
+     * Nim Deathmantle and Ashnod's Altar with a creature that brings tokens (Wurmcoil Engine, Myr Battlesphere, Grave Titan):
+     * the Altar takes the creature ({C}{C}), the Deathmantle pays {4} to return it with itself attached, the creature brings
+     * its tokens again, and the Altar takes those for {C}{C} each. A round makes the tokens' mana plus two, less four.
+     * One step at a time: the tokens go to the Altar first; then the creature, when the mana of the pool and the untapped
+     * lands can pay the {4} once the Altar has given its two. The sacrifice is marked for the payment, as the Ironworks loop does.
+     */
+    private static SpellAbility deathmantle(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.isPlayerTurn(ai) || !ai.getGame().getStack().isEmpty()
+                || !(ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.MAIN2))) {
+            return null;
+        }
+        final Card mantle = in(ai, ZoneType.Battlefield, "Nim Deathmantle");
+        final Card altar = in(ai, ZoneType.Battlefield, "Ashnod's Altar");
+        if (mantle == null || altar == null) {
+            return null;
+        }
+        Card fat = null;
+        final List<Card> tokens = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature() && c.isToken()) {
+                tokens.add(c);
+            } else if (c.isCreature() && tokensWith(c) > 0) {
+                fat = c;
+            }
+        }
+        if (fat == null || deathmantleNet(tokensWith(fat)) <= 0) {
+            return null;
+        }
+        final int goal = ManaLoopPlan.goal(ai);
+        if (goal <= 0 || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        int lands = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            lands += c.isLand() && !c.isTapped() && !c.getManaAbilities().isEmpty() ? 1 : 0;
+        }
+        final Card victim;
+        if (!tokens.isEmpty()) {
+            victim = tokens.get(0);
+        } else if (ai.getManaPool().totalMana() + lands >= 2) {
+            victim = fat; // the {4} is paid from the pool, the two of the Altar, and a land or two
+        } else {
+            return null;
+        }
+        SpellAbility sac = null;
+        for (final SpellAbility sa : candidates) {
+            if (sa != null && sa.getHostCard() == altar && sa.isManaAbility()) {
+                sac = sa;
+                break;
+            }
+        }
+        if (sac == null || RunawayLoop.exceeded(sac, LIMIT)) {
+            return null;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c == victim) {
+                c.setSVar("SacMe", "6");
+            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
+                c.removeSVar("SacMe");
+            }
+        }
+        sac.setActivatingPlayer(ai);
+        if (!approve.test(sac)) {
+            return null;
+        }
+        VetoLog.note(ai, "deathmantle-loop | the Altar takes " + victim.getName() + ", pool " + ai.getManaPool().totalMana()
                 + " of " + goal);
         return sac;
     }

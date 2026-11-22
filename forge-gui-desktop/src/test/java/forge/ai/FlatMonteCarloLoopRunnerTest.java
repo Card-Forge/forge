@@ -1758,4 +1758,25 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         runTurn();
         AssertJUnit.assertTrue("a round costs one more than it gives: no loop\n" + trace, opp.getLife() > 0);
     }
+
+    @Test(timeOut = 120000)
+    public void theDeathmantleLoopMakesManaOnlyWithTokens() {
+        AssertJUnit.assertEquals("two for the creature, less the four", -2, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(0));
+        AssertJUnit.assertEquals("a Wurmcoil Engine: two tokens", 2, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(2));
+        AssertJUnit.assertEquals("a Myr Battlesphere: four", 6, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(4));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDeathmantleAltarAndWurmcoilEnginePaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Plains", 4, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Nim Deathmantle", ai, ZoneType.Battlefield);
+        addCardToZone("Ashnod's Altar", ai, ZoneType.Battlefield);
+        addCardToZone("Wurmcoil Engine", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Altar takes the Engine, the Deathmantle brings it back, its tokens go to the Altar: two more a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
