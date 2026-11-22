@@ -13,6 +13,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -35,6 +36,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.gui.GuiBase;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
+import forge.gui.card.CardTextRows;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -432,7 +434,13 @@ public class FCardImageRenderer {
             //draw text box
             Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
             int textX = x + ART_INSET + (isClass ? artWidth : 0);
-            drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0 ? 1 : 0);
+            // Station levels and loyalty abilities get a badge on the left of their text
+            List<CardTextRows.Row> rows = isSaga || isClass || isDungeon ? Collections.<CardTextRows.Row>emptyList() : CardTextRows.parse(state, text);
+            if (rows.isEmpty()) {
+                drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0 ? 1 : 0);
+            } else {
+                drawTextBoxRows(g, state, rows, textBoxColors, colors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0);
+            }
 
             //draw P/T box
             if (ptBoxHeight > 0) {
@@ -818,6 +826,150 @@ public class FCardImageRenderer {
                 w -= PT_BOX_WIDTH;
             drawTextBoxText(g, text, x, y + yAdjust, w, h - yAdjust, textBoxFlags);
         }
+    }
+
+    /**
+     * Draws the text box of a card with Station levels or loyalty abilities. Every row is centered on its own
+     * slot, so the badge on the left, the text and the P/T box on the right of a row are aligned with each other.
+     * The badge sticks out of the left side of the text box, the P/T box of a Station level out of the right side.
+     *
+     * @param frameColors the border colors of the card, used for the outline of the Station badge and P/T box
+     * @param hasBottomPTBox true if the P/T box of the card itself overlaps the bottom right of the text box
+     */
+    private static void drawTextBoxRows(Graphics2D g, CardStateView state, List<CardTextRows.Row> rows, Color[] boxColors, Color[] frameColors,
+                                        int x, int y, int w, int h, boolean hasBottomPTBox) {
+        drawTextBox(g, state, "", boxColors, x, y, w, h, 0); // only the background and the border, there is no text
+        final int count = rows.size();
+        final int padding = TEXT_SIZE / 4;
+        final int badgeHeight = Math.round((NAME_SIZE + 2 * HEADER_PADDING) * 0.9f);
+        final int badgeWidth = Math.round(badgeHeight * 1.15f);
+        final int badgeOverhang = Math.round(badgeWidth * 0.4f);
+        final int ptOverlap = PT_BOX_WIDTH - ART_INSET; // how far a P/T box reaches into the text box
+        final boolean hideReminder = FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT);
+
+        List<List<Paragraph>> paragraphs = new ArrayList<>(count);
+        int[] textX = new int[count];
+        int[] textW = new int[count];
+        for (int i = 0; i < count; i++) {
+            CardTextRows.Row row = rows.get(i);
+            String rowText = hideReminder ? reminderHidePattern.matcher(row.text).replaceAll("") : row.text;
+            List<Paragraph> list = new ArrayList<>();
+            for (String pg : linebreakPattern.split(rowText)) {
+                if (!pg.isEmpty()) {
+                    list.add(new Paragraph(pg));
+                }
+            }
+            if (list.isEmpty()) {
+                list.add(new Paragraph(""));
+            }
+            paragraphs.add(list);
+            int left = x + padding + (row.hasBadge() ? badgeWidth - badgeOverhang : 0);
+            int right = x + w - padding;
+            if (row.pt != null || (hasBottomPTBox && i == count - 1)) {
+                right -= ptOverlap;
+            }
+            textX[i] = left;
+            textW[i] = Math.max(right - left, 1);
+        }
+
+        // Find font size that fit in the text box area
+        final int lineSpacing = -2;
+        int txFontSize = TEXT_SIZE, rmFontSize = REMINDER_SIZE;
+        Font txFont, rmFont;
+        FontMetrics txMetrics, rmMetrics;
+        int lineHeight, paraSpacing, total;
+        int[] needed = new int[count];
+        int[] visible = new int[count];
+        while (true) {
+            txFont = getFontBySize(TEXT_FONT, txFontSize);
+            rmFont = getFontBySize(REMINDER_FONT, rmFontSize);
+            txMetrics = g.getFontMetrics(txFont);
+            rmMetrics = g.getFontMetrics(rmFont);
+            paraSpacing = txMetrics.getLeading() + txMetrics.getDescent();
+            lineHeight = txMetrics.getAscent() + txMetrics.getDescent();
+            total = 0;
+            for (int i = 0; i < count; i++) {
+                int rowHeight = 0;
+                for (Paragraph pg : paragraphs.get(i)) {
+                    int lines = pg.calculateLines(textW[i], txMetrics, rmMetrics, 0);
+                    rowHeight += lines * (lineHeight + lineSpacing) + paraSpacing - lineSpacing;
+                }
+                visible[i] = rowHeight - (paraSpacing - lineSpacing);
+                boolean hasBox = rows.get(i).hasBadge() || rows.get(i).pt != null;
+                needed[i] = hasBox ? Math.max(rowHeight, badgeHeight + paraSpacing) : rowHeight;
+                total += needed[i];
+            }
+            if (total <= h || txFontSize <= 8 || rmFontSize <= 8) {
+                break;
+            }
+            --txFontSize;
+            --rmFontSize;
+        }
+
+        // Draw the rows, spreading the space that is left evenly over them
+        final int extra = Math.max(h - total, 0) / count;
+        final int ptRight = x + w + ART_INSET; // right side of the card's inner area, where the P/T box of a card ends
+        int rowTop = y;
+        for (int i = 0; i < count; i++) {
+            CardTextRows.Row row = rows.get(i);
+            int slot = needed[i] + extra;
+            int centerY = rowTop + slot / 2;
+
+            g.setColor(Color.BLACK);
+            int textY = rowTop + (slot - visible[i]) / 2;
+            for (Paragraph pg : paragraphs.get(i)) {
+                textY += pg.drawPieces(g, textX[i], textY, textW[i], lineSpacing + lineHeight, txFont, txMetrics, rmFont, rmMetrics);
+                textY += paraSpacing - lineSpacing;
+            }
+
+            if (row.hasBadge()) {
+                drawRowBox(g, row.badge, row.isStation, row.isStation ? frameColors[0] : Color.WHITE,
+                        x - badgeOverhang, centerY, badgeWidth, badgeHeight);
+            }
+            if (row.pt != null) {
+                drawRowBox(g, row.pt, false, frameColors[0], ptRight - PT_BOX_WIDTH, centerY, PT_BOX_WIDTH, badgeHeight);
+            }
+            rowTop += slot;
+        }
+        g.setColor(Color.BLACK);
+    }
+
+    /**
+     * Draws a black box with white text, vertically centered on centerY: a circle for the threshold of a
+     * Station level, otherwise a rounded box like the P/T box of a card.
+     */
+    private static void drawRowBox(Graphics2D g, String text, boolean circle, Color outline, int x, int centerY, int w, int h) {
+        final int top = centerY - h / 2;
+        g.setStroke(new BasicStroke(BOX_LINE_THICKNESS));
+        int maxTextWidth;
+        if (circle) {
+            int d = Math.min(w, h);
+            int left = x + (w - d) / 2;
+            g.setColor(Color.BLACK);
+            g.fillOval(left, top, d, d);
+            g.setColor(outline);
+            g.drawOval(left, top, d, d);
+            maxTextWidth = Math.round(d * 0.75f);
+        } else {
+            int arcWidth = h / 3;
+            g.setColor(Color.BLACK);
+            g.fillRoundRect(x, top, w, h, arcWidth, h);
+            g.setColor(outline);
+            g.drawRoundRect(x, top, w, h, arcWidth, h);
+            maxTextWidth = Math.round(w * 0.85f);
+        }
+
+        int size = PT_SIZE;
+        Font font = getFontBySize(PT_FONT, size);
+        FontMetrics metrics = g.getFontMetrics(font);
+        while (metrics.stringWidth(text) > maxTextWidth && size > 8) {
+            --size;
+            font = getFontBySize(PT_FONT, size);
+            metrics = g.getFontMetrics(font);
+        }
+        g.setFont(font);
+        g.setColor(Color.WHITE);
+        g.drawString(text, x + (w - metrics.stringWidth(text)) / 2, centerY + (metrics.getAscent() - metrics.getDescent()) / 2);
     }
 
     private static void drawPTBox(Graphics2D g, CardStateView state, String ptOverride, Color[] colors, int x, int y, int w, int h) {
