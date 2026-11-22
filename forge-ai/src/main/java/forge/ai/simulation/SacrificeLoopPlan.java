@@ -37,7 +37,11 @@ public final class SacrificeLoopPlan {
 
     static SpellAbility next(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
         final SpellAbility melira = meliraAndRedcap(ai, candidates, approve);
-        return melira != null ? melira : yawgmothAndUndying(ai, candidates, approve);
+        if (melira != null) {
+            return melira;
+        }
+        final SpellAbility yawgmoth = yawgmothAndUndying(ai, candidates, approve);
+        return yawgmoth != null ? yawgmoth : ironworks(ai, candidates, approve);
     }
 
     private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
@@ -150,5 +154,116 @@ public final class SacrificeLoopPlan {
         }
         VetoLog.note(ai, "sacrifice-loop | Yawgmoth sacrifices " + spare.getName());
         return put;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Ironworks
+
+    private static final String KCI = "Krark-Clan Ironworks";
+    private static final String TRAWLER = "Scrap Trawler";
+    private static final String RETRIEVER = "Myr Retriever";
+    private static final String INSPECTOR = "Foundry Inspector";
+
+    private static Card in(final Player ai, final ZoneType zone, final String name) {
+        for (final Card c : ai.getCardsIn(zone)) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * The colourless mana that a round of the Ironworks loop leaves: two for each of the Myr Retriever and the Scrap Trawler
+     * that is sacrificed, less what they cost to cast again (two and three), with every Foundry Inspector taking one off each.
+     * One Inspector makes it one more than it takes, none makes it one less.
+     */
+    public static int ironworksNet(final int inspectors) {
+        return 4 - Math.max(0, 3 - inspectors) - Math.max(0, 2 - inspectors);
+    }
+
+    /**
+     * Krark-Clan Ironworks with Scrap Trawler and Myr Retriever (and a Foundry Inspector): the Retriever dies and returns the
+     * Trawler from the graveyard, the Trawler is cast and dies and returns the Retriever (its mana value is less), the
+     * Retriever is cast: each sacrifice is {C}{C} and the two casts cost less than they give. One step at a time, by where
+     * the two are: a Trawler or a Retriever in the hand is cast; the Retriever on the battlefield with the Trawler in the
+     * graveyard (or on the battlefield) is sacrificed; the Trawler on the battlefield with the Retriever in the graveyard is
+     * sacrificed. The sacrifice is marked for the payment so that the Ironworks never takes the Inspector. Run only with
+     * something to spend the mana on, until the pool holds what the hand costs.
+     */
+    private static SpellAbility ironworks(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (!ph.isPlayerTurn(ai) || !ai.getGame().getStack().isEmpty()
+                || !(ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.MAIN2))) {
+            return null;
+        }
+        final Card kci = in(ai, ZoneType.Battlefield, KCI);
+        if (kci == null) {
+            return null;
+        }
+        int inspectors = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            inspectors += c.getName().equals(INSPECTOR) ? 1 : 0;
+        }
+        final Card retrieverIn = in(ai, ZoneType.Battlefield, RETRIEVER);
+        final Card trawlerIn = in(ai, ZoneType.Battlefield, TRAWLER);
+        final boolean retrieverKnown = retrieverIn != null || in(ai, ZoneType.Hand, RETRIEVER) != null
+                || in(ai, ZoneType.Graveyard, RETRIEVER) != null;
+        final boolean trawlerKnown = trawlerIn != null || in(ai, ZoneType.Hand, TRAWLER) != null
+                || in(ai, ZoneType.Graveyard, TRAWLER) != null;
+        if (ironworksNet(inspectors) <= 0 || !retrieverKnown || !trawlerKnown) {
+            return null;
+        }
+        final int goal = ManaLoopPlan.goal(ai);
+        if (goal <= 0 || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        // the casts first: what is in the hand is what the last sacrifice returned
+        for (final String name : new String[] {TRAWLER, RETRIEVER}) {
+            if (in(ai, ZoneType.Hand, name) != null) {
+                final SpellAbility cast = LoopRunner.castFromHand(ai, candidates, name);
+                if (cast != null && forge.ai.ComputerUtilMana.canPayManaCost(cast, ai, 0, false)) {
+                    cast.setActivatingPlayer(ai);
+                    if (approve.test(cast)) {
+                        VetoLog.note(ai, "ironworks-loop | " + name + " cast, pool " + ai.getManaPool().totalMana() + " of " + goal);
+                        return cast;
+                    }
+                }
+                return null;
+            }
+        }
+        final boolean retrieverGone = retrieverIn == null && in(ai, ZoneType.Graveyard, RETRIEVER) != null;
+        final boolean trawlerGone = trawlerIn == null && in(ai, ZoneType.Graveyard, TRAWLER) != null;
+        final Card victim;
+        if (retrieverIn != null && (trawlerGone || trawlerIn != null)) {
+            victim = retrieverIn;
+        } else if (trawlerIn != null && retrieverGone) {
+            victim = trawlerIn;
+        } else {
+            return null;
+        }
+        SpellAbility sac = null;
+        for (final SpellAbility sa : candidates) {
+            if (sa != null && sa.getHostCard() == kci && sa.isManaAbility()) {
+                sac = sa;
+                break;
+            }
+        }
+        if (sac == null || RunawayLoop.exceeded(sac, LIMIT)) {
+            return null;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c == victim) {
+                c.setSVar("SacMe", "6");
+            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
+                c.removeSVar("SacMe");
+            }
+        }
+        sac.setActivatingPlayer(ai);
+        if (!approve.test(sac)) {
+            return null;
+        }
+        VetoLog.note(ai, "ironworks-loop | the Ironworks takes " + victim.getName() + ", pool " + ai.getManaPool().totalMana()
+                + " of " + goal);
+        return sac;
     }
 }

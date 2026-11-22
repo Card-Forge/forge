@@ -1724,4 +1724,38 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         final byte chosen = ((PlayerControllerAi) ai.getController()).chooseColor("", mana, forge.card.ColorSet.fromMask(31));
         AssertJUnit.assertEquals("an empty hand is not white: the Wish in the graveyard needs red", forge.card.MagicColor.RED, chosen);
     }
+
+    @Test(timeOut = 120000)
+    public void theIronworksLoopNeedsAFoundryInspectorToGainMana() {
+        AssertJUnit.assertEquals("two for each sacrifice, three and two to cast them again", -1,
+                forge.ai.simulation.SacrificeLoopPlan.ironworksNet(0));
+        AssertJUnit.assertEquals(1, forge.ai.simulation.SacrificeLoopPlan.ironworksNet(1));
+        AssertJUnit.assertEquals(3, forge.ai.simulation.SacrificeLoopPlan.ironworksNet(2));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithIronworksTrawlerRetrieverAndInspectorPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Krark-Clan Ironworks", ai, ZoneType.Battlefield);
+        addCardToZone("Foundry Inspector", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Myr Retriever", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Scrap Trawler", ai, ZoneType.Graveyard);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("sacrifice the Retriever, cast the Trawler, sacrifice it, cast the Retriever: one more each round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theIronworksLoopDoesNotStartWithoutTheInspector() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Krark-Clan Ironworks", ai, ZoneType.Battlefield);
+        addCardToZone("Myr Retriever", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Scrap Trawler", ai, ZoneType.Graveyard);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("a round costs one more than it gives: no loop\n" + trace, opp.getLife() > 0);
+    }
 }
