@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -93,10 +94,27 @@ public class UntapEffect extends SpellAbilityEffect {
      * @param mandatory
      *            whether the untapping is mandatory.
      */
+    /**
+     * Builds a prompt that says what may be untapped and how many, e.g. "Select up to two lands to untap"
+     * for UntapType$ Land | Amount$ 2.
+     */
+    static String untapPrompt(final String valid, final int num, final boolean mandatory) {
+        final String type = valid == null ? "" : valid.split("[.,+ ]")[0];
+        final String noun;
+        if (CardType.isACardType(type) || "Permanent".equals(type)) {
+            noun = type.toLowerCase();
+        } else {
+            noun = "card";
+        }
+        final String what = mandatory ? Lang.nounWithNumeralExceptOne(num, noun) : Lang.nounWithNumeral(num, noun);
+        return Localizer.getInstance().getMessage(mandatory ? "lblSelectNToUntap" : "lblSelectUpToNToUntap", what);
+    }
+
     private static void untapChoose(final SpellAbility sa, final boolean mandatory) {
         final Map<Player, CardCollection> map = Maps.newHashMap();
         final int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         final String valid = sa.getParam("UntapType");
+        final String prompt = untapPrompt(valid, num, mandatory);
 
         for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
             if (!p.isInGame()) {
@@ -108,7 +126,7 @@ public class UntapEffect extends SpellAbilityEffect {
             list = CardLists.filter(list, c -> c.canUntap(null, false));
 
             CardCollection untapped = new CardCollection();
-            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
+            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, prompt, mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
                 for (final Card c : selected) {
                     if (c.untap()) untapped.add(c);
