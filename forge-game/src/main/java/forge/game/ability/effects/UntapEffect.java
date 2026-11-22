@@ -85,16 +85,6 @@ public class UntapEffect extends SpellAbilityEffect {
     }
 
     /**
-     * <p>
-     * Choose cards to untap.
-     * </p>
-     *
-     * @param sa
-     *            a {@link SpellAbility}.
-     * @param mandatory
-     *            whether the untapping is mandatory.
-     */
-    /**
      * Builds a prompt that says what may be untapped and how many, e.g. "Select up to two lands to untap"
      * for UntapType$ Land | Amount$ 2.
      */
@@ -110,6 +100,16 @@ public class UntapEffect extends SpellAbilityEffect {
         return Localizer.getInstance().getMessage(mandatory ? "lblSelectNToUntap" : "lblSelectUpToNToUntap", what);
     }
 
+    /**
+     * <p>
+     * Choose cards to untap.
+     * </p>
+     *
+     * @param sa
+     *            a {@link SpellAbility}.
+     * @param mandatory
+     *            whether the untapping is mandatory.
+     */
     private static void untapChoose(final SpellAbility sa, final boolean mandatory) {
         final Map<Player, CardCollection> map = Maps.newHashMap();
         final int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
