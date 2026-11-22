@@ -319,24 +319,64 @@ public class GuiDownloadServiceTest {
         assertSkipped(result, 1);
     }
 
+    /** Answers that are no image, whether or not they declare a length: (body, declares its length, name of the image it was meant to be). */
     @DataProvider(name = "notImages")
     public Object[][] notImages() {
+        final byte[] errorPage = "<html>Service unavailable</html>".getBytes(StandardCharsets.UTF_8);
         return new Object[][] {
-            {"<html>Service unavailable</html>".getBytes(StandardCharsets.UTF_8)},
-            {new byte[0]}
+            {errorPage, true, "card.jpg"}, {errorPage, false, "card.jpg"},
+            {errorPage, true, "card.png"}, {errorPage, false, "card.png"},
+            {new byte[0], true, "card.jpg"}, {new byte[0], false, "card.jpg"}
         };
     }
 
     @Test(dataProvider = "notImages")
-    public void bodyThatIsNoImage_withoutContentLength_keepsExistingImage(final byte[] body) throws Exception {
-        final File dest = new File(dir, "card.jpg");
+    public void bodyThatIsNoImage_keepsExistingImage(final byte[] body, final boolean declareLength, final String name) throws Exception {
+        final File dest = new File(dir, name);
         Files.write(dest.toPath(), OLD_IMAGE);
 
-        final String result = download(dest, serve("/card.jpg", ok(body, -1)));
+        final String result = download(dest, serve("/" + name, ok(body, declareLength ? body.length : -1)));
 
         Assert.assertEquals(Files.readAllBytes(dest.toPath()), OLD_IMAGE);
         assertNoTempFiles();
         assertSkipped(result, 1);
+    }
+
+    @Test(dataProvider = "notImages")
+    public void bodyThatIsNoImage_isNotSaved(final byte[] body, final boolean declareLength, final String name) throws Exception {
+        final File dest = new File(dir, name);
+
+        final String result = download(dest, serve("/" + name, ok(body, declareLength ? body.length : -1)));
+
+        Assert.assertFalse(dest.exists(), "an answer that is no image was installed as the image");
+        assertNoTempFiles();
+        assertSkipped(result, 1);
+    }
+
+    @Test
+    public void jpegWithBytesAfterTheEndMarker_withContentLength_isSaved() throws Exception {
+        final byte[] image = image("jpg", 1);
+        final byte[] padded = Arrays.copyOf(image, image.length + 16); // the byte count already says it is whole
+        final File dest = new File(dir, "card.jpg");
+
+        final String result = download(dest, serve("/card.jpg", ok(padded, padded.length)));
+
+        Assert.assertEquals(Files.readAllBytes(dest.toPath()), padded);
+        assertNoTempFiles();
+        assertSkipped(result, 0);
+    }
+
+    @Test(dataProvider = "lengths")
+    public void pngBehindAJpgName_isSaved(final boolean declareLength) throws Exception {
+        final byte[] image = image("png", 1);
+        final File dest = new File(dir, "card.jpg");
+        serve("/card.png", ok(image, declareLength ? image.length : -1)); // nothing at /card.jpg: the png retry finds this
+
+        final String result = download(dest, baseUrl + "/card.jpg");
+
+        Assert.assertEquals(Files.readAllBytes(dest.toPath()), image);
+        assertNoTempFiles();
+        assertSkipped(result, 0);
     }
 
     @Test
@@ -408,5 +448,37 @@ public class GuiDownloadServiceTest {
         }
         assertNoTempFiles();
         assertSkipped(result, count / 2);
+    }
+
+    @DataProvider(name = "mobilePorts")
+    public Object[][] mobilePorts() {
+        return new Object[][] {{true, false}, {false, true}}; // Android, iOS
+    }
+
+    /** Runs the check as the given platform, then puts the real flags back. */
+    private static void onPlatform(final boolean android, final boolean ios, final Runnable check) {
+        final boolean wasAndroid = GuiBase.isAndroid();
+        final boolean wasIOS = GuiBase.isIOS();
+        GuiBase.setIsAndroid(android);
+        GuiBase.setIsIOS(ios);
+        try {
+            check.run();
+        } finally {
+            GuiBase.setIsAndroid(wasAndroid);
+            GuiBase.setIsIOS(wasIOS);
+        }
+    }
+
+    @Test
+    public void parallelDownloads_onDesktop() {
+        onPlatform(false, false, () -> Assert.assertEquals(GuiDownloadService.parallelDownloads(), 20));
+    }
+
+    @Test(dataProvider = "mobilePorts")
+    public void parallelDownloads_isLimitedOnMobile(final boolean android, final boolean ios) {
+        onPlatform(android, ios, () -> {
+            final int workers = GuiDownloadService.parallelDownloads();
+            Assert.assertTrue(workers >= 4 && workers <= 6, "workers on a mobile port: " + workers);
+        });
     }
 }

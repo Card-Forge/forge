@@ -65,7 +65,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
     @Override
     protected int getThreadCount() {
-        return PARALLEL_DOWNLOADS; // Scryfall's CDN has no rate limit; the API and paced hosts are still held back by ScryfallRateLimiter
+        return parallelDownloads(); // Scryfall's CDN has no rate limit; the API and paced hosts are still held back by ScryfallRateLimiter
     }
 
     @Override

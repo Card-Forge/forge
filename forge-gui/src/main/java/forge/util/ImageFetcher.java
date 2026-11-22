@@ -81,12 +81,16 @@ public abstract class ImageFetcher {
     /**
      * Scrolling a card list asks for many images at once, and the shared service pool only has as many threads as the
      * machine has cores although a download mostly waits for the network. Give the downloads as many workers as the
-     * bulk downloader uses; the ones that are idle for a while end.
+     * bulk downloader uses; the ones that are idle for a while end. The pool is made when the first image is fetched,
+     * not when this class loads: GuiMobile builds its fetcher before Forge.create() tells GuiBase which platform this is.
      */
-    private static final ExecutorService DOWNLOAD_POOL = newDownloadPool();
+    private static final class DownloadPool {
+        private static final ExecutorService INSTANCE = newDownloadPool();
+    }
 
-    private static ExecutorService newDownloadPool() {
-        final ThreadPoolExecutor pool = new ThreadPoolExecutor(GuiDownloadService.PARALLEL_DOWNLOADS, GuiDownloadService.PARALLEL_DOWNLOADS,
+    static ExecutorService newDownloadPool() {
+        final int workers = GuiDownloadService.parallelDownloads();
+        final ThreadPoolExecutor pool = new ThreadPoolExecutor(workers, workers,
                 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> {
             Thread t = new Thread(r, "image-download");
             t.setDaemon(true);
@@ -546,7 +550,7 @@ public abstract class ImageFetcher {
             currentFetches.remove(destPath);
         };
         try {
-            DOWNLOAD_POOL.submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
+            DownloadPool.INSTANCE.submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
         } catch (RejectedExecutionException re) {
             re.printStackTrace();
         }

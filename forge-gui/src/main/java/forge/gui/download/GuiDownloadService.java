@@ -83,14 +83,19 @@ public abstract class GuiDownloadService implements Runnable {
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
     /**
-     * How many images are fetched at the same time from a host that has no rate limit (the Scryfall CDN); requests
+     * How many images a desktop fetches at the same time from a host that has no rate limit (the Scryfall CDN); requests
      * to the Scryfall API and to paced hosts still go one after the other through {@link ScryfallRateLimiter}.
      * Speed grows with the worker count until the connection is full, and the workers needed for that are about
-     * 1.35 x (images per second the connection carries) x (round trip + time to first byte). Measured through an
-     * emulated network with 90 KB images: 20 workers reach the full speed of every path up to 100 Mbit at 100 ms
-     * or 300 Mbit at 30 ms (16 reach only 85-92% there) and more workers add nothing, only longer or faster paths gain.
+     * 1.35 x (images per second the connection carries) x (round trip + time to first byte). Measured on a desktop JVM
+     * through an emulated network with 90 KB images: 20 workers reach the full speed of every path up to 100 Mbit at
+     * 100 ms or 300 Mbit at 30 ms (16 reach only 85-92% there) and more workers add nothing, only longer or faster paths gain.
      */
-    public static final int PARALLEL_DOWNLOADS = 20;
+    private static final int PARALLEL_DOWNLOADS = 20;
+    /**
+     * Mobile ports fetch fewer at a time. The measurement above says nothing about what a phone gains from more
+     * connections, while each one costs memory and CPU that a phone has little of and shares a single radio.
+     */
+    private static final int MOBILE_PARALLEL_DOWNLOADS = 6;
     private static final int CONNECT_TIMEOUT_MS = 10_000;
     private static final int READ_TIMEOUT_MS = 30_000;
     /** Separates alternative urls in a value of {@link #getNeededFiles()}; they are tried in order until one saves the file. */
@@ -250,6 +255,11 @@ public abstract class GuiDownloadService implements Runnable {
         btnStart.requestFocusInWindow();
     }
 
+    /** How many images are fetched at the same time from a host that has no rate limit: {@link #PARALLEL_DOWNLOADS}, fewer on a mobile port. */
+    public static int parallelDownloads() {
+        return GuiBase.isMobile() ? MOBILE_PARALLEL_DOWNLOADS : PARALLEL_DOWNLOADS;
+    }
+
     /** How many files are downloaded at once. Only services that fetch from a host without rate limits should raise this. */
     protected int getThreadCount() {
         return 1;
@@ -394,9 +404,9 @@ public abstract class GuiDownloadService implements Runnable {
                     if (conn.getContentLengthLong() >= 0 && received != conn.getContentLengthLong()) {
                         throw new IOException("Incomplete download: got " + received + " of " + conn.getContentLengthLong() + " bytes");
                     }
-                    // without a promised length there is nothing to compare with, so look at the file itself
-                    if (conn.getContentLengthLong() < 0 && !isWhole(tmpDest, fileDest.getName())) {
-                        throw new IOException("Incomplete download: " + fileDest.getName() + " is not a whole image (" + received + " bytes)");
+                    // a complete body can still be an error page, and without a promised length there is nothing to compare with, so look at the file itself
+                    if (!isValid(tmpDest, fileDest.getName(), conn.getContentLengthLong() >= 0)) {
+                        throw new IOException("Not a whole image: " + fileDest.getName() + " (" + received + " bytes)");
                     }
                     Files.move(tmpDest.toPath(), fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     saved = true;
@@ -453,11 +463,12 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     /**
-     * Whether a file that arrived without a known length is whole. A dropped connection ends the stream like a
-     * finished one, so images are told by their markers: a JPEG ends with the end-of-image marker, a PNG with its
-     * IEND chunk. Other files have nothing to check.
+     * Whether a received file is what its name says. An image must start like a JPEG or a PNG, which tells it from the
+     * error page a server may answer with a 200. Without a promised length it must also end like one, because a dropped
+     * connection ends the stream like a finished one: a JPEG with the end-of-image marker, a PNG with its IEND chunk.
+     * Other files have nothing to check.
      */
-    private static boolean isWhole(final File received, final String name) throws IOException {
+    private static boolean isValid(final File received, final String name, final boolean lengthKnown) throws IOException {
         final String lowerName = name.toLowerCase(Locale.ROOT);
         if (!lowerName.endsWith(".jpg") && !lowerName.endsWith(".jpeg") && !lowerName.endsWith(".png")) {
             return true;
@@ -469,13 +480,17 @@ public abstract class GuiDownloadService implements Runnable {
             }
             final byte[] head = new byte[PNG_SIGNATURE.length];
             in.readFully(head);
+            final boolean jpeg = head[0] == (byte) 0xFF && head[1] == (byte) 0xD8;
+            if (!jpeg && !Arrays.equals(head, PNG_SIGNATURE)) {
+                return false;
+            }
+            if (lengthKnown) {
+                return true;
+            }
             final byte[] tail = new byte[PNG_END.length];
             in.seek(length - tail.length);
             in.readFully(tail);
-            if (head[0] == (byte) 0xFF && head[1] == (byte) 0xD8) {
-                return tail[tail.length - 2] == (byte) 0xFF && tail[tail.length - 1] == (byte) 0xD9;
-            }
-            return Arrays.equals(head, PNG_SIGNATURE) && Arrays.equals(tail, PNG_END);
+            return jpeg ? tail[tail.length - 2] == (byte) 0xFF && tail[tail.length - 1] == (byte) 0xD9 : Arrays.equals(tail, PNG_END);
         }
     }
 
