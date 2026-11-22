@@ -225,7 +225,6 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
         if (nonBasicLandsToRemove > rogueRun.getRemovalCredits()) {
             // Not enough removal credits
             String message = localizer.getMessage("lblRogueRemovalLimitHint");
-            FMouseAdapter.forceMouseUp(); //double-click removal can open the dialog before mouse release
             FOptionPane.showMessageDialog(message,
                 localizer.getMessage("lblRogueRemovalLimitReached"), FOptionPane.WARNING_ICON);
             return;
