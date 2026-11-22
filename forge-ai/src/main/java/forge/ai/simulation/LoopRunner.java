@@ -85,7 +85,7 @@ public final class LoopRunner {
         if (tender != null) {
             return tender;
         }
-        final SpellAbility melira = meliraAndRedcap(ai, candidates, approve);
+        final SpellAbility melira = SacrificeLoopPlan.next(ai, candidates, approve);
         if (melira != null) {
             return melira;
         }
@@ -166,7 +166,7 @@ public final class LoopRunner {
         return null;
     }
 
-    private static SpellAbility activated(final List<SpellAbility> candidates, final Card host, final ApiType api) {
+    static SpellAbility activated(final List<SpellAbility> candidates, final Card host, final ApiType api) {
         for (final SpellAbility sa : candidates) {
             if (sa != null && sa.getHostCard() == host && sa.isActivatedAbility() && sa.getApi() == api) {
                 return sa;
@@ -234,33 +234,6 @@ public final class LoopRunner {
         final boolean face = counters > 2 || triskelion.getDamage() + counters < 2;
         return aimed(ai, activated(candidates, triskelion, ApiType.DealDamage), face ? opp : triskelion, approve,
                 MAX_ACTIVATIONS);
-    }
-
-    /**
-     * Melira, Sylvok Outcast stops the -1/-1 counter of persist, so a Murderous Redcap that is sacrificed to Viscera Seer
-     * comes back at once with the same power and its enter trigger hits for two again: every Seer activation is two damage.
-     * Melira also gives the persist creature the SacMe mark, which is what makes the Seer pay with the Redcap.
-     */
-    private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
-                                                final Predicate<SpellAbility> approve) {
-        final Card melira = inPlay(ai, "Melira, Sylvok Outcast");
-        final Card redcap = inPlay(ai, "Murderous Redcap");
-        final Card seer = inPlay(ai, "Viscera Seer");
-        if (melira == null || redcap == null || seer == null || !redcap.hasKeyword(Keyword.PERSIST)
-                || redcap.getCounters(CounterEnumType.M1M1) > 0) {
-            return null;
-        }
-        final SpellAbility scry = activated(candidates, seer, ApiType.Scry);
-        if (scry == null) {
-            return null;
-        }
-        scry.setActivatingPlayer(ai);
-        scry.resetTargets();
-        if (RunawayLoop.exceeded(scry, MAX_ACTIVATIONS) || !approve.test(scry)) {
-            return null;
-        }
-        VetoLog.note(ai, "melira-loop | Seer sacrifices the Redcap");
-        return scry;
     }
 
     /** Mana an X of the opponent's life needs from the Ballista (XX) and the pool must hold before it is cast. */

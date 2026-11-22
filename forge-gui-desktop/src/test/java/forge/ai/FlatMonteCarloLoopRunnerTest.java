@@ -1548,4 +1548,37 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
                 + gameStateToString(game), countCardsWithName(game, "Craterhoof Behemoth", ZoneType.Battlefield) > 0
                 || game.isGameOver());
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithPaintersServantAndGrindstoneMillsTheLibraryOut() {
+        elfDeckWith(0);
+        addCards("Forest", 3, ai);
+        addCardToZone("Painter's Servant", ai, ZoneType.Battlefield).setChosenColors(com.google.common.collect.Lists.newArrayList("blue"));
+        addCardToZone("Grindstone", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertEquals("every milled card is blue with the Servant: the Grindstone goes round until the library is gone\n"
+                + trace + gameStateToString(game), 0, opp.getCardsIn(ZoneType.Library).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithYawgmothTwoUndyingAndABloodArtistKillsTheOpponent() {
+        elfDeckWith(0);
+        for (final String name : new String[] {"Yawgmoth, Thran Physician", "Young Wolf", "Strangleroot Geist", "Blood Artist"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("one undying creature dies, the other takes the -1/-1 counter, and the Blood Artist drains for each\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void yawgmothDoesNotGoRoundWithNothingToPayForIt() {
+        elfDeckWith(0);
+        for (final String name : new String[] {"Yawgmoth, Thran Physician", "Young Wolf", "Strangleroot Geist"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        runTurn();
+        AssertJUnit.assertTrue("no drain, no loop: the AI keeps its life and its library\n" + trace, ai.getLife() >= 19);
+    }
 }
