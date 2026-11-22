@@ -34,6 +34,9 @@ export function fitCards(row: HTMLElement, box: HTMLElement, back: HTMLElement, 
   const around = getComputedStyle(back);
   const own = getComputedStyle(row);
   const card = { w: parseFloat(own.getPropertyValue('--card-w')), h: parseFloat(own.getPropertyValue('--card-h')) };
+  // A card drawn sideways is as wide as the others are tall
+  const sideways = row.querySelectorAll('.card.sideways').length;
+  if (sideways) [card.w, card.h] = [card.h, sideways === count ? card.w : card.h];
   const width = back.clientWidth - parseFloat(around.paddingLeft) - parseFloat(around.paddingRight)
     - parseFloat(own.paddingLeft) - parseFloat(own.paddingRight) - 16;
   // The row's padding holds the labels under its cards, so it counts as used. The rest of the box keeps its height

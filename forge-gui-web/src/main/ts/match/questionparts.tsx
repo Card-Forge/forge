@@ -69,7 +69,7 @@ export function ButtonRow({ children }: { children: ComponentChildren }) {
 export const SECTION = /^=+\s*(.*?)\s*=+$/;
 
 /** What an option can show: a card on the table, a card by image and name, or a line of text. */
-export type OptionLike = Pick<RequestOption, 'card' | 'name' | 'imageKey' | 'player'> & { label?: string };
+export type OptionLike = Pick<RequestOption, 'card' | 'name' | 'imageKey' | 'player'> & { label?: string; sideways?: boolean };
 
 export function OptionView({ model, opt, picked, onClick }: { model: Model; opt: OptionLike; picked?: boolean; onClick?: () => void }) {
   const section = SECTION.exec(opt.label ?? '');
@@ -82,11 +82,10 @@ export function OptionView({ model, opt, picked, onClick }: { model: Model; opt:
   }
   const card = opt.card ? model.objects.get(opt.card.ref) : null;
   if (card) {
-    return <BoardCard model={model} card={card} title={opt.label} picked={picked} onClick={onClick} />;
+    return <BoardCard model={model} card={card} picked={picked} onClick={onClick} />;
   }
   if (opt.imageKey || opt.name) {
-    return <InlineCard imageKey={opt.imageKey} name={opt.name ?? opt.label} title={opt.label ?? opt.name}
-      picked={picked} onClick={onClick} />;
+    return <InlineCard imageKey={opt.imageKey} name={opt.name ?? opt.label} sideways={opt.sideways} picked={picked} onClick={onClick} />;
   }
   // A sticker offered by name shows its own piece of the sticker sheet
   const sticker = cutFor(model, opt.label);
@@ -114,8 +113,8 @@ export function PlayerOption({ model, player, picked, onClick }: { model: Model;
 }
 
 /** A card on the table, drawn by the board's own card code so it looks and updates exactly as it does on the board. */
-export function BoardCard({ model, card, title, picked, onClick }: {
-  model: Model; card: TrackedObject; title?: string; picked?: boolean; onClick?: () => void;
+export function BoardCard({ model, card, picked, onClick }: {
+  model: Model; card: TrackedObject; picked?: boolean; onClick?: () => void;
 }) {
   const host = useRef<HTMLSpanElement>(null);
   const el = useRef<HTMLDivElement | null>(null);
@@ -129,7 +128,6 @@ export function BoardCard({ model, card, title, picked, onClick }: {
       host.current?.append(c);
     }
     c.dataset.key = String(card.$key);
-    c.title = title ?? '';
     c.tabIndex = onClick ? 0 : -1;
     updateCard(c, model, card);
     markPicked(c, !!picked);
@@ -138,15 +136,15 @@ export function BoardCard({ model, card, title, picked, onClick }: {
 }
 
 /** A card that is not on the table, drawn as an image and a name. Only the frame is drawn when there is no image. */
-export function InlineCard({ imageKey, name, title, picked, onClick }: {
-  imageKey?: string; name?: string; title?: string; picked?: boolean; onClick?: () => void;
+export function InlineCard({ imageKey, name, sideways, picked, onClick }: {
+  imageKey?: string; name?: string; sideways?: boolean; picked?: boolean; onClick?: () => void;
 }) {
   const src = imageKey ? imageUrl(imageKey) : undefined;
   // The address the picture failed at. A picture that arrives later has a new address
   const [failedAt, setFailedAt] = useState<string | undefined>(undefined);
   const broken = !src || failedAt === src;
   return (
-    <div class={`card inline${broken ? ' noimg' : ''}${picked ? ' picked' : ''}`} title={title ?? ''} data-zoom={src} tabIndex={onClick ? 0 : -1}
+    <div class={`card inline${broken ? ' noimg' : ''}${sideways ? ' sideways' : ''}${picked ? ' picked' : ''}`} data-sideways={sideways ? '' : undefined} data-zoom={src} tabIndex={onClick ? 0 : -1}
       onClick={onClick} onMouseEnter={e => hoverCard(e.currentTarget)} onMouseLeave={() => hoverCard(null)}>
       <img alt="" loading="lazy" src={src} onError={() => setFailedAt(src)} />
       <div class="frame">{name}</div>

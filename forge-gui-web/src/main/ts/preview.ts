@@ -19,6 +19,7 @@ import { openedOver, sheet, swipeAcross, swipeDown } from './sheet';
 import type { CardFace, CardView, KeywordText, PlayerDetail, PlayerView } from './protocol';
 import { t, type TextKey } from './text';
 import { conditionsOf, type Progress } from './match/thresholds';
+import { drawDie, RIFT } from './match/planardie';
 import { COMMANDER_LETHAL, COMMANDER_WARNING, frameColour, ptShift } from './match/gamerules';
 
 // The host builds a hovered card's text with CardDetailUtil, as desktop does. The text reaches the model shortly after the hover starts
@@ -280,7 +281,7 @@ function drawSheetActions(zoom: HTMLElement, model: Model): void {
   const details = key !== null ? model.cardDetails.get(key) : undefined;
   // A card with no rules text has no text side to flip to. The button stays if the text side is already showing
   const face = details?.faces[ui.faceIndex] ?? details?.faces[0] ?? itemFace(item);
-  flip.hidden = !face || !(hover && 'card' in hover && hover.src) || (!face.text && !ui.cardText);
+  flip.hidden = !face || zoom.classList.contains('die') || !(hover && 'card' in hover && hover.src) || (!face.text && !ui.cardText);
   flip.textContent = t(ui.cardText ? 'lblWebPortraitShowImage' : 'lblWebPortraitShowRules');
   // A tap on the picture turns a card with more than one face to its next face
   q<HTMLElement>(zoom, '.shot').onclick = () => nextFace(model);
@@ -344,6 +345,16 @@ function drawDetail(model: Model): void {
   ensureZoom(zoom);
   zoom.querySelector<HTMLElement>('.sheet-actions')?.toggleAttribute('hidden', !ui.inspect);
   q(zoom, '.cmdr-taken').hidden = true;
+  const die = 'card' in hover && hover.at?.matches('.die-button') ? hover.at : null;
+  zoom.classList.toggle('die', !!die);
+  if (die) {
+    drawPlayer(zoom, { t: 'playerDetail', key: 0, name: t('lblWebPlanesDie'), lines: [] });
+    zoom.classList.add('text-card');
+    setSymbolText(q(zoom, '.cost'), '{X}');
+    delete q(zoom, '.detail').dataset.frame;
+    drawDie(q(zoom, '.text'), model, die.getAttribute('aria-disabled') === 'false');
+    return;
+  }
   if ('player' in hover) {
     drawPlayer(zoom, model.playerDetails.get(hover.player));
     drawCommanderDamage(q(zoom, '.cmdr-taken'), model, hover.player);
@@ -378,8 +389,10 @@ function drawDetail(model: Model): void {
     setImage(img, picture);
   }
   const shot = q(zoom, '.shot');
-  shot.classList.toggle('turned', !!face?.turn);
-  shot.style.setProperty('--turn', `${face?.turn ?? 0}deg`);
+  // A card outside the match has no details, so the page marks one printed sideways, or the list it is in
+  const turn = face?.turn ?? (hover.at?.closest('[data-sideways]') ? 90 : 0);
+  shot.classList.toggle('turned', !!turn);
+  shot.style.setProperty('--turn', `${turn}deg`);
   q(zoom, '.detail').hidden = !face;
   const nowPt = q(zoom, '.now-pt');
   nowPt.hidden = true;
@@ -642,7 +655,7 @@ function drawPt(el: HTMLElement, model: Model, key: number | null, face: CardFac
 
 function ensureZoom(zoom: HTMLElement): void {
   if (zoom.firstChild) return;
-  zoom.innerHTML = '<span class="shot"><img alt=""><span class="stickers" aria-hidden="true"></span><span class="now-pt" hidden></span><canvas class="foil" hidden></canvas><span class="from-tab"></span></span><div class="detail"><header><b class="name"></b><span class="cid"></span><span class="cost"></span></header><div class="cmdr-taken" hidden></div><div class="type"><span class="type-line"></span><span class="kind-chip"></span><span class="set"></span></div><div class="from"></div><div class="text"></div><div class="foot"></div><div class="pt"></div></div><div class="conds"></div><div class="hint"></div>';
+  zoom.innerHTML = '<span class="shot"><img alt=""><span class="stickers" aria-hidden="true"></span><span class="now-pt" hidden></span><canvas class="foil" hidden></canvas><span class="from-tab"></span></span><div class="detail"><header><b class="name"></b><span class="cid"></span><span class="cost"></span></header><div class="cmdr-taken" hidden></div><div class="type"><span class="type-line"></span><span class="kind-chip"></span><span class="set"></span></div><div class="from"></div>' + RIFT + '<div class="text"></div><div class="foot"></div><div class="pt"></div></div><div class="conds"></div><div class="hint"></div>';
   const img = q<HTMLImageElement>(zoom, 'img');
   img.addEventListener('error', () => {
     brokenSrc = img.dataset.card ?? '';

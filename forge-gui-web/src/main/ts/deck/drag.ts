@@ -108,9 +108,9 @@ export function startDrag(e: PointerEvent, carried: Carried, image: string, judg
 
 /** Pointer handlers for a draggable card. Its menu opens on right-click or from the More button in its preview. */
 export type CardHandlers = (name: string, from: Zone, image: string, count: number, limit?: number) => {
-  'data-menu': string;
-  onPointerDown: (e: PointerEvent) => void;
-  onContextMenu: (e: MouseEvent) => void;
+  'data-menu'?: string;
+  onPointerDown?: (e: PointerEvent) => void;
+  onContextMenu?: (e: MouseEvent) => void;
 };
 
 function makeChip(carried: Carried, image: string): HTMLElement {

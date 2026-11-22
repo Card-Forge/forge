@@ -210,9 +210,9 @@ html[data-motion="reduced"] .row > .group { transition: none; }
 .row.paired > .group { flex: 0 0 auto; justify-content: center; }
 /* Planeswalkers and battles go at the far end of the row. Their group has no width until something is in it. */
 .row > .group.far { flex: 0 0 auto; margin-left: auto; }
-/* A battle is printed sideways and every other client draws it that way. So the card's box is turned along with the art. */
-.card.battle { width: calc(var(--card-h) * var(--fit, 1)); height: calc(var(--card-w) * var(--fit, 1)); }
-.card.battle > img {
+/* A battle or a plane is printed sideways. So the card's box is turned along with the art. */
+.card.sideways { width: calc(var(--card-h) * var(--fit, 1)); height: calc(var(--card-w) * var(--fit, 1)); }
+.card.sideways > img {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: 90deg;
   width: calc(var(--card-w) * var(--fit, 1)); height: calc(var(--card-h) * var(--fit, 1));
 }
@@ -384,7 +384,26 @@ html[data-motion="reduced"] .row > .group { transition: none; }
   0%, 100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--void) 30%, transparent), 0 0 calc(var(--tile-w) * .06) color-mix(in srgb, var(--void) 10%, transparent); }
   50% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--void) 55%, transparent), 0 0 calc(var(--tile-w) * .09) color-mix(in srgb, var(--void) 20%, transparent); }
 }
+/* The planar deck is face down, so its tile always shows a small dark world. It has the graveyard's dust and the exile ring's light. */
+.zone-tile[data-zone="PlanarDeck"] { background: color-mix(in srgb, var(--bg-deep) 78%, transparent); border: 2px solid var(--line-bright); }
+.zone-tile[data-zone="PlanarDeck"] .ambient::before { content: ''; position: absolute; left: 50%; top: 50%; width: 38%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(circle at 27% 22%, color-mix(in srgb, var(--void) 34%, #020308), color-mix(in srgb, var(--void) 10%, #020308) 46%, #020308 74%);
+  box-shadow: 0 0 calc(var(--tile-w) * .06) color-mix(in srgb, var(--void) 16%, transparent), inset 1px 1px 0 color-mix(in srgb, var(--void) 48%, transparent); }
+/* The ring is drawn twice: the whole ring behind the world, and its near half in front */
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(1), .zone-tile[data-zone="PlanarDeck"] .ambient::after { content: ''; position: absolute; left: 50%; top: 50%; width: 74%; height: 16%; box-sizing: border-box; translate: -50% -50%; rotate: -18deg; border: 1px solid var(--void); border-radius: 50%; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(1) { z-index: -1; opacity: .3; }
+.zone-tile[data-zone="PlanarDeck"] .ambient::after { clip-path: inset(50% -2px -2px -2px); animation: exile-breathe 4.8s ease-in-out infinite; }
+.zone-tile[data-zone="PlanarDeck"] .ambient { isolation: isolate; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(n + 2) { width: var(--s); height: var(--s); background: var(--ash); box-shadow: 0 0 2px var(--ash); animation: planar-star 9s ease-in-out infinite var(--d); }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(2) { left: 84%; top: 34%; --s: 2px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(3) { left: 14%; top: 40%; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(4) { left: 24%; top: 80%; --s: 2px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(5) { left: 74%; top: 68%; --s: 1.5px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(6) { left: 40%; top: 26%; }
+@keyframes planar-star { 0%, 100% { opacity: .1; } 50% { opacity: .5; } }
 html[data-motion="reduced"] .zone-tile .ambient { display: none; }
+html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient { display: block; }
+html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient i, html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient::after { animation: none; opacity: .75; }
 html[data-motion="reduced"] .zone-tile[data-zone="Exile"] { animation: none; }
 /* An opponent's hand is up to three card backs fanned from one point, in their sleeve. The count is shown beside them. */
 .player { position: relative; }
@@ -683,6 +702,7 @@ html:not([data-form="portrait"]) #zones.asking:not(.minimised) { padding-block: 
 /* At most five cards across, so a window with more cards is as wide as its rows and no wider */
 .reveal-panel.bare .cards { --fit: 1.45; display: flex; flex-wrap: wrap; justify-content: center; min-width: 240px; padding: 2px var(--glow);
   max-width: calc(5 * var(--card-w) * var(--fit) + 4 * 14px + 2 * var(--glow)); }
+.reveal-panel.bare .cards:has(.sideways) { max-width: calc(5 * var(--card-h) * var(--fit) + 4 * 14px + 2 * var(--glow)); }
 .reveal-panel.bare .cards .section { width: 100%; }
 .reveal-panel.bare footer { justify-content: center; gap: 10px; padding: 0 10px; border: 0; }
 .reveal-panel.bare footer > * { flex: 1; justify-content: center; max-width: 180px; height: 32px; padding-block: 0; }
@@ -1289,29 +1309,91 @@ html[data-motion="reduced"] .avatar.hit, html[data-motion="reduced"] .avatar.hit
 /* A one-pixel highlight along the top edge makes a dark panel look raised instead of sunken */
 #log, .zone-panel { box-shadow: inset 0 1px 0 #ffffff12; }
 
-/* Planechase: the face-up planes are in a dock over the divider, with the die beside them. The plane's art tints the table. */
-#plane-dock { position: absolute; left: 16px; z-index: 6; display: flex; gap: 10px; align-items: stretch; padding: 8px;
-  background: #0e1219e6; border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 12px 30px #000b; }
-#plane-dock .planes { display: flex; gap: 6px; }
-#plane-dock .plane { width: 150px; aspect-ratio: 88 / 63; border-radius: 6px; overflow: hidden; position: relative; cursor: zoom-in; background: var(--surface-2); }
-/* Plane and scheme cards are printed sideways, so they are rotated to landscape */
-#plane-dock .plane img, .scheme img { position: absolute; left: 50%; top: 50%; width: 71.6%; height: 139.7%; object-fit: cover; transform: translate(-50%, -50%) rotate(90deg); }
-#plane-dock .plane-name { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 6px 3px; font-size: 11px; font-weight: 700; background: linear-gradient(180deg, transparent, #000000d0 45%); }
-#plane-dock .plane-side { display: grid; align-content: space-between; gap: 6px; width: 150px; }
-#plane-dock .plane-from { margin: 0; color: var(--muted); font-size: 11.5px; }
-#plane-dock .die-button { width: 100%; }
-#plane-dock .die-button:not(:disabled) { background: var(--brass); border-color: var(--accent-2); color: var(--on-brass); font-weight: 650; }
-#match.planar::before { content: ''; position: absolute; inset: 0; background: var(--plane-art) center / cover no-repeat; opacity: .12; pointer-events: none; z-index: 0; }
+/* Planechase: the face-up planes are cards at the left end of the phase strip, in line with the pill, with the planar die on the corner */
+#match { --plane-w: clamp(96px, 10.4vw, 150px); }
+/* With more than two players the seats fill the space beside the strip */
+#match:is(.many, .quads, .tabbed) { --plane-w: 104px; }
+#plane-dock { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); z-index: 6; }
+#plane-dock .planes { display: flex; }
+/* A violet edge in the die preview's colours. It is outside the card's own size. */
+#plane-dock .plane { box-sizing: content-box; width: var(--plane-w); aspect-ratio: 88 / 63; margin: -3px; border: 3px solid transparent; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 4px 12px #000a;
+  background: linear-gradient(var(--surface-2) 0 0) padding-box, linear-gradient(165deg, #4d4a9e, #3d327f 60%, #35286f) border-box; }
+/* Two planes overlap, like a spread of cards. The one hovered comes to the front. */
+#plane-dock .plane + .plane { margin-left: calc(var(--plane-w) * -.7 - 3px); transform: translateY(14px); }
+#plane-dock .plane:has(+ .plane) { transform: translateY(-14px); }
+#plane-dock .plane:hover { z-index: 1; }
+/* A plane is printed sideways, so it is rotated to landscape */
+#plane-dock .plane img, .editor-shell.planar .tile img { max-width: none; position: absolute; left: 50%; top: 50%; width: 71.6%; height: 139.7%; object-fit: cover; transform: translate(-50%, -50%) rotate(90deg); }
+/* The card shows its own name. The label is for a card with no picture. */
+#plane-dock .plane-name { position: absolute; inset: 0; display: grid; opacity: 0; place-items: center; padding: 6px; text-align: center; font-size: 11px; font-weight: 700; }
+#plane-dock .plane.noimg .plane-name { opacity: 1; }
+#plane-dock .plane.noimg img { display: none; }
+#plane-dock .die-button { position: absolute; right: -8px; bottom: -8px; z-index: 2; width: 34px; height: 34px; padding: 0; display: grid; place-items: center; border-radius: 10px; background: var(--bg); border: 1px solid var(--line-bright); color: var(--text); }
+#plane-dock:has(.plane + .plane) .die-button { bottom: -22px; }
+#plane-dock .die-button .cube { width: 29px; height: 29px; }
+/* The marks are a little thicker at this size, so they stay readable */
+#plane-dock .die-button .marks { stroke-width: 2.3; }
+#plane-dock .die-button[aria-disabled="true"] { cursor: default; }
+#plane-dock .die-button[aria-disabled="true"] .cube { opacity: .45; }
+#plane-dock .die-button:not([aria-disabled="true"]):hover { border-color: var(--accent-2); }
+#plane-dock .die-button.playable { outline: 2px solid var(--playable, #66ccff); outline-offset: 0; }
+/* The planar die is previewed as its rules text: the die in front of a rift, then a row for each result */
+#zoom:not(.die) .rift, #zoom.die .detail > :is(.type, .foot) { display: none; }
+#zoom.die .detail { --frame: #6a5aa8; aspect-ratio: auto; }
+#zoom .rift { position: relative; flex: none; height: 176px; border-radius: 6px; overflow: hidden; background: radial-gradient(60% 80% at 50% 50%, #0f2a3a 0%, #080b18 70%); }
+#zoom .rift > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+#zoom .rift .clouds { mix-blend-mode: screen; opacity: .55; }
+#zoom .rift .rays { background: repeating-conic-gradient(from 8deg at 50% 50%, #a9d8ff16 0 3deg, transparent 3deg 13deg); mask: radial-gradient(60% 90% at 50% 50%, #000, transparent); }
+#zoom .rift .halo { background: radial-gradient(46% 100% at 50% 50%, #5a7cff80 0%, #5f3fd045 50%, transparent 100%); }
+#zoom .rift > .tear { inset: -60px 0; height: auto; background: radial-gradient(21% 60% at 50% 50%, #f6fcff 0%, #a9e6ff 20%, #4f86e6b8 46%, transparent 100%); filter: blur(6px); transform: rotate(24deg); }
+#zoom .rift .stars { background: radial-gradient(1px 1px at 8% 20%, #fff, transparent), radial-gradient(1.4px 1.4px at 18% 72%, #dcd3ff, transparent), radial-gradient(1px 1px at 27% 38%, #fff9, transparent), radial-gradient(1px 1px at 34% 86%, #fff, transparent),
+  radial-gradient(1.6px 1.6px at 71% 16%, #fff, transparent), radial-gradient(1px 1px at 78% 64%, #fff, transparent), radial-gradient(1.2px 1.2px at 87% 34%, #cfc4ff, transparent), radial-gradient(1px 1px at 93% 80%, #fff, transparent); }
+#zoom .rift .edge { background: radial-gradient(70% 85% at 50% 50%, transparent 40%, #04030ae0 100%); }
+#zoom .rift > .cube { inset: 18px 0; height: calc(100% - 36px); filter: drop-shadow(0 0 16px #b79bff66) drop-shadow(0 12px 10px #000c); }
+.cube .faces path { stroke: #8d8268; stroke-linejoin: round; }
+.cube .f-top { fill: #fbf8f0; }
+.cube .f-left { fill: #e6dfcf; }
+.cube .f-right { fill: #c8bfa9; }
+.cube .marks { fill: none; stroke: #1a1712; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.die-row { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 11px; align-items: start; }
+.die-row.blank { align-items: center; }
+.die-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.die-head b { font-size: 14px; }
+#zoom.die .odds { font-weight: 600; font-variant-numeric: tabular-nums; }
+.die-chip { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: #f1ece0; color: #1a1712; box-shadow: inset 0 -3px 0 #cfc5ae; }
+.die-chip .g { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.blank > .die-chip { background: #cfc9bb; color: #857d6b; }
+#zoom.die .why { color: var(--muted); font-style: italic; }
+#zoom.die .what .sym { width: 14px; height: 14px; vertical-align: -2px; }
+/* The waiting chip is cut short where it would reach the planes */
+#match.planar { --plane-end: calc(var(--plane-w) + 34px); }
+#match.planar:has(.plane + .plane) { --plane-end: calc(var(--plane-w) * 1.3 + 34px); }
+#match.planar #phase-strip .waiting { max-width: max(84px, calc((100vw - var(--side-gap) - 4px) / 2 - 250px - var(--plane-end))); }
+#match.planar #phase-strip .waiting .who { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#match.planar #phase-strip .waiting > :is(.glyph, b) { flex: none; }
+@media (max-width: 1400px) {
+  #match.planar #phase-strip .waiting { right: calc(100% + 16px); max-width: max(84px, calc((100vw - var(--side-gap) - 4px) / 2 - 216px - var(--plane-end))); }
+}
+/* There is room only for the chip's icon and time */
+@media (max-width: 1100px) {
+  #match, #match:is(.many, .quads, .tabbed) { --plane-w: 84px; }
+  #match.planar #phase-strip .waiting { padding: 0 8px; }
+  #match.planar #phase-strip .waiting .who { display: none; }
+}
+/* The day and night medal goes to the other end of the strip */
+#match.planar #sky { justify-self: end; margin: 0 25px 0 0; }
 .zone-tile.hidden-deck { cursor: default; }
 
 /* Archenemy: a brass tag next to the name and the ongoing schemes in a row under the seat. A scheme set in motion is shown large. */
 .role-tag { margin-left: 6px; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--brass); color: var(--on-brass); vertical-align: middle; }
 .schemes-ongoing:empty { display: none; }
 .schemes-ongoing { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-.scheme { width: 72px; aspect-ratio: 88 / 63; border-radius: 5px; overflow: hidden; position: relative; cursor: zoom-in; background: var(--surface-2); box-shadow: 0 3px 8px #0009, inset 0 0 0 1px #ffffff2a; }
+.scheme { width: 72px; aspect-ratio: 88 / 63; border-radius: 5px; overflow: hidden; position: relative; background: var(--surface-2); box-shadow: 0 3px 8px #0009, inset 0 0 0 1px #ffffff2a; }
+/* A scheme is printed upright. Its small tile shows only the art. */
+.scheme img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
 .scheme .scheme-name { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 4px 2px; font-size: 8.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: linear-gradient(180deg, transparent, #000000d0 45%); }
 .scheme-reveal { position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; align-content: center; gap: 12px; background: var(--scrim); pointer-events: none; }
-.scheme-reveal .scheme.big { width: min(420px, 80vw); }
+.scheme-reveal .scheme.big { width: min(320px, 70vw); aspect-ratio: 63 / 88; }
 .scheme-reveal .scheme.big .scheme-name { font-size: 15px; padding: 14px 10px 6px; }
 .scheme-reveal p { margin: 0; color: var(--text); font-size: 15px; }
 /* Why a dragged block was refused, shown where the card was dropped */

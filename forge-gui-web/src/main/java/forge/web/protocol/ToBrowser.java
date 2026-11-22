@@ -213,13 +213,17 @@ public final class ToBrowser {
     public record SeatExtra(String label, int count, @Nullable String detail, @Nullable String problem) {
     }
 
-    /** What a seat may choose for one extra section. An avatar choice includes its image and its two modifiers. */
+    /** What a seat may choose for one extra section. An avatar choice includes its image and its two modifiers. A deck choice includes a few cards that picture it.
+     * editable says this browser may change the saved planar deck itself. Otherwise its editor opens a copy. chosen is the key of the seat's choice, when this browser made it. */
     @Message("extraChoices")
-    public record ExtraChoices(String section, int index, List<ExtraChoice> choices) {
+    public record ExtraChoices(String section, int index, List<ExtraChoice> choices, @Nullable String chosen) {
     }
 
     public record ExtraChoice(String key, String label, @Nullable Integer count, @Nullable String problem,
-            @Nullable String image, @Nullable Integer hand, @Nullable Integer life) {
+            @Nullable String image, @Nullable Integer hand, @Nullable Integer life, List<ExtraCard> cards, boolean editable) {
+    }
+
+    public record ExtraCard(String name, String image) {
     }
 
     @Message("addresses")
@@ -550,9 +554,10 @@ public final class ToBrowser {
     /**
      * Which fields are set depends on the option: a card on the table, a card that is not (a split pile), or a player.
      * A card name to name has only its imageKey, for its preview. An ability gives the card it comes from as its source. A colour gives its mana symbol's letter.
+     * sideways says a card that is not on the table is a plane or phenomenon, which is printed sideways.
      */
     public record RequestOption(String label, @Nullable Ref card, @Nullable String name, @Nullable String imageKey,
-            @Nullable Ref player, @Nullable Ref source, @Nullable String symbol) {
+            @Nullable Ref player, @Nullable Ref source, @Nullable String symbol, boolean sideways) {
     }
 
     /** costs asks for a spell's optional costs, which have no way to decline. */

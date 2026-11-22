@@ -4,6 +4,7 @@
 import { h, render } from 'preact';
 import { reconcile } from './reconcile';
 import { createCard, has, markPicked, updateCard, type CardClick } from './cards';
+import { commandKind } from './command';
 import { fitCards } from './fit';
 import { isLocal, stateOf, zone, type Model } from '../model';
 import { byId, q, make, reducedMotion } from '../dom';
@@ -17,7 +18,7 @@ import { sheet } from '../sheet';
 import type { Actions } from '../actions';
 import { keyName } from '../keys';
 import { boundKeys } from '../settings';
-import type { CardView, PlayerView, PromptButton, ZoneType } from '../protocol';
+import type { CardStateView, CardView, PlayerView, PromptButton, ZoneType } from '../protocol';
 import { t, tCap, type TextKey } from '../text';
 import { Select } from '../select';
 import { manaValue } from './gamerules';
@@ -181,7 +182,7 @@ function createPanel(): HTMLElement {
 /** chips are the keys of the zones shown together for one question, and chosen is the one drawn. Both are empty for a single zone. */
 function updatePanel(el: HTMLElement, model: Model, actions: Actions, p: Panel, select: CardClick, chips: string[], chosen: string | null): void {
   const player = model.objects.get(p.player);
-  const cards = shown(model, zone(model, player, p.zone));
+  const cards = shown(model, listed(model, player, p.zone));
   const among = p.forced && chips.length > 1;
   renderChips(q(el, '.zone-chips'), model, among ? chips : [], chosen);
   // Among several zones the chip already shows the avatar, so the line names the player in words
@@ -295,9 +296,17 @@ function answer(el: HTMLElement, button: PromptButton | undefined, run: () => vo
   el.onclick = run;
 }
 
+/** A zone's cards. The planes, the planar die and the schemes in the command zone are left out, because the board draws them in places of their own. */
+function listed(model: Model, player: PlayerView | undefined, zoneName: ZoneType): CardView[] {
+  const cards = zone(model, player, zoneName);
+  return zoneName === 'Command' ? cards.filter(c => !['plane', 'dice', 'scheme'].includes(commandKind(c, stateOf(model, c)))) : cards;
+}
+
 /** The zone's cards in dialog order. While searching, the best match is first. Otherwise they follow the chosen sort. */
 function shown(model: Model, cards: CardView[]): CardView[] {
-  const name = (c: CardView) => stateOf(model, c).Name ?? '';
+  // The page also has the cards the player may not see. Finding or sorting them would tell the player what they are
+  const state = (c: CardView): Partial<CardStateView> => (model.visible.has(c.$key) ? stateOf(model, c) : {});
+  const name = (c: CardView) => state(c).Name ?? '';
   if (normalize(ui.zoneSearch)) {
     return rankByName(cards.map(name), ui.zoneSearch).map(i => cards[i]);
   }
@@ -306,11 +315,11 @@ function shown(model: Model, cards: CardView[]): CardView[] {
     return kept.sort((a, b) => name(a).localeCompare(name(b)));
   }
   if (ui.zoneSort === 'type') {
-    const type = (c: CardView) => stateOf(model, c).Type ?? '';
+    const type = (c: CardView) => state(c).Type ?? '';
     return kept.sort((a, b) => type(a).localeCompare(type(b)) || name(a).localeCompare(name(b)));
   }
   if (ui.zoneSort === 'mana') {
-    const value = (c: CardView) => manaValue(stateOf(model, c).ManaCost);
+    const value = (c: CardView) => manaValue(state(c).ManaCost);
     return kept.sort((a, b) => value(a) - value(b) || name(a).localeCompare(name(b)));
   }
   return kept;
@@ -320,7 +329,7 @@ function shown(model: Model, cards: CardView[]): CardView[] {
 function drawBar(root: HTMLElement, model: Model, panels: Panel[]): void {
   const first = panels[0];
   const player = model.objects.get(first.player);
-  const count = panels.length > 1 ? t('lblWebZoneNZones', panels.length) : t('lblWebNCards', zone(model, player, first.zone).length);
+  const count = panels.length > 1 ? t('lblWebZoneNZones', panels.length) : t('lblWebNCards', listed(model, player, first.zone).length);
   // Kept across renders, so a render between press and release does not lose the click
   let bar = root.querySelector<HTMLElement>(':scope > .zone-bar');
   if (!bar) {

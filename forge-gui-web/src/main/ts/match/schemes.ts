@@ -23,7 +23,7 @@ export function isArchenemy(model: Model, player: PlayerView): boolean {
   return zone(model, player, 'SchemeDeck').length > 0 || schemesOf(model, player).length > 0;
 }
 
-/** Draws the ongoing schemes under a seat, in landscape as they are printed. */
+/** Draws the ongoing schemes under a seat. */
 export function renderOngoing(root: HTMLElement, model: Model, player: PlayerView): void {
   drawNamedTiles(root, model, schemesOf(model, player), 'scheme');
 }

@@ -156,7 +156,7 @@ function ExtraZone({ section, cards, adding, landed, addTo, actions }: {
   const from = section.section;
   const remove = (name: string) => actions.edit({ op: 'remove', name, from, count: 1 });
   return (
-    <div class={adding ? 'zone extra-zone adding' : 'zone extra-zone'}>
+    <div class={adding ? 'zone extra-zone adding' : 'zone extra-zone'} data-sideways={from === 'Planes' ? '' : undefined}>
       <h4>
         <span class="zn">{section.name}</span><span class="count">{section.cards.reduce((n, c) => n + c.count, 0)}</span>
         <button class="small" aria-pressed={adding} onClick={() => addTo(adding ? null : from)}>

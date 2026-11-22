@@ -353,7 +353,7 @@ public final class Lobby {
         for (final DeckSection section : sectionsFor(lobby, index)) {
             if (!choice(index).extras().containsKey(section)) {
                 final Extra fallback = ExtraSections.resolveExtra(section,
-                        section == DeckSection.Avatar ? ExtraSections.RANDOM : ExtraSections.GENERATE, forComputer(lobby, index));
+                        section == DeckSection.Avatar ? ExtraSections.RANDOM : ExtraSections.GENERATE, forComputer(lobby, index), device);
                 if (fallback != null) {
                     change(index, c -> c.withExtra(section, fallback));
                 }
@@ -420,7 +420,7 @@ public final class Lobby {
         if (lobby == null || section == null || !dealsFor(lobby, index)) {
             return;
         }
-        final Extra extra = ExtraSections.resolveExtra(section, choice, forComputer(lobby, index));
+        final Extra extra = ExtraSections.resolveExtra(section, choice, forComputer(lobby, index), device);
         if (extra != null) {
             change(index, c -> c.withExtra(section, extra));
             compose(index);
@@ -433,8 +433,10 @@ public final class Lobby {
         if (lobby == null || section == null || index < 0 || index >= lobby.getNumberOfSlots()) {
             return null;
         }
+        final Extra extra = choice(index).extras().get(section);
         return new ToBrowser.ExtraChoices(section.name(), index,
-                ExtraSections.extraChoices(section, forComputer(lobby, index), catalog.deck(key(index))));
+                ExtraSections.extraChoices(section, forComputer(lobby, index), catalog.deck(key(index)), guest.getAsBoolean(), device),
+                extra == null ? null : extra.key());
     }
 
     private static DeckSection extraSection(final String name) {
@@ -739,7 +741,7 @@ public final class Lobby {
         return lobby != null && index >= 0 && index < lobby.getNumberOfSlots() ? lobby.getSlot(index).getDeck() : null;
     }
 
-    /** What stops the match from starting: all of startGame's own refusals, then an open seat, which only the page refuses. startGame still runs as the final check. */
+    /** What stops the match from starting: all of startGame's own refusals, then an open seat or a planar deck with no planes, which only the page refuses. startGame still runs as the final check. */
     public List<String> problems() {
         return problems(new ArrayList<>());
     }
@@ -756,8 +758,16 @@ public final class Lobby {
             for (int i = 0; i < lobby.getNumberOfSlots(); i++) {
                 final LobbySlot slot = lobby.getSlot(i);
                 // A seat that sits out is not in the match, so nothing about it stops the match
-                if (!slot.isSittingOut() && slot.getType() == LobbySlotType.OPEN) {
+                if (slot.isSittingOut()) {
+                    continue;
+                }
+                if (slot.getType() == LobbySlotType.OPEN) {
                     out.add(Localizer.getInstance().getMessage("lblWebLobbySeatOpen"));
+                    continue;
+                }
+                final Deck deck = deckAt(i);
+                if (deck != null && sectionsFor(lobby, i).contains(DeckSection.Planes) && ExtraSections.noPlanes(deck.get(DeckSection.Planes))) {
+                    out.add(Localizer.getInstance().getMessage("lblWebLobbyNoPlanes", slot.getName()));
                 }
             }
             return out;

@@ -16,6 +16,7 @@ import forge.game.GameType;
 import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
@@ -36,6 +37,8 @@ import java.util.UUID;
 /** One deck open in the browser's editor. Every change is checked against the engine's limits, applied and saved at once. */
 public final class DeckEditor {
     private static final int MOST_UNDO = 100;
+    /** The fewest cards a planar deck may have, as DeckFormat checks it. */
+    private static final int FEWEST_PLANES = 10;
     /** The message key for the reply to renaming, duplicating or deleting a pool's deck. */
     private static final String GROUP_OWNS_IT = "lblWebEditorPoolOwnsDeck";
     /** The message key for the reply to making a pool's cards foil. */
@@ -97,6 +100,11 @@ public final class DeckEditor {
     /** Whether this is a Commander Draft pool. Its commander comes from the pool, or from the few that every player may use without drafting them. */
     private boolean commanderDraft() {
         return !check.unrestricted() && check.deckFormat() == DeckFormat.CommanderDraft;
+    }
+
+    /** Whether this is a planar deck. All its cards are in its Planes section, with at most one of each. */
+    boolean planar() {
+        return !check.unrestricted() && check.format() == GameType.Planechase;
     }
 
     /** Marks a new deck, whose name is a placeholder that its first commander replaces. */
@@ -177,7 +185,7 @@ public final class DeckEditor {
             return addFromPool(name, to, count);
         }
         final PaperCard card = printingFor(name);
-        if (card == null) {
+        if (card == null || wrongKind(card, to)) {
             return Localizer.getInstance().getMessage("lblWebEditorNoSuchCard", String.valueOf(name));
         }
         final String limit = overLimit(card, count);
@@ -193,7 +201,7 @@ public final class DeckEditor {
             return add(name, to, 1);
         }
         final PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-        if (card == null || !card.getName().equals(name)) {
+        if (card == null || !card.getName().equals(name) || wrongKind(card, to)) {
             return Localizer.getInstance().getMessage("lblWebEditorNotAPrinting", String.valueOf(name));
         }
         final String limit = overLimit(card, 1);
@@ -201,6 +209,26 @@ public final class DeckEditor {
             return limit;
         }
         return change(name, () -> deck.getOrCreate(to).add(card, 1));
+    }
+
+    /** A planar deck holds only planes and phenomena, all in one section. */
+    private boolean wrongKind(final PaperCard card, final DeckSection to) {
+        return planar() && (to != DeckSection.Planes || DeckSection.matchingSection(card) != DeckSection.Planes);
+    }
+
+    /** Adds random planes to a planar deck until it has the fewest cards it may be played with. */
+    String fillWithRandomPlanes() {
+        if (!planar()) {
+            return null;
+        }
+        final CardPool held = deck.getOrCreate(DeckSection.Planes);
+        final int wanted = FEWEST_PLANES - held.countAll();
+        if (wanted <= 0) {
+            return null;
+        }
+        final List<PaperCard> left = StaticData.instance().getVariantCards().getUniqueCards().stream()
+                .filter(c -> c.getRules().getType().isPlane() && held.countByName(c.getName()) == 0).toList();
+        return change(null, () -> Aggregates.random(left, wanted).forEach(held::add));
     }
 
     /** Makes every copy of a card in a section foil, or plain again when all copies are foil, as desktop's editor does. */
@@ -383,6 +411,10 @@ public final class DeckEditor {
 
     /** Changes what the deck is checked against. A change of format family moves the deck to that format's folder. */
     String setCheck(final LegalityScope wanted) {
+        // A planar deck is not a deck of any other format
+        if (planar()) {
+            return null;
+        }
         return change(null, () -> moveTo(wanted));
     }
 
@@ -483,19 +515,21 @@ public final class DeckEditor {
         final List<PaperCard> leaders = Legality.commanders(deck, check);
         final Legality.Result legality = Legality.check(deck, check);
         final boolean wanted = df.hasCommander() && (leaders.isEmpty() || (df.hasSignatureSpell() && deck.getSignatureSpell() == null));
+        final int most = planar() ? 1 : df.getMaxCardCopies();
         return new EditorState(deck.getName(), check.label(), check.format().name(),
                 check.pool() == null ? null : check.pool().getName(), check.unrestricted(),
                 target instanceof Device, copyOf,
-                CardCatalog.cards(deck.get(DeckSection.Commander), legality), df.hasCommander(), wanted, df.getMaxCardCopies() == Integer.MAX_VALUE ? null : df.getMaxCardCopies(),
+                CardCatalog.cards(deck.get(DeckSection.Commander), legality), df.hasCommander(), wanted, most == Integer.MAX_VALUE ? null : most,
                 Legality.identityLetters(leaders),
-                CardCatalog.groups(deck.getMain(), legality), CardCatalog.cards(deck.get(DeckSection.Sideboard), legality), lands(),
+                CardCatalog.groups(planar() ? deck.getOrCreate(DeckSection.Planes) : deck.getMain(), legality),
+                CardCatalog.cards(deck.get(DeckSection.Sideboard), legality), lands(),
                 DeckFacts.stats(deck), legality.verdict(), !undo.isEmpty(), landed,
                 limited(), landSet, LandSets.ALL, sections(legality));
     }
 
-    /** Every section beyond the main deck that a constructed deck can have, as desktop's editor offers them. A pool has none. */
+    /** Every section beyond the main deck that a constructed deck can have, as desktop's editor offers them. A pool or a planar deck has none. */
     private List<EditorSection> sections(final Legality.Result legality) {
-        if (limited()) {
+        if (limited() || planar()) {
             return List.of();
         }
         final List<EditorSection> out = new ArrayList<>();
@@ -748,12 +782,17 @@ public final class DeckEditor {
         return common != null ? common : StaticData.instance().getVariantCards().getCard(name);
     }
 
+    /** A planar deck has no second copy of a phenomenon either, though the format's copy limit allows two. */
+    private int most(final PaperCard card) {
+        return planar() ? 1 : check.deckFormat().getMaxCardCopies(card);
+    }
+
     /** How many more copies of a card the copy limit allows, counted by name across the deck. */
     private int room(final PaperCard card) {
-        final DeckFormat df = check.deckFormat();
-        final int most = df.getMaxCardCopies(card);
-        return most == Integer.MAX_VALUE ? Integer.MAX_VALUE
-                : most - deck.getAllCardsInASinglePool(df.hasCommander(), false).countByName(card.getName());
+        final int most = most(card);
+        final CardPool held = planar() ? deck.getOrCreate(DeckSection.Planes)
+                : deck.getAllCardsInASinglePool(check.deckFormat().hasCommander(), false);
+        return most == Integer.MAX_VALUE ? Integer.MAX_VALUE : most - held.countByName(card.getName());
     }
 
     private String overLimit(final PaperCard card, final int adding) {
@@ -761,7 +800,7 @@ public final class DeckEditor {
         if (adding <= room) {
             return null;
         }
-        final int most = check.deckFormat().getMaxCardCopies(card);
+        final int most = most(card);
         if (most == Integer.MAX_VALUE) {
             return Localizer.getInstance().getMessage("lblWebDeckNoneLeft", card.getName());
         }

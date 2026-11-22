@@ -176,23 +176,30 @@ public final class DeckWorkspace implements IHasForgeLog {
             readOnly = false;
             target = guest ? new DeckEditor.Device(UUID.randomUUID().toString()) : new DeckEditor.Stored(storages.of(check.format()));
         } else {
-            deck = o.key() == null ? null : lobby.catalog().deck(o.key());
+            final Deck planar = ExtraSections.savedDeck(DeckSection.Planes, o.key(), device);
+            deck = planar != null ? planar : lobby.catalog().deck(o.key());
             if (deck == null) {
                 channel.send(new Notice(Localizer.getInstance().getMessage("lblWebEditorCannotOpen"), null, true));
                 return;
             }
-            readOnly = o.copy() || DeckCatalog.readOnly(o.key(), guest);
+            if (planar != null) {
+                check = LegalityScope.of(GameType.Planechase, null);
+            }
+            readOnly = o.copy() || (planar != null ? ExtraSections.readOnly(o.key(), guest) : DeckCatalog.readOnly(o.key(), guest));
             if (!readOnly) {
                 editorPath = DeckCatalog.pathOf(o.key());
             }
             target = targetOf(o.key(), editorPath, check);
+        }
+        // The editor's own menu names no seat, so its new planar deck is for the seat the open one was for
+        if (o.seat() != null || editor == null || !editor.planar()) {
+            editorSeat = o.seat();
         }
         editor = new DeckEditor(deck, readOnly, o.key() != null, target, check, storages, guest, this::sendDeviceDeck);
         if (o.newFormat() != null) {
             editor.unnamed();
         }
         eventPool = false;
-        editorSeat = o.seat();
         editorTable = lobby.table();
     }
 
@@ -287,10 +294,11 @@ public final class DeckWorkspace implements IHasForgeLog {
             case foil -> editor.toggleFoil(e.name(), from);
             case landSet -> editor.setLandSet(e.name());
             case suggestLands -> editor.suggestLands();
+            case randomPlanes -> editor.fillWithRandomPlanes();
         };
     }
 
-    /** Done. The deck goes on the seat whose finder opened the editor, if that seat is still at the same table and plays this format. */
+    /** Done. The deck goes on the seat whose finder opened the editor, if that seat is still at the same table and plays this format. A planar deck fits any format and becomes that seat's planes. */
     private String close(final BrowserChannel channel) {
         final DeckEditor done = editor;
         final Integer seat = editorSeat;
@@ -304,13 +312,17 @@ public final class DeckWorkspace implements IHasForgeLog {
         if (lobby.table() != editorTable) {
             return Localizer.getInstance().getMessage("lblWebEditorTableChanged");
         }
-        if (DeckStore.family(done.check().format()) != DeckStore.family(lobby.format())) {
+        if (!done.planar() && DeckStore.family(done.check().format()) != DeckStore.family(lobby.format())) {
             return Localizer.getInstance().getMessage("lblWebEditorWrongFormat", done.check().format());
         }
-        final String key = adopt(done);
+        final String key = done.planar() ? ExtraSections.keyOf(done.target(), editorPath, done.deck()) : adopt(done);
         // The table's seats are changed only on the host UI thread
         ui.invokeInEdtLater(() -> {
-            lobby.setDeck(seat, key);
+            if (done.planar()) {
+                lobby.setSeatExtra(seat, DeckSection.Planes.name(), key);
+            } else {
+                lobby.setDeck(seat, key);
+            }
             lobby.sendState(channel);
         });
         return null;

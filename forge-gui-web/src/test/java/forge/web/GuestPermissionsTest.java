@@ -2,7 +2,10 @@ package forge.web;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import forge.StaticData;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.Localizer;
@@ -106,5 +109,60 @@ public class GuestPermissionsTest extends WebHubTest {
         value.add(choice);
         m.add("value", value);
         return m;
+    }
+
+    // Fails if a guest's planar deck is not stored in its browser or not put on its seat, is listed with its card decks, or has no planes and the match can start, or a guest can change the host's planar deck
+    @Test(timeOut = 120_000)
+    public void aGuestBuildsItsOwnPlanarDecks() throws Exception {
+        final IStorage<Deck> stored = FModel.getDecks().getPlane();
+        final Deck hosts = new Deck("Guest Planar Test");
+        hosts.getOrCreate(DeckSection.Planes).add(StaticData.instance().getVariantCards().getCard("Murasa"));
+        final TestBrowser host = hostAt("invite");
+        stored.add(hosts);
+        try {
+            sessions.onMessage(host, message("setVariant", "variant", "Planechase", "on", true));
+            final TestBrowser guest = connect("planar");
+            sessions.onMessage(guest, message("setName", "name", "Guest"));
+            final int seat = guest.awaitLobbyWithSeat().get("mySeat").getAsInt();
+
+            sessions.onMessage(guest, message("editorOpen", "newFormat", "Planechase", "seat", seat, "copy", false));
+            sessions.onMessage(guest, message("editorEdit", "op", "add", "name", "Naya", "to", "Planes", "count", 1));
+            sessions.onMessage(guest, message("editorEdit", "op", "randomPlanes", "count", 0));
+            sessions.onMessage(guest, message("editorRename", "name", "Guest Planes"));
+            final JsonObject kept = guest.awaitMatching("deviceDeck", d -> str(d, "text").contains("Name=Guest Planes"), "the guest's planar deck was not sent to its browser");
+            Assert.assertEquals(str(kept, "format"), "Planechase");
+            Assert.assertTrue(str(kept, "text").contains("Naya"));
+            Assert.assertFalse(stored.contains("Guest Planes"), "the guest's planar deck was saved with the host's");
+            sessions.onMessage(guest, TestBrowser.action("editorClose"));
+            guest.awaitLobby(l -> "Guest Planes".equals(planesOf(l, seat)), "the guest's planar deck was not put on its seat");
+            Assert.assertFalse(guest.awaitDecks().toString().contains("Guest Planes"), "a planar deck is listed with the card decks");
+
+            // Asking to edit the host's deck in place must still make a copy
+            sessions.onMessage(guest, message("editorOpen", "key", "deck:/Guest Planar Test", "seat", seat, "copy", false));
+            sessions.onMessage(guest, message("editorEdit", "op", "add", "name", "Bant", "to", "Planes", "count", 1));
+            guest.awaitMatching("deviceDeck", d -> str(d, "text").contains("Name=Guest Planar Test") && str(d, "text").contains("Bant"), "the guest's copy was not sent to its browser");
+            Assert.assertEquals(stored.get("Guest Planar Test").get(DeckSection.Planes).countAll(), 1, "a guest changed the host's planar deck");
+
+            sessions.onMessage(guest, message("setSeat", "index", seat, "deck", TestDecks.firstLegal(guest.awaitDecks())));
+            sessions.onMessage(guest, message("editorOpen", "newFormat", "Planechase", "seat", seat, "copy", false));
+            sessions.onMessage(guest, message("editorEdit", "op", "add", "name", "Chaotic Aether", "to", "Planes", "count", 1));
+            sessions.onMessage(guest, TestBrowser.action("editorClose"));
+            final String noPlanes = Localizer.getInstance().getMessage("lblWebLobbyNoPlanes", "Guest");
+            host.awaitLobby(l -> l.getAsJsonArray("problems").contains(new JsonPrimitive(noPlanes)), "the match could start with a planar deck that has no planes");
+        } finally {
+            // The host's variants are saved, so the next test's table would also play Planechase
+            sessions.onMessage(host, message("setVariant", "variant", "Planechase", "on", false));
+            onUi(() -> { });
+            for (final String name : List.of("Guest Planar Test", "Guest Planes")) {
+                if (stored.contains(name)) {
+                    stored.delete(name);
+                }
+            }
+        }
+    }
+
+    private static String planesOf(final JsonObject table, final int seat) {
+        final JsonObject s = table.getAsJsonArray("seats").get(seat).getAsJsonObject();
+        return s.has("planes") && !s.get("planes").isJsonNull() ? str(s.getAsJsonObject("planes"), "label") : null;
     }
 }

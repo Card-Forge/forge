@@ -573,7 +573,7 @@ html:not([data-form="portrait"]) .finder:has(.rail) :is(.dk-chosen, .finder-foot
 
 .sizes { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
 .stats { display: grid; grid-template-columns: auto 1fr; gap: 18px; margin-top: 12px; }
-.curve h4, .types h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.curve h4, .types h4, .extra-body h4, .planar-list h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .bars { display: flex; align-items: flex-end; gap: 4px; }
 .bars .bar { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 22px; gap: 3px; }
 /* Each bar shows permanents in brass below instants and sorceries in pale steel (deckview.tsx). The two colours differ in lightness as well as hue. */
@@ -729,16 +729,48 @@ html[data-motion="reduced"] .dock-new { animation: none; }
 .dock-say { padding: 0 14px 14px; }
 .dock-say input { width: 100%; font-size: 12px; padding: 8px 11px; }
 
-/* The picker for a planar deck, scheme deck or avatar. It uses the finder's frame with one list, or a grid of avatar cards. */
+/* The picker for a planar deck, scheme deck or avatar. It uses the finder's frame. A deck picker is only as tall as its choices. */
 .extra-picker { width: min(900px, calc(100vw - 32px)); }
+.extra-picker:is(.planes, .schemes) { width: min(640px, calc(100vw - 32px)); height: auto; max-height: 92vh; grid-template-rows: auto minmax(0, 1fr); }
 .extra-picker .finder-head { gap: 10px; align-items: baseline; }
 .extra-picker .seat-note { color: var(--muted); font-size: 12.5px; }
-.extra-body { display: grid; gap: 12px; padding: 14px 16px; max-height: 70vh; overflow-y: auto; }
-.extra-list { display: grid; gap: 4px; }
-.extra-choice { display: flex; align-items: center; gap: 12px; text-align: left; }
-.extra-choice .name { flex: 1; font-weight: 550; }
-.extra-choice .count { color: var(--muted); font-size: 12px; }
-.extra-choice.illegal .name { color: var(--muted); }
+.extra-body { display: grid; align-content: start; gap: 12px; padding: 14px 16px; min-height: 0; overflow-y: auto; }
+.extra-body h4 { display: flex; align-items: center; justify-content: space-between; min-height: 24px; margin: 4px 0 -4px; }
+.extra-body small.no { color: var(--danger); }
+/* Only a card's art. A plane's scan is turned to landscape, then scaled and moved so its art box covers the space. A scheme's scan is upright. */
+.art-crop { position: relative; overflow: hidden; container-type: size; background: var(--surface-2); }
+.art-crop img { --long: max(128cqw, 280cqh); position: absolute; left: 50%; top: calc(50% + var(--long) * .082); width: calc(var(--long) * .716); height: var(--long); max-width: none; object-fit: cover; transform: translate(-50%, -50%) rotate(90deg); }
+.extra-picker.schemes .art-crop img { width: max(132cqw, 135cqh); height: auto; top: 50%; transform: translate(-50%, -38%); }
+.extra-body .art-crop:has(img[hidden]) { display: none; }
+.extra-sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.extra-source { position: relative; height: 132px; padding: 0; overflow: hidden; border-radius: 10px; border: 1px solid var(--line-bright); background: var(--surface-2); text-align: left; }
+.extra-source .pics { position: absolute; inset: 0 -12px; display: flex; }
+.extra-source .art-crop { flex: 1; margin: 0 -8px; clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%); }
+.extra-source::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 10%, color-mix(in srgb, var(--bg-deep) 92%, transparent) 74%); }
+.extra-source .words { position: absolute; z-index: 1; left: 14px; right: 14px; bottom: 11px; }
+.extra-source .words b { font-size: 15px; }
+.extra-source .words small { color: color-mix(in srgb, var(--text) 75%, var(--muted)); }
+.extra-source .tick { position: absolute; z-index: 1; right: 10px; top: 10px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--brass); color: var(--on-brass); }
+.extra-source .tick svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.extra-source.new { background: none; border: 1px dashed var(--line-bright); }
+.extra-source.new::after { display: none; }
+.extra-source.new:hover { border-color: var(--accent-2); }
+.extra-source .plus { position: absolute; left: 14px; top: 16px; width: 38px; height: 38px; box-sizing: border-box; border: 1.5px solid var(--accent-2); border-radius: 50%; display: grid; place-items: center; color: var(--accent-2); }
+.extra-source .plus svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.extra-source[aria-pressed="true"], .extra-row.on { border-color: var(--accent-2); box-shadow: 0 0 0 1px var(--accent-2); }
+:is(.extra-source, .extra-choice) .words { display: grid; min-width: 0; white-space: normal; }
+:is(.extra-source, .extra-choice) small { font-size: 12px; }
+.extra-list { display: grid; gap: 6px; }
+.extra-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding-right: 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-2); }
+.extra-row:hover { border-color: var(--line-bright); }
+.extra-choice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 6px 12px 6px 6px; text-align: left; border: 0; border-radius: 9px; background: none; }
+.extra-choice .thumbs { display: flex; }
+.extra-choice .art-crop { width: 74px; height: 46px; border-radius: 5px; box-shadow: 0 0 0 1.5px var(--surface-2); }
+.extra-choice .art-crop:not(:has(img[hidden])) ~ .art-crop { margin-left: -26px; }
+.extra-choice .words b { font-size: 14px; font-weight: 600; }
+.extra-choice .words small:not(.no) { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.extra-choice .count { color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+.extra-row.illegal .words b { color: var(--muted); }
 .avatar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
 .avatar-choice { display: grid; gap: 4px; justify-items: center; padding: 6px; background: none; border: 1px solid transparent; border-radius: 8px; }
 .avatar-choice:hover, .avatar-choice:focus-visible { border-color: var(--accent-2); background: var(--accent-soft); }

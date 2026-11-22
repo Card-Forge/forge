@@ -28,6 +28,7 @@ public final class DeckStore {
             case Oathbreaker -> FModel.getDecks().getOathbreaker();
             case Brawl -> FModel.getDecks().getBrawl();
             case TinyLeaders -> FModel.getDecks().getTinyLeaders();
+            case Planechase -> FModel.getDecks().getPlane();
             default -> FModel.getDecks().getConstructed();
         };
     }
@@ -35,7 +36,7 @@ public final class DeckStore {
     /** The format that a deck is listed under. Sealed and draft decks are listed under Draft. */
     static GameType family(final GameType format) {
         return switch (format) {
-            case Commander, Oathbreaker, Brawl, TinyLeaders -> format;
+            case Commander, Oathbreaker, Brawl, TinyLeaders, Planechase -> format;
             case Draft, Sealed -> GameType.Draft;
             default -> GameType.Constructed;
         };

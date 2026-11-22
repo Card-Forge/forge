@@ -43,7 +43,7 @@ public final class CardCatalog {
     static final int PAGE = 60;
     /** The order in which a decklist is written. The headings and the type sort use this order. */
     static final List<String> HEADINGS = List.of("Creatures", "Planeswalkers", "Instants", "Sorceries", "Artifacts",
-            "Enchantments", "Battles", "Lands");
+            "Enchantments", "Battles", "Lands", "Planes", "Phenomena");
     private static final Map<DeckSection, CardCatalog> SECTIONS = new ConcurrentHashMap<>();
     private static final Pattern NOT_NAME_CHARACTER = Pattern.compile("[^a-z0-9 ]");
     private final List<Row> rows;
@@ -282,6 +282,12 @@ public final class CardCatalog {
         }
         if (type.isBattle()) {
             return "Battles";
+        }
+        if (type.isPlane()) {
+            return "Planes";
+        }
+        if (type.isPhenomenon()) {
+            return "Phenomena";
         }
         return type.isEnchantment() ? "Enchantments" : "Artifacts";
     }

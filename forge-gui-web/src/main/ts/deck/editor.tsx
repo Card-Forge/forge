@@ -6,11 +6,12 @@ import { Catalogue } from './catalogue';
 import { CardMenu, PrintingPicker, type MenuAt } from './cardmenu';
 import { DeckHalf } from './deckhalf';
 import { DECK_FORMATS } from './deckview';
+import { isPlanar, PlanarDeck, planarCount } from './planareditor';
 import { addCard } from './preferred';
 import { saveText } from '../dom';
 import { startDrag, verdictFor, type CardHandlers, type Carried, type Verdict } from './drag';
 import { deckText } from './decklist';
-import { changeUi } from '../ui';
+import { changeUi, ui } from '../ui';
 import { HeadControls, PageHeader } from '../header';
 import type { Actions } from '../actions';
 import type { Model } from '../model';
@@ -20,6 +21,9 @@ import { FormatMenu, groupsOf, isCardPool } from '../formatmenu';
 import { Backdrop, Dropdown } from '../dialog';
 import { ICONS, Icon } from '../icons';
 import { showNotice } from '../notices';
+
+/** A planar deck has one section, so there is nowhere to drag its cards to, and they have no menu. */
+const noHandlers: CardHandlers = () => ({});
 
 export function Editor({ model, actions }: { model: Model; actions: Actions }) {
   const state = model.editor;
@@ -38,7 +42,8 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
     const pasted = (e: ClipboardEvent) => {
       const target = e.target as HTMLElement | null;
       const text = e.clipboardData?.getData('text') ?? '';
-      if (target?.closest('input, textarea') || !text.trim()) return;
+      // The importer reads lists of cards for a main deck
+      if (target?.closest('input, textarea') || !text.trim() || (model.editor && isPlanar(model.editor))) return;
       e.preventDefault();
       changeUi(u => { u.importer = { from: 'editor', text }; });
     };
@@ -48,8 +53,9 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
   if (!state) {
     return null;
   }
+  const planar = isPlanar(state);
   // The section chosen for the previous deck may not exist in this one
-  const adding = addingTo && state.sections.some(s => s.section === addingTo) ? addingTo : null;
+  const adding = planar ? 'Planes' : addingTo && state.sections.some(s => s.section === addingTo) ? addingTo : null;
   const dropped = (carried: Carried, v: Verdict) => {
     if (v.zone === 'catalogue' && carried.from !== 'catalogue') {
       actions.edit({ op: 'remove', name: carried.name, from: carried.from, count: carried.count });
@@ -75,10 +81,10 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
     },
   });
   const openAnother = () => {
-    const seat = model.screen === 'setup' ? model.lobby?.mySeat : undefined;
+    const seat = model.screen === 'setup' ? (planar ? ui.planarSeat : null) ?? model.lobby?.mySeat : undefined;
     actions.closeEditor();
     changeUi(u => {
-      if (seat !== undefined) u.picker = { kind: 'deck', seat };
+      if (seat !== undefined) u.picker = { kind: planar ? 'planes' : 'deck', seat };
       else u.browse = { format: state.format };
     });
   };
@@ -98,7 +104,7 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
     }}><Icon d={icon} /><span>{label}</span></button>
   );
   // Shown in the header, and on a phone in the deck summary, next to the verdict it explains
-  const check = state.limited
+  const check = planar ? null : state.limited
     ? <span class="check-fixed">{state.format === 'CommanderDraft' ? state.check : t('lblWebEditorLimitedFixed')}</span>
     : <CheckControl model={model} state={state} actions={actions} />;
   return (
@@ -113,11 +119,12 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
             {menu !== null && <div class="menu-scrim" onClick={() => setMenu(null)} />}
             {menu === 'menu' && (
               <div class="deck-menu" role="menu">
-                {ownDeck && item(ICONS.plus, t('lblWebEditorNewDeck'), () => setMenu('new'), true)}
-                {ownDeck && item(ICONS.folder, t('lblWebEditorOpenAnother'), openAnother)}
+                {planar && item(ICONS.plus, t('lblWebLobbyNewPlanarDeck'), () => actions.openEditor({ newFormat: 'Planechase' }))}
+                {ownDeck && !planar && item(ICONS.plus, t('lblWebEditorNewDeck'), () => setMenu('new'), true)}
+                {ownDeck && (!planar || model.screen === 'setup') && item(ICONS.folder, t('lblWebEditorOpenAnother'), openAnother)}
                 {ownDeck && item(ICONS.copy, t('lblDuplicate'), () => actions.deckOp('duplicate'))}
                 {ownDeck && <hr />}
-                {!state.limited && item(ICONS.download, t('lblWebEditorImportList'), () => changeUi(u => { u.importer = { from: 'editor' }; }))}
+                {!state.limited && !planar && item(ICONS.download, t('lblWebEditorImportList'), () => changeUi(u => { u.importer = { from: 'editor' }; }))}
                 {item(ICONS.copy, t('lblWebEditorCopyToClipboard'), copyDeck)}
                 {item(ICONS.upload, t('lblWebEditorExportDeckFile'), () => actions.deckOp('file'))}
                 {/* A deck opened as a copy, such as a precon or someone else's deck, has nothing of the player's to delete */}
@@ -144,17 +151,17 @@ export function Editor({ model, actions }: { model: Model; actions: Actions }) {
         </div>
       </PageHeader>
       <div class="editor-tabs" role="group">
-        <button aria-pressed={half === 'find'} onClick={() => setHalf('find')}>{t('lblWebEditorFindCards')}</button>
+        <button aria-pressed={half === 'find'} onClick={() => setHalf('find')}>{t(planar ? 'lblWebPlanarFind' : 'lblWebEditorFindCards')}</button>
         <button aria-pressed={half === 'deck'} onClick={() => setHalf('deck')}>
-          {t('lblDeck')} <span class={state.verdict ? 'n no' : 'n'}>{state.verdict ? '! ' : ''}{state.stats.main}</span>
+          {t(planar ? 'lblPlanarDeck' : 'lblDeck')} <span class={state.verdict ? 'n no' : 'n'}>{state.verdict ? '! ' : ''}{planar ? planarCount(state) : state.stats.main}</span>
         </button>
       </div>
-      <div class={half === 'deck' ? 'editor-shell deck' : 'editor-shell'}>
-        <Catalogue model={model} actions={actions} state={state} handlers={handlers} adding={adding} stopAdding={() => setAddingTo(null)} />
-        <DeckHalf actions={actions} state={state} handlers={handlers} check={check} adding={adding} addTo={section => {
+      <div class={`editor-shell${half === 'deck' ? ' deck' : ''}${planar ? ' planar' : ''}`}>
+        <Catalogue model={model} actions={actions} state={state} handlers={planar ? noHandlers : handlers} adding={adding} stopAdding={() => setAddingTo(null)} />
+        {planar ? <PlanarDeck actions={actions} state={state} /> : <DeckHalf actions={actions} state={state} handlers={handlers} check={check} adding={adding} addTo={section => {
           setAddingTo(section);
           if (section) setHalf('find');
-        }} />
+        }} />}
       </div>
       {dialog === 'text' && <TextDialog state={state} close={() => setDialog(null)} />}
       {dialog === 'delete' && (

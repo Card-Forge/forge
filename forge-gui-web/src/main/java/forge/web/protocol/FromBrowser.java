@@ -171,12 +171,12 @@ public final class FromBrowser {
     public record BrowseFormat(String format) {
     }
 
-    /** Opens a deck from the finder by key, or a new deck for a format. seat is the seat whose finder it came from. copy edits a copy. */
+    /** Opens a deck from the finder or the planar deck menu by key, or a new deck for a format. seat is the seat whose finder it came from. copy edits a copy. */
     @Command("editorOpen")
     public record EditorOpen(@Nullable String key, @Nullable String newFormat, @Nullable Integer seat, boolean copy) {
     }
 
-    public enum EditOp { add, remove, move, commander, printings, lands, landSet, suggestLands, foil }
+    public enum EditOp { add, remove, move, commander, printings, lands, landSet, suggestLands, foil, randomPlanes }
 
     /** A name and a count. The name is a card printing's image key in a printings change, or a basic land's name in a lands change. */
     public record CountedName(String name, int count) {

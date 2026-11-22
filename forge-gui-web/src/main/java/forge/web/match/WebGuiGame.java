@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
+import forge.card.CardTypeView;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.game.DrawOffer;
@@ -746,6 +747,10 @@ public class WebGuiGame extends NetworkGuiGame {
         return lookup(DeltaPacket.makeDeltaKey(card), TrackableTypes.CardViewType) == card;
     }
 
+    private static boolean sideways(final CardTypeView type) {
+        return type.isPlane() || type.isPhenomenon();
+    }
+
     private <T> List<RequestOption> options(final List<T> items, final FSerializableFunction<T, String> display) {
         final List<RequestOption> out = new ArrayList<>();
         for (final T item : items) {
@@ -753,23 +758,24 @@ public class WebGuiGame extends NetworkGuiGame {
             if (item instanceof CardView card) {
                 // Temporary views (pile splits, getCardForUi copies, LKI) have no mirror entry to refer to
                 out.add(isInMirror(card)
-                        ? new RequestOption(label, PromptState.cardRef(card), null, null, null, null, null)
+                        ? new RequestOption(label, PromptState.cardRef(card), null, null, null, null, null, false)
                         : new RequestOption(label, null, card.getName(),
-                                card.getCurrentState() == null ? null : Foil.key(card, card.getCurrentState()), null, null, null));
+                                card.getCurrentState() == null ? null : Foil.key(card, card.getCurrentState()), null, null, null,
+                                card.getCurrentState() != null && sideways(card.getCurrentState().getType())));
             } else if (item instanceof PlayerView player) {
-                out.add(new RequestOption(label, null, null, null, Ref.player(player.getId()), null, null));
+                out.add(new RequestOption(label, null, null, null, Ref.player(player.getId()), null, null, false));
             } else if (item instanceof PaperCard paper) {
-                out.add(new RequestOption(label, null, paper.getName(), Foil.key(paper), null, null, null));
+                out.add(new RequestOption(label, null, paper.getName(), Foil.key(paper), null, null, null, sideways(paper.getRules().getType())));
             } else if (item instanceof CardFaceView face) {
                 // Naming a card offers every card in the game, so the names are a list of words and only a hovered one loads its picture
-                out.add(new RequestOption(label, null, null, ImageKeys.CARD_PREFIX + face.getName(), null, null, null));
+                out.add(new RequestOption(label, null, null, ImageKeys.CARD_PREFIX + face.getName(), null, null, null, false));
             } else if (item instanceof SpellAbilityView ability && ability.getHostCard() != null && isInMirror(ability.getHostCard())) {
-                out.add(new RequestOption(label, null, null, null, null, PromptState.cardRef(ability.getHostCard()), null));
+                out.add(new RequestOption(label, null, null, null, null, PromptState.cardRef(ability.getHostCard()), null, false));
             } else {
                 // A colour is offered as a colour value or, by some effects, as its English name
                 final MagicColor.Color colour = item instanceof MagicColor.Color c ? c
                         : item instanceof String s ? MagicColor.Color.fromName(s) : null;
-                out.add(new RequestOption(label, null, null, null, null, null, colour == null ? null : colour.getShortName()));
+                out.add(new RequestOption(label, null, null, null, null, null, colour == null ? null : colour.getShortName(), false));
             }
         }
         return out;

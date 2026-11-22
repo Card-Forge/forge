@@ -478,7 +478,6 @@ const AMBIENT = '<span class="ambient" aria-hidden="true">' + '<i></i>'.repeat(6
 const EXTRA_ZONES: [ZoneType, TextKey][] = [['PlanarDeck', 'lblPlanes'], ['SchemeDeck', 'lblSchemes'],
   ['AttractionDeck', 'lblAttractions'], ['ContraptionDeck', 'lblContraptions'], ['Junkyard', 'lblJunkyardZone'],
   ['Sideboard', 'lblSideboard'], ['Ante', 'lblAnteZone'], ['StickerSheets', 'lblStickerSheets']];
-const FACE_DOWN_DECKS: ReadonlySet<ZoneType> = new Set(['PlanarDeck', 'SchemeDeck', 'AttractionDeck', 'ContraptionDeck']);
 
 function graveyardTitle(count: number, types: string[]): string {
   const cards = t(count === 1 ? 'lblWebOneCard' : 'lblWebNCards', count);
@@ -532,8 +531,8 @@ function renderZoneTiles(root: HTMLElement, model: Model, player: PlayerView, se
         + '<span class="zone-name"></span><span class="zone-count"></span>';
       const extra = EXTRA_ZONES.find(([z]) => z === zoneName)?.[1];
       q(el, '.zone-name').textContent = extra ? tCap(extra) : zoneTitle(zoneName);
-      // A planar, scheme, attraction or contraption deck is face down, so only its count is shown
-      el.classList.toggle('hidden-deck', FACE_DOWN_DECKS.has(zoneName));
+      // The engine lets every player see a scheme deck's cards, so opening it would show the schemes still to come
+      el.classList.toggle('hidden-deck', zoneName === 'SchemeDeck');
       const img = q<HTMLImageElement>(el, 'img');
       hideOnError(img);
       el.onclick = () => {

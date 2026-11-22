@@ -120,6 +120,25 @@ html[data-form="portrait"] :is(#match, #dialog-layer) .sheet[hidden] { display: 
 
 /* The phase strip shows whose turn it is, the current step, and the steps on each side of it. A tap anywhere on it opens the stops. */
 html[data-form="portrait"] #phase-strip { padding: 0 6px; }
+/* The planes are on the pill's line. The pill gives up the name of the player whose turn it is, and with two planes their picture. */
+html[data-form="portrait"] #match { --plane-w: 72px; }
+html[data-form="portrait"] #plane-dock { left: 8px; }
+html[data-form="portrait"] #match.planar #phase-strip { padding-left: calc(var(--plane-w) + 18px); }
+html[data-form="portrait"] #match.planar:has(.plane + .plane) #phase-strip { padding-left: calc(var(--plane-w) * 1.3 + 18px); }
+html[data-form="portrait"] #match.planar:has(.plane + .plane) #phase-strip .owner { display: none; }
+html[data-form="portrait"] #match.planar #phase-strip .owner { padding-right: 3px; }
+html[data-form="portrait"] #match.planar #phase-strip .owner :is(b, .turn) { display: none; }
+/* On a narrow phone the longest phase name leaves no room for the picture */
+@media (max-width: 379px) {
+  html[data-form="portrait"] #match { --plane-w: 64px; }
+  html[data-form="portrait"] #match.planar #phase-strip .owner { display: none; }
+}
+html[data-form="portrait"] #plane-dock .die-button { right: -10px; width: 28px; height: 28px; }
+html[data-form="portrait"] #plane-dock .die-button .cube { width: 24px; height: 24px; }
+/* The die looks small, but its touch area is taller and wider */
+html[data-form="portrait"] #plane-dock .die-button::before { content: ''; position: absolute; inset: -6px; }
+html[data-form="portrait"] #match.planar #phase-strip .waiting { right: auto; max-width: none; padding: 0 10px 0 8px; }
+html[data-form="portrait"] #match.planar #phase-strip .waiting .who { display: block; }
 /* The pill fills the row and already names the time of day, so the medallion has no room and is not needed */
 html[data-form="portrait"] #sky { display: none; }
 html[data-form="portrait"] #phase-strip .pill { position: relative; width: 100%; height: 32px; box-sizing: border-box; border-radius: 16px; gap: 4px; padding: 0 8px 0 4px; min-width: 0; }
@@ -170,6 +189,9 @@ html[data-form="portrait"] #match .seat .hand-fan { display: none; }
 html[data-form="portrait"] #zoom .from-tab { bottom: 0; transform: translate(-50%, 50%); padding: 4px 12px; font-size: 12px; }
 html[data-form="portrait"] #zoom.image-only:has(.from-tab:not(:empty)) { gap: 20px; }
 html[data-form="portrait"] #zoom.sheet { --zoom-w: min(62vw, calc((100dvh - var(--dock-h, 110px) - 250px) * 63 / 88)); }
+/* The die's rows are text, so they use the sheet's width */
+html[data-form="portrait"] #zoom.sheet.die { --zoom-w: min(88vw, 340px); }
+html[data-form="portrait"] #zoom.sheet .rift { height: 104px; }
 /* Outside a match there is no dock, so the sheet opens from the bottom of the screen */
 html[data-form="portrait"] #match[hidden] ~ #zoom.sheet { --dock-h: 0px; }
 .sheet-actions { display: none; }
@@ -355,6 +377,9 @@ html[data-form="portrait"] #game-over .actions button { min-height: 48px; paddin
 
 html[data-form="portrait"] :is(.finder-back, .sleeves-back) { place-items: stretch; }
 html[data-form="portrait"] :is(.finder, .sleeves) { width: 100vw; height: 100dvh; max-width: none; border: 0; border-radius: 0; min-width: 0; }
+html[data-form="portrait"] .extra-picker:is(.planes, .schemes) { max-height: none; }
+html[data-form="portrait"] .extra-row > .small { min-height: 44px; min-width: 56px; }
+html[data-form="portrait"] .extra-choice .art-crop:not(:has(img[hidden])) ~ .art-crop { display: none; }
 html[data-form="portrait"] :is(.finder-head, .sleeves-head, .imp-head) { flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
 html[data-form="portrait"] :is(.finder-head, .sleeves-head, .imp-head) button { min-height: 44px; min-width: 44px; }
 html[data-form="portrait"] .finder-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -440,7 +465,7 @@ html[data-form="portrait"] .zone-panel .zone-sort .select-button { min-height: 3
 /* While a dialog or a zone asks the question, the dock cannot answer anything, so it is hidden */
 html[data-form="portrait"] #prompt.blocked { display: none; }
 html[data-form="portrait"] #dialog-layer .dialog .ordered { gap: 30px 6px; justify-content: flex-start; }
-html[data-form="portrait"] #dialog-layer .dialog .ordered .card { --fit: 1; width: calc((100vw - 56px) / 4); height: calc((100vw - 56px) / 4 * 88 / 63); }
+html[data-form="portrait"] #dialog-layer .dialog .ordered .card { --fit: 1; --card-w: calc((100vw - 56px) / 4); --card-h: calc((100vw - 56px) / 4 * 88 / 63); }
 /* The arrow buttons under a card take the card's width instead of setting it, so four cards still fit in one row */
 html[data-form="portrait"] #dialog-layer .dialog .ordered .order-nudge { width: 0; min-width: 100%; }
 html[data-form="portrait"] #dialog-layer .dialog .ordered .order-nudge button { flex: 1 1 0; width: auto; min-width: 0; height: 36px; }
@@ -449,7 +474,7 @@ html[data-form="portrait"] #dialog-layer .dialog .ordered:not(.listed) .order-en
 html[data-form="portrait"] #dialog-layer .dialog .ordered-item.selected .order-end { visibility: hidden; }
 html[data-form="portrait"] #dialog-layer .dialog .ordered.listed { gap: 0; min-width: 0; }
 html[data-form="portrait"] #dialog-layer .dialog .ordered.listed .ordered-item { gap: 9px; padding: 9px; }
-html[data-form="portrait"] #dialog-layer .dialog .ordered.listed .card { width: 34px; height: 48px; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered.listed .card { --card-w: 34px; --card-h: 48px; }
 html[data-form="portrait"] #dialog-layer .dialog .options.colours { grid-auto-columns: minmax(46px, 1fr); gap: 2px; }
 html[data-form="portrait"] #dialog-layer .dialog .colour-option img { width: 34px; height: 34px; }
 html[data-form="portrait"] #dialog-layer .dialog .order-move :is(.earlier, .later) { width: 64px; height: 44px; }
@@ -591,6 +616,12 @@ html[data-form="portrait"] #editor .cat-grid .under .side { display: none; }
 /* The deck half is one column that scrolls as a whole. It has the summary and curve, the main deck, basic lands, then the sideboard. */
 html[data-form="portrait"] #editor .deck-half { border-left: 0; display: block; overflow-y: auto; padding-bottom: 64px; }
 html[data-form="portrait"] #editor .deck-half .zone { display: block; }
+html[data-form="portrait"] #editor .editor-shell.planar .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* A tap on the plane itself adds or removes it, so its buttons can be small */
+html[data-form="portrait"] #editor .planar .under .stepper { grid-template-columns: 34px auto 34px; justify-content: center; }
+html[data-form="portrait"] #editor .planar .under .step { height: 28px; font-size: 15px; }
+html[data-form="portrait"] #editor .planar-line button { width: 34px; height: 34px; }
+html[data-form="portrait"] #editor .planar-foot button { min-height: 46px; }
 html[data-form="portrait"] #editor .deck-half .zone-body { overflow: visible; }
 html[data-form="portrait"] #editor .deck-half .side-zone { max-height: none; }
 /* The deck's sizes and legality are next to the curve. The format it is checked against and the sample hand button share the line below. */

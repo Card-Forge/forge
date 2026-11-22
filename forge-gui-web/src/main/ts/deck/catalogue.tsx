@@ -11,6 +11,7 @@ import type { CardHandlers } from './drag';
 import type { Model } from '../model';
 import type { CataloguePage, CatalogueQuery, CatalogueRow, DeckSection, EditorState, LimitedEdition } from '../protocol';
 import { store, stored } from '../storage';
+import { isPlanar } from './planareditor';
 import { addCard, choosesPrintings, preferredPrinting } from './preferred';
 import { CARD_TYPES } from './decklist';
 import { t, type TextKey } from '../text';
@@ -97,6 +98,7 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
   // A section other than the main deck lists only its own kind of card, with no copy limit. No commander is chosen from it
   const extra = adding ? state.sections.find(s => s.section === adding) : undefined;
   const wanted = state.commanderWanted && !extra;
+  const planar = isPlanar(state);
 
   const page = model.catalogue;
   // The deck's rules decide which cards are shown. A change of commander or check asks for the first page again
@@ -116,12 +118,12 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
     // A card with no room left is not sent. Its tile already shows that the deck holds as many as it may
     const row = rows.find(r => r.name === name);
     if (row && !canAdd(row)) return;
-    liftCard(name, to);
+    if (!planar) liftCard(name, to);
     addCard(actions, state, name, to);
   };
   const remove = (name: string) => actions.edit({ op: 'remove', name, from: adding ?? 'Main', count: 1 });
   const makeCommander = (name: string) => actions.edit({ op: 'commander', name, count: 1 });
-  const kinds = catalogueKinds(state, model, actions).filter(k => !extra || (k.id !== 'identity' && k.id !== 'unusable'));
+  const kinds = catalogueKinds(state, model, actions).filter(k => !adding || (k.id !== 'identity' && k.id !== 'unusable'));
   const narrowed = !!typed || colours.size > 0 || type !== 'any'
     || kinds.some(k => k.id !== 'identity' && k.chip(filter) !== null && !k.fixed?.(filter));
   const clearAll = () => {
@@ -131,7 +133,7 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
     setFilter(NO_FILTER);
   };
   return (
-    <section class="catalogue" data-zone="catalogue">
+    <section class="catalogue" data-zone="catalogue" data-sideways={adding === 'Planes' ? '' : undefined}>
       <div class="cat-bar">
         <FilterBar kinds={kinds} filter={filter} set={setFilter} clearAll={clearAll} narrowed={narrowed}>
           <span class="search-wrap">
@@ -145,8 +147,8 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
               </tbody>
             </table>
           </span>
-          <ColourToggles label={t('lblColors')} colourless only={pickable} pressed={c => colours.has(c)} toggle={c => setColours(toggled(colours, c))} />
-          <Select cls="type-by" label={t('lblCardType')} value={type} change={setType} choices={TYPES.map(([id, name]) => ({ value: id, label: t(name) }))} />
+          {!planar && <ColourToggles label={t('lblColors')} colourless only={pickable} pressed={c => colours.has(c)} toggle={c => setColours(toggled(colours, c))} />}
+          {!planar && <Select cls="type-by" label={t('lblCardType')} value={type} change={setType} choices={TYPES.map(([id, name]) => ({ value: id, label: t(name) }))} />}
         </FilterBar>
         {extra && (
           <p class="adding-to">{t('lblWebEditorAddingTo', extra.name)}
@@ -169,7 +171,7 @@ export function Catalogue({ model, actions, state, handlers, adding, stopAdding 
         {view === 'cards'
           ? rows.map(row => <Tile key={row.name} row={row} count={counts.get(row.name) ?? 0} top={row === top}
               limit={extra ? Infinity : copyLimit(state, row.name, row.ownLimit)} room={room(row, counts.get(row.name) ?? 0)} limited={state.limited}
-              commanderWanted={wanted} mainOnly={!!extra} add={add} remove={remove}
+              commanderWanted={wanted} mainOnly={!!adding} add={add} remove={remove}
               makeCommander={makeCommander} handlers={handlers} />)
           : <Table rows={rows} counts={counts} room={room} add={add} remove={remove} handlers={handlers} />}
       </div>
@@ -327,11 +329,11 @@ function Tile({ row, count, top, limit, room, limited, commanderWanted, mainOnly
   const full = room <= 0;
   // The count is shown against the most the deck may hold. In a limited deck that is the copies in the pool
   const most = limited ? count + room : limit;
-  // With every copy of a pool's card already in the deck, a click takes one out instead
-  const takesOut = full && count > 0 && limited;
+  // With every copy of a pool's card already in the deck, a click takes one out instead. So does a click on a planar deck's one copy
+  const takesOut = full && count > 0 && (limited || mainOnly);
   const click = (e: MouseEvent) => {
-    // The second click of a double-click would put the copy straight back
-    if (e.detail > 1 && takenOut === row.name) return;
+    // The second click of a double-click would put the copy straight back, or take the only copy out again
+    if (e.detail > 1 && (takenOut === row.name || limit === 1)) return;
     takenOut = null;
     if (commanderWanted) makeCommander(row.name);
     else if (takesOut) {

@@ -5,6 +5,7 @@ import com.google.common.primitives.Ints;
 import forge.deck.CardPool;
 import forge.deck.CommanderBracketCalculator;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckStatistics;
@@ -160,7 +161,12 @@ public final class DeckFacts {
             // GameFormat lists the cards on separate lines
             return Localizer.getInstance().getMessage("lblNotLegalInFormat", pool.getName(), outOfPool.replaceFirst("\n+", " ").replace("\n", ", "));
         }
-        return Legality.enforced() ? format.getDeckFormat().getDeckConformanceProblem(deck) : null;
+        if (!Legality.enforced()) {
+            return null;
+        }
+        // A planar deck has no main deck, so its planes are checked instead
+        return format == GameType.Planechase ? DeckFormat.getPlaneSectionConformanceProblem(deck.get(DeckSection.Planes))
+                : format.getDeckFormat().getDeckConformanceProblem(deck);
     }
 
     /** The cards a deck plays with: its main deck and its commanders. A Commander deck's 100 cards include both. */

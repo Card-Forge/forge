@@ -53,6 +53,8 @@ export interface UiState {
   /** The play choice whose game kinds the start page shows. It is kept so that going back from a table returns there. */
   menuChoice: 'play' | 'friends' | null;
   picker: Picker | null;
+  /** The seat whose planar deck the editor was opened for. */
+  planarSeat: number | null;
   /** The deck finder opened from the start page with no seat, and the format it lists. A hello does not close it. */
   browse: { format: string } | null;
   /** The open importer, and where it was opened from: a seat's deck finder, the start page, or the editor. */
@@ -106,6 +108,7 @@ export const ui: UiState = {
   renaming: false,
   menuChoice: null,
   picker: null,
+  planarSeat: null,
   browse: null,
   importer: null,
   spectate: false,

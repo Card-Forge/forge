@@ -301,3 +301,24 @@ button.land-set[aria-expanded="true"] { border-color: var(--accent-2); box-shado
 .set-tile .meta span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
 .set-tile .meta small { flex: none; color: var(--muted); font-size: 10.5px; }
 /* A deck built from a game mode's own cards shows its owner before its name. Cards not yet played with are marked as new. */
+
+/* A planar deck: its cards are sideways and large enough to read, and the deck needs less room than the cards */
+.editor-shell.planar { grid-template-columns: minmax(0, 1fr) minmax(300px, 372px); }
+#editor .editor-shell.planar .cat-grid { grid-template-columns: repeat(auto-fill, minmax(204px, 1fr)); }
+.editor-shell.planar .tile { aspect-ratio: 88 / 63; overflow: hidden; }
+.deck-half.planar { grid-template-rows: auto minmax(0, 1fr) auto; }
+.planar-head { padding: 14px 16px 12px; display: grid; gap: 9px; border-bottom: 1px solid var(--line); }
+.planar-head h3 { margin: 0; font-size: 16px; }
+.meter { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 13px; }
+.meter .track { height: 6px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+.meter .track i { display: block; height: 100%; border-radius: 3px; background: var(--text); }
+.meter b { font-weight: 650; font-variant-numeric: tabular-nums; }
+.meter.no b { color: var(--danger); }
+.planar-list { overflow: auto; padding: 4px 10px 12px; min-height: 0; }
+.planar-list h4 { margin: 10px 6px 4px; }
+.planar-line { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 11px; align-items: center; padding: 4px 8px 4px 4px; border-radius: 8px; }
+.planar-line:hover { background: var(--surface-2); }
+.planar-line .art-crop { width: 62px; height: 40px; border-radius: 5px; }
+.planar-line b { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.planar-line button { width: 28px; height: 28px; padding: 0; border-radius: 7px; font-size: 16px; line-height: 1; }
+.planar-foot { padding: 11px 14px; border-top: 1px solid var(--line); display: grid; }

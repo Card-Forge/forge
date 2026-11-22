@@ -6,6 +6,8 @@ import forge.deck.DeckSection;
 import forge.deck.io.DeckStorage;
 import forge.game.GameType;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
@@ -168,5 +170,32 @@ public class DeckEditorTest {
         Assert.assertNull(e.makeCommander("Isamaru, Hound of Konda", null));
         Assert.assertNull(e.makeCommander("Krenko, Mob Boss", null));
         Assert.assertEquals(e.deck().getCommanders().size(), 2);
+    }
+
+    // Fails if a planar deck takes a second copy of a plane or a phenomenon or a card that is no plane, is saved with the Constructed decks, stays illegal once it is full, or can be moved to another format
+    @Test
+    public void aPlanarDeckHoldsOneOfEachPlane() {
+        final DeckEditor e = editor(new Deck("Planes"), GameType.Planechase);
+        Assert.assertNull(e.add("Murasa", DeckSection.Planes, 1));
+        Assert.assertNotNull(e.add("Murasa", DeckSection.Planes, 1), "a second copy of a plane was added");
+        Assert.assertNull(e.add("Chaotic Aether", DeckSection.Planes, 1));
+        Assert.assertNotNull(e.add("Chaotic Aether", DeckSection.Planes, 1), "a second copy of a phenomenon was added");
+        Assert.assertNotNull(e.add("Lightning Bolt", DeckSection.Planes, 1), "a card that is no plane was added");
+        Assert.assertNotNull(e.add("Naya", DeckSection.Main, 1), "a plane was added outside the planar deck");
+        Assert.assertEquals(e.deck().get(DeckSection.Planes).countAll(), 2);
+        Assert.assertNull(e.state().verdict(), "a planar deck was checked while decks may be illegal");
+        FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, true);
+        try {
+            Assert.assertNotNull(e.state().verdict(), "a planar deck of two cards is legal");
+            Assert.assertNull(e.fillWithRandomPlanes());
+            Assert.assertNull(e.state().verdict());
+        } finally {
+            FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
+        }
+        Assert.assertEquals(e.deck().get(DeckSection.Planes).toFlatList().stream().map(PaperCard::getName).distinct().count(), 10, "a plane was added twice");
+        e.setCheck(LegalityScope.of(GameType.Constructed, null));
+        Assert.assertEquals(e.check().format(), GameType.Planechase);
+        Assert.assertTrue(storages.of(GameType.Planechase).contains("Planes"));
+        Assert.assertFalse(storages.of(GameType.Constructed).contains("Planes"));
     }
 }

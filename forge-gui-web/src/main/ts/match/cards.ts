@@ -134,8 +134,9 @@ export function updateCard(el: HTMLElement, model: Model, card: CardView): void 
   const creature = /Creature/.test(type);
   const damage = card.Damage ?? 0;
   const power = creature ? `${state.Power ?? 0}/` : '';
-  // A battle is drawn sideways, as it is printed and as every other client draws it
+  // A battle or a plane is drawn sideways, as it is printed
   el.classList.toggle('battle', /Battle/.test(type));
+  el.classList.toggle('sideways', /Battle/.test(type) || (visible && card.GamePieceType === 'PLANAR'));
   // Damage is subtracted from the toughness shown, as a player counts it. It is not listed separately
   const toughness = creature ? `${(state.Toughness ?? 0) - damage}`
     : /Planeswalker/.test(type) ? `${state.Loyalty ?? ''}`
