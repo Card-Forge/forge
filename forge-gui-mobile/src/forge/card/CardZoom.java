@@ -213,6 +213,30 @@ public class CardZoom extends FOverlay {
         return cv != null && cv == viewAt(currentIndex);
     }
 
+    /**
+     * Reset the singleton zoom when its owning match is being discarded.
+     * A zoom left visible by a match transition still belongs to the old screen,
+     * so a subsequent show() can otherwise be ignored by FOverlay.setVisible().
+     */
+    public static void resetForMatchEnd() {
+        closing = false;
+        hidePosted = false;
+        fanActive = false;
+        cardZoom.finishHide(true);
+
+        // Do not retain references to cards or callbacks belonging to the finished game.
+        items = null;
+        currentCard = prevCard = nextCard = null;
+        activateHandler = null;
+        currentActivateAction = null;
+        currentIndex = initialIndex = 0;
+        isAdvBack = false;
+        nestedShow = false;
+        spreadNext = false;
+        cardZoom.totalZoomAmount = 0f;
+        specializedCardsList.clear();
+    }
+
     public static void hideZoom() {
         if (isAdvBack) {
             requestClose();
@@ -1105,6 +1129,10 @@ public class CardZoom extends FOverlay {
     }
 
     private void finishHide() {
+        finishHide(false);
+    }
+
+    private void finishHide(boolean immediately) {
         if (cardViewsToClearObject != null) {
             for (CardView cardView : cardViewsToClearObject.values()) {
                 if (cardView != null)
@@ -1128,7 +1156,11 @@ public class CardZoom extends FOverlay {
         Arrays.fill(btnAlpha, 0f);
         backAfterClose = false;
         backStack.clear();
-        super.hide();
+        if (immediately) {
+            hideImmediately();
+        } else {
+            super.hide();
+        }
     }
 
     @Override
