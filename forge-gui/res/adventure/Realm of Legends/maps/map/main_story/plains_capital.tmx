@@ -357,7 +357,7 @@
   <object id="108" template="../../../../common/maps/obj/door_down.tx" x="467.061" y="423.333" width="44.5455" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/Commanders_Library.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleportObjectId" value="86"/>
    </properties>
   </object>
  </objectgroup>

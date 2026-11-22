@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmGkOgyAQhUn/aXuEXqO16UG8h90u2sUep0x0IjGyC4OVHy8kBjIfjyXy2oKxNutvdOCqEuCQcX25PonNA2o9SsZuZdfK+KDfkeve93tH4gPPXoKm+HAO2OfEdS3j88nqNvzbmYBt7ItqzXAem625xPE248Yy5fOp4SvZ3hPXmJIPpLtbqPl0dwY1n+5cUvOZnPkYHPtdp5h8sppL9C/zZb4QfL5nZO3+qXxVtdR8Kfun8070cOn+hao71/6j9A4Eb8cqYT7dPz41H7whU/6HNs03bDSuURvUgLfYpX9zY64htqo9aKPakU/kxFxAl3H4COtA9gC+2OQPmAvAWGSdmw/ruGRKz2LIVHDdQ+Qrrnu7CcQz5UOIdVkLX6x1Skk/IDcHRA==
+   eJztmGkOgjAQhRv/gR7BayjGg3AP3C7qgsexE5jQELrbzij8eGlC2szX1yX0tYUQ7aK/0U6qYsCh43pLvZjNA2rdSiEuZdfq+KDfXura93tm4gPPHoqm+HAO2OcgdS7z8+nqNvLbkYBt7ItpzXAeq7W71PE+48Zy5YupESvd3lPXmJIPZLtbqPlsdwY1n+1cUvO5nPkcHNtNp5x8upq/6N/Ct/Cl4Is9I3P3z+SrqaXm4+6fi6fc+EL8y+WV7oxz9g4Eb8eKMZ/tH5+aD96QnP+hXfMNH41r1A414C126t/cmGuorWkP+qgO5FM5MRewZRwxwjqQPYAvPvkD5gIwFlm/zYd1QjKlezFkKrjuKfKV0L3dJOKZ8iHFusyFL9c6cdIHOWsG2A==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqoC2bxUFcdNvBUk4HhmSb5+mkJbuswMDBqMTAwaQ20SzABJWFODDjCCaEPQenjUPoYJ3H604FxmgHE13Wp7zZcIBZoXxyRaakZqK5FExLH9ACPGBkYKoH2VRGwU0yCPu4hF4gMIveZ82KKbRkg922VgITNtkESPtjCBgRmqzMwzFGnr1tAAJd70MF2oNt2qBPOl8SaN1KBHlo5XWMMoePR6ARj+rlpqIJ4Y+x8GF1DxzCkdb1PK5CAI/2NNDATR/xRUn/MoGGamIajnMUlPlBARgBCywkMrDtGAW3AaPyOglEwCtABAI8fJhU=
+   eJxjYBgFo2AUjIJRMAqoC2bxUFcdNvBUk4HhmSb5+mkJbuswMDBqMTAwaQ20SzABJWFODDjCCaEPQenjUPoYJ3H604FxmgHE13Wp7zZcIBZoXxyRaakZqK5FExLH9ACPGBkYKoH2VRGwU0yCPu4hF4gMIveZ82KKbRkg922VgITNtkESPtjCBgRmqzMwzFGnr1tAAJd70MF2oNt2qBPOl8SaN1KBHlo5XWMMoePR6ARj+rlpqAJ+Pux8WBjW0DEMaV3v0wok4Eh/Iw3MxBF/lNQfM2iYJqbhKGdxiQ8UkBGA0HICA+uOUUAbMBq/o2AUjAJ0AADNmiUr
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -357,10 +357,10 @@
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/door_down.tx" x="416.227" y="373" width="44.5455" height="16">
+  <object id="79" template="../../../../common/maps/obj/door_down.tx" x="417.227" y="374.5" width="44.5455" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/Commanders_Library.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleportObjectId" value="82"/>
    </properties>
   </object>
  </objectgroup>

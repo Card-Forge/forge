@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztV0tOwzAQNWLlpOkVCrsSiQ1HqGgR3XOEco+WE3CHQts7sKH8VkhcAFSqsOMGbPAoHeJYdjKeoLaq8qQnJ5breZ3ncWwhatSosSsYR0LcbIi3Ubm+TlOInuLnmtlVPG3S9MG4QcwjYi6FeFB8VHxSfFZ8ke7+jqe+u/3q9IGvvuUej4B16cM4Li2unOHzu/L7Iy6OZ9N3WfAbHDcKU/aCjNQ+X34F/vkLJJ+hoiSMg/8F7WHDX1+V+p2pmFdheayRNsbU5/JYH8etW9A3kXx9/ditkZO/1+OMqK9q/lz4q484owkzX8MwqxNkV635RKuBxCDWlqs++iX+Vll/oNdWHweN/DO+c+rjXsWaE3Jn2/+o/triUsfpe+tPlHIqUw3QmtT1DS3+mj7rz5z9z1xPFGLNtjTvzL1Q9xXfOf66/LPlDujy1Ox/a9tbX33XMiUV6Knp5VmQ3wu/2/bWV99JkBKA/gFcZ5OZ5qPuH9bnxREtLlUfakqMM4Der79DnnxrlqtvGmXr2LZn2frD1TeNe3+ZRDR9C897QwJnxWb2zV2s+jh3kCVBn47zON8WAerD5a85D2U+X22DkjmHYfGZ5T+1cVCUv20A55u7TpT5u2lQz8ybwravv9bqHFKjxi7hF/xOTys=
+   eJztV0tOwzAQNWLlpOkVCrsSiQ1HqGgR3XOEco+WE3CHQts7sKH8VkhcAFSqsOMGbLCVDnFGdjKeorSq8qQnJ5breZ3ncWwhatSosSsYR0LcbIi3Ubm+TlOInuJnxewqnjZp+vS4QcwjYC6FeFB8VHxSfFZ8ke7+jqe+u/316QNffcs9HjWq0gdxXFpcOYPnd+X3R1wcz6bvsuA3MG4UpuwFGal9vvwK/PMXSD5DRUkYp/+Xbg8b/vp8ahavv5mKeRWWxxoZY7A+l8fmOG7dan0TydfXj90aOfl7Pc4I+tbNnwt/9RFnxMD5GoZZnQC7as0nRg0kiFBbrvrol/i7zvrTem31cdDIP8M7pz7uVdw5IXe2/Y/qry0udZy5t/5EKacy1aBbTFPf0OIv9tl85ux/eD1RCDXbMrzDe6HpK7xz/HX5Z8udpstT3P/Wtre++q5lSirAU+zlWZDfC7/b9tZX30mQUgP803CdTWaGj6Z/UJ8XR7S4VH2gKUFnALPffNd58q1Zrr5plK1j255l6w9X3zTu/WUS0fQtPO8NiT4rNrNv7mLVx7mDLAn6TJzH+bYIuj5c/uJ5KPP5ahuUzDkMi88s/6mNg6L8bQM439wqUebvpkE9M28K277+WqtzSI0au4Rf+TdRIw==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -187,9 +187,9 @@
    </properties>
   </object>
   <object id="97" template="../../../../common/maps/obj/collision.tx" x="353.5" y="127.7" width="190" height="17.1004"/>
-  <object id="98" template="../../../../common/maps/obj/collision.tx" x="99" y="285.95" width="219" height="17.1004"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="99" y="285.95" width="170" height="17.1004"/>
   <object id="99" template="../../../../common/maps/obj/collision.tx" x="97" y="254.45" width="173" height="17.1004"/>
-  <object id="100" template="../../../../common/maps/obj/collision.tx" x="100.5" y="223.45" width="219" height="17.1004"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="100.5" y="223.45" width="169" height="17.1004"/>
   <object id="103" template="../../../../common/maps/obj/collision.tx" x="100" y="128.45" width="219" height="17.1004"/>
   <object id="104" template="../../../../common/maps/obj/collision.tx" x="449" y="350.95" width="13.5" height="32.6004"/>
   <object id="105" template="../../../../common/maps/obj/collision.tx" x="481.75" y="350.7" width="13.5" height="32.6004"/>
@@ -371,7 +371,7 @@
   <object id="111" template="../../../../common/maps/obj/door_down.tx" x="274.727" y="276" width="44.5455" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/Commanders_Library.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
  </objectgroup>

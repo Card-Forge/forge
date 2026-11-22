@@ -215,31 +215,31 @@
   <object id="81" template="../../../../common/maps/obj/door_up.tx" x="199.167" y="303.5" width="82.6666" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/swamp_capital.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleportObjectId" value="111"/>
    </properties>
   </object>
   <object id="82" template="../../../../common/maps/obj/door_up.tx" x="295.667" y="303.5" width="63.1666" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/mountain_capital.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
   <object id="84" template="../../../../common/maps/obj/door_up.tx" x="375.917" y="302.5" width="63.1666" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/forest_capital.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleportObjectId" value="92"/>
    </properties>
   </object>
   <object id="85" template="../../../../common/maps/obj/door_up.tx" x="120.417" y="305.5" width="63.1666" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/island_capital.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleportObjectId" value="84"/>
    </properties>
   </object>
   <object id="86" template="../../../../common/maps/obj/door_up.tx" x="41.9167" y="304" width="63.1666" height="16">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/main_story/plains_capital.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleportObjectId" value="108"/>
    </properties>
   </object>
  </objectgroup>
