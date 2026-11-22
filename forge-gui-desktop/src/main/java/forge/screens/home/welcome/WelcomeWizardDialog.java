@@ -82,6 +82,7 @@ public final class WelcomeWizardDialog extends FDialog {
     private FLabel lblStep;
     private FCheckBox cbDontShowAgain;
     private FComboBox<String> cbLanguage;
+    private FComboBox<String> cbCardLanguage;
     private final String initialLanguage;
 
     private WelcomeWizardDialog() {
@@ -135,19 +136,29 @@ public final class WelcomeWizardDialog extends FDialog {
                 .fontSize(13).fontAlign(SwingConstants.LEFT).build(),
                 "w 100%, wrap, gapbottom 20");
 
-        final JPanel langBox = framedBox(new MigLayout("insets 12, fillx"));
+        final JPanel langBox = framedBox(new MigLayout("insets 12, fillx, gap 12 10", "[][grow]"));
         cbLanguage = new FComboBox<>(ForgeConstants.getAvailableLanguages().toArray(new String[0]));
         cbLanguage.setSelectedItem(initialLanguage);
         langBox.add(new FLabel.Builder()
                 .text(L.getMessage("lblWelcomeWizardLanguagePageTitle") + ":")
-                .fontSize(13).fontAlign(SwingConstants.LEFT).build(),
-                "split 2, gapbottom 10");
-        langBox.add(cbLanguage, "w 160!, h 26!, wrap, gapbottom 10");
+                .fontSize(13).fontAlign(SwingConstants.LEFT).build());
+        langBox.add(cbLanguage, "w 180!, h 26!, wrap");
+
+        cbCardLanguage = new FComboBox<>(ForgeConstants.getScryfallCardLanguageMapping().keySet().toArray(new String[0]));
+        cbCardLanguage.setSelectedItem(cardLanguageName(prefs.getPref(FPref.UI_CARD_DOWNLOAD_LANG)));
+        langBox.add(new FLabel.Builder()
+                .text(L.getMessage("cbpCardDownloadLang") + ":")
+                .fontSize(13).fontAlign(SwingConstants.LEFT).build());
+        langBox.add(cbCardLanguage, "w 180!, h 26!, wrap");
+        p.add(langBox, "w 100%, wrap");
+
+        final JPanel spacer = new JPanel();
+        spacer.setOpaque(false);
+        p.add(spacer, "w 100%, growy, pushy, wrap");
 
         cbDontShowAgain = new FCheckBox(L.getMessage("lblWelcomeWizardDontShowAgain"));
         cbDontShowAgain.setSelected(true);
-        langBox.add(cbDontShowAgain, "wrap");
-        p.add(langBox, "w 100%, wrap");
+        p.add(cbDontShowAgain, "wrap");
 
         return new WizardPage(p, Collections.<RadioAxis>emptyList());
     }
@@ -345,11 +356,10 @@ public final class WelcomeWizardDialog extends FDialog {
             final String selected = (String) cbLanguage.getSelectedItem();
             if (selected != null && !selected.equals(prefs.getPref(FPref.UI_LANGUAGE))) {
                 prefs.setPref(FPref.UI_LANGUAGE, selected);
-                // Scryfall splits Chinese into simplified (zhs) and traditional (zht)
-                final String cardLang = "zh-CN".equals(selected) ? "zhs" : selected.split("-")[0];
-                if (ForgeConstants.getScryfallCardLanguageMapping().containsValue(cardLang)) {
-                    prefs.setPref(FPref.UI_CARD_DOWNLOAD_LANG, cardLang);
-                }
+            }
+            final String cardLang = ForgeConstants.getScryfallCardLanguageMapping().get((String) cbCardLanguage.getSelectedItem());
+            if (cardLang != null) {
+                prefs.setPref(FPref.UI_CARD_DOWNLOAD_LANG, cardLang);
             }
         }
         prefs.save();
@@ -425,6 +435,13 @@ public final class WelcomeWizardDialog extends FDialog {
         final JPanel box = framedBox(new MigLayout("insets 10, fillx"));
         box.add(previewLabel, "growx, wrap");
         return box;
+    }
+
+    private static String cardLanguageName(final String code) {
+        for (final Map.Entry<String, String> e : ForgeConstants.getScryfallCardLanguageMapping().entrySet()) {
+            if (e.getValue().equals(code)) return e.getKey();
+        }
+        return "English";
     }
 
     private static JPanel framedBox(final LayoutManager layout) {
