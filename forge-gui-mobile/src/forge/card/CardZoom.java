@@ -115,6 +115,7 @@ public class CardZoom extends FOverlay {
     private static final float OPEN_SECONDS = 0.22f, CLOSE_SECONDS = 0.16f;
     private static float openT = 1f, closeT;
     private static boolean closing, hidePosted;
+    private static int closeGeneration;
     private static final float FLIP_SECONDS = 0.34f;
     private static boolean flipping, flipToggled;
     private static float flipT;
@@ -219,6 +220,7 @@ public class CardZoom extends FOverlay {
      * so a subsequent show() can otherwise be ignored by FOverlay.setVisible().
      */
     public static void resetForMatchEnd() {
+        closeGeneration++;
         closing = false;
         hidePosted = false;
         fanActive = false;
@@ -684,7 +686,11 @@ public class CardZoom extends FOverlay {
             moving = true;
             if (closeT >= 1f && !hidePosted) {
                 hidePosted = true;
+                final int generation = closeGeneration;
                 Gdx.app.postRunnable(() -> {
+                    if (generation != closeGeneration) {
+                        return;
+                    }
                     hidePosted = false;
                     if (closing) cardZoom.completeClose();
                 });
