@@ -5,6 +5,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class ChangeSpeedEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "Mode",
+    };
+
     @Override
     public void resolve(SpellAbility sa) {
         String mode = sa.getParamOrDefault("Mode", "Increase");
