@@ -7,6 +7,10 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
 
 public class ChangeXEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"Value"}};
 
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityEffect#resolve(forge.card.spellability.SpellAbility)
