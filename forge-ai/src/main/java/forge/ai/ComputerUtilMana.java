@@ -178,12 +178,19 @@ public class ComputerUtilMana {
         }
 
         if (card.isCreature()) {
+            boolean canAttack = CombatUtil.canAttack(card);
+            boolean canBlock = CombatUtil.canBlock(card);
             // treat attacking and blocking as though they're non-mana abilities
-            if (CombatUtil.canAttack(card)) {
+            if (canAttack) {
                 score += 13;
             }
-            if (CombatUtil.canBlock(card)) {
+            if (canBlock) {
                 score += 13;
+            }
+            if (canAttack || canBlock) {
+                // the more the creature is worth, the more tapping it costs. Without this a mana creature with a
+                // broad mana ability (Noble Hierarch) is kept untapped over a big equipped land creature (Dryad Arbor)
+                score += ComputerUtilCard.evaluateCreature(card) / 10;
             }
         }
 
@@ -451,6 +458,16 @@ public class ComputerUtilMana {
                     // creatures for mana (for example, Servant of the Conduit)
                     continue;
                 }
+            } else if (sa.getApi() == ApiType.Attach && sa.isEquip()
+                    && ai.isAI()
+                    && ma.getPayCosts().hasTapCost()
+                    && ma.getHostCard().equals(sa.getTargetCard())
+                    && ai.getGame().getPhaseHandler().isPlayerTurn(ai)
+                    && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    && CombatUtil.canAttack(ma.getHostCard())) {
+                // do not equip a creature and then tap it for the mana of that equip (or of another equip):
+                // it is tapped and can not attack with the equipment it just got
+                continue;
             } else if (sa.getApi() == ApiType.Attach
                     && "AvoidPayingWithAttachTarget".equals(saHost.getSVar("AIPaymentPreference"))) {
                 // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
