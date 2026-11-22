@@ -56,7 +56,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
-import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.util.ImageFetcher;
 import forge.util.ItemPool;
