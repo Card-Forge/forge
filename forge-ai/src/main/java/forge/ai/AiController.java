@@ -2491,7 +2491,14 @@ public class AiController {
                 }
                 final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
                 if (solved != null) {
-                    return solved; // a line that wins this turn was found: follow it instead of guessing
+                    // a step that the mana cannot pay (the colour of the Diamond's mana was wrong, a land is tapped) is
+                    // not cast: cast like that it failed to pay, was skipped, and the whole turn went on without it
+                    solved.setActivatingPlayer(player);
+                    if (solved.isManaAbility() || ComputerUtilCost.canPayCost(solved, player, false)) {
+                        return solved; // a line that wins this turn was found: follow it instead of guessing
+                    }
+                    VetoLog.note(player, "storm-step-unpayable " + solved.getHostCard().getName());
+                    stormSolver.drop();
                 }
             }
         }

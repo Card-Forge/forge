@@ -1279,6 +1279,19 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtilMana.chooseColorForShard(shardBeingPaid, colors.getColor());
             }
             hand = CardCollection.combine(hand, player.getCardsIn(ZoneType.Stack));
+            // what the cards that the mana is for still lack: the cards that a Lion's Eye Diamond has just discarded
+            // are those (a Past in Flames casts them from the graveyard), so they are counted as well
+            final CardCollection wanted = new CardCollection(hand);
+            for (final Card g : player.getCardsIn(ZoneType.Graveyard)) {
+                if (g.getTurnInZone() == player.getGame().getPhaseHandler().getTurn() && !g.isLand() && !g.isCreature()
+                        && (g.isInstant() || g.isSorcery())) {
+                    wanted.add(g);
+                }
+            }
+            final byte lacking = ComputerUtilMana.colorShortfall(player, wanted, colors.getColor());
+            if (lacking != 0) {
+                return lacking;
+            }
         }
         final String c = ComputerUtilCard.getMostProminentColor(hand);
         byte chosenColorMask = MagicColor.fromName(c);

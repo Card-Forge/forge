@@ -1703,4 +1703,25 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("the drain is lost by the opponent, gained by the AI, lost by the opponent again\n" + trace
                 + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void theColourThatTheHandLacksIsTheOneTheAnyColourManaAdds() {
+        elfDeckWith(0, "Burning Wish", "Dark Ritual", "Dark Ritual");
+        final java.util.List<Card> hand = new java.util.ArrayList<>(ai.getCardsIn(ZoneType.Hand));
+        // black needs two, red one: black first; with the Rituals gone it is the red
+        AssertJUnit.assertEquals(forge.card.MagicColor.BLACK, ComputerUtilMana.colorShortfall(ai, hand, (byte) 31));
+        hand.removeIf(c -> c.getName().equals("Dark Ritual"));
+        AssertJUnit.assertEquals(forge.card.MagicColor.RED, ComputerUtilMana.colorShortfall(ai, hand, (byte) 31));
+        AssertJUnit.assertEquals("a colour the mana cannot be: none", 0, ComputerUtilMana.colorShortfall(ai, hand, (byte) forge.card.MagicColor.GREEN));
+    }
+
+    @Test(timeOut = 120000)
+    public void theDiamondAddsTheColourOfTheCardsItDiscarded() {
+        elfDeckWith(0);
+        final Card diamond = addCardToZone("Lion's Eye Diamond", ai, ZoneType.Battlefield);
+        addCardToZone("Burning Wish", ai, ZoneType.Graveyard); // what the Diamond has just discarded
+        final SpellAbility mana = abilityOf(diamond, ApiType.Mana);
+        final byte chosen = ((PlayerControllerAi) ai.getController()).chooseColor("", mana, forge.card.ColorSet.fromMask(31));
+        AssertJUnit.assertEquals("an empty hand is not white: the Wish in the graveyard needs red", forge.card.MagicColor.RED, chosen);
+    }
 }
