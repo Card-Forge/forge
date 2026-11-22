@@ -228,7 +228,7 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
         if (opponents.size() < 2) {
-            return Iterables.getFirst(opponents, null);
+            return opponents.getFirst();
         }
 
         Map<Player, Integer> threatScores = Maps.newHashMap();

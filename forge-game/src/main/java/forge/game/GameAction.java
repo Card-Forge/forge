@@ -2257,7 +2257,7 @@ public class GameAction {
         reveal(cards, cardOwner, dontRevealToOwner, messagePrefix, true);
     }
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
-        Card firstCard = Iterables.getFirst(cards, null);
+        Card firstCard = cards.getFirst();
         if (firstCard == null) {
             return;
         }
