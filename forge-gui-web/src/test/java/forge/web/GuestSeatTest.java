@@ -282,7 +282,6 @@ public class GuestSeatTest extends WebHubTest {
     public void aGuestFollowsTheHostIntoTheMatchAfterASeatBelowIsRemoved() throws Exception {
         final TestBrowser host = hostAt("invite");
         sessions.onMessage(host, TestBrowser.action("decks"));
-        final String deck = TestDecks.firstLegal(host.awaitDecks());
         send(host, message("setPlayerCount", "count", 3));
         send(host, message("aiSeat", "index", 1));
         send(host, message("openSeat", "index", 2));
@@ -294,7 +293,7 @@ public class GuestSeatTest extends WebHubTest {
 
         for (final TestBrowser browser : List.of(host, guest)) {
             final JsonObject choose = message("setSeat", "index", browser.latestTable().get("mySeat").getAsInt());
-            choose.addProperty("deck", deck);
+            choose.addProperty("deck", TestDecks.firstLegal(browser.awaitDecks()));
             sessions.onMessage(browser, choose);
             sessions.onMessage(browser, message("ready", "ready", true));
         }
@@ -310,7 +309,7 @@ public class GuestSeatTest extends WebHubTest {
                 "the guest was left in match setup when the match started");
     }
 
-    /** Seats a guest named Player beside the host, gives both seats the same deck and readies them. */
+    /** Seats a guest named Player beside the host, gives each seat a deck from its own browser's list and readies them. */
     private TestBrowser seatGuestAndReady(final TestBrowser host) throws InterruptedException {
         final JsonObject hosted = host.awaitLobbyWithSeat();
         Assert.assertNotNull(hosted, "the host never got a seat in its own game");
@@ -319,10 +318,9 @@ public class GuestSeatTest extends WebHubTest {
         final JsonObject seated = guest.awaitLobbyWithSeat();
         Assert.assertNotNull(seated, "the guest never took a seat");
         sessions.onMessage(host, TestBrowser.action("decks"));
-        final String deck = TestDecks.firstLegal(host.awaitDecks());
         for (final TestBrowser browser : List.of(host, guest)) {
             final JsonObject choose = message("setSeat", "index", (browser == host ? hosted : seated).get("mySeat").getAsInt());
-            choose.addProperty("deck", deck);
+            choose.addProperty("deck", TestDecks.firstLegal(browser.awaitDecks()));
             sessions.onMessage(browser, choose);
             sessions.onMessage(browser, message("ready", "ready", true));
         }
