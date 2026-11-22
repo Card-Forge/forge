@@ -89,6 +89,14 @@ public final class LoopRunner {
         if (melira != null) {
             return melira;
         }
+        final SpellAbility helm = ExtraCombatPlan.next(ai, candidates, approve);
+        if (helm != null) {
+            return helm;
+        }
+        final SpellAbility triggers = TriggerLoopPlan.next(ai, candidates, approve);
+        if (triggers != null) {
+            return triggers;
+        }
         final SpellAbility flicker = FlickerLoopPlan.next(ai, candidates, approve);
         if (flicker != null) {
             return flicker;

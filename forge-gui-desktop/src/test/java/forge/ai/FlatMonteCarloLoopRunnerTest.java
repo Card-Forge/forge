@@ -1635,4 +1635,72 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
                 + "the library is gone, " + opp.getCardsIn(ZoneType.Library).size() + " left\n" + trace + gameStateToString(game),
                 opp.getCardsIn(ZoneType.Library).size() <= 5);
     }
+
+    @Test(timeOut = 120000)
+    public void anExtraCombatEngineIsRecognised() {
+        elfDeckWith(0);
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield)));
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Godo, Bandit Warlord", ai, ZoneType.Battlefield)));
+        AssertJUnit.assertFalse(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield)));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithAureliaAndTheHelmOfTheHostKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Forest", 5, ai);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        final Card helm = addCardToZone("Helm of the Host", ai, ZoneType.Battlefield);
+        helm.attachToEntity(aurelia, null, true);
+        runTurn();
+        AssertJUnit.assertTrue("Aurelia attacks, untaps, and the Helm makes one more at the start of each combat\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theHelmOfTheHostIsEquippedToAurelia() {
+        elfDeckWith(0);
+        addCards("Forest", 5, ai);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        final Card helm = addCardToZone("Helm of the Host", ai, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        runTurn();
+        AssertJUnit.assertTrue("equip {5} in the first main phase\n" + trace + gameStateToString(game), helm.getEquipping() == aurelia
+                || aurelia.isEquipped());
+    }
+
+    @Test(timeOut = 120000)
+    public void anEngineDoesNotAttackIntoABlockerThatKillsIt() {
+        elfDeckWith(0);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        addCardToZone("Serra Angel", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertFalse(forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, opp.getCardsIn(ZoneType.Battlefield)));
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, new java.util.ArrayList<>()));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetAndCuriosityKillsTheOpponent() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Curiosity on Niv-Mizzet, an instant draws, the ping draws, round and round\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithExquisiteBloodSanguineBondAndADrainKillsTheOpponent() {
+        elfDeckWith(0, "Vampire's Kiss");
+        addCards("Swamp", 3, ai);
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the drain is lost by the opponent, gained by the AI, lost by the opponent again\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
