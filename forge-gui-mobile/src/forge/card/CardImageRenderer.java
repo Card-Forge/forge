@@ -36,6 +36,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
+import forge.gui.card.CardTextRows;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
@@ -47,7 +48,7 @@ public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
     private static final float BASE_IMAGE_HEIGHT = 504;
     private static float MANA_SYMBOL_SIZE, PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
-    private static FSkinFont NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT;
+    private static FSkinFont NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT, LEVEL_FONT; //LEVEL_FONT: the small "LEVEL" label of a Leveler level
     private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
     public static final Color[] VEHICLE_PTBOX_COLOR = new Color[] { Color.valueOf("#A36C42") };
@@ -55,6 +56,10 @@ public class CardImageRenderer {
     private static final ArrayList<String> ptPieces = new ArrayList<>(8);
     private static final float[] ptWidths = new float[8];
     private static final String[] landTypesStrings = new String[0];
+    private static float textBoxInset; //how far the text box is inset from the inner edge of the card
+    private static final Color LOYALTY_BOX_COLOR = Color.BLACK;
+    private static final List<TextRenderer> rowTextRenderers = new ArrayList<>();
+    private static final TextRenderer classHeaderTextRenderer = new TextRenderer(true);
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -101,6 +106,7 @@ public class CardImageRenderer {
         TYPE_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.9f);
         TEXT_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.95f);
         PT_FONT = NAME_FONT;
+        LEVEL_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.5f);
         BORDER_THICKNESS = Math.max(1.5f * ratio, 1f); //don't let border go below 1
 
         prevImageWidth = w;
@@ -172,6 +178,7 @@ public class CardImageRenderer {
         Color[] colors = useCardBGTexture && Forge.allowCardBG ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
 
         float artInset = blackBorderThickness * 0.5f;
+        textBoxInset = artInset;
         float outerBorderThickness = 2 * blackBorderThickness - artInset;
         x += outerBorderThickness;
         y += outerBorderThickness;
@@ -314,29 +321,34 @@ public class CardImageRenderer {
         return artist;
     }
 
-    private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
+    /** The color of the outline that is drawn inside of the black border of a box, or null if the card has none. */
+    private static Color getOutlineColor(ColorSet colors) {
         if (colors == null)
-            return;
+            return null;
         switch (colors.countColors()) {
             case 0:
-                g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#A0A6A4"), x, y, w, h);
-                break;
+                return Color.valueOf("#A0A6A4");
             case 1:
                 if (colors.hasBlack())
-                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#48494a"), x, y, w, h);
+                    return Color.valueOf("#48494a");
                 else if (colors.hasGreen())
-                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#66cb35"), x, y, w, h);
+                    return Color.valueOf("#66cb35");
                 else if (colors.hasBlue())
-                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#62b5f8"), x, y, w, h);
+                    return Color.valueOf("#62b5f8");
                 else if (colors.hasRed())
-                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#f6532d"), x, y, w, h);
+                    return Color.valueOf("#f6532d");
                 else if (colors.hasWhite())
-                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#EEEBE1"), x, y, w, h);
-                break;
+                    return Color.valueOf("#EEEBE1");
+                return null;
             default:
-                g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#F9E084"), x, y, w, h);
-                break;
+                return Color.valueOf("#F9E084");
         }
+    }
+
+    private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
+        final Color outline = getOutlineColor(colors);
+        if (outline != null)
+            g.drawRect(BORDER_THICKNESS*2, outline, x, y, w, h);
     }
     private static void drawHeader(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText, boolean isAdventure) {
         float oldAlpha = g.getfloatAlphaComposite();
@@ -773,6 +785,16 @@ public class CardImageRenderer {
                 return;
             }
 
+            // Station levels, loyalty abilities, Saga chapters, Class levels and Leveler ranges get a badge on the left of their text
+            if (!drawAdventure && state != null) {
+                List<CardTextRows.Row> rows = CardTextRows.parse(state, text);
+                if (!rows.isEmpty()) {
+                    boolean hasBottomPtBox = state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle();
+                    drawTextRows(g, state, rows, x, y, w, h, hasBottomPtBox);
+                    return;
+                }
+            }
+
             float padding = getCapHeight(TEXT_FONT) * 0.75f;
             x += padding;
             y += padding;
@@ -784,6 +806,387 @@ public class CardImageRenderer {
 
     private static void drawAlphaLines(Graphics g, float x, float y, float w, float h) {
         g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("overlay_alpha.png")), x, y, w, h);
+    }
+
+    private static TextRenderer getRowTextRenderer(int index) {
+        while (rowTextRenderers.size() <= index) {
+            rowTextRenderers.add(new TextRenderer(true));
+        }
+        return rowTextRenderers.get(index);
+    }
+
+    /** True if the row has a badge box on the left. The level of a Class is not a badge, it is the header of its row. */
+    private static boolean hasBadgeBox(CardTextRows.Row row) {
+        return row.hasBadge() && row.kind != CardTextRows.Kind.CLASS;
+    }
+
+    /** Width of the badge of a row: a circle (Station) and a square (Saga chapter) are as wide as they are high. */
+    private static float getBadgeWidth(CardTextRows.Row row, float boxHeight, float boxPadding) {
+        float textWidth = 0;
+        for (String part : row.badgeParts()) {
+            textWidth = Math.max(textWidth, getBoundsWidth(part, PT_FONT));
+        }
+        textWidth += 2 * boxPadding;
+        if (row.isRoundBadge() || row.kind == CardTextRows.Kind.SAGA) {
+            return Math.max(boxHeight, textWidth);
+        }
+        return Math.max(PT_BOX_WIDTH * 0.8f, textWidth);
+    }
+
+    /** Height of the badge(s) of a row: a Saga row has a badge for every chapter, stacked with a gap between them. */
+    private static float getBadgeHeight(CardTextRows.Row row, float badgeWidth, float boxHeight, float gap) {
+        if (row.kind == CardTextRows.Kind.SAGA) {
+            final int parts = row.badgeParts().size();
+            return parts * badgeWidth + (parts - 1) * gap;
+        }
+        return row.isRoundBadge() ? badgeWidth : boxHeight;
+    }
+
+    /**
+     * Draws the badge of a row, vertically centered on centerY: a gray circle with white text like the P/T box of a
+     * Spacecraft for a Station level, an independent square for every chapter of a Saga, otherwise a rectangle in
+     * the colors of the P/T box of the card.
+     */
+    private static void drawRowBadge(Graphics g, CardStateView state, CardTextRows.Row row, Color[] colors, float x, float centerY, float width, float boxHeight, float gap) {
+        if (row.kind == CardTextRows.Kind.SAGA) {
+            final List<String> chapters = row.badgeParts();
+            final float top = centerY - getBadgeHeight(row, width, boxHeight, gap) / 2;
+            for (int i = 0; i < chapters.size(); i++) {
+                drawRowBox(g, state, chapters.get(i), false, colors, Color.BLACK, false, x, top + i * (width + gap) + width / 2, width, width);
+            }
+        } else if (row.kind == CardTextRows.Kind.STATION) {
+            drawRowBox(g, state, row.badge, true, SPACECRAFT_PTBOX_COLOR, Color.WHITE, true, x, centerY, width, width);
+        } else {
+            drawRowBox(g, state, row.badge, false, colors, Color.BLACK, false, x, centerY, width, boxHeight);
+        }
+    }
+
+    /**
+     * Draws the small header of a Class level, like the header of an Adventure: the cost on the left, the level on
+     * the right. It is as wide as the text box and only has a line on top, so it connects to the frame like on the
+     * original card.
+     */
+    private static void drawClassHeader(Graphics g, String cost, String level, Color[] colors, float x, float y, float w, float h) {
+        // the gradient does not cover the lines of the frame on both sides
+        final float inset = 2 * BORDER_THICKNESS;
+        fillColorBackground(g, colors, x + inset, y, w - 2 * inset, h);
+        g.drawLine(BORDER_THICKNESS, Color.BLACK, x, y, x + w, y);
+        final float pad = h / 4;
+        final float levelWidth = getBoundsWidth(level, TYPE_FONT);
+        classHeaderTextRenderer.drawText(g, cost, TYPE_FONT, Color.BLACK, x + pad, y, Math.max(w - levelWidth - 3 * pad, 1), h, y, h, false, Align.left, true);
+        g.drawText(level, TYPE_FONT, Color.BLACK, x + pad, y, w - 2 * pad, h, false, Align.right, true);
+    }
+
+    private static boolean hasLevelerRows(List<CardTextRows.Row> rows) {
+        for (CardTextRows.Row row : rows) {
+            if (row.kind == CardTextRows.Kind.LEVEL) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The colors of the frame of the card, the P/T box and the header boxes are tinted from them. */
+    private static Color[] getFrameColors(CardStateView state) {
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
+        final Color[] frameColors = new Color[borderColors.size()];
+        for (int i = 0; i < frameColors.length; i++) {
+            frameColors[i] = fromDetailColor(borderColors.get(i));
+        }
+        return frameColors;
+    }
+
+    private static Color[] tintFrom(Color base, Color[] frameColors, float tint) {
+        return frameColors.length == 0 ? new Color[] { base } : FSkinColor.tintColors(base, frameColors, tint);
+    }
+
+    /**
+     * Draws the text of a Leveler like the desktop does: a band for the text before the first level and a band for
+     * every level, every band darker than the one before. A level has its name and range in a column on the left and
+     * its P/T box on the right. The P/T box of the card itself stays at the bottom right of the text box, the last
+     * level keeps clear of it.
+     */
+    private static void drawLevelerRows(Graphics g, CardStateView state, List<CardTextRows.Row> rows, float x, float y, float w, float h, boolean hasBottomPtBox) {
+        final float padding = getCapHeight(TEXT_FONT) * 0.75f;
+        final float boxPadding = Math.round(getCapHeight(PT_FONT) / 4);
+        final float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * boxPadding;
+        final float columnWidth = PT_BOX_WIDTH * 0.75f;
+        final float labelHeight = 2 * getCapHeight(LEVEL_FONT);
+        final float rangeHeight = 2 * getCapHeight(TYPE_FONT);
+        final float ptOverlap = PT_BOX_WIDTH - textBoxInset; //how far a P/T box reaches into the text box
+        final float ptRight = x + w + textBoxInset; //right side of the card's inner area, where the P/T box of a card ends
+        // how far the P/T box of the card reaches up into the text box
+        final float cardPtOverlap = Math.max(2 * textBoxInset - 2 * getCapHeight(PT_FONT) + boxHeight, 0);
+
+        // the bands: a LEVEL row for a level, null for the text before the first level
+        final List<CardTextRows.Row> bands = new ArrayList<>();
+        final List<String> bandTexts = new ArrayList<>();
+        final StringBuilder intro = new StringBuilder();
+        for (CardTextRows.Row row : rows) {
+            if (row.kind == CardTextRows.Kind.LEVEL) {
+                if (intro.length() > 0) {
+                    bands.add(null);
+                    bandTexts.add(intro.toString());
+                    intro.setLength(0);
+                }
+                bands.add(row);
+                bandTexts.add(row.text);
+            } else {
+                if (intro.length() > 0) {
+                    intro.append('\n');
+                }
+                intro.append(row.text);
+            }
+        }
+        if (intro.length() > 0) {
+            bands.add(null);
+            bandTexts.add(intro.toString());
+        }
+        final int count = bands.size();
+
+        final Color[] frameColors = getFrameColors(state);
+        final Color lighterGray = Color.valueOf("#E0E0E0");
+        final Color lightGray = Color.valueOf("#A0A0A0");
+        final Color[][] bandColors = {
+                null,
+                tintFrom(lighterGray, frameColors, CardRenderer.TEXT_BOX_TINT + 0.15f),
+                tintFrom(lightGray, frameColors, CardRenderer.TEXT_BOX_TINT + 0.3f)
+        };
+        final Color[][] ptColors = {
+                tintFrom(Color.WHITE, frameColors, CardRenderer.PT_BOX_TINT),
+                tintFrom(lighterGray, frameColors, CardRenderer.PT_BOX_TINT + 0.15f),
+                tintFrom(lightGray, frameColors, CardRenderer.PT_BOX_TINT + 0.3f)
+        };
+
+        // measure the bands
+        final int[] shades = new int[count];
+        final String[] pts = new String[count];
+        final float[] textX = new float[count];
+        final float[] textW = new float[count];
+        final float[] needed = new float[count];
+        float total = 0;
+        int levelNo = 0;
+        for (int i = 0; i < count; i++) {
+            final CardTextRows.Row level = bands.get(i);
+            shades[i] = level == null ? 0 : Math.min(++levelNo, 2);
+            pts[i] = level != null ? level.pt : null;
+            final float left = x + padding + (level != null ? columnWidth : 0);
+            float right = x + w - padding;
+            if (pts[i] != null || (hasBottomPtBox && i == count - 1)) {
+                right -= ptOverlap;
+            }
+            textX[i] = left;
+            textW[i] = Math.max(right - left, 1);
+            float content = bandTexts.get(i).isEmpty() ? 0 : getRowTextRenderer(i).getWrappedBounds(bandTexts.get(i), TEXT_FONT, textW[i]).height;
+            if (pts[i] != null) {
+                content = Math.max(content, boxHeight);
+                if (hasBottomPtBox && i == count - 1) {
+                    content = Math.max(content, boxHeight + cardPtOverlap + boxPadding);
+                }
+            }
+            if (level != null) {
+                content = Math.max(content, labelHeight + rangeHeight);
+            }
+            needed[i] = content + padding;
+            total += needed[i];
+        }
+
+        // the bands fill the whole text box
+        final float scale = total > h ? h / total : 1;
+        final float extra = total > h ? 0 : (h - total) / count;
+        final float[] centers = new float[count];
+        float top = y;
+        for (int i = 0; i < count; i++) {
+            final CardTextRows.Row level = bands.get(i);
+            final float slot = needed[i] * scale + extra;
+            final float centerY = top + slot / 2;
+            centers[i] = centerY;
+            if (shades[i] > 0) {
+                fillColorBackground(g, bandColors[shades[i]], x, top, w, slot);
+            }
+            if (i > 0) {
+                g.drawLine(BORDER_THICKNESS, Color.BLACK, x, top, x + w, top);
+            }
+            if (level != null) {
+                g.drawLine(BORDER_THICKNESS, Color.BLACK, x + columnWidth, top, x + columnWidth, top + slot);
+                final float labelTop = centerY - (labelHeight + rangeHeight) / 2;
+                g.drawText("LEVEL", LEVEL_FONT, Color.BLACK, x, labelTop, columnWidth, labelHeight, false, Align.center, true);
+                g.drawText(level.badge, TYPE_FONT, Color.BLACK, x, labelTop + labelHeight, columnWidth, rangeHeight, false, Align.center, true);
+            }
+            if (!bandTexts.get(i).isEmpty()) {
+                getRowTextRenderer(i).drawText(g, bandTexts.get(i), TEXT_FONT, Color.BLACK, textX[i], top, textW[i], slot, top, slot, true, Align.left, true);
+            }
+            top += slot;
+        }
+        // the frame of the text box on top of the bands
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        // the P/T boxes on top of the frame, they stick out of the right side of the text box
+        for (int i = 0; i < count; i++) {
+            if (pts[i] != null) {
+                final float ptWidth = Math.max(PT_BOX_WIDTH, getBoundsWidth(pts[i], PT_FONT) + 2 * boxPadding);
+                float ptCenterY = centers[i];
+                if (hasBottomPtBox && i == count - 1) {
+                    ptCenterY = Math.min(ptCenterY, y + h - cardPtOverlap - boxPadding - boxHeight / 2);
+                }
+                drawRowBox(g, state, pts[i], false, ptColors[shades[i]], Color.BLACK, false, ptRight - ptWidth, ptCenterY, ptWidth, boxHeight);
+            }
+        }
+    }
+
+    /**
+     * Draws the text of a card with rows that have a badge: Station levels, loyalty abilities, Saga chapters,
+     * Leveler ranges and Class levels. Every row is centered on its own slot, so the badge on the left, the text
+     * and the P/T box on the right of a row are aligned with each other. The badge sticks out of the left side of
+     * the text box, the P/T box of a Station level or a Leveler range out of the right side. The level of a Class
+     * is not a badge but a small header above the text of its row. The badges have the colors of the P/T box of a
+     * card, a Station level the gray of a Spacecraft.
+     *
+     * @param hasBottomPtBox true if the P/T box of the card itself overlaps the bottom right of the text box
+     */
+    private static void drawTextRows(Graphics g, CardStateView state, List<CardTextRows.Row> rows, float x, float y, float w, float h, boolean hasBottomPtBox) {
+        if (hasLevelerRows(rows)) {
+            drawLevelerRows(g, state, rows, x, y, w, h, hasBottomPtBox);
+            return;
+        }
+        final int count = rows.size();
+        final float padding = getCapHeight(TEXT_FONT) * 0.75f;
+        final float boxPadding = Math.round(getCapHeight(PT_FONT) / 4);
+        final float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * boxPadding;
+        final float headerHeight = 2 * getCapHeight(TYPE_FONT); // header of a Class level, as high as a type line
+
+        // a small gap above and below the rows, so the mana symbols of the first and the last row stay inside of the text box
+        final float verticalGap = padding / 2;
+        y += verticalGap;
+        h -= 2 * verticalGap;
+
+        // all badges have the same width, so they line up
+        float badgeWidth = 0;
+        for (CardTextRows.Row row : rows) {
+            if (hasBadgeBox(row)) {
+                badgeWidth = Math.max(badgeWidth, getBadgeWidth(row, boxHeight, boxPadding));
+            }
+        }
+        final float badgeOverhang = badgeWidth * 0.4f;
+        final float badgeLeft = x - badgeOverhang;
+        final float ptOverlap = PT_BOX_WIDTH - textBoxInset; //how far a P/T box reaches into the text box
+        final float ptRight = x + w + textBoxInset; //right side of the card's inner area, where the P/T box of a card ends
+
+        // the colors of the P/T box of the card, and of its header
+        final Color[] frameColors = getFrameColors(state);
+        final Color[] badgeColors = frameColors.length == 0 ? new Color[] { Color.WHITE } : FSkinColor.tintColors(Color.WHITE, frameColors, CardRenderer.PT_BOX_TINT);
+        final Color[] headerColors = frameColors.length == 0 ? new Color[] { Color.WHITE } : FSkinColor.tintColors(Color.WHITE, frameColors, CardRenderer.NAME_BOX_TINT);
+
+        // measure the rows
+        String[][] headers = new String[count][];
+        String[] bodies = new String[count];
+        float[] textX = new float[count];
+        float[] textW = new float[count];
+        float[] needed = new float[count];
+        final float headerGap = padding / 2; // between the header of a Class level and its text
+        final float headerPadding = 2 * padding; // above and below the header and the text of a Class level
+        float total;
+        FSkinFont rowFont = TEXT_FONT;
+        for (float fit = 1; ; fit -= 0.07f) {
+            total = 0;
+            for (int i = 0; i < count; i++) {
+                CardTextRows.Row row = rows.get(i);
+                headers[i] = row.classHeader();
+                bodies[i] = headers[i] != null ? headers[i][2] : row.text;
+                float left = hasBadgeBox(row) ? badgeLeft + badgeWidth + padding : x + padding;
+                float right = x + w - padding;
+                if (row.pt != null || (hasBottomPtBox && i == count - 1)) {
+                    right -= ptOverlap;
+                }
+                textX[i] = left;
+                textW[i] = Math.max(right - left, 1);
+                float textHeight = bodies[i].isEmpty() ? 0 : getRowTextRenderer(i).getWrappedBounds(bodies[i], rowFont, textW[i]).height;
+                if (headers[i] != null) {
+                    needed[i] = headerHeight + (bodies[i].isEmpty() ? 0 : headerGap + textHeight) + headerPadding;
+                } else {
+                    needed[i] = textHeight + padding;
+                    float boxNeeded = hasBadgeBox(row) ? getBadgeHeight(row, badgeWidth, boxHeight, boxPadding) : 0;
+                    if (row.pt != null) {
+                        boxNeeded = Math.max(boxNeeded, boxHeight);
+                    }
+                    if (boxNeeded > 0) {
+                        needed[i] = Math.max(needed[i], boxNeeded + padding);
+                    }
+                }
+                total += needed[i];
+            }
+            // the text is drawn in a smaller font if it does not fit
+            if (total <= h || fit <= 0.65f) {
+                break;
+            }
+            rowFont = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.95f * (fit - 0.07f));
+        }
+
+        // spread the space that is left evenly over the rows, or squeeze the rows if there is not enough
+        final float scale = total > h ? h / total : 1;
+        final float extra = total > h ? 0 : (h - total) / count;
+        float rowTop = y;
+        for (int i = 0; i < count; i++) {
+            CardTextRows.Row row = rows.get(i);
+            float slot = needed[i] * scale + extra;
+            float centerY = rowTop + slot / 2;
+            if (headers[i] != null) {
+                // the header on top, the text of the level below it, both centered in the slot
+                float top = rowTop + Math.max((slot - (needed[i] - headerPadding)) / 2, 0);
+                drawClassHeader(g, headers[i][0], headers[i][1], headerColors, x, top, w, headerHeight);
+                if (!bodies[i].isEmpty()) {
+                    float bodyTop = top + headerHeight + headerGap;
+                    float bodyHeight = Math.max(rowTop + slot - bodyTop, 1);
+                    getRowTextRenderer(i).drawText(g, bodies[i], rowFont, Color.BLACK, textX[i], bodyTop, textW[i], bodyHeight, bodyTop, bodyHeight, true, Align.left, false);
+                }
+                rowTop += slot;
+                continue;
+            }
+            getRowTextRenderer(i).drawText(g, bodies[i], rowFont, Color.BLACK, textX[i], rowTop, textW[i], slot, rowTop, slot, true, Align.left, true);
+            if (hasBadgeBox(row)) {
+                drawRowBadge(g, state, row, badgeColors, badgeLeft, centerY, badgeWidth, boxHeight, boxPadding);
+            }
+            if (row.pt != null) {
+                float ptWidth = Math.max(PT_BOX_WIDTH, getBoundsWidth(row.pt, PT_FONT) + 2 * boxPadding);
+                // like the P/T box of the card: gray for a Spacecraft, the color of the card otherwise
+                if (row.isStation) {
+                    drawRowBox(g, state, row.pt, false, SPACECRAFT_PTBOX_COLOR, Color.WHITE, true, ptRight - ptWidth, centerY, ptWidth, boxHeight);
+                } else {
+                    drawRowBox(g, state, row.pt, false, badgeColors, Color.BLACK, false, ptRight - ptWidth, centerY, ptWidth, boxHeight);
+                }
+            }
+            rowTop += slot;
+        }
+    }
+
+    /**
+     * Draws a box with text, vertically centered on centerY: a circle for the threshold of a Station level,
+     * otherwise a rectangle like the P/T box of a card.
+     *
+     * @param outlineWithCardColor the outline has the color of the card inside of the black outline, as on the P/T box of a Spacecraft
+     */
+    private static void drawRowBox(Graphics g, CardStateView state, String text, boolean circle, Color[] fill, Color textColor,
+                                   boolean outlineWithCardColor, float x, float centerY, float w, float h) {
+        float y = centerY - h / 2;
+        if (circle) {
+            final float cx = x + w / 2;
+            final float radius = Math.min(w, h) / 2;
+            g.fillCircle(fill[0], cx, centerY, radius);
+            if (outlineWithCardColor) {
+                final Color outline = getOutlineColor(state.getColors());
+                if (outline != null) {
+                    g.drawCircle(BORDER_THICKNESS * 2, outline, cx, centerY, radius);
+                }
+            }
+            g.drawCircle(BORDER_THICKNESS, Color.BLACK, cx, centerY, radius);
+        } else {
+            fillColorBackground(g, fill, x, y, w, h);
+            if (outlineWithCardColor) {
+                drawOutlineColor(g, state.getColors(), x, y, w, h);
+            }
+            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        }
+        g.drawText(text, PT_FONT, textColor, x, y, w, h, false, Align.center, true);
     }
 
     private static void drawPtBox(Graphics g, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
@@ -824,16 +1227,23 @@ public class CardImageRenderer {
         w = boxWidth;
         h = boxHeight;
 
-        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
-        //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        //loyalty and defense boxes are black with white text and outline, like on the desktop
+        final boolean isDarkBox = !state.isCreature() && (state.isPlaneswalker() || state.isBattle());
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : isDarkBox ? new Color[] { LOYALTY_BOX_COLOR } : colors, x, y, w, h);
+        if (isDarkBox) {
+            g.drawRect(BORDER_THICKNESS, Color.WHITE, x, y, w, h);
+        } else {
+            //draw outline color here
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
+            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        }
 
         if (noText)
             return;
+        final Color ptTextColor = state.isVehicle() || state.isSpaceCraft() || isDarkBox ? Color.WHITE : Color.BLACK;
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < piecesSize; i++) {
-            g.drawText(ptPieces.get(i), PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, false, Align.left, true);
+            g.drawText(ptPieces.get(i), PT_FONT, ptTextColor, x, y, w, h, false, Align.left, true);
             x += ptWidths[i];
         }
     }

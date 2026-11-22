@@ -25,7 +25,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ReplaceManaEffect;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -85,6 +84,42 @@ public class ComputerUtilMana {
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
+
+    /**
+     * Whether the AI may use life instead of a mana shard while paying a cost.
+     * Keep the life-payment restrictions here so mana estimation and actual payment use the same rules.
+     */
+    public static boolean canPayLifeForManaShard(final Player ai, final SpellAbility sa, final int lifeAmount) {
+        if (ai == null || sa == null || !ai.canPayLife(lifeAmount, false, sa)
+                || (ai.getLife() <= lifeAmount && !ai.cantLoseForZeroOrLessLife())) {
+            return false;
+        }
+        // an activated ability can be used again and again, so, like a PayLife cost (ComputerUtilCost.checkLifeCost),
+        // its Phyrexian mana never takes the AI below the life it keeps; no card needs to opt in to this one
+        if (ai.isAI() && sa.isActivatedAbility() && !ai.cantLoseForZeroOrLessLife()
+                && ai.getLife() - lifeAmount < ComputerUtilCost.lifeToKeep(sa, 4)) {
+            return false;
+        }
+        if (sa.hasParam("AIPhyrexianPayment")) {
+            final String policy = sa.getParam("AIPhyrexianPayment");
+            if ("Never".equals(policy)) {
+                return false;
+            }
+            if (policy.startsWith("OnFatalDamage.")) {
+                final int damage;
+                try {
+                    damage = Integer.parseInt(policy.substring(14));
+                } catch (final NumberFormatException e) {
+                    return false;
+                }
+                if (ai.getOpponents().stream().noneMatch(PlayerPredicates.lifeLessOrEqualTo(damage))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
         return payManaCost(cost, sa, ai, true, extraMana, true, effect);
     }
@@ -143,12 +178,19 @@ public class ComputerUtilMana {
         }
 
         if (card.isCreature()) {
+            boolean canAttack = CombatUtil.canAttack(card);
+            boolean canBlock = CombatUtil.canBlock(card);
             // treat attacking and blocking as though they're non-mana abilities
-            if (CombatUtil.canAttack(card)) {
+            if (canAttack) {
                 score += 13;
             }
-            if (CombatUtil.canBlock(card)) {
+            if (canBlock) {
                 score += 13;
+            }
+            if (canAttack || canBlock) {
+                // the more the creature is worth, the more tapping it costs. Without this a mana creature with a
+                // broad mana ability (Noble Hierarch) is kept untapped over a big equipped land creature (Dryad Arbor)
+                score += ComputerUtilCard.evaluateCreature(card) / 10;
             }
         }
 
@@ -416,6 +458,16 @@ public class ComputerUtilMana {
                     // creatures for mana (for example, Servant of the Conduit)
                     continue;
                 }
+            } else if (sa.getApi() == ApiType.Attach && sa.isEquip()
+                    && ai.isAI()
+                    && ma.getPayCosts().hasTapCost()
+                    && ma.getHostCard().equals(sa.getTargetCard())
+                    && ai.getGame().getPhaseHandler().isPlayerTurn(ai)
+                    && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    && CombatUtil.canAttack(ma.getHostCard())) {
+                // do not equip a creature and then tap it for the mana of that equip (or of another equip):
+                // it is tapped and can not attack with the equipment it just got
+                continue;
             } else if (sa.getApi() == ApiType.Attach
                     && "AvoidPayingWithAttachTarget".equals(saHost.getSVar("AIPaymentPreference"))) {
                 // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
@@ -463,8 +515,10 @@ public class ComputerUtilMana {
     }
 
     public static String predictMana(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
-        Card hostCard = saPayment.getHostCard();
+        return predictMana(saPayment, ai, toPay, toPay);
+    }
 
+    private static String predictMana(SpellAbility saPayment, Player ai, ManaCostShard toPay, ManaCostShard triggeredShard) {
         StringBuilder manaProduced = new StringBuilder(predictManaReplacement(saPayment, ai, toPay));
         String originalProduced = manaProduced.toString();
 
@@ -473,11 +527,7 @@ public class ComputerUtilMana {
         }
 
         // Run triggers like Nissa
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
-        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
-        runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, originalProduced);
-        for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
+        for (Trigger tr : getTapsForManaTriggers(saPayment, ai, originalProduced)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
                 continue;
@@ -485,7 +535,9 @@ public class ComputerUtilMana {
             if (ApiType.Mana.equals(trSA.getApi())) {
                 int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount", "1"), trSA);
                 String produced = trSA.getParam("Produced");
-                if (produced.equals("Chosen")) {
+                if (trSA.getManaPart().isAnyMana()) {
+                    produced = MagicColor.toShortString(chooseColorForShard(triggeredShard, MagicColor.ALL_COLORS));
+                } else if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
                 manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
@@ -532,6 +584,45 @@ public class ComputerUtilMana {
     // no color is chosen yet for combination mana, so "Combo W U" would count as three mana for ManaAmount
     private static String manaForReplacementCheck(String produced, SpellAbility ma) {
         return produced.startsWith("Combo ") ? StringUtils.repeat("C", " ", ma.amountOfManaGenerated(false)) : produced;
+    }
+
+    // shared by predictMana and the AI's real choice, so a payment makes the color it was planned with
+    public static byte chooseColorForShard(ManaCostShard shard, byte offered) {
+        final int colors = offered & shard.getColorMask();
+        return (byte) Integer.lowestOneBit(colors != 0 ? colors : offered);
+    }
+
+    // an any-color trigger like Fertile Ground pays the next shard when the source's own mana pays this one
+    private static ManaCostShard shardForTriggeredMana(ManaCostBeingPaid cost, ManaCostShard toPay, SpellAbility saPayment, Player ai,
+            Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
+        final ManaCostBeingPaid rest = new ManaCostBeingPaid(cost);
+        payMultipleMana(rest, predictManaReplacement(saPayment, ai, toPay), ai);
+        return rest.isPaid() || rest.getUnpaidShards(toPay) == cost.getUnpaidShards(toPay) ? toPay : getNextShardToPay(rest, sourcesForShards);
+    }
+
+    // triggers like Utopia Sprawl can add a color the source itself can't produce
+    private static int triggeredColors(final SpellAbility ma, final Player ai) {
+        int mask = 0;
+        for (final Trigger tr : getTapsForManaTriggers(ma, ai, manaOf(ma))) {
+            final SpellAbility trSA = tr.ensureAbility();
+            if (trSA == null || !ApiType.Mana.equals(trSA.getApi())) {
+                continue;
+            }
+            for (final byte color : MagicColor.WUBRG) {
+                if (trSA.getManaPart().canProduce(MagicColor.toShortString(color), trSA)) {
+                    mask |= color;
+                }
+            }
+        }
+        return mask;
+    }
+
+    private static List<Trigger> getTapsForManaTriggers(SpellAbility saPayment, Player ai, String produced) {
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(saPayment.getHostCard());
+        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
+        runParams.put(AbilityKey.AbilityMana, saPayment);
+        runParams.put(AbilityKey.Produced, produced);
+        return ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams);
     }
 
     private static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
@@ -771,8 +862,8 @@ public class ComputerUtilMana {
 
             if (saPayment == null) {
                 boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(phyLifeToPay, false, sa)
-                        || (ai.getLife() <= phyLifeToPay && !ai.cantLoseForZeroOrLessLife())) {
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack)
+                        || !canPayLifeForManaShard(ai, sa, phyLifeToPay)) {
                     // cannot pay
                     break;
                 }
@@ -837,6 +928,7 @@ public class ComputerUtilMana {
                 AiCardMemory.rememberCard(ai, saPayment.getHostCard(), MemorySet.PAYS_TAP_COST);
             }
 
+            final ManaCostShard triggeredShard = shardForTriggeredMana(cost, toPay, saPayment, ai, sourcesForShards);
             if (test) {
                 // Check energy when testing
                 CostPayEnergy energyCost = saPayment.getPayCosts().getCostEnergy();
@@ -848,7 +940,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                String manaProduced = predictMana(saPayment, ai, toPay);
+                String manaProduced = predictMana(saPayment, ai, toPay, triggeredShard);
                 payMultipleMana(cost, manaProduced, ai);
                 testLifeSpent += getLifeCost(saPayment);
                 // the mana to activate the ability has to come from the remaining sources
@@ -869,7 +961,11 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                ai.getGame().getStack().addAndUnfreeze(saPayment);
+                if (ai.getController() instanceof PlayerControllerAi aic) {
+                    aic.runPayingShard(triggeredShard, () -> ai.getGame().getStack().addAndUnfreeze(saPayment));
+                } else {
+                    ai.getGame().getStack().addAndUnfreeze(saPayment);
+                }
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
@@ -924,7 +1020,11 @@ public class ComputerUtilMana {
                     }
                     VetoLog.note(ai, "pay-failed " + sa.getHostCard().getName() + " toPay=" + toPay
                             + " convoke=" + sa.getHostCard().hasKeyword(Keyword.CONVOKE) + " x=" + sa.getXManaCostPaid()
-                            + " pool=" + ai.getManaPool().totalMana() + " untappedLands=" + lands + " readyCreatures=" + creatures);
+                            + " pool=" + ai.getManaPool().totalMana() + "(W" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.WHITE) + " U" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.BLUE)
+                            + " B" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.BLACK) + " R" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.RED)
+                            + " G" + ai.getManaPool().getAmountOfColor(forge.card.MagicColor.GREEN) + ")" + " untappedLands=" + lands + " readyCreatures=" + creatures
+                            // the sources the payer gave up on (a cost it could not pay: Lion's Eye Diamond's discard, a sacrifice)
+                            + " excluded=" + saExcludeList.stream().map(x -> x.getHostCard().getName()).distinct().sorted().collect(java.util.stream.Collectors.toList()));
                 }
                 sa.setSkip(true);
             }
@@ -1024,7 +1124,7 @@ public class ComputerUtilMana {
         final Map<Card, Integer> colorsOf = new HashMap<>();
         for (final SpellAbility ma : sourcesForShards.values()) {
             if (!usesUpSource(ma)) {
-                colorsOf.merge(ma.getHostCard(), producedColors(ma), (a, b) -> a | b);
+                colorsOf.merge(ma.getHostCard(), producedColors(ma, ai), (a, b) -> a | b);
             }
         }
         final int[] perColor = new int[MagicColor.WUBRG.length];
@@ -1087,14 +1187,14 @@ public class ComputerUtilMana {
                 || ma.getPayCosts().getCostParts().stream().anyMatch(part -> part instanceof CostExile && part.payCostFromSource());
     }
 
-    private static int producedColors(final SpellAbility ma) {
+    private static int producedColors(final SpellAbility ma, final Player ai) {
         final SpellAbility part = activeManaPart(ma);
         final AbilityManaPart mp = part.getManaPart();
         if (mp == null) {
             return 0;
         }
         final Set<String> reflected = CardUtil.getReflectableManaColors(ma);
-        int mask = 0;
+        int mask = triggeredColors(ma, ai);
         for (final byte c : MagicColor.WUBRG) {
             if (mp.canProduce(MagicColor.toShortString(c), part) || reflected.contains(MagicColor.toLongString(c))) {
                 mask |= c;
@@ -2147,13 +2247,9 @@ public class ComputerUtilMana {
         final CardCollection painfulManaSources = new CardCollection();
         for (Card card : manaSources) {
             // exclude creature sources that will tap as a part of an attack declaration
-            if (card.isCreature()) {
-                if (card.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
-                    Combat combat = card.getGame().getCombat();
-                    if (combat.getAttackers().indexOf(card) != -1 && !card.hasKeyword(Keyword.VIGILANCE)) {
-                        continue;
-                    }
-                }
+            if (card.isCreature() && !card.hasKeyword(Keyword.VIGILANCE)
+                    && ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ai.getGame().getCombat().getAttackers().contains(card)) {
+                continue;
             }
             // exclude cards that will deal lethal damage when tapped
             if (canDieToTapDamage) {
@@ -2322,6 +2418,13 @@ public class ComputerUtilMana {
 
                 for (final String color : CardUtil.canProduce(6, m, new HashSet<>())) {
                     manaMap.put((int) ManaAtom.fromName(color), m);
+                }
+
+                final int triggered = triggeredColors(m, ai);
+                for (final byte color : MagicColor.WUBRG) {
+                    if ((triggered & color) != 0) {
+                        manaMap.put((int) color, m);
+                    }
                 }
 
                 if (m.getHostCard().isSnow()) {

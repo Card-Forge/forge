@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CountersPutAi extends CountersAi {
 
@@ -1221,8 +1219,6 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         PhaseHandler ph = source.getGame().getPhaseHandler();
 
-        Pattern pattern = Pattern.compile("counters_GE(\\d+)_CHARGE");
-
         int numCharge = source.getCounters(CounterEnumType.CHARGE);
         CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
         if (canTap.isEmpty()) {
@@ -1240,14 +1236,10 @@ public class CountersPutAi extends CountersAi {
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
                 Integer minStation = null;
                 for (StaticAbility st : source.getStaticAbilities()) {
-                    if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
+                    if (!st.isIntrinsic() || !st.hasParam("Station") || !"Creature".equals(st.getParam("AddType"))) {
                         continue;
                     }
-                    Matcher m = pattern.matcher(st.getParam("Affected"));
-                    if (!m.find()) {
-                        continue;
-                    }
-                    minStation = Integer.valueOf(m.group(1));
+                    minStation = Integer.valueOf(st.getParam("Station"));
                     break;
                 }
                 if (minStation == null) {
@@ -1264,14 +1256,10 @@ public class CountersPutAi extends CountersAi {
         if (ph.is(PhaseType.MAIN2, ai)) {
             Integer maxStation = null;
             for (StaticAbility st : source.getStaticAbilities()) {
-                if (!st.isIntrinsic() || !st.hasParam("Affected")) {
+                if (!st.isIntrinsic() || !st.hasParam("Station")) {
                     continue;
                 }
-                Matcher m = pattern.matcher(st.getParam("Affected"));
-                if (!m.find()) {
-                    continue;
-                }
-                int value = Integer.valueOf(m.group(1));
+                int value = Integer.valueOf(st.getParam("Station"));
                 maxStation = maxStation == null ? value : Math.max(maxStation, value);
             }
             if (maxStation == null) {

@@ -38,6 +38,25 @@ public class GameStateEvaluatorTest extends SimulationTest {
     }
 
     @Test
+    public void lifeBelowZeroDoesNotPenalizeAPlayerProtectedByGeorgiou() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        addCard("Georgiou, Terran Emperor", ai);
+        moveToMain2(game, ai);
+
+        AssertJUnit.assertTrue("Georgiou prevents life-total losses", ai.cantLoseForZeroOrLessLife());
+        ai.setLife(-5, null);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertTrue("the AI remains in the game below zero life", ai.isInGame());
+        final int negativeLifeScore = evaluate(game, ai);
+
+        ai.setLife(5, null);
+        final int positiveLifeScore = evaluate(game, ai);
+        AssertJUnit.assertEquals("life is not a survival resource while Georgiou is active",
+                positiveLifeScore, negativeLifeScore);
+    }
+
+    @Test
     public void testPhasingSeparatesStrategicAndAvailableValue() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);

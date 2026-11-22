@@ -1,0 +1,56 @@
+# Cards that Rogue Commander never offers.
+
+# Conspiracies
+Adriana's Valor
+Advantageous Proclamation
+Assemble the Rank and Vile
+Backup Plan
+Brago's Favor
+Double Stroke
+Echoing Boon
+Emissary's Ploy
+Hired Heist
+Hold the Perimeter
+Hymn of the Wilds
+Immediate Action
+Incendiary Dissent
+Iterative Analysis
+Muzzio's Preparations
+Natural Unity
+Power Play
+Secret Summoning
+Secrets of Paradise
+Sentinel Dispatch
+Sovereign's Realm
+Summoner's Bond
+Unexpected Potential
+Weight Advantage
+Worldknit
+
+# Ante
+Amulet of Quoz
+Bronze Tablet
+Contract from Below
+Darkpact
+Demonic Attorney
+Jeweled Bird
+Rebirth
+Tempest Efreet
+Timmerian Fiends
+
+# Community standards
+Cleanse
+Crusade
+Imprison
+Invoke Prejudice
+Jihad
+Pradesh Gypsies
+Stone-Throwing Devils
+
+# Funny cards
+Blacker Lotus
+Booster Tutor
+Mise
+Incoming!
+Discord, Lord of Disharmony
+Rainbow Dash

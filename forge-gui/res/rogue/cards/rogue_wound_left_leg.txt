@@ -1,0 +1,5 @@
+Name:Wound - Left Leg
+ManaCost:no cost
+Types:Wound
+S:Mode$ RaiseCost | ValidCard$ Card | Activator$ You | ValidSpell$ Spell | AffectedZone$ Command | Amount$ 1 | EffectZone$ Command | Description$ Spells you cast from the command zone cost {1} more to cast.
+Oracle:Spells you cast from the command zone cost {1} more to cast.

@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
+import forge.ai.ability.CountersRemoveAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.*;
 import forge.card.CardStateName;
@@ -98,6 +99,7 @@ public class AiController {
     private List<SpellAbility> skipped;
     // flat Monte Carlo bookkeeping: time spent on rollouts during one turn, to keep slow devices responsive
     private int flatMcTurn = -1;
+    private int simultaneousValakutDamageTriggers;
     private long flatMcTurnSpentNanos;
     private FlatMonteCarloPicker.Result lastFlatMcResult;
     /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
@@ -172,6 +174,14 @@ public class AiController {
 
     public int getAttackAggression() {
         return lastAttackAggression;
+    }
+
+    public int getSimultaneousValakutDamageTriggers() {
+        return simultaneousValakutDamageTriggers;
+    }
+
+    void setSimultaneousValakutDamageTriggers(final int count) {
+        simultaneousValakutDamageTriggers = Math.max(0, count);
     }
 
     public SpellAbilityPicker getSimulationPicker() {
@@ -1031,6 +1041,18 @@ public class AiController {
             return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
         }
 
+        if (PlayRelevance.pointlessPump(player, sa) != null) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "pump-outside-combat", "heuristic");
+            return AiPlayDecision.DoesntImpactCombat; // +X/+X for a creature that is tapped and not in the fight
+        }
+
+        if (ActivationGuard.badBounce(player, sa) != null) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "bounce-feeds-opponent", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Unsummon on a Vendilion Clique: they cast it again for another trigger
+        }
+
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
@@ -1106,6 +1128,14 @@ public class AiController {
         }
 
         final Card card = sa.getHostCard();
+
+        if (shouldHoldSelfSacrificeForDeclaredBlock(sa)) {
+            return AiPlayDecision.CantPlayAi;
+        }
+        // A Scapeshift is only worth spending when the Valakut lands it can fetch are lethal.
+        if ("Scapeshift".equals(card.getName()) && RampPlan.scapeshiftMustWait(player)) {
+            return AiPlayDecision.AnotherTime;
+        }
 
         if (isPunishedForFreeCast(sa)) {
             return AiPlayDecision.CantAfford;
@@ -1919,7 +1949,38 @@ public class AiController {
             }
         }
 
+        {
+            // Khalni Heart Expedition: cast first, reached by a fetch land, fed with land entries, activated at three counters
+            // (for every AI, not only Flat Monte Carlo: the classic land choice prefers a fetch land for the thinning)
+            final SpellAbility ramp = forge.ai.simulation.RampPlan.expeditionStep(player, this::loopApproved, this::landEntersTapped);
+            if (ramp != null) {
+                forge.ai.simulation.VetoLog.note(player, "ramp-plan | " + ramp.getHostCard().getName());
+                return singleSpellAbilityList(ramp);
+            }
+        }
+
+        {
+            // Malevolent Rumble and the like: the spell whose token pays for the next one goes first
+            final SpellAbility tokenMana = forge.ai.simulation.RampPlan.tokenManaStep(player, this::loopApproved);
+            if (tokenMana != null) {
+                forge.ai.simulation.VetoLog.note(player, "token-mana-first | " + tokenMana.getHostCard().getName());
+                return singleSpellAbilityList(tokenMana);
+            }
+        }
+
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && flatMonteCarloActive()) {
+            // landfall: a landfall permanent the lands in play already pay for is cast first, so the land triggers it.
+            // Only a payoff the AI wants to cast goes first: the land is never held for a spell it is needed to cast
+            final List<SpellAbility> payoffs = forge.ai.simulation.LandfallGuard.payoffsFirst(player);
+            if (!payoffs.isEmpty()) {
+                final SpellAbility first = chooseSpellAbilityToPlayFromList(payoffs, false);
+                if (first != null) {
+                    forge.ai.simulation.VetoLog.note(player, "landfall-payoff-before-land | " + first.getHostCard().getName());
+                    return singleSpellAbilityList(first);
+                }
+            }
+        }
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             if (landsWannaPlay != null && landsWannaPlay.size() > 1) {
@@ -2115,6 +2176,104 @@ public class AiController {
         return true;
     }
 
+    /**
+     * Hexmage's impending line is a narrow, deliberate response, not an ordinary value trade.
+     * Once the normal AI rules approve the activation and choose the impending permanent, do not
+     * let candidate pruning or FlatMC choose to pass instead.
+     */
+    private SpellAbility sureHexmageImpending(final List<SpellAbility> candidates) {
+        for (final SpellAbility sa : candidates) {
+            final Card source = sa.getHostCard();
+            if (source == null || !"Vampire Hexmage".equals(source.getName())
+                    || !source.isInZone(ZoneType.Battlefield) || sa.isSkip()
+                    || sa.getApi() != ApiType.RemoveCounter || !"All".equals(sa.getParam("CounterType"))
+                    || !sa.usesTargeting() || !ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                continue;
+            }
+
+            sa.setActivatingPlayer(player);
+            sa.resetTargets();
+            final Card impending = CountersRemoveAi.worthwhileOwnTarget(player, sa);
+            if (!CountersRemoveAi.isImpendingPermanent(impending)) {
+                continue;
+            }
+
+            // Reuse the complete AI approval path: timing, target selection, costs and card-specific restrictions.
+            final AiPlayDecision decision = canPlaySa(sa);
+            if (decision == AiPlayDecision.WillPlay && sa.getTargets().getFirstTargetedCard() == impending) {
+                return sa;
+            }
+            sa.resetTargets();
+        }
+        return null;
+    }
+
+    /**
+     * Do not let the ordinary ability picker undo the post-block decision: sacrificing a blocker is harmful when
+     * its block also kills the attacker, or when it would let a trampler deal damage to the defending player.
+     * A full Fog is the exception because it prevents all combat damage, not merely a fixed amount.
+     */
+    private boolean shouldHoldSelfSacrificeForDeclaredBlock(final SpellAbility sa) {
+        if (sa == null || !ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())
+                || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            return false;
+        }
+        final Card blocker = sa.getHostCard();
+        final Combat combat = game.getCombat();
+        if (blocker == null || combat == null) {
+            return false;
+        }
+        final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
+        if (attackers.isEmpty() || ComputerUtilCost.preventsCombatDamage(sa)) {
+            return false;
+        }
+        for (final Card attacker : attackers) {
+            if (ComputerUtilCombat.attackerWouldBeDestroyed(player, attacker, combat)
+                    || attacker.hasKeyword(Keyword.TRAMPLE)) {
+                return true;
+            }
+        }
+        return blocker.hasKeyword(Keyword.BANDING);
+    }
+
+    /**
+     * Give a blocker that is going to die an early chance to use a worthwhile activated ability.
+     * The normal ability AI remains the authority on whether the effect is useful and payable;
+     * self-sacrifice still preserves profitable trades and avoids giving attackers trample damage.
+     */
+    private SpellAbility choosePostBlockValueAbility(final List<SpellAbility> candidates) {
+        final Combat combat = game.getCombat();
+        if (combat == null || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                || !game.getStack().isEmpty() || candidates == null || candidates.isEmpty()) {
+            return null;
+        }
+
+        for (final Card blocker : combat.getAllBlockers()) {
+            if (!player.equals(blocker.getController()) || !blocker.isCreature()
+                    || !ComputerUtil.predictCreatureWillDieThisTurn(player, blocker, null, false)) {
+                continue;
+            }
+            for (final SpellAbility sa : candidates) {
+                if (sa.getHostCard() != blocker || !sa.isActivatedAbility() || sa.isManaAbility() || sa.isSkip()) {
+                    continue;
+                }
+                // A self-sacrifice must not throw away a profitable block or let trample through.
+                // A real Fog is the exception; a small damage shield is not enough against trample.
+                if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())
+                        && (ComputerUtilCombat.willOpposingCreatureDieInCombat(player, blocker, combat)
+                        || (ComputerUtilCombat.isDangerousToSacInCombat(player, blocker, combat)
+                        && !ComputerUtilCost.preventsCombatDamage(sa)))) {
+                    continue;
+                }
+                sa.setActivatingPlayer(player);
+                if (canPlaySa(sa) == AiPlayDecision.WillPlay) {
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
     private SpellAbility getSpellAbilityToPlay() {
         if (skipped != null) {
             //FIXME: this is for failed SA to skip temporarily, don't know why AI computation for mana fails, maybe due to auto mana compute?
@@ -2195,6 +2354,31 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
+        final SpellAbility hexmage = sureHexmageImpending(saList);
+        if (hexmage != null) {
+            return hexmage;
+        }
+
+        // Let a dying blocker cash in a useful ability before candidate pruning or FlatMC can pass priority.
+        final SpellAbility postBlockValue = choosePostBlockValueAbility(saList);
+        if (postBlockValue != null) {
+            return postBlockValue;
+        }
+        // A lethal Valakut line is a deterministic win; do not let deck-removal heuristics hide Scapeshift.
+        for (final SpellAbility candidate : saList) {
+            final Card host = candidate.getHostCard();
+            if (host != null && "Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(player)
+                    && RampPlan.scapeshiftLethal(player)) {
+                candidate.setActivatingPlayer(player);
+                // the lethal line is not a reason to try a cast the mana cannot pay: {2}{G}{G} with the Forests tapped, or no
+                // untapped land at all, failed 60 times in one sweep ("Didn't find what to pay for {G}")
+                if (!hasFailedToCast(candidate) && ComputerUtilMana.canPayManaCost(candidate, player, 0, false)
+                        && canPlaySa(candidate) == AiPlayDecision.WillPlay) {
+                    return candidate;
+                }
+            }
+        }
+
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
         // Flat MC compares them with rollouts, the heuristics still decide for every other card
         // Every other card marked AI:RemoveDeck:All stays in the list too, for Flat MC alone: see isFlatMcOnlyPlay
@@ -2204,7 +2388,10 @@ public class AiController {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc) || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
+            return h != null && ((ComputerUtilCard.isCardRemAIDeck(h) && !flatMc
+                    && !("Scapeshift".equals(h.getName()) && RampPlan.valakutAccessible(player) && RampPlan.scapeshiftLethal(player)))
+                    || ("Scapeshift".equals(h.getName()) && RampPlan.scapeshiftMustWait(player))
+                    || (ComboAssembly.deadOnArrival(player, spellAbility) && vetoed(spellAbility, "dead-on-arrival"))
                     || (flatMc && LoopRunner.held(player, spellAbility) && vetoed(spellAbility, "held-for-loop"))
                     || (flatMc && SurpriseEntry.isEntryAbility(spellAbility) && !SurpriseEntry.offered(player, spellAbility))
                     || (flatMc && FlatMonteCarloPicker.needlessTrick(player, spellAbility))
@@ -2663,14 +2850,13 @@ public class AiController {
         }
         if (extras.contains(result.choice)) {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
-            // it is still aimed where the rollouts liked it, and that it can still be paid for.
+            // it is still aimed where the rollouts liked it, and that it is still legal and payable in the real game.
             if (result.target != null && !FlatMonteCarloPicker.applyTarget(result.choice, result.target)) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
-            if (guardProblem(result.choice, null, saveCantrips) != null) {
+            if (guardProblem(result.choice, null, saveCantrips) != null || !isStillCastable(result.choice)) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
-            result.choice.setActivatingPlayer(player);
             return result.choice;
         }
         // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
@@ -2921,7 +3107,7 @@ public class AiController {
         return false;
     }
 
-    private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+    boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (sa == null) {
             return false;
         }
@@ -2959,7 +3145,8 @@ public class AiController {
             return false;
         }
         switch (opinion) {
-            case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
+            case CantPlaySa, CantAfford, CantAffordX, StopRunawayActivations, TimingRestrictions,
+                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
                 return false;
             default:
                 break;
@@ -3000,7 +3187,7 @@ public class AiController {
         }
     }
 
-    private boolean isStillCastable(final SpellAbility sa) {
+    boolean isStillCastable(final SpellAbility sa) {
         sa.setActivatingPlayer(player);
         try {
             return sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
@@ -3735,6 +3922,12 @@ public class AiController {
                     ? VaultLoop.tinkerPick(player, fetchList) : null; // Tinker: the vault or its key, whatever the deck's plan
             if (tinkered != null) {
                 return tinkered;
+            }
+            final Card rampPick = destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
+                    ? RampPlan.nextPick(player, fetchList, Math.max(1, AbilityUtils.calculateAmount(sa.getHostCard(),
+                    sa.getParamOrDefault("ChangeNum", "1"), sa))) : null;
+            if (rampPick != null) {
+                return rampPick;
             }
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {

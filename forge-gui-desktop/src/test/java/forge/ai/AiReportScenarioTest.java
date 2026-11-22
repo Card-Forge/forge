@@ -1,5 +1,6 @@
 package forge.ai;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.CardLists;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
@@ -52,6 +55,16 @@ public class AiReportScenarioTest extends AITest {
     private static final boolean FLAT_MC = !"false".equals(System.getProperty("forge.test.flatmc", "true"));
     private static final String ONLY = System.getProperty("forge.test.issue", "");
     private static final List<String> SUMMARY = new ArrayList<>();
+
+    private static void forceAttackAggression(final AiAttackController controller, final int aggression) {
+        try {
+            final Field field = AiAttackController.class.getDeclaredField("aiAggression");
+            field.setAccessible(true);
+            field.setInt(controller, aggression);
+        } catch (final ReflectiveOperationException e) {
+            throw new AssertionError("Could not set the attack aggression for the regression scenario", e);
+        }
+    }
 
     private enum Fid { EXACT, APPROX, SMOKE }
 
@@ -100,6 +113,17 @@ public class AiReportScenarioTest extends AITest {
         void richMana() { for (final String l : new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" }) { bf(l, 3, ai); } }
         void counters(final Card c, final CounterEnumType t, final int n) { c.setCounters(t, n); }
 
+        /** Evaluate a trigger without depending on AiController's convenience wrapper. */
+        boolean shouldRunAiTrigger(final SpellAbility sa, final boolean mandatory) {
+            if (sa instanceof forge.game.trigger.WrappedAbility) {
+                return shouldRunAiTrigger(((forge.game.trigger.WrappedAbility) sa).getWrappedAbility(), mandatory);
+            }
+            if (sa.getApi() != null) {
+                return SpellApiToAi.Converter.get(sa).doTrigger(ai, sa, mandatory);
+            }
+            return sa.getPayCosts().isFree() && !sa.usesTargeting();
+        }
+
         AiController controller() { return ((PlayerControllerAi) ai.getController()).getAi(); }
 
         List<SpellAbility> plays() {
@@ -116,6 +140,14 @@ public class AiReportScenarioTest extends AITest {
         SpellAbility first() { final List<SpellAbility> l = plays(); return l.isEmpty() ? null : l.get(0); }
         Card target(final SpellAbility sa) {
             return sa != null && sa.usesTargeting() ? sa.getTargets().getFirstTargetedCard() : null;
+        }
+        SpellAbility tokenAbility(final String card) {
+            for (final SpellAbility sa : plays()) {
+                if (sa.getHostCard() != null && card.equals(sa.getHostCard().getName()) && sa.getApi() == ApiType.Token) {
+                    return sa;
+                }
+            }
+            return null;
         }
         /** The land drops the AI would make, best first. */
         List<Card> landPlays() {
@@ -140,7 +172,7 @@ public class AiReportScenarioTest extends AITest {
                             sb.append(" [etbCheck=").append(controller().checkETBEffects(k, main, null));
                             for (final forge.game.replacement.ReplacementEffect re : k.getReplacementEffects()) {
                                 final SpellAbility ex = re.getOverridingAbility();
-                                if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(controller().doTrigger(ex.copy(ai), false))
+                                if (ex != null) { sb.append(" replacement:").append(ex.getApi()).append("=").append(shouldRunAiTrigger(ex.copy(ai), false))
                                         .append(" decision=").append(SpellApiToAi.Converter.get(ex).doTriggerNoCostWithSubs(ai, ex.copy(ai), false))
                                         .append(" opposing permanents with an activated ability=").append(CardLists.getValidCards(
                                                 ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, k, ex)); }
@@ -149,7 +181,7 @@ public class AiReportScenarioTest extends AITest {
                                 if (tr.getMode() != forge.game.trigger.TriggerType.ChangesZone || !"Battlefield".equals(tr.getParam("Destination"))) { continue; }
                                 sb.append(" trigger(stack=").append(game.getStack().size()).append("):");
                                 for (SpellAbility ex = tr.ensureAbility().copy(ai); ex != null; ex = ex.getSubAbility()) {
-                                    sb.append(' ').append(ex.getApi()).append('=').append(controller().doTrigger(ex, false));
+                                    sb.append(' ').append(ex.getApi()).append('=').append(shouldRunAiTrigger(ex, false));
                                 }
                             }
                             sb.append(']');
@@ -192,6 +224,47 @@ public class AiReportScenarioTest extends AITest {
             ComputerUtil.playStack(sa, ai, game);
             resolveAll();
         }
+
+        /** Cast Overlord using its real Impending alternative cost, then restore the scenario's phase/turn. */
+        Card impendingOverlord() {
+            final PhaseType previousPhase = game.getPhaseHandler().getPhase();
+            final Player previousTurn = game.getPhaseHandler().getPlayerTurn();
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+            final Card spell = hand("Overlord of the Balemurk", ai);
+            SpellAbility impending = null;
+            for (final SpellAbility sa : spell.getSpellAbilities()) {
+                if (sa.isSpell() && sa.isImpending()) {
+                    impending = sa;
+                    break;
+                }
+            }
+            if (impending == null) {
+                throw new AssertionError("Overlord has no Impending spell ability");
+            }
+
+            impending.setActivatingPlayer(ai);
+            try {
+                if (!ComputerUtil.playStack(impending, ai, game)) {
+                    throw new AssertionError("Could not cast Overlord using its Impending cost");
+                }
+                resolveAll();
+            } finally {
+                game.getPhaseHandler().devModeSet(previousPhase, previousTurn);
+            }
+
+            for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                if ("Overlord of the Balemurk".equals(c.getName())) {
+                    if (c.getCastSA() == null || !c.getCastSA().isImpending() || c.isCreature()
+                            || c.getCounters(CounterEnumType.TIME) != 5) {
+                        throw new AssertionError("Overlord did not enter as an impending noncreature: " + c);
+                    }
+                    return c;
+                }
+            }
+            throw new AssertionError("Impending Overlord did not enter the battlefield");
+        }
+
         /** Resolves the stack until nothing is left, putting triggered abilities (enter-the-battlefield ...) on it as the real game does. */
         final StringBuilder trace = new StringBuilder();
         void resolveAll() {
@@ -392,16 +465,43 @@ public class AiReportScenarioTest extends AITest {
                     }));
         }
         // Vampire Hexmage: "remove all counters" frees an impending permanent (Overlord of the Balemurk is no creature until the last time counter is gone)
-        l.add(play("hexmage-impending-end-step", "Vampire Hexmage frees the impending Overlord of the Balemurk at the end of the opponent's turn", Fid.EXACT, "END_OF_TURN", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
-        l.add(play("hexmage-impending-removal", "Vampire Hexmage frees the impending Overlord of the Balemurk in response to removal aimed at it", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); final Card overlord = c.bf("Overlord of the Balemurk", c.ai); c.counters(overlord, CounterEnumType.TIME, 5);
+        l.add(aimed("hexmage-impending-end-step", "Vampire Hexmage frees the impending Overlord at the opponent's end step", Fid.EXACT, "END_OF_TURN", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord(); c.bf("Vampire Hexmage", c.ai); }));
+        l.add(aimed("hexmage-impending-removal", "Vampire Hexmage frees Overlord in response to Disenchant", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); final Card overlord = c.impendingOverlord();
                     c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Disenchant", overlord); }));
-        l.add(play("hexmage-in-danger", "Vampire Hexmage frees the impending Overlord of the Balemurk when Hexmage itself is about to be destroyed", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5);
+        l.add(aimed("hexmage-in-danger", "Vampire Hexmage frees Overlord before Hexmage is destroyed", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord();
                     final Card hexmage = c.bf("Vampire Hexmage", c.ai); c.stack(c.opp, "Terror", hexmage); }));
+        l.add(aimed("hexmage-haywire-mite", "Vampire Hexmage frees Overlord in response to Haywire Mite", Fid.EXACT, "MAIN1", false,
+                "Vampire Hexmage", "Overlord of the Balemurk",
+                c -> {
+                    c.bf("Swamp", 2, c.ai);
+                    final Card overlord = c.impendingOverlord();
+                    c.bf("Vampire Hexmage", c.ai);
+                    final Card mite = c.bf("Haywire Mite", c.opp);
+                    SpellAbility exile = null;
+                    for (final SpellAbility sa : mite.getSpellAbilities()) {
+                        if (sa.getApi() == ApiType.ChangeZone && "Exile".equals(sa.getParam("Destination"))) {
+                            exile = sa;
+                            break;
+                        }
+                    }
+                    if (exile == null) {
+                        throw new AssertionError("Haywire Mite has no exile ability");
+                    }
+                    exile.setActivatingPlayer(c.opp);
+                    if (!exile.canTarget(overlord)) {
+                        throw new AssertionError("Haywire Mite cannot target impending Overlord");
+                    }
+                    exile.getTargets().add(overlord);
+                    c.game.getStack().add(exile);
+                }));
         l.add(noPlay("hexmage-idle", "Vampire Hexmage keeps itself while nothing threatens it and it is not the end of the opponent's turn", Fid.EXACT, "MAIN1", false, "Vampire Hexmage",
-                c -> { c.bf("Swamp", 2, c.ai); c.counters(c.bf("Overlord of the Balemurk", c.ai), CounterEnumType.TIME, 5); c.bf("Vampire Hexmage", c.ai); }));
+                c -> { c.bf("Swamp", 2, c.ai); c.impendingOverlord(); c.bf("Vampire Hexmage", c.ai); }));
         // Tavern Scoundrel + Krark, the Thumbless: winning the coin flip of Krark's trigger is winning a coin flip
         l.add(new Scenario("krark-tavern-scoundrel", "Krark's coin flip won: Tavern Scoundrel creates two Treasure tokens", Fid.EXACT, M1, true,
                 c -> {
@@ -645,6 +745,598 @@ public class AiReportScenarioTest extends AITest {
                     final boolean bears = c.attackers().stream().anyMatch(a -> a.getName().equals("Grizzly Bears"));
                     final boolean wurm = c.attackers().stream().anyMatch(a -> a.getName().equals("Craw Wurm"));
                     return bears && !wurm ? "the Bears went in alone against the blocker that was counted as busy with the Wurm" : null;
+                }));
+        // ---- pumps that cannot matter: Chameleon Colossus pumped while it was tapped when the opponent attacked
+        final Setup tappedColossus = c -> {
+            c.bf("Forest", 4, c.ai); c.bf("Chameleon Colossus", c.ai).setTapped(true);
+            final Card att = c.bf("Hill Giant", c.opp);
+            final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai);
+            c.game.getPhaseHandler().setCombat(combat);
+        };
+        l.add(noPlay("pump-tapped-after-blocks", "A tapped Colossus is no blocker: no +4/+4 once the blockers are declared", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                "Chameleon Colossus", tappedColossus));
+        l.add(noPlay("pump-tapped-before-blocks", "A tapped Colossus cannot block: no +4/+4 when the attackers are declared", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                "Chameleon Colossus", tappedColossus));
+        l.add(noPlay("pump-after-combat", "No +4/+4 in the second main phase: nothing is left to fight", Fid.APPROX, "MAIN2", true, "Chameleon Colossus",
+                c -> { c.bf("Forest", 4, c.ai); c.bf("Chameleon Colossus", c.ai); c.bf("Hill Giant", c.opp); }));
+        l.add(noPlay("pump-spell-tapped", "Giant Growth on a tapped creature of the AI's, with a Hill Giant attacking", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false, "Giant Growth",
+                c -> { tappedColossus.run(c); c.hand("Giant Growth", c.ai); }));
+        l.add(play("pump-blocker-in-combat", "The Colossus that blocks a Craw Wurm is pumped: that is the fight", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false, "Chameleon Colossus",
+                c -> {
+                    c.bf("Forest", 4, c.ai);
+                    final Card blocker = c.bf("Chameleon Colossus", c.ai);
+                    final Card att = c.bf("Craw Wurm", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("sakura-tribe-elder-after-block", "Sakura-Tribe Elder cashes in after blocking a creature that would kill it", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.bf("Forest", c.ai); c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Hill Giant", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("sakura-tribe-elder-keeps-profitable-trade", "Sakura-Tribe Elder does not sacrifice itself when its block also kills the attacker", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Sakura-Tribe Elder", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("sakura-tribe-elder-stays-to-stop-trample", "Sakura-Tribe Elder blocks a trampler instead of sacrificing itself and letting all damage through", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Sakura-Tribe Elder", c -> {
+                    c.lib("Forest", c.ai);
+                    final Card blocker = c.bf("Sakura-Tribe Elder", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(play("spore-frog-after-block-trample", "Spore Frog uses its combat-damage prevention after blocking a trampler", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Spore Frog", c -> {
+                    c.ai.setLife(4, null);
+                    final Card blocker = c.bf("Spore Frog", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(noPlay("goblin-legionnaire-insufficient-trample-prevention", "Goblin Legionnaire does not sacrifice itself for a two-damage shield that still leaves lethal trample damage", Fid.APPROX,
+                "COMBAT_DECLARE_BLOCKERS", false, "Goblin Legionnaire", c -> {
+                    c.ai.setLife(2, null);
+                    c.bf("Plains", c.ai); // can pay the white activation cost
+                    final Card blocker = c.bf("Goblin Legionnaire", c.ai);
+                    final Card attacker = c.bf("Colossal Dreadmaw", c.opp);
+                    final Combat combat = new Combat(c.opp);
+                    combat.addAttacker(attacker, c.ai);
+                    combat.addBlocker(attacker, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        // ---- bounce: a tempo play, not for the creature that gives them another trigger
+        l.add(noPlay("bounce-vendilion-clique", "Unsummon on a Vendilion Clique: they cast it again and look at another hand", Fid.APPROX, M1, true, "Unsummon",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Unsummon", c.ai); c.bf("Vendilion Clique", c.opp); }));
+        l.add(noPlay("bounce-mulldrifter", "Unsummon on a Mulldrifter: they draw two cards again", Fid.APPROX, M1, true, "Unsummon",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Unsummon", c.ai); c.bf("Mulldrifter", c.opp); }));
+        l.add(noPlay("bounce-snapcaster", "Unsummon on a Snapcaster Mage: flash and a trigger", Fid.APPROX, M1, true, "Unsummon",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Unsummon", c.ai); c.bf("Snapcaster Mage", c.opp); }));
+        l.add(play("bounce-saves-blocker", "Unsummon on the Craw Wurm that would kill the blocker", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false, "Unsummon",
+                c -> {
+                    c.bf("Island", c.ai); c.hand("Unsummon", c.ai);
+                    final Card blocker = c.bf("Grizzly Bears", c.ai);
+                    final Card att = c.bf("Craw Wurm", c.opp);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                }));
+        l.add(new Scenario("bounce-value", "Which permanents of the opponent a bounce is worth a card for", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Vendilion Clique", c.opp); c.bf("Mulldrifter", c.opp); c.bf("Snapcaster Mage", c.opp);
+                    c.bf("Llanowar Elves", c.opp); c.bf("Craw Wurm", c.opp); c.bf("Forest", c.opp); c.bf("Gaea's Revenge", c.opp);
+                    c.counters(c.bf("Grizzly Bears", c.opp), CounterEnumType.P1P1, 2);
+                },
+                c -> {
+                    final StringBuilder bad = new StringBuilder();
+                    final java.util.Map<String, Boolean> expected = new java.util.HashMap<>();
+                    expected.put("Vendilion Clique", false);   // flash and a trigger
+                    expected.put("Mulldrifter", false);        // draws two again
+                    expected.put("Snapcaster Mage", false);    // flash and a trigger
+                    expected.put("Llanowar Elves", false);     // costs one mana to cast again
+                    expected.put("Craw Wurm", true);           // six mana for a vanilla body
+                    expected.put("Gaea's Revenge", true);      // flash alone is no reason: five mana to cast again, no trigger
+                    expected.put("Forest", true);              // a land drop
+                    expected.put("Grizzly Bears", true);       // loses its counters
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        final Boolean want = expected.get(k.getName());
+                        if (want != null && BounceValue.worthBouncing(c.ai, k) != want) { bad.append(k.getName()).append(" expected ").append(want).append("; "); }
+                    }
+                    return bad.length() == 0 ? null : bad.toString();
+                }));
+        // ---- counterspells: not for a bluff, for what matters
+        final Setup baitOnStack = c -> {
+            c.bf("Island", 2, c.ai); c.hand("Counterspell", c.ai);
+            final Card tapped = c.bf("Hill Giant", c.opp); tapped.setTapped(true);
+            c.bf("Mountain", c.opp);
+            c.stack(c.opp, "Giant Growth", tapped);
+        };
+        l.add(noPlay("counter-bait-pump", "Giant Growth on a tapped creature outside combat is a bluff: no Counterspell", Fid.APPROX, M1, false, "Counterspell", baitOnStack));
+        l.add(play("counter-creature", "A Craw Wurm on the stack is worth the Counterspell", Fid.APPROX, M1, false, "Counterspell",
+                c -> { c.bf("Island", 2, c.ai); c.hand("Counterspell", c.ai); c.stack(c.opp, "Craw Wurm"); }));
+        l.add(new Scenario("counter-pump-in-combat", "A Giant Growth on the creature that is blocked is no bluff, on the tapped one it is", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> {
+                    c.bf("Island", 2, c.ai); c.hand("Counterspell", c.ai);
+                    final Card att = c.bf("Hill Giant", c.opp);
+                    final Card idle = c.bf("Grizzly Bears", c.opp); idle.setTapped(true);
+                    final Card blocker = c.bf("Craw Wurm", c.ai);
+                    final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker);
+                    c.game.getPhaseHandler().setCombat(combat);
+                    c.stack(c.opp, "Giant Growth", att);
+                },
+                c -> {
+                    final SpellAbility pump = c.game.getStack().peekAbility();
+                    if (PlayRelevance.isBait(c.ai, pump)) { return "the pump on the attacker in combat was taken for a bluff"; }
+                    final Card idle = c.opp.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Grizzly Bears")).findFirst().get();
+                    return PlayRelevance.combatRelevant(idle) ? "a tapped creature that is not in the fight counted as part of it" : null;
+                }));
+        l.add(new Scenario("shock-pays-for-curve", "Plenty of life and a four-drop that needs the untapped land: pay", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == true ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-dual-source", "A dual land only pays for one coloured shard", Fid.EXACT, M1, true,
+                c -> { c.bf("Underground Sea", c.ai); c.hand("Baleful Strix", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI counted Underground Sea as both a blue and a black mana source" : null;
+                }));
+        l.add(new Scenario("shock-phyrexian-life-budget", "Do not spend life on a shockland if it is needed for a Phyrexian cost", Fid.EXACT, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Phyrexian Metamorph", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI paid 2 life for the Foundry and left no life to pay Phyrexian Metamorph's blue symbol" : null;
+                }));
+        l.add(new Scenario("shock-karns-sylex-phyrexian", "Do not use the life alternative for Phyrexian Metamorph under Karn's Sylex", Fid.EXACT, M1, true,
+                c -> { c.ai.setLife(14, null); c.bf("Mountain", 2, c.ai); c.bf("Karn's Sylex", c.ai); c.bf("Grizzly Bears", c.opp);
+                       c.hand("Phyrexian Metamorph", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI treated Metamorph's Phyrexian blue symbol as payable with life despite Karn's Sylex" : null;
+                }));
+        l.add(new Scenario("shock-low-life", "At 11 life the Foundry enters tapped, whatever is in hand", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(11, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-just-enough-life", "At 12 life the four-drop is worth it (10 is the floor)", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == true ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-burn-in-hand", "Lightning Helix is held for their turn: no life for an untapped land", Fid.APPROX, M1, true,
+                c -> { c.bf("Plains", c.ai); c.hand("Lightning Helix", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-flash-creature", "A flash creature is held too: Vendilion Clique does not make it worth the life", Fid.APPROX, M1, true,
+                c -> { c.bf("Island", 2, c.ai); c.hand("Vendilion Clique", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-threatened", "Their Craw Wurm and Hill Giant hit for nine: stay above 14, so 15 life does not pay", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(15, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); c.bf("Craw Wurm", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-threat-handled", "The same board at 20 life pays", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(20, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); c.bf("Craw Wurm", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == true ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-one-drop-healthy", "With 20 life even a one-drop on curve is worth it", Fid.APPROX, M1, true,
+                c -> { c.hand("Grim Lavamancer", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == true ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-one-drop-low", "With 13 life a one-drop is not worth 2 life", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(13, null); c.hand("Grim Lavamancer", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-nothing-to-cast", "No card that needs the land this turn: tapped", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("shock-aura-no-creature", "An Aura with nothing to enchant is no reason to pay", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", 2, c.ai); c.hand("Rancor", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays == false ? null : "the AI " + (pays ? "paid" : "did not pay") + " 2 life for the Sacred Foundry (life " + c.ai.getLife() + ")";
+                }));
+        // 12986: Malevolent Rumble's Spawn pays for a second spell, so the third Overgrown Tomb is worth the two life
+        l.add(new Scenario("12986-rumble-shockland", "Two Tombs and Malevolent Rumble with Emperor of Bones in hand: the third Tomb is worth two life", Fid.APPROX, M1, true,
+                c -> { c.bf("Overgrown Tomb", 2, c.ai); c.hand("Malevolent Rumble", c.ai); c.hand("Emperor of Bones", c.ai); c.hand("Overgrown Tomb", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Overgrown Tomb")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? null : "the AI let the third Overgrown Tomb enter tapped (life " + c.ai.getLife() + ")";
+                }));
+        l.add(play("12986-rumble-first", "With three untapped lands, Malevolent Rumble is cast before Emperor of Bones: the Spawn pays for it", Fid.APPROX,
+                M1, true, "Malevolent Rumble", c -> {
+                    c.bf("Overgrown Tomb", 3, c.ai); c.hand("Malevolent Rumble", c.ai); c.hand("Emperor of Bones", c.ai);
+                    c.lib("Forest", 4, c.ai);
+                }));
+        // 12982: a spell that only aims at the AI's own permanents is no reason to pay for the land
+        l.add(new Scenario("12982-ephemerate-fountain", "Hallowed Fountain and Ephemerate on turn one with no creature: the Fountain enters tapped", Fid.APPROX, M1, true,
+                c -> { c.hand("Ephemerate", c.ai); c.hand("Hallowed Fountain", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Hallowed Fountain")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "the AI paid 2 life for a Hallowed Fountain with only Ephemerate and no creature" : null;
+                }));
+        // 12984: a Plains and green one-drops
+        l.add(new Scenario("12984-wrong-colour-land", "A Plains and green one-drops is no keep", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Forest", c.ai); c.lib("Llanowar Elves", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Llanowar Elves", "Llanowar Elves", "Elvish Mystic", "Elvish Mystic", "Fyndhorn Elves" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept a Plains with green one-drops" : null;
+                }));
+        l.add(new Scenario("shock-colour-sources", "Swamp, Forest and a Sacred Foundry for Geralf's Messenger: one black source is not BBB", Fid.APPROX, M1, true,
+                c -> { c.bf("Swamp", c.ai); c.bf("Forest", c.ai); c.hand("Geralf's Messenger", c.ai); c.hand("Sacred Foundry", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? "paid 2 life for a Sacred Foundry that cannot make black for Geralf's Messenger" : null;
+                }));
+        l.add(new Scenario("shock-colour-sources-enough", "Two Swamps and an Overgrown Tomb for Geralf's Messenger: the third black source is worth the life", Fid.APPROX, M1, true,
+                c -> { c.bf("Swamp", 2, c.ai); c.hand("Geralf's Messenger", c.ai); c.hand("Overgrown Tomb", c.ai); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Overgrown Tomb")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    final boolean pays = new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null);
+                    return pays ? null : "did not pay 2 life for the third black source (life " + c.ai.getLife() + ")";
+                }));
+        l.add(new Scenario("12984-hybrid-keep", "Three Plains and Kitchen Finks: the hybrid cost is white, a keep", Fid.APPROX, M1, true,
+                c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Kitchen Finks", c.ai); } },
+                c -> {
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Kitchen Finks", "Kitchen Finks", "Plains", "Kitchen Finks" }) { c.hand(n, c.ai); }
+                    final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
+                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? null : "sent back Plains and Kitchen Finks, a hybrid cost that white pays";
+                }));
+        // ---- which creatures a pump can still matter to (before / after the attackers and the blockers are declared)
+        l.add(new Scenario("relevance-attacker-before-declaring", "Own turn, declare attackers, none declared yet: the untapped Colossus can still attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Chameleon Colossus", c.ai); c.game.getPhaseHandler().setCombat(new Combat(c.ai)); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "an untapped creature that can attack was ruled out"));
+        l.add(new Scenario("relevance-blocker-before-blocks", "Their declare attackers: the untapped Colossus can still block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                c -> { c.bf("Chameleon Colossus", c.ai); final Card att = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "an untapped creature that can block was ruled out"));
+        l.add(new Scenario("relevance-tapped-before-blocks", "Their declare attackers: the tapped Colossus cannot block", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
+                c -> { c.bf("Chameleon Colossus", c.ai).setTapped(true); final Card att = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> PlayRelevance.combatRelevant(c.ai.getCardsIn(ZoneType.Battlefield).get(0)) ? "a tapped creature counted as a blocker" : null));
+        l.add(new Scenario("relevance-blockers-declared", "After the blocks the one that blocks is in the fight, the one that stays out is not", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { final Card blocker = c.bf("Craw Wurm", c.ai); c.bf("Grizzly Bears", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.addBlocker(att, blocker); c.game.getPhaseHandler().setCombat(combat); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        final boolean want = k.getName().equals("Craw Wurm");
+                        if (PlayRelevance.combatRelevant(k) != want) { return k.getName() + (want ? " blocks and was ruled out" : " does not block and was counted"); }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("relevance-main-phase", "Before combat an untapped creature can matter, a tapped one cannot", Fid.APPROX, M1, true,
+                c -> { c.bf("Chameleon Colossus", c.ai); c.bf("Grizzly Bears", c.ai).setTapped(true); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        final boolean want = k.getName().equals("Chameleon Colossus");
+                        if (PlayRelevance.combatRelevant(k) != want) { return k.getName() + " was judged " + !want; }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("pump-in-response-to-burn", "A pump in response to burn is not outside combat: the toughness can save the creature", Fid.APPROX, M1, true,
+                c -> { c.bf("Forest", c.ai); final Card giant = c.bf("Hill Giant", c.ai); giant.setTapped(true); c.hand("Giant Growth", c.ai); c.stack(c.opp, "Lightning Bolt", giant); },
+                c -> {
+                    final SpellAbility sa = c.hand("Giant Growth", c.ai).getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    return PlayRelevance.pointlessPump(c.ai, sa) == null ? null : "a pump with burn on the stack was thrown out";
+                }));
+        l.add(new Scenario("counter-pump-in-response", "The opponent's pump in response to burn is not a bluff", Fid.APPROX, M1, false,
+                c -> { c.bf("Island", 2, c.ai); c.hand("Counterspell", c.ai); final Card g = c.bf("Hill Giant", c.opp); g.setTapped(true);
+                       c.stack(c.opp, "Lightning Bolt", c.ai); c.stack(c.opp, "Giant Growth", g); },
+                c -> PlayRelevance.isBait(c.ai, c.game.getStack().peekAbility()) ? "a pump on top of a spell was taken for a bluff" : null));
+        // ---- bounce: the attacker that is lethal, and the one that is not
+        l.add(new Scenario("bounce-lethal-attacker", "A Vendilion Clique that is lethal is worth bouncing: without it the AI lives", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(3, null); final Card clique = c.bf("Vendilion Clique", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(clique, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal Clique was refused"));
+        l.add(new Scenario("bounce-irrelevant-attacker", "A Vendilion Clique beside a Craw Wurm that is lethal anyway: bouncing it saves nothing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card clique = c.bf("Vendilion Clique", c.opp); final Card wurm = c.bf("Craw Wurm", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(clique, c.ai); combat.addAttacker(wurm, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> {
+                    for (final Card k : c.opp.getCardsIn(ZoneType.Battlefield)) {
+                        if (k.getName().equals("Vendilion Clique") && BounceValue.worthBouncing(c.ai, k)) { return "bounced the Clique although the Wurm kills anyway"; }
+                    }
+                    return null;
+                }));
+        l.add(aimed("bounce-prefers-craw-wurm", "Mulldrifter and Craw Wurm: the Wurm is the one to send back", Fid.APPROX, M1, true, "Unsummon", "Craw Wurm",
+                c -> { c.bf("Island", 2, c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Unsummon", c.ai); c.bf("Mulldrifter", c.opp); c.bf("Craw Wurm", c.opp); }));
+        // ---- which spell on the stack is worth the counterspell
+        l.add(new Scenario("counter-value-removal-aim", "A Terminate on the AI's creature outranks a Terminate on their own", Fid.APPROX, M1, false,
+                c -> { c.bf("Grizzly Bears", c.ai); c.bf("Hill Giant", c.opp); c.hand("Terminate", c.opp); c.hand("Terminate", c.opp); },
+                c -> {
+                    final Card mine = c.ai.getCardsIn(ZoneType.Battlefield).get(0), theirs = c.opp.getCardsIn(ZoneType.Battlefield).get(0);
+                    final java.util.List<Card> terminates = new java.util.ArrayList<>(c.opp.getCardsIn(ZoneType.Hand));
+                    final SpellAbility onMine = terminates.get(0).getFirstSpellAbility(), onTheirs = terminates.get(1).getFirstSpellAbility();
+                    onMine.setActivatingPlayer(c.opp); onMine.getTargets().add(mine);
+                    onTheirs.setActivatingPlayer(c.opp); onTheirs.getTargets().add(theirs);
+                    return PlayRelevance.stackValue(c.ai, onMine) > PlayRelevance.stackValue(c.ai, onTheirs) ? null
+                            : "removal on their own creature was valued like removal on the AI's";
+                }));
+        // ---- shocklands: what the opponent can really hit for next turn
+        l.add(new Scenario("shock-tapped-attackers-untap", "Their tapped Craw Wurm and Hill Giant untap before they attack: 15 life does not pay", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(15, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai);
+                       c.bf("Craw Wurm", c.opp).setTapped(true); c.bf("Hill Giant", c.opp).setTapped(true); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? "paid with nine power ready to untap against 15 life" : null;
+                }));
+        l.add(new Scenario("shock-blockers-cover", "Two untapped Grizzly Bears stop the Wurm and the Giant: 12 life pays", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai);
+                       c.bf("Grizzly Bears", 2, c.ai); c.bf("Craw Wurm", c.opp); c.bf("Hill Giant", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? null : "refused although the blockers stop everything";
+                }));
+        l.add(new Scenario("shock-defender-ignored", "A Wall of Stone cannot attack: it adds nothing to the threat", Fid.APPROX, M1, true,
+                c -> { c.ai.setLife(12, null); c.bf("Mountain", 3, c.ai); c.hand("Hill Giant", c.ai); c.hand("Sacred Foundry", c.ai); c.bf("Wall of Stone", c.opp); },
+                c -> {
+                    final Card land = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Sacred Foundry")).findFirst().get();
+                    final SpellAbility re = land.getReplacementEffects().get(0).ensureAbility();
+                    re.setActivatingPlayer(c.ai);
+                    return new forge.ai.ability.TapAi().willPayUnlessCost(c.ai, re, AbilityUtils.calculateUnlessCost(re, "PayLife<2>", false), false, null)
+                            ? null : "a defender was counted as an attacker";
+                }));
+        // ---- who can still take part in a fight: summoning sickness and defender are no part of it
+        l.add(new Scenario("relevance-sick-and-defender", "Before combat on their own turn a summoning-sick creature and a Wall of Stone cannot attack: a pump is wasted on them", Fid.APPROX, M1, true,
+                c -> { c.bf("Chameleon Colossus", c.ai).setSickness(true); c.bf("Wall of Stone", c.ai); },
+                c -> {
+                    for (final Card k : c.ai.getCardsIn(ZoneType.Battlefield)) {
+                        if (PlayRelevance.combatRelevant(k)) { return k.getName() + " cannot attack but was counted"; }
+                    }
+                    return null;
+                }));
+        l.add(new Scenario("pump-keyword-only", "Arnjlot's Ascent grants flying and no P/T: it is not a combat pump to be thrown out", Fid.APPROX, "MAIN2", true,
+                c -> { c.bf("Arnjlot's Ascent", c.ai); c.bf("Hill Giant", c.ai).setTapped(true); },
+                c -> {
+                    final Card ascent = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Arnjlot's Ascent")).findFirst().get();
+                    final SpellAbility sa = ascent.getSpellAbilities().stream().filter(SpellAbility::isActivatedAbility).findFirst().get();
+                    sa.setActivatingPlayer(c.ai);
+                    return PlayRelevance.pointlessPump(c.ai, sa) == null ? null : "a keyword grant was classified as a +X/+X pump";
+                }));
+        // ---- a blocked trampler can still be lethal; a blocked one without trample cannot
+        l.add(new Scenario("bounce-blocked-trampler", "Ghalta (12/12 trample) blocked by a Grizzly Bears still kills the AI at 5: worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card bears = c.bf("Grizzly Bears", c.ai); final Card ghalta = c.bf("Ghalta, Stampede Tyrant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(ghalta, c.ai); combat.addBlocker(ghalta, bears); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal blocked trampler was refused"));
+        l.add(new Scenario("bounce-blocked-no-trample", "A Crested Herdcaller (trample) blocked by a Craw Wurm deals nothing through: with an ETB it is not worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(5, null); final Card wurm = c.bf("Craw Wurm", c.ai); final Card herd = c.bf("Crested Herdcaller", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(herd, c.ai); combat.addBlocker(herd, wurm); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.worthBouncing(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? "bounced an attacker that the block stops completely" : null));
+        l.add(new Scenario("bounce-lethal-infect", "An unblocked infect attacker that takes the AI from 9 to 10 poison is worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(9, c.opp); final Card elf = c.bf("Glistener Elf", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the lethal poison attacker was not recognized"));
+        l.add(new Scenario("bounce-poison-danger-floor", "An infect attack from 7 to 8 poison crosses the AI's nonlethal danger floor", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(7, c.opp); final Card elf = c.bf("Glistener Elf", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(elf, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the nonlethal poison danger was not recognized"));
+        l.add(new Scenario("bounce-blocked-infect-trampler", "Blightsteel Colossus still deals lethal poison through a Grizzly Bears blocker", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setPoisonCounters(9, c.opp); final Card blocker = c.bf("Grizzly Bears", c.ai); final Card colossus = c.bf("Blightsteel Colossus", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(colossus, c.ai); combat.addBlocker(colossus, blocker); combat.setBlocked(colossus, true);
+                       c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "the blocked infect trampler's poison damage was missed"));
+        l.add(new Scenario("bounce-double-strike-lethal", "An unblocked double-striker that deals lethal damage is worth bouncing", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false,
+                c -> { c.ai.setLife(2, null); final Card blade = c.bf("Boros Swiftblade", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(blade, c.ai); c.game.getPhaseHandler().setCombat(combat); },
+                c -> BounceValue.savesTheCombat(c.ai, c.opp.getCardsIn(ZoneType.Battlefield).get(0)) ? null : "double-strike damage was not included in the combat forecast"));
+        // ---- Zagorka, Mother of Sanctum: the land is not worth an attack that never comes
+        final java.util.function.Function<Ctx, SpellAbility> sanctum = c -> {
+            final Card z = c.bf("Zagorka, Mother of Sanctum", c.opp);
+            return z.getTriggers().get(0).ensureAbility().getAdditionalAbility("RepeatSubAbility");
+        };
+        l.add(new Scenario("zagorka-declines-with-attackers", "With a Grizzly Bears that can attack next turn the AI does not take the Sanctum", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 3, c.ai); c.bf("Grizzly Bears", c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? "took the land and gave up its attack" : null));
+        l.add(new Scenario("zagorka-accepts-without-attackers", "With nothing that could attack the land is free", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 3, c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? null : "refused a free land with no attacker"));
+        l.add(new Scenario("zagorka-declines-flooded", "Seven lands already: another adds nothing, no creature or not", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 7, c.ai); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.ai, sanctum.apply(c), null, "", null) ? "took a land at seven" : null));
+        l.add(new Scenario("zagorka-controller-takes-it", "Her controller always takes the Sanctum", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Forest", 7, c.opp); c.bf("Grizzly Bears", c.opp); },
+                c -> new forge.ai.ability.TokenAi().confirmAction(c.opp, sanctum.apply(c), null, "", null) ? null : "Zagorka's controller refused"));
+        l.add(new Scenario("temple-of-the-false-god-last", "Turn one with the Temple and four Mountains in hand: the Temple is not the land drop", Fid.APPROX, M1, true,
+                c -> { c.hand("Temple of the False God", c.ai); c.hand("Mountain", c.ai); c.hand("Mountain", c.ai); c.hand("Mountain", c.ai);
+                       c.hand("Mountain", c.ai); c.hand("Goblin Guide", c.ai); },
+                c -> {
+                    final List<Card> drops = c.landPlays();
+                    return !drops.isEmpty() && drops.get(0).getName().equals("Temple of the False God") ? "played the Temple on turn one" : null;
+                }));
+        l.add(new Scenario("birthing-ritual-legend-copy", "Phelia in play and another Phelia among the seven: the copy is no reward (legend rule), a different creature is", Fid.APPROX, "END_OF_TURN", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.lib("Phelia, Exuberant Shepherd", c.ai); c.lib("Grizzly Bears", c.ai); },
+                c -> {
+                    final Card phelia = c.ai.getCardsIn(ZoneType.Library).stream().filter(k -> k.getName().startsWith("Phelia")).findFirst().get();
+                    final Card bears = c.ai.getCardsIn(ZoneType.Library).stream().filter(k -> k.getName().equals("Grizzly Bears")).findFirst().get();
+                    final Card inPlay = c.ai.getCardsIn(ZoneType.Battlefield).get(0);
+                    if (!forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, phelia, null)) { return "a second Phelia was thought fine"; }
+                    if (forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, phelia, inPlay)) { return "the Phelia that is sacrificed still counted"; }
+                    return forge.ai.ability.DigAi.legendIsAlreadyHere(c.ai, bears, null) ? "a plain creature was called a legend copy" : null;
+                }));
+        l.add(play("forcefield-unblocked", "Forcefield: one unblocked Hill Giant is a reason to pay one mana", Fid.APPROX, "COMBAT_DECLARE_BLOCKERS", false, "Forcefield",
+                c -> { c.bf("Mountain", 5, c.ai); c.bf("Forcefield", c.ai); final Card att = c.bf("Hill Giant", c.opp);
+                       final Combat combat = new Combat(c.opp); combat.addAttacker(att, c.ai); combat.setBlocked(att, false); c.game.getPhaseHandler().setCombat(combat); }));
+        l.add(new Scenario("attack-deal-nothing-to-attack-with", "The Second Doctor / Advokist: nothing that could attack, so take the card or the counters", Fid.APPROX, "END_OF_TURN", false,
+                c -> { },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-small-attack", "One Grizzly Bears against 20 life is a small attack: take the card", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Grizzly Bears", c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-real-attack", "Three Hill Giants against 20 life and no blockers is the plan: refuse", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Hill Giant", 3, c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == false ? null : "the deal was judged wrongly (should be refused)"));
+        l.add(new Scenario("attack-deal-blocked-anyway", "Three Hill Giants against three blockers get nowhere: take the card", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == true ? null : "the deal was judged wrongly (should be taken)"));
+        l.add(new Scenario("attack-deal-lethal", "Three Grizzly Bears against 5 life is lethal: refuse", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Grizzly Bears", 3, c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) == false ? null : "the deal was judged wrongly (should be refused)"));
+        l.add(new Scenario("attack-deal-blocked-lethal", "Three 2/2 attackers against three 3/3 blockers: the nominal six damage is stopped", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Grizzly Bears", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? null : "suitable blockers stop the nominally lethal attack"));
+        l.add(new Scenario("attack-deal-incompatible-blockers", "Three Wind Drakes against three ground blockers: the blockers cannot stop the lethal attack", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Wind Drake", 3, c.ai); c.bf("Hill Giant", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "ground blockers were incorrectly counted against flying attackers" : null));
+        l.add(new Scenario("attack-deal-double-strike-lethal", "A double striker deals both combat-damage steps", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(3, null); c.bf("Mirran Crusader", c.ai); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "double-strike damage was counted only once" : null));
+        l.add(new Scenario("attack-deal-trample-lethal", "A trampler gets lethal excess damage through its blocker", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(3, null); c.bf("Colossal Dreadmaw", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "trample damage through the blocker was ignored" : null));
+        l.add(new Scenario("attack-deal-trample-extra-blockers", "The defender may use multiple blockers to stop a trampler", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Colossal Dreadmaw", c.ai); c.bf("Grizzly Bears", 3, c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? null : "additional legal blockers were not assigned to stop trample"));
+        l.add(new Scenario("attack-deal-assign-as-unblocked", "An attacker that assigns damage as unblocked still hits the player when blocked", Fid.APPROX, "END_OF_TURN", false,
+                c -> { c.opp.setLife(5, null); c.bf("Thorn Elemental", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> AttackRestrictionDeal.worthTaking(c.ai, c.opp) ? "damage-as-unblocked was incorrectly treated as stopped by a blocker" : null));
+        // ---- the real cards that offer "take X, then you can't attack me": The Second Doctor, Orzhov Advokist, Willie Lumpkin
+        final java.util.function.Function<Ctx, SpellAbility> doctor = c -> c.bf("The Second Doctor", c.opp).getTriggers().get(0).ensureAbility();
+        final java.util.function.Function<Ctx, SpellAbility> advokist = c -> c.bf("Orzhov Advokist", c.opp).getTriggers().get(0).ensureAbility();
+        final java.util.function.Function<Ctx, SpellAbility> willie = c -> {
+            final SpellAbility effect = c.bf("Willie Lumpkin, Postman", c.opp).getTriggers().get(0).ensureAbility().getSubAbility();
+            effect.setActivatingPlayer(c.opp);
+            return effect;
+        };
+        final java.util.function.BiFunction<Ctx, SpellAbility, Boolean> willieDraws = (c, sa) ->
+                new forge.ai.ability.EffectAi().willPayUnlessCost(c.ai, sa, forge.game.cost.Cost.Zero, false,
+                        new forge.util.collect.FCollection<Player>(c.ai));
+        final Setup bigBoard = c -> c.bf("Hill Giant", 3, c.ai);
+        final Setup wallOnly = c -> c.bf("Wall of Stone", c.ai); // cannot attack: nothing is given up
+        l.add(new Scenario("second-doctor-takes-card-free", "The Second Doctor: with nothing that could attack, the AI draws", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> new forge.ai.ability.DrawAi().confirmAction(c.ai, doctor.apply(c), null, "", null) ? null : "refused a free card"));
+        l.add(new Scenario("second-doctor-refuses-card-for-attack", "The Second Doctor: three Hill Giants ready to attack are worth more than a card", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> new forge.ai.ability.DrawAi().confirmAction(c.ai, doctor.apply(c), null, "", null) ? "drew and gave up its attack" : null));
+        l.add(new Scenario("advokist-takes-counters-free", "Orzhov Advokist: with only a Wall the AI takes the counters", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> new forge.ai.ability.ChooseCardAi().chooseSingleCard(c.ai, advokist.apply(c), c.ai.getCreaturesInPlay(), true, null, null) != null ? null : "refused free counters"));
+        l.add(new Scenario("advokist-refuses-counters-for-attack", "Orzhov Advokist: three Hill Giants ready to attack, so no counters and no restriction", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> new forge.ai.ability.ChooseCardAi().chooseSingleCard(c.ai, advokist.apply(c), c.ai.getCreaturesInPlay(), true, null, null) == null ? null : "took the counters and gave up its attack"));
+        l.add(new Scenario("willie-draws-free", "Willie Lumpkin: with nothing that could attack, the AI takes the card", Fid.APPROX, "END_OF_TURN", false, wallOnly,
+                c -> willieDraws.apply(c, willie.apply(c)) ? null : "refused a free card"));
+        l.add(new Scenario("willie-refuses-card-for-attack", "Willie Lumpkin: three Hill Giants ready to attack are worth more than a card", Fid.APPROX, "END_OF_TURN", false, bigBoard,
+                c -> willieDraws.apply(c, willie.apply(c)) ? "drew and gave up its attack" : null));
+        l.add(new Scenario("expedition-forest-before-fetch", "Khalni Heart Expedition one mana short: the untapped Forest is the land drop, not the fetch land", Fid.APPROX, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.hand("Wooded Foothills", c.ai); c.hand("Forest", c.ai); c.hand("Khalni Heart Expedition", c.ai);
+                       c.hand("Sakura-Tribe Elder", c.ai); c.lib("Forest", c.ai); c.lib("Mountain", c.ai); },
+                c -> {
+                    final List<Card> drops = c.landPlays();
+                    return !drops.isEmpty() && !drops.get(0).getName().equals("Forest") ? "played " + drops.get(0).getName() + " first" : null;
+                }));
+        l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai)) ? null : "the Arbor was not recognised as a gift";
+                }));
+        l.add(new Scenario("land-creature-all-out-gift", "Even at all-out aggression 5, Dryad Arbor stays home when a blocker kills it for free", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    final AiAttackController attack = new AiAttackController(c.ai);
+                    forceAttackAggression(attack, 5);
+                    return attack.shouldAttack(arbor, c.opp.getCreaturesInPlay(), new Combat(c.ai), c.opp)
+                            ? "the animated land was sent into a free kill at aggression 5" : null;
+                }));
+        l.add(new Scenario("land-creature-exalted-gate", "Only the dedicated Exalted strategy bypasses the animated-land gift guard", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
+                    final Combat combat = new Combat(c.ai);
+                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, false);
+                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, true);
+                    return ordinary && !exalted ? null : "the land-gift guard was not limited to the explicit Exalted path";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
                 c -> { c.ai.setLife(3, null); c.bf("Plateau", c.ai); c.bf("Plains", 2, c.ai); c.bf("Manabarbs", c.opp); c.bf("Burning Earth", c.opp); },
@@ -979,9 +1671,110 @@ public class AiReportScenarioTest extends AITest {
                     final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
                             .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
                     final SpellAbility playSa = play.ensureAbility();
+                    playSa.setTrigger(play);
                     playSa.setActivatingPlayer(c.ai);
-                    return SpellApiToAi.Converter.get(playSa).doTriggerNoCostWithSubs(c.ai, playSa, false).willingToPlay() ? null
-                            : "the AI would not cast the suspended Rift Bolt at Shalai";
+                    if (bolt.hasSuspend() || !"TIME".equals(play.getParam("CounterType"))
+                            || !"0".equals(play.getParam("NewCounterAmount"))) {
+                        return "scenario did not model the removal of the last TIME counter";
+                    }
+                    final Card shalai = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Shalai, Voice of Plenty")).findFirst().get();
+                    if (!ComputerUtil.playNoStack(c.ai, playSa, c.game, true)) {
+                        return "the suspended Rift Bolt Play effect did not resolve";
+                    }
+                    if (c.game.getStack().isEmpty()) {
+                        return "the suspended Rift Bolt was not cast; the stack is empty";
+                    }
+                    final SpellAbility cast = c.game.getStack().peekAbility();
+                    return cast != null && "Rift Bolt".equals(cast.getHostCard().getName())
+                            && cast.getTargets().contains(shalai) ? null
+                            : "the suspended Rift Bolt was not cast targeting Shalai; stack=" + c.game.getStack();
+                }));
+        l.add(new Scenario("rift-bolt-suspended-crystal-barricade", "suspended Rift Bolt with only Crystal Barricade to aim at (the player is hexproof)", Fid.APPROX,
+                "UPKEEP", true, c -> { c.exile("Rift Bolt", c.ai); c.bf("Crystal Barricade", c.opp); },
+                c -> {
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Exile).stream().filter(k -> k.getName().equals("Rift Bolt")).findFirst().get();
+                    final forge.game.trigger.Trigger play = bolt.getTriggers().stream()
+                            .filter(t -> t.getMode() == forge.game.trigger.TriggerType.CounterRemoved).findFirst().get();
+                    final SpellAbility playSa = play.ensureAbility();
+                    playSa.setTrigger(play);
+                    playSa.setActivatingPlayer(c.ai);
+                    if (bolt.hasSuspend() || !"TIME".equals(play.getParam("CounterType"))
+                            || !"0".equals(play.getParam("NewCounterAmount"))) {
+                        return "scenario did not model the removal of the last TIME counter";
+                    }
+                    final Card barricade = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> k.getName().equals("Crystal Barricade")).findFirst().get();
+                    if (!ComputerUtil.playNoStack(c.ai, playSa, c.game, true)) {
+                        return "the suspended Rift Bolt Play effect did not resolve";
+                    }
+                    if (c.game.getStack().isEmpty()) {
+                        return "the suspended Rift Bolt was not cast; the stack is empty";
+                    }
+                    final SpellAbility cast = c.game.getStack().peekAbility();
+                    return cast != null && "Rift Bolt".equals(cast.getHostCard().getName())
+                            && cast.getTargets().contains(barricade) ? null
+                            : "the suspended Rift Bolt was not cast targeting Crystal Barricade; stack=" + c.game.getStack();
+                }));
+        l.add(play("scapeshift-valakut-library-lethal", "Scapeshift fetches Valakut and seven Mountains as a lethal batch", Fid.APPROX,
+                M1, true, "Scapeshift", c -> {
+                    c.richMana(); c.hand("Scapeshift", c.ai); c.lib("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 7, c.ai);
+                }));
+        l.add(new Scenario("scapeshift-valakut-trigger-batch-resolves",
+                "Scapeshift resolves and all seven Valakut triggers target the opponent as a lethal batch", Fid.APPROX, M1, true,
+                c -> {
+                    // Eight lands are sacrificed: three Mountains and five Forests. The seven fetched Mountains
+                    // enter together with Valakut, so each one sees at least five other Mountains.
+                    c.bf("Mountain", 3, c.ai);
+                    c.bf("Forest", 5, c.ai);
+                    c.hand("Scapeshift", c.ai);
+                    c.lib("Valakut, the Molten Pinnacle", c.ai);
+                    c.lib("Mountain", 7, c.ai);
+                },
+                c -> {
+                    final SpellAbility scapeshift = c.playOf("Scapeshift");
+                    if (scapeshift == null) {
+                        return "AI did not choose Scapeshift" + c.why("Scapeshift");
+                    }
+                    if (!ComputerUtil.playStack(scapeshift, c.ai, c.game)) {
+                        return "Scapeshift could not be cast";
+                    }
+
+                    int valakutTriggers = 0;
+                    final List<String> misdirected = new ArrayList<>();
+                    for (int i = 0; i < 50; i++) {
+                        c.game.getStack().addAllTriggeredAbilitiesToStack();
+                        if (c.game.getStack().isEmpty()) {
+                            break;
+                        }
+                        final SpellAbility top = c.game.getStack().peekAbility();
+                        c.trace.append(" [resolving ").append(top)
+                                .append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
+                        final Card source = top.getHostCard();
+                        if (top.isTrigger() && top.getApi() == ApiType.DealDamage && source != null
+                                && "Valakut, the Molten Pinnacle".equals(source.getName())) {
+                            valakutTriggers++;
+                            if (top.getTargets() == null || !top.getTargets().contains(c.opp)) {
+                                misdirected.add(String.valueOf(top.getTargets()));
+                            }
+                        }
+                        c.game.getStack().resolveStack();
+                        c.game.getAction().checkStateEffects(true);
+                    }
+
+                    if (valakutTriggers != 7) {
+                        return "expected seven simultaneous Valakut triggers, observed " + valakutTriggers
+                                + " | " + c.trace;
+                    }
+                    if (!misdirected.isEmpty()) {
+                        return "Valakut triggers were not all aimed at the opponent: " + misdirected;
+                    }
+                    return c.opp.getLife() <= 0 ? null
+                            : "the seven 3-damage triggers did not finish the opponent (life " + c.opp.getLife() + ")";
+                }));
+        l.add(noPlay("scapeshift-valakut-not-lethal", "Scapeshift waits when its six fetched Mountains only deal 18", Fid.APPROX,
+                M1, true, "Scapeshift", c -> {
+                    c.richMana(); c.hand("Scapeshift", c.ai); c.bf("Valakut, the Molten Pinnacle", c.ai); c.lib("Mountain", 6, c.ai);
                 }));
         // keyword abilities that aim at a creature (Arnjlot's Ascent) follow the same timing, and shields only for a creature in the fight
         l.add(aimed("kw-targeted-flying-block", "Wind Drake attacks: flying for the blocker, in the declare attackers step", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", false,
@@ -1293,6 +2086,57 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 2, c.ai); c.bf("Darksteel Relic", c.ai); c.hand("Rise and Shine", c.ai); }));
         l.add(play("12058", "solved Case of the Filched Falcon with noncreature artifacts to animate", Fid.APPROX, M1, true, "Case of the Filched Falcon",
                 c -> { c.bf("Island", 3, c.ai); c.bf("Darksteel Relic", 2, c.ai); c.bf("Case of the Filched Falcon", c.ai).setSolved(true); }));
+        // ---- Flat MC discovery: tap-cost activations must remain legal at the moment they are selected
+        l.add(new Scenario("13001", "Tal Shiar Analyst stops pinging after its runaway-activation limit", Fid.APPROX, M1, true,
+                c -> { c.bf("Tal Shiar Analyst", c.ai).setSickness(true); },
+                c -> {
+                    final Card analyst = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Tal Shiar Analyst".equals(k.getName())).findFirst().orElse(null);
+                    if (analyst == null) { return "Tal Shiar Analyst is missing"; }
+                    final SpellAbility ping = analyst.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.DealDamage).findFirst().orElse(null);
+                    if (ping == null) { return "Tal Shiar Analyst's ping ability is missing"; }
+                    ping.setActivatingPlayer(c.ai);
+                    final forge.game.cost.CostTap tap = ping.getPayCosts().getCostPartByType(forge.game.cost.CostTap.class);
+                    if (tap == null) { return "the ping has no tap cost"; }
+                    if (c.controller().isStillCastable(ping)) { return "summoning-sick Analyst was considered castable"; }
+                    if (tap.payAsDecided(c.ai, null, ping, false)) { return "the ping paid its tap cost while summoning sick"; }
+
+                    analyst.setSickness(false);
+                    if (!c.controller().isStillCastable(ping)) { return "the ping was not payable after summoning sickness ended"; }
+                    for (int i = 0; i < RunawayLoop.LIMIT; i++) { RunawayLoop.note(c.ai, ping); }
+                    final AiPlayDecision opinion = SpellApiToAi.Converter.get(ping).canPlayWithSubs(c.ai, ping).decision();
+                    if (opinion != AiPlayDecision.StopRunawayActivations) {
+                        return "the damage AI did not preserve the runaway rejection: " + opinion;
+                    }
+                    return c.controller().isLegalDiscovery(ping, opinion)
+                            ? "FlatMC re-added an ability rejected by the runaway-activation guard" : null;
+                }));
+        l.add(new Scenario("dvana-tap-cost", "D'Vana Tendi cannot use its untap ability while sick or already tapped", Fid.APPROX, M1, true,
+                c -> { c.bf("D'Vana Tendi, Optimistic Ensign", c.ai).setSickness(true); c.bf("Forest", c.ai); },
+                c -> {
+                    final Card tendi = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "D'Vana Tendi, Optimistic Ensign".equals(k.getName())).findFirst().orElse(null);
+                    final Card forest = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Forest".equals(k.getName())).findFirst().orElse(null);
+                    if (tendi == null || forest == null) { return "D'Vana Tendi or its target Forest is missing"; }
+                    final SpellAbility untap = tendi.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.Untap).findFirst().orElse(null);
+                    if (untap == null) { return "D'Vana Tendi's untap ability is missing"; }
+                    untap.setActivatingPlayer(c.ai);
+                    untap.getTargets().add(forest);
+                    final forge.game.cost.CostTap tap = untap.getPayCosts().getCostPartByType(forge.game.cost.CostTap.class);
+                    if (tap == null) { return "the untap ability has no tap cost"; }
+                    if (c.controller().isStillCastable(untap)) { return "summoning-sick D'Vana was considered castable"; }
+                    if (tap.payAsDecided(c.ai, null, untap, false)) { return "D'Vana paid its tap cost while summoning sick"; }
+
+                    tendi.setSickness(false);
+                    if (!c.controller().isStillCastable(untap)) { return "untapped D'Vana was not considered castable"; }
+                    tendi.setTapped(true);
+                    if (c.controller().isStillCastable(untap)) { return "tapped D'Vana was considered castable"; }
+                    return tap.payAsDecided(c.ai, null, untap, false)
+                            ? "D'Vana paid its tap cost while already tapped" : null;
+                }));
         // ---- Flat MC: equip {0}, counters, wipes, land wipes
         l.add(play("FMC-equip0", "Lightning Greaves (equip {0}) onto a creature that has none", Fid.APPROX, M1, true, "Lightning Greaves",
                 c -> { c.bf("Lightning Greaves", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Grizzly Bears", c.opp); }));
@@ -1325,6 +2169,29 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); final Card v = c.bf("Aether Vial", c.ai); c.counters(v, CounterEnumType.CHARGE, 1); c.hand("Aether Vial", c.ai); }));
         l.add(noPlay("12766", "Aura on its creature while the opponent's Spellskite can redirect it", Fid.APPROX, M1, true, "Rancor",
                 c -> { c.bf("Forest", c.ai); c.bf("Grizzly Bears", c.ai); c.hand("Rancor", c.ai); c.bf("Spellskite", c.opp); }));
+        // Spellskite's {U/P} paid with life: the AI redirected every untap of the opponent's land (16 -> 6 life) because only a few cards opt in to a limit
+        l.add(noPlay("phyrexian-spellskite-untap", "Spellskite paying 2 life to redirect the untap of the opponent's own land", Fid.EXACT, M1, false, "Spellskite",
+                c -> { c.ai.setLife(16, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai);
+                    final Card follower = c.bf("Kiora's Follower", c.opp); final Card coast = c.bf("Yavimaya Coast", c.opp);
+                    final SpellAbility untap = follower.getSpellAbilities().stream().filter(sa -> sa.getApi() == ApiType.Untap).findFirst().get();
+                    untap.setActivatingPlayer(c.opp); untap.getTargets().add(coast); c.game.getStack().add(untap);
+                    if (c.game.getStack().isEmpty()) { throw new IllegalStateException("the opponent's ability did not reach the stack"); } }));
+        l.add(play("phyrexian-spellskite-bolt", "Spellskite paying 2 life to keep its creature from a Lightning Bolt", Fid.APPROX, M1, false, "Spellskite",
+                c -> { c.ai.setLife(16, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
+        l.add(noPlay("phyrexian-spellskite-low-life", "Spellskite paying life at 5 life, even to keep its creature from a Lightning Bolt", Fid.APPROX, M1, false, "Spellskite",
+                c -> { c.ai.setLife(5, null); c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
+        l.add(new Scenario("phyrexian-activated-life-floor", "An activated ability's Phyrexian mana never takes the AI below 4 life", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final Card skite = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Spellskite")).findFirst().get();
+                    final SpellAbility sa = skite.getSpellAbilities().stream().filter(s -> s.getApi() == ApiType.ChangeTargets).findFirst().get();
+                    sa.setActivatingPlayer(c.ai);
+                    c.ai.setLife(6, null);
+                    if (!ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 2)) { return "at 6 life, which leaves the 4 that a PayLife cost keeps, the AI refused to pay"; }
+                    c.ai.setLife(5, null);
+                    if (ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 2)) { return "at 5 life the AI paid 2 for Spellskite and was left with 3"; }
+                    return ComputerUtilMana.canPayLifeForManaShard(c.ai, sa, 4) ? "a second Phyrexian pip would have left 1 life" : null;
+                }));
         // a deck that is not built around the graveyard: Nethergoyf (escape) is a card to cast, not one to Thoughtseize away
         l.add(new Scenario("12888", "Thoughtseize aimed at the AI itself to discard Nethergoyf", Fid.EXACT, "MAIN2", true,
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Thoughtseize", c.ai); c.hand("Thoughtseize", c.ai); c.hand("Nethergoyf", c.ai); c.hand("Lightning Bolt", c.opp); },
@@ -1335,6 +2202,29 @@ public class AiReportScenarioTest extends AITest {
                         if (e == c.ai) { return "Thoughtseize aimed at the AI itself"; }
                     }
                     return null;
+                }));
+        l.add(new Scenario("estrid-mask-own-target", "Estrid's Mask uses its friendly attachment preference instead of enchanting an opposing permanent", Fid.EXACT, M1, true,
+                c -> {
+                    final Card estrid = c.bf("Estrid, the Masked", c.ai);
+                    c.counters(estrid, CounterEnumType.LOYALTY, 3);
+                    c.bf("Grizzly Bears", c.ai);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
+                    if (sa == null) { return "Estrid did not activate its Mask ability" + c.why("Estrid, the Masked"); }
+                    final Card target = c.target(sa);
+                    return target != null && target.getController() == c.ai ? null : "Mask targeted " + target + " instead of an AI permanent";
+                }));
+        l.add(new Scenario("estrid-mask-no-friendly-target", "Estrid does not spend loyalty to give an opponent an Umbra Armor Aura when it has no friendly target", Fid.EXACT, M1, true,
+                c -> {
+                    final Card estrid = c.bf("Estrid, the Masked", c.ai);
+                    c.counters(estrid, CounterEnumType.LOYALTY, 3);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
+                    return sa == null ? null : "used the Mask ability on " + c.target(sa);
                 }));
         return l;
     }

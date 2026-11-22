@@ -1,0 +1,9 @@
+Name:Narset Trait - Lightwalker
+ManaCost:no cost
+Types:Trait
+T:Mode$ PlanarDice | Result$ Blank | TriggerZones$ Command | ValidPlayer$ You | LifeTotal$ You | LifeAmount$ LE10 | Execute$ TrigGainLife1 | TriggerDescription$ Whenever you roll a blank on the planar die, if you have 10 or less life, you gain 1 life.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | ValidPlayer$ You | LifeTotal$ You | LifeAmount$ LE10 | Execute$ TrigGainLife1 | TriggerDescription$ Whenever you roll Chaos on the planar die, if you have 10 or less life, you gain 1 life.
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigGainLife5 | TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, you gain 5 life.
+SVar:TrigGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife5:DB$ GainLife | Defined$ You | LifeAmount$ 5
+Oracle:Whenever you roll the planar die, if you rolled Planeswalk, you gain 5 life. Otherwise, if you have 10 or less life, you gain 1 life.
