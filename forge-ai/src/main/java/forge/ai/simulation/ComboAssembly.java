@@ -144,7 +144,11 @@ public final class ComboAssembly {
             }
             int cost = 0;
             final List<Card> spells = new ArrayList<>();
+            final boolean flash = inHand.stream().anyMatch(c -> c.getName().equals("Flash"));
             for (final Card c : inHand) {
+                if (flash && !c.isLand() && c.getName().equals("Protean Hulk")) {
+                    continue; // Flash puts the Hulk onto the battlefield: it is never cast, and it is meant to be sacrificed
+                }
                 if (!c.isLand()) {
                     // an X spell (Walking Ballista) counts for an X of one at least, and is cast after the others: it
                     // takes what is left, and cast first for an X of nothing it is a card thrown away
