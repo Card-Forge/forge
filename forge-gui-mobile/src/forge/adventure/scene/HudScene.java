@@ -72,11 +72,17 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         hud.draw();
     }
 
+    /** MapStage can show a dialog over the world map too, such as an achievement */
+    private GameStage dialogOwner() {
+        return MapStage.getInstance().isDialogOnlyInput() ? MapStage.getInstance() : stage;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
-        if (MapStage.getInstance().isDialogOnlyInput()) {
-            MapStage.getInstance().stop();
-            return MapStage.getInstance().dialogInput(keycode);
+        GameStage owner = dialogOwner();
+        if (owner.isDialogOnlyInput()) {
+            owner.stop();
+            return owner.dialogInput(keycode);
         }
         if (hud.keyDown(keycode))
             return true;
@@ -89,8 +95,9 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean keyUp(int keycode) {
-        if (MapStage.getInstance().isDialogOnlyInput()) {
-            MapStage.getInstance().stop();
+        GameStage owner = dialogOwner();
+        if (owner.isDialogOnlyInput()) {
+            owner.stop();
             return true;
         }
         if (hud.keyUp(keycode))

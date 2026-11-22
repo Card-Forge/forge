@@ -123,23 +123,29 @@ public class GameStateEvaluator {
         int teammateCards = 0;
         int opponentCards = 0;
         int teamLife = 0;
-        int teamPlayers = 0;
+        int teamLifePlayers = 0;
         int teammates = 0;
         int opponentLife = 0;
+        int opponentLifePlayers = 0;
         int opponents = 0;
         for (Player player : game.getPlayers()) {
             int cards = player.getCardsIn(ZoneType.Hand).size();
             if (player.isOpponentOf(aiPlayer)) {
                 score -= 4 * cards;
                 opponentCards += cards;
-                opponentLife += player.getLife();
+                if (!player.cantLoseForZeroOrLessLife()) {
+                    opponentLife += player.getLife();
+                    opponentLifePlayers++;
+                }
                 debugPrint("  Opponent " + (++opponents) + " life: -" + player.getLife());
             } else {
                 int fullValueCards = player.isUnlimitedHandSize()
                         ? cards : min(cards, player.getMaxHandSize());
                 score += cards + 4 * fullValueCards;
-                teamLife += player.getLife();
-                teamPlayers++;
+                if (!player.cantLoseForZeroOrLessLife()) {
+                    teamLife += player.getLife();
+                    teamLifePlayers++;
+                }
                 if (player == aiPlayer) {
                     aiCards = cards;
                     debugPrint("  My life: " + player.getLife());
@@ -155,9 +161,11 @@ public class GameStateEvaluator {
         }
         debugPrint("Their cards in hand: " + opponentCards);
         // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
-        score += 2 * teamLife / teamPlayers;
-        if (opponents > 0) {
-            score -= 2 * opponentLife / opponents;
+        if (teamLifePlayers > 0) {
+            score += 2 * teamLife / teamLifePlayers;
+        }
+        if (opponentLifePlayers > 0) {
+            score -= 2 * opponentLife / opponentLifePlayers;
         }
 
         // evaluate mana base quality

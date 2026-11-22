@@ -64,6 +64,97 @@ public final class ElfLoop {
         return isElfDeck(ai) || owns(ai, "Heritage Druid") && owns(ai, "Nettle Sentinel");
     }
 
+    private static final String HERITAGE_DRUID = "Heritage Druid";
+    private static final String NETTLE_SENTINEL = "Nettle Sentinel";
+    private static final String REGAL_FORCE = "Regal Force";
+    private static final String RANGER_OF_EOS = "Ranger of Eos";
+
+    /**
+     * The Heritage Druid decks without Glimpse of Nature (Gennaro Mango, Kenji Tsumura, Charles Schutt, Yuuma Shiota):
+     * Heritage Druid taps three Elves for GGG, Nettle Sentinel untaps for every green spell, and the new Elf of each cast
+     * is untapped again, so every cheap green creature is cast for less than it brings (see {@link #druidChain}).
+     */
+    public static boolean isDruidDeck(final Player ai) {
+        return !isElfDeck(ai) && owns(ai, HERITAGE_DRUID) && owns(ai, NETTLE_SENTINEL);
+    }
+
+    private static boolean isGreenCreatureSpell(final Card c) {
+        return c.isCreature() && c.isGreen();
+    }
+
+    /** Whether a creature spell of the hand that is green and cheap (two or less) is still to be cast before the big ones. */
+    private static boolean cheapGreenInHand(final Player ai, final Card except) {
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c != except && isGreenCreatureSpell(c) && c.getCMC() <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The order of the chain: the pieces of the engine first, the cheap green creatures, the big ones last. */
+    private static int druidTier(final Player ai, final Card c) {
+        final String name = c.getName();
+        if (name.equals(NETTLE_SENTINEL) && LoopRunner.inPlay(ai, NETTLE_SENTINEL) == null
+                || name.equals(HERITAGE_DRUID) && LoopRunner.inPlay(ai, HERITAGE_DRUID) == null) {
+            return 0; // the engine
+        }
+        if (name.equals(RANGER_OF_EOS) && (LoopRunner.inPlay(ai, NETTLE_SENTINEL) == null
+                || LoopRunner.inPlay(ai, HERITAGE_DRUID) == null)) {
+            return 1; // fetches the missing piece of the engine
+        }
+        if (name.equals(REGAL_FORCE) || name.equals(MIRROR_ENTITY)) {
+            return 5;
+        }
+        if (isGreenCreatureSpell(c) && c.getCMC() <= 2) {
+            return 2; // every green spell untaps the Sentinel
+        }
+        return isGreenCreatureSpell(c) && c.getCMC() <= 3 ? 3 : 4;
+    }
+
+    /**
+     * The turn of a Heritage Druid deck: the land first, then the creatures in the order that pays for the next one. The
+     * engine pieces, then the cheap green creatures (each one untaps Nettle Sentinel and is an untapped Elf for the Druid
+     * to tap), then Archdruid and the like, and Regal Force when nothing cheaper is left (it draws a card for every green
+     * creature: the later the more). Nothing here is cast that the guards of the loop refuse.
+     */
+    private static SpellAbility druidChain(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        if (ai.getCardsIn(ZoneType.Library).size() < 4) {
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isLandAbility() && host.isInZone(ZoneType.Hand) && ai.equals(host.getController())
+                    && host.getName().equals("Forest")) {
+                sa.setActivatingPlayer(ai);
+                sa.resetTargets();
+                if (approve.test(sa)) {
+                    return sa; // more mana first: every land before the chain is one more for the Regal Force
+                }
+            }
+        }
+        final List<SpellAbility> spells = creatureSpells(ai, candidates);
+        spells.sort(Comparator.comparingInt((SpellAbility sa) -> druidTier(ai, sa.getHostCard()))
+                .thenComparingInt(sa -> sa.getHostCard().getCMC()).thenComparing(sa -> sa.getHostCard().getName()));
+        for (final SpellAbility sa : spells) {
+            if (sa.getHostCard().getName().equals(REGAL_FORCE) && cheapGreenInHand(ai, sa.getHostCard())) {
+                continue; // a card more for every green creature cast first
+            }
+            sa.setActivatingPlayer(ai);
+            sa.resetTargets();
+            if (approve.test(sa)) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    /** Regal Force waits for the cheap green creatures of the hand: the AI paid its seven for it before a Visionary. */
+    private static boolean druidHeld(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return host.getName().equals(REGAL_FORCE) && cheapGreenInHand(ai, host);
+    }
+
     private static boolean owns(final Player ai, final String name) {
         for (final Card c : ai.getCardsIn(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Battlefield,
                 ZoneType.Sideboard)) {
@@ -184,6 +275,10 @@ public final class ElfLoop {
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
         final Card host = sa == null ? null : sa.getHostCard();
+        if (host != null && sa.isSpell() && host.isCreature() && host.isInZone(ZoneType.Hand)
+                && ai.equals(host.getController()) && !running() && isDruidDeck(ai)) {
+            return druidHeld(ai, sa);
+        }
         if (host == null || !sa.isSpell() || !host.isCreature() || !host.isInZone(ZoneType.Hand)
                 || !ai.equals(host.getController()) || running() || glimpseActive(ai)
                 || !LoopRunner.inHand(ai, GLIMPSE) || !isElfDeck(ai)) {
@@ -201,6 +296,9 @@ public final class ElfLoop {
         final SpellAbility finish = finishers(ai, candidates, opp, approve);
         if (finish != null) {
             return finish;
+        }
+        if (isDruidDeck(ai)) {
+            return druidChain(ai, candidates, approve);
         }
         if (!isElfDeck(ai)) {
             return null;
@@ -509,7 +607,33 @@ public final class ElfLoop {
      * deck: Craterhoof Behemoth once Glimpse of Nature is in hand or played, else Glimpse; then the creatures that keep the
      * chain going. Null for no opinion.
      */
+    /** Ranger of Eos and the other tutors of a Heritage Druid deck: the missing piece of the engine, then the cheap green ones. */
+    private static CardCollection druidPicks(final Player ai, final Iterable<Card> pool, final int n) {
+        final String[] order = { NETTLE_SENTINEL, HERITAGE_DRUID, "Elvish Visionary", "Llanowar Elves", "Noble Hierarch",
+                "Elvish Archdruid", "Devoted Druid" };
+        final CardCollection out = new CardCollection();
+        for (final String name : order) {
+            if ((name.equals(NETTLE_SENTINEL) || name.equals(HERITAGE_DRUID))
+                    && (LoopRunner.inHand(ai, name) || LoopRunner.inPlay(ai, name) != null)) {
+                continue; // one of each is the engine
+            }
+            for (final Card c : pool) {
+                if (c.getName().equals(name) && !out.contains(c)) {
+                    out.add(c);
+                    break;
+                }
+            }
+            if (out.size() >= n) {
+                break;
+            }
+        }
+        return out.isEmpty() ? null : out;
+    }
+
     public static CardCollection picks(final Player ai, final Iterable<Card> pool, final int n) {
+        if (ai != null && pool != null && n > 0 && isDruidDeck(ai)) {
+            return druidPicks(ai, pool, n);
+        }
         if (ai == null || pool == null || n <= 0 || !isElfDeck(ai)) {
             return null;
         }

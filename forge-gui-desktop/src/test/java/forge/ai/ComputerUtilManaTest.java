@@ -368,4 +368,121 @@ public class ComputerUtilManaTest extends SimulationTest {
         addCard("Foraging Wickermaw", p);
         payForReal(p, "U");
     }
+
+    /**
+     * The estimate and the payment have to agree. Lion's Eye Diamond is left out on purpose: the payer never takes it for
+     * a spell (it is an instant-speed ability that discards the hand, and the loops crack it by themselves), so the
+     * estimate says no and the payment says no.
+     */
+    private void estimateAndPaymentAgree(final Player p, final String spell) {
+        final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertTrue(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate for " + spell);
+        assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "the payment of " + spell);
+    }
+
+    @Test
+    public void lotusPetalPaysForBrainstorm() {
+        final Player p = sacrificeBoard(0, "Lotus Petal");
+        estimateAndPaymentAgree(p, "Brainstorm");
+    }
+
+    @Test
+    public void lionsEyeDiamondIsNotAnAutomaticSourceForASpell() {
+        final Player p = sacrificeBoard(0, "Lion's Eye Diamond");
+        final SpellAbility sa = addCardToZone("Burning Wish", p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        assertFalse(ComputerUtilMana.canPayManaCost(sa, p, 0, false), "the estimate must not count the Diamond");
+        assertFalse(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false), "and the payer must not take it");
+    }
+
+    @Test
+    public void phyrexianLifePaymentRespectsKarnsSylex() {
+        final Player p = sacrificeBoard(0, "Karn's Sylex");
+        p.setLife(14, null);
+        final SpellAbility sa = addCardToZone("Phyrexian Metamorph", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsNeverPolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Mental Misstep", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    @Test
+    public void phyrexianLifePaymentHonorsOnFatalDamagePolicy() {
+        final Player p = sacrificeBoard(0);
+        final SpellAbility sa = addCardToZone("Gut Shot", p, ZoneType.Hand).getFirstSpellAbility();
+        assertFalse(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+        p.getGame().getPlayers().get(0).setLife(1, null);
+        assertTrue(ComputerUtilMana.canPayLifeForManaShard(p, sa, 2));
+    }
+
+    /** A player in their own main phase. */
+    private Player auraBoard() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        return p;
+    }
+
+    private Card enchant(final Player p, final String aura, final Card land) {
+        final Card c = addCard(aura, p);
+        c.attachToEntity(land, null);
+        p.getGame().getAction().checkStateEffects(true);
+        return c;
+    }
+
+    @Test
+    public void auraChosenColorPaysAShard() {
+        final Player p = auraBoard();
+        final Card forest = addCard("Forest", p);
+        enchant(p, "Utopia Sprawl", forest).setChosenColors(Lists.newArrayList("blue"));
+        assertTrue(canPay(p, "Coral Merfolk"));
+        payForReal(p, "1 U");
+        assertTrue(forest.isTapped());
+    }
+
+    @Test
+    public void auraAnyColorIgnoresMostCommonColorInHand() {
+        final Player p = auraBoard();
+        enchant(p, "Fertile Ground", addCard("Forest", p));
+        addCard("Forest", p);
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Coral Merfolk", p, ZoneType.Hand);
+        }
+        assertTrue(canPay(p, "Goblin Piker"));
+        payForReal(p, "1 R");
+    }
+
+    @Test
+    public void auraAnyColorMakesThePlannedColor() {
+        final Player p = auraBoard();
+        enchant(p, "Fertile Ground", addCard("Forest", p));
+        addCard("Plains", p);
+        assertTrue(canPay(p, "Azorius First-Wing"));
+        payForReal(p, "W U");
+    }
+
+    @Test
+    public void auraColorsKeepThePlainsForWhite() {
+        final Player p = auraBoard();
+        enchant(p, "Utopia Sprawl", addCard("Forest", p)).setChosenColors(Lists.newArrayList("blue"));
+        enchant(p, "Fertile Ground", addCard("Forest", p));
+        addCard("Plains", p);
+        // both Forests are needed for blue, so the Plains has to pay {W}
+        payForReal(p, "W U U");
+    }
+
+    @Test
+    public void auraAnyColorPaysTheShardItsLandLeaves() {
+        final Player p = auraBoard();
+        enchant(p, "Fertile Ground", addCard("Forest", p));
+        addCard("Island", p);
+        // the Forest pays {G}, so the extra mana has to be blue
+        assertTrue(canPay(p, "Voidslime"));
+        payForReal(p, "G U U");
+    }
 }

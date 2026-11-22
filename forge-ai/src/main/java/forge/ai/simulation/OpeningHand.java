@@ -1,8 +1,12 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
+import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -120,7 +124,7 @@ public final class OpeningHand {
         }
         final CardCollection kept = new CardCollection(hand);
         kept.removeAll(bottom(ai, hand, cardsToReturn, onPlay, plan, lib));
-        if (!playable(kept, finalSize) && !dredgeOneLander(kept, plan)) {
+        if ((!playable(kept, finalSize) || !castsSomething(kept, lib)) && !dredgeOneLander(kept, plan)) {
             return false; // no key card, combo piece or good score makes up for a hand that cannot cast anything
         }
         if (plan != null && plan.combos.has(ComboPlan.Kind.TUTOR_STORM)) {
@@ -179,6 +183,205 @@ public final class OpeningHand {
             return false;
         }
         return !(size >= 6 && lands >= size - 1);
+    }
+
+    /**
+     * Whether a spell of the hand can be cast with the colours of the lands in it (#12984: a Plains and green one-drops).
+     * A colour that the deck makes plentifully may still come, but a hand whose every spell waits for it is no keep.
+     */
+    static boolean castsSomething(final CardCollectionView kept, final Library lib) {
+        boolean spell = false;
+        for (final Card c : kept) {
+            if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)) {
+                spell = true;
+                break;
+            }
+        }
+        if (!spell) {
+            return true; // only lands: judged by the other rules
+        }
+        return new HandMana(kept, lib).allocate(sources -> castsWith(kept, sources));
+    }
+
+    /**
+     * The mana the lands of a hand make. A land that taps for mana is one fixed source (a colourless one, Wastes, stays
+     * colourless). A fetch land is a source only through the one library card it finds: that card has to be one the
+     * fetch ability may search for (Evolving Wilds: basic lands only), and a card can be found by one fetch land only.
+     */
+    private static final class HandMana {
+        /** Nodes of the search for a split of the library's lands that a hand may cost before it is not judged. */
+        private static final int MAX_NODES = 20000;
+
+        private final Library lib;
+        private final List<Byte> fixed = new ArrayList<>();
+        /** For each library land: the fetch lands of the hand (bit by bit) that may find it. */
+        private final int[] finders;
+        private final int fetches;
+        private final byte reachable;
+
+        HandMana(final CardCollectionView hand, final Library lib) {
+            this.lib = lib;
+            final List<Card> fetchLands = new ArrayList<>();
+            byte own = 0;
+            for (final Card c : hand) {
+                if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
+                    if (fetchesLand(c)) {
+                        fetchLands.add(c);
+                    } else {
+                        final byte colors = producedColors(c);
+                        fixed.add(colors);
+                        own |= colors;
+                    }
+                }
+            }
+            fetches = fetchLands.size();
+            finders = new int[lib.landCards.size()];
+            byte found = 0;
+            for (int j = 0; j < fetches; j++) {
+                final Card fetch = fetchLands.get(j);
+                for (final SpellAbility sa : fetch.getSpellAbilities()) {
+                    if (!isLandSearch(sa)) {
+                        continue;
+                    }
+                    final String type = sa.getParamOrDefault("ChangeType", "Card");
+                    for (int i = 0; i < finders.length; i++) {
+                        if ((finders[i] & (1 << j)) == 0 && mayFind(lib.landCards.get(i), type, fetch, sa)) {
+                            finders[i] |= 1 << j;
+                            found |= lib.landMasks.get(i);
+                        }
+                    }
+                }
+            }
+            reachable = (byte) (own | found);
+        }
+
+        /** Every colour the hand can make, though not necessarily all together. */
+        byte reachable() {
+            return reachable;
+        }
+
+        /** Whether some choice of the cards the fetch lands find makes {@code test} true for the sources that result. */
+        boolean allocate(final Predicate<List<Byte>> test) {
+            return allocate(0, new boolean[finders.length], new ArrayList<>(fixed), test, new int[1]);
+        }
+
+        private boolean allocate(final int fetch, final boolean[] used, final List<Byte> sources,
+                                 final Predicate<List<Byte>> test, final int[] nodes) {
+            if (fetch == fetches) {
+                return test.test(sources);
+            }
+            if (++nodes[0] > MAX_NODES) {
+                // too many ways to split the library to try them all: the best split found greedily, which is checked
+                // like any other, so a yes is a verified yes and a no is the cautious answer
+                return test.test(greedy(fetch, used, sources));
+            }
+            final Set<Long> tried = new HashSet<>();
+            boolean finds = false;
+            for (int i = 0; i < finders.length; i++) {
+                if (used[i] || (finders[i] & (1 << fetch)) == 0) {
+                    continue;
+                }
+                // two lands with the same colours that the same later fetch lands may find are the same choice
+                final long key = (lib.landMasks.get(i).longValue() << 32) | (finders[i] >>> (fetch + 1));
+                if (!tried.add(key)) {
+                    continue;
+                }
+                finds = true;
+                used[i] = true;
+                sources.add(lib.landMasks.get(i));
+                final boolean ok = allocate(fetch + 1, used, sources, test, nodes);
+                sources.remove(sources.size() - 1);
+                used[i] = false;
+                if (ok) {
+                    return true;
+                }
+            }
+            // a found land only adds a source, so finding one is never worse; with nothing to find, it makes no mana
+            return !finds && allocate(fetch + 1, used, sources, test, nodes);
+        }
+
+        /** The sources when each remaining fetch land takes the unused land that adds the most colours. */
+        private List<Byte> greedy(final int from, final boolean[] used, final List<Byte> sources) {
+            final List<Byte> out = new ArrayList<>(sources);
+            final boolean[] taken = used.clone();
+            byte have = 0;
+            for (final byte s : out) {
+                have |= s;
+            }
+            for (int f = from; f < fetches; f++) {
+                int best = -1;
+                int bestNew = -1;
+                for (int i = 0; i < finders.length; i++) {
+                    if (taken[i] || (finders[i] & (1 << f)) == 0) {
+                        continue;
+                    }
+                    final int added = Integer.bitCount(lib.landMasks.get(i) & ~have & 0xFF);
+                    if (added > bestNew) {
+                        bestNew = added;
+                        best = i;
+                    }
+                }
+                if (best >= 0) {
+                    taken[best] = true;
+                    out.add(lib.landMasks.get(best));
+                    have |= lib.landMasks.get(best);
+                }
+            }
+            return out;
+        }
+
+        /** Whether the colours of the spell are all made together by some choice of what the fetch lands find. */
+        boolean makesColorsOf(final Card spell) {
+            if (spell.getManaCost().getColorProfile() == 0) {
+                return true;
+            }
+            // one source for each coloured pip: a Tropical Island makes green or blue, never {G}{U} by itself
+            return allocate(sources -> ManaSourceAllocation.canPayColoredPips(spell.getManaCost(), sources));
+        }
+    }
+
+    /**
+     * Whether the search of a fetch land may find the card. Card.isValid takes one restriction, so the alternatives of
+     * the script ("Plains,Island" for Flooded Strand) are split here: any one of them is enough.
+     */
+    private static boolean mayFind(final Card candidate, final String type, final Card fetch, final SpellAbility sa) {
+        for (final String restriction : type.split(",")) {
+            if (candidate.isValid(restriction, fetch.getController(), fetch, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A fetch land's ability: search the library for a card and put it onto the battlefield. */
+    private static boolean isLandSearch(final SpellAbility sa) {
+        return sa.getApi() == ApiType.ChangeZone && "Library".equals(sa.getParam("Origin"))
+                && "Battlefield".equals(sa.getParam("Destination"));
+    }
+
+    /** Whether a spell of the hand can be paid with these sources, one source for each coloured pip. */
+    private static boolean castsWith(final CardCollectionView kept, final List<Byte> sources) {
+        byte colors = 0;
+        for (final byte s : sources) {
+            colors |= s;
+        }
+        for (final Card c : kept) {
+            if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)
+                    && c.getManaCost().canBePaidWithAvailable(colors) // hybrid shards: either colour pays
+                    && ManaSourceAllocation.canPayColoredPips(c.getManaCost(), sources)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the lands of the hand (and what its fetch lands find) pay for the coloured pips of the spell together. */
+    static boolean makesColorsOf(final CardCollectionView hand, final Player ai, final Card spell) {
+        return new HandMana(hand, new Library(ai)).makesColorsOf(spell);
+    }
+
+    static boolean castsSomething(final CardCollectionView kept, final Player ai) {
+        return castsSomething(kept, new Library(ai));
     }
 
     /** One land and a 1 mana outlet in a dredge deck: Faithless Looting on turn one is a normal keep. */
@@ -240,6 +443,9 @@ public final class OpeningHand {
         final int size;
         final int lands;
         final int[] producers = new int[5];
+        /** The cards of the library that are lands making coloured mana, and the colours of each (what a fetch land can find). */
+        final List<Card> landCards = new ArrayList<>();
+        final List<Byte> landMasks = new ArrayList<>();
 
         Library(final Player ai) {
             final CardCollectionView lib = ai.getCardsIn(ZoneType.Library);
@@ -248,6 +454,10 @@ public final class OpeningHand {
                 if (isManaLand(c)) {
                     l++;
                     final byte colors = producedColors(c);
+                    if (colors != 0) {
+                        landCards.add(c);
+                        landMasks.add(colors);
+                    }
                     for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                         if ((colors & MagicColor.WUBRG[i]) != 0) {
                             producers[i]++;
@@ -298,7 +508,7 @@ public final class OpeningHand {
         boolean quickWiper = false;
         boolean stage = false;
         final boolean depths = plan != null && plan.combos.has(ComboPlan.Kind.DARK_DEPTHS);
-        byte colors = 0;
+        final HandMana mana = new HandMana(hand, lib); // the colours the lands make together, fetch lands included
         final List<Card> spells = new ArrayList<>();
         int outlets = 0;
         int pieces = 0;
@@ -311,8 +521,6 @@ public final class OpeningHand {
             if (c.isLand() || isMdfcLand(c)) {
                 if (isEarlyManaLand(c)) {
                     lands++;
-                    final byte own = producedColors(c);
-                    colors |= own != 0 ? own : libraryColors(lib);
                 }
                 if (depths && ComboPlan.isDepthsPiece(c)) {
                     landKeys++; // Dark Depths and the Stage are lands, and the pieces the deck is built around
@@ -345,7 +553,7 @@ public final class OpeningHand {
                 continue;
             }
             if (c.getCMC() <= w.playCmc) {
-                early += colorCredit(c, colors, lib);
+                early += colorCredit(c, mana, lib);
             }
             if (isKeyCard(c, arch) || plan != null && (plan.combos.isKeyCard(c) || plan.commander.isKeyCard(c))
                 || dredge && (ComboPlan.isDredgeOutlet(c) || ComboPlan.isDredgeHandPiece(c))) {
@@ -389,11 +597,14 @@ public final class OpeningHand {
     }
 
     /** 1 when the lands in hand make the colours of the spell, less when a missing colour may still be drawn. */
-    private static double colorCredit(final Card c, final byte handColors, final Library lib) {
-        final byte need = c.getManaCost().getColorProfile();
-        final int missing = need & ~handColors;
-        if (missing == 0) {
+    private static double colorCredit(final Card c, final HandMana mana, final Library lib) {
+        if (mana.makesColorsOf(c)) {
             return 1.0;
+        }
+        final byte need = c.getManaCost().getColorProfile();
+        final int missing = need & ~mana.reachable();
+        if (missing == 0) {
+            return 0.5; // every colour is within reach of the fetch lands, but not all of them at once
         }
         for (final byte col : MagicColor.WUBRG) {
             if ((missing & col) != 0 && lib.producersOf(col) < 4) {
@@ -450,8 +661,7 @@ public final class OpeningHand {
 
     private static boolean fetchesLand(final Card c) {
         for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.getApi() == ApiType.ChangeZone && "Library".equals(sa.getParam("Origin"))
-                    && "Battlefield".equals(sa.getParam("Destination"))) {
+            if (isLandSearch(sa)) {
                 return true;
             }
         }
@@ -491,17 +701,6 @@ public final class OpeningHand {
     static boolean isMdfcLand(final Card c) {
         return c.isModal() && !c.isLand() && c.getState(CardStateName.Backside) != null
                 && c.getState(CardStateName.Backside).getType().isLand();
-    }
-
-    /** The colours the rest of the library can make: what a fetch land in the hand can turn into. */
-    private static byte libraryColors(final Library lib) {
-        byte colors = 0;
-        for (final byte col : MagicColor.WUBRG) {
-            if (lib.producersOf(col) >= 1) {
-                colors |= col;
-            }
-        }
-        return colors;
     }
 
     private static boolean fetchesToHand(final Card c) {

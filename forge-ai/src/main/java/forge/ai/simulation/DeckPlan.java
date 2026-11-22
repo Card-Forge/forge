@@ -331,6 +331,10 @@ public final class DeckPlan {
         if (fromAluren != null) {
             return fromAluren;
         }
+        final CardCollection fromRamp = RampPlan.picks(ai, pool, n); // Valakut first, then the Mountains
+        if (fromRamp != null) {
+            return fromRamp;
+        }
         final CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
         if (fromCombo != null) {
             return fromCombo;
