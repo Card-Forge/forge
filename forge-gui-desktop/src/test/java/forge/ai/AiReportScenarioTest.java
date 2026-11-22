@@ -2086,6 +2086,57 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 2, c.ai); c.bf("Darksteel Relic", c.ai); c.hand("Rise and Shine", c.ai); }));
         l.add(play("12058", "solved Case of the Filched Falcon with noncreature artifacts to animate", Fid.APPROX, M1, true, "Case of the Filched Falcon",
                 c -> { c.bf("Island", 3, c.ai); c.bf("Darksteel Relic", 2, c.ai); c.bf("Case of the Filched Falcon", c.ai).setSolved(true); }));
+        // ---- Flat MC discovery: tap-cost activations must remain legal at the moment they are selected
+        l.add(new Scenario("13001", "Tal Shiar Analyst stops pinging after its runaway-activation limit", Fid.APPROX, M1, true,
+                c -> { c.bf("Tal Shiar Analyst", c.ai).setSickness(true); },
+                c -> {
+                    final Card analyst = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Tal Shiar Analyst".equals(k.getName())).findFirst().orElse(null);
+                    if (analyst == null) { return "Tal Shiar Analyst is missing"; }
+                    final SpellAbility ping = analyst.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.DealDamage).findFirst().orElse(null);
+                    if (ping == null) { return "Tal Shiar Analyst's ping ability is missing"; }
+                    ping.setActivatingPlayer(c.ai);
+                    final forge.game.cost.CostTap tap = ping.getPayCosts().getCostPartByType(forge.game.cost.CostTap.class);
+                    if (tap == null) { return "the ping has no tap cost"; }
+                    if (c.controller().isStillCastable(ping)) { return "summoning-sick Analyst was considered castable"; }
+                    if (tap.payAsDecided(c.ai, null, ping, false)) { return "the ping paid its tap cost while summoning sick"; }
+
+                    analyst.setSickness(false);
+                    if (!c.controller().isStillCastable(ping)) { return "the ping was not payable after summoning sickness ended"; }
+                    for (int i = 0; i < RunawayLoop.LIMIT; i++) { RunawayLoop.note(c.ai, ping); }
+                    final AiPlayDecision opinion = SpellApiToAi.Converter.get(ping).canPlayWithSubs(c.ai, ping).decision();
+                    if (opinion != AiPlayDecision.StopRunawayActivations) {
+                        return "the damage AI did not preserve the runaway rejection: " + opinion;
+                    }
+                    return c.controller().isLegalDiscovery(ping, opinion)
+                            ? "FlatMC re-added an ability rejected by the runaway-activation guard" : null;
+                }));
+        l.add(new Scenario("dvana-tap-cost", "D'Vana Tendi cannot use its untap ability while sick or already tapped", Fid.APPROX, M1, true,
+                c -> { c.bf("D'Vana Tendi, Optimistic Ensign", c.ai).setSickness(true); c.bf("Forest", c.ai); },
+                c -> {
+                    final Card tendi = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "D'Vana Tendi, Optimistic Ensign".equals(k.getName())).findFirst().orElse(null);
+                    final Card forest = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Forest".equals(k.getName())).findFirst().orElse(null);
+                    if (tendi == null || forest == null) { return "D'Vana Tendi or its target Forest is missing"; }
+                    final SpellAbility untap = tendi.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.Untap).findFirst().orElse(null);
+                    if (untap == null) { return "D'Vana Tendi's untap ability is missing"; }
+                    untap.setActivatingPlayer(c.ai);
+                    untap.getTargets().add(forest);
+                    final forge.game.cost.CostTap tap = untap.getPayCosts().getCostPartByType(forge.game.cost.CostTap.class);
+                    if (tap == null) { return "the untap ability has no tap cost"; }
+                    if (c.controller().isStillCastable(untap)) { return "summoning-sick D'Vana was considered castable"; }
+                    if (tap.payAsDecided(c.ai, null, untap, false)) { return "D'Vana paid its tap cost while summoning sick"; }
+
+                    tendi.setSickness(false);
+                    if (!c.controller().isStillCastable(untap)) { return "untapped D'Vana was not considered castable"; }
+                    tendi.setTapped(true);
+                    if (c.controller().isStillCastable(untap)) { return "tapped D'Vana was considered castable"; }
+                    return tap.payAsDecided(c.ai, null, untap, false)
+                            ? "D'Vana paid its tap cost while already tapped" : null;
+                }));
         // ---- Flat MC: equip {0}, counters, wipes, land wipes
         l.add(play("FMC-equip0", "Lightning Greaves (equip {0}) onto a creature that has none", Fid.APPROX, M1, true, "Lightning Greaves",
                 c -> { c.bf("Lightning Greaves", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Grizzly Bears", c.opp); }));
