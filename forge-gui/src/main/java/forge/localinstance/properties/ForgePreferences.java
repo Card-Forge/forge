@@ -365,7 +365,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
 
         ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true"),
 
-        WELCOME_SHOWN("false");
+        WELCOME_SHOWN("true");
 
         private final String strDefaultVal;
 
