@@ -4,6 +4,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
 
 public class BlankLineEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {};
+
     // this "effect" just allows spacing to look better for certain card displays
 
     @Override
