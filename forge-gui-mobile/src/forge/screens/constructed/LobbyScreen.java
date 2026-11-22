@@ -275,6 +275,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private void applyFormatChoice(final Object choice) {
         lobby.setFormatChoice(choice);
+        if (lobby.isAllowNetworking()) {
+            for (int i = 0; i < getNumPlayers(); i++) {
+                if (isPlayerAI(i)) {
+                    updateMyDeck(i);
+                }
+            }
+        }
         updateLayoutForVariants();
         lobby.saveSetup();
     }
