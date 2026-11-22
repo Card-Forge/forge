@@ -125,6 +125,7 @@ public enum TrackableProperty {
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     HasPrintedPT(TrackableTypes.BooleanType),
+    StationLevels(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
     Toughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.StringType),
