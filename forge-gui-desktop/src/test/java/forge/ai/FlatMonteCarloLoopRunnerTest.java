@@ -1502,4 +1502,50 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("tap for three, untap for two, round again: the pool pays the X of the Blaze\n" + trace
                 + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void aDruidUntapsForNothingWithMeliraOrAVizier() {
+        elfDeckWith(0);
+        final Card druid = addCardToZone("Devoted Druid", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("a counter that stays is no free untap", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 1));
+        addCardToZone("Vizier of Remedies", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue("Vizier: one counter fewer", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 1));
+        AssertJUnit.assertFalse("two counters leave one", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 2));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDevotedDruidAndVizierPaysForABlaze() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Devoted Druid", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Vizier of Remedies", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap for G, untap for no counter, round again\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithSliverQueenAndManaEchoesPaysForABlaze() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 4, ai);
+        addCardToZone("Mana Echoes", ai, ZoneType.Battlefield);
+        addCardToZone("Sliver Queen", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("a Sliver for two, two mana back, then three, then four\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithFoodChainAndSqueeCastsABigCreature() {
+        elfDeckWith(0, "Craterhoof Behemoth");
+        addCards("Mountain", 3, ai);
+        addCardToZone("Food Chain", ai, ZoneType.Battlefield);
+        addCardToZone("Squee, the Immortal", ai, ZoneType.Battlefield).setSickness(false);
+        runTurn();
+        AssertJUnit.assertTrue("Squee, exile it, four mana for creatures, round again, until the Hoof is paid for\n" + trace
+                + gameStateToString(game), countCardsWithName(game, "Craterhoof Behemoth", ZoneType.Battlefield) > 0
+                || game.isGameOver());
+    }
 }

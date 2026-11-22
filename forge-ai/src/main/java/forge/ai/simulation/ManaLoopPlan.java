@@ -90,10 +90,45 @@ public final class ManaLoopPlan {
         return paid.getConvertedManaCost();
     }
 
-    /** Whether the untap pays for something other than mana (a sacrifice, life): then it is no loop of ours. */
-    private static boolean manaOnly(final SpellAbility untap) {
-        return untap.getPayCosts() != null && untap.getPayCosts().getCostParts().stream()
-                .allMatch(p -> p instanceof forge.game.cost.CostPartMana);
+    /** Whether a -1/-1 counter put on the creature is no counter: Melira stops it, a Vizier of Remedies takes one off. */
+    public static boolean counterIsFree(final Player ai, final Card host, final int amount) {
+        try {
+            if (!host.canReceiveCounters(forge.game.card.CounterEnumType.M1M1, null)) {
+                return true;
+            }
+        } catch (final RuntimeException e) {
+            return false;
+        }
+        if (amount > 1) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Vizier of Remedies") && !host.equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the untap costs mana only, or a -1/-1 counter that does not stay on the creature (Devoted Druid with a
+     * Melira or a Vizier of Remedies): a cost that is paid for nothing.
+     */
+    private static boolean payable(final Player ai, final Card host, final SpellAbility untap) {
+        if (untap.getPayCosts() == null) {
+            return false;
+        }
+        return untap.getPayCosts().getCostParts().stream().allMatch(p -> {
+            if (p instanceof forge.game.cost.CostPartMana) {
+                return true;
+            }
+            if (p instanceof forge.game.cost.CostPutCounter) {
+                final forge.game.cost.CostPutCounter c = (forge.game.cost.CostPutCounter) p;
+                return c.getCounter().is(forge.game.card.CounterEnumType.M1M1)
+                        && counterIsFree(ai, host, Math.max(1, p.convertAmount() == null ? 1 : p.convertAmount()));
+            }
+            return false;
+        });
     }
 
     /** The colourless mana the loop is run for: what the hand costs, or enough for an X spell to finish the opponent. */
@@ -133,12 +168,20 @@ public final class ManaLoopPlan {
                 || !(ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2))) {
             return null;
         }
+        final SpellAbility chain = foodChain(ai, candidates, approve);
+        if (chain != null) {
+            return chain;
+        }
         final int goal = goal(ai);
         if (goal <= 0 || ai.getManaPool().totalMana() >= goal) {
             return null;
         }
+        final SpellAbility tokens = echoes(ai, candidates, approve, goal);
+        if (tokens != null) {
+            return tokens;
+        }
         for (final Card host : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (host.isLand()) {
+            if (host.isLand() || host.isSick()) {
                 continue;
             }
             final SpellAbility tap = own(candidates, host, ApiType.Mana, true);
@@ -147,7 +190,7 @@ public final class ManaLoopPlan {
                 continue;
             }
             final SpellAbility anyUntap = untap != null ? untap : findUntap(host);
-            if (anyUntap == null || !manaOnly(anyUntap) || !"Self".equals(anyUntap.getParamOrDefault("Defined", "Self"))) {
+            if (anyUntap == null || !payable(ai, host, anyUntap) || !"Self".equals(anyUntap.getParamOrDefault("Defined", "Self"))) {
                 continue;
             }
             final SpellAbility anyTap = tap != null ? tap : findTap(host);
@@ -171,6 +214,129 @@ public final class ManaLoopPlan {
                 if (approve.test(tap)) {
                     VetoLog.note(ai, "mana-loop | " + host.getName() + " pool " + ai.getManaPool().totalMana() + " of " + goal);
                     return tap;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Mana Echoes: a creature that enters adds one colourless mana for each creature of yours that shares a type with it,
+     * itself too. A Sliver Queen that makes a 1/1 Sliver for {2} gets two for the first, three for the second, and so on:
+     * a cycle that pays for itself from the second token on. The tokens are made while the pool is short of the goal and
+     * the mana is there to pay, lands or pool.
+     */
+    static SpellAbility echoes(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve,
+                               final int goal) {
+        boolean echoes = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            echoes |= c.getName().equals("Mana Echoes");
+        }
+        if (!echoes || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        for (final Card host : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!host.isCreature()) {
+                continue;
+            }
+            for (final SpellAbility sa : candidates) {
+                if (sa == null || sa.getHostCard() != host || !sa.isActivatedAbility() || sa.getApi() != ApiType.Token
+                        || sa.usesTargeting() || RunawayLoop.exceeded(sa, LIMIT)) {
+                    continue;
+                }
+                final String script = sa.getParamOrDefault("TokenScript", "").toLowerCase();
+                boolean shares = false;
+                for (final String type : host.getType().getCreatureTypes()) {
+                    shares |= script.contains(type.toLowerCase());
+                }
+                if (!shares) {
+                    continue;
+                }
+                int sharing = 1; // the token itself
+                for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                    sharing += c.isCreature() && c.sharesCreatureTypeWith(host) ? 1 : 0;
+                }
+                sa.setActivatingPlayer(ai);
+                final int cost = sa.getPayCosts() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+                if (sharing >= cost && forge.ai.ComputerUtilMana.canPayManaCost(sa, ai, 0, false) && approve.test(sa)) {
+                    VetoLog.note(ai, "mana-loop | " + host.getName() + " tokens with Mana Echoes, pool "
+                            + ai.getManaPool().totalMana() + " of " + goal);
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
+    /** The creature spells in the hand cost this much: what Food Chain's mana can pay for. */
+    static int creatureGoal(final Player ai) {
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.isCreature()) {
+                sum += c.getCMC() + (c.getManaCost() != null && c.getManaCost().countX() > 0 ? 12 : 0);
+            }
+        }
+        return Math.min(40, sum);
+    }
+
+    /** A creature that is cast from exile (Squee, Misthollow Griffin, Eternal Scourge): Food Chain loses it for nothing. */
+    private static boolean castFromExile(final Card c) {
+        for (final forge.game.staticability.StaticAbility st : c.getStaticAbilities()) {
+            if (st.hasParam("MayPlay") && st.getParamOrDefault("AffectedZone", "").contains("Exile")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Food Chain: exile a creature, add one more mana than its cost for creature spells only. With a creature that can be
+     * cast from exile the loop is a cast, an exile and one mana over, round and round, until the pool holds what the
+     * creature spells in the hand cost. Run only when every creature the AI has is such a creature, so that the exile is
+     * never the Ballista or the finisher.
+     */
+    static SpellAbility foodChain(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        final int goal = creatureGoal(ai);
+        if (goal <= 0 || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        boolean chain = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            chain |= c.getName().equals("Food Chain");
+        }
+        if (!chain) {
+            return null;
+        }
+        Card fuel = null;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature()) {
+                if (!castFromExile(c)) {
+                    return null;
+                }
+                fuel = c;
+            }
+        }
+        if (fuel != null) {
+            for (final SpellAbility sa : candidates) {
+                if (sa != null && sa.getApi() == ApiType.Mana && sa.getHostCard() != null
+                        && sa.getHostCard().getName().equals("Food Chain") && !RunawayLoop.exceeded(sa, LIMIT)) {
+                    sa.setActivatingPlayer(ai);
+                    if (approve.test(sa)) {
+                        VetoLog.note(ai, "mana-loop | Food Chain exiles " + fuel.getName() + ", pool "
+                                + ai.getManaPool().totalMana() + " of " + goal);
+                        return sa;
+                    }
+                }
+            }
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isSpell() && castFromExile(host)
+                    && (host.isInZone(ZoneType.Exile) || host.isInZone(ZoneType.Graveyard))) {
+                sa.setActivatingPlayer(ai);
+                if (forge.ai.ComputerUtilMana.canPayManaCost(sa, ai, 0, false) && approve.test(sa)) {
+                    return sa;
                 }
             }
         }

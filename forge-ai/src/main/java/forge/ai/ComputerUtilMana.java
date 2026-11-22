@@ -1496,6 +1496,14 @@ public class ComputerUtilMana {
             return false;
         }
 
+        // a mana ability that exiles another creature (Food Chain) is for a loop that goes round it, not for paying a
+        // spell: paid like that it exiled the Craterhoof Behemoth that had just been cast, to cast a Squee
+        if (ma != sa && ma.getPayCosts() != null && ai.isAI() && ma.getPayCosts().getCostParts().stream()
+                .anyMatch(part -> part instanceof CostExile && !part.payCostFromSource()
+                        && String.valueOf(part.getType()).contains("Creature"))) {
+            return false;
+        }
+
         if (toPay.isSnow() && !sourceCard.isSnow()) {
             return false;
         }
