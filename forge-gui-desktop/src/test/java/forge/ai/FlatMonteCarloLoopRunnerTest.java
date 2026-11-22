@@ -1581,4 +1581,58 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         runTurn();
         AssertJUnit.assertTrue("no drain, no loop: the AI keeps its life and its library\n" + trace, ai.getLife() >= 19);
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDeadeyeNavigatorAndPeregrineDrakePaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Island", 4, ai);
+        addCards("Mountain", 1, ai);
+        final Card navigator = addCardToZone("Deadeye Navigator", ai, ZoneType.Battlefield);
+        final Card drake = addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        navigator.setPairedWith(drake);
+        drake.setPairedWith(navigator);
+        game.getAction().checkStateEffects(true);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("float the lands, {1}{U} to flicker the Drake, five lands back, round again\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithGhostlyFlickerArchaeomancerAndDrakePaysForAFireball() {
+        elfDeckWith(0, "Fireball", "Ghostly Flicker");
+        addCards("Island", 5, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        addCardToZone("Archaeomancer", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("Ghostly Flicker on the Drake and the Archaeomancer: five lands back, the Flicker back in hand\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aFlickerLoopDoesNotStartWithoutAnythingToSpendTheManaOn() {
+        elfDeckWith(0);
+        addCards("Island", 5, ai);
+        final Card navigator = addCardToZone("Deadeye Navigator", ai, ZoneType.Battlefield);
+        final Card drake = addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        navigator.setPairedWith(drake);
+        drake.setPairedWith(navigator);
+        game.getAction().checkStateEffects(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertEquals("no hand, no loop", 0, forge.ai.simulation.ManaLoopPlan.goal(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBreachLionsEyeDiamondAndBrainFreezeMillsMostOfTheLibrary() {
+        elfDeckWith(0, "Underworld Breach", "Brain Freeze", "Ponder", "Brainstorm", "Opt");
+        addCards("Mountain", 3, ai);
+        addCards("Island", 3, ai);
+        addCardToZone("Lion's Eye Diamond", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertTrue("Breach, the Freeze, the Diamond turns the hand into fuel, the Freeze escapes: well over half of "
+                + "the library is gone, " + opp.getCardsIn(ZoneType.Library).size() + " left\n" + trace + gameStateToString(game),
+                opp.getCardsIn(ZoneType.Library).size() <= 5);
+    }
 }

@@ -89,6 +89,14 @@ public final class LoopRunner {
         if (melira != null) {
             return melira;
         }
+        final SpellAbility flicker = FlickerLoopPlan.next(ai, candidates, approve);
+        if (flicker != null) {
+            return flicker;
+        }
+        final SpellAbility breach = BreachPlan.next(ai, candidates, approve);
+        if (breach != null) {
+            return breach;
+        }
         final SpellAbility manaLoop = ManaLoopPlan.next(ai, candidates, approve);
         if (manaLoop != null) {
             return manaLoop;

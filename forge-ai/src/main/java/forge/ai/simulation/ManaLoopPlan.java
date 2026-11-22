@@ -133,11 +133,16 @@ public final class ManaLoopPlan {
 
     /** The colourless mana the loop is run for: what the hand costs, or enough for an X spell to finish the opponent. */
     public static int goal(final Player ai) {
+        return goal(ai, null);
+    }
+
+    /** The goal without the hand card of that name: a spell that is a part of the loop is not what the mana is for. */
+    public static int goal(final Player ai, final String ignore) {
         int sum = 0;
         boolean x = false;
         boolean spell = false;
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-            if (c.isLand()) {
+            if (c.isLand() || c.getName().equals(ignore)) {
                 continue;
             }
             spell = true;
