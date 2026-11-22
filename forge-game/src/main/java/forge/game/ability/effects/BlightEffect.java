@@ -18,6 +18,10 @@ import forge.util.Localizer;
 import java.util.List;
 
 public class BlightEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "Num",
+    };
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card card = sa.getHostCard();
