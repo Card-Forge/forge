@@ -1779,4 +1779,57 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("the Altar takes the Engine, the Deathmantle brings it back, its tokens go to the Altar: two more a round\n"
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBasaltMonolithAndRingsOfBrighthearthPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Plains", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Basalt Monolith", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Rings of Brighthearth", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap, untap with the copy, tap again with the untap on the stack: one mana over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithWarrenSoultraderGravecrawlerAndBloodArtistKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Swamp", 2, ai);
+        addCardToZone("Warren Soultrader", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Blood Artist", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Gravecrawler", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(6, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Gravecrawler for a Treasure, the Artist drains, the Treasure pays for the Gravecrawler\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithKrenkoThornbiteStaffAndGoblinBombardmentKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Mountain", 5, ai);
+        addCardToZone("Krenko, Mob Boss", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Thornbite Staff", ai, ZoneType.Battlefield);
+        addCardToZone("Goblin Bombardment", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Krenko taps for Goblins, a Goblin goes to the Bombardment, the Staff untaps Krenko\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDuskmantleGuildmageAndMindcrankKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Island", 2, ai);
+        addCards("Swamp", 2, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Duskmantle Guildmage", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Mindcrank", ai, ZoneType.Battlefield);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("the first ability, then the mill: a card is a life and a life is a card\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }

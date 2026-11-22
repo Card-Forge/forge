@@ -2305,6 +2305,12 @@ public class AiController {
                     return response;
                 }
             }
+            // Basalt Monolith with Rings of Brighthearth: the Monolith taps again with its own untap on the stack
+            final SpellAbility ringsTap = forge.ai.simulation.StackLoops.response(player, top,
+                    ComputerUtilAbility.getSpellAbilities(cards, player), this::loopApproved);
+            if (ringsTap != null) {
+                return ringsTap;
+            }
             // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
             final SpellAbility consultation = ConsultationWin.response(player);
             if (consultation != null) {

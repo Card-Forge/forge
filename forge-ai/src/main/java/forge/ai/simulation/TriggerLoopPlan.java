@@ -44,7 +44,57 @@ public final class TriggerLoopPlan {
             return null;
         }
         final SpellAbility niv = nivMizzet(ai, candidates, approve);
-        return niv != null ? niv : bloodAndBond(ai, candidates, approve);
+        if (niv != null) {
+            return niv;
+        }
+        final SpellAbility bond = bloodAndBond(ai, candidates, approve);
+        return bond != null ? bond : guildmageAndMindcrank(ai, candidates, approve);
+    }
+
+    /**
+     * Duskmantle Guildmage with Mindcrank: with the Guildmage's first ability on, a card that goes to the opponent's
+     * graveyard costs one life, and Mindcrank mills that many cards for the life: a card is a life and a life is a card, to
+     * the end. The mill ({2}{U}{B}) starts it, after the first ability ({1}{U}{B}), so seven mana go in, and the AI starts
+     * only when it has them. The first ability is told by its count this turn.
+     */
+    private static SpellAbility guildmageAndMindcrank(final Player ai, final List<SpellAbility> candidates,
+                                                      final Predicate<SpellAbility> approve) {
+        final Card guildmage = inPlayAny(ai, "Duskmantle Guildmage");
+        final Card crank = inPlayAny(ai, "Mindcrank");
+        if (guildmage == null || crank == null) {
+            return null;
+        }
+        Player opp = null;
+        for (final Player p : ai.getOpponents()) {
+            if (p.getLife() > 0 && !p.getCardsIn(ZoneType.Library).isEmpty()) {
+                opp = p;
+                break;
+            }
+        }
+        final SpellAbility effect = LoopRunner.activated(candidates, guildmage, ApiType.Effect);
+        final SpellAbility mill = LoopRunner.activated(candidates, guildmage, ApiType.Mill);
+        if (opp == null || effect == null || mill == null
+                || forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai) < 7) {
+            return null;
+        }
+        if (effect.getActivationsThisTurn() == 0) {
+            effect.setActivatingPlayer(ai);
+            effect.resetTargets();
+            if (!approve.test(effect)) {
+                return null;
+            }
+            VetoLog.note(ai, "guildmage-loop | the Guildmage's cards-to-the-graveyard ability first");
+            return effect;
+        }
+        if (mill.getActivationsThisTurn() > 0) {
+            return null; // the chain is running (or has run its course): one mill starts it, not two
+        }
+        final SpellAbility aimed = LoopRunner.aimedAtPlayer(ai, mill, opp);
+        if (aimed == null || !approve.test(aimed)) {
+            return null;
+        }
+        VetoLog.note(ai, "guildmage-loop | the Guildmage mills the opponent, Mindcrank takes it from there");
+        return aimed;
     }
 
     private static SpellAbility nivMizzet(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {

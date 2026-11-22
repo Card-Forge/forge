@@ -105,6 +105,10 @@ public final class LoopRunner {
         if (breach != null) {
             return breach;
         }
+        final SpellAbility rings = StackLoops.next(ai, candidates, approve);
+        if (rings != null) {
+            return rings;
+        }
         final SpellAbility manaLoop = ManaLoopPlan.next(ai, candidates, approve);
         if (manaLoop != null) {
             return manaLoop;
@@ -192,12 +196,12 @@ public final class LoopRunner {
     }
 
     /** The ability aimed at the entity, when it can be, is under its limit, and the AI approves it. */
-    private static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
+    static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
                                       final Predicate<SpellAbility> approve) {
         return aimed(ai, sa, at, approve, RunawayLoop.LIMIT);
     }
 
-    private static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
+    static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
                                       final Predicate<SpellAbility> approve, final int limit) {
         if (sa == null) {
             return null;

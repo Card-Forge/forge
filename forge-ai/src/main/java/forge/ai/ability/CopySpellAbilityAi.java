@@ -129,6 +129,10 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         if ("TriggeredSpellAbility".equals(sa.getParam("Defined"))) {
             for (SpellAbility copied : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), "TriggeredSpellAbility", sa)) {
                 if (copied.getActivatingPlayer() != null && copied.getActivatingPlayer().equals(aiPlayer)
+                        && forge.ai.simulation.StackLoops.copyIsTheLoop(aiPlayer, copied)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // Basalt Monolith: the copy is the loop
+                }
+                if (copied.getActivatingPlayer() != null && copied.getActivatingPlayer().equals(aiPlayer)
                         && !copied.isManaAbility() && copied.getApi() != ApiType.CopySpellAbility
                         && !(SpellApiToAi.Converter.get(copied.getApi()) instanceof CannotPlayAi)
                         && !ComputerUtilCard.isCardRemAIDeck(copied.getHostCard())) {

@@ -45,7 +45,15 @@ public final class SacrificeLoopPlan {
             return yawgmoth;
         }
         final SpellAbility works = ironworks(ai, candidates, approve);
-        return works != null ? works : deathmantle(ai, candidates, approve);
+        if (works != null) {
+            return works;
+        }
+        final SpellAbility mantle = deathmantle(ai, candidates, approve);
+        if (mantle != null) {
+            return mantle;
+        }
+        final SpellAbility trader = soultrader(ai, candidates, approve);
+        return trader != null ? trader : krenko(ai, candidates, approve);
     }
 
     private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
@@ -362,5 +370,169 @@ public final class SacrificeLoopPlan {
         VetoLog.note(ai, "deathmantle-loop | the Altar takes " + victim.getName() + ", pool " + ai.getManaPool().totalMana()
                 + " of " + goal);
         return sac;
+    }
+
+    /** Gives the creature the SacMe mark that the AI's choice of a sacrifice goes by, and takes it off the others. */
+    private static void markVictim(final Player ai, final Card victim) {
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c == victim) {
+                c.setSVar("SacMe", "6");
+            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
+                c.removeSVar("SacMe");
+            }
+        }
+    }
+
+    private static Player firstOpponent(final Player ai) {
+        for (final Player opp : ai.getOpponents()) {
+            if (opp.getLife() > 0) {
+                return opp;
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Soultrader
+
+    /**
+     * Warren Soultrader with Gravecrawler and a Blood Artist (or another drain for each death): the Soultrader pays a life
+     * and the Gravecrawler for a Treasure, the Artist drains one, and the Gravecrawler is cast again from the graveyard
+     * (the Soultrader is the Zombie that allows it) with the Treasure's mana. A round is one life lost by the opponent and
+     * one gained back, for no mana. One step at a time: the Gravecrawler to the Soultrader while it is on the battlefield,
+     * the cast while it is in the graveyard and the mana for it is there.
+     */
+    private static SpellAbility soultrader(final Player ai, final List<SpellAbility> candidates,
+                                           final Predicate<SpellAbility> approve) {
+        final Card trader = LoopRunner.inPlay(ai, "Warren Soultrader");
+        if (trader == null || drainPerDeath(ai) < 1 || ai.getLife() < 2 || firstOpponent(ai) == null) {
+            return null;
+        }
+        final Card crawler = LoopRunner.inPlay(ai, "Gravecrawler");
+        if (crawler != null) {
+            final SpellAbility make = LoopRunner.activated(candidates, trader, ApiType.Token);
+            if (make == null || RunawayLoop.exceeded(make, LIMIT)) {
+                return null;
+            }
+            markVictim(ai, crawler);
+            make.setActivatingPlayer(ai);
+            make.resetTargets();
+            if (!approve.test(make)) {
+                return null;
+            }
+            VetoLog.note(ai, "soultrader-loop | the Soultrader sacrifices the Gravecrawler");
+            return make;
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host != null && sa.isSpell() && host.getName().equals("Gravecrawler") && host.isInZone(ZoneType.Graveyard)
+                    && ai.equals(host.getOwner()) && !RunawayLoop.exceeded(sa, LIMIT)) {
+                sa.setActivatingPlayer(ai);
+                sa.resetTargets();
+                if (forge.ai.ComputerUtilMana.canPayManaCost(sa, ai, 0, false) && approve.test(sa)) {
+                    VetoLog.note(ai, "soultrader-loop | the Gravecrawler is cast from the graveyard");
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Krenko
+
+    /** An ability of the AI's that sacrifices a creature for one damage to any target, and costs no mana. */
+    private static SpellAbility pinger(final Player ai, final List<SpellAbility> candidates, final Card not) {
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || sa.getHostCard() == null || sa.getHostCard() == not || !sa.isActivatedAbility()
+                    || sa.isManaAbility() || sa.getApi() != ApiType.DealDamage || sa.getPayCosts() == null
+                    || !ai.equals(sa.getHostCard().getController())) {
+                continue;
+            }
+            final forge.game.cost.Cost cost = sa.getPayCosts();
+            boolean sacrifices = false;
+            for (final forge.game.cost.CostPart part : cost.getCostParts()) {
+                sacrifices |= part instanceof forge.game.cost.CostSacrifice && part.getType() != null
+                        && part.getType().contains("Creature");
+            }
+            if (sacrifices && !cost.hasTapCost() && cost.getTotalMana().getCMC() == 0
+                    && "1".equals(sa.getParamOrDefault("NumDmg", ""))) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Krenko, Mob Boss with a Thornbite Staff on it and a sacrifice outlet that pings for one (Goblin Bombardment): Krenko
+     * taps for as many Goblins as there are, a Goblin goes to the outlet (the opponent loses a life), the Staff untaps
+     * Krenko as the creature dies, and round again: the Goblins double every round. With as many tokens as the opponent
+     * has life the outlet takes them all. The Staff alone does not go round: Krenko is tapped when it is needed, so the
+     * death has to come from an outlet of the AI's own.
+     */
+    private static SpellAbility krenko(final Player ai, final List<SpellAbility> candidates,
+                                       final Predicate<SpellAbility> approve) {
+        final Card krenko = LoopRunner.inPlay(ai, "Krenko, Mob Boss");
+        final Card staff = LoopRunner.inPlay(ai, "Thornbite Staff");
+        final Player opp = firstOpponent(ai);
+        if (krenko == null || staff == null || opp == null) {
+            return null;
+        }
+        boolean equipped = false;
+        for (final Card c : krenko.getEquippedBy()) {
+            equipped |= c == staff;
+        }
+        if (!equipped) {
+            for (final SpellAbility sa : candidates) {
+                if (sa != null && sa.getHostCard() == staff && sa.isEquip()) {
+                    sa.setActivatingPlayer(ai);
+                    sa.resetTargets();
+                    if (!sa.canTarget(krenko) || RunawayLoop.exceeded(sa, 4)) {
+                        return null;
+                    }
+                    sa.getTargets().add(krenko);
+                    if (approve.test(sa)) {
+                        VetoLog.note(ai, "krenko-loop | the Thornbite Staff goes on Krenko");
+                        return sa;
+                    }
+                    return null;
+                }
+            }
+            return null;
+        }
+        final SpellAbility outlet = pinger(ai, candidates, krenko);
+        if (outlet == null) {
+            return null;
+        }
+        Card token = null;
+        int tokens = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != krenko && c.isCreature() && c.isToken() && c.getType().hasCreatureType("Goblin")) {
+                tokens++;
+                token = c;
+            }
+        }
+        final boolean lethal = tokens >= opp.getLife();
+        if (token != null && (lethal || krenko.isTapped())) {
+            markVictim(ai, token);
+            final SpellAbility pings = LoopRunner.aimed(ai, outlet, opp, approve, LIMIT);
+            if (pings != null) {
+                VetoLog.note(ai, "krenko-loop | a Goblin to the outlet, " + tokens + " against " + opp.getLife());
+                return pings;
+            }
+            return null;
+        }
+        if (krenko.isTapped() || krenko.isSick()) {
+            return null;
+        }
+        final SpellAbility make = LoopRunner.activated(candidates, krenko, ApiType.Token);
+        if (make == null || RunawayLoop.exceeded(make, LIMIT)) {
+            return null;
+        }
+        make.setActivatingPlayer(ai);
+        make.resetTargets();
+        if (!approve.test(make)) {
+            return null;
+        }
+        VetoLog.note(ai, "krenko-loop | Krenko doubles the Goblins, " + tokens + " against " + opp.getLife());
+        return make;
     }
 }
