@@ -36,6 +36,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
@@ -44,8 +45,8 @@ import forge.view.FFrame;
 import forge.view.arcane.util.CardPanelMouseAdapter;
 
 /**
- * Lets the player move cards to the top or bottom of their library. Only the moveable cards are shown, in a section for
- * each end. Clicking a card moves it to the other section, and dragging places it.
+ * Lets the player sort cards into the top of their library and a second pile. Only the moveable cards are shown, in a
+ * section for each pile. Clicking a card moves it to the other section, and dragging places it.
  */
 public class ListCardArea extends FloatingCardArea {
 
@@ -61,6 +62,7 @@ public class ListCardArea extends FloatingCardArea {
     private final List<CardView> bottomSection = new ArrayList<>();
     private final List<CardView> otherCards = new ArrayList<>();
 
+    private ZoneType secondPile;
     private int dividerY;
 
     private ListCardArea(final CMatchUI matchUI) {
@@ -76,11 +78,12 @@ public class ListCardArea extends FloatingCardArea {
         setDragEnabled(true);
     }
 
-    public static ListCardArea show(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards) {
+    public static ListCardArea show(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
         if (storedArea == null || storedArea.getMatchUI() != matchUI) {
             storedArea = new ListCardArea(matchUI);
         }
         storedArea.title = title;
+        storedArea.secondPile = secondPile;
         storedArea.setCards(cards, moveableCards);
         storedArea.showWindow();
         return storedArea;
@@ -217,10 +220,14 @@ public class ListCardArea extends FloatingCardArea {
         FSkin.setGraphicsFont(g2, FSkin.getBoldFont(13));
         FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
         drawCentered(g2, localizer.getMessage("lblTopOfLibrary"), GUTTER_Y + HEADER_HEIGHT / 2);
-        drawCentered(g2, localizer.getMessage("lblBottomOfLibrary"), dividerY + DIVIDER_GAP + HEADER_HEIGHT / 2);
+        drawCentered(g2, localizer.getMessage(secondPile == ZoneType.Library ? "lblBottomOfLibrary" : "lblGraveyard"), dividerY + DIVIDER_GAP + HEADER_HEIGHT / 2);
 
         FSkin.setGraphicsFont(g2, FSkin.getFont(12));
         FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        if (secondPile != ZoneType.Library) {
+            g2.drawLine(GUTTER_X, dividerY, getWidth() - GUTTER_X, dividerY);
+            return;
+        }
         final String dividerText = localizer.getMessage("lblOtherCardsInLibrary", otherCards.size());
         final int lineEnd = (getWidth() - g2.getFontMetrics().stringWidth(dividerText)) / 2 - DIVIDER_TEXT_GAP;
         g2.drawLine(GUTTER_X, dividerY, lineEnd, dividerY);

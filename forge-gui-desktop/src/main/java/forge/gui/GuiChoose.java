@@ -20,6 +20,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -271,12 +272,12 @@ public class GuiChoose {
         return new OrderResult<>(null, false);
     }
 
-    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable) {
+    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final ZoneType secondPile) {
         @SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
         final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
             @Override
             public List<CardView> call()  {
-                return ListCardArea.show(gui, title, cards, manipulable).getArrangedCards();
+                return ListCardArea.show(gui, title, cards, manipulable, secondPile).getArrangedCards();
             }
         };
         final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
