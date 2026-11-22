@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:Flash
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 Oracle:Flash\nEnchant creature\nEnchanted creature has flying.

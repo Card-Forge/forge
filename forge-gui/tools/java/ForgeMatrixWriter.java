@@ -71,7 +71,8 @@ public final class ForgeMatrixWriter {
                 true,
                 false,
                 false,
-                false);
+                false,
+                null);
 
         HashMap<String, List<Map.Entry<PaperCard, Integer>>> matrix = new HashMap<>();
         int rows = 0;
@@ -156,6 +157,7 @@ public final class ForgeMatrixWriter {
         @Override public boolean isRunningOnDesktop() { return true; }
         @Override public boolean isLibgdxPort() { return false; }
         @Override public String getCurrentVersion() { return "headless"; }
+        @Override public String getUserAgent() { return "Forge/" + forge.util.BuildInfo.getVersionString() + " (matrix-writer)"; }
         @Override public void invokeInEdtNow(Runnable runnable) { runnable.run(); }
         @Override public void invokeInEdtLater(Runnable runnable) { runnable.run(); }
         @Override public void invokeInEdtAndWait(Runnable proc) { proc.run(); }

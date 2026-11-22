@@ -5,8 +5,11 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.match.LobbySlotType;
+import forge.util.LogSafe;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public final class UpdateLobbyPlayerEvent implements NetEvent {
@@ -203,5 +206,23 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public String getAiProfile() {
         return aiProfile;
+    }
+
+    @Override
+    public String toString() {
+        final List<String> set = new ArrayList<>();
+        if (type != null) { set.add("type=" + type); }
+        if (name != null) { set.add("name=" + LogSafe.forLog(name)); }
+        if (avatarIndex != -1) { set.add("avatar=" + avatarIndex); }
+        if (sleeveIndex != -1) { set.add("sleeve=" + sleeveIndex); }
+        if (team != -1) { set.add("team=" + team); }
+        if (isArchenemy != null) { set.add("archenemy=" + isArchenemy); }
+        if (isReady != null) { set.add("ready=" + isReady); }
+        if (isDevMode != null) { set.add("devMode=" + isDevMode); }
+        if (deck != null) { set.add("deck=" + LogSafe.forLog(deck.getName())); }
+        if (section != null) { set.add(section + "=" + (cards == null ? 0 : cards.countAll()) + " cards"); }
+        if (DeckName != null) { set.add("deckName=" + LogSafe.forLog(DeckName)); }
+        if (aiProfile != null) { set.add("aiProfile=" + LogSafe.forLog(aiProfile)); }
+        return "UpdateLobbyPlayer: " + String.join(", ", set);
     }
 }

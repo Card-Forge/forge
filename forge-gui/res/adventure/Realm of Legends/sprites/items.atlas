@@ -21,8 +21,211 @@ Emerald
 Ivory
   xy: 0, 640
   size: 16, 16
+ArmorofWak-Wak
+  xy: 96, 80
+  size: 16, 16
+GladiatorArmor
+  xy: 160, 112
+  size: 16, 16
+ArmorofSafety
+  xy: 256, 48
+  size: 16, 16
+ArmorofSorrow
+  xy: 208, 0
+  size: 16, 16
+IcyArmor
+  xy: 176, 48
+  size: 16, 16
+OasisOutfit
+  xy: 288, 80
+  size: 16, 16
+RainbowArmor
+  xy: 192, 64
+  size: 16, 16
+Adventurer'sOutfit
+  xy: 64, 80
+  size: 16, 16
+ArmorofSerra
+  xy: 288, 0
+  size: 16, 16
+UnholyArmor
+  xy: 256, 96
+  size: 16, 16
+Seafarer'sOutfit
+  xy: 80, 80
+  size: 16, 16
+StrongholdArmor
+  xy: 160, 80
+  size: 16, 16
+HorriblePants
+  xy: 96, 464
+  size: 16, 16
+AysenArmor
+  xy: 224, 112
+  size: 16, 16
+An-HavvaArmor
+  xy: 256, 80
+  size: 16, 16
+SengirCloak
+  xy: 128, 32
+  size: 16, 16
+Wizard'sRobe
+  xy: 128, 0
+  size: 16, 16
+TokenoftheDevil
+  xy: 160, 624
+  size: 16, 16
+TokenofMunitions
+  xy: 128, 544
+  size: 16, 16
+TokenofChange
+  xy: 288, 640
+  size: 16, 16
+TokenofNinjutsu
+  xy: 176, 304
+  size: 16, 16
+TokenofGold
+  xy: 176, 928
+  size: 16, 16
+Didgeridoo
+  xy: 240, 976
+  size: 16, 16
+CrabHat
+  xy: 96, 304
+  size: 16, 16
+VectisBoots
+  xy: 96, 176
+  size: 16, 16
+BaneAlleyBoots
+  xy: 32, 96
+  size: 16, 16
+SwindlerShoes
+  xy: 128, 96
+  size: 16, 16
+HighMerchant'sShirt
+  xy: 368, 32
+  size: 16, 16
+ThrowingKnife
+  xy: 176, 320
+  size: 16, 16
+WhispersteelDagger
+  xy: 192, 352
+  size: 16, 16
+ThoughtDissector
+  xy: 160, 592
+  size: 16, 16
+Skulker'sHood
+  xy: 48, 400
+  size: 16, 16
+VexingBoots
+  xy: 0, 176
+  size: 16, 16
+SphinxHelm
+  xy: 144, 352
+  size: 16, 16
+Veteran'sBlade
+  xy: 208, 656
+  size: 16, 16
+Soldier'sHelm
+  xy: 32, 304
+  size: 16, 16
+ArmorofHorrors
+  xy: 160, 64
+  size: 16, 16
+Blor'sBow
+  xy: 224, 464
+  size: 16, 16
+Blor'sShield
+  xy: 256, 160
+  size: 16, 16
+BrushwaggBoots
+  xy: 48, 128
+  size: 16, 16
+BruteShield
+  xy: 240, 144
+  size: 16, 16
+SneaklingShoes
+  xy: 96, 112
+  size: 16, 16
+NecklaceofFlourishing
+  xy: 64, 880
+  size: 16, 16
+ScoriaAnklet
+  xy: 96, 928
+  size: 16, 16
+ArmorofSands
+  xy: 240, 112
+  size: 16, 16
+Jandor'sSaddlebags
+  xy: 48, 512
+  size: 16, 16
+Jester'sCap
+  xy: 80, 400
+  size: 16, 16
+KoskunArmor
+  xy: 176, 112
+  size: 16, 16
+Forebear'sBlade
+  xy: 256, 752
+  size: 16, 16
+MostlyKitten-ProofPants
+  xy: 0, 480
+  size: 16, 16
+Hero'sHeirloom
+  xy: 304, 736
+GraduationCap
+  xy: 304, 832
+  size: 16, 16
+SoltariSkirt
+  xy: 80, 464
+  size: 16, 16
+GateSmasher
+  xy: 208, 368
+  size: 16, 16
+RiotHelm
+  xy: 0, 336
+  size: 16, 16
+ScrolloftheMasters
+  xy: 208, 944
+  size: 16, 16
+TimeBomb
+  xy: 304, 928
+  size: 16, 16
+MindSculptorNecklace
+  xy: 80, 784
+  size: 16, 16
+DeathbringerNecklace
+  xy: 48, 816
+  size: 16, 16
+HealerNecklace
+  xy: 48, 848
+  size: 16, 16
+WarlordNecklace
+  xy: 112, 832
+  size: 16, 16
+ParadoxNecklace
+  xy: 32, 832
+  size: 16, 16
+Thief'sHat
+  xy: 48, 400
+  size: 16, 16
+SpitefulHelm
+  xy: 80, 368
+  size: 16, 16
+FulcrumGauntlet
+  xy: 16, 240
+  size: 16, 16
+PantsoftheFattestButt
+  xy: 32, 480
+  size: 16, 16
+DecayedPants
+  xy: 128, 480
+  size: 16, 16
 Cragflame
   xy: 288, 656
+  size: 16, 16
+Soothsayer'sHat
+  xy: 272, 832
   size: 16, 16
 Jade
   xy: 16, 640
@@ -38,6 +241,9 @@ ManaforceMace
   size: 16, 16
 Shadowspear
   xy: 256, 560
+  size: 16, 16
+CommandersSphere
+  xy: 48, 544
   size: 16, 16
 HeirloomBlade
   xy: 192, 656
@@ -949,7 +1155,7 @@ JoustingLance
   xy: 304, 528
   size: 16, 16
 Fblthp'sLostFishingPole
-  xy: 304, 576
+  xy: 208, 976
   size: 16, 16
 RamosianGreatsword
   xy: 304, 720

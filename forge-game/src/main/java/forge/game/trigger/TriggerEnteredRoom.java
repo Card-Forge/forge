@@ -26,8 +26,8 @@ public class TriggerEnteredRoom extends Trigger {
     }
 
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.RoomName);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.RoomName);
     }
 
     public String getImportantStackObjects(SpellAbility sa) {

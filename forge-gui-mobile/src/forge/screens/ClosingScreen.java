@@ -18,6 +18,7 @@ public class ClosingScreen extends FContainer {
     private BGAnimation bgAnimation;
     private StaticAnimation staticAnimation;
     private boolean restart = false;
+    private boolean ended = false;
     private boolean drawStatic = false;
     private FileHandle adv_logo = getSkinFile("adv_logo.png");
     private FileHandle existingLogo = adv_logo.exists() ? adv_logo : getDefaultSkinFile("adv_logo.png");
@@ -73,6 +74,7 @@ public class ClosingScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
+            ended = true;
             if (restart)
                 Forge.getDeviceAdapter().restart();
             else
@@ -120,6 +122,8 @@ public class ClosingScreen extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (ended)
+            return;
         //fix overlay showing on closing screen animation
         FOverlay.hideAll();
         if (drawStatic) {

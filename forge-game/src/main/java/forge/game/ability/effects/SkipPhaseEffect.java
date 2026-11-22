@@ -41,7 +41,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         final String phase = sa.getParam("Phase");
         final String step = sa.getParam("Step");
 
-        for (final Player player : getTargetPlayers(sa)) {
+        for (final Player player : getTargetPlayersOnePerTeam(sa)) {
             createSkipPhaseEffect(sa, player, duration, phase, step);
         }
     }
@@ -75,12 +75,10 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         }
         if (duration == null) {
             sb.append(".");
+        } else if (game.getPhaseHandler().isPlayerTurn(player)) {
+            sb.append(" of this turn.");
         } else {
-            if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
-                sb.append(" of this turn.");
-            } else {
-                sb.append(" of your next turn.");
-            }
+            sb.append(" of your next turn.");
         }
 
         final String repeffstr = sb.toString();

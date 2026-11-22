@@ -22,6 +22,7 @@ public abstract class Achievement {
     private final int commonThreshold, uncommonThreshold, rareThreshold, mythicThreshold;
     private final boolean checkGreaterThan;
     protected final int defaultValue;
+    private boolean hidden;
     private ISkinImage image;
     private long timestamp;
     private int best;
@@ -73,6 +74,14 @@ public abstract class Achievement {
     public String getMythicDesc() {
         return mythicDesc;
     }
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden0) {
+        hidden = hidden0;
+    }
+
     public ISkinImage getImage() {
         if (image == null) {
             updateTrophyImage();
@@ -155,7 +164,8 @@ public abstract class Achievement {
                 background = FSkinProp.IMG_COMMON_TROPHY;
             }
         }
-        image = GuiBase.getInterface().createLayeredImage((PaperCard) getPaperCard(), background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
+        PaperCard card = hidden && !isActive() ? null : (PaperCard) getPaperCard();
+        image = GuiBase.getInterface().createLayeredImage(card, background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
     public int update(final Player player) {

@@ -1,0 +1,8 @@
+Name:Hall of Echoes
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Clone | Cost$ 5 | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | Duration$ UntilEndOfTurn | SubAbility$ DBEffect | SpellDescription$ This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ LegendPermission
+SVar:LegendPermission:Mode$ IgnoreLegendRule | ValidCard$ Permanent.YouCtrl | Description$ The "legend rule" doesn't apply to permanents you control this turn.
+Oracle:{T}: Add {C}.\n{5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.

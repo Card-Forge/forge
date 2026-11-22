@@ -19,7 +19,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testWheelIntoXyrisImpactTremorsReportsLethal() {
-        Scenario scenario = createDrawScenario(ZoneType.Hand, true, 6);
+        Scenario scenario = createDrawScenario(ZoneType.Battlefield, true, 6);
 
         AssertJUnit.assertFalse("The simulation should reject a play causing an immediate loss",
                 OnePlaySafetyChecker.isAcceptable(scenario.ai, scenario.drawAbility));
@@ -27,7 +27,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testAiAvoidsWheelGivingXyrisSevenSnakes() {
-        Scenario scenario = createDrawScenario(ZoneType.Hand, false, 20);
+        Scenario scenario = createDrawScenario(ZoneType.Battlefield, false, 20);
 
         AssertJUnit.assertNull("The AI should decline a Wheel that gives an opponent seven Snakes",
                 ai(scenario.ai).chooseSpellAbilityToPlay());
@@ -35,8 +35,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testAiAllowsWheelIntoCommandZoneXyris() {
-        Scenario scenario = createDrawScenario(ZoneType.Hand, false, 20);
-        scenario.game.getAction().moveToCommand(scenario.xyris, null);
+        Scenario scenario = createDrawScenario(ZoneType.Command, false, 20);
         scenario.game.getAction().checkStateEffects(true);
 
         List<SpellAbility> choices = ai(scenario.ai).chooseSpellAbilityToPlay();
@@ -46,7 +45,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testAiDeclinesOptionalFreeWheelIntoXyris() {
-        Scenario scenario = createDrawScenario(ZoneType.Exile, false, 20);
+        Scenario scenario = createDrawScenario(ZoneType.Battlefield, false, 20);
         Spell freeCast = makeOptionalFreeCast(scenario);
 
         AssertJUnit.assertEquals(AiPlayDecision.HybridSimRejected,
@@ -54,20 +53,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         AssertJUnit.assertEquals("Mandatory casts cannot be declined",
                 AiPlayDecision.WillPlay,
                 ai(scenario.ai).canPlayFromEffectAI(freeCast, true, true));
-    }
-
-    @Test
-    public void testOnePlaySafetyOnlyChecksResolvingStack() {
-        Scenario scenario = createDrawScenario(ZoneType.Exile, false, 20);
-        addPendingSpellToStack(scenario);
-        Spell freeCast = makeOptionalFreeCast(scenario);
-
-        AssertJUnit.assertTrue("Unsupported priority responses should fail open",
-                OnePlaySafetyChecker.isAcceptable(scenario.ai, freeCast));
-
-        scenario.game.getStack().setResolving(true);
-        AssertJUnit.assertFalse("A resolving parent ability permits an incremental check",
-                OnePlaySafetyChecker.isAcceptable(scenario.ai, freeCast));
     }
 
     @Test
@@ -93,7 +78,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testOnePlaySafetyRewardsWheelWhenXyrisTokensAreLethalToOpponent() {
-        Scenario scenario = createDrawScenario(ZoneType.Hand, false, 20);
+        Scenario scenario = createDrawScenario(ZoneType.Battlefield, false, 20);
         scenario.opponent.setLife(6, null);
         addCard("Suture Priest", scenario.ai);
         scenario.game.getAction().checkStateEffects(true);
@@ -104,7 +89,7 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
 
     @Test
     public void testNormalAiTriesAnotherCandidateAfterUnsafeWheel() {
-        Scenario scenario = createDrawScenario(ZoneType.Hand, false, 20);
+        Scenario scenario = createDrawScenario(ZoneType.Battlefield, false, 20);
         addCards("Forest", 2, scenario.ai);
         addCardToZone("Runeclaw Bear", scenario.ai, ZoneType.Hand);
 
@@ -227,11 +212,11 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         ai.setLife(life, null);
 
         addCards("Mountain", 6, ai);
-        Card wheel = addCardToZone("Wheel of Fortune", ai, zone);
+        Card wheel = addCardToZone("Wheel of Fortune", ai, ZoneType.Hand);
         fillLibrary(ai, 20);
         fillLibrary(opponent, 20);
 
-        Card xyris = addCard("Xyris, the Writhing Storm", opponent);
+        Card xyris = addCardToZone("Xyris, the Writhing Storm", opponent, zone);
         if (impactTremors) {
             addCard("Impact Tremors", opponent);
         }

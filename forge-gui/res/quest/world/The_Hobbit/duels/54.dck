@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Air-Walker
+Title=Air-Walker
+Icon=Air-Walker.jpg
+Difficulty=Hard
+Description=./Modern/The_Hobbit/Riftbound_-_UrzaTron_(Modern,_#892618).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+2 Ulamog, the Ceaseless Hunger
+4 Sowing Mycospawn
+2 Dismember
+4 Talisman of Resilience
+3 Giant's Boulder
+4 Ugin, Eye of the Storms
+4 Kozilek's Command
+4 Eldrazi Temple
+4 Karn, the Great Creator
+4 Expedition Map
+4 Urza's Mine
+4 Urza's Tower
+4 Ugin's Labyrinth
+4 Urza's Power Plant
+2 Trinisphere
+1 Abstergo Entertainment
+2 Forest
+[Sideboard]
+1 Trinisphere
+1 Liquimetal Coating
+2 Cursed Totem
+1 Disruptor Flute
+2 Grafdigger's Cage
+1 Extinguisher Battleship
+1 Ensnaring Bridge
+1 Haywire Mite
+1 Chalice of the Void
+1 The Filigree Sylex
+1 Tormod's Crypt
+1 Walking Ballista
+1 The Stone Brain

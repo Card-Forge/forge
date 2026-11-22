@@ -2,7 +2,7 @@ Name:Grim Strider
 ManaCost:3 B
 Types:Creature Horror
 PT:6/6
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
 SVar:X:Count$ValidHand Card.YouOwn
 SVar:NeedsToPlayVar:X LE5
 SVar:BuffedBy:Card

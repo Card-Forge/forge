@@ -41,18 +41,29 @@ public class ChooseColorEffect extends SpellAbilityEffect {
         List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
         if (sa.hasParam("Choices")) {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
-            colorChoices = Arrays.asList(restrictedChoices);
+            colorChoices = new ArrayList<>(Arrays.asList(restrictedChoices));
         }
         if (sa.hasParam("ColorsFrom")) {
             ColorSet cs = CardUtil.getColorsFromCards(AbilityUtils.getDefinedCards(card, sa.getParam("ColorsFrom"), sa));
             if (cs.isColorless()) {
                 return;
             }
-            colorChoices = cs.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
+            colorChoices = cs.stream().map(Object::toString).map(String::toLowerCase).collect(Collectors.toCollection(ArrayList::new));
         }
         if (sa.hasParam("Exclude")) {
             for (String s : sa.getParam("Exclude").split(",")) {
                 colorChoices.remove(s);
+            }
+        }
+        if (sa.hasParam("ExcludeColorsFrom")) {
+            ColorSet cs = CardUtil.getColorsFromCards(AbilityUtils.getDefinedCards(card, sa.getParam("ExcludeColorsFrom"), sa));
+            if (!cs.isColorless()) {
+                for (String s : cs.stream().map(Object::toString).map(String::toLowerCase).collect(Collectors.toCollection(ArrayList::new))) {
+                    colorChoices.remove(s);
+                }
+                if (colorChoices.isEmpty()) {
+                    return;
+                }
             }
         }
 

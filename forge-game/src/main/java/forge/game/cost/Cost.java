@@ -77,6 +77,14 @@ public class Cost implements Serializable {
     public final boolean isFree() {
         return isOnlyManaCost() && getTotalMana().isZero();
     }
+
+    /**
+     * CR 605.1a: true when paying this cost moves any card to or from a library.
+     */
+    public final boolean movesCardToOrFromLibrary() {
+        return LibraryMovementCostVisitor.movesCardToOrFromLibrary(this);
+    }
+
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
@@ -943,7 +951,10 @@ public class Cost implements Serializable {
         if (1 != i) {
             String [] typewords = type.split(" ");
             String lastWord = typewords[typewords.length - 1];
-            sb.append(CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
+            // a script that already wrote the plural ("untapYType<15/Creature.YouCtrl/creatures>") is not pluralized twice
+            final boolean plural = lastWord.endsWith("s") && !lastWord.endsWith("us") && !lastWord.endsWith("ss")
+                    && !CardType.isASubType(lastWord);
+            sb.append(plural ? type : CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
                     : type + "s");
         } else {
             sb.append(type);
@@ -1009,7 +1020,8 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
-                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend());
+                // a cost increase does not change how much of a waterbend cost can be paid by tapping
+                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend() != null ? mPart.getMaxWaterbend() : mPartOld.getMaxWaterbend());
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||

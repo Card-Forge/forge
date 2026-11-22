@@ -3,6 +3,7 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.token.TokenDb;
 import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -228,12 +230,46 @@ public class DeckHints {
             }
             for (String tok : card.getTokens()) {
                 // unfortunately this doesn't include keyworded ones yet
-                if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).test(tdb.getToken(tok).getRules())) {
+                if (tdb == null || !tdb.containsRule(tok)) {
+                    continue;
+                }
+                CardRules tokenRules = getTokenRules(tdb, tok);
+                if (tokenRules != null && rulesWithTokens(predicate).test(tokenRules)) {
                     return true;
                 }
             }
             return false;
         };
+    }
+
+    // Resolving a PaperToken is comparatively expensive (edition lookups, string formatting, random art pick), and
+    // AI deck building asks for the same few token rules for every pair of cards it compares. The rules of a token
+    // never depend on which printing is picked, so they are resolved once per token name.
+    private static final Map<String, CardRules> TOKEN_RULES_CACHE = new ConcurrentHashMap<>();
+    private static volatile TokenDb tokenRulesCacheOwner = null;
+
+    private static CardRules getTokenRules(final TokenDb tdb, final String tokenName) {
+        if (tokenRulesCacheOwner != tdb) {
+            synchronized (TOKEN_RULES_CACHE) {
+                if (tokenRulesCacheOwner != tdb) {
+                    // a different token database was loaded (e.g. data reload), drop what belongs to the old one
+                    TOKEN_RULES_CACHE.clear();
+                    tokenRulesCacheOwner = tdb;
+                }
+            }
+        }
+        CardRules rules = TOKEN_RULES_CACHE.get(tokenName);
+        if (rules == null) {
+            PaperToken token = tdb.getToken(tokenName);
+            if (token == null) {
+                return null;
+            }
+            rules = token.getRules();
+            if (rules != null) {
+                TOKEN_RULES_CACHE.put(tokenName, rules);
+            }
+        }
+        return rules;
     }
 
 }

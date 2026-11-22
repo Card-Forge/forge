@@ -75,6 +75,19 @@ import forge.game.zone.ZoneType;
  * @version $Id$
  */
 public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable, Comparable<SpellAbility> {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AlternateCost", "Announce", "Boast", "CantCopy", "CostDesc", "DividedAsYouChoose",
+        "Exhaust", "IsCurse", "ManaRestriction", "MaxTotalTargetCMC", "MaxTotalTargetPower",
+        "Monstrosity", "Planeswalker", "PowerUp", "PrecostDesc",
+        "TargetType", "TargetingPlayer", "TargetingPlayerControls",
+        "TargetsWithControllerProperty", "TargetsWithDefinedController",
+        "TargetsWithRelatedProperty", "TargetsWithSharedCardType", "TargetsWithSharedTypes",
+        "ValidAfterStack", "WithoutManaCost", "XColor",
+    };
+    public static final String[] INTERNAL_PARAMS = {
+        "CloakUp", "CumulativeUpkeep", "DisguiseUp", "ManifestUp", "MorphUp", "Unlock",
+    };
+
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
@@ -218,9 +231,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final int getId() {
         return id;
     }
+    private static final int CLASS_HASH = SpellAbility.class.hashCode();
     @Override
     public int hashCode() {
-        return Objects.hash(SpellAbility.class, getId());
+        return 31 * (31 + CLASS_HASH) + getId();
     }
     @Override
     public boolean equals(final Object obj) {
@@ -338,7 +352,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         int result = 0;
         AbilityManaPart mp = getManaPart();
         if (mp != null && metConditions()) {
-            int amount = hasParam("Amount") ? AbilityUtils.calculateAmount(getHostCard(), getParam("Amount"), this) : 1;
+            int amount = mp.amountIfChosen(this, mp.choosesColorOnResolution(this) ? MagicColor.fromName(mp.getExpressChoice()) : 0);
 
             if (!multiply || mp.isAnyMana() || mp.isComboMana() || mp.isSpecialMana()) {
                 result += amount;
@@ -409,14 +423,33 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
+        // CR 605.1a: not a mana ability if paying for it moves a card to or from a library.
+        // Only the root ability's cost is inspected because sub-abilities carry no cost of their
+        // own, an assumption the engine makes elsewhere too, see getCostDescription().
+        final Cost cost = getPayCosts();
+        if (cost != null && cost.movesCardToOrFromLibrary()) {
+            return false;
+        }
+
+        // The whole chain is walked even after a mana part turns up, because CR 605.1a also
+        // disqualifies the ability when a later sub-ability moves a card to or from a library.
+        // Chromatic Sphere is the example: the mana part is on the root, the draw is a sub-ability.
+        //
+        // What each effect answers is fixed by the card script, not by the current board. That is
+        // deliberate: CR 605.1a says to disregard replacement effects other than self-replacement
+        // effects, so whether an ability is a mana ability must not change from turn to turn.
+        boolean addsMana = false;
         SpellAbility tail = this;
         while (tail != null) {
             if (tail.manaPart != null) {
-                return true;
+                addsMana = true;
+            }
+            if (tail.getApi() != null && tail.getApi().getSpellEffect().movesCardToOrFromLibrary(tail)) {
+                return false;
             }
             tail = tail.getSubAbility();
         }
-        return false;
+        return addsMana;
     }
 
     public final void setManaPart(AbilityManaPart manaPart0) {
@@ -783,6 +816,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isOmen() {
         return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Omen");
     }
+    public boolean isVengeance() {
+        return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Vengeance");
+    }
 
     public final boolean isCurse() {
         return hasParam("IsCurse");
@@ -800,10 +836,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPayCosts(final Cost abCost) {
         payCosts = abCost;
-    }
-
-    public boolean costHasX() {
-        return getPayCosts().hasXInAnyCostPart();
     }
 
     public boolean costHasManaX() {
@@ -961,14 +993,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggeringObjects.put(type, o);
     }
 
-    public void setTriggeringObjectsFrom(final Map<AbilityKey, Object> runParams, final AbilityKey... types) {
-        for (AbilityKey type : types) {
-            if (runParams.containsKey(type)) {
-                triggeringObjects.put(type, runParams.get(type));
-            }
-        }
-    }
-
     public boolean hasTriggeringObject(final AbilityKey type) {
         return triggeringObjects.containsKey(type);
     }
@@ -998,14 +1022,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void resetOnceResolved() {
-        //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.
-        // Is it truly necessary at this point? The paid hash seems to be reset on all SA instance operations.
-        // Epic spell keeps original targets
-        if (!this.getHostCard().hasKeyword(Keyword.EPIC)) {
-            resetTargets();
-        }
         resetTriggeringObjects();
-
         if (isActivatedAbility()) {
             setXManaCostPaid(null);
         }
@@ -1338,7 +1355,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return triggerObj;
     }
-
     public void setTrigger(final Trigger t) {
         triggerObj = t;
     }
@@ -1699,6 +1715,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isUndoable() {
         return undoable && payCosts.isUndoable() && getHostCard().isInPlay();
     }
+    public void setUndoable(boolean b) {
+        undoable = b;
+    }
 
     public boolean undo() {
         if (isUndoable() && getActivatingPlayer().getManaPool().accountFor(getManaPart())) {
@@ -1706,10 +1725,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
         return false;
-    }
-
-    public void setUndoable(boolean b) {
-        undoable = b;
     }
 
     public boolean isCastFromPlayEffect() {
@@ -2149,6 +2164,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 } else {
                     targetingPlayer = getActivatingPlayer();
                 }
+                if (targetingPlayer == null) {
+                    // nobody to choose the targets, so they cannot be chosen
+                    return false;
+                }
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
@@ -2395,14 +2414,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
         } else {
             String mana = manaPart.mana(this);
-            if (!mana.equals("Any")) {
+            if (mana.equals("Any")) {
+                score += 7;
+            } else {
                 score += mana.length();
                 if (!canProduce("C")) {
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }
-            } else {
-                score += 7;
             }
         }
 
@@ -2433,8 +2452,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // If the primary ability has a sub, it's probably "more expensive"
             score += 2;
         }
+        if (payCosts != null && payCosts.hasTapCost() && hostCard != null) {
+            for (final Trigger t : hostCard.getTriggers()) {
+                if ((t.getMode() == TriggerType.Taps || t.getMode() == TriggerType.TapsForMana)
+                        && hurtsController(t.getOverridingAbility())) {
+                    score += 10;
+                }
+            }
+        }
 
         return score;
+    }
+
+    private static boolean hurtsController(final SpellAbility sa) {
+        return sa != null
+                && (sa.getApi() == ApiType.DealDamage || sa.getApi() == ApiType.LoseLife)
+                && "You".equals(sa.getParamOrDefault("Defined", ""));
     }
 
     public CardDamageTable getDamageMap() {
@@ -2585,20 +2618,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
 
-        if (activator.canCastSorcery() || withFlash(host, activator)) {
+        // Activated Abilities are instant speed per default, except Planeswalker abilities
+        if (isActivatedAbility() && !isPwAbility() && !getRestrictions().isSorcerySpeed()) {
             return true;
         }
 
-        // spells per default are sorcerySpeed
-        if (isSpell()) {
-            return false;
-        }
-
-        if (isActivatedAbility()) {
-            // Activated Abilities are instant speed per default, except Planeswalker abilities
-            return !isPwAbility() && !getRestrictions().isSorcerySpeed();
-        }
-        return true;
+        return activator.canCastSorcery() || withFlash(host, activator);
     }
 
     public boolean withFlash(Card host, Player activator) {

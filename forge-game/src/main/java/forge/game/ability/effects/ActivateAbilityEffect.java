@@ -14,7 +14,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.collect.FCollection;
 
 public class ActivateAbilityEffect extends SpellAbilityEffect {
     @Override
@@ -46,7 +45,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
             for (Card c : list) {
                 List<SpellAbility> possibleAb = c.getAllPossibleAbilities(p, true);
                 if (isManaAb) {
-                    possibleAb.retainAll((FCollection<SpellAbility>)c.getManaAbilities());
+                    possibleAb.retainAll(c.getManaAbilities());
                 }
                 if (possibleAb.isEmpty()) {
                     continue;

@@ -1,0 +1,7 @@
+Name:Federation Resupply
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura,Equipment,Spacecraft | SpellDescription$ Search your library for an Aura, Equipment, or Spacecraft card, reveal it, put it into your hand, then shuffle.
+K:Beam me up:3 W
+DeckHints:Type$Aura|Equipment|Spacecraft
+Oracle:Search your library for an Aura, Equipment, or Spacecraft card, reveal it, put it into your hand, then shuffle.\nBeam me up {3}{W} (You may cast this card from your graveyard for {3}{W} if you also return a creature you control to its owner's hand. Then exile this spell.)

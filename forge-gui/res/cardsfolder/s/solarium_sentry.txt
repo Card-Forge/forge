@@ -1,0 +1,7 @@
+Name:Solarium Sentry
+ManaCost:G W
+Types:Creature Cat Soldier
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.cmcLE2 | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent casts a spell with mana value 2 or less, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever an opponent casts a spell with mana value 2 or less, you gain 2 life.

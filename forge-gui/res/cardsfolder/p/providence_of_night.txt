@@ -1,0 +1,8 @@
+Name:Providence of Night
+ManaCost:WU UB BR RG GW
+Types:Legendary Creature Spirit Avatar
+PT:5/5
+K:Protection:Card.MonoColor:monocolored
+T:Mode$ SpellCast | ValidCard$ Card.CostsHybridMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a spell with hybrid mana in its mana cost, copy it. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Protection from monocolored\nWhenever you cast a spell with hybrid mana in its mana cost, copy it. You may choose new targets for the copy.

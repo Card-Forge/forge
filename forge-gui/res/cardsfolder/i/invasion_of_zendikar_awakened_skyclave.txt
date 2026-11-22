@@ -16,6 +16,6 @@ Types:Creature Elemental
 PT:4/4
 K:Vigilance
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self | AddType$ Land | Description$ As long as CARDNAME is on the battlefield, it's a land in addition to its other types.
+S:Mode$ Continuous | AffectedDefined$ Self | AddType$ Land | Description$ As long as CARDNAME is on the battlefield, it's a land in addition to its other types.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 Oracle:Vigilance, haste\nAs long as Awakened Skyclave is on the battlefield, it's a land in addition to its other types.\n{T}: Add one mana of any color.

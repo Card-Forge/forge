@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Star Trek #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/10/312.-TRK1-scaled.jpg?ssl=1
+Goal:Win
+Turns:0
+Difficulty:Mythic
+Description:Start in your upkeep with Quark's trigger on the stack, and win this turn! Good luck!
+[state]
+turn=0
+activeplayer=p1
+activephase=CLEANUP
+activephaseadvance=UPKEEP
+p0life=20
+p0hand=Woodland Acolyte;Gearbane Orangutan;Blooming Blast;Dathon and Picard at El-Adrel
+p0graveyard=Pure Energy;Tasha Yar, Out of Time;Imodane's Recruiter
+p0battlefield=Quark, Humble Proprietor;U.S.S. Discovery, at Black Alert|Counters:CHARGE=2;Worf, Honor-Bound Warrior;Unstable Glyphbridge;Forest;Forest;Forest;Bajor|NoETBTrigs;Bajor|NoETBTrigs;Bajor|NoETBTrigs;T:c_a_treasure_sac;T:c_a_treasure_sac;T:c_a_treasure_sac
+p1life=13
+p1battlefield=Pinnacle Kill-Ship|Counters:CHARGE=7;Cold-Blooded Crew|Counters:P1P1=2;Battle-Scarred Survivalist|Counters:P1P1=1

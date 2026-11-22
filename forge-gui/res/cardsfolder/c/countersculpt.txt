@@ -1,0 +1,7 @@
+Name:Countersculpt
+ManaCost:U U
+Types:Instant
+K:AlternateAdditionalCost:Behold<1/Jace>:1
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SubAbility$ DBEmpower | SpellDescription$ Counter target spell. Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 1
+Oracle:As an additional cost to cast this spell, behold a Jace or pay {1}. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.)\nCounter target spell. Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

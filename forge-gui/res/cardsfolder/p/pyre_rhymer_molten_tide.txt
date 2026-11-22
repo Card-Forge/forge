@@ -1,0 +1,19 @@
+Name:Pyre Rhymer
+ManaCost:1 R R
+Types:Creature Elemental Sorcerer
+PT:3/3
+K:Prowess
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Prowess\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Molten Tide
+ManaCost:R
+Types:Instant
+A:SP$ Effect | Triggers$ IslandTrigger | SpellDescription$ Until end of turn, whenever you tap a Mountain for mana, add an additonal {R}.
+SVar:IslandTrigger:Mode$ TapsForMana | ValidCard$ Mountain | Activator$ You | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a Mountain for mana, add an additonal {R}.
+SVar:TrigMana:DB$ Mana | Produced$ R
+Oracle:Until end of turn, whenever you tap a Mountain for mana, add an additonal {R}.

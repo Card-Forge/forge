@@ -1,0 +1,9 @@
+Name:Surgical Precision
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroy,DBDraw
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.toughnessGE4 | ValidTgtsDesc$ creature with toughness 4 or greater | SubAbility$ DBGainLife1 | SpellDescription$ Destroy target creature with toughness 4 or greater. You gain 1 life.
+SVar:DBGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:DBDraw:DB$ Draw | Defined$ You | SubAbility$ DBGainLife2 | SpellDescription$ You draw a card and gain 2 life.
+SVar:DBGainLife2:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Choose one —\n• Destroy target creature with toughness 4 or greater. You gain 1 life.\n• You draw a card and gain 2 life.

@@ -2,12 +2,12 @@ package forge.item;
 
 import forge.ImageKeys;
 import forge.card.*;
-import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private static final long serialVersionUID = 1L;
@@ -208,7 +208,9 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
                 suffix = ImageKeys.BACKFACE_POSTFIX;
             }
         }
-        int idx = MyRandom.getRandom().nextInt(artIndex);
+        // Cosmetic art pick, made on the GUI thread whenever the image is looked up. It must not draw from MyRandom:
+        // that would count as game randomness (breaking undo) and perturb seeded simulations.
+        int idx = ThreadLocalRandom.current().nextInt(artIndex);
         return getImageKey(idx) + suffix;
     }
 

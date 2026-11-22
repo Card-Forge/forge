@@ -1,0 +1,7 @@
+Name:Vic Fontaine, One Night Only
+ManaCost:1 R W
+Types:Legendary Artifact Creature Illusion Performer
+PT:3/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Seek out — Whenever you draw your second card each turn, one or two target creatures each get +2/+0 and gain lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select one or two target creatures | TargetMin$ 1 | TargetMax$ 2 | NumAtt$ +2 | KW$ Lifelink
+Oracle:Seek out — Whenever you draw your second card each turn, one or two target creatures each get +2/+0 and gain lifelink until end of turn.

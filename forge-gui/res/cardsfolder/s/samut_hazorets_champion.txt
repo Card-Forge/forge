@@ -1,0 +1,6 @@
+Name:Samut, Hazoret's Champion
+ManaCost:1 R
+Types:Legendary Creature Human Warrior Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+Oracle:Creatures you control have haste.

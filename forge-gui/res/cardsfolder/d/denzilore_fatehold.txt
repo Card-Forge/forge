@@ -1,0 +1,10 @@
+Name:Denzilore Fatehold
+ManaCost:1 W U U
+Types:Legendary Creature Elder Sphinx
+PT:3/4
+K:Flash
+K:Flying
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you scry or surveil, put a +1/+1 counter on each creature you control.
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flash\nFlying\nWhenever you scry or surveil, put a +1/+1 counter on each creature you control.

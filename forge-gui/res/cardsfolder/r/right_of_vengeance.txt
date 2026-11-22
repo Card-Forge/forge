@@ -1,0 +1,8 @@
+Name:Right of Vengeance
+ManaCost:3 W
+Types:Instant
+A:SP$ Effect | Triggers$ TrigDamaged | SpellDescription$ Until end of turn, whenever a creature deals combat damage to you, destroy that creature and create a 2/1 red Klingon Warrior creature token with haste.
+SVar:TrigDamaged:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature deals combat damage to you, destroy that creature and create a 2/1 red Klingon Warrior creature token with haste.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You
+Oracle:Until end of turn, whenever a creature deals combat damage to you, destroy that creature and create a 2/1 red Klingon Warrior creature token with haste.

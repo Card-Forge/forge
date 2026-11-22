@@ -1,0 +1,5 @@
+Name:Tyvar Trait - Augmented Commander
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Hexproof | EffectZone$ Command | Description$ Commander creatures you control get +2/+2 and have hexproof.
+Oracle:Commander creatures you control get +2/+2 and have hexproof.

@@ -1,0 +1,10 @@
+Name:Way of the Healer
+ManaCost:3 W
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When CARDNAME enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 5
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWHealer | Description$ Planeswalkers you control have "[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."
+SVar:PWHealer:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ cadet | TokenOwner$ You | SubAbility$ DBSurveil | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+DeckHints:Type$Planeswalker
+Oracle:When Way of the Healer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nPlaneswalkers you control have "[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."

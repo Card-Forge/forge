@@ -3,6 +3,6 @@ ManaCost:U U
 Types:Creature Human Wizard
 PT:2/3
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast.
-SVar:TrigDraw:DB$ Effect | UnlessCost$ Draw<1/Player.TriggeredPlayer> | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | StaticAbilities$ RaiseCost
-SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.ActivePlayerCtrl | Type$ Spell | Amount$ 2 | Description$ Spells they cast this turn cost {2} more to cast.
+SVar:TrigDraw:DB$ Effect | UnlessCost$ Draw<1/Player.TriggeredPlayer> | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | StaticAbilities$ RaiseCost | RememberObjects$ TriggeredPlayer
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card | Activator$ Player.IsRemembered | Type$ Spell | Amount$ 2 | Description$ Spells they cast this turn cost {2} more to cast.
 Oracle:At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast.

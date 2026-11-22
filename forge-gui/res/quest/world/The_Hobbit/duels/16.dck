@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Iron Man
+Title=Iron Man
+Icon=Iron Man.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Jun_Furukawa_-_Mono_Green_Landfall_(Standard,_#889572).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+3 Mossborn Hydra
+1 Surrak, Elusive Hunter
+1 Esper Origins
+4 Sazh's Chocobo
+4 Icetill Explorer
+4 Mightform Harmonizer
+2 Lumbering Worldwagon
+2 Glimpse the Core
+2 Meltstrider's Resolve
+4 Earthbender Ascension
+3 Sapling Nursery
+14 Forest
+1 Cavern of Souls
+4 Fabled Passage
+1 Demolition Field
+1 Promising Vein
+2 Escape Tunnel
+3 Ba Sing Se
+[Sideboard]
+1 Mossborn Hydra
+2 Meltstrider's Resolve
+1 Sapling Nursery
+2 Torpor Orb
+1 Fecund Greenshell
+2 Keen-Eyed Curator
+2 Scrapshooter
+1 Leatherhead, Swamp Stalker
+1 The Ooze
+1 Gigantic Big Bear
+1 Warg Tactics

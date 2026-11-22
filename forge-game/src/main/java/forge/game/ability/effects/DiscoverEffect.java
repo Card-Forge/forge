@@ -32,11 +32,16 @@ import java.util.Map;
 public class DiscoverEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
+    @Override
     protected String getStackDescription(SpellAbility sa) {
         final PlayerCollection players = getDefinedPlayersOrTargeted(sa);
         final String verb = players.size() == 1 ? " discovers " : " discover ";
 
-        return Lang.joinHomogenous(players) + verb + sa.getParamOrDefault("Num", "1") + ".";
+        return Lang.joinHomogenous(players) + verb + AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("Num", "1"), sa) + ".";
     }
 
     @Override
@@ -176,4 +181,5 @@ public class DiscoverEffect extends SpellAbilityEffect {
         }
         if (!exileSeq) table.triggerChangesZoneAll(game, sa);
     }
+
 }

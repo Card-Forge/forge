@@ -1,0 +1,17 @@
+Name:Grizzlegom, Hurloon Hero
+ManaCost:5 R G
+Types:Legendary Creature Minotaur Warrior
+PT:4/4
+DeckRule:ColorIdentity:Exempt$ Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have any land cards.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, create a 1/1 white Soldier creature token for each Plains you control. Draw a card for each Island you control. Each opponent loses 1 life for each Swamp you control. Put a +1/+1 counter on NICKNAME for each Mountain you control. You gain 1 life for each Forest you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ Z | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ W | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ V
+SVar:X:Count$Valid Plains.YouCtrl
+SVar:Y:Count$Valid Island.YouCtrl
+SVar:Z:Count$Valid Swamp.YouCtrl
+SVar:W:Count$Valid Mountain.YouCtrl
+SVar:V:Count$Valid Forest.YouCtrl
+Oracle:Rulebreaker — A deck with this commander can have any land cards.\nWhenever Grizzlegom attacks, create a 1/1 white Soldier creature token for each Plains you control. Draw a card for each Island you control. Each opponent loses 1 life for each Swamp you control. Put a +1/+1 counter on Grizzlegom for each Mountain you control. You gain 1 life for each Forest you control.

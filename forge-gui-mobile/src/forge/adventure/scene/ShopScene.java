@@ -1,5 +1,7 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import forge.Adventure;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -19,10 +21,12 @@ import forge.util.ItemPool;
 public class ShopScene extends ForgeScene {
     private static ShopScene object;
     private PointOfInterestChanges changes;
+    TextureRegion textureRegion;
 
-    public static ShopScene instance() {
+    public static ShopScene instance(TextureRegion textureRegion) {
         if (object == null)
             object = new ShopScene();
+        object.textureRegion = textureRegion;
         return object;
     }
 
@@ -43,13 +47,20 @@ public class ShopScene extends ForgeScene {
         screen = null;
         getScreen();
         screen.refresh();
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
         processAutoSell();
     }
 
     @Override
     public FScreen getScreen() {
-        return screen == null ? screen = new AdventureDeckEditor(true) : screen;
+        return screen == null ? screen = new AdventureDeckEditor(true, textureRegion) : screen;
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
     private void processAutoSell() {

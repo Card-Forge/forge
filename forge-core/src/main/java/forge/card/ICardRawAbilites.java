@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 public interface ICardRawAbilites
 {
     Iterable<String> getKeywords();
+    Iterable<String> getDeckRules();
     Iterable<String> getReplacements();
     Iterable<String> getTriggers();
     Iterable<String> getDraftActions();

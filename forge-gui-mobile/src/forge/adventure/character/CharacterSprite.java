@@ -30,7 +30,8 @@ public class CharacterSprite extends MapActor {
     private String atlasPath;
     private float wakeTimer = 0.0f;
     public DialogData.ConditionData[] spawnConditions = new DialogData.ConditionData[0]; //List of conditions for the sprite to spawn.
-
+    private static final Color batchColor = new Color();
+    private static final Vector2 moveAngle = new Vector2();
     public CharacterSprite(int id, String path) {
         super(id);
         collisionHeight = 0.4f;
@@ -208,7 +209,6 @@ public class CharacterSprite extends MapActor {
     }
 
     public void moveBy(float x, float y, float delta) {
-
         if (inactive) {
             return;
         }
@@ -226,37 +226,40 @@ public class CharacterSprite extends MapActor {
             wakeTimer += delta;
             return;
         }
+
         super.moveBy(x, y);
         if (x == 0 && y == 0) {
             return;
         }
-        Vector2 vec = new Vector2(x, y);
-        float degree = vec.angleDeg();
+
+        moveAngle.set(x, y);
+        float degree = moveAngle.angleDeg();
 
         if (!hidden)
             setAnimation(AnimationTypes.Walk);
-        if (degree < 22.5)
+        if (degree < 22.5f)
             setDirection(AnimationDirections.Right);
-        else if (degree < 22.5 + 45)
+        else if (degree < 22.5f + 45f)
             setDirection(AnimationDirections.RightUp);
-        else if (degree < 22.5 + 45 * 2)
+        else if (degree < 22.5f + 45f * 2f)
             setDirection(AnimationDirections.Up);
-        else if (degree < 22.5 + 45 * 3)
+        else if (degree < 22.5f + 45f * 3f)
             setDirection(AnimationDirections.LeftUp);
-        else if (degree < 22.5 + 45 * 4)
+        else if (degree < 22.5f + 45f * 4f)
             setDirection(AnimationDirections.Left);
-        else if (degree < 22.5 + 45 * 5)
+        else if (degree < 22.5f + 45f * 5f)
             setDirection(AnimationDirections.LeftDown);
-        else if (degree < 22.5 + 45 * 6)
+        else if (degree < 22.5f + 45f * 6f)
             setDirection(AnimationDirections.Down);
-        else if (degree < 22.5 + 45 * 7)
+        else if (degree < 22.5f + 45f * 7f)
             setDirection(AnimationDirections.RightDown);
         else
             setDirection(AnimationDirections.Right);
-
     }
 
     public Vector2 pos() {
+        // The movement system requires an independent instance copy to prevent
+        // player and NPC coordinates from cross-contaminating each other..
         return new Vector2(getX(), getY());
     }
 
@@ -290,15 +293,17 @@ public class CharacterSprite extends MapActor {
 
         setHeight(currentFrame.getRegionHeight() * scale);
         setWidth(currentFrame.getRegionWidth() * scale);
-        Color oldColor = batch.getColor().cpy();
+
+        Color originalBatchColor = batch.getColor();
+        batchColor.set(originalBatchColor.r, originalBatchColor.g, originalBatchColor.b, originalBatchColor.a);
+
         batch.setColor(getColor());
-
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
-        batch.setColor(oldColor);
-        super.draw(batch, parentAlpha);
-        //batch.draw(getDebugTexture(),getX(),getY());
+        batch.setColor(batchColor);
 
+        super.draw(batch, parentAlpha);
     }
+
 
 
     public Sprite getAvatar() {

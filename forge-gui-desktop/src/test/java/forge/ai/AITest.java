@@ -215,7 +215,7 @@ public class AITest {
         Player current = game.getPhaseHandler().getPlayerTurn();
         do {
             game.getPhaseHandler().mainLoopStep();
-        } while (!game.isGameOver() && game.getPhaseHandler().getPlayerTurn().equals(current));
+        } while (!game.isGameOver() && game.getPhaseHandler().isPlayerTurn(current));
     }
 
     protected String gameStateToString(Game game) {

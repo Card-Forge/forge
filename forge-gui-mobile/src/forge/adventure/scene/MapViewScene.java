@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,7 +36,6 @@ public class MapViewScene extends UIScene {
     private static MapViewScene object;
     private final ScrollPane scroll;
     private final Image img;
-    private Texture miniMapTexture;
     private final Image miniMapPlayer;
     private final Group table;
     private final List<TypingLabel> labels;
@@ -104,19 +104,6 @@ public class MapViewScene extends UIScene {
             }
         });
         stage.setScrollFocus(ui);
-
-    }
-
-    public void test() {
-        img.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*img.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*img.getY());
-        img.setScale(img.getScaleX()*0.9f);
-        miniMapPlayer.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*miniMapPlayer.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*miniMapPlayer.getY());
-        miniMapPlayer.setScale(miniMapPlayer.getScaleX()*0.9f);
-        for(Actor actor : table.getChildren()) {
-            if (actor instanceof TypingLabel) {
-                actor.setPosition((scroll.getScrollPercentX() * 2334 + 233) * 0.1f + 0.9f * actor.getX(), (2544 - scroll.getScrollPercentY() * 2544 + 128) * 0.1f + 0.9f * actor.getY());
-            }
-        }
     }
 
     public boolean done() {
@@ -164,7 +151,6 @@ public class MapViewScene extends UIScene {
         }
         return true;
     }
-
 
     private void setOverlayButtonStates(int mode) {
         String[] buttons = {"details", "events", "reputation", "names"};
@@ -238,7 +224,7 @@ public class MapViewScene extends UIScene {
         List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
         for (PointOfInterest poi : allPois) {
             if (WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID()).isVisited()) {
-                if ("cave".equalsIgnoreCase(poi.getData().type) || "dungeon".equalsIgnoreCase(poi.getData().type) || "castle".equalsIgnoreCase(poi.getData().type)) {
+                if (poi.getData().isDungeon() || "castle".equalsIgnoreCase(poi.getData().type)) {
                     TypingLabel label = Controls.newTypingLabel("[%?BLACKEN] " + poi.getDisplayName());
                     table.addActor(label);
                     details.add(label);
@@ -256,7 +242,6 @@ public class MapViewScene extends UIScene {
             table.removeActor(detail);
         }
         details.clear();
-
     }
 
     public void zoomOut() {
@@ -288,11 +273,10 @@ public class MapViewScene extends UIScene {
 
     @Override
     public void enter() {
-        if (miniMapTexture != null)
-            miniMapTexture.dispose();
-        miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-        img.setSize(WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight());
-        img.getParent().setSize(WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight());
+        Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
+        Texture miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
+        img.setSize(biomeImage.getWidth(), biomeImage.getHeight());
+        img.getParent().setSize(biomeImage.getWidth(), biomeImage.getHeight());
         img.setDrawable(new TextureRegionDrawable(miniMapTexture));
         miniMapPlayer.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         miniMapPlayer.setSize(Current.player().avatar().getRegionWidth(), Current.player().avatar().getRegionHeight());

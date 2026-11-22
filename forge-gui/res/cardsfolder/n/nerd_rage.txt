@@ -5,7 +5,7 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw two cards.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 2
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddStaticAbility$ NoMaxHandSize | AddTrigger$ AttackTrig | Description$ Enchanted creature has "You have no maximum hand size" and "Whenever this creature attacks, if you have ten or more cards in hand, it gets +10/+10 until end of turn."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | AddStaticAbility$ NoMaxHandSize | AddTrigger$ AttackTrig | Description$ Enchanted creature has "You have no maximum hand size" and "Whenever this creature attacks, if you have ten or more cards in hand, it gets +10/+10 until end of turn."
 SVar:NoMaxHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE10 | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, if you have ten or more cards in hand, it gets +10/+10 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +10 | NumDef$ +10

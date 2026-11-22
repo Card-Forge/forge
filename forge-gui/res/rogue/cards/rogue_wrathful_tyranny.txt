@@ -1,0 +1,5 @@
+Name:Wrathful - Tyranny
+ManaCost:no cost
+Types:Wrathful
+S:Mode$ Continuous | Affected$ Opponent | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ Your opponents may play an additional land on each of their turns.
+Oracle:Your opponents may play an additional land on each of their turns.

@@ -19,7 +19,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.IterableUtil;
 
 import java.util.Arrays;
@@ -75,7 +74,7 @@ public class ManaAi extends SpellAbilityAi {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         }
         if ("AtOppEOT".equals(logic)) {
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+            return ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai)
                     && (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife());
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
@@ -158,16 +157,9 @@ public class ManaAi extends SpellAbilityAi {
         String produced = sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
 
-        int numCounters = 0;
-        int manaSurplus = 0;
         if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
             CounterType ctrType = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class).counter;
-            numCounters = host.getCounters(ctrType);
-            manaReceived = numCounters;
-            if (logic.startsWith("ManaRitualBattery.")) {
-                manaSurplus = Integer.parseInt(logic.substring(18)); // adds an extra mana even if no counters removed
-                manaReceived += manaSurplus;
-            }
+            manaReceived = host.getCounters(ctrType);
         }
 
         int searchCMC = numManaSrcs - selfCost + manaReceived;
@@ -190,10 +182,14 @@ public class ManaAi extends SpellAbilityAi {
         CardCollection cardList = new CardCollection();
         // TODO check other zones
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
-        for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+        final List<SpellAbility> testable = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai);
+        // the same untapped sources answer this for every ability in hand, and nothing in the loop
+        // taps or adds one, so ask once - and not at all when there is nothing to ask about
+        final byte availableColors = testable.isEmpty() ? 0 : ColorSet.fromNames(
+                ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor();
+        for (final SpellAbility testSa : testable) {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
-            boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
-                    ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
+            boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(availableColors);
 
             if (cost.getCMC() == 0 && cost.countX() == 0) {
                 // no mana cost, no need to activate this SA then (additional mana not needed)
@@ -238,13 +234,6 @@ public class ManaAi extends SpellAbilityAi {
                         CardPredicates.lessCMC(searchCMC),
                         CardPredicates.isColorless().or(CardPredicates.isColor(producedColor))));
 
-        if (logic.startsWith("ManaRitualBattery")) {
-            // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
-            // otherwise the AI grabs too many counters at once.
-            int maxCtrs = Aggregates.max(castableSpells, Card::getCMC) - manaSurplus;
-            sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
-        }
-
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;
     }
@@ -256,7 +245,7 @@ public class ManaAi extends SpellAbilityAi {
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         // TODO if threatened use right away
-        return ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
+        return ph.is(PhaseType.END_OF_TURN) && (ph.isPlayerNextTurn(ai) || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
                 && (activateForTrigger || canRampPool(ai, sa.getHostCard()));   
     }
 

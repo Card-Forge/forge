@@ -108,7 +108,7 @@ public class ImageCache {
 
     private Set<String> getCardsLoaded() {
         if (cardsLoaded == null) {
-            cardsLoaded = new HashSet<>(400);
+            cardsLoaded = new HashSet<>(maxCardCapacity + (maxCardCapacity / 3));
         }
         return cardsLoaded;
     }
@@ -133,6 +133,7 @@ public class ImageCache {
 
     private Supplier<HashMap<String, ImageRecord>> imageRecord = Suppliers.memoize(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
     private boolean imageLoaded, delayLoadRequested;
+    private long lastLoaderPumpFrame = -1; // frame in which the asset loader was last pumped from loadAsset
 
     public void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
@@ -253,6 +254,50 @@ public class ImageCache {
     }
 
     /**
+     * Helper for normalizing imageKey
+     */
+    private static String normalizeImageKey(String imageKey) {
+        if (StringUtils.isBlank(imageKey)) return "";
+
+        // detect suffixes
+        boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String specColor = "";
+        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) specColor = "white";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) specColor = "blue";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) specColor = "black";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) specColor = "red";
+        else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) specColor = "green";
+
+        // strip suffixes
+        if (altState) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        } else if (!specColor.isEmpty()) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
+        }
+
+        // resolve to actual card/token key
+        if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
+            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (card != null) {
+                if (altState) {
+                    imageKey = card.getCardAltImageKey();
+                } else if (!specColor.isEmpty()) {
+                    imageKey = ImageUtil.getImageKey(card, specColor, true);
+                } else {
+                    imageKey = card.getCardImageKey();
+                }
+            }
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
+            if (token != null) {
+                imageKey = token.getCardImageKey();
+            }
+        }
+
+        return imageKey;
+    }
+
+    /**
      * This requests the original unscaled image from the cache for the given key.
      * If the image does not exist then it can return a default image if desired.
      * <p>
@@ -272,39 +317,7 @@ public class ImageCache {
             return null;
         }
 
-        boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String specColor = "";
-        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
-            specColor = "white";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
-            specColor = "blue";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
-            specColor = "black";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
-            specColor = "red";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
-            specColor = "green";
-        }
-        if (altState)
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-        if (!specColor.isEmpty())
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
-        if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-            if (card != null) {
-                if (altState) {
-                    imageKey = card.getCardAltImageKey();
-                } else if (!specColor.isEmpty()) {
-                    imageKey = ImageUtil.getImageKey(card, specColor, true);
-                } else {
-                    imageKey = card.getCardImageKey();
-                }
-            }
-        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
-            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
-            if (token != null)
-                imageKey = token.getCardImageKey();
-        }
+        imageKey = normalizeImageKey(imageKey);
 
         if (StringUtils.isBlank(imageKey)) {
             if (useDefaultIfNotFound)
@@ -372,54 +385,76 @@ public class ImageCache {
     private Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        Texture check = getAsset(file);
-        if (check != null)
+
+        final String fileName = file.getPath();
+        Texture check = Forge.getAssets().manager().get(fileName, Texture.class, false);
+
+        if (check != null) {
+            if (!others) {
+                //update first before clearing
+                getSyncQ().add(fileName);
+                getCardsLoaded().add(fileName);
+                unloadCardTextures(false);
+            }
+
+            if (others) {
+                return check;
+            }
+
+            String textureKey = getTextureKey(check);
+            if (imageRecord.get().get(textureKey) == null) {
+                String setCode = imageKey.split("/")[0].trim().toUpperCase();
+                int radius;
+                if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
+                    radius = 28;
+                else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
+                    radius = 25;
+                else
+                    radius = 22;
+                // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
+                boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
+                // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
+                // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
+                // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
+                updateImageRecord(check, textureKey, radius, isFullBorder);
+            }
             return check;
-
-        String fileName = file.getPath();
-
-        if (!others) {
-            //update first before clearing
-            getSyncQ().add(fileName);
-            getCardsLoaded().add(fileName);
-            unloadCardTextures(false);
         }
 
         try {
-            if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
-                Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
-                Forge.getAssets().manager().finishLoadingAsset(fileName);
-                counter += 1;
-                // a texture just became available for a card that may already be drawn in text mode:
-                // invalidate cached card art so renderers pick it up
-                CardRenderer.clearcardArtCache();
-                ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
+            if (!Forge.getAssets().manager().isLoaded(fileName, Texture.class)) {
+                if (!Forge.getAssets().manager().contains(fileName)) {
+                    Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
+                    counter += 1;
+                }
+
+                // Every card still waiting for its texture reaches this point on EVERY frame. AssetManager.update(int)
+                // busy-waits up to that many ms while an async decode is pending, so N waiting cards used to cost up to
+                // N x 16ms per frame (and N art-cache clears). Pump the loader and reset the art cache once per frame.
+                final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
+                if (frame < 0 || frame != lastLoaderPumpFrame) {
+                    lastLoaderPumpFrame = frame;
+                    CardRenderer.clearcardArtCache();
+                    Forge.getAssets().manager().update(16);
+                }
+                //((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
             }
         } catch (Exception e) {
-            System.err.println("Failed to load image: " + fileName);
-            System.err.println("Error details: " + e.getMessage());
-            e.printStackTrace(System.err);
+            System.err.println("Failed to enqueue asynchronous image: " + fileName);
         }
 
-        Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
-        if (others || cardTexture == null)
-            return cardTexture;
-        //if full bordermasking is enabled, update the border color
-        String setCode = imageKey.split("/")[0].trim().toUpperCase();
-        int radius;
-        if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
-            radius = 28;
-        else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
-            radius = 25;
-        else
-            radius = 22;
-        // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
-        boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
-        // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
-        // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
-        // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
-        updateImageRecord(getTextureKey(cardTexture), isCloserToWhite(getpixelColor(cardTexture)), radius, isFullBorder);
-        return cardTexture;
+        // Return null instantly so the view layer displays its pre-cached default fallbacks
+        // placeholder cards while the image texture loads in the background.
+        return null;
+    }
+
+    // Force the asset loader to immediately block and finish
+    public void finishLoadingActiveQueue(String filename) {
+        try {
+            Forge.getAssets().manager().finishLoadingAsset(filename);
+        } catch (Exception e) {
+            System.err.println("ImageCache: Safe fallback bypass triggered during lifecycle force-flush step.");
+        }
     }
 
     // iOS downloaded images (Documents/cache) decode via CardTextureData so the AssetManager owns their
@@ -558,14 +593,20 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public void updateImageRecord(String textureString, Pair<String, Boolean> data, int radius, boolean fullborder) {
+    public void updateImageRecord(Texture t, String textureString, int radius, boolean fullborder) {
+        String colorString = getpixelColorOnce(t);
+        Pair<String, Boolean> data = isCloserToWhite(colorString);
         imageRecord.get().put(textureString, new ImageRecord(data.getLeft(), data.getRight(), radius, fullborder));
     }
 
     public int getRadius(Texture t) {
         if (t == null)
-            return 20;
-        ImageRecord record = imageRecord.get().get(getTextureKey(t));
+            return 0;
+        String key = getTextureKey(t);
+        if (!key.contains("card") && !key.contains("token")) {
+            return 0;
+        }
+        ImageRecord record = imageRecord.get().get(key);
         if (record == null)
             return 20;
         Integer i = record.cardRadius;
@@ -631,16 +672,20 @@ public class ImageCache {
         return borderColor(t);
     }
 
-    public String getpixelColor(Texture i) {
-        if (!i.getTextureData().isPrepared()) {
-            i.getTextureData().prepare(); //prepare texture
+    private String getpixelColorOnce(Texture t) {
+        try {
+            TextureData data = t.getTextureData();
+            if (!data.isPrepared()) data.prepare();
+            // Sample the same spot as before the optimization: just inside the cropped card border. The raw corner
+            // (1,1) is transparent or scan-white on images with rounded corners and misclassifies the border color.
+            final com.badlogic.gdx.graphics.g2d.TextureRegion region = croppedBorderImage(t);
+            Pixmap pixmap = data.consumePixmap();
+            Color color = new Color(pixmap.getPixel(region.getRegionX() + 1, region.getRegionY() + 1));
+            pixmap.dispose();
+            return color.toString();
+        } catch (Exception e) {
+            return Color.valueOf("#171717").toString();
         }
-        //get pixmap from texture data
-        Pixmap pixmap = i.getTextureData().consumePixmap();
-        //get pixel color from x,y texture coordinate based on the image fullborder or not
-        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX() + 1, croppedBorderImage(i).getRegionY() + 1));
-        pixmap.dispose();
-        return color.toString();
     }
 
     public Pair<String, Boolean> isCloserToWhite(String c) {

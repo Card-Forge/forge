@@ -1,0 +1,8 @@
+Name:Isolinear Processor
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckNeeds:Type$Artifact
+Oracle:{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.\n{2}, {T}: Draw a card, then discard a card.

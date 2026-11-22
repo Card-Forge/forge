@@ -7,19 +7,18 @@ import forge.adventure.stage.MapStage;
  * EntryActor
  * Used to teleport the player in and out of the map
  */
-public class EntryActor extends MapActor{
-    final MapStage stage;
-    String targetMap;
-    float x;
-    float y;
-    float w;
-    float h;
-    String direction;
-    String currentMap;
-    int entryTargetObject;
+public class EntryActor extends MapActor {
+    protected final MapStage stage;
+    protected final String targetMap;
+    protected final float x;
+    protected final float y;
+    protected final float w;
+    protected final float h;
+    protected final String direction;
+    protected final int entryTargetObject;
+    protected String currentMap;
 
-    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction, String currentMap, int entryTargetObject)
-    {
+    public EntryActor(MapStage stage, int id, String targetMap, float x, float y, float w, float h, String direction, String currentMap, int entryTargetObject) {
         super(id);
         this.stage = stage;
         this.targetMap = targetMap;
@@ -29,30 +28,21 @@ public class EntryActor extends MapActor{
         this.h = h;
         this.currentMap = currentMap;
         this.entryTargetObject = entryTargetObject;
-
         this.direction = direction;
     }
 
-    public MapStage getMapStage()
-    {
+    public MapStage getMapStage() {
         return stage;
     }
 
     @Override
-    public void  onPlayerCollide()
-    {
-        if(targetMap==null||targetMap.isEmpty())
-        {
+    public void onPlayerCollide() {
+        if (targetMap == null || targetMap.isEmpty()) {
             stage.exitDungeon(false, false);
-        }
-        else
-        {
-            if (targetMap.equals(currentMap))
-            {
+        } else {
+            if (targetMap.equals(currentMap)) {
                 stage.spawn(entryTargetObject);
-            }
-            else
-            {
+            } else {
                 currentMap = targetMap;
                 TileMapScene.instance().loadNext(targetMap, entryTargetObject);
             }
@@ -60,22 +50,23 @@ public class EntryActor extends MapActor{
     }
 
     public void spawn() {
-        switch(direction)
-        {
+        final PlayerSprite player = stage.getPlayerSprite();
+        final float playerWidth = player.getWidth();
+        final float playerHeight = player.getHeight();
+
+        switch (direction) {
             case "up":
-                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y+h);
+                player.setPosition(x + w / 2f - playerWidth / 2f, y + h);
                 break;
             case "down":
-                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y-stage.getPlayerSprite().getHeight());
+                player.setPosition(x + w / 2f - playerWidth / 2f, y - playerHeight);
                 break;
             case "right":
-                stage.getPlayerSprite().setPosition(x-stage.getPlayerSprite().getWidth(),y+h/2-stage.getPlayerSprite().getHeight()/2);
+                player.setPosition(x - playerWidth, y + h / 2f - playerHeight / 2f);
                 break;
             case "left":
-                stage.getPlayerSprite().setPosition(x+w,y+h/2-stage.getPlayerSprite().getHeight()/2);
+                player.setPosition(x + w, y + h / 2f - playerHeight / 2f);
                 break;
-
         }
     }
 }
-

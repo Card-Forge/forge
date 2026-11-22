@@ -1,0 +1,8 @@
+Name:Jace's Machinations
+ManaCost:2 U
+Types:Instant
+A:SP$ Effect | StaticAbilities$ InstantJace | SubAbility$ DBEmpower | SpellDescription$ Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.
+SVar:InstantJace:Mode$ CastWithFlash | ValidCard$ Planeswalker.Jace+YouCtrl | ValidSA$ Activated.Loyalty | Caster$ You | Description$ You may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 8 | SpellDescription$ Empower Jace 8. (Put eight loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+DeckHints:Type$Jace
+Oracle:Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.\nEmpower Jace 8. (Put eight loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

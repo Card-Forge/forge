@@ -1,0 +1,8 @@
+Name:Saru, Unthreatened
+ManaCost:2 G
+Types:Legendary Creature Kelpien Officer
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, another target creature you control gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | KW$ Hexproof
+Oracle:Flash\nWhen Saru enters, another target creature you control gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

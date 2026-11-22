@@ -1,10 +1,12 @@
 package forge.app;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.UpnpServiceConfiguration;
+import org.lwjgl.glfw.GLFW;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
@@ -98,8 +100,9 @@ public class Main {
             if (RestartUtil.prepareForRestart()) {
                 // Calls dispose()
                 Gdx.app.exit();
-                // Note: exit code -1073740791 (0xC0000409), don't use System.exit(0) on android
-                System.exit(0);
+                // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+                // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+                //System.exit(0);
             }
         }
 
@@ -107,8 +110,9 @@ public class Main {
         public void exit() {
             // Calls dispose()
             Gdx.app.exit();
-            // Note: exit code -1073740791 (0xC0000409) don't use System.exit(0) on android
-            System.exit(0);
+            // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+            // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+            //System.exit(0);
         }
 
         @Override
@@ -172,6 +176,16 @@ public class Main {
         @Override
         public void requestFileAcces() {
 
+        }
+
+        @Override
+        public void setMouseConfined(boolean confined) {
+            if (!(Gdx.graphics instanceof Lwjgl3Graphics)) {
+                return;
+            }
+            long handle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
+            GLFW.glfwSetInputMode(handle, GLFW.GLFW_CURSOR,
+                    confined ? GLFW.GLFW_CURSOR_CAPTURED : GLFW.GLFW_CURSOR_NORMAL);
         }
     }
 }

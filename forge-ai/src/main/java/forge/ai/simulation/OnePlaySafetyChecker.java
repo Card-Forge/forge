@@ -39,7 +39,7 @@ public final class OnePlaySafetyChecker {
         if (source == null || !source.isInZone(ZoneType.Hand)) {
             return 0;
         }
-        Card simulatedSource = (Card) simulator.getGameCopier().find(source);
+        Card simulatedSource = simulator.getGameCopier().find(source);
         if (simulatedSource.isInZone(ZoneType.Hand)) {
             return 0;
         }

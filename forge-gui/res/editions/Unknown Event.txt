@@ -6,519 +6,566 @@ Type=Funny
 ScryfallCode=UNK
 
 [cards]
-CAa C Potatoes @
-CAb C Simic Slaw @
-UB U Halving Season @
-CA01 C Phyrexian Ornithopter @
-CC01 C Common Curve Filler @
-CG01 C Joraga Peach @
-CL01 C Tarkir Omenpath @
-CL01a C The Forgotten Place @
-CL01b C Unknown Event Shores @
-CU01 C Irrefutable Evidence @
-CW01 C Illuminating Detective @
-MG01 M Minnea, Planar Tourist @
-ML01 M The Waffle Restaurant @
-MR01 M Polis the Planeshifter @
-MZ01 M The Unknown Wizard @
-RA01 R Cinnamon, Seasoned Steed @
-RB01 R Noyd, Keeper of the Void @
-RC01a R Banned Eldraine Card @
-RC01b R Command From the Shadows @
-RC01c R Enolc, Perfect Clone @
-RC01d R Guild Pact @
-RG01a R Chatterstorm and Awaken the Woods @
-RG01b R The Disciple of Nissa @
-RL01 R Chicago Loop @
-RL01a R The Belligerent and Useless Island @
-RL01b R The Magical City, New @
-RL01c R ______ @
-RL01d R Blustering Barnyard @
-RL01e R A-Town @
-RL01f R The Goblin Sparring Grounds @
-RU01 R Lord of Atlanta @
-RU01a R The Whiteboarder @
-RZ01a R Anax and Cymede & Kynaios and Tiro @
-RZ01b R The Water Maro @
-RZ01c R Valko Indorian, Researcher @
-UA01a U Black Tulip @
-UA01b U That Which Was Compleated @
-UA01c U Moth Herb Elixir @
-UB01 U Devoted Abzan @
-UB01a U Bloodspatter Vampire @
-UB01b U Nim Mongoose @
-UL01 U P-Artist Alley @
-UL01a U Mana Conference @
-UL01b U Urza's Hot Dog Stand @
-UU01 U Dialogue Tree @
-UW01 U Good Knight @
-UW01a U Unstickerify @
-CA02 C A Container of Booster Packs @
-CA02a C Leisure Bicycle @
-CA02b C Your Mana Rock @
-CA02c C Item Crate @
-CB02 C Reverse Ninja @
-CB02a C Demon Detective @
-CB02b C Syr Konrad's Squire @
-CB02c C Fear (split card) // Loathing @
-CG02a C Naturalize the Phyresis @
-CG02b C That's No Moonmist @
-CR02 C Fear of Going 0-2 Drop @
-CW02 C Unclaimed Cat @
-CZ02 C Spare Changeling @
-MW02 M You, Magic Playtester @
-MW02a M You, Iterative Playtester @
-MZ02 M Delphia, Undecided @
-RA02a R Goblin Savant @
-RA02b R Huge Truck @
-RA02c R Jitte and Divining Top @
-RA02d R Spice Rack @
-RB02 R Seer of the Bright Side @
-RC02 R Playtest Wish @
-RG02 R Retto, Family Racer @
-RG02a R Bringer of Green Zenith's Twilight @
-RG02b R Locus Cobra @
-RG02c R Lona, Tracker of the Known @
-RG02d R Questing Cosplayer @
-RG02e R Land Station @
-RR02 R Norin and Feldon @
-RR02a R The Bringer of the Red Beard @
-RR02b R Occupation of Kulrath @
-RU02 R Memnarchitect @
-RU02a R Disguise Agent @
-RU02c R Phyrexian Adapter @
-RU02d R Really Charming Prince @
-RW02 R Htbr, Racetrack Referee @
-RW02a R Bram, Baguette Brawler @
-RW02b R Isamaru and Yoshimaru @
-RW02c R The Kami Knight @
-RW02d R Save Point @
-RZ02 R The Vegetable Car @
-RZ02a R Kallist Rhoka @
-RZ02b R The Keeper of the Yellow Hat @
-RZ02c R The Chaos Keeper @
-RZ02d R The Multiplayer Nitpickers @
-RZ02e R Jiffy, Vehicle Repairer @
-RZ02f R Syx, Robot Overlord @
-RZ02g R The Bearded Teakeeper @
-RZ02h R Uh, Squen & Cragg Made a Card @
-UA02 U Crow Scarer @
-UA02a U Cat Oven @
-UA02b U Deep Dish Pizza @
-UA02c U Aetherflux Car @
-UA02d U Tinfoil Helm @
-UB02a U Bad Knight @
-UB02b U Incubob @
-UB02c U Innistrad Charm @
-UB02d U Team Perseverance @
-UC02 U Magic Designer @
-UG02 U Team Acceleration @
-UG02a U Primetime Suspect @
-UG02b U Tax Keeper @
-UR02a U Must Be Knights @
-UR02b U Red Priest of Yawgmoth @
-UR02c U Unclaimed Battle Axe @
-UU02a U Ensoul Ring @
-UU02b U Ring Out @
-UW02a U Gather, the Townsfolk @
-UW02b U Hero's Uncle @
-UW02c U Identify the Culprit @
-UZ02 U Red and Black Legac @
-WW02 S The Pleasant Taxer @
-CA03 C Unicycling Automaton @
-CB03 C May of the Machine @
-CC03 C May the Mana Be with You @
-CG03a C Garruk's Lost Wolf @
-CG03b C Growing Detective @
-CG03c C Investi-Gate @
-CG03d C Merfolk Surveyor @
-CL03a C Artifact Unknown Shores @
-CL03b C Command Mine @
-CR03c C Aggressive Detective @
-CR03d C Join the Winning Team @
-CU03 C Drake with Set's Mechanic @
-CW03 C Incisor Steed @
-CZ03 C Blended Twistling @
-MU03 M Barce, Friend Finder @
-MZ03 M Gen, Confider of Ages @
-MZ03a M The Faction Dragon @
-RA03a R Bob the Claymore @
-RA03b R Luxior and Shadowspear @
-RA03c R Manakin and Millikin @
-RA03d R Phyrexian Incubator @
-RB03 R The Multifaceted Phyrexian @
-RB03a R Auntie Flint @
-RB03b R Dan, Shrewd Trader @
-RB03c R Incubation Triformer @
-RB03d R Old Way Phyrexian @
-RB03e R The Juzam Master @
-RG03a R Maître Tree @
-RG03b R Mr. Wiggles, Helpful Butterfly @
-RG03c R Pulse of the Hunter Maze @
-RG03d R The Dilu Horse @
-RG03e R The Spike Cactus @
-RG03f R The Paradise Bird @
-RR03 R The Wiley Speedster @
-RR03a R Char-Dog @
-RR03b R Mijo, the Bull @
-RU03 R The Karfell Rocker @
-RU03a R Dockbreacher @
-RU03b R Wrath of Oko @
-RU03c R The Covert Blue Mage @
-RU03d R Second Stage of Magic Design @
-RU03e R Yeah Nah // Nah Yeah @
-RW03a R Azorius Traffic Enforcement @
-RW03b R Fioran Reformist @
-RW03c R Ratatwotwo @
-RW03d R Stika, Playtestress @
-RW03e R The Inspector Inspector @
-RW03f R White Rhystic Study @
-RW03g R The Tokenator @
-RW03h R Sixth Stage of Magic Design @
-RZ03 R The Herald of Numot @
-RZ03a R Slobad, Actually Just Fine @
-RZ03b R The Egotistical Velociraptor @
-RZ03c R The Keeper of Kaldra @
-RZ03d R The Caffeinated Runner @
-RZ03e R The Weekly Princess @
-RZ03f R The Milling Runner @
-RZ03g R The Fifth Alias @
-RZ03h R The Actualizer @
-RZ03i R Gomif, Fast Racer @
-RZ03j R The Fact Checker @
-RZ03k R The Mox Painter @
-RZ03l R Efteekay, Flame of the Kav @
-RZ03m R Frie, Displaced in Time @
-RZ03n R Pirk, Heroic Captain @
-RZ03o R The Policy Maker @
-RZ03p R The Cookout Creator @
-RZ03q R The Good Gamers @
-RZ03r R The Wizardly Barge @
-RZ03s R Evy, Fang Keeper @
-RZ03t R The Ice Dancer @
-RZ03u R The Sad Creaturez @
-UA03 U Twenty Lessons @
-UA03a U Bag of Stroopwafels @
-UA03b U Famous Museum @
-UA03c U Interrogation Robot @
-UA03d U Sagrada Familiar @
-UA03e U Segovian Sword @
-UB03 U Impressive Rat @
-UB03a U Vamping Vampire @
-UG03 U Devoted Sultai @
-UG03a U Ate-o'-Clock @
-UG03b U Kamigawa Charm @
-UL03a U Reflective Gate @
-UR03 U Devoted Temur @
-UU03 U Tricky Mage @
-UU03a U Team Mage @
-UU03b U Ulgrotha Charm @
-UU03c U Xerex Squire @
-UU03d U Higher Level Zone Monster @
-UW03 U Tax Hounds @
-UW03a U Rideable Mantis @
-UZ03 U Your Favorite Missing Character @
-CG04 C Fear of Unsleeved Decks @
-CL04 C Command Power Plant @
-CR04a C Azra Matchthrower @
-CR04b C Believe in the Cleave @
-CR04c C Phyrexian Esthetician @
-CU04 C Unclaimed Bird @
-CU04a C Educated Detective @
-CU04b C Shadowmoor Draw Spell @
-CU04d C Wistful Puppeteer @
-MA04 M The Strixhaven-Lorwyn Rover @
-RB04 R The Gunky Runner @
-RB04a R Hidetsugu's Poison Rite @
-RB04b R Invasion Specialist @
-RB04c R Night Out in Vegas @
-RB04d R Quest Compleated Beast @
-RB04e R Rankle, Master of Pranksters @
-RB04f R The Magic Bandit @
-RB04g R Yet Another Night in Vegas @
-RB04h R A Chaotic Night in Vegas @
-RG04 R Phyrexian Cytoshaper @
-RR04 R Need for Speed (Not the Odyssey One) @
-RR04a R Mzed, Mercenary Leader @
-RR04b R The Great Juggernaut @
-RR04c R At Least It's a Dry Heat @
-RR04d R The Wheeling Runner @
-RR04e R Rafi, Retro Racer @
-RR04f R Mana Max, Afterburner @
-RR04g R Advanced Tactics @
-RU04 R Rinta, Cousin of Sitka @
-RU04a R The Clever Magician @
-RU04b R Toothy and Zndrsplt @
-RU04c R The Fearsome Flock @
-RU04d R Blu, Mansion Prince @
-RW04 R Leech Medic @
-RW04a R Gerrard and Hanna @
-RW04b R Kylem All-Star @
-RW04c R Draw Team Lines @
-RW04d R The Miniaturizer @
-RW04e R Theopholos, Order Acolyte @
-RW04f R Try-My-Deck Elemental @
-RZ04 R The River Warlock @
-RZ04a R Forestfolk @
-RZ04b R Hadran, Naya Sunseeder @
-RZ04c R Halana and Alena and Gisa and Geralf @
-RZ04d R Maeve, Wearer of Many Hats @
-RZ04e R Princess Snowfall @
-RZ04f R Riku and Riku @
-RZ04g R Shahrazad and Sindbad @
-RZ04h R The Joiner of Cats @
-RZ04i R The Karst, Enchanted @
-RZ04j R The Marvelous Scientist @
-RZ04k R The Sprinkler of Stardust @
-RZ04l R The Trivia Mastermind @
-RZ04m R The Bus Runner @
-RZ04n R The Majestic Duo @
-RZ04o R Fifth Stage of Magic Design @
-RZ04p R The Zabulous Cosplayer @
-RZ04q R Shen, Wish Granter @
-RZ04r R The Sprinkler of Stardust @
-RZ04s R Falko, Showoff Pilot @
-RZ04t R The Traveling Postman @
-RZ04u R The Vast Scrier @
-RZ04v R The Ancient Dingus @
-RZ04w R The Goblin Mastermind @
-RZ04x R The Salubrious Philosopher @
-RZ04y R Welcome to Australia @
-UG04 U Arcbound Mamba @
-UG04a U You and Ooze Army? @
-UR04a U Guess Who it Is! @
-UR04b U Jeska and Kamahl @
-UR04c U Tarkir Charm @
-UU04 U Farseeing Flockmate @
-UU04a U Windy City Aven @
-UU04b U Devoted Jeskai @
-UU04c U Fear of Forgetting Names @
-UW04 U Brave Falconhawk @
-CB05 C Shedding Snake @
-CG05a C Underdog Racer @
-CW05 C Catch-Up Mechanic @
-MZ05 M The Horizon Seeker @
-MZ05a M The Convincing General @
-RA05 R The Mysterious Sphere @
-RA05a R Glorious Dragon-Kin @
-RA05b R Oilskelion @
-RA05c R Winter's Demonmech @
-RA05d R Chandra's Dragonmech @
-RB05 R The Keeper of Dark Pacts @
-RB05a R Mister Cheddar, Cheese Sliver @
-RB05b R Surprise, Nerd! @
-RB05c R Bin Chicken @
-RB05d R Rat of God @
-RC05 R The Five Stages of Grief @
-RC05a R Mysterious Confluence @
-RC05b R The Companion of the Wilds @
-RC05c R Your Favorite Character @
-RG05a R Grek the Ogre @
-RG05b R Oozeavite @
-RR05 R Snapsail Rider @
-RR05a R Auntie Ant, Ant Auntie @
-RU05 R Welcome to Mini-apolis @
-RU05a R The Cosplayzer @
-RU05b R The Countering Runner @
-RU05c R The Misty Stepper @
-RU05d R The Commander Recommender @
-RU05e R The Playful Winners @
-RW05a R Agoraphobic Phyrexian @
-RW05b R Form of the Stax Player @
-RW05c R The Sixth Seraph @
-RW05d R The Keeper of Four Scythes @
-RW05e R Hosting Season @
-RW05f R Third Stage of Magic Design @
-RZ05 R The Brewing Chef @
-RZ05a R Genevieve, Conniving Dragon @
-RZ05b R Margle, Cousin of Yargle @
-RZ05c R The Ash Lizard @
-RZ05d R The Knight of Commentary @
-RZ05e R The Master of Cuisine @
-RZ05f R The Judge of Height @
-RZ05g R The Zonian Brawler @
-RZ05h R The Good Time Sleuth @
-RZ05i R X, Mystery Racer @
-RZ05j R The Game-Changing Host @
-RZ05k R Tarkiran Towelsbane @
-RZ05l R The Convention Enthusiast @
-RZ05m R Saga of Krark Losing His Thumb @
-RZ05n R Drop Bear @
-UA05a U Compleated Clone Shell @
-UA05b U Guilded Lotus @
-UA05c U Power Level Analyzer @
-UA05d U Kibo's Bananamobile @
-UB05 U Phyrexian Chimney Imp @
-UB05a U Fear of Fear Itself @
-UR05 U P-Joven and Chandler @
-UU05 U Adventurer Beguiler @
-UW05 U Rosewater's Nemesis @
-UW05a U Devoted Mardu @
-UW05b U Windy City Elemental @
-UW05c U 17-Year Cicadas @
-CA06a C Karlov's Crossbow @
-CA06b C Sojourner's Enforcermite @
-CU06 C Literal Delver of Secrets @
-RA06a R Platinum Persecutor @
-RA06b R Soul of Mirrodin @
-RA06c R Sword of Fire and Ice and War and Peace @
-RA06d R Sharp Eraser @
-RB06 R The Zassacre Zirl @
-RC06 R Who's That Praetor? @
-RC06b R Fear of the Unknown @
-RG06 R Stormscale Wurm @
-RG06a R Praetorhoof Behemoth @
-RG06b R The Colossal Dreadmaw @
-RG06c R Lander Rizzi @
-RR06 R Hound of Urabrask @
-RR06b R The Powerful Dragon @
-RU06 R The Charitable Drafter @
-RU06a R MagicConsecrated Sphinx @
-RW06 R The Knight of Weeks @
-RW06a R Naming Screen @
-RW06b R The Highland Runner @
-RZ06 R The Cobra King @
-RZ06a R Arvad of the Weatherlight @
-RZ06b R Autumn Willow and Baron Sengir @
-RZ06c R The Wise Sable @
-RZ06d R Seventh Stage of Magic Design @
-RZ06e R Sue, Everlasting Dinosaur @
-RZ06f R Blue Screen of Death @
-RZ06g R Monet, Sensei of the Sewers @
-RZ06h R The Snapstone Wielder @
-RZ06i R The Bird Champion @
-UA06a U Gingerbehemoth @
-UA06b U Sawtooth Avenger @
-UB06 U Soul Drainer @
-UZ06 U Trash Panda @
-CG07 C Unclaimed Tanadon @
-RA07 R Colorless Ultimatum @
-RA07a R Battle Myrsphere @
-RA07b R Chancellor of the Mulligan @
-RC07a R Call Up Emrakul to Help @
-RC07b R The Battle of Dragon Brothers @
-RG07 R The Massive Zatcatl @
-RR07 R Tragda, the Burner @
-RU07a R The Value Knight @
-RU07b R Fourth Stage of Magic Design @
-RZ07a R Colossal Dreadmaw and Storm Crow @
-RZ07b R Groaaaaag, Hungry Monster @
-UC07 U Windmill Slam @
-RB08 R Myojin of Night's Reach and Grim Betrayal @
-RC08 R New Magic Game Plus @
-RG08 R Then, Dreadmaws Ate Everyone @
-RR08a R Kevin, Questing Dragon @
-RR08b R The Knight of Land Drops @
-RU08 R Phyrexian Broodstar @
-RU08a R Lorthos, Tentacled Terror @
-RZ08 R The Octopus Official @
-RZ08a R Avacyn and Griselbrand @
-RZ08b R Koma and Toski, Compleated @
-RZ08c R Riven Turnbull and Princess Lucrezia @
-RZ08d R Simic, Value Engine @
-RA09 R Wurmcoil Broodmother @
-RC09 R Everyone's an Imposter @
-RZ09 R Daxiver, Izzet Electromancer @
-RG10 R Emrakul and Chatterfang @
-RR10 R The Crimson Avenger @
-RZ10 R Ano'thr, Equipment Commander @
-CA11 C Toe-Breaking Helmet @
-CA11b C Color Pie @
-CB11 C Unclaimed Blessing @
-CB11a C Life at Stake @
-CR11a C Establishing Shot @
-CU11 C Point to the Scoreboard @
-CW11 C Drive to Work @
-RA11a R Mindslaver Toolkit @
-RA11b R Mox Poison @
-RG11 R Occupation of Llanowar @
-RG11a R Just a Li'l Guy @
-RZ11a R Awoken Nephilim @
-RZ11b R The Scholar of Seas @
-RZ11c R The Mystery Raceway @
-UA11 U Original Skullclamp @
-UB11 U Delve too Deep @
-UB11a U Would You Have Done the Same? @
-UR11a U Nevermind @
-UR11b U Tax Bolt @
-UU11 U Where We're Going . . . @
-UU11a U Clear, the Mind @
-UU11b U Elemental, My Dear @
-UW11 U Echoing Echo @
-UW11a U Out of Town @
-CA12 C Melira's Snacks @
-CB12 C Mark Ritual @
-CG12 C Peel Out @
-CR12a C Now THIS Is Aether Racing @
-CU12 C Chic // Ago @
-CU12a C One Does Not @
-CU12b C Taught by Narset @
-CW12 C Taught by Serra @
-RA12a R Guildmark @
-RA12b R Trampled Lotus @
-RG12a R HONK! @
-RG12b R Clear, Fair Magic @
-RU12 R Untap, Upkeep, Draw @
-RZ12b R Zimone's Homework @
-RZ12chan R Eldest Dragon Highlander @
-UB12 U Sheoldred's Terror @
-UG12 U Rampant, Growth @
-CB13 C Long-Term Phyresis Study @
-CB13b C Taught by Vito @
-CG13 C Take the High Ground @
-CR13 C Burn the Phyresis @
-CU13 C More of That Strange Oil... @
-RA13 R Sort of _____ and _____ @
-RB13 R The Archenemy's Charm @
-RB13a R Davvol's Birthdaymobile @
-RB13b R The Underworld Fantasy Queen @
-RR13b R Triple Threat @
-RW13 R Life Cloud @
-UR13 U Furnace Oriflamme @
-UR13b U Across the Multiverse @
-UU13 U Takesies // Backsies @
-UW13 U You're Toast! @
-CG14 C Taught by Surrak @
-CR14a C My Deck is About a Seven @
-CR14b C Taught by Bruce Tarl @
-RB14 R Another Night in Vegas @
-RR14 R Brutal Command @
-UU14a U Tax Draw @
-UU14b U Tax Sweeper @
-# CR15a C Fast // Furious @  -- disabled: collides with MH2 "Fast // Furious"; only rules script is the MH2 legal version, so loading this printing would attach wrong rules to joke art.
-RB15 R Monster Mash-Up @
-RR15 R Force of Rowan @
-RW15 R Crux of Mirrodin @
-RZ15 R Knowing // Half the Battle @
-RZ15b R First Stage of Magic Design @
-UG15 U The Alright Henge @
-UR15 U Lava, Axe @
-UW15 U Theros Charm @
-RR16 R Math is for Blockers @
-RZ16 R The Beleaguered Boxer @
-UB16 U Ransack, the Lab @
-RZ24 R The Dogronmaster @
-MA30 M Phila, Unsealed @
-RA31 R The Rebellious Intelligence @
-RZ34 R The Duke of Midrange @
-RW35a R The Asker of More Mana @
-RW35b R The Asker of More Mana @
-RU38 R The Crab Queen @
-RU42 R The Fish Brewer @
-RW47 R The Curve Keeper @
-RB54 R The Disciple of Vess @
-RG59 R The Bear Force Pilot @
-RG59a R The Bear Force Pilot Runner @
-RG63 R The Roaring Toeclaws @
-RR66 R The Crafter @
-RU72 R The Rhystic Storyteller @
-RW90a R The Keeper of Favorite Cards @
-RW90b R The Keeper of Favorite Cards @
-RW90c R The Keeper of Favorite Cards @
-RW90d R The Keeper of Favorite Cards @
-RW90e R The Keeper of Favorite Cards @
-MZ99 M The Collector @
+20230201 R Crux of Mirrodin @
+20230202 U Echoing Echo @
+20230203 U Good Knight @
+20230204 C Incisor Steed @
+20230205 R Leech Medic @
+20230206 R Life Cloud @
+20230207 U Rosewater's Nemesis @
+20230208 C Unclaimed Cat @
+20230209 C Drake with Set's Mechanic @
+20230210 R Memnarchitect @
+20230211 C More of That Strange Oil... @
+20230212 R Phyrexian Broodstar @
+20230213 C Point to the Scoreboard @
+20230214 U Tricky Mage @
+20230215 C Unclaimed Bird @
+20230216 R Untap, Upkeep, Draw @
+20230217 U Bad Knight @
+20230218 R Hidetsugu's Poison Rite @
+20230219 C Long-Term Phyresis Study @
+20230220 U Nim Mongoose @
+20230221 R Old Way Phyrexian @
+20230222 U Phyrexian Chimney Imp @
+20230223 U Sheoldred's Terror @
+20230224 C Unclaimed Blessing @
+20230225 C Burn the Phyresis @
+20230226 U Furnace Oriflamme @
+20230227 R Hound of Urabrask @
+20230228 C Join the Winning Team @
+20230229 C Phyrexian Esthetician @
+20230230 U Red Priest of Yawgmoth @
+20230231 R Snapsail Rider @
+20230232 U Unclaimed Battle Axe @
+20230233 U Arcbound Mamba @
+20230234 R Bringer of Green Zenith's Twilight @
+20230235 R Locus Cobra @
+20230236 C Naturalize the Phyresis @
+20230237 R Pulse of the Hunter Maze @
+20230238 C Take the High Ground @
+20230239 R Then, Dreadmaws Ate Everyone @
+20230240 C Unclaimed Tanadon @
+20230241 R Forestfolk @
+20230242 M Delphia, Undecided @
+20230243 M Phila, Unsealed @
+20230244 R Call Up Emrakul to Help @
+20230245 R Chancellor of the Mulligan @
+20230246 U Compleated Clone Shell @
+20230247 R Glorious Dragon-Kin @
+20230248 R Goblin Savant @
+20230249 C Melira's Snacks @
+20230250 R Mindslaver Toolkit @
+20230251 R Mox Poison @
+20230252 R Oilskelion @
+20230253 U Original Skullclamp @
+20230254 C Phyrexian Ornithopter @
+20230255 R Platinum Persecutor @
+20230256 U Sawtooth Avenger @
+20230257 C Sojourner's Enforcermite @
+20230258 R Sort of _____ and _____ @
+20230259 R Soul of Mirrodin @
+20230260 R Who's That Praetor? @
+20230261 C Artifact Unknown Shores @
+20230262 C The Forgotten Place @
+20230501 R Agoraphobic Phyrexian @
+20230502 R Azorius Traffic Enforcement @
+20230503 R Gerrard and Hanna @
+20230504 U Hero's Uncle @
+20230505 R Isamaru and Yoshimaru @
+20230506 R Kylem All-Star @
+20230507 U Theros Charm @
+20230508 U Farseeing Flockmate @
+20230509 R Phyrexian Adapter @
+20230510 C Shadowmoor Draw Spell @
+20230511 R Toothy and Zndrsplt @
+20230512 U Ulgrotha Charm @
+20230513 R Welcome to Mini-apolis @
+20230514 U Xerex Squire @
+20230515 R Incubation Triformer @
+20230516 U Incubob @
+20230517 U Innistrad Charm @
+20230518 R Invasion Specialist @
+20230519 C May of the Machine @
+20230520 R Myojin of Night's Reach and Grim Betrayal @
+20230521 R Quest Compleated Beast @
+20230522 U Across the Multiverse @
+20230523 C Azra Matchthrower @
+20230524 U Jeska and Kamahl @
+20230525 U P-Joven and Chandler @
+20230526 U Nevermind @
+20230527 R Norin and Feldon @
+20230528 M Polis the Planeshifter @
+20230529 U Tarkir Charm @
+20230530 R Chatterstorm and Awaken the Woods @
+20230531 U Kamigawa Charm @
+20230532 C Merfolk Surveyor @
+20230533 M Minnea, Planar Tourist @
+20230534 R Occupation of Llanowar @
+20230535 R Phyrexian Cytoshaper @
+20230536 R Praetorhoof Behemoth @
+20230537 C That's No Moonmist @
+20230538 R Shahrazad and Sindbad @
+20230539 R Riven Turnbull and Princess Lucrezia @
+20230540 R Avacyn and Griselbrand @
+20230541 R Knowing // Half the Battle @
+20230542 R Autumn Willow and Baron Sengir @
+20230543 R Colossal Dreadmaw and Storm Crow @
+20230544 R Koma and Toski, Compleated @
+20230545 R Riku and Riku @
+20230546 R Halana and Alena and Gisa and Geralf @
+20230547 R Anax and Cymede & Kynaios and Tiro @
+20230548 R Emrakul and Chatterfang @
+20230549 R Battle Myrsphere @
+20230550 R Bob the Claymore @
+20230551 C Common Curve Filler @
+20230552 R Guildmark @
+20230553 R Huge Truck @
+20230554 R Jitte and Divining Top @
+20230555 R Luxior and Shadowspear @
+20230556 R Manakin and Millikin @
+20230557 R Phyrexian Incubator @
+20230558 U Segovian Sword @
+20230559 R Sword of Fire and Ice and War and Peace @
+20230560 C Unicycling Automaton @
+20230561 R The Belligerent and Useless Island @
+20230562 C Unknown Event Shores @
+20230701 R Fioran Reformist @
+20230702 R Form of the Stax Player @
+20230703 U Gather, the Townsfolk @
+20230704 C Taught by Serra @
+20230705 U Tax Hounds @
+20230706 R Theopholos, Order Acolyte @
+20230707 R Try-My-Deck Elemental @
+20230708 R White Rhystic Study @
+20230709 M Barce, Friend Finder @
+20230710 U Clear, the Mind @
+20230711 R Dockbreacher @
+20230712 U Ensoul Ring @
+20230713 R Lorthos, Tentacled Terror @
+20230714 C One Does Not @
+20230715 U Ring Out @
+20230716 C Taught by Narset @
+20230717 U Tax Draw @
+20230718 R Auntie Flint @
+20230719 U Delve too Deep @
+20230720 U Ransack, the Lab @
+20230721 C Shedding Snake @
+20230722 U Soul Drainer @
+20230723 C Taught by Vito @
+20230724 U Tax Sweeper @
+20230725 U Lava, Axe @
+20230726 R Math is for Blockers @
+20230727 C My Deck is About a Seven @
+20230728 R Mzed, Mercenary Leader @
+20230729 C Taught by Bruce Tarl @
+20230730 U Tax Bolt @
+20230731 R Triple Threat @
+20230732 R Lona, Tracker of the Known @
+20230733 R Maître Tree @
+20230734 R Mr. Wiggles, Helpful Butterfly @
+20230735 U Rampant, Growth @
+20230736 C Taught by Surrak @
+20230737 U Tax Keeper @
+20230738 R The Colossal Dreadmaw @
+20230739 R The Dilu Horse @
+20230740 R Valko Indorian, Researcher @
+20230741 R Kallist Rhoka @
+20230742 R Slobad, Actually Just Fine @
+20230743 R Hadran, Naya Sunseeder @
+20230744 R Margle, Cousin of Yargle @
+20230745 R Arvad of the Weatherlight @
+20230746 R Daxiver, Izzet Electromancer @
+20230747 R Groaaaaag, Hungry Monster @
+20230748 R Ano'thr, Equipment Commander @
+20230749 R Simic, Value Engine @
+20230750 R Eldest Dragon Highlander @
+20230751 R Awoken Nephilim @
+20230752 R Command From the Shadows @
+20230753 R Enolc, Perfect Clone @
+20230754 R Mysterious Confluence @
+20230755 C Potatoes @
+20230756 U Power Level Analyzer @
+20230757 U Sagrada Familiar @
+20230758 R Spice Rack @
+20230759 C Toe-Breaking Helmet @
+20230760 R Your Favorite Character @
+20230761 C Your Mana Rock @
+20230762 U Mana Conference @
+20230801 M Gen, Confider of Ages @
+20230901 R Bram, Baguette Brawler @
+20230902 R Ratatwotwo @
+20230903 R Stika, Playtestress @
+20230904 M You, Magic Playtester @
+20230905 U Adventurer Beguiler @
+20230906 R Really Charming Prince @
+20230907 C Wistful Puppeteer @
+20230908 R Wrath of Oko @
+20230909 R Dan, Shrewd Trader @
+20230910 R Night Out in Vegas @
+20230911 R Rankle, Master of Pranksters @
+20230912 C Syr Konrad's Squire @
+20230913 C Believe in the Cleave @
+20230914 R Force of Rowan @
+20230915 R Kevin, Questing Dragon @
+20230916 U Must Be Knights @
+20230917 C Garruk's Lost Wolf @
+20230918 R Grek the Ogre @
+20230919 R HONK! @
+20230920 R Questing Cosplayer @
+20230921 U The Alright Henge @
+20230922 U Takesies // Backsies @
+20230923 R Maeve, Wearer of Many Hats @
+20230924 R Princess Snowfall @
+20230925 R Banned Eldraine Card @
+20230926 U Cat Oven @
+20230927 R Cinnamon, Seasoned Steed @
+20230928 U Gingerbehemoth @
+20230929 U Magic Designer @
+20230930 R Playtest Wish @
+20230931 R The Companion of the Wilds @
+20230932 R Trampled Lotus @
+20230933 C Command Mine @
+20230934 C Command Power Plant @
+20240201 U Identify the Culprit @
+20240202 C Illuminating Detective @
+20240203 R The Asker of More Mana @
+20240204 R The Curve Keeper @
+20240205 R The Keeper of Favorite Cards @
+20240206 R The Knight of Weeks @
+20240207 U Windy City Elemental @
+20240208 R Disguise Agent @
+20240209 C Educated Detective @
+20240210 U Elemental, My Dear @
+20240211 C Irrefutable Evidence @
+20240212 R The Crab Queen @
+20240213 R The Fish Brewer @
+20240214 R The Rhystic Storyteller @
+20240215 R The Value Knight @
+20240216 U Bloodspatter Vampire @
+20240217 C Demon Detective @
+20240218 U Halving Season @
+20240219 U Impressive Rat @
+20240220 C Life at Stake @
+20240221 R The Disciple of Vess @
+20240222 R The Keeper of Dark Pacts @
+20240223 C Aggressive Detective @
+20240224 U Guess Who it Is! @
+20240225 R The Crafter @
+20240226 R The Crimson Avenger @
+20240227 R The Knight of Land Drops @
+20240228 U Ate-o'-Clock @
+20240229 C Growing Detective @
+20240230 C Investi-Gate @
+20240231 U Primetime Suspect @
+20240232 R The Bear Force Pilot @
+20240233 R The Roaring Toeclaws @
+20240234 R The Spike Cactus @
+20240235 U Trash Panda @
+20240236 R The Sprinkler of Stardust @
+20240237 R The Duke of Midrange @
+20240238 R The Dogronmaster @
+20240239 R The Scholar of Seas @
+20240240 R The Water Maro @
+20240241 R The Beleaguered Boxer @
+20240242 M The Collector @
+20240243 R The Rebellious Intelligence @
+20240244 U Deep Dish Pizza @
+20240245 U Guilded Lotus @
+20240246 R Guild Pact @
+20240247 U Interrogation Robot @
+20240248 C Karlov's Crossbow @
+20240249 C Simic Slaw @
+20240250 U That Which Was Compleated @
+20240251 U Urza's Hot Dog Stand @
+20240601 R The Inspector Inspector @
+20240602 R The Kami Knight @
+20240603 R The Miniaturizer @
+20240604 S The Pleasant Taxer @
+20240605 R The Clever Magician @
+20240606 R The Juzam Master @
+20240607 R The Magic Bandit @
+20240608 R The Zassacre Zirl @
+20240609 R The Great Juggernaut @
+20240610 R The Disciple of Nissa @
+20240611 R The Massive Zatcatl @
+20240612 R The Keeper of the Yellow Hat @
+20240613 R The Ash Lizard @
+20240614 R The Marvelous Scientist @
+20240615 R The Joiner of Cats @
+20240616 R The Keeper of Kaldra @
+20240617 R The Karst, Enchanted @
+20240618 R The Egotistical Velociraptor @
+20240619 R The Trivia Mastermind @
+20240620 R The Master of Cuisine @
+20240621 R The Wise Sable @
+20240622 M The Horizon Seeker @
+20240623 R The Knight of Commentary @
+20240624 U Bag of Stroopwafels @
+20240625 U Black Tulip @
+20240626 U Famous Museum @
+20240627 C Leisure Bicycle @
+20240628 U Windmill Slam @
+20240629 R The Magical City, New @
+20240801 R Genevieve, Conniving Dragon @
+20240802 M The Convincing General @
+20240803 R The Battle of Dragon Brothers @
+20241001 C Drive to Work @
+20241002 R Hosting Season @
+20241003 R Sixth Stage of Magic Design @
+20241004 R The Highland Runner @
+20241005 R The Keeper of Favorite Cards @
+20241006 R The Keeper of Four Scythes @
+20241007 R The Sixth Seraph @
+20241008 R The Tokenator @
+20241009 R Third Stage of Magic Design @
+20241010 R Fourth Stage of Magic Design @
+20241011 R Second Stage of Magic Design @
+20241012 R The Cosplayzer @
+20241013 R The Countering Runner @
+20241014 R The Covert Blue Mage @
+20241015 R The Fearsome Flock @
+20241016 R Another Night in Vegas @
+20241017 C Mark Ritual @
+20241018 R Seer of the Bright Side @
+20241019 R The Archenemy's Charm @
+20241020 R The Gunky Runner @
+20241021 R At Least It's a Dry Heat @
+20241022 C Fear of Going 0-2 Drop @
+20241023 R The Powerful Dragon @
+20241024 R The Wheeling Runner @
+20241025 R The Wiley Speedster @
+20241026 R Clear, Fair Magic @
+20241027 C Fear of Unsleeved Decks @
+20241028 R Oozeavite @
+20241029 R The Bear Force Pilot Runner @
+20241030 R The Paradise Bird @
+20241031 R The Milling Runner @
+20241032 R The Actualizer @
+20241033 R Fifth Stage of Magic Design @
+20241034 R The Weekly Princess @
+20241035 R The Zonian Brawler @
+20241036 R The Chaos Keeper @
+20241037 R The Caffeinated Runner @
+20241038 R The Judge of Height @
+20241039 R Seventh Stage of Magic Design @
+20241040 R The Cobra King @
+20241041 R The Majestic Duo @
+20241042 R Zimone's Homework @
+20241043 R The Multiplayer Nitpickers @
+20241044 R The Fifth Alias @
+20241045 R The Bus Runner @
+20241046 R First Stage of Magic Design @
+20241047 M The Unknown Wizard @
+20241048 R Fear of the Unknown @
+20241049 R Sharp Eraser @
+20250201 C Catch-Up Mechanic @
+20250202 R Draw Team Lines @
+20250203 R Htbr, Racetrack Referee @
+20250204 U Unstickerify @
+20250205 M You, Iterative Playtester @
+20250206 C Chic // Ago @
+20250207 R MagicConsecrated Sphinx @
+20250208 R Rinta, Cousin of Sitka @
+20250209 U Team Mage @
+20250210 U Where We're Going . . . @
+20250211 U Windy City Aven @
+20250212 R Davvol's Birthdaymobile @
+20250213 U Team Perseverance @
+20250214 R The Multifaceted Phyrexian @
+20250215 U Would You Have Done the Same? @
+20250216 R Char-Dog @
+20250217 C Establishing Shot @
+# 20250218 C Fast // Furious @  -- disabled: collides with MH2 "Fast // Furious"; only rules script is the MH2 legal version, so loading this printing would attach wrong rules to joke art.
+20250219 R Mana Max, Afterburner @
+20250220 R Mijo, the Bull @
+20250221 R Need for Speed (Not the Odyssey One) @
+20250222 C Now THIS Is Aether Racing @
+20250223 R Rafi, Retro Racer @
+20250224 R Just a Li'l Guy @
+20250225 C Peel Out @
+20250226 R Retto, Family Racer @
+20250227 U Team Acceleration @
+20250228 C Underdog Racer @
+20250229 R The Fact Checker @
+20250230 R X, Mystery Racer @
+20250231 R The Good Time Sleuth @
+20250232 R Gomif, Fast Racer @
+20250233 R The Zabulous Cosplayer @
+20250234 R Jiffy, Vehicle Repairer @
+20250235 R The Mox Painter @
+20250236 R Sue, Everlasting Dinosaur @
+20250237 U Aetherflux Car @
+20250238 R Chandra's Dragonmech @
+20250239 C Item Crate @
+20250240 U Kibo's Bananamobile @
+20250241 U Moth Herb Elixir @
+20250242 R Winter's Demonmech @
+20250243 R The Mystery Raceway @
+20250244 R ______ @
+20250245 U Reflective Gate @
+20250601 U Devoted Mardu @
+20250602 R Naming Screen @
+20250603 U Out of Town @
+20250604 U Rideable Mantis @
+20250605 R Save Point @
+20250606 R The Keeper of Favorite Cards @
+20250607 U You're Toast! @
+20250608 R Blu, Mansion Prince @
+20250609 U Devoted Jeskai @
+20250610 U Dialogue Tree @
+20250611 U Fear of Forgetting Names @
+20250612 U Higher Level Zone Monster @
+20250613 R The Misty Stepper @
+20250614 U Devoted Abzan @
+20250615 R Mister Cheddar, Cheese Sliver @
+20250616 C Reverse Ninja @
+20250617 R Surprise, Nerd! @
+20250618 U Vamping Vampire @
+20250619 R Yet Another Night in Vegas @
+20250620 R Advanced Tactics @
+20250621 R Brutal Command @
+20250622 U Devoted Temur @
+20250623 R Tragda, the Burner @
+20250624 U Devoted Sultai @
+20250625 R Stormscale Wurm @
+20250626 U You and Ooze Army? @
+20250627 R Blue Screen of Death @
+20250628 U Red and Black Legac @
+20250629 R The Vegetable Car @
+20250630 R Tarkiran Towelsbane @
+20250631 R The Sprinkler of Stardust @
+20250632 R The River Warlock @
+20250633 R The Brewing Chef @
+20250634 R The Herald of Numot @
+20250635 R Shen, Wish Granter @
+20250636 R The Game-Changing Host @
+20250637 C Color Pie @
+20250638 R New Magic Game Plus @
+20250639 M The Faction Dragon @
+20250640 R The Mysterious Sphere @
+20250641 U Twenty Lessons @
+20250642 U Your Favorite Missing Character @
+20250643 R Chicago Loop @
+20250644 C Tarkir Omenpath @
+20250801 C Literal Delver of Secrets @
+20250802 R Noyd, Keeper of the Void @
+20250803 R Lander Rizzi @
+20250804 R Pirk, Heroic Captain @
+20250805 R Efteekay, Flame of the Kav @
+20250806 R Saga of Krark Losing His Thumb @
+20250807 R Syx, Robot Overlord @
+20250808 R Monet, Sensei of the Sewers @
+20250809 R Frie, Displaced in Time @
+20250810 R The Convention Enthusiast @
+20250811 C May the Mana Be with You @
+20250812 R Blustering Barnyard @
+20250901 U 17-Year Cicadas @
+20250902 U Brave Falconhawk @
+20250903 R The Asker of More Mana @
+20250904 R The Keeper of Favorite Cards @
+20250905 R Lord of Atlanta @
+20250906 R The Charitable Drafter @
+20250907 R The Commander Recommender @
+20250908 U Fear of Fear Itself @
+20250909 R Monster Mash-Up @
+20250910 C Joraga Peach @
+20250911 R The Policy Maker @
+20250912 R The Octopus Official @
+20250913 R Falko, Showoff Pilot @
+20250914 R The Traveling Postman @
+20250915 R The Vast Scrier @
+20250916 R The Snapstone Wielder @
+20250917 M The Waffle Restaurant @
+20250918 R A-Town @
+20260501 R The Keeper of Favorite Cards @
+20260502 R The Karfell Rocker @
+20260503 R The Playful Winners @
+20260504 R The Whiteboarder @
+20260505 R Yeah Nah // Nah Yeah @
+20260506 R A Chaotic Night in Vegas @
+20260507 R Bin Chicken @
+20260508 C Fear (split card) // Loathing @
+20260509 R Rat of God @
+20260510 R The Underworld Fantasy Queen @
+20260511 R Auntie Ant, Ant Auntie @
+20260512 R Occupation of Kulrath @
+20260513 R The Bringer of the Red Beard @
+20260514 R Land Station @
+20260515 C Spare Changeling @
+20260516 R The Goblin Mastermind @
+20260517 R Drop Bear @
+20260518 R The Ancient Dingus @
+20260519 R Welcome to Australia @
+20260520 C Blended Twistling @
+20260521 R The Wizardly Barge @
+20260522 R The Salubrious Philosopher @
+20260523 R Uh, Squen & Cragg Made a Card @
+20260524 R The Bearded Teakeeper @
+20260525 R The Bird Champion @
+20260526 R The Sad Creaturez @
+20260527 R The Cookout Creator @
+20260528 R The Good Gamers @
+20260529 R The Ice Dancer @
+20260530 R Evy, Fang Keeper @
+20260531 C A Container of Booster Packs @
+20260532 R Colorless Ultimatum @
+20260533 U Crow Scarer @
+20260534 R Everyone's an Impostor @
+20260535 R The Five Stages of Grief @
+20260536 M The Strixhaven-Lorwyn Rover @
+20260537 U Tinfoil Helm @
+20260538 R Wurmcoil Broodmother @
+20260539 R The Goblin Sparring Grounds @
+20260540 U P-Artist Alley @
+20260701 R Bobby, Another Dwarf @
+20260702 C I'm Going On An Adventure! @
+20260703 R Robby, Another Dwarf @
+20260704 U Mysterious Hero @
+20260705 R Split into Three Parts @
+20260706 R The Swamp Kitten @
+20260707 U CGI Fight Sequence @
+20260708 R The Local Guides @
+20260709 R Wheel of Not Ideal @
+20260710 R Tarelily, Lovestruck Archer @
+20260711 R Niv-Mizzet's Diary @
+20260712 C Emerin, Shivan Angel @
+20260713 R The Meld Hound @
+20260714 M The Flavormancer @
+20260715 M The Generational Historian @
+20261101 R Proud Parent @
+20261102 R The Charitable Kids @
+20261103 R The Countess of Counterspells @
+20261104 R The Rhystic Friends @
+20261105 R The No Mana Bard @
+20261106 R Throw Shade @
+20261107 R Red Smothering Tithe @
+20261108 R Strixhaven Film Student @
+20261109 M Raccoon @
+20261110 R The Lorwyn Lizard @
+20261111 C The Urza Finder @
+20261112 M Ms. Bumbleflower, No Longer Kind @
+20261113 R The Queen of Wolves @
+20261114 R The Gaming Explainer @
+20261115 M Shroomsday, Feast Spoiler @
+20261116 R The Radioactive Gravymaker @
+20261117 R The Sabertooth Wizard @
+20261118 R The Tale of Jimothy @
+20261119 R The Kinnan Hirer @
+20261120 R The King of Grixis @
+20261121 R Critter, Behind the Camera @
+20261122 R Gigi Wellplayed @
+20261123 R The Alien Spellslayer @
+20261124 R The Roaming Guild Pack @
+20261125 R The Sayer of Don't @
+20261126 R The Stylish Spellslayer @
+20261127 R Ham Sandwich @
+20261128 M The Mystery Booster @
+20261129 R The Wondrous Architect @
+20261130 R The Bird Pool @
 
 [CreatureTypes]
 Glass:Glasses
 Stained:Stained
+Judge:Judges
+Chef:Chefs

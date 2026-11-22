@@ -1,80 +1,74 @@
 [metadata]
-Name=Built from Scratch
-Set=C14
+Name=Reign of Dragons [FDC] [2026]
 [Commander]
-1 Daretti, Scrap Savant|C14
+1 Lathliss, Dragon Queen|FDC
 [Main]
-1 Arcane Lighthouse|C14
-1 Beetleback Chief|C14
-1 Bitter Feud|C14
-1 Blasphemous Act|C14
-1 Bogardan Hellkite|C14
-1 Bosh, Iron Golem|C14
-1 Bottle Gnomes|C14
-1 Buried Ruin|C14
-1 Caged Sun|C14
-1 Cathodion|C14
-1 Chaos Warp|C14
-1 Commander's Sphere|C14
-1 Darksteel Citadel|C14
-1 Dormant Volcano|C14
-1 Dreamstone Hedron|C14
-1 Dualcaster Mage|C14
-1 Epochrasite|C14
-1 Everflowing Chalice|C14
-1 Faithless Looting|C14
-1 Feldon of the Third Path|C14
-1 Fire Diamond|C14
-1 Flamekin Village|C14
-1 Flametongue Kavu|C14
-1 Forgotten Cave|C14
-1 Ghost Quarter|C14
-1 Goblin Welder|C14
-1 Great Furnace|C14
-1 Hoard-Smelter Dragon|C14
-1 Ichor Wellspring|C14
-1 Impact Resonance|C14
-1 Incite Rebellion|C14
-1 Ingot Chewer|C14
-1 Jalum Tome|C14
-1 Junk Diver|C14
-1 Liquimetal Coating|C14
-1 Loreseeker's Stone|C14
-1 Magmaquake|C14
-1 Mind Stone|C14
-8 Mountain|C14|[330]
-7 Mountain|C14|[331]
-7 Mountain|C14|[332]
-7 Mountain|C14|[333]
-1 Mycosynth Wellspring|C14
-1 Myr Battlesphere|C14
-1 Myr Retriever|C14
-1 Myr Sire|C14
-1 Palladium Myr|C14
-1 Panic Spellbomb|C14
-1 Pentavus|C14
-1 Phyrexia's Core|C14
-1 Pilgrim's Eye|C14
-1 Pristine Talisman|C14
-1 Reliquary Tower|C14
-1 Ruby Medallion|C14
-1 Scrap Mastery|C14
-1 Smoldering Crater|C14
-1 Sol Ring|C14
-1 Solemn Simulacrum|C14
-1 Spine of Ish Sah|C14
-1 Spitebellows|C14
-1 Starstorm|C14
-1 Steel Hellkite|C14
-1 Swiftfoot Boots|C14
-1 Temple of the False God|C14
-1 Trading Post|C14
-1 Tuktuk the Explorer|C14
-1 Tyrant's Familiar|C14
-1 Unstable Obelisk|C14
-1 Volcanic Offering|C14
-1 Warmonger Hellkite|C14
-1 Wayfarer's Bauble|C14
-1 Whipflare|C14
-1 Word of Seizing|C14
-1 Wurmcoil Engine|C14
+1 Atsushi, the Blazing Sky|FDC
+1 Dragonhawk, Fate's Tempest|FDC
+1 Dragonmaster Outcast|FDC
+1 Drakuseth, Maw of Flames|FDC
+1 Goddric, Cloaked Reveler|FDC
+1 Goldlust Triad|FDC
+1 Hellkite Charger|FDC
+1 Leyline Tyrant|FDC
+1 Minion of the Mighty|FDC
+1 Nogi, Draco-Zealot|FDC
+1 Parapet Thrasher|FDC
+1 Sarkhan, Dragon Ascendant|FDC
+1 Scourge of the Throne|FDC
+1 Scourge of Valkas|FDC
+1 Shivan Devastator|FDC
+1 Taurean Mauler|FDC
+1 Terror of Mount Velus|FDC
+1 Thunderbreak Regent|FDC
+1 Thundermane Dragon|FDC
+1 Tyrant's Familiar|FDC
+1 Utvara Hellkite|FDC
+1 Anger|FDC
+1 Dragonlord's Servant|FDC
+1 Dragonspeaker Shaman|FDC
+1 Firespitter Whelp|FDC
+1 Rapacious Dragon|FDC
+1 Skyline Despot|FDC
+1 Count on Luck
+1 Crucible of Fire|FDC
+1 Dragon Tempest|FDC
+1 The Elder Dragon War|FDC
+1 Outpost Siege|FDC
+1 Warstorm Surge|FDC
+1 Bitter Reunion|FDC
+1 Breaching Dragonstorm|FDC
+1 Cursed Mirror|FDC
+1 Orb of Dragonkind|FDC
+1 Basilisk Collar|FDC
+1 Dragon's Hoard|FDC
+1 Carnelian Orb of Dragonkind|FDC
+1 Arcane Signet|FDC|[245]
+1 Commander's Sphere|FDC
+1 Dragonstorm Globe|FDC
+1 Fire Diamond|FDC
+1 Hazoret's Monument|FDC
+1 Herald's Horn|FDC
+1 Sol Ring|FDC|[286]
+1 Swiftfoot Boots|FDC
+1 Chaos Warp|FDC
+1 Magmaquake|FDC
+1 Spit Flame|FDC
+1 Abrade|FDC
+1 Breath Weapon|FDC
+1 Lightning Bolt|FDC
+1 Thrill of Possibility|FDC
+1 Unexpected Windfall|FDC
+1 Blasphemous Act|FDC
+1 Chain Reaction|FDC
+1 Chandra's Ignition|FDC
+1 Hit the Mother Lode|FDC
+1 Mana Geyser|FDC
+1 Bonders' Enclave|FDC
+1 Haven of the Spirit Dragon|FDC
+1 Spinerock Knoll|FDC
+1 War Room|FDC
+1 Forgotten Cave|FDC
+1 Temple of the False God|FDC
+16 Mountain|FDN|[278]
+16 Mountain|FDN|[279]

@@ -1,0 +1,17 @@
+Name:Demonic Tourist Laser
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Demonic
+SVar:STK2:Kind$ Name | Word$ Tourist
+SVar:STK3:Kind$ Name | Word$ Laser
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Outlast {1} ({1}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.) | Keywords$ Outlast:1
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ When this permanent dies, you get seven {TK}. | Triggers$ STK8Dies
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 1 | Toughness$ 4
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 9 | Toughness$ 6
+SVar:STK8Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ STK8Tickets | TriggerDescription$ When this permanent dies, you get seven {TK}.
+SVar:STK8Tickets:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 7
+Oracle:{TK}{TK} — Outlast {1} ({1}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\n{TK}{TK}{TK} — When this permanent dies, you get seven {TK}.\n{TK}{TK} — 1/4\n{TK}{TK}{TK}{TK}{TK} — 9/6
