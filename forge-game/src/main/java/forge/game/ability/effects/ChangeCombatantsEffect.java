@@ -14,6 +14,10 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChangeCombatantsEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "ForEach", "Optional",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"Attacking", "Blocking"}};
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
