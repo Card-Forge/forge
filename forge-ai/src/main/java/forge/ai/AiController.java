@@ -2850,14 +2850,13 @@ public class AiController {
         }
         if (extras.contains(result.choice)) {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
-            // it is still aimed where the rollouts liked it, and that it can still be paid for.
+            // it is still aimed where the rollouts liked it, and that it is still legal and payable in the real game.
             if (result.target != null && !FlatMonteCarloPicker.applyTarget(result.choice, result.target)) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
-            if (guardProblem(result.choice, null, saveCantrips) != null) {
+            if (guardProblem(result.choice, null, saveCantrips) != null || !isStillCastable(result.choice)) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
-            result.choice.setActivatingPlayer(player);
             return result.choice;
         }
         // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
@@ -3108,7 +3107,7 @@ public class AiController {
         return false;
     }
 
-    private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+    boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (sa == null) {
             return false;
         }
@@ -3146,7 +3145,8 @@ public class AiController {
             return false;
         }
         switch (opinion) {
-            case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
+            case CantPlaySa, CantAfford, CantAffordX, StopRunawayActivations, TimingRestrictions,
+                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
                 return false;
             default:
                 break;
@@ -3187,7 +3187,7 @@ public class AiController {
         }
     }
 
-    private boolean isStillCastable(final SpellAbility sa) {
+    boolean isStillCastable(final SpellAbility sa) {
         sa.setActivatingPlayer(player);
         try {
             return sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);

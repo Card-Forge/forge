@@ -250,7 +250,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         // Try to chain damage/debuff effects
