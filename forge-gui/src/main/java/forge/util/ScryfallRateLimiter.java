@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Global pacing/cooldown gate for api.scryfall.com endpoints. Never applies to cards.scryfall.io
@@ -29,7 +30,7 @@ public final class ScryfallRateLimiter {
     private static long lastSearchRequestAt = 0;
     private static final Object defaultPacingLock = new Object();
     private static long lastDefaultRequestAt = 0;
-    private static volatile Date cooldownUntil = null;
+    private static final AtomicLong cooldownUntilMs = new AtomicLong(0);
 
     /** Hosts we know nothing about: one request per second, since no limit is published. */
     private static final long HOST_INTERVAL_MS = 1000;
@@ -40,7 +41,7 @@ public final class ScryfallRateLimiter {
         final String name;
         final Object lock = new Object();
         long lastRequestAt = 0;
-        volatile long cooldownUntilMs = 0;
+        final AtomicLong cooldownUntilMs = new AtomicLong(0);
 
         PacedHost(String name) {
             this.name = name;
@@ -100,12 +101,10 @@ public final class ScryfallRateLimiter {
 
     /**
      * Whether we are still backing off after Scryfall rate limited us. An expired cooldown is left in place rather
-     * than cleared: many threads ask at once, and a clear could erase a cooldown that a 429 set in the meantime
-     * or leave {@link #awaitCooldownCleared} reading null.
+     * than cleared: many threads ask at once, and a clear could erase a cooldown that a 429 set in the meantime.
      */
     public static boolean isCoolingDown() {
-        final Date until = cooldownUntil;
-        return until != null && until.after(new Date());
+        return cooldownUntilMs.get() > System.currentTimeMillis();
     }
 
     /**
@@ -117,9 +116,11 @@ public final class ScryfallRateLimiter {
      */
     public static void noteRateLimited(String triggerUrl, long retryAfterSeconds) {
         long seconds = retryAfterSeconds > 0 ? retryAfterSeconds : DEFAULT_COOLDOWN_SECONDS;
-        cooldownUntil = new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds));
+        // concurrent responses race here: a shorter Retry-After must never cut short a cooldown that is already set
+        final long until = cooldownUntilMs.accumulateAndGet(
+                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds), Math::max);
         System.err.println("==== Scryfall returned 429 for: " + triggerUrl
-                + " -- backing off all api.scryfall.com requests until " + cooldownUntil + " ====");
+                + " -- backing off all api.scryfall.com requests until " + new Date(until) + " ====");
     }
 
     /** Parses a {@code Retry-After} header value (seconds) into seconds, or {@code -1} if absent/unparseable. */
@@ -147,9 +148,10 @@ public final class ScryfallRateLimiter {
         if (host != null && (responseCode == 429 || responseCode == 503)) {
             final long retryAfter = parseRetryAfterSeconds(retryAfterHeader);
             final long seconds = retryAfter > 0 ? retryAfter : HOST_DEFAULT_COOLDOWN_SECONDS;
-            host.cooldownUntilMs = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
+            final long until = host.cooldownUntilMs.accumulateAndGet(
+                    System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds), Math::max);
             System.err.println("==== " + host.name + " returned " + responseCode + " for: " + url
-                    + " -- backing off all " + host.name + " requests for " + seconds + "s ====");
+                    + " -- backing off all " + host.name + " requests until " + new Date(until) + " ====");
         }
     }
 
@@ -159,7 +161,7 @@ public final class ScryfallRateLimiter {
             return isCoolingDown();
         }
         final PacedHost host = pacedHost(url);
-        return host != null && host.cooldownUntilMs > System.currentTimeMillis();
+        return host != null && host.cooldownUntilMs.get() > System.currentTimeMillis();
     }
 
     /** True (and logs) if url is a Scryfall API URL or a paced host's and we're currently backing off. */
@@ -199,7 +201,7 @@ public final class ScryfallRateLimiter {
             if (cancelled.getAsBoolean()) {
                 return;
             }
-            final long untilMs = host == null ? cooldownUntil.getTime() : host.cooldownUntilMs;
+            final long untilMs = host == null ? cooldownUntilMs.get() : host.cooldownUntilMs.get();
             long remainingSec = Math.max(0, untilMs - System.currentTimeMillis()) / 1000 + 1;
             String message = "Rate limited by " + (host == null ? "Scryfall" : host.name) + " -- waiting " + remainingSec + "s before continuing...";
             if (onWaiting != null) {

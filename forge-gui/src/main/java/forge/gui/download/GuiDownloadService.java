@@ -37,8 +37,10 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
@@ -93,6 +95,9 @@ public abstract class GuiDownloadService implements Runnable {
     private static final int READ_TIMEOUT_MS = 30_000;
     /** Separates alternative urls in a value of {@link #getNeededFiles()}; they are tried in order until one saves the file. */
     public static final String URL_SEPARATOR = "\n";
+    private static final byte[] PNG_SIGNATURE = {(byte) 0x89, 'P', 'N', 'G', '\r', '\n', 0x1A, '\n'};
+    /** The last bytes of every PNG: its empty IEND chunk (length, type, CRC). */
+    private static final byte[] PNG_END = {0, 0, 0, 0, 'I', 'E', 'N', 'D', (byte) 0xAE, 0x42, 0x60, (byte) 0x82};
 
     private int skipped = 0;
     private int completed = 0;
@@ -389,6 +394,10 @@ public abstract class GuiDownloadService implements Runnable {
                     if (conn.getContentLengthLong() >= 0 && received != conn.getContentLengthLong()) {
                         throw new IOException("Incomplete download: got " + received + " of " + conn.getContentLengthLong() + " bytes");
                     }
+                    // without a promised length there is nothing to compare with, so look at the file itself
+                    if (conn.getContentLengthLong() < 0 && !isWhole(tmpDest, fileDest.getName())) {
+                        throw new IOException("Incomplete download: " + fileDest.getName() + " is not a whole image (" + received + " bytes)");
+                    }
                     Files.move(tmpDest.toPath(), fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     saved = true;
                     break;
@@ -441,6 +450,33 @@ public abstract class GuiDownloadService implements Runnable {
 
 
         return saved;
+    }
+
+    /**
+     * Whether a file that arrived without a known length is whole. A dropped connection ends the stream like a
+     * finished one, so images are told by their markers: a JPEG ends with the end-of-image marker, a PNG with its
+     * IEND chunk. Other files have nothing to check.
+     */
+    private static boolean isWhole(final File received, final String name) throws IOException {
+        final String lowerName = name.toLowerCase(Locale.ROOT);
+        if (!lowerName.endsWith(".jpg") && !lowerName.endsWith(".jpeg") && !lowerName.endsWith(".png")) {
+            return true;
+        }
+        try (RandomAccessFile in = new RandomAccessFile(received, "r")) {
+            final long length = in.length();
+            if (length < PNG_END.length) {
+                return false;
+            }
+            final byte[] head = new byte[PNG_SIGNATURE.length];
+            in.readFully(head);
+            final byte[] tail = new byte[PNG_END.length];
+            in.seek(length - tail.length);
+            in.readFully(tail);
+            if (head[0] == (byte) 0xFF && head[1] == (byte) 0xD8) {
+                return tail[tail.length - 2] == (byte) 0xFF && tail[tail.length - 1] == (byte) 0xD9;
+            }
+            return Arrays.equals(head, PNG_SIGNATURE) && Arrays.equals(tail, PNG_END);
+        }
     }
 
     /**
