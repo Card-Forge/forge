@@ -252,11 +252,10 @@ public abstract class Achievement {
 
         final DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
 
-        return formatter.format(new Date(timestamp))
-            // Replace characters that often cause boxes in macOS GUIs
-            .replace('\u00A0', ' ')  // non-breaking space → normal space
-            .replace('\u2009', ' ')  // thin space -> normal space
-            .replace('\u202F', ' '); // narrow nbsp -> normal space
+        // Since JDK 20 (CLDR 42) many locales use special spaces such as U+202F (narrow no-break space)
+        // in date/time formats. The skin font has no glyphs for them, and fonts loaded via Font.createFont
+        // get no fallback, so they render as boxes. Normalize all horizontal whitespace to a plain space.
+        return formatter.format(new Date(timestamp)).replaceAll("\\h", " ");
     }
 
     public String getSubTitle(final boolean includeTimestamp) {
