@@ -288,6 +288,11 @@ public enum CSubmenuPreferences implements ICDoc {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
         }
         view.getTxtActionableHighlightColor().setText(prefs.getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR));
+        // The welcome wizard can change these after the screen was built
+        initializeStackGroupPermanentsComboBox();
+        initializeUndoModeComboBox();
+        initializeDefaultLanguageComboBox();
+        view.getCbpCardDownloadLangComboBoxPanel().setSelectedItem(savedCardDownloadLanguageLabel());
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(() -> view.getCbRemoveSmall().requestFocusInWindow());
@@ -421,14 +426,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createLocalizedComboBox(localizedOptions, cardLangPreference, cardLangMapping);
         comboBox.addItemListener(e -> applyPreferredLanguageAvailability());
 
-        final String savedCode = this.prefs.getPref(cardLangPreference);
-        final String selectedDisplayName = cardLangMapping.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(savedCode))
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse("English");
-
-        panel.setComboBox(comboBox, selectedDisplayName);
+        panel.setComboBox(comboBox, savedCardDownloadLanguageLabel());
 
         final JCheckBox cbPreferLang = this.view.getCbPreferLangForUniqueCards();
         cbPreferLang.setSelected(this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS));
@@ -439,6 +437,15 @@ public enum CSubmenuPreferences implements ICDoc {
         });
 
         applyPreferredLanguageAvailability();
+    }
+
+    private String savedCardDownloadLanguageLabel() {
+        final String savedCode = this.prefs.getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        return ForgeConstants.getScryfallCardLanguageMapping().entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("English");
     }
 
     private void applyPreferredLanguageAvailability() {

@@ -4,9 +4,10 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 
-public final class OnboardingPresets {
+final class OnboardingPresets {
     private OnboardingPresets() {}
 
     public static final Map<FPref, String> AI_CASUAL = build(
@@ -16,7 +17,8 @@ public final class OnboardingPresets {
             FPref.UI_REMIND_ON_PRIORITY, "true",
             FPref.UI_SHOW_STORM_COUNT_IN_PROMPT, "true",
             FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "true",
-            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "true");
+            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "true",
+            FPref.UI_UNDO_MODE, ForgeConstants.UNDO_MODE_FREE);
     public static final Map<FPref, String> AI_EXPERT = build(
             FPref.UI_OVERLAY_DRAFT_RANKING, "false",
             FPref.UI_ORDER_HAND, "false",
@@ -24,7 +26,8 @@ public final class OnboardingPresets {
             FPref.UI_REMIND_ON_PRIORITY, "false",
             FPref.UI_SHOW_STORM_COUNT_IN_PROMPT, "false",
             FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "false",
-            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "false");
+            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "false",
+            FPref.UI_UNDO_MODE, ForgeConstants.UNDO_MODE_OFF);
 
     public static final Map<FPref, String> LAYOUT_DEFAULT = build(
             FPref.UI_GROUP_PERMANENTS, "default");
