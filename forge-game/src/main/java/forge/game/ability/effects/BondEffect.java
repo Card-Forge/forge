@@ -15,6 +15,11 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class BondEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"ValidCards"}};
+
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
