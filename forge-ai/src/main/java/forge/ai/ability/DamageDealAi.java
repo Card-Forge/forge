@@ -378,9 +378,17 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
-        // try unfiltered now
+        // Retry against the full legal target set. Prefer a target that can take damage, but a mandatory trigger
+        // still has to choose a legal target when prevention makes every option deal zero.
         hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
-        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final List<Card> legalTargets = Lists.newArrayList(hPlay);
+        final List<Card> damageableTargets = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        if (!damageableTargets.isEmpty()) {
+            hPlay = damageableTargets;
+        } else {
+            hPlay = legalTargets;
+        }
         List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
 
         if (!hPlay.isEmpty()) {
@@ -1209,9 +1217,10 @@ public class DamageDealAi extends DamageAiBase {
         int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
 
         // Separate options into creatures and players
-        List<Card> oppCreatures = CardLists.filterControlledBy(
+        final List<Card> legalOppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
-        oppCreatures = CardLists.filter(oppCreatures, c -> canActuallyDamage(c, dmg, source, noPrevention));
+        List<Card> oppCreatures = CardLists.filter(legalOppCreatures,
+                c -> canActuallyDamage(c, dmg, source, noPrevention));
         Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
         List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 
@@ -1239,6 +1248,11 @@ public class DamageDealAi extends DamageAiBase {
         // Fourth priority: target opponent player
         if (!oppPlayers.isEmpty()) {
             return (T) oppPlayers.get(0);
+        }
+
+        // A mandatory damage ability must still select a legal target even when every opposing creature prevents it.
+        if (!isOptional && !legalOppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(legalOppCreatures);
         }
 
         // If optional and only own stuff remains, don't choose

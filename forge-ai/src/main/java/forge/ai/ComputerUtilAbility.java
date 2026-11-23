@@ -106,10 +106,9 @@ public class ComputerUtilAbility {
     }
 
     /**
-     * Do not spend the full mana cost of a Spectacle spell while an available damage activation can turn on its
-     * cheaper cost. In particular, a Seal of Fire in hand should be cast and activated before Skewer the Critics.
-     * The decision is re-evaluated after each action, so the Spectacle spell becomes available as soon as the opponent
-     * has actually lost life.
+     * Do not spend mana on a Spectacle spell at its full cost while a damage activation can enable its cheaper cost.
+     * The enabler and the Spectacle spell must both remain payable from the current mana sources; otherwise the AI
+     * could spend the only source for the Spectacle cost and end up unable to cast the discounted spell.
      */
     public static boolean shouldWaitForSpectacleEnabler(final Player player, final SpellAbility sa) {
         if (player == null || sa == null || !sa.isSpell() || sa.isSpectacle()
@@ -123,52 +122,81 @@ public class ComputerUtilAbility {
         if (!baseCost.isOnlyManaCost()) {
             return false;
         }
-        boolean hasCheaperSpectacleCost = false;
-        for (final SpellAbility alternative : sa.getHostCard().getSpellAbilities()) {
-            if (alternative.isSpectacle() && alternative.getPayCosts().isOnlyManaCost()
-                    && alternative.getPayCosts().getTotalMana().compareTo(baseCost.getTotalMana()) < 0) {
-                hasCheaperSpectacleCost = true;
-                break;
-            }
-        }
-        if (!hasCheaperSpectacleCost) {
-            return false;
-        }
 
-        // An unused damage activation on the battlefield can be used before paying for the Spectacle spell.
-        for (final Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            if (hasOpponentDamageActivation(card, player, true)) {
-                return true;
-            }
-        }
-
-        // A permanent in hand such as Seal of Fire can be cast first, then its activated damage ability can enable
-        // Spectacle on the next priority check.
-        for (final Card card : player.getCardsIn(ZoneType.Hand)) {
-            if (card == sa.getHostCard() || !card.isPermanent() || !canCastPermanent(card, player)) {
+        for (final SpellAbility spectacle : sa.getHostCard().getSpellAbilities()) {
+            if (!spectacle.isSpell() || !spectacle.isSpectacle() || !spectacle.getPayCosts().isOnlyManaCost()
+                    || spectacle.getPayCosts().getTotalMana().compareTo(baseCost.getTotalMana()) >= 0) {
                 continue;
             }
-            if (hasOpponentDamageActivation(card, player, false)) {
-                return true;
+            spectacle.setActivatingPlayer(player);
+
+            // An unused damage activation on the battlefield can be used before paying for the Spectacle spell.
+            for (final Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                if (hasOpponentDamageActivation(card, player, true, spectacle)) {
+                    return true;
+                }
+            }
+
+            // A permanent in hand such as Seal of Fire can be cast first, then its activated damage ability can enable
+            // Spectacle on the next priority check. Reserve enough mana for both the permanent and the follow-up spell.
+            for (final Card card : player.getCardsIn(ZoneType.Hand)) {
+                if (card == sa.getHostCard() || !card.isPermanent()
+                        || !canCastPermanent(card, player, spectacle)) {
+                    continue;
+                }
+                if (hasOpponentDamageActivation(card, player, false, spectacle)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    private static boolean canCastPermanent(final Card card, final Player player) {
+    private static boolean canCastPermanent(final Card card, final Player player, final SpellAbility followUp) {
         for (final SpellAbility cast : card.getSpellAbilities()) {
             if (!cast.isSpell()) {
                 continue;
             }
             cast.setActivatingPlayer(player);
-            if (cast.canPlay() && ComputerUtilCost.canPayCost(cast, player, false)) {
+            if (cast.canPlay() && ComputerUtilCost.canPayCost(cast, player, false)
+                    && canPayCostsTogether(cast, followUp, player)) {
                 return true;
             }
         }
         return false;
     }
 
-    private static boolean hasOpponentDamageActivation(final Card card, final Player player, final boolean requirePlayable) {
+    /** Check that paying an action does not consume the mana needed for the cheaper follow-up spell. */
+    private static boolean canPayCostsTogether(final SpellAbility action, final SpellAbility followUp, final Player player) {
+        if (action.getPayCosts() == null || followUp.getPayCosts() == null) {
+            return false;
+        }
+        final Cost combined = action.getPayCosts().copy();
+        combined.add(followUp.getPayCosts().copy());
+        // An ability that taps its own permanent cannot also use that permanent as a mana source for the follow-up.
+        final Card source = action.getHostCard();
+        final boolean tapsSource = action.isActivatedAbility() && action.getPayCosts().hasTapCost()
+                && source != null && source.isInPlay();
+        final boolean wasTapped = source != null && source.isTapped();
+        if (tapsSource && wasTapped) {
+            return false;
+        }
+        try {
+            if (tapsSource) {
+                source.setTapped(true);
+            }
+            // Check both spell/ability contexts because mana sources can impose different payment restrictions.
+            return ComputerUtilMana.canPayManaCost(combined, action, player, 0, false)
+                    && ComputerUtilMana.canPayManaCost(combined, followUp, player, 0, false);
+        } finally {
+            if (tapsSource) {
+                source.setTapped(wasTapped);
+            }
+        }
+    }
+
+    private static boolean hasOpponentDamageActivation(final Card card, final Player player, final boolean requirePlayable,
+                                                        final SpellAbility followUp) {
         for (final SpellAbility ability : card.getSpellAbilities()) {
             if (!ability.isActivatedAbility() || ability.getApi() != ApiType.DealDamage) {
                 continue;
@@ -192,7 +220,8 @@ public class ComputerUtilAbility {
             }
 
             ability.setActivatingPlayer(player);
-            if (requirePlayable && (!ability.canPlay() || !ComputerUtilCost.canPayCost(ability, player, false))) {
+            if (requirePlayable && (!ability.canPlay() || !ComputerUtilCost.canPayCost(ability, player, false)
+                    || !canPayCostsTogether(ability, followUp, player))) {
                 continue;
             }
             for (final Player opponent : player.getOpponents()) {
@@ -257,7 +286,7 @@ public class ComputerUtilAbility {
             }
             if (top.getApi() == ApiType.ChangeZone) {
                 final String destination = top.getParamOrDefault("Destination", "");
-                if ("Graveyard".equals(destination) || "Exile".equals(destination)) {
+                if (!destination.isEmpty() && !"Battlefield".equals(destination)) {
                     return true;
                 }
             }

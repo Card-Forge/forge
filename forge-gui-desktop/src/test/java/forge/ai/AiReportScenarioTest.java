@@ -668,6 +668,32 @@ public class AiReportScenarioTest extends AITest {
                     return after.stream().anyMatch(sa -> sa.getHostCard().equals(skewer) && sa.isSpectacle())
                             ? null : "Skewer's Spectacle ability was not offered after Seal of Fire dealt damage";
                 }));
+        l.add(new Scenario("13014-mana-reserved", "do not spend the only red source on Seal of Fire when Skewer needs it", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.bf("Island", c.ai); c.bf("Plains", c.ai);
+                    c.hand("Seal of Fire", c.ai); c.hand("Skewer the Critics", c.ai); },
+                c -> {
+                    final Card skewer = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Skewer the Critics".equals(card.getName())).findFirst().orElse(null);
+                    if (skewer == null) { return "Skewer the Critics is missing"; }
+                    final SpellAbility cast = skewer.getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    return c.controller().canPlaySa(cast) == AiPlayDecision.AnotherTime
+                            ? "deferred Skewer even though using Seal would leave no red mana for its Spectacle cost" : null;
+                }));
+        l.add(new Scenario("mandatory-damage-target-prevention", "mandatory damage still chooses a legal target if all opposing creatures prevent damage", Fid.EXACT, M1, true,
+                c -> { c.bf("The Wanderer", c.opp); c.bf("Grizzly Bears", c.opp); c.hand("Lightning Bolt", c.ai); },
+                c -> {
+                    final Card bears = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Lightning Bolt".equals(card.getName())).findFirst().orElse(null);
+                    if (bears == null || bolt == null) { return "mandatory damage target setup is incomplete"; }
+                    final SpellAbility sa = bolt.getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final Card chosen = new forge.ai.ability.DamageDealAi().chooseSingleEntity(c.ai, sa,
+                            java.util.Collections.singletonList(bears), false, null, java.util.Collections.emptyMap());
+                    return chosen == bears ? null : "mandatory damage target selection returned " + chosen + " instead of its only legal target";
+                }));
         l.add(aimed("7477", "burn is aimed at a creature that is not protected by Crystal Barricade", Fid.EXACT, M1, true,
                 "Lightning Bolt", "Crystal Barricade",
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Crystal Barricade", c.opp); }));
@@ -2326,6 +2352,19 @@ public class AiReportScenarioTest extends AITest {
                     return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
                             ? null : "Ugin's Labyrinth did not respond to Assassin's Trophy";
                 }));
+        l.add(new Scenario("13016-bounce", "Ugin's Labyrinth returns its card in response to Boomerang", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Boomerang", labyrinth);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Boomerang";
+                }));
         l.add(new Scenario("13016", "Ugin's Labyrinth returns its card before Disruptor Flute can name it", Fid.EXACT, M1, true,
                 c -> {
                     c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
@@ -2442,6 +2481,21 @@ public class AiReportScenarioTest extends AITest {
                     if (gusts.isEmpty()) { return "AI did not consider Parting Gust" + c.why("Parting Gust"); }
                     return gusts.stream().allMatch(SpellAbility::isGiftPromised)
                             ? null : "AI considered Parting Gust without promising the Fish gift: " + gusts;
+                }));
+        l.add(new Scenario("parting-gust-owner-not-controller", "unpromised Parting Gust can exile an opponent-controlled creature owned by the AI", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    final Card bears = c.bf("Baneslayer Angel", c.ai);
+                    bears.setController(c.opp, c.game.getNextTimestamp());
+                    c.hand("Parting Gust", c.ai);
+                },
+                c -> {
+                    final SpellAbility gust = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Parting Gust".equals(card.getName())).findFirst().orElseThrow().getFirstSpellAbility();
+                    gust.setActivatingPlayer(c.ai);
+                    final AiPlayDecision decision = SpellApiToAi.Converter.get(gust).canPlayWithSubs(c.ai, gust).decision();
+                    return decision == AiPlayDecision.CantPlayAi
+                            ? "rejected the unpaid Gift mode based on current controller instead of owner" : null;
                 }));
         l.add(new Scenario("crashing-drawbridge-haste-lethal-ancients", "Crashing Drawbridge grants haste to a lethal Defender attacker under Felothar", Fid.APPROX, M1, true,
                 c -> {

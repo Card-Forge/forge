@@ -28,9 +28,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityDisableTriggers;
-import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -205,61 +203,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
         return false;
-    }
-
-    /**
-     * Ugin's Labyrinth should normally return its exiled card at the opponent's end step. Respond sooner only when
-     * the Labyrinth is about to be removed or an as-enters name lock would shut off its return ability.
-     */
-    private static boolean canReturnUginLabyrinthCard(final Player ai, final SpellAbility sa) {
-        final Card labyrinth = sa.getHostCard();
-        if (labyrinth.getExiledCards().isEmpty()) {
-            return false;
-        }
-
-        final Game game = ai.getGame();
-        final PhaseHandler phase = game.getPhaseHandler();
-        final boolean opponentEndStep = phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai);
-        boolean responseNeeded = false;
-        if (!game.getStack().isEmpty()) {
-            final SpellAbility top = game.getStack().peekAbility();
-            if (top != null && top.getHostCard() != null && top.getActivatingPlayer() != null
-                    && top.getActivatingPlayer().isOpponentOf(ai)) {
-                if (top.usesTargeting() && top.findTargetedCards().contains(labyrinth)) {
-                    if (top.getApi() == ApiType.Destroy) {
-                        responseNeeded = true;
-                    } else if (top.getApi() == ApiType.ChangeZone) {
-                        final String destination = top.getParamOrDefault("Destination", "");
-                        responseNeeded = "Graveyard".equals(destination) || "Exile".equals(destination);
-                    }
-                }
-
-                // Pithing Needle / Disruptor Flute choose a name as they enter. Return the card while the
-                // Labyrinth's activated ability is still available, before that name choice resolves.
-                if (!responseNeeded) {
-                    for (final StaticAbility ability : top.getHostCard().getStaticAbilities()) {
-                        if (ability.checkMode(StaticAbilityMode.CantBeActivated)
-                                && ability.getParamOrDefault("ValidCard", "").contains("NamedCard")) {
-                            responseNeeded = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        if (!opponentEndStep && !responseNeeded) {
-            return false;
-        }
-
-        // Activating the return ability taps the Labyrinth. Do not count its mana ability when checking affordability.
-        final Card exiled = labyrinth.getExiledCards().getFirst();
-        final boolean wasTapped = labyrinth.isTapped();
-        try {
-            labyrinth.setTapped(true);
-            return canCastCardNow(ai, exiled);
-        } finally {
-            labyrinth.setTapped(wasTapped);
-        }
     }
 
     /**
@@ -858,7 +801,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             if (hasUnpromisedGiftReturn(sa)) {
                 for (final Card target : sa.getTargets().getTargetCards()) {
-                    if (target.getController().isOpponentOf(ai)) {
+                    if (target.getOwner() != null && target.getOwner().isOpponentOf(ai)) {
                         // Do not spend mana on the mode that gives the opponent's creature back larger.
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
