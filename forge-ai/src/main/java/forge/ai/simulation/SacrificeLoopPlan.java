@@ -624,7 +624,7 @@ public final class SacrificeLoopPlan {
         int treasures = 0;
         int lands = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (c.isCreature() && c.getType().hasCreatureType("Squirrel")) {
+            if (c != fang && c.isCreature() && c.getType().hasCreatureType("Squirrel")) {
                 squirrels.add(c);
             }
             treasures += c.getName().equals("Treasure Token") ? 1 : 0;
