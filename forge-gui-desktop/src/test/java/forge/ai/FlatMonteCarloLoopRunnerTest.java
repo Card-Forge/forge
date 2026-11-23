@@ -1884,4 +1884,31 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("a Thopter for the Sword, the Sword back on it, twice: five artifacts for the Sieve\n"
                 + trace + gameStateToString(game), sieve.isTapped() || !sieve.isInZone(ZoneType.Battlefield));
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBaskingBroodscaleAndSadisticGleePaysForAFireball() {
+        elfDeckWith(0, "Sadistic Glee", "Fireball");
+        addCards("Forest", 3, ai);
+        addCards("Swamp", 1, ai);
+        addCards("Mountain", 2, ai);
+        addCardToZone("Basking Broodscale", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Glee, adapt for a Spawn, the Spawn for a mana and a counter, the counter for a Spawn\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithChatterfangAndPitilessPlundererPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Swamp", 1, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Chatterfang, Squirrel General", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Pitiless Plunderer", ai, ZoneType.Battlefield).setSickness(false);
+        addTokens("g_1_1_squirrel", 3, ai);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Squirrels to Chatterfang, each death a Treasure and a Squirrel: mana for a {B}\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }

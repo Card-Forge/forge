@@ -53,7 +53,15 @@ public final class SacrificeLoopPlan {
             return mantle;
         }
         final SpellAbility trader = soultrader(ai, candidates, approve);
-        return trader != null ? trader : krenko(ai, candidates, approve);
+        if (trader != null) {
+            return trader;
+        }
+        final SpellAbility kren = krenko(ai, candidates, approve);
+        if (kren != null) {
+            return kren;
+        }
+        final SpellAbility brood = broodscale(ai, candidates, approve);
+        return brood != null ? brood : chatterfang(ai, candidates, approve);
     }
 
     private static SpellAbility meliraAndRedcap(final Player ai, final List<SpellAbility> candidates,
@@ -534,5 +542,118 @@ public final class SacrificeLoopPlan {
         }
         VetoLog.note(ai, "krenko-loop | Krenko doubles the Goblins, " + tokens + " against " + opp.getLife());
         return make;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Broodscale
+
+    /**
+     * Basking Broodscale with Sadistic Glee on it: an Eldrazi Spawn dies for {C}, the Glee puts a +1/+1 counter on the
+     * Broodscale, the counter makes a Spawn: a mana for nothing, until the pool has what the hand costs. The Broodscale
+     * starts it itself ({1}{G}, adapt) when it has no counter and no Spawn is about, and the Glee is cast on it from the
+     * hand first.
+     */
+    private static SpellAbility broodscale(final Player ai, final List<SpellAbility> candidates,
+                                           final Predicate<SpellAbility> approve) {
+        final Card brood = LoopRunner.inPlay(ai, "Basking Broodscale");
+        final int goal = ManaLoopPlan.goal(ai);
+        if (brood == null || goal <= 0 || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        boolean glee = false;
+        for (final Card c : brood.getEnchantedBy()) {
+            glee |= c.getName().equals("Sadistic Glee");
+        }
+        if (!glee) {
+            final SpellAbility aura = LoopRunner.castFromHand(ai, candidates, "Sadistic Glee");
+            if (aura == null) {
+                return null;
+            }
+            aura.setActivatingPlayer(ai);
+            aura.resetTargets();
+            if (!aura.canTarget(brood) || !aura.getTargets().add(brood) || !approve.test(aura)) {
+                aura.resetTargets();
+                return null;
+            }
+            VetoLog.note(ai, "broodscale-loop | the Glee on the Broodscale");
+            return aura;
+        }
+        for (final Card spawn : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!spawn.getName().equals("Eldrazi Spawn Token")) {
+                continue;
+            }
+            for (final SpellAbility sa : candidates) {
+                if (sa != null && sa.getHostCard() == spawn && sa.isManaAbility() && !RunawayLoop.exceeded(sa, 2 * LIMIT)) {
+                    sa.setActivatingPlayer(ai);
+                    if (approve.test(sa)) {
+                        VetoLog.note(ai, "broodscale-loop | a Spawn for {C}, pool " + ai.getManaPool().totalMana() + " of " + goal);
+                        return sa;
+                    }
+                }
+            }
+        }
+        if (brood.getCounters(forge.game.card.CounterEnumType.P1P1) == 0) {
+            final SpellAbility adapt = LoopRunner.activated(candidates, brood, ApiType.PutCounter);
+            if (adapt != null && !RunawayLoop.exceeded(adapt, 4)) {
+                adapt.setActivatingPlayer(ai);
+                adapt.resetTargets();
+                if (approve.test(adapt)) {
+                    VetoLog.note(ai, "broodscale-loop | the Broodscale adapts for the first Spawn");
+                    return adapt;
+                }
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Chatterfang
+
+    /**
+     * Chatterfang with Pitiless Plunderer: {B} and all the Squirrels but one for +X/-X on the one left. Every Squirrel that
+     * dies is a Treasure and (Chatterfang) a Squirrel again, the one that is aimed at dies too: with S Squirrels a round
+     * ends with S Treasures and S Squirrels for {B}, so S - 1 mana over. The Treasures are the mana: they stay, and the
+     * AI pays with them when it casts.
+     */
+    private static SpellAbility chatterfang(final Player ai, final List<SpellAbility> candidates,
+                                            final Predicate<SpellAbility> approve) {
+        final Card fang = LoopRunner.inPlay(ai, "Chatterfang, Squirrel General");
+        final int goal = ManaLoopPlan.goal(ai);
+        if (fang == null || LoopRunner.inPlay(ai, "Pitiless Plunderer") == null || goal <= 0) {
+            return null;
+        }
+        final List<Card> squirrels = new java.util.ArrayList<>();
+        int treasures = 0;
+        int lands = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature() && c.getType().hasCreatureType("Squirrel")) {
+                squirrels.add(c);
+            }
+            treasures += c.getName().equals("Treasure Token") ? 1 : 0;
+            lands += c.isLand() && !c.isTapped() ? 1 : 0;
+        }
+        if (squirrels.size() < 2 || ai.getManaPool().totalMana() + treasures + lands >= goal + 2) {
+            return null;
+        }
+        final SpellAbility pump = LoopRunner.activated(candidates, fang, ApiType.Pump);
+        if (pump == null || RunawayLoop.exceeded(pump, LIMIT)) {
+            return null;
+        }
+        final Card target = squirrels.get(0);
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != target && squirrels.contains(c)) {
+                c.setSVar("SacMe", "6");
+            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
+                c.removeSVar("SacMe");
+            }
+        }
+        pump.setActivatingPlayer(ai);
+        pump.resetTargets();
+        pump.setXManaCostPaid(squirrels.size() - 1);
+        if (!pump.canTarget(target) || !pump.getTargets().add(target) || !approve.test(pump)) {
+            pump.resetTargets();
+            return null;
+        }
+        VetoLog.note(ai, "chatterfang-loop | " + (squirrels.size() - 1) + " Squirrels to Chatterfang, " + treasures
+                + " Treasures, " + goal + " wanted");
+        return pump;
     }
 }
