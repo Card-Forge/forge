@@ -56,6 +56,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
+import forge.toolbox.FOptionPane;
 import forge.util.ImageFetcher;
 import forge.util.ItemPool;
 import java.util.ArrayList;
@@ -223,12 +224,8 @@ public final class CEditorRogue extends CDeckEditor<Deck> {
         if (nonBasicLandsToRemove > rogueRun.getRemovalCredits()) {
             // Not enough removal credits
             String message = localizer.getMessage("lblRogueRemovalLimitHint");
-            javax.swing.JOptionPane.showMessageDialog(
-                null,
-                message,
-                localizer.getMessage("lblRogueRemovalLimitReached"),
-                javax.swing.JOptionPane.WARNING_MESSAGE
-            );
+            FOptionPane.showMessageDialog(message,
+                localizer.getMessage("lblRogueRemovalLimitReached"), FOptionPane.WARNING_ICON);
             return;
         }
 

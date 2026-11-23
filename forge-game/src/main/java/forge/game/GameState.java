@@ -1465,4 +1465,8 @@ public class GameState {
         }
         return cl;
     }
+
+    public String getAIName() {
+        return playerStates.get(1).name;
+    }
 }

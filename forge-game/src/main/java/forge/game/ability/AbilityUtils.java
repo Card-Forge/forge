@@ -660,7 +660,7 @@ public class AbilityUtils implements IHasForgeParams {
                 val = handlePaid(tgtList, calcX[1], card, ability);
             }
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("SpellTargeted")) {
-                final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
+                final SpellAbility sat = getDefinedSpellAbilities(card, calcX[0], sa).getFirst();
                 val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
