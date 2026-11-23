@@ -332,14 +332,14 @@ public class RogueMetaProgress {
         String key = stat.getConditionKey();
 
         boolean changed = false;
-        for (RogueDeck deck : RogueConfig.loadRogueDecks()) {
-            RogueUnlockCondition condition = deck.getUnlockCondition();
+        for (RogueConfig.CommanderUnlock unlock : RogueConfig.getCommanderUnlocks()) {
+            RogueUnlockCondition condition = unlock.condition();
             if (condition == null || condition.isDefault() || !condition.hasCondition(key)) {
                 continue;
             }
 
-            String name = deck.getCommanderCardName();
-            if (deck.isUnlocked() && !notifiedCommanderUnlocks.contains(name)) {
+            String name = unlock.commanderName();
+            if (unlock.isUnlocked() && !notifiedCommanderUnlocks.contains(name)) {
                 notifiedCommanderUnlocks.add(name);
                 changed = true;
 

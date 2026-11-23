@@ -227,9 +227,7 @@ public class RogueDeck {
      * @return true if the commander can be selected
      */
     public boolean isUnlocked() {
-        if (RogueMetaProgress.getInstance().isDevUnlockAll()) return true;
-        if (rogueUnlockCondition == null) return true;
-        return rogueUnlockCondition.evaluate();
+        return RogueUnlockCondition.isUnlocked(rogueUnlockCondition);
     }
 
     /**

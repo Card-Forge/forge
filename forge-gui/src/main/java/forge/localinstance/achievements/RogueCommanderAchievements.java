@@ -7,7 +7,6 @@ import forge.deck.Deck;
 import forge.gamemodes.rogue.AetherUpgrade;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueConfig;
-import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RoguePlanebound;
 import forge.gamemodes.rogue.RogueRun;
@@ -166,14 +165,14 @@ public class RogueCommanderAchievements extends AchievementCollection {
     }
 
     public void evaluateCommanderUnlockAchievements() {
-        List<RogueDeck> decks = RogueConfig.loadRogueDecks().stream()
-            .filter(deck -> !deck.isExperimental())
+        List<RogueConfig.CommanderUnlock> unlocks = RogueConfig.getCommanderUnlocks().stream()
+            .filter(unlock -> !unlock.experimental())
             .collect(Collectors.toList());
-        if (decks.isEmpty()) {
+        if (unlocks.isEmpty()) {
             return;
         }
-        for (RogueDeck deck : decks) {
-            if (!deck.isUnlocked()) {
+        for (RogueConfig.CommanderUnlock unlock : unlocks) {
+            if (!unlock.isUnlocked()) {
                 return;
             }
         }

@@ -64,6 +64,28 @@ public class RogueConfig {
             Suppliers.memoize(RogueConfig::loadGamechangerCardNames);
     private static final Supplier<Set<String>> excludedRogueCardNames =
             Suppliers.memoize(RogueConfig::loadExcludedRogueCardNames);
+    private static final Supplier<List<CommanderUnlock>> commanderUnlocks =
+            Suppliers.memoize(RogueConfig::loadCommanderUnlocks);
+
+    /** What an unlock check needs from a commander deck. Unlike the deck, it never changes while the game runs. */
+    public record CommanderUnlock(String commanderName, boolean experimental, RogueUnlockCondition condition) {
+        public boolean isUnlocked() {
+            return RogueUnlockCondition.isUnlocked(condition);
+        }
+    }
+
+    /** Read once: loading the decks parses every start deck and reward pool. */
+    public static List<CommanderUnlock> getCommanderUnlocks() {
+        return commanderUnlocks.get();
+    }
+
+    private static List<CommanderUnlock> loadCommanderUnlocks() {
+        List<CommanderUnlock> unlocks = new ArrayList<>();
+        for (RogueDeck deck : loadRogueDecks()) {
+            unlocks.add(new CommanderUnlock(deck.getCommanderCardName(), deck.isExperimental(), deck.getUnlockCondition()));
+        }
+        return ImmutableList.copyOf(unlocks);
+    }
 
     public static PaperCard getRogueCard(String name) {
         return name == null ? null : rogueCards.get().get(name);
