@@ -106,6 +106,40 @@ public class ComputerUtilAbility {
     }
 
     /**
+     * Returns whether an unpromised Gift spell has a delayed trigger that returns its exiled target to the battlefield.
+     * Check both the parsed Execute ability and its SVar text because copied or constructed abilities may only retain
+     * one of those representations.
+     */
+    public static boolean hasUnpromisedGiftReturn(final SpellAbility sa) {
+        if (sa == null) {
+            return false;
+        }
+        final SpellAbility root = sa.getRootAbility();
+        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
+            return false;
+        }
+        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.DelayedTrigger
+                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
+                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
+                continue;
+            }
+            final SpellAbility execute = sub.getAdditionalAbility("Execute");
+            final String executeName = sub.getParamOrDefault("Execute", "");
+            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
+            final boolean returnsFromExile = execute != null && execute.getApi() == ApiType.ChangeZone
+                    && "Exile".equals(execute.getParam("Origin"))
+                    && "Battlefield".equals(execute.getParam("Destination"));
+            final boolean scriptReturnsFromExile = executeText != null && executeText.contains("DB$ ChangeZone")
+                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield");
+            if (returnsFromExile || scriptReturnsFromExile) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Do not spend mana on a Spectacle spell at its full cost while a damage activation can enable its cheaper cost.
      * The enabler and the Spectacle spell must both remain payable from the current mana sources; otherwise the AI
      * could spend the only source for the Spectacle cost and end up unable to cast the discounted spell.

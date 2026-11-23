@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import com.google.common.collect.ArrayListMultimap;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -98,35 +99,15 @@ public class PossibleTargetSelector {
     }
 
     /**
-     * An unpromised Gift spell may have a delayed trigger that returns its exiled target to the battlefield.
-     * Do not let the simulation choose an opponent's creature for that mode: it is not removal. The separate
-     * Promise Gift spell ability remains available and can still target the opponent's creature.
+     * An unpromised Gift spell returns its opposing target later, so that target is not useful removal.
+     * The separate Promise Gift spell ability remains available and can still target opposing creatures.
      */
     private boolean pointlessUnpromisedGiftTarget(final Player player, final GameObject o) {
-        if (!(o instanceof Card) || !((Card) o).getOwner().isOpponentOf(player)) {
+        if (!(o instanceof Card) || ((Card) o).getOwner() == null
+                || !((Card) o).getOwner().isOpponentOf(player)) {
             return false;
         }
-
-        final SpellAbility root = targetingSa.getRootAbility();
-        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
-            return false;
-        }
-
-        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
-            if (sub.getApi() != ApiType.DelayedTrigger
-                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
-                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
-                continue;
-            }
-
-            final String executeName = sub.getParamOrDefault("Execute", "");
-            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
-            if (executeText != null && executeText.contains("DB$ ChangeZone")
-                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield")) {
-                return true;
-            }
-        }
-        return false;
+        return ComputerUtilAbility.hasUnpromisedGiftReturn(targetingSa);
     }
 
     private static class SimilarTargetSkipper {

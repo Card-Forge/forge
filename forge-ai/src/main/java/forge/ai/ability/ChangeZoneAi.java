@@ -732,38 +732,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return any;
     }
 
-    /**
-     * Parting Gust without its promised Fish returns an exiled creature with a +1/+1 counter at the next end step.
-     * It is therefore not removal against an opponent's creature unless the gift cost was actually chosen.
-     */
-    private static boolean hasUnpromisedGiftReturn(final SpellAbility sa) {
-        final SpellAbility root = sa.getRootAbility();
-        if (root.isGiftPromised()) {
-            return false;
-        }
-        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
-            if (sub.getApi() != ApiType.DelayedTrigger
-                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
-                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
-                continue;
-            }
-            final SpellAbility execute = sub.getAdditionalAbility("Execute");
-            // DelayedTrigger scripts expose Execute as an additional ability, while the script name is also
-            // retained in the parameters. Check both representations so this remains reliable for copied SAs.
-            final String executeName = sub.getParamOrDefault("Execute", "");
-            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
-            final boolean returnsFromExile = execute != null && execute.getApi() == ApiType.ChangeZone
-                    && "Exile".equals(execute.getParam("Origin"))
-                    && "Battlefield".equals(execute.getParam("Destination"));
-            final boolean scriptReturnsFromExile = executeText != null && executeText.contains("DB$ ChangeZone")
-                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield");
-            if (returnsFromExile || scriptReturnsFromExile) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -780,7 +748,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-            if (hasUnpromisedGiftReturn(sa)) {
+            if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
                 for (final Card target : sa.getTargets().getTargetCards()) {
                     if (target.getOwner() != null && target.getOwner().isOpponentOf(ai)) {
                         // Do not spend mana on the mode that gives the opponent's creature back larger.

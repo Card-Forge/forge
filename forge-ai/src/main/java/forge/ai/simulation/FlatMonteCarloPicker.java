@@ -846,38 +846,13 @@ public final class FlatMonteCarloPicker {
         return Math.max(cfg.maxPlayoutPlays, Math.min(cfg.comboPlayoutPlays, spells + 2));
     }
 
-    /**
-     * Whether this spell's unpaid Gift mode returns an opposing creature to the battlefield at the next end step.
-     * Such a mode must not be offered as hostile removal; the separate Promise Gift version remains a valid play.
-     */
-    private static boolean isUnpromisedGiftReturn(final SpellAbility sa) {
-        final SpellAbility root = sa.getRootAbility();
-        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
-            return false;
-        }
-        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
-            if (sub.getApi() != ApiType.DelayedTrigger
-                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
-                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
-                continue;
-            }
-            final String executeName = sub.getParamOrDefault("Execute", "");
-            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
-            if (executeText != null && executeText.contains("DB$ ChangeZone")
-                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static boolean returnsOpponentTargetWithUnpromisedGift(final Player player, final SpellAbility sa,
                                                                     final GameObject target) {
         if (!(target instanceof Card card) || card.getOwner() == null
                 || !card.getOwner().isOpponentOf(player)) {
             return false;
         }
-        return isUnpromisedGiftReturn(sa);
+        return ComputerUtilAbility.hasUnpromisedGiftReturn(sa);
     }
 
     /**
