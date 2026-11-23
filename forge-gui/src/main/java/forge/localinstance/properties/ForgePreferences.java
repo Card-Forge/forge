@@ -77,6 +77,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_OVERLAY_ABILITY_ICONS("true"),
         UI_OVERLAY_DRAFT_RANKING("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("true"),
+        UI_CACHE_CARD_FRAMES ("true"),
         UI_CARD_DOWNLOAD_LANG ("en"),
         UI_PREFER_LANG_FOR_UNIQUE_CARDS ("false"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),

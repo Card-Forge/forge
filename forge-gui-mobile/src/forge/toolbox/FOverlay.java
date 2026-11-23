@@ -85,6 +85,26 @@ public abstract class FOverlay extends FContainer {
         setVisible(false);
     }
 
+    /**
+     * Hide this overlay immediately, bypassing the short top-overlay fade delay.
+     * Use when the screen that owns the overlay is being discarded.
+     */
+    protected final void hideImmediately() {
+        FThreads.assertExecutedByEdt(true);
+
+        if (tempOverlay == this) {
+            hideTempOverlayTask.cancel();
+            tempOverlay = null;
+        } else if (hideTempOverlayTask.isScheduled()) {
+            hideTempOverlayTask.cancel();
+            hideTempOverlayTask.run();
+        }
+
+        openedOnScreen = null;
+        overlays.remove(this);
+        super.setVisible(false);
+    }
+
     public void finishedloading() {
         Forge.setLoadingaMatch(false);
     }

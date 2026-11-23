@@ -39,6 +39,7 @@ import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
 import forge.card.CardSleeveImage;
+import forge.card.CardZoom;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -678,9 +679,12 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public void afterGameEnd() {
         super.afterGameEnd();
-        Forge.back(true);
-        if (Forge.disposeTextures)
-            ImageCache.getInstance().disposeTextures();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            CardZoom.resetForMatchEnd();
+            Forge.back(true);
+            if (Forge.disposeTextures)
+                ImageCache.getInstance().disposeTextures();
+        });
         //view = null;
     }
 
