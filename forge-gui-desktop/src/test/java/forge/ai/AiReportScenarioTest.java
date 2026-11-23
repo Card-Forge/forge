@@ -152,6 +152,15 @@ public class AiReportScenarioTest extends AITest {
             return sa.getPayCosts().isFree() && !sa.usesTargeting();
         }
 
+        /** Find a trigger's executable ability, unwrapping it the same way the AI trigger evaluator does. */
+        SpellAbility triggerAbility(final Card card, final String execute) {
+            final SpellAbility ability = card.getTriggers().stream()
+                    .filter(t -> execute.equals(t.getMapParams().get("Execute")))
+                    .map(t -> t.ensureAbility()).findFirst().orElse(null);
+            return ability instanceof forge.game.trigger.WrappedAbility
+                    ? ((forge.game.trigger.WrappedAbility) ability).getWrappedAbility() : ability;
+        }
+
         AiController controller() { return ((PlayerControllerAi) ai.getController()).getAi(); }
 
         List<SpellAbility> plays() {
@@ -788,8 +797,34 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
         l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
                 c -> { c.bf("Wastes", 4, c.ai); c.bf("Grizzly Bears", c.opp); c.hand("Kozilek's Command", c.ai); }));
-        l.add(noPlay("12934-thraben-charm-yard", "Thraben Charm / Endurance do not exile a graveyard holding only a fetch land", Fid.APPROX, M1, true, "Thraben Charm",
+        l.add(noPlay("12934-thraben-charm-yard", "Thraben Charm does not choose its graveyard-exile mode for a lone fetch land", Fid.APPROX, M1, true, "Thraben Charm",
                 c -> { c.bf("Plains", c.ai); c.bf("Plains", c.ai); c.hand("Thraben Charm", c.ai); c.gy("Wooded Foothills", c.opp); }));
+        l.add(new Scenario("12934-endurance-fetch", "Endurance resolves its mandatory ETB trigger without targeting a lone fetch land", Fid.APPROX, M1, true,
+                c -> { c.gy("Wooded Foothills", c.opp); c.bf("Endurance", c.ai); },
+                c -> {
+                    final Card endurance = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Endurance".equals(card.getName())).findFirst().orElse(null);
+                    if (endurance == null) { return "Endurance is missing"; }
+                    final SpellAbility etb = c.triggerAbility(endurance, "TrigBottom");
+                    if (etb == null) { return "Endurance's ETB ability is missing"; }
+                    etb.setActivatingPlayer(c.ai);
+                    if (!c.shouldRunAiTrigger(etb, true)) { return "AI declined Endurance's mandatory ETB trigger"; }
+                    final Player target = etb.getTargets().getFirstTargetedPlayer();
+                    return target == null ? null : "Endurance targeted " + target + " with only a fetch land to exile";
+                }));
+        l.add(new Scenario("12934-endurance-creature", "Endurance still targets a graveyard containing a creature worth protecting", Fid.APPROX, M1, true,
+                c -> { c.gy("Griselbrand", c.opp); c.bf("Endurance", c.ai); },
+                c -> {
+                    final Card endurance = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Endurance".equals(card.getName())).findFirst().orElse(null);
+                    if (endurance == null) { return "Endurance is missing"; }
+                    final SpellAbility etb = c.triggerAbility(endurance, "TrigBottom");
+                    if (etb == null) { return "Endurance's ETB ability is missing"; }
+                    etb.setActivatingPlayer(c.ai);
+                    if (!c.shouldRunAiTrigger(etb, true)) { return "AI declined Endurance's mandatory ETB trigger"; }
+                    final Player target = etb.getTargets().getFirstTargetedPlayer();
+                    return target == c.opp ? null : "Endurance should target the opponent's valuable graveyard, chose " + target;
+                }));
         l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
@@ -2606,7 +2641,7 @@ public class AiReportScenarioTest extends AITest {
     public Object[][] provide() {
         final List<Object[]> rows = new ArrayList<>();
         for (final Scenario s : scenarios()) {
-            if (ONLY.isEmpty() || ONLY.equals(s.issue)) { rows.add(new Object[] { s }); }
+            if (ONLY.isEmpty() || ONLY.equals(s.issue) || s.issue.startsWith(ONLY + "-")) { rows.add(new Object[] { s }); }
         }
         return rows.toArray(new Object[0][]);
     }
