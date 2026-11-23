@@ -322,26 +322,21 @@ html:has(:is(.backdrop.on-board, .reveal-back.on-board):not([hidden])) :is(.back
 /* A card drawn by the board's own code is placed in its own holder. The holder takes no part in the layout. */
 .card-host { display: contents; }
 
-/* Putting cards back on the library. The top and the bottom are on each side of the pile. A card further from the pile is nearer to that end. */
+/* Putting cards back on the library. The top and the bottom of the library are panels. Between them is the number of library cards that stay where they are. */
 .manipulate { display: grid; gap: 12px; justify-items: center; }
-.lib-row { --fit: 1.3; display: flex; align-items: flex-start; justify-content: center; gap: 22px; padding: 4px 6px 30px; }
-.lib-side { display: grid; justify-items: center; }
-.lib-cards { display: flex; flex-wrap: wrap; gap: 14px; }
+.lib-row { --fit: 1.3; display: flex; align-items: stretch; justify-content: center; gap: 18px; padding: 4px 6px 8px; }
+.lib-side { display: grid; align-content: start; justify-items: center; padding: 12px 16px 18px; border: 1px solid var(--line-bright); border-radius: 12px; background: #ffffff07; }
+.lib-head { margin: 0 0 12px; font-size: 13px; font-weight: 700; text-align: center; }
+.lib-head small { display: block; margin-top: 2px; white-space: nowrap; font-size: 11px; font-weight: 500; color: var(--muted); }
+.lib-cards { display: flex; gap: 14px; }
 .lib-card { position: relative; cursor: grab; }
 .lib-card:active { cursor: grabbing; }
 .dialog .lib-side.top .lib-card:first-child .order-number { background: var(--brass); border-color: var(--accent); color: var(--on-brass); }
-.dialog .lib-side.bottom .order-end { color: var(--muted); }
 /* An empty end is shown as a drop target the size of a card */
 .lib-slot { display: block; box-sizing: border-box; width: calc(var(--card-w) * var(--fit)); height: calc(var(--card-h) * var(--fit)); border: 1px dashed var(--line-bright); border-radius: var(--radius); }
-.lib-pile { position: relative; flex: none; width: calc(var(--card-w) * var(--fit, 1)); height: calc(var(--card-h) * var(--fit, 1)); }
-.lib-pile i { position: absolute; inset: 0; box-sizing: border-box; border-radius: var(--radius); border: 2px solid var(--back-edge);
-  background: var(--sleeve, none) center / cover, repeating-linear-gradient(45deg, var(--back-a) 0 6px, var(--back-b) 6px 12px); }
-.lib-pile i:nth-child(1) { translate: -6px 6px; filter: brightness(.45); }
-.lib-pile i:nth-child(2) { translate: -3px 3px; filter: brightness(.7); }
-.lib-pile i:nth-child(3) { box-shadow: 0 10px 22px #000c; }
-.lib-count { position: absolute; z-index: 2; right: -8px; bottom: -8px; min-width: 24px; height: 22px; box-sizing: border-box; padding: 0 6px; display: grid; place-items: center;
-  border-radius: 11px; background: var(--surface); border: 1px solid var(--line-bright); font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.lib-name { position: absolute; left: 50%; top: calc(100% + 9px); transform: translateX(-50%); font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; color: var(--muted); }
+.lib-rest { flex: none; align-self: center; max-width: 96px; margin: 0; display: grid; justify-items: center; gap: 6px; font-size: 11.5px; line-height: 1.25; text-align: center; color: var(--muted); }
+.lib-rest i { width: 1px; height: 46px; background: linear-gradient(var(--line-bright) 50%, transparent 0) 0 0 / 1px 6px; }
+.lib-rest b { font-size: 20px; color: var(--text); }
 /* The actions for one clicked card are a menu at the pointer, as on desktop, not a dialog */
 .card-menu { position: fixed; min-width: 220px; max-width: min(420px, calc(100vw - 16px)); padding: 6px; display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 14px 36px #000c; }
 .card-menu-title { margin: 2px 8px 5px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }

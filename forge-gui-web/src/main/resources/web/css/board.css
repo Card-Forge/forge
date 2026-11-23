@@ -589,8 +589,8 @@ html[data-motion="reduced"] #phase-strip .pill:hover .caret { animation: none; }
 #phase-strip .stops .skip { color: var(--select); display: flex; }
 /* A raised panel lighter than the table, with a light top edge and a dark outline. So the stack does not look like loose cards on the board. */
 #stack .pile { transition: height .15s ease; }
-#stack { position: fixed; top: 56px; right: calc(var(--side-gap) + 8px); z-index: 25; width: calc(var(--stack-w) + 20px); display: grid; gap: 8px; padding: 8px 10px 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--surface-3) 96%, #fff), var(--surface-3)); border: 1px solid color-mix(in srgb, var(--line-bright) 92%, #fff); border-radius: 12px;
-  box-shadow: inset 0 1px 0 #ffffff24, 0 0 0 1px var(--bg-deep), 0 22px 48px #000000e0, 0 4px 12px #000a; }
+#stack { position: fixed; top: 56px; right: calc(var(--side-gap) + 8px); z-index: 25; width: calc(var(--stack-w) + 20px); display: grid; gap: 8px; padding: 8px 10px 10px; background: var(--panel); backdrop-filter: blur(6px); border: 1px solid var(--panel-edge); border-radius: 12px;
+  box-shadow: inset 0 1px 0 #ffffff24, 0 0 0 1px var(--bg-deep), 0 12px 34px #000a; }
 /* With several opponents the top seats have a row of details. The panel starts below that row instead of over their piles. */
 #match.many #stack, #match.many #storm { top: 80px; }
 #stack .head { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); }
@@ -623,7 +623,7 @@ html[data-motion="reduced"] #phase-strip .pill:hover .caret { animation: none; }
 .stack-item.awaiting .await { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 6px 7px; border-radius: 0 0 8px 8px; text-align: center; background: linear-gradient(transparent, #070910e6 40%); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #dfe8fa; }
 @keyframes awaiting { 50% { box-shadow: 0 0 26px #9fc0ff55, inset 0 0 30px #9fc0ff33; border-color: #d6e3ffdd; } }
 html[data-motion="reduced"] .stack-item.awaiting { animation: none; }
-#log { overflow-anchor: none; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; overflow-y: auto; flex: 1; min-height: 0; font-size: 12px; color: var(--muted); scrollbar-width: thin; }
+#log { overflow-anchor: none; background: var(--panel); backdrop-filter: blur(6px); border: 1px solid var(--panel-edge); box-shadow: inset 0 1px 0 #ffffff24, 0 0 0 1px var(--bg-deep); border-radius: 8px; padding: 6px 8px; overflow-y: auto; flex: 1; min-height: 0; font-size: 12px; color: var(--muted); scrollbar-width: thin; }
 .log-entry { padding: 2px 0; border-bottom: 1px solid var(--surface-2); display: flex; gap: 6px; align-items: flex-start; }
 .log-entry .thumb { width: 32px; border-radius: 3px; flex: none; cursor: pointer; }
 .log-entry.log-turn { align-items: center; gap: 8px; margin-top: 10px; padding: 3px 0; border-bottom: 0; color: var(--accent-2);
@@ -1307,7 +1307,7 @@ html[data-motion="reduced"] .avatar.hit, html[data-motion="reduced"] .avatar.hit
 #stack .stack-item.highlighted { outline: 3px solid var(--pick); }
 
 /* A one-pixel highlight along the top edge makes a dark panel look raised instead of sunken */
-#log, .zone-panel { box-shadow: inset 0 1px 0 #ffffff12; }
+.zone-panel { box-shadow: inset 0 1px 0 #ffffff12; }
 
 /* Planechase: the face-up planes are cards at the left end of the phase strip, in line with the pill, with the planar die on the corner */
 #match { --plane-w: clamp(96px, 10.4vw, 150px); }

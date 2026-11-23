@@ -535,10 +535,14 @@ html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions .dist-left 
 html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions:has(.dist-left) > .primary { flex: 0 0 92px; }
 html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions .dist-left button { align-self: stretch; min-height: 50px; border: 0; border-left: 1px solid var(--line); border-radius: 0; }
 html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board .actions, .reveal-back.on-board footer) kbd { display: none; }
-/* On a phone the two ends are stacked. The pile between them is hidden, so the cards get its space. */
-html[data-form="portrait"] .lib-row { --fit: 1; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 0 24px; }
-html[data-form="portrait"] .lib-side { justify-items: start; }
-html[data-form="portrait"] .lib-row .lib-pile { display: none; }
+/* On a phone the two panels are stacked, and the cards in a panel wrap */
+html[data-form="portrait"] .lib-row { flex-direction: column; align-items: stretch; gap: 18px; padding: 6px 0 12px; }
+html[data-form="portrait"] .lib-side { padding: 14px 18px 18px; }
+html[data-form="portrait"] .lib-head { margin-bottom: 14px; font-size: 14px; }
+html[data-form="portrait"] .lib-cards { flex-wrap: wrap; justify-content: center; gap: 16px; }
+html[data-form="portrait"] .lib-rest { max-width: none; grid-auto-flow: column; align-items: center; }
+html[data-form="portrait"] .lib-rest i { width: 46px; height: 1px; background: linear-gradient(90deg, var(--line-bright) 50%, transparent 0) 0 0 / 6px 1px; }
+html[data-form="portrait"] .lib-rest b { font-size: 13px; }
 /* A touch screen has no drag, so the line about dragging is hidden */
 html[data-form="portrait"] .manipulate .hint { display: none; }
 /* The attacker and its pile are a row of their own, and the arrow is left out, so the targets keep their size */

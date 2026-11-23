@@ -13,6 +13,8 @@ export interface CardFit {
   least?: number;
   /** How many boxes are stacked one above another in the backdrop's height. */
   share?: number;
+  /** For cards split between boxes stacked in the row, the number of card rows they take at a column count, and the pixels of height the boxes take besides their cards. */
+  stacked?: { rows: (cols: number) => number; around: number };
 }
 
 /**
@@ -20,11 +22,13 @@ export interface CardFit {
  * The layout with the biggest cards is used.
  */
 function cardScale(count: number, width: number, height: number, card: { w: number; h: number }, how: CardFit): number {
-  const { gap, below = 0, wrap = false, least = 1 } = how;
+  const { gap, below = 0, wrap = false, least = 1, stacked } = how;
   let best = 0;
-  for (let rows = 1; rows <= (wrap ? count : 1); rows++) {
-    const cols = Math.ceil(count / rows);
-    best = Math.max(best, Math.min((width - gap * (cols - 1)) / cols / card.w, (height - gap * (rows - 1) - below * rows) / rows / card.h));
+  for (let tried = 1; tried <= (wrap ? count : 1); tried++) {
+    const cols = Math.ceil(count / tried);
+    const rows = stacked ? stacked.rows(cols) : tried;
+    const tall = height - (stacked?.around ?? 0) - gap * (rows - 1) - below * rows;
+    best = Math.max(best, Math.min((width - gap * (cols - 1)) / cols / card.w, tall / rows / card.h));
   }
   return Math.max(least, Math.min(MOST_FIT, best));
 }
@@ -39,8 +43,9 @@ export function fitCards(row: HTMLElement, box: HTMLElement, back: HTMLElement, 
   if (sideways) [card.w, card.h] = [card.h, sideways === count ? card.w : card.h];
   const width = back.clientWidth - parseFloat(around.paddingLeft) - parseFloat(around.paddingRight)
     - parseFloat(own.paddingLeft) - parseFloat(own.paddingRight) - 16;
-  // The row's padding holds the labels under its cards, so it counts as used. The rest of the box keeps its height
-  const used = box.offsetHeight - row.clientHeight + parseFloat(own.paddingTop) + parseFloat(own.paddingBottom);
+  // The row's padding holds the labels under its cards, so it counts as used. The rest of the box keeps its height.
+  // A box held to the screen's height is shorter than its content, so its content height is measured instead
+  const used = Math.max(box.offsetHeight, box.scrollHeight) - row.clientHeight + parseFloat(own.paddingTop) + parseFloat(own.paddingBottom);
   const room = back.clientHeight - parseFloat(around.paddingTop) - parseFloat(around.paddingBottom);
   const height = room / (how.share ?? 1) - used - 16;
   row.style.setProperty('--fit', cardScale(count, width, height, card, how).toFixed(2));

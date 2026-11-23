@@ -2,25 +2,13 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
 import { SymbolText } from '../symbols';
-import { cssUrl, playerSleeveUrl } from '../avatarsleeves';
-import { me, stateOf, type Model } from '../model';
+import { stateOf, type Model } from '../model';
 import type { ManipulateRequest, OrderRequest, RequestOption, CardView, SideboardRequest } from '../protocol';
-import { t } from '../text';
+import { t, tNodes } from '../text';
 import { make, reducedMotion } from '../dom';
 import { isPortrait } from '../form';
 import { trackDrag } from '../press';
 import { BoardCard, Button, ButtonRow, OkKey, OptionView, offerAnswer, useCardFit, type Answer } from './questionparts';
-
-/** The player's library as a pile in their sleeve. The top and bottom ends of the library are drawn on either side of it. */
-function LibraryPile({ model, count }: { model: Model; count: number }) {
-  return (
-    <div class="lib-pile" style={{ '--sleeve': cssUrl(playerSleeveUrl(me(model))) }} aria-hidden="true">
-      <i /><i /><i />
-      <span class="lib-count">{count}</span>
-      <span class="lib-name">{t('lblLibrary')}</span>
-    </div>
-  );
-}
 
 /** The engine ends a triggered ability's text with the cause of the trigger, in square brackets. */
 const SET_OFF_BY = /\s*\[([^\]]*)\]$/;
@@ -286,7 +274,7 @@ export function Order({ req, model, answer }: { req: OrderRequest; model: Model;
 // The host sends the whole library, but only the top cards can move. Cards placed after the rest go to the bottom
 type Shelf = 'top' | 'bottom';
 
-/** The top and bottom of the library on either side of the pile. The further a card is from the pile, the nearer it is to that end. */
+/** The top and the bottom of the library in two panels. Each panel runs from its end of the library towards the cards that stay where they are. */
 export function Manipulate({ req, model, answer }: { req: ManipulateRequest; model: Model; answer: Answer }) {
   const all = req.options.map((_, i) => i);
   const rest = all.filter(i => !req.movable.includes(i));
@@ -298,10 +286,15 @@ export function Manipulate({ req, model, answer }: { req: ManipulateRequest; mod
   const ghost = useRef<HTMLElement | null>(null);
   const bothEnds = req.toBottom || req.toTop;
   const row = useRef<HTMLDivElement>(null);
-  // One row holds each end's cards, or an empty place for an end with none, and the pile between them. A phone stacks the ends instead (portrait.css)
-  useCardFit(row, isPortrait() ? 0 : Math.max(piles.top.length, 1) + (bothEnds ? Math.max(piles.bottom.length, 1) : 0) + 1, { gap: 18 });
+  // An empty panel holds a card-sized place. On a wide screen the panels share one row, with the count between them about a card wide.
+  // A phone stacks the panels and wraps their cards (portrait.css). There the headings, padding and count take about 230 pixels, and a large scry scrolls
+  const places = (bothEnds ? [piles.top.length, piles.bottom.length] : [piles.top.length]).map(n => Math.max(n, 1));
+  const portrait = isPortrait();
+  useCardFit(row, portrait ? Math.max(...places) : places.reduce((a, b) => a + b) + (bothEnds ? 1 : 0), portrait
+    ? { gap: 30, wrap: true, stacked: { rows: cols => places.reduce((n, p) => n + Math.ceil(p / cols), 0), around: bothEnds ? 230 : 90 } }
+    : { gap: 36 });
 
-  // Each end's cards, and the empty place of an end with none, in page order
+  // Each panel's cards, and the empty place of a panel with none, in page order
   const slots = () => (row.current ? [...row.current.querySelectorAll<HTMLElement>('.lib-card')] : []);
   const slide = useSlide(() => slots().filter(el => el.dataset.slide), piles);
   useEffect(() => () => ghost.current?.remove(), []);
@@ -328,7 +321,7 @@ export function Manipulate({ req, model, answer }: { req: ManipulateRequest; mod
       dropped: () => setCarried(null),
     });
   };
-  // A card sent to the other end goes next to the pile, which is the middle of the library at that end
+  // A card sent to the other end goes next to the cards that stay, which is the middle of the library at that end
   const send = (from: Shelf, pos: number) => setPiles(p => {
     const card = p[from][pos];
     const next = { top: [...p.top], bottom: [...p.bottom] };
@@ -340,19 +333,19 @@ export function Manipulate({ req, model, answer }: { req: ManipulateRequest; mod
 
   offerAnswer(req.id, () => answer([...piles.top, ...rest, ...piles.bottom]));
 
-  // The top runs from its end to the pile, and the bottom from the pile to its end. So the card at each end is the one furthest out
+  // The top runs from its end towards the cards that stay, and the bottom from those cards to its end. So the card at each end is the one furthest out
   const side = (name: Shelf) => (
     <div class={`lib-side ${name}`}>
+      <div class="lib-head">{t(name === 'top' ? 'lblTopOfLibrary' : 'lblWebDialogBottomOfLibrary')}
+        <small>{t(name === 'top' ? 'lblWebDialogTopDrawnFirst' : 'lblWebDialogBottomLast')}</small></div>
       <div class="lib-cards">
         {piles[name].map((i, pos) => (
           <div key={i} data-slide={i} data-shelf={name} data-pos={pos} class={`lib-card${carried === i ? ' carried' : ''}`} onPointerDown={e => carry(e, i)}>
             <OptionView model={model} opt={req.options[i]} onClick={bothEnds ? () => send(name, pos) : undefined} />
             {name === 'top' && <span class="order-number">{pos + 1}</span>}
-            {name === 'top' && pos === 0 && <span class="order-end">{t('lblClosestToTop')}</span>}
-            {name === 'bottom' && pos === piles.bottom.length - 1 && <span class="order-end">{t('lblClosestToBottom')}</span>}
           </div>
         ))}
-        {piles[name].length === 0 && <div class="lib-card" data-shelf={name} data-pos={0}><span class="lib-slot" /><span class="order-end">{t(name === 'top' ? 'lblClosestToTop' : 'lblClosestToBottom')}</span></div>}
+        {piles[name].length === 0 && <div class="lib-card" data-shelf={name} data-pos={0}><span class="lib-slot" /></div>}
       </div>
     </div>
   );
@@ -361,7 +354,7 @@ export function Manipulate({ req, model, answer }: { req: ManipulateRequest; mod
     <div class="manipulate">
       <div class="lib-row" ref={row}>
         {side('top')}
-        <LibraryPile model={model} count={rest.length} />
+        {bothEnds && <p class="lib-rest"><i />{tNodes('lblWebDialogOtherCardsInLibrary', <b>{rest.length}</b>)}<i /></p>}
         {bothEnds && side('bottom')}
       </div>
       <p class="hint">{t(bothEnds ? 'lblWebDialogMoveAcross' : 'lblWebDialogReorderHint')}</p>

@@ -22,6 +22,10 @@
   --text: #e6edf3;
   --muted: #8b96a5;
   --faint: #6b7686;
+  /* The log, the stack and the prompt float over the playmat. They share one fill that lets a little of it through */
+  --panel: color-mix(in srgb, var(--surface) 90%, transparent);
+  /* The log and the stack have a light edge with a dark ring outside it, which shows on a light playmat and on a dark one */
+  --panel-edge: color-mix(in srgb, var(--line-bright) 92%, #fff);
   /* The dark gold (--accent) is used only for text and marks on brass, never as a fill. A fill of a gold this dark looks dull brown. */
   --accent: #8d680b;
   --accent-2: #f2c344;

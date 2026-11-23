@@ -1,5 +1,5 @@
 /* The prompt console is at the bottom of the side column, under the log. The question is shown above one wide answer bar. */
-#prompt { position: relative; flex: none; width: var(--prompt-w); align-self: flex-end; margin-bottom: 14px; z-index: 30; display: grid; gap: 10px; padding: 10px 12px 12px; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 34px #000a; }
+#prompt { position: relative; flex: none; width: var(--prompt-w); align-self: flex-end; margin-bottom: 14px; z-index: 30; display: grid; gap: 10px; padding: 10px 12px 12px; background: var(--panel); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 34px #000a; }
 /* When the log and chat are folded, the side column holds only tabs. So the console is fixed to the corner on its own. */
 #match.side-folded #prompt { position: fixed; right: 8px; bottom: 14px; }
 #prompt.waiting { border-color: var(--accent-2); }
