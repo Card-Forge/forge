@@ -626,13 +626,16 @@ public class ImageCache {
     // their whole lifecycle. Other images use the stock file decode. This selects a decode PARAMETER
     // only — it caches/gets/unloads nothing.
     private static TextureParameter cardTextureParameter(String fileName, boolean others) {
-        // Android card textures are downscaled before upload to reduce their resident GPU/native cost.
+        // Android card textures can opt out of the size and RGB565 reductions for original quality.
         if (isDownloadedCardImage(fileName) || (GuiBase.isAndroid() && !others)) {
             TextureParameter p = new TextureParameter();
-            p.textureData = new CardTextureData(fileName,
-                    GuiBase.isAndroid() && !others
-                            && (StringUtils.endsWithIgnoreCase(fileName, ".jpg")
-                            || StringUtils.endsWithIgnoreCase(fileName, ".jpeg")));
+            final boolean androidCardTexture = GuiBase.isAndroid() && !others;
+            final boolean preserveOriginalQuality = androidCardTexture
+                    && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANDROID_ORIGINAL_TEXTURE_QUALITY);
+            final boolean useRgb565 = androidCardTexture && !preserveOriginalQuality
+                    && (StringUtils.endsWithIgnoreCase(fileName, ".jpg")
+                    || StringUtils.endsWithIgnoreCase(fileName, ".jpeg"));
+            p.textureData = new CardTextureData(fileName, useRgb565, preserveOriginalQuality);
             p.minFilter = Texture.TextureFilter.Linear;
             p.magFilter = Texture.TextureFilter.Linear;
             return p;

@@ -24,18 +24,24 @@ final class CardTextureData implements TextureData {
 
     private final String path;
     private final boolean useRgb565;
+    private final boolean preserveOriginalQuality;
     private int width, height;
     private Format format = Format.RGBA8888; // real format set in prepare(); safe default pre-prepare
     private Pixmap pixmap;
     private boolean prepared;
 
     CardTextureData(String path) {
-        this(path, false);
+        this(path, false, false);
     }
 
     CardTextureData(String path, boolean useRgb565) {
+        this(path, useRgb565, false);
+    }
+
+    CardTextureData(String path, boolean useRgb565, boolean preserveOriginalQuality) {
         this.path = path;
         this.useRgb565 = useRgb565;
+        this.preserveOriginalQuality = preserveOriginalQuality;
     }
 
     String getPath() {
@@ -56,7 +62,7 @@ final class CardTextureData implements TextureData {
     public void prepare() {
         if (prepared)
             throw new GdxRuntimeException("Already prepared");
-        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path), useRgb565);
+        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path), useRgb565, preserveOriginalQuality);
         pixmap = p;
         width = p.getWidth();
         height = p.getHeight();
@@ -133,8 +139,11 @@ final class CardTextureData implements TextureData {
 
     // Cap the longest side at MAX_CARD_TEX_DIM. Android JPEG card art is also converted to RGB565
     // when it is already within the size limit; PNG/alpha-capable art keeps its original alpha.
+    // Original-quality mode bypasses both transformations.
     // Any failure falls back to the decoded source so a format conversion cannot prevent card display.
-    private static Pixmap downscale(Pixmap src, boolean useRgb565) {
+    private static Pixmap downscale(Pixmap src, boolean useRgb565, boolean preserveOriginalQuality) {
+        if (preserveOriginalQuality)
+            return src;
         try {
             int w = src.getWidth();
             int h = src.getHeight();
