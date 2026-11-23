@@ -12,6 +12,9 @@ import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
 public class AbandonEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Optional", "RememberAbandoned",
+    };
 
 
     /* (non-Javadoc)

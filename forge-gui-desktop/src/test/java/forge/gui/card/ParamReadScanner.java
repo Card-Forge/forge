@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Finds the card-script params the engine reads by looking at its bytecode, without loading any class.
@@ -135,10 +136,22 @@ final class ParamReadScanner {
             if (code != null) {
                 boolean isStatic = (access & 0x0008) != 0;
                 methods.add(new Method(self, self + "." + name + desc, calls(code, cp, refs,
-                    slots(desc, isStatic, "Ljava/lang/String;"), paramMapSlots(desc, signature, isStatic),
+                    slots(desc, isStatic, "Ljava/lang/String;"),
+                    buildsTraits(self) ? paramMapSlots(desc, signature, isStatic) : List.of(),
                     slots(desc, isStatic, null), apiChecked(code, cp, refs))));
             }
         }
+    }
+
+    /**
+     * Code that builds or runs card traits, where a Map parameter can hold a trait's params. Elsewhere a
+     * Map<String, String> is the object's own, e.g. the params a Sticker is parsed from.
+     */
+    private static boolean buildsTraits(String owner) {
+        return Stream.of("forge/game/ability/", "forge/game/spellability/", "forge/game/trigger/",
+                "forge/game/staticability/", "forge/game/replacement/", "forge/game/CardTraitBase",
+                "forge/game/TriggerReplacementBase", "forge/game/StaticEffect")
+            .anyMatch(owner::startsWith);
     }
 
     /**

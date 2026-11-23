@@ -48,6 +48,9 @@ import java.util.Map;
  */
 
 public class AnimateAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts", "AITgtsStrict",
+    };
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -157,9 +160,9 @@ public class AnimateAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
         if (sa.getApi() != ApiType.Animate || host == null || !host.isLand() || !host.isInZone(ZoneType.Battlefield)
                 || host.isTapped() || host.getManaAbilities().isEmpty() || sa.getPayCosts() == null
-                || sa.getPayCosts().getCostMana() == null || sa.costHasManaX()
+                || sa.getPayCosts().getCostMana() == null || sa.costHasManaX() || sa.usesTargeting()
                 || "Permanent".equals(sa.getParam("Duration"))
-                || !("Self".equals(sa.getParam("Defined")) || "Self".equals(sa.getParam("ValidCards")))) {
+                || !"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
             return false;
         }
         final ManaCostBeingPaid cost = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
@@ -201,7 +204,7 @@ public class AnimateAi extends SpellAbilityAi {
         sa = sa.getRootAbility();
         if (sa.getApi() != ApiType.Animate || sa.usesTargeting() || !"Permanent".equals(sa.getParam("Duration"))
                 || !sa.hasParam("Power") || !sa.hasParam("Toughness")
-                || !("Self".equals(sa.getParam("ValidCards")) || "Self".equals(sa.getParam("Defined")))) {
+                || !"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
             return false;
         }
         if (sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords") || sa.hasParam("Types") || sa.hasParam("RemoveTypes")

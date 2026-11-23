@@ -39,6 +39,10 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class AttachAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts", "AITgtsStrict",
+    };
+    public static final String[] INTERNAL_PARAMS = {"AIValid"};
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

@@ -94,7 +94,7 @@ public class DamageDealEffect extends DamageBaseEffect {
 - **Framework classes** (listed in `CardScriptParams.FRAMEWORK`, such as `AbilityFactory`, `CardTraitBase` and `SpellAbility`) declare the params that any ability can use. Each param is declared once, in the class that reads it.
 - **Effects** declare the params their API uses in addition to those. This includes params that the effect's helper methods read for it.
 - **AI classes** declare the params that only the AI reads, such as `AIExpectAmount` on `DamageDealAi`. An effect that declares needs its AI class to declare too, if the AI reads anything more.
-- **`INTERNAL_PARAMS`** lists params that the engine sets itself, for example when it builds keyword abilities. A script that sets one gets a warning.
+- **`INTERNAL_PARAMS`** lists params that the engine sets itself, for example when it builds keyword abilities. Framework classes, effects and AI classes can declare them. A script that sets one gets a warning.
 
 Effects are being declared in batches. Until an effect declares its params, CI checks them against the compiled code instead, and the Card Workshop doesn't check them.
 

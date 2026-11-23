@@ -116,20 +116,11 @@ public class CardScriptParamDeclarationTest {
         }
     }
 
-    /** What an AI class declares: what it reads beyond the framework and every effect it serves. */
+    /** What an AI class declares: what it reads beyond the framework and the effects it serves. */
     private Set<String> aiExpected(Class<?> ai, List<ApiType> apis, Set<String> framework) {
         Set<String> expected = engine.aiReads(ai);
         expected.removeAll(framework);
-        Set<String> everyEffect = null;
-        for (ApiType api : apis) {
-            Set<String> reads = engine.effectReads(api);
-            if (everyEffect == null) {
-                everyEffect = reads;
-            } else {
-                everyEffect.retainAll(reads);
-            }
-        }
-        expected.removeAll(everyEffect);
+        apis.forEach(api -> expected.removeAll(engine.effectReads(api)));
         return expected;
     }
 
@@ -175,11 +166,16 @@ public class CardScriptParamDeclarationTest {
         }
     }
 
-    /** INTERNAL_PARAMS, on a framework class or a declaring effect, must be params the engine really sets. */
+    /** INTERNAL_PARAMS, on a framework class, an effect or an AI class, must be params the engine really sets. */
     private void checkInternal(List<String> errors) {
         Set<Class<?>> declarers = new LinkedHashSet<>(CardScriptParams.FRAMEWORK);
         for (Class<?> effect : effectClasses().keySet()) {
             for (Class<?> c = effect; c != SpellAbilityEffect.class; c = c.getSuperclass()) {
+                declarers.add(c);
+            }
+        }
+        for (Class<?> ai : aiClasses().keySet()) {
+            for (Class<?> c = ai; c != SpellAbilityAi.class; c = c.getSuperclass()) {
                 declarers.add(c);
             }
         }
