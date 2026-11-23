@@ -330,6 +330,9 @@ public class SpellAbilityPicker {
         if (!sa.checkRestrictions(sa.getHostCard(), player)) {
             return AiPlayDecision.CantPlaySa;
         }
+        if (ComputerUtilAbility.shouldWaitForSpectacleEnabler(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
 
         if (sa.isLandAbility()) {
             return AiPlayDecision.WillPlay;

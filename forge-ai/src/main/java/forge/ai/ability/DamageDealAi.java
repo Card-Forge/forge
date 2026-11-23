@@ -344,6 +344,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final int targetCountBeforePrevention = hPlay.size();
+        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        final boolean skippedPreventedTargets = hPlay.size() < targetCountBeforePrevention;
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -366,11 +369,18 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!mandatory) {
+            // If prevention made another legal target take zero damage, prefer a target that can actually be damaged
+            // rather than falling through and aiming the spell at the protected creature.
+            if (skippedPreventedTargets && pl.isOpponentOf(ai) && activator.equals(ai) && !hPlay.isEmpty()) {
+                final List<Card> creatures = CardLists.filter(hPlay, CardPredicates.CREATURES);
+                if (!creatures.isEmpty()) { return ComputerUtilCard.getBestCreatureAI(creatures); }
+            }
             return null;
         }
 
         // try unfiltered now
         hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
+        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
         List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
 
         if (!hPlay.isEmpty()) {
@@ -1201,6 +1211,7 @@ public class DamageDealAi extends DamageAiBase {
         // Separate options into creatures and players
         List<Card> oppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
+        oppCreatures = CardLists.filter(oppCreatures, c -> canActuallyDamage(c, dmg, source, noPrevention));
         Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
         List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 

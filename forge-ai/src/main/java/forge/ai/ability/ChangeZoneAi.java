@@ -28,7 +28,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityMustTarget;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -911,6 +914,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    private static boolean hasEnabledEtbTrigger(final Player ai, final Card card) {
+        if (!card.hasETBTrigger(false)) {
+            return false;
+        }
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+        runParams.put(AbilityKey.Destination, ZoneType.Battlefield.name());
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.ChangesZone
+                    || !ZoneType.Battlefield.toString().equals(trigger.getParam("Destination"))) {
+                continue;
+            }
+            if (!StaticAbilityDisableTriggers.disabled(ai.getGame(), trigger, runParams)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * changeKnownPreferredTarget.
@@ -1081,7 +1102,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 // blink logic: get my own permanents back or blink permanents with ETB effects
                 if (blink) {
-                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false)));
+                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || hasEnabledEtbTrigger(ai, c)));
                     if (!blinkTargets.isEmpty()) {
                         CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
                         // prefer post-combat unless targeting opponent's stuff or part of another ability

@@ -14,11 +14,13 @@ import com.google.common.collect.Multimap;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPutCounter;
@@ -31,6 +33,7 @@ import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
@@ -99,6 +102,108 @@ public class ComputerUtilAbility {
             spellAbilities.addAll(possible);
         }
         return spellAbilities;
+    }
+
+    /**
+     * Do not spend the full mana cost of a Spectacle spell while an available damage activation can turn on its
+     * cheaper cost. In particular, a Seal of Fire in hand should be cast and activated before Skewer the Critics.
+     * The decision is re-evaluated after each action, so the Spectacle spell becomes available as soon as the opponent
+     * has actually lost life.
+     */
+    public static boolean shouldWaitForSpectacleEnabler(final Player player, final SpellAbility sa) {
+        if (player == null || sa == null || !sa.isSpell() || sa.isSpectacle()
+                || sa.getHostCard() == null || !sa.getHostCard().hasKeyword(Keyword.SPECTACLE)
+                || player.getOpponentLostLifeThisTurn() > 0) {
+            return false;
+        }
+
+        sa.setActivatingPlayer(player);
+        final Cost baseCost = sa.getPayCosts();
+        if (!baseCost.isOnlyManaCost()) {
+            return false;
+        }
+        boolean hasCheaperSpectacleCost = false;
+        for (final SpellAbility alternative : sa.getHostCard().getSpellAbilities()) {
+            if (alternative.isSpectacle() && alternative.getPayCosts().isOnlyManaCost()
+                    && alternative.getPayCosts().getTotalMana().compareTo(baseCost.getTotalMana()) < 0) {
+                hasCheaperSpectacleCost = true;
+                break;
+            }
+        }
+        if (!hasCheaperSpectacleCost) {
+            return false;
+        }
+
+        // An unused damage activation on the battlefield can be used before paying for the Spectacle spell.
+        for (final Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            if (hasOpponentDamageActivation(card, player, true)) {
+                return true;
+            }
+        }
+
+        // A permanent in hand such as Seal of Fire can be cast first, then its activated damage ability can enable
+        // Spectacle on the next priority check.
+        for (final Card card : player.getCardsIn(ZoneType.Hand)) {
+            if (card == sa.getHostCard() || !card.isPermanent() || !canCastPermanent(card, player)) {
+                continue;
+            }
+            if (hasOpponentDamageActivation(card, player, false)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean canCastPermanent(final Card card, final Player player) {
+        for (final SpellAbility cast : card.getSpellAbilities()) {
+            if (!cast.isSpell()) {
+                continue;
+            }
+            cast.setActivatingPlayer(player);
+            if (cast.canPlay() && ComputerUtilCost.canPayCost(cast, player, false)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasOpponentDamageActivation(final Card card, final Player player, final boolean requirePlayable) {
+        for (final SpellAbility ability : card.getSpellAbilities()) {
+            if (!ability.isActivatedAbility() || ability.getApi() != ApiType.DealDamage) {
+                continue;
+            }
+            final TargetRestrictions restrictions = ability.getTargetRestrictions();
+            if (restrictions == null || !restrictions.canTgtPlayer()) {
+                continue;
+            }
+
+            final String damageParam = ability.getParam("NumDmg");
+            if (damageParam == null) {
+                continue;
+            }
+            if (!requirePlayable && (!ability.getPayCosts().getTotalMana().isZero()
+                    || (!ability.getPayCosts().isFree() && !ComputerUtilCost.isSacrificeSelfCost(ability.getPayCosts())))) {
+                continue;
+            }
+            final int damage = AbilityUtils.calculateAmount(card, damageParam, ability);
+            if (damage <= 0) {
+                continue;
+            }
+
+            ability.setActivatingPlayer(player);
+            if (requirePlayable && (!ability.canPlay() || !ComputerUtilCost.canPayCost(ability, player, false))) {
+                continue;
+            }
+            for (final Player opponent : player.getOpponents()) {
+                final int predicted = ability.hasParam("NoPrevention")
+                        ? opponent.staticReplaceDamage(damage, card, false)
+                        : ComputerUtilCombat.predictDamageTo(opponent, damage, card, false);
+                if (opponent.canLoseLife() && ability.canTarget(opponent) && predicted > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player activator) {

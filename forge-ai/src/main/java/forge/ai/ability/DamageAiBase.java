@@ -4,6 +4,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.keyword.Keyword;
@@ -57,6 +58,17 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return true;
         }
         return !isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai);
+    }
+
+    /** Does this source deal any damage to the target after replacement and prevention effects? */
+    protected static boolean canActuallyDamage(final GameEntity target, final int damage, final Card source,
+                                               final boolean noPrevention) {
+        if (target == null || source == null || damage <= 0) {
+            return false;
+        }
+        final int predicted = noPrevention ? target.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(target, damage, source, false);
+        return predicted > 0;
     }
 
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {

@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 import forge.ai.simulation.ActivationGuard;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.OpeningHand;
+import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -614,6 +615,54 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
                 c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
                 c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
+        l.add(new Scenario("13014", "Seal of Fire is used before Skewer the Critics so Spectacle is available", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 7, c.ai); c.hand("Seal of Fire", c.ai); c.hand("Skewer the Critics", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> {
+                    final Card seal = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Seal of Fire")).findFirst().orElse(null);
+                    final Card skewer = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Skewer the Critics")).findFirst().orElse(null);
+                    if (seal == null || skewer == null) { return "setup did not put both cards in hand"; }
+
+                    final List<SpellAbility> before = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    if (before.stream().anyMatch(sa -> sa.getHostCard().equals(skewer))) {
+                        return "Skewer was still offered at its full cost while Seal of Fire could enable Spectacle";
+                    }
+                    if (before.stream().noneMatch(sa -> sa.getHostCard().equals(seal) && sa.isSpell())) {
+                        return "Seal of Fire was not offered as the enabling play";
+                    }
+                    final SpellAbility skewerSpell = skewer.getFirstSpellAbility();
+                    skewerSpell.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(skewerSpell) != AiPlayDecision.AnotherTime) {
+                        return "classic AI did not defer Skewer while Seal of Fire could enable Spectacle";
+                    }
+
+                    final SpellAbility castSeal = seal.getFirstSpellAbility();
+                    castSeal.setActivatingPlayer(c.ai);
+                    c.resolve(castSeal);
+                    final List<SpellAbility> afterCastSeal = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    final SpellAbility sealDamage = afterCastSeal.stream()
+                            .filter(sa -> sa.getHostCard().equals(seal) && sa.isActivatedAbility() && sa.getApi() == ApiType.DealDamage)
+                            .findFirst().orElse(null);
+                    if (sealDamage == null) { return "Seal of Fire's damage activation was not offered after it entered"; }
+                    sealDamage.setActivatingPlayer(c.ai);
+                    sealDamage.resetTargets();
+                    sealDamage.getTargets().add(c.opp);
+                    if (!ComputerUtil.playStack(sealDamage, c.ai, c.game)) {
+                        return "Seal of Fire's damage activation could not be put on the stack";
+                    }
+                    c.resolveAll();
+                    if (c.ai.getOpponentLostLifeThisTurn() <= 0) { return "Seal of Fire's damage activation resolved without causing opponent life loss"; }
+
+                    final List<SpellAbility> after = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    return after.stream().anyMatch(sa -> sa.getHostCard().equals(skewer) && sa.isSpectacle())
+                            ? null : "Skewer's Spectacle ability was not offered after Seal of Fire dealt damage";
+                }));
+        l.add(aimed("7477", "burn is aimed at a creature that is not protected by Crystal Barricade", Fid.EXACT, M1, true,
+                "Lightning Bolt", "Crystal Barricade",
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Crystal Barricade", c.opp); }));
+        l.add(noPlay("13011", "Ephemerate does not blink a creature whose ETB trigger is disabled", Fid.EXACT, M1, true, "Ephemerate",
+                c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Quantum Riddler", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
+        l.add(play("13011-protection", "Ephemerate still saves a creature from removal while ETB triggers are disabled", Fid.APPROX, M1, false, "Ephemerate",
+                c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Plains", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.hand("Ephemerate", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
         l.add(noPlay("12930-ephemerate", "Ephemerate in its own upkeep with a Grizzly Bears to blink: wait for the main phase", Fid.APPROX, "UPKEEP", true, "Ephemerate",
                 c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
         l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
