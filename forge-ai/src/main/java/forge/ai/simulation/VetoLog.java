@@ -21,7 +21,7 @@ import forge.game.spellability.SpellAbility;
 public final class VetoLog {
     private static volatile boolean enabled = Boolean.getBoolean("flatmc.veto");
 
-    private static final Set<String> SEEN = ConcurrentHashMap.newKeySet();
+    private static final Set<String> SEEN = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
     private static final Map<String, Integer> COUNTS = new ConcurrentHashMap<>();
     private static final Map<String, Map<String, Integer>> BY_PLAYER = new ConcurrentHashMap<>();
     private static volatile boolean echo = true;
