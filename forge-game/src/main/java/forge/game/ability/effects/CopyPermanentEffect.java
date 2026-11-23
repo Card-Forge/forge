@@ -112,7 +112,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         boolean chosenMap = "ChosenMap".equals(sa.getParam("Defined"));
         CardZoneTable triggerList = sa.getChangeZoneTable();
         if (triggerList == null) {
-            triggerList = CardZoneTable.getSimultaneousInstance(sa);
+            triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
             useZoneTable = false;
         }
         if (sa.hasParam("ChangeZoneTable")) {
