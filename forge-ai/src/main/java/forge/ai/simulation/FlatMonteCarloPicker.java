@@ -847,6 +847,40 @@ public final class FlatMonteCarloPicker {
     }
 
     /**
+     * Whether this spell's unpaid Gift mode returns an opposing creature to the battlefield at the next end step.
+     * Such a mode must not be offered as hostile removal; the separate Promise Gift version remains a valid play.
+     */
+    private static boolean isUnpromisedGiftReturn(final SpellAbility sa) {
+        final SpellAbility root = sa.getRootAbility();
+        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
+            return false;
+        }
+        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.DelayedTrigger
+                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
+                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
+                continue;
+            }
+            final String executeName = sub.getParamOrDefault("Execute", "");
+            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
+            if (executeText != null && executeText.contains("DB$ ChangeZone")
+                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean returnsOpponentTargetWithUnpromisedGift(final Player player, final SpellAbility sa,
+                                                                    final GameObject target) {
+        if (!(target instanceof Card card) || card.getOwner() == null
+                || !card.getOwner().isOpponentOf(player)) {
+            return false;
+        }
+        return isUnpromisedGiftReturn(sa);
+    }
+
+    /**
      * Drops plays that are the same as an earlier one: same card name, same ability text and same targets, like two
      * copies of a permanent with an activated ability. (Identical cards in hand are already merged by the heuristics.)
      * Playing either gives the same result, so sampling both only wastes the time budget. The order is kept.
@@ -857,7 +891,7 @@ public final class FlatMonteCarloPicker {
         for (final SpellAbility sa : plays) {
             final Card host = sa.getHostCard();
             final String key = (host == null ? "" : host.getName()) + "|" + sa.getDescription() + "|"
-                    + (sa.usesTargeting() ? String.valueOf(sa.getTargets()) : "");
+                    + (sa.usesTargeting() ? String.valueOf(sa.getTargets()) : "") + "|gift=" + sa.isGiftPromised();
             if (seen.add(key)) {
                 unique.add(sa);
             }
@@ -868,7 +902,14 @@ public final class FlatMonteCarloPicker {
     private static List<Candidate> buildCandidates(final Player player, final List<SpellAbility> approvedPlays,
                                                    final List<SpellAbility> extras, final Config cfg,
                                                    final Predicate<SpellAbility> revalidate, final Mode mode) {
-        final List<SpellAbility> approved = approvedPlays.isEmpty() ? approvedPlays : dedupePlays(approvedPlays);
+        final List<SpellAbility> approved = new ArrayList<>();
+        if (!approvedPlays.isEmpty()) {
+            for (final SpellAbility sa : dedupePlays(approvedPlays)) {
+                if (!returnsOpponentTargetWithUnpromisedGift(player, sa, firstAimedCard(sa))) {
+                    approved.add(sa);
+                }
+            }
+        }
         final List<Candidate> cands = new ArrayList<>();
         // Index 0 is always what the heuristics would do: their favourite play, or passing when they approved nothing.
         cands.add(approved.isEmpty() ? new Candidate((SpellAbility) null) : new Candidate(approved.get(0)));
@@ -892,6 +933,9 @@ public final class FlatMonteCarloPicker {
                 continue; // the heuristics have set the target up again, or no longer want the play
             }
             for (final GameObject target : alternativeTargets(player, sa, variantsLeft)) {
+                if (returnsOpponentTargetWithUnpromisedGift(player, sa, target)) {
+                    continue;
+                }
                 if (wastedOnHarmless(player, sa, target)) {
                     continue;
                 }
@@ -994,6 +1038,9 @@ public final class FlatMonteCarloPicker {
                     continue; // a targeted play with nothing sensible to aim at is not worth a rollout
                 }
             }
+            if (returnsOpponentTargetWithUnpromisedGift(player, sa, target)) {
+                continue; // the unpaid Gift mode gives the opposing creature back: it is not hostile removal
+            }
             if (shieldAlreadyUp(sa, target)) {
                 continue; // a regeneration shield that is up cannot be improved by paying for another one
             }
@@ -1009,7 +1056,7 @@ public final class FlatMonteCarloPicker {
 
     private static String playKey(final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        return (host == null ? "" : host.getName()) + "|" + sa.getDescription();
+        return (host == null ? "" : host.getName()) + "|" + sa.getDescription() + "|gift=" + sa.isGiftPromised();
     }
 
     /** What a play is for, for keeping the candidates varied and for deciding what discovery may add. */

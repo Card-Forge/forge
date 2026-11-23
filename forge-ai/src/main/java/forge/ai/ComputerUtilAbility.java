@@ -26,6 +26,7 @@ import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -202,6 +203,106 @@ public class ComputerUtilAbility {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    /**
+     * Ugin's Labyrinth normally returns its imprinted card at the opponent's end step. It can be returned sooner
+     * when the Labyrinth is threatened, but only when the card will still be castable without using the Labyrinth's
+     * mana ability (which is paid for by tapping the Labyrinth itself).
+     */
+    public static boolean shouldWaitForUginLabyrinthReturn(final Player player, final SpellAbility sa) {
+        if (player == null || sa == null || !"ReturnCastable".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+        final Card labyrinth = sa.getHostCard();
+        if (labyrinth == null || labyrinth.getExiledCards().isEmpty()) {
+            return false;
+        }
+
+        final Game game = player.getGame();
+        final boolean opponentEndStep = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().isPlayerNextTurn(player);
+        final boolean responseNeeded = isUginLabyrinthThreatened(player, labyrinth);
+        if (!opponentEndStep && !responseNeeded) {
+            return true;
+        }
+        if (labyrinth.isTapped()) {
+            return true;
+        }
+
+        final boolean wasTapped = labyrinth.isTapped();
+        try {
+            labyrinth.setTapped(true);
+            return !canCastCardNow(player, labyrinth.getExiledCards().getFirst(), labyrinth);
+        } finally {
+            labyrinth.setTapped(wasTapped);
+        }
+    }
+
+    private static boolean isUginLabyrinthThreatened(final Player player, final Card labyrinth) {
+        final Game game = player.getGame();
+        if (game.getStack().isEmpty()) {
+            return false;
+        }
+        final SpellAbility top = game.getStack().peekAbility();
+        if (top == null || top.getHostCard() == null || top.getActivatingPlayer() == null
+                || !top.getActivatingPlayer().isOpponentOf(player)) {
+            return false;
+        }
+        if (top.usesTargeting() && top.findTargetedCards().contains(labyrinth)) {
+            if (top.getApi() == ApiType.Destroy) {
+                return true;
+            }
+            if (top.getApi() == ApiType.ChangeZone) {
+                final String destination = top.getParamOrDefault("Destination", "");
+                if ("Graveyard".equals(destination) || "Exile".equals(destination)) {
+                    return true;
+                }
+            }
+        }
+
+        // Pithing Needle / Disruptor Flute choose a name as they enter. Take the card back while the return ability
+        // is still available, before that name choice can disable it.
+        for (final StaticAbility ability : top.getHostCard().getStaticAbilities()) {
+            if (ability.checkMode(StaticAbilityMode.CantBeActivated)
+                    && ability.getParamOrDefault("ValidCard", "").contains("NamedCard")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether at least one normal or alternative spell cost on this card can be paid now. */
+    public static boolean canCastCardNow(final Player player, final Card card) {
+        return canCastCardNow(player, card, null);
+    }
+
+    private static boolean canCastCardNow(final Player player, final Card card, final Card excludedManaSource) {
+        if (player == null || card == null) {
+            return false;
+        }
+        final List<SpellAbility> options = getOriginalAndAltCostAbilities(Lists.newArrayList(card.getSpellAbilities()), player);
+        for (final SpellAbility candidate : options) {
+            if (!candidate.isSpell()) {
+                continue;
+            }
+            candidate.setActivatingPlayer(player);
+            if (!ComputerUtilCost.canPayCost(candidate, player, false)) {
+                continue;
+            }
+            if (excludedManaSource != null && candidate.getPayCosts() != null
+                    && candidate.getPayCosts().hasManaCost()) {
+                final ManaCostBeingPaid manaCost = ComputerUtilMana.calculateManaCost(
+                        candidate.getPayCosts(), candidate, player, true, 0, false);
+                final CardCollection usedSources = ComputerUtilMana.getManaSourcesToPayCost(
+                        manaCost, candidate, player, false);
+                if (usedSources == null || usedSources.contains(excludedManaSource)) {
+                    continue;
+                }
+            }
+            return true;
         }
         return false;
     }

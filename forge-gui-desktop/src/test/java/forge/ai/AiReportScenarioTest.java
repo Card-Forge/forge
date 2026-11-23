@@ -97,6 +97,18 @@ public class AiReportScenarioTest extends AITest {
 
         Ctx(final Game g) { game = g; opp = g.getPlayers().get(0); ai = g.getPlayers().get(1); }
 
+        Card uginLabyrinthWithExiled(final String name) {
+            final Card labyrinth = bf("Ugin's Labyrinth", ai);
+            final Card exiled = exile(name, ai);
+            exiled.setExiledWith(labyrinth);
+            labyrinth.addExiledCard(exiled);
+            return labyrinth;
+        }
+        SpellAbility uginLabyrinthReturn(final Card labyrinth) {
+            return labyrinth.getSpellAbilities().stream()
+                    .filter(sa -> "ReturnCastable".equals(sa.getParam("AILogic"))).findFirst().orElse(null);
+        }
+
         /** A permanent that has been there for a while: no summoning sickness, so {T} abilities and attacks are possible. */
         Card bf(final String name, final Player p) {
             final Card k = addCardToZone(name, p, ZoneType.Battlefield);
@@ -2274,6 +2286,179 @@ public class AiReportScenarioTest extends AITest {
                 c -> {
                     final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
                     return sa == null ? null : "used the Mask ability on " + c.target(sa);
+                }));
+        l.add(new Scenario("13015", "Ugin's Labyrinth does not imprint Nulldrifter when it can be cast", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 4, c.ai);
+                    c.bf("Ugin's Labyrinth", c.ai);
+                    c.hand("Nulldrifter", c.ai);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    if (labyrinth == null) { return "Ugin's Labyrinth is missing"; }
+                    final SpellAbility imprint = labyrinth.getTriggers().get(0).ensureAbility();
+                    imprint.setActivatingPlayer(c.ai);
+                    return c.shouldRunAiTrigger(imprint, false) ? "accepted an imprint of castable Nulldrifter" : null;
+                }));
+        l.add(new Scenario("13015", "Ugin's Labyrinth returns its card at the opponent's end step, not in the AI's main phase", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.AnotherTime
+                            ? null : "Ugin's Labyrinth was not deferred outside the opponent's end step";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card in response to Assassin's Trophy", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Assassin's Trophy", labyrinth);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Assassin's Trophy";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card before Disruptor Flute can name it", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Disruptor Flute");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Disruptor Flute";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth does not return Nulldrifter when only the Labyrinth itself would provide the missing mana", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Disruptor Flute");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.AnotherTime
+                            ? null : "returned Nulldrifter despite not having enough mana after tapping Ugin's Labyrinth";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card in response to Boseiju", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    final Card boseiju = c.hand("Boseiju, Who Endures", c.opp);
+                    final SpellAbility channel = boseiju.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.Destroy).findFirst().orElse(null);
+                    if (channel == null) { throw new AssertionError("Boseiju's channel ability was not found"); }
+                    channel.setActivatingPlayer(c.opp);
+                    channel.getTargets().add(labyrinth);
+                    c.game.getStack().add(channel);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Boseiju's channel ability";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card at the opponent's end step", Fid.EXACT, "END_OF_TURN", false,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not return its card at the opponent's end step";
+                }));
+        l.add(new Scenario("13017", "Thought-Knot Seer exiles Serra's Emissary instead of Birds of Paradise", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Wastes", 4, c.ai);
+                    c.hand("Birds of Paradise", c.opp);
+                    c.hand("Serra's Emissary", c.opp);
+                    c.hand("Eladamri's Call", c.opp);
+                    c.hand("Opt", c.opp);
+                    final SpellAbility cast = c.hand("Thought-Knot Seer", c.ai).getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    if (!ComputerUtil.playStack(cast, c.ai, c.game)) {
+                        throw new AssertionError("Thought-Knot Seer could not be cast in the regression setup");
+                    }
+                    c.resolveAll();
+                },
+                c -> c.opp.getCardsIn(ZoneType.Exile).anyMatch(card -> "Serra's Emissary".equals(card.getName()))
+                        ? null : "Thought-Knot Seer exiled " + c.opp.getCardsIn(ZoneType.Exile)
+                        + " instead of Serra's Emissary; remaining hand=" + c.opp.getCardsIn(ZoneType.Hand)));
+        l.add(new Scenario("nog-ambitious-cadet-promotion-once", "Nog's two promotion stages cannot be paid for repeatedly in one turn", Fid.APPROX, M1, true,
+                c -> {
+                    c.richMana();
+                    c.bf("Nog, Ambitious Cadet", c.ai);
+                },
+                c -> {
+                    final Card nog = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Nog, Ambitious Cadet".equals(card.getName())).findFirst().orElse(null);
+                    if (nog == null) { return "Nog is missing"; }
+                    final SpellAbility scout = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Scout".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    if (scout == null) { return "Nog's Rogue-to-Scout promotion ability is missing"; }
+                    scout.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(scout) != AiPlayDecision.WillPlay) { return "Nog's Rogue-to-Scout stage was not available"; }
+                    c.resolve(scout);
+                    final SpellAbility officer = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Officer".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    if (officer == null) { return "Nog's Scout-to-Officer promotion ability is missing after the first promotion"; }
+                    officer.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(officer) != AiPlayDecision.WillPlay) { return "Nog's Scout-to-Officer stage was not available after the first promotion"; }
+                    c.resolve(officer);
+                    final SpellAbility officerAgain = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Officer".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    return officerAgain != null && c.controller().canPlaySa(officerAgain) == AiPlayDecision.WillPlay
+                            ? "Nog still had a useful promotion activation available after becoming an Officer" : null;
+                }));
+        l.add(noPlay("willowdusk-zero-life-change", "Willowdusk does not pay mana or tap when no life was gained or lost", Fid.EXACT, M1, true,
+                "Willowdusk, Essence Seer",
+                c -> { c.richMana(); c.bf("Willowdusk, Essence Seer", c.ai); c.bf("Grizzly Bears", c.ai); }));
+        l.add(new Scenario("parting-gust-promises-gift", "Parting Gust chooses the Fish gift when exiling an opposing creature", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    c.hand("Parting Gust", c.ai);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final List<SpellAbility> gusts = c.plays().stream()
+                            .filter(sa -> sa.getHostCard() != null && "Parting Gust".equals(sa.getHostCard().getName()))
+                            .collect(Collectors.toList());
+                    if (gusts.isEmpty()) { return "AI did not consider Parting Gust" + c.why("Parting Gust"); }
+                    return gusts.stream().allMatch(SpellAbility::isGiftPromised)
+                            ? null : "AI considered Parting Gust without promising the Fish gift: " + gusts;
+                }));
+        l.add(new Scenario("crashing-drawbridge-haste-lethal-ancients", "Crashing Drawbridge grants haste to a lethal Defender attacker under Felothar", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Crashing Drawbridge", c.ai);
+                    c.bf("Felothar the Steadfast", c.ai);
+                    final Card ancients = c.bf("Indomitable Ancients", c.ai);
+                    ancients.setSickness(true);
+                    c.opp.setLife(10, null);
+                },
+                c -> c.plays("Crashing Drawbridge") ? null
+                        : "AI did not activate Drawbridge to enable Felothar's lethal toughness-based attack" + c.why("Crashing Drawbridge")));
+        l.add(noPlay("willowdusk-zero-life-change", "Willowdusk does not pay {1} and tap when no life was gained or lost", Fid.EXACT, M1, true,
+                "Willowdusk, Essence Seer",
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    c.bf("Willowdusk, Essence Seer", c.ai);
+                    c.bf("Grizzly Bears", c.ai);
                 }));
         return l;
     }

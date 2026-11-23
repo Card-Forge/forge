@@ -1760,6 +1760,17 @@ public class ComputerUtilCard {
                 }
                 // combat Haste: only grant it if the creature will attack
                 if (doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    final int damage = ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true);
+                    final Card pumpSource = sa.getHostCard();
+                    final boolean tapsPermanentSource = sa.isActivatedAbility() && sa.getPayCosts() != null
+                            && sa.getPayCosts().hasTapCost() && pumpSource != null && pumpSource.isInPlay();
+                    final int sourceDamage = tapsPermanentSource && pumpSource.isCreature()
+                            && doesSpecifiedCreatureAttackAI(ai, pumpSource)
+                            ? ComputerUtilCombat.damageIfUnblocked(pumpSource, opp, combat, true) : 0;
+                    if ((opp.getLife() > 0 && damage >= opp.getLife())
+                            || (tapsPermanentSource && (!pumpSource.isCreature() || sourceDamage == 0 || damage > sourceDamage))) {
+                        return true;
+                    }
                     combatChance += 0.5f + (0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife());
                 }
                 chance += nonCombatChance + combatChance;

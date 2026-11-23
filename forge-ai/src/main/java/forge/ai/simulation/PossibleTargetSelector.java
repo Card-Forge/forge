@@ -70,7 +70,7 @@ public class PossibleTargetSelector {
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
         for (GameObject o : tgt.getAllCandidates(targetingSa)) {
-            if (pointlessCounterTarget(player, o)) {
+            if (pointlessCounterTarget(player, o) || pointlessUnpromisedGiftTarget(player, o)) {
                 continue;
             }
             if (maxTargets == 1 && skipper.shouldSkipTarget(o)) {
@@ -95,6 +95,38 @@ public class PossibleTargetSelector {
         }
         final Card c = (Card) o;
         return !c.isCreature() || c.getController().isOpponentOf(player);
+    }
+
+    /**
+     * An unpromised Gift spell may have a delayed trigger that returns its exiled target to the battlefield.
+     * Do not let the simulation choose an opponent's creature for that mode: it is not removal. The separate
+     * Promise Gift spell ability remains available and can still target the opponent's creature.
+     */
+    private boolean pointlessUnpromisedGiftTarget(final Player player, final GameObject o) {
+        if (!(o instanceof Card) || !((Card) o).getOwner().isOpponentOf(player)) {
+            return false;
+        }
+
+        final SpellAbility root = targetingSa.getRootAbility();
+        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
+            return false;
+        }
+
+        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.DelayedTrigger
+                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
+                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
+                continue;
+            }
+
+            final String executeName = sub.getParamOrDefault("Execute", "");
+            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
+            if (executeText != null && executeText.contains("DB$ ChangeZone")
+                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class SimilarTargetSkipper {

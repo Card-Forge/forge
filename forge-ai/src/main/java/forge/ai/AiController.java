@@ -1127,6 +1127,10 @@ public class AiController {
             return AiPlayDecision.TimingRestrictions;
         }
 
+        if (ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
         if (ComputerUtilAbility.shouldWaitForSpectacleEnabler(player, sa)) {
             return AiPlayDecision.AnotherTime;
         }

@@ -28,7 +28,9 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityDisableTriggers;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -174,17 +176,90 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else if (aiLogic.equals("ReturnCastable")) {
-                if (!sa.getHostCard().getExiledCards().isEmpty()
-                        && ComputerUtilMana.canPayManaCost(sa.getHostCard().getExiledCards().getFirst().getFirstSpellAbility(), aiPlayer, 0, false)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return !sa.getHostCard().getExiledCards().isEmpty()
+                        && !ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(aiPlayer, sa)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         if (sa.isHidden()) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         }
         return knownOriginCanPlayAI(aiPlayer, sa);
+    }
+
+    /** Whether a spell from this card can currently be paid for, including keyword alternative costs such as Evoke. */
+    private static boolean canCastCardNow(final Player ai, final Card card) {
+        if (card == null) {
+            return false;
+        }
+        // Keyword alternative costs are materialized as spell abilities on the card itself. Read them directly:
+        // getAllPossibleAbilities may filter an ability whose ordinary casting restriction says "from hand".
+        for (final SpellAbility candidate : card.getSpellAbilities()) {
+            if (!candidate.isSpell()) {
+                continue;
+            }
+            candidate.setActivatingPlayer(ai);
+            if (ComputerUtilMana.canPayManaCost(candidate, ai, 0, false)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Ugin's Labyrinth should normally return its exiled card at the opponent's end step. Respond sooner only when
+     * the Labyrinth is about to be removed or an as-enters name lock would shut off its return ability.
+     */
+    private static boolean canReturnUginLabyrinthCard(final Player ai, final SpellAbility sa) {
+        final Card labyrinth = sa.getHostCard();
+        if (labyrinth.getExiledCards().isEmpty()) {
+            return false;
+        }
+
+        final Game game = ai.getGame();
+        final PhaseHandler phase = game.getPhaseHandler();
+        final boolean opponentEndStep = phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai);
+        boolean responseNeeded = false;
+        if (!game.getStack().isEmpty()) {
+            final SpellAbility top = game.getStack().peekAbility();
+            if (top != null && top.getHostCard() != null && top.getActivatingPlayer() != null
+                    && top.getActivatingPlayer().isOpponentOf(ai)) {
+                if (top.usesTargeting() && top.findTargetedCards().contains(labyrinth)) {
+                    if (top.getApi() == ApiType.Destroy) {
+                        responseNeeded = true;
+                    } else if (top.getApi() == ApiType.ChangeZone) {
+                        final String destination = top.getParamOrDefault("Destination", "");
+                        responseNeeded = "Graveyard".equals(destination) || "Exile".equals(destination);
+                    }
+                }
+
+                // Pithing Needle / Disruptor Flute choose a name as they enter. Return the card while the
+                // Labyrinth's activated ability is still available, before that name choice resolves.
+                if (!responseNeeded) {
+                    for (final StaticAbility ability : top.getHostCard().getStaticAbilities()) {
+                        if (ability.checkMode(StaticAbilityMode.CantBeActivated)
+                                && ability.getParamOrDefault("ValidCard", "").contains("NamedCard")) {
+                            responseNeeded = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (!opponentEndStep && !responseNeeded) {
+            return false;
+        }
+
+        // Activating the return ability taps the Labyrinth. Do not count its mana ability when checking affordability.
+        final Card exiled = labyrinth.getExiledCards().getFirst();
+        final boolean wasTapped = labyrinth.isTapped();
+        try {
+            labyrinth.setTapped(true);
+            return canCastCardNow(ai, exiled);
+        } finally {
+            labyrinth.setTapped(wasTapped);
+        }
     }
 
     /**
@@ -493,6 +568,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
+        final boolean uginLabyrinthImprint = "UginLabyrinthImprint".equals(sa.getParam("AILogic"));
         if (!mandatory && type != null && type.contains("X")) {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
@@ -537,6 +613,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Computer should "know" his deck
             if (p == ai) {
                 list = AbilityUtils.filterListByType(list, sa.getParam("ChangeType"), sa);
+                if (uginLabyrinthImprint) {
+                    list = CardLists.filter(list, card -> !ComputerUtilAbility.canCastCardNow(ai, card));
+                }
             }
 
             if (list.isEmpty()) {
@@ -729,6 +808,38 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return any;
     }
 
+    /**
+     * Parting Gust without its promised Fish returns an exiled creature with a +1/+1 counter at the next end step.
+     * It is therefore not removal against an opponent's creature unless the gift cost was actually chosen.
+     */
+    private static boolean hasUnpromisedGiftReturn(final SpellAbility sa) {
+        final SpellAbility root = sa.getRootAbility();
+        if (root.isGiftPromised()) {
+            return false;
+        }
+        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.DelayedTrigger
+                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
+                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
+                continue;
+            }
+            final SpellAbility execute = sub.getAdditionalAbility("Execute");
+            // DelayedTrigger scripts expose Execute as an additional ability, while the script name is also
+            // retained in the parameters. Check both representations so this remains reliable for copied SAs.
+            final String executeName = sub.getParamOrDefault("Execute", "");
+            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
+            final boolean returnsFromExile = execute != null && execute.getApi() == ApiType.ChangeZone
+                    && "Exile".equals(execute.getParam("Origin"))
+                    && "Battlefield".equals(execute.getParam("Destination"));
+            final boolean scriptReturnsFromExile = executeText != null && executeText.contains("DB$ ChangeZone")
+                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield");
+            if (returnsFromExile || scriptReturnsFromExile) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -744,6 +855,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (hasUnpromisedGiftReturn(sa)) {
+                for (final Card target : sa.getTargets().getTargetCards()) {
+                    if (target.getController().isOpponentOf(ai)) {
+                        // Do not spend mana on the mode that gives the opponent's creature back larger.
+                        sa.resetTargets();
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                }
             }
             if (destination == ZoneType.Battlefield && diesToItsOwnMinusCounters(sa)) {
                 // Persist on a 1/1: it comes back with a -1/-1 counter and is gone again (#4122)
@@ -1663,6 +1783,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if ("UginLabyrinthImprint".equals(logic)) {
+                // Keep cards the AI can already cast; imprint the least useful remaining option.
+                final CardCollection uncastable = CardLists.filter(fetchList, card -> !ComputerUtilAbility.canCastCardNow(decider, card));
+                return uncastable.isEmpty() ? null : ComputerUtilCard.getWorstAI(uncastable);
+            } else if ("ThoughtKnotSeer".equals(logic)) {
+                // Prefer configured deck key cards; otherwise take the highest-mana-value nonland card.
+                return keycardFound != null ? keycardFound : ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {
