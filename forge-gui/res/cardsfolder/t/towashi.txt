@@ -8,4 +8,5 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDesc
 SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
 DeckHas:Ability$Counters
 DeckHints:Type$Aura|Equipment & Ability$Counters
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.YouCtrl | RollInMain1$ True | MinTurn$ 1
 Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.

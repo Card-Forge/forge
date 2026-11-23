@@ -4,5 +4,5 @@ Types:Plane Zendikar
 S:Mode$ CastWithFlash | ValidCard$ Enchantment | ValidSA$ Spell | EffectZone$ Command | Caster$ Player | Description$ Players may cast enchantment spells as though they had flash.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, destroy target creature that isn't enchanted.
 SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature.!enchanted | TgtPrompt$ Select target creature that isn't enchanted
-SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True | RollInMain1$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.OppCtrl+!enchanted | RollInMain1$ True | MinTurn$ 1
 Oracle:Players may cast enchantment spells as though they had flash.\nWhenever chaos ensues, destroy target creature that isn't enchanted.

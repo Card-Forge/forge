@@ -5,5 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.!to
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each opponent discards a card.
 SVar:RolledChaos:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent
-SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1
 Oracle:Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.\nWhenever chaos ensues, each opponent discards a card.
