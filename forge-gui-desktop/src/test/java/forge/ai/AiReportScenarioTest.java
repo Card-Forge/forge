@@ -12,6 +12,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
@@ -21,6 +22,7 @@ import org.testng.annotations.Test;
 import forge.ai.simulation.ActivationGuard;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.OpeningHand;
+import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -31,6 +33,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollection;
 
 /**
  * One scenario per open "AI doesn't / AI wrongly ..." report (issue number in the scenario name).
@@ -95,6 +98,31 @@ public class AiReportScenarioTest extends AITest {
         final Player ai, opp;
 
         Ctx(final Game g) { game = g; opp = g.getPlayers().get(0); ai = g.getPlayers().get(1); }
+
+        Card uginLabyrinthWithExiled(final String name) {
+            final Card labyrinth = bf("Ugin's Labyrinth", ai);
+            final Card exiled = exile(name, ai);
+            exiled.setExiledWith(labyrinth);
+            labyrinth.addExiledCard(exiled);
+            return labyrinth;
+        }
+        SpellAbility uginLabyrinthReturn(final Card labyrinth) {
+            return labyrinth.getSpellAbilities().stream()
+                    .filter(sa -> "ReturnCastable".equals(sa.getParam("AILogic"))).findFirst().orElse(null);
+        }
+        boolean wouldPayParalyze(final Card creature) {
+            final Card paralyze = bf("Paralyze", opp);
+            paralyze.attachToEntity(creature, null, true);
+            final SpellAbility trigger = paralyze.getTriggers().stream()
+                    .filter(t -> "TrigUntap".equals(t.getMapParams().get("Execute")))
+                    .map(t -> t.ensureAbility()).findFirst().orElseThrow();
+            final SpellAbility ability = trigger instanceof forge.game.trigger.WrappedAbility
+                    ? ((forge.game.trigger.WrappedAbility) trigger).getWrappedAbility() : trigger;
+            ability.setActivatingPlayer(ai);
+            final Cost cost = new Cost(ability.getParam("UnlessCost"), false);
+            return SpellApiToAi.Converter.get(ability).willPayUnlessCost(ai, ability, cost, false,
+                    new FCollection<>(ai));
+        }
 
         /** A permanent that has been there for a while: no summoning sickness, so {T} abilities and attacks are possible. */
         Card bf(final String name, final Player p) {
@@ -614,6 +642,148 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
                 c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
                 c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
+        l.add(new Scenario("13014", "Seal of Fire is used before Skewer the Critics so Spectacle is available", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 7, c.ai); c.hand("Seal of Fire", c.ai); c.hand("Skewer the Critics", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> {
+                    final Card seal = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Seal of Fire")).findFirst().orElse(null);
+                    final Card skewer = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Skewer the Critics")).findFirst().orElse(null);
+                    if (seal == null || skewer == null) { return "setup did not put both cards in hand"; }
+
+                    final List<SpellAbility> before = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    if (before.stream().anyMatch(sa -> sa.getHostCard().equals(skewer))) {
+                        return "Skewer was still offered at its full cost while Seal of Fire could enable Spectacle";
+                    }
+                    if (before.stream().noneMatch(sa -> sa.getHostCard().equals(seal) && sa.isSpell())) {
+                        return "Seal of Fire was not offered as the enabling play";
+                    }
+                    final SpellAbility skewerSpell = skewer.getFirstSpellAbility();
+                    skewerSpell.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(skewerSpell) != AiPlayDecision.AnotherTime) {
+                        return "classic AI did not defer Skewer while Seal of Fire could enable Spectacle";
+                    }
+
+                    final SpellAbility castSeal = seal.getFirstSpellAbility();
+                    castSeal.setActivatingPlayer(c.ai);
+                    c.resolve(castSeal);
+                    final List<SpellAbility> afterCastSeal = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    final SpellAbility sealDamage = afterCastSeal.stream()
+                            .filter(sa -> sa.getHostCard().equals(seal) && sa.isActivatedAbility() && sa.getApi() == ApiType.DealDamage)
+                            .findFirst().orElse(null);
+                    if (sealDamage == null) { return "Seal of Fire's damage activation was not offered after it entered"; }
+                    sealDamage.setActivatingPlayer(c.ai);
+                    sealDamage.resetTargets();
+                    sealDamage.getTargets().add(c.opp);
+                    if (!ComputerUtil.playStack(sealDamage, c.ai, c.game)) {
+                        return "Seal of Fire's damage activation could not be put on the stack";
+                    }
+                    c.resolveAll();
+                    if (c.ai.getOpponentLostLifeThisTurn() <= 0) { return "Seal of Fire's damage activation resolved without causing opponent life loss"; }
+
+                    final List<SpellAbility> after = new SpellAbilityPicker(c.ai).getCandidateSpellsAndAbilities();
+                    return after.stream().anyMatch(sa -> sa.getHostCard().equals(skewer) && sa.isSpectacle())
+                            ? null : "Skewer's Spectacle ability was not offered after Seal of Fire dealt damage";
+                }));
+        l.add(new Scenario("13014-mana-reserved", "do not spend the only red source on Seal of Fire when Skewer needs it", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.bf("Island", c.ai); c.bf("Plains", c.ai);
+                    c.hand("Seal of Fire", c.ai); c.hand("Skewer the Critics", c.ai); },
+                c -> {
+                    final Card skewer = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Skewer the Critics".equals(card.getName())).findFirst().orElse(null);
+                    if (skewer == null) { return "Skewer the Critics is missing"; }
+                    final SpellAbility cast = skewer.getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    return c.controller().canPlaySa(cast) == AiPlayDecision.AnotherTime
+                            ? "deferred Skewer even though using Seal would leave no red mana for its Spectacle cost" : null;
+                }));
+        l.add(new Scenario("mandatory-damage-target-prevention", "mandatory damage still chooses a legal target if all opposing creatures prevent damage", Fid.EXACT, M1, true,
+                c -> { c.bf("The Wanderer", c.opp); c.bf("Grizzly Bears", c.opp); c.hand("Lightning Bolt", c.ai); },
+                c -> {
+                    final Card bears = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    final Card bolt = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Lightning Bolt".equals(card.getName())).findFirst().orElse(null);
+                    if (bears == null || bolt == null) { return "mandatory damage target setup is incomplete"; }
+                    final SpellAbility sa = bolt.getFirstSpellAbility();
+                    sa.setActivatingPlayer(c.ai);
+                    final Card chosen = new forge.ai.ability.DamageDealAi().chooseSingleEntity(c.ai, sa,
+                            java.util.Collections.singletonList(bears), false, null, java.util.Collections.emptyMap());
+                    return chosen == bears ? null : "mandatory damage target selection returned " + chosen + " instead of its only legal target";
+                }));
+        l.add(new Scenario("mandatory-damage-trigger-target-prevention", "mandatory ETB damage trigger still chooses a legal creature that prevents damage", Fid.EXACT, M1, true,
+                c -> { c.bf("The Wanderer", c.opp); c.bf("Grizzly Bears", c.opp); c.bf("Nova Hellkite", c.ai); },
+                c -> {
+                    final Card bears = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    final Card hellkite = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Nova Hellkite".equals(card.getName())).findFirst().orElse(null);
+                    if (bears == null || hellkite == null) { return "mandatory damage trigger setup is incomplete"; }
+                    final SpellAbility trigger = hellkite.getTriggers().stream()
+                            .filter(t -> "TrigDamage".equals(t.getMapParams().get("Execute")))
+                            .map(t -> t.ensureAbility()).findFirst().orElse(null);
+                    if (trigger == null) { return "Nova Hellkite's mandatory damage trigger is missing"; }
+                    trigger.setActivatingPlayer(c.ai);
+                    final SpellAbility ability = trigger instanceof forge.game.trigger.WrappedAbility
+                            ? ((forge.game.trigger.WrappedAbility) trigger).getWrappedAbility() : trigger;
+                    ability.setActivatingPlayer(c.ai);
+                    return c.shouldRunAiTrigger(ability, true) && c.target(ability) == bears ? null
+                            : "mandatory damage trigger did not retain its only legal target when prevention made it unable to deal damage";
+                }));
+        l.add(new Scenario("paralyze-does-not-pay-for-weak-creature", "AI does not pay {4} to untap a low-value creature even with abundant spare mana", Fid.EXACT, "UPKEEP", true,
+                c -> { c.richMana(); c.bf("Memnite", c.ai).setTapped(true); },
+                c -> {
+                    final Card memnite = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Memnite".equals(card.getName())).findFirst().orElse(null);
+                    return memnite != null && !c.wouldPayParalyze(memnite) ? null
+                            : "AI agreed to spend four mana to untap a low-value Memnite";
+                }));
+        l.add(new Scenario("paralyze-pays-for-buffed-evasive-creature", "AI pays {4} to free a counter-grown creature made unblockable by an aura", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.richMana();
+                    final Card bears = c.bf("Grizzly Bears", c.ai);
+                    c.counters(bears, CounterEnumType.P1P1, 1);
+                    c.bf("Aqueous Form", c.ai).attachToEntity(bears, null, true);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && c.wouldPayParalyze(bears) ? null
+                            : "AI declined to spend four mana on a counter-grown creature with unblockable evasion";
+                }));
+        l.add(new Scenario("paralyze-preserves-spare-mana", "AI keeps four mana available instead of spending it to untap a modest evasion creature", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.bf("Plains", 4, c.ai);
+                    final Card bears = c.bf("Grizzly Bears", c.ai);
+                    c.counters(bears, CounterEnumType.P1P1, 1);
+                    c.bf("Aqueous Form", c.ai).attachToEntity(bears, null, true);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && !c.wouldPayParalyze(bears) ? null
+                            : "AI spent all available mana to untap a creature that was not valuable enough to justify it";
+                }));
+        l.add(new Scenario("paralyze-does-not-pay-through-stun-counter", "AI does not pay {4} when a stun counter would absorb the untap", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.richMana();
+                    final Card bears = c.bf("Baneslayer Angel", c.ai);
+                    c.counters(bears, CounterEnumType.STUN, 1);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Baneslayer Angel".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && !c.wouldPayParalyze(bears) ? null
+                            : "AI paid for an untap that would only remove a stun counter";
+                }));
+        l.add(aimed("7477", "burn is aimed at a creature that is not protected by Crystal Barricade", Fid.EXACT, M1, true,
+                "Lightning Bolt", "Crystal Barricade",
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Crystal Barricade", c.opp); }));
+        l.add(noPlay("13011", "Ephemerate does not blink a creature whose ETB trigger is disabled", Fid.EXACT, M1, true, "Ephemerate",
+                c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Quantum Riddler", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
+        l.add(play("13011-protection", "Ephemerate still saves a creature from removal while ETB triggers are disabled", Fid.APPROX, M1, false, "Ephemerate",
+                c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Plains", c.ai); final Card bears = c.bf("Grizzly Bears", c.ai); c.hand("Ephemerate", c.ai); c.stack(c.opp, "Lightning Bolt", bears); }));
         l.add(noPlay("12930-ephemerate", "Ephemerate in its own upkeep with a Grizzly Bears to blink: wait for the main phase", Fid.APPROX, "UPKEEP", true, "Ephemerate",
                 c -> { c.bf("Grizzly Bears", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
         l.add(noPlay("12930-kozileks-command", "Kozilek's Command in the player's draw step with a creature to exile: not now", Fid.APPROX, "DRAW", false, "Kozilek's Command",
@@ -2225,6 +2395,207 @@ public class AiReportScenarioTest extends AITest {
                 c -> {
                     final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
                     return sa == null ? null : "used the Mask ability on " + c.target(sa);
+                }));
+        l.add(new Scenario("13015", "Ugin's Labyrinth does not imprint Nulldrifter when it can be cast", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 4, c.ai);
+                    c.bf("Ugin's Labyrinth", c.ai);
+                    c.hand("Nulldrifter", c.ai);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    if (labyrinth == null) { return "Ugin's Labyrinth is missing"; }
+                    final SpellAbility imprint = labyrinth.getTriggers().get(0).ensureAbility();
+                    imprint.setActivatingPlayer(c.ai);
+                    return c.shouldRunAiTrigger(imprint, false) ? "accepted an imprint of castable Nulldrifter" : null;
+                }));
+        l.add(new Scenario("13015", "Ugin's Labyrinth returns its card at the opponent's end step, not in the AI's main phase", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.AnotherTime
+                            ? null : "Ugin's Labyrinth was not deferred outside the opponent's end step";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card in response to Assassin's Trophy", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Assassin's Trophy", labyrinth);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Assassin's Trophy";
+                }));
+        l.add(new Scenario("13016-bounce", "Ugin's Labyrinth returns its card in response to Boomerang", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Boomerang", labyrinth);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Boomerang";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card before Disruptor Flute can name it", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Disruptor Flute");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Disruptor Flute";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth does not return Nulldrifter when only the Labyrinth itself would provide the missing mana", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                    c.stack(c.opp, "Disruptor Flute");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.AnotherTime
+                            ? null : "returned Nulldrifter despite not having enough mana after tapping Ugin's Labyrinth";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card in response to Boseiju", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    final Card labyrinth = c.uginLabyrinthWithExiled("Nulldrifter");
+                    final Card boseiju = c.hand("Boseiju, Who Endures", c.opp);
+                    final SpellAbility channel = boseiju.getSpellAbilities().stream()
+                            .filter(sa -> sa.getApi() == ApiType.Destroy).findFirst().orElse(null);
+                    if (channel == null) { throw new AssertionError("Boseiju's channel ability was not found"); }
+                    channel.setActivatingPlayer(c.opp);
+                    channel.getTargets().add(labyrinth);
+                    c.game.getStack().add(channel);
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not respond to Boseiju's channel ability";
+                }));
+        l.add(new Scenario("13016", "Ugin's Labyrinth returns its card at the opponent's end step", Fid.EXACT, "END_OF_TURN", false,
+                c -> {
+                    c.bf("Island", c.ai); c.bf("Plains", 3, c.ai);
+                    c.uginLabyrinthWithExiled("Nulldrifter");
+                },
+                c -> {
+                    final Card labyrinth = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Ugin's Labyrinth".equals(card.getName())).findFirst().orElse(null);
+                    final SpellAbility ret = labyrinth == null ? null : c.uginLabyrinthReturn(labyrinth);
+                    return ret != null && c.controller().canPlaySa(ret) == AiPlayDecision.WillPlay
+                            ? null : "Ugin's Labyrinth did not return its card at the opponent's end step";
+                }));
+        l.add(new Scenario("13017", "Thought-Knot Seer exiles Serra's Emissary instead of Birds of Paradise", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Wastes", 4, c.ai);
+                    c.hand("Birds of Paradise", c.opp);
+                    c.hand("Serra's Emissary", c.opp);
+                    c.hand("Eladamri's Call", c.opp);
+                    c.hand("Opt", c.opp);
+                    final SpellAbility cast = c.hand("Thought-Knot Seer", c.ai).getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    if (!ComputerUtil.playStack(cast, c.ai, c.game)) {
+                        throw new AssertionError("Thought-Knot Seer could not be cast in the regression setup");
+                    }
+                    c.resolveAll();
+                },
+                c -> c.opp.getCardsIn(ZoneType.Exile).anyMatch(card -> "Serra's Emissary".equals(card.getName()))
+                        ? null : "Thought-Knot Seer exiled " + c.opp.getCardsIn(ZoneType.Exile)
+                        + " instead of Serra's Emissary; remaining hand=" + c.opp.getCardsIn(ZoneType.Hand)));
+        l.add(new Scenario("nog-ambitious-cadet-promotion-once", "Nog's two promotion stages cannot be paid for repeatedly in one turn", Fid.APPROX, M1, true,
+                c -> {
+                    c.richMana();
+                    c.bf("Nog, Ambitious Cadet", c.ai);
+                },
+                c -> {
+                    final Card nog = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Nog, Ambitious Cadet".equals(card.getName())).findFirst().orElse(null);
+                    if (nog == null) { return "Nog is missing"; }
+                    final SpellAbility scout = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Scout".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    if (scout == null) { return "Nog's Rogue-to-Scout promotion ability is missing"; }
+                    scout.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(scout) != AiPlayDecision.WillPlay) { return "Nog's Rogue-to-Scout stage was not available"; }
+                    c.resolve(scout);
+                    final SpellAbility officer = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Officer".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    if (officer == null) { return "Nog's Scout-to-Officer promotion ability is missing after the first promotion"; }
+                    officer.setActivatingPlayer(c.ai);
+                    if (c.controller().canPlaySa(officer) != AiPlayDecision.WillPlay) { return "Nog's Scout-to-Officer stage was not available after the first promotion"; }
+                    c.resolve(officer);
+                    final SpellAbility officerAgain = nog.getSpellAbilities().stream()
+                            .filter(sa -> "Ferengi,Officer".equals(sa.getParam("Types"))).findFirst().orElse(null);
+                    return officerAgain != null && c.controller().canPlaySa(officerAgain) == AiPlayDecision.WillPlay
+                            ? "Nog still had a useful promotion activation available after becoming an Officer" : null;
+                }));
+        l.add(noPlay("willowdusk-zero-life-change", "Willowdusk does not pay mana or tap when no life was gained or lost", Fid.EXACT, M1, true,
+                "Willowdusk, Essence Seer",
+                c -> { c.richMana(); c.bf("Willowdusk, Essence Seer", c.ai); c.bf("Grizzly Bears", c.ai); }));
+        l.add(new Scenario("parting-gust-promises-gift", "Parting Gust chooses the Fish gift when exiling an opposing creature", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    c.hand("Parting Gust", c.ai);
+                    c.bf("Baneslayer Angel", c.opp);
+                },
+                c -> {
+                    final List<SpellAbility> gusts = c.plays().stream()
+                            .filter(sa -> sa.getHostCard() != null && "Parting Gust".equals(sa.getHostCard().getName()))
+                            .collect(Collectors.toList());
+                    if (gusts.isEmpty()) { return "AI did not consider Parting Gust" + c.why("Parting Gust"); }
+                    return gusts.stream().allMatch(SpellAbility::isGiftPromised)
+                            ? null : "AI considered Parting Gust without promising the Fish gift: " + gusts;
+                }));
+        l.add(new Scenario("parting-gust-owner-not-controller", "unpromised Parting Gust can exile an opponent-controlled creature owned by the AI", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    final Card bears = c.bf("Baneslayer Angel", c.ai);
+                    bears.setController(c.opp, c.game.getNextTimestamp());
+                    c.hand("Parting Gust", c.ai);
+                },
+                c -> {
+                    final SpellAbility gust = c.ai.getCardsIn(ZoneType.Hand).stream()
+                            .filter(card -> "Parting Gust".equals(card.getName())).findFirst().orElseThrow().getFirstSpellAbility();
+                    gust.setActivatingPlayer(c.ai);
+                    final AiPlayDecision decision = SpellApiToAi.Converter.get(gust).canPlayWithSubs(c.ai, gust).decision();
+                    return decision == AiPlayDecision.CantPlayAi
+                            ? "rejected the unpaid Gift mode based on current controller instead of owner" : null;
+                }));
+        l.add(new Scenario("crashing-drawbridge-haste-lethal-ancients", "Crashing Drawbridge grants haste to a lethal Defender attacker under Felothar", Fid.APPROX, M1, true,
+                c -> {
+                    c.bf("Crashing Drawbridge", c.ai);
+                    c.bf("Felothar the Steadfast", c.ai);
+                    final Card ancients = c.bf("Indomitable Ancients", c.ai);
+                    ancients.setSickness(true);
+                    c.opp.setLife(10, null);
+                },
+                c -> c.plays("Crashing Drawbridge") ? null
+                        : "AI did not activate Drawbridge to enable Felothar's lethal toughness-based attack" + c.why("Crashing Drawbridge")));
+        l.add(noPlay("willowdusk-zero-life-change", "Willowdusk does not pay {1} and tap when no life was gained or lost", Fid.EXACT, M1, true,
+                "Willowdusk, Essence Seer",
+                c -> {
+                    c.bf("Plains", 2, c.ai);
+                    c.bf("Willowdusk, Essence Seer", c.ai);
+                    c.bf("Grizzly Bears", c.ai);
                 }));
         return l;
     }
