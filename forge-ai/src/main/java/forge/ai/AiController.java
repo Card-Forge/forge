@@ -1127,6 +1127,14 @@ public class AiController {
             return AiPlayDecision.TimingRestrictions;
         }
 
+        if (ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
+        if (ComputerUtilAbility.shouldWaitForSpectacleEnabler(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
         final Card card = sa.getHostCard();
 
         if (shouldHoldSelfSacrificeForDeclaredBlock(sa)) {

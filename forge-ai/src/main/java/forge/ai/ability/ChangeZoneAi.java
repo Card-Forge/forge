@@ -28,7 +28,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityMustTarget;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -171,11 +174,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else if (aiLogic.equals("ReturnCastable")) {
-                if (!sa.getHostCard().getExiledCards().isEmpty()
-                        && ComputerUtilMana.canPayManaCost(sa.getHostCard().getExiledCards().getFirst().getFirstSpellAbility(), aiPlayer, 0, false)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return !sa.getHostCard().getExiledCards().isEmpty()
+                        && !ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(aiPlayer, sa)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         if (sa.isHidden()) {
@@ -490,6 +492,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
+        final boolean uginLabyrinthImprint = "UginLabyrinthImprint".equals(sa.getParam("AILogic"));
         if (!mandatory && type != null && type.contains("X")) {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
@@ -534,6 +537,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Computer should "know" his deck
             if (p == ai) {
                 list = AbilityUtils.filterListByType(list, sa.getParam("ChangeType"), sa);
+                if (uginLabyrinthImprint) {
+                    list = CardLists.filter(list, card -> !ComputerUtilAbility.canCastCardNow(ai, card));
+                }
             }
 
             if (list.isEmpty()) {
@@ -742,6 +748,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
+                for (final Card target : sa.getTargets().getTargetCards()) {
+                    if (target.getOwner() != null && target.getOwner().isOpponentOf(ai)) {
+                        // Do not spend mana on the mode that gives the opponent's creature back larger.
+                        sa.resetTargets();
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                }
+            }
             if (destination == ZoneType.Battlefield && diesToItsOwnMinusCounters(sa)) {
                 // Persist on a 1/1: it comes back with a -1/-1 counter and is gone again (#4122)
                 sa.resetTargets();
@@ -909,6 +924,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         // if we are here, we have a target
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private static boolean hasEnabledEtbTrigger(final Player ai, final Card card) {
+        if (!card.hasETBTrigger(false)) {
+            return false;
+        }
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+        runParams.put(AbilityKey.Destination, ZoneType.Battlefield.name());
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.ChangesZone
+                    || !ZoneType.Battlefield.toString().equals(trigger.getParam("Destination"))) {
+                continue;
+            }
+            if (!StaticAbilityDisableTriggers.disabled(ai.getGame(), trigger, runParams)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1081,7 +1114,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 // blink logic: get my own permanents back or blink permanents with ETB effects
                 if (blink) {
-                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false)));
+                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || hasEnabledEtbTrigger(ai, c)));
                     if (!blinkTargets.isEmpty()) {
                         CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
                         // prefer post-combat unless targeting opponent's stuff or part of another ability
@@ -1642,6 +1675,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if ("UginLabyrinthImprint".equals(logic)) {
+                // Keep cards the AI can already cast; imprint the least useful remaining option.
+                final CardCollection uncastable = CardLists.filter(fetchList, card -> !ComputerUtilAbility.canCastCardNow(decider, card));
+                return uncastable.isEmpty() ? null : ComputerUtilCard.getWorstAI(uncastable);
+            } else if ("ThoughtKnotSeer".equals(logic)) {
+                // Prefer configured deck key cards; otherwise take the highest-mana-value nonland card.
+                return keycardFound != null ? keycardFound : ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {
