@@ -91,10 +91,12 @@ public final class WebSocketTunnel {
      * connect to the web port, so the handshake is where the server accepts or refuses this client.
      */
     public void awaitOpen(final Channel ch) throws InterruptedException {
-        final ChannelFuture opened = ch.pipeline().get(WebSocketBytes.class).opened();
-        if (!opened.await(OPEN_SECONDS, TimeUnit.SECONDS) || !opened.isSuccess()) {
+        // A refusal can close the channel before this runs, and closing removes the handlers
+        final WebSocketBytes bytes = ch.pipeline().get(WebSocketBytes.class);
+        final ChannelFuture opened = bytes == null ? null : bytes.opened();
+        if (opened == null || !opened.await(OPEN_SECONDS, TimeUnit.SECONDS) || !opened.isSuccess()) {
             ch.close();
-            throw new IllegalStateException("The host did not let this client in", opened.cause());
+            throw new IllegalStateException("The host did not let this client in", opened == null ? null : opened.cause());
         }
     }
 }

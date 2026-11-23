@@ -1,0 +1,324 @@
+/* The deck editor reuses the deck finder's parts. This file holds the editor's own layout and states, and the controls other pages share: small and link buttons, the pill select, segmented buttons, menus, flags and badges */
+
+#editor { height: 100%; }
+/* In landscape, the editor is a panel the same size as the deck selector, over the page it was opened from. Notices are drawn above it, and the chat chip below it. */
+html:not([data-form="portrait"]) #editor:not([hidden]) { position: fixed; inset: 0; z-index: 35; height: auto; display: grid; place-items: center; background: var(--scrim); }
+html:not([data-form="portrait"]) #editor .editor-page { width: min(1500px, 94vw); height: min(880px, 92vh); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+/* The wordmark, volume and options are hidden, because the page behind the editor shows them */
+html:not([data-form="portrait"]) #editor .editor-head :is(.wordmark-block, .icon-button, .volume) { display: none; }
+/* The header, the cards and the deck are separate boxes on the page's background, as in the draft */
+html:not([data-form="portrait"]) #editor .editor-head { margin: 16px 18px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+html:not([data-form="portrait"]) #editor .editor-shell { gap: 16px; padding: 0 18px 18px; }
+html:not([data-form="portrait"]) #editor :is(.catalogue, .deck-half) { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.editor-page { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.deck-title { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.deck-name-field { width: 260px; padding: 5px 12px; border-radius: 8px; font-size: 16px; font-weight: 650; }
+.deck-name-field:hover, .deck-name-field:focus { border-color: var(--accent-2); outline: none; }
+.deck-name-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; font-weight: 650; }
+.editor-head .deck-menu-button { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border-radius: 8px; }
+.editor-head .deck-menu-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.editor-head .deck-menu-button:hover, .editor-head .deck-menu-button[aria-expanded="true"] { border-color: var(--accent-2); }
+.name-menu .deck-menu { left: 0; right: auto; transform-origin: 0 0; }
+.menu-scrim { display: none; }
+.save-state { color: var(--muted); font-size: 12px; }
+.editor-head .legality, .imp-sub .legality, .finder-head .legality { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+/* A brass pill select: a rounded select with its own caret and an accent-coloured fill */
+.pill-select { position: relative; display: inline-flex; }
+.pill-select > :is(select, button) {
+  appearance: none; background: var(--accent-soft); color: var(--text); border: 1px solid var(--accent-2); border-radius: 999px;
+  padding: 5px 30px 5px 13px; font: inherit; font-size: 13px; cursor: pointer;
+}
+.pill-select > :is(select, button):focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.pill-select select option, .pill-select select optgroup { background: var(--surface); color: var(--text); }
+.pill-select::after {
+  content: ''; position: absolute; right: 13px; top: 50%; width: 6px; height: 6px; pointer-events: none;
+  border-right: 1.5px solid var(--accent-2); border-bottom: 1.5px solid var(--accent-2); transform: translateY(-70%) rotate(45deg);
+}
+.legality .popup { left: auto; right: 0; }
+.menu-anchor { position: relative; }
+.deck-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; width: 230px; padding: 5px; display: grid;
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 12px 34px var(--scrim-deep);
+}
+.deck-menu button { display: flex; align-items: center; gap: 9px; background: none; border: 0; text-align: left; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+.deck-menu button svg { flex: none; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.deck-menu button:hover { background: var(--surface-3); }
+.deck-menu .danger { color: var(--remove); }
+.deck-menu hr { border: 0; border-top: 1px solid var(--line); margin: 4px 6px; }
+.menu-cap { padding: 4px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); }
+.editor-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 0; }
+/* Only a phone shows these: the tabs between the two halves and the check in the deck's summary */
+.editor-tabs, .deck-head .deck-check { display: none; }
+button.small { padding: 3px 10px; font-size: 12px; }
+button.link { background: none; border: 0; padding: 0; color: var(--accent-2); font-weight: 600; }
+
+.catalogue { display: grid; grid-template-rows: auto auto minmax(0, 1fr); min-height: 0; position: relative; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; background: var(--surface-2); color: var(--muted); padding: 6px 12px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-2); font-weight: 600; }
+.cat-bar { padding: 12px 14px 10px; border-bottom: 1px solid var(--line); }
+.cat-bar .search-wrap { flex: 1 1 220px; }
+.cat-bar .type-by { padding: 6px 10px 6px 12px; }
+.catalogue .count-row { padding: 6px 14px 4px; }
+.catalogue .shown.commanders-only { color: var(--text); }
+.cat-grid { overflow: auto; padding: 12px 14px 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 18px 12px; align-content: start; }
+/* The deck editor's collection shows at most four cards in a row */
+#editor .cat-grid { grid-template-columns: repeat(auto-fill, minmax(max(118px, (100% - 37px) / 4), 1fr)); }
+.cat-table { overflow: auto; padding: 0 14px 20px; }
+.cat-table table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.cat-table th { position: sticky; top: 0; background: var(--bg); text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); padding: 7px; border-bottom: 1px solid var(--line); }
+.cat-table td { padding: 4px 7px; border-bottom: 1px solid var(--surface-2); white-space: nowrap; }
+.cat-table tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--text) 3%, transparent); }
+.cat-table tr:hover td { background: var(--surface-2); }
+.cat-table .sym { width: 13px; height: 13px; vertical-align: -2px; }
+
+/* The board's cards also sit in slots, which this layout is not for */
+.slot:not(:where(#match *)) { position: relative; display: grid; gap: 5px; min-width: 0; }
+.tile { position: relative; padding: 0; border: 0; border-radius: 6px; aspect-ratio: 63 / 88; width: 100%; background: var(--surface-2); overflow: visible; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 6px; object-fit: cover; box-shadow: 0 3px 10px #0007; }
+.tile-name { position: absolute; inset: 8px; font-size: 11px; color: var(--muted); text-align: left; }
+.tile:hover img { transform: translateY(-2px); box-shadow: 0 8px 20px #000a; }
+/* A card the deck holds as many of as it may is dark, so the cards still to choose from stand out */
+.slot.full .tile img { filter: brightness(.45) saturate(.6); }
+.slot.top .tile img { outline: 2px solid var(--accent-2); outline-offset: 3px; box-shadow: 0 0 16px var(--accent-glow); }
+.enter { position: absolute; left: 50%; top: -11px; transform: translateX(-50%); z-index: 3; background: var(--brass); color: var(--on-brass); font-size: 10.5px; font-weight: 700; border-radius: 999px; padding: 1px 9px; white-space: nowrap; }
+/* The steppers sit either side of the count, centred under the card. A Side button moves them to the left */
+.under { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--faint); }
+.under:has(> .side) { justify-content: space-between; }
+.under .stepper { display: flex; align-items: center; gap: 6px; }
+.under .stepper button.step { width: 22px; height: 22px; font-size: 13px; }
+button.step { width: 20px; height: 20px; display: grid; place-items: center; padding: 0; border-radius: 4px; font-size: 12px; line-height: 1; }
+.under .n { min-width: 14px; text-align: center; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.under .n .of { color: var(--muted); font-weight: 500; }
+.under .n.zero { color: var(--faint); font-weight: 500; }
+.under .side { margin-left: auto; height: 20px; padding: 0 7px; font-size: 10.5px; font-weight: 600; color: var(--muted); background: var(--surface); }
+.under.centred { justify-content: center; }
+.under.centred .side { margin-left: 0; }
+/* Help for the search syntax. It is shown while the pointer is over the field, or while the field is focused and empty. */
+.search-wrap { position: relative; flex: 1; min-width: 0; display: flex; }
+.search-wrap .find { flex: 1; min-width: 0; }
+.search-tip {
+  display: none; position: absolute; left: 0; top: calc(100% + 8px); z-index: 25; padding: 6px 4px; border-collapse: separate;
+  font-size: 12.5px; background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 12px 30px var(--scrim-deep);
+}
+.search-tip th { text-align: left; font: 12px ui-monospace, monospace; color: var(--accent-2); white-space: nowrap; padding: 3px 12px 3px 10px; }
+.search-tip td { color: var(--muted); padding: 3px 10px 3px 0; white-space: nowrap; }
+.search-wrap:hover .search-tip, .search-wrap .find:focus:placeholder-shown + .search-tip { display: table; }
+.none-found { padding: 26px 0; display: grid; gap: 8px; justify-items: start; color: var(--muted); grid-column: 1 / -1; max-width: 520px; }
+.none-found b { color: var(--text); }
+
+/* A card the deck cannot use is marked three ways: the problem colour, a hatch pattern and a "!" */
+.slot.bad .tile img { filter: saturate(.55) brightness(.8); }
+.flag { color: var(--select); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.slot .flag { overflow: hidden; text-overflow: ellipsis; }
+.cat-table tr.bad td, .ed-line.bad {
+  background: repeating-linear-gradient(135deg, #ffffff0a 0 5px, #0000 5px 11px), color-mix(in srgb, var(--select) 7%, transparent);
+}
+
+/* The main deck takes the row that stretches. The basic lands are the last row of the panel. */
+.deck-half { border-left: 1px solid var(--line); background: var(--surface); display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto auto; min-height: 0; }
+.deck-half > .main-zone { grid-row: 2; }
+.deck-half > .side-zone { grid-row: 3; }
+.deck-half > .extras { grid-row: 4; border-bottom: 1px solid var(--line); }
+.extras .extra-zones { max-height: 240px; overflow: auto; }
+.deck-half > .land-row { grid-row: 5; }
+.extras .extra-zone { border-bottom: 1px solid var(--line); }
+.extras .extra-zone > h4 .small { margin-left: auto; text-transform: none; letter-spacing: 0; }
+.extras .extra-zone.adding > h4 .zn { color: var(--accent-2); }
+.extras .add-section { padding: 7px 16px; }
+.extras .add-section .deck-menu { left: 16px; right: auto; top: auto; bottom: calc(100% - 2px); transform-origin: 0 100%; }
+.catalogue .adding-to { margin: 8px 0 0; padding: 6px 10px; display: flex; gap: 10px; align-items: baseline; font-size: 12.5px; font-weight: 600;
+  color: var(--accent-2); background: var(--accent-soft); border-radius: 6px; }
+.deck-head { padding: 12px 16px 10px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; }
+.deck-head.with-commander { grid-template-columns: auto minmax(0, 1fr) auto; }
+.deck-head .flag { display: block; margin: -4px 0 8px; white-space: normal; }
+.cmd-cards { display: flex; gap: 8px; align-items: start; }
+.cmd-card { display: grid; justify-items: center; gap: 12px; width: 70px; }
+.cmd-art { position: relative; width: 100%; }
+.cmd-art img { display: block; width: 100%; aspect-ratio: 63 / 88; object-fit: cover; border-radius: 5px; box-shadow: 0 0 0 1px var(--zone-command), 0 6px 16px #000a; }
+.cmd-card.bad .cmd-art img { filter: saturate(.55) brightness(.8); box-shadow: 0 0 0 2px var(--danger); }
+.cmd-tag { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); padding: 0 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--zone-command);
+  color: var(--zone-command); font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.cmd-card .link { font-size: 11.5px; }
+.card-outline.cmd-card { width: 70px; }
+.deck-head h3 { margin: 0 0 2px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.deck-head .sizes { margin: 0; color: var(--muted); font-size: 12.5px; }
+.deck-head .verdict { margin: 4px 0 8px; }
+.deck-head .curve h4 { margin: 0 0 10px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+.deck-head .curve h4 span { text-transform: none; letter-spacing: 0; color: var(--text); font-weight: 600; }
+.deck-numbers { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.breakdown h4 { margin: 0 0 4px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+.breakdown h4 span { letter-spacing: 0; color: var(--text); font-weight: 600; }
+.share-bar { display: flex; gap: 1px; height: 8px; border-radius: 3px; overflow: hidden; }
+.share-bar i { background: var(--mtg-c); }
+.share-bar i[data-colour="W"] { background: var(--mtg-w); }
+.share-bar i[data-colour="U"] { background: var(--mtg-u); }
+.share-bar i[data-colour="B"] { background: var(--mtg-b); }
+.share-bar i[data-colour="R"] { background: var(--mtg-r); }
+.share-bar i[data-colour="G"] { background: var(--mtg-g); }
+.share-key { display: flex; flex-wrap: wrap; gap: 2px 8px; margin-top: 4px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.share-key span { display: inline-flex; align-items: center; gap: 4px; }
+.share-key .pip { width: 14px; height: 14px; }
+.share-key small { color: var(--muted); }
+.deck-head .bars { height: 44px; }
+.deck-head .bar { width: 18px; }
+.zone { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; position: relative; border-bottom: 1px solid var(--line); }
+.zone > h4 { margin: 0; padding: 7px 16px 5px; display: flex; align-items: center; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.zone > h4 .zn { color: var(--text); font-weight: 700; }
+/* A zone's count is drawn close to its name */
+.zone > h4 .count { margin-left: -2px; padding: 0 7px; border-radius: 9px; background: var(--surface-2); color: var(--text); font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: 0; font-size: 12.5px; }
+.zone > h4 .view-seg { margin-left: auto; }
+.zone > h4 .select-button { text-transform: none; letter-spacing: 0; font-size: 11.5px; padding: 2px 8px 2px 10px; }
+.zone-body { overflow: auto; padding: 2px 16px 10px; }
+.zone-body.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; align-content: start; }
+.zone-body .none { grid-column: 1 / -1; color: var(--muted); margin: 8px 0; }
+.side-zone { max-height: 190px; }
+.zone .group { margin-bottom: 10px; }
+.ed-line { align-items: center; padding: 1px 4px 1px 0; border-radius: 4px; }
+.ed-line .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ed-line .cost .sym { width: 13px; height: 13px; vertical-align: -2px; }
+.ed-line .prints { font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 6px; white-space: nowrap; }
+.ed-line .ra { display: none; gap: 3px; }
+.ed-line .ra button { padding: 0 6px; font-size: 10.5px; line-height: 17px; border-color: var(--line-bright); }
+.ed-line:hover { background: var(--surface-2); padding-left: 4px; }
+.ed-line:hover .ra { display: inline-flex; }
+.ed-line:hover .cost { display: none; }
+.zone > h4 .view-seg { text-transform: none; letter-spacing: 0; }
+.zone > h4 .view-seg button { padding: 2px 9px; font-size: 11.5px; }
+/* In the card view, each group is one column. Each card overlaps the one before it but leaves that card's name visible. */
+.zone-body.deck-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px 10px; align-content: start; }
+.deck-cols .group h4 { white-space: nowrap; gap: 6px; }
+/* A heading longer than its column is cut short, so it does not run into the next column */
+.deck-cols .group h4 .hn { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.deck-stack { position: relative; cursor: grab; }
+.deck-stack + .deck-stack { margin-top: -112%; }
+.deck-stack img { display: block; width: 100%; aspect-ratio: 63 / 88; object-fit: cover; border-radius: 5px; box-shadow: 0 -2px 6px #0008; background: var(--surface-2); }
+.deck-stack:hover { z-index: 2; }
+.deck-stack:hover img { box-shadow: 0 0 0 2px var(--accent-2), 0 6px 16px #000a; }
+.deck-count { position: absolute; right: 4px; top: 4px; padding: 0 6px; border-radius: 999px; background: #000c; color: var(--text); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.deck-stack.bad img { filter: saturate(.55) brightness(.8); outline: 2px solid var(--danger); outline-offset: -2px; }
+.deck-stack.landed img { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+.ed-line.landed { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent-2); padding-left: 4px; }
+.card-outline { width: 58px; aspect-ratio: 63 / 88; border: 2px dashed var(--line-bright); border-radius: 6px; display: grid; place-items: center; font-size: 9px; font-weight: 600; flex: none; }
+/* Each basic shows the printing a new copy uses. A basic the deck holds none of is greyed. */
+/* The basic lands, the land set and Suggest share one row. The group's name is read out, and shown only on a phone */
+.land-row { display: flex; align-items: center; gap: 10px; padding: 10px 16px; }
+html:not([data-form="portrait"]) .land-row > .band-lab { display: none; }
+.land { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.land-card { position: relative; width: 34px; aspect-ratio: 63 / 88; border-radius: 4px; overflow: hidden; background: var(--surface-2); box-shadow: 0 2px 6px #0008; }
+.land-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.land.zero .land-card img { filter: grayscale(.85) brightness(.55); }
+.land-step { display: inline-flex; flex-direction: column; align-items: center; }
+.land .n { min-width: 16px; text-align: center; font-size: 13px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.land.off { opacity: .38; }
+.land-tail { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-left: auto; }
+.sample-hand .hand-cards { display: flex; flex-wrap: wrap; gap: 8px; max-width: 760px; }
+.sample-hand .hand-cards img { width: 96px; border-radius: 6px; }
+.deck-text textarea { width: min(520px, 80vw); font: 12px/1.5 ui-monospace, monospace; background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+
+/* A section that accepts the dragged card gets a dashed outline. The section under the pointer shows the result. A section that refuses the card is hatched and shows why. */
+[data-zone].drop-eligible, [data-zone].drop-over, [data-zone].drop-refuse, [data-zone].drop-remove { position: relative; }
+[data-zone].drop-eligible::before { content: ''; position: absolute; inset: 3px; border: 1px dashed var(--line-bright); border-radius: 6px; pointer-events: none; }
+[data-zone].drop-over { background: linear-gradient(100deg, var(--accent-soft) 0%, transparent 55%); }
+[data-zone].drop-over::before { content: ''; position: absolute; inset: 3px; border: 2px solid var(--accent-2); border-radius: 6px; box-shadow: 0 0 14px var(--accent-glow); pointer-events: none; }
+[data-zone].drop-refuse { background-image: repeating-linear-gradient(135deg, #ffffff08 0 5px, #0000 5px 11px); }
+[data-zone].drop-refuse > * { opacity: .45; }
+[data-zone].drop-remove::before { content: ''; position: absolute; inset: 6px; border: 2px dashed var(--danger); border-radius: 10px; pointer-events: none;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--danger) 8%, transparent) 0 6px, #0000 6px 14px); }
+[data-zone][data-drop-hint]::after {
+  content: attr(data-drop-hint); position: absolute; top: 6px; right: 12px; z-index: 4; font-size: 11.5px; font-weight: 600;
+  color: var(--muted); background: var(--surface); padding: 1px 6px; border-radius: 4px; pointer-events: none;
+}
+[data-zone].drop-over::after { color: var(--accent-2); }
+[data-zone].drop-remove::after { color: var(--danger); }
+.dragging { opacity: .35; }
+.drag-chip {
+  position: fixed; z-index: 90; display: flex; align-items: center; gap: 9px; padding: 5px 12px 5px 5px; pointer-events: none;
+  background: color-mix(in srgb, var(--bg-deep) 95%, transparent); border: 1px solid var(--accent-2); border-radius: 9px;
+  box-shadow: 0 16px 38px var(--scrim-deep); font-size: 12px;
+}
+.drag-chip img { width: 30px; border-radius: 3px; }
+.drag-chip span { display: grid; }
+.drag-chip .verb { font-size: 11px; color: var(--accent-2); font-weight: 600; }
+.drag-chip.no { border-color: var(--line); }
+.drag-chip.no .verb { color: var(--muted); }
+.drag-chip.no img { filter: grayscale(1) brightness(.6); }
+.drag-chip.rm { border-color: var(--danger); }
+.drag-chip.rm .verb { color: var(--danger); }
+.tile, .ed-line, .commander, .cat-table tr { touch-action: pan-y; user-select: none; }
+
+.card-menu { position: fixed; right: auto; top: auto; }
+.card-menu button:disabled { opacity: .45; }
+/* The printing picker uses the desktop layout. A filter bar is above a grid of pictures, four across. */
+.picker { width: min(920px, 94vw); max-width: none; max-height: 86vh; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 12px; }
+.picker h3 { margin: 0; }
+.print-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.print-bar :is(input, .select-button) { height: 34px; border-radius: 8px; }
+.print-bar input { padding: 0 12px; }
+.print-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-content: start; overflow-y: auto; padding: 2px 6px 2px 2px; }
+.print-grid .hint { grid-column: 1 / -1; margin: 24px 0; text-align: center; }
+/* The single column is no wider than the cell. Otherwise a long set name would stretch the picture too. */
+.print-cell { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 6px; padding: 6px; border: 2px solid transparent; border-radius: 12px; text-align: center; }
+.print-cell.cur { border-color: var(--accent-2); background: var(--accent-soft); }
+.print-cell.off { opacity: .45; }
+.print-cell.choose:not(.off) { cursor: pointer; }
+.print-cell.choose:not(.off, .cur):hover { background: var(--surface-2); }
+.print-cell img { display: block; width: 100%; aspect-ratio: 63 / 88; object-fit: cover; border-radius: 9px; background: var(--surface-2); }
+.print-cell .ed { color: var(--muted); font-size: 12px; line-height: 1.3; }
+.print-cell .ed b { display: block; color: var(--text); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.print-cell .under { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.picker .actions { align-items: center; }
+.picker .actions .hint { margin: 0 auto 0 0; }
+.editor-head .check-fixed { color: var(--muted); font-size: 12px; padding-left: 14px; border-left: 1px solid var(--line); }
+/* The land set shows its five basics. The menu lists every offered set the same way. */
+.land-set { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); font-size: 12px; text-align: left; }
+button.land-set[aria-expanded="true"] { border-color: var(--accent-2); box-shadow: 0 0 0 3px var(--accent-soft); }
+.land-set .nm { display: grid; line-height: 1.15; max-width: 170px; }
+.land-set .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.land-set .caret { color: var(--muted); font-size: 10px; }
+.land-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; border-radius: 4px; overflow: hidden; flex: none; background: var(--surface-3); }
+.land-strip img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Each basic's colour shows until its art arrives */
+.land-strip > span:nth-child(1) { background: color-mix(in srgb, var(--mtg-w) 30%, var(--surface-3)); }
+.land-strip > span:nth-child(2) { background: color-mix(in srgb, var(--mtg-u) 30%, var(--surface-3)); }
+.land-strip > span:nth-child(3) { background: color-mix(in srgb, var(--mtg-b) 30%, var(--surface-3)); }
+.land-strip > span:nth-child(4) { background: color-mix(in srgb, var(--mtg-r) 30%, var(--surface-3)); }
+.land-strip > span:nth-child(5) { background: color-mix(in srgb, var(--mtg-g) 30%, var(--surface-3)); }
+.land-set .land-strip { width: 50px; height: 22px; }
+.land-set-menu { position: absolute; right: 0; bottom: calc(100% + 6px); z-index: 30; width: min(560px, 86vw); padding: 10px; display: grid; gap: 8px;
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; box-shadow: 0 18px 50px var(--scrim-deep); animation: menu-in .14s cubic-bezier(.2,.7,.3,1); transform-origin: 100% 100%; }
+.land-set-menu input { font-size: 12.5px; }
+.land-set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; max-height: min(300px, 50vh); overflow: hidden auto; padding: 2px 12px 2px 2px; }
+.land-set-grid .none { grid-column: 1 / -1; color: var(--muted); margin: 8px 4px; }
+.set-tile { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; padding: 6px; border-radius: 8px; background: var(--surface-2); border: 1px solid transparent; text-align: left; }
+.set-tile:hover { border-color: var(--line-bright); }
+.set-tile[aria-selected="true"] { border-color: var(--accent-2); background: color-mix(in srgb, var(--accent-2) 10%, var(--surface-2)); }
+.set-tile .land-strip { height: 40px; }
+.set-tile .meta { display: flex; justify-content: space-between; gap: 6px; align-items: baseline; font-size: 12px; }
+.set-tile .meta > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.set-tile .meta small { flex: none; }
+.set-tile .meta span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.set-tile .meta small { flex: none; color: var(--muted); font-size: 10.5px; }
+/* A deck built from a game mode's own cards shows its owner before its name. Cards not yet played with are marked as new. */
+
+/* A planar deck: its cards are sideways and large enough to read, and the deck needs less room than the cards */
+.editor-shell.planar { grid-template-columns: minmax(0, 1fr) minmax(300px, 372px); }
+#editor .editor-shell.planar .cat-grid { grid-template-columns: repeat(auto-fill, minmax(204px, 1fr)); }
+.editor-shell.planar .tile { aspect-ratio: 88 / 63; overflow: hidden; }
+.deck-half.planar { grid-template-rows: auto minmax(0, 1fr) auto; }
+.planar-head { padding: 14px 16px 12px; display: grid; gap: 9px; border-bottom: 1px solid var(--line); }
+.planar-head h3 { margin: 0; font-size: 16px; }
+.meter { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 13px; }
+.meter .track { height: 6px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+.meter .track i { display: block; height: 100%; border-radius: 3px; background: var(--text); }
+.meter b { font-weight: 650; font-variant-numeric: tabular-nums; }
+.meter.no b { color: var(--danger); }
+.planar-list { overflow: auto; padding: 4px 10px 12px; min-height: 0; }
+.planar-list h4 { margin: 10px 6px 4px; }
+.planar-line { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 11px; align-items: center; padding: 4px 8px 4px 4px; border-radius: 8px; }
+.planar-line:hover { background: var(--surface-2); }
+.planar-line .art-crop { width: 62px; height: 40px; border-radius: 5px; }
+.planar-line b { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.planar-line button { width: 28px; height: 28px; padding: 0; border-radius: 7px; font-size: 16px; line-height: 1; }
+.planar-foot { padding: 11px 14px; border-top: 1px solid var(--line); display: grid; }

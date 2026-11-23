@@ -1,0 +1,95 @@
+/* The hand is placed low, so the bottom of each card is below the screen edge. A hovered card rises fully into view. */
+/* The room above the hand holds the cards' costs, which are drawn above their top edge, so they stay clear of the battlefield */
+#match { --hand-room: calc(var(--hand-w) * .12); }
+#hand { display: flex; justify-content: center; align-items: flex-start; align-self: end; height: calc(var(--hand-h) * .8); margin-top: var(--hand-room); padding-left: var(--line-w, 0px); }
+/* When the log panel is folded, the hand uses the full width. It leaves space on the right for the prompt console. */
+#match.side-folded #hand { padding-right: calc(var(--prompt-w) + 16px); }
+#hand .card { width: var(--hand-w); height: var(--hand-h); }
+/* A dark gradient behind the hand runs up from the bottom of the window. The cards are drawn against it, not against the playmat. */
+#hand::before { content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: calc(var(--hand-h) * 1.05); z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg-deep) 55%, transparent) 55%, color-mix(in srgb, var(--bg-deep) 88%, transparent) 100%); }
+/* Each card overlaps the edge of the card before it. --step is set from the hand size (hand.ts). */
+#hand .card + .card { margin-left: var(--step, 0px); }
+/* Each card casts a shadow on the card it overlaps, so the edges of two dark cards stay distinct. Glow states include this shadow through --lift. */
+#hand .card { --lift: 0 3px 12px #0009; }
+#hand .card + .card { --lift: calc(var(--hand-w) * -.06) 0 calc(var(--hand-w) * .09) calc(var(--hand-w) * -.04) #000d, 0 3px 12px #0009; }
+:where(#hand) .card { box-shadow: var(--lift); }
+/* The cost to cast is drawn at the card's top-right corner as bare symbols. Its size is set from the card width. */
+#hand .card .cost-badge { display: flex; position: absolute; bottom: calc(100% - var(--hand-w) * 0.01); right: calc(var(--hand-w) * 0.03); z-index: 3; gap: 1px; filter: drop-shadow(0 1px 2px #000c); transform-origin: 100% 100%; transition: transform .12s ease; }
+#hand .card .cost-badge:empty { display: none; }
+#hand .card .cost-badge .sym { height: calc(var(--hand-w) * 0.15); width: calc(var(--hand-w) * 0.15); margin: 0; }
+/* The hovered card grows 1.8 times. Its cost grows by only a fifth, so the symbols stay the size of a label. */
+#hand .card:hover .cost-badge { transform: scale(.67); }
+#hand .card .cost-badge .pip { position: relative; display: flex; border-radius: 50%; }
+/* A changed cost draws a fixed ring and a moving glow around each symbol. Cards playable from another zone get the same kind of ring. */
+#hand .card .cost-badge.changed { gap: 3px; }
+#hand .card .cost-badge.changed .pip { outline: 1.5px solid var(--cost-changed); outline-offset: 1px;
+  box-shadow: 0 0 5px 1px color-mix(in srgb, var(--cost-changed) 40%, transparent); }
+#hand .card .cost-badge.changed .pip::before {
+  content: ''; position: absolute; inset: -4px; z-index: -1; border-radius: 50%; pointer-events: none; mix-blend-mode: plus-lighter;
+  border: 2.5px solid color-mix(in srgb, var(--cost-changed) 50%, transparent); filter: url(#cost-warp-a) blur(1.2px);
+}
+#hand .card .cost-badge.changed .pip:nth-child(2n)::before { filter: url(#cost-warp-b) blur(1.2px); }
+html[data-motion="reduced"] #hand .card .cost-badge.changed .pip::before { filter: blur(2px); }
+/* A card revealed to other players shows a red eye in the top-left corner. The eye is on the same row as the cost. */
+/* Only cards in the hand show these two marks. A card anywhere else never shows them. */
+.card .seen, .card .owned-by { display: none; }
+#hand .card .seen { display: none; position: absolute; bottom: calc(100% - var(--hand-w) * 0.01); left: calc(var(--hand-w) * 0.03); z-index: 3;
+  width: calc(var(--hand-w) * 0.2); height: calc(var(--hand-w) * 0.2); padding: 2px; border-radius: 50%; background: #0e1116e6; color: #ff6b5a;
+  filter: drop-shadow(0 1px 2px #000c); transform-origin: 0 100%; transition: transform .12s ease; }
+#hand .card .seen svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+#hand .card.revealed .seen { display: block; }
+#hand .card:hover .seen { transform: scale(.67); }
+/* A card owned by another player that you may play has a band across it with the zone and the owner's name, in their colour */
+#hand .card.foreign .owned-by { display: block; position: absolute; left: 0; right: 0; top: 14%; z-index: 3; padding: calc(var(--hand-w) * 0.025) 4px;
+  background: var(--owner-tint); color: #0b0e14; font-size: calc(var(--hand-w) * 0.09); font-weight: 800; text-align: center;
+  line-height: 1.15; overflow-wrap: anywhere; box-shadow: 0 1px 4px #000a; }
+#hand .card.foreign .owned-by small { display: block; font-size: .78em; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .8; }
+#hand .card { flex: none; transform: translateX(var(--shift, 0px)) translateY(var(--drop, 0px)) rotate(var(--tilt, 0deg)); transform-origin: 50% 100%; transition: transform .2s cubic-bezier(.2, .8, .2, 1), filter .3s ease; }
+/* The cards on each side of a hovered card move away from it. The two cards next to it move furthest. */
+#hand .card:has(~ .card:hover) { --shift: calc(var(--hand-w) * -.12); }
+#hand .card:hover ~ .card { --shift: calc(var(--hand-w) * .12); }
+#hand .card:has(+ .card:hover) { --shift: calc(var(--hand-w) * -.32); }
+#hand .card:hover + .card { --shift: calc(var(--hand-w) * .32); }
+#hand .card:hover { transform: translateY(-28%) scale(1.8); z-index: 10; box-shadow: 0 10px 30px #000c; }
+/* The hovered card keeps the strip below it as part of its hover area. Without it, a pointer there would leave the card, the card would drop, and then rise again. */
+#hand .card:hover::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 25%; }
+
+/* A card playable from outside the hand gets light round it, not a fill. A fill would tint a face-down card or a card without art.
+   The light is grey while the card cannot be cast, and the castable colour once it can. The zone is named in the card's preview */
+.card .haze, .card .halo { display: none; }
+#hand .card.elsewhere .halo { display: block; position: absolute; z-index: -1; pointer-events: none; mix-blend-mode: plus-lighter;
+  --rise: #dde2ea; opacity: .88; transition: opacity .3s; }
+#hand .card.elsewhere:is(.playable, .auto-tap) .halo { --rise: var(--playable, #66ccff); opacity: 1; }
+/* The light's edge sits where the castable outline would, so it takes the outline's place */
+#hand .card.elsewhere:is(.playable, .auto-tap):not(.selectable) { outline-color: transparent; }
+/* These cards come first in the hand, and a gap sets them apart from the cards in it */
+#hand .card.elsewhere + .card:not(.elsewhere) { margin-left: calc(var(--step, 0px) + 28px); }
+/* Light rising from an edge just outside the card (index.html's rise filters). The box reaches past the card, because the light stops at the box */
+#hand .card.elsewhere .halo { inset: -30px; filter: url(#rise-a); }
+#hand .card.elsewhere .halo::before { content: ''; position: absolute; inset: 28.5px; border: 1.5px solid color-mix(in srgb, var(--rise) 65%, #fff);
+  border-radius: calc(var(--radius, 6px) + 1.5px); }
+/* Three copies of the filter start at different points in the loop, so neighbouring cards never move in step */
+#hand .card.elsewhere:nth-child(3n+2) .halo { filter: url(#rise-b); }
+#hand .card.elsewhere:nth-child(3n) .halo { filter: url(#rise-c); }
+/* A card that cannot be cast yet gets the moving light and a soft band on its edge, but no crisp edge. A crisp edge means the card can be cast */
+#hand .card.elsewhere:not(.playable, .auto-tap) .halo { filter: url(#haze-a); }
+#hand .card.elsewhere:not(.playable, .auto-tap):nth-child(3n+2) .halo { filter: url(#haze-b); }
+#hand .card.elsewhere:not(.playable, .auto-tap):nth-child(3n) .halo { filter: url(#haze-c); }
+#hand .card.elsewhere:is(.playable, .auto-tap):hover .halo { --rise: color-mix(in srgb, var(--playable, #66ccff) 80%, #fff); }
+/* nth-child(n) outranks the rules that hand out the filter copies */
+html[data-motion="reduced"] #hand .card.elsewhere:nth-child(n) .halo { filter: blur(4px); }
+#hand .card.elsewhere:is(.playable, .auto-tap):hover .haze { display: block; position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: var(--radius); pointer-events: none; }
+#hand .card.elsewhere:hover .haze::before, #hand .card.elsewhere:hover .haze::after {
+  content: ''; position: absolute; bottom: 26%; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--playable, #66ccff); box-shadow: 0 0 7px 1px var(--playable, #66ccff); opacity: 0;
+  animation: elsewhere-rise 2.4s linear infinite;
+}
+#hand .card.elsewhere:hover .haze::before { left: 24%; }
+#hand .card.elsewhere:hover .haze::after { left: 64%; animation-delay: -1.2s; }
+@keyframes elsewhere-rise {
+  0% { opacity: 0; transform: translateY(14px); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-38px); }
+}
+html[data-motion="reduced"] #hand .card.elsewhere:hover .haze::before, html[data-motion="reduced"] #hand .card.elsewhere:hover .haze::after { animation: none; opacity: .75; }

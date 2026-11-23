@@ -1,0 +1,21 @@
+{
+  "name": "forge-gui-web",
+  "private": true,
+  "description": "The browser half of Forge's web GUI. Maven runs the build; see README.md.",
+  "type": "module",
+  "scripts": {
+    "prebuild": "node -e \"for (const dir of ['src/main/resources/web/js', 'target/classes/web/js']) require('fs').rmSync(dir, { recursive: true, force: true })\"",
+    "build": "esbuild src/main/ts/app.ts --bundle --splitting --minify --format=esm --target=es2022 --log-level=warning --outdir=src/main/resources/web/js --chunk-names=chunks/[name]-[hash]",
+    "watch": "esbuild src/main/ts/app.ts --bundle --splitting --format=esm --target=es2022 --sourcemap --outdir=src/main/resources/web/js --chunk-names=chunks/[name]-[hash] --watch",
+    "typecheck": "tsc",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
+  },
+  "dependencies": {
+    "preact": "10.29.8"
+  }
+}

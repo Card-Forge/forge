@@ -1,0 +1,144 @@
+/* The Limited pages. This file covers the play-kind chooser on the start page, the saved pools, the setup form and the opponents list. */
+
+.chooser { max-width: 920px; margin: 0 auto; display: grid; gap: 14px; }
+.chooser-kinds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kind-main:disabled { opacity: .45; cursor: default; }
+/* A chooser card is a plaque, as on the start page, holding two buttons because a button cannot contain another. The main button fills the card.
+   It keeps the art at its own zoom, and its fade starts lower so more of the art shows. */
+.kind-card.plaque { --plaque-h: 236px; --plaque-pad: 0; --plaque-zoom: 1;
+  --plaque-fade: linear-gradient(180deg, transparent 50%, #0b0e1499 74%, #0b0e14e0 100%);
+  --ground: radial-gradient(80% 90% at 82% 18%, #3b3420 0%, transparent 62%), linear-gradient(160deg, #182030, #0c1119); }
+.kind-main { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 20px; background: none; border: 0; border-radius: 0;
+  color: inherit; font: inherit; text-align: left; }
+.kind-card.has-resume .kind-main { padding-bottom: 10px; }
+.kind-card .mode-text { text-shadow: 0 1px 3px #000; }
+.kind-resume { align-self: flex-start; margin: 0 20px 18px; display: flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 55%, transparent); background: #0b0e14b3; color: var(--accent-2);
+  font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.2; text-align: left; }
+.kind-resume svg { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.kind-resume path:last-child { fill: currentColor; stroke: none; }
+.kind-resume:hover { background: color-mix(in srgb, var(--accent-2) 16%, #0b0e14); color: var(--text); }
+.kind-main:focus-visible, .kind-resume:focus-visible { outline: 2px solid var(--accent-2); outline-offset: -2px; }
+@media (max-width: 700px) { .chooser-kinds { grid-template-columns: 1fr; } }
+
+#limited { min-height: 100%; display: grid; }
+.limited-page { display: grid; grid-template-rows: auto auto auto auto 1fr; }
+.limited-page > .page-head { grid-row: 1; }
+.limited-head .head-right { gap: 10px; }
+.limited-error { grid-row: 2; margin: 10px 20px 0; color: var(--select); }
+.limited-page .muted { color: var(--muted); font-size: 12.5px; }
+/* The current view is placed under the setup trail. Like the lobby, it is centred with a maximum width of 960px. */
+.limited-page > .setup-head { grid-row: 3; justify-self: center; width: min(100% - 40px, 960px); margin-top: 40px; }
+.limited-page > :is(.event-shelf, .setup, .opponents, .pools-wait) { grid-row: 4; align-self: start; justify-self: center; width: min(100% - 40px, 960px); margin: 4px 0 28px; }
+.pools-wait { padding: 20px; }
+
+/* The player's events are shown as a grid of cards. Each card is shaped like a ticket, with a dashed tear line and side notches above its buttons. */
+.event-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.ev { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; display: grid; grid-template-rows: auto 1fr auto; }
+.ev-top { padding: 16px 18px 10px; display: grid; gap: 3px; }
+.ev-top b { font-size: 15.5px; overflow-wrap: anywhere; }
+.ev-top .sub { font-size: 12.5px; color: var(--muted); }
+.ev-mid { padding: 0 18px 14px; display: grid; gap: 7px; align-content: start; }
+.ev-line { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+.ev-line.dim { color: var(--muted); }
+.ev.unbuilt .ev-line.deck { color: var(--accent-2); }
+.ev-foot { position: relative; border-top: 1px dashed var(--line-bright); padding: 12px 14px; display: flex; gap: 8px; align-items: center;
+  background: color-mix(in srgb, var(--bg-deep) 35%, transparent); border-radius: 0 0 12px 12px; }
+.ev-foot::before, .ev-foot::after { content: ''; position: absolute; top: -8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); clip-path: inset(0 0 0 50%); }
+.ev-foot::before { left: -9px; }
+.ev-foot::after { right: -9px; clip-path: inset(0 50% 0 0); }
+.ev-foot .sp { flex: 1; }
+.ev-foot .danger { color: var(--concede); border-color: color-mix(in srgb, var(--concede) 45%, var(--line)); }
+.ev-ask { font-size: 12.5px; color: var(--muted); }
+.ev-more { position: relative; }
+.ev-more .more { width: 32px; padding: 6px 0; text-align: center; }
+.ev-menu { position: absolute; right: 0; bottom: calc(100% + 6px); z-index: 5; min-width: 150px; padding: 5px; display: grid; background: var(--surface-3); border: 1px solid var(--line-bright); border-radius: 8px; box-shadow: 0 10px 28px #000a; }
+.ev-menu button { text-align: left; background: none; border: 0; color: var(--concede); }
+.ev-menu button:hover { background: var(--surface-2); }
+.ev.new { border: 1.5px dashed color-mix(in srgb, var(--accent-2) 55%, #000); background: color-mix(in srgb, var(--accent-2) 4%, transparent);
+  display: grid; grid-template-rows: none; place-content: center; justify-items: center; text-align: center; gap: 8px; padding: 24px 18px; font: inherit; color: var(--text); min-height: 190px; }
+.ev.new:hover { border-color: var(--accent-2); background: color-mix(in srgb, var(--accent-2) 8%, transparent); }
+.ev.new .plus { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 26px; line-height: 1; color: var(--on-brass);
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent-2) 55%, #fff), var(--accent-2) 55%, color-mix(in srgb, var(--accent-2) 62%, #000));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-2) 45%, #000), 0 3px 10px #000a; }
+.ev.new b { font-size: 15px; }
+.ev.new > span:last-child { font-size: 12.5px; color: var(--muted); max-width: 30ch; }
+
+.setup { display: grid; gap: 8px; }
+.wiz-steps { display: grid; gap: 6px; }
+.wiz-ticket { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+.wiz-ticket > .wiz-steps .stp { padding-left: 8px; padding-right: 8px; }
+.ticket { position: sticky; top: 16px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line-bright); border-radius: 14px; display: grid; }
+.ticket-head { padding: 16px 18px 12px; display: grid; gap: 3px; border-radius: 14px 14px 0 0; background: linear-gradient(180deg, var(--accent-soft), transparent); }
+.ticket-kicker, .kicker { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ticket-head b { font-size: 17px; }
+.ticket dl { margin: 0; padding: 4px 18px 14px; display: grid; grid-template-columns: auto 1fr; gap: 9px 14px; font-size: 13px; }
+.ticket dt { color: var(--muted); }
+.ticket dd { margin: 0; text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.ticket dd.pending { color: var(--faint); font-weight: 400; font-style: italic; }
+.ticket-foot { position: relative; border-top: 1px dashed var(--line-bright); padding: 14px 18px 16px; display: grid; gap: 8px; }
+.ticket-foot::before, .ticket-foot::after { content: ''; position: absolute; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line-bright); }
+.ticket-foot::before { left: -10px; clip-path: inset(0 0 0 50%); }
+.ticket-foot::after { right: -10px; clip-path: inset(0 50% 0 0); }
+.ticket-foot .big { padding: 10px 16px; font-size: 14.5px; transition: opacity .3s; }
+html[data-motion="reduced"] .ticket-foot .big { transition: none; }
+.ticket-foot small { font-size: 11.5px; color: var(--muted); text-align: center; }
+.ticket-foot .sentence.taken { display: grid; gap: 8px; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 800px) { .wiz-ticket { grid-template-columns: 1fr; } .ticket { position: static; } }
+.wiz { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; display: grid; gap: 6px; }
+.wiz-title { margin: 0 0 8px; font-size: 17px; }
+.stp { display: grid; grid-template-columns: 26px 128px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 4px; border-bottom: 1px solid var(--line); font-size: 13px; }
+.stp .num, .stp-open .num { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 750; border: 1px solid var(--line-bright); color: var(--muted); }
+.stp.done .num { background: var(--brass); color: var(--on-brass); border: 0; }
+.stp .lab { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+.stp .val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stp.todo { opacity: .4; border-bottom-style: dashed; }
+.stp.todo .val { color: var(--faint); }
+.stp-open { border: 1px solid var(--accent-2); border-radius: 10px; background: var(--surface); padding: 14px 16px 16px; margin: 6px 0; display: grid; gap: 12px; }
+.stp-open .q { display: flex; align-items: center; gap: 10px; }
+.stp-open .q .num { border-color: var(--accent-2); color: var(--accent-2); }
+.stp-open .q b { font-size: 15px; }
+.stp-open .hint { color: var(--faint); font-size: 12px; margin: 0; }
+/* The moment between a pick and the fold. The picked choice keeps its gold edge and the others dim */
+.stp-open.choosing button:not(.picked) { opacity: .45; transition: opacity .15s; }
+.stp-open.choosing .picked { border-color: var(--accent-2); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+.wiz-steps .tiles { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+.tile-choice { display: grid; gap: 3px; align-content: start; text-align: left; padding: 10px 12px; border-radius: 8px; }
+.tile-choice span { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.tile-choice:hover { border-color: var(--accent-2); }
+.pick { display: grid; gap: 8px; }
+.pick-list { display: grid; gap: 1px; max-height: 320px; overflow-y: auto; padding-right: 12px; }
+.pick-list button { text-align: left; background: none; border: 0; border-radius: 7px; padding: 7px 10px; }
+.pick-list button:hover, .pick-list button:focus-visible { background: var(--surface-2); }
+.stp-open .rows { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.stp-open .rows input[type=text] { flex: 1; min-width: 220px; }
+.stepper { display: inline-flex; align-items: center; gap: 6px; }
+.stepper .n { min-width: 24px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wfoot { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.wfoot .sentence { flex: 1; color: var(--muted); font-size: 13px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.wfoot .sentence b { color: var(--text); font-weight: 600; }
+
+/* The numbered list of opponents shown before a match. Each row starts a match against that opponent. The gauntlet plays them all in order. */
+.opponents { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.opp-head { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+.opp-head .kicker:first-child { flex: 1; }
+.opp-short { margin: 0; padding: 9px 18px; font-size: 12.5px; color: var(--accent-2); border-bottom: 1px solid var(--line); background: var(--accent-soft); }
+.opp-list { margin: 0; padding: 0; list-style: none; }
+.opp-row { display: grid; grid-template-columns: 26px 54px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 18px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); font-size: 13.5px; }
+.opp-row .n { color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+.opp-row .muted { font-size: 12.5px; }
+.opp-play { padding: 4px 16px; font-size: 12.5px; background: none; border-color: transparent; color: var(--muted); }
+.opp-row:hover, .opp-row:focus-within { background: color-mix(in srgb, var(--accent-2) 5%, transparent); }
+.opp-row:hover .opp-play, .opp-play:focus-visible { background: var(--brass); border-color: color-mix(in srgb, var(--accent-2) 52%, #fff); color: var(--on-brass); font-weight: 650; }
+.opp-foot { display: flex; align-items: center; gap: 14px; padding: 13px 18px; }
+.opp-foot + .opp-foot { border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent); padding-top: 11px; }
+.opp-foot .say { flex: 1; font-size: 13px; color: var(--muted); }
+.opp-foot .say b { color: var(--text); font-weight: 600; }
+button.outline { background: none; border-color: color-mix(in srgb, var(--accent-2) 55%, #000); color: var(--accent-2); font-weight: 600; }
+button.outline:hover { background: var(--accent-soft); }
+.your-deck { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.your-deck b { font-weight: 600; }
+.shelf-rename { display: flex; gap: 6px; }
+.shelf-rename input { flex: 1; min-width: 0; background: var(--surface-2); border: 1px solid var(--line-bright); border-radius: 6px; padding: 6px 9px; color: var(--text); font: inherit; font-weight: 650; }
+.shelf-rename button { padding: 6px 10px; font-size: 12.5px; }

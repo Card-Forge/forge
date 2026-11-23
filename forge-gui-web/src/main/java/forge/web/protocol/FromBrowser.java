@@ -1,0 +1,424 @@
+package forge.web.protocol;
+
+import com.google.gson.JsonElement;
+import forge.deck.DeckSection;
+import forge.game.phase.PhaseType;
+import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.NextGameDecision;
+import forge.web.protocol.MessageJson.Command;
+import forge.web.protocol.MessageJson.Nullable;
+import forge.web.protocol.MessageJson.Ts;
+
+import java.util.List;
+
+/** Every message the browser sends the server. src/main/ts/protocol.gen.ts is generated from these. */
+public final class FromBrowser {
+    private FromBrowser() {
+    }
+
+    /** Messages that are only a name. */
+    public enum Plain { decks, join, lobby, leaveLobby, addresses, cardSets, netDecks, leave, limitedLeave, poolClose, draftDiscard, gauntletNext, gauntletRestart, eventStart, eventNew,
+        ok, cancel, endTurn, stopYield, autoPass, undo, concede, macroRecord, macroRepeat,
+        editorClose, editorUndo }
+
+    @Command
+    public record Bare(Plain t) {
+    }
+
+    public enum EventKind { sealed, draft }
+
+    /** Opens a table others can join. When limited is not null, the table is set up from the start for a draft or sealed event. */
+    @Command("invite")
+    public record Invite(@Nullable EventKind limited) {
+    }
+
+    /** Takes the host's seat. A browser on another machine gives the host password when one is set. */
+    @Command("claimHost")
+    public record ClaimHost(@Nullable String password) {
+    }
+
+    /** The name and avatar this browser plays under. Both are chosen before anything else. A guest's browser also sends the sleeve it last chose. */
+    @Command("setName")
+    public record SetName(String name, @Nullable Integer avatar, @Nullable Integer sleeve) {
+    }
+
+    @Command("chat")
+    public record Say(String text) {
+    }
+
+    /** A script error in the page. Without this message, the server's log would never record it. */
+    @Command("pageError")
+    public record PageError(String text) {
+    }
+
+    /** The host gives a disconnected player's seat to a waiting player. That player continues from where the seat was left. */
+    @Command("giveSeat")
+    public record GiveSeat(String from, String to) {
+    }
+
+    /** The host takes away a disconnected player's seat. At the table the seat becomes open. In a match the AI plays it. */
+    @Command("dropPlayer")
+    public record DropPlayer(String name) {
+    }
+
+    @Command("ready")
+    public record Ready(boolean ready) {
+    }
+
+    public enum SeatAction { openSeat, aiSeat, removeSeat }
+
+    @Command
+    public record SeatCommand(SeatAction t, int index) {
+    }
+
+    /** How many seats the table has. Seats are added and removed at the end. A seat a person holds is never removed. */
+    @Command("setPlayerCount")
+    public record SetPlayerCount(int count) {
+    }
+
+    /** Changes one or more of a seat's choices. A field left out is not changed. A blank name gives an AI seat a new random name.
+     *  aiProfile is how an AI seat plays, one of the table's aiProfiles. */
+    @Command("setSeat")
+    public record SetSeat(int index, @Nullable String name, @Nullable String deck, @Nullable Integer avatar,
+            @Nullable Integer sleeve, @Nullable Integer commander, @Nullable String aiProfile) {
+    }
+
+    /** How many games the table's match is: 1, 3 or 5. */
+    @Command("setMatchLength")
+    public record SetMatchLength(int games) {
+    }
+
+    /** The highest Commander bracket the table plays at, 1 to 4, or 5 for any. */
+    @Command("setMaxBracket")
+    public record SetMaxBracket(int bracket) {
+    }
+
+    @Command("setFormat")
+    public record SetFormat(String format) {
+    }
+
+    /** Switches a casual variant on or off. The engine decides what else that switches off. */
+    @Command("setVariant")
+    public record SetVariant(String variant, boolean on) {
+    }
+
+    @Command("setArchenemy")
+    public record SetArchenemy(int index) {
+    }
+
+    /** How many teams the seats are dealt into, or 0 for a free-for-all. */
+    @Command("setTeams")
+    public record SetTeams(int count) {
+    }
+
+    @Command("setTeam")
+    public record SetTeam(int index, int team) {
+    }
+
+    /** A seat's planar deck, scheme deck or avatar: the section's name and a choice key from its list. */
+    @Command("setSeatExtra")
+    public record SetSeatExtra(int index, String section, String choice) {
+    }
+
+    @Command("extraChoices")
+    public record AskExtraChoices(int index, String section) {
+    }
+
+    /** A card pool for Constructed, or null to remove the restriction. */
+    @Command("setCardPool")
+    public record SetCardPool(@Nullable String cardPool) {
+    }
+
+    @Command("deckDetails")
+    public record AskDeckDetails(String key) {
+    }
+
+    public enum DeckQueryKind { card, sideboard, set }
+
+    /** Which listed decks hold a card in the main deck or the sideboard, or cards from a set. */
+    @Command("deckQuery")
+    public record DeckQuery(DeckQueryKind kind, String value) {
+    }
+
+    @Command("hostChoice")
+    public record HostChoiceAnswer(int id, List<Integer> value) {
+    }
+
+    @Command("cardSearch")
+    public record SearchCards(String query) {
+    }
+
+    /** A card's printings. cardPool, when set, marks the printings outside it. */
+    @Command("printings")
+    public record AskPrintings(String name, @Nullable String cardPool) {
+    }
+
+    @Command("sleeveArt")
+    public record SleeveArt(int index, String key, int offset) {
+    }
+
+    /** Removes a card-art sleeve from the saved ones. A deck that already uses it keeps it. */
+    @Command("forgetSleeveArt")
+    public record ForgetSleeveArt(String key) {
+    }
+
+    @Command("start")
+    public record Start(boolean spectate) {
+    }
+
+    /** The format the start page's deck finder lists, while no table is open. */
+    @Command("browseFormat")
+    public record BrowseFormat(String format) {
+    }
+
+    /** Opens a deck from the finder or the planar deck menu by key, or a new deck for a format. seat is the seat whose finder it came from. copy edits a copy. */
+    @Command("editorOpen")
+    public record EditorOpen(@Nullable String key, @Nullable String newFormat, @Nullable Integer seat, boolean copy) {
+    }
+
+    public enum EditOp { add, remove, move, commander, printings, lands, landSet, suggestLands, foil, randomPlanes }
+
+    /** A name and a count. The name is a card printing's image key in a printings change, or a basic land's name in a lands change. */
+    public record CountedName(String name, int count) {
+    }
+
+    @Command("editorEdit")
+    public record EditorEdit(EditOp op, @Nullable String name, @Nullable DeckSection from, @Nullable DeckSection to, int count,
+            @Nullable List<CountedName> printings, @Nullable List<CountedName> lands) {
+    }
+
+    @Command("editorRename")
+    public record EditorRename(String name) {
+    }
+
+    /** "Check legality against": a format, a card pool for Constructed, or no restriction at all. */
+    @Command("editorCheck")
+    public record EditorCheck(String format, @Nullable String cardPool, boolean unrestricted) {
+    }
+
+    public enum DeckOp { duplicate, delete, file }
+
+    @Command("editorDeck")
+    public record EditorDeck(DeckOp op) {
+    }
+
+    /** Deletes one of the player's own decks from the finder, without opening it. */
+    @Command("deckDelete")
+    public record DeckDelete(String key) {
+    }
+
+    /** Stars one of the decks the finder lists, or removes its star. */
+    @Command("deckFavourite")
+    public record DeckFavourite(String key, boolean on) {
+    }
+
+    /** A page of the catalogue. request is sent back with the answer, so a late answer to an old query is dropped. */
+    @Command("catalogue")
+    public record CatalogueQuery(int request, String text, String colours, String type, String filters, String sort, int offset,
+            boolean showAll,
+            @Nullable List<String> sets, @Nullable String format, @Nullable DeckSection section) {
+    }
+
+    @Command("importRead")
+    public record ImportRead(int request, String text, String format, @Nullable String cardPool, boolean unrestricted) {
+    }
+
+    @Command("importFetch")
+    public record ImportFetch(int request, String url) {
+    }
+
+    /** use puts the deck on a seat, edit opens it, and save keeps it. add and replace change the deck open in the editor. */
+    public enum ImportAction { use, edit, save, add, replace }
+
+    /** What to do when the name is taken: replace that deck, or keep both. */
+    public enum Clash { replace, keep }
+
+    @Command("importCommit")
+    public record ImportCommit(String text, String name, String format, @Nullable String cardPool, boolean unrestricted,
+            ImportAction action, @Nullable Integer seat, @Nullable String url, @Nullable Clash clash) {
+    }
+
+    /** A .dck file's text, saved as a deck of the format without using the importer. */
+    @Command("deckFile")
+    public record DeckFile(String text, String format, @Nullable Clash clash) {
+    }
+
+    /** A deck a guest keeps in its browser: the id it is stored under, the deck as .dck text, and its format. */
+    public record DeviceDeckText(String id, String text, String format) {
+    }
+
+    /** Every deck a guest keeps in its browser. It is sent once each time the guest connects. */
+    @Command("deviceDecks")
+    public record DeviceDecks(List<DeviceDeckText> decks) {
+    }
+
+    @Command("reply")
+    public record Reply(int id, @Ts("unknown") JsonElement value) {
+    }
+
+    /** A click on a card. menu means the right button. x and y place the list of abilities the click may open. */
+    @Command("selectCard")
+    public record SelectCard(int key, boolean menu, int x, int y) {
+    }
+
+    public enum KeyAction { selectPlayer, selectStackItem, detail, playerDetail, stackMenu }
+
+    /** An action on one object in the game, named by its delta key. */
+    @Command
+    public record KeyCommand(KeyAction t, int key) {
+    }
+
+    public enum YieldAction { autoYield, alwaysYes, alwaysNo, yieldToStack, yieldToEntireStack }
+
+    @Command("stackYield")
+    public record StackYield(int key, YieldAction action) {
+    }
+
+    /** The Always Yes and Always No shortcuts, for the ability on top of the stack. */
+    @Command("autoYieldTop")
+    public record AutoYieldTop(boolean yes) {
+    }
+
+    /** Sets every stop of one row instead of toggling them, so a browser can restore its remembered stops. Null phases means Forge's defaults. */
+    @Command("setStops")
+    public record SetStops(boolean mine, @Nullable List<PhaseType> phases) {
+    }
+
+    public enum PhaseAction { toggleStop, toggleMarker }
+
+    /** A stop, or a pass-priority-until marker, at a phase of the player's own turns (mine) or the opponents' turns. */
+    @Command
+    public record PhaseCommand(PhaseAction t, PhaseType phase, boolean mine) {
+    }
+
+    /** Pays with one colour from the mana pool. color is its bit, as in the player's Mana property. */
+    @Command("useMana")
+    public record UseMana(byte color) {
+    }
+
+    /** How the host's generators build decks. singletons means one copy of each card. */
+    @Command("setDeckGen")
+    public record SetDeckGen(boolean singletons, boolean noArtifacts) {
+    }
+
+    @Command("setSetting")
+    public record SetSetting(String key, String value) {
+    }
+
+    /** Forge's developer cheats, by their names in IDevModeCheats. state only asks for the current values of the two switches. */
+    public enum DevAction { state, unlimitedLands, viewAll, generateMana, tutorForCard, addCardToHand, addCardToBattlefield,
+        addTokenToBattlefield, addCardToLibrary, addCardToGraveyard, addCardToExile, repeatLastAddition, castASpell,
+        exileCardsFromHand, exileCardsFromBattlefield, removeCardsFromGame, addCountersToPermanent,
+        removeCountersFromPermanent, tapPermanents, untapPermanents, setPlayerLife, winGame,
+        riggedPlanarRoll, planeswalkTo, setupGameState, dumpGameState }
+
+    /** A cheat for the host's own seat. text is the game state to set up, for setupGameState. */
+    @Command("dev")
+    public record Dev(DevAction action, @Nullable String text) {
+    }
+
+    @Command("nextGame")
+    public record NextGame(NextGameDecision decision) {
+    }
+
+    /** Offers a draw, or answers another player's offer. */
+    @Command("drawOffer")
+    public record DrawOfferCommand(DrawOfferMessage.Action action) {
+    }
+
+    public enum AutoDecisionAction { list, remove, clear, clearOrders, disableYields, disableTriggers }
+
+    /** Lists or forgets the player's auto-yields and trigger answers, or forgets saved ability orders. disableYields and disableTriggers switch either kind off when on is true. */
+    @Command("autoDecisions")
+    public record AutoDecisionCommand(AutoDecisionAction action, @Nullable String key, boolean on) {
+    }
+
+    /** Opens the Limited pages for a kind of event. With resume, it opens the pool saved last directly. */
+    @Command("limitedOpen")
+    public record LimitedOpen(EventKind kind, boolean resume) {
+    }
+
+    /** Opens a sealed pool. product is a LimitedPoolType name. The fields that product does not need are null. */
+    @Command("sealedCreate")
+    public record SealedCreate(String product, @Nullable String block, @Nullable String combo, @Nullable String edition,
+            @Nullable String template, @Nullable String cubeId, int packs, String name, boolean replace) {
+    }
+
+    /** Starts an offline booster draft. product is a LimitedPoolType name. The fields that product needs are set. combo is "A/B/C". pickRule is a DoublePick name, or null for the set's own. */
+    @Command("draftStart")
+    public record DraftStart(String product, @Nullable String block, @Nullable String combo, @Nullable String cube, @Nullable String theme,
+            @Nullable String cubeId, @Nullable String pickRule) {
+    }
+
+    /** Picks the card at index from the pack. step is the draft state the click was made on, and a pick with an old step is ignored. */
+    @Command("draftPick")
+    public record DraftPick(int step, int index, boolean sideboard) {
+    }
+
+    /** Moves the pick at index, in the order picked, into the sideboard or back into the main deck. */
+    @Command("draftMove")
+    public record DraftMove(int index, boolean sideboard) {
+    }
+
+    /** Saves a finished draft. replace means the player agreed to replace a draft with the same name. */
+    @Command("draftSave")
+    public record DraftSave(String name, boolean replace) {
+    }
+
+    /** Opens a saved pool's opponents screen. */
+    @Command("poolOpen")
+    public record PoolOpen(String name) {
+    }
+
+    /** Opens a saved pool's deck in the editor. */
+    @Command("poolEdit")
+    public record PoolEdit(String name) {
+    }
+
+    @Command("poolDelete")
+    public record PoolDelete(String name) {
+    }
+
+    /** Against one opponent, against count opponents at once, or against each in turn. */
+    public enum PoolPlayMode { one, several, gauntlet }
+
+    /** Plays a pool's deck against one of its opponents. opponent is 0-based. games is the number of games in the match. */
+    @Command("poolPlay")
+    public record PoolPlay(String name, @Nullable PoolPlayMode mode, int opponent, int count, int games) {
+    }
+
+    /** The table's Limited switch, which only the host sets. It is the kind of event, or null for Constructed. */
+    @Command("setLimited")
+    public record SetLimited(@Nullable EventKind kind) {
+    }
+
+    /** Sets up the table's event, or sets it up again. timer and grace are in seconds. pickRule is a DoublePick name. */
+    @Command("eventSetup")
+    public record EventSetup(String product, @Nullable String block, @Nullable String combo, @Nullable String edition,
+            @Nullable String template, @Nullable String cube, @Nullable String theme, @Nullable String cubeId, int packs,
+            int podSize, @Nullable String pickRule, int timer, int grace) {
+    }
+
+    /** Keeps a seat at the table while it sits out the next match. */
+    @Command("sitOut")
+    public record SitOut(int index, boolean sittingOut) {
+    }
+
+    /** Plays a past event's decks again at this table, as desktop's Load Past Event does. */
+    @Command("eventHostAgain")
+    public record EventHostAgain(String eventId) {
+    }
+
+    /** Deletes a past event's pools from the host's event decks. */
+    @Command("eventForget")
+    public record EventForget(String eventId) {
+    }
+
+    /** Whether the deck finder lists only the event's decks. */
+    @Command("eventDecksOnly")
+    public record EventDecksOnly(boolean on) {
+    }
+
+    /** Every command record. MessageJson decodes commands by these, and the TypeScript is generated from them. */
+    static final List<Class<? extends Record>> COMMANDS = MessageJson.marked(Command.class);
+}

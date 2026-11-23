@@ -1,0 +1,1419 @@
+/* The table is lighter than the other pages' background, so a card's black border stays visible against it */
+#match { --table: #1a202c; --table-deep: #0f131b; }
+#match::after {
+  content: ''; position: fixed; inset: -16px; z-index: -3;
+  background: radial-gradient(120% 90% at 50% 42%, var(--table) 0%, var(--table-deep) 100%);
+}
+/* A dark layer covers the playmat so its picture does not distract from the cards. The brightness setting sets how dark the layer is. */
+html[data-playmat="dark"] :is(#match, .playmat-choice) { --mat-wash: .62; --mat-saturate: .75; }
+html[data-playmat="dim"] :is(#match, .playmat-choice) { --mat-wash: .46; --mat-saturate: .9; }
+html[data-playmat="light"] :is(#match, .playmat-choice) { --mat-wash: .32; --mat-saturate: 1; }
+html[data-playmat="bright"] :is(#match, .playmat-choice) { --mat-wash: .2; --mat-saturate: 1; }
+html:not([data-playmat=""]) #match::after {
+  background: radial-gradient(120% 90% at 50% 42%, rgb(10 13 19 / calc(var(--mat-wash) - .12)) 0%, rgb(8 10 15 / calc(var(--mat-wash) + .12)) 100%),
+    var(--playmat) center / cover no-repeat;
+  filter: saturate(var(--mat-saturate));
+}
+/* A faint light rises from the bottom of the window over your half of the table. It shows which side is yours without a label. */
+#match::before {
+  content: ''; position: fixed; inset: -16px; z-index: -3;
+  background: linear-gradient(0deg, color-mix(in srgb, var(--accent-2) 2.5%, transparent) 0%, transparent 42%),
+              radial-gradient(120% 90% at 50% 42%,
+              color-mix(in srgb, var(--table) 42%, transparent) 0%,
+              color-mix(in srgb, var(--table-deep) 68%, transparent) 100%);
+}
+/* Use clip, not hidden. A hidden overflow can still scroll on Space or a focus change. That moves the table up and cuts off the top seat. */
+#match { --side-w: 250px; --prompt-w: var(--side-w); --side-gap: calc(var(--side-w) + 20px); display: grid; position: relative; height: 100vh; overflow: clip; grid-template-columns: 1fr var(--side-w); grid-template-rows: 1fr auto 1fr auto; grid-template-areas: "opp side" "phase side" "me side" "hand side"; gap: 8px; padding: 8px 8px 0; }
+#opponent { grid-area: opp; }
+#me { grid-area: me; }
+#phase-strip { grid-area: phase; }
+#side { grid-area: side; position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 0; view-transition-name: side-column; }
+/* When a panel opens or closes (side.ts), the column animates to its new size and the board to its new layout */
+::view-transition-group(side-column), ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .26s; animation-timing-function: cubic-bezier(.2,.7,.3,1); }
+/* When the column folds or unfolds, it slides out or in at the right edge instead of resizing */
+html[data-side]::view-transition-group(side-column) { animation: none; }
+html[data-side]::view-transition-old(side-column), html[data-side]::view-transition-new(side-column) {
+  inset-inline: auto 0; inline-size: auto; block-size: auto; mix-blend-mode: normal; }
+html[data-side="shut"]::view-transition-old(side-column) { animation: side-off .26s cubic-bezier(.4,0,.8,.4) both; }
+html[data-side="shut"]::view-transition-new(side-column) { animation: side-fade-in .2s .08s ease-out both; }
+html[data-side="open"]::view-transition-new(side-column) { animation: side-on .28s cubic-bezier(.2,.7,.3,1) both; }
+html[data-side="open"]::view-transition-old(side-column) { animation: side-fade-out .12s ease-out both; }
+/* The prompt stays in its corner whether the column is open or folded. So it has its own view transition and does not slide with the column. */
+#prompt { view-transition-name: prompt; }
+::view-transition-group(prompt), ::view-transition-new(prompt) { animation: none; }
+::view-transition-old(prompt) { display: none; }
+@keyframes side-off { to { transform: translateX(calc(100% + 16px)); } }
+@keyframes side-on { from { transform: translateX(calc(100% + 16px)); } }
+@keyframes side-fade-in { from { opacity: 0; } }
+@keyframes side-fade-out { to { opacity: 0; } }
+.side-panel { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+#log-panel { flex: 1; }
+#chat-panel { flex: 0 1 40%; }
+#side[data-log="shut"] #log-panel, #side[data-chat="shut"] #chat-panel { flex: none; }
+#side[data-log="shut"] #log, #side[data-chat="shut"] #match-chat { display: none; }
+#side[data-log="shut"][data-chat="open"] #chat-panel { flex: 1; }
+.side-toggle { align-self: flex-end; font-size: 12px; padding: 2px 10px; }
+.side-toggle[aria-expanded="true"] { color: var(--muted); }
+/* When the column is folded, the panels become tabs at the right edge and the board uses their column */
+#match.side-folded { --side-gap: 48px; grid-template-areas: "opp opp" "phase phase" "me me" "hand hand"; }
+#match.side-folded #side { position: fixed; right: 0; top: 8px; z-index: 26; }
+#match.side-folded .side-toggle { writing-mode: vertical-rl; padding: 10px 4px; border-radius: 6px 0 0 6px; }
+/* The chat is drawn into its own container. Its log and input are the rows of the panel. */
+#match-chat { display: flex; flex: 1; min-height: 0; }
+#hand { grid-area: hand; }
+#opponent.many { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; min-height: 0; }
+/* The tabbed layout shows one opponent at a time. The other opponents are tabs along the top edge of the seat. Only the open tab has a full outline. */
+#seat-tabs, #seat-switch { display: none; }
+#match.tabbed { --edge: color-mix(in srgb, var(--open-tint, var(--line)) 50%, var(--line)); grid-template-rows: auto 1fr auto 1fr auto; grid-template-areas: "tabs side" "opp side" "phase side" "me side" "hand side"; }
+#match.tabbed.side-folded { grid-template-areas: "tabs tabs" "opp opp" "phase phase" "me me" "hand hand"; }
+#match.tabbed #seat-tabs:not([hidden]) { grid-area: tabs; display: flex; align-items: flex-end; min-width: 0; margin-bottom: -8px; }
+#seat-tabs::after { content: ''; flex: 1; align-self: flex-end; border-bottom: 1px solid var(--edge); }
+#match.tabbed #opponent.many { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+/* The open tab and its seat share a faint fill, so they look like one panel */
+#opponent.tabbed > .seat:not(.compact) { position: relative; padding: 8px 10px; border: 1px solid var(--edge); border-top: 0; border-radius: 0 0 10px 10px;
+  background: color-mix(in srgb, var(--open-tint, var(--line)) 7%, transparent); }
+#opponent.tabbed > .seat:not(.compact) .player { position: absolute; left: 12px; top: 14px; z-index: 6; }
+/* On the open player's turn the outline is gold, as on a compact seat. The glow is drawn below the seat so it does not reach the tabs. */
+#match.tabbed:has(#opponent > .seat.turn:not(.compact, [hidden])) { --edge: color-mix(in srgb, var(--accent-2) 70%, transparent); }
+#opponent.tabbed > .seat.turn:not(.compact) { box-shadow: 0 12px 22px -14px color-mix(in srgb, var(--accent-2) 30%, transparent), inset 0 -18px 30px -26px color-mix(in srgb, var(--accent-2) 40%, transparent); }
+.seat-tab { position: relative; flex: 0 1 auto; min-width: 118px; max-width: 190px; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; column-gap: 9px; align-items: center; padding: 8px 14px 9px 10px;
+  border: 1px solid transparent; border-bottom-color: var(--edge); border-radius: 12px 12px 0 0; background: none; text-align: left; }
+.seat-tab:hover { background: color-mix(in srgb, var(--surface) 60%, transparent); }
+.seat-tab + .seat-tab:not(.on)::after { content: ''; position: absolute; left: -1px; top: 26%; bottom: 26%; width: 1px; background: var(--line); }
+.seat-tab.on + .seat-tab::after { display: none; }
+.seat-tab.on { border-color: var(--edge); border-bottom-color: transparent; background: color-mix(in srgb, var(--tint) 7%, transparent); }
+.seat-tab .pic { position: relative; width: 32px; height: 32px; border-radius: 50%; }
+.seat-tab img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; filter: brightness(.7) saturate(.75); }
+.seat-tab:is(.on, .turn, .asked, :hover) img { filter: none; }
+/* A gold ring shows whose turn it is. The selectable ring marks a seat that holds a card that can be picked. When both apply, two rings are drawn. */
+.seat-tab.turn .pic { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--accent-2); }
+.seat-tab.asked .pic { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--selectable); }
+.seat-tab.turn.asked .pic { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--accent-2), 0 0 0 5.5px var(--bg-deep), 0 0 0 7.5px var(--selectable); }
+.seat-tab .who { min-width: 0; font-size: 12.5px; font-weight: 600; color: color-mix(in srgb, var(--text) 72%, var(--muted)); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seat-tab.on .who { color: var(--tint); font-weight: 700; }
+.seat-tab .life { font-size: 15px; line-height: 1; font-variant-numeric: tabular-nums; }
+.seat-tab.turn .life { color: var(--accent-2); }
+.seat-tab .note { display: none; }
+/* A pale dot shows that a seat's board changed while it was not shown. It is not gold, because gold marks the turn. */
+:is(.seat-tab, #seat-switch) .dot { display: none; position: absolute; right: -3px; top: -3px; width: 9px; height: 9px; border-radius: 50%; background: #d7e8ff; box-shadow: 0 0 0 2.5px var(--bg-deep); }
+:is(.seat-tab, #seat-switch).changed .dot { display: block; }
+.seat-tab .skull-mark { display: none; position: absolute; inset: 0; place-items: center; color: #d8dde5; }
+.seat-tab .skull-mark svg { width: 52%; height: 52%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 3px #000); }
+.seat-tab.out { opacity: .5; }
+.seat-tab.out img { filter: grayscale(1) brightness(.32); }
+.seat-tab.out .skull-mark { display: grid; }
+.seat-tab.out .who { text-decoration: line-through; }
+.seat-tab.out .life { visibility: hidden; }
+/* When a tabbed seat is shown, its content slides in from the side of its tab. The seat's frame does not move. */
+#opponent.tabbed > .seat:is(.from-right, .from-left) > * { animation: seat-from-right .24s cubic-bezier(.2,.7,.3,1) both; }
+#opponent.tabbed > .seat.from-left > * { animation-name: seat-from-left; }
+@keyframes seat-from-right { from { opacity: 0; translate: 36px 0; } }
+@keyframes seat-from-left { from { opacity: 0; translate: -36px 0; } }
+html[data-motion="reduced"] #opponent.tabbed > .seat > * { animation: none; }
+/* While the seat was hidden it had no size to fit its cards to. So the cards take their size at once and do not grow as they slide in. */
+#opponent.tabbed > .seat:is(.from-right, .from-left), #opponent.tabbed > .seat:is(.from-right, .from-left) .group { transition: none; }
+/* Quadrants: the table is split into four quarters. You are in the bottom left with your hand below you. The other players go round the table. */
+/* The quarters are the same size whatever their cards need. Your hand is inside your quarter, along its bottom, so the phase pill sits in the middle */
+#match.quads { grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--side-w); grid-template-areas: "q1 q2 side" "phase phase side" "me q3 side"; }
+#match.quads[data-opponents="2"] { grid-template-areas: "q1 q2 side" "phase phase side" "me me side"; }
+#match.quads.side-folded { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "q1 q2" "phase phase" "me q3"; }
+#match.quads #hand { grid-area: me; }
+#match.many.quads #me { margin-bottom: 0; }
+#match.quads #opponent { display: contents; }
+#match.quads #opponent > .seat:nth-child(1) { grid-area: q1; }
+#match.quads #opponent > .seat:nth-child(2) { grid-area: q2; }
+#match.quads #opponent > .seat:nth-child(3) { grid-area: q3; }
+/* The third seat is on your side of the table, so its lands are nearest the bottom edge, as yours are */
+#match.quads #opponent > .seat:nth-child(3) .battlefield { flex-direction: column-reverse; align-self: end; }
+/* Your teammate's quarter is drawn like yours: cards nearest the bottom edge, portrait and piles at the bottom left, and the hand face up and fanned beside them */
+.seat > .mate-hand { display: none; }
+#match.quads .seat.mate { position: relative; grid-template-rows: minmax(0, 1fr) calc(var(--hand-h) * .8 + var(--hand-room)); gap: 0; align-items: stretch; border: 1px solid transparent; border-radius: 10px; }
+#match.quads .seat.mate .player { position: absolute; left: 20px; bottom: 18px; z-index: 6; }
+#match.quads .seat.mate .player-extra { position: absolute; left: 0; bottom: calc(100% + 10px); }
+#match.quads .seat.mate .battlefield { padding-bottom: var(--glow); padding-top: max(calc(var(--glow) + 6px), calc(var(--card-w) * var(--fit, 1) * .38 - 2px)); }
+#match.quads .seat.mate > .mate-hand:not([hidden]) { display: flex; justify-content: center; align-items: flex-start; padding-top: var(--hand-room); }
+#match.quads .seat.mate > .mate-hand .card { flex: none; width: calc(var(--hand-w) * .85); height: calc(var(--hand-h) * .85); box-shadow: 0 3px 12px #0009;
+  transform: translateX(var(--shift, 0px)) translateY(var(--drop, 0px)) rotate(var(--tilt, 0deg)); transform-origin: 50% 100%; transition: transform .2s cubic-bezier(.2, .8, .2, 1); }
+#match.quads .seat.mate > .mate-hand .card + .card { margin-left: var(--step, 0px); }
+#match.quads .seat.mate > .mate-hand .card:hover { transform: translateY(-24%) scale(1.6); z-index: 10; box-shadow: 0 10px 30px #000c; }
+/* A compact seat shows the player's details in a row across the top, in their colour. Their cards are below, in a border with no fill, like your seat. */
+.seat.compact { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); align-items: stretch; gap: 8px; padding: 8px 10px; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tint) 22%, var(--line)); --tile-w: 54px; }
+/* The turn is shown in gold, as it is everywhere else, not in the player's own colour */
+/* Your seat has no panel of its own, so on your turn it gets the same border and glow as the other seats */
+#match.many #me { border: 1px solid transparent; border-radius: 10px; }
+/* The border continues under the hand and off the bottom edge, so the whole bottom of the screen reads as yours. The padding keeps the cards in place. */
+#match.many #me { --under: calc(var(--hand-h) * .8 + var(--hand-room) + 8px + 16px); margin-bottom: calc(var(--under) * -1); padding-bottom: var(--under); }
+#match.many #me.turn, .seat.compact.turn, #match.quads .seat.mate.turn { border-color: color-mix(in srgb, var(--accent-2) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-2) 20%, transparent), 0 0 22px color-mix(in srgb, var(--accent-2) 14%, transparent); }
+/* The tiles line up with the top of the portrait, as they do for the player across the table */
+.seat.compact .player { align-items: flex-start; flex-wrap: wrap; }
+.seat.compact .avatar { width: 46px; height: 46px; flex: none; }
+.seat.compact .avatar .initial { font-size: 18px; }
+.seat.compact .avatar .life { font-size: 11px; bottom: -7px; padding: 0 6px; }
+.seat.compact .avatar .ai-badge { width: 20px; height: 20px; left: -5px; top: -5px; }
+.seat.compact .avatar.first::after { right: -22px; top: -9px; font-size: 10px; padding: 1px 5px; }
+.seat.compact .name { color: var(--tint); font-weight: 700; font-size: 13px; }
+.seat.compact .zone-tiles { gap: 4px; }
+.seat.compact .zone-tile .zone-name { font-size: 9px; letter-spacing: 0; }
+.seat.compact .zone-tile .zone-count { font-size: 11px; min-width: 18px; }
+.seat.compact .battlefield { max-height: none; }
+#out-banner .skull svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.seat.out .name { color: var(--muted); }
+.seat.out .battlefield, .seat.out .zone-tiles, .seat.out .hand-fan, .seat.out .emblems { filter: grayscale(1) brightness(.55); opacity: .6; pointer-events: none; }
+/* When the player looks at the final board, every seat shows as it ended, including the loser's */
+#match:has(#game-over.viewing) .seat.out :is(.battlefield, .zone-tiles, .hand-fan, .emblems) { filter: none; opacity: 1; pointer-events: auto; }
+/* An empty seat is nearly black and hatched, so it never looks like a live seat */
+.seat.compact.out { border-style: dashed; border-color: #262d38; box-shadow: none;
+  background: repeating-linear-gradient(135deg, #07090d 0 10px, #0a0d12 10px 20px); }
+#out-banner { position: fixed; left: 50%; top: 18px; transform: translateX(calc(-50% - var(--side-w) / 2)); z-index: 45; display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 16px;
+  border-radius: 12px; background: color-mix(in srgb, var(--surface) 96%, transparent); border: 1px solid var(--line-bright); box-shadow: 0 16px 40px #000b; animation: out-in .35s ease both; }
+#out-banner .skull { width: 26px; height: 26px; color: var(--muted); flex: none; }
+#out-banner b { font-size: 14px; }
+#out-banner p { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; }
+#out-banner .leave { color: var(--concede); border-color: color-mix(in srgb, var(--concede) 45%, var(--line)); }
+@keyframes out-in { from { opacity: 0; transform: translate(calc(-50% - var(--side-w) / 2), -10px); } }
+/* A seat's card size (battlefield.ts) animates to its new value while a card flies. So the board does not jump when the card lands. */
+@property --fit { syntax: '<number>'; inherits: true; initial-value: 1; }
+.seat { transition: --fit .6s cubic-bezier(.2,.7,.3,1); }
+/* Each group of cards has its own size (battlefield.ts), which animates the same way */
+.row > .group { transition: --fit .6s cubic-bezier(.2,.7,.3,1); }
+/* The seats are also children of #match. The #match transition rule uses two ids, so this rule names the seats by id too. */
+html[data-motion="reduced"] .seat, html[data-motion="reduced"] #match > :is(#me, #opponent),
+html[data-motion="reduced"] .row > .group { transition: none; }
+.seat { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: center; min-height: 0; }
+/* The battlefield scrolls only when battlefield.ts marks it crowded. Otherwise a moving card would flash a scrollbar and be cut off at the edge. */
+.battlefield { display: flex; flex-direction: column; gap: 8px; overflow: visible; scrollbar-width: thin; min-height: 0; max-height: 100%; padding: var(--glow); }
+.battlefield.crowded { overflow-y: auto; }
+.battlefield.crowded.settling { overflow: hidden; }
+/* Lands are nearest their owner's edge. Your board is placed directly above the hand, so the two read as one side of the table. */
+#me .battlefield { flex-direction: column-reverse; align-self: end; }
+/* Space for an attacker's forward step and its chevron is always reserved, not only in combat. So the cards do not resize when an attack starts or ends. */
+#me .battlefield { padding-top: max(calc(var(--glow) + 6px), calc(var(--card-w) * var(--fit, 1) * .38 - 2px)); }
+#opponent .battlefield { padding-bottom: max(calc(var(--glow) + 20px), calc(var(--card-w) * var(--fit, 1) * .38 + 14px)); }
+/* Each row holds two groups. An empty group takes no space, so a single group stays in the middle. */
+.row { display: flex; gap: 20px; min-height: calc(var(--card-h) * var(--fit, 1) * .6); padding-top: 16px; align-items: flex-end; }
+/* A group stays on one line unless battlefield.ts splits it over two. It never shrinks, because the sizing already makes the row fit. */
+.row > .group { flex: 1 0 auto; display: flex; flex-wrap: nowrap; align-items: flex-end; }
+/* A split group wraps at the width battlefield.ts sets. The gap between its lines leaves room for a back-line attacker to step forward. */
+.row > .group.two { max-width: calc(var(--split-w) * var(--fit, 1) + 2px); flex-wrap: wrap; align-content: flex-end; row-gap: calc(14px + (var(--card-h) - var(--card-w) * .9) / 2 * var(--fit, 1)); }
+.row > .group:first-child { justify-content: flex-start; }
+.row > .group:last-child { justify-content: flex-end; }
+.row:has(> .group:empty) > .group { justify-content: center; }
+.row > .group:empty { display: none; }
+/* The grid is size-contained, so its width does not change the board's width. battlefield.ts measures the board to size the cards. */
+/* battlefield.ts counts only one gap, the far group's margin. A grid gap would also add space before the empty first column. */
+.row:not(.paired):has(> .group:first-child:not(:empty)):has(> .group:last-child:not(:empty)) { display: grid; grid-template-columns: 1fr auto 1fr; column-gap: 0; contain: inline-size; }
+.row:not(.paired):has(> .group:last-child:not(:empty)) > .group:first-child { grid-column: 2; justify-content: center; }
+.row:not(.paired):has(> .group:first-child:not(:empty)) > .group:last-child { grid-column: 3; justify-content: flex-end; margin-left: 52px; }
+/* The other permanents are placed just after the lands. Both groups are centred together while the row has room. */
+.row.paired { justify-content: safe center; gap: 40px; }
+.row.paired > .group { flex: 0 0 auto; justify-content: center; }
+/* Planeswalkers and battles go at the far end of the row. Their group has no width until something is in it. */
+.row > .group.far { flex: 0 0 auto; margin-left: auto; }
+/* A battle or a plane is printed sideways. So the card's box is turned along with the art. */
+.card.sideways { width: calc(var(--card-h) * var(--fit, 1)); height: calc(var(--card-w) * var(--fit, 1)); }
+.card.sideways > img {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: 90deg;
+  width: calc(var(--card-w) * var(--fit, 1)); height: calc(var(--card-h) * var(--fit, 1));
+}
+/* This number is defence counters, not toughness. A different number needs a different colour. */
+.card.battle .pt .pt-t { color: #cfe8b8; }
+/* The creatures stay in the middle, with their tokens after them. There is a wider gap before the far end. */
+/* safe: at the smallest card size a row can still be too wide. Then it keeps its start in view instead of losing both ends. */
+.row.together { justify-content: safe center; gap: 52px; }
+.row.together > .group { flex: 0 0 auto; justify-content: center; }
+/* Every slot always reserves the extra width of a tapped card. Adding it on a tap would shift the whole row. */
+.group > .slot { margin-inline: calc(((var(--card-h) * .9 - var(--card-w)) / 2 + var(--slot-gap)) * var(--fit, 1)); }
+/* Attachments are drawn behind their host. Each one shows a strip to the left of the card in front of it. */
+.slot > .card:last-child { z-index: 1; }
+/* Attached cards and a pile's lower cards fan out to the left only, so a row stays one card high. battlefield.ts counts this space. */
+.battlefield { --fan: .15; --support-indent: 28px; }
+/* The space battlefield.ts leaves between rows and beside a row. The phone layout sets these smaller. */
+.battlefield { --row-gap-0: 40px; --row-gap-1: 52px; --fit-spare: 56px; }
+/* The support group is inset from the row's edge so it does not line up with the stack panel above. battlefield.ts counts this space. */
+.row > .group.support { margin-right: var(--support-indent); }
+.slot { position: relative; padding-left: calc(var(--behind, 0) * var(--card-w) * var(--fit, 1) * var(--fan)); }
+/* Each card behind the host is its own layer, so its P/T, badges and icons also stay behind the host */
+.slot > .card:not(:last-child) { position: absolute; z-index: 0; top: 0; left: calc(var(--under) * var(--card-w) * var(--fit, 1) * var(--fan)); }
+.slot > .card:not(:last-child):hover { z-index: 6; }
+/* A tapped host moves down so its bottom edge lines up with its attachments. The cards behind it move left by the extra width of the turned card. */
+.slot > .card:not(:last-child) ~ .card.tapped:last-child { top: calc((var(--card-h) - var(--card-w) * .9) / 2 * var(--fit, 1)); }
+.slot:has(> .card.tapped:last-child) > .card:not(:last-child) {
+  left: calc(var(--under) * var(--card-w) * var(--fit, 1) * var(--fan) - (var(--card-h) * .9 - var(--card-w)) / 2 * var(--fit, 1)); }
+/* A player's details take no column from the battlefield. Yours are in the corner beside your hand. An opponent's are along the top of their half. */
+.player { display: flex; align-items: flex-end; gap: 10px; }
+.player-id { display: grid; justify-items: center; gap: 6px; }
+.player-extra { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.player-extra:not(:has(> :not(:empty):not([hidden]))) { display: none; }
+.seat.compact .player-extra { display: contents; }
+.player-id .name { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px 3px #000, 0 0 8px #000c; }
+/* In a compact seat the hand is drawn small beside the name. So the player's row ends with the tiles and the cards get more height. */
+.seat.compact .player-id { grid-template-columns: auto auto; gap: 3px 2px; align-items: center; }
+.seat.compact .player-id .avatar { grid-column: 1 / 3; }
+.seat.compact .player-id .name { max-width: 84px; }
+.seat.compact .hand-fan { padding: 0 4px 0 0; }
+.seat.compact .hand-fan .backs { width: 28px; height: 20px; }
+.seat.compact .hand-fan .backs i { left: 7px; width: 13px; height: 17px; border-radius: 2px; }
+.seat.compact .hand-fan .hand-count { font-size: 12px; }
+/* In a full seat the portrait is on its own row, on the side the player faces. It is above the tiles for you and below them for an opponent. */
+.seat:not(.compact) .player { flex-direction: column; align-items: flex-start; gap: 10px; }
+.seat:not(.compact) .player-id { grid-template-columns: auto auto; grid-template-rows: 1fr auto auto 1fr; column-gap: 12px; row-gap: 0; align-items: center; justify-items: start; }
+.seat:not(.compact) .player-id .avatar { grid-row: 1 / 5; }
+.seat:not(.compact) .player-id .name { grid-row: 2; font-weight: 700; font-size: 15px; max-width: 230px; }
+.seat:not(.compact) .player-id .hand-fan { grid-row: 3; margin-left: -4px; }
+#opponent.seat { position: relative; }
+#opponent.seat .player { position: absolute; left: 12px; top: 10px; z-index: 6; }
+#opponent.seat .player-id { order: 1; }
+#opponent.seat .player-extra { order: 2; }
+#me .player { position: absolute; left: 20px; bottom: 18px; z-index: 6; }
+/* This is placed above the player's row, not beside it, so a floating mana pool never pushes the hand sideways */
+#me .player-extra { position: absolute; left: 0; bottom: calc(100% + 10px); }
+.player .mana { transition: opacity .2s ease; }
+@starting-style { .player .mana { opacity: 0; } }
+.avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; position: relative; cursor: pointer; border: 2px solid var(--line); }
+.avatar .portrait { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.avatar .ai-badge { display: none; position: absolute; left: -6px; top: -6px; width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1px solid var(--accent-2); padding: 3px; }
+.avatar.ai .ai-badge { display: block; }
+/* Commander damage is shown as an arc on the portrait's rim, under the life badge. A chip on the left also shows it, like the computer badge. */
+.avatar .life { z-index: 2; }
+.avatar .cmdr-arc { position: absolute; inset: -4px; z-index: 1; pointer-events: none; }
+.avatar .cmdr-arc svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.avatar .cmdr-arc circle { fill: none; stroke: var(--text); stroke-width: 3.2; stroke-linecap: round; opacity: .85; }
+.avatar .cmdr-chip { position: absolute; left: -12px; bottom: 6px; z-index: 3; display: flex; align-items: center; gap: 3px; height: 20px; padding: 0 6px 0 4px;
+  border-radius: 10px; background: var(--bg); border: 1px solid var(--line-bright); font-size: 11.5px; font-weight: 800; line-height: 1; color: var(--text); }
+.avatar .cmdr-chip svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+/* On a small portrait the life badge uses the bottom, so the chip goes at the top right */
+.seat.compact .avatar .cmdr-chip { left: auto; right: -18px; top: -6px; bottom: auto; height: 17px; font-size: 10px; }
+/* At 15 or more, the arc and the chip turn bright. The warning uses brightness and glow, not only hue. */
+.avatar .cmdr-arc.near circle { stroke: #fff4ee; opacity: 1; filter: drop-shadow(0 0 2px #ff3b2a) drop-shadow(0 0 6px #ff2a14aa); }
+.avatar .cmdr-chip.near { border-color: #ff5a3c; color: #fff; box-shadow: 0 0 7px #ff3b2a99; }
+#zoom .cmdr-taken { display: grid; gap: 6px; padding: 6px 0 8px; border-bottom: 1px solid var(--line); }
+#zoom .cmdr-taken h6 { margin: 0; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+#zoom .cmdr-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+#zoom .cmdr-row .art { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2) no-repeat 50% 26% / 240% auto; box-shadow: 0 0 0 1px #000c; }
+#zoom .cmdr-row .who { display: grid; gap: 3px; min-width: 0; }
+#zoom .cmdr-row .nm { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#zoom .cmdr-row .bar { height: 4px; border-radius: 2px; background: #ffffff1a; overflow: hidden; }
+#zoom .cmdr-row .bar i { display: block; height: 100%; border-radius: 2px; background: #c9ced6; }
+#zoom .cmdr-row .v b { font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; }
+#zoom .cmdr-row .v small { color: var(--muted); font-size: 11px; font-weight: 600; }
+#zoom .cmdr-row.near .bar i { background: #fff4ee; box-shadow: 0 0 5px #ff3b2a; }
+#zoom .cmdr-row.near .v b { color: #fff; text-shadow: 0 0 6px #ff3b2a; }
+.ai-badge svg { width: 100%; height: 100%; fill: var(--text); }
+.ai-badge svg .eye { fill: var(--bg); }
+.avatar.active { border-color: var(--accent-2); }
+.avatar.lost { border-color: #2a3240; }
+.avatar.lost .portrait { filter: grayscale(1) brightness(.45); animation: lost-return .9s ease 1.8s both; }
+/* The portrait shatters first. Its grey copy fades back in only after the pieces are gone. */
+@keyframes lost-return { from { opacity: 0; } }
+.avatar.lost .initial { opacity: .3; }
+.avatar.lost .skull-mark { display: grid; }
+.avatar.lost :is(.life, .cmdr-arc, .cmdr-chip) { display: none; }
+.avatar .skull-mark { display: none; position: absolute; inset: 0; z-index: 2; place-items: center; color: #d8dde5; pointer-events: none; }
+.avatar .skull-mark svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 3px #000); }
+.avatar.selectable { box-shadow: 0 0 0 3px var(--selectable); }
+.avatar.highlighted { box-shadow: 0 0 0 3px var(--pick), 0 0 12px 2px color-mix(in srgb, var(--pick) 55%, transparent); }
+.avatar .initial { font-size: 28px; font-weight: 700; }
+.avatar .life { position: absolute; bottom: -8px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 0 8px; font-weight: 700; }
+/* Damage is made obvious. The life number grows for a moment, its badge flashes, and the amount floats up from the avatar. */
+.avatar .life.hurt { animation: life-hurt .5s ease-out; }
+.avatar .life.healed { animation: life-healed .5s ease-out; }
+@keyframes life-hurt { 30% { transform: scale(1.5); color: #ffb4a2; border-color: var(--damage); box-shadow: 0 0 14px var(--damage); } }
+@keyframes life-healed { 30% { transform: scale(1.35); color: #bfe9ff; border-color: #5cc8ff; box-shadow: 0 0 14px #5cc8ff; } }
+.avatar .life-change { position: absolute; left: 50%; bottom: -4px; z-index: 5; transform: translateX(-50%); font-size: 22px; font-weight: 800; pointer-events: none; text-shadow: 0 2px 6px #000, 0 0 14px #000; animation: life-float 1.1s ease-out forwards; }
+.avatar .life-change.hurt { color: var(--damage); }
+.avatar .life-change.healed { color: #5cc8ff; }
+@keyframes life-float { from { opacity: 0; transform: translate(-50%, 6px) scale(.7); } 25% { opacity: 1; transform: translate(-50%, -6px) scale(1.1); } to { opacity: 0; transform: translate(-50%, -46px) scale(1); } }
+.zone-tiles { display: grid; grid-auto-flow: column; grid-auto-columns: var(--tile-w); gap: 6px; }
+.zone-tile { width: var(--tile-w); height: calc(var(--tile-w) * 1.4); padding: 0; position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+.zone-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.zone-tile.back, .card.back { background: var(--sleeve, none) center / cover, repeating-linear-gradient(45deg, var(--back-a) 0 6px, var(--back-b) 6px 12px); border: 2px solid var(--back-edge); }
+.zone-tile.empty { background: color-mix(in srgb, var(--bg-deep) 78%, transparent); border: 2px dotted var(--line-bright); }
+/* The label has a dark strip behind it, so it stays readable over a sleeve or a card's art */
+.zone-tile .zone-name { position: absolute; left: 2px; right: 2px; top: 2px; z-index: 2; padding: 1px 2px; border-radius: 4px; background: #000000c4; color: var(--text); font-size: 10.5px; letter-spacing: .03em; text-align: center; }
+.zone-tile .zone-count { position: absolute; z-index: 2; right: 3px; bottom: 3px; min-width: 20px; background: var(--bg); border: 1px solid var(--accent-2); border-radius: 10px; padding: 0 5px; font-size: 12px; font-weight: 700; color: var(--text); }
+.zone-tile:hover { border-color: var(--accent-2); }
+/* Each particle has its own position, delay and size, so the six do not move together */
+.zone-tile { --ash: #cdc3b3; --void: #9fe7ff; }
+.zone-tile .ambient { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.zone-tile .ambient i { position: absolute; width: 5px; height: 5px; border-radius: 50%; opacity: 0; }
+.zone-tile .ambient i:nth-child(1) { --x: 18%; --d: 0s; --s: 2px; }
+.zone-tile .ambient i:nth-child(2) { --x: 72%; --d: -2.1s; --s: 3px; }
+.zone-tile .ambient i:nth-child(3) { --x: 44%; --d: -4.2s; --s: 1.5px; }
+.zone-tile .ambient i:nth-child(4) { --x: 30%; --d: -6.3s; --s: 2.5px; }
+.zone-tile .ambient i:nth-child(5) { --x: 84%; --d: -8.4s; --s: 2px; }
+.zone-tile .ambient i:nth-child(6) { --x: 58%; --d: -10.5s; --s: 1.5px; }
+/* Graveyard particles look like dust, not lights. They are small and dim with almost no glow. They drift side to side as they fall. */
+.zone-tile[data-zone="Graveyard"] .ambient i { left: var(--x); top: 0; width: var(--s); height: var(--s); background: var(--ash); box-shadow: 0 0 2px var(--ash); animation: dust 12.6s ease-in-out infinite var(--d); }
+@keyframes dust {
+  0% { opacity: 0; transform: translate(0, -4px); }
+  18% { opacity: .55; transform: translate(5px, calc(var(--tile-w) * .22)); }
+  40% { transform: translate(-3px, calc(var(--tile-w) * .5)); }
+  62% { opacity: .45; transform: translate(6px, calc(var(--tile-w) * .78)); }
+  82% { opacity: .3; transform: translate(-2px, calc(var(--tile-w) * 1.05)); }
+  100% { opacity: 0; transform: translate(3px, calc(var(--tile-w) * 1.3)); }
+}
+/* Screen blending makes each layer of the exile effect add light instead of covering the others */
+.zone-tile[data-zone="Exile"] .ambient { mix-blend-mode: screen; }
+.zone-tile[data-zone="Exile"] .ambient::before { content: ''; position: absolute; left: 50%; top: 48%; width: 78%; height: 30%; margin: -15% 0 0 -39%; border-radius: 50%;
+  background: conic-gradient(from 200deg, transparent 0 10%, color-mix(in srgb, var(--void) 30%, transparent) 30%, transparent 55%, color-mix(in srgb, var(--void) 18%, transparent) 80%, transparent 95%);
+  mask: radial-gradient(closest-side, transparent 52%, #000 62%, #000 82%, transparent 100%); filter: blur(1px); animation: exile-turn 30s linear infinite; }
+.zone-tile[data-zone="Exile"] .ambient::after { content: ''; position: absolute; left: 50%; top: 48%; width: 34%; aspect-ratio: 1; margin: -17% 0 0 -17%; border-radius: 50%; background: #020308;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--void) 80%, transparent), 0 0 calc(var(--tile-w) * .05) color-mix(in srgb, var(--void) 45%, transparent), inset 0 0 calc(var(--tile-w) * .04) color-mix(in srgb, var(--void) 30%, transparent);
+  animation: exile-breathe 4.8s ease-in-out infinite; }
+.zone-tile[data-zone="Exile"] .ambient i { left: 50%; top: 48%; width: calc(var(--tile-w) * .11); height: calc(var(--tile-w) * .03); margin: calc(var(--tile-w) * -.015) calc(var(--tile-w) * -.055);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--void) 95%, #fff) 0 28%, color-mix(in srgb, var(--void) 22%, transparent) 42%, transparent 100%);
+  animation: exile-streak 5.6s cubic-bezier(.5, 0, .9, .6) infinite var(--d); }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(1) { --a: 0deg; }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(2) { --a: 60deg; }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(3) { --a: 120deg; }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(4) { --a: 180deg; }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(5) { --a: 240deg; }
+.zone-tile[data-zone="Exile"] .ambient i:nth-child(6) { --a: 300deg; }
+/* When exile has cards, the top card matters most. So the effect is hidden and only an outline pulses round the pile. */
+.zone-tile[data-zone="Exile"]:not(.empty) .ambient { display: none; }
+.zone-tile[data-zone="Exile"]:not(.empty) { animation: exile-aura 3.4s ease-in-out infinite; }
+@keyframes exile-turn { to { transform: rotate(1turn); } }
+@keyframes exile-breathe { 0%, 100% { opacity: .6; } 50% { opacity: .96; } }
+@keyframes exile-streak {
+  0% { opacity: 0; transform: scaleY(.4) rotate(var(--a)) translateX(calc(var(--tile-w) * .4)) rotate(90deg); }
+  30% { opacity: .7; }
+  100% { opacity: 0; transform: scaleY(.4) rotate(calc(var(--a) + 90deg)) translateX(calc(var(--tile-w) * .17)) rotate(90deg) scale(.5); }
+}
+@keyframes exile-aura {
+  0%, 100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--void) 30%, transparent), 0 0 calc(var(--tile-w) * .06) color-mix(in srgb, var(--void) 10%, transparent); }
+  50% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--void) 55%, transparent), 0 0 calc(var(--tile-w) * .09) color-mix(in srgb, var(--void) 20%, transparent); }
+}
+/* The planar deck is face down, so its tile always shows a small dark world. It has the graveyard's dust and the exile ring's light. */
+.zone-tile[data-zone="PlanarDeck"] { background: color-mix(in srgb, var(--bg-deep) 78%, transparent); border: 2px solid var(--line-bright); }
+.zone-tile[data-zone="PlanarDeck"] .ambient::before { content: ''; position: absolute; left: 50%; top: 50%; width: 38%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(circle at 27% 22%, color-mix(in srgb, var(--void) 34%, #020308), color-mix(in srgb, var(--void) 10%, #020308) 46%, #020308 74%);
+  box-shadow: 0 0 calc(var(--tile-w) * .06) color-mix(in srgb, var(--void) 16%, transparent), inset 1px 1px 0 color-mix(in srgb, var(--void) 48%, transparent); }
+/* The ring is drawn twice: the whole ring behind the world, and its near half in front */
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(1), .zone-tile[data-zone="PlanarDeck"] .ambient::after { content: ''; position: absolute; left: 50%; top: 50%; width: 74%; height: 16%; box-sizing: border-box; translate: -50% -50%; rotate: -18deg; border: 1px solid var(--void); border-radius: 50%; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(1) { z-index: -1; opacity: .3; }
+.zone-tile[data-zone="PlanarDeck"] .ambient::after { clip-path: inset(50% -2px -2px -2px); animation: exile-breathe 4.8s ease-in-out infinite; }
+.zone-tile[data-zone="PlanarDeck"] .ambient { isolation: isolate; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(n + 2) { width: var(--s); height: var(--s); background: var(--ash); box-shadow: 0 0 2px var(--ash); animation: planar-star 9s ease-in-out infinite var(--d); }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(2) { left: 84%; top: 34%; --s: 2px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(3) { left: 14%; top: 40%; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(4) { left: 24%; top: 80%; --s: 2px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(5) { left: 74%; top: 68%; --s: 1.5px; }
+.zone-tile[data-zone="PlanarDeck"] .ambient i:nth-child(6) { left: 40%; top: 26%; }
+@keyframes planar-star { 0%, 100% { opacity: .1; } 50% { opacity: .5; } }
+html[data-motion="reduced"] .zone-tile .ambient { display: none; }
+html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient { display: block; }
+html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient i, html[data-motion="reduced"] .zone-tile[data-zone="PlanarDeck"] .ambient::after { animation: none; opacity: .75; }
+html[data-motion="reduced"] .zone-tile[data-zone="Exile"] { animation: none; }
+/* An opponent's hand is up to three card backs fanned from one point, in their sleeve. The count is shown beside them. */
+.player { position: relative; }
+.hand-fan { display: flex; align-items: center; gap: 4px; padding: 2px 6px 2px 2px; background: none; border-color: transparent; border-radius: 8px; }
+.hand-fan:hover { background: var(--surface-2); }
+.hand-fan .backs { position: relative; width: 40px; height: 34px; }
+.hand-fan .backs i { position: absolute; left: 10px; bottom: 0; width: 20px; height: 28px; border-radius: 3px; transform-origin: 50% 100%; background: var(--sleeve, none) center / cover, repeating-linear-gradient(45deg, var(--back-a) 0 3px, var(--back-b) 3px 6px); border: 1px solid var(--back-edge); box-shadow: 0 1px 4px #000a; }
+.hand-fan .backs i:nth-child(1) { transform: rotate(-16deg); }
+.hand-fan .backs i:nth-child(3) { transform: rotate(16deg); }
+.hand-fan[data-count="0"] .backs { display: none; }
+.hand-fan[data-count="0"] .backs i, .hand-fan[data-count="1"] .backs i:not(:nth-child(2)), .hand-fan[data-count="2"] .backs i:nth-child(3) { display: none; }
+.hand-fan[data-count="2"] .backs i:nth-child(1) { transform: rotate(-8deg); }
+.hand-fan[data-count="2"] .backs i:nth-child(2) { transform: rotate(8deg); }
+.hand-fan .hand-count { font-size: 14px; font-weight: 700; }
+.player-counters { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.player-counter { font-size: 12px; font-weight: 600; background: var(--surface-2); border: 1px solid var(--accent-2); border-radius: 10px; padding: 0 8px; }
+.player-counters:empty, .emblems:empty { display: none; }
+.emblems { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+/* An emblem or effect is a small framed tile of its card's art. A label along the bottom says what it is. */
+.emblem { width: 74px; height: 58px; border-radius: 6px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; cursor: pointer; position: relative;
+  box-shadow: 0 0 0 1.5px var(--accent-2), 0 0 0 2.5px color-mix(in srgb, var(--accent-2) 40%, #000), 0 4px 10px #0009; }
+.emblem img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+/* When no art crop is available, the whole card is used. It is sized and shifted so only its art box shows. */
+.emblem.whole img { inset: auto; left: -10.2%; top: -22%; width: 120.5%; height: auto; object-fit: fill; }
+.emblem .initials { display: none; font-weight: 700; font-size: 16px; }
+.emblem.noimg img { display: none; }
+.emblem.noimg .initials { display: block; }
+.emblem .band { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 4px 2px; display: flex; gap: 3px; align-items: center; justify-content: center;
+  font: 800 8px/1 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--accent-2) 60%, #fff);
+  background: linear-gradient(180deg, transparent, #000d 50%); }
+.emblem .band i { display: flex; width: 9px; height: 9px; }
+.emblem .band svg { width: 100%; height: 100%; }
+/* The extra cost of a commander over its printed cost, shown in place of the band. It is in words because a bare "+6" looks like a counter. */
+.emblem .tax { position: absolute; left: 0; right: 0; bottom: 0; padding: 7px 0 2px; text-align: center; font-size: 8.5px; font-weight: 800; color: var(--accent-2); background: linear-gradient(180deg, transparent, #000000e0 38%); }
+.emblem .tax:empty { display: none; }
+.emblem:has(.tax:not(:empty)) .band { display: none; }
+.emblem .n { position: absolute; right: 2px; top: 2px; min-width: 20px; height: 17px; padding: 0 4px; box-sizing: border-box; display: grid; place-items: center; background: #050608; color: #fff; border: 1px solid #ffffff38; border-radius: 9px; font-size: 11px; font-weight: 800; }
+.emblem .n:empty { display: none; }
+/* The Ring's level is a gold numeral, so it does not read as a pile's count */
+.emblem.level .n { color: var(--accent-2); border-color: color-mix(in srgb, var(--accent-2) 55%, #000); font-family: Georgia, "Times New Roman", serif; letter-spacing: .04em; }
+/* A commander, signature spell or avatar is a card the player reads or activates, so it is drawn as a small card */
+.cmd-tile { width: 52px; height: 72px; border-radius: 5px; overflow: hidden; position: relative; cursor: pointer; background: var(--surface-2); box-shadow: 0 3px 8px #0009, inset 0 0 0 1px #ffffff2a; }
+.cmd-tile img { width: 100%; height: 100%; object-fit: cover; }
+.cmd-tile.noimg img { display: none; }
+.cmd-tile .band { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 1px 2px; text-align: center; font-size: 8.5px; font-weight: 800; color: var(--text); background: linear-gradient(180deg, transparent, #000000e0 38%); white-space: nowrap; }
+.cmd-tile .band:empty { display: none; }
+
+/* Day and night sit at the left end of the centre line, which both players share. The medallion is a sun on one face and a moon on the other, so a change of time turns it over. */
+#sky { grid-area: phase; justify-self: start; align-self: center; z-index: 24; pointer-events: none; display: flex; align-items: center; gap: 11px; margin-left: 25px; }
+#sky .medal { width: 46px; height: 46px; flex: none; perspective: 300px; }
+#sky .flip { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.5, 0, .2, 1); }
+#sky[data-time="Night"] .flip { transform: rotateY(180deg); }
+#sky .face { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; }
+#sky .sun { box-shadow: 0 0 0 1.5px var(--accent-2), 0 0 0 2.5px #5a430d, 0 4px 12px #000a, 0 0 16px #f2c34440;
+  background: radial-gradient(circle, #fff6d4 0 18%, #f7d36c 19% 30%, transparent 31%), repeating-conic-gradient(from 4deg, #f2c344aa 0 9deg, transparent 9deg 30deg), radial-gradient(circle, #4a3510, #1a1205 75%); }
+#sky .moon { transform: rotateY(180deg); box-shadow: 0 0 0 1.5px #c9d6ee, 0 0 0 2.5px #39445c, 0 4px 12px #000a, 0 0 16px #9fb3dd40;
+  background: radial-gradient(circle at 60% 40%, #111a2c 0 25%, transparent 26%), radial-gradient(circle at 47% 50%, #eef2fb 0 31%, transparent 32%),
+    radial-gradient(circle at 24% 26%, #fff 0 2%, transparent 3%), radial-gradient(circle at 76% 72%, #fff 0 1.6%, transparent 2.6%), radial-gradient(circle at 30% 78%, #ffffffaa 0 1.3%, transparent 2.3%),
+    radial-gradient(circle, #1a2540, #0b1120 75%); }
+#sky .when { font-size: 10.5px; font-weight: 800; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #f0c86a; text-shadow: 0 1px 3px #000; transition: color .8s ease; }
+#sky[data-time="Night"] .when { color: #c9d6ee; }
+html[data-motion="reduced"] #sky :is(.flip, .when) { transition: none; }
+/* The table background cools slowly, so it looks like the sky changing and not the page redrawing */
+#match::after { transition: filter .8s ease; }
+#match.night::after { filter: brightness(.78) saturate(.8) hue-rotate(-10deg); }
+
+/* Floating mana is a labelled pool with a pulsing border, because it lasts only until the step ends */
+.mana { display: grid; justify-items: center; gap: 4px; padding: 5px 8px 6px; border: 1px solid var(--accent-2); border-radius: 10px; background: color-mix(in srgb, var(--accent-2) 10%, var(--surface)); animation: floating 2.4s ease-in-out infinite; }
+.mana-label { font-size: 9.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); }
+.mana-chips { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.mana-chip { display: flex; align-items: center; gap: 3px; padding: 2px 7px 2px 3px; border-radius: 12px; background: var(--surface-2); border-color: var(--line); font-size: 13px; font-weight: 700; }
+.mana-chip .sym { width: 18px; height: 18px; margin: 0; filter: drop-shadow(0 1px 1px #000a); }
+.mana-chip:hover:not(:disabled) { border-color: var(--accent-2); }
+.mana-chip:disabled { opacity: 1; cursor: default; }
+@keyframes floating { 50% { box-shadow: 0 0 6px color-mix(in srgb, var(--accent-2) 25%, transparent); } }
+/* Phase bar: a pill on the divider shows whose turn it is, the five phases and the current step. It opens a grid of stops. */
+#phase-strip { display: flex; justify-content: center; position: relative; --pill-ms: 240ms; --pill-ease: cubic-bezier(.2,.7,.2,1); interpolate-size: allow-keywords; }
+#phase-strip .pill { position: relative; display: flex; align-items: center; gap: 9px; height: 38px; padding: 0 13px 0 4px; border-radius: 19px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; white-space: nowrap; cursor: pointer; }
+#phase-strip .pill.open { background: var(--surface-2); border-color: #4a5563; }
+/* The whole outline is lit while you hold priority, on any player's turn */
+#phase-strip .pill.priority { border-color: var(--accent-2); box-shadow: 0 0 5px color-mix(in srgb, var(--accent-2) 20%, transparent); }
+#phase-strip .glyph { display: block; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+#phase-strip .owner { display: flex; align-items: center; gap: 7px; height: 30px; padding: 0 11px 0 3px; border-radius: 15px; background: var(--surface-2); overflow: hidden; }
+#phase-strip .owner img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--accent-2); }
+#phase-strip .owner img + img { margin-left: -18px; }
+#phase-strip .owner b { font-weight: 700; }
+#phase-strip .owner .turn { color: var(--muted); font-size: 11.5px; }
+#phase-strip .track { position: relative; display: flex; align-items: center; gap: 2px; }
+/* The brass highlight under the current phase, moved by phasebar.ts */
+#phase-strip .slide { position: absolute; left: 0; top: 50%; height: 28px; margin-top: -14px; width: 0; border-radius: 14px; background: var(--brass); pointer-events: none; }
+/* The current phase's code collapses and its padding grows, so the icon moves smoothly instead of jumping */
+#phase-strip .phase { position: relative; display: flex; align-items: center; height: 30px; padding: 0; margin: 0; color: var(--muted);
+  transition: color var(--pill-ms) var(--pill-ease), padding var(--pill-ms) var(--pill-ease), margin var(--pill-ms) var(--pill-ease); }
+#phase-strip .phase .mark { width: 24px; display: flex; flex-direction: column; align-items: center; }
+#phase-strip .phase .code { margin-top: 2px; max-height: 9px; overflow: hidden; font-size: 9px; font-weight: 700; line-height: 1; letter-spacing: .06em;
+  transition: max-height var(--pill-ms) var(--pill-ease), margin-top var(--pill-ms) var(--pill-ease), opacity var(--pill-ms) var(--pill-ease); }
+#phase-strip .phase.current .code { margin-top: 0; max-height: 0; opacity: 0; }
+/* A ring round a phase's icon marks where a pass-priority-until marker is set */
+#phase-strip .phase.marked .glyph { border-radius: 50%; outline: 1.5px solid var(--select); outline-offset: 2px; }
+/* The current phase is the one thing on screen that changes every turn, so it is lit, not flat-filled */
+#phase-strip .phase.current { padding: 0 11px 0 3px; margin: 0 2px; color: var(--on-brass); font-size: 12.5px; font-weight: 650; }
+/* The name expands out of the icon when the step starts, instead of appearing at full width */
+#phase-strip .phase .label { width: 0; overflow: hidden; white-space: nowrap; transition: width var(--pill-ms) var(--pill-ease); }
+#phase-strip .phase.current .label { width: auto; }
+/* Every phase keeps its pips, but only the current phase shows them. So the pill does not jump sideways at each change of phase. */
+#phase-strip .pips { display: flex; align-items: center; gap: 2px; margin-left: 0; width: 0; opacity: 0; overflow: clip; overflow-clip-margin: 3px;
+  transition: width var(--pill-ms) var(--pill-ease), opacity var(--pill-ms) var(--pill-ease), margin-left var(--pill-ms) var(--pill-ease); }
+#phase-strip .phase.current .pips { margin-left: 8px; width: auto; opacity: 1; }
+#phase-strip .pip { width: 4px; height: 4px; border-radius: 2px; background: var(--muted); transition: width .18s ease, background-color .18s ease; }
+#phase-strip .pip.now { width: 9px; background: var(--on-brass); }
+/* Inside the brass highlight, a filled pip is a step that is past or in progress. An open pip is a step still to come. The pill shows no stops. */
+#phase-strip .current .pip { width: 5px; height: 5px; border-radius: 50%; }
+#phase-strip .current .pip { background: none; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--on-brass) 75%, transparent); }
+#phase-strip .current .pip.past { background: color-mix(in srgb, var(--on-brass) 75%, transparent); box-shadow: none; }
+#phase-strip .current .pip.now { width: 5px; background: var(--on-brass); box-shadow: none; }
+#phase-strip .pip.marked { box-shadow: 0 0 0 1.5px var(--select); }
+#phase-strip .current .pip.marked { box-shadow: 0 0 0 1.5px var(--on-brass); }
+/* The chips are beside the pill, not in it, so the pill keeps its position when a chip appears or goes */
+/* The chip for who is being waited on is left of the pill. The chip for where you are skipping to is right of it. */
+/* Each chip is a fixed distance from the pill's centre, not its edge. So it stays in place as the pill changes width between phases. A pill wider than that pushes the chip out. */
+#phase-strip .waiting { position: absolute; right: max(calc(50% + 250px), calc(100% + 24px)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px 0 8px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+#phase-strip .waiting b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; min-width: 26px; text-align: right; }
+/* When others are waiting on you, the chip is brass, which marks your move everywhere. Only "you" is in bold. */
+#phase-strip .waiting.you { background: var(--brass); border-color: color-mix(in srgb, var(--accent-2) 45%, #000); color: var(--on-brass); font-weight: 500;
+  box-shadow: inset 0 1px 0 #ffffff88, 0 2px 6px #0008; }
+#phase-strip .waiting.you strong { font-weight: 800; }
+#phase-strip .waiting.you b { color: var(--on-brass); }
+/* A pulse every 20 seconds that never gets stronger */
+#phase-strip .waiting.you.pulse { animation: wait-pulse 1.1s ease-in-out; }
+@keyframes wait-pulse { 40% { transform: translateY(-50%) scale(1.1); box-shadow: inset 0 1px 0 #ffffff88, 0 0 14px var(--accent-2); } }
+html[data-motion="reduced"] #phase-strip .waiting.you.pulse { animation: none; }
+/* A pass in progress, built like the waiting chip. The cross in its own segment shows that a click stops it. */
+#phase-strip .until { cursor: pointer; position: absolute; left: max(calc(50% + 250px), calc(100% + 24px)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 0 0 8px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); color: var(--text); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+#phase-strip .until > .glyph { color: var(--select); }
+#phase-strip .until .verb { color: var(--muted); font-weight: 500; }
+#phase-strip .until .stop { align-self: stretch; display: flex; align-items: center; margin-left: 2px; padding: 0 8px 0 7px; border-left: 1px solid var(--line); color: var(--muted); }
+#phase-strip .until:hover { border-color: var(--line-bright); }
+#phase-strip .until:hover .stop { border-left-color: var(--line-bright); color: var(--text); }
+#phase-strip .caret { color: var(--muted); display: flex; transition: transform .18s ease; }
+/* The pill opens the stops grid. So on hover the pill gets lighter and the caret moves toward where the grid will open. */
+#phase-strip .pill:not(.open):hover { background: var(--surface-2); border-color: var(--line-bright); }
+#phase-strip .pill:not(.open):hover .caret { color: var(--text); animation: caret-nudge .6s ease; }
+#phase-strip .pill[data-opens="down"] { --nudge: 2px; }
+#phase-strip .pill[data-opens="up"] { --nudge: -2px; }
+#phase-strip .pill.open .caret { transform: rotate(180deg); }
+@keyframes caret-nudge { 40% { transform: translateY(var(--nudge)); } }
+html[data-motion="reduced"] #phase-strip .pill:hover .caret { animation: none; }
+#phase-strip .stops { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 35; background: var(--surface); border: 1px solid var(--line-bright); border-radius: 10px; padding: 6px 8px 8px; box-shadow: 0 14px 36px #000c; font-size: 11.5px; }
+#phase-strip .stops.above { top: auto; bottom: calc(100% + 8px); }
+/* A notch on the edge facing the pill, so the window looks like it opens from the pill */
+#phase-strip .stops::before { content: ''; position: absolute; left: 50%; top: -6px; width: 10px; height: 10px; background: inherit; border: 1px solid var(--line-bright); border-right: 0; border-bottom: 0; transform: translateX(-50%) rotate(45deg); }
+#phase-strip .stops.above::before { top: auto; bottom: -6px; border: 1px solid var(--line-bright); border-left: 0; border-top: 0; }
+#phase-strip .stops .hint { margin: 8px 6px 0; padding-top: 6px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; text-align: center; }
+#phase-strip .stops td.row-tools { padding: 0 6px 0 12px; white-space: nowrap; }
+#phase-strip .stops .row-tool { padding: 3px 10px; font-size: 12px; }
+#phase-strip .stops .row-tool + .row-tool { margin-left: 4px; }
+#phase-strip .stops .title { margin: 4px 8px 8px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+#phase-strip .stops table { border-collapse: separate; border-spacing: 0; }
+#phase-strip .stops td, #phase-strip .stops th { padding: 0; height: 26px; text-align: center; font-weight: 400; }
+#phase-strip .stops th { width: 54px; vertical-align: top; padding: 0 3px 5px; }
+#phase-strip .stops th .name { display: block; margin-top: 4px; color: var(--muted); font-size: 10.5px; line-height: 1.25; }
+#phase-strip .stops th.now .name { color: var(--col); font-weight: 600; }
+#phase-strip .stops td.who { text-align: left; padding: 0 12px 0 10px; white-space: nowrap; font-size: 12.5px; }
+#phase-strip .stops th.group { height: auto; padding: 0 3px 6px; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+#phase-strip .stops th.group span { display: block; white-space: nowrap; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+#phase-strip .stops td.gap { width: 10px; }
+/* The row of the active player is lit gold and the current step's column is amber. So the cell where they cross is the brightest. */
+#phase-strip .stops { --row-lit: var(--surface-2); --col: var(--accent-2); --col-lit: var(--accent-soft); }
+#phase-strip .stops tr.active td { background: var(--row-lit); }
+#phase-strip .stops tr.active td:first-child { border-radius: 6px 0 0 6px; color: var(--accent-2); font-weight: 600; }
+#phase-strip .stops tr.active td:last-child { border-radius: 0 6px 6px 0; }
+#phase-strip .stops .head { width: 22px; height: 20px; margin: 0 auto; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+#phase-strip .stops th.now, #phase-strip .stops td.now { background: var(--col-lit); }
+#phase-strip .stops tr.active td.now { background: linear-gradient(var(--col-lit), var(--col-lit)), var(--row-lit); }
+#phase-strip .stops th.now { border-radius: 6px 6px 0 0; box-shadow: inset 0 2px 0 var(--col); }
+#phase-strip .stops th.now .head { color: var(--col); }
+#phase-strip .stops tr:last-child td.now { border-radius: 0 0 6px 6px; }
+#phase-strip .stops .cell { width: 100%; height: 26px; padding: 0; border: none; background: none; display: flex; align-items: center; justify-content: center; }
+#phase-strip .stops .square { width: 16px; height: 16px; box-sizing: border-box; border-radius: 4px; background: var(--surface-2); border: 1px solid var(--line-bright); display: grid; place-items: center; }
+#phase-strip .stops .square.on { background: var(--accent-2); border-color: var(--accent-2); color: var(--on-brass); }
+#phase-strip .stops .square.current { outline: 2px solid var(--text); outline-offset: 2px; }
+#phase-strip .stops .cell:hover .square { border-color: var(--accent-2); }
+#phase-strip .stops .skip { color: var(--select); display: flex; }
+/* A raised panel lighter than the table, with a light top edge and a dark outline. So the stack does not look like loose cards on the board. */
+#stack .pile { transition: height .15s ease; }
+#stack { position: fixed; top: 56px; right: calc(var(--side-gap) + 8px); z-index: 25; width: calc(var(--stack-w) + 20px); display: grid; gap: 8px; padding: 8px 10px 10px; background: var(--panel); backdrop-filter: blur(6px); border: 1px solid var(--panel-edge); border-radius: 12px;
+  box-shadow: inset 0 1px 0 #ffffff24, 0 0 0 1px var(--bg-deep), 0 12px 34px #000a; }
+/* With several opponents the top seats have a row of details. The panel starts below that row instead of over their piles. */
+#match.many #stack, #match.many #storm { top: 80px; }
+#stack .head { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); }
+#stack:not(.collapsed) .head { padding-bottom: 7px; border-bottom: 1px solid #ffffff14; }
+#stack .head .count { display: inline-grid; place-items: center; box-sizing: border-box; min-width: 18px; height: 18px; padding: 0 5px; line-height: 1;
+  border-radius: 9px; background: var(--line-bright); color: var(--text); letter-spacing: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+#stack .head .collapse { margin-left: auto; font-size: 11px; padding: 2px 8px; letter-spacing: 0; text-transform: none; }
+#stack .pile { position: relative; --stack-room: 400px; }
+#storm { position: fixed; top: 56px; right: calc(var(--side-gap) + 8px); z-index: 25; padding: 3px 12px; border-radius: 999px; background: var(--surface);
+  border: 1px solid var(--line); box-shadow: 0 6px 18px #0008; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); }
+#stack.collapsed .pile { display: none; }
+.stack-item { position: absolute; left: 0; width: var(--stack-w); height: calc(var(--stack-w) * 1.4); border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); box-shadow: 0 6px 18px #000a; transition: top .15s ease, transform .15s ease, filter .3s ease; cursor: default; }
+/* Particles that drift up from a spell breaking apart on the stack */
+.unweave-mote { position: fixed; z-index: 42; width: 2px; height: 2px; border-radius: 50%; background: #c6d4ff; box-shadow: 0 0 5px #9684ff; opacity: 0; pointer-events: none; }
+.stack-item img { position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 8px; object-fit: cover; display: block; }
+.stack-item .frame { position: absolute; inset: 0; padding: 8px; font-weight: 700; font-size: 12px; }
+.stack-item.noimg img { display: none; }
+.stack-item .caption { z-index: 2; }
+.stack-item.top { outline: 3px solid var(--accent-2); }
+.stack-item.lifted { transform: scale(1.15); }
+.stack-item .caption { position: absolute; left: 0; right: 0; bottom: 0; background: #000d; border-radius: 0 0 8px 8px; padding: 4px 6px; font-size: 11px; line-height: 1.3; max-height: 100%; box-sizing: border-box; overflow: hidden; }
+/* A long ability is cut short so its caption stays on its own card. The card's full text shows on hover. */
+#stack:not(.chip) .stack-item .desc { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 8; overflow: hidden; }
+.stack-item .who { color: var(--muted); }
+.stack-item .targets { color: var(--select); }
+.stack-item .desc:empty, .stack-item .targets:empty { display: none; }
+/* A spell awaiting payment is a see-through, colourless outline of the card. It is drawn in the slot its stack item will take. */
+.stack-item.awaiting { background: #8fb4ff14; border: 1px dashed #b9cdf0aa; outline: none; box-shadow: 0 0 18px #9fc0ff33, inset 0 0 22px #9fc0ff22; animation: awaiting 2.4s ease-in-out infinite; }
+.stack-item.awaiting img { opacity: .38; filter: grayscale(1); }
+.stack-item.awaiting .await { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 6px 7px; border-radius: 0 0 8px 8px; text-align: center; background: linear-gradient(transparent, #070910e6 40%); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #dfe8fa; }
+@keyframes awaiting { 50% { box-shadow: 0 0 26px #9fc0ff55, inset 0 0 30px #9fc0ff33; border-color: #d6e3ffdd; } }
+html[data-motion="reduced"] .stack-item.awaiting { animation: none; }
+#log { overflow-anchor: none; background: var(--panel); backdrop-filter: blur(6px); border: 1px solid var(--panel-edge); box-shadow: inset 0 1px 0 #ffffff24, 0 0 0 1px var(--bg-deep); border-radius: 8px; padding: 6px 8px; overflow-y: auto; flex: 1; min-height: 0; font-size: 12px; color: var(--muted); scrollbar-width: thin; }
+.log-entry { padding: 2px 0; border-bottom: 1px solid var(--surface-2); display: flex; gap: 6px; align-items: flex-start; }
+.log-entry .thumb { width: 32px; border-radius: 3px; flex: none; cursor: pointer; }
+.log-entry.log-turn { align-items: center; gap: 8px; margin-top: 10px; padding: 3px 0; border-bottom: 0; color: var(--accent-2);
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.log-entry.log-turn::before, .log-entry.log-turn::after { content: ''; flex: 1; height: 1px; background: color-mix(in srgb, var(--accent-2) 35%, transparent); }
+.log-entry.log-turn:first-child { margin-top: 2px; }
+.log-entry.log-game_outcome, .log-entry.log-match_results { color: var(--text); }
+/* An open zone covers the whole screen and dims the board. When it is folded, the scrim is removed and only the bar stays. */
+#zones { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: var(--scrim-deep); }
+/* On a landscape board the side column's panels are drawn above the dim layer. A pile opened to look at dims the board lightly. A zone the game asks about dims it as any card question does. */
+html:not([data-form="portrait"]) #zones:not(.minimised) { padding-right: var(--side-gap); background: var(--scrim-look); }
+html:not([data-form="portrait"]) #zones.asking:not(.minimised) { padding-block: 36px; background: var(--scrim-board); backdrop-filter: blur(5px) saturate(.8); }
+@media (prefers-reduced-transparency: reduce) { #zones.asking { backdrop-filter: none; } }
+#match:has(#zones:not([hidden]):not(.minimised)) #side { z-index: 41; }
+.zone-ask { display: none; }
+.zone-panel.asking { width: auto; background: none; border-color: transparent; box-shadow: none; }
+/* The cards grow into the space the board leaves them (zones.ts fitZones), so the window is as wide as its rows */
+.zone-panel.asking .cards { display: flex; flex-wrap: wrap; justify-content: center; padding-top: 22px; }
+#zones.asking .zone-shelf { max-height: calc(100vh - 72px); }
+.zone-panel.asking .zone-ask { display: block; margin: 0; padding: 0 18px 2px; font-size: 18px; font-weight: 700; text-align: center; text-wrap: balance; text-shadow: 0 2px 10px #000; }
+.zone-panel.asking header { justify-content: center; padding-top: 4px; border: 0; }
+.zone-panel.asking .zone-who { font-size: 13px; font-weight: 400; color: var(--muted); }
+.zone-panel.asking .zone-gap { flex: 0 0 12px; }
+.zone-panel.asking footer { justify-content: center; border: 0; }
+.zone-panel.asking .zone-hint { display: none; }
+.zone-panel.asking .cards .card { box-shadow: 0 12px 30px #000d, 0 0 0 1px #000c; }
+/* In a library the game asks about, only the cards it shows are drawn. The rest are face down and cannot be picked. */
+.zone-panel.asking .cards > .card.back:not(.selectable) { display: none; }
+/* Zones the game shows together, such as every graveyard for one target, are chips above the chosen zone's cards (zones.ts renderChips) */
+.zone-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; padding: 8px 18px 2px; }
+.zone-chips[hidden] { display: none; }
+.zone-chip { position: relative; display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px 3px 3px; border: 1px solid var(--line-bright); border-radius: 999px; background: var(--surface-2); color: var(--text); font-size: 13px; }
+.zone-chip img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+.zone-chip b { font-weight: 600; }
+.zone-chip em { padding: 1px 5px; border-radius: 999px; background: var(--text); color: var(--bg); font-size: 9.5px; font-style: normal; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.zone-chip i { min-width: 18px; padding: 1px 5px; border-radius: 999px; background: var(--surface-3); font-size: 11px; font-style: normal; font-weight: 800; text-align: center; }
+.zone-chip[aria-pressed="true"] { border-color: var(--accent-2); background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--surface-2); }
+.zone-chip[aria-pressed="true"] i { background: var(--accent-2); color: var(--on-brass); }
+/* Once cards are chosen the badge counts those, light rather than gold */
+.zone-chip i.got, .zone-chip[aria-pressed="true"] i.got { background: var(--text); color: var(--bg); }
+/* A player with nothing to choose keeps a faded chip, so the chips stay in seat order */
+.zone-chip.none { opacity: .4; }
+/* When folded, the bar is shown where the stack is, near the board's top right, not under the hand */
+#zones.minimised, .reveal-back.minimised { background: none; place-items: start end; padding: 56px calc(var(--side-gap, 270px) + 8px) 0 0; pointer-events: none; }
+#zones.minimised > *, .reveal-back.minimised > * { pointer-events: auto; }
+/* A zone opened while the stack has items is usually that spell asking. So the stack stays above the scrim, with the zone beside it. */
+#match:has(#zones:not([hidden]):not(.minimised)) #stack:not([hidden]) { z-index: 41; }
+#match:has(#stack:not([hidden])) #zones:not(.minimised) { padding-right: calc(var(--side-gap) + var(--stack-w) + 40px); }
+#match:has(#stack:not([hidden])) #zones:not(.minimised) .zone-panel:not(.asking) { width: min(860px, calc(100vw - var(--side-gap) - var(--stack-w) - 80px)); }
+/* Use a flex column, not a grid. A grid row grows to fit its content, so a long library would push the footer and its OK button off the screen. */
+.zone-shelf { display: flex; flex-direction: column; gap: 12px; max-height: 88vh; }
+.zone-panel {
+  display: flex; flex-direction: column; min-height: 0; width: min(860px, 88vw);
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 13px;
+  box-shadow: 0 24px 70px #000000b3; overflow: hidden;
+}
+.zone-panel header { display: flex; align-items: center; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+.zone-who { font-size: 16px; font-weight: 700; }
+.zone-count { font-size: 12.5px; color: var(--muted); }
+.zone-gap { flex: 1; }
+.zone-find { width: 180px; font-size: 12.5px; padding: 6px 10px; }
+.zone-sort { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+.zone-sort .select-button { font-size: 12px; padding: 4px 8px 4px 10px; }
+.zone-fold { font-size: 12.5px; padding: 6px 13px; }
+/* The panel has the same shape for every zone: five cards across, scrolled. It does not grow with its contents. */
+/* The cards are bigger than on the board, because reading them is why the panel is open */
+.zone-panel .cards { --fit: 1.45; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; padding: 16px 18px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; justify-items: center; align-content: start; }
+/* A reveal opens in the same window as a zone, over the same dimmed board */
+.reveal-back { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--scrim-deep); }
+.reveal-panel { max-height: 88vh; }
+/* A plain reveal has no bars. It is as wide as its cards, which grow into the space the board leaves them (questions.tsx useCardFit). */
+.reveal-panel.bare { gap: 14px; width: fit-content; max-width: min(860px, 88vw); padding: 16px 8px; }
+.reveal-panel.bare header { display: block; padding: 0 10px; border: 0; text-align: center; }
+/* The heading wraps to the width of the cards instead of widening the window */
+.reveal-panel.bare :is(.zone-who, .zone-count) { display: block; width: 0; min-width: 100%; }
+/* At most five cards across, so a window with more cards is as wide as its rows and no wider */
+.reveal-panel.bare .cards { --fit: 1.45; display: flex; flex-wrap: wrap; justify-content: center; min-width: 240px; padding: 2px var(--glow);
+  max-width: calc(5 * var(--card-w) * var(--fit) + 4 * 14px + 2 * var(--glow)); }
+.reveal-panel.bare .cards:has(.sideways) { max-width: calc(5 * var(--card-h) * var(--fit) + 4 * 14px + 2 * var(--glow)); }
+.reveal-panel.bare .cards .section { width: 100%; }
+.reveal-panel.bare footer { justify-content: center; gap: 10px; padding: 0 10px; border: 0; }
+.reveal-panel.bare footer > * { flex: 1; justify-content: center; max-width: 180px; height: 32px; padding-block: 0; }
+/* A reveal's scrim fades in, as a dialog's does */
+.reveal-back:not(.minimised) { animation: backdrop-in .2s ease-out; }
+html[data-motion="reduced"] .reveal-back { animation: none; }
+.reveal-panel .cards .section { grid-column: 1 / -1; justify-self: stretch; padding-bottom: 4px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.zone-panel footer { display: flex; align-items: center; gap: 12px; padding: 11px 18px; border-top: 1px solid var(--line); }
+.zone-hint { flex: 1; font-size: 12px; color: var(--muted); }
+.zone-answer { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border-radius: 6px; font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+.zone-answer.cancel { background: var(--surface-2); border-color: var(--line); color: var(--muted); }
+.zone-answer.cancel:hover { color: var(--text); }
+
+/* The folded zone bar. It keeps the search and the sort order, so reopening the zone returns to where you were. */
+.zone-bar { display: flex; align-items: center; gap: 11px; padding: 8px 10px 8px 14px; border-radius: 11px; background: var(--surface); border: 1px solid var(--accent-2); box-shadow: 0 12px 34px #000000a6; }
+.zone-bar b { font-size: 13px; font-weight: 650; }
+.zone-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); }
+.zone-unfold { font-size: 12.5px; padding: 6px 13px; }
+.zone-shut { width: 30px; padding: 0; color: var(--muted); background: none; }
+#overlay { position: fixed; inset: 0; pointer-events: none; z-index: 30; }
+/* The preview is drawn above dialogs. Hovering a card in a dialog is how you read it, so the preview must not be covered. */
+/* An image or rules-text preview uses the preview size that every page shares (theme.css) */
+#zoom { --zoom-w: var(--preview-w); position: fixed; right: var(--side-gap); top: 50%; transform: translateY(-50%); z-index: 70; pointer-events: none; display: flex; gap: 10px; align-items: flex-start; }
+/* A placed preview is beside the card it shows. The default position, used for a player, is at the board's right. */
+#zoom.placed { right: auto; transform: none; }
+#zoom.settling { visibility: hidden; }
+/* Both the image and the rules text are the card's own size, with the keys in a pill below */
+#zoom.image-only, #zoom.text-card { flex-direction: column; align-items: center; gap: 6px; }
+#zoom.image-only .detail { display: none; }
+/* A tab at the bottom of the image shows where a card in hand is actually played from. It stays clear of the cost and of the overlays at the top. */
+#zoom .shot { position: relative; display: block; line-height: 0; }
+/* When the preview turns to the card's other side, the new side rotates in from edge-on. This applies to the image and the text. */
+#zoom.flipping.image-only > .shot, #zoom.flipping.text-card > .detail { animation: zoom-flip .26s cubic-bezier(.2, .7, .3, 1); }
+@keyframes zoom-flip { from { transform: perspective(900px) rotateY(-90deg); } to { transform: perspective(900px) rotateY(0deg); } }
+html[data-motion="reduced"] #zoom.flipping > * { animation: none; }
+/* The zone a card is played from is named above its preview, as desktop names it above the card. It is drawn like the hint, outlined in the zone's colour */
+#zoom .from-tab { position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -8px); padding: 4px 13px;
+  border: 1px solid var(--zone-glow); border-radius: 999px; background: var(--surface); color: var(--text); font: 600 13px/1.25 system-ui, sans-serif;
+  white-space: nowrap; box-shadow: 0 4px 14px #000a; }
+#zoom .from-tab:empty, #zoom.text-card .shot { display: none; }
+/* The hint is a pill like the playable-from tab, so it stays readable over whatever is behind it */
+#zoom > .hint { padding: 4px 12px; border: 1px solid var(--line-bright); border-radius: 999px; background: var(--surface); color: var(--text);
+  font-size: 11px; font-weight: 600; text-shadow: 0 1px 3px #000; box-shadow: 0 4px 14px #000a; }
+#zoom:not(.image-only):not(.text-card) > .hint { display: none; }
+/* The empty hint keeps its space while the card's details load. So the preview does not grow and shift when the hint arrives. */
+#zoom > .hint:empty { visibility: hidden; }
+#zoom > .hint:empty::before { content: '\00a0'; }
+/* Ability-word conditions and delve under the picture. Met is the brass of the main buttons with a tick, so it differs from unmet in brightness, not only in colour */
+#zoom > .conds { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+/* The picture is positioned, so its shadow would fall over the pills under it unless they are positioned too */
+#zoom > :is(.conds, .hint) { position: relative; }
+#zoom > .conds:empty, #zoom:not(.image-only) > .conds { display: none; }
+#zoom .cond { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border: 1px solid var(--line-bright); border-radius: 999px; background: var(--surface);
+  color: var(--text); font: 600 13px/1.25 system-ui, sans-serif; white-space: nowrap; box-shadow: 0 4px 14px #000a; }
+#zoom .cond .num { display: inline-flex; align-items: center; gap: 2px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#zoom .cond .segs { display: grid; grid-auto-flow: column; grid-auto-columns: 9px; gap: 3px; }
+#zoom .cond .segs i { height: 5px; border-radius: 2px; background: var(--surface-3); }
+#zoom .cond .segs i.on { background: var(--text); }
+#zoom .cond.delve { border-color: color-mix(in srgb, var(--cost-changed) 55%, transparent); }
+#zoom .cond.delve .num { color: var(--cost-changed); }
+#zoom .cond.delve .segs i.on { background: var(--cost-changed); }
+#zoom .cond.met { background: var(--brass); border-color: color-mix(in srgb, var(--accent-2) 45%, #000); color: var(--on-brass); }
+#zoom .cond.met .num { color: var(--on-brass); }
+#zoom :is(.cond, .aw) .tick { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#zoom .cond img.sym { width: 15px; height: 15px; }
+/* The same condition as a chip on its ability word in the rules text */
+#zoom .text .aw { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; font-style: normal; line-height: 1.5; padding: 0 7px; border-radius: 5px;
+  border: 1px solid var(--line-bright); color: var(--muted); vertical-align: 1px; font-variant-numeric: tabular-nums; }
+#zoom .text .aw.met { background: var(--brass); border-color: color-mix(in srgb, var(--accent-2) 45%, #000); color: var(--on-brass); }
+/* The rules text has the card's own shape and size, so switching between it and the image with T moves nothing */
+#zoom.text-card .detail { position: relative; width: var(--zoom-w); aspect-ratio: 63 / 88; box-sizing: border-box; display: flex; flex-direction: column; gap: 5px;
+  padding: 6px; overflow: hidden; border: 7px solid #0b0d11; border-radius: 14px; font-size: 13px; line-height: 1.38;
+  background: linear-gradient(165deg, color-mix(in srgb, var(--frame) 40%, #1b2029), color-mix(in srgb, var(--frame) 16%, #0d1016));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 55%, transparent), 0 10px 40px #000a; }
+#zoom.text-card .detail > header, #zoom.text-card .detail > .type { flex: none; display: flex; align-items: center; gap: 8px; padding: 5px 9px; border-radius: 6px;
+  background: color-mix(in srgb, var(--frame) 28%, #0d1016); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 45%, transparent); }
+#zoom.text-card .detail > header { justify-content: space-between; }
+#zoom.text-card .detail .name { font-size: 15.5px; line-height: 1.2; }
+#zoom.text-card .detail .cost { white-space: nowrap; }
+#zoom.text-card .detail > .type { color: #dfe4ea; font-size: 12.5px; font-weight: 600; line-height: 1.25; }
+#zoom.text-card .detail .type-line { flex: 1; }
+#zoom .detail .kind-chip, #zoom .detail .set { flex: none; font-size: 10px; font-weight: 700; line-height: 1; padding: 3px 5px; border-radius: 4px; }
+#zoom .detail .kind-chip { color: var(--accent-2); border: 1px solid var(--accent-2); }
+#zoom .detail .set { letter-spacing: .06em; color: #0d1016; background: #d8dbe0; }
+#zoom .detail .set[data-rarity="Uncommon"] { background: linear-gradient(135deg, #e4ecf2, #8fa3b3); }
+#zoom .detail .set[data-rarity="Rare"] { background: linear-gradient(135deg, #f5dc8a, #b8902e); }
+#zoom .detail .set[data-rarity="MythicRare"] { background: linear-gradient(135deg, #ffb070, #d0461e); }
+#zoom .detail .set[data-rarity="Special"] { background: linear-gradient(135deg, #d9c2ff, #8a5cd6); }
+#zoom .detail .kind-chip:empty, #zoom .detail .set:empty, #zoom:not(.text-card) .detail .foot { display: none; }
+#zoom.text-card .detail .from { flex: none; padding: 3px 10px; border-radius: 5px; background: var(--zone-glow); color: #15121c; font-size: 11.5px; font-weight: 700; }
+#zoom.text-card .detail .text { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; display: flex; flex-direction: column; white-space: normal;
+  border-radius: 6px; background: #12161e; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 22%, transparent); }
+#zoom.text-card .text > * { padding: 7px 10px; }
+#zoom.text-card .text > * + * { border-top: 1px solid #262e3b; }
+#zoom.text-card .text .rem { font-style: italic; color: var(--muted); }
+#zoom.text-card .text > .mode-option { position: relative; padding-left: 22px; }
+#zoom.text-card .text > * + .mode-option { border-top: 0; padding-top: 0; }
+#zoom.text-card .text > .mode-option::before { content: '•'; position: absolute; left: 11px; }
+#zoom.text-card .text .kws { display: flex; flex-wrap: wrap; gap: 4px 5px; align-items: center; }
+#zoom.text-card .text .kw { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--frame) 18%, #1b212b); border: 1px solid color-mix(in srgb, var(--frame) 45%, transparent); }
+/* Changes the game made to the card's printed rules. Gained text is gold. Lost text is struck through and dimmed. */
+#zoom.text-card .text .change { font-style: normal; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-left: 5px; color: var(--muted); }
+#zoom.text-card .text .kw:has(.change) { box-shadow: 0 0 0 1px var(--cost-changed); }
+#zoom.text-card .text .kw:has(.change) .change { color: var(--cost-changed); }
+#zoom.text-card .text .kw.lost { box-shadow: none; opacity: .6; }
+#zoom.text-card .text .kw.lost .change { color: var(--muted); }
+#zoom.text-card .text .lost > span:not(.change), #zoom .detail .text .struck { text-decoration: line-through; opacity: .6; }
+#zoom.text-card .text div.lost { color: var(--muted); }
+#zoom.text-card .text .kwrem { flex-basis: 100%; font-size: 11.5px; line-height: 1.35; color: var(--muted); font-style: italic; }
+#zoom.text-card .text .ab { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 9px; align-items: baseline; }
+#zoom.text-card .text .ac { font-size: 12px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: #1e2530; border: 1px solid var(--line-bright); white-space: nowrap; }
+#zoom.text-card .text .ab.long { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+#zoom.text-card .text .ab.long .ac { white-space: normal; justify-self: start; }
+/* Loyalty up is blue and loyalty down is orange-red, the same pair the P/T uses */
+#zoom.text-card .text .ac.plus { color: #7cc8ff; border-color: #7cc8ff73; }
+#zoom.text-card .text .ac.minus { color: var(--damage); border-color: #ff7a5973; }
+#zoom.text-card .text .notes { margin-top: auto; display: grid; gap: 2px; font-size: 11.5px; color: #c5cdd8; background: #0d1016; }
+#zoom.text-card .detail .foot { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-height: 30px; padding-right: 64px; }
+#zoom .detail .foot .chip { font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #0d1016cc; border: 1px solid var(--line-bright); white-space: nowrap; }
+#zoom .detail .foot .counter { color: #7cc8ff; border-color: #7cc8ff66; }
+#zoom .detail .foot .damage { color: var(--damage); border-color: #ff7a5966; }
+#zoom.text-card .detail .pt { position: absolute; right: 5px; bottom: 4px; font-size: 17px; font-weight: 800; line-height: 1; padding: 5px 10px; border-radius: 7px;
+  font-variant-numeric: tabular-nums; background: color-mix(in srgb, var(--frame) 30%, #0d1016);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 65%, transparent), 0 2px 6px #000a; }
+#zoom.text-card .detail .pt i { font-style: normal; }
+#zoom.text-card .detail .pt [data-shift="up"] { color: #7cc8ff; }
+#zoom.text-card .detail .pt [data-shift="down"] { color: var(--damage); }
+/* A planeswalker's loyalty is drawn in a shield, as it is printed */
+#zoom.text-card .detail .pt.shield { width: 40px; padding: 7px 0 10px; border-radius: 0; text-align: center; background: #1c1f26; color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); box-shadow: inset 0 0 0 2px #cfd3da; }
+
+/* A card image's corner radius is about 4.5% of its width. So the rounding scales with the preview and hides the white corners behind it. */
+#zoom img { width: var(--zoom-w); aspect-ratio: 63 / 88; border-radius: 4.5% / 3.2%; box-shadow: 0 10px 40px #000a; }
+/* A creature in hand whose power or toughness is not its printed value shows the current value on a plate over the printed box (preview.ts) */
+#zoom .shot > .now-pt { position: absolute; left: 77.4%; top: 89.2%; width: 16.2%; height: 4.8%; z-index: 2; display: grid; place-items: center; box-sizing: border-box;
+  background: #0d1118; border: 1.5px solid var(--accent-2); border-radius: 6px; box-shadow: 0 2px 8px #000a; color: var(--accent-2); font-size: calc(var(--zoom-w) * .052); font-weight: 800; line-height: 1; }
+#zoom canvas.foil { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 4.5% / 3.2%; }
+/* A card printed sideways, such as a Room or a plane, gets a wide box. Its picture is turned inside it */
+#zoom .shot.turned { width: calc(var(--zoom-w) * 88 / 63); height: var(--zoom-w); }
+#zoom .shot.turned > :is(img, canvas.foil, .stickers) { position: absolute; inset: auto; left: 50%; top: 50%; width: var(--zoom-w); height: calc(var(--zoom-w) * 88 / 63); translate: -50% -50%; rotate: var(--turn); }
+#zoom .detail { width: 260px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; box-shadow: 0 10px 40px #000a; font-size: 13px; }
+#zoom .detail header { display: flex; justify-content: space-between; gap: 8px; }
+#zoom .detail header .cid { margin-right: auto; align-self: center; color: var(--muted); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#zoom .detail header .cid:empty { display: none; }
+#zoom .detail .type { color: var(--muted); }
+#zoom .detail .text { white-space: pre-line; }
+#zoom .detail .text .muted { color: var(--muted); }
+#zoom .detail .pt { font-weight: 700; text-align: right; }
+/* This uses the same colour as the glow around the card, so the panel explains what the glow only hints at */
+#zoom .detail .from { color: var(--zone-glow); font-size: 12px; font-weight: 600; }
+#zoom .detail .pt:empty, #zoom .detail .from:empty { display: none; }
+/* The end of a game: the board fades back behind the shattering portrait, and the result is shown over it */
+#match > :not(#game-over) { transition: filter .9s cubic-bezier(.3,.6,.3,1), --fit .6s cubic-bezier(.2,.7,.3,1); }
+#match.ending > :not(#game-over) { filter: grayscale(.75) brightness(.42) blur(3px); }
+/* A card preview left open under the pointer would cover the shattering portrait */
+#match.ending ~ #zoom { display: none; }
+#match.ending::before { content: ''; position: fixed; inset: 0; z-index: 50; pointer-events: none; animation: ending-in .9s ease both;
+  background: radial-gradient(circle at var(--end-x, 50%) var(--end-y, 50%), rgba(4,6,10,.08), rgba(4,6,10,.62) 55%, rgba(2,3,6,.9)); }
+@keyframes ending-in { from { opacity: 0; } }
+.shatter-layer { position: fixed; inset: 0; z-index: 55; pointer-events: none; overflow: hidden; }
+.shatter-layer canvas { position: absolute; left: 0; top: 0; }
+/* The burst's light is added to what is behind it, not drawn over it. So it brightens the board instead of fogging it. */
+.shatter-glow { position: absolute; left: 0; top: 0; mix-blend-mode: plus-lighter; opacity: 0; will-change: transform, opacity; }
+.shatter-glow.core { width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,251,242,1) 0%, rgba(255,238,214,.8) 11%, rgba(255,214,176,.22) 34%, rgba(255,214,176,0) 60%); }
+.shatter-glow.bloom { width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(168,198,255,.32) 0%, rgba(140,172,255,.12) 30%, rgba(140,172,255,0) 64%); }
+.shatter-glow.ring { width: 200px; height: 200px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(222,234,255,.3); box-shadow: 0 0 14px rgba(168,198,255,.2), inset 0 0 14px rgba(168,198,255,.14); filter: blur(1.5px); }
+.shatter-glow.streak { width: 700px; height: 3px; border-radius: 50%; filter: blur(1.5px); background: linear-gradient(90deg, rgba(200,220,255,0), rgba(214,228,255,.55) 45%, rgba(255,250,240,.9) 50%, rgba(214,228,255,.55) 55%, rgba(200,220,255,0)); }
+#game-over { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; pointer-events: none; }
+#game-over .panel { display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: auto; --metal: linear-gradient(180deg, #fff4d2 0%, #f5d27a 40%, #e8b73c 62%, #a3781a 100%); --rule: rgba(242,195,68,.65); }
+#game-over .panel.lose, #game-over .panel.draw, #game-over .panel.watched { --metal: linear-gradient(180deg, #f2f5f9 0%, #c7d0db 45%, #8f9aa9 72%, #5e6979 100%); --rule: rgba(170,185,205,.55); }
+#game-over .panel > * { animation: ending-rise .9s cubic-bezier(.2,.8,.2,1) both; }
+#game-over .panel > .word { animation-delay: .12s; }
+#game-over .panel > .rule { animation-delay: .3s; }
+#game-over .panel > .sub { animation-delay: .45s; }
+#game-over .panel > .tally { animation-delay: .58s; }
+#game-over .panel > .actions { animation-delay: .7s; }
+#game-over .face { width: 88px; height: 88px; border-radius: 50%; background: var(--surface-2) center / cover; border: 2px solid rgba(242,195,68,.85); box-shadow: 0 0 0 4px #0a0d13, 0 14px 34px #000; }
+#game-over .word { margin: 0 -.2em 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 60px; font-weight: 700; line-height: 1; letter-spacing: .2em; text-transform: uppercase;
+  background: var(--metal); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#game-over .rule { width: 240px; height: 1px; background: linear-gradient(90deg, transparent, var(--rule), transparent); }
+#game-over .sub { margin: 0; font-size: 13px; letter-spacing: .26em; text-transform: uppercase; color: #aeb8c6; }
+/* Which game of the match this was, shown above the result */
+#game-over .stage { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #aeb8c6; }
+#game-over .tally { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+#game-over .tally-player { display: flex; align-items: center; gap: 9px; padding: 5px 12px 5px 5px; border-radius: 999px;
+  background: #0d1016d9; border: 1px solid var(--line-bright); }
+#game-over .tally-face { width: 28px; height: 28px; border-radius: 50%; background: var(--surface-2) center / cover; box-shadow: 0 0 0 1px #000c; }
+#game-over .tally-name { font-size: 13px; font-weight: 600; color: #d6dde6; }
+#game-over .tally-won { min-width: 1.2em; text-align: center; font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; color: #eef2f6; }
+#game-over .tally-player.champion { border-color: rgba(242,195,68,.7); }
+#game-over .tally-player.champion .tally-won { color: #f5d27a; }
+#game-over .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; }
+#game-over .actions button { padding: 9px 22px; }
+#game-over.viewing { place-items: end center; padding-bottom: 28px; }
+#game-over.viewing .panel, #game-over:not(.viewing) .to-result { display: none; }
+#game-over .to-result { pointer-events: auto; padding: 9px 22px; box-shadow: 0 10px 30px #000c; }
+@keyframes ending-rise { from { opacity: 0; transform: translateY(10px); } }
+/* Your own win: striped light rotates slowly behind the portrait while the result is shown. Particles rise past it once.
+   The panel is its own stacking context, so the light is behind everything in the panel and in front of the board. */
+#game-over .panel { isolation: isolate; }
+#game-over .face-wrap { position: relative; }
+#game-over .win-rays { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(620px, 150vw); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from 0deg, rgba(242,195,68,.19) 0 7deg, transparent 7deg 20deg);
+  mask: radial-gradient(circle, #000 0, transparent 68%); animation: win-rays-in 1.2s .25s ease-out both, win-rays-turn 60s .25s linear infinite; }
+@keyframes win-rays-in { from { opacity: 0; } 60% { opacity: 1; } to { opacity: .55; } }
+@keyframes win-rays-turn { to { rotate: 360deg; } }
+#game-over .win-mote { position: absolute; left: calc(50% + var(--at)); top: calc(50% + 60px); z-index: -1; width: 3px; height: 3px; border-radius: 50%; background: #ffe9b0; box-shadow: 0 0 6px var(--accent-2);
+  pointer-events: none; animation: win-mote 2.8s var(--wait) ease-out both; }
+@keyframes win-mote { from { opacity: 0; translate: 0 0; } 20% { opacity: 1; } to { opacity: 0; translate: var(--drift) -190px; } }
+html[data-motion="reduced"] #game-over .win-rays { animation: none; opacity: .55; }
+html[data-motion="reduced"] #game-over .win-mote { display: none; }
+html[data-motion="reduced"] #match.ending > :not(#game-over) { transition: none; }
+html[data-motion="reduced"] #game-over .panel > * { animation-duration: 1ms; }
+/* Corners scale with the card, so the square corners of a large card's scan do not show */
+.card { --radius: max(6px, calc(var(--card-w) * var(--fit, 1) * .05)); width: calc(var(--card-w) * var(--fit, 1)); height: calc(var(--card-h) * var(--fit, 1)); border-radius: var(--radius); position: relative; background: var(--surface-2); cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, filter .3s ease, opacity .3s ease; flex: none; }
+/* A tapped card's shadow rotates with it, so its offset is turned the other way to keep the shadow below the card. Glow states keep the shadow through --lift. */
+/* A sharp dark outline and a softer shadow around each card, so cards stay visible on a busy playmat */
+.battlefield .card { --lift: 0 1px 2px #000d, 0 3px 7px #000b; box-shadow: var(--lift); }
+.battlefield .card.tapped { --lift: 1px 0 2px #000d, 3px 0 7px #000b; }
+/* An untapped flyer bobs and sways on two cycles that never line up. Its shadow is further below it. */
+@property --bob { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --sway { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@keyframes hover-bob { 0%, 100% { --bob: -1.6px; } 50% { --bob: 1.6px; } }
+@keyframes hover-sway { 0%, 100% { --sway: -1.6px; } 50% { --sway: 1.6px; } }
+.battlefield .card.flying:not(.tapped) {
+  translate: var(--sway) calc(var(--bob) - 5px);
+  --lift: calc(var(--sway) * -0.4) calc(9px - var(--bob)) calc(12px - var(--bob) * 0.6) #0009;
+  animation: hover-bob 3.1s ease-in-out infinite, hover-sway 4.6s ease-in-out infinite;
+  animation-delay: var(--hover-at), calc(var(--hover-at) * 1.7);
+}
+/* A flyer hit by damage still shakes. Without this rule the hover animations would replace the shake. */
+.battlefield .card.flying.struck:not(.tapped) {
+  animation: card-struck .34s ease-out, hover-bob 3.1s ease-in-out infinite, hover-sway 4.6s ease-in-out infinite;
+  animation-delay: 0s, var(--hover-at), calc(var(--hover-at) * 1.7);
+}
+html[data-motion="reduced"] .battlefield .card.flying:not(.tapped) { animation: none; }
+/* Summoning sickness greys the art. At your untap the colour fades back instead of switching at once. */
+.card > img, .card .frame { transition: filter .3s ease; }
+/* The text frame is under the image, so the card can be read while its image loads or when it has none */
+.card > img { position: relative; z-index: 1; width: 100%; height: 100%; border-radius: var(--radius); display: block; object-fit: cover; }
+.card .cost-badge { display: none; }
+/* The text face is clipped to the card, because a long type line on a small card would otherwise stick out below it */
+.card .frame { position: absolute; inset: 0; display: grid; gap: 2px; padding: 6px; font-size: 10px; align-content: start; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); }
+.card.noimg img { display: none; }
+/* Without its image a card is drawn as a small printed card, with a frame in its colour */
+.card, #zoom .detail { --frame: #9aa1ab; }
+:is(.card, #zoom .detail)[data-frame="W"] { --frame: var(--frame-W); }
+:is(.card, #zoom .detail)[data-frame="U"] { --frame: var(--frame-U); }
+:is(.card, #zoom .detail)[data-frame="B"] { --frame: var(--frame-B); }
+:is(.card, #zoom .detail)[data-frame="R"] { --frame: var(--frame-R); }
+:is(.card, #zoom .detail)[data-frame="G"] { --frame: var(--frame-G); }
+:is(.card, #zoom .detail)[data-frame="M"] { --frame: var(--frame-M); }
+:is(.card, #zoom .detail)[data-frame="L"] { --frame: var(--frame-L); }
+.card.noimg .frame { --u: calc(var(--card-w) * var(--fit, 1) / 100); grid-template-rows: auto auto 1fr auto; gap: 0; padding: calc(var(--u) * 5);
+  border: calc(var(--u) * 4) solid #0b0d11; background: linear-gradient(165deg, color-mix(in srgb, var(--frame) 42%, #1b2029), color-mix(in srgb, var(--frame) 18%, #0d1016));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 60%, transparent); font-size: calc(var(--u) * 10); color: #f2f4f7; }
+.card.noimg .frame .name { padding: calc(var(--u) * 2) calc(var(--u) * 4); border-radius: calc(var(--u) * 3); background: color-mix(in srgb, var(--frame) 30%, #0d1016); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frame) 50%, transparent);
+  line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card.noimg .frame .cost { justify-self: end; margin-top: calc(var(--u) * 2); }
+.card.noimg .frame .type { grid-row: 4; margin-bottom: calc(var(--u) * 16); padding: calc(var(--u) * 2) calc(var(--u) * 4); border-radius: calc(var(--u) * 3); background: color-mix(in srgb, var(--frame) 22%, #0d1016);
+  font-size: calc(var(--u) * 8.5); line-height: 1.2; color: #d9dee5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card .pt, .card .badges, .card .sick, .card .count { z-index: 2; }
+.card.back > img, .card.back .frame { display: none; }
+/* A card held in exile is dimmed, not brightened, so its frame stays as dark as the frame of the card holding it */
+.card.ghost { box-shadow: 0 0 0 1px var(--zone-exile), var(--lift, 0 0 #0000); }
+.card.ghost > img { opacity: .55; filter: grayscale(.6); }
+/* Otherwise the fallback text face would show through the dimmed image */
+.card.ghost:not(.noimg) .frame { visibility: hidden; }
+.card .pt { display: none; position: absolute; right: 4px; bottom: 4px; background: #000c; border-radius: 4px; padding: 0 4px; font-size: 12px; font-weight: 700; }
+.card .pt.on { display: block; }
+.card .pt i { font-style: normal; }
+.card .pt .hurt, .card .pt [data-shift="down"] { color: var(--damage); }
+/* Blue means above the printed value and orange-red means below. The two colours differ in lightness and on the blue-orange axis. */
+.card .pt [data-shift="up"] { color: #7cc8ff; }
+/* Counters go where desktop draws its counter tabs: on the left edge, under the title bar */
+.card .badges { position: absolute; left: 0; top: 19%; font-size: 10px; background: #000c; border-radius: 0 4px 4px 0; padding: 0 3px; }
+.card .badges:empty, .card .pt:empty { display: none; }
+/* A land creature's tag is on the same line, so its counters start below the tag */
+.battlefield .card:has(.kind-tag:not(:empty)) .badges { top: 27%; }
+/* Icons for what a permanent has stack upward from the bottom-left corner. So the first icon keeps its place and the name stays clear. */
+.card .kind-tag { display: none; }
+.battlefield .card .kind-tag:not(:empty) { display: block; position: absolute; left: 50%; top: 14%; z-index: 3; transform: translateX(-50%);
+  padding: 1px 7px; border-radius: 999px; background: #0e1116e6; border: 1px solid var(--accent-2); color: var(--accent-2);
+  font-size: calc(8.5px * var(--fit, 1)); font-weight: 700; white-space: nowrap; pointer-events: none; }
+.card .corner { position: absolute; left: 3px; bottom: 3px; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: calc(60% - 3px); pointer-events: none; }
+.card .kws { display: flex; flex-wrap: wrap-reverse; gap: 1px; }
+.card .kws:empty { display: none; }
+/* A shield is the last item in the strip. It matters in the same situation as deathtouch, at the same moment. */
+.card .shield { position: relative; width: calc(var(--card-w) * var(--fit, 1) * 0.19); aspect-ratio: 1; }
+.card .shield svg { width: 100%; height: 100%; display: block; fill: #1d2635; stroke: #9fdcff; stroke-width: 1.6; filter: drop-shadow(0 1px 2px #000b); }
+.card .shield .n { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 8%; font-style: normal; font-size: calc(var(--card-w) * var(--fit, 1) * 0.1); font-weight: 800; color: #dff1ff; }
+/* One chip serves every set mechanic, because a permanent never has two of them */
+.card .mech { display: flex; align-items: center; gap: 3px; padding: 1px 4px; border-radius: 4px; background: #0b0f16e8; border: 1px solid #5a4a22; color: #e0c98a; font-size: calc(var(--card-w) * var(--fit, 1) * 0.085); font-weight: 700; white-space: nowrap; }
+.card .mech:empty { display: none; }
+.card .mech .pips { display: flex; gap: 1px; }
+.card .mech .pips i { width: 3px; height: 3px; border-radius: 1px; background: #5a4a22; display: block; }
+.card .mech .pips i.on { background: #e0c98a; }
+.card .mech .pips i.lit { background: #9fdcff; }
+.card .mech-text { font-style: normal; }
+/* How many attackers this creature may block, when that is more than one */
+.card .blocks { position: absolute; right: 3px; top: 3px; z-index: 3; min-width: 15px; height: 15px; padding: 0 3px; border-radius: 8px; background: #1a2433; border: 1px solid #3d5876; color: #bcd6f0; font-size: 9.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.card .blocks:empty { display: none; }
+/* A creature that must block is lit. The overlay links it to what it has to block. */
+.card.must-block { box-shadow: 0 0 0 2px var(--accent-2), 0 0 12px color-mix(in srgb, var(--accent-2) 22%, transparent), var(--lift, 0 0 #0000); }
+.card .kws img { display: block; width: calc(var(--card-w) * var(--fit, 1) * 0.19); height: auto; filter: drop-shadow(0 1px 2px #000c); }
+/* In a cramped group the corner icons are too small to read, so they are hidden. The preview still shows them on hover. */
+.group.cramped .card .corner { display: none; }
+.card.tapped { transform: rotate(90deg) scale(.9); }
+.sym { height: 1em; width: 1em; vertical-align: -0.12em; margin: 0 1px; }
+#zoom .sym { height: 1.05em; width: 1.05em; }
+/* A land that can pay the current cost. Paying is not a choice among options, so the board does not dim for it. */
+/* The ring has a small gap from the card, so it still shows round a white-bordered card */
+.card.selectable { outline: 2px solid var(--selectable); outline-offset: 2px; }
+/* A card you could act on now, and a card Auto would tap, get an outline in the highlight colour. It sits on the card's edge, without the gap of the white ring a prompt uses. */
+.card.playable:not(.selectable) { outline: 2px solid var(--playable, #66ccff); outline-offset: 0; }
+.card.auto-tap:not(.selectable) { outline: 3px solid var(--playable, #66ccff); box-shadow: 0 0 6px color-mix(in srgb, var(--playable, #66ccff) 40%, transparent), var(--lift, 0 0 #0000); }
+/* While Auto's choice is shown, only the cards it chose are outlined. The other sources that could pay can still be tapped. The same outline on them would hide which ones Auto chose. */
+#match:has(.card.auto-tap) .card.playable:not(.selectable):not(.auto-tap) { outline-color: transparent; }
+/* A card still flying to its place has no ring. The ring appears when the card lands (motion.ts). */
+.card.landing:is(.selectable, .playable, .auto-tap) { outline-color: transparent; }
+/* A pile holds only cards that Auto would treat the same way (battlefield.ts). So every copy fanned behind the top card gets the ring. The count, in the same colour, shows how many. */
+.card.pile.auto-tap:not(.selectable)::before, .card.pile.auto-tap:not(.selectable)::after, .card.pile.auto-tap:not(.selectable) .pile-edge {
+  box-shadow: 0 0 0 3px var(--playable, #66ccff), 0 1px 4px #000a; }
+.card.pile.auto-tap:not(.selectable) .count:not(.opened) { background: var(--playable, #66ccff); border-color: var(--playable, #66ccff); color: #04121c; }
+.card.highlighted { outline: 2px solid var(--pick); outline-offset: 0; box-shadow: 0 0 12px 2px color-mix(in srgb, var(--pick) 55%, transparent), var(--lift, 0 0 #0000); }
+/* While a prompt offers a pick, the offered cards keep their ring and everything else dims. The gold ring marks what is already chosen. */
+/* The dim waits until no card is still flying to its place (motion.ts). So the board does not darken round a hand while it is being dealt. */
+#match.picking:not(:has(.card.landing)) :is(.card, .avatar, .emblem, .cmd-tile, .zone-tile):not(.selectable):not(.highlighted),
+#match.picking:not(:has(.card.landing)) #stack .stack-item:not(.targetable) { filter: brightness(.42) saturate(.6); }
+#match .card.bonded { box-shadow: 0 0 0 2px var(--bonded), var(--lift, 0 0 #0000); }
+/* This uses !important because the picking and selectable outlines above are more specific. They would hide the aimed arrow's mark (overlay.ts). */
+#match .aimed { outline: 2px solid var(--aimed) !important; outline-offset: 1px; box-shadow: 0 0 16px 2px var(--aimed) !important; }
+.avatar, .emblem, .cmd-tile, .zone-tile { transition: filter .3s ease; }
+/* The whole slot moves forward so attachments move with the attacker. A tapped attacker moves further so the front edges line up. */
+/* The transition is on every slot, not only an attacking one. So the move back after combat animates like the move forward. */
+.battlefield .slot { transition: transform .15s ease; }
+/* A pile that a card is flying into starts at its old depth and width. It widens as the card flies (motion.ts openPile). */
+.battlefield .slot.holding { padding-left: calc(var(--held-behind) * var(--card-w) * var(--fit, 1) * var(--fan)); }
+.battlefield .slot.opening { transition: transform .15s ease, padding-left .26s cubic-bezier(.2,.7,.3,1); }
+.card.pile.grown[data-depth="1"]::after, .card.pile.grown[data-depth="2"]::before, .card.pile.grown[data-depth="3"] .pile-edge { animation: pile-out .26s cubic-bezier(.2,.7,.3,1); }
+@keyframes pile-out { from { transform: none; } }
+.slot.attacking { --advance: 14px; transform: translateY(calc(-1 * var(--advance))); }
+.slot.attacking:has(> .card.tapped:last-child) { --advance: calc(14px + (var(--card-h) - var(--card-w) * .9) / 2 * var(--fit, 1)); }
+#opponent .slot.attacking { transform: translateY(var(--advance)); }
+.card.attacking { outline: 2px solid var(--attack); }
+/* The charge marks are in their own layer over the board. The battlefield scrolls, so it would clip the glow above its top row. */
+#charges { position: fixed; inset: 0; pointer-events: none; z-index: 30; }
+.charge { position: absolute; aspect-ratio: 64 / 54; transform: translate(-50%, -100%); }
+.charge.down { transform: translate(-50%, 0) rotate(180deg); }
+.charge::before, .charge::after { content: ''; position: absolute; }
+.charge::before { left: 50%; top: 58%; width: 140%; height: 70%; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(closest-side, #ff3b2a40, transparent); animation: charge-breathe 3.2s ease-in-out infinite; }
+.charge::after { inset: 0; background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -14 64 54'><filter id='b' filterUnits='userSpaceOnUse' x='-12' y='-14' width='64' height='54'><feGaussianBlur stdDeviation='5'/></filter><g transform='translate(6 13) scale(.7)' opacity='.55'><path d='M2 19L20 2L38 19L20 8Z' fill='%23ff2a14' opacity='.6' filter='url(%23b)'/><path d='M2 19L20 2L38 19L20 8Z' fill='%23e8321f' stroke='%23ff5a3c' stroke-width='.6'/><path d='M6 18.3L20 3.7L34 18.3L20 6.2Z' fill='%23fff4ee'/></g><path d='M2 19L20 2L38 19L20 8Z' fill='%23ff2a14' opacity='.6' filter='url(%23b)'/><path d='M2 19L20 2L38 19L20 8Z' fill='%23e8321f' stroke='%23ff5a3c' stroke-width='.6'/><path d='M6 18.3L20 3.7L34 18.3L20 6.2Z' fill='%23fff4ee'/></svg>") center / contain no-repeat; }
+@keyframes charge-breathe { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+html[data-motion="reduced"] .charge::before { animation: none; }
+.slot.charging > .card.attacking:not(.playable) { outline: none; }
+/* While attackers or blockers are declared, your creatures can be dragged. So a touch on one drags it instead of scrolling. */
+#match:is(.declaring-blocks, .declaring-attacks) #me .battlefield .card { touch-action: none; }
+body.dragging-block, body.dragging-block * { cursor: grabbing !important; }
+body.dragging-block #zoom { display: none; }
+/* A blocking card shows a tab at its bottom edge. An outline would look like the pale blue outline of a playable card. */
+.card .block-tab { display: none; }
+.card.blocking .block-tab { display: flex; align-items: center; gap: calc(3px * var(--fit, 1)); position: absolute; left: 50%; bottom: 0; z-index: 4;
+  transform: translate(-50%, 50%); padding: calc(2px * var(--fit, 1)) calc(7px * var(--fit, 1)) calc(2px * var(--fit, 1)) calc(5px * var(--fit, 1));
+  border-radius: 999px; background: #2f7df0; border: 1px solid #6fb0ff; color: #eef6ff; box-shadow: 0 0 8px #2a8cff80, 0 2px 5px #000a;
+  font-size: calc(9.5px * var(--fit, 1)); font-weight: 800; line-height: 1.2; letter-spacing: .02em; white-space: nowrap; pointer-events: none; }
+.card.blocking .block-tab::before { content: ''; width: calc(9px * var(--fit, 1)); aspect-ratio: 40 / 44; flex: none;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'><path d='M20 3L36 9V21C36 31 29 37.5 20 41C11 37.5 4 31 4 21V9Z' fill='%23eef6ff'/></svg>") center / contain no-repeat; }
+.card.blocking .pt { bottom: calc(12px * var(--fit, 1)); }
+/* The shake uses translate and rotate, not transform, so a tapped card keeps its rotation while it shakes */
+.card.struck { animation: card-struck .34s ease-out; }
+@keyframes card-struck { 25% { translate: -3px 2px; rotate: -1deg; } 60% { translate: 3px -1px; rotate: 1deg; } }
+/* The card also flashes white for a few frames. The flash is easier to notice than the shake. */
+.card .hit-white { position: absolute; inset: 0; z-index: 3; border-radius: var(--radius); background: #fff; pointer-events: none; animation: hit-white .18s ease-out forwards; }
+@keyframes hit-white { from { opacity: .85; } to { opacity: 0; } }
+.card .hit-number { position: absolute; left: 50%; top: 28%; z-index: 4; transform: translateX(-50%); color: var(--damage); font-size: 26px; font-weight: 800; pointer-events: none; text-shadow: 0 2px 6px #000, 0 0 12px #000; animation: hit-number 1s ease-out forwards; }
+@keyframes hit-number { from { opacity: 0; transform: translate(-50%, 10px) scale(.6); } 25% { opacity: 1; transform: translate(-50%, 0) scale(1.15); } to { opacity: 0; transform: translate(-50%, -30px) scale(1); } }
+/* A change to power, toughness or loyalty makes its badge grow for a moment */
+.card .pt.changed { animation: pt-changed .45s ease-out; }
+@keyframes pt-changed { 35% { transform: scale(1.45); color: #fff; text-shadow: 0 0 6px var(--accent-2); } }
+.card .sick { display: none; position: absolute; right: 4px; top: 4px; font-size: 10px; font-weight: 700; background: #000c; border-radius: 4px; padding: 0 3px; font-style: italic; }
+.card.sickness .sick { display: block; }
+/* A permanent you cannot use yet loses its colour. So it is clear at a glance, not only from a 10px label. */
+.card.sickness > img, .card.sickness .frame { filter: grayscale(1) brightness(.78); }
+/* A phased-out card keeps its place as a tinted ghost in a dashed outline, and a tag names the state. The art stays opaque because the text frame is drawn beneath it. */
+.card.phased > img { filter: grayscale(1) contrast(.72) brightness(1.04); }
+.card.phased::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 3;
+  border: 1.5px dashed #d3e0ffa6; box-shadow: 0 0 14px #a9c6ff33, inset 0 0 18px #b8d2ff26;
+  background: linear-gradient(112deg, #0000 34%, #e6eeff2e 47%, #0000 60%) 0 0 / 260% 100% no-repeat, #16202ec4;
+  animation: phase-sheen 4s ease-in-out infinite; }
+@keyframes phase-sheen { from { background-position: 160% 0; } to { background-position: -110% 0; } }
+html[data-motion="reduced"] .card.phased::after { animation: none; }
+/* While attackers or blockers are declared, a creature that can't take part dims under a struck sword or shield (match/battlefield.ts).
+   It waits a moment, because the host sends the list of creatures that can just after the prompt */
+.card .barred-mark { display: none; }
+.battlefield .card.barred > img, .battlefield .card.barred .frame { filter: grayscale(.7) brightness(.42); transition-delay: .1s; }
+.battlefield .card.barred .barred-mark { display: grid; justify-items: center; gap: 3px; position: absolute; left: 50%; top: 40%; z-index: 4; transform: translate(-50%, -50%);
+  pointer-events: auto; animation: barred-in .2s ease-out .1s both; }
+.card .barred-mark svg { width: calc(30px * var(--fit, 1)); height: calc(30px * var(--fit, 1)); overflow: visible; filter: drop-shadow(0 2px 4px #000); }
+.card .barred-mark g { fill: none; stroke: #e6edf3; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card .barred-mark .under { stroke: #000; stroke-width: 5; stroke-linecap: round; }
+.card .barred-mark .strike { stroke: #ffa366; stroke-width: 2.4; stroke-linecap: round; }
+.card .barred-mark b { padding: 1px 7px; border-radius: 999px; background: #0e1116e6; border: 1px solid #556275; color: var(--text);
+  font-size: calc(8.5px * var(--fit, 1)); font-weight: 700; white-space: nowrap; }
+@keyframes barred-in { from { opacity: 0; scale: .8; } }
+html[data-motion="reduced"] .battlefield .card.barred .barred-mark { animation: none; }
+.card .phase-tag { display: none; }
+.battlefield .card.phased .phase-tag { display: block; position: absolute; left: 50%; top: 44%; z-index: 4; transform: translateX(-50%);
+  padding: 1px 7px; border-radius: 999px; background: #0e1116e6; border: 1px solid #c9d8ff; color: #dfe8ff;
+  font-size: calc(8.5px * var(--fit, 1)); font-weight: 700; white-space: nowrap; pointer-events: none; }
+/* A detained card shows chains held by a lock seal. No other state uses this shape, because the board's white rings already mean selectable and attacking. */
+.card .chains, .card .seal { display: none; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius); pointer-events: none;
+  background: center / 100% 100% no-repeat; }
+/* The SVGs draw their own glow. A CSS drop-shadow here would also glow from the mist past the card's edge. */
+.card .chains { background-image: url(../detained-chains.svg), radial-gradient(ellipse, #8fcaff00 35%, #8fcaff1f 75%, #b8e0ff38 100%);
+  mix-blend-mode: screen; }
+.card .seal { background-image: url(../detained-seal.svg); }
+.card:is(.detained, .releasing) :is(.chains, .seal) { display: block; }
+.card.detained > img, .card.detained .frame { filter: brightness(.74) saturate(.45) hue-rotate(-8deg); }
+/* The seal stamps on and the chains grow out from under it. On release, the chains shrink back and the seal lifts away. */
+.card.detaining .seal { animation: detain-seal-in .28s cubic-bezier(.2, .8, .3, 1.2) both; }
+.card.detaining .chains { animation: detain-chains-out .38s cubic-bezier(.3, .7, .2, 1) .16s both; }
+.card.releasing .chains { animation: detain-chains-out .28s cubic-bezier(.6, 0, .8, .4) reverse forwards; }
+.card.releasing .seal { animation: detain-seal-out .22s ease-in .16s forwards; }
+@keyframes detain-seal-in { from { opacity: 0; transform: scale(1.35); } 65% { opacity: 1; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+@keyframes detain-seal-out { to { opacity: 0; transform: scale(1.12); } }
+@keyframes detain-chains-out { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(74% at 50% 50%); } }
+/* The pile is isolated, so the copies under the top card are behind its image but above anything the board draws */
+.card.pile { isolation: isolate; }
+.card.pile::before, .card.pile::after { content: ''; position: absolute; inset: 0; z-index: -1; display: none; border-radius: var(--radius);
+  background: var(--pile-img, none) center / cover, var(--surface-2); box-shadow: 0 1px 4px #000a; }
+.card.pile { --pile-step: calc(var(--card-w) * var(--fit, 1) * var(--fan, .2)); }
+.card.pile::after { transform: translateX(calc(-1 * var(--pile-step))); filter: brightness(.78); }
+.card.pile::before { transform: translateX(calc(-2 * var(--pile-step))); filter: brightness(.58); }
+/* The layers rotate with a tapped card, so they are offset along its length to end up on its left. The offset is divided by .9 to undo the card's scale. */
+.card.pile.tapped::after { transform: translateY(calc(var(--pile-step) / .9)); }
+.card.pile.tapped::before { transform: translateY(calc(2 * var(--pile-step) / .9)); }
+/* A third copy for a pile of four or more, below the other two */
+.card .pile-edge { position: absolute; inset: 0; z-index: -2; display: none; border-radius: var(--radius); background: var(--pile-img, none) center / cover, var(--surface-2);
+  box-shadow: 0 1px 4px #000a; filter: brightness(.45); transform: translateX(calc(-3 * var(--pile-step))); pointer-events: none; }
+.card.pile[data-depth="3"] .pile-edge { display: block; }
+.card.pile.tapped .pile-edge { transform: translateY(calc(3 * var(--pile-step) / .9)); }
+/* A pile holds cards in the same state, so a sick pile greys every copy, not only the top one */
+.card.pile.sickness::after { filter: grayscale(1) brightness(.61); }
+.card.pile.sickness::before { filter: grayscale(1) brightness(.45); }
+.card.pile.sickness .pile-edge { filter: grayscale(1) brightness(.35); }
+/* The pile's count is in the corner, so the summoning sickness label goes just below it */
+.card.pile .sick { right: -3px; top: 21px; }
+.card.pile[data-depth]::after { display: block; }
+.card.pile[data-depth="2"]::before, .card.pile[data-depth="3"]::before { display: block; }
+/* Hidden for the one frame where a pile is drawn at its old depth (motion.ts openPile). These come after the rules above so they win. */
+.card.pile[data-held-depth="0"]::after, .card.pile[data-held-depth="0"]::before, .card.pile[data-held-depth="0"] .pile-edge,
+.card.pile[data-held-depth="1"]::before, .card.pile[data-held-depth="1"] .pile-edge, .card.pile[data-held-depth="2"] .pile-edge { display: none; }
+/* A pile's count is white on black on the top card's corner. When the pile is spread out, the count is muted and is used to close it again. */
+.card .count { display: none; position: absolute; right: -7px; top: -7px; z-index: 3; min-width: 28px; height: 24px; padding: 0 7px; place-items: center; background: #050608; color: #fff; border: 1px solid #ffffff38; border-radius: 12px; box-shadow: 0 2px 6px #000b; font-size: 14.5px; font-weight: 800; cursor: pointer; }
+.card.pile .count, .card .count.opened { display: grid; }
+.card .count.opened { background: #0e1116e6; border: 1px dashed var(--accent-2); color: var(--muted); box-shadow: none; }
+.card:hover { z-index: 5; }
+/* A stack item's menu is drawn like the game menu, above the stack it opens over */
+#stack-menu { z-index: 70; }
+#stack-menu .tick { color: var(--accent-2); }
+#stack-menu [aria-checked="false"] .tick { visibility: hidden; }
+/* A spell whose cost is still being paid is shown over the board */
+.card.paying { transform-origin: 0 0; outline: 2px solid var(--accent-2); outline-offset: 0; border-radius: var(--radius); box-shadow: 0 0 0 4px #0e1116, 0 12px 28px #000c, 0 0 6px color-mix(in srgb, var(--accent-2) 30%, transparent); animation: paying 1.4s ease-in-out infinite; }
+@keyframes paying { 50% { box-shadow: 0 0 0 4px #0e1116, 0 12px 28px #000c, 0 0 10px color-mix(in srgb, var(--accent-2) 45%, transparent); } }
+/* The turn banner replaces the phase pill instead of crossing the board, so it never covers the cards */
+#phase-strip .pill { transition: opacity .16s ease, background-color .15s ease, border-color var(--pill-ms) var(--pill-ease), box-shadow var(--pill-ms) var(--pill-ease); }
+#phase-strip.announcing .pill, #phase-strip.announcing .stops { opacity: 0; pointer-events: none; }
+/* Who goes first and how the game ended are shown in the middle of the board, so the pill is hidden for them too */
+html:has(#first-reveal, #coin-toss) #phase-strip .pill, #match:is(.starting, .ending) #phase-strip .pill { opacity: 0; pointer-events: none; }
+/* The opening hand is dealt and the mulligan is asked only after who goes first has been shown (match/board.ts) */
+#match.starting :is(#prompt, #hand .card, .mate-hand .card) { visibility: hidden; }
+.turn-banner {
+  /* Centred by layout, not by a half-width shift. turnbanner.ts rounds the margins to whole pixels, so its text stays sharp */
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: fit-content;
+  /* Below a card's preview, because the player opens a preview on purpose */
+  z-index: 65;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 0 22px 0 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 80%, #fff), color-mix(in srgb, var(--accent-2) 90%, #000));
+  border: 1px solid color-mix(in srgb, var(--accent-2) 52%, #fff);
+  box-shadow: 0 8px 20px #000a;
+  white-space: nowrap;
+  color: var(--on-brass);
+  /* An entrance and an exit, with nothing running between them. A running animation keeps the banner on its own layer, where its text is drawn softer */
+  animation: turn-in .32s cubic-bezier(.2,.8,.3,1), turn-out .26s ease-in 1.34s forwards;
+}
+.turn-banner .mugshot { flex: none; width: 36px; height: 36px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--on-brass); }
+.turn-banner .mugshot + .mugshot { margin-left: -22px; }
+.turn-banner span.mugshot { display: grid; place-items: center; background: var(--surface-3); color: var(--text); font-size: 15px; font-weight: 700; }
+.turn-banner b { font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+
+.turn-banner::after { content: ''; position: absolute; inset: 0; transform: translateX(-120%); background: linear-gradient(105deg, transparent 40%, #ffffff40 50%, transparent 60%); animation: turn-sheen 1.1s cubic-bezier(.3,.6,.4,1) .26s; }
+@keyframes turn-sheen { to { transform: translateX(120%); } }
+
+/* The coin toss for a match's first game uses mobile's coin. It rises over the page the match was started from and lands on the board.
+   It comes before who goes first is asked or shown (coin.ts). It is drawn outside the board, so it is hidden with the board here */
+html:has(#match[hidden]) #coin-toss { display: none; }
+#coin-toss { position: fixed; inset: 0 calc(var(--side-w) + 16px) 0 0; z-index: 70; display: grid; place-content: center; justify-items: center; gap: 36px;
+  background: radial-gradient(closest-side, #070910d9, #07091000); animation: backdrop-in .25s ease-out; cursor: pointer; --opening: .6s cubic-bezier(.3,.7,.3,1); transition: gap var(--opening); }
+#coin-toss.closing { animation: backdrop-out .2s ease-in forwards; }
+/* A chosen answer dims as a prompt button does (prompt.css), and the panel waits for that before it fades */
+#coin-toss button.pressed { animation: pressed .18s ease-out; }
+#coin-toss.closing:has(button.pressed) { animation-delay: .18s; }
+#coin-toss .coin-scene { position: relative; width: 200px; height: 200px; perspective: 900px; transition: scale var(--opening), margin var(--opening); }
+#coin-toss .coin { position: absolute; inset: 0; transform-style: preserve-3d; }
+#coin-toss .coin i { position: absolute; inset: 0; border-radius: 50%; }
+#coin-toss .coin-side { background: url("../coin?side=heads") center / 102%; backface-visibility: hidden; transform: translateZ(7px); }
+#coin-toss .coin-side.tails { background-image: url("../coin?side=tails"); transform: rotateX(180deg) translateZ(7px); }
+#coin-toss .coin .coin-edge { inset: 1px; background: repeating-conic-gradient(#b8912e 0 1.5deg, #8d6b1c 1.5deg 3deg); }
+#coin-toss .coin-shadow { position: absolute; left: 10%; right: 10%; bottom: -30px; height: 24px; border-radius: 50%; background: #000; filter: blur(11px); opacity: .5; }
+#coin-toss p { margin: 0; font-size: 20px; font-weight: 600; text-align: center; opacity: 0; transition: opacity .3s; }
+#coin-toss.landed p { opacity: 1; }
+/* The question of who goes first opens under the coin that decided it. The coin shrinks in place, and the question and its answers fade in below (firstplayer.ts). */
+#coin-toss.asking { cursor: auto; gap: 14px; }
+#coin-toss.asking .coin-scene { scale: .38; margin: -62px 0; }
+#coin-toss .first-ask { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--opening); }
+#coin-toss.asking .first-ask { grid-template-rows: 1fr; }
+/* The padding leaves room for a face's ring while the question is still opening and clipped */
+#coin-toss .first-ask > div { min-height: 0; overflow: hidden; display: grid; justify-items: center; gap: 18px; padding: 4px 16px 14px; }
+#coin-toss h3 { margin: 0; font-size: 26px; font-weight: 700; text-shadow: 0 1px 8px #000; opacity: 0; translate: 0 6px; transition: opacity .4s .2s, translate .4s .2s ease-out; }
+#coin-toss :is(.first-answers, .first-seats) { display: flex; opacity: 0; translate: 0 8px; transition: opacity .4s .32s, translate .4s .32s ease-out; }
+#coin-toss.asking :is(h3, .first-answers, .first-seats) { opacity: 1; translate: 0 0; }
+/* Play and Draw look like the prompt's buttons they replace: one bar of two equal halves */
+#coin-toss .first-answers { gap: 2px; }
+#coin-toss .first-answers button { display: flex; align-items: center; justify-content: center; gap: 7px; width: 150px; min-height: 44px; padding: 0 12px; border-radius: 8px 4px 4px 8px;
+  font-size: 14px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+#coin-toss .first-answers button:not(.primary) { background: var(--surface-2); border-color: var(--line); color: var(--muted); border-radius: 4px 8px 8px 4px; }
+#coin-toss .first-answers button:not(.primary):hover { color: var(--text); }
+/* Each face can be picked, so it has the same ring as a pickable portrait on the table. The face under the pointer gets the pick ring, and every face shows the turn it would then play. */
+#coin-toss .first-seats { gap: 22px; }
+#coin-toss .first-seat { position: relative; display: grid; justify-items: center; gap: 8px; padding: 0; background: none; border: 0; color: var(--text); font: inherit; cursor: pointer; }
+#coin-toss .first-seat:focus-visible { outline: none; }
+#coin-toss .first-seat .reveal-avatar { width: 64px; height: 64px; font-size: 24px; border-color: transparent; box-shadow: 0 0 0 3px var(--selectable); transition: transform .15s ease, box-shadow .15s ease; }
+#coin-toss .first-seat.lit .reveal-avatar { transform: scale(1.08); box-shadow: 0 0 0 3px var(--pick), 0 0 12px 2px color-mix(in srgb, var(--pick) 55%, transparent); }
+#coin-toss .first-seats.pointing .first-seat:not(.lit) { opacity: .7; }
+#coin-toss .first-seat .turn { position: absolute; top: -4px; right: -6px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; font-style: normal;
+  background: var(--surface-2); color: var(--muted); box-shadow: 0 0 0 1px var(--line-bright); opacity: 0; transition: opacity .15s; }
+#coin-toss .first-seats.pointing .turn { opacity: 1; }
+#coin-toss .first-seat.lit .turn { background: var(--brass); color: var(--on-brass); box-shadow: none; }
+/* The who-goes-first message needs no click, so the mulligan prompt under it can be answered at once */
+#first-reveal { position: fixed; inset: 0 calc(var(--side-w) + 16px) 0 0; z-index: 70; pointer-events: none; display: grid; place-content: center; justify-items: center; gap: 22px;
+  background: radial-gradient(closest-side, #070910d9, #07091000); animation: first-reveal 2.2s ease forwards; }
+#first-reveal .reveal-faces { display: flex; gap: 36px; }
+#first-reveal .reveal-face { display: grid; justify-items: center; gap: 8px; }
+:is(#first-reveal, #coin-toss) .reveal-avatar { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; box-sizing: border-box; border: 2px solid var(--line-bright);
+  background: var(--surface-2); display: grid; place-items: center; font-size: 32px; font-weight: 700; }
+:is(#first-reveal, #coin-toss) .reveal-name { font-size: 13px; font-weight: 600; }
+#first-reveal .reveal-face.first .reveal-avatar { animation: first-lit .45s cubic-bezier(.2,.8,.3,1.2) .45s forwards; }
+#first-reveal .reveal-face:not(.first) { animation: first-dim .45s ease .45s forwards; }
+#first-reveal p { margin: 0; font-size: 26px; font-weight: 700; text-shadow: 0 1px 8px #000; opacity: 0; animation: first-say .4s cubic-bezier(.2,.8,.3,1) .55s forwards; }
+@keyframes first-reveal { from { opacity: 0; } 8% { opacity: 1; } 86% { opacity: 1; } to { opacity: 0; } }
+@keyframes first-lit { to { transform: scale(1.14); border-color: var(--accent-2); box-shadow: 0 0 0 3px #0e1116, 0 0 24px var(--accent-glow); } }
+@keyframes first-dim { to { opacity: .4; transform: scale(.9); } }
+@keyframes first-say { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: none; } }
+/* The message is still shown, only without the motion */
+html[data-motion="reduced"] #first-reveal .reveal-avatar, html[data-motion="reduced"] #first-reveal .reveal-face, html[data-motion="reduced"] #first-reveal p { animation-duration: 1ms; animation-delay: 0s; }
+html[data-motion="reduced"] #coin-toss, html[data-motion="reduced"] #coin-toss * { transition-duration: 1ms; transition-delay: 0s; }
+/* The starting player keeps a mark on their portrait until their first turn ends */
+.avatar.first::after { content: attr(data-first-label); position: absolute; right: -10px; top: -6px; padding: 2px 6px; border-radius: 9px; background: var(--brass); color: var(--on-brass);
+  font-size: 10px; font-weight: 800; letter-spacing: .04em; border: 1px solid color-mix(in srgb, var(--accent-2) 52%, #fff); box-shadow: 0 1px 3px #000a; }
+/* The banner rests with no transform, so its text is drawn afresh instead of as a scaled picture */
+@keyframes turn-in { from { opacity: 0; transform: translateY(-14px); } 60% { opacity: 1; transform: translateY(2px); } }
+@keyframes turn-out { to { opacity: 0; } }
+/* A hit on your own life shakes the board, and a hit on another player shakes only their portrait. Deep red spreads in from the edges and then fades. */
+#match.hit, .avatar.hit { animation: hit-shake .32s ease-out; }
+#match.hit-hard, .avatar.hit-hard { animation: hit-shake-hard .42s ease-out; }
+@keyframes hit-shake { 25%, 75% { transform: translate(1.5px, -1px); } 50% { transform: translate(-2px, 1px); } }
+@keyframes hit-shake-hard { 20%, 70% { transform: translate(3px, -1.5px); } 45% { transform: translate(-4px, 2px); } 90% { transform: translate(1px, -.5px); } }
+.hit-flash { --hit: .85; position: fixed; inset: 0; z-index: 80; overflow: hidden; pointer-events: none; animation: hit-linger 1.2s ease-out forwards;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(176,20,30,calc(.4 * var(--hit))) 67%, rgba(112,6,16,calc(.72 * var(--hit))) 100%); }
+.hit-flash.hard { --hit: 1.25; }
+/* The red edge has a second, inner layer. A noise mask breaks up its inner side so it is not a clean ellipse. */
+.hit-flash::before { content: ''; position: absolute; inset: 0; animation: hit-seep 1.2s ease-out forwards;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(176,20,30,calc(.15 * var(--hit))) 46.5%, rgba(176,20,30,calc(.52 * var(--hit))) 56%, rgba(112,6,16,calc(.65 * var(--hit))) 74%);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.021' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  4.03 0 0 0 -1.68'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 52vw 52vw; }
+@keyframes hit-linger { from { opacity: 0; } 8% { opacity: 1; } 40% { opacity: .75; } to { opacity: 0; } }
+@keyframes hit-seep { from { scale: 1.07; } 12% { scale: 1; } to { scale: 1.115; } }
+html[data-motion="reduced"] .hit-flash::before { animation: none; }
+@keyframes hit-wash { from { opacity: 0; } 25% { opacity: 1; } to { opacity: 0; } }
+/* Another player's hit uses the same red edge, limited to the part of the screen near their portrait */
+.hit-flash.near { mask-image: radial-gradient(circle at var(--at), #000 0 20%, transparent 46%); }
+/* The hit also shows as a ring round the portrait */
+.avatar-hit { position: absolute; inset: -22px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, transparent 56%, rgba(255,122,89,.55) 64%, transparent 78%); animation: hit-wash .55s ease-out forwards; }
+html[data-motion="reduced"] .avatar.hit, html[data-motion="reduced"] .avatar.hit-hard { animation: none; }
+
+/* A spell that can be targeted is picked on the stack. It stays bright while the rest dims. */
+#stack .stack-item.targetable { cursor: pointer; }
+#stack .stack-item.targetable:hover { outline-color: var(--text); }
+#stack .stack-item.highlighted { outline: 3px solid var(--pick); }
+
+/* A one-pixel highlight along the top edge makes a dark panel look raised instead of sunken */
+.zone-panel { box-shadow: inset 0 1px 0 #ffffff12; }
+
+/* Planechase: the face-up planes are cards at the left end of the phase strip, in line with the pill, with the planar die on the corner */
+#match { --plane-w: clamp(96px, 10.4vw, 150px); }
+/* With more than two players the seats fill the space beside the strip */
+#match:is(.many, .quads, .tabbed) { --plane-w: 104px; }
+#plane-dock { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); z-index: 6; }
+#plane-dock .planes { display: flex; }
+/* A violet edge in the die preview's colours. It is outside the card's own size. */
+#plane-dock .plane { box-sizing: content-box; width: var(--plane-w); aspect-ratio: 88 / 63; margin: -3px; border: 3px solid transparent; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 4px 12px #000a;
+  background: linear-gradient(var(--surface-2) 0 0) padding-box, linear-gradient(165deg, #4d4a9e, #3d327f 60%, #35286f) border-box; }
+/* Two planes overlap, like a spread of cards. The one hovered comes to the front. */
+#plane-dock .plane + .plane { margin-left: calc(var(--plane-w) * -.7 - 3px); transform: translateY(14px); }
+#plane-dock .plane:has(+ .plane) { transform: translateY(-14px); }
+#plane-dock .plane:hover { z-index: 1; }
+/* A plane is printed sideways, so it is rotated to landscape */
+#plane-dock .plane img, .editor-shell.planar .tile img { max-width: none; position: absolute; left: 50%; top: 50%; width: 71.6%; height: 139.7%; object-fit: cover; transform: translate(-50%, -50%) rotate(90deg); }
+/* The card shows its own name. The label is for a card with no picture. */
+#plane-dock .plane-name { position: absolute; inset: 0; display: grid; opacity: 0; place-items: center; padding: 6px; text-align: center; font-size: 11px; font-weight: 700; }
+#plane-dock .plane.noimg .plane-name { opacity: 1; }
+#plane-dock .plane.noimg img { display: none; }
+#plane-dock .die-button { position: absolute; right: -8px; bottom: -8px; z-index: 2; width: 34px; height: 34px; padding: 0; display: grid; place-items: center; border-radius: 10px; background: var(--bg); border: 1px solid var(--line-bright); color: var(--text); }
+#plane-dock:has(.plane + .plane) .die-button { bottom: -22px; }
+#plane-dock .die-button .cube { width: 29px; height: 29px; }
+/* The marks are a little thicker at this size, so they stay readable */
+#plane-dock .die-button .marks { stroke-width: 2.3; }
+#plane-dock .die-button[aria-disabled="true"] { cursor: default; }
+#plane-dock .die-button[aria-disabled="true"] .cube { opacity: .45; }
+#plane-dock .die-button:not([aria-disabled="true"]):hover { border-color: var(--accent-2); }
+#plane-dock .die-button.playable { outline: 2px solid var(--playable, #66ccff); outline-offset: 0; }
+/* The planar die is previewed as its rules text: the die in front of a rift, then a row for each result */
+#zoom:not(.die) .rift, #zoom.die .detail > :is(.type, .foot) { display: none; }
+#zoom.die .detail { --frame: #6a5aa8; aspect-ratio: auto; }
+#zoom .rift { position: relative; flex: none; height: 176px; border-radius: 6px; overflow: hidden; background: radial-gradient(60% 80% at 50% 50%, #0f2a3a 0%, #080b18 70%); }
+#zoom .rift > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+#zoom .rift .clouds { mix-blend-mode: screen; opacity: .55; }
+#zoom .rift .rays { background: repeating-conic-gradient(from 8deg at 50% 50%, #a9d8ff16 0 3deg, transparent 3deg 13deg); mask: radial-gradient(60% 90% at 50% 50%, #000, transparent); }
+#zoom .rift .halo { background: radial-gradient(46% 100% at 50% 50%, #5a7cff80 0%, #5f3fd045 50%, transparent 100%); }
+#zoom .rift > .tear { inset: -60px 0; height: auto; background: radial-gradient(21% 60% at 50% 50%, #f6fcff 0%, #a9e6ff 20%, #4f86e6b8 46%, transparent 100%); filter: blur(6px); transform: rotate(24deg); }
+#zoom .rift .stars { background: radial-gradient(1px 1px at 8% 20%, #fff, transparent), radial-gradient(1.4px 1.4px at 18% 72%, #dcd3ff, transparent), radial-gradient(1px 1px at 27% 38%, #fff9, transparent), radial-gradient(1px 1px at 34% 86%, #fff, transparent),
+  radial-gradient(1.6px 1.6px at 71% 16%, #fff, transparent), radial-gradient(1px 1px at 78% 64%, #fff, transparent), radial-gradient(1.2px 1.2px at 87% 34%, #cfc4ff, transparent), radial-gradient(1px 1px at 93% 80%, #fff, transparent); }
+#zoom .rift .edge { background: radial-gradient(70% 85% at 50% 50%, transparent 40%, #04030ae0 100%); }
+#zoom .rift > .cube { inset: 18px 0; height: calc(100% - 36px); filter: drop-shadow(0 0 16px #b79bff66) drop-shadow(0 12px 10px #000c); }
+.cube .faces path { stroke: #8d8268; stroke-linejoin: round; }
+.cube .f-top { fill: #fbf8f0; }
+.cube .f-left { fill: #e6dfcf; }
+.cube .f-right { fill: #c8bfa9; }
+.cube .marks { fill: none; stroke: #1a1712; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.die-row { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 11px; align-items: start; }
+.die-row.blank { align-items: center; }
+.die-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.die-head b { font-size: 14px; }
+#zoom.die .odds { font-weight: 600; font-variant-numeric: tabular-nums; }
+.die-chip { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: #f1ece0; color: #1a1712; box-shadow: inset 0 -3px 0 #cfc5ae; }
+.die-chip .g { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.blank > .die-chip { background: #cfc9bb; color: #857d6b; }
+#zoom.die .why { color: var(--muted); font-style: italic; }
+#zoom.die .what .sym { width: 14px; height: 14px; vertical-align: -2px; }
+/* The waiting chip is cut short where it would reach the planes */
+#match.planar { --plane-end: calc(var(--plane-w) + 34px); }
+#match.planar:has(.plane + .plane) { --plane-end: calc(var(--plane-w) * 1.3 + 34px); }
+#match.planar #phase-strip .waiting { max-width: max(84px, calc((100vw - var(--side-gap) - 4px) / 2 - 250px - var(--plane-end))); }
+#match.planar #phase-strip .waiting .who { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#match.planar #phase-strip .waiting > :is(.glyph, b) { flex: none; }
+@media (max-width: 1400px) {
+  #match.planar #phase-strip .waiting { right: calc(100% + 16px); max-width: max(84px, calc((100vw - var(--side-gap) - 4px) / 2 - 216px - var(--plane-end))); }
+}
+/* There is room only for the chip's icon and time */
+@media (max-width: 1100px) {
+  #match, #match:is(.many, .quads, .tabbed) { --plane-w: 84px; }
+  #match.planar #phase-strip .waiting { padding: 0 8px; }
+  #match.planar #phase-strip .waiting .who { display: none; }
+}
+/* The day and night medal goes to the other end of the strip */
+#match.planar #sky { justify-self: end; margin: 0 25px 0 0; }
+.zone-tile.hidden-deck { cursor: default; }
+
+/* Archenemy: a brass tag next to the name and the ongoing schemes in a row under the seat. A scheme set in motion is shown large. */
+.role-tag { margin-left: 6px; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--brass); color: var(--on-brass); vertical-align: middle; }
+.schemes-ongoing:empty { display: none; }
+.schemes-ongoing { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.scheme { width: 72px; aspect-ratio: 88 / 63; border-radius: 5px; overflow: hidden; position: relative; background: var(--surface-2); box-shadow: 0 3px 8px #0009, inset 0 0 0 1px #ffffff2a; }
+/* A scheme is printed upright. Its small tile shows only the art. */
+.scheme img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+.scheme .scheme-name { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 4px 2px; font-size: 8.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: linear-gradient(180deg, transparent, #000000d0 45%); }
+.scheme-reveal { position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; align-content: center; gap: 12px; background: var(--scrim); pointer-events: none; }
+.scheme-reveal .scheme.big { width: min(320px, 70vw); aspect-ratio: 63 / 88; }
+.scheme-reveal .scheme.big .scheme-name { font-size: 15px; padding: 14px 10px 6px; }
+.scheme-reveal p { margin: 0; color: var(--text); font-size: 15px; }
+/* Why a dragged block was refused, shown where the card was dropped */
+.block-tip { position: fixed; z-index: 90; max-width: 240px; display: grid; gap: 2px; padding: 6px 10px; pointer-events: none;
+  font-size: 12px; line-height: 1.35; color: var(--muted); background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(4px);
+  border: 1px solid var(--line-bright); border-left: 2px solid var(--accent-2); border-radius: 8px; box-shadow: 0 8px 22px var(--scrim-deep);
+  animation: block-tip-in .14s ease-out; }
+.block-tip b { color: var(--text); font-weight: 700; }
+.block-tip.leaving { animation: block-tip-out .2s ease-in forwards; }
+@keyframes block-tip-in { from { opacity: 0; transform: translateY(3px); } }
+@keyframes block-tip-out { to { opacity: 0; } }
+
+/* Stickers are drawn on the card image as pieces cut from their sheet's image. They have a white edge like paper stickers. */
+.card > .stickers, #zoom .shot > .stickers { position: absolute; inset: 0; z-index: 2; pointer-events: none; container-type: size; }
+.stickers .stk { position: absolute; display: block; background-repeat: no-repeat; border-radius: 6% / 10%; filter: drop-shadow(0 .4cqw .5cqw #000a); }
+.stickers .stk.art { border-radius: 18%; }
+/* An ability sticker is drawn on lavender paper, as the sheets print it */
+.stickers .stk.words { left: 7%; right: 7%; padding: .6cqw 2cqw; border: .5cqw solid #fff; border-radius: 1.5cqw; background: #dcd3f0; color: #1b1a17;
+  font: 600 6cqw/1.15 Georgia, "Times New Roman", serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#zoom .shot > .stickers .stk.words { white-space: normal; }
+/* The place of a sticker peeled off its sheet is hatched with a dashed edge. So it reads as gone without relying on colour. */
+.stickers .stk.peeled { filter: none; border: .5cqw dashed #9c8f73; border-radius: 1.5cqw; background: repeating-linear-gradient(135deg, #e9dfc6 0 1.2cqw, #c9bc9c 1.2cqw 2.4cqw); }
+.text-option .stk-cut { display: inline-block; height: 26px; margin-right: 8px; vertical-align: middle; background-repeat: no-repeat; border-radius: 4px; }

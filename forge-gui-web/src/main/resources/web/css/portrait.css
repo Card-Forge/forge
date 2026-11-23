@@ -1,0 +1,754 @@
+/* Rules for a phone or tablet held upright (form.ts sets data-form). Every rule that only this form needs is here. Nothing here applies to the desktop layout with a mouse. A page's own file keeps only the desktop-only rules, under html:not([data-form="portrait"]). The width queries in other files also apply on a phone. */
+/* Turns off the browser's own touch actions: pull to refresh, double-tap zoom and the long-press callout */
+html[data-form="portrait"], html[data-form="portrait"] body { overscroll-behavior: none; }
+@media (hover: none) {
+  #match { touch-action: manipulation; }
+  #match :is(.card, .avatar, .zone-tile, .stack-item, #phase-strip, #prompt, img) { -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+  /* A long press on a card in a menu opens its preview over the card. Without these rules, the browser's own highlight would show over the preview. */
+  :is([data-image], [data-image] img) { -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  /* On a touch screen, :hover stays on the last thing touched. So the hover rules that move or enlarge a hand card are cancelled. */
+  #hand .card:hover { transform: translateX(var(--shift, 0px)) translateY(var(--drop, 0px)) rotate(var(--tilt, 0deg)); z-index: auto; box-shadow: var(--lift, none); }
+  #hand .card:hover::after { content: none; }
+  #hand .card:is(:has(~ .card:hover), :hover ~ .card, :has(+ .card:hover), :hover + .card) { --shift: 0px; }
+  #hand .card:hover :is(.cost-badge, .seen) { transform: none; }
+  :is(#prompt, .first-answers) kbd { display: none; }
+}
+
+html[data-form="portrait"] #match { height: 100dvh; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto minmax(0, 1fr) auto auto;
+  grid-template-areas: "tabs" "opp" "phase" "me" "hand" "prompt"; gap: 0; padding: 0; --side-w: 0px; --side-gap: 0px; --prompt-w: 0px; }
+html[data-form="portrait"] #side { display: none; }
+#menu-button { display: none; }
+html[data-form="portrait"] #menu-button { display: grid; place-items: center; position: fixed; top: 0; right: 4px; z-index: 27; width: 44px; height: 44px; padding: 0; background: none; border-color: transparent; }
+html[data-form="portrait"] #menu-button svg { width: 22px; height: 22px; fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; }
+
+/* The dock uses the Forge mobile prompt layout. OK and Cancel are in opposite corners. The message is between them, under the step's name. */
+html[data-form="portrait"] #prompt { grid-area: prompt; position: relative; right: auto; bottom: auto; width: auto; margin: 0; align-self: stretch; z-index: 60; border-radius: 0; border-width: 1px 0 0; border-color: var(--accent);
+  padding: 0 0 env(safe-area-inset-bottom); box-shadow: 0 -8px 24px #0008; backdrop-filter: none; background: var(--surface);
+  display: grid; grid-template-columns: 92px minmax(0, 1fr) 92px; grid-template-rows: auto auto auto; min-height: 44px; box-sizing: content-box; gap: 0;
+  grid-template-areas: "ok step cancel" "ok body cancel" "players players players"; }
+html[data-form="portrait"] #prompt.waiting { border-color: var(--accent-2); }
+html[data-form="portrait"] #prompt .glints { display: none; }
+html[data-form="portrait"] #prompt .step { grid-area: step; align-self: end; margin: 0; padding: 3px 10px 0; font-size: 9px; line-height: 10px; letter-spacing: .12em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html[data-form="portrait"] #match > .tools { grid-area: me; align-self: end; justify-self: end; z-index: 7; height: 44px; margin: 0 2px 0 0; gap: 0; }
+html[data-form="portrait"] #match > .tools[hidden] { display: none; }
+html[data-form="portrait"] #match > .tools button { width: 36px; height: 44px; }
+html[data-form="portrait"] #match > .tools svg { width: 19px; height: 19px; }
+html[data-form="portrait"] #match > .tools :is(.tools-gap, .volume) { display: none; }
+@media (max-width: 374px) { html[data-form="portrait"] #match > .tools button { width: 34px; } }
+html[data-form="portrait"] #prompt:has(.message:empty) .step { grid-row: 1 / 3; align-self: center; padding-top: 0; font-size: 11px; }
+html[data-form="portrait"] #prompt .buttons { display: contents; }
+html[data-form="portrait"] #prompt .ok { grid-area: ok; }
+html[data-form="portrait"] #prompt .cancel { grid-area: cancel; max-width: none; }
+html[data-form="portrait"] #prompt :is(.ok, .cancel) { height: auto; min-height: 44px; min-width: 0; border-radius: 0; font-size: 13px; padding: 0 4px; align-self: stretch; }
+html[data-form="portrait"] #prompt :is(.ok, .cancel) .label { white-space: normal; text-align: center; line-height: 1.1; }
+html[data-form="portrait"] #prompt .prompt-body { grid-area: body; align-self: start; padding: 0 10px 2px; min-width: 0; }
+html[data-form="portrait"] #prompt .prompt-card { display: none; }
+html[data-form="portrait"] #prompt .message { max-height: none; font-size: 12px; line-height: 1.2; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+html[data-form="portrait"] #prompt.open .message { -webkit-line-clamp: unset; max-height: 40dvh; overflow-y: auto; }
+html[data-form="portrait"] #prompt .choose-players { grid-area: players; padding: 6px 8px; }
+html[data-form="portrait"] #prompt.pulse { animation: dock-pulse .5s ease-out; }
+@keyframes dock-pulse { from { filter: brightness(1.6); } }
+html[data-motion="reduced"] #prompt.pulse { animation: none; }
+
+/* Each player is shown as one bar: portrait, life and name, then the zone counts. The opponent's bar is the top row. Your bar is just above your hand. */
+html[data-form="portrait"] #match .seat { --card-w: 52px; --card-h: 73px; --min-card-w: 40px; --tile-w: 42px; grid-template-rows: auto minmax(0, 1fr); gap: 0; align-items: stretch; padding: 0 6px; }
+html[data-form="portrait"] #match #me { --card-w: 60px; --card-h: 84px; grid-template-rows: minmax(0, 1fr) auto; }
+html[data-form="portrait"] #match #me .player { order: 2; }
+html[data-form="portrait"] #match .seat .player { position: relative; left: auto; top: auto; bottom: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0 8px; }
+html[data-form="portrait"] #opponent.seat .player { padding-right: 46px; }
+/* Your bar stops before the tools at its right end */
+html[data-form="portrait"] #match #me .player { padding-right: 148px; }
+@media (max-width: 374px) { html[data-form="portrait"] #match #me .player { padding-right: 138px; } }
+html[data-form="portrait"] #match .seat .player-id { display: grid; grid-template-columns: 36px auto; grid-template-rows: auto; column-gap: 8px; row-gap: 0; align-items: end; justify-items: start; order: 0; min-width: 78px; flex: 0 1 auto; overflow: hidden; padding: 4px 0 4px 6px; margin-left: -6px; }
+html[data-form="portrait"] #match .seat .player-id .avatar { grid-row: 1; grid-column: 1; width: 36px; height: 36px; align-self: center; }
+html[data-form="portrait"] #match .seat .avatar .initial { font-size: 18px; }
+html[data-form="portrait"] #match .seat .avatar .ai-badge { width: 18px; height: 18px; left: -5px; top: -5px; padding: 2px; }
+html[data-form="portrait"] #match .seat .avatar .life { left: calc(100% + 8px); bottom: auto; top: 0; padding: 0; border: 0; background: none; font-size: 20px; line-height: 1; font-weight: 800; }
+html[data-form="portrait"] #match .seat .player-id .name { grid-row: 1; grid-column: 2; min-width: 34px; max-width: 84px; font-size: 11px; font-weight: 700; color: var(--muted); padding-bottom: 2px; }
+html[data-form="portrait"] #match .seat .player-id .hand-fan { grid-row: 1; grid-column: 3; margin: 0; min-width: 44px; min-height: 40px; align-self: center; }
+/* There is no room to show every zone tile, so the zone counts follow the name along the bar. A tap opens the tiles over the board. */
+.zones-pill { display: none; }
+html[data-form="portrait"] #match .seat .zones-pill { order: 1; flex: 0 1 auto; min-width: 0; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: flex-start; gap: 8px; height: 44px; padding: 0 4px; border: 0; border-radius: 8px; background: none; color: var(--text); font-weight: 700; font-size: 13px; }
+html[data-form="portrait"] .zones-pill span { display: flex; align-items: center; gap: 3px; }
+html[data-form="portrait"] .zones-pill span[hidden] { display: none; }
+html[data-form="portrait"] .zones-pill svg { width: 15px; height: 15px; fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+html[data-form="portrait"] .zones-pill.more::after { content: '+'; color: var(--muted); }
+html[data-form="portrait"] #match .seat .zones-pill.lit { box-shadow: inset 0 0 0 1px var(--select), 0 0 8px color-mix(in srgb, var(--select) 45%, transparent); }
+html[data-form="portrait"] #match .seat .zones-pill[aria-expanded="true"] { background: var(--surface-3); box-shadow: inset 0 0 0 1px var(--accent-2); }
+html[data-form="portrait"] #match .seat .zone-tiles { display: none; }
+html[data-form="portrait"] #match .seat.zones-open .zone-tiles { --tile-w: 56px; display: grid; position: absolute; left: 0; top: calc(100% + 4px); z-index: 28; gap: 5px; padding: 6px; max-width: calc(100vw - 12px); box-sizing: border-box; overflow-x: auto;
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 12px; box-shadow: 0 12px 34px #000c; }
+html[data-form="portrait"] #match #me.zones-open .zone-tiles { top: auto; bottom: calc(100% + 4px); }
+html[data-form="portrait"] #match .seat.zones-open .zone-tile { height: calc(var(--tile-w) * 1.4); }
+/* Counters, emblems and floating mana get their own line, but only when there are any */
+html[data-form="portrait"] #match .seat .player-extra { position: static; order: 3; flex: 1 0 100%; flex-direction: row; align-items: center; gap: 6px; min-height: 24px; overflow-x: auto; scrollbar-width: none; }
+html[data-form="portrait"] #match #me .player-extra { order: -1; }
+html[data-form="portrait"] #match .seat .player-extra :is(.player-counter, .emblem, .cmd-tile, .mana-chips > *) { position: relative; }
+html[data-form="portrait"] #match .seat .player-extra :is(.player-counter, .emblem, .cmd-tile, .mana-chips > *)::after { content: ''; position: absolute; inset: -10px -3px; }
+html[data-form="portrait"] #match .seat .battlefield { --row-gap-0: 12px; --row-gap-1: 16px; --fit-spare: 18px; gap: 0; padding: 9px 5px 12px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; }
+html[data-form="portrait"] #match .seat .battlefield.crowded { overflow-y: auto; }
+html[data-form="portrait"] #match .seat .row { gap: 12px; padding-top: 4px; min-height: 0; }
+html[data-form="portrait"] #match .seat .row > .group.far { margin-left: 0; }
+/* Your player line is not next to the hand here, so the hand keeps no padding for it */
+html[data-form="portrait"] #hand { padding-left: 0; padding-right: 0; }
+/* The hand is shown as a strip of card tops until its drawer is opened */
+html[data-form="portrait"] #match { --hand-w: 50px; --hand-h: 70px; }
+/* The card image shows its own cost, so no cost badge is drawn over it here. The exception is a changed cost in the open drawer. */
+html[data-form="portrait"] #hand { height: 52px; margin-top: 0; padding-top: 6px; box-sizing: border-box; overflow: hidden; }
+html[data-form="portrait"] #hand .card .cost-badge:not(.changed), html[data-form="portrait"] #hand.strip .card .cost-badge { display: none; }
+html[data-form="portrait"] #hand::before { display: none; }
+html[data-form="portrait"] #hand.strip .card { pointer-events: none; }
+/* A card whose image has not loaded shows its name on one line, because the strip only shows one line */
+html[data-form="portrait"] #hand.strip .card .frame .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#hand-head { display: none; }
+/* The open hand is a drawer with four cards to a row, so a full hand fits at once. A line above the cards says what is on the stack. */
+html[data-form="portrait"] #match #hand.sheet { --hand-w: calc((100vw - 48px) / 4); --hand-h: calc(var(--hand-w) * 88 / 63); height: auto; max-height: calc((100dvh - var(--dock-h, 110px)) * .6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center; align-items: start; gap: 18px 8px; padding: 64px 12px 12px; overflow-y: auto; }
+html[data-form="portrait"] #hand.sheet .card { margin: 0; transform: none; }
+html[data-form="portrait"] #hand.sheet .card::after { content: none; }
+/* The open drawer is taken out of the board's grid rows. The strip's row keeps its height, so the board behind does not move. */
+html[data-form="portrait"] #match:has(#hand.sheet) { grid-template-rows: auto minmax(0, 1fr) auto minmax(0, 1fr) 52px auto; }
+html[data-form="portrait"] #hand-head:not([hidden]) { display: flex; align-items: center; gap: 8px; position: fixed; left: 0; right: 0; z-index: 51; height: 44px; padding: 0 8px 0 16px; box-sizing: border-box; }
+html[data-form="portrait"] #hand-head .on-stack { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent-2); font-size: 12px; }
+html[data-form="portrait"] #hand-head .close { min-width: 64px; min-height: 44px; margin-left: auto; }
+
+/* A sheet opens upward from the top of the dock and never covers it */
+html[data-form="portrait"] :is(#match, #dialog-layer) .sheet, html[data-form="portrait"] #zoom.sheet { position: fixed; left: 0; right: 0; bottom: var(--dock-h, 110px); top: auto; z-index: 50; width: auto; max-width: none; max-height: calc(100dvh - var(--dock-h, 110px) - 40px); margin: 0; box-sizing: border-box;
+  overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border: 0; border-top: 1px solid var(--line-bright); border-radius: 16px 16px 0 0; box-shadow: 0 -16px 40px #000c; padding: 22px 12px 12px; transform: none; }
+html[data-form="portrait"] :is(#match, #dialog-layer) .sheet::before, html[data-form="portrait"] #zoom.sheet::before { content: ''; position: absolute; top: 8px; bottom: auto; left: 50%; width: 40px; height: 5px; margin-left: -20px; border: 0; border-radius: 3px; background: var(--line-bright); transform: none; }
+html[data-form="portrait"] :is(#match, #dialog-layer) .sheet[hidden] { display: none; }
+
+/* The phase strip shows whose turn it is, the current step, and the steps on each side of it. A tap anywhere on it opens the stops. */
+html[data-form="portrait"] #phase-strip { padding: 0 6px; }
+/* The planes are on the pill's line. The pill gives up the name of the player whose turn it is, and with two planes their picture. */
+html[data-form="portrait"] #match { --plane-w: 72px; }
+html[data-form="portrait"] #plane-dock { left: 8px; }
+html[data-form="portrait"] #match.planar #phase-strip { padding-left: calc(var(--plane-w) + 18px); }
+html[data-form="portrait"] #match.planar:has(.plane + .plane) #phase-strip { padding-left: calc(var(--plane-w) * 1.3 + 18px); }
+html[data-form="portrait"] #match.planar:has(.plane + .plane) #phase-strip .owner { display: none; }
+html[data-form="portrait"] #match.planar #phase-strip .owner { padding-right: 3px; }
+html[data-form="portrait"] #match.planar #phase-strip .owner :is(b, .turn) { display: none; }
+/* On a narrow phone the longest phase name leaves no room for the picture */
+@media (max-width: 379px) {
+  html[data-form="portrait"] #match { --plane-w: 64px; }
+  html[data-form="portrait"] #match.planar #phase-strip .owner { display: none; }
+}
+html[data-form="portrait"] #plane-dock .die-button { right: -10px; width: 28px; height: 28px; }
+html[data-form="portrait"] #plane-dock .die-button .cube { width: 24px; height: 24px; }
+/* The die looks small, but its touch area is taller and wider */
+html[data-form="portrait"] #plane-dock .die-button::before { content: ''; position: absolute; inset: -6px; }
+html[data-form="portrait"] #match.planar #phase-strip .waiting { right: auto; max-width: none; padding: 0 10px 0 8px; }
+html[data-form="portrait"] #match.planar #phase-strip .waiting .who { display: block; }
+/* The pill fills the row and already names the time of day, so the medallion has no room and is not needed */
+html[data-form="portrait"] #sky { display: none; }
+html[data-form="portrait"] #phase-strip .pill { position: relative; width: 100%; height: 32px; box-sizing: border-box; border-radius: 16px; gap: 4px; padding: 0 8px 0 4px; min-width: 0; }
+html[data-form="portrait"] .turn-banner { height: 38px; gap: 9px; padding: 0 16px 0 4px; }
+html[data-form="portrait"] .turn-banner .mugshot { width: 30px; height: 30px; font-size: 13px; }
+html[data-form="portrait"] .turn-banner b { font-size: 13px; }
+/* The pill looks slim, but its touch area is taller */
+html[data-form="portrait"] #phase-strip .pill::before { content: ''; position: absolute; inset: -6px 0; }
+/* When space is short, the turn number is hidden before the player's name. It wraps whole onto a second line that the pill hides, because a cut-off number would look like a different turn. */
+html[data-form="portrait"] #phase-strip .owner { min-width: 0; flex: 0 1 auto; flex-wrap: wrap; align-content: flex-start; row-gap: 30px; padding-right: 8px; }
+html[data-form="portrait"] #phase-strip .owner b { flex: none; }
+html[data-form="portrait"] #phase-strip .owner .turn { flex: none; white-space: nowrap; line-height: 30px; }
+html[data-form="portrait"] #phase-strip .track { margin-left: auto; }
+html[data-form="portrait"] #phase-strip .phase .mark { width: 22px; }
+html[data-form="portrait"] #phase-strip .caret { display: none; }
+/* The waiting and passing chips are drawn over the ends of the strip, because there is no room beside it */
+/* The dock already says who the game is waiting for. So only the chip that says others are waiting for you is kept, over the end of the strip. */
+html[data-form="portrait"] #phase-strip .waiting:not(.you) { display: none; }
+html[data-form="portrait"] #phase-strip .waiting { right: auto; left: 12px; top: -14px; transform: none; z-index: 3; }
+html[data-form="portrait"] #phase-strip .until { left: auto; right: 6px; top: 0; transform: none; z-index: 3; height: 32px; min-width: 44px; padding: 0 12px; border-radius: 16px; }
+html[data-form="portrait"] #phase-strip .until :is(.verb, .stop) { display: none; }
+/* The stops grid is shown in a sheet. Every cell is large enough for a finger, and the grid scrolls sideways inside the sheet. */
+.until-row { display: none; }
+html[data-form="portrait"] #phase-strip .stops .grid-scroll { overflow-x: auto; overscroll-behavior-x: contain; margin: 0 -12px; padding: 0 12px; }
+html[data-form="portrait"] #phase-strip .stops :is(td, th) { height: 44px; }
+html[data-form="portrait"] #phase-strip .stops th { min-width: 44px; width: 44px; }
+html[data-form="portrait"] #phase-strip .stops th.group { height: auto; }
+html[data-form="portrait"] #phase-strip .stops .cell { min-width: 44px; height: 44px; }
+html[data-form="portrait"] #phase-strip .stops .square { width: 18px; height: 18px; }
+html[data-form="portrait"] #phase-strip .stops .row-tool { height: 44px; padding: 0 12px; font-size: 12px; }
+html[data-form="portrait"] .until-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 10px 0 4px; }
+html[data-form="portrait"] .until-row span { width: 100%; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+html[data-form="portrait"] .until-row button { min-height: 44px; flex: 1 1 30%; }
+html[data-form="portrait"] .until-row button.on { background: var(--brass); color: var(--on-brass); }
+@media (hover: none) {
+  /* The hint explains the mouse buttons, so a touch screen does not need it */
+  #phase-strip .stops .hint { display: none; }
+}
+/* The hand size is already one of the counts on the player's bar, so it is not repeated beside the portrait */
+html[data-form="portrait"] #match .seat .hand-fan { display: none; }
+
+/* The hover preview, kept open by a long press. It shows the card, then the mouse actions for it as buttons.
+   On a wide touch screen it is a panel in the middle. On a phone it is a sheet above the dock. */
+#zoom.sheet { right: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: auto; padding: 14px; box-sizing: border-box;
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 14px; box-shadow: 0 16px 50px #000d; }
+#zoom.sheet > .hint { display: none; }
+/* The sheet has no room above the card, so the zone's name sits on the card's bottom edge */
+html[data-form="portrait"] #zoom .from-tab { bottom: 0; transform: translate(-50%, 50%); padding: 4px 12px; font-size: 12px; }
+html[data-form="portrait"] #zoom.image-only:has(.from-tab:not(:empty)) { gap: 20px; }
+html[data-form="portrait"] #zoom.sheet { --zoom-w: min(62vw, calc((100dvh - var(--dock-h, 110px) - 250px) * 63 / 88)); }
+/* The die's rows are text, so they use the sheet's width */
+html[data-form="portrait"] #zoom.sheet.die { --zoom-w: min(88vw, 340px); }
+html[data-form="portrait"] #zoom.sheet .rift { height: 104px; }
+/* Outside a match there is no dock, so the sheet opens from the bottom of the screen */
+html[data-form="portrait"] #match[hidden] ~ #zoom.sheet { --dock-h: 0px; }
+.sheet-actions { display: none; }
+#zoom.sheet .sheet-actions:not([hidden]) { display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) 44px; gap: 8px; width: 100%; min-width: min(var(--zoom-w), 90vw); align-items: center; }
+.sheet-actions button { min-height: 48px; min-width: 0; grid-column: span 2; }
+.sheet-actions :is(.sheet-prev, .sheet-next) { grid-column: span 1; min-height: 44px; font-size: 22px; line-height: 1; padding: 0; }
+.sheet-actions .sheet-at { grid-column: span 2; text-align: center; color: var(--muted); font-size: 12px; }
+.sheet-actions .sheet-act { background: var(--brass); color: var(--on-brass); font-weight: 800; border-color: var(--accent); }
+/* A button that is alone in its row fills the whole row */
+.sheet-actions .sheet-act:not([hidden]):has(+ .sheet-abilities[hidden]), .sheet-actions .sheet-flip[hidden] + .sheet-close { grid-column: 1 / -1; }
+/* A card's menu and the stack menu open at the pointer on a desktop. Here they are a sheet above the dock. */
+html[data-form="portrait"] #dialog-layer .backdrop.anchored .card-menu, html[data-form="portrait"] #stack-menu { position: fixed; left: 0 !important; right: 0; top: auto !important; bottom: var(--dock-h, 110px); width: auto; max-width: none; box-sizing: border-box; border-radius: 16px 16px 0 0; padding: 12px; }
+html[data-form="portrait"] :is(.card-menu, #stack-menu) .card-menu-item { min-height: 48px; }
+/* The game menu is a short list, so its rows are closer together */
+html[data-form="portrait"] #dialog-layer .backdrop.anchored .game-menu { padding: 6px 12px; }
+html[data-form="portrait"] #dialog-layer .game-menu .card-menu-item { min-height: 40px; padding-top: 0; padding-bottom: 0; }
+html[data-form="portrait"] #dialog-layer .game-menu .card-menu-sep { margin: 1px 4px; }
+html[data-form="portrait"] .card-menu kbd { display: none; }
+/* A pressed card flashes at once, before the host responds */
+@media (hover: none) {
+  #match .card.pressed { animation: card-pressed .25s ease-out; }
+}
+@keyframes card-pressed { from { filter: brightness(1.5); } }
+/* The who-went-first mark is placed under the portrait, away from the life total next to it */
+html[data-form="portrait"] #match .seat .avatar.first::after { right: auto; left: -6px; top: auto; bottom: -9px; font-size: 9px; padding: 0 4px; }
+
+/* The stack is a chip below the phase strip that names what resolves next. It opens to a list. */
+html[data-form="portrait"] #match #stack.chip { left: 6px; right: 6px; width: auto; z-index: 26; padding: 0 8px; gap: 0; box-sizing: border-box; }
+html[data-form="portrait"] #match #stack.chip .head { min-height: 44px; gap: 8px; padding: 0; border: 0; letter-spacing: 0; text-transform: none; font-size: 13px; }
+html[data-form="portrait"] #stack.chip .head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-form="portrait"] #stack.chip .head .collapse { margin-left: 0; min-width: 56px; min-height: 36px; font-size: 12px; }
+html[data-form="portrait"] #stack.chip .pile { display: grid; gap: 6px; max-height: 30dvh; overflow-y: auto; padding-bottom: 8px; transition: none; }
+html[data-form="portrait"] #stack.chip.collapsed .pile { display: none; }
+html[data-form="portrait"] #stack.chip .stack-item { position: relative; left: auto; width: auto; height: auto; min-height: 56px; display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; column-gap: 8px; align-items: center; padding: 4px 6px 4px 4px; transform: none; box-shadow: none; }
+html[data-form="portrait"] #stack.chip .stack-item img { grid-column: 1; grid-row: 1 / 3; width: 38px; height: 53px; border-radius: 4px; }
+html[data-form="portrait"] #stack.chip .stack-item .frame { position: static; grid-column: 2; padding: 0; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-form="portrait"] #stack.chip .stack-item .caption { position: static; grid-column: 2; background: none; padding: 0; border-radius: 0; }
+html[data-form="portrait"] #stack.chip .stack-item .await { position: static; grid-column: 2; grid-row: 1 / 3; background: none; padding: 0; text-align: left; }
+html[data-form="portrait"] #stack.chip .stack-item::after { content: attr(data-n); grid-column: 3; grid-row: 1 / 3; }
+html[data-form="portrait"] #match #storm { display: none; }
+/* The tags on a target. The tag for the top of the stack is filled and the others are outlined, so they differ in brightness and shape. */
+.target-tags { position: absolute; left: -6px; top: -6px; z-index: 6; display: flex; gap: 2px; pointer-events: none; }
+.target-tag, html[data-form="portrait"] #stack.chip .stack-item::after { min-width: 18px; height: 18px; padding: 0 4px; box-sizing: border-box; border-radius: 9px; font: 800 10px/14px system-ui, sans-serif; text-align: center; background: var(--bg-deep); color: var(--text); border: 2px solid var(--text); }
+.target-tag.top, html[data-form="portrait"] #stack.chip .stack-item[data-n="1"]::after { background: var(--accent-2); color: var(--on-brass); border-color: var(--accent-2); }
+
+/* One opponent is shown at a time. A players button next to the menu button opens the list of opponents. */
+html[data-form="portrait"] #seat-switch:not([hidden]) { display: grid; place-items: center; position: fixed; top: 5px; right: 52px; z-index: 27; width: 34px; height: 34px; padding: 0; border-radius: 50%; background: var(--surface-3); border: 1px solid var(--line-bright); }
+#seat-switch svg { width: 18px; height: 18px; fill: none; stroke: var(--text); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+#seat-switch.asked { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--selectable); }
+html[data-form="portrait"] #match.tabbed #seat-tabs.sheet:not([hidden]) { display: flex; flex-direction: column; align-items: stretch; gap: 2px; margin: 0; padding: 46px 10px 12px; }
+html[data-form="portrait"] #seat-tabs.sheet::after { content: attr(aria-label); position: absolute; left: 18px; top: 22px; flex: none; border: 0; color: var(--muted); font: 700 12px/1 system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+html[data-form="portrait"] .sheet .seat-tab { flex: none; min-width: 0; max-width: none; height: 46px; grid-template-columns: 34px auto minmax(0, 1fr) auto; column-gap: 12px; padding: 0 12px 0 8px; border: 0; border-radius: 10px; }
+html[data-form="portrait"] .sheet .seat-tab::after { display: none; }
+html[data-form="portrait"] .sheet .seat-tab.on { background: var(--surface-3); box-shadow: inset 3px 0 0 var(--tint); }
+html[data-form="portrait"] .sheet .seat-tab .pic { width: 34px; height: 34px; }
+html[data-form="portrait"] .sheet .seat-tab .who { font-size: 15px; }
+html[data-form="portrait"] .sheet .seat-tab .note { display: block; font: 600 11.5px/1 system-ui, sans-serif; color: var(--muted); white-space: nowrap; }
+html[data-form="portrait"] .sheet .seat-tab.turn .note { color: var(--accent-2); }
+html[data-form="portrait"] .sheet .seat-tab .life { font-size: 16px; }
+/* One seat fills the opponents' row, whatever the table layout setting is */
+html[data-form="portrait"] #match:is(.many, .quads) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tabs" "opp" "phase" "me" "hand" "prompt"; }
+html[data-form="portrait"] #match #opponent.many { display: grid; grid-area: opp; grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); gap: 0; }
+html[data-form="portrait"] #match #opponent.many > .seat { grid-area: auto; }
+html[data-form="portrait"] #match #opponent.many > .seat[hidden] { display: none; }
+html[data-form="portrait"] #match #opponent.tabbed > .seat { border-radius: 0 0 10px 10px; border-width: 0; margin: 0; }
+html[data-form="portrait"] #match #opponent.tabbed .player { padding-right: 0; }
+html[data-form="portrait"] #match.many #me { margin-bottom: 0; padding-bottom: 0; border: 0; --under: 0px; }
+
+/* The attacker that your creature will block if you touch it. The game may have chosen that attacker for you. */
+.combat-tag { display: none; }
+html[data-form="portrait"] .battlefield .card .combat-tag:not(:empty) { display: block; position: absolute; left: 50%; top: -9px; transform: translateX(-50%); z-index: 4; padding: 0 5px; border-radius: 8px; background: var(--pick); color: var(--on-brass); font: 800 8.5px/14px system-ui, sans-serif; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
+/* Each cost symbol draws its own disc. The lobby's colour pip uses the same class name, and would draw a larger grey disc behind it. */
+html[data-form="portrait"] #hand .card .cost-badge .pip { width: auto; height: auto; background: none; }
+/* Your attackers move up toward the phase strip, so the extra space is at the top of your half */
+html[data-form="portrait"] #match #me .battlefield { padding: 16px 5px 5px; }
+
+html[data-form="portrait"] #dialog-layer .menu-sheet { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px; height: auto; max-height: min(70dvh, calc(100dvh - var(--dock-h, 110px) - 40px)); padding: 22px 0 0; overflow: hidden; }
+html[data-form="portrait"] .menu-tabs { display: flex; gap: 4px; margin: 0 12px; padding: 4px; background: var(--bg-deep); border: 1px solid var(--line); border-radius: 10px; }
+html[data-form="portrait"] .menu-tabs button { flex: 1; min-height: 44px; background: none; border: 0; color: var(--muted); font-weight: 700; }
+html[data-form="portrait"] .menu-tabs .on { background: var(--surface-2); color: var(--text); box-shadow: inset 0 -2px 0 var(--accent-2); }
+html[data-form="portrait"] .menu-body { min-height: 0; overflow-y: auto; padding: 0 12px; display: flex; flex-direction: column; gap: 6px; }
+html[data-form="portrait"] .menu-body > :is(#log, #match-chat) { flex: 1; min-height: 0; }
+html[data-form="portrait"] .menu-row { display: flex; align-items: center; gap: 10px; min-height: 48px; text-align: left; }
+html[data-form="portrait"] .menu-row b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+html[data-form="portrait"] .menu-row img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+html[data-form="portrait"] .menu-foot { display: flex; gap: 8px; padding: 8px 12px 12px; border-top: 1px solid var(--line); }
+html[data-form="portrait"] .menu-foot button { flex: 1; min-height: 48px; }
+html[data-form="portrait"] .menu-foot .concede { color: var(--danger); }
+
+/* Zones, dialogs and menus all open upward from the top of the dock, so the dock stays usable */
+html[data-form="portrait"] #match #zones { inset: 0 0 var(--dock-h, 110px) 0; place-items: end stretch; padding: 0; }
+html[data-form="portrait"] #match #zones.minimised { place-items: start end; padding: 8px 8px 0 0; }
+html[data-form="portrait"] #match #zones .zone-shelf { max-height: 86%; width: 100%; }
+html[data-form="portrait"] #match #zones .zone-panel { width: 100%; max-width: none; border-radius: 16px 16px 0 0; border-width: 1px 0 0; box-sizing: border-box; }
+html[data-form="portrait"] .zone-panel .cards { --fit: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 12px; }
+html[data-form="portrait"] .zone-panel :is(header, footer) { flex-wrap: wrap; gap: 8px; padding: 8px 12px; }
+/* The Show board button and the search share the second line */
+html[data-form="portrait"] .zone-panel .zone-fold { order: 8; }
+html[data-form="portrait"] .zone-panel .zone-find { order: 9; flex: 1 1 120px; width: auto; min-width: 0; box-sizing: border-box; }
+html[data-form="portrait"] .zone-panel .zone-gap { display: none; }
+html[data-form="portrait"] .zone-panel .zone-sort { margin-left: auto; }
+html[data-form="portrait"] .zone-panel :is(button, input) { min-height: 44px; }
+html[data-form="portrait"] :is(#dialog-layer .backdrop:not(.anchored), .reveal-back) { inset: 0 0 var(--dock-h, 110px) 0; align-items: end; place-items: end stretch; padding: 0; }
+html[data-form="portrait"] #dialog-layer .dialog { width: 100%; max-width: none; margin: 0; max-height: 100%; border-radius: 16px 16px 0 0; border-width: 1px 0 0; padding: 16px 12px; box-sizing: border-box; }
+html[data-form="portrait"] #dialog-layer .dialog button { min-height: 44px; }
+html[data-form="portrait"] .dialog .number-step { gap: 22px; }
+html[data-form="portrait"] .dialog .number-step button { width: 56px; height: 56px; font-size: 26px; }
+html[data-form="portrait"] .dialog .number-quick { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+html[data-form="portrait"] #dialog-layer .dialog .number-quick button { min-height: 48px; font-size: 16px; }
+html[data-form="portrait"] .dialog .number-quick + .actions { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+html[data-form="portrait"] .reveal-panel { width: 100%; max-height: 86%; border-radius: 16px 16px 0 0; }
+html[data-form="portrait"] #dialog-layer .game-menu { max-height: calc(100dvh - var(--dock-h, 110px) - 40px); }
+
+/* The question asked before Back leaves a match */
+#leave-ask { position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: 95; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px; width: min(320px, 86vw); box-sizing: border-box;
+  background: var(--surface); border: 1px solid var(--line-bright); border-radius: 12px; box-shadow: 0 16px 40px #000c; }
+#leave-ask[hidden] { display: none; }
+#leave-ask p { grid-column: 1 / -1; margin: 0; font-weight: 700; }
+#leave-ask button { min-height: 48px; }
+/* A phone turned sideways is too short for either layout, so a warning asks the player to turn it */
+#turn-upright { display: none; }
+@media (max-height: 499px) and (pointer: coarse) {
+  body:has(#match:not([hidden])):not(:has(:is(input, textarea):focus)) #turn-upright { display: grid; place-items: center; position: fixed; inset: 0; z-index: 99; padding: 24px; text-align: center; background: var(--bg-deep); font-size: 18px; }
+}
+
+/* Match setup on a phone: the options as rows, the seats one under another, and Play along the bottom edge */
+html[data-form="portrait"] .lobby-main { justify-items: stretch; padding: 20px 12px calc(140px + env(safe-area-inset-bottom)); }
+html[data-form="portrait"] .lobby-main > :is(.setup-head, .match-bar, .event-head) { width: auto; min-width: 0; }
+html[data-form="portrait"] .setup-head { margin-bottom: 12px; }
+html[data-form="portrait"] .setup-head .crumb { flex-wrap: wrap; }
+html[data-form="portrait"] .match-bar .fields { display: grid; grid-template-columns: minmax(0, 1fr); }
+html[data-form="portrait"] .match-bar .field { grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 52px; padding: 4px 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+html[data-form="portrait"] .match-bar .field:last-child { border-bottom: 0; }
+html[data-form="portrait"] .match-bar .field-value { min-height: 44px; }
+html[data-form="portrait"] .match-bar .count { width: 100%; }
+html[data-form="portrait"] .match-bar .count button { flex: 1; min-height: 44px; font-size: 14px; }
+/* A popup spans its field's row, because the value starts too far right for a wide popup to fit beside it */
+html[data-form="portrait"] .match-bar .field { position: relative; }
+html[data-form="portrait"] .match-bar .field .popup-anchor { position: static; }
+html[data-form="portrait"] .match-bar .popup { left: 0; right: 0; width: auto; top: calc(100% + 4px); }
+html[data-form="portrait"] #lobby .seats { grid-template-columns: minmax(0, 1fr); justify-content: stretch; gap: 10px; }
+html[data-form="portrait"] #lobby .seats .plate { width: auto; min-width: 0; padding: 10px; gap: 10px; }
+html[data-form="portrait"] #lobby .seats .plate .sleeve { width: 76px; height: 106px; flex: none; }
+html[data-form="portrait"] #lobby .seats .plate { --sleeve-mid: 48px; }
+html[data-form="portrait"] #lobby .seats .plate.teamed { padding-top: 22px; }
+html[data-form="portrait"] #lobby .seats:has(.plate.teamed) { row-gap: 22px; }
+html[data-form="portrait"] #lobby .plate button.team-tab { min-height: 0; }
+html[data-form="portrait"] #lobby :is(.sleeve-deck, .sleeve-style) { left: 4px; right: 4px; font-size: 11px; }
+html[data-form="portrait"] #lobby .sleeve-deck { top: 4px; bottom: 52px; }
+html[data-form="portrait"] #lobby .sleeve-style { bottom: 4px; height: 44px; }
+html[data-form="portrait"] #lobby .who .avatar { width: 52px; height: 52px; }
+html[data-form="portrait"] #lobby .plate button { min-height: 44px; }
+html[data-form="portrait"] #lobby .plate .drop { min-height: 0; width: 26px; height: 26px; top: -9px; right: -6px; }
+html[data-form="portrait"] #lobby .play-row { justify-items: stretch; margin-top: 10px; }
+/* The Play button is fixed to the bottom edge, so it is in reach at any scroll position. The note that says why the match cannot start stays with the seats. */
+html[data-form="portrait"] #lobby .play { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; min-width: 0; min-height: 52px; box-shadow: 0 0 0 12px var(--bg); }
+html[data-form="portrait"] #lobby .not-yet { margin-top: 0; max-width: none; }
+/* When open, the table's chat is placed above Play. When folded, it shares Play's row, so it covers none of the seats. */
+html[data-form="portrait"] body:has(#lobby:not([hidden])) #dock .dock { bottom: calc(76px + env(safe-area-inset-bottom)); }
+html[data-form="portrait"] body:has(#lobby:not([hidden])) #dock .dock.folded { bottom: calc(12px + env(safe-area-inset-bottom)); width: 112px; min-height: 52px; padding-block: 0; border-bottom: 1px solid var(--line-bright);
+  border-radius: 10px; box-shadow: 0 0 0 12px var(--bg); }
+html[data-form="portrait"] body:has(#dock .dock.folded) #lobby .play { right: calc(12px + 112px + 8px); }
+html[data-form="portrait"] #dock .dock { right: 12px; left: auto; max-width: calc(100vw - 24px); box-sizing: border-box; }
+html[data-form="portrait"] #dock .dock.folded { min-height: 44px; width: auto; }
+html[data-form="portrait"] #dock .dock.open { left: 12px; width: auto; max-height: 60dvh; }
+html[data-form="portrait"] .page-head button { min-width: 44px; min-height: 44px; }
+/* A screen wider than the phone scrolls sideways inside itself, so the page never scrolls sideways */
+html[data-form="portrait"] :is(#editor, #limited, #drafting) { max-width: 100vw; overflow-x: auto; }
+/* A disabled Play button is fixed over the seats, so it is dimmed but stays opaque */
+html[data-form="portrait"] #lobby .play:disabled { opacity: 1; filter: saturate(.35) brightness(.55); }
+
+/* A tapped card rotates its combat tag and numbers with it. They are rotated back, and the tag is placed on the edge that is now at the top. */
+html[data-form="portrait"] .battlefield .card.tapped .combat-tag:not(:empty) { left: -9px; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+html[data-form="portrait"] .battlefield .card.tapped :is(.count, .pt) { rotate: -90deg; }
+@media (hover: none) {
+  .zone-answer kbd, .dialog .actions kbd, .word-foot kbd, .word-keys { display: none; }
+}
+
+html[data-form="portrait"] #game-over .panel { max-width: 100%; box-sizing: border-box; padding: 0 16px; }
+html[data-form="portrait"] #game-over .word { margin: 0; font-size: clamp(30px, 11vw, 60px); letter-spacing: .12em; text-align: center; }
+html[data-form="portrait"] #game-over .rule { width: min(240px, 70vw); }
+html[data-form="portrait"] #game-over .actions button { min-height: 48px; padding: 9px 16px; }
+
+html[data-form="portrait"] :is(.finder-back, .sleeves-back) { place-items: stretch; }
+html[data-form="portrait"] :is(.finder, .sleeves) { width: 100vw; height: 100dvh; max-width: none; border: 0; border-radius: 0; min-width: 0; }
+html[data-form="portrait"] .extra-picker:is(.planes, .schemes) { max-height: none; }
+html[data-form="portrait"] .extra-row > .small { min-height: 44px; min-width: 56px; }
+html[data-form="portrait"] .extra-choice .art-crop:not(:has(img[hidden])) ~ .art-crop { display: none; }
+html[data-form="portrait"] :is(.finder-head, .sleeves-head, .imp-head) { flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
+html[data-form="portrait"] :is(.finder-head, .sleeves-head, .imp-head) button { min-height: 44px; min-width: 44px; }
+html[data-form="portrait"] .finder-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+html[data-form="portrait"] .finder .rail { flex-direction: row; align-items: center; gap: 8px; padding: 8px 12px; border-right: 0; border-bottom: 1px solid var(--line); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+html[data-form="portrait"] .finder .rail section { flex-direction: row; gap: 6px; flex: none; }
+html[data-form="portrait"] .finder .rail h4 { display: none; }
+html[data-form="portrait"] .finder .rail .source { flex: none; height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 22px; white-space: nowrap; }
+html[data-form="portrait"] .finder .rail .source[aria-pressed="true"] { box-shadow: none; border-color: var(--accent-2); }
+html[data-form="portrait"] .finder .net-cats { flex-direction: row; margin: 0; padding: 0; border: 0; }
+html[data-form="portrait"] .finder .rail .get-net { flex: none; align-self: center; min-height: 44px; border-radius: 22px; }
+html[data-form="portrait"] .finder .results { min-width: 0; padding: 10px 12px; border-right: 0; }
+/* A compact list: the source is a menu in the head, the search shares its line with a sort button, the colours are a filter chip,
+   the count ends the chip line, and rows are one short line with "Legal" left out */
+html[data-form="portrait"] .finder .dk-hit { min-height: 44px; padding-top: 0; padding-bottom: 0; }
+html[data-form="portrait"] .finder .dk-hit :is(.legal.yes, .legal.blank) { display: none; }
+html[data-form="portrait"] .finder-head { flex-wrap: nowrap; }
+html[data-form="portrait"] .finder .select:has(> .source-pick) { display: inline-flex; min-width: 0; max-width: 56vw; }
+html[data-form="portrait"] .finder .source-pick { height: 36px; color: var(--accent-2); font-weight: 600; font-size: 13.5px; }
+html[data-form="portrait"] .finder .rail section > .source { display: none; }
+html[data-form="portrait"] .finder .rail:not(:has(.net-cats, .gen-options)) { display: none; }
+html[data-form="portrait"] .finder .rail { grid-row: 1; }
+html[data-form="portrait"] .finder .results { grid-row: 2; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto minmax(0, 1fr); column-gap: 8px; }
+html[data-form="portrait"] .finder-find { grid-column: 1 / -1; }
+html[data-form="portrait"] .finder-find .find { height: 40px; font-size: 15px; }
+html[data-form="portrait"] .finder-find .colours { display: none; }
+html[data-form="portrait"] .finder-find .sort-by { width: 44px; height: 40px; padding: 0; justify-content: center; background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6edf3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3'/%3E%3C/svg%3E") no-repeat center / 18px; }
+html[data-form="portrait"] .finder-find .sort-by > * { display: none; }
+html[data-form="portrait"] .finder .results > .shown { grid-column: 2; align-self: center; }
+html[data-form="portrait"] .finder .dk-hits { grid-column: 1 / -1; }
+html[data-form="portrait"] .finder .fbar { grid-column: 1; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+html[data-form="portrait"] .finder .fbar > * { flex: none; }
+/* The colours shrink to fit, so a name gets the room */
+html[data-form="portrait"] .finder .dk-hit-title .pips { width: auto; }
+/* There is no room for the deck's card list beside the decks. The player sees the cards in the editor instead. */
+html[data-form="portrait"] .finder .dk-chosen { display: none; }
+html[data-form="portrait"] .finder-foot { gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+html[data-form="portrait"] .finder-foot .random { min-width: 48px; padding: 0; justify-content: center; }
+html[data-form="portrait"] .finder-foot .random .label { display: none; }
+html[data-form="portrait"] .finder-foot .primary { flex: 1; }
+html[data-form="portrait"] .dk-close { width: 44px; height: 44px; }
+html[data-form="portrait"] .finder-foot button { min-height: 48px; }
+html[data-form="portrait"] .finder-foot .use { flex: 1; }
+
+/* The start page's choices are shorter, and each choice in a chooser is one row, so more than one fits on a screen */
+html[data-form="portrait"] .modes { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+/* Each tile is a row with its icon beside the text, because a tile this short has no room for the icon above the text */
+html[data-form="portrait"] :is(.modes .mode, .kind-card).plaque { height: auto; min-height: 112px; flex-direction: row; align-items: center; justify-content: flex-start; padding-left: 78px; }
+html[data-form="portrait"] :is(.modes .mode, .kind-card).plaque .mode-art { top: 50%; transform: translateY(-50%); }
+html[data-form="portrait"] :is(.modes .mode, .kind-card).plaque .mode-text { flex: 1; min-width: 0; }
+html[data-form="portrait"] .chooser-kinds { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+/* A chooser card keeps its two buttons stacked, and its main button leaves the room for the icon instead.
+   Its text runs over the middle of the art, so it takes the start page's fade, which darkens the card from the top. */
+html[data-form="portrait"] .chooser-kinds .kind-card.plaque { flex-direction: column; align-items: stretch; padding-left: 0; --plaque-fade: initial; }
+html[data-form="portrait"] .kind-main { justify-content: center; padding-left: 78px; }
+html[data-form="portrait"] .kind-resume { margin-left: 78px; }
+/* Space under the last choice for the chat bar in the corner */
+html[data-form="portrait"] #menu { padding-bottom: 64px; }
+/* A phone is too short to fix the links over the bottom of the page, so they come after the page content */
+html[data-form="portrait"] .forge-links.foot { position: static; order: 1; }
+/* A deck's row keeps its name, size and legality. Its formats and source are in the filters instead. */
+html[data-form="portrait"] .finder .dk-hit :is(.deck-formats, .tag) { display: none; }
+
+/* The stack's list opens upward over the opponent's half, and its chip stays on the strip */
+html[data-form="portrait"] #match #stack.chip.over-them:not(.collapsed) { display: flex; flex-direction: column-reverse; }
+html[data-form="portrait"] #stack.chip.over-them .pile { padding: 8px 0 0; }
+/* An item whose image has not loaded gives the image's space to its text */
+html[data-form="portrait"] #stack.chip .stack-item.noimg { grid-template-columns: 0 minmax(0, 1fr) auto; column-gap: 4px; }
+/* When the game is over there is nothing to answer or pass, so the dock and the tools are hidden */
+html[data-form="portrait"] #match:has(#game-over:not([hidden])) :is(#prompt, #match > .tools) { display: none; }
+/* While the player looks over the final board, the button back to the result stays clear of the dock area */
+html[data-form="portrait"] #game-over.viewing { padding-bottom: calc(var(--dock-h, 110px) + 12px); }
+html[data-form="portrait"] #game-over .to-result { min-height: 48px; pointer-events: auto; }
+/* A row that continues past the edge fades out there, to show that there is more */
+html[data-form="portrait"] :is(#phase-strip .stops .grid-scroll, .finder .rail) { padding-right: 32px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+/* On a desktop, an open zone is placed beside the stack. Here it keeps the full width and is drawn over the stack's chip, because the chip would cover its cards. */
+html[data-form="portrait"] #match:has(#zones:not([hidden]):not(.minimised)) #stack:not([hidden]) { z-index: 26; }
+html[data-form="portrait"] #match:has(#stack:not([hidden])) #zones:not(.minimised) { padding-right: 0; }
+html[data-form="portrait"] #match:has(#stack:not([hidden])) #zones:not(.minimised) .zone-panel { width: 100%; }
+/* The zone's sheet is limited to the space above the dock, and its cards scroll inside it */
+html[data-form="portrait"] #match #zones:not(.minimised) { display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; }
+html[data-form="portrait"] #match #zones:not(.minimised) .zone-shelf { max-height: 92%; min-height: 0; flex: 0 1 auto; }
+html[data-form="portrait"] .zone-panel .zone-sort .select-button { min-height: 32px; padding: 2px 8px 2px 10px; }
+/* While a dialog or a zone asks the question, the dock cannot answer anything, so it is hidden */
+html[data-form="portrait"] #prompt.blocked { display: none; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered { gap: 30px 6px; justify-content: flex-start; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered .card { --fit: 1; --card-w: calc((100vw - 56px) / 4); --card-h: calc((100vw - 56px) / 4 * 88 / 63); }
+/* The arrow buttons under a card take the card's width instead of setting it, so four cards still fit in one row */
+html[data-form="portrait"] #dialog-layer .dialog .ordered .order-nudge { width: 0; min-width: 100%; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered .order-nudge button { flex: 1 1 0; width: auto; min-width: 0; height: 36px; }
+/* The label for each end of the order is placed just under its card, as wide as the card, not under the arrows. On a selected card, the arrows replace the label. */
+html[data-form="portrait"] #dialog-layer .dialog .ordered:not(.listed) .order-end { top: calc((100vw - 56px) / 4 * 88 / 63 + 6px); left: 0; width: 100%; transform: none; white-space: normal; text-align: center; line-height: 1.2; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered-item.selected .order-end { visibility: hidden; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered.listed { gap: 0; min-width: 0; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered.listed .ordered-item { gap: 9px; padding: 9px; }
+html[data-form="portrait"] #dialog-layer .dialog .ordered.listed .card { --card-w: 34px; --card-h: 48px; }
+html[data-form="portrait"] #dialog-layer .dialog .options.colours { grid-auto-columns: minmax(46px, 1fr); gap: 2px; }
+html[data-form="portrait"] #dialog-layer .dialog .colour-option img { width: 34px; height: 34px; }
+html[data-form="portrait"] #dialog-layer .dialog .order-move :is(.earlier, .later) { width: 64px; height: 44px; }
+/* The list uses the space the sheet has. Its small buttons stay small next to the rows the player picks from. */
+html[data-form="portrait"] #dialog-layer .dialog .word-list { height: min(320px, 42dvh); }
+html[data-form="portrait"] #dialog-layer .dialog :is(.word-clear, .word-chip button) { min-height: 0; }
+
+/* A card drawn without its image uses the hand's card size, so its text stays inside it */
+html[data-form="portrait"] #hand .card { --card-w: var(--hand-w); --fit: 1; }
+/* An attacker moves a short way forward, into the space its half keeps next to the phase strip */
+html[data-form="portrait"] #match .slot.attacking { --advance: 5px; }
+html[data-form="portrait"] #match .slot.attacking:has(> .card.tapped:last-child) { --advance: calc(5px + (var(--card-h) - var(--card-w) * .9) / 2 * var(--fit, 1)); }
+/* Cards revealed only to be looked at. The title and Show board share the header, and a single section heading over the cards is hidden. */
+html[data-form="portrait"] .reveal-panel header { flex-wrap: nowrap; align-items: flex-start; }
+html[data-form="portrait"] .reveal-panel header .zone-who { flex: 1; min-width: 0; }
+html[data-form="portrait"] .reveal-panel header .zone-count { display: none; }
+html[data-form="portrait"] .reveal-panel.bare { max-width: none; padding: 8px 0; }
+html[data-form="portrait"] .reveal-panel.bare .zone-who { width: auto; }
+/* A question about cards is laid out over the board, with no sheet. The question is at the top, then where the cards are and the fold button.
+   Then come the cards, as large as the space allows (fit.ts). A zone is answered from the dock. A dialog leaves the dock nothing to answer, so it is answered from a bar along the bottom. */
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board, .reveal-back.on-board, #match #zones.asking:not(.minimised)) { inset: 0 0 var(--dock-h, 110px) 0; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;
+  padding: 14px 12px 0; box-sizing: border-box; background: var(--scrim-board); backdrop-filter: blur(4px) saturate(.8); }
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board, .reveal-back.on-board) { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+/* Each box is only as tall as its content, because the cards are sized to fit the space left around it. It has no rise-in animation, because that would move the answer bar too. */
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board > .dialog, .reveal-back.on-board .reveal-panel.bare, #match #zones.asking .zone-shelf, #match #zones.asking .zone-panel) { flex: 0 1 auto; min-height: 0; max-height: none; width: auto; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 10px; border: 0; border-radius: 0; overflow: visible; animation: none; }
+html[data-form="portrait"] :is(.backdrop.on-board .dialog-head, .reveal-back.on-board header, #zones.asking .zone-ask) { justify-content: flex-start; padding: 0; }
+html[data-form="portrait"] :is(.backdrop.on-board .dialog-head h3, .reveal-back.on-board .zone-who, #zones.asking .zone-ask) { flex: 1; font-size: 16px; line-height: 1.3; text-align: left; }
+html[data-form="portrait"] .backdrop.on-board .dialog-head { align-items: flex-start; gap: 10px; }
+html[data-form="portrait"] :is(.ask-line, #zones.asking header) { display: flex; align-items: center; gap: 10px; margin-top: -6px; padding: 0; color: var(--muted); font-size: 12.5px; }
+html[data-form="portrait"] :is(.ask-line .ask-where, #zones.asking .zone-who) { flex: 1; min-width: 0; margin: 0; font-size: 12.5px; }
+html[data-form="portrait"] :is(.ask-line, .backdrop.on-board .dialog-head, .reveal-back.on-board header, #zones.asking header) .zone-fold { flex: none; margin-left: auto; min-height: 36px; padding: 0 12px; font-size: 12.5px; }
+html[data-form="portrait"] .reveal-back.on-board header { display: flex; align-items: center; gap: 10px; }
+html[data-form="portrait"] .reveal-back.on-board header .zone-who { flex: 1; width: auto; min-width: 0; }
+html[data-form="portrait"] :is(.backdrop.on-board .options:not(.ordered), .reveal-back.on-board .cards, #zones.asking .cards) { flex: 0 1 auto; min-height: 0; max-height: none; max-width: none; min-width: 0; overflow-y: auto;
+  display: flex; flex-wrap: wrap; justify-content: center; align-content: start; gap: 12px; padding: 22px 12px 14px; }
+html[data-form="portrait"] .backdrop.on-board .dist-row { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
+html[data-form="portrait"] #zones.asking .zone-count { display: none; }
+/* The zone chips are avatars with a badge in a row that scrolls sideways, because the line under them names the player shown. The names stay for screen readers. */
+html[data-form="portrait"] .zone-chips { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 4px 2px; }
+html[data-form="portrait"] .zone-chip { flex: none; padding: 3px; }
+html[data-form="portrait"] .zone-chip :is(b, em) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+html[data-form="portrait"] .zone-chip i { position: absolute; top: -4px; right: -4px; min-width: 0; padding: 0 4px; font-size: 10px; }
+/* A short zone (fewer than nine cards) does not need the search or the sort */
+html[data-form="portrait"] #zones.asking .zone-panel:not(:has(.cards > :nth-child(9 of :not(.back:not(.selectable))))) :is(.zone-find:placeholder-shown, .zone-sort) { display: none; }
+/* In a long zone, the search gets its own line under the name of the zone's owner */
+html[data-form="portrait"] #zones.asking .zone-who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html[data-form="portrait"] #zones.asking .zone-sort { margin-left: 0; }
+html[data-form="portrait"] #zones.asking .zone-find { flex: 1 0 100%; }
+html[data-form="portrait"] #zones.asking footer { display: none; }
+/* The dialog's buttons take the dock's place, laid out like the dock's buttons */
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board .actions, .reveal-back.on-board footer) { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; display: flex; gap: 0; padding: 0 0 env(safe-area-inset-bottom);
+  background: var(--surface); border-top: 1px solid var(--accent-2); box-shadow: 0 -8px 24px #0008; }
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board .actions, .reveal-back.on-board footer) > button { flex: 1 1 0; max-width: none; min-width: 0; height: auto; min-height: 50px; border: 0; border-radius: 0; font-size: 14px; }
+html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions > .primary { order: -1; }
+/* The amount left to assign is in the middle of the bar, with Reset at its right end */
+html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions .dist-left { flex: 1 1 auto; min-width: 0; align-self: stretch; display: grid; grid-template-columns: minmax(0, 1fr) 92px; align-items: center; gap: 0; margin: 0; padding: 0; text-align: center; font-size: 12px; }
+html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions:has(.dist-left) > .primary { flex: 0 0 92px; }
+html[data-form="portrait"] #dialog-layer .backdrop.on-board .actions .dist-left button { align-self: stretch; min-height: 50px; border: 0; border-left: 1px solid var(--line); border-radius: 0; }
+html[data-form="portrait"] :is(#dialog-layer .backdrop.on-board .actions, .reveal-back.on-board footer) kbd { display: none; }
+/* On a phone the two panels are stacked, and the cards in a panel wrap */
+html[data-form="portrait"] .lib-row { flex-direction: column; align-items: stretch; gap: 18px; padding: 6px 0 12px; }
+html[data-form="portrait"] .lib-side { padding: 14px 18px 18px; }
+html[data-form="portrait"] .lib-head { margin-bottom: 14px; font-size: 14px; }
+html[data-form="portrait"] .lib-cards { flex-wrap: wrap; justify-content: center; gap: 16px; }
+html[data-form="portrait"] .lib-rest { max-width: none; grid-auto-flow: column; align-items: center; }
+html[data-form="portrait"] .lib-rest i { width: 46px; height: 1px; background: linear-gradient(90deg, var(--line-bright) 50%, transparent 0) 0 0 / 6px 1px; }
+html[data-form="portrait"] .lib-rest b { font-size: 13px; }
+/* A touch screen has no drag, so the line about dragging is hidden */
+html[data-form="portrait"] .manipulate .hint { display: none; }
+/* The attacker and its pile are a row of their own, and the arrow is left out, so the targets keep their size */
+html[data-form="portrait"] .dialog .dist-arrow { display: none; }
+html[data-form="portrait"] .dialog .dist-source { flex-basis: 100%; width: auto; grid-template-columns: auto auto; justify-content: center; align-items: center; gap: 14px; }
+html[data-form="portrait"] .dialog .dist-source > :first-child { width: calc(var(--card-w) * var(--fit, 1) * .7); }
+html[data-form="portrait"] .dialog .dist-pile { min-width: 110px; }
+html[data-form="portrait"] .reveal-panel .cards .section:first-child:not(:has(~ .section)) { display: none; }
+/* The toss and the question of who goes first stop above the dock, which keeps the prompt's message */
+html[data-form="portrait"] #coin-toss { inset: 0 0 var(--dock-h, 45px) 0; }
+html[data-form="portrait"] #coin-toss .coin-scene { width: 150px; height: 150px; }
+html[data-form="portrait"] #coin-toss.asking .coin-scene { scale: .4; margin: -45px 0; }
+html[data-form="portrait"] #coin-toss h3 { font-size: 22px; }
+html[data-form="portrait"] #coin-toss .first-answers button { width: 132px; min-height: 46px; }
+html[data-form="portrait"] #coin-toss .first-seats { gap: 12px; }
+html[data-form="portrait"] #coin-toss .first-seat .reveal-avatar { width: 52px; height: 52px; }
+html[data-form="portrait"] #coin-toss .reveal-name { font-size: 12px; }
+html[data-form="portrait"] #coin-toss p { font-size: 17px; }
+html[data-form="portrait"] #first-reveal .reveal-faces { gap: 12px; }
+html[data-form="portrait"] #first-reveal .reveal-avatar { width: 52px; height: 52px; font-size: 22px; }
+html[data-form="portrait"] #first-reveal .reveal-name { font-size: 12px; }
+html[data-form="portrait"] #first-reveal p { font-size: 22px; }
+
+html[data-form="portrait"] #editor .editor-head { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: 6px; padding: 6px 10px; }
+html[data-form="portrait"] #editor .editor-head .wordmark-block, html[data-form="portrait"] #editor .editor-head .icon-button, html[data-form="portrait"] #editor .editor-head > .legality, html[data-form="portrait"] #editor .editor-head > .check-fixed, html[data-form="portrait"] #editor .editor-head .word { display: none; }
+html[data-form="portrait"] #editor .editor-head .head-right { display: contents; }
+html[data-form="portrait"] #editor .editor-head .deck-name-field { width: 100%; min-width: 0; min-height: 40px; box-sizing: border-box; padding: 5px 10px; }
+html[data-form="portrait"] #editor .editor-head .deck-menu-button { width: 40px; height: 40px; }
+/* The deck's menu is a sheet along the bottom, with rows a thumb can hit. Its head is raised over the dock while it is open */
+html[data-form="portrait"] #editor .editor-head:has(.menu-scrim) { z-index: 40; }
+html[data-form="portrait"] #editor .name-menu .menu-scrim { display: block; position: fixed; inset: 0; z-index: 29; background: var(--scrim-deep); }
+html[data-form="portrait"] #editor .name-menu .deck-menu { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; padding: 8px 10px calc(14px + env(safe-area-inset-bottom)); border-radius: 14px 14px 0 0; transform-origin: 50% 100%; }
+html[data-form="portrait"] #editor .name-menu .deck-menu button { min-height: 44px; gap: 12px; font-size: 15px; }
+html[data-form="portrait"] #editor .name-menu .deck-menu button svg { width: 18px; height: 18px; }
+html[data-form="portrait"] #editor .editor-head .save-state { font-size: 11.5px; }
+html[data-form="portrait"] #editor .editor-head button { min-height: 40px; }
+html[data-form="portrait"] #editor .editor-head .head-right > button:not(.primary) { min-width: 40px; padding: 0; font-size: 18px; }
+html[data-form="portrait"] #editor .editor-head .primary { padding: 0 16px; }
+
+/* One half of the editor is shown at a time, chosen by the two tabs under the head */
+html[data-form="portrait"] #editor .editor-page { grid-template-rows: auto auto minmax(0, 1fr); }
+html[data-form="portrait"] #editor .editor-tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); background: var(--surface); }
+html[data-form="portrait"] #editor .editor-tabs button { border: 0; border-radius: 0; background: none; min-height: 42px; color: var(--muted); font-size: 13.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 7px; }
+html[data-form="portrait"] #editor .editor-tabs button[aria-pressed="true"] { color: var(--accent-2); box-shadow: inset 0 -2px 0 var(--accent-2); background: var(--accent-soft); }
+html[data-form="portrait"] #editor .editor-tabs .n { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--text); background: var(--surface-3); border-radius: 999px; padding: 1px 8px; font-size: 12px; }
+/* The count of a deck with a problem has an outline and a "!". The count of a legal deck is filled. So colour is not the only difference. */
+html[data-form="portrait"] #editor .editor-tabs .n.no { background: none; box-shadow: inset 0 0 0 1.5px var(--text); }
+html[data-form="portrait"] #editor .editor-shell { grid-template-columns: minmax(0, 1fr); }
+html[data-form="portrait"] #editor .editor-shell:not(.deck) > .deck-half, html[data-form="portrait"] #editor .editor-shell.deck > .catalogue { display: none; }
+
+html[data-form="portrait"] #editor .cat-bar { padding: 8px 10px 6px; }
+html[data-form="portrait"] #editor .cat-bar .fbar { gap: 6px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; }
+html[data-form="portrait"] #editor .cat-bar .search-wrap { grid-column: 1 / -1; }
+html[data-form="portrait"] #editor .cat-bar .find { height: 40px; font-size: 15px; }
+html[data-form="portrait"] #editor .search-tip { display: none; }
+html[data-form="portrait"] #editor .cat-bar .colours { gap: 4px; padding: 4px; }
+html[data-form="portrait"] #editor .cat-bar .colour { width: 28px; height: 28px; }
+html[data-form="portrait"] #editor .cat-bar .select:has(> .type-by) { width: 100%; }
+html[data-form="portrait"] #editor .cat-bar .type-by { height: 38px; min-width: 0; width: 100%; font-size: 13px; padding: 0 8px; }
+html[data-form="portrait"] #editor .cat-bar .add { min-height: 38px; }
+html[data-form="portrait"] #editor .catalogue .count-row { padding: 2px 10px 4px; gap: 8px; }
+html[data-form="portrait"] #editor .catalogue { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+html[data-form="portrait"] #editor .cat-bar .clear-all { grid-column: 1 / -1; justify-self: end; }
+html[data-form="portrait"] #editor .catalogue .count-row .shown { flex: 1; min-width: 0; font-size: 12px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* A phone has no Enter key, so the hint to press Enter is hidden */
+html[data-form="portrait"] #editor .cat-grid .enter { display: none; }
+html[data-form="portrait"] #editor .catalogue .count-row .select-button, html[data-form="portrait"] #editor .catalogue .count-row .seg button { min-height: 36px; }
+html[data-form="portrait"] #editor .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; padding: 8px 10px 64px; }
+/* A finger needs larger buttons than the 20px steppers used with a mouse. The Side button is removed from the tile, because a near miss would send a card to the sideboard. */
+html[data-form="portrait"] #editor .cat-grid .under .stepper { flex: 1; display: grid; grid-template-columns: 1fr auto 1fr; gap: 4px; }
+html[data-form="portrait"] #editor .cat-grid .under .step { width: auto; height: 36px; font-size: 18px; }
+html[data-form="portrait"] #editor .cat-grid .under .n { min-width: 22px; font-size: 13px; }
+html[data-form="portrait"] #editor .cat-grid .under .side { display: none; }
+
+/* The deck half is one column that scrolls as a whole. It has the summary and curve, the main deck, basic lands, then the sideboard. */
+html[data-form="portrait"] #editor .deck-half { border-left: 0; display: block; overflow-y: auto; padding-bottom: 64px; }
+html[data-form="portrait"] #editor .deck-half .zone { display: block; }
+html[data-form="portrait"] #editor .editor-shell.planar .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* A tap on the plane itself adds or removes it, so its buttons can be small */
+html[data-form="portrait"] #editor .planar .under .stepper { grid-template-columns: 34px auto 34px; justify-content: center; }
+html[data-form="portrait"] #editor .planar .under .step { height: 28px; font-size: 15px; }
+html[data-form="portrait"] #editor .planar-line button { width: 34px; height: 34px; }
+html[data-form="portrait"] #editor .planar-foot button { min-height: 46px; }
+html[data-form="portrait"] #editor .deck-half .zone-body { overflow: visible; }
+html[data-form="portrait"] #editor .deck-half .side-zone { max-height: none; }
+/* The deck's sizes and legality are next to the curve. The format it is checked against and the sample hand button share the line below. */
+html[data-form="portrait"] #editor .deck-head { padding: 8px 10px; gap: 4px 10px; align-items: center; }
+html[data-form="portrait"] #editor .deck-head > .deck-about { display: contents; }
+html[data-form="portrait"] #editor .deck-head .sizes { grid-area: 1 / 1; align-self: end; }
+html[data-form="portrait"] #editor .deck-head .verdict { grid-area: 2 / 1; align-self: start; }
+html[data-form="portrait"] #editor .deck-head .curve { grid-area: 1 / 2 / 3 / 3; }
+html[data-form="portrait"] #editor .deck-head .deck-check { grid-area: 3 / 1; }
+html[data-form="portrait"] #editor .deck-head button.small { grid-area: 3 / 2; justify-self: end; }
+/* The commander's card takes a narrow first column, beside the deck's sizes and legality */
+html[data-form="portrait"] #editor .deck-head.with-commander { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr) auto; }
+html[data-form="portrait"] #editor .deck-head.with-commander > :is(.cmd-cards, .cmd-card) { grid-area: 1 / 1 / 3 / 2; align-self: start; }
+html[data-form="portrait"] #editor .deck-head.with-commander .cmd-card { width: 52px; }
+html[data-form="portrait"] #editor .deck-head.with-commander .sizes { grid-area: 1 / 2; align-self: start; }
+html[data-form="portrait"] #editor .deck-head.with-commander .verdict { grid-area: 2 / 2; }
+html[data-form="portrait"] #editor .deck-head.with-commander .deck-numbers { grid-area: 1 / 3 / 3 / 4; }
+html[data-form="portrait"] #editor .deck-head.with-commander .deck-check { grid-area: 3 / 1 / 4 / 3; }
+html[data-form="portrait"] #editor .deck-head.with-commander button.small { grid-area: 3 / 3; }
+/* The deck name is already in the editor head above */
+html[data-form="portrait"] #editor .deck-head h3 { display: none; }
+html[data-form="portrait"] #editor .deck-head .verdict { margin: 0; }
+html[data-form="portrait"] #editor .deck-head .verdict .link { padding: 8px 4px; margin: -8px 0; }
+html[data-form="portrait"] #editor .deck-head .deck-check { display: flex; min-width: 0; }
+html[data-form="portrait"] #editor .deck-head .deck-check .legality { font-size: 0; gap: 0; min-width: 0; }
+html[data-form="portrait"] #editor .deck-head .deck-check .select-button { font-size: 13px; height: 36px; max-width: 100%; }
+html[data-form="portrait"] #editor .deck-head button.small { min-height: 36px; padding: 0 12px; font-size: 13px; }
+html[data-form="portrait"] #editor .zone > h4 { padding: 8px 10px 4px; gap: 8px; }
+html[data-form="portrait"] #editor .zone > h4 .select-button, html[data-form="portrait"] #editor .zone > h4 .view-seg button { min-height: 36px; font-size: 13px; }
+html[data-form="portrait"] #editor .zone > h4 .view-seg button { padding: 0 12px; }
+html[data-form="portrait"] #editor .zone-body { padding: 2px 10px 10px; }
+html[data-form="portrait"] #editor .zone-body.deck-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 8px; }
+html[data-form="portrait"] #editor .zone-body.cols { grid-template-columns: 1fr; gap: 0; }
+/* A list row has no hover to show its buttons, so they are always shown. The button that moves a card to the other section is set apart. */
+html[data-form="portrait"] #editor .ed-line { min-height: 44px; gap: 8px; }
+html[data-form="portrait"] #editor .ed-line .n { color: var(--text); font-weight: 700; }
+html[data-form="portrait"] #editor .ed-line .ra { display: inline-flex; gap: 4px; }
+html[data-form="portrait"] #editor .ed-line .ra button { width: 38px; height: 36px; font-size: 16px; line-height: 1; padding: 0; }
+html[data-form="portrait"] #editor .ed-line .ra button:nth-child(3) { width: 52px; margin-left: 8px; font-size: 13px; }
+html[data-form="portrait"] #editor .ed-line:hover { padding-left: 0; background: none; }
+html[data-form="portrait"] #editor .land-row { display: grid; grid-template-columns: repeat(3, max-content); justify-content: space-between; padding: 8px 10px; gap: 8px 6px; }
+html[data-form="portrait"] #editor .land-row .band-lab, html[data-form="portrait"] #editor .land-row .land-tail { grid-column: 1 / -1; }
+html[data-form="portrait"] #editor .land-row .land-tail { margin-left: 0; }
+html[data-form="portrait"] #editor .land-card { width: 64px; }
+html[data-form="portrait"] #editor .land-set-menu { position: fixed; left: 0; right: 0; bottom: 0; width: auto; padding: 10px 10px calc(14px + env(safe-area-inset-bottom)); border-radius: 14px 14px 0 0; transform-origin: 50% 100%; }
+html[data-form="portrait"] #editor .land-set-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 55vh; }
+html[data-form="portrait"] #editor .land-row .band-lab { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+html[data-form="portrait"] #editor .land-row .step { width: 36px; height: 36px; font-size: 18px; }
+html[data-form="portrait"] .print-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Three sleeves fit across a phone, where the desktop tile size would fit only two */
+html[data-form="portrait"] :is(.art-grid, .sleeve-grid) { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+
+/* Drafting on a phone: the pack fills the screen. The picks are a drawer that slides up over it from a bar at the bottom. */
+html[data-form="portrait"] #drafting .limited-head { display: flex; align-items: center; gap: 8px; padding: 6px 10px; }
+html[data-form="portrait"] #drafting .limited-head :is(.wordmark-block, .icon-button) { display: none; }
+html[data-form="portrait"] #drafting .limited-head .limited-title { flex: none; font-size: 15px; font-weight: 700; }
+html[data-form="portrait"] #drafting .limited-head > .muted { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+html[data-form="portrait"] #drafting .limited-head .head-right { margin-left: auto; }
+html[data-form="portrait"] #drafting .drafting-shell { grid-template-columns: minmax(0, 1fr); padding: 0; gap: 0; }
+html[data-form="portrait"] #drafting .draft-pack { border: 0; border-radius: 0; }
+html[data-form="portrait"] #drafting .pick-line { padding: 8px 12px; }
+/* The table already shows who passes to you and who holds packs. So the line keeps only where your pack goes and the table chip. */
+html[data-form="portrait"] #drafting .tool-line { padding: 6px 12px; }
+html[data-form="portrait"] #drafting .tool-line .chip { font-size: 12px; }
+html[data-form="portrait"] #drafting .tool-line .chip.more { display: none; }
+html[data-form="portrait"] #drafting .tool-line .sort-by { width: 40px; min-height: 36px; padding: 0; justify-content: center; background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6edf3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3'/%3E%3C/svg%3E") no-repeat center / 16px; }
+html[data-form="portrait"] #drafting .tool-line .sort-by > * { display: none; }
+/* The sort and table buttons share the line with where your pack goes, so the table button drops the seat faces the chip already names */
+html[data-form="portrait"] #drafting .tool-line .table-btn .faces { display: none; }
+/* The table has fixed pixel sizes for a desktop panel. On a phone it is fixed across the screen and drawn at 80% size. */
+html[data-form="portrait"] #drafting .table-pop { position: fixed; left: 8px; right: 8px; top: auto; display: grid; justify-items: center; }
+html[data-form="portrait"] #drafting .table-pop .dial { zoom: .8; }
+html[data-form="portrait"] #drafting .draft-pack .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 10px; padding: 12px 12px 76px; }
+html[data-form="portrait"] #drafting .draft-picks { position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; height: min(80vh, calc(100% - 64px));
+  border-radius: 14px 14px 0 0; border-bottom: 0; box-shadow: 0 -10px 30px var(--scrim-deep); transform: translateY(calc(100% - 56px));
+  transition: transform .25s cubic-bezier(.2, .7, .3, 1); }
+html[data-form="portrait"] #drafting .draft-picks.open { transform: none; }
+html[data-form="portrait"] #drafting .draft-picks > .draft-panel-head { min-height: 56px; padding: 0 12px; flex-wrap: nowrap; }
+html[data-form="portrait"] #drafting .draft-group-by { flex-wrap: wrap; padding: 8px 12px 4px; }
+.picks-toggle { flex: 1; display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--text); font-size: 15px; font-weight: 700; text-align: left; }
+.picks-toggle .caret { margin-left: auto; color: var(--muted); font-size: 13px; }
+.picks-scrim { position: fixed; inset: 0; z-index: 34; background: var(--scrim-deep); }
+
+/* The phone header (PhoneHead in header.tsx): back, the title and its line, the page's own action, the chat and a menu */
+html[data-form="portrait"] .ph { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+html[data-form="portrait"] .ph-row { display: flex; align-items: center; gap: 6px; min-height: 52px; padding: 0 6px 0 4px; }
+html[data-form="portrait"] .ph-icon { flex: none; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: none; color: var(--muted); }
+html[data-form="portrait"] .ph-icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+html[data-form="portrait"] .ph-icon:is(:active, [aria-expanded="true"]) { background: var(--surface-2); color: var(--text); }
+html[data-form="portrait"] .ph-back { color: var(--text); }
+html[data-form="portrait"] .ph-back svg { width: 22px; height: 22px; stroke-width: 2.4; }
+html[data-form="portrait"] .ph-title { flex: 1; min-width: 0; display: grid; gap: 1px; padding-left: 4px; }
+html[data-form="portrait"] .ph-title h2 { margin: 0; font-size: 15px; line-height: 1.2; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+html[data-form="portrait"] .ph-title .wordmark-block { justify-items: start; padding-left: 6px; }
+html[data-form="portrait"] .ph-line { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 11.5px; color: var(--muted); }
+html[data-form="portrait"] .ph-line > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-form="portrait"] .ph .popup-anchor > .menu-button { width: 40px; height: 40px; padding: 0; display: grid; place-items: center; border: 0; background: none; color: var(--muted); }
+html[data-form="portrait"] .ph .popup-anchor > .invite-button { color: var(--accent-2); }
+html[data-form="portrait"] .ph .popup-anchor > .invite-button::after { content: none; }
+html[data-form="portrait"] .ph .popup-anchor > .menu-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* The invite popup spans the screen under the header, so its addresses are not cut off at the left */
+html[data-form="portrait"] .ph .popup:has(.invite) { position: fixed; top: 54px; left: 8px; right: 8px; }
+html[data-form="portrait"] .ph .invite { width: auto; }
+/* The folded chat is drawn into the header's slot by the dock (dock.tsx). It is a chip of faces, and a new message or arrival is a gold dot on it */
+html[data-form="portrait"] .ph-chat:empty { display: none; }
+html[data-form="portrait"] .ph-chat .dock.folded { position: relative; height: 34px; padding: 0 4px; gap: 0; border: 1px solid var(--line-bright); border-radius: 999px; box-shadow: none; overflow: visible; }
+html[data-form="portrait"] .ph-chat .faces img { width: 24px; height: 24px; }
+html[data-form="portrait"] .ph-chat .dock-count { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* The badge keeps its words for screen readers. Only a dot is drawn. */
+html[data-form="portrait"] .ph-chat .dock-new { position: absolute; top: -2px; right: -2px; width: 11px; height: 11px; padding: 0; box-sizing: border-box; overflow: hidden; color: transparent; text-shadow: none; text-indent: 20px; border-radius: 50%; box-shadow: 0 0 0 2px var(--bg); }
+html[data-form="portrait"] .ph-more { position: relative; flex: none; }
+html[data-form="portrait"] .ph-menu { position: absolute; top: calc(100% + 4px); right: 0; z-index: 40; width: 240px; padding: 6px; display: grid; gap: 2px; background: var(--surface-3); border: 1px solid var(--line-bright); border-radius: 12px; box-shadow: 0 18px 40px #000d;
+  animation: menu-in .14s cubic-bezier(.2,.7,.3,1); transform-origin: 100% 0; }
+html[data-form="portrait"] .ph-menu > button { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 10px; border: 0; border-radius: 8px; background: none; color: var(--text); font-size: 14px; text-align: left; white-space: nowrap; }
+html[data-form="portrait"] .ph-menu > button:active { background: var(--surface-2); }
+html[data-form="portrait"] .ph-menu > button svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* Under a phone header the setup pages start near the top */
+html[data-form="portrait"] .limited-page > .setup-head { margin-top: 12px; }
+html[data-form="portrait"] .menu-shell:has(> .ph) .menu-page { align-content: start; padding-top: 12px; }
+html[data-form="portrait"] #lobby:has(> .ph) .lobby-main { padding-top: 12px; }
+/* A phone has no room for the filter list beside a filter's panel. The menu is a sheet along the bottom, showing the list or the chosen panel */
+html[data-form="portrait"] .filter-menu { position: fixed; left: 0; right: 0; top: auto; bottom: 0; z-index: 60; flex-direction: column; align-items: stretch; gap: 0; }
+html[data-form="portrait"] .filter-menu :is(.mlist, .fpanel) { width: auto; max-height: 75dvh; overflow-y: auto; box-sizing: border-box; border-radius: 14px 14px 0 0; padding: 10px 12px calc(14px + env(safe-area-inset-bottom)); }
+html[data-form="portrait"] .filter-menu.picked .mlist { display: none; }
+html[data-form="portrait"] .filter-menu :is(.fopt, .game-choice) { min-height: 44px; font-size: 15px; }
+html[data-form="portrait"] .filter-menu :is(.fopts, .game-choices) { max-height: none; }

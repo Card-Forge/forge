@@ -96,6 +96,15 @@
     <profiles>
         <profile>
             <id>windows-linux</id>
+            <!-- Builds the web GUI first, which the download carries beside desktop and adventure -->
+            <dependencies>
+                <dependency>
+                    <groupId>forge</groupId>
+                    <artifactId>forge-gui-web</artifactId>
+                    <version>${project.version}</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -189,6 +198,11 @@
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target/classes" includes="build.txt" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-web.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-web.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-web.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-web.cmd" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-gui-web-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
@@ -201,13 +215,18 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.cmd" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-web.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-web.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-web.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-web.exe" perm="a+rx" />
                                         <copy todir="${basedir}/target">
                                             <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh,forge.command" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh,forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh,adventure-editor.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-web/target" includes="forge-web.sh,forge-web.command" />
                                         </copy>
                                         <chmod file="${basedir}/target/forge.sh" perm="a+rx" />
                                         <chmod file="${basedir}/target/forge.command" perm="a+rx" />
@@ -215,6 +234,8 @@
                                         <chmod file="${basedir}/target/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${basedir}/target/adventure-editor.sh" perm="a+rx" />
                                         <chmod file="${basedir}/target/adventure-editor.command" perm="a+rx" />
+                                        <chmod file="${basedir}/target/forge-web.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/forge-web.command" perm="a+rx" />
                                         <tar destfile="${basedir}/target/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
@@ -229,6 +250,10 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
+                                                <include name="forge-web.sh" />
+                                                <include name="forge-web.command" />
+                                                <include name="forge-web.cmd" />
+                                                <include name="forge-web.exe" />
                                                 <exclude name="**/*.xcf" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
@@ -245,6 +270,10 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
+                                                <exclude name="forge-web.sh" />
+                                                <exclude name="forge-web.command" />
+                                                <exclude name="forge-web.cmd" />
+                                                <exclude name="forge-web.exe" />
                                                 <exclude name="**/*.xcf" />
                                             </tarfileset>
                                         </tar>

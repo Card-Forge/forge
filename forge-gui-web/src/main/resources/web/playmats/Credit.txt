@@ -1,0 +1,26 @@
+The playmats in this folder are public domain paintings, cropped and resized from the sources below.
+
+waves.jpg - Ivan Aivazovsky, Among the Waves, 1898.
+  https://commons.wikimedia.org/wiki/File:Ivan_Konstantinovich_Aivazovsky_-_Among_the_Waves,_1898.jpg
+sunset.jpg - J. M. W. Turner, Sun Setting over a Lake, c. 1840. Tate. Photograph from Wikimedia Commons.
+  https://commons.wikimedia.org/wiki/File:Horror_und_Delight-Turner-Sun_Setting_over_a_Lake_DSC2132.jpg
+azorius.jpg - Caspar David Friedrich, The Sea of Ice, 1823-24. Hamburger Kunsthalle.
+  https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Das_Eismeer_-_Hamburger_Kunsthalle_-_02.jpg
+boros.jpg - Frederic Edwin Church, Sky at Sunset, Jamaica, 1865. Cooper Hewitt.
+  https://commons.wikimedia.org/wiki/File:Frederic_Edwin_Church_-_Sky_at_sunset,_Jamaica,_West_Indies_-_Google_Art_Project.jpg
+dimir.jpg - Caspar David Friedrich, Seashore by Moonlight, 1835-36. Hamburger Kunsthalle. Photograph by Wikimedia Commons user anagoria.
+  https://commons.wikimedia.org/wiki/File:1835_Friedrich_Meeresufer_im_Mondschein_anagoria.JPG
+golgari.jpg - Johan Christian Dahl, Birch Tree in a Storm. Metropolitan Museum of Art.
+  https://commons.wikimedia.org/wiki/File:Johan_Christian_Dahl_-_Birch_Tree_in_a_Storm_-_MET_2009.400.32.jpg
+gruul.jpg - Frederic Edwin Church, Cotopaxi, 1862. Detroit Institute of Arts.
+  https://commons.wikimedia.org/wiki/File:Cotopaxi_church.jpg
+izzet.jpg - J. M. W. Turner, The Burning of the Houses of Lords and Commons, 1834. Cleveland Museum of Art.
+  https://commons.wikimedia.org/wiki/File:Joseph_Mallord_William_Turner_-_The_Burning_of_the_Houses_of_Lords_and_Commons,_16_October_1834_-_1942.647_-_Cleveland_Museum_of_Art.jpg
+orzhov.jpg - Peder Balke, Stetind in Fog, 1864. National Museum, Oslo.
+  https://commons.wikimedia.org/wiki/File:Peder_Balke_-_Stetind_in_Fog_-_Google_Art_Project.jpg
+rakdos.jpg - Arkhip Kuindzhi, Red Sunset on the Dnieper, 1905-08. Metropolitan Museum of Art.
+  https://commons.wikimedia.org/wiki/File:Red_Sunset_on_the_Dnieper_MET_DT2557.jpg
+selesnya.jpg - Ivan Shishkin, Rye, 1878. Tretyakov Gallery.
+  https://commons.wikimedia.org/wiki/File:Ivan_Shishkin_-_%D0%A0%D0%BE%D0%B6%D1%8C_-_Google_Art_Project.jpg
+simic.jpg - Claude Monet, Water Lilies, 1906. Art Institute of Chicago.
+  https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Water_Lilies_-_1933.1157_-_Art_Institute_of_Chicago.jpg
