@@ -16,6 +16,7 @@ import forge.screens.limited.NewDraftScreen;
 import forge.screens.limited.NewSealedScreen;
 import forge.screens.planarconquest.NewConquestScreen;
 import forge.screens.quest.NewQuestScreen;
+import forge.screens.rogue.RogueLaunchScreen;
 
 public class NewGameMenu extends FPopupMenu {
 
@@ -26,6 +27,7 @@ public class NewGameMenu extends FPopupMenu {
         QuestMode(Forge.getLocalizer().getMessageorUseDefault("lblQuestMode", "Quest Mode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
         PuzzleMode(Forge.getLocalizer().getMessageorUseDefault("lblPuzzleMode", "Puzzle Mode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
         PlanarConquest(Forge.getLocalizer().getMessageorUseDefault("lblPlanarConquest", "Planar Conquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
+        RogueCommander(Forge.getLocalizer().getMessageorUseDefault("lblRogueCommander", "Rogue Commander"), FSkinImage.QUEST_MAP, RogueLaunchScreen.class),
         Gauntlet(Forge.getLocalizer().getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class),
         Adventure(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"), FSkinImage.MENU_ADVLOGO, AdventureScreen.class);
 
