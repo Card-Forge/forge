@@ -360,12 +360,40 @@ public class AiAttackController {
         final CardCollectionView controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
-                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)) {
+                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)
+                        && attackTriggerReaches(attacker, trigger)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * Whether an attack trigger that {@link ComputerUtilCombat#combatTriggerWillTrigger} reports does something for this
+     * attacker. That method also reports "Whenever ~ attacks" of a creature that is already attacking for every other
+     * candidate (battle cry pumps the others), so a Goblin Guide in the attack would make a 0/4 Spellskite look like
+     * worth attacking with. Only an effect that reaches the other attackers may do that.
+     */
+    static boolean attackTriggerReaches(final Card attacker, final Trigger trigger) {
+        if (!TriggerType.Attacks.equals(trigger.getMode()) || !trigger.hasParam("ValidCard")
+                || trigger.matchesValidParam("ValidCard", attacker)) {
+            return true; // the trigger is about this attacker (or about any attacker): nothing to filter
+        }
+        for (SpellAbility sa = trigger.ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+            if (ApiType.PumpAll.equals(sa.getApi()) || ApiType.PutCounterAll.equals(sa.getApi())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * An attacker with no damage to deal and no effect when it attacks (a 0/4 Spellskite) only gets tapped and exposed
+     * by attacking. The rollouts of the Monte Carlo attack search must not add it either.
+     */
+    static boolean isPointlessAttacker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
+        return !new AiAttackController(ai).isEffectiveAttacker(ai, attacker, combat, defender);
     }
 
     public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers, final boolean nextTurn) {

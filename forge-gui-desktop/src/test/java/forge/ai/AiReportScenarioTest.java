@@ -847,6 +847,23 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12927-control-harmless-blocker", "control: the only blocker is a 0/8 wall that cannot kill it, the Dryad Arbor still attacks", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Wall of Stone", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? null : "Dryad Arbor stayed home against a blocker that cannot hurt it"));
+        // a creature with zero power and no effect of its own has no reason to attack: another attacker's "Whenever ~ attacks" must not make it one
+        l.add(new Scenario("zero-power-attacker", "Spellskite (0/4) stays home when Goblin Guide, with an attack trigger of its own, attacks", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Goblin Guide", c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    if (attackers.stream().noneMatch(a -> a.getName().equals("Goblin Guide"))) { return "setup: Goblin Guide did not attack, the scenario proves nothing: " + attackers; }
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Spellskite")) ? "Spellskite attacked with no power and no effect: " + attackers : null;
+                }));
+        l.add(new Scenario("zero-power-attacker-alone", "Spellskite (0/4) alone never attacks", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Spellskite", c.ai); },
+                c -> c.attackers().isEmpty() ? null : "Spellskite attacked alone: " + c.attackers()));
+        l.add(new Scenario("zero-power-battle-cry", "control: Spellskite attacks next to a battle cry creature, which gives it +1/+0", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Accorder Paladin", c.ai); c.bf("Spellskite", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Spellskite")) ? null : "Spellskite stayed home although battle cry makes it a 1/4 attacker"));
+        l.add(new Scenario("zero-power-doran", "control: Doran, the Siege Tower (0/5, damage equal to toughness) attacks into an empty board", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Doran, the Siege Tower", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Doran, the Siege Tower")) ? null : "Doran stayed home although it deals 5 damage"));
         // Manabarbs: the lands that pay for a spell cost life, and the AI ran into it until it died
         l.add(noPlay("manabarbs-low-life", "At 3 life under Manabarbs the AI does not pay four lands for a Hill Giant", Fid.APPROX, "MAIN2", true, "Hill Giant",
                 c -> { c.ai.setLife(3, null); c.bf("Mountain", 4, c.ai); c.hand("Hill Giant", c.ai); c.bf("Manabarbs", c.opp); }));

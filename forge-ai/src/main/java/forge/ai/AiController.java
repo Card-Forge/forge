@@ -1689,9 +1689,11 @@ public class AiController {
         combat.clearAttackers();
         for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
             // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
-            // (Dryad Arbor into Lyra Dawnbringer)
+            // (Dryad Arbor into Lyra Dawnbringer), nor one with nothing to do in combat (a 0/4 Spellskite)
             if (CombatUtil.canAttack(e.getKey(), e.getValue())
-                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat))) {
+                    && (before.containsKey(e.getKey())
+                        || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat)
+                            && !AiAttackController.isPointlessAttacker(player, e.getKey(), combat, e.getValue()))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
