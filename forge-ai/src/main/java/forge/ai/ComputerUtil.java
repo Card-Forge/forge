@@ -22,6 +22,7 @@ import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.ai.simulation.OpeningHand;
 import forge.ai.simulation.RampPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -2200,6 +2201,10 @@ public class ComputerUtil {
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
             return finalHandSize;
+        }
+
+        if (OpeningHand.hasOnlyLandsAndCreatureAuras(handList)) {
+            return 0; // the classic mulligan path must not count creature Auras as playable without a creature (#12929)
         }
 
         final CardCollectionView lands = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")

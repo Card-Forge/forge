@@ -2225,9 +2225,11 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12929-lands-and-auras", "a hand of lands and Auras for creatures, no creature, is sent back", Fid.APPROX, M1, true,
                 c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Grizzly Bears", c.ai); } },
                 c -> {
-                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { c.hand(n, c.ai); }
+                    final CardCollection hand = new CardCollection();
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { hand.add(c.hand(n, c.ai)); }
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
-                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept lands and Auras without a creature" : null;
+                    if (OpeningHand.keep(c.ai, hand, 0, true, plan, 4)) { return "smart mulligan kept lands and Auras without a creature"; }
+                    return ComputerUtil.wantMulligan(c.ai, 0) ? null : "classic mulligan kept lands and Auras without a creature";
                 }));
         l.add(noPlay("5860", "edict against a player with nothing to sacrifice", Fid.EXACT, M1, true, "Diabolic Edict",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));

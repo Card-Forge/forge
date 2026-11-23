@@ -124,6 +124,9 @@ public final class OpeningHand {
         }
         final CardCollection kept = new CardCollection(hand);
         kept.removeAll(bottom(ai, hand, cardsToReturn, onPlay, plan, lib));
+        if (hasOnlyLandsAndCreatureAuras(kept)) {
+            return false; // creature Auras are not a threat without a creature to enchant (#12929)
+        }
         if ((!playable(kept, finalSize) || !castsSomething(kept, lib)) && !dredgeOneLander(kept, plan)) {
             return false; // no key card, combo piece or good score makes up for a hand that cannot cast anything
         }
@@ -135,6 +138,28 @@ public final class OpeningHand {
         }
         final double score = score(kept, lib, onPlay, plan);
         return score >= keepBar(finalSize);
+    }
+
+    /**
+     * A hand containing only lands and creature Auras has no creature to enchant and no meaningful opening play.
+     * Keep this check independent of the smart score so combo bonuses or a lands classification cannot rescue it;
+     * the classic mulligan heuristic uses it too.
+     */
+    public static boolean hasOnlyLandsAndCreatureAuras(final CardCollectionView hand) {
+        boolean hasAura = false;
+        for (final Card c : hand) {
+            if (c.isCreature()) {
+                return false;
+            }
+            if (c.isLand()) {
+                continue;
+            }
+            if (!isCreatureAura(c)) {
+                return false;
+            }
+            hasAura = true;
+        }
+        return hasAura;
     }
 
     /** For tests and the game log: why a hand is kept or not. */
@@ -190,15 +215,21 @@ public final class OpeningHand {
      * A colour that the deck makes plentifully may still come, but a hand whose every spell waits for it is no keep.
      */
     static boolean castsSomething(final CardCollectionView kept, final Library lib) {
+        final boolean hasBody = kept.stream().anyMatch(Card::isCreature);
         boolean spell = false;
+        boolean unplayableAura = false;
         for (final Card c : kept) {
-            if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)) {
-                spell = true;
-                break;
+            if (c.isLand() || isMdfcLand(c)) {
+                continue;
             }
+            if (!hasBody && isCreatureAura(c)) {
+                unplayableAura = true;
+                continue;
+            }
+            spell = true;
         }
         if (!spell) {
-            return true; // only lands: judged by the other rules
+            return !unplayableAura; // only lands are judged by the other rules; dead Auras are not lands
         }
         return new HandMana(kept, lib).allocate(sources -> castsWith(kept, sources));
     }
