@@ -31,6 +31,7 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.CompoundSkinBorder;
 import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinnedFrame;
+import forge.toolbox.FWayland;
 
 @SuppressWarnings("serial")
 public class FFrame extends SkinnedFrame implements ITitleBarOwner {
@@ -41,6 +42,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private boolean moveInProgress;
     private int resizeCursor;
     private FTitleBarBase titleBar;
+    private boolean updatingState;
     private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame, paused;
     private Rectangle normalBounds;
 
@@ -162,25 +164,33 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         }
     }
 
-    //ensure un-maximized if location or size changed
+    //Under native Wayland, compositor-driven size/location changes must not clear maximize state.
     @Override
     public void setLocation(final Point point) {
-        resetState();
+        if (!(FWayland.isActive() && this.maximized)) {
+            resetState();
+        }
         super.setLocation(point);
     }
     @Override
     public void setLocation(final int x, final int y) {
-        resetState();
+        if (!(FWayland.isActive() && this.maximized)) {
+            resetState();
+        }
         super.setLocation(x, y);
     }
     @Override
     public void setSize(final Dimension size) {
-        resetState();
+        if (!(FWayland.isActive() && this.maximized)) {
+            resetState();
+        }
         super.setSize(size);
     }
     @Override
     public void setSize(final int width, final int height) {
-        resetState();
+        if (!(FWayland.isActive() && this.maximized)) {
+            resetState();
+        }
         super.setSize(width, height);
     }
 
@@ -262,29 +272,55 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     }
 
     private void updateState() {
-        if (this.minimized) {
-            super.setExtendedState(Frame.ICONIFIED);
-            return;
-        }
-        updateBorder();
-        updateTitleBar();
+        updateState(true);
+    }
 
-        super.setExtendedState(Frame.NORMAL);
-
-        if (this.fullScreen) {
-            if (SDisplayUtil.setFullScreenWindow(this, true)) {
-                return; //nothing else needed if full-screen successful
+    private void updateState(final boolean allowNativeRequests) {
+        if (this.updatingState) { return; } //prevent peer-generated state callbacks from re-entering this method
+        this.updatingState = true;
+        try {
+            if (this.minimized) {
+                if (allowNativeRequests) {
+                    super.setExtendedState(Frame.ICONIFIED);
+                }
+                return;
             }
-            this.fullScreen = false; //reset if full screen failed
-            updateBorder(); //ensure border updated for non-full screen if needed
-            updateTitleBar(); //ensure titlebar updated for non-full screen if needed
-        }
+            updateBorder();
+            updateTitleBar();
 
-        if (this.maximized) {
-            this.setBounds(SDisplayUtil.getScreenMaximizedBounds(this.normalBounds));
-        }
-        else {
-            this.setBounds(this.normalBounds);
+            if (allowNativeRequests && !(FWayland.isActive() && this.maximized && !this.fullScreen)) {
+                super.setExtendedState(Frame.NORMAL);
+            }
+
+            if (this.fullScreen) {
+                if (SDisplayUtil.setFullScreenWindow(this, true)) {
+                    return; //nothing else needed if full-screen successful
+                }
+                this.fullScreen = false; //reset if full screen failed
+                updateBorder(); //ensure border updated for non-full screen if needed
+                updateTitleBar(); //ensure titlebar updated for non-full screen if needed
+            }
+
+            if (FWayland.isActive()) {
+                if (allowNativeRequests) {
+                    if (this.maximized) {
+                        super.setExtendedState(Frame.MAXIMIZED_BOTH); //let the compositor maximize on the window's current output
+                    }
+                    else if (this.normalBounds != null) {
+                        super.setSize(this.normalBounds.width, this.normalBounds.height); //only size; location is compositor-managed
+                    }
+                }
+                return;
+            }
+
+            if (this.maximized) {
+                this.setBounds(SDisplayUtil.getScreenMaximizedBounds(this.normalBounds));
+            }
+            else {
+                this.setBounds(this.normalBounds);
+            }
+        } finally {
+            this.updatingState = false;
         }
     }
 
@@ -303,22 +339,43 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         }
     }
 
+    //peer callbacks only sync local flags and chrome; re-requesting a state would loop with the compositor
+    private void syncStateFromPeer(final int state) {
+        final boolean iconified = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
+        final boolean maximized0 = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
+        if (this.minimized != iconified) {
+            this.minimized = iconified;
+            if (iconified) {
+                pause();
+            }
+            else {
+                resume();
+            }
+        }
+        if (maximized0) {
+            this.maximized = true;
+        }
+        else if (state == Frame.NORMAL) {
+            this.maximized = false;
+        }
+        if ((maximized0 || state == Frame.NORMAL) && this.fullScreen) {
+            SDisplayUtil.setFullScreenWindow(this, false); //clear stale full-screen state reported by the peer
+            this.fullScreen = false;
+        }
+        updateState(false);
+    }
+
     //override normal state behavior
     @Override
     public synchronized void setState(final int state) {
-        setMinimized(state == Frame.ICONIFIED);
-        if (state == Frame.MAXIMIZED_BOTH) {
-            this.setMaximized(true);
-        }
+        syncStateFromPeer(state);
     }
 
     //override normal extended state behavior
     @Override
     public void setExtendedState(final int state) {
         if (this.isActive()) { //only update state set this way when active, otherwise window will be minimized when deactivated
-            this.minimized = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
-            this.maximized = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
-            updateState();
+            syncStateFromPeer(state);
         }
     }
 
@@ -328,6 +385,10 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
             public void mousePressed(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && !fullScreen) { //don't allow moving or restore down when Full Screen
                     if (e.getClickCount() == 1) {
+                        if (FWayland.isActive()) {
+                            FWayland.startMove(FFrame.this, MouseEvent.BUTTON1);
+                            return; //JBR drives the move; no drag-based move under Wayland
+                        }
                         locBeforeMove = getLocation();
                         mouseDownLoc = e.getLocationOnScreen();
                     }

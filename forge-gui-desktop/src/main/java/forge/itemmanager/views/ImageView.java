@@ -8,7 +8,6 @@ import forge.deck.io.DeckPreferences;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.limited.CardRanker;
-import forge.gui.GuiBase;
 import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -1155,7 +1154,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g.setColor(Color.black);
             g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
 
-            final float screenScale = GuiBase.getInterface().getScreenScale();
+            final float screenScale = FUiScale.of(this);
             final int drawX = bounds.x + borderSize;
             final int drawY = bounds.y + borderSize;
             final int drawWidth = bounds.width - 2 * borderSize;

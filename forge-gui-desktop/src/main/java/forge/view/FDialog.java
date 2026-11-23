@@ -46,6 +46,7 @@ import forge.toolbox.FSkin.CompoundSkinBorder;
 import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedDialog;
+import forge.toolbox.FWayland;
 import forge.util.OperatingSystem;
 import net.miginfocom.swing.MigLayout;
 
@@ -307,6 +308,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
             public void mousePressed(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (e.getClickCount() == 1) {
+                        if (FWayland.isActive()) {
+                            FWayland.startMove(FDialog.this, MouseEvent.BUTTON1);
+                            return; //JBR drives the move; no drag-based move under Wayland
+                        }
                         locBeforeMove = getLocation();
                         mouseDownLoc = e.getLocationOnScreen();
                     }

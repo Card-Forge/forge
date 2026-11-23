@@ -31,7 +31,7 @@ import javax.swing.Timer;
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.gui.GuiBase;
+import forge.toolbox.FUiScale;
 
 /**
  * Displays a {@code BufferedImage} at its center.
@@ -290,7 +290,7 @@ public class FImagePanel extends JPanel {
         at.rotate(Math.toRadians(degreesOfRotation));
 
         // 2. scale image.
-        float screenScale = GuiBase.getInterface().getScreenScale();
+        float screenScale = FUiScale.of(this);
         if (createScaleTransform) {
             at.scale(this.imageScale / screenScale, this.imageScale / screenScale);
         } else {
@@ -333,7 +333,7 @@ public class FImagePanel extends JPanel {
             if (this.autoSizeMode != AutoSizeImageMode.OFF) {
                 double newScale = FImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
                 // apply DPI based scale
-                newScale *= GuiBase.getInterface().getScreenScale();
+                newScale *= FUiScale.of(this);
                 if (newScale != this.imageScale) {
                     isResampleEnabled = true;
                     this.imageScale = newScale;

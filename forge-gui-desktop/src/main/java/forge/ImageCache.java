@@ -58,6 +58,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.FUiScale;
 import forge.toolbox.imaging.FCardImageRenderer;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
@@ -196,11 +197,11 @@ public class ImageCache {
      *
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
-        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView).getLeft();
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView, -1, -1).getLeft();
     }
 
     public static Pair<BufferedImage, Boolean> getCardOriginalImageInfo(String imageKey, boolean useDefaultIfNotFound) {
-        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null);
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null, -1, -1);
     }
 
     private static int sleeveIndexOf(final CardView cardView) {
@@ -369,7 +370,7 @@ public class ImageCache {
     }
 
     // return the pair of image and a flag to indicate if it is a placeholder image.
-    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView, int requestedWidth, int requestedHeight) {
         if (null == imageKey) {
             return Pair.of(null, false);
         }
@@ -498,19 +499,19 @@ public class ImageCache {
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null || useArtCrop) {
             if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
-                float screenScale = GuiBase.getInterface().getScreenScale();
-                int width = Math.round(488 * screenScale), height = Math.round(680 * screenScale);
+                int placeholderWidth = requestedWidth == -1 ? Math.round(488 * FUiScale.fallback()) : requestedWidth;
+                int placeholderHeight = requestedHeight == -1 ? Math.round(680 * FUiScale.fallback()) : requestedHeight;
                 BufferedImage art = original;
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
                 String legalString = null;
-                original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                original = new BufferedImage(placeholderWidth, placeholderHeight, BufferedImage.TYPE_INT_ARGB);
                 if (art != null) {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
                     int year = cal.get(Calendar.YEAR);
                     legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
                 }
-                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, placeholderWidth, placeholderHeight, art, legalString);
                 // Skip store cache since the rendering speed seems to be fast enough
                 // Also the scaleImage below will already cache re-sized image for CardPanel anyway
                 // if (art != null || !fetcherEnabled)
@@ -553,7 +554,7 @@ public class ImageCache {
             return cached;
         }
 
-        Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView);
+        Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView, width, height);
         BufferedImage original = orgImgs.getLeft();
         boolean isPlaceholder = orgImgs.getRight();
         if (original == null) { return null; }
