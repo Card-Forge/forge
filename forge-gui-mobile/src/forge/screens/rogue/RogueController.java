@@ -109,9 +109,10 @@ public final class RogueController {
     private void recover(RuntimeException e) {
         Logger.error(e, "Rogue Commander step failed");
         flow.setRun(null);
-        flow.load();
+        // A run that failed to start has no save to go back to
+        String message = flow.load().isPresent() ? "lblRogueStepFailed" : "lblRogueStepFailedNoRun";
         Localizer localizer = Localizer.getInstance();
-        decisions.showMessage(localizer.getMessage("lblRogueCommander"), localizer.getMessage("lblRogueStepFailed"));
+        decisions.showMessage(localizer.getMessage("lblRogueCommander"), localizer.getMessage(message));
     }
 
     void hold(RogueQuestion<?> question) {
