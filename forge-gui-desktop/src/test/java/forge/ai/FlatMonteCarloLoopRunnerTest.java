@@ -1842,4 +1842,46 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("the Flicker, Naru Meha in response, her copy flickers her and a land: a mana a round\n"
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithSenseisDiviningTopBolassCitadelAndAetherfluxReservoirKillsTheOpponent() {
+        elfDeckWith(0);
+        addCardToZone("Bolas's Citadel", ai, ZoneType.Battlefield);
+        addCardToZone("Aetherflux Reservoir", ai, ZoneType.Battlefield);
+        addCardToZone("Sensei's Divining Top", ai, ZoneType.Battlefield);
+        opp.setLife(40, null);
+        runTurn();
+        AssertJUnit.assertTrue("Top draws, is cast from the library for a life, the Reservoir gains a life per spell: then fifty\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithIsochronScepterDramaticReversalAndRocksPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        final Card scepter = addCardToZone("Isochron Scepter", ai, ZoneType.Battlefield);
+        final Card reversal = addCardToZone("Dramatic Reversal", ai, ZoneType.Exile);
+        scepter.addImprintedCard(reversal);
+        reversal.setExiledWith(scepter);
+        scepter.addExiledCard(reversal);
+        addCardToZone("Sol Ring", ai, ZoneType.Battlefield);
+        addCardToZone("Mana Crypt", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap the rocks, the Scepter pays two, the copy untaps all: two mana over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
+        elfDeckWith(0);
+        addCards("Island", 3, ai);
+        final Card sieve = addCardToZone("Time Sieve", ai, ZoneType.Battlefield);
+        sieve.setSickness(false);
+        addCardToZone("Thopter Foundry", ai, ZoneType.Battlefield);
+        addCardToZone("Sword of the Meek", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertTrue("a Thopter for the Sword, the Sword back on it, twice: five artifacts for the Sieve\n"
+                + trace + gameStateToString(game), sieve.isTapped() || !sieve.isInZone(ZoneType.Battlefield));
+    }
 }

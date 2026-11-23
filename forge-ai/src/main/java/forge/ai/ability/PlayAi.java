@@ -185,6 +185,11 @@ public class PlayAi extends SpellAbilityAi {
                     return c;
             }
         }
+        for (final Card c : options) {
+            if (forge.ai.simulation.StackLoops.scepterCopiesTheReversal(ai, sa, c)) {
+                return c; // Isochron Scepter with Dramatic Reversal: the untap is the loop, whatever it looks like on its own
+            }
+        }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
             // of which spell was the reason for the choice can be used there

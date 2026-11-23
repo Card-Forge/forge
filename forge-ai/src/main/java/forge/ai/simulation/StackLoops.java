@@ -142,6 +142,19 @@ public final class StackLoops {
      */
     public static SpellAbility response(final Player ai, final SpellAbility top, final List<SpellAbility> candidates,
                                         final Predicate<SpellAbility> approve) {
+        // Time Sieve's extra turn on the stack, its five artifacts in the graveyard: Faith's Reward brings them back
+        if (top != null && top.isActivatedAbility() && top.getApi() == ApiType.AddTurn && ai.equals(top.getActivatingPlayer())
+                && ArtifactLoopPlan.rewardRefills(ai)) {
+            final SpellAbility reward = LoopRunner.castFromHand(ai, candidates, ArtifactLoopPlan.REWARD);
+            if (reward != null && forge.ai.ComputerUtilMana.canPayManaCost(reward, ai, 0, false)) {
+                reward.setActivatingPlayer(ai);
+                reward.resetTargets();
+                if (approve.test(reward)) {
+                    VetoLog.note(ai, "sieve-loop | Faith's Reward brings the Sieve and the artifacts back");
+                    return reward;
+                }
+            }
+        }
         final SpellAbility naru = naruResponse(ai, top, candidates, approve);
         if (naru != null) {
             return naru;
@@ -279,5 +292,12 @@ public final class StackLoops {
         }
         naru.setSVar("NaruRounds", String.valueOf(rounds + 1));
         return true;
+    }
+
+    /** Whether the Scepter's copy of its imprinted Dramatic Reversal is a loop's (the AI wants mana the rocks can make). */
+    public static boolean scepterCopiesTheReversal(final Player ai, final SpellAbility sa, final Card option) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        return host != null && host.getName().equals("Isochron Scepter") && option != null
+                && option.getName().equals("Dramatic Reversal") && ai.equals(host.getController()) && ManaLoopPlan.goal(ai) > 0;
     }
 }

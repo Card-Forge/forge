@@ -105,6 +105,10 @@ public final class LoopRunner {
         if (breach != null) {
             return breach;
         }
+        final SpellAbility artifacts = ArtifactLoopPlan.next(ai, candidates, approve);
+        if (artifacts != null) {
+            return artifacts;
+        }
         final SpellAbility rings = StackLoops.next(ai, candidates, approve);
         if (rings != null) {
             return rings;
