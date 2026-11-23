@@ -120,14 +120,16 @@ public class RogueShopScreen extends RogueScreen {
 
     private class Items extends RogueScrollPane {
         private final List<Tile> tiles = new ArrayList<>();
+        private final RogueDeal deal = new RogueDeal(cards.size() + specials.size());
+        private boolean dealt;
         private float specialsTop = -1;
 
         Items() {
             for (BazaarItem item : cards) {
-                tiles.add(add(new Tile(item)));
+                tiles.add(add(new Tile(item, tiles.size())));
             }
             for (BazaarItem item : specials) {
-                tiles.add(add(new Tile(item)));
+                tiles.add(add(new Tile(item, tiles.size())));
             }
         }
 
@@ -157,6 +159,10 @@ public class RogueShopScreen extends RogueScreen {
                 }
             }
             float bottom = col == 0 ? y : y + th + gap;
+            if (!dealt && visibleHeight > 0) {
+                dealt = true;
+                deal.start();
+            }
             return new ScrollBounds(visibleWidth, bottom);
         }
 
@@ -172,13 +178,18 @@ public class RogueShopScreen extends RogueScreen {
 
     private class Tile extends FDisplayObject {
         private final BazaarItem item;
+        private final int index;
 
-        Tile(BazaarItem item) {
+        Tile(BazaarItem item, int index) {
             this.item = item;
+            this.index = index;
         }
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (!items.deal.arrived(index)) {
+                return true;
+            }
             toggle(item);
             return true;
         }
@@ -197,6 +208,15 @@ public class RogueShopScreen extends RogueScreen {
             float u = RogueLook.unit();
             float w = getWidth();
             float ch = w * RogueLook.CARD_RATIO;
+            boolean rare = item.isSpecial();
+            if (rare) {
+                items.deal.halo(g, index, w, ch);
+            }
+            if (!items.deal.arrived(index)) {
+                items.deal.draw(g, index, item.card(), w, ch, items.getWidth() / 2 - getLeft(),
+                    items.getScrollTop() + items.getHeight() - getTop(), rare);
+                return;
+            }
             boolean on = selected.contains(item);
             if (on) {
                 g.fillRect(RogueLook.INK, -3.4f * u, -3.4f * u, w + 6.8f * u, ch + 6.8f * u);

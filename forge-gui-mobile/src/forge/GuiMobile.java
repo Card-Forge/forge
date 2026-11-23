@@ -27,6 +27,8 @@ import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.quest.QuestMenu;
+import forge.screens.rogue.RogueDialog;
+import forge.screens.rogue.RogueScreen;
 import forge.screens.settings.GuiDownloader;
 import forge.sound.*;
 import forge.toolbox.FOptionPane;
@@ -238,6 +240,10 @@ public class GuiMobile implements IGuiBase {
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         if (Forge.isMobileAdventureMode) {
             FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image, null));
+            return;
+        }
+        if (Forge.getCurrentScreen() instanceof RogueScreen) {
+            RogueDialog.notice((FImage) image, message, title);
             return;
         }
         new WaitCallback<Integer>() {

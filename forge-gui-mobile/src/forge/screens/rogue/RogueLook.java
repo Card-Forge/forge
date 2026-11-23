@@ -34,6 +34,7 @@ public final class RogueLook {
     public static final Color GOLD = new Color(0xffd75eff);
     public static final Color DEEP = new Color(0x8a5a12ff);
     public static final Color PAPER = new Color(0xe4d2a8ff);
+    private static final Color HALO = new Color(1f, 0.55f, 0.4f, 0f);
     public static final float CARD_RATIO = 1.395f;
 
     private static final Map<String, Texture> textures = new HashMap<>();
@@ -222,9 +223,10 @@ public final class RogueLook {
         if (region == null) {
             return;
         }
-        g.getBatch().setColor(tint);
+        float alpha = g.getBatch().getColor().a;
+        g.getBatch().setColor(tint.r, tint.g, tint.b, tint.a * alpha);
         g.drawImage(region, x, y, w, h);
-        g.getBatch().setColor(Color.WHITE);
+        g.getBatch().setColor(1, 1, 1, alpha);
     }
 
     /** An adventure item sprite by name, such as {@code Gold} or {@code Refresh}. */
@@ -248,13 +250,18 @@ public final class RogueLook {
     }
 
     public static void card(Graphics g, PaperCard c, float x, float y, float w, float alpha) {
+        card(g, c, x, y, w, w * CARD_RATIO, alpha);
+    }
+
+    /** The card squeezed into w by h, as when it turns over. */
+    public static void card(Graphics g, PaperCard c, float x, float y, float w, float h, float alpha) {
         if (c == null) {
             return;
         }
         if (alpha < 1) {
             g.setAlphaComposite(alpha);
         }
-        CardRenderer.drawCard(g, c, x, y, w, w * CARD_RATIO, CardStackPosition.Top);
+        CardRenderer.drawCard(g, c, x, y, w, h, CardStackPosition.Top);
         if (alpha < 1) {
             g.resetAlphaComposite();
         }
@@ -282,6 +289,15 @@ public final class RogueLook {
         g.endClip();
         if (alpha < 1) {
             g.resetAlphaComposite();
+        }
+    }
+
+    /** A warm halo of radius r round cx, cy, pulsing with time in seconds; fade from 0 to 1. */
+    public static void halo(Graphics g, float cx, float cy, float r, float time, float fade) {
+        float pulsed = r * (1 + 0.08f * (float) Math.sin(time * 6));
+        HALO.a = 0.22f * fade;
+        for (int k = 3; k > 0; k--) {
+            g.fillCircle(HALO, cx, cy, pulsed * k / 3f + pulsed * 0.2f);
         }
     }
 

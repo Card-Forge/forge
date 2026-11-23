@@ -1,14 +1,15 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardZoom;
 import forge.deck.Deck;
-import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.CodexHelper.CodexState;
 import forge.gamemodes.rogue.CodexHelper.JournalEntry;
+import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
@@ -48,6 +49,7 @@ public class RogueCodexScreen extends RogueScreen {
     private RoguePlanebound planebound;
     private JournalEntry entry;
     private boolean detail;
+    private float slide;
     private final Pane side;
     private final Pane main;
     private final RogueButton back;
@@ -73,10 +75,18 @@ public class RogueCodexScreen extends RogueScreen {
         build();
     }
 
+    /** The new page slides in from the side its tab is on. */
     private void show(Page next) {
+        int side = Integer.signum(next.ordinal() - page.ordinal());
         page = next;
         detail = false;
         build();
+        if (side != 0) {
+            RogueMotion.play(0.35f, t -> {
+                slide = side * getWidth() * (1 - Interpolation.pow3Out.apply(t));
+                revalidate();
+            }, null);
+        }
     }
 
     private void goBack() {
@@ -432,6 +442,11 @@ public class RogueCodexScreen extends RogueScreen {
     }
 
     @Override
+    protected int tab() {
+        return 3;
+    }
+
+    @Override
     protected List<List<RogueButton>> buttonRows() {
         return List.of(pageTabs, List.of(back));
     }
@@ -453,10 +468,10 @@ public class RogueCodexScreen extends RogueScreen {
         float u = RogueLook.unit();
         if (twoPanes()) {
             float sw = sideWidth();
-            side.setBounds(6 * u, 6 * u, sw - 6 * u, h - 9 * u);
-            main.setBounds(sw + 9 * u, 6 * u, w - sw - 15 * u, h - 9 * u);
+            side.setBounds(slide + 6 * u, 6 * u, sw - 6 * u, h - 9 * u);
+            main.setBounds(slide + sw + 9 * u, 6 * u, w - sw - 15 * u, h - 9 * u);
         } else {
-            main.setBounds(9 * u, 6 * u, w - 18 * u, h - 9 * u);
+            main.setBounds(slide + 9 * u, 6 * u, w - 18 * u, h - 9 * u);
         }
     }
 
@@ -467,10 +482,10 @@ public class RogueCodexScreen extends RogueScreen {
         float bottom = main.getBottom() + 3 * u;
         if (twoPanes()) {
             float sw = sideWidth();
-            RogueLook.paper(g, 3 * u, 3 * u, sw, bottom - 3 * u);
-            RogueLook.paper(g, sw + 6 * u, 3 * u, getWidth() - sw - 9 * u, bottom - 3 * u);
+            RogueLook.paper(g, slide + 3 * u, 3 * u, sw, bottom - 3 * u);
+            RogueLook.paper(g, slide + sw + 6 * u, 3 * u, getWidth() - sw - 9 * u, bottom - 3 * u);
         } else {
-            RogueLook.paper(g, 3 * u, 3 * u, getWidth() - 6 * u, bottom - 3 * u);
+            RogueLook.paper(g, slide + 3 * u, 3 * u, getWidth() - 6 * u, bottom - 3 * u);
         }
     }
 

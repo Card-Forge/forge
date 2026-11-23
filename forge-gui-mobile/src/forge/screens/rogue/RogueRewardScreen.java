@@ -41,13 +41,18 @@ public class RogueRewardScreen extends RogueScreen {
             }));
         reroll = rerollLabel == null ? null : add(new RogueButton(rerollLabel, "Refresh",
             rerollEnabled ? RogueButton.State.NORMAL : RogueButton.State.DISABLED, () -> question.answer(null)));
-        ok = add(new RogueButton(localizer.getMessage("lblOK"), null, RogueButton.State.MAIN, () -> {
-            List<PaperCard> chosen = new ArrayList<>();
-            for (int i : picked) {
-                chosen.add(cards.get(i));
-            }
-            question.answer(chosen);
-        }));
+        ok = add(new RogueButton(localizer.getMessage("lblOK"), null, RogueButton.State.MAIN, () -> confirm(question)));
+    }
+
+    private void confirm(RogueQuestion<List<PaperCard>> question) {
+        List<PaperCard> chosen = new ArrayList<>();
+        for (int i : picked) {
+            chosen.add(cards.get(i));
+        }
+        for (RogueButton button : buttonRows().get(0)) {
+            button.setState(RogueButton.State.DISABLED);
+        }
+        grid.flyChosen(this, ok, () -> question.answer(chosen));
     }
 
     private void toggle(int index) {

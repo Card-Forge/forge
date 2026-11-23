@@ -57,6 +57,11 @@ public class RogueTraitsScreen extends RogueScreen {
     }
 
     @Override
+    protected int tab() {
+        return 1;
+    }
+
+    @Override
     protected List<List<RogueButton>> buttonRows() {
         return List.of(List.of(mapTab, traits, deck, codex));
     }

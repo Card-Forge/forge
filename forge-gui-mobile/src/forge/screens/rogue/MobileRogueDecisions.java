@@ -14,6 +14,7 @@ import forge.gamemodes.rogue.flow.RogueDecisions;
 import forge.gamemodes.rogue.npc.NPCContext;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.Forge;
+import forge.assets.FImage;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
@@ -26,8 +27,13 @@ class MobileRogueDecisions implements RogueDecisions {
 
     /** Shows a dialog and waits for the answer's index. */
     static int dialog(String title, String text, List<String> answers) {
+        return dialog(title, text, null, RogueDialog.Entrance.PLAIN, answers);
+    }
+
+    /** image may be null. */
+    static int dialog(String title, String text, FImage image, RogueDialog.Entrance entrance, List<String> answers) {
         CompletableFuture<Integer> choice = new CompletableFuture<>();
-        FThreads.invokeInEdtLater(() -> RogueDialog.show(title, text, answers, choice::complete));
+        FThreads.invokeInEdtLater(() -> RogueDialog.show(title, text, image, entrance, answers, choice::complete));
         return RogueController.get().await(choice);
     }
 

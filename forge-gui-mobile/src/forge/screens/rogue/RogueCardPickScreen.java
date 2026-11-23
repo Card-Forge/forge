@@ -72,7 +72,12 @@ public class RogueCardPickScreen extends RogueScreen {
     private void confirm() {
         List<PaperCard> list = pickedCards();
         if (choice.accepts(list)) {
-            question.answer(list);
+            for (List<RogueButton> row : buttonRows()) {
+                for (RogueButton button : row) {
+                    button.setState(RogueButton.State.DISABLED);
+                }
+            }
+            grid.flyChosen(this, ok, () -> question.answer(list));
         }
     }
 

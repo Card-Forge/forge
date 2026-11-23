@@ -61,6 +61,11 @@ public class RogueHistoryScreen extends RogueScreen {
     }
 
     @Override
+    protected int tab() {
+        return 4;
+    }
+
+    @Override
     protected List<List<RogueButton>> buttonRows() {
         return List.of(tabs);
     }

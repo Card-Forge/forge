@@ -1,17 +1,19 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import forge.Forge;
 import forge.Graphics;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 
-/** A parchment sheet over the page: from the bottom upright, at the right sideways. A tap outside closes it. */
+/** A parchment sheet over the page, rising from the bottom upright and the right sideways. A tap outside closes it. */
 public class RogueSheet extends FOverlay {
     private static final Color DIM = new Color(0, 0, 0, 0.6f);
 
     private final FDisplayObject content;
     private final float uprightHeight;
+    private float rise = 1;
 
     /** uprightHeight is in units. */
     public RogueSheet(FDisplayObject content, float uprightHeight) {
@@ -20,11 +22,21 @@ public class RogueSheet extends FOverlay {
         this.uprightHeight = uprightHeight;
     }
 
+    @Override
+    public void show() {
+        super.show();
+        RogueMotion.play(0.3f, t -> {
+            rise = Interpolation.pow3Out.apply(t);
+            revalidate();
+        }, null);
+    }
+
     private float[] box() {
         float u = RogueLook.unit();
+        float away = 1 - rise;
         return Forge.isLandscapeMode()
-            ? new float[]{getWidth() - 300 * u, 3 * u, 297 * u, getHeight() - 41 * u}
-            : new float[]{3 * u, getHeight() - (uprightHeight + 34) * u, getWidth() - 6 * u, uprightHeight * u};
+            ? new float[]{getWidth() - 300 * u + away * 300 * u, 3 * u, 297 * u, getHeight() - 41 * u}
+            : new float[]{3 * u, getHeight() - (uprightHeight + 34) * u + away * (uprightHeight + 34) * u, getWidth() - 6 * u, uprightHeight * u};
     }
 
     @Override

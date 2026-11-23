@@ -1,9 +1,13 @@
 package forge.screens.rogue;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import forge.Forge;
 import forge.Graphics;
 import forge.gamemodes.rogue.RogueRun;
 import forge.screens.FScreen;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -14,6 +18,17 @@ import java.util.function.Supplier;
  * first.
  */
 public abstract class RogueScreen extends FScreen {
+    private static final float TRANSITION_SECONDS = 0.5f;
+    private static final Color TRANSITION_DIM = new Color(0, 0, 0, 0);
+    private static long opened;
+    private static WeakReference<RogueScreen> onTop = new WeakReference<>(null);
+    private static long onTopFrame;
+
+    private long order = ++opened;
+    private RogueScreen from;
+    private float transition = 1;
+    private boolean nested;
+    private final List<Flight> flights = new ArrayList<>();
     private final RogueRunBar runBar;
     private final RogueButton menuButton;
 
@@ -24,7 +39,7 @@ public abstract class RogueScreen extends FScreen {
             runBar = null;
             menuButton = null;
         } else {
-            runBar = add(new RogueRunBar(run, this::openMenu));
+            runBar = add(new RogueRunBar(this, run, this::openMenu));
             menuButton = add(new RogueButton("", "Menu", RogueButton.State.NORMAL, this::openMenu).weight(0.3f));
         }
     }
@@ -65,6 +80,134 @@ public abstract class RogueScreen extends FScreen {
     @Override
     public FScreen getLandscapeBackdropScreen() {
         return null;
+    }
+
+    /** Opened again from further back, as the open question is: it comes forward like a new screen. */
+    void bringForward() {
+        order = ++opened;
+    }
+
+    /** Its place among the tabs it shares with others, which slide sideways between each other; -1 for none. */
+    protected int tab() {
+        return -1;
+    }
+
+    /**
+     * A screen that has just become current draws the one it replaced behind itself while it moves in: forward, it
+     * rises over it; back, the old one drops away; between tabs, both slide sideways.
+     */
+    @Override
+    public void draw(Graphics g) {
+        if (nested) {
+            super.draw(g);
+            return;
+        }
+        long frame = Gdx.graphics.getFrameId();
+        if (Forge.getCurrentScreen() == this) {
+            RogueScreen top = onTop.get();
+            if (top != this) {
+                RogueScreen left = top != null && frame - onTopFrame <= 2 ? top : null;
+                onTop = new WeakReference<>(this);
+                if (left != null && left.getWidth() == getWidth() && left.getHeight() == getHeight()) {
+                    from = left;
+                    RogueMotion.play(TRANSITION_SECONDS, t -> transition = t, () -> from = null);
+                }
+            }
+            onTopFrame = frame;
+        }
+        RogueScreen left = from;
+        if (left == null) {
+            super.draw(g);
+            return;
+        }
+        float e = Interpolation.pow3Out.apply(transition);
+        float w = getWidth();
+        float h = getHeight();
+        int side = Integer.signum(tab() - left.tab());
+        if (tab() >= 0 && left.tab() >= 0 && side != 0) {
+            drawAt(g, left, -side * w * e, 0, 0);
+            drawAt(g, this, side * w * (1 - e), 0, 0);
+        } else if (left.order > order) {
+            drawAt(g, this, 0, 0, 1 - e);
+            drawAt(g, left, 0, h * e, 0);
+        } else {
+            drawAt(g, left, 0, 0, e);
+            drawAt(g, this, 0, h * (1 - e), 0);
+        }
+    }
+
+    /** Paints a flying thing into its current rectangle. */
+    interface FlightPainter {
+        void paint(Graphics g, float x, float y, float w, float h);
+    }
+
+    private static final class Flight {
+        final FlightPainter painter;
+        final float[] from;
+        final float[] to;
+        final float delay;
+        final float seconds;
+        final float arc;
+        float time;
+
+        Flight(FlightPainter painter, float[] from, float[] to, float delay, float seconds, float arc) {
+            this.painter = painter;
+            this.from = from;
+            this.to = to;
+            this.delay = delay;
+            this.seconds = seconds;
+            this.arc = arc;
+        }
+    }
+
+    /**
+     * Flies something across the page above everything else, from one rectangle (x, y, w, h) to another, rising by arc
+     * on the way. done may be null.
+     */
+    void fly(FlightPainter painter, float[] from, float[] to, float delay, float seconds, float arc, Runnable done) {
+        Flight flight = new Flight(painter, from, to, delay, seconds, arc);
+        flights.add(flight);
+        RogueMotion.play(delay + seconds, t -> flight.time = t * (delay + seconds), () -> {
+            flights.remove(flight);
+            if (done != null) {
+                done.run();
+            }
+        });
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        for (int i = 0; i < flights.size(); i++) {
+            Flight f = flights.get(i);
+            float p = (f.time - f.delay) / f.seconds;
+            if (p <= 0 || p >= 1) {
+                continue;
+            }
+            float e = Interpolation.pow3Out.apply(p);
+            float x = f.from[0] + (f.to[0] - f.from[0]) * e;
+            float y = f.from[1] + (f.to[1] - f.from[1]) * e - f.arc * (float) Math.sin(Math.PI * p);
+            float w = f.from[2] + (f.to[2] - f.from[2]) * e;
+            float h = f.from[3] + (f.to[3] - f.from[3]) * e;
+            f.painter.paint(g, x, y, w, h);
+        }
+    }
+
+    private void drawAt(Graphics g, RogueScreen screen, float x, float y, float dim) {
+        screen.nested = true;
+        screen.setLeft(x);
+        screen.setTop(y);
+        try {
+            g.draw(screen);
+        } finally {
+            screen.setLeft(0);
+            screen.setTop(0);
+            screen.nested = false;
+        }
+        if (dim > 0) {
+            TRANSITION_DIM.a = 0.55f * dim;
+            g.fillRect(TRANSITION_DIM, x, y, getWidth(), getHeight());
+        }
     }
 
     @Override

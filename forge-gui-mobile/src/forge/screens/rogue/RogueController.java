@@ -169,6 +169,9 @@ public final class RogueController {
         if (question == null || question.screen() == null) {
             return false;
         }
+        if (question.screen() instanceof RogueScreen screen) {
+            screen.bringForward();
+        }
         Forge.openScreen(question.screen());
         return true;
     }

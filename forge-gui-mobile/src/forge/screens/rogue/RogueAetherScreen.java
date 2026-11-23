@@ -1,6 +1,7 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
@@ -28,8 +29,14 @@ import java.util.List;
 public class RogueAetherScreen extends RogueScreen {
     private static final Color UNUSED = new Color(1, 1, 1, 0.3f);
 
+    private static final Color FLARE = new Color(1f, 0.96f, 0.75f, 0f);
+    private static final Color GLOW = new Color(1f, 0.84f, 0.37f, 0f);
+
     private final List<AetherEffect> works = new ArrayList<>();
     private AetherEffect selected;
+    private AetherEffect raised;
+    private float raise = 1;
+    private float echoesShown = -1;
     private final Content list;
     private final RogueButton reset;
     private final RogueButton toggle;
@@ -127,16 +134,45 @@ public class RogueAetherScreen extends RogueScreen {
 
     private void upgradeSelected() {
         AetherEffect effect = selected;
-        act(() -> {
+        RogueController.get().submit(() -> {
             RogueMetaProgress progress = progress();
+            int echoes = progress.getTotalEchoes();
             int before = progress.getAetherEffectRank(effect);
-            if (progress.upgradeAetherEffect(effect)) {
+            boolean done = progress.upgradeAetherEffect(effect);
+            if (done) {
                 SoundSystem.instance.play(SoundEffectType.Artifact, SoundEffectType.Artifact.isSynced());
                 if (before == 0) {
                     progress.activateAetherEffect(effect);
                 }
             }
+            int after = progress.getTotalEchoes();
+            FThreads.invokeInEdtLater(() -> {
+                refresh();
+                if (done) {
+                    celebrate(effect, echoes, after);
+                }
+            });
         });
+    }
+
+    /** The Echoes run down while the new rank's pip fills and flares, the tile glows and the rank pops. */
+    private void celebrate(AetherEffect effect, int echoesBefore, int echoesAfter) {
+        raised = effect;
+        RogueMotion.play(0.9f, t -> {
+            raise = t;
+            echoesShown = echoesBefore + (echoesAfter - echoesBefore) * Interpolation.pow3Out.apply(Math.min(1, t / 0.4f));
+        }, () -> {
+            raised = null;
+            echoesShown = -1;
+        });
+    }
+
+    /** 0 to 1 over the part of the rank-up between from and to; 1 when it is not this Aetherwork's. */
+    private float raising(AetherEffect effect, float from, float to) {
+        if (effect != raised) {
+            return 1;
+        }
+        return Math.max(0, Math.min(1, (raise - from) / (to - from)));
     }
 
     private void buyUpgrade() {
@@ -149,8 +185,8 @@ public class RogueAetherScreen extends RogueScreen {
             if (progress().purchaseAetherUpgrade(next.level)) {
                 SoundSystem.instance.play(SoundEffectType.Artifact, SoundEffectType.Artifact.isSynced());
                 FThreads.invokeInEdtLater(() -> RogueDialog.show(localizer.getMessage("lblRogueAetherUpgradeUnlocked"),
-                    localizer.getMessage("lblRogueUnlockedAetherUpgrade", next.name, next.description),
-                    List.of(localizer.getMessage("lblOK")), choice -> { }));
+                    localizer.getMessage("lblRogueUnlockedAetherUpgrade", next.name, next.description), FSkinImage.QUEST_ELIXIR,
+                    RogueDialog.Entrance.RAYS, List.of(localizer.getMessage("lblOK")), choice -> { }));
             }
         });
     }
@@ -187,6 +223,11 @@ public class RogueAetherScreen extends RogueScreen {
     @Override
     protected float backgroundDim() {
         return 0.2f;
+    }
+
+    @Override
+    protected int tab() {
+        return 2;
     }
 
     @Override
@@ -258,7 +299,7 @@ public class RogueAetherScreen extends RogueScreen {
         float cx = ix + slots * step + 3 * u;
         RogueLook.text(g, active + "/" + slots, cx, ty, 1.1f, RogueLook.INK);
         cx += RogueLook.textWidth(active + "/" + slots, 1.1f) + 8 * u;
-        cx = currency(g, FSkinImage.QUEST_GOLD, progress.getTotalEchoes(), cx, ty);
+        cx = currency(g, FSkinImage.QUEST_GOLD, echoesShown >= 0 ? Math.round(echoesShown) : progress.getTotalEchoes(), cx, ty);
         if (progress.isDescensionModeUnlocked()) {
             currency(g, FSkinImage.QUEST_ELIXIR, progress.getTotalSparks(), cx, ty);
         }
@@ -274,7 +315,10 @@ public class RogueAetherScreen extends RogueScreen {
         int rank = progress.getAetherEffectRank(selected);
         int level = progress.getAetherUpgradeLevel();
         RogueLook.fit(g, selected.getDisplayName(), dx + 12 * u, dy + 8 * u, 1.3f, RogueLook.INK, dw - 24 * u, Align.left);
-        RogueLook.text(g, localizer.getMessage("lblRogueRank", rank, selected.getEffectiveMaxRank(level)), dx + 12 * u, dy + 26 * u, 1, RogueLook.SOFT);
+        float pop = raising(selected, 0.4f, 0.65f);
+        float rankScale = 1 + 0.35f * (float) Math.sin(Math.PI * pop);
+        RogueLook.text(g, localizer.getMessage("lblRogueRank", rank, selected.getEffectiveMaxRank(level)), dx + 12 * u, dy + 26 * u, rankScale,
+            RogueLook.SOFT);
         RogueLook.wrap(g, selected.getDescriptionWithAllRanks(rank, level), dx + 12 * u, dy + 42 * u, dw - 24 * u, 1, RogueLook.INK, Align.left);
     }
 
@@ -357,9 +401,24 @@ public class RogueAetherScreen extends RogueScreen {
             }
             RogueLook.fit(g, effect.getDisplayName(), 8 * u, 4 * u, 1.1f, rank == 0 ? RogueLook.SOFT : RogueLook.DEEP, w - 16 * u, Align.left);
             int max = effect.getEffectiveMaxRank(progress.getAetherUpgradeLevel());
+            float fill = raising(effect, 0.15f, 0.45f);
             for (int r = 0; r < max; r++) {
                 g.fillRect(RogueLook.INK, 8 * u + r * 16 * u, 24 * u, 13 * u, 6 * u);
-                g.fillRect(r < rank ? RogueLook.GOLD : RogueLook.PAPER, 9 * u + r * 16 * u, 25 * u, 11 * u, 4 * u);
+                g.fillRect(RogueLook.PAPER, 9 * u + r * 16 * u, 25 * u, 11 * u, 4 * u);
+                float part = r < rank - 1 ? 1 : r == rank - 1 ? fill : 0;
+                if (part > 0) {
+                    g.fillRect(RogueLook.GOLD, 9 * u + r * 16 * u, 25 * u, 11 * u * part, 4 * u);
+                }
+            }
+            float flare = raising(effect, 0.42f, 0.75f);
+            if (effect == raised && flare > 0 && flare < 1 && rank > 0) {
+                FLARE.a = 0.8f * (1 - flare);
+                g.fillCircle(FLARE, 14.5f * u + (rank - 1) * 16 * u, 27 * u, (6 + 10 * flare) * u);
+            }
+            float glow = raising(effect, 0.45f, 1);
+            if (effect == raised && glow < 1) {
+                GLOW.a = (float) Math.sin(Math.PI * glow);
+                RogueLook.box(g, -2 * u, -2 * u, w + 4 * u, h + 4 * u, 2.5f, GLOW);
             }
             if (progress.getActiveAetherEffects().contains(effect)) {
                 String active = Localizer.getInstance().getMessage("lblRogueActiveAetherwork");

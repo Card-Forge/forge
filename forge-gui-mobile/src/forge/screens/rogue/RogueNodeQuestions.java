@@ -1,6 +1,7 @@
 package forge.screens.rogue;
 
 import forge.Forge;
+import forge.assets.FSkinImage;
 import forge.deck.FDeckViewer;
 import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueMetaProgress;
@@ -223,7 +224,9 @@ final class RogueNodeQuestions {
     static void result(RogueDecisions.ResultKind kind, String title, String text, List<RogueDecisions.Section> sections, RogueRun run) {
         Localizer localizer = Localizer.getInstance();
         switch (kind) {
-            case REVIVE, SPARK, DEFEAT -> MobileRogueDecisions.dialog(title, text, List.of(localizer.getMessage("lblOK")));
+            case SPARK -> MobileRogueDecisions.dialog(title, text, FSkinImage.QUEST_ELIXIR, RogueDialog.Entrance.DROP,
+                List.of(localizer.getMessage("lblOK")));
+            case REVIVE, DEFEAT -> MobileRogueDecisions.dialog(title, text, List.of(localizer.getMessage("lblOK")));
             case EVENT, BOON, SANCTUM -> RogueQuestion.<Integer>ask(q -> new RogueSceneScreen(runOf(run),
                 kind == RogueDecisions.ResultKind.EVENT ? "title_bg" : "tavern", title, text, null, new RogueSections(sections),
                 List.of(new RogueButton(localizer.getMessage("lblOK"), null, RogueButton.State.MAIN, () -> q.answer(CONTINUE)))));
