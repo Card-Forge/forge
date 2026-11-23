@@ -1,5 +1,6 @@
 package forge.screens.home.rogue;
 
+import forge.gamemodes.rogue.flow.RogueDecisions.Section;
 import forge.item.PaperCard;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -33,16 +34,6 @@ public class NodeResultPanel extends SkinnedPanel {
     private final transient RogueUIHelper.TypewriterText typewriterText;
     private transient CardUtil zoomUtil;
 
-    public record CardSection(String label, String text, List<PaperCard> cards) {
-        public CardSection(String label, List<PaperCard> cards) {
-            this(label, null, cards);
-        }
-
-        public CardSection(String label, String text) {
-            this(label, text, List.of());
-        }
-    }
-
     public enum MessageAlignment {
         LEFT(StyleConstants.ALIGN_LEFT),
         CENTER(StyleConstants.ALIGN_CENTER);
@@ -54,11 +45,11 @@ public class NodeResultPanel extends SkinnedPanel {
         }
     }
 
-    public NodeResultPanel(String message, List<CardSection> sections) {
+    public NodeResultPanel(String message, List<Section> sections) {
         this(message, sections, DEFAULT_MIN_WIDTH, 0, MessageAlignment.LEFT, false);
     }
 
-    public NodeResultPanel(String message, List<CardSection> sections, int minWidth, int minHeight,
+    public NodeResultPanel(String message, List<Section> sections, int minWidth, int minHeight,
                            MessageAlignment messageAlignment, boolean typewriterMessage) {
         super(new MigLayout("insets 10, gap 0, wrap", "[grow, center]", ""));
         setOpaque(false);
@@ -91,7 +82,7 @@ public class NodeResultPanel extends SkinnedPanel {
         int desiredHeight = PANEL_INSET * 2 + txtMessage.getPreferredSize().height + 10;
 
         // Result sections
-        for (CardSection section : sections) {
+        for (Section section : sections) {
             desiredHeight += addResultSection(section, textWidth);
         }
         desiredHeight = Math.max(desiredHeight, minHeight);
@@ -100,7 +91,7 @@ public class NodeResultPanel extends SkinnedPanel {
         setMinimumSize(size);
     }
 
-    private int addResultSection(CardSection section, int textWidth) {
+    private int addResultSection(Section section, int textWidth) {
         if (!hasContent(section)) {
             return 0;
         }
@@ -176,11 +167,11 @@ public class NodeResultPanel extends SkinnedPanel {
         return textArea;
     }
 
-    private static boolean hasLabel(CardSection section) {
+    private static boolean hasLabel(Section section) {
         return section.label() != null && !section.label().isBlank();
     }
 
-    private static boolean hasContent(CardSection section) {
+    private static boolean hasContent(Section section) {
         return section.text() != null && !section.text().isBlank()
             || section.cards() != null && !section.cards().isEmpty();
     }

@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.gamemodes.rogue.BazaarPricing;
 import forge.gamemodes.rogue.CardRewardHelper;
@@ -16,6 +16,8 @@ import forge.gamemodes.rogue.effect.ChoiceRerollContext;
 import forge.gamemodes.rogue.effect.NPCEffect;
 import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
+import forge.gamemodes.rogue.flow.RogueDecisions.ShopAnswer;
+import forge.gamemodes.rogue.flow.RogueDecisions.ShopOffer;
 import forge.gamemodes.rogue.npc.NPCContext;
 import forge.gamemodes.rogue.npc.NPCEncounterComposite;
 import forge.gamemodes.rogue.path.NodeBazaar;
@@ -37,11 +39,12 @@ import java.util.function.Predicate;
 import org.tinylog.Logger;
 
 class NodeBazaarHelper {
+    private static final int MAX_DISPLAY_CARDS = 10;
 
-    private final CSubmenuRogueMap map;
+    private final RogueFlow flow;
 
-    NodeBazaarHelper(CSubmenuRogueMap map) {
-        this.map = map;
+    NodeBazaarHelper(RogueFlow flow) {
+        this.flow = flow;
     }
 
     void handleBazaarNode(NodeBazaar bazaarNode, RogueRun currentRun) {
@@ -51,7 +54,7 @@ class NodeBazaarHelper {
 
         runBazaarShopping(currentRun, null);
         RogueCommanderAchievements.getInstance().evaluateRunAchievements(currentRun);
-        map.completeSideNode(bazaarNode);
+        flow.completeSideNode(bazaarNode);
     }
 
     List<PaperCard> runBazaarShopping(RogueRun currentRun, BazaarContext ctx) {
@@ -77,13 +80,13 @@ class NodeBazaarHelper {
         applyActualItemPrices(bazaarCtx, inventory);
         CodexHelper.recordBazaarInventory(currentRun, inventory);
 
-        BazaarDialog.DialogResult dialogResult = showBazaarDialog(inventory, currentRun, bazaarCtx, null, false, 0);
-        return applyBazaarPurchases(currentRun, rogueDeck, bazaarCtx, dialogResult.selectedItems(), true);
+        ShopAnswer answer = showBazaar(inventory, currentRun, bazaarCtx, null, 0, false, 0);
+        return applyBazaarPurchases(currentRun, rogueDeck, bazaarCtx, answer.selected(), true);
     }
 
     private List<PaperCard> runOrdinaryBazaarShopping(RogueRun currentRun, RogueDeck rogueDeck) {
         BazaarContext bazaarCtx = createOrdinaryBazaarContext();
-        RogueTutorialHelper.showIfNotSeen(RogueTutorial.BAZAAR);
+        flow.decisions().showTutorial(RogueTutorial.BAZAAR);
         RogueEffectComposite.INSTANCE.onBeforeBazaar(bazaarCtx, currentRun);
         NPCEncounterComposite.INSTANCE.onBeforeBazaar(bazaarCtx, currentRun, RogueMetaProgress.getInstance());
 
@@ -91,7 +94,7 @@ class NodeBazaarHelper {
         int freeRerolls = selCtx.freeRerolls;
         int rerollCount = 0;
         int selectedBazaarTab = 0;
-        BazaarDialog.DialogResult dialogResult;
+        ShopAnswer answer;
         do {
             List<BazaarItem> inventory = buildOrdinaryBazaarRollInventory(currentRun, rogueDeck, bazaarCtx, selCtx);
             if (inventory.isEmpty()) {
@@ -100,22 +103,23 @@ class NodeBazaarHelper {
             }
 
             String rerollLabel = CardRewardHelper.buildRerollLabel(freeRerolls, rerollCount);
+            int rerollCost = CardRewardHelper.getRerollCost(freeRerolls, rerollCount);
             boolean rerollEnabled =
                 CardRewardHelper.canAffordReroll(freeRerolls, rerollCount, currentRun.getCurrentGold());
             CodexHelper.recordBazaarInventory(currentRun, inventory);
-            dialogResult =
-                showBazaarDialog(inventory, currentRun, bazaarCtx, rerollLabel, rerollEnabled, selectedBazaarTab);
-            selectedBazaarTab = dialogResult.selectedTabIndex();
+            answer = showBazaar(inventory, currentRun, bazaarCtx, rerollLabel, rerollCost, rerollEnabled,
+                selectedBazaarTab);
+            selectedBazaarTab = answer.tab();
             rogueDeck.discardRewardOptions(getRewardPoolCards(inventory));
 
-            if (dialogResult.rerollRequested()) {
+            if (answer.reroll()) {
                 spendRerollCostIfNeeded(currentRun, freeRerolls, rerollCount);
                 rerollCount++;
             }
-        } while (dialogResult.rerollRequested());
+        } while (answer.reroll());
 
         List<PaperCard> purchasedDeckCards = applyBazaarPurchases(currentRun, rogueDeck, bazaarCtx,
-            dialogResult.selectedItems(), false);
+            answer.selected(), false);
         showNpcBazaarPurchaseDialogs(bazaarCtx);
         return purchasedDeckCards;
     }
@@ -130,33 +134,28 @@ class NodeBazaarHelper {
         return inventory;
     }
 
-    private BazaarDialog.DialogResult showBazaarDialog(List<BazaarItem> inventory, RogueRun currentRun,
-                                                BazaarContext bazaarCtx, String rerollLabel,
-                                                boolean rerollEnabled, int selectedBazaarTab) {
-        BazaarDialog dialog = new BazaarDialog(
+    private ShopAnswer showBazaar(List<BazaarItem> inventory, RogueRun currentRun,
+                                  BazaarContext bazaarCtx, String rerollLabel, int rerollCost,
+                                  boolean rerollEnabled, int selectedBazaarTab) {
+        return flow.decisions().shop(new ShopOffer(
             inventory,
             currentRun,
             currentRun.getCurrentGold(),
             bazaarCtx.title,
             rerollLabel,
-            selectedBazaarTab);
-        dialog.setRerollEnabled(rerollEnabled);
-        return dialog.show();
+            rerollCost,
+            rerollEnabled,
+            selectedBazaarTab));
     }
 
     private void spendRerollCostIfNeeded(RogueRun currentRun, int freeRerolls, int rerollCount) {
-        if (rerollCount < freeRerolls) {
-            return;
-        }
-
-        int cost = CardRewardHelper.getRerollCost(rerollCount - freeRerolls);
-        currentRun.spendGold(cost);
+        currentRun.spendGold(CardRewardHelper.getRerollCost(freeRerolls, rerollCount));
     }
 
     private void showNpcBazaarPurchaseDialogs(BazaarContext bazaarCtx) {
         for (NPCContext npcContext : NPCEncounterComposite.INSTANCE.onAfterBazaarPurchase(
             bazaarCtx, RogueMetaProgress.getInstance())) {
-            new NPCDialog(npcContext, new ChoiceRerollContext()).show();
+            flow.decisions().chooseBoon(npcContext, new ChoiceRerollContext());
         }
     }
 
@@ -217,12 +216,12 @@ class NodeBazaarHelper {
 
     private List<BazaarItem> buildCustomBazaarInventory(BazaarContext bazaarCtx) {
         List<BazaarItem> inventory = new ArrayList<>(bazaarCtx.inventory);
-        if (inventory.size() <= BazaarDialog.MAX_DISPLAY_CARDS) {
+        if (inventory.size() <= MAX_DISPLAY_CARDS) {
             return inventory;
         }
 
         Collections.shuffle(inventory);
-        return new ArrayList<>(inventory.subList(0, BazaarDialog.MAX_DISPLAY_CARDS));
+        return new ArrayList<>(inventory.subList(0, MAX_DISPLAY_CARDS));
     }
 
     private Set<Integer> getDiscountedCardIndices(BazaarContext bazaarCtx, List<BazaarItem> inventory) {

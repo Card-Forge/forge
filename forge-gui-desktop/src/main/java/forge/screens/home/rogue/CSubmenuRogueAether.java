@@ -68,6 +68,9 @@ public enum CSubmenuRogueAether implements ICDoc {
 
   @Override
   public void update() {
+    if (!RogueUIHelper.progressReadable()) {
+      return;
+    }
     refreshDisplay();
     RogueTutorialHelper.showIfNotSeen(RogueTutorial.AETHER);
   }

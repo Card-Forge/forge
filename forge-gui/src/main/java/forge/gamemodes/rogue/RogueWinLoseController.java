@@ -231,8 +231,8 @@ public class RogueWinLoseController {
     }
 
     private void awardCardRewards(boolean isElite, int goldReward, int echoReward, MatchRewardContext rewardCtx) {
-        List<PaperCard> chosenCards = CardRewardHelper.runReward(currentRun,
-                rewardDialog, false, rewardCtx, null);
+        List<PaperCard> chosenCards = new ArrayList<>(CardRewardHelper.runReward(currentRun,
+                rewardDialog, false, rewardCtx, null));
 
         // If Elite opponent, show second reward screen with mythic cards
         if (isElite) {
@@ -404,10 +404,5 @@ public class RogueWinLoseController {
                 .anyMatch(c -> c.getName().equals(card.cardName()))
             || human.getCardsIn(ZoneType.Stack).stream()
                 .anyMatch(c -> c.getName().equals(card.cardName()));
-    }
-
-    public void actionOnQuit() {
-        // Any cleanup needed before quitting
-        // Currently handled by RogueWinLose.actionOnQuit()
     }
 }

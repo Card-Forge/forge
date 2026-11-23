@@ -1,12 +1,9 @@
 package forge.screens.home.rogue;
 
-import com.google.common.eventbus.Subscribe;
 import forge.game.Game;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.player.Player;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueTutorial;
+import forge.gamemodes.rogue.RogueTutorialTriggers;
 import forge.gamemodes.rogue.npc.NPC;
 import forge.gamemodes.rogue.npc.NPCContext;
 import forge.gui.FThreads;
@@ -57,16 +54,8 @@ public class RogueTutorialHelper {
   }
 
   public static void registerMatchTutorials(Game game) {
-    if (hasSeenTutorial(RogueTutorial.MATCH_CARD_HIGHLIGHTING)
-        && hasSeenTutorial(RogueTutorial.MATCH_PHASES_AND_YIELDS)) {
-      return;
-    }
-    for (Player player : game.getPlayers()) {
-      if (player.getController().isGuiPlayer()) {
-        game.subscribeToEvents(new MatchTutorialListener(player));
-        return;
-      }
-    }
+    RogueTutorialTriggers.watchMatch(game, RogueMetaProgress.getInstance(),
+        tutorial -> FThreads.invokeInEdtAndWait(() -> showIfNotSeen(tutorial)));
   }
 
   private static void showTutorialDialog(RogueTutorial tutorial, RogueMetaProgress progress) {
@@ -88,30 +77,5 @@ public class RogueTutorialHelper {
     }
     progress.markAllTutorialsSeen();
     return true;
-  }
-
-  private static final class MatchTutorialListener {
-    private final Player human;
-
-    private MatchTutorialListener(Player human) {
-      this.human = human;
-    }
-
-    @Subscribe
-    public void onPlayerPriority(GameEventPlayerPriority event) {
-      if (human.getView().equals(event.turn()) && human.getView().equals(event.priority())
-          && human.getTurn() == 2 && !hasSeenTutorial(RogueTutorial.MATCH_CARD_HIGHLIGHTING)) {
-        FThreads.invokeInEdtAndWait(() -> showIfNotSeen(RogueTutorial.MATCH_CARD_HIGHLIGHTING));
-      }
-    }
-
-    @Subscribe
-    public void onTurnBegan(GameEventTurnBegan event) {
-      // TurnBegan is emitted before the player's turn counter increments.
-      if (human.getView().equals(event.turnOwner()) && human.getTurn() + 1 == 3
-          && !hasSeenTutorial(RogueTutorial.MATCH_PHASES_AND_YIELDS)) {
-        FThreads.invokeInEdtAndWait(() -> showIfNotSeen(RogueTutorial.MATCH_PHASES_AND_YIELDS));
-      }
-    }
   }
 }

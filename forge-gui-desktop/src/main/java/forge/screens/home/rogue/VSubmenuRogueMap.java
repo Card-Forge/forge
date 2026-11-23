@@ -179,7 +179,7 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
       lblEndless.setVisible(endlessLevel > 0);
       lblEndless.setText(endlessLevel > 0 ? localizer.getMessage("lblRogueEndlessLevel", endlessLevel) : "");
       lblEndless.setToolTipText(endlessLevel > 0
-          ? EndlessMode.getModifiersDescription(endlessLevel) : null);
+          ? RogueUIHelper.html(EndlessMode.getModifiersDescription(endlessLevel), false) : null);
 
       // Populate active effects (Aetherworks, descension, event traits, chest traits, wounds...)
       List<RogueEffect> allEffects = RogueEffectComposite.getAllEffects(run);
@@ -391,11 +391,7 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
   }
 
   private String buildCarryCardTooltip(CarryCard carryCard, PaperCard paperCard) {
-    return paperCard.getName() + " (" + switch (carryCard.type()) {
-      case ITEM -> localizer.getMessage("lblRogueCarryItem");
-      case FELLOW -> localizer.getMessage("lblRogueCarryFellow");
-      case SCROLL -> localizer.getMessage("lblRogueCarryScroll");
-    } + ")";
+    return paperCard.getName() + " (" + carryCard.type().label() + ")";
   }
 
   private JPanel createInfoRow() {
