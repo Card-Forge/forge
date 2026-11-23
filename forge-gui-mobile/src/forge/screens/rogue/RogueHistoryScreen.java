@@ -109,11 +109,14 @@ public class RogueHistoryScreen extends RogueScreen {
             boolean wide = Forge.isLandscapeMode();
             float gap = 6 * u;
             float cw = wide ? (visibleWidth - 10 * u - gap) / 2 : visibleWidth - 10 * u;
+            float h = 0;
+            for (Row row : rows) {
+                h = Math.max(h, row.preferredHeight(cw));
+            }
             float[] colBottom = {0, 0};
             for (int i = 0; i < rows.size(); i++) {
                 int col = wide ? i % 2 : 0;
                 Row row = rows.get(i);
-                float h = row.preferredHeight(cw);
                 row.setBounds(5 * u + col * (cw + gap), colBottom[col], cw, h);
                 colBottom[col] += h + gap;
             }

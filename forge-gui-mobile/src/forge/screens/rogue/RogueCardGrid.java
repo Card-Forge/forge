@@ -113,6 +113,12 @@ public class RogueCardGrid extends RogueScrollPane {
         }
 
         @Override
+        public void setHovered(boolean hovered) {
+            super.setHovered(hovered);
+            RogueScreen.hover(this, hovered && deal.arrived(index), cards.get(index));
+        }
+
+        @Override
         public boolean longPress(float x, float y) {
             CardZoom.show(cards, index, null);
             return true;

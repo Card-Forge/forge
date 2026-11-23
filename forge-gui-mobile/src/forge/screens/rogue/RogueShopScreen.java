@@ -136,8 +136,8 @@ public class RogueShopScreen extends RogueScreen {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float u = RogueLook.unit();
-            int cols = Forge.isLandscapeMode() ? 7 : 4;
             float gap = 7 * u;
+            int cols = Forge.isLandscapeMode() ? twoRowColumns(visibleWidth, visibleHeight, gap) : 4;
             float cw = (visibleWidth - 8 * u - (cols - 1) * gap) / cols;
             float th = cw * RogueLook.CARD_RATIO + 16 * u;
             float y = 4 * u;
@@ -166,6 +166,14 @@ public class RogueShopScreen extends RogueScreen {
             return new ScrollBounds(visibleWidth, bottom);
         }
 
+        /** Sideways, as many columns as it takes for two whole rows of cards to fit the height. */
+        private int twoRowColumns(float visibleWidth, float visibleHeight, float gap) {
+            float u = RogueLook.unit();
+            float rowHeight = (visibleHeight - 4 * u - gap) / 2;
+            float cw = (rowHeight - 16 * u) / RogueLook.CARD_RATIO;
+            return Math.max(7, (int) ((visibleWidth - 8 * u + gap) / (cw + gap)));
+        }
+
         @Override
         protected void drawBackground(Graphics g) {
             if (specialsTop >= 0) {
@@ -192,6 +200,12 @@ public class RogueShopScreen extends RogueScreen {
             }
             toggle(item);
             return true;
+        }
+
+        @Override
+        public void setHovered(boolean hovered) {
+            super.setHovered(hovered);
+            RogueScreen.hover(this, hovered, item.card());
         }
 
         @Override

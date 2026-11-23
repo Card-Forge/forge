@@ -18,6 +18,7 @@ import forge.gui.FThreads;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.settings.SettingsScreen;
+import forge.item.PaperCard;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 import forge.util.Localizer;
@@ -32,6 +33,9 @@ import java.util.function.Consumer;
  * Sideways: the run and the chosen node in a left column, the map, and one row of buttons.
  */
 public class RogueMapScreen extends RogueScreen {
+    /** Sideways, the width of the column beside the map, in units. */
+    private static final float SIDE = 190;
+
     private final RogueMapView map = add(new RogueMapView(this::choose, false));
     private final RogueButton whole;
     private final RogueButton plane;
@@ -57,6 +61,7 @@ public class RogueMapScreen extends RogueScreen {
     public RogueMapScreen(String folded) {
         super(() -> RogueController.get().flow().run());
         this.folded = folded;
+        map.onOpen(this::openPlaneAt);
         Localizer localizer = Localizer.getInstance();
         whole = add(new RogueButton("", "Magnifier", RogueButton.State.NORMAL, () -> Forge.openScreen(new RogueWholeMapScreen())));
         plane = add(new RogueButton(localizer.getMessage("lblPlane"), null, RogueButton.State.NORMAL, this::openPlane));
@@ -109,6 +114,7 @@ public class RogueMapScreen extends RogueScreen {
 
     @Override
     public void onActivate() {
+        map.resumeIntro();
         RogueRun run = run();
         if (run != null && !RogueController.get().busy() && folded == null) {
             RogueController.get().queue(() -> run.getRunTimer().start());
@@ -146,6 +152,20 @@ public class RogueMapScreen extends RogueScreen {
             if (flow().select(index)) {
                 FThreads.invokeInEdtLater(this::refresh);
             }
+        });
+    }
+
+    /** After the choice that came with it, shows the plane's sheet. */
+    private void openPlaneAt(int index) {
+        if (folded != null) {
+            return;
+        }
+        RogueController.get().queue(() -> {
+            flow().select(index);
+            FThreads.invokeInEdtLater(() -> {
+                refresh();
+                openPlane();
+            });
         });
     }
 
@@ -229,14 +249,11 @@ public class RogueMapScreen extends RogueScreen {
     @Override
     protected List<RogueButton> wideRow() {
         List<RogueButton> row = new ArrayList<>(List.of(mapTab, traits, deck, codex));
-        if (plane.isVisible()) {
-            row.add(plane);
-        }
         if (reroll.isVisible()) {
             row.add(reroll);
         }
         row.add(enter);
-        enter.weight(plane.isVisible() ? 180 / 58f : 288 / 58f);
+        enter.weight(reroll.isVisible() ? 180 / 58f : 288 / 58f);
         return row;
     }
 
@@ -245,15 +262,16 @@ public class RogueMapScreen extends RogueScreen {
         float u = RogueLook.unit();
         if (foldBar != null) {
             float bw = 200 * u;
-            float bx = Forge.isLandscapeMode() ? 154 * u + (w - 157 * u - bw) / 2 : (w - bw) / 2;
+            float bx = Forge.isLandscapeMode() ? SIDE * u + 4 * u + (w - SIDE * u - 7 * u - bw) / 2 : (w - bw) / 2;
             float by = Forge.isLandscapeMode() ? h - 40 * u : h - 72 * u;
             foldBar.setBounds(bx, by, bw, 34 * u);
             show.setBounds(bx + bw - 76 * u, by + 3 * u, 72 * u, 28 * u);
         }
         if (Forge.isLandscapeMode()) {
-            float side = 154 * u;
+            float side = SIDE * u + 4 * u;
             map.setBounds(side + 6 * u, 9 * u, w - side - 12 * u, h - 14 * u);
             whole.setBounds(w - 34 * u, 12 * u, 24 * u, 24 * u);
+            plane.setBounds(0, 0, 0, 0);
             return;
         }
         float top = 108 * u;
@@ -275,8 +293,8 @@ public class RogueMapScreen extends RogueScreen {
         }
         float u = RogueLook.unit();
         if (Forge.isLandscapeMode()) {
-            drawSideColumn(g, run, 150 * u);
-            RogueLook.paper(g, 154 * u, 2 * u, getWidth() - 157 * u, map.getBottom() + 5 * u - 2 * u);
+            drawSideColumn(g, run, SIDE * u);
+            RogueLook.paper(g, SIDE * u + 4 * u, 2 * u, getWidth() - SIDE * u - 7 * u, map.getBottom() + 5 * u - 2 * u);
         } else {
             drawEnemy(g, run, 3 * u, 3 * u, getWidth() - 6 * u, 103 * u);
             RogueLook.paper(g, 3 * u, 108 * u, getWidth() - 6 * u, map.getBottom() + 7 * u - 108 * u);
@@ -308,21 +326,45 @@ public class RogueMapScreen extends RogueScreen {
         }
         boolean down = run.getPath().isFaceDown(run, n);
         RoguePlanebound b = n.getRoguePlanebound();
-        g.fillRect(RogueLook.INK, 10 * u, 73 * u, side - 16 * u, 78 * u);
+        PaperCard planeCard = CodexHelper.getPlaneCard(b);
+        g.fillRect(RogueLook.INK, 10 * u, 72 * u, side - 16 * u, 52 * u);
         if (down) {
-            g.fillRect(new Color(0.45f, 0.39f, 0.31f, 1), 11 * u, 74 * u, side - 18 * u, 76 * u);
-            RogueLook.text(g, "?", 11 * u, 100 * u, 2, RogueLook.PALE, side - 18 * u, Align.center);
+            g.fillRect(new Color(0.45f, 0.39f, 0.31f, 1), 11 * u, 73 * u, side - 18 * u, 50 * u);
+            RogueLook.text(g, "?", 11 * u, 86 * u, 2, RogueLook.PALE, side - 18 * u, Align.center);
         } else {
-            RogueLook.art(g, CodexHelper.getPlaneCard(b), 11 * u, 74 * u, side - 18 * u, 76 * u, 1);
+            RogueLook.art(g, planeCard, 11 * u, 73 * u, side - 18 * u, 50 * u, 1);
         }
-        RogueLook.avatar(g, down ? 125 : b.avatarIndex(), 12 * u, 158 * u, 30 * u);
-        RogueLook.fit(g, down ? "???" : b.planeboundName(), 48 * u, 154 * u, 1.1f, RogueLook.INK, side - 58 * u, Align.left);
-        RogueLook.fit(g, down ? "???" : b.planeName(), 48 * u, 168 * u, 1, RogueLook.SOFT, side - 58 * u, Align.left);
-        marks(g, run, n, 12 * u, 196 * u);
-        if (down) {
-            RogueLook.wrap(g, Localizer.getInstance().getMessage("lblRogueHiddenPlanes"), 12 * u, 212 * u, side - 20 * u, 0.8f,
-                RogueLook.SOFT, Align.left);
+        RogueLook.avatar(g, down ? 125 : b.avatarIndex(), 12 * u, 130 * u, 26 * u);
+        RogueLook.fit(g, down ? "???" : b.planeboundName(), 44 * u, 129 * u, 1.05f, RogueLook.INK, side - 54 * u, Align.left);
+        RogueLook.fit(g, down ? "???" : b.planeName(), 44 * u, 143 * u, 0.95f, RogueLook.SOFT, side - 54 * u, Align.left);
+        marks(g, run, n, 12 * u, 164 * u);
+        float bottom = getHeight() - 38 * u;
+        float rewards = bottom - 18 * u;
+        String rules = down || planeCard == null ? Localizer.getInstance().getMessage("lblRogueHiddenPlanes")
+            : planeCard.getRules().getOracleText().replace("\\n", "\n");
+        if (g.startClip(10 * u, 178 * u, side - 16 * u, rewards - 182 * u)) {
+            RogueLook.wrap(g, rules, 12 * u, 180 * u, side - 20 * u, 0.8f, down ? RogueLook.SOFT : RogueLook.INK, Align.left);
+            g.endClip();
         }
+        RogueLook.line(g, 12 * u, rewards - 3 * u, side - 8 * u, rewards - 3 * u, 0.8f, RogueLook.SOFT);
+        RogueLook.skin(g, FSkinImage.QUEST_COIN, 12 * u, rewards, 12 * u);
+        RogueLook.text(g, String.valueOf(n.getGoldReward()), 27 * u, rewards, 1, RogueLook.INK);
+        RogueLook.skin(g, FSkinImage.QUEST_GOLD, 48 * u, rewards, 12 * u);
+        RogueLook.text(g, String.valueOf(n.getEchoReward()), 63 * u, rewards, 1, RogueLook.INK);
+        RogueLook.fit(g, Localizer.getInstance().getMessage("lblRogueCardReward"), 84 * u, rewards, 1, RogueLook.INK, side - 92 * u, Align.left);
+    }
+
+    /** Sideways, the plane's panel shows its details; a tap on it opens the whole sheet, with Reroll Plane. */
+    @Override
+    public boolean tap(float x, float y, int count) {
+        float u = RogueLook.unit();
+        RogueRun run = run();
+        if (Forge.isLandscapeMode() && folded == null && x < SIDE * u && y > 64 * u && y < getHeight() - 36 * u
+                && run != null && run.getCurrentNode() instanceof NodePlanebound) {
+            openPlane();
+            return true;
+        }
+        return super.tap(x, y, count);
     }
 
     /** Upright: the planebound with the plane's art beside it, or the side node with its building. */

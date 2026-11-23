@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * A question or story at a node: a heading with a mark and text, and a body such as choices, with buttons. Sideways
- * the heading has a column of its own. Upright the main button, or the last one, runs along the bottom and the
+ * A question or story at a node: a heading with a mark and text, and a body such as choices, with buttons, on one
+ * parchment column; sideways it stands in the middle of the scene's art. Upright the main button, or the last one, runs along the bottom and the
  * others stand in rows of up to three above it.
  */
 public class RogueSceneScreen extends RogueScreen {
@@ -29,6 +29,8 @@ public class RogueSceneScreen extends RogueScreen {
     private final FDisplayObject body;
     private final List<RogueButton> buttons;
     private float bodyBottom;
+    private float columnX;
+    private float columnW;
 
     /** run is null for a screen without the run bar; text and mark may be null. */
     public RogueSceneScreen(Supplier<RogueRun> run, String background, String title, String text, Mark mark,
@@ -94,6 +96,11 @@ public class RogueSceneScreen extends RogueScreen {
         return buttons;
     }
 
+    @Override
+    protected boolean continues(RogueScreen left) {
+        return left instanceof RogueSceneScreen;
+    }
+
     private float headHeight(float w) {
         float u = RogueLook.unit();
         float tx = mark == null ? 0 : 42 * u;
@@ -104,29 +111,20 @@ public class RogueSceneScreen extends RogueScreen {
     @Override
     protected void layoutBody(float x, float y, float w, float h) {
         float u = RogueLook.unit();
-        if (Forge.isLandscapeMode()) {
-            float hw = 178 * u;
-            float line = 12 * u + headHeight(hw);
-            if (text != null) {
-                text.setBounds(14 * u, line + 6 * u, hw, Math.min(text.getPreferredHeight(hw), h - line - 12 * u));
-            }
-            if (body != null) {
-                body.setBounds(212 * u, 9 * u, w - 221 * u, h - 14 * u);
-            }
-            return;
-        }
-        float hw = w - 32 * u;
+        columnW = Forge.isLandscapeMode() ? Math.min(w - 24 * u, 340 * u) : w - 6 * u;
+        columnX = (w - columnW) / 2;
+        float hw = columnW - 26 * u;
         float line = y + 10 * u + headHeight(hw);
         float top = line + 2 * u;
         if (text != null) {
-            float th = Math.min(text.getPreferredHeight(hw), h * 0.45f);
-            text.setBounds(16 * u, line + 6 * u, hw, th);
+            float th = Math.min(text.getPreferredHeight(hw), h * (Forge.isLandscapeMode() ? 0.35f : 0.45f));
+            text.setBounds(columnX + 13 * u, line + 6 * u, hw, th);
             top = line + 6 * u + th;
         }
         float bodyTop = top + 8 * u;
         bodyBottom = h - 8 * u;
         if (body != null) {
-            body.setBounds(8 * u, bodyTop - 2 * u, w - 16 * u, bodyBottom - bodyTop + 2 * u);
+            body.setBounds(columnX + 5 * u, bodyTop - 2 * u, columnW - 10 * u, bodyBottom - bodyTop + 2 * u);
         }
     }
 
@@ -135,15 +133,8 @@ public class RogueSceneScreen extends RogueScreen {
         super.drawBackground(g);
         float u = RogueLook.unit();
         float w = getWidth();
-        if (Forge.isLandscapeMode()) {
-            float h = getHeight() - 41 * u;
-            RogueLook.paper(g, 3 * u, 3 * u, 200 * u, h);
-            drawHead(g, 14 * u, 12 * u, 178 * u);
-            RogueLook.paper(g, 206 * u, 3 * u, w - 209 * u, h);
-        } else {
-            RogueLook.paper(g, 3 * u, 3 * u, w - 6 * u, bodyBottom + 8 * u - 3 * u);
-            drawHead(g, 16 * u, 13 * u, w - 32 * u);
-        }
+        RogueLook.paper(g, columnX, 3 * u, columnW, bodyBottom + 8 * u - 3 * u);
+        drawHead(g, columnX + 13 * u, 13 * u, columnW - 26 * u);
     }
 
     private void drawHead(Graphics g, float x, float y, float w) {

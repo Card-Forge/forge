@@ -7,6 +7,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueTutorial;
 import forge.gamemodes.rogue.RogueTutorialTriggers;
 import forge.gamemodes.rogue.flow.RogueFlow;
+import forge.gamemodes.rogue.flow.RogueStart;
 import forge.gui.FThreads;
 import forge.util.Localizer;
 import java.util.ArrayList;
@@ -121,7 +122,9 @@ public final class RogueController {
             Forge.back();
         }
         if (!(Forge.getCurrentScreen() instanceof RogueRunsScreen)) {
-            RogueMenu.openHome();
+            RogueController controller = get();
+            boolean runsHoldSomething = controller.flow().run() != null || RogueStart.tabsUnlocked(RogueMetaProgress.getInstance());
+            Forge.openScreen(runsHoldSomething ? new RogueRunsScreen() : new RogueNewRunScreen());
         }
     }
 

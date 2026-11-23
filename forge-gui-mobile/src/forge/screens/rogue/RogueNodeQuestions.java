@@ -117,10 +117,6 @@ final class RogueNodeQuestions {
     static Pick<ChestEffect> chest(List<ChestEffect> loot, RogueRun run, ChoiceRerollContext rerolls) {
         Localizer localizer = Localizer.getInstance();
         return RogueQuestion.ask(q -> {
-            List<RogueChoiceList.Choice> choices = new ArrayList<>();
-            for (ChestEffect effect : loot) {
-                choices.add(new RogueChoiceList.Choice(effect.getDisplayName(), effect.getRawDescription(), null));
-            }
             String title = localizer.getMessage("lblRogueChooseYourLoot");
             List<RogueButton> buttons = new ArrayList<>(List.of(viewMap(title), viewDeck(run)));
             if (rerolls.remainingRerolls > 0) {
@@ -128,8 +124,7 @@ final class RogueNodeQuestions {
             }
             buttons.add(new RogueButton(localizer.getMessage("lblRogueSkipLoot"), null, RogueButton.State.NORMAL,
                 () -> q.answer(new Pick<>(false, null))));
-            return new RogueSceneScreen(runOf(run), "reward", title, null, RogueSceneScreen.building(432, 272, 16),
-                new RogueChoiceList(choices, 46, i -> q.answer(new Pick<>(false, loot.get(i)))), buttons);
+            return new RogueChestScreen(runOf(run), title, loot, effect -> q.answer(new Pick<>(false, effect)), buttons);
         });
     }
 

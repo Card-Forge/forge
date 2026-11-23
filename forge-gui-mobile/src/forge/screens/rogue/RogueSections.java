@@ -92,6 +92,12 @@ public class RogueSections extends RogueScrollPane {
         }
 
         @Override
+        public void setHovered(boolean hovered) {
+            super.setHovered(hovered);
+            RogueScreen.hover(this, hovered, list.get(index));
+        }
+
+        @Override
         public boolean tap(float x, float y, int count) {
             CardZoom.show(list, index, null);
             return true;

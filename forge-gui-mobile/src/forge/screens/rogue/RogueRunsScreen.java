@@ -1,5 +1,6 @@
 package forge.screens.rogue;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
@@ -17,6 +18,9 @@ import java.util.List;
 
 /** The mode's home: the run in progress, if any, and a new run, with the tabs between runs. */
 public class RogueRunsScreen extends RogueScreen {
+    private static final Color BANNER_TEXT = RogueLook.PALE;
+    private static final Color BANNER_SOFT = new Color(0xc9b98fff);
+
     private RogueRun run;
     private List<RogueDeck> roster = List.of();
     private final RogueButton continueRun;
@@ -101,9 +105,11 @@ public class RogueRunsScreen extends RogueScreen {
         float ch = currentHeight();
         if (Forge.isLandscapeMode()) {
             float cw = run == null ? 0 : 363 * u;
-            continueRun.setBounds(138 * u, 3 * u + ch - 42 * u, 130 * u, 32 * u);
-            viewDeck.setBounds(270 * u, 3 * u + ch - 42 * u, 84 * u, 32 * u);
-            startNewRun.setBounds(cw + 10 * u, h - 39 * u, w - cw - 23 * u, 32 * u);
+            float by = run == null ? h - 39 * u : 3 * u + ch - 42 * u;
+            float left = 3 * u + (360 * u - 216 * u) / 2;
+            continueRun.setBounds(left, by, 130 * u, 32 * u);
+            viewDeck.setBounds(left + 132 * u, by, 84 * u, 32 * u);
+            startNewRun.setBounds(cw + 10 * u, by, w - cw - 23 * u, 32 * u);
         } else {
             continueRun.setBounds(12 * u, 3 * u + ch - 42 * u, 160 * u, 32 * u);
             viewDeck.setBounds(174 * u, 3 * u + ch - 42 * u, 84 * u, 32 * u);
@@ -127,8 +133,9 @@ public class RogueRunsScreen extends RogueScreen {
         RogueLook.paper(g, nx, ny, nw, nh);
         if (roster.size() >= 3) {
             float cx = nx + nw / 2;
-            RogueLook.card(g, commander(roster.get(2)), cx - 113 * u, ny + 22 * u, 62 * u, 0.8f);
-            RogueLook.card(g, commander(roster.get(1)), cx + 51 * u, ny + 22 * u, 62 * u, 0.8f);
+            float spread = Math.min(113 * u, nw / 2 - 10 * u);
+            RogueLook.card(g, commander(roster.get(2)), cx - spread, ny + 22 * u, 62 * u, 0.8f);
+            RogueLook.card(g, commander(roster.get(1)), cx + spread - 62 * u, ny + 22 * u, 62 * u, 0.8f);
             RogueLook.card(g, commander(roster.get(0)), cx - 37 * u, ny + 10 * u, 74 * u, 1);
         }
         RogueLook.text(g, Localizer.getInstance().getMessage("lblRoguePickYourRogueCommander"), nx, startNewRun.getTop() - 16 * u,
@@ -143,19 +150,19 @@ public class RogueRunsScreen extends RogueScreen {
         float u = RogueLook.unit();
         Localizer localizer = Localizer.getInstance();
         float y = 3 * u;
-        RogueLook.paper(g, 3 * u, y, w, h);
+        RogueLook.patch(g, "TenPatchGold", 3 * u, y, w, h);
         float cw = (wide ? 118 : 104) * u;
         RogueLook.card(g, commander(run.getSelectedRogueDeck()), 14 * u, y + 12 * u, cw, 1);
         float tx = 14 * u + cw + 10 * u;
         float tw = w - cw - 34 * u;
-        RogueLook.text(g, localizer.getMessage("lblRogueCurrentRun"), tx, y + 10 * u, 1, RogueLook.SOFT);
+        RogueLook.text(g, localizer.getMessage("lblRogueCurrentRun"), tx, y + 10 * u, 1, BANNER_SOFT);
         float ty = y + 24 * u;
-        ty += RogueLook.wrap(g, run.getCurrentCommanderName(), tx, ty, tw, 1.5f, RogueLook.INK, Align.left) + 3 * u;
+        ty += RogueLook.wrap(g, run.getCurrentCommanderName(), tx, ty, tw, 1.5f, BANNER_TEXT, Align.left) + 3 * u;
         int level = run.getDescensionLevel();
         DescensionLevel descension = DescensionLevel.forLevel(level);
         String descensionText = level == 0 ? localizer.getMessage("lblOff")
             : descension == null ? localizer.getMessage("lblRogueLevel", level) : localizer.getMessage("lblRogueNamedLevel", level, descension.name);
-        ty += RogueLook.wrap(g, localizer.getMessage("lblRogueDescensionLevel", descensionText), tx, ty, tw, 1, RogueLook.INK, Align.left) + 6 * u;
+        ty += RogueLook.wrap(g, localizer.getMessage("lblRogueDescensionLevel", descensionText), tx, ty, tw, 1, BANNER_TEXT, Align.left) + 6 * u;
         String[] values = {run.getCurrentLife() + "/" + run.getMaxLife(), String.valueOf(run.getCurrentGold()),
             String.valueOf(run.getCurrentDeck().getMain().countAll()), String.valueOf(run.getRemovalCredits())};
         String[] labels = {localizer.getMessage("lblLife"), localizer.getMessage("lblRogueGold"), localizer.getMessage("lblCards"),
@@ -170,14 +177,14 @@ public class RogueRunsScreen extends RogueScreen {
                 case 2 -> RogueLook.item(g, "Deck", gx, gy, s);
                 default -> RogueLook.skin(g, FSkinImage.CARD_IMAGE, gx, gy, s);
             }
-            RogueLook.text(g, values[i], gx + 17 * u, gy, 1.1f, RogueLook.INK);
-            RogueLook.text(g, labels[i], gx + 17 * u, gy + 12 * u, 0.8f, RogueLook.SOFT);
+            RogueLook.text(g, values[i], gx + 17 * u, gy, 1.1f, BANNER_TEXT);
+            RogueLook.text(g, labels[i], gx + 17 * u, gy + 12 * u, 0.8f, BANNER_SOFT);
         }
         float carryX = wide ? tx : 16 * u;
         float carryY = wide ? ty + 56 * u : y + 166 * u;
         float carryW = (wide ? 30 : 44) * u;
         if (!wide) {
-            RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), carryX, carryY, 1, RogueLook.SOFT);
+            RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), carryX, carryY, 1, BANNER_SOFT);
             carryY += 15 * u;
         }
         for (int i = 0; i < run.getCarryCards().size(); i++) {

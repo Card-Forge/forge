@@ -9,8 +9,8 @@ import forge.item.PaperCard;
 final class RogueDeal {
     private static final Color BACK = new Color(0x1d2640ff);
     private static final Color STRIPE = new Color(0x26304fff);
-    private static final float MOVE = 0.35f;
-    private static final float TURN = 0.25f;
+    private static final float MOVE = 0.5f;
+    private static final float TURN = 0.35f;
     private static final float HALO = 0.9f;
 
     private final float step;
@@ -18,7 +18,7 @@ final class RogueDeal {
     private float time = Float.MAX_VALUE;
 
     RogueDeal(int count) {
-        step = Math.min(0.07f, 0.8f / Math.max(1, count));
+        step = Math.min(0.1f, 1.1f / Math.max(1, count));
         total = MOVE + TURN + HALO + step * count;
     }
 

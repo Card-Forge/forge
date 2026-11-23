@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Interpolation;
 import forge.Forge;
 import forge.Graphics;
 import forge.gamemodes.rogue.RogueRun;
+import forge.item.PaperCard;
 import forge.screens.FScreen;
+import forge.toolbox.FDisplayObject;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.function.Supplier;
  * first.
  */
 public abstract class RogueScreen extends FScreen {
+    private FDisplayObject hoverSource;
+    private PaperCard hoverCard;
     private static final float TRANSITION_SECONDS = 0.5f;
     private static final Color TRANSITION_DIM = new Color(0, 0, 0, 0);
     private static long opened;
@@ -28,6 +32,7 @@ public abstract class RogueScreen extends FScreen {
     private RogueScreen from;
     private float transition = 1;
     private boolean nested;
+    private float chromeTop;
     private final List<Flight> flights = new ArrayList<>();
     private final RogueRunBar runBar;
     private final RogueButton menuButton;
@@ -87,6 +92,11 @@ public abstract class RogueScreen extends FScreen {
         order = ++opened;
     }
 
+    /** Whether it carries on from that screen, as one page of a story follows another, so it shows without moving in. */
+    protected boolean continues(RogueScreen left) {
+        return false;
+    }
+
     /** Its place among the tabs it shares with others, which slide sideways between each other; -1 for none. */
     protected int tab() {
         return -1;
@@ -94,7 +104,7 @@ public abstract class RogueScreen extends FScreen {
 
     /**
      * A screen that has just become current draws the one it replaced behind itself while it moves in: forward, it
-     * rises over it; back, the old one drops away; between tabs, both slide sideways.
+     * rises over it; back, the old one drops away; between tabs, both pages slide sideways under buttons that stay.
      */
     @Override
     public void draw(Graphics g) {
@@ -108,7 +118,7 @@ public abstract class RogueScreen extends FScreen {
             if (top != this) {
                 RogueScreen left = top != null && frame - onTopFrame <= 2 ? top : null;
                 onTop = new WeakReference<>(this);
-                if (left != null && left.getWidth() == getWidth() && left.getHeight() == getHeight()) {
+                if (left != null && left.getWidth() == getWidth() && left.getHeight() == getHeight() && !continues(left)) {
                     from = left;
                     RogueMotion.play(TRANSITION_SECONDS, t -> transition = t, () -> from = null);
                 }
@@ -125,8 +135,15 @@ public abstract class RogueScreen extends FScreen {
         float h = getHeight();
         int side = Integer.signum(tab() - left.tab());
         if (tab() >= 0 && left.tab() >= 0 && side != 0) {
-            drawAt(g, left, -side * w * e, 0, 0);
-            drawAt(g, this, side * w * (1 - e), 0, 0);
+            if (g.startClip(0, 0, w, chromeTop)) {
+                drawAt(g, left, -side * w * e, 0, 0);
+                drawAt(g, this, side * w * (1 - e), 0, 0);
+                g.endClip();
+            }
+            if (g.startClip(0, chromeTop, w, h - chromeTop)) {
+                drawAt(g, this, 0, 0, 0);
+                g.endClip();
+            }
         } else if (left.order > order) {
             drawAt(g, this, 0, 0, 1 - e);
             drawAt(g, left, 0, h * e, 0);
@@ -175,9 +192,44 @@ public abstract class RogueScreen extends FScreen {
         });
     }
 
+    /** Desktop: while the pointer rests on a card, shows it large beside it, as Adventure's reward tooltips do. */
+    public static void hover(FDisplayObject source, boolean hovered, PaperCard card) {
+        if (!(Forge.getCurrentScreen() instanceof RogueScreen screen)) {
+            return;
+        }
+        if (hovered && card != null) {
+            screen.hoverSource = source;
+            screen.hoverCard = card;
+        } else if (screen.hoverSource == source) {
+            screen.hoverSource = null;
+            screen.hoverCard = null;
+        }
+    }
+
+    private void drawHover(Graphics g) {
+        if (hoverCard == null || !hoverSource.isHovered()) {
+            return;
+        }
+        float gap = 8 * RogueLook.unit();
+        float h = Math.min(getHeight() * 0.62f, getHeight() - 2 * gap);
+        float w = h / RogueLook.CARD_RATIO;
+        float sx = hoverSource.screenPos.x - screenPos.x;
+        float sy = hoverSource.screenPos.y - screenPos.y;
+        float x = sx + hoverSource.screenPos.width + gap;
+        if (x + w > getWidth()) {
+            x = sx - gap - w;
+        }
+        if (x < 0) {
+            x = (getWidth() - w) / 2;
+        }
+        float y = Math.max(gap, Math.min(sy + hoverSource.screenPos.height / 2 - h / 2, getHeight() - h - gap));
+        RogueLook.card(g, hoverCard, x, y, w, h, 1);
+    }
+
     @Override
     protected void drawOverlay(Graphics g) {
         super.drawOverlay(g);
+        drawHover(g);
         for (int i = 0; i < flights.size(); i++) {
             Flight f = flights.get(i);
             float p = (f.time - f.delay) / f.seconds;
@@ -237,6 +289,7 @@ public abstract class RogueScreen extends FScreen {
                 b.setBounds(x, y, b.getWeight() * k, 32 * u);
                 x += b.getWeight() * k;
             }
+            chromeTop = y - 2 * u;
             layoutBody(0, 0, width, y - 2 * u);
             return;
         }
@@ -261,6 +314,7 @@ public abstract class RogueScreen extends FScreen {
             runBar.setBounds(3 * u, top - 46 * u, width - 6 * u, 44 * u);
             top = runBar.getTop();
         }
+        chromeTop = top - 2 * u;
         layoutBody(0, 0, width, top - 2 * u);
     }
 }

@@ -196,6 +196,12 @@ public class RogueTraitsScreen extends RogueScreen {
         }
 
         @Override
+        public void setHovered(boolean hovered) {
+            super.setHovered(hovered);
+            RogueScreen.hover(this, hovered, run.getCarryCards().get(index).toPaperCard());
+        }
+
+        @Override
         public boolean longPress(float x, float y) {
             CardZoom.show(run.getCarryCards().get(index).toPaperCard());
             return true;

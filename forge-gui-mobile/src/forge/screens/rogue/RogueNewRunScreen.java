@@ -20,6 +20,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -49,6 +50,7 @@ public class RogueNewRunScreen extends RogueScreen {
     private final RogueButton start;
     private final RogueButton back;
     private final RogueButton random;
+    private final Details details;
     private final List<RogueButton> dev = new ArrayList<>();
 
     public RogueNewRunScreen() {
@@ -64,6 +66,7 @@ public class RogueNewRunScreen extends RogueScreen {
         start = add(new RogueButton(localizer.getMessage("lblRogueStartRun"), null, RogueButton.State.MAIN, this::begin));
         back = add(new RogueButton(localizer.getMessage("lblBack"), null, RogueButton.State.NORMAL, Forge::back));
         random = add(new RogueButton(localizer.getMessage("lblRandom"), null, RogueButton.State.NORMAL, this::rollRandom));
+        details = add(new Details());
         start.weight(130 / 80f);
         if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
             dev.add(add(new RogueButton(unlockAllText(), null, RogueButton.State.NORMAL, this::devToggleUnlockAll)));
@@ -279,9 +282,11 @@ public class RogueNewRunScreen extends RogueScreen {
         if (Forge.isLandscapeMode()) {
             previous.setBounds(4 * u, 203 * u, 36 * u, 28 * u);
             next.setBounds(210 * u, 203 * u, 36 * u, 28 * u);
+            details.setBounds(264 * u, 12 * u, w - 278 * u, h - 22 * u);
         } else {
             previous.setBounds(5 * u, 258 * u, 40 * u, 28 * u);
             next.setBounds(w - 45 * u, 258 * u, 40 * u, 28 * u);
+            details.setBounds(15 * u, 299 * u, w - 30 * u, buttonsTop() - 309 * u);
         }
     }
 
@@ -294,28 +299,23 @@ public class RogueNewRunScreen extends RogueScreen {
         }
         float u = RogueLook.unit();
         boolean wide = Forge.isLandscapeMode();
-        float x;
-        float y;
-        float w;
         if (wide) {
             g.startClip(0, 0, 250 * u, getHeight() - 36 * u);
             drawCarousel(g, new float[]{54 * u, 5 * u, 142 * u}, new float[]{-50 * u, 46 * u, 100 * u}, new float[]{200 * u, 46 * u, 100 * u});
             g.endClip();
             dots(g, 125 * u, 215 * u);
             RogueLook.paper(g, 252 * u, 2 * u, getWidth() - 254 * u, getHeight() - 38 * u);
-            x = 264 * u;
-            y = 12 * u;
-            w = getWidth() - 278 * u;
         } else {
             drawCarousel(g, new float[]{getWidth() / 2 - 85 * u, 16 * u, 170 * u}, new float[]{-84 * u, 60 * u, 110 * u},
                 new float[]{getWidth() - 26 * u, 60 * u, 110 * u});
             dots(g, getWidth() / 2, 270 * u);
-            RogueLook.paper(g, 3 * u, 290 * u, getWidth() - 6 * u, descensionButton.getTop() - 292 * u);
-            x = 15 * u;
-            y = 299 * u;
-            w = getWidth() - 30 * u;
+            RogueLook.paper(g, 3 * u, 290 * u, getWidth() - 6 * u, buttonsTop() - 292 * u);
         }
-        drawText(g, d, x, y, w);
+    }
+
+    /** Upright, the top of the highest button row. */
+    private float buttonsTop() {
+        return buttonRows().get(0).get(0).getTop();
     }
 
     private static PaperCard commander(RogueDeck deck) {
@@ -388,7 +388,8 @@ public class RogueNewRunScreen extends RogueScreen {
         }
     }
 
-    private void drawText(Graphics g, RogueDeck d, float x, float y, float w) {
+    /** Draws the commander's details from y; returns where they end. */
+    private float drawText(Graphics g, RogueDeck d, float x, float y, float w) {
         float u = RogueLook.unit();
         Localizer localizer = Localizer.getInstance();
         RogueMetaProgress progress = RogueMetaProgress.getInstance();
@@ -396,8 +397,7 @@ public class RogueNewRunScreen extends RogueScreen {
             RogueLook.fit(g, "???", x, y, 1.6f, RogueLook.INK, w, Align.left);
             RogueLook.text(g, localizer.getMessage("lblRogueUnlockLabel"), x, y + 24 * u, 1, RogueLook.SOFT);
             RogueLook.skin(g, FSkinImage.LOCK, x, y + 41 * u, 13 * u);
-            RogueLook.wrap(g, d.getUnlockDescription(), x + 18 * u, y + 40 * u, w - 18 * u, 1.1f, RogueLook.INK, Align.left);
-            return;
+            return y + 40 * u + RogueLook.wrap(g, d.getUnlockDescription(), x + 18 * u, y + 40 * u, w - 18 * u, 1.1f, RogueLook.INK, Align.left);
         }
         RogueLook.fit(g, d.getCommanderCardName(), x, y, 1.6f, RogueLook.INK, w, Align.left);
         y += 24 * u;
@@ -410,7 +410,7 @@ public class RogueNewRunScreen extends RogueScreen {
                 RogueLook.skin(g, FSkinImage.LOCK, x, y + u, 11 * u);
                 y += RogueLook.wrap(g, lock, x + 15 * u, y, w - 15 * u, 1, RogueLook.INK, Align.left) + 3 * u;
             }
-            return;
+            return y;
         }
         y += RogueLook.wrap(g, d.getThemeDescription(), x, y, w, 1, RogueLook.TEAL, Align.left) + 8 * u;
         RogueLook.line(g, x, y, x + w, y, 0.8f, RogueLook.SOFT);
@@ -427,6 +427,35 @@ public class RogueNewRunScreen extends RogueScreen {
         for (int i = 0; i < 4; i++) {
             RogueLook.text(g, values[i], x + i * w / 4, y, 1.3f, RogueLook.INK, w / 4, Align.center);
             RogueLook.text(g, labels[i], x + i * w / 4, y + 17 * u, 0.8f, RogueLook.SOFT, w / 4, Align.center);
+        }
+        return y + 30 * u;
+    }
+
+    /** The commander's details, scrolling when the buttons leave too little room. */
+    private final class Details extends RogueScrollPane {
+        private float contentHeight;
+
+        Details() {
+            add(new FDisplayObject() {
+                @Override
+                public void draw(Graphics g) {
+                    RogueDeck d = deck();
+                    if (d == null) {
+                        return;
+                    }
+                    float end = drawText(g, d, 0, 0, getWidth());
+                    if (Math.abs(end - contentHeight) > 1) {
+                        contentHeight = end;
+                        Details.this.revalidate();
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            getChildAt(0).setBounds(0, 0, visibleWidth, Math.max(contentHeight, visibleHeight));
+            return new ScrollBounds(visibleWidth, contentHeight);
         }
     }
 

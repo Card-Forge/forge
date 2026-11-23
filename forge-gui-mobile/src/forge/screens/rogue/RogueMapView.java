@@ -14,9 +14,12 @@ import forge.gamemodes.rogue.path.RoguePath;
 import forge.gamemodes.rogue.path.RoguePathNode;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.IntConsumer;
 
@@ -28,6 +31,7 @@ public class RogueMapView extends FScrollPane {
     static final Color NODE_FACE = new Color(0.93f, 0.87f, 0.73f, 1);
 
     private final IntConsumer onChoose;
+    private IntConsumer onOpen = i -> { };
     private final boolean whole;
     private float zoom = 1;
     private RogueRun run;
@@ -40,6 +44,11 @@ public class RogueMapView extends FScrollPane {
     private Runnable afterIntro;
 
     /** whole shows every row at once, smaller, without scrolling. */
+    /** What a double tap on an open plane does, as well as choosing it. */
+    void onOpen(IntConsumer onOpen) {
+        this.onOpen = onOpen;
+    }
+
     public RogueMapView(IntConsumer onChoose, boolean whole) {
         this.onChoose = onChoose;
         this.whole = whole;
@@ -164,7 +173,17 @@ public class RogueMapView extends FScrollPane {
         }
     }
 
-    /** A short pause on the far end, then an eased scroll down to the current row. */
+    /** Plays the first look again if another screen cut it short. */
+    void resumeIntro() {
+        if (intro) {
+            revalidate();
+        }
+    }
+
+    /**
+     * A short pause on the far end, then an eased scroll down to the current row. Cut short by another screen, it waits
+     * to start again when the map shows.
+     */
     private class IntroScroll extends ForgeAnimation {
         private static final float PAUSE = 0.5f;
         private static final float DURATION = 1.2f;
@@ -186,6 +205,12 @@ public class RogueMapView extends FScrollPane {
 
         @Override
         protected void onEnd(boolean endingAll) {
+            if (endingAll) {
+                intro = true;
+                scrollToCurrent = true;
+                setScrollTop(0);
+                return;
+            }
             setScrollTop(target);
             Runnable after = afterIntro;
             afterIntro = null;
@@ -205,6 +230,37 @@ public class RogueMapView extends FScrollPane {
         }
     }
 
+    private static WeakReference<RogueRun> facesRun = new WeakReference<>(null);
+    private static final Set<Integer> faceUp = new HashSet<>();
+    private static final Map<Integer, Float> turning = new HashMap<>();
+
+    /**
+     * How far plane index has turned face up, 0 to 1. A plane the map has not shown face up before in this run turns
+     * over the first time it is drawn so; the first look at a run shows its planes as they are.
+     */
+    private float turned(int index, boolean down) {
+        if (facesRun.get() != run) {
+            facesRun = new WeakReference<>(run);
+            faceUp.clear();
+            turning.clear();
+            for (int i = 0; i < run.getPath().getNodeCount(); i++) {
+                if (run.getPath().getNode(i) instanceof NodePlanebound p && !run.getPath().isFaceDown(run, p)) {
+                    faceUp.add(i);
+                }
+            }
+        }
+        if (down) {
+            return 0;
+        }
+        if (faceUp.add(index)) {
+            float delay = 0.15f * turning.size();
+            turning.put(index, 0f);
+            RogueMotion.play(delay + 0.5f, t -> turning.put(index, Math.max(0, (t * (delay + 0.5f) - delay) / 0.5f)),
+                () -> turning.remove(index));
+        }
+        return turning.getOrDefault(index, 1f);
+    }
+
     private class NodeTile extends FDisplayObject {
         private final int index;
         private final RoguePathNode node;
@@ -218,6 +274,9 @@ public class RogueMapView extends FScrollPane {
         public boolean tap(float x, float y, int count) {
             if (open.contains(index)) {
                 onChoose.accept(index);
+                if (count >= 2 && node instanceof NodePlanebound) {
+                    onOpen.accept(index);
+                }
             }
             return true;
         }
@@ -229,6 +288,11 @@ public class RogueMapView extends FScrollPane {
             boolean chosen = node == run.getCurrentNode();
             float alpha = node.isCompleted() ? 0.75f : live.contains(node) ? 1 : 0.38f;
             if (node instanceof NodePlanebound plane) {
+                float turn = turned(index, run.getPath().isFaceDown(run, plane));
+                if (turn > 0 && turn < 1) {
+                    drawTurning(g, plane, turn, alpha);
+                    return;
+                }
                 drawPlane(g, plane, here, chosen, alpha);
             } else {
                 drawSide(g, here, chosen, alpha);
@@ -252,6 +316,23 @@ public class RogueMapView extends FScrollPane {
             g.fillCircle(NODE_FACE, cx, cy, 14.5f * u);
             RogueLook.ring(g, cx, cy, 14.5f * u, 1, new Color(0.12f, 0.1f, 0.08f, alpha));
             building(g, node, cx, cy, 22 * u, alpha);
+        }
+
+        /** The whole tile turning over like a card: its hidden face narrows away, then its plane face widens in. */
+        private void drawTurning(Graphics g, NodePlanebound plane, float turn, float alpha) {
+            float u = RogueLook.unit();
+            float tw = getWidth();
+            float th = getHeight();
+            float art = th - 23 * u;
+            float kw = Math.max(u, tw * Math.abs(1 - 2 * turn));
+            float kx = (tw - kw) / 2;
+            g.fillRect(new Color(0.12f, 0.1f, 0.08f, alpha), kx - u, -u, kw + 2 * u, th + 2 * u);
+            g.fillRect(NODE_FACE, kx, 0, kw, th);
+            if (turn < 0.5f) {
+                g.fillRect(new Color(0.45f, 0.39f, 0.31f, alpha * 0.9f), kx, 0, kw, art);
+            } else {
+                RogueLook.art(g, CodexHelper.getPlaneCard(plane.getRoguePlanebound()), kx, 0, kw, art, alpha);
+            }
         }
 
         private void drawPlane(Graphics g, NodePlanebound plane, boolean here, boolean chosen, float alpha) {
