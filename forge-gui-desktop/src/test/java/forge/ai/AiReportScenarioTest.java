@@ -584,6 +584,15 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", c.ai); c.hand("Inquisition of Kozilek", c.ai); c.hand("Wurmcoil Engine", c.opp); c.hand("Mountain", c.opp); }));
         l.add(noPlay("4233", "evoking Grief while the player has hexproof", Fid.EXACT, M1, true, "Grief",
                 c -> { c.hand("Grief", c.ai); c.hand("Thoughtseize", c.ai); c.bf("Leyline of Sanctity", c.opp); c.hand("Lightning Bolt", c.opp); }));
+        // #13026: Solitude pitched to exile a mana dork is two cards (and the best removal) for a card that only ramped them
+        l.add(noPlay("13026", "evoking Solitude at a lone Noble Hierarch on the opponent's turn", Fid.EXACT, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("13026-dorks", "evoking Solitude when every creature of theirs is a mana dork", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Birds of Paradise", c.opp); }));
+        l.add(play("13026-angel", "control: Solitude is still evoked at a Serra Angel", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Serra Angel", c.opp); }));
+        l.add(play("13026-angel-and-dork", "control: a real threat beside the mana dork keeps the evoke open", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Serra Angel", c.opp); }));
         l.add(new Scenario("4278", "Up the Beanstalk before the 5+ cost spell (should be the first play)", Fid.EXACT, M1, true,
                 c -> { c.bf("Forest", 10, c.ai); c.hand("Up the Beanstalk", c.ai); c.hand("Craterhoof Behemoth", c.ai); },
                 c -> { final SpellAbility sa = c.first();

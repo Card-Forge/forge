@@ -40,6 +40,8 @@ import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -531,6 +533,49 @@ public final class ActivationGuard {
             }
         }
         return true;
+    }
+
+    /**
+     * Evoking an elemental by exiling a card from the hand (Solitude, Fury) spends two cards for one enter-the-battlefield
+     * removal: against a mana dork the AI gives up a good removal and a card for a card that only ramped them (#13026).
+     * Judged on everything the removal could hit, so a creature of theirs that is worth the second card keeps the play
+     * open. Only creature removal is judged: Grief, Endurance and Subtlety do not aim at creatures.
+     */
+    public static boolean evokeOnlyHitsManaDorks(final Player ai, final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || !sa.isEvoke() || sa.getPayCosts() == null || sa.getHostCard() == null) {
+            return false;
+        }
+        boolean pitchesACard = false;
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            pitchesACard |= part instanceof CostExile && ((CostExile) part).getFrom().contains(ZoneType.Hand);
+        }
+        if (!pitchesACard) {
+            return false; // paying mana for an evoke (Shriekmaw) is a different trade
+        }
+        boolean removesCreatures = false;
+        for (final Trigger t : sa.getHostCard().getTriggers()) {
+            if (t.getMode() != TriggerType.ChangesZone || !"Battlefield".equals(t.getParam("Destination"))
+                    || !"Card.Self".equals(t.getParam("ValidCard"))) {
+                continue;
+            }
+            final SpellAbility etb = t.ensureAbility();
+            final String valid = etb == null ? "" : etb.getParamOrDefault("ValidTgts", "");
+            removesCreatures |= valid.startsWith("Creature") && !valid.contains("Planeswalker") && !valid.contains("Player");
+        }
+        if (!removesCreatures) {
+            return false;
+        }
+        boolean anyTarget = false;
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isCreature()) {
+                continue;
+            }
+            anyTarget = true;
+            if (!isSmallBody(c) || c.getManaAbilities().isEmpty()) {
+                return false; // a creature that is worth the second card
+            }
+        }
+        return anyTarget;
     }
 
     /**

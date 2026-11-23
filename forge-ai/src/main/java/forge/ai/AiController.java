@@ -1041,6 +1041,12 @@ public class AiController {
             return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
         }
 
+        if (ActivationGuard.evokeOnlyHitsManaDorks(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "evoke-on-mana-dork", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Solitude pitching a card to exile a Noble Hierarch is two cards for one (#13026)
+        }
+
         if (PlayRelevance.pointlessPump(player, sa) != null) {
             sa.resetTargets();
             VetoLog.refused(player, sa, "pump-outside-combat", "heuristic");
