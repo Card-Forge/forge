@@ -70,11 +70,20 @@ public final class RogueController {
         }
     }
 
-    /** A player's command: ignored while another job runs or waits, so a second tap does nothing. */
+    /** A player's command: ignored while another job runs, and shows the question again while one waits. */
     public void submit(Runnable job) {
-        if (jobs.compareAndSet(0, 1)) {
-            execute(job);
+        if (!submitIfIdle(job)) {
+            reshowOpenQuestion();
         }
+    }
+
+    /** Work a screen does as it opens or closes: skipped while another job runs or waits. */
+    public boolean submitIfIdle(Runnable job) {
+        if (!jobs.compareAndSet(0, 1)) {
+            return false;
+        }
+        execute(job);
+        return true;
     }
 
     /** Work that must follow what runs now, such as the step after a match: always runs, in order. */

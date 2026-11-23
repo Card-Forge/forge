@@ -70,7 +70,7 @@ public class RogueCodexScreen extends RogueScreen {
 
     @Override
     public void onActivate() {
-        RogueController.get().submit(() -> RogueCommanderAchievements.getInstance().evaluateCodexAchievements(RogueMetaProgress.getInstance()));
+        RogueController.get().submitIfIdle(() -> RogueCommanderAchievements.getInstance().evaluateCodexAchievements(RogueMetaProgress.getInstance()));
         RogueController.get().showTutorials(List.of(RogueTutorial.CODEX));
         build();
     }

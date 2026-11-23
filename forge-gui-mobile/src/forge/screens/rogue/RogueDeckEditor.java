@@ -171,7 +171,7 @@ public class RogueDeckEditor extends FDeckEditor {
     /** Leaving checks the run's achievements, on the flow thread as anything that can announce must be. */
     @Override
     public void onClose(Consumer<Boolean> canCloseCallback) {
-        RogueController.get().submit(() -> RogueCommanderAchievements.getInstance().evaluateRunAchievements(run));
+        RogueController.get().submitIfIdle(() -> RogueCommanderAchievements.getInstance().evaluateRunAchievements(run));
         if (canCloseCallback != null) {
             canCloseCallback.accept(true);
         }
