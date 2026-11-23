@@ -1749,6 +1749,11 @@ public class AiController {
                     || attackMax != null && combat.getAttackers().size() >= attackMax) {
                 continue;
             }
+            // The attack heuristics left this land creature at home, and committing it here would skip their gift check
+            // (shouldAttack): a blocker that kills it for free must not get it (Dryad Arbor into Lyra Dawnbringer, #12927)
+            if (AiAttackController.shouldDeclineLandGift(attacker, c, combat, false)) {
+                continue;
+            }
             combat.addAttacker(c, defender);
             committed.put(c, defender);
         }

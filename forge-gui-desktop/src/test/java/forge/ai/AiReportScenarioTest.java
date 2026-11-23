@@ -825,9 +825,28 @@ public class AiReportScenarioTest extends AITest {
                     final Player target = etb.getTargets().getFirstTargetedPlayer();
                     return target == c.opp ? null : "Endurance should target the opponent's valuable graveyard, chose " + target;
                 }));
-        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
+        // The attack is declared in the declare attackers step: AiController.declareAttackers only commits the land creatures
+        // (commitAttackers) in that phase, so a MAIN1 scenario never reaches the path that sent the Arbor in.
+        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        l.add(new Scenario("12927-dryad-arbor-flatmc-off", "Same board with the plain heuristics only (no Monte Carlo): the Arbor stays home", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); c.game.AI_FLAT_MONTE_CARLO = false; },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra without the rollouts" : null));
+        // the report's own board: the other creatures stay home and the land creature goes in alone
+        l.add(new Scenario("12927-dryad-arbor-alone", "Dryad Arbor is not sent into a Serra Angel alone while the other creatures stay home", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Slippery Bogle", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into the Serra Angel: " + attackers : null;
+                }));
+        // controls: the guard only refuses a plain gift, it is not a ban on land creatures attacking
+        l.add(new Scenario("12927-control-no-blockers", "control: nothing can block, the Dryad Arbor still attacks", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? null : "Dryad Arbor stayed home against an empty board"));
+        l.add(new Scenario("12927-control-harmless-blocker", "control: the only blocker is a 0/8 wall that cannot kill it, the Dryad Arbor still attacks", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Wall of Stone", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? null : "Dryad Arbor stayed home against a blocker that cannot hurt it"));
         // Manabarbs: the lands that pay for a spell cost life, and the AI ran into it until it died
         l.add(noPlay("manabarbs-low-life", "At 3 life under Manabarbs the AI does not pay four lands for a Hill Giant", Fid.APPROX, "MAIN2", true, "Hill Giant",
                 c -> { c.ai.setLife(3, null); c.bf("Mountain", 4, c.ai); c.hand("Hill Giant", c.ai); c.bf("Manabarbs", c.opp); }));
