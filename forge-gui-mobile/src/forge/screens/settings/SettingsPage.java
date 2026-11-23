@@ -639,6 +639,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
             Forge.getLocalizer().getMessage("cbImageFetcher"),
             Forge.getLocalizer().getMessage("nlImageFetcher")), 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CACHE_CARD_FRAMES,
+            Forge.getLocalizer().getMessage("cbCacheCardFrames"),
+            Forge.getLocalizer().getMessage("nlCacheCardFrames")) {
+                @Override
+                public void select() {
+                    super.select();
+                    forge.card.CardImageRenderer.setFrameCacheEnabled(FModel.getPreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
+                }
+            }, 4);
         final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_DOWNLOAD_LANG, "Card art language",
                 "Preferred language for downloaded card images",

@@ -245,6 +245,7 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+        forge.card.CardImageRenderer.setFrameCacheEnabled(getForgePreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
         else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
@@ -1093,6 +1094,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         lifecycleClosing = false;
+        forge.card.CardImageRenderer.clearFrameCache(); //the contents of frame buffers are lost with the GL context
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
