@@ -1567,6 +1567,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     void chooseNewTargetsForCopy(final SpellAbility copy) {
+        if (forge.ai.simulation.StackLoops.naruCopy(player, copy)) {
+            return; // Naru Meha with Ghostly Flicker: the copy goes for Naru Meha and the land of the loop, or ends it
+        }
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {

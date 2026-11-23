@@ -117,6 +117,16 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
         String logic = sa.getParamOrDefault("AILogic", "");
 
+        if (sa.usesTargeting() && "Spell".equals(sa.getParam("TargetType")) && sa.getTargets().isEmpty()) {
+            // Naru Meha and the like: copy the instant or sorcery of its own on the stack, when there is one
+            final Game game = aiPlayer.getGame();
+            final SpellAbility top = game.getStack().isEmpty() ? null : game.getStack().peekAbility();
+            if (top != null && top.isSpell() && aiPlayer.equals(top.getActivatingPlayer()) && top.canBeTargetedBy(sa)) {
+                sa.getTargets().add(top);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+        }
+
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

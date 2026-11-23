@@ -136,13 +136,13 @@ public final class ManaLoopPlan {
         return goal(ai, null);
     }
 
-    /** The goal without the hand card of that name: a spell that is a part of the loop is not what the mana is for. */
+    /** The goal without the hand cards of those names (separated by |): a spell that is a part of the loop is not what the mana is for. */
     public static int goal(final Player ai, final String ignore) {
         int sum = 0;
         boolean x = false;
         boolean spell = false;
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-            if (c.isLand() || c.getName().equals(ignore)) {
+            if (c.isLand() || ignore != null && java.util.Arrays.asList(ignore.split("\\|")).contains(c.getName())) {
                 continue;
             }
             spell = true;

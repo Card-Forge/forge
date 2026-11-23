@@ -8,6 +8,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,11 +20,18 @@ import java.util.function.Predicate;
  * stack it is tapped for {C}{C}{C} again, and the original untaps it once more. A round is six mana in and five out: one over.
  * The steps are two at an empty stack (the tap; the untap, with the pool and the lands to pay both the {3} and the {2}) and
  * one with the original untap on the stack and the Monolith untapped: {@link #response}.</li>
+ * <li><b>Naru Meha with Ghostly Flicker.</b> Ghostly Flicker is cast on two lands, and Naru Meha (flash) is cast in response: her
+ * enter trigger copies the Flicker, the copy flickers Naru Meha and a land, her enter trigger copies the Flicker again, and so
+ * on. The land is tapped for mana each time it is back (with her trigger on the stack) and flickered again: a mana a round.
+ * The copy that ends it flickers two lands and not Naru Meha, once the pool holds what the hand costs.</li>
  * </ul>
  */
 public final class StackLoops {
     private static final int LIMIT = 80;
     private static final int RINGS = 2;
+    private static final String NARU = "Naru Meha, Master Wizard";
+    private static final String FLICKER = "Ghostly Flicker";
+    private static final int NARU_ROUNDS = 60;
 
     private StackLoops() {
     }
@@ -82,6 +90,10 @@ public final class StackLoops {
                 || !(ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.MAIN2))) {
             return null;
         }
+        final SpellAbility start = naruStart(ai, candidates, approve);
+        if (start != null) {
+            return start;
+        }
         final int goal = ManaLoopPlan.goal(ai);
         if (ringsOf(ai) == null || goal <= 0 || ai.getManaPool().totalMana() >= goal) {
             return null;
@@ -130,6 +142,10 @@ public final class StackLoops {
      */
     public static SpellAbility response(final Player ai, final SpellAbility top, final List<SpellAbility> candidates,
                                         final Predicate<SpellAbility> approve) {
+        final SpellAbility naru = naruResponse(ai, top, candidates, approve);
+        if (naru != null) {
+            return naru;
+        }
         if (top == null || !top.isActivatedAbility() || top.getApi() != ApiType.Untap || !ai.equals(top.getActivatingPlayer())
                 || ringsOf(ai) == null) {
             return null;
@@ -148,5 +164,120 @@ public final class StackLoops {
         }
         VetoLog.note(ai, "rings-loop | " + host.getName() + " taps again with its untap on the stack");
         return tap;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Naru Meha
+
+    private static int naruGoal(final Player ai) {
+        return ManaLoopPlan.goal(ai, FLICKER + "|" + NARU);
+    }
+
+    /** The lands that tap for mana, the first by id first: the loop uses the first, and the Flicker is aimed at the first two. */
+    private static List<Card> landsByAge(final Player ai) {
+        final List<Card> lands = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.getManaAbilities().isEmpty()) {
+                lands.add(c);
+            }
+        }
+        lands.sort((a, b) -> Integer.compare(a.getId(), b.getId()));
+        return lands;
+    }
+
+    /** Ghostly Flicker on two lands, with Naru Meha in the hand and the mana for both. */
+    private static SpellAbility naruStart(final Player ai, final List<SpellAbility> candidates,
+                                          final Predicate<SpellAbility> approve) {
+        if (LoopRunner.inPlay(ai, NARU) != null || !LoopRunner.inHand(ai, NARU) || !LoopRunner.inHand(ai, FLICKER)
+                || naruGoal(ai) <= 0 || ai.getManaPool().totalMana() >= naruGoal(ai)
+                || forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai) < 7) {
+            return null;
+        }
+        final List<Card> lands = landsByAge(ai);
+        final SpellAbility flicker = LoopRunner.castFromHand(ai, candidates, FLICKER);
+        if (flicker == null || lands.size() < 2) {
+            return null;
+        }
+        flicker.setActivatingPlayer(ai);
+        flicker.resetTargets();
+        if (!flicker.canTarget(lands.get(0)) || !flicker.getTargets().add(lands.get(0))
+                || !flicker.canTarget(lands.get(1)) || !flicker.getTargets().add(lands.get(1)) || !approve.test(flicker)) {
+            flicker.resetTargets();
+            return null;
+        }
+        VetoLog.note(ai, "naru-loop | Ghostly Flicker on two lands, Naru Meha to follow");
+        return flicker;
+    }
+
+    /** The cast of Naru Meha with the Flicker on the stack, and the land tapped each time it is back. */
+    private static SpellAbility naruResponse(final Player ai, final SpellAbility top, final List<SpellAbility> candidates,
+                                             final Predicate<SpellAbility> approve) {
+        if (top == null || !ai.equals(top.getActivatingPlayer())) {
+            return null;
+        }
+        final Card naru = LoopRunner.inPlay(ai, NARU);
+        if (naru == null) {
+            final SpellAbility cast = LoopRunner.castFromHand(ai, candidates, NARU);
+            if (cast != null && top.isSpell() && top.getHostCard() != null && top.getHostCard().getName().equals(FLICKER)
+                    && naruGoal(ai) > 0 && forge.ai.ComputerUtilMana.canPayManaCost(cast, ai, 0, false)) {
+                cast.setActivatingPlayer(ai);
+                cast.resetTargets();
+                if (approve.test(cast)) {
+                    VetoLog.note(ai, "naru-loop | Naru Meha with the Flicker on the stack");
+                    return cast;
+                }
+            }
+            return null;
+        }
+        if (top.getHostCard() != naru || !top.isTrigger() || ai.getManaPool().totalMana() >= naruGoal(ai)) {
+            return null;
+        }
+        final List<Card> lands = landsByAge(ai);
+        if (lands.isEmpty() || lands.get(0).isTapped()) {
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            if (sa != null && sa.getHostCard() == lands.get(0) && sa.isManaAbility() && !RunawayLoop.exceeded(sa, 4 * NARU_ROUNDS)) {
+                sa.setActivatingPlayer(ai);
+                if (approve.test(sa)) {
+                    VetoLog.note(ai, "naru-loop | the land taps with Naru Meha's trigger on the stack, pool "
+                            + ai.getManaPool().totalMana() + " of " + naruGoal(ai));
+                    return sa;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * The targets of a copy of Ghostly Flicker while Naru Meha is in play: Naru Meha and the land of the loop while the pool is
+     * short of what the hand costs (and for {@value #NARU_ROUNDS} rounds at most), the two lands without her when it is not.
+     *
+     * @return true if the targets are set
+     */
+    public static boolean naruCopy(final Player ai, final SpellAbility copy) {
+        final Card host = copy == null ? null : copy.getHostCard();
+        final Card naru = LoopRunner.inPlay(ai, NARU);
+        if (host == null || !host.getName().equals(FLICKER) || naru == null || !copy.usesTargeting()) {
+            return false;
+        }
+        final List<Card> lands = landsByAge(ai);
+        if (lands.size() < 2) {
+            return false;
+        }
+        final int rounds = naru.hasSVar("NaruRounds") ? Integer.parseInt(naru.getSVar("NaruRounds")) : 0;
+        final boolean go = naruGoal(ai) > 0 && ai.getManaPool().totalMana() < naruGoal(ai) && rounds < NARU_ROUNDS;
+        final Card[] picks = go ? new Card[] {naru, lands.get(0)} : new Card[] {lands.get(0), lands.get(1)};
+        copy.setActivatingPlayer(ai);
+        for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+            s.clearTargets();
+        }
+        for (final Card c : picks) {
+            if (!copy.canTarget(c) || !copy.getTargets().add(c)) {
+                copy.clearTargets();
+                return false;
+            }
+        }
+        naru.setSVar("NaruRounds", String.valueOf(rounds + 1));
+        return true;
     }
 }

@@ -1832,4 +1832,14 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("the first ability, then the mill: a card is a life and a life is a card\n"
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNaruMehaAndGhostlyFlickerPaysForAWalkingBallista() {
+        elfDeckWith(0, "Ghostly Flicker", "Naru Meha, Master Wizard", "Walking Ballista");
+        addCards("Island", 8, ai);
+        opp.setLife(4, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Flicker, Naru Meha in response, her copy flickers her and a land: a mana a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
