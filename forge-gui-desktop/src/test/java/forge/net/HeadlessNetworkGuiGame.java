@@ -15,6 +15,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
@@ -155,7 +156,7 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     }
 
     @Override
-    public List<CardView> manipulateCardList(String title, Iterable<CardView> cards, Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere) {
+    public List<CardView> manipulateCardList(String title, Iterable<CardView> cards, Iterable<CardView> manipulable, ZoneType secondPile) {
         List<CardView> result = new ArrayList<>();
         if (cards != null) {
             for (CardView card : cards) {

@@ -987,26 +987,33 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    public List<Card> manipulateCardList(final String title, final Iterable<Card> cards, final Iterable<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<Card> manipulateCardList(final String title, final Iterable<Card> cards, final Iterable<Card> manipulable, final ZoneType secondPile) {
         GameEntityViewMap<Card, CardView> gameCacheManipulate = GameEntityView.getMap(cards);
         gameCacheManipulate.putAll(manipulable);
-        List<CardView> views = getGui().manipulateCardList(title, CardView.getCollection(cards), CardView.getCollection(manipulable), toTop, toBottom, toAnywhere);
+        List<CardView> views = getGui().manipulateCardList(title, CardView.getCollection(cards), CardView.getCollection(manipulable), secondPile);
         return gameCacheManipulate.addToList(views, new CardCollection());
     }
 
-    public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
-        List<Card> result = manipulateCardList(title, cards, manipulable, topOK, bottomOK, false);
+    public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final ZoneType secondPile) {
+        List<Card> result = manipulateCardList(title, cards, manipulable, secondPile);
+        if (result.isEmpty()) { // the remote player disconnected
+            return ImmutablePair.of(new CardCollection(manipulable), new CardCollection());
+        }
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
         for (int i = 0; i < cards.size() && manipulable.contains(result.get(i)); i++) {
             toTop.add(result.get(i));
         }
-        if (toTop.size() < cards.size()) { // the top isn't everything
-            for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(0, result.get(i));
-            }
+        for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
+            toBottom.add(0, result.get(i));
         }
         return ImmutablePair.of(toTop, toBottom);
+    }
+
+    // arrangeForMove tells the piles apart by the rest of the library between them
+    private boolean canArrangeForMove(final CardCollection topN) {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()
+                && player.getCardsIn(ZoneType.Library).size() > topN.size();
     }
 
     @Override
@@ -1021,10 +1028,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()) {
+        if (canArrangeForMove(topN)) {
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
-                    arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
+                    arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, ZoneType.Library);
             toTop = result.getLeft();
             toBottom = result.getRight();
         } else if (topN.size() == 1) {
@@ -1066,7 +1073,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (topN.size() == 1) {
+        if (canArrangeForMove(topN)) {
+            ImmutablePair<CardCollection, CardCollection> result =
+                    arrangeForMove(localizer.getMessage("lblMoveCardsToTopOfLibraryOrGraveyard"), player.getCardsIn(ZoneType.Library), topN, ZoneType.Graveyard);
+            toTop = result.getLeft();
+            toGrave = result.getRight();
+        } else if (topN.size() == 1) {
             final Card c = topN.getFirst();
             final CardView view = CardView.get(c);
 
