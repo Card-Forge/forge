@@ -56,6 +56,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_SHOW_FPS("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_AUTO_CACHE_SIZE("false"),
+        UI_ANDROID_ORIGINAL_TEXTURE_QUALITY("false"),
         UI_ARROW_OPTION("Default"),
         UI_LOAD_UNKNOWN_CARDS("true"),
         UI_SINGLE_CARD_ZOOM("false"),
