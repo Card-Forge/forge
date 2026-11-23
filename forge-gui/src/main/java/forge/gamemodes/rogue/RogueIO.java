@@ -228,25 +228,22 @@ public class RogueIO {
                 xStream.toXML(value, zout);
                 zout.flush();
             }
-            if (!moveOver(temp, file)) {
-                // Windows does not replace a file that another program has open, but it can be written
-                Files.write(file, Files.readAllBytes(temp));
-            }
+            moveOver(temp, file);
         } finally {
             deleteRunFile(temp.toFile());
         }
     }
 
-    private static boolean moveOver(final Path source, final Path target) {
+    /** Windows does not replace a file that another program has open; the old save then stays. */
+    private static void moveOver(final Path source, final Path target) throws IOException {
         for (int attempt = 1; ; attempt++) {
             try {
                 // Without ATOMIC_MOVE, Windows deletes the target before the move
                 Files.move(source, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
-                return true;
+                return;
             } catch (final IOException e) {
                 if (attempt == 3) {
-                    Logger.warn(e, "Could not move Rogue save over {}", target);
-                    return false;
+                    throw e;
                 }
                 pause(50);
             }
