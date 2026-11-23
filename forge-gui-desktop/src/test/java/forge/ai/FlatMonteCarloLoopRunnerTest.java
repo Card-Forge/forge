@@ -1911,4 +1911,18 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("the Squirrels to Chatterfang, each death a Treasure and a Squirrel: mana for a {B}\n"
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithConspicuousSnoopBoggartHarbingerKikiJikiAndSlingGangKillsTheOpponent() {
+        elfDeckWith(0, "Boggart Harbinger");
+        addCards("Swamp", 3, ai);
+        addCardToZone("Conspicuous Snoop", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Library);
+        addCardToZone("Sling-Gang Lieutenant", ai, ZoneType.Library);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Harbinger puts Kiki-Jiki on top, the Snoops copy themselves, a last one copies the Harbinger"
+                + " for Sling-Gang Lieutenant, the Goblins go\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
 }

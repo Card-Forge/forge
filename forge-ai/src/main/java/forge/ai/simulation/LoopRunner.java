@@ -105,6 +105,10 @@ public final class LoopRunner {
         if (breach != null) {
             return breach;
         }
+        final SpellAbility goblins = GoblinPlan.next(ai, candidates, approve);
+        if (goblins != null) {
+            return goblins;
+        }
         final SpellAbility artifacts = ArtifactLoopPlan.next(ai, candidates, approve);
         if (artifacts != null) {
             return artifacts;

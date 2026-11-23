@@ -381,7 +381,7 @@ public final class SacrificeLoopPlan {
     }
 
     /** Gives the creature the SacMe mark that the AI's choice of a sacrifice goes by, and takes it off the others. */
-    private static void markVictim(final Player ai, final Card victim) {
+    static void markVictim(final Player ai, final Card victim) {
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c == victim) {
                 c.setSVar("SacMe", "6");
