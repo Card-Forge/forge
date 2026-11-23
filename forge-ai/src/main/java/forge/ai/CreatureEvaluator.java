@@ -29,9 +29,17 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     public int evaluateCreature(final Card c) {
-        return evaluateCreature(c, true, true);
+        return evaluateCreature(c, true, true, false);
     }
     public int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
+        return evaluateCreature(c, considerPT, considerCMC, false);
+    }
+    /** Score the creature as a potential untap target, without treating its current untap lock as a loss of value. */
+    public int evaluateCreatureForUntap(final Card c) {
+        return evaluateCreature(c, true, true, true);
+    }
+    private int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC,
+            final boolean ignoreCurrentUntapLock) {
         //Card shouldn't be null and AI shouldn't crash since this is just score
         if (c == null)
             return 0;
@@ -74,7 +82,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(power * 10, "horses");
         }
 
-        if (StaticAbilityCantAttackBlock.cantBlockBy(c, null)) {
+        if (StaticAbilityCantAttackBlock.cantBlockBy(c, null) || hasUnblockableAttachment(c)) {
             value += addValue(power * 10, "unblockable");
         } else {
             if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c)
@@ -221,14 +229,16 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(1, "untapped");
         }
 
-        if (!c.canUntap(c.getController(), true)) {
-            if (c.isTapped()) {
-                value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
+        if (!ignoreCurrentUntapLock) {
+            if (!c.canUntap(c.getController(), true)) {
+                if (c.isTapped()) {
+                    value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
+                } else {
+                    value -= subValue(50, "doesnt-untap");
+                }
             } else {
-                value -= subValue(50, "doesnt-untap");
+                value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
             }
-        } else {
-            value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
         }
 
         for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -327,6 +337,29 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         // default value
         return 10;
+    }
+
+    /**
+     * The generic cantBlockBy(card, null) check cannot recognize abilities without a blocker restriction,
+     * because the rules helper treats a null blocker as no actual blocking matchup. For creature valuation,
+     * an attached static ability that forbids blocking by every blocker is still meaningful evasion.
+     */
+    private static boolean hasUnblockableAttachment(final Card creature) {
+        for (final Card attachment : creature.getAttachedCards()) {
+            for (final StaticAbility ability : attachment.getStaticAbilities()) {
+                if (!ability.checkConditions(StaticAbilityMode.CantBlockBy)
+                        || ability.hasParam("ValidBlocker")
+                        || ability.hasParam("ValidAttackerRelative")
+                        || ability.hasParam("ValidBlockerRelative")
+                        || ability.hasParam("ValidDefender")) {
+                    continue;
+                }
+                if (ability.matchesValidParam("ValidAttacker", creature)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     protected int addValue(int value, String text) {

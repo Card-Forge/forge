@@ -884,6 +884,9 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }
+    public static int evaluateCreatureForUntap(final Card c) {
+        return creatureEvaluator.evaluateCreatureForUntap(c);
+    }
     public static int evaluateCreature(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 

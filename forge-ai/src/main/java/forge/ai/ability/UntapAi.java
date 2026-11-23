@@ -540,10 +540,22 @@ public class UntapAi extends SpellAbilityAi {
                     return false;
                 }
 
-                // if the ManaCost would cost more than the creatures CMC, it is not worth it
-                CostPartMana mana = cost.getCostMana();
-                if (mana != null && mana.getManaCostFor(sa).getCMC() > card.getCMC()) {
+                // A stun counter would be removed instead of actually untapping the creature.
+                if (gameCard.getCounters(CounterEnumType.STUN) > 0) {
                     return false;
+                }
+
+                final CostPartMana mana = cost.getCostMana();
+                if (mana != null) {
+                    final int manaCost = mana.getManaCostFor(sa).getCMC();
+                    final int spareMana = Math.max(0, ComputerUtilMana.getAvailableManaEstimate(payer) - manaCost);
+                    // Three mana left over is enough to avoid a scarcity penalty. If paying would consume
+                    // nearly all available mana, require a more valuable creature before agreeing to pay.
+                    final int scarcityPenalty = Math.max(0, 3 - spareMana) * 15;
+                    final int minimumCreatureValue = 160 + manaCost * 10 + scarcityPenalty;
+                    if (ComputerUtilCard.evaluateCreatureForUntap(gameCard) < minimumCreatureValue) {
+                        return false;
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import org.testng.AssertJUnit;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
@@ -32,6 +33,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollection;
 
 /**
  * One scenario per open "AI doesn't / AI wrongly ..." report (issue number in the scenario name).
@@ -107,6 +109,19 @@ public class AiReportScenarioTest extends AITest {
         SpellAbility uginLabyrinthReturn(final Card labyrinth) {
             return labyrinth.getSpellAbilities().stream()
                     .filter(sa -> "ReturnCastable".equals(sa.getParam("AILogic"))).findFirst().orElse(null);
+        }
+        boolean wouldPayParalyze(final Card creature) {
+            final Card paralyze = bf("Paralyze", opp);
+            paralyze.attachToEntity(creature, null, true);
+            final SpellAbility trigger = paralyze.getTriggers().stream()
+                    .filter(t -> "TrigUntap".equals(t.getMapParams().get("Execute")))
+                    .map(t -> t.ensureAbility()).findFirst().orElseThrow();
+            final SpellAbility ability = trigger instanceof forge.game.trigger.WrappedAbility
+                    ? ((forge.game.trigger.WrappedAbility) trigger).getWrappedAbility() : trigger;
+            ability.setActivatingPlayer(ai);
+            final Cost cost = new Cost(ability.getParam("UnlessCost"), false);
+            return SpellApiToAi.Converter.get(ability).willPayUnlessCost(ai, ability, cost, false,
+                    new FCollection<>(ai));
         }
 
         /** A permanent that has been there for a while: no summoning sickness, so {T} abilities and attacks are possible. */
@@ -693,6 +708,74 @@ public class AiReportScenarioTest extends AITest {
                     final Card chosen = new forge.ai.ability.DamageDealAi().chooseSingleEntity(c.ai, sa,
                             java.util.Collections.singletonList(bears), false, null, java.util.Collections.emptyMap());
                     return chosen == bears ? null : "mandatory damage target selection returned " + chosen + " instead of its only legal target";
+                }));
+        l.add(new Scenario("mandatory-damage-trigger-target-prevention", "mandatory ETB damage trigger still chooses a legal creature that prevents damage", Fid.EXACT, M1, true,
+                c -> { c.bf("The Wanderer", c.opp); c.bf("Grizzly Bears", c.opp); c.bf("Nova Hellkite", c.ai); },
+                c -> {
+                    final Card bears = c.opp.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    final Card hellkite = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Nova Hellkite".equals(card.getName())).findFirst().orElse(null);
+                    if (bears == null || hellkite == null) { return "mandatory damage trigger setup is incomplete"; }
+                    final SpellAbility trigger = hellkite.getTriggers().stream()
+                            .filter(t -> "TrigDamage".equals(t.getMapParams().get("Execute")))
+                            .map(t -> t.ensureAbility()).findFirst().orElse(null);
+                    if (trigger == null) { return "Nova Hellkite's mandatory damage trigger is missing"; }
+                    trigger.setActivatingPlayer(c.ai);
+                    final SpellAbility ability = trigger instanceof forge.game.trigger.WrappedAbility
+                            ? ((forge.game.trigger.WrappedAbility) trigger).getWrappedAbility() : trigger;
+                    ability.setActivatingPlayer(c.ai);
+                    return c.shouldRunAiTrigger(ability, true) && c.target(ability) == bears ? null
+                            : "mandatory damage trigger did not retain its only legal target when prevention made it unable to deal damage";
+                }));
+        l.add(new Scenario("paralyze-does-not-pay-for-weak-creature", "AI does not pay {4} to untap a low-value creature even with abundant spare mana", Fid.EXACT, "UPKEEP", true,
+                c -> { c.richMana(); c.bf("Memnite", c.ai).setTapped(true); },
+                c -> {
+                    final Card memnite = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Memnite".equals(card.getName())).findFirst().orElse(null);
+                    return memnite != null && !c.wouldPayParalyze(memnite) ? null
+                            : "AI agreed to spend four mana to untap a low-value Memnite";
+                }));
+        l.add(new Scenario("paralyze-pays-for-buffed-evasive-creature", "AI pays {4} to free a counter-grown creature made unblockable by an aura", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.richMana();
+                    final Card bears = c.bf("Grizzly Bears", c.ai);
+                    c.counters(bears, CounterEnumType.P1P1, 1);
+                    c.bf("Aqueous Form", c.ai).attachToEntity(bears, null, true);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && c.wouldPayParalyze(bears) ? null
+                            : "AI declined to spend four mana on a counter-grown creature with unblockable evasion";
+                }));
+        l.add(new Scenario("paralyze-preserves-spare-mana", "AI keeps four mana available instead of spending it to untap a modest evasion creature", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.bf("Plains", 4, c.ai);
+                    final Card bears = c.bf("Grizzly Bears", c.ai);
+                    c.counters(bears, CounterEnumType.P1P1, 1);
+                    c.bf("Aqueous Form", c.ai).attachToEntity(bears, null, true);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Grizzly Bears".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && !c.wouldPayParalyze(bears) ? null
+                            : "AI spent all available mana to untap a creature that was not valuable enough to justify it";
+                }));
+        l.add(new Scenario("paralyze-does-not-pay-through-stun-counter", "AI does not pay {4} when a stun counter would absorb the untap", Fid.EXACT, "UPKEEP", true,
+                c -> {
+                    c.richMana();
+                    final Card bears = c.bf("Baneslayer Angel", c.ai);
+                    c.counters(bears, CounterEnumType.STUN, 1);
+                    bears.setTapped(true);
+                },
+                c -> {
+                    final Card bears = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(card -> "Baneslayer Angel".equals(card.getName())).findFirst().orElse(null);
+                    return bears != null && !c.wouldPayParalyze(bears) ? null
+                            : "AI paid for an untap that would only remove a stun counter";
                 }));
         l.add(aimed("7477", "burn is aimed at a creature that is not protected by Crystal Barricade", Fid.EXACT, M1, true,
                 "Lightning Bolt", "Crystal Barricade",

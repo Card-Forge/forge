@@ -186,25 +186,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return knownOriginCanPlayAI(aiPlayer, sa);
     }
 
-    /** Whether a spell from this card can currently be paid for, including keyword alternative costs such as Evoke. */
-    private static boolean canCastCardNow(final Player ai, final Card card) {
-        if (card == null) {
-            return false;
-        }
-        // Keyword alternative costs are materialized as spell abilities on the card itself. Read them directly:
-        // getAllPossibleAbilities may filter an ability whose ordinary casting restriction says "from hand".
-        for (final SpellAbility candidate : card.getSpellAbilities()) {
-            if (!candidate.isSpell()) {
-                continue;
-            }
-            candidate.setActivatingPlayer(ai);
-            if (ComputerUtilMana.canPayManaCost(candidate, ai, 0, false)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * <p>
      * changeZonePlayDrawbackAI.
