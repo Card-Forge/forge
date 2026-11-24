@@ -4,6 +4,6 @@ Types:Creature Zombie
 PT:1/1
 S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 A:AB$ PutCounter | Cost$ Sac<1/Creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AristocratCounters | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:AIPreference:SacCost$Creature.Other
+SVar:AIPreference:SacCost$Creature.Other+token,Creature.Other+cmcLE2
 DeckHas:Ability$Counters
 Oracle:Carrion Feeder can't block.\nSacrifice a creature: Put a +1/+1 counter on Carrion Feeder.

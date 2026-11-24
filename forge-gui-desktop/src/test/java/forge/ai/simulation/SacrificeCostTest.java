@@ -80,4 +80,24 @@ public class SacrificeCostTest extends AITest {
         AssertJUnit.assertFalse(ActivationGuard.sacrificesNeedMoreCards(ai, tutor, tutor.getPayCosts()));
         AssertJUnit.assertTrue(decidesDifferentCardsForEveryPart());
     }
+
+    @Test
+    public void outletExclusionAlsoRetainsEarlierSacrificePayments() {
+        setUp("Grixis Grimblade", "Raging Goblin", "Phyrexian Obliterator");
+        // Combine the outlet hint with overlapping sacrifice cost parts.
+        tutor.getMapParams().put("AILogic", "AristocratCounters");
+        final AiCostDecision decision = new AiCostDecision(ai, tutor, false);
+        final Set<Card> chosen = new HashSet<>();
+        for (final CostPart part : tutor.getPayCosts().getCostParts()) {
+            if (part instanceof CostSacrifice) {
+                final PaymentDecision pay = decision.visit((CostSacrifice) part);
+                AssertJUnit.assertNotNull("a different creature can pay each part", pay);
+                for (final Card card : pay.cards) {
+                    AssertJUnit.assertFalse("the outlet must survive its own payment", card == tutor.getHostCard());
+                    AssertJUnit.assertTrue("earlier payments remain excluded", chosen.add(card));
+                }
+            }
+        }
+        AssertJUnit.assertEquals(3, chosen.size());
+    }
 }

@@ -22,6 +22,7 @@ import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.ai.simulation.ElfLoop;
 import forge.ai.simulation.RampPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -80,6 +81,7 @@ import java.util.stream.Collectors;
  * @version $Id$
  */
 public class ComputerUtil {
+    private static final double DEVOUR_SACRIFICE_VALUE_FACTOR = 0.8;
 
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
@@ -370,6 +372,16 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) {
+            if (sa != null && sa.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
+                final CardCollection rawThreatenedList = CardLists.filter(typeList,
+                        c -> predictThreatenedObjects(c.getController(), null, true).contains(c)
+                );
+                if (!rawThreatenedList.isEmpty()) {
+                    CardLists.shuffle(rawThreatenedList);
+                    return rawThreatenedList.getFirst();
+                }
+            }
+
             // search for permanents with SacMe. priority 1 is the lowest, priority 5 the highest
             for (int ip = 0; ip < 6; ip++) {
                 final int priority = 6 - ip;
@@ -949,56 +961,25 @@ public class ComputerUtil {
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && (source.isKeyword(Keyword.DEVOUR) || source.isKeyword(Keyword.EXPLOIT))) {
-            if (source.isKeyword(Keyword.EXPLOIT)) {
-                for (Trigger t : host.getTriggers()) {
-                    if (t.getMode() == TriggerType.Exploited) {
-                        final SpellAbility exSA = t.ensureAbility().copy(ai);
+        if (isOptional && source.isKeyword(Keyword.DEVOUR)) {
+            return chooseDevourSacrifices(source, remaining, ai, amount, considerSacThreshold);
+        }
+        if (isOptional && source.isKeyword(Keyword.EXPLOIT)) {
+            for (Trigger t : host.getTriggers()) {
+                if (t.getMode() == TriggerType.Exploited) {
+                    final SpellAbility exSA = t.ensureAbility().copy(ai);
 
-                        exSA.setTrigger(t);
+                    exSA.setTrigger(t);
 
-                        // Run non-mandatory trigger.
-                        // These checks only work if the Executing SpellAbility is an Ability_Sub.
-                        if (exSA instanceof AbilitySub && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
-                            // AI would not run this trigger if given the chance
-                            return sacrificed;
-                        }
+                    // Run non-mandatory trigger.
+                    // These checks only work if the Executing SpellAbility is an Ability_Sub.
+                    if (exSA instanceof AbilitySub && !SpellApiToAi.Converter.get(exSA).doTrigger(ai, exSA, false)) {
+                        // AI would not run this trigger if given the chance
+                        return sacrificed;
                     }
                 }
             }
-            remaining = CardLists.filter(remaining, c -> {
-                int sacThreshold = 190;
-
-                String logic = source.getParamOrDefault("AILogic", "");
-                if (logic.startsWith("SacForDamage")) {
-                    final int damageAmt = logic.contains("cmc") ? c.getManaCost().getCMC() : c.getNetPower();
-                    if (damageAmt <= 0) {
-                        return false;
-                    } else if (damageAmt >= ai.getOpponentsSmallestLifeTotal()) {
-                        return true;
-                    } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
-                            && damageAmt * 2 >= ai.getOpponentsSmallestLifeTotal()) {
-                        return true; // TODO: generalize this for any type and actually make the AI prefer giants?
-                    }
-                }
-
-                if ("DesecrationDemon".equals(logic)) {
-                    sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
-                } else if (considerSacThreshold != -1) {
-                    sacThreshold = considerSacThreshold;
-                }
-
-                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold
-                        || source.isKeyword(Keyword.DEVOUR) && forge.ai.simulation.ElfLoop.devourAll(ai, source.getHostCard())) {
-                    return true; // a Predator Dragon that kills this turn eats the whole board
-                }
-
-                if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                    return true;
-                }
-
-                return false;
-            });
+            remaining = filterOptionalSacrificeCandidates(source, remaining, ai, considerSacThreshold);
         }
 
         int max = Math.min(remaining.size(), amount);
@@ -1023,6 +1004,113 @@ public class ComputerUtil {
         }
 
         return sacrificed;
+    }
+
+    private static CardCollection chooseDevourSacrifices(final SpellAbility source, final CardCollection remaining,
+            final Player ai, final int amount, final int considerSacThreshold) {
+        final Card host = source.getHostCard();
+        final int devourAmount = getDevourAmount(source, host);
+        if (devourAmount > 0 && host.isCreature() && ElfLoop.devourAll(ai, host)) {
+            final CardCollection sacrificed = new CardCollection();
+            for (final Card card : remaining) {
+                if (sacrificed.size() >= amount) {
+                    break;
+                }
+                if (card.isCreature() && !card.equals(host)) {
+                    sacrificed.add(card);
+                }
+            }
+            return sacrificed;
+        }
+        final CardCollection candidates = filterOptionalSacrificeCandidates(source, remaining, ai, considerSacThreshold);
+        final CardCollection sacrificed = new CardCollection();
+
+        if (!host.isCreature() || candidates.isEmpty()) {
+            return sacrificed;
+        }
+
+        if (devourAmount <= 0) {
+            return sacrificed;
+        }
+
+        int currentScore = ComputerUtilCard.evaluateCreature(host, true, false);
+        final int max = Math.min(candidates.size(), amount);
+
+        for (int i = 0; i < max && !candidates.isEmpty(); ) {
+            final Card next = chooseCardToSacrifice(source, candidates, ai, false);
+            if (next == null || !next.isCreature()) {
+                break;
+            }
+
+            final int nextScore = evaluateDevourCreature(host, devourAmount * (i + 1));
+            final int sacrificedScore = ComputerUtilCard.evaluateCreature(next, true, false);
+            final int devourGain = nextScore - currentScore;
+            final double requiredGain = sacrificedScore * DEVOUR_SACRIFICE_VALUE_FACTOR;
+            if (devourGain < requiredGain) {
+                candidates.remove(next);
+                continue;
+            }
+
+            candidates.remove(next);
+            sacrificed.add(next);
+            currentScore = nextScore;
+            i++;
+        }
+
+        return sacrificed;
+    }
+
+    private static int evaluateDevourCreature(final Card host, final int addedCounters) {
+        final Card copy = CardCopyService.getLKICopy(host);
+        copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + addedCounters);
+        copy.setZone(host.getZone());
+        return ComputerUtilCard.evaluateCreature(copy, true, false);
+    }
+
+    private static int getDevourAmount(final SpellAbility source, final Card host) {
+        if (source != null && source.getKeyword() != null && source.getKeyword().getKeyword() == Keyword.DEVOUR) {
+            final int amount = source.getKeyword().getAmount();
+            if (amount > 0) {
+                return amount;
+            }
+        }
+        return host.getKeywordMagnitude(Keyword.DEVOUR);
+    }
+
+    private static CardCollection filterOptionalSacrificeCandidates(final SpellAbility source, final CardCollection remaining,
+            final Player ai, final int considerSacThreshold) {
+        return CardLists.filter(remaining, c -> {
+            int sacThreshold = 190;
+
+            String logic = source == null ? "" : source.getParamOrDefault("AILogic", "");
+            if (logic.startsWith("SacForDamage")) {
+                final int damageAmt = logic.contains("cmc") ? c.getManaCost().getCMC() : c.getNetPower();
+                if (damageAmt <= 0) {
+                    return false;
+                } else if (damageAmt >= ai.getOpponentsSmallestLifeTotal()) {
+                    return true;
+                } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
+                        && damageAmt * 2 >= ai.getOpponentsSmallestLifeTotal()) {
+                    return true; // TODO: generalize this for any type and actually make the AI prefer giants?
+                }
+            }
+
+            if ("DesecrationDemon".equals(logic)) {
+                sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
+            } else if (considerSacThreshold != -1) {
+                sacThreshold = considerSacThreshold;
+            }
+
+            if (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) < sacThreshold)) {
+                return true;
+            }
+
+            if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                return true;
+            }
+
+            return false;
+        });
     }
 
     // Precondition it wants: remaining are reverse-sorted by CMC
@@ -1061,7 +1149,10 @@ public class ComputerUtil {
             c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.LANDS));
         }
         else {
-            c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
+            c = choosePreferredSacrificeTypePermanent(ai, source, remaining);
+            if (c == null) {
+                c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
+            }
         }
 
         if (c != null && c.isEnchanted()) {
@@ -1073,6 +1164,49 @@ public class ComputerUtil {
             }
         }
         return c;
+    }
+
+    private static Card choosePreferredSacrificeTypePermanent(final Player ai, final SpellAbility source,
+            final CardCollection remaining) {
+        if (source == null || !"DeckMostProminentType".equals(source.getParam("AIPermanentSacPreference"))) {
+            return null;
+        }
+
+        final EnumSet<CardType.CoreType> validTypes = EnumSet.noneOf(CardType.CoreType.class);
+        final CardCollection nonlandTokens = new CardCollection();
+        for (Card card : remaining) {
+            validTypes.addAll(card.getType().getCoreTypes());
+            if (card.isToken() && !card.isLand()) {
+                nonlandTokens.add(card);
+            }
+        }
+
+        validTypes.remove(CardType.CoreType.Land);
+        if (validTypes.isEmpty()) {
+            return null;
+        }
+
+        CardType.CoreType preferredType = null;
+        if (!nonlandTokens.isEmpty()) {
+            preferredType = ComputerUtilCard.getMostProminentCardType(nonlandTokens, validTypes);
+        }
+        if (preferredType == null) {
+            preferredType = ComputerUtilCard.getMostProminentCardType(ai.getAllCards(), validTypes);
+        }
+
+        return chooseWorstPermanentWithSacrificeTypeBias(remaining, preferredType);
+    }
+
+    private static Card chooseWorstPermanentWithSacrificeTypeBias(final CardCollection remaining,
+            final CardType.CoreType preferredType) {
+        if (preferredType == null) {
+            return null;
+        }
+        return ComputerUtilCard.getWorstPermanentAI(remaining,
+                preferredType == CardType.CoreType.Enchantment,
+                false,
+                preferredType == CardType.CoreType.Artifact,
+                preferredType == CardType.CoreType.Creature);
     }
 
     public static boolean canRegenerate(Player ai, final Card card) {

@@ -521,7 +521,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // (a blue, black and red one for Demon's Herald) is chosen for each, and paying the first leaves the others
         // "paid" with a permanent that is already gone.
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, isEffect(), c, sacrificed);
+        final CardCollection exclude = new CardCollection(sacrificed);
+        if (ability.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
+            exclude.add(source);
+        }
+        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, isEffect(), c, exclude);
         if (list == null) {
             return null;
         }
