@@ -36,6 +36,11 @@ public class PermanentAi extends SpellAbilityAi {
             return false;
         }
 
+        // Temporary evaluation copies can inspect spells held for Main 2.
+        if (sa.isSpell() && ph.is(PhaseType.MAIN1, ai) && "True".equals(sa.getParam("AIIgnoreMain2Preference"))) {
+            return true;
+        }
+
         // Wait for Main2 if possible
         return !ph.is(PhaseType.MAIN1) || !ph.isPlayerTurn(ai) || sa.hasParam("WithoutManaCost") || ComputerUtil.castPermanentInMain1(ai, sa)
                 || paysOffForSpellInHand(ai, sa);
