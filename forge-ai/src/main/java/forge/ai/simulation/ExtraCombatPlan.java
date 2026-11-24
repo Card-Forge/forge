@@ -47,8 +47,67 @@ public final class ExtraCombatPlan {
                     sa = sa.getSubAbility();
                 }
             }
+            return damageEngine(c);
         } catch (final RuntimeException e) {
             return false;
+        }
+    }
+
+    private static boolean addsACombat(final Trigger t) {
+        SpellAbility sa = t.ensureAbility();
+        while (sa != null) {
+            if (sa.getApi() == ApiType.AddPhase && "Combat".equals(sa.getParam("ExtraPhase"))) {
+                return true;
+            }
+            sa = sa.getSubAbility();
+        }
+        return false;
+    }
+
+    /** Whether something in play deals damage to each creature that attacks (Caltrops). */
+    private static boolean pingsAttackers(final Card c) {
+        for (final Card other : c.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final Trigger t : other.getTriggers()) {
+                if (!"Attacks".equals(t.getParam("Mode"))) {
+                    continue;
+                }
+                for (SpellAbility sa = t.ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+                    if (sa.getApi() == ApiType.DealDamage && sa.getParamOrDefault("Defined", "").contains("TriggeredAttacker")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A creature whose combat damage adds a combat phase: The Incredible Hulk is dealt damage (by Caltrops, as it attacks),
+     * and Bumi, Unleashed deals it to a player (and only land creatures attack in the extra combat, so Bumi has to be one,
+     * Ashaya, Soul of the Wild makes it so).
+     */
+    private static boolean damageEngine(final Card c) {
+        for (final Trigger t : c.getTriggers()) {
+            final String mode = t.getParam("Mode");
+            if (!"DamageDone".equals(mode) && !"DamageDoneOnce".equals(mode) || !addsACombat(t)) {
+                continue;
+            }
+            if ("DamageDoneOnce".equals(mode) && "Card.Self".equals(t.getParam("ValidTarget"))) {
+                return pingsAttackers(c);
+            }
+            if ("DamageDone".equals(mode) && "Player".equals(t.getParam("ValidTarget"))) {
+                return c.isLand();
+            }
+        }
+        return false;
+    }
+
+    /** An engine that has to deal its damage to a player to add the combat. */
+    private static boolean mustConnect(final Card c) {
+        for (final Trigger t : c.getTriggers()) {
+            if ("DamageDone".equals(t.getParam("Mode")) && "Player".equals(t.getParam("ValidTarget")) && addsACombat(t)) {
+                return true;
+            }
         }
         return false;
     }
@@ -66,9 +125,13 @@ public final class ExtraCombatPlan {
 
     /** Whether no creature that can block the engine kills it (or takes it with deathtouch). */
     public static boolean safeToAttack(final Card engine, final Iterable<Card> blockers) {
+        final boolean connect = mustConnect(engine);
         for (final Card b : blockers) {
             if (!CombatUtil.canBlock(engine, b)) {
                 continue;
+            }
+            if (connect && (!engine.hasKeyword(forge.game.keyword.Keyword.TRAMPLE) || b.getNetToughness() >= engine.getNetPower())) {
+                return false; // blocked, nothing reaches the player: no combat is added
             }
             if (b.hasKeyword(forge.game.keyword.Keyword.DEATHTOUCH)
                     || ComputerUtilCombat.getDamageToKill(engine, false) <= b.getNetCombatDamage()) {

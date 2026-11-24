@@ -2175,6 +2175,48 @@ public class AiReportScenarioTest extends AITest {
                     final SpellAbility sa = c.tokenAbility("Estrid, the Masked");
                     return sa == null ? null : "used the Mask ability on " + c.target(sa);
                 }));
+        l.add(new Scenario("13029", "Conspicuous Snoop with Boggart Harbinger: the Harbinger is cast and puts Kiki-Jiki on top, not Goblin Trashmaster", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Swamp", 3, c.ai);
+                    c.bf("Conspicuous Snoop", c.ai);
+                    c.hand("Boggart Harbinger", c.ai);
+                    c.hand("Sling-Gang Lieutenant", c.ai);
+                    c.lib("Goblin Trashmaster", c.ai);
+                    c.lib("Kiki-Jiki, Mirror Breaker", c.ai);
+                    c.lib("Mountain", 5, c.ai);
+                },
+                c -> {
+                    final SpellAbility cast = c.playOf("Boggart Harbinger");
+                    if (cast == null) {
+                        return "the Harbinger was not cast, the AI did " + c.plays();
+                    }
+                    final Card harbinger = cast.getHostCard();
+                    final SpellAbility fetch = harbinger.getTriggers().get(0).ensureAbility().copy(c.ai);
+                    final CardCollection library = new CardCollection(c.ai.getCardsIn(ZoneType.Library));
+                    final Card chosen = forge.ai.ability.ChangeZoneAi.chooseCardToHiddenOriginChangeZone(ZoneType.Library,
+                            Arrays.asList(ZoneType.Library), fetch, new CardCollection(CardLists.getValidCards(library, "Card.Goblin", c.ai, harbinger, fetch)),
+                            c.ai, c.ai);
+                    return chosen != null && "Kiki-Jiki, Mirror Breaker".equals(chosen.getName()) ? null
+                            : "the Harbinger would put " + chosen + " on top";
+                }));
+        l.add(new Scenario("13029-kiki-on-top", "Conspicuous Snoop with Kiki-Jiki on top of the library: the Snoop copies itself, once for each Goblin the opponent's life takes", Fid.EXACT, M1, true,
+                c -> {
+                    c.bf("Swamp", 3, c.ai);
+                    c.bf("Conspicuous Snoop", c.ai);
+                    c.bf("Boggart Harbinger", c.ai);
+                    c.hand("Sling-Gang Lieutenant", c.ai);
+                    c.lib("Mountain", 5, c.ai);
+                    final Card kiki = c.lib("Kiki-Jiki, Mirror Breaker", c.ai);
+                    c.ai.getZone(ZoneType.Library).remove(kiki);
+                    c.ai.getZone(ZoneType.Library).add(kiki, 0);
+                    c.opp.setLife(10, null);
+                },
+                c -> {
+                    final SpellAbility sa = c.first();
+                    return sa != null && sa.getApi() == ApiType.CopyPermanent && sa.getHostCard() != null
+                            && "Conspicuous Snoop".equals(sa.getHostCard().getName()) ? null
+                            : "the AI's first play was " + sa + " from " + (sa == null ? null : sa.getHostCard());
+                }));
         return l;
     }
 

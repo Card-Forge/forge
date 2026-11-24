@@ -1645,6 +1645,20 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void theDamageEnginesAreRecognisedOnlyWhenTheyCanWork() {
+        elfDeckWith(0);
+        final Card bumi = addCardToZone("Bumi, Unleashed", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("Only land creatures attack in the extra combat, so Bumi is no engine alone"
+                + gameStateToString(game), forge.ai.simulation.ExtraCombatPlan.isEngine(bumi));
+        addCardToZone("Ashaya, Soul of the Wild", ai, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true); // applies Ashaya's static ability
+        AssertJUnit.assertTrue("With Ashaya Bumi is a land creature" + gameStateToString(game),
+                forge.ai.simulation.ExtraCombatPlan.isEngine(bumi));
+        AssertJUnit.assertTrue("Trample past a small blocker still connects",
+                forge.ai.simulation.ExtraCombatPlan.safeToAttack(bumi, new forge.game.card.CardCollection()));
+    }
+
+    @Test(timeOut = 120000)
     public void aWholeTurnWithAureliaAndTheHelmOfTheHostKillsTheOpponent() {
         elfDeckWith(0);
         addCards("Forest", 5, ai);
