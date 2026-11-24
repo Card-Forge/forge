@@ -264,6 +264,9 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (!mandatory && "SleeperAgent".equals(sa.getParam("AILogic"))) {
+            return lendToOpponent(ai, sa);
+        }
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -288,6 +291,29 @@ public class ControlGainAi extends SpellAbilityAi {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /**
+     * "When this enters, target opponent gains control of it" and it hurts its controller each turn (Sleeper Agent): the opponent gets a
+     * body, and takes the damage. That is a race the AI takes when it can survive the body: it has a creature that blocks it well, or
+     * it is not behind on life and has life to spare for a few hits. The card's own NeedsToPlay asked for a big creature of the AI
+     * and kept it out of every deck without one, burn decks included (#13048).
+     */
+    private static AiAbilityDecision lendToOpponent(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final PlayerCollection opponents = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        if (opponents.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+        final int power = host.getNetPower();
+        final int toughness = host.getNetToughness();
+        final boolean answer = ai.getCreaturesInPlay().anyMatch(c -> c.getNetToughness() > power || c.getNetPower() >= toughness);
+        final int opponentLife = opponents.stream().mapToInt(Player::getLife).min().orElse(0);
+        final boolean ahead = ai.getLife() > 3 * power && ai.getLife() >= opponentLife;
+        if (answer || ahead) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

@@ -495,6 +495,30 @@ public class TokenAi extends SpellAbilityAi {
         return false;
     }
 
+    /**
+     * A Treasure, a Clue or a Food for an opponent is worth about one mana or a card to them, and it costs the payer the mana of
+     * the price now: it is paid when the mana is not needed for anything the payer could cast this turn. Any other price (life,
+     * cards) is judged by the general rules.
+     */
+    private boolean paysToDenyNonCreatureToken(final Player payer, final Cost cost, final Card source, final SpellAbility sa) {
+        if (cost.getTotalMana() == null || cost.getCostParts().size() != 1) {
+            return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                    && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa);
+        }
+        final int price = cost.getTotalMana().getCMC();
+        final int available = ComputerUtilMana.getAvailableManaEstimate(payer);
+        if (price > available) {
+            return false;
+        }
+        int needed = 0;
+        for (final Card inHand : payer.getCardsIn(ZoneType.Hand)) {
+            if (!inHand.isLand() && inHand.getCMC() <= available) {
+                needed = Math.max(needed, inHand.getCMC());
+            }
+        }
+        return available - price >= needed;
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
@@ -584,8 +608,13 @@ public class TokenAi extends SpellAbilityAi {
             }
             final Card tokenCard = TokenAi.spawnToken(p, sa);
 
+            // Smothering Tithe: pay {2} or they get a Treasure. It is no creature, so the comparison of boards below says nothing
+            // about it, and the AI never paid
+            if (!tokenCard.isCreature()) {
+                return paysToDenyNonCreatureToken(payer, cost, source, sa);
+            }
             // Token would not survive
-            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+            if (tokenCard.getNetToughness() < 1) {
                 return false;
             }
             int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());

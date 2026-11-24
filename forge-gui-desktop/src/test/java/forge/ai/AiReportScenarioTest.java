@@ -327,8 +327,8 @@ public class AiReportScenarioTest extends AITest {
                 game.getStack().addAllTriggeredAbilitiesToStack();
                 if (game.getStack().isEmpty()) { return; }
                 final SpellAbility top = game.getStack().peekAbility();
-                // only an ability of the AI that actually resolves asks its controller for choices (a target, a card out of a hand, a payment)
-                if (ai.equals(top.getActivatingPlayer())) { decisions++; }
+                // only an ability of the AI that resolves, or one that lets it pay "unless", asks its controller for choices (a target, a card, a payment)
+                if (ai.equals(top.getActivatingPlayer()) || top.hasParam("UnlessCost")) { decisions++; }
                 trace.append(" [resolving ").append(top).append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
                 game.getStack().resolveStack();
                 game.getAction().checkStateEffects(true); // lethal damage kills, as it does between two priority passes
@@ -395,6 +395,22 @@ public class AiReportScenarioTest extends AITest {
                 c -> c.opp.getCardsIn(ZoneType.Exile).anyMatch(card -> expectedExiled.equals(card.getName()))
                         ? null : "Thought-Knot Seer exiled " + c.opp.getCardsIn(ZoneType.Exile) + " instead of " + expectedExiled
                         + "; remaining hand=" + c.opp.getCardsIn(ZoneType.Hand));
+    }
+
+    /**
+     * The AI draws a card and the trigger of Smothering Tithe is put on the stack. A scenario that has no trigger to answer proves
+     * nothing (no Treasure is made then either), so it says so instead of passing.
+     */
+    private static String drawIntoTithe(final Ctx c) {
+        c.ai.drawCards(1);
+        c.game.getTriggerHandler().runWaitingTriggers();
+        c.game.getStack().addAllTriggeredAbilitiesToStack();
+        return c.game.getStack().isEmpty() ? "setup: the Smothering Tithe trigger never reached the stack" : null;
+    }
+
+    private static boolean hasTreasure(final Ctx c) {
+        // the token is called "Treasure Token": its subtype is what says it is one
+        return c.opp.getCardsIn(ZoneType.Battlefield).anyMatch(k -> k.getType().hasSubtype("Treasure"));
     }
 
     /** The card is played and aimed at the wanted target. */
@@ -680,6 +696,47 @@ public class AiReportScenarioTest extends AITest {
                     final Player before = etb.getActivatingPlayer();
                     if (!ActivationGuard.evokeOnlyHitsManaDorks(c.ai, evoke)) { return "setup: the guard should refuse Solitude at a lone Noble Hierarch"; }
                     return etb.getActivatingPlayer() == before ? null : "the guard changed the activating player of the card's own ability";
+                }));
+        // #13046: the -1/-1 counters of Ifnir Deadlands (2BB, tap, sacrifice a Desert; sorcery speed), with the lands of the report
+        l.add(play("13046", "Ifnir Deadlands puts its counters on an annoying creature with 4 other lands and nothing to cast", Fid.EXACT, M1, true, "Ifnir Deadlands",
+                c -> { c.bf("Ifnir Deadlands", c.ai); c.bf("Swamp", 2, c.ai); c.bf("Eldrazi Temple", 2, c.ai); c.bf("Grizzly Bears", c.opp); }));
+        l.add(noPlay("13046-no-target", "control: Ifnir Deadlands is not sacrificed when they have no creature", Fid.EXACT, M1, true, "Ifnir Deadlands",
+                c -> { c.bf("Ifnir Deadlands", c.ai); c.bf("Swamp", 2, c.ai); c.bf("Eldrazi Temple", 2, c.ai); }));
+        // #13048: Sleeper Agent gives the opponent a 3/3 that hits them for 2 at each of their upkeeps
+        l.add(play("13048", "Sleeper Agent is cast by a deck with no creatures while the AI is not behind on life", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(noPlay("13048-behind", "control: Sleeper Agent is held at 5 life with nothing that blocks a 3/3", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(play("13048-answer", "Sleeper Agent is cast at 5 life when a Serra Angel holds the 3/3 off", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
+        l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));
+        l.add(noPlay("13049-one-energy", "control: Gonti's Machinations cannot be paid with one energy", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 1); c.ai.setLife(10, null); }));
+        // Smothering Tithe: whenever the AI draws, it may pay {2} or they get a Treasure; and a 3 mana counterspell is not the answer to that
+        l.add(new Scenario("tithe-pays", "the AI pays {2} for Smothering Tithe when the mana is not needed for anything in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? "the AI let them have a Treasure instead of paying {2}" : null;
+                }));
+        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana spell in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Phyrexian Rager", c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Phyrexian Rager";
+                }));
+        l.add(new Scenario("tithe-disallow", "Disallow is not cast at the trigger of Smothering Tithe when paying {2} is cheaper", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Island", 3, c.ai); c.hand("Disallow", c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    return c.plays("Disallow") ? "Disallow was cast at the Tithe trigger" + c.why("Disallow") : null;
                 }));
         l.add(new Scenario("4278", "Up the Beanstalk before the 5+ cost spell (should be the first play)", Fid.EXACT, M1, true,
                 c -> { c.bf("Forest", 10, c.ai); c.hand("Up the Beanstalk", c.ai); c.hand("Craterhoof Behemoth", c.ai); },
