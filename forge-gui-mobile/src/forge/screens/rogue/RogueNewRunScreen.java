@@ -54,7 +54,8 @@ public class RogueNewRunScreen extends RogueScreen {
     private final RogueButton back;
     private final RogueButton random;
     private final Details details;
-    private final List<RogueButton> dev = new ArrayList<>();
+    /** In dev mode only: opens the dev actions, so they take no row of their own. */
+    private final RogueButton devMenu;
 
     public RogueNewRunScreen() {
         super(null);
@@ -70,11 +71,16 @@ public class RogueNewRunScreen extends RogueScreen {
         back = add(new RogueButton(localizer.getMessage("lblBack"), null, RogueButton.State.NORMAL, Forge::back));
         random = add(new RogueButton(localizer.getMessage("lblRandom"), null, RogueButton.State.NORMAL, this::rollRandom));
         start.weight(130 / 80f).uprightWeight(1.7f);
-        if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
-            dev.add(add(new RogueButton(unlockAllText(), null, RogueButton.State.NORMAL, this::devToggleUnlockAll)));
-            dev.add(add(new RogueButton(localizer.getMessage("lblRogueDevNpcProgress"), null, RogueButton.State.NORMAL,
-                () -> Forge.openScreen(new RogueNpcProgressScreen()))));
-        }
+        devMenu = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)
+            ? add(new RogueButton("", "Menu", RogueButton.State.NORMAL, this::openDevMenu).weight(0.3f)) : null;
+    }
+
+    private void openDevMenu() {
+        List<RogueRunMenu.Item> items = List.of(new RogueRunMenu.Item(unlockAllText(), this::devToggleUnlockAll),
+            new RogueRunMenu.Item(Localizer.getInstance().getMessage("lblRogueDevNpcProgress"), () -> Forge.openScreen(new RogueNpcProgressScreen())));
+        // Upright the menu opens under its button at the top; the run menu places itself above the y it is given
+        float u = RogueLook.unit();
+        RogueRunMenu.show(items, devMenu.getBottom() + (items.size() * 31 + 18) * u);
     }
 
     private static String unlockAllText() {
@@ -86,7 +92,6 @@ public class RogueNewRunScreen extends RogueScreen {
             RogueMetaProgress progress = RogueMetaProgress.getInstance();
             progress.setDevUnlockAll(!progress.isDevUnlockAll());
             FThreads.invokeInEdtLater(() -> {
-                dev.get(0).setText(unlockAllText());
                 reloadRoster();
                 update();
             });
@@ -257,9 +262,6 @@ public class RogueNewRunScreen extends RogueScreen {
     @Override
     protected List<List<RogueButton>> buttonRows() {
         List<List<RogueButton>> rows = new ArrayList<>();
-        if (!dev.isEmpty()) {
-            rows.add(dev);
-        }
         rows.add(List.of(descensionButton, customRun));
         rows.add(List.of(start, back));
         return rows;
@@ -269,9 +271,11 @@ public class RogueNewRunScreen extends RogueScreen {
     protected List<RogueButton> wideRow() {
         back.weight(52 / 80f);
         descensionButton.weight(100 / 80f);
-        List<RogueButton> row = new ArrayList<>(List.of(back));
-        row.addAll(dev);
-        row.addAll(List.of(descensionButton, customRun, start));
+        List<RogueButton> row = new ArrayList<>();
+        if (devMenu != null) {
+            row.add(devMenu);
+        }
+        row.addAll(List.of(back, descensionButton, customRun, start));
         return row;
     }
 
@@ -286,6 +290,9 @@ public class RogueNewRunScreen extends RogueScreen {
             tabs.setBounds(262 * u, 8 * u, w - 274 * u, 22 * u);
             details.setBounds(264 * u, 34 * u, w - 278 * u, h - 44 * u);
         } else {
+            if (devMenu != null) {
+                devMenu.setBounds(w - 33 * u, 5 * u, 28 * u, 28 * u);
+            }
             previous.setBounds(5 * u, 234 * u, 40 * u, 26 * u);
             next.setBounds(w - 45 * u, 234 * u, 40 * u, 26 * u);
             random.setBounds(w / 2 - 45 * u, 234 * u, 90 * u, 26 * u);
