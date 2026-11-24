@@ -38,6 +38,11 @@ public final class RogueLook {
     public static final float CARD_RATIO = 1.395f;
 
     private static final Map<String, Texture> textures = new HashMap<>();
+    private static final TextureRegion INSET = new TextureRegion();
+    private static final int TRAIL_STEPS = 44;
+    private static final float[] TRAIL_X = new float[TRAIL_STEPS + 1];
+    private static final float[] TRAIL_Y = new float[TRAIL_STEPS + 1];
+    private static final float[] TRAIL_ALONG = new float[TRAIL_STEPS + 1];
     private static final Matrix4 scaled = new Matrix4();
     private static BitmapFont font;
     private static float zoom = 1;
@@ -111,6 +116,13 @@ public final class RogueLook {
         patch(g, "paper10Patch", x, y, w, h);
     }
 
+    /** Parchment with a gold double rule and corner diamonds, for a page's chief panel. */
+    public static void gilded(Graphics g, float x, float y, float w, float h) {
+        float inset = 7 * unit();
+        g.fillRect(PAPER, x + inset, y + inset, w - 2 * inset, h - 2 * inset);
+        patch(g, "paperGold10Patch", x, y, w, h);
+    }
+
     /** A pale inset on parchment with a thin ink edge. A chosen one is brighter and has a thick edge. */
     public static void tile(Graphics g, float x, float y, float w, float h, boolean chosen) {
         g.fillRect(chosen ? new Color(1f, 0.97f, 0.83f, 1f) : new Color(1f, 0.97f, 0.86f, 0.5f), x, y, w, h);
@@ -144,21 +156,29 @@ public final class RogueLook {
     /** A path on the map: straight, then a curve, then straight. Style 0 is faint dots, 1 dashes, 2 solid. */
     public static void trail(Graphics g, float x1, float y1, float x2, float y2, boolean sideways, int style, Color c) {
         float u = unit();
-        int steps = 44;
-        float px = x1, py = y1, travelled = 0;
+        int steps = TRAIL_STEPS;
+        float[] xs = TRAIL_X;
+        float[] ys = TRAIL_Y;
+        float[] along = TRAIL_ALONG;
+        xs[0] = x1;
+        ys[0] = y1;
         for (int i = 1; i <= steps; i++) {
             float t = i / (float) steps;
             float e = t < 0.2f ? 0 : t > 0.8f ? 1 : (t - 0.2f) / 0.6f;
             e = e * e * (3 - 2 * e);
-            float x = sideways ? x1 + (x2 - x1) * t : x1 + (x2 - x1) * e;
-            float y = sideways ? y1 + (y2 - y1) * e : y1 + (y2 - y1) * t;
-            travelled += (float) Math.hypot(x - px, y - py) / u;
-            boolean on = style == 2 || (style == 1 ? travelled % 7 < 4.6f : travelled % 5 < 1.6f);
+            xs[i] = sideways ? x1 + (x2 - x1) * t : x1 + (x2 - x1) * e;
+            ys[i] = sideways ? y1 + (y2 - y1) * e : y1 + (y2 - y1) * t;
+            along[i] = along[i - 1] + (float) Math.hypot(xs[i] - xs[i - 1], ys[i] - ys[i - 1]) / u;
+        }
+        float total = along[steps];
+        for (int i = 1; i <= steps; i++) {
+            // Each half is dashed from its own end, so trails sharing an end lay their dashes on top of each other
+            float mid = (along[i - 1] + along[i]) / 2;
+            float d = mid < total / 2 ? mid : total - mid;
+            boolean on = style == 2 || (style == 1 ? d % 7 < 4.6f : d % 5 < 1.6f);
             if (on) {
-                line(g, px, py, x, y, style == 2 ? 2.6f : style == 1 ? 1.8f : 1.2f, c);
+                line(g, xs[i - 1], ys[i - 1], xs[i], ys[i], style == 2 ? 2.6f : style == 1 ? 1.8f : 1.2f, c);
             }
-            px = x;
-            py = y;
         }
     }
 
@@ -223,9 +243,14 @@ public final class RogueLook {
         if (region == null) {
             return;
         }
+        // Half a texel in from each edge, so a sprite drawn between whole pixels never samples its atlas neighbour
+        float iu = Math.signum(region.getU2() - region.getU()) * 0.5f / region.getTexture().getWidth();
+        float iv = Math.signum(region.getV2() - region.getV()) * 0.5f / region.getTexture().getHeight();
+        INSET.setTexture(region.getTexture());
+        INSET.setRegion(region.getU() + iu, region.getV() + iv, region.getU2() - iu, region.getV2() - iv);
         float alpha = g.getBatch().getColor().a;
         g.getBatch().setColor(tint.r, tint.g, tint.b, tint.a * alpha);
-        g.drawImage(region, x, y, w, h);
+        g.drawImage(INSET, x, y, w, h);
         g.getBatch().setColor(1, 1, 1, alpha);
     }
 
@@ -278,10 +303,13 @@ public final class RogueLook {
         if (image == null) {
             return;
         }
+        // A clip outside an enclosing one fails, and drawing then would spill past the enclosing clip
+        if (!g.startClip(x, y, w, h)) {
+            return;
+        }
         if (alpha < 1) {
             g.setAlphaComposite(alpha);
         }
-        g.startClip(x, y, w, h);
         float ratio = image.getWidth() / image.getHeight();
         float w0 = Math.max(w, h * ratio);
         float h0 = w0 / ratio;

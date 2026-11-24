@@ -31,7 +31,6 @@ public class RogueTraitsScreen extends RogueScreen {
     private final RogueButton mapTab;
     private final RogueButton traits;
     private final RogueButton deck;
-    private final RogueButton codex;
 
     public RogueTraitsScreen() {
         super(() -> RogueController.get().flow().run());
@@ -42,8 +41,6 @@ public class RogueTraitsScreen extends RogueScreen {
         mapTab = add(new RogueButton(localizer.getMessage("lblRogueMap"), null, RogueButton.State.NORMAL, Forge::back));
         traits = add(new RogueButton(localizer.getMessage("lblRogueTraits"), null, RogueButton.State.SELECTED, null));
         deck = add(new RogueButton(localizer.getMessage("lblDeck"), null, RogueButton.State.NORMAL, RogueDeckEditor::openForRun));
-        codex = add(new RogueButton(localizer.getMessage("lblRogueCodex"), null, RogueButton.State.NORMAL,
-            () -> Forge.openScreen(new RogueCodexScreen())));
     }
 
     @Override
@@ -63,7 +60,7 @@ public class RogueTraitsScreen extends RogueScreen {
 
     @Override
     protected List<List<RogueButton>> buttonRows() {
-        return List.of(List.of(mapTab, traits, deck, codex));
+        return List.of(List.of(mapTab, traits, deck));
     }
 
     @Override

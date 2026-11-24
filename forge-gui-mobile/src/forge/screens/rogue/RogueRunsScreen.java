@@ -18,8 +18,9 @@ import java.util.List;
 
 /** The mode's home: the run in progress, if any, and a new run, with the tabs between runs. */
 public class RogueRunsScreen extends RogueScreen {
-    private static final Color BANNER_TEXT = RogueLook.PALE;
-    private static final Color BANNER_SOFT = new Color(0xc9b98fff);
+    private static final Color RULE = new Color(0xc9a03eff);
+    /** The cards fanned for a new run: the side ones are this much of the middle one's size. */
+    private static final float SIDE_CARD = 0.81f;
 
     private RogueRun run;
     private List<RogueDeck> roster = List.of();
@@ -34,7 +35,7 @@ public class RogueRunsScreen extends RogueScreen {
     public RogueRunsScreen() {
         super(null);
         Localizer localizer = Localizer.getInstance();
-        continueRun = add(new RogueButton(localizer.getMessage("lblRogueContinueRun"), null, RogueButton.State.MAIN, () -> RogueController.get().openMap()));
+        continueRun = add(new RogueButton(localizer.getMessage("lblRogueContinueRun"), null, RogueButton.State.GOLD, () -> RogueController.get().openMap()));
         viewDeck = add(new RogueButton(localizer.getMessage("lblViewDeck"), null, RogueButton.State.NORMAL,
             () -> FDeckViewer.show(run.getCurrentDeck())));
         startNewRun = add(new RogueButton(localizer.getMessage("lblRogueStartNewRun"), null, RogueButton.State.NORMAL,
@@ -96,7 +97,7 @@ public class RogueRunsScreen extends RogueScreen {
         if (run == null) {
             return 0;
         }
-        return Forge.isLandscapeMode() ? getHeight() - 41 * u : 316 * u;
+        return Forge.isLandscapeMode() ? getHeight() - 41 * u : 292 * u;
     }
 
     @Override
@@ -105,16 +106,30 @@ public class RogueRunsScreen extends RogueScreen {
         float ch = currentHeight();
         if (Forge.isLandscapeMode()) {
             float cw = run == null ? 0 : 363 * u;
-            float by = run == null ? h - 39 * u : 3 * u + ch - 42 * u;
-            float left = 3 * u + (360 * u - 216 * u) / 2;
-            continueRun.setBounds(left, by, 130 * u, 32 * u);
-            viewDeck.setBounds(left + 132 * u, by, 84 * u, 32 * u);
-            startNewRun.setBounds(cw + 10 * u, by, w - cw - 23 * u, 32 * u);
+            float by = run == null ? h - 43 * u : 3 * u + ch - 46 * u;
+            float left = cardX() + cardWidth(true) + 10 * u;
+            buttons(left, by, 363 * u - 17 * u - left);
+            startNewRun.setBounds(cw + 14 * u, by, w - cw - 31 * u, 32 * u);
         } else {
-            continueRun.setBounds(12 * u, 3 * u + ch - 42 * u, 160 * u, 32 * u);
-            viewDeck.setBounds(174 * u, 3 * u + ch - 42 * u, 84 * u, 32 * u);
-            startNewRun.setBounds(12 * u, h - 42 * u, w - 24 * u, 32 * u);
+            buttons(17 * u, 3 * u + ch - 46 * u, w - 34 * u);
+            startNewRun.setBounds(14 * u, h - 46 * u, w - 28 * u, 32 * u);
         }
+    }
+
+    /** Continue Run and View Deck share the width three to two; Continue Run stands a little taller. */
+    private void buttons(float x, float y, float w) {
+        float u = RogueLook.unit();
+        float cw = (w - 4 * u) * 0.6f;
+        continueRun.setBounds(x, y - 2 * u, cw, 36 * u);
+        viewDeck.setBounds(x + cw + 4 * u, y, w - cw - 4 * u, 32 * u);
+    }
+
+    private static float cardX() {
+        return 17 * RogueLook.unit();
+    }
+
+    private static float cardWidth(boolean wide) {
+        return (wide ? 118 : 104) * RogueLook.unit();
     }
 
     @Override
@@ -131,15 +146,32 @@ public class RogueRunsScreen extends RogueScreen {
         float nw = w - nx - 3 * u;
         float nh = startNewRun.getBottom() + 7 * u - ny;
         RogueLook.paper(g, nx, ny, nw, nh);
-        if (roster.size() >= 3) {
+        Localizer localizer = Localizer.getInstance();
+        float room = startNewRun.getTop() - 10 * u - ny - 50 * u;
+        // The fan spreads to about 2.3 middle cards wide, so a narrow panel caps its size too
+        float mw = roster.size() < 3 ? 0 : Math.min(Math.min(146 * u, room) / RogueLook.CARD_RATIO, (nw - 24 * u) / 2.3f);
+        float mh = mw * RogueLook.CARD_RATIO;
+        // The heading and the fan stay together, centred in the room above Start New Run
+        float hy = ny + (room - mh) / 2;
+        RogueLook.text(g, localizer.getMessage("lblRogueNewRun"), nx, hy + 12 * u, 1.3f, RogueLook.DEEP, nw, Align.center);
+        RogueLook.text(g, localizer.getMessage("lblRoguePickYourRogueCommander"), nx, hy + 30 * u, 0.85f, RogueLook.SOFT, nw, Align.center);
+        if (mw > 0) {
+            float top = hy + 50 * u;
+            float sw = mw * SIDE_CARD;
             float cx = nx + nw / 2;
-            float spread = Math.min(113 * u, nw / 2 - 10 * u);
-            RogueLook.card(g, commander(roster.get(2)), cx - spread, ny + 22 * u, 62 * u, 0.8f);
-            RogueLook.card(g, commander(roster.get(1)), cx + spread - 62 * u, ny + 22 * u, 62 * u, 0.8f);
-            RogueLook.card(g, commander(roster.get(0)), cx - 37 * u, ny + 10 * u, 74 * u, 1);
+            float sideTop = top + mh * 0.14f;
+            fanned(g, commander(roster.get(2)), cx - mw * 0.66f, sideTop, sw, 12);
+            fanned(g, commander(roster.get(1)), cx + mw * 0.66f, sideTop, sw, -12);
+            RogueLook.card(g, commander(roster.get(0)), cx - mw / 2, top, mw, 1);
         }
-        RogueLook.text(g, Localizer.getInstance().getMessage("lblRoguePickYourRogueCommander"), nx, startNewRun.getTop() - 16 * u,
-            1, RogueLook.INK, nw, Align.center);
+    }
+
+    /** A card of the fan, centred on cx and turned by degrees about its centre. */
+    private static void fanned(Graphics g, PaperCard card, float cx, float y, float w, float degrees) {
+        float h = w * RogueLook.CARD_RATIO;
+        g.startRotateTransform(cx, y + h / 2, degrees);
+        RogueLook.card(g, card, cx - w / 2, y, w, 1);
+        g.endTransform();
     }
 
     private static PaperCard commander(RogueDeck deck) {
@@ -150,19 +182,21 @@ public class RogueRunsScreen extends RogueScreen {
         float u = RogueLook.unit();
         Localizer localizer = Localizer.getInstance();
         float y = 3 * u;
-        RogueLook.patch(g, "TenPatchGold", 3 * u, y, w, h);
-        float cw = (wide ? 118 : 104) * u;
-        RogueLook.card(g, commander(run.getSelectedRogueDeck()), 14 * u, y + 12 * u, cw, 1);
-        float tx = 14 * u + cw + 10 * u;
-        float tw = w - cw - 34 * u;
-        RogueLook.text(g, localizer.getMessage("lblRogueCurrentRun"), tx, y + 10 * u, 1, BANNER_SOFT);
-        float ty = y + 24 * u;
-        ty += RogueLook.wrap(g, run.getCurrentCommanderName(), tx, ty, tw, 1.5f, BANNER_TEXT, Align.left) + 3 * u;
+        RogueLook.gilded(g, 3 * u, y, w, h);
+        float cw = cardWidth(wide);
+        RogueLook.card(g, commander(run.getSelectedRogueDeck()), cardX(), y + 15 * u, cw, 1);
+        float tx = cardX() + cw + 10 * u;
+        float tw = w - cw - 38 * u;
+        RogueLook.text(g, localizer.getMessage("lblRogueCurrentRun"), tx, y + 13 * u, 1, RogueLook.DEEP);
+        float ty = y + 27 * u;
+        ty += RogueLook.wrap(g, run.getCurrentCommanderName(), tx, ty, tw, 1.5f, RogueLook.INK, Align.left) + 3 * u;
         int level = run.getDescensionLevel();
         DescensionLevel descension = DescensionLevel.forLevel(level);
         String descensionText = level == 0 ? localizer.getMessage("lblOff")
             : descension == null ? localizer.getMessage("lblRogueLevel", level) : localizer.getMessage("lblRogueNamedLevel", level, descension.name);
-        ty += RogueLook.wrap(g, localizer.getMessage("lblRogueDescensionLevel", descensionText), tx, ty, tw, 1, BANNER_TEXT, Align.left) + 6 * u;
+        ty += RogueLook.wrap(g, localizer.getMessage("lblRogueDescensionLevel", descensionText), tx, ty, tw, 1, RogueLook.SOFT, Align.left) + 4 * u;
+        RogueLook.line(g, tx, ty, tx + tw, ty, 1.2f, RULE);
+        ty += 7 * u;
         String[] values = {run.getCurrentLife() + "/" + run.getMaxLife(), String.valueOf(run.getCurrentGold()),
             String.valueOf(run.getCurrentDeck().getMain().countAll()), String.valueOf(run.getRemovalCredits())};
         String[] labels = {localizer.getMessage("lblLife"), localizer.getMessage("lblRogueGold"), localizer.getMessage("lblCards"),
@@ -177,14 +211,14 @@ public class RogueRunsScreen extends RogueScreen {
                 case 2 -> RogueLook.item(g, "Deck", gx, gy, s);
                 default -> RogueLook.skin(g, FSkinImage.CARD_IMAGE, gx, gy, s);
             }
-            RogueLook.text(g, values[i], gx + 17 * u, gy, 1.1f, BANNER_TEXT);
-            RogueLook.text(g, labels[i], gx + 17 * u, gy + 12 * u, 0.8f, BANNER_SOFT);
+            RogueLook.text(g, values[i], gx + 17 * u, gy, 1.1f, RogueLook.INK);
+            RogueLook.text(g, labels[i], gx + 17 * u, gy + 12 * u, 0.8f, RogueLook.SOFT);
         }
-        float carryX = wide ? tx : 16 * u;
-        float carryY = wide ? ty + 56 * u : y + 166 * u;
+        float carryX = wide ? tx : cardX();
+        float carryY = wide ? ty + 56 * u : y + 170 * u;
         float carryW = (wide ? 30 : 44) * u;
         if (!wide) {
-            RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), carryX, carryY, 1, BANNER_SOFT);
+            RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), carryX, carryY, 1, RogueLook.DEEP);
             carryY += 15 * u;
         }
         for (int i = 0; i < run.getCarryCards().size(); i++) {

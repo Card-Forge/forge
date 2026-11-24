@@ -5,9 +5,9 @@ import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.toolbox.FDisplayObject;
 
-/** Adventure's wooden button. The main action is gold; a selected tab is pressed in. */
+/** Adventure's wooden button. The main action is gold, a page's chief action has adventure's gold frame, and a selected tab is pressed in. */
 public class RogueButton extends FDisplayObject {
-    public enum State { NORMAL, MAIN, DISABLED, SELECTED }
+    public enum State { NORMAL, MAIN, GOLD, DISABLED, SELECTED }
 
     private static final Color FACE = new Color(0x262335ff);
     private static final Color FACE_DISABLED = new Color(0x474747ff);
@@ -89,6 +89,7 @@ public class RogueButton extends FDisplayObject {
         g.fillRect(state == State.DISABLED ? FACE_DISABLED : FACE, 3 * u, 3 * u, w - 6 * u, h - 8 * u);
         String patch = switch (state) {
             case MAIN -> "unpressedgold10patch";
+            case GOLD -> "TenPatchGold";
             case DISABLED -> "unpressed-disable10Patch";
             case SELECTED -> "pressed10Patch";
             case NORMAL -> pressed ? "pressed10Patch" : "unpressed10patch";
@@ -110,7 +111,7 @@ public class RogueButton extends FDisplayObject {
         }
         if (hasText) {
             Color color = state == State.DISABLED ? TEXT_DISABLED
-                : state == State.MAIN || state == State.SELECTED ? RogueLook.GOLD : Color.WHITE;
+                : state == State.MAIN || state == State.GOLD || state == State.SELECTED ? RogueLook.GOLD : Color.WHITE;
             RogueLook.text(g, text, x + iconWidth, midY - 6.5f * k * u, k, color, 0, Align.left);
         }
     }

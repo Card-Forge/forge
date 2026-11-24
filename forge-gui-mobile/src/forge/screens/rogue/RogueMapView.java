@@ -100,11 +100,11 @@ public class RogueMapView extends FScrollPane {
     }
 
     private float rowStep() {
-        return (Forge.isLandscapeMode() ? 54 : 66) * RogueLook.unit();
+        return (Forge.isLandscapeMode() ? 60 : 76) * RogueLook.unit();
     }
 
     private float colStep() {
-        return (Forge.isLandscapeMode() ? 80 : 61) * RogueLook.unit();
+        return (Forge.isLandscapeMode() ? 80 : 67) * RogueLook.unit();
     }
 
     @Override
@@ -167,8 +167,9 @@ public class RogueMapView extends FScrollPane {
                 int style = walked ? 2 : way || live.contains(from.node) && live.contains(next) ? 1 : 0;
                 Color ink = walked || way ? RogueLook.INK
                     : style == 1 ? new Color(0.30f, 0.26f, 0.2f, 0.85f) : new Color(0.36f, 0.32f, 0.27f, 0.45f);
-                RogueLook.trail(g, from.getLeft() + from.getWidth() / 2, from.getTop() + from.getHeight() / 2,
-                    to.getLeft() + to.getWidth() / 2, to.getTop() + to.getHeight() / 2, false, style, ink);
+                // Edge to edge, so the bend falls between the tiles and every trail meets a tile at the middle of its edge
+                RogueLook.trail(g, from.getLeft() + from.getWidth() / 2, from.getTop(),
+                    to.getLeft() + to.getWidth() / 2, to.getTop() + to.getHeight(), false, style, ink);
             }
         }
     }
