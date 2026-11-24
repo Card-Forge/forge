@@ -280,17 +280,17 @@ public class RogueNewRunScreen extends RogueScreen {
         float u = RogueLook.unit();
         if (Forge.isLandscapeMode()) {
             // Random sits with the commanders it picks from, between the arrows
-            previous.setBounds(4 * u, 200 * u, 36 * u, 26 * u);
-            next.setBounds(210 * u, 200 * u, 36 * u, 26 * u);
-            random.setBounds(85 * u, 200 * u, 80 * u, 26 * u);
+            previous.setBounds(4 * u, 192 * u, 36 * u, 26 * u);
+            next.setBounds(210 * u, 192 * u, 36 * u, 26 * u);
+            random.setBounds(85 * u, 192 * u, 80 * u, 26 * u);
             tabs.setBounds(262 * u, 8 * u, w - 274 * u, 22 * u);
             details.setBounds(264 * u, 34 * u, w - 278 * u, h - 44 * u);
         } else {
-            previous.setBounds(5 * u, 237 * u, 40 * u, 26 * u);
-            next.setBounds(w - 45 * u, 237 * u, 40 * u, 26 * u);
-            random.setBounds(w / 2 - 45 * u, 237 * u, 90 * u, 26 * u);
-            tabs.setBounds(11 * u, 274 * u, w - 22 * u, 22 * u);
-            details.setBounds(15 * u, 300 * u, w - 30 * u, buttonsTop() - 310 * u);
+            previous.setBounds(5 * u, 234 * u, 40 * u, 26 * u);
+            next.setBounds(w - 45 * u, 234 * u, 40 * u, 26 * u);
+            random.setBounds(w / 2 - 45 * u, 234 * u, 90 * u, 26 * u);
+            tabs.setBounds(11 * u, 272 * u, w - 22 * u, 22 * u);
+            details.setBounds(15 * u, 298 * u, w - 30 * u, buttonsTop() - 308 * u);
         }
     }
 
@@ -305,15 +305,15 @@ public class RogueNewRunScreen extends RogueScreen {
         boolean wide = Forge.isLandscapeMode();
         if (wide) {
             g.startClip(0, 0, 250 * u, getHeight() - 36 * u);
-            drawCarousel(g, new float[]{60 * u, 5 * u, 130 * u}, new float[]{-50 * u, 40 * u, 95 * u}, new float[]{205 * u, 40 * u, 95 * u});
+            drawCarousel(g, new float[]{65 * u, 5 * u, 120 * u}, new float[]{-50 * u, 40 * u, 95 * u}, new float[]{205 * u, 40 * u, 95 * u});
             g.endClip();
-            dots(g, 125 * u, 192 * u);
+            dots(g, 125 * u, 181 * u);
             RogueLook.paper(g, 252 * u, 2 * u, getWidth() - 254 * u, getHeight() - 38 * u);
         } else {
-            drawCarousel(g, new float[]{getWidth() / 2 - 75 * u, 14 * u, 150 * u}, new float[]{-80 * u, 52 * u, 100 * u},
-                new float[]{getWidth() - 20 * u, 52 * u, 100 * u});
-            dots(g, getWidth() / 2, 229 * u);
-            RogueLook.paper(g, 3 * u, 268 * u, getWidth() - 6 * u, buttonsTop() - 270 * u);
+            drawCarousel(g, new float[]{getWidth() / 2 - 72 * u, 12 * u, 144 * u}, new float[]{-80 * u, 50 * u, 100 * u},
+                new float[]{getWidth() - 20 * u, 50 * u, 100 * u});
+            dots(g, getWidth() / 2, 224 * u);
+            RogueLook.paper(g, 3 * u, 266 * u, getWidth() - 6 * u, buttonsTop() - 268 * u);
         }
     }
 
