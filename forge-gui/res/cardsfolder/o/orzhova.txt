@@ -6,5 +6,5 @@ SVar:OrzhovaDeal:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefiel
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, for each opponent, exile up to one target creature card from that player's graveyard.
 SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True
 SVar:OneEach:PlayerCountOpponents$Amount
-SVar:AIRollPlanarDieParams:Mode$ Always
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Graveyard:Creature.OppCtrl,Creature.YouOwn
 Oracle:When you planeswalk away from Orzhova, each player returns all creature cards from their graveyard to the battlefield.\nWhenever chaos ensues, for each opponent, exile up to one target creature card from that player's graveyard.

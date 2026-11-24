@@ -8,9 +8,15 @@ import forge.ai.AITest;
 import forge.ai.ComputerUtilMana;
 import forge.ai.LobbyPlayerAi;
 import forge.game.Game;
+import forge.game.GameRules;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.Match;
+import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
@@ -45,6 +51,14 @@ public class RollPlanarDiceAiTest extends AITest {
         return plane;
     }
 
+    private SpellAbility roll(final int cost) {
+        final Card host = addCardToZone("Fractured Powerstone", ai, ZoneType.Command);
+        final SpellAbility roll = AbilityFactory.getAbility(
+                "ST$ RollPlanarDice | Cost$ " + cost + " | SpecialAction$ True", host);
+        roll.setActivatingPlayer(ai);
+        return roll;
+    }
+
     // planes without a hint
 
     @Test
@@ -53,13 +67,13 @@ public class RollPlanarDiceAiTest extends AITest {
         if (game.getPhaseHandler().getTurn() < 1) {
             throw new SkipException("the test game is at turn 0, the Reckless profile rolls from turn 1");
         }
-        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, plane(null)));
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane(null)));
     }
 
     @Test
     public void planeWithoutHintWaitsForMain2() {
         start("MAIN1");
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane(null)));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane(null)));
     }
 
     // planes with a hint
@@ -67,49 +81,68 @@ public class RollPlanarDiceAiTest extends AITest {
     @Test
     public void hintWithoutModeNeverRolls() {
         start("MAIN2");
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane("MinTurn$ 0")));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane("MinTurn$ 0")));
     }
 
     @Test
     public void modeNeverNeverRolls() {
         start("MAIN2");
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane("Mode$ Never | MinTurn$ 0")));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Never | MinTurn$ 0")));
     }
 
     @Test
     public void modeAlwaysRollsInMain2() {
         start("MAIN2");
-        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, plane("Mode$ Always | MinTurn$ 0")));
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Always | MinTurn$ 0")));
+    }
+
+    @Test
+    public void rogueCommanderHintsOverrideOnlyInRogueCommander() {
+        for (final GameType gameType : new GameType[] {GameType.Constructed, GameType.RogueCommander}) {
+            final GameRules rules = new GameRules(gameType);
+            final Match match = new Match(rules, initAndCreateGame().getMatch().getPlayers(), "Test");
+            game = match.createGame();
+            ai = game.getPlayers().get(1);
+            ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Reckless");
+            game.setAge(GameStage.Play);
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+            game.getPhaseHandler().onStackResolved();
+
+            final Card plane = plane("Mode$ Never | MinTurn$ 0");
+            plane.setSVar("AIRollPlanarDieParamsRogueCommander", "Mode$ Always | MinTurn$ 0");
+            AssertJUnit.assertEquals("Roll hints for " + gameType, gameType == GameType.RogueCommander,
+                    planarAi.willRollOnPlane(ai, roll(0), plane));
+        }
     }
 
     @Test
     public void modeAlwaysWaitsForMain2UnlessRollInMain1() {
         start("MAIN1");
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane("Mode$ Always | MinTurn$ 0")));
-        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, plane("Mode$ Always | MinTurn$ 0 | RollInMain1$ True")));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Always | MinTurn$ 0")));
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Always | MinTurn$ 0 | RollInMain1$ True")));
     }
 
     @Test
     public void minTurnInTheFutureHoldsTheRoll() {
         start("MAIN2");
         final int turn = game.getPhaseHandler().getTurn();
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane("Mode$ Always | MinTurn$ " + (turn + 1))));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Always | MinTurn$ " + (turn + 1))));
     }
 
     @Test
     public void malformedParameterIsSkippedNotThrown() {
         start("MAIN2");
         // "garbage" has no $: it used to throw an ArrayIndexOutOfBoundsException, which made the AI pass its whole priority
-        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, plane("Mode$ Always | garbage | MinTurn$ 0")));
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane("Mode$ Always | garbage | MinTurn$ 0")));
     }
 
     @Test
     public void cardsInHandLimitIsKept() {
         start("MAIN2");
         final String hint = "Mode$ Always | MinTurn$ 0 | CardsInHandLE$ 0";
-        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, plane(hint)));
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane(hint)));
         addCardToZone("Island", ai, ZoneType.Hand);
-        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, plane(hint)));
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(0), plane(hint)));
     }
 
     // the chance is decided once
@@ -132,7 +165,7 @@ public class RollPlanarDiceAiTest extends AITest {
     public void extraRollNeedsTheMana() {
         start("MAIN2");
         AssertJUnit.assertEquals(0, ComputerUtilMana.getAvailableManaEstimate(ai));
-        AssertJUnit.assertFalse(planarAi.hasSpareManaForExtraRoll(ai, 1));
+        AssertJUnit.assertFalse(ComputerUtilMana.canPayManaCost(roll(1), ai, 0, false));
     }
 
     @Test
@@ -141,19 +174,34 @@ public class RollPlanarDiceAiTest extends AITest {
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Plains", ai, ZoneType.Battlefield);
-        AssertJUnit.assertTrue(planarAi.hasSpareManaForExtraRoll(ai, 1));
+        AssertJUnit.assertTrue(planarAi.canSpendSurplusMana(ai, roll(1)));
         addCardToZone("Island", ai, ZoneType.Hand); // a land in hand wants no mana
-        AssertJUnit.assertTrue(planarAi.hasSpareManaForExtraRoll(ai, 1));
+        AssertJUnit.assertTrue(planarAi.canSpendSurplusMana(ai, roll(1)));
     }
 
     @Test
     public void extraRollIsNotWorthTheManaOfACastableSpell() {
-        start("MAIN2");
-        addCardToZone("Plains", ai, ZoneType.Battlefield);
+        start("MAIN1");
+        addCardToZone("Forest", ai, ZoneType.Battlefield);
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
-        AssertJUnit.assertFalse(planarAi.hasSpareManaForExtraRoll(ai, 1));
+        AssertJUnit.assertFalse(planarAi.canSpendSurplusMana(ai, roll(2)));
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(2),
+                plane("Mode$ Always | MinTurn$ 0 | RollInMain1$ True | MaxRollsPerTurn$ 9")));
+
+        start("MAIN2");
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        addCardToZone("Counterspell", ai, ZoneType.Hand);
+        final Card plane = plane("Mode$ Always | MinTurn$ 0 | MaxRollsPerTurn$ 9");
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane));
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(1), plane));
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(1), plane));
     }
 
     @Test
@@ -163,6 +211,6 @@ public class RollPlanarDiceAiTest extends AITest {
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Wurmcoil Engine", ai, ZoneType.Hand); // mana value 6
-        AssertJUnit.assertTrue(planarAi.hasSpareManaForExtraRoll(ai, 1));
+        AssertJUnit.assertTrue(planarAi.canSpendSurplusMana(ai, roll(1)));
     }
 }

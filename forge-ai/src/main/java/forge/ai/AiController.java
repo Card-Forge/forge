@@ -2504,6 +2504,17 @@ public class AiController {
             }
         }
 
+        List<SpellAbility> planarRolls = Lists.newArrayList();
+        if (game.getPhaseHandler().is(PhaseType.MAIN1, player) || game.getPhaseHandler().is(PhaseType.MAIN2, player)) {
+            saList.removeIf(sa -> {
+                if (sa.getApi() == ApiType.RollPlanarDice && sa.hasParam("SpecialAction")) {
+                    planarRolls.add(sa);
+                    return true;
+                }
+                return false;
+            });
+        }
+
         SpellAbility chosenSa;
         lastFlatMcResult = null;
         if (reactiveMode != null) {
@@ -2532,6 +2543,11 @@ public class AiController {
             }
         } else {
             chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+        }
+
+        if (chosenSa == null && !planarRolls.isEmpty()
+                && (lastFlatMcResult == null || !lastFlatMcResult.hold)) {
+            chosenSa = chooseSpellAbilityToPlayFromList(planarRolls, true);
         }
 
         if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {

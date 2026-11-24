@@ -6,5 +6,5 @@ SVar:TrigVesuvaCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | Controll
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, destroy target creature and all other creatures with the same name as that creature.
 SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DestroyOtherAll
 SVar:DestroyOtherAll:DB$ DestroyAll | ValidCards$ Targeted.sameName+Other
-SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.OppCtrl
 Oracle:Whenever a nontoken creature enters, its controller creates a token that's a copy of that creature.\nWhenever chaos ensues, destroy target creature and all other creatures with the same name as that creature.

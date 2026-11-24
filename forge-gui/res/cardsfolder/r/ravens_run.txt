@@ -3,8 +3,8 @@ ManaCost:no cost
 Types:Plane Shadowmoor
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Wither | Description$ All creatures have wither (They deal damage to creatures in the form of -1/-1 counters.)
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever chaos ensues, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetUnique$ True | CounterType$ M1M1 | SubAbility$ DBPutTwo
-SVar:DBPutTwo:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 2 | SubAbility$ DBPutThree
-SVar:DBPutThree:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 3
-SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetUnique$ True | CounterType$ M1M1 | IsCurse$ True | SubAbility$ DBPutTwo
+SVar:DBPutTwo:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 2 | IsCurse$ True | SubAbility$ DBPutThree
+SVar:DBPutThree:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 3 | IsCurse$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.OppCtrl:3 | RollInMain1$ True | MinTurn$ 1
 Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever chaos ensues, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
