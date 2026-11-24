@@ -2,16 +2,11 @@ package forge.ai.simulation;
 
 import static org.testng.Assert.fail;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Stream;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,37 +14,17 @@ import org.testng.annotations.Test;
 import forge.GuiDesktop;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.CardScriptNames;
 import forge.util.FileUtil;
 
 /** The shipped AI card lists must only name cards that exist, use known roles and not repeat the bracket combos. */
 public class AiCardListsDataTest {
-    private static final String NAME_PREFIX = "Name:";
-
     private Set<String> cardNames;
 
     @BeforeClass
     public void setUp() {
         GuiBase.setInterface(new GuiDesktop());
-        cardNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        try (Stream<Path> paths = Files.walk(Path.of(ForgeConstants.CARD_DATA_DIR))) {
-            paths.filter(p -> p.toString().endsWith(".txt")).forEach(this::readNames);
-        } catch (final IOException e) {
-            fail("Could not read card names from " + ForgeConstants.CARD_DATA_DIR, e);
-        }
-    }
-
-    private void readNames(final Path path) {
-        final List<String> faces = new ArrayList<>();
-        for (final String line : FileUtil.readFile(path.toString())) {
-            if (line.startsWith(NAME_PREFIX)) {
-                final String n = line.substring(NAME_PREFIX.length()).trim();
-                cardNames.add(n);
-                faces.add(n);
-            }
-        }
-        if (faces.size() > 1) {
-            cardNames.add(String.join(" // ", faces));
-        }
+        cardNames = CardScriptNames.names();
     }
 
     private static String strip(final String line) {

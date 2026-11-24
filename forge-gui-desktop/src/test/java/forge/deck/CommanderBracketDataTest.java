@@ -3,27 +3,20 @@ package forge.deck;
 import forge.GuiDesktop;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.CardScriptNames;
 import forge.util.FileUtil;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.stream.Stream;
 
 import static org.testng.Assert.fail;
 
 public class CommanderBracketDataTest {
-    private static final String NAME_PREFIX = "Name:";
-    private static final String FLAVOR_NAME_PREFIX = "FlavorName:";
-
     @BeforeClass
     public void setUp() {
         GuiBase.setInterface(new GuiDesktop());
@@ -31,7 +24,7 @@ public class CommanderBracketDataTest {
 
     @Test
     public void bracketCardNamesResolveInDatabase() {
-        final Set<String> cardNames = getCardDatabaseNames();
+        final Set<String> cardNames = CardScriptNames.namesWithFlavor();
         final Map<String, List<String>> unknownCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (final String filename : List.of(
@@ -46,34 +39,6 @@ public class CommanderBracketDataTest {
         if (!unknownCards.isEmpty()) {
             fail("Commander bracket list contains " + unknownCards.size()
                     + " unknown card name(s):\n" + formatUnknownCards(unknownCards));
-        }
-    }
-
-    private static Set<String> getCardDatabaseNames() {
-        final Set<String> cardNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        try (Stream<Path> paths = Files.walk(Path.of(ForgeConstants.CARD_DATA_DIR))) {
-            paths.filter(path -> path.toString().endsWith(".txt"))
-                    .forEach(path -> readCardName(path, cardNames));
-        } catch (final IOException e) {
-            fail("Could not read card database names from " + ForgeConstants.CARD_DATA_DIR, e);
-        }
-        return cardNames;
-    }
-
-    private static void readCardName(final Path path, final Set<String> cardNames) {
-        final List<String> faceNames = new ArrayList<>();
-        for (final String line : FileUtil.readFile(path.toString())) {
-            if (line.startsWith(NAME_PREFIX)) {
-                final String cardName = line.substring(NAME_PREFIX.length()).trim();
-                cardNames.add(cardName);
-                faceNames.add(cardName);
-            }
-            else if (line.contains(FLAVOR_NAME_PREFIX)) {
-                cardNames.add(line.substring(line.indexOf(FLAVOR_NAME_PREFIX) + FLAVOR_NAME_PREFIX.length()).trim());
-            }
-        }
-        if (faceNames.size() > 1) {
-            cardNames.add(String.join(" // ", faceNames));
         }
     }
 
