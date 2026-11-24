@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -46,9 +47,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge;
+import forge.adventure.scene.HudScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.UIScene;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.deck.Deck;
 import forge.game.card.CardView;
@@ -58,6 +63,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.toolbox.FOptionPane;
 import forge.util.ImageUtil;
 
 /**
@@ -90,6 +96,11 @@ public class ImageCache {
     // Track only loads requested by ImageCache; another AssetManager client may have queued
     // the same path, and this cache must not cancel a load it does not own.
     private final Set<String> ownedPendingCardTextures = new HashSet<>();
+    // Remember failed files for this application session to avoid retrying them.
+    private final Set<String> failedCardTexturePaths = new LinkedHashSet<>();
+    private boolean failedCardTextureWarningPosted;
+    private boolean failedCardTextureWarningShown;
+    private static final int MAX_FAILED_TEXTURE_NAMES_IN_DIALOG = 8;
     private int maxPendingCardTextures = Integer.MAX_VALUE;
     // Keep textures used by the previous and current render frames resident. The previous-frame
     // set matters because rendering is sequential: cards later in this frame have not yet been
@@ -104,6 +115,13 @@ public class ImageCache {
         }
         return imageCache;
     }
+    static boolean handleAssetLoadError(String fileName, Class<?> assetType, Throwable error) {
+        if (assetType != Texture.class || imageCache == null) {
+            return false;
+        }
+        return imageCache.handlePendingCardTextureFailure(fileName, error);
+    }
+
     private void initCache(int capacity) {
         //override maxCardCapacity
         maxCardCapacity = capacity;
@@ -203,6 +221,7 @@ public class ImageCache {
         if (!pendingCardTextures.isEmpty()) {
             pumpLoaderOncePerFrame();
         }
+        notifyFailedCardTextureWarningIfReady();
         // Release textures that have not been used in either of the preceding two frames.
         unloadCardTextures(false);
     }
@@ -538,6 +557,102 @@ public class ImageCache {
                 ownedPendingCardTextures.remove(fileName);
             }
         }
+        notifyFailedCardTextureWarningIfReady();
+    }
+
+    /** Consume a failed card/token texture load and release its pending-load slot. */
+    private boolean handlePendingCardTextureFailure(String fileName, Throwable error) {
+        if (StringUtils.isEmpty(fileName)
+                || (!pendingCardTextures.containsKey(fileName)
+                && !ownedPendingCardTextures.contains(fileName))) {
+            return false;
+        }
+
+        pendingCardTextures.remove(fileName);
+        ownedPendingCardTextures.remove(fileName);
+        if (failedCardTexturePaths.add(fileName)) {
+            System.err.println("ImageCache: Failed to load cached card/token image: " + fileName);
+            if (error != null) {
+                error.printStackTrace(System.err);
+            }
+        }
+        if (Gdx.graphics != null) {
+            Gdx.graphics.requestRendering();
+        }
+        return true;
+    }
+
+    /** Show one consolidated warning after the tracked pending image loads have drained. */
+    private void notifyFailedCardTextureWarningIfReady() {
+        if (!isPlayerNotificationReady()
+                || failedCardTextureWarningShown || failedCardTextureWarningPosted
+                || failedCardTexturePaths.isEmpty() || !pendingCardTextures.isEmpty()) {
+            return;
+        }
+        failedCardTextureWarningPosted = true;
+        FThreads.invokeInEdtLater(() -> {
+            failedCardTextureWarningPosted = false;
+            if (!isPlayerNotificationReady()
+                    || failedCardTextureWarningShown || failedCardTexturePaths.isEmpty()
+                    || !pendingCardTextures.isEmpty()) {
+                return;
+            }
+            final StringBuilder message = new StringBuilder(
+                    Forge.getLocalizer().getMessage("lblImageLoadFailureIntro"));
+            int shown = 0;
+            for (String path : failedCardTexturePaths) {
+                if (shown >= MAX_FAILED_TEXTURE_NAMES_IN_DIALOG) {
+                    break;
+                }
+                message.append("\n - ").append(new File(path).getName());
+                shown++;
+            }
+            if (failedCardTexturePaths.size() > shown) {
+                message.append("\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureMore"));
+            }
+            message.append("\n\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureAdvice"));
+            if (showFailedCardTextureWarning(message.toString())) {
+                failedCardTextureWarningShown = true;
+            }
+        });
+        if (Gdx.graphics != null) {
+            Gdx.graphics.requestRendering();
+        }
+    }
+
+    /** Use the dialog system belonging to the active mobile UI. */
+    private static boolean showFailedCardTextureWarning(String message) {
+        final String title = Forge.getLocalizer().getMessage("lblImageLoadFailureTitle");
+        if (Forge.isMobileAdventureMode) {
+            final Scene scene = Forge.getCurrentScene();
+            if (scene instanceof UIScene uiScene) {
+                uiScene.showImageLoadFailureDialog(title, message);
+                return true;
+            }
+            if (scene instanceof HudScene hudScene) {
+                return hudScene.showImageLoadFailureDialog(title, message);
+            }
+        }
+        if (Forge.getCurrentScreen() != null) {
+            FOptionPane.showErrorDialog(message, title);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Wait until the active mode has a UI capable of displaying the warning.
+     */
+    private static boolean isPlayerNotificationReady() {
+        if (!Forge.afterDBloaded) {
+            return false;
+        }
+        if (!Forge.isMobileAdventureMode) {
+            return Forge.getCurrentScreen() != null;
+        }
+        final Scene scene = Forge.getCurrentScene();
+        return scene instanceof UIScene || scene instanceof HudScene
+                || Forge.getCurrentScreen() != null; // ForgeScene renders through the classic screen/overlay path.
     }
 
     /** Pump the AssetManager at most once per render frame and account for completed card loads. */
@@ -562,6 +677,9 @@ public class ImageCache {
             return null;
 
         final String fileName = file.getPath();
+        if (failedCardTexturePaths.contains(fileName)) {
+            return null;
+        }
         final AssetManager manager = Forge.getAssets().manager();
         Texture check = manager.get(fileName, Texture.class, false);
 

@@ -72,6 +72,11 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         hud.draw();
     }
 
+    /** Show the warning through the active Adventure stage, respecting its modal input state. */
+    public boolean showImageLoadFailureDialog(String title, String message) {
+        return dialogOwner().showImageLoadFailureDialog(title, message);
+    }
+
     /** MapStage can show a dialog over the world map too, such as an achievement */
     private GameStage dialogOwner() {
         return MapStage.getInstance().isDialogOnlyInput() ? MapStage.getInstance() : stage;

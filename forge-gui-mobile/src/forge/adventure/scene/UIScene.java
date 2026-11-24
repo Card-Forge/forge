@@ -122,6 +122,14 @@ public class UIScene extends Scene {
 
     }
 
+    /** Show an error message using the Adventure scene's own dialog layer. */
+    public void showImageLoadFailureDialog(String title, String message) {
+        Dialog errorDialog = createGenericDialog(title, message.replace("[", "[["),
+                Forge.getLocalizer().getMessage("lblOK"), null,
+                this::removeDialog, null, false, "", true);
+        showDialog(errorDialog);
+    }
+
     private void requestTextInput(String text, KeyBoardDialog.ScreenKeyboardFinished e) {
         KeyBoardDialog keyboardDialog=new KeyBoardDialog()
         {
