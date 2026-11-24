@@ -34,6 +34,8 @@ public final class RogueLook {
     public static final Color GOLD = new Color(0xffd75eff);
     public static final Color DEEP = new Color(0x8a5a12ff);
     public static final Color PAPER = new Color(0xe4d2a8ff);
+    /** The gold of the rules on gilded panels. */
+    public static final Color RULE = new Color(0xc9a03eff);
     private static final Color HALO = new Color(1f, 0.55f, 0.4f, 0f);
     public static final float CARD_RATIO = 1.395f;
 

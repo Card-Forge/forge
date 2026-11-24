@@ -1,6 +1,5 @@
 package forge.screens.rogue;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
@@ -18,7 +17,6 @@ import java.util.List;
 
 /** The mode's home: the run in progress, if any, and a new run, with the tabs between runs. */
 public class RogueRunsScreen extends RogueScreen {
-    private static final Color RULE = new Color(0xc9a03eff);
     /** The cards fanned for a new run: the side ones are this much of the middle one's size. */
     private static final float SIDE_CARD = 0.81f;
 
@@ -195,7 +193,7 @@ public class RogueRunsScreen extends RogueScreen {
         String descensionText = level == 0 ? localizer.getMessage("lblOff")
             : descension == null ? localizer.getMessage("lblRogueLevel", level) : localizer.getMessage("lblRogueNamedLevel", level, descension.name);
         ty += RogueLook.wrap(g, localizer.getMessage("lblRogueDescensionLevel", descensionText), tx, ty, tw, 1, RogueLook.SOFT, Align.left) + 4 * u;
-        RogueLook.line(g, tx, ty, tx + tw, ty, 1.2f, RULE);
+        RogueLook.line(g, tx, ty, tx + tw, ty, 1.2f, RogueLook.RULE);
         ty += 7 * u;
         String[] values = {run.getCurrentLife() + "/" + run.getMaxLife(), String.valueOf(run.getCurrentGold()),
             String.valueOf(run.getCurrentDeck().getMain().countAll()), String.valueOf(run.getRemovalCredits())};

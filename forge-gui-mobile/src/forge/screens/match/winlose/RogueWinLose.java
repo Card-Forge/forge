@@ -1,26 +1,30 @@
 package forge.screens.match.winlose;
 
+import forge.LobbyPlayer;
 import forge.game.GameView;
-import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueWinLoseController;
 import forge.gamemodes.rogue.flow.RogueFlow;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
+import forge.player.GamePlayerUtil;
 import forge.screens.match.MatchController;
 import forge.screens.rogue.RogueController;
+import forge.screens.rogue.RogueQuestion;
+import forge.screens.rogue.RogueSpoils;
+import forge.screens.rogue.RogueSpoilsScreen;
 import forge.toolbox.FButton;
 import forge.util.Localizer;
 import java.util.List;
 
 /**
- * Rogue Commander's result: the flow decides rewards on its own thread, then the title and the way on are set.
- * Next Game and New Match are not offered. Until the flow has finished, Quit returns to the reward question waiting.
+ * Rogue Commander's result: only whether the battle was won, and one way on. The match closes before the rewards are
+ * worked out, so the reward screens show over the trail, and they list each spoil in a ledger rather than in a message.
+ * Next Game and New Match are not offered.
  */
 public class RogueWinLose extends ControlWinLose {
-    private volatile RogueWinLoseController controller;
-    private volatile boolean failed;
+    private boolean left;
 
     public RogueWinLose(final ViewWinLose view, final GameView lastGame) {
         super(view, lastGame);
@@ -35,76 +39,44 @@ public class RogueWinLose extends ControlWinLose {
     @Override
     public void showRewards() {
         ViewWinLose view = getView();
-        RogueController.get().queue(() -> {
-            try {
-                controller = flow().matchOver(lastGame, new InlineView(view));
-            } catch (RuntimeException e) {
-                failed = true;
-                throw e;
-            } finally {
-                FThreads.invokeInEdtLater(this::showWayOn);
-            }
-        });
-    }
-
-    private void showWayOn() {
-        ViewWinLose view = getView();
-        if (controller == null) {
-            view.getBtnQuit().setEnabled(true);
-            return;
-        }
         Localizer localizer = Localizer.getInstance();
-        view.setTitle(flow().resultTitle(controller));
-        if (flow().offersEnding(controller)) {
-            boolean unlocked = RogueMetaProgress.getInstance().isEndlessModeUnlocked();
-            view.getBtnContinue().setText(localizer.getMessage("lblRogueCompleteRun"));
-            view.getBtnContinue().setVisible(true);
-            view.getBtnContinue().setEnabled(true);
-            view.getBtnQuit().setText(localizer.getMessage("lblRogueGoEndless"));
-            view.getBtnQuit().setEnabled(unlocked);
-            if (!unlocked) {
-                view.setHint(localizer.getMessage("lblRogueUnlockEndlessHint").replace("\n", " "));
-            }
-        } else {
-            view.getBtnQuit().setEnabled(true);
-        }
+        LobbyPlayer human = GamePlayerUtil.getGuiPlayer();
+        boolean won = lastGame.getOutcome() != null ? lastGame.getOutcome().isWinner(human) : lastGame.isMatchWonBy(human);
+        view.setTitle(localizer.getMessage(won ? "lblRogueBattleWon" : "lblRogueBattleLost"));
+        view.getBtnQuit().setText(localizer.getMessage("lblContinue"));
+        view.getBtnQuit().setEnabled(true);
         view.revalidate();
     }
 
     @Override
     public void actionOnContinue() {
-        if (controller != null && flow().offersEnding(controller)) {
-            leave(false);
-        }
     }
 
     @Override
     public void actionOnQuit() {
-        if (failed) {
-            failed = false;
-            MatchController.getHostedMatch().endCurrentGame();
-            getView().hide();
-            RogueController.backToRuns();
+        if (left) {
             return;
         }
-        if (controller == null) {
-            RogueController.get().reshowOpenQuestion();
-            return;
-        }
-        leave(flow().offersEnding(controller));
-    }
-
-    /** The match closes before the flow goes on, so whatever it shows next is not hidden under the match. */
-    private void leave(boolean endless) {
-        RogueWinLoseController result = controller;
-        controller = null;
+        left = true;
+        ViewWinLose view = getView();
         saveOptions();
         MatchController.getHostedMatch().endCurrentGame();
-        getView().hide();
-        RogueController.get().queue(() -> flow().resultLeft(result, endless));
+        view.hide();
+        RogueController.get().queue(() -> {
+            RogueSpoils.start();
+            RogueWinLoseController result = flow().matchOver(lastGame, new InlineView(view));
+            boolean ending = flow().offersEnding(result);
+            boolean endless = false;
+            if (ending || RogueSpoils.unseen()) {
+                String title = flow().resultTitle(result);
+                endless = RogueQuestion.ask(q -> new RogueSpoilsScreen(flow().run(), title, ending, q));
+            }
+            flow().resultLeft(result, endless);
+            RogueSpoils.start();
+        });
     }
 
-    /** Runs the reward script inline on the flow thread, where its questions can wait for their answers. */
+    /** Runs the reward script inline on the flow thread, gathering each message as a spoil for the reward screens. */
     private static final class InlineView implements IWinLoseView<FButton> {
         private final ViewWinLose view;
 
@@ -137,14 +109,14 @@ public class RogueWinLose extends ControlWinLose {
             runnable.run();
         }
 
+        /** The cards just picked, which the player has already seen. */
         @Override
         public void showCards(String title, List<PaperCard> cards) {
-            view.showCards(title, cards);
         }
 
         @Override
         public void showMessage(String message, String title, FSkinProp icon) {
-            view.showMessage(message, title, icon);
+            RogueSpoils.add(message, title, icon);
         }
     }
 }

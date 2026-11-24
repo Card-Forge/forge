@@ -1,23 +1,32 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 import forge.Graphics;
 import forge.deck.FDeckViewer;
 import forge.gamemodes.rogue.RogueRun;
 import forge.item.PaperCard;
+import forge.localinstance.skin.FSkinProp;
 import forge.util.Localizer;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-/** A card reward after a won match: up to a number of cards, or none. Reroll answers null. */
+/** A card reward after a won match: up to a number of cards, or none. Reroll answers null. The battle's other spoils head it. */
 public class RogueRewardScreen extends RogueScreen {
+    /** Sideways, the width of the ledger panel down the left, in units. */
+    static final float PANEL = 190;
+
     private final String title;
     private final List<PaperCard> cards;
     private final int maxSelections;
     private final int gold;
     private final Set<Integer> picked = new LinkedHashSet<>();
+    private final List<RogueSpoils.Spoil> spoils = RogueSpoils.take();
+    private final Map<FSkinProp, float[]> where = new EnumMap<>(FSkinProp.class);
     private final RogueCardGrid grid;
     private final RogueButton viewDeck;
     private final RogueButton reroll;
@@ -79,19 +88,67 @@ public class RogueRewardScreen extends RogueScreen {
     @Override
     protected void layoutBody(float x, float y, float w, float h) {
         float u = RogueLook.unit();
-        grid.setBounds(x, y + 45 * u, w, h - 45 * u);
+        float top = header(null) + 3 * u;
+        grid.setBounds(x, y + top, w, h - top);
+    }
+
+    /** Sideways the run bar and the buttons stand at the foot of the ledger panel, and the cards fill the rest. */
+    @Override
+    protected boolean layoutSideways(float width, float height, RogueButton menu, RogueRunBar bar) {
+        float u = RogueLook.unit();
+        float panel = PANEL * u;
+        float bx = 16 * u;
+        float bw = panel - 26 * u;
+        float okY = height - 46 * u;
+        ok.setBounds(bx, okY, bw, 30 * u);
+        float rowY = okY - 32 * u;
+        if (reroll == null) {
+            viewDeck.setBounds(bx, rowY, bw, 28 * u);
+        } else {
+            float half = (bw - 4 * u) / 2;
+            reroll.setBounds(bx, rowY, half, 28 * u);
+            viewDeck.setBounds(bx + half + 4 * u, rowY, half, 28 * u);
+        }
+        if (menu != null) {
+            menu.setBounds(panel - 34 * u, 14 * u, 24 * u, 25 * u);
+        }
+        if (bar != null) {
+            bar.setCompact(true);
+            bar.setVisible(true);
+            bar.setBounds(14 * u, rowY - 46 * u, panel - 22 * u, 40 * u);
+        }
+        grid.setBounds(panel + 7 * u, 31 * u, width - panel - 10 * u, height - 34 * u);
+        return true;
     }
 
     @Override
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
+        if (!Forge.isLandscapeMode()) {
+            header(g);
+            return;
+        }
         float u = RogueLook.unit();
-        float w = getWidth();
+        float panel = PANEL * u;
         Localizer localizer = Localizer.getInstance();
-        RogueLook.paper(g, 3 * u, 3 * u, w - 6 * u, 42 * u);
-        RogueLook.fit(g, localizer.getMessage("lblRogueVictoryReward", title), 10 * u, 8 * u, 1.35f, RogueLook.INK, w - 90 * u, Align.left);
-        RogueLook.fit(g, localizer.getMessage("lblRogueGoldTotal", gold), w - 80 * u, 10 * u, 1, RogueLook.SOFT, 70 * u, Align.right);
-        RogueLook.fit(g, localizer.getMessage("lblRogueCardRewardSelectionCount", maxSelections, picked.size()), 10 * u, 26 * u, 1,
-            RogueLook.SOFT, w - 20 * u, Align.center);
+        RogueSpoils.sidePanel(g, 3 * u, 3 * u, panel, getHeight() - 6 * u, localizer.getMessage("lblRogueVictoryReward", title),
+            null, spoils, where);
+        RogueLook.paper(g, panel + 7 * u, 3 * u, getWidth() - panel - 10 * u, 26 * u);
+        RogueLook.fit(g, selection(), panel + 7 * u, 10 * u, 1, RogueLook.SOFT, getWidth() - panel - 10 * u, Align.center);
+    }
+
+    private String selection() {
+        return Localizer.getInstance().getMessage("lblRogueCardRewardSelectionCount", maxSelections, picked.size());
+    }
+
+    private float header(Graphics g) {
+        Localizer localizer = Localizer.getInstance();
+        return RogueSpoils.uprightHeader(g, getWidth(), localizer.getMessage("lblRogueVictoryReward", title),
+            localizer.getMessage("lblRogueGoldTotal", gold), selection(), spoils, g == null ? null : where);
+    }
+
+    @Override
+    protected float[] coinSource(int count) {
+        return where.get(RogueSpoils.iconFor(count));
     }
 }

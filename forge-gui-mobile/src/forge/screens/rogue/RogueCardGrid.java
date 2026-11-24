@@ -41,14 +41,27 @@ public class RogueCardGrid extends RogueScrollPane {
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         float u = RogueLook.unit();
-        int cols = Forge.isLandscapeMode() ? 7 : 4;
         float gap = 7 * u;
+        int cols = Forge.isLandscapeMode() ? 7 : 4;
         float cw = (visibleWidth - 16 * u - (cols - 1) * gap) / cols;
+        if (Forge.isLandscapeMode()) {
+            // Fewer columns when the cards then come out larger and still fit the height, never smaller than seven across
+            for (int c = 6; c >= 3; c--) {
+                int rows = (tiles.size() + c - 1) / c;
+                float fit = Math.min((visibleWidth - 16 * u - (c - 1) * gap) / c,
+                    (visibleHeight - 7 * u - rows * 8 * u) / rows / RogueLook.CARD_RATIO);
+                if (fit > cw) {
+                    cw = fit;
+                    cols = c;
+                }
+            }
+        }
         float ch = cw * RogueLook.CARD_RATIO;
+        float left = (visibleWidth - cols * cw - (cols - 1) * gap) / 2;
         float bottom = 0;
         for (Tile tile : tiles) {
             float y = 7 * u + (tile.index / cols) * (ch + 8 * u);
-            tile.setBounds(8 * u + (tile.index % cols) * (cw + gap), y, cw, ch);
+            tile.setBounds(left + (tile.index % cols) * (cw + gap), y, cw, ch);
             bottom = y + ch;
         }
         if (!dealt && visibleHeight > 0) {

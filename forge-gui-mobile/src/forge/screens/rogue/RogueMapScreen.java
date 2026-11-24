@@ -308,6 +308,7 @@ public class RogueMapScreen extends RogueScreen {
     private void drawSideColumn(Graphics g, RogueRun run, float side) {
         float u = RogueLook.unit();
         float cy = getHeight() - 36 * u - SIDE_BAR * u;
+        RogueRunBar.shownElsewhere(run);
         RogueLook.paper(g, 2 * u, cy, side, SIDE_BAR * u);
         RogueLook.avatar(g, run.getSelectedRogueDeck().getAvatarIndex(), 9 * u, cy + 8 * u, 28 * u);
         RogueLook.fit(g, run.getCurrentCommanderName(), 43 * u, cy + 4 * u, 1.1f, RogueLook.INK, side - 50 * u, Align.left);

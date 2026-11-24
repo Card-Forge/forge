@@ -63,6 +63,19 @@ public abstract class RogueScreen extends FScreen {
 
     protected abstract void layoutBody(float x, float y, float w, float h);
 
+    /**
+     * Sideways, a screen that places its own buttons, the run menu's among them, does so here and returns true; it then
+     * lays out its body too, and may show the run bar, compact, where it likes. menu and bar are null outside a run.
+     */
+    protected boolean layoutSideways(float width, float height, RogueButton menu, RogueRunBar bar) {
+        return false;
+    }
+
+    /** Where the coins for a run bar count fly from when it rises, as x, y, w, h; null for the middle of the page. */
+    protected float[] coinSource(int count) {
+        return null;
+    }
+
     /** The run menu's items; a screen outside a run has none. */
     protected List<RogueRunMenu.Item> menuItems() {
         return List.of();
@@ -271,11 +284,17 @@ public abstract class RogueScreen extends FScreen {
     protected void doLayout(float startY, float width, float height) {
         float u = RogueLook.unit();
         if (Forge.isLandscapeMode()) {
+            if (menuButton != null) {
+                menuButton.setVisible(true);
+                runBar.setVisible(false);
+            }
+            if (layoutSideways(width, height, menuButton, runBar)) {
+                chromeTop = height;
+                return;
+            }
             List<RogueButton> row = new ArrayList<>();
             if (menuButton != null) {
                 row.add(menuButton);
-                menuButton.setVisible(true);
-                runBar.setVisible(false);
             }
             row.addAll(wideRow());
             float total = 0;
@@ -310,6 +329,7 @@ public abstract class RogueScreen extends FScreen {
         }
         if (runBar != null) {
             menuButton.setVisible(false);
+            runBar.setCompact(false);
             runBar.setVisible(true);
             runBar.setBounds(3 * u, top - 46 * u, width - 6 * u, 44 * u);
             top = runBar.getTop();
