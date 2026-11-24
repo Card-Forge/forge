@@ -50,9 +50,9 @@ public class AITest {
     protected Game initAndCreateGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
+        // one deck each: with a shared Deck, a key card list set for one player was the list of both (#13037)
+        players.add(new RegisteredPlayer(new Deck()).setPlayer(new LobbyPlayerAi("p2", null)));
+        players.add(new RegisteredPlayer(new Deck()).setPlayer(new LobbyPlayerAi("p1", null)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
         Game game = new Game(players, rules, match);

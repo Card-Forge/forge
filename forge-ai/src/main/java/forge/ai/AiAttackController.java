@@ -391,6 +391,28 @@ public class AiAttackController {
             if (ApiType.PumpAll.equals(sa.getApi()) || ApiType.PutCounterAll.equals(sa.getApi())) {
                 return true;
             }
+            // "another target attacking creature gets +X/+X" (Wildwood Mentor), "put two +1/+1 counters on another target
+            // attacking creature" (Goliath Truck): a targeted effect reaches this candidate when it is a legal target for it
+            if ((ApiType.Pump.equals(sa.getApi()) || ApiType.PutCounter.equals(sa.getApi())) && canBeTargetedOnceAttacking(attacker, trigger, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the candidate would be a legal target of a targeted ability of an attack trigger once it is attacking: the
+     * trigger is evaluated while the candidate is still at home, so the "attacking" part of the restriction is left out.
+     */
+    private static boolean canBeTargetedOnceAttacking(final Card attacker, final Trigger trigger, final SpellAbility sa) {
+        if (!sa.usesTargeting() || sa.getTargetRestrictions() == null || trigger.getHostCard() == null) {
+            return false;
+        }
+        final Card host = trigger.getHostCard();
+        for (final String valid : sa.getTargetRestrictions().getValidTgts()) {
+            if (attacker.isValid(valid.replace(".attacking+", ".").replace("+attacking", "").replace(".attacking", ""), host.getController(), host, sa)) {
+                return true;
+            }
         }
         return false;
     }

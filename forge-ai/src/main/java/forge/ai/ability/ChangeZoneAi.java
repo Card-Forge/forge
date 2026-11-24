@@ -1602,6 +1602,35 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    /**
+     * The card to take out of the hand of another player (Thought-Knot Seer): the first key card of THEIR deck list that is
+     * in the revealed cards, following the order of the list and skipping those already in play. The {@code player} that the
+     * chooser methods get is always the AI that decides, so its own list says nothing about the hand it looks at.
+     *
+     * @return null when the cards are the AI's own, the deck has no key card or none of them is among the cards
+     */
+    private static Card firstKeyCardOfHandOwner(final CardCollection fetchList, final Player decider) {
+        if (fetchList.isEmpty()) {
+            return null;
+        }
+        final Player owner = fetchList.getFirst().getOwner();
+        if (owner == null || owner.equals(decider) || owner.getRegisteredPlayer() == null
+                || owner.getRegisteredPlayer().getDeck() == null) {
+            return null;
+        }
+        final CardCollectionView inPlay = owner.getCardsIn(ZoneType.Battlefield);
+        for (final String keyName : owner.getRegisteredPlayer().getDeck().getKeyCards()) {
+            if (inPlay.anyMatch(CardPredicates.nameEquals(keyName))) {
+                continue; // already in play: the next one on the list
+            }
+            final CardCollection inHand = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
+            if (!inHand.isEmpty()) {
+                return inHand.getFirst();
+            }
+        }
+        return null;
+    }
+
     public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, Player player, final Player decider) {
         if (fetchList.isEmpty()) {
             return null;
@@ -1680,8 +1709,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 final CardCollection uncastable = CardLists.filter(fetchList, card -> !ComputerUtilAbility.canCastCardNow(decider, card));
                 return uncastable.isEmpty() ? null : ComputerUtilCard.getWorstAI(uncastable);
             } else if ("ThoughtKnotSeer".equals(logic)) {
-                // Prefer configured deck key cards; otherwise take the highest-mana-value nonland card.
-                return keycardFound != null ? keycardFound : ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
+                // The key cards of the deck whose hand it is, in the order of its list (#13037); without one of them in the
+                // hand, the highest-mana-value nonland card. The key cards of the AI's own deck say nothing about their hand.
+                final Card theirKeyCard = firstKeyCardOfHandOwner(fetchList, decider);
+                if (theirKeyCard != null) {
+                    return theirKeyCard;
+                }
+                return ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {

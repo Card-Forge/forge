@@ -2516,6 +2516,16 @@ public class AiController {
             }
         }
 
+        if (!mustRespond && game.getStack().isEmpty()
+                && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
+            // Nothing to answer in an upkeep or draw step, whoever's turn it is: a spell waits for the main phase, the attack or
+            // the end step, when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the player's draw
+            // step, #12930). This is checked here, for every way of choosing below: Monte Carlo only handles the AI's main
+            // phases and a response, so the upkeep and the draw step were always decided by the plain heuristics.
+            saList.removeIf(sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
+                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa));
+        }
+
         SpellAbility chosenSa;
         lastFlatMcResult = null;
         if (reactiveMode != null) {

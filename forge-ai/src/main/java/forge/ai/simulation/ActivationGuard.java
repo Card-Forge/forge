@@ -539,7 +539,7 @@ public final class ActivationGuard {
      * Evoking an elemental by exiling a card from the hand (Solitude, Fury) spends two cards for one enter-the-battlefield
      * removal: against a mana dork the AI gives up a good removal and a card for a card that only ramped them (#13026).
      * Judged on everything the removal could hit, so a creature of theirs that is worth the second card keeps the play
-     * open. Only creature removal is judged: Grief, Endurance and Subtlety do not aim at creatures.
+     * open. Only single-target creature removal is judged (Fury divides its damage and may kill several): Grief, Endurance and Subtlety do not aim at creatures.
      */
     public static boolean evokeOnlyHitsManaDorks(final Player ai, final SpellAbility sa) {
         if (sa == null || !sa.isSpell() || !sa.isEvoke() || sa.getPayCosts() == null || sa.getHostCard() == null) {
@@ -565,6 +565,9 @@ public final class ActivationGuard {
             }
             if (etb == null || !etb.usesTargeting()) {
                 continue;
+            }
+            if (etb.hasParam("DividedAsYouChoose") || etb.hasParam("TargetMax") && !"1".equals(etb.getParam("TargetMax"))) {
+                continue; // Fury: 4 damage divided can kill two mana dorks, a two-for-two. Only a single-target removal is judged here
             }
             // Targetability depends on the controller of this trigger: hexproof, shroud and protection
             // must not make an otherwise valuable creature look like a legal alternative to a mana dork.
