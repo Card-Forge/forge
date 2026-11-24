@@ -45,7 +45,134 @@ final class ArtifactLoopPlan {
             return top;
         }
         final SpellAbility scepter = scepter(ai, candidates, approve);
-        return scepter != null ? scepter : sieve(ai, candidates, approve);
+        if (scepter != null) {
+            return scepter;
+        }
+        final SpellAbility metal = metalworker(ai, candidates, approve);
+        if (metal != null) {
+            return metal;
+        }
+        final SpellAbility pili = piliPala(ai, candidates, approve);
+        return pili != null ? pili : sieve(ai, candidates, approve);
+    }
+
+    // ------------------------------------------------------------------------------------------------ Metalworker
+
+    private static int artifactsInHand(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            n += c.isArtifact() ? 1 : 0;
+        }
+        return n;
+    }
+
+    /**
+     * Metalworker with Staff of Domination: the Metalworker reveals the artifacts in hand for two mana each, the Staff
+     * untaps it for three and untaps itself for one, so a round pays 2N - 4 and wants three artifacts in hand.
+     */
+    private static SpellAbility metalworker(final Player ai, final List<SpellAbility> candidates,
+                                            final Predicate<SpellAbility> approve) {
+        final Card metal = LoopRunner.inPlay(ai, "Metalworker");
+        final Card staff = LoopRunner.inPlay(ai, "Staff of Domination");
+        final int goal = ManaLoopPlan.goal(ai);
+        if (metal == null || staff == null || goal <= 0 || ai.getManaPool().totalMana() >= goal || artifactsInHand(ai) < 3) {
+            return null;
+        }
+        if (!metal.isTapped()) {
+            final SpellAbility reveal = LoopRunner.activated(candidates, metal, ApiType.Reveal);
+            if (reveal != null && !RunawayLoop.exceeded(reveal, LIMIT)) {
+                reveal.setActivatingPlayer(ai);
+                reveal.resetTargets();
+                if (approve.test(reveal)) {
+                    VetoLog.note(ai, "metalworker-loop | reveals " + artifactsInHand(ai) + " artifacts, pool " + ai.getManaPool().totalMana()
+                            + " of " + goal);
+                    return reveal;
+                }
+            }
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || sa.getHostCard() != staff || !sa.isActivatedAbility() || sa.getApi() != ApiType.Untap
+                    || RunawayLoop.exceeded(sa, LIMIT)) {
+                continue;
+            }
+            final boolean targeted = sa.usesTargeting();
+            if (staff.isTapped() == targeted) {
+                continue; // tapped: the one-mana self untap; untapped: the three-mana untap aimed at the Metalworker
+            }
+            sa.setActivatingPlayer(ai);
+            sa.resetTargets();
+            if (targeted) {
+                if (!sa.canTarget(metal)) {
+                    continue;
+                }
+                sa.getTargets().add(metal);
+            }
+            if (approve.test(sa)) {
+                VetoLog.note(ai, "metalworker-loop | the Staff untaps " + (targeted ? "the Metalworker" : "itself"));
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Pili-Pala
+
+    /**
+     * Pili-Pala with Grand Architect: the Architect makes Pili-Pala blue, tapping it pays the Architect's two colourless
+     * for artifact abilities, and Pili-Pala's {2}{Q} untaps it for one mana of any colour: one more mana a round.
+     */
+    private static SpellAbility piliPala(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        final Card pili = LoopRunner.inPlay(ai, "Pili-Pala");
+        final Card architect = LoopRunner.inPlay(ai, "Grand Architect");
+        final int goal = ManaLoopPlan.goal(ai);
+        if (pili == null || architect == null || goal <= 0 || ai.getManaPool().totalMana() >= goal) {
+            return null;
+        }
+        if (!pili.getColor().hasBlue()) {
+            final SpellAbility paint = LoopRunner.activated(candidates, architect, ApiType.Animate);
+            if (paint == null || RunawayLoop.exceeded(paint, LIMIT)) {
+                return null;
+            }
+            paint.setActivatingPlayer(ai);
+            paint.resetTargets();
+            if (!paint.canTarget(pili)) {
+                return null;
+            }
+            paint.getTargets().add(pili);
+            if (approve.test(paint)) {
+                VetoLog.note(ai, "pili-loop | the Architect makes Pili-Pala blue");
+                return paint;
+            }
+            return null;
+        }
+        SpellAbility pay = null;
+        SpellAbility fromArchitect = null;
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || !sa.isManaAbility() || sa.getApi() != ApiType.Mana || RunawayLoop.exceeded(sa, LIMIT)) {
+                continue;
+            }
+            if (sa.getHostCard() == pili) {
+                pay = sa;
+            } else if (sa.getHostCard() == architect) {
+                fromArchitect = sa;
+            }
+        }
+        if (pili.isTapped() && pay != null && ai.getManaPool().totalMana() >= 2) {
+            pay.setActivatingPlayer(ai);
+            if (approve.test(pay)) {
+                VetoLog.note(ai, "pili-loop | Pili-Pala untaps for a mana, pool " + ai.getManaPool().totalMana() + " of " + goal);
+                return pay;
+            }
+        }
+        if (fromArchitect != null && !(pili.isTapped() && architect.isTapped())) {
+            fromArchitect.setActivatingPlayer(ai);
+            if (approve.test(fromArchitect)) {
+                VetoLog.note(ai, "pili-loop | a blue creature taps for the Architect's two");
+                return fromArchitect;
+            }
+        }
+        return null;
     }
 
     private static Player firstOpponent(final Player ai) {

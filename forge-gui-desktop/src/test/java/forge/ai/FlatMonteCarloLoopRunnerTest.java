@@ -1887,6 +1887,32 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void aWholeTurnWithMetalworkerAndStaffOfDominationPaysForAFireball() {
+        elfDeckWith(0, "Fireball", "Juggernaut", "Juggernaut", "Juggernaut");
+        addCards("Mountain", 1, ai);
+        final Card metal = addCardToZone("Metalworker", ai, ZoneType.Battlefield);
+        metal.setSickness(false);
+        addCardToZone("Staff of Domination", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("reveal three artifacts for six, untap with the Staff for three and one: two over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithPiliPalaAndGrandArchitectPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCards("Island", 1, ai);
+        addCardToZone("Pili-Pala", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Grand Architect", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Architect paints Pili-Pala, taps it for two, Pili-Pala pays them to untap for one mana\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
     public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
         elfDeckWith(0);
         addCards("Island", 3, ai);
