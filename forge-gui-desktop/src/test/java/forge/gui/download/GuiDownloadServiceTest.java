@@ -1,7 +1,6 @@
 package forge.gui.download;
 
 import forge.gui.GuiBase;
-import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IProgressBar;
