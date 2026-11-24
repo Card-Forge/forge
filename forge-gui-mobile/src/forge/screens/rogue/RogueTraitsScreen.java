@@ -76,6 +76,27 @@ public class RogueTraitsScreen extends RogueScreen {
         RogueLook.paper(g, 3 * u, 3 * u, getWidth() - 6 * u, list.getBottom() + 2 * u);
     }
 
+    /**
+     * Draws a trait as this page's rows do, from y, and returns the row's height: a tile, its mark, its name, then text.
+     * Measures only when g is null.
+     */
+    static float traitRow(Graphics g, RogueEffect effect, String text, float x, float y, float w) {
+        float u = RogueLook.unit();
+        float h = Math.max(36 * u, RogueLook.wrappedHeight(text, w - 44 * u, 1) + 21 * u);
+        if (g == null) {
+            return h;
+        }
+        if (effect instanceof WoundEffect) {
+            RogueLook.dashTile(g, x, y, w, h);
+        } else {
+            RogueLook.tile(g, x, y, w, h, false);
+        }
+        mark(g, effect, x + 19 * u, y + h / 2, 13 * u);
+        RogueLook.fit(g, name(effect), x + 38 * u, y + 2 * u, 1.15f, RogueLook.DEEP, w - 42 * u, Align.left);
+        RogueLook.wrap(g, text, x + 38 * u, y + 17 * u, w - 44 * u, 1, RogueLook.INK, Align.left);
+        return h;
+    }
+
     /** Draws the trait's mark centred on cx, cy. */
     static void mark(Graphics g, RogueEffect effect, float cx, float cy, float r) {
         float u = RogueLook.unit();
@@ -98,7 +119,7 @@ public class RogueTraitsScreen extends RogueScreen {
         }
     }
 
-    private static String name(RogueEffect effect) {
+    static String name(RogueEffect effect) {
         String card = effect.getEffectCardDisplayName();
         return card == null || card.isEmpty() ? effect.getDisplayName() : card;
     }

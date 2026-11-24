@@ -319,9 +319,14 @@ public abstract class RogueScreen extends FScreen {
         float y = top;
         for (List<RogueButton> buttons : rows) {
             float gap = 2 * u;
-            float w = (width - 6 * u - gap * (buttons.size() - 1)) / buttons.size();
+            float total = 0;
+            for (RogueButton b : buttons) {
+                total += b.getUprightWeight();
+            }
+            float k = (width - 6 * u - gap * (buttons.size() - 1)) / total;
             float x = 3 * u;
             for (RogueButton b : buttons) {
+                float w = b.getUprightWeight() * k;
                 b.setBounds(x, y, w, rowHeight);
                 x += w + gap;
             }

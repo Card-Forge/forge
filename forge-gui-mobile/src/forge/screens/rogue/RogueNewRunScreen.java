@@ -7,13 +7,13 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinImage;
-import forge.deck.FDeckViewer;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.CodexHelper.CodexState;
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.effect.CustomRunModification;
 import forge.gamemodes.rogue.effect.DescensionLevel;
+import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.flow.RogueStart;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
@@ -32,6 +32,7 @@ import java.util.Set;
 /** Choosing the commander, Descension level and custom run for a new run. */
 public class RogueNewRunScreen extends RogueScreen {
     private static final Color LOCKED_DOT = new Color(0.45f, 0.42f, 0.38f, 1);
+    private static final Color TAB_RULE = new Color(0.36f, 0.32f, 0.27f, 0.5f);
 
     private List<RogueDeck> roster = List.of();
     private int index;
@@ -46,7 +47,9 @@ public class RogueNewRunScreen extends RogueScreen {
     private final RogueButton next;
     private final RogueButton descensionButton;
     private final RogueButton customRun;
-    private final RogueButton startingDeck;
+    private final Tabs tabs;
+    /** Which tab the details show: the commander, its starting deck or the run's starting traits. */
+    private int tab;
     private final RogueButton start;
     private final RogueButton back;
     private final RogueButton random;
@@ -61,13 +64,12 @@ public class RogueNewRunScreen extends RogueScreen {
         descensionButton = add(new RogueButton("", null, RogueButton.State.NORMAL, this::openDescensionSheet));
         customRun = add(new RogueButton(localizer.getMessage("lblRogueCustomRun"), null, RogueButton.State.NORMAL,
             () -> Forge.openScreen(new RogueCustomRunScreen(this))));
-        startingDeck = add(new RogueButton(localizer.getMessage("lblRogueStartingDeck"), null, RogueButton.State.NORMAL,
-            () -> FDeckViewer.show(deck().getStartDeck())));
+        details = add(new Details());
+        tabs = add(new Tabs());
         start = add(new RogueButton(localizer.getMessage("lblRogueStartRun"), null, RogueButton.State.MAIN, this::begin));
         back = add(new RogueButton(localizer.getMessage("lblBack"), null, RogueButton.State.NORMAL, Forge::back));
         random = add(new RogueButton(localizer.getMessage("lblRandom"), null, RogueButton.State.NORMAL, this::rollRandom));
-        details = add(new Details());
-        start.weight(130 / 80f);
+        start.weight(130 / 80f).uprightWeight(1.7f);
         if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
             dev.add(add(new RogueButton(unlockAllText(), null, RogueButton.State.NORMAL, this::devToggleUnlockAll)));
             dev.add(add(new RogueButton(localizer.getMessage("lblRogueDevNpcProgress"), null, RogueButton.State.NORMAL,
@@ -243,7 +245,7 @@ public class RogueNewRunScreen extends RogueScreen {
             ? RogueButton.State.NORMAL : RogueButton.State.DISABLED);
         customRun.setState(!progress.isCustomRunsUnlocked() ? RogueButton.State.DISABLED
             : custom ? RogueButton.State.SELECTED : RogueButton.State.NORMAL);
-        startingDeck.setState(unlocked ? RogueButton.State.NORMAL : RogueButton.State.DISABLED);
+        details.revalidate();
         start.setState(selection().canBegin(progress) ? RogueButton.State.MAIN : RogueButton.State.DISABLED);
     }
 
@@ -258,21 +260,18 @@ public class RogueNewRunScreen extends RogueScreen {
         if (!dev.isEmpty()) {
             rows.add(dev);
         }
-        rows.add(List.of(descensionButton, customRun, startingDeck));
-        rows.add(List.of(start));
-        rows.add(List.of(back, random));
+        rows.add(List.of(descensionButton, customRun));
+        rows.add(List.of(start, back));
         return rows;
     }
 
     @Override
     protected List<RogueButton> wideRow() {
         back.weight(52 / 80f);
-        random.weight(66 / 80f);
         descensionButton.weight(100 / 80f);
-        startingDeck.weight(90 / 80f);
-        List<RogueButton> row = new ArrayList<>(List.of(back, random));
+        List<RogueButton> row = new ArrayList<>(List.of(back));
         row.addAll(dev);
-        row.addAll(List.of(descensionButton, customRun, startingDeck, start));
+        row.addAll(List.of(descensionButton, customRun, start));
         return row;
     }
 
@@ -280,13 +279,18 @@ public class RogueNewRunScreen extends RogueScreen {
     protected void layoutBody(float x, float y, float w, float h) {
         float u = RogueLook.unit();
         if (Forge.isLandscapeMode()) {
-            previous.setBounds(4 * u, 203 * u, 36 * u, 28 * u);
-            next.setBounds(210 * u, 203 * u, 36 * u, 28 * u);
-            details.setBounds(264 * u, 12 * u, w - 278 * u, h - 22 * u);
+            // Random sits with the commanders it picks from, between the arrows
+            previous.setBounds(4 * u, 200 * u, 36 * u, 26 * u);
+            next.setBounds(210 * u, 200 * u, 36 * u, 26 * u);
+            random.setBounds(85 * u, 200 * u, 80 * u, 26 * u);
+            tabs.setBounds(262 * u, 8 * u, w - 274 * u, 22 * u);
+            details.setBounds(264 * u, 34 * u, w - 278 * u, h - 44 * u);
         } else {
-            previous.setBounds(5 * u, 258 * u, 40 * u, 28 * u);
-            next.setBounds(w - 45 * u, 258 * u, 40 * u, 28 * u);
-            details.setBounds(15 * u, 299 * u, w - 30 * u, buttonsTop() - 309 * u);
+            previous.setBounds(5 * u, 237 * u, 40 * u, 26 * u);
+            next.setBounds(w - 45 * u, 237 * u, 40 * u, 26 * u);
+            random.setBounds(w / 2 - 45 * u, 237 * u, 90 * u, 26 * u);
+            tabs.setBounds(11 * u, 274 * u, w - 22 * u, 22 * u);
+            details.setBounds(15 * u, 300 * u, w - 30 * u, buttonsTop() - 310 * u);
         }
     }
 
@@ -301,15 +305,15 @@ public class RogueNewRunScreen extends RogueScreen {
         boolean wide = Forge.isLandscapeMode();
         if (wide) {
             g.startClip(0, 0, 250 * u, getHeight() - 36 * u);
-            drawCarousel(g, new float[]{54 * u, 5 * u, 142 * u}, new float[]{-50 * u, 46 * u, 100 * u}, new float[]{200 * u, 46 * u, 100 * u});
+            drawCarousel(g, new float[]{60 * u, 5 * u, 130 * u}, new float[]{-50 * u, 40 * u, 95 * u}, new float[]{205 * u, 40 * u, 95 * u});
             g.endClip();
-            dots(g, 125 * u, 215 * u);
+            dots(g, 125 * u, 192 * u);
             RogueLook.paper(g, 252 * u, 2 * u, getWidth() - 254 * u, getHeight() - 38 * u);
         } else {
-            drawCarousel(g, new float[]{getWidth() / 2 - 85 * u, 16 * u, 170 * u}, new float[]{-84 * u, 60 * u, 110 * u},
-                new float[]{getWidth() - 26 * u, 60 * u, 110 * u});
-            dots(g, getWidth() / 2, 270 * u);
-            RogueLook.paper(g, 3 * u, 290 * u, getWidth() - 6 * u, buttonsTop() - 292 * u);
+            drawCarousel(g, new float[]{getWidth() / 2 - 75 * u, 14 * u, 150 * u}, new float[]{-80 * u, 52 * u, 100 * u},
+                new float[]{getWidth() - 20 * u, 52 * u, 100 * u});
+            dots(g, getWidth() / 2, 229 * u);
+            RogueLook.paper(g, 3 * u, 268 * u, getWidth() - 6 * u, buttonsTop() - 270 * u);
         }
     }
 
@@ -388,8 +392,8 @@ public class RogueNewRunScreen extends RogueScreen {
         }
     }
 
-    /** Draws the commander's details from y; returns where they end. */
-    private float drawText(Graphics g, RogueDeck d, float x, float y, float w) {
+    /** Draws the commander's details from y; returns where they end. With room to spare the stats sit on bottom. */
+    private float drawText(Graphics g, RogueDeck d, float x, float y, float w, float bottom) {
         float u = RogueLook.unit();
         Localizer localizer = Localizer.getInstance();
         RogueMetaProgress progress = RogueMetaProgress.getInstance();
@@ -413,6 +417,7 @@ public class RogueNewRunScreen extends RogueScreen {
             return y;
         }
         y += RogueLook.wrap(g, d.getThemeDescription(), x, y, w, 1, RogueLook.TEAL, Align.left) + 8 * u;
+        y = Math.max(y, bottom - 35 * u);
         RogueLook.line(g, x, y, x + w, y, 0.8f, RogueLook.SOFT);
         y += 5 * u;
         String name = d.getCommanderCardName();
@@ -431,9 +436,118 @@ public class RogueNewRunScreen extends RogueScreen {
         return y + 30 * u;
     }
 
-    /** The commander's details, scrolling when the buttons leave too little room. */
+    private List<RogueEffect> startingTraits() {
+        return selection().startingTraits(RogueMetaProgress.getInstance());
+    }
+
+    /** The traits as the run's Traits page shows them, one under another from y; returns where they end. */
+    private static float traitRows(Graphics g, List<RogueEffect> list, float x, float y, float w) {
+        float u = RogueLook.unit();
+        for (RogueEffect trait : list) {
+            String text = RogueStart.startingTraitText(trait, RogueMetaProgress.getInstance());
+            y += RogueTraitsScreen.traitRow(g, trait, text, x, y, w) + 4 * u;
+        }
+        return y;
+    }
+
+
+    /** The starting deck by type, in columns; returns where it ends. A locked commander's deck stays hidden. */
+    private float drawDeck(Graphics g, RogueDeck d, float x, float y, float w) {
+        float u = RogueLook.unit();
+        Localizer localizer = Localizer.getInstance();
+        if (!d.isUnlocked()) {
+            return y + RogueLook.wrap(g, localizer.getMessage("lblRogueDeckLocked"), x, y, w, 1, RogueLook.SOFT, Align.left);
+        }
+        List<String> creatures = new ArrayList<>();
+        List<String> lands = new ArrayList<>();
+        List<String> spells = new ArrayList<>();
+        int[] counts = new int[3];
+        for (java.util.Map.Entry<PaperCard, Integer> entry : d.getStartDeck().getMain()) {
+            PaperCard card = entry.getKey();
+            String line = (entry.getValue() > 1 ? entry.getValue() + " " : "") + card.getName();
+            int group = card.getRules().getType().isLand() ? 2 : card.getRules().getType().isCreature() ? 0 : 1;
+            (group == 0 ? creatures : group == 1 ? spells : lands).add(line);
+            counts[group] += entry.getValue();
+        }
+        // One list of headed groups, split into columns of about equal length
+        List<String[]> lines = new ArrayList<>();
+        String[] heads = {localizer.getMessage("lblCreatures"), localizer.getMessage("lblSpells"), localizer.getMessage("lblLands")};
+        List<List<String>> groups = List.of(creatures, spells, lands);
+        for (int i = 0; i < 3; i++) {
+            if (groups.get(i).isEmpty()) {
+                continue;
+            }
+            lines.add(new String[]{heads[i] + " (" + counts[i] + ")", "head"});
+            groups.get(i).stream().sorted().forEach(name -> lines.add(new String[]{name, ""}));
+        }
+        int cols = 2;
+        int perColumn = (lines.size() + cols - 1) / cols;
+        float gap = 10 * u;
+        float colWidth = (w - 7 * u - gap * (cols - 1)) / cols;
+        float lineHeight = 12 * u;
+        for (int i = 0; i < lines.size(); i++) {
+            String[] line = lines.get(i);
+            float lx = x + (i / perColumn) * (colWidth + gap);
+            float ly = y + (i % perColumn) * lineHeight;
+            boolean head = !line[1].isEmpty();
+            RogueLook.fit(g, line[0], lx, ly, head ? 0.95f : 0.85f, head ? RogueLook.DEEP : RogueLook.INK, colWidth, Align.left);
+        }
+        return y + perColumn * lineHeight + 6 * u;
+    }
+
+    /** The starting traits as the run's Traits page shows them; returns where they end. */
+    private float drawTraits(Graphics g, float x, float y, float w) {
+        List<RogueEffect> list = startingTraits();
+        if (list.isEmpty()) {
+            return y + RogueLook.wrap(g, Localizer.getInstance().getMessage("lblRogueNoStartingTraits"), x, y, w, 1, RogueLook.SOFT, Align.left);
+        }
+        // Clear of the scroll bar at the pane's right edge
+        return traitRows(g, list, x, y, w - 7 * RogueLook.unit());
+    }
+
+    /** Commander, Starting Deck and Traits along the top of the panel; the chosen one is darker and underlined. */
+    private final class Tabs extends FDisplayObject {
+        private String label(int i) {
+            Localizer localizer = Localizer.getInstance();
+            return switch (i) {
+                case 0 -> localizer.getMessage("lblCommander");
+                case 1 -> localizer.getMessage("lblRogueTraitsCount", startingTraits().size());
+                default -> localizer.getMessage("lblRogueStartingDeck");
+            };
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            int chosen = Math.min(2, (int) (x / (getWidth() / 3)));
+            if (chosen != tab) {
+                tab = chosen;
+                details.setScrollTop(0);
+                details.revalidate();
+            }
+            return true;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            float u = RogueLook.unit();
+            float w = getWidth() / 3;
+            float h = getHeight();
+            for (int i = 0; i < 3; i++) {
+                boolean on = i == tab;
+                RogueLook.fit(g, label(i), i * w + 3 * u, 6 * u, 0.85f, on ? RogueLook.INK : RogueLook.SOFT, w - 6 * u, Align.center);
+                g.fillRect(on ? RogueLook.DEEP : TAB_RULE, i * w, h - (on ? 2 : 1) * u, w, (on ? 2 : 1) * u);
+            }
+        }
+    }
+
+    /** The open tab's content, each scrolling on its own when the panel is too short for it. */
     private final class Details extends RogueScrollPane {
         private float contentHeight;
+
+        @Override
+        protected float arrowBandInset() {
+            return 0;
+        }
 
         Details() {
             add(new FDisplayObject() {
@@ -443,7 +557,11 @@ public class RogueNewRunScreen extends RogueScreen {
                     if (d == null) {
                         return;
                     }
-                    float end = drawText(g, d, 0, 0, getWidth());
+                    float end = switch (tab) {
+                        case 1 -> drawTraits(g, 0, 0, getWidth());
+                        case 2 -> drawDeck(g, d, 0, 0, getWidth());
+                        default -> drawText(g, d, 0, 0, getWidth(), Details.this.getHeight());
+                    };
                     if (Math.abs(end - contentHeight) > 1) {
                         contentHeight = end;
                         Details.this.revalidate();

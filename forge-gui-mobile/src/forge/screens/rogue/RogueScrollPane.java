@@ -11,6 +11,11 @@ import forge.toolbox.FScrollPane;
 public abstract class RogueScrollPane extends FScrollPane {
     private static final Color BAR = new Color(RogueLook.INK.r, RogueLook.INK.g, RogueLook.INK.b, 0.7f);
 
+    /** On parchment, how far in from the left a band of it starts under the arrow, keeping the arrow off the text; -1 for none. */
+    protected float arrowBandInset() {
+        return -1;
+    }
+
     @Override
     protected void drawOverlay(Graphics g) {
         float max = getMaxScrollTop();
@@ -19,6 +24,10 @@ public abstract class RogueScrollPane extends FScrollPane {
         }
         float u = RogueLook.unit();
         float h = getHeight();
+        float inset = arrowBandInset();
+        if (inset >= 0 && getScrollTop() < max - u) {
+            g.fillRect(RogueLook.PAPER, inset, h - 10 * u, getWidth() - inset - 5 * u, 10 * u);
+        }
         float knob = Math.max(8 * u, h * h / getScrollHeight());
         float y = (h - knob) * getScrollTop() / max;
         g.fillRect(BAR, getWidth() - 3 * u, y, 1.5f * u, knob);

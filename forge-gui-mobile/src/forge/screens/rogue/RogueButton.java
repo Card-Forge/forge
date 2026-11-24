@@ -19,6 +19,7 @@ public class RogueButton extends FDisplayObject {
     private final Runnable command;
     private boolean pressed;
     private float weight = 1;
+    private float uprightWeight = 1;
 
     /** icon is an adventure item sprite name, or null. */
     public RogueButton(String text, String icon, State state, Runnable command) {
@@ -44,6 +45,16 @@ public class RogueButton extends FDisplayObject {
 
     public float getWeight() {
         return weight;
+    }
+
+    /** Its share of the width in an upright row of buttons. */
+    public RogueButton uprightWeight(float uprightWeight) {
+        this.uprightWeight = uprightWeight;
+        return this;
+    }
+
+    public float getUprightWeight() {
+        return uprightWeight;
     }
 
     public State getState() {

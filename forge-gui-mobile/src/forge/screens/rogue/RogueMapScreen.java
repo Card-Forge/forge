@@ -344,14 +344,9 @@ public class RogueMapScreen extends RogueScreen {
             paint(g, getWidth());
         }
 
-        /** While there is more below, a band of parchment keeps the arrow off the text. */
         @Override
-        protected void drawOverlay(Graphics g) {
-            float u = RogueLook.unit();
-            if (getScrollTop() < getMaxScrollTop() - u) {
-                g.fillRect(RogueLook.PAPER, 6 * u, getHeight() - 10 * u, getWidth() - 11 * u, 10 * u);
-            }
-            super.drawOverlay(g);
+        protected float arrowBandInset() {
+            return 6 * RogueLook.unit();
         }
 
         /** Draws the content when g is set, and returns its height either way. */

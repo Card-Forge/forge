@@ -3,8 +3,10 @@ package forge.gamemodes.rogue.flow;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
+import forge.gamemodes.rogue.effect.AetherEffect;
 import forge.gamemodes.rogue.effect.CustomRunModification;
 import forge.gamemodes.rogue.effect.DescensionLevel;
+import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -112,6 +114,25 @@ public record RogueStart(RogueDeck deck, boolean custom, Set<CustomRunModificati
 
     boolean isGeneratedCommander() {
         return custom && modifications.stream().anyMatch(CustomRunModification::isGeneratedCommander);
+    }
+
+    /** The traits the run would begin with: the active Aether effects, its Descension levels, then the custom run's changes. */
+    public List<RogueEffect> startingTraits(RogueMetaProgress progress) {
+        // In the Aether page's order, as the active effects are kept in no order
+        List<RogueEffect> traits = new ArrayList<>(progress.getActiveAetherEffects().stream().sorted().toList());
+        for (int level = 1; level <= descension; level++) {
+            DescensionLevel descensionLevel = DescensionLevel.forLevel(level);
+            if (descensionLevel != null) {
+                traits.add(descensionLevel);
+            }
+        }
+        traits.addAll(runModifications());
+        return traits;
+    }
+
+    /** What a starting trait does; an Aether effect at the rank the run would take it at. */
+    public static String startingTraitText(RogueEffect trait, RogueMetaProgress progress) {
+        return trait instanceof AetherEffect aether ? aether.getDescriptionForRank(progress.getAetherEffectRank(aether)) : trait.getDescription();
     }
 
     /** In the order they apply. */
