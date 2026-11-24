@@ -3,6 +3,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.MagicColor;
+import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -40,8 +41,12 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
     boolean willRollOnPlane(Player ai, SpellAbility sa, Card plane) {
         boolean decideToRoll = false;
         boolean rollInMain1 = false;
-        // a plane with hints has to name its mode; a plane without them rolls by the profile defaults
-        final boolean hinted = plane.hasSVar("AIRollPlanarDieParams");
+        // Rogue Commander can override the normal hints for a plane.
+        final String hintSVar = ai.getGame().getRules().getGameType() == GameType.RogueCommander
+                && plane.hasSVar("AIRollPlanarDieParamsRogueCommander")
+                ? "AIRollPlanarDieParamsRogueCommander" : "AIRollPlanarDieParams";
+        final boolean hinted = plane.hasSVar(hintSVar);
+        // Hints without Mode disable rolling; planes without hints use profile-based rolling.
         String modeName = hinted ? "never" : "random";
         int maxActivations = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
         int chance = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
@@ -49,7 +54,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         int minTurnToRoll = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE);
         
         if (hinted) {
-            String[] params = plane.getSVar("AIRollPlanarDieParams").trim().split("\\|");
+            String[] params = plane.getSVar(hintSVar).trim().split("\\|");
             for (String param : params) {
                 String[] paramData = param.toLowerCase(Locale.ROOT).split("\\$", 2);
                 if (paramData.length < 2) {
