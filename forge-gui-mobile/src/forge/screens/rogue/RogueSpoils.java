@@ -96,10 +96,10 @@ public final class RogueSpoils {
     }
 
     /**
-     * Upright: a parchment banner with the title, a note at its right and a line of guidance, then the ledger in its
+     * Upright: a parchment banner with the title and a line of guidance, both centred, then the ledger in its
      * own gilded panel under it. Returns the height of both; measures only when g is null.
      */
-    static float uprightHeader(Graphics g, float w, String title, String note, String line, List<Spoil> list, Map<FSkinProp, float[]> where) {
+    static float uprightHeader(Graphics g, float w, String title, String line, List<Spoil> list, Map<FSkinProp, float[]> where) {
         float u = RogueLook.unit();
         float banner = line.isEmpty() ? 30 * u : 44 * u;
         float h = banner;
@@ -110,11 +110,7 @@ public final class RogueSpoils {
             return h;
         }
         RogueLook.paper(g, 3 * u, 3 * u, w - 6 * u, banner);
-        float noteWidth = note == null ? 0 : RogueLook.textWidth(note, 1) + 6 * u;
-        RogueLook.fit(g, title, 10 * u, 8 * u, 1.35f, RogueLook.INK, w - 20 * u - noteWidth, Align.left);
-        if (note != null) {
-            RogueLook.text(g, note, w - 10 * u - noteWidth + 6 * u, 10 * u, 1, RogueLook.SOFT);
-        }
+        RogueLook.fit(g, title, 10 * u, 8 * u, 1.35f, RogueLook.INK, w - 20 * u, Align.center);
         if (!line.isEmpty()) {
             RogueLook.fit(g, line, 10 * u, 26 * u, 1, RogueLook.SOFT, w - 20 * u, Align.center);
         }
@@ -127,8 +123,8 @@ public final class RogueSpoils {
     }
 
     /**
-     * Sideways: a gilded panel down the left with the title, a note, a gold rule and the ledger. The run bar and the
-     * buttons go at its foot. Returns where the ledger ends.
+     * Sideways: a gilded panel down the left with the title, a note, a gold rule and the ledger. Without a title the
+     * ledger starts at the top. The run bar and the buttons go at its foot. Returns where the ledger ends.
      */
     static float sidePanel(Graphics g, float x, float y, float w, float h, String title, String note, List<Spoil> list,
                            Map<FSkinProp, float[]> where) {
@@ -137,6 +133,10 @@ public final class RogueSpoils {
         float ix = x + 13 * u;
         float iw = w - 26 * u;
         float ty = y + 13 * u;
+        if (title == null) {
+            // The menu button sits in the panel's top right corner, beside the first line of the ledger
+            return ty + ledger(g, list, ix, ty, iw - 28 * u, 1, where);
+        }
         // The menu button sits in the panel's top right corner, beside the title and the note
         ty += RogueLook.wrap(g, title, ix, ty, iw - 28 * u, 1.2f, RogueLook.INK, Align.left);
         if (note != null && !note.isEmpty()) {

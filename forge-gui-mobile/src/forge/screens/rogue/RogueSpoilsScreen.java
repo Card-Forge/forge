@@ -89,7 +89,7 @@ public class RogueSpoilsScreen extends RogueScreen {
         if (Forge.isLandscapeMode()) {
             RogueSpoils.sidePanel(g, 3 * u, 3 * u, RogueRewardScreen.PANEL * u, getHeight() - 6 * u, title, line, spoils, where);
         } else {
-            RogueSpoils.uprightHeader(g, getWidth(), title, null, line, spoils, where);
+            RogueSpoils.uprightHeader(g, getWidth(), title, line, spoils, where);
         }
     }
 

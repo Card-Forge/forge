@@ -167,7 +167,9 @@ public class RogueRunBar extends FContainer {
             RogueLook.text(g, text, x + 16 * u, y + u, 1, RogueLook.INK);
             x += i == LIFE ? lifeGap : (16 + RogueLook.textWidth(text, 1) / u + 10) * u;
         }
-        if (Forge.getCurrentScreen() == screen) {
+        // While the flow works, the screen showing may be a moment from replaced by the one that asks, such as the rewards
+        // after a match, and the change should rise there, where its coins fly from
+        if (Forge.getCurrentScreen() == screen && !RogueController.get().working()) {
             follow(r, counts(r));
         }
     }

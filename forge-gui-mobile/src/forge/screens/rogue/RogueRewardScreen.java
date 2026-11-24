@@ -24,7 +24,6 @@ public class RogueRewardScreen extends RogueScreen {
     private final String title;
     private final List<PaperCard> cards;
     private final int maxSelections;
-    private final int gold;
     private final Set<Integer> picked = new LinkedHashSet<>();
     private final List<RogueSpoils.Spoil> spoils = RogueSpoils.take();
     private final Map<FSkinProp, float[]> where = new EnumMap<>(FSkinProp.class);
@@ -35,12 +34,11 @@ public class RogueRewardScreen extends RogueScreen {
 
     /** rerollLabel is null when there is no reroll. */
     public RogueRewardScreen(RogueRun run, String title, List<PaperCard> cards, int maxSelections, String rerollLabel,
-                             boolean rerollEnabled, int gold, RogueQuestion<List<PaperCard>> question) {
+                             boolean rerollEnabled, RogueQuestion<List<PaperCard>> question) {
         super(run == null ? null : () -> run);
         this.title = title;
         this.cards = cards;
         this.maxSelections = maxSelections;
-        this.gold = gold;
         Localizer localizer = Localizer.getInstance();
         grid = add(new RogueCardGrid(cards, picked::contains, this::toggle, false));
         viewDeck = add(new RogueButton(localizer.getMessage("lblViewDeck"), null, RogueButton.State.NORMAL,
@@ -62,7 +60,7 @@ public class RogueRewardScreen extends RogueScreen {
         for (RogueButton button : buttonRows().get(0)) {
             button.setState(RogueButton.State.DISABLED);
         }
-        grid.flyChosen(this, ok, () -> question.answer(chosen));
+        grid.flyChosen(this, viewDeck, () -> question.answer(chosen));
     }
 
     private void toggle(int index) {
@@ -118,7 +116,7 @@ public class RogueRewardScreen extends RogueScreen {
             bar.setVisible(true);
             bar.setBounds(14 * u, rowY - 46 * u, panel - 22 * u, 40 * u);
         }
-        grid.setBounds(panel + 7 * u, 31 * u, width - panel - 10 * u, height - 34 * u);
+        grid.setBounds(panel + 7 * u, 49 * u, width - panel - 10 * u, height - 52 * u);
         return true;
     }
 
@@ -132,10 +130,13 @@ public class RogueRewardScreen extends RogueScreen {
         float u = RogueLook.unit();
         float panel = PANEL * u;
         Localizer localizer = Localizer.getInstance();
-        RogueSpoils.sidePanel(g, 3 * u, 3 * u, panel, getHeight() - 6 * u, localizer.getMessage("lblRogueVictoryReward", title),
-            null, spoils, where);
-        RogueLook.paper(g, panel + 7 * u, 3 * u, getWidth() - panel - 10 * u, 26 * u);
-        RogueLook.fit(g, selection(), panel + 7 * u, 10 * u, 1, RogueLook.SOFT, getWidth() - panel - 10 * u, Align.center);
+        RogueSpoils.sidePanel(g, 3 * u, 3 * u, panel, getHeight() - 6 * u, null, null, spoils, where);
+        // The banner over the cards is the upright one: the title, then the selection line, both centred
+        float bx = panel + 7 * u;
+        float bw = getWidth() - panel - 10 * u;
+        RogueLook.paper(g, bx, 3 * u, bw, 44 * u);
+        RogueLook.fit(g, localizer.getMessage("lblRogueVictoryReward", title), bx + 10 * u, 8 * u, 1.35f, RogueLook.INK, bw - 20 * u, Align.center);
+        RogueLook.fit(g, selection(), bx + 10 * u, 26 * u, 1, RogueLook.SOFT, bw - 20 * u, Align.center);
     }
 
     private String selection() {
@@ -145,7 +146,7 @@ public class RogueRewardScreen extends RogueScreen {
     private float header(Graphics g) {
         Localizer localizer = Localizer.getInstance();
         return RogueSpoils.uprightHeader(g, getWidth(), localizer.getMessage("lblRogueVictoryReward", title),
-            localizer.getMessage("lblRogueGoldTotal", gold), selection(), spoils, g == null ? null : where);
+            selection(), spoils, g == null ? null : where);
     }
 
     @Override

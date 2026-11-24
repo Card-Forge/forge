@@ -54,7 +54,7 @@ class MobileRogueDecisions implements RogueDecisions {
                                 boolean rerollEnabled, int gold) {
         RogueRun run = RogueController.get().flow().run();
         List<PaperCard> chosen = RogueQuestion.ask(q -> new RogueRewardScreen(run, title, cards, maxSelections, rerollLabel,
-            rerollEnabled, gold, q));
+            rerollEnabled, q));
         showTutorial(RogueTutorial.CARD_REWARDS);
         return chosen;
     }
