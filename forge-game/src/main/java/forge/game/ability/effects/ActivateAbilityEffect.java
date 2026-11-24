@@ -16,6 +16,10 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ActivateAbilityEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "ManaAbility", "Type",
+    };
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

@@ -7,6 +7,8 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
@@ -157,7 +159,7 @@ public class CardUtil {
     if (cardImage != null) {
       int rotation = getCardRotation(card);
       FImagePanel imagePanel = new FImagePanel();
-      imagePanel.setImage(cardImage, rotation, AutoSizeImageMode.SOURCE);
+      imagePanel.setImage(cardImage, rotation, getAutoSizeImageMode());
       zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
     }
 
@@ -192,6 +194,10 @@ public class CardUtil {
     return image != null ? image : FImageUtil.getImage(state);
   }
 
+  private static AutoSizeImageMode getAutoSizeImageMode() {
+    return FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER) ? AutoSizeImageMode.PANEL : AutoSizeImageMode.SOURCE;
+  }
+
   /**
    * Get the rotation needed for a card (split cards and planes display at 90 degrees).
    */
@@ -222,7 +228,7 @@ public class CardUtil {
     zoomOverlay.removeAll();
 
     FImagePanel imagePanel = new FImagePanel();
-    imagePanel.setImage(cardImage, 0, AutoSizeImageMode.SOURCE);
+    imagePanel.setImage(cardImage, 0, getAutoSizeImageMode());
     zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
 
     zoomOverlay.setVisible(true);

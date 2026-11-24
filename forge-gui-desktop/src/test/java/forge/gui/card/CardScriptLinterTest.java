@@ -61,6 +61,7 @@ public class CardScriptLinterTest {
             "AbilityUtils reads Destination on a trigger, so it's a trigger param");
         assertTrue(!PARAMS.forApi(ApiType.Animate).contains("SacValid"), "AnimateAi reads SacValid on the ability on the stack");
         assertTrue(!PARAMS.forApi(ApiType.Dig).contains("Attacker"), "DigAi reads Attacker from its options map");
+        assertTrue(!PARAMS.forApi(ApiType.Draw).contains("Tickets"), "Sticker reads Tickets from a sticker's own params");
         assertTrue(PARAMS.forApi(ApiType.Untap).contains("Radiance"), "read on sa.getSATargetingCard(), often sa itself");
         assertTrue(PARAMS.forTrigger(TriggerType.AttackersDeclared).contains("AttackingPlayer"),
             "matchesValidParam(\"AttackingPlayer\", runParams.get(...))");
@@ -85,6 +86,8 @@ public class CardScriptLinterTest {
         assertEquals(codes(HEAD + "A:SP$ DealDamage | ValidTgts$ Any | Numdmg$ 1"), List.of("KEY-CASE", "MISSING-KEY"));
         assertEquals(codes(HEAD + "A:SP$ Draw | Frobnicate$ 1"), List.of("UNKNOWN-KEY"));
         assertEquals(codes(HEAD + "A:SP$ Pump | Defined$ Self | CumulativeUpkeep$ True"), List.of("INTERNAL-KEY"));
+        assertEquals(codes(HEAD + "A:SP$ Attach | Defined$ Self | AIValid$ Creature"), List.of("INTERNAL-KEY"),
+            "an AI class's INTERNAL_PARAMS");
         assertEquals(codes(HEAD + "A:SP$ LoseLife | Defined$ You | LifeAmount$ 1 | NumCards$ 1"), List.of("WRONG-KEY"));
         // a sub-ability key belongs to the effects that run it
         assertEquals(codes(HEAD + "A:SP$ Draw | WinSubAbility$ DBX\nSVar:DBX:DB$ Draw"), List.of("WRONG-KEY"));

@@ -228,7 +228,7 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
         if (opponents.size() < 2) {
-            return Iterables.getFirst(opponents, null);
+            return opponents.getFirst();
         }
 
         Map<Player, Integer> threatScores = Maps.newHashMap();
@@ -534,7 +534,7 @@ public class AiAttackController {
                 }
                 final int totalExaltedAttack = defendingOpponent.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
                         : humanBasePower;
-                if (ai.getLife() - 3 <= totalExaltedAttack) {
+                if (!ai.cantLoseForZeroOrLessLife() && ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one blocker
                     if (blockersNeeded == 0 && !notNeededAsBlockers.isEmpty()) {
                         notNeededAsBlockers.remove(0);
@@ -1205,13 +1205,13 @@ public class AiAttackController {
 
             // find the potential counter attacking damage compared to AI life total
             double aiLifeToPlayerDamageRatio = 1000000;
-            if (candidateCounterAttackDamage > 0) {
+            if (candidateCounterAttackDamage > 0 && !ai.cantLoseForZeroOrLessLife()) {
                 aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
             }
 
             // find the potential damage ratio the AI can cause
             double humanLifeToDamageRatio = 1000000;
-            if (candidateUnblockedDamage > 0) {
+            if (candidateUnblockedDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
                 humanLifeToDamageRatio = (double) (defendingOpponent.getLife() - ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent)) / candidateUnblockedDamage;
             }
 
@@ -1245,7 +1245,8 @@ public class AiAttackController {
             }
             // until the attackers are used up or the player would run out of life
             int attackRounds = 1;
-            while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
+            while (!defendingOpponent.cantLoseForZeroOrLessLife() && !attritionalAttackers.isEmpty()
+                    && humanLife > 0 && attackRounds < 99) {
                 // sum attacker damage
                 int damageThisRound = 0;
                 for (Card attritionalAttacker : attritionalAttackers) {
@@ -1307,7 +1308,7 @@ public class AiAttackController {
             if (unblockableDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
                 turnsUntilDeathByUnblockable = 1 + (defendingOpponent.getLife() - unblockableDamage) / nextUnblockableDamage;
             }
-            if (defendingOpponent.canLoseLife()) {
+            if (!defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
                 doUnblockableAttack = true;
             }
             // *****************
@@ -1325,7 +1326,7 @@ public class AiAttackController {
             } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
                     && defendingOpponent != null
                     && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
-                    && ai.getLife() > defendingOpponent.getLife()
+                    && (ai.cantLoseForZeroOrLessLife() || ai.getLife() > defendingOpponent.getLife())
                     && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
                     // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
                     // otherwise we want mana open so we can bluff or use a trick

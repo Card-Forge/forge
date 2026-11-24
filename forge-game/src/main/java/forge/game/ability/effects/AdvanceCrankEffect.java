@@ -8,6 +8,10 @@ import forge.util.Lang;
 import java.util.List;
 
 public class AdvanceCrankEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

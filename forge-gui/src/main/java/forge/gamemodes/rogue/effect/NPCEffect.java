@@ -160,10 +160,6 @@ public enum NPCEffect implements RogueEffect {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
             addEffectCardToCommandZone(human);
-            RogueEffect.moveCardsFromDeckToBattlefield(c ->
-                c.getRules().getType().isPermanent() && !c.getRules().getType().isLand()
-                    && c.getRules().getManaCost().getCMC() <= 3,
-                2, human);
         }
     },
     HENZIE_STREET_SMART("npc_henzie_street_smart", "Street Smart",

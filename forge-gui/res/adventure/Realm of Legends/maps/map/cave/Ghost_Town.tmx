@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztWMtOAjEUvUZQMIGVK8aE0RUEDTEaH0tXulcW/oyZf0CF8An6A/hY8CMa4zcouNDEdoYJtWlnbh/zMHCShs7Q6dzTcx+dAiywAA59F7ysbcgCwwKA80/bY2HGo1MU87suJb+Gu2Wz51nb2X63lI1P7m0D7JPmVKPf/9IAeG3MrmU8ksCtixt3sKQ+twqPkzWAWtVfqz+oM9c90iYtgK9W/LvvHYCnavy4KJBc5gPDY2U5aJSHDYTxNiIcnon/DFzzOTE8rirBry0eLIgPed9183nieHSZXEV5hHFoE7weXY38KOLRlORAXT0O2wBHpB235WNU1kdUB1TjXAbi59AH8ET2nBP7L0jrMDxs6fq+HvzyPKI0fSM8VsvRLSukWT+ShAqPO8fsXUnub6J4hDVGhi3DGmYTGD34mNkwtF8U4y4zp45uMh5hHtCFzBYbtVuEvMR5ndN4pKi5Co+ahj+p1mbdPYotPVifD/s3O7hxdN/Lx8xmgnpgQL8xeq76f6bQ5UH1/5n6wCDmPONyul+eVHBzx9Up0TeLDo9P3DAfaXzbU8h48DHdKAdNhvBb64E8d9oEOGvi44Pv6yAveZcF5S9aAx6kxnlhP4oH9iwGe34wHeuJ7vck97F521QPjP/H2TK0sE+z6VeYtcPumVW5sbZ/FJM9r/TtS+hcdKyoAb/mcX7Fa5yXXKKKeeSRVs3UwTzqwSJv2sy7HnlD2jx+AacSdkE=
+   eJztWElOwzAU/YgWWqR2xapBamDVqrBAUPas4AIsuAzKHQq06hHgAmVY9CIgxBmYFiBhJ7VqLDv5npKg9klWndRx/vP7g2OAJZbAYRRCVLQNRWBSAQj+abuvzHmcVeX8Lmv+13C/bvc8bzvfH9SK8cmDXYBD0oJm+vufOgDPnfm1iocPXIe4cUcr+nPr8DjeAGg147X6gzZ3PSTtswfw1ct+920A8NDMHpcGkstiYHisrSaN8nABFm9TwuGR+M84tJ8Tw+Oikfy64sGD+FD03bafJ4vHgMtVlAeLQ5cQ9RgY5EcZj64iB5rq0e/Pmwo66yOrA7pxrgLxcxgBRDJ7eB6MiytdXzeTX5FHmqYvhMd6Pb0VhTzrh0/o8LgJ7N7lc3+TxoPVGBV2LGuYS2D0EGNmy9J+WYyH3Jwmuql4sDxgCpUtLmq3DGWJ87ag8VRTcx0eLQN/0q3NpnsUV3rwPs/6V3u4cXTfK8bMtkc9MKDfGMNQ/z9bmPKg+v/MfGCccZ5xPtsvfzZwc2fVKdk3iwmPd9ywGHl821OoeIgx3aknTQX2rXVHnjvpApx28fEh9k1QlrzLg/KXrYEIUuMi1k/jgT2LwZ4fzMZGsvtDxX1s3rbVA+P/WbZMHOzTXPoVZu2we2Zdbrztb1W/55WxfZ7ORT80NRDXPMuvRI3Lkkt0sYg88qqZJlhEPXiUTZtF16NsyJvHL+dudmk=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="50" height="40">
@@ -251,23 +251,6 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="30"/>
-   </properties>
-  </object>
-  <object id="150" template="../../../../common/maps/obj/dialog.tx" x="354.5" y="236.583" width="75.0001" height="21.8333" visible="1">
-   <properties>
-    <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Ahead, you see a library swirling with spirits. You feel you might find great power within, if you are wealthy enough to claim it.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
-]</property>
-   </properties>
-  </object>
-  <object id="151" template="../../../../common/maps/obj/door_down.tx" x="370.727" y="230" width="44.5455" height="16">
-   <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Commanders_Library.tmx"/>
-    <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
  </objectgroup>

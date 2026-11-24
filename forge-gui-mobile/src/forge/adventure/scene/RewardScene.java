@@ -235,11 +235,11 @@ public class RewardScene extends UIScene {
     }
 
     /** The bobbing down-arrow from the item preview, shown while its pane has more below. */
-    static class MoreArrow extends Actor {
+    public static class MoreArrow extends Actor {
         private final ScrollPane pane;
         private float elapsed;
 
-        MoreArrow(ScrollPane pane) {
+        public MoreArrow(ScrollPane pane) {
             this.pane = pane;
             setSize(7, 6);
         }
@@ -252,17 +252,21 @@ public class RewardScene extends UIScene {
         @Override
         public void draw(Batch batch, float parentAlpha) {
             if (pane.getScrollY() < pane.getMaxY() - 1)
-                RewardActor.drawMoreArrow(batch, getX() + getWidth() / 2, getY(), 1, elapsed, parentAlpha);
+                RewardActor.drawMoreArrow(batch, getX() + getWidth() / 2, getY(), 1, elapsed, parentAlpha, getColor());
         }
     }
 
     /** @return a style with a thin white scroll bar, for a scrolling list in a dialog */
-    static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
+    public static ScrollPane.ScrollPaneStyle thinScrollBarStyle() {
+        return thinScrollBarStyle(Color.WHITE);
+    }
+
+    public static ScrollPane.ScrollPaneStyle thinScrollBarStyle(Color tint) {
         TextureRegionDrawable white = new TextureRegionDrawable(new TextureRegion(Forge.getAssets().getWhiteTexture()));
         ScrollPane.ScrollPaneStyle barStyle = new ScrollPane.ScrollPaneStyle();
-        barStyle.vScroll = white.tint(new Color(1, 1, 1, 0.15f));
+        barStyle.vScroll = white.tint(new Color(tint.r, tint.g, tint.b, 0.15f));
         barStyle.vScroll.setMinWidth(2);
-        barStyle.vScrollKnob = white.tint(new Color(1, 1, 1, 0.7f));
+        barStyle.vScrollKnob = white.tint(new Color(tint.r, tint.g, tint.b, 0.7f));
         barStyle.vScrollKnob.setMinWidth(2);
         barStyle.vScrollKnob.setMinHeight(8);
         return barStyle;

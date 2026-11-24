@@ -34,6 +34,8 @@ Each line shows the file, the line number, the severity, a code, and what to cha
 
 The last comment comes from comparing the card with its printed version on Scryfall. That comparison covers the name, type line, P/T, mana cost and loyalty. Cards that Scryfall doesn't list yet are skipped.
 
+The review also adds a "Card-script review" row to the PR's checks. It shows a green tick when the changed cards have no findings, and a neutral mark when they do or when the build stopped before the linter ran. Its Details page lists every finding in the changed cards, including those on lines the PR didn't change.
+
 ### Errors and warnings
 
 - **Error:** the engine ignores this part of the script or fails on it, so the card doesn't work as written. A PR build fails if one of its changed lines has an error.
@@ -77,7 +79,7 @@ The linter doesn't yet check param values (`Defined$`, `Valid*$`, values that mu
 | 2. Declaration check | Reads the compiled engine code to find every param passed to `getParam`, `hasParam` and similar methods. Fails if the declarations don't match. | `CardScriptParamDeclarationTest` | test suite |
 | 3. Lint | Checks card and token scripts (see the codes above). | `CardScriptLinter`, `CardScriptLinterTest` | CI on PRs, Card Workshop, `checkCards` |
 | 4. Scryfall check | Compares each changed card with its printed version. | `.github/scripts/card_script_review.py` | CI on PRs |
-| 5. PR comments | Posts the results of steps 3 and 4 on the lines a PR changes. | `.github/workflows/card-script-review.yml` | CI on PRs |
+| 5. PR comments | Posts the results of steps 3 and 4 on the lines a PR changes, and as a check run. | `.github/workflows/card-script-review.yml` | CI on PRs |
 
 ### Declaring params
 
@@ -92,7 +94,7 @@ public class DamageDealEffect extends DamageBaseEffect {
 - **Framework classes** (listed in `CardScriptParams.FRAMEWORK`, such as `AbilityFactory`, `CardTraitBase` and `SpellAbility`) declare the params that any ability can use. Each param is declared once, in the class that reads it.
 - **Effects** declare the params their API uses in addition to those. This includes params that the effect's helper methods read for it.
 - **AI classes** declare the params that only the AI reads, such as `AIExpectAmount` on `DamageDealAi`. An effect that declares needs its AI class to declare too, if the AI reads anything more.
-- **`INTERNAL_PARAMS`** lists params that the engine sets itself, for example when it builds keyword abilities. A script that sets one gets a warning.
+- **`INTERNAL_PARAMS`** lists params that the engine sets itself, for example when it builds keyword abilities. Framework classes, effects and AI classes can declare them. A script that sets one gets a warning.
 
 Effects are being declared in batches. Until an effect declares its params, CI checks them against the compiled code instead, and the Card Workshop doesn't check them.
 

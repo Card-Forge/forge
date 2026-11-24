@@ -1,6 +1,5 @@
 package forge.game.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
@@ -1039,7 +1038,7 @@ public abstract class SpellAbilityEffect implements IHasForgeParams {
             }
         }
         if (sa.hasParam(blockingParam)) {
-            final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
+            final Card attacker = AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa).getFirst();
             if (attacker != null && combat.getDefenderPlayerByAttacker(attacker).equals(c.getController())) {
                 final boolean wasBlocked = combat.isBlocked(attacker);
                 combat.addBlocker(attacker, c);

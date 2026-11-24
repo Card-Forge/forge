@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEarthbend:DB$ Earthbend | Num$ 4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigUntapAll | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, untap all lands you control. After this phase, there is an additional combat phase. Only land creatures can attack during that combat phase.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Land.YouCtrl | SubAbility$ DBAddCombat
-SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ExtraPhaseDelayedTrigger$ DelTrigStatic | ExtraPhaseDelayedTriggerExcute$ TrigEffect
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ExtraPhaseDelayedTrigger$ DelTrigStatic | ExtraPhaseDelayedTriggerExecute$ TrigEffect
 SVar:DelTrigStatic:Mode$ Phase | Static$ True | Phase$ BeginCombat | TriggerDescription$ After this phase, there is an additional combat phase. Only land creatures can attack during that combat phase.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ ForbidAttack | Duration$ UntilEndOfCombat
 SVar:ForbidAttack:Mode$ CantAttack | ValidCard$ Creature.nonLand | Description$ CARDNAME can't attack.

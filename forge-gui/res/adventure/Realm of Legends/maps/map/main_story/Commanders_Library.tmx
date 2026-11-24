@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
@@ -9,7 +9,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBhaYA8zBI8Ue+UFGBgUBahj1kGgOYeIxO38DAmqAgwJxKo/TCU3UtO/A2VvIz8DQxORWAVop7IA8eqb+fH7QYFGGF/Y7AXK7SMStwHd38pPvPr9o+kKDkbzL33sHQ1n7IBXHWEviE0vsF0CFQ8lAAD6WmkA
+   eJxjYBhaYA8zBI8Ue+UFGBgUBahj1kGgOYeIxO38DAmqAgwJxKo/TCU3UtO/A2VvIz8DQxORWAVop7IA8eqb+fH7QYFGGF/Y7AXK7SMStwHd38pPvPr9o+kKDkbzL33sHQ1n7IBXHWEviE0p2C6BwMSKkaJ2MAAA35tytA==
   </data>
  </layer>
  <layer id="3" name="Walls" width="30" height="20">
@@ -17,12 +17,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMBmB2ByILwGxsgomvsRHGGPTh26GGRZ7TYEYBA6q4Mcg4MnJAAcwNjH6jPHYS0uAz15QmKiq4KfRgRKBMFYmwr+gMDmsgp9GBwcIhPFgDmcWNYQ6XGxcgJDewehfWPqBpRUouwE5baEDHGmwQRlNDz57GaUYGJikIDQyG5lGB7jUMaLpGYzhPFD2Esq72PIvIT2HB3H+JQQaxTHFmrGIEWvvTF4GhmlEYnRArL4ZvJTV1ehgoNsOpGAAlLuP2g==
+   eJwz4WNgMBmB2ByILwGxsgomvsRHGGPTh26GGRZ7TYEYBA6q4Mcg4MnJAAcwNjH6jPHYS0uAz15QmKiq4KfRgRKBMFYmwr+gMDmsgp9GBwcIhPFgDmcWNYQ6XGxcgJDewehfWPqBpRUouwE5baEDHGmwQRlNDz57GaUYGJikIDQyG5lGB7jUMaLpGYzhPFD2Esq72PIvIT2HB3H+JQS+CBInRoq9e5gReBovBGMTQwf41CKLYbPXBM1efGLogFT9A4kBxneXFw==
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFyEBZBRUPFuDJOdAuGAWjYBSMVIBeLmLD6EAVKo6PHgVDAzSLEyc2ClABAHuBB6s=
+   eJxjYBgFyEBZBRUPFuDJOdAuGAWjYBSMVIBeLmLD6EAVKo6PHgWkgS+CxImRC5rFIZiQGKlq0cEtPkz+egFUMRD/CZo6EACJXUUTB/G3oOlH5w8EAAAqNxXR
   </data>
  </layer>
  <objectgroup id="5" name="Objects">
@@ -30,7 +30,7 @@
   <object id="2" template="../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32"/>
   <object id="3" template="../../../../common/maps/obj/collision.tx" x="481.333" y="-12.6667" width="32" height="336.667"/>
   <object id="4" template="../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="45" template="../../../../common/maps/obj/dialog.tx" x="196.167" y="266.333" width="86" height="16">
+  <object id="45" template="../../../../common/maps/obj/dialog.tx" x="38.667" y="277.333" width="395" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -214,8 +214,32 @@
   </object>
   <object id="81" template="../../../../common/maps/obj/door_up.tx" x="199.167" y="303.5" width="82.6666" height="16">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Ghost_Town.tmx"/>
-    <property name="teleportObjectId" value="89"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/swamp_capital.tmx"/>
+    <property name="teleportObjectId" value="111"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/door_up.tx" x="295.667" y="303.5" width="63.1666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/mountain_capital.tmx"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/door_up.tx" x="375.917" y="302.5" width="63.1666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/forest_capital.tmx"/>
+    <property name="teleportObjectId" value="92"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/door_up.tx" x="120.417" y="305.5" width="63.1666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/island_capital.tmx"/>
+    <property name="teleportObjectId" value="84"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/door_up.tx" x="41.9167" y="304" width="63.1666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/plains_capital.tmx"/>
+    <property name="teleportObjectId" value="108"/>
    </properties>
   </object>
  </objectgroup>

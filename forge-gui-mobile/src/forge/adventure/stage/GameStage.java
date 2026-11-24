@@ -10,10 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -33,9 +37,11 @@ import forge.adventure.data.DialogData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.UIScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -82,6 +88,7 @@ public abstract class GameStage extends Stage {
     private final Vector2 touchInput = new Vector2();
     protected final Vector2 touchKnobInput = new Vector2();
 
+    private static final String SCROLLING_TEXT = "scrollingText";
     private String extraAnnouncement = "";
 
     protected final Dialog dialog;
@@ -157,7 +164,6 @@ public abstract class GameStage extends Stage {
         });
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" + intro + "{ENDGRADIENT}\n" + details);
-        L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override
             public void end() {
@@ -172,9 +178,127 @@ public abstract class GameStage extends Stage {
             }
         });
         dialog.getButtonTable().add(ok).width(240f);
-        dialog.getContentTable().add(L).width(250f);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         showDialog();
+    }
+
+    /** Adds the dialog's text last, scrolling with a more-arrow when the rest of the dialog leaves too little room. */
+    public void addScrollingText(TypingLabel label, float width) {
+        label.setWrap(true);
+        label.setWidth(width);
+        label.layout();
+        float room = GameHUD.getInstance().getHeight() - dialog.getPrefHeight() - 30;
+        boolean overflows = label.getPrefHeight() > room;
+        Table text = new Table();
+        if (overflows) {
+            // 6 gap + 2 scroll bar + 5 right margin keeps the dialog at the same width
+            label.setWidth(width - 13);
+            label.layout();
+            text.add(label).width(width - 13).padRight(6);
+            // typing would carry on below the visible part, so show it all at once
+            label.skipToTheEnd();
+        } else {
+            text.add(label).width(width);
+        }
+        ScrollPane pane = new ScrollPane(text, RewardScene.thinScrollBarStyle());
+        pane.setName(SCROLLING_TEXT);
+        pane.setScrollingDisabled(true, false);
+        pane.setFadeScrollBars(false);
+        // a ScrollPane only takes scroll focus on touch-down, so hovering hands it the mouse wheel
+        pane.addListener(new InputListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                if (pointer == -1)
+                    event.getStage().setScrollFocus(pane);
+            }
+        });
+        Table content = dialog.getContentTable();
+        if (overflows) {
+            int column = content.add(pane).width(width - 5).height(room - 5).padTop(5).padRight(5).getColumn();
+            content.row();
+            for (int i = 0; i < column; i++)
+                content.add();
+            content.add(new RewardScene.MoreArrow(pane)).padTop(4);
+        } else {
+            content.add(pane).width(width).height(label.getPrefHeight()).row();
+        }
+    }
+
+    /** Scrolls the dialog's text half a page, for keys and controllers. @return false when the text has nothing to scroll */
+    protected boolean scrollDialogText(boolean down) {
+        if (!(dialog.findActor(SCROLLING_TEXT) instanceof ScrollPane pane) || pane.getMaxY() <= 0)
+            return false;
+        pane.setScrollY(pane.getScrollY() + (down ? 0.5f : -0.5f) * pane.getHeight());
+        return true;
+    }
+
+    public boolean dialogInput(int keycode) {
+        if (dialogOnlyInput) {
+            if (KeyBinding.Up.isPressed(keycode) && !scrollDialogText(false)) {
+                selectPreviousDialogButton();
+            }
+            if (KeyBinding.Down.isPressed(keycode) && !scrollDialogText(true)) {
+                selectNextDialogButton();
+            }
+            if (KeyBinding.ScrollUp.isPressed(keycode)) {
+                scrollDialogText(false);
+            }
+            if (KeyBinding.ScrollDown.isPressed(keycode)) {
+                scrollDialogText(true);
+            }
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(dialogStage.getKeyboardFocus());
+            }
+        }
+        return true;
+    }
+
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(UIScene.eventTouchDown());
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(UIScene.eventTouchUp());
+            }
+        }, 0.10f);
+    }
+
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
+    }
+
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 
     public void showImageDialog(String message, FBufferedImage fb, Runnable runnable) {
@@ -188,12 +312,10 @@ public abstract class GameStage extends Stage {
             Image image = new Image(tr);
             image.setScaling(Scaling.fit);
             dialog.getContentTable().add(image).height(100);
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         }
         TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
         L.skipToTheEnd();
-        dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
             Timer.schedule(new Timer.Task() {
@@ -207,6 +329,7 @@ public abstract class GameStage extends Stage {
                 runnable.run();
             }
         })).width(240f);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -246,25 +369,24 @@ public abstract class GameStage extends Stage {
             group.addActor(deckColors);
             group.addActor(deckname);
             dialog.getContentTable().add(group).height(100).width(100).center();
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         } else {
             TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             dialog.getContentTable().add(label).align(Align.center);
-            dialog.getContentTable().add().row();
+            dialog.getContentTable().row();
         }
 
         TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
         L.skipToTheEnd();
 
-        dialog.getContentTable().add(L).width(250);
         dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
             hideDialog();
             if (runnable != null)
                 runnable.run();
         })).width(240);
+        addScrollingText(L, 250f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();

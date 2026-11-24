@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /**
- * TextureData for downloaded card images (iOS Documents/cache), supplied to the AssetManager via
+ * TextureData for selected card images (iOS downloaded images and Android card art), supplied to the AssetManager via
  * {@link com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter#textureData}. The stock
  * TextureLoader honours a preset textureData and ignores the resolved FileHandle, so the AssetManager
  * owns the whole lifecycle (load/get/unload/dispose/context-loss reload) while the actual decode stays
@@ -23,13 +23,25 @@ final class CardTextureData implements TextureData {
     private static final int MAX_CARD_TEX_DIM = 512;
 
     private final String path;
+    private final boolean useRgb565;
+    private final boolean preserveOriginalQuality;
     private int width, height;
     private Format format = Format.RGBA8888; // real format set in prepare(); safe default pre-prepare
     private Pixmap pixmap;
     private boolean prepared;
 
     CardTextureData(String path) {
+        this(path, false, false);
+    }
+
+    CardTextureData(String path, boolean useRgb565) {
+        this(path, useRgb565, false);
+    }
+
+    CardTextureData(String path, boolean useRgb565, boolean preserveOriginalQuality) {
         this.path = path;
+        this.useRgb565 = useRgb565;
+        this.preserveOriginalQuality = preserveOriginalQuality;
     }
 
     String getPath() {
@@ -50,7 +62,7 @@ final class CardTextureData implements TextureData {
     public void prepare() {
         if (prepared)
             throw new GdxRuntimeException("Already prepared");
-        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path));
+        Pixmap p = downscale(GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path), useRgb565, preserveOriginalQuality);
         pixmap = p;
         width = p.getWidth();
         height = p.getHeight();
@@ -125,19 +137,24 @@ final class CardTextureData implements TextureData {
         return new Pixmap(bytes, 0, bytes.length);
     }
 
-    // Cap the longest side at MAX_CARD_TEX_DIM; returns src unchanged when already small enough,
-    // otherwise a new RGBA8888 pixmap (and disposes src). Any failure falls back to the original.
-    private static Pixmap downscale(Pixmap src) {
+    // Cap the longest side at MAX_CARD_TEX_DIM. Android JPEG card art is also converted to RGB565
+    // when it is already within the size limit; PNG/alpha-capable art keeps its original alpha.
+    // Original-quality mode bypasses both transformations.
+    // Any failure falls back to the decoded source so a format conversion cannot prevent card display.
+    private static Pixmap downscale(Pixmap src, boolean useRgb565, boolean preserveOriginalQuality) {
+        if (preserveOriginalQuality)
+            return src;
         try {
             int w = src.getWidth();
             int h = src.getHeight();
             int maxSide = Math.max(w, h);
-            if (maxSide <= MAX_CARD_TEX_DIM)
+            if (maxSide <= MAX_CARD_TEX_DIM && !useRgb565)
                 return src;
-            float s = (float) MAX_CARD_TEX_DIM / (float) maxSide;
+            float s = maxSide <= MAX_CARD_TEX_DIM ? 1f : (float) MAX_CARD_TEX_DIM / (float) maxSide;
             int nw = Math.max(1, Math.round(w * s));
             int nh = Math.max(1, Math.round(h * s));
-            Pixmap dst = new Pixmap(nw, nh, Pixmap.Format.RGBA8888);
+            Pixmap.Format targetFormat = useRgb565 ? Pixmap.Format.RGB565 : Pixmap.Format.RGBA8888;
+            Pixmap dst = new Pixmap(nw, nh, targetFormat);
             dst.setFilter(Pixmap.Filter.BiLinear);
             dst.drawPixmap(src, 0, 0, w, h, 0, 0, nw, nh);
             src.dispose();
