@@ -1608,6 +1608,7 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
+            sa.clearTargets();
             return targetingPlayer.getController().chooseTargetsFor(sa);
         }
         return brains.doTrigger(sa, isMandatory);

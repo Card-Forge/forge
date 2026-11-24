@@ -876,8 +876,12 @@ public class CountersPutAi extends CountersAi {
                     choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                    if (left <= 0) {
+                        break; // no more counters to distribute
+                    }
+                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1 || left <= Math.max(amount / totalTargets, 1)) {
                         sa.addDividedAllocation(choice, left);
+                        left = 0;
                     } else {
                         int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);
