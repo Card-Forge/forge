@@ -47,6 +47,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge;
+import forge.adventure.scene.HudScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.UIScene;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
@@ -594,7 +597,6 @@ public class ImageCache {
                     || !pendingCardTextures.isEmpty()) {
                 return;
             }
-            failedCardTextureWarningShown = true;
             final StringBuilder message = new StringBuilder(
                     Forge.getLocalizer().getMessage("lblImageLoadFailureIntro"));
             int shown = 0;
@@ -609,21 +611,48 @@ public class ImageCache {
                 message.append("\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureMore"));
             }
             message.append("\n\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureAdvice"));
-            FOptionPane.showErrorDialog(message.toString(),
-                    Forge.getLocalizer().getMessage("lblImageLoadFailureTitle"));
+            if (showFailedCardTextureWarning(message.toString())) {
+                failedCardTextureWarningShown = true;
+            }
         });
         if (Gdx.graphics != null) {
             Gdx.graphics.requestRendering();
         }
     }
 
+    /** Use the dialog system belonging to the active mobile UI. */
+    private static boolean showFailedCardTextureWarning(String message) {
+        final String title = Forge.getLocalizer().getMessage("lblImageLoadFailureTitle");
+        if (Forge.isMobileAdventureMode) {
+            final Scene scene = Forge.getCurrentScene();
+            if (scene instanceof UIScene uiScene) {
+                uiScene.showImageLoadFailureDialog(title, message);
+                return true;
+            }
+            if (scene instanceof HudScene hudScene) {
+                return hudScene.showImageLoadFailureDialog(title, message);
+            }
+        }
+        if (Forge.getCurrentScreen() != null) {
+            FOptionPane.showErrorDialog(message, title);
+            return true;
+        }
+        return false;
+    }
+
     /**
-     * Do not show cache warnings while Android resources and the card database are
-     * still initializing. Classic mode opens a screen; Adventure opens a scene.
+     * Wait until the active mode has a UI capable of displaying the warning.
      */
     private static boolean isPlayerNotificationReady() {
-        return Forge.afterDBloaded
-                && (Forge.getCurrentScreen() != null || Forge.getCurrentScene() != null);
+        if (!Forge.afterDBloaded) {
+            return false;
+        }
+        if (!Forge.isMobileAdventureMode) {
+            return Forge.getCurrentScreen() != null;
+        }
+        final Scene scene = Forge.getCurrentScene();
+        return scene instanceof UIScene || scene instanceof HudScene
+                || Forge.getCurrentScreen() != null; // ForgeScene renders through the classic screen/overlay path.
     }
 
     /** Pump the AssetManager at most once per render frame and account for completed card loads. */
