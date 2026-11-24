@@ -121,7 +121,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             // Naru Meha and the like: copy the instant or sorcery of its own on the stack, when there is one
             final Game game = aiPlayer.getGame();
             final SpellAbility top = game.getStack().isEmpty() ? null : game.getStack().peekAbility();
-            if (top != null && top.isSpell() && aiPlayer.equals(top.getActivatingPlayer()) && top.canBeTargetedBy(sa)) {
+            if (top != null && top.isSpell() && aiPlayer.equals(top.getActivatingPlayer()) && top.canBeTargetedBy(sa)
+                    && !forge.ai.simulation.StackLoops.notWorthCopying(top)) {
                 sa.getTargets().add(top);
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }

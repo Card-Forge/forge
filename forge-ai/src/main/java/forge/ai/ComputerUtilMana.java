@@ -569,7 +569,6 @@ public class ComputerUtilMana {
         return produced.startsWith("Combo ") ? StringUtils.repeat("C", " ", ma.amountOfManaGenerated(false)) : produced;
     }
 
-    // shared by predictMana and the AI's real choice, so a payment makes the color it was planned with
     /**
      * The colour that the spells still to be paid for lack the most of, among the offered ones, or 0 when the pool covers
      * them all: an any-colour mana ability (Lion's Eye Diamond, a Lotus Petal) chose the most common colour of the hand,
@@ -605,6 +604,7 @@ public class ComputerUtilMana {
         return best;
     }
 
+    // shared by predictMana and the AI's real choice, so a payment makes the color it was planned with
     public static byte chooseColorForShard(ManaCostShard shard, byte offered) {
         final int colors = offered & shard.getColorMask();
         return (byte) Integer.lowestOneBit(colors != 0 ? colors : offered);

@@ -18,7 +18,8 @@ import java.util.function.Predicate;
  * Extra combat phases: Aurelia, the Warleader and Godo, Bandit Warlord untap and add a combat the first time that they
  * attack each turn, and with a Helm of the Host the beginning of every combat makes one more of them with haste.
  * <ul>
- * <li><b>The engine attacks.</b> A creature whose first attack adds a combat phase is sent to attack even when the
+ * <li><b>The engine attacks.</b> A creature whose first attack adds a combat phase, or whose damage does (The Incredible
+ * Hulk is dealt it by a Caltrops, Bumi, Unleashed deals it to a player and is a land creature with Ashaya), is sent to attack even when the
  * attack logic would have left it at home, as long as nothing that can block it kills it: its attack is worth the
  * combats that follow, and it untaps (Aurelia has vigilance as well).</li>
  * <li><b>The Helm is worn.</b> A Helm of the Host in play that no creature wears is equipped to the engine in the first

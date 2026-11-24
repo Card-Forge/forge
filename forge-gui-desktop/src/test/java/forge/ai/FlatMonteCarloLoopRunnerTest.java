@@ -1913,6 +1913,27 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void aWholeTurnWithDualcasterMageAndTwinflameKillsTheOpponent() {
+        elfDeckWith(0, "Twinflame", "Dualcaster Mage");
+        addCards("Mountain", 5, ai);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Twinflame for nothing, the Mage in answer copies it, each hasty token copies it again\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithWitherbloomApprenticeAndChainOfSmogDrainsTheOpponent() {
+        elfDeckWith(0, "Chain of Smog");
+        addCards("Swamp", 2, ai);
+        addCardToZone("Witherbloom Apprentice", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(6, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Chain at the AI itself with an empty hand, copied again and again, one drained for each\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
     public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
         elfDeckWith(0);
         addCards("Island", 3, ai);

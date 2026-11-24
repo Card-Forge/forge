@@ -90,6 +90,14 @@ public final class StackLoops {
                 || !(ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.MAIN2))) {
             return null;
         }
+        final SpellAbility twin = twinStart(ai, candidates, approve);
+        if (twin != null) {
+            return twin;
+        }
+        final SpellAbility chain = chainStart(ai, candidates, approve);
+        if (chain != null) {
+            return chain;
+        }
         final SpellAbility start = naruStart(ai, candidates, approve);
         if (start != null) {
             return start;
@@ -154,6 +162,10 @@ public final class StackLoops {
                     return reward;
                 }
             }
+        }
+        final SpellAbility twin = twinResponse(ai, top, candidates, approve);
+        if (twin != null) {
+            return twin;
         }
         final SpellAbility naru = naruResponse(ai, top, candidates, approve);
         if (naru != null) {
@@ -261,6 +273,18 @@ public final class StackLoops {
         return null;
     }
 
+    /** A spell of the AI's own that is bad to have twice: it sweeps the board, empties hands or takes the AI's own life. */
+    public static boolean notWorthCopying(final SpellAbility spell) {
+        for (SpellAbility sa = spell; sa != null; sa = sa.getSubAbility()) {
+            final ApiType api = sa.getApi();
+            if (api == ApiType.DestroyAll || api == ApiType.DamageAll || api == ApiType.ChangeZoneAll
+                    || api == ApiType.SacrificeAll || api == ApiType.Discard && !sa.usesTargeting()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * The targets of a copy of Ghostly Flicker while Naru Meha is in play: Naru Meha and the land of the loop while the pool is
      * short of what the hand costs (and for {@value #NARU_ROUNDS} rounds at most), the two lands without her when it is not.
@@ -268,6 +292,9 @@ public final class StackLoops {
      * @return true if the targets are set
      */
     public static boolean naruCopy(final Player ai, final SpellAbility copy) {
+        if (twinCopy(ai, copy) || chainCopy(ai, copy)) {
+            return true;
+        }
         final Card host = copy == null ? null : copy.getHostCard();
         final Card naru = LoopRunner.inPlay(ai, NARU);
         if (host == null || !host.getName().equals(FLICKER) || naru == null || !copy.usesTargeting()) {
@@ -291,6 +318,194 @@ public final class StackLoops {
             }
         }
         naru.setSVar("NaruRounds", String.valueOf(rounds + 1));
+        return true;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Dualcaster Mage
+
+    static final String DUALCASTER = "Dualcaster Mage";
+    static final String TWINFLAME = "Twinflame";
+    private static final int DUAL_TOKENS = 40;
+
+    private static int redSources(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isLand() || c.isTapped()) {
+                continue;
+            }
+            for (final SpellAbility ma : c.getManaAbilities()) {
+                if (ma.canProduce("R")) {
+                    n++;
+                    break;
+                }
+            }
+        }
+        return n;
+    }
+
+    /** The hasty tokens of the Mage that are in play, and the power that they are enough for. */
+    private static int dualcasterPower(final Player ai) {
+        int power = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isToken() && DUALCASTER.equals(c.getName())) {
+                power += Math.max(0, c.getNetPower());
+            }
+        }
+        return power;
+    }
+
+    private static int dualcasterTokens(final Player ai) {
+        int n = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            n += c.isToken() && DUALCASTER.equals(c.getName()) ? 1 : 0;
+        }
+        return n;
+    }
+
+    /** The power that kills: the opponent's life, two for every creature that may block, and two more. */
+    private static int dualcasterNeed(final Player ai) {
+        final Player opp = firstOpponentOf(ai);
+        if (opp == null) {
+            return 0;
+        }
+        int blockers = 0;
+        for (final Card c : opp.getCreaturesInPlay()) {
+            blockers += c.isUntapped() ? 1 : 0;
+        }
+        return opp.getLife() + 2 * blockers + 2;
+    }
+
+    private static Player firstOpponentOf(final Player ai) {
+        for (final Player opp : ai.getOpponents()) {
+            if (opp.getLife() > 0) {
+                return opp;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Dualcaster Mage with Twinflame: Twinflame is cast for no creature, the Mage comes in with flash in answer and copies it
+     * for itself, the token that it makes copies it again, and so on until the tokens are enough to kill.
+     */
+    private static SpellAbility twinStart(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        if (!LoopRunner.inHand(ai, TWINFLAME) || !LoopRunner.inHand(ai, DUALCASTER) || LoopRunner.inPlay(ai, DUALCASTER) != null
+                || dualcasterNeed(ai) <= 0 || forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai) < 5 || redSources(ai) < 3) {
+            return null;
+        }
+        final SpellAbility twin = LoopRunner.castFromHand(ai, candidates, TWINFLAME);
+        if (twin == null) {
+            return null;
+        }
+        twin.setActivatingPlayer(ai);
+        twin.resetTargets();
+        if (!approve.test(twin)) {
+            return null;
+        }
+        VetoLog.note(ai, "twinflame-loop | Twinflame for no creature, the Mage to follow");
+        return twin;
+    }
+
+    private static SpellAbility twinResponse(final Player ai, final SpellAbility top, final List<SpellAbility> candidates,
+                                             final Predicate<SpellAbility> approve) {
+        if (top == null || !top.isSpell() || top.getHostCard() == null || !TWINFLAME.equals(top.getHostCard().getName())
+                || !ai.equals(top.getActivatingPlayer()) || top.getTargets().size() > 0 || LoopRunner.inPlay(ai, DUALCASTER) != null) {
+            return null;
+        }
+        final SpellAbility cast = LoopRunner.castFromHand(ai, candidates, DUALCASTER);
+        if (cast == null || dualcasterNeed(ai) <= 0 || !forge.ai.ComputerUtilMana.canPayManaCost(cast, ai, 0, false)) {
+            return null;
+        }
+        cast.setActivatingPlayer(ai);
+        cast.resetTargets();
+        if (!approve.test(cast)) {
+            return null;
+        }
+        VetoLog.note(ai, "twinflame-loop | the Mage in answer to Twinflame");
+        return cast;
+    }
+
+    /** The target of a copy of Twinflame: the Mage while the tokens do not kill, none once they do. */
+    private static boolean twinCopy(final Player ai, final SpellAbility copy) {
+        final Card host = copy == null ? null : copy.getHostCard();
+        if (host == null || !TWINFLAME.equals(host.getName()) || !copy.usesTargeting()) {
+            return false;
+        }
+        Card mage = null;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (DUALCASTER.equals(c.getName()) && (mage == null || mage.isToken() && !c.isToken())) {
+                mage = c;
+            }
+        }
+        if (mage == null) {
+            return false;
+        }
+        copy.setActivatingPlayer(ai);
+        for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+            s.clearTargets();
+        }
+        final boolean go = dualcasterPower(ai) < dualcasterNeed(ai) && dualcasterTokens(ai) < DUAL_TOKENS;
+        if (go && (!copy.canTarget(mage) || !copy.getTargets().add(mage))) {
+            copy.clearTargets();
+        }
+        VetoLog.note(ai, "twinflame-loop | " + dualcasterTokens(ai) + " tokens, power " + dualcasterPower(ai) + " of "
+                + dualcasterNeed(ai) + (go ? ", one more" : ", the chain ends"));
+        return true;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Chain of Smog
+
+    static final String WITHERBLOOM = "Witherbloom Apprentice";
+    static final String CHAIN = "Chain of Smog";
+
+    /**
+     * Witherbloom Apprentice with Chain of Smog: the AI aims the Chain at itself with nothing else in hand, so nothing is
+     * discarded, and copies it for itself again and again. Every copy is a spell copied, and Witherbloom drains one for it.
+     */
+    public static boolean chainLoop(final Player ai) {
+        if (LoopRunner.inPlay(ai, WITHERBLOOM) == null || firstOpponentOf(ai) == null) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!CHAIN.equals(c.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static SpellAbility chainStart(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
+        if (!LoopRunner.inHand(ai, CHAIN) || !chainLoop(ai)) {
+            return null;
+        }
+        final SpellAbility chain = LoopRunner.castFromHand(ai, candidates, CHAIN);
+        if (chain == null) {
+            return null;
+        }
+        chain.setActivatingPlayer(ai);
+        chain.resetTargets();
+        if (!chain.canTarget(ai) || !chain.getTargets().add(ai) || !approve.test(chain)) {
+            chain.resetTargets();
+            return null;
+        }
+        VetoLog.note(ai, "chain-loop | the Chain at itself with an empty hand, opponent at " + firstOpponentOf(ai).getLife());
+        return chain;
+    }
+
+    /** The target of a copy of the Chain: the AI itself, while the opponent still lives. */
+    private static boolean chainCopy(final Player ai, final SpellAbility copy) {
+        final Card host = copy == null ? null : copy.getHostCard();
+        if (host == null || !CHAIN.equals(host.getName()) || !copy.usesTargeting() || !chainLoop(ai)) {
+            return false;
+        }
+        copy.setActivatingPlayer(ai);
+        for (SpellAbility sa = copy; sa != null; sa = sa.getSubAbility()) {
+            sa.clearTargets();
+        }
+        if (!copy.canTarget(ai) || !copy.getTargets().add(ai)) {
+            copy.clearTargets();
+            return false;
+        }
         return true;
     }
 
