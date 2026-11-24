@@ -88,6 +88,8 @@ public enum FSkinImage implements FSkinImageInterface {
     OFFERDRAW    (FSkinProp.ICO_DOCK_OFFERDRAW),
     DECKLIST     (FSkinProp.ICO_DECKLIST),
     ALPHASTRIKE  (FSkinProp.ICO_ALPHASTRIKE),
+    DOCK_ALPHASTRIKE (FSkinProp.ICO_DOCK_ALPHASTRIKE),
+    PLAYERS      (FSkinProp.ICO_PLAYERS),
     ARCSOFF      (FSkinProp.ICO_ARCSOFF),
     ARCSON       (FSkinProp.ICO_ARCSON),
     ARCSHOVER    (FSkinProp.ICO_ARCSHOVER),
@@ -173,6 +175,7 @@ public enum FSkinImage implements FSkinImageInterface {
     MENU_SEALED       (FSkinProp.ICO_MENU_SEALED),
     MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT),
     MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED),
+    DECKSTATS         (FSkinProp.ICO_DECKSTATS),
 
     //Interface icons
     QUESTION        (FSkinProp.ICO_QUESTION),

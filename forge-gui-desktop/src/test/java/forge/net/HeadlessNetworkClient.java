@@ -201,6 +201,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
     }
 
     void onGameEnd() {
+        if (gameFinishedLatch.getCount() == 0) {
+            return;
+        }
         gameInProgress.set(false);
         gameFinishedLatch.countDown();
         netLog.info("Game ended. Deltas={}, FullSyncs={}, TotalBytes={}",
@@ -280,6 +283,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         });
         // Track the current pending auto-response so we can cancel it when a new prompt arrives
         private volatile ScheduledFuture<?> pendingAutoResponse = null;
+        private volatile boolean gameFinishedEventSeen = false;
         // Lock for coordinating auto-response scheduling
         private final Object autoResponseLock = new Object();
 
@@ -334,6 +338,11 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
             // Then notify the client for logging/verification
             client.onDeltaPacketReceived(packet);
+
+            // afterGameEnd never arrives once the harness hands this seat to the AI
+            if (gameFinishedEventSeen) {
+                client.onGameEnd();
+            }
         }
 
         @Override
@@ -371,6 +380,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
                 }
             }
             super.handleGameEvents(events);
+            if (events.stream().anyMatch(e -> e instanceof forge.game.event.GameEventGameFinished)) {
+                gameFinishedEventSeen = true;
+            }
         }
 
         @Override
@@ -465,21 +477,29 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void setSelectables(Iterable<forge.game.card.CardView> cards, int min, int max) {
-            super.setSelectables(cards, min, max);
-            synchronized (pendingSelectables) {
-                // Track selectable cards for multi-selection prompts
-                pendingSelectables.clear();
-                selectableIndex = 0;
-                if (cards != null) {
-                    for (forge.game.card.CardView card : cards) {
-                        pendingSelectables.add(card);
+        public void setSelection(forge.gamemodes.match.Selection selection) {
+            final boolean cardsChanged = !getSelection().cards().equals(selection.cards());
+            super.setSelection(selection);
+            if (cardsChanged) {
+                synchronized (pendingSelectables) {
+                    // Track selectable cards for multi-selection prompts
+                    pendingSelectables.clear();
+                    selectableIndex = 0;
+                    pendingSelectables.addAll(selection.cards());
+
+                    // Auto-select the first selectable card when cards become selectable
+                    if (gameController != null && !pendingSelectables.isEmpty()) {
+                        selectNextCard();
                     }
                 }
-
-                // Auto-select the first selectable card when cards become selectable
-                if (gameController != null && !pendingSelectables.isEmpty()) {
-                    selectNextCard();
+            }
+            // stack targets (counterspells and the like): pick the first one not picked yet, as for cards
+            if (gameController != null) {
+                for (forge.trackable.TrackableObject target : selection.targets()) {
+                    if (target instanceof forge.game.spellability.StackItemView item && !isHighlighted(item)) {
+                        scheduleAutoResponse(() -> gameController.selectStackItem(item), 100, "select stack item " + item);
+                        break;
+                    }
                 }
             }
         }

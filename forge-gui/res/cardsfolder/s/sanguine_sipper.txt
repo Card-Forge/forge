@@ -1,0 +1,6 @@
+Name:Sanguine Sipper
+ManaCost:1 W
+Types:Creature Vampire Guest
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | IsPresent$ Permanent.stickered+YouCtrl | Description$ CARDNAME has lifelink as long as you control a stickered permanent.
+Oracle:This creature has lifelink as long as you control a stickered permanent.

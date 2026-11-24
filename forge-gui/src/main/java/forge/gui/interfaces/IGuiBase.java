@@ -1,6 +1,8 @@
 package forge.gui.interfaces;
 
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.tutorial.TutorialLayout;
+import forge.gamemodes.tutorial.TutorialTarget;
 import forge.gui.download.GuiDownloadService;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
@@ -20,16 +22,47 @@ import java.util.function.Consumer;
 import org.jupnp.UpnpServiceConfiguration;
 
 public interface IGuiBase {
+
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
+    String getUserAgent();
 
     void invokeInEdtNow(Runnable runnable);
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(Runnable proc);
     void runBackgroundTask(String message, Runnable task);
     boolean isGuiThread();
+    default boolean isMatchInProgress() { return false; }
 
+    /**
+     * Shows a tutorial note on the match screen without dimming or blocking it, so the cards it talks about stay in
+     * view. {@code onNext} runs when the player presses the note's button. Returns false when this GUI has no such
+     * panel, in which case the caller shows a dialog instead. Safe to call from any thread.
+     */
+    default boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        return false;
+    }
+    /** Removes the note shown by {@link #showCoach}, if any. Safe to call from any thread. */
+    default void hideCoach() { }
+    /**
+     * Whether the match screen is on screen and laid out, so a tutorial note can be drawn on it. A match starts before
+     * its screen is showing (mobile switches screens a moment later), and a note sent too early would otherwise fall
+     * back to a blocking dialog or be dropped. Safe to call from any thread.
+     */
+    default boolean isTutorialBoardReady() { return true; }
+    /**
+     * Which match screen layout is on screen now, so the tutorial can say where things are on this player's screen
+     * (desktop, mobile upright, mobile sideways, the compact layouts).
+     */
+    default TutorialLayout getTutorialLayout() { return TutorialLayout.DESKTOP; }
+    /**
+     * Points the player at the given parts of the match screen: each is outlined and the rest of the screen is dimmed,
+     * and the tutorial note moves out of their way. A part this layout does not have is ignored, and an empty
+     * collection clears the highlight. Where a part is folded away (the phase stops of the compact layout) it is
+     * opened for as long as it is highlighted. Safe to call from any thread.
+     */
+    default void highlightGui(final Collection<TutorialTarget> targets) { }
     String getAssetsDir();
     ImageFetcher getImageFetcher();
     ISkinImage getSkinIcon(FSkinProp skinProp);

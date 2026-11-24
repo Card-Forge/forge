@@ -1,0 +1,7 @@
+Name:The Beacon of Kahless
+ManaCost:2 R
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | PrecostDesc$ Battlefront — | SpellDescription$ Choose a color. Add an amount of mana of that color equal to the number of opponents you attacked this turn.
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisTurn
+Oracle:{T}: Add one mana of any color.\nBattlefront — {T}: Choose a color. Add an amount of mana of that color equal to the number of opponents you attacked this turn.

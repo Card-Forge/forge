@@ -4,7 +4,57 @@ Date=2025-08-19
 Name=Alchemy: Edge of Eternities
 Type=Online
 ScryfallCode=YEOE
-Booster=1 UncommonRareMythic:fromsheet("YEOE cards"), 8 Common:fromsheet("EOE cards"), 3 Uncommon:fromSheet("EOE cards"), 1 UncommonRareMythic:fromSheet("EOE cards"), 1 RareMythic:fromSheet("EOE cards"), 1 BasicLand:fromSheet("EOE cards")
+BoosterSlots=Common,Alchemy,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 BasicLand
+
+[Common]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. The 10 check lands are not part of this slot.
+Base=Uncommon:!Land:fromSheet("YEOE cards")
+Replace=0.385714F Rare:!Land:fromSheet("YEOE cards")
+Replace=0.064286F Mythic:fromSheet("YEOE cards")
+
+[Common-Guest]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=.018F fromSheet("EOE special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("EOE cards")
+
+[RareMythic]
+Base=Rare:fromSheet("EOE cards")
+Replace=.142F Mythic:fromSheet("EOE cards")
+Replace=.036F Rare:fromSheet("EOE borderless")
+Replace=.018F Mythic:fromSheet("EOE borderless")
+
+[Wildcard]
+Base=Uncommon:fromSheet("EOE cards")
+Replace=0.125F Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.106F Rare:fromSheet("EOE cards")
+Replace=0.003F Mythic:fromSheet("EOE cards")
+Replace=0.1F Rare:fromSheet("EOS cards")
+Replace=0.025F Mythic:fromSheet("EOS cards")
+#Drop rates: Alchemy packs replace a card with a Stellar Sights rare or one of the 10 check lands at about 1:6.7. Stellar Sights above is 0.125, so the lands make up the rest.
+Replace=0.024254F Rare:Land:fromSheet("YEOE cards")
+Replace=0.01F Rare:fromSheet("EOE borderless")
+Replace=0.005F Mythic:fromSheet("EOE borderless")
+
+[WildcardFoil]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.32F Uncommon:fromSheet("EOE cards")
+Replace=0.064F Rare:fromSheet("EOE cards")
+Replace=0.011F Mythic:fromSheet("EOE cards")
+Replace=0.01F Rare:fromSheet("EOS cards")
+Replace=0.0075F Mythic:fromSheet("EOS cards")
+Replace=0.0075F fromSheet("EOE borderless"):!BasicLand
+
+[BasicLand]
+Base=BasicLand:fromSheet("EOE cards")
+Replace=0.16F BasicLand:fromSheet("EOE cards")+
+Replace=0.16F BasicLand:fromSheet("EOE borderless")
+Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 
 [cards]
 1 R Candela, Aegis of Adagia @Sergey Glushakov

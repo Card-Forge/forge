@@ -1,0 +1,6 @@
+Name:Chest Trait - Charm Of Wilderness
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap all lands you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl
+Oracle:At the beginning of your end step, untap all lands you control.

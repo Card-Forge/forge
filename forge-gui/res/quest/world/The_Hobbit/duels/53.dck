@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Hobbit/Jonathan_Dietrich_-_Hammer_Time_(Modern,_#898897).dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+3 Kíli the Resourceful
+4 Colossus Hammer
+4 Leyline Axe
+4 Mox Opal
+1 Cryptic Coat
+1 Lavaspur Boots
+1 Paradise Mantle
+1 Shadowspear
+4 Metallic Rebuke
+4 Urza's Saga
+1 Super-Soldier Serum
+4 Arid Mesa
+3 Plains
+2 Hallowed Fountain
+2 Inkmoth Nexus
+2 Marsh Flats
+2 Meticulous Archive
+1 Windswept Heath
+[Sideboard]
+4 Consign to Memory
+2 Hushbringer
+2 Surge of Salvation
+1 Assimilation Aegis
+1 Grafdigger's Cage
+1 Pithing Needle
+1 Prismatic Ending
+1 Teferi, Time Raveler
+1 Tormod's Crypt
+1 Vexing Bauble

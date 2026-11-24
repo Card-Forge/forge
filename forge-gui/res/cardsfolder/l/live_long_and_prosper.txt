@@ -1,0 +1,11 @@
+Name:Live Long and Prosper
+ManaCost:5 W U
+Types:Sorcery
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+A:SP$ SetLife | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ Double your life total. Draw cards equal to the number of cards in your hand. You have no maximum hand size until your next turn.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
+SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+SVar:X:Count$YourLifeTotal/Twice
+SVar:Y:Count$ValidHand Card.YouOwn
+Oracle:This spell can't be countered.\nDouble your life total. Draw cards equal to the number of cards in your hand. You have no maximum hand size until your next turn.

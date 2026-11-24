@@ -393,7 +393,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 410 U Cid, Timeless Artificer @Alexander Mokhov
 411 U Cid, Timeless Artificer @Nijihayashi
 412 U Cid, Timeless Artificer @David Astruga
-413 U Cid, Timeless Artificer @David Astruga
+413 U Cid, Timeless Artificer @Jake Murray
 414 U Cid, Timeless Artificer @Kevin Glint
 415 U Cid, Timeless Artificer @Nurikabe
 416 U Cid, Timeless Artificer @David Astruga

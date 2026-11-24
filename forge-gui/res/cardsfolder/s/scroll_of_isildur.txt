@@ -5,7 +5,7 @@ K:Chapter:3:DBGainControl,DBTap,DBDraw
 SVar:DBGainControl:DB$ GainControl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target artifact | ValidTgts$ Artifact | SubAbility$ TrigTempt | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of up to one target artifact for as long as you control CARDNAME. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures. Put a stun counter on each of them.
-SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1
 SVar:DBDraw:DB$ Draw | ValidTgts$ Opponent | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
 SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 DeckHas:Ability$Counters

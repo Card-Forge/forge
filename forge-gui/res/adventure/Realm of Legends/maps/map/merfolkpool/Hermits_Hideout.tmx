@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Scuttletide&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztlE0OgjAQhbvy5wxSEw7RLjyAR3KFaLyHyi0MRvFo2pcycSgtFjGsXLxAaDvf/LxSTIUoRtB63lTsua0SYqnH41aGlRvmwjz35rnpkesQLjiS1Qn2c/IbLmJzdZ1H3YlRaXTt0Xcfl/oH7VRcHOIP4SLGQVnBP1VHPKznkblxP7jcY83lnvX1Gt/O9d6bjmOTF31cxFvN7Fqp2zMWbP40T2KH/E/vfI/LhTcT3c7P7Zc799AssFey/mEfehi6R5L17vTBQzQLqj+UQ8r6F+Lye+rWlykrt/6LfucgPexHBNdV1uEbqj8NeNDnyW//z6S7tn2luQ25v30U+1/7c5t6ARl5LSs=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlV0OgjAMgPtihHgEH33xHRUT3wnhTp7HKB7AaxiIFzAix3CLayhNN9gksUlDYF2/rj8jiwGyAb1EAKXSazRsa1MuY5gvs68IZIZwc6UbZZcqfcbhZ/blNkrfRs/Rlx2Sc4mL9Rvy1xg2BJydC63fGH+5sa09680lF77Z/PEYXVw+Azbu3rwnFn+c6cqNtj1uAW67zpfETcj7Se1phbgpk9pzNsa33PXXuWC/6n6RaibVgUoFXY+XzP/DPAvHHGn/q0U/foy9Iva1g69ztU47xd53cem5MX7MLZ1fKnfDwvWW5aoh321c6Z7gvnB+MX+8F6a8r2zz68OcinsA/3/EFNzqT9zZ/HfuB6s/qqY=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDFbwlHOgXUAfMFL8SQ2QbsTAkGE00K5ABR4DFH8we73obP9QtxcA6uQFTQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="193.059" y="270.942" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="208.103" y="88.0577">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hedron Crab&quot;, &quot;Ruin Crab&quot;]}"/>
+    <property name="enemy" value="Homer"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/scroll.tx" x="36.7088" y="106.735">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hedron Crab&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/scroll.tx" x="371.755" y="157.907">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruin Crab&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/treasure.tx" x="151.982" y="47.482">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Crabomination&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Uchuulon&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sigiled Starfish&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sinister Starfish&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sharktocrab&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Purple-Crystal Crab&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Iceberg Cancrix&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;King Crab&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Shore Keeper&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Hard Evidence&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Scuttling Sentinel&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Scuttletide&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;King Crab&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Shore Keeper&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Crystacean&quot;
+}
+]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/dialog.tx" x="188.077" y="219.026" width="62.8539" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You enter a wet cave with a low ceiling. Crabs scurry all around, and in one of the back tunnels, you see a huge crab carrying a lantern scurry away from the sight of you. You get the feeling it hopes you will just leave.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

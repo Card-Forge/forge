@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -17,6 +20,9 @@ public class ZipUtil {
     public static String backupAdvFile = "forge.adv";
     public static String backupClsFile = "forge.cls";
     private static boolean isClassic = false;
+    public static String newAdvBackupName() {
+        return backupAdvFile.replace(".adv", "_" + new SimpleDateFormat("yyMMdd_HHmmss").format(new Date()) + ".adv");
+    }
     public static void zip(File source, File dest, String name) throws IOException {
         isClassic = backupClsFile.equalsIgnoreCase(name);
         try(
@@ -108,7 +114,7 @@ public class ZipUtil {
                 }
 
                 if (!isClassic)
-                    val.append(" * "). append(newFile.getName()).append("\n");
+                    val.append(" * ").append(newFile.getParentFile().getName()).append("\\").append(newFile.getName()).append("\n");
                 // write file content
                 try(FileOutputStream fos = new FileOutputStream(newFile)) {
                     int len;
@@ -136,5 +142,17 @@ public class ZipUtil {
         }
 
         return destFile;
+    }
+
+    public static boolean isValidZip(File file) {
+        try (ZipFile zipFile = new ZipFile(file)) {
+            var entries = zipFile.entries();
+            while (entries.hasMoreElements()) {
+                entries.nextElement();
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

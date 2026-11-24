@@ -1,0 +1,33 @@
+[metadata]
+Name=Goblin Grenade Runner
+[Main]
+14 Mountain|3ED
+3 Dwarven Ruins|FEM
+4 Forgotten Cave|ONS
+1 Goblin Chirurgeon|FEM|[54a]
+1 Goblin Chirurgeon|FEM|[54b]
+1 Goblin Chirurgeon|FEM|[54c]
+2 Goblin Recruiter|VIS
+2 Aeolipile|FEM
+1 Goblin Bomb|WTH
+1 Goblin Bombardment|TMP
+1 Goblin War Drums|FEM|[58b]
+1 Goblin War Drums|FEM|[58c]
+1 Antagonism|USG
+2 Arms Dealer|MMQ
+2 Goblin Firestarter|PO2
+4 Mogg Fanatic|TMP
+2 Goblin Vandal|WTH
+2 Goblin Tinkerer|MIR
+1 Goblin Hero|DRK
+1 Mogg Assassin|EXO
+1 Goblin Grenadiers|WTH
+1 Mogg Bombers|STH
+1 Goblin Kites|FEM
+2 Goblin Grenade|FEM|[56a]
+2 Goblin Grenade|FEM|[56b]
+2 Goblin Grenade|FEM|[56c]
+4 Incendiary|UDS
+[StartInBattle_Reference]
+1 Dwarven Ruins|FEM
+1 Raging Goblin|POR

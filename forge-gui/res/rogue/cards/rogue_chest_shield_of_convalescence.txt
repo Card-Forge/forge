@@ -1,0 +1,6 @@
+Name:Chest Trait - Shield Of Convalescence
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | LifeTotal$ You | LifeAmount$ LE10 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.

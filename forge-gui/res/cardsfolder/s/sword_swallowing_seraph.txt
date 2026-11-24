@@ -1,0 +1,11 @@
+Name:Sword-Swallowing Seraph
+ManaCost:4 W W
+Types:Creature Angel Performer
+PT:4/4
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on a nonland permanent you own.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Name | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+A:AB$ PutCounter | Cost$ 1 W T | ValidTgts$ Creature.Other+stickeredWith Name | TgtPrompt$ Select another target creature with a name sticker on it | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on another target creature with a name sticker on it. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:Flying, vigilance\nWhen this creature enters, you may put a name sticker on a nonland permanent you own.\n{1}{W}, {T}: Put a +1/+1 counter on another target creature with a name sticker on it. Activate only as a sorcery.

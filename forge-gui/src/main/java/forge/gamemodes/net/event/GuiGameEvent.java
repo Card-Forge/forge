@@ -9,21 +9,30 @@ public final class GuiGameEvent implements IdentifiableNetEvent {
     private final int id;
     private final ProtocolMethod method;
     private final Object[] objects;
-    private boolean replaceTrackables = true;
+    private final byte[] encodedObjects;
 
     public GuiGameEvent(final ProtocolMethod method, final Object ... objects) {
         this.id = staticId++;
         this.method = method;
         this.objects = objects == null ? new Object[0] : objects;
+        this.encodedObjects = null;
     }
-    public GuiGameEvent(final ProtocolMethod method, boolean replace, final Object ... objects) {
-        this(method, objects);
-        replaceTrackables = replace;
+    private GuiGameEvent(final int id, final ProtocolMethod method, final byte[] encodedObjects) {
+        this.id = id;
+        this.method = method;
+        this.objects = new Object[0];
+        this.encodedObjects = encodedObjects;
+    }
+
+    public GuiGameEvent withEncodedObjects(final byte[] encodedObjects) {
+        return new GuiGameEvent(id, method, encodedObjects);
     }
 
     @Override
     public String toString() {
-        return String.format("GuiGameEvent %d: %s (%d args)", id, method, objects.length);
+        return encodedObjects == null
+                ? String.format("GuiGameEvent %d: %s (%d args)", id, method, objects.length)
+                : String.format("GuiGameEvent %d: %s (%d encoded bytes)", id, method, encodedObjects.length);
     }
 
     @Override
@@ -39,7 +48,8 @@ public final class GuiGameEvent implements IdentifiableNetEvent {
         return objects;
     }
 
-    public boolean replaceTrackables() {
-        return replaceTrackables;
+    /** Null unless the objects travel encoded, in which case {@link #getObjects()} is empty. */
+    public byte[] getEncodedObjects() {
+        return encodedObjects;
     }
 }

@@ -3,6 +3,7 @@ package forge.game.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import forge.game.card.sticker.StickerSheet;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -15,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
@@ -347,7 +349,6 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         super.updateCounters(c);
-        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -650,7 +651,8 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.equals(viewer)) {
+            // CR 810.5: Two-Headed Giant teammates may review each other's hands
+            if (controller.sharesTeamWith(viewer)) {
                 return true;
             }
             break;
@@ -668,6 +670,9 @@ public class CardView extends GameEntityView {
             break;
         case SchemeDeck:
             // true for now, to actually see the Scheme cards (can't see deck anyway)
+            return true;
+        case StickerSheets:
+            // CR 123.2c
             return true;
         default:
             break;
@@ -802,6 +807,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NonAbilityText, c.getNonAbilityText());
     }
 
+    void updateStickers(Card c) {
+        set(TrackableProperty.Stickers, StickerSheet.describe(c));
+    }
+
     public String getText() {
         return getText(getCurrentState(), null);
     }
@@ -866,6 +875,11 @@ public class CardView extends GameEntityView {
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        String stickers = get(TrackableProperty.Stickers);
+        if (StringUtils.isNotEmpty(stickers)) {
+            sb.append("\r\n\r\n").append(stickers);
         }
 
         Set<Integer> attractionLights = get(TrackableProperty.AttractionLights);
@@ -970,30 +984,6 @@ public class CardView extends GameEntityView {
         return alternate0 ? getAlternateState() : getCurrentState();
     }
 
-    public boolean wasDestroyed() {
-        return get(TrackableProperty.WasDestroyed);
-    }
-    void updateWasDestroyed(boolean value) {
-        set(TrackableProperty.WasDestroyed, value);
-    }
-    public boolean needsUntapAnimation() {
-        return get(TrackableProperty.NeedsUntapAnimation);
-    }
-    public void updateNeedsUntapAnimation(boolean value) {
-        set(TrackableProperty.NeedsUntapAnimation, value);
-    }
-    public boolean needsTapAnimation() {
-        return get(TrackableProperty.NeedsTapAnimation);
-    }
-    public void updateNeedsTapAnimation(boolean value) {
-        set(TrackableProperty.NeedsTapAnimation, value);
-    }
-    public boolean needsTransformAnimation() {
-        return get(TrackableProperty.NeedsTransformAnimation);
-    }
-    public void updateNeedsTransformAnimation(boolean value) {
-        set(TrackableProperty.NeedsTransformAnimation, value);
-    }
     public boolean useCardArt() {
         // prevent NPE
         if (getCurrentState() == null)
@@ -1032,7 +1022,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
 
         final Card cloner = c.getCloner();
-        set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
+        // Use the cloner's printed name; for self-clones (e.g. Sculpting Steel) its current
+        // name is the copied card's name, which would be misleading here.
+        set(TrackableProperty.Cloner, cloner == null ? null
+                : cloner.getOriginalState(CardStateName.Original).getName() + " (" + cloner.getId() + ")");
 
         CardCollection mergedCollection = new CardCollection();
         if (c.hasMergedCard()) {
@@ -1095,6 +1088,7 @@ public class CardView extends GameEntityView {
 
         currentStateView.updateAttractionLights(currentState);
         currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && currentState.hasPrintedPT());
+        currentStateView.updateStationLevels(currentState);
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1418,6 +1412,8 @@ public class CardView extends GameEntityView {
                 num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
+            // isLethalDamageByPower() cards use power. so this needs update too for VAssignCombatDamage dialog -> auto
+            CardView.this.updateLethalDamage(c);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1443,6 +1439,7 @@ public class CardView extends GameEntityView {
                 num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
+            CardView.this.updateLethalDamage(c);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();
@@ -1523,6 +1520,66 @@ public class CardView extends GameEntityView {
         }
         void updateHasPrintedPT(boolean v) {
             set(TrackableProperty.HasPrintedPT, v);
+        }
+
+        /**
+         * The Station levels of a Spacecraft or Planet as "threshold:power:toughness" entries separated by ';',
+         * sorted by threshold. Power and toughness are empty for a level without a P/T box,
+         * e.g. "3::;8:3:3". Empty if the card has no Station levels.
+         */
+        public String getStationLevels() {
+            return get(TrackableProperty.StationLevels);
+        }
+        void updateStationLevels(CardState c) {
+            final TreeMap<Integer, String> levels = new TreeMap<>();
+            for (final StaticAbility st : c.getStaticAbilities()) {
+                if (!st.isIntrinsic() || !st.hasParam("Station")) {
+                    continue;
+                }
+                putStationLevel(levels, st.getParam("Station"), st.getParamOrDefault("SetPower", ""), st.getParamOrDefault("SetToughness", ""));
+            }
+            if (levels.isEmpty()) {
+                // UI cards (deck editor, id -1) get no StaticAbility objects from CardFactory: read the script lines instead
+                final forge.card.CardRules rules = c.getCard() == null ? null : c.getCard().getRules();
+                final forge.card.ICardFace face = rules == null ? null
+                        : c.getStateName() == CardStateName.Original ? rules.getMainPart() : rules.getOtherPart();
+                if (face != null && face.getStaticAbilities() != null) {
+                    for (final String script : face.getStaticAbilities()) {
+                        final Map<String, String> params = parseScriptParams(script);
+                        if (params.containsKey("Station")) {
+                            putStationLevel(levels, params.get("Station"), params.getOrDefault("SetPower", ""), params.getOrDefault("SetToughness", ""));
+                        }
+                    }
+                }
+            }
+            final StringBuilder sb = new StringBuilder();
+            for (final Map.Entry<Integer, String> e : levels.entrySet()) {
+                if (sb.length() > 0) {
+                    sb.append(';');
+                }
+                sb.append(e.getKey()).append(':').append(e.getValue());
+            }
+            set(TrackableProperty.StationLevels, sb.toString());
+        }
+
+        private void putStationLevel(TreeMap<Integer, String> levels, String station, String power, String toughness) {
+            try {
+                levels.put(Integer.parseInt(station.trim()), power + ":" + toughness);
+            } catch (NumberFormatException e) {
+                // not a numeric threshold, nothing to show
+            }
+        }
+
+        /** The "Key$ Value" parameters of a script line such as "Mode$ Continuous | Station$ 12 | SetPower$ 7". */
+        private Map<String, String> parseScriptParams(String script) {
+            final Map<String, String> params = new java.util.HashMap<>();
+            for (final String part : script.split("\\|")) {
+                final int i = part.indexOf('$');
+                if (i > 0) {
+                    params.put(part.substring(0, i).trim(), part.substring(i + 1).trim());
+                }
+            }
+            return params;
         }
 
         public String getSetCode() {

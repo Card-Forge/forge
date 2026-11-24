@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Amadioha
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Kobayashi_Hiroyuki_-_Dimir_Aggro_(Standard,_#891562).dck
+Deck Type=constructed
+
+[Main]
+2 Shoot the Sheriff
+2 Bitter Triumph
+3 Spell Pierce
+3 Requiting Hex
+4 Corpses of the Lost
+4 Kaito, Bane of Nightmares
+2 Mockingbird
+4 Cecil, Dark Knight
+4 Desolation Prowler
+4 Floodpits Drowner
+4 Forsaken Miner
+2 Island
+2 Soulstone Sanctuary
+4 Swamp
+4 Watery Grave
+4 Gloomlake Verge
+4 Starting Town
+4 Multiversal Passage
+[Sideboard]
+2 Day of Black Sun
+2 Duress
+1 Flashfreeze
+1 Disdainful Stroke
+1 Annul
+1 Nowhere to Run
+4 Strategic Betrayal
+1 Spider-Sense
+1 Wan Shi Tong, Librarian
+1 Requiting Hex

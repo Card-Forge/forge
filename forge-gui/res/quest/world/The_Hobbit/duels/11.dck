@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/GodOfSlaughter_-_Jund_Aggro_(Standard,_#888912).dck
+Deck Type=constructed
+
+[Main]
+1 The Ooze
+3 Lively Dirge
+3 Requiting Hex
+3 Deadly Precision
+4 Obsessive Pursuit
+1 Umbral Collar Zealot
+1 Goldvein Hydra
+3 Callous Inspector
+4 The Sackville-Bagginses
+4 Biotech Specialist
+4 Gene Pollinator
+4 Rottenmouth Viper
+4 Greedy Freebooter
+1 Forest
+1 Stomping Ground
+1 Swamp
+2 Blood Crypt
+2 Wastewood Verge
+2 Blazemire Verge
+4 Starting Town
+4 Overgrown Tomb
+4 Blooming Marsh
+[Sideboard]
+3 Duress
+4 Strategic Betrayal
+2 Heritage Reclamation
+3 Vicious Rivalry
+2 Witherbloom Charm
+1 Eddie Brock

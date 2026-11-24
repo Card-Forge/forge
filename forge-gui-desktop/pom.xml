@@ -89,6 +89,7 @@
                             <messages>
                                 <!-- launch4j appends " 17" (the minimum version) to this text. -->
                                 <jreVersionErr>Forge needs Java 17 or newer. Click OK to open the download page. Minimum version:</jreVersionErr>
+                                <jreNotFoundErr>Forge needs Java 17 or newer. Click OK to open the download page.</jreNotFoundErr>
                             </messages>
                             <icon>src/main/config/forge.ico</icon>
                             <classPath>

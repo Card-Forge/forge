@@ -1,63 +1,127 @@
 [metadata]
-Code=PUNK
+Code=OUNK
 Date=2024-02-24
 Name=Black Lotus Unknown Planechase
 Type=Funny
-ScryfallCode=PUNK
+ScryfallCode=OUNK
 
 [cards]
-PLA001 C Artist Alley @
-PLA001a C Artist Alley @
-PLA002 C The Bean @
-PLA002a C The Bean @
-PLA003 C Black Lotus Lounge @
-PLA003a C Black Lotus Lounge @
-PLA004 C City Hall @
-PLA004a C City Hall @
-PLA005 C Pin Collector's Booth @
-PLA005a C Pin Collector's Booth @
-PLA006 C Pin Trading @
-PLA007 C Shy Town @
-PLA008 C Sky Deck @
-PLA009 C The Windy City @
-PLA009a C The Windy City @
-PLA010 C Unknown Event @
-PLA011 C Bicycle Rack @
-PLA012 C Clamilton Estate @
-PLA013 C Event Horizon @
-PLA014 C The Food Court @
-PLA015 C High Noon At Thunder Junction @
-PLA016 C Mad Labs @
-PLA017 C Multiversal High Council @
-PLA018 C Oteclán @
-PLA019 C Probability Flux @
-PLA020 C Royal Booster @
-PLA021 C Shrinking Plane @
-PLA022 C Stroopwafel Cafe @
-PLA023 C Tarnation @
-PLA024 C Windmill Farm @
-PLA025 C Asmoranomardicadaistinaculdacar's Kitchen @
-PLA026 C Circus of the Sun @
-PLA027 C Elvish Impersonation Contest @
-PLA028 C High and Dry Black Market @
-PLA029 C Jalira's Show @
-PLA030 C Mojave Desert @
-PLA031 C P-No Way Out @
-PLA032 C Omenpath Instability @
-PLA033 C Preston's Stage @
-PLA034 C Pursued by Something @
-PLA035 C Raiders' Allegiance @
-PLA036 C Team-Up! @
-PLA037 C The Sphere @
-PLA038 C Welcome to Valley @
-PLA039 C Game Knights Live @
-PLA040 C Ghirapur Grand Prix @
-PLA041 C New Player's Journey @
-PLA042 C Sorin's Remastered Manor @
-PLA043 C That's Enough Slices @
-PLA044 C The Command Zone @
-PLA045 C The Pro Tour @
-PLA046 C Year-End Review @
+20240201 C The Art of Magic @
+20240202 C Black Lotus Lounge @
+20240203 C City Hall @
+20240204 C Pin Collector's Booth @
+20240205 C Pin Trading @
+20240206 C Shy Town @
+20240207 C Sky Deck @
+20240208 C The Bean @
+20240209 C The Windy City @
+20240210 C Unknown Event @
+20240601 C The Art of Magic @
+20240602 C Bicycle Rack @
+20240603 C Black Lotus Lounge @
+20240604 C Clamilton Estate @
+20240605 C Event Horizon @
+20240606 C High Noon At Thunder Junction @
+20240607 C Mad Labs @
+20240608 C Multiversal High Council @
+20240609 C Oteclán @
+20240610 C Pin Collector's Booth @
+20240611 C Probability Flux @
+20240612 C Royal Booster @
+20240613 C Shrinking Plane @
+20240614 C Stroopwafel Cafe @
+20240615 C Tarnation @
+20240616 C The Food Court @
+20240617 C Windmill Farm @
+20241001 C Asmoranomardicadaistinaculdacar's Kitchen @
+20241002 C Circus of the Sun @
+20241003 C Elvish Impersonation Contest @
+20241004 C High and Dry Black Market @
+20241005 C Jalira's Show @
+20241006 C Mojave Desert @
+20241007 C No Way Out @
+20241008 C Omenpath Instability @
+20241009 C Preston's Stage @
+20241010 C Pursued by Something @
+20241011 C Raiders' Allegiance @
+20241012 C Team-Up! @
+20241013 C The Sphere @
+20241014 C Welcome to Valley @
+20250201 C City Hall @
+20250202 C Game Knights Live @
+20250203 C Ghirapur Grand Prix @
+20250204 C New Player's Journey @
+20250205 C Sorin's Remastered Manor @
+20250206 C That's Enough Slices @
+20250207 C The Bean @
+20250208 C The Command Zone @
+20250209 C The Pro Tour @
+20250210 C The Windy City @
+20250211 C Year-End Review @
+20250601 C Alesha's Arena @
+20250602 C Bagel Valley @
+20250603 C Crime Scene @
+20250604 C Demo Tables @
+20250605 C Elvish Impersonation Contest (Phenomenon) @
+20250606 C Jalira's Showroom @
+20250607 C Samut's Training Grounds @
+20250608 C The Merch Booth @
+20250609 C Ureni's Lair @
+20250610 C You Encounter a Beholder! @
+20250611 C Captain (Rank) @
+20250612 C Chief Engineer (Rank) @
+20250613 C Chief Medical Officer (Rank) @
+20250614 C First Officer (Rank) @
+20250615 C Head of Security (Rank) @
+20250616 C Navigator (Rank) @
+20250901 C Cola Bottling Plant @
+20250902 C Georgia Technical Institute @
+20250903 C Goldengrave @
+20250904 C Gravitational Capture @
+20250905 C Lorwyn Arena @
+20250906 C Mysterious Planet @
+20250907 C Secret Lair @
+20250908 C Terminus, End of the Line @
+20250909 C The Big Aquarium @
+20250910 C Through the Wormhole @
+20250911 C Waffle Hovel @
+20260501 C Clamilton Estate @
+20260502 C Explore the Local Scene @
+20260503 C Flamekin Village Square @
+20260504 C Fleem-for-All @
+20260505 C Ikori-All-You-Can-Eat @
+20260506 C LobbyCon @
+20260507 C Neon Graveyard @
+20260508 C Pizza Parlor @
+20260509 C Probability Flux @
+20260510 C Raiders' Allegiance @
+20260511 C Strixhaven Rivalry @
+20260512 C That's Enough Slices @
+20260513 C The Art of Magic @
+20260514 C The Command Zone @
+20260515 C The Sphere @
+20260701 C Cat Café @
+20260702 C Game Knights Live @
+20260703 C Grachtengordel @
+20260704 C Multiversal Field Trip @
+20260705 C National Museum @
+20260706 C Omega-Level Threat @
+20260707 C Overstuffed Bicycle Rack @
+20260708 C Rule 104.3a @
+20260709 C Sandbox Black Market @
+20260710 C Showdown of the Supers @
+20260711 C Ultimate Team-Up @
+20260712 C Your Turn at the Merch Booth @
+20261101 C Clash Me Outside @
+20261102 C Forbidden Peach Orchard @
+20261103 C Fractured Realities @
+20261104 C Jace's Bloomburrow @
+20261105 C Jace's Capenna @
+20261106 C Jace's Thuuuuunder Junction @
+20261107 C Jace's Zendikar @
+20261108 C New Coopenna @
+20261109 C Phoenix Nest @
+20261110 C Serra's Jace's Realm @
 
 [EnchantmentTypes]
 Entropy

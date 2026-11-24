@@ -1,5 +1,6 @@
 package forge.game.staticability;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Table.Cell;
 
 import forge.game.Game;
@@ -10,23 +11,26 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class StaticAbilityDisableTriggers {
 
     public static boolean disabled(final Game game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
-        CardCollectionView cardList = null;
-        // if LTB look back
+        Set<ZoneType> zones = ZoneType.STATIC_ABILITIES_SOURCE_ZONES;
+        Iterable<Card> cardList;
         if (regtrig.looksBackInTime()) {
-            if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
-                cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            CardCollectionView lki = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            if (lki == null) {
+                lki = game.getLastStateBattlefield();
             }
-            if (cardList == null) {
-                cardList = game.getLastStateBattlefield();
-            }
+            zones = new HashSet<>(zones);
+            zones.remove(ZoneType.Battlefield);
+            cardList = Iterables.concat(lki, game.getCardsIn(zones));
         } else {
-            cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            cardList = game.getCardsIn(zones);
         }
 
         for (final Card ca : cardList) {

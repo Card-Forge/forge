@@ -3,14 +3,17 @@ package forge;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +29,7 @@ import forge.toolbox.FDisplayObject;
 import forge.util.ShaderUtil;
 import forge.util.TextBounds;
 import forge.util.Utils;
+import forge.assets.FrameMask;
 
 import java.util.Arrays;
 
@@ -43,6 +47,7 @@ public class Graphics implements Disposable {
     private Rectangle bounds = new Rectangle();
     private Rectangle visibleBounds = new Rectangle();
     private int failedClipCount;
+    private boolean clipImbalanceReported;
     private float alphaComposite = 1;
     private int transformCount = 0;
     private boolean isDisposed = false;
@@ -130,6 +135,29 @@ public class Graphics implements Disposable {
         if (shapeRenderer.getCurrentType() != null) {
             shapeRenderer.end();
         }
+        resetClipState();
+    }
+
+    // A frame must not leave a clip behind. If an exception skipped an endClip, whatever is left would otherwise stay on
+    // libGDX's static scissor stack and keep the depth counter (and the pool) growing frame after frame.
+    private void resetClipState() {
+        if (clipDepth == 0 && failedClipCount == 0) {
+            return;
+        }
+        if (!clipImbalanceReported) {
+            clipImbalanceReported = true;
+            System.err.println("Graphics: unbalanced startClip/endClip at the end of a frame (depth=" + clipDepth + ", failed=" + failedClipCount + "), resetting");
+        }
+        while (clipDepth > 0) {
+            try {
+                ScissorStack.popScissors();
+            } catch (RuntimeException e) {
+                break; // nothing left to pop
+            }
+            clipDepth--;
+        }
+        clipDepth = 0;
+        failedClipCount = 0;
     }
 
     @Override
@@ -227,13 +255,12 @@ public class Graphics implements Disposable {
 
     public void endClip() {
         if (failedClipCount == 0) {
+            if (clipDepth == 0) {
+                return; // nothing open (e.g. the frame was reset mid-clip), don't touch ScissorStack
+            }
             batch.flush(); // must flush batch to ensure stuff rendered during clip respects that clip
             ScissorStack.popScissors();
-
-            // Retract depth tracking downward as layout loops exit
-            if (clipDepth > 0) {
-                clipDepth--;
-            }
+            clipDepth--;
         } else {
             failedClipCount--;
         }
@@ -547,13 +574,21 @@ public class Graphics implements Disposable {
     }
 
     public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
+        drawCurvedArrow(thickness, fillColor, strokeColor, x1, y1, x2, y2, drawPointer, 0f);
+    }
+
+    /**
+     * @param bulge if non-zero, always draws a curve (even between close points) whose control point sits this far
+     *              to the side of the midpoint; positive bulges to the left of the direction of travel on screen
+     */
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer, float bulge) {
         if (alphaComposite < 1) {
             fillColor = fade(fillColor, fadeA);
             strokeColor = fade(strokeColor, fadeB);
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, !drawPointer);
+        prepCurved(thickness, x1, y1, x2, y2, !drawPointer, bulge);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -617,7 +652,7 @@ public class Graphics implements Disposable {
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, false);
+        prepCurved(thickness, x1, y1, x2, y2, false, 0f);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -766,7 +801,7 @@ public class Graphics implements Disposable {
     }
 
     //geometry of a curved arrow/pointer (straight when short), computed once into the ca* fields and curvePts
-    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead) {
+    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead, float bulge) {
         caSx1 = adjustX(x1);
         caSy1 = adjustY(y1, 0);
         caSx2 = adjustX(x2);
@@ -779,7 +814,7 @@ public class Graphics implements Disposable {
         // Point just before the tip for direction
         float beforeTipX = x1, beforeTipY = y1;
 
-        if (length < 120f) {
+        if (length < 120f && bulge == 0f) {
             // Straight line
             caCurved = false;
             float backScale = Math.max(0.1f, 10f / length);
@@ -791,7 +826,7 @@ public class Graphics implements Disposable {
             float midX = (x1 + x2) / 2f;
             float midY = (y1 + y2) / 2f;
             float px = -dy / length, py = dx / length;
-            float curveStrength = 50f;
+            float curveStrength = bulge != 0f ? bulge : 50f;
             float cx = midX + px * curveStrength;
             float cy = midY + py * curveStrength;
 
@@ -936,7 +971,9 @@ public class Graphics implements Disposable {
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
         shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
-        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
+        //the pieces must not overlap: translucent colours would show the overlap as a brighter square
+        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), cornerRadius, h - cornerRadius * 2);
+        shapeRenderer.rect(adjustX(x + w - cornerRadius), adjustY(y + cornerRadius, h - cornerRadius * 2), cornerRadius, h - cornerRadius * 2);
         shapeRenderer.rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
 
         endShape();
@@ -984,11 +1021,211 @@ public class Graphics implements Disposable {
         }
     }
 
+    /**
+     * Fills a rectangle whose corners are quarter ellipses rx wide and ry high, like Java2D's fillRoundRect with the arc
+     * diameters 2 * rx and 2 * ry. fillRoundRect can only do circular corners, and the card bars of the desktop renderer
+     * have tall, narrow ends. The shape is convex and is filled as a triangle fan, so nothing overlaps and translucent
+     * colors stay even.
+     */
+    public void fillEllipticRoundRect(Color color, float x, float y, float w, float h, float rx, float ry) {
+        rx = Math.max(Math.min(rx, w / 2), 0);
+        ry = Math.max(Math.min(ry, h / 2), 0);
+        batch.end(); //must pause batch while rendering shapes
+        if (alphaComposite < 1) {
+            color = fade(color, fadeA);
+        }
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        final int segments = Math.max(4, Math.min(20, Math.round(Math.max(rx, ry) / 2)));
+        final int count = 4 * (segments + 1);
+        final float[] px = new float[count];
+        final float[] py = new float[count];
+        //corner centers and the angle each corner starts at, clockwise on the screen
+        final float[] cx = { x + rx, x + w - rx, x + w - rx, x + rx };
+        final float[] cy = { y + ry, y + ry, y + h - ry, y + h - ry };
+        final float[] start = { 180f, 270f, 0f, 90f };
+        int n = 0;
+        for (int corner = 0; corner < 4; corner++) {
+            for (int i = 0; i <= segments; i++) {
+                final float angle = (start[corner] + 90f * i / segments) * MathUtils.degreesToRadians;
+                px[n] = adjustX(cx[corner] + rx * MathUtils.cos(angle));
+                py[n] = adjustY(cy[corner] + ry * MathUtils.sin(angle), 0);
+                n++;
+            }
+        }
+        final float midX = adjustX(x + w / 2);
+        final float midY = adjustY(y + h / 2, 0);
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        for (int i = 0; i < count; i++) {
+            final int next = (i + 1) % count;
+            shapeRenderer.triangle(midX, midY, px[i], py[i], px[next], py[next]);
+        }
+        endShape();
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        batch.begin();
+    }
+
+    // ---- antialiased rounded boxes ---------------------------------------------------------------------------------
+    // A box is a corner mask (see FrameMask) in each corner and plain rectangles in between. All edges come from one
+    // array of coordinates, so the pieces share exactly the same float values and no crack can show between them.
+
+    private void batchQuadAbs(float l, float b, float r, float t, float cBL, float cTL, float cTR, float cBR) {
+        if (r <= l || t <= b) {
+            return;
+        }
+        final float[] v = quadVerts;
+        v[0] = l;  v[1] = b;  v[2] = cBL;  v[3] = 0.5f;  v[4] = 0.5f;
+        v[5] = l;  v[6] = t;  v[7] = cTL;  v[8] = 0.5f;  v[9] = 0.5f;
+        v[10] = r; v[11] = t; v[12] = cTR; v[13] = 0.5f; v[14] = 0.5f;
+        v[15] = r; v[16] = b; v[17] = cBR; v[18] = 0.5f; v[19] = 0.5f;
+        batch.draw(getWhiteTexture(), v, 0, 20);
+    }
+
+    /** A corner mask: the texture is the top left corner, flipU and flipV mirror it into the other corners. */
+    private void batchMaskQuad(Texture mask, float l, float b, float r, float t, float color, boolean flipU, boolean flipV) {
+        if (r <= l || t <= b) {
+            return;
+        }
+        final float uLeft = flipU ? 1 : 0, uRight = flipU ? 0 : 1, vTop = flipV ? 1 : 0, vBottom = flipV ? 0 : 1;
+        final float[] v = quadVerts;
+        v[0] = l;  v[1] = b;  v[2] = color;  v[3] = uLeft;  v[4] = vBottom;
+        v[5] = l;  v[6] = t;  v[7] = color;  v[8] = uLeft;  v[9] = vTop;
+        v[10] = r; v[11] = t; v[12] = color; v[13] = uRight; v[14] = vTop;
+        v[15] = r; v[16] = b; v[17] = color; v[18] = uRight; v[19] = vBottom;
+        batch.draw(mask, v, 0, 20);
+    }
+
+    /**
+     * Fills a box with antialiased elliptical corners (each rx wide and ry high). The color goes from color1 on the left to
+     * color2 on the right. The left or the right side can be square, so a three color box is drawn as two halves.
+     */
+    public void fillMaskedRoundRect(Color color1, Color color2, float x, float y, float w, float h, float rx, float ry, boolean roundLeft, boolean roundRight) {
+        if (!batch.isDrawing()) {
+            fillEllipticRoundRect(color1, x, y, w, h, rx, ry); //no batch to draw the masks with
+            return;
+        }
+        rx = Math.max(Math.min(rx, w / 2), 0);
+        ry = Math.max(Math.min(ry, h / 2), 0);
+        if (alphaComposite < 1) {
+            color1 = fade(color1, fadeA);
+            color2 = fade(color2, fadeB);
+        }
+        final float c1 = color1.toFloatBits(), c2 = color2.toFloatBits();
+        final Texture mask = FrameMask.fill();
+        // the edges of the pieces, y goes up here: y0 is the bottom of the box and y3 its top
+        final float lx = adjustX(x), by = adjustY(y, h);
+        final float x0 = lx, x1 = lx + (roundLeft ? rx : 0), x2 = lx + w - (roundRight ? rx : 0), x3 = lx + w;
+        final float y0 = by, y1 = by + ry, y2 = by + h - ry, y3 = by + h;
+        if (roundLeft) {
+            batchMaskQuad(mask, x0, y2, x1, y3, c1, false, false); //top left
+            batchMaskQuad(mask, x0, y0, x1, y1, c1, false, true);  //bottom left
+            batchQuadAbs(x0, y1, x1, y2, c1, c1, c1, c1);
+        }
+        if (roundRight) {
+            batchMaskQuad(mask, x2, y2, x3, y3, c2, true, false);  //top right
+            batchMaskQuad(mask, x2, y0, x3, y1, c2, true, true);   //bottom right
+            batchQuadAbs(x2, y1, x3, y2, c2, c2, c2, c2);
+        }
+        batchQuadAbs(x1, y0, x2, y3, c1, c1, c2, c2);
+    }
+
+    /**
+     * Draws the four corners that a rounded box cuts away, in one color: laid over a texture, they give the texture the
+     * rounded shape of the box.
+     */
+    public void fillMaskedCorners(Color color, float x, float y, float w, float h, float rx, float ry) {
+        fillMaskedCorners(color, x, y, w, h, rx, ry, rx, ry);
+    }
+
+    /** Like above, with a different (elliptical) corner size on the top and on the bottom of the box. */
+    public void fillMaskedCorners(Color color, float x, float y, float w, float h, float rxTop, float ryTop, float rxBottom, float ryBottom) {
+        if (!batch.isDrawing()) {
+            return;
+        }
+        rxTop = Math.max(Math.min(rxTop, w / 2), 0);
+        ryTop = Math.max(Math.min(ryTop, h / 2), 0);
+        rxBottom = Math.max(Math.min(rxBottom, w / 2), 0);
+        ryBottom = Math.max(Math.min(ryBottom, h / 2), 0);
+        if (alphaComposite < 1) {
+            color = fade(color, fadeA);
+        }
+        final float c = color.toFloatBits();
+        final Texture mask = FrameMask.wedge();
+        final float lx = adjustX(x), by = adjustY(y, h);
+        final float x0 = lx, x3 = lx + w;
+        final float y0 = by, y3 = by + h;
+        if (rxTop > 0 && ryTop > 0) {
+            batchMaskQuad(mask, x0, y3 - ryTop, x0 + rxTop, y3, c, false, false);
+            batchMaskQuad(mask, x3 - rxTop, y3 - ryTop, x3, y3, c, true, false);
+        }
+        if (rxBottom > 0 && ryBottom > 0) {
+            batchMaskQuad(mask, x0, y0, x0 + rxBottom, y0 + ryBottom, c, false, true);
+            batchMaskQuad(mask, x3 - rxBottom, y0, x3, y0 + ryBottom, c, true, true);
+        }
+    }
+
+    // ---- rectangles through the SpriteBatch -------------------------------------------------------------------------
+    // fillRect / fillGradientRect / drawRect / drawRectLines used to go through ShapeRenderer, which has to pause the batch for
+    // every single call (flush, shader switch, shape pass, shader switch). A card frame drawn in code makes around ten of them
+    // per card. They are now solid quads drawn through the batch with a 1x1 white texture: draw order is preserved, nothing
+    // is paused, and consecutive rects merge into one draw call. Fills and gradients cover exactly the same pixels as before.
+    // Outlines used to be GL lines (smoothed, centered on the edge); the quads cover the same footprint with hard edges.
+    // FORCED ON by default. -Dforge.batchedRects=true turns it on; -Dforge.batchedOutlines=false then keeps outlines on ShapeRenderer.
+    private static final boolean BATCHED_RECTS = true;// Boolean.parseBoolean(System.getProperty("forge.batchedRects", "false"));
+    private static final boolean BATCHED_RECT_OUTLINES = true;// BATCHED_RECTS && !"false".equalsIgnoreCase(System.getProperty("forge.batchedOutlines"));
+    // ONE shared 1x1 texture for the whole app instead of one per Graphics instance, so it can never pile up
+    private static Pixmap whitePixmap;
+    private static Texture whiteTexture;
+    private final float[] quadVerts = new float[20];
+
+    private Texture getWhiteTexture() {
+        if (whiteTexture == null) {
+            whitePixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            whitePixmap.setColor(1f, 1f, 1f, 1f);
+            whitePixmap.fill();
+            // managed, so it is restored if the GL context is ever lost
+            whiteTexture = new Texture(new PixmapTextureData(whitePixmap, null, false, false, true));
+            whiteTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
+        return whiteTexture;
+    }
+
+    // One solid quad. (l, b) is the bottom-left corner in screen space; colors are packed floats per corner in the order
+    // bottom-left, top-left, top-right, bottom-right. Vertex colors are used as they are (the batch color is not applied).
+    private void batchQuad(float l, float b, float w, float h, float cBL, float cTL, float cTR, float cBR) {
+        final float[] v = quadVerts;
+        final float r = l + w, t = b + h;
+        v[0] = l;  v[1] = b;  v[2] = cBL;  v[3] = 0.5f;  v[4] = 0.5f;
+        v[5] = l;  v[6] = t;  v[7] = cTL;  v[8] = 0.5f;  v[9] = 0.5f;
+        v[10] = r; v[11] = t; v[12] = cTR; v[13] = 0.5f; v[14] = 0.5f;
+        v[15] = r; v[16] = b; v[17] = cBR; v[18] = 0.5f; v[19] = 0.5f;
+        batch.draw(getWhiteTexture(), v, 0, 20);
+    }
+
     public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
         drawRect(thickness, skinColor.getColor(), x, y, w, h);
     }
 
     public void drawRect(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f); // GL lines were never thinner than 1
+            final float half = t / 2f;
+            final float c = color.toFloatBits();
+            final float l = adjustX(x), b = adjustY(y, h);
+            // the four edges, each centered on the rectangle's edge like the GL lines were
+            batchQuad(l, b - half, w, t, c, c, c, c);
+            batchQuad(l, b + h - half, w, t, c, c, c, c);
+            batchQuad(l - half, b, t, h, c, c, c, c);
+            batchQuad(l + w - half, b, t, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (thickness > 1) {
@@ -1014,7 +1251,92 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
+    /**
+     * Rectangle outline made of dashes, drawn inside the given rectangle. Changing {@code phase} (same units as the
+     * other lengths) slides the dashes along the outline, which gives "marching ants" when it grows over time.
+     * Built from filled rects, so it batches like every other rect and follows active transforms.
+     */
+    public void drawDashedRect(float thickness, Color color, float x, float y, float w, float h, float dash, float gap, float phase) {
+        final float period = dash + gap;
+        if (dash <= 0 || period <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        final float perimeter = 2 * (w + h);
+        // start one period early so a dash that straddles the starting corner is still drawn
+        final float offset = ((phase % period) + period) % period;
+        for (float s = offset - period; s < perimeter; s += period) {
+            final float a = Math.max(s, 0f), b = Math.min(s + dash, perimeter);
+            if (b > a) {
+                dashSegment(color, t, x, y, w, h, a, b);
+            }
+        }
+    }
+
+    /**
+     * Outline of equal dashes that alternate between two colours: the same picture as two {@link #drawDashedRect} calls
+     * half a pattern apart. When opaque, the first colour is drawn as one solid frame and only the second colour's dashes
+     * go over it, which halves the rects drawn (this runs for every selectable card, every frame). Translucent drawing
+     * keeps the two passes so the colours do not blend where they would overlap.
+     */
+    public void drawAlternatingDashedRect(float thickness, Color colorA, Color colorB, float x, float y, float w, float h, float dash, float phase) {
+        if (alphaComposite < 1) {
+            drawDashedRect(thickness, colorA, x, y, w, h, dash, dash, phase);
+            drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+            return;
+        }
+        if (dash <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        fillRect(colorA, x, y, w, t); // top
+        fillRect(colorA, x, y + h - t, w, t); // bottom
+        fillRect(colorA, x, y + t, t, h - 2 * t); // left
+        fillRect(colorA, x + w - t, y + t, t, h - 2 * t); // right
+        drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+    }
+
+    // draws the part of an outline (clockwise from the top left corner) between distances a and b, split per edge
+    private void dashSegment(Color color, float t, float x, float y, float w, float h, float a, float b) {
+        float edgeStart = 0;
+        for (int edge = 0; edge < 4; edge++) {
+            if (edgeStart >= b) {
+                break; // the rest of the outline lies beyond this dash
+            }
+            final float len = edge % 2 == 0 ? w : h;
+            final float lo = Math.max(a, edgeStart), hi = Math.min(b, edgeStart + len);
+            if (hi > lo) {
+                final float u0 = lo - edgeStart, u1 = hi - edgeStart;
+                switch (edge) {
+                    case 0 -> fillRect(color, x + u0, y, u1 - u0, t); // top, left to right
+                    case 1 -> fillRect(color, x + w - t, y + u0, t, u1 - u0); // right, downwards
+                    case 2 -> fillRect(color, x + w - u1, y + h - t, u1 - u0, t); // bottom, right to left
+                    default -> fillRect(color, x, y + h - u1, t, u1 - u0); // left, upwards
+                }
+            }
+            edgeStart += len;
+        }
+    }
+
     public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f);
+            final float half = thickness / 2f; // the edges were inset by thickness / 2, as in the line version below
+            final float qh = t / 2f;
+            final float c = color.toFloatBits();
+            final float x0 = adjustX(x), x1 = adjustX(x + w);
+            final float yTop = adjustY(y, 0), yBottom = adjustY(y + h, 0);
+            batchQuad(x0, yTop - qh, x1 - x0, t, c, c, c, c);
+            batchQuad(x0, yBottom - qh, x1 - x0, t, c, c, c, c);
+            final float lx = adjustX(x + half), rx = adjustX(x + w - half);
+            final float yv0 = adjustY(y + h - half, 0), yv1 = adjustY(y + half, 0);
+            batchQuad(lx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            batchQuad(rx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            return;
+        }
         // all four edges are axis aligned (no smoothing needed) so they share one batch pause and one shape pass
         batch.end(); //must pause batch while rendering shapes
 
@@ -1052,6 +1374,14 @@ public class Graphics implements Disposable {
     }
 
     public void fillRect(Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float c = color.toFloatBits();
+            batchQuad(adjustX(x), adjustY(y, h), w, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -1168,6 +1498,16 @@ public class Graphics implements Disposable {
     }
 
     public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color1 = fade(color1, fadeA);
+                color2 = fade(color2, fadeB);
+            }
+            final float c1 = color1.toFloatBits(), c2 = color2.toFloatBits();
+            // same corner colors as the ShapeRenderer version below: bottom-left, top-left, top-right, bottom-right
+            batchQuad(adjustX(x), adjustY(y, h), w, h, vertical ? c2 : c1, c1, vertical ? c1 : c2, c2);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -1888,6 +2228,13 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         batch.draw(image, adjustX(x), adjustY(y, h), w, h, 0, 0, image.getWidth(), image.getHeight(), false, true);
+    }
+
+    /** Draws a part of a frame buffer texture flipped (like drawFlippedImage), turned by rotation degrees around the center cx, cy. w and h are the size before it is turned. */
+    public void drawRotatedFlippedImage(Texture image, float cx, float cy, float w, float h, int srcX, int srcY, int srcWidth, int srcHeight, float rotation) {
+        if (image == null)
+            return;
+        batch.draw(image, adjustX(cx - w / 2), adjustY(cy - h / 2, h), w / 2, h / 2, w, h, 1, 1, rotation, srcX, srcY, srcWidth, srcHeight, false, true);
     }
 
     public void drawImageWithTransforms(TextureRegion image, float x, float y, float w, float h, float rotation, boolean flipX, boolean flipY) {

@@ -1,0 +1,7 @@
+Name:Event Trait - Confession
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ TrigSuspect | EffectZone$ Command | Description$ Your commander is suspected. (A suspected creature has menace and can't block.)
+SVar:TrigSuspect:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSuspect | TriggerDescription$ When this creature enters, suspect it. (A suspected creature has menace and can't block.)
+SVar:DBSuspect:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected
+Oracle:Whenever your Commander enters the battlefield, suspect it.\n(A suspected creature has menace and can't block.)

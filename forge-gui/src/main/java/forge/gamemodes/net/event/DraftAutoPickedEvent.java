@@ -24,4 +24,9 @@ public final class DraftAutoPickedEvent implements NetEvent {
 
     @Override
     public void updateForClient(RemoteClient client) { }
+
+    @Override
+    public String toString() {
+        return String.format("DraftAutoPicked: seat %d, pack %d pick %d, %s", seatIndex, packNumber, pickInPack, card);
+    }
 }

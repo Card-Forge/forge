@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.game.Game;
@@ -72,7 +71,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            return isSorcerySpeed(sa, ai) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
+            return isSorcerySpeed(sa, ai) || (ph.isPlayerNextTurn(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
@@ -239,9 +238,6 @@ public class PumpAi extends PumpAiBase {
                 }
 
             }
-        } else if (aiLogic.startsWith("Donate")) {
-            // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
-            return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
@@ -358,7 +354,10 @@ public class PumpAi extends PumpAiBase {
                 : Lists.newArrayList();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
-        final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
+
+        if ("Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"))) {
+            return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
+        }
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
@@ -368,17 +367,12 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && !"ReplaySpell".equals(sa.getParam("AILogic"))
-                && !isFight) {
+                && !"ReplaySpell".equals(sa.getParam("AILogic"))) {
             return false;
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-
-        if ("PowerStruggle".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.PowerStruggle.considerFirstTarget(ai, sa);
-        }
 
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -390,76 +384,64 @@ public class PumpAi extends PumpAiBase {
         }
 
         CardCollection list;
-        if (sa.hasParam("AILogic")) {
-            if (sa.getParam("AILogic").equals("HighestPower") || sa.getParam("AILogic").equals("ContinuousBonus")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
-                list = CardLists.getTargetableCards(list, sa);
-                CardLists.sortByPowerDesc(list);
+        if ("HighestPower".equals(sa.getParam("AILogic")) || "ContinuousBonus".equals(sa.getParam("AILogic"))) {
+            list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
+            list = CardLists.getTargetableCards(list, sa);
+            CardLists.sortByPowerDesc(list);
 
-                if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
-                    list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+            if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
+                list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+            }
+
+            // Try not to kill own creatures with this pump
+            CardCollection canDieToPump = new CardCollection();
+            for (Card c : list) {
+                if (c.isCreature() && c.getController() == ai
+                        && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
+                    canDieToPump.add(c);
                 }
-
-                // Try not to kill own creatures with this pump
-                CardCollection canDieToPump = new CardCollection();
-                for (Card c : list) {
-                    if (c.isCreature() && c.getController() == ai
-                            && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
-                        canDieToPump.add(c);
-                    }
-                    // Also, don't pump itself if the SA involves a sacrifice self cost
-                    if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
-                        canDieToPump.add(c);
-                    }
+                // Also, don't pump itself if the SA involves a sacrifice self cost
+                if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                    canDieToPump.add(c);
                 }
-                list.removeAll(canDieToPump);
+            }
+            list.removeAll(canDieToPump);
 
-                // Generally, don't pump anything that your opponents control
-                if ("ContinuousBonus".equals(sa.getParam("AILogic"))) {
-                    // TODO: make it possible for the AI to use this logic to kill opposing creatures
-                    // when a toughness debuff is applied
-                    list = CardLists.filter(list, CardPredicates.isController(ai));
-                }
+            // Generally, don't pump anything that your opponents control
+            if ("ContinuousBonus".equals(sa.getParam("AILogic"))) {
+                // TODO: make it possible for the AI to use this logic to kill opposing creatures
+                // when a toughness debuff is applied
+                list = CardLists.filter(list, CardPredicates.isController(ai));
+            }
 
-                if (!list.isEmpty()) {
-                    sa.getTargets().add(list.get(0));
-                    return true;
-                }
-                return false;
-            } else if (sa.getParam("AILogic").equals("SameName")) {
-                return doSameNameLogic(ai, sa);
-            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
-                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
-                // the best for opponents
-                return SacrificeAi.doSacOneEachLogic(ai, sa).willingToPlay();
-            } else if (sa.getParam("AILogic").equals("Destroy")) {
-                List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
-                if (tgts.isEmpty()) {
-                    return false;
-                }
-
-                List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
-                List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
-
-                Card destroyTgt = null;
-                if (!oppTgts.isEmpty()) {
-                    destroyTgt = ComputerUtilCard.getBestAI(oppTgts);
-                } else {
-                    // TODO: somehow limit this so that the AI doesn't always destroy own stuff when able?
-                    destroyTgt = ComputerUtilCard.getWorstAI(alliedTgts);
-                }
-
-                if (destroyTgt != null) {
-                    sa.getTargets().add(destroyTgt);
-                    return true;
-                }
-
+            if (!list.isEmpty()) {
+                sa.getTargets().add(list.get(0));
+                return true;
+            }
+            return false;
+        } else if ("Destroy".equals(sa.getParam("AILogic"))) {
+            List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+            if (tgts.isEmpty()) {
                 return false;
             }
 
-            if (isFight) {
-                return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
+            List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
+            List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
+
+            Card destroyTgt = null;
+            if (!oppTgts.isEmpty()) {
+                destroyTgt = ComputerUtilCard.getBestAI(oppTgts);
+            } else {
+                // TODO: somehow limit this so that the AI doesn't always destroy own stuff when able?
+                destroyTgt = ComputerUtilCard.getWorstAI(alliedTgts);
             }
+
+            if (destroyTgt != null) {
+                sa.getTargets().add(destroyTgt);
+                return true;
+            }
+
+            return false;
         }
 
         if (sa.isCurse()) {
@@ -471,6 +453,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
+            if (tgt.canOnlyTgtOpponent()) {
+                for (final Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        return true;
+                    }
+                }
+                return false;
+            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
@@ -732,68 +723,6 @@ public class PumpAi extends PumpAiBase {
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory
         return true;
-    }
-
-    private boolean doSameNameLogic(Player aiPlayer, SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
-        final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final ZoneType origin = ZoneType.listValueOf(sa.getSubAbility().getParam("Origin")).get(0);
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), aiPlayer,
-                source, sa);
-        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
-        if (list.isEmpty()) {
-            return false; // no valid targets
-        }
-
-        Map<Player, Map.Entry<String, Integer>> data = Maps.newHashMap();
-
-        // need to filter for the opponents first
-        for (final Player opp : aiPlayer.getOpponents()) {
-            CardCollection oppList = CardLists.filterControlledBy(list, opp);
-
-            // no cards
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            // Compute value for each possible target
-            Map<String, Integer> values = ComputerUtilCard.evaluateCreatureListByName(oppList);
-
-            // reject if none of them can be targeted
-            oppList = CardLists.filter(oppList, CardPredicates.isTargetableBy(sa));
-            // none can be targeted
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            List<String> toRemove = Lists.newArrayList();
-            for (final String name : values.keySet()) {
-                if (!oppList.anyMatch(CardPredicates.nameEquals(name))) {
-                    toRemove.add(name);
-                }
-            }
-            values.keySet().removeAll(toRemove);
-
-            data.put(opp, Collections.max(values.entrySet(), Map.Entry.comparingByValue()));
-        }
-
-        if (!data.isEmpty()) {
-            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), Comparator.comparingInt(o -> o.getValue().getValue()));
-
-            // filter list again by the opponent and a creature of the wanted name that can be targeted
-            list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
-                    CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
-
-            // list should contain only one element or zero
-            sa.resetTargets();
-            for (Card c : list) {
-                sa.getTargets().add(c);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     @Override

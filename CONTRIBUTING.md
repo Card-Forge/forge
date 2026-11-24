@@ -1,90 +1,106 @@
 # Contributing to Forge
 
-[Official repo](https://github.com/Card-Forge/forge.git).
+Forge is an open-source project run by volunteers, and contributions are welcome! This page explains how to get set up and how to avoid the most common problems in pull requests.
+
+[Official repo](https://github.com/Card-Forge/forge.git). Questions and discussion also happen on [Discord](https://discord.gg/HcPJNyD66a).
 
 ## Contents
 
-- [Requirements / Tools](#requirements--tools)
-- [Project Quick Setup](#project-quick-setup)
-  - [IntelliJ](#intellij)
-  - [Eclipse](#eclipse)
-  - [Windows](#windows)
-  - [Linux / Mac OSX](#linux--mac-osx)
-  - [Android Platform](#android-platform)
-  - [Proguard update](#proguard-update)
-- [Card Scripting](#card-scripting)
-- [General Notes](#general-notes)
+- [Setup](#setup)
+- [Card scripting](#card-scripting)
+- [Opening a pull request](#opening-a-pull-request)
 - [Using AI coding agents](#using-ai-coding-agents)
-- [Project Hierarchy](#project-hierarchy)
+- [Tests](#tests)
+- [Art and UI](#art-and-ui)
+- [Project hierarchy](#project-hierarchy)
 
-## Requirements / Tools
+## Setup
 
-- your favourite Java IDE (IntelliJ, Eclipse, VSCodium, Emacs, Vi...)
+You need:
+
 - Java JDK 17 or later
-- Git
-- Git client (optional)
 - [Maven](https://maven.apache.org/install.html)
-- GitHub account
-- Libgdx (optional: familiarity with this library is helpful for mobile platform development)
-- Android SDK (optional: for Android releases)
-- RoboVM (optional: for iOS releases) (TBD: Current status of support by libgdx)
+- Git and a GitHub account
+- A Java IDE. IntelliJ is recommended. Eclipse also works and includes Maven.
 
-## Project Quick Setup
+To get started, fork the project on GitHub and clone your fork. Then run Maven from the project folder to download the dependencies and build a snapshot:
 
-- Login into GitHub with your user account and fork the project
-- Clone your forked project to your local machine
-- Go to the project location on your machine. Run Maven to download all dependencies and build a snapshot.
-  - Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
+```
+mvn -U -B clean -P windows-linux install
+```
 
-### IntelliJ
+Add `-DskipTests` for a faster build. The [IntelliJ setup guide](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup) explains how to run the desktop and mobile clients. To test a change in a game, you can turn on Developer Mode in Preferences.
 
-IntelliJ is the recommended IDE for Forge development. Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
+### Android
 
-### Eclipse
+> [!CAUTION]
+> Shared code also runs on Android. Be careful about using Java APIs that Android doesn't support such as ``StringBuilder.isEmpty()``. Google's documentation for these is sometimes inaccurate.
 
-Eclipse includes Maven integration so a separate install is not necessary.
-Google no longer supports Android SDK releases for Eclipse.
-
-### Windows
-
-TBD
-
-### Linux / Mac OSX
-
-TBD
-
-### Android Platform
-
-In IntelliJ, if the SDK Manager is not already running, go to Tools > Android > Android SDK Manager. Install the following options / versions:
+Install these through the Android SDK Manager (in IntelliJ: Tools > Android > Android SDK Manager):
 
 - Android SDK Build-tools 35.0.0
 - Android 15 (API 35) SDK Platform
 
-> [!CAUTION]
-> Be careful about using unsupported api calls e.g. ``StringBuilder.isEmpty()``. Google's documentation for these is sometimes inaccurate.
+Proguard 7.6.0 is included under `forge-gui-android/tools` (`proguard.jar`). It supports up to Java 23.
 
-### Proguard update
+## Card scripting
 
-Standalone Proguard 7.6.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports up to Java 23 (latest android uses Java 17).
+Card scripts are in `forge-gui/res/cardsfolder`. The [Card scripting API](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) page on the wiki explains the format.
 
-## Card Scripting
+The easiest way to write a new script is to use a similar card as a template. Prefer one from a recent set, since older scripts can use outdated forms. Test the card in a game before you open a PR.
 
-Visit [this page](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) for information on scripting.
+## Opening a pull request
 
-Card scripting resources are found in the forge-gui/res/ path.
+Before opening a pull request you should do the following:
 
-## General Notes
-
-- Art files need to be copyright-free and they should be in the public domain. Credits and attribution should be included in [Credit and Thanks](https://github.com/Card-Forge/forge/wiki/Credit-and-Thanks).
-- If your contribution adds new UI elements consider the [UI guidelines](https://github.com/Card-Forge/forge/wiki/UI-Guidelines).
+- Check GitHub first for open PRs and issues on the same topic. 
+- For a large change, it can be helpful to seek feedback on [Discord](https://discord.gg/HcPJNyD66a) before opening a PR.
+- In particular, new features for formats like Adventure Mode should be discussed with existing developers in the planning stage before any PR is opened. Sometimes stand-alone features make more sense to integrate into other mechanics, or a desired quality-of-life change may be better addressed by expanding on existing gameplay systems rather than simplifying them.
+- Keep each PR to one goal or feature. Avoid lumping different features into the same PR that could be dealt with separately.
+- For a change that may affect performance, you should profile the impact on different board states (e.g. 1v1, 4v4 Commander, wide token decks) and give before and after performance numbers in the PR description.
+- If your PR involves a visual or UI change, include a screenshot or video in the PR description.
+- Build and run the tests before you open a PR. CI runs `mvn clean test`, and Checkstyle fails the build on unused or redundant imports.
 
 ## Using AI coding agents
 
-If you use an AI agent (e.g. Claude Code, OpenAI Codex) to substantially code a contribution to Forge please identify this when you make a pull request, either by including the coding agent as a co-author or by noting in the body of the request.
+> [!IMPORTANT]
+> Use of AI coding agents such as Claude Code, Codex or Copilot is acceptable. However, ultimately you are the author responsible for any change, so make sure you understand it and can explain it. 
 
-Agents have a tendency to add unnecessary new unit or wiring tests to the CI suite. This should be avoided unless necessary to catch potential future integration regressions.
+If an agent wrote a substantial part of your contribution, say so in the PR body or add it as a co-author.
 
-## Project Hierarchy
+Agent-written PRs tend to go wrong in the same few ways:
+
+- Work with Forge's existing architecture. Before adding something new, check whether existing code already does the job and either re-use or adapt it, so the change fits how the rest of Forge works rather than adding a parallel system.
+- Keep the code simple. Aim for the clearest, smallest change that solves the problem.
+- Fix the root cause, not the symptom. Trace a bug back to where it starts and fix it there, rather than hiding the bug and leaving other cases broken.
+- Keep PRs as small as possible. Break a large feature into a minimal first version that works on its own, followed by smaller PRs, because one large PR takes much longer to review than two small ones.
+- Keep code comments short. Comment only what isn't obvious from the code, such as a hidden constraint or the reason for an unusual choice. Don't use a code comment to describe the bug you fixed or the change you made. That belongs in the PR description.
+- Make sure you run your change before you open a PR. Reproduce a bug before you fix it, check in a game that the fix works, and state in the PR description what you have verified.
+- Keep your PR description concise and to the point. It should identify the key issue in the PR, any implementation issues or decisions maintainers should be aware of, and what testing you have completed. Agents tend to write unnecessarily long and complex PR text.
+
+If your change touches the rules engine, the AI or another complex system, it can help to have your agent run an adversarial review before you open the PR. Ask it to look for ways the change could be wrong, not just to confirm that it works.
+
+If your change doesn't originate from the Comprehensive Rules (e.g. a new game variant or format, unprecedented mechanics from newly released cards, or un-cards) be ready to explain how it integrates and functions with the existing rules engine.
+
+Try and answer review comments in your own words, or make clear when you are copying and pasting text from an agent.
+
+Agents also tend to add more tests than a change needs. See [Tests](#tests).
+
+## Tests
+
+Tests run on every push and build, so every future contributor pays for them. Add the fewest tests that protect behaviour a later change could break.
+
+- Don't add tests for card script changes that don't touch engine or AI code, or trivial wiring tests that only confirm your code runs, such as checking that a method was called.
+- Tests may be added for engine or AI behaviour that many cards share, and to protect against regressions between different systems. A useful test checks a generalisable rule or behaviour, not just one very specific card or situation.
+
+A test should fail without your change and protect a behaviour a player would notice. Add to existing test classes and reuse their setup where you can, rather than writing new test infrastructure. Keep tests fast and deterministic, with fixed seeds and no sleeps or full games. One test per behaviour is usually enough.
+
+## Art and UI
+
+- Art must be copyright-free and in the public domain. Add credits to [Credit and Thanks](https://github.com/Card-Forge/forge/wiki/Credit-and-Thanks).
+- New UI elements should follow the [UI guidelines](https://github.com/Card-Forge/forge/wiki/UI-Guidelines).
+
+## Project hierarchy
 
 Forge is divided into 4 primary projects with additional projects that target specific platform releases. The primary projects are:
 
@@ -107,15 +123,15 @@ The forge-ai project contains the computer opponent logic for gameplay. It inclu
 
 #### forge-core
 
-The forge-core project contains the core game engine, card mechanics, rules engine, and fundamental game logic. It includes the implementation of Magic: The Gathering rules, card interactions, and the game state management system.
+The forge-core project contains the card database, card and deck data, and shared utilities used by the other projects.
 
 #### forge-game
 
-The forge-game project handles the game session management, player interactions, and game flow control. It includes implementations for multiplayer support, game modes, matchmaking, and game state persistence. This module bridges the core game engine with the user interface and networking components.
+The forge-game project contains the rules engine. It implements the Magic: The Gathering rules, card interactions, and game state, including zones, abilities, triggers and combat.
 
 #### forge-gui
 
-The forge-gui project contains the user interface components and rendering logic for the game. It includes the main game window, card displays, player interactions, and the scripting resource definitions in the res/ path.
+The forge-gui project contains the GUI logic shared by the desktop and mobile clients, including game modes, player interactions and network play. It also holds the resources in the res/ path, such as card scripts, editions and translations.
 
 #### forge-gui-android
 
@@ -138,5 +154,3 @@ Mobile GUI game logic utilizing [libgdx](https://libgdx.badlogicgames.com/) libr
 #### forge-gui-mobile-dev
 
 Libgdx backend for desktop development for mobile backends. Utilizes LWJGL. Relies on forge-gui-mobile for GUI logic.
-
-#### forge-installer

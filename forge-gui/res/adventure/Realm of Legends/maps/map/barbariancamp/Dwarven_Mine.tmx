@@ -150,6 +150,7 @@
     ]
    }
 ]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cowardice&quot;]}"/>
     <property name="enemy" value="Reveka"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

@@ -1,0 +1,19 @@
+Name:Unique Charmed Pants
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Unique
+SVar:STK2:Kind$ Name | Word$ Charmed
+SVar:STK3:Kind$ Name | Word$ Pants
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: Add one mana of any color. | Ability$ STK7Mana
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Whenever this creature attacks, if it's not a Brushwagg, it gets +X/+0 until end of turn, where X is the number of supertypes, card types, and subtypes it has. | Triggers$ STK8Attacks
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 5 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 4 | Toughness$ 8
+SVar:STK7Mana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:STK8Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Card.Self+nonBrushwagg | Execute$ STK8Pump | TriggerDescription$ Whenever this creature attacks, if it's not a Brushwagg, it gets +X/+0 until end of turn, where X is the number of supertypes, card types, and subtypes it has.
+SVar:STK8Pump:DB$ Pump | Defined$ Self | NumAtt$ +STK8X
+SVar:STK8X:Count$ValidSelf Card$AllTypes
+Oracle:{TK}{TK} — {T}: Add one mana of any color.\n{TK}{TK}{TK} — Whenever this creature attacks, if it's not a Brushwagg, it gets +X/+0 until end of turn, where X is the number of supertypes, card types, and subtypes it has.\n{TK}{TK} — 5/1\n{TK}{TK}{TK}{TK} — 4/8

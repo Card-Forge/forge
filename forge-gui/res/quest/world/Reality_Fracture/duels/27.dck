@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Gabriele_Piras_-_Orzhov_Aggro_(Standard,_#895990).dck
+Deck Type=constructed
+
+[Main]
+1 Deep-Cavern Bat
+4 Amalia Benavides Aguirre
+4 Hinterland Sanctifier
+2 Voice of Victory
+3 Haliya, Guided by Light
+2 Emptiness
+2 Liliana the Faultless
+3 Moseo, Vein's New Dean
+3 Essence Channeler
+2 Starscape Cleric
+3 Erode
+4 Case of the Uneaten Feast
+3 Lunar Convocation
+2 Ajani Resolute
+4 Plains
+4 Godless Shrine
+3 Concealed Courtyard
+1 Shattered Sanctum
+1 Bleachbone Verge
+4 Starting Town
+3 Multiversal Passage
+1 Swamp
+1 Dalkovan Encampment
+[Sideboard]
+1 Deep-Cavern Bat
+1 Erode
+1 Cruelclaw's Heist
+2 Ghost Vacuum
+2 Enduring Innocence
+2 Seam Rip
+2 Strategic Betrayal
+1 Decorum Dissertation
+3 Cathar Commando

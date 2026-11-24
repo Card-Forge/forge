@@ -13,8 +13,7 @@ public class StaticAbilityTurnPhaseReversed {
         return anyTurnPhaseReversed(player, StaticAbilityMode.PhaseReversed);
     }
 
-    protected static boolean anyTurnPhaseReversed(Player player, final StaticAbilityMode mode)
-    {
+    protected static boolean anyTurnPhaseReversed(Player player, final StaticAbilityMode mode) {
         boolean result = false;
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {

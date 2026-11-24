@@ -1,0 +1,8 @@
+Name:Borg Queen, One Who Is Many
+ManaCost:4 W
+Types:Legendary Artifact Creature Borg Noble
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Lifelink | Description$ Artifact creatures you control have lifelink. (Damage dealt by artifact creatures you control, including this one, also cause you to gain that much life.)
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+Oracle:Artifact creatures you control have lifelink. (Damage dealt by artifact creatures you control, including this one, also cause you to gain that much life.)

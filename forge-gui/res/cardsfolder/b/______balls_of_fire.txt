@@ -1,0 +1,9 @@
+Name:_____ Balls of Fire
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it.
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name
+T:Mode$ StickerPlaced | ValidPlayer$ You | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you put a sticker on CARDNAME, it deals damage equal to the number of o's in name stickers on CARDNAME to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$CardStickers.NameLetter.o
+Oracle:When this enchantment enters, you may put a name sticker on it.\nWhenever you put a sticker on this enchantment, it deals damage equal to the number of o's in name stickers on this enchantment to any target.

@@ -1,0 +1,19 @@
+Name:Yawgmoth Merfolk Soul
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Yawgmoth
+SVar:STK2:Kind$ Name | Word$ Merfolk
+SVar:STK3:Kind$ Name | Word$ Soul
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ When this permanent leaves the battlefield, target player discards a card. | Triggers$ STK7Leaves
+SVar:STK8:Kind$ Ability | Tickets$ 5 | Text$ When this permanent leaves the battlefield, create five 1/1 white Clown Robot artifact creature tokens. | Triggers$ STK8Leaves
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 6 | Toughness$ 5
+SVar:STK7Leaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ STK7Discard | TriggerDescription$ When this permanent leaves the battlefield, target player discards a card.
+SVar:STK7Discard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose
+SVar:STK8Leaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ STK8Token | TriggerDescription$ When this permanent leaves the battlefield, create five 1/1 white Clown Robot artifact creature tokens.
+SVar:STK8Token:DB$ Token | TokenScript$ w_1_1_a_clown_robot | TokenOwner$ You | TokenAmount$ 5
+Oracle:{TK}{TK} — When this permanent leaves the battlefield, target player discards a card.\n{TK}{TK}{TK}{TK}{TK} — When this permanent leaves the battlefield, create five 1/1 white Clown Robot artifact creature tokens.\n{TK}{TK} — 3/3\n{TK}{TK}{TK}{TK} — 6/5

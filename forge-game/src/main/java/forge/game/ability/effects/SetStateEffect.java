@@ -28,7 +28,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        boolean specialize = sa.getParam("Mode").equals("Specialize");
+        boolean specialize = "Specialize".equals(sa.getParam("Mode"));
 
         if (sa.hasParam("Flip")) {
             sb.append("Flip ");
@@ -161,7 +161,7 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             if (optional) {
                 String message = TextUtil.concatWithSpace("Transform", gameCard.getDisplayName(), "?");
-                if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null)) {
+                if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, gameCard, null)) {
                     return;
                 }
             }

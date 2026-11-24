@@ -1,4 +1,5 @@
 Ajani Goldmane|Ajani's Avatar|Serra? Is that you?
+Ajani Resolute|Ajani's Powerful Boost|There's no 'I' in 'team'.
 Ajani Steadfast|Ajani's Forcefield|Shields up!
 Ajani Unyielding|Ajani's Mentoring|Today's lesson: How to be strong.
 Ajani Vengeant|Ajani's Tantrum|Look Ma! No lands!
@@ -29,6 +30,7 @@ Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
 Chandra, Awakened Inferno|Chandra's Utter Disintegration|Is it hot here or is it just me?
 Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
+Chandra, Chill of Compliance|Chandra's Endless Knowledge|You will comply, sooner or later.
 Chandra, Dressed to Kill|Chandra's Red Wedding|She's pretty in pink, cute in crimson, and mighty in maroon.
 Chandra, Fire Artisan|Chandra's Fiery Rush|Combo time!
 Chandra, Flame's Catalyst|Chandra's Sudden Epiphany|Forget everything you know and believe that everything is possible.
@@ -96,6 +98,7 @@ Jace, Cunning Castaway|Jace's Mirror Image|Who is real and who is fake?
 Jace, Ingenious Mind-Mage|Jace's Will|Let me change your minds...
 Jace, Memory Adept|Jace's Revelation|So many things to learn!
 Jace, Mirror Mage|Jace the Bob|Really not much of an achievement at all, but what can you do?
+Jace, Reality Sculptor|Jace's New and Improved Reality|The old must make place for the new.
 Jace, Telepath Unbound|Jace's Erasure|First empty your mind and then... nope, that's it.
 Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
@@ -218,6 +221,7 @@ Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grande
 Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
 The Aetherspark|Extraplanar Energy|I'm not sure where it's coming from, but there's a lot of it.
 The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where.
+The Theorist, Jace Beleren|Jace's Multiversal Theory|It's not just better. It's the best.
 Thomil, the Destroyer|Thomil's Unwise Summoning|I'm sure this won't come back to bite me later...
 Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!

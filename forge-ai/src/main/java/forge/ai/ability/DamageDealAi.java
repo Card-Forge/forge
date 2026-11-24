@@ -40,6 +40,10 @@ import java.util.Map;
 import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AIExpectAmount", "AITgts", "AITgtsStrict",
+    };
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final SpellAbility root = sa.getRootAbility();
@@ -199,7 +203,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                        if (ai.getGame().getPhaseHandler().isPlayerTurn(tgt.getController())) {
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
@@ -246,7 +250,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         // Try to chain damage/debuff effects
@@ -258,11 +262,12 @@ public class DamageDealAi extends DamageAiBase {
                 // won't play it even in chain
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
-                // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
+            if (!chainDmg.getKey().canTarget(sa.getTargets().get(0))) {
+                // we might be trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
                 if (!damageTargetAI(ai, sa, dmg, false)) {
+                    // could try to find another chain candidate
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
@@ -339,6 +344,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final int targetCountBeforePrevention = hPlay.size();
+        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        final boolean skippedPreventedTargets = hPlay.size() < targetCountBeforePrevention;
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -348,6 +356,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+        if (!mandatory) {
+            killables = ComputerUtilCard.withoutHarmlessCreatures(ai, killables);
+        }
 
         // Try not to target anything which will already be dead by the time the spell resolves
         killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
@@ -358,11 +369,26 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!mandatory) {
+            // If prevention made another legal target take zero damage, prefer a target that can actually be damaged
+            // rather than falling through and aiming the spell at the protected creature.
+            if (skippedPreventedTargets && pl.isOpponentOf(ai) && activator.equals(ai) && !hPlay.isEmpty()) {
+                final List<Card> creatures = CardLists.filter(hPlay, CardPredicates.CREATURES);
+                if (!creatures.isEmpty()) { return ComputerUtilCard.getBestCreatureAI(creatures); }
+            }
             return null;
         }
 
-        // try unfiltered now
+        // Retry against the full legal target set. Prefer a target that can take damage, but a mandatory trigger
+        // still has to choose a legal target when prevention makes every option deal zero.
         hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
+        StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final List<Card> legalTargets = Lists.newArrayList(hPlay);
+        final List<Card> damageableTargets = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        if (!damageableTargets.isEmpty()) {
+            hPlay = damageableTargets;
+        } else {
+            hPlay = legalTargets;
+        }
         List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
 
         if (!hPlay.isEmpty()) {
@@ -466,7 +492,36 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory(), immediately);
+        // The last suspend counter has already been removed when PlayEffect builds this spell.
+        final Card host = saMe.getHostCard();
+        final boolean castFromSuspend = saMe.isCastFromPlayEffect() && host != null
+                && host.isInZone(ZoneType.Exile) && host.hasKeyword(Keyword.SUSPEND)
+                && host.getCounters(CounterEnumType.TIME) == 0;
+        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory() || castFromSuspend,
+                immediately || castFromSuspend);
+    }
+
+    /** Aim the simultaneous Valakut triggers at an opponent when the full batch is lethal. */
+    private boolean chooseLethalValakutBatchTarget(final Player ai, final SpellAbility sa,
+                                                   final TargetRestrictions restrictions, final int damage) {
+        final Card source = sa.getHostCard();
+        if (!sa.isTrigger() || source == null || !"Valakut, the Molten Pinnacle".equals(source.getName())
+                || sa.getApi() != ApiType.DealDamage || restrictions == null || !restrictions.canTgtPlayer()) {
+            return false;
+        }
+        final int triggers = Math.max(1,
+                ((PlayerControllerAi) ai.getController()).getAi().getSimultaneousValakutDamageTriggers());
+        for (final Player opponent : ai.getOpponents()) {
+            if (!opponent.canLoseLife() || opponent.cantLoseForZeroOrLessLife() || !sa.canTarget(opponent)) {
+                continue;
+            }
+            final int damagePerTrigger = ComputerUtilCombat.predictDamageTo(opponent, damage, source, false);
+            if (damagePerTrigger > 0 && (long) damagePerTrigger * triggers >= opponent.getLife()) {
+                sa.getTargets().add(opponent);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -518,6 +573,10 @@ public class DamageDealAi extends DamageAiBase {
         sa.resetTargets();
         TargetChoices tcs = sa.getTargets();
 
+        if (chooseLethalValakutBatchTarget(ai, sa, tgt, dmg)) {
+            return true;
+        }
+
         // Do not use if would kill self
         if ("SelfDamage".equals(logic) && ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount"))) {
             return false;
@@ -549,7 +608,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             if (dmg > 0 && lastTgt != null) {
-                sa.addDividedAllocation(lastTgt, sa.getDividedValue(lastTgt) + dmg);
+                final Integer already = sa.getDividedValue(lastTgt);
+                sa.addDividedAllocation(lastTgt, (already == null ? 0 : already) + dmg); // a target without a share yet is 0, not a crash
                 dmg = 0;
                 return true;
             }
@@ -682,7 +742,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
                         freePing = true;
                     }
                     if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
@@ -694,8 +754,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if ((freePing && !avoidTargetP(ai, sa))
-                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || ProwessTiming.worthBeforeCombat(ai, sa) // before combat, so the prowess trigger counts
+                        || isFaceBurnWorthCasting(ai, sa) // an instant that can only hit the player (Skullcrack)
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
                         && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
                         || shouldTgtP(ai, sa, dmg, noPrevention)))) {
@@ -797,7 +859,8 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
         if (!urgent && !playReusable(ai, saMe)) {
-            return false;
+            // a spell that can only hurt the opponent has no other use, so it is not kept for later (Boltwave at 6+ life)
+            return positive && (isFaceBurnWorthCasting(ai, saMe) || ProwessTiming.worthBeforeCombat(ai, saMe));
         }
         return true;
     }
@@ -911,10 +974,12 @@ public class DamageDealAi extends DamageAiBase {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+        int dmg;
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && sa.getPayCosts().hasXInAnyCostPart()) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
+        } else {
+            dmg = calculateDamageAmount(sa, source, damage);
         }
 
         if (!sa.usesTargeting()) {
@@ -927,29 +992,34 @@ public class DamageDealAi extends DamageAiBase {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        // Suspend's Play effect is optional, but the spell is lost if it is not cast after the last TIME counter.
+        final boolean castFromSuspend = sa.isCastFromPlayEffect() && source != null && source.isInZone(ZoneType.Exile)
+                && source.hasKeyword(Keyword.SUSPEND) && source.getCounters(CounterEnumType.TIME) == 0;
+        final boolean mustChooseTarget = mandatory || castFromSuspend;
+        final boolean targetsChosen = damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mustChooseTarget, true);
+        if ((!targetsChosen && !mustChooseTarget) || (castFromSuspend && !sa.isTargetNumberValid())) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
+            // If I can kill my target by paying less mana, do it
+            int actualPay = 0;
+            final boolean noPrevention = sa.hasParam("NoPrevention");
+
+            //target is a player
+            if (!sa.getTargets().isTargetingAnyCard()) {
+                actualPay = dmg;
+            }
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                if (adjDamage > actualPay) {
+                    actualPay = adjDamage;
+                }
             }
 
-            if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
-                // If I can kill my target by paying less mana, do it
-                int actualPay = 0;
-                final boolean noPrevention = sa.hasParam("NoPrevention");
-
-                //target is a player
-                if (!sa.getTargets().isTargetingAnyCard()) {
-                    actualPay = dmg;
-                }
-                for (final Card c : sa.getTargets().getTargetCards()) {
-                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if (adjDamage > actualPay) {
-                        actualPay = adjDamage;
-                    }
-                }
-
-                sa.setXManaCostPaid(actualPay);
-            }
+            sa.setXManaCostPaid(actualPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1067,6 +1137,9 @@ public class DamageDealAi extends DamageAiBase {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
                     }
+                    if (ab.getActivatingPlayer() == null) {
+                        ab.setActivatingPlayer(ai); // a spell still in hand has none, and canPlay() checks need one
+                    }
                     if (!ab.canPlay()) {
                         continue;
                     }
@@ -1086,11 +1159,9 @@ public class DamageDealAi extends DamageAiBase {
                         if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
-                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
-                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
-                                String[] validTgtsSa = tgtSa.getValidTgts();
-                                String[] validTgtsAb = tgtAb.getValidTgts();
-                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                String[] validTgtsSa = sa.getTargetRestrictions().getValidTgts();
+                                String[] validTgtsAb = ab.getTargetRestrictions().getValidTgts();
+                                if (!validTgtsAb[0].equals("Any") && !Arrays.asList(validTgtsAb).containsAll(Arrays.asList(validTgtsSa))) {
                                     continue;
                                 }
 
@@ -1146,8 +1217,10 @@ public class DamageDealAi extends DamageAiBase {
         int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
 
         // Separate options into creatures and players
-        List<Card> oppCreatures = CardLists.filterControlledBy(
+        final List<Card> legalOppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
+        List<Card> oppCreatures = CardLists.filter(legalOppCreatures,
+                c -> canActuallyDamage(c, dmg, source, noPrevention));
         Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
         List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 
@@ -1175,6 +1248,11 @@ public class DamageDealAi extends DamageAiBase {
         // Fourth priority: target opponent player
         if (!oppPlayers.isEmpty()) {
             return (T) oppPlayers.get(0);
+        }
+
+        // A mandatory damage ability must still select a legal target even when every opposing creature prevents it.
+        if (!isOptional && !legalOppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(legalOppCreatures);
         }
 
         // If optional and only own stuff remains, don't choose

@@ -1,0 +1,4 @@
+Name:Aetherwork - Opening Vision 1
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with 1 additional opening hand card.

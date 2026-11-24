@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="108">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="109">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEtOwzAQhkdigYiUbJCQ4AIVfQmJhwJlg9hAgcKa+8AhwkOCFeIMPUdhx2PFGjhAZ0Ssuq7tOI4dUqilX/Ej9nwd29PY/TmA/hQoCQGuKqLrcJIvjgC2U+2ingqoYzFGh7O/E+n5ZO15FFuMkWU/5n7zM+qgAXCI6qKOUMeoE1QPdYo609Tb8A04P6r4ivpNNdZyHWClPpnP43tWz/zW0/gny6+ijU3k2UKF0Shvy+fDfy76iv7rpj5x4T+XfNPuP5N9XYb/wgK+tOE7XzXjo+RqftebABvN8bYW7t224/2bl7nM/cHSX+Tj51eVZ2J1pnx7gX5++fbf8J/Oftl8DwtyPooxLM6IPFXg0/GY8LlafzzfZ2PcPl+m/FoLYLH1U6Yn1dGTvfuoWeMu/PeKduex/CY894NRXtZOeg/889nsB9/rj6+X/d9TIj5KYnuZ3we3mvMe8ZmeQW9CP3yqMyGdl4hvoGhX9fExv2L9R7o3X4JReamNDDVkqNkxuOSTifi+kO27AnwX+K12qfleM33HF98d2r3PsG3yTpnz61Mm8UV2fySbR76cSO6fZHUkdtbglWTEJpP7IXEe+bKsf547J5P7IdauitNZMVnHlzWmrD+vPLHXNDbbjmkb22ea6b9pCG01Gus=
+   eJztmEtOwzAQhkdigQhKN0hIcIGKPpF4tZQNggUUKEjAhquwhkOUhwQrxBl6jsKOx4o1cABmRK24ru3YjhNa1Ei/4kfs+TrOTGN3JgA6I6B2CHA1JLoOB/lqOYB6TxuopwRqOMzR4Oyv5/R8sn4b1RzmiLNf437zM2qnCLCLaqL2UPuoA1QLdYg60rS78HU5P6r4kvpNNddcAWC+MFi28T1rZ35rafwT51fRxgryrKLCXFR25UvDfz7Giv5r9nziw38++UbdfyZxnYX/wgS+dOE7WzDjo8vX+i6VAJZL/X1ljN2K5/i1Zc4yPtj1H/n49VWVmVibKd9moF9fvv8v/KeznzXfw5Scj3IMyzMizzDw6XhM+Hy9fzzfZ7HfPl+n8mIZYKb8W6c7tdGdPfuoecd9+O8V7U5i/U24bwVRWdZPeg/S53OJh7TfP75d9n9PF/HRJfZn+X1wq9nvEZ/pHvQm1POtVdEeql6141PtCWm/RHxdRb9qjIrvGLlOUKeWfLL2j15svgRRfbaCDHlkyLut4fl0FIfbQTI+mYjvC9m+HfmSxIfYfoHfapea7zXTZ9Liu0O79zG2TZ5Jiy9rmeQX2fmRbB35elty/iRrI7G9Bq92TG4yOR8S15Gvy8bbnDmZnA+xflWejsvJOr64OWXjednkXtPc7DqnLrePNdZYkX4Ak4sYAQ==
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
@@ -241,7 +241,7 @@
 						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ambitious Farmhand&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stoic Farmer&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Irrigated Farmland&quot;, &quot;count&quot;: 1 },
-                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Farmland &quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Farmland&quot;, &quot;count&quot;: 1 },
                         {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
                       ]
                     },
@@ -352,6 +352,12 @@
 			]
 	}
 ]</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/door_down.tx" x="467.061" y="423.333" width="44.5455" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/main_story/Commanders_Library.tmx"/>
+    <property name="teleportObjectId" value="86"/>
    </properties>
   </object>
  </objectgroup>

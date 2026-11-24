@@ -21,7 +21,7 @@
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2MEJgDAMQNFevTmAiOs4rhtKQFAcoGn0Pei5vz0E2tYAAMZxzNkFAPUs1+xczVAACtmne1VUvT9U7X/evf7+3v3VzjBKe/b/R/b+8FdfeL9vhduD/lz688T8iX7zJ0+P/hNq0QzU
+   eJzt2MEJgDAMQNG6gQOIuP/NlZxEAoLiAE2j70HP/e0h0LYGADCOfc4uAKhnuWbnaoYCUMgx3aui6v2hav/z7vX39+6vdoZR2rP/P7L3h7/6wvt9K9we9OfSnyfmT/SbP3l69J/Bmxr9
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -29,12 +29,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmFsOgyAQRfntTzWmdSVuovvpw2VZV9iQSkIpw1yRh4lDcr9KmFNkZi4MZ6UGkUgkEolEoozqW6XeoPRA517bMvyXhSv16IT/EPxjo9QD0LP5ct3B+a+mfC4j36nUvh6FH62f88I/Sf0UfuHPzs/lpcmv3PxIffDlOsfVFeJH1vd9q1h+tL9S/TkV/7isSfGY/u6uH3tuqXUof2KzUV5Dr8nxUHHRvkblERKXmmNi657J9cuZiGvz3E7/4s4JEndq/fm7JSdT8cfEFP598K+9k4T4fez2fwjx577r+GKi/Mj+b/EQvvqnB+cd1p4HhL934iP3hFB8JGZKfoRF+H9/c2sA9f5A+ZDa/NR6a+Jt4Q/5t9CeUX2fu7+7PsRm89VzwxaqnZx/y+X9ub3l2FD/5tuzlIOLncO/1Rgp/U+NEet/Yu6HsffL2m+9e33/FP60+gBS+gUU
+   eJztmH0KgzAMxbsLTJHNk3i0fXgs55F2klGm4ErTvGnSCkZ4f1maH9UkL+3OznUmk8lkMplMimpr516g3id87bXOw3+ZuKTVGP8h+PvKuTugR/XluoHrn1X+XEa+U65zPQo/Wj/HiX+w+mn8xq/Oz+XlnF/a/Eh9iOW650o9TSZ+jmPJIsGP9leqP0vx99OeFM/c30P+tf8ttQ/lT5ZslNfwe3I8VFy0r1F5hMSl1syxfc/k+uVIxEXzglqPxB3qeP5uyUkp/i211vjL8v87k2jxa886sZiS/Fs8RKz++YfzDhr8bRAfmRNSfQ+JKcmPsBj/b8ywBlD3D5QPKc1P5Tr3Xoo/5d9SZ0b1fW5+D31I6lsu/VuqdnL+Tcv7I/VTwr/FzkxSXGwN/1ZCkv5nD/yo/1kzH66dL0vf9e71/tP4ZfUBG8sCPg==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJgEAMBdC0Vi5y4BxOolOo6Czu6YFYCHYievgepEhI8atAIgAAAP5tqCPGXFP9dpJnrU1EW+1VoiN7qfkBAAC4p9T/vU8RSzrP5tx36Xof+J5S7w//sgFPNgnx
+   eJzt17EJgEAMBdA4gYscOJZOoaKzuJiTeCAWgp2IHr4HKRJS/CqQCAAAgH/r64gh11i/neRZSxOxVnuV6Mhean4AAADuKfV/71LEnM6zKfdtut4HvqfU+8O/bE0ZDMY=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -93,7 +93,7 @@
   <object id="95" template="../../../../common/maps/obj/enemy.tx" x="129" y="409">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mox Emerald&quot;, &quot;Emerald Medallion&quot;, &quot;Emerald Collector&quot;, &quot;Unnatural Growth|INR&quot;, &quot;Lurking Predators|m10&quot; ] }"/>
-    <property name="enemy" value="Autumn Willow"/>
+    <property name="enemy" value="Kaysa"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>

@@ -1,0 +1,8 @@
+Name:Dal R'El, Augment Orphan
+ManaCost:1 R G
+Types:Legendary Creature Human Mutant Rogue
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land you control enters, add {R} or {G}.
+SVar:TrigMana:DB$ Mana | Produced$ Combo R G
+A:AB$ Draw | Cost$ 3 Sac<1/Land> | SpellDescription$ Draw a card.
+Oracle:Landfall — Whenever a land you control enters, add {R} or {G}.\n{3}, Sacrifice a land: Draw a card.
