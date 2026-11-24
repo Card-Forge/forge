@@ -391,6 +391,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getCode2() { return code2; }
     public String getScryfallCode() { return scryfallCode.toLowerCase(); }
     public String getTokensCode() { return tokensCode.toLowerCase(); }
+    public String getTokenFallbackCode() { return tokenFallbackCode; }
     public String getCardsLangCode() { return cardsLanguage.toLowerCase(); }
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }

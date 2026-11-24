@@ -391,6 +391,36 @@ public class GuiDownloadServiceTest {
         assertSkipped(result, 0);
     }
 
+    /**
+     * Files as they were received, for the check that the mobile on-demand fetcher shares with the bulk download:
+     * (body, length the server promised or -1, name it is saved under, whether it is whole).
+     */
+    @DataProvider(name = "receivedFiles")
+    public Object[][] receivedFiles() throws IOException {
+        final byte[] jpg = image("jpg", 1);
+        final byte[] png = image("png", 1);
+        final byte[] errorPage = "<html>Service unavailable</html>".getBytes(StandardCharsets.UTF_8);
+        return new Object[][] {
+            {jpg, (long) jpg.length, "card.jpg", true}, {jpg, -1L, "card.jpg", true},
+            {png, (long) png.length, "card.png", true}, {png, -1L, "card.png", true},
+            {png, -1L, "card.jpg", true}, // a PNG answered for a .jpg is still an image
+            {firstHalf(jpg), (long) jpg.length, "card.jpg", false}, {firstHalf(jpg), -1L, "card.jpg", false},
+            {firstHalf(png), (long) png.length, "card.png", false}, {firstHalf(png), -1L, "card.png", false},
+            {errorPage, (long) errorPage.length, "card.jpg", false}, {errorPage, -1L, "card.png", false},
+            {new byte[0], 0L, "card.jpg", false},
+            {errorPage, -1L, "prices.txt", true}, // no image to look at
+            {errorPage, errorPage.length + 5L, "prices.txt", false} // but the promised length still counts
+        };
+    }
+
+    @Test(dataProvider = "receivedFiles")
+    public void isWholeDownload_decidesOnTheReceivedFile(final byte[] body, final long promised, final String name, final boolean whole) throws Exception {
+        final File received = new File(dir, name + ".tmp");
+        Files.write(received.toPath(), body);
+
+        Assert.assertEquals(GuiDownloadService.isWholeDownload(received, name, promised), whole);
+    }
+
     @Test
     public void notFound_keepsExistingImage() throws Exception {
         final File dest = new File(dir, "card.jpg");

@@ -83,7 +83,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
         final List<PaperCard> matches = new ArrayList<>();
         final Set<CardEdition> tokenEditions = new HashSet<>();
-        final Map<CardEdition, Boolean> tokensFromScryfall = new HashMap<>();
+        final Map<CardEdition, Set<String>> tokenSetCodes = new HashMap<>();
         final TreeSet<String> scryfallSetCodes = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (final PaperCard c : Iterables.concat(
                 FModel.getMagicDb().getCommonCards().getAllCards(),
@@ -101,10 +101,9 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
             }
             if (hasTokenImages(edition)) {
                 // token sets are synced with the card sets, so tokens find the CDN even when they are not downloaded now;
-                // an edition whose tokens a site other than Scryfall hosts (Old Border, Duelist) has no token set there
-                if (tokensFromScryfall.computeIfAbsent(edition, GuiDownloadFilteredCardImages::usesScryfall)) {
-                    scryfallSetCodes.add(edition.getTokensCode());
-                }
+                // they are the sets of the editions that hold the tokens (PM14 uses those of M14), and an edition whose
+                // tokens a site other than Scryfall hosts (Old Border, Duelist) has no token set there
+                scryfallSetCodes.addAll(tokenSetCodes.computeIfAbsent(edition, GuiDownloadFilteredCardImages::getScryfallTokenSetCodes));
                 if (includeTokens) {
                     tokenEditions.add(edition);
                 }
@@ -114,9 +113,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         final Set<CardEdition> tokenOnlyEditions = new HashSet<>();
         addTokenOnlyEditions(tokenOnlyEditions, editionFilter);
         for (final CardEdition edition : tokenOnlyEditions) {
-            if (usesScryfall(edition)) {
-                scryfallSetCodes.add(edition.getTokensCode());
-            }
+            scryfallSetCodes.addAll(getScryfallTokenSetCodes(edition));
         }
         if (includeTokens) {
             tokenEditions.addAll(tokenOnlyEditions);
@@ -206,10 +203,33 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         downloads.put((overwrite && destFull.exists() ? destFull : destFb).getAbsolutePath(), url);
     }
 
-    /** True if the edition has token images to download: tokens or named extras, and it is not a custom set. */
+    /**
+     * True if the edition has token images to download: tokens or named extras, its own or those of the editions its
+     * TokenFallbackCode leads to (Magic 2014 Promos uses the tokens of Magic 2014), and they are not of a custom set.
+     */
     public static boolean hasTokenImages(final CardEdition edition) {
-        return edition != null && edition.getType() != CardEdition.Type.CUSTOM_SET
-                && !(edition.getTokens().isEmpty() && edition.getOther().isEmpty());
+        for (final CardEdition source : getTokenSources(edition)) {
+            if (hasOwnTokenImages(source)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasOwnTokenImages(final CardEdition edition) {
+        return edition.getType() != CardEdition.Type.CUSTOM_SET && !(edition.getTokens().isEmpty() && edition.getOther().isEmpty());
+    }
+
+    /** The edition, then the editions its TokenFallbackCode leads to: where CardEdition.getTokenSet looks for a token, in that order. */
+    private static List<CardEdition> getTokenSources(final CardEdition edition) {
+        final List<CardEdition> sources = new ArrayList<>();
+        CardEdition source = edition;
+        while (source != null && !sources.contains(source)) {
+            sources.add(source);
+            final String fallback = source.getTokenFallbackCode();
+            source = fallback == null ? null : StaticData.instance().getCardEdition(fallback);
+        }
+        return sources;
     }
 
     /**
@@ -227,27 +247,32 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
     /** How many token images the editions have: {total, downloaded, missing}. */
     public static int[] countTokenImages(final Collection<CardEdition> editions) {
-        int total = 0, downloaded = 0;
+        // by file: an edition and the one it falls back on (PM14 and M14) can both be selected and share their images
+        final Map<String, TokenImage> images = new HashMap<>();
         for (final CardEdition edition : editions) {
-            for (final TokenImage image : getTokenImages(edition).values()) {
-                total++;
-                if (image.file.exists()) {
-                    downloaded++;
-                }
+            images.putAll(getTokenImages(edition));
+        }
+        int downloaded = 0;
+        for (final TokenImage image : images.values()) {
+            if (image.file.exists()) {
+                downloaded++;
             }
         }
-        return new int[] {total, downloaded, total - downloaded};
+        return new int[] {images.size(), downloaded, images.size() - downloaded};
     }
 
     /** A token image of an edition and the file it is saved as. */
     private static final class TokenImage {
+        /** The edition whose token list or extras hold the image: the edition itself or one its TokenFallbackCode leads to. */
+        final CardEdition source;
         final String collectorNumber;
         final boolean back;
         final File file;
         /** Where a site other than Scryfall hosts this token (token-images.txt), or null. */
         final String hostedUrl;
 
-        TokenImage(final String collectorNumber, final String imageKey) {
+        TokenImage(final CardEdition source, final String collectorNumber, final String imageKey) {
+            this.source = source;
             this.collectorNumber = collectorNumber;
             this.back = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
             final String filename = ImageFetcher.getTokenFilename(imageKey);
@@ -257,40 +282,47 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         }
     }
 
-    /** False for an edition whose tokens are all hosted elsewhere: Scryfall has no token set for it. */
-    private static boolean usesScryfall(final CardEdition edition) {
+    /** The Scryfall token sets that hold the token images of an edition; none for an image hosted elsewhere, Scryfall has no token set for it. */
+    private static Set<String> getScryfallTokenSetCodes(final CardEdition edition) {
+        final Set<String> codes = new TreeSet<>();
         for (final TokenImage image : getTokenImages(edition).values()) {
             if (image.hostedUrl == null) {
-                return true;
+                codes.add(image.source.getTokensCode());
             }
         }
-        return false;
+        return codes;
     }
 
     /**
-     * The token images of an edition, by file: its token list (with the back faces of double-faced tokens) and
-     * its named extras, i.e. what StaticData.getOtherImageKey finds for a token that is a copy of a card
-     * (CopyPermanent with DefinedName, like Tarmogoyf or Mutavault) or for the Monarch and the like.
+     * The token images of an edition's cards, by file: the token list (with the back faces of double-faced tokens) and
+     * the named extras, i.e. what StaticData.getOtherImageKey finds for a token that is a copy of a card
+     * (CopyPermanent with DefinedName, like Tarmogoyf or Mutavault) or for the Monarch and the like. A token the
+     * edition does not have itself is the one of the edition its TokenFallbackCode leads to, and is saved under
+     * that edition, as CardEdition.getTokenSet and getOtherSet say.
      */
     private static Map<String, TokenImage> getTokenImages(final CardEdition edition) {
         final Map<String, TokenImage> images = new LinkedHashMap<>();
         final Map<String, CardRules> tokenRules = StaticData.instance().getAllTokens().getRules();
-        for (final CardEdition.EditionEntry t : edition.getTokens().values()) {
-            if (StringUtils.isBlank(t.collectorNumber())) continue;
+        for (final CardEdition source : getTokenSources(edition)) {
+            if (!hasOwnTokenImages(source)) continue;
 
-            addTokenImage(images, t.collectorNumber(), tokenKey(edition, t));
-            final CardRules rules = tokenRules.get(t.name());
-            if (rules != null) {
-                final PaperToken token = new PaperToken(rules, edition, t.name(), t.collectorNumber(), t.artistName());
-                if (token.hasBackFace()) {
-                    addTokenImage(images, t.collectorNumber(), token.getCardAltImageKey());
+            for (final CardEdition.EditionEntry t : source.getTokens().values()) {
+                if (StringUtils.isBlank(t.collectorNumber()) || !source.getCode().equals(edition.getTokenSet(t.name()))) continue;
+
+                addTokenImage(images, source, t.collectorNumber(), tokenKey(source, t));
+                final CardRules rules = tokenRules.get(t.name());
+                if (rules != null) {
+                    final PaperToken token = new PaperToken(rules, source, t.name(), t.collectorNumber(), t.artistName());
+                    if (token.hasBackFace()) {
+                        addTokenImage(images, source, t.collectorNumber(), token.getCardAltImageKey());
+                    }
                 }
             }
-        }
-        for (final CardEdition.EditionEntry o : edition.getOther().values()) {
-            if (StringUtils.isBlank(o.collectorNumber())) continue;
+            for (final CardEdition.EditionEntry o : source.getOther().values()) {
+                if (StringUtils.isBlank(o.collectorNumber()) || !source.getCode().equals(edition.getOtherSet(o.name()))) continue;
 
-            addTokenImage(images, o.collectorNumber(), tokenKey(edition, o));
+                addTokenImage(images, source, o.collectorNumber(), tokenKey(source, o));
+            }
         }
         return images;
     }
@@ -300,8 +332,8 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
         return ImageKeys.getTokenKey(String.format("%s|%s|%s", entry.name(), edition.getCode(), entry.collectorNumber()));
     }
 
-    private static void addTokenImage(final Map<String, TokenImage> images, final String collectorNumber, final String imageKey) {
-        final TokenImage image = new TokenImage(collectorNumber, imageKey);
+    private static void addTokenImage(final Map<String, TokenImage> images, final CardEdition source, final String collectorNumber, final String imageKey) {
+        final TokenImage image = new TokenImage(source, collectorNumber, imageKey);
         images.putIfAbsent(image.file.getAbsolutePath(), image);
     }
 
@@ -315,7 +347,7 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                 urls.add(image.hostedUrl); // not a Scryfall token (Old Border, Duelist): asked first, paced by ScryfallRateLimiter
             }
             // the CDN url comes first when the token set is cached, otherwise the Scryfall API
-            ImageFetcher.addScryfallTokenUrl(edition, image.collectorNumber, image.back ? "back" : "", urls);
+            ImageFetcher.addScryfallTokenUrl(image.source, image.collectorNumber, image.back ? "back" : "", urls);
 
             downloads.put(entry.getKey(), String.join(URL_SEPARATOR, urls));
         }

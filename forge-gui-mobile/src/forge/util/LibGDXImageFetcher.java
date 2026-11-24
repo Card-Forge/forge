@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.adventure.data.ConfigData;
 import forge.adventure.util.Config;
 import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadService;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import io.sentry.Sentry;
@@ -116,6 +117,13 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 // never leave a poisoned 0-byte cache file ("downloaded" but
                 // undisplayable, and never retried because the file exists)
                 System.err.println("  Downloaded 0 bytes, skipping");
+                destFile.delete();
+                c.disconnect();
+                return false;
+            }
+            if (!GuiDownloadService.isWholeDownload(destFile.file(), newdespath, c.getContentLengthLong())) {
+                // a cut-off transfer or an error page answered with a 200: the same check as the bulk download, so neither is installed
+                System.err.println("  Not a whole image, skipping");
                 destFile.delete();
                 c.disconnect();
                 return false;

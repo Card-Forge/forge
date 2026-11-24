@@ -400,12 +400,7 @@ public abstract class GuiDownloadService implements Runnable {
                     }
                     fos.close();
                     fos = null;
-                    // a dropped connection ends the stream like a finished one, so compare with what the server promised
-                    if (conn.getContentLengthLong() >= 0 && received != conn.getContentLengthLong()) {
-                        throw new IOException("Incomplete download: got " + received + " of " + conn.getContentLengthLong() + " bytes");
-                    }
-                    // a complete body can still be an error page, and without a promised length there is nothing to compare with, so look at the file itself
-                    if (!isValid(tmpDest, fileDest.getName(), conn.getContentLengthLong() >= 0)) {
+                    if (!isWholeDownload(tmpDest, fileDest.getName(), conn.getContentLengthLong())) {
                         throw new IOException("Not a whole image: " + fileDest.getName() + " (" + received + " bytes)");
                     }
                     Files.move(tmpDest.toPath(), fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -463,12 +458,18 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     /**
-     * Whether a received file is what its name says. An image must start like a JPEG or a PNG, which tells it from the
-     * error page a server may answer with a 200. Without a promised length it must also end like one, because a dropped
-     * connection ends the stream like a finished one: a JPEG with the end-of-image marker, a PNG with its IEND chunk.
-     * Other files have nothing to check.
+     * Whether a file received over HTTP is the whole file its name says, for every download that saves an image (the
+     * bulk download and the on-demand fetch of the mobile ports). A dropped connection ends the stream like a finished
+     * one, so it must have the length the server promised ({@code contentLength}, negative if it promised none). An
+     * image must also start like a JPEG or a PNG, which tells it from the error page a server may answer with a 200,
+     * and without a promised length it must end like one too: a JPEG with the end-of-image marker, a PNG with its IEND
+     * chunk. Other files have nothing more to check.
      */
-    private static boolean isValid(final File received, final String name, final boolean lengthKnown) throws IOException {
+    public static boolean isWholeDownload(final File received, final String name, final long contentLength) throws IOException {
+        final boolean lengthKnown = contentLength >= 0;
+        if (lengthKnown && received.length() != contentLength) {
+            return false;
+        }
         final String lowerName = name.toLowerCase(Locale.ROOT);
         if (!lowerName.endsWith(".jpg") && !lowerName.endsWith(".jpeg") && !lowerName.endsWith(".png")) {
             return true;
