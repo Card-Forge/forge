@@ -2521,7 +2521,9 @@ public class AiController {
             // Nothing to answer in an upkeep or draw step, whoever's turn it is: a spell waits for the main phase, the attack or
             // the end step, when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the player's draw
             // step, #12930). This is checked here, for every way of choosing below: Monte Carlo only handles the AI's main
-            // phases and a response, so the upkeep and the draw step were always decided by the plain heuristics.
+            // phases and a response, so the upkeep and the draw step were always decided by the plain heuristics. That makes it
+            // apply to every AI profile, not only FlatMC. A spell that is only castable then ("cast only during your upkeep") or
+            // is marked MustCastInUpkeep stays (FlatMonteCarloPicker.mustBeCastNow).
             saList.removeIf(sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
                     && !FlatMonteCarloPicker.mustBeCastNow(player, sa));
         }

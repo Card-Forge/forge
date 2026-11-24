@@ -912,11 +912,7 @@ public class PlayerControllerAi extends PlayerController {
                 // fall back to the standard rule below
             }
         }
-        try {
-            return classicMulliganKeepsHand(player.getCardsIn(ZoneType.Hand), cardsToReturn);
-        } catch (final RuntimeException e) {
-            return !ComputerUtil.wantMulligan(player, cardsToReturn);
-        }
+        return classicMulliganKeepsHand(player.getCardsIn(ZoneType.Hand), cardsToReturn);
     }
 
     /** Applies the classic keep heuristic to the hand that remains after its own bottoming choice. */

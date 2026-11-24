@@ -668,6 +668,19 @@ public class AiReportScenarioTest extends AITest {
                     evoke.setActivatingPlayer(c.ai);
                     return ActivationGuard.evokeOnlyHitsManaDorks(c.ai, evoke) ? "the evoke of Fury was treated as a removal of mana dorks only" : null;
                 }));
+        l.add(new Scenario("13026-guard-no-side-effect", "the evoke guard asks about targets on a copy: the enter-the-battlefield ability of the card keeps its player", Fid.APPROX, M1, true,
+                c -> { c.hand("Solitude", c.ai); c.bf("Noble Hierarch", c.opp); },
+                c -> {
+                    final Card solitude = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Solitude")).findFirst().orElse(null);
+                    final SpellAbility evoke = solitude == null ? null : solitude.getSpellAbilities().stream().filter(SpellAbility::isEvoke).findFirst().orElse(null);
+                    if (evoke == null) { return "setup: Solitude has no evoke ability"; }
+                    evoke.setActivatingPlayer(c.ai);
+                    final SpellAbility etb = solitude.getTriggers().stream().map(t -> t.ensureAbility()).filter(a -> a != null && a.usesTargeting()).findFirst().orElse(null);
+                    if (etb == null) { return "setup: Solitude has no targeted enter-the-battlefield ability"; }
+                    final Player before = etb.getActivatingPlayer();
+                    if (!ActivationGuard.evokeOnlyHitsManaDorks(c.ai, evoke)) { return "setup: the guard should refuse Solitude at a lone Noble Hierarch"; }
+                    return etb.getActivatingPlayer() == before ? null : "the guard changed the activating player of the card's own ability";
+                }));
         l.add(new Scenario("4278", "Up the Beanstalk before the 5+ cost spell (should be the first play)", Fid.EXACT, M1, true,
                 c -> { c.bf("Forest", 10, c.ai); c.hand("Up the Beanstalk", c.ai); c.hand("Craterhoof Behemoth", c.ai); },
                 c -> { final SpellAbility sa = c.first();
@@ -2811,6 +2824,19 @@ public class AiReportScenarioTest extends AITest {
 
     @Test(dataProvider = "scenarios")
     public void aiBehavesAsReported(final Scenario s) {
+        // The AI rolls dice in many places (useRemovalNow, percentTrue ...): every scenario gets its own fixed stream, so that a
+        // result is the same on every machine, Java version and run order, and a failure can be repeated (-Dforge.test.seed=N
+        // tries another stream: a scenario that is only right for one seed tests the dice, not the AI)
+        final java.util.Random previousRandom = forge.util.MyRandom.getRandom();
+        forge.util.MyRandom.setRandom(new java.util.Random(Long.getLong("forge.test.seed", 0L) * 31 + s.toString().hashCode()));
+        try {
+            runScenario(s);
+        } finally {
+            forge.util.MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    private void runScenario(final Scenario s) {
         final Game game = initAndCreateGame();
         game.AI_FLAT_MONTE_CARLO = FLAT_MC;
         if (System.getProperty("forge.test.issue") != null) { forge.ai.simulation.FlatMonteCarloPicker.DEBUG = true; } // a single scenario: print what the picker made of it

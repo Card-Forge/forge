@@ -558,23 +558,24 @@ public final class ActivationGuard {
                     || !"Card.Self".equals(t.getParam("ValidCard"))) {
                 continue;
             }
-            final SpellAbility etb = t.ensureAbility();
-            final String valid = etb == null ? "" : etb.getParamOrDefault("ValidTgts", "");
+            final SpellAbility shared = t.ensureAbility(); // cached on the trigger and shared with the card state: never modified here
+            final String valid = shared == null ? "" : shared.getParamOrDefault("ValidTgts", "");
             if (!valid.startsWith("Creature") || valid.contains("Player")) {
                 continue;
             }
-            if (etb == null || !etb.usesTargeting()) {
+            if (shared == null || !shared.usesTargeting()) {
                 continue;
-            }
-            if (etb.hasParam("DividedAsYouChoose") || etb.hasParam("TargetMax") && !"1".equals(etb.getParam("TargetMax"))) {
-                continue; // Fury: 4 damage divided can kill two mana dorks, a two-for-two. Only a single-target removal is judged here
             }
             // Targetability depends on the controller of this trigger: hexproof, shroud and protection
             // must not make an otherwise valuable creature look like a legal alternative to a mana dork.
+            final SpellAbility etb;
             try {
-                etb.setActivatingPlayer(ai);
+                etb = shared.copy(ai);
             } catch (final RuntimeException e) {
                 return false;
+            }
+            if (etb.hasParam("DividedAsYouChoose") || etb.hasParam("TargetMax") && !"1".equals(etb.getParam("TargetMax"))) {
+                continue; // Fury: 4 damage divided can kill two mana dorks, a two-for-two. Only a single-target removal is judged here
             }
             for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
                 final boolean targetable;
