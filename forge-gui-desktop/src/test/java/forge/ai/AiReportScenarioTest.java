@@ -463,6 +463,14 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", 2, c.ai); c.hand("Skullcrack", c.ai); }));
         l.add(play("6601", "Boltwave against a player at 20 life with creatures", Fid.EXACT, "MAIN2", true, "Boltwave",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Boltwave", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("6617-lava-spike", "Lava Spike is cast before combat to trigger Monastery Swiftspear's Prowess", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Lava Spike", c.ai); },
+                c -> c.plays("Lava Spike") ? null
+                        : "AI deferred Lava Spike instead of triggering Prowess before its predicted attack" + c.why("Lava Spike")));
+        l.add(new Scenario("6617-skullcrack", "Skullcrack's nested damage effect is cast before a Prowess attack", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Skullcrack", c.ai); },
+                c -> c.plays("Skullcrack") ? null
+                        : "AI deferred Skullcrack instead of triggering Prowess before its predicted attack" + c.why("Skullcrack")));
 
         // ---------------- the same name chosen by several copies
         l.add(new Scenario("12801", "a second Meddling Mage names a different card than the first", Fid.APPROX, M1, true,
