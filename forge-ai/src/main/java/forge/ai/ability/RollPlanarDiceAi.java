@@ -210,13 +210,17 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
             decideToRoll = false;
         }
 
-        if (decideToRoll && ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn() >= maxActivations) {
+        final int rollsThisTurn = ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+        if (decideToRoll && rollsThisTurn >= maxActivations) {
             boolean extraRollWindow = sa.hasParam("SpecialAction")
                     && (ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)
                     || (rollInMain1 && ai.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)));
-            if (!extraRollWindow || !canSpendSurplusMana(ai, sa)) {
+            if (!extraRollWindow) {
                 decideToRoll = false;
             }
+        }
+        if (decideToRoll && rollsThisTurn > 0 && !canSpendSurplusMana(ai, sa)) {
+            decideToRoll = false;
         }
 
         // check if the AI hesitates

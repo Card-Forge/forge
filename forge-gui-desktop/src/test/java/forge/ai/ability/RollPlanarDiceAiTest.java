@@ -164,6 +164,21 @@ public class RollPlanarDiceAiTest extends AITest {
         addCardToZone("Plains", ai, ZoneType.Battlefield);
         addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
         AssertJUnit.assertFalse(planarAi.canSpendSurplusMana(ai, roll(2)));
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(2),
+                plane("Mode$ Always | MinTurn$ 0 | RollInMain1$ True | MaxRollsPerTurn$ 9")));
+
+        start("MAIN2");
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        addCardToZone("Counterspell", ai, ZoneType.Hand);
+        final Card plane = plane("Mode$ Always | MinTurn$ 0 | MaxRollsPerTurn$ 9");
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(0), plane));
+        game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        AssertJUnit.assertFalse(planarAi.willRollOnPlane(ai, roll(1), plane));
+        addCardToZone("Island", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(planarAi.willRollOnPlane(ai, roll(1), plane));
     }
 
     @Test
