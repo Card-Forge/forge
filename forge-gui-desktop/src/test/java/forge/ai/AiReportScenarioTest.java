@@ -323,11 +323,12 @@ public class AiReportScenarioTest extends AITest {
         /** Resolves the stack until nothing is left, putting triggered abilities (enter-the-battlefield ...) on it as the real game does. */
         final StringBuilder trace = new StringBuilder();
         void resolveAll() {
-            decisions++; // what the AI has to choose while the effects resolve (a target, a card out of a hand, a payment)
             for (int i = 0; i < 50; i++) {
                 game.getStack().addAllTriggeredAbilitiesToStack();
                 if (game.getStack().isEmpty()) { return; }
                 final SpellAbility top = game.getStack().peekAbility();
+                // only an ability of the AI that actually resolves asks its controller for choices (a target, a card out of a hand, a payment)
+                if (ai.equals(top.getActivatingPlayer())) { decisions++; }
                 trace.append(" [resolving ").append(top).append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
                 game.getStack().resolveStack();
                 game.getAction().checkStateEffects(true); // lethal damage kills, as it does between two priority passes
@@ -875,8 +876,23 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Crystal Barricade", c.opp); c.bf("Grizzly Bears", c.opp); }));
         l.add(noPlay("3994-barricade-prowess", "A prowess creature is no reason to Bolt a 0/4 Crystal Barricade in the main phase", Fid.APPROX, M1, true, "Lightning Bolt",
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Monastery Swiftspear", c.ai); c.bf("Crystal Barricade", c.opp); c.bf("Grizzly Bears", c.opp); }));
-        l.add(play("3994-killable", "control: a Lightning Bolt still goes at a creature it kills", Fid.EXACT, M1, true, "Lightning Bolt",
-                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Grizzly Bears", c.opp); }));
+        // ComputerUtilCard.useRemovalNow decides whether a removal spell is cast now with MyRandom (chance < value): a Bolt at a vanilla
+        // Grizzly Bears is held about a third of the time. The control pins every draw to 0 (the chance succeeds), or it is flaky.
+        l.add(new Scenario("3994-killable", "control: a Lightning Bolt still goes at a creature it kills (should play Lightning Bolt)", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> {
+                    final java.util.Random previous = forge.util.MyRandom.getRandom();
+                    // MyRandom wraps what it is given and draws only delegate.nextInt(): that is the one method to override (every
+                    // nextFloat/nextInt(bound)/nextDouble of the wrapper is computed from it), so 0 makes every chance roll succeed
+                    forge.util.MyRandom.setRandom(new java.util.Random(0) {
+                        @Override public int nextInt() { return 0; }
+                    });
+                    try {
+                        return c.plays("Lightning Bolt") ? null : "AI did not play/activate Lightning Bolt" + c.why("Lightning Bolt");
+                    } finally {
+                        forge.util.MyRandom.setRandom(previous);
+                    }
+                }));
         l.add(noPlay("13011", "Ephemerate does not blink a creature whose ETB trigger is disabled", Fid.EXACT, M1, true, "Ephemerate",
                 c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Quantum Riddler", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
         l.add(play("13011-protection", "Ephemerate still saves a creature from removal while ETB triggers are disabled", Fid.APPROX, M1, false, "Ephemerate",
@@ -949,6 +965,13 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("zero-power-battle-cry", "control: Spellskite attacks next to a battle cry creature, which gives it +1/+0", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Accorder Paladin", c.ai); c.bf("Spellskite", c.ai); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Spellskite")) ? null : "Spellskite stayed home although battle cry makes it a 1/4 attacker"));
+        l.add(new Scenario("zero-power-aerial-guide", "Spellskite (0/4) stays home next to Aerial Guide: flying is no damage", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Aerial Guide", c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    if (attackers.stream().noneMatch(a -> a.getName().equals("Aerial Guide"))) { return "setup: Aerial Guide did not attack, the scenario proves nothing: " + attackers; }
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Spellskite")) ? "Spellskite attacked for a trigger that adds no power: " + attackers : null;
+                }));
         l.add(new Scenario("zero-power-doran", "control: Doran, the Siege Tower (0/5, damage equal to toughness) attacks into an empty board", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Doran, the Siege Tower", c.ai); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Doran, the Siege Tower")) ? null : "Doran stayed home although it deals 5 damage"));
@@ -2845,6 +2868,17 @@ public class AiReportScenarioTest extends AITest {
                 AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(mentor, opponent, spellskite, opponent)));
         AssertJUnit.assertTrue("without Wildwood Mentor in the attack Spellskite is still pointless",
                 AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(spellskite, opponent)));
+    }
+
+    @Test
+    public void flatMcPointlessAttackerIgnoresTargetedTriggersThatAddNoPower() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card guide = addCard("Aerial Guide", ai); // another attacking creature gains flying: no damage for a 0/4
+        final Card spellskite = addCard("Spellskite", ai);
+        AssertJUnit.assertTrue("Spellskite gains nothing from Aerial Guide's flying, it is still a pointless attacker",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(guide, opponent, spellskite, opponent)));
     }
 
     @Test

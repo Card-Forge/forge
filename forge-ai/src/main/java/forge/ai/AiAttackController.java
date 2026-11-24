@@ -393,11 +393,36 @@ public class AiAttackController {
             }
             // "another target attacking creature gets +X/+X" (Wildwood Mentor), "put two +1/+1 counters on another target
             // attacking creature" (Goliath Truck): a targeted effect reaches this candidate when it is a legal target for it
-            if ((ApiType.Pump.equals(sa.getApi()) || ApiType.PutCounter.equals(sa.getApi())) && canBeTargetedOnceAttacking(attacker, trigger, sa)) {
+            if ((ApiType.Pump.equals(sa.getApi()) || ApiType.PutCounter.equals(sa.getApi())) && addsPower(trigger, sa)
+                    && canBeTargetedOnceAttacking(attacker, trigger, sa)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Whether the effect adds power: only that makes a creature without any worth attacking for (a 0/4 that gets flying from
+     * Aerial Guide, a -1/-1, a loyalty or charge counter deal no damage). Power from "+X" is judged by the trigger's source.
+     */
+    private static boolean addsPower(final Trigger trigger, final SpellAbility sa) {
+        final Card host = trigger.getHostCard();
+        if (host == null) {
+            return false;
+        }
+        if (ApiType.Pump.equals(sa.getApi())) {
+            return amount(host, sa, "NumAtt") > 0;
+        }
+        final String counterType = sa.getParamOrDefault("CounterType", "");
+        return ("P1P1".equals(counterType) || "P2P2".equals(counterType)) && amount(host, sa, "CounterNum") > 0;
+    }
+
+    private static int amount(final Card host, final SpellAbility sa, final String param) {
+        String value = sa.getParamOrDefault(param, "0").trim();
+        if (value.startsWith("+")) {
+            value = value.substring(1);
+        }
+        return AbilityUtils.calculateAmount(host, value, sa);
     }
 
     /**
