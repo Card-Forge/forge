@@ -24,7 +24,7 @@ public class RogueSections extends RogueScrollPane {
                 continue;
             }
             sections.add(section);
-            texts.add(hasText ? add(new RogueText(section.text(), 1, RogueLook.INK)) : null);
+            texts.add(hasText ? add(new RogueText(section.text(), null, 1, RogueLook.INK)) : null);
             List<CardTile> tiles = new ArrayList<>();
             if (hasCards) {
                 for (int i = 0; i < section.cards().size(); i++) {

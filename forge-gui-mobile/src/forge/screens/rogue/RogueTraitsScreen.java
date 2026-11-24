@@ -39,7 +39,7 @@ public class RogueTraitsScreen extends RogueScreen {
         list = add(new Content());
         Localizer localizer = Localizer.getInstance();
         mapTab = add(new RogueButton(localizer.getMessage("lblRogueMap"), null, RogueButton.State.NORMAL, Forge::back));
-        traits = add(new RogueButton(localizer.getMessage("lblRogueTraits"), null, RogueButton.State.SELECTED, null));
+        traits = add(new RogueButton(localizer.getMessage("lblRogueEffects"), null, RogueButton.State.SELECTED, null));
         deck = add(new RogueButton(localizer.getMessage("lblDeck"), null, RogueButton.State.NORMAL, RogueDeckEditor::openForRun));
     }
 
@@ -125,6 +125,7 @@ public class RogueTraitsScreen extends RogueScreen {
     }
 
     private class Content extends RogueScrollPane {
+        private static final float NONE_HEIGHT = 18;
         private final List<TraitRow> rows = new ArrayList<>();
         private final List<CarryTile> carry = new ArrayList<>();
         private float carryTop;
@@ -148,6 +149,9 @@ public class RogueTraitsScreen extends RogueScreen {
                 row.setBounds(5 * u, y, w, h);
                 y += h + 5 * u;
             }
+            if (rows.isEmpty()) {
+                y += NONE_HEIGHT * u;
+            }
             y += 24 * u;
             int cols = Forge.isLandscapeMode() ? 6 : 3;
             float cw = Math.min(55 * u, (w - (cols - 1) * 12 * u) / cols);
@@ -156,7 +160,7 @@ public class RogueTraitsScreen extends RogueScreen {
                 tile.setBounds(14 * u + (i % cols) * (cw + 12 * u), y + (i / cols) * (cw * RogueLook.CARD_RATIO + 22 * u), cw,
                     cw * RogueLook.CARD_RATIO + 18 * u);
             }
-            float bottom = carry.isEmpty() ? y : carry.get(carry.size() - 1).getBottom();
+            float bottom = carry.isEmpty() ? y + NONE_HEIGHT * u : carry.get(carry.size() - 1).getBottom();
             carryTop = y - 22 * u;
             return new ScrollBounds(visibleWidth, bottom + 8 * u);
         }
@@ -165,9 +169,15 @@ public class RogueTraitsScreen extends RogueScreen {
         protected void drawBackground(Graphics g) {
             float u = RogueLook.unit();
             Localizer localizer = Localizer.getInstance();
-            float shift = rows.isEmpty() ? 0 : rows.get(0).getTop() - 26 * u;
-            RogueLook.text(g, localizer.getMessage("lblRogueYourTraits"), 7 * u, shift + 2 * u, 1.5f, RogueLook.INK);
+            float shift = -getScrollTop();
+            RogueLook.text(g, localizer.getMessage("lblRogueYourEffects"), 7 * u, shift + 2 * u, 1.5f, RogueLook.INK);
+            if (rows.isEmpty()) {
+                RogueLook.text(g, localizer.getMessage("lblNone"), 9 * u, shift + 26 * u, 1, RogueLook.SOFT);
+            }
             RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), 7 * u, shift + carryTop, 1.5f, RogueLook.INK);
+            if (carry.isEmpty()) {
+                RogueLook.text(g, localizer.getMessage("lblNone"), 9 * u, shift + carryTop + 24 * u, 1, RogueLook.SOFT);
+            }
         }
     }
 
@@ -177,7 +187,7 @@ public class RogueTraitsScreen extends RogueScreen {
 
         TraitRow(RogueEffect effect) {
             this.effect = effect;
-            this.text = add(new RogueText(effect.getActiveDescription(run), 1, RogueLook.INK));
+            this.text = add(new RogueText(effect.getActiveDescription(run), effect.getEffectCardReference(), 1, RogueLook.INK));
         }
 
         float preferredHeight(float w) {

@@ -88,7 +88,7 @@ public class RogueChestScreen extends RogueScreen {
             this.take = take;
             Localizer localizer = Localizer.getInstance();
             kind = localizer.getMessage(effect.getEffectType() == EffectType.ONESHOT ? "lblRogueLoot" : "lblRogueTrait");
-            text = add(new RogueText(effect.getRawDescription(), 1, RogueLook.INK));
+            text = add(new RogueText(effect.getRawDescription(), effect.getEffectCardReference(), 1, RogueLook.INK));
         }
 
         /** Stacked upright, a box is wider than tall and reads left to right: its icon, then its name and text. */

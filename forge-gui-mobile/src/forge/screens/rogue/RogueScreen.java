@@ -22,6 +22,8 @@ import java.util.function.Supplier;
 public abstract class RogueScreen extends FScreen {
     private FDisplayObject hoverSource;
     private PaperCard hoverCard;
+    private String hoverTitle;
+    private String hoverText;
     private static final float TRANSITION_SECONDS = 0.5f;
     private static final Color TRANSITION_DIM = new Color(0, 0, 0, 0);
     private static long opened;
@@ -151,12 +153,12 @@ public abstract class RogueScreen extends FScreen {
             if (g.startClip(0, 0, w, chromeTop)) {
                 drawAt(g, left, -side * w * e, 0, 0);
                 drawAt(g, this, side * w * (1 - e), 0, 0);
-                g.endClip();
             }
+            g.endClip();
             if (g.startClip(0, chromeTop, w, h - chromeTop)) {
                 drawAt(g, this, 0, 0, 0);
-                g.endClip();
             }
+            g.endClip();
         } else if (left.order > order) {
             drawAt(g, this, 0, 0, 1 - e);
             drawAt(g, left, 0, h * e, 0);
@@ -213,14 +215,33 @@ public abstract class RogueScreen extends FScreen {
         if (hovered && card != null) {
             screen.hoverSource = source;
             screen.hoverCard = card;
+            screen.hoverText = null;
         } else if (screen.hoverSource == source) {
             screen.hoverSource = null;
             screen.hoverCard = null;
+            screen.hoverText = null;
+        }
+    }
+
+    /** Desktop: while the pointer rests on something with a note, such as a defined term, shows it beside the pointer. */
+    public static void hoverNote(FDisplayObject source, String title, String text) {
+        if (Forge.getCurrentScreen() instanceof RogueScreen screen && text != null) {
+            screen.hoverSource = source;
+            screen.hoverCard = null;
+            screen.hoverTitle = title;
+            screen.hoverText = text;
         }
     }
 
     private void drawHover(Graphics g) {
-        if (hoverCard == null || !hoverSource.isHovered()) {
+        if (hoverSource == null || !hoverSource.isHovered()) {
+            return;
+        }
+        if (hoverText != null) {
+            RogueTermPopup.draw(g, hoverTitle, hoverText, Forge.mouseMovedX - screenPos.x, Forge.mouseMovedY - screenPos.y, getWidth(), getHeight());
+            return;
+        }
+        if (hoverCard == null) {
             return;
         }
         float gap = 8 * RogueLook.unit();

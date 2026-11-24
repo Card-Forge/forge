@@ -227,8 +227,12 @@ public class GuiMobile implements IGuiBase {
                     }
                 } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
-                    if (cardImage != null)
+                    if (cardImage != null) {
                         g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, 0);
+                    } else if (ImageKeys.getImageFile(paperCard.getCardImageKey()) != null) {
+                        // The picture is on disk but loads over the next frame; draw again then rather than keep this one
+                        Gdx.app.postRunnable(this::clear);
+                    }
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away

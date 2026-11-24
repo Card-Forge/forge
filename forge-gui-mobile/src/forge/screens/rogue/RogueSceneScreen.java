@@ -173,7 +173,7 @@ public class RogueSceneScreen extends RogueScreen {
         private final RogueText text;
 
         TextPane(String raw) {
-            text = add(new RogueText(raw, 1, RogueLook.INK));
+            text = add(new RogueText(raw, null, 1, RogueLook.INK));
         }
 
         float getPreferredHeight(float w) {

@@ -47,7 +47,7 @@ public class RogueShopScreen extends RogueScreen {
         viewDeck = add(new RogueButton(localizer.getMessage("lblViewDeck"), null, RogueButton.State.NORMAL,
             () -> FDeckViewer.show(offer.run().getCurrentDeck())));
         reroll = offer.rerollLabel() == null ? null : add(new RogueButton(offer.rerollLabel(), "Refresh",
-            offer.rerollEnabled() ? RogueButton.State.NORMAL : RogueButton.State.DISABLED, () -> answer(new ShopAnswer(true, Set.of(), offer.tab()))));
+            offer.rerollEnabled() ? RogueButton.State.NORMAL : RogueButton.State.DISABLED, () -> answer(new ShopAnswer(true, Set.of(), offer.tab()))).after(FSkinImage.QUEST_COIN));
         skip = add(new RogueButton(localizer.getMessage("lblSkip"), null, RogueButton.State.NORMAL,
             () -> answer(new ShopAnswer(false, Set.of(), offer.tab()))));
         buy = add(new RogueButton(localizer.getMessage(specials.isEmpty() ? "lblRogueBuySelectedCards" : "lblRogueBuySelected"), null,

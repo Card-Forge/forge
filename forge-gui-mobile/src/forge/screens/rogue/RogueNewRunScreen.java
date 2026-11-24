@@ -7,6 +7,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinImage;
+import forge.card.CardZoom;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.CodexHelper.CodexState;
 import forge.gamemodes.rogue.RogueDeck;
@@ -250,6 +251,10 @@ public class RogueNewRunScreen extends RogueScreen {
             ? RogueButton.State.NORMAL : RogueButton.State.DISABLED);
         customRun.setState(!progress.isCustomRunsUnlocked() ? RogueButton.State.DISABLED
             : custom ? RogueButton.State.SELECTED : RogueButton.State.NORMAL);
+        descensionButton.lead(progress.isDescensionModeUnlocked() ? null : FSkinImage.LOCK);
+        descensionButton.setHint(progress.isDescensionModeUnlocked() ? null : localizer.getMessage("lblRogueUnlockDescensionHint"));
+        customRun.lead(progress.isCustomRunsUnlocked() ? null : FSkinImage.LOCK);
+        customRun.setHint(progress.isCustomRunsUnlocked() ? null : localizer.getMessage("lblRogueCustomRunWin2RunsWithAnyCommanderToUnlock"));
         details.revalidate();
         start.setState(selection().canBegin(progress) ? RogueButton.State.MAIN : RogueButton.State.DISABLED);
     }
@@ -312,15 +317,15 @@ public class RogueNewRunScreen extends RogueScreen {
         boolean wide = Forge.isLandscapeMode();
         if (wide) {
             g.startClip(0, 0, 250 * u, getHeight() - 36 * u);
-            drawCarousel(g, new float[]{65 * u, 5 * u, 120 * u}, new float[]{-50 * u, 40 * u, 95 * u}, new float[]{205 * u, 40 * u, 95 * u});
+            drawCarousel(g, centreCard(), new float[]{-50 * u, 40 * u, 95 * u}, new float[]{205 * u, 40 * u, 95 * u});
             g.endClip();
             dots(g, 125 * u, 181 * u);
-            RogueLook.paper(g, 252 * u, 2 * u, getWidth() - 254 * u, getHeight() - 38 * u);
+            RogueLook.gilded(g, 252 * u, 2 * u, getWidth() - 254 * u, getHeight() - 38 * u);
         } else {
-            drawCarousel(g, new float[]{getWidth() / 2 - 72 * u, 12 * u, 144 * u}, new float[]{-80 * u, 50 * u, 100 * u},
+            drawCarousel(g, centreCard(), new float[]{-80 * u, 50 * u, 100 * u},
                 new float[]{getWidth() - 20 * u, 50 * u, 100 * u});
             dots(g, getWidth() / 2, 224 * u);
-            RogueLook.paper(g, 3 * u, 266 * u, getWidth() - 6 * u, buttonsTop() - 268 * u);
+            RogueLook.gilded(g, 3 * u, 266 * u, getWidth() - 6 * u, buttonsTop() - 268 * u);
         }
     }
 
@@ -331,6 +336,23 @@ public class RogueNewRunScreen extends RogueScreen {
 
     private static PaperCard commander(RogueDeck deck) {
         return deck.getStartDeck().getCommanders().get(0);
+    }
+
+    /** The chosen commander's card: left, top and width. */
+    private float[] centreCard() {
+        float u = RogueLook.unit();
+        return Forge.isLandscapeMode() ? new float[]{65 * u, 5 * u, 120 * u} : new float[]{getWidth() / 2 - 72 * u, 12 * u, 144 * u};
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        RogueDeck d = deck();
+        float[] c = centreCard();
+        if (d == null || !d.isUnlocked() || x < c[0] || x > c[0] + c[2] || y < c[1] || y > c[1] + c[2] * RogueLook.CARD_RATIO) {
+            return false;
+        }
+        CardZoom.show(commander(d));
+        return true;
     }
 
     /** Each slot is x, y and width. The middle card is drawn last, over its neighbours. */
@@ -518,8 +540,8 @@ public class RogueNewRunScreen extends RogueScreen {
             Localizer localizer = Localizer.getInstance();
             return switch (i) {
                 case 0 -> localizer.getMessage("lblCommander");
-                case 1 -> localizer.getMessage("lblRogueTraitsCount", startingTraits().size());
-                default -> localizer.getMessage("lblRogueStartingDeck");
+                case 1 -> localizer.getMessage("lblRogueEffectsCount", startingTraits().size());
+                default -> localizer.getMessage("lblDeck");
             };
         }
 

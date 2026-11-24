@@ -34,9 +34,11 @@ public class RogueSheet extends FOverlay {
     private float[] box() {
         float u = RogueLook.unit();
         float away = 1 - rise;
+        // Never taller than the screen, so a short screen such as a tablet's keeps the sheet's top in view
+        float h = Math.min(uprightHeight * u, getHeight() - 40 * u);
         return Forge.isLandscapeMode()
             ? new float[]{getWidth() - 300 * u + away * 300 * u, 3 * u, 297 * u, getHeight() - 41 * u}
-            : new float[]{3 * u, getHeight() - (uprightHeight + 34) * u + away * (uprightHeight + 34) * u, getWidth() - 6 * u, uprightHeight * u};
+            : new float[]{3 * u, getHeight() - h - 34 * u + away * (h + 34 * u), getWidth() - 6 * u, h};
     }
 
     @Override

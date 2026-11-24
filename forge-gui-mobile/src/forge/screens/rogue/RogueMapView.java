@@ -1,6 +1,7 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
@@ -12,6 +13,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePath;
 import forge.gamemodes.rogue.path.RoguePathNode;
+import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 import java.lang.ref.WeakReference;
@@ -29,29 +31,78 @@ import java.util.function.IntConsumer;
  */
 public class RogueMapView extends FScrollPane {
     static final Color NODE_FACE = new Color(0.93f, 0.87f, 0.73f, 1);
+    private static final float ZOOM_SECONDS = 0.35f;
+    // The rays are 30 degrees apart, so one 30 degree turn repeats seamlessly; 3 seconds is 10 degrees a second
+    private static final float RAY_TURN_SECONDS = 3f;
+    private static final Color[] RAY_BANDS = {new Color(0.77f, 0.25f, 0.16f, 0.35f), new Color(0.77f, 0.25f, 0.16f, 0.28f),
+        new Color(0.77f, 0.25f, 0.16f, 0.21f), new Color(0.77f, 0.25f, 0.16f, 0.13f), new Color(0.77f, 0.25f, 0.16f, 0.06f)};
 
     private final IntConsumer onChoose;
     private IntConsumer onOpen = i -> { };
-    private final boolean whole;
+    private IntConsumer onInspect = i -> { };
+    /** A node off the current row that is highlighted instead of the chosen one; -1 for none. */
+    private int inspected = -1;
+    private boolean whole;
+    /** 0 is the scrolling map and 1 every row; in between while zooming. */
+    private float wholeness;
+    private boolean zooming;
+    /** Where the scrolling map was, at full size, when zooming out began. */
+    private float zoomOutFrom;
     private float zoom = 1;
+    private float raySpin;
+    private boolean raysTurning;
     private RogueRun run;
     private Set<Integer> open = Set.of();
     private final Set<RoguePathNode> live = new HashSet<>();
     private final List<NodeTile> tiles = new ArrayList<>();
     private RoguePathNode lastCompleted;
     private boolean scrollToCurrent;
+    private Float scrollAfterLayout;
     private boolean intro;
     private Runnable afterIntro;
 
-    /** whole shows every row at once, smaller, without scrolling. */
     /** What a double tap on an open plane does, as well as choosing it. */
     void onOpen(IntConsumer onOpen) {
         this.onOpen = onOpen;
     }
 
-    public RogueMapView(IntConsumer onChoose, boolean whole) {
+    /** What a tap on a node off the current row does, to plan ahead. */
+    void onInspect(IntConsumer onInspect) {
+        this.onInspect = onInspect;
+    }
+
+    /** Highlights a node off the current row instead of the chosen one; -1 goes back to the chosen one. */
+    void setInspected(int index) {
+        inspected = index;
+    }
+
+    public RogueMapView(IntConsumer onChoose) {
         this.onChoose = onChoose;
+    }
+
+    boolean isWhole() {
+        return whole;
+    }
+
+    /** Zooms between every row at once and the scrolling map at the current row. */
+    void setWhole(boolean whole) {
+        if (this.whole == whole || zooming) {
+            return;
+        }
         this.whole = whole;
+        if (whole) {
+            zoomOutFrom = getScrollTop() / zoom;
+        }
+        float start = wholeness;
+        zooming = true;
+        RogueMotion.play(ZOOM_SECONDS, t -> {
+            wholeness = whole ? start + (1 - start) * t : start * (1 - t);
+            revalidate();
+        }, () -> {
+            zooming = false;
+            scrollToCurrent = !whole;
+            revalidate();
+        });
     }
 
     @Override
@@ -97,6 +148,17 @@ public class RogueMapView extends FScrollPane {
         }
         scrollToCurrent = true;
         revalidate();
+        turnRays();
+    }
+
+    /** Keeps the light behind the final boss turning while the screen that showed the map is up. */
+    private void turnRays() {
+        if (raysTurning) {
+            return;
+        }
+        raysTurning = true;
+        FScreen screen = Forge.getCurrentScreen();
+        RogueMotion.loop(RAY_TURN_SECONDS, t -> raySpin = t * 30, () -> Forge.getCurrentScreen() == screen, () -> raysTurning = false);
     }
 
     private float rowStep() {
@@ -112,14 +174,24 @@ public class RogueMapView extends FScrollPane {
         if (run == null || run.getPath() == null) {
             return new ScrollBounds(visibleWidth, visibleHeight);
         }
-        if (whole) {
-            zoom = 1;
-            float fullHeight = (run.getPath().getMaxRow() + 1) * rowStep() + 30 * RogueLook.unit();
-            zoom = Math.min(1, visibleHeight / fullHeight);
-        }
+        float fit = Math.min(1, visibleWidth / fullWidth());
+        float fullHeight = (run.getPath().getMaxRow() + 1) * rowStep() + 30 * RogueLook.unit();
+        float all = Math.min(fit, visibleHeight / fullHeight);
+        zoom = fit + (all - fit) * Interpolation.smooth.apply(wholeness);
         ScrollBounds[] bounds = new ScrollBounds[1];
         RogueLook.zoomed(zoom, () -> bounds[0] = layout(visibleWidth, visibleHeight));
         return bounds[0];
+    }
+
+    /** The widest row at full size, with a margin at each side. */
+    private float fullWidth() {
+        RoguePath path = run.getPath();
+        int widest = 1;
+        for (int row = 0; row <= path.getMaxRow(); row++) {
+            widest = Math.max(widest, path.getNodesInRow(row).size());
+        }
+        float u = RogueLook.unit();
+        return (widest - 1) * colStep() + (Forge.isLandscapeMode() ? 70 : 55) * u + 8 * u;
     }
 
     private ScrollBounds layout(float visibleWidth, float visibleHeight) {
@@ -138,19 +210,35 @@ public class RogueMapView extends FScrollPane {
             float h = node.isSideNode() ? 36 * u : boss ? th * 1.2f : th;
             tile.setBounds(cx - w / 2, cy - h / 2, w, h);
         }
-        if (scrollToCurrent && !whole) {
+        float cy = height - 15 * u - (run.getCurrentNode().getRowIndex() + 0.5f) * rowStep();
+        float target = Math.max(0, Math.min(height - visibleHeight, cy - visibleHeight * 0.68f));
+        if (zooming) {
+            // Out from wherever the map was; back in to the current row
+            float rest = 1 - Interpolation.smooth.apply(wholeness);
+            scrollAfterLayout = (whole ? zoomOutFrom * zoom : target) * rest;
+        } else if (scrollToCurrent && !whole) {
             scrollToCurrent = false;
-            float cy = height - 15 * u - (run.getCurrentNode().getRowIndex() + 0.5f) * rowStep();
-            float target = Math.max(0, Math.min(height - visibleHeight, cy - visibleHeight * 0.68f));
             if (intro) {
                 intro = false;
-                setScrollPositionsAfterLayout(0, 0);
+                scrollAfterLayout = 0f;
                 new IntroScroll(target).start();
             } else {
-                setScrollPositionsAfterLayout(0, target);
+                scrollAfterLayout = target;
             }
+        } else if (whole) {
+            scrollAfterLayout = 0f;
         }
         return new ScrollBounds(visibleWidth, height);
+    }
+
+    /** Scrolling has to wait until the new bounds are in place and the old scroll is undone, which doLayout does next. */
+    @Override
+    protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        if (scrollAfterLayout != null) {
+            scrollTop0 = scrollAfterLayout;
+            scrollAfterLayout = null;
+        }
+        super.setScrollPositionsAfterLayout(scrollLeft0, scrollTop0);
     }
 
     @Override
@@ -158,6 +246,7 @@ public class RogueMapView extends FScrollPane {
         if (run == null) {
             return;
         }
+        drawBossLight(g);
         RoguePath path = run.getPath();
         for (NodeTile from : tiles) {
             for (RoguePathNode next : path.getReachableNodes(from.node)) {
@@ -174,6 +263,17 @@ public class RogueMapView extends FScrollPane {
         }
     }
 
+    /** Dark red light turning slowly behind the act's final boss, fading outwards. */
+    private void drawBossLight(Graphics g) {
+        for (NodeTile tile : tiles) {
+            if (!(tile.node instanceof NodePlanebound plane) || plane.getPlaneboundType() != RoguePlaneboundType.BOSS || plane.isCompleted()) {
+                continue;
+            }
+            RogueLook.rays(g, RAY_BANDS, tile.getLeft() + tile.getWidth() / 2, tile.getTop() + tile.getHeight() / 2,
+                tile.getWidth() * 1.3f, raySpin);
+        }
+    }
+
     /** Plays the first look again if another screen cut it short. */
     void resumeIntro() {
         if (intro) {
@@ -187,7 +287,7 @@ public class RogueMapView extends FScrollPane {
      */
     private class IntroScroll extends ForgeAnimation {
         private static final float PAUSE = 0.5f;
-        private static final float DURATION = 1.2f;
+        private static final float DURATION = 1.8f;
         private final float target;
         private float time;
 
@@ -278,6 +378,8 @@ public class RogueMapView extends FScrollPane {
                 if (count >= 2 && node instanceof NodePlanebound) {
                     onOpen.accept(index);
                 }
+            } else {
+                onInspect.accept(index);
             }
             return true;
         }
@@ -286,7 +388,7 @@ public class RogueMapView extends FScrollPane {
         public void draw(Graphics g) {
             float u = RogueLook.unit();
             boolean here = open.contains(index);
-            boolean chosen = node == run.getCurrentNode();
+            boolean chosen = inspected >= 0 ? index == inspected : node == run.getCurrentNode();
             float alpha = node.isCompleted() ? 0.75f : live.contains(node) ? 1 : 0.38f;
             if (node instanceof NodePlanebound plane) {
                 float turn = turned(index, run.getPath().isFaceDown(run, plane));
@@ -310,7 +412,7 @@ public class RogueMapView extends FScrollPane {
             float u = RogueLook.unit();
             float cx = getWidth() / 2;
             float cy = getHeight() / 2;
-            if (here) {
+            if (here || chosen) {
                 g.fillCircle(chosen ? RogueLook.INK : new Color(0.12f, 0.1f, 0.08f, 0.35f), cx, cy, 18 * u);
                 g.fillCircle(chosen ? RogueLook.GOLD : RogueLook.PALE, cx, cy, 16 * u);
             }
@@ -343,7 +445,7 @@ public class RogueMapView extends FScrollPane {
             float art = th - 23 * u;
             boolean down = run.getPath().isFaceDown(run, plane);
             Color ink = new Color(0.12f, 0.1f, 0.08f, Math.max(alpha, 0.5f));
-            if (here) {
+            if (here || chosen) {
                 g.fillRect(chosen ? RogueLook.INK : new Color(0.12f, 0.1f, 0.08f, 0.45f), -4 * u, -4 * u, tw + 8 * u, th + 8 * u);
                 g.fillRect(chosen ? RogueLook.GOLD : RogueLook.PALE, -2.4f * u, -2.4f * u, tw + 4.8f * u, th + 4.8f * u);
             }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
@@ -305,8 +306,9 @@ public final class RogueLook {
         if (image == null) {
             return;
         }
-        // A clip outside an enclosing one fails, and drawing then would spill past the enclosing clip
+        // A clip outside an enclosing one fails; it still needs its endClip, or the enclosing clip stays pushed
         if (!g.startClip(x, y, w, h)) {
+            g.endClip();
             return;
         }
         if (alpha < 1) {
@@ -319,6 +321,24 @@ public final class RogueLook {
         g.endClip();
         if (alpha < 1) {
             g.resetAlphaComposite();
+        }
+    }
+
+    /**
+     * Twelve rays 30 degrees apart round cx, cy, turned by spin degrees, reaching reach. Each band colours an equal step
+     * outwards, so fading colours fade the rays.
+     */
+    public static void rays(Graphics g, Color[] bands, float cx, float cy, float reach, float spin) {
+        for (int i = 0; i < 12; i++) {
+            float a = (spin + i * 30) * MathUtils.degreesToRadians;
+            float b = a + 12 * MathUtils.degreesToRadians;
+            float ca = MathUtils.cos(a), sa = MathUtils.sin(a), cb = MathUtils.cos(b), sb = MathUtils.sin(b);
+            for (int band = 0; band < bands.length; band++) {
+                float r0 = reach * band / bands.length;
+                float r1 = reach * (band + 1) / bands.length;
+                g.fillTriangle(bands[band], cx + r0 * ca, cy + r0 * sa, cx + r1 * ca, cy + r1 * sa, cx + r1 * cb, cy + r1 * sb);
+                g.fillTriangle(bands[band], cx + r0 * ca, cy + r0 * sa, cx + r1 * cb, cy + r1 * sb, cx + r0 * cb, cy + r0 * sb);
+            }
         }
     }
 

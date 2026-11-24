@@ -11,8 +11,8 @@ import java.util.function.IntPredicate;
 
 /** Choices as tiles. One that cannot be taken is dashed, with a lock and its reason. A tap takes a choice. */
 public class RogueChoiceList extends RogueScrollPane {
-    /** reason is null when the choice can be taken. */
-    public record Choice(String title, String text, String reason) { }
+    /** reason is null when the choice can be taken. effectCard names the effect card its text mentions, or is null. */
+    public record Choice(String title, String text, String reason, String effectCard) { }
 
     private final List<Tile> tiles = new ArrayList<>();
     private final float minHeight;
@@ -55,7 +55,7 @@ public class RogueChoiceList extends RogueScrollPane {
             this.choice = choice;
             this.index = index;
             this.onChoose = onChoose;
-            this.text = add(new RogueText(choice.text(), 1, choice.reason() == null ? RogueLook.INK : RogueLook.SOFT));
+            this.text = add(new RogueText(choice.text(), choice.effectCard(), 1, choice.reason() == null ? RogueLook.INK : RogueLook.SOFT));
         }
 
         float preferredHeight(float w) {

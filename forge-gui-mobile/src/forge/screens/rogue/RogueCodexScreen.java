@@ -904,7 +904,7 @@ public class RogueCodexScreen extends RogueScreen {
         private final RogueText text;
 
         Body(String raw) {
-            text = add(new RogueText(raw, 1, RogueLook.INK));
+            text = add(new RogueText(raw, null, 1, RogueLook.INK));
         }
 
         @Override

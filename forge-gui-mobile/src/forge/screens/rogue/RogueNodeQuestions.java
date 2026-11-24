@@ -62,7 +62,8 @@ final class RogueNodeQuestions {
             for (RogueEvent.EventChoice choice : event.getChoices()) {
                 String reason = choice.effect().isChoiceAvailable(run) ? null : choice.effect().getUnavailableReason(run);
                 choices.add(new RogueChoiceList.Choice(choice.label(), choice.effect().getRawDescription(),
-                    choice.effect().isChoiceAvailable(run) ? null : reason == null ? "" : reason));
+                    choice.effect().isChoiceAvailable(run) ? null : reason == null ? "" : reason,
+                    choice.effect().getEffectCardReference()));
             }
             List<RogueButton> buttons = new ArrayList<>(List.of(viewMap(event.getDisplayName()), viewDeck(run)));
             if (rerolls.remainingRerolls > 0) {
@@ -85,8 +86,9 @@ final class RogueNodeQuestions {
                 return RogueQuestion.ask(q -> {
                     List<RogueChoiceList.Choice> list = new ArrayList<>();
                     for (NPCContext.NPCChoice choice : choices) {
-                        list.add(new RogueChoiceList.Choice(choice.label(),
-                            choice.npcEffect() == null ? "" : choice.npcEffect().getRawDescription(), null));
+                        NPCEffect effect = choice.npcEffect();
+                        list.add(new RogueChoiceList.Choice(choice.label(), effect == null ? "" : effect.getRawDescription(), null,
+                            effect == null ? null : effect.getEffectCardReference()));
                     }
                     List<RogueButton> buttons = new ArrayList<>();
                     if (rerolls.remainingRerolls > 0) {
@@ -135,7 +137,7 @@ final class RogueNodeQuestions {
             List<RogueChoiceList.Choice> choices = new ArrayList<>();
             for (SanctumOption option : options) {
                 String reason = option.disabledReason() == null ? "" : option.disabledReason();
-                choices.add(new RogueChoiceList.Choice(option.label(), option.description(), option.enabled() ? null : reason));
+                choices.add(new RogueChoiceList.Choice(option.label(), option.description(), option.enabled() ? null : reason, null));
             }
             String title = localizer.getMessage("lblRogueSanctum");
             List<RogueButton> buttons = List.of(viewMap(title), viewDeck(run), new RogueButton(localizer.getMessage("lblSkip"), null,
@@ -167,7 +169,9 @@ final class RogueNodeQuestions {
         List<T> answer = RogueQuestion.ask(q -> {
             List<RogueChoiceList.Choice> choices = new ArrayList<>();
             for (T item : all) {
-                choices.add(new RogueChoiceList.Choice(nameOf(item), item instanceof RogueEffect effect ? effect.getRawDescription() : "", null));
+                RogueEffect effect = item instanceof RogueEffect e ? e : null;
+                choices.add(new RogueChoiceList.Choice(nameOf(item), effect == null ? "" : effect.getRawDescription(), null,
+                    effect == null ? null : effect.getEffectCardReference()));
             }
             RogueButton[] okHolder = new RogueButton[1];
             Runnable update = () -> {
@@ -206,10 +210,10 @@ final class RogueNodeQuestions {
         RogueDecisions.Heading heading = RogueDecisions.planeboundEffects(wrathful, cursed);
         List<RogueChoiceList.Choice> lines = new ArrayList<>();
         for (WrathfulEffect effect : wrathful) {
-            lines.add(new RogueChoiceList.Choice(effect.getDisplayName(), effect.getRawDescription(), null));
+            lines.add(new RogueChoiceList.Choice(effect.getDisplayName(), effect.getRawDescription(), null, effect.getEffectCardReference()));
         }
         for (CursedEffect effect : cursed) {
-            lines.add(new RogueChoiceList.Choice(effect.getDisplayName(), effect.getRawDescription(), null));
+            lines.add(new RogueChoiceList.Choice(effect.getDisplayName(), effect.getRawDescription(), null, effect.getEffectCardReference()));
         }
         RogueQuestion.<Integer>ask(q -> new RogueSceneScreen(runOf(run), "title_bg", heading.title(), heading.text(),
             RogueSceneScreen.building(304, 288, 16), new RogueChoiceList(lines, 0, i -> { }),

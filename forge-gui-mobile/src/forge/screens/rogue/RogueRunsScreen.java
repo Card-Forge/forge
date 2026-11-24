@@ -21,6 +21,7 @@ public class RogueRunsScreen extends RogueScreen {
     private static final float SIDE_CARD = 0.81f;
 
     private RogueRun run;
+    private float bodyHeight;
     private List<RogueDeck> roster = List.of();
     private final RogueButton continueRun;
     private final RogueButton viewDeck;
@@ -95,12 +96,19 @@ public class RogueRunsScreen extends RogueScreen {
         if (run == null) {
             return 0;
         }
-        return Forge.isLandscapeMode() ? getHeight() - 41 * u : 292 * u;
+        if (Forge.isLandscapeMode()) {
+            return getHeight() - 41 * u;
+        }
+        // Upright on a short screen, such as a tablet, it gives up height to leave a strip for Start New Run, but never
+        // less than its card and carry cards (or None) need above its buttons
+        float content = (run.getCarryCards().isEmpty() ? 200 : 250) * u;
+        return Math.max(content + 43 * u, Math.min(292 * u, bodyHeight - 53 * u));
     }
 
     @Override
     protected void layoutBody(float x, float y, float w, float h) {
         float u = RogueLook.unit();
+        bodyHeight = h;
         float ch = currentHeight();
         if (Forge.isLandscapeMode()) {
             float cw = run == null ? 0 : 363 * u;
@@ -149,6 +157,9 @@ public class RogueRunsScreen extends RogueScreen {
         // The fan spreads to about 2.3 middle cards wide, so a narrow panel caps its size too
         float mw = roster.size() < 3 ? 0 : Math.min(Math.min(146 * u, room) / RogueLook.CARD_RATIO, (nw - 24 * u) / 2.3f);
         float mh = mw * RogueLook.CARD_RATIO;
+        if (room <= 0) {
+            return;
+        }
         // The heading and the fan stay together, centred in the room above Start New Run
         float hy = ny + (room - mh) / 2;
         RogueLook.text(g, localizer.getMessage("lblRogueNewRun"), nx, hy + 12 * u, 1.3f, RogueLook.DEEP, nw, Align.center);
@@ -218,6 +229,9 @@ public class RogueRunsScreen extends RogueScreen {
         if (!wide) {
             RogueLook.text(g, localizer.getMessage("lblRogueCarryCards"), carryX, carryY, 1, RogueLook.DEEP);
             carryY += 15 * u;
+            if (run.getCarryCards().isEmpty()) {
+                RogueLook.text(g, localizer.getMessage("lblNone"), carryX, carryY, 0.9f, RogueLook.SOFT);
+            }
         }
         for (int i = 0; i < run.getCarryCards().size(); i++) {
             RogueLook.card(g, run.getCarryCards().get(i).toPaperCard(), carryX + i * (carryW + 6 * u), carryY, carryW, 1);

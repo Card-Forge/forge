@@ -25,10 +25,12 @@ public class RogueDialog extends FOverlay {
     public enum Entrance { PLAIN, RAYS, DROP }
 
     private static final Color DIM = new Color(0, 0, 0, 0.6f);
-    private static final Color RAY = new Color(1f, 0.84f, 0.37f, 0.35f);
+    private static final Color[] RAY = {new Color(1f, 0.84f, 0.37f, 0.35f)};
     private static final Color SHINE = new Color(1f, 1f, 1f, 0.55f);
     private static final Color SPARKLE = new Color(1f, 0.95f, 0.69f, 1f);
     private static final float EFFECT_SECONDS = 2.4f;
+    // The rays are 30 degrees apart, so one 30 degree turn repeats seamlessly
+    private static final float RAY_TURN_SECONDS = 1.2f;
     private static final float[][] SPOTS = {{-0.08f, 0.05f}, {1.06f, 0.2f}, {-0.05f, 0.85f}, {1.04f, 0.92f}, {0.5f, -0.06f}};
 
     private final String title;
@@ -40,6 +42,7 @@ public class RogueDialog extends FOverlay {
     private final IntConsumer onChoice;
     private float pop = 1;
     private float time = EFFECT_SECONDS;
+    private float spin;
 
     private RogueDialog(String title, String text, FImage image, Entrance entrance, List<String> answers, IntConsumer onChoice) {
         super(null);
@@ -71,6 +74,14 @@ public class RogueDialog extends FOverlay {
         if (dialog.entrance != Entrance.PLAIN) {
             RogueMotion.play(EFFECT_SECONDS, t -> dialog.time = t * EFFECT_SECONDS, null);
         }
+        if (dialog.entrance == Entrance.RAYS) {
+            dialog.turnRays();
+        }
+    }
+
+    /** Keeps the light turning for as long as the dialog is up. */
+    private void turnRays() {
+        RogueMotion.loop(RAY_TURN_SECONDS, t -> spin = t * 30, this::isVisible, null);
     }
 
     /** An unlock notice, its image arriving in the light; waits for OK unless asked on the GUI thread. */
@@ -100,7 +111,7 @@ public class RogueDialog extends FOverlay {
         float u = RogueLook.unit();
         float wanted = (entrance == Entrance.DROP ? 64 : 150) * u;
         float w = (Forge.isLandscapeMode() ? 300 : 254) * u;
-        float room = getHeight() - 16 * u - RogueLook.wrappedHeight(text, w - 28 * u, 1) - 92 * u;
+        float room = getHeight() - 16 * u - RogueLook.wrappedHeight(text, w - 28 * u, 1) - 96 * u;
         return Math.max(48 * u, Math.min(wanted, room));
     }
 
@@ -108,7 +119,8 @@ public class RogueDialog extends FOverlay {
         float u = RogueLook.unit();
         float w = (Forge.isLandscapeMode() ? 300 : 254) * u;
         float ih = imageHeight();
-        float h = Math.min(RogueLook.wrappedHeight(text, w - 28 * u, 1) + 84 * u + (ih > 0 ? ih + 8 * u : 0), getHeight() - 16 * u);
+        // 4 more for the last line's descenders, which the message's clip would otherwise cut
+        float h = Math.min(RogueLook.wrappedHeight(text, w - 28 * u, 1) + 88 * u + (ih > 0 ? ih + 8 * u : 0), getHeight() - 16 * u);
         return new float[]{(getWidth() - w) / 2, (getHeight() - h) / 2, w, h};
     }
 
@@ -173,15 +185,9 @@ public class RogueDialog extends FOverlay {
         switch (entrance) {
             case RAYS -> {
                 if (g.startClip(box[0], box[1], box[2], box[3])) {
-                    float r = Math.max(box[2], box[3]);
-                    float turn = time * 25;
-                    for (int i = 0; i < 12; i++) {
-                        float a = (turn + i * 30) * MathUtils.degreesToRadians;
-                        float b = a + 12 * MathUtils.degreesToRadians;
-                        g.fillTriangle(RAY, cx, cy, cx + r * MathUtils.cos(a), cy + r * MathUtils.sin(a), cx + r * MathUtils.cos(b), cy + r * MathUtils.sin(b));
-                    }
-                    g.endClip();
+                    RogueLook.rays(g, RAY, cx, cy, Math.max(box[2], box[3]), spin);
                 }
+                g.endClip();
                 image.draw(g, at[0], at[1], at[2], at[3]);
                 drawShine(g, at);
                 drawSparkles(g, at);
@@ -203,7 +209,11 @@ public class RogueDialog extends FOverlay {
         if (t > 1) {
             t = (time - 1.4f) / 0.7f;
         }
-        if (t <= 0 || t >= 1 || !g.startClip(at[0], at[1], at[2], at[3])) {
+        if (t <= 0 || t >= 1) {
+            return;
+        }
+        if (!g.startClip(at[0], at[1], at[2], at[3])) {
+            g.endClip();
             return;
         }
         float band = at[2] * 0.18f;

@@ -153,7 +153,7 @@ public class RogueHistoryScreen extends RogueScreen {
             }
             extra = String.join("   ", lines);
             path = entry.getPath().isEmpty() ? null
-                : add(new RogueText(localizer.getMessage("lblRogueHistoryPath", String.join(", ", entry.getPath())), 0.85f, RogueLook.SOFT));
+                : add(new RogueText(localizer.getMessage("lblRogueHistoryPath", String.join(", ", entry.getPath())), null, 0.85f, RogueLook.SOFT));
             viewDeck = entry.getDeckSnapshot() == null ? null : add(new RogueButton(localizer.getMessage("lblViewDeck"), null,
                 RogueButton.State.NORMAL, () -> FDeckViewer.show(entry.getDeckSnapshot())));
         }

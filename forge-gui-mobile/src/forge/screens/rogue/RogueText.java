@@ -1,11 +1,13 @@
 package forge.screens.rogue;
 
 import com.badlogic.gdx.graphics.Color;
+import forge.Forge;
 import forge.Graphics;
 import forge.card.CardZoom;
 import forge.gamemodes.rogue.KeywordHint;
 import forge.gamemodes.rogue.PreviewReferenceType;
 import forge.gamemodes.rogue.TextHelper;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.toolbox.FDisplayObject;
 import java.util.ArrayList;
@@ -13,7 +15,8 @@ import java.util.List;
 
 /**
  * A Rogue Commander text with its cards underlined solid and its defined terms underlined in dots, each across the
- * whole name. Tapping a card zooms it; tapping a term explains it.
+ * whole name. Tapping a card zooms it. On desktop, resting the pointer on a card or term shows it; on a phone, tapping a
+ * term explains it.
  */
 public class RogueText extends FDisplayObject {
     private record Hit(float x, float y, float w, float h, TextHelper.Part part) { }
@@ -23,8 +26,9 @@ public class RogueText extends FDisplayObject {
     private final Color color;
     private final List<Hit> hits = new ArrayList<>();
 
-    public RogueText(String raw, float scale, Color color) {
-        this.parts = TextHelper.parts(raw);
+    /** effectCardReference, which may be null, names the effect card whose name in the text is underlined as that card. */
+    public RogueText(String raw, String effectCardReference, float scale, Color color) {
+        this.parts = TextHelper.parts(raw, effectCardReference);
         this.scale = scale;
         this.color = color;
     }
@@ -40,21 +44,47 @@ public class RogueText extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        for (Hit hit : hits) {
-            if (x >= hit.x() && x <= hit.x() + hit.w() && y >= hit.y() && y <= hit.y() + hit.h()) {
-                TextHelper.Part part = hit.part();
-                if (part.type() == PreviewReferenceType.CARD) {
-                    PaperCard card = TextHelper.resolveCard(part.token());
-                    if (card != null) {
-                        CardZoom.show(card);
-                    }
-                } else {
-                    RogueTermPopup.show(KeywordHint.fromToken(part.token()));
-                }
-                return true;
+        TextHelper.Part part = partAt(x, y);
+        if (part == null) {
+            return false;
+        }
+        if (part.type() == PreviewReferenceType.CARD) {
+            PaperCard card = TextHelper.resolveCard(part.token());
+            if (card != null) {
+                CardZoom.show(card);
+            }
+        } else if (GuiBase.isMobile()) {
+            // Desktop explains a term while the pointer rests on it
+            KeywordHint hint = KeywordHint.fromToken(part.token());
+            if (hint != null) {
+                RogueTermPopup.show(hint.getTitle(), hint.getHintText(), localToScreenX(x), localToScreenY(y));
             }
         }
-        return false;
+        return true;
+    }
+
+    @Override
+    public void setHovered(boolean hovered) {
+        super.setHovered(hovered);
+        TextHelper.Part part = hovered ? partAt(screenToLocalX(Forge.mouseMovedX), screenToLocalY(Forge.mouseMovedY)) : null;
+        if (part != null && part.type() == PreviewReferenceType.KEYWORD) {
+            KeywordHint hint = KeywordHint.fromToken(part.token());
+            if (hint != null) {
+                RogueScreen.hoverNote(this, hint.getTitle(), hint.getHintText());
+                return;
+            }
+        }
+        boolean card = part != null && part.type() == PreviewReferenceType.CARD;
+        RogueScreen.hover(this, card, card ? TextHelper.resolveCard(part.token()) : null);
+    }
+
+    private TextHelper.Part partAt(float x, float y) {
+        for (Hit hit : hits) {
+            if (x >= hit.x() && x <= hit.x() + hit.w() && y >= hit.y() && y <= hit.y() + hit.h()) {
+                return hit.part();
+            }
+        }
+        return null;
     }
 
     /** Draws when g is set; either way returns the height. */

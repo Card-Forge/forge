@@ -3,6 +3,7 @@ package forge.screens.rogue;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinImage;
 import forge.deck.FDeckViewer;
 import forge.gamemodes.rogue.RogueRun;
 import forge.item.PaperCard;
@@ -49,7 +50,7 @@ public class RogueRewardScreen extends RogueScreen {
                 }
             }));
         reroll = rerollLabel == null ? null : add(new RogueButton(rerollLabel, "Refresh",
-            rerollEnabled ? RogueButton.State.NORMAL : RogueButton.State.DISABLED, () -> question.answer(null)));
+            rerollEnabled ? RogueButton.State.NORMAL : RogueButton.State.DISABLED, () -> question.answer(null)).after(FSkinImage.QUEST_COIN));
         ok = add(new RogueButton(localizer.getMessage("lblOK"), null, RogueButton.State.MAIN, () -> confirm(question)));
     }
 
