@@ -463,8 +463,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (sa.hasParam("CounterNumPerDefined")) {
                         counterAmount = AbilityUtils.calculateAmount(gameCard, sa.getParam("CounterNumPerDefined"), sa);
                     }
-                    counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard)
-                            : counterAmount;
+                    if (sa.usesTargeting() && sa.isDividedAsYouChoose()) {
+                        Integer dividedAmount = sa.getDividedValue(gameCard);
+                        if (dividedAmount == null) {
+                            // Only apply counters explicitly allocated to this target.
+                            continue;
+                        }
+                        counterAmount = dividedAmount;
+                    }
                     if (sa.hasParam("UpTo")) {
                         int min = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("UpToMin", "0"), sa);
                         Map<String, Object> params = Maps.newHashMap();
