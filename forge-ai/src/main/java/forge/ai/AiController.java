@@ -1697,9 +1697,8 @@ public class AiController {
             // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
             // (Dryad Arbor into Lyra Dawnbringer), nor one with nothing to do in combat (a 0/4 Spellskite)
             if (CombatUtil.canAttack(e.getKey(), e.getValue())
-                    && (before.containsKey(e.getKey())
-                        || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat)
-                            && !AiAttackController.isPointlessAttacker(player, e.getKey(), combat, e.getValue()))) {
+                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat, e.getValue())
+                    && !AiAttackController.isPointlessAttacker(player, e.getKey(), e.getValue(), result.attackers))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -1759,7 +1758,7 @@ public class AiController {
             }
             // The attack heuristics left this land creature at home, and committing it here would skip their gift check
             // (shouldAttack): a blocker that kills it for free must not get it (Dryad Arbor into Lyra Dawnbringer, #12927)
-            if (AiAttackController.shouldDeclineLandGift(attacker, c, combat, false)) {
+            if (AiAttackController.shouldDeclineLandGift(attacker, c, combat, defender, false)) {
                 continue;
             }
             combat.addAttacker(c, defender);

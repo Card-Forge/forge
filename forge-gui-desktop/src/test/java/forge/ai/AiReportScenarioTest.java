@@ -595,6 +595,8 @@ public class AiReportScenarioTest extends AITest {
         // #13026: Solitude pitched to exile a mana dork is two cards (and the best removal) for a card that only ramped them
         l.add(noPlay("13026", "evoking Solitude at a lone Noble Hierarch on the opponent's turn", Fid.EXACT, M1, false, "Solitude",
                 c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("13026-hexproof", "Solitude does not treat a hexproof creature as an alternative target to a mana dork", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Carnage Tyrant", c.opp); }));
         l.add(noPlay("13026-dorks", "evoking Solitude when every creature of theirs is a mana dork", Fid.APPROX, M1, false, "Solitude",
                 c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Birds of Paradise", c.opp); }));
         l.add(play("13026-angel", "control: Solitude is still evoked at a Serra Angel", Fid.APPROX, M1, false, "Solitude",
@@ -1576,7 +1578,7 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
                 c -> {
                     final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
-                    return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai)) ? null : "the Arbor was not recognised as a gift";
+                    return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai), c.opp) ? null : "the Arbor was not recognised as a gift";
                 }));
         l.add(new Scenario("land-creature-all-out-gift", "Even at all-out aggression 5, Dryad Arbor stays home when a blocker kills it for free", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
@@ -1592,8 +1594,8 @@ public class AiReportScenarioTest extends AITest {
                 c -> {
                     final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
                     final Combat combat = new Combat(c.ai);
-                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, false);
-                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, true);
+                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, c.opp, false);
+                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, c.opp, true);
                     return ordinary && !exalted ? null : "the land-gift guard was not limited to the explicit Exalted path";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
@@ -2728,6 +2730,66 @@ public class AiReportScenarioTest extends AITest {
         }
         SUMMARY.add((failure == null ? "OK     " : "BUG    ") + s + (failure == null ? "" : " -> " + failure));
         AssertJUnit.assertNull(s + (failure == null ? "" : " -> " + failure), failure); // the reason is in the assertion, not only in the summary
+    }
+
+    @Test
+    public void flatMcPointlessAttackerUsesTheProposedAttackSet() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card battleCry = addCard("Accorder Paladin", ai);
+        final Card spellskite = addCard("Spellskite", ai);
+        AssertJUnit.assertTrue("Spellskite must be pointless when Battle Cry's source is not in the planned attack",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(spellskite, opponent)));
+        AssertJUnit.assertFalse("Spellskite is effective when Battle Cry's source is also in the planned attack",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(battleCry, opponent, spellskite, opponent)));
+    }
+
+    @Test
+    public void landGiftCheckOnlyConsidersTheChosenDefendingTeam() {
+        final Game game = initAndCreateThreePlayerGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player chosenDefender = game.getPlayers().get(0);
+        final Player otherDefender = game.getPlayers().get(2);
+        final Card arbor = addCard("Dryad Arbor", ai);
+        addCard("Lyra Dawnbringer", otherDefender);
+        final Combat combat = new Combat(ai);
+
+        AssertJUnit.assertFalse("a blocker belonging to another free-for-all opponent cannot block this attack",
+                AiAttackController.isGiftToABlocker(ai, arbor, combat, chosenDefender));
+        AssertJUnit.assertTrue("the chosen defender's Lyra can kill the Dryad Arbor for free",
+                AiAttackController.isGiftToABlocker(ai, arbor, combat, otherDefender));
+    }
+
+    @Test
+    public void classicMulliganChecksTheHandAfterBottomingItsOnlyCreature() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        // The classic bottoming heuristic only sends uncastable cards back when the profile enables this rule.
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Default");
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Plains", ai, ZoneType.Library);
+        }
+        final CardCollection hand = new CardCollection();
+        for (int i = 0; i < 3; i++) {
+            hand.add(addCardToZone("Plains", ai, ZoneType.Hand));
+        }
+        for (int i = 0; i < 3; i++) {
+            hand.add(addCardToZone("Holy Strength", ai, ZoneType.Hand));
+        }
+        final Card onlyCreature = addCardToZone("Emrakul, the Aeons Torn", ai, ZoneType.Hand);
+        hand.add(onlyCreature);
+        AssertJUnit.assertTrue("the Default profile should bottom an uncastable creature",
+                ComputerUtil.scryWillMoveCardToBottomOfLibrary(ai, onlyCreature));
+
+        final PlayerControllerAi controller = (PlayerControllerAi) ai.getController();
+        final CardCollection bottom = controller.classicMulliganBottomCards(hand, 1);
+        AssertJUnit.assertTrue("the uncastable high-cost creature should be selected for bottoming", bottom.contains(onlyCreature));
+        final CardCollection kept = new CardCollection(hand);
+        kept.removeAll(bottom);
+        AssertJUnit.assertTrue("the retained hand now contains only lands and creature Auras",
+                OpeningHand.hasOnlyLandsAndCreatureAuras(kept));
+        AssertJUnit.assertFalse("the classic mulligan must reject the resulting hand", controller.classicMulliganKeepsHand(hand, 1));
     }
 
     @AfterClass

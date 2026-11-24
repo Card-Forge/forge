@@ -2203,7 +2203,8 @@ public class ComputerUtil {
             return finalHandSize;
         }
 
-        if (OpeningHand.hasOnlyLandsAndCreatureAuras(handList)) {
+        // When cards will be bottomed, PlayerControllerAi checks the actual retained hand after choosing them.
+        if (cardsToReturn == 0 && OpeningHand.hasOnlyLandsAndCreatureAuras(handList)) {
             return 0; // the classic mulligan path must not count creature Auras as playable without a creature (#12929)
         }
 

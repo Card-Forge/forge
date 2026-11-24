@@ -552,7 +552,7 @@ public final class ActivationGuard {
         if (!pitchesACard) {
             return false; // paying mana for an evoke (Shriekmaw) is a different trade
         }
-        boolean removesCreatures = false;
+        boolean anyTarget = false;
         for (final Trigger t : sa.getHostCard().getTriggers()) {
             if (t.getMode() != TriggerType.ChangesZone || !"Battlefield".equals(t.getParam("Destination"))
                     || !"Card.Self".equals(t.getParam("ValidCard"))) {
@@ -560,19 +560,36 @@ public final class ActivationGuard {
             }
             final SpellAbility etb = t.ensureAbility();
             final String valid = etb == null ? "" : etb.getParamOrDefault("ValidTgts", "");
-            removesCreatures |= valid.startsWith("Creature") && !valid.contains("Planeswalker") && !valid.contains("Player");
-        }
-        if (!removesCreatures) {
-            return false;
-        }
-        boolean anyTarget = false;
-        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
-            if (!c.isCreature()) {
+            if (!valid.startsWith("Creature") || valid.contains("Player")) {
                 continue;
             }
-            anyTarget = true;
-            if (!isSmallBody(c) || c.getManaAbilities().isEmpty()) {
-                return false; // a creature that is worth the second card
+            if (etb == null || !etb.usesTargeting()) {
+                continue;
+            }
+            // Targetability depends on the controller of this trigger: hexproof, shroud and protection
+            // must not make an otherwise valuable creature look like a legal alternative to a mana dork.
+            try {
+                etb.setActivatingPlayer(ai);
+            } catch (final RuntimeException e) {
+                return false;
+            }
+            for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+                final boolean targetable;
+                try {
+                    targetable = etb.canTarget(c);
+                } catch (final RuntimeException e) {
+                    return false; // fail open if an unusual target restriction cannot be evaluated
+                }
+                if (!targetable) {
+                    continue;
+                }
+                if (!c.isCreature()) {
+                    return false; // a legal planeswalker target is an alternative worth preserving the evoke for
+                }
+                anyTarget = true;
+                if (!isSmallBody(c) || c.getManaAbilities().isEmpty()) {
+                    return false; // a creature that is worth the second card
+                }
             }
         }
         return anyTarget;

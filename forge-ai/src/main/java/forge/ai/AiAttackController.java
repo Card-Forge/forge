@@ -101,6 +101,13 @@ public class AiAttackController {
         refreshCombatants(defendingOpponent);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
+    /** Evaluates attack triggers against the exact set of attackers chosen by a simulation. */
+    private AiAttackController(final Player ai, final Collection<Card> plannedAttackers) {
+        this.ai = ai;
+        this.nextTurn = false;
+        this.attackers = new ArrayList<>(plannedAttackers);
+    }
+
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
         defendingOpponent = choosePreferredDefenderPlayer(ai, true);
@@ -392,8 +399,17 @@ public class AiAttackController {
      * An attacker with no damage to deal and no effect when it attacks (a 0/4 Spellskite) only gets tapped and exposed
      * by attacking. The rollouts of the Monte Carlo attack search must not add it either.
      */
-    static boolean isPointlessAttacker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
-        return !new AiAttackController(ai).isEffectiveAttacker(ai, attacker, combat, defender);
+    static boolean isPointlessAttacker(final Player ai, final Card attacker, final GameEntity defender,
+                                       final Map<Card, GameEntity> plannedAttackers) {
+        // The candidate is not yet attacking, but its teammates' attack triggers can still affect it.
+        final Combat otherAttackers = new Combat(ai);
+        for (final Map.Entry<Card, GameEntity> entry : plannedAttackers.entrySet()) {
+            if (entry.getKey() != attacker) {
+                otherAttackers.addAttacker(entry.getKey(), entry.getValue());
+            }
+        }
+        return !new AiAttackController(ai, plannedAttackers.keySet())
+                .isEffectiveAttacker(ai, attacker, otherAttackers, defender);
     }
 
     public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers, final boolean nextTurn) {
@@ -1645,7 +1661,7 @@ public class AiAttackController {
         }
 
         // Aggression 6 is also used by attack-limit and Reconnaissance paths; only the explicit Exalted path may bypass this.
-        if (shouldDeclineLandGift(ai, attacker, combat, exaltedStrategy)) {
+        if (shouldDeclineLandGift(ai, attacker, combat, defender, exaltedStrategy)) {
             return false;
         }
 
@@ -1922,16 +1938,34 @@ public class AiAttackController {
      * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
      * make that worth it: attacking just hands the blocker a free kill.
      */
-    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat, final boolean exaltedStrategy) {
-        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat);
+    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat,
+                                         final GameEntity defender, final boolean exaltedStrategy) {
+        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat, defender);
     }
 
     /** Shared blocker check used by the attack decision and report scenarios. */
-    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
+    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
         if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
             return false;
         }
+        final Player defendingPlayer;
+        if (defender instanceof Player) {
+            defendingPlayer = (Player) defender;
+        } else if (defender instanceof Card) {
+            final Card defendingCard = (Card) defender;
+            defendingPlayer = defendingCard.isBattle() ? defendingCard.getProtectingPlayer() : defendingCard.getController();
+        } else {
+            return false;
+        }
+        if (defendingPlayer == null) {
+            return false;
+        }
         for (final Player opp : ai.getOpponents()) {
+            // In free-for-all only the chosen defender can block. Under shared team turns, any member of
+            // the defending team can block an attack directed at one of its players or permanents.
+            if (!defendingPlayer.sharesTeamWith(opp)) {
+                continue;
+            }
             for (final Card blocker : opp.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, blocker) && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
                         && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
