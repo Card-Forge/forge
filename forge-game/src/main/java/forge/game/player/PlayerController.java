@@ -384,7 +384,7 @@ public abstract class PlayerController {
         return this.getCostDecisionMaker(player, ability, effect, null);
     }
     /**
-     * @param orString the " (or: ...)" suffix for unless-style payments during resolution,
+     * @param orString the " (or: ...)" suffix for payments made during resolution,
      *                 already built by {@link PlaySpellAbility#getOrStringFromCost}; null for normal cost payment.
      */
     public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String orString);

@@ -34,8 +34,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         super(p, effect, sa, sa.getHostCard());
         this.controller = controller;
         mandatory = sa.getPayCosts().isMandatory();
-        // Only set for unless-style payments during resolution (see PlaySpellAbility.payCostDuringAbilityResolve).
-        // Normal cost payment passes null, so e.g. a trigger's Draw cost asks a plain "Draw N Card(s)?".
         this.orString = orString;
     }
 
