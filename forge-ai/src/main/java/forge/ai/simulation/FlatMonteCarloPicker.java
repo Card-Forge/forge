@@ -2138,24 +2138,26 @@ public final class FlatMonteCarloPicker {
      * only castable then, a tutor that finds its card for the whole turn, an ability that names its phases.
      */
     public static boolean shouldDeferEarlySpell(final Player player, final SpellAbility sa) {
-        if (!sa.isSpell() || sa.isCopied() || sa.getApi() == ApiType.Counter || mustBeCastNow(player, sa)) {
+        if (!sa.isSpell() || sa.isCopied() || sa.getApi() == ApiType.Counter) {
             return false;
+        }
+        final Card host = sa.getHostCard();
+        if (host == null || host.hasSVar("MustCastInUpkeep") || sa.isTrigger()) {
+            return false;
+        }
+        final Game game = host.getGame();
+        // "cast only during your upkeep and end step": it can wait while a permitted step is still to come this turn
+        if (sa.getRestrictions() != null && sa.getRestrictions().getPhases() != null && !sa.getRestrictions().getPhases().isEmpty()) {
+            final PhaseType now = game.getPhaseHandler().getPhase();
+            if (sa.getRestrictions().getPhases().stream().noneMatch(ph -> ph.isAfter(now))) {
+                return false; // this is the last window it has
+            }
         }
         if (!player.getManaPool().isEmpty()) {
             return false; // mana from an upkeep effect is gone when the step ends
         }
-        for (SpellAbility s = sa; s != null; s = s.getSubAbility()) {
-            if (s.hasParam("ActivationPhases") || s.hasParam("AnyPhase")) {
-                return false;
-            }
-        }
         // a tutor in the player's own turn: the card is in hand for the draw step and the main phase
-        return !(TutorPlan.isLibraryTutor(sa) && sa.getActivatingPlayer() != null
-                && game(sa).getPhaseHandler().isPlayerTurn(player));
-    }
-
-    private static forge.game.Game game(final SpellAbility sa) {
-        return sa.getHostCard().getGame();
+        return !(TutorPlan.isLibraryTutor(sa) && game.getPhaseHandler().isPlayerTurn(player));
     }
 
     public static boolean isCombatTrick(final SpellAbility sa) {

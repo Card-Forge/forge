@@ -709,6 +709,15 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
         l.add(play("13048-answer", "Sleeper Agent is cast at 5 life when a Serra Angel holds the 3/3 off", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
                 c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(new Scenario("13048-trigger", "Sleeper Agent's enter trigger resolves and the opponent really gets the creature", Fid.EXACT, "MAIN2", true,
+                c -> c.bf("Swamp", c.ai),
+                c -> {
+                    final Card agent = c.hand("Sleeper Agent", c.ai);
+                    c.game.getAction().moveToPlay(agent, c.ai, null, forge.game.ability.AbilityKey.newMap());
+                    c.game.getTriggerHandler().runWaitingTriggers();
+                    c.resolveAll();
+                    return agent.getController().equals(c.opp) ? null : "Sleeper Agent stayed with " + agent.getController();
+                }));
         // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
         l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",
                 c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));
@@ -725,13 +734,59 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return hasTreasure(c) ? "the AI let them have a Treasure instead of paying {2}" : null;
                 }));
-        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana white spell in its hand", Fid.APPROX, "DRAW", true,
-                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Glorious Anthem", c.ai); },
+        l.add(new Scenario("tithe-unaffordable", "control for the Treasure check: with no mana to pay {2} the opponent must get the Treasure", Fid.APPROX, "DRAW", true,
+                c -> c.bf("Smothering Tithe", c.opp),
                 c -> {
                     final String broken = drawIntoTithe(c);
                     if (broken != null) { return broken; }
                     c.resolveAll();
-                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Glorious Anthem";
+                    return hasTreasure(c) ? null : "no Treasure although the AI could not pay: the scenario does not see the token, trace:" + c.trace;
+                }));
+        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana white spell in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Glorious Anthem", c.ai); },
+                c -> {
+                    // asked before the draw: afterwards the Plains are tapped and the answers say nothing
+                    final SpellAbility anthem = c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility();
+                    anthem.setActivatingPlayer(c.ai);
+                    final String before = "before the draw: untapped Plains " + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
+                            + ", mana estimate " + ComputerUtilMana.getAvailableManaEstimate(c.ai) + ", Anthem castable with 0 / 2 extra mana: "
+                            + ComputerUtilMana.canPayManaCost(anthem, c.ai, 0, false) + " / " + ComputerUtilMana.canPayManaCost(anthem, c.ai, 2, false);
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    // what the check in TokenAi sees for every spell in hand, with the Tithe trigger on the stack
+                    final StringBuilder seen = new StringBuilder();
+                    for (final Card h : c.ai.getCardsIn(ZoneType.Hand)) {
+                        for (final SpellAbility s : h.getSpellAbilities()) {
+                            if (s.getActivatingPlayer() == null) { s.setActivatingPlayer(c.ai); }
+                            final forge.game.mana.ManaCostBeingPaid now = s.getPayCosts() == null ? null
+                                    : ComputerUtilMana.calculateManaCost(s.getPayCosts(), s, c.ai, true, 0, false);
+                            seen.append("[").append(h).append(" / ").append(s).append(": isSpell ").append(s.isSpell())
+                                    .append(", payCosts ").append(s.getPayCosts())
+                                    .append(", cost now ").append(now).append(" cmc ").append(now == null ? -1 : now.getConvertedManaCost())
+                                    .append(", payable ").append(now != null && ComputerUtilMana.canPayManaCost(now, s, c.ai, false))
+                                    .append(", estimate ").append(ComputerUtilMana.getAvailableManaEstimate(c.ai)).append("] ");
+                        }
+                    }
+                    // what TokenAi itself answers for the trigger on the stack, before anything resolves
+                    String asked;
+                    try {
+                        final SpellAbility top = c.game.getStack().peekAbility();
+                        final SpellAbility inner = top instanceof forge.game.trigger.WrappedAbility
+                                ? ((forge.game.trigger.WrappedAbility) top).getWrappedAbility() : top;
+                        final Cost unless = new Cost(inner.getParam("UnlessCost"), true);
+                        asked = "stack top " + top + ", api " + inner.getApi() + ", activator " + inner.getActivatingPlayer() + ", ai " + c.ai
+                                + ", cost parts " + unless.getCostParts() + ", TokenAi pays: "
+                                + SpellApiToAi.Converter.get(inner).willPayUnlessCost(c.ai, inner, unless, false, new FCollection<>(c.ai));
+                    } catch (final RuntimeException e) {
+                        asked = "asking TokenAi threw " + e;
+                    }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Glorious Anthem; " + asked + "; spells seen: " + seen + "; " + before + "; untapped Plains left: "
+                            + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
+                            + ", hand: " + c.ai.getCardsIn(ZoneType.Hand) + ", Anthem castable with 0 / 2 extra mana: "
+                            + ComputerUtilMana.canPayManaCost(c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility(), c.ai, 0, false) + " / "
+                            + ComputerUtilMana.canPayManaCost(c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility(), c.ai, 2, false)
+                            + ", trace:" + c.trace;
                 }));
         l.add(new Scenario("tithe-colors", "the AI pays {2} for Smothering Tithe when its Counterspell could not be cast with four Plains anyway", Fid.APPROX, "DRAW", true,
                 c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Counterspell", c.ai); },

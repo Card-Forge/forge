@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostSacrifice;
@@ -45,7 +46,9 @@ public class CounterAi extends SpellAbilityAi {
             return false;
         }
         final int counterCost = counter.getHostCard() == null ? 0 : counter.getHostCard().getCMC();
-        return price.getTotalMana().getCMC() < counterCost && ComputerUtilMana.getAvailableManaEstimate(ai) >= price.getTotalMana().getCMC();
+        // the colours count, not only the amount: {U}{U} cannot be paid with four Plains
+        return price.getTotalMana().getCMC() < counterCost
+                && ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(price.getTotalMana()), topSA, ai, false);
     }
 
     @Override
