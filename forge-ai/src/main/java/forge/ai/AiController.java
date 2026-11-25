@@ -2524,8 +2524,7 @@ public class AiController {
             // phases and a response, so the upkeep and the draw step were always decided by the plain heuristics. That makes it
             // apply to every AI profile, not only FlatMC. A spell that is only castable then ("cast only during your upkeep") or
             // is marked MustCastInUpkeep stays (FlatMonteCarloPicker.mustBeCastNow).
-            saList.removeIf(sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
-                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa));
+            saList.removeIf(sa -> FlatMonteCarloPicker.shouldDeferEarlySpell(player, sa));
         }
 
         List<SpellAbility> planarRolls = Lists.newArrayList();
@@ -2715,8 +2714,7 @@ public class AiController {
                 && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
             // Nothing to answer in an upkeep or draw step: an instant waits for the main phase, the attack or the end step,
             // when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the draw step)
-            final Predicate<SpellAbility> tooEarly = sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
-                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa);
+            final Predicate<SpellAbility> tooEarly = sa -> FlatMonteCarloPicker.shouldDeferEarlySpell(player, sa);
             extras.removeIf(tooEarly);
             approved.removeIf(tooEarly);
         }

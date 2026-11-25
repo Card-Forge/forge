@@ -15,6 +15,8 @@ import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCost;
 import forge.game.cost.CostDraw;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
@@ -505,18 +507,34 @@ public class TokenAi extends SpellAbilityAi {
             return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
                     && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa);
         }
-        final int price = cost.getTotalMana().getCMC();
-        final int available = ComputerUtilMana.getAvailableManaEstimate(payer);
-        if (price > available) {
+        final ManaCost price = cost.getTotalMana();
+        if (price.getCMC() > ComputerUtilMana.getAvailableManaEstimate(payer)) {
             return false;
         }
-        int needed = 0;
+        // Real mana allocation, not converted mana cost: four Plains cannot cast Counterspell with or without the payment, but
+        // paying {2} out of Plains + Island + Island + Mountain would take the blue away from it. Pay unless it costs a spell
+        // that can be cast right now.
         for (final Card inHand : payer.getCardsIn(ZoneType.Hand)) {
-            if (!inHand.isLand() && inHand.getCMC() <= available) {
-                needed = Math.max(needed, inHand.getCMC());
+            if (inHand.isLand()) {
+                continue;
+            }
+            for (final SpellAbility spell : inHand.getSpellAbilities()) {
+                if (!spell.isSpell() || spell.getPayCosts() == null || spell.getPayCosts().getTotalMana() == null) {
+                    continue;
+                }
+                if (spell.getActivatingPlayer() == null) {
+                    spell.setActivatingPlayer(payer);
+                }
+                final ManaCost spellCost = spell.getPayCosts().getTotalMana();
+                if (!ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(spellCost), spell, payer, false)) {
+                    continue; // not castable now anyway
+                }
+                if (!ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(ManaCost.combine(spellCost, price)), spell, payer, false)) {
+                    return false; // paying would leave it uncastable
+                }
             }
         }
-        return available - price >= needed;
+        return true;
     }
 
     @Override

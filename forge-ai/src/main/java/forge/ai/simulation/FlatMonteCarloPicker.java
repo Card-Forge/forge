@@ -2131,6 +2131,33 @@ public final class FlatMonteCarloPicker {
         return sa.getHostCard() != null && (sa.getHostCard().hasSVar("MustCastInUpkeep") || sa.isTrigger());
     }
 
+    /**
+     * Whether a spell is better left for later in an upkeep or draw step with nothing on the stack (Ephemerate with nothing to
+     * blink in its own upkeep, Kozilek's Command in the draw step, #12930). Deliberately narrow: it only defers a plain spell
+     * that has no reason to be cast now. Whatever is lost when the step ends stays castable: floating mana, a card that is
+     * only castable then, a tutor that finds its card for the whole turn, an ability that names its phases.
+     */
+    public static boolean shouldDeferEarlySpell(final Player player, final SpellAbility sa) {
+        if (!sa.isSpell() || sa.isCopied() || sa.getApi() == ApiType.Counter || mustBeCastNow(player, sa)) {
+            return false;
+        }
+        if (!player.getManaPool().isEmpty()) {
+            return false; // mana from an upkeep effect is gone when the step ends
+        }
+        for (SpellAbility s = sa; s != null; s = s.getSubAbility()) {
+            if (s.hasParam("ActivationPhases") || s.hasParam("AnyPhase")) {
+                return false;
+            }
+        }
+        // a tutor in the player's own turn: the card is in hand for the draw step and the main phase
+        return !(TutorPlan.isLibraryTutor(sa) && sa.getActivatingPlayer() != null
+                && game(sa).getPhaseHandler().isPlayerTurn(player));
+    }
+
+    private static forge.game.Game game(final SpellAbility sa) {
+        return sa.getHostCard().getGame();
+    }
+
     public static boolean isCombatTrick(final SpellAbility sa) {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null || sa.isPwAbility()) {
             return false;

@@ -183,7 +183,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if (spendsEnergyAndItself(sa) && tgtPlayers.anyMatch(PlayerPredicates.isOpponentOf(ai))) {
+        if (spendsEnergyAndItself(sa) && tgtPlayers.anyMatch(p -> p.isOpponentOf(ai) && p.canLoseLife())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

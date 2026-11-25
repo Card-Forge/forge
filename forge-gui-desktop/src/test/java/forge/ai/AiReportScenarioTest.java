@@ -714,6 +714,8 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));
         l.add(noPlay("13049-one-energy", "control: Gonti's Machinations cannot be paid with one energy", Fid.EXACT, M1, true, "Gonti's Machinations",
                 c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 1); c.ai.setLife(10, null); }));
+        l.add(noPlay("13049-no-life-loss", "control: Gonti's Machinations is kept while the opponent cannot lose life (Platinum Emperion)", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); c.bf("Platinum Emperion", c.opp); }));
         // Smothering Tithe: whenever the AI draws, it may pay {2} or they get a Treasure; and a 3 mana counterspell is not the answer to that
         l.add(new Scenario("tithe-pays", "the AI pays {2} for Smothering Tithe when the mana is not needed for anything in its hand", Fid.APPROX, "DRAW", true,
                 c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); },
@@ -723,13 +725,21 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return hasTreasure(c) ? "the AI let them have a Treasure instead of paying {2}" : null;
                 }));
-        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana spell in its hand", Fid.APPROX, "DRAW", true,
-                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Phyrexian Rager", c.ai); },
+        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana white spell in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Glorious Anthem", c.ai); },
                 c -> {
                     final String broken = drawIntoTithe(c);
                     if (broken != null) { return broken; }
                     c.resolveAll();
-                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Phyrexian Rager";
+                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Glorious Anthem";
+                }));
+        l.add(new Scenario("tithe-colors", "the AI pays {2} for Smothering Tithe when its Counterspell could not be cast with four Plains anyway", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Counterspell", c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? "the AI gave a Treasure to keep two Plains for a Counterspell it cannot cast" : null;
                 }));
         l.add(new Scenario("tithe-disallow", "Disallow is not cast at the trigger of Smothering Tithe when paying {2} is cheaper", Fid.APPROX, "DRAW", true,
                 c -> { c.bf("Smothering Tithe", c.opp); c.bf("Island", 3, c.ai); c.hand("Disallow", c.ai); },
