@@ -78,6 +78,36 @@ public class GameSimulatorSpellChoiceTest extends SimulationTest {
     }
 
     @Test
+    public void testKickedCometStormFindsAllItsTargetsAndResolves() {
+        Game game = createGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Mountain", 6, ai);
+        Card storm = addCardToZone("Comet Storm", ai, ZoneType.Hand);
+
+        // "Choose any target, then another for each time this spell was kicked": the choice the simulation is handed
+        // has one target; the missing ones come from TargetTopUp (the opponent first, then his creatures)
+        SpellAbility kicked = GameActionUtil.addExtraKeywordCost(ability(storm, ai));
+        final int kicks = kicked.getOptionalKeywordAmount(Keyword.MULTIKICKER);
+        AssertJUnit.assertTrue("Comet Storm is kicked at least once", kicks >= 1);
+        kicked.setXManaCostPaid(2);
+        kicked.getTargets().add(opponent);
+        addCards("Mountain", 2, ai); // the X, paid after the kicks were chosen
+        addCards("Runeclaw Bear", kicks, opponent);
+
+        GameSimulator simulator = simulate(game, ai, kicked);
+        Player simulatedAi = (Player) simulator.getGameCopier().find(ai);
+        Player simulatedOpponent = (Player) simulator.getGameCopier().find(opponent);
+
+        AssertJUnit.assertEquals("two damage to the opponent: the spell was cast and resolved",
+                18, simulatedOpponent.getLife());
+        AssertJUnit.assertEquals("two damage to each of his " + kicks + " creatures kills them",
+                0, simulatedOpponent.getCreaturesInPlay().size());
+        AssertJUnit.assertEquals("the AI is not among the targets", 20, simulatedAi.getLife());
+    }
+
+    @Test
     public void testPreservesAnnouncedX() {
         Game game = createGame();
         Player ai = game.getPlayers().get(1);

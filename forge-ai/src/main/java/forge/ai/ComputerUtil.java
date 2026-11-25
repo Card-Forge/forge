@@ -22,6 +22,7 @@ import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.ai.simulation.RampPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -930,6 +931,21 @@ public class ComputerUtil {
             }
             // Otherwise, continue to choose permanents to sacrifice to avoid dying
         }
+
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            // Keep the payoff and the existing Mountains needed for the fetched Mountains to trigger it.
+            remaining.removeIf(c -> c.getName().startsWith("Valakut"));
+            final CardCollection mountains = CardLists.filter(remaining, c -> c.getType().hasSubtype("Mountain"));
+            for (int i = 0; i < RampPlan.scapeshiftMountainsToKeep(ai) && !mountains.isEmpty(); i++) {
+                final Card keep = ComputerUtilCard.getBestLandAI(mountains);
+                if (keep == null) {
+                    break;
+                }
+                remaining.remove(keep);
+                mountains.remove(keep);
+            }
+        }
+
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
@@ -985,7 +1001,10 @@ public class ComputerUtil {
             });
         }
 
-        final int max = Math.min(remaining.size(), amount);
+        int max = Math.min(remaining.size(), amount);
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            max = Math.min(max, RampPlan.scapeshiftLandsToSacrifice(ai));
+        }
 
         if (exceptSelf && max < remaining.size()) {
             removedSelf = remaining.remove(host);

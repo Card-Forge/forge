@@ -72,27 +72,7 @@ public final class ComboAssembly {
         if (!piece.getName().equals("Scapeshift")) {
             return false;
         }
-        boolean valakut = false;
-        int lands = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (c.getName().startsWith("Valakut")) {
-                valakut = true;
-            } else if (c.isLand()) {
-                lands++;
-            }
-        }
-        int mountains = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
-            if (c.getType().hasSubtype("Mountain")) {
-                mountains++;
-            }
-        }
-        int life = Integer.MAX_VALUE;
-        for (final Player opp : ai.getOpponents()) {
-            life = Math.min(life, opp.getLife());
-        }
-        final int entering = Math.min(lands, mountains);
-        return !(valakut && entering >= 6 && 3 * entering >= life);
+        return RampPlan.scapeshiftMustWait(ai); // a deck without a Valakut uses Scapeshift as ordinary ramp
     }
 
     /**

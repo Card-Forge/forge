@@ -639,6 +639,27 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
             Forge.getLocalizer().getMessage("cbImageFetcher"),
             Forge.getLocalizer().getMessage("nlImageFetcher")), 4);
+        if (GuiBase.isAndroid()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_ORIGINAL_TEXTURE_QUALITY,
+                Forge.getLocalizer().getMessage("cbOriginalTextureQuality"),
+                Forge.getLocalizer().getMessage("nlOriginalTextureQuality")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        // Reload card textures using the newly selected decode settings.
+                        ImageCache.getInstance().disposeTextures();
+                    }
+                }, 4);
+        }
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CACHE_CARD_FRAMES,
+            Forge.getLocalizer().getMessage("cbCacheCardFrames"),
+            Forge.getLocalizer().getMessage("nlCacheCardFrames")) {
+                @Override
+                public void select() {
+                    super.select();
+                    forge.card.CardImageRenderer.setFrameCacheEnabled(FModel.getPreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
+                }
+            }, 4);
         final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_DOWNLOAD_LANG, "Card art language",
                 "Preferred language for downloaded card images",

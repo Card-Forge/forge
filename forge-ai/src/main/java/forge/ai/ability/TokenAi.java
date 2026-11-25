@@ -41,6 +41,9 @@ import forge.util.collect.FCollectionView;
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 public class TokenAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts",
+    };
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
@@ -159,6 +162,12 @@ public class TokenAi extends SpellAbilityAi {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+
+            if (isTargetedAuraToken(actualToken, sa)) {
+                return chooseTargetedAuraToken(ai, sa, actualToken, false)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
@@ -291,7 +300,11 @@ public class TokenAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (sa.canTarget(ai)) {
+            if (isTargetedAuraToken(actualToken, sa)) {
+                if (!chooseTargetedAuraToken(ai, sa, actualToken, mandatory)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
+            } else if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
             } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -344,8 +357,34 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxLand".equals(sa.getParam("AILogic"))) {
+            return takesTheAttackTaxLand(player, sa);
+        }
+        if ("AttackTax".equals(sa.getParam("AILogic"))) {
+            return AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController()); // City Hall: two Treasures
+        }
         // TODO: AILogic
         return true;
+    }
+
+    /**
+     * Zagorka, Mother of Sanctum: each player may make a tapped land, and each opponent who does cannot attack her controller
+     * during their next turn. Her controller takes it. An opponent takes it only when the land is worth more than the attack
+     * it gives up: it has no creature that could attack next turn, and not so many lands that one more adds nothing. Taking it
+     * always would build a board that never attacks, until the library is empty.
+     */
+    private static boolean takesTheAttackTaxLand(final Player player, final SpellAbility sa) {
+        final Player owner = sa.getHostCard().getController();
+        if (player.equals(owner) || !player.isOpponentOf(owner)) {
+            return true;
+        }
+        for (final Card c : player.getCreaturesInPlay()) {
+            // next turn it is untapped and no longer sick: what can attack then is what would stay at home
+            if (c.getNetCombatDamage() > 0 && CombatUtil.canAttackNextTurn(c, owner)) {
+                return false;
+            }
+        }
+        return player.getLandsInPlay().size() < 7;
     }
 
     /*
@@ -394,6 +433,27 @@ public class TokenAi extends SpellAbilityAi {
         // Apply static abilities
         ComputerUtilCard.applyStaticContPT(ai.getGame(), result, null);
         return result;
+    }
+
+    /**
+     * Targeted Aura tokens with an attachment AI logic must use the same controller preference as Aura spells.
+     * In particular, "Pump" is beneficial and should prefer our own permanents, not the opponent's.
+     */
+    private static boolean isTargetedAuraToken(final Card token, final SpellAbility sa) {
+        return token.isAura() && "Targeted".equals(sa.getParam("AttachedTo")) && token.hasSVar("AttachAILogic");
+    }
+
+    /** Select and add the target using the token's own AttachAILogic (e.g. Pump for Estrid's Mask). */
+    private static boolean chooseTargetedAuraToken(final Player ai, final SpellAbility sa,
+            final Card token, final boolean mandatory) {
+        // attachGeneralAI may filter the collection in place, so do not pass CardUtil's shared target list directly.
+        final CardCollection targetable = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+        final Card target = AttachAi.attachGeneralAI(ai, sa, targetable, mandatory, token, token.getSVar("AttachAILogic"));
+        if (target == null) {
+            return false;
+        }
+        sa.getTargets().add(target);
+        return true;
     }
 
     private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {

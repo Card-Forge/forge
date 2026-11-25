@@ -40,6 +40,9 @@ import java.util.Map;
 import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AIExpectAmount", "AITgts", "AITgtsStrict",
+    };
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
@@ -247,7 +250,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         // Try to chain damage/debuff effects
@@ -341,6 +344,9 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final int targetCountBeforePrevention = hPlay.size();
+        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        final boolean skippedPreventedTargets = hPlay.size() < targetCountBeforePrevention;
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -363,11 +369,26 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!mandatory) {
+            // If prevention made another legal target take zero damage, prefer a target that can actually be damaged
+            // rather than falling through and aiming the spell at the protected creature.
+            if (skippedPreventedTargets && pl.isOpponentOf(ai) && activator.equals(ai) && !hPlay.isEmpty()) {
+                final List<Card> creatures = CardLists.filter(hPlay, CardPredicates.CREATURES);
+                if (!creatures.isEmpty()) { return ComputerUtilCard.getBestCreatureAI(creatures); }
+            }
             return null;
         }
 
-        // try unfiltered now
+        // Retry against the full legal target set. Prefer a target that can take damage, but a mandatory trigger
+        // still has to choose a legal target when prevention makes every option deal zero.
         hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
+        StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final List<Card> legalTargets = Lists.newArrayList(hPlay);
+        final List<Card> damageableTargets = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        if (!damageableTargets.isEmpty()) {
+            hPlay = damageableTargets;
+        } else {
+            hPlay = legalTargets;
+        }
         List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
 
         if (!hPlay.isEmpty()) {
@@ -471,7 +492,36 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory(), immediately);
+        // The last suspend counter has already been removed when PlayEffect builds this spell.
+        final Card host = saMe.getHostCard();
+        final boolean castFromSuspend = saMe.isCastFromPlayEffect() && host != null
+                && host.isInZone(ZoneType.Exile) && host.hasKeyword(Keyword.SUSPEND)
+                && host.getCounters(CounterEnumType.TIME) == 0;
+        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory() || castFromSuspend,
+                immediately || castFromSuspend);
+    }
+
+    /** Aim the simultaneous Valakut triggers at an opponent when the full batch is lethal. */
+    private boolean chooseLethalValakutBatchTarget(final Player ai, final SpellAbility sa,
+                                                   final TargetRestrictions restrictions, final int damage) {
+        final Card source = sa.getHostCard();
+        if (!sa.isTrigger() || source == null || !"Valakut, the Molten Pinnacle".equals(source.getName())
+                || sa.getApi() != ApiType.DealDamage || restrictions == null || !restrictions.canTgtPlayer()) {
+            return false;
+        }
+        final int triggers = Math.max(1,
+                ((PlayerControllerAi) ai.getController()).getAi().getSimultaneousValakutDamageTriggers());
+        for (final Player opponent : ai.getOpponents()) {
+            if (!opponent.canLoseLife() || opponent.cantLoseForZeroOrLessLife() || !sa.canTarget(opponent)) {
+                continue;
+            }
+            final int damagePerTrigger = ComputerUtilCombat.predictDamageTo(opponent, damage, source, false);
+            if (damagePerTrigger > 0 && (long) damagePerTrigger * triggers >= opponent.getLife()) {
+                sa.getTargets().add(opponent);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -522,6 +572,10 @@ public class DamageDealAi extends DamageAiBase {
 
         sa.resetTargets();
         TargetChoices tcs = sa.getTargets();
+
+        if (chooseLethalValakutBatchTarget(ai, sa, tgt, dmg)) {
+            return true;
+        }
 
         // Do not use if would kill self
         if ("SelfDamage".equals(logic) && ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount"))) {
@@ -940,7 +994,12 @@ public class DamageDealAi extends DamageAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+        // Suspend's Play effect is optional, but the spell is lost if it is not cast after the last TIME counter.
+        final boolean castFromSuspend = sa.isCastFromPlayEffect() && source != null && source.isInZone(ZoneType.Exile)
+                && source.hasKeyword(Keyword.SUSPEND) && source.getCounters(CounterEnumType.TIME) == 0;
+        final boolean mustChooseTarget = mandatory || castFromSuspend;
+        final boolean targetsChosen = damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mustChooseTarget, true);
+        if ((!targetsChosen && !mustChooseTarget) || (castFromSuspend && !sa.isTargetNumberValid())) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
@@ -1158,8 +1217,10 @@ public class DamageDealAi extends DamageAiBase {
         int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
 
         // Separate options into creatures and players
-        List<Card> oppCreatures = CardLists.filterControlledBy(
+        final List<Card> legalOppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
+        List<Card> oppCreatures = CardLists.filter(legalOppCreatures,
+                c -> canActuallyDamage(c, dmg, source, noPrevention));
         Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
         List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 
@@ -1187,6 +1248,11 @@ public class DamageDealAi extends DamageAiBase {
         // Fourth priority: target opponent player
         if (!oppPlayers.isEmpty()) {
             return (T) oppPlayers.get(0);
+        }
+
+        // A mandatory damage ability must still select a legal target even when every opposing creature prevents it.
+        if (!isOptional && !legalOppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(legalOppCreatures);
         }
 
         // If optional and only own stuff remains, don't choose

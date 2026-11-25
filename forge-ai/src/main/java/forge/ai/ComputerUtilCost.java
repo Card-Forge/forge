@@ -260,6 +260,21 @@ public class ComputerUtilCost {
         return true;
     }
 
+    /**
+     * The life the AI keeps when an activated ability costs it life: the script's AILifeThreshold, else the default
+     * (what {@link #checkLifeCost} is given for a PayLife cost; Phyrexian mana paid with life has to respect it too).
+     */
+    public static int lifeToKeep(final SpellAbility sa, final int defaultLife) {
+        if (sa != null && sa.hasParam("AILifeThreshold")) {
+            try {
+                return Integer.parseInt(sa.getParam("AILifeThreshold"));
+            } catch (final NumberFormatException e) {
+                return defaultLife;
+            }
+        }
+        return defaultLife;
+    }
+
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final SpellAbility sourceAbility, final boolean effect) {
         // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
         if (cost == null || !ai.isAI()) {
@@ -386,7 +401,8 @@ public class ComputerUtilCost {
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
+                        if (creatureInDanger && (!ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)
+                                || preventsCombatDamage(sourceAbility))) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;
@@ -454,6 +470,16 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice && part.payCostFromSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A Fog prevents all combat damage; a bounded PreventDamage shield may not stop trample. */
+    public static boolean preventsCombatDamage(final SpellAbility sa) {
+        for (SpellAbility ability = sa; ability != null; ability = ability.getSubAbility()) {
+            if (ability.getApi() == ApiType.Fog && ability.metConditions()) {
                 return true;
             }
         }

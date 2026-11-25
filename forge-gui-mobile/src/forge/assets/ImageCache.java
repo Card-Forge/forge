@@ -20,9 +20,13 @@ package forge.assets;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.TextureData;
@@ -43,9 +47,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge;
+import forge.adventure.scene.HudScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.UIScene;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.deck.Deck;
 import forge.game.card.CardView;
@@ -55,6 +63,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.toolbox.FOptionPane;
 import forge.util.ImageUtil;
 
 /**
@@ -80,6 +89,25 @@ public class ImageCache {
     private EvictingQueue<String> q;
     private Set<String> cardsLoaded;
     private Queue<String> syncQ;
+    // Card textures are loaded asynchronously. Keep their keys until AssetManager has finished
+    // loading them so completed textures can be registered with the LRU even if they are no
+    // longer visible when the decode finishes.
+    private final Map<String, String> pendingCardTextures = new HashMap<>();
+    // Track only loads requested by ImageCache; another AssetManager client may have queued
+    // the same path, and this cache must not cancel a load it does not own.
+    private final Set<String> ownedPendingCardTextures = new HashSet<>();
+    // Remember failed files for this application session to avoid retrying them.
+    private final Set<String> failedCardTexturePaths = new LinkedHashSet<>();
+    private boolean failedCardTextureWarningPosted;
+    private boolean failedCardTextureWarningShown;
+    private static final int MAX_FAILED_TEXTURE_NAMES_IN_DIALOG = 8;
+    private int maxPendingCardTextures = Integer.MAX_VALUE;
+    // Keep textures used by the previous and current render frames resident. The previous-frame
+    // set matters because rendering is sequential: cards later in this frame have not yet been
+    // touched when early cards are drawn.
+    private Set<String> previousFrameCardTextures = new HashSet<>();
+    private Set<String> currentFrameCardTextures = new HashSet<>();
+
     public static ImageCache getInstance() {
         if (imageCache == null) {
             imageCache = new ImageCache();
@@ -87,14 +115,26 @@ public class ImageCache {
         }
         return imageCache;
     }
+    static boolean handleAssetLoadError(String fileName, Class<?> assetType, Throwable error) {
+        if (assetType != Texture.class || imageCache == null) {
+            return false;
+        }
+        return imageCache.handlePendingCardTextureFailure(fileName, error);
+    }
+
     private void initCache(int capacity) {
         //override maxCardCapacity
         maxCardCapacity = capacity;
-        // iOS: every card texture is now a manager-owned image whose whole lifecycle the AssetManager owns
-        // (see CardTextureData). Keep the old downloaded ceiling (48 on <=~4GB devices, else 120) as the unified
-        // resident cap so the card set doesn't balloon toward cacheSize (300) — decoded cards are hundreds of MB
-        // of native memory and the main per-turn ratchet over a long game.
-        if (GuiBase.isIOS()) {
+        final long maxHeapBytes = Runtime.getRuntime().maxMemory();
+        if (GuiBase.isAndroid()) {
+            // Physical device RAM is not the app's Java heap. In particular, devices with 6-12 GB
+            // of RAM can still run Forge with a 512 MB heap, so never let autoCache raise the
+            // resident texture count beyond what that heap can reasonably support.
+            maxCardCapacity = androidCardCacheCapacity(maxHeapBytes, capacity);
+            maxPendingCardTextures = androidPendingTextureLimit(maxHeapBytes);
+        } else if (GuiBase.isIOS()) {
+            // iOS: downloaded card textures use CardTextureData and the AssetManager owns their
+            // lifecycle. Preserve the existing conservative resident limit.
             boolean lowRam = Forge.totalDeviceRAM > 0 && Forge.totalDeviceRAM <= 4500;
             maxCardCapacity = lowRam ? 48 : 120;
         }
@@ -102,8 +142,39 @@ public class ImageCache {
         q = EvictingQueue.create(maxCardCapacity);
         //init syncQ for threadsafe use
         syncQ = Queues.synchronizedQueue(q);
-        int cl = maxCardCapacity + (capacity / 3);
+        int cl = maxCardCapacity + (maxCardCapacity / 3);
         cardsLoaded = new HashSet<>(cl);
+    }
+
+    /**
+     * Conservative Android resident-card limits based on the heap actually available to Forge,
+     * not the device's total physical RAM. Keep these limits in one place for easy tuning.
+     */
+    static int androidCardCacheCapacity(long maxHeapBytes, int configuredCapacity) {
+        final int heapLimit;
+        if (maxHeapBytes <= (384L << 20)) {
+            heapLimit = 24;
+        } else if (maxHeapBytes <= (512L << 20)) {
+            heapLimit = 48;
+        } else if (maxHeapBytes <= (768L << 20)) {
+            heapLimit = 64;
+        } else if (maxHeapBytes <= (1024L << 20)) {
+            heapLimit = 96;
+        } else {
+            heapLimit = 120;
+        }
+        return Math.max(1, Math.min(Math.max(1, configuredCapacity), heapLimit));
+    }
+
+    /** Limit outstanding card loads as well as the number of resident textures. */
+    static int androidPendingTextureLimit(long maxHeapBytes) {
+        if (maxHeapBytes <= (384L << 20)) {
+            return 1;
+        }
+        if (maxHeapBytes <= (768L << 20)) {
+            return 2;
+        }
+        return 4;
     }
 
     private Set<String> getCardsLoaded() {
@@ -115,7 +186,7 @@ public class ImageCache {
 
     private EvictingQueue<String> getQ() {
         if (q == null) {
-            q = EvictingQueue.create(400);
+            q = EvictingQueue.create(maxCardCapacity);
         }
         return q;
     }
@@ -134,10 +205,25 @@ public class ImageCache {
     private Supplier<HashMap<String, ImageRecord>> imageRecord = Suppliers.memoize(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
     private boolean imageLoaded, delayLoadRequested;
     private long lastLoaderPumpFrame = -1; // frame in which the asset loader was last pumped from loadAsset
+    private long lastEvictionFrame = -1;
 
     public void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
         delayLoadRequested = false;
+        // Retain the preceding frame's visible textures until the new frame has completed.
+        // This prevents render-order-dependent eviction in multiplayer games.
+        Set<String> oldPrevious = previousFrameCardTextures;
+        previousFrameCardTextures = currentFrameCardTextures;
+        currentFrameCardTextures = oldPrevious;
+        currentFrameCardTextures.clear();
+        // AssetManager needs to be pumped while a decode is pending, even when the card that
+        // requested it has scrolled off-screen and no longer calls getImage().
+        if (!pendingCardTextures.isEmpty()) {
+            pumpLoaderOncePerFrame();
+        }
+        notifyFailedCardTextureWarningIfReady();
+        // Release textures that have not been used in either of the preceding two frames.
+        unloadCardTextures(false);
     }
 
     public void clear() {
@@ -156,6 +242,21 @@ public class ImageCache {
             }
         } catch (Exception ignored) {}
         getCardsLoaded().clear();
+        getSyncQ().clear();
+        // AssetManager also owns loads that have not completed yet. Cancel queued card loads
+        // before clearing their bookkeeping, or they can finish after this cache is reset.
+        try {
+            AssetManager manager = Forge.getAssets().manager();
+            for (String fileName : new HashSet<>(ownedPendingCardTextures)) {
+                if (manager.contains(fileName)) {
+                    manager.unload(fileName);
+                }
+            }
+        } catch (Exception ignored) {}
+        ownedPendingCardTextures.clear();
+        pendingCardTextures.clear();
+        previousFrameCardTextures.clear();
+        currentFrameCardTextures.clear();
         imageRecord.get().clear();
         counter = 0;
         ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
@@ -167,8 +268,10 @@ public class ImageCache {
     public void updateSynqCount(File file, int count) {
         if (file == null)
             return;
-        getSyncQ().add(file.getPath());
-        getCardsLoaded().add(file.getPath());
+        String fileName = file.getPath();
+        getSyncQ().remove(fileName);
+        getSyncQ().add(fileName);
+        getCardsLoaded().add(fileName);
         counter += count;
     }
 
@@ -328,11 +431,19 @@ public class ImageCache {
 
         Texture image;
         File imageFile = ImageKeys.getImageFile(imageKey);
+        updatePendingCardTextures(Forge.getAssets().manager());
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
             image = getAsset(imageFile);
 
             if (image != null) {
+                if (!others) {
+                    if (imageFile != null) {
+                        pendingCardTextures.remove(imageFile.getPath());
+                        ownedPendingCardTextures.remove(imageFile.getPath());
+                    }
+                    trackLoadedCardTexture(imageKey, imageFile, image, true);
+                }
                 return image;
             }
 
@@ -378,6 +489,185 @@ public class ImageCache {
         return Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
     }
 
+    /** Register/touch a loaded card texture before returning it to a renderer. */
+    private void trackLoadedCardTexture(String imageKey, File file, Texture texture, boolean visibleThisFrame) {
+        if (file == null || texture == null) {
+            return;
+        }
+
+        final String fileName = file.getPath();
+        final boolean newlyTracked = getCardsLoaded().add(fileName);
+        if (visibleThisFrame) {
+            currentFrameCardTextures.add(fileName);
+        }
+        final Queue<String> recent = getSyncQ();
+        // EvictingQueue permits duplicate entries. Move the key instead so the queue represents
+        // unique textures in true least-recently-used order.
+        recent.remove(fileName);
+        recent.add(fileName);
+
+        final String textureKey = getTextureKey(texture);
+        if (textureKey != null && imageRecord.get().get(textureKey) == null) {
+            final int slash = imageKey.indexOf('/');
+            final String setCode = (slash < 0 ? imageKey : imageKey.substring(0, slash))
+                    .trim().toUpperCase();
+            final int radius;
+            if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB")) {
+                radius = 28;
+            } else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3")
+                    || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1")) {
+                radius = 25;
+            } else {
+                radius = 22;
+            }
+            boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.")
+                    || fileName.contains("tokens");
+            updateImageRecord(texture, textureKey, radius, isFullBorder);
+        }
+
+        if (newlyTracked) {
+            unloadCardTextures(false);
+        }
+    }
+
+    /**
+     * Record completed asynchronous loads. Without this, a card that is scrolled away before its
+     * decode finishes can leave a resident AssetManager texture that is never added to cardsLoaded
+     * and therefore never considered by eviction.
+     */
+    private void updatePendingCardTextures(AssetManager manager) {
+        if (pendingCardTextures.isEmpty()) {
+            return;
+        }
+        final Iterator<Map.Entry<String, String>> iterator = pendingCardTextures.entrySet().iterator();
+        while (iterator.hasNext()) {
+            final Map.Entry<String, String> entry = iterator.next();
+            final String fileName = entry.getKey();
+            if (manager.isLoaded(fileName, Texture.class)) {
+                final Texture texture = manager.get(fileName, Texture.class, false);
+                final String imageKey = entry.getValue();
+                iterator.remove();
+                ownedPendingCardTextures.remove(fileName);
+                if (texture != null) {
+                    trackLoadedCardTexture(imageKey, new File(fileName), texture, false);
+                }
+            } else if (!manager.contains(fileName)) {
+                // A failed/cancelled load must not permanently consume a pending-load slot.
+                iterator.remove();
+                ownedPendingCardTextures.remove(fileName);
+            }
+        }
+        notifyFailedCardTextureWarningIfReady();
+    }
+
+    /** Consume a failed card/token texture load and release its pending-load slot. */
+    private boolean handlePendingCardTextureFailure(String fileName, Throwable error) {
+        if (StringUtils.isEmpty(fileName)
+                || (!pendingCardTextures.containsKey(fileName)
+                && !ownedPendingCardTextures.contains(fileName))) {
+            return false;
+        }
+
+        pendingCardTextures.remove(fileName);
+        ownedPendingCardTextures.remove(fileName);
+        if (failedCardTexturePaths.add(fileName)) {
+            System.err.println("ImageCache: Failed to load cached card/token image: " + fileName);
+            if (error != null) {
+                error.printStackTrace(System.err);
+            }
+        }
+        if (Gdx.graphics != null) {
+            Gdx.graphics.requestRendering();
+        }
+        return true;
+    }
+
+    /** Show one consolidated warning after the tracked pending image loads have drained. */
+    private void notifyFailedCardTextureWarningIfReady() {
+        if (!isPlayerNotificationReady()
+                || failedCardTextureWarningShown || failedCardTextureWarningPosted
+                || failedCardTexturePaths.isEmpty() || !pendingCardTextures.isEmpty()) {
+            return;
+        }
+        failedCardTextureWarningPosted = true;
+        FThreads.invokeInEdtLater(() -> {
+            failedCardTextureWarningPosted = false;
+            if (!isPlayerNotificationReady()
+                    || failedCardTextureWarningShown || failedCardTexturePaths.isEmpty()
+                    || !pendingCardTextures.isEmpty()) {
+                return;
+            }
+            final StringBuilder message = new StringBuilder(
+                    Forge.getLocalizer().getMessage("lblImageLoadFailureIntro"));
+            int shown = 0;
+            for (String path : failedCardTexturePaths) {
+                if (shown >= MAX_FAILED_TEXTURE_NAMES_IN_DIALOG) {
+                    break;
+                }
+                message.append("\n - ").append(new File(path).getName());
+                shown++;
+            }
+            if (failedCardTexturePaths.size() > shown) {
+                message.append("\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureMore"));
+            }
+            message.append("\n\n").append(Forge.getLocalizer().getMessage("lblImageLoadFailureAdvice"));
+            if (showFailedCardTextureWarning(message.toString())) {
+                failedCardTextureWarningShown = true;
+            }
+        });
+        if (Gdx.graphics != null) {
+            Gdx.graphics.requestRendering();
+        }
+    }
+
+    /** Use the dialog system belonging to the active mobile UI. */
+    private static boolean showFailedCardTextureWarning(String message) {
+        final String title = Forge.getLocalizer().getMessage("lblImageLoadFailureTitle");
+        if (Forge.isMobileAdventureMode) {
+            final Scene scene = Forge.getCurrentScene();
+            if (scene instanceof UIScene uiScene) {
+                uiScene.showImageLoadFailureDialog(title, message);
+                return true;
+            }
+            if (scene instanceof HudScene hudScene) {
+                return hudScene.showImageLoadFailureDialog(title, message);
+            }
+        }
+        if (Forge.getCurrentScreen() != null) {
+            FOptionPane.showErrorDialog(message, title);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Wait until the active mode has a UI capable of displaying the warning.
+     */
+    private static boolean isPlayerNotificationReady() {
+        if (!Forge.afterDBloaded) {
+            return false;
+        }
+        if (!Forge.isMobileAdventureMode) {
+            return Forge.getCurrentScreen() != null;
+        }
+        final Scene scene = Forge.getCurrentScene();
+        return scene instanceof UIScene || scene instanceof HudScene
+                || Forge.getCurrentScreen() != null; // ForgeScene renders through the classic screen/overlay path.
+    }
+
+    /** Pump the AssetManager at most once per render frame and account for completed card loads. */
+    private void pumpLoaderOncePerFrame() {
+        final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
+        if (frame >= 0 && frame == lastLoaderPumpFrame) {
+            return;
+        }
+        lastLoaderPumpFrame = frame;
+        CardRenderer.clearcardArtCache();
+        final AssetManager manager = Forge.getAssets().manager();
+        manager.update(16);
+        updatePendingCardTextures(manager);
+    }
+
     public int getCardsLoadedCount() {
         return getCardsLoaded().size();
     }
@@ -387,57 +677,50 @@ public class ImageCache {
             return null;
 
         final String fileName = file.getPath();
-        Texture check = Forge.getAssets().manager().get(fileName, Texture.class, false);
+        if (failedCardTexturePaths.contains(fileName)) {
+            return null;
+        }
+        final AssetManager manager = Forge.getAssets().manager();
+        Texture check = manager.get(fileName, Texture.class, false);
 
         if (check != null) {
             if (!others) {
-                //update first before clearing
-                getSyncQ().add(fileName);
-                getCardsLoaded().add(fileName);
-                unloadCardTextures(false);
-            }
-
-            if (others) {
-                return check;
-            }
-
-            String textureKey = getTextureKey(check);
-            if (imageRecord.get().get(textureKey) == null) {
-                String setCode = imageKey.split("/")[0].trim().toUpperCase();
-                int radius;
-                if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
-                    radius = 28;
-                else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
-                    radius = 25;
-                else
-                    radius = 22;
-                // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
-                boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
-                // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
-                // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
-                // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
-                updateImageRecord(check, textureKey, radius, isFullBorder);
+                pendingCardTextures.remove(fileName);
+                ownedPendingCardTextures.remove(fileName);
+                trackLoadedCardTexture(imageKey, file, check, true);
             }
             return check;
         }
 
         try {
-            if (!Forge.getAssets().manager().isLoaded(fileName, Texture.class)) {
-                if (!Forge.getAssets().manager().contains(fileName)) {
-                    Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
+            if (!manager.isLoaded(fileName, Texture.class)) {
+                if (!manager.contains(fileName)) {
+                    if (!others && pendingCardTextures.size() >= maxPendingCardTextures) {
+                        // Let an existing decode/upload finish before accepting another card.
+                        pumpLoaderOncePerFrame();
+                        if (pendingCardTextures.size() >= maxPendingCardTextures) {
+                            if (Gdx.graphics != null) {
+                                Gdx.graphics.requestRendering();
+                            }
+                            return null;
+                        }
+                    }
+                    manager.load(fileName, Texture.class, cardTextureParameter(fileName, others));
+                    if (!others) {
+                        pendingCardTextures.put(fileName, imageKey);
+                        ownedPendingCardTextures.add(fileName);
+                    }
                     counter += 1;
+                } else if (!others) {
+                    // The asset may have been queued by another mobile view. Track it as pending
+                    // so its eventual completion still enters the card LRU.
+                    pendingCardTextures.putIfAbsent(fileName, imageKey);
                 }
 
-                // Every card still waiting for its texture reaches this point on EVERY frame. AssetManager.update(int)
-                // busy-waits up to that many ms while an async decode is pending, so N waiting cards used to cost up to
-                // N x 16ms per frame (and N art-cache clears). Pump the loader and reset the art cache once per frame.
-                final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
-                if (frame < 0 || frame != lastLoaderPumpFrame) {
-                    lastLoaderPumpFrame = frame;
-                    CardRenderer.clearcardArtCache();
-                    Forge.getAssets().manager().update(16);
-                }
-                //((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
+                // AssetManager uses its asynchronous loader for decode and performs the texture
+                // upload while being pumped here. The pending-card limit bounds its backlog; this
+                // frame guard also prevents multiple callers from busy-waiting in the same frame.
+                pumpLoaderOncePerFrame();
             }
         } catch (Exception e) {
             System.err.println("Failed to enqueue asynchronous image: " + fileName);
@@ -457,13 +740,20 @@ public class ImageCache {
         }
     }
 
-    // iOS downloaded images (Documents/cache) decode via CardTextureData so the AssetManager owns their
-    // whole lifecycle; every other card image uses the stock file decode. This selects a decode PARAMETER
+    // iOS downloaded images and Android card art decode via CardTextureData so the AssetManager owns
+    // their whole lifecycle. Other images use the stock file decode. This selects a decode PARAMETER
     // only — it caches/gets/unloads nothing.
-    private static TextureParameter cardTextureParameter(String fileName) {
-        if (isDownloadedCardImage(fileName)) {
+    private static TextureParameter cardTextureParameter(String fileName, boolean others) {
+        // Android card textures can opt out of the size and RGB565 reductions for original quality.
+        if (isDownloadedCardImage(fileName) || (GuiBase.isAndroid() && !others)) {
             TextureParameter p = new TextureParameter();
-            p.textureData = new CardTextureData(fileName);
+            final boolean androidCardTexture = GuiBase.isAndroid() && !others;
+            final boolean preserveOriginalQuality = androidCardTexture
+                    && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANDROID_ORIGINAL_TEXTURE_QUALITY);
+            final boolean useRgb565 = androidCardTexture && !preserveOriginalQuality
+                    && (StringUtils.endsWithIgnoreCase(fileName, ".jpg")
+                    || StringUtils.endsWithIgnoreCase(fileName, ".jpeg"));
+            p.textureData = new CardTextureData(fileName, useRgb565, preserveOriginalQuality);
             p.minFilter = Texture.TextureFilter.Linear;
             p.magFilter = Texture.TextureFilter.Linear;
             return p;
@@ -478,15 +768,28 @@ public class ImageCache {
     public void unloadCardTextures(boolean removeAll) {
         if (removeAll) {
             try {
+                AssetManager manager = Forge.getAssets().manager();
                 // Iterate cardsLoaded (not getAssetNames filtered by ".full") so downloaded card paths that
                 // don't contain ".full" are released too, and non-card assets are never touched.
                 for (String fileName : getCardsLoaded()) {
-                    if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
-                        Forge.getAssets().manager().unload(fileName);
+                    Texture texture = manager.get(fileName, Texture.class, false);
+                    if (texture != null) {
+                        manager.unload(fileName);
                     }
                 }
+                // AssetManager owns queued textures too; cancel pending card art before resetting.
+                for (String fileName : new HashSet<>(ownedPendingCardTextures)) {
+                    if (manager.contains(fileName)) {
+                        manager.unload(fileName);
+                    }
+                }
+                ownedPendingCardTextures.clear();
+                pendingCardTextures.clear();
+                previousFrameCardTextures.clear();
+                currentFrameCardTextures.clear();
                 getSyncQ().clear();
                 getCardsLoaded().clear();
+                imageRecord.get().clear();
                 counter = 0;
                 CardRenderer.clearcardArtCache();
             } catch (Exception ignored) {}
@@ -494,15 +797,29 @@ public class ImageCache {
         }
         if (getCardsLoaded().size() <= maxCardCapacity)
             return;
+        final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
+        if (frame >= 0 && frame == lastEvictionFrame)
+            return;
+        lastEvictionFrame = frame;
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(getSyncQ());
-        //get all images not in newQ (cards to unload)
-        Set<String> toUnload = Sets.difference(getCardsLoaded(), newQ);
+        // Snapshot the difference: removing from cardsLoaded while iterating a live Guava set
+        // difference can throw ConcurrentModificationException and abort the eviction pass.
+        Set<String> toUnload = Sets.newHashSet(Sets.difference(getCardsLoaded(), newQ));
         //unload from assetmanager to save RAM
         try {
             for (String asset : toUnload) {
-                if (Forge.getAssets().manager().get(asset, Texture.class, false) != null) {
+                // Keep the previous/current render-frame working set resident. The count cap is
+                // a target for inactive textures, not a reason to unload cards currently visible.
+                if (previousFrameCardTextures.contains(asset) || currentFrameCardTextures.contains(asset)) {
+                    continue;
+                }
+                Texture texture = Forge.getAssets().manager().get(asset, Texture.class, false);
+                if (texture != null) {
+                    imageRecord.get().remove(getTextureKey(texture));
                     Forge.getAssets().manager().unload(asset);
+                } else {
+                    imageRecord.get().remove(asset);
                 }
                 getCardsLoaded().remove(asset);
             }

@@ -25,6 +25,9 @@ import forge.util.Lang;
  * be moved, a permanent only changes hands.
  */
 public class AssimilateEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
 
     private static final String ANIMATE = "Mode$ Continuous | Affected$ Card.IsRemembered"
             + " | AddType$ Artifact & Creature & Borg | RemoveCreatureTypes$ True";

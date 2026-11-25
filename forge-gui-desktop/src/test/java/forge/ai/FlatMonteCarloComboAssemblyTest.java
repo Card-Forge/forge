@@ -14,8 +14,10 @@ import org.testng.annotations.Test;
 
 import forge.ai.simulation.ComboAssembly;
 import forge.ai.simulation.ComboCatalog;
+import forge.ai.simulation.RampPlan;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -323,6 +325,144 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void scapeshiftCanFetchValakutAndMountainsTogether() {
+        setUp();
+        mana(2); // ten lands available to sacrifice
+        final Card scapeshift = addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        final SpellAbility cast = scapeshift.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+
+        AssertJUnit.assertFalse("seven Mountains fetched with Valakut deal 21", RampPlan.scapeshiftMustWait(ai));
+        final CardCollection pool = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        final CardCollection picks = RampPlan.picks(ai, pool, 8);
+        AssertJUnit.assertNotNull("the Valakut deck gets a dedicated land-search choice", picks);
+        AssertJUnit.assertEquals(8, picks.size());
+        AssertJUnit.assertEquals("Valakut, the Molten Pinnacle", picks.get(0).getName());
+        for (int i = 1; i < picks.size(); i++) {
+            AssertJUnit.assertTrue("all remaining picks are Mountains", picks.get(i).getType().hasSubtype("Mountain"));
+        }
+
+        // During the search the Scapeshift is no longer in hand; the ramp plan must still recognize it on the stack.
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        cast.setHostCard(game.getAction().moveToStack(scapeshift, cast));
+        final CardCollection afterFirstPick = new CardCollection(pool);
+        afterFirstPick.remove(picks.get(0));
+        final CardCollection remainingPicks = RampPlan.picks(ai, afterFirstPick, 7);
+        AssertJUnit.assertNotNull("Scapeshift remains recognized while resolving its library search", remainingPicks);
+        AssertJUnit.assertEquals(7, remainingPicks.size());
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftDoesNotSacrificeValakutAlreadyInPlay() {
+        setUp();
+        mana(2);
+        final Card valakut = addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        final Card scapeshift = addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        final SpellAbility cast = scapeshift.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+
+        final CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(ai, ai.getCardsIn(ZoneType.Battlefield),
+                ai.getCardsIn(ZoneType.Battlefield).size(), cast, false, true);
+        AssertJUnit.assertFalse("Scapeshift must leave its Valakut payoff in play", chosen.contains(valakut));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftKeepsMountainsNeededForTrigger() {
+        setUp();
+        mana(2);
+        addCards("Mountain", 2, ai); // four existing Mountains
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        final Player opponent = game.getPlayers().get(0);
+        opponent.setLife(6, null);
+        final Card scapeshift = addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        final SpellAbility cast = scapeshift.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+
+        AssertJUnit.assertEquals("four retained plus two new Mountains trigger twice", 6, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertEquals(4, RampPlan.scapeshiftMountainsToKeep(ai));
+        final CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(ai, ai.getCardsIn(ZoneType.Battlefield),
+                ai.getCardsIn(ZoneType.Battlefield).size(), cast, false, true);
+        AssertJUnit.assertEquals("only the two lands needed to fetch the Mountains are sacrificed", 2, chosen.size());
+        for (final Card c : chosen) {
+            AssertJUnit.assertFalse("existing Mountains must remain", c.getType().hasSubtype("Mountain"));
+        }
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftValakutBatchAimsAtTheOpponent() {
+        setUp();
+        mana(2);
+        final Player opponent = game.getPlayers().get(0);
+        opponent.setLife(20, null);
+        final Card scapeshift = addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        final SpellAbility cast = scapeshift.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        // a creature that three damage would kill is a legal target too: only the lethal batch makes the opponent the pick
+        final Card bears = addCardToZone("Grizzly Bears", opponent, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        AssertJUnit.assertTrue("the lethal Scapeshift was not cast", ComputerUtil.playStack(cast, ai, game));
+        for (int i = 0; i < 50 && !game.isGameOver(); i++) {
+            game.getStack().addAllTriggeredAbilitiesToStack();
+            if (game.getStack().isEmpty()) {
+                break;
+            }
+            game.getStack().resolveStack();
+            game.getAction().checkStateEffects(true);
+        }
+        AssertJUnit.assertTrue("the simultaneous Valakut triggers did not send 21 damage to the opponent",
+                game.isGameOver() || opponent.getLife() <= 0);
+        AssertJUnit.assertTrue("the Valakut triggers went at a creature instead of the opponent", bears.isInZone(ZoneType.Battlefield));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftIsOrdinaryRampWithoutAValakut() {
+        setUp();
+        mana(2);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Forest", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertFalse("no Valakut to wait for: no lethal-only rule", RampPlan.scapeshiftMustWait(ai));
+        AssertJUnit.assertFalse("no Valakut line to force either", RampPlan.scapeshiftLethal(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftCountsASecondValakutFetchedWithTheMountains() {
+        setUp();
+        addCards("Mountain", 7, ai);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        game.getPlayers().get(0).setLife(9, null);
+
+        // three lands sacrificed fetch a second Valakut and two Mountains: two Valakuts see two Mountains each
+        AssertJUnit.assertEquals(12, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertEquals(3, RampPlan.scapeshiftLandsToSacrifice(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
+        final CardCollection pool = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        final CardCollection picks = RampPlan.picks(ai, pool, 3);
+        AssertJUnit.assertNotNull(picks);
+        AssertJUnit.assertEquals("Valakut, the Molten Pinnacle", picks.get(0).getName());
+        AssertJUnit.assertEquals(3, picks.size());
+    }
+
+    @Test(timeOut = 120000)
     public void peerIntoTheAbyssIsCastWhenUnderworldDreamsKills() {
         setUp();
         addCards("Swamp", 10, ai);
@@ -352,5 +492,94 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
         AssertJUnit.assertNull("no Dreams: no kill",
                 ComboAssembly.finish(ai, java.util.Collections.singletonList(peer.getFirstSpellAbility()), s -> true));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftCountsEveryValakutInPlay() {
+        setUp();
+        addCards("Mountain", 6, ai);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Battlefield);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        addCardToZone("Mountain", ai, ZoneType.Library);
+        game.getPlayers().get(0).setLife(9, null);
+
+        // two lands sacrificed, two Mountains in: four Valakut triggers of three damage
+        AssertJUnit.assertEquals(12, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftFetchesOnlyTheValakutsTheKeptMountainsSupport() {
+        setUp();
+        addCards("Mountain", 6, ai);
+        addCardToZone("Forest", ai, ZoneType.Battlefield);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        for (int i = 0; i < 2; i++) {
+            addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        }
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        game.getPlayers().get(0).setLife(9, null);
+
+        // four lands go (the Forest and three Mountains): three Mountains stay, one Valakut and three Mountains come in
+        AssertJUnit.assertEquals(9, RampPlan.scapeshiftDamage(ai));
+        AssertJUnit.assertEquals(4, RampPlan.scapeshiftLandsToSacrifice(ai));
+        AssertJUnit.assertFalse(RampPlan.scapeshiftMustWait(ai));
+
+        final CardCollection pool = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        final java.util.List<String> chosen = new java.util.ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            final Card pick = RampPlan.nextPick(ai, pool, 4);
+            AssertJUnit.assertNotNull(pick);
+            chosen.add(pick.getName());
+            pool.remove(pick);
+        }
+        AssertJUnit.assertEquals(java.util.Arrays.asList("Valakut, the Molten Pinnacle", "Mountain", "Mountain", "Mountain"), chosen);
+    }
+
+    @Test(timeOut = 120000)
+    public void scapeshiftIsNotLethalAgainstAHexproofOpponent() {
+        setUp();
+        mana(2);
+        final Player opponent = game.getPlayers().get(0);
+        opponent.setLife(20, null);
+        addCardToZone("Scapeshift", ai, ZoneType.Hand);
+        addCardToZone("Valakut, the Molten Pinnacle", ai, ZoneType.Library);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Mountain", ai, ZoneType.Library);
+        }
+        AssertJUnit.assertTrue("21 damage kills an opponent who can be targeted", RampPlan.scapeshiftLethal(ai));
+
+        addCardToZone("Leyline of Sanctity", opponent, ZoneType.Battlefield);
+        game.getAction().checkStaticAbilities();
+        AssertJUnit.assertTrue("Leyline of Sanctity gives the player hexproof", opponent.hasKeyword(forge.game.keyword.Keyword.HEXPROOF));
+        AssertJUnit.assertFalse("Valakut cannot target a hexproof opponent", RampPlan.scapeshiftLethal(ai));
+        AssertJUnit.assertTrue(RampPlan.scapeshiftMustWait(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void theTokenSpellGoesFirstWhenItsMannaPaysForTheNextOne() {
+        setUp();
+        addCards("Swamp", 3, ai);
+        addCardToZone("Malevolent Rumble", ai, ZoneType.Hand);
+        addCardToZone("Emperor of Bones", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        final SpellAbility first = RampPlan.tokenManaStep(ai, sa -> true);
+        AssertJUnit.assertNotNull("two two-drops from three lands and a Spawn", first);
+        AssertJUnit.assertEquals("Malevolent Rumble", first.getHostCard().getName());
+    }
+
+    @Test(timeOut = 120000)
+    public void theTokenSpellHasNoPriorityWhenTheSpawnPaysForNothing() {
+        setUp();
+        addCards("Swamp", 2, ai);
+        addCardToZone("Malevolent Rumble", ai, ZoneType.Hand);
+        addCardToZone("Emperor of Bones", ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        AssertJUnit.assertNull("two lands and a Spawn do not pay for both", RampPlan.tokenManaStep(ai, sa -> true));
     }
 }

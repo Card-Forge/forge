@@ -50,6 +50,14 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void aTempleOfTheFalseGodIsNoLandForTheFirstTurns() {
+        setUp(9, 8);
+        // one Mountain and the Temple: the Temple makes no mana before the fifth land, so this is a one-lander
+        AssertJUnit.assertFalse(keeps(DeckPlan.of(DeckPlan.Archetype.MIDRANGE), true,
+                mix(SPELLS, "Mountain", "Temple of the False God", "Grizzly Bears")));
+    }
+
+    @Test
     public void keepsThreeLandsAndFourSpells() {
         setUp(9, 8);
         AssertJUnit.assertTrue(keeps(DeckPlan.of(DeckPlan.Archetype.MIDRANGE), true,
@@ -155,5 +163,123 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertFalse(OpeningHand.isKeyCard(bears, DeckPlan.Archetype.RAMP));
         AssertJUnit.assertTrue(OpeningHand.isKeyCard(counter, DeckPlan.Archetype.CONTROL));
         AssertJUnit.assertFalse(OpeningHand.isKeyCard(elves, DeckPlan.Archetype.CONTROL));
+    }
+
+    private boolean castsSomething(final CardCollection cards) {
+        ai.getGame().getAction().checkStateEffects(true);
+        return OpeningHand.castsSomething(cards, ai);
+    }
+
+    @Test
+    public void oneDualLandCannotPayBothColoredPips() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse("one Underground Sea only pays one of {U} or {B}",
+                castsSomething(hand("Underground Sea", "Baleful Strix")));
+    }
+
+    @Test
+    public void dualLandAndOffColorLandStillCannotPayBothColoredPips() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse("the Mountain cannot cover the second blue/black pip",
+                castsSomething(hand("Underground Sea", "Mountain", "Baleful Strix")));
+    }
+
+    @Test
+    public void dualLandCanPayEitherColorWhenAnotherSourceCoversTheOther() {
+        setUp(0, 0);
+        AssertJUnit.assertTrue("the Sea can cover black while the Island covers blue",
+                castsSomething(hand("Underground Sea", "Island", "Baleful Strix")));
+    }
+
+    @Test
+    public void colorlessLandDoesNotBorrowTheLibraryColors() {
+        setUp(0, 1); // a Mountain is left in the library, but the hand has no red source
+        AssertJUnit.assertFalse("Wastes makes only {C} and must not pretend to find the library's Mountain",
+                castsSomething(hand("Wastes", "Plains", "Lightning Bolt")));
+    }
+
+    @Test
+    public void handWithOnlyColorlessAndOffColorLandsIsNotKept() {
+        setUp(0, 1);
+        // Wastes and Plains cast none of the red spells, whatever the library still holds
+        AssertJUnit.assertFalse(keeps(DeckPlan.of(DeckPlan.Archetype.BURN), true,
+                "Wastes", "Plains", "Lightning Bolt", "Shock", "Lightning Bolt", "Shock", "Lightning Bolt"));
+    }
+
+    @Test
+    public void fetchLandStillGetsTheLibraryColors() {
+        setUp(0, 1);
+        AssertJUnit.assertTrue("Evolving Wilds can fetch the Mountain that is left in the library",
+                castsSomething(hand("Evolving Wilds", "Plains", "Lightning Bolt")));
+    }
+
+    @Test
+    public void twoFetchLandsCannotBothUseTheOnlyLibraryIsland() {
+        setUp(1, 0);
+
+        AssertJUnit.assertFalse(
+                "two Evolving Wilds cannot both fetch the only Island for Counterspell",
+                castsSomething(hand(
+                        "Evolving Wilds",
+                        "Evolving Wilds",
+                        "Counterspell")));
+    }
+
+    @Test
+    public void fetchLandCannotFindAnIneligibleNonbasicLand() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+
+        AssertJUnit.assertFalse(
+                "Evolving Wilds cannot fetch a nonbasic Tropical Island",
+                castsSomething(hand(
+                        "Evolving Wilds",
+                        "Plains",
+                        "Coral Merfolk")));
+    }
+
+    @Test
+    public void twoFetchLandsCannotReuseTheSameDualLand() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+
+        AssertJUnit.assertFalse(
+                "one Tropical Island cannot pay both green and blue through two fetch lands",
+                castsSomething(hand(
+                        "Flooded Strand",
+                        "Windswept Heath",
+                        "Coiling Oracle")));
+    }
+
+    @Test
+    public void twoFetchLandsCanFindTwoDifferentLibraryLands() {
+        setUp(0, 0);
+        addCardToZone("Tropical Island", ai, ZoneType.Library);
+        addCardToZone("Forest", ai, ZoneType.Library);
+
+        AssertJUnit.assertTrue(
+                "Flooded Strand finds the Tropical Island for blue, Windswept Heath the Forest for green",
+                castsSomething(hand(
+                        "Flooded Strand",
+                        "Windswept Heath",
+                        "Coiling Oracle")));
+    }
+
+    @Test
+    public void twoFetchLandsCanUseTwoLibraryIslands() {
+        setUp(2, 0);
+
+        AssertJUnit.assertTrue("each Evolving Wilds can fetch its own Island for Counterspell",
+                castsSomething(hand("Evolving Wilds", "Evolving Wilds", "Counterspell")));
+    }
+
+    @Test
+    public void aDualLandMakesOneColourOfTheTwoPips() {
+        setUp(0, 0);
+        final Card charm = addCardToZone("Simic Charm", ai, ZoneType.Library); // {G}{U}
+        AssertJUnit.assertFalse("one Tropical Island pays {G} or {U}, not both",
+                OpeningHand.makesColorsOf(hand("Tropical Island"), ai, charm));
+        AssertJUnit.assertTrue("a Forest beside it pays the other pip",
+                OpeningHand.makesColorsOf(hand("Tropical Island", "Forest"), ai, charm));
     }
 }

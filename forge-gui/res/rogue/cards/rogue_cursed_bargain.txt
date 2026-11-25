@@ -1,0 +1,5 @@
+Name:Cursed - Bargain
+ManaCost:no cost
+Types:Cursed
+S:Mode$ ReduceCost | ValidCard$ Card | Activator$ Player.Opponent | Type$ Spell | Amount$ 2 | EffectZone$ Command | Description$ Spells your opponents cast cost {2} less to cast.
+Oracle:Spells your opponents cast cost {2} less to cast.

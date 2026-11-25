@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of The Flame
+ManaCost:no cost
+Types:Trait
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+Oracle:Whenever you cast an instant or sorcery spell, Sigil Of The Flame deals 2 damage to each opponent.

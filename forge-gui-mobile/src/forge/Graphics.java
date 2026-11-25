@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -28,6 +29,7 @@ import forge.toolbox.FDisplayObject;
 import forge.util.ShaderUtil;
 import forge.util.TextBounds;
 import forge.util.Utils;
+import forge.assets.FrameMask;
 
 import java.util.Arrays;
 
@@ -1016,6 +1018,153 @@ public class Graphics implements Disposable {
         endShape();
         if (color.a < 1) {
             Gdx.gl.glDisable(GL_BLEND);
+        }
+    }
+
+    /**
+     * Fills a rectangle whose corners are quarter ellipses rx wide and ry high, like Java2D's fillRoundRect with the arc
+     * diameters 2 * rx and 2 * ry. fillRoundRect can only do circular corners, and the card bars of the desktop renderer
+     * have tall, narrow ends. The shape is convex and is filled as a triangle fan, so nothing overlaps and translucent
+     * colors stay even.
+     */
+    public void fillEllipticRoundRect(Color color, float x, float y, float w, float h, float rx, float ry) {
+        rx = Math.max(Math.min(rx, w / 2), 0);
+        ry = Math.max(Math.min(ry, h / 2), 0);
+        batch.end(); //must pause batch while rendering shapes
+        if (alphaComposite < 1) {
+            color = fade(color, fadeA);
+        }
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        final int segments = Math.max(4, Math.min(20, Math.round(Math.max(rx, ry) / 2)));
+        final int count = 4 * (segments + 1);
+        final float[] px = new float[count];
+        final float[] py = new float[count];
+        //corner centers and the angle each corner starts at, clockwise on the screen
+        final float[] cx = { x + rx, x + w - rx, x + w - rx, x + rx };
+        final float[] cy = { y + ry, y + ry, y + h - ry, y + h - ry };
+        final float[] start = { 180f, 270f, 0f, 90f };
+        int n = 0;
+        for (int corner = 0; corner < 4; corner++) {
+            for (int i = 0; i <= segments; i++) {
+                final float angle = (start[corner] + 90f * i / segments) * MathUtils.degreesToRadians;
+                px[n] = adjustX(cx[corner] + rx * MathUtils.cos(angle));
+                py[n] = adjustY(cy[corner] + ry * MathUtils.sin(angle), 0);
+                n++;
+            }
+        }
+        final float midX = adjustX(x + w / 2);
+        final float midY = adjustY(y + h / 2, 0);
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        for (int i = 0; i < count; i++) {
+            final int next = (i + 1) % count;
+            shapeRenderer.triangle(midX, midY, px[i], py[i], px[next], py[next]);
+        }
+        endShape();
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        batch.begin();
+    }
+
+    // ---- antialiased rounded boxes ---------------------------------------------------------------------------------
+    // A box is a corner mask (see FrameMask) in each corner and plain rectangles in between. All edges come from one
+    // array of coordinates, so the pieces share exactly the same float values and no crack can show between them.
+
+    private void batchQuadAbs(float l, float b, float r, float t, float cBL, float cTL, float cTR, float cBR) {
+        if (r <= l || t <= b) {
+            return;
+        }
+        final float[] v = quadVerts;
+        v[0] = l;  v[1] = b;  v[2] = cBL;  v[3] = 0.5f;  v[4] = 0.5f;
+        v[5] = l;  v[6] = t;  v[7] = cTL;  v[8] = 0.5f;  v[9] = 0.5f;
+        v[10] = r; v[11] = t; v[12] = cTR; v[13] = 0.5f; v[14] = 0.5f;
+        v[15] = r; v[16] = b; v[17] = cBR; v[18] = 0.5f; v[19] = 0.5f;
+        batch.draw(getWhiteTexture(), v, 0, 20);
+    }
+
+    /** A corner mask: the texture is the top left corner, flipU and flipV mirror it into the other corners. */
+    private void batchMaskQuad(Texture mask, float l, float b, float r, float t, float color, boolean flipU, boolean flipV) {
+        if (r <= l || t <= b) {
+            return;
+        }
+        final float uLeft = flipU ? 1 : 0, uRight = flipU ? 0 : 1, vTop = flipV ? 1 : 0, vBottom = flipV ? 0 : 1;
+        final float[] v = quadVerts;
+        v[0] = l;  v[1] = b;  v[2] = color;  v[3] = uLeft;  v[4] = vBottom;
+        v[5] = l;  v[6] = t;  v[7] = color;  v[8] = uLeft;  v[9] = vTop;
+        v[10] = r; v[11] = t; v[12] = color; v[13] = uRight; v[14] = vTop;
+        v[15] = r; v[16] = b; v[17] = color; v[18] = uRight; v[19] = vBottom;
+        batch.draw(mask, v, 0, 20);
+    }
+
+    /**
+     * Fills a box with antialiased elliptical corners (each rx wide and ry high). The color goes from color1 on the left to
+     * color2 on the right. The left or the right side can be square, so a three color box is drawn as two halves.
+     */
+    public void fillMaskedRoundRect(Color color1, Color color2, float x, float y, float w, float h, float rx, float ry, boolean roundLeft, boolean roundRight) {
+        if (!batch.isDrawing()) {
+            fillEllipticRoundRect(color1, x, y, w, h, rx, ry); //no batch to draw the masks with
+            return;
+        }
+        rx = Math.max(Math.min(rx, w / 2), 0);
+        ry = Math.max(Math.min(ry, h / 2), 0);
+        if (alphaComposite < 1) {
+            color1 = fade(color1, fadeA);
+            color2 = fade(color2, fadeB);
+        }
+        final float c1 = color1.toFloatBits(), c2 = color2.toFloatBits();
+        final Texture mask = FrameMask.fill();
+        // the edges of the pieces, y goes up here: y0 is the bottom of the box and y3 its top
+        final float lx = adjustX(x), by = adjustY(y, h);
+        final float x0 = lx, x1 = lx + (roundLeft ? rx : 0), x2 = lx + w - (roundRight ? rx : 0), x3 = lx + w;
+        final float y0 = by, y1 = by + ry, y2 = by + h - ry, y3 = by + h;
+        if (roundLeft) {
+            batchMaskQuad(mask, x0, y2, x1, y3, c1, false, false); //top left
+            batchMaskQuad(mask, x0, y0, x1, y1, c1, false, true);  //bottom left
+            batchQuadAbs(x0, y1, x1, y2, c1, c1, c1, c1);
+        }
+        if (roundRight) {
+            batchMaskQuad(mask, x2, y2, x3, y3, c2, true, false);  //top right
+            batchMaskQuad(mask, x2, y0, x3, y1, c2, true, true);   //bottom right
+            batchQuadAbs(x2, y1, x3, y2, c2, c2, c2, c2);
+        }
+        batchQuadAbs(x1, y0, x2, y3, c1, c1, c2, c2);
+    }
+
+    /**
+     * Draws the four corners that a rounded box cuts away, in one color: laid over a texture, they give the texture the
+     * rounded shape of the box.
+     */
+    public void fillMaskedCorners(Color color, float x, float y, float w, float h, float rx, float ry) {
+        fillMaskedCorners(color, x, y, w, h, rx, ry, rx, ry);
+    }
+
+    /** Like above, with a different (elliptical) corner size on the top and on the bottom of the box. */
+    public void fillMaskedCorners(Color color, float x, float y, float w, float h, float rxTop, float ryTop, float rxBottom, float ryBottom) {
+        if (!batch.isDrawing()) {
+            return;
+        }
+        rxTop = Math.max(Math.min(rxTop, w / 2), 0);
+        ryTop = Math.max(Math.min(ryTop, h / 2), 0);
+        rxBottom = Math.max(Math.min(rxBottom, w / 2), 0);
+        ryBottom = Math.max(Math.min(ryBottom, h / 2), 0);
+        if (alphaComposite < 1) {
+            color = fade(color, fadeA);
+        }
+        final float c = color.toFloatBits();
+        final Texture mask = FrameMask.wedge();
+        final float lx = adjustX(x), by = adjustY(y, h);
+        final float x0 = lx, x3 = lx + w;
+        final float y0 = by, y3 = by + h;
+        if (rxTop > 0 && ryTop > 0) {
+            batchMaskQuad(mask, x0, y3 - ryTop, x0 + rxTop, y3, c, false, false);
+            batchMaskQuad(mask, x3 - rxTop, y3 - ryTop, x3, y3, c, true, false);
+        }
+        if (rxBottom > 0 && ryBottom > 0) {
+            batchMaskQuad(mask, x0, y0, x0 + rxBottom, y0 + ryBottom, c, false, true);
+            batchMaskQuad(mask, x3 - rxBottom, y0, x3, y0 + ryBottom, c, true, true);
         }
     }
 
@@ -2079,6 +2228,13 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         batch.draw(image, adjustX(x), adjustY(y, h), w, h, 0, 0, image.getWidth(), image.getHeight(), false, true);
+    }
+
+    /** Draws a part of a frame buffer texture flipped (like drawFlippedImage), turned by rotation degrees around the center cx, cy. w and h are the size before it is turned. */
+    public void drawRotatedFlippedImage(Texture image, float cx, float cy, float w, float h, int srcX, int srcY, int srcWidth, int srcHeight, float rotation) {
+        if (image == null)
+            return;
+        batch.draw(image, adjustX(cx - w / 2), adjustY(cy - h / 2, h), w / 2, h / 2, w, h, 1, 1, rotation, srcX, srcY, srcWidth, srcHeight, false, true);
     }
 
     public void drawImageWithTransforms(TextureRegion image, float x, float y, float w, float h, float rotation, boolean flipX, boolean flipY) {

@@ -393,6 +393,16 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return max == Integer.MAX_VALUE ? max : Math.max(0, max - gold);
     }
 
+    /** @return whether any chosen modifier has the rule */
+    public boolean hasModifierRule(Predicate<ModifierData> rule) {
+        return getActiveModifiers().stream().anyMatch(rule);
+    }
+
+    /** @return whether every chosen RarityLimit and ColorLimit modifier allows the card */
+    public boolean modifiersAllowCard(PaperCard card) {
+        return getActiveModifiers().stream().allMatch(modifier -> modifier.allowedCards(modifiers.get(modifier.name)).test(card));
+    }
+
     /** @return the plane's modifiers that this run has turned on, in the plane's order */
     public List<ModifierData> getActiveModifiers() {
         List<ModifierData> active = new ArrayList<>();
@@ -1722,6 +1732,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     /** Adds deck slots up to the maximum while searching, so a returned index is always valid. */
     private int findEmptyDeckSlot() {
+        if (hasModifierRule(modifier -> modifier.singleDeck))
+            return isEmptyDeck(selectedDeckIndex) ? selectedDeckIndex : -1;
         for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i))

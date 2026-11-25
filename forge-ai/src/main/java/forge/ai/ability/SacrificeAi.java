@@ -235,7 +235,8 @@ public class SacrificeAi extends SpellAbilityAi {
         final int limit = given.getCMC() + 1;
         final int giveUp = ComputerUtilCard.evaluateCreature(given);
         for (final Card c : top) {
-            if (c.isCreature() && c.getCMC() <= limit && ComputerUtilCard.evaluateCreature(c) > giveUp) {
+            if (c.isCreature() && c.getCMC() <= limit && ComputerUtilCard.evaluateCreature(c) > giveUp
+                    && !DigAi.legendIsAlreadyHere(ai, c, given)) {
                 return true;
             }
         }

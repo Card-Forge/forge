@@ -39,6 +39,7 @@ import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
 import forge.card.CardSleeveImage;
+import forge.card.CardZoom;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -678,9 +679,12 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public void afterGameEnd() {
         super.afterGameEnd();
-        Forge.back(true);
-        if (Forge.disposeTextures)
-            ImageCache.getInstance().disposeTextures();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            CardZoom.resetForMatchEnd();
+            Forge.back(true);
+            if (Forge.disposeTextures)
+                ImageCache.getInstance().disposeTextures();
+        });
         //view = null;
     }
 
@@ -813,7 +817,7 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final ZoneType secondPile) {
         System.err.println("Not implemented yet - should never be called");
         return null;
     }

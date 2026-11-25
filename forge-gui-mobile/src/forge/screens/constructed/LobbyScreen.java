@@ -68,6 +68,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // General variables
     private GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
+    private boolean switchingType;
     private final FLabel lblPlayers = new FLabel.Builder().icon(FSkinImage.PLAYERS).align(Align.center).build();
     private final FComboBox<Integer> cbPlayerCount;
     private final Deck[] decks = new Deck[MAX_PLAYERS];
@@ -274,6 +275,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private void applyFormatChoice(final Object choice) {
         lobby.setFormatChoice(choice);
+        if (lobby.isAllowNetworking()) {
+            for (int i = 0; i < getNumPlayers(); i++) {
+                if (isPlayerAI(i)) {
+                    updateMyDeck(i);
+                }
+            }
+        }
         updateLayoutForVariants();
         lobby.saveSetup();
     }
@@ -923,7 +931,22 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
-            playerChangeListener.update(index, getSlot(index));
+            playerChangeListener.update(index, getSlot(index, playerPanels.get(index).getType()));
+        }
+    }
+    void updateType(final int index, final LobbySlotType type) {
+        // The seat's deck lists reload and reselect as its type changes, so hold their deck updates and send one after
+        switchingType = true;
+        try {
+            if (playerChangeListener != null) {
+                playerChangeListener.update(index, getSlot(index, type));
+            }
+            update(index, type);
+        } finally {
+            switchingType = false;
+        }
+        if (type == LobbySlotType.AI) {
+            updateMyDeck(index);
         }
     }
     void fireReady(final int index, boolean ready) {
@@ -941,7 +964,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         /* updateMyDeck is called via button handler when the user set their deck on network play*/
 
         //safety check
-        if(playerPanels.size() < 2)
+        if(playerPanels.size() < 2 || switchingType)
             return;
 
         updateDeck(index);
@@ -955,9 +978,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return lobby.hasVariant(variant);
     }
 
-    private UpdateLobbyPlayerEvent getSlot(final int index) {
+    private UpdateLobbyPlayerEvent getSlot(final int index, final LobbySlotType type) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(),
+        return UpdateLobbyPlayerEvent.create(type,
                 panel.getPlayerName(),
                 panel.getAvatarIndex(),
                 panel.getSleeveIndex(),

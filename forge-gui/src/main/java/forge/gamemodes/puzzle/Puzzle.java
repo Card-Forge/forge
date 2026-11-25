@@ -43,14 +43,14 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
     public Puzzle(Map<String, List<String>> puzzleLines, String filename, boolean completed) {
         loadMetaData(puzzleLines.get("metadata"));
-        loadGameState(puzzleLines.get("state"));
+        parse(puzzleLines.get("state"));
         // Generate goal enforcement
         this.filename = filename;
         this.completed = completed;
     }
 
     private void loadMetaData(List<String> metadataLines) {
-        for(String line : metadataLines) {
+        for (String line : metadataLines) {
             String[] split = line.split(":", 2);
             if ("Name".equalsIgnoreCase(split[0])) {
                 this.name = split[1].trim();
@@ -98,16 +98,17 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         desc.append("\nTurns Limit: ");
         desc.append(this.turns);
 
+        if (getAIName() != null) {
+            desc.append("\nOpponent: ");
+            desc.append(getAIName());
+        }
+
         if (this.description != null) {
             desc.append("\n\n");
             desc.append(this.description.replace("\\n", "\n"));
         }
 
         return desc.toString();
-    }
-    
-    private void loadGameState(List<String> stateLines) {
-        this.parse(stateLines);
     }
 
     public void setupMaxPlayerHandSize(Game game, int maxHandSize) {

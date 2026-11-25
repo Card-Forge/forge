@@ -43,6 +43,8 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.home.gauntlet.*;
+import forge.screens.home.rogue.VSubmenuRogueMap;
+import forge.screens.home.rogue.VSubmenuRogueStart;
 import forge.screens.home.online.VSubmenuOnlineDecks;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
@@ -148,6 +150,9 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE);
 
+        allSubmenus.add(VSubmenuRogueStart.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuRogueMap.SINGLETON_INSTANCE);
+
         allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
 
@@ -194,6 +199,15 @@ public enum VHomeUI implements IVTopLevelUI {
         return pnlMenu;
     }
 
+    void setSidebarVisible(final boolean visible) {
+        if (pnlMenu.isVisible() != visible) {
+            pnlMenu.setVisible(visible);
+            final JPanel content = FView.SINGLETON_INSTANCE.getPnlInsets();
+            content.revalidate();
+            content.repaint();
+        }
+    }
+
     /** @return {@link javax.swing.JPanel} */
     public PnlDisplay getPnlDisplay() {
         return pnlDisplay;
@@ -227,10 +241,10 @@ public enum VHomeUI implements IVTopLevelUI {
     public void populate() {
         JPanel pnl = FView.SINGLETON_INSTANCE.getPnlInsets();
         pnl.setBorder(null);
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
+        pnl.setLayout(new MigLayout("insets 0, gap 0, fill, hidemode 3"));
 
         pnl.add(pnlMenu, "w 205px!, h 100%!");
-        pnl.add(pnlDisplay, "w 100% - 205px!, h 100%!");
+        pnl.add(pnlDisplay, "wmin 0, grow, push");
     }
 
     /** */
@@ -278,7 +292,7 @@ public enum VHomeUI implements IVTopLevelUI {
             int h1 = getHeight();
             int h2 = 0;
             
-            if (lblSelected.isShowing()) {
+            if (lblSelected != null && lblSelected.isShowing()) {
                 int scrollPanelTop = scrollPanel.getY();
                 int labelTop = lblSelected.getY() + lblSelected.getParent().getY() + scrollPanelTop - scrollPanel.getVerticalScrollBar().getValue();
                 y2 = labelTop + lblSelected.getHeight();

@@ -8,5 +8,5 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDesc
 SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ RestorationReturn
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.YouCtrl
 Oracle:Whenever a creature enters, that creature's controller may have it deal damage equal to its power to any target of their choice.\nWhenever chaos ensues, exile target creature, then return it to the battlefield under its owner's control.

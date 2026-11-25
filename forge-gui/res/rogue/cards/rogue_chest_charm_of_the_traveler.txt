@@ -1,0 +1,8 @@
+Name:Chest Trait - Charm Of The Traveler
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigBlink | TriggerDescription$ At the beginning of your end step, exile up to one target creature you control, then return it to the battlefield under its owner's control.
+SVar:TrigBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:At the beginning of your end step, exile up to one target creature you control, then return it to the battlefield under its owner's control.

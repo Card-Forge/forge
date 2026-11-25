@@ -341,23 +341,34 @@ public final class LegalityGuard {
     private static final Pattern PRESENT_COMPARE = Pattern.compile("GE(\\d+)");
 
     /**
+     * How many lands the player must control for the land to make mana: 0 for an ordinary land, 5 for Temple of the
+     * False God ("activate only if you control five or more lands"). The least that any of its mana abilities asks.
+     */
+    public static int landsNeededToWork(final Card land) {
+        try {
+            if (land == null || !land.isLand() || land.getManaAbilities().isEmpty()) {
+                return 0;
+            }
+            int needed = Integer.MAX_VALUE;
+            for (final SpellAbility m : land.getManaAbilities()) {
+                final String present = m.getParamOrDefault("IsPresent", "");
+                final Matcher n = PRESENT_COMPARE.matcher(m.getParamOrDefault("PresentCompare", ""));
+                needed = Math.min(needed, present.startsWith("Land") && n.matches() ? Integer.parseInt(n.group(1)) : 0);
+            }
+            return needed;
+        } catch (final RuntimeException e) {
+            return 0;
+        }
+    }
+
+    /**
      * A land whose mana abilities all need more lands than the AI will have after this land drop (Temple of the False
      * God: "activate only if you control five or more lands"). Played first, it is a land that makes no mana for turns.
      */
     public static boolean isDormantLand(final Player ai, final Card land) {
         try {
-            if (land == null || !land.isLand() || land.getManaAbilities().isEmpty()) {
-                return false;
-            }
             final int lands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Card::isLand).size() + 1;
-            for (final SpellAbility m : land.getManaAbilities()) {
-                final String present = m.getParamOrDefault("IsPresent", "");
-                final Matcher n = PRESENT_COMPARE.matcher(m.getParamOrDefault("PresentCompare", ""));
-                if (!present.startsWith("Land") || !n.matches() || Integer.parseInt(n.group(1)) <= lands) {
-                    return false;
-                }
-            }
-            return true;
+            return landsNeededToWork(land) > lands;
         } catch (final RuntimeException e) {
             return false;
         }

@@ -135,6 +135,16 @@ public class TwoHeadedGiantTest extends AITest {
         assertEquals(b1.getLife(), 30, "the other team's life changed");
     }
 
+    /** A teammate's creature that can attack but not block takes part in the fight on the shared turn (PlayRelevance). */
+    @Test
+    public void aTeammatesAttackerIsRelevantOnTheSharedTurn() {
+        Game game = twoHeadedGiant();
+        Player a2 = game.getPlayers().get(1);
+        Card glider = ready(addCard("Aesthir Glider", a2)); // can't block
+        assertTrue(game.getPhaseHandler().isPlayerTurn(a2), "the shared turn is a2's as well");
+        assertTrue(PlayRelevance.combatRelevant(glider), "a creature that can attack on the team's turn was judged by its blocking");
+    }
+
     /** Fails if a team loses at ten poison counters, or survives at fifteen (CR 810.8d). */
     @Test
     public void aTeamLosesAtFifteenPoison() {
