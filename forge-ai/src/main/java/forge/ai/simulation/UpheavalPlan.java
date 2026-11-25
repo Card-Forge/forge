@@ -148,12 +148,22 @@ public final class UpheavalPlan {
         return null;
     }
 
-    /** One untapped land into the pool, black and blue first while the pool lacks them. */
+    /**
+     * One untapped land into the pool. The colours that few lands make go first: a land that makes only black or only blue
+     * for what the pool lacks, and the dual lands last, for the colour that is still missing, black before blue (it is one
+     * mana and only a dual land may be left to make it). With the first matching ability, two Underground Seas could both be
+     * tapped for blue ahead of the Islands, and no black was left for the Psychatog.
+     */
     private static SpellAbility floatMana(final Player ai, final List<SpellAbility> candidates,
                                           final Predicate<SpellAbility> approve) {
         final boolean needBlack = ai.getManaPool().getAmountOfColor(MagicColor.BLACK) == 0;
         final boolean needBlue = ai.getManaPool().getAmountOfColor(MagicColor.BLUE) < 3;
+        SpellAbility blackOnly = null;
+        SpellAbility blueOnly = null;
+        SpellAbility dualForBlack = null;
+        SpellAbility dualForBlue = null;
         SpellAbility any = null;
+        SpellAbility anyDual = null;
         for (final SpellAbility sa : candidates) {
             final Card host = sa == null ? null : sa.getHostCard();
             if (host == null || !sa.isManaAbility() || !host.isLand() || host.isTapped() || !ai.equals(host.getController())
@@ -164,15 +174,39 @@ public final class UpheavalPlan {
             if (!approve.test(sa)) {
                 continue;
             }
+            final byte landColors = OpeningHand.producedColors(host); // what the land can make, not this one ability
+            final boolean dual = (landColors & MagicColor.BLACK) != 0 && (landColors & MagicColor.BLUE) != 0;
             final byte colors = ManaConversion.producedColors(sa);
-            if (needBlack && (colors & MagicColor.BLACK) != 0 || needBlue && (colors & MagicColor.BLUE) != 0) {
-                return sa;
+            final boolean black = (colors & MagicColor.BLACK) != 0;
+            final boolean blue = (colors & MagicColor.BLUE) != 0;
+            if (needBlack && black) {
+                if (dual) {
+                    dualForBlack = dualForBlack == null ? sa : dualForBlack;
+                } else {
+                    blackOnly = blackOnly == null ? sa : blackOnly;
+                }
             }
-            if (any == null) {
+            if (needBlue && blue) {
+                if (dual) {
+                    dualForBlue = dualForBlue == null ? sa : dualForBlue;
+                } else {
+                    blueOnly = blueOnly == null ? sa : blueOnly;
+                }
+            }
+            if (any == null && !dual) {
                 any = sa;
             }
+            if (anyDual == null && dual) {
+                anyDual = sa; // every land is tapped in the end: the dual lands that no colour is wanted from, last
+            }
         }
-        return any;
+        // the lands that make one colour only, then the dual lands for the missing black, then for the missing blue
+        for (final SpellAbility pick : new SpellAbility[] {blackOnly, blueOnly, dualForBlack, dualForBlue, any, anyDual}) {
+            if (pick != null) {
+                return pick;
+            }
+        }
+        return null;
     }
 
     /** The same turn: Psychatog out of the pool, and a land first when the pool is short of it. */

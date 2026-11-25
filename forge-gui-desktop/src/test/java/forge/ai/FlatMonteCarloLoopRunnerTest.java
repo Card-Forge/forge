@@ -2043,6 +2043,55 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
     }
 
     @Test(timeOut = 120000)
+    public void aWholeTurnWithUpheavalKeepsABlackSourceWhenTheDualLandsComeFirst() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Underground Sea", 2, ai); // first in the list: the first blue ability must not take both of them
+        addCards("Island", 2, ai);
+        addCards("Plains", 5, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        AssertJUnit.assertTrue("nine lands: three blue and a black", forge.ai.simulation.UpheavalPlan.ready(ai));
+        runTurn();
+        boolean atog = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            atog |= c.getName().equals("Psychatog");
+        }
+        AssertJUnit.assertTrue("a dual land is tapped for the black, the Psychatog comes out of the pool\n" + trace + gameStateToString(game), atog);
+        AssertJUnit.assertEquals("the opponent starts again", 0, opp.getCardsIn(ZoneType.Battlefield).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetStartsTheLoopAfterItDamagedBeforeTheAuraCame() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        final Card niv = addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield);
+        niv.setSickness(false);
+        opp.setLife(10, null);
+        // Niv-Mizzet itself hit the opponent (an instant that pinged, say) before the Curiosity: not the chain
+        final forge.game.card.CardDamageTable damage = new forge.game.card.CardDamageTable();
+        damage.put(niv, opp, 2);
+        game.getAction().dealDamage(false, damage, new forge.game.card.CardDamageTable(), new forge.game.GameEntityCounterTable(), null);
+        AssertJUnit.assertTrue("setup: Niv-Mizzet has hit the opponent", niv.hasDealtDamageToOpponentThisTurn());
+        runTurn();
+        AssertJUnit.assertTrue("the Curiosity is on, the earlier ping is not the chain: an instant starts it\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBloodAndBondStartsTheLoopAfterLifeLostBeforeTheSecondPiece() {
+        elfDeckWith(0, "Soul Feast");
+        addCards("Swamp", 5, ai);
+        opp.setLife(10, null);
+        opp.loseLife(1, false, false, null); // combat damage, before the combo is complete
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield); // the piece that completes it
+        runTurn();
+        AssertJUnit.assertTrue("the earlier life loss is not the loop: the Soul Feast starts it\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
     public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
         elfDeckWith(0);
         addCards("Island", 3, ai);

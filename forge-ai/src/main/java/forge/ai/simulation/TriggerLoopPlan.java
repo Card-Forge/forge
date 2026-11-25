@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -8,6 +9,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.function.Predicate;
 
 /**
@@ -35,6 +38,23 @@ public final class TriggerLoopPlan {
             }
         }
         return null;
+    }
+
+    /**
+     * What had already happened when the pieces of a combo were all in play, per game and turn: the first time the planner sees
+     * both of them. Whatever the opponent lost or Niv-Mizzet dealt before that is not the combo, and the turn's totals cannot tell
+     * the two apart. Only a change after this number means that the chain has begun.
+     */
+    private static final Map<Game, Map<String, Integer>> AT_COMPLETION = new WeakHashMap<>();
+
+    private static int sinceCompletion(final Player ai, final String key, final int total) {
+        final Game game = ai.getGame();
+        final String turnKey = game.getPhaseHandler().getTurn() + ":" + key;
+        synchronized (AT_COMPLETION) {
+            final Map<String, Integer> turns = AT_COMPLETION.computeIfAbsent(game, g -> new java.util.HashMap<>());
+            final Integer before = turns.putIfAbsent(turnKey, total);
+            return total - (before == null ? total : before);
+        }
     }
 
     static SpellAbility next(final Player ai, final List<SpellAbility> candidates, final Predicate<SpellAbility> approve) {
@@ -104,6 +124,8 @@ public final class TriggerLoopPlan {
         }
         final boolean enchanted = niv.getEnchantedBy().stream()
                 .anyMatch(a -> a.getName().equals("Curiosity") || a.getName().equals("Ophidian Eye"));
+        // seen as soon as the aura is on, so that what Niv-Mizzet did before it is not counted as the chain
+        final boolean running = enchanted && started(ai, niv);
         if (!enchanted) {
             for (final String aura : new String[] {"Curiosity", "Ophidian Eye"}) {
                 final SpellAbility sa = LoopRunner.castFromHand(ai, candidates, aura);
@@ -135,7 +157,7 @@ public final class TriggerLoopPlan {
                 cheapest = sa;
             }
         }
-        if (cheapest != null && !started(niv)) {
+        if (cheapest != null && !running) {
             cheapest.setActivatingPlayer(ai);
             if (approve.test(cheapest)) {
                 VetoLog.note(ai, "trigger-loop | " + cheapest.getHostCard().getName() + " starts " + niv.getName());
@@ -145,9 +167,13 @@ public final class TriggerLoopPlan {
         return null;
     }
 
-    /** Whether Niv-Mizzet has already hit an opponent this turn: its trigger chain is going, whatever else cost them life. */
-    private static boolean started(final Card niv) {
-        return niv.hasDealtDamageToOpponentThisTurn();
+    /**
+     * Whether Niv-Mizzet has hit an opponent since the aura is on it: the chain is going. Damage that it dealt before the aura came
+     * (an instant that pinged, then the Curiosity) is not the chain, and neither is life that was lost some other way.
+     */
+    private static boolean started(final Player ai, final Card niv) {
+        final int dealt = niv.getDamageHistory().getDamageDoneThisTurn(null, false, null, "Player.Opponent", niv, ai, null);
+        return sinceCompletion(ai, "niv:" + niv.getId(), dealt) > 0;
     }
 
     /**
@@ -169,10 +195,15 @@ public final class TriggerLoopPlan {
         if (inPlayAny(ai, "Exquisite Blood") == null || inPlayAny(ai, "Sanguine Bond") == null) {
             return null;
         }
+        final Card blood = inPlayAny(ai, "Exquisite Blood");
+        final Card bond = inPlayAny(ai, "Sanguine Bond");
+        int drained = ai.getLifeGainedThisTurn();
         for (final Player opp : ai.getOpponents()) {
-            if (opp.getLifeLostThisTurn() > 0) {
-                return null; // it has started
-            }
+            drained += opp.getLifeLostThisTurn();
+        }
+        // life lost by the opponent (or gained by the AI) after both pieces are in play has started it; before, it did not
+        if (sinceCompletion(ai, "blood:" + blood.getId() + ":" + bond.getId(), drained) > 0) {
+            return null; // it has started
         }
         SpellAbility best = null;
         for (final SpellAbility sa : candidates) {
