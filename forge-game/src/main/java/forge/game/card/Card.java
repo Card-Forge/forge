@@ -7110,15 +7110,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     /**
-     * The characteristic-defining statics (Changeling's every creature type,
-     * Devoid's colorless) of keyword instances that an immediate, non-layered
-     * "loses all abilities" (Animate/AnimateAll RemoveAllAbilities$, as Humble or
-     * Curious Colossus) has taken out of the keyword cache. A CDA applies in its
-     * own layer (CR 604.3, 613.3): Changeling in layer 4, Devoid in layer 5, both
-     * before any layer-6 ability loss (CR 613.1f), and CR 613.6 keeps it applying
-     * to that object afterwards. Forge's immediate removal makes
-     * {@link #getStaticAbilities} lose the static before those layers run, so
-     * the caller adds these back.
+     * Characteristic-defining statics (Changeling, Devoid) of keywords already removed from the keyword cache by an
+     * immediate "loses all abilities"; they still apply in layers 4/5 before the ability loss (CR 613.6).
      */
     public final List<StaticAbility> getCharacteristicStaticsLostWithKeywords() {
         final CardState state = currentState;

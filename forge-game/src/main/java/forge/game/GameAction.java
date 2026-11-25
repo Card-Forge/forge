@@ -1127,7 +1127,7 @@ public class GameAction {
                     staticAbilities.add(stAb);
                 }
             }
-            // CR 613.6, 702.73a, 702.114a: a keyword CDA (Changeling, Devoid) survives an immediate "loses all abilities"
+            // CDAs of Changeling/Devoid still apply after an immediate "loses all abilities" (CR 613.6)
             for (StaticAbility stAb : co.getCharacteristicStaticsLostWithKeywords()) {
                 if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                     staticAbilities.add(stAb);
