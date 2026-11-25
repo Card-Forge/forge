@@ -243,7 +243,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
         lblEndless = new FLabel.Builder()
             .text(localizer.getMessage("lblRogueEndlessLevel", entry.getEndlessLevel()))
             .fontSize(12).fontAlign(SwingConstants.LEFT).build();
-        lblEndless.setToolTipText(EndlessMode.getModifiersDescription(entry.getEndlessLevel()));
+        lblEndless.setToolTipText(RogueUIHelper.html(EndlessMode.getModifiersDescription(entry.getEndlessLevel()), false));
         add(lblEndless);
       } else {
         lblEndless = null;

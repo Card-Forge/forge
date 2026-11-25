@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -6,6 +6,8 @@ import forge.gamemodes.rogue.CardRewardHelper;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.EffectResultContext;
+import forge.gamemodes.rogue.flow.RogueDecisions.CardChoice;
+import forge.gamemodes.rogue.flow.RogueDecisions.CardChoiceKind;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import java.util.ArrayList;
@@ -17,19 +19,19 @@ final class EffectResultHelper {
     private EffectResultHelper() {
     }
 
-    static boolean handleTrigger(EffectResultContext ctx, RogueRun currentRun) {
+    static boolean handleTrigger(EffectResultContext ctx, RogueRun currentRun, RogueDecisions decisions) {
         if (ctx.trigger == null) {
             return true;
         }
 
         return switch (ctx.trigger) {
-            case CARD_REMOVAL -> handleCardRemovalTrigger(ctx, currentRun);
+            case CARD_REMOVAL -> handleCardRemovalTrigger(ctx, currentRun, decisions);
             case CARD_ADDITION -> {
-                handleCardAdditionTrigger(ctx, currentRun);
+                handleCardAdditionTrigger(ctx, currentRun, decisions);
                 yield true;
             }
             case CARD_REWARD, MYTHIC_CARD_REWARD -> {
-                handleCardRewardTrigger(ctx, currentRun);
+                handleCardRewardTrigger(ctx, currentRun, decisions);
                 yield true;
             }
             default -> throw new IllegalStateException(
@@ -37,17 +39,19 @@ final class EffectResultHelper {
         };
     }
 
-    private static boolean handleCardRemovalTrigger(EffectResultContext ctx, RogueRun currentRun) {
+    private static boolean handleCardRemovalTrigger(EffectResultContext ctx, RogueRun currentRun,
+                                                    RogueDecisions decisions) {
         int removeMaxCount = Math.min(ctx.cardSelectionMaxCount, getCandidateCardCount(ctx));
         int removeMinCount = Math.min(ctx.cardSelectionMinCount, removeMaxCount);
         if (removeMaxCount <= 0) {
             return true;
         }
 
-        List<PaperCard> removed = new CardSelectionDialog(
+        List<PaperCard> removed = decisions.chooseCards(new CardChoice(
+            CardChoiceKind.REMOVE,
             Localizer.getInstance().getMessage("lblRogueCardSelection"),
             getCardRemovalSubtitle(removeMinCount, removeMaxCount),
-            ctx.candidateCards, currentRun, removeMinCount, removeMaxCount, ctx.buildDeckPreview).show();
+            ctx.candidateCards, currentRun, removeMinCount, removeMaxCount, ctx.buildDeckPreview));
         if (removed.size() < removeMinCount) {
             return false;
         }
@@ -74,7 +78,8 @@ final class EffectResultHelper {
         return true;
     }
 
-    private static void handleCardAdditionTrigger(EffectResultContext ctx, RogueRun currentRun) {
+    private static void handleCardAdditionTrigger(EffectResultContext ctx, RogueRun currentRun,
+                                                  RogueDecisions decisions) {
         int addMaxCount = Math.min(ctx.cardSelectionMaxCount, getCandidateCardCount(ctx));
         int addMinCount = Math.min(ctx.cardSelectionMinCount, addMaxCount);
         if (addMaxCount <= 0) {
@@ -84,10 +89,11 @@ final class EffectResultHelper {
         CodexHelper.recordCardRewardOptions(currentRun, ctx.candidateCards);
         String subtitle = ctx.cardSelectionSubtitle != null
             ? ctx.cardSelectionSubtitle : getCardAdditionSubtitle(addMinCount, addMaxCount);
-        List<PaperCard> added = new CardSelectionDialog(
+        List<PaperCard> added = decisions.chooseCards(new CardChoice(
+            ctx.replaceCurrentCardsInAddSection ? CardChoiceKind.REPLACE : CardChoiceKind.ADD,
             Localizer.getInstance().getMessage("lblRogueCardSelection"),
             subtitle,
-            ctx.candidateCards, currentRun, addMinCount, addMaxCount, ctx.buildDeckPreview).show();
+            ctx.candidateCards, currentRun, addMinCount, addMaxCount, ctx.buildDeckPreview));
         if (added.isEmpty() && addMinCount > 0) {
             return;
         }
@@ -129,12 +135,10 @@ final class EffectResultHelper {
         }
     }
 
-    private static void handleCardRewardTrigger(EffectResultContext ctx, RogueRun currentRun) {
+    private static void handleCardRewardTrigger(EffectResultContext ctx, RogueRun currentRun,
+                                                RogueDecisions decisions) {
         boolean mythicOnly = ctx.trigger == EffectResultContext.ActionTriggerType.MYTHIC_CARD_REWARD;
-        CardRewardHelper.runReward(currentRun,
-            (title, cards, max, label, enabled, gold) ->
-                new CardRewardDialog(title, cards, max, label, enabled, gold).show(),
-            mythicOnly, null, ctx.cardRewardContext);
+        CardRewardHelper.runReward(currentRun, decisions, mythicOnly, null, ctx.cardRewardContext);
     }
 
     private static int getCandidateCardCount(EffectResultContext ctx) {

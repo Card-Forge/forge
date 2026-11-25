@@ -6,6 +6,7 @@ import forge.deckchooser.FDeckViewer;
 import forge.gamemodes.rogue.BazaarPricing;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.BazaarItem;
+import forge.gamemodes.rogue.flow.RogueDecisions.ShopAnswer;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.home.rogue.CardUtil.CardGridSize;
 import forge.sound.SoundEffectType;
@@ -47,8 +48,6 @@ import net.miginfocom.swing.MigLayout;
  * Allows the player to purchase cards using gold based on rarity pricing.
  */
 public class BazaarDialog {
-  static final int MAX_DISPLAY_CARDS = 10;
-
   private static final int BASE_CARD_WIDTH = 240;
   private static final int PRICE_LABEL_HEIGHT = 40;
   private static final int CARD_SPACING = 10;
@@ -178,7 +177,7 @@ public class BazaarDialog {
 
   private void splitItems() {
     for (BazaarItem item : availableItems) {
-      if (item.type() == BazaarItem.Type.TRAIT || item.type() == BazaarItem.Type.CARRY_CARD) {
+      if (item.isSpecial()) {
         specialItems.add(item);
       } else {
         cardItems.add(item);
@@ -225,10 +224,7 @@ public class BazaarDialog {
     return Math.max(1, Math.max(cardRows, specialRows));
   }
 
-  public record DialogResult(boolean rerollRequested, Set<BazaarItem> selectedItems,
-                             int selectedTabIndex) {}
-
-  public DialogResult show() {
+  public ShopAnswer show() {
     final Localizer localizer = Localizer.getInstance();
     SoundSystem.instance.play(SoundEffectType.CoinsDrop,
         SoundEffectType.CoinsDrop.isSynced());
@@ -301,7 +297,7 @@ public class BazaarDialog {
 
     boolean rerollRequested = showReroll && result == REROLL_OPTION;
     Set<BazaarItem> purchases = result == BUY_OPTION ? selectedItems : Set.of();
-    return new DialogResult(rerollRequested, purchases, selectedTabIndex);
+    return new ShopAnswer(rerollRequested, purchases, selectedTabIndex);
   }
 
   private static javax.swing.Icon createCoinIcon() {

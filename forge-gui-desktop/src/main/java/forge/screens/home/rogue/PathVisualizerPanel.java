@@ -1,8 +1,6 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.RogueRun;
-import forge.gamemodes.rogue.effect.PathUpdateContext;
-import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePath;
 import forge.gamemodes.rogue.path.RoguePathNode;
@@ -78,31 +76,13 @@ public class PathVisualizerPanel extends SkinnedPanel {
     RoguePathNode currentNode = run.getCurrentNode();
     int currentRow = currentNode != null ? currentNode.getRowIndex() : 0;
 
-    // Check wound effects (e.g. Wounded Eye hides planes)
-    PathUpdateContext pathCtx = new PathUpdateContext();
-    RogueEffectComposite.INSTANCE.onPathUpdate(pathCtx, run);
-
-    // Get visible nodes in current row (reachable from last completed in previous row)
-    List<Integer> visibleInCurrentRow = path.getVisibleNodesInCurrentRow(currentRow, pathCtx);
-    List<Integer> visibleInFuturePlaneboundRows = path.getVisibleNodesInFuturePlaneboundRows(
-        currentRow, pathCtx);
-
     // Create panels for each node
-    List<RoguePathNode> nodes = path.getNodes();
+    List<NodePlanebound> newlyRevealed = path.revealVisible(run);
     List<NodePlaneboundPanel> toReveal = new ArrayList<>();
-    for (int i = 0; i < nodes.size(); i++) {
-      RoguePathNode node = nodes.get(i);
+    for (RoguePathNode node : path.getNodes()) {
       int row = node.getRowIndex();
-      boolean wasAlreadyRevealed = node instanceof NodePlanebound planebound
-          && planebound.isRevealed();
-      boolean isFaceDown = !wasAlreadyRevealed && isNodeFaceDown(path, node, i, currentRow,
-          visibleInCurrentRow, visibleInFuturePlaneboundRows, pathCtx.hidePlanes);
-      boolean animateReveal = node instanceof NodePlanebound && !wasAlreadyRevealed && !isFaceDown
-          && row >= currentRow;
-
-      if (!isFaceDown && node instanceof NodePlanebound planebound) {
-        planebound.setRevealed(true);
-      }
+      boolean isFaceDown = path.isFaceDown(run, node);
+      boolean animateReveal = newlyRevealed.contains(node) && row >= currentRow;
 
       // Calculate planebound row count for life display
       int planeboundRowCount = path.countPlaneboundRowsUpTo(row);
@@ -122,22 +102,6 @@ public class PathVisualizerPanel extends SkinnedPanel {
     revalidate();
     repaint();
     animateReveals(toReveal);
-  }
-
-  private static boolean isNodeFaceDown(RoguePath path, RoguePathNode node, int nodeIndex,
-                                        int currentRow, List<Integer> visibleInCurrentRow,
-                                        List<Integer> visibleInFuturePlaneboundRows, boolean hidePlanes) {
-    int row = node.getRowIndex();
-    if (row < currentRow) {
-      // Use reachability for that row without applying the current effects.
-      return !path.getVisibleNodesInCurrentRow(row, new PathUpdateContext()).contains(nodeIndex);
-    }
-    if (hidePlanes && node instanceof NodePlanebound && !node.isCompleted()) {
-      return true;
-    }
-    List<Integer> visibleNodes = row == currentRow
-        ? visibleInCurrentRow : visibleInFuturePlaneboundRows;
-    return !visibleNodes.contains(nodeIndex);
   }
 
   private static void animateReveals(List<NodePlaneboundPanel> toReveal) {

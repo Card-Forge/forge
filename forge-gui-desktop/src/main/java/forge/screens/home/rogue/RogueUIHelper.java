@@ -2,6 +2,7 @@ package forge.screens.home.rogue;
 
 import forge.toolbox.FSkin;
 import forge.gamemodes.rogue.PreviewReference;
+import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRunHistoryEntry;
 import forge.gamemodes.rogue.effect.RogueEffect;
@@ -29,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -46,6 +48,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
+import org.tinylog.Logger;
 
 /**
  * Shared helper for Rogue UI widgets.
@@ -61,10 +64,30 @@ public final class RogueUIHelper {
   }
 
 
+  /** Shared texts are plain, with line breaks; Swing labels need HTML to break lines. */
+  public static String html(String plain, boolean centered) {
+    if (plain == null || plain.startsWith("<html>")) {
+      return plain;
+    }
+    String body = plain.replace("\n", "<br>");
+    return centered ? "<html><center>" + body + "</center></html>" : "<html>" + body + "</html>";
+  }
+
   private static final int TYPEWRITER_DELAY_MS = 15;
   private static final int TYPEWRITER_CHARS_PER_TICK = 2;
 
   private RogueUIHelper() {
+  }
+
+  static boolean progressReadable() {
+    try {
+      RogueMetaProgress.getInstance();
+      return true;
+    } catch (UncheckedIOException e) {
+      Logger.error(e, "Could not read Rogue meta progress");
+      FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblRogueProgressUnreadable"));
+      return false;
+    }
   }
 
   static Dimension getUsableDefaultScreenSize() {
@@ -168,14 +191,14 @@ public final class RogueUIHelper {
     return selected == null || selected.isEmpty() ? currentChoice : selected.get(0);
   }
 
-  static <T extends RogueEffect> List<T> chooseDevEffects(String title, String heading,
+  static <T> List<T> chooseDevEffects(String title, String heading,
       String selectionMessageKey, List<T> choices, List<T> preselected, int requiredSelections) {
     SkinnedPanel checkBoxPanel = new SkinnedPanel();
     checkBoxPanel.setOpaque(false);
     checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
     Map<FCheckBox, T> effectsByCheckBox = new LinkedHashMap<>();
     for (T effect : choices) {
-      FCheckBox checkBox = new FCheckBox(effect.getDisplayName(), preselected.contains(effect));
+      FCheckBox checkBox = new FCheckBox(((RogueEffect) effect).getDisplayName(), preselected.contains(effect));
       effectsByCheckBox.put(checkBox, effect);
       checkBoxPanel.add(checkBox);
     }
@@ -312,7 +335,7 @@ public final class RogueUIHelper {
         .text(displayText)
         .fontSize(11)
         .build();
-    effectLabel.setToolTipText(tooltipText);
+    effectLabel.setToolTipText(html(tooltipText, false));
     panel.add(effectLabel, "cell " + col + " " + row);
   }
 

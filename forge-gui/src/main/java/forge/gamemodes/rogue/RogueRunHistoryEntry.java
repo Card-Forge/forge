@@ -70,19 +70,18 @@ public class RogueRunHistoryEntry {
             if (!node.isCompleted() && node != currentNode) {
                 continue;
             }
-            if (node instanceof NodePlanebound planeboundNode) {
-                RoguePlanebound planebound = planeboundNode.getRoguePlanebound();
-                if (planebound != null) {
-                    pathLabels.add(planebound.planeName() + " (" + planebound.planeboundName() + ")");
+            String label = switch (node.getType()) {
+                case PLANEBOUND -> {
+                    RoguePlanebound planebound = ((NodePlanebound) node).getRoguePlanebound();
+                    yield planebound == null ? null : planebound.planeName() + " (" + planebound.planeboundName() + ")";
                 }
-            } else if (node instanceof NodeSanctum) {
-                pathLabels.add("Sanctum");
-            } else if (node instanceof NodeBazaar) {
-                pathLabels.add("Bazaar");
-            } else if (node instanceof NodeChest) {
-                pathLabels.add("Loot");
-            } else if (node instanceof NodeEvent) {
-                pathLabels.add("Event");
+                case SANCTUM -> "Sanctum";
+                case BAZAAR -> "Bazaar";
+                case CHEST -> "Loot";
+                case EVENT -> "Event";
+            };
+            if (label != null) {
+                pathLabels.add(label);
             }
         }
 
