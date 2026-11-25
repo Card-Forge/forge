@@ -1525,6 +1525,14 @@ public class AiAttackController {
                 }
             }
 
+            // a creature whose first attack adds a combat phase (Aurelia, Godo) goes when nothing kills it
+            for (final Card engine : forge.ai.simulation.ExtraCombatPlan.engines(ai, this.attackers)) {
+                if (!combat.isAttacking(engine) && defendingOpponent != null && canAttackWrapper(engine, defendingOpponent)
+                        && forge.ai.simulation.ExtraCombatPlan.safeToAttack(engine, this.blockers)) {
+                    combat.addAttacker(engine, defendingOpponent);
+                }
+            }
+
             return aiAggression;
         } finally {
             if (trackTimer) {

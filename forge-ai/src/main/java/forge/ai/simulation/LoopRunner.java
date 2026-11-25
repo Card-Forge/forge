@@ -52,6 +52,24 @@ public final class LoopRunner {
         if (ai == null || candidates == null || candidates.isEmpty()) {
             return null;
         }
+        SacMarks.restore(ai);
+        // a plan that is turned down takes its sacrifice marks back at once, as does a step that finds nothing to do
+        final Predicate<SpellAbility> guarded = sa -> {
+            final boolean ok = approve.test(sa);
+            if (!ok) {
+                SacMarks.restore(ai);
+            }
+            return ok;
+        };
+        final SpellAbility step = step(ai, candidates, guarded);
+        if (step == null) {
+            SacMarks.restore(ai);
+        }
+        return step;
+    }
+
+    private static SpellAbility step(final Player ai, final List<SpellAbility> candidates,
+                                     final Predicate<SpellAbility> approve) {
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         final boolean dip = doubleDip(ai);
         if (!ai.getGame().getStack().isEmpty()
@@ -85,6 +103,42 @@ public final class LoopRunner {
         if (tender != null) {
             return tender;
         }
+        final SpellAbility melira = SacrificeLoopPlan.next(ai, candidates, approve);
+        if (melira != null) {
+            return melira;
+        }
+        final SpellAbility helm = ExtraCombatPlan.next(ai, candidates, approve);
+        if (helm != null) {
+            return helm;
+        }
+        final SpellAbility triggers = TriggerLoopPlan.next(ai, candidates, approve);
+        if (triggers != null) {
+            return triggers;
+        }
+        final SpellAbility flicker = FlickerLoopPlan.next(ai, candidates, approve);
+        if (flicker != null) {
+            return flicker;
+        }
+        final SpellAbility breach = BreachPlan.next(ai, candidates, approve);
+        if (breach != null) {
+            return breach;
+        }
+        final SpellAbility goblins = GoblinPlan.next(ai, candidates, approve);
+        if (goblins != null) {
+            return goblins;
+        }
+        final SpellAbility artifacts = ArtifactLoopPlan.next(ai, candidates, approve);
+        if (artifacts != null) {
+            return artifacts;
+        }
+        final SpellAbility rings = StackLoops.next(ai, candidates, approve);
+        if (rings != null) {
+            return rings;
+        }
+        final SpellAbility manaLoop = ManaLoopPlan.next(ai, candidates, approve);
+        if (manaLoop != null) {
+            return manaLoop;
+        }
         final SpellAbility palinchron = highTideAndPalinchron(ai, candidates, target, approve);
         if (palinchron != null) {
             return palinchron;
@@ -96,6 +150,10 @@ public final class LoopRunner {
         final SpellAbility aluren = AlurenPlan.next(ai, candidates, target, approve);
         if (aluren != null) {
             return aluren;
+        }
+        final SpellAbility upheaval = UpheavalPlan.next(ai, candidates, approve);
+        if (upheaval != null) {
+            return upheaval;
         }
         final SpellAbility affinity = AffinityPlan.next(ai, candidates, approve);
         if (affinity != null) {
@@ -154,7 +212,7 @@ public final class LoopRunner {
         return null;
     }
 
-    private static SpellAbility activated(final List<SpellAbility> candidates, final Card host, final ApiType api) {
+    static SpellAbility activated(final List<SpellAbility> candidates, final Card host, final ApiType api) {
         for (final SpellAbility sa : candidates) {
             if (sa != null && sa.getHostCard() == host && sa.isActivatedAbility() && sa.getApi() == api) {
                 return sa;
@@ -164,12 +222,12 @@ public final class LoopRunner {
     }
 
     /** The ability aimed at the entity, when it can be, is under its limit, and the AI approves it. */
-    private static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
+    static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
                                       final Predicate<SpellAbility> approve) {
         return aimed(ai, sa, at, approve, RunawayLoop.LIMIT);
     }
 
-    private static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
+    static SpellAbility aimed(final Player ai, final SpellAbility sa, final forge.game.GameEntity at,
                                       final Predicate<SpellAbility> approve, final int limit) {
         if (sa == null) {
             return null;
@@ -339,7 +397,7 @@ public final class LoopRunner {
      * three High Tides and two Strokes away, one by one, before it had the lands to go round with.
      */
     public static boolean held(final Player ai, final SpellAbility sa) {
-        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa) || RampPlan.wolfRunWaits(ai, sa)) {
+        if (ElfLoop.held(ai, sa) || AlurenPlan.pointlessHarpy(ai, sa) || RampPlan.wolfRunWaits(ai, sa) || UpheavalPlan.held(ai, sa)) {
             return true;
         }
         final String landfall = LandfallGuard.fetchProblem(ai, sa);

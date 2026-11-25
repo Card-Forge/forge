@@ -247,6 +247,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
+        if (sa.isHidden() && "Library".equals(sa.getParam("Destination")) && sa.hasParam("ChangeType")
+                && forge.ai.simulation.GoblinPlan.fetch(aiPlayer, sa, aiPlayer.getCardsIn(ZoneType.Library)) != null) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // Boggart Harbinger for Conspicuous Snoop
+        }
         if (sa.isHidden()) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
@@ -1637,6 +1641,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         if (destination == null) {
             return fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+        final Card goblin = forge.ai.simulation.GoblinPlan.fetch(decider, sa, fetchList);
+        if (goblin != null) {
+            return goblin; // Boggart Harbinger for Conspicuous Snoop: Kiki-Jiki, then Sling-Gang Lieutenant
         }
         // an opponent choosing between cards revealed from outside the game (Extrapolate the Impossible, Wish-like
         // effects with a chooser) hands over the worse one

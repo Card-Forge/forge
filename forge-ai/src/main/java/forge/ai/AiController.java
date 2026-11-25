@@ -2325,6 +2325,12 @@ public class AiController {
                     return response;
                 }
             }
+            // Basalt Monolith with Rings of Brighthearth: the Monolith taps again with its own untap on the stack
+            final SpellAbility ringsTap = forge.ai.simulation.StackLoops.response(player, top,
+                    ComputerUtilAbility.getSpellAbilities(cards, player), this::loopApproved);
+            if (ringsTap != null) {
+                return ringsTap;
+            }
             // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
             final SpellAbility consultation = ConsultationWin.response(player);
             if (consultation != null) {
@@ -2511,7 +2517,14 @@ public class AiController {
                 }
                 final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
                 if (solved != null) {
-                    return solved; // a line that wins this turn was found: follow it instead of guessing
+                    // a step that the mana cannot pay (the colour of the Diamond's mana was wrong, a land is tapped) is
+                    // not cast: cast like that it failed to pay, was skipped, and the whole turn went on without it
+                    solved.setActivatingPlayer(player);
+                    if (solved.isManaAbility() || ComputerUtilCost.canPayCost(solved, player, false)) {
+                        return solved; // a line that wins this turn was found: follow it instead of guessing
+                    }
+                    VetoLog.note(player, "storm-step-unpayable " + solved.getHostCard().getName());
+                    stormSolver.drop();
                 }
             }
         }

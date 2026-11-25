@@ -832,6 +832,7 @@ public final class ActivationGuard {
             return false;
         }
         final Player opp = ai.getWeakestOpponent();
+        final boolean goblinCombo = root.getHostCard() != null && root.getHostCard().getName().equals("Conspicuous Snoop");
         int copies = 0;
         int power = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -840,7 +841,8 @@ public final class ActivationGuard {
                 power += Math.max(0, c.getNetPower());
             }
         }
-        return copies >= MAX_COPIES || opp != null && copies > 0 && power >= opp.getLife() + 3;
+        // the Snoops are worth a life each to Sling-Gang Lieutenant, whatever their power
+        return copies >= MAX_COPIES || !goblinCombo && opp != null && copies > 0 && power >= opp.getLife() + 3;
     }
 
     static boolean poorSacrifice(final Player ai, final SpellAbility sa) {

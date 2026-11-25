@@ -117,6 +117,17 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
         String logic = sa.getParamOrDefault("AILogic", "");
 
+        if (sa.usesTargeting() && "Spell".equals(sa.getParam("TargetType")) && sa.getTargets().isEmpty()) {
+            // Naru Meha and the like: copy the instant or sorcery of its own on the stack, when there is one
+            final Game game = aiPlayer.getGame();
+            final SpellAbility top = game.getStack().isEmpty() ? null : game.getStack().peekAbility();
+            if (top != null && top.isSpell() && aiPlayer.equals(top.getActivatingPlayer()) && top.canBeTargetedBy(sa)
+                    && !forge.ai.simulation.StackLoops.notWorthCopying(top)) {
+                sa.getTargets().add(top);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+        }
+
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -128,6 +139,10 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         // the AI copies its own abilities if it has enough mana to still pay for other spells in its hand afterward
         if ("TriggeredSpellAbility".equals(sa.getParam("Defined"))) {
             for (SpellAbility copied : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), "TriggeredSpellAbility", sa)) {
+                if (copied.getActivatingPlayer() != null && copied.getActivatingPlayer().equals(aiPlayer)
+                        && forge.ai.simulation.StackLoops.copyIsTheLoop(aiPlayer, copied)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // Basalt Monolith: the copy is the loop
+                }
                 if (copied.getActivatingPlayer() != null && copied.getActivatingPlayer().equals(aiPlayer)
                         && !copied.isManaAbility() && copied.getApi() != ApiType.CopySpellAbility
                         && !(SpellApiToAi.Converter.get(copied.getApi()) instanceof CannotPlayAi)

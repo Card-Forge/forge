@@ -31,6 +31,9 @@ import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.ability.AbilityKey;
+import forge.game.card.Card;
+import forge.game.zone.ZoneType;
 import forge.game.Match;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -56,6 +59,8 @@ import forge.util.MyRandom;
  * <li>{@code flatmc.vetomax}: at most this many decks (default 20); {@code flatmc.vetogames}: games per deck, default 2;</li>
  * <li>{@code flatmc.vetoopp}: the deck every deck plays against (default: the next deck of the list);</li>
  * <li>{@code flatmc.timeout}: seconds before a game is called stalled (default 150); {@code flatmc.seed} (default 1000);</li>
+ * <li>{@code flatmc.vetostack}: true puts the pieces of the deck under test (its metadata line {@code Comment=pieces=A|B|C}) in
+ * its opening hand and five basic lands in play, so a combo is not left to the draw; decks without that line play as they are;</li>
  * <li>{@code flatmc.vetoout}: the report file (default target/veto-sweep.txt); the same text is printed.</li>
  * </ul>
  * The report lists, per deck, the games (winner, turns, stalled), the refusals of that deck's player by count, and at
@@ -159,9 +164,63 @@ public class FlatMonteCarloVetoSweep extends AITest {
         return out;
     }
 
+
+    /** The cards that a deck's metadata names as its combo pieces ({@code Comment=pieces=A|B|C}). */
+    private static List<String> piecesOf(final Deck deck) {
+        final List<String> out = new ArrayList<>();
+        final String c = deck.getComment();
+        if (c != null && c.startsWith("pieces=")) {
+            for (final String n : c.substring("pieces=".length()).split("\\|")) {
+                if (!n.trim().isEmpty()) {
+                    out.add(n.trim());
+                }
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Run once the opening hands are drawn: the seat under test keeps its combo pieces in hand (the other cards go to the
+     * bottom of the library, so the hand does not have to be discarded down) and has five basic lands in play.
+     */
+    private static void stackPieces(final Game game, final Deck[] decks, final int seat) {
+        final List<String> pieces = piecesOf(decks[seat]);
+        if (pieces.isEmpty()) {
+            return;
+        }
+        for (final Player p : game.getPlayers()) {
+            if (!p.getLobbyPlayer().getName().startsWith("P" + seat)) {
+                continue;
+            }
+            for (final Card c : new ArrayList<>(p.getCardsIn(ZoneType.Hand))) {
+                if (!pieces.contains(c.getName())) {
+                    game.getAction().moveToLibrary(c, -1, null);
+                }
+            }
+            for (final String name : pieces) {
+                if (p.getCardsIn(ZoneType.Hand).anyMatch(c -> name.equals(c.getName()))) {
+                    continue;
+                }
+                for (final Card c : p.getCardsIn(ZoneType.Library)) {
+                    if (name.equals(c.getName())) {
+                        game.getAction().moveToHand(c, null);
+                        break;
+                    }
+                }
+            }
+            int lands = 0;
+            for (final Card c : new ArrayList<>(p.getCardsIn(ZoneType.Library))) {
+                if (lands < 5 && c.getType().isBasicLand() && !pieces.contains(c.getName())) {
+                    game.getAction().moveToPlay(c, p, null, AbilityKey.newMap());
+                    lands++;
+                }
+            }
+        }
+    }
+
     /** One game; the winner (0 or 1), -1 for a draw, -2 for a game that stalled or failed. */
     private static int play(final ExecutorService pool, final Deck[] decks, final long seed, final int timeoutSeconds,
-                            final int[] turnsOut, final StringBuilder note) {
+                            final int[] turnsOut, final StringBuilder note, final int stackSeat) {
         MyRandom.setRandom(new Random(seed));
         final List<RegisteredPlayer> players = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
@@ -182,7 +241,7 @@ public class FlatMonteCarloVetoSweep extends AITest {
             ((PlayerControllerAi) p.getController()).getAi().setFlatMonteCarloOverride(Boolean.TRUE);
             ((PlayerControllerAi) p.getController()).getAi().setFlatMonteCarloMaxOverride(Boolean.FALSE);
         }
-        final Future<?> running = pool.submit(() -> match.startGame(game));
+        final Future<?> running = pool.submit(() -> match.startGame(game, stackSeat < 0 ? null : () -> stackPieces(game, decks, stackSeat)));
         try {
             running.get(timeoutSeconds, TimeUnit.SECONDS);
         } catch (final TimeoutException e) {
@@ -221,6 +280,7 @@ public class FlatMonteCarloVetoSweep extends AITest {
         final int timeout = Integer.getInteger("flatmc.timeout", 150);
         final long seed0 = Long.getLong("flatmc.seed", 1000L);
         final String oppFile = System.getProperty("flatmc.vetoopp", "");
+        final boolean stack = Boolean.getBoolean("flatmc.vetostack");
 
         final List<Deck> decks = new ArrayList<>();
         int skipped = 0;
@@ -302,7 +362,7 @@ public class FlatMonteCarloVetoSweep extends AITest {
                     final int[] turns = new int[1];
                     final StringBuilder note = new StringBuilder();
                     final int r = play(pool, first ? new Deck[] { mine, other } : new Deck[] { other, mine },
-                            seed0 + 31L * i + g, timeout, turns, note);
+                            seed0 + 31L * i + g, timeout, turns, note, stack ? (first ? 0 : 1) : -1);
                     final String me = first ? "P0" : "P1";
                     final String result = r == -2 ? note.toString() : r == -1 ? "draw"
                             : (first ? r == 0 : r == 1) ? "won" : "lost";
