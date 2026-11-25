@@ -146,7 +146,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 "TurnCount$ " + turnLimit + " | TriggerDescription$ At the beginning of your cleanup step on the specified turn, you lose the game.";
         String eff = "DB$ LosesGame | Defined$ You";
 
-        switch(goal.toLowerCase()) {
+        // A file with no Goal: line plays as "win"
+        switch (goal == null ? "win" : goal.toLowerCase()) {
             case "win":
                 // Handled as default
                 break;
